@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory),Runtime.sln))\tools\WebStack.settings.targets" />
+  <PropertyGroup>
+    <TargetFrameworks>net462;netcoreapp2.1;net6.0</TargetFrameworks>
+    <RootNamespace>System.Net.Http</RootNamespace>
+    <OutputPath>..\..\bin\$(Configuration)\Test\ns1_3\</OutputPath>
+    <Configurations>$(Configurations);CodeAnalysis</Configurations>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <DefineConstants>$(DefineConstants);Testing_NetStandard1_3</DefineConstants>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+    <!-- Version 2.4.5 does not support netstandard2.1. -->
+    <_VSRunnerVersion Condition=" '$(TargetFramework)' == 'netcoreapp2.1' ">2.4.3</_VSRunnerVersion>
+    <_VSRunnerVersion Condition=" '$(TargetFramework)' != 'netcoreapp2.1' ">2.4.5</_VSRunnerVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.IO.Pipelines" Version="4.7.5" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4"
+        Condition=" '$(TargetFrameworkIdentifier)' == '.NETFramework' " />
+
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+    <PackageReference Include="Moq" Version="4.18.4" />
+    <PackageReference Include="xunit" Version="2.4.2" />
+    <PackageReference Include="xunit.analyzers" Version="1.1.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="$(_VSRunnerVersion)">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="XunitXml.TestLogger" Version="3.0.70" />
+
+    <Compile Include="..\System.Net.Http.Formatting.Test\**\*.cs"
+        Exclude="..\System.Net.Http.Formatting.Test\obj\**\*.cs;
+                 ..\System.Net.Http.Formatting.Test\Formatting\BufferedMediaTypeFormatterTests.cs;
+                 ..\System.Net.Http.Formatting.Test\Handlers\ProgressWriteAsyncResultTest.cs">
+      <Link>%(RecursiveDir)\%(Filename).cs</Link>
+    </Compile>
+
+    <ProjectReference Include="..\..\src\System.Net.Http.Formatting.ns1_3\System.Net.Http.Formatting.ns1_3.csproj" />
+    <ProjectReference Include="..\Microsoft.TestCommon\Microsoft.TestCommon.csproj" Properties="Testing_NetStandard1_3=true" />
+
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+</Project>
