@@ -15,11 +15,12 @@ public class RedisOptions
     /// <summary>
     /// Gets or sets configuration options exposed by <c>StackExchange.Redis</c>.
     /// </summary>
-    public ConfigurationOptions Configuration { get; set; } = new ConfigurationOptions
-    {
-        // Enable reconnecting by default
-        AbortOnConnectFail = false
-    };
+    public ConfigurationOptions Configuration { get; set; } =
+        new ConfigurationOptions
+        {
+            // Enable reconnecting by default
+            AbortOnConnectFail = false,
+        };
 
     /// <summary>
     /// Gets or sets the Redis connection factory.

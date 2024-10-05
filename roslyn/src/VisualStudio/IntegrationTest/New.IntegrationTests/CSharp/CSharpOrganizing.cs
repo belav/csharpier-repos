@@ -17,14 +17,13 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpOrganizing()
-            : base(nameof(CSharpOrganizing))
-        {
-        }
+            : base(nameof(CSharpOrganizing)) { }
 
         [IdeFact]
         public async Task RemoveAndSort()
         {
-            await SetUpEditorAsync("""
+            await SetUpEditorAsync(
+                """
                 $$
                 using C;
                 using B;
@@ -38,11 +37,20 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                 namespace A { public class CA { } }
                 namespace B { public class CB { } }
                 namespace C { public class CC { } }
-                """, HangMitigatingCancellationToken);
-            await TestServices.Shell.ExecuteCommandAsync(WellKnownCommands.Edit.RemoveAndSort, HangMitigatingCancellationToken);
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(FeatureAttribute.OrganizeDocument, HangMitigatingCancellationToken);
+                """,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Shell.ExecuteCommandAsync(
+                WellKnownCommands.Edit.RemoveAndSort,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.OrganizeDocument,
+                HangMitigatingCancellationToken
+            );
 
-            await TestServices.EditorVerifier.TextContainsAsync("""
+            await TestServices.EditorVerifier.TextContainsAsync(
+                """
                 using A;
                 using C;
 
@@ -54,7 +62,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                 namespace A { public class CA { } }
                 namespace B { public class CB { } }
                 namespace C { public class CC { } }
-                """, cancellationToken: HangMitigatingCancellationToken);
+                """,
+                cancellationToken: HangMitigatingCancellationToken
+            );
         }
     }
 }

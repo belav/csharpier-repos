@@ -13,7 +13,10 @@ namespace System.Workflow.Activities.Rules
     {
         #region Decompile literals
 
-        internal static void DecompileObjectLiteral(StringBuilder decompilation, object primitiveValue)
+        internal static void DecompileObjectLiteral(
+            StringBuilder decompilation,
+            object primitiveValue
+        )
         {
             if (primitiveValue == null)
             {
@@ -44,7 +47,11 @@ namespace System.Workflow.Activities.Rules
             }
         }
 
-        private static void DecompileFloatingPointLiteral(StringBuilder decompilation, object value, char suffix)
+        private static void DecompileFloatingPointLiteral(
+            StringBuilder decompilation,
+            object value,
+            char suffix
+        )
         {
             // Make sure decimal point isn't converted to a comma in European locales.
             string svalue = Convert.ToString(value, CultureInfo.InvariantCulture);
@@ -68,7 +75,11 @@ namespace System.Workflow.Activities.Rules
             }
         }
 
-        private static void DecompileSuffixedIntegerLiteral(StringBuilder decompilation, object value, string suffix)
+        private static void DecompileSuffixedIntegerLiteral(
+            StringBuilder decompilation,
+            object value,
+            string suffix
+        )
         {
             decompilation.Append(value.ToString());
             decompilation.Append(suffix);
@@ -82,7 +93,11 @@ namespace System.Workflow.Activities.Rules
                 char c = strValue[i];
 
                 // is this character a surrogate pair?
-                if ((char.IsHighSurrogate(c)) && (i + 1 < strValue.Length) && (char.IsLowSurrogate(strValue[i + 1])))
+                if (
+                    (char.IsHighSurrogate(c))
+                    && (i + 1 < strValue.Length)
+                    && (char.IsLowSurrogate(strValue[i + 1]))
+                )
                 {
                     // yes, so leave the two characters unchanged
                     decompilation.Append(c);
@@ -102,7 +117,11 @@ namespace System.Workflow.Activities.Rules
             decompilation.Append("'");
         }
 
-        private static void AppendCharacter(StringBuilder decompilation, char charValue, char quoteCharacter)
+        private static void AppendCharacter(
+            StringBuilder decompilation,
+            char charValue,
+            char quoteCharacter
+        )
         {
             if (charValue == quoteCharacter)
             {
@@ -113,7 +132,11 @@ namespace System.Workflow.Activities.Rules
             {
                 decompilation.Append("\\\\");
             }
-            else if ((charValue >= ' ' && charValue < '\u007f') || char.IsLetterOrDigit(charValue) || char.IsPunctuation(charValue))
+            else if (
+                (charValue >= ' ' && charValue < '\u007f')
+                || char.IsLetterOrDigit(charValue)
+                || char.IsPunctuation(charValue)
+            )
             {
                 decompilation.Append(charValue);
             }
@@ -389,23 +412,24 @@ namespace System.Workflow.Activities.Rules
         private enum Operation
         {
             RootExpression,
-            LogicalOr,          // ||
-            LogicalAnd,         // &&
-            BitwiseOr,          // |
-            BitwiseAnd,         // &
-            Equality,           // ==  !=
-            Comparitive,        // <  <=  >  >=
-            Additive,           // +  -
-            Multiplicative,     // *  /  %
-            Unary,              // -  !  (cast)
-            Postfix,            // field/property ref and method call
-            NoParentheses       // Highest
+            LogicalOr, // ||
+            LogicalAnd, // &&
+            BitwiseOr, // |
+            BitwiseAnd, // &
+            Equality, // ==  !=
+            Comparitive, // <  <=  >  >=
+            Additive, // +  -
+            Multiplicative, // *  /  %
+            Unary, // -  !  (cast)
+            Postfix, // field/property ref and method call
+            NoParentheses // Highest
+            ,
         }
 
         private delegate Operation ComputePrecedence(CodeExpression expresssion);
 
-        private static Dictionary<Type, ComputePrecedence> precedenceMap = InitializePrecedenceMap();
-
+        private static Dictionary<Type, ComputePrecedence> precedenceMap =
+            InitializePrecedenceMap();
 
         private static Dictionary<Type, ComputePrecedence> InitializePrecedenceMap()
         {
@@ -478,7 +502,11 @@ namespace System.Workflow.Activities.Rules
                     break;
 
                 default:
-                    string message = string.Format(CultureInfo.CurrentCulture, Messages.BinaryOpNotSupported, binaryExpr.Operator.ToString());
+                    string message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.BinaryOpNotSupported,
+                        binaryExpr.Operator.ToString()
+                    );
                     NotSupportedException exception = new NotSupportedException(message);
                     exception.Data[RuleUserDataKeys.ErrorObject] = binaryExpr;
                     throw exception;
@@ -510,7 +538,8 @@ namespace System.Workflow.Activities.Rules
 
             if (parentOperation == childOperation)
             {
-                CodeBinaryOperatorExpression parentBinary = parentExpr as CodeBinaryOperatorExpression;
+                CodeBinaryOperatorExpression parentBinary =
+                    parentExpr as CodeBinaryOperatorExpression;
                 if (parentBinary != null)
                 {
                     if (childExpr == parentBinary.Right)

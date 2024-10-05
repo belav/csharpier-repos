@@ -5,58 +5,65 @@ namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite;
 
 internal static class FlagParser
 {
-    private static readonly IDictionary<string, FlagType> _ruleFlagLookup = new Dictionary<string, FlagType>(StringComparer.OrdinalIgnoreCase) {
-            { "b", FlagType.EscapeBackreference},
-            { "c", FlagType.Chain },
-            { "chain", FlagType.Chain},
-            { "co", FlagType.Cookie },
-            { "cookie", FlagType.Cookie },
-            { "dpi", FlagType.DiscardPath },
-            { "discardpath", FlagType.DiscardPath },
-            { "e", FlagType.Env},
-            { "env", FlagType.Env},
-            { "end", FlagType.End },
-            { "f", FlagType.Forbidden },
-            { "forbidden", FlagType.Forbidden },
-            { "g", FlagType.Gone },
-            { "gone", FlagType.Gone },
-            { "h", FlagType.Handler },
-            { "handler", FlagType.Handler },
-            { "l", FlagType.Last },
-            { "last", FlagType.Last },
-            { "n", FlagType.Next },
-            { "next", FlagType.Next },
-            { "nc", FlagType.NoCase },
-            { "nocase", FlagType.NoCase },
-            { "ne", FlagType.NoEscape },
-            { "noescape", FlagType.NoEscape },
-            { "ns", FlagType.NoSubReq },
-            { "nosubreq", FlagType.NoSubReq },
-            { "or", FlagType.Or },
-            { "ornext", FlagType.Or },
-            { "p", FlagType.Proxy },
-            { "proxy", FlagType.Proxy },
-            { "pt", FlagType.PassThrough },
-            { "passthrough", FlagType.PassThrough },
-            { "qsa", FlagType.QSAppend },
-            { "qsappend", FlagType.QSAppend },
-            { "qsd", FlagType.QSDiscard },
-            { "qsdiscard", FlagType.QSDiscard },
-            { "qsl", FlagType.QSLast },
-            { "qslast", FlagType.QSLast },
-            { "r", FlagType.Redirect },
-            { "redirect", FlagType.Redirect },
-            { "s", FlagType.Skip },
-            { "skip", FlagType.Skip },
-            { "t", FlagType.Type },
-            { "type", FlagType.Type },
-        };
+    private static readonly IDictionary<string, FlagType> _ruleFlagLookup = new Dictionary<
+        string,
+        FlagType
+    >(StringComparer.OrdinalIgnoreCase)
+    {
+        { "b", FlagType.EscapeBackreference },
+        { "c", FlagType.Chain },
+        { "chain", FlagType.Chain },
+        { "co", FlagType.Cookie },
+        { "cookie", FlagType.Cookie },
+        { "dpi", FlagType.DiscardPath },
+        { "discardpath", FlagType.DiscardPath },
+        { "e", FlagType.Env },
+        { "env", FlagType.Env },
+        { "end", FlagType.End },
+        { "f", FlagType.Forbidden },
+        { "forbidden", FlagType.Forbidden },
+        { "g", FlagType.Gone },
+        { "gone", FlagType.Gone },
+        { "h", FlagType.Handler },
+        { "handler", FlagType.Handler },
+        { "l", FlagType.Last },
+        { "last", FlagType.Last },
+        { "n", FlagType.Next },
+        { "next", FlagType.Next },
+        { "nc", FlagType.NoCase },
+        { "nocase", FlagType.NoCase },
+        { "ne", FlagType.NoEscape },
+        { "noescape", FlagType.NoEscape },
+        { "ns", FlagType.NoSubReq },
+        { "nosubreq", FlagType.NoSubReq },
+        { "or", FlagType.Or },
+        { "ornext", FlagType.Or },
+        { "p", FlagType.Proxy },
+        { "proxy", FlagType.Proxy },
+        { "pt", FlagType.PassThrough },
+        { "passthrough", FlagType.PassThrough },
+        { "qsa", FlagType.QSAppend },
+        { "qsappend", FlagType.QSAppend },
+        { "qsd", FlagType.QSDiscard },
+        { "qsdiscard", FlagType.QSDiscard },
+        { "qsl", FlagType.QSLast },
+        { "qslast", FlagType.QSLast },
+        { "r", FlagType.Redirect },
+        { "redirect", FlagType.Redirect },
+        { "s", FlagType.Skip },
+        { "skip", FlagType.Skip },
+        { "t", FlagType.Type },
+        { "type", FlagType.Type },
+    };
 
     public static Flags Parse(string flagString)
     {
         if (string.IsNullOrEmpty(flagString))
         {
-            throw new ArgumentException("Argument cannot be null or empty string.", nameof(flagString));
+            throw new ArgumentException(
+                "Argument cannot be null or empty string.",
+                nameof(flagString)
+            );
         }
 
         // Check that flags are contained within []

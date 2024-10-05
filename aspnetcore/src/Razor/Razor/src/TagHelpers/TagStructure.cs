@@ -23,5 +23,5 @@ public enum TagStructure
     /// Element can be written as &lt;my-tag-helper&gt; or &lt;my-tag-helper /&gt;.
     /// </summary>
     /// <remarks>Elements with a <see cref="WithoutEndTag"/> structure will never have any content.</remarks>
-    WithoutEndTag
+    WithoutEndTag,
 }

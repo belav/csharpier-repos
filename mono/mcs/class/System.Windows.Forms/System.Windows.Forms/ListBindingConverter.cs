@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,32 +28,50 @@
 
 using System.ComponentModel;
 
-namespace System.Windows.Forms {
-	public class ListBindingConverter : TypeConverter {
-		#region Public Constructors
-		public ListBindingConverter() {
-		}
-		#endregion	// Public Constructors
+namespace System.Windows.Forms
+{
+    public class ListBindingConverter : TypeConverter
+    {
+        #region Public Constructors
+        public ListBindingConverter() { }
+        #endregion	// Public Constructors
 
-		#region Public Instance Methods
-		public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType) {
-			if (destinationType == typeof(string)) {
-				return true;
-			}
-			return base.CanConvertTo (context, destinationType);
-		}
+        #region Public Instance Methods
+        public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+        {
+            if (destinationType == typeof(string))
+            {
+                return true;
+            }
+            return base.CanConvertTo(context, destinationType);
+        }
 
-		public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType) {
-			return base.ConvertTo (context, culture, value, destinationType);
-		}
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            System.Globalization.CultureInfo culture,
+            object value,
+            Type destinationType
+        )
+        {
+            return base.ConvertTo(context, culture, value, destinationType);
+        }
 
-		public override object CreateInstance(ITypeDescriptorContext context, System.Collections.IDictionary propertyValues) {
-			return new Binding((string)propertyValues["PropertyName"], (object)propertyValues["DataSource"], (string)propertyValues["DataMember"]);
-		}
+        public override object CreateInstance(
+            ITypeDescriptorContext context,
+            System.Collections.IDictionary propertyValues
+        )
+        {
+            return new Binding(
+                (string)propertyValues["PropertyName"],
+                (object)propertyValues["DataSource"],
+                (string)propertyValues["DataMember"]
+            );
+        }
 
-		public override bool GetCreateInstanceSupported(ITypeDescriptorContext context) {
-			return true;
-		}
-		#endregion	// Public Instance Methods
-	}
+        public override bool GetCreateInstanceSupported(ITypeDescriptorContext context)
+        {
+            return true;
+        }
+        #endregion	// Public Instance Methods
+    }
 }

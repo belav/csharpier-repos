@@ -6,10 +6,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,59 +29,65 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Xml.Serialization;
 
-namespace MonoTests.System.ComponentModel {
+namespace MonoTests.System.ComponentModel
+{
+    [TestFixture]
+    public class ComplexBindingPropertiesAttributeTest
+    {
+        [Test]
+        public void CtorTest()
+        {
+            ComplexBindingPropertiesAttribute a;
 
-	[TestFixture]
-	public class ComplexBindingPropertiesAttributeTest {
+            a = new ComplexBindingPropertiesAttribute("source", "member");
+            Assert.AreEqual("source", a.DataSource, "1");
+            Assert.AreEqual("member", a.DataMember, "2");
 
-		[Test]
-		public void CtorTest ()
-		{
-			ComplexBindingPropertiesAttribute a;
+            a = new ComplexBindingPropertiesAttribute("source");
+            Assert.AreEqual("source", a.DataSource, "3");
+            Assert.AreEqual(null, a.DataMember, "4");
 
-			a = new ComplexBindingPropertiesAttribute ("source", "member");
-			Assert.AreEqual ("source", a.DataSource, "1");
-			Assert.AreEqual ("member", a.DataMember, "2");
+            a = new ComplexBindingPropertiesAttribute();
+            Assert.AreEqual(null, a.DataSource, "5");
+            Assert.AreEqual(null, a.DataMember, "6");
+        }
 
-			a = new ComplexBindingPropertiesAttribute ("source");
-			Assert.AreEqual ("source", a.DataSource, "3");
-			Assert.AreEqual (null, a.DataMember, "4");
+        [Test]
+        public void EqualsTest()
+        {
+            ComplexBindingPropertiesAttribute a;
 
-			a = new ComplexBindingPropertiesAttribute ();
-			Assert.AreEqual (null, a.DataSource, "5");
-			Assert.AreEqual (null, a.DataMember, "6");
-		}
+            a = new ComplexBindingPropertiesAttribute("source", "member");
+            Assert.IsFalse(a.Equals(null), "1");
+            Assert.IsFalse(
+                a.Equals(new ComplexBindingPropertiesAttribute("member", "source")),
+                "2"
+            );
+            Assert.IsTrue(a.Equals(new ComplexBindingPropertiesAttribute("source", "member")), "3");
+        }
 
-		[Test]
-		public void EqualsTest ()
-		{
-			ComplexBindingPropertiesAttribute a;
+        [Test]
+        public void GetHashCodeTest()
+        {
+            ComplexBindingPropertiesAttribute a;
 
-			a = new ComplexBindingPropertiesAttribute ("source", "member");
-			Assert.IsFalse (a.Equals (null), "1");
-			Assert.IsFalse (a.Equals (new ComplexBindingPropertiesAttribute ("member", "source")), "2");
-			Assert.IsTrue (a.Equals (new ComplexBindingPropertiesAttribute ("source", "member")), "3");
-		}
+            a = new ComplexBindingPropertiesAttribute("source", "member");
+            Assert.IsFalse(0 == a.GetHashCode(), "1");
 
-		[Test]
-		public void GetHashCodeTest ()
-		{
-			ComplexBindingPropertiesAttribute a;
+            a = new ComplexBindingPropertiesAttribute("source");
+            Assert.IsFalse(0 == a.GetHashCode(), "2");
+        }
 
-			a = new ComplexBindingPropertiesAttribute ("source", "member");
-			Assert.IsFalse (0 == a.GetHashCode (), "1");
-
-			a = new ComplexBindingPropertiesAttribute ("source");
-			Assert.IsFalse (0 == a.GetHashCode (), "2");
-		}
-
-		[Test]
-		public void DefaultTest ()
-		{
-			Assert.AreEqual (ComplexBindingPropertiesAttribute.Default, new ComplexBindingPropertiesAttribute (), "1");
-		}
-	}
-
+        [Test]
+        public void DefaultTest()
+        {
+            Assert.AreEqual(
+                ComplexBindingPropertiesAttribute.Default,
+                new ComplexBindingPropertiesAttribute(),
+                "1"
+            );
+        }
+    }
 }
 
 #endif

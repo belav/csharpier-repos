@@ -24,20 +24,35 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime.Language
         public EmbeddedLanguageCompletionProvider CompletionProvider { get; }
 
         public async Task<SyntaxToken?> TryGetDateAndTimeTokenAtPositionAsync(
-            Document document, int position, CancellationToken cancellationToken)
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
 
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var token = GetToken(syntaxFacts, root, position);
 
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            var detector = DateAndTimeLanguageDetector.GetOrCreate(semanticModel.Compilation, this.Info);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var detector = DateAndTimeLanguageDetector.GetOrCreate(
+                semanticModel.Compilation,
+                this.Info
+            );
             return detector.TryParseString(token, semanticModel, cancellationToken) != null
-                ? token : null;
+                ? token
+                : null;
         }
 
-        private static SyntaxToken GetToken(ISyntaxFactsService syntaxFacts, SyntaxNode root, int position)
+        private static SyntaxToken GetToken(
+            ISyntaxFactsService syntaxFacts,
+            SyntaxNode root,
+            int position
+        )
         {
             var token = root.FindToken(position);
             var syntaxKinds = syntaxFacts.SyntaxKinds;

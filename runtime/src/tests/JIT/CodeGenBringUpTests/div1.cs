@@ -24,9 +24,6 @@ public class child
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static int div1(int a, int b)
     {
-
         return a / b;
     }
-
 }
-

@@ -2,7 +2,6 @@
 // All rights reserved. Licensed under the BSD 3-Clause License; see License.txt.
 
 using System;
-
 using Xunit;
 
 namespace Moq.Tests
@@ -89,6 +88,7 @@ namespace Moq.Tests
         }
 
         public struct Struct { }
+
         public struct Struct<T> { }
 
         public enum Enumeration { }
@@ -97,18 +97,23 @@ namespace Moq.Tests
         public delegate T NonVoidDelegate<T>();
 
         public interface IInterface { }
+
         public interface IInterface<T> { }
 
         public class NonSealedClass { }
+
         public class NonSealedClass<T> { }
 
         public abstract class AbstractClass { }
+
         public abstract class AbstractClass<T> { }
 
         public static class StaticClass { }
+
         public static class StaticClass<T> { }
 
         public sealed class SealedClass { }
+
         public sealed class SealedClass<T> { }
     }
 }

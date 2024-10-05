@@ -23,9 +23,9 @@ namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue
         string message,
         ManagedHotReloadDiagnosticSeverity severity,
         string filePath,
-        SourceSpan span)
+        SourceSpan span
+    )
     {
-
         /// <summary>
         /// Diagnostic information identifier.
         /// </summary>

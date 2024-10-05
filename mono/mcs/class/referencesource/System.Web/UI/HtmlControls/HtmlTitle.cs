@@ -1,57 +1,63 @@
-namespace System.Web.UI.HtmlControls {
+namespace System.Web.UI.HtmlControls
+{
     using System;
     using System.ComponentModel;
 
-    public class HtmlTitle : HtmlControl {
+    public class HtmlTitle : HtmlControl
+    {
         private string _text;
 
-
-        public HtmlTitle() : base("title") {
-        }
-
+        public HtmlTitle()
+            : base("title") { }
 
         [
-        WebCategory("Appearance"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        Localizable(true),
-        PersistenceMode(PersistenceMode.InnerDefaultProperty)
+            WebCategory("Appearance"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            Localizable(true),
+            PersistenceMode(PersistenceMode.InnerDefaultProperty)
         ]
-        public virtual string Text {
-            get {
-                if (_text == null) {
+        public virtual string Text
+        {
+            get
+            {
+                if (_text == null)
+                {
                     return String.Empty;
                 }
                 return _text;
             }
-            set {
-                _text = value;
-            }
+            set { _text = value; }
         }
 
-
-        protected override void AddParsedSubObject(object obj) {
-            if (obj is LiteralControl) {
+        protected override void AddParsedSubObject(object obj)
+        {
+            if (obj is LiteralControl)
+            {
                 _text = ((LiteralControl)obj).Text;
             }
-            else {
+            else
+            {
                 base.AddParsedSubObject(obj);
             }
         }
 
         // Allow child controls to support databinding expressions as inner text.
-        protected override ControlCollection CreateControlCollection() {
+        protected override ControlCollection CreateControlCollection()
+        {
             return new ControlCollection(this);
         }
 
-
-        protected internal override void Render(HtmlTextWriter writer) {
+        protected internal override void Render(HtmlTextWriter writer)
+        {
             writer.RenderBeginTag(HtmlTextWriterTag.Title);
 
-            if (HasControls() || HasRenderDelegate()) {
+            if (HasControls() || HasRenderDelegate())
+            {
                 RenderChildren(writer);
             }
-            else if (_text != null) {
+            else if (_text != null)
+            {
                 writer.Write(_text);
             }
 

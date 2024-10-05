@@ -16,9 +16,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
         private class Rewriter : AbstractReductionRewriter
         {
             public Rewriter(ObjectPool<IReductionRewriter> pool)
-                : base(pool)
-            {
-            }
+                : base(pool) { }
 
             private SyntaxNode ProcessTypeSyntax(TypeSyntax typeSyntax)
             {
@@ -37,27 +35,49 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 }
 
                 var typeStyle = CSharpUseImplicitTypeHelper.Instance.AnalyzeTypeName(
-                    typeSyntax, this.SemanticModel, this.Options, this.CancellationToken);
+                    typeSyntax,
+                    this.SemanticModel,
+                    this.Options,
+                    this.CancellationToken
+                );
 
                 if (!typeStyle.IsStylePreferred || !typeStyle.CanConvert())
                 {
                     return typeSyntax;
                 }
 
-                return SyntaxFactory.IdentifierName("var")
+                return SyntaxFactory
+                    .IdentifierName("var")
                     .WithLeadingTrivia(typeSyntax.GetLeadingTrivia())
                     .WithTrailingTrivia(typeSyntax.GetTrailingTrivia());
             }
 
-            public override SyntaxNode VisitAliasQualifiedName(AliasQualifiedNameSyntax node) => ProcessTypeSyntax(node);
-            public override SyntaxNode VisitArrayType(ArrayTypeSyntax node) => ProcessTypeSyntax(node);
-            public override SyntaxNode VisitGenericName(GenericNameSyntax node) => ProcessTypeSyntax(node);
-            public override SyntaxNode VisitIdentifierName(IdentifierNameSyntax node) => ProcessTypeSyntax(node);
-            public override SyntaxNode VisitNullableType(NullableTypeSyntax node) => ProcessTypeSyntax(node);
-            public override SyntaxNode VisitPointerType(PointerTypeSyntax node) => ProcessTypeSyntax(node);
-            public override SyntaxNode VisitPredefinedType(PredefinedTypeSyntax node) => ProcessTypeSyntax(node);
-            public override SyntaxNode VisitQualifiedName(QualifiedNameSyntax node) => ProcessTypeSyntax(node);
-            public override SyntaxNode VisitTupleType(TupleTypeSyntax node) => ProcessTypeSyntax(node);
+            public override SyntaxNode VisitAliasQualifiedName(AliasQualifiedNameSyntax node) =>
+                ProcessTypeSyntax(node);
+
+            public override SyntaxNode VisitArrayType(ArrayTypeSyntax node) =>
+                ProcessTypeSyntax(node);
+
+            public override SyntaxNode VisitGenericName(GenericNameSyntax node) =>
+                ProcessTypeSyntax(node);
+
+            public override SyntaxNode VisitIdentifierName(IdentifierNameSyntax node) =>
+                ProcessTypeSyntax(node);
+
+            public override SyntaxNode VisitNullableType(NullableTypeSyntax node) =>
+                ProcessTypeSyntax(node);
+
+            public override SyntaxNode VisitPointerType(PointerTypeSyntax node) =>
+                ProcessTypeSyntax(node);
+
+            public override SyntaxNode VisitPredefinedType(PredefinedTypeSyntax node) =>
+                ProcessTypeSyntax(node);
+
+            public override SyntaxNode VisitQualifiedName(QualifiedNameSyntax node) =>
+                ProcessTypeSyntax(node);
+
+            public override SyntaxNode VisitTupleType(TupleTypeSyntax node) =>
+                ProcessTypeSyntax(node);
         }
     }
 }

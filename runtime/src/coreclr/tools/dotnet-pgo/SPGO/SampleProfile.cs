@@ -20,9 +20,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         private Dictionary<BasicBlock, long> _smoothedSamples;
         private Dictionary<(BasicBlock, BasicBlock), long> _smoothedEdgeSamples;
 
-        public SampleProfile(
-            MethodIL methodIL,
-            FlowGraph fg)
+        public SampleProfile(MethodIL methodIL, FlowGraph fg)
         {
             MethodIL = methodIL;
             FlowGraph = fg;
@@ -32,7 +30,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         public FlowGraph FlowGraph { get; }
         public IReadOnlyDictionary<BasicBlock, long> RawSamples => _rawSamples;
         public IReadOnlyDictionary<BasicBlock, long> SmoothedSamples => _smoothedSamples;
-        public IReadOnlyDictionary<(BasicBlock, BasicBlock), long> SmoothedEdgeSamples => _smoothedEdgeSamples;
+        public IReadOnlyDictionary<(BasicBlock, BasicBlock), long> SmoothedEdgeSamples =>
+            _smoothedEdgeSamples;
         public long AttributedSamples { get; set; }
 
         public bool TryAttributeSamples(int ilOffset, long count)
@@ -60,7 +59,13 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     _rawSamples.Add(bb, 0);
             }
 
-            FlowSmoothing<BasicBlock> flowSmooth = new(_rawSamples, FlowGraph.Lookup(0), bb => bb.Targets, (bb, isForward) => bb.Size * (isForward ? 1 : 50) + 2);
+            FlowSmoothing<BasicBlock> flowSmooth =
+                new(
+                    _rawSamples,
+                    FlowGraph.Lookup(0),
+                    bb => bb.Targets,
+                    (bb, isForward) => bb.Size * (isForward ? 1 : 50) + 2
+                );
             flowSmooth.Perform();
             _smoothedSamples = flowSmooth.NodeResults;
             _smoothedEdgeSamples = flowSmooth.EdgeResults;

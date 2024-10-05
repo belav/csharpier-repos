@@ -3,7 +3,13 @@
 
 namespace System.Runtime.InteropServices
 {
-    [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.ReturnValue, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Parameter
+            | AttributeTargets.Field
+            | AttributeTargets.Property
+            | AttributeTargets.ReturnValue,
+        Inherited = false
+    )]
     public sealed class ComAliasNameAttribute : Attribute
     {
         public ComAliasNameAttribute(string alias) => Value = alias;

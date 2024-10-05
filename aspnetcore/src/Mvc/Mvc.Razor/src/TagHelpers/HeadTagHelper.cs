@@ -21,7 +21,5 @@ public class HeadTagHelper : TagHelperComponentTagHelper
     /// of <see cref="ITagHelperComponent"/>s.</param>
     /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
     public HeadTagHelper(ITagHelperComponentManager manager, ILoggerFactory loggerFactory)
-        : base(manager, loggerFactory)
-    {
-    }
+        : base(manager, loggerFactory) { }
 }

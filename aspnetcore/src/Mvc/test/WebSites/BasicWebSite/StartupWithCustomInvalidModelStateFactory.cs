@@ -11,12 +11,11 @@ public class StartupWithCustomInvalidModelStateFactory
     // Set up application services
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddAuthentication()
+        services
+            .AddAuthentication()
             .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("Api", _ => { });
 
-        services
-            .AddMvc()
-            .AddNewtonsoftJson();
+        services.AddMvc().AddNewtonsoftJson();
 
         services.Configure<ApiBehaviorOptions>(options =>
         {

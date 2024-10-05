@@ -17,15 +17,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.InlayHint
 {
     public class VisualBasicInlayHintTests : AbstractInlayHintTests
     {
-        public VisualBasicInlayHintTests(ITestOutputHelper? testOutputHelper) : base(testOutputHelper)
-        {
-        }
+        public VisualBasicInlayHintTests(ITestOutputHelper? testOutputHelper)
+            : base(testOutputHelper) { }
 
         [Theory, CombinatorialData]
         public async Task TestOneInlayParameterHintAsync(bool mutatingLspWorkspace)
         {
             var markup =
-@"Class A
+                @"Class A
     Sub M(x As Integer)
     End Sub
 
@@ -40,7 +39,7 @@ End Class";
         public async Task TestMultipleInlayParameterHintsAsync(bool mutatingLspWorkspace)
         {
             var markup =
-@"Class A
+                @"Class A
     Sub M(x As Integer, y As Boolean)
     End Sub
 
@@ -53,21 +52,26 @@ End Class";
 
         private async Task RunVerifyInlayHintAsync(string markup, bool mutatingLspWorkspace)
         {
-            await using var testLspServer = await CreateVisualBasicTestLspServerAsync(markup, mutatingLspWorkspace, new InitializationOptions
-            {
-                ClientCapabilities = new LSP.VSInternalClientCapabilities
+            await using var testLspServer = await CreateVisualBasicTestLspServerAsync(
+                markup,
+                mutatingLspWorkspace,
+                new InitializationOptions
                 {
-                    SupportsVisualStudioExtensions = true,
-                    Workspace = new WorkspaceClientCapabilities
+                    ClientCapabilities = new LSP.VSInternalClientCapabilities
                     {
-                        InlayHint = new InlayHintWorkspaceSetting
+                        SupportsVisualStudioExtensions = true,
+                        Workspace = new WorkspaceClientCapabilities
                         {
-                            RefreshSupport = true
-                        }
-                    }
+                            InlayHint = new InlayHintWorkspaceSetting { RefreshSupport = true },
+                        },
+                    },
                 }
-            });
-            testLspServer.TestWorkspace.GlobalOptions.SetGlobalOption(InlineHintsOptionsStorage.EnabledForParameters, LanguageNames.VisualBasic, true);
+            );
+            testLspServer.TestWorkspace.GlobalOptions.SetGlobalOption(
+                InlineHintsOptionsStorage.EnabledForParameters,
+                LanguageNames.VisualBasic,
+                true
+            );
             await VerifyInlayHintAsync(testLspServer);
         }
     }

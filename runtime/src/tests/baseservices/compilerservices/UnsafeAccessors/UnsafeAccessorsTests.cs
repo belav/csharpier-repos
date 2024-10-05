@@ -5,7 +5,6 @@ using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-
 using Xunit;
 
 public static unsafe class UnsafeAccessorsTests
@@ -33,14 +32,24 @@ public static unsafe class UnsafeAccessorsTests
 
         public string Value => _f;
 
-        private UserDataClass(string a) { _f = a; }
-        private UserDataClass() { _f = Private; Prop = Private; }
+        private UserDataClass(string a)
+        {
+            _f = a;
+        }
+
+        private UserDataClass()
+        {
+            _f = Private;
+            Prop = Private;
+        }
 
         private static string _M(string s, ref string sr, in string si) => s;
+
         private string _m(string s, ref string sr, in string si) => s;
 
-        private static void _MVV() {}
-        private void _mvv() {}
+        private static void _MVV() { }
+
+        private void _mvv() { }
 
         // The "init" is important to have here - custom modifier test.
         // The signature of set_Prop is
@@ -48,16 +57,23 @@ public static unsafe class UnsafeAccessorsTests
         private string Prop { get; init; }
 
         // Used to validate ambiguity is handled via custom modifiers.
-        private string _Ambiguous(delegate* unmanaged[Cdecl, MemberFunction]<void> fptr) => nameof(CallConvCdecl);
-        private string _Ambiguous(delegate* unmanaged[Stdcall, MemberFunction]<void> fptr) => nameof(CallConvStdcall);
+        private string _Ambiguous(delegate* unmanaged[Cdecl, MemberFunction]<void> fptr) =>
+            nameof(CallConvCdecl);
+
+        private string _Ambiguous(delegate* unmanaged[Stdcall, MemberFunction]<void> fptr) =>
+            nameof(CallConvStdcall);
 
         // Used to validate pointer values.
         private static string _Pointer(void* ptr) => "void*";
 
         // Used to validate the embedded callconv bits in
         // ECMA-335 signatures for methods.
-        private string _CdeclCallConvBit(delegate* unmanaged[Cdecl]<void> fptr) => nameof(CallConvCdecl);
-        private string _StdcallCallConvBit(delegate* unmanaged[Stdcall]<void> fptr) => nameof(CallConvStdcall);
+        private string _CdeclCallConvBit(delegate* unmanaged[Cdecl]<void> fptr) =>
+            nameof(CallConvCdecl);
+
+        private string _StdcallCallConvBit(delegate* unmanaged[Stdcall]<void> fptr) =>
+            nameof(CallConvStdcall);
+
         private string _ManagedCallConvBit(delegate* <void> fptr) => "Managed";
     }
 
@@ -74,12 +90,19 @@ public static unsafe class UnsafeAccessorsTests
 
         public string Value => _f;
 
-        private UserDataValue(string a) { _f = a; }
+        private UserDataValue(string a)
+        {
+            _f = a;
+        }
 
         // ValueClass are not permitted to define a private default constructor.
-        public UserDataValue() { _f = Private; }
+        public UserDataValue()
+        {
+            _f = Private;
+        }
 
         private static string _M(string s, ref string sr, in string si) => s;
+
         private string _m(string s, ref string sr, in string si) => s;
 
         public string GetFieldValue() => _f;
@@ -103,23 +126,28 @@ public static unsafe class UnsafeAccessorsTests
         private static string _F = PrivateStatic;
         private string _f;
 
-        public UserDataGenericClass() { _f = Private; }
+        public UserDataGenericClass()
+        {
+            _f = Private;
+        }
 
         private static string _GM(T s, ref T sr, in T si) => typeof(T).ToString();
+
         private string _gm(T s, ref T sr, in T si) => typeof(T).ToString();
 
         private static string _M(string s, ref string sr, in string si) => s;
+
         private string _m(string s, ref string sr, in string si) => s;
     }
 
     [UnsafeAccessor(UnsafeAccessorKind.Constructor)]
-    extern static UserDataClass CallPrivateConstructorClass();
+    static extern UserDataClass CallPrivateConstructorClass();
 
     [UnsafeAccessor(UnsafeAccessorKind.Constructor)]
-    extern static UserDataClass CallPrivateConstructorClass(string a);
+    static extern UserDataClass CallPrivateConstructorClass(string a);
 
     [UnsafeAccessor(UnsafeAccessorKind.Constructor)]
-    extern static UserDataValue CallPrivateConstructorValue(string a);
+    static extern UserDataValue CallPrivateConstructorValue(string a);
 
     [Fact]
     public static void Verify_CallDefaultCtorClass()
@@ -158,8 +186,8 @@ public static unsafe class UnsafeAccessorsTests
         var local = CallPrivateConstructorWithEmptyName();
         Assert.Equal(nameof(UserDataClass), local.GetType().Name);
 
-        [UnsafeAccessor(UnsafeAccessorKind.Constructor, Name="")]
-        extern static UserDataClass CallPrivateConstructorWithEmptyName();
+        [UnsafeAccessor(UnsafeAccessorKind.Constructor, Name = "")]
+        static extern UserDataClass CallPrivateConstructorWithEmptyName();
     }
 
     [Fact]
@@ -167,14 +195,15 @@ public static unsafe class UnsafeAccessorsTests
     {
         Console.WriteLine($"Running {nameof(Verify_CallCtorAsMethod)}");
 
-        UserDataClass ud = (UserDataClass)RuntimeHelpers.GetUninitializedObject(typeof(UserDataClass));
+        UserDataClass ud = (UserDataClass)
+            RuntimeHelpers.GetUninitializedObject(typeof(UserDataClass));
         Assert.Null(ud.Value);
 
         CallPrivateConstructor(ud, PrivateArg);
         Assert.Equal(PrivateArg, ud.Value);
 
-        [UnsafeAccessor(UnsafeAccessorKind.Method, Name=".ctor")]
-        extern static void CallPrivateConstructor(UserDataClass _this, string a);
+        [UnsafeAccessor(UnsafeAccessorKind.Method, Name = ".ctor")]
+        static extern void CallPrivateConstructor(UserDataClass _this, string a);
     }
 
     [Fact]
@@ -188,8 +217,8 @@ public static unsafe class UnsafeAccessorsTests
         CallPrivateConstructor(ref ud, PrivateArg);
         Assert.Equal(PrivateArg, ud.Value);
 
-        [UnsafeAccessor(UnsafeAccessorKind.Method, Name=".ctor")]
-        extern static void CallPrivateConstructor(ref UserDataValue _this, string a);
+        [UnsafeAccessor(UnsafeAccessorKind.Method, Name = ".ctor")]
+        static extern void CallPrivateConstructor(ref UserDataValue _this, string a);
     }
 
     [Fact]
@@ -199,8 +228,8 @@ public static unsafe class UnsafeAccessorsTests
 
         Assert.Equal(PrivateStatic, GetPrivateStaticField((UserDataClass)null));
 
-        [UnsafeAccessor(UnsafeAccessorKind.StaticField, Name=UserDataClass.StaticFieldName)]
-        extern static ref string GetPrivateStaticField(UserDataClass d);
+        [UnsafeAccessor(UnsafeAccessorKind.StaticField, Name = UserDataClass.StaticFieldName)]
+        static extern ref string GetPrivateStaticField(UserDataClass d);
     }
 
     [Fact]
@@ -211,8 +240,8 @@ public static unsafe class UnsafeAccessorsTests
         var local = CallPrivateConstructorClass();
         Assert.Equal(Private, GetPrivateField(local));
 
-        [UnsafeAccessor(UnsafeAccessorKind.Field, Name=UserDataClass.FieldName)]
-        extern static ref string GetPrivateField(UserDataClass d);
+        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = UserDataClass.FieldName)]
+        static extern ref string GetPrivateField(UserDataClass d);
     }
 
     [Fact]
@@ -223,13 +252,22 @@ public static unsafe class UnsafeAccessorsTests
 
         Assert.Equal(PrivateStatic, GetPrivateStaticFieldInt((UserDataGenericClass<int>)null));
 
-        Assert.Equal(PrivateStatic, GetPrivateStaticFieldString((UserDataGenericClass<string>)null));
+        Assert.Equal(
+            PrivateStatic,
+            GetPrivateStaticFieldString((UserDataGenericClass<string>)null)
+        );
 
-        [UnsafeAccessor(UnsafeAccessorKind.StaticField, Name=UserDataGenericClass<int>.StaticFieldName)]
-        extern static ref string GetPrivateStaticFieldInt(UserDataGenericClass<int> d);
+        [UnsafeAccessor(
+            UnsafeAccessorKind.StaticField,
+            Name = UserDataGenericClass<int>.StaticFieldName
+        )]
+        static extern ref string GetPrivateStaticFieldInt(UserDataGenericClass<int> d);
 
-        [UnsafeAccessor(UnsafeAccessorKind.StaticField, Name=UserDataGenericClass<string>.StaticFieldName)]
-        extern static ref string GetPrivateStaticFieldString(UserDataGenericClass<string> d);
+        [UnsafeAccessor(
+            UnsafeAccessorKind.StaticField,
+            Name = UserDataGenericClass<string>.StaticFieldName
+        )]
+        static extern ref string GetPrivateStaticFieldString(UserDataGenericClass<string> d);
     }
 
     [Fact]
@@ -239,8 +277,8 @@ public static unsafe class UnsafeAccessorsTests
 
         Assert.Equal(PrivateStatic, GetPrivateStaticField(new UserDataValue()));
 
-        [UnsafeAccessor(UnsafeAccessorKind.StaticField, Name=UserDataValue.StaticFieldName)]
-        extern static ref string GetPrivateStaticField(UserDataValue d);
+        [UnsafeAccessor(UnsafeAccessorKind.StaticField, Name = UserDataValue.StaticFieldName)]
+        static extern ref string GetPrivateStaticField(UserDataValue d);
     }
 
     [Fact]
@@ -255,8 +293,8 @@ public static unsafe class UnsafeAccessorsTests
         GetPrivateField(ref local) = newValue;
         Assert.Equal(newValue, local.GetFieldValue());
 
-        [UnsafeAccessor(UnsafeAccessorKind.Field, Name=UserDataValue.FieldName)]
-        extern static ref string GetPrivateField(ref UserDataValue d);
+        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = UserDataValue.FieldName)]
+        static extern ref string GetPrivateField(ref UserDataValue d);
     }
 
     [Fact]
@@ -269,11 +307,11 @@ public static unsafe class UnsafeAccessorsTests
 
         Assert.Equal(Private, GetPrivateFieldString(new UserDataGenericClass<string>()));
 
-        [UnsafeAccessor(UnsafeAccessorKind.Field, Name=UserDataGenericClass<int>.FieldName)]
-        extern static ref string GetPrivateFieldInt(UserDataGenericClass<int> d);
+        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = UserDataGenericClass<int>.FieldName)]
+        static extern ref string GetPrivateFieldInt(UserDataGenericClass<int> d);
 
-        [UnsafeAccessor(UnsafeAccessorKind.Field, Name=UserDataGenericClass<string>.FieldName)]
-        extern static ref string GetPrivateFieldString(UserDataGenericClass<string> d);
+        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = UserDataGenericClass<string>.FieldName)]
+        static extern ref string GetPrivateFieldString(UserDataGenericClass<string> d);
     }
 
     [Fact]
@@ -283,10 +321,18 @@ public static unsafe class UnsafeAccessorsTests
 
         var sr = string.Empty;
         var si = string.Empty;
-        Assert.Equal(PrivateStatic, GetPrivateStaticMethod((UserDataClass)null, PrivateStatic, ref sr, in si));
+        Assert.Equal(
+            PrivateStatic,
+            GetPrivateStaticMethod((UserDataClass)null, PrivateStatic, ref sr, in si)
+        );
 
-        [UnsafeAccessor(UnsafeAccessorKind.StaticMethod, Name=UserDataClass.StaticMethodName)]
-        extern static string GetPrivateStaticMethod(UserDataClass d, string s, ref string sr, in string si);
+        [UnsafeAccessor(UnsafeAccessorKind.StaticMethod, Name = UserDataClass.StaticMethodName)]
+        static extern string GetPrivateStaticMethod(
+            UserDataClass d,
+            string s,
+            ref string sr,
+            in string si
+        );
     }
 
     [Fact]
@@ -299,16 +345,22 @@ public static unsafe class UnsafeAccessorsTests
         var local = CallPrivateConstructorClass();
         Assert.Equal(Private, GetPrivateMethod(local, Private, ref sr, in si));
 
-        [UnsafeAccessor(UnsafeAccessorKind.Method, Name=UserDataClass.MethodName)]
-        extern static string GetPrivateMethod(UserDataClass d, string s, ref string sr, in string si);
+        [UnsafeAccessor(UnsafeAccessorKind.Method, Name = UserDataClass.MethodName)]
+        static extern string GetPrivateMethod(
+            UserDataClass d,
+            string s,
+            ref string sr,
+            in string si
+        );
     }
 
     // These are defined outside of the test to validate lookup using the name of
     // the declaration as opposed to the Name field.
     [UnsafeAccessor(UnsafeAccessorKind.StaticMethod)]
-    extern static void _MVV(UserDataClass d);
+    static extern void _MVV(UserDataClass d);
+
     [UnsafeAccessor(UnsafeAccessorKind.Method)]
-    extern static void _mvv(UserDataClass d);
+    static extern void _mvv(UserDataClass d);
 
     [Fact]
     public static void Verify_AccessStaticMethodVoidClass()
@@ -318,8 +370,8 @@ public static unsafe class UnsafeAccessorsTests
         GetPrivateStaticMethod((UserDataClass)null);
         _MVV((UserDataClass)null);
 
-        [UnsafeAccessor(UnsafeAccessorKind.StaticMethod, Name=UserDataClass.StaticMethodVoidName)]
-        extern static void GetPrivateStaticMethod(UserDataClass d);
+        [UnsafeAccessor(UnsafeAccessorKind.StaticMethod, Name = UserDataClass.StaticMethodVoidName)]
+        static extern void GetPrivateStaticMethod(UserDataClass d);
     }
 
     [Fact]
@@ -331,8 +383,8 @@ public static unsafe class UnsafeAccessorsTests
         GetPrivateMethod(local);
         _mvv(local);
 
-        [UnsafeAccessor(UnsafeAccessorKind.Method, Name=UserDataClass.MethodVoidName)]
-        extern static void GetPrivateMethod(UserDataClass d);
+        [UnsafeAccessor(UnsafeAccessorKind.Method, Name = UserDataClass.MethodVoidName)]
+        static extern void GetPrivateMethod(UserDataClass d);
     }
 
     [Fact]
@@ -342,10 +394,18 @@ public static unsafe class UnsafeAccessorsTests
 
         var sr = string.Empty;
         var si = string.Empty;
-        Assert.Equal(PrivateStatic, GetPrivateStaticMethod(new UserDataValue(), PrivateStatic, ref sr, in si));
+        Assert.Equal(
+            PrivateStatic,
+            GetPrivateStaticMethod(new UserDataValue(), PrivateStatic, ref sr, in si)
+        );
 
-        [UnsafeAccessor(UnsafeAccessorKind.StaticMethod, Name=UserDataValue.StaticMethodName)]
-        extern static string GetPrivateStaticMethod(UserDataValue d, string s, ref string sr, in string si);
+        [UnsafeAccessor(UnsafeAccessorKind.StaticMethod, Name = UserDataValue.StaticMethodName)]
+        static extern string GetPrivateStaticMethod(
+            UserDataValue d,
+            string s,
+            ref string sr,
+            in string si
+        );
     }
 
     [Fact]
@@ -358,8 +418,13 @@ public static unsafe class UnsafeAccessorsTests
         UserDataValue local = new();
         Assert.Equal(Private, GetPrivateMethod(ref local, Private, ref sr, in si));
 
-        [UnsafeAccessor(UnsafeAccessorKind.Method, Name=UserDataValue.MethodName)]
-        extern static string GetPrivateMethod(ref UserDataValue d, string s, ref string sr, in string si);
+        [UnsafeAccessor(UnsafeAccessorKind.Method, Name = UserDataValue.MethodName)]
+        static extern string GetPrivateMethod(
+            ref UserDataValue d,
+            string s,
+            ref string sr,
+            in string si
+        );
     }
 
     [Fact]
@@ -374,12 +439,12 @@ public static unsafe class UnsafeAccessorsTests
         CallPrivateSetter(ud, newValue);
         Assert.Equal(newValue, CallPrivateGetter(ud));
 
-        [UnsafeAccessor(UnsafeAccessorKind.Method, Name="get_Prop")]
-        extern static string CallPrivateGetter(UserDataClass d);
+        [UnsafeAccessor(UnsafeAccessorKind.Method, Name = "get_Prop")]
+        static extern string CallPrivateGetter(UserDataClass d);
 
         // Private setter used with "init" to validate default "ignore custom modifier" logic
-        [UnsafeAccessor(UnsafeAccessorKind.Method, Name="set_Prop")]
-        extern static void CallPrivateSetter(UserDataClass d, string v);
+        [UnsafeAccessor(UnsafeAccessorKind.Method, Name = "set_Prop")]
+        static extern void CallPrivateSetter(UserDataClass d, string v);
     }
 
     [Fact]
@@ -390,14 +455,19 @@ public static unsafe class UnsafeAccessorsTests
         var ud = CallPrivateConstructorClass();
         Assert.Equal(nameof(CallConvStdcall), CallPrivateMethod(ud, null));
 
-        [UnsafeAccessor(UnsafeAccessorKind.Method, Name=UserDataClass.MethodNameAmbiguous)]
-        extern static string CallPrivateMethod(UserDataClass d, delegate* unmanaged[Stdcall, MemberFunction]<void> fptr);
+        [UnsafeAccessor(UnsafeAccessorKind.Method, Name = UserDataClass.MethodNameAmbiguous)]
+        static extern string CallPrivateMethod(
+            UserDataClass d,
+            delegate* unmanaged[Stdcall, MemberFunction]<void> fptr
+        );
     }
 
     [Fact]
     public static void Verify_UnmanagedCallConvBitAreTreatedAsCustomModifiersAndIgnored()
     {
-        Console.WriteLine($"Running {nameof(Verify_UnmanagedCallConvBitAreTreatedAsCustomModifiersAndIgnored)}");
+        Console.WriteLine(
+            $"Running {nameof(Verify_UnmanagedCallConvBitAreTreatedAsCustomModifiersAndIgnored)}"
+        );
 
         var ud = CallPrivateConstructorClass();
         Assert.Equal(nameof(CallConvCdecl), CallCdeclMethod(ud, null));
@@ -407,12 +477,21 @@ public static unsafe class UnsafeAccessorsTests
         // pointer signature, this is by design for this test. The intent here is to validate that
         // calling conventions, when encoded in the ECMA-335 bits, are ignored on the first pass
         // in the same way custom modifiers are ignored.
-        [UnsafeAccessor(UnsafeAccessorKind.Method, Name=UserDataClass.MethodCdeclCallConvBitName)]
-        extern static string CallCdeclMethod(UserDataClass d, delegate* unmanaged[Stdcall]<void> fptr);
+        [UnsafeAccessor(UnsafeAccessorKind.Method, Name = UserDataClass.MethodCdeclCallConvBitName)]
+        static extern string CallCdeclMethod(
+            UserDataClass d,
+            delegate* unmanaged[Stdcall]<void> fptr
+        );
 
         // See comment above regarding naming.
-        [UnsafeAccessor(UnsafeAccessorKind.Method, Name=UserDataClass.MethodStdcallCallConvBitName)]
-        extern static string CallStdcallMethod(UserDataClass d, delegate* unmanaged[Cdecl]<void> fptr);
+        [UnsafeAccessor(
+            UnsafeAccessorKind.Method,
+            Name = UserDataClass.MethodStdcallCallConvBitName
+        )]
+        static extern string CallStdcallMethod(
+            UserDataClass d,
+            delegate* unmanaged[Cdecl]<void> fptr
+        );
     }
 
     [Fact]
@@ -425,31 +504,47 @@ public static unsafe class UnsafeAccessorsTests
         Assert.Throws<MissingMethodException>(() => CallManagedMethod(ud, null));
 
         // Managed calling conventions don't match on unmanaged function pointers
-        [UnsafeAccessor(UnsafeAccessorKind.Method, Name=UserDataClass.MethodCdeclCallConvBitName)]
-        extern static string CallCdeclMethod(UserDataClass d, delegate* <void> fptr);
+        [UnsafeAccessor(UnsafeAccessorKind.Method, Name = UserDataClass.MethodCdeclCallConvBitName)]
+        static extern string CallCdeclMethod(UserDataClass d, delegate* <void> fptr);
 
         // Unmanaged calling conventions don't match on managed function pointers
-        [UnsafeAccessor(UnsafeAccessorKind.Method, Name=UserDataClass.MethodManagedCallConvBitName)]
-        extern static string CallManagedMethod(UserDataClass d, delegate* unmanaged[Cdecl]<void> fptr);
+        [UnsafeAccessor(
+            UnsafeAccessorKind.Method,
+            Name = UserDataClass.MethodManagedCallConvBitName
+        )]
+        static extern string CallManagedMethod(
+            UserDataClass d,
+            delegate* unmanaged[Cdecl]<void> fptr
+        );
     }
 
     abstract class InheritanceBase
     {
         private static string OnBase() => nameof(OnBase);
+
         private static string FieldOnBase = nameof(FieldOnBase);
         protected abstract string Abstract();
+
         protected virtual string Virtual() => $"{nameof(InheritanceBase)}.{nameof(Virtual)}";
+
         protected virtual string NewVirtual() => $"{nameof(InheritanceBase)}.{nameof(NewVirtual)}";
-        protected virtual string BaseVirtual() => $"{nameof(InheritanceBase)}.{nameof(BaseVirtual)}";
+
+        protected virtual string BaseVirtual() =>
+            $"{nameof(InheritanceBase)}.{nameof(BaseVirtual)}";
     }
 
     class InheritanceDerived : InheritanceBase
     {
         private static string OnDerived() => nameof(OnDerived);
+
         private static string FieldOnDerived = nameof(FieldOnDerived);
+
         protected override string Abstract() => $"{nameof(InheritanceDerived)}.{nameof(Abstract)}";
+
         protected override string Virtual() => $"{nameof(InheritanceDerived)}.{nameof(Virtual)}";
-        protected new virtual string NewVirtual() => $"{nameof(InheritanceDerived)}.{nameof(NewVirtual)}";
+
+        protected new virtual string NewVirtual() =>
+            $"{nameof(InheritanceDerived)}.{nameof(NewVirtual)}";
     }
 
     [Fact]
@@ -466,22 +561,22 @@ public static unsafe class UnsafeAccessorsTests
         Assert.Equal($"{nameof(InheritanceBase)}.{nameof(NewVirtual)}", NewVirtual(instance));
 
         [UnsafeAccessor(UnsafeAccessorKind.StaticMethod, Name = nameof(OnBase))]
-        extern static string OnBase(InheritanceDerived i);
+        static extern string OnBase(InheritanceDerived i);
 
         [UnsafeAccessor(UnsafeAccessorKind.Method, Name = nameof(BaseVirtual))]
-        extern static string BaseVirtual(InheritanceDerived target);
+        static extern string BaseVirtual(InheritanceDerived target);
 
         [UnsafeAccessor(UnsafeAccessorKind.StaticMethod, Name = nameof(OnDerived))]
-        extern static string OnDerived(InheritanceDerived i);
+        static extern string OnDerived(InheritanceDerived i);
 
         [UnsafeAccessor(UnsafeAccessorKind.Method, Name = nameof(Abstract))]
-        extern static string Abstract(InheritanceBase target);
+        static extern string Abstract(InheritanceBase target);
 
         [UnsafeAccessor(UnsafeAccessorKind.Method, Name = nameof(Virtual))]
-        extern static string Virtual(InheritanceBase target);
+        static extern string Virtual(InheritanceBase target);
 
         [UnsafeAccessor(UnsafeAccessorKind.Method, Name = nameof(NewVirtual))]
-        extern static string NewVirtual(InheritanceBase target);
+        static extern string NewVirtual(InheritanceBase target);
     }
 
     [Fact]
@@ -494,10 +589,10 @@ public static unsafe class UnsafeAccessorsTests
         Assert.Equal(nameof(FieldOnDerived), FieldOnDerived(instance));
 
         [UnsafeAccessor(UnsafeAccessorKind.StaticField, Name = nameof(FieldOnBase))]
-        extern static ref string FieldOnBase(InheritanceDerived i);
+        static extern ref string FieldOnBase(InheritanceDerived i);
 
         [UnsafeAccessor(UnsafeAccessorKind.StaticField, Name = nameof(FieldOnDerived))]
-        extern static ref string FieldOnDerived(InheritanceDerived i);
+        static extern ref string FieldOnDerived(InheritanceDerived i);
     }
 
     [Fact]
@@ -509,63 +604,88 @@ public static unsafe class UnsafeAccessorsTests
         const string DoesNotExist = "_DoesNotExist_";
         AssertExtensions.ThrowsMissingMemberException<MissingMethodException>(
             isNativeAot ? null : DoesNotExist,
-            () => MethodNotFound(null));
+            () => MethodNotFound(null)
+        );
         AssertExtensions.ThrowsMissingMemberException<MissingMethodException>(
             isNativeAot ? null : DoesNotExist,
-            () => StaticMethodNotFound(null));
+            () => StaticMethodNotFound(null)
+        );
 
         AssertExtensions.ThrowsMissingMemberException<MissingFieldException>(
             isNativeAot ? null : DoesNotExist,
-            () => FieldNotFound(null));
+            () => FieldNotFound(null)
+        );
         AssertExtensions.ThrowsMissingMemberException<MissingFieldException>(
             isNativeAot ? null : UserDataClass.StaticFieldName,
             () =>
             {
                 UserDataValue value = default;
                 FieldNotFoundStaticMismatch1(ref value);
-            });
+            }
+        );
         AssertExtensions.ThrowsMissingMemberException<MissingFieldException>(
             isNativeAot ? null : UserDataValue.FieldName,
-            () => FieldNotFoundStaticMismatch2(default));
+            () => FieldNotFoundStaticMismatch2(default)
+        );
         AssertExtensions.ThrowsMissingMemberException<MissingFieldException>(
             isNativeAot ? null : DoesNotExist,
-            () => StaticFieldNotFound(null));
+            () => StaticFieldNotFound(null)
+        );
 
         AssertExtensions.ThrowsMissingMemberException<MissingMethodException>(
             isNativeAot ? null : UserDataClass.MethodPointerName,
-            () => CallPointerMethod(null, null));
+            () => CallPointerMethod(null, null)
+        );
         AssertExtensions.ThrowsMissingMemberException<MissingMethodException>(
             isNativeAot ? null : UserDataClass.StaticMethodName,
-            () => { string sr = string.Empty; StaticMethodWithDifferentReturnType(null, null, ref sr, string.Empty); });
+            () =>
+            {
+                string sr = string.Empty;
+                StaticMethodWithDifferentReturnType(null, null, ref sr, string.Empty);
+            }
+        );
 
         AssertExtensions.ThrowsMissingMemberException<MissingMethodException>(
             isNativeAot ? null : UserDataClass.StaticMethodName,
-            () => { string sr = string.Empty; StaticMethodWithDifferentReturnType(null, null, ref sr, string.Empty); });
+            () =>
+            {
+                string sr = string.Empty;
+                StaticMethodWithDifferentReturnType(null, null, ref sr, string.Empty);
+            }
+        );
 
-        [UnsafeAccessor(UnsafeAccessorKind.Method, Name=DoesNotExist)]
-        extern static void MethodNotFound(UserDataClass d);
+        [UnsafeAccessor(UnsafeAccessorKind.Method, Name = DoesNotExist)]
+        static extern void MethodNotFound(UserDataClass d);
 
-        [UnsafeAccessor(UnsafeAccessorKind.StaticMethod, Name=DoesNotExist)]
-        extern static void StaticMethodNotFound(UserDataClass d);
+        [UnsafeAccessor(UnsafeAccessorKind.StaticMethod, Name = DoesNotExist)]
+        static extern void StaticMethodNotFound(UserDataClass d);
 
-        [UnsafeAccessor(UnsafeAccessorKind.Field, Name=DoesNotExist)]
-        extern static ref string FieldNotFound(UserDataClass d);
+        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = DoesNotExist)]
+        static extern ref string FieldNotFound(UserDataClass d);
 
-        [UnsafeAccessor(UnsafeAccessorKind.Field, Name=UserDataValue.StaticFieldName)]
-        extern static ref string FieldNotFoundStaticMismatch1(ref UserDataValue d);
+        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = UserDataValue.StaticFieldName)]
+        static extern ref string FieldNotFoundStaticMismatch1(ref UserDataValue d);
 
-        [UnsafeAccessor(UnsafeAccessorKind.StaticField, Name=UserDataValue.FieldName)]
-        extern static ref string FieldNotFoundStaticMismatch2(UserDataValue d);
+        [UnsafeAccessor(UnsafeAccessorKind.StaticField, Name = UserDataValue.FieldName)]
+        static extern ref string FieldNotFoundStaticMismatch2(UserDataValue d);
 
-        [UnsafeAccessor(UnsafeAccessorKind.StaticField, Name=DoesNotExist)]
-        extern static ref string StaticFieldNotFound(UserDataClass d);
+        [UnsafeAccessor(UnsafeAccessorKind.StaticField, Name = DoesNotExist)]
+        static extern ref string StaticFieldNotFound(UserDataClass d);
 
         // Pointers generally degrade to `void*`, but that isn't true for UnsafeAccessor signature validation.
-        [UnsafeAccessor(UnsafeAccessorKind.StaticMethod, Name=UserDataClass.MethodPointerName)]
-        extern static string CallPointerMethod(UserDataClass d, delegate* unmanaged[Stdcall]<void> fptr);
+        [UnsafeAccessor(UnsafeAccessorKind.StaticMethod, Name = UserDataClass.MethodPointerName)]
+        static extern string CallPointerMethod(
+            UserDataClass d,
+            delegate* unmanaged[Stdcall]<void> fptr
+        );
 
-        [UnsafeAccessor(UnsafeAccessorKind.StaticMethod, Name=UserDataClass.StaticMethodName)]
-        extern static int StaticMethodWithDifferentReturnType(UserDataClass d, string s, ref string sr, in string si);
+        [UnsafeAccessor(UnsafeAccessorKind.StaticMethod, Name = UserDataClass.StaticMethodName)]
+        static extern int StaticMethodWithDifferentReturnType(
+            UserDataClass d,
+            string s,
+            ref string sr,
+            in string si
+        );
     }
 
     [Fact]
@@ -574,27 +694,31 @@ public static unsafe class UnsafeAccessorsTests
         Console.WriteLine($"Running {nameof(Verify_InvalidTargetUnsafeAccessorAmbiguousMatch)}");
 
         Assert.Throws<AmbiguousMatchException>(
-            () => CallAmbiguousMethod(CallPrivateConstructorClass(), null));
+            () => CallAmbiguousMethod(CallPrivateConstructorClass(), null)
+        );
 
         // This is an ambiguous match since there are two methods each with two custom modifiers.
         // Therefore the default "ignore custom modifiers" logic fails. The fallback is for a
         // precise match and that also fails because the custom modifiers don't match precisely.
-        [UnsafeAccessor(UnsafeAccessorKind.Method, Name=UserDataClass.MethodNameAmbiguous)]
-        extern static string CallAmbiguousMethod(UserDataClass d, delegate* unmanaged[Stdcall, SuppressGCTransition]<void> fptr);
+        [UnsafeAccessor(UnsafeAccessorKind.Method, Name = UserDataClass.MethodNameAmbiguous)]
+        static extern string CallAmbiguousMethod(
+            UserDataClass d,
+            delegate* unmanaged[Stdcall, SuppressGCTransition]<void> fptr
+        );
     }
 
     class Invalid
     {
-        [UnsafeAccessor(UnsafeAccessorKind.Method, Name=nameof(ToString))]
+        [UnsafeAccessor(UnsafeAccessorKind.Method, Name = nameof(ToString))]
         public extern string NonStatic(string a);
 
-        [UnsafeAccessor(UnsafeAccessorKind.Method, Name=nameof(ToString))]
+        [UnsafeAccessor(UnsafeAccessorKind.Method, Name = nameof(ToString))]
         public static extern string CallToString<U>(U a);
     }
 
     class Invalid<T>
     {
-        [UnsafeAccessor(UnsafeAccessorKind.Method, Name=nameof(ToString))]
+        [UnsafeAccessor(UnsafeAccessorKind.Method, Name = nameof(ToString))]
         public static extern string CallToString(T a);
     }
 
@@ -603,15 +727,21 @@ public static unsafe class UnsafeAccessorsTests
     {
         Console.WriteLine($"Running {nameof(Verify_InvalidUseUnsafeAccessor)}");
 
-        Assert.Throws<BadImageFormatException>(() => FieldReturnMustBeByRefClass((UserDataClass)null));
+        Assert.Throws<BadImageFormatException>(
+            () => FieldReturnMustBeByRefClass((UserDataClass)null)
+        );
         Assert.Throws<BadImageFormatException>(() =>
         {
             UserDataValue local = new();
             FieldReturnMustBeByRefValue(ref local);
         });
         Assert.Throws<BadImageFormatException>(() => FieldArgumentMustBeByRef(new UserDataValue()));
-        Assert.Throws<BadImageFormatException>(() => FieldMustHaveSingleArgument((UserDataClass)null, 0));
-        Assert.Throws<BadImageFormatException>(() => StaticFieldMustHaveSingleArgument((UserDataClass)null, 0));
+        Assert.Throws<BadImageFormatException>(
+            () => FieldMustHaveSingleArgument((UserDataClass)null, 0)
+        );
+        Assert.Throws<BadImageFormatException>(
+            () => StaticFieldMustHaveSingleArgument((UserDataClass)null, 0)
+        );
         Assert.Throws<BadImageFormatException>(() => InvalidKindValue(null));
         Assert.Throws<BadImageFormatException>(() => InvalidCtorSignatureClass());
         Assert.Throws<BadImageFormatException>(() => InvalidCtorSignatureValue());
@@ -629,43 +759,48 @@ public static unsafe class UnsafeAccessorsTests
             InvokeMethodOnValueWithoutRef(local, null, ref str, str);
         });
 
-        [UnsafeAccessor(UnsafeAccessorKind.Field, Name=UserDataValue.FieldName)]
-        extern static string FieldReturnMustBeByRefClass(UserDataClass d);
+        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = UserDataValue.FieldName)]
+        static extern string FieldReturnMustBeByRefClass(UserDataClass d);
 
-        [UnsafeAccessor(UnsafeAccessorKind.Field, Name=UserDataValue.FieldName)]
-        extern static string FieldReturnMustBeByRefValue(ref UserDataValue d);
+        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = UserDataValue.FieldName)]
+        static extern string FieldReturnMustBeByRefValue(ref UserDataValue d);
 
-        [UnsafeAccessor(UnsafeAccessorKind.Field, Name=UserDataValue.FieldName)]
-        extern static ref string FieldArgumentMustBeByRef(UserDataValue d);
+        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = UserDataValue.FieldName)]
+        static extern ref string FieldArgumentMustBeByRef(UserDataValue d);
 
-        [UnsafeAccessor(UnsafeAccessorKind.Field, Name=UserDataValue.FieldName)]
-        extern static ref string FieldMustHaveSingleArgument(UserDataClass d, int a);
+        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = UserDataValue.FieldName)]
+        static extern ref string FieldMustHaveSingleArgument(UserDataClass d, int a);
 
-        [UnsafeAccessor(UnsafeAccessorKind.StaticField, Name=UserDataValue.StaticFieldName)]
-        extern static ref string StaticFieldMustHaveSingleArgument(UserDataClass d, int a);
+        [UnsafeAccessor(UnsafeAccessorKind.StaticField, Name = UserDataValue.StaticFieldName)]
+        static extern ref string StaticFieldMustHaveSingleArgument(UserDataClass d, int a);
 
-        [UnsafeAccessor((UnsafeAccessorKind)100, Name=UserDataClass.StaticMethodVoidName)]
-        extern static void InvalidKindValue(UserDataClass d);
-
-        [UnsafeAccessor(UnsafeAccessorKind.Constructor)]
-        extern static ref UserDataClass InvalidCtorSignatureClass();
+        [UnsafeAccessor((UnsafeAccessorKind)100, Name = UserDataClass.StaticMethodVoidName)]
+        static extern void InvalidKindValue(UserDataClass d);
 
         [UnsafeAccessor(UnsafeAccessorKind.Constructor)]
-        extern static ref UserDataValue InvalidCtorSignatureValue();
-
-        [UnsafeAccessor(UnsafeAccessorKind.Constructor, Name="_ShouldBeNull_")]
-        extern static UserDataClass InvalidCtorName();
+        static extern ref UserDataClass InvalidCtorSignatureClass();
 
         [UnsafeAccessor(UnsafeAccessorKind.Constructor)]
-        extern static void InvalidCtorType();
+        static extern ref UserDataValue InvalidCtorSignatureValue();
 
-        [UnsafeAccessor(UnsafeAccessorKind.Method, Name=nameof(ToString))]
-        extern static string LookUpFailsOnPointers(void* d);
+        [UnsafeAccessor(UnsafeAccessorKind.Constructor, Name = "_ShouldBeNull_")]
+        static extern UserDataClass InvalidCtorName();
 
-        [UnsafeAccessor(UnsafeAccessorKind.Method, Name=nameof(ToString))]
-        extern static string LookUpFailsOnFunctionPointers(delegate* <void> fptr);
+        [UnsafeAccessor(UnsafeAccessorKind.Constructor)]
+        static extern void InvalidCtorType();
+
+        [UnsafeAccessor(UnsafeAccessorKind.Method, Name = nameof(ToString))]
+        static extern string LookUpFailsOnPointers(void* d);
+
+        [UnsafeAccessor(UnsafeAccessorKind.Method, Name = nameof(ToString))]
+        static extern string LookUpFailsOnFunctionPointers(delegate* <void> fptr);
 
         [UnsafeAccessor(UnsafeAccessorKind.Method, Name = UserDataValue.MethodName)]
-        extern static string InvokeMethodOnValueWithoutRef(UserDataValue target, string s, ref string sr, in string si);
+        static extern string InvokeMethodOnValueWithoutRef(
+            UserDataValue target,
+            string s,
+            ref string sr,
+            in string si
+        );
     }
 }

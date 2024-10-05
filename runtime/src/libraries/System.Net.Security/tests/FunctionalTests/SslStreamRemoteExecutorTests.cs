@@ -18,8 +18,7 @@ namespace System.Net.Security.Tests
 
     public class SslStreamRemoteExecutorTests
     {
-        public SslStreamRemoteExecutorTests()
-        { }
+        public SslStreamRemoteExecutorTests() { }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/94843", ~TestPlatforms.Linux)]
@@ -27,35 +26,52 @@ namespace System.Net.Security.Tests
         {
             if (PlatformDetection.IsReleaseLibrary(typeof(SslStream).Assembly))
             {
-                throw new SkipTestException("Retrieving SSL secrets is not supported in Release mode.");
+                throw new SkipTestException(
+                    "Retrieving SSL secrets is not supported in Release mode."
+                );
             }
 
             var psi = new ProcessStartInfo();
             var tempFile = Path.GetTempFileName();
             psi.Environment.Add("SSLKEYLOGFILE", tempFile);
 
-            RemoteExecutor.Invoke(async () =>
-            {
-                (Stream clientStream, Stream serverStream) = TestHelper.GetConnectedStreams();
-                using (clientStream)
-                using (serverStream)
-                using (var client = new SslStream(clientStream))
-                using (var server = new SslStream(serverStream))
-                using (X509Certificate2 certificate = Configuration.Certificates.GetServerCertificate())
-                {
-                    SslClientAuthenticationOptions clientOptions = new SslClientAuthenticationOptions();
-                    clientOptions.RemoteCertificateValidationCallback = delegate { return true; };
+            RemoteExecutor
+                .Invoke(
+                    async () =>
+                    {
+                        (Stream clientStream, Stream serverStream) =
+                            TestHelper.GetConnectedStreams();
+                        using (clientStream)
+                        using (serverStream)
+                        using (var client = new SslStream(clientStream))
+                        using (var server = new SslStream(serverStream))
+                        using (
+                            X509Certificate2 certificate =
+                                Configuration.Certificates.GetServerCertificate()
+                        )
+                        {
+                            SslClientAuthenticationOptions clientOptions =
+                                new SslClientAuthenticationOptions();
+                            clientOptions.RemoteCertificateValidationCallback = delegate
+                            {
+                                return true;
+                            };
 
-                    SslServerAuthenticationOptions serverOptions = new SslServerAuthenticationOptions();
-                    serverOptions.ServerCertificate = certificate;
+                            SslServerAuthenticationOptions serverOptions =
+                                new SslServerAuthenticationOptions();
+                            serverOptions.ServerCertificate = certificate;
 
-                    await TestConfiguration.WhenAllOrAnyFailedWithTimeout(
-                        client.AuthenticateAsClientAsync(clientOptions),
-                        server.AuthenticateAsServerAsync(serverOptions));
+                            await TestConfiguration.WhenAllOrAnyFailedWithTimeout(
+                                client.AuthenticateAsClientAsync(clientOptions),
+                                server.AuthenticateAsServerAsync(serverOptions)
+                            );
 
-                    await TestHelper.PingPong(client, server);
-                }
-            }, new RemoteInvokeOptions { StartInfo = psi }).Dispose();
+                            await TestHelper.PingPong(client, server);
+                        }
+                    },
+                    new RemoteInvokeOptions { StartInfo = psi }
+                )
+                .Dispose();
 
             Assert.True(File.Exists(tempFile));
             Assert.True(File.ReadAllText(tempFile).Length > 0);

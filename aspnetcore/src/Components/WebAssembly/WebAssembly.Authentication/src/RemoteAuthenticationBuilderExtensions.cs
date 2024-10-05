@@ -20,13 +20,25 @@ public static class RemoteAuthenticationBuilderExtensions
     /// <typeparam name="TAccountClaimsPrincipalFactory">The new user factory type.</typeparam>
     /// <param name="builder">The <see cref="IRemoteAuthenticationBuilder{TRemoteAuthenticationState, TAccount}"/>.</param>
     /// <returns>The <see cref="IRemoteAuthenticationBuilder{TRemoteAuthenticationState, TAccount}"/>.</returns>
-    public static IRemoteAuthenticationBuilder<TRemoteAuthenticationState, TAccount> AddAccountClaimsPrincipalFactory<TRemoteAuthenticationState, TAccount, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TAccountClaimsPrincipalFactory>(
-        this IRemoteAuthenticationBuilder<TRemoteAuthenticationState, TAccount> builder)
+    public static IRemoteAuthenticationBuilder<
+        TRemoteAuthenticationState,
+        TAccount
+    > AddAccountClaimsPrincipalFactory<
+        TRemoteAuthenticationState,
+        TAccount,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+            TAccountClaimsPrincipalFactory
+    >(this IRemoteAuthenticationBuilder<TRemoteAuthenticationState, TAccount> builder)
         where TRemoteAuthenticationState : RemoteAuthenticationState, new()
         where TAccount : RemoteUserAccount
         where TAccountClaimsPrincipalFactory : AccountClaimsPrincipalFactory<TAccount>
     {
-        builder.Services.Replace(ServiceDescriptor.Scoped<AccountClaimsPrincipalFactory<TAccount>, TAccountClaimsPrincipalFactory>());
+        builder.Services.Replace(
+            ServiceDescriptor.Scoped<
+                AccountClaimsPrincipalFactory<TAccount>,
+                TAccountClaimsPrincipalFactory
+            >()
+        );
 
         return builder;
     }
@@ -38,10 +50,21 @@ public static class RemoteAuthenticationBuilderExtensions
     /// <typeparam name="TAccountClaimsPrincipalFactory">The new user factory type.</typeparam>
     /// <param name="builder">The <see cref="IRemoteAuthenticationBuilder{TRemoteAuthenticationState, Account}"/>.</param>
     /// <returns>The <see cref="IRemoteAuthenticationBuilder{TRemoteAuthenticationState, Account}"/>.</returns>
-    public static IRemoteAuthenticationBuilder<TRemoteAuthenticationState, RemoteUserAccount> AddAccountClaimsPrincipalFactory<TRemoteAuthenticationState, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TAccountClaimsPrincipalFactory>(
-        this IRemoteAuthenticationBuilder<TRemoteAuthenticationState, RemoteUserAccount> builder)
+    public static IRemoteAuthenticationBuilder<
+        TRemoteAuthenticationState,
+        RemoteUserAccount
+    > AddAccountClaimsPrincipalFactory<
+        TRemoteAuthenticationState,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+            TAccountClaimsPrincipalFactory
+    >(this IRemoteAuthenticationBuilder<TRemoteAuthenticationState, RemoteUserAccount> builder)
         where TRemoteAuthenticationState : RemoteAuthenticationState, new()
-        where TAccountClaimsPrincipalFactory : AccountClaimsPrincipalFactory<RemoteUserAccount> => builder.AddAccountClaimsPrincipalFactory<TRemoteAuthenticationState, RemoteUserAccount, TAccountClaimsPrincipalFactory>();
+        where TAccountClaimsPrincipalFactory : AccountClaimsPrincipalFactory<RemoteUserAccount> =>
+        builder.AddAccountClaimsPrincipalFactory<
+            TRemoteAuthenticationState,
+            RemoteUserAccount,
+            TAccountClaimsPrincipalFactory
+        >();
 
     /// <summary>
     /// Replaces the existing <see cref="AccountClaimsPrincipalFactory{TAccount}"/> with the user factory defined by <typeparamref name="TAccountClaimsPrincipalFactory"/>.
@@ -49,7 +72,17 @@ public static class RemoteAuthenticationBuilderExtensions
     /// <typeparam name="TAccountClaimsPrincipalFactory">The new user factory type.</typeparam>
     /// <param name="builder">The <see cref="IRemoteAuthenticationBuilder{RemoteAuthenticationState, Account}"/>.</param>
     /// <returns>The <see cref="IRemoteAuthenticationBuilder{RemoteAuthenticationState, Account}"/>.</returns>
-    public static IRemoteAuthenticationBuilder<RemoteAuthenticationState, RemoteUserAccount> AddAccountClaimsPrincipalFactory<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TAccountClaimsPrincipalFactory>(
-        this IRemoteAuthenticationBuilder<RemoteAuthenticationState, RemoteUserAccount> builder)
-        where TAccountClaimsPrincipalFactory : AccountClaimsPrincipalFactory<RemoteUserAccount> => builder.AddAccountClaimsPrincipalFactory<RemoteAuthenticationState, RemoteUserAccount, TAccountClaimsPrincipalFactory>();
+    public static IRemoteAuthenticationBuilder<
+        RemoteAuthenticationState,
+        RemoteUserAccount
+    > AddAccountClaimsPrincipalFactory<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+            TAccountClaimsPrincipalFactory
+    >(this IRemoteAuthenticationBuilder<RemoteAuthenticationState, RemoteUserAccount> builder)
+        where TAccountClaimsPrincipalFactory : AccountClaimsPrincipalFactory<RemoteUserAccount> =>
+        builder.AddAccountClaimsPrincipalFactory<
+            RemoteAuthenticationState,
+            RemoteUserAccount,
+            TAccountClaimsPrincipalFactory
+        >();
 }

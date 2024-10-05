@@ -21,10 +21,14 @@ internal class PriorityTest
     private int _medTime;
     private int _youngTime;
 
-
-    public PriorityTest(int oldDataSize, int medDataSize,
-                        int iterCount, int meanAllocSize,
-                        int medTime, int youngTime)
+    public PriorityTest(
+        int oldDataSize,
+        int medDataSize,
+        int iterCount,
+        int meanAllocSize,
+        int medTime,
+        int youngTime
+    )
     {
         _rand = new Random(314159);
         _oldDataSize = oldDataSize;
@@ -54,9 +58,14 @@ internal class PriorityTest
 
     // churns data in the heap by replacing byte arrays with new ones of random length
     // this should induce concurrent GCs
-    private void SteadyState(int oldDataSize, int medDataSize,
-                        int iterCount, int meanAllocSize,
-                        int medTime, int youngTime)
+    private void SteadyState(
+        int oldDataSize,
+        int medDataSize,
+        int iterCount,
+        int meanAllocSize,
+        int medTime,
+        int youngTime
+    )
     {
         for (int i = 0; i < iterCount; i++)
         {
@@ -84,16 +93,24 @@ internal class PriorityTest
         {
             AllocTest(_oldDataSize, _medDataSize, _meanAllocSize);
 
-            SteadyState(_oldDataSize, _medDataSize,
-                _iterCount, _meanAllocSize,
-                _medTime, _youngTime);
+            SteadyState(
+                _oldDataSize,
+                _medDataSize,
+                _iterCount,
+                _meanAllocSize,
+                _medTime,
+                _youngTime
+            );
 
             if (((iteration + 1) % 20) == 0)
-                Console.WriteLine("Thread: {1} Finished iteration {0}", iteration, System.Threading.Thread.CurrentThread.Name);
+                Console.WriteLine(
+                    "Thread: {1} Finished iteration {0}",
+                    iteration,
+                    System.Threading.Thread.CurrentThread.Name
+                );
         }
     }
 }
-
 
 internal class ConcurrentRepro
 {
@@ -133,11 +150,10 @@ internal class ConcurrentRepro
             return parameters;
         }
 
-        // incorrect number of arguments        
+        // incorrect number of arguments
         Usage();
         return null;
     }
-
 
     public static int Main(string[] args)
     {
@@ -178,5 +194,3 @@ internal class ConcurrentRepro
         return 100;
     }
 }
-
-

@@ -19,16 +19,22 @@ public class RequestHeaderTests : LoggedTest
     public async Task RequestHeaders_ClientSendsDefaultHeaders_Success()
     {
         string address;
-        using (Utilities.CreateHttpServer(out address, httpContext =>
-            {
-                var requestHeaders = httpContext.Request.Headers;
-                // NOTE: The System.Net client only sends the Connection: keep-alive header on the first connection per service-point.
-                // Assert.Equal(2, requestHeaders.Count);
-                // Assert.Equal("Keep-Alive", requestHeaders.Get("Connection"));
-                Assert.False(StringValues.IsNullOrEmpty(requestHeaders["Host"]));
-                Assert.True(StringValues.IsNullOrEmpty(requestHeaders["Accept"]));
-                return Task.FromResult(0);
-            }, LoggerFactory))
+        using (
+            Utilities.CreateHttpServer(
+                out address,
+                httpContext =>
+                {
+                    var requestHeaders = httpContext.Request.Headers;
+                    // NOTE: The System.Net client only sends the Connection: keep-alive header on the first connection per service-point.
+                    // Assert.Equal(2, requestHeaders.Count);
+                    // Assert.Equal("Keep-Alive", requestHeaders.Get("Connection"));
+                    Assert.False(StringValues.IsNullOrEmpty(requestHeaders["Host"]));
+                    Assert.True(StringValues.IsNullOrEmpty(requestHeaders["Accept"]));
+                    return Task.FromResult(0);
+                },
+                LoggerFactory
+            )
+        )
         {
             string response = await SendRequestAsync(address);
             Assert.Equal(string.Empty, response);
@@ -38,19 +44,23 @@ public class RequestHeaderTests : LoggedTest
     [ConditionalFact]
     public async Task RequestHeaders_ClientSendsCustomHeaders_Success()
     {
-        using var server = Utilities.CreateHttpServer(out var address, httpContext =>
-        {
-            var requestHeaders = httpContext.Request.Headers;
-            Assert.Equal(4, requestHeaders.Count);
-            Assert.False(StringValues.IsNullOrEmpty(requestHeaders["Host"]));
-            Assert.Equal("close", requestHeaders["Connection"]);
-            // Apparently Http.Sys squashes request headers together.
-            Assert.Single(requestHeaders["Custom-Header"]);
-            Assert.Equal("custom1, and custom2, custom3", requestHeaders["Custom-Header"]);
-            Assert.Single(requestHeaders["Spacer-Header"]);
-            Assert.Equal("spacervalue, spacervalue", requestHeaders["Spacer-Header"]);
-            return Task.FromResult(0);
-        }, LoggerFactory);
+        using var server = Utilities.CreateHttpServer(
+            out var address,
+            httpContext =>
+            {
+                var requestHeaders = httpContext.Request.Headers;
+                Assert.Equal(4, requestHeaders.Count);
+                Assert.False(StringValues.IsNullOrEmpty(requestHeaders["Host"]));
+                Assert.Equal("close", requestHeaders["Connection"]);
+                // Apparently Http.Sys squashes request headers together.
+                Assert.Single(requestHeaders["Custom-Header"]);
+                Assert.Equal("custom1, and custom2, custom3", requestHeaders["Custom-Header"]);
+                Assert.Single(requestHeaders["Spacer-Header"]);
+                Assert.Equal("spacervalue, spacervalue", requestHeaders["Spacer-Header"]);
+                return Task.FromResult(0);
+            },
+            LoggerFactory
+        );
 
         var customValues = new string[] { "custom1, and custom2", "custom3" };
 
@@ -84,15 +94,21 @@ public class RequestHeaderTests : LoggedTest
     public async Task RequestHeaders_ServerAddsCustomHeaders_Success()
     {
         string address;
-        using (Utilities.CreateHttpServer(out address, httpContext =>
-        {
-            var requestHeaders = httpContext.Request.Headers;
-            var header = KeyValuePair.Create("Custom-Header", new StringValues("custom"));
-            requestHeaders.Add(header);
+        using (
+            Utilities.CreateHttpServer(
+                out address,
+                httpContext =>
+                {
+                    var requestHeaders = httpContext.Request.Headers;
+                    var header = KeyValuePair.Create("Custom-Header", new StringValues("custom"));
+                    requestHeaders.Add(header);
 
-            Assert.True(requestHeaders.Contains(header));
-            return Task.FromResult(0);
-        }, LoggerFactory))
+                    Assert.True(requestHeaders.Contains(header));
+                    return Task.FromResult(0);
+                },
+                LoggerFactory
+            )
+        )
         {
             string response = await SendRequestAsync(address);
             Assert.Equal(string.Empty, response);
@@ -103,19 +119,25 @@ public class RequestHeaderTests : LoggedTest
     public async Task RequestHeaders_ClientSendTransferEncodingHeaders()
     {
         string address;
-        using (Utilities.CreateHttpServer(out address, httpContext =>
+        using (
+            Utilities.CreateHttpServer(
+                out address,
+                httpContext =>
+                {
+                    var requestHeaders = httpContext.Request.Headers;
+                    var request = httpContext.Features.Get<RequestContext>().Request;
+                    Assert.Single(requestHeaders["Transfer-Encoding"]);
+                    Assert.Equal("chunked", requestHeaders.TransferEncoding);
+                    Assert.True(request.HasEntityBody);
+                    return Task.FromResult(0);
+                },
+                LoggerFactory
+            )
+        )
         {
-            var requestHeaders = httpContext.Request.Headers;
-            var request = httpContext.Features.Get<RequestContext>().Request;
-            Assert.Single(requestHeaders["Transfer-Encoding"]);
-            Assert.Equal("chunked", requestHeaders.TransferEncoding);
-            Assert.True(request.HasEntityBody);
-            return Task.FromResult(0);
-        }, LoggerFactory))
-        {
-            var headerDictionary = new HeaderDictionary(new Dictionary<string, StringValues> {
-                { "Transfer-Encoding", "chunked" }
-            });
+            var headerDictionary = new HeaderDictionary(
+                new Dictionary<string, StringValues> { { "Transfer-Encoding", "chunked" } }
+            );
             var response = await SendRequestAsync(address, headerDictionary);
             var responseStatusCode = response.Substring(9, 3); // Skip "HTTP/1.1 "
             Assert.Equal("200", responseStatusCode);
@@ -126,19 +148,28 @@ public class RequestHeaderTests : LoggedTest
     public async Task RequestHeaders_ClientSendTransferEncodingHeadersWithMultipleValues()
     {
         string address;
-        using (Utilities.CreateHttpServer(out address, httpContext =>
+        using (
+            Utilities.CreateHttpServer(
+                out address,
+                httpContext =>
+                {
+                    var requestHeaders = httpContext.Request.Headers;
+                    var request = httpContext.Features.Get<RequestContext>().Request;
+                    Assert.Single(requestHeaders["Transfer-Encoding"]);
+                    Assert.Equal("gzip, chunked", requestHeaders.TransferEncoding);
+                    Assert.True(request.HasEntityBody);
+                    return Task.FromResult(0);
+                },
+                LoggerFactory
+            )
+        )
         {
-            var requestHeaders = httpContext.Request.Headers;
-            var request = httpContext.Features.Get<RequestContext>().Request;
-            Assert.Single(requestHeaders["Transfer-Encoding"]);
-            Assert.Equal("gzip, chunked", requestHeaders.TransferEncoding);
-            Assert.True(request.HasEntityBody);
-            return Task.FromResult(0);
-        }, LoggerFactory))
-        {
-            var headerDictionary = new HeaderDictionary(new Dictionary<string, StringValues> {
-                { "Transfer-Encoding", new string[] { "gzip", "chunked" } }
-            });
+            var headerDictionary = new HeaderDictionary(
+                new Dictionary<string, StringValues>
+                {
+                    { "Transfer-Encoding", new string[] { "gzip", "chunked" } },
+                }
+            );
             var response = await SendRequestAsync(address, headerDictionary);
             var responseStatusCode = response.Substring(9, 3); // Skip "HTTP/1.1 "
             Assert.Equal("200", responseStatusCode);
@@ -149,28 +180,37 @@ public class RequestHeaderTests : LoggedTest
     public async Task RequestHeaders_ClientSendTransferEncodingAndContentLength_ContentLengthShouldBeRemoved()
     {
         string address;
-        using (Utilities.CreateHttpServer(out address, httpContext =>
+        using (
+            Utilities.CreateHttpServer(
+                out address,
+                httpContext =>
+                {
+                    var requestHeaders = httpContext.Request.Headers;
+                    var request = httpContext.Features.Get<RequestContext>().Request;
+                    Assert.Single(requestHeaders["Transfer-Encoding"]);
+                    Assert.Equal("gzip, chunked", requestHeaders.TransferEncoding);
+
+                    Assert.Null(request.ContentLength);
+                    Assert.True(request.HasEntityBody);
+
+                    Assert.False(requestHeaders.ContainsKey("Content-Length"));
+                    Assert.Null(requestHeaders.ContentLength);
+
+                    Assert.Single(requestHeaders["X-Content-Length"]);
+                    Assert.Equal("1", requestHeaders["X-Content-Length"]);
+                    return Task.FromResult(0);
+                },
+                LoggerFactory
+            )
+        )
         {
-            var requestHeaders = httpContext.Request.Headers;
-            var request = httpContext.Features.Get<RequestContext>().Request;
-            Assert.Single(requestHeaders["Transfer-Encoding"]);
-            Assert.Equal("gzip, chunked", requestHeaders.TransferEncoding);
-
-            Assert.Null(request.ContentLength);
-            Assert.True(request.HasEntityBody);
-
-            Assert.False(requestHeaders.ContainsKey("Content-Length"));
-            Assert.Null(requestHeaders.ContentLength);
-
-            Assert.Single(requestHeaders["X-Content-Length"]);
-            Assert.Equal("1", requestHeaders["X-Content-Length"]);
-            return Task.FromResult(0);
-        }, LoggerFactory))
-        {
-            var headerDictionary = new HeaderDictionary(new Dictionary<string, StringValues> {
-                { "Transfer-Encoding", new string[] { "gzip", "chunked" } },
-                { "Content-Length", "1" },
-            });
+            var headerDictionary = new HeaderDictionary(
+                new Dictionary<string, StringValues>
+                {
+                    { "Transfer-Encoding", new string[] { "gzip", "chunked" } },
+                    { "Content-Length", "1" },
+                }
+            );
             var response = await SendRequestAsync(address, headerDictionary);
             var responseStatusCode = response.Substring(9, 3); // Skip "HTTP/1.1 "
             Assert.Equal("200", responseStatusCode);
@@ -181,17 +221,21 @@ public class RequestHeaderTests : LoggedTest
     public async Task RequestHeaders_AllKnownHeadersKeys_Received()
     {
         string customHeader = "X-KnownHeader";
-        using var server = Utilities.CreateHttpServer(out var address, httpContext =>
-        {
-            var requestHeaders = httpContext.Request.Headers;
-            Assert.Equal(3, requestHeaders.Count);
-            Assert.Equal(requestHeaders.Keys.Count, requestHeaders.Count);
-            Assert.Equal(requestHeaders.Count, requestHeaders.Values.Count);
-            Assert.Contains(customHeader, requestHeaders.Keys);
-            Assert.Contains(requestHeaders[customHeader].First(), requestHeaders.Keys);
-            Assert.Contains(HeaderNames.Host, requestHeaders.Keys);
-            return Task.FromResult(0);
-        }, LoggerFactory);
+        using var server = Utilities.CreateHttpServer(
+            out var address,
+            httpContext =>
+            {
+                var requestHeaders = httpContext.Request.Headers;
+                Assert.Equal(3, requestHeaders.Count);
+                Assert.Equal(requestHeaders.Keys.Count, requestHeaders.Count);
+                Assert.Equal(requestHeaders.Count, requestHeaders.Values.Count);
+                Assert.Contains(customHeader, requestHeaders.Keys);
+                Assert.Contains(requestHeaders[customHeader].First(), requestHeaders.Keys);
+                Assert.Contains(HeaderNames.Host, requestHeaders.Keys);
+                return Task.FromResult(0);
+            },
+            LoggerFactory
+        );
 
         foreach ((HttpSysRequestHeader Key, string Value) testRow in HeaderTestData())
         {
@@ -199,7 +243,7 @@ public class RequestHeaderTests : LoggedTest
             var headerDictionary = new Dictionary<string, string>
             {
                 { key, testRow.Value },
-                { customHeader, key }
+                { customHeader, key },
             };
             await SendRequestAsync(address, headerDictionary);
         }
@@ -208,24 +252,28 @@ public class RequestHeaderTests : LoggedTest
     [ConditionalFact]
     public async Task RequestHeaders_AllUnknownHeadersKeys_Received()
     {
-        using var server = Utilities.CreateHttpServer(out var address, httpContext =>
-        {
-            var requestHeaders = httpContext.Request.Headers;
-            Assert.Equal(4, requestHeaders.Count);
-            Assert.Equal(requestHeaders.Keys.Count, requestHeaders.Count);
-            Assert.Equal(requestHeaders.Count, requestHeaders.Values.Count);
-            Assert.Contains("X-UnknownHeader-0", requestHeaders.Keys);
-            Assert.Contains("My-UnknownHeader-1", requestHeaders.Keys);
-            Assert.Contains("X-UnknownHeader-2", requestHeaders.Keys);
-            Assert.Contains(HeaderNames.Host, requestHeaders.Keys);
-            return Task.FromResult(0);
-        }, LoggerFactory);
+        using var server = Utilities.CreateHttpServer(
+            out var address,
+            httpContext =>
+            {
+                var requestHeaders = httpContext.Request.Headers;
+                Assert.Equal(4, requestHeaders.Count);
+                Assert.Equal(requestHeaders.Keys.Count, requestHeaders.Count);
+                Assert.Equal(requestHeaders.Count, requestHeaders.Values.Count);
+                Assert.Contains("X-UnknownHeader-0", requestHeaders.Keys);
+                Assert.Contains("My-UnknownHeader-1", requestHeaders.Keys);
+                Assert.Contains("X-UnknownHeader-2", requestHeaders.Keys);
+                Assert.Contains(HeaderNames.Host, requestHeaders.Keys);
+                return Task.FromResult(0);
+            },
+            LoggerFactory
+        );
 
         var headerDictionary = new Dictionary<string, string>
         {
             { "X-UnknownHeader-0", "0" },
             { "My-UnknownHeader-1", "1" },
-            { "X-UnknownHeader-2", "2" }
+            { "X-UnknownHeader-2", "2" },
         };
         await SendRequestAsync(address, headerDictionary);
     }
@@ -286,7 +334,10 @@ public class RequestHeaderTests : LoggedTest
         // Host is sent by HttpClient, hence excluded from this enumeration.
         yield return (HttpSysRequestHeader.CacheControl, HeaderNames.CacheControl);
         yield return (HttpSysRequestHeader.Connection, HeaderNames.Connection);
-        yield return (HttpSysRequestHeader.Date, new DateTime(2022, 11, 14).ToString("r", CultureInfo.InvariantCulture));
+        yield return (
+            HttpSysRequestHeader.Date,
+            new DateTime(2022, 11, 14).ToString("r", CultureInfo.InvariantCulture)
+        );
         yield return (HttpSysRequestHeader.KeepAlive, HeaderNames.KeepAlive);
         yield return (HttpSysRequestHeader.Pragma, HeaderNames.Pragma);
         yield return (HttpSysRequestHeader.Trailer, HeaderNames.Trailer);

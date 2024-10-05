@@ -15,18 +15,30 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
 {
     [ComVisible(true)]
     [ComDefaultInterface(typeof(EnvDTE.CodeInterface))]
-    public sealed class ExternalCodeInterface : AbstractExternalCodeType, EnvDTE80.CodeInterface2, EnvDTE.CodeInterface, EnvDTE.CodeType, EnvDTE.CodeElement, EnvDTE80.CodeElement2
+    public sealed class ExternalCodeInterface
+        : AbstractExternalCodeType,
+            EnvDTE80.CodeInterface2,
+            EnvDTE.CodeInterface,
+            EnvDTE.CodeType,
+            EnvDTE.CodeElement,
+            EnvDTE80.CodeElement2
     {
-        internal static EnvDTE.CodeInterface Create(CodeModelState state, ProjectId projectId, ITypeSymbol typeSymbol)
+        internal static EnvDTE.CodeInterface Create(
+            CodeModelState state,
+            ProjectId projectId,
+            ITypeSymbol typeSymbol
+        )
         {
             var newElement = new ExternalCodeInterface(state, projectId, typeSymbol);
             return (EnvDTE.CodeInterface)ComAggregate.CreateAggregatedObject(newElement);
         }
 
-        private ExternalCodeInterface(CodeModelState state, ProjectId projectId, ITypeSymbol typeSymbol)
-            : base(state, projectId, typeSymbol)
-        {
-        }
+        private ExternalCodeInterface(
+            CodeModelState state,
+            ProjectId projectId,
+            ITypeSymbol typeSymbol
+        )
+            : base(state, projectId, typeSymbol) { }
 
         public override EnvDTE.vsCMElement Kind
         {
@@ -35,30 +47,39 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
 
         #region EnvDTE.CodeInterface members
 
-        public EnvDTE.CodeFunction AddFunction(string name, EnvDTE.vsCMFunction kind, object type, object position, EnvDTE.vsCMAccess access)
-            => throw Exceptions.ThrowEFail();
+        public EnvDTE.CodeFunction AddFunction(
+            string name,
+            EnvDTE.vsCMFunction kind,
+            object type,
+            object position,
+            EnvDTE.vsCMAccess access
+        ) => throw Exceptions.ThrowEFail();
 
-        public EnvDTE.CodeProperty AddProperty(string getterName, string putterName, object type, object position, EnvDTE.vsCMAccess access, object location)
-            => throw Exceptions.ThrowEFail();
+        public EnvDTE.CodeProperty AddProperty(
+            string getterName,
+            string putterName,
+            object type,
+            object position,
+            EnvDTE.vsCMAccess access,
+            object location
+        ) => throw Exceptions.ThrowEFail();
 
         #endregion
 
         #region EnvDTE.CodeInterface2 members
 
-        public EnvDTE80.CodeEvent AddEvent(string name, string fullDelegateName, bool createPropertyStyleEvent, object position, EnvDTE.vsCMAccess access)
-            => throw Exceptions.ThrowEFail();
+        public EnvDTE80.CodeEvent AddEvent(
+            string name,
+            string fullDelegateName,
+            bool createPropertyStyleEvent,
+            object position,
+            EnvDTE.vsCMAccess access
+        ) => throw Exceptions.ThrowEFail();
 
         public EnvDTE80.vsCMDataTypeKind DataTypeKind
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw Exceptions.ThrowEFail();
-            }
+            get { throw new NotImplementedException(); }
+            set { throw Exceptions.ThrowEFail(); }
         }
 
         public bool IsGeneric
@@ -68,10 +89,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
 
         public EnvDTE.CodeElements Parts
         {
-            get
-            {
-                throw Exceptions.ThrowEFail();
-            }
+            get { throw Exceptions.ThrowEFail(); }
         }
 
         #endregion

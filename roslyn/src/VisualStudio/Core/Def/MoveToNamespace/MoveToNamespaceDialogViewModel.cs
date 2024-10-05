@@ -22,18 +22,27 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveToNamespace
             string defaultNamespace,
             ImmutableArray<string> availableNamespaces,
             ISyntaxFacts syntaxFacts,
-            ImmutableArray<string> namespaceHistory)
+            ImmutableArray<string> namespaceHistory
+        )
         {
             _syntaxFacts = syntaxFacts ?? throw new ArgumentNullException(nameof(syntaxFacts));
             _namespaceName = defaultNamespace;
-            AvailableNamespaces = namespaceHistory.Select(n => new NamespaceItem(true, n))
-                .Concat(availableNamespaces.Except(namespaceHistory).Select(n => new NamespaceItem(false, n)))
+            AvailableNamespaces = namespaceHistory
+                .Select(n => new NamespaceItem(true, n))
+                .Concat(
+                    availableNamespaces
+                        .Except(namespaceHistory)
+                        .Select(n => new NamespaceItem(false, n))
+                )
                 .ToImmutableArray();
 
             PropertyChanged += MoveToNamespaceDialogViewModel_PropertyChanged;
         }
 
-        private void MoveToNamespaceDialogViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void MoveToNamespaceDialogViewModel_PropertyChanged(
+            object sender,
+            PropertyChangedEventArgs e
+        )
         {
             switch (e.PropertyName)
             {
@@ -45,7 +54,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveToNamespace
 
         public void OnNamespaceUpdated()
         {
-            var isNewNamespace = !AvailableNamespaces.Any(static (i, self) => i.Namespace == self.NamespaceName, this);
+            var isNewNamespace = !AvailableNamespaces.Any(
+                static (i, self) => i.Namespace == self.NamespaceName,
+                this
+            );
             var isValidName = !isNewNamespace || IsValidNamespace(NamespaceName);
 
             if (isNewNamespace && isValidName)
@@ -128,12 +140,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveToNamespace
 
         public string Error => CanSubmit ? string.Empty : Message ?? string.Empty;
 
-        public string this[string columnName]
-            => columnName switch
+        public string this[string columnName] =>
+            columnName switch
             {
                 nameof(NamespaceName) => Error,
-                _ => string.Empty
+                _ => string.Empty,
             };
-
     }
 }

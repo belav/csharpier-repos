@@ -10,7 +10,8 @@ internal interface IFileResultLogger
 {
     void IfUnmodifiedSincePreconditionFailed(
         DateTimeOffset? lastModified,
-        DateTimeOffset? ifUnmodifiedSinceDate);
+        DateTimeOffset? ifUnmodifiedSinceDate
+    );
 
     void IfMatchPreconditionFailed(EntityTagHeaderValue etag);
 

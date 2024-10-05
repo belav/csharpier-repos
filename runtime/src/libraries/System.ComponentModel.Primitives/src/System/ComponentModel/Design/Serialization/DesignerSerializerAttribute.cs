@@ -8,7 +8,11 @@ namespace System.ComponentModel.Design.Serialization
     /// This attribute can be placed on a class to indicate what serialization
     /// object should be used to serialize the class at design time.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, AllowMultiple = true, Inherited = true)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Interface,
+        AllowMultiple = true,
+        Inherited = true
+    )]
     public sealed class DesignerSerializerAttribute : Attribute
     {
         private string? _typeId;
@@ -39,7 +43,10 @@ namespace System.ComponentModel.Design.Serialization
         /// <summary>
         /// Creates a new designer serialization attribute.
         /// </summary>
-        public DesignerSerializerAttribute(string? serializerTypeName, string? baseSerializerTypeName)
+        public DesignerSerializerAttribute(
+            string? serializerTypeName,
+            string? baseSerializerTypeName
+        )
         {
             SerializerTypeName = serializerTypeName;
             SerializerBaseTypeName = baseSerializerTypeName;

@@ -55,28 +55,38 @@ namespace System.DirectoryServices.ActiveDirectory
             {
                 if (advanced)
                 {
-                    addr = IntPtr.Add(info, sizeof(int) * 2 + i * Marshal.SizeOf(typeof(DS_REPL_CURSOR_3)));
+                    addr = IntPtr.Add(
+                        info,
+                        sizeof(int) * 2 + i * Marshal.SizeOf(typeof(DS_REPL_CURSOR_3))
+                    );
                     DS_REPL_CURSOR_3 cursor = new DS_REPL_CURSOR_3();
                     Marshal.PtrToStructure(addr, cursor);
 
-                    ReplicationCursor managedCursor = new ReplicationCursor(_server,
-                                                                         partition,
-                                                                         cursor.uuidSourceDsaInvocationID,
-                                                                         cursor.usnAttributeFilter,
-                                                                         cursor.ftimeLastSyncSuccess,
-                                                                         cursor.pszSourceDsaDN);
+                    ReplicationCursor managedCursor = new ReplicationCursor(
+                        _server,
+                        partition,
+                        cursor.uuidSourceDsaInvocationID,
+                        cursor.usnAttributeFilter,
+                        cursor.ftimeLastSyncSuccess,
+                        cursor.pszSourceDsaDN
+                    );
                     Add(managedCursor);
                 }
                 else
                 {
-                    addr = IntPtr.Add(info, sizeof(int) * 2 + i * Marshal.SizeOf(typeof(DS_REPL_CURSOR)));
+                    addr = IntPtr.Add(
+                        info,
+                        sizeof(int) * 2 + i * Marshal.SizeOf(typeof(DS_REPL_CURSOR))
+                    );
                     DS_REPL_CURSOR cursor = new DS_REPL_CURSOR();
                     Marshal.PtrToStructure(addr, cursor);
 
-                    ReplicationCursor managedCursor = new ReplicationCursor(_server,
-                                                                         partition,
-                                                                         cursor.uuidSourceDsaInvocationID,
-                                                                         cursor.usnAttributeFilter);
+                    ReplicationCursor managedCursor = new ReplicationCursor(
+                        _server,
+                        partition,
+                        cursor.uuidSourceDsaInvocationID,
+                        cursor.usnAttributeFilter
+                    );
                     Add(managedCursor);
                 }
             }

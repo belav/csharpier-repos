@@ -1,6 +1,7 @@
 ﻿namespace System.Web.Instrumentation
 {
-    public abstract class PageExecutionListener {
+    public abstract class PageExecutionListener
+    {
         /// <summary>
         /// Called by a view engine BEFORE it renders the output for the specified context.
         /// </summary>

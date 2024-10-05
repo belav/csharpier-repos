@@ -14,9 +14,7 @@ public class DefaultFilesOptions : SharedOptionsBase
     /// Configuration for the DefaultFilesMiddleware.
     /// </summary>
     public DefaultFilesOptions()
-        : this(new SharedOptions())
-    {
-    }
+        : this(new SharedOptions()) { }
 
     /// <summary>
     /// Configuration for the DefaultFilesMiddleware.
@@ -27,12 +25,12 @@ public class DefaultFilesOptions : SharedOptionsBase
     {
         // Prioritized list
         DefaultFileNames = new List<string>
-            {
-                "default.htm",
-                "default.html",
-                "index.htm",
-                "index.html",
-            };
+        {
+            "default.htm",
+            "default.html",
+            "index.htm",
+            "index.html",
+        };
     }
 
     /// <summary>

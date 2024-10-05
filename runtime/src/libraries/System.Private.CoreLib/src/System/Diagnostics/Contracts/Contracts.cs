@@ -29,17 +29,29 @@ namespace System.Diagnostics.Contracts
     /// Methods and classes marked with this attribute can be used within calls to Contract methods. Such methods not make any visible state changes.
     /// </summary>
     [Conditional("CONTRACTS_FULL")]
-    [AttributeUsage(AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Event | AttributeTargets.Delegate | AttributeTargets.Class | AttributeTargets.Parameter, AllowMultiple = false, Inherited = true)]
-    public sealed class PureAttribute : Attribute
-    {
-    }
+    [AttributeUsage(
+        AttributeTargets.Constructor
+            | AttributeTargets.Method
+            | AttributeTargets.Property
+            | AttributeTargets.Event
+            | AttributeTargets.Delegate
+            | AttributeTargets.Class
+            | AttributeTargets.Parameter,
+        AllowMultiple = false,
+        Inherited = true
+    )]
+    public sealed class PureAttribute : Attribute { }
 
     /// <summary>
     /// Types marked with this attribute specify that a separate type contains the contracts for this type.
     /// </summary>
     [Conditional("CONTRACTS_FULL")]
     [Conditional("DEBUG")]
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Delegate, AllowMultiple = false, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Delegate,
+        AllowMultiple = false,
+        Inherited = false
+    )]
     public sealed class ContractClassAttribute : Attribute
     {
         private readonly Type _typeWithContracts;
@@ -79,26 +91,24 @@ namespace System.Diagnostics.Contracts
     /// </summary>
     [Conditional("CONTRACTS_FULL")]
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
-    public sealed class ContractInvariantMethodAttribute : Attribute
-    {
-    }
+    public sealed class ContractInvariantMethodAttribute : Attribute { }
 
     /// <summary>
     /// Attribute that specifies that an assembly is a reference assembly with contracts.
     /// </summary>
     [AttributeUsage(AttributeTargets.Assembly)]
-    public sealed class ContractReferenceAssemblyAttribute : Attribute
-    {
-    }
+    public sealed class ContractReferenceAssemblyAttribute : Attribute { }
 
     /// <summary>
     /// Methods (and properties) marked with this attribute can be used within calls to Contract methods, but have no runtime behavior associated with them.
     /// </summary>
     [Conditional("CONTRACTS_FULL")]
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-    public sealed class ContractRuntimeIgnoredAttribute : Attribute
-    {
-    }
+    [AttributeUsage(
+        AttributeTargets.Method | AttributeTargets.Property,
+        AllowMultiple = false,
+        Inherited = true
+    )]
+    public sealed class ContractRuntimeIgnoredAttribute : Attribute { }
 
     /// <summary>
     /// Instructs downstream tools whether to assume the correctness of this assembly, type or member without performing any verification or not.
@@ -112,12 +122,22 @@ namespace System.Diagnostics.Contracts
     /// Apply this attribute to a property to apply to both the getter and setter.
     /// </remarks>
     [Conditional("CONTRACTS_FULL")]
-    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Property)]
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Method
+            | AttributeTargets.Constructor
+            | AttributeTargets.Property
+    )]
     public sealed class ContractVerificationAttribute : Attribute
     {
         private readonly bool _value;
 
-        public ContractVerificationAttribute(bool value) { _value = value; }
+        public ContractVerificationAttribute(bool value)
+        {
+            _value = value;
+        }
 
         public bool Value => _value;
     }
@@ -146,18 +166,14 @@ namespace System.Diagnostics.Contracts
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     [Conditional("CONTRACTS_FULL")]
-    public sealed class ContractArgumentValidatorAttribute : Attribute
-    {
-    }
+    public sealed class ContractArgumentValidatorAttribute : Attribute { }
 
     /// <summary>
     /// Enables writing abbreviations for contracts that get copied to other methods
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     [Conditional("CONTRACTS_FULL")]
-    public sealed class ContractAbbreviatorAttribute : Attribute
-    {
-    }
+    public sealed class ContractAbbreviatorAttribute : Attribute { }
 
     /// <summary>
     /// Allows setting contract and tool options at assembly, type, or method granularity.
@@ -327,7 +343,8 @@ namespace System.Diagnostics.Contracts
         /// Use this form when you want to throw a particular exception.
         /// </remarks>
         [Pure]
-        public static void Requires<TException>(bool condition) where TException : Exception
+        public static void Requires<TException>(bool condition)
+            where TException : Exception
         {
             AssertMustUseRewriter(ContractFailureKind.Precondition, "Requires<TException>");
         }
@@ -343,7 +360,8 @@ namespace System.Diagnostics.Contracts
         /// Use this form when you want to throw a particular exception.
         /// </remarks>
         [Pure]
-        public static void Requires<TException>(bool condition, string? userMessage) where TException : Exception
+        public static void Requires<TException>(bool condition, string? userMessage)
+            where TException : Exception
         {
             AssertMustUseRewriter(ContractFailureKind.Precondition, "Requires<TException>");
         }
@@ -397,7 +415,8 @@ namespace System.Diagnostics.Contracts
         /// </remarks>
         [Pure]
         [Conditional("CONTRACTS_FULL")]
-        public static void EnsuresOnThrow<TException>(bool condition) where TException : Exception
+        public static void EnsuresOnThrow<TException>(bool condition)
+            where TException : Exception
         {
             AssertMustUseRewriter(ContractFailureKind.PostconditionOnException, "EnsuresOnThrow");
         }
@@ -415,7 +434,8 @@ namespace System.Diagnostics.Contracts
         /// </remarks>
         [Pure]
         [Conditional("CONTRACTS_FULL")]
-        public static void EnsuresOnThrow<TException>(bool condition, string? userMessage) where TException : Exception
+        public static void EnsuresOnThrow<TException>(bool condition, string? userMessage)
+            where TException : Exception
         {
             AssertMustUseRewriter(ContractFailureKind.PostconditionOnException, "EnsuresOnThrow");
         }
@@ -431,7 +451,10 @@ namespace System.Diagnostics.Contracts
         /// This method can only be used within the argument to the <see cref="Ensures(bool)"/> contract.
         /// </remarks>
         [Pure]
-        public static T Result<T>() { return default!; }
+        public static T Result<T>()
+        {
+            return default!;
+        }
 
         /// <summary>
         /// Represents the final (output) value of an out parameter when returning from a method.
@@ -443,7 +466,11 @@ namespace System.Diagnostics.Contracts
         /// This method can only be used within the argument to the <see cref="Ensures(bool)"/> contract.
         /// </remarks>
         [Pure]
-        public static T ValueAtReturn<T>(out T value) { value = default!; return value; }
+        public static T ValueAtReturn<T>(out T value)
+        {
+            value = default!;
+            return value;
+        }
 
         /// <summary>
         /// Represents the value of <paramref name="value"/> as it was at the start of the method or property.
@@ -455,7 +482,10 @@ namespace System.Diagnostics.Contracts
         /// This method can only be used within the argument to the <see cref="Ensures(bool)"/> contract.
         /// </remarks>
         [Pure]
-        public static T OldValue<T>(T value) { return default!; }
+        public static T OldValue<T>(T value)
+        {
+            return default!;
+        }
 
         #endregion Old, Result, and Out Parameters
 
@@ -520,10 +550,10 @@ namespace System.Diagnostics.Contracts
             ArgumentNullException.ThrowIfNull(predicate);
 
             for (int i = fromInclusive; i < toExclusive; i++)
-                if (!predicate(i)) return false;
+                if (!predicate(i))
+                    return false;
             return true;
         }
-
 
         /// <summary>
         /// Returns whether the <paramref name="predicate"/> returns <c>true</c>
@@ -541,7 +571,8 @@ namespace System.Diagnostics.Contracts
             ArgumentNullException.ThrowIfNull(predicate);
 
             foreach (T t in collection)
-                if (!predicate(t)) return false;
+                if (!predicate(t))
+                    return false;
             return true;
         }
 
@@ -567,7 +598,8 @@ namespace System.Diagnostics.Contracts
             ArgumentNullException.ThrowIfNull(predicate);
 
             for (int i = fromInclusive; i < toExclusive; i++)
-                if (predicate(i)) return true;
+                if (predicate(i))
+                    return true;
             return false;
         }
 
@@ -587,7 +619,8 @@ namespace System.Diagnostics.Contracts
             ArgumentNullException.ThrowIfNull(predicate);
 
             foreach (T t in collection)
-                if (predicate(t)) return true;
+                if (predicate(t))
+                    return true;
             return false;
         }
 
@@ -613,14 +646,17 @@ namespace System.Diagnostics.Contracts
         /// This method is used internally to trigger a failure indicating to the "programmer" that they are using the interface incorrectly.
         /// It is NEVER used to indicate failure of actual contracts at runtime.
         /// </summary>
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "StackFrame.GetMethod is only used to help diagnosing incorrect use of contracts. " +
-                "It handles missing or incomplete metadata.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "StackFrame.GetMethod is only used to help diagnosing incorrect use of contracts. "
+                + "It handles missing or incomplete metadata."
+        )]
         private static void AssertMustUseRewriter(ContractFailureKind kind, string contractKind)
         {
             // For better diagnostics, report which assembly is at fault.  Walk up stack and
             // find the first non-mscorlib assembly.
-            Assembly thisAssembly = typeof(Contract).Assembly;  // In case we refactor mscorlib, use Contract class instead of Object.
+            Assembly thisAssembly = typeof(Contract).Assembly; // In case we refactor mscorlib, use Contract class instead of Object.
             StackTrace stack = new StackTrace();
             Assembly? probablyNotRewritten = null;
             for (int i = 0; i < stack.FrameCount; i++)
@@ -635,7 +671,13 @@ namespace System.Diagnostics.Contracts
 
             probablyNotRewritten ??= thisAssembly;
             string? simpleName = probablyNotRewritten.GetName().Name;
-            ContractHelper.TriggerFailure(kind, SR.Format(SR.MustUseCCRewrite, contractKind, simpleName), null, null, null);
+            ContractHelper.TriggerFailure(
+                kind,
+                SR.Format(SR.MustUseCCRewrite, contractKind, simpleName),
+                null,
+                null,
+                null
+            );
         }
 
         #endregion Private Methods
@@ -648,17 +690,39 @@ namespace System.Diagnostics.Contracts
         /// ContractHelper.RaiseContractFailedEvent, followed by ContractHelper.TriggerFailure.
         /// </summary>
         [DebuggerNonUserCode]
-        private static void ReportFailure(ContractFailureKind failureKind, string? userMessage, string? conditionText, Exception? innerException)
+        private static void ReportFailure(
+            ContractFailureKind failureKind,
+            string? userMessage,
+            string? conditionText,
+            Exception? innerException
+        )
         {
-            if (failureKind < ContractFailureKind.Precondition || failureKind > ContractFailureKind.Assume)
-                throw new ArgumentException(SR.Format(SR.Arg_EnumIllegalVal, failureKind), nameof(failureKind));
+            if (
+                failureKind < ContractFailureKind.Precondition
+                || failureKind > ContractFailureKind.Assume
+            )
+                throw new ArgumentException(
+                    SR.Format(SR.Arg_EnumIllegalVal, failureKind),
+                    nameof(failureKind)
+                );
 
             // displayMessage == null means: yes we handled it. Otherwise it is the localized failure message
-            string? displayMessage = ContractHelper.RaiseContractFailedEvent(failureKind, userMessage, conditionText, innerException);
+            string? displayMessage = ContractHelper.RaiseContractFailedEvent(
+                failureKind,
+                userMessage,
+                conditionText,
+                innerException
+            );
             if (displayMessage == null)
                 return;
 
-            ContractHelper.TriggerFailure(failureKind, displayMessage, userMessage, conditionText, innerException);
+            ContractHelper.TriggerFailure(
+                failureKind,
+                displayMessage,
+                userMessage,
+                conditionText,
+                innerException
+            );
         }
 
         /// <summary>
@@ -672,20 +736,16 @@ namespace System.Diagnostics.Contracts
         /// </summary>
         public static event EventHandler<ContractFailedEventArgs>? ContractFailed
         {
-            add
-            {
-                ContractHelper.InternalContractFailed += value;
-            }
-            remove
-            {
-                ContractHelper.InternalContractFailed -= value;
-            }
+            add { ContractHelper.InternalContractFailed += value; }
+            remove { ContractHelper.InternalContractFailed -= value; }
         }
 
         #endregion Failure Behavior
     }
 
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public enum ContractFailureKind
     {
         Precondition,
@@ -695,4 +755,4 @@ namespace System.Diagnostics.Contracts
         Assert,
         Assume,
     }
-}  // namespace System.Runtime.CompilerServices
+} // namespace System.Runtime.CompilerServices

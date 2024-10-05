@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.Extensions.DependencyInjection;
-using System.Collections.Generic;
-using System;
 
 namespace Microsoft.CommonLanguageServerProtocol.Framework.Example;
 
@@ -21,7 +21,8 @@ internal class ExampleLspServices : ILspServices
         _serviceProvider = serviceProvider;
     }
 
-    public T GetRequiredService<T>() where T : notnull
+    public T GetRequiredService<T>()
+        where T : notnull
     {
         var service = _serviceProvider.GetRequiredService<T>();
 
@@ -40,9 +41,7 @@ internal class ExampleLspServices : ILspServices
         return _serviceProvider.GetServices<TService>();
     }
 
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 
     public IEnumerable<T> GetRequiredServices<T>()
     {

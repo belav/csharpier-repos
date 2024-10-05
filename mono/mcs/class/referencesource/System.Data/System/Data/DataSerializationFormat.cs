@@ -6,10 +6,11 @@
 // <owner current="true" primary="false">markash</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
-
-    public enum SerializationFormat {
-        Xml    =  0,
-        Binary =  1
+namespace System.Data
+{
+    public enum SerializationFormat
+    {
+        Xml = 0,
+        Binary = 1,
     }
 }

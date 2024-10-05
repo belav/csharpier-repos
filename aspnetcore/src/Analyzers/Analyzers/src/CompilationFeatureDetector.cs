@@ -15,7 +15,8 @@ internal static class CompilationFeatureDetector
 {
     public static async Task<IImmutableSet<string>> DetectFeaturesAsync(
         Compilation compilation,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var symbols = new StartupSymbols(compilation);
         if (!symbols.HasRequiredSymbols)
@@ -27,7 +28,10 @@ internal static class CompilationFeatureDetector
         var features = ImmutableHashSet.CreateBuilder<string>();
 
         // Find configure methods in the project's assembly
-        var configureMethods = ConfigureMethodVisitor.FindConfigureMethods(symbols, compilation.Assembly);
+        var configureMethods = ConfigureMethodVisitor.FindConfigureMethods(
+            symbols,
+            compilation.Assembly
+        );
         for (var i = 0; i < configureMethods.Count; i++)
         {
             var configureMethod = configureMethods[i];
@@ -38,14 +42,18 @@ internal static class CompilationFeatureDetector
             {
                 var semanticModel = compilation.GetSemanticModel(syntaxReferences[j].SyntaxTree);
 
-                var syntax = await syntaxReferences[j].GetSyntaxAsync(cancellationToken).ConfigureAwait(false);
+                var syntax = await syntaxReferences[j]
+                    .GetSyntaxAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 var operation = semanticModel.GetOperation(syntax, cancellationToken);
 
                 // Look for a call to one of the SignalR gestures that applies to the Configure method.
-                if (operation
-                    .Descendants()
-                    .OfType<IInvocationOperation>()
-                    .Any(op => StartupFacts.IsSignalRConfigureMethodGesture(op.TargetMethod)))
+                if (
+                    operation
+                        .Descendants()
+                        .OfType<IInvocationOperation>()
+                        .Any(op => StartupFacts.IsSignalRConfigureMethodGesture(op.TargetMethod))
+                )
                 {
                     features.Add(WellKnownFeatures.SignalR);
                 }

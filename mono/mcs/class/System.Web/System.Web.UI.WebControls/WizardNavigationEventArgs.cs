@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,30 +31,33 @@
 
 namespace System.Web.UI.WebControls
 {
-	public class WizardNavigationEventArgs : EventArgs
-	{
-		int curStepIndex;
-		int nxtStepIndex;
-		bool cancel;
-		
-		public WizardNavigationEventArgs (int currentStepIndex, int nextStepIndex)
-		{
-			this.curStepIndex = currentStepIndex;
-			this.nxtStepIndex = nextStepIndex;
-			cancel = false;
-		}
-		
-		public bool Cancel {
-			get { return cancel; }
-			set { cancel = value; }
-		}
+    public class WizardNavigationEventArgs : EventArgs
+    {
+        int curStepIndex;
+        int nxtStepIndex;
+        bool cancel;
 
-		public int CurrentStepIndex {
-			get { return curStepIndex; }
-		}
+        public WizardNavigationEventArgs(int currentStepIndex, int nextStepIndex)
+        {
+            this.curStepIndex = currentStepIndex;
+            this.nxtStepIndex = nextStepIndex;
+            cancel = false;
+        }
 
-		public int NextStepIndex {
-			get { return nxtStepIndex; }
-		}
-	}
+        public bool Cancel
+        {
+            get { return cancel; }
+            set { cancel = value; }
+        }
+
+        public int CurrentStepIndex
+        {
+            get { return curStepIndex; }
+        }
+
+        public int NextStepIndex
+        {
+            get { return nxtStepIndex; }
+        }
+    }
 }

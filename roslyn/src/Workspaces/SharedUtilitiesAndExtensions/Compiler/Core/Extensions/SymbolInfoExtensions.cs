@@ -11,8 +11,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
     // Note - these methods are called in fairly hot paths in the IDE, so we try to be responsible about allocations.
     internal static class SymbolInfoExtensions
     {
-        public static ImmutableArray<ISymbol> GetAllSymbols(this SymbolInfo info)
-            => GetAllSymbolsWorker(info).Distinct();
+        public static ImmutableArray<ISymbol> GetAllSymbols(this SymbolInfo info) =>
+            GetAllSymbolsWorker(info).Distinct();
 
         private static ImmutableArray<ISymbol> GetAllSymbolsWorker(this SymbolInfo info)
         {
@@ -29,8 +29,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
         }
 
-        public static ISymbol? GetAnySymbol(this SymbolInfo info)
-            => info.Symbol ?? info.CandidateSymbols.FirstOrDefault();
+        public static ISymbol? GetAnySymbol(this SymbolInfo info) =>
+            info.Symbol ?? info.CandidateSymbols.FirstOrDefault();
 
         public static ImmutableArray<ISymbol> GetBestOrAllSymbols(this SymbolInfo info)
         {

@@ -26,7 +26,8 @@ internal sealed class DefaultControllerFactory : IControllerFactory
     /// </param>
     public DefaultControllerFactory(
         IControllerActivator controllerActivator,
-        IEnumerable<IControllerPropertyActivator> propertyActivators)
+        IEnumerable<IControllerPropertyActivator> propertyActivators
+    )
     {
         ArgumentNullException.ThrowIfNull(controllerActivator);
         ArgumentNullException.ThrowIfNull(propertyActivators);
@@ -42,9 +43,12 @@ internal sealed class DefaultControllerFactory : IControllerFactory
 
         if (context.ActionDescriptor == null)
         {
-            throw new ArgumentException(Resources.FormatPropertyOfTypeCannotBeNull(
-                nameof(ControllerContext.ActionDescriptor),
-                nameof(ControllerContext)));
+            throw new ArgumentException(
+                Resources.FormatPropertyOfTypeCannotBeNull(
+                    nameof(ControllerContext.ActionDescriptor),
+                    nameof(ControllerContext)
+                )
+            );
         }
 
         var controller = _controllerActivator.Create(context);

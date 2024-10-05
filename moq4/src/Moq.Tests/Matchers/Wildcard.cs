@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Moq.Tests.Matchers.Wildcard
 {
-    using static AutoIsAny;   // note using static to simplify syntax
+    using static AutoIsAny; // note using static to simplify syntax
 
     /// <summary>
     /// Helper class provided by user
@@ -61,12 +61,15 @@ namespace Moq.Tests.Matchers.Wildcard
         }
 
         public static implicit operator int(AnyValue _) => default;
+
         public static implicit operator byte(AnyValue _) => default;
+
         public static implicit operator GearId(AnyValue _) => default;
+
         public static implicit operator Animal(AnyValue _) => default;
+
         public static implicit operator Dolphin(AnyValue _) => default;
     }
-
 
     public class Tests
     {
@@ -126,7 +129,6 @@ namespace Moq.Tests.Matchers.Wildcard
         }
     }
 
-
     /// <summary>
     /// Example enum
     /// </summary>
@@ -136,7 +138,6 @@ namespace Moq.Tests.Matchers.Wildcard
         Neutral,
         Gear1,
     }
-
 
     /// <summary>
     /// Example interface
@@ -150,7 +151,6 @@ namespace Moq.Tests.Matchers.Wildcard
         int UseAnimal(Animal a);
         int UseDolphin(Dolphin a);
     }
-
 
     /// <summary>
     /// just a class that implements interface
@@ -188,15 +188,7 @@ namespace Moq.Tests.Matchers.Wildcard
         }
     }
 
+    public class Animal { }
 
-    public class Animal
-    {
-
-    }
-
-
-    public class Dolphin : Animal
-    {
-
-    }
+    public class Dolphin : Animal { }
 }

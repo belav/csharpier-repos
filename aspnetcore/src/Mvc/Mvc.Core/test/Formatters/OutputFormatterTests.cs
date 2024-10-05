@@ -17,7 +17,8 @@ public class OutputFormatterTests
             new DefaultHttpContext(),
             new TestHttpResponseStreamWriterFactory().CreateWriter,
             objectType: null,
-            @object: null);
+            @object: null
+        );
 
         var formatter = new TestOutputFormatter();
 
@@ -40,7 +41,8 @@ public class OutputFormatterTests
         // Act
         var contentTypes = formatter.GetSupportedContentTypes(
             contentType: null,
-            objectType: typeof(string));
+            objectType: typeof(string)
+        );
 
         // Assert
         Assert.Null(contentTypes);
@@ -58,7 +60,8 @@ public class OutputFormatterTests
             new DefaultHttpContext(),
             new TestHttpResponseStreamWriterFactory().CreateWriter,
             typeof(string),
-            "Hello, world!")
+            "Hello, world!"
+        )
         {
             ContentType = new StringSegment(formatter.SupportedMediaTypes[0].ToString()),
         };
@@ -74,7 +77,9 @@ public class OutputFormatterTests
     [InlineData(true, true)]
     [InlineData(false, false)]
     public void CanWriteResult_MatchesWildcardsOnlyWhenContentTypeProvidedByServer(
-        bool contentTypeProvidedByServer, bool shouldMatchWildcards)
+        bool contentTypeProvidedByServer,
+        bool shouldMatchWildcards
+    )
     {
         // Arrange
         var formatter = new TypeSpecificFormatter();
@@ -87,7 +92,8 @@ public class OutputFormatterTests
             new DefaultHttpContext(),
             new TestHttpResponseStreamWriterFactory().CreateWriter,
             typeof(string),
-            "Hello, world!")
+            "Hello, world!"
+        )
         {
             ContentType = new StringSegment(requestedContentType),
             ContentTypeIsServerDefined = contentTypeProvidedByServer,
@@ -116,7 +122,8 @@ public class OutputFormatterTests
         // Act
         var contentTypes = formatter.GetSupportedContentTypes(
             contentType: null,
-            objectType: typeof(string));
+            objectType: typeof(string)
+        );
 
         // Assert
         Assert.Equal(2, contentTypes.Count);
@@ -135,9 +142,7 @@ public class OutputFormatterTests
         formatter.SupportedMediaTypes.Add(MediaTypeHeaderValue.Parse("text/xml"));
 
         // Act
-        var contentTypes = formatter.GetSupportedContentTypes(
-            "application/*",
-            typeof(int));
+        var contentTypes = formatter.GetSupportedContentTypes("application/*", typeof(int));
 
         // Assert
         var contentType = Assert.Single(contentTypes);
@@ -158,7 +163,8 @@ public class OutputFormatterTests
         // Act
         var contentTypes = formatter.GetSupportedContentTypes(
             "application/vnd.test+json;v=2",
-            typeof(int));
+            typeof(int)
+        );
 
         // Assert
         var contentType = Assert.Single(contentTypes);
@@ -178,7 +184,8 @@ public class OutputFormatterTests
         // Act
         var contentTypes = formatter.GetSupportedContentTypes(
             "application/vnd.test+bson",
-            typeof(int));
+            typeof(int)
+        );
 
         // Assert
         Assert.Null(contentTypes);
@@ -210,7 +217,8 @@ public class OutputFormatterTests
             new DefaultHttpContext(),
             (s, e) => new StreamWriter(s, e),
             typeof(object),
-            new object());
+            new object()
+        );
 
         // Act & Assert
         Assert.Throws<InvalidOperationException>(() => formatter.CanWriteResult(context));
@@ -225,7 +233,8 @@ public class OutputFormatterTests
 
         // Act & Assert
         Assert.Throws<InvalidOperationException>(
-            () => formatter.GetSupportedContentTypes("application/json", typeof(object)));
+            () => formatter.GetSupportedContentTypes("application/json", typeof(object))
+        );
     }
 
     private class TestOutputFormatter : OutputFormatter

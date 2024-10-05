@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Gets the expression-body syntax from an expression-bodied member. The
         /// given syntax must be for a member which could contain an expression-body.
         /// </summary>
-        internal static ArrowExpressionClauseSyntax? GetExpressionBodySyntax(this CSharpSyntaxNode node)
+        internal static ArrowExpressionClauseSyntax? GetExpressionBodySyntax(
+            this CSharpSyntaxNode node
+        )
         {
             ArrowExpressionClauseSyntax? arrowExpr = null;
             switch (node.Kind())
@@ -64,9 +66,18 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="token">The token to normalize.</param>
         /// <param name="indentation">A sequence of whitespace characters that defines a single level of indentation.</param>
         /// <param name="elasticTrivia">If true the replaced trivia is elastic trivia.</param>
-        public static SyntaxToken NormalizeWhitespace(this SyntaxToken token, string indentation, bool elasticTrivia)
+        public static SyntaxToken NormalizeWhitespace(
+            this SyntaxToken token,
+            string indentation,
+            bool elasticTrivia
+        )
         {
-            return SyntaxNormalizer.Normalize(token, indentation, CodeAnalysis.SyntaxNodeExtensions.DefaultEOL, elasticTrivia);
+            return SyntaxNormalizer.Normalize(
+                token,
+                indentation,
+                CodeAnalysis.SyntaxNodeExtensions.DefaultEOL,
+                elasticTrivia
+            );
         }
 
         /// <summary>
@@ -86,10 +97,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// single level of indentation.</param>
         /// <param name="eol">An optional sequence of whitespace characters used for end of line.</param>
         /// <param name="elasticTrivia">If true the replaced trivia is elastic trivia.</param>
-        public static SyntaxToken NormalizeWhitespace(this SyntaxToken token,
+        public static SyntaxToken NormalizeWhitespace(
+            this SyntaxToken token,
             string indentation = CodeAnalysis.SyntaxNodeExtensions.DefaultIndentation,
             string eol = CodeAnalysis.SyntaxNodeExtensions.DefaultEOL,
-            bool elasticTrivia = false)
+            bool elasticTrivia = false
+        )
         {
             return SyntaxNormalizer.Normalize(token, indentation, eol, elasticTrivia);
         }
@@ -101,9 +114,18 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="list">The trivia list to normalize.</param>
         /// <param name="indentation">A sequence of whitespace characters that defines a single level of indentation.</param>
         /// <param name="elasticTrivia">If true the replaced trivia is elastic trivia.</param>
-        public static SyntaxTriviaList NormalizeWhitespace(this SyntaxTriviaList list, string indentation, bool elasticTrivia)
+        public static SyntaxTriviaList NormalizeWhitespace(
+            this SyntaxTriviaList list,
+            string indentation,
+            bool elasticTrivia
+        )
         {
-            return SyntaxNormalizer.Normalize(list, indentation, CodeAnalysis.SyntaxNodeExtensions.DefaultEOL, elasticTrivia);
+            return SyntaxNormalizer.Normalize(
+                list,
+                indentation,
+                CodeAnalysis.SyntaxNodeExtensions.DefaultEOL,
+                elasticTrivia
+            );
         }
 
         /// <summary>
@@ -115,10 +137,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// single level of indentation.</param>
         /// <param name="eol">An optional sequence of whitespace characters used for end of line.</param>
         /// <param name="elasticTrivia">If true the replaced trivia is elastic trivia.</param>
-        public static SyntaxTriviaList NormalizeWhitespace(this SyntaxTriviaList list,
+        public static SyntaxTriviaList NormalizeWhitespace(
+            this SyntaxTriviaList list,
             string indentation = CodeAnalysis.SyntaxNodeExtensions.DefaultIndentation,
             string eol = CodeAnalysis.SyntaxNodeExtensions.DefaultEOL,
-            bool elasticTrivia = false)
+            bool elasticTrivia = false
+        )
         {
             return SyntaxNormalizer.Normalize(list, indentation, eol, elasticTrivia);
         }
@@ -128,7 +152,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return SyntaxFactory.TriviaList(sequence);
         }
 
-        internal static XmlNameAttributeElementKind GetElementKind(this XmlNameAttributeSyntax attributeSyntax)
+        internal static XmlNameAttributeElementKind GetElementKind(
+            this XmlNameAttributeSyntax attributeSyntax
+        )
         {
             Debug.Assert(attributeSyntax.Parent is object);
             CSharpSyntaxNode parentSyntax = attributeSyntax.Parent;
@@ -152,19 +178,39 @@ namespace Microsoft.CodeAnalysis.CSharp
                 throw ExceptionUtilities.UnexpectedValue(parentKind);
             }
 
-            if (DocumentationCommentXmlNames.ElementEquals(parentName, DocumentationCommentXmlNames.ParameterElementName))
+            if (
+                DocumentationCommentXmlNames.ElementEquals(
+                    parentName,
+                    DocumentationCommentXmlNames.ParameterElementName
+                )
+            )
             {
                 return XmlNameAttributeElementKind.Parameter;
             }
-            else if (DocumentationCommentXmlNames.ElementEquals(parentName, DocumentationCommentXmlNames.ParameterReferenceElementName))
+            else if (
+                DocumentationCommentXmlNames.ElementEquals(
+                    parentName,
+                    DocumentationCommentXmlNames.ParameterReferenceElementName
+                )
+            )
             {
                 return XmlNameAttributeElementKind.ParameterReference;
             }
-            else if (DocumentationCommentXmlNames.ElementEquals(parentName, DocumentationCommentXmlNames.TypeParameterElementName))
+            else if (
+                DocumentationCommentXmlNames.ElementEquals(
+                    parentName,
+                    DocumentationCommentXmlNames.TypeParameterElementName
+                )
+            )
             {
                 return XmlNameAttributeElementKind.TypeParameter;
             }
-            else if (DocumentationCommentXmlNames.ElementEquals(parentName, DocumentationCommentXmlNames.TypeParameterReferenceElementName))
+            else if (
+                DocumentationCommentXmlNames.ElementEquals(
+                    parentName,
+                    DocumentationCommentXmlNames.TypeParameterReferenceElementName
+                )
+            )
             {
                 return XmlNameAttributeElementKind.TypeParameterReference;
             }
@@ -186,17 +232,23 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="simpleName"></param>
         /// <param name="identifier"></param>
         /// <returns>The given simple name updated with the given identifier.</returns>
-        public static SimpleNameSyntax WithIdentifier(this SimpleNameSyntax simpleName, SyntaxToken identifier)
+        public static SimpleNameSyntax WithIdentifier(
+            this SimpleNameSyntax simpleName,
+            SyntaxToken identifier
+        )
         {
             return simpleName.Kind() == SyntaxKind.IdentifierName
                 ? (SimpleNameSyntax)((IdentifierNameSyntax)simpleName).WithIdentifier(identifier)
                 : (SimpleNameSyntax)((GenericNameSyntax)simpleName).WithIdentifier(identifier);
         }
 
-        internal static bool IsTypeInContextWhichNeedsDynamicAttribute(this IdentifierNameSyntax typeNode)
+        internal static bool IsTypeInContextWhichNeedsDynamicAttribute(
+            this IdentifierNameSyntax typeNode
+        )
         {
             Debug.Assert(typeNode != null);
-            return SyntaxFacts.IsInTypeOnlyContext(typeNode) && IsInContextWhichNeedsDynamicAttribute(typeNode);
+            return SyntaxFacts.IsInTypeOnlyContext(typeNode)
+                && IsInContextWhichNeedsDynamicAttribute(typeNode);
         }
 
         internal static ExpressionSyntax SkipParens(this ExpressionSyntax expression)
@@ -219,7 +271,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case SyntaxKind.TupleExpression:
                     return true;
                 case SyntaxKind.DeclarationExpression:
-                    return ((DeclarationExpressionSyntax)node).Designation.Kind() == SyntaxKind.ParenthesizedVariableDesignation;
+                    return ((DeclarationExpressionSyntax)node).Designation.Kind()
+                        == SyntaxKind.ParenthesizedVariableDesignation;
                 default:
                     return false;
             }
@@ -259,7 +312,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return false;
 
                 default:
-                    return node.Parent != null && IsInContextWhichNeedsDynamicAttribute(node.Parent);
+                    return node.Parent != null
+                        && IsInContextWhichNeedsDynamicAttribute(node.Parent);
             }
         }
 
@@ -271,7 +325,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ExplicitInterfaceSpecifierSyntax explicitInterfaceSpecifier,
             SyntaxToken thisKeyword,
             BracketedParameterListSyntax parameterList,
-            AccessorListSyntax accessorList)
+            AccessorListSyntax accessorList
+        )
         {
             return syntax.Update(
                 attributeLists,
@@ -282,7 +337,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 parameterList,
                 accessorList,
                 expressionBody: null,
-                semicolonToken: default);
+                semicolonToken: default
+            );
         }
 
         public static OperatorDeclarationSyntax Update(
@@ -294,7 +350,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxToken operatorToken,
             ParameterListSyntax parameterList,
             BlockSyntax block,
-            SyntaxToken semicolonToken)
+            SyntaxToken semicolonToken
+        )
         {
             return syntax.Update(
                 attributeLists,
@@ -305,7 +362,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 parameterList,
                 block,
                 expressionBody: null,
-                semicolonToken);
+                semicolonToken
+            );
         }
 
         public static MethodDeclarationSyntax Update(
@@ -319,7 +377,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ParameterListSyntax parameterList,
             SyntaxList<TypeParameterConstraintClauseSyntax> constraintClauses,
             BlockSyntax block,
-            SyntaxToken semicolonToken)
+            SyntaxToken semicolonToken
+        )
         {
             return syntax.Update(
                 attributeLists,
@@ -332,7 +391,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 constraintClauses,
                 block,
                 expressionBody: null,
-                semicolonToken);
+                semicolonToken
+            );
         }
 
         /// <summary>
@@ -343,16 +403,27 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal static CSharpSyntaxNode? GetContainingDeconstruction(this ExpressionSyntax expr)
         {
             var kind = expr.Kind();
-            if (kind != SyntaxKind.TupleExpression && kind != SyntaxKind.DeclarationExpression && kind != SyntaxKind.IdentifierName)
+            if (
+                kind != SyntaxKind.TupleExpression
+                && kind != SyntaxKind.DeclarationExpression
+                && kind != SyntaxKind.IdentifierName
+            )
             {
                 return null;
             }
 
             while (true)
             {
-                Debug.Assert(expr.Kind() == SyntaxKind.TupleExpression || expr.Kind() == SyntaxKind.DeclarationExpression || expr.Kind() == SyntaxKind.IdentifierName);
+                Debug.Assert(
+                    expr.Kind() == SyntaxKind.TupleExpression
+                        || expr.Kind() == SyntaxKind.DeclarationExpression
+                        || expr.Kind() == SyntaxKind.IdentifierName
+                );
                 var parent = expr.Parent;
-                if (parent == null) { return null; }
+                if (parent == null)
+                {
+                    return null;
+                }
 
                 switch (parent.Kind())
                 {
@@ -389,7 +460,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal static bool IsOutVarDeclaration(this DeclarationExpressionSyntax p)
         {
-            return p.Designation.Kind() == SyntaxKind.SingleVariableDesignation && p.IsOutDeclaration();
+            return p.Designation.Kind() == SyntaxKind.SingleVariableDesignation
+                && p.IsOutDeclaration();
         }
 
 #nullable enable
@@ -399,7 +471,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="type"></param>
         /// <param name="action"></param>
         /// <param name="argument">The argument that is passed to the action whenever it is invoked</param>
-        internal static void VisitRankSpecifiers<TArg>(this TypeSyntax type, Action<ArrayRankSpecifierSyntax, TArg> action, in TArg argument)
+        internal static void VisitRankSpecifiers<TArg>(
+            this TypeSyntax type,
+            Action<ArrayRankSpecifierSyntax, TArg> action,
+            in TArg argument
+        )
         {
             // Use a manual stack here to avoid deeply nested recursion which can blow the real stack
             var stack = ArrayBuilder<SyntaxNode>.GetInstance();
@@ -438,9 +514,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                         break;
                     case SyntaxKind.FunctionPointerType:
                         var functionPointerTypeSyntax = (FunctionPointerTypeSyntax)type;
-                        for (int i = functionPointerTypeSyntax.ParameterList.Parameters.Count - 1; i >= 0; i--)
+                        for (
+                            int i = functionPointerTypeSyntax.ParameterList.Parameters.Count - 1;
+                            i >= 0;
+                            i--
+                        )
                         {
-                            TypeSyntax? paramType = functionPointerTypeSyntax.ParameterList.Parameters[i].Type;
+                            TypeSyntax? paramType = functionPointerTypeSyntax
+                                .ParameterList
+                                .Parameters[i]
+                                .Type;
                             Debug.Assert(paramType is object);
                             stack.Push(paramType);
                         }
@@ -462,7 +545,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                         break;
                     case SyntaxKind.GenericName:
                         var genericNameSyntax = (GenericNameSyntax)type;
-                        for (int i = genericNameSyntax.TypeArgumentList.Arguments.Count - 1; i >= 0; i--)
+                        for (
+                            int i = genericNameSyntax.TypeArgumentList.Arguments.Count - 1;
+                            i >= 0;
+                            i--
+                        )
                         {
                             stack.Push(genericNameSyntax.TypeArgumentList.Arguments[i]);
                         }

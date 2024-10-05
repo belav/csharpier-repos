@@ -12,7 +12,11 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
 {
-    [ExportCSharpVisualBasicStatelessLspService(typeof(FailingRequestHandler)), PartNotDiscoverable, Shared]
+    [
+        ExportCSharpVisualBasicStatelessLspService(typeof(FailingRequestHandler)),
+        PartNotDiscoverable,
+        Shared
+    ]
     [Method(MethodName)]
     internal class FailingRequestHandler : ILspServiceRequestHandler<TestRequest, TestResponse>
     {
@@ -21,14 +25,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FailingRequestHandler()
-        {
-        }
+        public FailingRequestHandler() { }
 
         public bool MutatesSolutionState => false;
         public bool RequiresLSPSolution => true;
 
-        public async Task<TestResponse> HandleRequestAsync(TestRequest request, RequestContext context, CancellationToken cancellationToken)
+        public async Task<TestResponse> HandleRequestAsync(
+            TestRequest request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             await Task.Delay(Delay, cancellationToken).ConfigureAwait(false);
 

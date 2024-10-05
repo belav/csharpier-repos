@@ -26,6 +26,8 @@ internal static partial class Interop
 
     internal static bool IsBufferTooSmall(this NCrypt.ErrorCode errorCode)
     {
-        return errorCode is NCrypt.ErrorCode.NTE_BUFFER_TOO_SMALL or NCrypt.ErrorCode.TPM_E_PCP_BUFFER_TOO_SMALL;
+        return errorCode
+            is NCrypt.ErrorCode.NTE_BUFFER_TOO_SMALL
+                or NCrypt.ErrorCode.TPM_E_PCP_BUFFER_TOO_SMALL;
     }
 }

@@ -11,20 +11,18 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue;
 /// <summary>
 /// record C([Attr] [|in int a|] = 1);
 /// </summary>
-internal sealed class RecordParameterDeclarationBody(ParameterSyntax parameter) : PropertyOrIndexerAccessorDeclarationBody
+internal sealed class RecordParameterDeclarationBody(ParameterSyntax parameter)
+    : PropertyOrIndexerAccessorDeclarationBody
 {
-    public override SyntaxNode? ExplicitBody
-        => null;
+    public override SyntaxNode? ExplicitBody => null;
 
-    public override SyntaxNode? HeaderActiveStatement
-        => parameter;
+    public override SyntaxNode? HeaderActiveStatement => parameter;
 
-    public override TextSpan HeaderActiveStatementSpan
-        => BreakpointSpans.CreateSpanForRecordParameter(parameter);
+    public override TextSpan HeaderActiveStatementSpan =>
+        BreakpointSpans.CreateSpanForRecordParameter(parameter);
 
-    public override SyntaxNode? MatchRoot
-        => null;
+    public override SyntaxNode? MatchRoot => null;
 
-    public override IEnumerable<SyntaxToken>? GetActiveTokens()
-        => BreakpointSpans.GetActiveTokensForRecordParameter(parameter);
+    public override IEnumerable<SyntaxToken>? GetActiveTokens() =>
+        BreakpointSpans.GetActiveTokensForRecordParameter(parameter);
 }

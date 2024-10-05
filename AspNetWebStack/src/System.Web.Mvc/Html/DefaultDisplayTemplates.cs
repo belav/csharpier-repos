@@ -19,12 +19,15 @@ namespace System.Web.Mvc.Html
             bool? value = null;
             if (html.ViewContext.ViewData.Model != null)
             {
-                value = Convert.ToBoolean(html.ViewContext.ViewData.Model, CultureInfo.InvariantCulture);
+                value = Convert.ToBoolean(
+                    html.ViewContext.ViewData.Model,
+                    CultureInfo.InvariantCulture
+                );
             }
 
             return html.ViewContext.ViewData.ModelMetadata.IsNullableValueType
-                       ? BooleanTemplateDropDownList(value)
-                       : BooleanTemplateCheckbox(value ?? false);
+                ? BooleanTemplateDropDownList(value)
+                : BooleanTemplateCheckbox(value ?? false);
         }
 
         private static string BooleanTemplateCheckbox(bool value)
@@ -65,7 +68,10 @@ namespace System.Web.Mvc.Html
             return CollectionTemplate(html, TemplateHelpers.TemplateHelper);
         }
 
-        internal static string CollectionTemplate(HtmlHelper html, TemplateHelpers.TemplateHelperDelegate templateHelper)
+        internal static string CollectionTemplate(
+            HtmlHelper html,
+            TemplateHelpers.TemplateHelperDelegate templateHelper
+        )
         {
             object model = html.ViewContext.ViewData.ModelMetadata.Model;
             if (model == null)
@@ -80,16 +86,23 @@ namespace System.Web.Mvc.Html
                     String.Format(
                         CultureInfo.CurrentCulture,
                         MvcResources.Templates_TypeMustImplementIEnumerable,
-                        model.GetType().FullName));
+                        model.GetType().FullName
+                    )
+                );
             }
 
             Type typeInCollection = typeof(string);
-            Type genericEnumerableType = TypeHelpers.ExtractGenericInterface(collection.GetType(), typeof(IEnumerable<>));
+            Type genericEnumerableType = TypeHelpers.ExtractGenericInterface(
+                collection.GetType(),
+                typeof(IEnumerable<>)
+            );
             if (genericEnumerableType != null)
             {
                 typeInCollection = genericEnumerableType.GetGenericArguments()[0];
             }
-            bool typeInCollectionIsNullableValueType = TypeHelpers.IsNullableValueType(typeInCollection);
+            bool typeInCollectionIsNullableValueType = TypeHelpers.IsNullableValueType(
+                typeInCollection
+            );
 
             string oldPrefix = html.ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix;
 
@@ -108,9 +121,25 @@ namespace System.Web.Mvc.Html
                     {
                         itemType = item.GetType();
                     }
-                    ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(() => item, itemType);
-                    string fieldName = String.Format(CultureInfo.InvariantCulture, "{0}[{1}]", fieldNameBase, index++);
-                    string output = templateHelper(html, metadata, fieldName, null /* templateName */, DataBoundControlMode.ReadOnly, null /* additionalViewData */);
+                    ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                        () => item,
+                        itemType
+                    );
+                    string fieldName = String.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0}[{1}]",
+                        fieldNameBase,
+                        index++
+                    );
+                    string output = templateHelper(
+                        html,
+                        metadata,
+                        fieldName,
+                        null /* templateName */
+                        ,
+                        DataBoundControlMode.ReadOnly,
+                        null /* additionalViewData */
+                    );
                     result.Append(output);
                 }
 
@@ -124,9 +153,16 @@ namespace System.Web.Mvc.Html
 
         internal static string DecimalTemplate(HtmlHelper html)
         {
-            if (html.ViewContext.ViewData.TemplateInfo.FormattedModelValue == html.ViewContext.ViewData.ModelMetadata.Model)
+            if (
+                html.ViewContext.ViewData.TemplateInfo.FormattedModelValue
+                == html.ViewContext.ViewData.ModelMetadata.Model
+            )
             {
-                html.ViewContext.ViewData.TemplateInfo.FormattedModelValue = String.Format(CultureInfo.CurrentCulture, "{0:0.00}", html.ViewContext.ViewData.ModelMetadata.Model);
+                html.ViewContext.ViewData.TemplateInfo.FormattedModelValue = String.Format(
+                    CultureInfo.CurrentCulture,
+                    "{0:0.00}",
+                    html.ViewContext.ViewData.ModelMetadata.Model
+                );
             }
 
             return StringTemplate(html);
@@ -134,10 +170,12 @@ namespace System.Web.Mvc.Html
 
         internal static string EmailAddressTemplate(HtmlHelper html)
         {
-            return String.Format(CultureInfo.InvariantCulture,
-                                 "<a href=\"mailto:{0}\">{1}</a>",
-                                 html.AttributeEncode(html.ViewContext.ViewData.Model),
-                                 html.Encode(html.ViewContext.ViewData.TemplateInfo.FormattedModelValue));
+            return String.Format(
+                CultureInfo.InvariantCulture,
+                "<a href=\"mailto:{0}\">{1}</a>",
+                html.AttributeEncode(html.ViewContext.ViewData.Model),
+                html.Encode(html.ViewContext.ViewData.TemplateInfo.FormattedModelValue)
+            );
         }
 
         internal static string HiddenInputTemplate(HtmlHelper html)
@@ -159,7 +197,10 @@ namespace System.Web.Mvc.Html
             return ObjectTemplate(html, TemplateHelpers.TemplateHelper);
         }
 
-        internal static string ObjectTemplate(HtmlHelper html, TemplateHelpers.TemplateHelperDelegate templateHelper)
+        internal static string ObjectTemplate(
+            HtmlHelper html,
+            TemplateHelpers.TemplateHelperDelegate templateHelper
+        )
         {
             ViewDataDictionary viewData = html.ViewContext.ViewData;
             TemplateInfo templateInfo = viewData.TemplateInfo;
@@ -184,21 +225,39 @@ namespace System.Web.Mvc.Html
                 return text;
             }
 
-            foreach (ModelMetadata propertyMetadata in modelMetadata.Properties.Where(pm => ShouldShow(pm, templateInfo)))
+            foreach (
+                ModelMetadata propertyMetadata in modelMetadata.Properties.Where(pm =>
+                    ShouldShow(pm, templateInfo)
+                )
+            )
             {
                 if (!propertyMetadata.HideSurroundingHtml)
                 {
                     string label = propertyMetadata.GetDisplayName();
                     if (!String.IsNullOrEmpty(label))
                     {
-                        builder.AppendFormat(CultureInfo.InvariantCulture, "<div class=\"display-label\">{0}</div>", label);
+                        builder.AppendFormat(
+                            CultureInfo.InvariantCulture,
+                            "<div class=\"display-label\">{0}</div>",
+                            label
+                        );
                         builder.AppendLine();
                     }
 
                     builder.Append("<div class=\"display-field\">");
                 }
 
-                builder.Append(templateHelper(html, propertyMetadata, propertyMetadata.PropertyName, null /* templateName */, DataBoundControlMode.ReadOnly, null /* additionalViewData */));
+                builder.Append(
+                    templateHelper(
+                        html,
+                        propertyMetadata,
+                        propertyMetadata.PropertyName,
+                        null /* templateName */
+                        ,
+                        DataBoundControlMode.ReadOnly,
+                        null /* additionalViewData */
+                    )
+                );
 
                 if (!propertyMetadata.HideSurroundingHtml)
                 {
@@ -211,8 +270,7 @@ namespace System.Web.Mvc.Html
 
         private static bool ShouldShow(ModelMetadata metadata, TemplateInfo templateInfo)
         {
-            return
-                metadata.ShowForDisplay
+            return metadata.ShowForDisplay
                 && metadata.ModelType != typeof(EntityState)
                 && !metadata.IsComplexType
                 && !templateInfo.Visited(metadata);
@@ -225,10 +283,12 @@ namespace System.Web.Mvc.Html
 
         internal static string UrlTemplate(HtmlHelper html)
         {
-            return String.Format(CultureInfo.InvariantCulture,
-                                 "<a href=\"{0}\">{1}</a>",
-                                 html.AttributeEncode(html.ViewContext.ViewData.Model),
-                                 html.Encode(html.ViewContext.ViewData.TemplateInfo.FormattedModelValue));
+            return String.Format(
+                CultureInfo.InvariantCulture,
+                "<a href=\"{0}\">{1}</a>",
+                html.AttributeEncode(html.ViewContext.ViewData.Model),
+                html.Encode(html.ViewContext.ViewData.TemplateInfo.FormattedModelValue)
+            );
         }
     }
 }

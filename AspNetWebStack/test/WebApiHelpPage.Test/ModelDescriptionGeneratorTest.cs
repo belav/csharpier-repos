@@ -40,12 +40,18 @@ namespace WebApiHelpPageWebHost.UnitTest
         [InlineData(typeof(UInt16), "UInt16", "unsigned integer")]
         [InlineData(typeof(Int16), "Int16", "integer")]
         [InlineData(typeof(Uri), "Uri", "URI")]
-        public void CreateModelDescription_SimpleTypes(Type type, string expectedModelName, string expectedDocumentation)
+        public void CreateModelDescription_SimpleTypes(
+            Type type,
+            string expectedModelName,
+            string expectedDocumentation
+        )
         {
             HttpConfiguration config = new HttpConfiguration();
             ModelDescriptionGenerator modelGenerator = new ModelDescriptionGenerator(config);
 
-            SimpleTypeModelDescription simpleModel = Assert.IsType<SimpleTypeModelDescription>(modelGenerator.GetOrCreateModelDescription(type));
+            SimpleTypeModelDescription simpleModel = Assert.IsType<SimpleTypeModelDescription>(
+                modelGenerator.GetOrCreateModelDescription(type)
+            );
 
             Assert.NotNull(simpleModel);
             Assert.Equal(expectedModelName, simpleModel.Name);
@@ -71,8 +77,14 @@ namespace WebApiHelpPageWebHost.UnitTest
         [InlineData(typeof(List<int>), typeof(int))]
         [InlineData(typeof(List<Nullable<double>>), typeof(double))]
         [InlineData(typeof(List<DateTime>), typeof(DateTime))]
-        [InlineData(typeof(IEnumerable<KeyValuePair<string, int>>), typeof(KeyValuePair<string, int>))]
-        [InlineData(typeof(IEnumerable<KeyValuePair<DateTime, int?>>), typeof(KeyValuePair<DateTime, int?>))]
+        [InlineData(
+            typeof(IEnumerable<KeyValuePair<string, int>>),
+            typeof(KeyValuePair<string, int>)
+        )]
+        [InlineData(
+            typeof(IEnumerable<KeyValuePair<DateTime, int?>>),
+            typeof(KeyValuePair<DateTime, int?>)
+        )]
         [InlineData(typeof(IEnumerable), typeof(object))]
         [InlineData(typeof(ICollection), typeof(object))]
         [InlineData(typeof(IList), typeof(object))]
@@ -94,7 +106,9 @@ namespace WebApiHelpPageWebHost.UnitTest
             HttpConfiguration config = new HttpConfiguration();
             ModelDescriptionGenerator modelGenerator = new ModelDescriptionGenerator(config);
 
-            CollectionModelDescription collectionModel = Assert.IsType<CollectionModelDescription>(modelGenerator.GetOrCreateModelDescription(collectionType));
+            CollectionModelDescription collectionModel = Assert.IsType<CollectionModelDescription>(
+                modelGenerator.GetOrCreateModelDescription(collectionType)
+            );
 
             Assert.NotNull(collectionModel);
             Assert.Equal(collectionType, collectionModel.ModelType);
@@ -103,19 +117,29 @@ namespace WebApiHelpPageWebHost.UnitTest
 
         [Theory]
         [InlineData(typeof(Dictionary<string, int>), typeof(string), typeof(int))]
-        [InlineData(typeof(Dictionary<string, Dictionary<Customer, Order>>), typeof(string), typeof(Dictionary<Customer, Order>))]
+        [InlineData(
+            typeof(Dictionary<string, Dictionary<Customer, Order>>),
+            typeof(string),
+            typeof(Dictionary<Customer, Order>)
+        )]
         [InlineData(typeof(Hashtable), typeof(object), typeof(object))]
         [InlineData(typeof(IDictionary), typeof(object), typeof(object))]
         [InlineData(typeof(IDictionary<string, DateTime>), typeof(string), typeof(DateTime))]
         [InlineData(typeof(SortedDictionary<string, Guid>), typeof(string), typeof(Guid))]
         [InlineData(typeof(OrderedDictionary), typeof(object), typeof(object))]
         [InlineData(typeof(ConcurrentDictionary<Guid, DateTime>), typeof(Guid), typeof(DateTime))]
-        public void CreateModelDescription_Dictionary(Type dictionaryType, Type keyType, Type valueType)
+        public void CreateModelDescription_Dictionary(
+            Type dictionaryType,
+            Type keyType,
+            Type valueType
+        )
         {
             HttpConfiguration config = new HttpConfiguration();
             ModelDescriptionGenerator modelGenerator = new ModelDescriptionGenerator(config);
 
-            DictionaryModelDescription dictionaryModel = Assert.IsType<DictionaryModelDescription>(modelGenerator.GetOrCreateModelDescription(dictionaryType));
+            DictionaryModelDescription dictionaryModel = Assert.IsType<DictionaryModelDescription>(
+                modelGenerator.GetOrCreateModelDescription(dictionaryType)
+            );
 
             Assert.NotNull(dictionaryModel);
             Assert.Equal(dictionaryType, dictionaryModel.ModelType);
@@ -125,14 +149,25 @@ namespace WebApiHelpPageWebHost.UnitTest
 
         [Theory]
         [InlineData(typeof(KeyValuePair<string, int>), typeof(string), typeof(int))]
-        [InlineData(typeof(KeyValuePair<Dictionary<int, string>, int>), typeof(Dictionary<int, string>), typeof(int))]
+        [InlineData(
+            typeof(KeyValuePair<Dictionary<int, string>, int>),
+            typeof(Dictionary<int, string>),
+            typeof(int)
+        )]
         [InlineData(typeof(KeyValuePair<string, User>), typeof(string), typeof(User))]
-        public void CreateModelDescription_KeyValuePair(Type modelType, Type keyType, Type valueType)
+        public void CreateModelDescription_KeyValuePair(
+            Type modelType,
+            Type keyType,
+            Type valueType
+        )
         {
             HttpConfiguration config = new HttpConfiguration();
             ModelDescriptionGenerator modelGenerator = new ModelDescriptionGenerator(config);
 
-            KeyValuePairModelDescription keyValuePairModel = Assert.IsType<KeyValuePairModelDescription>(modelGenerator.GetOrCreateModelDescription(modelType));
+            KeyValuePairModelDescription keyValuePairModel =
+                Assert.IsType<KeyValuePairModelDescription>(
+                    modelGenerator.GetOrCreateModelDescription(modelType)
+                );
 
             Assert.NotNull(keyValuePairModel);
             Assert.Equal(modelType, keyValuePairModel.ModelType);
@@ -153,7 +188,9 @@ namespace WebApiHelpPageWebHost.UnitTest
             HttpConfiguration config = new HttpConfiguration();
             ModelDescriptionGenerator modelGenerator = new ModelDescriptionGenerator(config);
 
-            EnumTypeModelDescription enumModel = Assert.IsType<EnumTypeModelDescription>(modelGenerator.GetOrCreateModelDescription(type));
+            EnumTypeModelDescription enumModel = Assert.IsType<EnumTypeModelDescription>(
+                modelGenerator.GetOrCreateModelDescription(type)
+            );
 
             Assert.NotNull(enumModel);
             Assert.Equal(type, enumModel.ModelType);
@@ -163,23 +200,65 @@ namespace WebApiHelpPageWebHost.UnitTest
         [Theory]
         [InlineData(typeof(ComplexTypeWithPublicFields), new[] { "Name", "Id", "item" })]
         [InlineData(typeof(ComplexStruct), new[] { "Name", "Id", "Time", "Kind" })]
-        [InlineData(typeof(ApiDescription), new[] { "HttpMethod", "RelativePath", "ActionDescriptor", "Route", "Documentation", "SupportedResponseFormatters", "SupportedRequestBodyFormatters", "ParameterDescriptions", "ResponseDescription", "ID" })]
-        [InlineData(typeof(ApiParameterDescription), new[] { "Name", "Documentation", "Source", "ParameterDescriptor" })]
+        [InlineData(
+            typeof(ApiDescription),
+            new[]
+            {
+                "HttpMethod",
+                "RelativePath",
+                "ActionDescriptor",
+                "Route",
+                "Documentation",
+                "SupportedResponseFormatters",
+                "SupportedRequestBodyFormatters",
+                "ParameterDescriptions",
+                "ResponseDescription",
+                "ID",
+            }
+        )]
+        [InlineData(
+            typeof(ApiParameterDescription),
+            new[] { "Name", "Documentation", "Source", "ParameterDescriptor" }
+        )]
         [InlineData(typeof(Customer), new[] { "Name", "Id", "Orders" })] // Circular reference
         [InlineData(typeof(Order), new[] { "Items", "Id", "ShipDate" })] // Circular reference
         [InlineData(typeof(Item), new[] { "Name", "Buyer", "Price" })] // Circular reference
         [InlineData(typeof(DataContractType), new[] { "Member", "Field" })]
         [InlineData(typeof(StructDataContractType), new[] { "Member", "Field" })]
-        [InlineData(typeof(TypeWithIgnores), new[] { "Member", "DataMember", "RegularMember", "Field", "DataField", "RegularField" })]
-        [InlineData(typeof(DerivedType), new[] { "Member", "DataMember", "RegularMember", "Field", "DataField", "RegularField", "DerivedField", "DerivedMember" })]
-        [InlineData(typeof(PropertyAliasType), new[] { "RenamedMember", "Bar", "JsonField", "JsonProperty" })]
-        [InlineData(typeof(DataContractPropertyAliasType), new[] { "RenamedField", "JsonField", "JsonProperty" })]
+        [InlineData(
+            typeof(TypeWithIgnores),
+            new[] { "Member", "DataMember", "RegularMember", "Field", "DataField", "RegularField" }
+        )]
+        [InlineData(
+            typeof(DerivedType),
+            new[]
+            {
+                "Member",
+                "DataMember",
+                "RegularMember",
+                "Field",
+                "DataField",
+                "RegularField",
+                "DerivedField",
+                "DerivedMember",
+            }
+        )]
+        [InlineData(
+            typeof(PropertyAliasType),
+            new[] { "RenamedMember", "Bar", "JsonField", "JsonProperty" }
+        )]
+        [InlineData(
+            typeof(DataContractPropertyAliasType),
+            new[] { "RenamedField", "JsonField", "JsonProperty" }
+        )]
         public void CreateModelDescription_ComplexType(Type type, string[] expectedPropertyNames)
         {
             HttpConfiguration config = new HttpConfiguration();
             ModelDescriptionGenerator modelGenerator = new ModelDescriptionGenerator(config);
 
-            ComplexTypeModelDescription complexModel = Assert.IsType<ComplexTypeModelDescription>(modelGenerator.GetOrCreateModelDescription(type));
+            ComplexTypeModelDescription complexModel = Assert.IsType<ComplexTypeModelDescription>(
+                modelGenerator.GetOrCreateModelDescription(type)
+            );
             var propertyNames = complexModel.Properties.Select(m => m.Name).ToArray();
 
             Assert.NotNull(complexModel);
@@ -199,12 +278,17 @@ namespace WebApiHelpPageWebHost.UnitTest
         [InlineData(typeof(Item), "Item")]
         [InlineData(typeof(User), "CustomUser")]
         [InlineData(typeof(Address), "MyAddress")]
-        public void CreateModelDescription_ComplexType_ReturnsExpectedModelName(Type type, string expectedModelName)
+        public void CreateModelDescription_ComplexType_ReturnsExpectedModelName(
+            Type type,
+            string expectedModelName
+        )
         {
             HttpConfiguration config = new HttpConfiguration();
             ModelDescriptionGenerator modelGenerator = new ModelDescriptionGenerator(config);
 
-            ComplexTypeModelDescription complexModel = Assert.IsType<ComplexTypeModelDescription>(modelGenerator.GetOrCreateModelDescription(type));
+            ComplexTypeModelDescription complexModel = Assert.IsType<ComplexTypeModelDescription>(
+                modelGenerator.GetOrCreateModelDescription(type)
+            );
 
             Assert.NotNull(complexModel);
             Assert.Equal(type, complexModel.ModelType);
@@ -243,24 +327,30 @@ namespace WebApiHelpPageWebHost.UnitTest
                 annotationMapping = new Dictionary<string, string[]>
                 {
                     {
-                        "Property", new[] {
+                        "Property",
+                        new[]
+                        {
                             "Required",
                             "Data type: PostalCode",
                             "Matching regular expression pattern: [a-z]",
                             "Max length: 3",
                             "Min length: 2",
                             "Range: inclusive between 1 and 200",
-                            "String length: inclusive between 0 and 100"}
+                            "String length: inclusive between 0 and 100",
+                        }
                     },
                     {
-                        "OptionalProperty", new[] {
+                        "OptionalProperty",
+                        new[]
+                        {
                             "Data type: PostalCode",
                             "Matching regular expression pattern: [a-z]",
                             "Max length: 3",
                             "Min length: 2",
                             "Range: inclusive between 1 and 200",
-                            "String length: inclusive between 0 and 100"}
-                    }
+                            "String length: inclusive between 0 and 100",
+                        }
+                    },
                 };
 
                 yield return new[] { type, annotationMapping };
@@ -269,12 +359,17 @@ namespace WebApiHelpPageWebHost.UnitTest
 
         [Theory]
         [PropertyData("CreateModelDescription_ComplexType_WithAnnotation_PropertyData")]
-        public void CreateModelDescription_ComplexType_WithAnnotation(Type type, Dictionary<string, string[]> annotationMapping)
+        public void CreateModelDescription_ComplexType_WithAnnotation(
+            Type type,
+            Dictionary<string, string[]> annotationMapping
+        )
         {
             HttpConfiguration config = new HttpConfiguration();
             ModelDescriptionGenerator modelGenerator = new ModelDescriptionGenerator(config);
 
-            ComplexTypeModelDescription complexModel = Assert.IsType<ComplexTypeModelDescription>(modelGenerator.GetOrCreateModelDescription(type));
+            ComplexTypeModelDescription complexModel = Assert.IsType<ComplexTypeModelDescription>(
+                modelGenerator.GetOrCreateModelDescription(type)
+            );
 
             Assert.NotNull(complexModel);
             Assert.Equal(type, complexModel.ModelType);
@@ -300,7 +395,7 @@ namespace WebApiHelpPageWebHost.UnitTest
                 type = typeof(User);
                 annotationMapping = new Dictionary<string, string>
                 {
-                    { "Name", "User name."},
+                    { "Name", "User name." },
                     { "Age", "Age of the user." },
                     { "Comment", "User comment." },
                     { "PhoneNumber", "U.S. phone number." },
@@ -322,13 +417,20 @@ namespace WebApiHelpPageWebHost.UnitTest
 
         [Theory]
         [PropertyData("CreateModelDescription_ComplexType_WithDocumentation_PropertyData")]
-        public void CreateModelDescription_ComplexType_WithDocumentation(Type type, Dictionary<string, string> documentationMapping)
+        public void CreateModelDescription_ComplexType_WithDocumentation(
+            Type type,
+            Dictionary<string, string> documentationMapping
+        )
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.SetDocumentationProvider(new XmlDocumentationProvider("WebApiHelpPage.Test.XML"));
+            config.SetDocumentationProvider(
+                new XmlDocumentationProvider("WebApiHelpPage.Test.XML")
+            );
             ModelDescriptionGenerator modelGenerator = new ModelDescriptionGenerator(config);
 
-            ComplexTypeModelDescription complexModel = Assert.IsType<ComplexTypeModelDescription>(modelGenerator.GetOrCreateModelDescription(type));
+            ComplexTypeModelDescription complexModel = Assert.IsType<ComplexTypeModelDescription>(
+                modelGenerator.GetOrCreateModelDescription(type)
+            );
 
             Assert.NotNull(complexModel);
             Assert.Equal(type, complexModel.ModelType);
@@ -346,12 +448,16 @@ namespace WebApiHelpPageWebHost.UnitTest
             HttpConfiguration config = new HttpConfiguration();
             ModelDescriptionGenerator modelGenerator = new ModelDescriptionGenerator(config);
 
-            Assert.Throws<InvalidOperationException>(() =>
-            {
-                modelGenerator.GetOrCreateModelDescription(typeof(Customer));
-                modelGenerator.GetOrCreateModelDescription(typeof(WebApiHelpPageWebHost.UnitTest2.Customer));
-            },
-            "A model description could not be created. Duplicate model name 'Customer' was found for types 'WebApiHelpPageWebHost.UnitTest.Customer' and 'WebApiHelpPageWebHost.UnitTest2.Customer'. Use the [ModelName] attribute to change the model name for at least one of the types so that it has a unique name.");
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    modelGenerator.GetOrCreateModelDescription(typeof(Customer));
+                    modelGenerator.GetOrCreateModelDescription(
+                        typeof(WebApiHelpPageWebHost.UnitTest2.Customer)
+                    );
+                },
+                "A model description could not be created. Duplicate model name 'Customer' was found for types 'WebApiHelpPageWebHost.UnitTest.Customer' and 'WebApiHelpPageWebHost.UnitTest2.Customer'. Use the [ModelName] attribute to change the model name for at least one of the types so that it has a unique name."
+            );
         }
     }
 }

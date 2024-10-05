@@ -11,12 +11,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 
-namespace System.Data.Common.Utils {
-
+namespace System.Data.Common.Utils
+{
     // An interface for a set abstraction
     internal class Set<TElement> : InternalBase, IEnumerable<TElement>
     {
@@ -24,7 +24,7 @@ namespace System.Data.Common.Utils {
         /// <summary>
         /// Instance of set value comparer.
         /// </summary>
-        internal static readonly IEqualityComparer<Set<TElement>> ValueComparer = 
+        internal static readonly IEqualityComparer<Set<TElement>> ValueComparer =
             new SetValueComparer();
 
         /// <summary>
@@ -41,33 +41,25 @@ namespace System.Data.Common.Utils {
         /// Initialize set with the same values and comparer as other set.
         /// </summary>
         internal Set(Set<TElement> other)
-            : this(other._values, other.Comparer)
-        {
-        }
+            : this(other._values, other.Comparer) { }
 
         /// <summary>
         /// Initialize empty set with default comparer.
         /// </summary>
         internal Set()
-            : this(null, null)
-        {
-        }
+            : this(null, null) { }
 
         /// <summary>
         /// Initialize a set with the given elements and using default comparer.
         /// </summary>
         internal Set(IEnumerable<TElement> elements)
-            : this(elements, null)
-        {
-        }
+            : this(elements, null) { }
 
         /// <summary>
         /// Initializes an empty set with the given comparer.
         /// </summary>
         internal Set(IEqualityComparer<TElement> comparer)
-            : this(null, comparer)
-        {
-        }
+            : this(null, comparer) { }
 
         /// <summary>
         /// Initialize a set with the given elements and comparer.
@@ -76,7 +68,8 @@ namespace System.Data.Common.Utils {
         {
             _values = new HashSet<TElement>(
                 elements ?? Enumerable.Empty<TElement>(),
-                comparer ?? EqualityComparer<TElement>.Default);
+                comparer ?? EqualityComparer<TElement>.Default
+            );
         }
         #endregion
 
@@ -84,12 +77,9 @@ namespace System.Data.Common.Utils {
         /// <summary>
         /// Gets the number of elements in this set.
         /// </summary>
-        internal int Count 
-        { 
-            get 
-            { 
-                return _values.Count; 
-            } 
+        internal int Count
+        {
+            get { return _values.Count; }
         }
 
         /// <summary>
@@ -97,10 +87,7 @@ namespace System.Data.Common.Utils {
         /// </summary>
         internal IEqualityComparer<TElement> Comparer
         {
-            get
-            {
-                return _values.Comparer;
-            }
+            get { return _values.Comparer; }
         }
         #endregion
 
@@ -108,9 +95,9 @@ namespace System.Data.Common.Utils {
         /// <summary>
         /// Determines whether the given element exists in the set.
         /// </summary>
-        internal bool Contains(TElement element) 
-        { 
-            return _values.Contains(element); 
+        internal bool Contains(TElement element)
+        {
+            return _values.Contains(element);
         }
 
         /// <summary>
@@ -118,10 +105,10 @@ namespace System.Data.Common.Utils {
         /// Adds given element to the set. If the set already contains
         /// the element, does nothing.
         /// </summary>
-        internal void Add(TElement element) 
+        internal void Add(TElement element)
         {
             AssertReadWrite();
-            _values.Add(element); 
+            _values.Add(element);
         }
 
         /// <summary>
@@ -174,8 +161,7 @@ namespace System.Data.Common.Utils {
         internal bool SetEquals(Set<TElement> other)
         {
             AssertSetCompatible(other);
-            return _values.Count == other._values.Count
-                && _values.IsSubsetOf(other._values);
+            return _values.Count == other._values.Count && _values.IsSubsetOf(other._values);
         }
 
         /// <summary>
@@ -292,12 +278,12 @@ namespace System.Data.Common.Utils {
         }
 
         /// <summary>
-        /// Returns typed enumerator over elements of the set. 
+        /// Returns typed enumerator over elements of the set.
         /// Uses HashSet&lt;TElement&gt;.Enumerator to avoid boxing struct.
         /// </summary>
-        public HashSet<TElement>.Enumerator GetEnumerator() 
-        { 
-            return _values.GetEnumerator(); 
+        public HashSet<TElement>.Enumerator GetEnumerator()
+        {
+            return _values.GetEnumerator();
         }
 
         [Conditional("DEBUG")]
@@ -325,15 +311,30 @@ namespace System.Data.Common.Utils {
                 this.keys = keys;
             }
 
-            public TElement Current { get { return keys.Current; } }
+            public TElement Current
+            {
+                get { return keys.Current; }
+            }
 
-            public void Dispose() { keys.Dispose(); }
+            public void Dispose()
+            {
+                keys.Dispose();
+            }
 
-            object IEnumerator.Current { get { return ((IEnumerator)keys).Current; } }
+            object IEnumerator.Current
+            {
+                get { return ((IEnumerator)keys).Current; }
+            }
 
-            public bool MoveNext() { return keys.MoveNext(); }
+            public bool MoveNext()
+            {
+                return keys.MoveNext();
+            }
 
-            void System.Collections.IEnumerator.Reset() { ((System.Collections.IEnumerator)keys).Reset(); }
+            void System.Collections.IEnumerator.Reset()
+            {
+                ((System.Collections.IEnumerator)keys).Reset();
+            }
         }
 
         IEnumerator<TElement> IEnumerable<TElement>.GetEnumerator()
@@ -367,13 +368,19 @@ namespace System.Data.Common.Utils {
         {
             bool IEqualityComparer<Set<TElement>>.Equals(Set<TElement> x, Set<TElement> y)
             {
-                Debug.Assert(null != x && null != y, "comparer must be used only in context of Dictionary/HashSet");
+                Debug.Assert(
+                    null != x && null != y,
+                    "comparer must be used only in context of Dictionary/HashSet"
+                );
                 return x.SetEquals(y);
             }
 
             int IEqualityComparer<Set<TElement>>.GetHashCode(Set<TElement> obj)
             {
-                Debug.Assert(null != obj, "comparer must be used only in context of Dictionary/HashSet");
+                Debug.Assert(
+                    null != obj,
+                    "comparer must be used only in context of Dictionary/HashSet"
+                );
                 return obj.GetElementsHashCode();
             }
         }

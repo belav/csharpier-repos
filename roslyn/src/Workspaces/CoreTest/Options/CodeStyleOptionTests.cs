@@ -12,11 +12,23 @@ namespace Microsoft.CodeAnalysis.UnitTests.Options
         [Fact]
         public void WithValue_Same_Bool()
         {
-            Assert.Same(CodeStyleOption2.FalseWithSilentEnforcement.WithValue(true), CodeStyleOption2.TrueWithSilentEnforcement);
-            Assert.Same(CodeStyleOption2.TrueWithSilentEnforcement.WithValue(false), CodeStyleOption2.FalseWithSilentEnforcement);
+            Assert.Same(
+                CodeStyleOption2.FalseWithSilentEnforcement.WithValue(true),
+                CodeStyleOption2.TrueWithSilentEnforcement
+            );
+            Assert.Same(
+                CodeStyleOption2.TrueWithSilentEnforcement.WithValue(false),
+                CodeStyleOption2.FalseWithSilentEnforcement
+            );
 
-            Assert.Same(CodeStyleOption2.FalseWithSuggestionEnforcement.WithValue(true), CodeStyleOption2.TrueWithSuggestionEnforcement);
-            Assert.Same(CodeStyleOption2.TrueWithSuggestionEnforcement.WithValue(false), CodeStyleOption2.FalseWithSuggestionEnforcement);
+            Assert.Same(
+                CodeStyleOption2.FalseWithSuggestionEnforcement.WithValue(true),
+                CodeStyleOption2.TrueWithSuggestionEnforcement
+            );
+            Assert.Same(
+                CodeStyleOption2.TrueWithSuggestionEnforcement.WithValue(false),
+                CodeStyleOption2.FalseWithSuggestionEnforcement
+            );
         }
 
         [Fact]
@@ -29,7 +41,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Options
         [Fact]
         public void WithValue_Same_Enum()
         {
-            var style = new CodeStyleOption2<ExpressionBodyPreference>(ExpressionBodyPreference.WhenOnSingleLine, NotificationOption2.Error);
+            var style = new CodeStyleOption2<ExpressionBodyPreference>(
+                ExpressionBodyPreference.WhenOnSingleLine,
+                NotificationOption2.Error
+            );
             Assert.Equal(style.WithValue(ExpressionBodyPreference.WhenOnSingleLine), style);
         }
 
@@ -45,7 +60,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Options
         {
             Assert.Equal(
                 new CodeStyleOption2<bool>(true, NotificationOption2.Error).WithValue(false),
-                new CodeStyleOption2<bool>(false, NotificationOption2.Error));
+                new CodeStyleOption2<bool>(false, NotificationOption2.Error)
+            );
         }
 
         [Fact]
@@ -53,15 +69,23 @@ namespace Microsoft.CodeAnalysis.UnitTests.Options
         {
             Assert.Equal(
                 new CodeStyleOption2<int>(1, NotificationOption2.Error).WithValue(2),
-                new CodeStyleOption2<int>(2, NotificationOption2.Error));
+                new CodeStyleOption2<int>(2, NotificationOption2.Error)
+            );
         }
 
         [Fact]
         public void WithValue_Equal_Enum()
         {
             Assert.Equal(
-                new CodeStyleOption2<ExpressionBodyPreference>(ExpressionBodyPreference.Never, NotificationOption2.Error).WithValue(ExpressionBodyPreference.WhenPossible),
-                new CodeStyleOption2<ExpressionBodyPreference>(ExpressionBodyPreference.WhenPossible, NotificationOption2.Error));
+                new CodeStyleOption2<ExpressionBodyPreference>(
+                    ExpressionBodyPreference.Never,
+                    NotificationOption2.Error
+                ).WithValue(ExpressionBodyPreference.WhenPossible),
+                new CodeStyleOption2<ExpressionBodyPreference>(
+                    ExpressionBodyPreference.WhenPossible,
+                    NotificationOption2.Error
+                )
+            );
         }
 
         [Fact]
@@ -69,7 +93,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Options
         {
             Assert.Equal(
                 new CodeStyleOption2<string>("abc", NotificationOption2.Error).WithValue("xyz"),
-                new CodeStyleOption2<string>("xyz", NotificationOption2.Error));
+                new CodeStyleOption2<string>("xyz", NotificationOption2.Error)
+            );
         }
 
         /// <summary>
@@ -97,13 +122,19 @@ namespace Microsoft.CodeAnalysis.UnitTests.Options
         [Fact]
         public void ToFromXElement_EnumToBool()
         {
-            var option = new CodeStyleOption2<ExpressionBodyPreference>(ExpressionBodyPreference.Never, NotificationOption2.Silent);
+            var option = new CodeStyleOption2<ExpressionBodyPreference>(
+                ExpressionBodyPreference.Never,
+                NotificationOption2.Silent
+            );
             var serialized = option.ToXElement();
             var deserialized = CodeStyleOption2<bool>.FromXElement(serialized);
 
             Assert.False(deserialized.Value);
 
-            option = new CodeStyleOption2<ExpressionBodyPreference>(ExpressionBodyPreference.WhenPossible, NotificationOption2.Silent);
+            option = new CodeStyleOption2<ExpressionBodyPreference>(
+                ExpressionBodyPreference.WhenPossible,
+                NotificationOption2.Silent
+            );
             serialized = option.ToXElement();
             deserialized = CodeStyleOption2<bool>.FromXElement(serialized);
 
@@ -111,7 +142,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Options
 
             // This new values can't actually translate back to a bool.  So we'll just get the default
             // value for this option.
-            option = new CodeStyleOption2<ExpressionBodyPreference>(ExpressionBodyPreference.WhenOnSingleLine, NotificationOption2.Silent);
+            option = new CodeStyleOption2<ExpressionBodyPreference>(
+                ExpressionBodyPreference.WhenOnSingleLine,
+                NotificationOption2.Silent
+            );
             serialized = option.ToXElement();
             deserialized = CodeStyleOption2<bool>.FromXElement(serialized);
 

@@ -29,7 +29,10 @@ namespace System.ComponentModel.Design.Tests
         [Fact]
         public void Ctor_NullKeyword_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("keyword", () => new HelpKeywordAttribute((string)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "keyword",
+                () => new HelpKeywordAttribute((string)null)
+            );
         }
 
         [Theory]
@@ -45,7 +48,10 @@ namespace System.ComponentModel.Design.Tests
         [Fact]
         public void Ctor_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("t", () => new HelpKeywordAttribute((Type)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "t",
+                () => new HelpKeywordAttribute((Type)null)
+            );
         }
 
         [Fact]
@@ -71,7 +77,11 @@ namespace System.ComponentModel.Design.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Other_ReturnsExpected(HelpKeywordAttribute attribute, object other, bool expected)
+        public void Equals_Other_ReturnsExpected(
+            HelpKeywordAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Equals(other));
         }

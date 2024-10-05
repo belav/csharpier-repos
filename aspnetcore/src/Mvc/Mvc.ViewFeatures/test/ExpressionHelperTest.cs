@@ -8,7 +8,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 public class ExpressionHelperTest
 {
-    private readonly ConcurrentDictionary<LambdaExpression, string> _expressionTextCache = new ConcurrentDictionary<LambdaExpression, string>(LambdaExpressionComparer.Instance);
+    private readonly ConcurrentDictionary<LambdaExpression, string> _expressionTextCache =
+        new ConcurrentDictionary<LambdaExpression, string>(LambdaExpressionComparer.Instance);
 
     public static TheoryData<Expression, string> ExpressionAndTexts
     {
@@ -23,142 +24,170 @@ public class ExpressionHelperTest
             var modelType = typeof(TestModel);
 
             var data = new TheoryData<Expression, string>
+            {
                 {
-                    {
-                        (Expression<Func<TestModel, Category>>)(model => model.SelectedCategory),
-                        "SelectedCategory"
-                    },
-                    {
-                        (Expression<Func<TestModel, CategoryName>>)(model => model.SelectedCategory.CategoryName),
-                        "SelectedCategory.CategoryName"
-                    },
-                    {
-                        (Expression<Func<TestModel, int>>)(testModel => testModel.SelectedCategory.CategoryId),
-                        "SelectedCategory.CategoryId"
-                    },
-                    {
-                        (Expression<Func<LowerModel, int>>)(testModel => testModel.selectedcategory.CategoryId),
-                        "selectedcategory.CategoryId"
-                    },
-                    {
-                        (Expression<Func<TestModel, string>>)(model => model.SelectedCategory.CategoryName.MainCategory),
-                        "SelectedCategory.CategoryName.MainCategory"
-                    },
-                    {
-                        (Expression<Func<TestModel, TestModel>>)(model => model),
-                        string.Empty
-                    },
-                    {
-                        (Expression<Func<TestModel, string>>)(model => value),
-                        "value"
-                    },
-                    {
-                        (Expression<Func<TestModel, int>>)(model => models[0].SelectedCategory.CategoryId),
-                        "models[0].SelectedCategory.CategoryId"
-                    },
-                    {
-                        (Expression<Func<TestModel, string>>)(model => modelTest.Name),
-                        "modelTest.Name"
-                    },
-                    {
-                        (Expression<Func<TestModel, Type>>)(model => modelType),
-                        "modelType"
-                    },
-                    {
-                        (Expression<Func<IList<TestModel>, Category>>)(model => model[2].SelectedCategory),
-                        "[2].SelectedCategory"
-                    },
-                    {
-                        (Expression<Func<IList<TestModel>, Category>>)(model => model[i].SelectedCategory),
-                        "[3].SelectedCategory"
-                    },
-                    {
-                        (Expression<Func<IList<LowerModel>, Category>>)(model => model[i].selectedcategory),
-                        "[3].selectedcategory"
-                    },
-                    {
-                        (Expression<Func<IDictionary<string, TestModel>, string>>)(model => model[key].SelectedCategory.CategoryName.MainCategory),
-                        "[TestModel].SelectedCategory.CategoryName.MainCategory"
-                    },
-                    {
-                        (Expression<Func<TestModel, int>>)(model => model.PreferredCategories[i].CategoryId),
-                        "PreferredCategories[3].CategoryId"
-                    },
-                    {
-                        (Expression<Func<IList<TestModel>, Category>>)(model => myModels[i].SelectedCategory),
-                        "myModels[3].SelectedCategory"
-                    },
-                    {
-                        (Expression<Func<IList<TestModel>, int>>)(model => model[2].PreferredCategories[i].CategoryId),
-                        "[2].PreferredCategories[3].CategoryId"
-                    },
-                    {
-                        (Expression<Func<IList<LowerModel>, int>>)(model => model[2].preferredcategories[i].CategoryId),
-                        "[2].preferredcategories[3].CategoryId"
-                    },
-                    {
-                        (Expression<Func<IList<TestModel>, string>>)(model => model.FirstOrDefault().Name),
-                        "Name"
-                    },
-                    {
-                        (Expression<Func<IList<LowerModel>, string>>)(model => model.FirstOrDefault().name),
-                        "name"
-                    },
-                    {
-                        (Expression<Func<IList<TestModel>, string>>)(model => model.FirstOrDefault().Model),
-                        "Model"
-                    },
-                    {
-                        (Expression<Func<IList<TestModel>, int>>)(model => model.FirstOrDefault().SelectedCategory.CategoryId),
-                        "SelectedCategory.CategoryId"
-                    },
-                    {
-                        (Expression<Func<IList<TestModel>, string>>)(model => model.FirstOrDefault().SelectedCategory.CategoryName.MainCategory),
-                        "SelectedCategory.CategoryName.MainCategory"
-                    },
-                    {
-                        (Expression<Func<IList<TestModel>, int>>)(model => model.FirstOrDefault().PreferredCategories.Count),
-                        "PreferredCategories.Count"
-                    },
-                    {
-                        (Expression<Func<IList<TestModel>, int>>)(model => model.FirstOrDefault().PreferredCategories.FirstOrDefault().CategoryId),
-                        "CategoryId"
-                    },
-                    // Constants are not supported.
-                    {
-                        // Namespace never appears in expression name. "Model" there doesn't matter.
-                        (Expression<Func<TestModel, int>>)(m => Microsoft.AspNetCore.Mvc.ViewFeatures.Model.Constants.WoodstockYear),
-                        string.Empty
-                    },
-                    {
-                        // Class name never appears in expression name. "Model" there doesn't matter.
-                        (Expression<Func<TestModel, int>>)(m => Model.Constants.WoodstockYear),
-                        string.Empty
-                    },
-                    // ExpressionHelper treats static properties like other member accesses. Similarly to
-                    // RazorPage.Model, name "Model" is ignored at LHS of these expressions. This is a rare case because
-                    // static properties are the only leftmost member accesses that can reach beyond the current class.
-                    {
-                        (Expression<Func<TestModel, string>>)(m => Model.Constants.Model.Name),
-                        "Name"
-                    },
-                    {
-                        (Expression<Func<TestModel, string>>)(m => AStaticClass.Model),
-                        string.Empty
-                    },
-                    {
-                        (Expression<Func<TestModel, string>>)(m => AStaticClass.Test),
-                        "Test"
-                    },
-                    {
-                        (Expression<Func<TestModel, string>>)(m => AnotherStaticClass.Model.Name),
-                        "Name"
-                    },
-                    {
-                        (Expression<Func<TestModel, string>>)(m => AnotherStaticClass.Test.Name),
-                        "Test.Name"
-                    },
-                };
+                    (Expression<Func<TestModel, Category>>)(model => model.SelectedCategory),
+                    "SelectedCategory"
+                },
+                {
+                    (Expression<Func<TestModel, CategoryName>>)(
+                        model => model.SelectedCategory.CategoryName
+                    ),
+                    "SelectedCategory.CategoryName"
+                },
+                {
+                    (Expression<Func<TestModel, int>>)(
+                        testModel => testModel.SelectedCategory.CategoryId
+                    ),
+                    "SelectedCategory.CategoryId"
+                },
+                {
+                    (Expression<Func<LowerModel, int>>)(
+                        testModel => testModel.selectedcategory.CategoryId
+                    ),
+                    "selectedcategory.CategoryId"
+                },
+                {
+                    (Expression<Func<TestModel, string>>)(
+                        model => model.SelectedCategory.CategoryName.MainCategory
+                    ),
+                    "SelectedCategory.CategoryName.MainCategory"
+                },
+                { (Expression<Func<TestModel, TestModel>>)(model => model), string.Empty },
+                { (Expression<Func<TestModel, string>>)(model => value), "value" },
+                {
+                    (Expression<Func<TestModel, int>>)(
+                        model => models[0].SelectedCategory.CategoryId
+                    ),
+                    "models[0].SelectedCategory.CategoryId"
+                },
+                {
+                    (Expression<Func<TestModel, string>>)(model => modelTest.Name),
+                    "modelTest.Name"
+                },
+                { (Expression<Func<TestModel, Type>>)(model => modelType), "modelType" },
+                {
+                    (Expression<Func<IList<TestModel>, Category>>)(
+                        model => model[2].SelectedCategory
+                    ),
+                    "[2].SelectedCategory"
+                },
+                {
+                    (Expression<Func<IList<TestModel>, Category>>)(
+                        model => model[i].SelectedCategory
+                    ),
+                    "[3].SelectedCategory"
+                },
+                {
+                    (Expression<Func<IList<LowerModel>, Category>>)(
+                        model => model[i].selectedcategory
+                    ),
+                    "[3].selectedcategory"
+                },
+                {
+                    (Expression<Func<IDictionary<string, TestModel>, string>>)(
+                        model => model[key].SelectedCategory.CategoryName.MainCategory
+                    ),
+                    "[TestModel].SelectedCategory.CategoryName.MainCategory"
+                },
+                {
+                    (Expression<Func<TestModel, int>>)(
+                        model => model.PreferredCategories[i].CategoryId
+                    ),
+                    "PreferredCategories[3].CategoryId"
+                },
+                {
+                    (Expression<Func<IList<TestModel>, Category>>)(
+                        model => myModels[i].SelectedCategory
+                    ),
+                    "myModels[3].SelectedCategory"
+                },
+                {
+                    (Expression<Func<IList<TestModel>, int>>)(
+                        model => model[2].PreferredCategories[i].CategoryId
+                    ),
+                    "[2].PreferredCategories[3].CategoryId"
+                },
+                {
+                    (Expression<Func<IList<LowerModel>, int>>)(
+                        model => model[2].preferredcategories[i].CategoryId
+                    ),
+                    "[2].preferredcategories[3].CategoryId"
+                },
+                {
+                    (Expression<Func<IList<TestModel>, string>>)(
+                        model => model.FirstOrDefault().Name
+                    ),
+                    "Name"
+                },
+                {
+                    (Expression<Func<IList<LowerModel>, string>>)(
+                        model => model.FirstOrDefault().name
+                    ),
+                    "name"
+                },
+                {
+                    (Expression<Func<IList<TestModel>, string>>)(
+                        model => model.FirstOrDefault().Model
+                    ),
+                    "Model"
+                },
+                {
+                    (Expression<Func<IList<TestModel>, int>>)(
+                        model => model.FirstOrDefault().SelectedCategory.CategoryId
+                    ),
+                    "SelectedCategory.CategoryId"
+                },
+                {
+                    (Expression<Func<IList<TestModel>, string>>)(
+                        model => model.FirstOrDefault().SelectedCategory.CategoryName.MainCategory
+                    ),
+                    "SelectedCategory.CategoryName.MainCategory"
+                },
+                {
+                    (Expression<Func<IList<TestModel>, int>>)(
+                        model => model.FirstOrDefault().PreferredCategories.Count
+                    ),
+                    "PreferredCategories.Count"
+                },
+                {
+                    (Expression<Func<IList<TestModel>, int>>)(
+                        model =>
+                            model.FirstOrDefault().PreferredCategories.FirstOrDefault().CategoryId
+                    ),
+                    "CategoryId"
+                },
+                // Constants are not supported.
+                {
+                    // Namespace never appears in expression name. "Model" there doesn't matter.
+                    (Expression<Func<TestModel, int>>)(
+                        m => Microsoft.AspNetCore.Mvc.ViewFeatures.Model.Constants.WoodstockYear
+                    ),
+                    string.Empty
+                },
+                {
+                    // Class name never appears in expression name. "Model" there doesn't matter.
+                    (Expression<Func<TestModel, int>>)(m => Model.Constants.WoodstockYear),
+                    string.Empty
+                },
+                // ExpressionHelper treats static properties like other member accesses. Similarly to
+                // RazorPage.Model, name "Model" is ignored at LHS of these expressions. This is a rare case because
+                // static properties are the only leftmost member accesses that can reach beyond the current class.
+                {
+                    (Expression<Func<TestModel, string>>)(m => Model.Constants.Model.Name),
+                    "Name"
+                },
+                { (Expression<Func<TestModel, string>>)(m => AStaticClass.Model), string.Empty },
+                { (Expression<Func<TestModel, string>>)(m => AStaticClass.Test), "Test" },
+                {
+                    (Expression<Func<TestModel, string>>)(m => AnotherStaticClass.Model.Name),
+                    "Name"
+                },
+                {
+                    (Expression<Func<TestModel, string>>)(m => AnotherStaticClass.Test.Name),
+                    "Test.Name"
+                },
+            };
 
             {
                 // Nearly impossible in a .cshtml file because model is a keyword.
@@ -171,7 +200,10 @@ public class ExpressionHelperTest
                 var Model = new TestModel();
                 data.Add((Expression<Func<TestModel, TestModel>>)(m => Model), string.Empty);
                 data.Add((Expression<Func<TestModel, TestModel>>)(model => Model), string.Empty);
-                data.Add((Expression<Func<TestModel, Category>>)(m => Model.SelectedCategory), "SelectedCategory");
+                data.Add(
+                    (Expression<Func<TestModel, Category>>)(m => Model.SelectedCategory),
+                    "SelectedCategory"
+                );
             }
 
             return data;
@@ -186,15 +218,21 @@ public class ExpressionHelperTest
             var myModel = new TestModel();
 
             return new TheoryData<Expression>
-                {
-                    (Expression<Func<TestModel, Category>>)(model => model.SelectedCategory),
-                    (Expression<Func<TestModel, CategoryName>>)(model => model.SelectedCategory.CategoryName),
-                    (Expression<Func<TestModel, int>>)(testModel => testModel.SelectedCategory.CategoryId),
-                    (Expression<Func<TestModel, string>>)(model => model.SelectedCategory.CategoryName.MainCategory),
-                    (Expression<Func<TestModel, string>>)(testModel => key),
-                    (Expression<Func<TestModel, TestModel>>)(m => m),
-                    (Expression<Func<TestModel, Category>>)(m => myModel.SelectedCategory),
-                };
+            {
+                (Expression<Func<TestModel, Category>>)(model => model.SelectedCategory),
+                (Expression<Func<TestModel, CategoryName>>)(
+                    model => model.SelectedCategory.CategoryName
+                ),
+                (Expression<Func<TestModel, int>>)(
+                    testModel => testModel.SelectedCategory.CategoryId
+                ),
+                (Expression<Func<TestModel, string>>)(
+                    model => model.SelectedCategory.CategoryName.MainCategory
+                ),
+                (Expression<Func<TestModel, string>>)(testModel => key),
+                (Expression<Func<TestModel, TestModel>>)(m => m),
+                (Expression<Func<TestModel, Category>>)(m => myModel.SelectedCategory),
+            };
         }
     }
 
@@ -207,13 +245,21 @@ public class ExpressionHelperTest
             var myModels = new List<TestModel>();
 
             return new TheoryData<Expression>
-                {
-                    (Expression<Func<IList<TestModel>, Category>>)(model => model[2].SelectedCategory),
-                    (Expression<Func<IList<TestModel>, Category>>)(model => myModels[i].SelectedCategory),
-                    (Expression<Func<IList<TestModel>, CategoryName>>)(testModel => testModel[i].SelectedCategory.CategoryName),
-                    (Expression<Func<TestModel, int>>)(model => model.PreferredCategories[i].CategoryId),
-                    (Expression<Func<IDictionary<string, TestModel>, string>>)(model => model[key].SelectedCategory.CategoryName.MainCategory),
-                };
+            {
+                (Expression<Func<IList<TestModel>, Category>>)(model => model[2].SelectedCategory),
+                (Expression<Func<IList<TestModel>, Category>>)(
+                    model => myModels[i].SelectedCategory
+                ),
+                (Expression<Func<IList<TestModel>, CategoryName>>)(
+                    testModel => testModel[i].SelectedCategory.CategoryName
+                ),
+                (Expression<Func<TestModel, int>>)(
+                    model => model.PreferredCategories[i].CategoryId
+                ),
+                (Expression<Func<IDictionary<string, TestModel>, string>>)(
+                    model => model[key].SelectedCategory.CategoryName.MainCategory
+                ),
+            };
         }
     }
 
@@ -225,17 +271,21 @@ public class ExpressionHelperTest
             var j = 3;
 
             return new TheoryData<Expression>
-                {
-                    // Indexers that have multiple arguments.
-                    (Expression<Func<TestModel[][], string>>)(model => model[23][3].Name),
-                    (Expression<Func<TestModel[][], string>>)(model => model[i][3].Name),
-                    (Expression<Func<TestModel[][], string>>)(model => model[23][j].Name),
-                    (Expression<Func<TestModel[][], string>>)(model => model[i][j].Name),
-                    // Calls that aren't indexers.
-                    (Expression<Func<IList<TestModel>, string>>)(model => model.FirstOrDefault().Name),
-                    (Expression<Func<IList<TestModel>, string>>)(model => model.FirstOrDefault().SelectedCategory.CategoryName.MainCategory),
-                    (Expression<Func<IList<TestModel>, int>>)(model => model.FirstOrDefault().PreferredCategories.FirstOrDefault().CategoryId),
-                };
+            {
+                // Indexers that have multiple arguments.
+                (Expression<Func<TestModel[][], string>>)(model => model[23][3].Name),
+                (Expression<Func<TestModel[][], string>>)(model => model[i][3].Name),
+                (Expression<Func<TestModel[][], string>>)(model => model[23][j].Name),
+                (Expression<Func<TestModel[][], string>>)(model => model[i][j].Name),
+                // Calls that aren't indexers.
+                (Expression<Func<IList<TestModel>, string>>)(model => model.FirstOrDefault().Name),
+                (Expression<Func<IList<TestModel>, string>>)(
+                    model => model.FirstOrDefault().SelectedCategory.CategoryName.MainCategory
+                ),
+                (Expression<Func<IList<TestModel>, int>>)(
+                    model => model.FirstOrDefault().PreferredCategories.FirstOrDefault().CategoryId
+                ),
+            };
         }
     }
 
@@ -247,39 +297,51 @@ public class ExpressionHelperTest
             var Model = "Test";
 
             return new TheoryData<Expression, Expression>
+            {
                 {
-                    {
-                        (Expression<Func<TestModel, Category>>)(model => model.SelectedCategory),
-                        (Expression<Func<TestModel, Category>>)(model => model.SelectedCategory)
-                    },
-                    {
-                        (Expression<Func<TestModel, CategoryName>>)(model => model.SelectedCategory.CategoryName),
-                        (Expression<Func<TestModel, CategoryName>>)(model => model.SelectedCategory.CategoryName)
-                    },
-                    {
-                        (Expression<Func<TestModel, int>>)(testModel => testModel.SelectedCategory.CategoryId),
-                        (Expression<Func<TestModel, int>>)(testModel => testModel.SelectedCategory.CategoryId)
-                    },
-                    {
-                        (Expression<Func<TestModel, string>>)(model => model.SelectedCategory.CategoryName.MainCategory),
-                        (Expression<Func<TestModel, string>>)(model => model.SelectedCategory.CategoryName.MainCategory)
-                    },
-                    {
-                        (Expression<Func<TestModel, TestModel>>)(model => model),
-                        (Expression<Func<TestModel, TestModel>>)(m => m)
-                    },
-                    {
-                        (Expression<Func<TestModel, string>>)(model => value),
-                        (Expression<Func<TestModel, string>>)(m => value)
-                    },
-                    {
-                        // These two expressions are not actually equivalent. However ExpressionHelper returns
-                        // string.Empty for these two expressions and hence they are considered as equivalent by the
-                        // cache.
-                        (Expression<Func<TestModel, string>>)(m => Model),
-                        (Expression<Func<TestModel, TestModel>>)(m => m)
-                    },
-                };
+                    (Expression<Func<TestModel, Category>>)(model => model.SelectedCategory),
+                    (Expression<Func<TestModel, Category>>)(model => model.SelectedCategory)
+                },
+                {
+                    (Expression<Func<TestModel, CategoryName>>)(
+                        model => model.SelectedCategory.CategoryName
+                    ),
+                    (Expression<Func<TestModel, CategoryName>>)(
+                        model => model.SelectedCategory.CategoryName
+                    )
+                },
+                {
+                    (Expression<Func<TestModel, int>>)(
+                        testModel => testModel.SelectedCategory.CategoryId
+                    ),
+                    (Expression<Func<TestModel, int>>)(
+                        testModel => testModel.SelectedCategory.CategoryId
+                    )
+                },
+                {
+                    (Expression<Func<TestModel, string>>)(
+                        model => model.SelectedCategory.CategoryName.MainCategory
+                    ),
+                    (Expression<Func<TestModel, string>>)(
+                        model => model.SelectedCategory.CategoryName.MainCategory
+                    )
+                },
+                {
+                    (Expression<Func<TestModel, TestModel>>)(model => model),
+                    (Expression<Func<TestModel, TestModel>>)(m => m)
+                },
+                {
+                    (Expression<Func<TestModel, string>>)(model => value),
+                    (Expression<Func<TestModel, string>>)(m => value)
+                },
+                {
+                    // These two expressions are not actually equivalent. However ExpressionHelper returns
+                    // string.Empty for these two expressions and hence they are considered as equivalent by the
+                    // cache.
+                    (Expression<Func<TestModel, string>>)(m => Model),
+                    (Expression<Func<TestModel, TestModel>>)(m => m)
+                },
+            };
         }
     }
 
@@ -293,78 +355,107 @@ public class ExpressionHelperTest
             var myModel = new TestModel();
 
             return new TheoryData<Expression, Expression>
+            {
                 {
-                    {
-                        (Expression<Func<TestModel, Category>>)(model => model.SelectedCategory),
-                        (Expression<Func<TestModel, CategoryName>>)(model => model.SelectedCategory.CategoryName)
-                    },
-                    {
-                        (Expression<Func<TestModel, CategoryName>>)(model => model.SelectedCategory.CategoryName),
-                        (Expression<Func<LowerModel, CategoryName>>)(model => model.selectedcategory.CategoryName)
-                    },
-                    {
-                        (Expression<Func<TestModel, string>>)(model => model.Model),
-                        (Expression<Func<TestModel, string>>)(model => model.Name)
-                    },
-                    {
-                        (Expression<Func<TestModel, string>>)(model => model.Model),
-                        (Expression<Func<LowerModel, string>>)(model => model.model)
-                    },
-                    {
-                        (Expression<Func<TestModel, string>>)(model => model.Name),
-                        (Expression<Func<LowerModel, string>>)(model => model.name)
-                    },
-                    {
-                        (Expression<Func<TestModel, CategoryName>>)(model => model.SelectedCategory.CategoryName),
-                        (Expression<Func<TestModel, string>>)(model => value)
-                    },
-                    {
-                        (Expression<Func<TestModel, string>>)(testModel => testModel.SelectedCategory.CategoryName.MainCategory),
-                        (Expression<Func<TestModel, string>>)(testModel => value)
-                    },
-                    {
-                        (Expression<Func<IList<TestModel>, Category>>)(model => model[2].SelectedCategory),
-                        (Expression<Func<TestModel, string>>)(model => model.SelectedCategory.CategoryName.MainCategory)
-                    },
-                    {
-                        (Expression<Func<IList<TestModel>, Category>>)(model => model[2].SelectedCategory),
-                        (Expression<Func<IList<LowerModel>, Category>>)(model => model[2].selectedcategory)
-                    },
-                    {
-                        (Expression<Func<TestModel, int>>)(testModel => testModel.SelectedCategory.CategoryId),
-                        (Expression<Func<TestModel, Category>>)(model => model.SelectedCategory)
-                    },
-                    {
-                        (Expression<Func<IDictionary<string, TestModel>, string>>)(model => model[key].SelectedCategory.CategoryName.MainCategory),
-                        (Expression<Func<TestModel, Category>>)(model => model.SelectedCategory)
-                    },
-                    {
-                        (Expression<Func<IDictionary<string, TestModel>, string>>)(model => model[key].SelectedCategory.CategoryName.MainCategory),
-                        (Expression<Func<IDictionary<string, LowerModel>, string>>)(model => model[key].selectedcategory.CategoryName.MainCategory)
-                    },
-                    {
-                        (Expression<Func<TestModel, string>>)(m => Model),
-                        (Expression<Func<TestModel, string>>)(m => m.Model)
-                    },
-                    {
-                        (Expression<Func<TestModel, TestModel>>)(m => m),
-                        (Expression<Func<TestModel, string>>)(m => m.Model)
-                    },
-                    {
-                        (Expression<Func<TestModel, string>>)(m => myModel.Name),
-                        (Expression<Func<TestModel, string>>)(m => m.Name)
-                    },
-                    {
-                        (Expression<Func<TestModel, string>>)(m => key),
-                        (Expression<Func<TestModel, string>>)(m => value)
-                    },
-                };
+                    (Expression<Func<TestModel, Category>>)(model => model.SelectedCategory),
+                    (Expression<Func<TestModel, CategoryName>>)(
+                        model => model.SelectedCategory.CategoryName
+                    )
+                },
+                {
+                    (Expression<Func<TestModel, CategoryName>>)(
+                        model => model.SelectedCategory.CategoryName
+                    ),
+                    (Expression<Func<LowerModel, CategoryName>>)(
+                        model => model.selectedcategory.CategoryName
+                    )
+                },
+                {
+                    (Expression<Func<TestModel, string>>)(model => model.Model),
+                    (Expression<Func<TestModel, string>>)(model => model.Name)
+                },
+                {
+                    (Expression<Func<TestModel, string>>)(model => model.Model),
+                    (Expression<Func<LowerModel, string>>)(model => model.model)
+                },
+                {
+                    (Expression<Func<TestModel, string>>)(model => model.Name),
+                    (Expression<Func<LowerModel, string>>)(model => model.name)
+                },
+                {
+                    (Expression<Func<TestModel, CategoryName>>)(
+                        model => model.SelectedCategory.CategoryName
+                    ),
+                    (Expression<Func<TestModel, string>>)(model => value)
+                },
+                {
+                    (Expression<Func<TestModel, string>>)(
+                        testModel => testModel.SelectedCategory.CategoryName.MainCategory
+                    ),
+                    (Expression<Func<TestModel, string>>)(testModel => value)
+                },
+                {
+                    (Expression<Func<IList<TestModel>, Category>>)(
+                        model => model[2].SelectedCategory
+                    ),
+                    (Expression<Func<TestModel, string>>)(
+                        model => model.SelectedCategory.CategoryName.MainCategory
+                    )
+                },
+                {
+                    (Expression<Func<IList<TestModel>, Category>>)(
+                        model => model[2].SelectedCategory
+                    ),
+                    (Expression<Func<IList<LowerModel>, Category>>)(
+                        model => model[2].selectedcategory
+                    )
+                },
+                {
+                    (Expression<Func<TestModel, int>>)(
+                        testModel => testModel.SelectedCategory.CategoryId
+                    ),
+                    (Expression<Func<TestModel, Category>>)(model => model.SelectedCategory)
+                },
+                {
+                    (Expression<Func<IDictionary<string, TestModel>, string>>)(
+                        model => model[key].SelectedCategory.CategoryName.MainCategory
+                    ),
+                    (Expression<Func<TestModel, Category>>)(model => model.SelectedCategory)
+                },
+                {
+                    (Expression<Func<IDictionary<string, TestModel>, string>>)(
+                        model => model[key].SelectedCategory.CategoryName.MainCategory
+                    ),
+                    (Expression<Func<IDictionary<string, LowerModel>, string>>)(
+                        model => model[key].selectedcategory.CategoryName.MainCategory
+                    )
+                },
+                {
+                    (Expression<Func<TestModel, string>>)(m => Model),
+                    (Expression<Func<TestModel, string>>)(m => m.Model)
+                },
+                {
+                    (Expression<Func<TestModel, TestModel>>)(m => m),
+                    (Expression<Func<TestModel, string>>)(m => m.Model)
+                },
+                {
+                    (Expression<Func<TestModel, string>>)(m => myModel.Name),
+                    (Expression<Func<TestModel, string>>)(m => m.Name)
+                },
+                {
+                    (Expression<Func<TestModel, string>>)(m => key),
+                    (Expression<Func<TestModel, string>>)(m => value)
+                },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(ExpressionAndTexts))]
-    public void GetExpressionText_ReturnsExpectedExpressionText(LambdaExpression expression, string expressionText)
+    public void GetExpressionText_ReturnsExpectedExpressionText(
+        LambdaExpression expression,
+        string expressionText
+    )
     {
         // Act
         var text = ExpressionHelper.GetExpressionText(expression, _expressionTextCache);
@@ -390,7 +481,9 @@ public class ExpressionHelperTest
     [Theory]
     [MemberData(nameof(IndexerExpressions))]
     [MemberData(nameof(UnsupportedExpressions))]
-    public void GetExpressionText_DoesNotCacheIndexerOrUnsupportedExpression(LambdaExpression expression)
+    public void GetExpressionText_DoesNotCacheIndexerOrUnsupportedExpression(
+        LambdaExpression expression
+    )
     {
         // Act - 1
         var text1 = ExpressionHelper.GetExpressionText(expression, _expressionTextCache);
@@ -405,7 +498,10 @@ public class ExpressionHelperTest
 
     [Theory]
     [MemberData(nameof(EquivalentExpressions))]
-    public void GetExpressionText_CacheEquivalentExpressions(LambdaExpression expression1, LambdaExpression expression2)
+    public void GetExpressionText_CacheEquivalentExpressions(
+        LambdaExpression expression1,
+        LambdaExpression expression2
+    )
     {
         // Act - 1
         var text1 = ExpressionHelper.GetExpressionText(expression1, _expressionTextCache);
@@ -419,7 +515,10 @@ public class ExpressionHelperTest
 
     [Theory]
     [MemberData(nameof(NonEquivalentExpressions))]
-    public void GetExpressionText_CheckNonEquivalentExpressions(LambdaExpression expression1, LambdaExpression expression2)
+    public void GetExpressionText_CheckNonEquivalentExpressions(
+        LambdaExpression expression1,
+        LambdaExpression expression2
+    )
     {
         // Act - 1
         var text1 = ExpressionHelper.GetExpressionText(expression1, _expressionTextCache);
@@ -445,8 +544,11 @@ public class ExpressionHelperTest
 
             // Act i
             var result = ExpressionHelper.GetExpressionText(
-                (Expression<Func<List<TestModel>, int>>)(m => collection[i].SelectedCategory.CategoryId),
-                _expressionTextCache);
+                (Expression<Func<List<TestModel>, int>>)(
+                    m => collection[i].SelectedCategory.CategoryId
+                ),
+                _expressionTextCache
+            );
 
             // Assert i
             Assert.Equal(expectedText, result);

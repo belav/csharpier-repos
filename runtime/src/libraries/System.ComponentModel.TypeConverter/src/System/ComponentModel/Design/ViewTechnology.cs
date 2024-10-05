@@ -18,7 +18,9 @@ namespace System.ComponentModel.Design
         /// COM2 interface technologies such as doc objects and ActiveX
         /// controls.
         /// </summary>
-        [Obsolete("ViewTechnology.Passthrough has been deprecated. Use ViewTechnology.Default instead.")]
+        [Obsolete(
+            "ViewTechnology.Passthrough has been deprecated. Use ViewTechnology.Default instead."
+        )]
         Passthrough = 0,
 
         /// <summary>
@@ -26,7 +28,9 @@ namespace System.ComponentModel.Design
         /// a Windows Forms control object. The designer host will fill the
         /// development environment's document window with this control.
         /// </summary>
-        [Obsolete("ViewTechnology.WindowsForms has been deprecated. Use ViewTechnology.Default instead.")]
+        [Obsolete(
+            "ViewTechnology.WindowsForms has been deprecated. Use ViewTechnology.Default instead."
+        )]
         WindowsForms = 1,
 
         /// <summary>
@@ -37,6 +41,6 @@ namespace System.ComponentModel.Design
         /// view object for the Windows Forms designer is a Control instance, while the
         /// default view object for the Avalon designer is an Element instance.
         /// </summary>
-        Default = 2
+        Default = 2,
     }
 }

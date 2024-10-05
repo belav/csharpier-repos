@@ -51,11 +51,17 @@ namespace System.Text.Json.Tests.SourceGenRegressionTests.Net70
 
         public class CustomConverter : JsonConverter<ClassWithCustomConverter>
         {
-            public override ClassWithCustomConverter? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-                => new ClassWithCustomConverter { Value = reader.GetInt32() - 1 };
+            public override ClassWithCustomConverter? Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            ) => new ClassWithCustomConverter { Value = reader.GetInt32() - 1 };
 
-            public override void Write(Utf8JsonWriter writer, ClassWithCustomConverter value, JsonSerializerOptions options)
-                => writer.WriteNumberValue(value.Value + 1);
+            public override void Write(
+                Utf8JsonWriter writer,
+                ClassWithCustomConverter value,
+                JsonSerializerOptions options
+            ) => writer.WriteNumberValue(value.Value + 1);
         }
     }
 }

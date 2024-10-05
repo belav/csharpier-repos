@@ -6,7 +6,8 @@
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
 public class FakeRelationalCommandDiagnosticsLogger
-    : FakeDiagnosticsLogger<DbLoggerCategory.Database.Command>, IRelationalCommandDiagnosticsLogger
+    : FakeDiagnosticsLogger<DbLoggerCategory.Database.Command>,
+        IRelationalCommandDiagnosticsLogger
 {
     public InterceptionResult<DbCommand> CommandCreating(
         IRelationalConnection connection,
@@ -15,8 +16,8 @@ public class FakeRelationalCommandDiagnosticsLogger
         Guid commandId,
         Guid connectionId,
         DateTimeOffset startTime,
-        CommandSource commandSource)
-        => default;
+        CommandSource commandSource
+    ) => default;
 
     public DbCommand CommandCreated(
         IRelationalConnection connection,
@@ -27,8 +28,8 @@ public class FakeRelationalCommandDiagnosticsLogger
         Guid connectionId,
         DateTimeOffset startTime,
         TimeSpan duration,
-        CommandSource commandSource)
-        => command;
+        CommandSource commandSource
+    ) => command;
 
     public DbCommand CommandInitialized(
         IRelationalConnection connection,
@@ -39,8 +40,8 @@ public class FakeRelationalCommandDiagnosticsLogger
         Guid connectionId,
         DateTimeOffset startTime,
         TimeSpan duration,
-        CommandSource commandSource)
-        => command;
+        CommandSource commandSource
+    ) => command;
 
     public InterceptionResult<DbDataReader> CommandReaderExecuting(
         IRelationalConnection connection,
@@ -49,8 +50,8 @@ public class FakeRelationalCommandDiagnosticsLogger
         Guid commandId,
         Guid connectionId,
         DateTimeOffset startTime,
-        CommandSource commandSource)
-        => default;
+        CommandSource commandSource
+    ) => default;
 
     public InterceptionResult<object> CommandScalarExecuting(
         IRelationalConnection connection,
@@ -59,8 +60,8 @@ public class FakeRelationalCommandDiagnosticsLogger
         Guid commandId,
         Guid connectionId,
         DateTimeOffset startTime,
-        CommandSource commandSource)
-        => default;
+        CommandSource commandSource
+    ) => default;
 
     public InterceptionResult<int> CommandNonQueryExecuting(
         IRelationalConnection connection,
@@ -69,8 +70,8 @@ public class FakeRelationalCommandDiagnosticsLogger
         Guid commandId,
         Guid connectionId,
         DateTimeOffset startTime,
-        CommandSource commandSource)
-        => default;
+        CommandSource commandSource
+    ) => default;
 
     public ValueTask<InterceptionResult<DbDataReader>> CommandReaderExecutingAsync(
         IRelationalConnection connection,
@@ -80,8 +81,8 @@ public class FakeRelationalCommandDiagnosticsLogger
         Guid connectionId,
         DateTimeOffset startTime,
         CommandSource commandSource,
-        CancellationToken cancellationToken = default)
-        => default;
+        CancellationToken cancellationToken = default
+    ) => default;
 
     public ValueTask<InterceptionResult<object>> CommandScalarExecutingAsync(
         IRelationalConnection connection,
@@ -91,8 +92,8 @@ public class FakeRelationalCommandDiagnosticsLogger
         Guid connectionId,
         DateTimeOffset startTime,
         CommandSource commandSource,
-        CancellationToken cancellationToken = default)
-        => default;
+        CancellationToken cancellationToken = default
+    ) => default;
 
     public ValueTask<InterceptionResult<int>> CommandNonQueryExecutingAsync(
         IRelationalConnection connection,
@@ -102,8 +103,8 @@ public class FakeRelationalCommandDiagnosticsLogger
         Guid connectionId,
         DateTimeOffset startTime,
         CommandSource commandSource,
-        CancellationToken cancellationToken = default)
-        => default;
+        CancellationToken cancellationToken = default
+    ) => default;
 
     public DbDataReader CommandReaderExecuted(
         IRelationalConnection connection,
@@ -114,8 +115,8 @@ public class FakeRelationalCommandDiagnosticsLogger
         DbDataReader methodResult,
         DateTimeOffset startTime,
         TimeSpan duration,
-        CommandSource commandSource)
-        => methodResult;
+        CommandSource commandSource
+    ) => methodResult;
 
     public object? CommandScalarExecuted(
         IRelationalConnection connection,
@@ -126,8 +127,8 @@ public class FakeRelationalCommandDiagnosticsLogger
         object? methodResult,
         DateTimeOffset startTime,
         TimeSpan duration,
-        CommandSource commandSource)
-        => methodResult;
+        CommandSource commandSource
+    ) => methodResult;
 
     public int CommandNonQueryExecuted(
         IRelationalConnection connection,
@@ -138,8 +139,8 @@ public class FakeRelationalCommandDiagnosticsLogger
         int methodResult,
         DateTimeOffset startTime,
         TimeSpan duration,
-        CommandSource commandSource)
-        => methodResult;
+        CommandSource commandSource
+    ) => methodResult;
 
     public ValueTask<DbDataReader> CommandReaderExecutedAsync(
         IRelationalConnection connection,
@@ -151,8 +152,8 @@ public class FakeRelationalCommandDiagnosticsLogger
         DateTimeOffset startTime,
         TimeSpan duration,
         CommandSource commandSource,
-        CancellationToken cancellationToken = default)
-        => new(methodResult);
+        CancellationToken cancellationToken = default
+    ) => new(methodResult);
 
     public ValueTask<object?> CommandScalarExecutedAsync(
         IRelationalConnection connection,
@@ -164,8 +165,8 @@ public class FakeRelationalCommandDiagnosticsLogger
         DateTimeOffset startTime,
         TimeSpan duration,
         CommandSource commandSource,
-        CancellationToken cancellationToken = default)
-        => new(methodResult);
+        CancellationToken cancellationToken = default
+    ) => new(methodResult);
 
     public ValueTask<int> CommandNonQueryExecutedAsync(
         IRelationalConnection connection,
@@ -177,8 +178,8 @@ public class FakeRelationalCommandDiagnosticsLogger
         DateTimeOffset startTime,
         TimeSpan duration,
         CommandSource commandSource,
-        CancellationToken cancellationToken = default)
-        => new(methodResult);
+        CancellationToken cancellationToken = default
+    ) => new(methodResult);
 
     public void CommandException(
         IRelationalConnection connection,
@@ -190,9 +191,8 @@ public class FakeRelationalCommandDiagnosticsLogger
         Exception exception,
         DateTimeOffset startTime,
         TimeSpan duration,
-        CommandSource commandSource)
-    {
-    }
+        CommandSource commandSource
+    ) { }
 
     public Task CommandExceptionAsync(
         IRelationalConnection connection,
@@ -205,8 +205,8 @@ public class FakeRelationalCommandDiagnosticsLogger
         DateTimeOffset startTime,
         TimeSpan duration,
         CommandSource commandSource,
-        CancellationToken cancellationToken = default)
-        => Task.CompletedTask;
+        CancellationToken cancellationToken = default
+    ) => Task.CompletedTask;
 
     public void CommandError(
         IRelationalConnection connection,
@@ -218,9 +218,8 @@ public class FakeRelationalCommandDiagnosticsLogger
         Exception exception,
         DateTimeOffset startTime,
         TimeSpan duration,
-        CommandSource commandSource)
-    {
-    }
+        CommandSource commandSource
+    ) { }
 
     public Task CommandErrorAsync(
         IRelationalConnection connection,
@@ -233,8 +232,8 @@ public class FakeRelationalCommandDiagnosticsLogger
         DateTimeOffset startTime,
         TimeSpan duration,
         CommandSource commandSource,
-        CancellationToken cancellationToken = default)
-        => Task.CompletedTask;
+        CancellationToken cancellationToken = default
+    ) => Task.CompletedTask;
 
     public void CommandCanceled(
         IRelationalConnection connection,
@@ -245,9 +244,8 @@ public class FakeRelationalCommandDiagnosticsLogger
         Guid connectionId,
         DateTimeOffset startTime,
         TimeSpan duration,
-        CommandSource commandSource)
-    {
-    }
+        CommandSource commandSource
+    ) { }
 
     public Task CommandCanceledAsync(
         IRelationalConnection connection,
@@ -259,8 +257,8 @@ public class FakeRelationalCommandDiagnosticsLogger
         DateTimeOffset startTime,
         TimeSpan duration,
         CommandSource commandSource,
-        CancellationToken cancellationToken = default)
-        => Task.CompletedTask;
+        CancellationToken cancellationToken = default
+    ) => Task.CompletedTask;
 
     public InterceptionResult DataReaderDisposing(
         IRelationalConnection connection,
@@ -270,8 +268,8 @@ public class FakeRelationalCommandDiagnosticsLogger
         int recordsAffected,
         int readCount,
         DateTimeOffset startTime,
-        TimeSpan duration)
-        => default;
+        TimeSpan duration
+    ) => default;
 
     public InterceptionResult DataReaderClosing(
         IRelationalConnection connection,
@@ -280,8 +278,8 @@ public class FakeRelationalCommandDiagnosticsLogger
         Guid commandId,
         int recordsAffected,
         int readCount,
-        DateTimeOffset startTime)
-        => default;
+        DateTimeOffset startTime
+    ) => default;
 
     public ValueTask<InterceptionResult> DataReaderClosingAsync(
         IRelationalConnection connection,
@@ -290,18 +288,14 @@ public class FakeRelationalCommandDiagnosticsLogger
         Guid commandId,
         int recordsAffected,
         int readCount,
-        DateTimeOffset startTime)
-        => default;
+        DateTimeOffset startTime
+    ) => default;
 
-    public bool ShouldLogCommandCreate(DateTimeOffset now)
-        => true;
+    public bool ShouldLogCommandCreate(DateTimeOffset now) => true;
 
-    public bool ShouldLogCommandExecute(DateTimeOffset now)
-        => true;
+    public bool ShouldLogCommandExecute(DateTimeOffset now) => true;
 
-    public bool ShouldLogDataReaderClose(DateTimeOffset now)
-        => true;
+    public bool ShouldLogDataReaderClose(DateTimeOffset now) => true;
 
-    public bool ShouldLogDataReaderDispose(DateTimeOffset now)
-        => true;
+    public bool ShouldLogDataReaderDispose(DateTimeOffset now) => true;
 }

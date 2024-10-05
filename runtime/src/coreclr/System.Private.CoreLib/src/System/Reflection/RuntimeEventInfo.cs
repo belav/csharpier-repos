@@ -25,7 +25,12 @@ namespace System.Reflection
         #endregion
 
         #region Constructor
-        internal RuntimeEventInfo(int tkEvent, RuntimeType declaredType, RuntimeTypeCache reflectedTypeCache, out bool isPrivate)
+        internal RuntimeEventInfo(
+            int tkEvent,
+            RuntimeType declaredType,
+            RuntimeTypeCache reflectedTypeCache,
+            out bool isPrivate
+        )
         {
             Debug.Assert(declaredType != null);
             Debug.Assert(reflectedTypeCache != null);
@@ -37,24 +42,33 @@ namespace System.Reflection
             m_reflectedTypeCache = reflectedTypeCache;
             m_declaringType = declaredType;
 
-
             RuntimeType reflectedType = reflectedTypeCache.GetRuntimeType();
 
             scope.GetEventProps(tkEvent, out m_utf8name, out m_flags);
 
-            Associates.AssignAssociates(scope, tkEvent, declaredType, reflectedType,
-                out m_addMethod, out m_removeMethod, out m_raiseMethod,
-                out _, out _, out m_otherMethod, out isPrivate, out m_bindingFlags);
+            Associates.AssignAssociates(
+                scope,
+                tkEvent,
+                declaredType,
+                reflectedType,
+                out m_addMethod,
+                out m_removeMethod,
+                out m_raiseMethod,
+                out _,
+                out _,
+                out m_otherMethod,
+                out isPrivate,
+                out m_bindingFlags
+            );
         }
         #endregion
 
         #region Internal Members
         internal override bool CacheEquals(object? o)
         {
-            return
-                o is RuntimeEventInfo m &&
-                m.m_token == m_token &&
-                ReferenceEquals(m_declaringType, m.m_declaringType);
+            return o is RuntimeEventInfo m
+                && m.m_token == m_token
+                && ReferenceEquals(m_declaringType, m.m_declaringType);
         }
 
         internal BindingFlags BindingFlags => m_bindingFlags;
@@ -64,8 +78,7 @@ namespace System.Reflection
         public override string ToString()
         {
             ReadOnlySpan<ParameterInfo> parameters;
-            if (m_addMethod == null ||
-                (parameters = m_addMethod.GetParametersAsSpan()).Length == 0)
+            if (m_addMethod == null || (parameters = m_addMethod.GetParametersAsSpan()).Length == 0)
             {
                 throw new InvalidOperationException(SR.InvalidOperation_NoPublicAddMethod);
             }
@@ -74,15 +87,23 @@ namespace System.Reflection
         }
 
         public override bool Equals(object? obj) =>
-            ReferenceEquals(this, obj) ||
-            (MetadataUpdater.IsSupported &&
-                obj is RuntimeEventInfo ei &&
-                ei.m_token == m_token &&
-                ReferenceEquals(ei.m_declaringType, m_declaringType) &&
-                ReferenceEquals(ei.m_reflectedTypeCache.GetRuntimeType(), m_reflectedTypeCache.GetRuntimeType()));
+            ReferenceEquals(this, obj)
+            || (
+                MetadataUpdater.IsSupported
+                && obj is RuntimeEventInfo ei
+                && ei.m_token == m_token
+                && ReferenceEquals(ei.m_declaringType, m_declaringType)
+                && ReferenceEquals(
+                    ei.m_reflectedTypeCache.GetRuntimeType(),
+                    m_reflectedTypeCache.GetRuntimeType()
+                )
+            );
 
         public override int GetHashCode() =>
-            HashCode.Combine(m_token.GetHashCode(), m_declaringType.GetUnderlyingNativeHandle().GetHashCode());
+            HashCode.Combine(
+                m_token.GetHashCode(),
+                m_declaringType.GetUnderlyingNativeHandle().GetHashCode()
+            );
         #endregion
 
         #region ICustomAttributeProvider
@@ -121,14 +142,21 @@ namespace System.Reflection
         public override MemberTypes MemberType => MemberTypes.Event;
         public override string Name => m_name ??= new MdUtf8String(m_utf8name).ToString();
         public override Type? DeclaringType => m_declaringType;
-        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) => HasSameMetadataDefinitionAsCore<RuntimeEventInfo>(other);
+
+        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) =>
+            HasSameMetadataDefinitionAsCore<RuntimeEventInfo>(other);
+
         public override Type? ReflectedType => ReflectedTypeInternal;
 
         private RuntimeType ReflectedTypeInternal => m_reflectedTypeCache.GetRuntimeType();
 
         public override int MetadataToken => m_token;
         public override Module Module => GetRuntimeModule();
-        internal RuntimeModule GetRuntimeModule() { return m_declaringType.GetRuntimeModule(); }
+
+        internal RuntimeModule GetRuntimeModule()
+        {
+            return m_declaringType.GetRuntimeModule();
+        }
         #endregion
 
         #region EventInfo Overrides

@@ -7,6 +7,6 @@ namespace System.Activities.DurableInstancing
     public enum InstanceCompletionAction
     {
         DeleteNothing = 0,
-        DeleteAll
+        DeleteAll,
     };
 }

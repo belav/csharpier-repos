@@ -4,7 +4,7 @@ using System.CommandLine.Parsing;
 namespace System.CommandLine
 {
     /// <summary>
-    /// Enables the use of the <c>[diagram]</c> directive, which when specified on the command line will short 
+    /// Enables the use of the <c>[diagram]</c> directive, which when specified on the command line will short
     /// circuit normal command handling and display a diagram explaining the parse result for the command line input.
     /// </summary>
     public sealed class DiagramDirective : CliDirective
@@ -14,9 +14,8 @@ namespace System.CommandLine
         /// <summary>
         /// Writes a diagram of the parse result to the output.
         /// </summary>
-        public DiagramDirective() : base("diagram")
-        {
-        }
+        public DiagramDirective()
+            : base("diagram") { }
 
         /// <inheritdoc />
         public override CliAction? Action

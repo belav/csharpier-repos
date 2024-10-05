@@ -16,12 +16,10 @@ using Xunit;
 
 namespace System.Security.Cryptography.Xml.Tests
 {
-
     // Note: GetInnerXml is protected in XmlDsigBase64Transform making it
     // difficult to test properly. This class "open it up" :-)
     public class UnprotectedXmlDsigBase64Transform : XmlDsigBase64Transform
     {
-
         public XmlNodeList UnprotectedGetInnerXml()
         {
             return base.GetInnerXml();
@@ -30,7 +28,6 @@ namespace System.Security.Cryptography.Xml.Tests
 
     public class XmlDsigBase64TransformTest
     {
-
         protected UnprotectedXmlDsigBase64Transform transform;
 
         public XmlDsigBase64TransformTest()
@@ -109,7 +106,31 @@ namespace System.Security.Cryptography.Xml.Tests
         }
 
         private static string base64 = "XmlDsigBase64Transform";
-        private static byte[] base64array = { 0x58, 0x6D, 0x6C, 0x44, 0x73, 0x69, 0x67, 0x42, 0x61, 0x73, 0x65, 0x36, 0x34, 0x54, 0x72, 0x61, 0x6E, 0x73, 0x66, 0x6F, 0x72, 0x6D };
+        private static byte[] base64array =
+        {
+            0x58,
+            0x6D,
+            0x6C,
+            0x44,
+            0x73,
+            0x69,
+            0x67,
+            0x42,
+            0x61,
+            0x73,
+            0x65,
+            0x36,
+            0x34,
+            0x54,
+            0x72,
+            0x61,
+            0x6E,
+            0x73,
+            0x66,
+            0x6F,
+            0x72,
+            0x6D,
+        };
 
         private XmlDocument GetDoc()
         {
@@ -177,7 +198,10 @@ namespace System.Security.Cryptography.Xml.Tests
         public void UnsupportedOutput()
         {
             XmlDocument doc = new XmlDocument();
-            AssertExtensions.Throws<ArgumentException>("type", () => transform.GetOutput(doc.GetType()));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => transform.GetOutput(doc.GetType())
+            );
         }
     }
 }

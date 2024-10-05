@@ -177,13 +177,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 var token = _lexer.Lex(ref mode);
                 _newDirectives = _lexer.Directives;
-                _newLexerDrivenMode = mode & (LexerMode.MaskXmlDocCommentLocation | LexerMode.MaskXmlDocCommentStyle);
+                _newLexerDrivenMode =
+                    mode & (LexerMode.MaskXmlDocCommentLocation | LexerMode.MaskXmlDocCommentStyle);
                 return token;
             }
 
-            private bool TryTakeOldNodeOrToken(
-                bool asToken,
-                out BlendedNode blendedNode)
+            private bool TryTakeOldNodeOrToken(bool asToken, out BlendedNode blendedNode)
             {
                 // If we're asking for tokens, then first move down to our first token.  (if we're
                 // already at a token, then this won't do anything).
@@ -211,7 +210,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 blendedNode = CreateBlendedNode(
                     node: (CSharp.CSharpSyntaxNode)currentNodeOrToken.AsNode(),
-                    token: (InternalSyntax.SyntaxToken)currentNodeOrToken.AsToken().Node);
+                    token: (InternalSyntax.SyntaxToken)currentNodeOrToken.AsToken().Node
+                );
                 return true;
             }
 
@@ -241,8 +241,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 }
 
                 // don't reuse nodes or tokens with skipped text or diagnostics attached to them
-                if (nodeOrToken.ContainsDiagnostics ||
-                    (nodeOrToken.IsToken && ((CSharpSyntaxNode)nodeOrToken.AsToken().Node).ContainsSkippedText && nodeOrToken.Parent.ContainsDiagnostics))
+                if (
+                    nodeOrToken.ContainsDiagnostics
+                    || (
+                        nodeOrToken.IsToken
+                        && ((CSharpSyntaxNode)nodeOrToken.AsToken().Node).ContainsSkippedText
+                        && nodeOrToken.Parent.ContainsDiagnostics
+                    )
+                )
                 {
                     return false;
                 }
@@ -263,8 +269,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 // trailing semicolon.  We treat this as an ExpressionStatement with a missing
                 // semicolon, but we do not report errors.  It would be preferable to fix that so
                 // that the semicolon can be optional rather than abusing the system.
-                if ((nodeOrToken.IsToken && nodeOrToken.AsToken().IsMissing) ||
-                    (nodeOrToken.IsNode && IsIncomplete((CSharp.CSharpSyntaxNode)nodeOrToken.AsNode())))
+                if (
+                    (nodeOrToken.IsToken && nodeOrToken.AsToken().IsMissing)
+                    || (
+                        nodeOrToken.IsNode
+                        && IsIncomplete((CSharp.CSharpSyntaxNode)nodeOrToken.AsNode())
+                    )
+                )
                 {
                     return false;
                 }
@@ -315,8 +326,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
             private BlendedNode CreateBlendedNode(CSharp.CSharpSyntaxNode node, SyntaxToken token)
             {
-                return new BlendedNode(node, token,
-                    new Blender(_lexer, _oldTreeCursor, _changes, _newPosition, _changeDelta, _newDirectives, _oldDirectives, _newLexerDrivenMode));
+                return new BlendedNode(
+                    node,
+                    token,
+                    new Blender(
+                        _lexer,
+                        _oldTreeCursor,
+                        _changes,
+                        _newPosition,
+                        _changeDelta,
+                        _newDirectives,
+                        _oldDirectives,
+                        _newLexerDrivenMode
+                    )
+                );
             }
         }
     }

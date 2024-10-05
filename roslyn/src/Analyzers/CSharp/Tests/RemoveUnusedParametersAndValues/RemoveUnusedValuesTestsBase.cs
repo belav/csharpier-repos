@@ -14,15 +14,19 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersAndValues
 {
-    public abstract class RemoveUnusedValuesTestsBase : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public abstract class RemoveUnusedValuesTestsBase
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         protected RemoveUnusedValuesTestsBase(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpRemoveUnusedParametersAndValuesDiagnosticAnalyzer(), new CSharpRemoveUnusedValuesCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpRemoveUnusedParametersAndValuesDiagnosticAnalyzer(),
+                new CSharpRemoveUnusedValuesCodeFixProvider()
+            );
 
         private protected abstract OptionsCollection PreferNone { get; }
         private protected abstract OptionsCollection PreferDiscard { get; }
@@ -43,27 +47,65 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
             }
         }
 
-        private protected Task TestMissingInRegularAndScriptAsync(string initialMarkup, OptionsCollection options, ParseOptions parseOptions = null)
-            => TestMissingInRegularAndScriptAsync(initialMarkup, new TestParameters(options: options, parseOptions: parseOptions));
-        private protected Task TestMissingInRegularAndScriptAsync(string initialMarkup, string optionName, ParseOptions parseOptions = null)
-             => TestMissingInRegularAndScriptAsync(initialMarkup, GetOptions(optionName), parseOptions);
-        protected Task TestInRegularAndScriptAsync(string initialMarkup, string expectedMarkup, string optionName, ParseOptions parseOptions = null)
-            => TestInRegularAndScriptAsync(initialMarkup, expectedMarkup, options: GetOptions(optionName), parseOptions: parseOptions);
+        private protected Task TestMissingInRegularAndScriptAsync(
+            string initialMarkup,
+            OptionsCollection options,
+            ParseOptions parseOptions = null
+        ) =>
+            TestMissingInRegularAndScriptAsync(
+                initialMarkup,
+                new TestParameters(options: options, parseOptions: parseOptions)
+            );
+
+        private protected Task TestMissingInRegularAndScriptAsync(
+            string initialMarkup,
+            string optionName,
+            ParseOptions parseOptions = null
+        ) =>
+            TestMissingInRegularAndScriptAsync(initialMarkup, GetOptions(optionName), parseOptions);
+
+        protected Task TestInRegularAndScriptAsync(
+            string initialMarkup,
+            string expectedMarkup,
+            string optionName,
+            ParseOptions parseOptions = null
+        ) =>
+            TestInRegularAndScriptAsync(
+                initialMarkup,
+                expectedMarkup,
+                options: GetOptions(optionName),
+                parseOptions: parseOptions
+            );
 
         // Helpers to test all options - only used by tests which already have InlineData for custom input test code snippets.
-        protected async Task TestInRegularAndScriptWithAllOptionsAsync(string initialMarkup, string expectedMarkup, ParseOptions parseOptions = null)
+        protected async Task TestInRegularAndScriptWithAllOptionsAsync(
+            string initialMarkup,
+            string expectedMarkup,
+            ParseOptions parseOptions = null
+        )
         {
             foreach (var options in new[] { PreferDiscard, PreferUnusedLocal })
             {
-                await TestInRegularAndScriptAsync(initialMarkup, expectedMarkup, options: options, parseOptions: parseOptions);
+                await TestInRegularAndScriptAsync(
+                    initialMarkup,
+                    expectedMarkup,
+                    options: options,
+                    parseOptions: parseOptions
+                );
             }
         }
 
-        protected async Task TestMissingInRegularAndScriptWithAllOptionsAsync(string initialMarkup, ParseOptions parseOptions = null)
+        protected async Task TestMissingInRegularAndScriptWithAllOptionsAsync(
+            string initialMarkup,
+            ParseOptions parseOptions = null
+        )
         {
             foreach (var options in new[] { PreferDiscard, PreferUnusedLocal })
             {
-                await TestMissingInRegularAndScriptAsync(initialMarkup, new TestParameters(options: options, parseOptions: parseOptions));
+                await TestMissingInRegularAndScriptAsync(
+                    initialMarkup,
+                    new TestParameters(options: options, parseOptions: parseOptions)
+                );
             }
         }
     }

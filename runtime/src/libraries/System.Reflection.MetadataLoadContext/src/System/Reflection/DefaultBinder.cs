@@ -19,7 +19,8 @@ namespace System
             _objectType = loader.TryGetCoreType(CoreType.Object);
         }
 
-        private bool IsImplementedByMetadataLoadContext(Type type) => type is RoType roType && roType.Loader == _loader;
+        private bool IsImplementedByMetadataLoadContext(Type type) =>
+            type is RoType roType && roType.Loader == _loader;
 
         // This method is passed a set of methods and must choose the best
         // fit.  The methods all have the same number of arguments and the object
@@ -35,16 +36,32 @@ namespace System
         // The most specific match will be selected.
         //
         public sealed override MethodBase BindToMethod(
-            BindingFlags bindingAttr, MethodBase[] match, ref object?[] args,
-            ParameterModifier[]? modifiers, CultureInfo? cultureInfo, string[]? names, out object state) => throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+            BindingFlags bindingAttr,
+            MethodBase[] match,
+            ref object?[] args,
+            ParameterModifier[]? modifiers,
+            CultureInfo? cultureInfo,
+            string[]? names,
+            out object state
+        ) => throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
 
         // Given a set of fields that match the base criteria, select a field.
         // if value is null then we have no way to select a field
-        public sealed override FieldInfo BindToField(BindingFlags bindingAttr, FieldInfo[] match, object value, CultureInfo? cultureInfo) => throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+        public sealed override FieldInfo BindToField(
+            BindingFlags bindingAttr,
+            FieldInfo[] match,
+            object value,
+            CultureInfo? cultureInfo
+        ) => throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
 
         // Given a set of methods that match the base criteria, select a method based upon an array of types.
         // This method should return null if no method matches the criteria.
-        public sealed override MethodBase? SelectMethod(BindingFlags bindingAttr, MethodBase[] match, Type[] types, ParameterModifier[]? modifiers)
+        public sealed override MethodBase? SelectMethod(
+            BindingFlags bindingAttr,
+            MethodBase[] match,
+            Type[] types,
+            ParameterModifier[]? modifiers
+        )
         {
             int i;
             int j;
@@ -53,7 +70,12 @@ namespace System
             for (i = 0; i < types.Length; i++)
             {
                 realTypes[i] = types[i].UnderlyingSystemType;
-                if (!(IsImplementedByMetadataLoadContext(realTypes[i]) || realTypes[i].IsSignatureType()))
+                if (
+                    !(
+                        IsImplementedByMetadataLoadContext(realTypes[i])
+                        || realTypes[i].IsSignatureType()
+                    )
+                )
                     throw new ArgumentException(SR.Arg_MustBeType, nameof(types));
             }
             types = realTypes;
@@ -92,8 +114,13 @@ namespace System
 
                     if (pCls.IsPrimitive)
                     {
-                        if (!(IsImplementedByMetadataLoadContext(type.UnderlyingSystemType)) ||
-                            !CanChangePrimitive(type.UnderlyingSystemType, pCls.UnderlyingSystemType))
+                        if (
+                            !(IsImplementedByMetadataLoadContext(type.UnderlyingSystemType))
+                            || !CanChangePrimitive(
+                                type.UnderlyingSystemType,
+                                pCls.UnderlyingSystemType
+                            )
+                        )
                             break;
                     }
                     else
@@ -125,7 +152,9 @@ namespace System
                     candidates[i],
                     paramOrder,
                     paramArrayType2: null,
-                    types, args: null);
+                    types,
+                    args: null
+                );
 
                 if (newMin == 0)
                 {
@@ -144,8 +173,13 @@ namespace System
         }
 
         // Given a set of properties that match the base criteria, select one.
-        public sealed override PropertyInfo? SelectProperty(BindingFlags bindingAttr, PropertyInfo[] match, Type? returnType,
-                    Type[]? indexes, ParameterModifier[]? modifiers)
+        public sealed override PropertyInfo? SelectProperty(
+            BindingFlags bindingAttr,
+            PropertyInfo[] match,
+            Type? returnType,
+            Type[]? indexes,
+            ParameterModifier[]? modifiers
+        )
         {
             // Allow a null indexes array. But if it is not null, every element must be non-null as well.
             if (indexes != null)
@@ -162,7 +196,8 @@ namespace System
 
             PropertyInfo[] candidates = (PropertyInfo[])match.Clone();
 
-            int i, j = 0;
+            int i,
+                j = 0;
 
             // Find all the properties that can be described by type indexes parameter
             int curIdx = 0;
@@ -187,8 +222,17 @@ namespace System
 
                         if (pCls.IsPrimitive)
                         {
-                            if (!(IsImplementedByMetadataLoadContext(indexes[j].UnderlyingSystemType)) ||
-                                !CanChangePrimitive(indexes[j].UnderlyingSystemType, pCls.UnderlyingSystemType))
+                            if (
+                                !(
+                                    IsImplementedByMetadataLoadContext(
+                                        indexes[j].UnderlyingSystemType
+                                    )
+                                )
+                                || !CanChangePrimitive(
+                                    indexes[j].UnderlyingSystemType,
+                                    pCls.UnderlyingSystemType
+                                )
+                            )
                                 break;
                         }
                         else
@@ -205,8 +249,17 @@ namespace System
                     {
                         if (candidates[i].PropertyType.IsPrimitive)
                         {
-                            if (!(IsImplementedByMetadataLoadContext(returnType.UnderlyingSystemType)) ||
-                                !CanChangePrimitive(returnType.UnderlyingSystemType, candidates[i].PropertyType.UnderlyingSystemType))
+                            if (
+                                !(
+                                    IsImplementedByMetadataLoadContext(
+                                        returnType.UnderlyingSystemType
+                                    )
+                                )
+                                || !CanChangePrimitive(
+                                    returnType.UnderlyingSystemType,
+                                    candidates[i].PropertyType.UnderlyingSystemType
+                                )
+                            )
                                 continue;
                         }
                         else
@@ -232,7 +285,11 @@ namespace System
             for (i = 1; i < curIdx; i++)
             {
                 Debug.Assert(returnType != null);
-                int newMin = FindMostSpecificType(candidates[currentMin].PropertyType, candidates[i].PropertyType, returnType);
+                int newMin = FindMostSpecificType(
+                    candidates[currentMin].PropertyType,
+                    candidates[i].PropertyType,
+                    returnType
+                );
                 if (newMin == 0 && indexes != null)
                     newMin = FindMostSpecific(
                         candidates[currentMin].GetIndexParameters(),
@@ -242,7 +299,8 @@ namespace System
                         paramOrder,
                         paramArrayType2: null,
                         indexes,
-                        args: null);
+                        args: null
+                    );
 
                 if (newMin == 0)
                 {
@@ -265,9 +323,11 @@ namespace System
 
         // The default binder doesn't support any change type functionality.
         // This is because the default is built into the low level invoke code.
-        public override object ChangeType(object value, Type type, CultureInfo? cultureInfo) => throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+        public override object ChangeType(object value, Type type, CultureInfo? cultureInfo) =>
+            throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
 
-        public sealed override void ReorderArgumentArray(ref object?[] args, object state) => throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+        public sealed override void ReorderArgumentArray(ref object?[] args, object state) =>
+            throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
 
         // Return any exact bindings that may exist. (This method is not defined on the
         // Binder and is used by RuntimeType.)
@@ -316,7 +376,11 @@ namespace System
 
         // Return any exact bindings that may exist. (This method is not defined on the
         //  Binder and is used by RuntimeType.)
-        public static PropertyInfo? ExactPropertyBinding(PropertyInfo[] match, Type? returnType, Type[]? types)
+        public static PropertyInfo? ExactPropertyBinding(
+            PropertyInfo[] match,
+            Type? returnType,
+            Type[]? types
+        )
         {
             if (match is null)
             {
@@ -350,13 +414,22 @@ namespace System
             return bestMatch;
         }
 
-        private static int FindMostSpecific(ParameterInfo[] p1, int[] paramOrder1, Type? paramArrayType1,
-                                            ParameterInfo[] p2, int[] paramOrder2, Type? paramArrayType2,
-                                            Type[] types, object[]? args)
+        private static int FindMostSpecific(
+            ParameterInfo[] p1,
+            int[] paramOrder1,
+            Type? paramArrayType1,
+            ParameterInfo[] p2,
+            int[] paramOrder2,
+            Type? paramArrayType2,
+            Type[] types,
+            object[]? args
+        )
         {
             // A method using params is always less specific than one not using params
-            if (paramArrayType1 != null && paramArrayType2 == null) return 2;
-            if (paramArrayType2 != null && paramArrayType1 == null) return 1;
+            if (paramArrayType1 != null && paramArrayType2 == null)
+                return 2;
+            if (paramArrayType2 != null && paramArrayType1 == null)
+                return 1;
 
             // now either p1 and p2 both use params or neither does.
 
@@ -368,7 +441,8 @@ namespace System
                 if (args != null && args[i] == Type.Missing)
                     continue;
 
-                Type c1, c2;
+                Type c1,
+                    c2;
 
                 //  If a param array is present, then either
                 //      the user re-ordered the parameters in which case
@@ -390,13 +464,19 @@ namespace System
                 else
                     c2 = p2[paramOrder2[i]].ParameterType;
 
-                if (c1 == c2) continue;
+                if (c1 == c2)
+                    continue;
 
                 switch (FindMostSpecificType(c1, c2, types[i]))
                 {
-                    case 0: return 0;
-                    case 1: param1Less = true; break;
-                    case 2: param2Less = true; break;
+                    case 0:
+                        return 0;
+                    case 1:
+                        param1Less = true;
+                        break;
+                    case 2:
+                        param2Less = true;
+                        break;
                 }
             }
 
@@ -476,7 +556,6 @@ namespace System
                 }
             }
 
-
             if (c1.IsPrimitive && c2.IsPrimitive)
             {
                 c1FromC2 = CanChangePrimitive(c2, c1);
@@ -501,13 +580,28 @@ namespace System
             }
         }
 
-        private static int FindMostSpecificMethod(MethodBase m1, int[] paramOrder1, Type? paramArrayType1,
-                                                  MethodBase m2, int[] paramOrder2, Type? paramArrayType2,
-                                                  Type[] types, object[]? args)
+        private static int FindMostSpecificMethod(
+            MethodBase m1,
+            int[] paramOrder1,
+            Type? paramArrayType1,
+            MethodBase m2,
+            int[] paramOrder2,
+            Type? paramArrayType2,
+            Type[] types,
+            object[]? args
+        )
         {
             // Find the most specific method based on the parameters.
-            int res = FindMostSpecific(m1.GetParametersNoCopy(), paramOrder1, paramArrayType1,
-                                       m2.GetParametersNoCopy(), paramOrder2, paramArrayType2, types, args);
+            int res = FindMostSpecific(
+                m1.GetParametersNoCopy(),
+                paramOrder1,
+                paramArrayType1,
+                m2.GetParametersNoCopy(),
+                paramOrder2,
+                paramArrayType2,
+                types,
+                args
+            );
 
             // If the match was not ambiguous then return the result.
             if (res != 0)

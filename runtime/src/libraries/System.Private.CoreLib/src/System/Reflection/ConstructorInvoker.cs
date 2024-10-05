@@ -52,7 +52,10 @@ namespace System.Reflection
 
             if (constructor is not RuntimeConstructorInfo runtimeConstructor)
             {
-                throw new ArgumentException(SR.Argument_MustBeRuntimeConstructorInfo, nameof(constructor));
+                throw new ArgumentException(
+                    SR.Argument_MustBeRuntimeConstructorInfo,
+                    nameof(constructor)
+                );
             }
 
             return new ConstructorInvoker(runtimeConstructor);
@@ -130,7 +133,7 @@ namespace System.Reflection
         /// <param name="arg3">The third argument for the invoked method.</param>
         public object Invoke(object? arg1, object? arg2, object? arg3)
         {
-            if (_argCount !=3)
+            if (_argCount != 3)
             {
                 MethodBaseInvoker.ThrowTargetParameterCountException();
             }
@@ -155,7 +158,16 @@ namespace System.Reflection
 
         private object InvokeImpl(object? arg1, object? arg2, object? arg3, object? arg4)
         {
-            if ((_invocationFlags & (InvocationFlags.NoInvoke | InvocationFlags.ContainsStackPointers | InvocationFlags.NoConstructorInvoke)) != 0)
+            if (
+                (
+                    _invocationFlags
+                    & (
+                        InvocationFlags.NoInvoke
+                        | InvocationFlags.ContainsStackPointers
+                        | InvocationFlags.NoConstructorInvoke
+                    )
+                ) != 0
+            )
             {
                 _method.ThrowNoInvokeException();
             }
@@ -184,7 +196,13 @@ namespace System.Reflection
 
             if ((_strategy & InvokerStrategy.StrategyDetermined_Obj4Args) == 0)
             {
-                DetermineStrategy_Obj4Args(ref _strategy, ref _invokeFunc_Obj4Args, _method, _needsByRefStrategy, backwardsCompat: false);
+                DetermineStrategy_Obj4Args(
+                    ref _strategy,
+                    ref _invokeFunc_Obj4Args,
+                    _method,
+                    _needsByRefStrategy,
+                    backwardsCompat: false
+                );
                 if (_invokeFunc_Obj4Args is not null)
                 {
                     return _invokeFunc_Obj4Args(obj: null, arg1, arg2, arg3, arg4)!;
@@ -227,7 +245,12 @@ namespace System.Reflection
                 }
             }
 
-            if ((_invocationFlags & (InvocationFlags.NoInvoke | InvocationFlags.ContainsStackPointers)) != 0)
+            if (
+                (
+                    _invocationFlags
+                    & (InvocationFlags.NoInvoke | InvocationFlags.ContainsStackPointers)
+                ) != 0
+            )
             {
                 _method.ThrowNoInvokeException();
             }
@@ -258,13 +281,19 @@ namespace System.Reflection
             // Check fast path first.
             if (_invokeFunc_ObjSpanArgs is not null)
             {
-                return _invokeFunc_ObjSpanArgs(obj : null, copyOfArgs)!;
+                return _invokeFunc_ObjSpanArgs(obj: null, copyOfArgs)!;
                 // No need to call CopyBack here since there are no ref values.
             }
 
             if ((_strategy & InvokerStrategy.StrategyDetermined_ObjSpanArgs) == 0)
             {
-                DetermineStrategy_ObjSpanArgs(ref _strategy, ref _invokeFunc_ObjSpanArgs, _method, _needsByRefStrategy, backwardsCompat: false);
+                DetermineStrategy_ObjSpanArgs(
+                    ref _strategy,
+                    ref _invokeFunc_ObjSpanArgs,
+                    _method,
+                    _needsByRefStrategy,
+                    backwardsCompat: false
+                );
                 if (_invokeFunc_ObjSpanArgs is not null)
                 {
                     return _invokeFunc_ObjSpanArgs(obj: null, copyOfArgs)!;
@@ -276,7 +305,12 @@ namespace System.Reflection
             return ret;
         }
 
-        internal object InvokeDirectByRef(object? arg1 = null, object? arg2 = null, object? arg3 = null, object? arg4 = null)
+        internal object InvokeDirectByRef(
+            object? arg1 = null,
+            object? arg2 = null,
+            object? arg3 = null,
+            object? arg4 = null
+        )
         {
             StackAllocatedArguments stackStorage = new(arg1, arg2, arg3, arg4);
             return InvokeDirectByRefWithFewArgs(stackStorage._args.AsSpan(_argCount));
@@ -286,7 +320,12 @@ namespace System.Reflection
         {
             if ((_strategy & InvokerStrategy.StrategyDetermined_RefArgs) == 0)
             {
-                DetermineStrategy_RefArgs(ref _strategy, ref _invokeFunc_RefArgs, _method, backwardsCompat: false);
+                DetermineStrategy_RefArgs(
+                    ref _strategy,
+                    ref _invokeFunc_RefArgs,
+                    _method,
+                    backwardsCompat: false
+                );
             }
 
             StackAllocatedByRefs byrefs = default;
@@ -297,10 +336,12 @@ namespace System.Reflection
             for (int i = 0; i < _argCount; i++)
             {
 #pragma warning disable CS8500
-                *(ByReference*)(pByRefFixedStorage + i) = (_invokerArgFlags[i] & InvokerArgFlags.IsValueType) != 0 ?
+                *(ByReference*)(pByRefFixedStorage + i) =
+                    (_invokerArgFlags[i] & InvokerArgFlags.IsValueType) != 0
+                        ?
 #pragma warning restore CS8500
-                    ByReference.Create(ref copyOfArgs[i]!.GetRawData()) :
-                    ByReference.Create(ref copyOfArgs[i]);
+                        ByReference.Create(ref copyOfArgs[i]!.GetRawData())
+                        : ByReference.Create(ref copyOfArgs[i]);
             }
 
             return _invokeFunc_RefArgs!(obj: null, pByRefFixedStorage)!;
@@ -314,7 +355,13 @@ namespace System.Reflection
 
             if ((_strategy & InvokerStrategy.StrategyDetermined_ObjSpanArgs) == 0)
             {
-                DetermineStrategy_ObjSpanArgs(ref _strategy, ref _invokeFunc_ObjSpanArgs, _method, _needsByRefStrategy, backwardsCompat: false);
+                DetermineStrategy_ObjSpanArgs(
+                    ref _strategy,
+                    ref _invokeFunc_ObjSpanArgs,
+                    _method,
+                    _needsByRefStrategy,
+                    backwardsCompat: false
+                );
             }
 
             if (_invokeFunc_ObjSpanArgs is not null)
@@ -347,7 +394,12 @@ namespace System.Reflection
             {
                 if ((_strategy & InvokerStrategy.StrategyDetermined_RefArgs) == 0)
                 {
-                    DetermineStrategy_RefArgs(ref _strategy, ref _invokeFunc_RefArgs, _method, backwardsCompat: false);
+                    DetermineStrategy_RefArgs(
+                        ref _strategy,
+                        ref _invokeFunc_RefArgs,
+                        _method,
+                        backwardsCompat: false
+                    );
                 }
 
                 IntPtr* pStorage = stackalloc IntPtr[2 * _argCount];
@@ -358,7 +410,8 @@ namespace System.Reflection
                 scoped Span<bool> shouldCopyBack = stackalloc bool[_argCount];
 
                 regArgStorage = new((void**)pStorage, (uint)_argCount, areByRefs: false);
-                GCFrameRegistration regByRefStorage = new((void**)pByRefStorage, (uint)_argCount, areByRefs: true);
+                GCFrameRegistration regByRefStorage =
+                    new((void**)pByRefStorage, (uint)_argCount, areByRefs: true);
 
                 try
                 {
@@ -370,11 +423,15 @@ namespace System.Reflection
                         object? arg = arguments[i];
                         shouldCopyBack[i] = CheckArgument(ref arg, i);
                         copyOfArgs[i] = arg;
-    #pragma warning disable CS8500
-                        *(ByReference*)(pByRefStorage + i) = (_invokerArgFlags[i] & InvokerArgFlags.IsValueType) != 0 ?
-    #pragma warning restore CS8500
-                            ByReference.Create(ref Unsafe.AsRef<object>(pStorage + i).GetRawData()) :
-                            ByReference.Create(ref Unsafe.AsRef<object>(pStorage + i));
+#pragma warning disable CS8500
+                        *(ByReference*)(pByRefStorage + i) =
+                            (_invokerArgFlags[i] & InvokerArgFlags.IsValueType) != 0
+                                ?
+#pragma warning restore CS8500
+                                ByReference.Create(
+                                    ref Unsafe.AsRef<object>(pStorage + i).GetRawData()
+                                )
+                                : ByReference.Create(ref Unsafe.AsRef<object>(pStorage + i));
                     }
 
                     ret = _invokeFunc_RefArgs!(obj: null, pByRefStorage)!;
@@ -392,7 +449,11 @@ namespace System.Reflection
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         // Copy modified values out. This is only done with ByRef parameters.
-        internal void CopyBack(Span<object?> dest, Span<object?> copyOfParameters, Span<bool> shouldCopyBack)
+        internal void CopyBack(
+            Span<object?> dest,
+            Span<object?> copyOfParameters,
+            Span<bool> shouldCopyBack
+        )
         {
             for (int i = 0; i < dest.Length; i++)
             {

@@ -6,10 +6,8 @@ using Xunit;
 
 namespace test_uncaughtException
 {
-
     public class Class1
     {
-
         private static TestUtil.TestLog testLog;
 
         static Class1()
@@ -31,6 +29,7 @@ namespace test_uncaughtException
             // Create and initialize test log object
             testLog = new TestUtil.TestLog(expectedOut);
         }
+
         [Fact]
         public static int TestEntryPoint()
         {

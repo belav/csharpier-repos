@@ -13,6 +13,6 @@ namespace System.IO
         CaseSensitive,
 
         /// <summary>Matches ignoring character casing.</summary>
-        CaseInsensitive
+        CaseInsensitive,
     }
 }

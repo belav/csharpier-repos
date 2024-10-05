@@ -14,7 +14,11 @@ namespace System.Data.Metadata.Edm
     /// <summary>
     /// This class encapsulates the error information for a schema error that was encountered.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Edm")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Edm"
+    )]
     [Serializable]
     public sealed class EdmSchemaError : EdmError
     {
@@ -34,10 +38,8 @@ namespace System.Data.Metadata.Edm
         /// <param name="message">The explanation of the error.</param>
         /// <param name="errorCode">The code associated with this error.</param>
         /// <param name="severity">The severity of the error.</param>
-        internal EdmSchemaError(string message, int errorCode, EdmSchemaErrorSeverity severity) :
-            this(message, errorCode, severity, null)
-        {
-        }
+        internal EdmSchemaError(string message, int errorCode, EdmSchemaErrorSeverity severity)
+            : this(message, errorCode, severity, null) { }
 
         /// <summary>
         /// Constructs a EdmSchemaError object.
@@ -46,7 +48,12 @@ namespace System.Data.Metadata.Edm
         /// <param name="errorCode">The code associated with this error.</param>
         /// <param name="severity">The severity of the error.</param>
         /// <param name="exception">The exception that caused the error to be filed.</param>
-        internal EdmSchemaError(string message, int errorCode, EdmSchemaErrorSeverity severity, Exception exception)
+        internal EdmSchemaError(
+            string message,
+            int errorCode,
+            EdmSchemaErrorSeverity severity,
+            Exception exception
+        )
             : base(message)
         {
             Initialize(errorCode, severity, null, -1, -1, exception);
@@ -61,10 +68,15 @@ namespace System.Data.Metadata.Edm
         /// <param name="sourceUri"></param>
         /// <param name="lineNumber"></param>
         /// <param name="sourceColumn"></param>
-        internal EdmSchemaError(string message, int errorCode, EdmSchemaErrorSeverity severity, string schemaLocation, int line, int column)
-            : this(message, errorCode, severity, schemaLocation, line, column, null)
-        {
-        }
+        internal EdmSchemaError(
+            string message,
+            int errorCode,
+            EdmSchemaErrorSeverity severity,
+            string schemaLocation,
+            int line,
+            int column
+        )
+            : this(message, errorCode, severity, schemaLocation, line, column, null) { }
 
         /// <summary>
         /// Constructs a EdmSchemaError object.
@@ -76,22 +88,48 @@ namespace System.Data.Metadata.Edm
         /// <param name="lineNumber"></param>
         /// <param name="sourceColumn"></param>
         /// <param name="exception">The exception that caused the error to be filed.</param>
-        internal EdmSchemaError(string message, int errorCode, EdmSchemaErrorSeverity severity, string schemaLocation, int line, int column, Exception exception)
+        internal EdmSchemaError(
+            string message,
+            int errorCode,
+            EdmSchemaErrorSeverity severity,
+            string schemaLocation,
+            int line,
+            int column,
+            Exception exception
+        )
             : base(message)
         {
-            if (severity < EdmSchemaErrorSeverity.Warning || severity > EdmSchemaErrorSeverity.Error)
+            if (
+                severity < EdmSchemaErrorSeverity.Warning
+                || severity > EdmSchemaErrorSeverity.Error
+            )
             {
-                throw new ArgumentOutOfRangeException("severity", severity, System.Data.Entity.Strings.ArgumentOutOfRange(severity));
+                throw new ArgumentOutOfRangeException(
+                    "severity",
+                    severity,
+                    System.Data.Entity.Strings.ArgumentOutOfRange(severity)
+                );
             }
 
             Initialize(errorCode, severity, schemaLocation, line, column, exception);
         }
 
-        private void Initialize(int errorCode, EdmSchemaErrorSeverity severity, string schemaLocation, int line, int column, Exception exception)
+        private void Initialize(
+            int errorCode,
+            EdmSchemaErrorSeverity severity,
+            string schemaLocation,
+            int line,
+            int column,
+            Exception exception
+        )
         {
             if (errorCode < 0)
             {
-                throw new ArgumentOutOfRangeException("errorCode", errorCode, System.Data.Entity.Strings.ArgumentOutOfRangeExpectedPostiveNumber(errorCode));
+                throw new ArgumentOutOfRangeException(
+                    "errorCode",
+                    errorCode,
+                    System.Data.Entity.Strings.ArgumentOutOfRangeExpectedPostiveNumber(errorCode)
+                );
             }
 
             _errorCode = errorCode;
@@ -128,20 +166,26 @@ namespace System.Data.Metadata.Edm
 
             if (String.IsNullOrEmpty(SchemaName) && Line < 0 && Column < 0)
             {
-                text = String.Format(System.Globalization.CultureInfo.CurrentCulture, "{0} {1:0000}: {2}",
+                text = String.Format(
+                    System.Globalization.CultureInfo.CurrentCulture,
+                    "{0} {1:0000}: {2}",
                     severity,
                     ErrorCode,
-                    Message);
+                    Message
+                );
             }
             else
             {
-                text = String.Format(System.Globalization.CultureInfo.CurrentCulture, "{0}({1},{2}) : {3} {4:0000}: {5}",
+                text = String.Format(
+                    System.Globalization.CultureInfo.CurrentCulture,
+                    "{0}({1},{2}) : {3} {4:0000}: {5}",
                     (SchemaName == null) ? System.Data.Entity.Strings.SourceUriUnknown : SchemaName,
                     Line,
                     Column,
                     severity,
                     ErrorCode,
-                    Message);
+                    Message
+                );
             }
 
             return text;
@@ -154,10 +198,7 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         public int ErrorCode
         {
-            get
-            {
-                return _errorCode;
-            }
+            get { return _errorCode; }
         }
 
         /// <summary>
@@ -165,14 +206,8 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         public EdmSchemaErrorSeverity Severity
         {
-            get
-            {
-                return _severity;
-            }
-            set
-            {
-                _severity = value;
-            }
+            get { return _severity; }
+            set { _severity = value; }
         }
 
         /// <summary>
@@ -180,10 +215,7 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         public int Line
         {
-            get
-            {
-                return _line;
-            }
+            get { return _line; }
         }
 
         /// <summary>
@@ -191,10 +223,7 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         public int Column
         {
-            get
-            {
-                return _column;
-            }
+            get { return _column; }
         }
 
         /// <summary>
@@ -202,10 +231,7 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         public string SchemaLocation
         {
-            get
-            {
-                return _schemaLocation;
-            }
+            get { return _schemaLocation; }
         }
 
         /// <summary>
@@ -213,10 +239,7 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         public string SchemaName
         {
-            get
-            {
-                return GetNameFromSchemaLocation(SchemaLocation);
-            }
+            get { return GetNameFromSchemaLocation(SchemaLocation); }
         }
 
         /// <summary>
@@ -225,10 +248,7 @@ namespace System.Data.Metadata.Edm
         /// <value></value>
         public string StackTrace
         {
-            get
-            {
-                return _stackTrace;
-            }
+            get { return _stackTrace; }
         }
         #endregion
 

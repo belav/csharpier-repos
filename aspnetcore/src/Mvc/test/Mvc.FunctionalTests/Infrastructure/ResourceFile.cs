@@ -21,7 +21,13 @@ public static class ResourceFile
 
     private static readonly object writeLock = new object();
 
-    public static void UpdateOrVerify(Assembly assembly, string outputFile, string expectedContent, string responseContent, string token = null)
+    public static void UpdateOrVerify(
+        Assembly assembly,
+        string outputFile,
+        string expectedContent,
+        string responseContent,
+        string token = null
+    )
     {
         if (GenerateBaselines)
         {
@@ -36,7 +42,11 @@ public static class ResourceFile
         {
             if (token != null)
             {
-                expectedContent = string.Format(CultureInfo.InvariantCulture, expectedContent, token);
+                expectedContent = string.Format(
+                    CultureInfo.InvariantCulture,
+                    expectedContent,
+                    token
+                );
             }
             Assert.Equal(expectedContent, responseContent, ignoreLineEndingDifferences: true);
         }
@@ -67,7 +77,7 @@ public static class ResourceFile
     /// </exception>
     public static Stream GetResourceStream(Assembly assembly, string resourceName, bool sourceFile)
     {
-        var fullName = $"{ assembly.GetName().Name }.{ resourceName.Replace('/', '.') }";
+        var fullName = $"{assembly.GetName().Name}.{resourceName.Replace('/', '.')}";
         if (!Exists(assembly, fullName))
         {
             if (GenerateBaselines)
@@ -75,13 +85,13 @@ public static class ResourceFile
                 if (sourceFile)
                 {
                     // Even when generating baselines, a missing source file is a serious problem.
-                    Assert.True(false, $"Manifest resource: { fullName } not found.");
+                    Assert.True(false, $"Manifest resource: {fullName} not found.");
                 }
             }
             else
             {
                 // When not generating baselines, a missing source or output file is always an error.
-                Assert.True(false, $"Manifest resource '{ fullName }' not found.");
+                Assert.True(false, $"Manifest resource '{fullName}' not found.");
             }
 
             return null;
@@ -131,7 +141,11 @@ public static class ResourceFile
     /// <paramref name="resourceName"/> is not found in <paramref name="assembly"/>.
     /// </exception>
     /// <remarks>Normalizes line endings to <see cref="Environment.NewLine"/>.</remarks>
-    public static async Task<string> ReadResourceAsync(Assembly assembly, string resourceName, bool sourceFile)
+    public static async Task<string> ReadResourceAsync(
+        Assembly assembly,
+        string resourceName,
+        bool sourceFile
+    )
     {
         using (var stream = GetResourceStream(assembly, resourceName, sourceFile))
         {
@@ -204,11 +218,18 @@ public static class ResourceFile
     /// <param name="content">
     /// New content of <paramref name="resourceName"/> in <paramref name="assembly"/>.
     /// </param>
-    private static void UpdateFile(Assembly assembly, string resourceName, string previousContent, string content)
+    private static void UpdateFile(
+        Assembly assembly,
+        string resourceName,
+        string previousContent,
+        string content
+    )
     {
         if (!GenerateBaselines)
         {
-            throw new NotSupportedException("Calling UpdateFile is not supported when GenerateBaselines=false");
+            throw new NotSupportedException(
+                "Calling UpdateFile is not supported when GenerateBaselines=false"
+            );
         }
 
         // Normalize line endings to '\r\n' for comparison. This removes Environment.NewLine from the equation. Not

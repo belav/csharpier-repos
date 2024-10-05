@@ -20,8 +20,10 @@ public class QueryCollection : IQueryCollection
     /// </summary>
     public static readonly QueryCollection Empty = new QueryCollection();
     private static readonly string[] EmptyKeys = Array.Empty<string>();
+
     // Pre-box
-    private static readonly IEnumerator<KeyValuePair<string, StringValues>> EmptyIEnumeratorType = default(Enumerator);
+    private static readonly IEnumerator<KeyValuePair<string, StringValues>> EmptyIEnumeratorType =
+        default(Enumerator);
     private static readonly IEnumerator EmptyIEnumerator = default(Enumerator);
 
     private Dictionary<string, StringValues>? Store { get; }
@@ -29,9 +31,7 @@ public class QueryCollection : IQueryCollection
     /// <summary>
     /// Initializes a new instance of <see cref="QueryCollection"/>.
     /// </summary>
-    public QueryCollection()
-    {
-    }
+    public QueryCollection() { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="QueryCollection"/>.
@@ -161,7 +161,9 @@ public class QueryCollection : IQueryCollection
     /// Returns an enumerator that iterates through a collection.
     /// </summary>
     /// <returns>An <see cref="IEnumerator{T}" /> object that can be used to iterate through the collection.</returns>
-    IEnumerator<KeyValuePair<string, StringValues>> IEnumerable<KeyValuePair<string, StringValues>>.GetEnumerator()
+    IEnumerator<KeyValuePair<string, StringValues>> IEnumerable<
+        KeyValuePair<string, StringValues>
+    >.GetEnumerator()
     {
         if (Store == null || Store.Count == 0)
         {
@@ -230,16 +232,11 @@ public class QueryCollection : IQueryCollection
         }
 
         /// <inheritdoc />
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         object IEnumerator.Current
         {
-            get
-            {
-                return Current;
-            }
+            get { return Current; }
         }
 
         void IEnumerator.Reset()
@@ -256,6 +253,9 @@ public class QueryCollection : IQueryCollection
         private readonly QueryCollectionInternal _collection = collection;
 
         [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
-        public KeyValuePair<string, string>[] Items => _collection.Select(pair => new KeyValuePair<string, string>(pair.Key, pair.Value.ToString())).ToArray();
+        public KeyValuePair<string, string>[] Items =>
+            _collection
+                .Select(pair => new KeyValuePair<string, string>(pair.Key, pair.Value.ToString()))
+                .ToArray();
     }
 }

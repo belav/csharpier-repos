@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Net.Sockets {
+namespace System.Net.Sockets
+{
     using System;
     using System.Collections;
     using System.Configuration;
@@ -34,11 +35,11 @@ namespace System.Net.Sockets {
     // amount of data available is queried by "Available" property (FIONREAD)
     // The other flags are not exposed currently
     //
-    internal static class IoctlSocketConstants {
-
-        public const int FIONREAD   = 0x4004667F;
-        public const int FIONBIO    = unchecked((int)0x8004667E);
-        public const int FIOASYNC   = unchecked((int)0x8004667D);
+    internal static class IoctlSocketConstants
+    {
+        public const int FIONREAD = 0x4004667F;
+        public const int FIONBIO = unchecked((int)0x8004667E);
+        public const int FIOASYNC = unchecked((int)0x8004667D);
         public const int SIOGETEXTENSIONFUNCTIONPOINTER = unchecked((int)0xC8000006);
 
         //
@@ -76,19 +77,20 @@ namespace System.Net.Sockets {
     // WinSock 2 extension -- bit values and indices for FD_XXX network events
     //
     [Flags]
-    internal enum AsyncEventBits {
-        FdNone                     = 0,
-        FdRead                     = 1 << 0,
-        FdWrite                    = 1 << 1,
-        FdOob                      = 1 << 2,
-        FdAccept                   = 1 << 3,
-        FdConnect                  = 1 << 4,
-        FdClose                    = 1 << 5,
-        FdQos                      = 1 << 6,
-        FdGroupQos                 = 1 << 7,
-        FdRoutingInterfaceChange   = 1 << 8,
-        FdAddressListChange        = 1 << 9,
-        FdAllEvents                = (1 << 10) - 1,
+    internal enum AsyncEventBits
+    {
+        FdNone = 0,
+        FdRead = 1 << 0,
+        FdWrite = 1 << 1,
+        FdOob = 1 << 2,
+        FdAccept = 1 << 3,
+        FdConnect = 1 << 4,
+        FdClose = 1 << 5,
+        FdQos = 1 << 6,
+        FdGroupQos = 1 << 7,
+        FdRoutingInterfaceChange = 1 << 8,
+        FdAddressListChange = 1 << 9,
+        FdAllEvents = (1 << 10) - 1,
     }
 
     // Array position in NetworkEvents (WSAEnumNetworkEvents).
@@ -118,7 +120,7 @@ namespace System.Net.Sockets {
         //
         // An array that contains any associated error codes, with an array index that corresponds to the position of event bits in lNetworkEvents. The identifiers FD_READ_BIT, FD_WRITE_BIT and other can be used to index the iErrorCode array.
         //
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int) AsyncEventBitsPos.FdMaxEvents)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AsyncEventBitsPos.FdMaxEvents)]
         public int[] ErrorCodes;
     }
 
@@ -126,9 +128,9 @@ namespace System.Net.Sockets {
     // Structure used in select() call, taken from the BSD file sys/time.h.
     //
     [StructLayout(LayoutKind.Sequential)]
-    internal struct TimeValue {
-        public int Seconds;  // seconds
+    internal struct TimeValue
+    {
+        public int Seconds; // seconds
         public int Microseconds; // and microseconds
-
     } // struct TimeValue
 } // namespace System.Net.Sockets

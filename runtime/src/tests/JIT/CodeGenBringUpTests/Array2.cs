@@ -20,8 +20,9 @@ public class BringUpTest_Array2
     [Fact]
     public static int TestEntryPoint()
     {
-        int[] a = {1, 2, 3, 4};
-        if (Array2(a) != 2) return Fail;
+        int[] a = { 1, 2, 3, 4 };
+        if (Array2(a) != 2)
+            return Fail;
         return Pass;
     }
 }

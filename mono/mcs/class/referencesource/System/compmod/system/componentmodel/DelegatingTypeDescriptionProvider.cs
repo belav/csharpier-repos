@@ -1,10 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="DelegatingTypeDescriptionProvider.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel {
+namespace System.ComponentModel
+{
     using System;
     using System.Collections;
     using System.Reflection;
@@ -18,7 +19,7 @@ namespace System.ComponentModel {
     ///     or instance to its corresponding base type.
     /// </devdoc>
     [HostProtection(SharedState = true)]
-    internal sealed class DelegatingTypeDescriptionProvider : TypeDescriptionProvider 
+    internal sealed class DelegatingTypeDescriptionProvider : TypeDescriptionProvider
     {
         private Type _type;
 
@@ -32,36 +33,40 @@ namespace System.ComponentModel {
         }
 
         /// <devdoc>
-        ///     
+        ///
         /// </devdoc>
-        internal TypeDescriptionProvider Provider {
-            get {
-                return TypeDescriptor.GetProviderRecursive(_type);
-            }
+        internal TypeDescriptionProvider Provider
+        {
+            get { return TypeDescriptor.GetProviderRecursive(_type); }
         }
 
         /// <devdoc>
-        ///     This method is used to create an instance that can substitute for another 
-        ///     data type.   If the method is not interested in providing a substitute 
+        ///     This method is used to create an instance that can substitute for another
+        ///     data type.   If the method is not interested in providing a substitute
         ///     instance, it should call base.
         /// </devdoc>
-        public override object CreateInstance(IServiceProvider provider, Type objectType, Type[] argTypes, object[] args)
+        public override object CreateInstance(
+            IServiceProvider provider,
+            Type objectType,
+            Type[] argTypes,
+            object[] args
+        )
         {
             return Provider.CreateInstance(provider, objectType, argTypes, args);
         }
 
         /// <devdoc>
-        ///     TypeDescriptor may need to perform complex operations on collections of metadata.  
-        ///     Since types are not unloaded for the life of a domain, TypeDescriptor will 
-        ///     automatically cache the results of these operations based on type.  There are a 
-        ///     number of operations that use live object instances, however.  These operations 
-        ///     cannot be cached within TypeDescriptor because caching them would prevent the 
-        ///     object from garbage collecting.  Instead, TypeDescriptor allows for a per-object 
-        ///     cache, accessed as an IDictionary of key/value pairs, to exist on an object.  
-        ///     The GetCache method returns an instance of this cache.  GetCache will return 
+        ///     TypeDescriptor may need to perform complex operations on collections of metadata.
+        ///     Since types are not unloaded for the life of a domain, TypeDescriptor will
+        ///     automatically cache the results of these operations based on type.  There are a
+        ///     number of operations that use live object instances, however.  These operations
+        ///     cannot be cached within TypeDescriptor because caching them would prevent the
+        ///     object from garbage collecting.  Instead, TypeDescriptor allows for a per-object
+        ///     cache, accessed as an IDictionary of key/value pairs, to exist on an object.
+        ///     The GetCache method returns an instance of this cache.  GetCache will return
         ///     null if there is no supported cache for an object.
         /// </devdoc>
-	    public override IDictionary GetCache(object instance)
+        public override IDictionary GetCache(object instance)
         {
             return Provider.GetCache(instance);
         }
@@ -75,23 +80,23 @@ namespace System.ComponentModel {
         ///     If not overridden, the default implementation of this method will call
         ///     GetTypeDescriptor.GetComponentName.
         /// </devdoc>
-        public override string GetFullComponentName(object component) 
+        public override string GetFullComponentName(object component)
         {
             return Provider.GetFullComponentName(component);
         }
 
         /// <devdoc>
-        ///     This method returns an extended custom type descriptor for the given object.  
-        ///     An extended type descriptor is a custom type descriptor that offers properties 
-        ///     that other objects have added to this object, but are not actually defined on 
-        ///     the object.  For example, in the .NET Framework Component Model, objects that 
-        ///     implement the interface IExtenderProvider can "attach" properties to other 
-        ///     objects that reside in the same logical container.  The GetTypeDescriptor 
-        ///     method does not return a type descriptor that provides these extra extended 
-        ///     properties.  GetExtendedTypeDescriptor returns the set of these extended 
-        ///     properties.  TypeDescriptor will automatically merge the results of these 
-        ///     two property collections.  Note that while the .NET Framework component 
-        ///     model only supports extended properties this API can be used for extended 
+        ///     This method returns an extended custom type descriptor for the given object.
+        ///     An extended type descriptor is a custom type descriptor that offers properties
+        ///     that other objects have added to this object, but are not actually defined on
+        ///     the object.  For example, in the .NET Framework Component Model, objects that
+        ///     implement the interface IExtenderProvider can "attach" properties to other
+        ///     objects that reside in the same logical container.  The GetTypeDescriptor
+        ///     method does not return a type descriptor that provides these extra extended
+        ///     properties.  GetExtendedTypeDescriptor returns the set of these extended
+        ///     properties.  TypeDescriptor will automatically merge the results of these
+        ///     two property collections.  Note that while the .NET Framework component
+        ///     model only supports extended properties this API can be used for extended
         ///     attributes and events as well, if the type description provider supports it.
         /// </devdoc>
         public override ICustomTypeDescriptor GetExtendedTypeDescriptor(object instance)
@@ -105,8 +110,8 @@ namespace System.ComponentModel {
         }
 
         /// <devdoc>
-        ///     The GetReflection method is a lower level version of GetTypeDescriptor.  
-        ///     If no custom type descriptor can be located for an object, GetReflection 
+        ///     The GetReflection method is a lower level version of GetTypeDescriptor.
+        ///     If no custom type descriptor can be located for an object, GetReflection
         ///     is called to perform normal reflection against the object.
         /// </devdoc>
         public override Type GetReflectionType(Type objectType, object instance)
@@ -114,16 +119,17 @@ namespace System.ComponentModel {
             return Provider.GetReflectionType(objectType, instance);
         }
 
-        public override Type GetRuntimeType(Type objectType) {
+        public override Type GetRuntimeType(Type objectType)
+        {
             return Provider.GetRuntimeType(objectType);
         }
 
         /// <devdoc>
-        ///     This method returns a custom type descriptor for the given type / object.  
-        ///     The objectType parameter is always valid, but the instance parameter may 
-        ///     be null if no instance was passed to TypeDescriptor.  The method should 
-        ///     return a custom type descriptor for the object.  If the method is not 
-        ///     interested in providing type information for the object it should 
+        ///     This method returns a custom type descriptor for the given type / object.
+        ///     The objectType parameter is always valid, but the instance parameter may
+        ///     be null if no instance was passed to TypeDescriptor.  The method should
+        ///     return a custom type descriptor for the object.  If the method is not
+        ///     interested in providing type information for the object it should
         ///     return null.
         /// </devdoc>
         public override ICustomTypeDescriptor GetTypeDescriptor(Type objectType, object instance)
@@ -131,9 +137,9 @@ namespace System.ComponentModel {
             return Provider.GetTypeDescriptor(objectType, instance);
         }
 
-        public override bool IsSupportedType(Type type) {
+        public override bool IsSupportedType(Type type)
+        {
             return Provider.IsSupportedType(type);
         }
     }
 }
-

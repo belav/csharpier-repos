@@ -11,6 +11,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Structure
 {
     internal interface IFSharpBlockStructureService
     {
-        Task<FSharpBlockStructure> GetBlockStructureAsync(Document document, CancellationToken cancellationToken);
+        Task<FSharpBlockStructure> GetBlockStructureAsync(
+            Document document,
+            CancellationToken cancellationToken
+        );
     }
 }

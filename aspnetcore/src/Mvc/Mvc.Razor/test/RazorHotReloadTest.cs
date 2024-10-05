@@ -19,7 +19,9 @@ public class RazorHotReloadTest
         // Arrange
         var serviceProvider = GetServiceProvider();
 
-        var compilerProvider = Assert.IsType<DefaultViewCompilerProvider>(serviceProvider.GetRequiredService<IViewCompilerProvider>());
+        var compilerProvider = Assert.IsType<DefaultViewCompilerProvider>(
+            serviceProvider.GetRequiredService<IViewCompilerProvider>()
+        );
         var hotReload = serviceProvider.GetRequiredService<RazorHotReload>();
 
         // Act
@@ -35,7 +37,9 @@ public class RazorHotReloadTest
         // Arrange
         var serviceProvider = GetServiceProvider();
 
-        var viewEngine = Assert.IsType<RazorViewEngine>(serviceProvider.GetRequiredService<IRazorViewEngine>());
+        var viewEngine = Assert.IsType<RazorViewEngine>(
+            serviceProvider.GetRequiredService<IRazorViewEngine>()
+        );
         var hotReload = serviceProvider.GetRequiredService<RazorHotReload>();
         var lookup = viewEngine.ViewLookupCache;
 
@@ -52,13 +56,17 @@ public class RazorHotReloadTest
         // Arrange
         var serviceProvider = GetServiceProvider();
 
-        var pageActivator = Assert.IsType<RazorPageActivator>(serviceProvider.GetRequiredService<IRazorPageActivator>());
+        var pageActivator = Assert.IsType<RazorPageActivator>(
+            serviceProvider.GetRequiredService<IRazorPageActivator>()
+        );
         var hotReload = serviceProvider.GetRequiredService<RazorHotReload>();
         var cache = pageActivator.ActivationInfo;
         cache[new RazorPageActivator.CacheKey()] = new RazorPagePropertyActivator(
-            typeof(string), typeof(object),
+            typeof(string),
+            typeof(object),
             new EmptyModelMetadataProvider(),
-            new RazorPagePropertyActivator.PropertyValueAccessors());
+            new RazorPagePropertyActivator.PropertyValueAccessors()
+        );
 
         // Act
         Assert.Single(pageActivator.ActivationInfo);
@@ -75,7 +83,7 @@ public class RazorHotReloadTest
         var serviceProvider = new ServiceCollection()
             .AddControllersWithViews()
             .Services
-            // Manually add RazorHotReload because it's only added if MetadataUpdateHandler.IsSupported = true 
+            // Manually add RazorHotReload because it's only added if MetadataUpdateHandler.IsSupported = true
             .AddSingleton<RazorHotReload>()
             .AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance)
             .AddSingleton<DiagnosticSource>(diagnosticListener)

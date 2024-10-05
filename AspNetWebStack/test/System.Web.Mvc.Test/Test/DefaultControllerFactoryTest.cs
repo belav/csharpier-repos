@@ -25,23 +25,28 @@ namespace System.Web.Mvc.Test
             // Arrange
             RouteBase route = new Mock<RouteBase>().Object;
 
-            Type[] matchingTypes = new Type[]
-            {
-                typeof(object),
-                typeof(string)
-            };
+            Type[] matchingTypes = new Type[] { typeof(object), typeof(string) };
 
             // Act
-            InvalidOperationException exception = DefaultControllerFactory.CreateAmbiguousControllerException(route, "Foo", matchingTypes);
+            InvalidOperationException exception =
+                DefaultControllerFactory.CreateAmbiguousControllerException(
+                    route,
+                    "Foo",
+                    matchingTypes
+                );
 
             // Assert
             Assert.Equal(
-                "Multiple types were found that match the controller named 'Foo'. This can happen if the route that services this request does not specify namespaces to search for a controller that matches the request. If this is the case, register this route by calling an overload of the 'MapRoute' method that takes a 'namespaces' parameter." + Environment.NewLine
-              + Environment.NewLine
-              + "The request for 'Foo' has found the following matching controllers:" + Environment.NewLine
-              + "System.Object" + Environment.NewLine
-              + "System.String",
-                exception.Message);
+                "Multiple types were found that match the controller named 'Foo'. This can happen if the route that services this request does not specify namespaces to search for a controller that matches the request. If this is the case, register this route by calling an overload of the 'MapRoute' method that takes a 'namespaces' parameter."
+                    + Environment.NewLine
+                    + Environment.NewLine
+                    + "The request for 'Foo' has found the following matching controllers:"
+                    + Environment.NewLine
+                    + "System.Object"
+                    + Environment.NewLine
+                    + "System.String",
+                exception.Message
+            );
         }
 
         [Fact]
@@ -50,23 +55,28 @@ namespace System.Web.Mvc.Test
             // Arrange
             RouteBase route = new Route("{controller}/blah", new Mock<IRouteHandler>().Object);
 
-            Type[] matchingTypes = new Type[]
-            {
-                typeof(object),
-                typeof(string)
-            };
+            Type[] matchingTypes = new Type[] { typeof(object), typeof(string) };
 
             // Act
-            InvalidOperationException exception = DefaultControllerFactory.CreateAmbiguousControllerException(route, "Foo", matchingTypes);
+            InvalidOperationException exception =
+                DefaultControllerFactory.CreateAmbiguousControllerException(
+                    route,
+                    "Foo",
+                    matchingTypes
+                );
 
             // Assert
             Assert.Equal(
-                "Multiple types were found that match the controller named 'Foo'. This can happen if the route that services this request ('{controller}/blah') does not specify namespaces to search for a controller that matches the request. If this is the case, register this route by calling an overload of the 'MapRoute' method that takes a 'namespaces' parameter." + Environment.NewLine
-              + Environment.NewLine
-              + "The request for 'Foo' has found the following matching controllers:" + Environment.NewLine
-              + "System.Object" + Environment.NewLine
-              + "System.String",
-                exception.Message);
+                "Multiple types were found that match the controller named 'Foo'. This can happen if the route that services this request ('{controller}/blah') does not specify namespaces to search for a controller that matches the request. If this is the case, register this route by calling an overload of the 'MapRoute' method that takes a 'namespaces' parameter."
+                    + Environment.NewLine
+                    + Environment.NewLine
+                    + "The request for 'Foo' has found the following matching controllers:"
+                    + Environment.NewLine
+                    + "System.Object"
+                    + Environment.NewLine
+                    + "System.String",
+                exception.Message
+            );
         }
 
         [Fact]
@@ -79,11 +89,10 @@ namespace System.Web.Mvc.Test
             Assert.ThrowsArgumentNull(
                 delegate
                 {
-                    ((IControllerFactory)factory).CreateController(
-                        null,
-                        "foo");
+                    ((IControllerFactory)factory).CreateController(null, "foo");
                 },
-                "requestContext");
+                "requestContext"
+            );
         }
 
         [Fact]
@@ -98,22 +107,32 @@ namespace System.Web.Mvc.Test
                 {
                     ((IControllerFactory)factory).CreateController(
                         new RequestContext(new Mock<HttpContextBase>().Object, new RouteData()),
-                        String.Empty);
+                        String.Empty
+                    );
                 },
-                "Value cannot be null or empty.\r\nParameter name: controllerName");
+                "Value cannot be null or empty.\r\nParameter name: controllerName"
+            );
         }
 
         [Fact]
         public void CreateControllerReturnsControllerInstance()
         {
             // Arrange
-            RequestContext requestContext = new RequestContext(new Mock<HttpContextBase>().Object, new RouteData());
+            RequestContext requestContext = new RequestContext(
+                new Mock<HttpContextBase>().Object,
+                new RouteData()
+            );
             Mock<DefaultControllerFactory> factoryMock = new Mock<DefaultControllerFactory>();
             factoryMock.CallBase = true;
-            factoryMock.Setup(o => o.GetControllerType(requestContext, "moo")).Returns(typeof(DummyController));
+            factoryMock
+                .Setup(o => o.GetControllerType(requestContext, "moo"))
+                .Returns(typeof(DummyController));
 
             // Act
-            IController controller = ((IControllerFactory)factoryMock.Object).CreateController(requestContext, "moo");
+            IController controller = ((IControllerFactory)factoryMock.Object).CreateController(
+                requestContext,
+                "moo"
+            );
 
             // Assert
             Assert.IsType<DummyController>(controller);
@@ -123,13 +142,23 @@ namespace System.Web.Mvc.Test
         public void CreateControllerCanReturnNull()
         {
             // Arrange
-            RequestContext requestContext = new RequestContext(new Mock<HttpContextBase>().Object, new RouteData());
+            RequestContext requestContext = new RequestContext(
+                new Mock<HttpContextBase>().Object,
+                new RouteData()
+            );
             Mock<DefaultControllerFactory> factoryMock = new Mock<DefaultControllerFactory>();
-            factoryMock.Setup(o => o.GetControllerType(requestContext, "moo")).Returns(typeof(DummyController));
-            factoryMock.Setup(o => o.GetControllerInstance(requestContext, typeof(DummyController))).Returns((ControllerBase)null);
+            factoryMock
+                .Setup(o => o.GetControllerType(requestContext, "moo"))
+                .Returns(typeof(DummyController));
+            factoryMock
+                .Setup(o => o.GetControllerInstance(requestContext, typeof(DummyController)))
+                .Returns((ControllerBase)null);
 
             // Act
-            IController controller = ((IControllerFactory)factoryMock.Object).CreateController(requestContext, "moo");
+            IController controller = ((IControllerFactory)factoryMock.Object).CreateController(
+                requestContext,
+                "moo"
+            );
 
             // Assert
             Assert.Null(controller);
@@ -160,27 +189,44 @@ namespace System.Web.Mvc.Test
             contextMock.Setup(o => o.Request).Returns(requestMock.Object);
             requestMock.Setup(o => o.Path).Returns("somepath");
             RequestContext requestContext = new RequestContext(contextMock.Object, new RouteData());
-            Mock<DefaultControllerFactory> factoryMock = new Mock<DefaultControllerFactory> { CallBase = true };
+            Mock<DefaultControllerFactory> factoryMock = new Mock<DefaultControllerFactory>
+            {
+                CallBase = true,
+            };
             factoryMock.Setup(o => o.GetControllerType(requestContext, "moo")).Returns((Type)null);
 
             // Act
             Assert.ThrowsHttpException(
-                delegate { ((IControllerFactory)factoryMock.Object).CreateController(requestContext, "moo"); },
+                delegate
+                {
+                    ((IControllerFactory)factoryMock.Object).CreateController(
+                        requestContext,
+                        "moo"
+                    );
+                },
                 "The controller for path 'somepath' was not found or does not implement IController.",
-                404);
+                404
+            );
         }
 
         [Fact]
         public void GetControllerInstanceThrowsIfControllerTypeIsNotControllerBase()
         {
             // Arrange
-            RequestContext requestContext = new RequestContext(new Mock<HttpContextBase>().Object, new RouteData());
+            RequestContext requestContext = new RequestContext(
+                new Mock<HttpContextBase>().Object,
+                new RouteData()
+            );
             DefaultControllerFactory factory = new DefaultControllerFactory();
 
             // Act
             Assert.Throws<ArgumentException>(
-                delegate { factory.GetControllerInstance(requestContext, typeof(int)); },
-                "The controller type 'System.Int32' must implement IController.\r\nParameter name: controllerType");
+                delegate
+                {
+                    factory.GetControllerInstance(requestContext, typeof(int));
+                },
+                "The controller type 'System.Int32' must implement IController.\r\nParameter name: controllerType"
+            );
         }
 
         [Fact]
@@ -191,12 +237,21 @@ namespace System.Web.Mvc.Test
             RequestContext requestContext = new RequestContext(contextMock.Object, new RouteData());
             Mock<DefaultControllerFactory> factoryMock = new Mock<DefaultControllerFactory>();
             factoryMock.CallBase = true;
-            factoryMock.Setup(o => o.GetControllerType(requestContext, "moo")).Returns(typeof(DummyControllerThrows));
+            factoryMock
+                .Setup(o => o.GetControllerType(requestContext, "moo"))
+                .Returns(typeof(DummyControllerThrows));
 
             // Act
             Exception ex = Assert.Throws<InvalidOperationException>(
-                delegate { ((IControllerFactory)factoryMock.Object).CreateController(requestContext, "moo"); },
-                "An error occurred when trying to create a controller of type 'System.Web.Mvc.Test.DefaultControllerFactoryTest+DummyControllerThrows'. Make sure that the controller has a parameterless public constructor.");
+                delegate
+                {
+                    ((IControllerFactory)factoryMock.Object).CreateController(
+                        requestContext,
+                        "moo"
+                    );
+                },
+                "An error occurred when trying to create a controller of type 'System.Web.Mvc.Test.DefaultControllerFactoryTest+DummyControllerThrows'. Make sure that the controller has a parameterless public constructor."
+            );
 
             Assert.Equal("constructor", ex.InnerException.InnerException.Message);
         }
@@ -205,22 +260,25 @@ namespace System.Web.Mvc.Test
         public void GetControllerSessionBehaviorGuardClauses()
         {
             // Arrange
-            RequestContext requestContext = new RequestContext(new Mock<HttpContextBase>().Object, new RouteData());
+            RequestContext requestContext = new RequestContext(
+                new Mock<HttpContextBase>().Object,
+                new RouteData()
+            );
             IControllerFactory factory = new DefaultControllerFactory();
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
                 () => factory.GetControllerSessionBehavior(null, "controllerName"),
                 "requestContext"
-                );
+            );
             Assert.ThrowsArgumentNullOrEmpty(
                 () => factory.GetControllerSessionBehavior(requestContext, null),
                 "controllerName"
-                );
+            );
             Assert.ThrowsArgumentNullOrEmpty(
                 () => factory.GetControllerSessionBehavior(requestContext, ""),
                 "controllerName"
-                );
+            );
         }
 
         [Fact]
@@ -243,7 +301,10 @@ namespace System.Web.Mvc.Test
             var factory = new DefaultControllerFactory();
 
             // Act
-            SessionStateBehavior result = factory.GetControllerSessionBehavior(null, typeof(object));
+            SessionStateBehavior result = factory.GetControllerSessionBehavior(
+                null,
+                typeof(object)
+            );
 
             // Assert
             Assert.Equal(SessionStateBehavior.Default, result);
@@ -256,35 +317,46 @@ namespace System.Web.Mvc.Test
             var factory = new DefaultControllerFactory();
 
             // Act
-            SessionStateBehavior result = factory.GetControllerSessionBehavior(null, typeof(MyReadOnlyController));
+            SessionStateBehavior result = factory.GetControllerSessionBehavior(
+                null,
+                typeof(MyReadOnlyController)
+            );
 
             // Assert
             Assert.Equal(SessionStateBehavior.ReadOnly, result);
         }
 
         [SessionState(SessionStateBehavior.ReadOnly)]
-        class MyReadOnlyController
-        {
-        }
+        class MyReadOnlyController { }
 
         [Fact]
         public void GetControllerTypeWithEmptyControllerNameThrows()
         {
             // Arrange
-            RequestContext requestContext = new RequestContext(new Mock<HttpContextBase>().Object, new RouteData());
+            RequestContext requestContext = new RequestContext(
+                new Mock<HttpContextBase>().Object,
+                new RouteData()
+            );
             DefaultControllerFactory factory = new DefaultControllerFactory();
 
             // Act
             Assert.Throws<ArgumentException>(
-                delegate { factory.GetControllerType(requestContext, String.Empty); },
-                "Value cannot be null or empty.\r\nParameter name: controllerName");
+                delegate
+                {
+                    factory.GetControllerType(requestContext, String.Empty);
+                },
+                "Value cannot be null or empty.\r\nParameter name: controllerName"
+            );
         }
 
         [Fact]
         public void GetControllerTypeForNoAssemblies()
         {
             // Arrange
-            RequestContext requestContext = new RequestContext(new Mock<HttpContextBase>().Object, new RouteData());
+            RequestContext requestContext = new RequestContext(
+                new Mock<HttpContextBase>().Object,
+                new RouteData()
+            );
             DefaultControllerFactory factory = new DefaultControllerFactory();
             MockBuildManager buildManagerMock = new MockBuildManager(new Assembly[] { });
             ControllerTypeCache controllerTypeCache = new ControllerTypeCache();
@@ -304,9 +376,17 @@ namespace System.Web.Mvc.Test
         public void GetControllerTypeForOneAssembly()
         {
             // Arrange
-            RequestContext requestContext = new RequestContext(new Mock<HttpContextBase>().Object, new RouteData());
-            DefaultControllerFactory factory = GetDefaultControllerFactory("ns1a.ns1b", "ns2a.ns2b");
-            MockBuildManager buildManagerMock = new MockBuildManager(new Assembly[] { Assembly.Load("MvcAssembly1") });
+            RequestContext requestContext = new RequestContext(
+                new Mock<HttpContextBase>().Object,
+                new RouteData()
+            );
+            DefaultControllerFactory factory = GetDefaultControllerFactory(
+                "ns1a.ns1b",
+                "ns2a.ns2b"
+            );
+            MockBuildManager buildManagerMock = new MockBuildManager(
+                new Assembly[] { Assembly.Load("MvcAssembly1") }
+            );
             ControllerTypeCache controllerTypeCache = new ControllerTypeCache();
 
             factory.BuildManager = buildManagerMock;
@@ -329,9 +409,19 @@ namespace System.Web.Mvc.Test
         public void GetControllerTypeForManyAssemblies()
         {
             // Arrange
-            RequestContext requestContext = new RequestContext(new Mock<HttpContextBase>().Object, new RouteData());
-            DefaultControllerFactory factory = GetDefaultControllerFactory("ns1a.ns1b", "ns2a.ns2b", "ns3a.ns3b", "ns4a.ns4b");
-            MockBuildManager buildManagerMock = new MockBuildManager(new Assembly[] { Assembly.Load("MvcAssembly1"), Assembly.Load("MvcAssembly2") });
+            RequestContext requestContext = new RequestContext(
+                new Mock<HttpContextBase>().Object,
+                new RouteData()
+            );
+            DefaultControllerFactory factory = GetDefaultControllerFactory(
+                "ns1a.ns1b",
+                "ns2a.ns2b",
+                "ns3a.ns3b",
+                "ns4a.ns4b"
+            );
+            MockBuildManager buildManagerMock = new MockBuildManager(
+                new Assembly[] { Assembly.Load("MvcAssembly1"), Assembly.Load("MvcAssembly2") }
+            );
             ControllerTypeCache controllerTypeCache = new ControllerTypeCache();
 
             factory.BuildManager = buildManagerMock;
@@ -370,8 +460,13 @@ namespace System.Web.Mvc.Test
             // Arrange
             RequestContext requestContext = GetRequestContextWithNamespaces("ns3a", "ns3a.ns3b");
             requestContext.RouteData.DataTokens["UseNamespaceFallback"] = false;
-            DefaultControllerFactory factory = GetDefaultControllerFactory("ns1a.ns1b", "ns2a.ns2b");
-            MockBuildManager buildManagerMock = new MockBuildManager(new Assembly[] { Assembly.Load("MvcAssembly3") });
+            DefaultControllerFactory factory = GetDefaultControllerFactory(
+                "ns1a.ns1b",
+                "ns2a.ns2b"
+            );
+            MockBuildManager buildManagerMock = new MockBuildManager(
+                new Assembly[] { Assembly.Load("MvcAssembly3") }
+            );
             ControllerTypeCache controllerTypeCache = new ControllerTypeCache();
 
             factory.BuildManager = buildManagerMock;
@@ -391,9 +486,17 @@ namespace System.Web.Mvc.Test
         public void GetControllerTypeForAssembliesWithSameTypeNamesInDifferentNamespaces()
         {
             // Arrange
-            RequestContext requestContext = new RequestContext(new Mock<HttpContextBase>().Object, new RouteData());
-            DefaultControllerFactory factory = GetDefaultControllerFactory("ns1a.ns1b", "ns2a.ns2b");
-            MockBuildManager buildManagerMock = new MockBuildManager(new Assembly[] { Assembly.Load("MvcAssembly1"), Assembly.Load("MvcAssembly3") });
+            RequestContext requestContext = new RequestContext(
+                new Mock<HttpContextBase>().Object,
+                new RouteData()
+            );
+            DefaultControllerFactory factory = GetDefaultControllerFactory(
+                "ns1a.ns1b",
+                "ns2a.ns2b"
+            );
+            MockBuildManager buildManagerMock = new MockBuildManager(
+                new Assembly[] { Assembly.Load("MvcAssembly1"), Assembly.Load("MvcAssembly3") }
+            );
             ControllerTypeCache controllerTypeCache = new ControllerTypeCache();
 
             factory.BuildManager = buildManagerMock;
@@ -418,9 +521,17 @@ namespace System.Web.Mvc.Test
         public void GetControllerTypeForAssembliesWithSameTypeNamesInDifferentNamespacesThrowsIfAmbiguous()
         {
             // Arrange
-            RequestContext requestContext = new RequestContext(new Mock<HttpContextBase>().Object, new RouteData());
-            DefaultControllerFactory factory = GetDefaultControllerFactory("ns1a.ns1b", "ns3a.ns3b");
-            MockBuildManager buildManagerMock = new MockBuildManager(new Assembly[] { Assembly.Load("MvcAssembly1"), Assembly.Load("MvcAssembly3") });
+            RequestContext requestContext = new RequestContext(
+                new Mock<HttpContextBase>().Object,
+                new RouteData()
+            );
+            DefaultControllerFactory factory = GetDefaultControllerFactory(
+                "ns1a.ns1b",
+                "ns3a.ns3b"
+            );
+            MockBuildManager buildManagerMock = new MockBuildManager(
+                new Assembly[] { Assembly.Load("MvcAssembly1"), Assembly.Load("MvcAssembly3") }
+            );
             ControllerTypeCache controllerTypeCache = new ControllerTypeCache();
 
             factory.BuildManager = buildManagerMock;
@@ -428,12 +539,19 @@ namespace System.Web.Mvc.Test
 
             // Act
             Assert.Throws<InvalidOperationException>(
-                delegate { factory.GetControllerType(requestContext, "C1"); },
-                "Multiple types were found that match the controller named 'C1'. This can happen if the route that services this request does not specify namespaces to search for a controller that matches the request. If this is the case, register this route by calling an overload of the 'MapRoute' method that takes a 'namespaces' parameter." + Environment.NewLine
-              + Environment.NewLine
-              + "The request for 'C1' has found the following matching controllers:" + Environment.NewLine
-              + "NS1a.NS1b.C1Controller" + Environment.NewLine
-              + "NS3a.NS3b.C1Controller");
+                delegate
+                {
+                    factory.GetControllerType(requestContext, "C1");
+                },
+                "Multiple types were found that match the controller named 'C1'. This can happen if the route that services this request does not specify namespaces to search for a controller that matches the request. If this is the case, register this route by calling an overload of the 'MapRoute' method that takes a 'namespaces' parameter."
+                    + Environment.NewLine
+                    + Environment.NewLine
+                    + "The request for 'C1' has found the following matching controllers:"
+                    + Environment.NewLine
+                    + "NS1a.NS1b.C1Controller"
+                    + Environment.NewLine
+                    + "NS3a.NS3b.C1Controller"
+            );
 
             // Assert
             Assert.Equal(4, controllerTypeCache.Count);
@@ -443,9 +561,14 @@ namespace System.Web.Mvc.Test
         public void GetControllerTypeForAssembliesWithSameTypeNamesInSameNamespaceThrows()
         {
             // Arrange
-            RequestContext requestContext = new RequestContext(new Mock<HttpContextBase>().Object, new RouteData());
+            RequestContext requestContext = new RequestContext(
+                new Mock<HttpContextBase>().Object,
+                new RouteData()
+            );
             DefaultControllerFactory factory = GetDefaultControllerFactory("ns1a.ns1b");
-            MockBuildManager buildManagerMock = new MockBuildManager(new Assembly[] { Assembly.Load("MvcAssembly1"), Assembly.Load("MvcAssembly4") });
+            MockBuildManager buildManagerMock = new MockBuildManager(
+                new Assembly[] { Assembly.Load("MvcAssembly1"), Assembly.Load("MvcAssembly4") }
+            );
             ControllerTypeCache controllerTypeCache = new ControllerTypeCache();
 
             factory.BuildManager = buildManagerMock;
@@ -453,12 +576,19 @@ namespace System.Web.Mvc.Test
 
             // Act
             Assert.Throws<InvalidOperationException>(
-                delegate { factory.GetControllerType(requestContext, "C1"); },
-                "Multiple types were found that match the controller named 'C1'. This can happen if the route that services this request does not specify namespaces to search for a controller that matches the request. If this is the case, register this route by calling an overload of the 'MapRoute' method that takes a 'namespaces' parameter." + Environment.NewLine
-              + Environment.NewLine
-              + "The request for 'C1' has found the following matching controllers:" + Environment.NewLine
-              + "NS1a.NS1b.C1Controller" + Environment.NewLine
-              + "NS1a.NS1b.C1Controller");
+                delegate
+                {
+                    factory.GetControllerType(requestContext, "C1");
+                },
+                "Multiple types were found that match the controller named 'C1'. This can happen if the route that services this request does not specify namespaces to search for a controller that matches the request. If this is the case, register this route by calling an overload of the 'MapRoute' method that takes a 'namespaces' parameter."
+                    + Environment.NewLine
+                    + Environment.NewLine
+                    + "The request for 'C1' has found the following matching controllers:"
+                    + Environment.NewLine
+                    + "NS1a.NS1b.C1Controller"
+                    + Environment.NewLine
+                    + "NS1a.NS1b.C1Controller"
+            );
 
             // Assert
             Assert.Equal(4, controllerTypeCache.Count);
@@ -470,7 +600,9 @@ namespace System.Web.Mvc.Test
             // Arrange
             RequestContext requestContext = GetRequestContextWithNamespaces("ns3a.ns3b");
             DefaultControllerFactory factory = GetDefaultControllerFactory("ns1a.ns1b");
-            MockBuildManager buildManagerMock = new MockBuildManager(new Assembly[] { Assembly.Load("MvcAssembly1") });
+            MockBuildManager buildManagerMock = new MockBuildManager(
+                new Assembly[] { Assembly.Load("MvcAssembly1") }
+            );
             ControllerTypeCache controllerTypeCache = new ControllerTypeCache();
 
             factory.BuildManager = buildManagerMock;
@@ -493,8 +625,13 @@ namespace System.Web.Mvc.Test
             // Arrange
             RequestContext requestContext = GetRequestContextWithNamespaces("ns3a.ns3b");
             requestContext.RouteData.DataTokens["UseNamespaceFallback"] = false;
-            DefaultControllerFactory factory = GetDefaultControllerFactory("ns1a.ns1b", "ns2a.ns2b");
-            MockBuildManager buildManagerMock = new MockBuildManager(new Assembly[] { Assembly.Load("MvcAssembly1"), Assembly.Load("MvcAssembly3") });
+            DefaultControllerFactory factory = GetDefaultControllerFactory(
+                "ns1a.ns1b",
+                "ns2a.ns2b"
+            );
+            MockBuildManager buildManagerMock = new MockBuildManager(
+                new Assembly[] { Assembly.Load("MvcAssembly1"), Assembly.Load("MvcAssembly3") }
+            );
             ControllerTypeCache controllerTypeCache = new ControllerTypeCache();
 
             factory.BuildManager = buildManagerMock;
@@ -517,8 +654,13 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             RequestContext requestContext = GetRequestContextWithNamespaces("ns3a.ns3b");
-            DefaultControllerFactory factory = GetDefaultControllerFactory("ns1a.ns1b", "ns2a.ns2b");
-            MockBuildManager buildManagerMock = new MockBuildManager(new Assembly[] { Assembly.Load("MvcAssembly1"), Assembly.Load("MvcAssembly3") });
+            DefaultControllerFactory factory = GetDefaultControllerFactory(
+                "ns1a.ns1b",
+                "ns2a.ns2b"
+            );
+            MockBuildManager buildManagerMock = new MockBuildManager(
+                new Assembly[] { Assembly.Load("MvcAssembly1"), Assembly.Load("MvcAssembly3") }
+            );
             ControllerTypeCache controllerTypeCache = new ControllerTypeCache();
 
             factory.BuildManager = buildManagerMock;
@@ -544,9 +686,25 @@ namespace System.Web.Mvc.Test
         public void GetControllerTypeThatDoesntExist()
         {
             // Arrange
-            RequestContext requestContext = new RequestContext(new Mock<HttpContextBase>().Object, new RouteData());
-            DefaultControllerFactory factory = GetDefaultControllerFactory("ns1a.ns1b", "ns2a.ns2b", "ns3a.ns3b", "ns4a.ns4b");
-            MockBuildManager buildManagerMock = new MockBuildManager(new Assembly[] { Assembly.Load("MvcAssembly1"), Assembly.Load("MvcAssembly2"), Assembly.Load("MvcAssembly3"), Assembly.Load("MvcAssembly4") });
+            RequestContext requestContext = new RequestContext(
+                new Mock<HttpContextBase>().Object,
+                new RouteData()
+            );
+            DefaultControllerFactory factory = GetDefaultControllerFactory(
+                "ns1a.ns1b",
+                "ns2a.ns2b",
+                "ns3a.ns3b",
+                "ns4a.ns4b"
+            );
+            MockBuildManager buildManagerMock = new MockBuildManager(
+                new Assembly[]
+                {
+                    Assembly.Load("MvcAssembly1"),
+                    Assembly.Load("MvcAssembly2"),
+                    Assembly.Load("MvcAssembly3"),
+                    Assembly.Load("MvcAssembly4"),
+                }
+            );
             ControllerTypeCache controllerTypeCache = new ControllerTypeCache();
 
             factory.BuildManager = buildManagerMock;
@@ -574,7 +732,9 @@ namespace System.Web.Mvc.Test
             bool isController2 = ControllerTypeCache.IsControllerType(typeof(NonPublicController));
             bool isController3 = ControllerTypeCache.IsControllerType(typeof(MisspelledKontroller));
             bool isController4 = ControllerTypeCache.IsControllerType(typeof(AbstractController));
-            bool isController5 = ControllerTypeCache.IsControllerType(typeof(NonIControllerController));
+            bool isController5 = ControllerTypeCache.IsControllerType(
+                typeof(NonIControllerController)
+            );
             bool isController6 = ControllerTypeCache.IsControllerType(typeof(Goodcontroller));
 
             // Assert
@@ -598,7 +758,10 @@ namespace System.Web.Mvc.Test
         public void IsNamespaceMatch(string testNamespace, bool expectedResult)
         {
             // Act & Assert
-            Assert.Equal(expectedResult, ControllerTypeCache.IsNamespaceMatch(testNamespace, "Dummy.Controllers"));
+            Assert.Equal(
+                expectedResult,
+                ControllerTypeCache.IsNamespaceMatch(testNamespace, "Dummy.Controllers")
+            );
         }
 
         [Fact]
@@ -623,12 +786,20 @@ namespace System.Web.Mvc.Test
             var context = new RequestContext();
             var expectedController = new Goodcontroller();
             var resolverActivator = new Mock<IControllerActivator>();
-            resolverActivator.Setup(a => a.Create(context, typeof(Goodcontroller))).Returns(expectedController);
-            var activatorResolver = new Resolver<IControllerActivator> { Current = resolverActivator.Object };
+            resolverActivator
+                .Setup(a => a.Create(context, typeof(Goodcontroller)))
+                .Returns(expectedController);
+            var activatorResolver = new Resolver<IControllerActivator>
+            {
+                Current = resolverActivator.Object,
+            };
             var factory = new DefaultControllerFactory(null, activatorResolver, null);
 
             //Act
-            IController returnedController = factory.GetControllerInstance(context, typeof(Goodcontroller));
+            IController returnedController = factory.GetControllerInstance(
+                context,
+                typeof(Goodcontroller)
+            );
 
             //Assert
             Assert.Same(returnedController, expectedController);
@@ -641,11 +812,16 @@ namespace System.Web.Mvc.Test
             var context = new RequestContext();
             var expectedController = new Goodcontroller();
             var dependencyResolver = new Mock<IDependencyResolver>(MockBehavior.Strict);
-            dependencyResolver.Setup(dr => dr.GetService(typeof(Goodcontroller))).Returns(expectedController);
+            dependencyResolver
+                .Setup(dr => dr.GetService(typeof(Goodcontroller)))
+                .Returns(expectedController);
             var factory = new DefaultControllerFactory(null, null, dependencyResolver.Object);
 
             // Act
-            IController returnedController = factory.GetControllerInstance(context, typeof(Goodcontroller));
+            IController returnedController = factory.GetControllerInstance(
+                context,
+                typeof(Goodcontroller)
+            );
 
             // Assert
             Assert.Same(returnedController, expectedController);
@@ -663,7 +839,7 @@ namespace System.Web.Mvc.Test
             Assert.Throws<InvalidOperationException>(
                 () => factory.GetControllerInstance(context, typeof(NoParameterlessCtor)),
                 "An error occurred when trying to create a controller of type 'System.Web.Mvc.Test.DefaultControllerFactoryTest+NoParameterlessCtor'. Make sure that the controller has a parameterless public constructor."
-                );
+            );
         }
 
         [Fact]
@@ -674,16 +850,28 @@ namespace System.Web.Mvc.Test
             var expectedController = new Goodcontroller();
 
             Mock<IControllerActivator> activator = new Mock<IControllerActivator>();
-            activator.Setup(a => a.Create(context, typeof(Goodcontroller))).Returns(expectedController);
+            activator
+                .Setup(a => a.Create(context, typeof(Goodcontroller)))
+                .Returns(expectedController);
 
             var resolverActivator = new Mock<IControllerActivator>(MockBehavior.Strict);
-            var activatorResolver = new Resolver<IControllerActivator> { Current = resolverActivator.Object };
+            var activatorResolver = new Resolver<IControllerActivator>
+            {
+                Current = resolverActivator.Object,
+            };
 
             var dependencyResolver = new Mock<IDependencyResolver>(MockBehavior.Strict);
 
             //Act
-            var factory = new DefaultControllerFactory(activator.Object, activatorResolver, dependencyResolver.Object);
-            IController returnedController = factory.GetControllerInstance(context, typeof(Goodcontroller));
+            var factory = new DefaultControllerFactory(
+                activator.Object,
+                activatorResolver,
+                dependencyResolver.Object
+            );
+            IController returnedController = factory.GetControllerInstance(
+                context,
+                typeof(Goodcontroller)
+            );
 
             //Assert
             Assert.Same(returnedController, expectedController);
@@ -695,7 +883,10 @@ namespace System.Web.Mvc.Test
             // Arrange
             var requestContext = new RequestContext();
             requestContext.RouteData = new RouteData();
-            requestContext.RouteData.Route = DirectRouteTestHelpers.BuildDirectRouteFromMethod<WithRoutingAttributeController>(c => c.Action());
+            requestContext.RouteData.Route =
+                DirectRouteTestHelpers.BuildDirectRouteFromMethod<WithRoutingAttributeController>(
+                    c => c.Action()
+                );
             requestContext.RouteData.AddDirectRouteMatches();
 
             var expectedControllerType = typeof(WithRoutingAttributeController);
@@ -703,10 +894,14 @@ namespace System.Web.Mvc.Test
             var controllerActivator = new Mock<IControllerActivator>(MockBehavior.Strict).Object;
             var activatorResolver = new Resolver<IControllerActivator>();
 
-            var factory = new DefaultControllerFactory(controllerActivator, activatorResolver, null);
+            var factory = new DefaultControllerFactory(
+                controllerActivator,
+                activatorResolver,
+                null
+            );
 
             // Act
-            // if it would not get the controller type from the DirectRoute, then it would not 
+            // if it would not get the controller type from the DirectRoute, then it would not
             // be able to find any controller
             var type = factory.GetControllerType(requestContext, controllerName: null);
 
@@ -720,7 +915,8 @@ namespace System.Web.Mvc.Test
             // Arrange
             var requestContext = new RequestContext();
             requestContext.RouteData = new RouteData();
-            requestContext.RouteData.Route = DirectRouteTestHelpers.BuildDirectRouteFromController<AttributeRouteAtControllerLevelController>();
+            requestContext.RouteData.Route =
+                DirectRouteTestHelpers.BuildDirectRouteFromController<AttributeRouteAtControllerLevelController>();
             requestContext.RouteData.AddDirectRouteMatches();
 
             var expectedControllerType = typeof(AttributeRouteAtControllerLevelController);
@@ -728,10 +924,14 @@ namespace System.Web.Mvc.Test
             var controllerActivator = new Mock<IControllerActivator>(MockBehavior.Strict).Object;
             var activatorResolver = new Resolver<IControllerActivator>();
 
-            var factory = new DefaultControllerFactory(controllerActivator, activatorResolver, null);
+            var factory = new DefaultControllerFactory(
+                controllerActivator,
+                activatorResolver,
+                null
+            );
 
             // Act
-            // if it would not get the controller type from the DirectRoute, then it would not 
+            // if it would not get the controller type from the DirectRoute, then it would not
             // be able to find any controller
             var type = factory.GetControllerType(requestContext, controllerName: null);
 
@@ -746,32 +946,41 @@ namespace System.Web.Mvc.Test
             var requestContext = new RequestContext();
             requestContext.RouteData = new RouteData();
             SubRouteCollection subRoutes = new SubRouteCollection();
-            DirectRouteTestHelpers.AddDirectRouteFromController<AttributeRouteAtControllerLevelController>(subRoutes);
-            DirectRouteTestHelpers.AddDirectRouteFromMethod<WithRoutingAttributeController>(subRoutes, c => c.Action());
+            DirectRouteTestHelpers.AddDirectRouteFromController<AttributeRouteAtControllerLevelController>(
+                subRoutes
+            );
+            DirectRouteTestHelpers.AddDirectRouteFromMethod<WithRoutingAttributeController>(
+                subRoutes,
+                c => c.Action()
+            );
             requestContext.RouteData.Route = new RouteCollectionRoute(subRoutes);
             requestContext.RouteData.AddDirectRouteMatches();
 
             var controllerActivator = new Mock<IControllerActivator>(MockBehavior.Strict).Object;
             var activatorResolver = new Resolver<IControllerActivator>();
 
-            var factory = new DefaultControllerFactory(controllerActivator, activatorResolver, null);
+            var factory = new DefaultControllerFactory(
+                controllerActivator,
+                activatorResolver,
+                null
+            );
 
             // Act & Assert
-            Assert.Throws<InvalidOperationException>(() => factory.GetControllerType(requestContext, controllerName: null));
+            Assert.Throws<InvalidOperationException>(
+                () => factory.GetControllerType(requestContext, controllerName: null)
+            );
         }
 
         class NoParameterlessCtor : IController
         {
-            public NoParameterlessCtor(int x)
-            {
-            }
+            public NoParameterlessCtor(int x) { }
 
-            public void Execute(RequestContext requestContext)
-            {
-            }
+            public void Execute(RequestContext requestContext) { }
         }
 
-        private static DefaultControllerFactory GetDefaultControllerFactory(params string[] namespaces)
+        private static DefaultControllerFactory GetDefaultControllerFactory(
+            params string[] namespaces
+        )
         {
             ControllerBuilder builder = new ControllerBuilder();
             builder.DefaultNamespaces.UnionWith(namespaces);
@@ -812,49 +1021,33 @@ namespace System.Web.Mvc.Test
             #endregion
         }
 
-        public interface IDisposableController : IController, IDisposable
-        {
-        }
+        public interface IDisposableController : IController, IDisposable { }
     }
 
     // BAD: type isn't public
-    internal class NonPublicController : Controller
-    {
-    }
+    internal class NonPublicController : Controller { }
 
     // BAD: type doesn't end with 'Controller'
-    public class MisspelledKontroller : Controller
-    {
-    }
+    public class MisspelledKontroller : Controller { }
 
     // BAD: type is abstract
-    public abstract class AbstractController : Controller
-    {
-    }
+    public abstract class AbstractController : Controller { }
 
     // BAD: type doesn't implement IController
-    public class NonIControllerController
-    {
-    }
+    public class NonIControllerController { }
 
     // GOOD: 'Controller' suffix should be case-insensitive
-    public class Goodcontroller : Controller
-    {
-    }
+    public class Goodcontroller : Controller { }
 
     public class WithRoutingAttributeController : Controller
     {
         [Route("route")]
-        public void Action()
-        {
-        }
+        public void Action() { }
     }
 
     [Route("cool/{action}")]
     public class AttributeRouteAtControllerLevelController : Controller
     {
-        public void Action()
-        {
-        }
+        public void Action() { }
     }
 }

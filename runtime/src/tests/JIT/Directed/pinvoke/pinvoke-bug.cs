@@ -5,7 +5,7 @@ using System;
 using System.Runtime.InteropServices;
 using Xunit;
 
-// Test includes an intentional unreachable return 
+// Test includes an intentional unreachable return
 #pragma warning disable 162
 
 namespace PInvokeTest
@@ -29,7 +29,7 @@ namespace PInvokeTest
             {
                 Func(val);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 result = (Math.Abs(g - sin(val)) < 0.0001);
             }
@@ -45,7 +45,7 @@ namespace PInvokeTest
             g = sin(x);
 
             // A bit of control flow to throw off rareness detection
-            // Also we need float in here 
+            // Also we need float in here
             if (b)
             {
                 g = 0.0;
@@ -58,4 +58,3 @@ namespace PInvokeTest
         }
     }
 }
-

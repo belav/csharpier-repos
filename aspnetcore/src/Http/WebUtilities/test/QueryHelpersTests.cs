@@ -86,7 +86,9 @@ public class QueryHelperTests
     [Fact]
     public void ParseQueryWithEncodedKeyEncodedValuesWorks()
     {
-        var collection = QueryHelpers.ParseQuery("?fields+%5BtodoItems%5D=%5B+1+%5D&fields+%5BtodoItems%5D=%5B+2+%5D");
+        var collection = QueryHelpers.ParseQuery(
+            "?fields+%5BtodoItems%5D=%5B+1+%5D&fields+%5BtodoItems%5D=%5B+2+%5D"
+        );
         Assert.Single(collection);
         Assert.Equal(new[] { "[ 1 ]", "[ 2 ]" }, collection["fields [todoItems]"]);
     }
@@ -104,30 +106,44 @@ public class QueryHelperTests
     [Fact]
     public void AddQueryStringWithNullValueThrows()
     {
-        Assert.Throws<ArgumentNullException>("value", () => QueryHelpers.AddQueryString("http://contoso.com/", "hello", null!));
+        Assert.Throws<ArgumentNullException>(
+            "value",
+            () => QueryHelpers.AddQueryString("http://contoso.com/", "hello", null!)
+        );
     }
 
     [Theory]
     [InlineData("http://contoso.com/", "http://contoso.com/?hello=world")]
     [InlineData("http://contoso.com/someaction", "http://contoso.com/someaction?hello=world")]
-    [InlineData("http://contoso.com/someaction?q=test", "http://contoso.com/someaction?q=test&hello=world")]
+    [InlineData(
+        "http://contoso.com/someaction?q=test",
+        "http://contoso.com/someaction?q=test&hello=world"
+    )]
     [InlineData(
         "http://contoso.com/someaction?q=test#anchor",
-        "http://contoso.com/someaction?q=test&hello=world#anchor")]
-    [InlineData("http://contoso.com/someaction#anchor", "http://contoso.com/someaction?hello=world#anchor")]
+        "http://contoso.com/someaction?q=test&hello=world#anchor"
+    )]
+    [InlineData(
+        "http://contoso.com/someaction#anchor",
+        "http://contoso.com/someaction?hello=world#anchor"
+    )]
     [InlineData("http://contoso.com/#anchor", "http://contoso.com/?hello=world#anchor")]
     [InlineData(
         "http://contoso.com/someaction?q=test#anchor?value",
-        "http://contoso.com/someaction?q=test&hello=world#anchor?value")]
+        "http://contoso.com/someaction?q=test&hello=world#anchor?value"
+    )]
     [InlineData(
         "http://contoso.com/someaction#anchor?stuff",
-        "http://contoso.com/someaction?hello=world#anchor?stuff")]
+        "http://contoso.com/someaction?hello=world#anchor?stuff"
+    )]
     [InlineData(
         "http://contoso.com/someaction?name?something",
-        "http://contoso.com/someaction?name?something&hello=world")]
+        "http://contoso.com/someaction?name?something&hello=world"
+    )]
     [InlineData(
         "http://contoso.com/someaction#name#something",
-        "http://contoso.com/someaction?hello=world#name#something")]
+        "http://contoso.com/someaction?hello=world#name#something"
+    )]
     public void AddQueryStringWithKeyAndValue(string uri, string expectedUri)
     {
         var result = QueryHelpers.AddQueryString(uri, "hello", "world");
@@ -136,64 +152,105 @@ public class QueryHelperTests
 
     [Theory]
     [InlineData("http://contoso.com/", "http://contoso.com/?hello=world&some=text&another=")]
-    [InlineData("http://contoso.com/someaction", "http://contoso.com/someaction?hello=world&some=text&another=")]
-    [InlineData("http://contoso.com/someaction?q=1", "http://contoso.com/someaction?q=1&hello=world&some=text&another=")]
-    [InlineData("http://contoso.com/some#action", "http://contoso.com/some?hello=world&some=text&another=#action")]
-    [InlineData("http://contoso.com/some?q=1#action", "http://contoso.com/some?q=1&hello=world&some=text&another=#action")]
-    [InlineData("http://contoso.com/#action", "http://contoso.com/?hello=world&some=text&another=#action")]
+    [InlineData(
+        "http://contoso.com/someaction",
+        "http://contoso.com/someaction?hello=world&some=text&another="
+    )]
+    [InlineData(
+        "http://contoso.com/someaction?q=1",
+        "http://contoso.com/someaction?q=1&hello=world&some=text&another="
+    )]
+    [InlineData(
+        "http://contoso.com/some#action",
+        "http://contoso.com/some?hello=world&some=text&another=#action"
+    )]
+    [InlineData(
+        "http://contoso.com/some?q=1#action",
+        "http://contoso.com/some?q=1&hello=world&some=text&another=#action"
+    )]
+    [InlineData(
+        "http://contoso.com/#action",
+        "http://contoso.com/?hello=world&some=text&another=#action"
+    )]
     [InlineData(
         "http://contoso.com/someaction?q=test#anchor?value",
-        "http://contoso.com/someaction?q=test&hello=world&some=text&another=#anchor?value")]
+        "http://contoso.com/someaction?q=test&hello=world&some=text&another=#anchor?value"
+    )]
     [InlineData(
         "http://contoso.com/someaction#anchor?stuff",
-        "http://contoso.com/someaction?hello=world&some=text&another=#anchor?stuff")]
+        "http://contoso.com/someaction?hello=world&some=text&another=#anchor?stuff"
+    )]
     [InlineData(
         "http://contoso.com/someaction?name?something",
-        "http://contoso.com/someaction?name?something&hello=world&some=text&another=")]
+        "http://contoso.com/someaction?name?something&hello=world&some=text&another="
+    )]
     [InlineData(
         "http://contoso.com/someaction#name#something",
-        "http://contoso.com/someaction?hello=world&some=text&another=#name#something")]
+        "http://contoso.com/someaction?hello=world&some=text&another=#name#something"
+    )]
     public void AddQueryStringWithDictionary(string uri, string expectedUri)
     {
         var queryStrings = new Dictionary<string, string?>()
-                        {
-                            { "hello", "world" },
-                            { "some", "text" },
-                            { "another", string.Empty },
-                            { "invisible", null }
-                        };
+        {
+            { "hello", "world" },
+            { "some", "text" },
+            { "another", string.Empty },
+            { "invisible", null },
+        };
 
         var result = QueryHelpers.AddQueryString(uri, queryStrings);
         Assert.Equal(expectedUri, result);
     }
 
     [Theory]
-    [InlineData("http://contoso.com/", "http://contoso.com/?param1=value1&param1=&param1=value3&param2=")]
-    [InlineData("http://contoso.com/someaction", "http://contoso.com/someaction?param1=value1&param1=&param1=value3&param2=")]
-    [InlineData("http://contoso.com/someaction?param2=1", "http://contoso.com/someaction?param2=1&param1=value1&param1=&param1=value3&param2=")]
-    [InlineData("http://contoso.com/some#action", "http://contoso.com/some?param1=value1&param1=&param1=value3&param2=#action")]
-    [InlineData("http://contoso.com/some?param2=1#action", "http://contoso.com/some?param2=1&param1=value1&param1=&param1=value3&param2=#action")]
-    [InlineData("http://contoso.com/#action", "http://contoso.com/?param1=value1&param1=&param1=value3&param2=#action")]
+    [InlineData(
+        "http://contoso.com/",
+        "http://contoso.com/?param1=value1&param1=&param1=value3&param2="
+    )]
+    [InlineData(
+        "http://contoso.com/someaction",
+        "http://contoso.com/someaction?param1=value1&param1=&param1=value3&param2="
+    )]
+    [InlineData(
+        "http://contoso.com/someaction?param2=1",
+        "http://contoso.com/someaction?param2=1&param1=value1&param1=&param1=value3&param2="
+    )]
+    [InlineData(
+        "http://contoso.com/some#action",
+        "http://contoso.com/some?param1=value1&param1=&param1=value3&param2=#action"
+    )]
+    [InlineData(
+        "http://contoso.com/some?param2=1#action",
+        "http://contoso.com/some?param2=1&param1=value1&param1=&param1=value3&param2=#action"
+    )]
+    [InlineData(
+        "http://contoso.com/#action",
+        "http://contoso.com/?param1=value1&param1=&param1=value3&param2=#action"
+    )]
     [InlineData(
         "http://contoso.com/someaction?q=test#anchor?value",
-        "http://contoso.com/someaction?q=test&param1=value1&param1=&param1=value3&param2=#anchor?value")]
+        "http://contoso.com/someaction?q=test&param1=value1&param1=&param1=value3&param2=#anchor?value"
+    )]
     [InlineData(
         "http://contoso.com/someaction#anchor?stuff",
-        "http://contoso.com/someaction?param1=value1&param1=&param1=value3&param2=#anchor?stuff")]
+        "http://contoso.com/someaction?param1=value1&param1=&param1=value3&param2=#anchor?stuff"
+    )]
     [InlineData(
         "http://contoso.com/someaction?name?something",
-        "http://contoso.com/someaction?name?something&param1=value1&param1=&param1=value3&param2=")]
+        "http://contoso.com/someaction?name?something&param1=value1&param1=&param1=value3&param2="
+    )]
     [InlineData(
         "http://contoso.com/someaction#name#something",
-        "http://contoso.com/someaction?param1=value1&param1=&param1=value3&param2=#name#something")]
+        "http://contoso.com/someaction?param1=value1&param1=&param1=value3&param2=#name#something"
+    )]
     public void AddQueryStringWithEnumerableOfKeysAndStringValues(string uri, string expectedUri)
     {
         var queryStrings = new Dictionary<string, StringValues>()
-                        {
-                            { "param1", new StringValues(new [] { "value1", string.Empty, "value3" }) },
-                            { "param2", string.Empty },
-                            { "param3", StringValues.Empty }
-                        };
+        {
+            { "param1", new StringValues(new[] { "value1", string.Empty, "value3" }) },
+            { "param2", string.Empty },
+            { "param3", StringValues.Empty },
+        };
 
         var result = QueryHelpers.AddQueryString(uri, queryStrings);
         Assert.Equal(expectedUri, result);

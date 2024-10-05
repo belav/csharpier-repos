@@ -13,33 +13,40 @@ using System.Web;
 using System.Web.Resources;
 using System.Web.UI;
 
-namespace System.Web.UI.WebControls {
-    public class NumericPagerField : DataPagerField {
+namespace System.Web.UI.WebControls
+{
+    public class NumericPagerField : DataPagerField
+    {
         private int _startRowIndex;
         private int _maximumRows;
         private int _totalRowCount;
 
-        public NumericPagerField() {
-        }
+        public NumericPagerField() { }
 
         [
-        DefaultValue(5),
-        Category("Appearance"),
-        ResourceDescription("NumericPagerField_ButtonCount"),
+            DefaultValue(5),
+            Category("Appearance"),
+            ResourceDescription("NumericPagerField_ButtonCount"),
         ]
-        public int ButtonCount {
-            get {
+        public int ButtonCount
+        {
+            get
+            {
                 object o = ViewState["ButtonCount"];
-                if (o != null) {
+                if (o != null)
+                {
                     return (int)o;
                 }
                 return 5;
             }
-            set {
-                if (value < 1) {
+            set
+            {
+                if (value < 1)
+                {
                     throw new ArgumentOutOfRangeException("value");
                 }
-                if (value != ButtonCount) {
+                if (value != ButtonCount)
+                {
                     ViewState["ButtonCount"] = value;
                     OnFieldChanged();
                 }
@@ -50,22 +57,27 @@ namespace System.Web.UI.WebControls {
         /// <para>Indicates the button type for the field.</para>
         /// </devdoc>
         [
-        Category("Appearance"),
-        DefaultValue(ButtonType.Link),
-        ResourceDescription("NumericPagerField_ButtonType"),
+            Category("Appearance"),
+            DefaultValue(ButtonType.Link),
+            ResourceDescription("NumericPagerField_ButtonType"),
         ]
-        public ButtonType ButtonType {
-            get {
+        public ButtonType ButtonType
+        {
+            get
+            {
                 object o = ViewState["ButtonType"];
                 if (o != null)
-                    return(ButtonType)o;
+                    return (ButtonType)o;
                 return ButtonType.Link;
             }
-            set {
-                if (value < ButtonType.Button || value > ButtonType.Link) {
+            set
+            {
+                if (value < ButtonType.Button || value > ButtonType.Link)
+                {
                     throw new ArgumentOutOfRangeException("value");
                 }
-                if (value != ButtonType) {
+                if (value != ButtonType)
+                {
                     ViewState["ButtonType"] = value;
                     OnFieldChanged();
                 }
@@ -73,112 +85,140 @@ namespace System.Web.UI.WebControls {
         }
 
         [
-        Category("Appearance"),
-        DefaultValue(""),
-        ResourceDescription("NumericPagerField_CurrentPageLabelCssClass"),
-        CssClassPropertyAttribute
+            Category("Appearance"),
+            DefaultValue(""),
+            ResourceDescription("NumericPagerField_CurrentPageLabelCssClass"),
+            CssClassPropertyAttribute
         ]
-        public string CurrentPageLabelCssClass {
-            get {
+        public string CurrentPageLabelCssClass
+        {
+            get
+            {
                 object o = ViewState["CurrentPageLabelCssClass"];
-                if (o != null) {
+                if (o != null)
+                {
                     return (string)o;
                 }
                 return String.Empty;
             }
-            set {
-                if (value != CurrentPageLabelCssClass) {
+            set
+            {
+                if (value != CurrentPageLabelCssClass)
+                {
                     ViewState["CurrentPageLabelCssClass"] = value;
                     OnFieldChanged();
                 }
             }
         }
-        
+
         [
-        Category("Appearance"),
-        DefaultValue(""),
-        Editor(typeof(System.Web.UI.Design.ImageUrlEditor), typeof(UITypeEditor)),
-        ResourceDescription("NumericPagerField_NextPageImageUrl"),
-        SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings",
-                        Justification = "Required by ASP.NET parser."),
-        UrlProperty()
+            Category("Appearance"),
+            DefaultValue(""),
+            Editor(typeof(System.Web.UI.Design.ImageUrlEditor), typeof(UITypeEditor)),
+            ResourceDescription("NumericPagerField_NextPageImageUrl"),
+            SuppressMessage(
+                "Microsoft.Design",
+                "CA1056:UriPropertiesShouldNotBeStrings",
+                Justification = "Required by ASP.NET parser."
+            ),
+            UrlProperty()
         ]
-        public string NextPageImageUrl {
-            get {
+        public string NextPageImageUrl
+        {
+            get
+            {
                 object o = ViewState["NextPageImageUrl"];
-                if (o != null) {
+                if (o != null)
+                {
                     return (string)o;
                 }
                 return String.Empty;
             }
-            set {
-                if (value != NextPageImageUrl) {
+            set
+            {
+                if (value != NextPageImageUrl)
+                {
                     ViewState["NextPageImageUrl"] = value;
                     OnFieldChanged();
                 }
             }
         }
-        
+
         [
-        Category("Appearance"),
-        Localizable(true),
-        ResourceDefaultValue("NumericPagerField_DefaultNextPageText"),
-        ResourceDescription("NumericPagerField_NextPageText")
+            Category("Appearance"),
+            Localizable(true),
+            ResourceDefaultValue("NumericPagerField_DefaultNextPageText"),
+            ResourceDescription("NumericPagerField_NextPageText")
         ]
-        public string NextPageText {
-            get {
+        public string NextPageText
+        {
+            get
+            {
                 object o = ViewState["NextPageText"];
-                if (o != null) {
+                if (o != null)
+                {
                     return (string)o;
                 }
                 return AtlasWeb.NumericPagerField_DefaultNextPageText;
             }
-            set {
-                if (value != NextPageText) {
+            set
+            {
+                if (value != NextPageText)
+                {
                     ViewState["NextPageText"] = value;
                     OnFieldChanged();
                 }
             }
         }
-        
+
         [
-        Category("Appearance"),
-        DefaultValue(""),
-        ResourceDescription("NumericPagerField_NextPreviousButtonCssClass"),
-        CssClassPropertyAttribute
+            Category("Appearance"),
+            DefaultValue(""),
+            ResourceDescription("NumericPagerField_NextPreviousButtonCssClass"),
+            CssClassPropertyAttribute
         ]
-        public string NextPreviousButtonCssClass {
-            get {
+        public string NextPreviousButtonCssClass
+        {
+            get
+            {
                 object o = ViewState["NextPreviousButtonCssClass"];
-                if (o != null) {
+                if (o != null)
+                {
                     return (string)o;
                 }
                 return String.Empty;
             }
-            set {
-                if (value != NextPreviousButtonCssClass) {
+            set
+            {
+                if (value != NextPreviousButtonCssClass)
+                {
                     ViewState["NextPreviousButtonCssClass"] = value;
                     OnFieldChanged();
                 }
             }
         }
-        
+
         [
-        Category("Appearance"),
-        DefaultValue(""),
-        ResourceDescription("NumericPagerField_NumericButtonCssClass"),
-        CssClassPropertyAttribute
+            Category("Appearance"),
+            DefaultValue(""),
+            ResourceDescription("NumericPagerField_NumericButtonCssClass"),
+            CssClassPropertyAttribute
         ]
-        public string NumericButtonCssClass {
-            get {
+        public string NumericButtonCssClass
+        {
+            get
+            {
                 object o = ViewState["NumericButtonCssClass"];
-                if (o != null) {
+                if (o != null)
+                {
                     return (string)o;
                 }
                 return String.Empty;
             }
-            set {
-                if (value != NumericButtonCssClass) {
+            set
+            {
+                if (value != NumericButtonCssClass)
+                {
                     ViewState["NumericButtonCssClass"] = value;
                     OnFieldChanged();
                 }
@@ -186,67 +226,85 @@ namespace System.Web.UI.WebControls {
         }
 
         [
-        Category("Appearance"),
-        DefaultValue(""),
-        Editor(typeof(System.Web.UI.Design.ImageUrlEditor), typeof(UITypeEditor)),
-        ResourceDescription("NumericPagerField_PreviousPageImageUrl"),
-        SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings",
-                        Justification = "Required by ASP.NET parser."),
-        UrlProperty()
+            Category("Appearance"),
+            DefaultValue(""),
+            Editor(typeof(System.Web.UI.Design.ImageUrlEditor), typeof(UITypeEditor)),
+            ResourceDescription("NumericPagerField_PreviousPageImageUrl"),
+            SuppressMessage(
+                "Microsoft.Design",
+                "CA1056:UriPropertiesShouldNotBeStrings",
+                Justification = "Required by ASP.NET parser."
+            ),
+            UrlProperty()
         ]
-        public string PreviousPageImageUrl {
-            get {
+        public string PreviousPageImageUrl
+        {
+            get
+            {
                 object o = ViewState["PreviousPageImageUrl"];
-                if (o != null) {
+                if (o != null)
+                {
                     return (string)o;
                 }
                 return String.Empty;
             }
-            set {
-                if (value != PreviousPageImageUrl) {
+            set
+            {
+                if (value != PreviousPageImageUrl)
+                {
                     ViewState["PreviousPageImageUrl"] = value;
                     OnFieldChanged();
                 }
             }
         }
-        
+
         [
-        Category("Appearance"),
-        Localizable(true),
-        ResourceDefaultValue("NumericPagerField_DefaultPreviousPageText"),
-        ResourceDescription("NumericPagerField_PreviousPageText")
+            Category("Appearance"),
+            Localizable(true),
+            ResourceDefaultValue("NumericPagerField_DefaultPreviousPageText"),
+            ResourceDescription("NumericPagerField_PreviousPageText")
         ]
-        public string PreviousPageText {
-            get {
+        public string PreviousPageText
+        {
+            get
+            {
                 object o = ViewState["PreviousPageText"];
-                if (o != null) {
+                if (o != null)
+                {
                     return (string)o;
                 }
                 return AtlasWeb.NumericPagerField_DefaultPreviousPageText;
             }
-            set {
-                if (value != PreviousPageText) { 
+            set
+            {
+                if (value != PreviousPageText)
+                {
                     ViewState["PreviousPageText"] = value;
                     OnFieldChanged();
                 }
             }
         }
-        
+
         [
-        DefaultValue(true),
-        Category("Behavior"),
-        ResourceDescription("NumericPagerField_RenderNonBreakingSpacesBetweenControls"),
+            DefaultValue(true),
+            Category("Behavior"),
+            ResourceDescription("NumericPagerField_RenderNonBreakingSpacesBetweenControls"),
         ]
-        public bool RenderNonBreakingSpacesBetweenControls {
-            get {
+        public bool RenderNonBreakingSpacesBetweenControls
+        {
+            get
+            {
                 object o = ViewState["RenderNonBreakingSpacesBetweenControls"];
-                if (o != null) {
+                if (o != null)
+                {
                     return (bool)o;
                 }
                 return true;
             }
-            set {
-                if (value != RenderNonBreakingSpacesBetweenControls) {
+            set
+            {
+                if (value != RenderNonBreakingSpacesBetweenControls)
+                {
                     ViewState["RenderNonBreakingSpacesBetweenControls"] = value;
                     OnFieldChanged();
                 }
@@ -254,19 +312,29 @@ namespace System.Web.UI.WebControls {
         }
 
         [
-        SuppressMessage("Microsoft.Usage", "CA2204:LiteralsShouldBeSpelledCorrectly", MessageId = "nbsp",
-                        Justification = "Literal is HTML escape sequence."),
-        SuppressMessage("Microsoft.Globalization", "CA1303:DoNotPassLiteralsAsLocalizedParameters",
-                        MessageId = "System.Web.UI.LiteralControl.#ctor(System.String)",
-                        Justification = "Literal is HTML escape sequence.")
+            SuppressMessage(
+                "Microsoft.Usage",
+                "CA2204:LiteralsShouldBeSpelledCorrectly",
+                MessageId = "nbsp",
+                Justification = "Literal is HTML escape sequence."
+            ),
+            SuppressMessage(
+                "Microsoft.Globalization",
+                "CA1303:DoNotPassLiteralsAsLocalizedParameters",
+                MessageId = "System.Web.UI.LiteralControl.#ctor(System.String)",
+                Justification = "Literal is HTML escape sequence."
+            )
         ]
-        private void AddNonBreakingSpace(DataPagerFieldItem container) {
-            if (RenderNonBreakingSpacesBetweenControls) {
+        private void AddNonBreakingSpace(DataPagerFieldItem container)
+        {
+            if (RenderNonBreakingSpacesBetweenControls)
+            {
                 container.Controls.Add(new LiteralControl("&nbsp;"));
             }
         }
 
-        protected override void CopyProperties(DataPagerField newField) {
+        protected override void CopyProperties(DataPagerField newField)
+        {
             ((NumericPagerField)newField).ButtonCount = ButtonCount;
             ((NumericPagerField)newField).ButtonType = ButtonType;
             ((NumericPagerField)newField).CurrentPageLabelCssClass = CurrentPageLabelCssClass;
@@ -280,53 +348,73 @@ namespace System.Web.UI.WebControls {
             base.CopyProperties(newField);
         }
 
-        protected override DataPagerField CreateField() {
+        protected override DataPagerField CreateField()
+        {
             return new NumericPagerField();
         }
 
-        [SuppressMessage("Microsoft.Security", "CA2109:ReviewVisibleEventHandlers", MessageId = "0#")]
-        public override void HandleEvent(CommandEventArgs e) {
-            if (String.IsNullOrEmpty(DataPager.QueryStringField)) {
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2109:ReviewVisibleEventHandlers",
+            MessageId = "0#"
+        )]
+        public override void HandleEvent(CommandEventArgs e)
+        {
+            if (String.IsNullOrEmpty(DataPager.QueryStringField))
+            {
                 int newStartRowIndex = -1;
                 int currentPageIndex = _startRowIndex / DataPager.PageSize;
-                int firstButtonIndex = (_startRowIndex / (ButtonCount * DataPager.PageSize)) * ButtonCount;
+                int firstButtonIndex =
+                    (_startRowIndex / (ButtonCount * DataPager.PageSize)) * ButtonCount;
                 int lastButtonIndex = firstButtonIndex + ButtonCount - 1;
                 int lastRecordIndex = ((lastButtonIndex + 1) * DataPager.PageSize) - 1;
 
-                if (String.Equals(e.CommandName, DataControlCommands.PreviousPageCommandArgument)) {
+                if (String.Equals(e.CommandName, DataControlCommands.PreviousPageCommandArgument))
+                {
                     newStartRowIndex = (firstButtonIndex - 1) * DataPager.PageSize;
-                    if (newStartRowIndex < 0) {
+                    if (newStartRowIndex < 0)
+                    {
                         newStartRowIndex = 0;
                     }
                 }
-                else if (String.Equals(e.CommandName, DataControlCommands.NextPageCommandArgument)) {
+                else if (String.Equals(e.CommandName, DataControlCommands.NextPageCommandArgument))
+                {
                     newStartRowIndex = lastRecordIndex + 1;
-                    if (newStartRowIndex > _totalRowCount) {
+                    if (newStartRowIndex > _totalRowCount)
+                    {
                         newStartRowIndex = _totalRowCount - DataPager.PageSize;
                     }
                 }
-                else {
+                else
+                {
                     int pageIndex = Convert.ToInt32(e.CommandName, CultureInfo.InvariantCulture);
                     newStartRowIndex = pageIndex * DataPager.PageSize;
                 }
 
-                if (newStartRowIndex != -1) {
+                if (newStartRowIndex != -1)
+                {
                     DataPager.SetPageProperties(newStartRowIndex, DataPager.PageSize, true);
                 }
             }
         }
 
-        private Control CreateNumericButton(string buttonText, string commandArgument, string commandName) {
+        private Control CreateNumericButton(
+            string buttonText,
+            string commandArgument,
+            string commandName
+        )
+        {
             IButtonControl button;
 
-            switch (ButtonType) {
-            case ButtonType.Button:
-                button = new Button();
-                break;
-            case ButtonType.Link:
-            default:
-                button = new LinkButton();
-                break;
+            switch (ButtonType)
+            {
+                case ButtonType.Button:
+                    button = new Button();
+                    break;
+                case ButtonType.Link:
+                default:
+                    button = new LinkButton();
+                    break;
             }
 
             button.Text = buttonText;
@@ -335,42 +423,52 @@ namespace System.Web.UI.WebControls {
             button.CommandArgument = commandArgument;
 
             WebControl webControl = button as WebControl;
-            if (webControl != null && !String.IsNullOrEmpty(NumericButtonCssClass)) {
+            if (webControl != null && !String.IsNullOrEmpty(NumericButtonCssClass))
+            {
                 webControl.CssClass = NumericButtonCssClass;
             }
 
             return button as Control;
         }
 
-        private HyperLink CreateNumericLink(int pageIndex) {
+        private HyperLink CreateNumericLink(int pageIndex)
+        {
             int pageNumber = pageIndex + 1;
             HyperLink link = new HyperLink();
             link.Text = pageNumber.ToString(CultureInfo.InvariantCulture);
             link.NavigateUrl = GetQueryStringNavigateUrl(pageNumber);
 
-            if (!String.IsNullOrEmpty(NumericButtonCssClass)) {
+            if (!String.IsNullOrEmpty(NumericButtonCssClass))
+            {
                 link.CssClass = NumericButtonCssClass;
             }
 
             return link;
         }
 
-        private Control CreateNextPrevButton(string buttonText, string commandName, string commandArgument, string imageUrl) {
+        private Control CreateNextPrevButton(
+            string buttonText,
+            string commandName,
+            string commandArgument,
+            string imageUrl
+        )
+        {
             IButtonControl button;
 
-            switch (ButtonType) {
-            case ButtonType.Link:
-                button = new LinkButton();
-                break;
-            case ButtonType.Button:
-                button = new Button();
-                break;
-            case ButtonType.Image:
-            default:
-                button = new ImageButton();
-                ((ImageButton)button).ImageUrl = imageUrl;
-                ((ImageButton)button).AlternateText = HttpUtility.HtmlDecode(buttonText);
-                break;
+            switch (ButtonType)
+            {
+                case ButtonType.Link:
+                    button = new LinkButton();
+                    break;
+                case ButtonType.Button:
+                    button = new Button();
+                    break;
+                case ButtonType.Image:
+                default:
+                    button = new ImageButton();
+                    ((ImageButton)button).ImageUrl = imageUrl;
+                    ((ImageButton)button).AlternateText = HttpUtility.HtmlDecode(buttonText);
+                    break;
             }
             button.Text = buttonText;
             button.CausesValidation = false;
@@ -378,120 +476,194 @@ namespace System.Web.UI.WebControls {
             button.CommandArgument = commandArgument;
 
             WebControl webControl = button as WebControl;
-            if (webControl != null && !String.IsNullOrEmpty(NextPreviousButtonCssClass)) {
+            if (webControl != null && !String.IsNullOrEmpty(NextPreviousButtonCssClass))
+            {
                 webControl.CssClass = NextPreviousButtonCssClass;
             }
 
             return button as Control;
         }
 
-        private HyperLink CreateNextPrevLink(string buttonText, int pageIndex, string imageUrl) {
+        private HyperLink CreateNextPrevLink(string buttonText, int pageIndex, string imageUrl)
+        {
             int pageNumber = pageIndex + 1;
             HyperLink link = new HyperLink();
             link.Text = buttonText;
             link.NavigateUrl = GetQueryStringNavigateUrl(pageNumber);
             link.ImageUrl = imageUrl;
-            if (!String.IsNullOrEmpty(NextPreviousButtonCssClass)) {
+            if (!String.IsNullOrEmpty(NextPreviousButtonCssClass))
+            {
                 link.CssClass = NextPreviousButtonCssClass;
             }
             return link;
         }
 
-        public override void CreateDataPagers(DataPagerFieldItem container, int startRowIndex, int maximumRows, int totalRowCount, int fieldIndex) {
+        public override void CreateDataPagers(
+            DataPagerFieldItem container,
+            int startRowIndex,
+            int maximumRows,
+            int totalRowCount,
+            int fieldIndex
+        )
+        {
             _startRowIndex = startRowIndex;
             _maximumRows = maximumRows;
             _totalRowCount = totalRowCount;
 
-            if (String.IsNullOrEmpty(DataPager.QueryStringField)) {
+            if (String.IsNullOrEmpty(DataPager.QueryStringField))
+            {
                 CreateDataPagersForCommand(container, fieldIndex);
             }
-            else {
+            else
+            {
                 CreateDataPagersForQueryString(container, fieldIndex);
             }
         }
 
-        private void CreateDataPagersForCommand(DataPagerFieldItem container, int fieldIndex) {
+        private void CreateDataPagersForCommand(DataPagerFieldItem container, int fieldIndex)
+        {
             int currentPageIndex = _startRowIndex / _maximumRows;
             int firstButtonIndex = (_startRowIndex / (ButtonCount * _maximumRows)) * ButtonCount;
             int lastButtonIndex = firstButtonIndex + ButtonCount - 1;
             int lastRecordIndex = ((lastButtonIndex + 1) * _maximumRows) - 1;
 
-            if (firstButtonIndex != 0) {
-                container.Controls.Add(CreateNextPrevButton(PreviousPageText, DataControlCommands.PreviousPageCommandArgument, fieldIndex.ToString(CultureInfo.InvariantCulture), PreviousPageImageUrl));
+            if (firstButtonIndex != 0)
+            {
+                container.Controls.Add(
+                    CreateNextPrevButton(
+                        PreviousPageText,
+                        DataControlCommands.PreviousPageCommandArgument,
+                        fieldIndex.ToString(CultureInfo.InvariantCulture),
+                        PreviousPageImageUrl
+                    )
+                );
                 AddNonBreakingSpace(container);
             }
 
-            for (int i = 0; i < ButtonCount && _totalRowCount > ((i + firstButtonIndex) * _maximumRows); i++) {
-                if (i + firstButtonIndex == currentPageIndex) {
+            for (
+                int i = 0;
+                i < ButtonCount && _totalRowCount > ((i + firstButtonIndex) * _maximumRows);
+                i++
+            )
+            {
+                if (i + firstButtonIndex == currentPageIndex)
+                {
                     Label pageNumber = new Label();
-                    pageNumber.Text = (i + firstButtonIndex + 1).ToString(CultureInfo.InvariantCulture);
-                    if (!String.IsNullOrEmpty(CurrentPageLabelCssClass)) {
+                    pageNumber.Text = (i + firstButtonIndex + 1).ToString(
+                        CultureInfo.InvariantCulture
+                    );
+                    if (!String.IsNullOrEmpty(CurrentPageLabelCssClass))
+                    {
                         pageNumber.CssClass = CurrentPageLabelCssClass;
                     }
                     container.Controls.Add(pageNumber);
                 }
-                else {
-                    container.Controls.Add(CreateNumericButton((i + firstButtonIndex + 1).ToString(CultureInfo.InvariantCulture), fieldIndex.ToString(CultureInfo.InvariantCulture), (i + firstButtonIndex).ToString(CultureInfo.InvariantCulture)));
+                else
+                {
+                    container.Controls.Add(
+                        CreateNumericButton(
+                            (i + firstButtonIndex + 1).ToString(CultureInfo.InvariantCulture),
+                            fieldIndex.ToString(CultureInfo.InvariantCulture),
+                            (i + firstButtonIndex).ToString(CultureInfo.InvariantCulture)
+                        )
+                    );
                 }
                 AddNonBreakingSpace(container);
             }
 
-            if (lastRecordIndex < _totalRowCount - 1) {
+            if (lastRecordIndex < _totalRowCount - 1)
+            {
                 AddNonBreakingSpace(container);
-                container.Controls.Add(CreateNextPrevButton(NextPageText, DataControlCommands.NextPageCommandArgument, fieldIndex.ToString(CultureInfo.InvariantCulture), NextPageImageUrl));
+                container.Controls.Add(
+                    CreateNextPrevButton(
+                        NextPageText,
+                        DataControlCommands.NextPageCommandArgument,
+                        fieldIndex.ToString(CultureInfo.InvariantCulture),
+                        NextPageImageUrl
+                    )
+                );
                 AddNonBreakingSpace(container);
             }
         }
 
-        private void CreateDataPagersForQueryString(DataPagerFieldItem container, int fieldIndex) {
+        private void CreateDataPagersForQueryString(DataPagerFieldItem container, int fieldIndex)
+        {
             int currentPageIndex = _startRowIndex / _maximumRows;
             QueryStringHandled = true;
-           
+
             int firstButtonIndex = (_startRowIndex / (ButtonCount * _maximumRows)) * ButtonCount;
             int lastButtonIndex = firstButtonIndex + ButtonCount - 1;
             int lastRecordIndex = ((lastButtonIndex + 1) * _maximumRows) - 1;
 
-            if (firstButtonIndex != 0) {
-                container.Controls.Add(CreateNextPrevLink(PreviousPageText, firstButtonIndex - 1, PreviousPageImageUrl));
+            if (firstButtonIndex != 0)
+            {
+                container.Controls.Add(
+                    CreateNextPrevLink(PreviousPageText, firstButtonIndex - 1, PreviousPageImageUrl)
+                );
                 AddNonBreakingSpace(container);
             }
 
-            for (int i = 0; i < ButtonCount && _totalRowCount > ((i + firstButtonIndex) * _maximumRows); i++) {
-                if (i + firstButtonIndex == currentPageIndex) {
+            for (
+                int i = 0;
+                i < ButtonCount && _totalRowCount > ((i + firstButtonIndex) * _maximumRows);
+                i++
+            )
+            {
+                if (i + firstButtonIndex == currentPageIndex)
+                {
                     Label pageNumber = new Label();
-                    pageNumber.Text = (i + firstButtonIndex + 1).ToString(CultureInfo.InvariantCulture);
-                    if (!String.IsNullOrEmpty(CurrentPageLabelCssClass)) {
+                    pageNumber.Text = (i + firstButtonIndex + 1).ToString(
+                        CultureInfo.InvariantCulture
+                    );
+                    if (!String.IsNullOrEmpty(CurrentPageLabelCssClass))
+                    {
                         pageNumber.CssClass = CurrentPageLabelCssClass;
                     }
                     container.Controls.Add(pageNumber);
                 }
-                else {
+                else
+                {
                     container.Controls.Add(CreateNumericLink(i + firstButtonIndex));
                 }
                 AddNonBreakingSpace(container);
             }
 
-            if (lastRecordIndex < _totalRowCount - 1) {
+            if (lastRecordIndex < _totalRowCount - 1)
+            {
                 AddNonBreakingSpace(container);
-                container.Controls.Add(CreateNextPrevLink(NextPageText, firstButtonIndex + ButtonCount, NextPageImageUrl));
+                container.Controls.Add(
+                    CreateNextPrevLink(
+                        NextPageText,
+                        firstButtonIndex + ButtonCount,
+                        NextPageImageUrl
+                    )
+                );
                 AddNonBreakingSpace(container);
             }
         }
 
         // Required for design-time support (DesignerPagerStyle)
         [SuppressMessage("Microsoft.Security", "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase")]
-        public override bool Equals(object o) {
+        public override bool Equals(object o)
+        {
             NumericPagerField field = o as NumericPagerField;
-            if (field != null) {
-                if (String.Equals(field.ButtonCount, this.ButtonCount) &&
-                    field.ButtonType == this.ButtonType &&
-                    String.Equals(field.CurrentPageLabelCssClass, this.CurrentPageLabelCssClass) &&
-                    String.Equals(field.NextPageImageUrl, this.NextPageImageUrl) &&
-                    String.Equals(field.NextPageText, this.NextPageText) &&
-                    String.Equals(field.NextPreviousButtonCssClass, this.NextPreviousButtonCssClass) &&
-                    String.Equals(field.NumericButtonCssClass, this.NumericButtonCssClass) &&
-                    String.Equals(field.PreviousPageImageUrl, this.PreviousPageImageUrl) &&
-                    String.Equals(field.PreviousPageText, this.PreviousPageText)) {
+            if (field != null)
+            {
+                if (
+                    String.Equals(field.ButtonCount, this.ButtonCount)
+                    && field.ButtonType == this.ButtonType
+                    && String.Equals(field.CurrentPageLabelCssClass, this.CurrentPageLabelCssClass)
+                    && String.Equals(field.NextPageImageUrl, this.NextPageImageUrl)
+                    && String.Equals(field.NextPageText, this.NextPageText)
+                    && String.Equals(
+                        field.NextPreviousButtonCssClass,
+                        this.NextPreviousButtonCssClass
+                    )
+                    && String.Equals(field.NumericButtonCssClass, this.NumericButtonCssClass)
+                    && String.Equals(field.PreviousPageImageUrl, this.PreviousPageImageUrl)
+                    && String.Equals(field.PreviousPageText, this.PreviousPageText)
+                )
+                {
                     return true;
                 }
             }
@@ -499,18 +671,17 @@ namespace System.Web.UI.WebControls {
         }
 
         [SuppressMessage("Microsoft.Security", "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase")]
-        public override int GetHashCode() {
-            return
-                this.ButtonCount.GetHashCode() |
-                this.ButtonType.GetHashCode() |
-                this.CurrentPageLabelCssClass.GetHashCode() |
-                this.NextPageImageUrl.GetHashCode() |
-                this.NextPageText.GetHashCode() |
-                this.NextPreviousButtonCssClass.GetHashCode() |
-                this.NumericButtonCssClass.GetHashCode() |
-                this.PreviousPageImageUrl.GetHashCode() |
-                this.PreviousPageText.GetHashCode();
+        public override int GetHashCode()
+        {
+            return this.ButtonCount.GetHashCode()
+                | this.ButtonType.GetHashCode()
+                | this.CurrentPageLabelCssClass.GetHashCode()
+                | this.NextPageImageUrl.GetHashCode()
+                | this.NextPageText.GetHashCode()
+                | this.NextPreviousButtonCssClass.GetHashCode()
+                | this.NumericButtonCssClass.GetHashCode()
+                | this.PreviousPageImageUrl.GetHashCode()
+                | this.PreviousPageText.GetHashCode();
         }
-
     }
 }

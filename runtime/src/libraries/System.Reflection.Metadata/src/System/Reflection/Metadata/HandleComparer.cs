@@ -5,13 +5,15 @@ using System.Collections.Generic;
 
 namespace System.Reflection.Metadata
 {
-    public sealed class HandleComparer : IEqualityComparer<Handle>, IComparer<Handle>, IEqualityComparer<EntityHandle>, IComparer<EntityHandle>
+    public sealed class HandleComparer
+        : IEqualityComparer<Handle>,
+            IComparer<Handle>,
+            IEqualityComparer<EntityHandle>,
+            IComparer<EntityHandle>
     {
         private static readonly HandleComparer s_default = new HandleComparer();
 
-        private HandleComparer()
-        {
-        }
+        private HandleComparer() { }
 
         public static HandleComparer Default
         {

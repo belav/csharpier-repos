@@ -5,13 +5,13 @@ using System.Runtime.CompilerServices;
 
 namespace System.Linq.Expressions
 {
-	partial class LambdaExpression
-	{
-		public void CompileToMethod (MethodBuilder method, DebugInfoGenerator debugInfoGenerator)
-		{
-			CompileToMethod (method);
-		}
-	}
+    partial class LambdaExpression
+    {
+        public void CompileToMethod(MethodBuilder method, DebugInfoGenerator debugInfoGenerator)
+        {
+            CompileToMethod(method);
+        }
+    }
 }
 
 #endif

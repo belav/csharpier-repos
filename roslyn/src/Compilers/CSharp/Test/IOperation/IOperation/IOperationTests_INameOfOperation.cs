@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void NameOfFlow_01()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(bool b, int i1, int i2)
@@ -26,16 +27,20 @@ class C
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS8081: Expression does not have a name.
                 //         string test = nameof(b ? i1 : i2);
                 Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "b ? i1 : i2").WithLocation(6, 30),
                 // CS0219: The variable 'test' is assigned but its value is never used
                 //         string test = nameof(b ? i1 : i2);
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "test").WithArguments("test").WithLocation(6, 16)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "test")
+                    .WithArguments("test")
+                    .WithLocation(6, 16),
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -60,14 +65,19 @@ Block[B0] - Entry
 Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void NameOfFlow_02()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(int i1)
@@ -76,13 +86,17 @@ class C
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0219: The variable 'test' is assigned but its value is never used
                 //         string test = nameof(i1);
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "test").WithArguments("test").WithLocation(6, 16)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "test")
+                    .WithArguments("test")
+                    .WithLocation(6, 16),
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -108,14 +122,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void NameOfFlow_03()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(bool b, int i1, int i2)
@@ -126,7 +145,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -176,14 +196,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void NameOfFlow_InvalidName()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M()
@@ -192,13 +217,17 @@ class C
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(6,30): error CS0103: The name 'test2' does not exist in the current context
                 //         string test = nameof(test2);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "test2").WithArguments("test2").WithLocation(6, 30)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "test2")
+                    .WithArguments("test2")
+                    .WithLocation(6, 30),
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
     Block[B0] - Entry
         Statements (0)
         Next (Regular) Block[B1]
@@ -221,7 +250,11 @@ class C
         Predecessors: [B1]
         Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
@@ -234,7 +267,7 @@ class C
                     public int Property { get; }
                     public int Field;
                     public event System.Action Event;
-                
+
                     public static string StaticMethod()
                     /*<bind>*/{
                         return nameof(Property) +
@@ -266,7 +299,11 @@ class C
                     Statements (0)
                 """;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, DiagnosticDescription.None);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                DiagnosticDescription.None
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
@@ -280,7 +317,7 @@ class C
                     public void Method1(int i) { }
                     public void Method2() { }
                     public static void Method2(int i) { }
-                
+
                     public static string StaticMethod()
                     /*<bind>*/{
                         return nameof(Method1) +
@@ -307,7 +344,11 @@ class C
                     Statements (0)
                 """;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, DiagnosticDescription.None);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                DiagnosticDescription.None
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
@@ -319,7 +360,7 @@ class C
                 {
                     public C1 Property { get; }
                     public C1 Field;
-                
+
                     public static string StaticMethod()
                     /*<bind>*/{
                         return nameof(Property.Property) +
@@ -330,7 +371,7 @@ class C
                             nameof(Field.Event);
                     }/*</bind>*/
                 }
-                
+
                 public class C1
                 {
                     public int Property { get; }
@@ -373,7 +414,11 @@ class C
                     Statements (0)
                 """;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, DiagnosticDescription.None);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                DiagnosticDescription.None
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
@@ -386,7 +431,7 @@ class C
                     public C1 Property { get; }
                     public C1 Field;
                     public event System.Action Event;
-                
+
                     public static string StaticMethod()
                     /*<bind>*/{
                         return nameof(Property.Method) +
@@ -424,7 +469,11 @@ class C
                     Statements (0)
                 """;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, DiagnosticDescription.None);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                DiagnosticDescription.None
+            );
         }
     }
 }

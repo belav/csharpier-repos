@@ -4,31 +4,26 @@
 
 namespace System.ServiceModel.Security.Tokens
 {
+    using System.IdentityModel.Tokens;
     using System.Runtime.Serialization;
     using System.ServiceModel;
-    using System.IdentityModel.Tokens;
 
     [Serializable]
     class SecurityContextTokenValidationException : SecurityTokenValidationException
     {
         public SecurityContextTokenValidationException()
-            : base()
-        {
-        }
+            : base() { }
 
         public SecurityContextTokenValidationException(String message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         public SecurityContextTokenValidationException(String message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
-        protected SecurityContextTokenValidationException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+        protected SecurityContextTokenValidationException(
+            SerializationInfo info,
+            StreamingContext context
+        )
+            : base(info, context) { }
     }
 }

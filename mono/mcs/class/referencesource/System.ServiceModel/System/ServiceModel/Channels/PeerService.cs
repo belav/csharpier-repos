@@ -26,7 +26,12 @@ namespace System.ServiceModel.Channels
     interface IPeerFlooderContract<TFloodContract, TLinkContract>
     {
         //invoked by the peerservice
-        IAsyncResult OnFloodedMessage(IPeerNeighbor neighbor, TFloodContract floodedInfo, AsyncCallback callback, object state);
+        IAsyncResult OnFloodedMessage(
+            IPeerNeighbor neighbor,
+            TFloodContract floodedInfo,
+            AsyncCallback callback,
+            object state
+        );
         void EndFloodMessage(IAsyncResult result);
         void ProcessLinkUtility(IPeerNeighbor neighbor, TLinkContract utilityInfo);
     }
@@ -34,9 +39,10 @@ namespace System.ServiceModel.Channels
     // Class that implements IPeerService contract for incoming neighbor sessions and messages.
     // WARNING: This class is not synchronized. Expects the using class to synchronize access
     [ServiceBehavior(
-     ConcurrencyMode = ConcurrencyMode.Multiple,
-     InstanceContextMode = InstanceContextMode.Single,
-     UseSynchronizationContext = false)]
+        ConcurrencyMode = ConcurrencyMode.Multiple,
+        InstanceContextMode = InstanceContextMode.Single,
+        UseSynchronizationContext = false
+    )]
     class PeerService : IPeerService, IServiceBehavior, IChannelInitializer
     {
         public delegate bool ChannelCallback(IClientChannel channel);
@@ -46,25 +52,33 @@ namespace System.ServiceModel.Channels
         PeerNodeConfig config;
         ChannelCallback newChannelCallback;
         GetNeighborCallback getNeighborCallback;
-        ServiceHost serviceHost;                    // To listen for incoming neighbor sessions
+        ServiceHost serviceHost; // To listen for incoming neighbor sessions
         IPeerConnectorContract connector;
         IPeerFlooderContract<Message, UtilityInfo> flooder;
         IPeerNodeMessageHandling messageHandler;
 
-        public PeerService(PeerNodeConfig config,
-                            ChannelCallback channelCallback,
-                            GetNeighborCallback getNeighborCallback,
-                            Dictionary<Type, object> services)
+        public PeerService(
+            PeerNodeConfig config,
+            ChannelCallback channelCallback,
+            GetNeighborCallback getNeighborCallback,
+            Dictionary<Type, object> services
+        )
             : this(config, channelCallback, getNeighborCallback, services, null) { }
-        public PeerService(PeerNodeConfig config,
-                            ChannelCallback channelCallback,
-                            GetNeighborCallback getNeighborCallback,
-                            Dictionary<Type, object> services,
-                            IPeerNodeMessageHandling messageHandler)
+
+        public PeerService(
+            PeerNodeConfig config,
+            ChannelCallback channelCallback,
+            GetNeighborCallback getNeighborCallback,
+            Dictionary<Type, object> services,
+            IPeerNodeMessageHandling messageHandler
+        )
         {
             this.config = config;
             this.newChannelCallback = channelCallback;
-            Fx.Assert(getNeighborCallback != null, "getNeighborCallback must be passed to PeerService constructor");
+            Fx.Assert(
+                getNeighborCallback != null,
+                "getNeighborCallback must be passed to PeerService constructor"
+            );
             this.getNeighborCallback = getNeighborCallback;
             this.messageHandler = messageHandler;
 
@@ -73,15 +87,21 @@ namespace System.ServiceModel.Channels
                 object reply = null;
                 services.TryGetValue(typeof(IPeerConnectorContract), out reply);
                 connector = reply as IPeerConnectorContract;
-                Fx.Assert(connector != null, "PeerService must be created with a connector implementation");
+                Fx.Assert(
+                    connector != null,
+                    "PeerService must be created with a connector implementation"
+                );
                 reply = null;
                 services.TryGetValue(typeof(IPeerFlooderContract<Message, UtilityInfo>), out reply);
                 flooder = reply as IPeerFlooderContract<Message, UtilityInfo>;
-                Fx.Assert(flooder != null, "PeerService must be created with a flooder implementation");
+                Fx.Assert(
+                    flooder != null,
+                    "PeerService must be created with a flooder implementation"
+                );
             }
             this.serviceHost = new ServiceHost(this);
 
-            // Add throttling            
+            // Add throttling
             ServiceThrottlingBehavior throttle = new ServiceThrottlingBehavior();
             throttle.MaxConcurrentCalls = this.config.MaxPendingIncomingCalls;
             throttle.MaxConcurrentSessions = this.config.MaxConcurrentSessions;
@@ -98,7 +118,7 @@ namespace System.ServiceModel.Channels
             get { return this.binding; }
         }
 
-        // Create the binding using user specified config. The stacking is 
+        // Create the binding using user specified config. The stacking is
         // BinaryMessageEncoder/TCP
         void CreateBinding()
         {
@@ -120,7 +140,8 @@ namespace System.ServiceModel.Channels
 
             if (encoder == null)
             {
-                BinaryMessageEncodingBindingElement bencoder = new BinaryMessageEncodingBindingElement();
+                BinaryMessageEncodingBindingElement bencoder =
+                    new BinaryMessageEncodingBindingElement();
                 this.config.ReaderQuotas.CopyTo(bencoder.ReaderQuotas);
                 bindingElements.Add(bencoder);
             }
@@ -144,16 +165,21 @@ namespace System.ServiceModel.Channels
 
         IPeerNeighbor GetNeighbor()
         {
-            IPeerNeighbor neighbor = (IPeerNeighbor)getNeighborCallback(OperationContext.Current.GetCallbackChannel<IPeerProxy>());
+            IPeerNeighbor neighbor = (IPeerNeighbor)getNeighborCallback(
+                OperationContext.Current.GetCallbackChannel<IPeerProxy>()
+            );
 
             if (neighbor == null || neighbor.State == PeerNeighborState.Closed)
             {
                 if (DiagnosticUtility.ShouldTraceWarning)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Warning, TraceCode.PeerNeighborNotFound,
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Warning,
+                        TraceCode.PeerNeighborNotFound,
                         SR.GetString(SR.TraceCodePeerNeighborNotFound),
                         new PeerNodeTraceRecord(config.NodeId),
-                        OperationContext.Current.IncomingMessage);
+                        OperationContext.Current.IncomingMessage
+                    );
                 }
                 return null;
             }
@@ -171,12 +197,27 @@ namespace System.ServiceModel.Channels
                     connectIPAddr = config.ListenIPAddress;
                 }
 
-                PeerNeighborTraceRecord record = new PeerNeighborTraceRecord(neighbor.NodeId,
-                    this.config.NodeId, listenAddr, connectIPAddr, neighbor.GetHashCode(),
-                    neighbor.IsInitiator, state.ToString(), null, null,
-                    OperationContext.Current.IncomingMessage.Headers.Action);
+                PeerNeighborTraceRecord record = new PeerNeighborTraceRecord(
+                    neighbor.NodeId,
+                    this.config.NodeId,
+                    listenAddr,
+                    connectIPAddr,
+                    neighbor.GetHashCode(),
+                    neighbor.IsInitiator,
+                    state.ToString(),
+                    null,
+                    null,
+                    OperationContext.Current.IncomingMessage.Headers.Action
+                );
 
-                TraceUtility.TraceEvent(TraceEventType.Verbose, TraceCode.PeerNeighborMessageReceived, SR.GetString(SR.TraceCodePeerNeighborMessageReceived), record, this, null);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Verbose,
+                    TraceCode.PeerNeighborMessageReceived,
+                    SR.GetString(SR.TraceCodePeerNeighborMessageReceived),
+                    record,
+                    this,
+                    null
+                );
             }
 
             return neighbor;
@@ -187,12 +228,17 @@ namespace System.ServiceModel.Channels
             // Create the neighbor binding
             CreateBinding();
             this.serviceHost.Description.Endpoints.Clear();
-            ServiceEndpoint endPoint = this.serviceHost.AddServiceEndpoint(typeof(IPeerService), this.binding, config.GetMeshUri());
+            ServiceEndpoint endPoint = this.serviceHost.AddServiceEndpoint(
+                typeof(IPeerService),
+                this.binding,
+                config.GetMeshUri()
+            );
             endPoint.ListenUri = config.GetSelfUri();
-            endPoint.ListenUriMode = (this.config.Port > 0) ? ListenUriMode.Explicit : ListenUriMode.Unique;
+            endPoint.ListenUriMode =
+                (this.config.Port > 0) ? ListenUriMode.Explicit : ListenUriMode.Unique;
 
             /*
-                Uncomment this to allow the retrieval of metadata 
+                Uncomment this to allow the retrieval of metadata
                 using the command:
                     \binaries.x86chk\svcutil http://localhost /t:metadata
 
@@ -208,31 +254,42 @@ namespace System.ServiceModel.Channels
 
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.PeerServiceOpened,
-                    SR.GetString(SR.TraceCodePeerServiceOpened, this.GetListenAddress()), this);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.PeerServiceOpened,
+                    SR.GetString(SR.TraceCodePeerServiceOpened, this.GetListenAddress()),
+                    this
+                );
             }
         }
 
         //
-        // IContractBehavior and IChannelInitializer implementation. 
+        // IContractBehavior and IChannelInitializer implementation.
         // Used to register for incoming channel notification.
         //
-        void IServiceBehavior.Validate(ServiceDescription description, ServiceHostBase serviceHost)
-        {
-        }
+        void IServiceBehavior.Validate(
+            ServiceDescription description,
+            ServiceHostBase serviceHost
+        ) { }
 
-        void IServiceBehavior.AddBindingParameters(ServiceDescription description, ServiceHostBase serviceHost, Collection<ServiceEndpoint> endpoints, BindingParameterCollection parameters)
-        {
-        }
+        void IServiceBehavior.AddBindingParameters(
+            ServiceDescription description,
+            ServiceHostBase serviceHost,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection parameters
+        ) { }
 
-        void IServiceBehavior.ApplyDispatchBehavior(ServiceDescription description, ServiceHostBase serviceHost)
+        void IServiceBehavior.ApplyDispatchBehavior(
+            ServiceDescription description,
+            ServiceHostBase serviceHost
+        )
         {
             for (int i = 0; i < serviceHost.ChannelDispatchers.Count; i++)
             {
-                ChannelDispatcher channelDispatcher = serviceHost.ChannelDispatchers[i] as ChannelDispatcher;
+                ChannelDispatcher channelDispatcher =
+                    serviceHost.ChannelDispatchers[i] as ChannelDispatcher;
                 if (channelDispatcher != null)
                 {
-
                     bool addedChannelInitializer = false;
                     foreach (EndpointDispatcher endpointDispatcher in channelDispatcher.Endpoints)
                     {
@@ -243,8 +300,8 @@ namespace System.ServiceModel.Channels
                                 channelDispatcher.ChannelInitializers.Add(this);
                                 addedChannelInitializer = true;
                             }
-                            endpointDispatcher.DispatchRuntime.OperationSelector = new OperationSelector(this.messageHandler);
-
+                            endpointDispatcher.DispatchRuntime.OperationSelector =
+                                new OperationSelector(this.messageHandler);
                         }
                     }
                 }
@@ -292,7 +349,11 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        IAsyncResult IPeerServiceContract.BeginFloodMessage(Message floodedInfo, AsyncCallback callback, object state)
+        IAsyncResult IPeerServiceContract.BeginFloodMessage(
+            Message floodedInfo,
+            AsyncCallback callback,
+            object state
+        )
         {
             IPeerNeighbor neighbor = GetNeighbor();
             if (neighbor != null)
@@ -321,7 +382,9 @@ namespace System.ServiceModel.Channels
         {
             IPeerNeighbor neighbor = GetNeighbor();
             if (neighbor == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ObjectDisposedException(typeof(IPeerNeighbor).ToString()));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ObjectDisposedException(typeof(IPeerNeighbor).ToString())
+                );
             Message reply = this.config.SecurityManager.ProcessRequest(neighbor, message);
             if (reply == null)
             {
@@ -336,14 +399,12 @@ namespace System.ServiceModel.Channels
         {
             IPeerNeighbor neighbor = GetNeighbor();
             if (neighbor == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ObjectDisposedException(typeof(IPeerNeighbor).ToString()));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ObjectDisposedException(typeof(IPeerNeighbor).ToString())
+                );
             neighbor.Abort(PeerCloseReason.Faulted, PeerCloseInitiator.RemoteNode);
         }
 
-        void IPeerServiceContract.Ping(Message message)
-        {
-        }
-
-
+        void IPeerServiceContract.Ping(Message message) { }
     }
 }

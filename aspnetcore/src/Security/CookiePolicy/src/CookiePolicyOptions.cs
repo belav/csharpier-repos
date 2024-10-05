@@ -42,12 +42,13 @@ public class CookiePolicyOptions
     /// <item><description><see cref="CookieBuilder.Expiration"/> defaults to 365 days.</description></item>
     /// </list>
     /// </remarks>
-    public CookieBuilder ConsentCookie { get; set; } = new CookieBuilder()
-    {
-        Name = ".AspNet.Consent",
-        Expiration = TimeSpan.FromDays(365),
-        IsEssential = true,
-    };
+    public CookieBuilder ConsentCookie { get; set; } =
+        new CookieBuilder()
+        {
+            Name = ".AspNet.Consent",
+            Expiration = TimeSpan.FromDays(365),
+            IsEssential = true,
+        };
 
     /// <summary>
     /// Gets or sets the value for the cookie used to track if the user consented to the

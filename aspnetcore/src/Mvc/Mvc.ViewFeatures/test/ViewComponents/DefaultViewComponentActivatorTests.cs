@@ -84,15 +84,15 @@ public class DefaultViewComponentActivatorTests
         {
             ViewComponentDescriptor = new ViewComponentDescriptor
             {
-                TypeInfo = componentType.GetTypeInfo()
+                TypeInfo = componentType.GetTypeInfo(),
             },
             ViewContext = new ViewContext
             {
                 HttpContext = new DefaultHttpContext
                 {
-                    RequestServices = Mock.Of<IServiceProvider>()
-                }
-            }
+                    RequestServices = Mock.Of<IServiceProvider>(),
+                },
+            },
         };
     }
 

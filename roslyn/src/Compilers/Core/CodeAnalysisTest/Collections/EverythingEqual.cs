@@ -25,10 +25,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         internal static EverythingEqual<T> Default
         {
-            get
-            {
-                return s_singleton;
-            }
+            get { return s_singleton; }
         }
 
         public bool Equals(T? x, T? y)

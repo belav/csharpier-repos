@@ -9,9 +9,7 @@ using System.Net.Test.Common;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-
 using Microsoft.DotNet.XUnitExtensions;
-
 using Xunit;
 using Xunit.Abstractions;
 
@@ -23,12 +21,16 @@ namespace System.Net.Http.Functional.Tests
 
     public abstract class HttpClientHandler_Cancellation_Test : HttpClientHandlerTestBase
     {
-        public HttpClientHandler_Cancellation_Test(ITestOutputHelper output) : base(output) { }
+        public HttpClientHandler_Cancellation_Test(ITestOutputHelper output)
+            : base(output) { }
 
         [Theory]
         [InlineData(false, CancellationMode.Token)]
         [InlineData(true, CancellationMode.Token)]
-        public async Task PostAsync_CancelDuringRequestContentSend_TaskCanceledQuickly(bool chunkedTransfer, CancellationMode mode)
+        public async Task PostAsync_CancelDuringRequestContentSend_TaskCanceledQuickly(
+            bool chunkedTransfer,
+            CancellationMode mode
+        )
         {
             if (LoopbackServerFactory.Version >= HttpVersion20.Value && chunkedTransfer)
             {
@@ -48,58 +50,82 @@ namespace System.Net.Http.Functional.Tests
             }
 
             var serverRelease = new TaskCompletionSource<bool>();
-            await LoopbackServerFactory.CreateClientAndServerAsync(async uri =>
-            {
-                try
+            await LoopbackServerFactory.CreateClientAndServerAsync(
+                async uri =>
                 {
-                    using (HttpClient client = CreateHttpClient())
+                    try
                     {
-                        client.Timeout = Timeout.InfiniteTimeSpan;
-                        var cts = new CancellationTokenSource();
-
-                        var waitToSend = new TaskCompletionSource<bool>();
-                        var contentSending = new TaskCompletionSource<bool>();
-                        var req = new HttpRequestMessage(HttpMethod.Post, uri) { Version = UseVersion };
-                        req.Content = new ByteAtATimeContent(int.MaxValue, waitToSend.Task, contentSending, millisecondDelayBetweenBytes: 1);
-                        req.Headers.TransferEncodingChunked = chunkedTransfer;
-
-                        if (PlatformDetection.IsBrowser)
+                        using (HttpClient client = CreateHttpClient())
                         {
+                            client.Timeout = Timeout.InfiniteTimeSpan;
+                            var cts = new CancellationTokenSource();
+
+                            var waitToSend = new TaskCompletionSource<bool>();
+                            var contentSending = new TaskCompletionSource<bool>();
+                            var req = new HttpRequestMessage(HttpMethod.Post, uri)
+                            {
+                                Version = UseVersion,
+                            };
+                            req.Content = new ByteAtATimeContent(
+                                int.MaxValue,
+                                waitToSend.Task,
+                                contentSending,
+                                millisecondDelayBetweenBytes: 1
+                            );
+                            req.Headers.TransferEncodingChunked = chunkedTransfer;
+
+                            if (PlatformDetection.IsBrowser)
+                            {
 #if !NETFRAMEWORK
-                            req.Options.Set(new HttpRequestOptionsKey<bool>("WebAssemblyEnableStreamingRequest"), true);
+                                req.Options.Set(
+                                    new HttpRequestOptionsKey<bool>(
+                                        "WebAssemblyEnableStreamingRequest"
+                                    ),
+                                    true
+                                );
 #endif
-                        }
+                            }
 
-                        Task<HttpResponseMessage> resp = client.SendAsync(TestAsync, req, HttpCompletionOption.ResponseHeadersRead, cts.Token);
-                        waitToSend.SetResult(true);
-                        await Task.WhenAny(contentSending.Task, resp);
-                        if (!resp.IsCompleted)
-                        {
-                            Cancel(mode, client, cts);
+                            Task<HttpResponseMessage> resp = client.SendAsync(
+                                TestAsync,
+                                req,
+                                HttpCompletionOption.ResponseHeadersRead,
+                                cts.Token
+                            );
+                            waitToSend.SetResult(true);
+                            await Task.WhenAny(contentSending.Task, resp);
+                            if (!resp.IsCompleted)
+                            {
+                                Cancel(mode, client, cts);
+                            }
+                            await ValidateClientCancellationAsync(() => resp);
                         }
-                        await ValidateClientCancellationAsync(() => resp);
+                    }
+                    finally
+                    {
+                        serverRelease.SetResult(true);
+                    }
+                },
+                async server =>
+                {
+                    try
+                    {
+                        await server.AcceptConnectionAsync(connection => serverRelease.Task);
+                    }
+                    catch (Exception ex)
+                    {
+                        _output.WriteLine($"Ignored exception:{Environment.NewLine}{ex}");
                     }
                 }
-                finally
-                {
-                    serverRelease.SetResult(true);
-                }
-            }, async server =>
-            {
-                try
-                {
-                    await server.AcceptConnectionAsync(connection => serverRelease.Task);
-                }
-                catch (Exception ex)
-                {
-                    _output.WriteLine($"Ignored exception:{Environment.NewLine}{ex}");
-                }
-            });
+            );
         }
 
         [Theory]
         [MemberData(nameof(OneBoolAndCancellationMode))]
-        public async Task GetAsync_CancelDuringResponseHeadersReceived_TaskCanceledQuickly(bool connectionClose, CancellationMode mode)
+        public async Task GetAsync_CancelDuringResponseHeadersReceived_TaskCanceledQuickly(
+            bool connectionClose,
+            CancellationMode mode
+        )
         {
             if (LoopbackServerFactory.Version >= HttpVersion20.Value && connectionClose)
             {
@@ -117,50 +143,67 @@ namespace System.Net.Http.Functional.Tests
                 client.Timeout = Timeout.InfiniteTimeSpan;
                 var cts = new CancellationTokenSource();
 
-                await LoopbackServerFactory.CreateServerAsync(async (server, url) =>
-                {
-                    var partialResponseHeadersSent = new TaskCompletionSource<bool>();
-                    var clientFinished = new TaskCompletionSource<bool>();
-
-                    Task serverTask = server.AcceptConnectionAsync(async connection =>
+                await LoopbackServerFactory.CreateServerAsync(
+                    async (server, url) =>
                     {
-                        await connection.ReadRequestDataAsync();
-                        await connection.SendPartialResponseHeadersAsync(HttpStatusCode.OK);
+                        var partialResponseHeadersSent = new TaskCompletionSource<bool>();
+                        var clientFinished = new TaskCompletionSource<bool>();
 
-                        partialResponseHeadersSent.TrySetResult(true);
-                        await clientFinished.Task;
-                    });
+                        Task serverTask = server.AcceptConnectionAsync(async connection =>
+                        {
+                            await connection.ReadRequestDataAsync();
+                            await connection.SendPartialResponseHeadersAsync(HttpStatusCode.OK);
 
-                    await ValidateClientCancellationAsync(async () =>
-                    {
-                        var req = new HttpRequestMessage(HttpMethod.Get, url) { Version = UseVersion };
-                        req.Headers.ConnectionClose = connectionClose;
+                            partialResponseHeadersSent.TrySetResult(true);
+                            await clientFinished.Task;
+                        });
 
-                        Task<HttpResponseMessage> getResponse = client.SendAsync(TestAsync, req, HttpCompletionOption.ResponseHeadersRead, cts.Token);
-                        await partialResponseHeadersSent.Task;
-                        Cancel(mode, client, cts);
-                        await getResponse;
-                    });
+                        await ValidateClientCancellationAsync(async () =>
+                        {
+                            var req = new HttpRequestMessage(HttpMethod.Get, url)
+                            {
+                                Version = UseVersion,
+                            };
+                            req.Headers.ConnectionClose = connectionClose;
 
-                    try
-                    {
-                        clientFinished.SetResult(true);
-                        await serverTask;
+                            Task<HttpResponseMessage> getResponse = client.SendAsync(
+                                TestAsync,
+                                req,
+                                HttpCompletionOption.ResponseHeadersRead,
+                                cts.Token
+                            );
+                            await partialResponseHeadersSent.Task;
+                            Cancel(mode, client, cts);
+                            await getResponse;
+                        });
+
+                        try
+                        {
+                            clientFinished.SetResult(true);
+                            await serverTask;
+                        }
+                        catch (Exception ex)
+                        {
+                            _output.WriteLine($"Ignored exception:{Environment.NewLine}{ex}");
+                        }
                     }
-                    catch (Exception ex)
-                    {
-                        _output.WriteLine($"Ignored exception:{Environment.NewLine}{ex}");
-                    }
-                });
+                );
             }
         }
 
         [Theory]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/25760")]
         [MemberData(nameof(TwoBoolsAndCancellationMode))]
-        public async Task GetAsync_CancelDuringResponseBodyReceived_Buffered_TaskCanceledQuickly(bool chunkedTransfer, bool connectionClose, CancellationMode mode)
+        public async Task GetAsync_CancelDuringResponseBodyReceived_Buffered_TaskCanceledQuickly(
+            bool chunkedTransfer,
+            bool connectionClose,
+            CancellationMode mode
+        )
         {
-            if (LoopbackServerFactory.Version >= HttpVersion20.Value && (chunkedTransfer || connectionClose))
+            if (
+                LoopbackServerFactory.Version >= HttpVersion20.Value
+                && (chunkedTransfer || connectionClose)
+            )
             {
                 // There is no chunked encoding or connection header in HTTP/2 and later
                 return;
@@ -171,57 +214,87 @@ namespace System.Net.Http.Functional.Tests
                 client.Timeout = Timeout.InfiniteTimeSpan;
                 var cts = new CancellationTokenSource();
 
-                await LoopbackServerFactory.CreateServerAsync(async (server, url) =>
-                {
-                    var responseHeadersSent = new TaskCompletionSource<bool>();
-                    var clientFinished = new TaskCompletionSource<bool>();
-
-                    Task serverTask = server.AcceptConnectionAsync(async connection =>
+                await LoopbackServerFactory.CreateServerAsync(
+                    async (server, url) =>
                     {
-                        var headers = new List<HttpHeaderData>();
-                        headers.Add(chunkedTransfer ? new HttpHeaderData("Transfer-Encoding", "chunked") : new HttpHeaderData("Content-Length", "20"));
-                        if (connectionClose)
+                        var responseHeadersSent = new TaskCompletionSource<bool>();
+                        var clientFinished = new TaskCompletionSource<bool>();
+
+                        Task serverTask = server.AcceptConnectionAsync(async connection =>
                         {
-                            headers.Add(new HttpHeaderData("Connection", "close"));
+                            var headers = new List<HttpHeaderData>();
+                            headers.Add(
+                                chunkedTransfer
+                                    ? new HttpHeaderData("Transfer-Encoding", "chunked")
+                                    : new HttpHeaderData("Content-Length", "20")
+                            );
+                            if (connectionClose)
+                            {
+                                headers.Add(new HttpHeaderData("Connection", "close"));
+                            }
+
+                            await connection.ReadRequestDataAsync();
+                            await connection.SendResponseAsync(
+                                HttpStatusCode.OK,
+                                headers: headers,
+                                content: "123",
+                                isFinal: false
+                            );
+                            responseHeadersSent.TrySetResult(true);
+                            await clientFinished.Task;
+                        });
+
+                        await ValidateClientCancellationAsync(async () =>
+                        {
+                            var req = new HttpRequestMessage(HttpMethod.Get, url)
+                            {
+                                Version = UseVersion,
+                            };
+                            req.Headers.ConnectionClose = connectionClose;
+
+                            Task<HttpResponseMessage> getResponse = client.SendAsync(
+                                TestAsync,
+                                req,
+                                HttpCompletionOption.ResponseContentRead,
+                                cts.Token
+                            );
+                            await responseHeadersSent.Task;
+                            await Task.Delay(1); // make it more likely that client will have started processing response body
+                            Cancel(mode, client, cts);
+                            await getResponse;
+                        });
+
+                        try
+                        {
+                            clientFinished.SetResult(true);
+                            await serverTask;
                         }
-
-                        await connection.ReadRequestDataAsync();
-                        await connection.SendResponseAsync(HttpStatusCode.OK, headers: headers, content: "123", isFinal: false);
-                        responseHeadersSent.TrySetResult(true);
-                        await clientFinished.Task;
-                    });
-
-                    await ValidateClientCancellationAsync(async () =>
-                    {
-                        var req = new HttpRequestMessage(HttpMethod.Get, url) { Version = UseVersion };
-                        req.Headers.ConnectionClose = connectionClose;
-
-                        Task<HttpResponseMessage> getResponse = client.SendAsync(TestAsync, req, HttpCompletionOption.ResponseContentRead, cts.Token);
-                        await responseHeadersSent.Task;
-                        await Task.Delay(1); // make it more likely that client will have started processing response body
-                        Cancel(mode, client, cts);
-                        await getResponse;
-                    });
-
-                    try
-                    {
-                        clientFinished.SetResult(true);
-                        await serverTask;
+                        catch (Exception ex)
+                        {
+                            _output.WriteLine($"Ignored exception:{Environment.NewLine}{ex}");
+                        }
                     }
-                    catch (Exception ex)
-                    {
-                        _output.WriteLine($"Ignored exception:{Environment.NewLine}{ex}");
-                    }
-                });
+                );
             }
         }
 
         [Theory]
         [MemberData(nameof(ThreeBools))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/65429", typeof(PlatformDetection), nameof(PlatformDetection.IsNodeJS))]
-        public async Task GetAsync_CancelDuringResponseBodyReceived_Unbuffered_TaskCanceledQuickly(bool chunkedTransfer, bool connectionClose, bool readOrCopyToAsync)
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/65429",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNodeJS)
+        )]
+        public async Task GetAsync_CancelDuringResponseBodyReceived_Unbuffered_TaskCanceledQuickly(
+            bool chunkedTransfer,
+            bool connectionClose,
+            bool readOrCopyToAsync
+        )
         {
-            if (LoopbackServerFactory.Version >= HttpVersion20.Value && (chunkedTransfer || connectionClose))
+            if (
+                LoopbackServerFactory.Version >= HttpVersion20.Value
+                && (chunkedTransfer || connectionClose)
+            )
             {
                 // There is no chunked encoding or connection header in HTTP/2 and later
                 return;
@@ -237,58 +310,79 @@ namespace System.Net.Http.Functional.Tests
                 client.Timeout = Timeout.InfiniteTimeSpan;
                 var cts = new CancellationTokenSource();
 
-                await LoopbackServerFactory.CreateServerAsync(async (server, url) =>
-                {
-                    var clientFinished = new TaskCompletionSource<bool>();
-
-                    Task serverTask = server.AcceptConnectionAsync(async connection =>
+                await LoopbackServerFactory.CreateServerAsync(
+                    async (server, url) =>
                     {
-                        var headers = new List<HttpHeaderData>();
-                        headers.Add(chunkedTransfer ? new HttpHeaderData("Transfer-Encoding", "chunked") : new HttpHeaderData("Content-Length", "20"));
-                        if (connectionClose)
+                        var clientFinished = new TaskCompletionSource<bool>();
+
+                        Task serverTask = server.AcceptConnectionAsync(async connection =>
                         {
-                            headers.Add(new HttpHeaderData("Connection", "close"));
+                            var headers = new List<HttpHeaderData>();
+                            headers.Add(
+                                chunkedTransfer
+                                    ? new HttpHeaderData("Transfer-Encoding", "chunked")
+                                    : new HttpHeaderData("Content-Length", "20")
+                            );
+                            if (connectionClose)
+                            {
+                                headers.Add(new HttpHeaderData("Connection", "close"));
+                            }
+
+                            await connection.ReadRequestDataAsync();
+                            await connection.SendResponseAsync(
+                                HttpStatusCode.OK,
+                                headers: headers,
+                                isFinal: false
+                            );
+                            await clientFinished.Task;
+
+#if TARGET_BROWSER
+                            // make sure that the browser closed the connection
+                            await connection.WaitForCloseAsync(CancellationToken.None);
+#endif
+                        });
+
+                        var req = new HttpRequestMessage(HttpMethod.Get, url)
+                        {
+                            Version = UseVersion,
+                        };
+                        req.Headers.ConnectionClose = connectionClose;
+
+#if TARGET_BROWSER
+                        var WebAssemblyEnableStreamingResponseKey = new HttpRequestOptionsKey<bool>(
+                            "WebAssemblyEnableStreamingResponse"
+                        );
+                        req.Options.Set(WebAssemblyEnableStreamingResponseKey, true);
+#endif
+
+                        Task<HttpResponseMessage> getResponse = client.SendAsync(
+                            TestAsync,
+                            req,
+                            HttpCompletionOption.ResponseHeadersRead,
+                            cts.Token
+                        );
+                        await ValidateClientCancellationAsync(async () =>
+                            {
+                                HttpResponseMessage resp = await getResponse;
+                                Stream respStream = await resp.Content.ReadAsStreamAsync(TestAsync);
+                                Task readTask = readOrCopyToAsync
+                                    ? respStream.ReadAsync(new byte[1], 0, 1, cts.Token)
+                                    : respStream.CopyToAsync(Stream.Null, 10, cts.Token);
+                                cts.Cancel();
+                                await readTask;
+                            })
+                            .WaitAsync(TimeSpan.FromSeconds(30));
+                        try
+                        {
+                            clientFinished.SetResult(true);
+                            await serverTask;
                         }
-
-                        await connection.ReadRequestDataAsync();
-                        await connection.SendResponseAsync(HttpStatusCode.OK, headers: headers, isFinal: false);
-                        await clientFinished.Task;
-
-#if TARGET_BROWSER
-                        // make sure that the browser closed the connection
-                        await connection.WaitForCloseAsync(CancellationToken.None);
-#endif
-                    });
-
-                    var req = new HttpRequestMessage(HttpMethod.Get, url) { Version = UseVersion };
-                    req.Headers.ConnectionClose = connectionClose;
-
-#if TARGET_BROWSER
-                    var WebAssemblyEnableStreamingResponseKey = new HttpRequestOptionsKey<bool>("WebAssemblyEnableStreamingResponse");
-                    req.Options.Set(WebAssemblyEnableStreamingResponseKey, true);
-#endif
-
-                    Task<HttpResponseMessage> getResponse = client.SendAsync(TestAsync, req, HttpCompletionOption.ResponseHeadersRead, cts.Token);
-                    await ValidateClientCancellationAsync(async () =>
-                    {
-                        HttpResponseMessage resp = await getResponse;
-                        Stream respStream = await resp.Content.ReadAsStreamAsync(TestAsync);
-                        Task readTask = readOrCopyToAsync ?
-                            respStream.ReadAsync(new byte[1], 0, 1, cts.Token) :
-                            respStream.CopyToAsync(Stream.Null, 10, cts.Token);
-                        cts.Cancel();
-                        await readTask;
-                    }).WaitAsync(TimeSpan.FromSeconds(30));
-                    try
-                    {
-                        clientFinished.SetResult(true);
-                        await serverTask;
+                        catch (Exception ex)
+                        {
+                            _output.WriteLine($"Ignored exception:{Environment.NewLine}{ex}");
+                        }
                     }
-                    catch (Exception ex)
-                    {
-                        _output.WriteLine($"Ignored exception:{Environment.NewLine}{ex}");
-                    }
-                });
+                );
             }
         }
 
@@ -297,8 +391,14 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(CancellationMode.DisposeHttpClient, false)]
         [InlineData(CancellationMode.CancelPendingRequests, true)]
         [InlineData(CancellationMode.DisposeHttpClient, true)]
-        [SkipOnPlatform(TestPlatforms.Browser, "Browser doesn't have blocking synchronous Stream.ReadByte and so it waits for whole body")]
-        public async Task GetAsync_CancelPendingRequests_DoesntCancelReadAsyncOnResponseStream(CancellationMode mode, bool copyToAsync)
+        [SkipOnPlatform(
+            TestPlatforms.Browser,
+            "Browser doesn't have blocking synchronous Stream.ReadByte and so it waits for whole body"
+        )]
+        public async Task GetAsync_CancelPendingRequests_DoesntCancelReadAsyncOnResponseStream(
+            CancellationMode mode,
+            bool copyToAsync
+        )
         {
             if (IsWinHttpHandler && UseVersion >= HttpVersion20.Value)
             {
@@ -309,68 +409,99 @@ namespace System.Net.Http.Functional.Tests
             {
                 client.Timeout = Timeout.InfiniteTimeSpan;
 
-                await LoopbackServerFactory.CreateServerAsync(async (server, url) =>
-                {
-                    var clientReadSomeBody = new TaskCompletionSource<bool>();
-                    var clientFinished = new TaskCompletionSource<bool>();
-
-                    var responseContentSegment = new string('s', 3000);
-                    int responseSegments = 4;
-                    int contentLength = responseContentSegment.Length * responseSegments;
-
-                    Task serverTask = server.AcceptConnectionAsync(async connection =>
+                await LoopbackServerFactory.CreateServerAsync(
+                    async (server, url) =>
                     {
-                        await connection.ReadRequestDataAsync();
-                        await connection.SendResponseAsync(HttpStatusCode.OK, headers: new HttpHeaderData[] { new HttpHeaderData("Content-Length", contentLength.ToString()) }, isFinal: false);
-                        for (int i = 0; i < responseSegments; i++)
+                        var clientReadSomeBody = new TaskCompletionSource<bool>();
+                        var clientFinished = new TaskCompletionSource<bool>();
+
+                        var responseContentSegment = new string('s', 3000);
+                        int responseSegments = 4;
+                        int contentLength = responseContentSegment.Length * responseSegments;
+
+                        Task serverTask = server.AcceptConnectionAsync(async connection =>
                         {
-                            await connection.SendResponseBodyAsync(responseContentSegment, isFinal: i == responseSegments - 1);
-                            if (i == 0)
+                            await connection.ReadRequestDataAsync();
+                            await connection.SendResponseAsync(
+                                HttpStatusCode.OK,
+                                headers: new HttpHeaderData[]
+                                {
+                                    new HttpHeaderData("Content-Length", contentLength.ToString()),
+                                },
+                                isFinal: false
+                            );
+                            for (int i = 0; i < responseSegments; i++)
                             {
-                                await clientReadSomeBody.Task;
+                                await connection.SendResponseBodyAsync(
+                                    responseContentSegment,
+                                    isFinal: i == responseSegments - 1
+                                );
+                                if (i == 0)
+                                {
+                                    await clientReadSomeBody.Task;
+                                }
                             }
-                        }
 
-                        await clientFinished.Task;
-                    });
+                            await clientFinished.Task;
+                        });
 
-
-                    using (HttpResponseMessage resp = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead))
-                    using (Stream respStream = await resp.Content.ReadAsStreamAsync(TestAsync))
-                    {
-                        var result = new MemoryStream();
-                        int b = respStream.ReadByte();
-                        Assert.NotEqual(-1, b);
-                        result.WriteByte((byte)b);
-
-                        Cancel(mode, client, null); // should not cancel the operation, as using ResponseHeadersRead
-                        clientReadSomeBody.SetResult(true);
-
-                        if (copyToAsync)
+                        using (
+                            HttpResponseMessage resp = await client.GetAsync(
+                                url,
+                                HttpCompletionOption.ResponseHeadersRead
+                            )
+                        )
+                        using (Stream respStream = await resp.Content.ReadAsStreamAsync(TestAsync))
                         {
-                            await respStream.CopyToAsync(result, 10, new CancellationTokenSource().Token);
-                        }
-                        else
-                        {
-                            byte[] buffer = new byte[10];
-                            int bytesRead;
-                            while ((bytesRead = await respStream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                            var result = new MemoryStream();
+                            int b = respStream.ReadByte();
+                            Assert.NotEqual(-1, b);
+                            result.WriteByte((byte)b);
+
+                            Cancel(mode, client, null); // should not cancel the operation, as using ResponseHeadersRead
+                            clientReadSomeBody.SetResult(true);
+
+                            if (copyToAsync)
                             {
-                                result.Write(buffer, 0, bytesRead);
+                                await respStream.CopyToAsync(
+                                    result,
+                                    10,
+                                    new CancellationTokenSource().Token
+                                );
                             }
+                            else
+                            {
+                                byte[] buffer = new byte[10];
+                                int bytesRead;
+                                while (
+                                    (
+                                        bytesRead = await respStream.ReadAsync(
+                                            buffer,
+                                            0,
+                                            buffer.Length
+                                        )
+                                    ) > 0
+                                )
+                                {
+                                    result.Write(buffer, 0, bytesRead);
+                                }
+                            }
+
+                            Assert.Equal(contentLength, result.Length);
                         }
 
-                        Assert.Equal(contentLength, result.Length);
+                        clientFinished.SetResult(true);
+                        await serverTask;
                     }
-
-                    clientFinished.SetResult(true);
-                    await serverTask;
-                });
+                );
             }
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.Browser, "MaxConnectionsPerServer is not supported on Browser")]
+        [SkipOnPlatform(
+            TestPlatforms.Browser,
+            "MaxConnectionsPerServer is not supported on Browser"
+        )]
         public async Task MaxConnectionsPerServer_WaitingConnectionsAreCancelable()
         {
             if (LoopbackServerFactory.Version >= HttpVersion20.Value)
@@ -385,40 +516,48 @@ namespace System.Net.Http.Functional.Tests
                 handler.MaxConnectionsPerServer = 1;
                 client.Timeout = Timeout.InfiniteTimeSpan;
 
-                await LoopbackServer.CreateServerAsync(async (server, url) =>
-                {
-                    var serverAboutToBlock = new TaskCompletionSource<bool>();
-                    var blockServerResponse = new TaskCompletionSource<bool>();
-
-                    Task serverTask1 = server.AcceptConnectionAsync(async connection1 =>
+                await LoopbackServer.CreateServerAsync(
+                    async (server, url) =>
                     {
-                        await connection1.ReadRequestHeaderAsync();
-                        await connection1.WriteStringAsync($"HTTP/1.1 200 OK\r\nConnection: close\r\nDate: {DateTimeOffset.UtcNow:R}\r\n");
-                        serverAboutToBlock.SetResult(true);
-                        await blockServerResponse.Task;
-                        await connection1.WriteStringAsync("Content-Length: 5\r\n\r\nhello");
-                    });
+                        var serverAboutToBlock = new TaskCompletionSource<bool>();
+                        var blockServerResponse = new TaskCompletionSource<bool>();
 
-                    Task get1 = client.GetAsync(url);
-                    await serverAboutToBlock.Task;
+                        Task serverTask1 = server.AcceptConnectionAsync(async connection1 =>
+                        {
+                            await connection1.ReadRequestHeaderAsync();
+                            await connection1.WriteStringAsync(
+                                $"HTTP/1.1 200 OK\r\nConnection: close\r\nDate: {DateTimeOffset.UtcNow:R}\r\n"
+                            );
+                            serverAboutToBlock.SetResult(true);
+                            await blockServerResponse.Task;
+                            await connection1.WriteStringAsync("Content-Length: 5\r\n\r\nhello");
+                        });
 
-                    var cts = new CancellationTokenSource();
-                    Task get2 = ValidateClientCancellationAsync(() => client.GetAsync(url, cts.Token));
-                    Task get3 = ValidateClientCancellationAsync(() => client.GetAsync(url, cts.Token));
+                        Task get1 = client.GetAsync(url);
+                        await serverAboutToBlock.Task;
 
-                    Task get4 = client.GetAsync(url);
+                        var cts = new CancellationTokenSource();
+                        Task get2 = ValidateClientCancellationAsync(
+                            () => client.GetAsync(url, cts.Token)
+                        );
+                        Task get3 = ValidateClientCancellationAsync(
+                            () => client.GetAsync(url, cts.Token)
+                        );
 
-                    cts.Cancel();
-                    await get2;
-                    await get3;
+                        Task get4 = client.GetAsync(url);
 
-                    blockServerResponse.SetResult(true);
-                    await new[] { get1, serverTask1 }.WhenAllOrAnyFailed();
+                        cts.Cancel();
+                        await get2;
+                        await get3;
 
-                    Task serverTask4 = server.AcceptConnectionSendResponseAndCloseAsync();
+                        blockServerResponse.SetResult(true);
+                        await new[] { get1, serverTask1 }.WhenAllOrAnyFailed();
 
-                    await new[] { get4, serverTask4 }.WhenAllOrAnyFailed();
-                });
+                        Task serverTask4 = server.AcceptConnectionSendResponseAndCloseAsync();
+
+                        await new[] { get4, serverTask4 }.WhenAllOrAnyFailed();
+                    }
+                );
             }
         }
 
@@ -443,12 +582,21 @@ namespace System.Net.Http.Functional.Tests
                         {
                             ex = e;
                         }
-                        Assert.True(ex != null, "Expected OperationCancelledException, but no exception was thrown.");
+                        Assert.True(
+                            ex != null,
+                            "Expected OperationCancelledException, but no exception was thrown."
+                        );
 
-                        Assert.True(cts.Token.IsCancellationRequested, "cts token IsCancellationRequested");
+                        Assert.True(
+                            cts.Token.IsCancellationRequested,
+                            "cts token IsCancellationRequested"
+                        );
 
                         // .NET Framework has bug where it doesn't propagate token information.
-                        Assert.True(ex.CancellationToken.IsCancellationRequested, "exception token IsCancellationRequested");
+                        Assert.True(
+                            ex.CancellationToken.IsCancellationRequested,
+                            "exception token IsCancellationRequested"
+                        );
 
                         clientCanceled.SetResult(true);
                     }
@@ -457,7 +605,8 @@ namespace System.Net.Http.Functional.Tests
                 {
                     Task serverTask = server.HandleRequestAsync();
                     await clientCanceled.Task;
-                });
+                }
+            );
         }
 
         public static IEnumerable<object[]> PostAsync_Cancel_CancellationTokenPassedToContent_MemberData()
@@ -470,29 +619,31 @@ namespace System.Net.Http.Functional.Tests
                 CancellationTokenSource tokenSource = new CancellationTokenSource();
                 var actualToken = new StrongBox<CancellationToken>();
                 bool called = false;
-                var content = new StreamContent(new DelegateStream(
-                    canReadFunc: () => true,
-                    readAsyncFunc: async (buffer, offset, count, cancellationToken) =>
-                    {
-                        int result = 1;
-                        if (called)
+                var content = new StreamContent(
+                    new DelegateStream(
+                        canReadFunc: () => true,
+                        readAsyncFunc: async (buffer, offset, count, cancellationToken) =>
                         {
-                            result = 0;
-                            Assert.False(cancellationToken.IsCancellationRequested);
-                            tokenSource.Cancel();
-
-                            // Wait for cancellation to occur.  It should be very quickly after it's been requested.
-                            var tcs = new TaskCompletionSource<bool>();
-                            using (cancellationToken.Register(() => tcs.SetResult(true)))
+                            int result = 1;
+                            if (called)
                             {
-                                await tcs.Task;
-                            }
-                        }
+                                result = 0;
+                                Assert.False(cancellationToken.IsCancellationRequested);
+                                tokenSource.Cancel();
 
-                        called = true;
-                        return result;
-                    }
-                ));
+                                // Wait for cancellation to occur.  It should be very quickly after it's been requested.
+                                var tcs = new TaskCompletionSource<bool>();
+                                using (cancellationToken.Register(() => tcs.SetResult(true)))
+                                {
+                                    await tcs.Task;
+                                }
+                            }
+
+                            called = true;
+                            return result;
+                        }
+                    )
+                );
                 yield return new object[] { content, tokenSource };
             }
 
@@ -502,33 +653,37 @@ namespace System.Net.Http.Functional.Tests
                 var actualToken = new StrongBox<CancellationToken>();
                 bool called = false;
                 var content = new MultipartContent();
-                content.Add(new StreamContent(new DelegateStream(
-                    canReadFunc: () => true,
-                    canSeekFunc: () => true,
-                    lengthFunc: () => 1,
-                    positionGetFunc: () => 0,
-                    positionSetFunc: _ => { },
-                    readAsyncFunc: async (buffer, offset, count, cancellationToken) =>
-                    {
-                        int result = 1;
-                        if (called)
-                        {
-                            result = 0;
-                            Assert.False(cancellationToken.IsCancellationRequested);
-                            tokenSource.Cancel();
-
-                            // Wait for cancellation to occur.  It should be very quickly after it's been requested.
-                            var tcs = new TaskCompletionSource<bool>();
-                            using (cancellationToken.Register(() => tcs.SetResult(true)))
+                content.Add(
+                    new StreamContent(
+                        new DelegateStream(
+                            canReadFunc: () => true,
+                            canSeekFunc: () => true,
+                            lengthFunc: () => 1,
+                            positionGetFunc: () => 0,
+                            positionSetFunc: _ => { },
+                            readAsyncFunc: async (buffer, offset, count, cancellationToken) =>
                             {
-                                await tcs.Task;
-                            }
-                        }
+                                int result = 1;
+                                if (called)
+                                {
+                                    result = 0;
+                                    Assert.False(cancellationToken.IsCancellationRequested);
+                                    tokenSource.Cancel();
 
-                        called = true;
-                        return result;
-                    }
-                )));
+                                    // Wait for cancellation to occur.  It should be very quickly after it's been requested.
+                                    var tcs = new TaskCompletionSource<bool>();
+                                    using (cancellationToken.Register(() => tcs.SetResult(true)))
+                                    {
+                                        await tcs.Task;
+                                    }
+                                }
+
+                                called = true;
+                                return result;
+                            }
+                        )
+                    )
+                );
                 yield return new object[] { content, tokenSource };
             }
 
@@ -538,33 +693,37 @@ namespace System.Net.Http.Functional.Tests
                 var actualToken = new StrongBox<CancellationToken>();
                 bool called = false;
                 var content = new MultipartFormDataContent();
-                content.Add(new StreamContent(new DelegateStream(
-                    canReadFunc: () => true,
-                    canSeekFunc: () => true,
-                    lengthFunc: () => 1,
-                    positionGetFunc: () => 0,
-                    positionSetFunc: _ => { },
-                    readAsyncFunc: async (buffer, offset, count, cancellationToken) =>
-                    {
-                        int result = 1;
-                        if (called)
-                        {
-                            result = 0;
-                            Assert.False(cancellationToken.IsCancellationRequested);
-                            tokenSource.Cancel();
-
-                            // Wait for cancellation to occur.  It should be very quickly after it's been requested.
-                            var tcs = new TaskCompletionSource<bool>();
-                            using (cancellationToken.Register(() => tcs.SetResult(true)))
+                content.Add(
+                    new StreamContent(
+                        new DelegateStream(
+                            canReadFunc: () => true,
+                            canSeekFunc: () => true,
+                            lengthFunc: () => 1,
+                            positionGetFunc: () => 0,
+                            positionSetFunc: _ => { },
+                            readAsyncFunc: async (buffer, offset, count, cancellationToken) =>
                             {
-                                await tcs.Task;
-                            }
-                        }
+                                int result = 1;
+                                if (called)
+                                {
+                                    result = 0;
+                                    Assert.False(cancellationToken.IsCancellationRequested);
+                                    tokenSource.Cancel();
 
-                        called = true;
-                        return result;
-                    }
-                )));
+                                    // Wait for cancellation to occur.  It should be very quickly after it's been requested.
+                                    var tcs = new TaskCompletionSource<bool>();
+                                    using (cancellationToken.Register(() => tcs.SetResult(true)))
+                                    {
+                                        await tcs.Task;
+                                    }
+                                }
+
+                                called = true;
+                                return result;
+                            }
+                        )
+                    )
+                );
                 yield return new object[] { content, tokenSource };
             }
         }
@@ -574,7 +733,10 @@ namespace System.Net.Http.Functional.Tests
         [OuterLoop("Uses Task.Delay")]
         [Theory]
         [MemberData(nameof(PostAsync_Cancel_CancellationTokenPassedToContent_MemberData))]
-        public async Task PostAsync_Cancel_CancellationTokenPassedToContent(HttpContent content, CancellationTokenSource cancellationTokenSource)
+        public async Task PostAsync_Cancel_CancellationTokenPassedToContent(
+            HttpContent content,
+            CancellationTokenSource cancellationTokenSource
+        )
         {
             if (IsWinHttpHandler)
             {
@@ -591,10 +753,22 @@ namespace System.Net.Http.Functional.Tests
                 async uri =>
                 {
                     using (var invoker = new HttpMessageInvoker(CreateHttpClientHandler()))
-                    using (var req = new HttpRequestMessage(HttpMethod.Post, uri) { Content = content, Version = UseVersion })
+                    using (
+                        var req = new HttpRequestMessage(HttpMethod.Post, uri)
+                        {
+                            Content = content,
+                            Version = UseVersion,
+                        }
+                    )
                         try
                         {
-                            using (HttpResponseMessage resp = await invoker.SendAsync(TestAsync, req, cancellationTokenSource.Token))
+                            using (
+                                HttpResponseMessage resp = await invoker.SendAsync(
+                                    TestAsync,
+                                    req,
+                                    cancellationTokenSource.Token
+                                )
+                            )
                             {
                                 Assert.Equal("Hello World", await resp.Content.ReadAsStringAsync());
                             }
@@ -608,7 +782,8 @@ namespace System.Net.Http.Functional.Tests
                         await server.HandleRequestAsync(content: "Hello World");
                     }
                     catch (Exception) { }
-                });
+                }
+            );
         }
 #endif
 
@@ -621,13 +796,21 @@ namespace System.Net.Http.Functional.Tests
             Assert.NotNull(error);
 
             Assert.True(
-                    error is OperationCanceledException,
-                    "Expected cancellation exception, got:" + Environment.NewLine + error);
+                error is OperationCanceledException,
+                "Expected cancellation exception, got:" + Environment.NewLine + error
+            );
 
-            Assert.True(stopwatch.Elapsed < new TimeSpan(0, 0, 60), $"Elapsed time {stopwatch.Elapsed} should be less than 60 seconds, was {stopwatch.Elapsed.TotalSeconds}");
+            Assert.True(
+                stopwatch.Elapsed < new TimeSpan(0, 0, 60),
+                $"Elapsed time {stopwatch.Elapsed} should be less than 60 seconds, was {stopwatch.Elapsed.TotalSeconds}"
+            );
         }
 
-        private static void Cancel(CancellationMode mode, HttpClient client, CancellationTokenSource cts)
+        private static void Cancel(
+            CancellationMode mode,
+            HttpClient client,
+            CancellationTokenSource cts
+        )
         {
             if ((mode & CancellationMode.Token) != 0)
             {
@@ -650,18 +833,30 @@ namespace System.Net.Http.Functional.Tests
         {
             Token = 0x1,
             CancelPendingRequests = 0x2,
-            DisposeHttpClient = 0x4
+            DisposeHttpClient = 0x4,
         }
 
         public static IEnumerable<object[]> OneBoolAndCancellationMode() =>
             from first in BoolValues
-            from mode in new[] { CancellationMode.Token, CancellationMode.CancelPendingRequests, CancellationMode.DisposeHttpClient, CancellationMode.Token | CancellationMode.CancelPendingRequests }
+            from mode in new[]
+            {
+                CancellationMode.Token,
+                CancellationMode.CancelPendingRequests,
+                CancellationMode.DisposeHttpClient,
+                CancellationMode.Token | CancellationMode.CancelPendingRequests,
+            }
             select new object[] { first, mode };
 
         public static IEnumerable<object[]> TwoBoolsAndCancellationMode() =>
             from first in BoolValues
             from second in BoolValues
-            from mode in new[] { CancellationMode.Token, CancellationMode.CancelPendingRequests, CancellationMode.DisposeHttpClient, CancellationMode.Token | CancellationMode.CancelPendingRequests }
+            from mode in new[]
+            {
+                CancellationMode.Token,
+                CancellationMode.CancelPendingRequests,
+                CancellationMode.DisposeHttpClient,
+                CancellationMode.Token | CancellationMode.CancelPendingRequests,
+            }
             select new object[] { first, second, mode };
 
         public static IEnumerable<object[]> ThreeBools() =>

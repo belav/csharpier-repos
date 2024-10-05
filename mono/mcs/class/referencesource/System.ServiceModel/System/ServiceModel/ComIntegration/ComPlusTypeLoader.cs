@@ -29,8 +29,9 @@ namespace System.ServiceModel.ComIntegration
         public ComPlusTypeLoader(ServiceInfo info)
         {
             this.info = info;
-            this.transactionFlow = info.TransactionOption == TransactionOption.Required ||
-                                    info.TransactionOption == TransactionOption.Supported;
+            this.transactionFlow =
+                info.TransactionOption == TransactionOption.Required
+                || info.TransactionOption == TransactionOption.Supported;
             this.interfaceResolver = new TypeCacheManager();
             this.contracts = new Dictionary<Guid, ContractDescription>();
         }
@@ -40,7 +41,9 @@ namespace System.ServiceModel.ComIntegration
             // Filter known invalid IIDs
             if (!ComPlusTypeValidator.IsValidInterface(iid))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(Error.ListenerInitFailed(SR.GetString(SR.InvalidWebServiceInterface, iid)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    Error.ListenerInitFailed(SR.GetString(SR.InvalidWebServiceInterface, iid))
+                );
             }
 
             // Filter out interfaces with no configured methods
@@ -51,7 +54,9 @@ namespace System.ServiceModel.ComIntegration
                 {
                     if (contractInfo.Operations.Count == 0)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(Error.ListenerInitFailed(SR.GetString(SR.RequireConfiguredMethods, iid)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            Error.ListenerInitFailed(SR.GetString(SR.RequireConfiguredMethods, iid))
+                        );
                     }
 
                     configuredInterface = true;
@@ -62,7 +67,9 @@ namespace System.ServiceModel.ComIntegration
             // Filter out interfaces that aren't configured at all
             if (!configuredInterface)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(Error.ListenerInitFailed(SR.GetString(SR.RequireConfiguredInterfaces, iid)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    Error.ListenerInitFailed(SR.GetString(SR.RequireConfiguredInterfaces, iid))
+                );
             }
         }
 
@@ -71,19 +78,35 @@ namespace System.ServiceModel.ComIntegration
             ComContractElement contractConfigElement = ConfigLoader.LookupComContract(iid);
 
             if (contractConfigElement == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(Error.ListenerInitFailed(SR.GetString(SR.InterfaceNotFoundInConfig, iid)));
-            if (String.IsNullOrEmpty(contractConfigElement.Name) || String.IsNullOrEmpty(contractConfigElement.Namespace))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(Error.ListenerInitFailed(SR.GetString(SR.CannotHaveNullOrEmptyNameOrNamespaceForIID, iid)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    Error.ListenerInitFailed(SR.GetString(SR.InterfaceNotFoundInConfig, iid))
+                );
+            if (
+                String.IsNullOrEmpty(contractConfigElement.Name)
+                || String.IsNullOrEmpty(contractConfigElement.Namespace)
+            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    Error.ListenerInitFailed(
+                        SR.GetString(SR.CannotHaveNullOrEmptyNameOrNamespaceForIID, iid)
+                    )
+                );
 
-            ContractDescription contract = new ContractDescription(contractConfigElement.Name, contractConfigElement.Namespace);
+            ContractDescription contract = new ContractDescription(
+                contractConfigElement.Name,
+                contractConfigElement.Namespace
+            );
             contract.ContractType = type;
-            contract.SessionMode = contractConfigElement.RequiresSession ? SessionMode.Required : SessionMode.Allowed;
+            contract.SessionMode = contractConfigElement.RequiresSession
+                ? SessionMode.Required
+                : SessionMode.Allowed;
 
             bool methodFound = false;
 
             List<Guid> guidList = new List<Guid>();
 
-            foreach (ComPersistableTypeElement typeElement in contractConfigElement.PersistableTypes)
+            foreach (
+                ComPersistableTypeElement typeElement in contractConfigElement.PersistableTypes
+            )
             {
                 Guid typeGuid = Fx.CreateGuid(typeElement.ID);
 
@@ -94,7 +117,7 @@ namespace System.ServiceModel.ComIntegration
 
             // We create a surrogate when the persistable types config section is there
             // even if we have no types that we allow.
-            // That way we have control over the error when the client tries to make a call 
+            // That way we have control over the error when the client tries to make a call
             // persistable type.
             if (guidList.Count > 0 || contractConfigElement.PersistableTypes.EmitClear)
             {
@@ -108,7 +131,12 @@ namespace System.ServiceModel.ComIntegration
                 {
                     if (method.Name == configMethod.ExposedMethod)
                     {
-                        OperationDescription operation = CreateOperationDescription(contract, method, contractConfigElement, (null != contractSurrogate));
+                        OperationDescription operation = CreateOperationDescription(
+                            contract,
+                            method,
+                            contractConfigElement,
+                            (null != contractSurrogate)
+                        );
                         ConfigureOperationDescriptionBehaviors(operation, contractSurrogate);
                         contract.Operations.Add(operation);
                         methodFound = true;
@@ -116,11 +144,23 @@ namespace System.ServiceModel.ComIntegration
                     }
                 }
                 if (!methodFound)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(Error.ListenerInitFailed(SR.GetString(SR.MethodGivenInConfigNotFoundOnInterface, configMethod.ExposedMethod, iid)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        Error.ListenerInitFailed(
+                            SR.GetString(
+                                SR.MethodGivenInConfigNotFoundOnInterface,
+                                configMethod.ExposedMethod,
+                                iid
+                            )
+                        )
+                    );
             }
 
             if (contract.Operations.Count == 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(Error.ListenerInitFailed(SR.GetString(SR.NoneOfTheMethodsForInterfaceFoundInConfig, iid)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    Error.ListenerInitFailed(
+                        SR.GetString(SR.NoneOfTheMethodsForInterfaceFoundInConfig, iid)
+                    )
+                );
 
             ConfigureContractDescriptionBehaviors(contract);
             return contract;
@@ -132,14 +172,23 @@ namespace System.ServiceModel.ComIntegration
             contract.Behaviors.Add(new OperationSelectorBehavior());
 
             // ComPlusContractBehavior
-            ComPlusContractBehavior comPlusContractBehavior = new ComPlusContractBehavior(this.info);
+            ComPlusContractBehavior comPlusContractBehavior = new ComPlusContractBehavior(
+                this.info
+            );
             contract.Behaviors.Add(comPlusContractBehavior);
         }
 
-        void ConfigureOperationDescriptionBehaviors(OperationDescription operation, IDataContractSurrogate contractSurrogate)
+        void ConfigureOperationDescriptionBehaviors(
+            OperationDescription operation,
+            IDataContractSurrogate contractSurrogate
+        )
         {
             // DataContractSerializerOperationBehavior
-            DataContractSerializerOperationBehavior contractSerializer = new DataContractSerializerOperationBehavior(operation, TypeLoader.DefaultDataContractFormatAttribute);
+            DataContractSerializerOperationBehavior contractSerializer =
+                new DataContractSerializerOperationBehavior(
+                    operation,
+                    TypeLoader.DefaultDataContractFormatAttribute
+                );
 
             if (null != contractSurrogate)
             {
@@ -151,13 +200,19 @@ namespace System.ServiceModel.ComIntegration
             // OperationInvokerBehavior
             operation.Behaviors.Add(new OperationInvokerBehavior());
 
-            if (info.TransactionOption == TransactionOption.Supported || info.TransactionOption == TransactionOption.Required)
+            if (
+                info.TransactionOption == TransactionOption.Supported
+                || info.TransactionOption == TransactionOption.Required
+            )
             {
-                operation.Behaviors.Add(new TransactionFlowAttribute(TransactionFlowOption.Allowed));
+                operation.Behaviors.Add(
+                    new TransactionFlowAttribute(TransactionFlowOption.Allowed)
+                );
             }
 
             // OperationBehaviorAttribute
-            OperationBehaviorAttribute operationBehaviorAttribute = new OperationBehaviorAttribute();
+            OperationBehaviorAttribute operationBehaviorAttribute =
+                new OperationBehaviorAttribute();
             operationBehaviorAttribute.TransactionAutoComplete = true;
             operationBehaviorAttribute.TransactionScopeRequired = false;
             operation.Behaviors.Add(operationBehaviorAttribute);
@@ -169,7 +224,12 @@ namespace System.ServiceModel.ComIntegration
         // for that to be realistic at the time of writing (12/2004).
         //
 
-        OperationDescription CreateOperationDescription(ContractDescription contract, MethodInfo methodInfo, ComContractElement config, bool allowReferences)
+        OperationDescription CreateOperationDescription(
+            ContractDescription contract,
+            MethodInfo methodInfo,
+            ComContractElement config,
+            bool allowReferences
+        )
         {
             XmlName operationName = new XmlName(ServiceReflector.GetLogicalName(methodInfo));
             XmlName returnValueName = TypeLoader.GetReturnValueName(operationName);
@@ -178,16 +238,23 @@ namespace System.ServiceModel.ComIntegration
             {
                 Fx.Assert("No async operations allowed");
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(Error.NoAsyncOperationsAllowed());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    Error.NoAsyncOperationsAllowed()
+                );
             }
             if (contract.Operations.FindAll(operationName.EncodedName).Count != 0)
             {
                 Fx.Assert("Duplicate operation name");
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(Error.DuplicateOperation());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    Error.DuplicateOperation()
+                );
             }
 
-            OperationDescription operationDescription = new OperationDescription(operationName.EncodedName, contract);
+            OperationDescription operationDescription = new OperationDescription(
+                operationName.EncodedName,
+                contract
+            );
             operationDescription.SyncMethod = methodInfo;
             operationDescription.IsInitiating = true;
             operationDescription.IsTerminating = false;
@@ -206,38 +273,51 @@ namespace System.ServiceModel.ComIntegration
 
                 Guid typeLibID = Fx.CreateGuid(udt.TypeLibID);
 
-                TypeCacheManager.Provider.FindOrCreateType(typeLibID, udt.TypeLibVersion, Fx.CreateGuid(udt.TypeDefID), out knownType, false);
+                TypeCacheManager.Provider.FindOrCreateType(
+                    typeLibID,
+                    udt.TypeLibVersion,
+                    Fx.CreateGuid(udt.TypeDefID),
+                    out knownType,
+                    false
+                );
 
                 this.info.AddUdt(knownType, typeLibID);
                 operationDescription.KnownTypes.Add(knownType);
             }
 
-
             string ns = contract.Namespace;
             XmlQualifiedName contractQName = new XmlQualifiedName(contract.Name, ns);
 
-            string requestAction = NamingHelper.GetMessageAction(contractQName,
-                                                                 operationName.DecodedName,
-                                                                 null,
-                                                                 false);
+            string requestAction = NamingHelper.GetMessageAction(
+                contractQName,
+                operationName.DecodedName,
+                null,
+                false
+            );
 
-            string responseAction = NamingHelper.GetMessageAction(contractQName,
-                                                                  operationName.DecodedName,
-                                                                  null,
-                                                                  true);
+            string responseAction = NamingHelper.GetMessageAction(
+                contractQName,
+                operationName.DecodedName,
+                null,
+                true
+            );
 
-            MessageDescription inMessage = CreateIncomingMessageDescription(contract,
-                                                                            methodInfo,
-                                                                            ns,
-                                                                            requestAction,
-                                                                            allowReferences);
+            MessageDescription inMessage = CreateIncomingMessageDescription(
+                contract,
+                methodInfo,
+                ns,
+                requestAction,
+                allowReferences
+            );
 
-            MessageDescription outMessage = CreateOutgoingMessageDescription(contract,
-                                                                             methodInfo,
-                                                                             returnValueName,
-                                                                             ns,
-                                                                             responseAction,
-                                                                             allowReferences);
+            MessageDescription outMessage = CreateOutgoingMessageDescription(
+                contract,
+                methodInfo,
+                returnValueName,
+                ns,
+                responseAction,
+                allowReferences
+            );
 
             operationDescription.Messages.Add(inMessage);
             operationDescription.Messages.Add(outMessage);
@@ -245,55 +325,65 @@ namespace System.ServiceModel.ComIntegration
             return operationDescription;
         }
 
-        MessageDescription CreateIncomingMessageDescription(ContractDescription contract,
-                                                            MethodInfo methodInfo,
-                                                            string ns,
-                                                            string action,
-                                                            bool allowReferences)
+        MessageDescription CreateIncomingMessageDescription(
+            ContractDescription contract,
+            MethodInfo methodInfo,
+            string ns,
+            string action,
+            bool allowReferences
+        )
         {
             ParameterInfo[] parameters = ServiceReflector.GetInputParameters(methodInfo, false);
-            return CreateParameterMessageDescription(contract,
-                                                     parameters,
-                                                     null,
-                                                     null,
-                                                     null,
-                                                     methodInfo.Name,
-                                                     ns,
-                                                     action,
-                                                     MessageDirection.Input,
-                                                     allowReferences);
+            return CreateParameterMessageDescription(
+                contract,
+                parameters,
+                null,
+                null,
+                null,
+                methodInfo.Name,
+                ns,
+                action,
+                MessageDirection.Input,
+                allowReferences
+            );
         }
 
-        MessageDescription CreateOutgoingMessageDescription(ContractDescription contract,
-                                                            MethodInfo methodInfo,
-                                                            XmlName returnValueName,
-                                                            string ns,
-                                                            string action,
-                                                            bool allowReferences)
+        MessageDescription CreateOutgoingMessageDescription(
+            ContractDescription contract,
+            MethodInfo methodInfo,
+            XmlName returnValueName,
+            string ns,
+            string action,
+            bool allowReferences
+        )
         {
             ParameterInfo[] parameters = ServiceReflector.GetOutputParameters(methodInfo, false);
-            return CreateParameterMessageDescription(contract,
-                                                     parameters,
-                                                     methodInfo.ReturnType,
-                                                     methodInfo.ReturnTypeCustomAttributes,
-                                                     returnValueName,
-                                                     methodInfo.Name,
-                                                     ns,
-                                                     action,
-                                                     MessageDirection.Output,
-                                                     allowReferences);
+            return CreateParameterMessageDescription(
+                contract,
+                parameters,
+                methodInfo.ReturnType,
+                methodInfo.ReturnTypeCustomAttributes,
+                returnValueName,
+                methodInfo.Name,
+                ns,
+                action,
+                MessageDirection.Output,
+                allowReferences
+            );
         }
 
-        MessageDescription CreateParameterMessageDescription(ContractDescription contract,
-                                                             ParameterInfo[] parameters,
-                                                             Type returnType,
-                                                             ICustomAttributeProvider returnCustomAttributes,
-                                                             XmlName returnValueName,
-                                                             string methodName,
-                                                             string ns,
-                                                             string action,
-                                                             MessageDirection direction,
-                                                             bool allowReferences)
+        MessageDescription CreateParameterMessageDescription(
+            ContractDescription contract,
+            ParameterInfo[] parameters,
+            Type returnType,
+            ICustomAttributeProvider returnCustomAttributes,
+            XmlName returnValueName,
+            string methodName,
+            string ns,
+            string action,
+            MessageDirection direction,
+            bool allowReferences
+        )
         {
             MessageDescription messageDescription = new MessageDescription(action, direction);
             messageDescription.Body.WrapperNamespace = ns;
@@ -303,19 +393,33 @@ namespace System.ServiceModel.ComIntegration
                 ParameterInfo parameter = parameters[index];
                 Type parameterType = TypeLoader.GetParameterType(parameter);
 
-                if (!ComPlusTypeValidator.IsValidParameter(parameterType, parameter, allowReferences))
+                if (
+                    !ComPlusTypeValidator.IsValidParameter(
+                        parameterType,
+                        parameter,
+                        allowReferences
+                    )
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(Error.ListenerInitFailed(SR.GetString(SR.InvalidWebServiceParameter,
-                                                                parameter.Name,
-                                                                parameterType.Name,
-                                                                methodName,
-                                                                contract.Name)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        Error.ListenerInitFailed(
+                            SR.GetString(
+                                SR.InvalidWebServiceParameter,
+                                parameter.Name,
+                                parameterType.Name,
+                                methodName,
+                                contract.Name
+                            )
+                        )
+                    );
                 }
 
-                MessagePartDescription messagePart = CreateMessagePartDescription(parameterType,
-                                                                                  new XmlName(parameter.Name),
-                                                                                  ns,
-                                                                                  index);
+                MessagePartDescription messagePart = CreateMessagePartDescription(
+                    parameterType,
+                    new XmlName(parameter.Name),
+                    ns,
+                    index
+                );
                 messageDescription.Body.Parts.Add(messagePart);
             }
 
@@ -326,32 +430,53 @@ namespace System.ServiceModel.ComIntegration
             }
             else
             {
-                messageDescription.Body.WrapperName = TypeLoader.GetBodyWrapperResponseName(xmlName).EncodedName;
+                messageDescription.Body.WrapperName = TypeLoader
+                    .GetBodyWrapperResponseName(xmlName)
+                    .EncodedName;
 
-                if (!ComPlusTypeValidator.IsValidParameter(returnType, returnCustomAttributes, allowReferences))
+                if (
+                    !ComPlusTypeValidator.IsValidParameter(
+                        returnType,
+                        returnCustomAttributes,
+                        allowReferences
+                    )
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(Error.ListenerInitFailed(SR.GetString(SR.InvalidWebServiceReturnValue,
-                                                                returnType.Name,
-                                                                methodName,
-                                                                contract.Name)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        Error.ListenerInitFailed(
+                            SR.GetString(
+                                SR.InvalidWebServiceReturnValue,
+                                returnType.Name,
+                                methodName,
+                                contract.Name
+                            )
+                        )
+                    );
                 }
 
-                MessagePartDescription messagePart = CreateMessagePartDescription(returnType,
-                                                                                  returnValueName,
-                                                                                  ns,
-                                                                                  0);
+                MessagePartDescription messagePart = CreateMessagePartDescription(
+                    returnType,
+                    returnValueName,
+                    ns,
+                    0
+                );
                 messageDescription.Body.ReturnValue = messagePart;
             }
 
             return messageDescription;
         }
 
-        MessagePartDescription CreateMessagePartDescription(Type bodyType,
-                                                            XmlName name,
-                                                            string ns,
-                                                            int index)
+        MessagePartDescription CreateMessagePartDescription(
+            Type bodyType,
+            XmlName name,
+            string ns,
+            int index
+        )
         {
-            MessagePartDescription partDescription = new MessagePartDescription(name.EncodedName, ns);
+            MessagePartDescription partDescription = new MessagePartDescription(
+                name.EncodedName,
+                ns
+            );
             partDescription.SerializationPosition = index;
             partDescription.MemberInfo = null;
             partDescription.Type = bodyType;
@@ -375,7 +500,11 @@ namespace System.ServiceModel.ComIntegration
             {
                 if (!DiagnosticUtility.Utility.TryCreateGuid(contractTypeString, out iid))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(Error.ListenerInitFailed(SR.GetString(SR.ContractTypeNotAnIID, contractTypeString)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        Error.ListenerInitFailed(
+                            SR.GetString(SR.ContractTypeNotAnIID, contractTypeString)
+                        )
+                    );
                 }
 
                 ValidateInterface(iid);
@@ -395,11 +524,19 @@ namespace System.ServiceModel.ComIntegration
                 // Generate a managed type corresponding to the interface in question
                 try
                 {
-                    this.interfaceResolver.FindOrCreateType(this.info.ServiceType, iid, out type, false, true);
+                    this.interfaceResolver.FindOrCreateType(
+                        this.info.ServiceType,
+                        iid,
+                        out type,
+                        false,
+                        true
+                    );
                 }
                 catch (InvalidOperationException e)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(Error.ListenerInitFailed(e.Message));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        Error.ListenerInitFailed(e.Message)
+                    );
                 }
 
                 contract = CreateContractDescriptionInternal(iid, type);
@@ -408,8 +545,13 @@ namespace System.ServiceModel.ComIntegration
                 contract = ResolveIMetadataExchangeToContract();
             contracts.Add(iid, contract);
 
-            ComPlusServiceHostTrace.Trace(TraceEventType.Verbose, TraceCode.ComIntegrationServiceHostCreatedServiceContract,
-                                SR.TraceCodeComIntegrationServiceHostCreatedServiceContract, this.info, contract);
+            ComPlusServiceHostTrace.Trace(
+                TraceEventType.Verbose,
+                TraceCode.ComIntegrationServiceHostCreatedServiceContract,
+                SR.TraceCodeComIntegrationServiceHostCreatedServiceContract,
+                this.info,
+                contract
+            );
 
             return contract;
         }

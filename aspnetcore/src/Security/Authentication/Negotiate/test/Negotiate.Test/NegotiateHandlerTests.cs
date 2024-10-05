@@ -26,8 +26,13 @@ public class NegotiateHandlerTests
         using var host = await CreateHostAsync();
         var server = host.GetTestServer();
 
-        var ex = await Assert.ThrowsAsync<NotSupportedException>(() => SendAsync(server, "/Anonymous1", connection: null));
-        Assert.Equal("Negotiate authentication requires a server that supports IConnectionItemsFeature like Kestrel.", ex.Message);
+        var ex = await Assert.ThrowsAsync<NotSupportedException>(
+            () => SendAsync(server, "/Anonymous1", connection: null)
+        );
+        Assert.Equal(
+            "Negotiate authentication requires a server that supports IConnectionItemsFeature like Kestrel.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -78,7 +83,12 @@ public class NegotiateHandlerTests
     {
         using var host = await CreateHostAsync();
         var server = host.GetTestServer();
-        var result = await SendAsync(server, "/404", new TestConnection(), "Negotiate ClientNtlmBlob1");
+        var result = await SendAsync(
+            server,
+            "/404",
+            new TestConnection(),
+            "Negotiate ClientNtlmBlob1"
+        );
         Assert.Equal(StatusCodes.Status401Unauthorized, result.Response.StatusCode);
         Assert.Equal("Negotiate ServerNtlmBlob1", result.Response.Headers.WWWAuthenticate);
     }
@@ -91,8 +101,13 @@ public class NegotiateHandlerTests
         var testConnection = new TestConnection();
         await NtlmStage1Auth(server, testConnection);
 
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => SendAsync(server, "/404", testConnection));
-        Assert.Equal("An anonymous request was received in between authentication handshake requests.", ex.Message);
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => SendAsync(server, "/404", testConnection)
+        );
+        Assert.Equal(
+            "An anonymous request was received in between authentication handshake requests.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -101,7 +116,9 @@ public class NegotiateHandlerTests
         using var host = await CreateHostAsync();
         var server = host.GetTestServer();
 
-        var ex = await Assert.ThrowsAsync<TrueException>(() => SendAsync(server, "/404", new TestConnection(), "Negotiate ClientNtlmBlob2"));
+        var ex = await Assert.ThrowsAsync<TrueException>(
+            () => SendAsync(server, "/404", new TestConnection(), "Negotiate ClientNtlmBlob2")
+        );
         Assert.Equal("Stage1Complete", ex.UserMessage);
     }
 
@@ -110,7 +127,9 @@ public class NegotiateHandlerTests
     [InlineData(true)]
     public async Task NtlmStage1And2Auth_Success(bool persistNtlm)
     {
-        using var host = await CreateHostAsync(options => options.PersistNtlmCredentials = persistNtlm);
+        using var host = await CreateHostAsync(options =>
+            options.PersistNtlmCredentials = persistNtlm
+        );
         var server = host.GetTestServer();
         var testConnection = new TestConnection();
         await NtlmStage1And2Auth(server, testConnection);
@@ -121,7 +140,9 @@ public class NegotiateHandlerTests
     [InlineData(true)]
     public async Task KerberosAuth_Success(bool persistKerberos)
     {
-        using var host = await CreateHostAsync(options => options.PersistKerberosCredentials = persistKerberos);
+        using var host = await CreateHostAsync(options =>
+            options.PersistKerberosCredentials = persistKerberos
+        );
         var server = host.GetTestServer();
         var testConnection = new TestConnection();
         await KerberosAuth(server, testConnection);
@@ -132,7 +153,9 @@ public class NegotiateHandlerTests
     [InlineData(true)]
     public async Task KerberosTwoStageAuth_Success(bool persistKerberos)
     {
-        using var host = await CreateHostAsync(options => options.PersistKerberosCredentials = persistKerberos);
+        using var host = await CreateHostAsync(options =>
+            options.PersistKerberosCredentials = persistKerberos
+        );
         var server = host.GetTestServer();
         var testConnection = new TestConnection();
         await KerberosStage1And2Auth(server, testConnection);
@@ -144,7 +167,9 @@ public class NegotiateHandlerTests
     [InlineData("Kerberos2")]
     public async Task AnonymousAfterCompletedPersist_Cached(string protocol)
     {
-        using var host = await CreateHostAsync(options => options.PersistNtlmCredentials = options.PersistKerberosCredentials = true);
+        using var host = await CreateHostAsync(options =>
+            options.PersistNtlmCredentials = options.PersistKerberosCredentials = true
+        );
         var server = host.GetTestServer();
         var testConnection = new TestConnection();
         if (protocol == "NTLM")
@@ -171,7 +196,9 @@ public class NegotiateHandlerTests
     [InlineData("Kerberos2")]
     public async Task AnonymousAfterCompletedNoPersist_Denied(string protocol)
     {
-        using var host = await CreateHostAsync(options => options.PersistNtlmCredentials = options.PersistKerberosCredentials = false);
+        using var host = await CreateHostAsync(options =>
+            options.PersistNtlmCredentials = options.PersistKerberosCredentials = false
+        );
         var server = host.GetTestServer();
         var testConnection = new TestConnection();
         if (protocol == "NTLM")
@@ -211,15 +238,15 @@ public class NegotiateHandlerTests
         claimsCache.Set("name", new string[] { "CN=Domain Admins,CN=Users,DC=domain,DC=net" });
         NegotiateOptions negotiateOptions = null;
         using var host = await CreateHostAsync(options =>
+        {
+            options.EnableLdap(ldapSettings =>
             {
-                options.EnableLdap(ldapSettings =>
-                {
-                    ldapSettings.Domain = "domain.NET";
-                    ldapSettings.ClaimsCache = claimsCache;
-                    ldapSettings.EnableLdapClaimResolution = false; // This disables binding to the LDAP connection on startup
-                });
-                negotiateOptions = options;
+                ldapSettings.Domain = "domain.NET";
+                ldapSettings.ClaimsCache = claimsCache;
+                ldapSettings.EnableLdapClaimResolution = false; // This disables binding to the LDAP connection on startup
             });
+            negotiateOptions = options;
+        });
         var server = host.GetTestServer();
         var testConnection = new TestConnection();
         negotiateOptions.EnableLdap(_ => { }); // Forcefully re-enable ldap claims resolution to trigger RBAC claims retrieval from cache
@@ -254,12 +281,14 @@ public class NegotiateHandlerTests
     public async Task ApplicationExceptionReExecute_AfterComplete_DoesntReRun()
     {
         var builder = new HostBuilder()
-            .ConfigureServices(services => services
-                .AddAuthentication()
-                .AddNegotiate(options =>
-                {
-                    options.StateFactory = new TestNegotiateStateFactory();
-                }))
+            .ConfigureServices(services =>
+                services
+                    .AddAuthentication()
+                    .AddNegotiate(options =>
+                    {
+                        options.StateFactory = new TestNegotiateStateFactory();
+                    })
+            )
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder.UseTestServer();
@@ -285,7 +314,12 @@ public class NegotiateHandlerTests
 
         var testConnection = new TestConnection();
         await NtlmStage1Auth(server, testConnection);
-        var result = await SendAsync(server, "/Authenticate", testConnection, "Negotiate ClientNtlmBlob2");
+        var result = await SendAsync(
+            server,
+            "/Authenticate",
+            testConnection,
+            "Negotiate ClientNtlmBlob2"
+        );
         Assert.Equal(StatusCodes.Status500InternalServerError, result.Response.StatusCode);
         Assert.False(result.Response.Headers.ContainsKey(HeaderNames.WWWAuthenticate));
     }
@@ -296,7 +330,12 @@ public class NegotiateHandlerTests
         using var host = await CreateHostAsync();
         var server = host.GetTestServer();
         var testConnection = new TestConnection();
-        var result = await SendAsync(server, "/Authenticate", testConnection, "Negotiate CredentialError");
+        var result = await SendAsync(
+            server,
+            "/Authenticate",
+            testConnection,
+            "Negotiate CredentialError"
+        );
         Assert.Equal(StatusCodes.Status401Unauthorized, result.Response.StatusCode);
         Assert.Equal("Negotiate", result.Response.Headers.WWWAuthenticate);
     }
@@ -319,12 +358,23 @@ public class NegotiateHandlerTests
         var server = host.GetTestServer();
         var testConnection = new TestConnection();
 
-        var ex = await Assert.ThrowsAsync<Exception>(() => SendAsync(server, "/404", testConnection, "Negotiate OtherError"));
+        var ex = await Assert.ThrowsAsync<Exception>(
+            () => SendAsync(server, "/404", testConnection, "Negotiate OtherError")
+        );
         Assert.Equal("A test other error occurred", ex.Message);
     }
-    private static async Task AuthenticateAndRetrieveRBACClaims(TestServer server, TestConnection testConnection)
+
+    private static async Task AuthenticateAndRetrieveRBACClaims(
+        TestServer server,
+        TestConnection testConnection
+    )
     {
-        var result = await SendAsync(server, "/AuthenticateAndRetrieveRBACClaims", testConnection, "Negotiate ClientKerberosBlob");
+        var result = await SendAsync(
+            server,
+            "/AuthenticateAndRetrieveRBACClaims",
+            testConnection,
+            "Negotiate ClientKerberosBlob"
+        );
         Assert.Equal(StatusCodes.Status200OK, result.Response.StatusCode);
         Assert.Equal("Negotiate ServerKerberosBlob", result.Response.Headers.WWWAuthenticate);
     }
@@ -332,12 +382,20 @@ public class NegotiateHandlerTests
     // Single Stage
     private static async Task KerberosAuth(TestServer server, TestConnection testConnection)
     {
-        var result = await SendAsync(server, "/Authenticate", testConnection, "Negotiate ClientKerberosBlob");
+        var result = await SendAsync(
+            server,
+            "/Authenticate",
+            testConnection,
+            "Negotiate ClientKerberosBlob"
+        );
         Assert.Equal(StatusCodes.Status200OK, result.Response.StatusCode);
         Assert.Equal("Negotiate ServerKerberosBlob", result.Response.Headers.WWWAuthenticate);
     }
 
-    private static async Task KerberosStage1And2Auth(TestServer server, TestConnection testConnection)
+    private static async Task KerberosStage1And2Auth(
+        TestServer server,
+        TestConnection testConnection
+    )
     {
         await KerberosStage1Auth(server, testConnection);
         await KerberosStage2Auth(server, testConnection);
@@ -345,14 +403,24 @@ public class NegotiateHandlerTests
 
     private static async Task KerberosStage1Auth(TestServer server, TestConnection testConnection)
     {
-        var result = await SendAsync(server, "/Authenticate", testConnection, "Negotiate ClientKerberosBlob1");
+        var result = await SendAsync(
+            server,
+            "/Authenticate",
+            testConnection,
+            "Negotiate ClientKerberosBlob1"
+        );
         Assert.Equal(StatusCodes.Status401Unauthorized, result.Response.StatusCode);
         Assert.Equal("Negotiate ServerKerberosBlob1", result.Response.Headers.WWWAuthenticate);
     }
 
     private static async Task KerberosStage2Auth(TestServer server, TestConnection testConnection)
     {
-        var result = await SendAsync(server, "/Authenticate", testConnection, "Negotiate ClientKerberosBlob2");
+        var result = await SendAsync(
+            server,
+            "/Authenticate",
+            testConnection,
+            "Negotiate ClientKerberosBlob2"
+        );
         Assert.Equal(StatusCodes.Status200OK, result.Response.StatusCode);
         Assert.Equal("Negotiate ServerKerberosBlob2", result.Response.Headers.WWWAuthenticate);
     }
@@ -372,22 +440,31 @@ public class NegotiateHandlerTests
 
     private static async Task NtlmStage2Auth(TestServer server, TestConnection testConnection)
     {
-        var result = await SendAsync(server, "/Authenticate", testConnection, "Negotiate ClientNtlmBlob2");
+        var result = await SendAsync(
+            server,
+            "/Authenticate",
+            testConnection,
+            "Negotiate ClientNtlmBlob2"
+        );
         Assert.Equal(StatusCodes.Status200OK, result.Response.StatusCode);
         Assert.Equal("Negotiate ServerNtlmBlob2", result.Response.Headers.WWWAuthenticate);
     }
 
-    private static async Task<IHost> CreateHostAsync(Action<NegotiateOptions> configureOptions = null)
+    private static async Task<IHost> CreateHostAsync(
+        Action<NegotiateOptions> configureOptions = null
+    )
     {
         var builder = new HostBuilder()
-            .ConfigureServices(services => services
-                .AddRouting()
-                .AddAuthentication()
-                .AddNegotiate(options =>
-                {
-                    options.StateFactory = new TestNegotiateStateFactory();
-                    configureOptions?.Invoke(options);
-                }))
+            .ConfigureServices(services =>
+                services
+                    .AddRouting()
+                    .AddAuthentication()
+                    .AddNegotiate(options =>
+                    {
+                        options.StateFactory = new TestNegotiateStateFactory();
+                        configureOptions?.Invoke(options);
+                    })
+            )
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder.UseTestServer();
@@ -404,80 +481,114 @@ public class NegotiateHandlerTests
 
     private static void ConfigureEndpoints(IEndpointRouteBuilder builder)
     {
-        builder.Map("/Anonymous1", context =>
-        {
-            Assert.Equal("HTTP/1.1", context.Request.Protocol);
-            Assert.False(context.User.Identity.IsAuthenticated, "Anonymous");
-            return Task.CompletedTask;
-        });
-
-        builder.Map("/Anonymous2", context =>
-        {
-            Assert.Equal("HTTP/2", context.Request.Protocol);
-            Assert.False(context.User.Identity.IsAuthenticated, "Anonymous");
-            return Task.CompletedTask;
-        });
-
-        builder.Map("/Authenticate", async context =>
-        {
-            if (!context.User.Identity.IsAuthenticated)
+        builder.Map(
+            "/Anonymous1",
+            context =>
             {
-                await context.ChallengeAsync();
-                return;
+                Assert.Equal("HTTP/1.1", context.Request.Protocol);
+                Assert.False(context.User.Identity.IsAuthenticated, "Anonymous");
+                return Task.CompletedTask;
             }
+        );
 
-            Assert.Equal("HTTP/1.1", context.Request.Protocol); // Not HTTP/2
-            var name = context.User.Identity.Name;
-            Assert.False(string.IsNullOrEmpty(name), "name");
-            await context.Response.WriteAsync(name);
-        });
-
-        builder.Map("/AuthenticateAndRetrieveRBACClaims", async context =>
-        {
-            if (!context.User.Identity.IsAuthenticated)
+        builder.Map(
+            "/Anonymous2",
+            context =>
             {
-                await context.ChallengeAsync();
-                return;
+                Assert.Equal("HTTP/2", context.Request.Protocol);
+                Assert.False(context.User.Identity.IsAuthenticated, "Anonymous");
+                return Task.CompletedTask;
             }
+        );
 
-            Assert.Equal("HTTP/1.1", context.Request.Protocol); // Not HTTP/2
-            var name = context.User.Identity.Name;
-            Assert.False(string.IsNullOrEmpty(name), "name");
-            Assert.Contains(
-                context.User.Claims,
-                claim => claim.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
-                    && claim.Value == "CN=Domain Admins,CN=Users,DC=domain,DC=net");
-            await context.Response.WriteAsync(name);
-        });
+        builder.Map(
+            "/Authenticate",
+            async context =>
+            {
+                if (!context.User.Identity.IsAuthenticated)
+                {
+                    await context.ChallengeAsync();
+                    return;
+                }
 
-        builder.Map("/AlreadyAuthenticated", async context =>
-        {
-            Assert.Equal("HTTP/1.1", context.Request.Protocol); // Not HTTP/2
-            Assert.True(context.User.Identity.IsAuthenticated, "Authenticated");
-            var name = context.User.Identity.Name;
-            Assert.False(string.IsNullOrEmpty(name), "name");
-            await context.Response.WriteAsync(name);
-        });
+                Assert.Equal("HTTP/1.1", context.Request.Protocol); // Not HTTP/2
+                var name = context.User.Identity.Name;
+                Assert.False(string.IsNullOrEmpty(name), "name");
+                await context.Response.WriteAsync(name);
+            }
+        );
 
-        builder.Map("/Unauthorized", async context =>
-        {
-            // Simulate Authorization failure
-            var result = await context.AuthenticateAsync();
-            await context.ChallengeAsync();
-        });
+        builder.Map(
+            "/AuthenticateAndRetrieveRBACClaims",
+            async context =>
+            {
+                if (!context.User.Identity.IsAuthenticated)
+                {
+                    await context.ChallengeAsync();
+                    return;
+                }
 
-        builder.Map("/SignIn", context =>
-        {
-            return Assert.ThrowsAsync<InvalidOperationException>(() => context.SignInAsync(new ClaimsPrincipal()));
-        });
+                Assert.Equal("HTTP/1.1", context.Request.Protocol); // Not HTTP/2
+                var name = context.User.Identity.Name;
+                Assert.False(string.IsNullOrEmpty(name), "name");
+                Assert.Contains(
+                    context.User.Claims,
+                    claim =>
+                        claim.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
+                        && claim.Value == "CN=Domain Admins,CN=Users,DC=domain,DC=net"
+                );
+                await context.Response.WriteAsync(name);
+            }
+        );
 
-        builder.Map("/signOut", context =>
-        {
-            return Assert.ThrowsAsync<InvalidOperationException>(() => context.SignOutAsync());
-        });
+        builder.Map(
+            "/AlreadyAuthenticated",
+            async context =>
+            {
+                Assert.Equal("HTTP/1.1", context.Request.Protocol); // Not HTTP/2
+                Assert.True(context.User.Identity.IsAuthenticated, "Authenticated");
+                var name = context.User.Identity.Name;
+                Assert.False(string.IsNullOrEmpty(name), "name");
+                await context.Response.WriteAsync(name);
+            }
+        );
+
+        builder.Map(
+            "/Unauthorized",
+            async context =>
+            {
+                // Simulate Authorization failure
+                var result = await context.AuthenticateAsync();
+                await context.ChallengeAsync();
+            }
+        );
+
+        builder.Map(
+            "/SignIn",
+            context =>
+            {
+                return Assert.ThrowsAsync<InvalidOperationException>(
+                    () => context.SignInAsync(new ClaimsPrincipal())
+                );
+            }
+        );
+
+        builder.Map(
+            "/signOut",
+            context =>
+            {
+                return Assert.ThrowsAsync<InvalidOperationException>(() => context.SignOutAsync());
+            }
+        );
     }
 
-    private static Task<HttpContext> SendAsync(TestServer server, string path, TestConnection connection, string authorizationHeader = null, bool http2 = false)
+    private static Task<HttpContext> SendAsync(
+        TestServer server,
+        string path,
+        TestConnection connection,
+        string authorizationHeader = null,
+        bool http2 = false
+    )
     {
         return server.SendAsync(context =>
         {
@@ -499,9 +610,7 @@ public class NegotiateHandlerTests
     {
         public IDictionary<object, object> Items { get; set; } = new ConnectionItems();
 
-        public void OnCompleted(Func<object, Task> callback, object state)
-        {
-        }
+        public void OnCompleted(Func<object, Task> callback, object state) { }
     }
 
     private class TestNegotiateStateFactory : INegotiateStateFactory
@@ -550,7 +659,11 @@ public class NegotiateHandlerTests
             return new GenericIdentity("name", _protocol);
         }
 
-        public string GetOutgoingBlob(string incomingBlob, out BlobErrorType errorType, out Exception ex)
+        public string GetOutgoingBlob(
+            string incomingBlob,
+            out BlobErrorType errorType,
+            out Exception ex
+        )
         {
             if (IsDisposed)
             {

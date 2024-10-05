@@ -18,9 +18,7 @@ public class InMemoryTypeMappingSource : TypeMappingSource
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public InMemoryTypeMappingSource(TypeMappingSourceDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -33,26 +31,28 @@ public class InMemoryTypeMappingSource : TypeMappingSource
         var clrType = mappingInfo.ClrType;
         Check.DebugAssert(clrType != null, "ClrType is null");
 
-        var jsonValueReaderWriter = Dependencies.JsonValueReaderWriterSource.FindReaderWriter(clrType);
+        var jsonValueReaderWriter = Dependencies.JsonValueReaderWriterSource.FindReaderWriter(
+            clrType
+        );
 
-        if (clrType.IsValueType
+        if (
+            clrType.IsValueType
             || clrType == typeof(string)
-            || (clrType == typeof(byte[]) && mappingInfo.ElementTypeMapping == null))
+            || (clrType == typeof(byte[]) && mappingInfo.ElementTypeMapping == null)
+        )
         {
-            return new InMemoryTypeMapping(
-                clrType, jsonValueReaderWriter: jsonValueReaderWriter);
+            return new InMemoryTypeMapping(clrType, jsonValueReaderWriter: jsonValueReaderWriter);
         }
 
-        if (clrType.FullName == "NetTopologySuite.Geometries.Geometry"
-            || clrType.GetBaseTypes().Any(t => t.FullName == "NetTopologySuite.Geometries.Geometry"))
+        if (
+            clrType.FullName == "NetTopologySuite.Geometries.Geometry"
+            || clrType.GetBaseTypes().Any(t => t.FullName == "NetTopologySuite.Geometries.Geometry")
+        )
         {
-            var comparer = (ValueComparer)Activator.CreateInstance(typeof(GeometryValueComparer<>).MakeGenericType(clrType))!;
+            var comparer = (ValueComparer)
+                Activator.CreateInstance(typeof(GeometryValueComparer<>).MakeGenericType(clrType))!;
 
-            return new InMemoryTypeMapping(
-                clrType,
-                comparer,
-                comparer,
-                jsonValueReaderWriter);
+            return new InMemoryTypeMapping(clrType, comparer, comparer, jsonValueReaderWriter);
         }
 
         return base.FindMapping(mappingInfo);

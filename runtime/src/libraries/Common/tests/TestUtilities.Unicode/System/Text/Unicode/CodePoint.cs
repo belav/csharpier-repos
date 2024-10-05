@@ -16,8 +16,11 @@ namespace System.Text.Unicode
             if ((uint)value > 0x10_FFFF)
             {
                 throw new ArgumentOutOfRangeException(
-                    message: FormattableString.Invariant($"Value U+{(uint)value:X4} is not a valid code point."),
-                    paramName: nameof(value));
+                    message: FormattableString.Invariant(
+                        $"Value U+{(uint)value:X4} is not a valid code point."
+                    ),
+                    paramName: nameof(value)
+                );
             }
 
             Assert.NotNull(parsedData);
@@ -70,7 +73,12 @@ namespace System.Text.Unicode
 
             // Finally, get the grapheme cluster break value.
 
-            if (parsedData.GraphemeBreakPropertyData.TryGetValue(value, out GraphemeClusterBreakProperty graphemeProperty))
+            if (
+                parsedData.GraphemeBreakPropertyData.TryGetValue(
+                    value,
+                    out GraphemeClusterBreakProperty graphemeProperty
+                )
+            )
             {
                 GraphemeClusterBreakProperty = graphemeProperty;
             }
@@ -125,7 +133,8 @@ namespace System.Text.Unicode
         /// <remarks>
         /// See https://www.unicode.org/reports/tr29/#Grapheme_Cluster_Break_Property_Values.
         /// </remarks>
-        public GraphemeClusterBreakProperty GraphemeClusterBreakProperty { get; } = GraphemeClusterBreakProperty.Other; // default is "Other"
+        public GraphemeClusterBreakProperty GraphemeClusterBreakProperty { get; } =
+            GraphemeClusterBreakProperty.Other; // default is "Other"
 
         /// <summary>
         /// The name of this code point.

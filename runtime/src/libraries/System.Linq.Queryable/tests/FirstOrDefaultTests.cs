@@ -87,6 +87,7 @@ namespace System.Linq.Tests
             int[] source = { 3, 7, 10, 7, 9, 2, 11, 17, 13, 8 };
             Assert.Equal(10, source.AsQueryable().FirstOrDefault(i => i % 2 == 0));
         }
+
         [Fact]
         public void PredicateTrueForSomeDefault()
         {
@@ -97,23 +98,41 @@ namespace System.Linq.Tests
         [Fact]
         public void NullSource()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<int>)null).FirstOrDefault());
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<int>)null).FirstOrDefault(5));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<int>)null).FirstOrDefault()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<int>)null).FirstOrDefault(5)
+            );
         }
 
         [Fact]
         public void NullSourcePredicateUsed()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<int>)null).FirstOrDefault(i => i != 2));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<int>)null).FirstOrDefault(i => i != 2, 5));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<int>)null).FirstOrDefault(i => i != 2)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<int>)null).FirstOrDefault(i => i != 2, 5)
+            );
         }
 
         [Fact]
         public void NullPredicate()
         {
             Expression<Func<int, bool>> predicate = null;
-            AssertExtensions.Throws<ArgumentNullException>("predicate", () => Enumerable.Range(0, 3).AsQueryable().FirstOrDefault(predicate));
-            AssertExtensions.Throws<ArgumentNullException>("predicate", () => Enumerable.Range(0, 3).AsQueryable().FirstOrDefault(predicate, 5));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "predicate",
+                () => Enumerable.Range(0, 3).AsQueryable().FirstOrDefault(predicate)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "predicate",
+                () => Enumerable.Range(0, 3).AsQueryable().FirstOrDefault(predicate, 5)
+            );
         }
 
         [Fact]
@@ -134,7 +153,9 @@ namespace System.Linq.Tests
         public void FirstOrDefault_OverloadResolution_Regression()
         {
             // Regression test for https://github.com/dotnet/runtime/issues/65419
-            object? result = new object[] { 1, "" }.AsQueryable().FirstOrDefault(x => x is string);
+            object? result = new object[] { 1, "" }
+                .AsQueryable()
+                .FirstOrDefault(x => x is string);
             Assert.IsType<string>(result);
 
             result = Array.Empty<object>().AsQueryable().FirstOrDefault(1);

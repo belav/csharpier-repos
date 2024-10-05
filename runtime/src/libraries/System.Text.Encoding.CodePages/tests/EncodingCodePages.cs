@@ -10,7 +10,8 @@ namespace System.Text.Tests
 {
     public partial class EncodingTest : IClassFixture<CultureSetup>
     {
-        private const string AsciiPrintable = " 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        private const string AsciiPrintable =
+            " 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         private static readonly char[] s_asciiPrintableCharArr = AsciiPrintable.ToCharArray();
 
         public EncodingTest(CultureSetup setup)
@@ -259,7 +260,12 @@ namespace System.Text.Tests
             yield return new object[] { 20424, "ibm424", "cp424" };
             yield return new object[] { 20424, "ibm424", "csibm424" };
             yield return new object[] { 20424, "ibm424", "ebcdic-cp-he" };
-            yield return new object[] { 20833, "x-ebcdic-koreanextended", "x-ebcdic-koreanextended" };
+            yield return new object[]
+            {
+                20833,
+                "x-ebcdic-koreanextended",
+                "x-ebcdic-koreanextended",
+            };
             yield return new object[] { 20838, "ibm-thai", "ibm-thai" };
             yield return new object[] { 20838, "ibm-thai", "csibmthai" };
             yield return new object[] { 20866, "koi8-r", "koi8-r" };
@@ -368,7 +374,12 @@ namespace System.Text.Tests
             yield return new object[] { 50227, "x-cp50227", "cp50227" };
             yield return new object[] { 51932, "euc-jp", "euc-jp" };
             yield return new object[] { 51932, "euc-jp", "cseucpkdfmtjapanese" };
-            yield return new object[] { 51932, "euc-jp", "extended_unix_code_packed_format_for_japanese" };
+            yield return new object[]
+            {
+                51932,
+                "euc-jp",
+                "extended_unix_code_packed_format_for_japanese",
+            };
             yield return new object[] { 51932, "euc-jp", "iso-2022-jpeuc" };
             yield return new object[] { 51932, "euc-jp", "x-euc" };
             yield return new object[] { 51932, "euc-jp", "x-euc-jp" };
@@ -395,50 +406,231 @@ namespace System.Text.Tests
         public static IEnumerable<object[]> SpecificCodepageEncodings()
         {
             // Layout is codepage encoding, bytes, and matching unicode string.
-            yield return new object[] { "Windows-1256", new byte[] { 0xC7, 0xE1, 0xE1, 0xE5, 0x20, 0xC7, 0xCD, 0xCF }, "\x0627\x0644\x0644\x0647\x0020\x0627\x062D\x062F" };
-            yield return new object[] {"Windows-1252", new byte[] { 0xD0, 0xD1, 0xD2, 0xD3, 0xD4, 0xD5, 0xD6, 0xD7, 0xD8, 0xD9, 0xDA, 0xDB, 0xDC, 0xDD, 0xDE, 0xDF } ,
-                    "\x00D0\x00D1\x00D2\x00D3\x00D4\x00D5\x00D6\x00D7\x00D8\x00D9\x00DA\x00DB\x00DC\x00DD\x00DE\x00DF"};
-            yield return new object[] { "GB2312", new byte[] { 0xCD, 0xE2, 0xCD, 0xE3, 0xCD, 0xE4 }, "\x5916\x8C4C\x5F2F" };
-            yield return new object[] {"GB18030", new byte[] { 0x81, 0x30, 0x89, 0x37, 0x81, 0x30, 0x89, 0x38, 0xA8, 0xA4, 0xA8, 0xA2, 0x81, 0x30, 0x89, 0x39, 0x81, 0x30, 0x8A, 0x30 } ,
-                    "\x00DE\x00DF\x00E0\x00E1\x00E2\x00E3"};
+            yield return new object[]
+            {
+                "Windows-1256",
+                new byte[] { 0xC7, 0xE1, 0xE1, 0xE5, 0x20, 0xC7, 0xCD, 0xCF },
+                "\x0627\x0644\x0644\x0647\x0020\x0627\x062D\x062F",
+            };
+            yield return new object[]
+            {
+                "Windows-1252",
+                new byte[]
+                {
+                    0xD0,
+                    0xD1,
+                    0xD2,
+                    0xD3,
+                    0xD4,
+                    0xD5,
+                    0xD6,
+                    0xD7,
+                    0xD8,
+                    0xD9,
+                    0xDA,
+                    0xDB,
+                    0xDC,
+                    0xDD,
+                    0xDE,
+                    0xDF,
+                },
+                "\x00D0\x00D1\x00D2\x00D3\x00D4\x00D5\x00D6\x00D7\x00D8\x00D9\x00DA\x00DB\x00DC\x00DD\x00DE\x00DF",
+            };
+            yield return new object[]
+            {
+                "GB2312",
+                new byte[] { 0xCD, 0xE2, 0xCD, 0xE3, 0xCD, 0xE4 },
+                "\x5916\x8C4C\x5F2F",
+            };
+            yield return new object[]
+            {
+                "GB18030",
+                new byte[]
+                {
+                    0x81,
+                    0x30,
+                    0x89,
+                    0x37,
+                    0x81,
+                    0x30,
+                    0x89,
+                    0x38,
+                    0xA8,
+                    0xA4,
+                    0xA8,
+                    0xA2,
+                    0x81,
+                    0x30,
+                    0x89,
+                    0x39,
+                    0x81,
+                    0x30,
+                    0x8A,
+                    0x30,
+                },
+                "\x00DE\x00DF\x00E0\x00E1\x00E2\x00E3",
+            };
         }
 
         public static IEnumerable<object[]> MultibyteCharacterEncodings()
         {
             // Layout is the encoding, bytes, and expected result.
-            yield return new object[] { "iso-2022-jp",
-                new byte[] { 0xA,
-                    0x1B, 0x24, 0x42, 0x25, 0x4A, 0x25, 0x4A,
-                    0x1B, 0x28, 0x42,
-                    0x1B, 0x24, 0x42, 0x25, 0x4A,
-                    0x1B, 0x28, 0x42,
-                    0x1B, 0x24, 0x42, 0x25, 0x4A,
-                    0x1B, 0x28, 0x42,
-                    0x1B, 0x1, 0x2, 0x3, 0x4,
-                    0x1B, 0x24, 0x42, 0x25, 0x4A, 0x0E, 0x25, 0x4A,
-                    0x1B, 0x28, 0x42, 0x41, 0x42, 0x0E, 0x25, 0x0F, 0x43 },
-                new int[] { 0xA, 0x30CA, 0x30CA, 0x30CA, 0x30CA, 0x1B, 0x1, 0x2, 0x3, 0x4,
-                    0x30CA, 0xFF65, 0xFF8A, 0x41, 0x42, 0xFF65, 0x43}
+            yield return new object[]
+            {
+                "iso-2022-jp",
+                new byte[]
+                {
+                    0xA,
+                    0x1B,
+                    0x24,
+                    0x42,
+                    0x25,
+                    0x4A,
+                    0x25,
+                    0x4A,
+                    0x1B,
+                    0x28,
+                    0x42,
+                    0x1B,
+                    0x24,
+                    0x42,
+                    0x25,
+                    0x4A,
+                    0x1B,
+                    0x28,
+                    0x42,
+                    0x1B,
+                    0x24,
+                    0x42,
+                    0x25,
+                    0x4A,
+                    0x1B,
+                    0x28,
+                    0x42,
+                    0x1B,
+                    0x1,
+                    0x2,
+                    0x3,
+                    0x4,
+                    0x1B,
+                    0x24,
+                    0x42,
+                    0x25,
+                    0x4A,
+                    0x0E,
+                    0x25,
+                    0x4A,
+                    0x1B,
+                    0x28,
+                    0x42,
+                    0x41,
+                    0x42,
+                    0x0E,
+                    0x25,
+                    0x0F,
+                    0x43,
+                },
+                new int[]
+                {
+                    0xA,
+                    0x30CA,
+                    0x30CA,
+                    0x30CA,
+                    0x30CA,
+                    0x1B,
+                    0x1,
+                    0x2,
+                    0x3,
+                    0x4,
+                    0x30CA,
+                    0xFF65,
+                    0xFF8A,
+                    0x41,
+                    0x42,
+                    0xFF65,
+                    0x43,
+                },
             };
 
-            yield return new object[] { "GB18030",
-                new byte[] { 0x41, 0x42, 0x43, 0x81, 0x40, 0x82, 0x80, 0x81, 0x30, 0x82, 0x31, 0x81, 0x20 },
-                 new int[] { 0x41, 0x42, 0x43, 0x4E02, 0x500B, 0x8B, 0x3F, 0x20 }
+            yield return new object[]
+            {
+                "GB18030",
+                new byte[]
+                {
+                    0x41,
+                    0x42,
+                    0x43,
+                    0x81,
+                    0x40,
+                    0x82,
+                    0x80,
+                    0x81,
+                    0x30,
+                    0x82,
+                    0x31,
+                    0x81,
+                    0x20,
+                },
+                new int[] { 0x41, 0x42, 0x43, 0x4E02, 0x500B, 0x8B, 0x3F, 0x20 },
             };
 
-            yield return new object[] { "shift_jis",
+            yield return new object[]
+            {
+                "shift_jis",
                 new byte[] { 0x41, 0x42, 0x43, 0x81, 0x42, 0xE0, 0x43, 0x44, 0x45 },
-                new int[] { 0x41, 0x42, 0x43, 0x3002, 0x6F86, 0x44, 0x45 }
+                new int[] { 0x41, 0x42, 0x43, 0x3002, 0x6F86, 0x44, 0x45 },
             };
 
-            yield return new object[] { "iso-2022-kr",
-                new byte[] { 0x0E, 0x21, 0x7E, 0x1B, 0x24, 0x29, 0x43, 0x21, 0x7E, 0x0F, 0x21, 0x7E, 0x1B, 0x24, 0x29, 0x43, 0x21, 0x7E },
-                new int[] { 0xFFE2, 0xFFE2, 0x21, 0x7E, 0x21, 0x7E }
+            yield return new object[]
+            {
+                "iso-2022-kr",
+                new byte[]
+                {
+                    0x0E,
+                    0x21,
+                    0x7E,
+                    0x1B,
+                    0x24,
+                    0x29,
+                    0x43,
+                    0x21,
+                    0x7E,
+                    0x0F,
+                    0x21,
+                    0x7E,
+                    0x1B,
+                    0x24,
+                    0x29,
+                    0x43,
+                    0x21,
+                    0x7E,
+                },
+                new int[] { 0xFFE2, 0xFFE2, 0x21, 0x7E, 0x21, 0x7E },
             };
 
-            yield return new object[] { "hz-gb-2312",
-                new byte[] { 0x7E, 0x42, 0x7E, 0x7E, 0x7E, 0x7B, 0x21, 0x7E, 0x7E, 0x7D, 0x42, 0x42, 0x7E, 0xA, 0x43, 0x43 },
-                new int[] { 0x7E, 0x42, 0x7E, 0x3013, 0x42, 0x42, 0x43, 0x43, }
+            yield return new object[]
+            {
+                "hz-gb-2312",
+                new byte[]
+                {
+                    0x7E,
+                    0x42,
+                    0x7E,
+                    0x7E,
+                    0x7E,
+                    0x7B,
+                    0x21,
+                    0x7E,
+                    0x7E,
+                    0x7D,
+                    0x42,
+                    0x42,
+                    0x7E,
+                    0xA,
+                    0x43,
+                    0x43,
+                },
+                new int[] { 0x7E, 0x42, 0x7E, 0x3013, 0x42, 0x42, 0x43, 0x43 },
             };
         }
 
@@ -469,7 +661,10 @@ namespace System.Text.Tests
             // The default encoding should be something from the known list.
             Encoding defaultEncoding = Encoding.GetEncoding(0);
             Assert.NotNull(defaultEncoding);
-            KeyValuePair<int, string> mappedEncoding = Map(defaultEncoding.CodePage, defaultEncoding.WebName);
+            KeyValuePair<int, string> mappedEncoding = Map(
+                defaultEncoding.CodePage,
+                defaultEncoding.WebName
+            );
 
             if (defaultEncoding.CodePage == Encoding.UTF8.CodePage)
             {
@@ -478,8 +673,13 @@ namespace System.Text.Tests
                 // at that time we shouldn't expect exceptions when creating the following encodings.
                 foreach (object[] mapping in CodePageInfo())
                 {
-                    Assert.Throws<NotSupportedException>(() => Encoding.GetEncoding((int)mapping[0]));
-                    AssertExtensions.Throws<ArgumentException>("name", () => Encoding.GetEncoding((string)mapping[2]));
+                    Assert.Throws<NotSupportedException>(
+                        () => Encoding.GetEncoding((int)mapping[0])
+                    );
+                    AssertExtensions.Throws<ArgumentException>(
+                        "name",
+                        () => Encoding.GetEncoding((string)mapping[2])
+                    );
                 }
 
                 // Currently the class EncodingInfo isn't present in .NET Core, so this checks none of the code pages are present.
@@ -497,13 +697,18 @@ namespace System.Text.Tests
             {
                 Encoding encoding = Encoding.GetEncoding((int)mapping[0]);
 
-                Encoding codePageEncoding = CodePagesEncodingProvider.Instance.GetEncoding((int)mapping[0]);
+                Encoding codePageEncoding = CodePagesEncodingProvider.Instance.GetEncoding(
+                    (int)mapping[0]
+                );
                 Assert.Equal(encoding, codePageEncoding);
                 Assert.Equal(encoding.CodePage, (int)mapping[0]);
                 Assert.Equal(encoding.WebName, (string)mapping[1]);
 
                 // Get encoding via query string.
-                Assert.Equal(Encoding.GetEncoding((string)mapping[2]), CodePagesEncodingProvider.Instance.GetEncoding((string)mapping[2]));
+                Assert.Equal(
+                    Encoding.GetEncoding((string)mapping[2]),
+                    CodePagesEncodingProvider.Instance.GetEncoding((string)mapping[2])
+                );
             }
             // Adding the code page provider should keep the originals, too.
             ValidateDefaultEncodings();
@@ -516,7 +721,11 @@ namespace System.Text.Tests
             defaultEncoding = Encoding.GetEncoding(0);
             Assert.NotNull(defaultEncoding);
             mappedEncoding = Map(defaultEncoding.CodePage, defaultEncoding.WebName);
-            Assert.Contains(mappedEncoding, CrossplatformDefaultEncodings().Union(CodePageInfo().Select(i => Map((int)i[0], (string)i[1]))));
+            Assert.Contains(
+                mappedEncoding,
+                CrossplatformDefaultEncodings()
+                    .Union(CodePageInfo().Select(i => Map((int)i[0], (string)i[1])))
+            );
 
             TestRegister1252();
         }
@@ -534,7 +743,11 @@ namespace System.Text.Tests
 
         [Theory]
         [MemberData(nameof(SpecificCodepageEncodings))]
-        public static void TestRoundtrippingSpecificCodepageEncoding(string encodingName, byte[] bytes, string expected)
+        public static void TestRoundtrippingSpecificCodepageEncoding(
+            string encodingName,
+            byte[] bytes,
+            string expected
+        )
         {
             Encoding encoding = CodePagesEncodingProvider.Instance.GetEncoding(encodingName);
             string encoded = encoding.GetString(bytes, 0, bytes.Length);
@@ -560,7 +773,10 @@ namespace System.Text.Tests
             else
             {
                 encoding = CodePagesEncodingProvider.Instance.GetEncoding(codePage);
-                Assert.NotEqual(encoding, CodePagesEncodingProvider.Instance.GetEncoding(queryString));
+                Assert.NotEqual(
+                    encoding,
+                    CodePagesEncodingProvider.Instance.GetEncoding(queryString)
+                );
                 Assert.NotEqual(encoding, CodePagesEncodingProvider.Instance.GetEncoding(webName));
             }
 
@@ -576,7 +792,11 @@ namespace System.Text.Tests
 
         [Theory]
         [MemberData(nameof(CodePageInfo))]
-        public static void TestEncoderNLSAndDecoderNLSValidateDataRoundTrips(int codePage, string webName, string queryString)
+        public static void TestEncoderNLSAndDecoderNLSValidateDataRoundTrips(
+            int codePage,
+            string webName,
+            string queryString
+        )
         {
             _ = webName;
             Encoding encoding;
@@ -600,10 +820,23 @@ namespace System.Text.Tests
             byte[] encodedBytes = new byte[encodedByteCount];
             char[] decodedChars = new char[asciiPrintableLength];
 
-            int encodedLength = encoder.GetBytes(s_asciiPrintableCharArr, 0, asciiPrintableLength, encodedBytes, 0, false);
+            int encodedLength = encoder.GetBytes(
+                s_asciiPrintableCharArr,
+                0,
+                asciiPrintableLength,
+                encodedBytes,
+                0,
+                false
+            );
             Assert.Equal(encodedByteCount, encodedLength);
 
-            int decodedLength = decoder.GetChars(encodedBytes, 0, encodedByteCount, decodedChars, 0);
+            int decodedLength = decoder.GetChars(
+                encodedBytes,
+                0,
+                encodedByteCount,
+                decodedChars,
+                0
+            );
             Assert.Equal(asciiPrintableLength, decodedLength);
 
             Assert.Equal(s_asciiPrintableCharArr, decodedChars);
@@ -611,12 +844,22 @@ namespace System.Text.Tests
 
         [Theory]
         [MemberData(nameof(MultibyteCharacterEncodings))]
-        public static void TestSpecificMultibyteCharacterEncodings(string codepageName, byte[] bytes, int[] expected)
+        public static void TestSpecificMultibyteCharacterEncodings(
+            string codepageName,
+            byte[] bytes,
+            int[] expected
+        )
         {
-            Decoder decoder = CodePagesEncodingProvider.Instance.GetEncoding(codepageName).GetDecoder();
+            Decoder decoder = CodePagesEncodingProvider
+                .Instance.GetEncoding(codepageName)
+                .GetDecoder();
             char[] buffer = new char[expected.Length];
 
-            for (int byteIndex = 0, charIndex = 0, charCount = 0; byteIndex < bytes.Length; byteIndex++, charIndex += charCount)
+            for (
+                int byteIndex = 0, charIndex = 0, charCount = 0;
+                byteIndex < bytes.Length;
+                byteIndex++, charIndex += charCount
+            )
             {
                 charCount = decoder.GetChars(bytes, byteIndex, 1, buffer, charIndex);
             }
@@ -626,7 +869,11 @@ namespace System.Text.Tests
 
         [Theory]
         [MemberData(nameof(CodePageInfo))]
-        public static void TestEncodingDisplayNames(int codePage, string webName, string queryString)
+        public static void TestEncodingDisplayNames(
+            int codePage,
+            string webName,
+            string queryString
+        )
         {
             _ = webName;
             _ = queryString;
@@ -636,7 +883,14 @@ namespace System.Text.Tests
 
             // Names can't be empty, and must be printable characters.
             Assert.False(string.IsNullOrWhiteSpace(name));
-            Assert.All(name, c => Assert.True(c >= ' ' && c < '~' + 1, "Name: " + name + " contains character: " + c));
+            Assert.All(
+                name,
+                c =>
+                    Assert.True(
+                        c >= ' ' && c < '~' + 1,
+                        "Name: " + name + " contains character: " + c
+                    )
+            );
         }
 
         // This test is run as part of the default mappings test, since it modifies global state which that test
@@ -645,28 +899,32 @@ namespace System.Text.Tests
         {
             // This test case ensure we can map all 1252 codepage codepoints without any exception.
             string s1252Result =
-            "\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\u0008\u0009\u000a\u000b\u000c\u000d\u000e\u000f" +
-            "\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001a\u001b\u001c\u001d\u001e\u001f" +
-            "\u0020\u0021\u0022\u0023\u0024\u0025\u0026\u0027\u0028\u0029\u002a\u002b\u002c\u002d\u002e\u002f" +
-            "\u0030\u0031\u0032\u0033\u0034\u0035\u0036\u0037\u0038\u0039\u003a\u003b\u003c\u003d\u003e\u003f" +
-            "\u0040\u0041\u0042\u0043\u0044\u0045\u0046\u0047\u0048\u0049\u004a\u004b\u004c\u004d\u004e\u004f" +
-            "\u0050\u0051\u0052\u0053\u0054\u0055\u0056\u0057\u0058\u0059\u005a\u005b\u005c\u005d\u005e\u005f" +
-            "\u0060\u0061\u0062\u0063\u0064\u0065\u0066\u0067\u0068\u0069\u006a\u006b\u006c\u006d\u006e\u006f" +
-            "\u0070\u0071\u0072\u0073\u0074\u0075\u0076\u0077\u0078\u0079\u007a\u007b\u007c\u007d\u007e\u007f" +
-            "\u20ac\u0081\u201a\u0192\u201e\u2026\u2020\u2021\u02c6\u2030\u0160\u2039\u0152\u008d\u017d\u008f" +
-            "\u0090\u2018\u2019\u201c\u201d\u2022\u2013\u2014\u02dc\u2122\u0161\u203a\u0153\u009d\u017e\u0178" +
-            "\u00a0\u00a1\u00a2\u00a3\u00a4\u00a5\u00a6\u00a7\u00a8\u00a9\u00aa\u00ab\u00ac\u00ad\u00ae\u00af" +
-            "\u00b0\u00b1\u00b2\u00b3\u00b4\u00b5\u00b6\u00b7\u00b8\u00b9\u00ba\u00bb\u00bc\u00bd\u00be\u00bf" +
-            "\u00c0\u00c1\u00c2\u00c3\u00c4\u00c5\u00c6\u00c7\u00c8\u00c9\u00ca\u00cb\u00cc\u00cd\u00ce\u00cf" +
-            "\u00d0\u00d1\u00d2\u00d3\u00d4\u00d5\u00d6\u00d7\u00d8\u00d9\u00da\u00db\u00dc\u00dd\u00de\u00df" +
-            "\u00e0\u00e1\u00e2\u00e3\u00e4\u00e5\u00e6\u00e7\u00e8\u00e9\u00ea\u00eb\u00ec\u00ed\u00ee\u00ef" +
-            "\u00f0\u00f1\u00f2\u00f3\u00f4\u00f5\u00f6\u00f7\u00f8\u00f9\u00fa\u00fb\u00fc\u00fd\u00fe\u00ff";
+                "\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\u0008\u0009\u000a\u000b\u000c\u000d\u000e\u000f"
+                + "\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001a\u001b\u001c\u001d\u001e\u001f"
+                + "\u0020\u0021\u0022\u0023\u0024\u0025\u0026\u0027\u0028\u0029\u002a\u002b\u002c\u002d\u002e\u002f"
+                + "\u0030\u0031\u0032\u0033\u0034\u0035\u0036\u0037\u0038\u0039\u003a\u003b\u003c\u003d\u003e\u003f"
+                + "\u0040\u0041\u0042\u0043\u0044\u0045\u0046\u0047\u0048\u0049\u004a\u004b\u004c\u004d\u004e\u004f"
+                + "\u0050\u0051\u0052\u0053\u0054\u0055\u0056\u0057\u0058\u0059\u005a\u005b\u005c\u005d\u005e\u005f"
+                + "\u0060\u0061\u0062\u0063\u0064\u0065\u0066\u0067\u0068\u0069\u006a\u006b\u006c\u006d\u006e\u006f"
+                + "\u0070\u0071\u0072\u0073\u0074\u0075\u0076\u0077\u0078\u0079\u007a\u007b\u007c\u007d\u007e\u007f"
+                + "\u20ac\u0081\u201a\u0192\u201e\u2026\u2020\u2021\u02c6\u2030\u0160\u2039\u0152\u008d\u017d\u008f"
+                + "\u0090\u2018\u2019\u201c\u201d\u2022\u2013\u2014\u02dc\u2122\u0161\u203a\u0153\u009d\u017e\u0178"
+                + "\u00a0\u00a1\u00a2\u00a3\u00a4\u00a5\u00a6\u00a7\u00a8\u00a9\u00aa\u00ab\u00ac\u00ad\u00ae\u00af"
+                + "\u00b0\u00b1\u00b2\u00b3\u00b4\u00b5\u00b6\u00b7\u00b8\u00b9\u00ba\u00bb\u00bc\u00bd\u00be\u00bf"
+                + "\u00c0\u00c1\u00c2\u00c3\u00c4\u00c5\u00c6\u00c7\u00c8\u00c9\u00ca\u00cb\u00cc\u00cd\u00ce\u00cf"
+                + "\u00d0\u00d1\u00d2\u00d3\u00d4\u00d5\u00d6\u00d7\u00d8\u00d9\u00da\u00db\u00dc\u00dd\u00de\u00df"
+                + "\u00e0\u00e1\u00e2\u00e3\u00e4\u00e5\u00e6\u00e7\u00e8\u00e9\u00ea\u00eb\u00ec\u00ed\u00ee\u00ef"
+                + "\u00f0\u00f1\u00f2\u00f3\u00f4\u00f5\u00f6\u00f7\u00f8\u00f9\u00fa\u00fb\u00fc\u00fd\u00fe\u00ff";
 
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-            foreach (string codePageName in new string [] { "windows-1252", "cp1252"})
+            foreach (string codePageName in new string[] { "windows-1252", "cp1252" })
             {
-                Encoding win1252 = Encoding.GetEncoding(codePageName, EncoderFallback.ExceptionFallback, DecoderFallback.ExceptionFallback);
+                Encoding win1252 = Encoding.GetEncoding(
+                    codePageName,
+                    EncoderFallback.ExceptionFallback,
+                    DecoderFallback.ExceptionFallback
+                );
                 byte[] enc = new byte[256];
                 for (int j = 0; j < 256; j++)
                 {

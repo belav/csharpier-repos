@@ -17,22 +17,17 @@ namespace LifeTimeFX
     {
         Short,
         Medium,
-        Long
+        Long,
     }
 
     public interface LifeTime
     {
-        LifeTimeENUM LifeTime
-        {
-            get;
-            set;
-        }
-
+        LifeTimeENUM LifeTime { get; set; }
     }
 
     public interface LifeTimeStrategy
     {
-        int  NextObject(LifeTimeENUM lifeTime);
+        int NextObject(LifeTimeENUM lifeTime);
         bool ShouldDie(LifeTime o, int index);
     }
 
@@ -47,32 +42,26 @@ namespace LifeTimeFX
     /// <param name="o"></param>
     /// <param name="index"></param>
 
-    public interface ObjectContainer<T> where T:LifeTime
+    public interface ObjectContainer<T>
+        where T : LifeTime
     {
         void Init(int numberOfObjects);
         void AddObjectAt(T o, int index);
         T GetObject(int index);
-        T SetObjectAt(T o , int index);
-        int Count
-        {
-            get;
-        }
+        T SetObjectAt(T o, int index);
+        int Count { get; }
     }
 
-
-    public sealed class BinaryTreeObjectContainer<T> : ObjectContainer<T> where T:LifeTime
+    public sealed class BinaryTreeObjectContainer<T> : ObjectContainer<T>
+        where T : LifeTime
     {
-
         class Node
         {
             public Node LeftChild;
             public Node RightChild;
             public int id;
             public T Data;
-
         }
-
-
 
         private Node root;
         private int count;
@@ -85,8 +74,7 @@ namespace LifeTimeFX
 
         public void Init(int numberOfObjects)
         {
-
-            if (numberOfObjects<=0)
+            if (numberOfObjects <= 0)
             {
                 return;
             }
@@ -94,50 +82,42 @@ namespace LifeTimeFX
             root = new Node();
             root.id = 0;
             count = numberOfObjects;
-            if (numberOfObjects>1)
+            if (numberOfObjects > 1)
             {
-                int depth = (int)Math.Log(numberOfObjects,2)+1;
+                int depth = (int)Math.Log(numberOfObjects, 2) + 1;
 
-                root.LeftChild = CreateTree(depth-1, 1);
-                root.RightChild = CreateTree(depth-1, 2);
+                root.LeftChild = CreateTree(depth - 1, 1);
+                root.RightChild = CreateTree(depth - 1, 2);
             }
-
-
         }
 
         public void AddObjectAt(T o, int index)
         {
             Node node = Find(index);
 
-            if (node!=null)
+            if (node != null)
             {
                 node.Data = o;
             }
-
         }
-
 
         public T GetObject(int index)
         {
-
-
             Node node = Find(index);
 
-            if (node==null)
+            if (node == null)
             {
                 return default(T);
             }
 
             return node.Data;
-
         }
 
-        public T SetObjectAt(T o , int index)
+        public T SetObjectAt(T o, int index)
         {
-
             Node node = Find(index);
 
-            if (node==null)
+            if (node == null)
             {
                 return default(T);
             }
@@ -145,52 +125,45 @@ namespace LifeTimeFX
             T old = node.Data;
             node.Data = o;
             return old;
-
         }
 
         public int Count
         {
-            get
-            {
-                return count;
-            }
+            get { return count; }
         }
-
-
 
         private Node CreateTree(int depth, int id)
         {
-            if (depth<=0)
+            if (depth <= 0)
             {
                 return null;
             }
 
             Node node = new Node();
             node.id = id;
-            node.LeftChild = CreateTree(depth-1, id*2+1);
-            node.RightChild = CreateTree(depth-1, id*2+2);
+            node.LeftChild = CreateTree(depth - 1, id * 2 + 1);
+            node.RightChild = CreateTree(depth - 1, id * 2 + 2);
 
             return node;
         }
 
         private Node Find(int id)
         {
-
             List<int> path = new List<int>();
 
             // find the path from node to root
-            int n=id;
-            while (n>0)
+            int n = id;
+            while (n > 0)
             {
                 path.Add(n);
-                n = (int)Math.Ceiling( ((double)n/2.0) ) - 1;
+                n = (int)Math.Ceiling(((double)n / 2.0)) - 1;
             }
 
             // follow the path from root to node
             Node node = root;
-            for (int i=path.Count-1; i>=0; i--)
+            for (int i = path.Count - 1; i >= 0; i--)
             {
-                if (path[i]==(id*2+1))
+                if (path[i] == (id * 2 + 1))
                 {
                     node = node.LeftChild;
                 }
@@ -198,24 +171,21 @@ namespace LifeTimeFX
                 {
                     node = node.RightChild;
                 }
-
             }
 
             return node;
         }
-
     }
 
-
-
-//#ArrayContainer Simple Array Stock Implementation for ObjectContainer
-    public sealed class ArrayObjectContainer<T> : ObjectContainer<T> where T:LifeTime
+    //#ArrayContainer Simple Array Stock Implementation for ObjectContainer
+    public sealed class ArrayObjectContainer<T> : ObjectContainer<T>
+        where T : LifeTime
     {
         private T[] objContainer = null;
+
         public void Init(int numberOfObjects)
         {
             objContainer = new T[numberOfObjects];
-
         }
 
         public void AddObjectAt(T o, int index)
@@ -225,7 +195,7 @@ namespace LifeTimeFX
 
         public T GetObject(int index)
         {
-            return  objContainer[index];
+            return objContainer[index];
         }
 
         public T SetObjectAt(T o, int index)
@@ -237,25 +207,21 @@ namespace LifeTimeFX
 
         public int Count
         {
-            get
-            {
-                return objContainer.Length;
-            }
+            get { return objContainer.Length; }
         }
     }
 
-
-
-    public delegate void ObjectDiedEventHandler(LifeTime o, int index );
+    public delegate void ObjectDiedEventHandler(LifeTime o, int index);
 
     public sealed class ObjectLifeTimeManager
     {
         private LifeTimeStrategy strategy;
 
         private ObjectContainer<LifeTime> objectContainer = null;
-       //
 
-        public void SetObjectContainer (ObjectContainer<LifeTime> objectContainer)
+        //
+
+        public void SetObjectContainer(ObjectContainer<LifeTime> objectContainer)
         {
             this.objectContainer = objectContainer;
         }
@@ -270,10 +236,7 @@ namespace LifeTimeFX
 
         public LifeTimeStrategy LifeTimeStrategy
         {
-            set
-            {
-                strategy = value;
-            }
+            set { strategy = value; }
         }
 
         public void AddObject(LifeTime o, int index)
@@ -284,8 +247,6 @@ namespace LifeTimeFX
 
         public void Run()
         {
-
-
             LifeTime objLifeTime;
 
             for (int i = 0; i < objectContainer.Count; ++i)
@@ -297,12 +258,11 @@ namespace LifeTimeFX
                 if (strategy.ShouldDie(objLifeTime, i))
                 {
                     int index = strategy.NextObject(objLifeTime.LifeTime);
-                    LifeTime oldObject  = objectContainer.SetObjectAt(null, index);
+                    LifeTime oldObject = objectContainer.SetObjectAt(null, index);
                     //objContainer[index] = null;
                     // fire the event
                     objectDied(oldObject, index);
                 }
-
             }
         }
     }

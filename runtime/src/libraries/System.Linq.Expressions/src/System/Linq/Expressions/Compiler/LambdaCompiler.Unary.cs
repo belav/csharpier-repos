@@ -16,7 +16,6 @@ namespace System.Linq.Expressions.Compiler
             EmitQuote((UnaryExpression)expr);
         }
 
-
         private void EmitQuote(UnaryExpression quote)
         {
             // emit the quoted expression as a runtime constant
@@ -91,7 +90,13 @@ namespace System.Linq.Expressions.Compiler
                     _ilg.EmitDefault(nnType, locals: null); // locals won't be used.
                     _ilg.Emit(OpCodes.Ldloca, loc);
                     _ilg.EmitGetValueOrDefault(type);
-                    EmitBinaryOperator(ExpressionType.SubtractChecked, nnType, nnType, nnType, liftedToNull: false);
+                    EmitBinaryOperator(
+                        ExpressionType.SubtractChecked,
+                        nnType,
+                        nnType,
+                        nnType,
+                        liftedToNull: false
+                    );
 
                     // construct result
                     _ilg.Emit(OpCodes.Newobj, TypeUtils.GetNullableConstructor(type));
@@ -107,7 +112,13 @@ namespace System.Linq.Expressions.Compiler
                 {
                     _ilg.EmitDefault(type, locals: null); // locals won't be used.
                     EmitExpression(node.Operand);
-                    EmitBinaryOperator(ExpressionType.SubtractChecked, type, type, type, liftedToNull: false);
+                    EmitBinaryOperator(
+                        ExpressionType.SubtractChecked,
+                        type,
+                        type,
+                        type,
+                        liftedToNull: false
+                    );
                 }
             }
             else
@@ -341,21 +352,34 @@ namespace System.Linq.Expressions.Compiler
                 {
                     // A conversion is emitted after emitting the operand, no tail call is emitted
                     EmitExpression(node.Operand);
-                    _ilg.EmitConvertToType(node.Operand.Type, node.Type, node.NodeType == ExpressionType.ConvertChecked, this);
+                    _ilg.EmitConvertToType(
+                        node.Operand.Type,
+                        node.Type,
+                        node.NodeType == ExpressionType.ConvertChecked,
+                        this
+                    );
                 }
             }
         }
-
 
         private void EmitUnaryMethod(UnaryExpression node, CompilationFlags flags)
         {
             if (node.IsLifted)
             {
-                ParameterExpression v = Expression.Variable(node.Operand.Type.GetNonNullableType(), name: null);
+                ParameterExpression v = Expression.Variable(
+                    node.Operand.Type.GetNonNullableType(),
+                    name: null
+                );
                 MethodCallExpression mc = Expression.Call(node.Method!, v);
 
                 Type resultType = mc.Type.GetNullableType();
-                EmitLift(node.NodeType, resultType, mc, new ParameterExpression[] { v }, new Expression[] { node.Operand });
+                EmitLift(
+                    node.NodeType,
+                    resultType,
+                    mc,
+                    new ParameterExpression[] { v },
+                    new Expression[] { node.Operand }
+                );
                 _ilg.EmitConvertToType(resultType, node.Type, isChecked: false, locals: this);
             }
             else

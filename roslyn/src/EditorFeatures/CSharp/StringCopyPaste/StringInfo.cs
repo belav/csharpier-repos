@@ -20,7 +20,8 @@ internal readonly struct StringInfo(
     TextSpan startDelimiterSpan,
     TextSpan endDelimiterSpan,
     TextSpan endDelimiterSpanWithoutSuffix,
-    ImmutableArray<TextSpan> contentSpans)
+    ImmutableArray<TextSpan> contentSpans
+)
 {
     /// <summary>
     /// Number of quotes in the delimiter of the string being pasted into.  Given that the string should have no errors
@@ -60,12 +61,15 @@ internal readonly struct StringInfo(
     /// </summary>
     public readonly ImmutableArray<TextSpan> ContentSpans = contentSpans;
 
-    public static StringInfo GetStringInfo(SourceText text, ExpressionSyntax stringExpression)
-        => stringExpression switch
+    public static StringInfo GetStringInfo(SourceText text, ExpressionSyntax stringExpression) =>
+        stringExpression switch
         {
             LiteralExpressionSyntax literal => GetStringLiteralInfo(text, literal),
-            InterpolatedStringExpressionSyntax interpolatedString => GetInterpolatedStringInfo(text, interpolatedString),
-            _ => throw ExceptionUtilities.UnexpectedValue(stringExpression)
+            InterpolatedStringExpressionSyntax interpolatedString => GetInterpolatedStringInfo(
+                text,
+                interpolatedString
+            ),
+            _ => throw ExceptionUtilities.UnexpectedValue(stringExpression),
         };
 
     private static StringInfo GetStringLiteralInfo(SourceText text, LiteralExpressionSyntax literal)
@@ -82,7 +86,10 @@ internal readonly struct StringInfo(
             : GetNormalStringLiteralStringInfo(text, literal);
     }
 
-    private static StringInfo GetRawStringLiteralInfo(SourceText text, LiteralExpressionSyntax literal)
+    private static StringInfo GetRawStringLiteralInfo(
+        SourceText text,
+        LiteralExpressionSyntax literal
+    )
     {
         var start = literal.SpanStart;
         while (SafeCharAt(text, start) == '"')
@@ -101,11 +108,13 @@ internal readonly struct StringInfo(
             // A single line raw literal doesn't have any indentation processing.  So we use the same spans for both
             // sets of content.
             return new StringInfo(
-                delimiterQuoteCount, delimiterDollarCount: 0,
+                delimiterQuoteCount,
+                delimiterDollarCount: 0,
                 startDelimiterSpan: TextSpan.FromBounds(literal.SpanStart, start),
                 endDelimiterSpan: TextSpan.FromBounds(end, literal.Span.End),
                 endDelimiterSpanWithoutSuffix: TextSpan.FromBounds(end, endBeforeU8Suffix),
-                contentSpans);
+                contentSpans
+            );
         }
         else if (literal.Token.Kind() is SyntaxKind.MultiLineRawStringLiteralToken)
         {
@@ -146,7 +155,8 @@ internal readonly struct StringInfo(
                 TextSpan.FromBounds(literal.SpanStart, rawStart),
                 TextSpan.FromBounds(rawEnd, literal.Span.End),
                 TextSpan.FromBounds(rawEnd, endBeforeU8Suffix),
-                contentSpans: ImmutableArray.Create(TextSpan.FromBounds(start, end)));
+                contentSpans: ImmutableArray.Create(TextSpan.FromBounds(start, end))
+            );
         }
         else
         {
@@ -154,7 +164,10 @@ internal readonly struct StringInfo(
         }
     }
 
-    private static StringInfo GetNormalStringLiteralStringInfo(SourceText text, LiteralExpressionSyntax literal)
+    private static StringInfo GetNormalStringLiteralStringInfo(
+        SourceText text,
+        LiteralExpressionSyntax literal
+    )
     {
         var start = literal.SpanStart;
         if (SafeCharAt(text, start) == '@')
@@ -176,11 +189,14 @@ internal readonly struct StringInfo(
             startDelimiterSpan: TextSpan.FromBounds(literal.SpanStart, start),
             endDelimiterSpan: TextSpan.FromBounds(end, literal.Span.End),
             endDelimiterSpanWithoutSuffix: TextSpan.FromBounds(end, endBeforeU8Suffix),
-            ImmutableArray.Create(TextSpan.FromBounds(start, end)));
+            ImmutableArray.Create(TextSpan.FromBounds(start, end))
+        );
     }
 
     private static StringInfo GetInterpolatedStringInfo(
-        SourceText text, InterpolatedStringExpressionSyntax interpolatedString)
+        SourceText text,
+        InterpolatedStringExpressionSyntax interpolatedString
+    )
     {
         // Interpolated string.  Normal, verbatim, or raw.
         //
@@ -216,10 +232,21 @@ internal readonly struct StringInfo(
         result.Add(TextSpan.FromBounds(currentPosition, end));
 
         return new StringInfo(
-            delimiterQuoteCount, delimiterDollarCount,
-            startDelimiterSpan: TextSpan.FromBounds(interpolatedString.SpanStart, interpolatedString.StringStartToken.Span.End),
-            endDelimiterSpan: TextSpan.FromBounds(interpolatedString.StringEndToken.SpanStart, interpolatedString.Span.End),
-            endDelimiterSpanWithoutSuffix: TextSpan.FromBounds(interpolatedString.StringEndToken.SpanStart, endBeforeU8Suffix),
-            contentSpans: result.ToImmutableAndClear());
+            delimiterQuoteCount,
+            delimiterDollarCount,
+            startDelimiterSpan: TextSpan.FromBounds(
+                interpolatedString.SpanStart,
+                interpolatedString.StringStartToken.Span.End
+            ),
+            endDelimiterSpan: TextSpan.FromBounds(
+                interpolatedString.StringEndToken.SpanStart,
+                interpolatedString.Span.End
+            ),
+            endDelimiterSpanWithoutSuffix: TextSpan.FromBounds(
+                interpolatedString.StringEndToken.SpanStart,
+                endBeforeU8Suffix
+            ),
+            contentSpans: result.ToImmutableAndClear()
+        );
     }
 }

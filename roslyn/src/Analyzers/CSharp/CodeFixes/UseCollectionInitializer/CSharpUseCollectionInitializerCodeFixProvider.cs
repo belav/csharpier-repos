@@ -14,11 +14,21 @@ using Microsoft.CodeAnalysis.UseCollectionInitializer;
 
 namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer;
 
-[ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.UseCollectionInitializer), Shared]
+[
+    ExportCodeFixProvider(
+        LanguageNames.CSharp,
+        Name = PredefinedCodeFixProviderNames.UseCollectionInitializer
+    ),
+    Shared
+]
 [method: ImportingConstructor]
-[method: SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-internal partial class CSharpUseCollectionInitializerCodeFixProvider() :
-    AbstractUseCollectionInitializerCodeFixProvider<
+[method: SuppressMessage(
+    "RoslynDiagnosticsReliability",
+    "RS0033:Importing constructor should be [Obsolete]",
+    Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+)]
+internal partial class CSharpUseCollectionInitializerCodeFixProvider()
+    : AbstractUseCollectionInitializerCodeFixProvider<
         SyntaxKind,
         ExpressionSyntax,
         StatementSyntax,
@@ -28,10 +38,11 @@ internal partial class CSharpUseCollectionInitializerCodeFixProvider() :
         ExpressionStatementSyntax,
         LocalDeclarationStatementSyntax,
         VariableDeclaratorSyntax,
-        CSharpUseCollectionInitializerAnalyzer>
+        CSharpUseCollectionInitializerAnalyzer
+    >
 {
-    protected override CSharpUseCollectionInitializerAnalyzer GetAnalyzer()
-        => CSharpUseCollectionInitializerAnalyzer.Allocate();
+    protected override CSharpUseCollectionInitializerAnalyzer GetAnalyzer() =>
+        CSharpUseCollectionInitializerAnalyzer.Allocate();
 
     protected override async Task<(SyntaxNode, SyntaxNode)> GetReplacementNodesAsync(
         Document document,
@@ -39,10 +50,18 @@ internal partial class CSharpUseCollectionInitializerCodeFixProvider() :
         BaseObjectCreationExpressionSyntax objectCreation,
         bool useCollectionExpression,
         ImmutableArray<Match<StatementSyntax>> matches,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         var newObjectCreation = await GetNewObjectCreationAsync(
-            document, fallbackOptions, objectCreation, useCollectionExpression, matches, cancellationToken).ConfigureAwait(false);
+                document,
+                fallbackOptions,
+                objectCreation,
+                useCollectionExpression,
+                matches,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
         return (objectCreation, newObjectCreation);
     }
 
@@ -52,10 +71,18 @@ internal partial class CSharpUseCollectionInitializerCodeFixProvider() :
         BaseObjectCreationExpressionSyntax objectCreation,
         bool useCollectionExpression,
         ImmutableArray<Match<StatementSyntax>> matches,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         return useCollectionExpression
-            ? await CreateCollectionExpressionAsync(document, fallbackOptions, objectCreation, matches, cancellationToken).ConfigureAwait(false)
+            ? await CreateCollectionExpressionAsync(
+                    document,
+                    fallbackOptions,
+                    objectCreation,
+                    matches,
+                    cancellationToken
+                )
+                .ConfigureAwait(false)
             : CreateObjectInitializerExpression(objectCreation, matches);
     }
 }

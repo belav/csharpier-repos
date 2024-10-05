@@ -14,6 +14,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal readonly struct VariableIdentifier : IEquatable<VariableIdentifier>
         {
             public readonly Symbol Symbol;
+
             /// <summary>
             /// Indicates whether this variable is nested inside another tracked variable.
             /// For instance, if a field `x` of a struct is a tracked variable, the symbol is not sufficient
@@ -25,17 +26,21 @@ namespace Microsoft.CodeAnalysis.CSharp
             public VariableIdentifier(Symbol symbol, int containingSlot = 0)
             {
                 Debug.Assert(containingSlot >= 0);
-                Debug.Assert(symbol.Kind switch
-                {
-                    SymbolKind.Local => true,
-                    SymbolKind.Parameter => true,
-                    SymbolKind.Field => true,
-                    SymbolKind.Property => true,
-                    SymbolKind.Event => true,
-                    SymbolKind.ErrorType => true,
-                    SymbolKind.Method when symbol is MethodSymbol m && m.MethodKind == MethodKind.LocalFunction => true,
-                    _ => false
-                });
+                Debug.Assert(
+                    symbol.Kind switch
+                    {
+                        SymbolKind.Local => true,
+                        SymbolKind.Parameter => true,
+                        SymbolKind.Field => true,
+                        SymbolKind.Property => true,
+                        SymbolKind.Event => true,
+                        SymbolKind.ErrorType => true,
+                        SymbolKind.Method
+                            when symbol is MethodSymbol m
+                                && m.MethodKind == MethodKind.LocalFunction => true,
+                        _ => false,
+                    }
+                );
                 Symbol = symbol;
                 ContainingSlot = containingSlot;
             }
@@ -53,9 +58,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // MemberIndexOpt, if available, is a fast approach to comparing relative members,
                 // and is necessary in cases such as anonymous types where OriginalDefinition will be distinct.
                 int? thisIndex = Symbol.MemberIndexOpt;
-                return thisIndex.HasValue ?
-                    Hash.Combine(thisIndex.GetValueOrDefault(), currentKey) :
-                    Hash.Combine(Symbol.OriginalDefinition, currentKey);
+                return thisIndex.HasValue
+                    ? Hash.Combine(thisIndex.GetValueOrDefault(), currentKey)
+                    : Hash.Combine(Symbol.OriginalDefinition, currentKey);
             }
 
             public bool Equals(VariableIdentifier other)

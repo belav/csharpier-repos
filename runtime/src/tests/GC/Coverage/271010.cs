@@ -8,18 +8,18 @@
 using System;
 using System.Runtime.CompilerServices;
 
-public class Test_271010 {
-
-    public static int Main() {
-
+public class Test_271010
+{
+    public static int Main()
+    {
         int[][] otherarray;
 
         try
         {
             otherarray = new int[16384][];
-            for(int i=0;i<16384;i++)
+            for (int i = 0; i < 16384; i++)
             {
-                otherarray[i] = new int[1024*500];
+                otherarray[i] = new int[1024 * 500];
             }
         }
         catch (System.OutOfMemoryException)
@@ -28,6 +28,5 @@ public class Test_271010 {
             return 100;
         }
         return 1;
-
     }
 }

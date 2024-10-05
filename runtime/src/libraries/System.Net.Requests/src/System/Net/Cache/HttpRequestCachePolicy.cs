@@ -12,16 +12,20 @@ namespace System.Net.Cache
         private readonly TimeSpan _minFresh = TimeSpan.MinValue;
         private readonly TimeSpan _maxStale = TimeSpan.MinValue;
 
-        public HttpRequestCachePolicy() : this(HttpRequestCacheLevel.Default)
-        {
-        }
+        public HttpRequestCachePolicy()
+            : this(HttpRequestCacheLevel.Default) { }
 
-        public HttpRequestCachePolicy(HttpRequestCacheLevel level) : base(MapLevel(level))
+        public HttpRequestCachePolicy(HttpRequestCacheLevel level)
+            : base(MapLevel(level))
         {
             Level = level;
         }
 
-        public HttpRequestCachePolicy(HttpCacheAgeControl cacheAgeControl, TimeSpan ageOrFreshOrStale) : this(HttpRequestCacheLevel.Default)
+        public HttpRequestCachePolicy(
+            HttpCacheAgeControl cacheAgeControl,
+            TimeSpan ageOrFreshOrStale
+        )
+            : this(HttpRequestCacheLevel.Default)
         {
             switch (cacheAgeControl)
             {
@@ -35,11 +39,19 @@ namespace System.Net.Cache
                     _maxStale = ageOrFreshOrStale;
                     break;
                 default:
-                    throw new ArgumentException(SR.Format(SR.net_invalid_enum, nameof(HttpCacheAgeControl)), nameof(cacheAgeControl));
+                    throw new ArgumentException(
+                        SR.Format(SR.net_invalid_enum, nameof(HttpCacheAgeControl)),
+                        nameof(cacheAgeControl)
+                    );
             }
         }
 
-        public HttpRequestCachePolicy(HttpCacheAgeControl cacheAgeControl, TimeSpan maxAge, TimeSpan freshOrStale) : this(HttpRequestCacheLevel.Default)
+        public HttpRequestCachePolicy(
+            HttpCacheAgeControl cacheAgeControl,
+            TimeSpan maxAge,
+            TimeSpan freshOrStale
+        )
+            : this(HttpRequestCacheLevel.Default)
         {
             switch (cacheAgeControl)
             {
@@ -61,18 +73,26 @@ namespace System.Net.Cache
                     _maxStale = freshOrStale;
                     break;
                 default:
-                    throw new ArgumentException(SR.Format(SR.net_invalid_enum, nameof(HttpCacheAgeControl)), nameof(cacheAgeControl));
+                    throw new ArgumentException(
+                        SR.Format(SR.net_invalid_enum, nameof(HttpCacheAgeControl)),
+                        nameof(cacheAgeControl)
+                    );
             }
         }
 
-        public HttpRequestCachePolicy(DateTime cacheSyncDate) :
-            this(HttpRequestCacheLevel.Default)
+        public HttpRequestCachePolicy(DateTime cacheSyncDate)
+            : this(HttpRequestCacheLevel.Default)
         {
             _lastSyncDateUtc = cacheSyncDate.ToUniversalTime();
         }
 
-        public HttpRequestCachePolicy(HttpCacheAgeControl cacheAgeControl, TimeSpan maxAge, TimeSpan freshOrStale, DateTime cacheSyncDate) :
-            this(cacheAgeControl, maxAge, freshOrStale)
+        public HttpRequestCachePolicy(
+            HttpCacheAgeControl cacheAgeControl,
+            TimeSpan maxAge,
+            TimeSpan freshOrStale,
+            DateTime cacheSyncDate
+        )
+            : this(cacheAgeControl, maxAge, freshOrStale)
         {
             _lastSyncDateUtc = cacheSyncDate.ToUniversalTime();
         }
@@ -80,9 +100,9 @@ namespace System.Net.Cache
         public new HttpRequestCacheLevel Level { get; }
 
         public DateTime CacheSyncDate =>
-            _lastSyncDateUtc == DateTime.MinValue || _lastSyncDateUtc == DateTime.MaxValue ?
-                _lastSyncDateUtc :
-                _lastSyncDateUtc.ToLocalTime();
+            _lastSyncDateUtc == DateTime.MinValue || _lastSyncDateUtc == DateTime.MaxValue
+                ? _lastSyncDateUtc
+                : _lastSyncDateUtc.ToLocalTime();
 
         public TimeSpan MaxAge => _maxAge;
 
@@ -92,11 +112,24 @@ namespace System.Net.Cache
 
         public override string ToString()
         {
-            return "Level:" + Level.ToString() +
-                (_maxAge == TimeSpan.MaxValue ? string.Empty : " MaxAge:" + _maxAge.ToString()) +
-                (_minFresh == TimeSpan.MinValue ? string.Empty : " MinFresh:" + _minFresh.ToString()) +
-                (_maxStale == TimeSpan.MinValue ? string.Empty : " MaxStale:" + _maxStale.ToString()) +
-                (CacheSyncDate == DateTime.MinValue ? string.Empty : " CacheSyncDate:" + CacheSyncDate.ToString(CultureInfo.CurrentCulture));
+            return "Level:"
+                + Level.ToString()
+                + (_maxAge == TimeSpan.MaxValue ? string.Empty : " MaxAge:" + _maxAge.ToString())
+                + (
+                    _minFresh == TimeSpan.MinValue
+                        ? string.Empty
+                        : " MinFresh:" + _minFresh.ToString()
+                )
+                + (
+                    _maxStale == TimeSpan.MinValue
+                        ? string.Empty
+                        : " MaxStale:" + _maxStale.ToString()
+                )
+                + (
+                    CacheSyncDate == DateTime.MinValue
+                        ? string.Empty
+                        : " CacheSyncDate:" + CacheSyncDate.ToString(CultureInfo.CurrentCulture)
+                );
         }
 
         private static RequestCacheLevel MapLevel(HttpRequestCacheLevel level)

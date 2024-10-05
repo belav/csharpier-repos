@@ -28,16 +28,27 @@ public class HttpClientSlimTest
     {
         using (var host = StartHost(out var address, statusCode: 500))
         {
-            await Assert.ThrowsAnyAsync<HttpRequestException>(() => HttpClientSlim.GetStringAsync(address));
+            await Assert.ThrowsAnyAsync<HttpRequestException>(
+                () => HttpClientSlim.GetStringAsync(address)
+            );
         }
     }
 
     [Fact]
     public async Task PostAsyncHttp()
     {
-        using (var host = StartHost(out var address, handler: context => context.Request.InputStream.CopyToAsync(context.Response.OutputStream)))
+        using (
+            var host = StartHost(
+                out var address,
+                handler: context =>
+                    context.Request.InputStream.CopyToAsync(context.Response.OutputStream)
+            )
+        )
         {
-            Assert.Equal("test post", await HttpClientSlim.PostAsync(address, new StringContent("test post")));
+            Assert.Equal(
+                "test post",
+                await HttpClientSlim.PostAsync(address, new StringContent("test post"))
+            );
         }
     }
 
@@ -47,7 +58,8 @@ public class HttpClientSlimTest
         using (var host = StartHost(out var address, statusCode: 500))
         {
             await Assert.ThrowsAnyAsync<HttpRequestException>(
-                () => HttpClientSlim.PostAsync(address, new StringContent("")));
+                () => HttpClientSlim.PostAsync(address, new StringContent(""))
+            );
         }
     }
 
@@ -65,7 +77,11 @@ public class HttpClientSlimTest
         Assert.Equal("[fe80::5d2a:d070:6fd6:1bac]", HttpClientSlim.GetHost(requestUri));
     }
 
-    private HttpListener StartHost(out string address, int statusCode = 200, Func<HttpListenerContext, Task> handler = null)
+    private HttpListener StartHost(
+        out string address,
+        int statusCode = 200,
+        Func<HttpListenerContext, Task> handler = null
+    )
     {
         var listener = new HttpListener();
 #if NET6_0_OR_GREATER
@@ -97,22 +113,28 @@ public class HttpClientSlimTest
 
         Assert.True(listener.IsListening, "IsListening");
 
-        _ = listener.GetContextAsync().ContinueWith(async task =>
-        {
-            var context = task.Result;
-            context.Response.StatusCode = statusCode;
-
-            if (handler == null)
+        _ = listener
+            .GetContextAsync()
+            .ContinueWith(async task =>
             {
-                await context.Response.OutputStream.WriteAsync(_defaultResponse, 0, _defaultResponse.Length);
-            }
-            else
-            {
-                await handler(context);
-            }
+                var context = task.Result;
+                context.Response.StatusCode = statusCode;
 
-            context.Response.Close();
-        });
+                if (handler == null)
+                {
+                    await context.Response.OutputStream.WriteAsync(
+                        _defaultResponse,
+                        0,
+                        _defaultResponse.Length
+                    );
+                }
+                else
+                {
+                    await handler(context);
+                }
+
+                context.Response.Close();
+            });
 
         return listener;
     }

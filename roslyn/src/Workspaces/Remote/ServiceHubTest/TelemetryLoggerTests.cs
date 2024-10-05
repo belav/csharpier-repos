@@ -39,8 +39,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
             public List<TelemetryEvent> PostedEvents = new();
             public HashSet<TestScope> OpenedScopes = new();
 
-            public override bool IsEnabled(FunctionId functionId)
-                => true;
+            public override bool IsEnabled(FunctionId functionId) => true;
 
             protected override void PostEvent(TelemetryEvent telemetryEvent)
             {
@@ -59,19 +58,25 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 Assert.True(OpenedScopes.Remove((TestScope)scope));
             }
 
-            protected override TelemetryEvent GetEndEvent(object scope)
-                => ((TestScope)scope).EndEvent;
+            protected override TelemetryEvent GetEndEvent(object scope) =>
+                ((TestScope)scope).EndEvent;
         }
 
-        private static IEnumerable<string> InspectProperties(TelemetryEvent @event, string? keyToIgnoreValueInspection = null)
-            => @event.Properties.Select(p => $"{p.Key}={(keyToIgnoreValueInspection == p.Key ? string.Empty : InspectPropertyValue(p.Value))}");
+        private static IEnumerable<string> InspectProperties(
+            TelemetryEvent @event,
+            string? keyToIgnoreValueInspection = null
+        ) =>
+            @event.Properties.Select(p =>
+                $"{p.Key}={(keyToIgnoreValueInspection == p.Key ? string.Empty : InspectPropertyValue(p.Value))}"
+            );
 
-        private static string InspectPropertyValue(object? value)
-            => value switch
+        private static string InspectPropertyValue(object? value) =>
+            value switch
             {
                 null => "<null>",
-                TelemetryComplexProperty { Value: IEnumerable<object?> items } => $"Complex[{string.Join(",", items.Select(InspectPropertyValue))}]",
-                _ => value.ToString()!
+                TelemetryComplexProperty { Value: IEnumerable<object?> items } =>
+                    $"Complex[{string.Join(",", items.Select(InspectPropertyValue))}]",
+                _ => value.ToString()!,
             };
 
         [Theory]
@@ -80,7 +85,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var logger = new TestLogger();
 
-            logger.Log(FunctionId.Debugging_EncSession_EditSession_EmitDeltaErrorId, LogMessage.Create("test", level));
+            logger.Log(
+                FunctionId.Debugging_EncSession_EditSession_EmitDeltaErrorId,
+                LogMessage.Create("test", level)
+            );
             Assert.Equal((level < LogLevel.Information) ? 0 : 1, logger.PostedEvents.Count);
         }
 
@@ -89,23 +97,32 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var logger = new TestLogger();
 
-            logger.Log(FunctionId.Debugging_EncSession_EditSession_EmitDeltaErrorId, KeyValueLogMessage.Create(p =>
-            {
-                p.Add("test1", 1);
-                p.Add("test2", new PiiValue(2));
-                p.Add("test3", new object[] { 3, new PiiValue(4) });
-            }));
+            logger.Log(
+                FunctionId.Debugging_EncSession_EditSession_EmitDeltaErrorId,
+                KeyValueLogMessage.Create(p =>
+                {
+                    p.Add("test1", 1);
+                    p.Add("test2", new PiiValue(2));
+                    p.Add("test3", new object[] { 3, new PiiValue(4) });
+                })
+            );
 
             var postedEvent = logger.PostedEvents.Single();
 
-            Assert.Equal("vs/ide/vbcs/debugging/encsession/editsession/emitdeltaerrorid", postedEvent.Name);
+            Assert.Equal(
+                "vs/ide/vbcs/debugging/encsession/editsession/emitdeltaerrorid",
+                postedEvent.Name
+            );
 
-            AssertEx.Equal(new[]
-            {
-                "vs.ide.vbcs.debugging.encsession.editsession.emitdeltaerrorid.test1=1",
-                "vs.ide.vbcs.debugging.encsession.editsession.emitdeltaerrorid.test2=PII(2)",
-                "vs.ide.vbcs.debugging.encsession.editsession.emitdeltaerrorid.test3=Complex[3,PII(4)]",
-            }, InspectProperties(postedEvent));
+            AssertEx.Equal(
+                new[]
+                {
+                    "vs.ide.vbcs.debugging.encsession.editsession.emitdeltaerrorid.test1=1",
+                    "vs.ide.vbcs.debugging.encsession.editsession.emitdeltaerrorid.test2=PII(2)",
+                    "vs.ide.vbcs.debugging.encsession.editsession.emitdeltaerrorid.test3=Complex[3,PII(4)]",
+                },
+                InspectProperties(postedEvent)
+            );
         }
 
         [Theory, CombinatorialData]
@@ -113,30 +130,56 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var logger = new TestLogger(logDelta);
 
-            logger.LogBlockStart(FunctionId.Debugging_EncSession_EditSession_EmitDeltaErrorId, KeyValueLogMessage.Create(p => p.Add("test", "start"), logLevel: LogLevel.Information), blockId: 1, CancellationToken.None);
+            logger.LogBlockStart(
+                FunctionId.Debugging_EncSession_EditSession_EmitDeltaErrorId,
+                KeyValueLogMessage.Create(
+                    p => p.Add("test", "start"),
+                    logLevel: LogLevel.Information
+                ),
+                blockId: 1,
+                CancellationToken.None
+            );
 
             var scope = logger.OpenedScopes.Single();
             Assert.Equal(LogType.Trace, scope.Type);
 
-            logger.LogBlockEnd(FunctionId.Debugging_EncSession_EditSession_EmitDeltaErrorId, KeyValueLogMessage.Create(p => p.Add("test", "end")), blockId: 1, delta: 100, CancellationToken.None);
+            logger.LogBlockEnd(
+                FunctionId.Debugging_EncSession_EditSession_EmitDeltaErrorId,
+                KeyValueLogMessage.Create(p => p.Add("test", "end")),
+                blockId: 1,
+                delta: 100,
+                CancellationToken.None
+            );
 
-            Assert.Equal("vs/ide/vbcs/debugging/encsession/editsession/emitdeltaerrorid", scope.EndEvent.Name);
+            Assert.Equal(
+                "vs/ide/vbcs/debugging/encsession/editsession/emitdeltaerrorid",
+                scope.EndEvent.Name
+            );
 
             if (logDelta)
             {
                 // We don't inspect the property value for "Delta" (time of execution) as that value will vary each time.
-                AssertEx.Equal(new[]
-                {
-                    "vs.ide.vbcs.debugging.encsession.editsession.emitdeltaerrorid.test=end",
-                    "vs.ide.vbcs.debugging.encsession.editsession.emitdeltaerrorid.delta="
-                }, InspectProperties(scope.EndEvent, keyToIgnoreValueInspection: "vs.ide.vbcs.debugging.encsession.editsession.emitdeltaerrorid.delta"));
+                AssertEx.Equal(
+                    new[]
+                    {
+                        "vs.ide.vbcs.debugging.encsession.editsession.emitdeltaerrorid.test=end",
+                        "vs.ide.vbcs.debugging.encsession.editsession.emitdeltaerrorid.delta=",
+                    },
+                    InspectProperties(
+                        scope.EndEvent,
+                        keyToIgnoreValueInspection: "vs.ide.vbcs.debugging.encsession.editsession.emitdeltaerrorid.delta"
+                    )
+                );
             }
             else
             {
-                AssertEx.Equal(new[]
-                {
-                    "vs.ide.vbcs.debugging.encsession.editsession.emitdeltaerrorid.test=end"
-                }, InspectProperties(scope.EndEvent));
+                AssertEx.Equal(
+                    new[]
+                    {
+                        "vs.ide.vbcs.debugging.encsession.editsession.emitdeltaerrorid.test=end",
+                    },
+                    InspectProperties(scope.EndEvent)
+                );
             }
         }
     }

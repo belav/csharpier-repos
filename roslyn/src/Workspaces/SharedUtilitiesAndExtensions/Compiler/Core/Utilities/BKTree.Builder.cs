@@ -22,7 +22,7 @@ namespace Roslyn.Utilities
             // '4' simply reads better and makes it clearer what's going on.
             private const int CompactEdgeAllocationSize = 4;
 
-            // Instead of producing a char[] for each string we're building a node for, we instead 
+            // Instead of producing a char[] for each string we're building a node for, we instead
             // have one long char[] with all the chracters of each string concatenated.  i.e.
             // "goo" "bar" and "baz" becomes { f, o, o, b, a, r, b, a, z }.  Then in _wordSpans
             // we have the text spans for each of those words in this array.  This gives us only
@@ -40,13 +40,13 @@ namespace Roslyn.Utilities
             // of children along with each node.  However, this would be very inefficient and would
             // put an enormous amount of memory pressure on the system.
             //
-            // Emperical data for a nice large assembly like mscorlib gives us the following 
+            // Emperical data for a nice large assembly like mscorlib gives us the following
             // information:
-            // 
+            //
             //      Unique-Words (ignoring case): 9662
-            // 
-            // For each unique word we need a node in the BKTree. If we stored a list or dictionary 
-            // with each node, that would be 10s of thousands of objects created that would then 
+            //
+            // For each unique word we need a node in the BKTree. If we stored a list or dictionary
+            // with each node, that would be 10s of thousands of objects created that would then
             // just have to be GCed.  That's a lot of garbage pressure we'd like to avoid.
             //
             // Now if we look at all those nodes, we can see the following information about how many
@@ -77,11 +77,11 @@ namespace Roslyn.Utilities
             // we found that this ratio stays true across the board.  i.e. with all dlls, 95% of nodes
             // have 4 or less edges.
             //
-            // So, to optimize things, we pre-alloc a single array with space for 4 edges for each 
+            // So, to optimize things, we pre-alloc a single array with space for 4 edges for each
             // node we're going to add.  Each node then gets that much space to store edge information.
-            // If it needs more than that space, then we have a fall-over dictionary that it can store 
+            // If it needs more than that space, then we have a fall-over dictionary that it can store
             // information in.
-            // 
+            //
             // Once building is complete, the GC only needs to deallocate this single array and the
             // spillover dictionaries.
             //
@@ -94,7 +94,10 @@ namespace Roslyn.Utilities
             public Builder(IEnumerable<string> values)
             {
                 // TODO(cyrusn): Properly handle unicode normalization here.
-                var distinctValues = values.Where(v => v.Length > 0).Distinct(CaseInsensitiveComparison.Comparer).ToArray();
+                var distinctValues = values
+                    .Where(v => v.Length > 0)
+                    .Distinct(CaseInsensitiveComparison.Comparer)
+                    .ToArray();
                 var charCount = distinctValues.Sum(v => v.Length);
 
                 _concatenatedLowerCaseWords = new char[charCount];
@@ -108,7 +111,8 @@ namespace Roslyn.Utilities
 
                     foreach (var ch in value)
                     {
-                        _concatenatedLowerCaseWords[characterIndex] = CaseInsensitiveComparison.ToLower(ch);
+                        _concatenatedLowerCaseWords[characterIndex] =
+                            CaseInsensitiveComparison.ToLower(ch);
                         characterIndex++;
                     }
                 }
@@ -129,14 +133,23 @@ namespace Roslyn.Utilities
 
                 // There will be one less edge in the graph than nodes.  Each node (except for the
                 // root) will have a single edge pointing to it.
-                var edges = ImmutableArray.CreateBuilder<Edge>(Math.Max(0, _builderNodes.Length - 1));
+                var edges = ImmutableArray.CreateBuilder<Edge>(
+                    Math.Max(0, _builderNodes.Length - 1)
+                );
 
                 BuildArrays(nodes, edges);
 
-                return new BKTree(_concatenatedLowerCaseWords, nodes.MoveToImmutable(), edges.MoveToImmutable());
+                return new BKTree(
+                    _concatenatedLowerCaseWords,
+                    nodes.MoveToImmutable(),
+                    edges.MoveToImmutable()
+                );
             }
 
-            private void BuildArrays(ImmutableArray<Node>.Builder nodes, ImmutableArray<Edge>.Builder edges)
+            private void BuildArrays(
+                ImmutableArray<Node>.Builder nodes,
+                ImmutableArray<Edge>.Builder edges
+            )
             {
                 var currentEdgeIndex = 0;
                 for (var i = 0; i < _builderNodes.Length; i++)
@@ -160,7 +173,9 @@ namespace Roslyn.Utilities
                         var spilledEdges = builderNode.SpilloverEdges;
                         if (spilledEdges != null)
                         {
-                            Debug.Assert(spilledEdges.Count == (edgeCount - CompactEdgeAllocationSize));
+                            Debug.Assert(
+                                spilledEdges.Count == (edgeCount - CompactEdgeAllocationSize)
+                            );
 
                             foreach (var (distance, childIndex) in spilledEdges)
                                 edges.Add(new Edge(distance, childIndex));
@@ -191,8 +206,15 @@ namespace Roslyn.Utilities
                     // a threshold here as we need the actual edit distance so we can actually
                     // determine what edge to make or walk.
                     var editDistance = EditDistance.GetEditDistance(
-                        _concatenatedLowerCaseWords.AsSpan(currentNode.CharacterSpan.Start, currentNode.CharacterSpan.Length),
-                        _concatenatedLowerCaseWords.AsSpan(characterSpan.Start, characterSpan.Length));
+                        _concatenatedLowerCaseWords.AsSpan(
+                            currentNode.CharacterSpan.Start,
+                            currentNode.CharacterSpan.Length
+                        ),
+                        _concatenatedLowerCaseWords.AsSpan(
+                            characterSpan.Start,
+                            characterSpan.Length
+                        )
+                    );
 
                     if (editDistance == 0)
                     {
@@ -201,7 +223,14 @@ namespace Roslyn.Utilities
                         throw new InvalidOperationException();
                     }
 
-                    if (TryGetChildIndex(currentNode, currentNodeIndex, editDistance, out var childNodeIndex))
+                    if (
+                        TryGetChildIndex(
+                            currentNode,
+                            currentNodeIndex,
+                            editDistance,
+                            out var childNodeIndex
+                        )
+                    )
                     {
                         // Edit distances collide.  Move to this child and add this word to it.
                         currentNodeIndex = childNodeIndex;
@@ -209,33 +238,45 @@ namespace Roslyn.Utilities
                     }
 
                     // found the node we want to add the child node to.
-                    AddChildNode(characterSpan, insertionIndex, currentNode.EdgeCount, currentNodeIndex, editDistance);
+                    AddChildNode(
+                        characterSpan,
+                        insertionIndex,
+                        currentNode.EdgeCount,
+                        currentNodeIndex,
+                        editDistance
+                    );
                     return;
                 }
             }
 
             private void AddChildNode(
-                TextSpan characterSpan, int insertionIndex, int currentNodeEdgeCount, int currentNodeIndex, int editDistance)
+                TextSpan characterSpan,
+                int insertionIndex,
+                int currentNodeEdgeCount,
+                int currentNodeIndex,
+                int editDistance
+            )
             {
-                // The node as 'currentNodeIndex' doesn't have an edge with this edit distance. 
+                // The node as 'currentNodeIndex' doesn't have an edge with this edit distance.
                 // Three cases to handle:
                 // 1) there are less than 4 edges.  We simply place the edge into the correct
                 //    location in compactEdges
-                // 2) there are 4 edges.  We need to make the spillover dictionary and then add 
+                // 2) there are 4 edges.  We need to make the spillover dictionary and then add
                 //    the new edge into that.
-                // 3) there are more than 4 edges.  Just put the new edge in the spillover 
+                // 3) there are more than 4 edges.  Just put the new edge in the spillover
                 //    dictionary.
 
                 if (currentNodeEdgeCount < CompactEdgeAllocationSize)
                 {
-                    _compactEdges[currentNodeIndex * CompactEdgeAllocationSize + currentNodeEdgeCount] =
-                        new Edge(editDistance, insertionIndex);
+                    _compactEdges[
+                        currentNodeIndex * CompactEdgeAllocationSize + currentNodeEdgeCount
+                    ] = new Edge(editDistance, insertionIndex);
                 }
                 else
                 {
                     ref var node = ref _builderNodes[currentNodeIndex];
 
-                    // When we hit 4 elements, we need to allocate the spillover dictionary to 
+                    // When we hit 4 elements, we need to allocate the spillover dictionary to
                     // place the extra edges.
                     if (currentNodeEdgeCount == CompactEdgeAllocationSize)
                     {
@@ -256,7 +297,12 @@ namespace Roslyn.Utilities
                 return;
             }
 
-            private bool TryGetChildIndex(BuilderNode currentNode, int currentNodeIndex, int editDistance, out int childIndex)
+            private bool TryGetChildIndex(
+                BuilderNode currentNode,
+                int currentNodeIndex,
+                int editDistance,
+                out int childIndex
+            )
             {
                 // linearly scan the children we have to see if there is one with this edit distance.
                 var start = currentNodeIndex * CompactEdgeAllocationSize;
@@ -275,7 +321,10 @@ namespace Roslyn.Utilities
                 if (currentNode.SpilloverEdges != null)
                 {
                     // Can't use the compact array.  Have to use the spillover dictionary instead.
-                    Debug.Assert(currentNode.SpilloverEdges.Count == (currentNode.EdgeCount - CompactEdgeAllocationSize));
+                    Debug.Assert(
+                        currentNode.SpilloverEdges.Count
+                            == (currentNode.EdgeCount - CompactEdgeAllocationSize)
+                    );
                     return currentNode.SpilloverEdges.TryGetValue(editDistance, out childIndex);
                 }
 

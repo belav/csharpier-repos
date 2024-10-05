@@ -15,12 +15,14 @@ internal struct EmbeddedSyntaxNodeOrToken<TSyntaxKind, TSyntaxNode>
 
     public readonly TSyntaxNode? Node;
 
-    private EmbeddedSyntaxNodeOrToken(TSyntaxNode? node) : this()
+    private EmbeddedSyntaxNodeOrToken(TSyntaxNode? node)
+        : this()
     {
         Node = node;
     }
 
-    private EmbeddedSyntaxNodeOrToken(EmbeddedSyntaxToken<TSyntaxKind> token) : this()
+    private EmbeddedSyntaxNodeOrToken(EmbeddedSyntaxToken<TSyntaxKind> token)
+        : this()
     {
         Debug.Assert((int)(object)token.Kind != 0);
         _token = token;
@@ -39,12 +41,13 @@ internal struct EmbeddedSyntaxNodeOrToken<TSyntaxKind, TSyntaxNode>
     [MemberNotNullWhen(true, nameof(Node))]
     public bool IsNode => Node != null;
 
-    public TextSpan? GetFullSpan()
-        => IsNode ? Node.GetFullSpan() : _token.GetFullSpan();
+    public TextSpan? GetFullSpan() => IsNode ? Node.GetFullSpan() : _token.GetFullSpan();
 
-    public static implicit operator EmbeddedSyntaxNodeOrToken<TSyntaxKind, TSyntaxNode>(TSyntaxNode? node)
-        => new(node);
+    public static implicit operator EmbeddedSyntaxNodeOrToken<TSyntaxKind, TSyntaxNode>(
+        TSyntaxNode? node
+    ) => new(node);
 
-    public static implicit operator EmbeddedSyntaxNodeOrToken<TSyntaxKind, TSyntaxNode>(EmbeddedSyntaxToken<TSyntaxKind> token)
-        => new(token);
+    public static implicit operator EmbeddedSyntaxNodeOrToken<TSyntaxKind, TSyntaxNode>(
+        EmbeddedSyntaxToken<TSyntaxKind> token
+    ) => new(token);
 }

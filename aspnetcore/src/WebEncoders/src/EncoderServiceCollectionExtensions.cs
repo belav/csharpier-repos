@@ -29,12 +29,11 @@ public static class EncoderServiceCollectionExtensions
 
         // Register the default encoders
         // We want to call the 'Default' property getters lazily since they perform static caching
+        services.TryAddSingleton(CreateFactory(() => HtmlEncoder.Default, HtmlEncoder.Create));
         services.TryAddSingleton(
-            CreateFactory(() => HtmlEncoder.Default, HtmlEncoder.Create));
-        services.TryAddSingleton(
-            CreateFactory(() => JavaScriptEncoder.Default, JavaScriptEncoder.Create));
-        services.TryAddSingleton(
-            CreateFactory(() => UrlEncoder.Default, UrlEncoder.Create));
+            CreateFactory(() => JavaScriptEncoder.Default, JavaScriptEncoder.Create)
+        );
+        services.TryAddSingleton(CreateFactory(() => UrlEncoder.Default, UrlEncoder.Create));
 
         return services;
     }
@@ -46,7 +45,10 @@ public static class EncoderServiceCollectionExtensions
     /// <param name="services">The <see cref="IServiceCollection"/>.</param>
     /// <param name="setupAction">An <see cref="Action{WebEncoderOptions}"/> to configure the provided <see cref="WebEncoderOptions"/>.</param>
     /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
-    public static IServiceCollection AddWebEncoders(this IServiceCollection services, Action<WebEncoderOptions> setupAction)
+    public static IServiceCollection AddWebEncoders(
+        this IServiceCollection services,
+        Action<WebEncoderOptions> setupAction
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(services);
         ArgumentNullThrowHelper.ThrowIfNull(setupAction);
@@ -59,14 +61,14 @@ public static class EncoderServiceCollectionExtensions
 
     private static Func<IServiceProvider, TService> CreateFactory<TService>(
         Func<TService> defaultFactory,
-        Func<TextEncoderSettings, TService> customSettingsFactory)
+        Func<TextEncoderSettings, TService> customSettingsFactory
+    )
     {
         return serviceProvider =>
         {
             var settings = serviceProvider
                 ?.GetService<IOptions<WebEncoderOptions>>()
-                ?.Value
-                ?.TextEncoderSettings;
+                ?.Value?.TextEncoderSettings;
             return (settings != null) ? customSettingsFactory(settings) : defaultFactory();
         };
     }

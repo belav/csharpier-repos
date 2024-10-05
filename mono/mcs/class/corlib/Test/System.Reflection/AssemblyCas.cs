@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,253 +26,273 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.IO;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Security;
 using System.Security.Permissions;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Reflection {
+namespace MonoCasTests.System.Reflection
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class AssemblyCas
+    {
+        private MonoTests.System.Reflection.AssemblyTest at;
+        private Assembly corlib;
+        private Assembly corlib_test;
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class AssemblyCas {
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
+        {
+            at = new MonoTests.System.Reflection.AssemblyTest();
+            corlib = typeof(int).Assembly;
+            corlib_test = Assembly.GetExecutingAssembly();
+        }
 
-		private MonoTests.System.Reflection.AssemblyTest at;
-		private Assembly corlib;
-		private Assembly corlib_test;
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			at = new MonoTests.System.Reflection.AssemblyTest ();
-			corlib = typeof (int).Assembly;
-			corlib_test = Assembly.GetExecutingAssembly ();
-		}
+        // Partial Trust Tests - i.e. call "normal" unit with reduced privileges
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void PartialTrust_Deny_Unrestricted()
+        {
+            at.CreateInstance();
+            at.CreateInvalidInstance();
+            at.GetAssembly();
+            at.GetReferencedAssemblies();
 
-		// Partial Trust Tests - i.e. call "normal" unit with reduced privileges
+            Assert.IsNotNull(Assembly.GetCallingAssembly(), "GetCallingAssembly");
+            Assembly.GetEntryAssembly(); // null for MS, non-null with Mono
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void PartialTrust_Deny_Unrestricted ()
-		{
-			at.CreateInstance ();
-			at.CreateInvalidInstance ();
-			at.GetAssembly ();
-			at.GetReferencedAssemblies ();
+            Assert.IsTrue(corlib.GetCustomAttributes(true).Length > 0, "GetCustomAttribute");
+            Assert.IsTrue(corlib.GetExportedTypes().Length > 0, "GetExportedTypes");
+            Assert.IsTrue(corlib.GetLoadedModules(true).Length > 0, "GetLoadedModules(true)");
+            Assert.IsNotNull(corlib.ToString(), "ToString");
 
-			Assert.IsNotNull (Assembly.GetCallingAssembly (), "GetCallingAssembly");
-			Assembly.GetEntryAssembly (); // null for MS, non-null with Mono
+            Module[] ms = corlib.GetModules(true);
+            Assert.IsTrue(ms.Length > 0, "GetModules(true)");
+            // can't use ms [0].Name as this requires PathDiscovery
+            // but ToString return the same value without the check
+            Assert.IsNotNull(corlib.GetModule(ms[0].ToString()), "GetModule");
 
-			Assert.IsTrue (corlib.GetCustomAttributes (true).Length > 0, "GetCustomAttribute");
-			Assert.IsTrue (corlib.GetExportedTypes ().Length > 0, "GetExportedTypes");
-			Assert.IsTrue (corlib.GetLoadedModules (true).Length > 0, "GetLoadedModules(true)");
-			Assert.IsNotNull (corlib.ToString (), "ToString");
+            corlib.GetManifestResourceNames();
 
-			Module[] ms = corlib.GetModules (true);
-			Assert.IsTrue (ms.Length > 0, "GetModules(true)");
-			// can't use ms [0].Name as this requires PathDiscovery 
-			// but ToString return the same value without the check
-			Assert.IsNotNull (corlib.GetModule (ms [0].ToString ()), "GetModule");
+            Assembly corlib_test = Assembly.GetExecutingAssembly();
+            Assert.AreEqual(
+                corlib_test.GetCustomAttributes(true).Length,
+                corlib_test.GetCustomAttributes(false).Length,
+                "GetCustomAttribute true==false"
+            );
+            Assert.AreEqual(
+                corlib_test.GetLoadedModules().Length,
+                corlib_test.GetLoadedModules(false).Length,
+                "GetLoadedModules()==(false)"
+            );
+            Assert.AreEqual(
+                corlib_test.GetModules().Length,
+                corlib_test.GetModules(false).Length,
+                "GetModules()==(false)"
+            );
 
-			corlib.GetManifestResourceNames ();
+            Assert.IsTrue(
+                corlib_test.GetReferencedAssemblies().Length > 0,
+                "GetReferencedAssemblies"
+            );
+        }
 
-			Assembly corlib_test = Assembly.GetExecutingAssembly ();
-			Assert.AreEqual (corlib_test.GetCustomAttributes (true).Length, 
-				corlib_test.GetCustomAttributes (false).Length, "GetCustomAttribute true==false");
-			Assert.AreEqual (corlib_test.GetLoadedModules ().Length,
-				corlib_test.GetLoadedModules (false).Length, "GetLoadedModules()==(false)");
-			Assert.AreEqual (corlib_test.GetModules ().Length,
-				corlib_test.GetModules (false).Length, "GetModules()==(false)");
+        [Test]
+        [SecurityPermission(SecurityAction.PermitOnly, ControlEvidence = true)]
+        [FileIOPermission(SecurityAction.PermitOnly, Unrestricted = true)]
+        public void PartialTrust_PermitOnly_ControlEvidenceFileIOPermission()
+        {
+            at.Corlib_test();
+        }
 
-			Assert.IsTrue (corlib_test.GetReferencedAssemblies ().Length > 0, "GetReferencedAssemblies");
-		}
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, ControlEvidence = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void PartialTrust_Deny_ControlEvidence()
+        {
+            Assert.IsNotNull(corlib_test.Evidence, "Evidence");
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, ControlEvidence = true)]
-		[FileIOPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-		public void PartialTrust_PermitOnly_ControlEvidenceFileIOPermission ()
-		{
-			at.Corlib_test ();
-		}
+        [Test]
+        [FileIOPermission(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void CodeBase_Deny_FileIOPermission()
+        {
+            Assert.IsNotNull(corlib_test.CodeBase, "CodeBase");
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, ControlEvidence = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void PartialTrust_Deny_ControlEvidence ()
-		{
-			Assert.IsNotNull (corlib_test.Evidence, "Evidence");
-		}
+        [Test]
+        [FileIOPermission(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void EscapedCodeBase_Deny_FileIOPermission()
+        {
+            Assert.IsNotNull(corlib_test.EscapedCodeBase, "EscapedCodeBase");
+        }
 
-		[Test]
-		[FileIOPermission (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void CodeBase_Deny_FileIOPermission ()
-		{
-			Assert.IsNotNull (corlib_test.CodeBase, "CodeBase");
-		}
+        [Test]
+        [FileIOPermission(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Location_Deny_FileIOPermission()
+        {
+            Assert.IsNotNull(corlib_test.Location, "Location");
+        }
 
-		[Test]
-		[FileIOPermission (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void EscapedCodeBase_Deny_FileIOPermission ()
-		{
-			Assert.IsNotNull (corlib_test.EscapedCodeBase, "EscapedCodeBase");
-		}
+        [Test]
+        public void GetFile_PermitOnly_FileIOPermission()
+        {
+            FileStream[] fss = corlib.GetFiles(false);
+            if (fss.Length > 0)
+            {
+                foreach (FileStream fs in fss)
+                {
+                    GetFile_PermitOnly(fs.Name);
+                }
+            }
+        }
 
-		[Test]
-		[FileIOPermission (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Location_Deny_FileIOPermission ()
-		{
-			Assert.IsNotNull (corlib_test.Location, "Location");
-		}
+        [FileIOPermission(SecurityAction.PermitOnly, Unrestricted = true)]
+        private void GetFile_PermitOnly(string filename)
+        {
+            corlib.GetFile(filename);
+        }
 
-		[Test]
-		public void GetFile_PermitOnly_FileIOPermission ()
-		{
-			FileStream[] fss = corlib.GetFiles (false);
-			if (fss.Length > 0) {
-				foreach (FileStream fs in fss) {
-					GetFile_PermitOnly (fs.Name);
-				}
-			}
-		}
+        [Test]
+        public void GetFile_Deny_FileIOPermission()
+        {
+            FileStream[] fss = corlib.GetFiles(false);
+            if (fss.Length > 0)
+            {
+                foreach (FileStream fs in fss)
+                {
+                    GetFile_Deny(fs.Name);
+                }
+            }
+            // note: we already know the name
+        }
 
-		[FileIOPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-		private void GetFile_PermitOnly (string filename)
-		{
-			corlib.GetFile (filename);
-		}
+        [FileIOPermission(SecurityAction.Deny, Unrestricted = true)]
+        private void GetFile_Deny(string filename)
+        {
+            corlib.GetFile(filename);
+        }
 
-		[Test]
-		public void GetFile_Deny_FileIOPermission ()
-		{
-			FileStream[] fss = corlib.GetFiles (false);
-			if (fss.Length > 0) {
-				foreach (FileStream fs in fss) {
-					GetFile_Deny (fs.Name);
-				}
-			}
-			// note: we already know the name
-		}
+        [Test]
+        [FileIOPermission(SecurityAction.Deny, Unrestricted = true)]
+        public void GetFile_Unexisting_Deny()
+        {
+            corlib.GetFile("TOTO");
+        }
 
-		[FileIOPermission (SecurityAction.Deny, Unrestricted = true)]
-		private void GetFile_Deny (string filename)
-		{
-			corlib.GetFile (filename);
-		}
+        [Test]
+        [FileIOPermission(SecurityAction.PermitOnly, Unrestricted = true)]
+        public void GetFiles_PermitOnly_FileIOPermission()
+        {
+            at.GetFiles_False();
+            at.GetFiles_True();
+        }
 
-		[Test]
-		[FileIOPermission (SecurityAction.Deny, Unrestricted = true)]
-		public void GetFile_Unexisting_Deny ()
-		{
-			corlib.GetFile ("TOTO");
-		}
+        [Test]
+        [FileIOPermission(SecurityAction.Deny, Unrestricted = true)]
+        public void GetFilesFalse_Deny_FileIOPermission()
+        {
+            try
+            {
+                FileStream[] fss = corlib.GetFiles(false);
+                if (fss.Length != 0)
+                    Assert.Fail("Expected SecurityException");
+            }
+            catch (SecurityException)
+            {
+                // so there was at least one (like on MS runtime)
+            }
+        }
 
-		[Test]
-		[FileIOPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-		public void GetFiles_PermitOnly_FileIOPermission ()
-		{
-			at.GetFiles_False ();
-			at.GetFiles_True ();
-		}
+        [Test]
+        [FileIOPermission(SecurityAction.Deny, Unrestricted = true)]
+        public void GetFilesTrue_Deny_FileIOPermission()
+        {
+            try
+            {
+                FileStream[] fss = corlib.GetFiles(true);
+                if (fss.Length != 0)
+                    Assert.Fail("Expected SecurityException");
+            }
+            catch (SecurityException)
+            {
+                // so there was at least one (like on MS runtime)
+            }
+        }
 
-		[Test]
-		[FileIOPermission (SecurityAction.Deny, Unrestricted = true)]
-		public void GetFilesFalse_Deny_FileIOPermission ()
-		{
-			try {
-				FileStream[] fss = corlib.GetFiles (false);
-				if (fss.Length != 0)
-					Assert.Fail ("Expected SecurityException");
-			}
-			catch (SecurityException) {
-				// so there was at least one (like on MS runtime)
-			}
-		}
+        [Test]
+        [FileIOPermission(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void GetName_Deny_FileIOPermission()
+        {
+            corlib.GetName();
+        }
 
-		[Test]
-		[FileIOPermission (SecurityAction.Deny, Unrestricted = true)]
-		public void GetFilesTrue_Deny_FileIOPermission ()
-		{
-			try {
-				FileStream[] fss = corlib.GetFiles (true);
-				if (fss.Length != 0)
-					Assert.Fail ("Expected SecurityException");
-			}
-			catch (SecurityException) {
-				// so there was at least one (like on MS runtime)
-			}
-		}
+        [Test]
+        [FileIOPermission(SecurityAction.PermitOnly, Unrestricted = true)]
+        public void GetName_PermitOnly_FileIOPermission()
+        {
+            corlib.GetName();
+        }
 
-		[Test]
-		[FileIOPermission (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void GetName_Deny_FileIOPermission ()
-		{
-			corlib.GetName ();
-		}
+        [Test]
+        [FileIOPermission(SecurityAction.Deny, Unrestricted = true)]
+        public void LoadWithPartialName_Deny_FileIOPermission()
+        {
+            // FileIOPermission isn't (always) required for LoadWithPartialName
+            // e.g. in this case both assemblies are already loaded in memory
+            at.LoadWithPartialName();
+        }
 
-		[Test]
-		[FileIOPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-		public void GetName_PermitOnly_FileIOPermission ()
-		{
-			corlib.GetName ();
-		}
+        // we use reflection to call Assembly as some methods and events are protected
+        // by LinkDemand (which will be converted into full demand, i.e. a stack walk)
+        // when reflection is used (i.e. it gets testable).
 
-		[Test]
-		[FileIOPermission (SecurityAction.Deny, Unrestricted = true)]
-		public void LoadWithPartialName_Deny_FileIOPermission ()
-		{
-			// FileIOPermission isn't (always) required for LoadWithPartialName
-			// e.g. in this case both assemblies are already loaded in memory
-			at.LoadWithPartialName ();
-		}
-		// we use reflection to call Assembly as some methods and events are protected 
-		// by LinkDemand (which will be converted into full demand, i.e. a stack walk)
-		// when reflection is used (i.e. it gets testable).
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, SerializationFormatter = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void GetObjectData()
+        {
+            SerializationInfo info = null;
+            StreamingContext context = new StreamingContext(StreamingContextStates.All);
+            Assembly a = Assembly.GetExecutingAssembly();
+            MethodInfo mi = typeof(Assembly).GetMethod("GetObjectData");
+            mi.Invoke(a, new object[2] { info, context });
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, SerializationFormatter = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void GetObjectData ()
-		{
-			SerializationInfo info = null;
-			StreamingContext context = new StreamingContext (StreamingContextStates.All);
-			Assembly a = Assembly.GetExecutingAssembly ();
-			MethodInfo mi = typeof (Assembly).GetMethod ("GetObjectData");
-			mi.Invoke (a, new object [2] { info, context });
-		}
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, ControlAppDomain = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void AddModuleResolve()
+        {
+            Assembly a = Assembly.GetExecutingAssembly();
+            MethodInfo mi = typeof(Assembly).GetMethod("add_ModuleResolve");
+            mi.Invoke(a, new object[1] { null });
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, ControlAppDomain = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void AddModuleResolve ()
-		{
-			Assembly a = Assembly.GetExecutingAssembly ();
-			MethodInfo mi = typeof (Assembly).GetMethod ("add_ModuleResolve");
-			mi.Invoke (a, new object [1] { null });
-		}
-
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, ControlAppDomain = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void RemoveModuleResolve ()
-		{
-			Assembly a = Assembly.GetExecutingAssembly ();
-			MethodInfo mi = typeof (Assembly).GetMethod ("remove_ModuleResolve");
-			mi.Invoke (a, new object [1] { null });
-		}
-	}
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, ControlAppDomain = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void RemoveModuleResolve()
+        {
+            Assembly a = Assembly.GetExecutingAssembly();
+            MethodInfo mi = typeof(Assembly).GetMethod("remove_ModuleResolve");
+            mi.Invoke(a, new object[1] { null });
+        }
+    }
 }

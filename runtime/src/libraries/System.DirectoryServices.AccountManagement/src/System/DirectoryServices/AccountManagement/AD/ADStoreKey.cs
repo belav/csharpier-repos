@@ -25,10 +25,11 @@ namespace System.DirectoryServices.AccountManagement
             _wellKnownSid = false;
 
             GlobalDebug.WriteLineIf(
-                            GlobalDebug.Info,
-                            "ADStoreKey",
-                            "creating GUID key for GUID={0}",
-                            guid);
+                GlobalDebug.Info,
+                "ADStoreKey",
+                "creating GUID key for GUID={0}",
+                guid
+            );
         }
 
         public ADStoreKey(string domainName, byte[] sid)
@@ -44,11 +45,12 @@ namespace System.DirectoryServices.AccountManagement
             _wellKnownSid = true;
 
             GlobalDebug.WriteLineIf(
-                            GlobalDebug.Info,
-                            "ADStoreKey",
-                            "creating SID key for domainName={0}, sid={1}",
-                            domainName,
-                            Utils.ByteArrayToString(sid));
+                GlobalDebug.Info,
+                "ADStoreKey",
+                "creating SID key for domainName={0}, sid={1}",
+                domainName,
+                Utils.ByteArrayToString(sid)
+            );
         }
 
         public override bool Equals(object o)
@@ -68,8 +70,15 @@ namespace System.DirectoryServices.AccountManagement
             }
             else
             {
-                if ((string.Equals(_domainName, that._domainName, StringComparison.OrdinalIgnoreCase)) &&
-                     (Utils.AreBytesEqual(_sid, that._sid)))
+                if (
+                    (
+                        string.Equals(
+                            _domainName,
+                            that._domainName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    ) && (Utils.AreBytesEqual(_sid, that._sid))
+                )
                     return true;
             }
 
@@ -78,9 +87,9 @@ namespace System.DirectoryServices.AccountManagement
 
         public override int GetHashCode()
         {
-            return (_wellKnownSid == false) ?
-                        _objectGuid.GetHashCode() :
-                        (_domainName.GetHashCode() ^ _sid.GetHashCode());
+            return (_wellKnownSid == false)
+                ? _objectGuid.GetHashCode()
+                : (_domainName.GetHashCode() ^ _sid.GetHashCode());
         }
     }
 }

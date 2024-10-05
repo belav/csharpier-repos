@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,90 +32,81 @@ using System.Collections;
 
 namespace System.Web.UI.Design
 {
-	public abstract class DesignerDataSourceView
-	{
-		[MonoNotSupported ("")]
-		protected DesignerDataSourceView (IDataSourceDesigner owner, string viewName)
-		{
-			throw new NotImplementedException ();
-		}
+    public abstract class DesignerDataSourceView
+    {
+        [MonoNotSupported("")]
+        protected DesignerDataSourceView(IDataSourceDesigner owner, string viewName)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoNotSupported ("")]
-		public virtual bool CanDelete {
-			[MonoNotSupported ("")]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoNotSupported("")]
+        public virtual bool CanDelete
+        {
+            [MonoNotSupported("")]
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoNotSupported ("")]
-		public virtual bool CanInsert {
-			[MonoNotSupported ("")]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoNotSupported("")]
+        public virtual bool CanInsert
+        {
+            [MonoNotSupported("")]
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoNotSupported ("")]
-		public virtual bool CanPage {
-			[MonoNotSupported ("")]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoNotSupported("")]
+        public virtual bool CanPage
+        {
+            [MonoNotSupported("")]
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoNotSupported ("")]
-		public virtual bool CanRetrieveTotalRowCount {
-			[MonoNotSupported ("")]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoNotSupported("")]
+        public virtual bool CanRetrieveTotalRowCount
+        {
+            [MonoNotSupported("")]
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoNotSupported ("")]
-		public virtual bool CanSort {
-			[MonoNotSupported ("")]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoNotSupported("")]
+        public virtual bool CanSort
+        {
+            [MonoNotSupported("")]
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoNotSupported ("")]
-		public virtual bool CanUpdate {
-			[MonoNotSupported ("")]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoNotSupported("")]
+        public virtual bool CanUpdate
+        {
+            [MonoNotSupported("")]
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoNotSupported ("")]
-		public IDataSourceDesigner DataSourceDesigner {
-			[MonoNotSupported ("")]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoNotSupported("")]
+        public IDataSourceDesigner DataSourceDesigner
+        {
+            [MonoNotSupported("")]
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoNotSupported ("")]
-		public string Name {
-			[MonoNotSupported ("")]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoNotSupported("")]
+        public string Name
+        {
+            [MonoNotSupported("")]
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoNotSupported ("")]
-		public virtual IDataSourceViewSchema Schema {
-			[MonoNotSupported ("")]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoNotSupported("")]
+        public virtual IDataSourceViewSchema Schema
+        {
+            [MonoNotSupported("")]
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoNotSupported ("")]
-		public virtual IEnumerable GetDesignTimeData (int minimumRows, out bool isSampleData)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoNotSupported("")]
+        public virtual IEnumerable GetDesignTimeData(int minimumRows, out bool isSampleData)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

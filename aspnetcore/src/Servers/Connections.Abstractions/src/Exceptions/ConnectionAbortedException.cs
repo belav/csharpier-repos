@@ -13,25 +13,21 @@ public class ConnectionAbortedException : OperationCanceledException
     /// <summary>
     /// Initializes a new instance of <see cref="ConnectionAbortedException"/>.
     /// </summary>
-    public ConnectionAbortedException() :
-        this("The connection was aborted")
-    {
-    }
+    public ConnectionAbortedException()
+        : this("The connection was aborted") { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ConnectionAbortedException"/>.
     /// </summary>
     /// <param name="message">The exception message.</param>
-    public ConnectionAbortedException(string message) : base(message)
-    {
-    }
+    public ConnectionAbortedException(string message)
+        : base(message) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ConnectionAbortedException"/>.
     /// </summary>
     /// <param name="message">The exception message.</param>
     /// <param name="inner">The underlying <see cref="Exception"/>.</param>
-    public ConnectionAbortedException(string message, Exception inner) : base(message, inner)
-    {
-    }
+    public ConnectionAbortedException(string message, Exception inner)
+        : base(message, inner) { }
 }

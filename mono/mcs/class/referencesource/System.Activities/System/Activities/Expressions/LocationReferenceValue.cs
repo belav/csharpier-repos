@@ -6,9 +6,13 @@ namespace System.Activities.Expressions
 {
     using System.Linq.Expressions;
     using System.Runtime;
-   
+
     [Fx.Tag.XamlVisible(false)]
-    sealed class LocationReferenceValue<T> : CodeActivity<T>, IExpressionContainer, ILocationReferenceWrapper, ILocationReferenceExpression
+    sealed class LocationReferenceValue<T>
+        : CodeActivity<T>,
+            IExpressionContainer,
+            ILocationReferenceWrapper,
+            ILocationReferenceExpression
     {
         LocationReference locationReference;
 
@@ -20,10 +24,7 @@ namespace System.Activities.Expressions
 
         LocationReference ILocationReferenceWrapper.LocationReference
         {
-            get
-            {
-                return this.locationReference;
-            }
+            get { return this.locationReference; }
         }
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
@@ -45,7 +46,9 @@ namespace System.Activities.Expressions
             }
         }
 
-        ActivityWithResult ILocationReferenceExpression.CreateNewInstance(LocationReference locationReference)
+        ActivityWithResult ILocationReferenceExpression.CreateNewInstance(
+            LocationReference locationReference
+        )
         {
             return new LocationReferenceValue<T>(locationReference);
         }

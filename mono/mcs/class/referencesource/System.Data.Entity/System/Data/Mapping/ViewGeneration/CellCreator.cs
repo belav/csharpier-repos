@@ -7,12 +7,12 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
+using System.Collections.Generic;
 using System.Data.Common.Utils;
 using System.Data.Mapping.ViewGeneration.Structures;
-using System.Collections.Generic;
 using System.Data.Mapping.ViewGeneration.Utils;
-using System.Diagnostics;
 using System.Data.Metadata.Edm;
+using System.Diagnostics;
 using System.Linq;
 
 namespace System.Data.Mapping.ViewGeneration
@@ -22,7 +22,6 @@ namespace System.Data.Mapping.ViewGeneration
     /// </summary>
     internal class CellCreator : InternalBase
     {
-
         #region Constructors
         // effects: Creates a cell creator object for an entity container's
         // mappings (specified in "maps")
@@ -40,7 +39,7 @@ namespace System.Data.Mapping.ViewGeneration
         private CqlIdentifiers m_identifiers;
         // Keep track of all the identifiers to prevent clashes with _from0,
         // _from1, T, T1, etc
-        // Keep track of names of 
+        // Keep track of names of
         // * Entity Containers
         // * Extent names
         // * Entity Types
@@ -83,13 +82,13 @@ namespace System.Data.Mapping.ViewGeneration
 
         #region Private Methods
         /// <summary>
-        /// Boolean members have a closed domain and are enumerated when domains are established i.e. (T, F) instead of (notNull). 
-        /// Query Rewriting is exercised over every domain of the condition member. If the member contains not_null condition 
-        /// for example, it cannot generate a view for partitions (member=T), (Member=F). For this reason we need to expand the cells 
-        /// in a predefined situation (below) to include sub-fragments mapping individual elements of the closed domain.  
+        /// Boolean members have a closed domain and are enumerated when domains are established i.e. (T, F) instead of (notNull).
+        /// Query Rewriting is exercised over every domain of the condition member. If the member contains not_null condition
+        /// for example, it cannot generate a view for partitions (member=T), (Member=F). For this reason we need to expand the cells
+        /// in a predefined situation (below) to include sub-fragments mapping individual elements of the closed domain.
         /// Enums (a planned feature) need to be handled in a similar fashion.
-        /// 
-        /// Find booleans that are projected with a not_null condition 
+        ///
+        /// Find booleans that are projected with a not_null condition
         /// Expand ALL cells where they are projected. Why? See Unit Test case NullabilityConditionOnBoolean5.es
         /// Validation will fail because it will not be able to validate rewritings for partitions on the 'other' cells.
         /// </summary>
@@ -100,11 +99,19 @@ namespace System.Data.Mapping.ViewGeneration
             foreach (Cell cell in cells)
             {
                 //Find Projected members that are Boolean AND are mentioned in the Where clause with not_null condition
-                foreach (var memberToExpand in cell.SQuery.GetProjectedMembers()
-                                            .Where(member => IsBooleanMember(member))
-                                            .Where(boolMember => cell.SQuery.GetConjunctsFromWhereClause()
-                                                                    .Where(restriction => restriction.Domain.Values.Contains(Constant.NotNull))
-                                                                    .Select(restriction => restriction.RestrictedMemberSlot.MemberPath).Contains(boolMember)))
+                foreach (
+                    var memberToExpand in cell
+                        .SQuery.GetProjectedMembers()
+                        .Where(member => IsBooleanMember(member))
+                        .Where(boolMember =>
+                            cell.SQuery.GetConjunctsFromWhereClause()
+                                .Where(restriction =>
+                                    restriction.Domain.Values.Contains(Constant.NotNull)
+                                )
+                                .Select(restriction => restriction.RestrictedMemberSlot.MemberPath)
+                                .Contains(boolMember)
+                        )
+                )
                 {
                     sSideMembersToBeExpanded.Add(memberToExpand);
                 }
@@ -117,15 +124,25 @@ namespace System.Data.Mapping.ViewGeneration
             //  Here we need to know that because of T1.sdisc, we need to expand T2.sdisc.
             //  This is done by tracking cdisc, and then seeing in cell 2 that it is mapped to T2.sdisc
 
-            var cSideMembersForSSideExpansionCandidates = new Dictionary<MemberPath, Set<MemberPath>>();
+            var cSideMembersForSSideExpansionCandidates =
+                new Dictionary<MemberPath, Set<MemberPath>>();
             foreach (Cell cell in cells)
             {
                 foreach (var sSideMemberToExpand in sSideMembersToBeExpanded)
                 {
-                    var cSideMembers = cell.SQuery.GetProjectedPositions(sSideMemberToExpand).Select(pos => ((MemberProjectedSlot)cell.CQuery.ProjectedSlotAt(pos)).MemberPath);
+                    var cSideMembers = cell
+                        .SQuery.GetProjectedPositions(sSideMemberToExpand)
+                        .Select(pos =>
+                            ((MemberProjectedSlot)cell.CQuery.ProjectedSlotAt(pos)).MemberPath
+                        );
 
                     Set<MemberPath> cSidePaths = null;
-                    if (!cSideMembersForSSideExpansionCandidates.TryGetValue(sSideMemberToExpand, out cSidePaths))
+                    if (
+                        !cSideMembersForSSideExpansionCandidates.TryGetValue(
+                            sSideMemberToExpand,
+                            out cSidePaths
+                        )
+                    )
                     {
                         cSidePaths = new Set<MemberPath>();
                         cSideMembersForSSideExpansionCandidates[sSideMemberToExpand] = cSidePaths;
@@ -143,7 +160,9 @@ namespace System.Data.Mapping.ViewGeneration
                 // Note: this is not a cross-product
                 foreach (var memberToExpand in sSideMembersToBeExpanded)
                 {
-                    var mappedCSideMembers = cSideMembersForSSideExpansionCandidates[memberToExpand];
+                    var mappedCSideMembers = cSideMembersForSSideExpansionCandidates[
+                        memberToExpand
+                    ];
 
                     //Check if member is projected in this cell.
                     if (cell.SQuery.GetProjectedMembers().Contains(memberToExpand))
@@ -151,26 +170,70 @@ namespace System.Data.Mapping.ViewGeneration
                         // Creationg additional cel can fail when the condition to be appended contradicts existing condition in the CellQuery
                         // We don't add contradictions because they seem to cause unrelated problems in subsequent validation routines
                         Cell resultCell = null;
-                        if (TryCreateAdditionalCellWithCondition(cell, memberToExpand, true  /*condition value*/, ViewTarget.UpdateView /*s-side member*/, out resultCell))
+                        if (
+                            TryCreateAdditionalCellWithCondition(
+                                cell,
+                                memberToExpand,
+                                true /*condition value*/
+                                ,
+                                ViewTarget.UpdateView /*s-side member*/
+                                ,
+                                out resultCell
+                            )
+                        )
                         {
                             cells.Add(resultCell);
                         }
-                        if (TryCreateAdditionalCellWithCondition(cell, memberToExpand, false /*condition value*/, ViewTarget.UpdateView /*s-side member*/, out resultCell))
+                        if (
+                            TryCreateAdditionalCellWithCondition(
+                                cell,
+                                memberToExpand,
+                                false /*condition value*/
+                                ,
+                                ViewTarget.UpdateView /*s-side member*/
+                                ,
+                                out resultCell
+                            )
+                        )
                         {
                             cells.Add(resultCell);
                         }
                     }
                     else
-                    {  //If the s-side member is not projected, see if the mapped C-side member(s) is projected
-                        foreach (var cMemberToExpand in cell.CQuery.GetProjectedMembers().Intersect(mappedCSideMembers))
+                    { //If the s-side member is not projected, see if the mapped C-side member(s) is projected
+                        foreach (
+                            var cMemberToExpand in cell
+                                .CQuery.GetProjectedMembers()
+                                .Intersect(mappedCSideMembers)
+                        )
                         {
                             Cell resultCell = null;
-                            if (TryCreateAdditionalCellWithCondition(cell, cMemberToExpand, true  /*condition value*/, ViewTarget.QueryView /*c-side member*/, out resultCell))
+                            if (
+                                TryCreateAdditionalCellWithCondition(
+                                    cell,
+                                    cMemberToExpand,
+                                    true /*condition value*/
+                                    ,
+                                    ViewTarget.QueryView /*c-side member*/
+                                    ,
+                                    out resultCell
+                                )
+                            )
                             {
                                 cells.Add(resultCell);
                             }
 
-                            if (TryCreateAdditionalCellWithCondition(cell, cMemberToExpand, false /*condition value*/, ViewTarget.QueryView /*c-side member*/, out resultCell))
+                            if (
+                                TryCreateAdditionalCellWithCondition(
+                                    cell,
+                                    cMemberToExpand,
+                                    false /*condition value*/
+                                    ,
+                                    ViewTarget.QueryView /*c-side member*/
+                                    ,
+                                    out resultCell
+                                )
+                            )
                             {
                                 cells.Add(resultCell);
                             }
@@ -178,19 +241,24 @@ namespace System.Data.Mapping.ViewGeneration
                     }
                 }
             }
-
         }
 
         /// <summary>
         /// Given a cell, a member and a boolean condition on that member, creates additional cell
         /// which with the specified restriction on the member in addition to original condition.
         /// e.i conjunction of original condition AND member in newCondition
-        /// 
+        ///
         /// Creation fails when the original condition contradicts new boolean condition
-        /// 
+        ///
         /// ViewTarget tells whether MemberPath is in Cquery or SQuery
         /// </summary>
-        private bool TryCreateAdditionalCellWithCondition(Cell originalCell, MemberPath memberToExpand, bool conditionValue, ViewTarget viewTarget, out Cell result)
+        private bool TryCreateAdditionalCellWithCondition(
+            Cell originalCell,
+            MemberPath memberToExpand,
+            bool conditionValue,
+            ViewTarget viewTarget,
+            out Cell result
+        )
         {
             Debug.Assert(originalCell != null);
             Debug.Assert(memberToExpand != null);
@@ -200,9 +268,18 @@ namespace System.Data.Mapping.ViewGeneration
             MemberPath leftExtent = originalCell.GetLeftQuery(viewTarget).SourceExtentMemberPath;
             MemberPath rightExtent = originalCell.GetRightQuery(viewTarget).SourceExtentMemberPath;
 
-            //Now for the given left-side projected member, find corresponding right-side member that it is mapped to 
-            int indexOfBooLMemberInProjection = originalCell.GetLeftQuery(viewTarget).GetProjectedMembers().TakeWhile(path => !path.Equals(memberToExpand)).Count();
-            MemberProjectedSlot rightConditionMemberSlot = ((MemberProjectedSlot)originalCell.GetRightQuery(viewTarget).ProjectedSlotAt(indexOfBooLMemberInProjection));
+            //Now for the given left-side projected member, find corresponding right-side member that it is mapped to
+            int indexOfBooLMemberInProjection = originalCell
+                .GetLeftQuery(viewTarget)
+                .GetProjectedMembers()
+                .TakeWhile(path => !path.Equals(memberToExpand))
+                .Count();
+            MemberProjectedSlot rightConditionMemberSlot = (
+                (MemberProjectedSlot)
+                    originalCell
+                        .GetRightQuery(viewTarget)
+                        .ProjectedSlotAt(indexOfBooLMemberInProjection)
+            );
             MemberPath rightSidePath = rightConditionMemberSlot.MemberPath;
 
             List<ProjectedSlot> leftSlots = new List<ProjectedSlot>();
@@ -211,12 +288,22 @@ namespace System.Data.Mapping.ViewGeneration
             //Check for impossible conditions (otehrwise we get inaccurate pre-validation errors)
             ScalarConstant negatedCondition = new ScalarConstant(!conditionValue);
 
-            if (originalCell.GetLeftQuery(viewTarget).Conditions
-                    .Where(restriction => restriction.RestrictedMemberSlot.MemberPath.Equals(memberToExpand))
-                    .Where(restriction => restriction.Domain.Values.Contains(negatedCondition)).Any()
-                || originalCell.GetRightQuery(viewTarget).Conditions
-                    .Where(restriction => restriction.RestrictedMemberSlot.MemberPath.Equals(rightSidePath))
-                    .Where(restriction => restriction.Domain.Values.Contains(negatedCondition)).Any())
+            if (
+                originalCell
+                    .GetLeftQuery(viewTarget)
+                    .Conditions.Where(restriction =>
+                        restriction.RestrictedMemberSlot.MemberPath.Equals(memberToExpand)
+                    )
+                    .Where(restriction => restriction.Domain.Values.Contains(negatedCondition))
+                    .Any()
+                || originalCell
+                    .GetRightQuery(viewTarget)
+                    .Conditions.Where(restriction =>
+                        restriction.RestrictedMemberSlot.MemberPath.Equals(rightSidePath)
+                    )
+                    .Where(restriction => restriction.Domain.Values.Contains(negatedCondition))
+                    .Any()
+            )
             {
                 return false;
             }
@@ -237,24 +324,56 @@ namespace System.Data.Mapping.ViewGeneration
             }
 
             //Create condition boolena expressions
-            BoolExpression leftQueryWhereClause = BoolExpression.CreateLiteral(new ScalarRestriction(memberToExpand, new ScalarConstant(conditionValue)), null);
-            leftQueryWhereClause = BoolExpression.CreateAnd(originalCell.GetLeftQuery(viewTarget).WhereClause, leftQueryWhereClause);
+            BoolExpression leftQueryWhereClause = BoolExpression.CreateLiteral(
+                new ScalarRestriction(memberToExpand, new ScalarConstant(conditionValue)),
+                null
+            );
+            leftQueryWhereClause = BoolExpression.CreateAnd(
+                originalCell.GetLeftQuery(viewTarget).WhereClause,
+                leftQueryWhereClause
+            );
 
-            BoolExpression rightQueryWhereClause = BoolExpression.CreateLiteral(new ScalarRestriction(rightSidePath, new ScalarConstant(conditionValue)), null);
-            rightQueryWhereClause = BoolExpression.CreateAnd(originalCell.GetRightQuery(viewTarget).WhereClause, rightQueryWhereClause);
+            BoolExpression rightQueryWhereClause = BoolExpression.CreateLiteral(
+                new ScalarRestriction(rightSidePath, new ScalarConstant(conditionValue)),
+                null
+            );
+            rightQueryWhereClause = BoolExpression.CreateAnd(
+                originalCell.GetRightQuery(viewTarget).WhereClause,
+                rightQueryWhereClause
+            );
 
             //Create additional Cells
-            CellQuery rightQuery = new CellQuery(rightSlots, rightQueryWhereClause, rightExtent, originalCell.GetRightQuery(viewTarget).SelectDistinctFlag);
-            CellQuery leftQuery = new CellQuery(leftSlots, leftQueryWhereClause, leftExtent, originalCell.GetLeftQuery(viewTarget).SelectDistinctFlag);
+            CellQuery rightQuery = new CellQuery(
+                rightSlots,
+                rightQueryWhereClause,
+                rightExtent,
+                originalCell.GetRightQuery(viewTarget).SelectDistinctFlag
+            );
+            CellQuery leftQuery = new CellQuery(
+                leftSlots,
+                leftQueryWhereClause,
+                leftExtent,
+                originalCell.GetLeftQuery(viewTarget).SelectDistinctFlag
+            );
 
             Cell newCell;
             if (viewTarget == ViewTarget.UpdateView)
             {
-                newCell = Cell.CreateCS(rightQuery, leftQuery, originalCell.CellLabel, m_currentCellNumber);
+                newCell = Cell.CreateCS(
+                    rightQuery,
+                    leftQuery,
+                    originalCell.CellLabel,
+                    m_currentCellNumber
+                );
             }
             else
             {
-                newCell = Cell.CreateCS(leftQuery, rightQuery, originalCell.CellLabel, m_currentCellNumber);
+                newCell = Cell.CreateCS(
+                    leftQuery,
+                    rightQuery,
+                    originalCell.CellLabel,
+                    m_currentCellNumber
+                );
             }
 
             m_currentCellNumber++;
@@ -270,15 +389,15 @@ namespace System.Data.Mapping.ViewGeneration
             // extract entity mappings, i.e., for CPerson1, COrder1, etc
             foreach (StorageSetMapping extentMap in m_containerMapping.AllSetMaps)
             {
-
                 // Get each type map in an entity set mapping, i.e., for
                 // CPerson, CCustomer, etc in CPerson1
                 foreach (StorageTypeMapping typeMap in extentMap.TypeMappings)
                 {
-
                     StorageEntityTypeMapping entityTypeMap = typeMap as StorageEntityTypeMapping;
-                    Debug.Assert(entityTypeMap != null ||
-                                 typeMap is StorageAssociationTypeMapping, "Invalid typemap");
+                    Debug.Assert(
+                        entityTypeMap != null || typeMap is StorageAssociationTypeMapping,
+                        "Invalid typemap"
+                    );
 
                     // A set for all the types in this type mapping
                     Set<EdmType> allTypes = new Set<EdmType>();
@@ -291,14 +410,23 @@ namespace System.Data.Mapping.ViewGeneration
                         allTypes.AddRange(entityTypeMap.Types);
                         foreach (EdmType type in entityTypeMap.IsOfTypes)
                         {
-                            IEnumerable<EdmType> typeAndSubTypes = MetadataHelper.GetTypeAndSubtypesOf(type, m_containerMapping.StorageMappingItemCollection.EdmItemCollection, false /*includeAbstractTypes*/);
+                            IEnumerable<EdmType> typeAndSubTypes =
+                                MetadataHelper.GetTypeAndSubtypesOf(
+                                    type,
+                                    m_containerMapping
+                                        .StorageMappingItemCollection
+                                        .EdmItemCollection,
+                                    false /*includeAbstractTypes*/
+                                );
                             allTypes.AddRange(typeAndSubTypes);
                         }
                     }
 
                     EntitySetBase extent = extentMap.Set;
-                    Debug.Assert(extent != null, "Extent map for a null extent or type of extentMap.Exent " +
-                                 "is not Extent");
+                    Debug.Assert(
+                        extent != null,
+                        "Extent map for a null extent or type of extentMap.Exent " + "is not Extent"
+                    );
 
                     // For each table mapping for the type mapping, we create cells
                     foreach (StorageMappingFragment fragmentMap in typeMap.MappingFragments)
@@ -315,10 +443,13 @@ namespace System.Data.Mapping.ViewGeneration
         // allTypes corresponds to all the different types that the type map
         // represents -- this parameter has something useful only if extent
         // is an entity set
-        private void ExtractCellsFromTableFragment(EntitySetBase extent, StorageMappingFragment fragmentMap,
-                                                   Set<EdmType> allTypes, List<Cell> cells)
+        private void ExtractCellsFromTableFragment(
+            EntitySetBase extent,
+            StorageMappingFragment fragmentMap,
+            Set<EdmType> allTypes,
+            List<Cell> cells
+        )
         {
-
             // create C-query components
             MemberPath cRootExtent = new MemberPath(extent);
             BoolExpression cQueryWhereClause = BoolExpression.True;
@@ -327,7 +458,10 @@ namespace System.Data.Mapping.ViewGeneration
             if (allTypes.Count > 0)
             {
                 // Create a type condition for the extent, i.e., "extent in allTypes"
-                cQueryWhereClause = BoolExpression.CreateLiteral(new TypeRestriction(cRootExtent, allTypes), null);
+                cQueryWhereClause = BoolExpression.CreateLiteral(
+                    new TypeRestriction(cRootExtent, allTypes),
+                    null
+                );
             }
 
             // create S-query components
@@ -338,12 +472,31 @@ namespace System.Data.Mapping.ViewGeneration
             // Association or entity set
             // Add the properties and the key properties to a list and
             // then process them in ExtractProperties
-            ExtractProperties(fragmentMap.AllProperties, cRootExtent, cSlots, ref cQueryWhereClause, sRootExtent, sSlots, ref sQueryWhereClause);
+            ExtractProperties(
+                fragmentMap.AllProperties,
+                cRootExtent,
+                cSlots,
+                ref cQueryWhereClause,
+                sRootExtent,
+                sSlots,
+                ref sQueryWhereClause
+            );
 
             // limitation of MSL API: cannot assign constant values to table columns
-            CellQuery cQuery = new CellQuery(cSlots, cQueryWhereClause, cRootExtent, CellQuery.SelectDistinct.No /*no distinct flag*/);
-            CellQuery sQuery = new CellQuery(sSlots, sQueryWhereClause, sRootExtent,
-                                        fragmentMap.IsSQueryDistinct ? CellQuery.SelectDistinct.Yes : CellQuery.SelectDistinct.No);
+            CellQuery cQuery = new CellQuery(
+                cSlots,
+                cQueryWhereClause,
+                cRootExtent,
+                CellQuery.SelectDistinct.No /*no distinct flag*/
+            );
+            CellQuery sQuery = new CellQuery(
+                sSlots,
+                sQueryWhereClause,
+                sRootExtent,
+                fragmentMap.IsSQueryDistinct
+                    ? CellQuery.SelectDistinct.Yes
+                    : CellQuery.SelectDistinct.No
+            );
 
             StorageMappingFragment fragmentInfo = fragmentMap as StorageMappingFragment;
             Debug.Assert((fragmentInfo != null), "CSMappingFragment should support Line Info");
@@ -360,36 +513,52 @@ namespace System.Data.Mapping.ViewGeneration
         // the projected slots on both sides corresponding to
         // properties. Also updates the C-side whereclause corresponding to
         // discriminator properties on the C-side, e.g, isHighPriority
-        private void ExtractProperties(IEnumerable<StoragePropertyMapping> properties,
-                                       MemberPath cNode, List<ProjectedSlot> cSlots,
-                                       ref BoolExpression cQueryWhereClause,
-                                       MemberPath sRootExtent,
-                                       List<ProjectedSlot> sSlots,
-                                       ref BoolExpression sQueryWhereClause)
+        private void ExtractProperties(
+            IEnumerable<StoragePropertyMapping> properties,
+            MemberPath cNode,
+            List<ProjectedSlot> cSlots,
+            ref BoolExpression cQueryWhereClause,
+            MemberPath sRootExtent,
+            List<ProjectedSlot> sSlots,
+            ref BoolExpression sQueryWhereClause
+        )
         {
             // For each property mapping, we add an entry to the C and S cell queries
             foreach (StoragePropertyMapping propMap in properties)
             {
-                StorageScalarPropertyMapping scalarPropMap = propMap as StorageScalarPropertyMapping;
-                StorageComplexPropertyMapping complexPropMap = propMap as StorageComplexPropertyMapping;
-                StorageEndPropertyMapping associationEndPropertypMap = propMap as StorageEndPropertyMapping;
-                StorageConditionPropertyMapping conditionMap = propMap as StorageConditionPropertyMapping;
+                StorageScalarPropertyMapping scalarPropMap =
+                    propMap as StorageScalarPropertyMapping;
+                StorageComplexPropertyMapping complexPropMap =
+                    propMap as StorageComplexPropertyMapping;
+                StorageEndPropertyMapping associationEndPropertypMap =
+                    propMap as StorageEndPropertyMapping;
+                StorageConditionPropertyMapping conditionMap =
+                    propMap as StorageConditionPropertyMapping;
 
-                Debug.Assert(scalarPropMap != null ||
-                             complexPropMap != null ||
-                             associationEndPropertypMap != null ||
-                             conditionMap != null, "Unimplemented property mapping");
+                Debug.Assert(
+                    scalarPropMap != null
+                        || complexPropMap != null
+                        || associationEndPropertypMap != null
+                        || conditionMap != null,
+                    "Unimplemented property mapping"
+                );
 
                 if (scalarPropMap != null)
                 {
-                    Debug.Assert(scalarPropMap.ColumnProperty != null, "ColumnMember for a Scalar Property can not be null");
+                    Debug.Assert(
+                        scalarPropMap.ColumnProperty != null,
+                        "ColumnMember for a Scalar Property can not be null"
+                    );
                     // Add an attribute node to node
 
                     MemberPath cAttributeNode = new MemberPath(cNode, scalarPropMap.EdmProperty);
                     // Add a column (attribute) node the sQuery
                     // unlike the C side, there is no nesting. Hence we
                     // did not need an internal node
-                    MemberPath sAttributeNode = new MemberPath(sRootExtent, scalarPropMap.ColumnProperty);
+                    MemberPath sAttributeNode = new MemberPath(
+                        sRootExtent,
+                        scalarPropMap.ColumnProperty
+                    );
                     cSlots.Add(new MemberProjectedSlot(cAttributeNode));
                     sSlots.Add(new MemberProjectedSlot(sAttributeNode));
                 }
@@ -402,26 +571,55 @@ namespace System.Data.Mapping.ViewGeneration
                 // Check if the property mapping is for a complex types
                 if (complexPropMap != null)
                 {
-                    foreach (StorageComplexTypeMapping complexTypeMap in complexPropMap.TypeMappings)
+                    foreach (
+                        StorageComplexTypeMapping complexTypeMap in complexPropMap.TypeMappings
+                    )
                     {
                         // Create a node for the complex type property and call recursively
-                        MemberPath complexMemberNode = new MemberPath(cNode, complexPropMap.EdmProperty);
+                        MemberPath complexMemberNode = new MemberPath(
+                            cNode,
+                            complexPropMap.EdmProperty
+                        );
                         //Get the list of types that this type map represents
                         Set<EdmType> allTypes = new Set<EdmType>();
                         // Gather a set of all explicit types for an entity
                         // type mapping in allTypes.
-                        IEnumerable<EdmType> exactTypes = Helpers.AsSuperTypeList<ComplexType, EdmType>(complexTypeMap.Types);
+                        IEnumerable<EdmType> exactTypes = Helpers.AsSuperTypeList<
+                            ComplexType,
+                            EdmType
+                        >(complexTypeMap.Types);
                         allTypes.AddRange(exactTypes);
                         foreach (EdmType type in complexTypeMap.IsOfTypes)
                         {
-                            allTypes.AddRange(MetadataHelper.GetTypeAndSubtypesOf(type, m_containerMapping.StorageMappingItemCollection.EdmItemCollection, false /*includeAbstractTypes*/));
+                            allTypes.AddRange(
+                                MetadataHelper.GetTypeAndSubtypesOf(
+                                    type,
+                                    m_containerMapping
+                                        .StorageMappingItemCollection
+                                        .EdmItemCollection,
+                                    false /*includeAbstractTypes*/
+                                )
+                            );
                         }
-                        BoolExpression complexInTypes = BoolExpression.CreateLiteral(new TypeRestriction(complexMemberNode, allTypes), null);
-                        cQueryWhereClause = BoolExpression.CreateAnd(cQueryWhereClause, complexInTypes);
+                        BoolExpression complexInTypes = BoolExpression.CreateLiteral(
+                            new TypeRestriction(complexMemberNode, allTypes),
+                            null
+                        );
+                        cQueryWhereClause = BoolExpression.CreateAnd(
+                            cQueryWhereClause,
+                            complexInTypes
+                        );
                         // Now extract the properties of the complex type
                         // (which could have other complex types)
-                        ExtractProperties(complexTypeMap.AllProperties, complexMemberNode, cSlots,
-                                          ref cQueryWhereClause, sRootExtent, sSlots, ref sQueryWhereClause);
+                        ExtractProperties(
+                            complexTypeMap.AllProperties,
+                            complexMemberNode,
+                            cSlots,
+                            ref cQueryWhereClause,
+                            sRootExtent,
+                            sSlots,
+                            ref sQueryWhereClause
+                        );
                     }
                 }
 
@@ -429,10 +627,20 @@ namespace System.Data.Mapping.ViewGeneration
                 if (associationEndPropertypMap != null)
                 {
                     // create join tree node representing this relation end
-                    MemberPath associationEndNode = new MemberPath(cNode, associationEndPropertypMap.EndMember);
+                    MemberPath associationEndNode = new MemberPath(
+                        cNode,
+                        associationEndPropertypMap.EndMember
+                    );
                     // call recursively
-                    ExtractProperties(associationEndPropertypMap.Properties, associationEndNode, cSlots,
-                                      ref cQueryWhereClause, sRootExtent, sSlots, ref sQueryWhereClause);
+                    ExtractProperties(
+                        associationEndPropertypMap.Properties,
+                        associationEndNode,
+                        cSlots,
+                        ref cQueryWhereClause,
+                        sRootExtent,
+                        sSlots,
+                        ref sQueryWhereClause
+                    );
                 }
 
                 //Check if the this is a condition and add it to the Where clause
@@ -441,19 +649,30 @@ namespace System.Data.Mapping.ViewGeneration
                     if (conditionMap.ColumnProperty != null)
                     {
                         //Produce a Condition Expression for the Condition Map.
-                        BoolExpression conditionExpression = GetConditionExpression(sRootExtent, conditionMap);
+                        BoolExpression conditionExpression = GetConditionExpression(
+                            sRootExtent,
+                            conditionMap
+                        );
                         //Add the condition expression to the exisiting S side Where clause using an "And"
-                        sQueryWhereClause = BoolExpression.CreateAnd(sQueryWhereClause, conditionExpression);
+                        sQueryWhereClause = BoolExpression.CreateAnd(
+                            sQueryWhereClause,
+                            conditionExpression
+                        );
                     }
                     else
                     {
                         Debug.Assert(conditionMap.EdmProperty != null);
                         //Produce a Condition Expression for the Condition Map.
-                        BoolExpression conditionExpression = GetConditionExpression(cNode, conditionMap);
+                        BoolExpression conditionExpression = GetConditionExpression(
+                            cNode,
+                            conditionMap
+                        );
                         //Add the condition expression to the exisiting C side Where clause using an "And"
-                        cQueryWhereClause = BoolExpression.CreateAnd(cQueryWhereClause, conditionExpression);
+                        cQueryWhereClause = BoolExpression.CreateAnd(
+                            cQueryWhereClause,
+                            conditionExpression
+                        );
                     }
-
                 }
             }
         }
@@ -465,10 +684,16 @@ namespace System.Data.Mapping.ViewGeneration
         /// <param name="joinTreeNode"></param>
         /// <param name="conditionMap"></param>
         /// <returns></returns>
-        private static BoolExpression GetConditionExpression(MemberPath member, StorageConditionPropertyMapping conditionMap)
+        private static BoolExpression GetConditionExpression(
+            MemberPath member,
+            StorageConditionPropertyMapping conditionMap
+        )
         {
             //Get the member for which the condition is being specified
-            EdmMember conditionMember = (conditionMap.ColumnProperty != null) ? conditionMap.ColumnProperty : conditionMap.EdmProperty;
+            EdmMember conditionMember =
+                (conditionMap.ColumnProperty != null)
+                    ? conditionMap.ColumnProperty
+                    : conditionMap.EdmProperty;
 
             MemberPath conditionMemberNode = new MemberPath(member, conditionMember);
             //Check if this is a IsNull condition
@@ -476,19 +701,29 @@ namespace System.Data.Mapping.ViewGeneration
             if (conditionMap.IsNull.HasValue)
             {
                 // for conditions on scalars, create NodeValue nodes, otherwise NodeType
-                Constant conditionConstant = (true == conditionMap.IsNull.Value) ? Constant.Null : Constant.NotNull;
+                Constant conditionConstant =
+                    (true == conditionMap.IsNull.Value) ? Constant.Null : Constant.NotNull;
                 if (true == MetadataHelper.IsNonRefSimpleMember(conditionMember))
                 {
-                    conditionExpression = new ScalarRestriction(conditionMemberNode, conditionConstant);
+                    conditionExpression = new ScalarRestriction(
+                        conditionMemberNode,
+                        conditionConstant
+                    );
                 }
                 else
                 {
-                    conditionExpression = new TypeRestriction(conditionMemberNode, conditionConstant);
+                    conditionExpression = new TypeRestriction(
+                        conditionMemberNode,
+                        conditionConstant
+                    );
                 }
             }
             else
             {
-                conditionExpression = new ScalarRestriction(conditionMemberNode, new ScalarConstant(conditionMap.Value));
+                conditionExpression = new ScalarRestriction(
+                    conditionMemberNode,
+                    new ScalarConstant(conditionMap.Value)
+                );
             }
 
             Debug.Assert(conditionExpression != null);
@@ -510,6 +745,5 @@ namespace System.Data.Mapping.ViewGeneration
         }
 
         #endregion
-
     }
 }

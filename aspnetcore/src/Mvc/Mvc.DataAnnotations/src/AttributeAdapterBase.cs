@@ -12,9 +12,9 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 /// interfaces for the adapters.
 /// </summary>
 /// <typeparam name="TAttribute">The type of <see cref="ValidationAttribute"/> which is being wrapped.</typeparam>
-public abstract class AttributeAdapterBase<TAttribute> :
-    ValidationAttributeAdapter<TAttribute>,
-    IAttributeAdapter
+public abstract class AttributeAdapterBase<TAttribute>
+    : ValidationAttributeAdapter<TAttribute>,
+        IAttributeAdapter
     where TAttribute : ValidationAttribute
 {
     /// <summary>
@@ -23,9 +23,7 @@ public abstract class AttributeAdapterBase<TAttribute> :
     /// <param name="attribute">The <see cref="ValidationAttribute"/> being wrapped.</param>
     /// <param name="stringLocalizer">The <see cref="IStringLocalizer"/> to be used in error generation.</param>
     public AttributeAdapterBase(TAttribute attribute, IStringLocalizer? stringLocalizer)
-        : base(attribute, stringLocalizer)
-    {
-    }
+        : base(attribute, stringLocalizer) { }
 
     /// <inheritdoc/>
     public abstract string GetErrorMessage(ModelValidationContextBase validationContext);

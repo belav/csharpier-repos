@@ -10,7 +10,11 @@ namespace Microsoft.AspNetCore.Mvc;
 /// Executes a middleware pipeline provided the by the <see cref="MiddlewareFilterAttribute.ConfigurationType"/>.
 /// The middleware pipeline will be treated as an async resource filter.
 /// </summary>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Method,
+    AllowMultiple = true,
+    Inherited = true
+)]
 public class MiddlewareFilterAttribute : Attribute, IFilterFactory, IOrderedFilter
 {
     /// <summary>
@@ -40,7 +44,8 @@ public class MiddlewareFilterAttribute : Attribute, IFilterFactory, IOrderedFilt
     {
         ArgumentNullException.ThrowIfNull(serviceProvider);
 
-        var middlewarePipelineService = serviceProvider.GetRequiredService<MiddlewareFilterBuilder>();
+        var middlewarePipelineService =
+            serviceProvider.GetRequiredService<MiddlewareFilterBuilder>();
         var pipeline = middlewarePipelineService.GetPipeline(ConfigurationType);
 
         return new MiddlewareFilter(pipeline);

@@ -35,8 +35,11 @@ namespace System.Web.Http.WebHost
         private string _virtualPathRoot;
         private bool _virtualPathRootSet;
 
-        public WebHostHttpRequestContext(HttpContextBase contextBase, HttpRequestBase requestBase,
-            HttpRequestMessage request)
+        public WebHostHttpRequestContext(
+            HttpContextBase contextBase,
+            HttpRequestBase requestBase,
+            HttpRequestMessage request
+        )
         {
             Contract.Assert(contextBase != null);
             Contract.Assert(requestBase != null);
@@ -72,8 +75,11 @@ namespace System.Web.Http.WebHost
                 {
                     X509Certificate2 value;
 
-                    if (_requestBase.ClientCertificate != null && _requestBase.ClientCertificate.Certificate != null
-                        && _requestBase.ClientCertificate.Certificate.Length > 0)
+                    if (
+                        _requestBase.ClientCertificate != null
+                        && _requestBase.ClientCertificate.Certificate != null
+                        && _requestBase.ClientCertificate.Certificate.Length > 0
+                    )
                     {
                         value = new X509Certificate2(_requestBase.ClientCertificate.Certificate);
                     }
@@ -187,10 +193,7 @@ namespace System.Web.Http.WebHost
 
         public override IPrincipal Principal
         {
-            get
-            {
-                return _contextBase.User;
-            }
+            get { return _contextBase.User; }
             set
             {
                 _contextBase.User = value;

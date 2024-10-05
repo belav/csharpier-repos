@@ -9,15 +9,16 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Metadata.Edm;
 using System.Text;
 using System.Xml;
-using System.Data.Metadata.Edm;
 
-namespace System.Data.Mapping {
+namespace System.Data.Mapping
+{
     /// <summary>
     /// Mapping metadata for all OC member maps.
     /// </summary>
-    internal class ObjectPropertyMapping: ObjectMemberMapping
+    internal class ObjectPropertyMapping : ObjectMemberMapping
     {
         #region Constructors
         /// <summary>
@@ -25,10 +26,8 @@ namespace System.Data.Mapping {
         /// </summary>
         /// <param name="edmProperty"></param>
         /// <param name="clrProperty"></param>
-        internal ObjectPropertyMapping(EdmProperty edmProperty, EdmProperty clrProperty) :
-            base(edmProperty, clrProperty)
-        {
-        }
+        internal ObjectPropertyMapping(EdmProperty edmProperty, EdmProperty clrProperty)
+            : base(edmProperty, clrProperty) { }
         #endregion
 
         #region Properties
@@ -38,10 +37,7 @@ namespace System.Data.Mapping {
         /// </summary>
         internal EdmProperty ClrProperty
         {
-            get
-            {
-                return (EdmProperty)this.ClrMember;
-            }
+            get { return (EdmProperty)this.ClrMember; }
         }
 
         /// <summary>
@@ -49,10 +45,7 @@ namespace System.Data.Mapping {
         /// </summary>
         internal override MemberMappingKind MemberMappingKind
         {
-            get
-            {
-                return MemberMappingKind.ScalarPropertyMapping;
-            }
+            get { return MemberMappingKind.ScalarPropertyMapping; }
         }
         #endregion
     }

@@ -11,7 +11,11 @@ namespace System.Linq.Tests
 {
     public partial class ToLookupTests : EnumerableTests
     {
-        private static void AssertMatches<K, T>(IEnumerable<K> keys, IEnumerable<T> elements, System.Linq.ILookup<K, T> lookup)
+        private static void AssertMatches<K, T>(
+            IEnumerable<K> keys,
+            IEnumerable<T> elements,
+            System.Linq.ILookup<K, T> lookup
+        )
         {
             Assert.NotNull(lookup);
             Assert.NotNull(keys);
@@ -40,15 +44,23 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCall()
         {
-            var q1 = from x1 in new string[] { "Alen", "Felix", null, null, "X", "Have Space", "Clinton", "" }
-                     select x1;
+            var q1 =
+                from x1 in new string[]
+                {
+                    "Alen",
+                    "Felix",
+                    null,
+                    null,
+                    "X",
+                    "Have Space",
+                    "Clinton",
+                    "",
+                }
+                select x1;
 
-            var q2 = from x2 in new int[] { 55, 49, 9, -100, 24, 25, -1, 0 }
-                     select x2;
+            var q2 = from x2 in new int[] { 55, 49, 9, -100, 24, 25, -1, 0 } select x2;
 
-            var q = from x3 in q1
-                    from x4 in q2
-                    select new { a1 = x3, a2 = x4 };
+            var q = from x3 in q1 from x4 in q2 select new { a1 = x3, a2 = x4 };
 
             Assert.Equal(q.ToLookup(e => e.a1), q.ToLookup(e => e.a1));
         }
@@ -68,7 +80,7 @@ namespace System.Linq.Tests
         {
             string[] key = { "Chris" };
             int[] element = { 50 };
-            var source = new [] { new {Name = "risCh", Score = 50} };
+            var source = new[] { new { Name = "risCh", Score = 50 } };
 
             AssertMatches(key, source, source.ToLookup(e => e.Name, new AnagramEqualityComparer()));
         }
@@ -78,13 +90,13 @@ namespace System.Linq.Tests
         {
             string[] key = { "Chris", "Prakash", "Tim", "Robert", "Brian" };
             int[] element = { 50, 100, 95, 60, 80 };
-            var source = new []
+            var source = new[]
             {
                 new { Name = key[0], Score = element[0] },
                 new { Name = key[1], Score = element[1] },
                 new { Name = key[2], Score = element[2] },
                 new { Name = key[3], Score = element[3] },
-                new { Name = key[4], Score = element[4] }
+                new { Name = key[4], Score = element[4] },
             };
 
             AssertMatches(key, element, source.ToLookup(e => e.Name, e => e.Score));
@@ -102,10 +114,14 @@ namespace System.Linq.Tests
                 new { Name = key[2], Score = element[5] },
                 new { Name = key[1], Score = element[3] },
                 new { Name = key[0], Score = element[1] },
-                new { Name = key[1], Score = element[4] }
+                new { Name = key[1], Score = element[4] },
             };
 
-            AssertMatches(key, element, source.ToLookup(e => e.Name, e => e.Score, new AnagramEqualityComparer()));
+            AssertMatches(
+                key,
+                element,
+                source.ToLookup(e => e.Name, e => e.Score, new AnagramEqualityComparer())
+            );
         }
 
         [Fact]
@@ -120,10 +136,14 @@ namespace System.Linq.Tests
                 new { Name = key[2], Score = element[5] },
                 new { Name = key[1], Score = element[3] },
                 new { Name = key[0], Score = element[1] },
-                new { Name = key[1], Score = element[4] }
+                new { Name = key[1], Score = element[4] },
             };
 
-            AssertMatches(key, element, source.RunOnce().ToLookup(e => e.Name, e => e.Score, new AnagramEqualityComparer()));
+            AssertMatches(
+                key,
+                element,
+                source.RunOnce().ToLookup(e => e.Name, e => e.Score, new AnagramEqualityComparer())
+            );
         }
 
         [Fact]
@@ -138,7 +158,7 @@ namespace System.Linq.Tests
                 new { Name = key[2], Score = element[5] },
                 new { Name = key[1], Score = element[3] },
                 new { Name = key[0], Score = element[1] },
-                new { Name = key[1], Score = element[4] }
+                new { Name = key[1], Score = element[4] },
             };
 
             Assert.Equal(3, source.ToLookup(e => e.Name, e => e.Score).Count());
@@ -151,7 +171,11 @@ namespace System.Linq.Tests
             int[] element = { };
             var source = key.Zip(element, (k, e) => new { Name = k, Score = e });
 
-            AssertMatches(key, element, source.ToLookup(e => e.Name, e => e.Score, new AnagramEqualityComparer()));
+            AssertMatches(
+                key,
+                element,
+                source.ToLookup(e => e.Name, e => e.Score, new AnagramEqualityComparer())
+            );
         }
 
         [Fact]
@@ -161,77 +185,117 @@ namespace System.Linq.Tests
             string[] element = { null };
             string[] source = new string[] { null };
 
-            AssertMatches(key, element, source.ToLookup(e => e, e => e, EqualityComparer<string>.Default));
+            AssertMatches(
+                key,
+                element,
+                source.ToLookup(e => e, e => e, EqualityComparer<string>.Default)
+            );
         }
 
         [Fact]
         public void NullSource()
         {
             IEnumerable<int> source = null;
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.ToLookup(i => i / 10));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.ToLookup(i => i / 10)
+            );
         }
 
         [Fact]
         public void NullSourceExplicitComparer()
         {
             IEnumerable<int> source = null;
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.ToLookup(i => i / 10, EqualityComparer<int>.Default));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.ToLookup(i => i / 10, EqualityComparer<int>.Default)
+            );
         }
 
         [Fact]
         public void NullSourceElementSelector()
         {
             IEnumerable<int> source = null;
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.ToLookup(i => i / 10, i => i + 2));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.ToLookup(i => i / 10, i => i + 2)
+            );
         }
 
         [Fact]
         public void NullSourceElementSelectorExplicitComparer()
         {
             IEnumerable<int> source = null;
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.ToLookup(i => i / 10, i => i + 2, EqualityComparer<int>.Default));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.ToLookup(i => i / 10, i => i + 2, EqualityComparer<int>.Default)
+            );
         }
 
         [Fact]
         public void NullKeySelector()
         {
             Func<int, int> keySelector = null;
-            AssertExtensions.Throws<ArgumentNullException>("keySelector", () => Enumerable.Range(0, 1000).ToLookup(keySelector));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "keySelector",
+                () => Enumerable.Range(0, 1000).ToLookup(keySelector)
+            );
         }
 
         [Fact]
         public void NullKeySelectorExplicitComparer()
         {
             Func<int, int> keySelector = null;
-            AssertExtensions.Throws<ArgumentNullException>("keySelector", () => Enumerable.Range(0, 1000).ToLookup(keySelector, EqualityComparer<int>.Default));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "keySelector",
+                () => Enumerable.Range(0, 1000).ToLookup(keySelector, EqualityComparer<int>.Default)
+            );
         }
 
         [Fact]
         public void NullKeySelectorElementSelector()
         {
             Func<int, int> keySelector = null;
-            AssertExtensions.Throws<ArgumentNullException>("keySelector", () => Enumerable.Range(0, 1000).ToLookup(keySelector, i => i + 2));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "keySelector",
+                () => Enumerable.Range(0, 1000).ToLookup(keySelector, i => i + 2)
+            );
         }
 
         [Fact]
         public void NullKeySelectorElementSelectorExplicitComparer()
         {
             Func<int, int> keySelector = null;
-            AssertExtensions.Throws<ArgumentNullException>("keySelector", () => Enumerable.Range(0, 1000).ToLookup(keySelector, i => i + 2, EqualityComparer<int>.Default));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "keySelector",
+                () =>
+                    Enumerable
+                        .Range(0, 1000)
+                        .ToLookup(keySelector, i => i + 2, EqualityComparer<int>.Default)
+            );
         }
 
         [Fact]
         public void NullElementSelector()
         {
             Func<int, int> elementSelector = null;
-            AssertExtensions.Throws<ArgumentNullException>("elementSelector", () => Enumerable.Range(0, 1000).ToLookup(i => i / 10, elementSelector));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "elementSelector",
+                () => Enumerable.Range(0, 1000).ToLookup(i => i / 10, elementSelector)
+            );
         }
 
         [Fact]
         public void NullElementSelectorExplicitComparer()
         {
             Func<int, int> elementSelector = null;
-            AssertExtensions.Throws<ArgumentNullException>("elementSelector", () => Enumerable.Range(0, 1000).ToLookup(i => i / 10, elementSelector, EqualityComparer<int>.Default));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "elementSelector",
+                () =>
+                    Enumerable
+                        .Range(0, 1000)
+                        .ToLookup(i => i / 10, elementSelector, EqualityComparer<int>.Default)
+            );
         }
 
         [Theory]
@@ -248,22 +312,26 @@ namespace System.Linq.Tests
                 new Role { Id = 3 },
             };
 
-            var memberships = Enumerable.Range(0, 50).Select(i => new Membership
-            {
-                Id = i,
-                Role = roles[i % 3],
-                CountMe = i % 3 == 0
-            });
+            var memberships = Enumerable
+                .Range(0, 50)
+                .Select(i => new Membership
+                {
+                    Id = i,
+                    Role = roles[i % 3],
+                    CountMe = i % 3 == 0,
+                });
 
             //Run actual test
             var grouping = memberships.GroupBy(
                 m => m.Role,
-                (role, mems) => new RoleMetadata
-                {
-                    Role = role,
-                    CountA = mems.Count(m => m.CountMe),
-                    CountrB = mems.Count(m => !m.CountMe)
-                });
+                (role, mems) =>
+                    new RoleMetadata
+                    {
+                        Role = role,
+                        CountA = mems.Count(m => m.CountMe),
+                        CountrB = mems.Count(m => !m.CountMe),
+                    }
+            );
 
             IEnumerable<RoleMetadata> result;
             switch (enumType)
@@ -281,9 +349,24 @@ namespace System.Linq.Tests
 
             var expected = new[]
             {
-                new RoleMetadata {Role = new Role {Id = 1}, CountA = 17, CountrB = 0 },
-                new RoleMetadata {Role = new Role {Id = 2}, CountA = 0, CountrB = 17 },
-                new RoleMetadata {Role = new Role {Id = 3}, CountA = 0, CountrB = 16 }
+                new RoleMetadata
+                {
+                    Role = new Role { Id = 1 },
+                    CountA = 17,
+                    CountrB = 0,
+                },
+                new RoleMetadata
+                {
+                    Role = new Role { Id = 2 },
+                    CountA = 0,
+                    CountrB = 17,
+                },
+                new RoleMetadata
+                {
+                    Role = new Role { Id = 3 },
+                    CountA = 0,
+                    CountrB = 16,
+                },
             };
 
             Assert.Equal(expected, result);
@@ -314,8 +397,11 @@ namespace System.Linq.Tests
             public int CountA { get; set; }
             public int CountrB { get; set; }
 
-            public bool Equals(RoleMetadata other)
-                => other != null && Role.Equals(other.Role) && CountA == other.CountA && CountrB == other.CountrB;
+            public bool Equals(RoleMetadata other) =>
+                other != null
+                && Role.Equals(other.Role)
+                && CountA == other.CountA
+                && CountrB == other.CountrB;
 
             public override bool Equals(object obj) => Equals(obj as RoleMetadata);
 

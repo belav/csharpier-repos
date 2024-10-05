@@ -1,11 +1,11 @@
-// Copyright (c) Microsoft Corporation. All rights reserved. 
-//  
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, 
-// WHETHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED 
-// WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE. 
-// THE ENTIRE RISK OF USE OR RESULTS IN CONNECTION WITH THE USE OF THIS CODE 
-// AND INFORMATION REMAINS WITH THE USER. 
-//  
+// Copyright (c) Microsoft Corporation. All rights reserved.
+//
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
+// WHETHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED
+// WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// THE ENTIRE RISK OF USE OR RESULTS IN CONNECTION WITH THE USE OF THIS CODE
+// AND INFORMATION REMAINS WITH THE USER.
+//
 
 /*********************************************************************
  * NOTE: A copy of this file exists at: WF\Common\Shared
@@ -19,9 +19,9 @@ namespace System.Workflow.Activities.Common
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Reflection;
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
+    using System.Reflection;
     using System.Workflow.ComponentModel;
 
     #endregion
@@ -33,8 +33,9 @@ namespace System.Workflow.Activities.Common
     {
         Continue = 0,
         Skip = 1,
-        Abort = 2
+        Abort = 2,
     }
+
     #region Class WalkerEventArgs
 
     internal sealed class WalkerEventArgs : EventArgs
@@ -53,7 +54,12 @@ namespace System.Workflow.Activities.Common
             this.currentValue = null;
         }
 
-        internal WalkerEventArgs(Activity currentActivity, object currentValue, PropertyInfo currentProperty, object currentPropertyOwner)
+        internal WalkerEventArgs(
+            Activity currentActivity,
+            object currentValue,
+            PropertyInfo currentProperty,
+            object currentPropertyOwner
+        )
             : this(currentActivity)
         {
             this.currentPropertyOwner = currentPropertyOwner;
@@ -63,49 +69,31 @@ namespace System.Workflow.Activities.Common
 
         public WalkerAction Action
         {
-            get
-            {
-                return this.action;
-            }
-            set
-            {
-                this.action = value;
-            }
+            get { return this.action; }
+            set { this.action = value; }
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         public PropertyInfo CurrentProperty
         {
-            get
-            {
-                return this.currentProperty;
-            }
+            get { return this.currentProperty; }
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         public object CurrentPropertyOwner
         {
-            get
-            {
-                return this.currentPropertyOwner;
-            }
+            get { return this.currentPropertyOwner; }
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         public object CurrentValue
         {
-            get
-            {
-                return this.currentValue;
-            }
+            get { return this.currentValue; }
         }
 
         public Activity CurrentActivity
         {
-            get
-            {
-                return this.currentActivity;
-            }
+            get { return this.currentActivity; }
         }
     }
 
@@ -124,9 +112,7 @@ namespace System.Workflow.Activities.Common
         #region Methods
 
         public Walker()
-            : this(false)
-        {
-        }
+            : this(false) { }
 
         public Walker(bool useEnabledActivities)
         {
@@ -167,7 +153,11 @@ namespace System.Workflow.Activities.Common
                 {
                     if (useEnabledActivities)
                     {
-                        foreach (Activity activity2 in Helpers.GetAllEnabledActivities((CompositeActivity)activity))
+                        foreach (
+                            Activity activity2 in Helpers.GetAllEnabledActivities(
+                                (CompositeActivity)activity
+                            )
+                        )
                             queue.Enqueue(activity2);
                     }
                     else
@@ -188,7 +178,8 @@ namespace System.Workflow.Activities.Common
         {
             Activity currentActivity = obj as Activity;
 
-            PropertyInfo[] props = obj.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            PropertyInfo[] props = obj.GetType()
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance);
             foreach (PropertyInfo prop in props)
             {
                 // !!Work around: no indexer property walking
@@ -203,7 +194,10 @@ namespace System.Workflow.Activities.Common
                 //if so then we should compare if the dynamic property values match with the property type
                 //if not we bail out
                 object propValue = null;
-                DependencyProperty dependencyProperty = DependencyProperty.FromName(prop.Name, obj.GetType());
+                DependencyProperty dependencyProperty = DependencyProperty.FromName(
+                    prop.Name,
+                    obj.GetType()
+                );
                 if (dependencyProperty != null && currentActivity != null)
                 {
                     if (currentActivity.IsBindingSet(dependencyProperty))
@@ -240,7 +234,12 @@ namespace System.Workflow.Activities.Common
                     {
                         if (FoundProperty != null)
                         {
-                            WalkerEventArgs args = new WalkerEventArgs(activity, childObj, null, propValue);
+                            WalkerEventArgs args = new WalkerEventArgs(
+                                activity,
+                                childObj,
+                                null,
+                                propValue
+                            );
                             FoundProperty(this, args);
                             if (args.Action == WalkerAction.Skip)
                                 continue;
@@ -266,11 +265,19 @@ namespace System.Workflow.Activities.Common
         private static DesignerSerializationVisibility GetSerializationVisibility(PropertyInfo prop)
         {
             // work around!!! for Activities collection
-            if (prop.DeclaringType == typeof(CompositeActivity) && string.Equals(prop.Name, "Activities", StringComparison.Ordinal))
+            if (
+                prop.DeclaringType == typeof(CompositeActivity)
+                && string.Equals(prop.Name, "Activities", StringComparison.Ordinal)
+            )
                 return DesignerSerializationVisibility.Hidden;
 
             DesignerSerializationVisibility visibility = DesignerSerializationVisibility.Visible;
-            DesignerSerializationVisibilityAttribute[] visibilityAttrs = (DesignerSerializationVisibilityAttribute[])prop.GetCustomAttributes(typeof(DesignerSerializationVisibilityAttribute), true);
+            DesignerSerializationVisibilityAttribute[] visibilityAttrs =
+                (DesignerSerializationVisibilityAttribute[])
+                    prop.GetCustomAttributes(
+                        typeof(DesignerSerializationVisibilityAttribute),
+                        true
+                    );
             if (visibilityAttrs.Length > 0)
                 visibility = visibilityAttrs[0].Visibility;
 
@@ -280,7 +287,8 @@ namespace System.Workflow.Activities.Common
         private static bool IsBrowsableType(Type type)
         {
             bool browsable = false;
-            BrowsableAttribute[] browsableAttrs = (BrowsableAttribute[])type.GetCustomAttributes(typeof(BrowsableAttribute), true);
+            BrowsableAttribute[] browsableAttrs = (BrowsableAttribute[])
+                type.GetCustomAttributes(typeof(BrowsableAttribute), true);
             if (browsableAttrs.Length > 0)
                 browsable = browsableAttrs[0].Browsable;
             return browsable;

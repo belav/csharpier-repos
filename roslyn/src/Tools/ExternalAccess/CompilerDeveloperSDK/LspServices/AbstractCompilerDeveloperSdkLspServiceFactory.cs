@@ -8,9 +8,14 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.CompilerDeveloperSdk;
 
 internal abstract class AbstractCompilerDeveloperSdkLspServiceFactory : ILspServiceFactory
 {
-    public abstract AbstractCompilerDeveloperSdkLspService CreateILspService(CompilerDeveloperSdkLspServices lspServices);
+    public abstract AbstractCompilerDeveloperSdkLspService CreateILspService(
+        CompilerDeveloperSdkLspServices lspServices
+    );
 
-    ILspService ILspServiceFactory.CreateILspService(LspServices lspServices, WellKnownLspServerKinds serverKind)
+    ILspService ILspServiceFactory.CreateILspService(
+        LspServices lspServices,
+        WellKnownLspServerKinds serverKind
+    )
     {
         return CreateILspService(new CompilerDeveloperSdkLspServices(lspServices));
     }

@@ -21,7 +21,8 @@ namespace System.Runtime.Caching
             set { _absExpiry = value; }
         }
 
-        public Collection<ChangeMonitor> ChangeMonitors => _changeMonitors ??= new Collection<ChangeMonitor>();
+        public Collection<ChangeMonitor> ChangeMonitors =>
+            _changeMonitors ??= new Collection<ChangeMonitor>();
 
         public CacheItemPriority Priority
         {

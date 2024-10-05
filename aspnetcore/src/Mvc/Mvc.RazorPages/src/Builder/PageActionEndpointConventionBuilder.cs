@@ -16,7 +16,11 @@ public sealed class PageActionEndpointConventionBuilder : IEndpointConventionBui
     private readonly List<Action<EndpointBuilder>> _conventions;
     private readonly List<Action<EndpointBuilder>> _finallyConventions;
 
-    internal PageActionEndpointConventionBuilder(object @lock, List<Action<EndpointBuilder>> conventions, List<Action<EndpointBuilder>> finallyConventions)
+    internal PageActionEndpointConventionBuilder(
+        object @lock,
+        List<Action<EndpointBuilder>> conventions,
+        List<Action<EndpointBuilder>> finallyConventions
+    )
     {
         _lock = @lock;
         _conventions = conventions;
@@ -47,6 +51,7 @@ public sealed class PageActionEndpointConventionBuilder : IEndpointConventionBui
         lock (_lock)
         {
             _finallyConventions.Add(finalConvention);
-        };
+        }
+        ;
     }
 }

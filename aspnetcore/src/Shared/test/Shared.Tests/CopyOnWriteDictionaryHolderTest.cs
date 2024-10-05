@@ -15,10 +15,10 @@ public class CopyOnWriteDictionaryHolderTest
     {
         // Arrange
         var source = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
-            {
-                { "test-key", "test-value" },
-                { "key2", "key2-value" }
-            };
+        {
+            { "test-key", "test-value" },
+            { "key2", "key2-value" },
+        };
 
         var holder = new CopyOnWriteDictionaryHolder<string, object>(source);
 
@@ -41,10 +41,10 @@ public class CopyOnWriteDictionaryHolderTest
     {
         // Arrange
         var source = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
-            {
-                { "key1", "value1" },
-                { "key2", "value2" }
-            };
+        {
+            { "key1", "value1" },
+            { "key2", "value2" },
+        };
 
         var holder = new CopyOnWriteDictionaryHolder<string, object>(source);
 
@@ -66,10 +66,10 @@ public class CopyOnWriteDictionaryHolderTest
     {
         // Arrange
         var source = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
-            {
-                { "key1", "value1" },
-                { "key2", "value2" }
-            };
+        {
+            { "key1", "value1" },
+            { "key2", "value2" },
+        };
 
         var holder = new CopyOnWriteDictionaryHolder<string, object>(source);
 

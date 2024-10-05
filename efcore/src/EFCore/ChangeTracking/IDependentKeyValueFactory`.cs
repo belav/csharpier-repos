@@ -49,7 +49,10 @@ public interface IDependentKeyValueFactory<TKey> : IDependentKeyValueFactory
     /// <param name="key">The key instance.</param>
     /// <returns><see langword="true" /> if the key instance was created; <see langword="false" /> otherwise.</returns>
     [ContractAnnotation("=>true, key:notnull; =>false, key:null")]
-    bool TryCreateFromPreStoreGeneratedCurrentValues(IUpdateEntry entry, [NotNullWhen(true)] out TKey? key);
+    bool TryCreateFromPreStoreGeneratedCurrentValues(
+        IUpdateEntry entry,
+        [NotNullWhen(true)] out TKey? key
+    );
 
     /// <summary>
     ///     Attempts to create a key instance using original foreign key values from the given <see cref="IUpdateEntry" />.

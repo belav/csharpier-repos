@@ -11,19 +11,26 @@ namespace System.Configuration
         private readonly long _resolution;
 
         public TimeSpanValidator(TimeSpan minValue, TimeSpan maxValue)
-            : this(minValue, maxValue, false, 0)
-        { }
+            : this(minValue, maxValue, false, 0) { }
 
         public TimeSpanValidator(TimeSpan minValue, TimeSpan maxValue, bool rangeIsExclusive)
-            : this(minValue, maxValue, rangeIsExclusive, 0)
-        { }
+            : this(minValue, maxValue, rangeIsExclusive, 0) { }
 
-        public TimeSpanValidator(TimeSpan minValue, TimeSpan maxValue, bool rangeIsExclusive, long resolutionInSeconds)
+        public TimeSpanValidator(
+            TimeSpan minValue,
+            TimeSpan maxValue,
+            bool rangeIsExclusive,
+            long resolutionInSeconds
+        )
         {
-            if (resolutionInSeconds < 0) throw new ArgumentOutOfRangeException(nameof(resolutionInSeconds));
+            if (resolutionInSeconds < 0)
+                throw new ArgumentOutOfRangeException(nameof(resolutionInSeconds));
 
             if (minValue > maxValue)
-                throw new ArgumentOutOfRangeException(nameof(minValue), SR.Validator_min_greater_than_max);
+                throw new ArgumentOutOfRangeException(
+                    nameof(minValue),
+                    SR.Validator_min_greater_than_max
+                );
 
             _minValue = minValue;
             _maxValue = maxValue;
@@ -41,11 +48,13 @@ namespace System.Configuration
         {
             ValidatorUtils.HelperParamValidation(value, typeof(TimeSpan));
 
-            ValidatorUtils.ValidateScalar((TimeSpan)value,
+            ValidatorUtils.ValidateScalar(
+                (TimeSpan)value,
                 _minValue,
                 _maxValue,
                 _resolution,
-                _flags == ValidationFlags.ExclusiveRange);
+                _flags == ValidationFlags.ExclusiveRange
+            );
         }
 
         private enum ValidationFlags

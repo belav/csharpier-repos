@@ -5,11 +5,17 @@ namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal;
 
 internal static class ErrorMessageHelper
 {
-    internal static string BuildErrorMessage(string message, Exception exception, bool? includeExceptionDetails)
+    internal static string BuildErrorMessage(
+        string message,
+        Exception exception,
+        bool? includeExceptionDetails
+    )
     {
         if (includeExceptionDetails ?? false)
         {
-            return message + " " + CommonGrpcProtocolHelpers.ConvertToRpcExceptionMessage(exception);
+            return message
+                + " "
+                + CommonGrpcProtocolHelpers.ConvertToRpcExceptionMessage(exception);
         }
 
         return message;

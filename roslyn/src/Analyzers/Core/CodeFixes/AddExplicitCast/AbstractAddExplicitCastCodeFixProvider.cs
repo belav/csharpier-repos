@@ -19,7 +19,8 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
 {
-    internal abstract partial class AbstractAddExplicitCastCodeFixProvider<TExpressionSyntax> : SyntaxEditorBasedCodeFixProvider
+    internal abstract partial class AbstractAddExplicitCastCodeFixProvider<TExpressionSyntax>
+        : SyntaxEditorBasedCodeFixProvider
         where TExpressionSyntax : SyntaxNode
     {
         /// <summary>
@@ -29,7 +30,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
         private const int MaximumConversionOptions = 3;
 
         protected abstract TExpressionSyntax Cast(TExpressionSyntax expression, ITypeSymbol type);
-        protected abstract void GetPartsOfCastOrConversionExpression(TExpressionSyntax expression, out SyntaxNode type, out SyntaxNode castedExpression);
+        protected abstract void GetPartsOfCastOrConversionExpression(
+            TExpressionSyntax expression,
+            out SyntaxNode type,
+            out SyntaxNode castedExpression
+        );
 
         /// <summary>
         /// Output the current type information of the target node and the conversion type(s) that the target node is
@@ -49,9 +54,14 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
         /// "potentialConversionTypes" False, if there is no potential conversion pair.
         /// </returns>
         protected abstract bool TryGetTargetTypeInfo(
-            Document document, SemanticModel semanticModel, SyntaxNode root,
-            string diagnosticId, TExpressionSyntax spanNode, CancellationToken cancellationToken,
-            out ImmutableArray<(TExpressionSyntax node, ITypeSymbol type)> potentialConversionTypes);
+            Document document,
+            SemanticModel semanticModel,
+            SyntaxNode root,
+            string diagnosticId,
+            TExpressionSyntax spanNode,
+            CancellationToken cancellationToken,
+            out ImmutableArray<(TExpressionSyntax node, ITypeSymbol type)> potentialConversionTypes
+        );
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
@@ -59,45 +69,86 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
             var cancellationToken = context.CancellationToken;
             var diagnostic = context.Diagnostics.First();
 
-            var root = await document.GetRequiredSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(context.CancellationToken)
+                .ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
-            var spanNode = root.FindNode(diagnostic.Location.SourceSpan, getInnermostNodeForTie: true)
-                .GetAncestorsOrThis<TExpressionSyntax>().FirstOrDefault();
+            var spanNode = root.FindNode(
+                    diagnostic.Location.SourceSpan,
+                    getInnermostNodeForTie: true
+                )
+                .GetAncestorsOrThis<TExpressionSyntax>()
+                .FirstOrDefault();
             if (spanNode == null)
                 return;
 
-            var hasSolution = TryGetTargetTypeInfo(document,
-                semanticModel, root, diagnostic.Id, spanNode, cancellationToken,
-                out var potentialConversionTypes);
+            var hasSolution = TryGetTargetTypeInfo(
+                document,
+                semanticModel,
+                root,
+                diagnostic.Id,
+                spanNode,
+                cancellationToken,
+                out var potentialConversionTypes
+            );
             if (!hasSolution)
                 return;
 
             if (potentialConversionTypes.Length == 1)
             {
-                RegisterCodeFix(context, CodeFixesResources.Add_explicit_cast, nameof(CodeFixesResources.Add_explicit_cast));
+                RegisterCodeFix(
+                    context,
+                    CodeFixesResources.Add_explicit_cast,
+                    nameof(CodeFixesResources.Add_explicit_cast)
+                );
                 return;
             }
 
             using var actions = TemporaryArray<CodeAction>.Empty;
 
             // MaximumConversionOptions: we show at most [MaximumConversionOptions] options for this code fixer
-            for (var i = 0; i < Math.Min(MaximumConversionOptions, potentialConversionTypes.Length); i++)
+            for (
+                var i = 0;
+                i < Math.Min(MaximumConversionOptions, potentialConversionTypes.Length);
+                i++
+            )
             {
                 var targetNode = potentialConversionTypes[i].node;
                 var conversionType = potentialConversionTypes[i].type;
                 var title = GetSubItemName(semanticModel, targetNode.SpanStart, conversionType);
 
-                actions.Add(CodeAction.Create(
-                    title,
-                    cancellationToken => Task.FromResult(document.WithSyntaxRoot(
-                        ApplyFix(document, semanticModel, root, targetNode, conversionType, cancellationToken))),
-                    title));
+                actions.Add(
+                    CodeAction.Create(
+                        title,
+                        cancellationToken =>
+                            Task.FromResult(
+                                document.WithSyntaxRoot(
+                                    ApplyFix(
+                                        document,
+                                        semanticModel,
+                                        root,
+                                        targetNode,
+                                        conversionType,
+                                        cancellationToken
+                                    )
+                                )
+                            ),
+                        title
+                    )
+                );
             }
 
             context.RegisterCodeFix(
-                CodeAction.Create(CodeFixesResources.Add_explicit_cast, actions.ToImmutableAndClear(), isInlinable: false),
-                context.Diagnostics);
+                CodeAction.Create(
+                    CodeFixesResources.Add_explicit_cast,
+                    actions.ToImmutableAndClear(),
+                    isInlinable: false
+                ),
+                context.Diagnostics
+            );
         }
 
         private SyntaxNode ApplyFix(
@@ -106,55 +157,88 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
             SyntaxNode currentRoot,
             TExpressionSyntax targetNode,
             ITypeSymbol conversionType,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var semanticFacts = document.GetRequiredLanguageService<ISemanticFactsService>();
 
             // if the node we're about to cast already has a cast, replace that cast if both are reference-identity downcasts.
-            if (syntaxFacts.IsCastExpression(targetNode) || syntaxFacts.IsConversionExpression(targetNode))
+            if (
+                syntaxFacts.IsCastExpression(targetNode)
+                || syntaxFacts.IsConversionExpression(targetNode)
+            )
             {
-                GetPartsOfCastOrConversionExpression(targetNode, out var castTypeNode, out var castedExpression);
+                GetPartsOfCastOrConversionExpression(
+                    targetNode,
+                    out var castTypeNode,
+                    out var castedExpression
+                );
 
                 var castType = semanticModel.GetTypeInfo(castTypeNode, cancellationToken).Type;
                 if (castType != null)
                 {
-                    var firstConversion = semanticFacts.ClassifyConversion(semanticModel, castedExpression, castType);
-                    var secondConversion = semanticModel.Compilation.ClassifyCommonConversion(castType, conversionType);
+                    var firstConversion = semanticFacts.ClassifyConversion(
+                        semanticModel,
+                        castedExpression,
+                        castType
+                    );
+                    var secondConversion = semanticModel.Compilation.ClassifyCommonConversion(
+                        castType,
+                        conversionType
+                    );
 
-                    if (firstConversion is { IsImplicit: false, IsReference: true } or { IsIdentity: true } &&
-                        secondConversion is { IsImplicit: false, IsReference: true })
+                    if (
+                        firstConversion
+                            is { IsImplicit: false, IsReference: true }
+                                or { IsIdentity: true }
+                        && secondConversion is { IsImplicit: false, IsReference: true }
+                    )
                     {
                         return currentRoot.ReplaceNode(
                             targetNode,
                             this.Cast((TExpressionSyntax)castedExpression, conversionType)
                                 .WithTriviaFrom(targetNode)
-                                .WithAdditionalAnnotations(Simplifier.Annotation));
+                                .WithAdditionalAnnotations(Simplifier.Annotation)
+                        );
                     }
                 }
             }
 
             return currentRoot.ReplaceNode(
                 targetNode,
-                this.Cast(targetNode, conversionType).WithAdditionalAnnotations(Simplifier.Annotation));
+                this.Cast(targetNode, conversionType)
+                    .WithAdditionalAnnotations(Simplifier.Annotation)
+            );
         }
 
-        private static string GetSubItemName(SemanticModel semanticModel, int position, ITypeSymbol conversionType)
+        private static string GetSubItemName(
+            SemanticModel semanticModel,
+            int position,
+            ITypeSymbol conversionType
+        )
         {
             return string.Format(
                 CodeFixesResources.Convert_type_to_0,
-                conversionType.ToMinimalDisplayString(semanticModel, position));
+                conversionType.ToMinimalDisplayString(semanticModel, position)
+            );
         }
 
-        protected static ImmutableArray<(TExpressionSyntax, ITypeSymbol)> FilterValidPotentialConversionTypes(
+        protected static ImmutableArray<(
+            TExpressionSyntax,
+            ITypeSymbol
+        )> FilterValidPotentialConversionTypes(
             Document document,
             SemanticModel semanticModel,
-            ArrayBuilder<(TExpressionSyntax node, ITypeSymbol type)> mutablePotentialConversionTypes)
+            ArrayBuilder<(TExpressionSyntax node, ITypeSymbol type)> mutablePotentialConversionTypes
+        )
         {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var semanticFacts = document.GetRequiredLanguageService<ISemanticFactsService>();
 
-            using var _ = ArrayBuilder<(TExpressionSyntax, ITypeSymbol)>.GetInstance(out var validPotentialConversionTypes);
+            using var _ = ArrayBuilder<(TExpressionSyntax, ITypeSymbol)>.GetInstance(
+                out var validPotentialConversionTypes
+            );
             foreach (var conversionTuple in mutablePotentialConversionTypes)
             {
                 var targetNode = conversionTuple.node;
@@ -163,8 +247,12 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
                 // For cases like object creation expression. for example:
                 // Derived d = [||]new Base();
                 // It is always invalid except the target node has explicit conversion operator or is numeric.
-                if (syntaxFacts.IsObjectCreationExpression(targetNode) &&
-                    !semanticFacts.ClassifyConversion(semanticModel, targetNode, targetNodeConversionType).IsUserDefined)
+                if (
+                    syntaxFacts.IsObjectCreationExpression(targetNode)
+                    && !semanticFacts
+                        .ClassifyConversion(semanticModel, targetNode, targetNodeConversionType)
+                        .IsUserDefined
+                )
                 {
                     continue;
                 }
@@ -176,7 +264,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
         }
 
         protected static bool FindCorrespondingParameterByName(
-            string argumentName, ImmutableArray<IParameterSymbol> parameters, ref int parameterIndex)
+            string argumentName,
+            ImmutableArray<IParameterSymbol> parameters,
+            ref int parameterIndex
+        )
         {
             for (var j = 0; j < parameters.Length; j++)
             {
@@ -195,28 +286,54 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CodeActionOptionsProvider fallbackOptions,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-            var spanNodes = diagnostics.SelectAsArray(
-                d => root.FindNode(d.Location.SourceSpan, getInnermostNodeForTie: true)
-                         .GetAncestorsOrThis<TExpressionSyntax>().First());
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var spanNodes = diagnostics.SelectAsArray(d =>
+                root.FindNode(d.Location.SourceSpan, getInnermostNodeForTie: true)
+                    .GetAncestorsOrThis<TExpressionSyntax>()
+                    .First()
+            );
 
-            await editor.ApplyExpressionLevelSemanticEditsAsync(
-                document, spanNodes,
-                (semanticModel, spanNode) => true,
-                (semanticModel, root, spanNode) =>
-                {
-                    // All diagnostics have the same error code
-                    if (TryGetTargetTypeInfo(document, semanticModel, root, diagnostics[0].Id, spanNode, cancellationToken, out var potentialConversionTypes) &&
-                        potentialConversionTypes.Length == 1)
+            await editor
+                .ApplyExpressionLevelSemanticEditsAsync(
+                    document,
+                    spanNodes,
+                    (semanticModel, spanNode) => true,
+                    (semanticModel, root, spanNode) =>
                     {
-                        return ApplyFix(document, semanticModel, root, potentialConversionTypes[0].node, potentialConversionTypes[0].type, cancellationToken);
-                    }
+                        // All diagnostics have the same error code
+                        if (
+                            TryGetTargetTypeInfo(
+                                document,
+                                semanticModel,
+                                root,
+                                diagnostics[0].Id,
+                                spanNode,
+                                cancellationToken,
+                                out var potentialConversionTypes
+                            )
+                            && potentialConversionTypes.Length == 1
+                        )
+                        {
+                            return ApplyFix(
+                                document,
+                                semanticModel,
+                                root,
+                                potentialConversionTypes[0].node,
+                                potentialConversionTypes[0].type,
+                                cancellationToken
+                            );
+                        }
 
-                    return root;
-                },
-                cancellationToken).ConfigureAwait(false);
+                        return root;
+                    },
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
     }
 }

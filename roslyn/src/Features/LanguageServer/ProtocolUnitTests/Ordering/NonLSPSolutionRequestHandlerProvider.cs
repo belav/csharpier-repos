@@ -13,22 +13,29 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
 {
-    [ExportCSharpVisualBasicStatelessLspService(typeof(NonLSPSolutionRequestHandler)), PartNotDiscoverable, Shared]
+    [
+        ExportCSharpVisualBasicStatelessLspService(typeof(NonLSPSolutionRequestHandler)),
+        PartNotDiscoverable,
+        Shared
+    ]
     [Method(MethodName)]
-    internal class NonLSPSolutionRequestHandler : ILspServiceRequestHandler<TestRequest, TestResponse>
+    internal class NonLSPSolutionRequestHandler
+        : ILspServiceRequestHandler<TestRequest, TestResponse>
     {
         public const string MethodName = nameof(NonLSPSolutionRequestHandler);
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public NonLSPSolutionRequestHandler()
-        {
-        }
+        public NonLSPSolutionRequestHandler() { }
 
         public bool MutatesSolutionState => false;
         public bool RequiresLSPSolution => false;
 
-        public Task<TestResponse> HandleRequestAsync(TestRequest request, RequestContext context, CancellationToken cancellationToken)
+        public Task<TestResponse> HandleRequestAsync(
+            TestRequest request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             Assert.Null(context.Solution);
 

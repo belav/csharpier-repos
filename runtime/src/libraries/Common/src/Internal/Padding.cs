@@ -14,7 +14,5 @@ namespace Internal
 
     /// <summary>Padding structure used to minimize false sharing</summary>
     [StructLayout(LayoutKind.Explicit, Size = PaddingHelpers.CACHE_LINE_SIZE - sizeof(int))]
-    internal struct PaddingFor32
-    {
-    }
+    internal struct PaddingFor32 { }
 }

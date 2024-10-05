@@ -12,7 +12,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test;
 
-public abstract class SqlStoreOnlyUsersTestBase<TUser, TKey> : UserManagerSpecificationTestBase<TUser, TKey>, IClassFixture<ScratchDatabaseFixture>
+public abstract class SqlStoreOnlyUsersTestBase<TUser, TKey>
+    : UserManagerSpecificationTestBase<TUser, TKey>,
+        IClassFixture<ScratchDatabaseFixture>
     where TUser : IdentityUser<TKey>, new()
     where TKey : IEquatable<TKey>
 {
@@ -25,26 +27,37 @@ public abstract class SqlStoreOnlyUsersTestBase<TUser, TKey> : UserManagerSpecif
 
     public class TestUserDbContext : IdentityUserContext<TUser, TKey>
     {
-        public TestUserDbContext(DbContextOptions options) : base(options) { }
+        public TestUserDbContext(DbContextOptions options)
+            : base(options) { }
     }
 
-    protected override TUser CreateTestUser(string namePrefix = "", string email = "", string phoneNumber = "",
-        bool lockoutEnabled = false, DateTimeOffset? lockoutEnd = default(DateTimeOffset?), bool useNamePrefixAsUserName = false)
+    protected override TUser CreateTestUser(
+        string namePrefix = "",
+        string email = "",
+        string phoneNumber = "",
+        bool lockoutEnabled = false,
+        DateTimeOffset? lockoutEnd = default(DateTimeOffset?),
+        bool useNamePrefixAsUserName = false
+    )
     {
         return new TUser
         {
-            UserName = useNamePrefixAsUserName ? namePrefix : string.Format(CultureInfo.InvariantCulture, "{0}{1}", namePrefix, Guid.NewGuid()),
+            UserName = useNamePrefixAsUserName
+                ? namePrefix
+                : string.Format(CultureInfo.InvariantCulture, "{0}{1}", namePrefix, Guid.NewGuid()),
             Email = email,
             PhoneNumber = phoneNumber,
             LockoutEnabled = lockoutEnabled,
-            LockoutEnd = lockoutEnd
+            LockoutEnd = lockoutEnd,
         };
     }
 
-    protected override Expression<Func<TUser, bool>> UserNameEqualsPredicate(string userName) => u => u.UserName == userName;
+    protected override Expression<Func<TUser, bool>> UserNameEqualsPredicate(string userName) =>
+        u => u.UserName == userName;
 
 #pragma warning disable CA1310 // Specify StringComparison for correctness
-    protected override Expression<Func<TUser, bool>> UserNameStartsWithPredicate(string userName) => u => u.UserName.StartsWith(userName);
+    protected override Expression<Func<TUser, bool>> UserNameStartsWithPredicate(string userName) =>
+        u => u.UserName.StartsWith(userName);
 #pragma warning restore CA1310 // Specify StringComparison for correctness
 
     private TestUserDbContext CreateContext()
@@ -61,7 +74,9 @@ public abstract class SqlStoreOnlyUsersTestBase<TUser, TKey> : UserManagerSpecif
 
     protected override void AddUserStore(IServiceCollection services, object context = null)
     {
-        services.AddSingleton<IUserStore<TUser>>(new UserOnlyStore<TUser, TestUserDbContext, TKey>((TestUserDbContext)context));
+        services.AddSingleton<IUserStore<TUser>>(
+            new UserOnlyStore<TUser, TestUserDbContext, TKey>((TestUserDbContext)context)
+        );
     }
 
     protected override void SetUserPasswordHash(TUser user, string hashedPassword)
@@ -82,19 +97,81 @@ public abstract class SqlStoreOnlyUsersTestBase<TUser, TKey> : UserManagerSpecif
         using (var db = new SqliteConnection(sqlConn.ConnectionString))
         {
             db.Open();
-            Assert.True(DbUtil.VerifyColumns(db, "AspNetUsers", "Id", "UserName", "Email", "PasswordHash", "SecurityStamp",
-                "EmailConfirmed", "PhoneNumber", "PhoneNumberConfirmed", "TwoFactorEnabled", "LockoutEnabled",
-                "LockoutEnd", "AccessFailedCount", "ConcurrencyStamp", "NormalizedUserName", "NormalizedEmail"));
-            Assert.False(DbUtil.VerifyColumns(db, "AspNetRoles", "Id", "Name", "NormalizedName", "ConcurrencyStamp"));
+            Assert.True(
+                DbUtil.VerifyColumns(
+                    db,
+                    "AspNetUsers",
+                    "Id",
+                    "UserName",
+                    "Email",
+                    "PasswordHash",
+                    "SecurityStamp",
+                    "EmailConfirmed",
+                    "PhoneNumber",
+                    "PhoneNumberConfirmed",
+                    "TwoFactorEnabled",
+                    "LockoutEnabled",
+                    "LockoutEnd",
+                    "AccessFailedCount",
+                    "ConcurrencyStamp",
+                    "NormalizedUserName",
+                    "NormalizedEmail"
+                )
+            );
+            Assert.False(
+                DbUtil.VerifyColumns(
+                    db,
+                    "AspNetRoles",
+                    "Id",
+                    "Name",
+                    "NormalizedName",
+                    "ConcurrencyStamp"
+                )
+            );
             Assert.False(DbUtil.VerifyColumns(db, "AspNetUserRoles", "UserId", "RoleId"));
-            Assert.True(DbUtil.VerifyColumns(db, "AspNetUserClaims", "Id", "UserId", "ClaimType", "ClaimValue"));
-            Assert.True(DbUtil.VerifyColumns(db, "AspNetUserLogins", "UserId", "ProviderKey", "LoginProvider", "ProviderDisplayName"));
-            Assert.True(DbUtil.VerifyColumns(db, "AspNetUserTokens", "UserId", "LoginProvider", "Name", "Value"));
+            Assert.True(
+                DbUtil.VerifyColumns(
+                    db,
+                    "AspNetUserClaims",
+                    "Id",
+                    "UserId",
+                    "ClaimType",
+                    "ClaimValue"
+                )
+            );
+            Assert.True(
+                DbUtil.VerifyColumns(
+                    db,
+                    "AspNetUserLogins",
+                    "UserId",
+                    "ProviderKey",
+                    "LoginProvider",
+                    "ProviderDisplayName"
+                )
+            );
+            Assert.True(
+                DbUtil.VerifyColumns(
+                    db,
+                    "AspNetUserTokens",
+                    "UserId",
+                    "LoginProvider",
+                    "Name",
+                    "Value"
+                )
+            );
 
             DbUtil.VerifyIndex(db, "AspNetUsers", "UserNameIndex", isUnique: true);
             DbUtil.VerifyIndex(db, "AspNetUsers", "EmailIndex");
 
-            DbUtil.VerifyMaxLength(dbContext, "AspNetUsers", 256, "UserName", "Email", "NormalizeUserName", "NormalizeEmail");
+            DbUtil.VerifyMaxLength(
+                dbContext,
+                "AspNetUsers",
+                256,
+                "UserName",
+                "Email",
+                "NormalizeUserName",
+                "NormalizeEmail"
+            );
 
             db.Close();
         }
@@ -107,7 +184,9 @@ public abstract class SqlStoreOnlyUsersTestBase<TUser, TKey> : UserManagerSpecif
         var userMgr = CreateManager();
         var user = CreateTestUser();
         IdentityResultAssert.IsSuccess(await userMgr.CreateAsync(user));
-        IdentityResultAssert.IsSuccess(await userMgr.SetAuthenticationTokenAsync(user, "provider", "test", "value"));
+        IdentityResultAssert.IsSuccess(
+            await userMgr.SetAuthenticationTokenAsync(user, "provider", "test", "value")
+        );
 
         Assert.Equal("value", await userMgr.GetAuthenticationTokenAsync(user, "provider", "test"));
 
@@ -143,12 +222,13 @@ public abstract class SqlStoreOnlyUsersTestBase<TUser, TKey> : UserManagerSpecif
         var context = CreateContext();
         var manager = CreateManager(context);
         IdentityResultAssert.IsSuccess(await manager.CreateAsync(user));
-        IdentityResultAssert.IsSuccess(await manager.AddLoginAsync(user, new UserLoginInfo("provider", user.Id.ToString(), "display")));
-        Claim[] userClaims =
-        {
-                new Claim("Whatever", "Value"),
-                new Claim("Whatever2", "Value2")
-            };
+        IdentityResultAssert.IsSuccess(
+            await manager.AddLoginAsync(
+                user,
+                new UserLoginInfo("provider", user.Id.ToString(), "display")
+            )
+        );
+        Claim[] userClaims = { new Claim("Whatever", "Value"), new Claim("Whatever2", "Value2") };
         foreach (var c in userClaims)
         {
             IdentityResultAssert.IsSuccess(await manager.AddClaimAsync(user, c));

@@ -21,7 +21,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         private readonly Func<IEnumerable<object>, bool> _shouldShowMenu;
         private readonly Action _updateMenu;
 
-        public ContextMenuController(int menuId, Func<IEnumerable<object>, bool> shouldShowMenu, Action updateMenu)
+        public ContextMenuController(
+            int menuId,
+            Func<IEnumerable<object>, bool> shouldShowMenu,
+            Action updateMenu
+        )
         {
             _menuId = menuId;
             _shouldShowMenu = shouldShowMenu;
@@ -39,13 +43,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 
             var shell = Package.GetGlobalService(typeof(SVsUIShell)) as IVsUIShell;
             var guidContextMenu = Guids.RoslynGroupId;
-            var locationPoints = new[] { new POINTS() { x = (short)location.X, y = (short)location.Y } };
-            return shell != null && ErrorHandler.Succeeded(shell.ShowContextMenu(
-                0,
-                ref guidContextMenu,
-                _menuId,
-                locationPoints,
-                pCmdTrgtActive: null));
+            var locationPoints = new[]
+            {
+                new POINTS() { x = (short)location.X, y = (short)location.Y },
+            };
+            return shell != null
+                && ErrorHandler.Succeeded(
+                    shell.ShowContextMenu(
+                        0,
+                        ref guidContextMenu,
+                        _menuId,
+                        locationPoints,
+                        pCmdTrgtActive: null
+                    )
+                );
         }
     }
 }

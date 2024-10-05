@@ -38,10 +38,7 @@ namespace System.Speech.Internal.SrgsCompiler
 
         internal new Arc First
         {
-            get
-            {
-                return (Arc)base.First;
-            }
+            get { return (Arc)base.First; }
         }
 
         #endregion
@@ -69,6 +66,7 @@ namespace System.Speech.Internal.SrgsCompiler
             {
                 _item = item;
             }
+
             [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
             public Arc[] AKeys
             {

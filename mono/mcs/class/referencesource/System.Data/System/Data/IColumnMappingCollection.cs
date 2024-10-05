@@ -6,15 +6,13 @@
 // <owner current="true" primary="false">laled</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
+namespace System.Data
+{
     using System;
 
-    public interface IColumnMappingCollection : System.Collections.IList {
-
-        object this[string index] {
-            get;
-            set;
-        }
+    public interface IColumnMappingCollection : System.Collections.IList
+    {
+        object this[string index] { get; set; }
 
         IColumnMapping Add(string sourceColumnName, string dataSetColumnName);
 

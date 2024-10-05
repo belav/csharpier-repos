@@ -40,9 +40,7 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         /// <param name="filterUIHint">The name of the UI control.</param>
         public FilterUIHintAttribute(string filterUIHint)
-            : this(filterUIHint, null, Array.Empty<object>())
-        {
-        }
+            : this(filterUIHint, null, Array.Empty<object>()) { }
 
         /// <summary>
         /// Constructor that accepts both the name of the control as well as the
@@ -52,9 +50,7 @@ namespace System.ComponentModel.DataAnnotations
         /// <param name="presentationLayer">The name of the presentation layer that
         /// supports this control</param>
         public FilterUIHintAttribute(string filterUIHint, string? presentationLayer)
-            : this(filterUIHint, presentationLayer, Array.Empty<object>())
-        {
-        }
+            : this(filterUIHint, presentationLayer, Array.Empty<object>()) { }
 
         /// <summary>
         /// Full constructor that accepts the name of the control, presentation layer,
@@ -63,11 +59,17 @@ namespace System.ComponentModel.DataAnnotations
         /// <param name="filterUIHint">The name of the control</param>
         /// <param name="presentationLayer">The presentation layer</param>
         /// <param name="controlParameters">The list of parameters for the control</param>
-        public FilterUIHintAttribute(string filterUIHint, string? presentationLayer,
-            params object?[] controlParameters)
+        public FilterUIHintAttribute(
+            string filterUIHint,
+            string? presentationLayer,
+            params object?[] controlParameters
+        )
         {
             _implementation = new UIHintAttribute.UIHintImplementation(
-                filterUIHint, presentationLayer, controlParameters);
+                filterUIHint,
+                presentationLayer,
+                controlParameters
+            );
         }
 
         /// <summary>
@@ -84,6 +86,7 @@ namespace System.ComponentModel.DataAnnotations
         /// <returns>true if obj is a FilterUIHintAttribute and its value is the same
         /// as this instance; otherwise, false.</returns>
         public override bool Equals([NotNullWhen(true)] object? obj) =>
-            obj is FilterUIHintAttribute otherAttribute && _implementation.Equals(otherAttribute._implementation);
+            obj is FilterUIHintAttribute otherAttribute
+            && _implementation.Equals(otherAttribute._implementation);
     }
 }

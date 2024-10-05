@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpUseConditionalExpressionForAssignmentDiagnosticAnalyzer,
-        CSharpUseConditionalExpressionForAssignmentCodeFixProvider>;
+        CSharpUseConditionalExpressionForAssignmentCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseConditionalExpression)]
     public partial class UseConditionalExpressionForAssignmentTests
@@ -24,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         private static async Task TestMissingAsync(
             string testCode,
             LanguageVersion languageVersion = LanguageVersion.CSharp8,
-            OptionsCollection? options = null)
+            OptionsCollection? options = null
+        )
         {
             var test = new VerifyCS.Test
             {
@@ -42,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
             string fixedCode,
             LanguageVersion languageVersion = LanguageVersion.CSharp8,
             OptionsCollection? options = null,
-            string? equivalenceKey = null)
+            string? equivalenceKey = null
+        )
         {
             await new VerifyCS.Test
             {
@@ -54,12 +57,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
             }.RunAsync();
         }
 
-        private static readonly OptionsCollection PreferImplicitTypeAlways = new(LanguageNames.CSharp)
-        {
-            { CSharpCodeStyleOptions.VarWhenTypeIsApparent, CodeStyleOption2.TrueWithSilentEnforcement },
-            { CSharpCodeStyleOptions.VarElsewhere, CodeStyleOption2.TrueWithSilentEnforcement },
-            { CSharpCodeStyleOptions.VarForBuiltInTypes, CodeStyleOption2.TrueWithSilentEnforcement },
-        };
+        private static readonly OptionsCollection PreferImplicitTypeAlways =
+            new(LanguageNames.CSharp)
+            {
+                {
+                    CSharpCodeStyleOptions.VarWhenTypeIsApparent,
+                    CodeStyleOption2.TrueWithSilentEnforcement
+                },
+                { CSharpCodeStyleOptions.VarElsewhere, CodeStyleOption2.TrueWithSilentEnforcement },
+                {
+                    CSharpCodeStyleOptions.VarForBuiltInTypes,
+                    CodeStyleOption2.TrueWithSilentEnforcement
+                },
+            };
 
         [Fact]
         public async Task TestOnSimpleAssignment()
@@ -89,7 +99,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         i = true ? 0 : 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43291")]
@@ -120,7 +131,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         i = true ? throw new System.Exception() : 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43291")]
@@ -151,7 +163,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         i = true ? 0 : throw new System.Exception();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43291")]
@@ -173,7 +186,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43291")]
@@ -195,7 +209,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         }
                     }
                 }
-                """, LanguageVersion.CSharp6);
+                """,
+                LanguageVersion.CSharp6
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43291")]
@@ -217,7 +233,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -244,7 +261,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         i = true ? 0 : 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -273,7 +291,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                             i = true ? 0 : 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -295,7 +314,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -326,7 +346,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         this.{|CS1061:i|} = true ? 0 : 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43291")]
@@ -357,7 +378,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         this.{|CS1061:i|} = true ? 0 : throw new System.Exception();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -392,7 +414,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         this.i = true ? 0 : 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -427,7 +450,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         this.i = true ? 0 : 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -459,7 +483,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         int i = true ? 0 : 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43291")]
@@ -491,7 +516,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         int i = true ? 0 : throw new System.Exception();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43291")]
@@ -523,7 +549,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         int i = true ? throw new System.Exception() : 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -555,7 +582,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         int i = true ? 0 : 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -587,7 +615,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         int i = true ? 0 : 1;
                     }
                 }
-                """, LanguageVersion.Latest);
+                """,
+                LanguageVersion.Latest
+            );
         }
 
         [Fact]
@@ -619,7 +649,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         int i = true ? 0 : 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -656,7 +687,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
 
                     int Foo() => 0;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -695,7 +727,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         i = true ? 0 : 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -732,7 +765,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
 
                     bool Bar(int i) => true;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -765,7 +799,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         i = true ? 0 : 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -797,7 +832,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         var i = true ? 0 : 1;
                     }
                 }
-                """, options: new OptionsCollection(LanguageNames.CSharp) { { CSharpCodeStyleOptions.VarForBuiltInTypes, CodeStyleOption2.TrueWithSilentEnforcement } });
+                """,
+                options: new OptionsCollection(LanguageNames.CSharp)
+                {
+                    {
+                        CSharpCodeStyleOptions.VarForBuiltInTypes,
+                        CodeStyleOption2.TrueWithSilentEnforcement
+                    },
+                }
+            );
         }
 
         [Fact]
@@ -829,7 +872,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         int i = true ? 0 : 1;
                     }
                 }
-                """, options: new OptionsCollection(LanguageNames.CSharp) { { CSharpCodeStyleOptions.VarWhenTypeIsApparent, CodeStyleOption2.TrueWithSilentEnforcement } });
+                """,
+                options: new OptionsCollection(LanguageNames.CSharp)
+                {
+                    {
+                        CSharpCodeStyleOptions.VarWhenTypeIsApparent,
+                        CodeStyleOption2.TrueWithSilentEnforcement
+                    },
+                }
+            );
         }
 
         [Fact]
@@ -861,7 +912,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         int i = true ? 0 : 1;
                     }
                 }
-                """, options: new OptionsCollection(LanguageNames.CSharp) { { CSharpCodeStyleOptions.VarElsewhere, CodeStyleOption2.TrueWithSilentEnforcement } });
+                """,
+                options: new OptionsCollection(LanguageNames.CSharp)
+                {
+                    {
+                        CSharpCodeStyleOptions.VarElsewhere,
+                        CodeStyleOption2.TrueWithSilentEnforcement
+                    },
+                }
+            );
         }
 
         [Fact]
@@ -879,7 +938,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -899,7 +959,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         i = 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43291")]
@@ -919,7 +980,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         throw new System.Exception();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -953,7 +1015,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         var o = true ? "a" : (object)"b";
                     }
                 }
-                """, options: PreferImplicitTypeAlways);
+                """,
+                options: PreferImplicitTypeAlways
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43291")]
@@ -985,7 +1049,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         var o = true ? throw new System.Exception() : (object)"b";
                     }
                 }
-                """, LanguageVersion.CSharp8, PreferImplicitTypeAlways);
+                """,
+                LanguageVersion.CSharp8,
+                PreferImplicitTypeAlways
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43291")]
@@ -1017,7 +1084,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         var o = true ? throw new System.Exception() : (object)"b";
                     }
                 }
-                """, LanguageVersion.CSharp9, options: PreferImplicitTypeAlways);
+                """,
+                LanguageVersion.CSharp9,
+                options: PreferImplicitTypeAlways
+            );
         }
 
         [Fact]
@@ -1049,7 +1119,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         var o = true ? (object)"a" : throw new System.Exception();
                     }
                 }
-                """, options: PreferImplicitTypeAlways);
+                """,
+                options: PreferImplicitTypeAlways
+            );
         }
 
         [Fact]
@@ -1081,7 +1153,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         var s = true ? "a" : null;
                     }
                 }
-                """, options: PreferImplicitTypeAlways);
+                """,
+                options: PreferImplicitTypeAlways
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43291")]
@@ -1113,7 +1187,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         var s = true ? throw new System.Exception() : (string)null;
                     }
                 }
-                """, options: PreferImplicitTypeAlways);
+                """,
+                options: PreferImplicitTypeAlways
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43291")]
@@ -1145,7 +1221,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         var s = true ? "a" : throw new System.Exception();
                     }
                 }
-                """, options: PreferImplicitTypeAlways);
+                """,
+                options: PreferImplicitTypeAlways
+            );
         }
 
         [Fact]
@@ -1177,7 +1255,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         var s = true ? null : (string)null;
                     }
                 }
-                """, LanguageVersion.CSharp8, PreferImplicitTypeAlways);
+                """,
+                LanguageVersion.CSharp8,
+                PreferImplicitTypeAlways
+            );
         }
 
         [Fact]
@@ -1209,7 +1290,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         var s = true ? null : (string)null;
                     }
                 }
-                """, LanguageVersion.CSharp9, options: PreferImplicitTypeAlways);
+                """,
+                LanguageVersion.CSharp9,
+                options: PreferImplicitTypeAlways
+            );
         }
 
         [Fact]
@@ -1242,7 +1326,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         i = true ? 0 : 1; // trailing
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1285,7 +1370,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         string s = true ? "a" : "b";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1324,7 +1410,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
 
                     int Foo(int x, int y, int z) => 0;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1363,7 +1450,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
 
                     int Foo(int x, int y, int z) => 0;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1404,7 +1492,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
 
                     int Foo(int x, int y, int z) => 0;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1444,7 +1533,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43291")]
@@ -1484,7 +1574,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43291")]
@@ -1524,7 +1615,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1533,26 +1625,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
             await new VerifyCS.Test
             {
                 TestCode = """
-                class C
-                {
-                    void M(int i)
+                    class C
                     {
-                        if (true) i = 2;
-                        else [|if|] (false) i = 1;
-                        else i = 0;
+                        void M(int i)
+                        {
+                            if (true) i = 2;
+                            else [|if|] (false) i = 1;
+                            else i = 0;
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                class C
-                {
-                    void M(int i)
+                    class C
                     {
-                        if (true) i = 2;
-                        else i = false ? 1 : 0;
+                        void M(int i)
+                        {
+                            if (true) i = 2;
+                            else i = false ? 1 : 0;
+                        }
                     }
-                }
-                """,
+                    """,
                 CodeFixTestBehaviors = Testing.CodeFixTestBehaviors.FixOne,
                 FixedState =
                 {
@@ -1560,8 +1652,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                     {
                         // /0/Test0.cs(6,9): hidden IDE0045: 'if' statement can be simplified
                         VerifyCS.Diagnostic().WithSpan(5, 9, 5, 11).WithSpan(5, 9, 6, 32),
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -1595,7 +1687,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         x = ref true ? ref i : ref j;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43291")]
@@ -1618,7 +1711,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43291")]
@@ -1641,7 +1735,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1672,7 +1767,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         i = j == 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43291")]
@@ -1703,7 +1799,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         i = j == 0 ? true : throw new System.Exception();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43291")]
@@ -1734,7 +1831,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         i = j == 0 ? throw new System.Exception() : false;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1765,7 +1863,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         i = j != 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43291")]
@@ -1796,7 +1895,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         i = j == 0 ? throw new System.Exception() : true;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43291")]
@@ -1827,7 +1927,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         i = j == 0 ? false : throw new System.Exception();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/58898")]
@@ -1864,7 +1965,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         var id = true ? Guid.NewGuid() : (Guid?)Guid.Empty;
                     }
                 }
-                """, options: PreferImplicitTypeAlways);
+                """,
+                options: PreferImplicitTypeAlways
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33284")]
@@ -1901,7 +2004,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         Action<char> write = containsHighBits ? ((char character) => Console.WriteLine(1)) : ((char character) => Console.WriteLine(2));
                     }
                 }
-                """, LanguageVersion.CSharp9);
+                """,
+                LanguageVersion.CSharp9
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39260")]
@@ -1947,7 +2052,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         throw new NotImplementedException();
                     }
                 }
-                """, LanguageVersion.CSharp9, equivalenceKey: nameof(AnalyzersResources.Simplify_check));
+                """,
+                LanguageVersion.CSharp9,
+                equivalenceKey: nameof(AnalyzersResources.Simplify_check)
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/67649")]
@@ -1957,9 +2065,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         [InlineData("object", "string")]
         [InlineData("int", "long")]
         [InlineData("long", "int")]
-        public async Task TestForDiscardsWithMatchingOrConvertibleExpressionTypes(string originalFirstType, string originalSecondType)
+        public async Task TestForDiscardsWithMatchingOrConvertibleExpressionTypes(
+            string originalFirstType,
+            string originalSecondType
+        )
         {
-            await TestInRegularAndScript1Async($$"""
+            await TestInRegularAndScript1Async(
+                $$"""
                 class MyClass
                 {
                     void M(bool flag)
@@ -1977,24 +2089,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                     {{originalFirstType}} A() => default;
                     {{originalSecondType}} B() => default;
                 }
-                """, $$"""
+                """,
+                $$"""
                 class MyClass
                 {
                     void M(bool flag)
                     {
                         _ = flag ? A() : B();
                     }
-                
+
                     {{originalFirstType}} A() => default;
                     {{originalSecondType}} B() => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67649")]
         public async Task TestMissingForDiscardsWithDifferentTypes()
         {
-            await TestMissingAsync("""
+            await TestMissingAsync(
+                """
                 class MyClass
                 {
                     void M(bool flag)
@@ -2008,17 +2123,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                             _ = B();
                         }
                     }
-                
+
                     int A() => default;
                     string B() => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67649")]
         public async Task TestMissingForDiscardsWithBothImplicitConversions()
         {
-            await TestMissingAsync("""
+            await TestMissingAsync(
+                """
                 class MyClass
                 {
                     void M(bool flag)
@@ -2042,13 +2159,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                     public static implicit operator C(string c) => new C();
                     public static implicit operator string(C c) => "";
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/68578")]
         public async Task TestMissingWhenAssignmentReferencesPatternVariable()
         {
-            await TestMissingAsync("""
+            await TestMissingAsync(
+                """
                 using System;
 
                 public class Class1
@@ -2070,13 +2189,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/68578")]
         public async Task TestMissingWhenAssignmentReferencesOutVariable()
         {
-            await TestMissingAsync("""
+            await TestMissingAsync(
+                """
                 using System;
 
                 public class Class1
@@ -2100,7 +2221,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
 
                     private static bool TryGetValue(out Class1 c) => throw new NotImplementedException();
                 }
-                """);
+                """
+            );
         }
     }
 }

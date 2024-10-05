@@ -18,7 +18,10 @@ internal static class RazorFileHierarchy
 
         if (path[0] != '/')
         {
-            throw new ArgumentException(Resources.RazorProject_PathMustStartWithForwardSlash, nameof(path));
+            throw new ArgumentException(
+                Resources.RazorProject_PathMustStartWithForwardSlash,
+                nameof(path)
+            );
         }
 
         if (path.Length == 1)

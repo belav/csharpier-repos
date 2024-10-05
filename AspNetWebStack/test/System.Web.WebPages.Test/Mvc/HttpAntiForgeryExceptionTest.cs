@@ -16,7 +16,10 @@ namespace System.Web.Mvc.Test
             Exception innerException = new Exception();
 
             // Act
-            HttpAntiForgeryException ex = new HttpAntiForgeryException("the message", innerException);
+            HttpAntiForgeryException ex = new HttpAntiForgeryException(
+                "the message",
+                innerException
+            );
 
             // Assert
             Assert.Equal("the message", ex.Message);
@@ -38,7 +41,11 @@ namespace System.Web.Mvc.Test
         {
             // Act & assert
             Assert.Throws<HttpAntiForgeryException>(
-                delegate { throw new HttpAntiForgeryException(); });
+                delegate
+                {
+                    throw new HttpAntiForgeryException();
+                }
+            );
         }
 
         [Fact]
@@ -50,12 +57,16 @@ namespace System.Web.Mvc.Test
             // Arrange
             MemoryStream ms = new MemoryStream();
             BinaryFormatter formatter = new BinaryFormatter();
-            HttpAntiForgeryException ex = new HttpAntiForgeryException("the message", new Exception("inner exception"));
+            HttpAntiForgeryException ex = new HttpAntiForgeryException(
+                "the message",
+                new Exception("inner exception")
+            );
 
             // Act
             formatter.Serialize(ms, ex);
             ms.Position = 0;
-            HttpAntiForgeryException deserialized = formatter.Deserialize(ms) as HttpAntiForgeryException;
+            HttpAntiForgeryException deserialized =
+                formatter.Deserialize(ms) as HttpAntiForgeryException;
 
             // Assert
             Assert.NotNull(deserialized);

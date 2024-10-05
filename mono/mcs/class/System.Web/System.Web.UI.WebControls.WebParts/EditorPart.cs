@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,39 +33,42 @@ using System.ComponentModel;
 
 namespace System.Web.UI.WebControls.WebParts
 {
-
-	[BindableAttribute(false)]
-	[Designer ("System.Web.UI.Design.WebControls.WebParts.EditorPartDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
-	public abstract class EditorPart : Part
-	{	
-		bool				display = true;
+    [BindableAttribute(false)]
+    [Designer(
+        "System.Web.UI.Design.WebControls.WebParts.EditorPartDesigner, "
+            + Consts.AssemblySystem_Design,
+        "System.ComponentModel.Design.IDesigner"
+    )]
+    public abstract class EditorPart : Part
+    {
+        bool display = true;
 #pragma warning disable 0649
-		WebPart				webPartToEdit;
+        WebPart webPartToEdit;
 #if false
 		WebPartManager		manager;
 		EditorZoneBase		zone;
 #endif
-		object zone;
-		string				displayTitle;
+        object zone;
+        string displayTitle;
 #pragma warning restore 0649
 
-		protected EditorPart() {}
+        protected EditorPart() { }
 
-		public abstract bool ApplyChanges ();
+        public abstract bool ApplyChanges();
 
-		protected override IDictionary GetDesignModeState ()
-		{
-			throw new NotImplementedException ();
-		}
+        protected override IDictionary GetDesignModeState()
+        {
+            throw new NotImplementedException();
+        }
 
-		protected internal override void OnPreRender (EventArgs e)
-		{
-			if(zone ==  null)
-				throw new InvalidOperationException();
-			base.OnPreRender(e);
-			if(!Display)
-				Visible = false;
-		}
+        protected internal override void OnPreRender(EventArgs e)
+        {
+            if (zone == null)
+                throw new InvalidOperationException();
+            base.OnPreRender(e);
+            if (!Display)
+                Visible = false;
+        }
 #if false
 		protected override void SetDesignModeState (IDictionary data)
 		{
@@ -74,21 +77,21 @@ namespace System.Web.UI.WebControls.WebParts
 				zone = stateZone;
 		}
 #endif
-		public abstract void SyncChanges ();
+        public abstract void SyncChanges();
 
-		[Browsable (false)]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public virtual bool Display {
-			get { 
-				return display;
-			}
-		}
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public virtual bool Display
+        {
+            get { return display; }
+        }
 
-		[Browsable (false)]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public string DisplayTitle {
-			get { return displayTitle; }
-		}
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string DisplayTitle
+        {
+            get { return displayTitle; }
+        }
 
 #if false
 		protected WebPartManager WebPartManager {
@@ -96,15 +99,15 @@ namespace System.Web.UI.WebControls.WebParts
 		}
 #endif
 
-		protected WebPart WebPartToEdit {
-			get { return webPartToEdit; }
-		}
+        protected WebPart WebPartToEdit
+        {
+            get { return webPartToEdit; }
+        }
 
 #if false
 		protected EditorZoneBase Zone {
 			get { throw new NotImplementedException (); }
 		}
 #endif
-	}
+    }
 }
-

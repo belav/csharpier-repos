@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private readonly SyntheticBoundNodeFactory _bound;
         private readonly TypeMap _typeMap;
-        private readonly Dictionary<ParameterSymbol, BoundExpression> _parameterMap = new Dictionary<ParameterSymbol, BoundExpression>();
+        private readonly Dictionary<ParameterSymbol, BoundExpression> _parameterMap =
+            new Dictionary<ParameterSymbol, BoundExpression>();
         private readonly bool _ignoreAccessibility;
         private int _recursionDepth;
 
@@ -29,7 +30,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if ((object)_ExpressionType == null)
                 {
-                    _ExpressionType = _bound.WellKnownType(WellKnownType.System_Linq_Expressions_Expression);
+                    _ExpressionType = _bound.WellKnownType(
+                        WellKnownType.System_Linq_Expressions_Expression
+                    );
                 }
                 return _ExpressionType;
             }
@@ -42,7 +45,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if ((object)_ParameterExpressionType == null)
                 {
-                    _ParameterExpressionType = _bound.WellKnownType(WellKnownType.System_Linq_Expressions_ParameterExpression);
+                    _ParameterExpressionType = _bound.WellKnownType(
+                        WellKnownType.System_Linq_Expressions_ParameterExpression
+                    );
                 }
                 return _ParameterExpressionType;
             }
@@ -55,7 +60,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if ((object)_ElementInitType == null)
                 {
-                    _ElementInitType = _bound.WellKnownType(WellKnownType.System_Linq_Expressions_ElementInit);
+                    _ElementInitType = _bound.WellKnownType(
+                        WellKnownType.System_Linq_Expressions_ElementInit
+                    );
                 }
                 return _ElementInitType;
             }
@@ -69,7 +76,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if ((object)_MemberBindingType == null)
                 {
-                    _MemberBindingType = _bound.WellKnownType(WellKnownType.System_Linq_Expressions_MemberBinding);
+                    _MemberBindingType = _bound.WellKnownType(
+                        WellKnownType.System_Linq_Expressions_MemberBinding
+                    );
                 }
                 return _MemberBindingType;
             }
@@ -88,7 +97,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if ((object)_MemberInfoType == null)
                 {
-                    _MemberInfoType = _bound.WellKnownType(WellKnownType.System_Reflection_MemberInfo);
+                    _MemberInfoType = _bound.WellKnownType(
+                        WellKnownType.System_Reflection_MemberInfo
+                    );
                 }
                 return _MemberInfoType;
             }
@@ -96,30 +107,69 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private readonly NamedTypeSymbol _IEnumerableType;
 
-        private BindingDiagnosticBag Diagnostics { get { return _bound.Diagnostics; } }
-
-        private ExpressionLambdaRewriter(TypeCompilationState compilationState, TypeMap typeMap, SyntaxNode node, int recursionDepth, BindingDiagnosticBag diagnostics)
+        private BindingDiagnosticBag Diagnostics
         {
-            _bound = new SyntheticBoundNodeFactory(null, compilationState.Type, node, compilationState, diagnostics);
+            get { return _bound.Diagnostics; }
+        }
+
+        private ExpressionLambdaRewriter(
+            TypeCompilationState compilationState,
+            TypeMap typeMap,
+            SyntaxNode node,
+            int recursionDepth,
+            BindingDiagnosticBag diagnostics
+        )
+        {
+            _bound = new SyntheticBoundNodeFactory(
+                null,
+                compilationState.Type,
+                node,
+                compilationState,
+                diagnostics
+            );
             _ignoreAccessibility = compilationState.ModuleBuilderOpt.IgnoreAccessibility;
             _int32Type = _bound.SpecialType(SpecialType.System_Int32);
             _objectType = _bound.SpecialType(SpecialType.System_Object);
             _nullableType = _bound.SpecialType(SpecialType.System_Nullable_T);
-            _IEnumerableType = _bound.SpecialType(SpecialType.System_Collections_Generic_IEnumerable_T);
+            _IEnumerableType = _bound.SpecialType(
+                SpecialType.System_Collections_Generic_IEnumerable_T
+            );
 
             _typeMap = typeMap;
             _recursionDepth = recursionDepth;
         }
 
-        internal static BoundNode RewriteLambda(BoundLambda node, TypeCompilationState compilationState, TypeMap typeMap, int recursionDepth, BindingDiagnosticBag diagnostics)
+        internal static BoundNode RewriteLambda(
+            BoundLambda node,
+            TypeCompilationState compilationState,
+            TypeMap typeMap,
+            int recursionDepth,
+            BindingDiagnosticBag diagnostics
+        )
         {
             try
             {
-                var r = new ExpressionLambdaRewriter(compilationState, typeMap, node.Syntax, recursionDepth, diagnostics);
+                var r = new ExpressionLambdaRewriter(
+                    compilationState,
+                    typeMap,
+                    node.Syntax,
+                    recursionDepth,
+                    diagnostics
+                );
                 var result = r.VisitLambdaInternal(node);
-                if (!node.Type.Equals(result.Type, TypeCompareKind.IgnoreNullableModifiersForReferenceTypes))
+                if (
+                    !node.Type.Equals(
+                        result.Type,
+                        TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                    )
+                )
                 {
-                    diagnostics.Add(ErrorCode.ERR_MissingPredefinedMember, node.Syntax.Location, r.ExpressionType, "Lambda");
+                    diagnostics.Add(
+                        ErrorCode.ERR_MissingPredefinedMember,
+                        node.Syntax.Location,
+                        r.ExpressionType,
+                        "Lambda"
+                    );
                 }
                 return result;
             }
@@ -135,7 +185,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(block.Locals.IsEmpty);
             foreach (var s in block.Statements)
             {
-                for (var stmt = s; stmt != null;)
+                for (var stmt = s; stmt != null; )
                 {
                     switch (stmt.Kind)
                     {
@@ -194,10 +244,22 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return VisitBaseReference((BoundBaseReference)node);
                 case BoundKind.BinaryOperator:
                     var binOp = (BoundBinaryOperator)node;
-                    return VisitBinaryOperator(binOp.OperatorKind, binOp.Method, binOp.Type, binOp.Left, binOp.Right);
+                    return VisitBinaryOperator(
+                        binOp.OperatorKind,
+                        binOp.Method,
+                        binOp.Type,
+                        binOp.Left,
+                        binOp.Right
+                    );
                 case BoundKind.UserDefinedConditionalLogicalOperator:
                     var userDefCondLogOp = (BoundUserDefinedConditionalLogicalOperator)node;
-                    return VisitBinaryOperator(userDefCondLogOp.OperatorKind, userDefCondLogOp.LogicalOperator, userDefCondLogOp.Type, userDefCondLogOp.Left, userDefCondLogOp.Right);
+                    return VisitBinaryOperator(
+                        userDefCondLogOp.OperatorKind,
+                        userDefCondLogOp.LogicalOperator,
+                        userDefCondLogOp.Type,
+                        userDefCondLogOp.Left,
+                        userDefCondLogOp.Right
+                    );
                 case BoundKind.Call:
                     return VisitCall((BoundCall)node);
                 case BoundKind.ConditionalOperator:
@@ -344,13 +406,23 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (arrayType.IsSZArray)
                 {
-                    return ExprFactory("NewArrayInit", boundType, Expressions(node.InitializerOpt.Initializers));
+                    return ExprFactory(
+                        "NewArrayInit",
+                        boundType,
+                        Expressions(node.InitializerOpt.Initializers)
+                    );
                 }
                 else
                 {
                     // error should have been reported earlier
                     // Bound.Diagnostics.Add(ErrorCode.ERR_ExpressionTreeContainsMultiDimensionalArrayInitializer, node.Syntax.Location);
-                    return new BoundBadExpression(node.Syntax, default(LookupResultKind), ImmutableArray<Symbol>.Empty, ImmutableArray.Create<BoundExpression>(node), ExpressionType);
+                    return new BoundBadExpression(
+                        node.Syntax,
+                        default(LookupResultKind),
+                        ImmutableArray<Symbol>.Empty,
+                        ImmutableArray.Create<BoundExpression>(node),
+                        ExpressionType
+                    );
                 }
             }
             else
@@ -371,7 +443,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var operand = _bound.Null(_bound.SpecialType(SpecialType.System_Object));
                 Debug.Assert(node.OperandPlaceholder is null);
                 Debug.Assert(node.OperandConversion is null);
-                node = node.Update(operand, node.TargetType, node.OperandPlaceholder, node.OperandConversion, node.Type);
+                node = node.Update(
+                    operand,
+                    node.TargetType,
+                    node.OperandPlaceholder,
+                    node.OperandConversion,
+                    node.Type
+                );
             }
 
             return ExprFactory("TypeAs", Visit(node.Operand), _bound.Typeof(node.Type));
@@ -381,10 +459,22 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             // should have been reported earlier.
             // Diagnostics.Add(ErrorCode.ERR_ExpressionTreeContainsBaseAccess, node.Syntax.Location);
-            return new BoundBadExpression(node.Syntax, 0, ImmutableArray<Symbol>.Empty, ImmutableArray.Create<BoundExpression>(node), ExpressionType);
+            return new BoundBadExpression(
+                node.Syntax,
+                0,
+                ImmutableArray<Symbol>.Empty,
+                ImmutableArray.Create<BoundExpression>(node),
+                ExpressionType
+            );
         }
 
-        private static string GetBinaryOperatorName(BinaryOperatorKind opKind, MethodSymbol methodOpt, out bool isChecked, out bool isLifted, out bool requiresLifted)
+        private static string GetBinaryOperatorName(
+            BinaryOperatorKind opKind,
+            MethodSymbol methodOpt,
+            out bool isChecked,
+            out bool isLifted,
+            out bool requiresLifted
+        )
         {
             isChecked = opKind.IsChecked();
             isLifted = opKind.IsLifted();
@@ -392,36 +482,67 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             switch (opKind.Operator())
             {
-                case BinaryOperatorKind.Addition: return useCheckedFactory(isChecked, methodOpt) ? "AddChecked" : "Add";
-                case BinaryOperatorKind.Multiplication: return useCheckedFactory(isChecked, methodOpt) ? "MultiplyChecked" : "Multiply";
-                case BinaryOperatorKind.Subtraction: return useCheckedFactory(isChecked, methodOpt) ? "SubtractChecked" : "Subtract";
-                case BinaryOperatorKind.Division: return "Divide";
-                case BinaryOperatorKind.Remainder: return "Modulo";
-                case BinaryOperatorKind.And: return opKind.IsLogical() ? "AndAlso" : "And";
-                case BinaryOperatorKind.Xor: return "ExclusiveOr";
-                case BinaryOperatorKind.Or: return opKind.IsLogical() ? "OrElse" : "Or";
-                case BinaryOperatorKind.LeftShift: return "LeftShift";
-                case BinaryOperatorKind.RightShift: return "RightShift";
-                case BinaryOperatorKind.Equal: return "Equal";
-                case BinaryOperatorKind.NotEqual: return "NotEqual";
-                case BinaryOperatorKind.LessThan: return "LessThan";
-                case BinaryOperatorKind.LessThanOrEqual: return "LessThanOrEqual";
-                case BinaryOperatorKind.GreaterThan: return "GreaterThan";
-                case BinaryOperatorKind.GreaterThanOrEqual: return "GreaterThanOrEqual";
+                case BinaryOperatorKind.Addition:
+                    return useCheckedFactory(isChecked, methodOpt) ? "AddChecked" : "Add";
+                case BinaryOperatorKind.Multiplication:
+                    return useCheckedFactory(isChecked, methodOpt) ? "MultiplyChecked" : "Multiply";
+                case BinaryOperatorKind.Subtraction:
+                    return useCheckedFactory(isChecked, methodOpt) ? "SubtractChecked" : "Subtract";
+                case BinaryOperatorKind.Division:
+                    return "Divide";
+                case BinaryOperatorKind.Remainder:
+                    return "Modulo";
+                case BinaryOperatorKind.And:
+                    return opKind.IsLogical() ? "AndAlso" : "And";
+                case BinaryOperatorKind.Xor:
+                    return "ExclusiveOr";
+                case BinaryOperatorKind.Or:
+                    return opKind.IsLogical() ? "OrElse" : "Or";
+                case BinaryOperatorKind.LeftShift:
+                    return "LeftShift";
+                case BinaryOperatorKind.RightShift:
+                    return "RightShift";
+                case BinaryOperatorKind.Equal:
+                    return "Equal";
+                case BinaryOperatorKind.NotEqual:
+                    return "NotEqual";
+                case BinaryOperatorKind.LessThan:
+                    return "LessThan";
+                case BinaryOperatorKind.LessThanOrEqual:
+                    return "LessThanOrEqual";
+                case BinaryOperatorKind.GreaterThan:
+                    return "GreaterThan";
+                case BinaryOperatorKind.GreaterThanOrEqual:
+                    return "GreaterThanOrEqual";
                 default:
                     throw ExceptionUtilities.UnexpectedValue(opKind.Operator());
             }
 
             static bool useCheckedFactory(bool isChecked, MethodSymbol methodOpt)
             {
-                return isChecked || (methodOpt is { Name: string name } && SyntaxFacts.IsCheckedOperator(name));
+                return isChecked
+                    || (methodOpt is { Name: string name } && SyntaxFacts.IsCheckedOperator(name));
             }
         }
 
-        private BoundExpression VisitBinaryOperator(BinaryOperatorKind opKind, MethodSymbol methodOpt, TypeSymbol type, BoundExpression left, BoundExpression right)
+        private BoundExpression VisitBinaryOperator(
+            BinaryOperatorKind opKind,
+            MethodSymbol methodOpt,
+            TypeSymbol type,
+            BoundExpression left,
+            BoundExpression right
+        )
         {
-            bool isChecked, isLifted, requiresLifted;
-            string opName = GetBinaryOperatorName(opKind, methodOpt, out isChecked, out isLifted, out requiresLifted);
+            bool isChecked,
+                isLifted,
+                requiresLifted;
+            string opName = GetBinaryOperatorName(
+                opKind,
+                methodOpt,
+                out isChecked,
+                out isLifted,
+                out requiresLifted
+            );
 
             // Fix up the null value for a nullable comparison vs null
             if ((object)left.Type == null && left.IsLiteralNull())
@@ -439,26 +560,47 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BinaryOperatorKind.EnumAndUnderlying:
                 case BinaryOperatorKind.UnderlyingAndEnum:
                 case BinaryOperatorKind.Enum:
+                {
+                    var enumOperand =
+                        (opKind.OperandTypes() == BinaryOperatorKind.UnderlyingAndEnum)
+                            ? right
+                            : left;
+                    var promotedType = PromotedType(
+                        enumOperand.Type.StrippedType().GetEnumUnderlyingType()
+                    );
+                    if (opKind.IsLifted())
                     {
-                        var enumOperand = (opKind.OperandTypes() == BinaryOperatorKind.UnderlyingAndEnum) ? right : left;
-                        var promotedType = PromotedType(enumOperand.Type.StrippedType().GetEnumUnderlyingType());
-                        if (opKind.IsLifted())
-                        {
-                            promotedType = _nullableType.Construct(promotedType);
-                        }
-
-                        var loweredLeft = VisitAndPromoteEnumOperand(left, promotedType, isChecked);
-                        var loweredRight = VisitAndPromoteEnumOperand(right, promotedType, isChecked);
-
-                        var result = MakeBinary(methodOpt, type, isLifted, requiresLifted, opName, loweredLeft, loweredRight);
-                        return Demote(result, type, isChecked);
+                        promotedType = _nullableType.Construct(promotedType);
                     }
+
+                    var loweredLeft = VisitAndPromoteEnumOperand(left, promotedType, isChecked);
+                    var loweredRight = VisitAndPromoteEnumOperand(right, promotedType, isChecked);
+
+                    var result = MakeBinary(
+                        methodOpt,
+                        type,
+                        isLifted,
+                        requiresLifted,
+                        opName,
+                        loweredLeft,
+                        loweredRight
+                    );
+                    return Demote(result, type, isChecked);
+                }
                 default:
-                    {
-                        var loweredLeft = Visit(left);
-                        var loweredRight = Visit(right);
-                        return MakeBinary(methodOpt, type, isLifted, requiresLifted, opName, loweredLeft, loweredRight);
-                    }
+                {
+                    var loweredLeft = Visit(left);
+                    var loweredRight = Visit(right);
+                    return MakeBinary(
+                        methodOpt,
+                        type,
+                        isLifted,
+                        requiresLifted,
+                        opName,
+                        loweredLeft,
+                        loweredRight
+                    );
+                }
             }
         }
 
@@ -467,10 +609,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (operand.Kind == BoundKind.Conversion)
             {
                 var conversion = (BoundConversion)operand;
-                if (!conversion.ConversionKind.IsUserDefinedConversion() &&
-                    conversion.ConversionKind.IsImplicitConversion() &&
-                    conversion.ConversionKind != ConversionKind.NullLiteral &&
-                    conversion.Type.StrippedType().IsEnumType())
+                if (
+                    !conversion.ConversionKind.IsUserDefinedConversion()
+                    && conversion.ConversionKind.IsImplicitConversion()
+                    && conversion.ConversionKind != ConversionKind.NullLiteral
+                    && conversion.Type.StrippedType().IsEnumType()
+                )
                 {
                     operand = conversion.Operand;
                 }
@@ -479,7 +623,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             return operand;
         }
 
-        private BoundExpression VisitAndPromoteEnumOperand(BoundExpression operand, TypeSymbol promotedType, bool isChecked)
+        private BoundExpression VisitAndPromoteEnumOperand(
+            BoundExpression operand,
+            TypeSymbol promotedType,
+            bool isChecked
+        )
         {
             var literal = operand as BoundLiteral;
             if (literal != null)
@@ -498,12 +646,33 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        private BoundExpression MakeBinary(MethodSymbol methodOpt, TypeSymbol type, bool isLifted, bool requiresLifted, string opName, BoundExpression loweredLeft, BoundExpression loweredRight)
+        private BoundExpression MakeBinary(
+            MethodSymbol methodOpt,
+            TypeSymbol type,
+            bool isLifted,
+            bool requiresLifted,
+            string opName,
+            BoundExpression loweredLeft,
+            BoundExpression loweredRight
+        )
         {
-            return
-                ((object)methodOpt == null) ? ExprFactory(opName, loweredLeft, loweredRight) :
-                    requiresLifted ? ExprFactory(opName, loweredLeft, loweredRight, _bound.Literal(isLifted && !TypeSymbol.Equals(methodOpt.ReturnType, type, TypeCompareKind.ConsiderEverything2)), _bound.MethodInfo(methodOpt)) :
-                        ExprFactory(opName, loweredLeft, loweredRight, _bound.MethodInfo(methodOpt));
+            return ((object)methodOpt == null) ? ExprFactory(opName, loweredLeft, loweredRight)
+                : requiresLifted
+                    ? ExprFactory(
+                        opName,
+                        loweredLeft,
+                        loweredRight,
+                        _bound.Literal(
+                            isLifted
+                                && !TypeSymbol.Equals(
+                                    methodOpt.ReturnType,
+                                    type,
+                                    TypeCompareKind.ConsiderEverything2
+                                )
+                        ),
+                        _bound.MethodInfo(methodOpt)
+                    )
+                : ExprFactory(opName, loweredLeft, loweredRight, _bound.MethodInfo(methodOpt));
         }
 
         private TypeSymbol PromotedType(TypeSymbol underlying)
@@ -535,7 +704,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return Convert(node, type, isChecked);
                 }
 
-                var promotedType = e.IsNullableType() ? _nullableType.Construct(PromotedType(e.GetNullableUnderlyingType())) : PromotedType(e);
+                var promotedType = e.IsNullableType()
+                    ? _nullableType.Construct(PromotedType(e.GetNullableUnderlyingType()))
+                    : PromotedType(e);
                 if (!TypeSymbol.Equals(promotedType, type, TypeCompareKind.ConsiderEverything2))
                 {
                     return Convert(node, type, isChecked);
@@ -545,10 +716,24 @@ namespace Microsoft.CodeAnalysis.CSharp
             return node;
         }
 
-        private BoundExpression ConvertIndex(BoundExpression expr, TypeSymbol oldType, TypeSymbol newType)
+        private BoundExpression ConvertIndex(
+            BoundExpression expr,
+            TypeSymbol oldType,
+            TypeSymbol newType
+        )
         {
-            var useSiteInfo = new CompoundUseSiteInfo<AssemblySymbol>(Diagnostics, _bound.Compilation.Assembly);
-            var kind = _bound.Compilation.Conversions.ClassifyConversionFromType(oldType, newType, isChecked: false, ref useSiteInfo).Kind;
+            var useSiteInfo = new CompoundUseSiteInfo<AssemblySymbol>(
+                Diagnostics,
+                _bound.Compilation.Assembly
+            );
+            var kind = _bound
+                .Compilation.Conversions.ClassifyConversionFromType(
+                    oldType,
+                    newType,
+                    isChecked: false,
+                    ref useSiteInfo
+                )
+                .Kind;
             Debug.Assert(useSiteInfo.Diagnostics.IsNullOrEmpty());
             Diagnostics.AddDependencies(useSiteInfo);
 
@@ -568,7 +753,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (node.IsDelegateCall)
             {
                 // Generate Expression.Invoke(Receiver, arguments)
-                return ExprFactory(WellKnownMemberNames.DelegateInvokeName, Visit(node.ReceiverOpt), Expressions(node.Arguments));
+                return ExprFactory(
+                    WellKnownMemberNames.DelegateInvokeName,
+                    Visit(node.ReceiverOpt),
+                    Expressions(node.Arguments)
+                );
             }
             else
             {
@@ -576,9 +765,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var method = node.Method;
                 return ExprFactory(
                     "Call",
-                    method.RequiresInstanceReceiver ? Visit(node.ReceiverOpt) : _bound.Null(ExpressionType),
+                    method.RequiresInstanceReceiver
+                        ? Visit(node.ReceiverOpt)
+                        : _bound.Null(ExpressionType),
                     _bound.MethodInfo(method),
-                    Expressions(node.Arguments));
+                    Expressions(node.Arguments)
+                );
             }
         }
 
@@ -607,7 +799,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     explicitCastInCode: true,
                     conversionGroupOpt: conversion.ConversionGroupOpt,
                     constantValueOpt: conversion.ConstantValueOpt,
-                    type: conversion.Type);
+                    type: conversion.Type
+                );
             }
 
             return Visit(e);
@@ -618,58 +811,136 @@ namespace Microsoft.CodeAnalysis.CSharp
             switch (node.ConversionKind)
             {
                 case ConversionKind.MethodGroup:
-                    {
-                        var mg = (BoundMethodGroup)node.Operand;
-                        return DelegateCreation(mg.ReceiverOpt, node.SymbolOpt, node.Type, !node.SymbolOpt.RequiresInstanceReceiver && !node.IsExtensionMethod);
-                    }
+                {
+                    var mg = (BoundMethodGroup)node.Operand;
+                    return DelegateCreation(
+                        mg.ReceiverOpt,
+                        node.SymbolOpt,
+                        node.Type,
+                        !node.SymbolOpt.RequiresInstanceReceiver && !node.IsExtensionMethod
+                    );
+                }
                 case ConversionKind.ExplicitUserDefined:
                 case ConversionKind.ImplicitUserDefined:
                 case ConversionKind.IntPtr:
-                    {
-                        var method = node.SymbolOpt;
-                        var operandType = node.Operand.Type;
-                        var strippedOperandType = operandType.StrippedType();
-                        var conversionInputType = method.Parameters[0].Type;
-                        var isLifted = !TypeSymbol.Equals(operandType, conversionInputType, TypeCompareKind.ConsiderEverything2) && TypeSymbol.Equals(strippedOperandType, conversionInputType, TypeCompareKind.ConsiderEverything2);
-                        bool requireAdditionalCast =
-                            !TypeSymbol.Equals(strippedOperandType, ((node.ConversionKind == ConversionKind.ExplicitUserDefined) ? conversionInputType : conversionInputType.StrippedType()), TypeCompareKind.ConsiderEverything2);
-                        var resultType = (isLifted && method.ReturnType.IsNonNullableValueType() && node.Type.IsNullableType()) ?
-                                            _nullableType.Construct(method.ReturnType) : method.ReturnType;
-                        var e1 = requireAdditionalCast
-                            ? Convert(Visit(node.Operand), node.Operand.Type, method.Parameters[0].Type, node.Checked, false)
-                            : Visit(node.Operand);
-                        var e2 = ExprFactory(node.Checked && SyntaxFacts.IsCheckedOperator(method.Name) ? "ConvertChecked" : "Convert", e1, _bound.Typeof(resultType), _bound.MethodInfo(method));
-                        return Convert(e2, resultType, node.Type, node.Checked, false);
-                    }
+                {
+                    var method = node.SymbolOpt;
+                    var operandType = node.Operand.Type;
+                    var strippedOperandType = operandType.StrippedType();
+                    var conversionInputType = method.Parameters[0].Type;
+                    var isLifted =
+                        !TypeSymbol.Equals(
+                            operandType,
+                            conversionInputType,
+                            TypeCompareKind.ConsiderEverything2
+                        )
+                        && TypeSymbol.Equals(
+                            strippedOperandType,
+                            conversionInputType,
+                            TypeCompareKind.ConsiderEverything2
+                        );
+                    bool requireAdditionalCast = !TypeSymbol.Equals(
+                        strippedOperandType,
+                        (
+                            (node.ConversionKind == ConversionKind.ExplicitUserDefined)
+                                ? conversionInputType
+                                : conversionInputType.StrippedType()
+                        ),
+                        TypeCompareKind.ConsiderEverything2
+                    );
+                    var resultType =
+                        (
+                            isLifted
+                            && method.ReturnType.IsNonNullableValueType()
+                            && node.Type.IsNullableType()
+                        )
+                            ? _nullableType.Construct(method.ReturnType)
+                            : method.ReturnType;
+                    var e1 = requireAdditionalCast
+                        ? Convert(
+                            Visit(node.Operand),
+                            node.Operand.Type,
+                            method.Parameters[0].Type,
+                            node.Checked,
+                            false
+                        )
+                        : Visit(node.Operand);
+                    var e2 = ExprFactory(
+                        node.Checked && SyntaxFacts.IsCheckedOperator(method.Name)
+                            ? "ConvertChecked"
+                            : "Convert",
+                        e1,
+                        _bound.Typeof(resultType),
+                        _bound.MethodInfo(method)
+                    );
+                    return Convert(e2, resultType, node.Type, node.Checked, false);
+                }
                 case ConversionKind.ImplicitReference:
                 case ConversionKind.Identity:
-                    {
-                        var operand = Visit(node.Operand);
-                        return node.ExplicitCastInCode ? Convert(operand, node.Type, false) : operand;
-                    }
+                {
+                    var operand = Visit(node.Operand);
+                    return node.ExplicitCastInCode ? Convert(operand, node.Type, false) : operand;
+                }
                 case ConversionKind.ImplicitNullable:
                     if (node.Operand.Type.IsNullableType())
                     {
-                        return Convert(Visit(node.Operand), node.Operand.Type, node.Type, node.Checked, node.ExplicitCastInCode);
+                        return Convert(
+                            Visit(node.Operand),
+                            node.Operand.Type,
+                            node.Type,
+                            node.Checked,
+                            node.ExplicitCastInCode
+                        );
                     }
                     else
                     {
                         // the native compiler performs this conversion in two steps, so we follow suit
                         var nullable = (NamedTypeSymbol)node.Type;
-                        var intermediate = nullable.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0].Type;
-                        var e1 = Convert(Visit(node.Operand), node.Operand.Type, intermediate, node.Checked, false);
+                        var intermediate = nullable
+                            .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0]
+                            .Type;
+                        var e1 = Convert(
+                            Visit(node.Operand),
+                            node.Operand.Type,
+                            intermediate,
+                            node.Checked,
+                            false
+                        );
                         return Convert(e1, intermediate, node.Type, node.Checked, false);
                     }
                 case ConversionKind.NullLiteral:
-                    return Convert(Constant(_bound.Null(_objectType)), _objectType, node.Type, false, node.ExplicitCastInCode);
+                    return Convert(
+                        Constant(_bound.Null(_objectType)),
+                        _objectType,
+                        node.Type,
+                        false,
+                        node.ExplicitCastInCode
+                    );
                 default:
-                    return Convert(Visit(node.Operand), node.Operand.Type, node.Type, node.Checked, node.ExplicitCastInCode);
+                    return Convert(
+                        Visit(node.Operand),
+                        node.Operand.Type,
+                        node.Type,
+                        node.Checked,
+                        node.ExplicitCastInCode
+                    );
             }
         }
 
-        private BoundExpression Convert(BoundExpression operand, TypeSymbol oldType, TypeSymbol newType, bool isChecked, bool isExplicit)
+        private BoundExpression Convert(
+            BoundExpression operand,
+            TypeSymbol oldType,
+            TypeSymbol newType,
+            bool isChecked,
+            bool isExplicit
+        )
         {
-            return (TypeSymbol.Equals(oldType, newType, TypeCompareKind.ConsiderEverything2) && !isExplicit) ? operand : Convert(operand, newType, isChecked);
+            return (
+                TypeSymbol.Equals(oldType, newType, TypeCompareKind.ConsiderEverything2)
+                && !isExplicit
+            )
+                ? operand
+                : Convert(operand, newType, isChecked);
         }
 
         private BoundExpression Convert(BoundExpression expr, TypeSymbol type, bool isChecked)
@@ -677,24 +948,46 @@ namespace Microsoft.CodeAnalysis.CSharp
             return ExprFactory(isChecked ? "ConvertChecked" : "Convert", expr, _bound.Typeof(type));
         }
 
-        private BoundExpression DelegateCreation(BoundExpression receiver, MethodSymbol method, TypeSymbol delegateType, bool requiresInstanceReceiver)
+        private BoundExpression DelegateCreation(
+            BoundExpression receiver,
+            MethodSymbol method,
+            TypeSymbol delegateType,
+            bool requiresInstanceReceiver
+        )
         {
             var nullObject = _bound.Null(_objectType);
-            receiver = requiresInstanceReceiver ? nullObject : receiver.Type.IsReferenceType ? receiver : _bound.Convert(_objectType, receiver);
+            receiver =
+                requiresInstanceReceiver ? nullObject
+                : receiver.Type.IsReferenceType ? receiver
+                : _bound.Convert(_objectType, receiver);
 
-            var createDelegate = _bound.WellKnownMethod(WellKnownMember.System_Reflection_MethodInfo__CreateDelegate, isOptional: true);
+            var createDelegate = _bound.WellKnownMethod(
+                WellKnownMember.System_Reflection_MethodInfo__CreateDelegate,
+                isOptional: true
+            );
             BoundExpression unquoted;
             if ((object)createDelegate != null)
             {
                 // beginning in 4.5, we do it this way
-                unquoted = _bound.Call(_bound.MethodInfo(method), createDelegate, _bound.Typeof(delegateType), receiver);
+                unquoted = _bound.Call(
+                    _bound.MethodInfo(method),
+                    createDelegate,
+                    _bound.Typeof(delegateType),
+                    receiver
+                );
             }
             else
             {
                 // 4.0 and earlier we do it this way
                 //createDelegate = (MethodSymbol)Bound.WellKnownMember(WellKnownMember.System_Delegate__CreateDelegate);
                 //operand = Bound.Call(nullObject, createDelegate, Bound.Typeof(node.Type), receiver, Bound.MethodInfo(method));
-                unquoted = _bound.StaticCall(_bound.SpecialType(SpecialType.System_Delegate), "CreateDelegate", _bound.Typeof(delegateType), receiver, _bound.MethodInfo(method));
+                unquoted = _bound.StaticCall(
+                    _bound.SpecialType(SpecialType.System_Delegate),
+                    "CreateDelegate",
+                    _bound.Typeof(delegateType),
+                    receiver,
+                    _bound.MethodInfo(method)
+                );
             }
 
             // NOTE: we visit the just-built node, which has not yet been visited.  This is not the usual order
@@ -703,7 +996,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return Convert(Visit(unquoted), delegateType, false);
         }
 
-        private BoundExpression VisitDelegateCreationExpression(BoundDelegateCreationExpression node)
+        private BoundExpression VisitDelegateCreationExpression(
+            BoundDelegateCreationExpression node
+        )
         {
             if (node.Argument.Kind == BoundKind.MethodGroup)
             {
@@ -712,7 +1007,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if ((object)node.MethodOpt != null)
             {
-                bool staticMember = !node.MethodOpt.RequiresInstanceReceiver && !node.IsExtensionMethod;
+                bool staticMember =
+                    !node.MethodOpt.RequiresInstanceReceiver && !node.IsExtensionMethod;
                 return DelegateCreation(node.Argument, node.MethodOpt, node.Type, staticMember);
             }
 
@@ -728,16 +1024,20 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private BoundExpression VisitFieldAccess(BoundFieldAccess node)
         {
-            var receiver = node.FieldSymbol.IsStatic ? _bound.Null(ExpressionType) : Visit(node.ReceiverOpt);
-            return ExprFactory(
-                "Field",
-                receiver, _bound.FieldInfo(node.FieldSymbol));
+            var receiver = node.FieldSymbol.IsStatic
+                ? _bound.Null(ExpressionType)
+                : Visit(node.ReceiverOpt);
+            return ExprFactory("Field", receiver, _bound.FieldInfo(node.FieldSymbol));
         }
 
         private BoundExpression VisitIsOperator(BoundIsOperator node)
         {
             var operand = node.Operand;
-            if ((object)operand.Type == null && operand.ConstantValueOpt != null && operand.ConstantValueOpt.IsNull)
+            if (
+                (object)operand.Type == null
+                && operand.ConstantValueOpt != null
+                && operand.ConstantValueOpt.IsNull
+            )
             {
                 operand = _bound.Null(_objectType);
             }
@@ -765,18 +1065,24 @@ namespace Microsoft.CodeAnalysis.CSharp
                 parameters.Add(parameterReference);
                 var parameter = ExprFactory(
                     "Parameter",
-                    _bound.Typeof(_typeMap.SubstituteType(p.Type).Type), _bound.Literal(p.Name));
+                    _bound.Typeof(_typeMap.SubstituteType(p.Type).Type),
+                    _bound.Literal(p.Name)
+                );
                 initializers.Add(_bound.AssignmentExpression(parameterReference, parameter));
                 _parameterMap[p] = parameterReference;
             }
 
             var underlyingDelegateType = node.Type.GetDelegateType();
-            var result = _bound.Sequence(locals.ToImmutableAndFree(), initializers.ToImmutableAndFree(),
+            var result = _bound.Sequence(
+                locals.ToImmutableAndFree(),
+                initializers.ToImmutableAndFree(),
                 ExprFactory(
                     "Lambda",
                     ImmutableArray.Create<TypeSymbol>(underlyingDelegateType),
                     TranslateLambdaBody(node.Body),
-                    _bound.ArrayOrEmpty(ParameterExpressionType, parameters.ToImmutableAndFree())));
+                    _bound.ArrayOrEmpty(ParameterExpressionType, parameters.ToImmutableAndFree())
+                )
+            );
 
             foreach (var p in node.Symbol.Parameters)
             {
@@ -788,18 +1094,29 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private BoundExpression VisitNewT(BoundNewT node)
         {
-            return VisitObjectCreationContinued(ExprFactory("New", _bound.Typeof(node.Type)), node.InitializerExpressionOpt);
+            return VisitObjectCreationContinued(
+                ExprFactory("New", _bound.Typeof(node.Type)),
+                node.InitializerExpressionOpt
+            );
         }
 
         private BoundExpression VisitNullCoalescingOperator(BoundNullCoalescingOperator node)
         {
             var left = Visit(node.LeftOperand);
             var right = Visit(node.RightOperand);
-            if (BoundNode.GetConversion(node.LeftConversion, node.LeftPlaceholder) is { IsUserDefined: true } leftConversion)
+            if (
+                BoundNode.GetConversion(node.LeftConversion, node.LeftPlaceholder) is
+                { IsUserDefined: true } leftConversion
+            )
             {
                 Debug.Assert(node.LeftPlaceholder is not null);
                 TypeSymbol lambdaParamType = node.LeftPlaceholder.Type;
-                return ExprFactory("Coalesce", left, right, MakeConversionLambda(leftConversion, lambdaParamType, node.LeftConversion.Type));
+                return ExprFactory(
+                    "Coalesce",
+                    left,
+                    right,
+                    MakeConversionLambda(leftConversion, lambdaParamType, node.LeftConversion.Type)
+                );
             }
             else
             {
@@ -807,23 +1124,40 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        private BoundExpression MakeConversionLambda(Conversion conversion, TypeSymbol fromType, TypeSymbol toType)
+        private BoundExpression MakeConversionLambda(
+            Conversion conversion,
+            TypeSymbol fromType,
+            TypeSymbol toType
+        )
         {
             string parameterName = "p";
             ParameterSymbol lambdaParameter = _bound.SynthesizedParameter(fromType, parameterName);
             var param = _bound.SynthesizedLocal(ParameterExpressionType);
             var parameterReference = _bound.Local(param);
-            var parameter = ExprFactory("Parameter", _bound.Typeof(fromType), _bound.Literal(parameterName));
+            var parameter = ExprFactory(
+                "Parameter",
+                _bound.Typeof(fromType),
+                _bound.Literal(parameterName)
+            );
             _parameterMap[lambdaParameter] = parameterReference;
-            var convertedValue = Visit(_bound.Convert(toType, _bound.Parameter(lambdaParameter), conversion));
+            var convertedValue = Visit(
+                _bound.Convert(toType, _bound.Parameter(lambdaParameter), conversion)
+            );
             _parameterMap.Remove(lambdaParameter);
             var result = _bound.Sequence(
                 ImmutableArray.Create(param),
-                ImmutableArray.Create<BoundExpression>(_bound.AssignmentExpression(parameterReference, parameter)),
+                ImmutableArray.Create<BoundExpression>(
+                    _bound.AssignmentExpression(parameterReference, parameter)
+                ),
                 ExprFactory(
                     "Lambda",
                     convertedValue,
-                    _bound.ArrayOrEmpty(ParameterExpressionType, ImmutableArray.Create<BoundExpression>(parameterReference))));
+                    _bound.ArrayOrEmpty(
+                        ParameterExpressionType,
+                        ImmutableArray.Create<BoundExpression>(parameterReference)
+                    )
+                )
+            );
             return result;
         }
 
@@ -836,7 +1170,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case SymbolKind.Property:
                     return _bound.MethodInfo(((PropertySymbol)symbol).GetOwnOrInheritedSetMethod());
                 case SymbolKind.Event:
-                    return _bound.Convert(MemberInfoType, _bound.FieldInfo(((EventSymbol)symbol).AssociatedField));
+                    return _bound.Convert(
+                        MemberInfoType,
+                        _bound.FieldInfo(((EventSymbol)symbol).AssociatedField)
+                    );
                 default:
                     throw ExceptionUtilities.UnexpectedValue(symbol.Kind);
             }
@@ -851,96 +1188,115 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case SymbolKind.Property:
                     return _bound.MethodInfo(((PropertySymbol)symbol).GetOwnOrInheritedGetMethod());
                 case SymbolKind.Event:
-                    return _bound.Convert(MemberInfoType, _bound.FieldInfo(((EventSymbol)symbol).AssociatedField));
+                    return _bound.Convert(
+                        MemberInfoType,
+                        _bound.FieldInfo(((EventSymbol)symbol).AssociatedField)
+                    );
                 default:
                     throw ExceptionUtilities.UnexpectedValue(symbol.Kind);
             }
         }
 
-        private enum InitializerKind { Expression, MemberInitializer, CollectionInitializer };
+        private enum InitializerKind
+        {
+            Expression,
+            MemberInitializer,
+            CollectionInitializer,
+        };
 
         private BoundExpression VisitInitializer(BoundExpression node, out InitializerKind kind)
         {
             switch (node.Kind)
             {
                 case BoundKind.ObjectInitializerExpression:
+                {
+                    var oi = (BoundObjectInitializerExpression)node;
+                    var builder = ArrayBuilder<BoundExpression>.GetInstance();
+                    foreach (BoundAssignmentOperator a in oi.Initializers)
                     {
-                        var oi = (BoundObjectInitializerExpression)node;
-                        var builder = ArrayBuilder<BoundExpression>.GetInstance();
-                        foreach (BoundAssignmentOperator a in oi.Initializers)
+                        var sym = ((BoundObjectInitializerMember)a.Left).MemberSymbol;
+
+                        // An error is reported in diagnostics pass when a dynamic object initializer is encountered in an ET:
+                        Debug.Assert((object)sym != null);
+
+                        InitializerKind elementKind;
+                        var value = VisitInitializer(a.Right, out elementKind);
+                        switch (elementKind)
                         {
-                            var sym = ((BoundObjectInitializerMember)a.Left).MemberSymbol;
-
-                            // An error is reported in diagnostics pass when a dynamic object initializer is encountered in an ET:
-                            Debug.Assert((object)sym != null);
-
-                            InitializerKind elementKind;
-                            var value = VisitInitializer(a.Right, out elementKind);
-                            switch (elementKind)
+                            case InitializerKind.CollectionInitializer:
                             {
-                                case InitializerKind.CollectionInitializer:
-                                    {
-                                        var left = InitializerMemberGetter(sym);
-                                        builder.Add(ExprFactory("ListBind", left, value));
-                                        break;
-                                    }
-                                case InitializerKind.Expression:
-                                    {
-                                        var left = InitializerMemberSetter(sym);
-                                        builder.Add(ExprFactory("Bind", left, value));
-                                        break;
-                                    }
-                                case InitializerKind.MemberInitializer:
-                                    {
-                                        var left = InitializerMemberGetter(sym);
-                                        builder.Add(ExprFactory("MemberBind", left, value));
-                                        break;
-                                    }
-                                default:
-                                    throw ExceptionUtilities.UnexpectedValue(elementKind);
+                                var left = InitializerMemberGetter(sym);
+                                builder.Add(ExprFactory("ListBind", left, value));
+                                break;
                             }
+                            case InitializerKind.Expression:
+                            {
+                                var left = InitializerMemberSetter(sym);
+                                builder.Add(ExprFactory("Bind", left, value));
+                                break;
+                            }
+                            case InitializerKind.MemberInitializer:
+                            {
+                                var left = InitializerMemberGetter(sym);
+                                builder.Add(ExprFactory("MemberBind", left, value));
+                                break;
+                            }
+                            default:
+                                throw ExceptionUtilities.UnexpectedValue(elementKind);
                         }
-
-                        kind = InitializerKind.MemberInitializer;
-                        return _bound.ArrayOrEmpty(MemberBindingType, builder.ToImmutableAndFree());
                     }
+
+                    kind = InitializerKind.MemberInitializer;
+                    return _bound.ArrayOrEmpty(MemberBindingType, builder.ToImmutableAndFree());
+                }
 
                 case BoundKind.CollectionInitializerExpression:
+                {
+                    var ci = (BoundCollectionInitializerExpression)node;
+                    Debug.Assert(ci.Initializers.Length != 0);
+                    kind = InitializerKind.CollectionInitializer;
+
+                    var builder = ArrayBuilder<BoundExpression>.GetInstance();
+
+                    // The method invocation must be a static call.
+                    // Dynamic calls are not allowed in ETs, an error is reported in diagnostics pass.
+                    foreach (BoundCollectionElementInitializer i in ci.Initializers)
                     {
-                        var ci = (BoundCollectionInitializerExpression)node;
-                        Debug.Assert(ci.Initializers.Length != 0);
-                        kind = InitializerKind.CollectionInitializer;
-
-                        var builder = ArrayBuilder<BoundExpression>.GetInstance();
-
-                        // The method invocation must be a static call. 
-                        // Dynamic calls are not allowed in ETs, an error is reported in diagnostics pass.
-                        foreach (BoundCollectionElementInitializer i in ci.Initializers)
-                        {
-                            BoundExpression elementInit = ExprFactory("ElementInit", _bound.MethodInfo(i.AddMethod), Expressions(i.Arguments));
-                            builder.Add(elementInit);
-                        }
-
-                        return _bound.ArrayOrEmpty(ElementInitType, builder.ToImmutableAndFree());
+                        BoundExpression elementInit = ExprFactory(
+                            "ElementInit",
+                            _bound.MethodInfo(i.AddMethod),
+                            Expressions(i.Arguments)
+                        );
+                        builder.Add(elementInit);
                     }
+
+                    return _bound.ArrayOrEmpty(ElementInitType, builder.ToImmutableAndFree());
+                }
 
                 default:
-                    {
-                        kind = InitializerKind.Expression;
-                        return Visit(node);
-                    }
+                {
+                    kind = InitializerKind.Expression;
+                    return Visit(node);
+                }
             }
         }
 
         private BoundExpression VisitObjectCreationExpression(BoundObjectCreationExpression node)
         {
-            return VisitObjectCreationContinued(VisitObjectCreationExpressionInternal(node), node.InitializerExpressionOpt);
+            return VisitObjectCreationContinued(
+                VisitObjectCreationExpressionInternal(node),
+                node.InitializerExpressionOpt
+            );
         }
 
-        private BoundExpression VisitObjectCreationContinued(BoundExpression creation, BoundExpression initializerExpressionOpt)
+        private BoundExpression VisitObjectCreationContinued(
+            BoundExpression creation,
+            BoundExpression initializerExpressionOpt
+        )
         {
             var result = creation;
-            if (initializerExpressionOpt == null) return result;
+            if (initializerExpressionOpt == null)
+                return result;
             InitializerKind initializerKind;
             var init = VisitInitializer(initializerExpressionOpt, out initializerKind);
             switch (initializerKind)
@@ -954,7 +1310,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        private BoundExpression VisitObjectCreationExpressionInternal(BoundObjectCreationExpression node)
+        private BoundExpression VisitObjectCreationExpressionInternal(
+            BoundObjectCreationExpression node
+        )
         {
             if (node.ConstantValueOpt != null)
             {
@@ -962,25 +1320,39 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return Constant(node);
             }
 
-            if ((object)node.Constructor == null ||
-                (node.Arguments.Length == 0 && !node.Type.IsStructType()) ||
-                node.Constructor.IsDefaultValueTypeConstructor())
+            if (
+                (object)node.Constructor == null
+                || (node.Arguments.Length == 0 && !node.Type.IsStructType())
+                || node.Constructor.IsDefaultValueTypeConstructor()
+            )
             {
                 return ExprFactory("New", _bound.Typeof(node.Type));
             }
 
             var ctor = _bound.ConstructorInfo(node.Constructor);
-            var args = _bound.Convert(_IEnumerableType.Construct(ExpressionType), Expressions(node.Arguments));
+            var args = _bound.Convert(
+                _IEnumerableType.Construct(ExpressionType),
+                Expressions(node.Arguments)
+            );
             if (node.Type.IsAnonymousType && node.Arguments.Length != 0)
             {
                 var anonType = (NamedTypeSymbol)node.Type;
                 var membersBuilder = ArrayBuilder<BoundExpression>.GetInstance();
                 for (int i = 0; i < node.Arguments.Length; i++)
                 {
-                    membersBuilder.Add(_bound.MethodInfo(AnonymousTypeManager.GetAnonymousTypeProperty(anonType, i).GetMethod));
+                    membersBuilder.Add(
+                        _bound.MethodInfo(
+                            AnonymousTypeManager.GetAnonymousTypeProperty(anonType, i).GetMethod
+                        )
+                    );
                 }
 
-                return ExprFactory("New", ctor, args, _bound.ArrayOrEmpty(MemberInfoType, membersBuilder.ToImmutableAndFree()));
+                return ExprFactory(
+                    "New",
+                    ctor,
+                    args,
+                    _bound.ArrayOrEmpty(MemberInfoType, membersBuilder.ToImmutableAndFree())
+                );
             }
             else
             {
@@ -993,38 +1365,56 @@ namespace Microsoft.CodeAnalysis.CSharp
             return _parameterMap[node.ParameterSymbol];
         }
 
-        private static BoundExpression VisitPointerIndirectionOperator(BoundPointerIndirectionOperator node)
+        private static BoundExpression VisitPointerIndirectionOperator(
+            BoundPointerIndirectionOperator node
+        )
         {
             // error should have been reported earlier
             // Diagnostics.Add(ErrorCode.ERR_ExpressionTreeContainsPointerOp, node.Syntax.Location);
-            return new BoundBadExpression(node.Syntax, default(LookupResultKind), ImmutableArray<Symbol>.Empty, ImmutableArray.Create<BoundExpression>(node), node.Type);
+            return new BoundBadExpression(
+                node.Syntax,
+                default(LookupResultKind),
+                ImmutableArray<Symbol>.Empty,
+                ImmutableArray.Create<BoundExpression>(node),
+                node.Type
+            );
         }
 
         private static BoundExpression VisitPointerElementAccess(BoundPointerElementAccess node)
         {
             // error should have been reported earlier
             // Diagnostics.Add(ErrorCode.ERR_ExpressionTreeContainsPointerOp, node.Syntax.Location);
-            return new BoundBadExpression(node.Syntax, default(LookupResultKind), ImmutableArray<Symbol>.Empty, ImmutableArray.Create<BoundExpression>(node), node.Type);
+            return new BoundBadExpression(
+                node.Syntax,
+                default(LookupResultKind),
+                ImmutableArray<Symbol>.Empty,
+                ImmutableArray.Create<BoundExpression>(node),
+                node.Type
+            );
         }
 
         private BoundExpression VisitPropertyAccess(BoundPropertyAccess node)
         {
-            var receiver = node.PropertySymbol.IsStatic ? _bound.Null(ExpressionType) : Visit(node.ReceiverOpt);
+            var receiver = node.PropertySymbol.IsStatic
+                ? _bound.Null(ExpressionType)
+                : Visit(node.ReceiverOpt);
             var getMethod = node.PropertySymbol.GetOwnOrInheritedGetMethod();
 
             // COMPAT: see https://github.com/dotnet/roslyn/issues/4471
-            //         old compiler used to insert casts like this and 
+            //         old compiler used to insert casts like this and
             //         there are known dependencies on this kind of tree shape.
             //
             //         While the casts are semantically incorrect, the conditions
             //         under which they are observable are extremely narrow:
             //         We would have to deal with a generic T receiver which is actually a struct
-            //         that implements a property form an interface and 
+            //         that implements a property form an interface and
             //         the implementation of the getter must make observable mutations to the instance.
             //
             //         At this point it seems more appropriate to continue adding these casts.
-            if (node.ReceiverOpt?.Type.IsTypeParameter() == true &&
-                !node.ReceiverOpt.Type.IsReferenceType)
+            if (
+                node.ReceiverOpt?.Type.IsTypeParameter() == true
+                && !node.ReceiverOpt.Type.IsReferenceType
+            )
             {
                 receiver = this.Convert(receiver, getMethod.ReceiverType, isChecked: false);
             }
@@ -1036,7 +1426,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             // error should have been reported earlier
             // Diagnostics.Add(ErrorCode.ERR_ExpressionTreeContainsPointerOp, node.Syntax.Location);
-            return new BoundBadExpression(node.Syntax, default(LookupResultKind), ImmutableArray<Symbol>.Empty, ImmutableArray.Create<BoundExpression>(node), node.Type);
+            return new BoundBadExpression(
+                node.Syntax,
+                default(LookupResultKind),
+                ImmutableArray<Symbol>.Empty,
+                ImmutableArray.Create<BoundExpression>(node),
+                node.Type
+            );
         }
 
         private BoundExpression VisitUnaryOperator(BoundUnaryOperator node)
@@ -1058,7 +1454,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                     opname = "UnaryPlus";
                     break;
                 case UnaryOperatorKind.UnaryMinus:
-                    opname = isChecked || (node.MethodOpt is { Name: string name } && SyntaxFacts.IsCheckedOperator(name)) ? "NegateChecked" : "Negate";
+                    opname =
+                        isChecked
+                        || (
+                            node.MethodOpt is { Name: string name }
+                            && SyntaxFacts.IsCheckedOperator(name)
+                        )
+                            ? "NegateChecked"
+                            : "Negate";
                     break;
                 case UnaryOperatorKind.BitwiseComplement:
                 case UnaryOperatorKind.LogicalNegation:
@@ -1068,7 +1471,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     throw ExceptionUtilities.UnexpectedValue(op);
             }
 
-            if (node.OperatorKind.OperandTypes() == UnaryOperatorKind.Enum && (opKind & UnaryOperatorKind.Lifted) != 0)
+            if (
+                node.OperatorKind.OperandTypes() == UnaryOperatorKind.Enum
+                && (opKind & UnaryOperatorKind.Lifted) != 0
+            )
             {
                 Debug.Assert((object)node.MethodOpt == null);
                 var promotedType = PromotedType(arg.Type.StrippedType().GetEnumUnderlyingType());
@@ -1090,9 +1496,19 @@ namespace Microsoft.CodeAnalysis.CSharp
             return _bound.StaticCall(ExpressionType, name, arguments);
         }
 
-        private BoundExpression ExprFactory(string name, ImmutableArray<TypeSymbol> typeArgs, params BoundExpression[] arguments)
+        private BoundExpression ExprFactory(
+            string name,
+            ImmutableArray<TypeSymbol> typeArgs,
+            params BoundExpression[] arguments
+        )
         {
-            return _bound.StaticCall(_ignoreAccessibility ? BinderFlags.IgnoreAccessibility : BinderFlags.None, ExpressionType, name, typeArgs, arguments);
+            return _bound.StaticCall(
+                _ignoreAccessibility ? BinderFlags.IgnoreAccessibility : BinderFlags.None,
+                ExpressionType,
+                name,
+                typeArgs,
+                arguments
+            );
         }
 
         private BoundExpression Constant(BoundExpression node)
@@ -1100,7 +1516,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             return ExprFactory(
                 "Constant",
                 _bound.Convert(_objectType, node),
-                _bound.Typeof(node.Type));
+                _bound.Typeof(node.Type)
+            );
         }
     }
 }

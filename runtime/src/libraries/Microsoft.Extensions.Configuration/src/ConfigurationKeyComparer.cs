@@ -43,17 +43,22 @@ namespace Microsoft.Extensions.Configuration
 
                 int compareResult = Compare(
                     xDelimiterIndex == -1 ? xSpan : xSpan.Slice(0, xDelimiterIndex),
-                    yDelimiterIndex == -1 ? ySpan : ySpan.Slice(0, yDelimiterIndex));
+                    yDelimiterIndex == -1 ? ySpan : ySpan.Slice(0, yDelimiterIndex)
+                );
 
                 if (compareResult != 0)
                 {
                     return compareResult;
                 }
 
-                xSpan = xDelimiterIndex == -1 ? default :
-                    SkipAheadOnDelimiter(xSpan.Slice(xDelimiterIndex + 1));
-                ySpan = yDelimiterIndex == -1 ? default :
-                    SkipAheadOnDelimiter(ySpan.Slice(yDelimiterIndex + 1));
+                xSpan =
+                    xDelimiterIndex == -1
+                        ? default
+                        : SkipAheadOnDelimiter(xSpan.Slice(xDelimiterIndex + 1));
+                ySpan =
+                    yDelimiterIndex == -1
+                        ? default
+                        : SkipAheadOnDelimiter(ySpan.Slice(yDelimiterIndex + 1));
             }
 
             return xSpan.IsEmpty ? (ySpan.IsEmpty ? 0 : -1) : 1;

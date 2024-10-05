@@ -8,6 +8,6 @@ namespace System.IO.Ports
         None = 0,
         One = 1,
         Two = 2,
-        OnePointFive = 3
+        OnePointFive = 3,
     };
 }

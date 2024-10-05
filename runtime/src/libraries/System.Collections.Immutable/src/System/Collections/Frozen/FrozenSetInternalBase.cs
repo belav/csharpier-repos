@@ -16,12 +16,14 @@ namespace System.Collections.Frozen
     /// This is an optimization, to minimize the virtual calls necessary to implement these bulk operations.
     /// </typeparam>
     internal abstract class FrozenSetInternalBase<T, TThisWrapper> : FrozenSet<T>
-        where TThisWrapper : struct, FrozenSetInternalBase<T, TThisWrapper>.IGenericSpecializedWrapper
+        where TThisWrapper : struct,
+            FrozenSetInternalBase<T, TThisWrapper>.IGenericSpecializedWrapper
     {
         /// <summary>A wrapper around this that enables access to important members without making virtual calls.</summary>
         private readonly TThisWrapper _thisSet;
 
-        protected FrozenSetInternalBase(IEqualityComparer<T> comparer) : base(comparer)
+        protected FrozenSetInternalBase(IEqualityComparer<T> comparer)
+            : base(comparer)
         {
             _thisSet = default;
             _thisSet.Store(this);
@@ -45,12 +47,16 @@ namespace System.Collections.Frozen
                 // If the other is a set and is using the same equality comparer, the operation can be optimized.
                 if (other is IReadOnlySet<T> otherAsSet && ComparersAreCompatible(otherAsSet))
                 {
-                    return _thisSet.Count < otherCount && IsSubsetOfSetWithCompatibleComparer(otherAsSet);
+                    return _thisSet.Count < otherCount
+                        && IsSubsetOfSetWithCompatibleComparer(otherAsSet);
                 }
             }
 
             // We couldn't take a fast path; do the full comparison.
-            (int uniqueCount, int unfoundCount) = CheckUniqueAndUnfoundElements(other, returnIfUnfound: false);
+            (int uniqueCount, int unfoundCount) = CheckUniqueAndUnfoundElements(
+                other,
+                returnIfUnfound: false
+            );
             return uniqueCount == _thisSet.Count && unfoundCount > 0;
         }
 
@@ -77,7 +83,10 @@ namespace System.Collections.Frozen
             }
 
             // We couldn't take a fast path; do the full comparison.
-            (int uniqueCount, int unfoundCount) = CheckUniqueAndUnfoundElements(other, returnIfUnfound: true);
+            (int uniqueCount, int unfoundCount) = CheckUniqueAndUnfoundElements(
+                other,
+                returnIfUnfound: true
+            );
             return uniqueCount < _thisSet.Count && unfoundCount == 0;
         }
 
@@ -89,11 +98,15 @@ namespace System.Collections.Frozen
             // If the other is a set and is using the same equality comparer, the operation can be optimized.
             if (other is IReadOnlySet<T> otherAsSet && ComparersAreCompatible(otherAsSet))
             {
-                return _thisSet.Count <= otherAsSet.Count && IsSubsetOfSetWithCompatibleComparer(otherAsSet);
+                return _thisSet.Count <= otherAsSet.Count
+                    && IsSubsetOfSetWithCompatibleComparer(otherAsSet);
             }
 
             // We couldn't take a fast path; do the full comparison.
-            (int uniqueCount, int unfoundCount) = CheckUniqueAndUnfoundElements(other, returnIfUnfound: false);
+            (int uniqueCount, int unfoundCount) = CheckUniqueAndUnfoundElements(
+                other,
+                returnIfUnfound: false
+            );
             return uniqueCount == _thisSet.Count && unfoundCount >= 0;
         }
 
@@ -114,9 +127,11 @@ namespace System.Collections.Frozen
                 }
 
                 // If the other is a set and is using the same equality comparer, the operation can be optimized.
-                if (other is IReadOnlySet<T> otherAsSet &&
-                    otherCount > _thisSet.Count &&
-                    ComparersAreCompatible(otherAsSet))
+                if (
+                    other is IReadOnlySet<T> otherAsSet
+                    && otherCount > _thisSet.Count
+                    && ComparersAreCompatible(otherAsSet)
+                )
                 {
                     return false;
                 }
@@ -153,7 +168,10 @@ namespace System.Collections.Frozen
             }
 
             // We couldn't take a fast path; do the full comparison.
-            (int uniqueCount, int unfoundCount) = CheckUniqueAndUnfoundElements(other, returnIfUnfound: true);
+            (int uniqueCount, int unfoundCount) = CheckUniqueAndUnfoundElements(
+                other,
+                returnIfUnfound: true
+            );
             return uniqueCount == _thisSet.Count && unfoundCount == 0;
         }
 
@@ -165,7 +183,7 @@ namespace System.Collections.Frozen
                 ImmutableHashSet<T> ihs => _thisSet.Comparer.Equals(ihs.KeyComparer),
                 ImmutableSortedSet<T> iss => _thisSet.Comparer.Equals(iss.KeyComparer),
                 FrozenSet<T> fs => _thisSet.Comparer.Equals(fs.Comparer),
-                _ => false
+                _ => false,
             };
 
         /// <summary>
@@ -187,7 +205,10 @@ namespace System.Collections.Frozen
         ///    than _count; i.e. everything in other was in this and this had at least one element
         ///    not contained in other.
         /// </remarks>
-        private unsafe KeyValuePair<int, int> CheckUniqueAndUnfoundElements(IEnumerable<T> other, bool returnIfUnfound)
+        private unsafe KeyValuePair<int, int> CheckUniqueAndUnfoundElements(
+            IEnumerable<T> other,
+            bool returnIfUnfound
+        )
         {
             Debug.Assert(_thisSet.Count != 0, "EmptyFrozenSet should have been used.");
 
@@ -195,9 +216,10 @@ namespace System.Collections.Frozen
             int intArrayLength = (_thisSet.Count / BitsPerInt32) + 1;
 
             int[]? rentedArray = null;
-            Span<int> seenItems = intArrayLength <= 128 ?
-                stackalloc int[128] :
-                (rentedArray = ArrayPool<int>.Shared.Rent(intArrayLength));
+            Span<int> seenItems =
+                intArrayLength <= 128
+                    ? stackalloc int[128]
+                    : (rentedArray = ArrayPool<int>.Shared.Rent(intArrayLength));
             seenItems = seenItems.Slice(0, intArrayLength);
             seenItems.Clear();
 

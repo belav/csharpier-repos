@@ -46,5 +46,6 @@ internal interface IAntiforgeryTokenGenerator
         HttpContext httpContext,
         AntiforgeryToken cookieToken,
         AntiforgeryToken requestToken,
-        [NotNullWhen(false)] out string? message);
+        [NotNullWhen(false)] out string? message
+    );
 }

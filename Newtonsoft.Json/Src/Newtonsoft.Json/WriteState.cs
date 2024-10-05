@@ -45,7 +45,7 @@ namespace Newtonsoft.Json
         Closed = 1,
 
         /// <summary>
-        /// An object is being written. 
+        /// An object is being written.
         /// </summary>
         Object = 2,
 
@@ -67,6 +67,6 @@ namespace Newtonsoft.Json
         /// <summary>
         /// A <see cref="JsonWriter"/> write method has not been called.
         /// </summary>
-        Start = 6
+        Start = 6,
     }
 }

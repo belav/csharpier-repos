@@ -23,9 +23,11 @@ public class CustomXmlEncryptor : IXmlEncryptor
 
         _logger.LogInformation("Not encrypting key");
 
-        var newElement = new XElement("unencryptedKey",
+        var newElement = new XElement(
+            "unencryptedKey",
             new XComment(" This key is not encrypted. "),
-            new XElement(plaintextElement));
+            new XElement(plaintextElement)
+        );
         var encryptedTextElement = new EncryptedXmlInfo(newElement, typeof(CustomXmlDecryptor));
 
         return encryptedTextElement;

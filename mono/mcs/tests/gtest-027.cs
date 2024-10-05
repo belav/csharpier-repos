@@ -2,33 +2,29 @@
 
 class TheBase
 {
-	public void BaseFunc ()
-	{ }
+    public void BaseFunc() { }
 }
 
 class Stack<S> : TheBase
 {
-	public void Hello (S s)
-	{ }		
+    public void Hello(S s) { }
 }
 
 class Test<T> : Stack<T>
 {
-	public void Foo (T t)
-	{ }
+    public void Foo(T t) { }
 }
 
 class X
 {
-	Test<int> test;
+    Test<int> test;
 
-	void Test ()
-	{
-		test.Foo (4);
-		test.Hello (3);
-		test.BaseFunc ();
-	}
+    void Test()
+    {
+        test.Foo(4);
+        test.Hello(3);
+        test.BaseFunc();
+    }
 
-	public static void Main ()
-	{ }
+    public static void Main() { }
 }

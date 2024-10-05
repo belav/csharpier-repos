@@ -55,35 +55,39 @@
 //
 //---------------------------------------------------------------------------
 using System;
-using System.IO;
 using System.Collections;
-
+using System.IO;
 using RabbitMQ.Client;
 
-namespace RabbitMQ.Client.Content {
+namespace RabbitMQ.Client.Content
+{
     ///<summary>Analyzes AMQP Basic-class messages binary-compatible
     ///with QPid's "MapMessage" wire encoding.</summary>
-    public class MapMessageReader: BasicMessageReader, IMapMessageReader {
+    public class MapMessageReader : BasicMessageReader, IMapMessageReader
+    {
         ///<summary>MIME type associated with QPid MapMessages.</summary>
         public readonly static string MimeType = MapMessageBuilder.MimeType;
-	// ^ repeated here for convenience
+
+        // ^ repeated here for convenience
 
         ///<summary>Construct an instance for reading. See superclass.</summary>
         public MapMessageReader(IBasicProperties properties, byte[] payload)
-            : base(properties, payload)
-        {}
+            : base(properties, payload) { }
 
-	protected IDictionary m_table = null;
+        protected IDictionary m_table = null;
 
-	///<summary>Implement IMapMessageReader.Body</summary>
+        ///<summary>Implement IMapMessageReader.Body</summary>
         ///<exception cref="System.Net.ProtocolViolationException"/>
-	public IDictionary Body {
-	    get {
-		if (m_table == null) {
-		    m_table = MapWireFormatting.ReadMap(Reader);
-		}
-		return m_table;
-	    }
+        public IDictionary Body
+        {
+            get
+            {
+                if (m_table == null)
+                {
+                    m_table = MapWireFormatting.ReadMap(Reader);
+                }
+                return m_table;
+            }
         }
     }
 }

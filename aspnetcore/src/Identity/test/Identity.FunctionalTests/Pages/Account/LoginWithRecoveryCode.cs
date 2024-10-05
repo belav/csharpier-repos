@@ -10,7 +10,11 @@ public class LoginWithRecoveryCode : DefaultUIPage
 {
     private readonly IHtmlFormElement _loginWithRecoveryCodeForm;
 
-    public LoginWithRecoveryCode(HttpClient client, IHtmlDocument loginWithRecoveryCode, DefaultUIContext context)
+    public LoginWithRecoveryCode(
+        HttpClient client,
+        IHtmlDocument loginWithRecoveryCode,
+        DefaultUIContext context
+    )
         : base(client, loginWithRecoveryCode, context)
     {
         _loginWithRecoveryCodeForm = HtmlAssert.HasForm(loginWithRecoveryCode);
@@ -18,10 +22,10 @@ public class LoginWithRecoveryCode : DefaultUIPage
 
     public async Task<Index> SendRecoveryCodeAsync(string recoveryCode)
     {
-        var response = await Client.SendAsync(_loginWithRecoveryCodeForm, new Dictionary<string, string>
-        {
-            ["Input_RecoveryCode"] = recoveryCode
-        });
+        var response = await Client.SendAsync(
+            _loginWithRecoveryCodeForm,
+            new Dictionary<string, string> { ["Input_RecoveryCode"] = recoveryCode }
+        );
 
         var goToIndex = ResponseAssert.IsRedirect(response);
         var indexPage = await Client.GetAsync(goToIndex);

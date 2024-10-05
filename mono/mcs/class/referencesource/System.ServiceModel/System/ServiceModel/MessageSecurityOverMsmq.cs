@@ -3,8 +3,8 @@
 //------------------------------------------------------------
 namespace System.ServiceModel
 {
-    using System.Runtime;
     using System.ComponentModel;
+    using System.Runtime;
     using System.Runtime.CompilerServices;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
@@ -12,7 +12,8 @@ namespace System.ServiceModel
 
     public sealed class MessageSecurityOverMsmq
     {
-        internal const MessageCredentialType DefaultClientCredentialType = MessageCredentialType.Windows;
+        internal const MessageCredentialType DefaultClientCredentialType =
+            MessageCredentialType.Windows;
 
         MessageCredentialType clientCredentialType;
         SecurityAlgorithmSuite algorithmSuite;
@@ -32,13 +33,18 @@ namespace System.ServiceModel
             {
                 if (!MessageCredentialTypeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
                 this.clientCredentialType = value;
             }
         }
 
-        [DefaultValue(typeof(SecurityAlgorithmSuite), System.ServiceModel.Configuration.ConfigurationStrings.Default)]
+        [DefaultValue(
+            typeof(SecurityAlgorithmSuite),
+            System.ServiceModel.Configuration.ConfigurationStrings.Default
+        )]
         public SecurityAlgorithmSuite AlgorithmSuite
         {
             get { return this.algorithmSuite; }
@@ -72,21 +78,30 @@ namespace System.ServiceModel
                     result = SecurityBindingElement.CreateUserNameForCertificateBindingElement();
                     break;
                 case MessageCredentialType.Certificate:
-                    result = (SymmetricSecurityBindingElement)SecurityBindingElement.CreateMutualCertificateBindingElement();
+                    result = (SymmetricSecurityBindingElement)
+                        SecurityBindingElement.CreateMutualCertificateBindingElement();
                     break;
                 case MessageCredentialType.Windows:
                     result = SecurityBindingElement.CreateKerberosBindingElement();
                     isKerberosSelected = true;
                     break;
                 case MessageCredentialType.IssuedToken:
-                    result = SecurityBindingElement.CreateIssuedTokenForCertificateBindingElement(IssuedSecurityTokenParameters.CreateInfoCardParameters(new SecurityStandardsManager(), this.algorithmSuite));
+                    result = SecurityBindingElement.CreateIssuedTokenForCertificateBindingElement(
+                        IssuedSecurityTokenParameters.CreateInfoCardParameters(
+                            new SecurityStandardsManager(),
+                            this.algorithmSuite
+                        )
+                    );
                     break;
                 default:
                     Fx.Assert("unknown ClientCredentialType");
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException()
+                    );
             }
 
-            result.MessageSecurityVersion = MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11;
+            result.MessageSecurityVersion =
+                MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11;
 
             // set the algorithm suite and issued token params if required
             if (wasAlgorithmSuiteSet || !isKerberosSelected)
@@ -105,7 +120,10 @@ namespace System.ServiceModel
             return result;
         }
 
-        internal static bool TryCreate(SecurityBindingElement sbe, out MessageSecurityOverMsmq messageSecurity)
+        internal static bool TryCreate(
+            SecurityBindingElement sbe,
+            out MessageSecurityOverMsmq messageSecurity
+        )
         {
             messageSecurity = null;
             if (sbe == null)
@@ -115,8 +133,12 @@ namespace System.ServiceModel
             if (ssbe == null)
                 return false;
 
-            if (sbe.MessageSecurityVersion != MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10
-                && sbe.MessageSecurityVersion != MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11)
+            if (
+                sbe.MessageSecurityVersion
+                    != MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10
+                && sbe.MessageSecurityVersion
+                    != MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11
+            )
             {
                 return false;
             }
@@ -146,9 +168,12 @@ namespace System.ServiceModel
                 clientCredentialType = MessageCredentialType.Windows;
                 isKerberosSelected = true;
             }
-            else if (SecurityBindingElement.IsIssuedTokenForCertificateBinding(sbe, out issuedParameters))
+            else if (
+                SecurityBindingElement.IsIssuedTokenForCertificateBinding(sbe, out issuedParameters)
+            )
             {
-                if (!IssuedSecurityTokenParameters.IsInfoCardParameters(
+                if (
+                    !IssuedSecurityTokenParameters.IsInfoCardParameters(
                         issuedParameters,
                         new SecurityStandardsManager(
                             sbe.MessageSecurityVersion,
@@ -157,7 +182,13 @@ namespace System.ServiceModel
                                 sbe.MessageSecurityVersion.TrustVersion,
                                 sbe.MessageSecurityVersion.SecureConversationVersion,
                                 true,
-                                null, null, null))))
+                                null,
+                                null,
+                                null
+                            )
+                        )
+                    )
+                )
                     return false;
                 clientCredentialType = MessageCredentialType.IssuedToken;
             }

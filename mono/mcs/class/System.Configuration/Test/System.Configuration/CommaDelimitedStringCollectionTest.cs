@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,102 +32,101 @@ using System;
 using System.Configuration;
 using NUnit.Framework;
 
-namespace MonoTests.System.Configuration {
-	[TestFixture]
-	public class CommaDelimitedStringCollectionTest
-	{
-		[Test]
-		public void Defaults ()
-		{
-			CommaDelimitedStringCollection c = new CommaDelimitedStringCollection ();
-			Assert.IsFalse (c.IsModified, "A1");
-			Assert.IsFalse (c.IsReadOnly, "A1");
-		}
+namespace MonoTests.System.Configuration
+{
+    [TestFixture]
+    public class CommaDelimitedStringCollectionTest
+    {
+        [Test]
+        public void Defaults()
+        {
+            CommaDelimitedStringCollection c = new CommaDelimitedStringCollection();
+            Assert.IsFalse(c.IsModified, "A1");
+            Assert.IsFalse(c.IsReadOnly, "A1");
+        }
 
-		[Test]
-		public void Manipulations ()
-		{
-			CommaDelimitedStringCollection c = new CommaDelimitedStringCollection ();
+        [Test]
+        public void Manipulations()
+        {
+            CommaDelimitedStringCollection c = new CommaDelimitedStringCollection();
 
-			c.Add ("1");
-			Assert.AreEqual ("1", c.ToString(), "A1");
+            c.Add("1");
+            Assert.AreEqual("1", c.ToString(), "A1");
 
-			c.Add ("2");
-			c.Add ("3");
-			Assert.AreEqual ("1,2,3", c.ToString(), "A2");
+            c.Add("2");
+            c.Add("3");
+            Assert.AreEqual("1,2,3", c.ToString(), "A2");
 
-			c.Remove ("2");
-			Assert.AreEqual ("1,3", c.ToString(), "A3");
+            c.Remove("2");
+            Assert.AreEqual("1,3", c.ToString(), "A3");
 
-			c.Insert (1, "2");
-			Assert.AreEqual ("1,2,3", c.ToString(), "A4");
+            c.Insert(1, "2");
+            Assert.AreEqual("1,2,3", c.ToString(), "A4");
 
-			c.Clear ();
-			Assert.AreEqual (null, c.ToString(), "A5");
+            c.Clear();
+            Assert.AreEqual(null, c.ToString(), "A5");
 
-			string[] foo = new string[3];
-			foo[0] = "1";
-			foo[1] = "2";
-			foo[2] = "3";
-			c.AddRange (foo);
-			Assert.AreEqual ("1,2,3", c.ToString(), "A6");
-		}
+            string[] foo = new string[3];
+            foo[0] = "1";
+            foo[1] = "2";
+            foo[2] = "3";
+            c.AddRange(foo);
+            Assert.AreEqual("1,2,3", c.ToString(), "A6");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ConfigurationErrorsException))]
-		public void RO_Add ()
-		{
-			CommaDelimitedStringCollection c = new CommaDelimitedStringCollection ();
+        [Test]
+        [ExpectedException(typeof(ConfigurationErrorsException))]
+        public void RO_Add()
+        {
+            CommaDelimitedStringCollection c = new CommaDelimitedStringCollection();
 
-			c.SetReadOnly ();
-			c.Add ("hi");
-		}
+            c.SetReadOnly();
+            c.Add("hi");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ConfigurationErrorsException))]
-		public void RO_AddRange ()
-		{
-			CommaDelimitedStringCollection c = new CommaDelimitedStringCollection ();
-			string[] foo = new string[2];
+        [Test]
+        [ExpectedException(typeof(ConfigurationErrorsException))]
+        public void RO_AddRange()
+        {
+            CommaDelimitedStringCollection c = new CommaDelimitedStringCollection();
+            string[] foo = new string[2];
 
-			foo[0] = "hi";
-			foo[1] = "bye";
+            foo[0] = "hi";
+            foo[1] = "bye";
 
-			c.SetReadOnly ();
-			c.AddRange (foo);
-		}
+            c.SetReadOnly();
+            c.AddRange(foo);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ConfigurationErrorsException))]
-		public void RO_Clear ()
-		{
-			CommaDelimitedStringCollection c = new CommaDelimitedStringCollection ();
+        [Test]
+        [ExpectedException(typeof(ConfigurationErrorsException))]
+        public void RO_Clear()
+        {
+            CommaDelimitedStringCollection c = new CommaDelimitedStringCollection();
 
-			c.SetReadOnly ();
-			c.Clear ();
-		}
+            c.SetReadOnly();
+            c.Clear();
+        }
 
-		[Test]
-		[ExpectedException (typeof (ConfigurationErrorsException))]
-		public void RO_Remove ()
-		{
-			CommaDelimitedStringCollection c = new CommaDelimitedStringCollection ();
+        [Test]
+        [ExpectedException(typeof(ConfigurationErrorsException))]
+        public void RO_Remove()
+        {
+            CommaDelimitedStringCollection c = new CommaDelimitedStringCollection();
 
-			c.SetReadOnly ();
-			c.Clear ();
-		}
+            c.SetReadOnly();
+            c.Clear();
+        }
 
-		[Test]
-		[ExpectedException (typeof (ConfigurationErrorsException))]
-		public void RO_Insert ()
-		{
-			CommaDelimitedStringCollection c = new CommaDelimitedStringCollection ();
+        [Test]
+        [ExpectedException(typeof(ConfigurationErrorsException))]
+        public void RO_Insert()
+        {
+            CommaDelimitedStringCollection c = new CommaDelimitedStringCollection();
 
-			c.Add ("hi");
-			c.SetReadOnly ();
-			c.Insert (0, "bye");
-		}
-
-	}
+            c.Add("hi");
+            c.SetReadOnly();
+            c.Insert(0, "bye");
+        }
+    }
 }
-

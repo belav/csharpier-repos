@@ -16,12 +16,13 @@ public class ModelBinder
     /// <param name="modelType">The type that the model binder can bind.</param>
     /// <exception cref="ArgumentNullException"></exception>
     public ModelBinder(Type modelType)
-        : this(new AnonymousValueDescriptor(modelType))
-        => _ = modelType ?? throw new ArgumentNullException(nameof(modelType));
+        : this(new AnonymousValueDescriptor(modelType)) =>
+        _ = modelType ?? throw new ArgumentNullException(nameof(modelType));
 
     internal ModelBinder(IValueDescriptor valueDescriptor)
     {
-        ValueDescriptor = valueDescriptor ?? throw new ArgumentNullException(nameof(valueDescriptor));
+        ValueDescriptor =
+            valueDescriptor ?? throw new ArgumentNullException(nameof(valueDescriptor));
         ModelDescriptor = ModelDescriptor.FromType(valueDescriptor.ValueType);
     }
 
@@ -29,7 +30,7 @@ public class ModelBinder
     /// A descriptor for the source value
     /// </summary>
     public IValueDescriptor ValueDescriptor { get; }
-        
+
     /// <summary>
     /// The descriptor for the model type that the model binder targets.
     /// </summary>
@@ -39,12 +40,11 @@ public class ModelBinder
     /// When set to <see langword="true"/>, the model binder will only bind constructor parameters or properties that it has been explicitly configured to bind.
     /// </summary>
     public bool EnforceExplicitBinding { get; set; }
-    
+
     internal Dictionary<IValueDescriptor, IValueSource> ConstructorArgumentBindingSources { get; } =
         new();
 
-    internal Dictionary<IValueDescriptor, IValueSource> MemberBindingSources { get; } =
-        new();
+    internal Dictionary<IValueDescriptor, IValueSource> MemberBindingSources { get; } = new();
 
     /// <summary>
     /// Sets a property using a value descriptor.
@@ -58,8 +58,10 @@ public class ModelBinder
 
         if (propertyDescriptor is null)
         {
-            throw new ArgumentException(paramName: nameof(property),
-                                        message: "Property is not described by any of the model property descriptors.");
+            throw new ArgumentException(
+                paramName: nameof(property),
+                message: "Property is not described by any of the model property descriptors."
+            );
         }
 
         MemberBindingSources[propertyDescriptor] = new SpecificSymbolValueSource(symbol);
@@ -79,14 +81,18 @@ public class ModelBinder
     /// <summary>
     /// Updates an instance of the target model type.
     /// </summary>
-    public void UpdateInstance<T>(T instance, BindingContext bindingContext)
-        => UpdateInstanceInternalNotifyIfNonDefaultsUsed(instance, bindingContext);
+    public void UpdateInstance<T>(T instance, BindingContext bindingContext) =>
+        UpdateInstanceInternalNotifyIfNonDefaultsUsed(instance, bindingContext);
 
-    private (bool success, object? newInstance, bool anyNonDefaults) CreateInstanceInternal(BindingContext bindingContext)
+    private (bool success, object? newInstance, bool anyNonDefaults) CreateInstanceInternal(
+        BindingContext bindingContext
+    )
     {
         if (IsModelTypeUnbindable())
         {
-            throw new InvalidOperationException($"The type {ModelDescriptor.ModelType} cannot be bound");
+            throw new InvalidOperationException(
+                $"The type {ModelDescriptor.ModelType} cannot be bound"
+            );
         }
 
         if (ShortCutTheBinding())
@@ -106,40 +112,62 @@ public class ModelBinder
             var boundValues = constructorAndArgs.BoundValues;
             var nonDefaultsUsed = constructorAndArgs.NonDefaultsUsed;
 
-            return InstanceFromSpecificConstructor(bindingContext, constructor, boundValues, ref nonDefaultsUsed);
+            return InstanceFromSpecificConstructor(
+                bindingContext,
+                constructor,
+                boundValues,
+                ref nonDefaultsUsed
+            );
         }
     }
 
     private bool IsModelTypeUnbindable()
     {
         var modelType = ModelDescriptor.ModelType;
-        return modelType.IsConstructedGenericTypeOf(typeof(Span<>)) ||
-               modelType.IsConstructedGenericTypeOf(typeof(ReadOnlySpan<>));
+        return modelType.IsConstructedGenericTypeOf(typeof(Span<>))
+            || modelType.IsConstructedGenericTypeOf(typeof(ReadOnlySpan<>));
     }
 
     private bool ShortCutTheBinding()
     {
         var modelType = ModelDescriptor.ModelType;
-        return modelType.IsPrimitive ||
-               modelType.IsNullableValueType() ||
-               modelType == typeof(string) ||
-               modelType == typeof(decimal) ;
+        return modelType.IsPrimitive
+            || modelType.IsNullableValueType()
+            || modelType == typeof(string)
+            || modelType == typeof(decimal);
     }
 
     private (bool success, object? newInstance, bool anyNonDefaults) GetSimpleModelValue(
-        IDictionary<IValueDescriptor, IValueSource> bindingSources, BindingContext bindingContext)
+        IDictionary<IValueDescriptor, IValueSource> bindingSources,
+        BindingContext bindingContext
+    )
     {
-        var valueSource = GetValueSource(bindingSources, bindingContext, ValueDescriptor, EnforceExplicitBinding);
-        return bindingContext.TryBindToScalarValue(ValueDescriptor,
-                                                   valueSource,
-                                                   bindingContext.ParseResult,
-                                                   out var boundValue)
-                   ? (true, boundValue?.Value, true)
-                   : (false, null, false);
+        var valueSource = GetValueSource(
+            bindingSources,
+            bindingContext,
+            ValueDescriptor,
+            EnforceExplicitBinding
+        );
+        return bindingContext.TryBindToScalarValue(
+            ValueDescriptor,
+            valueSource,
+            bindingContext.ParseResult,
+            out var boundValue
+        )
+            ? (true, boundValue?.Value, true)
+            : (false, null, false);
     }
 
-    private (bool success, object? newInstance, bool anyNonDefaults) InstanceFromSpecificConstructor(
-        BindingContext bindingContext, ConstructorDescriptor constructor, IReadOnlyList<BoundValue>? boundValues, ref bool nonDefaultsUsed)
+    private (
+        bool success,
+        object? newInstance,
+        bool anyNonDefaults
+    ) InstanceFromSpecificConstructor(
+        BindingContext bindingContext,
+        ConstructorDescriptor constructor,
+        IReadOnlyList<BoundValue>? boundValues,
+        ref bool nonDefaultsUsed
+    )
     {
         var values = boundValues?.Select(x => x.Value).ToArray() ?? Array.Empty<object>();
         object? newInstance = null;
@@ -152,12 +180,18 @@ public class ModelBinder
             return (false, null, false);
         }
 
-        nonDefaultsUsed = UpdateInstanceInternalNotifyIfNonDefaultsUsed(newInstance, bindingContext);
+        nonDefaultsUsed = UpdateInstanceInternalNotifyIfNonDefaultsUsed(
+            newInstance,
+            bindingContext
+        );
 
         return (true, newInstance, nonDefaultsUsed);
     }
 
-    private bool UpdateInstanceInternalNotifyIfNonDefaultsUsed<T>(T instance, BindingContext bindingContext)
+    private bool UpdateInstanceInternalNotifyIfNonDefaultsUsed<T>(
+        T instance,
+        BindingContext bindingContext
+    )
     {
         var (boundValues, anyNonDefaults) = GetBoundValues(
             MemberBindingSources,
@@ -165,12 +199,13 @@ public class ModelBinder
             ModelDescriptor.PropertyDescriptors,
             EnforceExplicitBinding,
             ModelDescriptor.ModelType,
-            includeMissingValues: false);
+            includeMissingValues: false
+        );
 
         for (var i = 0; i < boundValues.Count; i++)
         {
             var boundValue = boundValues[i];
-            ((PropertyDescriptor) boundValue.ValueDescriptor).SetValue(instance, boundValue.Value);
+            ((PropertyDescriptor)boundValue.ValueDescriptor).SetValue(instance, boundValue.Value);
         }
 
         return anyNonDefaults;
@@ -178,13 +213,12 @@ public class ModelBinder
 
     private ConstructorAndArgs? GetBestConstructorAndArgs(BindingContext bindingContext)
     {
-        var constructorDescriptors =
-            ModelDescriptor
-                .ConstructorDescriptors
-                .OrderByDescending(d => d.ParameterDescriptors.Count);
-            
+        var constructorDescriptors = ModelDescriptor.ConstructorDescriptors.OrderByDescending(d =>
+            d.ParameterDescriptors.Count
+        );
+
         ConstructorAndArgs? bestNonMatching = null;
-            
+
         foreach (var constructor in constructorDescriptors)
         {
             var (boundValues, anyNonDefaults) = GetBoundValues(
@@ -193,13 +227,14 @@ public class ModelBinder
                 constructor.ParameterDescriptors,
                 EnforceExplicitBinding,
                 ModelDescriptor.ModelType,
-                true);
+                true
+            );
 
             if (boundValues.Count == constructor.ParameterDescriptors.Count)
             {
                 var match = new ConstructorAndArgs(constructor, boundValues, anyNonDefaults);
                 if (anyNonDefaults)
-                { 
+                {
                     // based on parameter length, first usable constructor that utilizes CLI definition
                     return match;
                 }
@@ -216,7 +251,8 @@ public class ModelBinder
         IReadOnlyList<IValueDescriptor> valueDescriptors,
         bool enforceExplicitBinding,
         Type? parentType = null,
-        bool includeMissingValues = true)
+        bool includeMissingValues = true
+    )
     {
         var values = new List<BoundValue>(valueDescriptors.Count);
         var anyNonDefaults = false;
@@ -224,10 +260,20 @@ public class ModelBinder
         for (var index = 0; index < valueDescriptors.Count; index++)
         {
             var valueDescriptor = valueDescriptors[index];
-            var valueSource = GetValueSource(bindingSources, bindingContext, valueDescriptor, enforceExplicitBinding);
-            var (boundValue, usedNonDefault) = 
-                GetBoundValue(valueSource, bindingContext, valueDescriptor, includeMissingValues, parentType);
-            
+            var valueSource = GetValueSource(
+                bindingSources,
+                bindingContext,
+                valueDescriptor,
+                enforceExplicitBinding
+            );
+            var (boundValue, usedNonDefault) = GetBoundValue(
+                valueSource,
+                bindingContext,
+                valueDescriptor,
+                includeMissingValues,
+                parentType
+            );
+
             if (usedNonDefault && !anyNonDefaults)
             {
                 anyNonDefaults = true;
@@ -242,10 +288,12 @@ public class ModelBinder
         return (values, anyNonDefaults);
     }
 
-    internal static IValueSource GetValueSource(IDictionary<IValueDescriptor, IValueSource> bindingSources,
+    internal static IValueSource GetValueSource(
+        IDictionary<IValueDescriptor, IValueSource> bindingSources,
         BindingContext bindingContext,
         IValueDescriptor valueDescriptor,
-        bool enforceExplicitBinding)
+        bool enforceExplicitBinding
+    )
     {
         if (bindingSources.TryGetValue(valueDescriptor, out IValueSource? valueSource))
         {
@@ -263,7 +311,7 @@ public class ModelBinder
             // by name and type (or a possible conversion)
             return new ParseResultMatchingValueSource();
         }
-        
+
         return new MissingValueSource();
     }
 
@@ -272,13 +320,17 @@ public class ModelBinder
         BindingContext bindingContext,
         IValueDescriptor valueDescriptor,
         bool includeMissingValues,
-        Type? parentType)
+        Type? parentType
+    )
     {
-        if (bindingContext.TryBindToScalarValue(
+        if (
+            bindingContext.TryBindToScalarValue(
                 valueDescriptor,
                 valueSource,
                 bindingContext.ParseResult,
-                out var boundValue))
+                out var boundValue
+            )
+        )
         {
             return (boundValue, true);
         }
@@ -299,17 +351,29 @@ public class ModelBinder
                     return (null, false);
                 }
 
-                var (success, newInstance, usedNonDefaults) = binder.CreateInstanceInternal(bindingContext);
+                var (success, newInstance, usedNonDefaults) = binder.CreateInstanceInternal(
+                    bindingContext
+                );
 
                 if (success)
                 {
-                    return (new BoundValue(newInstance, valueDescriptor, valueSource), usedNonDefaults);
+                    return (
+                        new BoundValue(newInstance, valueDescriptor, valueSource),
+                        usedNonDefaults
+                    );
                 }
             }
 
             if (valueDescriptor is ParameterDescriptor { AllowsNull: true } parameterDescriptor)
             {
-                return (new BoundValue(parameterDescriptor.GetDefaultValue(), valueDescriptor, valueSource), false);
+                return (
+                    new BoundValue(
+                        parameterDescriptor.GetDefaultValue(),
+                        valueDescriptor,
+                        valueSource
+                    ),
+                    false
+                );
             }
 
             return (DefaultForValueDescriptor(valueDescriptor, bindingContext), false);
@@ -320,24 +384,25 @@ public class ModelBinder
 
     private static BoundValue DefaultForValueDescriptor(
         IValueDescriptor valueDescriptor,
-        BindingContext context)
+        BindingContext context
+    )
     {
         var valueSource = ValueDescriptorDefaultValueSource.Instance;
 
         valueSource.TryGetValue(valueDescriptor, context, out var value);
 
-        return new BoundValue(
-            value,
-            valueDescriptor,
-            valueSource);
+        return new BoundValue(value, valueDescriptor, valueSource);
     }
 
-    private protected IValueDescriptor? FindModelPropertyDescriptor(Type propertyType, string propertyName)
+    private protected IValueDescriptor? FindModelPropertyDescriptor(
+        Type propertyType,
+        string propertyName
+    )
     {
-        return ModelDescriptor.PropertyDescriptors
-                              .FirstOrDefault(desc =>
-                                                  desc.ValueType == propertyType &&
-                                                  string.Equals(desc.ValueName, propertyName, StringComparison.Ordinal));
+        return ModelDescriptor.PropertyDescriptors.FirstOrDefault(desc =>
+            desc.ValueType == propertyType
+            && string.Equals(desc.ValueName, propertyName, StringComparison.Ordinal)
+        );
     }
 
     internal class AnonymousValueDescriptor : IValueDescriptor
@@ -364,7 +429,11 @@ public class ModelBinder
         public IReadOnlyList<BoundValue>? BoundValues { get; }
         public bool NonDefaultsUsed { get; }
 
-        public ConstructorAndArgs(ConstructorDescriptor constructor, IReadOnlyList<BoundValue>? boundValues, bool nonDefaultsUsed)
+        public ConstructorAndArgs(
+            ConstructorDescriptor constructor,
+            IReadOnlyList<BoundValue>? boundValues,
+            bool nonDefaultsUsed
+        )
         {
             Constructor = constructor;
             BoundValues = boundValues;

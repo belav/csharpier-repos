@@ -16,30 +16,14 @@ namespace System.ServiceModel.Activities
     {
         Collection<OutArgument> parameters;
 
-        public InArgument<Message> Message
-        {
-            get;
-            set;
-        }
+        public InArgument<Message> Message { get; set; }
 
-        public IClientMessageFormatter Formatter
-        {
-            get;
-            set;
-        }
+        public IClientMessageFormatter Formatter { get; set; }
 
-        public IClientFaultFormatter FaultFormatter
-        {
-            get;
-            set;
-        }
+        public IClientFaultFormatter FaultFormatter { get; set; }
 
-        public OutArgument Result
-        {
-            get;
-            set;
-        }
-        
+        public OutArgument Result { get; set; }
+
         public Collection<OutArgument> Parameters
         {
             get
@@ -54,13 +38,22 @@ namespace System.ServiceModel.Activities
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
-            RuntimeArgument messageArgument = new RuntimeArgument(Constants.Message, Constants.MessageType, ArgumentDirection.In, true);
+            RuntimeArgument messageArgument = new RuntimeArgument(
+                Constants.Message,
+                Constants.MessageType,
+                ArgumentDirection.In,
+                true
+            );
             metadata.Bind(this.Message, messageArgument);
             metadata.AddArgument(messageArgument);
 
             if (this.Result != null)
             {
-                RuntimeArgument resultArgument = new RuntimeArgument(Constants.Result, this.Result.ArgumentType, ArgumentDirection.Out);
+                RuntimeArgument resultArgument = new RuntimeArgument(
+                    Constants.Result,
+                    this.Result.ArgumentType,
+                    ArgumentDirection.Out
+                );
                 metadata.Bind(this.Result, resultArgument);
                 metadata.AddArgument(resultArgument);
             }
@@ -70,7 +63,11 @@ namespace System.ServiceModel.Activities
                 int count = 0;
                 foreach (OutArgument parameter in this.parameters)
                 {
-                    RuntimeArgument parameterArgument = new RuntimeArgument(Constants.Message + count++, parameter.ArgumentType, ArgumentDirection.Out);
+                    RuntimeArgument parameterArgument = new RuntimeArgument(
+                        Constants.Message + count++,
+                        parameter.ArgumentType,
+                        ArgumentDirection.Out
+                    );
                     metadata.Bind(parameter, parameterArgument);
                     metadata.AddArgument(parameterArgument);
                 }
@@ -83,11 +80,15 @@ namespace System.ServiceModel.Activities
 
             if (inMessage == null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.NullReplyMessageContractMismatch));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.NullReplyMessageContractMismatch)
+                );
             }
             if (inMessage.IsFault)
             {
-                FaultConverter faultConverter = FaultConverter.GetDefaultFaultConverter(inMessage.Version);
+                FaultConverter faultConverter = FaultConverter.GetDefaultFaultConverter(
+                    inMessage.Version
+                );
                 Exception exception = DeserializeFault(inMessage, faultConverter);
 
                 // We simply throw the exception
@@ -122,7 +123,9 @@ namespace System.ServiceModel.Activities
                         object obj = outObjects[i];
                         if (obj == null)
                         {
-                            obj = ProxyOperationRuntime.GetDefaultParameterValue(outArgument.ArgumentType);
+                            obj = ProxyOperationRuntime.GetDefaultParameterValue(
+                                outArgument.ArgumentType
+                            );
                         }
 
                         outArgument.Set(context, obj);
@@ -135,7 +138,10 @@ namespace System.ServiceModel.Activities
         {
             // Reproduce logic in ClientOperationFormatterHelper
 
-            MessageFault messageFault = MessageFault.CreateFault(inMessage, TransportDefaults.MaxFaultSize);
+            MessageFault messageFault = MessageFault.CreateFault(
+                inMessage,
+                TransportDefaults.MaxFaultSize
+            );
             string action = inMessage.Headers.Action;
             if (action == inMessage.Version.Addressing.DefaultFaultAction)
             {

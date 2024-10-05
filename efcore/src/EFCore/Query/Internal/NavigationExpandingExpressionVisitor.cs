@@ -22,7 +22,8 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public static readonly bool UseOldBehavior32217 =
-        AppContext.TryGetSwitch("Microsoft.EntityFrameworkCore.Issue32217", out var enabled32217) && enabled32217;
+        AppContext.TryGetSwitch("Microsoft.EntityFrameworkCore.Issue32217", out var enabled32217)
+        && enabled32217;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -31,32 +32,45 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public static readonly bool UseOldBehavior32312 =
-        AppContext.TryGetSwitch("Microsoft.EntityFrameworkCore.Issue32312", out var enabled32312) && enabled32312;
+        AppContext.TryGetSwitch("Microsoft.EntityFrameworkCore.Issue32312", out var enabled32312)
+        && enabled32312;
 
-    private static readonly PropertyInfo QueryContextContextPropertyInfo
-        = typeof(QueryContext).GetTypeInfo().GetDeclaredProperty(nameof(QueryContext.Context))!;
+    private static readonly PropertyInfo QueryContextContextPropertyInfo = typeof(QueryContext)
+        .GetTypeInfo()
+        .GetDeclaredProperty(nameof(QueryContext.Context))!;
 
-    private static readonly Dictionary<MethodInfo, MethodInfo> PredicateLessMethodInfo = new()
-    {
-        { QueryableMethods.FirstWithPredicate, QueryableMethods.FirstWithoutPredicate },
-        { QueryableMethods.FirstOrDefaultWithPredicate, QueryableMethods.FirstOrDefaultWithoutPredicate },
-        { QueryableMethods.SingleWithPredicate, QueryableMethods.SingleWithoutPredicate },
-        { QueryableMethods.SingleOrDefaultWithPredicate, QueryableMethods.SingleOrDefaultWithoutPredicate },
-        { QueryableMethods.LastWithPredicate, QueryableMethods.LastWithoutPredicate },
-        { QueryableMethods.LastOrDefaultWithPredicate, QueryableMethods.LastOrDefaultWithoutPredicate }
-    };
+    private static readonly Dictionary<MethodInfo, MethodInfo> PredicateLessMethodInfo =
+        new()
+        {
+            { QueryableMethods.FirstWithPredicate, QueryableMethods.FirstWithoutPredicate },
+            {
+                QueryableMethods.FirstOrDefaultWithPredicate,
+                QueryableMethods.FirstOrDefaultWithoutPredicate
+            },
+            { QueryableMethods.SingleWithPredicate, QueryableMethods.SingleWithoutPredicate },
+            {
+                QueryableMethods.SingleOrDefaultWithPredicate,
+                QueryableMethods.SingleOrDefaultWithoutPredicate
+            },
+            { QueryableMethods.LastWithPredicate, QueryableMethods.LastWithoutPredicate },
+            {
+                QueryableMethods.LastOrDefaultWithPredicate,
+                QueryableMethods.LastOrDefaultWithoutPredicate
+            },
+        };
 
-    private static readonly List<MethodInfo> SupportedFilteredIncludeOperations = new()
-    {
-        QueryableMethods.Where,
-        QueryableMethods.OrderBy,
-        QueryableMethods.OrderByDescending,
-        QueryableMethods.ThenBy,
-        QueryableMethods.ThenByDescending,
-        QueryableMethods.Skip,
-        QueryableMethods.Take,
-        QueryableMethods.AsQueryable
-    };
+    private static readonly List<MethodInfo> SupportedFilteredIncludeOperations =
+        new()
+        {
+            QueryableMethods.Where,
+            QueryableMethods.OrderBy,
+            QueryableMethods.OrderByDescending,
+            QueryableMethods.ThenBy,
+            QueryableMethods.ThenByDescending,
+            QueryableMethods.Skip,
+            QueryableMethods.Take,
+            QueryableMethods.AsQueryable,
+        };
 
     private readonly QueryTranslationPreprocessor _queryTranslationPreprocessor;
     private readonly QueryCompilationContext _queryCompilationContext;
@@ -71,8 +85,10 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
     private readonly INavigationExpansionExtensibilityHelper _extensibilityHelper;
     private readonly HashSet<IEntityType> _nonCyclicAutoIncludeEntityTypes;
 
-    private readonly Dictionary<IEntityType, LambdaExpression> _parameterizedQueryFilterPredicateCache
-        = new();
+    private readonly Dictionary<
+        IEntityType,
+        LambdaExpression
+    > _parameterizedQueryFilterPredicateCache = new();
 
     private readonly Parameters _parameters = new();
 
@@ -86,18 +102,27 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
         QueryTranslationPreprocessor queryTranslationPreprocessor,
         QueryCompilationContext queryCompilationContext,
         IEvaluatableExpressionFilter evaluatableExpressionFilter,
-        INavigationExpansionExtensibilityHelper extensibilityHelper)
+        INavigationExpansionExtensibilityHelper extensibilityHelper
+    )
     {
         _queryTranslationPreprocessor = queryTranslationPreprocessor;
         _queryCompilationContext = queryCompilationContext;
         _extensibilityHelper = extensibilityHelper;
-        _pendingSelectorExpandingExpressionVisitor = new PendingSelectorExpandingExpressionVisitor(this, extensibilityHelper);
-        _subqueryMemberPushdownExpressionVisitor = new SubqueryMemberPushdownExpressionVisitor(queryCompilationContext.Model);
+        _pendingSelectorExpandingExpressionVisitor = new PendingSelectorExpandingExpressionVisitor(
+            this,
+            extensibilityHelper
+        );
+        _subqueryMemberPushdownExpressionVisitor = new SubqueryMemberPushdownExpressionVisitor(
+            queryCompilationContext.Model
+        );
         _nullCheckRemovingExpressionVisitor = new NullCheckRemovingExpressionVisitor();
         _reducingExpressionVisitor = new ReducingExpressionVisitor();
-        _entityReferenceOptionalMarkingExpressionVisitor = new EntityReferenceOptionalMarkingExpressionVisitor();
-        _removeRedundantNavigationComparisonExpressionVisitor = new RemoveRedundantNavigationComparisonExpressionVisitor(
-            queryCompilationContext.Logger);
+        _entityReferenceOptionalMarkingExpressionVisitor =
+            new EntityReferenceOptionalMarkingExpressionVisitor();
+        _removeRedundantNavigationComparisonExpressionVisitor =
+            new RemoveRedundantNavigationComparisonExpressionVisitor(
+                queryCompilationContext.Logger
+            );
         _parameterExtractingExpressionVisitor = new ParameterExtractingExpressionVisitor(
             evaluatableExpressionFilter,
             _parameters,
@@ -105,9 +130,12 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
             _queryCompilationContext.Model,
             _queryCompilationContext.Logger,
             parameterize: false,
-            generateContextAccessors: true);
+            generateContextAccessors: true
+        );
 
-        _nonCyclicAutoIncludeEntityTypes = !_queryCompilationContext.IgnoreAutoIncludes ? new HashSet<IEntityType>() : null!;
+        _nonCyclicAutoIncludeEntityTypes = !_queryCompilationContext.IgnoreAutoIncludes
+            ? new HashSet<IEntityType>()
+            : null!;
     }
 
     /// <summary>
@@ -122,52 +150,81 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
 
         if (result is GroupByNavigationExpansionExpression groupByNavigationExpansionExpression)
         {
-            if (!(groupByNavigationExpansionExpression.Source is MethodCallExpression { Method.IsGenericMethod: true } methodCallExpression
-                    && methodCallExpression.Method.GetGenericMethodDefinition() == QueryableMethods.GroupByWithKeySelector))
+            if (
+                !(
+                    groupByNavigationExpansionExpression.Source
+                        is MethodCallExpression
+                        {
+                            Method.IsGenericMethod: true
+                        } methodCallExpression
+                    && methodCallExpression.Method.GetGenericMethodDefinition()
+                        == QueryableMethods.GroupByWithKeySelector
+                )
+            )
             {
                 // If the final operator is not GroupBy in source then GroupBy is not final operator. We throw exception.
                 throw new InvalidOperationException(CoreStrings.TranslationFailed(query.Print()));
             }
 
             var groupingQueryable = groupByNavigationExpansionExpression.GroupingEnumerable.Source;
-            var innerEnumerable = new PendingSelectorExpandingExpressionVisitor(this, _extensibilityHelper, applyIncludes: true).Visit(
-                groupByNavigationExpansionExpression.GroupingEnumerable);
+            var innerEnumerable = new PendingSelectorExpandingExpressionVisitor(
+                this,
+                _extensibilityHelper,
+                applyIncludes: true
+            ).Visit(groupByNavigationExpansionExpression.GroupingEnumerable);
             innerEnumerable = Reduce(innerEnumerable);
 
-            if (innerEnumerable is MethodCallExpression { Method.IsGenericMethod: true } selectMethodCall
-                && selectMethodCall.Method.GetGenericMethodDefinition() == QueryableMethods.Select)
+            if (
+                innerEnumerable
+                    is MethodCallExpression { Method.IsGenericMethod: true } selectMethodCall
+                && selectMethodCall.Method.GetGenericMethodDefinition() == QueryableMethods.Select
+            )
             {
                 var elementSelector = selectMethodCall.Arguments[1];
                 var elementSelectorLambda = elementSelector.UnwrapLambdaFromQuote();
 
                 // We do have element selector to inject which may have potentially expanded navigations
-                var oldKeySelectorLambda = methodCallExpression.Arguments[1].UnwrapLambdaFromQuote();
+                var oldKeySelectorLambda = methodCallExpression
+                    .Arguments[1]
+                    .UnwrapLambdaFromQuote();
                 var newSource = ReplacingExpressionVisitor.Replace(
-                    groupingQueryable, methodCallExpression.Arguments[0], selectMethodCall.Arguments[0]);
+                    groupingQueryable,
+                    methodCallExpression.Arguments[0],
+                    selectMethodCall.Arguments[0]
+                );
 
                 var oldKeySelectorParameterType = oldKeySelectorLambda.Parameters[0].Type;
-                var keySelectorParameter = Expression.Parameter(elementSelectorLambda.Parameters[0].Type);
+                var keySelectorParameter = Expression.Parameter(
+                    elementSelectorLambda.Parameters[0].Type
+                );
                 var keySelectorMemberAccess = (Expression)keySelectorParameter;
                 while (keySelectorMemberAccess.Type != oldKeySelectorParameterType)
                 {
                     keySelectorMemberAccess = Expression.MakeMemberAccess(
                         keySelectorMemberAccess,
-                        keySelectorMemberAccess.Type.GetTypeInfo().GetDeclaredField("Outer")!);
+                        keySelectorMemberAccess.Type.GetTypeInfo().GetDeclaredField("Outer")!
+                    );
                 }
 
                 var keySelectorLambda = Expression.Lambda(
                     ReplacingExpressionVisitor.Replace(
-                        oldKeySelectorLambda.Parameters[0], keySelectorMemberAccess, oldKeySelectorLambda.Body),
-                    keySelectorParameter);
+                        oldKeySelectorLambda.Parameters[0],
+                        keySelectorMemberAccess,
+                        oldKeySelectorLambda.Body
+                    ),
+                    keySelectorParameter
+                );
 
                 result = Expression.Call(
                     QueryableMethods.GroupByWithKeyElementSelector.MakeGenericMethod(
                         newSource.Type.GetSequenceType(),
                         keySelectorLambda.ReturnType,
-                        elementSelectorLambda.ReturnType),
+                        elementSelectorLambda.ReturnType
+                    ),
                     newSource,
                     Expression.Quote(keySelectorLambda),
-                    elementSelector);
+                    elementSelector
+                );
             }
             else
             {
@@ -177,16 +234,21 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
         }
         else
         {
-            result = new PendingSelectorExpandingExpressionVisitor(this, _extensibilityHelper, applyIncludes: true).Visit(result);
+            result = new PendingSelectorExpandingExpressionVisitor(
+                this,
+                _extensibilityHelper,
+                applyIncludes: true
+            ).Visit(result);
             result = Reduce(result);
         }
 
-        var dbContextOnQueryContextPropertyAccess =
-            Expression.Convert(
-                Expression.Property(
-                    QueryCompilationContext.QueryContextParameter,
-                    QueryContextContextPropertyInfo),
-                _queryCompilationContext.ContextType);
+        var dbContextOnQueryContextPropertyAccess = Expression.Convert(
+            Expression.Property(
+                QueryCompilationContext.QueryContextParameter,
+                QueryContextContextPropertyInfo
+            ),
+            _queryCompilationContext.ContextType
+        );
 
         foreach (var (key, value) in _parameters.ParameterValues)
         {
@@ -194,7 +256,8 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
             var remappedLambdaBody = ReplacingExpressionVisitor.Replace(
                 lambda.Parameters[0],
                 dbContextOnQueryContextPropertyAccess,
-                lambda.Body);
+                lambda.Body
+            );
 
             _queryCompilationContext.RegisterRuntimeParameter(
                 key,
@@ -202,7 +265,9 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                     remappedLambdaBody.Type.IsValueType
                         ? Expression.Convert(remappedLambdaBody, typeof(object))
                         : remappedLambdaBody,
-                    QueryCompilationContext.QueryContextParameter));
+                    QueryCompilationContext.QueryContextParameter
+                )
+            );
         }
 
         return result;
@@ -224,27 +289,47 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                 var definingQuery = entityType.GetDefiningQuery();
 #pragma warning restore CS0618 // Type or member is obsolete
                 NavigationExpansionExpression navigationExpansionExpression;
-                if (definingQuery != null
+                if (
+                    definingQuery != null
                     // Apply defining query only when it is not custom query root
-                    && entityQueryRootExpression.GetType() == typeof(EntityQueryRootExpression))
+                    && entityQueryRootExpression.GetType() == typeof(EntityQueryRootExpression)
+                )
                 {
                     var processedDefiningQueryBody =
-                        _parameterExtractingExpressionVisitor.ExtractParameters(definingQuery.Body, clearEvaluatedValues: false);
-                    processedDefiningQueryBody = _queryTranslationPreprocessor.NormalizeQueryableMethod(processedDefiningQueryBody);
-                    processedDefiningQueryBody = _nullCheckRemovingExpressionVisitor.Visit(processedDefiningQueryBody);
+                        _parameterExtractingExpressionVisitor.ExtractParameters(
+                            definingQuery.Body,
+                            clearEvaluatedValues: false
+                        );
                     processedDefiningQueryBody =
-                        new SelfReferenceEntityQueryableRewritingExpressionVisitor(this, entityType).Visit(processedDefiningQueryBody);
+                        _queryTranslationPreprocessor.NormalizeQueryableMethod(
+                            processedDefiningQueryBody
+                        );
+                    processedDefiningQueryBody = _nullCheckRemovingExpressionVisitor.Visit(
+                        processedDefiningQueryBody
+                    );
+                    processedDefiningQueryBody =
+                        new SelfReferenceEntityQueryableRewritingExpressionVisitor(
+                            this,
+                            entityType
+                        ).Visit(processedDefiningQueryBody);
 
                     processedDefiningQueryBody = Visit(processedDefiningQueryBody);
-                    processedDefiningQueryBody = _pendingSelectorExpandingExpressionVisitor.Visit(processedDefiningQueryBody);
+                    processedDefiningQueryBody = _pendingSelectorExpandingExpressionVisitor.Visit(
+                        processedDefiningQueryBody
+                    );
                     processedDefiningQueryBody = Reduce(processedDefiningQueryBody);
 
-                    navigationExpansionExpression = CreateNavigationExpansionExpression(processedDefiningQueryBody, entityType);
+                    navigationExpansionExpression = CreateNavigationExpansionExpression(
+                        processedDefiningQueryBody,
+                        entityType
+                    );
                 }
                 else
                 {
                     navigationExpansionExpression = CreateNavigationExpansionExpression(
-                        base.VisitExtension(entityQueryRootExpression), entityType);
+                        base.VisitExtension(entityQueryRootExpression),
+                        entityType
+                    );
                 }
 
                 return ApplyQueryFilter(entityType, navigationExpansionExpression);
@@ -252,19 +337,35 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
             // Inline query roots can contain arbitrary expressions, including subqueries with navigations; visit inside to process those.
             case InlineQueryRootExpression inlineQueryRootExpression:
             {
-                var visited = inlineQueryRootExpression.Update(this.VisitAndConvert(inlineQueryRootExpression.Values));
-                var currentTree = new NavigationTreeExpression(Expression.Default(inlineQueryRootExpression.ElementType));
+                var visited = inlineQueryRootExpression.Update(
+                    this.VisitAndConvert(inlineQueryRootExpression.Values)
+                );
+                var currentTree = new NavigationTreeExpression(
+                    Expression.Default(inlineQueryRootExpression.ElementType)
+                );
                 var parameterName = GetParameterName("e");
 
-                return new NavigationExpansionExpression(visited, currentTree, currentTree, parameterName);
+                return new NavigationExpansionExpression(
+                    visited,
+                    currentTree,
+                    currentTree,
+                    parameterName
+                );
             }
 
             case QueryRootExpression queryRootExpression:
             {
-                var currentTree = new NavigationTreeExpression(Expression.Default(queryRootExpression.ElementType));
+                var currentTree = new NavigationTreeExpression(
+                    Expression.Default(queryRootExpression.ElementType)
+                );
                 var parameterName = GetParameterName("e");
 
-                return new NavigationExpansionExpression(queryRootExpression, currentTree, currentTree, parameterName);
+                return new NavigationExpansionExpression(
+                    queryRootExpression,
+                    currentTree,
+                    currentTree,
+                    parameterName
+                );
             }
 
             case NavigationExpansionExpression:
@@ -287,15 +388,24 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
         var innerExpression = Visit(memberExpression.Expression);
 
         // Convert ICollection<T>.Count to Count<T>()
-        if (memberExpression.Expression != null
+        if (
+            memberExpression.Expression != null
             && innerExpression != null
             && memberExpression.Member.Name == nameof(ICollection<int>.Count)
-            && memberExpression.Expression.Type.GetInterfaces().Append(memberExpression.Expression.Type)
-                .Any(
-                    e => e.IsGenericType
-                        && (e.GetGenericTypeDefinition() is Type genericTypeDefinition
-                            && (genericTypeDefinition == typeof(ICollection<>)
-                                || genericTypeDefinition == typeof(IReadOnlyCollection<>)))))
+            && memberExpression
+                .Expression.Type.GetInterfaces()
+                .Append(memberExpression.Expression.Type)
+                .Any(e =>
+                    e.IsGenericType
+                    && (
+                        e.GetGenericTypeDefinition() is Type genericTypeDefinition
+                        && (
+                            genericTypeDefinition == typeof(ICollection<>)
+                            || genericTypeDefinition == typeof(IReadOnlyCollection<>)
+                        )
+                    )
+                )
+        )
         {
             var innerQueryable = UnwrapCollectionMaterialization(innerExpression);
 
@@ -303,21 +413,30 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
             {
                 return Visit(
                     Expression.Call(
-                        QueryableMethods.CountWithoutPredicate.MakeGenericMethod(innerQueryable.Type.GetSequenceType()),
-                        innerQueryable));
+                        QueryableMethods.CountWithoutPredicate.MakeGenericMethod(
+                            innerQueryable.Type.GetSequenceType()
+                        ),
+                        innerQueryable
+                    )
+                );
             }
         }
 
         var updatedExpression = (Expression)memberExpression.Update(innerExpression);
-        if (innerExpression is NavigationExpansionExpression navigationExpansionExpression
-            && navigationExpansionExpression.CardinalityReducingGenericMethodInfo != null)
+        if (
+            innerExpression is NavigationExpansionExpression navigationExpansionExpression
+            && navigationExpansionExpression.CardinalityReducingGenericMethodInfo != null
+        )
         {
             // This is FirstOrDefault.Member
             // due to SubqueryMemberPushdown, this may be collection navigation which was not pushed down
-            navigationExpansionExpression =
-                (NavigationExpansionExpression)_pendingSelectorExpandingExpressionVisitor.Visit(navigationExpansionExpression);
-            var expandedExpression =
-                new ExpandingExpressionVisitor(this, navigationExpansionExpression, _extensibilityHelper).Visit(updatedExpression);
+            navigationExpansionExpression = (NavigationExpansionExpression)
+                _pendingSelectorExpandingExpressionVisitor.Visit(navigationExpansionExpression);
+            var expandedExpression = new ExpandingExpressionVisitor(
+                this,
+                navigationExpansionExpression,
+                _extensibilityHelper
+            ).Visit(updatedExpression);
             if (expandedExpression != updatedExpression)
             {
                 updatedExpression = Visit(expandedExpression);
@@ -336,18 +455,22 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
     protected override Expression VisitMethodCall(MethodCallExpression methodCallExpression)
     {
         var method = methodCallExpression.Method;
-        if (method.DeclaringType == typeof(Queryable)
+        if (
+            method.DeclaringType == typeof(Queryable)
             || method.DeclaringType == typeof(QueryableExtensions)
-            || method.DeclaringType == typeof(EntityFrameworkQueryableExtensions))
+            || method.DeclaringType == typeof(EntityFrameworkQueryableExtensions)
+        )
         {
             var genericMethod = method.IsGenericMethod ? method.GetGenericMethodDefinition() : null;
             // First argument is source
             var firstArgument = Visit(methodCallExpression.Arguments[0]);
             if (firstArgument is NavigationExpansionExpression source)
             {
-                if (source.PendingOrderings.Any()
+                if (
+                    source.PendingOrderings.Any()
                     && genericMethod != QueryableMethods.ThenBy
-                    && genericMethod != QueryableMethods.ThenByDescending)
+                    && genericMethod != QueryableMethods.ThenByDescending
+                )
                 {
                     ApplyPendingOrderings(source);
                 }
@@ -364,13 +487,9 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                         when genericMethod == QueryableMethods.CountWithoutPredicate:
                     case nameof(Queryable.LongCount)
                         when genericMethod == QueryableMethods.LongCountWithoutPredicate:
-                        return ProcessAllAnyCountLongCount(
-                            source,
-                            genericMethod,
-                            predicate: null);
+                        return ProcessAllAnyCountLongCount(source, genericMethod, predicate: null);
 
-                    case nameof(Queryable.All)
-                        when genericMethod == QueryableMethods.All:
+                    case nameof(Queryable.All) when genericMethod == QueryableMethods.All:
                     case nameof(Queryable.Any)
                         when genericMethod == QueryableMethods.AnyWithPredicate:
                     case nameof(Queryable.Count)
@@ -380,7 +499,8 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                         return ProcessAllAnyCountLongCount(
                             source,
                             genericMethod,
-                            methodCallExpression.Arguments[1].UnwrapLambdaFromQuote());
+                            methodCallExpression.Arguments[1].UnwrapLambdaFromQuote()
+                        );
 
                     case nameof(Queryable.Average)
                         when QueryableMethods.IsAverageWithoutSelector(method):
@@ -388,17 +508,16 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                         when genericMethod == QueryableMethods.MaxWithoutSelector:
                     case nameof(Queryable.Min)
                         when genericMethod == QueryableMethods.MinWithoutSelector:
-                    case nameof(Queryable.Sum)
-                        when QueryableMethods.IsSumWithoutSelector(method):
+                    case nameof(Queryable.Sum) when QueryableMethods.IsSumWithoutSelector(method):
                         return ProcessAverageMaxMinSum(
                             source,
                             genericMethod ?? method,
-                            selector: null);
+                            selector: null
+                        );
 
                     case nameof(Queryable.Average)
                         when QueryableMethods.IsAverageWithSelector(method):
-                    case nameof(Queryable.Sum)
-                        when QueryableMethods.IsSumWithSelector(method):
+                    case nameof(Queryable.Sum) when QueryableMethods.IsSumWithSelector(method):
                     case nameof(Queryable.Max)
                         when genericMethod == QueryableMethods.MaxWithSelector:
                     case nameof(Queryable.Min)
@@ -406,26 +525,22 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                         return ProcessAverageMaxMinSum(
                             source,
                             genericMethod ?? method,
-                            methodCallExpression.Arguments[1].UnwrapLambdaFromQuote());
+                            methodCallExpression.Arguments[1].UnwrapLambdaFromQuote()
+                        );
 
-                    case nameof(Queryable.Distinct)
-                        when genericMethod == QueryableMethods.Distinct:
+                    case nameof(Queryable.Distinct) when genericMethod == QueryableMethods.Distinct:
                         return ProcessDistinct(source, genericMethod);
 
-                    case nameof(Queryable.Skip)
-                        when genericMethod == QueryableMethods.Skip:
-                    case nameof(Queryable.Take)
-                        when genericMethod == QueryableMethods.Take:
+                    case nameof(Queryable.Skip) when genericMethod == QueryableMethods.Skip:
+                    case nameof(Queryable.Take) when genericMethod == QueryableMethods.Take:
                         return ProcessSkipTake(
                             source,
                             genericMethod,
-                            methodCallExpression.Arguments[1]);
+                            methodCallExpression.Arguments[1]
+                        );
 
-                    case nameof(Queryable.Contains)
-                        when genericMethod == QueryableMethods.Contains:
-                        return ProcessContains(
-                            source,
-                            methodCallExpression.Arguments[1]);
+                    case nameof(Queryable.Contains) when genericMethod == QueryableMethods.Contains:
+                        return ProcessContains(source, methodCallExpression.Arguments[1]);
 
                     case nameof(Queryable.First)
                         when genericMethod == QueryableMethods.FirstWithoutPredicate:
@@ -443,7 +558,8 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                             source,
                             genericMethod,
                             predicate: null,
-                            methodCallExpression.Type);
+                            methodCallExpression.Type
+                        );
 
                     case nameof(Queryable.First)
                         when genericMethod == QueryableMethods.FirstWithPredicate:
@@ -461,7 +577,8 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                             source,
                             genericMethod,
                             methodCallExpression.Arguments[1].UnwrapLambdaFromQuote(),
-                            methodCallExpression.Type);
+                            methodCallExpression.Type
+                        );
 
                     case nameof(Queryable.ElementAt)
                         when genericMethod == QueryableMethods.ElementAt:
@@ -471,10 +588,10 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                             source,
                             genericMethod,
                             methodCallExpression.Arguments[1],
-                            methodCallExpression.Type);
+                            methodCallExpression.Type
+                        );
 
-                    case nameof(Queryable.Join)
-                        when genericMethod == QueryableMethods.Join:
+                    case nameof(Queryable.Join) when genericMethod == QueryableMethods.Join:
                     {
                         var secondArgument = Visit(methodCallExpression.Arguments[1]);
                         secondArgument = UnwrapCollectionMaterialization(secondArgument);
@@ -485,7 +602,8 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                                 innerSource,
                                 methodCallExpression.Arguments[2].UnwrapLambdaFromQuote(),
                                 methodCallExpression.Arguments[3].UnwrapLambdaFromQuote(),
-                                methodCallExpression.Arguments[4].UnwrapLambdaFromQuote());
+                                methodCallExpression.Arguments[4].UnwrapLambdaFromQuote()
+                            );
                         }
 
                         goto default;
@@ -503,7 +621,8 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                                 innerSource,
                                 methodCallExpression.Arguments[2].UnwrapLambdaFromQuote(),
                                 methodCallExpression.Arguments[3].UnwrapLambdaFromQuote(),
-                                methodCallExpression.Arguments[4].UnwrapLambdaFromQuote());
+                                methodCallExpression.Arguments[4].UnwrapLambdaFromQuote()
+                            );
                         }
 
                         goto default;
@@ -514,23 +633,22 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                         return ProcessSelectMany(
                             source,
                             methodCallExpression.Arguments[1].UnwrapLambdaFromQuote(),
-                            null);
+                            null
+                        );
 
                     case nameof(Queryable.SelectMany)
                         when genericMethod == QueryableMethods.SelectManyWithCollectionSelector:
                         return ProcessSelectMany(
                             source,
                             methodCallExpression.Arguments[1].UnwrapLambdaFromQuote(),
-                            methodCallExpression.Arguments[2].UnwrapLambdaFromQuote());
+                            methodCallExpression.Arguments[2].UnwrapLambdaFromQuote()
+                        );
 
-                    case nameof(Queryable.Concat)
-                        when genericMethod == QueryableMethods.Concat:
-                    case nameof(Queryable.Except)
-                        when genericMethod == QueryableMethods.Except:
+                    case nameof(Queryable.Concat) when genericMethod == QueryableMethods.Concat:
+                    case nameof(Queryable.Except) when genericMethod == QueryableMethods.Except:
                     case nameof(Queryable.Intersect)
                         when genericMethod == QueryableMethods.Intersect:
-                    case nameof(Queryable.Union)
-                        when genericMethod == QueryableMethods.Union:
+                    case nameof(Queryable.Union) when genericMethod == QueryableMethods.Union:
                     {
                         var secondArgument = Visit(methodCallExpression.Arguments[1]);
                         secondArgument = UnwrapCollectionMaterialization(secondArgument);
@@ -542,35 +660,37 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                         goto default;
                     }
 
-                    case nameof(Queryable.Cast)
-                        when genericMethod == QueryableMethods.Cast:
-                    case nameof(Queryable.OfType)
-                        when genericMethod == QueryableMethods.OfType:
+                    case nameof(Queryable.Cast) when genericMethod == QueryableMethods.Cast:
+                    case nameof(Queryable.OfType) when genericMethod == QueryableMethods.OfType:
                         return ProcessCastOfType(
                             source,
                             genericMethod,
-                            methodCallExpression.Type.GetSequenceType());
+                            methodCallExpression.Type.GetSequenceType()
+                        );
 
                     case nameof(EntityFrameworkQueryableExtensions.Include):
                         return ProcessInclude(
                             source,
                             methodCallExpression.Arguments[1],
                             thenInclude: false,
-                            setLoaded: true);
+                            setLoaded: true
+                        );
 
                     case nameof(EntityFrameworkQueryableExtensions.ThenInclude):
                         return ProcessInclude(
                             source,
                             methodCallExpression.Arguments[1],
                             thenInclude: true,
-                            setLoaded: true);
+                            setLoaded: true
+                        );
 
                     case nameof(EntityFrameworkQueryableExtensions.NotQuiteInclude):
                         return ProcessInclude(
                             source,
                             methodCallExpression.Arguments[1],
                             thenInclude: false,
-                            setLoaded: false);
+                            setLoaded: false
+                        );
 
                     case nameof(Queryable.GroupBy)
                         when genericMethod == QueryableMethods.GroupByWithKeySelector:
@@ -578,7 +698,8 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                             source,
                             methodCallExpression.Arguments[1].UnwrapLambdaFromQuote(),
                             null,
-                            null);
+                            null
+                        );
 
                     case nameof(Queryable.GroupBy)
                         when genericMethod == QueryableMethods.GroupByWithKeyElementSelector:
@@ -586,7 +707,8 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                             source,
                             methodCallExpression.Arguments[1].UnwrapLambdaFromQuote(),
                             methodCallExpression.Arguments[2].UnwrapLambdaFromQuote(),
-                            null);
+                            null
+                        );
 
                     case nameof(Queryable.GroupBy)
                         when genericMethod == QueryableMethods.GroupByWithKeyElementResultSelector:
@@ -594,7 +716,8 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                             source,
                             methodCallExpression.Arguments[1].UnwrapLambdaFromQuote(),
                             methodCallExpression.Arguments[2].UnwrapLambdaFromQuote(),
-                            methodCallExpression.Arguments[3].UnwrapLambdaFromQuote());
+                            methodCallExpression.Arguments[3].UnwrapLambdaFromQuote()
+                        );
 
                     case nameof(Queryable.GroupBy)
                         when genericMethod == QueryableMethods.GroupByWithKeyResultSelector:
@@ -602,43 +725,43 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                             source,
                             methodCallExpression.Arguments[1].UnwrapLambdaFromQuote(),
                             null,
-                            methodCallExpression.Arguments[2].UnwrapLambdaFromQuote());
+                            methodCallExpression.Arguments[2].UnwrapLambdaFromQuote()
+                        );
 
-                    case nameof(Queryable.OrderBy)
-                        when genericMethod == QueryableMethods.OrderBy:
+                    case nameof(Queryable.OrderBy) when genericMethod == QueryableMethods.OrderBy:
                     case nameof(Queryable.OrderByDescending)
                         when genericMethod == QueryableMethods.OrderByDescending:
                         return ProcessOrderByThenBy(
                             source,
                             genericMethod,
                             methodCallExpression.Arguments[1].UnwrapLambdaFromQuote(),
-                            thenBy: false);
+                            thenBy: false
+                        );
 
-                    case nameof(Queryable.ThenBy)
-                        when genericMethod == QueryableMethods.ThenBy:
+                    case nameof(Queryable.ThenBy) when genericMethod == QueryableMethods.ThenBy:
                     case nameof(Queryable.ThenByDescending)
                         when genericMethod == QueryableMethods.ThenByDescending:
                         return ProcessOrderByThenBy(
                             source,
                             genericMethod,
                             methodCallExpression.Arguments[1].UnwrapLambdaFromQuote(),
-                            thenBy: true);
+                            thenBy: true
+                        );
 
-                    case nameof(Queryable.Reverse)
-                        when genericMethod == QueryableMethods.Reverse:
+                    case nameof(Queryable.Reverse) when genericMethod == QueryableMethods.Reverse:
                         return ProcessReverse(source);
 
-                    case nameof(Queryable.Select)
-                        when genericMethod == QueryableMethods.Select:
+                    case nameof(Queryable.Select) when genericMethod == QueryableMethods.Select:
                         return ProcessSelect(
                             source,
-                            methodCallExpression.Arguments[1].UnwrapLambdaFromQuote());
+                            methodCallExpression.Arguments[1].UnwrapLambdaFromQuote()
+                        );
 
-                    case nameof(Queryable.Where)
-                        when genericMethod == QueryableMethods.Where:
+                    case nameof(Queryable.Where) when genericMethod == QueryableMethods.Where:
                         return ProcessWhere(
                             source,
-                            methodCallExpression.Arguments[1].UnwrapLambdaFromQuote());
+                            methodCallExpression.Arguments[1].UnwrapLambdaFromQuote()
+                        );
 
                     case nameof(Queryable.DefaultIfEmpty)
                         when genericMethod == QueryableMethods.DefaultIfEmptyWithoutArgument:
@@ -658,7 +781,9 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                         // IEqualityComparer overloads of Distinct, Contains, Join, Except, Intersect, Union, OrderBy, ThenBy, OrderByDescending, ThenByDescending, GroupBy
                         throw new InvalidOperationException(
                             CoreStrings.TranslationFailed(
-                                _reducingExpressionVisitor.Visit(methodCallExpression).Print()));
+                                _reducingExpressionVisitor.Visit(methodCallExpression).Print()
+                            )
+                        );
                 }
             }
 
@@ -679,10 +804,10 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                         return ProcessAllAnyCountLongCount(
                             groupBySource,
                             genericMethod,
-                            predicate: null);
+                            predicate: null
+                        );
 
-                    case nameof(Queryable.All)
-                        when genericMethod == QueryableMethods.All:
+                    case nameof(Queryable.All) when genericMethod == QueryableMethods.All:
                     case nameof(Queryable.Any)
                         when genericMethod == QueryableMethods.AnyWithPredicate:
                     case nameof(Queryable.Count)
@@ -692,7 +817,8 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                         return ProcessAllAnyCountLongCount(
                             groupBySource,
                             genericMethod,
-                            methodCallExpression.Arguments[1].UnwrapLambdaFromQuote());
+                            methodCallExpression.Arguments[1].UnwrapLambdaFromQuote()
+                        );
 
                     // case nameof(Queryable.Average)
                     //     when QueryableMethods.IsAverageWithoutSelector(method):
@@ -720,53 +846,54 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                     //         genericMethod ?? method,
                     //         methodCallExpression.Arguments[1].UnwrapLambdaFromQuote());
 
-                    case nameof(Queryable.OrderBy)
-                        when genericMethod == QueryableMethods.OrderBy:
+                    case nameof(Queryable.OrderBy) when genericMethod == QueryableMethods.OrderBy:
                     case nameof(Queryable.OrderByDescending)
                         when genericMethod == QueryableMethods.OrderByDescending:
                         return ProcessOrderByThenBy(
                             groupBySource,
                             genericMethod,
-                            methodCallExpression.Arguments[1].UnwrapLambdaFromQuote());
+                            methodCallExpression.Arguments[1].UnwrapLambdaFromQuote()
+                        );
 
-                    case nameof(Queryable.ThenBy)
-                        when genericMethod == QueryableMethods.ThenBy:
+                    case nameof(Queryable.ThenBy) when genericMethod == QueryableMethods.ThenBy:
                     case nameof(Queryable.ThenByDescending)
                         when genericMethod == QueryableMethods.ThenByDescending:
                         return ProcessOrderByThenBy(
                             groupBySource,
                             genericMethod,
-                            methodCallExpression.Arguments[1].UnwrapLambdaFromQuote());
+                            methodCallExpression.Arguments[1].UnwrapLambdaFromQuote()
+                        );
 
-                    case nameof(Queryable.Select)
-                        when genericMethod == QueryableMethods.Select:
+                    case nameof(Queryable.Select) when genericMethod == QueryableMethods.Select:
                         var result = ProcessSelect(
                             groupBySource,
-                            methodCallExpression.Arguments[1].UnwrapLambdaFromQuote());
+                            methodCallExpression.Arguments[1].UnwrapLambdaFromQuote()
+                        );
                         if (result == null)
                         {
                             throw new InvalidOperationException(
                                 CoreStrings.TranslationFailedWithDetails(
                                     _reducingExpressionVisitor.Visit(methodCallExpression).Print(),
-                                    CoreStrings.QuerySelectContainsGrouping));
+                                    CoreStrings.QuerySelectContainsGrouping
+                                )
+                            );
                         }
 
                         return result;
 
-                    case nameof(Queryable.Skip)
-                        when genericMethod == QueryableMethods.Skip:
-                    case nameof(Queryable.Take)
-                        when genericMethod == QueryableMethods.Take:
+                    case nameof(Queryable.Skip) when genericMethod == QueryableMethods.Skip:
+                    case nameof(Queryable.Take) when genericMethod == QueryableMethods.Take:
                         return ProcessSkipTake(
                             groupBySource,
                             genericMethod,
-                            methodCallExpression.Arguments[1]);
+                            methodCallExpression.Arguments[1]
+                        );
 
-                    case nameof(Queryable.Where)
-                        when genericMethod == QueryableMethods.Where:
+                    case nameof(Queryable.Where) when genericMethod == QueryableMethods.Where:
                         return ProcessWhere(
                             groupBySource,
-                            methodCallExpression.Arguments[1].UnwrapLambdaFromQuote());
+                            methodCallExpression.Arguments[1].UnwrapLambdaFromQuote()
+                        );
 
                     default:
                         // Average/Max/Min/Sum
@@ -783,19 +910,31 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                         // DefaultIfEmpty
                         throw new InvalidOperationException(
                             CoreStrings.TranslationFailed(
-                                _reducingExpressionVisitor.Visit(methodCallExpression).Print()));
+                                _reducingExpressionVisitor.Visit(methodCallExpression).Print()
+                            )
+                        );
                 }
             }
 
             if (genericMethod == QueryableMethods.AsQueryable)
             {
-                if (firstArgument is NavigationTreeExpression { Type.IsGenericType: true } navigationTreeExpression
-                    && navigationTreeExpression.Type.GetGenericTypeDefinition() == typeof(IGrouping<,>))
+                if (
+                    firstArgument
+                        is NavigationTreeExpression
+                        {
+                            Type.IsGenericType: true
+                        } navigationTreeExpression
+                    && navigationTreeExpression.Type.GetGenericTypeDefinition()
+                        == typeof(IGrouping<,>)
+                )
                 {
                     // This is groupingElement.AsQueryable so we preserve it
                     return Expression.Call(
-                        QueryableMethods.AsQueryable.MakeGenericMethod(navigationTreeExpression.Type.GetSequenceType()),
-                        navigationTreeExpression);
+                        QueryableMethods.AsQueryable.MakeGenericMethod(
+                            navigationTreeExpression.Type.GetSequenceType()
+                        ),
+                        navigationTreeExpression
+                    );
                 }
 
                 return UnwrapCollectionMaterialization(firstArgument);
@@ -804,22 +943,31 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
             if (firstArgument.Type.TryGetElementType(typeof(IQueryable<>)) == null)
             {
                 // firstArgument was not an queryable
-                var visitedArguments = new[] { firstArgument }
-                    .Concat(methodCallExpression.Arguments.Skip(1).Select(e => Visit(e)));
+                var visitedArguments = new[] { firstArgument }.Concat(
+                    methodCallExpression.Arguments.Skip(1).Select(e => Visit(e))
+                );
 
                 return ConvertToEnumerable(method, visitedArguments);
             }
 
-            throw new InvalidOperationException(CoreStrings.TranslationFailed(methodCallExpression.Print()));
+            throw new InvalidOperationException(
+                CoreStrings.TranslationFailed(methodCallExpression.Print())
+            );
         }
 
         // Remove MaterializeCollectionNavigationExpression when applying ToList/ToArray
-        if (method.IsGenericMethod
-            && (method.GetGenericMethodDefinition() == EnumerableMethods.ToList
-                || method.GetGenericMethodDefinition() == EnumerableMethods.ToArray))
+        if (
+            method.IsGenericMethod
+            && (
+                method.GetGenericMethodDefinition() == EnumerableMethods.ToList
+                || method.GetGenericMethodDefinition() == EnumerableMethods.ToArray
+            )
+        )
         {
             return methodCallExpression.Update(
-                null, new[] { UnwrapCollectionMaterialization(Visit(methodCallExpression.Arguments[0])) });
+                null,
+                new[] { UnwrapCollectionMaterialization(Visit(methodCallExpression.Arguments[0])) }
+            );
         }
 
         return ProcessUnknownMethod(methodCallExpression);
@@ -835,14 +983,21 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
     {
         var operand = Visit(unaryExpression.Operand);
         // Convert Array.Length to Count()
-        if (unaryExpression.Operand.Type.IsArray
-            && unaryExpression.NodeType == ExpressionType.ArrayLength)
+        if (
+            unaryExpression.Operand.Type.IsArray
+            && unaryExpression.NodeType == ExpressionType.ArrayLength
+        )
         {
             var innerQueryable = UnwrapCollectionMaterialization(operand);
             // Only if inner is queryable as array properties could also have Length access
             if (innerQueryable.Type.TryGetElementType(typeof(IQueryable<>)) is Type elementType)
             {
-                return Visit(Expression.Call(QueryableMethods.CountWithoutPredicate.MakeGenericMethod(elementType), innerQueryable));
+                return Visit(
+                    Expression.Call(
+                        QueryableMethods.CountWithoutPredicate.MakeGenericMethod(elementType),
+                        innerQueryable
+                    )
+                );
             }
         }
 
@@ -852,35 +1007,49 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
     private Expression ProcessAllAnyCountLongCount(
         NavigationExpansionExpression source,
         MethodInfo genericMethod,
-        LambdaExpression? predicate)
+        LambdaExpression? predicate
+    )
     {
         if (predicate != null)
         {
             predicate = ProcessLambdaExpression(source, predicate);
 
             return Expression.Call(
-                genericMethod.MakeGenericMethod(source.SourceElementType), source.Source, Expression.Quote(predicate));
+                genericMethod.MakeGenericMethod(source.SourceElementType),
+                source.Source,
+                Expression.Quote(predicate)
+            );
         }
 
-        return Expression.Call(genericMethod.MakeGenericMethod(source.SourceElementType), source.Source);
+        return Expression.Call(
+            genericMethod.MakeGenericMethod(source.SourceElementType),
+            source.Source
+        );
     }
 
-    private Expression ProcessAverageMaxMinSum(NavigationExpansionExpression source, MethodInfo method, LambdaExpression? selector)
+    private Expression ProcessAverageMaxMinSum(
+        NavigationExpansionExpression source,
+        MethodInfo method,
+        LambdaExpression? selector
+    )
     {
         if (selector != null)
         {
             source = ProcessSelect(source, selector);
-            source = (NavigationExpansionExpression)_pendingSelectorExpandingExpressionVisitor.Visit(source);
+            source = (NavigationExpansionExpression)
+                _pendingSelectorExpandingExpressionVisitor.Visit(source);
 
             var selectorLambda = GenerateLambda(source.PendingSelector, source.CurrentParameter);
-            method = method.GetGenericArguments().Length == 2
-                ? method.MakeGenericMethod(source.SourceElementType, selectorLambda.ReturnType)
-                : method.MakeGenericMethod(source.SourceElementType);
+            method =
+                method.GetGenericArguments().Length == 2
+                    ? method.MakeGenericMethod(source.SourceElementType, selectorLambda.ReturnType)
+                    : method.MakeGenericMethod(source.SourceElementType);
 
             return Expression.Call(method, source.Source, selectorLambda);
         }
 
-        source = (NavigationExpansionExpression)_pendingSelectorExpandingExpressionVisitor.Visit(source);
+        source = (NavigationExpansionExpression)
+            _pendingSelectorExpandingExpressionVisitor.Visit(source);
         var queryable = Reduce(source);
 
         if (method.GetGenericArguments().Length == 1)
@@ -895,26 +1064,35 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
     private NavigationExpansionExpression ProcessCastOfType(
         NavigationExpansionExpression source,
         MethodInfo genericMethod,
-        Type castType)
+        Type castType
+    )
     {
-        if (castType.IsAssignableFrom(source.PendingSelector.Type)
-            || castType == typeof(object))
+        if (castType.IsAssignableFrom(source.PendingSelector.Type) || castType == typeof(object))
         {
             // Casting to base/implementing interface is redundant
             return source;
         }
 
-        source = (NavigationExpansionExpression)_pendingSelectorExpandingExpressionVisitor.Visit(source);
+        source = (NavigationExpansionExpression)
+            _pendingSelectorExpandingExpressionVisitor.Visit(source);
         var newStructure = SnapshotExpression(source.PendingSelector);
         var queryable = Reduce(source);
 
         var result = Expression.Call(genericMethod.MakeGenericMethod(castType), queryable);
 
-        if (newStructure is EntityReference entityReference
-            && entityReference.EntityType.GetAllBaseTypes().Concat(entityReference.EntityType.GetDerivedTypesInclusive())
-                .FirstOrDefault(et => et.ClrType == castType) is IEntityType castEntityType)
+        if (
+            newStructure is EntityReference entityReference
+            && entityReference
+                .EntityType.GetAllBaseTypes()
+                .Concat(entityReference.EntityType.GetDerivedTypesInclusive())
+                .FirstOrDefault(et => et.ClrType == castType)
+                is IEntityType castEntityType
+        )
         {
-            var newEntityReference = new EntityReference(castEntityType, entityReference.EntityQueryRootExpression);
+            var newEntityReference = new EntityReference(
+                castEntityType,
+                entityReference.EntityQueryRootExpression
+            );
             if (entityReference.IsOptional)
             {
                 newEntityReference.MarkAsOptional();
@@ -923,10 +1101,10 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
             newEntityReference.IncludePaths.Merge(entityReference.IncludePaths);
 
             // Prune includes for sibling types
-            var siblingNavigations = newEntityReference.IncludePaths.Keys
-                .Where(
-                    n => !castEntityType.IsAssignableFrom(n.DeclaringEntityType)
-                        && !n.DeclaringEntityType.IsAssignableFrom(castEntityType));
+            var siblingNavigations = newEntityReference.IncludePaths.Keys.Where(n =>
+                !castEntityType.IsAssignableFrom(n.DeclaringEntityType)
+                && !n.DeclaringEntityType.IsAssignableFrom(castEntityType)
+            );
 
             foreach (var navigation in siblingNavigations)
             {
@@ -943,12 +1121,18 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
         var navigationTree = new NavigationTreeExpression(newStructure);
         var parameterName = GetParameterName("e");
 
-        return new NavigationExpansionExpression(result, navigationTree, navigationTree, parameterName);
+        return new NavigationExpansionExpression(
+            result,
+            navigationTree,
+            navigationTree,
+            parameterName
+        );
     }
 
     private Expression ProcessContains(NavigationExpansionExpression source, Expression item)
     {
-        source = (NavigationExpansionExpression)_pendingSelectorExpandingExpressionVisitor.Visit(source);
+        source = (NavigationExpansionExpression)
+            _pendingSelectorExpandingExpressionVisitor.Visit(source);
         var queryable = Reduce(source);
 
         if (!UseOldBehavior32217)
@@ -956,15 +1140,25 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
             item = Visit(item);
         }
 
-        return Expression.Call(QueryableMethods.Contains.MakeGenericMethod(queryable.Type.GetSequenceType()), queryable, item);
+        return Expression.Call(
+            QueryableMethods.Contains.MakeGenericMethod(queryable.Type.GetSequenceType()),
+            queryable,
+            item
+        );
     }
 
-    private NavigationExpansionExpression ProcessDefaultIfEmpty(NavigationExpansionExpression source)
+    private NavigationExpansionExpression ProcessDefaultIfEmpty(
+        NavigationExpansionExpression source
+    )
     {
         source.UpdateSource(
             Expression.Call(
-                QueryableMethods.DefaultIfEmptyWithoutArgument.MakeGenericMethod(source.SourceElementType),
-                source.Source));
+                QueryableMethods.DefaultIfEmptyWithoutArgument.MakeGenericMethod(
+                    source.SourceElementType
+                ),
+                source.Source
+            )
+        );
 
         var pendingSelector = source.PendingSelector;
         _entityReferenceOptionalMarkingExpressionVisitor.Visit(pendingSelector);
@@ -972,7 +1166,8 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
         {
             pendingSelector = Expression.Coalesce(
                 Expression.Convert(pendingSelector, pendingSelector.Type.MakeNullable()),
-                pendingSelector.Type.GetDefaultValueConstant());
+                pendingSelector.Type.GetDefaultValueConstant()
+            );
         }
 
         source.ApplySelector(pendingSelector);
@@ -980,31 +1175,50 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
         return source;
     }
 
-    private NavigationExpansionExpression ProcessDistinct(NavigationExpansionExpression source, MethodInfo genericMethod)
+    private NavigationExpansionExpression ProcessDistinct(
+        NavigationExpansionExpression source,
+        MethodInfo genericMethod
+    )
     {
-        source = (NavigationExpansionExpression)_pendingSelectorExpandingExpressionVisitor.Visit(source);
+        source = (NavigationExpansionExpression)
+            _pendingSelectorExpandingExpressionVisitor.Visit(source);
         var newStructure = SnapshotExpression(source.PendingSelector);
         var queryable = Reduce(source);
 
-        var result = Expression.Call(genericMethod.MakeGenericMethod(queryable.Type.GetSequenceType()), queryable);
+        var result = Expression.Call(
+            genericMethod.MakeGenericMethod(queryable.Type.GetSequenceType()),
+            queryable
+        );
 
         var navigationTree = new NavigationTreeExpression(newStructure);
         var parameterName = GetParameterName("e");
 
-        return new NavigationExpansionExpression(result, navigationTree, navigationTree, parameterName);
+        return new NavigationExpansionExpression(
+            result,
+            navigationTree,
+            navigationTree,
+            parameterName
+        );
     }
 
     private NavigationExpansionExpression ProcessSkipTake(
         NavigationExpansionExpression source,
         MethodInfo genericMethod,
-        Expression count)
+        Expression count
+    )
     {
         if (!UseOldBehavior32312)
         {
             count = Visit(count);
         }
 
-        source.UpdateSource(Expression.Call(genericMethod.MakeGenericMethod(source.SourceElementType), source.Source, count));
+        source.UpdateSource(
+            Expression.Call(
+                genericMethod.MakeGenericMethod(source.SourceElementType),
+                source.Source,
+                count
+            )
+        );
 
         return source;
     }
@@ -1013,7 +1227,8 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
         NavigationExpansionExpression source,
         MethodInfo genericMethod,
         LambdaExpression? predicate,
-        Type returnType)
+        Type returnType
+    )
     {
         if (predicate != null)
         {
@@ -1035,7 +1250,8 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
         NavigationExpansionExpression source,
         MethodInfo genericMethod,
         Expression index,
-        Type returnType)
+        Type returnType
+    )
     {
         if (source.PendingSelector.Type != returnType)
         {
@@ -1057,9 +1273,13 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
         NavigationExpansionExpression source,
         LambdaExpression keySelector,
         LambdaExpression? elementSelector,
-        LambdaExpression? resultSelector)
+        LambdaExpression? resultSelector
+    )
     {
-        var keySelectorBody = ExpandNavigationsForSource(source, RemapLambdaExpression(source, keySelector));
+        var keySelectorBody = ExpandNavigationsForSource(
+            source,
+            RemapLambdaExpression(source, keySelector)
+        );
 
         // Need to generate lambda after processing element/result selector
         if (elementSelector != null)
@@ -1073,59 +1293,104 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
         if (resultSelector == null)
         {
             var groupingParameter = Expression.Parameter(
-                typeof(IGrouping<,>).MakeGenericType(keySelector.ReturnType, source.SourceElementType),
-                GetParameterName("g"));
+                typeof(IGrouping<,>).MakeGenericType(
+                    keySelector.ReturnType,
+                    source.SourceElementType
+                ),
+                GetParameterName("g")
+            );
             var innerSource = Expression.Call(
-                QueryableMethods.GroupByWithKeySelector.MakeGenericMethod(source.SourceElementType, keySelector.ReturnType),
+                QueryableMethods.GroupByWithKeySelector.MakeGenericMethod(
+                    source.SourceElementType,
+                    keySelector.ReturnType
+                ),
                 source.Source,
-                Expression.Quote(keySelector));
+                Expression.Quote(keySelector)
+            );
 
             return new GroupByNavigationExpansionExpression(
-                innerSource, groupingParameter, source.CurrentTree, source.PendingSelector, innerParameterName);
+                innerSource,
+                groupingParameter,
+                source.CurrentTree,
+                source.PendingSelector,
+                innerParameterName
+            );
         }
 
         var enumerableParameter = Expression.Parameter(
             typeof(IEnumerable<>).MakeGenericType(source.SourceElementType),
-            GetParameterName("g"));
+            GetParameterName("g")
+        );
         var groupingEnumerable = new NavigationExpansionExpression(
-            Expression.Call(QueryableMethods.AsQueryable.MakeGenericMethod(source.SourceElementType), enumerableParameter),
+            Expression.Call(
+                QueryableMethods.AsQueryable.MakeGenericMethod(source.SourceElementType),
+                enumerableParameter
+            ),
             source.CurrentTree,
             source.PendingSelector,
-            innerParameterName);
+            innerParameterName
+        );
 
         var resultSelectorBody = new GroupingElementReplacingExpressionVisitor(
-            resultSelector.Parameters[1], groupingEnumerable).Visit(resultSelector.Body);
+            resultSelector.Parameters[1],
+            groupingEnumerable
+        ).Visit(resultSelector.Body);
 
         resultSelectorBody = Visit(resultSelectorBody);
-        resultSelector = Expression.Lambda(resultSelectorBody, resultSelector.Parameters[0], enumerableParameter);
+        resultSelector = Expression.Lambda(
+            resultSelectorBody,
+            resultSelector.Parameters[0],
+            enumerableParameter
+        );
 
         var result = Expression.Call(
             QueryableMethods.GroupByWithKeyResultSelector.MakeGenericMethod(
-                source.CurrentParameter.Type, keySelector.ReturnType, resultSelector.ReturnType),
+                source.CurrentParameter.Type,
+                keySelector.ReturnType,
+                resultSelector.ReturnType
+            ),
             source.Source,
             Expression.Quote(keySelector),
-            Expression.Quote(resultSelector));
+            Expression.Quote(resultSelector)
+        );
 
-        var navigationTree = new NavigationTreeExpression(Expression.Default(result.Type.GetSequenceType()));
+        var navigationTree = new NavigationTreeExpression(
+            Expression.Default(result.Type.GetSequenceType())
+        );
         var parameterName = GetParameterName("e");
 
-        return new NavigationExpansionExpression(result, navigationTree, navigationTree, parameterName);
+        return new NavigationExpansionExpression(
+            result,
+            navigationTree,
+            navigationTree,
+            parameterName
+        );
     }
 
     private NavigationExpansionExpression ProcessInclude(
         NavigationExpansionExpression source,
         Expression expression,
         bool thenInclude,
-        bool setLoaded)
+        bool setLoaded
+    )
     {
-        if (source.PendingSelector is NavigationTreeExpression { Value: EntityReference entityReference })
+        if (
+            source.PendingSelector is NavigationTreeExpression
+            {
+                Value: EntityReference entityReference
+            }
+        )
         {
 #pragma warning disable CS0618 // Type or member is obsolete
             if (entityReference.EntityType.GetDefiningQuery() != null)
             {
                 throw new InvalidOperationException(
 #pragma warning disable CS0612 // Type or member is obsolete
-                    CoreStrings.IncludeOnEntityWithDefiningQueryNotSupported(expression, entityReference.EntityType.DisplayName()));
+                    CoreStrings.IncludeOnEntityWithDefiningQueryNotSupported(
+                        expression,
+                        entityReference.EntityType.DisplayName()
+                    )
+                );
 #pragma warning restore CS0612 // Type or member is obsolete
             }
 #pragma warning restore CS0618 // Type or member is obsolete
@@ -1141,7 +1406,12 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                     while (nodesToProcess-- > 0)
                     {
                         var currentNode = includeTreeNodes.Dequeue();
-                        foreach (var navigation in FindNavigations(currentNode.EntityType, navigationName))
+                        foreach (
+                            var navigation in FindNavigations(
+                                currentNode.EntityType,
+                                navigationName
+                            )
+                        )
                         {
                             var addedNode = currentNode.AddNavigation(navigation, setLoaded);
 
@@ -1153,7 +1423,10 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
 
                     if (includeTreeNodes.Count == 0)
                     {
-                        _queryCompilationContext.Logger.InvalidIncludePathError(navigationChain, navigationName);
+                        _queryCompilationContext.Logger.InvalidIncludePathError(
+                            navigationChain,
+                            navigationName
+                        );
                     }
                 }
             }
@@ -1165,17 +1438,31 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                     : entityReference.IncludePaths;
                 var includeLambda = expression.UnwrapLambdaFromQuote();
 
-                var (result, filterExpression) = ExtractIncludeFilter(includeLambda.Body, includeLambda.Body);
-                var lastIncludeTree = PopulateIncludeTree(currentIncludeTreeNode, result, setLoaded);
+                var (result, filterExpression) = ExtractIncludeFilter(
+                    includeLambda.Body,
+                    includeLambda.Body
+                );
+                var lastIncludeTree = PopulateIncludeTree(
+                    currentIncludeTreeNode,
+                    result,
+                    setLoaded
+                );
                 if (filterExpression != null)
                 {
-                    if (lastIncludeTree.FilterExpression != null
-                        && !ExpressionEqualityComparer.Instance.Equals(filterExpression, lastIncludeTree.FilterExpression))
+                    if (
+                        lastIncludeTree.FilterExpression != null
+                        && !ExpressionEqualityComparer.Instance.Equals(
+                            filterExpression,
+                            lastIncludeTree.FilterExpression
+                        )
+                    )
                     {
                         throw new InvalidOperationException(
                             CoreStrings.MultipleFilteredIncludesOnSameNavigation(
                                 FormatFilter(filterExpression.Body).Print(),
-                                FormatFilter(lastIncludeTree.FilterExpression.Body).Print()));
+                                FormatFilter(lastIncludeTree.FilterExpression.Body).Print()
+                            )
+                        );
                     }
 
                     lastIncludeTree.ApplyFilter(filterExpression);
@@ -1191,7 +1478,8 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
 
         static (Expression result, LambdaExpression? filterExpression) ExtractIncludeFilter(
             Expression currentExpression,
-            Expression includeExpression)
+            Expression includeExpression
+        )
         {
             if (currentExpression is MemberExpression)
             {
@@ -1205,13 +1493,22 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                     return (currentExpression, default);
                 }
 
-                if (!methodCallExpression.Method.IsGenericMethod
-                    || !SupportedFilteredIncludeOperations.Contains(methodCallExpression.Method.GetGenericMethodDefinition()))
+                if (
+                    !methodCallExpression.Method.IsGenericMethod
+                    || !SupportedFilteredIncludeOperations.Contains(
+                        methodCallExpression.Method.GetGenericMethodDefinition()
+                    )
+                )
                 {
-                    throw new InvalidOperationException(CoreStrings.InvalidIncludeExpression(includeExpression));
+                    throw new InvalidOperationException(
+                        CoreStrings.InvalidIncludeExpression(includeExpression)
+                    );
                 }
 
-                var (result, filterExpression) = ExtractIncludeFilter(methodCallExpression.Arguments[0], includeExpression);
+                var (result, filterExpression) = ExtractIncludeFilter(
+                    methodCallExpression.Arguments[0],
+                    includeExpression
+                );
                 if (filterExpression == null)
                 {
                     var prm = Expression.Parameter(result.Type);
@@ -1222,20 +1519,31 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                 arguments.AddRange(methodCallExpression.Arguments.Skip(1));
                 filterExpression = Expression.Lambda(
                     methodCallExpression.Update(methodCallExpression.Object, arguments),
-                    filterExpression.Parameters);
+                    filterExpression.Parameters
+                );
 
                 return (result, filterExpression);
             }
 
-            throw new InvalidOperationException(CoreStrings.InvalidIncludeExpression(includeExpression));
+            throw new InvalidOperationException(
+                CoreStrings.InvalidIncludeExpression(includeExpression)
+            );
         }
 
         static Expression FormatFilter(Expression expression)
         {
-            if (expression is MethodCallExpression { Method.IsGenericMethod: true } methodCallExpression
-                && SupportedFilteredIncludeOperations.Contains(methodCallExpression.Method.GetGenericMethodDefinition()))
+            if (
+                expression
+                    is MethodCallExpression { Method.IsGenericMethod: true } methodCallExpression
+                && SupportedFilteredIncludeOperations.Contains(
+                    methodCallExpression.Method.GetGenericMethodDefinition()
+                )
+            )
             {
-                if (methodCallExpression.Method.GetGenericMethodDefinition() == QueryableMethods.AsQueryable)
+                if (
+                    methodCallExpression.Method.GetGenericMethodDefinition()
+                    == QueryableMethods.AsQueryable
+                )
                 {
                     return Expression.Parameter(expression.Type, "navigation");
                 }
@@ -1257,48 +1565,71 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
         NavigationExpansionExpression innerSource,
         LambdaExpression outerKeySelector,
         LambdaExpression innerKeySelector,
-        LambdaExpression resultSelector)
+        LambdaExpression resultSelector
+    )
     {
         if (innerSource.PendingOrderings.Any())
         {
             ApplyPendingOrderings(innerSource);
         }
 
-        (outerKeySelector, innerKeySelector) = ProcessJoinConditions(outerSource, innerSource, outerKeySelector, innerKeySelector);
+        (outerKeySelector, innerKeySelector) = ProcessJoinConditions(
+            outerSource,
+            innerSource,
+            outerKeySelector,
+            innerKeySelector
+        );
 
         var transparentIdentifierType = TransparentIdentifierFactory.Create(
-            outerSource.SourceElementType, innerSource.SourceElementType);
+            outerSource.SourceElementType,
+            innerSource.SourceElementType
+        );
 
-        var transparentIdentifierOuterMemberInfo = transparentIdentifierType.GetTypeInfo().GetDeclaredField("Outer")!;
-        var transparentIdentifierInnerMemberInfo = transparentIdentifierType.GetTypeInfo().GetDeclaredField("Inner")!;
+        var transparentIdentifierOuterMemberInfo = transparentIdentifierType
+            .GetTypeInfo()
+            .GetDeclaredField("Outer")!;
+        var transparentIdentifierInnerMemberInfo = transparentIdentifierType
+            .GetTypeInfo()
+            .GetDeclaredField("Inner")!;
 
         var newResultSelector = Expression.Lambda(
             Expression.New(
                 transparentIdentifierType.GetConstructors().Single(),
                 new[] { outerSource.CurrentParameter, innerSource.CurrentParameter },
                 transparentIdentifierOuterMemberInfo,
-                transparentIdentifierInnerMemberInfo),
+                transparentIdentifierInnerMemberInfo
+            ),
             outerSource.CurrentParameter,
-            innerSource.CurrentParameter);
+            innerSource.CurrentParameter
+        );
 
         var source = Expression.Call(
             QueryableMethods.Join.MakeGenericMethod(
-                outerSource.SourceElementType, innerSource.SourceElementType, outerKeySelector.ReturnType,
-                newResultSelector.ReturnType),
+                outerSource.SourceElementType,
+                innerSource.SourceElementType,
+                outerKeySelector.ReturnType,
+                newResultSelector.ReturnType
+            ),
             outerSource.Source,
             innerSource.Source,
             Expression.Quote(outerKeySelector),
             Expression.Quote(innerKeySelector),
-            Expression.Quote(newResultSelector));
+            Expression.Quote(newResultSelector)
+        );
 
         var currentTree = new NavigationTreeNode(outerSource.CurrentTree, innerSource.CurrentTree);
         var pendingSelector = new ReplacingExpressionVisitor(
-                new Expression[] { resultSelector.Parameters[0], resultSelector.Parameters[1] },
-                new[] { outerSource.PendingSelector, innerSource.PendingSelector })
-            .Visit(resultSelector.Body);
+            new Expression[] { resultSelector.Parameters[0], resultSelector.Parameters[1] },
+            new[] { outerSource.PendingSelector, innerSource.PendingSelector }
+        ).Visit(resultSelector.Body);
         var parameterName = GetParameterName("ti");
 
-        return new NavigationExpansionExpression(source, currentTree, pendingSelector, parameterName);
+        return new NavigationExpansionExpression(
+            source,
+            currentTree,
+            pendingSelector,
+            parameterName
+        );
     }
 
     private NavigationExpansionExpression ProcessLeftJoin(
@@ -1306,65 +1637,94 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
         NavigationExpansionExpression innerSource,
         LambdaExpression outerKeySelector,
         LambdaExpression innerKeySelector,
-        LambdaExpression resultSelector)
+        LambdaExpression resultSelector
+    )
     {
         if (innerSource.PendingOrderings.Any())
         {
             ApplyPendingOrderings(innerSource);
         }
 
-        (outerKeySelector, innerKeySelector) = ProcessJoinConditions(outerSource, innerSource, outerKeySelector, innerKeySelector);
+        (outerKeySelector, innerKeySelector) = ProcessJoinConditions(
+            outerSource,
+            innerSource,
+            outerKeySelector,
+            innerKeySelector
+        );
 
         var transparentIdentifierType = TransparentIdentifierFactory.Create(
-            outerSource.SourceElementType, innerSource.SourceElementType);
+            outerSource.SourceElementType,
+            innerSource.SourceElementType
+        );
 
-        var transparentIdentifierOuterMemberInfo = transparentIdentifierType.GetTypeInfo().GetDeclaredField("Outer")!;
-        var transparentIdentifierInnerMemberInfo = transparentIdentifierType.GetTypeInfo().GetDeclaredField("Inner")!;
+        var transparentIdentifierOuterMemberInfo = transparentIdentifierType
+            .GetTypeInfo()
+            .GetDeclaredField("Outer")!;
+        var transparentIdentifierInnerMemberInfo = transparentIdentifierType
+            .GetTypeInfo()
+            .GetDeclaredField("Inner")!;
 
         var newResultSelector = Expression.Lambda(
             Expression.New(
                 transparentIdentifierType.GetConstructors().Single(),
                 new[] { outerSource.CurrentParameter, innerSource.CurrentParameter },
                 transparentIdentifierOuterMemberInfo,
-                transparentIdentifierInnerMemberInfo),
+                transparentIdentifierInnerMemberInfo
+            ),
             outerSource.CurrentParameter,
-            innerSource.CurrentParameter);
+            innerSource.CurrentParameter
+        );
 
         var source = Expression.Call(
             QueryableExtensions.LeftJoinMethodInfo.MakeGenericMethod(
-                outerSource.SourceElementType, innerSource.SourceElementType, outerKeySelector.ReturnType,
-                newResultSelector.ReturnType),
+                outerSource.SourceElementType,
+                innerSource.SourceElementType,
+                outerKeySelector.ReturnType,
+                newResultSelector.ReturnType
+            ),
             outerSource.Source,
             innerSource.Source,
             Expression.Quote(outerKeySelector),
             Expression.Quote(innerKeySelector),
-            Expression.Quote(newResultSelector));
+            Expression.Quote(newResultSelector)
+        );
 
         var innerPendingSelector = innerSource.PendingSelector;
-        innerPendingSelector = _entityReferenceOptionalMarkingExpressionVisitor.Visit(innerPendingSelector);
+        innerPendingSelector = _entityReferenceOptionalMarkingExpressionVisitor.Visit(
+            innerPendingSelector
+        );
 
         var currentTree = new NavigationTreeNode(outerSource.CurrentTree, innerSource.CurrentTree);
         var pendingSelector = new ReplacingExpressionVisitor(
-                new Expression[] { resultSelector.Parameters[0], resultSelector.Parameters[1] },
-                new[] { outerSource.PendingSelector, innerPendingSelector })
-            .Visit(resultSelector.Body);
+            new Expression[] { resultSelector.Parameters[0], resultSelector.Parameters[1] },
+            new[] { outerSource.PendingSelector, innerPendingSelector }
+        ).Visit(resultSelector.Body);
         var parameterName = GetParameterName("ti");
 
-        return new NavigationExpansionExpression(source, currentTree, pendingSelector, parameterName);
+        return new NavigationExpansionExpression(
+            source,
+            currentTree,
+            pendingSelector,
+            parameterName
+        );
     }
 
     private NavigationExpansionExpression ProcessOrderByThenBy(
         NavigationExpansionExpression source,
         MethodInfo genericMethod,
         LambdaExpression keySelector,
-        bool thenBy)
+        bool thenBy
+    )
     {
         var lambdaBody = ReplacingExpressionVisitor.Replace(
             keySelector.Parameters[0],
             source.PendingSelector,
-            keySelector.Body);
+            keySelector.Body
+        );
 
-        lambdaBody = new ExpandingExpressionVisitor(this, source, _extensibilityHelper).Visit(lambdaBody);
+        lambdaBody = new ExpandingExpressionVisitor(this, source, _extensibilityHelper).Visit(
+            lambdaBody
+        );
         lambdaBody = _subqueryMemberPushdownExpressionVisitor.Visit(lambdaBody);
 
         if (thenBy)
@@ -1384,17 +1744,23 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
         source.UpdateSource(
             Expression.Call(
                 QueryableMethods.Reverse.MakeGenericMethod(source.SourceElementType),
-                source.Source));
+                source.Source
+            )
+        );
 
         return source;
     }
 
-    private static NavigationExpansionExpression ProcessSelect(NavigationExpansionExpression source, LambdaExpression selector)
+    private static NavigationExpansionExpression ProcessSelect(
+        NavigationExpansionExpression source,
+        LambdaExpression selector
+    )
     {
         var selectorBody = ReplacingExpressionVisitor.Replace(
             selector.Parameters[0],
             source.PendingSelector,
-            selector.Body);
+            selector.Body
+        );
 
         source.ApplySelector(selectorBody);
 
@@ -1404,15 +1770,22 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
     private NavigationExpansionExpression ProcessSelectMany(
         NavigationExpansionExpression source,
         LambdaExpression collectionSelector,
-        LambdaExpression? resultSelector)
+        LambdaExpression? resultSelector
+    )
     {
-        var collectionSelectorBody = ExpandNavigationsForSource(source, RemapLambdaExpression(source, collectionSelector));
+        var collectionSelectorBody = ExpandNavigationsForSource(
+            source,
+            RemapLambdaExpression(source, collectionSelector)
+        );
         collectionSelectorBody = UnwrapCollectionMaterialization(collectionSelectorBody);
 
         if (collectionSelectorBody is NavigationExpansionExpression collectionSource)
         {
-            collectionSource = (NavigationExpansionExpression)_pendingSelectorExpandingExpressionVisitor.Visit(collectionSource);
-            var innerTree = new NavigationTreeExpression(SnapshotExpression(collectionSource.PendingSelector));
+            collectionSource = (NavigationExpansionExpression)
+                _pendingSelectorExpandingExpressionVisitor.Visit(collectionSource);
+            var innerTree = new NavigationTreeExpression(
+                SnapshotExpression(collectionSource.PendingSelector)
+            );
             collectionSelector = GenerateLambda(collectionSource, source.CurrentParameter);
             var collectionElementType = collectionSelector.ReturnType.GetSequenceType();
 
@@ -1420,59 +1793,89 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
             // therefore the delegate type is specified explicitly
             var collectionSelectorLambdaType = typeof(Func<,>).MakeGenericType(
                 source.SourceElementType,
-                typeof(IEnumerable<>).MakeGenericType(collectionElementType));
+                typeof(IEnumerable<>).MakeGenericType(collectionElementType)
+            );
 
             collectionSelector = Expression.Lambda(
                 collectionSelectorLambdaType,
                 collectionSelector.Body,
-                collectionSelector.Parameters[0]);
+                collectionSelector.Parameters[0]
+            );
 
             var transparentIdentifierType = TransparentIdentifierFactory.Create(
-                source.SourceElementType, collectionElementType);
-            var transparentIdentifierOuterMemberInfo = transparentIdentifierType.GetTypeInfo().GetDeclaredField("Outer")!;
-            var transparentIdentifierInnerMemberInfo = transparentIdentifierType.GetTypeInfo().GetDeclaredField("Inner")!;
+                source.SourceElementType,
+                collectionElementType
+            );
+            var transparentIdentifierOuterMemberInfo = transparentIdentifierType
+                .GetTypeInfo()
+                .GetDeclaredField("Outer")!;
+            var transparentIdentifierInnerMemberInfo = transparentIdentifierType
+                .GetTypeInfo()
+                .GetDeclaredField("Inner")!;
             var collectionElementParameter = Expression.Parameter(collectionElementType, "c");
 
             var newResultSelector = Expression.Lambda(
                 Expression.New(
                     transparentIdentifierType.GetConstructors().Single(),
-                    new[] { source.CurrentParameter, collectionElementParameter }, transparentIdentifierOuterMemberInfo,
-                    transparentIdentifierInnerMemberInfo),
+                    new[] { source.CurrentParameter, collectionElementParameter },
+                    transparentIdentifierOuterMemberInfo,
+                    transparentIdentifierInnerMemberInfo
+                ),
                 source.CurrentParameter,
-                collectionElementParameter);
+                collectionElementParameter
+            );
 
             var newSource = Expression.Call(
                 QueryableMethods.SelectManyWithCollectionSelector.MakeGenericMethod(
-                    source.SourceElementType, collectionElementType, newResultSelector.ReturnType),
+                    source.SourceElementType,
+                    collectionElementType,
+                    newResultSelector.ReturnType
+                ),
                 source.Source,
                 Expression.Quote(collectionSelector),
-                Expression.Quote(newResultSelector));
+                Expression.Quote(newResultSelector)
+            );
 
             var currentTree = new NavigationTreeNode(source.CurrentTree, innerTree);
-            var pendingSelector = resultSelector == null
-                ? innerTree
-                : new ReplacingExpressionVisitor(
-                        new Expression[] { resultSelector.Parameters[0], resultSelector.Parameters[1] },
-                        new[] { source.PendingSelector, innerTree })
-                    .Visit(resultSelector.Body);
+            var pendingSelector =
+                resultSelector == null
+                    ? innerTree
+                    : new ReplacingExpressionVisitor(
+                        new Expression[]
+                        {
+                            resultSelector.Parameters[0],
+                            resultSelector.Parameters[1],
+                        },
+                        new[] { source.PendingSelector, innerTree }
+                    ).Visit(resultSelector.Body);
             var parameterName = GetParameterName("ti");
 
-            return new NavigationExpansionExpression(newSource, currentTree, pendingSelector, parameterName);
+            return new NavigationExpansionExpression(
+                newSource,
+                currentTree,
+                pendingSelector,
+                parameterName
+            );
         }
 
         // TODO: Improve this exception message
-        throw new InvalidOperationException(CoreStrings.TranslationFailed(collectionSelector.Print()));
+        throw new InvalidOperationException(
+            CoreStrings.TranslationFailed(collectionSelector.Print())
+        );
     }
 
     private NavigationExpansionExpression ProcessSetOperation(
         NavigationExpansionExpression outerSource,
         MethodInfo genericMethod,
-        NavigationExpansionExpression innerSource)
+        NavigationExpansionExpression innerSource
+    )
     {
-        outerSource = (NavigationExpansionExpression)_pendingSelectorExpandingExpressionVisitor.Visit(outerSource);
+        outerSource = (NavigationExpansionExpression)
+            _pendingSelectorExpandingExpressionVisitor.Visit(outerSource);
         var outerTreeStructure = SnapshotExpression(outerSource.PendingSelector);
 
-        innerSource = (NavigationExpansionExpression)_pendingSelectorExpandingExpressionVisitor.Visit(innerSource);
+        innerSource = (NavigationExpansionExpression)
+            _pendingSelectorExpandingExpressionVisitor.Visit(innerSource);
         var innerTreeStructure = SnapshotExpression(innerSource.PendingSelector);
 
         ValidateExpressionCompatibility(outerTreeStructure, innerTreeStructure);
@@ -1489,51 +1892,82 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
         var innerType = innerQueryable.Type.GetSequenceType();
 
         var result = Expression.Call(
-            genericMethod.MakeGenericMethod(outerType.IsAssignableFrom(innerType) ? outerType : innerType),
+            genericMethod.MakeGenericMethod(
+                outerType.IsAssignableFrom(innerType) ? outerType : innerType
+            ),
             outerQueryable,
-            innerQueryable);
+            innerQueryable
+        );
         var navigationTree = new NavigationTreeExpression(
-            outerType.IsAssignableFrom(innerType) ? outerTreeStructure : innerTreeStructure);
+            outerType.IsAssignableFrom(innerType) ? outerTreeStructure : innerTreeStructure
+        );
         var parameterName = GetParameterName("e");
 
-        return new NavigationExpansionExpression(result, navigationTree, navigationTree, parameterName);
+        return new NavigationExpansionExpression(
+            result,
+            navigationTree,
+            navigationTree,
+            parameterName
+        );
     }
 
     private Expression ProcessUnknownMethod(MethodCallExpression methodCallExpression)
     {
-        var queryableElementType = methodCallExpression.Type.TryGetElementType(typeof(IQueryable<>));
-        if (queryableElementType != null
+        var queryableElementType = methodCallExpression.Type.TryGetElementType(
+            typeof(IQueryable<>)
+        );
+        if (
+            queryableElementType != null
             && methodCallExpression.Object == null
             && methodCallExpression.Arguments.All(a => a.GetLambdaOrNull() == null)
             && methodCallExpression.Method.IsGenericMethod
             && methodCallExpression.Method.GetGenericArguments().Length == 1
             && methodCallExpression.Method.GetGenericArguments()[0] == queryableElementType
             && methodCallExpression.Arguments.Count > 0
-            && methodCallExpression.Arguments.Skip(1).All(e => e.Type.TryGetElementType(typeof(IQueryable<>)) == null))
+            && methodCallExpression
+                .Arguments.Skip(1)
+                .All(e => e.Type.TryGetElementType(typeof(IQueryable<>)) == null)
+        )
         {
             var firstArgument = Visit(methodCallExpression.Arguments[0]);
-            if (firstArgument is NavigationExpansionExpression source
-                && source.Type == methodCallExpression.Type)
+            if (
+                firstArgument is NavigationExpansionExpression source
+                && source.Type == methodCallExpression.Type
+            )
             {
-                source = (NavigationExpansionExpression)_pendingSelectorExpandingExpressionVisitor.Visit(source);
+                source = (NavigationExpansionExpression)
+                    _pendingSelectorExpandingExpressionVisitor.Visit(source);
                 var newStructure = SnapshotExpression(source.PendingSelector);
                 var queryable = Reduce(source);
 
                 var result = Expression.Call(
-                    methodCallExpression.Method.GetGenericMethodDefinition().MakeGenericMethod(queryableElementType),
-                    new[] { queryable }.Concat(methodCallExpression.Arguments.Skip(1).Select(e => Visit(e))));
+                    methodCallExpression
+                        .Method.GetGenericMethodDefinition()
+                        .MakeGenericMethod(queryableElementType),
+                    new[] { queryable }.Concat(
+                        methodCallExpression.Arguments.Skip(1).Select(e => Visit(e))
+                    )
+                );
 
                 var navigationTree = new NavigationTreeExpression(newStructure);
                 var parameterName = GetParameterName("e");
 
-                return new NavigationExpansionExpression(result, navigationTree, navigationTree, parameterName);
+                return new NavigationExpansionExpression(
+                    result,
+                    navigationTree,
+                    navigationTree,
+                    parameterName
+                );
             }
         }
 
         return base.VisitMethodCall(methodCallExpression);
     }
 
-    private NavigationExpansionExpression ProcessWhere(NavigationExpansionExpression source, LambdaExpression predicate)
+    private NavigationExpansionExpression ProcessWhere(
+        NavigationExpansionExpression source,
+        LambdaExpression predicate
+    )
     {
         predicate = ProcessLambdaExpression(source, predicate);
 
@@ -1541,7 +1975,9 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
             Expression.Call(
                 QueryableMethods.Where.MakeGenericMethod(source.SourceElementType),
                 source.Source,
-                Expression.Quote(predicate)));
+                Expression.Quote(predicate)
+            )
+        );
 
         return source;
     }
@@ -1549,36 +1985,52 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
     private Expression ProcessAllAnyCountLongCount(
         GroupByNavigationExpansionExpression groupBySource,
         MethodInfo genericMethod,
-        LambdaExpression? predicate)
+        LambdaExpression? predicate
+    )
     {
         if (predicate != null)
         {
             predicate = ProcessLambdaExpression(groupBySource, predicate);
 
             return Expression.Call(
-                genericMethod.MakeGenericMethod(groupBySource.SourceElementType), groupBySource.Source, Expression.Quote(predicate));
+                genericMethod.MakeGenericMethod(groupBySource.SourceElementType),
+                groupBySource.Source,
+                Expression.Quote(predicate)
+            );
         }
 
-        return Expression.Call(genericMethod.MakeGenericMethod(groupBySource.SourceElementType), groupBySource.Source);
+        return Expression.Call(
+            genericMethod.MakeGenericMethod(groupBySource.SourceElementType),
+            groupBySource.Source
+        );
     }
 
     private GroupByNavigationExpansionExpression ProcessOrderByThenBy(
         GroupByNavigationExpansionExpression groupBySource,
         MethodInfo genericMethod,
-        LambdaExpression keySelector)
+        LambdaExpression keySelector
+    )
     {
         keySelector = ProcessLambdaExpression(groupBySource, keySelector);
 
         groupBySource.UpdateSource(
             Expression.Call(
-                genericMethod.MakeGenericMethod(groupBySource.SourceElementType, keySelector.ReturnType),
+                genericMethod.MakeGenericMethod(
+                    groupBySource.SourceElementType,
+                    keySelector.ReturnType
+                ),
                 groupBySource.Source,
-                Expression.Quote(keySelector)));
+                Expression.Quote(keySelector)
+            )
+        );
 
         return groupBySource;
     }
 
-    private NavigationExpansionExpression? ProcessSelect(GroupByNavigationExpansionExpression groupBySource, LambdaExpression selector)
+    private NavigationExpansionExpression? ProcessSelect(
+        GroupByNavigationExpansionExpression groupBySource,
+        LambdaExpression selector
+    )
     {
         var groupingElementReplacingExpressionVisitor =
             new GroupingElementReplacingExpressionVisitor(selector.Parameters[0], groupBySource);
@@ -1589,26 +2041,39 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
         }
 
         selectorBody = Visit(selectorBody);
-        selectorBody =
-            new PendingSelectorExpandingExpressionVisitor(this, _extensibilityHelper, applyIncludes: true).Visit(selectorBody);
+        selectorBody = new PendingSelectorExpandingExpressionVisitor(
+            this,
+            _extensibilityHelper,
+            applyIncludes: true
+        ).Visit(selectorBody);
         selectorBody = Reduce(selectorBody);
         selector = Expression.Lambda(selectorBody, groupBySource.CurrentParameter);
 
         var newSource = Expression.Call(
-            QueryableMethods.Select.MakeGenericMethod(groupBySource.SourceElementType, selector.ReturnType),
+            QueryableMethods.Select.MakeGenericMethod(
+                groupBySource.SourceElementType,
+                selector.ReturnType
+            ),
             groupBySource.Source,
-            Expression.Quote(selector));
+            Expression.Quote(selector)
+        );
 
         var navigationTree = new NavigationTreeExpression(Expression.Default(selector.ReturnType));
         var parameterName = GetParameterName("e");
 
-        return new NavigationExpansionExpression(newSource, navigationTree, navigationTree, parameterName);
+        return new NavigationExpansionExpression(
+            newSource,
+            navigationTree,
+            navigationTree,
+            parameterName
+        );
     }
 
     private GroupByNavigationExpansionExpression ProcessSkipTake(
         GroupByNavigationExpansionExpression groupBySource,
         MethodInfo genericMethod,
-        Expression count)
+        Expression count
+    )
     {
         if (!UseOldBehavior32312)
         {
@@ -1616,21 +2081,29 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
         }
 
         groupBySource.UpdateSource(
-            Expression.Call(genericMethod.MakeGenericMethod(groupBySource.SourceElementType), groupBySource.Source, count));
+            Expression.Call(
+                genericMethod.MakeGenericMethod(groupBySource.SourceElementType),
+                groupBySource.Source,
+                count
+            )
+        );
 
         return groupBySource;
     }
 
     private GroupByNavigationExpansionExpression ProcessWhere(
         GroupByNavigationExpansionExpression groupBySource,
-        LambdaExpression predicate)
+        LambdaExpression predicate
+    )
     {
         predicate = ProcessLambdaExpression(groupBySource, predicate);
         groupBySource.UpdateSource(
             Expression.Call(
                 QueryableMethods.Where.MakeGenericMethod(groupBySource.SourceElementType),
                 groupBySource.Source,
-                Expression.Quote(predicate)));
+                Expression.Quote(predicate)
+            )
+        );
 
         return groupBySource;
     }
@@ -1644,59 +2117,85 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                 var lambdaBody = Visit(keySelector);
                 lambdaBody = _pendingSelectorExpandingExpressionVisitor.Visit(lambdaBody);
 
-                if (lambdaBody is NavigationTreeExpression { Value: EntityReference entityReference } navigationTreeExpression)
+                if (
+                    lambdaBody is NavigationTreeExpression
+                    {
+                        Value: EntityReference entityReference
+                    } navigationTreeExpression
+                )
                 {
-                    var primaryKeyProperties = entityReference.EntityType.FindPrimaryKey()?.Properties;
+                    var primaryKeyProperties = entityReference
+                        .EntityType.FindPrimaryKey()
+                        ?.Properties;
                     if (primaryKeyProperties != null)
                     {
                         for (var i = 0; i < primaryKeyProperties.Count; i++)
                         {
-                            var genericMethod = i > 0
-                                ? GetThenByMethod(orderingMethod)
-                                : orderingMethod;
+                            var genericMethod =
+                                i > 0 ? GetThenByMethod(orderingMethod) : orderingMethod;
 
                             var keyPropertyLambda = GenerateLambda(
                                 navigationTreeExpression.CreateEFPropertyExpression(
-                                    primaryKeyProperties[i], entityReference.IsOptional),
-                                source.CurrentParameter);
+                                    primaryKeyProperties[i],
+                                    entityReference.IsOptional
+                                ),
+                                source.CurrentParameter
+                            );
 
                             source.UpdateSource(
                                 Expression.Call(
-                                    genericMethod.MakeGenericMethod(source.SourceElementType, keyPropertyLambda.ReturnType),
+                                    genericMethod.MakeGenericMethod(
+                                        source.SourceElementType,
+                                        keyPropertyLambda.ReturnType
+                                    ),
                                     source.Source,
-                                    keyPropertyLambda));
+                                    keyPropertyLambda
+                                )
+                            );
                         }
 
                         continue;
                     }
                 }
 
-                if (lambdaBody is NavigationExpansionExpression navigationExpansionExpression
+                if (
+                    lambdaBody is NavigationExpansionExpression navigationExpansionExpression
                     && navigationExpansionExpression.CardinalityReducingGenericMethodInfo != null
-                    && navigationExpansionExpression.PendingSelector is NavigationTreeExpression
-                    {
-                        Value: EntityReference subqueryEntityReference
-                    })
+                    && navigationExpansionExpression.PendingSelector
+                        is NavigationTreeExpression
+                        {
+                            Value: EntityReference subqueryEntityReference
+                        }
+                )
                 {
-                    var primaryKeyProperties = subqueryEntityReference.EntityType.FindPrimaryKey()?.Properties;
+                    var primaryKeyProperties = subqueryEntityReference
+                        .EntityType.FindPrimaryKey()
+                        ?.Properties;
                     if (primaryKeyProperties != null)
                     {
                         for (var i = 0; i < primaryKeyProperties.Count; i++)
                         {
-                            var genericMethod = i > 0
-                                ? GetThenByMethod(orderingMethod)
-                                : orderingMethod;
+                            var genericMethod =
+                                i > 0 ? GetThenByMethod(orderingMethod) : orderingMethod;
 
                             var keyPropertyLambda = GenerateLambda(
                                 navigationExpansionExpression.CreateEFPropertyExpression(
-                                    primaryKeyProperties[i], subqueryEntityReference.IsOptional),
-                                source.CurrentParameter);
+                                    primaryKeyProperties[i],
+                                    subqueryEntityReference.IsOptional
+                                ),
+                                source.CurrentParameter
+                            );
 
                             source.UpdateSource(
                                 Expression.Call(
-                                    genericMethod.MakeGenericMethod(source.SourceElementType, keyPropertyLambda.ReturnType),
+                                    genericMethod.MakeGenericMethod(
+                                        source.SourceElementType,
+                                        keyPropertyLambda.ReturnType
+                                    ),
                                     source.Source,
-                                    keyPropertyLambda));
+                                    keyPropertyLambda
+                                )
+                            );
                         }
 
                         continue;
@@ -1707,33 +2206,39 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
 
                 source.UpdateSource(
                     Expression.Call(
-                        orderingMethod.MakeGenericMethod(source.SourceElementType, keySelectorLambda.ReturnType),
+                        orderingMethod.MakeGenericMethod(
+                            source.SourceElementType,
+                            keySelectorLambda.ReturnType
+                        ),
                         source.Source,
-                        keySelectorLambda));
+                        keySelectorLambda
+                    )
+                );
             }
 
             source.ClearPendingOrderings();
         }
 
-        static MethodInfo GetThenByMethod(MethodInfo currentGenericMethod)
-            => currentGenericMethod == QueryableMethods.OrderBy
-                ? QueryableMethods.ThenBy
-                : currentGenericMethod == QueryableMethods.OrderByDescending
-                    ? QueryableMethods.ThenByDescending
-                    : currentGenericMethod;
+        static MethodInfo GetThenByMethod(MethodInfo currentGenericMethod) =>
+            currentGenericMethod == QueryableMethods.OrderBy ? QueryableMethods.ThenBy
+            : currentGenericMethod == QueryableMethods.OrderByDescending
+                ? QueryableMethods.ThenByDescending
+            : currentGenericMethod;
     }
 
     private (LambdaExpression, LambdaExpression) ProcessJoinConditions(
         NavigationExpansionExpression outerSource,
         NavigationExpansionExpression innerSource,
         LambdaExpression outerKeySelector,
-        LambdaExpression innerKeySelector)
+        LambdaExpression innerKeySelector
+    )
     {
         var outerKeyLambda = RemapLambdaExpression(outerSource, outerKeySelector);
         var innerKeyLambda = RemapLambdaExpression(innerSource, innerKeySelector);
 
-        var keyComparison = _removeRedundantNavigationComparisonExpressionVisitor
-            .Visit(ExpressionExtensions.CreateEqualsExpression(outerKeyLambda, innerKeyLambda));
+        var keyComparison = _removeRedundantNavigationComparisonExpressionVisitor.Visit(
+            ExpressionExtensions.CreateEqualsExpression(outerKeyLambda, innerKeyLambda)
+        );
 
         Expression left;
         Expression right;
@@ -1750,8 +2255,14 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
             right = methodCall.Arguments[1];
         }
 
-        outerKeySelector = GenerateLambda(ExpandNavigationsForSource(outerSource, left), outerSource.CurrentParameter);
-        innerKeySelector = GenerateLambda(ExpandNavigationsForSource(innerSource, right), innerSource.CurrentParameter);
+        outerKeySelector = GenerateLambda(
+            ExpandNavigationsForSource(outerSource, left),
+            outerSource.CurrentParameter
+        );
+        innerKeySelector = GenerateLambda(
+            ExpandNavigationsForSource(innerSource, right),
+            innerSource.CurrentParameter
+        );
 
         if (outerKeySelector.ReturnType != innerKeySelector.ReturnType)
         {
@@ -1767,12 +2278,22 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
 
         static LambdaExpression ChangeReturnType(LambdaExpression lambdaExpression, Type type)
         {
-            var delegateType = typeof(Func<,>).MakeGenericType(lambdaExpression.Parameters[0].Type, type);
-            return Expression.Lambda(delegateType, lambdaExpression.Body, lambdaExpression.Parameters);
+            var delegateType = typeof(Func<,>).MakeGenericType(
+                lambdaExpression.Parameters[0].Type,
+                type
+            );
+            return Expression.Lambda(
+                delegateType,
+                lambdaExpression.Body,
+                lambdaExpression.Parameters
+            );
         }
     }
 
-    private Expression ApplyQueryFilter(IEntityType entityType, NavigationExpansionExpression navigationExpansionExpression)
+    private Expression ApplyQueryFilter(
+        IEntityType entityType,
+        NavigationExpansionExpression navigationExpansionExpression
+    )
     {
         if (!_queryCompilationContext.IgnoreQueryFilters)
         {
@@ -1781,42 +2302,64 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
             var queryFilter = rootEntityType.GetQueryFilter();
             if (queryFilter != null)
             {
-                if (!_parameterizedQueryFilterPredicateCache.TryGetValue(rootEntityType, out var filterPredicate))
+                if (
+                    !_parameterizedQueryFilterPredicateCache.TryGetValue(
+                        rootEntityType,
+                        out var filterPredicate
+                    )
+                )
                 {
                     filterPredicate = queryFilter;
-                    filterPredicate = (LambdaExpression)_parameterExtractingExpressionVisitor.ExtractParameters(
-                        filterPredicate, clearEvaluatedValues: false);
-                    filterPredicate = (LambdaExpression)_queryTranslationPreprocessor.NormalizeQueryableMethod(filterPredicate);
+                    filterPredicate = (LambdaExpression)
+                        _parameterExtractingExpressionVisitor.ExtractParameters(
+                            filterPredicate,
+                            clearEvaluatedValues: false
+                        );
+                    filterPredicate = (LambdaExpression)
+                        _queryTranslationPreprocessor.NormalizeQueryableMethod(filterPredicate);
 
                     // We need to do entity equality, but that requires a full method call on a query root to properly flow the
                     // entity information through. Construct a MethodCall wrapper for the predicate with the proper query root.
                     var filterWrapper = Expression.Call(
                         QueryableMethods.Where.MakeGenericMethod(rootEntityType.ClrType),
                         new EntityQueryRootExpression(rootEntityType),
-                        filterPredicate);
+                        filterPredicate
+                    );
                     filterPredicate = filterWrapper.Arguments[1].UnwrapLambdaFromQuote();
 
                     _parameterizedQueryFilterPredicateCache[rootEntityType] = filterPredicate;
                 }
 
-                filterPredicate =
-                    (LambdaExpression)new SelfReferenceEntityQueryableRewritingExpressionVisitor(this, entityType).Visit(
-                        filterPredicate);
+                filterPredicate = (LambdaExpression)
+                    new SelfReferenceEntityQueryableRewritingExpressionVisitor(
+                        this,
+                        entityType
+                    ).Visit(filterPredicate);
 
                 // if we are constructing EntityQueryable of a derived type, we need to re-map filter predicate to the correct derived type
                 var filterPredicateParameter = filterPredicate.Parameters[0];
                 if (filterPredicateParameter.Type != sequenceType)
                 {
-                    var newFilterPredicateParameter = Expression.Parameter(sequenceType, filterPredicateParameter.Name);
+                    var newFilterPredicateParameter = Expression.Parameter(
+                        sequenceType,
+                        filterPredicateParameter.Name
+                    );
                     var newFilterPredicateBody = ReplacingExpressionVisitor.Replace(
-                        filterPredicateParameter, newFilterPredicateParameter, filterPredicate.Body);
-                    filterPredicate = Expression.Lambda(newFilterPredicateBody, newFilterPredicateParameter);
+                        filterPredicateParameter,
+                        newFilterPredicateParameter,
+                        filterPredicate.Body
+                    );
+                    filterPredicate = Expression.Lambda(
+                        newFilterPredicateBody,
+                        newFilterPredicateParameter
+                    );
                 }
 
                 var filteredResult = Expression.Call(
                     QueryableMethods.Where.MakeGenericMethod(sequenceType),
                     navigationExpansionExpression,
-                    filterPredicate);
+                    filterPredicate
+                );
 
                 return Visit(filteredResult);
             }
@@ -1827,53 +2370,80 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
 
     private void ValidateExpressionCompatibility(Expression outer, Expression inner)
     {
-        if (outer is EntityReference outerEntityReference
-            && inner is EntityReference innerEntityReference)
+        if (
+            outer is EntityReference outerEntityReference
+            && inner is EntityReference innerEntityReference
+        )
         {
             if (!outerEntityReference.IncludePaths.Equals(innerEntityReference.IncludePaths))
             {
-                throw new InvalidOperationException(CoreStrings.SetOperationWithDifferentIncludesInOperands);
+                throw new InvalidOperationException(
+                    CoreStrings.SetOperationWithDifferentIncludesInOperands
+                );
             }
 
-            if (!_extensibilityHelper.AreQueryRootsCompatible(
-                    outerEntityReference.EntityQueryRootExpression, innerEntityReference.EntityQueryRootExpression))
+            if (
+                !_extensibilityHelper.AreQueryRootsCompatible(
+                    outerEntityReference.EntityQueryRootExpression,
+                    innerEntityReference.EntityQueryRootExpression
+                )
+            )
             {
                 throw new InvalidOperationException(CoreStrings.IncompatibleSourcesForSetOperation);
             }
         }
 
-        if (outer is NewExpression outerNewExpression
-            && inner is NewExpression innerNewExpression)
+        if (outer is NewExpression outerNewExpression && inner is NewExpression innerNewExpression)
         {
             if (outerNewExpression.Arguments.Count != innerNewExpression.Arguments.Count)
             {
-                throw new InvalidOperationException(CoreStrings.SetOperationWithDifferentIncludesInOperands);
+                throw new InvalidOperationException(
+                    CoreStrings.SetOperationWithDifferentIncludesInOperands
+                );
             }
 
             for (var i = 0; i < outerNewExpression.Arguments.Count; i++)
             {
-                ValidateExpressionCompatibility(outerNewExpression.Arguments[i], innerNewExpression.Arguments[i]);
+                ValidateExpressionCompatibility(
+                    outerNewExpression.Arguments[i],
+                    innerNewExpression.Arguments[i]
+                );
             }
         }
 
-        if (outer is DefaultExpression outerDefaultExpression
+        if (
+            outer is DefaultExpression outerDefaultExpression
             && inner is DefaultExpression innerDefaultExpression
-            && outerDefaultExpression.Type != innerDefaultExpression.Type)
+            && outerDefaultExpression.Type != innerDefaultExpression.Type
+        )
         {
-            throw new InvalidOperationException(CoreStrings.SetOperationWithDifferentIncludesInOperands);
+            throw new InvalidOperationException(
+                CoreStrings.SetOperationWithDifferentIncludesInOperands
+            );
         }
     }
 
-    private static MethodCallExpression ConvertToEnumerable(MethodInfo queryableMethod, IEnumerable<Expression> arguments)
+    private static MethodCallExpression ConvertToEnumerable(
+        MethodInfo queryableMethod,
+        IEnumerable<Expression> arguments
+    )
     {
         var genericTypeArguments = queryableMethod.IsGenericMethod
             ? queryableMethod.GetGenericArguments()
             : Array.Empty<Type>();
 
-        var enumerableArguments = arguments.Select(
-            arg => arg is UnaryExpression { NodeType: ExpressionType.Quote, Operand: LambdaExpression } unaryExpression
-                ? unaryExpression.Operand
-                : arg).ToList();
+        var enumerableArguments = arguments
+            .Select(arg =>
+                arg
+                    is UnaryExpression
+                    {
+                        NodeType: ExpressionType.Quote,
+                        Operand: LambdaExpression
+                    } unaryExpression
+                    ? unaryExpression.Operand
+                    : arg
+            )
+            .ToList();
 
         if (queryableMethod.Name == nameof(Enumerable.Min))
         {
@@ -1931,13 +2501,17 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
             }
         }
 
-        foreach (var method in typeof(Enumerable).GetTypeInfo().GetDeclaredMethods(queryableMethod.Name))
+        foreach (
+            var method in typeof(Enumerable).GetTypeInfo().GetDeclaredMethods(queryableMethod.Name)
+        )
         {
             var enumerableMethod = method;
             if (enumerableMethod.IsGenericMethod)
             {
-                if (genericTypeArguments != null
-                    && enumerableMethod.GetGenericArguments().Length == genericTypeArguments.Length)
+                if (
+                    genericTypeArguments != null
+                    && enumerableMethod.GetGenericArguments().Length == genericTypeArguments.Length
+                )
                 {
                     enumerableMethod = enumerableMethod.MakeGenericMethod(genericTypeArguments);
                 }
@@ -1956,7 +2530,10 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
             var validMapping = true;
             for (var i = 0; i < enumerableMethodParameters.Length; i++)
             {
-                if (!enumerableMethodParameters[i].ParameterType.IsAssignableFrom(enumerableArguments[i].Type))
+                if (
+                    !enumerableMethodParameters[i]
+                        .ParameterType.IsAssignableFrom(enumerableArguments[i].Type)
+                )
                 {
                     validMapping = false;
                     break;
@@ -1985,23 +2562,39 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
 
     private NavigationExpansionExpression CreateNavigationExpansionExpression(
         Expression sourceExpression,
-        IEntityType entityType)
+        IEntityType entityType
+    )
     {
         // if sourceExpression is not a query root we will throw when trying to construct temporal root expression
         // regular queries don't use the query root so they will still be fine
-        var entityReference = new EntityReference(entityType, sourceExpression as EntityQueryRootExpression);
+        var entityReference = new EntityReference(
+            entityType,
+            sourceExpression as EntityQueryRootExpression
+        );
         PopulateEagerLoadedNavigations(entityReference.IncludePaths);
 
         var currentTree = new NavigationTreeExpression(entityReference);
-        var parameterName = GetParameterName(entityType.ShortName()[0].ToString().ToLowerInvariant());
+        var parameterName = GetParameterName(
+            entityType.ShortName()[0].ToString().ToLowerInvariant()
+        );
 
-        return new NavigationExpansionExpression(sourceExpression, currentTree, currentTree, parameterName);
+        return new NavigationExpansionExpression(
+            sourceExpression,
+            currentTree,
+            currentTree,
+            parameterName
+        );
     }
 
-    private Expression ExpandNavigationsForSource(NavigationExpansionExpression source, Expression expression)
+    private Expression ExpandNavigationsForSource(
+        NavigationExpansionExpression source,
+        Expression expression
+    )
     {
         expression = _removeRedundantNavigationComparisonExpressionVisitor.Visit(expression);
-        expression = new ExpandingExpressionVisitor(this, source, _extensibilityHelper).Visit(expression);
+        expression = new ExpandingExpressionVisitor(this, source, _extensibilityHelper).Visit(
+            expression
+        );
         expression = _subqueryMemberPushdownExpressionVisitor.Visit(expression);
         expression = Visit(expression);
         expression = _pendingSelectorExpandingExpressionVisitor.Visit(expression);
@@ -2009,22 +2602,43 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
         return expression;
     }
 
-    private static Expression RemapLambdaExpression(NavigationExpansionExpression source, LambdaExpression lambdaExpression)
-        => ReplacingExpressionVisitor.Replace(lambdaExpression.Parameters[0], source.PendingSelector, lambdaExpression.Body);
+    private static Expression RemapLambdaExpression(
+        NavigationExpansionExpression source,
+        LambdaExpression lambdaExpression
+    ) =>
+        ReplacingExpressionVisitor.Replace(
+            lambdaExpression.Parameters[0],
+            source.PendingSelector,
+            lambdaExpression.Body
+        );
 
-    private LambdaExpression ProcessLambdaExpression(NavigationExpansionExpression source, LambdaExpression lambdaExpression)
-        => GenerateLambda(ExpandNavigationsForSource(source, RemapLambdaExpression(source, lambdaExpression)), source.CurrentParameter);
+    private LambdaExpression ProcessLambdaExpression(
+        NavigationExpansionExpression source,
+        LambdaExpression lambdaExpression
+    ) =>
+        GenerateLambda(
+            ExpandNavigationsForSource(source, RemapLambdaExpression(source, lambdaExpression)),
+            source.CurrentParameter
+        );
 
     private LambdaExpression ProcessLambdaExpression(
         GroupByNavigationExpansionExpression groupBySource,
-        LambdaExpression lambdaExpression)
-        => Expression.Lambda(
+        LambdaExpression lambdaExpression
+    ) =>
+        Expression.Lambda(
             Visit(
-                new GroupingElementReplacingExpressionVisitor(lambdaExpression.Parameters[0], groupBySource).Visit(
-                    lambdaExpression.Body)),
-            groupBySource.CurrentParameter);
+                new GroupingElementReplacingExpressionVisitor(
+                    lambdaExpression.Parameters[0],
+                    groupBySource
+                ).Visit(lambdaExpression.Body)
+            ),
+            groupBySource.CurrentParameter
+        );
 
-    private static IEnumerable<INavigationBase> FindNavigations(IEntityType entityType, string navigationName)
+    private static IEnumerable<INavigationBase> FindNavigations(
+        IEntityType entityType,
+        string navigationName
+    )
     {
         var navigation = entityType.FindNavigation(navigationName);
         if (navigation != null)
@@ -2033,8 +2647,11 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
         }
         else
         {
-            foreach (var derivedNavigation in entityType.GetDerivedTypes()
-                         .Select(et => et.FindDeclaredNavigation(navigationName)))
+            foreach (
+                var derivedNavigation in entityType
+                    .GetDerivedTypes()
+                    .Select(et => et.FindDeclaredNavigation(navigationName))
+            )
             {
                 if (derivedNavigation != null)
                 {
@@ -2050,8 +2667,11 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
         }
         else
         {
-            foreach (var derivedSkipNavigation in entityType.GetDerivedTypes()
-                         .Select(et => et.FindDeclaredSkipNavigation(navigationName)))
+            foreach (
+                var derivedSkipNavigation in entityType
+                    .GetDerivedTypes()
+                    .Select(et => et.FindDeclaredSkipNavigation(navigationName))
+            )
             {
                 if (derivedSkipNavigation != null)
                 {
@@ -2061,51 +2681,75 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
         }
     }
 
-    private LambdaExpression GenerateLambda(Expression body, ParameterExpression currentParameter)
-        => Expression.Lambda(Reduce(body), currentParameter);
+    private LambdaExpression GenerateLambda(
+        Expression body,
+        ParameterExpression currentParameter
+    ) => Expression.Lambda(Reduce(body), currentParameter);
 
     private Expression UnwrapCollectionMaterialization(Expression expression)
     {
-        while (expression is MethodCallExpression { Method.IsGenericMethod: true } innerMethodCall
-               && innerMethodCall.Method.GetGenericMethodDefinition() is MethodInfo innerMethod
-               && (innerMethod == EnumerableMethods.AsEnumerable
-                   || innerMethod == EnumerableMethods.ToList
-                   || innerMethod == EnumerableMethods.ToArray))
+        while (
+            expression is MethodCallExpression { Method.IsGenericMethod: true } innerMethodCall
+            && innerMethodCall.Method.GetGenericMethodDefinition() is MethodInfo innerMethod
+            && (
+                innerMethod == EnumerableMethods.AsEnumerable
+                || innerMethod == EnumerableMethods.ToList
+                || innerMethod == EnumerableMethods.ToArray
+            )
+        )
         {
             expression = innerMethodCall.Arguments[0];
         }
 
-        if (expression is MaterializeCollectionNavigationExpression materializeCollectionNavigationExpression)
+        if (
+            expression
+            is MaterializeCollectionNavigationExpression materializeCollectionNavigationExpression
+        )
         {
             expression = materializeCollectionNavigationExpression.Subquery;
         }
 
         switch (expression)
         {
-            case OwnedNavigationReference { Navigation.IsCollection: true } ownedNavigationReference:
+            case OwnedNavigationReference
             {
-                var currentTree = new NavigationTreeExpression(ownedNavigationReference.EntityReference);
+                Navigation.IsCollection: true
+            } ownedNavigationReference:
+            {
+                var currentTree = new NavigationTreeExpression(
+                    ownedNavigationReference.EntityReference
+                );
 
                 return new NavigationExpansionExpression(
                     Expression.Call(
-                        QueryableMethods.AsQueryable.MakeGenericMethod(ownedNavigationReference.Type.GetSequenceType()),
-                        ownedNavigationReference),
+                        QueryableMethods.AsQueryable.MakeGenericMethod(
+                            ownedNavigationReference.Type.GetSequenceType()
+                        ),
+                        ownedNavigationReference
+                    ),
                     currentTree,
                     currentTree,
-                    GetParameterName("o"));
+                    GetParameterName("o")
+                );
             }
 
             case PrimitiveCollectionReference primitiveCollectionReference:
             {
-                var currentTree = new NavigationTreeExpression(Expression.Default(primitiveCollectionReference.Type.GetSequenceType()));
+                var currentTree = new NavigationTreeExpression(
+                    Expression.Default(primitiveCollectionReference.Type.GetSequenceType())
+                );
 
                 return new NavigationExpansionExpression(
                     Expression.Call(
-                        QueryableMethods.AsQueryable.MakeGenericMethod(primitiveCollectionReference.Type.GetSequenceType()),
-                        primitiveCollectionReference),
+                        QueryableMethods.AsQueryable.MakeGenericMethod(
+                            primitiveCollectionReference.Type.GetSequenceType()
+                        ),
+                        primitiveCollectionReference
+                    ),
                     currentTree,
                     currentTree,
-                    GetParameterName("p"));
+                    GetParameterName("p")
+                );
             }
 
             default:
@@ -2130,17 +2774,25 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
     {
         var entityType = includeTreeNode.EntityType;
 
-        if (!_queryCompilationContext.IgnoreAutoIncludes
-            && !_nonCyclicAutoIncludeEntityTypes.Contains(entityType))
+        if (
+            !_queryCompilationContext.IgnoreAutoIncludes
+            && !_nonCyclicAutoIncludeEntityTypes.Contains(entityType)
+        )
         {
-            VerifyNoAutoIncludeCycles(entityType, new HashSet<IEntityType>(), new List<INavigationBase>());
+            VerifyNoAutoIncludeCycles(
+                entityType,
+                new HashSet<IEntityType>(),
+                new List<INavigationBase>()
+            );
         }
 
         var outboundNavigations = GetOutgoingEagerLoadedNavigations(entityType);
 
         if (_queryCompilationContext.IgnoreAutoIncludes)
         {
-            outboundNavigations = outboundNavigations.Where(n => n is INavigation { ForeignKey.IsOwnership: true });
+            outboundNavigations = outboundNavigations.Where(n =>
+                n is INavigation { ForeignKey.IsOwnership: true }
+            );
         }
 
         foreach (var navigation in outboundNavigations)
@@ -2152,7 +2804,8 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
     private void VerifyNoAutoIncludeCycles(
         IEntityType entityType,
         HashSet<IEntityType> visitedEntityTypes,
-        List<INavigationBase> navigationChain)
+        List<INavigationBase> navigationChain
+    )
     {
         if (_nonCyclicAutoIncludeEntityTypes.Contains(entityType))
         {
@@ -2163,7 +2816,11 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
         {
             throw new InvalidOperationException(
                 CoreStrings.AutoIncludeNavigationCycle(
-                    navigationChain.Select(e => $"'{e.DeclaringEntityType.ShortName()}.{e.Name}'").Join()));
+                    navigationChain
+                        .Select(e => $"'{e.DeclaringEntityType.ShortName()}.{e.Name}'")
+                        .Join()
+                )
+            );
         }
 
         var autoIncludedNavigations = GetOutgoingEagerLoadedNavigations(entityType)
@@ -2171,15 +2828,21 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
 
         foreach (var navigationBase in autoIncludedNavigations)
         {
-            if (navigationChain.Count > 0
+            if (
+                navigationChain.Count > 0
                 && navigationChain[^1].Inverse == navigationBase
-                && navigationBase is INavigation)
+                && navigationBase is INavigation
+            )
             {
                 continue;
             }
 
             navigationChain.Add(navigationBase);
-            VerifyNoAutoIncludeCycles(navigationBase.TargetEntityType, visitedEntityTypes, navigationChain);
+            VerifyNoAutoIncludeCycles(
+                navigationBase.TargetEntityType,
+                visitedEntityTypes,
+                navigationChain
+            );
             navigationChain.Remove(navigationBase);
         }
 
@@ -2187,15 +2850,22 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
         visitedEntityTypes.Remove(entityType);
     }
 
-    private static IEnumerable<INavigationBase> GetOutgoingEagerLoadedNavigations(IEntityType entityType)
-        => entityType.GetNavigations()
+    private static IEnumerable<INavigationBase> GetOutgoingEagerLoadedNavigations(
+        IEntityType entityType
+    ) =>
+        entityType
+            .GetNavigations()
             .Cast<INavigationBase>()
             .Concat(entityType.GetSkipNavigations())
             .Concat(entityType.GetDerivedNavigations())
             .Concat(entityType.GetDerivedSkipNavigations())
             .Where(n => n.IsEagerLoaded);
 
-    private IncludeTreeNode PopulateIncludeTree(IncludeTreeNode includeTreeNode, Expression expression, bool setLoaded)
+    private IncludeTreeNode PopulateIncludeTree(
+        IncludeTreeNode includeTreeNode,
+        Expression expression,
+        bool setLoaded
+    )
     {
         switch (expression)
         {
@@ -2203,8 +2873,17 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                 return includeTreeNode;
 
             case MethodCallExpression methodCallExpression
-                when methodCallExpression.TryGetEFPropertyArguments(out var entityExpression, out var propertyName):
-                if (TryExtractIncludeTreeNode(entityExpression, propertyName, out var addedEfPropertyNode))
+                when methodCallExpression.TryGetEFPropertyArguments(
+                    out var entityExpression,
+                    out var propertyName
+                ):
+                if (
+                    TryExtractIncludeTreeNode(
+                        entityExpression,
+                        propertyName,
+                        out var addedEfPropertyNode
+                    )
+                )
                 {
                     return addedEfPropertyNode;
                 }
@@ -2212,7 +2891,13 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                 break;
 
             case MemberExpression { Expression: { } } memberExpression:
-                if (TryExtractIncludeTreeNode(memberExpression.Expression, memberExpression.Member.Name, out var addedNode))
+                if (
+                    TryExtractIncludeTreeNode(
+                        memberExpression.Expression,
+                        memberExpression.Member.Name,
+                        out var addedNode
+                    )
+                )
                 {
                     return addedNode;
                 }
@@ -2225,24 +2910,36 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
         bool TryExtractIncludeTreeNode(
             Expression innerExpression,
             string propertyName,
-            [NotNullWhen(true)] out IncludeTreeNode? addedNode)
+            [NotNullWhen(true)] out IncludeTreeNode? addedNode
+        )
         {
             innerExpression = innerExpression.UnwrapTypeConversion(out var convertedType);
-            var innerIncludeTreeNode = PopulateIncludeTree(includeTreeNode, innerExpression, setLoaded);
+            var innerIncludeTreeNode = PopulateIncludeTree(
+                includeTreeNode,
+                innerExpression,
+                setLoaded
+            );
             var entityType = innerIncludeTreeNode.EntityType;
 
             if (convertedType != null)
             {
-                entityType = entityType.GetAllBaseTypes().Concat(entityType.GetDerivedTypesInclusive())
+                entityType = entityType
+                    .GetAllBaseTypes()
+                    .Concat(entityType.GetDerivedTypesInclusive())
                     .FirstOrDefault(et => et.ClrType == convertedType);
                 if (entityType == null)
                 {
                     throw new InvalidOperationException(
-                        CoreStrings.InvalidTypeConversationWithInclude(expression, convertedType.ShortDisplayName()));
+                        CoreStrings.InvalidTypeConversationWithInclude(
+                            expression,
+                            convertedType.ShortDisplayName()
+                        )
+                    );
                 }
             }
 
-            var navigation = (INavigationBase?)entityType.FindNavigation(propertyName)
+            var navigation =
+                (INavigationBase?)entityType.FindNavigation(propertyName)
                 ?? entityType.FindSkipNavigation(propertyName);
 
             if (navigation != null)
@@ -2260,8 +2957,7 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
         }
     }
 
-    private Expression Reduce(Expression source)
-        => _reducingExpressionVisitor.Visit(source);
+    private Expression Reduce(Expression source) => _reducingExpressionVisitor.Visit(source);
 
     private static Expression SnapshotExpression(Expression selector)
     {
@@ -2320,12 +3016,12 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
 
     private sealed class Parameters : IParameterValues
     {
-        private readonly IDictionary<string, object?> _parameterValues = new Dictionary<string, object?>();
+        private readonly IDictionary<string, object?> _parameterValues =
+            new Dictionary<string, object?>();
 
-        public IReadOnlyDictionary<string, object?> ParameterValues
-            => (IReadOnlyDictionary<string, object?>)_parameterValues;
+        public IReadOnlyDictionary<string, object?> ParameterValues =>
+            (IReadOnlyDictionary<string, object?>)_parameterValues;
 
-        public void AddParameter(string name, object? value)
-            => _parameterValues.Add(name, value);
+        public void AddParameter(string name, object? value) => _parameterValues.Add(name, value);
     }
 }

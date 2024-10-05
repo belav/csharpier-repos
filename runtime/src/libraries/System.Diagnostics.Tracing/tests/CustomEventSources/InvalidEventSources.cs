@@ -106,6 +106,7 @@ namespace SdtEventSources
         {
             WriteEvent(1, n);
         }
+
         [Event(1, Level = EventLevel.Informational)]
         public void WriteInteger2(int n)
         {
@@ -135,6 +136,7 @@ namespace SdtEventSources
         {
             WriteEvent(1, n);
         }
+
         [Event(2, Task = Tasks.MyTask, Opcode = Opcodes.Op1)]
         public void WriteInteger2(int n)
         {
@@ -146,6 +148,7 @@ namespace SdtEventSources
         {
             public const EventTask MyTask = (EventTask)1;
         }
+
         public static class Opcodes
         {
             public const EventOpcode Op1 = (EventOpcode)15;
@@ -166,7 +169,9 @@ namespace SdtEventSources
     {
         [Event(1, Message = "Message = {0,12:G}")]
         public void WriteString(string msg)
-        { WriteEvent(1, msg); }
+        {
+            WriteEvent(1, msg);
+        }
     }
 
     public sealed class EventWithAdminChannelNoMessageEventSource : EventSource
@@ -185,10 +190,12 @@ namespace SdtEventSources
         {
             public const EventKeywords Kwd1 = (EventKeywords)1;
         }
+
         public static class Tasks
         {
             public const EventTask Task1 = (EventTask)1;
         }
+
         public static class Opcodes
         {
             public const EventOpcode Op1 = (EventOpcode)15;
@@ -200,7 +207,9 @@ namespace SdtEventSources
     {
         [Event(1)]
         public void WriteInteger(int n)
-        { WriteEvent(1, n); }
+        {
+            WriteEvent(1, n);
+        }
     }
 
     public interface ILogging
@@ -214,6 +223,8 @@ namespace SdtEventSources
 
         [Event(1)]
         void ILogging.Error(int errorCode, string msg)
-        { WriteEvent(1, errorCode, msg); }
+        {
+            WriteEvent(1, errorCode, msg);
+        }
     }
 }

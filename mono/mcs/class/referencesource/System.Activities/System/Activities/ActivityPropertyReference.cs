@@ -6,20 +6,10 @@ namespace System.Activities
 {
     public class ActivityPropertyReference
     {
-        public ActivityPropertyReference()
-        {
-        }
+        public ActivityPropertyReference() { }
 
-        public string SourceProperty
-        {
-            get;
-            set;
-        }
+        public string SourceProperty { get; set; }
 
-        public string TargetProperty
-        {
-            get;
-            set;
-        }
+        public string TargetProperty { get; set; }
     }
 }

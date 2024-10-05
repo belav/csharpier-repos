@@ -17,10 +17,9 @@ namespace TestApp
             value = v;
         }
 
-
         public bool Equals(StructWithValue other)
         {
-            if (value.Equals (other.value))
+            if (value.Equals(other.value))
                 return true;
             else
                 return false;

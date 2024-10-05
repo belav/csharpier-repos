@@ -1,5 +1,5 @@
-// 
-// System.Xml.Serialization.XmlSerializerAssemblyAttribute.cs 
+//
+// System.Xml.Serialization.XmlSerializerAssemblyAttribute.cs
 //
 // Author:
 //   Lluis Sanchez Gual (lluis@ximian.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,40 +31,43 @@
 
 using System;
 
-namespace System.Xml.Serialization 
+namespace System.Xml.Serialization
 {
-	[AttributeUsageAttribute(AttributeTargets.Class | AttributeTargets.Enum | AttributeTargets.Interface | AttributeTargets.Struct, AllowMultiple=false)]
-	public sealed class XmlSerializerAssemblyAttribute : Attribute
-	{	
-		string _assemblyName;
-		string _codeBase;
-		
-		public XmlSerializerAssemblyAttribute ()
-		{
-		}
+    [AttributeUsageAttribute(
+        AttributeTargets.Class
+            | AttributeTargets.Enum
+            | AttributeTargets.Interface
+            | AttributeTargets.Struct,
+        AllowMultiple = false
+    )]
+    public sealed class XmlSerializerAssemblyAttribute : Attribute
+    {
+        string _assemblyName;
+        string _codeBase;
 
-		public XmlSerializerAssemblyAttribute (string assemblyName)
-		{
-			_assemblyName = assemblyName;
-		}
+        public XmlSerializerAssemblyAttribute() { }
 
-		public XmlSerializerAssemblyAttribute (string assemblyName, string codeBase)
-			: this (assemblyName)
-		{
-			_codeBase = codeBase;
-		}
-		
-		public string AssemblyName 
-		{
-			get { return _assemblyName; }
-			set { _assemblyName = value; }
-		}
+        public XmlSerializerAssemblyAttribute(string assemblyName)
+        {
+            _assemblyName = assemblyName;
+        }
 
-		public string CodeBase 
-		{
-			get { return _codeBase; }
-			set { _codeBase = value; }
-		}
-	}
+        public XmlSerializerAssemblyAttribute(string assemblyName, string codeBase)
+            : this(assemblyName)
+        {
+            _codeBase = codeBase;
+        }
+
+        public string AssemblyName
+        {
+            get { return _assemblyName; }
+            set { _assemblyName = value; }
+        }
+
+        public string CodeBase
+        {
+            get { return _codeBase; }
+            set { _codeBase = value; }
+        }
+    }
 }
-

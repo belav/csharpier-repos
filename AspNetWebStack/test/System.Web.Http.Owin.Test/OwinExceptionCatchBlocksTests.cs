@@ -17,12 +17,15 @@ namespace System.Web.Http.Owin
         public void HttpMessageHandlerAdapterBufferContent_IsSpecifiedValue()
         {
             // Act
-            ExceptionContextCatchBlock catchBlock = OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferContent;
+            ExceptionContextCatchBlock catchBlock =
+                OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferContent;
 
             // Assert
-            ExceptionContextCatchBlock expected =
-                new ExceptionContextCatchBlock("HttpMessageHandlerAdapter.BufferContent", isTopLevel: true,
-                    callsHandler: true);
+            ExceptionContextCatchBlock expected = new ExceptionContextCatchBlock(
+                "HttpMessageHandlerAdapter.BufferContent",
+                isTopLevel: true,
+                callsHandler: true
+            );
             AssertEqual(expected, catchBlock);
         }
 
@@ -30,10 +33,12 @@ namespace System.Web.Http.Owin
         public void HttpMessageHandlerAdapterBufferContent_IsSameInstance()
         {
             // Arrange
-            ExceptionContextCatchBlock first = OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferContent;
+            ExceptionContextCatchBlock first =
+                OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferContent;
 
             // Act
-            ExceptionContextCatchBlock second = OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferContent;
+            ExceptionContextCatchBlock second =
+                OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferContent;
 
             // Assert
             Assert.Same(first, second);
@@ -43,12 +48,15 @@ namespace System.Web.Http.Owin
         public void HttpMessageHandlerAdapterBufferError_IsSpecifiedValue()
         {
             // Act
-            ExceptionContextCatchBlock catchBlock = OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferError;
+            ExceptionContextCatchBlock catchBlock =
+                OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferError;
 
             // Assert
-            ExceptionContextCatchBlock expected =
-                new ExceptionContextCatchBlock("HttpMessageHandlerAdapter.BufferError", isTopLevel: true,
-                    callsHandler: false);
+            ExceptionContextCatchBlock expected = new ExceptionContextCatchBlock(
+                "HttpMessageHandlerAdapter.BufferError",
+                isTopLevel: true,
+                callsHandler: false
+            );
             AssertEqual(expected, catchBlock);
         }
 
@@ -56,10 +64,12 @@ namespace System.Web.Http.Owin
         public void HttpMessageHandlerAdapterBufferError_IsSameInstance()
         {
             // Arrange
-            ExceptionContextCatchBlock first = OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferError;
+            ExceptionContextCatchBlock first =
+                OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferError;
 
             // Act
-            ExceptionContextCatchBlock second = OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferError;
+            ExceptionContextCatchBlock second =
+                OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferError;
 
             // Assert
             Assert.Same(first, second);
@@ -73,9 +83,11 @@ namespace System.Web.Http.Owin
                 OwinExceptionCatchBlocks.HttpMessageHandlerAdapterComputeContentLength;
 
             // Assert
-            ExceptionContextCatchBlock expected =
-                new ExceptionContextCatchBlock("HttpMessageHandlerAdapter.ComputeContentLength", isTopLevel: true,
-                    callsHandler: false);
+            ExceptionContextCatchBlock expected = new ExceptionContextCatchBlock(
+                "HttpMessageHandlerAdapter.ComputeContentLength",
+                isTopLevel: true,
+                callsHandler: false
+            );
             AssertEqual(expected, catchBlock);
         }
 
@@ -83,10 +95,12 @@ namespace System.Web.Http.Owin
         public void HttpMessageHandlerAdapterComputeContentLength_IsSameInstance()
         {
             // Arrange
-            ExceptionContextCatchBlock first = OwinExceptionCatchBlocks.HttpMessageHandlerAdapterComputeContentLength;
+            ExceptionContextCatchBlock first =
+                OwinExceptionCatchBlocks.HttpMessageHandlerAdapterComputeContentLength;
 
             // Act
-            ExceptionContextCatchBlock second = OwinExceptionCatchBlocks.HttpMessageHandlerAdapterComputeContentLength;
+            ExceptionContextCatchBlock second =
+                OwinExceptionCatchBlocks.HttpMessageHandlerAdapterComputeContentLength;
 
             // Assert
             Assert.Same(first, second);
@@ -96,12 +110,15 @@ namespace System.Web.Http.Owin
         public void HttpMessageHandlerAdapterStreamContent_IsSpecifiedValue()
         {
             // Act
-            ExceptionContextCatchBlock catchBlock = OwinExceptionCatchBlocks.HttpMessageHandlerAdapterStreamContent;
+            ExceptionContextCatchBlock catchBlock =
+                OwinExceptionCatchBlocks.HttpMessageHandlerAdapterStreamContent;
 
             // Assert
-            ExceptionContextCatchBlock expected =
-                new ExceptionContextCatchBlock("HttpMessageHandlerAdapter.StreamContent", isTopLevel: true,
-                    callsHandler: false);
+            ExceptionContextCatchBlock expected = new ExceptionContextCatchBlock(
+                "HttpMessageHandlerAdapter.StreamContent",
+                isTopLevel: true,
+                callsHandler: false
+            );
             AssertEqual(expected, catchBlock);
         }
 
@@ -109,16 +126,21 @@ namespace System.Web.Http.Owin
         public void HttpMessageHandlerAdapterStreamContent_IsSameInstance()
         {
             // Arrange
-            ExceptionContextCatchBlock first = OwinExceptionCatchBlocks.HttpMessageHandlerAdapterStreamContent;
+            ExceptionContextCatchBlock first =
+                OwinExceptionCatchBlocks.HttpMessageHandlerAdapterStreamContent;
 
             // Act
-            ExceptionContextCatchBlock second = OwinExceptionCatchBlocks.HttpMessageHandlerAdapterStreamContent;
+            ExceptionContextCatchBlock second =
+                OwinExceptionCatchBlocks.HttpMessageHandlerAdapterStreamContent;
 
             // Assert
             Assert.Same(first, second);
         }
 
-        private static void AssertEqual(ExceptionContextCatchBlock expected, ExceptionContextCatchBlock actual)
+        private static void AssertEqual(
+            ExceptionContextCatchBlock expected,
+            ExceptionContextCatchBlock actual
+        )
         {
             if (expected == null)
             {

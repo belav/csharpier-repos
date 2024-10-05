@@ -1,6 +1,6 @@
 using System;
-using System.Runtime.Intrinsics.X86;
 using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
 using Xunit;
 
 namespace GitHub_22815
@@ -16,12 +16,23 @@ namespace GitHub_22815
             bool result = true;
             if (Avx2.IsSupported)
             {
-                result = test128((byte)1) && test128((sbyte)1) && test128((short)1) &&
-                         test128((ushort)1) && test128((int)1) && test128((uint)1) && 
-                         test128((long)1) && test128((ulong)1) &&
-                         test256((byte)1) && test256((sbyte)1) && test256((short)1) &&
-                         test256((ushort)1) && test256((int)1) && test256((uint)1) && 
-                         test256((long)1) && test256((ulong)1);
+                result =
+                    test128((byte)1)
+                    && test128((sbyte)1)
+                    && test128((short)1)
+                    && test128((ushort)1)
+                    && test128((int)1)
+                    && test128((uint)1)
+                    && test128((long)1)
+                    && test128((ulong)1)
+                    && test256((byte)1)
+                    && test256((sbyte)1)
+                    && test256((short)1)
+                    && test256((ushort)1)
+                    && test256((int)1)
+                    && test256((uint)1)
+                    && test256((long)1)
+                    && test256((ulong)1);
             }
             Assert.True(result);
         }
@@ -90,7 +101,7 @@ namespace GitHub_22815
             }
             return true;
         }
-        
+
         static unsafe bool test128(uint v)
         {
             var vec = Avx2.BroadcastScalarToVector128(&v);
@@ -194,7 +205,7 @@ namespace GitHub_22815
             }
             return true;
         }
-        
+
         static unsafe bool test256(uint v)
         {
             var vec = Avx2.BroadcastScalarToVector256(&v);

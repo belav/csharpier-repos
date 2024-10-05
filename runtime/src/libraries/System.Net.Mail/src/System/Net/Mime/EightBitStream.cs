@@ -36,9 +36,11 @@ namespace System.Net.Mime
         /// ctor.
         /// </summary>
         /// <param name="stream">Underlying stream</param>
-        internal EightBitStream(Stream stream) : base(stream) { }
+        internal EightBitStream(Stream stream)
+            : base(stream) { }
 
-        internal EightBitStream(Stream stream, bool shouldEncodeLeadingDots) : this(stream)
+        internal EightBitStream(Stream stream, bool shouldEncodeLeadingDots)
+            : this(stream)
         {
             _shouldEncodeLeadingDots = shouldEncodeLeadingDots;
         }
@@ -51,7 +53,13 @@ namespace System.Net.Mime
         /// <param name="count">Count of bytes to write</param>
         /// <param name="callback">Callback to call when write completes</param>
         /// <param name="state">State to pass to callback</param>
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        )
         {
             ValidateBufferArguments(buffer, offset, count);
 
@@ -130,12 +138,24 @@ namespace System.Net.Mime
             }
         }
 
-        public int DecodeBytes(byte[] buffer, int offset, int count) { throw new NotImplementedException(); }
+        public int DecodeBytes(byte[] buffer, int offset, int count)
+        {
+            throw new NotImplementedException();
+        }
 
-        public int EncodeBytes(byte[] buffer, int offset, int count) { throw new NotImplementedException(); }
+        public int EncodeBytes(byte[] buffer, int offset, int count)
+        {
+            throw new NotImplementedException();
+        }
 
-        public int EncodeString(string value, Encoding encoding) { throw new NotImplementedException(); }
+        public int EncodeString(string value, Encoding encoding)
+        {
+            throw new NotImplementedException();
+        }
 
-        public string GetEncodedString() { throw new NotImplementedException(); }
+        public string GetEncodedString()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

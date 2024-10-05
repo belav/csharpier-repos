@@ -4,9 +4,9 @@ using System;
 
 class Program
 {
-	void Main ()
-	{
-		LibB.A ();
-		LibB.B ();
-	}
+    void Main()
+    {
+        LibB.A();
+        LibB.B();
+    }
 }

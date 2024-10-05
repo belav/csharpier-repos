@@ -3,7 +3,5 @@
 
 namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.BaseProvidesInterfaceEdgeCase.Dependencies
 {
-	public class Derived1 : Base, IFoo
-	{
-	}
+    public class Derived1 : Base, IFoo { }
 }

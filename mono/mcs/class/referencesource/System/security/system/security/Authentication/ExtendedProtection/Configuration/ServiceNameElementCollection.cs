@@ -11,16 +11,11 @@ namespace System.Security.Authentication.ExtendedProtection.Configuration
     [ConfigurationCollection(typeof(ServiceNameElement))]
     public sealed class ServiceNameElementCollection : ConfigurationElementCollection
     {
-        public ServiceNameElementCollection()
-        {
-        }
+        public ServiceNameElementCollection() { }
 
         public ServiceNameElement this[int index]
         {
-            get
-            {
-                return (ServiceNameElement)BaseGet(index);
-            }
+            get { return (ServiceNameElement)BaseGet(index); }
             set
             {
                 if (BaseGet(index) != null)
@@ -33,10 +28,7 @@ namespace System.Security.Authentication.ExtendedProtection.Configuration
 
         public new ServiceNameElement this[string name]
         {
-            get
-            {
-                return (ServiceNameElement)BaseGet(name);
-            }
+            get { return (ServiceNameElement)BaseGet(name); }
             set
             {
                 if (BaseGet(name) != null)

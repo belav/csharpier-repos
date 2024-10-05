@@ -15,9 +15,11 @@ namespace System.IO.Tests
 
         #region Utilities
 
-        protected virtual Task WriteAsync(string path, string content) => File.WriteAllTextAsync(path, content);
+        protected virtual Task WriteAsync(string path, string content) =>
+            File.WriteAllTextAsync(path, content);
 
-        protected virtual Task WriteAsync(string path, string content, Encoding encoding) => File.WriteAllTextAsync(path, content, encoding);
+        protected virtual Task WriteAsync(string path, string content, Encoding encoding) =>
+            File.WriteAllTextAsync(path, content, encoding);
 
         protected virtual Task<string> ReadAsync(string path) => File.ReadAllTextAsync(path);
 
@@ -28,13 +30,25 @@ namespace System.IO.Tests
         [Fact]
         public async Task NullParametersAsync()
         {
-            await Assert.ThrowsAsync<ArgumentNullException>("path", async () => await WriteAsync(null, "Text"));
-            await Assert.ThrowsAsync<ArgumentNullException>("path", async () => await ReadAsync(null));
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                "path",
+                async () => await WriteAsync(null, "Text")
+            );
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                "path",
+                async () => await ReadAsync(null)
+            );
         }
 
         [Fact]
-        public Task NonExistentPathAsync() => Assert.ThrowsAsync<DirectoryNotFoundException>(
-            async () => await WriteAsync(Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName()), "Text"));
+        public Task NonExistentPathAsync() =>
+            Assert.ThrowsAsync<DirectoryNotFoundException>(
+                async () =>
+                    await WriteAsync(
+                        Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName()),
+                        "Text"
+                    )
+            );
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public async Task NullContent_CreatesFileAsync()
@@ -55,7 +69,10 @@ namespace System.IO.Tests
         [Fact]
         public async Task InvalidParametersAsync()
         {
-            await Assert.ThrowsAsync<ArgumentException>("path", async () => await WriteAsync(string.Empty, "Text"));
+            await Assert.ThrowsAsync<ArgumentException>(
+                "path",
+                async () => await WriteAsync(string.Empty, "Text")
+            );
             await Assert.ThrowsAsync<ArgumentException>("path", async () => await ReadAsync(""));
         }
 
@@ -68,7 +85,9 @@ namespace System.IO.Tests
         public async Task ValidWriteAsync(int size)
         {
             string path = GetTestFilePath();
-            string toWrite = new string(Enumerable.Range(0, size).Select(i => (char)(i + 1)).ToArray());
+            string toWrite = new string(
+                Enumerable.Range(0, size).Select(i => (char)(i + 1)).ToArray()
+            );
 
             File.Create(path).Dispose();
             await WriteAsync(path, toWrite);
@@ -85,7 +104,8 @@ namespace System.IO.Tests
             string overwriteLines = new string('b', overwriteLinesLength);
 
             await WriteAsync(path, lines);
-            await WriteAsync(path, overwriteLines); ;
+            await WriteAsync(path, overwriteLines);
+            ;
 
             if (IsAppend)
             {
@@ -114,7 +134,9 @@ namespace System.IO.Tests
 
         [Fact]
         public Task Read_FileNotFoundAsync() =>
-            Assert.ThrowsAsync<FileNotFoundException>(async () => await ReadAsync(GetTestFilePath()));
+            Assert.ThrowsAsync<FileNotFoundException>(
+                async () => await ReadAsync(GetTestFilePath())
+            );
 
         /// <summary>
         /// On Unix, modifying a file that is ReadOnly will fail under normal permissions.
@@ -135,7 +157,9 @@ namespace System.IO.Tests
                     Assert.Equal("text", await ReadAsync(path));
                 }
                 else
-                    await Assert.ThrowsAsync<UnauthorizedAccessException>(async () => await WriteAsync(path, "text"));
+                    await Assert.ThrowsAsync<UnauthorizedAccessException>(
+                        async () => await WriteAsync(path, "text")
+                    );
             }
             finally
             {
@@ -152,11 +176,15 @@ namespace System.IO.Tests
             source.Cancel();
             Assert.True(File.WriteAllTextAsync(path, "", token).IsCanceled);
             return Assert.ThrowsAsync<TaskCanceledException>(
-                async () => await File.WriteAllTextAsync(path, "", token));
+                async () => await File.WriteAllTextAsync(path, "", token)
+            );
         }
 
         [Theory]
-        [MemberData(nameof(File_ReadWriteAllText.OutputIsTheSameAsForStreamWriter_Args), MemberType = typeof(File_ReadWriteAllText))]
+        [MemberData(
+            nameof(File_ReadWriteAllText.OutputIsTheSameAsForStreamWriter_Args),
+            MemberType = typeof(File_ReadWriteAllText)
+        )]
         public async Task OutputIsTheSameAsForStreamWriterAsync(string content, Encoding encoding)
         {
             string filePath = GetTestFilePath();
@@ -168,13 +196,25 @@ namespace System.IO.Tests
                 await sw.WriteAsync(content);
             }
 
-            Assert.Equal(await File.ReadAllTextAsync(swPath, encoding), await File.ReadAllTextAsync(filePath, encoding));
-            Assert.Equal(await File.ReadAllBytesAsync(swPath), await File.ReadAllBytesAsync(filePath)); // ensure Preamble was stored
+            Assert.Equal(
+                await File.ReadAllTextAsync(swPath, encoding),
+                await File.ReadAllTextAsync(filePath, encoding)
+            );
+            Assert.Equal(
+                await File.ReadAllBytesAsync(swPath),
+                await File.ReadAllBytesAsync(filePath)
+            ); // ensure Preamble was stored
         }
 
         [Theory]
-        [MemberData(nameof(File_ReadWriteAllText.OutputIsTheSameAsForStreamWriter_Args), MemberType = typeof(File_ReadWriteAllText))]
-        public async Task OutputIsTheSameAsForStreamWriter_OverwriteAsync(string content, Encoding encoding)
+        [MemberData(
+            nameof(File_ReadWriteAllText.OutputIsTheSameAsForStreamWriter_Args),
+            MemberType = typeof(File_ReadWriteAllText)
+        )]
+        public async Task OutputIsTheSameAsForStreamWriter_OverwriteAsync(
+            string content,
+            Encoding encoding
+        )
         {
             string filePath = GetTestFilePath();
             string swPath = GetTestFilePath();
@@ -189,8 +229,14 @@ namespace System.IO.Tests
                 }
             }
 
-            Assert.Equal(await File.ReadAllTextAsync(swPath, encoding), await File.ReadAllTextAsync(filePath, encoding));
-            Assert.Equal(await File.ReadAllBytesAsync(swPath), await File.ReadAllBytesAsync(filePath)); // ensure Preamble was stored once
+            Assert.Equal(
+                await File.ReadAllTextAsync(swPath, encoding),
+                await File.ReadAllTextAsync(filePath, encoding)
+            );
+            Assert.Equal(
+                await File.ReadAllBytesAsync(swPath),
+                await File.ReadAllBytesAsync(filePath)
+            ); // ensure Preamble was stored once
         }
 
         #endregion
@@ -208,8 +254,14 @@ namespace System.IO.Tests
         public async Task NullEncodingAsync()
         {
             string path = GetTestFilePath();
-            await Assert.ThrowsAsync<ArgumentNullException>("encoding", async () => await File.WriteAllTextAsync(path, "Text", null));
-            await Assert.ThrowsAsync<ArgumentNullException>("encoding", async () => await File.ReadAllTextAsync(path, null));
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                "encoding",
+                async () => await File.WriteAllTextAsync(path, "Text", null)
+            );
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                "encoding",
+                async () => await File.ReadAllTextAsync(path, null)
+            );
         }
 
         [Fact]
@@ -221,7 +273,8 @@ namespace System.IO.Tests
             source.Cancel();
             Assert.True(File.WriteAllTextAsync(path, "", Encoding.UTF8, token).IsCanceled);
             return Assert.ThrowsAsync<TaskCanceledException>(
-                async () => await File.WriteAllTextAsync(path, "", Encoding.UTF8, token));
+                async () => await File.WriteAllTextAsync(path, "", Encoding.UTF8, token)
+            );
         }
     }
 }

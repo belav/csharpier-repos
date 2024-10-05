@@ -4,12 +4,12 @@
 
 namespace System.ServiceModel.Security
 {
-    using System.Xml;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.Xml;
 
     public class MessagePartSpecification
     {
@@ -45,14 +45,13 @@ namespace System.ServiceModel.Security
 
         public bool IsBodyIncluded
         {
-            get
-            {
-                return this.isBodyIncluded;
-            }
+            get { return this.isBodyIncluded; }
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                    );
 
                 this.isBodyIncluded = value;
             }
@@ -60,13 +59,10 @@ namespace System.ServiceModel.Security
 
         public bool IsReadOnly
         {
-            get
-            {
-                return this.isReadOnly;
-            }
+            get { return this.isReadOnly; }
         }
 
-        static public MessagePartSpecification NoParts
+        public static MessagePartSpecification NoParts
         {
             get
             {
@@ -83,7 +79,9 @@ namespace System.ServiceModel.Security
         public void Clear()
         {
             if (isReadOnly)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                );
 
             if (this.headerTypes != null)
                 this.headerTypes.Clear();
@@ -93,7 +91,9 @@ namespace System.ServiceModel.Security
         public void Union(MessagePartSpecification specification)
         {
             if (isReadOnly)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                );
             if (specification == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("specification");
 
@@ -151,23 +151,23 @@ namespace System.ServiceModel.Security
             this.isReadOnly = true;
         }
 
-        public MessagePartSpecification() 
+        public MessagePartSpecification()
         {
             // empty
         }
 
-        public MessagePartSpecification(bool isBodyIncluded) 
+        public MessagePartSpecification(bool isBodyIncluded)
         {
             this.isBodyIncluded = isBodyIncluded;
         }
 
-        public MessagePartSpecification(params XmlQualifiedName[] headerTypes) 
+        public MessagePartSpecification(params XmlQualifiedName[] headerTypes)
             : this(false, headerTypes)
         {
             // empty
         }
 
-        public MessagePartSpecification(bool isBodyIncluded, params XmlQualifiedName[] headerTypes) 
+        public MessagePartSpecification(bool isBodyIncluded, params XmlQualifiedName[] headerTypes)
         {
             this.isBodyIncluded = isBodyIncluded;
             if (headerTypes != null && headerTypes.Length > 0)
@@ -208,7 +208,7 @@ namespace System.ServiceModel.Security
                             return true;
                         }
                     }
-                    else 
+                    else
                     {
                         if (qname.Name == name && qname.Namespace == ns)
                         {

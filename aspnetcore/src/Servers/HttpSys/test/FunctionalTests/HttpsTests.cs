@@ -19,15 +19,23 @@ namespace Microsoft.AspNetCore.Server.HttpSys;
 
 public class HttpsTests : LoggedTest
 {
-    private static readonly X509Certificate2 _x509Certificate2 = TestResources.GetTestCertificate("eku.client.pfx");
+    private static readonly X509Certificate2 _x509Certificate2 = TestResources.GetTestCertificate(
+        "eku.client.pfx"
+    );
 
     [ConditionalFact]
     public async Task Https_200OK_Success()
     {
-        using (Utilities.CreateDynamicHttpsServer(out var address, httpContext =>
-        {
-            return Task.FromResult(0);
-        }, LoggerFactory))
+        using (
+            Utilities.CreateDynamicHttpsServer(
+                out var address,
+                httpContext =>
+                {
+                    return Task.FromResult(0);
+                },
+                LoggerFactory
+            )
+        )
         {
             string response = await SendRequestAsync(address);
             Assert.Equal(string.Empty, response);
@@ -37,12 +45,18 @@ public class HttpsTests : LoggedTest
     [ConditionalFact]
     public async Task Https_SendHelloWorld_Success()
     {
-        using (Utilities.CreateDynamicHttpsServer(out var address, httpContext =>
-        {
-            byte[] body = Encoding.UTF8.GetBytes("Hello World");
-            httpContext.Response.ContentLength = body.Length;
-            return httpContext.Response.Body.WriteAsync(body, 0, body.Length);
-        }, LoggerFactory))
+        using (
+            Utilities.CreateDynamicHttpsServer(
+                out var address,
+                httpContext =>
+                {
+                    byte[] body = Encoding.UTF8.GetBytes("Hello World");
+                    httpContext.Response.ContentLength = body.Length;
+                    return httpContext.Response.Body.WriteAsync(body, 0, body.Length);
+                },
+                LoggerFactory
+            )
+        )
         {
             string response = await SendRequestAsync(address);
             Assert.Equal("Hello World", response);
@@ -52,14 +66,20 @@ public class HttpsTests : LoggedTest
     [ConditionalFact]
     public async Task Https_EchoHelloWorld_Success()
     {
-        using (Utilities.CreateDynamicHttpsServer(out var address, async httpContext =>
-        {
-            var input = await new StreamReader(httpContext.Request.Body).ReadToEndAsync();
-            Assert.Equal("Hello World", input);
-            var body = Encoding.UTF8.GetBytes("Hello World");
-            httpContext.Response.ContentLength = body.Length;
-            await httpContext.Response.Body.WriteAsync(body, 0, body.Length);
-        }, LoggerFactory))
+        using (
+            Utilities.CreateDynamicHttpsServer(
+                out var address,
+                async httpContext =>
+                {
+                    var input = await new StreamReader(httpContext.Request.Body).ReadToEndAsync();
+                    Assert.Equal("Hello World", input);
+                    var body = Encoding.UTF8.GetBytes("Hello World");
+                    httpContext.Response.ContentLength = body.Length;
+                    await httpContext.Response.Body.WriteAsync(body, 0, body.Length);
+                },
+                LoggerFactory
+            )
+        )
         {
             string response = await SendRequestAsync(address, "Hello World");
             Assert.Equal("Hello World", response);
@@ -70,21 +90,30 @@ public class HttpsTests : LoggedTest
     [InlineData(ClientCertificateMethod.NoCertificate)]
     [InlineData(ClientCertificateMethod.AllowCertificate)]
     [InlineData(ClientCertificateMethod.AllowRenegotation)]
-    public async Task Https_ClientCertNotSent_ClientCertNotPresent(ClientCertificateMethod clientCertificateMethod)
+    public async Task Https_ClientCertNotSent_ClientCertNotPresent(
+        ClientCertificateMethod clientCertificateMethod
+    )
     {
-        using (Utilities.CreateDynamicHttpsServer("", out var root, out var address, options =>
-        {
-            options.ClientCertificateMethod = clientCertificateMethod;
-        },
-        async httpContext =>
-        {
-            var tls = httpContext.Features.Get<ITlsConnectionFeature>();
-            Assert.NotNull(tls);
-            Assert.Null(tls.ClientCertificate);
-            var cert = await tls.GetClientCertificateAsync(CancellationToken.None);
-            Assert.Null(cert);
-            Assert.Null(tls.ClientCertificate);
-        }))
+        using (
+            Utilities.CreateDynamicHttpsServer(
+                "",
+                out var root,
+                out var address,
+                options =>
+                {
+                    options.ClientCertificateMethod = clientCertificateMethod;
+                },
+                async httpContext =>
+                {
+                    var tls = httpContext.Features.Get<ITlsConnectionFeature>();
+                    Assert.NotNull(tls);
+                    Assert.Null(tls.ClientCertificate);
+                    var cert = await tls.GetClientCertificateAsync(CancellationToken.None);
+                    Assert.Null(cert);
+                    Assert.Null(tls.ClientCertificate);
+                }
+            )
+        )
         {
             var response = await SendRequestAsync(address);
             Assert.Equal(string.Empty, response);
@@ -95,29 +124,38 @@ public class HttpsTests : LoggedTest
     [InlineData(ClientCertificateMethod.NoCertificate)]
     [InlineData(ClientCertificateMethod.AllowCertificate)]
     [InlineData(ClientCertificateMethod.AllowRenegotation)]
-    public async Task Https_ClientCertRequested_ClientCertPresent(ClientCertificateMethod clientCertificateMethod)
+    public async Task Https_ClientCertRequested_ClientCertPresent(
+        ClientCertificateMethod clientCertificateMethod
+    )
     {
-        using (Utilities.CreateDynamicHttpsServer("", out var root, out var address, options =>
-        {
-            options.ClientCertificateMethod = clientCertificateMethod;
-        },
-        async httpContext =>
-        {
-            var tls = httpContext.Features.Get<ITlsConnectionFeature>();
-            Assert.NotNull(tls);
-            Assert.Null(tls.ClientCertificate);
-            var cert = await tls.GetClientCertificateAsync(CancellationToken.None);
-            if (clientCertificateMethod == ClientCertificateMethod.AllowRenegotation)
-            {
-                Assert.NotNull(cert);
-                Assert.NotNull(tls.ClientCertificate);
-            }
-            else
-            {
-                Assert.Null(cert);
-                Assert.Null(tls.ClientCertificate);
-            }
-        }))
+        using (
+            Utilities.CreateDynamicHttpsServer(
+                "",
+                out var root,
+                out var address,
+                options =>
+                {
+                    options.ClientCertificateMethod = clientCertificateMethod;
+                },
+                async httpContext =>
+                {
+                    var tls = httpContext.Features.Get<ITlsConnectionFeature>();
+                    Assert.NotNull(tls);
+                    Assert.Null(tls.ClientCertificate);
+                    var cert = await tls.GetClientCertificateAsync(CancellationToken.None);
+                    if (clientCertificateMethod == ClientCertificateMethod.AllowRenegotation)
+                    {
+                        Assert.NotNull(cert);
+                        Assert.NotNull(tls.ClientCertificate);
+                    }
+                    else
+                    {
+                        Assert.Null(cert);
+                        Assert.Null(tls.ClientCertificate);
+                    }
+                }
+            )
+        )
         {
             Assert.NotNull(_x509Certificate2);
             var response = await SendRequestAsync(address, _x509Certificate2);
@@ -129,18 +167,24 @@ public class HttpsTests : LoggedTest
     [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win7)]
     public async Task Https_SkipsITlsHandshakeFeatureOnWin7()
     {
-        using (Utilities.CreateDynamicHttpsServer(out var address, async httpContext =>
-        {
-            try
-            {
-                var tlsFeature = httpContext.Features.Get<ITlsHandshakeFeature>();
-                Assert.Null(tlsFeature);
-            }
-            catch (Exception ex)
-            {
-                await httpContext.Response.WriteAsync(ex.ToString());
-            }
-        }, LoggerFactory))
+        using (
+            Utilities.CreateDynamicHttpsServer(
+                out var address,
+                async httpContext =>
+                {
+                    try
+                    {
+                        var tlsFeature = httpContext.Features.Get<ITlsHandshakeFeature>();
+                        Assert.Null(tlsFeature);
+                    }
+                    catch (Exception ex)
+                    {
+                        await httpContext.Response.WriteAsync(ex.ToString());
+                    }
+                },
+                LoggerFactory
+            )
+        )
         {
             string response = await SendRequestAsync(address);
             Assert.Equal(string.Empty, response);
@@ -151,12 +195,18 @@ public class HttpsTests : LoggedTest
     [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win8)]
     public async Task Https_SetsITlsHandshakeFeature()
     {
-        using (Utilities.CreateDynamicHttpsServer(out var address, httpContext =>
-        {
-            var tlsFeature = httpContext.Features.Get<ITlsHandshakeFeature>();
-            Assert.NotNull(tlsFeature);
-            return httpContext.Response.WriteAsJsonAsync(tlsFeature);
-        }, LoggerFactory))
+        using (
+            Utilities.CreateDynamicHttpsServer(
+                out var address,
+                httpContext =>
+                {
+                    var tlsFeature = httpContext.Features.Get<ITlsHandshakeFeature>();
+                    Assert.NotNull(tlsFeature);
+                    return httpContext.Response.WriteAsJsonAsync(tlsFeature);
+                },
+                LoggerFactory
+            )
+        )
         {
             string response = await SendRequestAsync(address);
             var result = System.Text.Json.JsonDocument.Parse(response).RootElement;
@@ -165,7 +215,8 @@ public class HttpsTests : LoggedTest
             Assert.True(protocol > SslProtocols.None, "Protocol: " + protocol);
             Assert.True(Enum.IsDefined(typeof(SslProtocols), protocol), "Defined: " + protocol); // Mapping is required, make sure it's current
 
-            var cipherAlgorithm = (CipherAlgorithmType)result.GetProperty("cipherAlgorithm").GetInt32();
+            var cipherAlgorithm = (CipherAlgorithmType)
+                result.GetProperty("cipherAlgorithm").GetInt32();
             Assert.True(cipherAlgorithm > CipherAlgorithmType.Null, "Cipher: " + cipherAlgorithm);
 
             var cipherStrength = result.GetProperty("cipherStrength").GetInt32();
@@ -177,8 +228,12 @@ public class HttpsTests : LoggedTest
             var hashStrength = result.GetProperty("hashStrength").GetInt32();
             Assert.True(hashStrength >= 0, "HashStrength: " + hashStrength); // May be 0 for some algorithms
 
-            var keyExchangeAlgorithm = (ExchangeAlgorithmType)result.GetProperty("keyExchangeAlgorithm").GetInt32();
-            Assert.True(keyExchangeAlgorithm >= ExchangeAlgorithmType.None, "KeyExchangeAlgorithm: " + keyExchangeAlgorithm);
+            var keyExchangeAlgorithm = (ExchangeAlgorithmType)
+                result.GetProperty("keyExchangeAlgorithm").GetInt32();
+            Assert.True(
+                keyExchangeAlgorithm >= ExchangeAlgorithmType.None,
+                "KeyExchangeAlgorithm: " + keyExchangeAlgorithm
+            );
 
             var keyExchangeStrength = result.GetProperty("keyExchangeStrength").GetInt32();
             Assert.True(keyExchangeStrength >= 0, "KeyExchangeStrength: " + keyExchangeStrength);
@@ -195,36 +250,53 @@ public class HttpsTests : LoggedTest
     [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win8)]
     public async Task Https_ITlsHandshakeFeature_MatchesIHttpSysExtensionInfoFeature()
     {
-        using (Utilities.CreateDynamicHttpsServer(out var address, async httpContext =>
-        {
-            try
-            {
-                var tlsFeature = httpContext.Features.Get<ITlsHandshakeFeature>();
-                var requestInfoFeature = httpContext.Features.Get<IHttpSysRequestInfoFeature>();
-                Assert.NotNull(tlsFeature);
-                Assert.NotNull(requestInfoFeature);
-                Assert.True(requestInfoFeature.RequestInfo.Count > 0);
-                var tlsInfo = requestInfoFeature.RequestInfo[(int)HTTP_REQUEST_INFO_TYPE.HttpRequestInfoTypeSslProtocol];
-                HTTP_SSL_PROTOCOL_INFO tlsCopy;
-                unsafe
+        using (
+            Utilities.CreateDynamicHttpsServer(
+                out var address,
+                async httpContext =>
                 {
-                    using var handle = tlsInfo.Pin();
-                    tlsCopy = Marshal.PtrToStructure<HTTP_SSL_PROTOCOL_INFO>((IntPtr)handle.Pointer);
-                }
+                    try
+                    {
+                        var tlsFeature = httpContext.Features.Get<ITlsHandshakeFeature>();
+                        var requestInfoFeature =
+                            httpContext.Features.Get<IHttpSysRequestInfoFeature>();
+                        Assert.NotNull(tlsFeature);
+                        Assert.NotNull(requestInfoFeature);
+                        Assert.True(requestInfoFeature.RequestInfo.Count > 0);
+                        var tlsInfo = requestInfoFeature.RequestInfo[
+                            (int)HTTP_REQUEST_INFO_TYPE.HttpRequestInfoTypeSslProtocol
+                        ];
+                        HTTP_SSL_PROTOCOL_INFO tlsCopy;
+                        unsafe
+                        {
+                            using var handle = tlsInfo.Pin();
+                            tlsCopy = Marshal.PtrToStructure<HTTP_SSL_PROTOCOL_INFO>(
+                                (IntPtr)handle.Pointer
+                            );
+                        }
 
-                // Assert.Equal(tlsFeature.Protocol, tlsCopy.Protocol); // These don't directly match because the native and managed enums use different values.
-                Assert.Equal((uint)tlsFeature.CipherAlgorithm, tlsCopy.CipherType);
-                Assert.Equal(tlsFeature.CipherStrength, (int)tlsCopy.CipherStrength);
-                Assert.Equal((uint)tlsFeature.HashAlgorithm, tlsCopy.HashType);
-                Assert.Equal(tlsFeature.HashStrength, (int)tlsCopy.HashStrength);
-                Assert.Equal((uint)tlsFeature.KeyExchangeAlgorithm, tlsCopy.KeyExchangeType);
-                Assert.Equal(tlsFeature.KeyExchangeStrength, (int)tlsCopy.KeyExchangeStrength);
-            }
-            catch (Exception ex)
-            {
-                await httpContext.Response.WriteAsync(ex.ToString());
-            }
-        }, LoggerFactory))
+                        // Assert.Equal(tlsFeature.Protocol, tlsCopy.Protocol); // These don't directly match because the native and managed enums use different values.
+                        Assert.Equal((uint)tlsFeature.CipherAlgorithm, tlsCopy.CipherType);
+                        Assert.Equal(tlsFeature.CipherStrength, (int)tlsCopy.CipherStrength);
+                        Assert.Equal((uint)tlsFeature.HashAlgorithm, tlsCopy.HashType);
+                        Assert.Equal(tlsFeature.HashStrength, (int)tlsCopy.HashStrength);
+                        Assert.Equal(
+                            (uint)tlsFeature.KeyExchangeAlgorithm,
+                            tlsCopy.KeyExchangeType
+                        );
+                        Assert.Equal(
+                            tlsFeature.KeyExchangeStrength,
+                            (int)tlsCopy.KeyExchangeStrength
+                        );
+                    }
+                    catch (Exception ex)
+                    {
+                        await httpContext.Response.WriteAsync(ex.ToString());
+                    }
+                },
+                LoggerFactory
+            )
+        )
         {
             string response = await SendRequestAsync(address);
             Assert.Equal(string.Empty, response);
@@ -235,37 +307,79 @@ public class HttpsTests : LoggedTest
     [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2)]
     public async Task Https_SetsIHttpSysRequestTimingFeature()
     {
-        using (Utilities.CreateDynamicHttpsServer(out var address, async httpContext =>
-        {
-            try
-            {
-                var requestTimingFeature = httpContext.Features.Get<IHttpSysRequestTimingFeature>();
-                Assert.NotNull(requestTimingFeature);
-                Assert.True(requestTimingFeature.Timestamps.Length > (int)HttpSysRequestTimingType.Http3HeaderDecodeEnd);
-                Assert.True(requestTimingFeature.TryGetTimestamp(HttpSysRequestTimingType.RequestHeaderParseStart, out var headerStart));
-                Assert.True(requestTimingFeature.TryGetTimestamp(HttpSysRequestTimingType.RequestHeaderParseEnd, out var headerEnd));
-                Assert.True(requestTimingFeature.TryGetElapsedTime(HttpSysRequestTimingType.RequestHeaderParseStart, HttpSysRequestTimingType.RequestHeaderParseEnd, out var elapsed));
-                Assert.Equal(Stopwatch.GetElapsedTime(headerStart, headerEnd), elapsed);
-                Assert.False(requestTimingFeature.TryGetTimestamp(HttpSysRequestTimingType.Http3StreamStart, out var streamStart));
-                Assert.False(requestTimingFeature.TryGetTimestamp((HttpSysRequestTimingType)int.MaxValue, out var invalid));
-                Assert.False(requestTimingFeature.TryGetElapsedTime(HttpSysRequestTimingType.Http3StreamStart, HttpSysRequestTimingType.RequestHeaderParseStart, out elapsed));
-            }
-            catch (Exception ex)
-            {
-                await httpContext.Response.WriteAsync(ex.ToString());
-            }
-        }, LoggerFactory))
+        using (
+            Utilities.CreateDynamicHttpsServer(
+                out var address,
+                async httpContext =>
+                {
+                    try
+                    {
+                        var requestTimingFeature =
+                            httpContext.Features.Get<IHttpSysRequestTimingFeature>();
+                        Assert.NotNull(requestTimingFeature);
+                        Assert.True(
+                            requestTimingFeature.Timestamps.Length
+                                > (int)HttpSysRequestTimingType.Http3HeaderDecodeEnd
+                        );
+                        Assert.True(
+                            requestTimingFeature.TryGetTimestamp(
+                                HttpSysRequestTimingType.RequestHeaderParseStart,
+                                out var headerStart
+                            )
+                        );
+                        Assert.True(
+                            requestTimingFeature.TryGetTimestamp(
+                                HttpSysRequestTimingType.RequestHeaderParseEnd,
+                                out var headerEnd
+                            )
+                        );
+                        Assert.True(
+                            requestTimingFeature.TryGetElapsedTime(
+                                HttpSysRequestTimingType.RequestHeaderParseStart,
+                                HttpSysRequestTimingType.RequestHeaderParseEnd,
+                                out var elapsed
+                            )
+                        );
+                        Assert.Equal(Stopwatch.GetElapsedTime(headerStart, headerEnd), elapsed);
+                        Assert.False(
+                            requestTimingFeature.TryGetTimestamp(
+                                HttpSysRequestTimingType.Http3StreamStart,
+                                out var streamStart
+                            )
+                        );
+                        Assert.False(
+                            requestTimingFeature.TryGetTimestamp(
+                                (HttpSysRequestTimingType)int.MaxValue,
+                                out var invalid
+                            )
+                        );
+                        Assert.False(
+                            requestTimingFeature.TryGetElapsedTime(
+                                HttpSysRequestTimingType.Http3StreamStart,
+                                HttpSysRequestTimingType.RequestHeaderParseStart,
+                                out elapsed
+                            )
+                        );
+                    }
+                    catch (Exception ex)
+                    {
+                        await httpContext.Response.WriteAsync(ex.ToString());
+                    }
+                },
+                LoggerFactory
+            )
+        )
         {
             string response = await SendRequestAsync(address);
             Assert.Equal(string.Empty, response);
         }
     }
 
-    private async Task<string> SendRequestAsync(string uri,
-        X509Certificate cert = null)
+    private async Task<string> SendRequestAsync(string uri, X509Certificate cert = null)
     {
         var handler = new HttpClientHandler();
-        handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+        handler.ServerCertificateCustomValidationCallback =
+            HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
         if (cert != null)
         {
             handler.ClientCertificates.Add(cert);

@@ -83,6 +83,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Syntax
 
         OP_DEFAULT,
 
-        OP_LAST
+        OP_LAST,
     }
 }

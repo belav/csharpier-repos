@@ -12,5 +12,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing;
 /// </summary>
 internal interface IRequestDelegateFactory
 {
-    RequestDelegate? CreateRequestDelegate(ActionDescriptor actionDescriptor, RouteValueDictionary? dataTokens);
+    RequestDelegate? CreateRequestDelegate(
+        ActionDescriptor actionDescriptor,
+        RouteValueDictionary? dataTokens
+    );
 }

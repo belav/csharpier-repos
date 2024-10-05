@@ -11,7 +11,10 @@ namespace System.ServiceModel.Channels
     {
         IChannelFactory innerChannelFactory;
 
-        public LayeredChannelFactory(IDefaultCommunicationTimeouts timeouts, IChannelFactory innerChannelFactory)
+        public LayeredChannelFactory(
+            IDefaultCommunicationTimeouts timeouts,
+            IChannelFactory innerChannelFactory
+        )
             : base(timeouts)
         {
             this.innerChannelFactory = innerChannelFactory;
@@ -38,7 +41,11 @@ namespace System.ServiceModel.Channels
             return this.innerChannelFactory.GetProperty<T>();
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.innerChannelFactory.BeginOpen(timeout, callback, state);
         }
@@ -48,9 +55,20 @@ namespace System.ServiceModel.Channels
             this.innerChannelFactory.EndOpen(result);
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new ChainedCloseAsyncResult(timeout, callback, state, base.OnBeginClose, base.OnEndClose, this.innerChannelFactory);
+            return new ChainedCloseAsyncResult(
+                timeout,
+                callback,
+                state,
+                base.OnBeginClose,
+                base.OnEndClose,
+                this.innerChannelFactory
+            );
         }
 
         protected override void OnEndClose(IAsyncResult result)
@@ -80,9 +98,7 @@ namespace System.ServiceModel.Channels
     class LayeredInputChannel : LayeredChannel<IInputChannel>, IInputChannel
     {
         public LayeredInputChannel(ChannelManagerBase channelManager, IInputChannel innerChannel)
-            : base(channelManager, innerChannel)
-        {
-        }
+            : base(channelManager, innerChannel) { }
 
         public virtual EndpointAddress LocalAddress
         {
@@ -97,9 +113,7 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected virtual void OnReceive(Message message)
-        {
-        }
+        protected virtual void OnReceive(Message message) { }
 
         public Message Receive()
         {
@@ -156,7 +170,11 @@ namespace System.ServiceModel.Channels
             return InnerChannel.WaitForMessage(timeout);
         }
 
-        public IAsyncResult BeginWaitForMessage(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginWaitForMessage(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return InnerChannel.BeginWaitForMessage(timeout, callback, state);
         }
@@ -173,7 +191,12 @@ namespace System.ServiceModel.Channels
         EndpointAddress localAddress;
         EventHandler onInnerOutputChannelFaulted;
 
-        public LayeredDuplexChannel(ChannelManagerBase channelManager, IInputChannel innerInputChannel, EndpointAddress localAddress, IOutputChannel innerOutputChannel)
+        public LayeredDuplexChannel(
+            ChannelManagerBase channelManager,
+            IInputChannel innerInputChannel,
+            EndpointAddress localAddress,
+            IOutputChannel innerOutputChannel
+        )
             : base(channelManager, innerInputChannel)
         {
             this.localAddress = localAddress;
@@ -209,9 +232,20 @@ namespace System.ServiceModel.Channels
             base.OnAbort();
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new ChainedCloseAsyncResult(timeout, callback, state, base.OnBeginClose, base.OnEndClose, this.innerOutputChannel);
+            return new ChainedCloseAsyncResult(
+                timeout,
+                callback,
+                state,
+                base.OnBeginClose,
+                base.OnEndClose,
+                this.innerOutputChannel
+            );
         }
 
         protected override void OnEndClose(IAsyncResult result)
@@ -226,9 +260,20 @@ namespace System.ServiceModel.Channels
             base.OnClose(timeoutHelper.RemainingTime());
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new ChainedOpenAsyncResult(timeout, callback, state, base.OnBeginOpen, base.OnEndOpen, this.innerOutputChannel);
+            return new ChainedOpenAsyncResult(
+                timeout,
+                callback,
+                state,
+                base.OnBeginOpen,
+                base.OnEndOpen,
+                this.innerOutputChannel
+            );
         }
 
         protected override void OnEndOpen(IAsyncResult result)
@@ -258,7 +303,12 @@ namespace System.ServiceModel.Channels
             return this.BeginSend(message, this.DefaultSendTimeout, callback, state);
         }
 
-        public IAsyncResult BeginSend(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginSend(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.innerOutputChannel.BeginSend(message, timeout, callback, state);
         }

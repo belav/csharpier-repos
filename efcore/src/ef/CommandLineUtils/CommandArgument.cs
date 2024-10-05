@@ -18,6 +18,5 @@ internal class CommandArgument
     public List<string> Values { get; }
     public bool MultipleValues { get; set; }
 
-    public string? Value
-        => Values.FirstOrDefault();
+    public string? Value => Values.FirstOrDefault();
 }

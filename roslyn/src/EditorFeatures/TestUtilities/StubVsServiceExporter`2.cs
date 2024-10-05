@@ -12,7 +12,6 @@ using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.Threading;
-
 // Import Roslyn.Utilities with an alias to avoid conflicts with AsyncLazy<T>. This implementation relies on
 // AsyncLazy<T> from vs-threading, and not the one from Roslyn.
 using RoslynUtilities = Roslyn.Utilities;
@@ -32,14 +31,22 @@ internal class StubVsServiceExporter<TService, TInterface> : IVsService<TService
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
     public StubVsServiceExporter(
         [Import(typeof(SAsyncServiceProvider))] IAsyncServiceProvider2 asyncServiceProvider,
-        JoinableTaskContext joinableTaskContext)
+        JoinableTaskContext joinableTaskContext
+    )
     {
-        _serviceGetter = new AsyncLazy<TInterface>(() => asyncServiceProvider.GetServiceAsync<TService, TInterface>(joinableTaskContext.Factory, throwOnFailure: true)!, joinableTaskContext.Factory);
+        _serviceGetter = new AsyncLazy<TInterface>(
+            () =>
+                asyncServiceProvider.GetServiceAsync<TService, TInterface>(
+                    joinableTaskContext.Factory,
+                    throwOnFailure: true
+                )!,
+            joinableTaskContext.Factory
+        );
     }
 
     /// <inheritdoc />
-    public Task<TInterface> GetValueAsync(CancellationToken cancellationToken)
-        => _serviceGetter.GetValueAsync(cancellationToken);
+    public Task<TInterface> GetValueAsync(CancellationToken cancellationToken) =>
+        _serviceGetter.GetValueAsync(cancellationToken);
 
     /// <inheritdoc />
     public Task<TInterface?> GetValueOrNullAsync(CancellationToken cancellationToken)
@@ -50,11 +57,14 @@ internal class StubVsServiceExporter<TService, TInterface> : IVsService<TService
             return TransformResult(value);
         }
 
-        return value.ContinueWith(
-            static t => TransformResult(t),
-            CancellationToken.None, // token is already passed to antecedent, and this is a tiny sync continuation, so no need to make it also cancelable.
-            TaskContinuationOptions.ExecuteSynchronously,
-            TaskScheduler.Default).Unwrap();
+        return value
+            .ContinueWith(
+                static t => TransformResult(t),
+                CancellationToken.None, // token is already passed to antecedent, and this is a tiny sync continuation, so no need to make it also cancelable.
+                TaskContinuationOptions.ExecuteSynchronously,
+                TaskScheduler.Default
+            )
+            .Unwrap();
 
         static Task<TInterface?> TransformResult(Task<TInterface> task)
         {

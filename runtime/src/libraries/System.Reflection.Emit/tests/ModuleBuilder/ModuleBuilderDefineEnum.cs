@@ -42,7 +42,10 @@ namespace System.Reflection.Emit.Tests
 
             Assert.Equal(name, enumBuilder.Name);
             Assert.Equal(Helpers.GetFullName(name), enumBuilder.FullName);
-            Assert.Equal(enumBuilder.FullName + ", " + module.Assembly.FullName, enumBuilder.AssemblyQualifiedName);
+            Assert.Equal(
+                enumBuilder.FullName + ", " + module.Assembly.FullName,
+                enumBuilder.AssemblyQualifiedName
+            );
 
             Assert.Equal(typeof(Enum), enumBuilder.BaseType);
             Assert.Null(enumBuilder.DeclaringType);
@@ -51,7 +54,10 @@ namespace System.Reflection.Emit.Tests
 
             Assert.Equal("value__", enumBuilder.UnderlyingField.Name);
             Assert.Equal(underlyingType, enumBuilder.UnderlyingField.FieldType);
-            Assert.Equal(FieldAttributes.Public | FieldAttributes.SpecialName, enumBuilder.UnderlyingField.Attributes);
+            Assert.Equal(
+                FieldAttributes.Public | FieldAttributes.SpecialName,
+                enumBuilder.UnderlyingField.Attributes
+            );
 
             // Verify we can create the Enum properly
             TypeInfo createdEnum = enumBuilder.CreateTypeInfo();
@@ -62,18 +68,30 @@ namespace System.Reflection.Emit.Tests
 
             Assert.Equal(Helpers.GetFullName(name), createdEnum.Name);
             Assert.Equal(Helpers.GetFullName(name), enumBuilder.FullName);
-            Assert.Equal(enumBuilder.FullName + ", " + module.Assembly.FullName, enumBuilder.AssemblyQualifiedName);
+            Assert.Equal(
+                enumBuilder.FullName + ", " + module.Assembly.FullName,
+                enumBuilder.AssemblyQualifiedName
+            );
 
             Assert.Equal(typeof(Enum), createdEnum.BaseType);
             Assert.Null(createdEnum.DeclaringType);
 
             Assert.Equal(visibility | TypeAttributes.Sealed, createdEnum.Attributes);
-            Type expectedUnderlyingType = underlyingType.GetTypeInfo().IsEnum ? Enum.GetUnderlyingType(underlyingType) : underlyingType;
+            Type expectedUnderlyingType = underlyingType.GetTypeInfo().IsEnum
+                ? Enum.GetUnderlyingType(underlyingType)
+                : underlyingType;
             Assert.Equal(expectedUnderlyingType, Enum.GetUnderlyingType(createdEnum.AsType()));
 
             // There should be a field called "value__" created
-            FieldInfo createdUnderlyingField = createdEnum.AsType().GetField("value__", Helpers.AllFlags);
-            Assert.Equal(FieldAttributes.Public | FieldAttributes.SpecialName | FieldAttributes.RTSpecialName, createdUnderlyingField.Attributes);
+            FieldInfo createdUnderlyingField = createdEnum
+                .AsType()
+                .GetField("value__", Helpers.AllFlags);
+            Assert.Equal(
+                FieldAttributes.Public
+                    | FieldAttributes.SpecialName
+                    | FieldAttributes.RTSpecialName,
+                createdUnderlyingField.Attributes
+            );
         }
 
         [Fact]
@@ -81,10 +99,18 @@ namespace System.Reflection.Emit.Tests
         public void DefineEnum_DynamicUnderlyingType_Works()
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            EnumBuilder underlyingEnumTypeBuilder = module.DefineEnum("Enum1", TypeAttributes.Public, typeof(int));
+            EnumBuilder underlyingEnumTypeBuilder = module.DefineEnum(
+                "Enum1",
+                TypeAttributes.Public,
+                typeof(int)
+            );
             Type underlyingEnumType = underlyingEnumTypeBuilder.CreateType();
 
-            EnumBuilder enumBuilder = module.DefineEnum("Enum2", TypeAttributes.Public, underlyingEnumType);
+            EnumBuilder enumBuilder = module.DefineEnum(
+                "Enum2",
+                TypeAttributes.Public,
+                underlyingEnumType
+            );
             Type enumType = enumBuilder.CreateType();
 
             Assert.Equal(typeof(int), Enum.GetUnderlyingType(enumType));
@@ -95,14 +121,20 @@ namespace System.Reflection.Emit.Tests
         {
             ModuleBuilder module = Helpers.DynamicModule();
             module.DefineEnum("Name", TypeAttributes.Public, typeof(int));
-            AssertExtensions.Throws<ArgumentException>(null, () => module.DefineEnum("Name", TypeAttributes.Public, typeof(int)));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => module.DefineEnum("Name", TypeAttributes.Public, typeof(int))
+            );
         }
 
         [Fact]
         public void DefineEnum_NullName_ThrowsArgumentNullException()
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            AssertExtensions.Throws<ArgumentNullException>("name", () => module.DefineEnum(null, TypeAttributes.Public, typeof(object)));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => module.DefineEnum(null, TypeAttributes.Public, typeof(object))
+            );
         }
 
         [Theory]
@@ -112,7 +144,10 @@ namespace System.Reflection.Emit.Tests
         public void DefineEnum_EmptyName_ThrowsArgumentNullException(string name)
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            AssertExtensions.Throws<ArgumentException>("name", () => module.DefineEnum(name, TypeAttributes.Public, typeof(object)));
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                () => module.DefineEnum(name, TypeAttributes.Public, typeof(object))
+            );
         }
 
         [Theory]
@@ -139,31 +174,47 @@ namespace System.Reflection.Emit.Tests
         [InlineData(TypeAttributes.NestedFamORAssem, null)]
         [InlineData(TypeAttributes.NestedPrivate, null)]
         [InlineData(TypeAttributes.NestedPublic, null)]
-        public void DefineEnum_IncorrectVisibilityAttributes_ThrowsArgumentException(TypeAttributes visibility, string paramName)
+        public void DefineEnum_IncorrectVisibilityAttributes_ThrowsArgumentException(
+            TypeAttributes visibility,
+            string paramName
+        )
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            AssertExtensions.Throws<ArgumentException>(paramName, () => module.DefineEnum("Enum", visibility, typeof(int)));
+            AssertExtensions.Throws<ArgumentException>(
+                paramName,
+                () => module.DefineEnum("Enum", visibility, typeof(int))
+            );
         }
 
         [Fact]
         public void DefineEnum_NullUnderlyingType_ThrowsArgumentNullException()
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            AssertExtensions.Throws<ArgumentNullException>("type", () => module.DefineEnum("Name", TypeAttributes.Public, null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => module.DefineEnum("Name", TypeAttributes.Public, null)
+            );
         }
 
         [Fact]
         public void DefineEnum_VoidUnderlyingType_ThrowsArgumentException()
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            AssertExtensions.Throws<ArgumentException>(null, () => module.DefineEnum("Name", TypeAttributes.Public, typeof(void)));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => module.DefineEnum("Name", TypeAttributes.Public, typeof(void))
+            );
         }
 
         [Fact]
         public void DefineEnum_ByRefUnderlyingType_ThrowsTypeLoadExceptionOnCreation()
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            EnumBuilder enumBuilder = module.DefineEnum("Name", TypeAttributes.Public, typeof(int).MakeByRefType());
+            EnumBuilder enumBuilder = module.DefineEnum(
+                "Name",
+                TypeAttributes.Public,
+                typeof(int).MakeByRefType()
+            );
             Assert.Throws<TypeLoadException>(() => enumBuilder.CreateTypeInfo());
         }
 
@@ -178,10 +229,16 @@ namespace System.Reflection.Emit.Tests
         [InlineData(typeof(ValueType))]
         [InlineData(typeof(Enum))]
         [InlineData(typeof(int?))]
-        public void DefineEnum_InvalidUnderlyingType_ThrowsTypeLoadExceptionOnCreation(Type underlyingType)
+        public void DefineEnum_InvalidUnderlyingType_ThrowsTypeLoadExceptionOnCreation(
+            Type underlyingType
+        )
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            EnumBuilder enumBuilder = module.DefineEnum("Name", TypeAttributes.Public, underlyingType);
+            EnumBuilder enumBuilder = module.DefineEnum(
+                "Name",
+                TypeAttributes.Public,
+                underlyingType
+            );
             Assert.Equal(underlyingType, enumBuilder.UnderlyingField.FieldType);
             Assert.Throws<TypeLoadException>(() => enumBuilder.CreateType());
         }

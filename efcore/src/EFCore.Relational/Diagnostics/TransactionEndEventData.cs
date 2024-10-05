@@ -33,8 +33,18 @@ public class TransactionEndEventData : TransactionEventData
         Guid connectionId,
         bool async,
         DateTimeOffset startTime,
-        TimeSpan duration)
-        : base(eventDefinition, messageGenerator, transaction, context, transactionId, connectionId, async, startTime)
+        TimeSpan duration
+    )
+        : base(
+            eventDefinition,
+            messageGenerator,
+            transaction,
+            context,
+            transactionId,
+            connectionId,
+            async,
+            startTime
+        )
     {
         Duration = duration;
     }

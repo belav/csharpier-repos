@@ -18,20 +18,39 @@ namespace Microsoft.CodeAnalysis.ReplaceMethodWithProperty
     {
         Task<SyntaxNode> GetMethodDeclarationAsync(CodeRefactoringContext context);
 
-        void ReplaceGetReference(SyntaxEditor editor, SyntaxToken nameToken, string propertyName, bool nameChanged);
-        void ReplaceSetReference(SyntaxEditor editor, SyntaxToken nameToken, string propertyName, bool nameChanged);
+        void ReplaceGetReference(
+            SyntaxEditor editor,
+            SyntaxToken nameToken,
+            string propertyName,
+            bool nameChanged
+        );
+        void ReplaceSetReference(
+            SyntaxEditor editor,
+            SyntaxToken nameToken,
+            string propertyName,
+            bool nameChanged
+        );
 
         void ReplaceGetMethodWithProperty(
-            CodeGenerationOptions options, ParseOptions parseOptions,
-            SyntaxEditor editor, SemanticModel semanticModel,
-            GetAndSetMethods getAndSetMethods, string propertyName, bool nameChanged, CancellationToken cancellationToken);
+            CodeGenerationOptions options,
+            ParseOptions parseOptions,
+            SyntaxEditor editor,
+            SemanticModel semanticModel,
+            GetAndSetMethods getAndSetMethods,
+            string propertyName,
+            bool nameChanged,
+            CancellationToken cancellationToken
+        );
 
         void RemoveSetMethod(SyntaxEditor editor, SyntaxNode setMethodDeclaration);
     }
 
     internal readonly struct GetAndSetMethods(
-        IMethodSymbol getMethod, IMethodSymbol setMethod,
-        SyntaxNode getMethodDeclaration, SyntaxNode setMethodDeclaration)
+        IMethodSymbol getMethod,
+        IMethodSymbol setMethod,
+        SyntaxNode getMethodDeclaration,
+        SyntaxNode setMethodDeclaration
+    )
     {
         public readonly IMethodSymbol GetMethod = getMethod;
         public readonly IMethodSymbol SetMethod = setMethod;

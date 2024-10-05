@@ -10,5 +10,5 @@ internal enum Http2DataFrameFlags : byte
 {
     NONE = 0x0,
     END_STREAM = 0x1,
-    PADDED = 0x8
+    PADDED = 0x8,
 }

@@ -6,10 +6,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,33 +28,35 @@ using System.Reflection.Emit;
 
 namespace Mono.CodeGeneration
 {
-	public class CodeArrayLength: CodeExpression
-	{
-		CodeExpression array;
-		
-		public CodeArrayLength (CodeExpression array)
-		{
-			if (!array.GetResultType().IsArray)
-				throw new InvalidOperationException ("CodeArrayLength can only be applied to array expressions");
-			this.array = array;
-		}
-		
-		public override void Generate (ILGenerator gen)
-		{
-			array.Generate (gen);
-			gen.Emit (OpCodes.Ldlen);
-		}
-		
-		public override void PrintCode (CodeWriter cp)
-		{
-			array.PrintCode (cp);
-			cp.Write (".Length");
-		}
-		
-		public override Type GetResultType ()
-		{
-			return typeof(int);
-		}
-	}
+    public class CodeArrayLength : CodeExpression
+    {
+        CodeExpression array;
+
+        public CodeArrayLength(CodeExpression array)
+        {
+            if (!array.GetResultType().IsArray)
+                throw new InvalidOperationException(
+                    "CodeArrayLength can only be applied to array expressions"
+                );
+            this.array = array;
+        }
+
+        public override void Generate(ILGenerator gen)
+        {
+            array.Generate(gen);
+            gen.Emit(OpCodes.Ldlen);
+        }
+
+        public override void PrintCode(CodeWriter cp)
+        {
+            array.PrintCode(cp);
+            cp.Write(".Length");
+        }
+
+        public override Type GetResultType()
+        {
+            return typeof(int);
+        }
+    }
 }
 #endif

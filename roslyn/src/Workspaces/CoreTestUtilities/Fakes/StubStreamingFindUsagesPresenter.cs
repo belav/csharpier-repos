@@ -26,14 +26,18 @@ namespace Microsoft.CodeAnalysis.UnitTests.Fakes
             _globalOptions = globalOptions;
         }
 
-        public void ClearAll()
-        {
-        }
+        public void ClearAll() { }
 
-        public (FindUsagesContext, CancellationToken) StartSearch(string title, bool supportsReferences)
-            => (new SimpleFindUsagesContext(_globalOptions), CancellationToken.None);
+        public (FindUsagesContext, CancellationToken) StartSearch(
+            string title,
+            bool supportsReferences
+        ) => (new SimpleFindUsagesContext(_globalOptions), CancellationToken.None);
 
-        public (FindUsagesContext, CancellationToken) StartSearchWithCustomColumns(string title, bool supportsReferences, bool includeContainingTypeAndMemberColumns, bool includeKindColumn)
-            => (new SimpleFindUsagesContext(_globalOptions), CancellationToken.None);
+        public (FindUsagesContext, CancellationToken) StartSearchWithCustomColumns(
+            string title,
+            bool supportsReferences,
+            bool includeContainingTypeAndMemberColumns,
+            bool includeKindColumn
+        ) => (new SimpleFindUsagesContext(_globalOptions), CancellationToken.None);
     }
 }

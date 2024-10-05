@@ -42,30 +42,44 @@ namespace WebApiHelpPageWebHost.UnitTest
         public void GetHelpPageApiModel_ReturnsTheModel_WhenIdIsValid(string apiId)
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
             HelpPageApiModel model = config.GetHelpPageApiModel(apiId);
             Assert.NotNull(model);
             Assert.Same(model, config.GetHelpPageApiModel(apiId));
-            Assert.Equal(apiId, model.ApiDescription.GetFriendlyId(), StringComparer.OrdinalIgnoreCase);
+            Assert.Equal(
+                apiId,
+                model.ApiDescription.GetFriendlyId(),
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
         [Fact]
         public void GetHelpPageApiModel_TypeConverterModel_GeneratesUriParameter()
         {
-            // If class Point with properties X and Y is defined with a TypeConverter, 
+            // If class Point with properties X and Y is defined with a TypeConverter,
             // the UriParameters should be a single parameter name "point" instead of two member properties X and Y,
             // because X and Y do not appear in the Relative Path and it is the user that should specify how the query
             // string is parsed.
             // Arrange
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
 
             // Act
             HelpPageApiModel model = config.GetHelpPageApiModel("GET-Values_point");
 
             // Assert
             Assert.NotNull(model);
-            string expectedParameter = Assert.Single(model.ApiDescription.ParameterDescriptions).Name;
+            string expectedParameter = Assert
+                .Single(model.ApiDescription.ParameterDescriptions)
+                .Name;
             ParameterDescription parameterDescription = Assert.Single(model.UriParameters);
             Assert.Equal(expectedParameter, parameterDescription.Name);
         }
@@ -95,7 +109,11 @@ namespace WebApiHelpPageWebHost.UnitTest
         {
             // Arrange
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute("Default", "{controller}/{unused}/{id}", new { id = RouteParameter.Optional });
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{unused}/{id}",
+                new { id = RouteParameter.Optional }
+            );
 
             // Act
             HelpPageApiModel model = config.GetHelpPageApiModel(apiId);
@@ -103,7 +121,11 @@ namespace WebApiHelpPageWebHost.UnitTest
             // Assert
             Assert.NotNull(model);
             Assert.Same(model, config.GetHelpPageApiModel(apiId));
-            Assert.Equal(apiId, model.ApiDescription.GetFriendlyId(), StringComparer.OrdinalIgnoreCase);
+            Assert.Equal(
+                apiId,
+                model.ApiDescription.GetFriendlyId(),
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
         [Theory]
@@ -114,7 +136,11 @@ namespace WebApiHelpPageWebHost.UnitTest
         public void GetHelpPageApiModel_ReturnsNull_WhenIdIsInvalid(string apiId)
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
             HelpPageApiModel model = config.GetHelpPageApiModel(apiId);
             Assert.Null(model);
         }
@@ -135,14 +161,26 @@ namespace WebApiHelpPageWebHost.UnitTest
         public void GetHelpPageApiModel_HandlesException_ThrownDuringSampleGeneration()
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
             Mock<HelpPageSampleGenerator> faultyGenerator = new Mock<HelpPageSampleGenerator>();
-            faultyGenerator.Setup(g => g.GetSample(It.IsAny<ApiDescription>(), It.IsAny<SampleDirection>())).Returns(() => { throw new InvalidOperationException("This is a faulty sample generator."); });
+            faultyGenerator
+                .Setup(g => g.GetSample(It.IsAny<ApiDescription>(), It.IsAny<SampleDirection>()))
+                .Returns(() =>
+                {
+                    throw new InvalidOperationException("This is a faulty sample generator.");
+                });
             config.SetHelpPageSampleGenerator(faultyGenerator.Object);
             HelpPageApiModel model = config.GetHelpPageApiModel("Get-Values");
             Assert.NotNull(model);
             Assert.NotEmpty(model.ErrorMessages);
-            Assert.Equal("An exception has occurred while generating the sample. Exception message: This is a faulty sample generator.", model.ErrorMessages[0]);
+            Assert.Equal(
+                "An exception has occurred while generating the sample. Exception message: This is a faulty sample generator.",
+                model.ErrorMessages[0]
+            );
         }
 
         [Fact]
@@ -152,25 +190,46 @@ namespace WebApiHelpPageWebHost.UnitTest
             config.Formatters.Clear();
             config.Formatters.Add(new JQueryMvcFormUrlEncodedFormatter());
             config.SetSampleObjects(new Dictionary<Type, object> { { typeof(string), "sample" } });
-            config.Routes.MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
             HelpPageApiModel model = config.GetHelpPageApiModel("Post-Values");
             Assert.NotNull(model);
             Assert.NotEmpty(model.ErrorMessages);
-            Assert.Equal("Failed to generate the sample for media type 'application/x-www-form-urlencoded'. Cannot use formatter 'JQueryMvcFormUrlEncodedFormatter' to write type 'String'.", model.ErrorMessages[0]);
+            Assert.Equal(
+                "Failed to generate the sample for media type 'application/x-www-form-urlencoded'. Cannot use formatter 'JQueryMvcFormUrlEncodedFormatter' to write type 'String'.",
+                model.ErrorMessages[0]
+            );
         }
 
         [Fact]
         public void GetHelpPageApiModel_UnwrapsAggregateException()
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
             Mock<HelpPageSampleGenerator> faultyGenerator = new Mock<HelpPageSampleGenerator>();
-            faultyGenerator.Setup(g => g.GetSample(It.IsAny<ApiDescription>(), It.IsAny<SampleDirection>())).Returns(() => { throw new AggregateException(new InvalidOperationException("Sample generator failed.")); });
+            faultyGenerator
+                .Setup(g => g.GetSample(It.IsAny<ApiDescription>(), It.IsAny<SampleDirection>()))
+                .Returns(() =>
+                {
+                    throw new AggregateException(
+                        new InvalidOperationException("Sample generator failed.")
+                    );
+                });
             config.SetHelpPageSampleGenerator(faultyGenerator.Object);
             HelpPageApiModel model = config.GetHelpPageApiModel("Get-Values");
             Assert.NotNull(model);
             Assert.NotEmpty(model.ErrorMessages);
-            Assert.Equal("An exception has occurred while generating the sample. Exception message: Sample generator failed.", model.ErrorMessages[0]);
+            Assert.Equal(
+                "An exception has occurred while generating the sample. Exception message: Sample generator failed.",
+                model.ErrorMessages[0]
+            );
         }
 
         [Theory]
@@ -181,10 +240,17 @@ namespace WebApiHelpPageWebHost.UnitTest
         [InlineData("Get-Users", false)]
         [InlineData("Get-Values-id", false)]
         [InlineData("Head-Values-id", false)]
-        public void GetHelpPageApiModel_ReturnsExpectedRequestModelDescription(string apiId, bool hasRequestModelDescription)
+        public void GetHelpPageApiModel_ReturnsExpectedRequestModelDescription(
+            string apiId,
+            bool hasRequestModelDescription
+        )
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
 
             HelpPageApiModel model = config.GetHelpPageApiModel(apiId);
 
@@ -216,14 +282,16 @@ namespace WebApiHelpPageWebHost.UnitTest
             HttpConfiguration config = new HttpConfiguration();
             Dictionary<Type, object> sampleObjects = new Dictionary<Type, object>
             {
-                {typeof(int), 21},
-                {typeof(string), "sample"}
+                { typeof(int), 21 },
+                { typeof(string), "sample" },
             };
             config.SetSampleObjects(sampleObjects);
 
             object sampleGeneratorObj;
             config.Properties.TryGetValue(typeof(HelpPageSampleGenerator), out sampleGeneratorObj);
-            HelpPageSampleGenerator sampleGenerator = Assert.IsType<HelpPageSampleGenerator>(sampleGeneratorObj);
+            HelpPageSampleGenerator sampleGenerator = Assert.IsType<HelpPageSampleGenerator>(
+                sampleGeneratorObj
+            );
             Assert.Same(sampleObjects, sampleGenerator.SampleObjects);
         }
 
@@ -232,10 +300,17 @@ namespace WebApiHelpPageWebHost.UnitTest
         {
             HttpConfiguration config = new HttpConfiguration();
             TextSample sample = new TextSample("test");
-            config.SetSampleRequest(sample, new MediaTypeHeaderValue("application/xml"), "values", "get");
+            config.SetSampleRequest(
+                sample,
+                new MediaTypeHeaderValue("application/xml"),
+                "values",
+                "get"
+            );
             object sampleGeneratorObj;
             config.Properties.TryGetValue(typeof(HelpPageSampleGenerator), out sampleGeneratorObj);
-            HelpPageSampleGenerator sampleGenerator = Assert.IsType<HelpPageSampleGenerator>(sampleGeneratorObj);
+            HelpPageSampleGenerator sampleGenerator = Assert.IsType<HelpPageSampleGenerator>(
+                sampleGeneratorObj
+            );
             Assert.NotEmpty(sampleGenerator.ActionSamples);
             var actionSample = sampleGenerator.ActionSamples.First();
             Assert.Equal("values", actionSample.Key.ControllerName);
@@ -252,10 +327,19 @@ namespace WebApiHelpPageWebHost.UnitTest
         {
             HttpConfiguration config = new HttpConfiguration();
             TextSample sample = new TextSample("test");
-            config.SetSampleRequest(sample, new MediaTypeHeaderValue("application/json"), "values", "post", "id", "name");
+            config.SetSampleRequest(
+                sample,
+                new MediaTypeHeaderValue("application/json"),
+                "values",
+                "post",
+                "id",
+                "name"
+            );
             object sampleGeneratorObj;
             config.Properties.TryGetValue(typeof(HelpPageSampleGenerator), out sampleGeneratorObj);
-            HelpPageSampleGenerator sampleGenerator = Assert.IsType<HelpPageSampleGenerator>(sampleGeneratorObj);
+            HelpPageSampleGenerator sampleGenerator = Assert.IsType<HelpPageSampleGenerator>(
+                sampleGeneratorObj
+            );
             Assert.NotEmpty(sampleGenerator.ActionSamples);
             var actionSample = sampleGenerator.ActionSamples.First();
             Assert.Equal("values", actionSample.Key.ControllerName);
@@ -272,10 +356,17 @@ namespace WebApiHelpPageWebHost.UnitTest
         {
             HttpConfiguration config = new HttpConfiguration();
             TextSample sample = new TextSample("test");
-            config.SetSampleResponse(sample, new MediaTypeHeaderValue("application/xml"), "values", "get");
+            config.SetSampleResponse(
+                sample,
+                new MediaTypeHeaderValue("application/xml"),
+                "values",
+                "get"
+            );
             object sampleGeneratorObj;
             config.Properties.TryGetValue(typeof(HelpPageSampleGenerator), out sampleGeneratorObj);
-            HelpPageSampleGenerator sampleGenerator = Assert.IsType<HelpPageSampleGenerator>(sampleGeneratorObj);
+            HelpPageSampleGenerator sampleGenerator = Assert.IsType<HelpPageSampleGenerator>(
+                sampleGeneratorObj
+            );
             Assert.NotEmpty(sampleGenerator.ActionSamples);
             var actionSample = sampleGenerator.ActionSamples.First();
             Assert.Equal("values", actionSample.Key.ControllerName);
@@ -292,10 +383,19 @@ namespace WebApiHelpPageWebHost.UnitTest
         {
             HttpConfiguration config = new HttpConfiguration();
             TextSample sample = new TextSample("test");
-            config.SetSampleResponse(sample, new MediaTypeHeaderValue("application/json"), "values", "post", "id", "name");
+            config.SetSampleResponse(
+                sample,
+                new MediaTypeHeaderValue("application/json"),
+                "values",
+                "post",
+                "id",
+                "name"
+            );
             object sampleGeneratorObj;
             config.Properties.TryGetValue(typeof(HelpPageSampleGenerator), out sampleGeneratorObj);
-            HelpPageSampleGenerator sampleGenerator = Assert.IsType<HelpPageSampleGenerator>(sampleGeneratorObj);
+            HelpPageSampleGenerator sampleGenerator = Assert.IsType<HelpPageSampleGenerator>(
+                sampleGeneratorObj
+            );
             Assert.NotEmpty(sampleGenerator.ActionSamples);
             var actionSample = sampleGenerator.ActionSamples.First();
             Assert.Equal("values", actionSample.Key.ControllerName);
@@ -315,7 +415,9 @@ namespace WebApiHelpPageWebHost.UnitTest
             config.SetSampleForType(sample, new MediaTypeHeaderValue("image/png"), typeof(string));
             object sampleGeneratorObj;
             config.Properties.TryGetValue(typeof(HelpPageSampleGenerator), out sampleGeneratorObj);
-            HelpPageSampleGenerator sampleGenerator = Assert.IsType<HelpPageSampleGenerator>(sampleGeneratorObj);
+            HelpPageSampleGenerator sampleGenerator = Assert.IsType<HelpPageSampleGenerator>(
+                sampleGeneratorObj
+            );
             Assert.NotEmpty(sampleGenerator.ActionSamples);
             var actionSample = sampleGenerator.ActionSamples.First();
             Assert.Equal(String.Empty, actionSample.Key.ControllerName);
@@ -333,7 +435,9 @@ namespace WebApiHelpPageWebHost.UnitTest
             config.SetActualRequestType(typeof(string), "c", "a");
             object sampleGeneratorObj;
             config.Properties.TryGetValue(typeof(HelpPageSampleGenerator), out sampleGeneratorObj);
-            HelpPageSampleGenerator sampleGenerator = Assert.IsType<HelpPageSampleGenerator>(sampleGeneratorObj);
+            HelpPageSampleGenerator sampleGenerator = Assert.IsType<HelpPageSampleGenerator>(
+                sampleGeneratorObj
+            );
             Assert.NotEmpty(sampleGenerator.ActualHttpMessageTypes);
             var actualType = sampleGenerator.ActualHttpMessageTypes.First();
             Assert.Equal("c", actualType.Key.ControllerName);
@@ -352,7 +456,9 @@ namespace WebApiHelpPageWebHost.UnitTest
             config.SetActualRequestType(typeof(string), "c", "a", "id");
             object sampleGeneratorObj;
             config.Properties.TryGetValue(typeof(HelpPageSampleGenerator), out sampleGeneratorObj);
-            HelpPageSampleGenerator sampleGenerator = Assert.IsType<HelpPageSampleGenerator>(sampleGeneratorObj);
+            HelpPageSampleGenerator sampleGenerator = Assert.IsType<HelpPageSampleGenerator>(
+                sampleGeneratorObj
+            );
             Assert.NotEmpty(sampleGenerator.ActualHttpMessageTypes);
             var actualType = sampleGenerator.ActualHttpMessageTypes.First();
             Assert.Equal("c", actualType.Key.ControllerName);
@@ -371,7 +477,9 @@ namespace WebApiHelpPageWebHost.UnitTest
             config.SetActualResponseType(typeof(int), "c", "a");
             object sampleGeneratorObj;
             config.Properties.TryGetValue(typeof(HelpPageSampleGenerator), out sampleGeneratorObj);
-            HelpPageSampleGenerator sampleGenerator = Assert.IsType<HelpPageSampleGenerator>(sampleGeneratorObj);
+            HelpPageSampleGenerator sampleGenerator = Assert.IsType<HelpPageSampleGenerator>(
+                sampleGeneratorObj
+            );
             Assert.NotEmpty(sampleGenerator.ActualHttpMessageTypes);
             var actualType = sampleGenerator.ActualHttpMessageTypes.First();
             Assert.Equal("c", actualType.Key.ControllerName);
@@ -390,7 +498,9 @@ namespace WebApiHelpPageWebHost.UnitTest
             config.SetActualResponseType(typeof(int), "c", "a", "id");
             object sampleGeneratorObj;
             config.Properties.TryGetValue(typeof(HelpPageSampleGenerator), out sampleGeneratorObj);
-            HelpPageSampleGenerator sampleGenerator = Assert.IsType<HelpPageSampleGenerator>(sampleGeneratorObj);
+            HelpPageSampleGenerator sampleGenerator = Assert.IsType<HelpPageSampleGenerator>(
+                sampleGeneratorObj
+            );
             Assert.NotEmpty(sampleGenerator.ActualHttpMessageTypes);
             var actualType = sampleGenerator.ActualHttpMessageTypes.First();
             Assert.Equal("c", actualType.Key.ControllerName);
@@ -415,7 +525,8 @@ namespace WebApiHelpPageWebHost.UnitTest
         public void SetHelpPageSampleGenerator_ChangesTheDefault()
         {
             HttpConfiguration config = new HttpConfiguration();
-            Mock<HelpPageSampleGenerator> helpPageSampleGenerator = new Mock<HelpPageSampleGenerator>();
+            Mock<HelpPageSampleGenerator> helpPageSampleGenerator =
+                new Mock<HelpPageSampleGenerator>();
             config.SetHelpPageSampleGenerator(helpPageSampleGenerator.Object);
             Assert.Same(helpPageSampleGenerator.Object, config.GetHelpPageSampleGenerator());
         }

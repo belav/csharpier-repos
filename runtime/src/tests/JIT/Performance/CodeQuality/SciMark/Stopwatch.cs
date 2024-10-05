@@ -3,9 +3,9 @@
 /// <license>
 /// This is a port of the SciMark2a Java Benchmark to C# by
 /// Chris Re (cmr28@cornell.edu) and Werner Vogels (vogels@cs.cornell.edu)
-/// 
+///
 /// For details on the original authors see http://math.nist.gov/scimark2
-/// 
+///
 /// This software is likely to burn your processor, bitflip your memory chips
 /// anihilate your screen and corrupt all your disks, so you it at your
 /// own risk.
@@ -19,20 +19,20 @@ namespace SciMark2
     /// <summary>
     /// Provides a stopwatch to measure elapsed time.
     /// </summary>
-    /// <author> 
+    /// <author>
     /// Roldan Pozo
     /// </author>
-    /// <version> 
+    /// <version>
     /// 14 October 1997, revised 1999-04-24
     /// </version>
-    /// 
+    ///
     public class Stopwatch
     {
         private bool _running;
         private double _last_time;
         private double _total;
 
-        /// 
+        ///
         /// <summary>R
         /// eturn system time (in seconds)
         /// </summary>
@@ -53,7 +53,7 @@ namespace SciMark2
             reset();
         }
 
-        /// 
+        ///
         /// <summary>
         /// Start (and reset) timer
         /// </summary>
@@ -67,7 +67,7 @@ namespace SciMark2
             }
         }
 
-        /// 
+        ///
         /// <summary>
         /// Resume timing, after stopping.  (Does not wipe out accumulated times.)
         /// </summary>
@@ -80,7 +80,7 @@ namespace SciMark2
             }
         }
 
-        /// 
+        ///
         /// <summary>
         /// Stop timer
         /// </summary>
@@ -94,7 +94,7 @@ namespace SciMark2
             return _total;
         }
 
-        /// 
+        ///
         /// <summary>
         /// return the elapsed time (in seconds)
         /// </summary>

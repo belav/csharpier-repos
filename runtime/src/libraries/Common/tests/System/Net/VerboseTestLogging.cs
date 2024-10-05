@@ -10,9 +10,7 @@ namespace System.Net.Test.Common
     {
         private static readonly VerboseTestLogging s_instance = new VerboseTestLogging();
 
-        private VerboseTestLogging()
-        {
-        }
+        private VerboseTestLogging() { }
 
         public static VerboseTestLogging GetInstance()
         {

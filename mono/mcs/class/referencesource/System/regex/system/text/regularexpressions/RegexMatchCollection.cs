@@ -1,17 +1,16 @@
 //------------------------------------------------------------------------------
 // <copyright file="RegexMatchCollection.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 // The MatchCollection lists the successful matches that
 // result when searching a string for a regular expression.
 
-namespace System.Text.RegularExpressions {
-
+namespace System.Text.RegularExpressions
+{
     using System.Collections;
     using System.Collections.Generic;
-
 
     /*
      * This collection returns a sequence of successful match results, either
@@ -25,9 +24,10 @@ namespace System.Text.RegularExpressions {
     ///    </para>
     /// </devdoc>
 #if !SILVERLIGHT
-    [ Serializable() ] 
+    [Serializable()]
 #endif
-    public class MatchCollection : ICollection {
+    public class MatchCollection : ICollection
+    {
         internal Regex _regex;
 #if SILVERLIGHT
         internal List<Match> _matches;
@@ -46,9 +46,13 @@ namespace System.Text.RegularExpressions {
         /*
          * Nonpublic constructor
          */
-        internal MatchCollection(Regex regex, String input, int beginning, int length, int startat) {
+        internal MatchCollection(Regex regex, String input, int beginning, int length, int startat)
+        {
             if (startat < 0 || startat > input.Length)
-                throw new ArgumentOutOfRangeException("startat", SR.GetString(SR.BeginIndexNotNegative));
+                throw new ArgumentOutOfRangeException(
+                    "startat",
+                    SR.GetString(SR.BeginIndexNotNegative)
+                );
 
             _regex = regex;
             _input = input;
@@ -64,7 +68,8 @@ namespace System.Text.RegularExpressions {
             _done = false;
         }
 
-        internal Match GetMatch(int i) {
+        internal Match GetMatch(int i)
+        {
             if (i < 0)
                 return null;
 
@@ -76,10 +81,12 @@ namespace System.Text.RegularExpressions {
 
             Match match;
 
-            do {
+            do
+            {
                 match = _regex.Run(false, _prevlen, _input, _beginning, _length, _startat);
 
-                if (!match.Success) {
+                if (!match.Success)
+                {
                     _done = true;
                     return null;
                 }
@@ -88,7 +95,6 @@ namespace System.Text.RegularExpressions {
 
                 _prevlen = match._length;
                 _startat = match._textpos;
-
             } while (_matches.Count <= i);
 
             return match;
@@ -99,8 +105,10 @@ namespace System.Text.RegularExpressions {
         ///       Returns the number of captures.
         ///    </para>
         /// </devdoc>
-        public int Count {
-            get {
+        public int Count
+        {
+            get
+            {
                 if (_done)
                     return _matches.Count;
 
@@ -113,30 +121,26 @@ namespace System.Text.RegularExpressions {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public Object SyncRoot {
-            get {
-                return this;
-            }
+        public Object SyncRoot
+        {
+            get { return this; }
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool IsSynchronized {
-            get {
-                return false;
-            }
+        public bool IsSynchronized
+        {
+            get { return false; }
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool IsReadOnly {
-            get {
-                return true;
-            }
+        public bool IsReadOnly
+        {
+            get { return true; }
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -145,7 +149,8 @@ namespace System.Text.RegularExpressions {
         /// </devdoc>
         public virtual Match this[int i]
         {
-            get {
+            get
+            {
                 Match match;
 
                 match = GetMatch(i);
@@ -163,7 +168,8 @@ namespace System.Text.RegularExpressions {
         ///       starting at the given index.
         ///    </para>
         /// </devdoc>
-        public void CopyTo(Array array, int arrayIndex) {
+        public void CopyTo(Array array, int arrayIndex)
+        {
             if ((array != null) && (array.Rank != 1))
             {
                 throw new ArgumentException(SR.GetString(SR.Arg_RankMultiDimNotSupported));
@@ -195,7 +201,8 @@ namespace System.Text.RegularExpressions {
         ///       Provides an enumerator in the same order as Item[i].
         ///    </para>
         /// </devdoc>
-        public IEnumerator GetEnumerator() {
+        public IEnumerator GetEnumerator()
+        {
             return new MatchEnumerator(this);
         }
     }
@@ -205,9 +212,10 @@ namespace System.Text.RegularExpressions {
      * Should it be public?
      */
 #if !SILVERLIGHT
-    [ Serializable() ] 
+    [Serializable()]
 #endif
-    internal class MatchEnumerator : IEnumerator {
+    internal class MatchEnumerator : IEnumerator
+    {
         internal MatchCollection _matchcoll;
         internal Match _match = null;
         internal int _curindex;
@@ -216,21 +224,24 @@ namespace System.Text.RegularExpressions {
         /*
          * Nonpublic constructor
          */
-        internal MatchEnumerator(MatchCollection matchcoll) {
+        internal MatchEnumerator(MatchCollection matchcoll)
+        {
             _matchcoll = matchcoll;
         }
 
         /*
          * Advance to the next match
          */
-        public bool MoveNext() {
+        public bool MoveNext()
+        {
             if (_done)
                 return false;
 
             _match = _matchcoll.GetMatch(_curindex);
             _curindex++;
 
-            if (_match == null) {
+            if (_match == null)
+            {
                 _done = true;
                 return false;
             }
@@ -241,8 +252,10 @@ namespace System.Text.RegularExpressions {
         /*
          * The current match
          */
-        public Object Current {
-            get { 
+        public Object Current
+        {
+            get
+            {
                 if (_match == null)
                     throw new InvalidOperationException(SR.GetString(SR.EnumNotStarted));
                 return _match;
@@ -252,14 +265,11 @@ namespace System.Text.RegularExpressions {
         /*
          * Position before the first item
          */
-        public void Reset() {
+        public void Reset()
+        {
             _curindex = 0;
             _done = false;
             _match = null;
         }
     }
-
-
-
-
 }

@@ -103,7 +103,9 @@ namespace System.Reflection.Metadata
             {
                 case TypeRefTreatment.SystemAttribute:
                 case TypeRefTreatment.SystemDelegate:
-                    return AssemblyReferenceHandle.FromVirtualIndex(AssemblyReferenceHandle.VirtualIndex.System_Runtime);
+                    return AssemblyReferenceHandle.FromVirtualIndex(
+                        AssemblyReferenceHandle.VirtualIndex.System_Runtime
+                    );
 
                 case TypeRefTreatment.UseProjectionInfo:
                     return MetadataReader.GetProjectedAssemblyRef(RowId);

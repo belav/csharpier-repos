@@ -14,7 +14,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
     {
         public int QueryService(ref Guid guidService, ref Guid riid, out IntPtr ppvObject)
         {
-            var serviceProvider = (Microsoft.VisualStudio.OLE.Interop.IServiceProvider)_serviceProvider;
+            var serviceProvider =
+                (Microsoft.VisualStudio.OLE.Interop.IServiceProvider)_serviceProvider;
             return serviceProvider.QueryService(ref guidService, ref riid, out ppvObject);
         }
     }

@@ -8,52 +8,37 @@ namespace System.Formats.Asn1.Tests.Writer
 {
     public class WriteIA5String : WriteCharacterString
     {
-        public static IEnumerable<object[]> ShortValidCases { get; } = new object[][]
-        {
-            new object[]
+        public static IEnumerable<object[]> ShortValidCases { get; } =
+            new object[][]
             {
-                string.Empty,
-                "00",
-            },
-            new object[]
-            {
-                "hi",
-                "026869",
-            },
-            new object[]
-            {
-                "Dr. & Mrs. Smith-Jones & children",
-                "2144722E2026204D72732E20536D6974682D4A6F6E65732026206368696C6472656E",
-            },
-        };
+                new object[] { string.Empty, "00" },
+                new object[] { "hi", "026869" },
+                new object[]
+                {
+                    "Dr. & Mrs. Smith-Jones & children",
+                    "2144722E2026204D72732E20536D6974682D4A6F6E65732026206368696C6472656E",
+                },
+            };
 
-        public static IEnumerable<object[]> LongValidCases { get; } = new object[][]
-        {
-            new object[]
+        public static IEnumerable<object[]> LongValidCases { get; } =
+            new object[][]
             {
-                new string('f', 957) + new string('w', 182),
-                "820473" + new string('6', 957 * 2) + new string('7', 182 * 2),
-            },
-        };
+                new object[]
+                {
+                    new string('f', 957) + new string('w', 182),
+                    "820473" + new string('6', 957 * 2) + new string('7', 182 * 2),
+                },
+            };
 
-        public static IEnumerable<object[]> CERSegmentedCases { get; } = new object[][]
-        {
-            new object[]
+        public static IEnumerable<object[]> CERSegmentedCases { get; } =
+            new object[][]
             {
-                GettysburgAddress,
-                1458,
-            },
-            new object[]
-            {
-                new string ('Q', 2000),
-                2000,
-            },
-        };
+                new object[] { GettysburgAddress, 1458 },
+                new object[] { new string('Q', 2000), 2000 },
+            };
 
-        public static IEnumerable<object[]> InvalidInputs { get; } = new object[][]
-        {
-            new object[] { "Dr. & Mrs. Smith\u2010Jones \uFE60 children", },
-        };
+        public static IEnumerable<object[]> InvalidInputs { get; } =
+            new object[][] { new object[] { "Dr. & Mrs. Smith\u2010Jones \uFE60 children" } };
 
         internal override void WriteString(AsnWriter writer, string s) =>
             writer.WriteCharacterString(UniversalTagNumber.IA5String, s);
@@ -140,69 +125,108 @@ namespace System.Formats.Asn1.Tests.Writer
         [Theory]
         [MemberData(nameof(ShortValidCases))]
         [MemberData(nameof(LongValidCases))]
-        public void VerifyWrite_BER_String_ClearsConstructed(string input, string expectedPayloadHex) =>
-            base.VerifyWrite_BER_String_ClearsConstructed_Helper(input, expectedPayloadHex);
+        public void VerifyWrite_BER_String_ClearsConstructed(
+            string input,
+            string expectedPayloadHex
+        ) => base.VerifyWrite_BER_String_ClearsConstructed_Helper(input, expectedPayloadHex);
 
         [Theory]
         [MemberData(nameof(ShortValidCases))]
         [MemberData(nameof(LongValidCases))]
-        public void VerifyWrite_BER_String_CustomTag_ClearsConstructed(string input, string expectedPayloadHex) =>
-            base.VerifyWrite_BER_String_CustomTag_ClearsConstructed_Helper(input, expectedPayloadHex);
+        public void VerifyWrite_BER_String_CustomTag_ClearsConstructed(
+            string input,
+            string expectedPayloadHex
+        ) =>
+            base.VerifyWrite_BER_String_CustomTag_ClearsConstructed_Helper(
+                input,
+                expectedPayloadHex
+            );
 
         [Theory]
         [MemberData(nameof(ShortValidCases))]
         [MemberData(nameof(LongValidCases))]
-        public void VerifyWrite_BER_Span_ClearsConstructed(string input, string expectedPayloadHex) =>
-            base.VerifyWrite_BER_Span_ClearsConstructed_Helper(input, expectedPayloadHex);
+        public void VerifyWrite_BER_Span_ClearsConstructed(
+            string input,
+            string expectedPayloadHex
+        ) => base.VerifyWrite_BER_Span_ClearsConstructed_Helper(input, expectedPayloadHex);
 
         [Theory]
         [MemberData(nameof(ShortValidCases))]
         [MemberData(nameof(LongValidCases))]
-        public void VerifyWrite_BER_Span_CustomTag_ClearsConstructed(string input, string expectedPayloadHex) =>
+        public void VerifyWrite_BER_Span_CustomTag_ClearsConstructed(
+            string input,
+            string expectedPayloadHex
+        ) =>
             base.VerifyWrite_BER_Span_CustomTag_ClearsConstructed_Helper(input, expectedPayloadHex);
 
         [Theory]
         [MemberData(nameof(ShortValidCases))]
-        public void VerifyWrite_CER_String_ClearsConstructed(string input, string expectedPayloadHex) =>
-            base.VerifyWrite_CER_String_ClearsConstructed_Helper(input, expectedPayloadHex);
+        public void VerifyWrite_CER_String_ClearsConstructed(
+            string input,
+            string expectedPayloadHex
+        ) => base.VerifyWrite_CER_String_ClearsConstructed_Helper(input, expectedPayloadHex);
 
         [Theory]
         [MemberData(nameof(ShortValidCases))]
-        public void VerifyWrite_CER_String_CustomTag_ClearsConstructed(string input, string expectedPayloadHex) =>
-            base.VerifyWrite_CER_String_CustomTag_ClearsConstructed_Helper(input, expectedPayloadHex);
+        public void VerifyWrite_CER_String_CustomTag_ClearsConstructed(
+            string input,
+            string expectedPayloadHex
+        ) =>
+            base.VerifyWrite_CER_String_CustomTag_ClearsConstructed_Helper(
+                input,
+                expectedPayloadHex
+            );
 
         [Theory]
         [MemberData(nameof(ShortValidCases))]
-        public void VerifyWrite_CER_Span_ClearsConstructed(string input, string expectedPayloadHex) =>
-            base.VerifyWrite_CER_Span_ClearsConstructed_Helper(input, expectedPayloadHex);
+        public void VerifyWrite_CER_Span_ClearsConstructed(
+            string input,
+            string expectedPayloadHex
+        ) => base.VerifyWrite_CER_Span_ClearsConstructed_Helper(input, expectedPayloadHex);
 
         [Theory]
         [MemberData(nameof(ShortValidCases))]
-        public void VerifyWrite_CER_Span_CustomTag_ClearsConstructed(string input, string expectedPayloadHex) =>
+        public void VerifyWrite_CER_Span_CustomTag_ClearsConstructed(
+            string input,
+            string expectedPayloadHex
+        ) =>
             base.VerifyWrite_CER_Span_CustomTag_ClearsConstructed_Helper(input, expectedPayloadHex);
 
         [Theory]
         [MemberData(nameof(ShortValidCases))]
         [MemberData(nameof(LongValidCases))]
-        public void VerifyWrite_DER_String_ClearsConstructed(string input, string expectedPayloadHex) =>
-            base.VerifyWrite_DER_String_ClearsConstructed_Helper(input, expectedPayloadHex);
+        public void VerifyWrite_DER_String_ClearsConstructed(
+            string input,
+            string expectedPayloadHex
+        ) => base.VerifyWrite_DER_String_ClearsConstructed_Helper(input, expectedPayloadHex);
 
         [Theory]
         [MemberData(nameof(ShortValidCases))]
         [MemberData(nameof(LongValidCases))]
-        public void VerifyWrite_DER_String_CustomTag_ClearsConstructed(string input, string expectedPayloadHex) =>
-            base.VerifyWrite_DER_String_CustomTag_ClearsConstructed_Helper(input, expectedPayloadHex);
+        public void VerifyWrite_DER_String_CustomTag_ClearsConstructed(
+            string input,
+            string expectedPayloadHex
+        ) =>
+            base.VerifyWrite_DER_String_CustomTag_ClearsConstructed_Helper(
+                input,
+                expectedPayloadHex
+            );
 
         [Theory]
         [MemberData(nameof(ShortValidCases))]
         [MemberData(nameof(LongValidCases))]
-        public void VerifyWrite_DER_Span_ClearsConstructed(string input, string expectedPayloadHex) =>
-            base.VerifyWrite_DER_Span_ClearsConstructed_Helper(input, expectedPayloadHex);
+        public void VerifyWrite_DER_Span_ClearsConstructed(
+            string input,
+            string expectedPayloadHex
+        ) => base.VerifyWrite_DER_Span_ClearsConstructed_Helper(input, expectedPayloadHex);
 
         [Theory]
         [MemberData(nameof(ShortValidCases))]
         [MemberData(nameof(LongValidCases))]
-        public void VerifyWrite_DER_Span_CustomTag_ClearsConstructed(string input, string expectedPayloadHex) =>
+        public void VerifyWrite_DER_Span_CustomTag_ClearsConstructed(
+            string input,
+            string expectedPayloadHex
+        ) =>
             base.VerifyWrite_DER_Span_CustomTag_ClearsConstructed_Helper(input, expectedPayloadHex);
 
         [Theory]
@@ -245,12 +269,17 @@ namespace System.Formats.Asn1.Tests.Writer
 
         [Theory]
         [MemberData(nameof(CERSegmentedCases))]
-        public void VerifyWrite_CERSegmented_String_ConstructedTag(string input, int contentByteCount) =>
-            base.VerifyWrite_CERSegmented_String_ConstructedTag_Helper(input, contentByteCount);
+        public void VerifyWrite_CERSegmented_String_ConstructedTag(
+            string input,
+            int contentByteCount
+        ) => base.VerifyWrite_CERSegmented_String_ConstructedTag_Helper(input, contentByteCount);
 
         [Theory]
         [MemberData(nameof(CERSegmentedCases))]
-        public void VerifyWrite_CERSegmented_String_CustomPrimitiveTag(string input, int contentByteCount) =>
+        public void VerifyWrite_CERSegmented_String_CustomPrimitiveTag(
+            string input,
+            int contentByteCount
+        ) =>
             base.VerifyWrite_CERSegmented_String_CustomPrimitiveTag_Helper(input, contentByteCount);
 
         [Theory]
@@ -265,13 +294,17 @@ namespace System.Formats.Asn1.Tests.Writer
 
         [Theory]
         [MemberData(nameof(CERSegmentedCases))]
-        public void VerifyWrite_CERSegmented_Span_ConstructedTag(string input, int contentByteCount) =>
-            base.VerifyWrite_CERSegmented_Span_ConstructedTag_Helper(input, contentByteCount);
+        public void VerifyWrite_CERSegmented_Span_ConstructedTag(
+            string input,
+            int contentByteCount
+        ) => base.VerifyWrite_CERSegmented_Span_ConstructedTag_Helper(input, contentByteCount);
 
         [Theory]
         [MemberData(nameof(CERSegmentedCases))]
-        public void VerifyWrite_CERSegmented_Span_CustomPrimitiveTag(string input, int contentByteCount) =>
-            base.VerifyWrite_CERSegmented_Span_CustomPrimitiveTag_Helper(input, contentByteCount);
+        public void VerifyWrite_CERSegmented_Span_CustomPrimitiveTag(
+            string input,
+            int contentByteCount
+        ) => base.VerifyWrite_CERSegmented_Span_CustomPrimitiveTag_Helper(input, contentByteCount);
 
         [Theory]
         [MemberData(nameof(InvalidInputs))]

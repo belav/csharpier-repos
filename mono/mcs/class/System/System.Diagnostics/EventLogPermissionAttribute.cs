@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,46 +33,54 @@
 using System.Security;
 using System.Security.Permissions;
 
-namespace System.Diagnostics {
+namespace System.Diagnostics
+{
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Constructor
+            | AttributeTargets.Method
+            | AttributeTargets.Event,
+        AllowMultiple = true,
+        Inherited = false
+    )]
+    [Serializable]
+    public class EventLogPermissionAttribute : CodeAccessSecurityAttribute
+    {
+        private string machineName;
+        private EventLogPermissionAccess permissionAccess;
 
-	[AttributeUsage (
-		AttributeTargets.Assembly | AttributeTargets.Class |
-		AttributeTargets.Struct | AttributeTargets.Constructor |
-		AttributeTargets.Method | AttributeTargets.Event,
-		AllowMultiple=true, Inherited=false)]
-	[Serializable]
-	public class EventLogPermissionAttribute : CodeAccessSecurityAttribute {
+        public EventLogPermissionAttribute(SecurityAction action)
+            : base(action)
+        {
+            machineName = ResourcePermissionBase.Local;
+            permissionAccess = EventLogPermissionAccess.Write;
+        }
 
-		private string machineName;
-		private EventLogPermissionAccess permissionAccess;
+        public string MachineName
+        {
+            get { return machineName; }
+            set
+            {
+                ResourcePermissionBase.ValidateMachineName(value);
+                machineName = value;
+            }
+        }
 
-		public EventLogPermissionAttribute (SecurityAction action)
-			: base (action)
-		{
-			machineName = ResourcePermissionBase.Local;
-			permissionAccess = EventLogPermissionAccess.Write;
-		}
+        public EventLogPermissionAccess PermissionAccess
+        {
+            get { return permissionAccess; }
+            set { permissionAccess = value; }
+        }
 
-		public string MachineName {
-			get { return machineName; }
-			set {
-				ResourcePermissionBase.ValidateMachineName (value);
-				machineName = value;
-			}
-		}
-
-		public EventLogPermissionAccess PermissionAccess {
-			get { return permissionAccess; }
-			set { permissionAccess = value; }
-		}
-
-		public override IPermission CreatePermission ()
-		{
-			if (base.Unrestricted) {
-				return new EventLogPermission (PermissionState.Unrestricted); 
-			}
-			return new EventLogPermission (permissionAccess, machineName); 
-		}
-	}
+        public override IPermission CreatePermission()
+        {
+            if (base.Unrestricted)
+            {
+                return new EventLogPermission(PermissionState.Unrestricted);
+            }
+            return new EventLogPermission(permissionAccess, machineName);
+        }
+    }
 }
-

@@ -7,9 +7,11 @@ namespace System.Reflection.Emit
     {
         internal EmptyCAHolder() { }
 
-        object[] ICustomAttributeProvider.GetCustomAttributes(Type attributeType, bool inherit) => Array.Empty<object>();
+        object[] ICustomAttributeProvider.GetCustomAttributes(Type attributeType, bool inherit) =>
+            Array.Empty<object>();
 
-        object[] ICustomAttributeProvider.GetCustomAttributes(bool inherit) => Array.Empty<object>();
+        object[] ICustomAttributeProvider.GetCustomAttributes(bool inherit) =>
+            Array.Empty<object>();
 
         bool ICustomAttributeProvider.IsDefined(Type attributeType, bool inherit) => false;
     }

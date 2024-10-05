@@ -1,12 +1,12 @@
 //Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
 
 
@@ -19,30 +19,37 @@ namespace System.Data.Services.Client
 
     internal static class HttpProcessUtility
     {
-        internal static readonly UTF8Encoding EncodingUtf8NoPreamble = new UTF8Encoding(false, true);
+        internal static readonly UTF8Encoding EncodingUtf8NoPreamble = new UTF8Encoding(
+            false,
+            true
+        );
 
         internal static Encoding FallbackEncoding
         {
-            get
-            {
-                return EncodingUtf8NoPreamble;
-            }
+            get { return EncodingUtf8NoPreamble; }
         }
 
         private static Encoding MissingEncoding
         {
             get
             {
-#if ASTORIA_LIGHT                
+#if ASTORIA_LIGHT
                 return Encoding.UTF8;
 #else
-                return Encoding.GetEncoding("ISO-8859-1", new EncoderExceptionFallback(), new DecoderExceptionFallback());
+                return Encoding.GetEncoding(
+                    "ISO-8859-1",
+                    new EncoderExceptionFallback(),
+                    new DecoderExceptionFallback()
+                );
 #endif
             }
         }
 
-
-        internal static KeyValuePair<string, string>[] ReadContentType(string contentType, out string mime, out Encoding encoding)
+        internal static KeyValuePair<string, string>[] ReadContentType(
+            string contentType,
+            out string mime,
+            out Encoding encoding
+        )
         {
             if (String.IsNullOrEmpty(contentType))
             {
@@ -60,7 +67,8 @@ namespace System.Data.Services.Client
             Debug.Assert(text != null, "text != null");
 
             int separator = text.IndexOf(';');
-            string versionText, libraryName;
+            string versionText,
+                libraryName;
             if (separator >= 0)
             {
                 versionText = text.Substring(0, separator);
@@ -133,13 +141,20 @@ namespace System.Data.Services.Client
                 }
                 catch (ArgumentException)
                 {
-                    throw Error.HttpHeaderFailure(400, Strings.HttpProcessUtility_EncodingNotSupported(name));
+                    throw Error.HttpHeaderFailure(
+                        400,
+                        Strings.HttpProcessUtility_EncodingNotSupported(name)
+                    );
                 }
             }
         }
 
-
-        private static void ReadMediaTypeAndSubtype(string text, ref int textIndex, out string type, out string subType)
+        private static void ReadMediaTypeAndSubtype(
+            string text,
+            ref int textIndex,
+            out string type,
+            out string subType
+        )
         {
             Debug.Assert(text != null, "text != null");
             int textStart = textIndex;
@@ -150,7 +165,10 @@ namespace System.Data.Services.Client
 
             if (text[textIndex] != '/')
             {
-                throw Error.HttpHeaderFailure(400, Strings.HttpProcessUtility_MediaTypeRequiresSlash);
+                throw Error.HttpHeaderFailure(
+                    400,
+                    Strings.HttpProcessUtility_MediaTypeRequiresSlash
+                );
             }
 
             type = text.Substring(textStart, textIndex - textStart);
@@ -161,7 +179,10 @@ namespace System.Data.Services.Client
 
             if (textIndex == subTypeStart)
             {
-                throw Error.HttpHeaderFailure(400, Strings.HttpProcessUtility_MediaTypeRequiresSubType);
+                throw Error.HttpHeaderFailure(
+                    400,
+                    Strings.HttpProcessUtility_MediaTypeRequiresSubType
+                );
             }
 
             subType = text.Substring(subTypeStart, textIndex - subTypeStart);
@@ -181,7 +202,10 @@ namespace System.Data.Services.Client
             {
                 if (text[textIndex] != ';')
                 {
-                    throw Error.HttpHeaderFailure(400, Strings.HttpProcessUtility_MediaTypeRequiresSemicolonBeforeParameter);
+                    throw Error.HttpHeaderFailure(
+                        400,
+                        Strings.HttpProcessUtility_MediaTypeRequiresSemicolonBeforeParameter
+                    );
                 }
 
                 textIndex++;
@@ -220,18 +244,28 @@ namespace System.Data.Services.Client
             return (textIndex == text.Length);
         }
 
-        private static void ReadMediaTypeParameter(string text, ref int textIndex, ref KeyValuePair<string, string>[] parameters)
+        private static void ReadMediaTypeParameter(
+            string text,
+            ref int textIndex,
+            ref KeyValuePair<string, string>[] parameters
+        )
         {
             int startIndex = textIndex;
             if (ReadToken(text, ref textIndex))
             {
-                throw Error.HttpHeaderFailure(400, Strings.HttpProcessUtility_MediaTypeMissingValue);
+                throw Error.HttpHeaderFailure(
+                    400,
+                    Strings.HttpProcessUtility_MediaTypeMissingValue
+                );
             }
 
             string parameterName = text.Substring(startIndex, textIndex - startIndex);
             if (text[textIndex] != '=')
             {
-                throw Error.HttpHeaderFailure(400, Strings.HttpProcessUtility_MediaTypeMissingValue);
+                throw Error.HttpHeaderFailure(
+                    400,
+                    Strings.HttpProcessUtility_MediaTypeMissingValue
+                );
             }
 
             textIndex++;
@@ -244,18 +278,27 @@ namespace System.Data.Services.Client
             }
             else
             {
-                KeyValuePair<string, string>[] grow = new KeyValuePair<string, string>[parameters.Length + 1];
+                KeyValuePair<string, string>[] grow = new KeyValuePair<string, string>[
+                    parameters.Length + 1
+                ];
                 Array.Copy(parameters, grow, parameters.Length);
                 parameters = grow;
             }
 
-            parameters[parameters.Length - 1] = new KeyValuePair<string, string>(parameterName, parameterValue);
+            parameters[parameters.Length - 1] = new KeyValuePair<string, string>(
+                parameterName,
+                parameterValue
+            );
         }
 
-        private static string ReadQuotedParameterValue(string parameterName, string headerText, ref int textIndex)
+        private static string ReadQuotedParameterValue(
+            string parameterName,
+            string headerText,
+            ref int textIndex
+        )
         {
             StringBuilder parameterValue = new StringBuilder();
-            
+
             bool valueIsQuoted = false;
             if (textIndex < headerText.Length)
             {
@@ -274,7 +317,10 @@ namespace System.Data.Services.Client
                 {
                     if (!valueIsQuoted)
                     {
-                        throw Error.HttpHeaderFailure(400, Strings.HttpProcessUtility_EscapeCharWithoutQuotes(parameterName));
+                        throw Error.HttpHeaderFailure(
+                            400,
+                            Strings.HttpProcessUtility_EscapeCharWithoutQuotes(parameterName)
+                        );
                     }
 
                     textIndex++;
@@ -287,13 +333,15 @@ namespace System.Data.Services.Client
 
                     if (textIndex >= headerText.Length)
                     {
-                        throw Error.HttpHeaderFailure(400, Strings.HttpProcessUtility_EscapeCharAtEnd(parameterName));
+                        throw Error.HttpHeaderFailure(
+                            400,
+                            Strings.HttpProcessUtility_EscapeCharAtEnd(parameterName)
+                        );
                     }
 
-                    currentChar = headerText[textIndex];        
+                    currentChar = headerText[textIndex];
                 }
-                else
-                if (!IsHttpToken(currentChar))
+                else if (!IsHttpToken(currentChar))
                 {
                     break;
                 }
@@ -304,27 +352,42 @@ namespace System.Data.Services.Client
 
             if (valueIsQuoted)
             {
-                throw Error.HttpHeaderFailure(400, Strings.HttpProcessUtility_ClosingQuoteNotFound(parameterName));
+                throw Error.HttpHeaderFailure(
+                    400,
+                    Strings.HttpProcessUtility_ClosingQuoteNotFound(parameterName)
+                );
             }
 
             return parameterValue.ToString();
         }
 
-
         private static bool IsHttpSeparator(char c)
         {
-            return
-                c == '(' || c == ')' || c == '<' || c == '>' || c == '@' ||
-                c == ',' || c == ';' || c == ':' || c == '\\' || c == '"' ||
-                c == '/' || c == '[' || c == ']' || c == '?' || c == '=' ||
-                c == '{' || c == '}' || c == ' ' || c == '\x9';
+            return c == '('
+                || c == ')'
+                || c == '<'
+                || c == '>'
+                || c == '@'
+                || c == ','
+                || c == ';'
+                || c == ':'
+                || c == '\\'
+                || c == '"'
+                || c == '/'
+                || c == '['
+                || c == ']'
+                || c == '?'
+                || c == '='
+                || c == '{'
+                || c == '}'
+                || c == ' '
+                || c == '\x9';
         }
 
         private static bool IsHttpToken(char c)
         {
             return c < '\x7F' && c > '\x1F' && !IsHttpSeparator(c);
         }
-
 
         [DebuggerDisplay("MediaType [{type}/{subType}]")]
         private sealed class MediaType
@@ -335,7 +398,11 @@ namespace System.Data.Services.Client
 
             private readonly string type;
 
-            internal MediaType(string type, string subType, KeyValuePair<string, string>[] parameters)
+            internal MediaType(
+                string type,
+                string subType,
+                KeyValuePair<string, string>[] parameters
+            )
             {
                 Debug.Assert(type != null, "type != null");
                 Debug.Assert(subType != null, "subType != null");
@@ -355,14 +422,19 @@ namespace System.Data.Services.Client
                 get { return this.parameters; }
             }
 
-
             internal Encoding SelectEncoding()
             {
                 if (this.parameters != null)
                 {
                     foreach (KeyValuePair<string, string> parameter in this.parameters)
                     {
-                        if (String.Equals(parameter.Key, XmlConstants.HttpCharsetParameter, StringComparison.OrdinalIgnoreCase))
+                        if (
+                            String.Equals(
+                                parameter.Key,
+                                XmlConstants.HttpCharsetParameter,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                         {
                             string encodingName = parameter.Value.Trim();
                             if (encodingName.Length > 0)
@@ -373,9 +445,21 @@ namespace System.Data.Services.Client
                     }
                 }
 
-                if (String.Equals(this.type, XmlConstants.MimeTextType, StringComparison.OrdinalIgnoreCase))
+                if (
+                    String.Equals(
+                        this.type,
+                        XmlConstants.MimeTextType,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
-                    if (String.Equals(this.subType, XmlConstants.MimeXmlSubType, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        String.Equals(
+                            this.subType,
+                            XmlConstants.MimeXmlSubType,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         return null;
                     }
@@ -384,8 +468,18 @@ namespace System.Data.Services.Client
                         return MissingEncoding;
                     }
                 }
-                else if (String.Equals(this.type, XmlConstants.MimeApplicationType, StringComparison.OrdinalIgnoreCase) &&
-                    String.Equals(this.subType, XmlConstants.MimeJsonSubType, StringComparison.OrdinalIgnoreCase))
+                else if (
+                    String.Equals(
+                        this.type,
+                        XmlConstants.MimeApplicationType,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    && String.Equals(
+                        this.subType,
+                        XmlConstants.MimeJsonSubType,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     return FallbackEncoding;
                 }

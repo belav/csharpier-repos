@@ -43,15 +43,24 @@ public class NoContentResultTests
     public void PopulateMetadata_AddsResponseTypeMetadata()
     {
         // Arrange
-        NoContent MyApi() { throw new NotImplementedException(); }
+        NoContent MyApi()
+        {
+            throw new NotImplementedException();
+        }
         var metadata = new List<object>();
-        var builder = new RouteEndpointBuilder(requestDelegate: null, RoutePatternFactory.Parse("/"), order: 0);
+        var builder = new RouteEndpointBuilder(
+            requestDelegate: null,
+            RoutePatternFactory.Parse("/"),
+            order: 0
+        );
 
         // Act
         PopulateMetadata<NoContent>(((Delegate)MyApi).GetMethodInfo(), builder);
 
         // Assert
-        var producesResponseTypeMetadata = builder.Metadata.OfType<ProducesResponseTypeMetadata>().Last();
+        var producesResponseTypeMetadata = builder
+            .Metadata.OfType<ProducesResponseTypeMetadata>()
+            .Last();
         Assert.Equal(StatusCodes.Status204NoContent, producesResponseTypeMetadata.StatusCode);
         Assert.Equal(typeof(void), producesResponseTypeMetadata.Type);
     }
@@ -64,15 +73,38 @@ public class NoContentResultTests
         HttpContext httpContext = null;
 
         // Act & Assert
-        Assert.ThrowsAsync<ArgumentNullException>("httpContext", () => result.ExecuteAsync(httpContext));
+        Assert.ThrowsAsync<ArgumentNullException>(
+            "httpContext",
+            () => result.ExecuteAsync(httpContext)
+        );
     }
 
     [Fact]
     public void PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull()
     {
         // Act & Assert
-        Assert.Throws<ArgumentNullException>("method", () => PopulateMetadata<NoContent>(null, new RouteEndpointBuilder(requestDelegate: null, RoutePatternFactory.Parse("/"), order: 0)));
-        Assert.Throws<ArgumentNullException>("builder", () => PopulateMetadata<NoContent>(((Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull).GetMethodInfo(), null));
+        Assert.Throws<ArgumentNullException>(
+            "method",
+            () =>
+                PopulateMetadata<NoContent>(
+                    null,
+                    new RouteEndpointBuilder(
+                        requestDelegate: null,
+                        RoutePatternFactory.Parse("/"),
+                        order: 0
+                    )
+                )
+        );
+        Assert.Throws<ArgumentNullException>(
+            "builder",
+            () =>
+                PopulateMetadata<NoContent>(
+                    (
+                        (Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull
+                    ).GetMethodInfo(),
+                    null
+                )
+        );
     }
 
     [Fact]

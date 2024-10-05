@@ -14,7 +14,8 @@ namespace System.Web.Http.Cors.Test
         {
             Assert.ThrowsArgumentNull(
                 () => CorsHttpRequestMessageExtensions.GetCorsRequestContext(null),
-                "request");
+                "request"
+            );
         }
 
         [Fact]
@@ -28,7 +29,10 @@ namespace System.Web.Http.Cors.Test
         [Fact]
         public void GetCorsRequestContext_CachesTheContext()
         {
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, "http://example.com/test");
+            HttpRequestMessage request = new HttpRequestMessage(
+                HttpMethod.Put,
+                "http://example.com/test"
+            );
             request.Headers.Add("Origin", "foo");
             request.Headers.Add("Host", "example.com");
             request.Headers.Add("Access-Control-Request-Method", "bar");
@@ -42,7 +46,10 @@ namespace System.Web.Http.Cors.Test
         [Fact]
         public void GetCorsRequestContext_ReturnsHost()
         {
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, "http://example.com/test");
+            HttpRequestMessage request = new HttpRequestMessage(
+                HttpMethod.Put,
+                "http://example.com/test"
+            );
             request.Headers.Add("Origin", "foo");
             request.Headers.Add("Host", "example.com");
 
@@ -54,7 +61,10 @@ namespace System.Web.Http.Cors.Test
         [Fact]
         public void GetCorsRequestContext_ReturnsHttpMethod()
         {
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Options, "http://example.com/test");
+            HttpRequestMessage request = new HttpRequestMessage(
+                HttpMethod.Options,
+                "http://example.com/test"
+            );
             request.Headers.Add("Origin", "foo");
 
             CorsRequestContext result = request.GetCorsRequestContext();
@@ -65,7 +75,10 @@ namespace System.Web.Http.Cors.Test
         [Fact]
         public void GetCorsRequestContext_ReturnsOrigin()
         {
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, "http://example.com/test");
+            HttpRequestMessage request = new HttpRequestMessage(
+                HttpMethod.Put,
+                "http://example.com/test"
+            );
             request.Headers.Add("Origin", "foo");
 
             CorsRequestContext result = request.GetCorsRequestContext();
@@ -76,7 +89,10 @@ namespace System.Web.Http.Cors.Test
         [Fact]
         public void GetCorsRequestContext_ReturnsRequestMethod()
         {
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, "http://example.com/test");
+            HttpRequestMessage request = new HttpRequestMessage(
+                HttpMethod.Put,
+                "http://example.com/test"
+            );
             request.Headers.Add("Origin", "foo");
             request.Headers.Add("Access-Control-Request-Method", "bar");
 
@@ -88,7 +104,10 @@ namespace System.Web.Http.Cors.Test
         [Fact]
         public void GetCorsRequestContext_RetunsEmptyRequestHeaders()
         {
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, "http://example.com/test");
+            HttpRequestMessage request = new HttpRequestMessage(
+                HttpMethod.Put,
+                "http://example.com/test"
+            );
             request.Headers.Add("Origin", "foo");
 
             CorsRequestContext result = request.GetCorsRequestContext();
@@ -99,7 +118,10 @@ namespace System.Web.Http.Cors.Test
         [Fact]
         public void GetCorsRequestContext_RetunsRequestHeaders()
         {
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, "http://example.com/test");
+            HttpRequestMessage request = new HttpRequestMessage(
+                HttpMethod.Put,
+                "http://example.com/test"
+            );
             request.Headers.Add("Origin", "foo");
             request.Headers.Add("Access-Control-Request-Headers", "foo, bar");
 
@@ -113,7 +135,10 @@ namespace System.Web.Http.Cors.Test
         [Fact]
         public void GetCorsRequestContext_RetunsRequestHeadersFromMultipleAccessControlRequestHeaders()
         {
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, "http://example.com/test");
+            HttpRequestMessage request = new HttpRequestMessage(
+                HttpMethod.Put,
+                "http://example.com/test"
+            );
             request.Headers.Add("Origin", "foo");
             request.Headers.Add("Access-Control-Request-Headers", "foo, bar");
             request.Headers.Add("Access-Control-Request-Headers", "extra,baz");
@@ -131,10 +156,13 @@ namespace System.Web.Http.Cors.Test
         public void GetCorsRequestContext_ReturnsHttpRequestInThePropertiesCollection()
         {
             // Arrange
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Options, "http://example.com/test");
+            HttpRequestMessage request = new HttpRequestMessage(
+                HttpMethod.Options,
+                "http://example.com/test"
+            );
             request.Headers.Add("Origin", "foo");
 
-            // Act 
+            // Act
             CorsRequestContext result = request.GetCorsRequestContext();
 
             // Assert

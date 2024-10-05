@@ -12,7 +12,9 @@ using Xunit.Sdk;
 
 namespace Microsoft.CodeAnalysis.Tools.Tests.XUnit
 {
-    [DebuggerDisplay(@"\{ class = {TestMethod.TestClass.Class.Name}, method = {TestMethod.Method.Name}, display = {DisplayName}, skip = {SkipReason} \}")]
+    [DebuggerDisplay(
+        @"\{ class = {TestMethod.TestClass.Class.Name}, method = {TestMethod.Method.Name}, display = {DisplayName}, skip = {SkipReason} \}"
+    )]
     public sealed class MSBuildTestCase : LongLivedMarshalByRefObject, IXunitTestCase
     {
         private IXunitTestCase _testCase;
@@ -48,12 +50,22 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.XUnit
             IMessageBus messageBus,
             object[] constructorArguments,
             ExceptionAggregator aggregator,
-            CancellationTokenSource cancellationTokenSource)
+            CancellationTokenSource cancellationTokenSource
+        )
         {
             await MSBuildWorkspaceLoader.Guard.WaitAsync();
             try
             {
-                var runner = new XunitTestCaseRunner(this, DisplayName, SkipReason, constructorArguments, TestMethodArguments, messageBus, aggregator, cancellationTokenSource);
+                var runner = new XunitTestCaseRunner(
+                    this,
+                    DisplayName,
+                    SkipReason,
+                    constructorArguments,
+                    TestMethodArguments,
+                    messageBus,
+                    aggregator,
+                    cancellationTokenSource
+                );
                 return await runner.RunAsync();
             }
             finally

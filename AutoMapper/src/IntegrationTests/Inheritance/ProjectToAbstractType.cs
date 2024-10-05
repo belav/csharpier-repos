@@ -28,30 +28,34 @@ public class ProjectToAbstractType : IntegrationTest<ProjectToAbstractType.Datab
     {
         protected override void Seed(Context context)
         {
-            context.EntityA.AddRange(new[]
-            {
-                new DbEntityA { Name = "Alain Brito"},
-                new DbEntityA { Name = "Jimmy Bogard"},
-                new DbEntityA { Name = "Bill Gates"}
-            });
+            context.EntityA.AddRange(
+                new[]
+                {
+                    new DbEntityA { Name = "Alain Brito" },
+                    new DbEntityA { Name = "Jimmy Bogard" },
+                    new DbEntityA { Name = "Bill Gates" },
+                }
+            );
             base.Seed(context);
         }
     }
+
     public class Context : LocalDbContext
     {
         public DbSet<DbEntityA> EntityA { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<DbEntityA, ITypeA>().As<ConcreteTypeA>();
-        cfg.CreateProjection<DbEntityA, ConcreteTypeA>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<DbEntityA, ITypeA>().As<ConcreteTypeA>();
+            cfg.CreateProjection<DbEntityA, ConcreteTypeA>();
+        });
 
     [Fact]
     public void Should_project_to_abstract_type()
     {
-        using(var context = new Context())
+        using (var context = new Context())
         {
             _destinations = ProjectTo<ITypeA>(context.EntityA).ToArray();
         }
@@ -69,6 +73,7 @@ public class ProjectToInterface : IntegrationTest<ProjectToInterface.DatabaseIni
         {
             public Guid Id { get; set; }
         }
+
         public class Calendar : BaseDbObject
         {
             public string Name { get; set; }
@@ -80,6 +85,7 @@ public class ProjectToInterface : IntegrationTest<ProjectToInterface.DatabaseIni
             public virtual Calendar Reference { get; set; }
             public virtual ICollection<CalendarDay> Days { get; set; }
         }
+
         public class CalendarDay : BaseDbObject
         {
             public DateTime Date { get; set; }
@@ -151,14 +157,18 @@ public class ProjectToInterface : IntegrationTest<ProjectToInterface.DatabaseIni
 
         public virtual ICollection<ICalendarDay> Days { get; set; }
 
-        internal Calendar()
-        {
+        internal Calendar() { }
 
-        }
-
-        public Calendar(string name, Guid businessUnitId, ICalendar reference, DateTime? validFrom, DateTime? validTo)
+        public Calendar(
+            string name,
+            Guid businessUnitId,
+            ICalendar reference,
+            DateTime? validFrom,
+            DateTime? validTo
+        )
         {
-            if(businessUnitId == Guid.Empty) throw new ArgumentException();
+            if (businessUnitId == Guid.Empty)
+                throw new ArgumentException();
 
             Name = name;
             BusinessUnitId = businessUnitId;
@@ -177,10 +187,7 @@ public class ProjectToInterface : IntegrationTest<ProjectToInterface.DatabaseIni
         public bool Cancel { get; private set; }
         public bool Deleted { get; private set; }
 
-        internal CalendarDay()
-        {
-
-        }
+        internal CalendarDay() { }
 
         public CalendarDay(DateTime date, IValidityDayType dayType, ICalendar calendar)
         {
@@ -210,10 +217,7 @@ public class ProjectToInterface : IntegrationTest<ProjectToInterface.DatabaseIni
 
         public ICollection<ICalendarDay> Days { get; internal set; } = new List<ICalendarDay>();
 
-        internal ValidityDayType()
-        {
-
-        }
+        internal ValidityDayType() { }
 
         public ValidityDayType(string name, string acronym)
         {
@@ -229,7 +233,7 @@ public class ProjectToInterface : IntegrationTest<ProjectToInterface.DatabaseIni
 
         public IEnumerable<ICalendarDay> GetCalendarDays(ICalendar calendar)
         {
-            if(calendar == null)
+            if (calendar == null)
                 throw new ArgumentNullException();
 
             return Days.Where(d => d.Calendar == calendar);
@@ -245,11 +249,7 @@ public class ProjectToInterface : IntegrationTest<ProjectToInterface.DatabaseIni
 
         private static List<DataLayer.Calendar> CreateCalendarList()
         {
-            var dayType = new DataLayer.ValidityDayType()
-            {
-                Name = "WorkDays",
-                Acronym = "WD",
-            };
+            var dayType = new DataLayer.ValidityDayType() { Name = "WorkDays", Acronym = "WD" };
 
             var day = new DataLayer.CalendarDay()
             {
@@ -257,7 +257,7 @@ public class ProjectToInterface : IntegrationTest<ProjectToInterface.DatabaseIni
                 Cancel = true,
                 Deleted = false,
                 DayType = dayType,
-                Date = DateTime.Parse("2018-03-31")
+                Date = DateTime.Parse("2018-03-31"),
             };
 
             var cal1 = new DataLayer.Calendar()
@@ -267,10 +267,7 @@ public class ProjectToInterface : IntegrationTest<ProjectToInterface.DatabaseIni
                 BusinessUnitId = Guid.NewGuid(),
                 ValidFrom = DateTime.Parse("2018-01-01"),
                 ValidTo = null,
-                Days = new Collection<DataLayer.CalendarDay>()
-                {
-                    day
-                }
+                Days = new Collection<DataLayer.CalendarDay>() { day },
             };
 
             var cal2 = new DataLayer.Calendar()
@@ -282,13 +279,10 @@ public class ProjectToInterface : IntegrationTest<ProjectToInterface.DatabaseIni
                 BusinessUnitId = Guid.NewGuid(),
                 ValidFrom = DateTime.Parse("2018-01-01"),
                 ValidTo = null,
-                Days = new Collection<DataLayer.CalendarDay>()
+                Days = new Collection<DataLayer.CalendarDay>(),
             };
 
-            var dataCalendars = new List<DataLayer.Calendar>()
-            {
-                cal1, cal2
-            };
+            var dataCalendars = new List<DataLayer.Calendar>() { cal1, cal2 };
             return dataCalendars;
         }
     }
@@ -298,12 +292,13 @@ public class ProjectToInterface : IntegrationTest<ProjectToInterface.DatabaseIni
         public DbSet<DataLayer.Calendar> Calendars { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => cfg.AddProfile<MyProfile>());
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg => cfg.AddProfile<MyProfile>());
 
     [Fact]
     public void Should_project_to_abstract_type()
     {
-        using(var context = new Context())
+        using (var context = new Context())
         {
             var domainCalendars = ProjectTo<ICalendar>(context.Calendars).ToList();
             domainCalendars.Count.ShouldBe(2);
@@ -324,7 +319,8 @@ public class ProjectToInterface : IntegrationTest<ProjectToInterface.DatabaseIni
             //.ForMember(d => d.DayType, opt => opt.Ignore());
 
             //Include to mapping -> this causes the exception!
-            CreateMap<DataLayer.ValidityDayType, IValidityDayType>().As<ValidityDayType>();
+            CreateMap<DataLayer.ValidityDayType, IValidityDayType>()
+                .As<ValidityDayType>();
             CreateProjection<DataLayer.ValidityDayType, ValidityDayType>();
 
             CreateProjection<ICalendar, DataLayer.Calendar>();

@@ -11,7 +11,8 @@ namespace Test.Cryptography
 {
     internal static class PlatformSupport
     {
-        private static readonly Dictionary<CngAlgorithm, bool> s_platformCryptoSupportedAlgorithms = new();
+        private static readonly Dictionary<CngAlgorithm, bool> s_platformCryptoSupportedAlgorithms =
+            new();
 
         private static bool PlatformCryptoProviderFunctional(CngAlgorithm algorithm)
         {
@@ -43,13 +44,14 @@ namespace Test.Cryptography
                 try
                 {
                     key = CngKey.Create(
-                            algorithm,
-                            $"{nameof(PlatformCryptoProviderFunctional)}{algorithm.Algorithm}Key",
+                        algorithm,
+                        $"{nameof(PlatformCryptoProviderFunctional)}{algorithm.Algorithm}Key",
                         new CngKeyCreationParameters
                         {
                             Provider = new CngProvider("Microsoft Platform Crypto Provider"),
                             KeyCreationOptions = CngKeyCreationOptions.OverwriteExistingKey,
-                        });
+                        }
+                    );
 
                     return true;
                 }
@@ -65,23 +67,30 @@ namespace Test.Cryptography
         }
 
         // Platforms that use Apple Cryptography
-        internal const TestPlatforms AppleCrypto = TestPlatforms.OSX | TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst;
-        internal const TestPlatforms MobileAppleCrypto = TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst;
+        internal const TestPlatforms AppleCrypto =
+            TestPlatforms.OSX | TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst;
+        internal const TestPlatforms MobileAppleCrypto =
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst;
 
         // Platforms that support OpenSSL - all Unix except OSX/iOS/tvOS/MacCatalyst, Android, and Browser
-        internal const TestPlatforms OpenSSL = TestPlatforms.AnyUnix & ~(AppleCrypto | TestPlatforms.Android | TestPlatforms.Browser);
+        internal const TestPlatforms OpenSSL =
+            TestPlatforms.AnyUnix & ~(AppleCrypto | TestPlatforms.Android | TestPlatforms.Browser);
 
         // Whether or not the current platform supports RC2
         internal static readonly bool IsRC2Supported = !PlatformDetection.IsAndroid;
 
 #if NETCOREAPP
-        internal static readonly bool IsAndroidVersionAtLeast31 = OperatingSystem.IsAndroidVersionAtLeast(31);
+        internal static readonly bool IsAndroidVersionAtLeast31 =
+            OperatingSystem.IsAndroidVersionAtLeast(31);
 #else
         internal static readonly bool IsAndroidVersionAtLeast31 = false;
 #endif
 
-        internal static bool PlatformCryptoProviderFunctionalP256 => PlatformCryptoProviderFunctional(CngAlgorithm.ECDsaP256);
-        internal static bool PlatformCryptoProviderFunctionalP384 => PlatformCryptoProviderFunctional(CngAlgorithm.ECDsaP384);
-        internal static bool PlatformCryptoProviderFunctionalRsa => PlatformCryptoProviderFunctional(CngAlgorithm.Rsa);
+        internal static bool PlatformCryptoProviderFunctionalP256 =>
+            PlatformCryptoProviderFunctional(CngAlgorithm.ECDsaP256);
+        internal static bool PlatformCryptoProviderFunctionalP384 =>
+            PlatformCryptoProviderFunctional(CngAlgorithm.ECDsaP384);
+        internal static bool PlatformCryptoProviderFunctionalRsa =>
+            PlatformCryptoProviderFunctional(CngAlgorithm.Rsa);
     }
 }

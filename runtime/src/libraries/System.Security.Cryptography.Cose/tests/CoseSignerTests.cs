@@ -19,7 +19,11 @@ namespace System.Security.Cryptography.Cose.Tests
         [Fact]
         public void CoseSigner_RSA_Success()
         {
-            var signer = new CoseSigner(RSA.Create(), RSASignaturePadding.Pkcs1, HashAlgorithmName.SHA256);
+            var signer = new CoseSigner(
+                RSA.Create(),
+                RSASignaturePadding.Pkcs1,
+                HashAlgorithmName.SHA256
+            );
             Assert.NotNull(signer.ProtectedHeaders);
             Assert.NotNull(signer.UnprotectedHeaders);
             Assert.NotNull(signer.RSASignaturePadding);
@@ -29,7 +33,10 @@ namespace System.Security.Cryptography.Cose.Tests
         public void CoseSigner_RSAKeyNeedsSignaturePadding()
         {
             RSA rsa = RSA.Create();
-            Assert.Throws<ArgumentException>("key", () => new CoseSigner(rsa, HashAlgorithmName.SHA256));
+            Assert.Throws<ArgumentException>(
+                "key",
+                () => new CoseSigner(rsa, HashAlgorithmName.SHA256)
+            );
 
             var signer = new CoseSigner(rsa, RSASignaturePadding.Pss, HashAlgorithmName.SHA256);
             Assert.Equal(signer.RSASignaturePadding, RSASignaturePadding.Pss);
@@ -38,20 +45,32 @@ namespace System.Security.Cryptography.Cose.Tests
         [Fact]
         public void CoseSigner_UnsupportedKeyThrows()
         {
-            Assert.Throws<ArgumentException>("key", () => new CoseSigner(ECDiffieHellman.Create(), HashAlgorithmName.SHA256));
+            Assert.Throws<ArgumentException>(
+                "key",
+                () => new CoseSigner(ECDiffieHellman.Create(), HashAlgorithmName.SHA256)
+            );
         }
 
         [Fact]
         public void CoseSigner_NullKey()
         {
-            Assert.Throws<ArgumentNullException>("key", () => new CoseSigner(null!, HashAlgorithmName.SHA256));
-            Assert.Throws<ArgumentNullException>("key", () => new CoseSigner(null!, RSASignaturePadding.Pss, HashAlgorithmName.SHA256));
+            Assert.Throws<ArgumentNullException>(
+                "key",
+                () => new CoseSigner(null!, HashAlgorithmName.SHA256)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "key",
+                () => new CoseSigner(null!, RSASignaturePadding.Pss, HashAlgorithmName.SHA256)
+            );
         }
 
         [Fact]
         public void CoseSigner_NullSignaturePadding()
         {
-            Assert.Throws<ArgumentNullException>("signaturePadding", () => new CoseSigner(RSA.Create(), null!, HashAlgorithmName.SHA256));
+            Assert.Throws<ArgumentNullException>(
+                "signaturePadding",
+                () => new CoseSigner(RSA.Create(), null!, HashAlgorithmName.SHA256)
+            );
         }
     }
 }

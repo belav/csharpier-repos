@@ -8,20 +8,26 @@ namespace System.Runtime.Serialization
 
     class Attributes
     {
-        [Fx.Tag.SecurityNote(Critical = "Static field used to store the attribute names to read during deserialization."
-            + " Static fields are marked SecurityCritical or readonly to prevent"
-            + " data from being modified or leaked to other components in appdomain.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Static field used to store the attribute names to read during deserialization."
+                + " Static fields are marked SecurityCritical or readonly to prevent"
+                + " data from being modified or leaked to other components in appdomain."
+        )]
         [SecurityCritical]
         static XmlDictionaryString[] serializationLocalNames;
 
-        [Fx.Tag.SecurityNote(Critical = "Static field used to store the attribute names to read during deserialization."
-            + " Static fields are marked SecurityCritical or readonly to prevent"
-            + " data from being modified or leaked to other components in appdomain.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Static field used to store the attribute names to read during deserialization."
+                + " Static fields are marked SecurityCritical or readonly to prevent"
+                + " data from being modified or leaked to other components in appdomain."
+        )]
         [SecurityCritical]
         static XmlDictionaryString[] schemaInstanceLocalNames;
 
-        [Fx.Tag.SecurityNote(Critical = "Initializes critical static fields.",
-            Safe = "Doesn't leak anything.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Initializes critical static fields.",
+            Safe = "Doesn't leak anything."
+        )]
         [SecuritySafeCritical]
         static Attributes()
         {
@@ -32,13 +38,13 @@ namespace System.Runtime.Serialization
                 DictionaryGlobals.RefLocalName,
                 DictionaryGlobals.ClrTypeLocalName,
                 DictionaryGlobals.ClrAssemblyLocalName,
-                DictionaryGlobals.ISerializableFactoryTypeLocalName
+                DictionaryGlobals.ISerializableFactoryTypeLocalName,
             };
 
             schemaInstanceLocalNames = new XmlDictionaryString[]
             {
                 DictionaryGlobals.XsiNilLocalName,
-                DictionaryGlobals.XsiTypeLocalName
+                DictionaryGlobals.XsiTypeLocalName,
             };
         }
 
@@ -63,7 +69,12 @@ namespace System.Runtime.Serialization
 
             while (reader.MoveToNextAttribute())
             {
-                switch (reader.IndexOfLocalName(serializationLocalNames, DictionaryGlobals.SerializationNamespace))
+                switch (
+                    reader.IndexOfLocalName(
+                        serializationLocalNames,
+                        DictionaryGlobals.SerializationNamespace
+                    )
+                )
                 {
                     case 0:
                         ReadId(reader);
@@ -84,7 +95,12 @@ namespace System.Runtime.Serialization
                         ReadFactoryType(reader);
                         break;
                     default:
-                        switch (reader.IndexOfLocalName(schemaInstanceLocalNames, DictionaryGlobals.SchemaInstanceNamespace))
+                        switch (
+                            reader.IndexOfLocalName(
+                                schemaInstanceLocalNames,
+                                DictionaryGlobals.SchemaInstanceNamespace
+                            )
+                        )
                         {
                             case 0:
                                 ReadXsiNil(reader);
@@ -125,7 +141,11 @@ namespace System.Runtime.Serialization
             Id = reader.ReadContentAsString();
             if (string.IsNullOrEmpty(Id))
             {
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.GetString(SR.InvalidXsIdDefinition, Id)));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        SR.GetString(SR.InvalidXsIdDefinition, Id)
+                    )
+                );
             }
         }
 
@@ -134,7 +154,11 @@ namespace System.Runtime.Serialization
             Ref = reader.ReadContentAsString();
             if (string.IsNullOrEmpty(Ref))
             {
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.GetString(SR.InvalidXsRefDefinition, Ref)));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        SR.GetString(SR.InvalidXsRefDefinition, Ref)
+                    )
+                );
             }
         }
 
@@ -147,22 +171,37 @@ namespace System.Runtime.Serialization
         {
             ArraySZSize = reader.ReadContentAsInt();
             if (ArraySZSize < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.GetString(SR.InvalidSizeDefinition, ArraySZSize)));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        SR.GetString(SR.InvalidSizeDefinition, ArraySZSize)
+                    )
+                );
         }
 
         void ReadXsiType(XmlReaderDelegator reader)
         {
             string xsiTypeString = reader.Value;
             if (xsiTypeString != null && xsiTypeString.Length > 0)
-                XmlObjectSerializerReadContext.ParseQualifiedName(xsiTypeString, reader, out XsiTypeName, out XsiTypeNamespace, out XsiTypePrefix);
+                XmlObjectSerializerReadContext.ParseQualifiedName(
+                    xsiTypeString,
+                    reader,
+                    out XsiTypeName,
+                    out XsiTypeNamespace,
+                    out XsiTypePrefix
+                );
         }
 
         void ReadFactoryType(XmlReaderDelegator reader)
         {
             string factoryTypeString = reader.Value;
             if (factoryTypeString != null && factoryTypeString.Length > 0)
-                XmlObjectSerializerReadContext.ParseQualifiedName(factoryTypeString, reader, out FactoryTypeName, out FactoryTypeNamespace, out FactoryTypePrefix);
+                XmlObjectSerializerReadContext.ParseQualifiedName(
+                    factoryTypeString,
+                    reader,
+                    out FactoryTypeName,
+                    out FactoryTypeNamespace,
+                    out FactoryTypePrefix
+                );
         }
-
     }
 }

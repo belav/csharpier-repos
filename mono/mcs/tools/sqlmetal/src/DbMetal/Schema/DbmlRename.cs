@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System.Linq;
@@ -35,7 +35,11 @@ namespace DbMetal.Schema
     /// It is based on DBML format (but simpler).
     /// </summary>
     //[XmlRoot("Database")]
-    [XmlRoot("Database", Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007", IsNullable = false)]
+    [XmlRoot(
+        "Database",
+        Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007",
+        IsNullable = false
+    )]
     class DbmlRename : INameAliases
     {
         [XmlNamespaceDeclarations]
@@ -88,21 +92,11 @@ namespace DbMetal.Schema
             [XmlAttribute("IsDbGenerated")]
             public bool IsDbGeneratedXml
             {
-                get
-                {
-                    return IsDbGenerated.HasValue ? IsDbGenerated.Value : default(bool);
-                }
-                set
-                {
-                    IsDbGenerated = value;
-                }
+                get { return IsDbGenerated.HasValue ? IsDbGenerated.Value : default(bool); }
+                set { IsDbGenerated = value; }
             }
 
-            public bool? IsDbGenerated
-            {
-                get;
-                set;
-            }
+            public bool? IsDbGenerated { get; set; }
 
             [XmlAttribute("AutoSync")]
             public DbLinq.Schema.Dbml.AutoSync AutoSyncXml
@@ -111,17 +105,10 @@ namespace DbMetal.Schema
                 {
                     return AutoSync.HasValue ? AutoSync.Value : DbLinq.Schema.Dbml.AutoSync.Default;
                 }
-                set
-                {
-                    AutoSync = value;
-                }
+                set { AutoSync = value; }
             }
 
-            public DbLinq.Schema.Dbml.AutoSync? AutoSync
-            {
-                get;
-                set;
-            }
+            public DbLinq.Schema.Dbml.AutoSync? AutoSync { get; set; }
         }
 
         protected Table GetTable(string table, string schema)
@@ -182,7 +169,11 @@ namespace DbMetal.Schema
             return c.IsDbGenerated;
         }
 
-        public DbLinq.Schema.Dbml.AutoSync? GetColumnAutoSync(string column, string table, string schema)
+        public DbLinq.Schema.Dbml.AutoSync? GetColumnAutoSync(
+            string column,
+            string table,
+            string schema
+        )
         {
             var c = GetColumn(column, table, schema);
             if (c == null)

@@ -19,12 +19,12 @@ namespace Microsoft.CodeAnalysis.Collections
     /// fast. Internally a ConcurrentDictionary is used to cache lookup results. The client provides
     /// two delegates to perform lookups: One that maps a key to a IEnumerable of values, and one
     /// that provides all keys.
-    /// 
+    ///
     /// The client must provide an IEqualityComparer used for comparing keys. Failed lookups are
     /// cached, but that has the disadvantage that every different failed lookup will consume a
     /// small amount of extra memory. However, that memory can be reclaimed by forcing a full
     /// population of the cache.
-    /// 
+    ///
     /// Thread safe.
     /// </summary>
     internal class CachingDictionary<TKey, TElement>
@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Collections
 
         // This is a special sentinel value that is placed inside the map to indicate that a key was looked
         // up, but not found.
-        private static readonly ImmutableArray<TElement> s_emptySentinel = ImmutableArray<TElement>.Empty;
+        private static readonly ImmutableArray<TElement> s_emptySentinel =
+            ImmutableArray<TElement>.Empty;
 
         /// <summary>
         /// Create a CachingLookup.
@@ -55,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Collections
         public CachingDictionary(
             Func<TKey, ImmutableArray<TElement>> getElementsOfKey,
             Func<IEqualityComparer<TKey>, SegmentedHashSet<TKey>> getKeys,
-            IEqualityComparer<TKey> comparer)
+            IEqualityComparer<TKey> comparer
+        )
         {
             _getElementsOfKey = getElementsOfKey;
             _getKeys = getKeys;
@@ -71,17 +73,14 @@ namespace Microsoft.CodeAnalysis.Collections
         }
 
         /// <summary>
-        /// Get the values associated with a key. 
+        /// Get the values associated with a key.
         /// </summary>
         /// <param name="key">Key to look up.</param>
         /// <returns>All values associated with key. Returns an empty IEnumerable if
         /// no values are associated. Never returns null.</returns>
         public ImmutableArray<TElement> this[TKey key]
         {
-            get
-            {
-                return this.GetOrCreateValue(key);
-            }
+            get { return this.GetOrCreateValue(key); }
         }
 
         /// <summary>
@@ -90,10 +89,7 @@ namespace Microsoft.CodeAnalysis.Collections
         /// </summary>
         public int Count
         {
-            get
-            {
-                return this.EnsureFullyPopulated().Count;
-            }
+            get { return this.EnsureFullyPopulated().Count; }
         }
 
         /// <summary>
@@ -102,10 +98,7 @@ namespace Microsoft.CodeAnalysis.Collections
         /// </summary>
         public IEnumerable<TKey> Keys
         {
-            get
-            {
-                return this.EnsureFullyPopulated().Keys;
-            }
+            get { return this.EnsureFullyPopulated().Keys; }
         }
 
         /// <summary>
@@ -127,14 +120,20 @@ namespace Microsoft.CodeAnalysis.Collections
         /// <returns>The concurrent dictionary</returns>
         private ConcurrentDictionary<TKey, ImmutableArray<TElement>> CreateConcurrentDictionary()
         {
-            return new ConcurrentDictionary<TKey, ImmutableArray<TElement>>(concurrencyLevel: 2, capacity: 0, comparer: _comparer);
+            return new ConcurrentDictionary<TKey, ImmutableArray<TElement>>(
+                concurrencyLevel: 2,
+                capacity: 0,
+                comparer: _comparer
+            );
         }
 
         /// <summary>
         /// Create a dictionary instance suitable for use as the fully populated map.
         /// </summary>
         /// <returns>A new, empty dictionary, suitable for use as the fully populated map.</returns>
-        private IDictionary<TKey, ImmutableArray<TElement>> CreateDictionaryForFullyPopulatedMap(int capacity)
+        private IDictionary<TKey, ImmutableArray<TElement>> CreateDictionaryForFullyPopulatedMap(
+            int capacity
+        )
         {
             // CONSIDER: If capacity is small, consider using a more frugal data structure.
             return new Dictionary<TKey, ImmutableArray<TElement>>(capacity, _comparer);
@@ -182,7 +181,10 @@ namespace Microsoft.CodeAnalysis.Collections
         /// <param name="map">The concurrent map to augment.</param>
         /// <param name="key">The key of the new entry.</param>
         /// <returns>The added entry. If there was a race, and another thread beat this one, then this returns the previously added entry.</returns>
-        private ImmutableArray<TElement> AddToConcurrentMap(ConcurrentDictionary<TKey, ImmutableArray<TElement>> map, TKey key)
+        private ImmutableArray<TElement> AddToConcurrentMap(
+            ConcurrentDictionary<TKey, ImmutableArray<TElement>> map,
+            TKey key
+        )
         {
             var elements = _getElementsOfKey(key);
 
@@ -201,9 +203,13 @@ namespace Microsoft.CodeAnalysis.Collections
         /// </summary>
         /// <param name="existingMap">The map to test.</param>
         /// <returns>true if the map is fully populated.</returns>
-        private static bool IsNotFullyPopulatedMap([NotNullWhen(returnValue: false)] IDictionary<TKey, ImmutableArray<TElement>>? existingMap)
+        private static bool IsNotFullyPopulatedMap(
+            [NotNullWhen(returnValue: false)]
+                IDictionary<TKey, ImmutableArray<TElement>>? existingMap
+        )
         {
-            return existingMap == null || existingMap is ConcurrentDictionary<TKey, ImmutableArray<TElement>>;
+            return existingMap == null
+                || existingMap is ConcurrentDictionary<TKey, ImmutableArray<TElement>>;
         }
 
         /// <summary>
@@ -211,7 +217,9 @@ namespace Microsoft.CodeAnalysis.Collections
         /// </summary>
         /// <param name="existingMap">The existing map which may be null or a ConcurrentDictionary.</param>
         /// <returns></returns>
-        private IDictionary<TKey, ImmutableArray<TElement>> CreateFullyPopulatedMap(ConcurrentDictionary<TKey, ImmutableArray<TElement>>? existingMap)
+        private IDictionary<TKey, ImmutableArray<TElement>> CreateFullyPopulatedMap(
+            ConcurrentDictionary<TKey, ImmutableArray<TElement>>? existingMap
+        )
         {
             Debug.Assert(IsNotFullyPopulatedMap(existingMap));
 
@@ -233,7 +241,10 @@ namespace Microsoft.CodeAnalysis.Collections
                 foreach (var key in allKeys)
                 {
                     // Copy non-empty values from the existing map
-                    ImmutableArray<TElement> elements = existingMap.GetOrAdd(key, _getElementsOfKey);
+                    ImmutableArray<TElement> elements = existingMap.GetOrAdd(
+                        key,
+                        _getElementsOfKey
+                    );
                     Debug.Assert(elements != s_emptySentinel);
                     fullyPopulatedMap.Add(key, elements);
                 }
@@ -243,7 +254,7 @@ namespace Microsoft.CodeAnalysis.Collections
         }
 
         /// <summary>
-        /// Fully populate the underlying dictionary. Once this returns, the dictionary is guaranteed 
+        /// Fully populate the underlying dictionary. Once this returns, the dictionary is guaranteed
         /// to have every key in it.
         /// </summary>
         private IDictionary<TKey, ImmutableArray<TElement>> EnsureFullyPopulated()
@@ -251,9 +262,16 @@ namespace Microsoft.CodeAnalysis.Collections
             var currentMap = _map;
             while (IsNotFullyPopulatedMap(currentMap))
             {
-                IDictionary<TKey, ImmutableArray<TElement>> fullyPopulatedMap = CreateFullyPopulatedMap((ConcurrentDictionary<TKey, ImmutableArray<TElement>>?)currentMap);
+                IDictionary<TKey, ImmutableArray<TElement>> fullyPopulatedMap =
+                    CreateFullyPopulatedMap(
+                        (ConcurrentDictionary<TKey, ImmutableArray<TElement>>?)currentMap
+                    );
 
-                var replacedMap = Interlocked.CompareExchange(ref _map, fullyPopulatedMap, currentMap);
+                var replacedMap = Interlocked.CompareExchange(
+                    ref _map,
+                    fullyPopulatedMap,
+                    currentMap
+                );
                 if (replacedMap == currentMap)
                 {
                     // Normal exit.

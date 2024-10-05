@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Serialization;
 /// A wrapper around an array of <see cref="Microsoft.CodeAnalysis.Checksum"/>s, which also combines the value into a
 /// single aggregate checksum exposed through <see cref="Checksum"/>.
 /// </summary>
-internal readonly struct ChecksumCollection(ImmutableArray<Checksum> children) : IReadOnlyCollection<Checksum>
+internal readonly struct ChecksumCollection(ImmutableArray<Checksum> children)
+    : IReadOnlyCollection<Checksum>
 {
     public Checksum Checksum { get; } = Checksum.Create(children);
 
@@ -25,8 +26,7 @@ internal readonly struct ChecksumCollection(ImmutableArray<Checksum> children) :
     public Checksum this[int index] => children[index];
     public ImmutableArray<Checksum> Children => children;
 
-    public ImmutableArray<Checksum>.Enumerator GetEnumerator()
-        => children.GetEnumerator();
+    public ImmutableArray<Checksum>.Enumerator GetEnumerator() => children.GetEnumerator();
 
     IEnumerator<Checksum> IEnumerable<Checksum>.GetEnumerator()
     {
@@ -34,8 +34,7 @@ internal readonly struct ChecksumCollection(ImmutableArray<Checksum> children) :
             yield return checksum;
     }
 
-    IEnumerator IEnumerable.GetEnumerator()
-        => ((IEnumerable<Checksum>)this).GetEnumerator();
+    IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable<Checksum>)this).GetEnumerator();
 
     public void AddAllTo(HashSet<Checksum> checksums)
     {
@@ -43,13 +42,18 @@ internal readonly struct ChecksumCollection(ImmutableArray<Checksum> children) :
             checksums.AddIfNotNullChecksum(checksum);
     }
 
-    [PerformanceSensitive("https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1333566", AllowGenericEnumeration = false)]
+    [PerformanceSensitive(
+        "https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1333566",
+        AllowGenericEnumeration = false
+    )]
     internal static async Task FindAsync<TState>(
         TextDocumentStates<TState> documentStates,
         DocumentId? hintDocument,
         HashSet<Checksum> searchingChecksumsLeft,
         Dictionary<Checksum, object> result,
-        CancellationToken cancellationToken) where TState : TextDocumentState
+        CancellationToken cancellationToken
+    )
+        where TState : TextDocumentState
     {
         if (hintDocument != null)
         {
@@ -57,7 +61,9 @@ internal readonly struct ChecksumCollection(ImmutableArray<Checksum> children) :
             if (state != null)
             {
                 Contract.ThrowIfFalse(state.TryGetStateChecksums(out var stateChecksums));
-                await stateChecksums.FindAsync(state, searchingChecksumsLeft, result, cancellationToken).ConfigureAwait(false);
+                await stateChecksums
+                    .FindAsync(state, searchingChecksumsLeft, result, cancellationToken)
+                    .ConfigureAwait(false);
             }
         }
         else
@@ -70,7 +76,9 @@ internal readonly struct ChecksumCollection(ImmutableArray<Checksum> children) :
 
                 Contract.ThrowIfFalse(state.TryGetStateChecksums(out var stateChecksums));
 
-                await stateChecksums.FindAsync(state, searchingChecksumsLeft, result, cancellationToken).ConfigureAwait(false);
+                await stateChecksums
+                    .FindAsync(state, searchingChecksumsLeft, result, cancellationToken)
+                    .ConfigureAwait(false);
             }
         }
     }
@@ -80,7 +88,9 @@ internal readonly struct ChecksumCollection(ImmutableArray<Checksum> children) :
         ChecksumCollection checksums,
         HashSet<Checksum> searchingChecksumsLeft,
         Dictionary<Checksum, object> result,
-        CancellationToken cancellationToken) where T : class
+        CancellationToken cancellationToken
+    )
+        where T : class
     {
         Contract.ThrowIfFalse(values.Count == checksums.Children.Length);
 

@@ -35,7 +35,8 @@ public static class HtmlHelperDisplayNameExtensions
     /// <returns>A <see cref="string"/> containing the display name.</returns>
     public static string DisplayNameFor<TModelItem, TResult>(
         this IHtmlHelper<IEnumerable<TModelItem>> htmlHelper,
-        Expression<Func<TModelItem, TResult>> expression)
+        Expression<Func<TModelItem, TResult>> expression
+    )
     {
         ArgumentNullException.ThrowIfNull(htmlHelper);
         ArgumentNullException.ThrowIfNull(expression);

@@ -11,13 +11,19 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.RazorCompiler
 {
     internal static partial class GeneratorExtensions
     {
-        public static void RegisterHostOutput<TSource>(ref this IncrementalGeneratorInitializationContext @this, IncrementalValuesProvider<TSource> source, Action<HostProductionContext, TSource, CancellationToken> action)
+        public static void RegisterHostOutput<TSource>(
+            ref this IncrementalGeneratorInitializationContext @this,
+            IncrementalValuesProvider<TSource> source,
+            Action<HostProductionContext, TSource, CancellationToken> action
+        )
         {
             _ = @this;
             source.Node.RegisterOutput(new HostOutputNode<TSource>(source.Node, action));
         }
 
-        public static ImmutableArray<(string Key, string Value)> GetHostOutputs(this GeneratorRunResult runResult) => runResult.HostOutputs;
+        public static ImmutableArray<(string Key, string Value)> GetHostOutputs(
+            this GeneratorRunResult runResult
+        ) => runResult.HostOutputs;
     }
 
     internal readonly struct HostProductionContext

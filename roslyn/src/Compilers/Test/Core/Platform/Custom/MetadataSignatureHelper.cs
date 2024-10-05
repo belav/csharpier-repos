@@ -19,7 +19,11 @@ namespace Roslyn.Test.Utilities
     {
         #region Helpers
         private const BindingFlags BINDING_FLAGS =
-                BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly;
+            BindingFlags.Instance
+            | BindingFlags.Static
+            | BindingFlags.Public
+            | BindingFlags.NonPublic
+            | BindingFlags.DeclaredOnly;
 
         private static void AppendComma(StringBuilder sb)
         {
@@ -34,16 +38,32 @@ namespace Roslyn.Test.Utilities
             }
         }
 
-        private static void AppendType(Type type, StringBuilder sb, bool showGenericConstraints = false)
+        private static void AppendType(
+            Type type,
+            StringBuilder sb,
+            bool showGenericConstraints = false
+        )
         {
             if (showGenericConstraints && type.IsGenericParameter)
             {
                 var typeInfo = type.GetTypeInfo();
-                if (typeInfo.GenericParameterAttributes.HasFlag(GenericParameterAttributes.ReferenceTypeConstraint))
+                if (
+                    typeInfo.GenericParameterAttributes.HasFlag(
+                        GenericParameterAttributes.ReferenceTypeConstraint
+                    )
+                )
                     sb.Append("class ");
-                if (typeInfo.GenericParameterAttributes.HasFlag(GenericParameterAttributes.NotNullableValueTypeConstraint))
+                if (
+                    typeInfo.GenericParameterAttributes.HasFlag(
+                        GenericParameterAttributes.NotNullableValueTypeConstraint
+                    )
+                )
                     sb.Append("valuetype ");
-                if (typeInfo.GenericParameterAttributes.HasFlag(GenericParameterAttributes.DefaultConstructorConstraint))
+                if (
+                    typeInfo.GenericParameterAttributes.HasFlag(
+                        GenericParameterAttributes.DefaultConstructorConstraint
+                    )
+                )
                     sb.Append(".ctor ");
 
                 var genericConstraints = typeInfo.GetGenericParameterConstraints();
@@ -62,7 +82,11 @@ namespace Roslyn.Test.Utilities
             sb.Append(type);
         }
 
-        private static void AppendValue(object value, StringBuilder sb, bool includeAssignmentOperator = true)
+        private static void AppendValue(
+            object value,
+            StringBuilder sb,
+            bool includeAssignmentOperator = true
+        )
         {
             if (value != null)
             {
@@ -82,7 +106,10 @@ namespace Roslyn.Test.Utilities
             }
         }
 
-        private static void AppendCustomAttributeData(CustomAttributeData attribute, StringBuilder sb)
+        private static void AppendCustomAttributeData(
+            CustomAttributeData attribute,
+            StringBuilder sb
+        )
         {
             sb.Append("[");
             AppendType(attribute.Constructor.DeclaringType, sb);
@@ -107,10 +134,12 @@ namespace Roslyn.Test.Utilities
             foreach (var attribute in parameter.CustomAttributes)
             {
                 // these are pseudo-custom attributes that are added by Reflection but don't appear in metadata as custom attributes:
-                if (attribute.AttributeType != typeof(OptionalAttribute) &&
-                    attribute.AttributeType != typeof(InAttribute) &&
-                    attribute.AttributeType != typeof(OutAttribute) &&
-                    attribute.AttributeType != typeof(MarshalAsAttribute))
+                if (
+                    attribute.AttributeType != typeof(OptionalAttribute)
+                    && attribute.AttributeType != typeof(InAttribute)
+                    && attribute.AttributeType != typeof(OutAttribute)
+                    && attribute.AttributeType != typeof(MarshalAsAttribute)
+                )
                 {
                     AppendCustomAttributeData(attribute, sb);
                     sb.Append(" ");
@@ -151,7 +180,11 @@ namespace Roslyn.Test.Utilities
             }
         }
 
-        public static bool AppendParameterAttributes(StringBuilder sb, ParameterAttributes attributes, bool all = true)
+        public static bool AppendParameterAttributes(
+            StringBuilder sb,
+            ParameterAttributes attributes,
+            bool all = true
+        )
         {
             List<string> list = new List<string>();
 
@@ -174,7 +207,11 @@ namespace Roslyn.Test.Utilities
             return list.Count > 0;
         }
 
-        public static bool AppendPropertyAttributes(StringBuilder sb, PropertyAttributes attributes, bool all = true)
+        public static bool AppendPropertyAttributes(
+            StringBuilder sb,
+            PropertyAttributes attributes,
+            bool all = true
+        )
         {
             List<string> list = new List<string>();
 
@@ -206,18 +243,36 @@ namespace Roslyn.Test.Utilities
             return list.Count > 0;
         }
 
-        public static StringBuilder AppendFieldAttributes(StringBuilder sb, FieldAttributes attributes, bool all = true)
+        public static StringBuilder AppendFieldAttributes(
+            StringBuilder sb,
+            FieldAttributes attributes,
+            bool all = true
+        )
         {
             string visibility;
             switch (attributes & FieldAttributes.FieldAccessMask)
             {
-                case FieldAttributes.PrivateScope: visibility = "privatescope"; break;
-                case FieldAttributes.Private: visibility = "private"; break;
-                case FieldAttributes.FamANDAssem: visibility = "famandassem"; break;
-                case FieldAttributes.Assembly: visibility = "assembly"; break;
-                case FieldAttributes.Family: visibility = "family"; break;
-                case FieldAttributes.FamORAssem: visibility = "famorassem"; break;
-                case FieldAttributes.Public: visibility = "public"; break;
+                case FieldAttributes.PrivateScope:
+                    visibility = "privatescope";
+                    break;
+                case FieldAttributes.Private:
+                    visibility = "private";
+                    break;
+                case FieldAttributes.FamANDAssem:
+                    visibility = "famandassem";
+                    break;
+                case FieldAttributes.Assembly:
+                    visibility = "assembly";
+                    break;
+                case FieldAttributes.Family:
+                    visibility = "family";
+                    break;
+                case FieldAttributes.FamORAssem:
+                    visibility = "famorassem";
+                    break;
+                case FieldAttributes.Public:
+                    visibility = "public";
+                    break;
 
                 default:
                     throw new InvalidOperationException();
@@ -252,18 +307,36 @@ namespace Roslyn.Test.Utilities
             return sb;
         }
 
-        public static StringBuilder AppendMethodAttributes(StringBuilder sb, MethodAttributes attributes, bool all = true)
+        public static StringBuilder AppendMethodAttributes(
+            StringBuilder sb,
+            MethodAttributes attributes,
+            bool all = true
+        )
         {
             string visibility;
             switch (attributes & MethodAttributes.MemberAccessMask)
             {
-                case MethodAttributes.PrivateScope: visibility = "privatescope"; break;
-                case MethodAttributes.Private: visibility = "private"; break;
-                case MethodAttributes.FamANDAssem: visibility = "famandassem"; break;
-                case MethodAttributes.Assembly: visibility = "assembly"; break;
-                case MethodAttributes.Family: visibility = "family"; break;
-                case MethodAttributes.FamORAssem: visibility = "famorassem"; break;
-                case MethodAttributes.Public: visibility = "public"; break;
+                case MethodAttributes.PrivateScope:
+                    visibility = "privatescope";
+                    break;
+                case MethodAttributes.Private:
+                    visibility = "private";
+                    break;
+                case MethodAttributes.FamANDAssem:
+                    visibility = "famandassem";
+                    break;
+                case MethodAttributes.Assembly:
+                    visibility = "assembly";
+                    break;
+                case MethodAttributes.Family:
+                    visibility = "family";
+                    break;
+                case MethodAttributes.FamORAssem:
+                    visibility = "famorassem";
+                    break;
+                case MethodAttributes.Public:
+                    visibility = "public";
+                    break;
 
                 default:
                     throw new InvalidOperationException();
@@ -303,15 +376,26 @@ namespace Roslyn.Test.Utilities
             return sb;
         }
 
-        public static StringBuilder AppendMethodImplAttributes(StringBuilder sb, MethodImplAttributes attributes)
+        public static StringBuilder AppendMethodImplAttributes(
+            StringBuilder sb,
+            MethodImplAttributes attributes
+        )
         {
             string codeType;
             switch (attributes & MethodImplAttributes.CodeTypeMask)
             {
-                case MethodImplAttributes.IL: codeType = "cil"; break;
-                case MethodImplAttributes.OPTIL: codeType = "optil"; break;
-                case MethodImplAttributes.Runtime: codeType = "runtime"; break;
-                case MethodImplAttributes.Native: codeType = "native"; break;
+                case MethodImplAttributes.IL:
+                    codeType = "cil";
+                    break;
+                case MethodImplAttributes.OPTIL:
+                    codeType = "optil";
+                    break;
+                case MethodImplAttributes.Runtime:
+                    codeType = "runtime";
+                    break;
+                case MethodImplAttributes.Native:
+                    codeType = "native";
+                    break;
 
                 default:
                     throw new InvalidOperationException();
@@ -319,7 +403,11 @@ namespace Roslyn.Test.Utilities
 
             sb.Append(codeType);
             sb.Append(" ");
-            sb.Append((attributes & MethodImplAttributes.Unmanaged) == MethodImplAttributes.Unmanaged ? "unmanaged" : "managed");
+            sb.Append(
+                (attributes & MethodImplAttributes.Unmanaged) == MethodImplAttributes.Unmanaged
+                    ? "unmanaged"
+                    : "managed"
+            );
 
             if ((attributes & MethodImplAttributes.PreserveSig) != 0)
                 sb.Append(" preservesig");
@@ -339,19 +427,38 @@ namespace Roslyn.Test.Utilities
             return sb;
         }
 
-        public static StringBuilder AppendTypeAttributes(StringBuilder sb, TypeAttributes attributes)
+        public static StringBuilder AppendTypeAttributes(
+            StringBuilder sb,
+            TypeAttributes attributes
+        )
         {
             string visibility;
             switch (attributes & TypeAttributes.VisibilityMask)
             {
-                case TypeAttributes.NotPublic: visibility = "private"; break;
-                case TypeAttributes.Public: visibility = "public"; break;
-                case TypeAttributes.NestedPrivate: visibility = "nested private"; break;
-                case TypeAttributes.NestedFamANDAssem: visibility = "nested famandassem"; break;
-                case TypeAttributes.NestedAssembly: visibility = "nested assembly"; break;
-                case TypeAttributes.NestedFamily: visibility = "nested family"; break;
-                case TypeAttributes.NestedFamORAssem: visibility = "nested famorassem"; break;
-                case TypeAttributes.NestedPublic: visibility = "nested public"; break;
+                case TypeAttributes.NotPublic:
+                    visibility = "private";
+                    break;
+                case TypeAttributes.Public:
+                    visibility = "public";
+                    break;
+                case TypeAttributes.NestedPrivate:
+                    visibility = "nested private";
+                    break;
+                case TypeAttributes.NestedFamANDAssem:
+                    visibility = "nested famandassem";
+                    break;
+                case TypeAttributes.NestedAssembly:
+                    visibility = "nested assembly";
+                    break;
+                case TypeAttributes.NestedFamily:
+                    visibility = "nested family";
+                    break;
+                case TypeAttributes.NestedFamORAssem:
+                    visibility = "nested famorassem";
+                    break;
+                case TypeAttributes.NestedPublic:
+                    visibility = "nested public";
+                    break;
 
                 default:
                     throw new InvalidOperationException();
@@ -360,9 +467,15 @@ namespace Roslyn.Test.Utilities
             string layout;
             switch (attributes & TypeAttributes.LayoutMask)
             {
-                case TypeAttributes.AutoLayout: layout = "auto"; break;
-                case TypeAttributes.SequentialLayout: layout = "sequential"; break;
-                case TypeAttributes.ExplicitLayout: layout = "explicit"; break;
+                case TypeAttributes.AutoLayout:
+                    layout = "auto";
+                    break;
+                case TypeAttributes.SequentialLayout:
+                    layout = "sequential";
+                    break;
+                case TypeAttributes.ExplicitLayout:
+                    layout = "explicit";
+                    break;
 
                 default:
                     throw new InvalidOperationException();
@@ -371,9 +484,15 @@ namespace Roslyn.Test.Utilities
             string stringFormat;
             switch (attributes & TypeAttributes.StringFormatMask)
             {
-                case TypeAttributes.AnsiClass: stringFormat = "ansi"; break;
-                case TypeAttributes.UnicodeClass: stringFormat = "unicode"; break;
-                case TypeAttributes.AutoClass: stringFormat = "autochar"; break;
+                case TypeAttributes.AnsiClass:
+                    stringFormat = "ansi";
+                    break;
+                case TypeAttributes.UnicodeClass:
+                    stringFormat = "unicode";
+                    break;
+                case TypeAttributes.AutoClass:
+                    stringFormat = "autochar";
+                    break;
 
                 default:
                     throw new InvalidOperationException();
@@ -658,38 +777,53 @@ namespace Roslyn.Test.Utilities
         }
         #endregion
 
-        public static IEnumerable<string> GetMemberSignatures(System.Reflection.Assembly assembly, string fullyQualifiedTypeName)
+        public static IEnumerable<string> GetMemberSignatures(
+            System.Reflection.Assembly assembly,
+            string fullyQualifiedTypeName
+        )
         {
             var candidates = new List<string>();
             var sb = new StringBuilder();
             var type = assembly.GetType(fullyQualifiedTypeName);
             if (type != null)
             {
-                foreach (var constructor in type.GetConstructors(BINDING_FLAGS).OrderBy((member) => member.Name))
+                foreach (
+                    var constructor in type.GetConstructors(BINDING_FLAGS)
+                        .OrderBy((member) => member.Name)
+                )
                 {
                     AppendConstructorInfo(constructor, sb);
                     candidates.Add(sb.ToString());
                     sb.Clear();
                 }
-                foreach (var method in type.GetMethods(BINDING_FLAGS).OrderBy((member) => member.Name))
+                foreach (
+                    var method in type.GetMethods(BINDING_FLAGS).OrderBy((member) => member.Name)
+                )
                 {
                     AppendMethodInfo(method, sb);
                     candidates.Add(sb.ToString());
                     sb.Clear();
                 }
-                foreach (var property in type.GetProperties(BINDING_FLAGS).OrderBy((member) => member.Name))
+                foreach (
+                    var property in type.GetProperties(BINDING_FLAGS)
+                        .OrderBy((member) => member.Name)
+                )
                 {
                     AppendPropertyInfo(property, sb);
                     candidates.Add(sb.ToString());
                     sb.Clear();
                 }
-                foreach (var @event in type.GetEvents(BINDING_FLAGS).OrderBy((member) => member.Name))
+                foreach (
+                    var @event in type.GetEvents(BINDING_FLAGS).OrderBy((member) => member.Name)
+                )
                 {
                     AppendEventInfo(@event, sb);
                     candidates.Add(sb.ToString());
                     sb.Clear();
                 }
-                foreach (var field in type.GetFields(BINDING_FLAGS).OrderBy((member) => member.Name))
+                foreach (
+                    var field in type.GetFields(BINDING_FLAGS).OrderBy((member) => member.Name)
+                )
                 {
                     AppendFieldInfo(field, sb);
                     candidates.Add(sb.ToString());
@@ -699,7 +833,11 @@ namespace Roslyn.Test.Utilities
             return candidates;
         }
 
-        public static IEnumerable<string> GetMemberSignatures(System.Reflection.Assembly assembly, string fullyQualifiedTypeName, string memberName)
+        public static IEnumerable<string> GetMemberSignatures(
+            System.Reflection.Assembly assembly,
+            string fullyQualifiedTypeName,
+            string memberName
+        )
         {
             IEnumerable<string> retVal = null;
             if (string.IsNullOrWhiteSpace(memberName))

@@ -337,13 +337,29 @@ namespace System.Diagnostics.TraceSourceTests
             Trace.IndentLevel = 0;
             Trace.WriteLine("Message end.");
             textTL.Flush();
-            string testRunnerAssemblyName = Assembly.GetEntryAssembly()?.GetName().Name ?? string.Empty;
+            string testRunnerAssemblyName =
+                Assembly.GetEntryAssembly()?.GetName().Name ?? string.Empty;
             string newLine = Environment.NewLine;
-            var expected =
-                string.Format(
-                    "Message start." + newLine + "    This message should be indented.{0} Error: 0 : This error not be indented." + newLine + "    {0} Error: 0 : This error is indented" + newLine + "    {0} Warning: 0 : This warning is indented" + newLine + "    {0} Warning: 0 : This warning is also indented" + newLine + "    {0} Information: 0 : This information in indented" + newLine + "    {0} Information: 0 : This information is also indented" + newLine + "Message end." + newLine + "",
-                    testRunnerAssemblyName
-                );
+            var expected = string.Format(
+                "Message start."
+                    + newLine
+                    + "    This message should be indented.{0} Error: 0 : This error not be indented."
+                    + newLine
+                    + "    {0} Error: 0 : This error is indented"
+                    + newLine
+                    + "    {0} Warning: 0 : This warning is indented"
+                    + newLine
+                    + "    {0} Warning: 0 : This warning is also indented"
+                    + newLine
+                    + "    {0} Information: 0 : This information in indented"
+                    + newLine
+                    + "    {0} Information: 0 : This information is also indented"
+                    + newLine
+                    + "Message end."
+                    + newLine
+                    + "",
+                testRunnerAssemblyName
+            );
 
             Assert.Equal(expected, textTL.Output);
         }
@@ -384,7 +400,24 @@ namespace System.Diagnostics.TraceSourceTests
             Trace.WriteLine("Message end.");
             textTL.Flush();
             newLine = Environment.NewLine;
-            var expected = "Message start." + newLine + "    This message should be indented.This should not be indented." + newLine + "      " + fail + "This failure is reported with a detailed message" + newLine + "      " + fail + newLine + "      " + fail + "This assert is reported" + newLine + "Message end." + newLine;
+            var expected =
+                "Message start."
+                + newLine
+                + "    This message should be indented.This should not be indented."
+                + newLine
+                + "      "
+                + fail
+                + "This failure is reported with a detailed message"
+                + newLine
+                + "      "
+                + fail
+                + newLine
+                + "      "
+                + fail
+                + "This assert is reported"
+                + newLine
+                + "Message end."
+                + newLine;
             Assert.Equal(expected, textTL.Output);
         }
     }

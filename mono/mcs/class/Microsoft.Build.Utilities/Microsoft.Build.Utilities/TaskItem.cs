@@ -36,173 +36,193 @@ using Mono.XBuild.Utilities;
 namespace Microsoft.Build.Utilities
 {
 #if !MICROSOFT_BUILD_DLL
-	public
+    public
 #endif
-	sealed class TaskItem : MarshalByRefObject, ITaskItem
-		, ITaskItem2
-	{
-		IDictionary		escapedMetadata;
-		string			escapedItemSpec;
+    sealed class TaskItem : MarshalByRefObject, ITaskItem, ITaskItem2
+    {
+        IDictionary escapedMetadata;
+        string escapedItemSpec;
 
-		public TaskItem ()
-		{
-			this.escapedItemSpec = String.Empty;
-			this.escapedMetadata = CollectionsUtil.CreateCaseInsensitiveHashtable ();
-		}
+        public TaskItem()
+        {
+            this.escapedItemSpec = String.Empty;
+            this.escapedMetadata = CollectionsUtil.CreateCaseInsensitiveHashtable();
+        }
 
-		public TaskItem (ITaskItem sourceItem)
-		{
-			if (sourceItem == null)
-				throw new ArgumentNullException ("sourceItem");
+        public TaskItem(ITaskItem sourceItem)
+        {
+            if (sourceItem == null)
+                throw new ArgumentNullException("sourceItem");
 
-			var ti2 = sourceItem as ITaskItem2;
-			if (ti2 != null) {
-				escapedItemSpec = ti2.EvaluatedIncludeEscaped;
-				escapedMetadata = ti2.CloneCustomMetadataEscaped ();
-			} else
-			{
-				escapedItemSpec = MSBuildUtils.Escape (sourceItem.ItemSpec);
-				escapedMetadata = sourceItem.CloneCustomMetadata ();
-				foreach (string key in new ArrayList (escapedMetadata.Keys))
-					escapedMetadata [key] = MSBuildUtils.Escape ((string)escapedMetadata [key]);
-			}
-		}
+            var ti2 = sourceItem as ITaskItem2;
+            if (ti2 != null)
+            {
+                escapedItemSpec = ti2.EvaluatedIncludeEscaped;
+                escapedMetadata = ti2.CloneCustomMetadataEscaped();
+            }
+            else
+            {
+                escapedItemSpec = MSBuildUtils.Escape(sourceItem.ItemSpec);
+                escapedMetadata = sourceItem.CloneCustomMetadata();
+                foreach (string key in new ArrayList(escapedMetadata.Keys))
+                    escapedMetadata[key] = MSBuildUtils.Escape((string)escapedMetadata[key]);
+            }
+        }
 
-		public TaskItem (string itemSpec)
-		{
-			if (itemSpec == null)
-				throw new ArgumentNullException ("itemSpec");
-			
-			escapedItemSpec = itemSpec;
-			escapedMetadata = CollectionsUtil.CreateCaseInsensitiveHashtable ();
-		}
+        public TaskItem(string itemSpec)
+        {
+            if (itemSpec == null)
+                throw new ArgumentNullException("itemSpec");
 
-		public TaskItem (string itemSpec, IDictionary itemMetadata)
-		{
-			if (itemSpec == null)
-				throw new ArgumentNullException ("itemSpec");
-			
-			if (itemMetadata == null)
-				throw new ArgumentNullException ("itemMetadata");
-			
-			escapedItemSpec = itemSpec;
-			escapedMetadata = CollectionsUtil.CreateCaseInsensitiveHashtable (itemMetadata);
-		}
+            escapedItemSpec = itemSpec;
+            escapedMetadata = CollectionsUtil.CreateCaseInsensitiveHashtable();
+        }
 
-		public IDictionary CloneCustomMetadata ()
-		{
-			IDictionary clonedMetadata = CollectionsUtil.CreateCaseInsensitiveHashtable ();
-			foreach (DictionaryEntry de in escapedMetadata)
-				clonedMetadata.Add (de.Key, MSBuildUtils.Unescape ((string) de.Value));
-			return clonedMetadata;
-		}
+        public TaskItem(string itemSpec, IDictionary itemMetadata)
+        {
+            if (itemSpec == null)
+                throw new ArgumentNullException("itemSpec");
 
-		IDictionary CloneCustomMetadataEscaped ()
-		{
-			return CollectionsUtil.CreateCaseInsensitiveHashtable (escapedMetadata);
-		}
+            if (itemMetadata == null)
+                throw new ArgumentNullException("itemMetadata");
 
-		IDictionary ITaskItem2.CloneCustomMetadataEscaped ()
-		{
-			return CloneCustomMetadataEscaped ();
-		}
+            escapedItemSpec = itemSpec;
+            escapedMetadata = CollectionsUtil.CreateCaseInsensitiveHashtable(itemMetadata);
+        }
 
-		public void CopyMetadataTo (ITaskItem destinationItem)
-		{
-			foreach (DictionaryEntry e in escapedMetadata) {
-				if (destinationItem.GetMetadata ((string)e.Key) == String.Empty) {
-					destinationItem.SetMetadata ((string)e.Key, MSBuildUtils.Unescape ((string)e.Value));
-				}
-			}
-		}
+        public IDictionary CloneCustomMetadata()
+        {
+            IDictionary clonedMetadata = CollectionsUtil.CreateCaseInsensitiveHashtable();
+            foreach (DictionaryEntry de in escapedMetadata)
+                clonedMetadata.Add(de.Key, MSBuildUtils.Unescape((string)de.Value));
+            return clonedMetadata;
+        }
 
-		public static explicit operator string (TaskItem taskItemToCast)
-		{
-			return taskItemToCast.ItemSpec;
-		}
+        IDictionary CloneCustomMetadataEscaped()
+        {
+            return CollectionsUtil.CreateCaseInsensitiveHashtable(escapedMetadata);
+        }
 
-		public string GetMetadata (string metadataName)
-		{
-			return MSBuildUtils.Unescape (GetMetadataValue (metadataName));
-		}
+        IDictionary ITaskItem2.CloneCustomMetadataEscaped()
+        {
+            return CloneCustomMetadataEscaped();
+        }
 
-		string GetMetadataValue (string metadataName)
-		{
-			if (ReservedNameUtils.IsReservedMetadataName (metadataName))
-				return ReservedNameUtils.GetReservedMetadata (ItemSpec, metadataName, escapedMetadata);
-			return ((string) escapedMetadata [metadataName]) ?? String.Empty;
-		}
+        public void CopyMetadataTo(ITaskItem destinationItem)
+        {
+            foreach (DictionaryEntry e in escapedMetadata)
+            {
+                if (destinationItem.GetMetadata((string)e.Key) == String.Empty)
+                {
+                    destinationItem.SetMetadata(
+                        (string)e.Key,
+                        MSBuildUtils.Unescape((string)e.Value)
+                    );
+                }
+            }
+        }
 
-		string ITaskItem2.GetMetadataValueEscaped (string metadataName)
-		{
-			return GetMetadataValue (metadataName);
-		}
+        public static explicit operator string(TaskItem taskItemToCast)
+        {
+            return taskItemToCast.ItemSpec;
+        }
 
-		public override object InitializeLifetimeService ()
-		{
-			return null;
-		}
+        public string GetMetadata(string metadataName)
+        {
+            return MSBuildUtils.Unescape(GetMetadataValue(metadataName));
+        }
 
-		public void RemoveMetadata (string metadataName)
-		{
-			if (metadataName == null)
-				throw new ArgumentNullException ("metadataName");
-			if (ReservedNameUtils.IsReservedMetadataName (metadataName))
-				throw new ArgumentException ("Can't remove reserved metadata");
-			escapedMetadata.Remove (metadataName);
-		}
+        string GetMetadataValue(string metadataName)
+        {
+            if (ReservedNameUtils.IsReservedMetadataName(metadataName))
+                return ReservedNameUtils.GetReservedMetadata(
+                    ItemSpec,
+                    metadataName,
+                    escapedMetadata
+                );
+            return ((string)escapedMetadata[metadataName]) ?? String.Empty;
+        }
 
-		public void SetMetadata (string metadataName, string metadataValue)
-		{
-			if (metadataName == null)
-				throw new ArgumentNullException ("metadataName");
-			if (metadataValue == null)
-				throw new ArgumentNullException ("metadataValue");
+        string ITaskItem2.GetMetadataValueEscaped(string metadataName)
+        {
+            return GetMetadataValue(metadataName);
+        }
 
-			// allow RecursiveDir to be set, it gets set by DirectoryScanner
-			if (String.Compare (metadataName, "RecursiveDir", StringComparison.InvariantCultureIgnoreCase) != 0 &&
-				ReservedNameUtils.IsReservedMetadataName (metadataName))
-				throw new ArgumentException ("Can't modify reserved metadata");
-				
-			escapedMetadata [metadataName] = metadataValue;
-		}
+        public override object InitializeLifetimeService()
+        {
+            return null;
+        }
 
-		void ITaskItem2.SetMetadataValueLiteral (string metadataName, string metadataValue)
-		{
-			SetMetadata (metadataName, MSBuildUtils.Escape (metadataValue));
-		}
-		public override string ToString ()
-		{
-			return escapedItemSpec;
-		}
-		
-		public string ItemSpec {
-			get { return MSBuildUtils.Unescape (escapedItemSpec); }
-			set { escapedItemSpec = value; }
-		}
+        public void RemoveMetadata(string metadataName)
+        {
+            if (metadataName == null)
+                throw new ArgumentNullException("metadataName");
+            if (ReservedNameUtils.IsReservedMetadataName(metadataName))
+                throw new ArgumentException("Can't remove reserved metadata");
+            escapedMetadata.Remove(metadataName);
+        }
 
-		string ITaskItem2.EvaluatedIncludeEscaped {
-			get { return escapedItemSpec; }
-			set { escapedItemSpec = value; }
-		}
+        public void SetMetadata(string metadataName, string metadataValue)
+        {
+            if (metadataName == null)
+                throw new ArgumentNullException("metadataName");
+            if (metadataValue == null)
+                throw new ArgumentNullException("metadataValue");
 
-		public int MetadataCount {
-			get { return escapedMetadata.Count + 11; }
-		}
+            // allow RecursiveDir to be set, it gets set by DirectoryScanner
+            if (
+                String.Compare(
+                    metadataName,
+                    "RecursiveDir",
+                    StringComparison.InvariantCultureIgnoreCase
+                ) != 0
+                && ReservedNameUtils.IsReservedMetadataName(metadataName)
+            )
+                throw new ArgumentException("Can't modify reserved metadata");
 
-		public ICollection MetadataNames {
-			get {
-				ArrayList list = new ArrayList ();
-				
-				foreach (string s in ReservedNameUtils.ReservedMetadataNames)
-					list.Add (s);
-				foreach (string s in escapedMetadata.Keys)
-					list.Add (s);
+            escapedMetadata[metadataName] = metadataValue;
+        }
 
-				return list;
-			}
-		}
+        void ITaskItem2.SetMetadataValueLiteral(string metadataName, string metadataValue)
+        {
+            SetMetadata(metadataName, MSBuildUtils.Escape(metadataValue));
+        }
 
-	}
+        public override string ToString()
+        {
+            return escapedItemSpec;
+        }
+
+        public string ItemSpec
+        {
+            get { return MSBuildUtils.Unescape(escapedItemSpec); }
+            set { escapedItemSpec = value; }
+        }
+
+        string ITaskItem2.EvaluatedIncludeEscaped
+        {
+            get { return escapedItemSpec; }
+            set { escapedItemSpec = value; }
+        }
+
+        public int MetadataCount
+        {
+            get { return escapedMetadata.Count + 11; }
+        }
+
+        public ICollection MetadataNames
+        {
+            get
+            {
+                ArrayList list = new ArrayList();
+
+                foreach (string s in ReservedNameUtils.ReservedMetadataNames)
+                    list.Add(s);
+                foreach (string s in escapedMetadata.Keys)
+                    list.Add(s);
+
+                return list;
+            }
+        }
+    }
 }
-

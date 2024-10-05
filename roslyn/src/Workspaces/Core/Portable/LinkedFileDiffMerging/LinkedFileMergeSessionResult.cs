@@ -13,10 +13,15 @@ namespace Microsoft.CodeAnalysis
     {
         public Solution MergedSolution { get; }
 
-        private readonly Dictionary<DocumentId, IEnumerable<TextSpan>> _mergeConflictCommentSpans = new();
-        public Dictionary<DocumentId, IEnumerable<TextSpan>> MergeConflictCommentSpans => _mergeConflictCommentSpans;
+        private readonly Dictionary<DocumentId, IEnumerable<TextSpan>> _mergeConflictCommentSpans =
+            new();
+        public Dictionary<DocumentId, IEnumerable<TextSpan>> MergeConflictCommentSpans =>
+            _mergeConflictCommentSpans;
 
-        public LinkedFileMergeSessionResult(Solution mergedSolution, IEnumerable<LinkedFileMergeResult> fileMergeResults)
+        public LinkedFileMergeSessionResult(
+            Solution mergedSolution,
+            IEnumerable<LinkedFileMergeResult> fileMergeResults
+        )
         {
             this.MergedSolution = mergedSolution;
 
@@ -24,7 +29,10 @@ namespace Microsoft.CodeAnalysis
             {
                 foreach (var documentId in fileMergeResult.DocumentIds)
                 {
-                    _mergeConflictCommentSpans.Add(documentId, fileMergeResult.MergeConflictResolutionSpans);
+                    _mergeConflictCommentSpans.Add(
+                        documentId,
+                        fileMergeResult.MergeConflictResolutionSpans
+                    );
                 }
             }
         }

@@ -16,7 +16,11 @@ namespace System.Data.Common.CommandTrees
     /// The expression visitor pattern abstract base class that should be implemented by visitors that return a result value of a specific type.
     /// </summary>
     /// <typeparam name="TResultType">The type of the result value produced by the visitor.</typeparam>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "Db")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1709:IdentifiersShouldBeCasedCorrectly",
+        MessageId = "Db"
+    )]
     public abstract class DbExpressionVisitor<TResultType>
     {
         /// <summary>
@@ -101,7 +105,7 @@ namespace System.Data.Common.CommandTrees
         /// <param name="expression">The DbElementExpression that is being visited.</param>
         /// <returns>An instance of TResultType.</returns>
         public abstract TResultType Visit(DbElementExpression expression);
-        
+
         /// <summary>
         /// Typed visitor pattern method for DbExceptExpression.
         /// </summary>

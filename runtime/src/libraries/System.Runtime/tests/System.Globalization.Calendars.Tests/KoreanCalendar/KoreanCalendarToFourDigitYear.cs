@@ -8,7 +8,8 @@ namespace System.Globalization.Tests
 {
     public class KoreanCalendarToFourDigitYear
     {
-        private static readonly RandomDataGenerator s_randomDataGenerator = new RandomDataGenerator();
+        private static readonly RandomDataGenerator s_randomDataGenerator =
+            new RandomDataGenerator();
 
         public static IEnumerable<object[]> ToFourDigitYear_TestData()
         {
@@ -39,7 +40,10 @@ namespace System.Globalization.Tests
         [Fact]
         public void ToFourDigitYear_InvalidYear_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("year", () => new KoreanCalendar().ToFourDigitYear(100));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "year",
+                () => new KoreanCalendar().ToFourDigitYear(100)
+            );
         }
     }
 }

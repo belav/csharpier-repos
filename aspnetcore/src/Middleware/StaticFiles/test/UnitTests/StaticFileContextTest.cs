@@ -19,9 +19,25 @@ public class StaticFileContextTest
         var options = new StaticFileOptions();
         var httpContext = new DefaultHttpContext();
         var pathString = PathString.Empty;
-        var validateResult = StaticFileMiddleware.ValidatePath(httpContext, pathString, out var subPath);
-        var contentTypeResult = StaticFileMiddleware.LookupContentType(new FileExtensionContentTypeProvider(), options, subPath, out var contentType);
-        var context = new StaticFileContext(httpContext, options, NullLogger.Instance, new TestFileProvider(), contentType, subPath);
+        var validateResult = StaticFileMiddleware.ValidatePath(
+            httpContext,
+            pathString,
+            out var subPath
+        );
+        var contentTypeResult = StaticFileMiddleware.LookupContentType(
+            new FileExtensionContentTypeProvider(),
+            options,
+            subPath,
+            out var contentType
+        );
+        var context = new StaticFileContext(
+            httpContext,
+            options,
+            NullLogger.Instance,
+            new TestFileProvider(),
+            contentType,
+            subPath
+        );
 
         // Act
         var lookupResult = context.LookupFileInfo();
@@ -38,17 +54,36 @@ public class StaticFileContextTest
         // Arrange
         var options = new StaticFileOptions();
         var fileProvider = new TestFileProvider();
-        fileProvider.AddFile("/foo.txt", new TestFileInfo
-        {
-            LastModified = new DateTimeOffset(2014, 1, 2, 3, 4, 5, TimeSpan.Zero)
-        });
+        fileProvider.AddFile(
+            "/foo.txt",
+            new TestFileInfo
+            {
+                LastModified = new DateTimeOffset(2014, 1, 2, 3, 4, 5, TimeSpan.Zero),
+            }
+        );
         var pathString = new PathString("/test");
         var httpContext = new DefaultHttpContext();
         httpContext.Request.Path = new PathString("/test/foo.txt");
-        var validateResult = StaticFileMiddleware.ValidatePath(httpContext, pathString, out var subPath);
-        var contentTypeResult = StaticFileMiddleware.LookupContentType(new FileExtensionContentTypeProvider(), options, subPath, out var contentType);
+        var validateResult = StaticFileMiddleware.ValidatePath(
+            httpContext,
+            pathString,
+            out var subPath
+        );
+        var contentTypeResult = StaticFileMiddleware.LookupContentType(
+            new FileExtensionContentTypeProvider(),
+            options,
+            subPath,
+            out var contentType
+        );
 
-        var context = new StaticFileContext(httpContext, options, NullLogger.Instance, fileProvider, contentType, subPath);
+        var context = new StaticFileContext(
+            httpContext,
+            options,
+            NullLogger.Instance,
+            fileProvider,
+            contentType,
+            subPath
+        );
 
         // Act
         var result = context.LookupFileInfo();
@@ -64,19 +99,38 @@ public class StaticFileContextTest
     {
         var options = new StaticFileOptions();
         var fileProvider = new TestFileProvider();
-        fileProvider.AddFile("/foo.txt", new TestFileInfo
-        {
-            LastModified = new DateTimeOffset(2014, 1, 2, 3, 4, 5, TimeSpan.Zero)
-        });
+        fileProvider.AddFile(
+            "/foo.txt",
+            new TestFileInfo
+            {
+                LastModified = new DateTimeOffset(2014, 1, 2, 3, 4, 5, TimeSpan.Zero),
+            }
+        );
         var pathString = new PathString("/test");
         var httpContext = new DefaultHttpContext();
         var httpsCompressionFeature = new TestHttpsCompressionFeature();
         httpContext.Features.Set<IHttpsCompressionFeature>(httpsCompressionFeature);
         httpContext.Request.Path = new PathString("/test/foo.txt");
-        var validateResult = StaticFileMiddleware.ValidatePath(httpContext, pathString, out var subPath);
-        var contentTypeResult = StaticFileMiddleware.LookupContentType(new FileExtensionContentTypeProvider(), options, subPath, out var contentType);
+        var validateResult = StaticFileMiddleware.ValidatePath(
+            httpContext,
+            pathString,
+            out var subPath
+        );
+        var contentTypeResult = StaticFileMiddleware.LookupContentType(
+            new FileExtensionContentTypeProvider(),
+            options,
+            subPath,
+            out var contentType
+        );
 
-        var context = new StaticFileContext(httpContext, options, NullLogger.Instance, fileProvider, contentType, subPath);
+        var context = new StaticFileContext(
+            httpContext,
+            options,
+            NullLogger.Instance,
+            fileProvider,
+            contentType,
+            subPath
+        );
 
         var result = context.LookupFileInfo();
         Assert.True(validateResult);
@@ -93,19 +147,38 @@ public class StaticFileContextTest
     {
         var options = new StaticFileOptions();
         var fileProvider = new TestFileProvider();
-        fileProvider.AddFile("/foo.txt", new TestFileInfo
-        {
-            LastModified = new DateTimeOffset(2014, 1, 2, 3, 4, 5, TimeSpan.Zero)
-        });
+        fileProvider.AddFile(
+            "/foo.txt",
+            new TestFileInfo
+            {
+                LastModified = new DateTimeOffset(2014, 1, 2, 3, 4, 5, TimeSpan.Zero),
+            }
+        );
         var pathString = new PathString("/test");
         var httpContext = new DefaultHttpContext();
         var httpsCompressionFeature = new TestHttpsCompressionFeature();
         httpContext.Features.Set<IHttpsCompressionFeature>(httpsCompressionFeature);
         httpContext.Request.Path = new PathString("/test/bar.txt");
-        var validateResult = StaticFileMiddleware.ValidatePath(httpContext, pathString, out var subPath);
-        var contentTypeResult = StaticFileMiddleware.LookupContentType(new FileExtensionContentTypeProvider(), options, subPath, out var contentType);
+        var validateResult = StaticFileMiddleware.ValidatePath(
+            httpContext,
+            pathString,
+            out var subPath
+        );
+        var contentTypeResult = StaticFileMiddleware.LookupContentType(
+            new FileExtensionContentTypeProvider(),
+            options,
+            subPath,
+            out var contentType
+        );
 
-        var context = new StaticFileContext(httpContext, options, NullLogger.Instance, fileProvider, contentType, subPath);
+        var context = new StaticFileContext(
+            httpContext,
+            options,
+            NullLogger.Instance,
+            fileProvider,
+            contentType,
+            subPath
+        );
 
         var result = context.LookupFileInfo();
         Assert.True(validateResult);
@@ -120,20 +193,39 @@ public class StaticFileContextTest
     {
         var options = new StaticFileOptions();
         var fileProvider = new TestFileProvider();
-        fileProvider.AddFile("/foo.txt", new TestFileInfo
-        {
-            LastModified = new DateTimeOffset(2014, 1, 2, 3, 4, 5, TimeSpan.Zero)
-        });
+        fileProvider.AddFile(
+            "/foo.txt",
+            new TestFileInfo
+            {
+                LastModified = new DateTimeOffset(2014, 1, 2, 3, 4, 5, TimeSpan.Zero),
+            }
+        );
         var pathString = new PathString("/test");
         var httpContext = new DefaultHttpContext();
         httpContext.Request.Path = new PathString("/test/foo.txt");
         httpContext.RequestAborted = new CancellationToken(canceled: true);
         var body = new MemoryStream();
         httpContext.Response.Body = body;
-        var validateResult = StaticFileMiddleware.ValidatePath(httpContext, pathString, out var subPath);
-        var contentTypeResult = StaticFileMiddleware.LookupContentType(new FileExtensionContentTypeProvider(), options, subPath, out var contentType);
+        var validateResult = StaticFileMiddleware.ValidatePath(
+            httpContext,
+            pathString,
+            out var subPath
+        );
+        var contentTypeResult = StaticFileMiddleware.LookupContentType(
+            new FileExtensionContentTypeProvider(),
+            options,
+            subPath,
+            out var contentType
+        );
 
-        var context = new StaticFileContext(httpContext, options, NullLogger.Instance, fileProvider, contentType, subPath);
+        var context = new StaticFileContext(
+            httpContext,
+            options,
+            NullLogger.Instance,
+            fileProvider,
+            contentType,
+            subPath
+        );
 
         var result = context.LookupFileInfo();
         Assert.True(validateResult);
@@ -147,7 +239,9 @@ public class StaticFileContextTest
 
     private sealed class TestFileProvider : IFileProvider
     {
-        private readonly Dictionary<string, IFileInfo> _files = new Dictionary<string, IFileInfo>(StringComparer.Ordinal);
+        private readonly Dictionary<string, IFileInfo> _files = new Dictionary<string, IFileInfo>(
+            StringComparer.Ordinal
+        );
 
         public void AddFile(string path, IFileInfo fileInfo)
         {
@@ -178,50 +272,32 @@ public class StaticFileContextTest
         {
             public bool Exists
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             public bool IsDirectory
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             public DateTimeOffset LastModified
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             public long Length
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             public string Name
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             public string PhysicalPath
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             public Stream CreateReadStream()

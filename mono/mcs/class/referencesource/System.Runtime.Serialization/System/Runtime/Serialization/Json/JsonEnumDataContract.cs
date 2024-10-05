@@ -4,18 +4,22 @@
 
 namespace System.Runtime.Serialization.Json
 {
-    using System.Xml;
     using System.Security;
+    using System.Xml;
 
     class JsonEnumDataContract : JsonDataContract
     {
-        [Fx.Tag.SecurityNote(Critical = "Holds instance of CriticalHelper which keeps state that is cached statically for serialization."
-            + "Static fields are marked SecurityCritical or readonly to prevent data from being modified or leaked to other components in appdomain.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Holds instance of CriticalHelper which keeps state that is cached statically for serialization."
+                + "Static fields are marked SecurityCritical or readonly to prevent data from being modified or leaked to other components in appdomain."
+        )]
         [SecurityCritical]
         JsonEnumDataContractCriticalHelper helper;
 
-        [Fx.Tag.SecurityNote(Critical = "Initializes SecurityCritical field 'helper'.",
-            Safe = "Doesn't leak anything.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Initializes SecurityCritical field 'helper'.",
+            Safe = "Doesn't leak anything."
+        )]
         [SecuritySafeCritical]
         public JsonEnumDataContract(EnumDataContract traditionalDataContract)
             : base(new JsonEnumDataContractCriticalHelper(traditionalDataContract))
@@ -25,22 +29,33 @@ namespace System.Runtime.Serialization.Json
 
         public bool IsULong
         {
-            [Fx.Tag.SecurityNote(Critical = "Fetches the critical IsULong property.",
-                Safe = "IsULong only needs to be protected for write.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Fetches the critical IsULong property.",
+                Safe = "IsULong only needs to be protected for write."
+            )]
             [SecuritySafeCritical]
             get { return this.helper.IsULong; }
         }
 
-        public override object ReadJsonValueCore(XmlReaderDelegator jsonReader, XmlObjectSerializerReadContextComplexJson context)
+        public override object ReadJsonValueCore(
+            XmlReaderDelegator jsonReader,
+            XmlObjectSerializerReadContextComplexJson context
+        )
         {
             object enumValue;
             if (IsULong)
             {
-                enumValue = Enum.ToObject(TraditionalDataContract.UnderlyingType, jsonReader.ReadElementContentAsUnsignedLong());
+                enumValue = Enum.ToObject(
+                    TraditionalDataContract.UnderlyingType,
+                    jsonReader.ReadElementContentAsUnsignedLong()
+                );
             }
             else
             {
-                enumValue = Enum.ToObject(TraditionalDataContract.UnderlyingType, jsonReader.ReadElementContentAsLong());
+                enumValue = Enum.ToObject(
+                    TraditionalDataContract.UnderlyingType,
+                    jsonReader.ReadElementContentAsLong()
+                );
             }
 
             if (context != null)
@@ -50,7 +65,12 @@ namespace System.Runtime.Serialization.Json
             return enumValue;
         }
 
-        public override void WriteJsonValueCore(XmlWriterDelegator jsonWriter, object obj, XmlObjectSerializerWriteContextComplexJson context, RuntimeTypeHandle declaredTypeHandle)
+        public override void WriteJsonValueCore(
+            XmlWriterDelegator jsonWriter,
+            object obj,
+            XmlObjectSerializerWriteContextComplexJson context,
+            RuntimeTypeHandle declaredTypeHandle
+        )
         {
             if (IsULong)
             {
@@ -62,8 +82,10 @@ namespace System.Runtime.Serialization.Json
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Holds all state used for (de)serializing types."
-            + "Since the data is cached statically, we lock down access to it.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Holds all state used for (de)serializing types."
+                + "Since the data is cached statically, we lock down access to it."
+        )]
 #if !NO_SECURITY_ATTRIBUTES
 #pragma warning disable 618 // have not moved to the v4 security model yet
         [SecurityCritical(SecurityCriticalScope.Everything)]

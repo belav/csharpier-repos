@@ -1,12 +1,12 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.DotNet.Cli.Build.Framework;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using Microsoft.DotNet.Cli.Build.Framework;
 using Xunit;
 
 namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
@@ -34,17 +34,23 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             {
                 loadAssemblyBytes ? AppLoadAssemblyBytesArg : AppLoadAssemblyArg,
                 sharedState.HostFxrPath,
-                app.AppDll
+                app.AppDll,
             }.Concat(sharedState.GetComponentLoadArgs(loadAssemblyBytes, loadSymbolBytes));
 
-            CommandResult result = sharedState.CreateNativeHostCommand(args, sharedState.DotNetRoot)
+            CommandResult result = sharedState
+                .CreateNativeHostCommand(args, sharedState.DotNetRoot)
                 .Execute();
 
-            result.Should().Pass()
+            result
+                .Should()
+                .Pass()
                 .And.InitializeContextForApp(app.AppDll)
                 .And.ExecuteSelfContained(selfContained: false)
                 .And.ExecuteInDefaultContext(component.AssemblyName)
-                .And.ExecuteWithLocation(component.AssemblyName, loadAssemblyBytes ? string.Empty : component.AppDll)
+                .And.ExecuteWithLocation(
+                    component.AssemblyName,
+                    loadAssemblyBytes ? string.Empty : component.AppDll
+                )
                 .And.ExecuteFunctionPointer(sharedState.ComponentEntryPoint1, 1, 1);
         }
 
@@ -70,16 +76,22 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             {
                 loadAssemblyBytes ? ComponentLoadAssemblyBytesArg : ComponentLoadAssemblyArg,
                 sharedState.HostFxrPath,
-                component.RuntimeConfigJson
+                component.RuntimeConfigJson,
             }.Concat(sharedState.GetComponentLoadArgs(loadAssemblyBytes, loadSymbolBytes));
 
-            CommandResult result = sharedState.CreateNativeHostCommand(args, sharedState.DotNetRoot)
+            CommandResult result = sharedState
+                .CreateNativeHostCommand(args, sharedState.DotNetRoot)
                 .Execute();
 
-            result.Should().Pass()
+            result
+                .Should()
+                .Pass()
                 .And.InitializeContextForConfig(component.RuntimeConfigJson)
                 .And.ExecuteInDefaultContext(component.AssemblyName)
-                .And.ExecuteWithLocation(component.AssemblyName, loadAssemblyBytes ? string.Empty : component.AppDll)
+                .And.ExecuteWithLocation(
+                    component.AssemblyName,
+                    loadAssemblyBytes ? string.Empty : component.AppDll
+                )
                 .And.ExecuteFunctionPointer(sharedState.ComponentEntryPoint1, 1, 1);
         }
 
@@ -105,17 +117,23 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             {
                 loadAssemblyBytes ? AppLoadAssemblyBytesArg : AppLoadAssemblyArg,
                 app.HostFxrDll,
-                app.AppDll
+                app.AppDll,
             }.Concat(sharedState.GetComponentLoadArgs(loadAssemblyBytes, loadSymbolBytes));
 
-            CommandResult result = sharedState.CreateNativeHostCommand(args, sharedState.DotNetRoot)
+            CommandResult result = sharedState
+                .CreateNativeHostCommand(args, sharedState.DotNetRoot)
                 .Execute();
 
-            result.Should().Pass()
+            result
+                .Should()
+                .Pass()
                 .And.InitializeContextForApp(app.AppDll)
                 .And.ExecuteSelfContained(selfContained: true)
                 .And.ExecuteInDefaultContext(component.AssemblyName)
-                .And.ExecuteWithLocation(component.AssemblyName, loadAssemblyBytes ? string.Empty : component.AppDll)
+                .And.ExecuteWithLocation(
+                    component.AssemblyName,
+                    loadAssemblyBytes ? string.Empty : component.AppDll
+                )
                 .And.ExecuteFunctionPointer(sharedState.ComponentEntryPoint1, 1, 1);
         }
 
@@ -153,23 +171,37 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 HostFxrPath = TestContext.BuiltDotNet.GreatestVersionHostFxrFilePath;
 
                 Application = TestApp.CreateEmpty("App");
-                Application.PopulateFrameworkDependent(Constants.MicrosoftNETCoreApp, TestContext.MicrosoftNETCoreAppVersion);
+                Application.PopulateFrameworkDependent(
+                    Constants.MicrosoftNETCoreApp,
+                    TestContext.MicrosoftNETCoreAppVersion
+                );
 
                 SelfContainedApplication = TestApp.CreateEmpty("SelfContainedApp");
                 SelfContainedApplication.PopulateSelfContained(TestApp.MockedComponent.None);
 
-                ComponentWithNoDependenciesFixture = new TestProjectFixture("ComponentWithNoDependencies", RepoDirectories)
+                ComponentWithNoDependenciesFixture = new TestProjectFixture(
+                    "ComponentWithNoDependencies",
+                    RepoDirectories
+                )
                     .EnsureRestored()
                     .PublishProject();
 
-                ComponentTypeName = $"Component.Component, {ComponentWithNoDependenciesFixture.TestProject.AssemblyName}";
+                ComponentTypeName =
+                    $"Component.Component, {ComponentWithNoDependenciesFixture.TestProject.AssemblyName}";
             }
 
-            internal IEnumerable<string> GetComponentLoadArgs(bool loadAssemblyBytes, bool loadSymbolBytes)
+            internal IEnumerable<string> GetComponentLoadArgs(
+                bool loadAssemblyBytes,
+                bool loadSymbolBytes
+            )
             {
                 List<string> args = new List<string>() { Component.AppDll };
                 if (loadAssemblyBytes)
-                    args.Add(loadSymbolBytes ? $"{Path.GetFileNameWithoutExtension(Component.AppDll)}.pdb" : "nullptr");
+                    args.Add(
+                        loadSymbolBytes
+                            ? $"{Path.GetFileNameWithoutExtension(Component.AppDll)}.pdb"
+                            : "nullptr"
+                    );
 
                 args.Add(ComponentTypeName);
                 args.Add(ComponentEntryPoint1);

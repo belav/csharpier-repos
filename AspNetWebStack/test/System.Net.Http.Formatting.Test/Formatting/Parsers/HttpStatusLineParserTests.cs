@@ -21,24 +21,45 @@ namespace System.Net.Http.Formatting.Parsers
             HttpUnsortedResponse statusLine = new HttpUnsortedResponse();
             Assert.NotNull(statusLine);
 
-            Assert.ThrowsArgumentGreaterThanOrEqualTo(() => new HttpStatusLineParser(statusLine, ParserData.MinStatusLineSize - 1),
-                "maxStatusLineSize", ParserData.MinStatusLineSize.ToString(), ParserData.MinStatusLineSize - 1);
+            Assert.ThrowsArgumentGreaterThanOrEqualTo(
+                () => new HttpStatusLineParser(statusLine, ParserData.MinStatusLineSize - 1),
+                "maxStatusLineSize",
+                ParserData.MinStatusLineSize.ToString(),
+                ParserData.MinStatusLineSize - 1
+            );
 
-            HttpStatusLineParser parser = new HttpStatusLineParser(statusLine, ParserData.MinStatusLineSize);
+            HttpStatusLineParser parser = new HttpStatusLineParser(
+                statusLine,
+                ParserData.MinStatusLineSize
+            );
             Assert.NotNull(parser);
 
-            Assert.ThrowsArgumentNull(() => { new HttpStatusLineParser(null, ParserData.MinStatusLineSize); }, "httpResponse");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    new HttpStatusLineParser(null, ParserData.MinStatusLineSize);
+                },
+                "httpResponse"
+            );
         }
-
 
         [Fact]
         public void StatusLineParserNullBuffer()
         {
             HttpUnsortedResponse statusLine = new HttpUnsortedResponse();
-            HttpStatusLineParser parser = new HttpStatusLineParser(statusLine, ParserData.MinStatusLineSize);
+            HttpStatusLineParser parser = new HttpStatusLineParser(
+                statusLine,
+                ParserData.MinStatusLineSize
+            );
             Assert.NotNull(parser);
             int bytesConsumed = 0;
-            Assert.ThrowsArgumentNull(() => { parser.ParseBuffer(null, 0, ref bytesConsumed); }, "buffer");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    parser.ParseBuffer(null, 0, ref bytesConsumed);
+                },
+                "buffer"
+            );
         }
 
         [Fact]
@@ -46,7 +67,10 @@ namespace System.Net.Http.Formatting.Parsers
         {
             byte[] data = CreateBuffer("HTTP/1.1", "200", "");
             HttpUnsortedResponse statusLine = new HttpUnsortedResponse();
-            HttpStatusLineParser parser = new HttpStatusLineParser(statusLine, ParserData.MinStatusLineSize);
+            HttpStatusLineParser parser = new HttpStatusLineParser(
+                statusLine,
+                ParserData.MinStatusLineSize
+            );
             Assert.NotNull(parser);
 
             int bytesConsumed = 0;
@@ -148,7 +172,12 @@ namespace System.Net.Http.Formatting.Parsers
                 int totalBytesConsumed = 0;
                 ParserState state = ParseBufferInSteps(parser, data, cnt, out totalBytesConsumed);
 
-                ValidateResult(statusLine, new Version("1.1"), HttpStatusCode.OK, validReasonPhrase);
+                ValidateResult(
+                    statusLine,
+                    new Version("1.1"),
+                    HttpStatusCode.OK,
+                    validReasonPhrase
+                );
             }
         }
 
@@ -156,7 +185,11 @@ namespace System.Net.Http.Formatting.Parsers
         [TestDataSet(typeof(ParserData), "Versions")]
         public void StatusLineParserAcceptsValidVersion(Version version)
         {
-            byte[] data = CreateBuffer(String.Format("HTTP/{0}", version.ToString(2)), "200", "Reason");
+            byte[] data = CreateBuffer(
+                String.Format("HTTP/{0}", version.ToString(2)),
+                "200",
+                "Reason"
+            );
 
             for (var cnt = 1; cnt <= data.Length; cnt++)
             {
@@ -195,7 +228,12 @@ namespace System.Net.Http.Formatting.Parsers
             return CreateBuffer(version, statusCode, reasonPhrase, false);
         }
 
-        private static byte[] CreateBuffer(string version, string statusCode, string reasonPhrase, bool withLws)
+        private static byte[] CreateBuffer(
+            string version,
+            string statusCode,
+            string reasonPhrase,
+            bool withLws
+        )
         {
             const string SP = " ";
             const string HTAB = "\t";
@@ -207,11 +245,24 @@ namespace System.Net.Http.Formatting.Parsers
                 lws = SP + SP + HTAB + SP;
             }
 
-            string statusLine = String.Format("{0}{1}{2}{3}{4}{5}", version, lws, statusCode, lws, reasonPhrase, CRLF);
+            string statusLine = String.Format(
+                "{0}{1}{2}{3}{4}{5}",
+                version,
+                lws,
+                statusCode,
+                lws,
+                reasonPhrase,
+                CRLF
+            );
             return Encoding.UTF8.GetBytes(statusLine);
         }
 
-        private static ParserState ParseBufferInSteps(HttpStatusLineParser parser, byte[] buffer, int readsize, out int totalBytesConsumed)
+        private static ParserState ParseBufferInSteps(
+            HttpStatusLineParser parser,
+            byte[] buffer,
+            int readsize,
+            out int totalBytesConsumed
+        )
         {
             ParserState state = ParserState.Invalid;
             totalBytesConsumed = 0;
@@ -234,7 +285,12 @@ namespace System.Net.Http.Formatting.Parsers
             return state;
         }
 
-        private static void ValidateResult(HttpUnsortedResponse statusLine, Version version, HttpStatusCode statusCode, string reasonPhrase)
+        private static void ValidateResult(
+            HttpUnsortedResponse statusLine,
+            Version version,
+            HttpStatusCode statusCode,
+            string reasonPhrase
+        )
         {
             Assert.Equal(version, statusLine.Version);
             Assert.Equal(statusCode, statusLine.StatusCode);

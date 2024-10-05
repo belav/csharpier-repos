@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class NameParsingTests : ParsingTests
     {
-        public NameParsingTests(ITestOutputHelper output) : base(output) { }
+        public NameParsingTests(ITestOutputHelper output)
+            : base(output) { }
 
         private NameSyntax ParseName(string text)
         {
@@ -175,13 +176,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestDoubleAliasName()
         {
-            // In the original implementation of the parser this error case was parsed as 
+            // In the original implementation of the parser this error case was parsed as
             //
             // (goo :: bar ) :: baz
             //
             // However, we have decided that the left hand side of a :: should always be
-            // an identifier, not a name, even in error cases. Therefore instead we 
-            // parse this as though the error was that the user intended to make the 
+            // an identifier, not a name, even in error cases. Therefore instead we
+            // parse this as though the error was that the user intended to make the
             // second :: a dot; we parse this as
             //
             // (goo :: bar ) . baz
@@ -909,10 +910,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             }
             EOF();
 
-            CreateCompilation(source).VerifyDiagnostics(
-                // (5,9): error CS0305: Using the generic method group 'M' requires 2 type arguments
-                //         M<,>();
-                Diagnostic(ErrorCode.ERR_BadArity, "M<,>").WithArguments("M", "method group", "2").WithLocation(5, 9));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (5,9): error CS0305: Using the generic method group 'M' requires 2 type arguments
+                    //         M<,>();
+                    Diagnostic(ErrorCode.ERR_BadArity, "M<,>")
+                        .WithArguments("M", "method group", "2")
+                        .WithLocation(5, 9)
+                );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67277")]
@@ -928,10 +933,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
                 """;
 
-            UsingTree(source, TestOptions.Regular1,
+            UsingTree(
+                source,
+                TestOptions.Regular1,
                 // (5,10): error CS8022: Feature 'generics' is not available in C# 1. Please use language version 2 or greater.
                 //         M<,>();
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion1, "<").WithArguments("generics", "2").WithLocation(5, 10));
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion1, "<")
+                    .WithArguments("generics", "2")
+                    .WithLocation(5, 10)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1007,16 +1017,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             }
             EOF();
 
-            CreateCompilation(source, parseOptions: TestOptions.Regular1).VerifyDiagnostics(
-                // (3,11): error CS8022: Feature 'generics' is not available in C# 1. Please use language version 2 or greater.
-                //     void M<T1, T2>()
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion1, "<").WithArguments("generics", "2").WithLocation(3, 11),
-                // (5,9): error CS0305: Using the generic method group 'M' requires 2 type arguments
-                //         M<,>();
-                Diagnostic(ErrorCode.ERR_BadArity, "M<,>").WithArguments("M", "method group", "2").WithLocation(5, 9),
-                // (5,10): error CS8022: Feature 'generics' is not available in C# 1. Please use language version 2 or greater.
-                //         M<,>();
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion1, "<").WithArguments("generics", "2").WithLocation(5, 10));
+            CreateCompilation(source, parseOptions: TestOptions.Regular1)
+                .VerifyDiagnostics(
+                    // (3,11): error CS8022: Feature 'generics' is not available in C# 1. Please use language version 2 or greater.
+                    //     void M<T1, T2>()
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion1, "<")
+                        .WithArguments("generics", "2")
+                        .WithLocation(3, 11),
+                    // (5,9): error CS0305: Using the generic method group 'M' requires 2 type arguments
+                    //         M<,>();
+                    Diagnostic(ErrorCode.ERR_BadArity, "M<,>")
+                        .WithArguments("M", "method group", "2")
+                        .WithLocation(5, 9),
+                    // (5,10): error CS8022: Feature 'generics' is not available in C# 1. Please use language version 2 or greater.
+                    //         M<,>();
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion1, "<")
+                        .WithArguments("generics", "2")
+                        .WithLocation(5, 10)
+                );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67277")]
@@ -1138,10 +1156,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             }
             EOF();
 
-            CreateCompilation(source).VerifyDiagnostics(
-                // (9,15): error CS7003: Unexpected use of an unbound generic name
-                //         M<int,X<>>();
-                Diagnostic(ErrorCode.ERR_UnexpectedUnboundGenericName, "X<>").WithLocation(9, 15));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (9,15): error CS7003: Unexpected use of an unbound generic name
+                    //         M<int,X<>>();
+                    Diagnostic(ErrorCode.ERR_UnexpectedUnboundGenericName, "X<>")
+                        .WithLocation(9, 15)
+                );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67277")]
@@ -1263,10 +1284,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             }
             EOF();
 
-            CreateCompilation(source).VerifyDiagnostics(
-                // (9,11): error CS7003: Unexpected use of an unbound generic name
-                //         M<X<>, int>();
-                Diagnostic(ErrorCode.ERR_UnexpectedUnboundGenericName, "X<>").WithLocation(9, 11));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (9,11): error CS7003: Unexpected use of an unbound generic name
+                    //         M<X<>, int>();
+                    Diagnostic(ErrorCode.ERR_UnexpectedUnboundGenericName, "X<>")
+                        .WithLocation(9, 11)
+                );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67277")]
@@ -1427,13 +1451,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             }
             EOF();
 
-            CreateCompilation(source).VerifyDiagnostics(
-                // (13,11): error CS7003: Unexpected use of an unbound generic name
-                //         M<X<>, Y<,>>();
-                Diagnostic(ErrorCode.ERR_UnexpectedUnboundGenericName, "X<>").WithLocation(13, 11),
-                // (13,16): error CS7003: Unexpected use of an unbound generic name
-                //         M<X<>, Y<,>>();
-                Diagnostic(ErrorCode.ERR_UnexpectedUnboundGenericName, "Y<,>").WithLocation(13, 16));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (13,11): error CS7003: Unexpected use of an unbound generic name
+                    //         M<X<>, Y<,>>();
+                    Diagnostic(ErrorCode.ERR_UnexpectedUnboundGenericName, "X<>")
+                        .WithLocation(13, 11),
+                    // (13,16): error CS7003: Unexpected use of an unbound generic name
+                    //         M<X<>, Y<,>>();
+                    Diagnostic(ErrorCode.ERR_UnexpectedUnboundGenericName, "Y<,>")
+                        .WithLocation(13, 16)
+                );
         }
     }
 }

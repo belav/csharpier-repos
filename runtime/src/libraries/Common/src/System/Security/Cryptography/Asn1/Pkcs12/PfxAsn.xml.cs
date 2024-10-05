@@ -40,7 +40,11 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
             return Decode(Asn1Tag.Sequence, encoded, ruleSet);
         }
 
-        internal static PfxAsn Decode(Asn1Tag expectedTag, ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
+        internal static PfxAsn Decode(
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        )
         {
             try
             {
@@ -56,12 +60,21 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
             }
         }
 
-        internal static void Decode(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out PfxAsn decoded)
+        internal static void Decode(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out PfxAsn decoded
+        )
         {
             Decode(ref reader, Asn1Tag.Sequence, rebind, out decoded);
         }
 
-        internal static void Decode(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out PfxAsn decoded)
+        internal static void Decode(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out PfxAsn decoded
+        )
         {
             try
             {
@@ -73,27 +86,40 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
             }
         }
 
-        private static void DecodeCore(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out PfxAsn decoded)
+        private static void DecodeCore(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out PfxAsn decoded
+        )
         {
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
-
 
             if (!sequenceReader.TryReadInt32(out decoded.Version))
             {
                 sequenceReader.ThrowIfNotEmpty();
             }
 
-            System.Security.Cryptography.Asn1.Pkcs7.ContentInfoAsn.Decode(ref sequenceReader, rebind, out decoded.AuthSafe);
+            System.Security.Cryptography.Asn1.Pkcs7.ContentInfoAsn.Decode(
+                ref sequenceReader,
+                rebind,
+                out decoded.AuthSafe
+            );
 
-            if (sequenceReader.HasData && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.Sequence))
+            if (
+                sequenceReader.HasData
+                && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.Sequence)
+            )
             {
                 System.Security.Cryptography.Asn1.Pkcs12.MacData tmpMacData;
-                System.Security.Cryptography.Asn1.Pkcs12.MacData.Decode(ref sequenceReader, rebind, out tmpMacData);
+                System.Security.Cryptography.Asn1.Pkcs12.MacData.Decode(
+                    ref sequenceReader,
+                    rebind,
+                    out tmpMacData
+                );
                 decoded.MacData = tmpMacData;
-
             }
-
 
             sequenceReader.ThrowIfNotEmpty();
         }

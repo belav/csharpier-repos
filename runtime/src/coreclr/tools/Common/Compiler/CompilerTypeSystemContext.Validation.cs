@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler
@@ -120,19 +119,30 @@ namespace ILCompiler
             // Walk stack to see if the specified type is already in the process of being type checked.
             int typeLoadCheckInProgressStackOffset = -1;
             bool checkingMode = false; // Checking for match on TypeLoadabilityCheck field or in OtherTypesToMarkAsSuccessfullyLoaded. (true for OtherTypesToMarkAsSuccessfullyLoaded)
-            for (int typeCheckDepth = t_typeLoadCheckInProgressStack.Count - 1; typeCheckDepth >= 0; typeCheckDepth--)
+            for (
+                int typeCheckDepth = t_typeLoadCheckInProgressStack.Count - 1;
+                typeCheckDepth >= 0;
+                typeCheckDepth--
+            )
             {
                 if (t_typeLoadCheckInProgressStack[typeCheckDepth].TypeInLoadabilityCheck == type)
                 {
                     // The stack contains the interesting type.
-                    if (t_typeLoadCheckInProgressStack[typeCheckDepth].MarkTypeAsSuccessfullyLoadedIfNoExceptionThrown)
+                    if (
+                        t_typeLoadCheckInProgressStack[
+                            typeCheckDepth
+                        ].MarkTypeAsSuccessfullyLoadedIfNoExceptionThrown
+                    )
                     {
                         // And this is the level where the type is known to be successfully loaded.
                         typeLoadCheckInProgressStackOffset = typeCheckDepth;
                         break;
                     }
                 }
-                else if (t_typeLoadCheckInProgressStack[typeCheckDepth].OtherTypesToMarkAsSuccessfullyLoaded.Contains(type))
+                else if (
+                    t_typeLoadCheckInProgressStack[typeCheckDepth]
+                        .OtherTypesToMarkAsSuccessfullyLoaded.Contains(type)
+                )
                 {
                     // We've found where the type will be marked as successfully loaded.
                     typeLoadCheckInProgressStackOffset = typeCheckDepth;
@@ -149,7 +159,8 @@ namespace ILCompiler
             if (typeLoadCheckInProgressStackOffset == -1)
             {
                 // The type is not already in the process of being checked for loadability, so return false to indicate that normal load checking should begin
-                TypeLoadabilityCheckInProgress typeCheckInProgress = new TypeLoadabilityCheckInProgress();
+                TypeLoadabilityCheckInProgress typeCheckInProgress =
+                    new TypeLoadabilityCheckInProgress();
                 typeCheckInProgress.TypeInLoadabilityCheck = type;
                 typeCheckInProgress.OtherTypesToMarkAsSuccessfullyLoaded = EmptyList;
                 typeCheckInProgress.MarkTypeAsSuccessfullyLoadedIfNoExceptionThrown = true;
@@ -158,21 +169,41 @@ namespace ILCompiler
             }
 
             // Move timing of when types are considered loaded back to the point at which we mark this type as loaded
-            var typeLoadCheckToAddTo = t_typeLoadCheckInProgressStack[typeLoadCheckInProgressStackOffset];
-            for (int typeCheckDepth = t_typeLoadCheckInProgressStack.Count - 1; typeCheckDepth > typeLoadCheckInProgressStackOffset; typeCheckDepth--)
+            var typeLoadCheckToAddTo = t_typeLoadCheckInProgressStack[
+                typeLoadCheckInProgressStackOffset
+            ];
+            for (
+                int typeCheckDepth = t_typeLoadCheckInProgressStack.Count - 1;
+                typeCheckDepth > typeLoadCheckInProgressStackOffset;
+                typeCheckDepth--
+            )
             {
-                if (t_typeLoadCheckInProgressStack[typeCheckDepth].MarkTypeAsSuccessfullyLoadedIfNoExceptionThrown)
+                if (
+                    t_typeLoadCheckInProgressStack[
+                        typeCheckDepth
+                    ].MarkTypeAsSuccessfullyLoadedIfNoExceptionThrown
+                )
                 {
-                    typeLoadCheckToAddTo.AddToOtherTypesToMarkAsSuccessfullyLoaded(t_typeLoadCheckInProgressStack[typeCheckDepth].TypeInLoadabilityCheck);
-                    t_typeLoadCheckInProgressStack[typeCheckDepth].MarkTypeAsSuccessfullyLoadedIfNoExceptionThrown = false;
+                    typeLoadCheckToAddTo.AddToOtherTypesToMarkAsSuccessfullyLoaded(
+                        t_typeLoadCheckInProgressStack[typeCheckDepth].TypeInLoadabilityCheck
+                    );
+                    t_typeLoadCheckInProgressStack[
+                        typeCheckDepth
+                    ].MarkTypeAsSuccessfullyLoadedIfNoExceptionThrown = false;
                 }
 
-                foreach (var typeToMove in t_typeLoadCheckInProgressStack[typeCheckDepth].OtherTypesToMarkAsSuccessfullyLoaded)
+                foreach (
+                    var typeToMove in t_typeLoadCheckInProgressStack[
+                        typeCheckDepth
+                    ].OtherTypesToMarkAsSuccessfullyLoaded
+                )
                 {
                     typeLoadCheckToAddTo.AddToOtherTypesToMarkAsSuccessfullyLoaded(typeToMove);
                 }
 
-                t_typeLoadCheckInProgressStack[typeCheckDepth].OtherTypesToMarkAsSuccessfullyLoaded = EmptyList;
+                t_typeLoadCheckInProgressStack[
+                    typeCheckDepth
+                ].OtherTypesToMarkAsSuccessfullyLoaded = EmptyList;
             }
 
             // We are going to report that the type should be considered to be loadable at this stage
@@ -182,14 +213,18 @@ namespace ILCompiler
         private void PopTypeLoadabilityCheckInProgress(bool exceptionThrown)
         {
             Debug.Assert(EmptyList.Count == 0);
-            var typeLoadabilityCheck = t_typeLoadCheckInProgressStack[t_typeLoadCheckInProgressStack.Count - 1];
+            var typeLoadabilityCheck = t_typeLoadCheckInProgressStack[
+                t_typeLoadCheckInProgressStack.Count - 1
+            ];
             t_typeLoadCheckInProgressStack.RemoveAt(t_typeLoadCheckInProgressStack.Count - 1);
 
             if (!exceptionThrown)
             {
                 if (!typeLoadabilityCheck.MarkTypeAsSuccessfullyLoadedIfNoExceptionThrown)
                 {
-                    Debug.Assert(typeLoadabilityCheck.OtherTypesToMarkAsSuccessfullyLoaded.Count == 0);
+                    Debug.Assert(
+                        typeLoadabilityCheck.OtherTypesToMarkAsSuccessfullyLoaded.Count == 0
+                    );
                 }
 
                 if (typeLoadabilityCheck.MarkTypeAsSuccessfullyLoadedIfNoExceptionThrown)
@@ -219,9 +254,14 @@ namespace ILCompiler
         private sealed class ValidTypeHashTable : LockFreeReaderHashtable<TypeDesc, TypeDesc>
         {
             protected override bool CompareKeyToValue(TypeDesc key, TypeDesc value) => key == value;
-            protected override bool CompareValueToValue(TypeDesc value1, TypeDesc value2) => value1 == value2;
+
+            protected override bool CompareValueToValue(TypeDesc value1, TypeDesc value2) =>
+                value1 == value2;
+
             protected override TypeDesc CreateValueFromKey(TypeDesc key) => key;
+
             protected override int GetKeyHashCode(TypeDesc key) => key.GetHashCode();
+
             protected override int GetValueHashCode(TypeDesc value) => value.GetHashCode();
         }
 
@@ -269,31 +309,45 @@ namespace ILCompiler
                     if (!elementSize.IsIndeterminate && elementSize.AsInt >= ushort.MaxValue)
                     {
                         // Element size over 64k can't be encoded in the GCDesc
-                        ThrowHelper.ThrowTypeLoadException(ExceptionStringID.ClassLoadValueClassTooLarge, parameterType);
+                        ThrowHelper.ThrowTypeLoadException(
+                            ExceptionStringID.ClassLoadValueClassTooLarge,
+                            parameterType
+                        );
                     }
 
                     if (((ArrayType)parameterizedType).Rank > 32)
                     {
-                        ThrowHelper.ThrowTypeLoadException(ExceptionStringID.ClassLoadRankTooLarge, type);
+                        ThrowHelper.ThrowTypeLoadException(
+                            ExceptionStringID.ClassLoadRankTooLarge,
+                            type
+                        );
                     }
 
                     if (parameterType.IsByRefLike)
                     {
                         // Arrays of byref-like types are not allowed
-                        ThrowHelper.ThrowTypeLoadException(ExceptionStringID.ClassLoadGeneral, type);
+                        ThrowHelper.ThrowTypeLoadException(
+                            ExceptionStringID.ClassLoadGeneral,
+                            type
+                        );
                     }
 
                     if (parameterType.IsVoid)
                     {
                         // Arrays of System.Void are not allowed
-                        ThrowHelper.ThrowTypeLoadException(ExceptionStringID.ClassLoadGeneral, type);
+                        ThrowHelper.ThrowTypeLoadException(
+                            ExceptionStringID.ClassLoadGeneral,
+                            type
+                        );
                     }
                 }
             }
             else if (type.IsFunctionPointer)
             {
                 var functionPointer = ((FunctionPointerType)type).Signature;
-                ((CompilerTypeSystemContext)type.Context).EnsureLoadableType(functionPointer.ReturnType);
+                ((CompilerTypeSystemContext)type.Context).EnsureLoadableType(
+                    functionPointer.ReturnType
+                );
 
                 foreach (TypeDesc param in functionPointer)
                 {
@@ -309,15 +363,25 @@ namespace ILCompiler
                 if (type.IsGenericDefinition)
                 {
                     // Check for illegal recursion
-                    if (type is EcmaType ecmaType && ILCompiler.LazyGenericsSupport.CheckForECMAIllegalGenericRecursion(ecmaType))
+                    if (
+                        type is EcmaType ecmaType
+                        && ILCompiler.LazyGenericsSupport.CheckForECMAIllegalGenericRecursion(
+                            ecmaType
+                        )
+                    )
                     {
-                        ThrowHelper.ThrowTypeLoadException(ExceptionStringID.ClassLoadGeneral, type);
+                        ThrowHelper.ThrowTypeLoadException(
+                            ExceptionStringID.ClassLoadGeneral,
+                            type
+                        );
                     }
                     return type;
                 }
                 else if (type.HasInstantiation)
                 {
-                    ((CompilerTypeSystemContext)type.Context).EnsureLoadableType(type.GetTypeDefinition());
+                    ((CompilerTypeSystemContext)type.Context).EnsureLoadableType(
+                        type.GetTypeDefinition()
+                    );
                 }
 
                 // System.__Canon or System.__UniversalCanon
@@ -329,7 +393,9 @@ namespace ILCompiler
                 // We need to be able to load interfaces
                 foreach (var intf in type.RuntimeInterfaces)
                 {
-                    ((CompilerTypeSystemContext)type.Context).EnsureLoadableType(intf.NormalizeInstantiation());
+                    ((CompilerTypeSystemContext)type.Context).EnsureLoadableType(
+                        intf.NormalizeInstantiation()
+                    );
                 }
 
                 if (type.BaseType != null)
@@ -344,7 +410,9 @@ namespace ILCompiler
                 defType.ComputeStaticFieldLayout(StaticLayoutKind.StaticRegionSizesAndFields);
 
                 // Make sure instantiation length matches the expectation
-                if (defType.Instantiation.Length != defType.GetTypeDefinition().Instantiation.Length)
+                if (
+                    defType.Instantiation.Length != defType.GetTypeDefinition().Instantiation.Length
+                )
                 {
                     ThrowHelper.ThrowTypeLoadException(ExceptionStringID.ClassLoadGeneral, type);
                 }
@@ -352,18 +420,26 @@ namespace ILCompiler
                 foreach (TypeDesc typeArg in defType.Instantiation)
                 {
                     // ByRefs, pointers, function pointers, and System.Void are never valid instantiation arguments
-                    if (typeArg.IsByRef
+                    if (
+                        typeArg.IsByRef
                         || typeArg.IsPointer
                         || typeArg.IsFunctionPointer
-                        || typeArg.IsVoid)
+                        || typeArg.IsVoid
+                    )
                     {
-                        ThrowHelper.ThrowTypeLoadException(ExceptionStringID.ClassLoadGeneral, type);
+                        ThrowHelper.ThrowTypeLoadException(
+                            ExceptionStringID.ClassLoadGeneral,
+                            type
+                        );
                     }
 
                     ((CompilerTypeSystemContext)type.Context).EnsureLoadableType(typeArg);
                 }
 
-                if (!defType.IsCanonicalSubtype(CanonicalFormKind.Any) && !defType.CheckConstraints())
+                if (
+                    !defType.IsCanonicalSubtype(CanonicalFormKind.Any)
+                    && !defType.CheckConstraints()
+                )
                 {
                     ThrowHelper.ThrowTypeLoadException(ExceptionStringID.ClassLoadGeneral, type);
                 }

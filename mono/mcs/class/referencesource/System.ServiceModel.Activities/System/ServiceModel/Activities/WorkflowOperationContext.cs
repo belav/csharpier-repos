@@ -27,12 +27,19 @@ namespace System.ServiceModel.Activities
     // Async Path: If workflow goes async (SendFault/SendReply called after ResumeBookmark completes) we complete the AsyncResult at SendFault/SendReply.
     class WorkflowOperationContext : AsyncResult
     {
-        static readonly ReadOnlyDictionaryInternal<string, string> emptyDictionary = new ReadOnlyDictionaryInternal<string, string>(new Dictionary<string, string>());
+        static readonly ReadOnlyDictionaryInternal<string, string> emptyDictionary =
+            new ReadOnlyDictionaryInternal<string, string>(new Dictionary<string, string>());
         static readonly object[] emptyObjectArray = new object[0];
-        static AsyncCompletion handleEndResumeBookmark = new AsyncCompletion(HandleEndResumeBookmark);
-        static AsyncCompletion handleEndWaitForPendingOperations = new AsyncCompletion(HandleEndWaitForPendingOperations);
+        static AsyncCompletion handleEndResumeBookmark = new AsyncCompletion(
+            HandleEndResumeBookmark
+        );
+        static AsyncCompletion handleEndWaitForPendingOperations = new AsyncCompletion(
+            HandleEndWaitForPendingOperations
+        );
         static AsyncCompletion handleEndProcessReceiveContext;
-        static Action<AsyncResult, Exception> onCompleting = new Action<AsyncResult, Exception>(Finally);
+        static Action<AsyncResult, Exception> onCompleting = new Action<AsyncResult, Exception>(
+            Finally
+        );
         object[] inputs;
         string operationName;
         object[] outputs;
@@ -66,10 +73,21 @@ namespace System.ServiceModel.Activities
         //Tracking for decrement of ASP.NET busy count
         bool hasDecrementedBusyCount;
 
-        WorkflowOperationContext(object[] inputs, OperationContext operationContext, string operationName,
-            bool performanceCountersEnabled, bool propagateActivity, Transaction currentTransaction,
-            WorkflowServiceInstance workflowInstance, IInvokeReceivedNotification notification, WorkflowOperationBehavior behavior, ServiceEndpoint endpoint,
-            TimeSpan timeout, AsyncCallback callback, object state)
+        WorkflowOperationContext(
+            object[] inputs,
+            OperationContext operationContext,
+            string operationName,
+            bool performanceCountersEnabled,
+            bool propagateActivity,
+            Transaction currentTransaction,
+            WorkflowServiceInstance workflowInstance,
+            IInvokeReceivedNotification notification,
+            WorkflowOperationBehavior behavior,
+            ServiceEndpoint endpoint,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
             : base(callback, state)
         {
             this.inputs = inputs;
@@ -87,7 +105,11 @@ namespace System.ServiceModel.Activities
 
             // Resolve bookmark
             Fx.Assert(behavior != null, "behavior must not be null!");
-            this.bookmark = behavior.OnResolveBookmark(this, out this.bookmarkScope, out this.bookmarkValue);
+            this.bookmark = behavior.OnResolveBookmark(
+                this,
+                out this.bookmarkScope,
+                out this.bookmarkValue
+            );
             Fx.Assert(this.bookmark != null, "bookmark must not be null!");
 
             bool completeSelf = false;
@@ -103,13 +125,20 @@ namespace System.ServiceModel.Activities
 
                 if (Fx.Trace.IsEtwProviderEnabled)
                 {
-                    this.eventTraceActivity = EventTraceActivityHelper.TryExtractActivity(this.OperationContext.IncomingMessage);
+                    this.eventTraceActivity = EventTraceActivityHelper.TryExtractActivity(
+                        this.OperationContext.IncomingMessage
+                    );
                 }
 
                 // Take ownership of the ReceiveContext when buffering is enabled by removing the property
                 if (this.workflowInstance.BufferedReceiveManager != null)
                 {
-                    if (!ReceiveContext.TryGet(this.OperationContext.IncomingMessageProperties, out this.receiveContext))
+                    if (
+                        !ReceiveContext.TryGet(
+                            this.OperationContext.IncomingMessageProperties,
+                            out this.receiveContext
+                        )
+                    )
                     {
                         Fx.Assert("ReceiveContext expected when BufferedReceives are enabled");
                     }
@@ -139,36 +168,18 @@ namespace System.ServiceModel.Activities
 
         public object[] Inputs
         {
-            get
-            {
-                return this.inputs;
-            }
+            get { return this.inputs; }
         }
 
-        public OperationContext OperationContext
-        {
-            get;
-            private set;
-        }
+        public OperationContext OperationContext { get; private set; }
 
-        public ServiceEndpoint ServiceEndpoint
-        {
-            get;
-            private set;
-        }
+        public ServiceEndpoint ServiceEndpoint { get; private set; }
 
-        public Transaction CurrentTransaction
-        {
-            get;
-            private set;
-        }
+        public Transaction CurrentTransaction { get; private set; }
 
         public object BookmarkValue
         {
-            get 
-            { 
-                return this.bookmarkValue; 
-            }
+            get { return this.bookmarkValue; }
         }
 
         public bool HasResponse
@@ -177,33 +188,52 @@ namespace System.ServiceModel.Activities
             {
                 lock (this.thisLock)
                 {
-                    return this.CurrentState == State.Completed || this.CurrentState == State.ResultReceived;
+                    return this.CurrentState == State.Completed
+                        || this.CurrentState == State.ResultReceived;
                 }
             }
         }
 
         //Completion state of this AsyncResult guarded by propertyLock
-        State CurrentState
-        {
-            get;
-            set;
-        }
+        State CurrentState { get; set; }
 
         public Guid E2EActivityId
         {
-            get
-            {
-                return this.e2eActivityId;
-            }
+            get { return this.e2eActivityId; }
         }
 
-        public static IAsyncResult BeginProcessRequest(WorkflowServiceInstance workflowInstance, OperationContext operationContext, string operationName,
-            object[] inputs, bool performanceCountersEnabled, bool propagateActivity, Transaction currentTransaction, IInvokeReceivedNotification notification,
-            WorkflowOperationBehavior behavior, ServiceEndpoint endpoint, TimeSpan timeout, AsyncCallback callback, object state)
+        public static IAsyncResult BeginProcessRequest(
+            WorkflowServiceInstance workflowInstance,
+            OperationContext operationContext,
+            string operationName,
+            object[] inputs,
+            bool performanceCountersEnabled,
+            bool propagateActivity,
+            Transaction currentTransaction,
+            IInvokeReceivedNotification notification,
+            WorkflowOperationBehavior behavior,
+            ServiceEndpoint endpoint,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             Fx.Assert(inputs != null, "Null inputs");
-            return new WorkflowOperationContext(inputs, operationContext, operationName, performanceCountersEnabled,
-                propagateActivity, currentTransaction, workflowInstance, notification, behavior, endpoint, timeout, callback, state);
+            return new WorkflowOperationContext(
+                inputs,
+                operationContext,
+                operationName,
+                performanceCountersEnabled,
+                propagateActivity,
+                currentTransaction,
+                workflowInstance,
+                notification,
+                behavior,
+                endpoint,
+                timeout,
+                callback,
+                state
+            );
         }
 
         public static object EndProcessRequest(IAsyncResult result, out object[] outputs)
@@ -223,7 +253,11 @@ namespace System.ServiceModel.Activities
 
             lock (this.thisLock)
             {
-                Fx.Assert(this.CurrentState != State.Completed && this.CurrentState != State.ResultReceived, "Cannot receive this call after completion/result");
+                Fx.Assert(
+                    this.CurrentState != State.Completed
+                        && this.CurrentState != State.ResultReceived,
+                    "Cannot receive this call after completion/result"
+                );
                 completeNow = ProcessReply();
             }
 
@@ -239,7 +273,11 @@ namespace System.ServiceModel.Activities
 
             lock (this.thisLock)
             {
-                Fx.Assert(this.CurrentState != State.Completed && this.CurrentState != State.ResultReceived, "Cannot receive this call after completion/result");
+                Fx.Assert(
+                    this.CurrentState != State.Completed
+                        && this.CurrentState != State.ResultReceived,
+                    "Cannot receive this call after completion/result"
+                );
                 this.outputs = WorkflowOperationContext.emptyObjectArray; // everything is in the Message return value for workflow
                 this.operationReturnValue = returnValue;
                 completeNow = ProcessReply();
@@ -257,7 +295,11 @@ namespace System.ServiceModel.Activities
 
             lock (this.thisLock)
             {
-                Fx.Assert(this.CurrentState != State.Completed && this.CurrentState != State.ResultReceived, "Cannot receive this call after completion/result");
+                Fx.Assert(
+                    this.CurrentState != State.Completed
+                        && this.CurrentState != State.ResultReceived,
+                    "Cannot receive this call after completion/result"
+                );
                 this.outputs = outputs ?? WorkflowOperationContext.emptyObjectArray;
                 this.operationReturnValue = returnValue;
                 completeNow = ProcessReply();
@@ -332,22 +374,41 @@ namespace System.ServiceModel.Activities
                     DiagnosticTraceBase.ActivityId = this.E2EActivityId;
                     this.propagateActivity = false;
                 }
-                if (TraceUtility.ActivityTracing || (!TraceUtility.MessageFlowTracing && this.propagateActivity))
+                if (
+                    TraceUtility.ActivityTracing
+                    || (!TraceUtility.MessageFlowTracing && this.propagateActivity)
+                )
                 {
                     this.e2eActivityId = TraceUtility.GetReceivedActivityId(this.OperationContext);
 
-                    if ((this.E2EActivityId != Guid.Empty) && (this.E2EActivityId != InternalReceiveMessage.TraceCorrelationActivityId))
+                    if (
+                        (this.E2EActivityId != Guid.Empty)
+                        && (this.E2EActivityId != InternalReceiveMessage.TraceCorrelationActivityId)
+                    )
                     {
                         this.propagateActivity = true;
-                        this.OperationContext.IncomingMessageProperties[MessagingActivityHelper.E2EActivityId] = this.E2EActivityId;
+                        this.OperationContext.IncomingMessageProperties[
+                            MessagingActivityHelper.E2EActivityId
+                        ] = this.E2EActivityId;
                         this.ambientActivityId = InternalReceiveMessage.TraceCorrelationActivityId;
                         FxTrace.Trace.SetAndTraceTransfer(this.E2EActivityId, true);
                         if (TD.StartSignpostEventIsEnabled())
                         {
-                            TD.StartSignpostEvent(new DictionaryTraceRecord(new Dictionary<string, string>(2) {
-                                                    { MessagingActivityHelper.ActivityName, MessagingActivityHelper.ActivityNameWorkflowOperationInvoke },
-                                                    { MessagingActivityHelper.ActivityType, MessagingActivityHelper.ActivityTypeExecuteUserCode }
-                            }));
+                            TD.StartSignpostEvent(
+                                new DictionaryTraceRecord(
+                                    new Dictionary<string, string>(2)
+                                    {
+                                        {
+                                            MessagingActivityHelper.ActivityName,
+                                            MessagingActivityHelper.ActivityNameWorkflowOperationInvoke
+                                        },
+                                        {
+                                            MessagingActivityHelper.ActivityType,
+                                            MessagingActivityHelper.ActivityTypeExecuteUserCode
+                                        },
+                                    }
+                                )
+                            );
                         }
                     }
                     else
@@ -366,7 +427,6 @@ namespace System.ServiceModel.Activities
             }
         }
 
-
         void DecrementBusyCount()
         {
             lock (this.thisLock)
@@ -376,7 +436,9 @@ namespace System.ServiceModel.Activities
                     AspNetEnvironment.Current.DecrementBusyCount();
                     if (AspNetEnvironment.Current.TraceDecrementBusyCountIsEnabled())
                     {
-                        AspNetEnvironment.Current.TraceDecrementBusyCount(SR.BusyCountTraceFormatString(this.workflowInstance.Id));
+                        AspNetEnvironment.Current.TraceDecrementBusyCount(
+                            SR.BusyCountTraceFormatString(this.workflowInstance.Id)
+                        );
                     }
                     this.hasDecrementedBusyCount = true;
                 }
@@ -388,7 +450,9 @@ namespace System.ServiceModel.Activities
             AspNetEnvironment.Current.IncrementBusyCount();
             if (AspNetEnvironment.Current.TraceIncrementBusyCountIsEnabled())
             {
-                AspNetEnvironment.Current.TraceIncrementBusyCount(SR.BusyCountTraceFormatString(this.workflowInstance.Id));
+                AspNetEnvironment.Current.TraceIncrementBusyCount(
+                    SR.BusyCountTraceFormatString(this.workflowInstance.Id)
+                );
             }
         }
 
@@ -414,10 +478,21 @@ namespace System.ServiceModel.Activities
                     Guid oldId = InternalReceiveMessage.TraceCorrelationActivityId;
                     if (TD.StopSignpostEventIsEnabled())
                     {
-                        TD.StopSignpostEvent(new DictionaryTraceRecord(new Dictionary<string, string>(2) {
-                                                    { MessagingActivityHelper.ActivityName, MessagingActivityHelper.ActivityNameWorkflowOperationInvoke },
-                                                    { MessagingActivityHelper.ActivityType, MessagingActivityHelper.ActivityTypeExecuteUserCode }
-                        }));
+                        TD.StopSignpostEvent(
+                            new DictionaryTraceRecord(
+                                new Dictionary<string, string>(2)
+                                {
+                                    {
+                                        MessagingActivityHelper.ActivityName,
+                                        MessagingActivityHelper.ActivityNameWorkflowOperationInvoke
+                                    },
+                                    {
+                                        MessagingActivityHelper.ActivityType,
+                                        MessagingActivityHelper.ActivityTypeExecuteUserCode
+                                    },
+                                }
+                            )
+                        );
                     }
                     FxTrace.Trace.SetAndTraceTransfer(this.ambientActivityId, true);
                     this.ambientActivityId = Guid.Empty;
@@ -435,8 +510,10 @@ namespace System.ServiceModel.Activities
         }
 
         //Perf counter helpers.
-        [Fx.Tag.SecurityNote(Critical = "Critical because it accesses UnsafeNativeMethods.QueryPerformanceCounter.",
-            Safe = "Safe because we only make the call if the PartialTrustHelper.AppDomainFullyTrusted is true.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Critical because it accesses UnsafeNativeMethods.QueryPerformanceCounter.",
+            Safe = "Safe because we only make the call if the PartialTrustHelper.AppDomainFullyTrusted is true."
+        )]
         [SecuritySafeCritical]
         void TrackMethodCalled()
         {
@@ -447,15 +524,21 @@ namespace System.ServiceModel.Activities
                     PerformanceCounters.MethodCalled(this.operationName);
                 }
 
-                if (System.Runtime.Interop.UnsafeNativeMethods.QueryPerformanceCounter(out this.beginTime) == 0)
+                if (
+                    System.Runtime.Interop.UnsafeNativeMethods.QueryPerformanceCounter(
+                        out this.beginTime
+                    ) == 0
+                )
                 {
                     this.beginTime = -1;
                 }
             }
 
-            if (TD2.OperationCompletedIsEnabled() ||
-                    TD2.OperationFaultedIsEnabled() ||
-                    TD2.OperationFailedIsEnabled())
+            if (
+                TD2.OperationCompletedIsEnabled()
+                || TD2.OperationFaultedIsEnabled()
+                || TD2.OperationFailedIsEnabled()
+            )
             {
                 this.beginOperation = DateTime.UtcNow.Ticks;
             }
@@ -464,7 +547,11 @@ namespace System.ServiceModel.Activities
             {
                 using (new OperationContextScopeHelper(this.OperationContext))
                 {
-                    TD2.OperationInvoked(this.eventTraceActivity, this.operationName, TraceUtility.GetCallerInfo(this.OperationContext));
+                    TD2.OperationInvoked(
+                        this.eventTraceActivity,
+                        this.operationName,
+                        TraceUtility.GetCallerInfo(this.OperationContext)
+                    );
                 }
             }
         }
@@ -483,8 +570,11 @@ namespace System.ServiceModel.Activities
             {
                 using (new OperationContextScopeHelper(this.OperationContext))
                 {
-                    TD2.OperationFaulted(this.eventTraceActivity, this.operationName,
-                        TraceUtility.GetUtcBasedDurationForTrace(this.beginOperation));
+                    TD2.OperationFaulted(
+                        this.eventTraceActivity,
+                        this.operationName,
+                        TraceUtility.GetUtcBasedDurationForTrace(this.beginOperation)
+                    );
                 }
             }
         }
@@ -503,22 +593,35 @@ namespace System.ServiceModel.Activities
             {
                 using (new OperationContextScopeHelper(this.OperationContext))
                 {
-                    TD2.OperationFailed(this.eventTraceActivity, this.operationName, 
-                        TraceUtility.GetUtcBasedDurationForTrace(this.beginOperation));
+                    TD2.OperationFailed(
+                        this.eventTraceActivity,
+                        this.operationName,
+                        TraceUtility.GetUtcBasedDurationForTrace(this.beginOperation)
+                    );
                 }
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Critical because it accesses UnsafeNativeMethods.QueryPerformanceCounter.",
-            Safe = "Safe because we only make the call if the PartialTrustHelper.AppDomainFullyTrusted is true.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Critical because it accesses UnsafeNativeMethods.QueryPerformanceCounter.",
+            Safe = "Safe because we only make the call if the PartialTrustHelper.AppDomainFullyTrusted is true."
+        )]
         [SecuritySafeCritical]
         long GetDuration()
         {
             long currentTime = 0;
             long duration = 0;
 
-            if (PartialTrustHelpers.AppDomainFullyTrusted && this.performanceCountersEnabled && (this.beginTime >= 0) &&
-                (System.Runtime.Interop.UnsafeNativeMethods.QueryPerformanceCounter(out currentTime) != 0))
+            if (
+                PartialTrustHelpers.AppDomainFullyTrusted
+                && this.performanceCountersEnabled
+                && (this.beginTime >= 0)
+                && (
+                    System.Runtime.Interop.UnsafeNativeMethods.QueryPerformanceCounter(
+                        out currentTime
+                    ) != 0
+                )
+            )
             {
                 duration = currentTime - this.beginTime;
             }
@@ -540,8 +643,11 @@ namespace System.ServiceModel.Activities
             {
                 using (new OperationContextScopeHelper(this.OperationContext))
                 {
-                    TD2.OperationCompleted(this.eventTraceActivity, this.operationName, 
-                        TraceUtility.GetUtcBasedDurationForTrace(this.beginOperation));
+                    TD2.OperationCompleted(
+                        this.eventTraceActivity,
+                        this.operationName,
+                        TraceUtility.GetUtcBasedDurationForTrace(this.beginOperation)
+                    );
                 }
             }
         }
@@ -577,8 +683,13 @@ namespace System.ServiceModel.Activities
             }
 
             // if there is a session, queue up this request in the per session pending request queue before notifying
-            // the dispatcher to start the next invoke           
-            IAsyncResult pendingAsyncResult = this.workflowInstance.BeginWaitForPendingOperations(sessionId, this.timeoutHelper.RemainingTime(), this.PrepareAsyncCompletion(handleEndWaitForPendingOperations), this);
+            // the dispatcher to start the next invoke
+            IAsyncResult pendingAsyncResult = this.workflowInstance.BeginWaitForPendingOperations(
+                sessionId,
+                this.timeoutHelper.RemainingTime(),
+                this.PrepareAsyncCompletion(handleEndWaitForPendingOperations),
+                this
+            );
             bool completed;
 
             this.notification.NotifyInvokeReceived();
@@ -590,7 +701,7 @@ namespace System.ServiceModel.Activities
             {
                 completed = false;
             }
-            
+
             return completed;
         }
 
@@ -598,7 +709,10 @@ namespace System.ServiceModel.Activities
         {
             if (this.pendingAsyncResult != null)
             {
-                this.workflowInstance.RemovePendingOperation(this.OperationContext.SessionId, this.pendingAsyncResult);
+                this.workflowInstance.RemovePendingOperation(
+                    this.OperationContext.SessionId,
+                    this.pendingAsyncResult
+                );
                 this.pendingAsyncResult = null;
             }
         }
@@ -631,8 +745,13 @@ namespace System.ServiceModel.Activities
             try
             {
                 IAsyncResult nextResult = this.workflowInstance.BeginResumeProtocolBookmark(
-                    this.bookmark, this.bookmarkScope, this,
-                    this.timeoutHelper.RemainingTime(), this.PrepareAsyncCompletion(handleEndResumeBookmark), this);
+                    this.bookmark,
+                    this.bookmarkScope,
+                    this,
+                    this.timeoutHelper.RemainingTime(),
+                    this.PrepareAsyncCompletion(handleEndResumeBookmark),
+                    this
+                );
 
                 bool completed;
                 if (nextResult.CompletedSynchronously)
@@ -664,32 +783,52 @@ namespace System.ServiceModel.Activities
             bool shouldAbandon = true;
             try
             {
-                BookmarkResumptionResult resumptionResult = thisPtr.workflowInstance.EndResumeProtocolBookmark(result);
+                BookmarkResumptionResult resumptionResult =
+                    thisPtr.workflowInstance.EndResumeProtocolBookmark(result);
                 if (resumptionResult != BookmarkResumptionResult.Success)
                 {
                     // Raise UnkownMessageReceivedEvent when we fail to resume bookmark
-                    thisPtr.OperationContext.Host.RaiseUnknownMessageReceived(thisPtr.OperationContext.IncomingMessage);
+                    thisPtr.OperationContext.Host.RaiseUnknownMessageReceived(
+                        thisPtr.OperationContext.IncomingMessage
+                    );
 
                     // Only delay-retry this operation once (and only if retries are supported). Future calls will ensure the bookmark is set.
                     if (thisPtr.workflowInstance.BufferedReceiveManager != null)
                     {
-                        bool bufferSuccess = thisPtr.workflowInstance.BufferedReceiveManager.BufferReceive(
-                            thisPtr.OperationContext, thisPtr.receiveContext, thisPtr.bookmark.Name, BufferedReceiveState.WaitingOnBookmark, false);
+                        bool bufferSuccess =
+                            thisPtr.workflowInstance.BufferedReceiveManager.BufferReceive(
+                                thisPtr.OperationContext,
+                                thisPtr.receiveContext,
+                                thisPtr.bookmark.Name,
+                                BufferedReceiveState.WaitingOnBookmark,
+                                false
+                            );
                         if (bufferSuccess)
                         {
                             if (TD.BufferOutOfOrderMessageNoBookmarkIsEnabled())
                             {
-                                TD.BufferOutOfOrderMessageNoBookmark(thisPtr.eventTraceActivity, thisPtr.workflowInstance.Id.ToString(), thisPtr.bookmark.Name);
+                                TD.BufferOutOfOrderMessageNoBookmark(
+                                    thisPtr.eventTraceActivity,
+                                    thisPtr.workflowInstance.Id.ToString(),
+                                    thisPtr.bookmark.Name
+                                );
                             }
 
                             shouldAbandon = false;
                         }
                     }
 
-                    // The throw exception is intentional whether or not BufferedReceiveManager is set.   
-                    // This is to allow exception to bubble up the stack to WCF to cleanup various state (like Transaction).   
+                    // The throw exception is intentional whether or not BufferedReceiveManager is set.
+                    // This is to allow exception to bubble up the stack to WCF to cleanup various state (like Transaction).
                     // This is queue scenario and as far as the client is concerned, the client will not see any exception.
-                    throw FxTrace.Exception.AsError(new FaultException(OperationExecutionFault.CreateOperationNotAvailableFault(thisPtr.workflowInstance.Id, thisPtr.bookmark.Name)));
+                    throw FxTrace.Exception.AsError(
+                        new FaultException(
+                            OperationExecutionFault.CreateOperationNotAvailableFault(
+                                thisPtr.workflowInstance.Id,
+                                thisPtr.bookmark.Name
+                            )
+                        )
+                    );
                 }
 
                 lock (thisPtr.thisLock)
@@ -736,10 +875,17 @@ namespace System.ServiceModel.Activities
             {
                 if (handleEndProcessReceiveContext == null)
                 {
-                    handleEndProcessReceiveContext = new AsyncCompletion(HandleEndProcessReceiveContext);
+                    handleEndProcessReceiveContext = new AsyncCompletion(
+                        HandleEndProcessReceiveContext
+                    );
                 }
 
-                IAsyncResult nextResult = ReceiveContextAsyncResult.BeginProcessReceiveContext(this, this.receiveContext, PrepareAsyncCompletion(handleEndProcessReceiveContext), this);
+                IAsyncResult nextResult = ReceiveContextAsyncResult.BeginProcessReceiveContext(
+                    this,
+                    this.receiveContext,
+                    PrepareAsyncCompletion(handleEndProcessReceiveContext),
+                    this
+                );
                 return SyncContinue(nextResult);
             }
 
@@ -783,7 +929,7 @@ namespace System.ServiceModel.Activities
             BookmarkResumption,
             WaitForResult,
             ResultReceived,
-            Completed
+            Completed,
         }
 
         class OperationContextScopeHelper : IDisposable
@@ -809,7 +955,12 @@ namespace System.ServiceModel.Activities
             WorkflowOperationContext context;
             ReceiveContext receiveContext;
 
-            ReceiveContextAsyncResult(WorkflowOperationContext context, ReceiveContext receiveContext, AsyncCallback callback, object state)
+            ReceiveContextAsyncResult(
+                WorkflowOperationContext context,
+                ReceiveContext receiveContext,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.context = context;
@@ -821,7 +972,12 @@ namespace System.ServiceModel.Activities
                 }
             }
 
-            public static IAsyncResult BeginProcessReceiveContext(WorkflowOperationContext context, ReceiveContext receiveContext, AsyncCallback callback, object state)
+            public static IAsyncResult BeginProcessReceiveContext(
+                WorkflowOperationContext context,
+                ReceiveContext receiveContext,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return new ReceiveContextAsyncResult(context, receiveContext, callback, state);
             }
@@ -845,10 +1001,14 @@ namespace System.ServiceModel.Activities
                     if (this.context.CurrentTransaction != null)
                     {
                         // make sure we Abandon if the transaction ends up with an outcome of Aborted
-                        this.context.CurrentTransaction.TransactionCompleted += new TransactionCompletedEventHandler(OnTransactionComplete);
+                        this.context.CurrentTransaction.TransactionCompleted +=
+                            new TransactionCompletedEventHandler(OnTransactionComplete);
                     }
                     result = this.receiveContext.BeginComplete(
-                        this.context.timeoutHelper.RemainingTime(), PrepareAsyncCompletion(handleEndComplete), this);
+                        this.context.timeoutHelper.RemainingTime(),
+                        PrepareAsyncCompletion(handleEndComplete),
+                        this
+                    );
                 }
 
                 return SyncContinue(result);

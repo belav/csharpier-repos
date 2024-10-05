@@ -4,7 +4,7 @@
 
 namespace System.ServiceModel.Diagnostics
 {
-    static class TraceCode 
+    static class TraceCode
     {
         // Administration trace codes
         public const int Administration = 0X10000;
@@ -36,7 +36,8 @@ namespace System.ServiceModel.Diagnostics
         public const int ConnectionPoolCloseException = TraceCode.Channels | 0X0002;
         public const int ConnectionPoolIdleTimeoutReached = TraceCode.Channels | 0X0003;
         public const int ConnectionPoolLeaseTimeoutReached = TraceCode.Channels | 0X0004;
-        public const int ConnectionPoolMaxOutboundConnectionsPerEndpointQuotaReached = TraceCode.Channels | 0X0005;
+        public const int ConnectionPoolMaxOutboundConnectionsPerEndpointQuotaReached =
+            TraceCode.Channels | 0X0005;
         public const int ServerMaxPooledConnectionsQuotaReached = TraceCode.Channels | 0X0006;
         public const int EndpointListenerClose = TraceCode.Channels | 0X0007;
         public const int EndpointListenerOpen = TraceCode.Channels | 0X0008;
@@ -148,18 +149,30 @@ namespace System.ServiceModel.Diagnostics
 
         // ComIntegration trace codes
         public const int ComIntegration = 0X50000;
-        public const int ComIntegrationServiceHostStartingService = TraceCode.ComIntegration | 0X0001;
-        public const int ComIntegrationServiceHostStartedService = TraceCode.ComIntegration | 0X0002;
-        public const int ComIntegrationServiceHostCreatedServiceContract = TraceCode.ComIntegration | 0X0003;
-        public const int ComIntegrationServiceHostStartedServiceDetails = TraceCode.ComIntegration | 0X0004;
-        public const int ComIntegrationServiceHostCreatedServiceEndpoint = TraceCode.ComIntegration | 0X0005;
-        public const int ComIntegrationServiceHostStoppingService = TraceCode.ComIntegration | 0X0006;
-        public const int ComIntegrationServiceHostStoppedService = TraceCode.ComIntegration | 0X0007;
-        public const int ComIntegrationDllHostInitializerStarting = TraceCode.ComIntegration | 0X0008;
-        public const int ComIntegrationDllHostInitializerAddingHost = TraceCode.ComIntegration | 0X0009;
-        public const int ComIntegrationDllHostInitializerStarted = TraceCode.ComIntegration | 0X000A;
-        public const int ComIntegrationDllHostInitializerStopping = TraceCode.ComIntegration | 0X000B;
-        public const int ComIntegrationDllHostInitializerStopped = TraceCode.ComIntegration | 0X000C;
+        public const int ComIntegrationServiceHostStartingService =
+            TraceCode.ComIntegration | 0X0001;
+        public const int ComIntegrationServiceHostStartedService =
+            TraceCode.ComIntegration | 0X0002;
+        public const int ComIntegrationServiceHostCreatedServiceContract =
+            TraceCode.ComIntegration | 0X0003;
+        public const int ComIntegrationServiceHostStartedServiceDetails =
+            TraceCode.ComIntegration | 0X0004;
+        public const int ComIntegrationServiceHostCreatedServiceEndpoint =
+            TraceCode.ComIntegration | 0X0005;
+        public const int ComIntegrationServiceHostStoppingService =
+            TraceCode.ComIntegration | 0X0006;
+        public const int ComIntegrationServiceHostStoppedService =
+            TraceCode.ComIntegration | 0X0007;
+        public const int ComIntegrationDllHostInitializerStarting =
+            TraceCode.ComIntegration | 0X0008;
+        public const int ComIntegrationDllHostInitializerAddingHost =
+            TraceCode.ComIntegration | 0X0009;
+        public const int ComIntegrationDllHostInitializerStarted =
+            TraceCode.ComIntegration | 0X000A;
+        public const int ComIntegrationDllHostInitializerStopping =
+            TraceCode.ComIntegration | 0X000B;
+        public const int ComIntegrationDllHostInitializerStopped =
+            TraceCode.ComIntegration | 0X000C;
         public const int ComIntegrationTLBImportStarting = TraceCode.ComIntegration | 0X000D;
         public const int ComIntegrationTLBImportFromAssembly = TraceCode.ComIntegration | 0X000E;
         public const int ComIntegrationTLBImportFromTypelib = TraceCode.ComIntegration | 0X000F;
@@ -173,17 +186,22 @@ namespace System.ServiceModel.Diagnostics
         public const int ComIntegrationLeftActivity = TraceCode.ComIntegration | 0X0017;
         public const int ComIntegrationInvokingMethod = TraceCode.ComIntegration | 0X0018;
         public const int ComIntegrationInvokedMethod = TraceCode.ComIntegration | 0X0019;
-        public const int ComIntegrationInvokingMethodNewTransaction = TraceCode.ComIntegration | 0X001A;
-        public const int ComIntegrationInvokingMethodContextTransaction = TraceCode.ComIntegration | 0X001B;
+        public const int ComIntegrationInvokingMethodNewTransaction =
+            TraceCode.ComIntegration | 0X001A;
+        public const int ComIntegrationInvokingMethodContextTransaction =
+            TraceCode.ComIntegration | 0X001B;
         public const int ComIntegrationServiceMonikerParsed = TraceCode.ComIntegration | 0X001C;
         public const int ComIntegrationWsdlChannelBuilderLoaded = TraceCode.ComIntegration | 0X001D;
-        public const int ComIntegrationTypedChannelBuilderLoaded = TraceCode.ComIntegration | 0X001E;
+        public const int ComIntegrationTypedChannelBuilderLoaded =
+            TraceCode.ComIntegration | 0X001E;
         public const int ComIntegrationChannelCreated = TraceCode.ComIntegration | 0X001F;
         public const int ComIntegrationDispatchMethod = TraceCode.ComIntegration | 0X0020;
         public const int ComIntegrationTxProxyTxCommitted = TraceCode.ComIntegration | 0X0021;
-        public const int ComIntegrationTxProxyTxAbortedByContext = TraceCode.ComIntegration | 0X0022;
+        public const int ComIntegrationTxProxyTxAbortedByContext =
+            TraceCode.ComIntegration | 0X0022;
         public const int ComIntegrationTxProxyTxAbortedByTM = TraceCode.ComIntegration | 0X0023;
-        public const int ComIntegrationMexMonikerMetadataExchangeComplete = TraceCode.ComIntegration | 0X0024;
+        public const int ComIntegrationMexMonikerMetadataExchangeComplete =
+            TraceCode.ComIntegration | 0X0024;
         public const int ComIntegrationMexChannelBuilderLoaded = TraceCode.ComIntegration | 0X0025;
 
         // Security trace codes
@@ -198,7 +216,8 @@ namespace System.ServiceModel.Diagnostics
         public const int SecurityNegotiationProcessingFailure = TraceCode.Security | 0X0008;
         public const int IssuanceTokenProviderRemovedCachedToken = TraceCode.Security | 0X0009;
         public const int IssuanceTokenProviderUsingCachedToken = TraceCode.Security | 0X000A;
-        public const int IssuanceTokenProviderBeginSecurityNegotiation = TraceCode.Security | 0X000B;
+        public const int IssuanceTokenProviderBeginSecurityNegotiation =
+            TraceCode.Security | 0X000B;
         public const int IssuanceTokenProviderEndSecurityNegotiation = TraceCode.Security | 0X000C;
         public const int IssuanceTokenProviderRedirectApplied = TraceCode.Security | 0X000D;
         public const int IssuanceTokenProviderServiceTokenCacheFull = TraceCode.Security | 0X000E;
@@ -287,7 +306,8 @@ namespace System.ServiceModel.Diagnostics
         public const int ExtensionCollectionDoesNotExist = TraceCode.ServiceModel | 0X001A;
         public const int ExtensionCollectionNameNotFound = TraceCode.ServiceModel | 0X001B;
         public const int ExtensionCollectionIsEmpty = TraceCode.ServiceModel | 0X001C;
-        public const int ExtensionElementAlreadyExistsInCollection = TraceCode.ServiceModel | 0X001D;
+        public const int ExtensionElementAlreadyExistsInCollection =
+            TraceCode.ServiceModel | 0X001D;
         public const int ElementTypeDoesntMatchConfiguredType = TraceCode.ServiceModel | 0X001E;
         public const int ErrorInvokingUserCode = TraceCode.ServiceModel | 0X001F;
         public const int GetBehaviorElement = TraceCode.ServiceModel | 0X0020;
@@ -306,7 +326,8 @@ namespace System.ServiceModel.Diagnostics
         public const int ServiceHostBaseAddresses = TraceCode.ServiceModel | 0X002D;
         public const int ServiceHostTimeoutOnClose = TraceCode.ServiceModel | 0X002E;
         public const int ServiceHostFaulted = TraceCode.ServiceModel | 0X002F;
-        public const int ServiceHostErrorOnReleasePerformanceCounter = TraceCode.ServiceModel | 0X0030;
+        public const int ServiceHostErrorOnReleasePerformanceCounter =
+            TraceCode.ServiceModel | 0X0030;
         public const int ServiceThrottleLimitReached = TraceCode.ServiceModel | 0X0031;
         public const int ServiceOperationMissingReply = TraceCode.ServiceModel | 0X0032;
         public const int ServiceOperationMissingReplyContext = TraceCode.ServiceModel | 0X0033;
@@ -334,7 +355,7 @@ namespace System.ServiceModel.Diagnostics
         public const int MetadataExchangeClientSendRequest = TraceCode.ServiceModel | 0X005B;
         public const int MetadataExchangeClientReceiveReply = TraceCode.ServiceModel | 0X005C;
         public const int WarnHelpPageEnabledNoBaseAddress = TraceCode.ServiceModel | 0X005D;
-        
+
         // PortSharingtrace codes
         public const int PortSharing = 0xA0000;
         public const int PortSharingClosed = TraceCode.PortSharing | 0X0001;
@@ -342,26 +363,39 @@ namespace System.ServiceModel.Diagnostics
         public const int PortSharingDupHandleGranted = TraceCode.PortSharing | 0X0003;
         public const int PortSharingDuplicatedSocket = TraceCode.PortSharing | 0X0004;
         public const int PortSharingListening = TraceCode.PortSharing | 0X0005;
-        
+
         public const int SharedManagerServiceEndpointNotExist = TraceCode.PortSharing | 0X000E;
-        
+
         //Indigo Tx trace codes
         public const int ServiceModelTransaction = 0xE0000;
-        public const int TxSourceTxScopeRequiredIsTransactedTransport = TraceCode.ServiceModelTransaction | 0X0001;
-        public const int TxSourceTxScopeRequiredIsTransactionFlow = TraceCode.ServiceModelTransaction | 0X0002;
-        public const int TxSourceTxScopeRequiredIsAttachedTransaction = TraceCode.ServiceModelTransaction | 0X0003;
-        public const int TxSourceTxScopeRequiredIsCreateNewTransaction = TraceCode.ServiceModelTransaction | 0X0004;
-        public const int TxCompletionStatusCompletedForAutocomplete = TraceCode.ServiceModelTransaction | 0X0005;
-        public const int TxCompletionStatusCompletedForError = TraceCode.ServiceModelTransaction | 0X0006;
-        public const int TxCompletionStatusCompletedForSetComplete = TraceCode.ServiceModelTransaction | 0X0007;
-        public const int TxCompletionStatusCompletedForTACOSC = TraceCode.ServiceModelTransaction | 0X0008;
-        public const int TxCompletionStatusCompletedForAsyncAbort = TraceCode.ServiceModelTransaction | 0X0009;
-        public const int TxCompletionStatusRemainsAttached = TraceCode.ServiceModelTransaction | 0X000A;
-        public const int TxCompletionStatusAbortedOnSessionClose = TraceCode.ServiceModelTransaction | 0X000B;
-        public const int TxReleaseServiceInstanceOnCompletion = TraceCode.ServiceModelTransaction | 0X000C;
+        public const int TxSourceTxScopeRequiredIsTransactedTransport =
+            TraceCode.ServiceModelTransaction | 0X0001;
+        public const int TxSourceTxScopeRequiredIsTransactionFlow =
+            TraceCode.ServiceModelTransaction | 0X0002;
+        public const int TxSourceTxScopeRequiredIsAttachedTransaction =
+            TraceCode.ServiceModelTransaction | 0X0003;
+        public const int TxSourceTxScopeRequiredIsCreateNewTransaction =
+            TraceCode.ServiceModelTransaction | 0X0004;
+        public const int TxCompletionStatusCompletedForAutocomplete =
+            TraceCode.ServiceModelTransaction | 0X0005;
+        public const int TxCompletionStatusCompletedForError =
+            TraceCode.ServiceModelTransaction | 0X0006;
+        public const int TxCompletionStatusCompletedForSetComplete =
+            TraceCode.ServiceModelTransaction | 0X0007;
+        public const int TxCompletionStatusCompletedForTACOSC =
+            TraceCode.ServiceModelTransaction | 0X0008;
+        public const int TxCompletionStatusCompletedForAsyncAbort =
+            TraceCode.ServiceModelTransaction | 0X0009;
+        public const int TxCompletionStatusRemainsAttached =
+            TraceCode.ServiceModelTransaction | 0X000A;
+        public const int TxCompletionStatusAbortedOnSessionClose =
+            TraceCode.ServiceModelTransaction | 0X000B;
+        public const int TxReleaseServiceInstanceOnCompletion =
+            TraceCode.ServiceModelTransaction | 0X000C;
         public const int TxAsyncAbort = TraceCode.ServiceModelTransaction | 0X000D;
         public const int TxFailedToNegotiateOleTx = TraceCode.ServiceModelTransaction | 0X000E;
-        public const int TxSourceTxScopeRequiredUsingExistingTransaction = TraceCode.ServiceModelTransaction | 0X000F;
+        public const int TxSourceTxScopeRequiredUsingExistingTransaction =
+            TraceCode.ServiceModelTransaction | 0X000F;
 
         //CfxGreen trace codes
         public const int NetFx35 = 0xF0000;

@@ -20,17 +20,21 @@ public class ResetAuthenticatorModel : PageModel
 
     public ResetAuthenticatorModel(
         UserManager<ApplicationUser> userManager,
-        ILogger<ResetAuthenticatorModel> logger)
+        ILogger<ResetAuthenticatorModel> logger
+    )
     {
         _userManager = userManager;
         _logger = logger;
     }
+
     public async Task<IActionResult> OnGet()
     {
         var user = await _userManager.GetUserAsync(User);
         if (user == null)
         {
-            throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            throw new ApplicationException(
+                $"Unable to load user with ID '{_userManager.GetUserId(User)}'."
+            );
         }
 
         return Page();
@@ -41,12 +45,17 @@ public class ResetAuthenticatorModel : PageModel
         var user = await _userManager.GetUserAsync(User);
         if (user == null)
         {
-            throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            throw new ApplicationException(
+                $"Unable to load user with ID '{_userManager.GetUserId(User)}'."
+            );
         }
 
         await _userManager.SetTwoFactorEnabledAsync(user, false);
         await _userManager.ResetAuthenticatorKeyAsync(user);
-        _logger.LogInformation("User with ID '{UserId}' has reset their authentication app key.", user.Id);
+        _logger.LogInformation(
+            "User with ID '{UserId}' has reset their authentication app key.",
+            user.Id
+        );
 
         return RedirectToPage("./EnableAuthenticator");
     }

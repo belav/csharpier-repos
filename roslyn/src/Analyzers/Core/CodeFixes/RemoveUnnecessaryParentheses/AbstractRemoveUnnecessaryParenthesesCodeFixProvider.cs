@@ -19,32 +19,54 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryParentheses
         : SyntaxEditorBasedCodeFixProvider
         where TParenthesizedExpressionSyntax : SyntaxNode
     {
-        public override ImmutableArray<string> FixableDiagnosticIds
-           => ImmutableArray.Create(IDEDiagnosticIds.RemoveUnnecessaryParenthesesDiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.RemoveUnnecessaryParenthesesDiagnosticId);
 
         protected abstract bool CanRemoveParentheses(
-            TParenthesizedExpressionSyntax current, SemanticModel semanticModel, CancellationToken cancellationToken);
+            TParenthesizedExpressionSyntax current,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        );
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            RegisterCodeFix(context, AnalyzersResources.Remove_unnecessary_parentheses, nameof(AnalyzersResources.Remove_unnecessary_parentheses));
+            RegisterCodeFix(
+                context,
+                AnalyzersResources.Remove_unnecessary_parentheses,
+                nameof(AnalyzersResources.Remove_unnecessary_parentheses)
+            );
             return Task.CompletedTask;
         }
 
         protected override Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            var originalNodes = diagnostics.SelectAsArray(
-                d => (TParenthesizedExpressionSyntax)d.AdditionalLocations[0].FindNode(
-                    findInsideTrivia: true, getInnermostNodeForTie: true, cancellationToken));
+            var originalNodes = diagnostics.SelectAsArray(d =>
+                (TParenthesizedExpressionSyntax)
+                    d.AdditionalLocations[0]
+                        .FindNode(
+                            findInsideTrivia: true,
+                            getInnermostNodeForTie: true,
+                            cancellationToken
+                        )
+            );
 
             return editor.ApplyExpressionLevelSemanticEditsAsync(
-                document, originalNodes,
-                (semanticModel, current) => current != null && CanRemoveParentheses(current, semanticModel, cancellationToken),
-                (_, currentRoot, current) => currentRoot.ReplaceNode(current, syntaxFacts.Unparenthesize(current)),
-                cancellationToken);
+                document,
+                originalNodes,
+                (semanticModel, current) =>
+                    current != null
+                    && CanRemoveParentheses(current, semanticModel, cancellationToken),
+                (_, currentRoot, current) =>
+                    currentRoot.ReplaceNode(current, syntaxFacts.Unparenthesize(current)),
+                cancellationToken
+            );
         }
     }
 }

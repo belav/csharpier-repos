@@ -23,7 +23,11 @@ internal sealed class DuplexStream : Stream
 
     public override long Length => throw new NotSupportedException();
 
-    public override long Position { get => throw new NotSupportedException(); set => throw new NotSupportedException(); }
+    public override long Position
+    {
+        get => throw new NotSupportedException();
+        set => throw new NotSupportedException();
+    }
 
     public override void Flush()
     {
@@ -50,27 +54,47 @@ internal sealed class DuplexStream : Stream
         _responseBody.Write(buffer, offset, count);
     }
 
-    public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override Task<int> ReadAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         return _requestBody.ReadAsync(buffer, offset, count, cancellationToken);
     }
 
-    public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+    public override ValueTask<int> ReadAsync(
+        Memory<byte> buffer,
+        CancellationToken cancellationToken = default
+    )
     {
         return _requestBody.ReadAsync(buffer, cancellationToken);
     }
 
-    public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override Task WriteAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         return _responseBody.WriteAsync(buffer, offset, count, cancellationToken);
     }
 
-    public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+    public override ValueTask WriteAsync(
+        ReadOnlyMemory<byte> buffer,
+        CancellationToken cancellationToken = default
+    )
     {
         return _responseBody.WriteAsync(buffer, cancellationToken);
     }
 
-    public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
+    public override Task CopyToAsync(
+        Stream destination,
+        int bufferSize,
+        CancellationToken cancellationToken
+    )
     {
         return _requestBody.CopyToAsync(destination, bufferSize, cancellationToken);
     }

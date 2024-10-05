@@ -23,20 +23,28 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         public FileChangeWatcherProvider(
             IThreadingContext threadingContext,
             IAsynchronousOperationListenerProvider listenerProvider,
-            [Import(typeof(SVsServiceProvider))] Shell.IAsyncServiceProvider serviceProvider)
+            [Import(typeof(SVsServiceProvider))] Shell.IAsyncServiceProvider serviceProvider
+        )
         {
-            var fileChangeService = Task.Factory.StartNew(
-                async () =>
-                {
-                    await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(threadingContext.DisposalToken);
+            var fileChangeService = Task
+                .Factory.StartNew(
+                    async () =>
+                    {
+                        await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                            threadingContext.DisposalToken
+                        );
 
-                    var fileChangeService = (IVsAsyncFileChangeEx?)await serviceProvider.GetServiceAsync(typeof(SVsFileChangeEx)).ConfigureAwait(true);
-                    Assumes.Present(fileChangeService);
-                    return fileChangeService;
-                },
-                threadingContext.DisposalToken,
-                TaskCreationOptions.RunContinuationsAsynchronously,
-                TaskScheduler.Default)
+                        var fileChangeService = (IVsAsyncFileChangeEx?)
+                            await serviceProvider
+                                .GetServiceAsync(typeof(SVsFileChangeEx))
+                                .ConfigureAwait(true);
+                        Assumes.Present(fileChangeService);
+                        return fileChangeService;
+                    },
+                    threadingContext.DisposalToken,
+                    TaskCreationOptions.RunContinuationsAsynchronously,
+                    TaskScheduler.Default
+                )
                 .Unwrap();
 
             // We do not want background work to implicitly block on the availability of the SVsFileChangeEx to avoid any deadlock risk,

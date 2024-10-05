@@ -25,38 +25,44 @@ internal sealed class SlimWebHostBuilder : WebHostBuilderBase, ISupportsStartup
             config.AddConfiguration(_config);
         });
 
-        _builder.ConfigureServices((context, services) =>
-        {
-            var webhostContext = GetWebHostBuilderContext(context);
-            var webHostOptions = (WebHostOptions)context.Properties[typeof(WebHostOptions)];
+        _builder.ConfigureServices(
+            (context, services) =>
+            {
+                var webhostContext = GetWebHostBuilderContext(context);
+                var webHostOptions = (WebHostOptions)context.Properties[typeof(WebHostOptions)];
 
-            // Add the IHostingEnvironment and IApplicationLifetime from Microsoft.AspNetCore.Hosting
-            services.AddSingleton(webhostContext.HostingEnvironment);
+                // Add the IHostingEnvironment and IApplicationLifetime from Microsoft.AspNetCore.Hosting
+                services.AddSingleton(webhostContext.HostingEnvironment);
 #pragma warning disable CS0618 // Type or member is obsolete
-            services.AddSingleton((AspNetCore.Hosting.IHostingEnvironment)webhostContext.HostingEnvironment);
-            services.AddSingleton<IApplicationLifetime, GenericWebHostApplicationLifetime>();
+                services.AddSingleton(
+                    (AspNetCore.Hosting.IHostingEnvironment)webhostContext.HostingEnvironment
+                );
+                services.AddSingleton<IApplicationLifetime, GenericWebHostApplicationLifetime>();
 #pragma warning restore CS0618 // Type or member is obsolete
 
-            services.Configure<GenericWebHostServiceOptions>(options =>
-            {
-                // Set the options
-                options.WebHostOptions = webHostOptions;
-            });
+                services.Configure<GenericWebHostServiceOptions>(options =>
+                {
+                    // Set the options
+                    options.WebHostOptions = webHostOptions;
+                });
 
-            // REVIEW: This is bad since we don't own this type. Anybody could add one of these and it would mess things up
-            // We need to flow this differently
-            services.TryAddSingleton(sp => new DiagnosticListener("Microsoft.AspNetCore"));
-            services.TryAddSingleton<DiagnosticSource>(sp => sp.GetRequiredService<DiagnosticListener>());
-            services.TryAddSingleton(sp => new ActivitySource("Microsoft.AspNetCore"));
-            services.TryAddSingleton(DistributedContextPropagator.Current);
+                // REVIEW: This is bad since we don't own this type. Anybody could add one of these and it would mess things up
+                // We need to flow this differently
+                services.TryAddSingleton(sp => new DiagnosticListener("Microsoft.AspNetCore"));
+                services.TryAddSingleton<DiagnosticSource>(sp =>
+                    sp.GetRequiredService<DiagnosticListener>()
+                );
+                services.TryAddSingleton(sp => new ActivitySource("Microsoft.AspNetCore"));
+                services.TryAddSingleton(DistributedContextPropagator.Current);
 
-            services.TryAddSingleton<IHttpContextFactory, DefaultHttpContextFactory>();
-            services.TryAddScoped<IMiddlewareFactory, MiddlewareFactory>();
-            services.TryAddSingleton<IApplicationBuilderFactory, ApplicationBuilderFactory>();
+                services.TryAddSingleton<IHttpContextFactory, DefaultHttpContextFactory>();
+                services.TryAddScoped<IMiddlewareFactory, MiddlewareFactory>();
+                services.TryAddSingleton<IApplicationBuilderFactory, ApplicationBuilderFactory>();
 
-            services.AddMetrics();
-            services.TryAddSingleton<HostingMetrics>();
-        });
+                services.AddMetrics();
+                services.TryAddSingleton<HostingMetrics>();
+            }
+        );
     }
 
     public IWebHostBuilder Configure(Action<IApplicationBuilder> configure)
@@ -64,12 +70,20 @@ internal sealed class SlimWebHostBuilder : WebHostBuilderBase, ISupportsStartup
         throw new NotSupportedException();
     }
 
-    public IWebHostBuilder UseStartup([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicMethods)] Type startupType)
+    public IWebHostBuilder UseStartup(
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicConstructors
+                | DynamicallyAccessedMemberTypes.PublicMethods
+        )]
+            Type startupType
+    )
     {
         throw new NotSupportedException();
     }
 
-    public IWebHostBuilder UseStartup<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] TStartup>(Func<WebHostBuilderContext, TStartup> startupFactory)
+    public IWebHostBuilder UseStartup<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] TStartup
+    >(Func<WebHostBuilderContext, TStartup> startupFactory)
     {
         throw new NotSupportedException();
     }
@@ -80,14 +94,16 @@ internal sealed class SlimWebHostBuilder : WebHostBuilderBase, ISupportsStartup
 
         UseSetting(WebHostDefaults.ApplicationKey, startupAssemblyName);
 
-        _builder.ConfigureServices((context, services) =>
-        {
-            services.Configure<GenericWebHostServiceOptions>(options =>
+        _builder.ConfigureServices(
+            (context, services) =>
             {
-                var webhostBuilderContext = GetWebHostBuilderContext(context);
-                options.ConfigureApplication = app => configure(webhostBuilderContext, app);
-            });
-        });
+                services.Configure<GenericWebHostServiceOptions>(options =>
+                {
+                    var webhostBuilderContext = GetWebHostBuilderContext(context);
+                    options.ConfigureApplication = app => configure(webhostBuilderContext, app);
+                });
+            }
+        );
 
         return this;
     }

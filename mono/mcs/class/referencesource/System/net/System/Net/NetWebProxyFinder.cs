@@ -1,16 +1,16 @@
-using System.IO;
 using System.Collections;
-using System.Collections.Specialized;
-using System.Threading;
-using System.Text;
-using System.Net.Cache;
-using System.Globalization;
-using System.Net.Configuration;
-using System.Security.Permissions;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using Microsoft.Win32;
+using System.Collections.Specialized;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.IO;
+using System.Net.Cache;
+using System.Net.Configuration;
+using System.Runtime.InteropServices;
+using System.Security.Permissions;
+using System.Text;
+using System.Threading;
+using Microsoft.Win32;
 
 namespace System.Net
 {
@@ -22,7 +22,9 @@ namespace System.Net
     {
         private static readonly char[] splitChars = new char[] { ';' };
         private static TimerThread.Queue timerQueue;
-        private static readonly TimerThread.Callback timerCallback = new TimerThread.Callback(RequestTimeoutCallback);
+        private static readonly TimerThread.Callback timerCallback = new TimerThread.Callback(
+            RequestTimeoutCallback
+        );
         private static readonly WaitCallback abortWrapper = new WaitCallback(AbortWrapper);
 
         private RequestCache backupCache;
@@ -31,6 +33,7 @@ namespace System.Net
         private Uri scriptLocation;
         private bool scriptDetectionFailed;
         private object lockObject;
+
         // Keep the following fields volatile, since we're accessing them outside of lock blocks
         private volatile WebRequest request;
         private volatile bool aborted;
@@ -60,8 +63,18 @@ namespace System.Net
                 bool result = false;
                 try
                 {
-                    string proxyListString = scriptInstance.FindProxyForURL(destination.ToString(), destination.Host);
-                    GlobalLog.Print("NetWebProxyFinder#" + ValidationHelper.HashString(this) + "::GetProxies() calling ExecuteFindProxyForURL() for destination:" + ValidationHelper.ToString(destination) + " returned scriptReturn:" + ValidationHelper.ToString(proxyList));
+                    string proxyListString = scriptInstance.FindProxyForURL(
+                        destination.ToString(),
+                        destination.Host
+                    );
+                    GlobalLog.Print(
+                        "NetWebProxyFinder#"
+                            + ValidationHelper.HashString(this)
+                            + "::GetProxies() calling ExecuteFindProxyForURL() for destination:"
+                            + ValidationHelper.ToString(destination)
+                            + " returned scriptReturn:"
+                            + ValidationHelper.ToString(proxyList)
+                    );
 
                     proxyList = ParseScriptResult(proxyListString);
 
@@ -69,7 +82,11 @@ namespace System.Net
                 }
                 catch (Exception exception)
                 {
-                    if (Logging.On) Logging.PrintWarning(Logging.Web, SR.GetString(SR.net_log_proxy_script_execution_error, exception));
+                    if (Logging.On)
+                        Logging.PrintWarning(
+                            Logging.Web,
+                            SR.GetString(SR.net_log_proxy_script_execution_error, exception)
+                        );
                 }
 
                 return result;
@@ -115,14 +132,20 @@ namespace System.Net
         // Calls DownloadAndCompile().
         private void EnsureEngineAvailable()
         {
-            GlobalLog.Enter("NetWebProxyFinder#" + ValidationHelper.HashString(this) + "::EnsureEngineAvailable");
+            GlobalLog.Enter(
+                "NetWebProxyFinder#" + ValidationHelper.HashString(this) + "::EnsureEngineAvailable"
+            );
 
             if (State == AutoWebProxyState.Uninitialized || engineScriptLocation == null)
             {
 #if !FEATURE_PAL
                 if (Engine.AutomaticallyDetectSettings)
                 {
-                    GlobalLog.Print("NetWebProxyFinder#" + ValidationHelper.HashString(this) + "::EnsureEngineAvailable() Attempting auto-detection.");
+                    GlobalLog.Print(
+                        "NetWebProxyFinder#"
+                            + ValidationHelper.HashString(this)
+                            + "::EnsureEngineAvailable() Attempting auto-detection."
+                    );
                     DetectScriptLocation();
                     if (scriptLocation != null)
                     {
@@ -130,11 +153,23 @@ namespace System.Net
                         // Successfully detected or user has flipped the automaticallyDetectSettings bit.
                         // Attempt a non conclusive DownloadAndCompile() so we can fallback
                         //
-                        GlobalLog.Print("NetWebProxyFinder#" + ValidationHelper.HashString(this) + "::EnsureEngineAvailable() discovered:" + ValidationHelper.ToString(scriptLocation) + " engineScriptLocation:" + ValidationHelper.ToString(engineScriptLocation));
+                        GlobalLog.Print(
+                            "NetWebProxyFinder#"
+                                + ValidationHelper.HashString(this)
+                                + "::EnsureEngineAvailable() discovered:"
+                                + ValidationHelper.ToString(scriptLocation)
+                                + " engineScriptLocation:"
+                                + ValidationHelper.ToString(engineScriptLocation)
+                        );
                         if (scriptLocation.Equals(engineScriptLocation))
                         {
                             State = AutoWebProxyState.Completed;
-                            GlobalLog.Leave("NetWebProxyFinder#" + ValidationHelper.HashString(this) + "::EnsureEngineAvailable", ValidationHelper.ToString(State));
+                            GlobalLog.Leave(
+                                "NetWebProxyFinder#"
+                                    + ValidationHelper.HashString(this)
+                                    + "::EnsureEngineAvailable",
+                                ValidationHelper.ToString(State)
+                            );
                             return;
                         }
                         AutoWebProxyState newState = DownloadAndCompile(scriptLocation);
@@ -142,7 +177,12 @@ namespace System.Net
                         {
                             State = AutoWebProxyState.Completed;
                             engineScriptLocation = scriptLocation;
-                            GlobalLog.Leave("NetWebProxyFinder#" + ValidationHelper.HashString(this) + "::EnsureEngineAvailable", ValidationHelper.ToString(State));
+                            GlobalLog.Leave(
+                                "NetWebProxyFinder#"
+                                    + ValidationHelper.HashString(this)
+                                    + "::EnsureEngineAvailable",
+                                ValidationHelper.ToString(State)
+                            );
                             return;
                         }
                     }
@@ -152,18 +192,35 @@ namespace System.Net
                 // Either Auto-Detect wasn't enabled or something failed with it.  Try the manual script location.
                 if ((Engine.AutomaticConfigurationScript != null) && !aborted)
                 {
-                    GlobalLog.Print("NetWebProxyFinder#" + ValidationHelper.HashString(this) + "::EnsureEngineAvailable() using automaticConfigurationScript:" + ValidationHelper.ToString(Engine.AutomaticConfigurationScript) + " engineScriptLocation:" + ValidationHelper.ToString(engineScriptLocation));
+                    GlobalLog.Print(
+                        "NetWebProxyFinder#"
+                            + ValidationHelper.HashString(this)
+                            + "::EnsureEngineAvailable() using automaticConfigurationScript:"
+                            + ValidationHelper.ToString(Engine.AutomaticConfigurationScript)
+                            + " engineScriptLocation:"
+                            + ValidationHelper.ToString(engineScriptLocation)
+                    );
                     if (Engine.AutomaticConfigurationScript.Equals(engineScriptLocation))
                     {
                         State = AutoWebProxyState.Completed;
-                        GlobalLog.Leave("NetWebProxyFinder#" + ValidationHelper.HashString(this) + "::EnsureEngineAvailable", ValidationHelper.ToString(State));
+                        GlobalLog.Leave(
+                            "NetWebProxyFinder#"
+                                + ValidationHelper.HashString(this)
+                                + "::EnsureEngineAvailable",
+                            ValidationHelper.ToString(State)
+                        );
                         return;
                     }
                     State = DownloadAndCompile(Engine.AutomaticConfigurationScript);
                     if (State == AutoWebProxyState.Completed)
                     {
                         engineScriptLocation = Engine.AutomaticConfigurationScript;
-                        GlobalLog.Leave("NetWebProxyFinder#" + ValidationHelper.HashString(this) + "::EnsureEngineAvailable", ValidationHelper.ToString(State));
+                        GlobalLog.Leave(
+                            "NetWebProxyFinder#"
+                                + ValidationHelper.HashString(this)
+                                + "::EnsureEngineAvailable",
+                            ValidationHelper.ToString(State)
+                        );
                         return;
                     }
                 }
@@ -171,30 +228,56 @@ namespace System.Net
             else
             {
                 // We always want to call DownloadAndCompile to check the expiration.
-                GlobalLog.Print("NetWebProxyFinder#" + ValidationHelper.HashString(this) + "::EnsureEngineAvailable() State:" + State + " engineScriptLocation:" + ValidationHelper.ToString(engineScriptLocation));
+                GlobalLog.Print(
+                    "NetWebProxyFinder#"
+                        + ValidationHelper.HashString(this)
+                        + "::EnsureEngineAvailable() State:"
+                        + State
+                        + " engineScriptLocation:"
+                        + ValidationHelper.ToString(engineScriptLocation)
+                );
                 State = DownloadAndCompile(engineScriptLocation);
                 if (State == AutoWebProxyState.Completed)
                 {
-                    GlobalLog.Leave("NetWebProxyFinder#" + ValidationHelper.HashString(this) + "::EnsureEngineAvailable", ValidationHelper.ToString(State));
+                    GlobalLog.Leave(
+                        "NetWebProxyFinder#"
+                            + ValidationHelper.HashString(this)
+                            + "::EnsureEngineAvailable",
+                        ValidationHelper.ToString(State)
+                    );
                     return;
                 }
 
                 // There's still an opportunity to fail over to the automaticConfigurationScript.
                 if (!engineScriptLocation.Equals(Engine.AutomaticConfigurationScript) && !aborted)
                 {
-                    GlobalLog.Print("NetWebProxyFinder#" + ValidationHelper.HashString(this) + "::EnsureEngineAvailable() Update failed.  Falling back to automaticConfigurationScript:" + ValidationHelper.ToString(Engine.AutomaticConfigurationScript));
+                    GlobalLog.Print(
+                        "NetWebProxyFinder#"
+                            + ValidationHelper.HashString(this)
+                            + "::EnsureEngineAvailable() Update failed.  Falling back to automaticConfigurationScript:"
+                            + ValidationHelper.ToString(Engine.AutomaticConfigurationScript)
+                    );
                     State = DownloadAndCompile(Engine.AutomaticConfigurationScript);
                     if (State == AutoWebProxyState.Completed)
                     {
                         engineScriptLocation = Engine.AutomaticConfigurationScript;
-                        GlobalLog.Leave("NetWebProxyFinder#" + ValidationHelper.HashString(this) + "::EnsureEngineAvailable", ValidationHelper.ToString(State));
+                        GlobalLog.Leave(
+                            "NetWebProxyFinder#"
+                                + ValidationHelper.HashString(this)
+                                + "::EnsureEngineAvailable",
+                            ValidationHelper.ToString(State)
+                        );
                         return;
                     }
                 }
             }
 
             // Everything failed.  Set this instance to mostly-dead.  It will wake up again if there's a reg/connectoid change.
-            GlobalLog.Print("NetWebProxyFinder#" + ValidationHelper.HashString(this) + "::EnsureEngineAvailable() All failed.");
+            GlobalLog.Print(
+                "NetWebProxyFinder#"
+                    + ValidationHelper.HashString(this)
+                    + "::EnsureEngineAvailable() All failed."
+            );
             State = AutoWebProxyState.DiscoveryFailure;
 
             if (scriptInstance != null)
@@ -205,16 +288,25 @@ namespace System.Net
 
             engineScriptLocation = null;
 
-            GlobalLog.Leave("NetWebProxyFinder#" + ValidationHelper.HashString(this) + "::EnsureEngineAvailable", ValidationHelper.ToString(State));
+            GlobalLog.Leave(
+                "NetWebProxyFinder#"
+                    + ValidationHelper.HashString(this)
+                    + "::EnsureEngineAvailable",
+                ValidationHelper.ToString(State)
+            );
         }
-
 
         // Downloads and compiles the script from a given Uri.
         // This code can be called by config for a downloaded control, we need to assert.
         // This code is called holding the lock.
         private AutoWebProxyState DownloadAndCompile(Uri location)
         {
-            GlobalLog.Print("NetWebProxyFinder#" + ValidationHelper.HashString(this) + "::DownloadAndCompile() location:" + ValidationHelper.ToString(location));
+            GlobalLog.Print(
+                "NetWebProxyFinder#"
+                    + ValidationHelper.HashString(this)
+                    + "::DownloadAndCompile() location:"
+                    + ValidationHelper.ToString(location)
+            );
             AutoWebProxyState newState = AutoWebProxyState.DownloadFailure;
             WebResponse response = null;
             TimerThread.Timer timer = null;
@@ -228,8 +320,13 @@ namespace System.Net
                 {
                     if (aborted)
                     {
-                        throw new WebException(NetRes.GetWebStatusString("net_requestaborted",
-                            WebExceptionStatus.RequestCanceled), WebExceptionStatus.RequestCanceled);
+                        throw new WebException(
+                            NetRes.GetWebStatusString(
+                                "net_requestaborted",
+                                WebExceptionStatus.RequestCanceled
+                            ),
+                            WebExceptionStatus.RequestCanceled
+                        );
                     }
 
                     request = WebRequest.Create(location);
@@ -246,8 +343,15 @@ namespace System.Net
                 //
                 if (request.CacheProtocol != null)
                 {
-                    GlobalLog.Print("NetWebProxyFinder#" + ValidationHelper.HashString(this) + "::DownloadAndCompile() Using backup caching.");
-                    request.CacheProtocol = new RequestCacheProtocol(backupCache, request.CacheProtocol.Validator);
+                    GlobalLog.Print(
+                        "NetWebProxyFinder#"
+                            + ValidationHelper.HashString(this)
+                            + "::DownloadAndCompile() Using backup caching."
+                    );
+                    request.CacheProtocol = new RequestCacheProtocol(
+                        backupCache,
+                        request.CacheProtocol.Validator
+                    );
                 }
 
                 HttpWebRequest httpWebRequest = request as HttpWebRequest;
@@ -275,7 +379,9 @@ namespace System.Net
                 // Use our own timeout timer so that it can encompass the whole request, not just the headers.
                 if (timerQueue == null)
                 {
-                    timerQueue = TimerThread.GetOrCreateQueue(SettingsSectionInternal.Section.DownloadTimeout);
+                    timerQueue = TimerThread.GetOrCreateQueue(
+                        SettingsSectionInternal.Section.DownloadTimeout
+                    );
                 }
                 timer = timerQueue.CreateTimer(timerCallback, request);
                 response = request.GetResponse();
@@ -295,8 +401,23 @@ namespace System.Net
                         lastModified = ftpResponse.LastModified;
                     }
                 }
-                GlobalLog.Print("NetWebProxyFinder#" + ValidationHelper.HashString(this) + "::DownloadAndCompile() lastModified:" + lastModified.ToString() + " (script):" + (scriptInstance == null ? "(null)" : scriptInstance.LastModified.ToString()));
-                if (scriptInstance != null && lastModified != DateTime.MinValue && scriptInstance.LastModified == lastModified)
+                GlobalLog.Print(
+                    "NetWebProxyFinder#"
+                        + ValidationHelper.HashString(this)
+                        + "::DownloadAndCompile() lastModified:"
+                        + lastModified.ToString()
+                        + " (script):"
+                        + (
+                            scriptInstance == null
+                                ? "(null)"
+                                : scriptInstance.LastModified.ToString()
+                        )
+                );
+                if (
+                    scriptInstance != null
+                    && lastModified != DateTime.MinValue
+                    && scriptInstance.LastModified == lastModified
+                )
                 {
                     newScriptInstance = scriptInstance;
                     newState = AutoWebProxyState.Completed;
@@ -307,17 +428,26 @@ namespace System.Net
                     byte[] scriptBuffer = null;
                     using (Stream responseStream = response.GetResponseStream())
                     {
-                        SingleItemRequestCache.ReadOnlyStream ros = responseStream as SingleItemRequestCache.ReadOnlyStream;
+                        SingleItemRequestCache.ReadOnlyStream ros =
+                            responseStream as SingleItemRequestCache.ReadOnlyStream;
                         if (ros != null)
                         {
                             scriptBuffer = ros.Buffer;
                         }
-                        if (scriptInstance != null && scriptBuffer != null && scriptBuffer == scriptInstance.Buffer)
+                        if (
+                            scriptInstance != null
+                            && scriptBuffer != null
+                            && scriptBuffer == scriptInstance.Buffer
+                        )
                         {
                             scriptInstance.LastModified = lastModified;
                             newScriptInstance = scriptInstance;
                             newState = AutoWebProxyState.Completed;
-                            GlobalLog.Print("NetWebProxyFinder#" + ValidationHelper.HashString(this) + "::DownloadAndCompile() Buffer matched - reusing Engine.");
+                            GlobalLog.Print(
+                                "NetWebProxyFinder#"
+                                    + ValidationHelper.HashString(this)
+                                    + "::DownloadAndCompile() Buffer matched - reusing Engine."
+                            );
                         }
                         else
                         {
@@ -336,10 +466,21 @@ namespace System.Net
 
                     if (newState != AutoWebProxyState.Completed)
                     {
-                        GlobalLog.Print("NetWebProxyFinder#" + ValidationHelper.HashString(this) + "::DownloadAndCompile() IsFromCache:" + tempResponse.IsFromCache.ToString() + " scriptInstance:" + ValidationHelper.HashString(scriptInstance));
+                        GlobalLog.Print(
+                            "NetWebProxyFinder#"
+                                + ValidationHelper.HashString(this)
+                                + "::DownloadAndCompile() IsFromCache:"
+                                + tempResponse.IsFromCache.ToString()
+                                + " scriptInstance:"
+                                + ValidationHelper.HashString(scriptInstance)
+                        );
                         if (scriptInstance != null && scriptBody == scriptInstance.ScriptBody)
                         {
-                            GlobalLog.Print("NetWebProxyFinder#" + ValidationHelper.HashString(this) + "::DownloadAndCompile() Script matched - using existing Engine.");
+                            GlobalLog.Print(
+                                "NetWebProxyFinder#"
+                                    + ValidationHelper.HashString(this)
+                                    + "::DownloadAndCompile() Script matched - using existing Engine."
+                            );
                             scriptInstance.LastModified = lastModified;
                             if (scriptBuffer != null)
                             {
@@ -350,7 +491,11 @@ namespace System.Net
                         }
                         else
                         {
-                            GlobalLog.Print("NetWebProxyFinder#" + ValidationHelper.HashString(this) + "::DownloadAndCompile() Creating AutoWebProxyScriptWrapper.");
+                            GlobalLog.Print(
+                                "NetWebProxyFinder#"
+                                    + ValidationHelper.HashString(this)
+                                    + "::DownloadAndCompile() Creating AutoWebProxyScriptWrapper."
+                            );
                             newScriptInstance = new AutoWebProxyScriptWrapper();
                             newScriptInstance.LastModified = lastModified;
 
@@ -368,8 +513,17 @@ namespace System.Net
             }
             catch (Exception exception)
             {
-                if (Logging.On) Logging.PrintWarning(Logging.Web, SR.GetString(SR.net_log_proxy_script_download_compile_error, exception));
-                GlobalLog.Print("NetWebProxyFinder#" + ValidationHelper.HashString(this) + "::DownloadAndCompile() Download() threw:" + ValidationHelper.ToString(exception));
+                if (Logging.On)
+                    Logging.PrintWarning(
+                        Logging.Web,
+                        SR.GetString(SR.net_log_proxy_script_download_compile_error, exception)
+                    );
+                GlobalLog.Print(
+                    "NetWebProxyFinder#"
+                        + ValidationHelper.HashString(this)
+                        + "::DownloadAndCompile() Download() threw:"
+                        + ValidationHelper.ToString(exception)
+                );
             }
             finally
             {
@@ -378,7 +532,7 @@ namespace System.Net
                     timer.Cancel();
                 }
 
-                // 
+                //
                 try
                 {
                     if (response != null)
@@ -406,7 +560,12 @@ namespace System.Net
                 scriptInstance = newScriptInstance;
             }
 
-            GlobalLog.Print("NetWebProxyFinder#" + ValidationHelper.HashString(this) + "::DownloadAndCompile() retuning newState:" + ValidationHelper.ToString(newState));
+            GlobalLog.Print(
+                "NetWebProxyFinder#"
+                    + ValidationHelper.HashString(this)
+                    + "::DownloadAndCompile() retuning newState:"
+                    + ValidationHelper.ToString(newState)
+            );
             return newState;
         }
 
@@ -426,7 +585,10 @@ namespace System.Net
                 string proxyString = s.Trim(' ');
                 if (!proxyString.StartsWith("PROXY ", StringComparison.OrdinalIgnoreCase))
                 {
-                    if (string.Compare("DIRECT", proxyString, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (
+                        string.Compare("DIRECT", proxyString, StringComparison.OrdinalIgnoreCase)
+                        == 0
+                    )
                     {
                         proxyAuthority = null;
                     }
@@ -440,8 +602,20 @@ namespace System.Net
                     // remove prefix "PROXY " (6 chars) from the string and trim additional leading spaces.
                     proxyAuthority = proxyString.Substring(6).TrimStart(' ');
                     Uri uri = null;
-                    bool tryParse = Uri.TryCreate("http://" + proxyAuthority, UriKind.Absolute, out uri);
-                    if (!tryParse || uri.UserInfo.Length > 0 || uri.HostNameType == UriHostNameType.Basic || uri.AbsolutePath.Length != 1 || proxyAuthority[proxyAuthority.Length - 1] == '/' || proxyAuthority[proxyAuthority.Length - 1] == '#' || proxyAuthority[proxyAuthority.Length - 1] == '?')
+                    bool tryParse = Uri.TryCreate(
+                        "http://" + proxyAuthority,
+                        UriKind.Absolute,
+                        out uri
+                    );
+                    if (
+                        !tryParse
+                        || uri.UserInfo.Length > 0
+                        || uri.HostNameType == UriHostNameType.Basic
+                        || uri.AbsolutePath.Length != 1
+                        || proxyAuthority[proxyAuthority.Length - 1] == '/'
+                        || proxyAuthority[proxyAuthority.Length - 1] == '#'
+                        || proxyAuthority[proxyAuthority.Length - 1] == '?'
+                    )
                     {
                         continue;
                     }
@@ -459,13 +633,21 @@ namespace System.Net
                 return;
             }
 
-            GlobalLog.Print("NetWebProxyFinder::DetectScriptLocation() Attempting discovery PROXY_AUTO_DETECT_TYPE_DHCP.");
-            scriptLocation = SafeDetectAutoProxyUrl(UnsafeNclNativeMethods.WinHttp.AutoDetectType.Dhcp);
+            GlobalLog.Print(
+                "NetWebProxyFinder::DetectScriptLocation() Attempting discovery PROXY_AUTO_DETECT_TYPE_DHCP."
+            );
+            scriptLocation = SafeDetectAutoProxyUrl(
+                UnsafeNclNativeMethods.WinHttp.AutoDetectType.Dhcp
+            );
 
             if (scriptLocation == null)
             {
-                GlobalLog.Print("NetWebProxyFinder::DetectScriptLocation() Attempting discovery AUTO_DETECT_TYPE_DNS_A.");
-                scriptLocation = SafeDetectAutoProxyUrl(UnsafeNclNativeMethods.WinHttp.AutoDetectType.DnsA);
+                GlobalLog.Print(
+                    "NetWebProxyFinder::DetectScriptLocation() Attempting discovery AUTO_DETECT_TYPE_DNS_A."
+                );
+                scriptLocation = SafeDetectAutoProxyUrl(
+                    UnsafeNclNativeMethods.WinHttp.AutoDetectType.DnsA
+                );
             }
 
             if (scriptLocation == null)
@@ -491,18 +673,27 @@ namespace System.Net
         ///         autodetection using the method specified in the detectFlags.
         ///     </para>
         /// </devdoc>
-        [SuppressMessage("Microsoft.Reliability","CA2001:AvoidCallingProblematicMethods", MessageId="System.Runtime.InteropServices.SafeHandle.DangerousGetHandle", Justification="Implementation requires DangerousGetHandle")]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2001:AvoidCallingProblematicMethods",
+            MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle",
+            Justification = "Implementation requires DangerousGetHandle"
+        )]
         private static unsafe Uri SafeDetectAutoProxyUrl(
-            UnsafeNclNativeMethods.WinHttp.AutoDetectType discoveryMethod)
+            UnsafeNclNativeMethods.WinHttp.AutoDetectType discoveryMethod
+        )
         {
             Uri autoProxy = null;
 
 #if !FEATURE_PAL
             string url = null;
-            
+
             GlobalLog.Print("NetWebProxyFinder::SafeDetectAutoProxyUrl() Using WinHttp.");
             SafeGlobalFree autoProxyUrl;
-            bool success = UnsafeNclNativeMethods.WinHttp.WinHttpDetectAutoProxyConfigUrl(discoveryMethod, out autoProxyUrl);
+            bool success = UnsafeNclNativeMethods.WinHttp.WinHttpDetectAutoProxyConfigUrl(
+                discoveryMethod,
+                out autoProxyUrl
+            );
             if (!success)
             {
                 if (autoProxyUrl != null)
@@ -515,20 +706,36 @@ namespace System.Net
                 url = new string((char*)autoProxyUrl.DangerousGetHandle());
                 autoProxyUrl.Close();
             }
-            
+
             if (url != null)
             {
                 bool parsed = Uri.TryCreate(url, UriKind.Absolute, out autoProxy);
                 if (!parsed)
                 {
-                    if (Logging.On) Logging.PrintWarning(Logging.Web, SR.GetString(SR.net_log_proxy_autodetect_script_location_parse_error, ValidationHelper.ToString(url)));
-                    GlobalLog.Print("NetWebProxyFinder::SafeDetectAutoProxyUrl() Uri.TryParse() failed url:" + ValidationHelper.ToString(url));
+                    if (Logging.On)
+                        Logging.PrintWarning(
+                            Logging.Web,
+                            SR.GetString(
+                                SR.net_log_proxy_autodetect_script_location_parse_error,
+                                ValidationHelper.ToString(url)
+                            )
+                        );
+                    GlobalLog.Print(
+                        "NetWebProxyFinder::SafeDetectAutoProxyUrl() Uri.TryParse() failed url:"
+                            + ValidationHelper.ToString(url)
+                    );
                 }
             }
             else
             {
-                if (Logging.On) Logging.PrintWarning(Logging.Web, SR.GetString(SR.net_log_proxy_autodetect_failed));
-                GlobalLog.Print("NetWebProxyFinder::SafeDetectAutoProxyUrl() DetectAutoProxyUrl() returned false");
+                if (Logging.On)
+                    Logging.PrintWarning(
+                        Logging.Web,
+                        SR.GetString(SR.net_log_proxy_autodetect_failed)
+                    );
+                GlobalLog.Print(
+                    "NetWebProxyFinder::SafeDetectAutoProxyUrl() DetectAutoProxyUrl() returned false"
+                );
             }
 #endif // !FEATURE_PAL
 
@@ -537,7 +744,11 @@ namespace System.Net
 
         // RequestTimeoutCallback - Called by the TimerThread to abort a request.  This just posts ThreadPool work item - Abort() does too
         // much to be done on the timer thread (timer thread should never block or call user code).
-        private static void RequestTimeoutCallback(TimerThread.Timer timer, int timeNoticed, object context)
+        private static void RequestTimeoutCallback(
+            TimerThread.Timer timer,
+            int timeNoticed,
+            object context
+        )
         {
             ThreadPool.UnsafeQueueUserWorkItem(abortWrapper, context);
         }

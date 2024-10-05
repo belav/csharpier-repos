@@ -30,45 +30,48 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities {
-	
-	[ComVisible (false)]
-	public class WindowClass {
-	
-		string	name;
-		bool	versioned;
-		string	xmlName;
-		string	xmlVersioned;
-		
-		[MonoTODO]
-		public WindowClass ()
-		{
-			throw new NotImplementedException ();
-		}
+namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities
+{
+    [ComVisible(false)]
+    public class WindowClass
+    {
+        string name;
+        bool versioned;
+        string xmlName;
+        string xmlVersioned;
 
-		[MonoTODO]
-		public WindowClass (string name, bool versioned)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public string Name {
-			get { return name; }
-		}
-		
-		public bool Versioned {
-			get { return versioned; }
-		}
-		
-		public string XmlName {
-			get { return xmlName; }
-			set { xmlName = value; }
-		}
-		
-		public string XmlVersioned {
-			get { return xmlVersioned; }
-			set { xmlVersioned = value; }
-		}
-	}
+        [MonoTODO]
+        public WindowClass()
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public WindowClass(string name, bool versioned)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string Name
+        {
+            get { return name; }
+        }
+
+        public bool Versioned
+        {
+            get { return versioned; }
+        }
+
+        public string XmlName
+        {
+            get { return xmlName; }
+            set { xmlName = value; }
+        }
+
+        public string XmlVersioned
+        {
+            get { return xmlVersioned; }
+            set { xmlVersioned = value; }
+        }
+    }
 }
-

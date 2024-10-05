@@ -6,16 +6,13 @@
 // <owner current="true" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data.OleDb {
-
-    public static class OleDbMetaDataColumnNames {
-
-        public static readonly string BooleanFalseLiteral       = "BooleanFalseLiteral";
-        public static readonly string BooleanTrueLiteral        = "BooleanTrueLiteral";
-        public static readonly string NativeDataType            = "NativeDataType"; 
-        public static readonly string DateTimeDigits            = "DateTimeDigits";
-    } 
+namespace System.Data.OleDb
+{
+    public static class OleDbMetaDataColumnNames
+    {
+        public static readonly string BooleanFalseLiteral = "BooleanFalseLiteral";
+        public static readonly string BooleanTrueLiteral = "BooleanTrueLiteral";
+        public static readonly string NativeDataType = "NativeDataType";
+        public static readonly string DateTimeDigits = "DateTimeDigits";
+    }
 }
-
-
-

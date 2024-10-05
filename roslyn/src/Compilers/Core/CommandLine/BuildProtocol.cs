@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using Roslyn.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,10 +12,11 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Roslyn.Utilities;
 using static Microsoft.CodeAnalysis.CommandLine.BuildProtocolConstants;
 using static Microsoft.CodeAnalysis.CommandLine.CompilerServerLogger;
 
-// This file describes data structures about the protocol from client program to server that is 
+// This file describes data structures about the protocol from client program to server that is
 // used. The basic protocol is this.
 //
 // After the server pipe is connected, it forks off a thread to handle the connection, and creates
@@ -29,7 +29,7 @@ namespace Microsoft.CodeAnalysis.CommandLine
 {
     /// <summary>
     /// Represents a request from the client. A request is as follows.
-    /// 
+    ///
     ///  Field Name         Type                Size (bytes)
     /// ----------------------------------------------------
     ///  Length             Integer             4
@@ -38,10 +38,10 @@ namespace Microsoft.CodeAnalysis.CommandLine
     ///  CompilerHash       String              Variable
     ///  Argument Count     UInteger            4
     ///  Arguments          Argument[]          Variable
-    /// 
+    ///
     /// See <see cref="Argument"/> for the format of an
     /// Argument.
-    /// 
+    ///
     /// </summary>
     internal sealed class BuildRequest
     {
@@ -58,29 +58,39 @@ namespace Microsoft.CodeAnalysis.CommandLine
         public readonly ReadOnlyCollection<Argument> Arguments;
         public readonly string CompilerHash;
 
-        public BuildRequest(RequestLanguage language,
-                            string compilerHash,
-                            IEnumerable<Argument> arguments,
-                            Guid? requestId = null)
+        public BuildRequest(
+            RequestLanguage language,
+            string compilerHash,
+            IEnumerable<Argument> arguments,
+            Guid? requestId = null
+        )
         {
             RequestId = requestId ?? Guid.Empty;
             Language = language;
             Arguments = new ReadOnlyCollection<Argument>(arguments.ToList());
             CompilerHash = compilerHash;
 
-            Debug.Assert(!string.IsNullOrWhiteSpace(CompilerHash), "A hash value is required to communicate with the server");
+            Debug.Assert(
+                !string.IsNullOrWhiteSpace(CompilerHash),
+                "A hash value is required to communicate with the server"
+            );
         }
 
-        public static BuildRequest Create(RequestLanguage language,
-                                          IList<string> args,
-                                          string workingDirectory,
-                                          string? tempDirectory,
-                                          string compilerHash,
-                                          Guid? requestId = null,
-                                          string? keepAlive = null,
-                                          string? libDirectory = null)
+        public static BuildRequest Create(
+            RequestLanguage language,
+            IList<string> args,
+            string workingDirectory,
+            string? tempDirectory,
+            string compilerHash,
+            Guid? requestId = null,
+            string? keepAlive = null,
+            string? libDirectory = null
+        )
         {
-            Debug.Assert(!string.IsNullOrWhiteSpace(compilerHash), "CompilerHash is required to send request to the build server");
+            Debug.Assert(
+                !string.IsNullOrWhiteSpace(compilerHash),
+                "CompilerHash is required to send request to the build server"
+            );
 
             var requestLength = args.Count + 1 + (libDirectory == null ? 0 : 1);
             var requestArgs = new List<Argument>(requestLength);
@@ -109,17 +119,27 @@ namespace Microsoft.CodeAnalysis.CommandLine
 
         public static BuildRequest CreateShutdown()
         {
-            var requestArgs = new[] { new Argument(ArgumentId.Shutdown, argumentIndex: 0, value: "") };
-            return new BuildRequest(RequestLanguage.CSharpCompile, GetCommitHash() ?? "", requestArgs);
+            var requestArgs = new[]
+            {
+                new Argument(ArgumentId.Shutdown, argumentIndex: 0, value: ""),
+            };
+            return new BuildRequest(
+                RequestLanguage.CSharpCompile,
+                GetCommitHash() ?? "",
+                requestArgs
+            );
         }
 
         /// <summary>
         /// Read a Request from the given stream.
-        /// 
+        ///
         /// The total request size must be less than <see cref="MaximumRequestSize"/>.
         /// </summary>
         /// <returns>null if the Request was too large, the Request otherwise.</returns>
-        public static async Task<BuildRequest> ReadAsync(Stream inStream, CancellationToken cancellationToken)
+        public static async Task<BuildRequest> ReadAsync(
+            Stream inStream,
+            CancellationToken cancellationToken
+        )
         {
             // Read the length of the request
             var lengthBuffer = new byte[4];
@@ -129,14 +149,17 @@ namespace Microsoft.CodeAnalysis.CommandLine
             // Back out if the request is too large
             if (length > MaximumRequestSize)
             {
-                throw new ArgumentException($"Request is over {MaximumRequestSize >> 20}MB in length");
+                throw new ArgumentException(
+                    $"Request is over {MaximumRequestSize >> 20}MB in length"
+                );
             }
 
             cancellationToken.ThrowIfCancellationRequested();
 
             // Read the full request
             var requestBuffer = new byte[length];
-            await ReadAllAsync(inStream, requestBuffer, length, cancellationToken).ConfigureAwait(false);
+            await ReadAllAsync(inStream, requestBuffer, length, cancellationToken)
+                .ConfigureAwait(false);
 
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -154,10 +177,7 @@ namespace Microsoft.CodeAnalysis.CommandLine
                 argumentsBuilder.Add(BuildRequest.Argument.ReadFromBinaryReader(reader));
             }
 
-            return new BuildRequest(language,
-                                    compilerHash,
-                                    argumentsBuilder,
-                                    requestId);
+            return new BuildRequest(language, compilerHash, argumentsBuilder, requestId);
 
             static Guid readGuid(BinaryReader reader)
             {
@@ -175,7 +195,10 @@ namespace Microsoft.CodeAnalysis.CommandLine
         /// <summary>
         /// Write a Request to the stream.
         /// </summary>
-        public async Task WriteAsync(Stream outStream, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task WriteAsync(
+            Stream outStream,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             using var memoryStream = new MemoryStream();
             using var writer = new BinaryWriter(memoryStream, Encoding.Unicode);
@@ -198,26 +221,31 @@ namespace Microsoft.CodeAnalysis.CommandLine
             // Back out if the request is too large
             if (memoryStream.Length > MaximumRequestSize)
             {
-                throw new ArgumentOutOfRangeException($"Request is over {MaximumRequestSize >> 20}MB in length");
+                throw new ArgumentOutOfRangeException(
+                    $"Request is over {MaximumRequestSize >> 20}MB in length"
+                );
             }
 
-            await outStream.WriteAsync(BitConverter.GetBytes(length), 0, 4,
-                                       cancellationToken).ConfigureAwait(false);
+            await outStream
+                .WriteAsync(BitConverter.GetBytes(length), 0, 4, cancellationToken)
+                .ConfigureAwait(false);
 
             memoryStream.Position = 0;
-            await memoryStream.CopyToAsync(outStream, bufferSize: length, cancellationToken: cancellationToken).ConfigureAwait(false);
+            await memoryStream
+                .CopyToAsync(outStream, bufferSize: length, cancellationToken: cancellationToken)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
-        /// A command line argument to the compilation. 
+        /// A command line argument to the compilation.
         /// An argument is formatted as follows:
-        /// 
+        ///
         ///  Field Name         Type            Size (bytes)
         /// --------------------------------------------------
         ///  ID                 UInteger        4
         ///  Index              UInteger        4
         ///  Value              String          Variable
-        /// 
+        ///
         /// Strings are encoded via a length prefix as a signed
         /// 32-bit integer, followed by an array of characters.
         /// </summary>
@@ -227,9 +255,7 @@ namespace Microsoft.CodeAnalysis.CommandLine
             public readonly int ArgumentIndex;
             public readonly string? Value;
 
-            public Argument(ArgumentId argumentId,
-                            int argumentIndex,
-                            string? value)
+            public Argument(ArgumentId argumentId, int argumentIndex, string? value)
             {
                 ArgumentId = argumentId;
                 ArgumentIndex = argumentIndex;
@@ -262,7 +288,7 @@ namespace Microsoft.CodeAnalysis.CommandLine
     ///
     /// Field Name       Field Type          Size (bytes)
     /// -------------------------------------------------
-    /// responseLength   int (positive)      4  
+    /// responseLength   int (positive)      4
     /// responseType     enum ResponseType   4
     /// responseBody     Response subclass   variable
     /// </summary>
@@ -274,18 +300,18 @@ namespace Microsoft.CodeAnalysis.CommandLine
             MismatchedVersion,
 
             // The build request completed on the server and the results are contained
-            // in the message. 
+            // in the message.
             Completed,
 
             // The build request could not be run on the server due because it created
-            // an unresolvable inconsistency with analyzers.  
+            // an unresolvable inconsistency with analyzers.
             AnalyzerInconsistency,
 
-            // The shutdown request completed and the server process information is 
-            // contained in the message. 
+            // The shutdown request completed and the server process information is
+            // contained in the message.
             Shutdown,
 
-            // The request was rejected by the server.  
+            // The request was rejected by the server.
             Rejected,
 
             // The server hash did not match the one supplied by the client
@@ -297,8 +323,7 @@ namespace Microsoft.CodeAnalysis.CommandLine
 
         public abstract ResponseType Type { get; }
 
-        public async Task WriteAsync(Stream outStream,
-                               CancellationToken cancellationToken)
+        public async Task WriteAsync(Stream outStream, CancellationToken cancellationToken)
         {
             using (var memoryStream = new MemoryStream())
             using (var writer = new BinaryWriter(memoryStream, Encoding.Unicode))
@@ -317,13 +342,18 @@ namespace Microsoft.CodeAnalysis.CommandLine
 
                 // There is no way to know the number of bytes written to
                 // the pipe stream. We just have to assume all of them are written.
-                await outStream.WriteAsync(BitConverter.GetBytes(length),
-                                           0,
-                                           4,
-                                           cancellationToken).ConfigureAwait(false);
+                await outStream
+                    .WriteAsync(BitConverter.GetBytes(length), 0, 4, cancellationToken)
+                    .ConfigureAwait(false);
 
                 memoryStream.Position = 0;
-                await memoryStream.CopyToAsync(outStream, bufferSize: length, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await memoryStream
+                    .CopyToAsync(
+                        outStream,
+                        bufferSize: length,
+                        cancellationToken: cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
         }
 
@@ -335,7 +365,10 @@ namespace Microsoft.CodeAnalysis.CommandLine
         /// <param name="stream"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static async Task<BuildResponse> ReadAsync(Stream stream, CancellationToken cancellationToken = default(CancellationToken))
+        public static async Task<BuildResponse> ReadAsync(
+            Stream stream,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             // Read the response length
             var lengthBuffer = new byte[4];
@@ -344,12 +377,12 @@ namespace Microsoft.CodeAnalysis.CommandLine
 
             // Read the response
             var responseBuffer = new byte[length];
-            await ReadAllAsync(stream,
-                               responseBuffer,
-                               responseBuffer.Length,
-                               cancellationToken).ConfigureAwait(false);
+            await ReadAllAsync(stream, responseBuffer, responseBuffer.Length, cancellationToken)
+                .ConfigureAwait(false);
 
-            using (var reader = new BinaryReader(new MemoryStream(responseBuffer), Encoding.Unicode))
+            using (
+                var reader = new BinaryReader(new MemoryStream(responseBuffer), Encoding.Unicode)
+            )
             {
                 var responseType = (ResponseType)reader.ReadInt32();
 
@@ -371,7 +404,9 @@ namespace Microsoft.CodeAnalysis.CommandLine
                     // Intentional fall through
                     case ResponseType.CannotConnect:
                     default:
-                        throw new InvalidOperationException("Received invalid response type from server.");
+                        throw new InvalidOperationException(
+                            "Received invalid response type from server."
+                        );
                 }
             }
         }
@@ -379,16 +414,16 @@ namespace Microsoft.CodeAnalysis.CommandLine
 
     /// <summary>
     /// Represents a Response from the server. A response is as follows.
-    /// 
+    ///
     ///  Field Name         Type            Size (bytes)
     /// --------------------------------------------------
     ///  Length             UInteger        4
     ///  ReturnCode         Integer         4
     ///  Output             String          Variable
-    /// 
-    /// Strings are encoded via a character count prefix as a 
+    ///
+    /// Strings are encoded via a character count prefix as a
     /// 32-bit integer, followed by an array of characters.
-    /// 
+    ///
     /// </summary>
     internal sealed class CompletedBuildResponse : BuildResponse
     {
@@ -396,9 +431,7 @@ namespace Microsoft.CodeAnalysis.CommandLine
         public readonly bool Utf8Output;
         public readonly string Output;
 
-        public CompletedBuildResponse(int returnCode,
-                                      bool utf8output,
-                                      string? output)
+        public CompletedBuildResponse(int returnCode, bool utf8output, string? output)
         {
             ReturnCode = returnCode;
             Utf8Output = utf8output;
@@ -611,7 +644,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
         /// <returns>The hash value of the current assembly or an empty string</returns>
         public static string? GetCommitHash()
         {
-            var hashAttributes = typeof(BuildRequest).Assembly.GetCustomAttributes<CommitHashAttribute>();
+            var hashAttributes =
+                typeof(BuildRequest).Assembly.GetCustomAttributes<CommitHashAttribute>();
             var hashAttributeCount = hashAttributes.Count();
             if (hashAttributeCount != 1)
             {
@@ -627,15 +661,15 @@ namespace Microsoft.CodeAnalysis.CommandLine
             Stream stream,
             byte[] buffer,
             int count,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             int totalBytesRead = 0;
             do
             {
-                int bytesRead = await stream.ReadAsync(buffer,
-                                                       totalBytesRead,
-                                                       count - totalBytesRead,
-                                                       cancellationToken).ConfigureAwait(false);
+                int bytesRead = await stream
+                    .ReadAsync(buffer, totalBytesRead, count - totalBytesRead, cancellationToken)
+                    .ConfigureAwait(false);
                 if (bytesRead == 0)
                 {
                     throw new EndOfStreamException("Reached end of stream before end of read.");

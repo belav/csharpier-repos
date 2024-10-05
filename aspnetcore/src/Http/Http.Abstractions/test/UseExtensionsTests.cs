@@ -17,17 +17,21 @@ public class UseExtensionsTests
         var secondCalled = false;
         var lastCalled = false;
 
-        builder.Use((context, next) =>
-        {
-            firstCalled = true;
-            return next();
-        });
-        builder.Use((context, next) =>
-        {
-            Assert.True(firstCalled);
-            secondCalled = true;
-            return next(context);
-        });
+        builder.Use(
+            (context, next) =>
+            {
+                firstCalled = true;
+                return next();
+            }
+        );
+        builder.Use(
+            (context, next) =>
+            {
+                Assert.True(firstCalled);
+                secondCalled = true;
+                return next(context);
+            }
+        );
         builder.Run(context =>
         {
             Assert.True(secondCalled);
@@ -52,14 +56,18 @@ public class UseExtensionsTests
         var context = new DefaultHttpContext();
         var shouldThrow = true;
 
-        builder.Use(async (context, next) =>
-        {
-            throw await Assert.ThrowsAsync<Exception>(() => next());
-        });
-        builder.Use(async (context, next) =>
-        {
-            throw await Assert.ThrowsAsync<Exception>(() => next(context));
-        });
+        builder.Use(
+            async (context, next) =>
+            {
+                throw await Assert.ThrowsAsync<Exception>(() => next());
+            }
+        );
+        builder.Use(
+            async (context, next) =>
+            {
+                throw await Assert.ThrowsAsync<Exception>(() => next(context));
+            }
+        );
         builder.Run(context =>
         {
             if (shouldThrow)

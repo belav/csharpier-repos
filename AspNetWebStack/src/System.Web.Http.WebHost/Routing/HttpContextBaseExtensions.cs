@@ -24,7 +24,10 @@ namespace System.Web.Http.WebHost.Routing
             return context.Items[HttpRequestMessageKey] as HttpRequestMessage;
         }
 
-        public static void SetHttpRequestMessage(this HttpContextBase context, HttpRequestMessage request)
+        public static void SetHttpRequestMessage(
+            this HttpContextBase context,
+            HttpRequestMessage request
+        )
         {
             if (context.Items != null)
             {

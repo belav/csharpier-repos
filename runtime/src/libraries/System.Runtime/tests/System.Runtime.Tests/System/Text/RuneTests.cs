@@ -11,7 +11,11 @@ namespace System.Text.Tests
 {
     public static partial class RuneTests
     {
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsWindows8xOrLater), nameof(PlatformDetection.IsNlsGlobalization))] // the localization tables used by our test data only exist on Win8+
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWindows8xOrLater),
+            nameof(PlatformDetection.IsNlsGlobalization)
+        )] // the localization tables used by our test data only exist on Win8+
         [PlatformSpecific(TestPlatforms.Windows)]
         [InlineData('0', '0', '0', "en-US")]
         [InlineData('a', 'A', 'a', "en-US")]
@@ -37,7 +41,11 @@ namespace System.Text.Tests
         }
 
         // Invariant ToUpper / ToLower doesn't modify Turkish I or majuscule Eszett
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsWindows8xOrLater), nameof(PlatformDetection.IsNlsGlobalization))] // the localization tables used by our test data only exist on Win8+
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWindows8xOrLater),
+            nameof(PlatformDetection.IsNlsGlobalization)
+        )] // the localization tables used by our test data only exist on Win8+
         [PlatformSpecific(TestPlatforms.Windows)]
         [InlineData('0', '0', '0')]
         [InlineData('a', 'A', 'a')]
@@ -149,7 +157,11 @@ namespace System.Text.Tests
 
         [Theory]
         [MemberData(nameof(SurrogatePairTestData_ValidOnly))]
-        public static void Ctor_SurrogatePair_Valid(char highSurrogate, char lowSurrogate, int expectedValue)
+        public static void Ctor_SurrogatePair_Valid(
+            char highSurrogate,
+            char lowSurrogate,
+            int expectedValue
+        )
         {
             Assert.Equal(expectedValue, new Rune(highSurrogate, lowSurrogate).Value);
         }
@@ -158,8 +170,13 @@ namespace System.Text.Tests
         [MemberData(nameof(SurrogatePairTestData_InvalidOnly))]
         public static void Ctor_SurrogatePair_Invalid(char highSurrogate, char lowSurrogate)
         {
-            string expectedParamName = !char.IsHighSurrogate(highSurrogate) ? nameof(highSurrogate) : nameof(lowSurrogate);
-            Assert.Throws<ArgumentOutOfRangeException>(expectedParamName, () => new Rune(highSurrogate, lowSurrogate));
+            string expectedParamName = !char.IsHighSurrogate(highSurrogate)
+                ? nameof(highSurrogate)
+                : nameof(lowSurrogate);
+            Assert.Throws<ArgumentOutOfRangeException>(
+                expectedParamName,
+                () => new Rune(highSurrogate, lowSurrogate)
+            );
         }
 
         [Theory]
@@ -192,9 +209,17 @@ namespace System.Text.Tests
         [InlineData(new char[] { '\ud800' }, OperationStatus.NeedMoreData, 0xFFFD, 1)] // high surrogate at end of buffer
         [InlineData(new char[] { '\ud800', '\ud800' }, OperationStatus.InvalidData, 0xFFFD, 1)] // standalone high surrogate
         [InlineData(new char[] { '\ud800', '\u1234' }, OperationStatus.InvalidData, 0xFFFD, 1)] // standalone high surrogate
-        public static void DecodeFromUtf16(char[] data, OperationStatus expectedOperationStatus, int expectedRuneValue, int expectedCharsConsumed)
+        public static void DecodeFromUtf16(
+            char[] data,
+            OperationStatus expectedOperationStatus,
+            int expectedRuneValue,
+            int expectedCharsConsumed
+        )
         {
-            Assert.Equal(expectedOperationStatus, Rune.DecodeFromUtf16(data, out Rune actualRune, out int actualCharsConsumed));
+            Assert.Equal(
+                expectedOperationStatus,
+                Rune.DecodeFromUtf16(data, out Rune actualRune, out int actualCharsConsumed)
+            );
             Assert.Equal(expectedRuneValue, actualRune.Value);
             Assert.Equal(expectedCharsConsumed, actualCharsConsumed);
         }
@@ -206,9 +231,17 @@ namespace System.Text.Tests
         [InlineData(new char[] { '\ud83d', '\ude32' }, OperationStatus.Done, 0x1F632, 2)] // supplementary value (U+1F632 ASTONISHED FACE)
         [InlineData(new char[] { '\u1234', '\udc00' }, OperationStatus.InvalidData, 0xFFFD, 1)] // standalone low surrogate
         [InlineData(new char[] { '\udc00' }, OperationStatus.InvalidData, 0xFFFD, 1)] // standalone low surrogate
-        public static void DecodeLastFromUtf16(char[] data, OperationStatus expectedOperationStatus, int expectedRuneValue, int expectedCharsConsumed)
+        public static void DecodeLastFromUtf16(
+            char[] data,
+            OperationStatus expectedOperationStatus,
+            int expectedRuneValue,
+            int expectedCharsConsumed
+        )
         {
-            Assert.Equal(expectedOperationStatus, Rune.DecodeLastFromUtf16(data, out Rune actualRune, out int actualCharsConsumed));
+            Assert.Equal(
+                expectedOperationStatus,
+                Rune.DecodeLastFromUtf16(data, out Rune actualRune, out int actualCharsConsumed)
+            );
             Assert.Equal(expectedRuneValue, actualRune.Value);
             Assert.Equal(expectedCharsConsumed, actualCharsConsumed);
         }
@@ -240,9 +273,17 @@ namespace System.Text.Tests
         [InlineData(new byte[] { 0xF0, 0x9F, 0x98 }, OperationStatus.NeedMoreData, 0xFFFD, 3)] // [ F0 9F 98 ] is valid 3-byte start of 4-byte sequence
         [InlineData(new byte[] { 0xF0, 0x9F, 0x98, 0x20 }, OperationStatus.InvalidData, 0xFFFD, 3)] // [ F0 9F 98 ] followed by non-continuation byte, maximal invalid subsequence length 3
         [InlineData(new byte[] { 0xF0, 0x9F, 0x98, 0xB2 }, OperationStatus.Done, 0x1F632, 4)] // [ F0 9F 98 B2 ] is U+1F632 ASTONISHED FACE
-        public static void DecodeFromUtf8(byte[] data, OperationStatus expectedOperationStatus, int expectedRuneValue, int expectedBytesConsumed)
+        public static void DecodeFromUtf8(
+            byte[] data,
+            OperationStatus expectedOperationStatus,
+            int expectedRuneValue,
+            int expectedBytesConsumed
+        )
         {
-            Assert.Equal(expectedOperationStatus, Rune.DecodeFromUtf8(data, out Rune actualRune, out int actualBytesConsumed));
+            Assert.Equal(
+                expectedOperationStatus,
+                Rune.DecodeFromUtf8(data, out Rune actualRune, out int actualBytesConsumed)
+            );
             Assert.Equal(expectedRuneValue, actualRune.Value);
             Assert.Equal(expectedBytesConsumed, actualBytesConsumed);
         }
@@ -260,10 +301,18 @@ namespace System.Text.Tests
         [InlineData(new byte[] { 0xF0, 0x9F, 0x98, 0xB2 }, OperationStatus.Done, 0x1F632, 4)] // [ F0 9F 98 B2 ] is U+1F632 ASTONISHED FACE
         [InlineData(new byte[] { 0xE2, 0x88, 0xB4, 0xB2 }, OperationStatus.InvalidData, 0xFFFD, 1)] // [ B2 ] is standalone continuation byte
         [InlineData(new byte[] { 0x80, 0x62, 0x80, 0x80 }, OperationStatus.InvalidData, 0xFFFD, 1)] // [ 80 ] is standalone continuation byte
-        [InlineData(new byte[] { 0xF0, 0x9F, 0x98, }, OperationStatus.NeedMoreData, 0xFFFD, 3)] // [ F0 9F 98 ] is valid 3-byte start of 4-byte sequence
-        public static void DecodeLastFromUtf8(byte[] data, OperationStatus expectedOperationStatus, int expectedRuneValue, int expectedBytesConsumed)
+        [InlineData(new byte[] { 0xF0, 0x9F, 0x98 }, OperationStatus.NeedMoreData, 0xFFFD, 3)] // [ F0 9F 98 ] is valid 3-byte start of 4-byte sequence
+        public static void DecodeLastFromUtf8(
+            byte[] data,
+            OperationStatus expectedOperationStatus,
+            int expectedRuneValue,
+            int expectedBytesConsumed
+        )
         {
-            Assert.Equal(expectedOperationStatus, Rune.DecodeLastFromUtf8(data, out Rune actualRune, out int actualBytesConsumed));
+            Assert.Equal(
+                expectedOperationStatus,
+                Rune.DecodeLastFromUtf8(data, out Rune actualRune, out int actualBytesConsumed)
+            );
             Assert.Equal(expectedRuneValue, actualRune.Value);
             Assert.Equal(expectedBytesConsumed, actualBytesConsumed);
         }
@@ -276,7 +325,11 @@ namespace System.Text.Tests
         [InlineData('a', 'a', true)]
         [InlineData('a', 'A', false)]
         [InlineData('a', 'b', false)]
-        public static void Equals_OperatorEqual_OperatorNotEqual(int first, int other, bool expected)
+        public static void Equals_OperatorEqual_OperatorNotEqual(
+            int first,
+            int other,
+            bool expected
+        )
         {
             Rune a = new Rune(first);
             Rune b = new Rune(other);
@@ -303,7 +356,11 @@ namespace System.Text.Tests
         [InlineData("ab", 1, (int)'b')]
         [InlineData("x\U0001F46Ey", 3, (int)'y')]
         [InlineData("x\U0001F46Ey", 1, 0x1F46E)] // U+1F46E POLICE OFFICER
-        public static void GetRuneAt_TryGetRuneAt_Utf16_Success(string inputString, int index, int expectedScalarValue)
+        public static void GetRuneAt_TryGetRuneAt_Utf16_Success(
+            string inputString,
+            int index,
+            int expectedScalarValue
+        )
         {
             // GetRuneAt
             Assert.Equal(expectedScalarValue, Rune.GetRuneAt(inputString, index).Value);
@@ -320,7 +377,10 @@ namespace System.Text.Tests
         [InlineData(new char[] { 'x', '\uD800', 'y' }, 1)] // high surrogate not followed by low surrogate
         [InlineData(new char[] { 'x', '\uDFFF', '\uDFFF' }, 1)] // attempt to start at a low surrogate
         [InlineData(new char[] { 'x', '\uD800' }, 1)] // end of string reached before could complete surrogate pair
-        public static void GetRuneAt_TryGetRuneAt_Utf16_InvalidData(char[] inputCharArray, int index)
+        public static void GetRuneAt_TryGetRuneAt_Utf16_InvalidData(
+            char[] inputCharArray,
+            int index
+        )
         {
             string inputString = new string(inputCharArray);
 
@@ -342,7 +402,10 @@ namespace System.Text.Tests
             Assert.Throws<ArgumentOutOfRangeException>("index", () => Rune.GetRuneAt("hello", -1));
 
             // index goes past end of string
-            Assert.Throws<ArgumentOutOfRangeException>("index", () => Rune.GetRuneAt(string.Empty, 0));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => Rune.GetRuneAt(string.Empty, 0)
+            );
         }
 
         [Theory]
@@ -374,7 +437,10 @@ namespace System.Text.Tests
                     throw EqualException.ForMismatchedValues(
                         expected: UnicodeData.GetUnicodeCategory(rune.Value),
                         actual: Rune.GetUnicodeCategory(rune),
-                        banner: FormattableString.Invariant($@"Rune.GetUnicodeCategory(U+{rune.Value:X4}) returned wrong value."));
+                        banner: FormattableString.Invariant(
+                            $@"Rune.GetUnicodeCategory(U+{rune.Value:X4}) returned wrong value."
+                        )
+                    );
                 }
             }
         }
@@ -493,8 +559,14 @@ namespace System.Text.Tests
             Assert.Equal(scalarValueLeft <= scalarValueRight, left <= right);
             Assert.Equal(scalarValueLeft > scalarValueRight, left > right);
             Assert.Equal(scalarValueLeft >= scalarValueRight, left >= right);
-            Assert.Equal(Math.Sign(scalarValueLeft.CompareTo(scalarValueRight)), Math.Sign(left.CompareTo(right)));
-            Assert.Equal(Math.Sign(((IComparable)scalarValueLeft).CompareTo(scalarValueRight)), Math.Sign(((IComparable)left).CompareTo(right)));
+            Assert.Equal(
+                Math.Sign(scalarValueLeft.CompareTo(scalarValueRight)),
+                Math.Sign(left.CompareTo(right))
+            );
+            Assert.Equal(
+                Math.Sign(((IComparable)scalarValueLeft).CompareTo(scalarValueRight)),
+                Math.Sign(((IComparable)left).CompareTo(right))
+            );
         }
 
         [Theory]
@@ -510,7 +582,12 @@ namespace System.Text.Tests
         {
             IComparable rune = new Rune(0);
 
-            Assert.Throws<ArgumentException>(() => rune.CompareTo(0 /* int32 */));
+            Assert.Throws<ArgumentException>(
+                () =>
+                    rune.CompareTo(
+                        0 /* int32 */
+                    )
+            );
         }
 
         [Fact]
@@ -545,7 +622,11 @@ namespace System.Text.Tests
 
         [Theory]
         [MemberData(nameof(SurrogatePairTestData_ValidOnly))]
-        public static void TryCreate_SurrogateChars_Valid(char highSurrogate, char lowSurrogate, int expectedValue)
+        public static void TryCreate_SurrogateChars_Valid(
+            char highSurrogate,
+            char lowSurrogate,
+            int expectedValue
+        )
         {
             Assert.True(Rune.TryCreate(highSurrogate, lowSurrogate, out Rune result));
             Assert.Equal(expectedValue, result.Value);
@@ -592,7 +673,10 @@ namespace System.Text.Tests
         [MemberData(nameof(GeneralTestData_SupplementaryCodePoints_ValidOnly))]
         public static void ToStringTests(GeneralTestData testData)
         {
-            Assert.Equal(new string(testData.Utf16Sequence), new Rune(testData.ScalarValue).ToString());
+            Assert.Equal(
+                new string(testData.Utf16Sequence),
+                new Rune(testData.ScalarValue).ToString()
+            );
         }
 
         [Theory]
@@ -610,7 +694,10 @@ namespace System.Text.Tests
             Assert.False(success);
             Assert.Equal(0, charsWritten);
 
-            Assert.Throws<ArgumentException>("destination", () => rune.EncodeToUtf16(new char[rune.Utf16SequenceLength - 1]));
+            Assert.Throws<ArgumentException>(
+                "destination",
+                () => rune.EncodeToUtf16(new char[rune.Utf16SequenceLength - 1])
+            );
 
             // Then, try with a buffer that's appropriately sized
 
@@ -630,11 +717,19 @@ namespace System.Text.Tests
             success = rune.TryEncodeToUtf16(utf16Buffer, out charsWritten);
             Assert.True(success);
             Assert.Equal(testData.Utf16Sequence.Length, charsWritten);
-            Assert.True(utf16Buffer.Slice(0, testData.Utf16Sequence.Length).SequenceEqual(testData.Utf16Sequence));
+            Assert.True(
+                utf16Buffer
+                    .Slice(0, testData.Utf16Sequence.Length)
+                    .SequenceEqual(testData.Utf16Sequence)
+            );
 
             utf16Buffer.Clear();
             Assert.Equal(testData.Utf16Sequence.Length, rune.EncodeToUtf16(utf16Buffer));
-            Assert.True(utf16Buffer.Slice(0, testData.Utf16Sequence.Length).SequenceEqual(testData.Utf16Sequence));
+            Assert.True(
+                utf16Buffer
+                    .Slice(0, testData.Utf16Sequence.Length)
+                    .SequenceEqual(testData.Utf16Sequence)
+            );
         }
 
         [Theory]
@@ -652,7 +747,10 @@ namespace System.Text.Tests
             Assert.False(success);
             Assert.Equal(0, bytesWritten);
 
-            Assert.Throws<ArgumentException>("destination", () => rune.EncodeToUtf8(new byte[rune.Utf8SequenceLength - 1]));
+            Assert.Throws<ArgumentException>(
+                "destination",
+                () => rune.EncodeToUtf8(new byte[rune.Utf8SequenceLength - 1])
+            );
 
             // Then, try with a buffer that's appropriately sized
 
@@ -672,11 +770,19 @@ namespace System.Text.Tests
             success = rune.TryEncodeToUtf8(utf8Buffer, out bytesWritten);
             Assert.True(success);
             Assert.Equal(testData.Utf8Sequence.Length, bytesWritten);
-            Assert.True(utf8Buffer.Slice(0, testData.Utf8Sequence.Length).SequenceEqual(testData.Utf8Sequence));
+            Assert.True(
+                utf8Buffer
+                    .Slice(0, testData.Utf8Sequence.Length)
+                    .SequenceEqual(testData.Utf8Sequence)
+            );
 
             utf8Buffer.Clear();
             Assert.Equal(testData.Utf8Sequence.Length, rune.EncodeToUtf8(utf8Buffer));
-            Assert.True(utf8Buffer.Slice(0, testData.Utf8Sequence.Length).SequenceEqual(testData.Utf8Sequence));
+            Assert.True(
+                utf8Buffer
+                    .Slice(0, testData.Utf8Sequence.Length)
+                    .SequenceEqual(testData.Utf8Sequence)
+            );
         }
     }
 }

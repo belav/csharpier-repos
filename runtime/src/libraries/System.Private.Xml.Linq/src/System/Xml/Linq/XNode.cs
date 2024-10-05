@@ -44,10 +44,7 @@ namespace System.Xml.Linq
         /// </remarks>
         public XNode? NextNode
         {
-            get
-            {
-                return parent == null || this == parent.content ? null : next;
-            }
+            get { return parent == null || this == parent.content ? null : next; }
         }
 
         /// <summary>
@@ -61,7 +58,8 @@ namespace System.Xml.Linq
         {
             get
             {
-                if (parent == null) return null;
+                if (parent == null)
+                    return null;
                 Debug.Assert(parent.content != null);
                 XNode n = ((XNode)parent.content!).next!;
                 XNode? p = null;
@@ -77,12 +75,14 @@ namespace System.Xml.Linq
         /// <summary>
         /// Gets a comparer that can compare the relative position of two nodes.
         /// </summary>
-        public static XNodeDocumentOrderComparer DocumentOrderComparer => s_documentOrderComparer ??= new XNodeDocumentOrderComparer();
+        public static XNodeDocumentOrderComparer DocumentOrderComparer =>
+            s_documentOrderComparer ??= new XNodeDocumentOrderComparer();
 
         /// <summary>
         /// Gets a comparer that can compare two nodes for value equality.
         /// </summary>
-        public static XNodeEqualityComparer EqualityComparer => s_equalityComparer ??= new XNodeEqualityComparer();
+        public static XNodeEqualityComparer EqualityComparer =>
+            s_equalityComparer ??= new XNodeEqualityComparer();
 
         /// <overloads>
         /// Adds the specified content immediately after this node. The
@@ -106,7 +106,8 @@ namespace System.Xml.Linq
         /// </remarks>
         public void AddAfterSelf(object? content)
         {
-            if (parent == null) throw new InvalidOperationException(SR.InvalidOperation_MissingParent);
+            if (parent == null)
+                throw new InvalidOperationException(SR.InvalidOperation_MissingParent);
             new Inserter(parent, this).Add(content);
         }
 
@@ -150,10 +151,13 @@ namespace System.Xml.Linq
         /// </remarks>
         public void AddBeforeSelf(object? content)
         {
-            if (parent == null) throw new InvalidOperationException(SR.InvalidOperation_MissingParent);
+            if (parent == null)
+                throw new InvalidOperationException(SR.InvalidOperation_MissingParent);
             XNode? p = (XNode)parent.content!;
-            while (p.next != this) p = p.next!;
-            if (p == parent.content) p = null;
+            while (p.next != this)
+                p = p.next!;
+            if (p == parent.content)
+                p = null;
             new Inserter(parent, p).Add(content);
         }
 
@@ -223,9 +227,12 @@ namespace System.Xml.Linq
         /// </exception>
         public static int CompareDocumentOrder(XNode? n1, XNode? n2)
         {
-            if (n1 == n2) return 0;
-            if (n1 == null) return -1;
-            if (n2 == null) return 1;
+            if (n1 == n2)
+                return 0;
+            if (n1 == null)
+                return -1;
+            if (n2 == null)
+                return 1;
             if (n1.parent != n2.parent)
             {
                 int height = 0;
@@ -241,7 +248,8 @@ namespace System.Xml.Linq
                     p2 = p2.parent;
                     height--;
                 }
-                if (p1 != p2) throw new InvalidOperationException(SR.InvalidOperation_MissingAncestor);
+                if (p1 != p2)
+                    throw new InvalidOperationException(SR.InvalidOperation_MissingAncestor);
                 if (height < 0)
                 {
                     do
@@ -249,7 +257,8 @@ namespace System.Xml.Linq
                         n2 = n2.parent!;
                         height++;
                     } while (height != 0);
-                    if (n1 == n2) return -1;
+                    if (n1 == n2)
+                        return -1;
                 }
                 else if (height > 0)
                 {
@@ -258,7 +267,8 @@ namespace System.Xml.Linq
                         n1 = n1.parent!;
                         height--;
                     } while (height != 0);
-                    if (n1 == n2) return 1;
+                    if (n1 == n2)
+                        return 1;
                 }
                 while (n1.parent != n2.parent)
                 {
@@ -274,8 +284,10 @@ namespace System.Xml.Linq
             while (true)
             {
                 n = n.next!;
-                if (n == n1) return -1;
-                if (n == n2) return 1;
+                if (n == n1)
+                    return -1;
+                if (n == n2)
+                    return 1;
             }
         }
 
@@ -332,7 +344,8 @@ namespace System.Xml.Linq
                 do
                 {
                     n = n.next!;
-                    if (n == this) break;
+                    if (n == this)
+                        break;
                     yield return n;
                 } while (parent != null && parent == n.parent);
             }
@@ -427,7 +440,8 @@ namespace System.Xml.Linq
         {
             ArgumentNullException.ThrowIfNull(reader);
 
-            if (reader.ReadState != ReadState.Interactive) throw new InvalidOperationException(SR.InvalidOperation_ExpectedInteractive);
+            if (reader.ReadState != ReadState.Interactive)
+                throw new InvalidOperationException(SR.InvalidOperation_ExpectedInteractive);
             switch (reader.NodeType)
             {
                 case XmlNodeType.Text:
@@ -445,7 +459,9 @@ namespace System.Xml.Linq
                 case XmlNodeType.ProcessingInstruction:
                     return new XProcessingInstruction(reader);
                 default:
-                    throw new InvalidOperationException(SR.Format(SR.InvalidOperation_UnexpectedNodeType, reader.NodeType));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.InvalidOperation_UnexpectedNodeType, reader.NodeType)
+                    );
             }
         }
 
@@ -461,7 +477,10 @@ namespace System.Xml.Linq
         /// <exception cref="InvalidOperationException">
         /// Thrown if the <see cref="XmlReader"/> is not positioned on a recognized node type.
         /// </exception>
-        public static Task<XNode> ReadFromAsync(XmlReader reader, CancellationToken cancellationToken)
+        public static Task<XNode> ReadFromAsync(
+            XmlReader reader,
+            CancellationToken cancellationToken
+        )
         {
             ArgumentNullException.ThrowIfNull(reader);
 
@@ -470,9 +489,13 @@ namespace System.Xml.Linq
             return ReadFromAsyncInternal(reader, cancellationToken);
         }
 
-        private static async Task<XNode> ReadFromAsyncInternal(XmlReader reader, CancellationToken cancellationToken)
+        private static async Task<XNode> ReadFromAsyncInternal(
+            XmlReader reader,
+            CancellationToken cancellationToken
+        )
         {
-            if (reader.ReadState != ReadState.Interactive) throw new InvalidOperationException(SR.InvalidOperation_ExpectedInteractive);
+            if (reader.ReadState != ReadState.Interactive)
+                throw new InvalidOperationException(SR.InvalidOperation_ExpectedInteractive);
 
             XNode ret;
 
@@ -498,7 +521,9 @@ namespace System.Xml.Linq
                     ret = new XDocumentType(name, publicId, systemId, internalSubset);
                     break;
                 case XmlNodeType.Element:
-                    return await XElement.CreateAsync(reader, cancellationToken).ConfigureAwait(false);
+                    return await XElement
+                        .CreateAsync(reader, cancellationToken)
+                        .ConfigureAwait(false);
                 case XmlNodeType.ProcessingInstruction:
                     var target = reader.Name;
                     var data = reader.Value;
@@ -506,7 +531,9 @@ namespace System.Xml.Linq
                     ret = new XProcessingInstruction(target, data);
                     break;
                 default:
-                    throw new InvalidOperationException(SR.Format(SR.InvalidOperation_UnexpectedNodeType, reader.NodeType));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.InvalidOperation_UnexpectedNodeType, reader.NodeType)
+                    );
             }
 
             cancellationToken.ThrowIfCancellationRequested();
@@ -523,7 +550,8 @@ namespace System.Xml.Linq
         /// </exception>
         public void Remove()
         {
-            if (parent == null) throw new InvalidOperationException(SR.InvalidOperation_MissingParent);
+            if (parent == null)
+                throw new InvalidOperationException(SR.InvalidOperation_MissingParent);
             parent.RemoveNode(this);
         }
 
@@ -539,13 +567,17 @@ namespace System.Xml.Linq
         /// <param name="content">Content that replaces this node.</param>
         public void ReplaceWith(object? content)
         {
-            if (parent == null) throw new InvalidOperationException(SR.InvalidOperation_MissingParent);
+            if (parent == null)
+                throw new InvalidOperationException(SR.InvalidOperation_MissingParent);
             XContainer c = parent;
             XNode? p = (XNode)parent.content!;
-            while (p.next != this) p = p.next!;
-            if (p == parent.content) p = null;
+            while (p.next != this)
+                p = p.next!;
+            if (p == parent.content)
+                p = null;
             parent.RemoveNode(this);
-            if (p != null && p.parent != c) throw new InvalidOperationException(SR.InvalidOperation_ExternalCode);
+            if (p != null && p.parent != c)
+                throw new InvalidOperationException(SR.InvalidOperation_ExternalCode);
             new Inserter(c, p).Add(content);
         }
 
@@ -601,8 +633,10 @@ namespace System.Xml.Linq
         /// same name, public id, system id, and internal subset.</remarks>
         public static bool DeepEquals(XNode? n1, XNode? n2)
         {
-            if (n1 == n2) return true;
-            if (n1 == null || n2 == null) return false;
+            if (n1 == n2)
+                return true;
+            if (n1 == null || n2 == null)
+                return false;
             return n1.DeepEquals(n2);
         }
 
@@ -619,9 +653,7 @@ namespace System.Xml.Linq
         /// <param name="cancellationToken">A cancellation token.</param>
         public abstract Task WriteToAsync(XmlWriter writer, CancellationToken cancellationToken);
 
-        internal virtual void AppendText(StringBuilder sb)
-        {
-        }
+        internal virtual void AppendText(StringBuilder sb) { }
 
         internal abstract XNode CloneNode();
 
@@ -632,7 +664,8 @@ namespace System.Xml.Linq
             XElement? e = (self ? this : parent) as XElement;
             while (e != null)
             {
-                if (name == null || e.name == name) yield return e;
+                if (name == null || e.name == name)
+                    yield return e;
                 e = e.parent as XElement;
             }
         }
@@ -644,7 +677,8 @@ namespace System.Xml.Linq
             {
                 n = n.next!;
                 XElement? e = n as XElement;
-                if (e != null && (name == null || e.name == name)) yield return e;
+                if (e != null && (name == null || e.name == name))
+                    yield return e;
             }
         }
 
@@ -656,9 +690,11 @@ namespace System.Xml.Linq
                 do
                 {
                     n = n.next!;
-                    if (n == this) break;
+                    if (n == this)
+                        break;
                     XElement? e = n as XElement;
-                    if (e != null && (name == null || e.name == name)) yield return e;
+                    if (e != null && (name == null || e.name == name))
+                        yield return e;
                 } while (parent != null && parent == n.parent);
             }
         }
@@ -672,7 +708,8 @@ namespace System.Xml.Linq
         internal static XmlReaderSettings GetXmlReaderSettings(LoadOptions o)
         {
             XmlReaderSettings rs = new XmlReaderSettings();
-            if ((o & LoadOptions.PreserveWhitespace) == 0) rs.IgnoreWhitespace = true;
+            if ((o & LoadOptions.PreserveWhitespace) == 0)
+                rs.IgnoreWhitespace = true;
 
             // DtdProcessing.Parse; Parse is not defined in the public contract
             rs.DtdProcessing = (DtdProcessing)2;
@@ -684,8 +721,10 @@ namespace System.Xml.Linq
         internal static XmlWriterSettings GetXmlWriterSettings(SaveOptions o)
         {
             XmlWriterSettings ws = new XmlWriterSettings();
-            if ((o & SaveOptions.DisableFormatting) == 0) ws.Indent = true;
-            if ((o & SaveOptions.OmitDuplicateNamespaces) != 0) ws.NamespaceHandling |= NamespaceHandling.OmitDuplicates;
+            if ((o & SaveOptions.DisableFormatting) == 0)
+                ws.Indent = true;
+            if ((o & SaveOptions.OmitDuplicateNamespaces) != 0)
+                ws.NamespaceHandling |= NamespaceHandling.OmitDuplicates;
             return ws;
         }
 
@@ -695,9 +734,12 @@ namespace System.Xml.Linq
             {
                 XmlWriterSettings ws = new XmlWriterSettings();
                 ws.OmitXmlDeclaration = true;
-                if ((o & SaveOptions.DisableFormatting) == 0) ws.Indent = true;
-                if ((o & SaveOptions.OmitDuplicateNamespaces) != 0) ws.NamespaceHandling |= NamespaceHandling.OmitDuplicates;
-                if (this is XText) ws.ConformanceLevel = ConformanceLevel.Fragment;
+                if ((o & SaveOptions.DisableFormatting) == 0)
+                    ws.Indent = true;
+                if ((o & SaveOptions.OmitDuplicateNamespaces) != 0)
+                    ws.NamespaceHandling |= NamespaceHandling.OmitDuplicates;
+                if (this is XText)
+                    ws.ConformanceLevel = ConformanceLevel.Fragment;
                 using (XmlWriter w = XmlWriter.Create(sw, ws))
                 {
                     XDocument? n = this as XDocument;

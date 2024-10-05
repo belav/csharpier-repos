@@ -5,12 +5,12 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
-    using System.ServiceModel;
-    using System.ServiceModel.Description;
     using System.Collections.ObjectModel;
     using System.IO;
     using System.Net;
     using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Description;
     using System.Text;
     using System.Threading;
 
@@ -21,9 +21,7 @@ namespace System.ServiceModel.Channels
         TimeSpan receiveTimeout = ServiceDefaults.ReceiveTimeout;
         TimeSpan sendTimeout = ServiceDefaults.SendTimeout;
 
-        protected ChannelListenerBase()
-        {
-        }
+        protected ChannelListenerBase() { }
 
         protected ChannelListenerBase(IDefaultCommunicationTimeouts timeouts)
         {
@@ -76,7 +74,11 @@ namespace System.ServiceModel.Channels
             return this.OnWaitForChannel(timeout);
         }
 
-        public IAsyncResult BeginWaitForChannel(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginWaitForChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             this.ThrowIfNotOpened();
             this.ThrowPending();
@@ -89,25 +91,30 @@ namespace System.ServiceModel.Channels
         }
 
         protected abstract bool OnWaitForChannel(TimeSpan timeout);
-        protected abstract IAsyncResult OnBeginWaitForChannel(TimeSpan timeout, AsyncCallback callback, object state);
+        protected abstract IAsyncResult OnBeginWaitForChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
         protected abstract bool OnEndWaitForChannel(IAsyncResult result);
-
     }
 
-    public abstract class ChannelListenerBase<TChannel> : ChannelListenerBase, IChannelListener<TChannel>
+    public abstract class ChannelListenerBase<TChannel>
+        : ChannelListenerBase,
+            IChannelListener<TChannel>
         where TChannel : class, IChannel
     {
-        protected ChannelListenerBase()
-        {
-        }
+        protected ChannelListenerBase() { }
 
         protected ChannelListenerBase(IDefaultCommunicationTimeouts timeouts)
-            : base(timeouts)
-        {
-        }
+            : base(timeouts) { }
 
         protected abstract TChannel OnAcceptChannel(TimeSpan timeout);
-        protected abstract IAsyncResult OnBeginAcceptChannel(TimeSpan timeout, AsyncCallback callback, object state);
+        protected abstract IAsyncResult OnBeginAcceptChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
         protected abstract TChannel OnEndAcceptChannel(IAsyncResult result);
 
         public TChannel AcceptChannel()
@@ -127,7 +134,11 @@ namespace System.ServiceModel.Channels
             return this.BeginAcceptChannel(this.InternalReceiveTimeout, callback, state);
         }
 
-        public IAsyncResult BeginAcceptChannel(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginAcceptChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             this.ThrowIfNotOpened();
             this.ThrowPending();

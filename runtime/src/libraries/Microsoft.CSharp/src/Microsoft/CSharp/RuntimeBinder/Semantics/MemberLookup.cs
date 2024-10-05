@@ -25,7 +25,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         // All EXF flags are < 0x01000000
         MustBeInvocable = 0x20000000,
 
-        All = Ctor | NewObj | Operator | Indexer | UserCallable | BaseCall | MustBeInvocable
+        All = Ctor | NewObj | Operator | Indexer | UserCallable | BaseCall | MustBeInvocable,
     }
 
     /////////////////////////////////////////////////////////////////////////////////
@@ -49,17 +49,17 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         // Results of the lookup.
         private List<AggregateType> _prgtype;
-        private int _csym;                 // Number of syms found.
-        private readonly SymWithType _swtFirst;     // The first symbol found.
+        private int _csym; // Number of syms found.
+        private readonly SymWithType _swtFirst; // The first symbol found.
         private readonly List<MethPropWithType> _methPropWithTypeList; // When we look up methods, we want to keep the list of all candidate methods given a particular name.
 
         // These are for error reporting.
-        private readonly SymWithType _swtAmbig;     // An ambiguous symbol.
-        private readonly SymWithType _swtInaccess;  // An inaccessible symbol.
-        private readonly SymWithType _swtBad;       // If we're looking for a constructor or indexer, this matched on name, but isn't the right thing.
-        private readonly SymWithType _swtBogus;     // A bogus member - such as an indexed property.
-        private readonly SymWithType _swtBadArity;  // An symbol with the wrong arity.
-        private bool _fMulti;              // Whether symFirst is of a kind for which we collect multiples (methods and indexers).
+        private readonly SymWithType _swtAmbig; // An ambiguous symbol.
+        private readonly SymWithType _swtInaccess; // An inaccessible symbol.
+        private readonly SymWithType _swtBad; // If we're looking for a constructor or indexer, this matched on name, but isn't the right thing.
+        private readonly SymWithType _swtBogus; // A bogus member - such as an indexed property.
+        private readonly SymWithType _swtBadArity; // An symbol with the wrong arity.
+        private bool _fMulti; // Whether symFirst is of a kind for which we collect multiples (methods and indexers).
 
         /***************************************************************************************************
             Another match was found. Increment the count of syms and add the type to our list if it's not
@@ -110,9 +110,15 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             // Loop through symbols.
             Symbol symCur;
-            for (symCur = SymbolLoader.LookupAggMember(_name, typeCur.OwningAggregate, symbmask_t.MASK_Member);
-                 symCur != null;
-                 symCur = symCur.LookupNext(symbmask_t.MASK_Member))
+            for (
+                symCur = SymbolLoader.LookupAggMember(
+                    _name,
+                    typeCur.OwningAggregate,
+                    symbmask_t.MASK_Member
+                );
+                symCur != null;
+                symCur = symCur.LookupNext(symbmask_t.MASK_Member)
+            )
             {
                 Debug.Assert(!(symCur is AggregateSymbol));
                 // Check for arity.
@@ -120,7 +126,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 // For zero arity, don't filter out any methods since we do type argument
                 // inferencing.
                 // All others are only considered when arity is zero.
-                if (_arity > 0 && (!(symCur is MethodSymbol curMeth) || curMeth.typeVars.Count != _arity))
+                if (
+                    _arity > 0
+                    && (!(symCur is MethodSymbol curMeth) || curMeth.typeVars.Count != _arity)
+                )
                 {
                     if (!_swtBadArity)
                     {
@@ -138,14 +147,26 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
                 MethodOrPropertySymbol methProp = symCur as MethodOrPropertySymbol;
                 MethodSymbol meth = symCur as MethodSymbol;
-                if (methProp != null && (_flags & MemLookFlags.UserCallable) != 0 && !methProp.isUserCallable())
+                if (
+                    methProp != null
+                    && (_flags & MemLookFlags.UserCallable) != 0
+                    && !methProp.isUserCallable()
+                )
                 {
                     // If its an indexed property method symbol, let it through.
                     // This is too liberal, but maintained for compatibility.
-                    if (meth == null ||
-                        !meth.isPropertyAccessor() ||
-                        (!symCur.name.Text.StartsWith("set_", StringComparison.Ordinal) || meth.Params.Count <= 1) &&
-                        (!symCur.name.Text.StartsWith("get_", StringComparison.Ordinal) || meth.Params.Count <= 0))
+                    if (
+                        meth == null
+                        || !meth.isPropertyAccessor()
+                        || (
+                            !symCur.name.Text.StartsWith("set_", StringComparison.Ordinal)
+                            || meth.Params.Count <= 1
+                        )
+                            && (
+                                !symCur.name.Text.StartsWith("get_", StringComparison.Ordinal)
+                                || meth.Params.Count <= 0
+                            )
+                    )
                     {
                         if (!_swtInaccess)
                         {
@@ -156,7 +177,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     }
                 }
 
-                if (fInaccess || !CSemanticChecker.CheckAccess(symCur, typeCur, _symWhere, _typeQual))
+                if (
+                    fInaccess
+                    || !CSemanticChecker.CheckAccess(symCur, typeCur, _symWhere, _typeQual)
+                )
                 {
                     // Not accessible so get the next sym.
                     if (!_swtInaccess)
@@ -173,9 +197,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 PropertySymbol prop = symCur as PropertySymbol;
 
                 // Make sure that whether we're seeing a ctor, operator, or indexer is consistent with the flags.
-                if (((_flags & MemLookFlags.Ctor) == 0) != (meth == null || !meth.IsConstructor()) ||
-                    ((_flags & MemLookFlags.Operator) == 0) != (meth == null || !meth.isOperator) ||
-                    ((_flags & MemLookFlags.Indexer) == 0) != !(prop is IndexerSymbol))
+                if (
+                    ((_flags & MemLookFlags.Ctor) == 0) != (meth == null || !meth.IsConstructor())
+                    || ((_flags & MemLookFlags.Operator) == 0) != (meth == null || !meth.isOperator)
+                    || ((_flags & MemLookFlags.Indexer) == 0) != !(prop is IndexerSymbol)
+                )
                 {
                     if (!_swtBad)
                     {
@@ -187,7 +213,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 // We can't call CheckBogus on methods or indexers because if the method has the wrong
                 // number of parameters people don't think they should have to /r the assemblies containing
                 // the parameter types and they complain about the resulting CS0012 errors.
-                if (!(symCur is MethodSymbol) && (_flags & MemLookFlags.Indexer) == 0 && CSemanticChecker.CheckBogus(symCur))
+                if (
+                    !(symCur is MethodSymbol)
+                    && (_flags & MemLookFlags.Indexer) == 0
+                    && CSemanticChecker.CheckBogus(symCur)
+                )
                 {
                     // A bogus member - we can't use these, so only record them for error reporting.
                     if (!_swtBogus)
@@ -200,8 +230,18 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 // if we are in a calling context then we should only find a property if it is delegate valued
                 if ((_flags & MemLookFlags.MustBeInvocable) != 0)
                 {
-                    if ((symCur is FieldSymbol field && !IsDelegateType(field.GetType(), typeCur) && !IsDynamicMember(symCur)) ||
-                        (prop != null && !IsDelegateType(prop.RetType, typeCur) && !IsDynamicMember(symCur)))
+                    if (
+                        (
+                            symCur is FieldSymbol field
+                            && !IsDelegateType(field.GetType(), typeCur)
+                            && !IsDynamicMember(symCur)
+                        )
+                        || (
+                            prop != null
+                            && !IsDelegateType(prop.RetType, typeCur)
+                            && !IsDynamicMember(symCur)
+                        )
+                    )
                     {
                         if (!_swtBad)
                         {
@@ -228,13 +268,15 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         Debug.Assert(_fMulti || typeCur == _prgtype[0]);
                         if (!_fMulti)
                         {
-                            if (_swtFirst.Sym is FieldSymbol && symCur is EventSymbol
+                            if (
+                                _swtFirst.Sym is FieldSymbol
+                                && symCur is EventSymbol
                                 // The isEvent bit is only set on symbols which come from source...
                                 // This is not a problem for the compiler because the field is only
                                 // accessible in the scope in which it is declared,
                                 // but in the EE we ignore accessibility...
                                 && _swtFirst.Field().isEvent
-                        )
+                            )
                             {
                                 // m_swtFirst is just the field behind the event symCur so ignore symCur.
                                 continue;
@@ -300,7 +342,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             return fFoundSome;
 
-        LAmbig:
+            LAmbig:
             // Ambiguous!
             if (!_swtAmbig)
                 _swtAmbig.Set(symCur, typeCur);
@@ -317,7 +359,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 {
                     return false;
                 }
-                var o = field.AssociatedFieldInfo.GetCustomAttributes(typeof(System.Runtime.CompilerServices.DynamicAttribute), false);
+                var o = field.AssociatedFieldInfo.GetCustomAttributes(
+                    typeof(System.Runtime.CompilerServices.DynamicAttribute),
+                    false
+                );
                 if (o.Length == 1)
                 {
                     da = o[0] as System.Runtime.CompilerServices.DynamicAttribute;
@@ -331,7 +376,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 {
                     return false;
                 }
-                var o = prop.AssociatedPropertyInfo.GetCustomAttributes(typeof(System.Runtime.CompilerServices.DynamicAttribute), false);
+                var o = prop.AssociatedPropertyInfo.GetCustomAttributes(
+                    typeof(System.Runtime.CompilerServices.DynamicAttribute),
+                    false
+                );
                 if (o.Length == 1)
                 {
                     da = o[0] as System.Runtime.CompilerServices.DynamicAttribute;
@@ -342,7 +390,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             {
                 return false;
             }
-            return (da.TransformFlags.Count == 0 || (da.TransformFlags.Count == 1 && da.TransformFlags[0]));
+            return (
+                da.TransformFlags.Count == 0
+                || (da.TransformFlags.Count == 1 && da.TransformFlags[0])
+            );
         }
 
         /******************************************************************************
@@ -358,13 +409,21 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         private bool LookupInClass(AggregateType typeStart, ref AggregateType ptypeEnd)
         {
             Debug.Assert(!_swtFirst || _fMulti);
-            Debug.Assert(typeStart != null && !typeStart.IsInterfaceType && (ptypeEnd == null || typeStart != ptypeEnd));
+            Debug.Assert(
+                typeStart != null
+                    && !typeStart.IsInterfaceType
+                    && (ptypeEnd == null || typeStart != ptypeEnd)
+            );
 
             AggregateType typeEnd = ptypeEnd;
             AggregateType typeCur;
 
             // Loop through types. Loop until we hit typeEnd (object or null).
-            for (typeCur = typeStart; typeCur != typeEnd && typeCur != null; typeCur = typeCur.BaseClass)
+            for (
+                typeCur = typeStart;
+                typeCur != typeEnd && typeCur != null;
+                typeCur = typeCur.BaseClass
+            )
             {
                 Debug.Assert(!typeCur.IsInterfaceType);
 
@@ -475,11 +534,18 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Debug.Assert((meth1 ?? meth2) != null);
             return meth1 == null | meth2 == null
                 ? ErrorHandling.Error(
-                    ErrorCode.ERR_BindToBogusProp1, swt.Sym.name, new SymWithType(meth1 ?? meth2, swt.GetType()),
-                    new ErrArgRefOnly(swt.Sym))
+                    ErrorCode.ERR_BindToBogusProp1,
+                    swt.Sym.name,
+                    new SymWithType(meth1 ?? meth2, swt.GetType()),
+                    new ErrArgRefOnly(swt.Sym)
+                )
                 : ErrorHandling.Error(
-                    ErrorCode.ERR_BindToBogusProp2, swt.Sym.name, new SymWithType(meth1, swt.GetType()),
-                    new SymWithType(meth2, swt.GetType()), new ErrArgRefOnly(swt.Sym));
+                    ErrorCode.ERR_BindToBogusProp2,
+                    swt.Sym.name,
+                    new SymWithType(meth1, swt.GetType()),
+                    new SymWithType(meth2, swt.GetType()),
+                    new ErrArgRefOnly(swt.Sym)
+                );
         }
 
         private static bool IsDelegateType(CType pSrcType, AggregateType pAggType) =>
@@ -518,7 +584,14 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 TypeVarsAllowed only applies to the most derived type (not base types).
         ***************************************************************************************************/
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        public bool Lookup(CType typeSrc, Expr obj, ParentSymbol symWhere, Name name, int arity, MemLookFlags flags)
+        public bool Lookup(
+            CType typeSrc,
+            Expr obj,
+            ParentSymbol symWhere,
+            Name name,
+            int arity,
+            MemLookFlags flags
+        )
         {
             Debug.Assert((flags & ~MemLookFlags.All) == 0);
             Debug.Assert(obj == null || obj.Type != null);
@@ -542,7 +615,17 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             if (typeSrc.IsInterfaceType)
             {
-                Debug.Assert((_flags & (MemLookFlags.Ctor | MemLookFlags.NewObj | MemLookFlags.Operator | MemLookFlags.BaseCall)) == 0);
+                Debug.Assert(
+                    (
+                        _flags
+                        & (
+                            MemLookFlags.Ctor
+                            | MemLookFlags.NewObj
+                            | MemLookFlags.Operator
+                            | MemLookFlags.BaseCall
+                        )
+                    ) == 0
+                );
                 typeCls1 = null;
                 typeIface = (AggregateType)typeSrc;
                 ifaces = typeIface.IfacesAll;
@@ -554,18 +637,25 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 ifaces = TypeArray.Empty;
             }
 
-            AggregateType typeCls2 = typeIface != null || ifaces.Count > 0
-                ? SymbolLoader.GetPredefindType(PredefinedType.PT_OBJECT)
-                : null;
+            AggregateType typeCls2 =
+                typeIface != null || ifaces.Count > 0
+                    ? SymbolLoader.GetPredefindType(PredefinedType.PT_OBJECT)
+                    : null;
 
             // Search the class first (except possibly object).
             if (typeCls1 == null || LookupInClass(typeCls1, ref typeCls2))
             {
                 // Search the interfaces.
-                if ((typeIface != null || ifaces.Count > 0) && LookupInInterfaces(typeIface, ifaces) && typeCls2 != null)
+                if (
+                    (typeIface != null || ifaces.Count > 0)
+                    && LookupInInterfaces(typeIface, ifaces)
+                    && typeCls2 != null
+                )
                 {
                     // Search object last.
-                    Debug.Assert(typeCls2 != null && typeCls2.IsPredefType(PredefinedType.PT_OBJECT));
+                    Debug.Assert(
+                        typeCls2 != null && typeCls2.IsPredefType(PredefinedType.PT_OBJECT)
+                    );
 
                     AggregateType result = null;
                     LookupInClass(typeCls2, ref result);
@@ -607,7 +697,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             if (_swtInaccess)
             {
-                return !_swtInaccess.Sym.isUserCallable() && ((_flags & MemLookFlags.UserCallable) != 0)
+                return
+                    !_swtInaccess.Sym.isUserCallable()
+                    && ((_flags & MemLookFlags.UserCallable) != 0)
                     ? ErrorHandling.Error(ErrorCode.ERR_CantCallSpecialMethod, _swtInaccess)
                     : CSemanticChecker.ReportAccessError(_swtInaccess, _symWhere, _typeQual);
             }
@@ -616,8 +708,15 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             {
                 Debug.Assert(_typeSrc is AggregateType);
                 return _arity > 0
-                    ? ErrorHandling.Error(ErrorCode.ERR_BadCtorArgCount, ((AggregateType)_typeSrc).OwningAggregate, _arity)
-                    : ErrorHandling.Error(ErrorCode.ERR_NoConstructors, ((AggregateType)_typeSrc).OwningAggregate);
+                    ? ErrorHandling.Error(
+                        ErrorCode.ERR_BadCtorArgCount,
+                        ((AggregateType)_typeSrc).OwningAggregate,
+                        _arity
+                    )
+                    : ErrorHandling.Error(
+                        ErrorCode.ERR_NoConstructors,
+                        ((AggregateType)_typeSrc).OwningAggregate
+                    );
             }
 
             if ((_flags & MemLookFlags.Operator) != 0)
@@ -632,7 +731,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             if (_swtBad)
             {
-                return ErrorHandling.Error((_flags & MemLookFlags.MustBeInvocable) != 0 ? ErrorCode.ERR_NonInvocableMemberCalled : ErrorCode.ERR_CantCallSpecialMethod, _swtBad);
+                return ErrorHandling.Error(
+                    (_flags & MemLookFlags.MustBeInvocable) != 0
+                        ? ErrorCode.ERR_NonInvocableMemberCalled
+                        : ErrorCode.ERR_CantCallSpecialMethod,
+                    _swtBad
+                );
             }
 
             if (_swtBogus)
@@ -647,10 +751,19 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 if (_swtBadArity.Sym is MethodSymbol badMeth)
                 {
                     int cvar = badMeth.typeVars.Count;
-                    return ErrorHandling.Error(cvar > 0 ? ErrorCode.ERR_BadArity : ErrorCode.ERR_HasNoTypeVars, _swtBadArity, new ErrArgSymKind(_swtBadArity.Sym), cvar);
+                    return ErrorHandling.Error(
+                        cvar > 0 ? ErrorCode.ERR_BadArity : ErrorCode.ERR_HasNoTypeVars,
+                        _swtBadArity,
+                        new ErrArgSymKind(_swtBadArity.Sym),
+                        cvar
+                    );
                 }
 
-                return ErrorHandling.Error(ErrorCode.ERR_TypeArgsNotAllowed, _swtBadArity, new ErrArgSymKind(_swtBadArity.Sym));
+                return ErrorHandling.Error(
+                    ErrorCode.ERR_TypeArgsNotAllowed,
+                    _swtBadArity,
+                    new ErrArgSymKind(_swtBadArity.Sym)
+                );
             }
 
             return ErrorHandling.Error(ErrorCode.ERR_NoSuchMember, _typeSrc, _name);

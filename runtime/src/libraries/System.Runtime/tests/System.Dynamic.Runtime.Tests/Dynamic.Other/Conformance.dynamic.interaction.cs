@@ -41,8 +41,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondefretdym.commondefretdym
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
@@ -58,6 +56,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
     public class FirstClassReturnDynamicClass
     {
         private static SecondClass s_secClass = new SecondClass();
+
         public dynamic InstanceMethod()
         {
             Verify.FirstCalled = true;
@@ -113,10 +112,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
 
         public bool InstanceProperty
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public static bool operator +(SecondClass s, int i)
@@ -126,10 +122,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
 
         public bool this[int i]
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
     }
 
@@ -138,6 +131,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
     public class FirstClassReturnDynamicStruct
     {
         private static SecondStruct s_secStruct = new SecondStruct();
+
         public dynamic InstanceMethod()
         {
             Verify.FirstCalled = true;
@@ -193,10 +187,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
 
         public bool InstanceProperty
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public static bool operator +(SecondStruct s, int i)
@@ -206,10 +197,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
 
         public bool this[int i]
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
     }
 
@@ -218,6 +206,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
     public class FirstClassReturnDynamicInterface
     {
         private static SecondInterface s_secInterface = new SecondInterfaceImp();
+
         public dynamic InstanceMethod()
         {
             Verify.FirstCalled = true;
@@ -267,15 +256,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
     public interface SecondInterface
     {
         bool InstanceMethod();
-        bool InstanceProperty
-        {
-            get;
-        }
+        bool InstanceProperty { get; }
 
-        bool this[int i]
-        {
-            get;
-        }
+        bool this[int i] { get; }
     }
 
     public class SecondInterfaceImp : SecondInterface
@@ -287,18 +270,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
 
         public bool InstanceProperty
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public bool this[int i]
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
     }
     #endregion
@@ -306,12 +283,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.statictodynamic001.statictodynamic001
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondefretdym.commondefretdym;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is instance method of class and return dynamic
@@ -353,38 +329,37 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 
 #if M3
 
-static bool CallSecondClassOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondClassOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicClass();
 
-var s = new FirstClassReturnDynamicClass();
+            if ((!(bool)(s.InstanceMethod() + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(s.InstanceMethod() + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondClassIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicClass();
 
-static bool CallSecondClassIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+            if ((!(bool)(s.InstanceMethod()[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-
-var s = new FirstClassReturnDynamicClass();
-
-if ( (!(bool)(s.InstanceMethod()[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is struct
@@ -418,38 +393,37 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondStructOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondStructOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicStruct();
 
-var s = new FirstClassReturnDynamicStruct();
+            if ((!(bool)(s.InstanceMethod() + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(s.InstanceMethod() + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondStructIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicStruct();
 
-static bool CallSecondStructIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+            if ((!(bool)(s.InstanceMethod()[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-
-var s = new FirstClassReturnDynamicStruct();
-
-if ( (!(bool)(s.InstanceMethod()[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is interface
@@ -483,21 +457,21 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondInterfaceIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondInterfaceIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicInterface();
 
-var s = new FirstClassReturnDynamicInterface();
+            if ((!(bool)(s.InstanceMethod()[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(s.InstanceMethod()[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         [Fact]
@@ -512,32 +486,31 @@ return failcount == 0;
             result += Verify.Eval(CallSecondClassInstanceMethod);
             result += Verify.Eval(CallSecondClassInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondClassOperator);
-result += Verify.Eval(CallSecondClassIndexer);
- #endif
+            result += Verify.Eval(CallSecondClassOperator);
+            result += Verify.Eval(CallSecondClassIndexer);
+#endif
             result += Verify.Eval(CallSecondStructInstanceMethod);
             result += Verify.Eval(CallSecondStructInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondStructOperator);
-result += Verify.Eval(CallSecondStructIndexer);
- #endif
+            result += Verify.Eval(CallSecondStructOperator);
+            result += Verify.Eval(CallSecondStructIndexer);
+#endif
             result += Verify.Eval(CallSecondInterfaceInstanceMethod);
             result += Verify.Eval(CallSecondInterfaceInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondInterfaceIndexer);
- #endif
+            result += Verify.Eval(CallSecondInterfaceIndexer);
+#endif
             return result;
         }
     }
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.statictodynamic002.statictodynamic002
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondefretdym.commondefretdym;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is instance property of class and return dynamic
@@ -579,38 +552,37 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 
 #if M3
 
-static bool CallSecondClassOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondClassOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicClass();
 
-var s = new FirstClassReturnDynamicClass();
+            if ((!(bool)(s.InstanceProperty + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(s.InstanceProperty + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondClassIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicClass();
 
-static bool CallSecondClassIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+            if ((!(bool)(s.InstanceProperty[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-
-var s = new FirstClassReturnDynamicClass();
-
-if ( (!(bool)(s.InstanceProperty[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is struct
@@ -644,38 +616,37 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondStructOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondStructOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicStruct();
 
-var s = new FirstClassReturnDynamicStruct();
+            if ((!(bool)(s.InstanceProperty + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(s.InstanceProperty + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondStructIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicStruct();
 
-static bool CallSecondStructIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+            if ((!(bool)(s.InstanceProperty[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-
-var s = new FirstClassReturnDynamicStruct();
-
-if ( (!(bool)(s.InstanceProperty[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is interface
@@ -709,21 +680,21 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondInterfaceIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondInterfaceIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicInterface();
 
-var s = new FirstClassReturnDynamicInterface();
+            if ((!(bool)(s.InstanceProperty[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(s.InstanceProperty[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         [Fact]
@@ -738,32 +709,31 @@ return failcount == 0;
             result += Verify.Eval(CallSecondClassInstanceMethod);
             result += Verify.Eval(CallSecondClassInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondClassOperator);
-result += Verify.Eval(CallSecondClassIndexer);
- #endif
+            result += Verify.Eval(CallSecondClassOperator);
+            result += Verify.Eval(CallSecondClassIndexer);
+#endif
             result += Verify.Eval(CallSecondStructInstanceMethod);
             result += Verify.Eval(CallSecondStructInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondStructOperator);
-result += Verify.Eval(CallSecondStructIndexer);
- #endif
+            result += Verify.Eval(CallSecondStructOperator);
+            result += Verify.Eval(CallSecondStructIndexer);
+#endif
             result += Verify.Eval(CallSecondInterfaceInstanceMethod);
             result += Verify.Eval(CallSecondInterfaceInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondInterfaceIndexer);
- #endif
+            result += Verify.Eval(CallSecondInterfaceIndexer);
+#endif
             return result;
         }
     }
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.statictodynamic003.statictodynamic003
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondefretdym.commondefretdym;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is operator of class and return dynamic
@@ -804,38 +774,37 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 
 #if M3
 
-static bool CallSecondClassOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondClassOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicClass();
 
-var s = new FirstClassReturnDynamicClass();
+            if ((!(bool)((s + 1) + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)((s + 1) + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondClassIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicClass();
 
-static bool CallSecondClassIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+            if ((!(bool)((s + 1)[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-
-var s = new FirstClassReturnDynamicClass();
-
-if ( (!(bool)((s + 1)[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is struct
@@ -869,38 +838,37 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondStructOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondStructOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicStruct();
 
-var s = new FirstClassReturnDynamicStruct();
+            if ((!(bool)((s + 1) + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)((s + 1) + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondStructIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicStruct();
 
-static bool CallSecondStructIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+            if ((!(bool)((s + 1)[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-
-var s = new FirstClassReturnDynamicStruct();
-
-if ( (!(bool)((s + 1)[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is interface
@@ -934,21 +902,21 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondInterfaceIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondInterfaceIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicInterface();
 
-var s = new FirstClassReturnDynamicInterface();
+            if ((!(bool)((s + 1)[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)((s + 1)[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         [Fact]
@@ -963,32 +931,31 @@ return failcount == 0;
             result += Verify.Eval(CallSecondClassInstanceMethod);
             result += Verify.Eval(CallSecondClassInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondClassOperator);
-result += Verify.Eval(CallSecondClassIndexer);
- #endif
+            result += Verify.Eval(CallSecondClassOperator);
+            result += Verify.Eval(CallSecondClassIndexer);
+#endif
             result += Verify.Eval(CallSecondStructInstanceMethod);
             result += Verify.Eval(CallSecondStructInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondStructOperator);
-result += Verify.Eval(CallSecondStructIndexer);
- #endif
+            result += Verify.Eval(CallSecondStructOperator);
+            result += Verify.Eval(CallSecondStructIndexer);
+#endif
             result += Verify.Eval(CallSecondInterfaceInstanceMethod);
             result += Verify.Eval(CallSecondInterfaceInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondInterfaceIndexer);
- #endif
+            result += Verify.Eval(CallSecondInterfaceIndexer);
+#endif
             return result;
         }
     }
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.statictodynamic004.statictodynamic004
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondefretdym.commondefretdym;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is indexer of class and return dynamic
@@ -1030,38 +997,37 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 
 #if M3
 
-static bool CallSecondClassOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondClassOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicClass();
 
-var s = new FirstClassReturnDynamicClass();
+            if ((!(bool)(s[1] + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(s[1] + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondClassIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicClass();
 
-static bool CallSecondClassIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+            if ((!(bool)(s[1][2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-
-var s = new FirstClassReturnDynamicClass();
-
-if ( (!(bool)(s[1][2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is struct
@@ -1095,38 +1061,37 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondStructOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondStructOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicStruct();
 
-var s = new FirstClassReturnDynamicStruct();
+            if ((!(bool)(s[1] + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(s[1] + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondStructIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicStruct();
 
-static bool CallSecondStructIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+            if ((!(bool)(s[1][2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-
-var s = new FirstClassReturnDynamicStruct();
-
-if ( (!(bool)(s[1][2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is interface
@@ -1160,21 +1125,21 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondInterfaceIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondInterfaceIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicInterface();
 
-var s = new FirstClassReturnDynamicInterface();
+            if ((!(bool)(s[1][2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(s[1][2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         [Fact]
@@ -1189,27 +1154,25 @@ return failcount == 0;
             result += Verify.Eval(CallSecondClassInstanceMethod);
             result += Verify.Eval(CallSecondClassInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondClassOperator);
-result += Verify.Eval(CallSecondClassIndexer);
- #endif
+            result += Verify.Eval(CallSecondClassOperator);
+            result += Verify.Eval(CallSecondClassIndexer);
+#endif
             result += Verify.Eval(CallSecondStructInstanceMethod);
             result += Verify.Eval(CallSecondStructInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondStructOperator);
-result += Verify.Eval(CallSecondStructIndexer);
- #endif
+            result += Verify.Eval(CallSecondStructOperator);
+            result += Verify.Eval(CallSecondStructIndexer);
+#endif
             result += Verify.Eval(CallSecondInterfaceInstanceMethod);
             result += Verify.Eval(CallSecondInterfaceInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondInterfaceIndexer);
- #endif
+            result += Verify.Eval(CallSecondInterfaceIndexer);
+#endif
             return result;
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendefretdym.commongendefretdym
 {
@@ -1226,6 +1189,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
     public class FirstClassReturnDynamicClass<T>
     {
         private static SecondClass<T> s_secClass = new SecondClass<T>();
+
         public dynamic InstanceMethod()
         {
             Verify.FirstCalled = true;
@@ -1281,10 +1245,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
 
         public bool InstanceProperty
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public static bool operator +(SecondClass<T> s, int i)
@@ -1294,10 +1255,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
 
         public bool this[int i]
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
     }
 
@@ -1306,6 +1264,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
     public class FirstClassReturnDynamicStruct<T>
     {
         private static SecondStruct<T> s_secStruct = new SecondStruct<T>();
+
         public dynamic InstanceMethod()
         {
             Verify.FirstCalled = true;
@@ -1361,10 +1320,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
 
         public bool InstanceProperty
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public static bool operator +(SecondStruct<T> s, int i)
@@ -1374,10 +1330,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
 
         public bool this[int i]
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
     }
 
@@ -1386,6 +1339,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
     public class FirstClassReturnDynamicInterface<T>
     {
         private static SecondInterface<T> s_secInterface = new SecondInterfaceImp<T>();
+
         public dynamic InstanceMethod()
         {
             Verify.FirstCalled = true;
@@ -1435,15 +1389,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
     public interface SecondInterface<T>
     {
         bool InstanceMethod();
-        bool InstanceProperty
-        {
-            get;
-        }
+        bool InstanceProperty { get; }
 
-        bool this[int i]
-        {
-            get;
-        }
+        bool this[int i] { get; }
     }
 
     public class SecondInterfaceImp<T> : SecondInterface<T>
@@ -1455,18 +1403,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
 
         public bool InstanceProperty
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public bool this[int i]
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
     }
     #endregion
@@ -1474,12 +1416,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.statictodynamic005.statictodynamic005
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendefretdym.commongendefretdym;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is instance method of generic class and return dynamic
@@ -1521,38 +1462,37 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 
 #if M3
 
-static bool CallSecondClassOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondClassOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicClass<int>();
 
-var s = new FirstClassReturnDynamicClass<int>();
+            if ((!(bool)(s.InstanceMethod() + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(s.InstanceMethod() + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondClassIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicClass<int>();
 
-static bool CallSecondClassIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+            if ((!(bool)(s.InstanceMethod()[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-
-var s = new FirstClassReturnDynamicClass<int>();
-
-if ( (!(bool)(s.InstanceMethod()[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is struct
@@ -1586,38 +1526,37 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondStructOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondStructOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicStruct<int>();
 
-var s = new FirstClassReturnDynamicStruct<int>();
+            if ((!(bool)(s.InstanceMethod() + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(s.InstanceMethod() + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondStructIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicStruct<int>();
 
-static bool CallSecondStructIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+            if ((!(bool)(s.InstanceMethod()[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-
-var s = new FirstClassReturnDynamicStruct<int>();
-
-if ( (!(bool)(s.InstanceMethod()[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is interface
@@ -1651,21 +1590,21 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondInterfaceIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondInterfaceIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicInterface<int>();
 
-var s = new FirstClassReturnDynamicInterface<int>();
+            if ((!(bool)(s.InstanceMethod()[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(s.InstanceMethod()[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         [Fact]
@@ -1680,32 +1619,31 @@ return failcount == 0;
             result += Verify.Eval(CallSecondClassInstanceMethod);
             result += Verify.Eval(CallSecondClassInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondClassOperator);
-result += Verify.Eval(CallSecondClassIndexer);
- #endif
+            result += Verify.Eval(CallSecondClassOperator);
+            result += Verify.Eval(CallSecondClassIndexer);
+#endif
             result += Verify.Eval(CallSecondStructInstanceMethod);
             result += Verify.Eval(CallSecondStructInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondStructOperator);
-result += Verify.Eval(CallSecondStructIndexer);
- #endif
+            result += Verify.Eval(CallSecondStructOperator);
+            result += Verify.Eval(CallSecondStructIndexer);
+#endif
             result += Verify.Eval(CallSecondInterfaceInstanceMethod);
             result += Verify.Eval(CallSecondInterfaceInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondInterfaceIndexer);
- #endif
+            result += Verify.Eval(CallSecondInterfaceIndexer);
+#endif
             return result;
         }
     }
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.statictodynamic006.statictodynamic006
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendefretdym.commongendefretdym;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is instance property of generic class and return dynamic
@@ -1747,38 +1685,37 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 
 #if M3
 
-static bool CallSecondClassOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondClassOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicClass<int>();
 
-var s = new FirstClassReturnDynamicClass<int>();
+            if ((!(bool)(s.InstanceProperty + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(s.InstanceProperty + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondClassIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicClass<int>();
 
-static bool CallSecondClassIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+            if ((!(bool)(s.InstanceProperty[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-
-var s = new FirstClassReturnDynamicClass<int>();
-
-if ( (!(bool)(s.InstanceProperty[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is struct
@@ -1812,38 +1749,37 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondStructOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondStructOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicStruct<int>();
 
-var s = new FirstClassReturnDynamicStruct<int>();
+            if ((!(bool)(s.InstanceProperty + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(s.InstanceProperty + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondStructIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicStruct<int>();
 
-static bool CallSecondStructIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+            if ((!(bool)(s.InstanceProperty[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-
-var s = new FirstClassReturnDynamicStruct<int>();
-
-if ( (!(bool)(s.InstanceProperty[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is interface
@@ -1877,21 +1813,21 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondInterfaceIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondInterfaceIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicInterface<int>();
 
-var s = new FirstClassReturnDynamicInterface<int>();
+            if ((!(bool)(s.InstanceProperty[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(s.InstanceProperty[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         [Fact]
@@ -1906,32 +1842,31 @@ return failcount == 0;
             result += Verify.Eval(CallSecondClassInstanceMethod);
             result += Verify.Eval(CallSecondClassInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondClassOperator);
-result += Verify.Eval(CallSecondClassIndexer);
- #endif
+            result += Verify.Eval(CallSecondClassOperator);
+            result += Verify.Eval(CallSecondClassIndexer);
+#endif
             result += Verify.Eval(CallSecondStructInstanceMethod);
             result += Verify.Eval(CallSecondStructInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondStructOperator);
-result += Verify.Eval(CallSecondStructIndexer);
- #endif
+            result += Verify.Eval(CallSecondStructOperator);
+            result += Verify.Eval(CallSecondStructIndexer);
+#endif
             result += Verify.Eval(CallSecondInterfaceInstanceMethod);
             result += Verify.Eval(CallSecondInterfaceInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondInterfaceIndexer);
- #endif
+            result += Verify.Eval(CallSecondInterfaceIndexer);
+#endif
             return result;
         }
     }
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.statictodynamic007.statictodynamic007
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendefretdym.commongendefretdym;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is operator of generic class and return dynamic
@@ -1973,38 +1908,37 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 
 #if M3
 
-static bool CallSecondClassOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondClassOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicClass<int>();
 
-var s = new FirstClassReturnDynamicClass<int>();
+            if ((!(bool)((s + 1) + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)((s + 1) + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondClassIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicClass<int>();
 
-static bool CallSecondClassIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+            if ((!(bool)((s + 1)[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-
-var s = new FirstClassReturnDynamicClass<int>();
-
-if ( (!(bool)((s + 1)[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is struct
@@ -2038,38 +1972,37 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondStructOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondStructOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicStruct<int>();
 
-var s = new FirstClassReturnDynamicStruct<int>();
+            if ((!(bool)((s + 1) + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)((s + 1) + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondStructIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicStruct<int>();
 
-static bool CallSecondStructIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+            if ((!(bool)((s + 1)[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-
-var s = new FirstClassReturnDynamicStruct<int>();
-
-if ( (!(bool)((s + 1)[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is interface
@@ -2103,21 +2036,21 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondInterfaceIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondInterfaceIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicInterface<int>();
 
-var s = new FirstClassReturnDynamicInterface<int>();
+            if ((!(bool)((s + 1)[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)((s + 1)[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         [Fact]
@@ -2132,32 +2065,31 @@ return failcount == 0;
             result += Verify.Eval(CallSecondClassInstanceMethod);
             result += Verify.Eval(CallSecondClassInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondClassOperator);
-result += Verify.Eval(CallSecondClassIndexer);
- #endif
+            result += Verify.Eval(CallSecondClassOperator);
+            result += Verify.Eval(CallSecondClassIndexer);
+#endif
             result += Verify.Eval(CallSecondStructInstanceMethod);
             result += Verify.Eval(CallSecondStructInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondStructOperator);
-result += Verify.Eval(CallSecondStructIndexer);
- #endif
+            result += Verify.Eval(CallSecondStructOperator);
+            result += Verify.Eval(CallSecondStructIndexer);
+#endif
             result += Verify.Eval(CallSecondInterfaceInstanceMethod);
             result += Verify.Eval(CallSecondInterfaceInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondInterfaceIndexer);
- #endif
+            result += Verify.Eval(CallSecondInterfaceIndexer);
+#endif
             return result;
         }
     }
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.statictodynamic008.statictodynamic008
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendefretdym.commongendefretdym;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is indexer of generic class and return dynamic
@@ -2199,38 +2131,37 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 
 #if M3
 
-static bool CallSecondClassOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondClassOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicClass<int>();
 
-var s = new FirstClassReturnDynamicClass<int>();
+            if ((!(bool)(s[1] + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(s[1] + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondClassIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicClass<int>();
 
-static bool CallSecondClassIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+            if ((!(bool)(s[1][2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-
-var s = new FirstClassReturnDynamicClass<int>();
-
-if ( (!(bool)(s[1][2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is struct
@@ -2264,38 +2195,37 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondStructOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondStructOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicStruct<int>();
 
-var s = new FirstClassReturnDynamicStruct<int>();
+            if ((!(bool)(s[1] + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(s[1] + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondStructIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicStruct<int>();
 
-static bool CallSecondStructIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+            if ((!(bool)(s[1][2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-
-var s = new FirstClassReturnDynamicStruct<int>();
-
-if ( (!(bool)(s[1][2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is interface
@@ -2329,21 +2259,21 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondInterfaceIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondInterfaceIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnDynamicInterface<int>();
 
-var s = new FirstClassReturnDynamicInterface<int>();
+            if ((!(bool)(s[1][2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(s[1][2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         [Fact]
@@ -2358,32 +2288,31 @@ return failcount == 0;
             result += Verify.Eval(CallSecondClassInstanceMethod);
             result += Verify.Eval(CallSecondClassInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondClassOperator);
-result += Verify.Eval(CallSecondClassIndexer);
- #endif
+            result += Verify.Eval(CallSecondClassOperator);
+            result += Verify.Eval(CallSecondClassIndexer);
+#endif
             result += Verify.Eval(CallSecondStructInstanceMethod);
             result += Verify.Eval(CallSecondStructInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondStructOperator);
-result += Verify.Eval(CallSecondStructIndexer);
- #endif
+            result += Verify.Eval(CallSecondStructOperator);
+            result += Verify.Eval(CallSecondStructIndexer);
+#endif
             result += Verify.Eval(CallSecondInterfaceInstanceMethod);
             result += Verify.Eval(CallSecondInterfaceInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondInterfaceIndexer);
- #endif
+            result += Verify.Eval(CallSecondInterfaceIndexer);
+#endif
             return result;
         }
     }
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.statictodynamic009.statictodynamic009
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondefretdym.commondefretdym;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is static method of class and return dynamic
@@ -2399,7 +2328,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(FirstClassReturnDynamicClass.StaticMethod().InstanceMethod())) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(FirstClassReturnDynamicClass.StaticMethod().InstanceMethod()))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -2412,7 +2344,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(FirstClassReturnDynamicClass.StaticMethod().InstanceProperty)) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(FirstClassReturnDynamicClass.StaticMethod().InstanceProperty))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -2423,34 +2358,33 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 
 #if M3
 
-static bool CallSecondClassOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondClassOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if ((!(bool)(FirstClassReturnDynamicClass.StaticMethod() + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(FirstClassReturnDynamicClass.StaticMethod() + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondClassIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if ((!(bool)(FirstClassReturnDynamicClass.StaticMethod()[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-static bool CallSecondClassIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
-
-
-if ( (!(bool)(FirstClassReturnDynamicClass.StaticMethod()[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is struct
@@ -2458,7 +2392,10 @@ return failcount == 0;
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(FirstClassReturnDynamicStruct.StaticMethod().InstanceMethod())) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(FirstClassReturnDynamicStruct.StaticMethod().InstanceMethod()))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -2471,7 +2408,10 @@ return failcount == 0;
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(FirstClassReturnDynamicStruct.StaticMethod().InstanceProperty)) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(FirstClassReturnDynamicStruct.StaticMethod().InstanceProperty))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -2482,34 +2422,35 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondStructOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondStructOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(FirstClassReturnDynamicStruct.StaticMethod() + 2)) || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(FirstClassReturnDynamicStruct.StaticMethod() + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondStructIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if ((!(bool)(FirstClassReturnDynamicStruct.StaticMethod()[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-static bool CallSecondStructIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
-
-
-if ( (!(bool)(FirstClassReturnDynamicStruct.StaticMethod()[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is interface
@@ -2517,7 +2458,10 @@ return failcount == 0;
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(FirstClassReturnDynamicInterface.StaticMethod().InstanceMethod())) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(FirstClassReturnDynamicInterface.StaticMethod().InstanceMethod()))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -2530,7 +2474,10 @@ return failcount == 0;
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(FirstClassReturnDynamicInterface.StaticMethod().InstanceProperty)) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(FirstClassReturnDynamicInterface.StaticMethod().InstanceProperty))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -2541,19 +2488,22 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondInterfaceIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondInterfaceIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(FirstClassReturnDynamicInterface.StaticMethod()[2]))
+                || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(FirstClassReturnDynamicInterface.StaticMethod()[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         [Fact]
@@ -2568,32 +2518,31 @@ return failcount == 0;
             result += Verify.Eval(CallSecondClassInstanceMethod);
             result += Verify.Eval(CallSecondClassInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondClassOperator);
-result += Verify.Eval(CallSecondClassIndexer);
- #endif
+            result += Verify.Eval(CallSecondClassOperator);
+            result += Verify.Eval(CallSecondClassIndexer);
+#endif
             result += Verify.Eval(CallSecondStructInstanceMethod);
             result += Verify.Eval(CallSecondStructInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondStructOperator);
-result += Verify.Eval(CallSecondStructIndexer);
- #endif
+            result += Verify.Eval(CallSecondStructOperator);
+            result += Verify.Eval(CallSecondStructIndexer);
+#endif
             result += Verify.Eval(CallSecondInterfaceInstanceMethod);
             result += Verify.Eval(CallSecondInterfaceInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondInterfaceIndexer);
- #endif
+            result += Verify.Eval(CallSecondInterfaceIndexer);
+#endif
             return result;
         }
     }
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.statictodynamic010.statictodynamic010
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondefretdym.commondefretdym;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is static property of class and return dynamic
@@ -2609,7 +2558,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(FirstClassReturnDynamicClass.StaticProperty.InstanceMethod())) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(FirstClassReturnDynamicClass.StaticProperty.InstanceMethod()))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -2622,7 +2574,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(FirstClassReturnDynamicClass.StaticProperty.InstanceProperty)) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(FirstClassReturnDynamicClass.StaticProperty.InstanceProperty))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -2633,34 +2588,33 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 
 #if M3
 
-static bool CallSecondClassOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondClassOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if ((!(bool)(FirstClassReturnDynamicClass.StaticProperty + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(FirstClassReturnDynamicClass.StaticProperty + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondClassIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if ((!(bool)(FirstClassReturnDynamicClass.StaticProperty[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-static bool CallSecondClassIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
-
-
-if ( (!(bool)(FirstClassReturnDynamicClass.StaticProperty[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is struct
@@ -2668,7 +2622,10 @@ return failcount == 0;
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(FirstClassReturnDynamicStruct.StaticProperty.InstanceMethod())) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(FirstClassReturnDynamicStruct.StaticProperty.InstanceMethod()))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -2681,7 +2638,10 @@ return failcount == 0;
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(FirstClassReturnDynamicStruct.StaticProperty.InstanceProperty)) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(FirstClassReturnDynamicStruct.StaticProperty.InstanceProperty))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -2692,34 +2652,35 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondStructOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondStructOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(FirstClassReturnDynamicStruct.StaticProperty + 2)) || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(FirstClassReturnDynamicStruct.StaticProperty + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondStructIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if ((!(bool)(FirstClassReturnDynamicStruct.StaticProperty[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-static bool CallSecondStructIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
-
-
-if ( (!(bool)(FirstClassReturnDynamicStruct.StaticProperty[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is interface
@@ -2727,7 +2688,10 @@ return failcount == 0;
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(FirstClassReturnDynamicInterface.StaticProperty.InstanceMethod())) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(FirstClassReturnDynamicInterface.StaticProperty.InstanceMethod()))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -2740,7 +2704,10 @@ return failcount == 0;
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(FirstClassReturnDynamicInterface.StaticProperty.InstanceProperty)) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(FirstClassReturnDynamicInterface.StaticProperty.InstanceProperty))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -2751,19 +2718,22 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondInterfaceIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondInterfaceIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(FirstClassReturnDynamicInterface.StaticProperty[2]))
+                || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(FirstClassReturnDynamicInterface.StaticProperty[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         [Fact]
@@ -2778,32 +2748,31 @@ return failcount == 0;
             result += Verify.Eval(CallSecondClassInstanceMethod);
             result += Verify.Eval(CallSecondClassInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondClassOperator);
-result += Verify.Eval(CallSecondClassIndexer);
- #endif
+            result += Verify.Eval(CallSecondClassOperator);
+            result += Verify.Eval(CallSecondClassIndexer);
+#endif
             result += Verify.Eval(CallSecondStructInstanceMethod);
             result += Verify.Eval(CallSecondStructInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondStructOperator);
-result += Verify.Eval(CallSecondStructIndexer);
- #endif
+            result += Verify.Eval(CallSecondStructOperator);
+            result += Verify.Eval(CallSecondStructIndexer);
+#endif
             result += Verify.Eval(CallSecondInterfaceInstanceMethod);
             result += Verify.Eval(CallSecondInterfaceInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondInterfaceIndexer);
- #endif
+            result += Verify.Eval(CallSecondInterfaceIndexer);
+#endif
             return result;
         }
     }
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.statictodynamic011.statictodynamic011
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendefretdym.commongendefretdym;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is static method of generic class and return dynamic
@@ -2819,7 +2788,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(FirstClassReturnDynamicClass<int>.StaticMethod().InstanceMethod())) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(FirstClassReturnDynamicClass<int>.StaticMethod().InstanceMethod()))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -2832,7 +2804,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(FirstClassReturnDynamicClass<int>.StaticMethod().InstanceProperty)) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(FirstClassReturnDynamicClass<int>.StaticMethod().InstanceProperty))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -2843,34 +2818,39 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 
 #if M3
 
-static bool CallSecondClassOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondClassOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(FirstClassReturnDynamicClass<int>.StaticMethod() + 2))
+                || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(FirstClassReturnDynamicClass<int>.StaticMethod() + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondClassIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(FirstClassReturnDynamicClass<int>.StaticMethod()[2]))
+                || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-static bool CallSecondClassIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
-
-
-if ( (!(bool)(FirstClassReturnDynamicClass<int>.StaticMethod()[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is struct
@@ -2878,7 +2858,10 @@ return failcount == 0;
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(FirstClassReturnDynamicStruct<int>.StaticMethod().InstanceMethod())) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(FirstClassReturnDynamicStruct<int>.StaticMethod().InstanceMethod()))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -2891,7 +2874,10 @@ return failcount == 0;
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(FirstClassReturnDynamicStruct<int>.StaticMethod().InstanceProperty)) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(FirstClassReturnDynamicStruct<int>.StaticMethod().InstanceProperty))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -2902,34 +2888,39 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondStructOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondStructOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(FirstClassReturnDynamicStruct<int>.StaticMethod() + 2))
+                || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(FirstClassReturnDynamicStruct<int>.StaticMethod() + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondStructIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(FirstClassReturnDynamicStruct<int>.StaticMethod()[2]))
+                || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-static bool CallSecondStructIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
-
-
-if ( (!(bool)(FirstClassReturnDynamicStruct<int>.StaticMethod()[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is interface
@@ -2937,7 +2928,10 @@ return failcount == 0;
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(FirstClassReturnDynamicInterface<int>.StaticMethod().InstanceMethod())) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(FirstClassReturnDynamicInterface<int>.StaticMethod().InstanceMethod()))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -2950,7 +2944,10 @@ return failcount == 0;
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(FirstClassReturnDynamicInterface<int>.StaticMethod().InstanceProperty)) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(FirstClassReturnDynamicInterface<int>.StaticMethod().InstanceProperty))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -2961,19 +2958,22 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondInterfaceIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondInterfaceIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(FirstClassReturnDynamicInterface<int>.StaticMethod()[2]))
+                || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(FirstClassReturnDynamicInterface<int>.StaticMethod()[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         [Fact]
@@ -2988,32 +2988,31 @@ return failcount == 0;
             result += Verify.Eval(CallSecondClassInstanceMethod);
             result += Verify.Eval(CallSecondClassInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondClassOperator);
-result += Verify.Eval(CallSecondClassIndexer);
- #endif
+            result += Verify.Eval(CallSecondClassOperator);
+            result += Verify.Eval(CallSecondClassIndexer);
+#endif
             result += Verify.Eval(CallSecondStructInstanceMethod);
             result += Verify.Eval(CallSecondStructInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondStructOperator);
-result += Verify.Eval(CallSecondStructIndexer);
- #endif
+            result += Verify.Eval(CallSecondStructOperator);
+            result += Verify.Eval(CallSecondStructIndexer);
+#endif
             result += Verify.Eval(CallSecondInterfaceInstanceMethod);
             result += Verify.Eval(CallSecondInterfaceInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondInterfaceIndexer);
- #endif
+            result += Verify.Eval(CallSecondInterfaceIndexer);
+#endif
             return result;
         }
     }
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.statictodynamic012.statictodynamic012
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendefretdym.commongendefretdym;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is static property of generic class and return dynamic
@@ -3029,7 +3028,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(FirstClassReturnDynamicClass<int>.StaticProperty.InstanceMethod())) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(FirstClassReturnDynamicClass<int>.StaticProperty.InstanceMethod()))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -3042,7 +3044,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(FirstClassReturnDynamicClass<int>.StaticProperty.InstanceProperty)) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(FirstClassReturnDynamicClass<int>.StaticProperty.InstanceProperty))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -3053,34 +3058,39 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 
 #if M3
 
-static bool CallSecondClassOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondClassOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(FirstClassReturnDynamicClass<int>.StaticProperty + 2))
+                || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(FirstClassReturnDynamicClass<int>.StaticProperty + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondClassIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(FirstClassReturnDynamicClass<int>.StaticProperty[2]))
+                || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-static bool CallSecondClassIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
-
-
-if ( (!(bool)(FirstClassReturnDynamicClass<int>.StaticProperty[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is struct
@@ -3088,7 +3098,10 @@ return failcount == 0;
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(FirstClassReturnDynamicStruct<int>.StaticProperty.InstanceMethod())) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(FirstClassReturnDynamicStruct<int>.StaticProperty.InstanceMethod()))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -3101,7 +3114,10 @@ return failcount == 0;
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(FirstClassReturnDynamicStruct<int>.StaticProperty.InstanceProperty)) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(FirstClassReturnDynamicStruct<int>.StaticProperty.InstanceProperty))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -3112,34 +3128,39 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondStructOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondStructOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(FirstClassReturnDynamicStruct<int>.StaticProperty + 2))
+                || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(FirstClassReturnDynamicStruct<int>.StaticProperty + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondStructIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(FirstClassReturnDynamicStruct<int>.StaticProperty[2]))
+                || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-static bool CallSecondStructIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
-
-
-if ( (!(bool)(FirstClassReturnDynamicStruct<int>.StaticProperty[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is interface
@@ -3147,7 +3168,10 @@ return failcount == 0;
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(FirstClassReturnDynamicInterface<int>.StaticProperty.InstanceMethod())) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(FirstClassReturnDynamicInterface<int>.StaticProperty.InstanceMethod()))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -3160,7 +3184,10 @@ return failcount == 0;
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(FirstClassReturnDynamicInterface<int>.StaticProperty.InstanceProperty)) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(FirstClassReturnDynamicInterface<int>.StaticProperty.InstanceProperty))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -3171,19 +3198,22 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondInterfaceIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondInterfaceIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(FirstClassReturnDynamicInterface<int>.StaticProperty[2]))
+                || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(FirstClassReturnDynamicInterface<int>.StaticProperty[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         [Fact]
@@ -3198,27 +3228,25 @@ return failcount == 0;
             result += Verify.Eval(CallSecondClassInstanceMethod);
             result += Verify.Eval(CallSecondClassInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondClassOperator);
-result += Verify.Eval(CallSecondClassIndexer);
- #endif
+            result += Verify.Eval(CallSecondClassOperator);
+            result += Verify.Eval(CallSecondClassIndexer);
+#endif
             result += Verify.Eval(CallSecondStructInstanceMethod);
             result += Verify.Eval(CallSecondStructInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondStructOperator);
-result += Verify.Eval(CallSecondStructIndexer);
- #endif
+            result += Verify.Eval(CallSecondStructOperator);
+            result += Verify.Eval(CallSecondStructIndexer);
+#endif
             result += Verify.Eval(CallSecondInterfaceInstanceMethod);
             result += Verify.Eval(CallSecondInterfaceInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondInterfaceIndexer);
- #endif
+            result += Verify.Eval(CallSecondInterfaceIndexer);
+#endif
             return result;
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondef.commondef
 {
@@ -3235,6 +3263,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
     public class FirstClassReturnClass
     {
         private static SecondClass s_secClass = new SecondClass();
+
         public SecondClass InstanceMethod()
         {
             Verify.FirstCalled = true;
@@ -3290,10 +3319,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
 
         public bool InstanceProperty
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public static bool operator +(SecondClass s, int i)
@@ -3303,10 +3329,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
 
         public bool this[int i]
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
     }
 
@@ -3315,6 +3338,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
     public class FirstClassReturnStruct
     {
         private static SecondStruct s_secStruct = new SecondStruct();
+
         public SecondStruct InstanceMethod()
         {
             Verify.FirstCalled = true;
@@ -3370,10 +3394,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
 
         public bool InstanceProperty
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public static bool operator +(SecondStruct s, int i)
@@ -3383,10 +3404,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
 
         public bool this[int i]
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
     }
 
@@ -3395,6 +3413,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
     public class FirstClassReturnInterface
     {
         private static SecondInterface s_secInterface = new SecondInterfaceImp();
+
         public SecondInterface InstanceMethod()
         {
             Verify.FirstCalled = true;
@@ -3444,15 +3463,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
     public interface SecondInterface
     {
         bool InstanceMethod();
-        bool InstanceProperty
-        {
-            get;
-        }
+        bool InstanceProperty { get; }
 
-        bool this[int i]
-        {
-            get;
-        }
+        bool this[int i] { get; }
     }
 
     public class SecondInterfaceImp : SecondInterface
@@ -3464,18 +3477,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
 
         public bool InstanceProperty
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public bool this[int i]
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
     }
     #endregion
@@ -3483,12 +3490,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.statictodynamic013.statictodynamic013
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondef.commondef;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is instance method of class
@@ -3530,38 +3536,37 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 
 #if M3
 
-static bool CallSecondClassOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondClassOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnClass();
 
-var s = new FirstClassReturnClass();
+            if ((!(bool)(((dynamic)s.InstanceMethod()) + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)s.InstanceMethod()) + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondClassIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnClass();
 
-static bool CallSecondClassIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+            if ((!(bool)(((dynamic)s.InstanceMethod())[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-
-var s = new FirstClassReturnClass();
-
-if ( (!(bool)(((dynamic)s.InstanceMethod())[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is struct
@@ -3595,38 +3600,37 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondStructOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondStructOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnStruct();
 
-var s = new FirstClassReturnStruct();
+            if ((!(bool)(((dynamic)s.InstanceMethod()) + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)s.InstanceMethod()) + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondStructIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnStruct();
 
-static bool CallSecondStructIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+            if ((!(bool)(((dynamic)s.InstanceMethod())[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-
-var s = new FirstClassReturnStruct();
-
-if ( (!(bool)(((dynamic)s.InstanceMethod())[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is interface
@@ -3660,21 +3664,21 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondInterfaceIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondInterfaceIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnInterface();
 
-var s = new FirstClassReturnInterface();
+            if ((!(bool)(((dynamic)s.InstanceMethod())[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)s.InstanceMethod())[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         [Fact]
@@ -3689,32 +3693,31 @@ return failcount == 0;
             result += Verify.Eval(CallSecondClassInstanceMethod);
             result += Verify.Eval(CallSecondClassInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondClassOperator);
-result += Verify.Eval(CallSecondClassIndexer);
- #endif
+            result += Verify.Eval(CallSecondClassOperator);
+            result += Verify.Eval(CallSecondClassIndexer);
+#endif
             result += Verify.Eval(CallSecondStructInstanceMethod);
             result += Verify.Eval(CallSecondStructInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondStructOperator);
-result += Verify.Eval(CallSecondStructIndexer);
- #endif
+            result += Verify.Eval(CallSecondStructOperator);
+            result += Verify.Eval(CallSecondStructIndexer);
+#endif
             result += Verify.Eval(CallSecondInterfaceInstanceMethod);
             result += Verify.Eval(CallSecondInterfaceInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondInterfaceIndexer);
- #endif
+            result += Verify.Eval(CallSecondInterfaceIndexer);
+#endif
             return result;
         }
     }
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.statictodynamic014.statictodynamic014
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondef.commondef;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is instance property of class
@@ -3756,38 +3759,37 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 
 #if M3
 
-static bool CallSecondClassOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondClassOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnClass();
 
-var s = new FirstClassReturnClass();
+            if ((!(bool)(((dynamic)s.InstanceProperty) + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)s.InstanceProperty) + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondClassIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnClass();
 
-static bool CallSecondClassIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+            if ((!(bool)(((dynamic)s.InstanceProperty)[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-
-var s = new FirstClassReturnClass();
-
-if ( (!(bool)(((dynamic)s.InstanceProperty)[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is struct
@@ -3821,38 +3823,37 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondStructOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondStructOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnStruct();
 
-var s = new FirstClassReturnStruct();
+            if ((!(bool)(((dynamic)s.InstanceProperty) + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)s.InstanceProperty) + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondStructIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnStruct();
 
-static bool CallSecondStructIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+            if ((!(bool)(((dynamic)s.InstanceProperty)[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-
-var s = new FirstClassReturnStruct();
-
-if ( (!(bool)(((dynamic)s.InstanceProperty)[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is interface
@@ -3886,21 +3887,21 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondInterfaceIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondInterfaceIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnInterface();
 
-var s = new FirstClassReturnInterface();
+            if ((!(bool)(((dynamic)s.InstanceProperty)[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)s.InstanceProperty)[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         [Fact]
@@ -3915,32 +3916,31 @@ return failcount == 0;
             result += Verify.Eval(CallSecondClassInstanceMethod);
             result += Verify.Eval(CallSecondClassInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondClassOperator);
-result += Verify.Eval(CallSecondClassIndexer);
- #endif
+            result += Verify.Eval(CallSecondClassOperator);
+            result += Verify.Eval(CallSecondClassIndexer);
+#endif
             result += Verify.Eval(CallSecondStructInstanceMethod);
             result += Verify.Eval(CallSecondStructInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondStructOperator);
-result += Verify.Eval(CallSecondStructIndexer);
- #endif
+            result += Verify.Eval(CallSecondStructOperator);
+            result += Verify.Eval(CallSecondStructIndexer);
+#endif
             result += Verify.Eval(CallSecondInterfaceInstanceMethod);
             result += Verify.Eval(CallSecondInterfaceInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondInterfaceIndexer);
- #endif
+            result += Verify.Eval(CallSecondInterfaceIndexer);
+#endif
             return result;
         }
     }
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.statictodynamic015.statictodynamic015
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondef.commondef;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is operator of class
@@ -3982,38 +3982,37 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 
 #if M3
 
-static bool CallSecondClassOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondClassOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnClass();
 
-var s = new FirstClassReturnClass();
+            if ((!(bool)(((dynamic)(s + 1)) + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)(s + 1)) + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondClassIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnClass();
 
-static bool CallSecondClassIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+            if ((!(bool)(((dynamic)(s + 1))[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-
-var s = new FirstClassReturnClass();
-
-if ( (!(bool)(((dynamic)(s + 1))[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is struct
@@ -4047,38 +4046,37 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondStructOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondStructOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnStruct();
 
-var s = new FirstClassReturnStruct();
+            if ((!(bool)(((dynamic)(s + 1)) + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)(s + 1)) + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondStructIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnStruct();
 
-static bool CallSecondStructIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+            if ((!(bool)(((dynamic)(s + 1))[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-
-var s = new FirstClassReturnStruct();
-
-if ( (!(bool)(((dynamic)(s + 1))[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is interface
@@ -4112,21 +4110,21 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondInterfaceIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondInterfaceIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnInterface();
 
-var s = new FirstClassReturnInterface();
+            if ((!(bool)(((dynamic)(s + 1))[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)(s + 1))[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         [Fact]
@@ -4141,32 +4139,31 @@ return failcount == 0;
             result += Verify.Eval(CallSecondClassInstanceMethod);
             result += Verify.Eval(CallSecondClassInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondClassOperator);
-result += Verify.Eval(CallSecondClassIndexer);
- #endif
+            result += Verify.Eval(CallSecondClassOperator);
+            result += Verify.Eval(CallSecondClassIndexer);
+#endif
             result += Verify.Eval(CallSecondStructInstanceMethod);
             result += Verify.Eval(CallSecondStructInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondStructOperator);
-result += Verify.Eval(CallSecondStructIndexer);
- #endif
+            result += Verify.Eval(CallSecondStructOperator);
+            result += Verify.Eval(CallSecondStructIndexer);
+#endif
             result += Verify.Eval(CallSecondInterfaceInstanceMethod);
             result += Verify.Eval(CallSecondInterfaceInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondInterfaceIndexer);
- #endif
+            result += Verify.Eval(CallSecondInterfaceIndexer);
+#endif
             return result;
         }
     }
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.statictodynamic016.statictodynamic016
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondef.commondef;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is indexer of class
@@ -4208,38 +4205,37 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 
 #if M3
 
-static bool CallSecondClassOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondClassOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnClass();
 
-var s = new FirstClassReturnClass();
+            if ((!(bool)(((dynamic)s[1]) + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)s[1]) + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondClassIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnClass();
 
-static bool CallSecondClassIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+            if ((!(bool)(((dynamic)s[1])[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-
-var s = new FirstClassReturnClass();
-
-if ( (!(bool)(((dynamic)s[1])[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is struct
@@ -4273,38 +4269,37 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondStructOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondStructOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnStruct();
 
-var s = new FirstClassReturnStruct();
+            if ((!(bool)(((dynamic)s[1]) + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)s[1]) + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondStructIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnStruct();
 
-static bool CallSecondStructIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+            if ((!(bool)(((dynamic)s[1])[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-
-var s = new FirstClassReturnStruct();
-
-if ( (!(bool)(((dynamic)s[1])[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is interface
@@ -4338,21 +4333,21 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondInterfaceIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondInterfaceIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnInterface();
 
-var s = new FirstClassReturnInterface();
+            if ((!(bool)(((dynamic)s[1])[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)s[1])[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         [Fact]
@@ -4367,27 +4362,25 @@ return failcount == 0;
             result += Verify.Eval(CallSecondClassInstanceMethod);
             result += Verify.Eval(CallSecondClassInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondClassOperator);
-result += Verify.Eval(CallSecondClassIndexer);
- #endif
+            result += Verify.Eval(CallSecondClassOperator);
+            result += Verify.Eval(CallSecondClassIndexer);
+#endif
             result += Verify.Eval(CallSecondStructInstanceMethod);
             result += Verify.Eval(CallSecondStructInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondStructOperator);
-result += Verify.Eval(CallSecondStructIndexer);
- #endif
+            result += Verify.Eval(CallSecondStructOperator);
+            result += Verify.Eval(CallSecondStructIndexer);
+#endif
             result += Verify.Eval(CallSecondInterfaceInstanceMethod);
             result += Verify.Eval(CallSecondInterfaceInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondInterfaceIndexer);
- #endif
+            result += Verify.Eval(CallSecondInterfaceIndexer);
+#endif
             return result;
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendef.commongendef
 {
@@ -4404,6 +4397,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
     public class FirstClassReturnClass<T>
     {
         private static SecondClass<T> s_secClass = new SecondClass<T>();
+
         public SecondClass<T> InstanceMethod()
         {
             Verify.FirstCalled = true;
@@ -4459,10 +4453,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
 
         public bool InstanceProperty
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public static bool operator +(SecondClass<T> s, int i)
@@ -4472,10 +4463,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
 
         public bool this[int i]
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
     }
 
@@ -4484,6 +4472,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
     public class FirstClassReturnStruct<T>
     {
         private static SecondStruct<T> s_secStruct = new SecondStruct<T>();
+
         public SecondStruct<T> InstanceMethod()
         {
             Verify.FirstCalled = true;
@@ -4539,10 +4528,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
 
         public bool InstanceProperty
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public static bool operator +(SecondStruct<T> s, int i)
@@ -4552,10 +4538,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
 
         public bool this[int i]
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
     }
 
@@ -4564,6 +4547,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
     public class FirstClassReturnInterface<T>
     {
         private static SecondInterface<T> s_secInterface = new SecondInterfaceImp<T>();
+
         public SecondInterface<T> InstanceMethod()
         {
             Verify.FirstCalled = true;
@@ -4613,15 +4597,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
     public interface SecondInterface<T>
     {
         bool InstanceMethod();
-        bool InstanceProperty
-        {
-            get;
-        }
+        bool InstanceProperty { get; }
 
-        bool this[int i]
-        {
-            get;
-        }
+        bool this[int i] { get; }
     }
 
     public class SecondInterfaceImp<T> : SecondInterface<T>
@@ -4633,18 +4611,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
 
         public bool InstanceProperty
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public bool this[int i]
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
     }
     #endregion
@@ -4652,12 +4624,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.statictodynamic017.statictodynamic017
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendef.commongendef;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is instance method of generic class
@@ -4699,38 +4670,37 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 
 #if M3
 
-static bool CallSecondClassOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondClassOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnClass<int>();
 
-var s = new FirstClassReturnClass<int>();
+            if ((!(bool)(((dynamic)s.InstanceMethod()) + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)s.InstanceMethod()) + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondClassIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnClass<int>();
 
-static bool CallSecondClassIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+            if ((!(bool)(((dynamic)s.InstanceMethod())[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-
-var s = new FirstClassReturnClass<int>();
-
-if ( (!(bool)(((dynamic)s.InstanceMethod())[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is struct
@@ -4764,38 +4734,37 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondStructOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondStructOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnStruct<int>();
 
-var s = new FirstClassReturnStruct<int>();
+            if ((!(bool)(((dynamic)s.InstanceMethod()) + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)s.InstanceMethod()) + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondStructIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnStruct<int>();
 
-static bool CallSecondStructIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+            if ((!(bool)(((dynamic)s.InstanceMethod())[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-
-var s = new FirstClassReturnStruct<int>();
-
-if ( (!(bool)(((dynamic)s.InstanceMethod())[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is interface
@@ -4829,21 +4798,21 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondInterfaceIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondInterfaceIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnInterface<int>();
 
-var s = new FirstClassReturnInterface<int>();
+            if ((!(bool)(((dynamic)s.InstanceMethod())[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)s.InstanceMethod())[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         [Fact]
@@ -4858,32 +4827,31 @@ return failcount == 0;
             result += Verify.Eval(CallSecondClassInstanceMethod);
             result += Verify.Eval(CallSecondClassInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondClassOperator);
-result += Verify.Eval(CallSecondClassIndexer);
- #endif
+            result += Verify.Eval(CallSecondClassOperator);
+            result += Verify.Eval(CallSecondClassIndexer);
+#endif
             result += Verify.Eval(CallSecondStructInstanceMethod);
             result += Verify.Eval(CallSecondStructInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondStructOperator);
-result += Verify.Eval(CallSecondStructIndexer);
- #endif
+            result += Verify.Eval(CallSecondStructOperator);
+            result += Verify.Eval(CallSecondStructIndexer);
+#endif
             result += Verify.Eval(CallSecondInterfaceInstanceMethod);
             result += Verify.Eval(CallSecondInterfaceInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondInterfaceIndexer);
- #endif
+            result += Verify.Eval(CallSecondInterfaceIndexer);
+#endif
             return result;
         }
     }
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.statictodynamic018.statictodynamic018
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendef.commongendef;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is instance property of generic class
@@ -4925,38 +4893,37 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 
 #if M3
 
-static bool CallSecondClassOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondClassOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnClass<int>();
 
-var s = new FirstClassReturnClass<int>();
+            if ((!(bool)(((dynamic)s.InstanceProperty) + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)s.InstanceProperty) + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondClassIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnClass<int>();
 
-static bool CallSecondClassIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+            if ((!(bool)(((dynamic)s.InstanceProperty)[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-
-var s = new FirstClassReturnClass<int>();
-
-if ( (!(bool)(((dynamic)s.InstanceProperty)[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is struct
@@ -4990,38 +4957,37 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondStructOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondStructOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnStruct<int>();
 
-var s = new FirstClassReturnStruct<int>();
+            if ((!(bool)(((dynamic)s.InstanceProperty) + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)s.InstanceProperty) + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondStructIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnStruct<int>();
 
-static bool CallSecondStructIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+            if ((!(bool)(((dynamic)s.InstanceProperty)[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-
-var s = new FirstClassReturnStruct<int>();
-
-if ( (!(bool)(((dynamic)s.InstanceProperty)[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is interface
@@ -5055,21 +5021,21 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondInterfaceIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondInterfaceIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnInterface<int>();
 
-var s = new FirstClassReturnInterface<int>();
+            if ((!(bool)(((dynamic)s.InstanceProperty)[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)s.InstanceProperty)[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         [Fact]
@@ -5084,32 +5050,31 @@ return failcount == 0;
             result += Verify.Eval(CallSecondClassInstanceMethod);
             result += Verify.Eval(CallSecondClassInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondClassOperator);
-result += Verify.Eval(CallSecondClassIndexer);
- #endif
+            result += Verify.Eval(CallSecondClassOperator);
+            result += Verify.Eval(CallSecondClassIndexer);
+#endif
             result += Verify.Eval(CallSecondStructInstanceMethod);
             result += Verify.Eval(CallSecondStructInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondStructOperator);
-result += Verify.Eval(CallSecondStructIndexer);
- #endif
+            result += Verify.Eval(CallSecondStructOperator);
+            result += Verify.Eval(CallSecondStructIndexer);
+#endif
             result += Verify.Eval(CallSecondInterfaceInstanceMethod);
             result += Verify.Eval(CallSecondInterfaceInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondInterfaceIndexer);
- #endif
+            result += Verify.Eval(CallSecondInterfaceIndexer);
+#endif
             return result;
         }
     }
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.statictodynamic019.statictodynamic019
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendef.commongendef;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is operator of generic class
@@ -5151,38 +5116,37 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 
 #if M3
 
-static bool CallSecondClassOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondClassOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnClass<int>();
 
-var s = new FirstClassReturnClass<int>();
+            if ((!(bool)(((dynamic)(s + 1)) + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)(s + 1)) + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondClassIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnClass<int>();
 
-static bool CallSecondClassIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+            if ((!(bool)(((dynamic)(s + 1))[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-
-var s = new FirstClassReturnClass<int>();
-
-if ( (!(bool)(((dynamic)(s + 1))[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is struct
@@ -5216,38 +5180,37 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondStructOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondStructOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnStruct<int>();
 
-var s = new FirstClassReturnStruct<int>();
+            if ((!(bool)(((dynamic)(s + 1)) + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)(s + 1)) + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondStructIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnStruct<int>();
 
-static bool CallSecondStructIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+            if ((!(bool)(((dynamic)(s + 1))[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-
-var s = new FirstClassReturnStruct<int>();
-
-if ( (!(bool)(((dynamic)(s + 1))[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is interface
@@ -5281,21 +5244,21 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondInterfaceIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondInterfaceIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnInterface<int>();
 
-var s = new FirstClassReturnInterface<int>();
+            if ((!(bool)(((dynamic)(s + 1))[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)(s + 1))[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         [Fact]
@@ -5310,32 +5273,31 @@ return failcount == 0;
             result += Verify.Eval(CallSecondClassInstanceMethod);
             result += Verify.Eval(CallSecondClassInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondClassOperator);
-result += Verify.Eval(CallSecondClassIndexer);
- #endif
+            result += Verify.Eval(CallSecondClassOperator);
+            result += Verify.Eval(CallSecondClassIndexer);
+#endif
             result += Verify.Eval(CallSecondStructInstanceMethod);
             result += Verify.Eval(CallSecondStructInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondStructOperator);
-result += Verify.Eval(CallSecondStructIndexer);
- #endif
+            result += Verify.Eval(CallSecondStructOperator);
+            result += Verify.Eval(CallSecondStructIndexer);
+#endif
             result += Verify.Eval(CallSecondInterfaceInstanceMethod);
             result += Verify.Eval(CallSecondInterfaceInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondInterfaceIndexer);
- #endif
+            result += Verify.Eval(CallSecondInterfaceIndexer);
+#endif
             return result;
         }
     }
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.statictodynamic020.statictodynamic020
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendef.commongendef;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is indexer of generic class
@@ -5377,38 +5339,37 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 
 #if M3
 
-static bool CallSecondClassOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondClassOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnClass<int>();
 
-var s = new FirstClassReturnClass<int>();
+            if ((!(bool)(((dynamic)s[1]) + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)s[1]) + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondClassIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnClass<int>();
 
-static bool CallSecondClassIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+            if ((!(bool)(((dynamic)s[1])[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-
-var s = new FirstClassReturnClass<int>();
-
-if ( (!(bool)(((dynamic)s[1])[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is struct
@@ -5442,38 +5403,37 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondStructOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondStructOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnStruct<int>();
 
-var s = new FirstClassReturnStruct<int>();
+            if ((!(bool)(((dynamic)s[1]) + 2)) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)s[1]) + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondStructIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnStruct<int>();
 
-static bool CallSecondStructIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+            if ((!(bool)(((dynamic)s[1])[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-
-var s = new FirstClassReturnStruct<int>();
-
-if ( (!(bool)(((dynamic)s[1])[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is interface
@@ -5507,21 +5467,21 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondInterfaceIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondInterfaceIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            var s = new FirstClassReturnInterface<int>();
 
-var s = new FirstClassReturnInterface<int>();
+            if ((!(bool)(((dynamic)s[1])[2])) || (!Verify.FirstCalled))
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)s[1])[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         [Fact]
@@ -5536,32 +5496,31 @@ return failcount == 0;
             result += Verify.Eval(CallSecondClassInstanceMethod);
             result += Verify.Eval(CallSecondClassInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondClassOperator);
-result += Verify.Eval(CallSecondClassIndexer);
- #endif
+            result += Verify.Eval(CallSecondClassOperator);
+            result += Verify.Eval(CallSecondClassIndexer);
+#endif
             result += Verify.Eval(CallSecondStructInstanceMethod);
             result += Verify.Eval(CallSecondStructInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondStructOperator);
-result += Verify.Eval(CallSecondStructIndexer);
- #endif
+            result += Verify.Eval(CallSecondStructOperator);
+            result += Verify.Eval(CallSecondStructIndexer);
+#endif
             result += Verify.Eval(CallSecondInterfaceInstanceMethod);
             result += Verify.Eval(CallSecondInterfaceInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondInterfaceIndexer);
- #endif
+            result += Verify.Eval(CallSecondInterfaceIndexer);
+#endif
             return result;
         }
     }
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.statictodynamic021.statictodynamic021
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondef.commondef;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is static method of class
@@ -5577,7 +5536,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(((dynamic)FirstClassReturnClass.StaticMethod()).InstanceMethod())) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(((dynamic)FirstClassReturnClass.StaticMethod()).InstanceMethod()))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -5590,7 +5552,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(((dynamic)FirstClassReturnClass.StaticMethod()).InstanceProperty)) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(((dynamic)FirstClassReturnClass.StaticMethod()).InstanceProperty))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -5601,34 +5566,39 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 
 #if M3
 
-static bool CallSecondClassOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondClassOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(((dynamic)FirstClassReturnClass.StaticMethod()) + 2))
+                || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)FirstClassReturnClass.StaticMethod()) + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondClassIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(((dynamic)FirstClassReturnClass.StaticMethod())[2]))
+                || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-static bool CallSecondClassIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
-
-
-if ( (!(bool)(((dynamic)FirstClassReturnClass.StaticMethod())[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is struct
@@ -5636,7 +5606,10 @@ return failcount == 0;
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(((dynamic)FirstClassReturnStruct.StaticMethod()).InstanceMethod())) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(((dynamic)FirstClassReturnStruct.StaticMethod()).InstanceMethod()))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -5649,7 +5622,10 @@ return failcount == 0;
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(((dynamic)FirstClassReturnStruct.StaticMethod()).InstanceProperty)) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(((dynamic)FirstClassReturnStruct.StaticMethod()).InstanceProperty))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -5660,34 +5636,39 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondStructOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondStructOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(((dynamic)FirstClassReturnStruct.StaticMethod()) + 2))
+                || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)FirstClassReturnStruct.StaticMethod()) + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondStructIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(((dynamic)FirstClassReturnStruct.StaticMethod())[2]))
+                || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-static bool CallSecondStructIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
-
-
-if ( (!(bool)(((dynamic)FirstClassReturnStruct.StaticMethod())[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is interface
@@ -5695,7 +5676,10 @@ return failcount == 0;
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(((dynamic)FirstClassReturnInterface.StaticMethod()).InstanceMethod())) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(((dynamic)FirstClassReturnInterface.StaticMethod()).InstanceMethod()))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -5708,7 +5692,10 @@ return failcount == 0;
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(((dynamic)FirstClassReturnInterface.StaticMethod()).InstanceProperty)) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(((dynamic)FirstClassReturnInterface.StaticMethod()).InstanceProperty))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -5719,19 +5706,22 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondInterfaceIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondInterfaceIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(((dynamic)FirstClassReturnInterface.StaticMethod())[2]))
+                || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)FirstClassReturnInterface.StaticMethod())[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         [Fact]
@@ -5746,32 +5736,31 @@ return failcount == 0;
             result += Verify.Eval(CallSecondClassInstanceMethod);
             result += Verify.Eval(CallSecondClassInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondClassOperator);
-result += Verify.Eval(CallSecondClassIndexer);
- #endif
+            result += Verify.Eval(CallSecondClassOperator);
+            result += Verify.Eval(CallSecondClassIndexer);
+#endif
             result += Verify.Eval(CallSecondStructInstanceMethod);
             result += Verify.Eval(CallSecondStructInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondStructOperator);
-result += Verify.Eval(CallSecondStructIndexer);
- #endif
+            result += Verify.Eval(CallSecondStructOperator);
+            result += Verify.Eval(CallSecondStructIndexer);
+#endif
             result += Verify.Eval(CallSecondInterfaceInstanceMethod);
             result += Verify.Eval(CallSecondInterfaceInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondInterfaceIndexer);
- #endif
+            result += Verify.Eval(CallSecondInterfaceIndexer);
+#endif
             return result;
         }
     }
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.statictodynamic022.statictodynamic022
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondef.commondef;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is static property of class
@@ -5787,7 +5776,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(((dynamic)FirstClassReturnClass.StaticProperty).InstanceMethod())) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(((dynamic)FirstClassReturnClass.StaticProperty).InstanceMethod()))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -5800,7 +5792,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(((dynamic)FirstClassReturnClass.StaticProperty).InstanceProperty)) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(((dynamic)FirstClassReturnClass.StaticProperty).InstanceProperty))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -5811,34 +5806,39 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 
 #if M3
 
-static bool CallSecondClassOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondClassOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(((dynamic)FirstClassReturnClass.StaticProperty) + 2))
+                || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)FirstClassReturnClass.StaticProperty) + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondClassIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(((dynamic)FirstClassReturnClass.StaticProperty)[2]))
+                || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-static bool CallSecondClassIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
-
-
-if ( (!(bool)(((dynamic)FirstClassReturnClass.StaticProperty)[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is struct
@@ -5846,7 +5846,10 @@ return failcount == 0;
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(((dynamic)FirstClassReturnStruct.StaticProperty).InstanceMethod())) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(((dynamic)FirstClassReturnStruct.StaticProperty).InstanceMethod()))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -5859,7 +5862,10 @@ return failcount == 0;
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(((dynamic)FirstClassReturnStruct.StaticProperty).InstanceProperty)) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(((dynamic)FirstClassReturnStruct.StaticProperty).InstanceProperty))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -5870,34 +5876,39 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondStructOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondStructOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(((dynamic)FirstClassReturnStruct.StaticProperty) + 2))
+                || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)FirstClassReturnStruct.StaticProperty) + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondStructIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(((dynamic)FirstClassReturnStruct.StaticProperty)[2]))
+                || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-static bool CallSecondStructIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
-
-
-if ( (!(bool)(((dynamic)FirstClassReturnStruct.StaticProperty)[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is interface
@@ -5905,7 +5916,10 @@ return failcount == 0;
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(((dynamic)FirstClassReturnInterface.StaticProperty).InstanceMethod())) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(((dynamic)FirstClassReturnInterface.StaticProperty).InstanceMethod()))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -5918,7 +5932,10 @@ return failcount == 0;
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(((dynamic)FirstClassReturnInterface.StaticProperty).InstanceProperty)) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(((dynamic)FirstClassReturnInterface.StaticProperty).InstanceProperty))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -5929,19 +5946,22 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondInterfaceIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondInterfaceIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(((dynamic)FirstClassReturnInterface.StaticProperty)[2]))
+                || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)FirstClassReturnInterface.StaticProperty)[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         [Fact]
@@ -5956,32 +5976,31 @@ return failcount == 0;
             result += Verify.Eval(CallSecondClassInstanceMethod);
             result += Verify.Eval(CallSecondClassInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondClassOperator);
-result += Verify.Eval(CallSecondClassIndexer);
- #endif
+            result += Verify.Eval(CallSecondClassOperator);
+            result += Verify.Eval(CallSecondClassIndexer);
+#endif
             result += Verify.Eval(CallSecondStructInstanceMethod);
             result += Verify.Eval(CallSecondStructInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondStructOperator);
-result += Verify.Eval(CallSecondStructIndexer);
- #endif
+            result += Verify.Eval(CallSecondStructOperator);
+            result += Verify.Eval(CallSecondStructIndexer);
+#endif
             result += Verify.Eval(CallSecondInterfaceInstanceMethod);
             result += Verify.Eval(CallSecondInterfaceInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondInterfaceIndexer);
- #endif
+            result += Verify.Eval(CallSecondInterfaceIndexer);
+#endif
             return result;
         }
     }
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.statictodynamic023.statictodynamic023
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendef.commongendef;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is static method of generic class
@@ -5997,7 +6016,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(((dynamic)FirstClassReturnClass<int>.StaticMethod()).InstanceMethod())) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(((dynamic)FirstClassReturnClass<int>.StaticMethod()).InstanceMethod()))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -6010,7 +6032,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(((dynamic)FirstClassReturnClass<int>.StaticMethod()).InstanceProperty)) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(((dynamic)FirstClassReturnClass<int>.StaticMethod()).InstanceProperty))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -6021,34 +6046,39 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 
 #if M3
 
-static bool CallSecondClassOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondClassOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(((dynamic)FirstClassReturnClass<int>.StaticMethod()) + 2))
+                || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)FirstClassReturnClass<int>.StaticMethod()) + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondClassIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(((dynamic)FirstClassReturnClass<int>.StaticMethod())[2]))
+                || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-static bool CallSecondClassIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
-
-
-if ( (!(bool)(((dynamic)FirstClassReturnClass<int>.StaticMethod())[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is struct
@@ -6056,7 +6086,10 @@ return failcount == 0;
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(((dynamic)FirstClassReturnStruct<int>.StaticMethod()).InstanceMethod())) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(((dynamic)FirstClassReturnStruct<int>.StaticMethod()).InstanceMethod()))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -6069,7 +6102,10 @@ return failcount == 0;
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(((dynamic)FirstClassReturnStruct<int>.StaticMethod()).InstanceProperty)) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(((dynamic)FirstClassReturnStruct<int>.StaticMethod()).InstanceProperty))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -6080,34 +6116,39 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondStructOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondStructOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(((dynamic)FirstClassReturnStruct<int>.StaticMethod()) + 2))
+                || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)FirstClassReturnStruct<int>.StaticMethod()) + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondStructIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(((dynamic)FirstClassReturnStruct<int>.StaticMethod())[2]))
+                || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-static bool CallSecondStructIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
-
-
-if ( (!(bool)(((dynamic)FirstClassReturnStruct<int>.StaticMethod())[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is interface
@@ -6115,7 +6156,10 @@ return failcount == 0;
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(((dynamic)FirstClassReturnInterface<int>.StaticMethod()).InstanceMethod())) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(((dynamic)FirstClassReturnInterface<int>.StaticMethod()).InstanceMethod()))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -6128,7 +6172,10 @@ return failcount == 0;
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(((dynamic)FirstClassReturnInterface<int>.StaticMethod()).InstanceProperty)) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(((dynamic)FirstClassReturnInterface<int>.StaticMethod()).InstanceProperty))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -6139,19 +6186,22 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondInterfaceIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondInterfaceIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(((dynamic)FirstClassReturnInterface<int>.StaticMethod())[2]))
+                || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)FirstClassReturnInterface<int>.StaticMethod())[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         [Fact]
@@ -6166,32 +6216,31 @@ return failcount == 0;
             result += Verify.Eval(CallSecondClassInstanceMethod);
             result += Verify.Eval(CallSecondClassInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondClassOperator);
-result += Verify.Eval(CallSecondClassIndexer);
- #endif
+            result += Verify.Eval(CallSecondClassOperator);
+            result += Verify.Eval(CallSecondClassIndexer);
+#endif
             result += Verify.Eval(CallSecondStructInstanceMethod);
             result += Verify.Eval(CallSecondStructInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondStructOperator);
-result += Verify.Eval(CallSecondStructIndexer);
- #endif
+            result += Verify.Eval(CallSecondStructOperator);
+            result += Verify.Eval(CallSecondStructIndexer);
+#endif
             result += Verify.Eval(CallSecondInterfaceInstanceMethod);
             result += Verify.Eval(CallSecondInterfaceInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondInterfaceIndexer);
- #endif
+            result += Verify.Eval(CallSecondInterfaceIndexer);
+#endif
             return result;
         }
     }
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.statictodynamic024.statictodynamic024
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendef.commongendef;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is static property of generic class
@@ -6207,7 +6256,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(((dynamic)FirstClassReturnClass<int>.StaticProperty).InstanceMethod())) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(((dynamic)FirstClassReturnClass<int>.StaticProperty).InstanceMethod()))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -6220,7 +6272,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(((dynamic)FirstClassReturnClass<int>.StaticProperty).InstanceProperty)) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(((dynamic)FirstClassReturnClass<int>.StaticProperty).InstanceProperty))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -6231,34 +6286,39 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 
 #if M3
 
-static bool CallSecondClassOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondClassOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(((dynamic)FirstClassReturnClass<int>.StaticProperty) + 2))
+                || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)FirstClassReturnClass<int>.StaticProperty) + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondClassIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(((dynamic)FirstClassReturnClass<int>.StaticProperty)[2]))
+                || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-static bool CallSecondClassIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
-
-
-if ( (!(bool)(((dynamic)FirstClassReturnClass<int>.StaticProperty)[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is struct
@@ -6266,7 +6326,10 @@ return failcount == 0;
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(((dynamic)FirstClassReturnStruct<int>.StaticProperty).InstanceMethod())) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(((dynamic)FirstClassReturnStruct<int>.StaticProperty).InstanceMethod()))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -6279,7 +6342,10 @@ return failcount == 0;
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(((dynamic)FirstClassReturnStruct<int>.StaticProperty).InstanceProperty)) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(((dynamic)FirstClassReturnStruct<int>.StaticProperty).InstanceProperty))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -6290,34 +6356,39 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondStructOperator()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondStructOperator()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(((dynamic)FirstClassReturnStruct<int>.StaticProperty) + 2))
+                || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)FirstClassReturnStruct<int>.StaticProperty) + 2)) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
+            return failcount == 0;
+        }
 
-return failcount == 0;
-}
+        static bool CallSecondStructIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(((dynamic)FirstClassReturnStruct<int>.StaticProperty)[2]))
+                || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-static bool CallSecondStructIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
-
-
-if ( (!(bool)(((dynamic)FirstClassReturnStruct<int>.StaticProperty)[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         #region Second is interface
@@ -6325,7 +6396,10 @@ return failcount == 0;
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(((dynamic)FirstClassReturnInterface<int>.StaticProperty).InstanceMethod())) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(((dynamic)FirstClassReturnInterface<int>.StaticProperty).InstanceMethod()))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -6338,7 +6412,10 @@ return failcount == 0;
         {
             int failcount = 0;
             Verify.FirstCalled = false;
-            if ((!(bool)(((dynamic)FirstClassReturnInterface<int>.StaticProperty).InstanceProperty)) || (!Verify.FirstCalled))
+            if (
+                (!(bool)(((dynamic)FirstClassReturnInterface<int>.StaticProperty).InstanceProperty))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -6349,19 +6426,22 @@ return failcount == 0;
 
 #if M3
 
-static bool CallSecondInterfaceIndexer()
-{
-int failcount = 0; Verify.FirstCalled = false;
+        static bool CallSecondInterfaceIndexer()
+        {
+            int failcount = 0;
+            Verify.FirstCalled = false;
 
+            if (
+                (!(bool)(((dynamic)FirstClassReturnInterface<int>.StaticProperty)[2]))
+                || (!Verify.FirstCalled)
+            )
+            {
+                failcount++;
+                System.Console.WriteLine("Test failed at call result");
+            }
 
-if ( (!(bool)(((dynamic)FirstClassReturnInterface<int>.StaticProperty)[2])) || (!Verify.FirstCalled))
-{
-failcount++;
-System.Console.WriteLine("Test failed at call result");
-}
-
-return failcount == 0;
-}
+            return failcount == 0;
+        }
 #endif
         #endregion
         [Fact]
@@ -6376,32 +6456,31 @@ return failcount == 0;
             result += Verify.Eval(CallSecondClassInstanceMethod);
             result += Verify.Eval(CallSecondClassInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondClassOperator);
-result += Verify.Eval(CallSecondClassIndexer);
- #endif
+            result += Verify.Eval(CallSecondClassOperator);
+            result += Verify.Eval(CallSecondClassIndexer);
+#endif
             result += Verify.Eval(CallSecondStructInstanceMethod);
             result += Verify.Eval(CallSecondStructInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondStructOperator);
-result += Verify.Eval(CallSecondStructIndexer);
- #endif
+            result += Verify.Eval(CallSecondStructOperator);
+            result += Verify.Eval(CallSecondStructIndexer);
+#endif
             result += Verify.Eval(CallSecondInterfaceInstanceMethod);
             result += Verify.Eval(CallSecondInterfaceInstanceProperty);
 #if M3
-result += Verify.Eval(CallSecondInterfaceIndexer);
- #endif
+            result += Verify.Eval(CallSecondInterfaceIndexer);
+#endif
             return result;
         }
     }
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dynamictostatic001.dynamictostatic001
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondef.commondef;
+
     // <Title> Dynamic context switch to static context </Title>
     // <Description>
     // First is instance method of class
@@ -6534,7 +6613,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
             int failcount = 0;
             dynamic d = new FirstClassReturnInterface();
             Verify.FirstCalled = false;
-            if ((!(((SecondInterface)d.InstanceMethod()).InstanceMethod())) || (!Verify.FirstCalled))
+            if (
+                (!(((SecondInterface)d.InstanceMethod()).InstanceMethod())) || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -6548,7 +6629,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
             int failcount = 0;
             dynamic d = new FirstClassReturnInterface();
             Verify.FirstCalled = false;
-            if ((!(((SecondInterface)d.InstanceMethod()).InstanceProperty)) || (!Verify.FirstCalled))
+            if (
+                (!(((SecondInterface)d.InstanceMethod()).InstanceProperty)) || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -6598,12 +6681,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dynamictostatic002.dynamictostatic002
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondef.commondef;
+
     // <Title> Dynamic context switch to static context </Title>
     // <Description>
     // First is instance property of class
@@ -6736,7 +6818,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
             int failcount = 0;
             dynamic d = new FirstClassReturnInterface();
             Verify.FirstCalled = false;
-            if ((!(((SecondInterface)d.InstanceProperty).InstanceMethod())) || (!Verify.FirstCalled))
+            if (
+                (!(((SecondInterface)d.InstanceProperty).InstanceMethod())) || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -6750,7 +6834,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
             int failcount = 0;
             dynamic d = new FirstClassReturnInterface();
             Verify.FirstCalled = false;
-            if ((!(((SecondInterface)d.InstanceProperty).InstanceProperty)) || (!Verify.FirstCalled))
+            if (
+                (!(((SecondInterface)d.InstanceProperty).InstanceProperty)) || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -6800,12 +6886,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dynamictostatic003.dynamictostatic003
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondef.commondef;
+
     // <Title> Dynamic context switch to static context </Title>
     // <Description>
     // First is operator of class
@@ -7002,12 +7087,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dynamictostatic004.dynamictostatic004
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondef.commondef;
+
     // <Title> Dynamic context switch to static context </Title>
     // <Description>
     // First is indexer of class
@@ -7204,12 +7288,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dynamictostatic005.dynamictostatic005
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendef.commongendef;
+
     // <Title> Dynamic context switch to static context </Title>
     // <Description>
     // First is instance method of generic class
@@ -7226,7 +7309,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
             int failcount = 0;
             Verify.FirstCalled = false;
             dynamic d = new FirstClassReturnClass<int>();
-            if ((!(((SecondClass<int>)d.InstanceMethod()).InstanceMethod())) || (!Verify.FirstCalled))
+            if (
+                (!(((SecondClass<int>)d.InstanceMethod()).InstanceMethod()))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -7240,7 +7326,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
             int failcount = 0;
             Verify.FirstCalled = false;
             dynamic d = new FirstClassReturnClass<int>();
-            if ((!(((SecondClass<int>)d.InstanceMethod()).InstanceProperty)) || (!Verify.FirstCalled))
+            if (
+                (!(((SecondClass<int>)d.InstanceMethod()).InstanceProperty))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -7284,7 +7373,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
             int failcount = 0;
             Verify.FirstCalled = false;
             dynamic d = new FirstClassReturnStruct<int>();
-            if ((!(((SecondStruct<int>)d.InstanceMethod()).InstanceMethod())) || (!Verify.FirstCalled))
+            if (
+                (!(((SecondStruct<int>)d.InstanceMethod()).InstanceMethod()))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -7298,7 +7390,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
             int failcount = 0;
             Verify.FirstCalled = false;
             dynamic d = new FirstClassReturnStruct<int>();
-            if ((!(((SecondStruct<int>)d.InstanceMethod()).InstanceProperty)) || (!Verify.FirstCalled))
+            if (
+                (!(((SecondStruct<int>)d.InstanceMethod()).InstanceProperty))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -7342,7 +7437,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
             int failcount = 0;
             Verify.FirstCalled = false;
             dynamic d = new FirstClassReturnInterface<int>();
-            if ((!(((SecondInterface<int>)d.InstanceMethod()).InstanceMethod())) || (!Verify.FirstCalled))
+            if (
+                (!(((SecondInterface<int>)d.InstanceMethod()).InstanceMethod()))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -7356,7 +7454,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
             int failcount = 0;
             Verify.FirstCalled = false;
             dynamic d = new FirstClassReturnInterface<int>();
-            if ((!(((SecondInterface<int>)d.InstanceMethod()).InstanceProperty)) || (!Verify.FirstCalled))
+            if (
+                (!(((SecondInterface<int>)d.InstanceMethod()).InstanceProperty))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -7406,12 +7507,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dynamictostatic006.dynamictostatic006
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendef.commongendef;
+
     // <Title> Dynamic context switch to static context </Title>
     // <Description>
     // First is instance property of generic class
@@ -7428,7 +7528,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
             int failcount = 0;
             Verify.FirstCalled = false;
             dynamic d = new FirstClassReturnClass<int>();
-            if ((!(((SecondClass<int>)d.InstanceProperty).InstanceMethod())) || (!Verify.FirstCalled))
+            if (
+                (!(((SecondClass<int>)d.InstanceProperty).InstanceMethod()))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -7442,7 +7545,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
             int failcount = 0;
             Verify.FirstCalled = false;
             dynamic d = new FirstClassReturnClass<int>();
-            if ((!(((SecondClass<int>)d.InstanceProperty).InstanceProperty)) || (!Verify.FirstCalled))
+            if (
+                (!(((SecondClass<int>)d.InstanceProperty).InstanceProperty))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -7486,7 +7592,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
             int failcount = 0;
             Verify.FirstCalled = false;
             dynamic d = new FirstClassReturnStruct<int>();
-            if ((!(((SecondStruct<int>)d.InstanceProperty).InstanceMethod())) || (!Verify.FirstCalled))
+            if (
+                (!(((SecondStruct<int>)d.InstanceProperty).InstanceMethod()))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -7500,7 +7609,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
             int failcount = 0;
             Verify.FirstCalled = false;
             dynamic d = new FirstClassReturnStruct<int>();
-            if ((!(((SecondStruct<int>)d.InstanceProperty).InstanceProperty)) || (!Verify.FirstCalled))
+            if (
+                (!(((SecondStruct<int>)d.InstanceProperty).InstanceProperty))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -7544,7 +7656,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
             int failcount = 0;
             Verify.FirstCalled = false;
             dynamic d = new FirstClassReturnInterface<int>();
-            if ((!(((SecondInterface<int>)d.InstanceProperty).InstanceMethod())) || (!Verify.FirstCalled))
+            if (
+                (!(((SecondInterface<int>)d.InstanceProperty).InstanceMethod()))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -7558,7 +7673,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
             int failcount = 0;
             Verify.FirstCalled = false;
             dynamic d = new FirstClassReturnInterface<int>();
-            if ((!(((SecondInterface<int>)d.InstanceProperty).InstanceProperty)) || (!Verify.FirstCalled))
+            if (
+                (!(((SecondInterface<int>)d.InstanceProperty).InstanceProperty))
+                || (!Verify.FirstCalled)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -7608,12 +7726,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dynamictostatic007.dynamictostatic007
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendef.commongendef;
+
     // <Title> Dynamic context switch to static context </Title>
     // <Description>
     // First is operator of generic class
@@ -7810,12 +7927,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dynamictostatic008.dynamictostatic008
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendef.commongendef;
+
     // <Title> Dynamic context switch to static context </Title>
     // <Description>
     // First is indexer of generic class
@@ -8012,8 +8128,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.combined001.combined001
 {
     // <Title> Combined with dynamic context and static context </Title>
@@ -8089,8 +8203,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.combined002.combined002
 {
     // <Title> Combined with dynamic context and static context </Title>
@@ -8154,7 +8266,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
         {
             int failcount = 0;
             dynamic d = new First();
-            if ((!(bool)(((dynamic)(((Second)d.M1()).M2().M3())).M4())) || (TestCount.CallCount != 4))
+            if (
+                (!(bool)(((dynamic)(((Second)d.M1()).M2().M3())).M4()))
+                || (TestCount.CallCount != 4)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -8165,8 +8280,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.combined003.combined003
 {
@@ -8249,8 +8362,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.combined004.combined004
 {
     // <Title> Combined with dynamic context and static context </Title>
@@ -8331,8 +8442,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.combined005.combined005
 {
@@ -8424,7 +8533,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
         {
             int failcount = 0;
             dynamic d = new C1();
-            if ((!(bool)(((C5)(((C2)d.M1()).M2().M3().M4())).M5().M6().M7())) || (TestCount.CallCount != 7))
+            if (
+                (!(bool)(((C5)(((C2)d.M1()).M2().M3().M4())).M5().M6().M7()))
+                || (TestCount.CallCount != 7)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -8435,8 +8547,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.combined006.combined006
 {
@@ -8528,7 +8638,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
         {
             int failcount = 0;
             dynamic d = new C1();
-            if ((!(bool)(((C5)((dynamic)(((C2)d.M1()).M2().M3())).M4()).M5().M6().M7())) || (TestCount.CallCount != 7))
+            if (
+                (!(bool)(((C5)((dynamic)(((C2)d.M1()).M2().M3())).M4()).M5().M6().M7()))
+                || (TestCount.CallCount != 7)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -8539,8 +8652,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.combined007.combined007
 {
@@ -8644,7 +8755,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
         {
             int failcount = 0;
             dynamic d = new C1();
-            if ((!(bool)((((C5)((((C2)d[1]) + 2).P3.M4()))[5] + 6).P7)) || (TestCount.CallCount != 7))
+            if (
+                (!(bool)((((C5)((((C2)d[1]) + 2).P3.M4()))[5] + 6).P7))
+                || (TestCount.CallCount != 7)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");
@@ -8655,8 +8769,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.combined008.combined008
 {
@@ -8760,7 +8872,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
         {
             int failcount = 0;
             dynamic d = new C1();
-            if ((!(bool)(((C5)((dynamic)(((C2)d.M1()).P2 + 3))[4]).P5[6] + 7)) || (TestCount.CallCount != 7))
+            if (
+                (!(bool)(((C5)((dynamic)(((C2)d.M1()).P2 + 3))[4]).P5[6] + 7))
+                || (TestCount.CallCount != 7)
+            )
             {
                 failcount++;
                 System.Console.WriteLine("Test failed at call result");

@@ -38,7 +38,9 @@ internal sealed class AnsiConsole
 
     private static void SetColor(ConsoleColor color)
     {
-        Console.ForegroundColor = (ConsoleColor)(((int)Console.ForegroundColor & 0x08) | ((int)color & 0x07));
+        Console.ForegroundColor = (ConsoleColor)(
+            ((int)Console.ForegroundColor & 0x08) | ((int)color & 0x07)
+        );
     }
 
     private void SetBold(bool bold)
@@ -74,9 +76,11 @@ internal sealed class AnsiConsole
             {
                 var startIndex = escapeIndex + 2;
                 var endIndex = startIndex;
-                while (endIndex != message.Length &&
-                    message[endIndex] >= 0x20 &&
-                    message[endIndex] <= 0x3f)
+                while (
+                    endIndex != message.Length
+                    && message[endIndex] >= 0x20
+                    && message[endIndex] <= 0x3f
+                )
                 {
                     endIndex += 1;
                 }
@@ -93,9 +97,19 @@ internal sealed class AnsiConsole
                     case 'm':
                         int value;
 #if NETFRAMEWORK
-                        if (int.TryParse(message.Substring(startIndex, endIndex - startIndex), out value))
+                        if (
+                            int.TryParse(
+                                message.Substring(startIndex, endIndex - startIndex),
+                                out value
+                            )
+                        )
 #else
-                        if (int.TryParse(message.AsSpan(startIndex, endIndex - startIndex), out value))
+                        if (
+                            int.TryParse(
+                                message.AsSpan(startIndex, endIndex - startIndex),
+                                out value
+                            )
+                        )
 #endif
                         {
                             switch (value)

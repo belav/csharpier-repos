@@ -13,5 +13,6 @@ public class ImplicitManyToManyB
 
     public virtual string Name { get; set; }
 
-    public virtual ICollection<ImplicitManyToManyA> As { get; } = new ObservableCollection<ImplicitManyToManyA>();
+    public virtual ICollection<ImplicitManyToManyA> As { get; } =
+        new ObservableCollection<ImplicitManyToManyA>();
 }

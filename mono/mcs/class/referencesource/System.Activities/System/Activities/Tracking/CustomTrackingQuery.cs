@@ -6,21 +6,10 @@ namespace System.Activities.Tracking
 {
     public class CustomTrackingQuery : TrackingQuery
     {
+        public CustomTrackingQuery() { }
 
-        public CustomTrackingQuery()
-        {
-        }
+        public string Name { get; set; }
 
-        public string Name
-        {
-            get;
-            set;
-        }
-
-        public string ActivityName
-        {
-            get;
-            set;
-        }
+        public string ActivityName { get; set; }
     }
 }

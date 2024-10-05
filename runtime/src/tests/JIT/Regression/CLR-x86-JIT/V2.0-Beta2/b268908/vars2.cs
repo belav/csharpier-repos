@@ -7,15 +7,14 @@
 // The JIT32 only supports up to 32767 variables
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using Xunit;
 
 //Disable the warning about having variables that are not used
 #pragma warning disable 219
 public class Test_vars2
 {
-
     [Fact]
     public static int TestEntryPoint()
     {
@@ -32807,10 +32806,16 @@ public class Test_vars2
         long a32769 = 32769;
         long a32770 = 32770;
 
-        Console.WriteLine("a0 {0} a1 {1} a2 {2} a3 {3} a4 {4} a32770 {5}", a0, a1, a2, a3, a4, a32770);
+        Console.WriteLine(
+            "a0 {0} a1 {1} a2 {2} a3 {3} a4 {4} a32770 {5}",
+            a0,
+            a1,
+            a2,
+            a3,
+            a4,
+            a32770
+        );
         return 100;
     }
-
 }
 #pragma warning restore 219
-

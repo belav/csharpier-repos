@@ -9,11 +9,13 @@ namespace System.Xml.Schema
     {
         private XmlSchemaObjectCollection _items = new XmlSchemaObjectCollection();
 
-        [XmlElement("element", typeof(XmlSchemaElement)),
-         XmlElement("group", typeof(XmlSchemaGroupRef)),
-         XmlElement("choice", typeof(XmlSchemaChoice)),
-         XmlElement("sequence", typeof(XmlSchemaSequence)),
-         XmlElement("any", typeof(XmlSchemaAny))]
+        [
+            XmlElement("element", typeof(XmlSchemaElement)),
+            XmlElement("group", typeof(XmlSchemaGroupRef)),
+            XmlElement("choice", typeof(XmlSchemaChoice)),
+            XmlElement("sequence", typeof(XmlSchemaSequence)),
+            XmlElement("any", typeof(XmlSchemaAny))
+        ]
         public override XmlSchemaObjectCollection Items
         {
             get { return _items; }

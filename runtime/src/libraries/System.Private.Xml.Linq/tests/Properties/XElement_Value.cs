@@ -2,11 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.IO;
-using System.Text;
-using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using Microsoft.Test.ModuleCore;
@@ -35,11 +35,19 @@ namespace CoreXml.Test.XLinq
                     string xml = Variation.Params[0] as string;
                     XElement toChange = XElement.Parse(xml);
                     XName newName = Variation.Params[1] as string;
-                    if (_runWithEvents) _eHelper = new EventsHelper(toChange);
+                    if (_runWithEvents)
+                        _eHelper = new EventsHelper(toChange);
                     toChange.Name = newName;
-                    if (_runWithEvents) _eHelper.Verify(XObjectChange.Name);
-                    TestLog.Compare(newName.Namespace == toChange.Name.Namespace, "Namespace did not change");
-                    TestLog.Compare(newName.LocalName == toChange.Name.LocalName, "LocalName did not change");
+                    if (_runWithEvents)
+                        _eHelper.Verify(XObjectChange.Name);
+                    TestLog.Compare(
+                        newName.Namespace == toChange.Name.Namespace,
+                        "Namespace did not change"
+                    );
+                    TestLog.Compare(
+                        newName.LocalName == toChange.Name.LocalName,
+                        "LocalName did not change"
+                    );
                 }
 
                 //[Variation(Priority = 0, Desc = "XElement - space character name", Params = new object[] { "<element>value</element>", " " })]
@@ -52,12 +60,14 @@ namespace CoreXml.Test.XLinq
                     XElement toChange = XElement.Parse(xml);
                     try
                     {
-                        if (_runWithEvents) _eHelper = new EventsHelper(toChange);
+                        if (_runWithEvents)
+                            _eHelper = new EventsHelper(toChange);
                         toChange.Name = Variation.Params[1] as string;
                     }
                     catch (Exception)
                     {
-                        if (_runWithEvents) _eHelper.Verify(0);
+                        if (_runWithEvents)
+                            _eHelper.Verify(0);
                         return;
                     }
                     throw new TestException(TestResult.Failed, "");
@@ -68,9 +78,11 @@ namespace CoreXml.Test.XLinq
                 {
                     _runWithEvents = (bool)Params[0];
                     XProcessingInstruction toChange = new XProcessingInstruction("target", "data");
-                    if (_runWithEvents) _eHelper = new EventsHelper(toChange);
+                    if (_runWithEvents)
+                        _eHelper = new EventsHelper(toChange);
                     toChange.Target = "newTarget";
-                    if (_runWithEvents) _eHelper.Verify(XObjectChange.Name);
+                    if (_runWithEvents)
+                        _eHelper.Verify(XObjectChange.Name);
                     TestLog.Compare(toChange.Target.Equals("newTarget"), "Name did not change");
                 }
 
@@ -79,7 +91,8 @@ namespace CoreXml.Test.XLinq
                 {
                     _runWithEvents = (bool)Params[0];
                     XProcessingInstruction toChange = new XProcessingInstruction("target", "data");
-                    if (_runWithEvents) _eHelper = new EventsHelper(toChange);
+                    if (_runWithEvents)
+                        _eHelper = new EventsHelper(toChange);
 
                     try
                     {
@@ -87,7 +100,8 @@ namespace CoreXml.Test.XLinq
                     }
                     catch (Exception)
                     {
-                        if (_runWithEvents) _eHelper.Verify(0);
+                        if (_runWithEvents)
+                            _eHelper.Verify(0);
                         return;
                     }
 
@@ -97,7 +111,8 @@ namespace CoreXml.Test.XLinq
                     }
                     catch (Exception)
                     {
-                        if (_runWithEvents) _eHelper.Verify(0);
+                        if (_runWithEvents)
+                            _eHelper.Verify(0);
 
                         return;
                     }
@@ -108,7 +123,8 @@ namespace CoreXml.Test.XLinq
                     }
                     catch (Exception)
                     {
-                        if (_runWithEvents) _eHelper.Verify(0);
+                        if (_runWithEvents)
+                            _eHelper.Verify(0);
                         return;
                     }
 
@@ -120,9 +136,11 @@ namespace CoreXml.Test.XLinq
                 {
                     _runWithEvents = (bool)Params[0];
                     XDocumentType toChange = new XDocumentType("root", "", "", "");
-                    if (_runWithEvents) _eHelper = new EventsHelper(toChange);
+                    if (_runWithEvents)
+                        _eHelper = new EventsHelper(toChange);
                     toChange.Name = "newName";
-                    if (_runWithEvents) _eHelper.Verify(XObjectChange.Name);
+                    if (_runWithEvents)
+                        _eHelper.Verify(XObjectChange.Name);
                     TestLog.Compare(toChange.Name.Equals("newName"), "Name did not change");
                 }
 
@@ -131,7 +149,8 @@ namespace CoreXml.Test.XLinq
                 {
                     _runWithEvents = (bool)Params[0];
                     XDocumentType toChange = new XDocumentType("root", "", "", "");
-                    if (_runWithEvents) _eHelper = new EventsHelper(toChange);
+                    if (_runWithEvents)
+                        _eHelper = new EventsHelper(toChange);
 
                     try
                     {
@@ -139,7 +158,8 @@ namespace CoreXml.Test.XLinq
                     }
                     catch (Exception)
                     {
-                        if (_runWithEvents) _eHelper.Verify(0);
+                        if (_runWithEvents)
+                            _eHelper.Verify(0);
                         return;
                     }
 
@@ -149,7 +169,8 @@ namespace CoreXml.Test.XLinq
                     }
                     catch (Exception)
                     {
-                        if (_runWithEvents) _eHelper.Verify(0);
+                        if (_runWithEvents)
+                            _eHelper.Verify(0);
                         return;
                     }
 
@@ -159,7 +180,8 @@ namespace CoreXml.Test.XLinq
                     }
                     catch (Exception)
                     {
-                        if (_runWithEvents) _eHelper.Verify(0);
+                        if (_runWithEvents)
+                            _eHelper.Verify(0);
                         return;
                     }
                 }
@@ -285,7 +307,6 @@ namespace CoreXml.Test.XLinq
                     TestLog.Compare(e.Value, CalculateValue(e), "Value");
                 }
 
-
                 // ======================================
                 // SET:
                 //  ~ set null
@@ -313,7 +334,8 @@ namespace CoreXml.Test.XLinq
                     string newVal = Variation.Params[1] as string;
 
                     XElement e = XElement.Parse(xml, LoadOptions.PreserveWhitespace).Element("A");
-                    if (_runWithEvents) _eHelper = new EventsHelper(e);
+                    if (_runWithEvents)
+                        _eHelper = new EventsHelper(e);
                     e.Value = newVal;
                     // Not sure how to verify this yet( what possible events and in what order)
                     //if (runWithEvents) eHelper.Verify(XObjectChange.Value);
@@ -341,7 +363,8 @@ namespace CoreXml.Test.XLinq
                     var origNodes = e.Nodes().ToList();
                     var origAttributes = e.Attributes().ToList();
 
-                    if (_runWithEvents) _eHelper = new EventsHelper(e);
+                    if (_runWithEvents)
+                        _eHelper = new EventsHelper(e);
                     e.Value = newVal;
                     // Not sure how to verify this yet( what possible events and in what order)
                     //if (runWithEvents) eHelper.Verify(XObjectChange.Value);
@@ -349,8 +372,14 @@ namespace CoreXml.Test.XLinq
                     TestLog.Compare(e.Value, newVal, "value");
                     TestLog.Compare(e.Parent.Value, "t0" + newVal + "t00", "parent value");
                     TestLog.Compare(!e.IsEmpty, "!e.IsEmpty");
-                    TestLog.Compare(origNodes.Where(n => n.Parent != null || n.Document != null).IsEmpty(), "origNodes.Where(n=>n.Parent!=null || n.Document!=null).IsEmpty()");
-                    TestLog.Compare(origAttributes.SequenceEqual(e.Attributes()), "origAttributes.SequenceEqual(e.Attributes())");
+                    TestLog.Compare(
+                        origNodes.Where(n => n.Parent != null || n.Document != null).IsEmpty(),
+                        "origNodes.Where(n=>n.Parent!=null || n.Document!=null).IsEmpty()"
+                    );
+                    TestLog.Compare(
+                        origAttributes.SequenceEqual(e.Attributes()),
+                        "origAttributes.SequenceEqual(e.Attributes())"
+                    );
                 }
 
                 //[Variation(Priority = 2, Desc = "SET: Adjacent text nodes I.", Params = new object[] { "<X>t0<A>truck</A>t00</X>", "tn\n" })]
@@ -367,7 +396,8 @@ namespace CoreXml.Test.XLinq
                     var origNodes = e.Nodes().ToList();
                     var origAttributes = e.Attributes().ToList();
 
-                    if (_runWithEvents) _eHelper = new EventsHelper(e);
+                    if (_runWithEvents)
+                        _eHelper = new EventsHelper(e);
                     e.Value = newVal;
                     // Not sure how to verify this yet( what possible events and in what order)
                     //if (runWithEvents) eHelper.Verify(XObjectChange.Value);
@@ -375,8 +405,14 @@ namespace CoreXml.Test.XLinq
                     TestLog.Compare(e.Value, newVal, "value");
                     TestLog.Compare(e.Parent.Value, "t0" + newVal + "t00", "parent value");
                     TestLog.Compare(!e.IsEmpty, "!e.IsEmpty");
-                    TestLog.Compare(origNodes.Where(n => n.Parent != null || n.Document != null).IsEmpty(), "origNodes.Where(n=>n.Parent!=null || n.Document!=null).IsEmpty()");
-                    TestLog.Compare(origAttributes.SequenceEqual(e.Attributes()), "origAttributes.SequenceEqual(e.Attributes())");
+                    TestLog.Compare(
+                        origNodes.Where(n => n.Parent != null || n.Document != null).IsEmpty(),
+                        "origNodes.Where(n=>n.Parent!=null || n.Document!=null).IsEmpty()"
+                    );
+                    TestLog.Compare(
+                        origAttributes.SequenceEqual(e.Attributes()),
+                        "origAttributes.SequenceEqual(e.Attributes())"
+                    );
                 }
 
                 //[Variation(Priority = 2, Desc = "SET: Adjacent text nodes III.", Params = new object[] { "<X>t0<A xmlns:p='p'>truck\n<p:Y/>\nhello</A>t00</X>", "tn\n" })]
@@ -392,7 +428,8 @@ namespace CoreXml.Test.XLinq
                     var origNodes = e.Nodes().ToList();
                     var origAttributes = e.Attributes().ToList();
 
-                    if (_runWithEvents) _eHelper = new EventsHelper(e);
+                    if (_runWithEvents)
+                        _eHelper = new EventsHelper(e);
                     e.Value = newVal;
                     // Not sure how to verify this yet( what possible events and in what order)
                     //if (runWithEvents) eHelper.Verify(XObjectChange.Value);
@@ -400,8 +437,14 @@ namespace CoreXml.Test.XLinq
                     TestLog.Compare(e.Value, newVal, "value");
                     TestLog.Compare(e.Parent.Value, "t0" + newVal + "t00", "parent value");
                     TestLog.Compare(!e.IsEmpty, "!e.IsEmpty");
-                    TestLog.Compare(origNodes.Where(n => n.Parent != null || n.Document != null).IsEmpty(), "origNodes.Where(n=>n.Parent!=null || n.Document!=null).IsEmpty()");
-                    TestLog.Compare(origAttributes.SequenceEqual(e.Attributes()), "origAttributes.SequenceEqual(e.Attributes())");
+                    TestLog.Compare(
+                        origNodes.Where(n => n.Parent != null || n.Document != null).IsEmpty(),
+                        "origNodes.Where(n=>n.Parent!=null || n.Document!=null).IsEmpty()"
+                    );
+                    TestLog.Compare(
+                        origAttributes.SequenceEqual(e.Attributes()),
+                        "origAttributes.SequenceEqual(e.Attributes())"
+                    );
                 }
 
                 //[Variation(Priority = 2, Desc = "SET: Concatenated text I.", Params = new object[] { "<X>t0<A>truck</A>t00</X>", "tn\n" })]
@@ -418,7 +461,8 @@ namespace CoreXml.Test.XLinq
                     var origNodes = e.Nodes().ToList();
                     var origAttributes = e.Attributes().ToList();
 
-                    if (_runWithEvents) _eHelper = new EventsHelper(e);
+                    if (_runWithEvents)
+                        _eHelper = new EventsHelper(e);
                     e.Value = newVal;
                     // Not sure how to verify this yet( what possible events and in what order)
                     //if (runWithEvents) eHelper.Verify(XObjectChange.Value);
@@ -426,8 +470,14 @@ namespace CoreXml.Test.XLinq
                     TestLog.Compare(e.Value, newVal, "value");
                     TestLog.Compare(e.Parent.Value, "t0" + newVal + "t00", "parent value");
                     TestLog.Compare(!e.IsEmpty, "!e.IsEmpty");
-                    TestLog.Compare(origNodes.Where(n => n.Parent != null || n.Document != null).IsEmpty(), "origNodes.Where(n=>n.Parent!=null || n.Document!=null).IsEmpty()");
-                    TestLog.Compare(origAttributes.SequenceEqual(e.Attributes()), "origAttributes.SequenceEqual(e.Attributes())");
+                    TestLog.Compare(
+                        origNodes.Where(n => n.Parent != null || n.Document != null).IsEmpty(),
+                        "origNodes.Where(n=>n.Parent!=null || n.Document!=null).IsEmpty()"
+                    );
+                    TestLog.Compare(
+                        origAttributes.SequenceEqual(e.Attributes()),
+                        "origAttributes.SequenceEqual(e.Attributes())"
+                    );
                 }
 
                 //[Variation(Priority = 2, Desc = "SET: Removed node.", Params = new object[] { "<X>t0<A xmlns:p='p'>truck\n<p:Y/>\nhello</A>t00</X>", "tn\n" })]
@@ -443,7 +493,8 @@ namespace CoreXml.Test.XLinq
                     var origNodes = e.Nodes().ToList();
                     var origAttributes = e.Attributes().ToList();
 
-                    if (_runWithEvents) _eHelper = new EventsHelper(e);
+                    if (_runWithEvents)
+                        _eHelper = new EventsHelper(e);
                     e.Value = newVal;
                     // Not sure how to verify this yet( what possible events and in what order)
                     //if (runWithEvents) eHelper.Verify(XObjectChange.Value);
@@ -451,8 +502,14 @@ namespace CoreXml.Test.XLinq
                     TestLog.Compare(e.Value, newVal, "value");
                     TestLog.Compare(e.Parent.Value, "t0" + newVal + "t00", "parent value");
                     TestLog.Compare(!e.IsEmpty, "!e.IsEmpty");
-                    TestLog.Compare(origNodes.Where(n => n.Parent != null || n.Document != null).IsEmpty(), "origNodes.Where(n=>n.Parent!=null || n.Document!=null).IsEmpty()");
-                    TestLog.Compare(origAttributes.SequenceEqual(e.Attributes()), "origAttributes.SequenceEqual(e.Attributes())");
+                    TestLog.Compare(
+                        origNodes.Where(n => n.Parent != null || n.Document != null).IsEmpty(),
+                        "origNodes.Where(n=>n.Parent!=null || n.Document!=null).IsEmpty()"
+                    );
+                    TestLog.Compare(
+                        origAttributes.SequenceEqual(e.Attributes()),
+                        "origAttributes.SequenceEqual(e.Attributes())"
+                    );
                 }
             }
         }

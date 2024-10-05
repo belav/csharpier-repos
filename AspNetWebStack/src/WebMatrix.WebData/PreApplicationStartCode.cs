@@ -27,8 +27,8 @@ namespace WebMatrix.WebData
 
         public static void Start()
         {
-            // Even though ASP.NET will only call each PreAppStart once, we sometimes internally call one PreAppStart from 
-            // another PreAppStart to ensure that things get initialized in the right order. ASP.NET does not guarantee the 
+            // Even though ASP.NET will only call each PreAppStart once, we sometimes internally call one PreAppStart from
+            // another PreAppStart to ensure that things get initialized in the right order. ASP.NET does not guarantee the
             // order so we have to guard against multiple calls.
             // All Start calls are made on same thread, so no lock needed here.
 
@@ -77,7 +77,9 @@ namespace WebMatrix.WebData
             {
                 NameValueCollection configurationData = new NameValueCollection();
 
-                string appSettingsLoginUrl = ConfigurationManager.AppSettings[FormsAuthenticationSettings.LoginUrlKey];
+                string appSettingsLoginUrl = ConfigurationManager.AppSettings[
+                    FormsAuthenticationSettings.LoginUrlKey
+                ];
                 if (appSettingsLoginUrl != null)
                 {
                     // Allow use of <add key="loginUrl" value="~/MyPath/LogOn" /> as a shortcut to specify

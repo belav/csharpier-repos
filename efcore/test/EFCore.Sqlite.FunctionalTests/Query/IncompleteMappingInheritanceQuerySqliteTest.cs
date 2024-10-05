@@ -3,15 +3,14 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class IncompleteMappingInheritanceQuerySqliteTest : TPHInheritanceQueryTestBase<
-    IncompleteMappingInheritanceQuerySqliteFixture>
+public class IncompleteMappingInheritanceQuerySqliteTest
+    : TPHInheritanceQueryTestBase<IncompleteMappingInheritanceQuerySqliteFixture>
 {
     public IncompleteMappingInheritanceQuerySqliteTest(
         IncompleteMappingInheritanceQuerySqliteFixture fixture,
-        ITestOutputHelper testOutputHelper)
-        : base(fixture, testOutputHelper)
-    {
-    }
+        ITestOutputHelper testOutputHelper
+    )
+        : base(fixture, testOutputHelper) { }
 
     public override void Can_insert_update_delete()
     {

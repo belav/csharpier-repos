@@ -19,10 +19,27 @@ namespace System.Net
         public abstract IIdentity RemoteIdentity { get; }
         public abstract System.Security.Principal.TokenImpersonationLevel ImpersonationLevel { get; }
         public abstract void Dispose();
-        public abstract byte[]? GetOutgoingBlob(ReadOnlySpan<byte> incomingBlob, out NegotiateAuthenticationStatusCode statusCode);
-        public abstract NegotiateAuthenticationStatusCode Wrap(ReadOnlySpan<byte> input, IBufferWriter<byte> outputWriter, bool requestEncryption, out bool isEncrypted);
-        public abstract NegotiateAuthenticationStatusCode Unwrap(ReadOnlySpan<byte> input, IBufferWriter<byte> outputWriter, out bool wasEncrypted);
-        public abstract NegotiateAuthenticationStatusCode UnwrapInPlace(Span<byte> input, out int unwrappedOffset, out int unwrappedLength, out bool wasEncrypted);
+        public abstract byte[]? GetOutgoingBlob(
+            ReadOnlySpan<byte> incomingBlob,
+            out NegotiateAuthenticationStatusCode statusCode
+        );
+        public abstract NegotiateAuthenticationStatusCode Wrap(
+            ReadOnlySpan<byte> input,
+            IBufferWriter<byte> outputWriter,
+            bool requestEncryption,
+            out bool isEncrypted
+        );
+        public abstract NegotiateAuthenticationStatusCode Unwrap(
+            ReadOnlySpan<byte> input,
+            IBufferWriter<byte> outputWriter,
+            out bool wasEncrypted
+        );
+        public abstract NegotiateAuthenticationStatusCode UnwrapInPlace(
+            Span<byte> input,
+            out int unwrappedOffset,
+            out int unwrappedLength,
+            out bool wasEncrypted
+        );
         public abstract void GetMIC(ReadOnlySpan<byte> message, IBufferWriter<byte> signature);
         public abstract bool VerifyMIC(ReadOnlySpan<byte> message, ReadOnlySpan<byte> signature);
     }

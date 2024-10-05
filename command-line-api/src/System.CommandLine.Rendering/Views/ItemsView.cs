@@ -8,6 +8,7 @@ namespace System.CommandLine.Rendering.Views
     public abstract class ItemsView<TItem> : View
     {
         private IReadOnlyList<TItem> _items;
+
         //TODO: IEnumerable? INCC? IObservable?
         public virtual IReadOnlyList<TItem> Items
         {

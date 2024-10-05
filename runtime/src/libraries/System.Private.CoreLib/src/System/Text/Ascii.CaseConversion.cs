@@ -24,8 +24,11 @@ namespace System.Text
         /// <returns>An <see cref="OperationStatus"/> describing the result of the operation.</returns>
         /// <remarks>In-place conversion is prohibited, please use <see cref="ToUpperInPlace(Span{byte}, out int)"/> for that.</remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static OperationStatus ToUpper(ReadOnlySpan<byte> source, Span<byte> destination, out int bytesWritten)
-            => ChangeCase<byte, byte, ToUpperConversion>(source, destination, out bytesWritten);
+        public static OperationStatus ToUpper(
+            ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            out int bytesWritten
+        ) => ChangeCase<byte, byte, ToUpperConversion>(source, destination, out bytesWritten);
 
         /// <summary>
         /// Copies text from a source buffer to a destination buffer, converting
@@ -37,8 +40,16 @@ namespace System.Text
         /// <returns>An <see cref="OperationStatus"/> describing the result of the operation.</returns>
         /// <remarks>In-place conversion is prohibited, please use <see cref="ToUpperInPlace(Span{char}, out int)"/> for that.</remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static OperationStatus ToUpper(ReadOnlySpan<char> source, Span<char> destination, out int charsWritten)
-            => ChangeCase<ushort, ushort, ToUpperConversion>(MemoryMarshal.Cast<char, ushort>(source), MemoryMarshal.Cast<char, ushort>(destination), out charsWritten);
+        public static OperationStatus ToUpper(
+            ReadOnlySpan<char> source,
+            Span<char> destination,
+            out int charsWritten
+        ) =>
+            ChangeCase<ushort, ushort, ToUpperConversion>(
+                MemoryMarshal.Cast<char, ushort>(source),
+                MemoryMarshal.Cast<char, ushort>(destination),
+                out charsWritten
+            );
 
         /// <summary>
         /// Copies text from a source buffer to a destination buffer, converting
@@ -49,8 +60,16 @@ namespace System.Text
         /// <param name="charsWritten">The number of characters actually written to <paramref name="destination"/>. It's the same as the number of bytes actually read from <paramref name="source"/>.</param>
         /// <returns>An <see cref="OperationStatus"/> describing the result of the operation.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static OperationStatus ToUpper(ReadOnlySpan<byte> source, Span<char> destination, out int charsWritten)
-            => ChangeCase<byte, ushort, ToUpperConversion>(source, MemoryMarshal.Cast<char, ushort>(destination), out charsWritten);
+        public static OperationStatus ToUpper(
+            ReadOnlySpan<byte> source,
+            Span<char> destination,
+            out int charsWritten
+        ) =>
+            ChangeCase<byte, ushort, ToUpperConversion>(
+                source,
+                MemoryMarshal.Cast<char, ushort>(destination),
+                out charsWritten
+            );
 
         /// <summary>
         /// Copies text from a source buffer to a destination buffer, converting
@@ -61,8 +80,16 @@ namespace System.Text
         /// <param name="bytesWritten">The number of bytes actually written to <paramref name="destination"/>. It's the same as the number of characters actually read from <paramref name="source"/>.</param>
         /// <returns>An <see cref="OperationStatus"/> describing the result of the operation.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static OperationStatus ToUpper(ReadOnlySpan<char> source, Span<byte> destination, out int bytesWritten)
-            => ChangeCase<ushort, byte, ToUpperConversion>(MemoryMarshal.Cast<char, ushort>(source), destination, out bytesWritten);
+        public static OperationStatus ToUpper(
+            ReadOnlySpan<char> source,
+            Span<byte> destination,
+            out int bytesWritten
+        ) =>
+            ChangeCase<ushort, byte, ToUpperConversion>(
+                MemoryMarshal.Cast<char, ushort>(source),
+                destination,
+                out bytesWritten
+            );
 
         /// <summary>
         /// Copies text from a source buffer to a destination buffer, converting
@@ -74,8 +101,11 @@ namespace System.Text
         /// <returns>An <see cref="OperationStatus"/> describing the result of the operation.</returns>
         /// <remarks>In-place conversion is prohibited, please use <see cref="ToLowerInPlace(Span{byte}, out int)"/> for that.</remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static OperationStatus ToLower(ReadOnlySpan<byte> source, Span<byte> destination, out int bytesWritten)
-            => ChangeCase<byte, byte, ToLowerConversion>(source, destination, out bytesWritten);
+        public static OperationStatus ToLower(
+            ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            out int bytesWritten
+        ) => ChangeCase<byte, byte, ToLowerConversion>(source, destination, out bytesWritten);
 
         /// <summary>
         /// Copies text from a source buffer to a destination buffer, converting
@@ -87,8 +117,16 @@ namespace System.Text
         /// <returns>An <see cref="OperationStatus"/> describing the result of the operation.</returns>
         /// <remarks>In-place conversion is prohibited, please use <see cref="ToLowerInPlace(Span{char}, out int)"/> for that.</remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static OperationStatus ToLower(ReadOnlySpan<char> source, Span<char> destination, out int charsWritten)
-            => ChangeCase<ushort, ushort, ToLowerConversion>(MemoryMarshal.Cast<char, ushort>(source), MemoryMarshal.Cast<char, ushort>(destination), out charsWritten);
+        public static OperationStatus ToLower(
+            ReadOnlySpan<char> source,
+            Span<char> destination,
+            out int charsWritten
+        ) =>
+            ChangeCase<ushort, ushort, ToLowerConversion>(
+                MemoryMarshal.Cast<char, ushort>(source),
+                MemoryMarshal.Cast<char, ushort>(destination),
+                out charsWritten
+            );
 
         /// <summary>
         /// Copies text from a source buffer to a destination buffer, converting
@@ -99,8 +137,16 @@ namespace System.Text
         /// <param name="charsWritten">The number of characters actually written to <paramref name="destination"/>. It's the same as the number of bytes actually read from <paramref name="source"/>.</param>
         /// <returns>An <see cref="OperationStatus"/> describing the result of the operation.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static OperationStatus ToLower(ReadOnlySpan<byte> source, Span<char> destination, out int charsWritten)
-            => ChangeCase<byte, ushort, ToLowerConversion>(source, MemoryMarshal.Cast<char, ushort>(destination), out charsWritten);
+        public static OperationStatus ToLower(
+            ReadOnlySpan<byte> source,
+            Span<char> destination,
+            out int charsWritten
+        ) =>
+            ChangeCase<byte, ushort, ToLowerConversion>(
+                source,
+                MemoryMarshal.Cast<char, ushort>(destination),
+                out charsWritten
+            );
 
         /// <summary>
         /// Copies text from a source buffer to a destination buffer, converting
@@ -111,8 +157,16 @@ namespace System.Text
         /// <param name="bytesWritten">The number of bytes actually written to <paramref name="destination"/>. It's the same as the number of characters actually read from <paramref name="source"/>.</param>
         /// <returns>An <see cref="OperationStatus"/> describing the result of the operation.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static OperationStatus ToLower(ReadOnlySpan<char> source, Span<byte> destination, out int bytesWritten)
-            => ChangeCase<ushort, byte, ToLowerConversion>(MemoryMarshal.Cast<char, ushort>(source), destination, out bytesWritten);
+        public static OperationStatus ToLower(
+            ReadOnlySpan<char> source,
+            Span<byte> destination,
+            out int bytesWritten
+        ) =>
+            ChangeCase<ushort, byte, ToLowerConversion>(
+                MemoryMarshal.Cast<char, ushort>(source),
+                destination,
+                out bytesWritten
+            );
 
         /// <summary>
         /// Performs in-place uppercase conversion.
@@ -121,8 +175,8 @@ namespace System.Text
         /// <param name="bytesWritten">The number of processed bytes.</param>
         /// <returns>An <see cref="OperationStatus"/> describing the result of the operation.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static OperationStatus ToLowerInPlace(Span<byte> value, out int bytesWritten)
-            => ChangeCase<byte, ToLowerConversion>(value, out bytesWritten);
+        public static OperationStatus ToLowerInPlace(Span<byte> value, out int bytesWritten) =>
+            ChangeCase<byte, ToLowerConversion>(value, out bytesWritten);
 
         /// <summary>
         /// Performs in-place uppercase conversion.
@@ -131,8 +185,11 @@ namespace System.Text
         /// <param name="charsWritten">The number of processed characters.</param>
         /// <returns>An <see cref="OperationStatus"/> describing the result of the operation.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static OperationStatus ToLowerInPlace(Span<char> value, out int charsWritten)
-            => ChangeCase<ushort, ToLowerConversion>(MemoryMarshal.Cast<char, ushort>(value), out charsWritten);
+        public static OperationStatus ToLowerInPlace(Span<char> value, out int charsWritten) =>
+            ChangeCase<ushort, ToLowerConversion>(
+                MemoryMarshal.Cast<char, ushort>(value),
+                out charsWritten
+            );
 
         /// <summary>
         /// Performs in-place lowercase conversion.
@@ -141,8 +198,8 @@ namespace System.Text
         /// <param name="bytesWritten">The number of processed bytes.</param>
         /// <returns>An <see cref="OperationStatus"/> describing the result of the operation.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static OperationStatus ToUpperInPlace(Span<byte> value, out int bytesWritten)
-            => ChangeCase<byte, ToUpperConversion>(value, out bytesWritten);
+        public static OperationStatus ToUpperInPlace(Span<byte> value, out int bytesWritten) =>
+            ChangeCase<byte, ToUpperConversion>(value, out bytesWritten);
 
         /// <summary>
         /// Performs in-place lowercase conversion.
@@ -151,17 +208,26 @@ namespace System.Text
         /// <param name="charsWritten">The number of processed characters.</param>
         /// <returns>An <see cref="OperationStatus"/> describing the result of the operation.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static OperationStatus ToUpperInPlace(Span<char> value, out int charsWritten)
-            => ChangeCase<ushort, ToUpperConversion>(MemoryMarshal.Cast<char, ushort>(value), out charsWritten);
+        public static OperationStatus ToUpperInPlace(Span<char> value, out int charsWritten) =>
+            ChangeCase<ushort, ToUpperConversion>(
+                MemoryMarshal.Cast<char, ushort>(value),
+                out charsWritten
+            );
 
-        private static unsafe OperationStatus ChangeCase<TFrom, TTo, TCasing>(ReadOnlySpan<TFrom> source, Span<TTo> destination, out int destinationElementsWritten)
+        private static unsafe OperationStatus ChangeCase<TFrom, TTo, TCasing>(
+            ReadOnlySpan<TFrom> source,
+            Span<TTo> destination,
+            out int destinationElementsWritten
+        )
             where TFrom : unmanaged, IBinaryInteger<TFrom>
             where TTo : unmanaged, IBinaryInteger<TTo>
             where TCasing : struct
         {
             if (MemoryMarshal.AsBytes(source).Overlaps(MemoryMarshal.AsBytes(destination)))
             {
-                ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_SpanOverlappedOperation);
+                ThrowHelper.ThrowInvalidOperationException(
+                    ExceptionResource.InvalidOperation_SpanOverlappedOperation
+                );
             }
 
             nuint numElementsToConvert;
@@ -181,36 +247,58 @@ namespace System.Text
             fixed (TFrom* pSource = &MemoryMarshal.GetReference(source))
             fixed (TTo* pDestination = &MemoryMarshal.GetReference(destination))
             {
-                nuint numElementsActuallyConverted = ChangeCase<TFrom, TTo, TCasing>(pSource, pDestination, numElementsToConvert);
+                nuint numElementsActuallyConverted = ChangeCase<TFrom, TTo, TCasing>(
+                    pSource,
+                    pDestination,
+                    numElementsToConvert
+                );
                 Debug.Assert(numElementsActuallyConverted <= numElementsToConvert);
 
                 destinationElementsWritten = (int)numElementsActuallyConverted;
-                return (numElementsToConvert == numElementsActuallyConverted) ? statusToReturnOnSuccess : OperationStatus.InvalidData;
+                return (numElementsToConvert == numElementsActuallyConverted)
+                    ? statusToReturnOnSuccess
+                    : OperationStatus.InvalidData;
             }
         }
 
-        private static unsafe OperationStatus ChangeCase<T, TCasing>(Span<T> buffer, out int elementsWritten)
+        private static unsafe OperationStatus ChangeCase<T, TCasing>(
+            Span<T> buffer,
+            out int elementsWritten
+        )
             where T : unmanaged, IBinaryInteger<T>
             where TCasing : struct
         {
             fixed (T* pBuffer = &MemoryMarshal.GetReference(buffer))
             {
-                nuint numElementsActuallyConverted = ChangeCase<T, T, TCasing>(pBuffer, pBuffer, (nuint)buffer.Length);
+                nuint numElementsActuallyConverted = ChangeCase<T, T, TCasing>(
+                    pBuffer,
+                    pBuffer,
+                    (nuint)buffer.Length
+                );
                 Debug.Assert(numElementsActuallyConverted <= (nuint)buffer.Length);
 
                 elementsWritten = (int)numElementsActuallyConverted;
-                return elementsWritten == buffer.Length ? OperationStatus.Done : OperationStatus.InvalidData;
+                return elementsWritten == buffer.Length
+                    ? OperationStatus.Done
+                    : OperationStatus.InvalidData;
             }
         }
 
-        private static unsafe nuint ChangeCase<TFrom, TTo, TCasing>(TFrom* pSrc, TTo* pDest, nuint elementCount)
+        private static unsafe nuint ChangeCase<TFrom, TTo, TCasing>(
+            TFrom* pSrc,
+            TTo* pDest,
+            nuint elementCount
+        )
             where TFrom : unmanaged, IBinaryInteger<TFrom>
             where TTo : unmanaged, IBinaryInteger<TTo>
             where TCasing : struct
         {
             Debug.Assert(typeof(TFrom) == typeof(byte) || typeof(TFrom) == typeof(ushort));
             Debug.Assert(typeof(TTo) == typeof(byte) || typeof(TTo) == typeof(ushort));
-            Debug.Assert(typeof(TCasing) == typeof(ToUpperConversion) || typeof(TCasing) == typeof(ToLowerConversion));
+            Debug.Assert(
+                typeof(TCasing) == typeof(ToUpperConversion)
+                    || typeof(TCasing) == typeof(ToLowerConversion)
+            );
 
             bool sourceIsAscii = (sizeof(TFrom) == 1); // JIT turns this into a const
             bool destIsAscii = (sizeof(TTo) == 1); // JIT turns this into a const
@@ -218,7 +306,9 @@ namespace System.Text
             bool conversionIsNarrowing = !sourceIsAscii && destIsAscii; // JIT turns this into a const
             bool conversionIsWidthPreserving = typeof(TFrom) == typeof(TTo); // JIT turns this into a const
             bool conversionIsToUpper = (typeof(TCasing) == typeof(ToUpperConversion)); // JIT turns this into a const
-            uint numInputElementsToConsumeEachVectorizedLoopIteration = (uint)(sizeof(Vector128<byte>) / sizeof(TFrom)); // JIT turns this into a const
+            uint numInputElementsToConsumeEachVectorizedLoopIteration = (uint)(
+                sizeof(Vector128<byte>) / sizeof(TFrom)
+            ); // JIT turns this into a const
 
             nuint i = 0;
 
@@ -233,7 +323,10 @@ namespace System.Text
 
             // Process the input as a series of 128-bit blocks.
 
-            if (Vector128.IsHardwareAccelerated && elementCount >= numInputElementsToConsumeEachVectorizedLoopIteration)
+            if (
+                Vector128.IsHardwareAccelerated
+                && elementCount >= numInputElementsToConsumeEachVectorizedLoopIteration
+            )
             {
                 // Unaligned read and check for non-ASCII data.
 
@@ -248,11 +341,25 @@ namespace System.Text
                 // (value - CONST) <= (Z - A), but using signed instead of unsigned arithmetic.
 
                 TFrom SourceSignedMinValue = TFrom.CreateTruncating(1 << (8 * sizeof(TFrom) - 1));
-                Vector128<TFrom> subtractionVector = Vector128.Create(conversionIsToUpper ? (SourceSignedMinValue + TFrom.CreateTruncating('a')) : (SourceSignedMinValue + TFrom.CreateTruncating('A')));
-                Vector128<TFrom> comparisionVector = Vector128.Create(SourceSignedMinValue + TFrom.CreateTruncating(26 /* A..Z or a..z */));
-                Vector128<TFrom> caseConversionVector = Vector128.Create(TFrom.CreateTruncating(0x20)); // works both directions
+                Vector128<TFrom> subtractionVector = Vector128.Create(
+                    conversionIsToUpper
+                        ? (SourceSignedMinValue + TFrom.CreateTruncating('a'))
+                        : (SourceSignedMinValue + TFrom.CreateTruncating('A'))
+                );
+                Vector128<TFrom> comparisionVector = Vector128.Create(
+                    SourceSignedMinValue
+                        + TFrom.CreateTruncating(
+                            26 /* A..Z or a..z */
+                        )
+                );
+                Vector128<TFrom> caseConversionVector = Vector128.Create(
+                    TFrom.CreateTruncating(0x20)
+                ); // works both directions
 
-                Vector128<TFrom> matches = SignedLessThan((srcVector - subtractionVector), comparisionVector);
+                Vector128<TFrom> matches = SignedLessThan(
+                    (srcVector - subtractionVector),
+                    comparisionVector
+                );
                 srcVector ^= (matches & caseConversionVector);
 
                 // Now write to the destination.
@@ -263,9 +370,15 @@ namespace System.Text
                 // many elements we should skip in order to have future writes be
                 // aligned.
 
-                uint expectedWriteAlignment = numInputElementsToConsumeEachVectorizedLoopIteration * (uint)sizeof(TTo); // JIT turns this into a const
-                i = numInputElementsToConsumeEachVectorizedLoopIteration - ((uint)pDest % expectedWriteAlignment) / (uint)sizeof(TTo);
-                Debug.Assert((nuint)(&pDest[i]) % expectedWriteAlignment == 0, "Destination buffer wasn't properly aligned!");
+                uint expectedWriteAlignment =
+                    numInputElementsToConsumeEachVectorizedLoopIteration * (uint)sizeof(TTo); // JIT turns this into a const
+                i =
+                    numInputElementsToConsumeEachVectorizedLoopIteration
+                    - ((uint)pDest % expectedWriteAlignment) / (uint)sizeof(TTo);
+                Debug.Assert(
+                    (nuint)(&pDest[i]) % expectedWriteAlignment == 0,
+                    "Destination buffer wasn't properly aligned!"
+                );
 
                 // Future iterations of this loop will be aligned,
                 // except for the last iteration.
@@ -309,7 +422,7 @@ namespace System.Text
                 }
             }
 
-        Drain64:
+            Drain64:
 
             // Attempt to process blocks of 64 input bits.
 
@@ -322,9 +435,12 @@ namespace System.Text
                     {
                         goto Drain32;
                     }
-                    nextBlockAsUInt64 = (conversionIsToUpper)
-                        ? Utf8Utility.ConvertAllAsciiBytesInUInt64ToUppercase(nextBlockAsUInt64)
-                        : Utf8Utility.ConvertAllAsciiBytesInUInt64ToLowercase(nextBlockAsUInt64);
+                    nextBlockAsUInt64 =
+                        (conversionIsToUpper)
+                            ? Utf8Utility.ConvertAllAsciiBytesInUInt64ToUppercase(nextBlockAsUInt64)
+                            : Utf8Utility.ConvertAllAsciiBytesInUInt64ToLowercase(
+                                nextBlockAsUInt64
+                            );
                 }
                 else
                 {
@@ -332,9 +448,14 @@ namespace System.Text
                     {
                         goto Drain32;
                     }
-                    nextBlockAsUInt64 = (conversionIsToUpper)
-                        ? Utf16Utility.ConvertAllAsciiCharsInUInt64ToUppercase(nextBlockAsUInt64)
-                        : Utf16Utility.ConvertAllAsciiCharsInUInt64ToLowercase(nextBlockAsUInt64);
+                    nextBlockAsUInt64 =
+                        (conversionIsToUpper)
+                            ? Utf16Utility.ConvertAllAsciiCharsInUInt64ToUppercase(
+                                nextBlockAsUInt64
+                            )
+                            : Utf16Utility.ConvertAllAsciiCharsInUInt64ToLowercase(
+                                nextBlockAsUInt64
+                            );
                 }
 
                 if (conversionIsWidthPreserving)
@@ -345,15 +466,23 @@ namespace System.Text
                 {
                     Debug.Assert(Vector128.IsHardwareAccelerated);
 
-                    Vector128<ulong> blockAsVectorOfUInt64 = Vector128.CreateScalarUnsafe(nextBlockAsUInt64);
+                    Vector128<ulong> blockAsVectorOfUInt64 = Vector128.CreateScalarUnsafe(
+                        nextBlockAsUInt64
+                    );
                     if (conversionIsWidening)
                     {
-                        Vector128.StoreUnsafe(Vector128.WidenLower(blockAsVectorOfUInt64.AsByte()), ref *(ushort*)pDest, i);
+                        Vector128.StoreUnsafe(
+                            Vector128.WidenLower(blockAsVectorOfUInt64.AsByte()),
+                            ref *(ushort*)pDest,
+                            i
+                        );
                     }
                     else
                     {
                         Vector128<ushort> blockAsVectorOfUInt16 = blockAsVectorOfUInt64.AsUInt16();
-                        Vector128<uint> narrowedBlock = Vector128.Narrow(blockAsVectorOfUInt16, blockAsVectorOfUInt16).AsUInt32();
+                        Vector128<uint> narrowedBlock = Vector128
+                            .Narrow(blockAsVectorOfUInt16, blockAsVectorOfUInt16)
+                            .AsUInt32();
                         Unsafe.WriteUnaligned(&pDest[i], narrowedBlock.ToScalar());
                     }
                 }
@@ -368,7 +497,7 @@ namespace System.Text
                 }
             }
 
-        Drain32:
+            Drain32:
 
             // Attempt to process blocks of 32 input bits.
 
@@ -381,9 +510,12 @@ namespace System.Text
                     {
                         goto DrainRemaining;
                     }
-                    nextBlockAsUInt32 = (conversionIsToUpper)
-                        ? Utf8Utility.ConvertAllAsciiBytesInUInt32ToUppercase(nextBlockAsUInt32)
-                        : Utf8Utility.ConvertAllAsciiBytesInUInt32ToLowercase(nextBlockAsUInt32);
+                    nextBlockAsUInt32 =
+                        (conversionIsToUpper)
+                            ? Utf8Utility.ConvertAllAsciiBytesInUInt32ToUppercase(nextBlockAsUInt32)
+                            : Utf8Utility.ConvertAllAsciiBytesInUInt32ToLowercase(
+                                nextBlockAsUInt32
+                            );
                 }
                 else
                 {
@@ -391,9 +523,14 @@ namespace System.Text
                     {
                         goto DrainRemaining;
                     }
-                    nextBlockAsUInt32 = (conversionIsToUpper)
-                        ? Utf16Utility.ConvertAllAsciiCharsInUInt32ToUppercase(nextBlockAsUInt32)
-                        : Utf16Utility.ConvertAllAsciiCharsInUInt32ToLowercase(nextBlockAsUInt32);
+                    nextBlockAsUInt32 =
+                        (conversionIsToUpper)
+                            ? Utf16Utility.ConvertAllAsciiCharsInUInt32ToUppercase(
+                                nextBlockAsUInt32
+                            )
+                            : Utf16Utility.ConvertAllAsciiCharsInUInt32ToLowercase(
+                                nextBlockAsUInt32
+                            );
                 }
 
                 if (conversionIsWidthPreserving)
@@ -404,16 +541,22 @@ namespace System.Text
                 {
                     Debug.Assert(Vector128.IsHardwareAccelerated);
 
-                    Vector128<uint> blockAsVectorOfUInt32 = Vector128.CreateScalarUnsafe(nextBlockAsUInt32);
+                    Vector128<uint> blockAsVectorOfUInt32 = Vector128.CreateScalarUnsafe(
+                        nextBlockAsUInt32
+                    );
                     if (conversionIsWidening)
                     {
-                        Vector128<ulong> widenedBlock = Vector128.WidenLower(blockAsVectorOfUInt32.AsByte()).AsUInt64();
+                        Vector128<ulong> widenedBlock = Vector128
+                            .WidenLower(blockAsVectorOfUInt32.AsByte())
+                            .AsUInt64();
                         Unsafe.WriteUnaligned(&pDest[i], widenedBlock.ToScalar());
                     }
                     else
                     {
                         Vector128<ushort> blockAsVectorOfUInt16 = blockAsVectorOfUInt32.AsUInt16();
-                        Vector128<ushort> narrowedBlock = Vector128.Narrow(blockAsVectorOfUInt16, blockAsVectorOfUInt16).AsUInt16();
+                        Vector128<ushort> narrowedBlock = Vector128
+                            .Narrow(blockAsVectorOfUInt16, blockAsVectorOfUInt16)
+                            .AsUInt16();
                         Unsafe.WriteUnaligned(&pDest[i], narrowedBlock.ToScalar());
                     }
                 }
@@ -429,7 +572,7 @@ namespace System.Text
                 }
             }
 
-        DrainRemaining:
+            DrainRemaining:
 
             // Process single elements at a time.
 
@@ -458,13 +601,17 @@ namespace System.Text
                 pDest[i] = TTo.CreateTruncating(element);
             }
 
-        Return:
+            Return:
 
             return i;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe void ChangeWidthAndWriteTo<TFrom, TTo>(Vector128<TFrom> vector, TTo* pDest, nuint elementOffset)
+        private static unsafe void ChangeWidthAndWriteTo<TFrom, TTo>(
+            Vector128<TFrom> vector,
+            TTo* pDest,
+            nuint elementOffset
+        )
             where TFrom : unmanaged
             where TTo : unmanaged
         {
@@ -478,13 +625,23 @@ namespace System.Text
                 // widening operation required
                 if (Vector256.IsHardwareAccelerated)
                 {
-                    Vector256<ushort> wide = Vector256.WidenLower(vector.AsByte().ToVector256Unsafe());
+                    Vector256<ushort> wide = Vector256.WidenLower(
+                        vector.AsByte().ToVector256Unsafe()
+                    );
                     Vector256.StoreUnsafe(wide, ref *(ushort*)pDest, elementOffset);
                 }
                 else
                 {
-                    Vector128.StoreUnsafe(Vector128.WidenLower(vector.AsByte()), ref *(ushort*)pDest, elementOffset);
-                    Vector128.StoreUnsafe(Vector128.WidenUpper(vector.AsByte()), ref *(ushort*)pDest, elementOffset + 8);
+                    Vector128.StoreUnsafe(
+                        Vector128.WidenLower(vector.AsByte()),
+                        ref *(ushort*)pDest,
+                        elementOffset
+                    );
+                    Vector128.StoreUnsafe(
+                        Vector128.WidenUpper(vector.AsByte()),
+                        ref *(ushort*)pDest,
+                        elementOffset + 8
+                    );
                 }
             }
             else if (sizeof(TFrom) == 2 && sizeof(TTo) == 1)
@@ -519,6 +676,7 @@ namespace System.Text
         }
 
         private struct ToUpperConversion { }
+
         private struct ToLowerConversion { }
     }
 }

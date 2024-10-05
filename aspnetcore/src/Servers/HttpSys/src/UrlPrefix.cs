@@ -11,7 +11,14 @@ namespace Microsoft.AspNetCore.Server.HttpSys;
 /// </summary>
 public class UrlPrefix
 {
-    private UrlPrefix(bool isHttps, string scheme, string host, string port, int portValue, string path)
+    private UrlPrefix(
+        bool isHttps,
+        string scheme,
+        string host,
+        string port,
+        int portValue,
+        string path
+    )
     {
         IsHttps = isHttps;
         Scheme = scheme;
@@ -21,7 +28,14 @@ public class UrlPrefix
         PortValue = portValue;
         Path = path;
         PathWithoutTrailingSlash = Path.Length > 1 ? Path[0..^1] : string.Empty;
-        FullPrefix = string.Format(CultureInfo.InvariantCulture, "{0}://{1}:{2}{3}", Scheme, Host, Port, Path);
+        FullPrefix = string.Format(
+            CultureInfo.InvariantCulture,
+            "{0}://{1}:{2}{3}",
+            Scheme,
+            Host,
+            Port,
+            Path
+        );
     }
 
     /// <summary>
@@ -64,7 +78,11 @@ public class UrlPrefix
         }
         else
         {
-            throw new ArgumentOutOfRangeException(nameof(scheme), scheme, Resources.Exception_UnsupportedScheme);
+            throw new ArgumentOutOfRangeException(
+                nameof(scheme),
+                scheme,
+                Resources.Exception_UnsupportedScheme
+            );
         }
 
         ArgumentException.ThrowIfNullOrEmpty(host);
@@ -117,7 +135,12 @@ public class UrlPrefix
         {
             pathDelimiterStart = whole.Length;
         }
-        var hostDelimiterEnd = whole.LastIndexOf(":", pathDelimiterStart - 1, pathDelimiterStart - hostDelimiterStart, StringComparison.Ordinal);
+        var hostDelimiterEnd = whole.LastIndexOf(
+            ":",
+            pathDelimiterStart - 1,
+            pathDelimiterStart - hostDelimiterStart,
+            StringComparison.Ordinal
+        );
         if (hostDelimiterEnd < 0)
         {
             hostDelimiterEnd = pathDelimiterStart;
@@ -129,7 +152,14 @@ public class UrlPrefix
         if (!portString.IsEmpty)
         {
             var portValueString = portString.Slice(1); // Trim the leading ":"
-            if (int.TryParse(portValueString, NumberStyles.Integer, CultureInfo.InvariantCulture, out portValue))
+            if (
+                int.TryParse(
+                    portValueString,
+                    NumberStyles.Integer,
+                    CultureInfo.InvariantCulture,
+                    out portValue
+                )
+            )
             {
                 host = whole.Substring(hostDelimiterStart, hostDelimiterEnd - hostDelimiterStart);
                 port = portValue;
@@ -191,7 +221,11 @@ public class UrlPrefix
     /// <inheritdoc />
     public override bool Equals(object? obj)
     {
-        return string.Equals(FullPrefix, Convert.ToString(obj, CultureInfo.InvariantCulture), StringComparison.OrdinalIgnoreCase);
+        return string.Equals(
+            FullPrefix,
+            Convert.ToString(obj, CultureInfo.InvariantCulture),
+            StringComparison.OrdinalIgnoreCase
+        );
     }
 
     /// <inheritdoc />

@@ -11,7 +11,7 @@ namespace Microsoft.CodeAnalysis.Interactive
     {
         public readonly InteractiveHostPlatform? Platform;
 
-        public InteractiveEvaluatorResetOptions(InteractiveHostPlatform? platform)
-            => Platform = platform;
+        public InteractiveEvaluatorResetOptions(InteractiveHostPlatform? platform) =>
+            Platform = platform;
     }
 }

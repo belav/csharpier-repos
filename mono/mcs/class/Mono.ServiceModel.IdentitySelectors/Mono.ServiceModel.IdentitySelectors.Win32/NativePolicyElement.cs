@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,38 +34,40 @@ using System.Xml;
 
 namespace Mono.ServiceModel.IdentitySelectors.Win32
 {
-	// FIXME: it does not seem to marshal this object as expected ...
-	[StructLayout (LayoutKind.Sequential, CharSet = CharSet.Unicode)]
-	struct NativePolicyElement
-	{
-		// This field order must be fixed for win32 API interop:
-		string target;
-		string issuer;
-		string parameters;
-		string policy_link;
-		int policy_ver;
-		bool is_managed;
+    // FIXME: it does not seem to marshal this object as expected ...
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+    struct NativePolicyElement
+    {
+        // This field order must be fixed for win32 API interop:
+        string target;
+        string issuer;
+        string parameters;
+        string policy_link;
+        int policy_ver;
+        bool is_managed;
 
-		public NativePolicyElement (
-			XmlElement target, XmlElement issuer,
-			Collection<XmlElement> parameters,
-			Uri policyNoticeLink,
-			int policyNoticeVersion,
-			bool isManagedIssuer)
-		{
-			if (target == null)
-				throw new ArgumentException ("target");
-			if (parameters == null)
-				throw new ArgumentException ("parameters");
-			this.target = target.OuterXml;
-			this.issuer = issuer != null ? issuer.OuterXml : null;
-			this.parameters = null;
-			foreach (XmlElement el in parameters)
-				this.parameters += el.OuterXml;
-			this.policy_link = policyNoticeLink != null ? policyNoticeLink.ToString () : null;
-			policy_ver = policyNoticeVersion;
-			is_managed = isManagedIssuer;
-		}
-	}
+        public NativePolicyElement(
+            XmlElement target,
+            XmlElement issuer,
+            Collection<XmlElement> parameters,
+            Uri policyNoticeLink,
+            int policyNoticeVersion,
+            bool isManagedIssuer
+        )
+        {
+            if (target == null)
+                throw new ArgumentException("target");
+            if (parameters == null)
+                throw new ArgumentException("parameters");
+            this.target = target.OuterXml;
+            this.issuer = issuer != null ? issuer.OuterXml : null;
+            this.parameters = null;
+            foreach (XmlElement el in parameters)
+                this.parameters += el.OuterXml;
+            this.policy_link = policyNoticeLink != null ? policyNoticeLink.ToString() : null;
+            policy_ver = policyNoticeVersion;
+            is_managed = isManagedIssuer;
+        }
+    }
 }
 #pragma warning restore

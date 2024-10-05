@@ -26,155 +26,159 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Globalization;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace System.Net.Http.Headers
 {
-	public class WarningHeaderValue : ICloneable
-	{
-		public WarningHeaderValue (int code, string agent, string text)
-		{
-			if (!IsCodeValid (code))
-				throw new ArgumentOutOfRangeException ("code");
+    public class WarningHeaderValue : ICloneable
+    {
+        public WarningHeaderValue(int code, string agent, string text)
+        {
+            if (!IsCodeValid(code))
+                throw new ArgumentOutOfRangeException("code");
 
-			Parser.Uri.Check (agent);
-			Parser.Token.CheckQuotedString (text);
+            Parser.Uri.Check(agent);
+            Parser.Token.CheckQuotedString(text);
 
-			Code = code;
-			Agent = agent;
-			Text = text;
-		}
+            Code = code;
+            Agent = agent;
+            Text = text;
+        }
 
-		public WarningHeaderValue (int code, string agent, string text, DateTimeOffset date)
-			: this (code, agent, text)
-		{
-			Date = date;
-		}
+        public WarningHeaderValue(int code, string agent, string text, DateTimeOffset date)
+            : this(code, agent, text)
+        {
+            Date = date;
+        }
 
-		private WarningHeaderValue ()
-		{
-		}
+        private WarningHeaderValue() { }
 
-		public string Agent { get; private set; }
-		public int Code { get; private set; }
-		public DateTimeOffset? Date { get; private set; }
-		public string Text { get; private set; }
+        public string Agent { get; private set; }
+        public int Code { get; private set; }
+        public DateTimeOffset? Date { get; private set; }
+        public string Text { get; private set; }
 
-		static bool IsCodeValid (int code)
-		{
-			return code >= 0 && code < 1000;
-		}
+        static bool IsCodeValid(int code)
+        {
+            return code >= 0 && code < 1000;
+        }
 
-		object ICloneable.Clone ()
-		{
-			return MemberwiseClone ();
-		}
+        object ICloneable.Clone()
+        {
+            return MemberwiseClone();
+        }
 
-		public override bool Equals (object obj)
-		{
-			var source = obj as WarningHeaderValue;
-			if (source == null)
-				return false;
+        public override bool Equals(object obj)
+        {
+            var source = obj as WarningHeaderValue;
+            if (source == null)
+                return false;
 
-			return Code == source.Code &&
-				string.Equals (source.Agent, Agent, StringComparison.OrdinalIgnoreCase) &&
-				Text == source.Text &&
-				Date == source.Date;
-		}
+            return Code == source.Code
+                && string.Equals(source.Agent, Agent, StringComparison.OrdinalIgnoreCase)
+                && Text == source.Text
+                && Date == source.Date;
+        }
 
-		public override int GetHashCode ()
-		{
-			int hc = Code.GetHashCode ();
-			hc ^= Agent.ToLowerInvariant ().GetHashCode ();
-			hc ^= Text.GetHashCode ();
-			hc ^= Date.GetHashCode ();
+        public override int GetHashCode()
+        {
+            int hc = Code.GetHashCode();
+            hc ^= Agent.ToLowerInvariant().GetHashCode();
+            hc ^= Text.GetHashCode();
+            hc ^= Date.GetHashCode();
 
-			return hc;
-		}
+            return hc;
+        }
 
-		public static WarningHeaderValue Parse (string input)
-		{
-			WarningHeaderValue value;
-			if (TryParse (input, out value))
-				return value;
+        public static WarningHeaderValue Parse(string input)
+        {
+            WarningHeaderValue value;
+            if (TryParse(input, out value))
+                return value;
 
-			throw new FormatException (input);
-		}
+            throw new FormatException(input);
+        }
 
-		public static bool TryParse (string input, out WarningHeaderValue parsedValue)
-		{
-			var lexer = new Lexer (input);
-			Token token;
-			if (TryParseElement (lexer, out parsedValue, out token) && token == Token.Type.End)
-				return true;
+        public static bool TryParse(string input, out WarningHeaderValue parsedValue)
+        {
+            var lexer = new Lexer(input);
+            Token token;
+            if (TryParseElement(lexer, out parsedValue, out token) && token == Token.Type.End)
+                return true;
 
-			parsedValue = null;
-			return false;
-		}
+            parsedValue = null;
+            return false;
+        }
 
-		internal static bool TryParse (string input, int minimalCount, out List<WarningHeaderValue> result)
-		{
-			return CollectionParser.TryParse (input, minimalCount, TryParseElement, out result);
-		}
+        internal static bool TryParse(
+            string input,
+            int minimalCount,
+            out List<WarningHeaderValue> result
+        )
+        {
+            return CollectionParser.TryParse(input, minimalCount, TryParseElement, out result);
+        }
 
-		static bool TryParseElement (Lexer lexer, out WarningHeaderValue parsedValue, out Token t)	
-		{
-			parsedValue = null;
+        static bool TryParseElement(Lexer lexer, out WarningHeaderValue parsedValue, out Token t)
+        {
+            parsedValue = null;
 
-			t = lexer.Scan ();
+            t = lexer.Scan();
 
-			if (t != Token.Type.Token)
-				return false;
+            if (t != Token.Type.Token)
+                return false;
 
-			int code;
-			if (!lexer.TryGetNumericValue (t, out code) || !IsCodeValid (code))
-				return false;
+            int code;
+            if (!lexer.TryGetNumericValue(t, out code) || !IsCodeValid(code))
+                return false;
 
-			t = lexer.Scan ();
-			if (t != Token.Type.Token)
-				return false;
+            t = lexer.Scan();
+            if (t != Token.Type.Token)
+                return false;
 
-			var next = t;
-			if (lexer.PeekChar () == ':') {
-				lexer.EatChar ();
+            var next = t;
+            if (lexer.PeekChar() == ':')
+            {
+                lexer.EatChar();
 
-				next = lexer.Scan ();
-				if (next != Token.Type.Token)
-					return false;
-			}
+                next = lexer.Scan();
+                if (next != Token.Type.Token)
+                    return false;
+            }
 
-			var value = new WarningHeaderValue ();
-			value.Code = code;
-			value.Agent = lexer.GetStringValue (t, next);
+            var value = new WarningHeaderValue();
+            value.Code = code;
+            value.Agent = lexer.GetStringValue(t, next);
 
-			t = lexer.Scan ();
-			if (t != Token.Type.QuotedString)
-				return false;
+            t = lexer.Scan();
+            if (t != Token.Type.QuotedString)
+                return false;
 
-			value.Text = lexer.GetStringValue (t);
+            value.Text = lexer.GetStringValue(t);
 
-			t = lexer.Scan ();
-			if (t == Token.Type.QuotedString) {
-				DateTimeOffset date;
-				if (!lexer.TryGetDateValue (t, out date))
-					return false;
+            t = lexer.Scan();
+            if (t == Token.Type.QuotedString)
+            {
+                DateTimeOffset date;
+                if (!lexer.TryGetDateValue(t, out date))
+                    return false;
 
-				value.Date = date;
-				t = lexer.Scan ();
-			}
+                value.Date = date;
+                t = lexer.Scan();
+            }
 
-			parsedValue = value;
-			return true;
-		}
+            parsedValue = value;
+            return true;
+        }
 
-		public override string ToString ()
-		{
-			string s = Code.ToString ("000") + " " + Agent + " " + Text;
-			if (Date.HasValue)
-				s = s + " \"" + Date.Value.ToString ("r", CultureInfo.InvariantCulture) + "\"";
+        public override string ToString()
+        {
+            string s = Code.ToString("000") + " " + Agent + " " + Text;
+            if (Date.HasValue)
+                s = s + " \"" + Date.Value.ToString("r", CultureInfo.InvariantCulture) + "\"";
 
-			return s;
-		}
-	}
+            return s;
+        }
+    }
 }

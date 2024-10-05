@@ -3,7 +3,6 @@
 
 using System.Linq;
 using System.Net.Http.Headers;
-
 using Xunit;
 
 namespace System.Net.Http.Tests
@@ -13,14 +12,26 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Ctor_ValueNull_Throw()
         {
-            AssertExtensions.Throws<ArgumentNullException>("value", () => { new TransferCodingHeaderValue(null); });
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () =>
+                {
+                    new TransferCodingHeaderValue(null);
+                }
+            );
         }
 
         [Fact]
         public void Ctor_ValueEmpty_Throw()
         {
             // null and empty should be treated the same. So we also throw for empty strings.
-            AssertExtensions.Throws<ArgumentException>("value", () => { new TransferCodingHeaderValue(string.Empty); });
+            AssertExtensions.Throws<ArgumentException>(
+                "value",
+                () =>
+                {
+                    new TransferCodingHeaderValue(string.Empty);
+                }
+            );
         }
 
         [Fact]
@@ -47,7 +58,10 @@ namespace System.Net.Http.Tests
         {
             TransferCodingHeaderValue transferCoding = new TransferCodingHeaderValue("custom");
 
-            Assert.Throws<ArgumentNullException>(() => { transferCoding.Parameters.Add(null); });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                transferCoding.Parameters.Add(null);
+            });
         }
 
         [Fact]
@@ -59,9 +73,13 @@ namespace System.Net.Http.Tests
             transferCoding.Parameters.Add(new NameValueHeaderValue("paramName", "\"param value\""));
             Assert.Equal("custom; paramName=\"param value\"", transferCoding.ToString());
 
-            transferCoding.Parameters.Add(new NameValueHeaderValue("paramName2", "\"param value2\""));
-            Assert.Equal("custom; paramName=\"param value\"; paramName2=\"param value2\"",
-                transferCoding.ToString());
+            transferCoding.Parameters.Add(
+                new NameValueHeaderValue("paramName2", "\"param value2\"")
+            );
+            Assert.Equal(
+                "custom; paramName=\"param value\"; paramName2=\"param value2\"",
+                transferCoding.ToString()
+            );
         }
 
         [Fact]
@@ -109,16 +127,22 @@ namespace System.Net.Http.Tests
             Assert.True(transferCoding1.Equals(transferCoding2), "Different casing.");
             Assert.False(transferCoding1.Equals(transferCoding3), "No params vs. custom param.");
             Assert.True(transferCoding3.Equals(transferCoding4), "Params have different casing.");
-            Assert.False(transferCoding5.Equals(transferCoding6),
-                "Param value are quoted strings with different casing.");
-            Assert.True(transferCoding1.Equals(transferCoding7), "no vs. empty parameters collection.");
+            Assert.False(
+                transferCoding5.Equals(transferCoding6),
+                "Param value are quoted strings with different casing."
+            );
+            Assert.True(
+                transferCoding1.Equals(transferCoding7),
+                "no vs. empty parameters collection."
+            );
         }
 
         [Fact]
         public void Clone_Call_CloneFieldsMatchSourceFields()
         {
             TransferCodingHeaderValue source = new TransferCodingHeaderValue("custom");
-            TransferCodingHeaderValue clone = (TransferCodingHeaderValue)((ICloneable)source).Clone();
+            TransferCodingHeaderValue clone = (TransferCodingHeaderValue)
+                ((ICloneable)source).Clone();
             Assert.Equal(source.Value, clone.Value);
             Assert.Equal(0, clone.Parameters.Count);
 
@@ -135,18 +159,39 @@ namespace System.Net.Http.Tests
         {
             TransferCodingHeaderValue result = null;
 
-            Assert.Equal(7, TransferCodingHeaderValue.GetTransferCodingLength("chunked", 0,
-                DummyCreator, out result));
+            Assert.Equal(
+                7,
+                TransferCodingHeaderValue.GetTransferCodingLength(
+                    "chunked",
+                    0,
+                    DummyCreator,
+                    out result
+                )
+            );
             Assert.Equal("chunked", result.Value);
             Assert.Equal(0, result.Parameters.Count);
 
-            Assert.Equal(5, TransferCodingHeaderValue.GetTransferCodingLength("gzip , chunked", 0,
-                DummyCreator, out result));
+            Assert.Equal(
+                5,
+                TransferCodingHeaderValue.GetTransferCodingLength(
+                    "gzip , chunked",
+                    0,
+                    DummyCreator,
+                    out result
+                )
+            );
             Assert.Equal("gzip", result.Value);
             Assert.Equal(0, result.Parameters.Count);
 
-            Assert.Equal(18, TransferCodingHeaderValue.GetTransferCodingLength("custom; name=value", 0,
-                DummyCreator, out result));
+            Assert.Equal(
+                18,
+                TransferCodingHeaderValue.GetTransferCodingLength(
+                    "custom; name=value",
+                    0,
+                    DummyCreator,
+                    out result
+                )
+            );
             Assert.Equal("custom", result.Value);
             Assert.Equal(1, result.Parameters.Count);
             Assert.Equal("name", result.Parameters.ElementAt(0).Name);
@@ -155,8 +200,15 @@ namespace System.Net.Http.Tests
             // Note that TransferCodingHeaderValue recognizes the first transfer-coding as valid, even though it is
             // followed by an invalid character. The parser will call GetTransferCodingLength() starting at the invalid
             // character which will result in GetTransferCodingLength() returning 0 (see next test).
-            Assert.Equal(26, TransferCodingHeaderValue.GetTransferCodingLength(
-                " custom;name1=value1;name2 ,  \u4F1A", 1, DummyCreator, out result));
+            Assert.Equal(
+                26,
+                TransferCodingHeaderValue.GetTransferCodingLength(
+                    " custom;name1=value1;name2 ,  \u4F1A",
+                    1,
+                    DummyCreator,
+                    out result
+                )
+            );
             Assert.Equal("custom", result.Value);
             Assert.Equal(2, result.Parameters.Count);
             Assert.Equal("name1", result.Parameters.ElementAt(0).Name);
@@ -166,10 +218,25 @@ namespace System.Net.Http.Tests
 
             // There will be no exception for invalid characters. GetTransferCodingLength() will just return a length
             // of 0. The caller needs to validate if that's OK or not.
-            Assert.Equal(0, TransferCodingHeaderValue.GetTransferCodingLength("\u4F1A", 0, DummyCreator, out result));
+            Assert.Equal(
+                0,
+                TransferCodingHeaderValue.GetTransferCodingLength(
+                    "\u4F1A",
+                    0,
+                    DummyCreator,
+                    out result
+                )
+            );
 
-            Assert.Equal(43, TransferCodingHeaderValue.GetTransferCodingLength(
-                "  custom ; name1 = \"value1\" ; name2 = value2 , next", 2, DummyCreator, out result));
+            Assert.Equal(
+                43,
+                TransferCodingHeaderValue.GetTransferCodingLength(
+                    "  custom ; name1 = \"value1\" ; name2 = value2 , next",
+                    2,
+                    DummyCreator,
+                    out result
+                )
+            );
             Assert.Equal("custom", result.Value);
             Assert.Equal(2, result.Parameters.Count);
             Assert.Equal("name1", result.Parameters.ElementAt(0).Name);
@@ -177,8 +244,15 @@ namespace System.Net.Http.Tests
             Assert.Equal("name2", result.Parameters.ElementAt(1).Name);
             Assert.Equal("value2", result.Parameters.ElementAt(1).Value);
 
-            Assert.Equal(32, TransferCodingHeaderValue.GetTransferCodingLength(
-                " custom;name1=value1;name2=value2,next", 1, DummyCreator, out result));
+            Assert.Equal(
+                32,
+                TransferCodingHeaderValue.GetTransferCodingLength(
+                    " custom;name1=value1;name2=value2,next",
+                    1,
+                    DummyCreator,
+                    out result
+                )
+            );
             Assert.Equal("custom", result.Value);
             Assert.Equal(2, result.Parameters.Count);
             Assert.Equal("name1", result.Parameters.ElementAt(0).Name);
@@ -192,31 +266,90 @@ namespace System.Net.Http.Tests
         {
             TransferCodingHeaderValue result = null;
 
-            Assert.Equal(0, TransferCodingHeaderValue.GetTransferCodingLength(" custom", 0, DummyCreator,
-                out result));
+            Assert.Equal(
+                0,
+                TransferCodingHeaderValue.GetTransferCodingLength(
+                    " custom",
+                    0,
+                    DummyCreator,
+                    out result
+                )
+            );
             Assert.Null(result);
-            Assert.Equal(0, TransferCodingHeaderValue.GetTransferCodingLength("custom;", 0, DummyCreator,
-                out result));
+            Assert.Equal(
+                0,
+                TransferCodingHeaderValue.GetTransferCodingLength(
+                    "custom;",
+                    0,
+                    DummyCreator,
+                    out result
+                )
+            );
             Assert.Null(result);
-            Assert.Equal(0, TransferCodingHeaderValue.GetTransferCodingLength("custom;name=", 0, DummyCreator,
-                out result));
+            Assert.Equal(
+                0,
+                TransferCodingHeaderValue.GetTransferCodingLength(
+                    "custom;name=",
+                    0,
+                    DummyCreator,
+                    out result
+                )
+            );
             Assert.Null(result);
-            Assert.Equal(0, TransferCodingHeaderValue.GetTransferCodingLength("custom;name=value;", 0,
-                DummyCreator, out result));
+            Assert.Equal(
+                0,
+                TransferCodingHeaderValue.GetTransferCodingLength(
+                    "custom;name=value;",
+                    0,
+                    DummyCreator,
+                    out result
+                )
+            );
             Assert.Null(result);
-            Assert.Equal(0, TransferCodingHeaderValue.GetTransferCodingLength("custom;name=,value;", 0,
-                DummyCreator, out result));
+            Assert.Equal(
+                0,
+                TransferCodingHeaderValue.GetTransferCodingLength(
+                    "custom;name=,value;",
+                    0,
+                    DummyCreator,
+                    out result
+                )
+            );
             Assert.Null(result);
-            Assert.Equal(0, TransferCodingHeaderValue.GetTransferCodingLength("custom;", 0, DummyCreator,
-                out result));
+            Assert.Equal(
+                0,
+                TransferCodingHeaderValue.GetTransferCodingLength(
+                    "custom;",
+                    0,
+                    DummyCreator,
+                    out result
+                )
+            );
             Assert.Null(result);
-            Assert.Equal(0, TransferCodingHeaderValue.GetTransferCodingLength(null, 0, DummyCreator, out result));
+            Assert.Equal(
+                0,
+                TransferCodingHeaderValue.GetTransferCodingLength(null, 0, DummyCreator, out result)
+            );
             Assert.Null(result);
-            Assert.Equal(0, TransferCodingHeaderValue.GetTransferCodingLength(string.Empty, 0, DummyCreator,
-                out result));
+            Assert.Equal(
+                0,
+                TransferCodingHeaderValue.GetTransferCodingLength(
+                    string.Empty,
+                    0,
+                    DummyCreator,
+                    out result
+                )
+            );
             Assert.Null(result);
-            Assert.Equal(0, TransferCodingHeaderValue.GetTransferCodingLength("\r\nchunked", 0, DummyCreator,
-                out result));
+            Assert.Equal(
+                0,
+                TransferCodingHeaderValue.GetTransferCodingLength(
+                    "\r\nchunked",
+                    0,
+                    DummyCreator,
+                    out result
+                )
+            );
             Assert.Null(result);
         }
 
@@ -268,15 +401,23 @@ namespace System.Net.Http.Tests
 
         private void CheckInvalidParse(string input)
         {
-            Assert.Throws<FormatException>(() => { TransferCodingHeaderValue.Parse(input); });
+            Assert.Throws<FormatException>(() =>
+            {
+                TransferCodingHeaderValue.Parse(input);
+            });
 
-            Assert.False(TransferCodingHeaderValue.TryParse(input, out TransferCodingHeaderValue result));
+            Assert.False(
+                TransferCodingHeaderValue.TryParse(input, out TransferCodingHeaderValue result)
+            );
             Assert.Null(result);
         }
 
         private static void AssertFormatException(string transferCoding)
         {
-            Assert.Throws<FormatException>(() => { new TransferCodingHeaderValue(transferCoding); });
+            Assert.Throws<FormatException>(() =>
+            {
+                new TransferCodingHeaderValue(transferCoding);
+            });
         }
 
         private static TransferCodingHeaderValue DummyCreator()

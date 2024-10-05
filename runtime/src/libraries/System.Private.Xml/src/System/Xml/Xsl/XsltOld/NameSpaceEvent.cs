@@ -40,7 +40,13 @@ namespace System.Xml.Xsl.XsltOld
         public override bool Output(Processor processor, ActionFrame frame)
         {
             bool res;
-            res = processor.BeginEvent(XPathNodeType.Namespace, /*prefix:*/null, _name, _namespaceUri, /*empty:*/false);
+            res = processor.BeginEvent(
+                XPathNodeType.Namespace, /*prefix:*/
+                null,
+                _name,
+                _namespaceUri, /*empty:*/
+                false
+            );
             Debug.Assert(res); // Namespace node as any other attribute can't fail because it doesn't signal record change
             res = processor.EndEvent(XPathNodeType.Namespace);
             Debug.Assert(res);

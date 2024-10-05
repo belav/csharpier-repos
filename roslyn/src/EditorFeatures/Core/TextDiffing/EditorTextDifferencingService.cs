@@ -22,20 +22,45 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextDiffing
     [ExportWorkspaceService(typeof(IDocumentTextDifferencingService), ServiceLayer.Host), Shared]
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    internal class EditorTextDifferencingService(ITextDifferencingSelectorService differenceSelectorService) : IDocumentTextDifferencingService
+    internal class EditorTextDifferencingService(
+        ITextDifferencingSelectorService differenceSelectorService
+    ) : IDocumentTextDifferencingService
     {
-        private readonly ITextDifferencingSelectorService _differenceSelectorService = differenceSelectorService;
+        private readonly ITextDifferencingSelectorService _differenceSelectorService =
+            differenceSelectorService;
 
-        public Task<ImmutableArray<TextChange>> GetTextChangesAsync(Document oldDocument, Document newDocument, CancellationToken cancellationToken)
-            => GetTextChangesAsync(oldDocument, newDocument, TextDifferenceTypes.Word, cancellationToken);
+        public Task<ImmutableArray<TextChange>> GetTextChangesAsync(
+            Document oldDocument,
+            Document newDocument,
+            CancellationToken cancellationToken
+        ) =>
+            GetTextChangesAsync(
+                oldDocument,
+                newDocument,
+                TextDifferenceTypes.Word,
+                cancellationToken
+            );
 
-        public async Task<ImmutableArray<TextChange>> GetTextChangesAsync(Document oldDocument, Document newDocument, TextDifferenceTypes preferredDifferenceType, CancellationToken cancellationToken)
+        public async Task<ImmutableArray<TextChange>> GetTextChangesAsync(
+            Document oldDocument,
+            Document newDocument,
+            TextDifferenceTypes preferredDifferenceType,
+            CancellationToken cancellationToken
+        )
         {
-            var oldText = await oldDocument.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
-            var newText = await newDocument.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
+            var oldText = await oldDocument
+                .GetValueTextAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var newText = await newDocument
+                .GetValueTextAsync(cancellationToken)
+                .ConfigureAwait(false);
 
-            var diffService = _differenceSelectorService.GetTextDifferencingService(oldDocument.Project.Services.GetService<IContentTypeLanguageService>().GetDefaultContentType())
-                ?? _differenceSelectorService.DefaultTextDifferencingService;
+            var diffService =
+                _differenceSelectorService.GetTextDifferencingService(
+                    oldDocument
+                        .Project.Services.GetService<IContentTypeLanguageService>()
+                        .GetDefaultContentType()
+                ) ?? _differenceSelectorService.DefaultTextDifferencingService;
 
             var differenceOptions = GetDifferenceOptions(preferredDifferenceType);
 
@@ -44,16 +69,32 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextDiffing
             var useSnapshots = oldTextSnapshot != null && newTextSnapshot != null;
 
             var diffResult = useSnapshots
-                ? diffService.DiffSnapshotSpans(oldTextSnapshot.GetFullSpan(), newTextSnapshot.GetFullSpan(), differenceOptions)
-                : diffService.DiffStrings(oldText.ToString(), newText.ToString(), differenceOptions);
+                ? diffService.DiffSnapshotSpans(
+                    oldTextSnapshot.GetFullSpan(),
+                    newTextSnapshot.GetFullSpan(),
+                    differenceOptions
+                )
+                : diffService.DiffStrings(
+                    oldText.ToString(),
+                    newText.ToString(),
+                    differenceOptions
+                );
 
-            return diffResult.Differences.Select(d =>
-                new TextChange(
+            return diffResult
+                .Differences.Select(d => new TextChange(
                     diffResult.LeftDecomposition.GetSpanInOriginal(d.Left).ToTextSpan(),
-                    newText.GetSubText(diffResult.RightDecomposition.GetSpanInOriginal(d.Right).ToTextSpan()).ToString())).ToImmutableArray();
+                    newText
+                        .GetSubText(
+                            diffResult.RightDecomposition.GetSpanInOriginal(d.Right).ToTextSpan()
+                        )
+                        .ToString()
+                ))
+                .ToImmutableArray();
         }
 
-        private static StringDifferenceOptions GetDifferenceOptions(TextDifferenceTypes differenceTypes)
+        private static StringDifferenceOptions GetDifferenceOptions(
+            TextDifferenceTypes differenceTypes
+        )
         {
             StringDifferenceTypes stringDifferenceTypes = default;
 
@@ -72,10 +113,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextDiffing
                 stringDifferenceTypes |= StringDifferenceTypes.Character;
             }
 
-            return new StringDifferenceOptions()
-            {
-                DifferenceType = stringDifferenceTypes
-            };
+            return new StringDifferenceOptions() { DifferenceType = stringDifferenceTypes };
         }
     }
 }

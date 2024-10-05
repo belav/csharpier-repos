@@ -24,15 +24,15 @@ namespace System.Web.Routing
 
             // Assert
             var expectedResults = new List<Tuple<string, string>>
-             {
-                 new Tuple<string, string>("getme", "GetMe"),
-                 new Tuple<string, string>("postme", "PostMe"),
-                 new Tuple<string, string>("getorpostme", "GetOrPostMe"),
-                 new Tuple<string, string>("routeme", "RouteMe"),
-                 new Tuple<string, string>("once", "FoolMe"),
-                 new Tuple<string, string>("twice", "FoolMe"),
-                 new Tuple<string, string>("twice", "FoolMe"),
-             };
+            {
+                new Tuple<string, string>("getme", "GetMe"),
+                new Tuple<string, string>("postme", "PostMe"),
+                new Tuple<string, string>("getorpostme", "GetOrPostMe"),
+                new Tuple<string, string>("routeme", "RouteMe"),
+                new Tuple<string, string>("once", "FoolMe"),
+                new Tuple<string, string>("twice", "FoolMe"),
+                new Tuple<string, string>("twice", "FoolMe"),
+            };
 
             foreach (var expected in expectedResults)
             {
@@ -41,7 +41,10 @@ namespace System.Web.Routing
 
                 var attributeRoutes = GetAttributeRoutes(routes);
                 Route route = attributeRoutes.Cast<Route>().Single(r => r.Url == url);
-                Assert.Equal(methodName, Assert.Single(route.GetTargetActionDescriptors()).ActionName);
+                Assert.Equal(
+                    methodName,
+                    Assert.Single(route.GetTargetActionDescriptors()).ActionName
+                );
             }
         }
 
@@ -53,7 +56,11 @@ namespace System.Web.Routing
             var routes = new RouteCollection();
 
             // Act
-            AttributeRoutingMapper.MapAttributeRoutes(routes, controllerTypes, new FruitConstraintResolver());
+            AttributeRoutingMapper.MapAttributeRoutes(
+                routes,
+                controllerTypes,
+                new FruitConstraintResolver()
+            );
 
             // Assert
             var attributeRoutes = GetAttributeRoutes(routes);
@@ -76,7 +83,9 @@ namespace System.Web.Routing
 
             // Assert
             var attributeRoutes = GetAttributeRoutes(routes);
-            Route route = attributeRoutes.Cast<Route>().Single(r => r.GetTargetActionDescriptors().Single().ActionName == "Parameterized");
+            Route route = attributeRoutes
+                .Cast<Route>()
+                .Single(r => r.GetTargetActionDescriptors().Single().ActionName == "Parameterized");
             Assert.NotNull(route);
 
             Assert.Equal("i/{have}/{id}/{defaultsto}/{name}", route.Url);
@@ -136,7 +145,10 @@ namespace System.Web.Routing
             Assert.Equal("PugetSound", route.DataTokens["area"]);
             Assert.Equal((object)false, route.DataTokens["usenamespacefallback"]);
             Assert.Equal("GetMe", Assert.Single(route.GetTargetActionDescriptors()).ActionName);
-            Assert.Equal(typeof(PugetSoundController).Namespace, ((string[])route.DataTokens["namespaces"])[0]);
+            Assert.Equal(
+                typeof(PugetSoundController).Namespace,
+                ((string[])route.DataTokens["namespaces"])[0]
+            );
         }
 
         [Fact]
@@ -159,7 +171,10 @@ namespace System.Web.Routing
             Assert.Equal("PugetSound", route.DataTokens["area"]);
             Assert.Equal((object)false, route.DataTokens["usenamespacefallback"]);
             Assert.Equal("GetMe", Assert.Single(route.GetTargetActionDescriptors()).ActionName);
-            Assert.Equal(typeof(PrefixedPugetSoundController).Namespace, ((string[])route.DataTokens["namespaces"])[0]);
+            Assert.Equal(
+                typeof(PrefixedPugetSoundController).Namespace,
+                ((string[])route.DataTokens["namespaces"])[0]
+            );
         }
 
         [Theory]
@@ -186,7 +201,12 @@ namespace System.Web.Routing
         [InlineData("puget-sound", "pref", "~/whatever", "whatever")]
         [InlineData("puget-sound", null, "~/whatever", "whatever")]
         [InlineData(null, "pref", "~/whatever", "whatever")]
-        public void BuildRouteTemplate(string areaPrefix, string prefix, string template, string expected)
+        public void BuildRouteTemplate(
+            string areaPrefix,
+            string prefix,
+            string template,
+            string expected
+        )
         {
             var result = DirectRouteFactoryContext.BuildRouteTemplate(areaPrefix, prefix, template);
 
@@ -194,12 +214,27 @@ namespace System.Web.Routing
         }
 
         [Theory]
-        [InlineData(typeof(Bad1Controller), "The route prefix '/pref' on the controller named 'Bad1' cannot begin or end with a forward slash.")]
-        [InlineData(typeof(Bad2Controller), "The route prefix 'pref/' on the controller named 'Bad2' cannot begin or end with a forward slash.")]
-        [InlineData(typeof(Bad3Controller), "The route template '/getme' on the action named 'GetMe' on the controller named 'Bad3' cannot begin with a forward slash.")]
+        [InlineData(
+            typeof(Bad1Controller),
+            "The route prefix '/pref' on the controller named 'Bad1' cannot begin or end with a forward slash."
+        )]
+        [InlineData(
+            typeof(Bad2Controller),
+            "The route prefix 'pref/' on the controller named 'Bad2' cannot begin or end with a forward slash."
+        )]
+        [InlineData(
+            typeof(Bad3Controller),
+            "The route template '/getme' on the action named 'GetMe' on the controller named 'Bad3' cannot begin with a forward slash."
+        )]
         [InlineData(typeof(Bad4Controller), null)]
-        [InlineData(typeof(Bad5Controller), "The route template '/puget-sound/getme' on the action named 'GetMe' on the controller named 'Bad5' cannot begin with a forward slash.")]
-        [InlineData(typeof(Bad6Controller), "The prefix 'puget-sound/' of the route area named 'PugetSound' on the controller named 'Bad6' cannot end with a forward slash.")]
+        [InlineData(
+            typeof(Bad5Controller),
+            "The route template '/puget-sound/getme' on the action named 'GetMe' on the controller named 'Bad5' cannot begin with a forward slash."
+        )]
+        [InlineData(
+            typeof(Bad6Controller),
+            "The prefix 'puget-sound/' of the route area named 'PugetSound' on the controller named 'Bad6' cannot end with a forward slash."
+        )]
         public void TemplatesAreValidated(Type controllerType, string expectedErrorMessage)
         {
             // Arrange
@@ -209,11 +244,16 @@ namespace System.Web.Routing
             // Act & Assert
             if (expectedErrorMessage == null)
             {
-                Assert.DoesNotThrow(() => AttributeRoutingMapper.MapAttributeRoutes(routes, controllerTypes));
+                Assert.DoesNotThrow(
+                    () => AttributeRoutingMapper.MapAttributeRoutes(routes, controllerTypes)
+                );
             }
             else
             {
-                Assert.Throws<InvalidOperationException>(() => AttributeRoutingMapper.MapAttributeRoutes(routes, controllerTypes), expectedErrorMessage);
+                Assert.Throws<InvalidOperationException>(
+                    () => AttributeRoutingMapper.MapAttributeRoutes(routes, controllerTypes),
+                    expectedErrorMessage
+                );
             }
         }
 
@@ -387,8 +427,13 @@ namespace System.Web.Routing
 
         class FruitConstraint : IRouteConstraint
         {
-            public bool Match(HttpContextBase httpContext, Route route, string parameterName, RouteValueDictionary values,
-                              RouteDirection routeDirection)
+            public bool Match(
+                HttpContextBase httpContext,
+                Route route,
+                string parameterName,
+                RouteValueDictionary values,
+                RouteDirection routeDirection
+            )
             {
                 throw new NotImplementedException();
             }

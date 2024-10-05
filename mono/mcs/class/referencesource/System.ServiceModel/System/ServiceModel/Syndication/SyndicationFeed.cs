@@ -7,17 +7,18 @@ namespace System.ServiceModel.Syndication
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Serialization;
     using System.Text;
     using System.Xml;
-    using System.Runtime.Serialization;
-    using System.Globalization;
     using System.Xml.Serialization;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Runtime.CompilerServices;
-
 
     // NOTE: This class implements Clone so if you add any members, please update the copy ctor
-    [TypeForwardedFrom("System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35")]
+    [TypeForwardedFrom(
+        "System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
     public class SyndicationFeed : IExtensibleSyndicationObject
     {
         Collection<SyndicationPerson> authors;
@@ -37,31 +38,39 @@ namespace System.ServiceModel.Syndication
         TextSyndicationContent title;
 
         public SyndicationFeed()
-            : this((IEnumerable<SyndicationItem>) null)
-        {
-        }
+            : this((IEnumerable<SyndicationItem>)null) { }
 
         public SyndicationFeed(IEnumerable<SyndicationItem> items)
-            : this(null, null, null, items)
-        {
-        }
+            : this(null, null, null, items) { }
 
         public SyndicationFeed(string title, string description, Uri feedAlternateLink)
-            : this(title, description, feedAlternateLink, null)
-        {
-        }
+            : this(title, description, feedAlternateLink, null) { }
 
-        public SyndicationFeed(string title, string description, Uri feedAlternateLink, IEnumerable<SyndicationItem> items)
-            : this(title, description, feedAlternateLink, null, DateTimeOffset.MinValue, items)
-        {
-        }
+        public SyndicationFeed(
+            string title,
+            string description,
+            Uri feedAlternateLink,
+            IEnumerable<SyndicationItem> items
+        )
+            : this(title, description, feedAlternateLink, null, DateTimeOffset.MinValue, items) { }
 
-        public SyndicationFeed(string title, string description, Uri feedAlternateLink, string id, DateTimeOffset lastUpdatedTime)
-            : this(title, description, feedAlternateLink, id, lastUpdatedTime, null)
-        {
-        }
+        public SyndicationFeed(
+            string title,
+            string description,
+            Uri feedAlternateLink,
+            string id,
+            DateTimeOffset lastUpdatedTime
+        )
+            : this(title, description, feedAlternateLink, id, lastUpdatedTime, null) { }
 
-        public SyndicationFeed(string title, string description, Uri feedAlternateLink, string id, DateTimeOffset lastUpdatedTime, IEnumerable<SyndicationItem> items)
+        public SyndicationFeed(
+            string title,
+            string description,
+            Uri feedAlternateLink,
+            string id,
+            DateTimeOffset lastUpdatedTime,
+            IEnumerable<SyndicationItem> items
+        )
         {
             if (title != null)
             {
@@ -114,7 +123,11 @@ namespace System.ServiceModel.Syndication
             {
                 if (cloneItems)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.UnbufferedItemsCannotBeCloned)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.UnbufferedItemsCannotBeCloned)
+                        )
+                    );
                 }
                 this.items = source.items;
             }
@@ -136,7 +149,6 @@ namespace System.ServiceModel.Syndication
                 return authors;
             }
         }
-
 
         public Uri BaseUri
         {
@@ -259,25 +271,31 @@ namespace System.ServiceModel.Syndication
         }
 
         public static TSyndicationFeed Load<TSyndicationFeed>(XmlReader reader)
-            where TSyndicationFeed : SyndicationFeed, new ()
+            where TSyndicationFeed : SyndicationFeed, new()
         {
             if (reader == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
             }
-            Atom10FeedFormatter<TSyndicationFeed> atomSerializer = new Atom10FeedFormatter<TSyndicationFeed>();
+            Atom10FeedFormatter<TSyndicationFeed> atomSerializer =
+                new Atom10FeedFormatter<TSyndicationFeed>();
             if (atomSerializer.CanRead(reader))
             {
                 atomSerializer.ReadFrom(reader);
                 return atomSerializer.Feed as TSyndicationFeed;
             }
-            Rss20FeedFormatter<TSyndicationFeed> rssSerializer = new Rss20FeedFormatter<TSyndicationFeed>();
+            Rss20FeedFormatter<TSyndicationFeed> rssSerializer =
+                new Rss20FeedFormatter<TSyndicationFeed>();
             if (rssSerializer.CanRead(reader))
             {
                 rssSerializer.ReadFrom(reader);
                 return rssSerializer.Feed as TSyndicationFeed;
             }
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(SR.GetString(SR.UnknownFeedXml, reader.LocalName, reader.NamespaceURI)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new XmlException(
+                    SR.GetString(SR.UnknownFeedXml, reader.LocalName, reader.NamespaceURI)
+                )
+            );
         }
 
         public virtual SyndicationFeed Clone(bool cloneItems)
@@ -330,7 +348,12 @@ namespace System.ServiceModel.Syndication
             return new SyndicationPerson();
         }
 
-        protected internal virtual bool TryParseAttribute(string name, string ns, string value, string version)
+        protected internal virtual bool TryParseAttribute(
+            string name,
+            string ns,
+            string value,
+            string version
+        )
         {
             return false;
         }
@@ -350,7 +373,10 @@ namespace System.ServiceModel.Syndication
             this.extensions.WriteElementExtensions(writer);
         }
 
-        internal void LoadElementExtensions(XmlReader readerOverUnparsedExtensions, int maxExtensionSize)
+        internal void LoadElementExtensions(
+            XmlReader readerOverUnparsedExtensions,
+            int maxExtensionSize
+        )
         {
             this.extensions.LoadElementExtensions(readerOverUnparsedExtensions, maxExtensionSize);
         }

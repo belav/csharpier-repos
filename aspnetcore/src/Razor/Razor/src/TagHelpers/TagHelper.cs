@@ -26,9 +26,7 @@ public abstract class TagHelper : ITagHelper
     /// <remarks>When more than one <see cref="ITagHelper"/> runs on the same element,
     /// <see cref="M:TagHelperOutput.GetChildContentAsync"/> may be invoked prior to <see cref="ProcessAsync"/>.
     /// </remarks>
-    public virtual void Init(TagHelperContext context)
-    {
-    }
+    public virtual void Init(TagHelperContext context) { }
 
     /// <summary>
     /// Synchronously executes the <see cref="TagHelper"/> with the given <paramref name="context"/> and
@@ -36,9 +34,7 @@ public abstract class TagHelper : ITagHelper
     /// </summary>
     /// <param name="context">Contains information associated with the current HTML tag.</param>
     /// <param name="output">A stateful HTML element used to generate an HTML tag.</param>
-    public virtual void Process(TagHelperContext context, TagHelperOutput output)
-    {
-    }
+    public virtual void Process(TagHelperContext context, TagHelperOutput output) { }
 
     /// <summary>
     /// Asynchronously executes the <see cref="TagHelper"/> with the given <paramref name="context"/> and

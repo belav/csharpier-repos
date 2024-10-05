@@ -15,13 +15,22 @@ namespace Microsoft.AspNetCore.Grpc.Swagger.Tests;
 
 public class SchemaGeneratorIntegrationTests
 {
-    private (OpenApiSchema Schema, SchemaRepository SchemaRepository) GenerateSchema(System.Type type, IDescriptor descriptor)
+    private (OpenApiSchema Schema, SchemaRepository SchemaRepository) GenerateSchema(
+        System.Type type,
+        IDescriptor descriptor
+    )
     {
         var descriptorRegistry = new DescriptorRegistry();
         descriptorRegistry.RegisterFileDescriptor(descriptor.File);
 
-        var dataContractResolver = new GrpcDataContractResolver(new JsonSerializerDataContractResolver(new JsonSerializerOptions()), descriptorRegistry);
-        var schemaGenerator = new SchemaGenerator(new SchemaGeneratorOptions(), dataContractResolver);
+        var dataContractResolver = new GrpcDataContractResolver(
+            new JsonSerializerDataContractResolver(new JsonSerializerOptions()),
+            descriptorRegistry
+        );
+        var schemaGenerator = new SchemaGenerator(
+            new SchemaGeneratorOptions(),
+            dataContractResolver
+        );
         var schemaRepository = new SchemaRepository();
 
         var schema = schemaGenerator.GenerateSchema(type, schemaRepository);
@@ -44,20 +53,28 @@ public class SchemaGeneratorIntegrationTests
         Assert.Equal("string", enumSchema.Type);
         Assert.Equal(5, enumSchema.Enum.Count);
 
-        var enumValues = enumSchema.Enum.Select(e => ((OpenApiString)e).Value).OrderBy(s => s).ToList();
-        Assert.Collection(enumValues,
+        var enumValues = enumSchema
+            .Enum.Select(e => ((OpenApiString)e).Value)
+            .OrderBy(s => s)
+            .ToList();
+        Assert.Collection(
+            enumValues,
             v => Assert.Equal("BAR", v),
             v => Assert.Equal("BAZ", v),
             v => Assert.Equal("FOO", v),
             v => Assert.Equal("NEG", v),
-            v => Assert.Equal("NESTED_ENUM_UNSPECIFIED", v));
+            v => Assert.Equal("NESTED_ENUM_UNSPECIFIED", v)
+        );
     }
 
     [Fact]
     public void GenerateSchema_EnumWithoutMessage_ReturnSchema()
     {
         // Arrange & Act
-        var (schema, repository) = GenerateSchema(typeof(EnumWithoutMessage), MessagesReflection.Descriptor);
+        var (schema, repository) = GenerateSchema(
+            typeof(EnumWithoutMessage),
+            MessagesReflection.Descriptor
+        );
 
         // Assert
         schema = repository.Schemas[schema.Reference.Id];
@@ -65,12 +82,14 @@ public class SchemaGeneratorIntegrationTests
         Assert.Equal(5, schema.Enum.Count);
 
         var enumValues = schema.Enum.Select(e => ((OpenApiString)e).Value).OrderBy(s => s).ToList();
-        Assert.Collection(enumValues,
+        Assert.Collection(
+            enumValues,
             v => Assert.Equal("ENUM_WITHOUT_MESSAGE_BAR", v),
             v => Assert.Equal("ENUM_WITHOUT_MESSAGE_BAZ", v),
             v => Assert.Equal("ENUM_WITHOUT_MESSAGE_FOO", v),
             v => Assert.Equal("ENUM_WITHOUT_MESSAGE_NEG", v),
-            v => Assert.Equal("ENUM_WITHOUT_MESSAGE_UNSPECIFIED", v));
+            v => Assert.Equal("ENUM_WITHOUT_MESSAGE_UNSPECIFIED", v)
+        );
     }
 
     [Fact]
@@ -94,7 +113,10 @@ public class SchemaGeneratorIntegrationTests
     public void GenerateSchema_RecursiveMessage_ReturnSchema()
     {
         // Arrange & Act
-        var (schema, repository) = GenerateSchema(typeof(RecursiveMessage), RecursiveMessage.Descriptor);
+        var (schema, repository) = GenerateSchema(
+            typeof(RecursiveMessage),
+            RecursiveMessage.Descriptor
+        );
 
         // Assert
         schema = repository.Schemas[schema.Reference.Id];
@@ -199,7 +221,10 @@ public class SchemaGeneratorIntegrationTests
     public void GenerateSchema_FieldMask_ReturnSchema()
     {
         // Arrange & Act
-        var (schema, repository) = GenerateSchema(typeof(FieldMaskMessage), FieldMaskMessage.Descriptor);
+        var (schema, repository) = GenerateSchema(
+            typeof(FieldMaskMessage),
+            FieldMaskMessage.Descriptor
+        );
 
         // Assert
         schema = repository.Schemas[schema.Reference.Id];

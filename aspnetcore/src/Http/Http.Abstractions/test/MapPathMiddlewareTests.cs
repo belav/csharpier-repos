@@ -51,7 +51,13 @@ public class MapPathMiddlewareTests
     [InlineData("/foo/cho", "/Bar", "/foo/cho", "/Bar/foo/cho", "")]
     [InlineData("/foo/cho", "/Bar", "/foo/cho/do", "/Bar/foo/cho", "/do")]
     [InlineData("/foo%42/cho", "/Bar%42", "/foo%42/cho/do%42", "/Bar%42/foo%42/cho", "/do%42")]
-    public async Task PathMatchFunc_BranchTaken(string matchPath, string basePath, string requestPath, string expectedPathBase, string expectedPath)
+    public async Task PathMatchFunc_BranchTaken(
+        string matchPath,
+        string basePath,
+        string requestPath,
+        string expectedPathBase,
+        string expectedPath
+    )
     {
         HttpContext context = CreateRequest(basePath, requestPath);
         var builder = new ApplicationBuilder(serviceProvider: null!);
@@ -81,7 +87,11 @@ public class MapPathMiddlewareTests
     [InlineData("/foo", "/Bar", "/Foo/Cho/")]
     [InlineData("/foo/cho", "/Bar", "/Foo/Cho")]
     [InlineData("/foo/cho", "/Bar", "/Foo/Cho/do")]
-    public async Task PathMatchAction_BranchTaken(string matchPath, string basePath, string requestPath)
+    public async Task PathMatchAction_BranchTaken(
+        string matchPath,
+        string basePath,
+        string requestPath
+    )
     {
         HttpContext context = CreateRequest(basePath, requestPath);
         var builder = new ApplicationBuilder(serviceProvider: null!);
@@ -90,7 +100,10 @@ public class MapPathMiddlewareTests
         await app.Invoke(context);
 
         Assert.Equal(200, context.Response.StatusCode);
-        Assert.Equal(string.Concat(basePath, requestPath.AsSpan(0, matchPath.Length)), (string)context.Items["test.PathBase"]!);
+        Assert.Equal(
+            string.Concat(basePath, requestPath.AsSpan(0, matchPath.Length)),
+            (string)context.Items["test.PathBase"]!
+        );
         Assert.Equal(requestPath.Substring(matchPath.Length), context.Items["test.Path"]);
     }
 
@@ -109,7 +122,11 @@ public class MapPathMiddlewareTests
     [InlineData("/foo", "/Bar", "/Foo/Cho/")]
     [InlineData("/foo/cho", "/Bar", "/Foo/Cho")]
     [InlineData("/foo/cho", "/Bar", "/Foo/Cho/do")]
-    public async Task PathMatchAction_BranchTaken_WithPreserveMatchedPathSegment(string matchPath, string basePath, string requestPath)
+    public async Task PathMatchAction_BranchTaken_WithPreserveMatchedPathSegment(
+        string matchPath,
+        string basePath,
+        string requestPath
+    )
     {
         HttpContext context = CreateRequest(basePath, requestPath);
         var builder = new ApplicationBuilder(serviceProvider: null!);
@@ -128,7 +145,9 @@ public class MapPathMiddlewareTests
     [InlineData("/foo/cho/")]
     public void MatchPathWithTrailingSlashThrowsException(string matchPath)
     {
-        Assert.Throws<ArgumentException>(() => new ApplicationBuilder(serviceProvider: null!).Map(matchPath, map => { }).Build());
+        Assert.Throws<ArgumentException>(
+            () => new ApplicationBuilder(serviceProvider: null!).Map(matchPath, map => { }).Build()
+        );
     }
 
     [Theory]
@@ -139,7 +158,11 @@ public class MapPathMiddlewareTests
     [InlineData("/foo", "/foo", "/bar")]
     [InlineData("/foo", "", "/bar/foo")]
     [InlineData("/foo/bar", "/foo", "/bar")]
-    public async Task PathMismatchFunc_PassedThrough(string matchPath, string basePath, string requestPath)
+    public async Task PathMismatchFunc_PassedThrough(
+        string matchPath,
+        string basePath,
+        string requestPath
+    )
     {
         HttpContext context = CreateRequest(basePath, requestPath);
         var builder = new ApplicationBuilder(serviceProvider: null!);
@@ -161,7 +184,11 @@ public class MapPathMiddlewareTests
     [InlineData("/foo", "/foo", "/bar")]
     [InlineData("/foo", "", "/bar/foo")]
     [InlineData("/foo/bar", "/foo", "/bar")]
-    public async Task PathMismatchAction_PassedThrough(string matchPath, string basePath, string requestPath)
+    public async Task PathMismatchAction_PassedThrough(
+        string matchPath,
+        string basePath,
+        string requestPath
+    )
     {
         HttpContext context = CreateRequest(basePath, requestPath);
         var builder = new ApplicationBuilder(serviceProvider: null!);
@@ -179,11 +206,14 @@ public class MapPathMiddlewareTests
     public async Task ChainedRoutes_Success()
     {
         var builder = new ApplicationBuilder(serviceProvider: null!);
-        builder.Map("/route1", map =>
-        {
-            map.Map("/subroute1", UseSuccess);
-            map.Run(NotImplemented);
-        });
+        builder.Map(
+            "/route1",
+            map =>
+            {
+                map.Map("/subroute1", UseSuccess);
+                map.Run(NotImplemented);
+            }
+        );
         builder.Map("/route2/subroute2", UseSuccess);
         var app = builder.Build();
 
@@ -247,7 +277,11 @@ public class MapPathMiddlewareTests
     {
         public bool UseCalled { get; set; }
 
-        public IServiceProvider ApplicationServices { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IServiceProvider ApplicationServices
+        {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
 
         public IFeatureCollection ServerFeatures => throw new NotImplementedException();
 
@@ -257,7 +291,8 @@ public class MapPathMiddlewareTests
 
         public ICollection<EndpointDataSource> DataSources => throw new NotImplementedException();
 
-        public IApplicationBuilder CreateApplicationBuilder() => throw new NotImplementedException();
+        public IApplicationBuilder CreateApplicationBuilder() =>
+            throw new NotImplementedException();
 
         public IApplicationBuilder New() => this;
 

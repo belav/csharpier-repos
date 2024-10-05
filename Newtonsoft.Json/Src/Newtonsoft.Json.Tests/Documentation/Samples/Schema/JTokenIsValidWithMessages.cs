@@ -24,11 +24,11 @@
 #endregion
 
 #pragma warning disable 618
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Schema;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Schema;
 
 namespace Newtonsoft.Json.Tests.Documentation.Samples.Schema
 {
@@ -37,7 +37,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Schema
         public void Example()
         {
             #region Usage
-            string schemaJson = @"{
+            string schemaJson =
+                @"{
               'description': 'A person',
               'type': 'object',
               'properties': {
@@ -51,10 +52,12 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Schema
 
             JsonSchema schema = JsonSchema.Parse(schemaJson);
 
-            JObject person = JObject.Parse(@"{
+            JObject person = JObject.Parse(
+                @"{
               'name': null,
               'hobbies': ['Invalid content', 0.123456789]
-            }");
+            }"
+            );
 
             IList<string> messages;
             bool valid = person.IsValid(schema, out messages);

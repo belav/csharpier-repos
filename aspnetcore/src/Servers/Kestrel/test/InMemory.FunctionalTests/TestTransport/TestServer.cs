@@ -17,8 +17,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Xunit;
@@ -36,9 +36,7 @@ internal class TestServer : IAsyncDisposable, IStartup
     private readonly IHost _host;
 
     public TestServer(RequestDelegate app)
-        : this(app, new TestServiceContext())
-    {
-    }
+        : this(app, new TestServiceContext()) { }
 
     public TestServer(RequestDelegate app, TestServiceContext context)
         : this(app, context, new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0)))
@@ -47,26 +45,40 @@ internal class TestServer : IAsyncDisposable, IStartup
     }
 
     public TestServer(RequestDelegate app, TestServiceContext context, ListenOptions listenOptions)
-        : this(app, context, options => options.CodeBackedListenOptions.Add(listenOptions), _ => { })
-    {
-    }
+        : this(
+            app,
+            context,
+            options => options.CodeBackedListenOptions.Add(listenOptions),
+            _ => { }
+        ) { }
 
-    public TestServer(RequestDelegate app, TestServiceContext context, Action<ListenOptions> configureListenOptions)
-        : this(app, context, options =>
+    public TestServer(
+        RequestDelegate app,
+        TestServiceContext context,
+        Action<ListenOptions> configureListenOptions
+    )
+        : this(
+            app,
+            context,
+            options =>
             {
                 var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))
                 {
-                    KestrelServerOptions = options
+                    KestrelServerOptions = options,
                 };
 
                 configureListenOptions(listenOptions);
                 options.CodeBackedListenOptions.Add(listenOptions);
             },
-            _ => { })
-    {
-    }
+            _ => { }
+        ) { }
 
-    public TestServer(RequestDelegate app, TestServiceContext context, Action<KestrelServerOptions> configureKestrel, Action<IServiceCollection> configureServices)
+    public TestServer(
+        RequestDelegate app,
+        TestServiceContext context,
+        Action<KestrelServerOptions> configureKestrel,
+        Action<IServiceCollection> configureServices
+    )
     {
         _app = app;
         Context = context;
@@ -78,8 +90,16 @@ internal class TestServer : IAsyncDisposable, IStartup
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                    .UseSetting(WebHostDefaults.ShutdownTimeoutKey, TestConstants.DefaultTimeout.TotalSeconds.ToString(CultureInfo.InvariantCulture))
-                    .Configure(app => { app.Run(_app); });
+                    .UseSetting(
+                        WebHostDefaults.ShutdownTimeoutKey,
+                        TestConstants.DefaultTimeout.TotalSeconds.ToString(
+                            CultureInfo.InvariantCulture
+                        )
+                    )
+                    .Configure(app =>
+                    {
+                        app.Run(_app);
+                    });
             })
             .ConfigureServices(services =>
             {
@@ -89,7 +109,10 @@ internal class TestServer : IAsyncDisposable, IStartup
                 services.AddSingleton(context.LoggerFactory);
                 services.AddSingleton(context.Metrics);
                 services.AddSingleton<IHttpsConfigurationService, HttpsConfigurationService>();
-                services.AddSingleton<HttpsConfigurationService.IInitializer, HttpsConfigurationService.Initializer>();
+                services.AddSingleton<
+                    HttpsConfigurationService.IInitializer,
+                    HttpsConfigurationService.Initializer
+                >();
 
                 services.AddSingleton<IServer>(sp =>
                 {
@@ -99,7 +122,8 @@ internal class TestServer : IAsyncDisposable, IStartup
                         new IConnectionListenerFactory[] { _transportFactory },
                         sp.GetServices<IMultiplexedConnectionListenerFactory>(),
                         sp.GetRequiredService<IHttpsConfigurationService>(),
-                        context);
+                        context
+                    );
                 });
             });
 
@@ -113,9 +137,16 @@ internal class TestServer : IAsyncDisposable, IStartup
 
     public InMemoryHttpClientSlim HttpClientSlim { get; }
 
-    public InMemoryConnection CreateConnection(Encoding encoding = null, Action<IFeatureCollection> featuresAction = null)
+    public InMemoryConnection CreateConnection(
+        Encoding encoding = null,
+        Action<IFeatureCollection> featuresAction = null
+    )
     {
-        var transportConnection = new InMemoryTransportConnection(_memoryPool, Context.Log, Context.Scheduler);
+        var transportConnection = new InMemoryTransportConnection(
+            _memoryPool,
+            Context.Log,
+            Context.Scheduler
+        );
         featuresAction?.Invoke(transportConnection.Features);
 
         _transportFactory.AddConnection(transportConnection);

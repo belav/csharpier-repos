@@ -28,8 +28,16 @@ internal class DictionaryConverterFactory : IFormDataConverterFactory
             return false;
         }
 
-        if (Activator.CreateInstance(typeof(TypedDictionaryConverterFactory<,,>)
-            .MakeGenericType(type, keyType, valueType)) is not IFormDataConverterFactory factory)
+        if (
+            Activator.CreateInstance(
+                typeof(TypedDictionaryConverterFactory<,,>).MakeGenericType(
+                    type,
+                    keyType,
+                    valueType
+                )
+            )
+            is not IFormDataConverterFactory factory
+        )
         {
             return false;
         }
@@ -43,8 +51,9 @@ internal class DictionaryConverterFactory : IFormDataConverterFactory
     {
         // Type must implement IDictionary<TKey, TValue> IReadOnlyDictionary<TKey, TValue>
         // Note that IDictionary doesn't extend IReadOnlyDictionary, hence the need for two checks
-        var dictionaryType = ClosedGenericMatcher.ExtractGenericInterface(type, typeof(IDictionary<,>)) ??
-            ClosedGenericMatcher.ExtractGenericInterface(type, typeof(IReadOnlyDictionary<,>));
+        var dictionaryType =
+            ClosedGenericMatcher.ExtractGenericInterface(type, typeof(IDictionary<,>))
+            ?? ClosedGenericMatcher.ExtractGenericInterface(type, typeof(IReadOnlyDictionary<,>));
 
         if (dictionaryType == null)
         {
@@ -58,7 +67,10 @@ internal class DictionaryConverterFactory : IFormDataConverterFactory
             return default;
         }
 
-        var parsableKeyType = ClosedGenericMatcher.ExtractGenericInterface(keyType, typeof(IParsable<>));
+        var parsableKeyType = ClosedGenericMatcher.ExtractGenericInterface(
+            keyType,
+            typeof(IParsable<>)
+        );
         if (parsableKeyType == null)
         {
             return default;
@@ -74,45 +86,67 @@ internal class DictionaryConverterFactory : IFormDataConverterFactory
     {
         // Type must implement IDictionary<TKey, TValue> IReadOnlyDictionary<TKey, TValue>
         // Note that IDictionary doesn't extend IReadOnlyDictionary, hence the need for two checks
-        var dictionaryType = ClosedGenericMatcher.ExtractGenericInterface(type, typeof(IDictionary<,>)) ??
-            ClosedGenericMatcher.ExtractGenericInterface(type, typeof(IReadOnlyDictionary<,>));
+        var dictionaryType =
+            ClosedGenericMatcher.ExtractGenericInterface(type, typeof(IDictionary<,>))
+            ?? ClosedGenericMatcher.ExtractGenericInterface(type, typeof(IReadOnlyDictionary<,>));
         if (dictionaryType == null)
         {
-            throw new InvalidOperationException($"Unable to create converter for '{type.FullName}'.");
+            throw new InvalidOperationException(
+                $"Unable to create converter for '{type.FullName}'."
+            );
         }
 
         // Key type must implement IParsable<T>
         var keyType = dictionaryType?.GetGenericArguments()[0];
         if (keyType == null)
         {
-            throw new InvalidOperationException($"Unable to create converter for '{type.FullName}'.");
+            throw new InvalidOperationException(
+                $"Unable to create converter for '{type.FullName}'."
+            );
         }
 
-        var parsableKeyType = ClosedGenericMatcher.ExtractGenericInterface(keyType, typeof(IParsable<>));
+        var parsableKeyType = ClosedGenericMatcher.ExtractGenericInterface(
+            keyType,
+            typeof(IParsable<>)
+        );
         if (parsableKeyType == null)
         {
-            throw new InvalidOperationException($"Unable to create converter for '{type.FullName}'.");
+            throw new InvalidOperationException(
+                $"Unable to create converter for '{type.FullName}'."
+            );
         }
 
         // Value must have a converter
         var valueType = dictionaryType?.GetGenericArguments()[1];
         if (valueType == null)
         {
-            throw new InvalidOperationException($"Unable to create converter for '{type.FullName}'.");
+            throw new InvalidOperationException(
+                $"Unable to create converter for '{type.FullName}'."
+            );
         }
 
         var converter = options.ResolveConverter(valueType);
         if (converter == null)
         {
-            throw new InvalidOperationException($"Unable to create converter for '{type.FullName}'.");
+            throw new InvalidOperationException(
+                $"Unable to create converter for '{type.FullName}'."
+            );
         }
 
-        var factory = Activator.CreateInstance(typeof(TypedDictionaryConverterFactory<,,>)
-            .MakeGenericType(type, keyType, valueType)) as IFormDataConverterFactory;
+        var factory =
+            Activator.CreateInstance(
+                typeof(TypedDictionaryConverterFactory<,,>).MakeGenericType(
+                    type,
+                    keyType,
+                    valueType
+                )
+            ) as IFormDataConverterFactory;
 
         if (factory == null)
         {
-            throw new InvalidOperationException($"Unable to create converter for '{type.FullName}'.");
+            throw new InvalidOperationException(
+                $"Unable to create converter for '{type.FullName}'."
+            );
         }
 
         return factory.CreateConverter(type, options);

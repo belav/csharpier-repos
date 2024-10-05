@@ -32,41 +32,63 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
 
             public ConfigBindingGenTestDriver(
                 LanguageVersion langVersion = LanguageVersion.LatestMajor,
-                IEnumerable<Assembly>? assemblyReferences = null)
+                IEnumerable<Assembly>? assemblyReferences = null
+            )
             {
                 _langVersion = langVersion;
 
                 _assemblyReferences = assemblyReferences ?? s_compilationAssemblyRefs;
 
-                _parseOptions = new CSharpParseOptions(langVersion).WithFeatures(new[] {
-                    new KeyValuePair<string, string>("InterceptorsPreview", "") ,
-                    new KeyValuePair<string, string>("InterceptorsPreviewNamespaces", "Microsoft.Extensions.Configuration.Binder.SourceGeneration")
-                });
+                _parseOptions = new CSharpParseOptions(langVersion).WithFeatures(
+                    new[]
+                    {
+                        new KeyValuePair<string, string>("InterceptorsPreview", ""),
+                        new KeyValuePair<string, string>(
+                            "InterceptorsPreviewNamespaces",
+                            "Microsoft.Extensions.Configuration.Binder.SourceGeneration"
+                        ),
+                    }
+                );
 
-                ConfigurationBindingGenerator generator = new() { OnSourceEmitting = spec => _genSpec = spec };
+                ConfigurationBindingGenerator generator =
+                    new() { OnSourceEmitting = spec => _genSpec = spec };
                 _generatorDriver = CSharpGeneratorDriver.Create(
                     new ISourceGenerator[] { generator.AsSourceGenerator() },
                     parseOptions: _parseOptions,
                     driverOptions: new GeneratorDriverOptions(
                         disabledOutputs: IncrementalGeneratorOutputKind.None,
-                        trackIncrementalGeneratorSteps: true));
+                        trackIncrementalGeneratorSteps: true
+                    )
+                );
             }
 
-            public async Task<ConfigBindingGenRunResult> RunGeneratorAndUpdateCompilation(string? source = null)
+            public async Task<ConfigBindingGenRunResult> RunGeneratorAndUpdateCompilation(
+                string? source = null
+            )
             {
                 await UpdateCompilationWithSource(source);
                 Assert.NotNull(_compilation);
 
-                _generatorDriver = _generatorDriver.RunGeneratorsAndUpdateCompilation(_compilation, out Compilation outputCompilation, out _, CancellationToken.None);
+                _generatorDriver = _generatorDriver.RunGeneratorsAndUpdateCompilation(
+                    _compilation,
+                    out Compilation outputCompilation,
+                    out _,
+                    CancellationToken.None
+                );
                 GeneratorDriverRunResult runResult = _generatorDriver.GetRunResult();
 
                 return new ConfigBindingGenRunResult
                 {
                     OutputCompilation = outputCompilation,
                     Diagnostics = runResult.Diagnostics,
-                    GeneratedSource = runResult.Results[0].GeneratedSources is { Length: not 0 } sources ? sources[0] : null,
-                    TrackedSteps = runResult.Results[0].TrackedSteps[ConfigurationBindingGenerator.GenSpecTrackingName],
-                    GenerationSpec = _genSpec
+                    GeneratedSource = runResult.Results[0].GeneratedSources
+                        is { Length: not 0 } sources
+                        ? sources[0]
+                        : null,
+                    TrackedSteps = runResult.Results[0].TrackedSteps[
+                        ConfigurationBindingGenerator.GenSpecTrackingName
+                    ],
+                    GenerationSpec = _genSpec,
                 };
             }
 
@@ -75,20 +97,36 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
                 if (_compilation is not null && source is not null)
                 {
                     SyntaxTree newTree = CSharpSyntaxTree.ParseText(source, _parseOptions);
-                    _compilation = _compilation.ReplaceSyntaxTree(_compilation.SyntaxTrees.First(), newTree);
+                    _compilation = _compilation.ReplaceSyntaxTree(
+                        _compilation.SyntaxTrees.First(),
+                        newTree
+                    );
                 }
                 else if (_compilation is null)
                 {
                     Assert.True(source is not null, "Generator test requires input source.");
                     using AdhocWorkspace workspace = RoslynTestUtils.CreateTestWorkspace();
 
-                    Project project = RoslynTestUtils.CreateTestProject(workspace, _assemblyReferences, langVersion: _langVersion)
-                        .WithCompilationOptions(new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary).WithNullableContextOptions(NullableContextOptions.Annotations))
+                    Project project = RoslynTestUtils
+                        .CreateTestProject(
+                            workspace,
+                            _assemblyReferences,
+                            langVersion: _langVersion
+                        )
+                        .WithCompilationOptions(
+                            new CSharpCompilationOptions(
+                                OutputKind.DynamicallyLinkedLibrary
+                            ).WithNullableContextOptions(NullableContextOptions.Annotations)
+                        )
                         .WithParseOptions(_parseOptions)
                         .WithDocuments(new string[] { source });
                     Assert.True(project.Solution.Workspace.TryApplyChanges(project.Solution));
 
-                    _compilation = (await project.GetCompilationAsync(CancellationToken.None).ConfigureAwait(false))!;
+                    _compilation = (
+                        await project
+                            .GetCompilationAsync(CancellationToken.None)
+                            .ConfigureAwait(false)
+                    )!;
                 }
             }
         }
@@ -118,20 +156,39 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
 
     internal static class ConfigBindingGenTestDriverExtensions
     {
-        public static void ValidateIncrementalResult(this ConfigBindingGenRunResult result,
+        public static void ValidateIncrementalResult(
+            this ConfigBindingGenRunResult result,
             IncrementalStepRunReason inputReason,
-            IncrementalStepRunReason outputReason)
+            IncrementalStepRunReason outputReason
+        )
         {
-            Assert.Collection(result.TrackedSteps, step =>
-            {
-                Assert.Collection(step.Inputs, source => Assert.Equal(inputReason, source.Source.Outputs[source.OutputIndex].Reason));
-                Assert.Collection(step.Outputs, output => Assert.Equal(outputReason, output.Reason));
-            });
+            Assert.Collection(
+                result.TrackedSteps,
+                step =>
+                {
+                    Assert.Collection(
+                        step.Inputs,
+                        source =>
+                            Assert.Equal(
+                                inputReason,
+                                source.Source.Outputs[source.OutputIndex].Reason
+                            )
+                    );
+                    Assert.Collection(
+                        step.Outputs,
+                        output => Assert.Equal(outputReason, output.Reason)
+                    );
+                }
+            );
         }
 
-        public static void ValidateDiagnostics(this ConfigBindingGenRunResult result, ExpectedDiagnostics expectedDiags)
+        public static void ValidateDiagnostics(
+            this ConfigBindingGenRunResult result,
+            ExpectedDiagnostics expectedDiags
+        )
         {
-            ImmutableArray<Diagnostic> outputDiagnostics = result.OutputCompilation.GetDiagnostics();
+            ImmutableArray<Diagnostic> outputDiagnostics =
+                result.OutputCompilation.GetDiagnostics();
 
             if (expectedDiags is ExpectedDiagnostics.None)
             {
@@ -139,7 +196,8 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
                 {
                     Assert.True(
                         IsPermitted(diagnostic),
-                        $"Generator caused diagnostic in output compilation: {diagnostic.GetMessage(CultureInfo.InvariantCulture)}.");
+                        $"Generator caused diagnostic in output compilation: {diagnostic.GetMessage(CultureInfo.InvariantCulture)}."
+                    );
                 }
             }
             else
@@ -150,7 +208,8 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
                 Assert.False(outputDiagnostics.Any(diag => !IsPermitted(diag)));
             }
 
-            static bool IsPermitted(Diagnostic diagnostic) => diagnostic.Severity <= DiagnosticSeverity.Info;
+            static bool IsPermitted(Diagnostic diagnostic) =>
+                diagnostic.Severity <= DiagnosticSeverity.Info;
         }
     }
 }

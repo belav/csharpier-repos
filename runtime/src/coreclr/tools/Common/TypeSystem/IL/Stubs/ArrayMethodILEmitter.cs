@@ -2,9 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.IL.Stubs
@@ -20,7 +18,10 @@ namespace Internal.IL.Stubs
 
         private ArrayMethodILEmitter(ArrayMethod method)
         {
-            Debug.Assert(method.Kind != ArrayMethodKind.Address, "Should be " + nameof(ArrayMethodKind.AddressWithHiddenArg));
+            Debug.Assert(
+                method.Kind != ArrayMethodKind.Address,
+                "Should be " + nameof(ArrayMethodKind.AddressWithHiddenArg)
+            );
 
             _method = method;
 
@@ -31,7 +32,9 @@ namespace Internal.IL.Stubs
 
             // This helper field is needed to generate proper GC tracking. There is no direct way
             // to create interior pointer.
-            _helperFieldToken = _emitter.NewToken(_method.Context.GetWellKnownType(WellKnownType.Object).GetKnownField("m_pEEType"));
+            _helperFieldToken = _emitter.NewToken(
+                _method.Context.GetWellKnownType(WellKnownType.Object).GetKnownField("m_pEEType")
+            );
         }
 
         private void EmitLoadInteriorAddress(ILCodeStream codeStream, int offset)
@@ -53,7 +56,7 @@ namespace Internal.IL.Stubs
                     break;
 
                 case ArrayMethodKind.Ctor:
-                    // .ctor is implemented as a JIT helper and the JIT shouldn't be asking for the IL.
+                // .ctor is implemented as a JIT helper and the JIT shouldn't be asking for the IL.
                 default:
                     // Asking for anything else is invalid.
                     throw new InvalidOperationException();
@@ -91,8 +94,9 @@ namespace Internal.IL.Stubs
                 // Type check
                 if (_method.Kind == ArrayMethodKind.Set)
                 {
-                    MethodDesc checkArrayStore =
-                        context.SystemModule.GetKnownType("System.Runtime", "RuntimeImports").GetKnownMethod("RhCheckArrayStore", null);
+                    MethodDesc checkArrayStore = context
+                        .SystemModule.GetKnownType("System.Runtime", "RuntimeImports")
+                        .GetKnownMethod("RhCheckArrayStore", null);
 
                     codeStream.EmitLdArg(0);
                     codeStream.EmitLdArg(_rank + argStartOffset);
@@ -102,7 +106,10 @@ namespace Internal.IL.Stubs
                 else if (_method.Kind == ArrayMethodKind.AddressWithHiddenArg)
                 {
                     TypeDesc objectType = context.GetWellKnownType(WellKnownType.Object);
-                    TypeDesc eetypeType = context.SystemModule.GetKnownType("Internal.Runtime", "MethodTable");
+                    TypeDesc eetypeType = context.SystemModule.GetKnownType(
+                        "Internal.Runtime",
+                        "MethodTable"
+                    );
 
                     typeMismatchExceptionLabel = _emitter.NewCodeLabel();
 
@@ -117,14 +124,25 @@ namespace Internal.IL.Stubs
 
                     // MethodTable* actualElementType = this.m_pEEType->RelatedParameterType; // ArrayElementType
                     codeStream.EmitLdArg(0);
-                    codeStream.Emit(ILOpcode.ldfld, _emitter.NewToken(objectType.GetKnownField("m_pEEType")));
-                    codeStream.Emit(ILOpcode.call,
-                        _emitter.NewToken(eetypeType.GetKnownMethod("get_RelatedParameterType", null)));
+                    codeStream.Emit(
+                        ILOpcode.ldfld,
+                        _emitter.NewToken(objectType.GetKnownField("m_pEEType"))
+                    );
+                    codeStream.Emit(
+                        ILOpcode.call,
+                        _emitter.NewToken(
+                            eetypeType.GetKnownMethod("get_RelatedParameterType", null)
+                        )
+                    );
 
                     // MethodTable* expectedElementType = hiddenArg->RelatedParameterType; // ArrayElementType
                     codeStream.EmitLdArg(1);
-                    codeStream.Emit(ILOpcode.call,
-                        _emitter.NewToken(eetypeType.GetKnownMethod("get_RelatedParameterType", null)));
+                    codeStream.Emit(
+                        ILOpcode.call,
+                        _emitter.NewToken(
+                            eetypeType.GetKnownMethod("get_RelatedParameterType", null)
+                        )
+                    );
 
                     // if (expectedElementType != actualElementType)
                     //     ThrowHelpers.ThrowArrayTypeMismatchException();
@@ -141,12 +159,20 @@ namespace Internal.IL.Stubs
             if (_rank == 1)
             {
                 TypeDesc objectType = context.GetWellKnownType(WellKnownType.Object);
-                TypeDesc eetypeType = context.SystemModule.GetKnownType("Internal.Runtime", "MethodTable");
+                TypeDesc eetypeType = context.SystemModule.GetKnownType(
+                    "Internal.Runtime",
+                    "MethodTable"
+                );
 
                 codeStream.EmitLdArg(0);
-                codeStream.Emit(ILOpcode.ldfld, _emitter.NewToken(objectType.GetKnownField("m_pEEType")));
-                codeStream.Emit(ILOpcode.call,
-                    _emitter.NewToken(eetypeType.GetKnownMethod("get_IsSzArray", null)));
+                codeStream.Emit(
+                    ILOpcode.ldfld,
+                    _emitter.NewToken(objectType.GetKnownField("m_pEEType"))
+                );
+                codeStream.Emit(
+                    ILOpcode.call,
+                    _emitter.NewToken(eetypeType.GetKnownMethod("get_IsSzArray", null))
+                );
 
                 ILCodeLabel notSzArrayLabel = _emitter.NewCodeLabel();
                 codeStream.Emit(ILOpcode.brfalse, notSzArrayLabel);
@@ -236,13 +262,19 @@ namespace Internal.IL.Stubs
             codeStream.EmitLabel(rangeExceptionLabel); // Assumes that there is one "int" pushed on the stack
             codeStream.Emit(ILOpcode.pop);
 
-            MethodDesc throwHelper = context.GetHelperEntryPoint("ThrowHelpers", "ThrowIndexOutOfRangeException");
+            MethodDesc throwHelper = context.GetHelperEntryPoint(
+                "ThrowHelpers",
+                "ThrowIndexOutOfRangeException"
+            );
             codeStream.EmitCallThrowHelper(_emitter, throwHelper);
 
             if (typeMismatchExceptionLabel != null)
             {
                 codeStream.EmitLabel(typeMismatchExceptionLabel);
-                codeStream.EmitCallThrowHelper(_emitter, context.GetHelperEntryPoint("ThrowHelpers", "ThrowArrayTypeMismatchException"));
+                codeStream.EmitCallThrowHelper(
+                    _emitter,
+                    context.GetHelperEntryPoint("ThrowHelpers", "ThrowArrayTypeMismatchException")
+                );
             }
         }
     }

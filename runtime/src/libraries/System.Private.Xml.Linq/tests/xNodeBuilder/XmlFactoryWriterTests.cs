@@ -3,11 +3,11 @@
 
 using System;
 using System.Globalization;
-using System.Xml;
-using System.Xml.Linq;
+using System.IO;
 //using System.Xml.XPath;
 using System.Text;
-using System.IO;
+using System.Xml;
+using System.Xml.Linq;
 using Microsoft.Test.ModuleCore;
 
 namespace CoreXml.Test.XLinq
@@ -24,7 +24,17 @@ namespace CoreXml.Test.XLinq
                 //[Variation(Id = 4, Desc = "CheckChars=true, invalid name chars WriteDocType(name)", Priority = 1, Param = "WriteDocTypeName")]
                 public void checkChars_1()
                 {
-                    char[] invalidXML = { '\u0000', '\u0008', '\u000B', '\u000C', '\u000E', '\u001F', '\uFFFE', '\uFFFF' };
+                    char[] invalidXML =
+                    {
+                        '\u0000',
+                        '\u0008',
+                        '\u000B',
+                        '\u000C',
+                        '\u000E',
+                        '\u001F',
+                        '\uFFFE',
+                        '\uFFFF',
+                    };
 
                     XElement d = new XElement("a");
                     XmlWriter w = d.CreateWriter();
@@ -100,12 +110,20 @@ namespace CoreXml.Test.XLinq
                     }
                     catch (XmlException)
                     {
-                        TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                        TestLog.Compare(
+                            w.WriteState,
+                            WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                     catch (ArgumentException)
                     {
-                        TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                        TestLog.Compare(
+                            w.WriteState,
+                            WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                     finally
@@ -125,7 +143,17 @@ namespace CoreXml.Test.XLinq
                 //[Variation(Id = 47, Desc = "CheckChars=true, invalid XML characters in WriteQualifiedName should error", Priority = 1, Params = new object[] { "QName", true })]
                 public void checkChars_4()
                 {
-                    char[] invalidXML = { '\u0000', '\u0008', '\u000B', '\u000C', '\u000E', '\u001F', '\uFFFE', '\uFFFF' };
+                    char[] invalidXML =
+                    {
+                        '\u0000',
+                        '\u0008',
+                        '\u000B',
+                        '\u000C',
+                        '\u000E',
+                        '\u001F',
+                        '\uFFFE',
+                        '\uFFFF',
+                    };
                     XElement d = new XElement("a");
                     XmlWriter w = d.CreateWriter();
                     try
@@ -158,7 +186,11 @@ namespace CoreXml.Test.XLinq
                     }
                     catch (ArgumentException)
                     {
-                        TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                        TestLog.Compare(
+                            w.WriteState,
+                            WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                     finally
@@ -371,7 +403,11 @@ namespace CoreXml.Test.XLinq
                 {
                     XDocument d = new XDocument();
                     XmlWriter w = d.CreateWriter();
-                    TestLog.Compare(w.Settings.NewLineOnAttributes, false, "Mismatch in NewLineOnAttributes");
+                    TestLog.Compare(
+                        w.Settings.NewLineOnAttributes,
+                        false,
+                        "Mismatch in NewLineOnAttributes"
+                    );
 
                     w.WriteStartElement("root");
                     w.WriteAttributeString("attr1", "value1");
@@ -379,7 +415,12 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(d.CreateReader(), "<root attr1=\"value1\" attr2=\"value2\" />"))
+                    if (
+                        !CompareReader(
+                            d.CreateReader(),
+                            "<root attr1=\"value1\" attr2=\"value2\" />"
+                        )
+                    )
                         throw new TestException(TestResult.Failed, "");
                 }
 
@@ -415,7 +456,12 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.WriteEndDocument();
                     w.Dispose();
-                    if (!CompareReader(d.CreateReader(), "<?xml version=\"1.0\" encoding=\"utf8\" standalone=\"yes\"?><Root />"))
+                    if (
+                        !CompareReader(
+                            d.CreateReader(),
+                            "<?xml version=\"1.0\" encoding=\"utf8\" standalone=\"yes\"?><Root />"
+                        )
+                    )
                         throw new TestException(TestResult.Failed, "");
                 }
 
@@ -429,7 +475,12 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.WriteEndDocument();
                     w.Dispose();
-                    if (!CompareReader(d.CreateReader(), "<?xml version=\"1.0\" encoding=\"utf8\" standalone=\"no\"?><Root />"))
+                    if (
+                        !CompareReader(
+                            d.CreateReader(),
+                            "<?xml version=\"1.0\" encoding=\"utf8\" standalone=\"no\"?><Root />"
+                        )
+                    )
                         throw new TestException(TestResult.Failed, "");
                 }
             }
@@ -448,7 +499,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (InvalidOperationException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -468,7 +523,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (InvalidOperationException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -488,7 +547,11 @@ namespace CoreXml.Test.XLinq
                     w.WriteStartDocument();
 
                     // PROLOG
-                    TestLog.Compare(w.Settings.ConformanceLevel, ConformanceLevel.Document, "Error");
+                    TestLog.Compare(
+                        w.Settings.ConformanceLevel,
+                        ConformanceLevel.Document,
+                        "Error"
+                    );
                     w.WriteStartElement("root");
                     w.WriteEndElement();
 
@@ -526,13 +589,25 @@ namespace CoreXml.Test.XLinq
                             break;
                     }
                     // PROLOG
-                    TestLog.Compare(w.Settings.ConformanceLevel, ConformanceLevel.Document, "Error");
+                    TestLog.Compare(
+                        w.Settings.ConformanceLevel,
+                        ConformanceLevel.Document,
+                        "Error"
+                    );
                     w.WriteStartElement("root");
                     // ELEMENT CONTENT
-                    TestLog.Compare(w.Settings.ConformanceLevel, ConformanceLevel.Document, "Error");
+                    TestLog.Compare(
+                        w.Settings.ConformanceLevel,
+                        ConformanceLevel.Document,
+                        "Error"
+                    );
                     // Inside Attribute
                     w.WriteStartAttribute("attr");
-                    TestLog.Compare(w.Settings.ConformanceLevel, ConformanceLevel.Document, "Error");
+                    TestLog.Compare(
+                        w.Settings.ConformanceLevel,
+                        ConformanceLevel.Document,
+                        "Error"
+                    );
                     w.WriteEndElement();
 
                     // Try writing another root element, should error
@@ -559,7 +634,11 @@ namespace CoreXml.Test.XLinq
                     XmlWriter w = d.CreateWriter();
                     w.WriteDocType("ROOT", "publicid", "sysid", "<!ENTITY e 'abc'>");
                     // PROLOG
-                    TestLog.Compare(w.Settings.ConformanceLevel, ConformanceLevel.Document, "Should switch to Document from Auto when you write top level DTD");
+                    TestLog.Compare(
+                        w.Settings.ConformanceLevel,
+                        ConformanceLevel.Document,
+                        "Should switch to Document from Auto when you write top level DTD"
+                    );
                     w.WriteStartElement("Root");
                     w.WriteEndElement();
 
@@ -586,9 +665,17 @@ namespace CoreXml.Test.XLinq
                     XElement d = new XElement("a");
                     XmlWriter w = d.CreateWriter();
                     w.WriteStartElement("root");
-                    TestLog.Compare(w.Settings.ConformanceLevel, ConformanceLevel.Fragment, "Error");
+                    TestLog.Compare(
+                        w.Settings.ConformanceLevel,
+                        ConformanceLevel.Fragment,
+                        "Error"
+                    );
                     w.WriteEndElement();
-                    TestLog.Compare(w.Settings.ConformanceLevel, ConformanceLevel.Fragment, "Error");
+                    TestLog.Compare(
+                        w.Settings.ConformanceLevel,
+                        ConformanceLevel.Fragment,
+                        "Error"
+                    );
                     w.WriteStartElement("root");
                     w.WriteEndElement();
                     w.Dispose();
@@ -636,7 +723,11 @@ namespace CoreXml.Test.XLinq
                             TestLog.Compare(false, "Invalid param in testcase");
                             break;
                     }
-                    TestLog.Compare(w.Settings.ConformanceLevel, ConformanceLevel.Fragment, "Error");
+                    TestLog.Compare(
+                        w.Settings.ConformanceLevel,
+                        ConformanceLevel.Fragment,
+                        "Error"
+                    );
                     w.Dispose();
                 }
 
@@ -664,7 +755,11 @@ namespace CoreXml.Test.XLinq
                     }
 
                     w.WriteDocType("ROOT", "publicid", "sysid", "<!ENTITY e 'abc'>");
-                    TestLog.Compare(w.Settings.ConformanceLevel, ConformanceLevel.Document, "Error");
+                    TestLog.Compare(
+                        w.Settings.ConformanceLevel,
+                        ConformanceLevel.Document,
+                        "Error"
+                    );
                     w.Dispose();
                 }
 
@@ -677,7 +772,11 @@ namespace CoreXml.Test.XLinq
                     XmlWriter w = d.CreateWriter();
                     w.WriteProcessingInstruction("pi", "text");
                     w.WriteString("text");
-                    TestLog.Compare(w.Settings.ConformanceLevel, ConformanceLevel.Fragment, "Error");
+                    TestLog.Compare(
+                        w.Settings.ConformanceLevel,
+                        ConformanceLevel.Fragment,
+                        "Error"
+                    );
                     w.Dispose();
                 }
 
@@ -692,7 +791,11 @@ namespace CoreXml.Test.XLinq
 
                     xr.Read();
                     w.WriteNode(xr, false);
-                    TestLog.Compare(w.Settings.ConformanceLevel, ConformanceLevel.Document, "Error");
+                    TestLog.Compare(
+                        w.Settings.ConformanceLevel,
+                        ConformanceLevel.Document,
+                        "Error"
+                    );
                     w.Dispose();
                     xr.Dispose();
                 }
@@ -706,10 +809,15 @@ namespace CoreXml.Test.XLinq
                     string strxml = "<Root>text</Root>";
                     XmlReader xr = GetReaderStr(strxml);
 
-                    xr.Read(); xr.Read();
+                    xr.Read();
+                    xr.Read();
                     TestLog.Compare(xr.NodeType.ToString(), "Text", "Error");
                     w.WriteNode(xr, false);
-                    TestLog.Compare(w.Settings.ConformanceLevel, ConformanceLevel.Fragment, "Error");
+                    TestLog.Compare(
+                        w.Settings.ConformanceLevel,
+                        ConformanceLevel.Fragment,
+                        "Error"
+                    );
                     w.Dispose();
                     xr.Dispose();
                 }

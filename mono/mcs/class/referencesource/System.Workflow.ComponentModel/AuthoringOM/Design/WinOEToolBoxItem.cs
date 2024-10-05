@@ -2,38 +2,47 @@ namespace System.Workflow.ComponentModel.Design
 {
     using System;
     using System.Collections;
+    using System.ComponentModel;
+    using System.ComponentModel.Design;
     using System.Drawing;
     using System.Drawing.Design;
-    using System.ComponentModel;
-    using System.Runtime.Serialization;
-    using System.ComponentModel.Design;
-    using System.Security.Permissions;
     using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.Security.Permissions;
 
     [Serializable]
     [PermissionSet(SecurityAction.InheritanceDemand, Name = "FullTrust")]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class ActivityToolboxItem : ToolboxItem
     {
         private const String ActivitySuffix = "Activity";
 
-        public ActivityToolboxItem()
-        {
-        }
+        public ActivityToolboxItem() { }
+
         public ActivityToolboxItem(Type type)
             : base(type)
         {
-            // 
+            //
             if (type != null)
             {
                 if (type.Name != null)
                 {
                     string name = type.Name;
-                    if ((type.Assembly == Assembly.GetExecutingAssembly() ||
-                        type.Assembly != null && type.Assembly.FullName != null &&
-                        type.Assembly.FullName.Equals(AssemblyRef.ActivitiesAssemblyRef, StringComparison.OrdinalIgnoreCase)) &&
-                        type.Name.EndsWith(ActivitySuffix, StringComparison.Ordinal) &&
-                        !type.Name.Equals(ActivitySuffix, StringComparison.Ordinal))
+                    if (
+                        (
+                            type.Assembly == Assembly.GetExecutingAssembly()
+                            || type.Assembly != null
+                                && type.Assembly.FullName != null
+                                && type.Assembly.FullName.Equals(
+                                    AssemblyRef.ActivitiesAssemblyRef,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                        )
+                        && type.Name.EndsWith(ActivitySuffix, StringComparison.Ordinal)
+                        && !type.Name.Equals(ActivitySuffix, StringComparison.Ordinal)
+                    )
                     {
                         name = type.Name.Substring(0, type.Name.Length - ActivitySuffix.Length);
                     }
@@ -55,7 +64,7 @@ namespace System.Workflow.ComponentModel.Design
             return CreateComponentsCore(host);
         }
 
-        // 
+        //
 
         protected override IComponent[] CreateComponentsCore(IDesignerHost host)
         {
@@ -71,7 +80,9 @@ namespace System.Workflow.ComponentModel.Design
                     tpc = (ITypeProviderCreator)host.GetService(typeof(ITypeProviderCreator));
                 if (tpc != null)
                 {
-                    System.Reflection.Assembly assembly = tpc.GetTransientAssembly(this.AssemblyName);
+                    System.Reflection.Assembly assembly = tpc.GetTransientAssembly(
+                        this.AssemblyName
+                    );
                     if (assembly != null)
                         typeOfComponent = assembly.GetType(this.TypeName);
                 }
@@ -100,11 +111,20 @@ namespace System.Workflow.ComponentModel.Design
             Image toolBoxImage = null;
             if (activityType != null)
             {
-                object[] attribs = activityType.GetCustomAttributes(typeof(ToolboxBitmapAttribute), false);
+                object[] attribs = activityType.GetCustomAttributes(
+                    typeof(ToolboxBitmapAttribute),
+                    false
+                );
                 if (attribs != null && attribs.GetLength(0) == 0)
-                    attribs = activityType.GetCustomAttributes(typeof(ToolboxBitmapAttribute), true);
+                    attribs = activityType.GetCustomAttributes(
+                        typeof(ToolboxBitmapAttribute),
+                        true
+                    );
 
-                ToolboxBitmapAttribute toolboxBitmapAttribute = (attribs != null && attribs.GetLength(0) > 0) ? attribs[0] as ToolboxBitmapAttribute : null;
+                ToolboxBitmapAttribute toolboxBitmapAttribute =
+                    (attribs != null && attribs.GetLength(0) > 0)
+                        ? attribs[0] as ToolboxBitmapAttribute
+                        : null;
                 if (toolboxBitmapAttribute != null)
                     toolBoxImage = toolboxBitmapAttribute.GetImage(activityType);
             }
@@ -118,32 +138,51 @@ namespace System.Workflow.ComponentModel.Design
                 throw new ArgumentNullException("activityType");
 
             string displayName = activityType.Name;
-            object[] toolboxItemAttributes = activityType.GetCustomAttributes(typeof(ToolboxItemAttribute), true);
+            object[] toolboxItemAttributes = activityType.GetCustomAttributes(
+                typeof(ToolboxItemAttribute),
+                true
+            );
             if (toolboxItemAttributes != null && toolboxItemAttributes.Length > 0)
             {
-                ToolboxItemAttribute toolboxItemAttrib = toolboxItemAttributes[0] as ToolboxItemAttribute;
+                ToolboxItemAttribute toolboxItemAttrib =
+                    toolboxItemAttributes[0] as ToolboxItemAttribute;
                 if (toolboxItemAttrib != null && toolboxItemAttrib.ToolboxItemType != null)
                 {
                     try
                     {
-                        ToolboxItem item = Activator.CreateInstance(toolboxItemAttrib.ToolboxItemType, new object[] { activityType }) as ToolboxItem;
+                        ToolboxItem item =
+                            Activator.CreateInstance(
+                                toolboxItemAttrib.ToolboxItemType,
+                                new object[] { activityType }
+                            ) as ToolboxItem;
                         if (item != null)
                             displayName = item.DisplayName;
                     }
-                    catch
-                    {
-                    }
+                    catch { }
                 }
             }
 
             if (activityType.Assembly != null && activityType.Assembly.FullName != null)
             {
-                if ((activityType.Assembly.FullName.Equals(AssemblyRef.ActivitiesAssemblyRef, StringComparison.OrdinalIgnoreCase) ||
-                    activityType.Assembly.FullName.Equals(Assembly.GetExecutingAssembly().FullName, StringComparison.OrdinalIgnoreCase)) &&
-                    displayName.EndsWith(ActivitySuffix, StringComparison.Ordinal) &&
-                    !displayName.Equals(ActivitySuffix, StringComparison.Ordinal))
+                if (
+                    (
+                        activityType.Assembly.FullName.Equals(
+                            AssemblyRef.ActivitiesAssemblyRef,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                        || activityType.Assembly.FullName.Equals(
+                            Assembly.GetExecutingAssembly().FullName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                    && displayName.EndsWith(ActivitySuffix, StringComparison.Ordinal)
+                    && !displayName.Equals(ActivitySuffix, StringComparison.Ordinal)
+                )
                 {
-                    displayName = displayName.Substring(0, displayName.Length - ActivitySuffix.Length);
+                    displayName = displayName.Substring(
+                        0,
+                        displayName.Length - ActivitySuffix.Length
+                    );
                 }
             }
 

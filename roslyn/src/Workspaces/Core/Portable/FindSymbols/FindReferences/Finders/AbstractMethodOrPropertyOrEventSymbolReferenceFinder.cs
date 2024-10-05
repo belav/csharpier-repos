@@ -11,11 +11,16 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 {
-    internal abstract class AbstractMethodOrPropertyOrEventSymbolReferenceFinder<TSymbol> : AbstractReferenceFinder<TSymbol>
+    internal abstract class AbstractMethodOrPropertyOrEventSymbolReferenceFinder<TSymbol>
+        : AbstractReferenceFinder<TSymbol>
         where TSymbol : ISymbol
     {
         protected static ImmutableArray<IMethodSymbol> GetReferencedAccessorSymbols(
-            FindReferencesDocumentState state, IPropertySymbol property, SyntaxNode node, CancellationToken cancellationToken)
+            FindReferencesDocumentState state,
+            IPropertySymbol property,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        )
         {
             var semanticFacts = state.SemanticFacts;
             var semanticModel = state.SemanticModel;
@@ -53,7 +58,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 //
                 // This list is thought to be complete.  However, if new examples are found, they
                 // can be added here.
-                var inNameOf = semanticFacts.IsInsideNameOfExpression(semanticModel, node, cancellationToken);
+                var inNameOf = semanticFacts.IsInsideNameOfExpression(
+                    semanticModel,
+                    node,
+                    cancellationToken
+                );
                 var inStructuredTrivia = node.IsPartOfStructuredTrivia();
 
                 return inNameOf || inStructuredTrivia || property.GetMethod == null

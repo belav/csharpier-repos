@@ -19,7 +19,11 @@ namespace System.ComponentModel.Design.Tests
         [Fact]
         public void Ctor_Value()
         {
-            var value = new DesignerVerb[] { new DesignerVerb("Text", null), new DesignerVerb("Text", null) };
+            var value = new DesignerVerb[]
+            {
+                new DesignerVerb("Text", null),
+                new DesignerVerb("Text", null),
+            };
             var collection = new DesignerVerbCollection(value);
             Assert.Equal(2, collection.Count);
             Assert.Equal(value, collection.Cast<DesignerVerb>());
@@ -28,7 +32,10 @@ namespace System.ComponentModel.Design.Tests
         [Fact]
         public void Ctor_NullValue_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("value", () => new DesignerVerbCollection(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => new DesignerVerbCollection(null)
+            );
         }
 
         [Fact]
@@ -85,7 +92,11 @@ namespace System.ComponentModel.Design.Tests
         [Fact]
         public void AddRange_DesignerVerbArray_Success()
         {
-            var value = new DesignerVerb[] { new DesignerVerb("Text", null), new DesignerVerb("Text", null) };
+            var value = new DesignerVerb[]
+            {
+                new DesignerVerb("Text", null),
+                new DesignerVerb("Text", null),
+            };
             var collection = new DesignerVerbCollection();
             collection.AddRange(value);
 
@@ -96,7 +107,11 @@ namespace System.ComponentModel.Design.Tests
         [Fact]
         public void AddRange_DesignerVerbCollection_Success()
         {
-            var value = new DesignerVerb[] { new DesignerVerb("Text", null), new DesignerVerb("Text", null) };
+            var value = new DesignerVerb[]
+            {
+                new DesignerVerb("Text", null),
+                new DesignerVerb("Text", null),
+            };
             var collection = new DesignerVerbCollection();
             collection.AddRange(new DesignerVerbCollection(value));
 
@@ -107,7 +122,11 @@ namespace System.ComponentModel.Design.Tests
         [Fact]
         public void AddRange_ThisDesignerVerbCollection_Success()
         {
-            var value = new DesignerVerb[] { new DesignerVerb("Text", null), new DesignerVerb("Text", null) };
+            var value = new DesignerVerb[]
+            {
+                new DesignerVerb("Text", null),
+                new DesignerVerb("Text", null),
+            };
             var collection = new DesignerVerbCollection(value);
             collection.AddRange(collection);
 
@@ -119,8 +138,14 @@ namespace System.ComponentModel.Design.Tests
         public void AddRange_NullValue_ThrowsArgumentNullException()
         {
             var collection = new DesignerVerbCollection();
-            AssertExtensions.Throws<ArgumentNullException>("value", () => collection.AddRange((DesignerVerb[])null));
-            AssertExtensions.Throws<ArgumentNullException>("value", () => collection.AddRange((DesignerVerbCollection)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => collection.AddRange((DesignerVerb[])null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => collection.AddRange((DesignerVerbCollection)null)
+            );
         }
 
         [Fact]

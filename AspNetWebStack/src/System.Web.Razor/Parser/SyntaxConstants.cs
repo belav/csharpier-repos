@@ -13,8 +13,16 @@ namespace System.Web.Razor.Parser
         public static readonly string StartCommentSequence = "@*";
         public static readonly string EndCommentSequence = "*@";
 
-        [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible", Justification = "Class is nested to provide better organization")]
-        [SuppressMessage("Microsoft.Naming", "CA1724:TypeNamesShouldNotMatchNamespaces", Justification = "This type name should not cause a conflict")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1034:NestedTypesShouldNotBeVisible",
+            Justification = "Class is nested to provide better organization"
+        )]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1724:TypeNamesShouldNotMatchNamespaces",
+            Justification = "This type name should not cause a conflict"
+        )]
         public static class CSharp
         {
             public static readonly int UsingKeywordLength = 5;
@@ -29,7 +37,11 @@ namespace System.Web.Razor.Parser
             public static readonly string SessionStateKeyword = "sessionstate";
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible", Justification = "Class is nested to provide better organization")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1034:NestedTypesShouldNotBeVisible",
+            Justification = "Class is nested to provide better organization"
+        )]
         public static class VB
         {
             public static readonly int ImportsKeywordLength = 7;

@@ -9,7 +9,7 @@ public static class Program
 {
     [DllImport("cet_check.dll")]
     private static extern long ReadShadowStackPointer();
-    
+
     [Fact]
     public static int TestEntryPoint()
     {

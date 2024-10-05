@@ -13,23 +13,35 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.CSharp.ConvertBetweenRegularAndVerbatimString
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.ConvertBetweenRegularAndVerbatimInterpolatedString), Shared]
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.ConvertBetweenRegularAndVerbatimInterpolatedString
+        ),
+        Shared
+    ]
     [ExtensionOrder(Before = PredefinedCodeRefactoringProviderNames.ConvertToInterpolatedString)]
     internal class ConvertBetweenRegularAndVerbatimInterpolatedStringCodeRefactoringProvider
         : AbstractConvertBetweenRegularAndVerbatimStringCodeRefactoringProvider<InterpolatedStringExpressionSyntax>
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public ConvertBetweenRegularAndVerbatimInterpolatedStringCodeRefactoringProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public ConvertBetweenRegularAndVerbatimInterpolatedStringCodeRefactoringProvider() { }
 
         protected override bool IsInterpolation { get; } = true;
 
-        protected override bool IsAppropriateLiteralKind(InterpolatedStringExpressionSyntax literalExpression)
-            => true;
+        protected override bool IsAppropriateLiteralKind(
+            InterpolatedStringExpressionSyntax literalExpression
+        ) => true;
 
-        protected override void AddSubStringTokens(InterpolatedStringExpressionSyntax literalExpression, ArrayBuilder<SyntaxToken> subStringTokens)
+        protected override void AddSubStringTokens(
+            InterpolatedStringExpressionSyntax literalExpression,
+            ArrayBuilder<SyntaxToken> subStringTokens
+        )
         {
             foreach (var content in literalExpression.Contents)
             {
@@ -38,14 +50,21 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertBetweenRegularAndVerbatimString
             }
         }
 
-        protected override bool IsVerbatim(InterpolatedStringExpressionSyntax literalExpression)
-            => literalExpression.StringStartToken.Kind() == SyntaxKind.InterpolatedVerbatimStringStartToken;
+        protected override bool IsVerbatim(InterpolatedStringExpressionSyntax literalExpression) =>
+            literalExpression.StringStartToken.Kind()
+            == SyntaxKind.InterpolatedVerbatimStringStartToken;
 
         private static InterpolatedStringExpressionSyntax Convert(
-            IVirtualCharService charService, StringBuilder sb, InterpolatedStringExpressionSyntax stringExpression,
-            SyntaxKind newStartKind, Action<IVirtualCharService, StringBuilder, SyntaxToken> addStringText)
+            IVirtualCharService charService,
+            StringBuilder sb,
+            InterpolatedStringExpressionSyntax stringExpression,
+            SyntaxKind newStartKind,
+            Action<IVirtualCharService, StringBuilder, SyntaxToken> addStringText
+        )
         {
-            using var _ = ArrayBuilder<InterpolatedStringContentSyntax>.GetInstance(out var newContents);
+            using var _ = ArrayBuilder<InterpolatedStringContentSyntax>.GetInstance(
+                out var newContents
+            );
 
             foreach (var content in stringExpression.Contents)
             {
@@ -55,7 +74,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertBetweenRegularAndVerbatimString
                     sb.Clear();
 
                     addStringText(charService, sb, textSyntax.TextToken);
-                    newContents.Add(textSyntax.WithTextToken(CreateTextToken(textSyntax.TextToken, sb)));
+                    newContents.Add(
+                        textSyntax.WithTextToken(CreateTextToken(textSyntax.TextToken, sb))
+                    );
                 }
                 else
                 {
@@ -68,27 +89,49 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertBetweenRegularAndVerbatimString
             var newStartToken = SyntaxFactory.Token(
                 leading: startToken.LeadingTrivia,
                 kind: newStartKind,
-                trailing: startToken.TrailingTrivia);
+                trailing: startToken.TrailingTrivia
+            );
 
             return stringExpression.Update(
                 newStartToken,
                 SyntaxFactory.List(newContents),
-                stringExpression.StringEndToken);
+                stringExpression.StringEndToken
+            );
         }
 
-        private static SyntaxToken CreateTextToken(SyntaxToken textToken, StringBuilder sb)
-            => SyntaxFactory.Token(
+        private static SyntaxToken CreateTextToken(SyntaxToken textToken, StringBuilder sb) =>
+            SyntaxFactory.Token(
                 leading: textToken.LeadingTrivia,
                 SyntaxKind.InterpolatedStringTextToken,
-                sb.ToString(), valueText: "",
-                trailing: textToken.TrailingTrivia);
+                sb.ToString(),
+                valueText: "",
+                trailing: textToken.TrailingTrivia
+            );
 
-        protected override InterpolatedStringExpressionSyntax CreateVerbatimStringExpression(IVirtualCharService charService, StringBuilder sb, InterpolatedStringExpressionSyntax stringExpression)
-            => Convert(charService, sb, stringExpression,
-                SyntaxKind.InterpolatedVerbatimStringStartToken, AddVerbatimStringText);
+        protected override InterpolatedStringExpressionSyntax CreateVerbatimStringExpression(
+            IVirtualCharService charService,
+            StringBuilder sb,
+            InterpolatedStringExpressionSyntax stringExpression
+        ) =>
+            Convert(
+                charService,
+                sb,
+                stringExpression,
+                SyntaxKind.InterpolatedVerbatimStringStartToken,
+                AddVerbatimStringText
+            );
 
-        protected override InterpolatedStringExpressionSyntax CreateRegularStringExpression(IVirtualCharService charService, StringBuilder sb, InterpolatedStringExpressionSyntax stringExpression)
-            => Convert(charService, sb, stringExpression,
-                SyntaxKind.InterpolatedStringStartToken, AddRegularStringText);
+        protected override InterpolatedStringExpressionSyntax CreateRegularStringExpression(
+            IVirtualCharService charService,
+            StringBuilder sb,
+            InterpolatedStringExpressionSyntax stringExpression
+        ) =>
+            Convert(
+                charService,
+                sb,
+                stringExpression,
+                SyntaxKind.InterpolatedStringStartToken,
+                AddRegularStringText
+            );
     }
 }

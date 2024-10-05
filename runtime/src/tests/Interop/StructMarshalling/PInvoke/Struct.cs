@@ -6,6 +6,7 @@ public class Common
 {
     public const int NumArrElements = 2;
 }
+
 //////////////////////////////struct definition///////////////////////////
 [StructLayout(LayoutKind.Sequential)]
 public struct InnerSequential
@@ -46,8 +47,10 @@ struct AggregateSequentialWrapper
 public struct ComplexStruct
 {
     public int i;
+
     [MarshalAs(UnmanagedType.I1)]
     public bool b;
+
     [MarshalAs(UnmanagedType.LPStr)]
     public string str;
     public IntPtr pedding;
@@ -59,10 +62,13 @@ public struct ScriptParamType
 {
     [FieldOffset(0)]
     public int idata;
+
     [FieldOffset(8)]
     public bool bdata;
+
     [FieldOffset(8)]
     public double ddata;
+
     [FieldOffset(8)]
     public IntPtr ptrdata;
 }
@@ -72,8 +78,10 @@ public struct INNER2
 {
     [FieldOffset(0)]
     public int f1;
+
     [FieldOffset(4)]
     public float f2;
+
     [FieldOffset(8)]
     public String f3;
 }
@@ -83,13 +91,15 @@ public struct InnerExplicit
 {
     [FieldOffset(0)]
     public int f1;
+
     [FieldOffset(0)]
     public float f2;
+
     [FieldOffset(8)]
     public String f3;
 }
 
-[StructLayout(LayoutKind.Sequential)]//struct containing one field of array type
+[StructLayout(LayoutKind.Sequential)] //struct containing one field of array type
 public struct InnerArraySequential
 {
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = Common.NumArrElements)]
@@ -153,8 +163,10 @@ public struct NumberSequential
 public struct S3
 {
     public bool flag;
+
     [MarshalAs(UnmanagedType.LPStr)]
     public string str;
+
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = 256)]
     public int[] vals;
 }
@@ -166,7 +178,12 @@ public struct S4
     public string name;
 }
 
-public enum Enum1 { e1 = 1, e2 = 3 };
+public enum Enum1
+{
+    e1 = 1,
+    e2 = 3,
+};
+
 [StructLayout(LayoutKind.Sequential)]
 public struct S5
 {
@@ -187,19 +204,25 @@ public struct StringStructSequentialUnicode
     public string first;
     public string last;
 }
+
 [StructLayout(LayoutKind.Sequential)]
 public struct S8
 {
     public string name;
+
     [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
     public string fullName;
     public bool gender;
+
     [MarshalAs(UnmanagedType.Error)]
     public int i32;
+
     [MarshalAs(UnmanagedType.Error)]
     public uint ui32;
+
     [MarshalAs(UnmanagedType.U2)]
     public UInt16 jobNum;
+
     [MarshalAs(UnmanagedType.I1)]
     public sbyte mySByte;
 }
@@ -218,17 +241,20 @@ public struct IntegerStructSequential
 {
     public int i;
 }
+
 [StructLayout(LayoutKind.Sequential)]
 public struct OuterIntegerStructSequential
 {
     public int i;
     public IntegerStructSequential s_int;
 }
+
 [StructLayout(LayoutKind.Sequential)]
 public struct IncludeOuterIntegerStructSequential
 {
     public OuterIntegerStructSequential s;
 }
+
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct S11
 {
@@ -241,26 +267,37 @@ public struct U
 {
     [FieldOffset(0)]
     public int i32;
+
     [FieldOffset(0)]
     public uint ui32;
+
     [FieldOffset(0)]
     public IntPtr iPtr;
+
     [FieldOffset(0)]
     public UIntPtr uiPtr;
+
     [FieldOffset(0)]
     public short s;
+
     [FieldOffset(0)]
     public ushort us;
+
     [FieldOffset(0)]
     public Byte b;
+
     [FieldOffset(0)]
     public SByte sb;
+
     [FieldOffset(0)]
     public long l;
+
     [FieldOffset(0)]
     public ulong ul;
+
     [FieldOffset(0)]
     public float f;
+
     [FieldOffset(0)]
     public Double d;
 }
@@ -270,6 +307,7 @@ public struct ByteStructPack2Explicit
 {
     [FieldOffset(0)]
     public byte b1;
+
     [FieldOffset(1)]
     public byte b2;
 }
@@ -279,6 +317,7 @@ public struct ShortStructPack4Explicit
 {
     [FieldOffset(0)]
     public short s1;
+
     [FieldOffset(2)]
     public short s2;
 }
@@ -288,6 +327,7 @@ public struct IntStructPack8Explicit
 {
     [FieldOffset(0)]
     public int i1;
+
     [FieldOffset(4)]
     public int i2;
 }
@@ -297,6 +337,7 @@ public struct LongStructPack16Explicit
 {
     [FieldOffset(0)]
     public long l1;
+
     [FieldOffset(8)]
     public long l2;
 }
@@ -321,10 +362,13 @@ public struct ExplicitHFA
 {
     [FieldOffset(0)]
     public float f1;
+
     [FieldOffset(4)]
     public float f2;
+
     [FieldOffset(8)]
     public float f3;
+
     [FieldOffset(12)]
     public float f4;
 }
@@ -334,8 +378,10 @@ public unsafe struct ExplicitFixedHFA
 {
     [FieldOffset(0)]
     public float f1;
+
     [FieldOffset(4)]
     public float f2;
+
     [FieldOffset(8)]
     public fixed float fs[2];
 }
@@ -409,7 +455,6 @@ public struct ManyInts
     }
 }
 
-
 [StructLayout(LayoutKind.Sequential)]
 [InlineArray(2)]
 public struct MultipleBool
@@ -432,6 +477,7 @@ public struct OverlappingLongFloat2
 {
     [FieldOffset(4)]
     public float f;
+
     [FieldOffset(0)]
     public long l;
 }
@@ -441,6 +487,7 @@ public struct OverlappingMultipleEightbyte
 {
     [FieldOffset(8)]
     public int i;
+
     [FieldOffset(0), MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
     public float[] arr;
 }
@@ -493,7 +540,7 @@ public struct NonBlittableFloat
 {
     public NonBlittableFloat(float f)
     {
-        arr = new []{f};
+        arr = new[] { f };
     }
 
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = 1)]

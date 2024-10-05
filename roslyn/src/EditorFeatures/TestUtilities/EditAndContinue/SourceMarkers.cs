@@ -16,33 +16,44 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests;
 
 internal static class SourceMarkers
 {
-    private static readonly Regex s_tags = new(
-        "[<]  (?<IsEnd>/?)  (?<Name>(AS|ER|N|TS))[:]  (?<Id>[.0-9,]+)  (?<IsStartAndEnd>/?)  [>]", RegexOptions.IgnorePatternWhitespace);
+    private static readonly Regex s_tags =
+        new(
+            "[<]  (?<IsEnd>/?)  (?<Name>(AS|ER|N|TS))[:]  (?<Id>[.0-9,]+)  (?<IsStartAndEnd>/?)  [>]",
+            RegexOptions.IgnorePatternWhitespace
+        );
 
-    public static readonly Regex ExceptionRegionPattern = new(
-        @"[<]ER[:]      (?<Id>(?:[0-9]+[.][0-9]+[,]?)+)   [>]
+    public static readonly Regex ExceptionRegionPattern =
+        new(
+            @"[<]ER[:]      (?<Id>(?:[0-9]+[.][0-9]+[,]?)+)   [>]
             (?<ExceptionRegion>.*)
           [<][/]ER[:]   (\k<Id>)                          [>]",
-        RegexOptions.IgnorePatternWhitespace | RegexOptions.Singleline);
+            RegexOptions.IgnorePatternWhitespace | RegexOptions.Singleline
+        );
 
-    private static readonly Regex s_trackingStatementPattern = new(
-        @"[<]TS[:]    (?<Id>[0-9,]+) [>]
+    private static readonly Regex s_trackingStatementPattern =
+        new(
+            @"[<]TS[:]    (?<Id>[0-9,]+) [>]
             (?<TrackingStatement>.*)
           [<][/]TS[:] (\k<Id>)       [>]",
-        RegexOptions.IgnorePatternWhitespace | RegexOptions.Singleline);
+            RegexOptions.IgnorePatternWhitespace | RegexOptions.Singleline
+        );
 
-    internal static string Clear(string source)
-        => s_tags.Replace(source, m => new string(' ', m.Length));
+    internal static string Clear(string source) =>
+        s_tags.Replace(source, m => new string(' ', m.Length));
 
-    internal static string[] Clear(string[] sources)
-        => sources.Select(Clear).ToArray();
+    internal static string[] Clear(string[] sources) => sources.Select(Clear).ToArray();
 
-    private static IEnumerable<(int, int)> ParseIds(Match match)
-        => from ids in match.Groups["Id"].Value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-           let parts = ids.Split('.')
-           select (int.Parse(parts[0]), (parts.Length > 1) ? int.Parse(parts[1]) : 0);
+    private static IEnumerable<(int, int)> ParseIds(Match match) =>
+        from ids in match
+            .Groups["Id"]
+            .Value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+        let parts = ids.Split('.')
+        select (int.Parse(parts[0]), (parts.Length > 1) ? int.Parse(parts[1]) : 0);
 
-    private static IEnumerable<((int major, int minor) id, TextSpan span)> GetSpans(string markedSource, string tagName)
+    private static IEnumerable<((int major, int minor) id, TextSpan span)> GetSpans(
+        string markedSource,
+        string tagName
+    )
     {
         // id -> content start index
         var tagMap = new Dictionary<(int major, int minor), (int start, int end)>();
@@ -54,8 +65,10 @@ internal static class SourceMarkers
                 continue;
             }
 
-            var isStartingTag = match.Groups["IsEnd"].Value == "" || match.Groups["IsStartAndEnd"].Value != "";
-            var isEndingTag = match.Groups["IsEnd"].Value != "" || match.Groups["IsStartAndEnd"].Value != "";
+            var isStartingTag =
+                match.Groups["IsEnd"].Value == "" || match.Groups["IsStartAndEnd"].Value != "";
+            var isEndingTag =
+                match.Groups["IsEnd"].Value != "" || match.Groups["IsStartAndEnd"].Value != "";
             Contract.ThrowIfFalse(isStartingTag || isEndingTag);
 
             foreach (var id in ParseIds(match))
@@ -82,8 +95,8 @@ internal static class SourceMarkers
         }
     }
 
-    public static IEnumerable<(TextSpan Span, int Id)> GetActiveSpans(string markedSource)
-        => GetSpans(markedSource, tagName: "AS").Select(s => (s.span, s.id.major));
+    public static IEnumerable<(TextSpan Span, int Id)> GetActiveSpans(string markedSource) =>
+        GetSpans(markedSource, tagName: "AS").Select(s => (s.span, s.id.major));
 
     public static TextSpan[] GetTrackingSpans(string src, int count)
     {
@@ -126,11 +139,16 @@ internal static class SourceMarkers
                 result[activeStatementId] ??= new List<TextSpan>();
                 EnsureSlot(result[activeStatementId], exceptionRegionId);
 
-                var regionText = plainSource.AsSpan().Slice(exceptionRegion.Index, exceptionRegion.Length);
+                var regionText = plainSource
+                    .AsSpan()
+                    .Slice(exceptionRegion.Index, exceptionRegion.Length);
                 var start = IndexOfDifferent(regionText, ' ');
                 var length = LastIndexOfDifferent(regionText, ' ') - start + 1;
 
-                result[activeStatementId][exceptionRegionId] = new TextSpan(exceptionRegion.Index + start, length);
+                result[activeStatementId][exceptionRegionId] = new TextSpan(
+                    exceptionRegion.Index + start,
+                    length
+                );
             }
         }
 

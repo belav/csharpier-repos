@@ -27,8 +27,7 @@ class Program
             .AddDataProtection()
             .PersistKeysToDbContext<DataProtectionKeyContext>()
             .SetDefaultKeyLifetime(TimeSpan.FromDays(7))
-            .Services
-            .BuildServiceProvider(validateScopes: true);
+            .Services.BuildServiceProvider(validateScopes: true);
 
         using (services)
         {
@@ -42,7 +41,8 @@ class Program
 
 class DataProtectionKeyContext : DbContext, IDataProtectionKeyContext
 {
-    public DataProtectionKeyContext(DbContextOptions<DataProtectionKeyContext> options) : base(options) { }
+    public DataProtectionKeyContext(DbContextOptions<DataProtectionKeyContext> options)
+        : base(options) { }
 
     public DbSet<DataProtectionKey> DataProtectionKeys { get; set; }
 }

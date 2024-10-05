@@ -5,8 +5,8 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
-    using System.Reflection;
     using System.Collections;
+    using System.Reflection;
 
     public interface IClientOperationSelector
     {

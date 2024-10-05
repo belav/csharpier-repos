@@ -15,26 +15,39 @@ namespace Microsoft.CodeAnalysis.UnitTests.Options
 {
     public class OptionKeyTests
     {
-        private sealed class TestOptionStorageLocation : OptionStorageLocation
-        {
-        }
+        private sealed class TestOptionStorageLocation : OptionStorageLocation { }
 
         [Fact]
         public void OptionConstructor_Errors()
         {
-            Assert.Throws<ArgumentNullException>(() => new Option<bool>("Test Feature", null!, false));
+            Assert.Throws<ArgumentNullException>(
+                () => new Option<bool>("Test Feature", null!, false)
+            );
             Assert.Throws<ArgumentNullException>(() => new Option<bool>(null!, "Test Name", false));
-            Assert.Throws<ArgumentNullException>(() => new Option<bool>("X", "Test Name", false, storageLocations: null!));
-            Assert.Throws<ArgumentNullException>(() => new Option<bool>("X", "Test Name", false, storageLocations: [null!]));
+            Assert.Throws<ArgumentNullException>(
+                () => new Option<bool>("X", "Test Name", false, storageLocations: null!)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => new Option<bool>("X", "Test Name", false, storageLocations: [null!])
+            );
         }
 
         [Fact]
         public void PerLanguageOptionConstructor_Errors()
         {
-            Assert.Throws<ArgumentNullException>(() => new PerLanguageOption<bool>("Test Feature", null!, false));
-            Assert.Throws<ArgumentNullException>(() => new PerLanguageOption<bool>(null!, "Test Name", false));
-            Assert.Throws<ArgumentNullException>(() => new PerLanguageOption<bool>("X", "Test Name", false, storageLocations: null!));
-            Assert.Throws<ArgumentNullException>(() => new PerLanguageOption<bool>("X", "Test Name", false, storageLocations: [null!]));
+            Assert.Throws<ArgumentNullException>(
+                () => new PerLanguageOption<bool>("Test Feature", null!, false)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => new PerLanguageOption<bool>(null!, "Test Name", false)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => new PerLanguageOption<bool>("X", "Test Name", false, storageLocations: null!)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    new PerLanguageOption<bool>("X", "Test Name", false, storageLocations: [null!])
+            );
         }
 
         [Fact]
@@ -57,7 +70,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.Options
             var storage2 = new TestOptionStorageLocation();
             var storage3 = new TestOptionStorageLocation();
 
-            var option = new PerLanguageOption<bool>("X", "Test Name", false, storage1, storage2, storage3);
+            var option = new PerLanguageOption<bool>(
+                "X",
+                "Test Name",
+                false,
+                storage1,
+                storage2,
+                storage3
+            );
             Assert.Same(storage1, option.StorageLocations[0]);
             Assert.Same(storage2, option.StorageLocations[1]);
             Assert.Same(storage3, option.StorageLocations[2]);
@@ -72,8 +92,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Options
             Assert.Throws<ArgumentNullException>(() => new OptionKey(null!));
             Assert.Throws<ArgumentNullException>(() => new OptionKey(null!, null!));
             Assert.Throws<ArgumentNullException>(() => new OptionKey(null!, "lang"));
-            Assert.Throws<ArgumentNullException>(() => new OptionKey(new TestOption() { IsPerLanguage = true }));
-            Assert.Throws<ArgumentException>(() => new OptionKey(new TestOption() { IsPerLanguage = false }, language: "lang"));
+            Assert.Throws<ArgumentNullException>(
+                () => new OptionKey(new TestOption() { IsPerLanguage = true })
+            );
+            Assert.Throws<ArgumentException>(
+                () => new OptionKey(new TestOption() { IsPerLanguage = false }, language: "lang")
+            );
         }
 
         [Fact]
@@ -143,7 +167,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Options
         {
             var option1 = new PerLanguageOption<bool>("FooFeature", "BarName", defaultValue: false);
             var option2 = new PerLanguageOption<bool>("FooFeature", "BarName", defaultValue: true);
-            var option3 = new PerLanguageOption<bool>("FormattingOptions", "UseTabs", FormattingOptions.UseTabs.DefaultValue);
+            var option3 = new PerLanguageOption<bool>(
+                "FormattingOptions",
+                "UseTabs",
+                FormattingOptions.UseTabs.DefaultValue
+            );
 
             Assert.False(option1.Equals(option2));
             Assert.False(option2.Equals(option1));
@@ -156,7 +184,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Options
         {
             var option1 = new Option<bool>("FooFeature", "BarName", defaultValue: false);
             var option2 = new Option<bool>("FooFeature", "BarName", defaultValue: true);
-            var option3 = new Option<bool>("CSharpFormattingOptions", "SpacingAfterMethodDeclarationName", CSharpFormattingOptions.SpacingAfterMethodDeclarationName.DefaultValue);
+            var option3 = new Option<bool>(
+                "CSharpFormattingOptions",
+                "SpacingAfterMethodDeclarationName",
+                CSharpFormattingOptions.SpacingAfterMethodDeclarationName.DefaultValue
+            );
 
             Assert.False(option1.Equals(option2));
             Assert.False(option2.Equals(option1));
@@ -170,8 +202,16 @@ namespace Microsoft.CodeAnalysis.UnitTests.Options
             var option = CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess;
             var publicOption = CodeStyleOptions.PreferIntrinsicPredefinedTypeKeywordInMemberAccess;
 
-            Assert.True(option.Definition.Serializer.TryParseValue("true:suggestion", out var result));
-            Assert.Equal(new CodeStyleOption2<bool>(true, NotificationOption2.Suggestion.WithIsExplicitlySpecified(true)), result);
+            Assert.True(
+                option.Definition.Serializer.TryParseValue("true:suggestion", out var result)
+            );
+            Assert.Equal(
+                new CodeStyleOption2<bool>(
+                    true,
+                    NotificationOption2.Suggestion.WithIsExplicitlySpecified(true)
+                ),
+                result
+            );
 
             Assert.Empty(publicOption.StorageLocations);
         }
@@ -179,13 +219,24 @@ namespace Microsoft.CodeAnalysis.UnitTests.Options
         [Fact]
         public void IsEditorConfigOption()
         {
-            Assert.All(FormattingOptions2.Options, o => Assert.True(o.Definition.IsEditorConfigOption));
+            Assert.All(
+                FormattingOptions2.Options,
+                o => Assert.True(o.Definition.IsEditorConfigOption)
+            );
             Assert.False(FormattingOptions2.SmartIndent.Definition.IsEditorConfigOption);
 
-            Assert.All(CSharpFormattingOptions2.AllOptions, o => Assert.True(o.Definition.IsEditorConfigOption));
+            Assert.All(
+                CSharpFormattingOptions2.AllOptions,
+                o => Assert.True(o.Definition.IsEditorConfigOption)
+            );
 
             Assert.True(NamingStyleOptions.NamingPreferences.Definition.IsEditorConfigOption);
-            Assert.True(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess.Definition.IsEditorConfigOption);
+            Assert.True(
+                CodeStyleOptions2
+                    .PreferIntrinsicPredefinedTypeKeywordInMemberAccess
+                    .Definition
+                    .IsEditorConfigOption
+            );
         }
     }
 }

@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
@@ -10,8 +10,7 @@ namespace System.Runtime.CompilerServices
 {
     using System;
 
-
-    [AttributeUsage(AttributeTargets.Assembly, AllowMultiple=true, Inherited=false)]
+    [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true, Inherited = false)]
     public sealed class InternalsVisibleToAttribute : Attribute
     {
         private string _assemblyName;
@@ -22,12 +21,9 @@ namespace System.Runtime.CompilerServices
             this._assemblyName = assemblyName;
         }
 
-        public string AssemblyName 
+        public string AssemblyName
         {
-            get 
-            {
-                return _assemblyName;
-            }
+            get { return _assemblyName; }
         }
 
         public bool AllInternalsVisible
@@ -41,19 +37,19 @@ namespace System.Runtime.CompilerServices
     ///     If AllInternalsVisible is not true for a friend assembly, the FriendAccessAllowed attribute
     ///     indicates which internals are shared with that friend assembly.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class |
-                    AttributeTargets.Constructor |
-                    AttributeTargets.Enum |
-                    AttributeTargets.Event |
-                    AttributeTargets.Field |
-                    AttributeTargets.Interface |
-                    AttributeTargets.Method |
-                    AttributeTargets.Property |
-                    AttributeTargets.Struct,
+    [AttributeUsage(
+        AttributeTargets.Class
+            | AttributeTargets.Constructor
+            | AttributeTargets.Enum
+            | AttributeTargets.Event
+            | AttributeTargets.Field
+            | AttributeTargets.Interface
+            | AttributeTargets.Method
+            | AttributeTargets.Property
+            | AttributeTargets.Struct,
         AllowMultiple = false,
-        Inherited = false)]
+        Inherited = false
+    )]
     [FriendAccessAllowed]
-    internal sealed class FriendAccessAllowedAttribute : Attribute {
-    }
+    internal sealed class FriendAccessAllowedAttribute : Attribute { }
 }
-

@@ -15,31 +15,38 @@ namespace System.ServiceModel.ComIntegration
     using System.Security.Permissions;
     using SafeHGlobalHandle = System.IdentityModel.SafeHGlobalHandle;
 
-
-    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
-    Guid("0000010c-0000-0000-C000-000000000046")]
+    [
+        InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+        Guid("0000010c-0000-0000-C000-000000000046")
+    ]
     internal interface IPersist
     {
-        void GetClassID( /* [out] */ out Guid pClassID);
+        void GetClassID( /* [out] */
+            out Guid pClassID
+        );
     };
 
-    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
-    Guid("00000109-0000-0000-C000-000000000046")]
+    [
+        InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+        Guid("00000109-0000-0000-C000-000000000046")
+    ]
     internal interface IPersistStream : IPersist
     {
         new void GetClassID(out Guid pClassID);
+
         [PreserveSig]
         int IsDirty();
         void Load([In] IStream pStm);
-        void Save([In] IStream pStm, [In,
-        MarshalAs(UnmanagedType.Bool)] bool fClearDirty);
+        void Save([In] IStream pStm, [In, MarshalAs(UnmanagedType.Bool)] bool fClearDirty);
         void GetSizeMax(out long pcbSize);
     };
 
     internal class PersistHelper
     {
-        [Fx.Tag.SecurityNote(Critical = "Uses critical type SafeHGlobalHandle.",
-            Safe = "Performs a Demand for full trust.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses critical type SafeHGlobalHandle.",
+            Safe = "Performs a Demand for full trust."
+        )]
         [SecuritySafeCritical]
         [SecurityPermission(SecurityAction.Demand, Unrestricted = true)]
         internal static byte[] ConvertHGlobalToByteArray(SafeHGlobalHandle hGlobal)
@@ -51,7 +58,9 @@ namespace System.ServiceModel.ComIntegration
                 byte[] byteArray = new Byte[sizeOfByteArray];
                 IntPtr pBuff = SafeNativeMethods.GlobalLock(hGlobal);
                 if (IntPtr.Zero == pBuff)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new OutOfMemoryException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new OutOfMemoryException()
+                    );
 
                 try
                 {
@@ -66,13 +75,18 @@ namespace System.ServiceModel.ComIntegration
             return null;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Uses critical type SafeHGlobalHandle.",
-            Safe = "Performs a Demand for full trust.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses critical type SafeHGlobalHandle.",
+            Safe = "Performs a Demand for full trust."
+        )]
         [SecuritySafeCritical]
         [SecurityPermission(SecurityAction.Demand, Unrestricted = true)]
         internal static Byte[] PersistIPersistStreamToByteArray(IPersistStream persistableObject)
         {
-            IStream stream = SafeNativeMethods.CreateStreamOnHGlobal(SafeHGlobalHandle.InvalidHandle, false);
+            IStream stream = SafeNativeMethods.CreateStreamOnHGlobal(
+                SafeHGlobalHandle.InvalidHandle,
+                false
+            );
             try
             {
                 persistableObject.Save(stream, true);
@@ -90,17 +104,24 @@ namespace System.ServiceModel.ComIntegration
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Uses critical type SafeHGlobalHandle.",
-            Safe = "Performs a Demand for full trust.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses critical type SafeHGlobalHandle.",
+            Safe = "Performs a Demand for full trust."
+        )]
         [SecuritySafeCritical]
         [SecurityPermission(SecurityAction.Demand, Unrestricted = true)]
-        internal static void LoadIntoObjectFromByteArray(IPersistStream persistableObject, Byte[] byteStream)
+        internal static void LoadIntoObjectFromByteArray(
+            IPersistStream persistableObject,
+            Byte[] byteStream
+        )
         {
             SafeHGlobalHandle hGlobal = SafeHGlobalHandle.AllocHGlobal(byteStream.Length);
 
             IntPtr pBuff = SafeNativeMethods.GlobalLock(hGlobal);
             if (IntPtr.Zero == pBuff)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new OutOfMemoryException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new OutOfMemoryException()
+                );
             try
             {
                 Marshal.Copy(byteStream, 0, pBuff, byteStream.Length);
@@ -122,17 +143,23 @@ namespace System.ServiceModel.ComIntegration
 
         internal static object ActivateAndLoadFromByteStream(Guid clsid, byte[] byteStream)
         {
-            IPersistStream persistableObject = SafeNativeMethods.CoCreateInstance(
-                            clsid,
-                            null,
-                            CLSCTX.INPROC_SERVER,
-                            typeof(IPersistStream).GUID) as IPersistStream;
+            IPersistStream persistableObject =
+                SafeNativeMethods.CoCreateInstance(
+                    clsid,
+                    null,
+                    CLSCTX.INPROC_SERVER,
+                    typeof(IPersistStream).GUID
+                ) as IPersistStream;
             if (null != persistableObject)
             {
                 LoadIntoObjectFromByteArray(persistableObject, byteStream);
                 return persistableObject;
             }
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.CLSIDDoesNotSupportIPersistStream, clsid.ToString("B"))));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidOperationException(
+                    SR.GetString(SR.CLSIDDoesNotSupportIPersistStream, clsid.ToString("B"))
+                )
+            );
         }
     }
 
@@ -141,16 +168,13 @@ namespace System.ServiceModel.ComIntegration
     {
         [DataMember]
         internal Guid clsid;
+
         [DataMember]
         internal byte[] dataStream;
 
         public PersistStreamTypeWrapper() { }
 
-        public ExtensionDataObject ExtensionData
-        {
-            get;
-            set;
-        }
+        public ExtensionDataObject ExtensionData { get; set; }
 
         [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
         public void SetObject<T>(T obj)
@@ -160,7 +184,9 @@ namespace System.ServiceModel.ComIntegration
                 IntPtr punk = Marshal.GetIUnknownForObject(obj);
                 if (IntPtr.Zero == punk)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.UnableToRetrievepUnk)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException(SR.GetString(SR.UnableToRetrievepUnk))
+                    );
                 }
                 try
                 {
@@ -173,12 +199,19 @@ namespace System.ServiceModel.ComIntegration
                         {
                             if (IntPtr.Zero == persistStream)
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.PersistWrapperIsNull)));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new ArgumentException(SR.GetString(SR.PersistWrapperIsNull))
+                                );
                             }
-                            IPersistStream persistableObject = (IPersistStream)System.Runtime.Remoting.Services.EnterpriseServicesHelper.WrapIUnknownWithComObject(persistStream);
+                            IPersistStream persistableObject = (IPersistStream)
+                                System.Runtime.Remoting.Services.EnterpriseServicesHelper.WrapIUnknownWithComObject(
+                                    persistStream
+                                );
                             try
                             {
-                                this.dataStream = PersistHelper.PersistIPersistStreamToByteArray(persistableObject);
+                                this.dataStream = PersistHelper.PersistIPersistStreamToByteArray(
+                                    persistableObject
+                                );
                                 this.clsid = typeof(T).GUID;
                             }
                             finally
@@ -192,7 +225,14 @@ namespace System.ServiceModel.ComIntegration
                         }
                     }
                     else
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.CLSIDDoesNotSupportIPersistStream, typeof(T).GUID.ToString("B"))));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.CLSIDDoesNotSupportIPersistStream,
+                                    typeof(T).GUID.ToString("B")
+                                )
+                            )
+                        );
                 }
                 finally
                 {
@@ -201,8 +241,9 @@ namespace System.ServiceModel.ComIntegration
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.NotAComObject)));
-
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(SR.GetString(SR.NotAComObject))
+                );
             }
         }
 
@@ -214,7 +255,9 @@ namespace System.ServiceModel.ComIntegration
                 IntPtr punk = Marshal.GetIUnknownForObject(obj);
                 if (IntPtr.Zero == punk)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.UnableToRetrievepUnk)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException(SR.GetString(SR.UnableToRetrievepUnk))
+                    );
                 }
                 try
                 {
@@ -227,12 +270,20 @@ namespace System.ServiceModel.ComIntegration
                         {
                             if (IntPtr.Zero == persistStream)
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.PersistWrapperIsNull)));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new ArgumentException(SR.GetString(SR.PersistWrapperIsNull))
+                                );
                             }
-                            IPersistStream persistableObject = (IPersistStream)System.Runtime.Remoting.Services.EnterpriseServicesHelper.WrapIUnknownWithComObject(persistStream);
+                            IPersistStream persistableObject = (IPersistStream)
+                                System.Runtime.Remoting.Services.EnterpriseServicesHelper.WrapIUnknownWithComObject(
+                                    persistStream
+                                );
                             try
                             {
-                                PersistHelper.LoadIntoObjectFromByteArray(persistableObject, dataStream);
+                                PersistHelper.LoadIntoObjectFromByteArray(
+                                    persistableObject,
+                                    dataStream
+                                );
                             }
                             finally
                             {
@@ -245,7 +296,14 @@ namespace System.ServiceModel.ComIntegration
                         }
                     }
                     else
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.CLSIDDoesNotSupportIPersistStream, typeof(T).GUID.ToString("B"))));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.CLSIDDoesNotSupportIPersistStream,
+                                    typeof(T).GUID.ToString("B")
+                                )
+                            )
+                        );
                 }
                 finally
                 {
@@ -253,13 +311,22 @@ namespace System.ServiceModel.ComIntegration
                 }
             }
             else
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.CLSIDOfTypeDoesNotMatch, typeof(T).GUID.ToString(), clsid.ToString("B"))));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.CLSIDOfTypeDoesNotMatch,
+                            typeof(T).GUID.ToString(),
+                            clsid.ToString("B")
+                        )
+                    )
+                );
         }
     }
 
     internal class DataContractSurrogateForPersistWrapper : IDataContractSurrogate
     {
         Guid[] allowedClasses;
+
         public DataContractSurrogateForPersistWrapper(Guid[] allowedClasses)
         {
             this.allowedClasses = allowedClasses;
@@ -290,11 +357,17 @@ namespace System.ServiceModel.ComIntegration
                 {
                     PersistStreamTypeWrapper objToSerialize = new PersistStreamTypeWrapper();
                     streamableObject.GetClassID(out objToSerialize.clsid);
-                    objToSerialize.dataStream = PersistHelper.PersistIPersistStreamToByteArray(streamableObject);
+                    objToSerialize.dataStream = PersistHelper.PersistIPersistStreamToByteArray(
+                        streamableObject
+                    );
                     return objToSerialize;
                 }
                 if (targetType.IsInterface)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.TargetObjectDoesNotSupportIPersistStream)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.TargetObjectDoesNotSupportIPersistStream)
+                        )
+                    );
                 return obj;
             }
             return obj;
@@ -309,13 +382,29 @@ namespace System.ServiceModel.ComIntegration
                 {
                     if (IsAllowedClass(streamWrapper.clsid))
                     {
-                        return PersistHelper.ActivateAndLoadFromByteStream(streamWrapper.clsid, streamWrapper.dataStream);
+                        return PersistHelper.ActivateAndLoadFromByteStream(
+                            streamWrapper.clsid,
+                            streamWrapper.dataStream
+                        );
                     }
                     else
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.NotAllowedPersistableCLSID, streamWrapper.clsid.ToString("B"))));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.NotAllowedPersistableCLSID,
+                                    streamWrapper.clsid.ToString("B")
+                                )
+                            )
+                        );
                 }
                 if (targetType.IsInterface)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.TargetTypeIsAnIntefaceButCorrespoindingTypeIsNotPersistStreamTypeWrapper)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.TargetTypeIsAnIntefaceButCorrespoindingTypeIsNotPersistStreamTypeWrapper
+                            )
+                        )
+                    );
             }
             return obj;
         }
@@ -335,12 +424,19 @@ namespace System.ServiceModel.ComIntegration
             customDataTypes.Add(typeof(PersistStreamTypeWrapper));
         }
 
-        public Type GetReferencedTypeOnImport(string typeName, string typeNamespace, object customData)
+        public Type GetReferencedTypeOnImport(
+            string typeName,
+            string typeNamespace,
+            object customData
+        )
         {
             return null;
         }
 
-        public CodeTypeDeclaration ProcessImportedType(CodeTypeDeclaration typeDeclaration, CodeCompileUnit compileUnit)
+        public CodeTypeDeclaration ProcessImportedType(
+            CodeTypeDeclaration typeDeclaration,
+            CodeCompileUnit compileUnit
+        )
         {
             return null;
         }

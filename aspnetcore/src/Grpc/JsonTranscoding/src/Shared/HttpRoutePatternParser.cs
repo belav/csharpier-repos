@@ -107,36 +107,40 @@ internal class HttpRoutePatternParser
         switch (CurrentChar)
         {
             case '*':
+            {
+                if (_hasCatchAllSegment)
                 {
-                    if (_hasCatchAllSegment)
-                    {
-                        throw new InvalidOperationException("Only literal segments can follow a catch-all segment.");
-                    }
-
-                    ConsumeAndAssert('*');
-
-                    // Check for '**'
-                    if (Consume('*'))
-                    {
-                        _segments.Add("**");
-                        _hasCatchAllSegment = true;
-                        if (_inVariable)
-                        {
-                            CurrentVariable.HasCatchAllPath = true;
-                        }
-                        return true;
-                    }
-                    else
-                    {
-                        _segments.Add("*");
-                        return true;
-                    }
+                    throw new InvalidOperationException(
+                        "Only literal segments can follow a catch-all segment."
+                    );
                 }
+
+                ConsumeAndAssert('*');
+
+                // Check for '**'
+                if (Consume('*'))
+                {
+                    _segments.Add("**");
+                    _hasCatchAllSegment = true;
+                    if (_inVariable)
+                    {
+                        CurrentVariable.HasCatchAllPath = true;
+                    }
+                    return true;
+                }
+                else
+                {
+                    _segments.Add("*");
+                    return true;
+                }
+            }
 
             case '{':
                 if (_hasCatchAllSegment)
                 {
-                    throw new InvalidOperationException("Only literal segments can follow a catch-all segment.");
+                    throw new InvalidOperationException(
+                        "Only literal segments can follow a catch-all segment."
+                    );
                 }
 
                 ParseVariable();
@@ -183,8 +187,7 @@ internal class HttpRoutePatternParser
             {
                 throw new InvalidOperationException("Incomplete or empty field path.");
             }
-        }
-        while (Consume('.'));
+        } while (Consume('.'));
     }
 
     // Verb     = ":" LITERAL ;
@@ -307,7 +310,8 @@ internal class HttpRoutePatternParser
         }
     }
 
-    private char? CurrentChar => _tokenStart < _tokenEnd && _tokenEnd <= _input.Length ? _input[_tokenEnd - 1] : null;
+    private char? CurrentChar =>
+        _tokenStart < _tokenEnd && _tokenEnd <= _input.Length ? _input[_tokenEnd - 1] : null;
 
     private HttpRouteVariable CurrentVariable
     {
@@ -320,7 +324,6 @@ internal class HttpRoutePatternParser
 
             return variable;
         }
-
     }
 
     private void StartVariable()

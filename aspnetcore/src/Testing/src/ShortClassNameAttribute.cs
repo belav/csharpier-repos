@@ -11,6 +11,4 @@ namespace Microsoft.AspNetCore.InternalTesting;
 /// max path for logging.
 /// </summary>
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Assembly, AllowMultiple = false)]
-public class ShortClassNameAttribute : Attribute
-{
-}
+public class ShortClassNameAttribute : Attribute { }

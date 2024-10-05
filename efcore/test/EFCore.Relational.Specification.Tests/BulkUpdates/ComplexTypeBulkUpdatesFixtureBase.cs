@@ -3,11 +3,12 @@
 
 namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
-public abstract class ComplexTypeBulkUpdatesFixtureBase : ComplexTypeQueryRelationalFixtureBase, IBulkUpdatesFixtureBase
+public abstract class ComplexTypeBulkUpdatesFixtureBase
+    : ComplexTypeQueryRelationalFixtureBase,
+        IBulkUpdatesFixtureBase
 {
-    protected override string StoreName
-        => "ComplexTypeBulkUpdatesTest";
+    protected override string StoreName => "ComplexTypeBulkUpdatesTest";
 
-    public void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-        => facade.UseTransaction(transaction.GetDbTransaction());
+    public void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction) =>
+        facade.UseTransaction(transaction.GetDbTransaction());
 }

@@ -29,9 +29,10 @@ class Program
         //
         int expectedResult = 100;
 
-        string[][] zeroReturnValuePatterns = {
-            new string[] { "JIT", "jit64", "regress", "vsw", "102754", "test1"},
-            new string[] { "JIT", "Regression", "CLR-x86-JIT", "V1-M09", "b16102", "b16102"},
+        string[][] zeroReturnValuePatterns =
+        {
+            new string[] { "JIT", "jit64", "regress", "vsw", "102754", "test1" },
+            new string[] { "JIT", "Regression", "CLR-x86-JIT", "V1-M09", "b16102", "b16102" },
         };
 
         foreach (string[] pattern in zeroReturnValuePatterns)
@@ -50,19 +51,33 @@ class Program
         // RngchkStress2_o can hit a jit assert: '!m_failedToConverge' in 'SimpleArray_01.Test:Test1()' during 'Profile incorporation'
         // GitHub_25027 can hit a jit assert: 'verCurrentState.esStackDepth == 0' in 'X:Main():int' during 'Morph - Inlining'
         //
-        string[][] exclusionPatterns = {
+        string[][] exclusionPatterns =
+        {
             new string[] { "JIT", "jit64", "opt", "cse", "VolatileTest_op" },
             new string[] { "JIT", "jit64", "opt", "rngchk", "ArrayWithThread_o" },
             new string[] { "baseservices", "threading", "threadstatic", "ThreadStatic01" },
-            new string[] { "GC", "Scenarios", "ReflectObj", "reflectobj"},
-            new string[] { "baseservices", "threading", "mutex", "openexisting", "openmutexpos4"},
-            new string[] { "GC", "Scenarios", "NDPin", "ndpinfinal"},
-            new string[] { "JIT", "Regression", "JitBlue", "GitHub_4044", "GitHub_4044"},
-            new string[] { "JIT", "HardwareIntrinsics", "X86", "Regression", "GitHub_21666", "GitHub_21666_ro"},
-            new string[] { "Interop", "NativeLibrary", "API", "NativeLibraryTests"},
-            new string[] { "baseservices", "compilerservices", "FixedAddressValueType", "FixedAddressValueType"},
+            new string[] { "GC", "Scenarios", "ReflectObj", "reflectobj" },
+            new string[] { "baseservices", "threading", "mutex", "openexisting", "openmutexpos4" },
+            new string[] { "GC", "Scenarios", "NDPin", "ndpinfinal" },
+            new string[] { "JIT", "Regression", "JitBlue", "GitHub_4044", "GitHub_4044" },
+            new string[]
+            {
+                "JIT",
+                "HardwareIntrinsics",
+                "X86",
+                "Regression",
+                "GitHub_21666",
+                "GitHub_21666_ro",
+            },
+            new string[] { "Interop", "NativeLibrary", "API", "NativeLibraryTests" },
+            new string[]
+            {
+                "baseservices",
+                "compilerservices",
+                "FixedAddressValueType",
+                "FixedAddressValueType",
+            },
             new string[] { "GC", "LargeMemory", "API", "gc", "gettotalmemory" },
-
             new string[] { "JIT", "jit64", "opt", "rngchk", "RngchkStress2_o" },
             new string[] { "JIT", "Regression", "JitBlue", "GitHub_25027", "GitHub_25027" },
         };
@@ -73,7 +88,9 @@ class Program
             {
                 if (verbose)
                 {
-                    Console.WriteLine($"Test {Path.Join(pattern)} excluded; marked as incompatible");
+                    Console.WriteLine(
+                        $"Test {Path.Join(pattern)} excluded; marked as incompatible"
+                    );
                 }
                 return expectedResult;
             }
@@ -124,7 +141,6 @@ class Program
 
         try
         {
-
             for (; i < warmup && !giveUp; i++)
             {
                 if (mainParams.Length == 0)
@@ -140,12 +156,16 @@ class Program
                 {
                     if (i < 2)
                     {
-                        Console.WriteLine($"[tieringtest] test failed at iteration {i} with result {result}. Test is likely incompatible.");
+                        Console.WriteLine(
+                            $"[tieringtest] test failed at iteration {i} with result {result}. Test is likely incompatible."
+                        );
                         result = expectedResult;
                     }
                     else
                     {
-                        Console.WriteLine($"[tieringtest] test failed at iteration {i}: {result} (expected {expectedResult})");
+                        Console.WriteLine(
+                            $"[tieringtest] test failed at iteration {i}: {result} (expected {expectedResult})"
+                        );
                     }
                     giveUp = true;
                     break;
@@ -155,7 +175,9 @@ class Program
                 //
                 if (s.ElapsedMilliseconds > timeout)
                 {
-                    Console.WriteLine($"[tieringtest] test running long ({s.ElapsedMilliseconds / (i + 1)} ms/iteration). Giving up at iteration {i}");
+                    Console.WriteLine(
+                        $"[tieringtest] test running long ({s.ElapsedMilliseconds / (i + 1)} ms/iteration). Giving up at iteration {i}"
+                    );
                     giveUp = true;
                     break;
                 }
@@ -178,7 +200,9 @@ class Program
 
                 if (result != expectedResult)
                 {
-                    Console.WriteLine($"[tieringtest] failed at iteration {i}: {result} (expected {expectedResult})");
+                    Console.WriteLine(
+                        $"[tieringtest] failed at iteration {i}: {result} (expected {expectedResult})"
+                    );
                     giveUp = true;
                     break;
                 }
@@ -187,7 +211,9 @@ class Program
                 //
                 if (s.ElapsedMilliseconds > timeout)
                 {
-                    Console.WriteLine($"[tieringtest] test running long ({s.ElapsedMilliseconds / (i + 1)} ms/iteration). Giving up at iteration {i}");
+                    Console.WriteLine(
+                        $"[tieringtest] test running long ({s.ElapsedMilliseconds / (i + 1)} ms/iteration). Giving up at iteration {i}"
+                    );
                     giveUp = true;
                     break;
                 }
@@ -207,13 +233,17 @@ class Program
             {
                 if (verbose)
                 {
-                    Console.WriteLine($"[tieringtest] test failed at iteration {i} with exception {e.Message}. Test is likely incompatible.");
+                    Console.WriteLine(
+                        $"[tieringtest] test failed at iteration {i} with exception {e.Message}. Test is likely incompatible."
+                    );
                 }
                 result = expectedResult;
             }
             else
             {
-                Console.WriteLine($"[tieringtest] test failed at iteration {i} with exception {e.Message}");
+                Console.WriteLine(
+                    $"[tieringtest] test failed at iteration {i} with exception {e.Message}"
+                );
                 result = -1;
             }
         }

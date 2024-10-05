@@ -42,12 +42,14 @@ namespace strswitch
                     default:
                         Console.WriteLine("Greater than five");
                         break;
-                };
+                }
+                ;
                 continue;
-            continueloop:
+                continueloop:
                 Console.WriteLine("Continuing");
-            };
-        finish:
+            }
+            ;
+            finish:
             return;
         }
     }

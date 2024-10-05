@@ -23,8 +23,11 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         public readonly INamedTypeSymbol SystemHashCodeType;
 
         private HashCodeAnalyzer(
-            Compilation compilation, IMethodSymbol objectGetHashCodeMethod,
-            INamedTypeSymbol? equalityComparerType, INamedTypeSymbol systemHashCodeType)
+            Compilation compilation,
+            IMethodSymbol objectGetHashCodeMethod,
+            INamedTypeSymbol? equalityComparerType,
+            INamedTypeSymbol systemHashCodeType
+        )
         {
             _compilation = compilation;
             _objectGetHashCodeMethod = objectGetHashCodeMethod;
@@ -32,22 +35,35 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             SystemHashCodeType = systemHashCodeType;
         }
 
-        public static bool TryGetAnalyzer(Compilation compilation, [NotNullWhen(true)] out HashCodeAnalyzer analyzer)
+        public static bool TryGetAnalyzer(
+            Compilation compilation,
+            [NotNullWhen(true)] out HashCodeAnalyzer analyzer
+        )
         {
             analyzer = default;
             var objectType = compilation.GetSpecialType(SpecialType.System_Object);
             // This may not find anything.  However, CanAnalyze checks for this. So
             // we represent the value as non-nullable for all future code.
-            var equalityComparerType = compilation.GetBestTypeByMetadataName(typeof(EqualityComparer<>).FullName!);
+            var equalityComparerType = compilation.GetBestTypeByMetadataName(
+                typeof(EqualityComparer<>).FullName!
+            );
 
-            if (objectType?.GetMembers(nameof(GetHashCode)).FirstOrDefault() is not IMethodSymbol objectGetHashCodeMethod)
+            if (
+                objectType?.GetMembers(nameof(GetHashCode)).FirstOrDefault()
+                is not IMethodSymbol objectGetHashCodeMethod
+            )
                 return false;
 
             var systemHashCodeType = compilation.GetBestTypeByMetadataName("System.HashCode");
             if (systemHashCodeType == null)
                 return false;
 
-            analyzer = new HashCodeAnalyzer(compilation, objectGetHashCodeMethod, equalityComparerType, systemHashCodeType);
+            analyzer = new HashCodeAnalyzer(
+                compilation,
+                objectGetHashCodeMethod,
+                equalityComparerType,
+                systemHashCodeType
+            );
             return true;
         }
 
@@ -55,7 +71,11 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         /// Analyzes the containing <c>GetHashCode</c> method to determine which fields and
         /// properties were combined to form a hash code for this type.
         /// </summary>
-        public (bool accessesBase, ImmutableArray<ISymbol> members, ImmutableArray<IOperation> statements) GetHashedMembers(ISymbol? owningSymbol, IOperation? operation)
+        public (
+            bool accessesBase,
+            ImmutableArray<ISymbol> members,
+            ImmutableArray<IOperation> statements
+        ) GetHashedMembers(ISymbol? owningSymbol, IOperation? operation)
         {
             if (operation is not IBlockOperation blockOperation)
                 return default;
@@ -79,15 +99,17 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
             var statements = blockOperation.Operations.WhereAsArray(o => !o.IsImplicit);
             var (accessesBase, members) =
-                MatchAccumulatorPattern(method, statements) ??
-                MatchTuplePattern(method, statements) ??
-                default;
+                MatchAccumulatorPattern(method, statements)
+                ?? MatchTuplePattern(method, statements)
+                ?? default;
 
             return (accessesBase, members, statements);
         }
 
         private (bool accessesBase, ImmutableArray<ISymbol> members)? MatchTuplePattern(
-            IMethodSymbol method, ImmutableArray<IOperation> statements)
+            IMethodSymbol method,
+            ImmutableArray<IOperation> statements
+        )
         {
             // look for code of the form `return (a, b, c).GetHashCode()`.
             if (statements.Length != 1)
@@ -110,7 +132,9 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         }
 
         private (bool accessesBase, ImmutableArray<ISymbol> members)? MatchAccumulatorPattern(
-            IMethodSymbol method, ImmutableArray<IOperation> statements)
+            IMethodSymbol method,
+            ImmutableArray<IOperation> statements
+        )
         {
             // Needs to be of the form:
             //
@@ -129,15 +153,16 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
             // First statement has to be the declaration of the accumulator.
             // Last statement has to be the return of it.
-            if (statements.First() is not IVariableDeclarationGroupOperation varDeclStatement ||
-                !(statements.Last() is IReturnOperation { ReturnedValue: { } returnedValue }))
+            if (
+                statements.First() is not IVariableDeclarationGroupOperation varDeclStatement
+                || !(statements.Last() is IReturnOperation { ReturnedValue: { } returnedValue })
+            )
             {
                 return null;
             }
 
             var variables = varDeclStatement.GetDeclaredVariables();
-            if (variables.Length != 1 ||
-                varDeclStatement.Declarations.Length != 1)
+            if (variables.Length != 1 || varDeclStatement.Declarations.Length != 1)
             {
                 return null;
             }
@@ -176,8 +201,10 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             // Note: we pass in `seenHash: true` here because ReSharper may just initialize things
             // like `var hashCode = intField`.  In this case, there won't be any specific hashing
             // operations in the value that we have to look for.
-            if (!IsLiteralNumber(initializerValue) &&
-                !valueAnalyzer.TryAddHashedSymbol(initializerValue, seenHash: true))
+            if (
+                !IsLiteralNumber(initializerValue)
+                && !valueAnalyzer.TryAddHashedSymbol(initializerValue, seenHash: true)
+            )
             {
                 return null;
             }
@@ -196,10 +223,13 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             for (var i = 1; i < statements.Length - 1; i++)
             {
                 var statement = statements[i];
-                if (statement is not IExpressionStatementOperation expressionStatement ||
-                    expressionStatement.Operation is not ISimpleAssignmentOperation simpleAssignment ||
-                    !IsLocalReference(simpleAssignment.Target, hashCodeVariable) ||
-                    !valueAnalyzer.TryAddHashedSymbol(simpleAssignment.Value, seenHash: false))
+                if (
+                    statement is not IExpressionStatementOperation expressionStatement
+                    || expressionStatement.Operation
+                        is not ISimpleAssignmentOperation simpleAssignment
+                    || !IsLocalReference(simpleAssignment.Target, hashCodeVariable)
+                    || !valueAnalyzer.TryAddHashedSymbol(simpleAssignment.Value, seenHash: false)
+                )
                 {
                     return null;
                 }
@@ -221,8 +251,9 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             return false;
         }
 
-        private static bool IsLocalReference(IOperation value, ILocalSymbol accumulatorVariable)
-            => Unwrap(value) is ILocalReferenceOperation localReference && accumulatorVariable.Equals(localReference.Local);
+        private static bool IsLocalReference(IOperation value, ILocalSymbol accumulatorVariable) =>
+            Unwrap(value) is ILocalReferenceOperation localReference
+            && accumulatorVariable.Equals(localReference.Local);
 
         /// <summary>
         /// Matches positive and negative numeric literals.

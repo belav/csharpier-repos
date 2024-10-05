@@ -10,6 +10,9 @@ namespace Microsoft.CodeAnalysis.Host
 {
     internal interface IChecksummedPersistentStorageService
     {
-        ValueTask<IChecksummedPersistentStorage> GetStorageAsync(SolutionKey solutionKey, CancellationToken cancellationToken);
+        ValueTask<IChecksummedPersistentStorage> GetStorageAsync(
+            SolutionKey solutionKey,
+            CancellationToken cancellationToken
+        );
     }
 }

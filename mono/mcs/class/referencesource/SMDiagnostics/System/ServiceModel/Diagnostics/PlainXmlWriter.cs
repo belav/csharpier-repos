@@ -4,9 +4,9 @@
 
 namespace System.ServiceModel.Diagnostics
 {
-    using System.Xml;
-    using System.Runtime;
     using System.Diagnostics;
+    using System.Runtime;
+    using System.Xml;
 
     /// <summary>
     /// Very basic performance-oriented XmlWriter implementation. No validation/encoding is made.
@@ -15,9 +15,7 @@ namespace System.ServiceModel.Diagnostics
     /// </summary>
     internal class PlainXmlWriter : XmlWriter
     {
-        internal class MaxSizeExceededException : Exception
-        {
-        }
+        internal class MaxSizeExceededException : Exception { }
 
         TraceXPathNavigator navigator;
         bool writingAttribute = false;
@@ -28,8 +26,7 @@ namespace System.ServiceModel.Diagnostics
 
         public PlainXmlWriter()
             : this(-1) //no quota
-        {
-        }
+        { }
 
         public PlainXmlWriter(int maxSize)
         {
@@ -38,15 +35,20 @@ namespace System.ServiceModel.Diagnostics
 
         public TraceXPathNavigator Navigator
         {
-            get
-            {
-                return this.navigator;
-            }
+            get { return this.navigator; }
         }
 
         public override void WriteStartDocument() { }
+
         public override void WriteStartDocument(bool standalone) { }
-        public override void WriteDocType(string name, string pubid, string sysid, string subset) { }
+
+        public override void WriteDocType(
+            string name,
+            string pubid,
+            string sysid,
+            string subset
+        ) { }
+
         public override void WriteEndDocument() { }
 
         public override string LookupPrefix(string ns)
@@ -130,7 +132,12 @@ namespace System.ServiceModel.Diagnostics
             {
                 throw new InvalidOperationException();
             }
-            this.navigator.AddAttribute(this.currentAttributeName, this.currentAttributeText, this.currentAttributeNs, this.currentAttributePrefix);
+            this.navigator.AddAttribute(
+                this.currentAttributeName,
+                this.currentAttributeText,
+                this.currentAttributeNs,
+                this.currentAttributePrefix
+            );
             this.writingAttribute = false;
         }
 
@@ -149,21 +156,13 @@ namespace System.ServiceModel.Diagnostics
             this.navigator.AddProcessingInstruction(name, text);
         }
 
-        public override void WriteEntityRef(string name)
-        {
-        }
+        public override void WriteEntityRef(string name) { }
 
-        public override void WriteCharEntity(char ch)
-        {
-        }
+        public override void WriteCharEntity(char ch) { }
 
-        public override void WriteSurrogateCharEntity(char lowChar, char highChar)
-        {
-        }
+        public override void WriteSurrogateCharEntity(char lowChar, char highChar) { }
 
-        public override void WriteWhitespace(string ws)
-        {
-        }
+        public override void WriteWhitespace(string ws) { }
 
         public override void WriteString(string text)
         {
@@ -209,12 +208,8 @@ namespace System.ServiceModel.Diagnostics
             this.WriteChars(buffer, index, count);
         }
 
-        public override void Close()
-        {
-        }
+        public override void Close() { }
 
-        public override void Flush()
-        {
-        }
+        public override void Flush() { }
     }
 }

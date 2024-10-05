@@ -18,7 +18,8 @@ namespace System.Linq.Expressions.Interpreter
         private readonly IStrongBox[]? _closure;
         private readonly Interpreter _interpreter;
 #if NO_FEATURE_STATIC_DELEGATE
-        private static readonly CacheDict<Type, Func<LightLambda, Delegate>> _runCache = new CacheDict<Type, Func<LightLambda, Delegate>>(100);
+        private static readonly CacheDict<Type, Func<LightLambda, Delegate>> _runCache =
+            new CacheDict<Type, Func<LightLambda, Delegate>>(100);
 #endif
 
         // Adaptive compilation support
@@ -59,7 +60,9 @@ namespace System.Linq.Expressions.Interpreter
                         TryCatchFinallyHandler handler = enterTryCatchFinally.Handler!;
 
                         AddTryStart(handler.TryStartIndex);
-                        AddHandlerExit(handler.TryEndIndex + 1 /* include Goto instruction that acts as a "leave" */);
+                        AddHandlerExit(
+                            handler.TryEndIndex + 1 /* include Goto instruction that acts as a "leave" */
+                        );
 
                         if (handler.IsFinallyBlockExist)
                         {
@@ -71,13 +74,23 @@ namespace System.Linq.Expressions.Interpreter
                         {
                             foreach (ExceptionHandler catchHandler in handler.Handlers!)
                             {
-                                _handlerEnter.Add(catchHandler.HandlerStartIndex - 1 /* include EnterExceptionHandler instruction */, catchHandler.ToString());
+                                _handlerEnter.Add(
+                                    catchHandler.HandlerStartIndex
+                                        - 1 /* include EnterExceptionHandler instruction */
+                                    ,
+                                    catchHandler.ToString()
+                                );
                                 AddHandlerExit(catchHandler.HandlerEndIndex);
 
                                 ExceptionFilter? filter = catchHandler.Filter;
                                 if (filter != null)
                                 {
-                                    _handlerEnter.Add(filter.StartIndex - 1 /* include EnterExceptionFilter instruction */, "filter");
+                                    _handlerEnter.Add(
+                                        filter.StartIndex
+                                            - 1 /* include EnterExceptionFilter instruction */
+                                        ,
+                                        "filter"
+                                    );
                                     AddHandlerExit(filter.EndIndex);
                                 }
                             }
@@ -89,7 +102,9 @@ namespace System.Linq.Expressions.Interpreter
                         TryFaultHandler handler = enterTryFault.Handler!;
 
                         AddTryStart(handler.TryStartIndex);
-                        AddHandlerExit(handler.TryEndIndex + 1 /* include Goto instruction that acts as a "leave" */);
+                        AddHandlerExit(
+                            handler.TryEndIndex + 1 /* include Goto instruction that acts as a "leave" */
+                        );
 
                         _handlerEnter.Add(handler.FinallyStartIndex, "fault");
                         AddHandlerExit(handler.FinallyEndIndex);
@@ -134,13 +149,20 @@ namespace System.Linq.Expressions.Interpreter
                 sb.AppendLine("{");
 
                 sb.Append("  .locals ").Append(_interpreter.LocalCount).AppendLine();
-                sb.Append("  .maxstack ").Append(_interpreter.Instructions.MaxStackDepth).AppendLine();
-                sb.Append("  .maxcontinuation ").Append(_interpreter.Instructions.MaxContinuationDepth).AppendLine();
+                sb.Append("  .maxstack ")
+                    .Append(_interpreter.Instructions.MaxStackDepth)
+                    .AppendLine();
+                sb.Append("  .maxcontinuation ")
+                    .Append(_interpreter.Instructions.MaxContinuationDepth)
+                    .AppendLine();
                 sb.AppendLine();
 
                 Instruction[] instructions = _interpreter.Instructions.Instructions;
-                InstructionArray.DebugView debugView = new InstructionArray.DebugView(_interpreter.Instructions);
-                InstructionList.DebugView.InstructionView[] instructionViews = debugView.GetInstructionViews(includeDebugCookies: false);
+                InstructionArray.DebugView debugView = new InstructionArray.DebugView(
+                    _interpreter.Instructions
+                );
+                InstructionList.DebugView.InstructionView[] instructionViews =
+                    debugView.GetInstructionViews(includeDebugCookies: false);
 
                 for (int i = 0; i < instructions.Length; i++)
                 {
@@ -167,7 +189,10 @@ namespace System.Linq.Expressions.Interpreter
 
                     InstructionList.DebugView.InstructionView instructionView = instructionViews[i];
 
-                    sb.AppendLine(CultureInfo.InvariantCulture, $"{_indent}IP_{i.ToString().PadLeft(4, '0')}: {instructionView.GetValue()}");
+                    sb.AppendLine(
+                        CultureInfo.InvariantCulture,
+                        $"{_indent}IP_{i.ToString().PadLeft(4, '0')}: {instructionView.GetValue()}"
+                    );
                 }
 
                 EmitExits(sb, instructions.Length);
@@ -230,16 +255,26 @@ namespace System.Linq.Expressions.Interpreter
 
             MethodInfo runMethod;
 
-            if (method.ReturnType == typeof(void) && paramTypes.Length == 2 &&
-                paramInfos[0].ParameterType.IsByRef && paramInfos[1].ParameterType.IsByRef)
+            if (
+                method.ReturnType == typeof(void)
+                && paramTypes.Length == 2
+                && paramInfos[0].ParameterType.IsByRef
+                && paramInfos[1].ParameterType.IsByRef
+            )
             {
-                runMethod = typeof(LightLambda).GetMethod("RunVoidRef2", BindingFlags.NonPublic | BindingFlags.Instance);
+                runMethod = typeof(LightLambda).GetMethod(
+                    "RunVoidRef2",
+                    BindingFlags.NonPublic | BindingFlags.Instance
+                );
                 paramTypes[0] = paramInfos[0].ParameterType.GetElementType();
                 paramTypes[1] = paramInfos[1].ParameterType.GetElementType();
             }
             else if (method.ReturnType == typeof(void) && paramTypes.Length == 0)
             {
-                runMethod = typeof(LightLambda).GetMethod("RunVoid0", BindingFlags.NonPublic | BindingFlags.Instance);
+                runMethod = typeof(LightLambda).GetMethod(
+                    "RunVoid0",
+                    BindingFlags.NonPublic | BindingFlags.Instance
+                );
             }
             else
             {
@@ -257,12 +292,19 @@ namespace System.Linq.Expressions.Interpreter
                 {
                     name = "Make" + name + paramInfos.Length;
 
-                    MethodInfo ctorMethod = typeof(LightLambda).GetMethod(name, BindingFlags.NonPublic | BindingFlags.Static).MakeGenericMethod(paramTypes);
-                    return _runCache[delegateType] = (Func<LightLambda, Delegate>)ctorMethod.CreateDelegate(typeof(Func<LightLambda, Delegate>));
+                    MethodInfo ctorMethod = typeof(LightLambda)
+                        .GetMethod(name, BindingFlags.NonPublic | BindingFlags.Static)
+                        .MakeGenericMethod(paramTypes);
+                    return _runCache[delegateType] =
+                        (Func<LightLambda, Delegate>)
+                            ctorMethod.CreateDelegate(typeof(Func<LightLambda, Delegate>));
                 }
 #endif
 
-                runMethod = typeof(LightLambda).GetMethod(name + paramInfos.Length, BindingFlags.NonPublic | BindingFlags.Instance);
+                runMethod = typeof(LightLambda).GetMethod(
+                    name + paramInfos.Length,
+                    BindingFlags.NonPublic | BindingFlags.Instance
+                );
             }
 
             /*
@@ -278,8 +320,11 @@ namespace System.Linq.Expressions.Interpreter
             }*/
 
             // we don't have permission for restricted skip visibility dynamic methods, use the slower Delegate.CreateDelegate.
-            var targetMethod = runMethod.IsGenericMethodDefinition ? runMethod.MakeGenericMethod(paramTypes) : runMethod;
-            return _runCache[delegateType] = lambda => targetMethod.CreateDelegate(delegateType, lambda);
+            var targetMethod = runMethod.IsGenericMethodDefinition
+                ? runMethod.MakeGenericMethod(paramTypes)
+                : runMethod;
+            return _runCache[delegateType] = lambda =>
+                targetMethod.CreateDelegate(delegateType, lambda);
         }
 
         //TODO enable sharing of these custom delegates
@@ -294,7 +339,10 @@ namespace System.Linq.Expressions.Interpreter
             bool hasByRef = false;
             for (int i = 0; i < paramInfos.Length; i++)
             {
-                ParameterExpression parameter = Expression.Parameter(paramInfos[i].ParameterType, paramInfos[i].Name);
+                ParameterExpression parameter = Expression.Parameter(
+                    paramInfos[i].ParameterType,
+                    paramInfos[i].Name
+                );
                 hasByRef = hasByRef || paramInfos[i].ParameterType.IsByRef;
                 parameters[i] = parameter;
                 parametersAsObject[i] = Expression.Convert(parameter, typeof(object));
@@ -358,11 +406,17 @@ namespace System.Linq.Expressions.Interpreter
             MethodInfo method = delegateType.GetInvokeMethod();
             if (method.ReturnType == typeof(void))
             {
-                return System.Dynamic.Utils.DelegateHelpers.CreateObjectArrayDelegate(delegateType, RunVoid);
+                return System.Dynamic.Utils.DelegateHelpers.CreateObjectArrayDelegate(
+                    delegateType,
+                    RunVoid
+                );
             }
             else
             {
-                return System.Dynamic.Utils.DelegateHelpers.CreateObjectArrayDelegate(delegateType, Run);
+                return System.Dynamic.Utils.DelegateHelpers.CreateObjectArrayDelegate(
+                    delegateType,
+                    Run
+                );
             }
 #else
             Func<LightLambda, Delegate> fastCtor = GetRunDelegateCtor(delegateType);

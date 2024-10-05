@@ -16,16 +16,20 @@ internal sealed class ConstantTextAndVersionSource(TextAndVersion value) : IText
 {
     private readonly TextAndVersion _value = value;
 
-    public bool CanReloadText
-        => false;
+    public bool CanReloadText => false;
 
-    public TextAndVersion GetValue(LoadTextOptions options, CancellationToken cancellationToken)
-        => _value;
+    public TextAndVersion GetValue(LoadTextOptions options, CancellationToken cancellationToken) =>
+        _value;
 
-    public Task<TextAndVersion> GetValueAsync(LoadTextOptions options, CancellationToken cancellationToken)
-        => Task.FromResult(_value);
+    public Task<TextAndVersion> GetValueAsync(
+        LoadTextOptions options,
+        CancellationToken cancellationToken
+    ) => Task.FromResult(_value);
 
-    public bool TryGetValue(LoadTextOptions options, [MaybeNullWhen(false)] out TextAndVersion value)
+    public bool TryGetValue(
+        LoadTextOptions options,
+        [MaybeNullWhen(false)] out TextAndVersion value
+    )
     {
         value = _value;
         return true;
@@ -37,6 +41,8 @@ internal sealed class ConstantTextAndVersionSource(TextAndVersion value) : IText
         return true;
     }
 
-    public ValueTask<VersionStamp> GetVersionAsync(LoadTextOptions options, CancellationToken cancellationToken)
-        => new(_value.Version);
+    public ValueTask<VersionStamp> GetVersionAsync(
+        LoadTextOptions options,
+        CancellationToken cancellationToken
+    ) => new(_value.Version);
 }

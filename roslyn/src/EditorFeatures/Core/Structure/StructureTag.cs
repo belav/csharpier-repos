@@ -14,7 +14,11 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
 {
 #pragma warning disable CS0618 // Type or member is obsolete
-    internal sealed class StructureTag(AbstractStructureTaggerProvider tagProvider, BlockSpan blockSpan, ITextSnapshot snapshot) : IStructureTag2, IEquatable<StructureTag>
+    internal sealed class StructureTag(
+        AbstractStructureTaggerProvider tagProvider,
+        BlockSpan blockSpan,
+        ITextSnapshot snapshot
+    ) : IStructureTag2, IEquatable<StructureTag>
 #pragma warning restore CS0618 // Type or member is obsolete
     {
         private readonly AbstractStructureTaggerProvider _tagProvider = tagProvider;
@@ -28,8 +32,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
 
         public ITextSnapshot Snapshot { get; } = snapshot;
         public Span? OutliningSpan { get; } = blockSpan.TextSpan.ToSpan();
-        public Span? HeaderSpan { get; } = DetermineHeaderSpan(blockSpan.TextSpan, blockSpan.HintSpan, snapshot);
-        public Span? PrimaryHeaderSpan { get; } = blockSpan.PrimarySpans is { } primarySpans
+        public Span? HeaderSpan { get; } =
+            DetermineHeaderSpan(blockSpan.TextSpan, blockSpan.HintSpan, snapshot);
+        public Span? PrimaryHeaderSpan { get; } =
+            blockSpan.PrimarySpans is { } primarySpans
                 ? DetermineHeaderSpan(primarySpans.textSpan, primarySpans.hintSpan, snapshot)
                 : null;
         public Span? GuideLineSpan => null;
@@ -39,7 +45,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
         public bool IsDefaultCollapsed { get; } = blockSpan.IsDefaultCollapsed;
         public bool IsImplementation { get; } = blockSpan.AutoCollapse;
 
-        private static Span DetermineHeaderSpan(TextSpan textSpan, TextSpan hintSpan, ITextSnapshot snapshot)
+        private static Span DetermineHeaderSpan(
+            TextSpan textSpan,
+            TextSpan hintSpan,
+            ITextSnapshot snapshot
+        )
         {
             if (hintSpan.Start < textSpan.Start)
             {
@@ -58,31 +68,67 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
 
         // Editor uses this here:
         // https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_git/VS-Platform?path=/src/Editor/Text/Impl/Structure/StructureSpanningTree/StructureSpanningTree.cs&version=GBmain&line=308&lineEnd=309&lineStartColumn=1&lineEndColumn=1&lineStyle=plain&_a=contents
-        public override int GetHashCode()
-            => Hash.Combine(this.GuideLineHorizontalAnchorPoint.GetHashCode(),
-               Hash.Combine(this.Type,
-               Hash.Combine(this.IsCollapsible,
-               Hash.Combine(this.IsDefaultCollapsed,
-               Hash.Combine(this.IsImplementation,
-               Hash.Combine(this.OutliningSpan.GetHashCode(),
-               Hash.Combine(this.HeaderSpan.GetHashCode(),
-               Hash.Combine(this.PrimaryHeaderSpan.GetHashCode(), this.GuideLineSpan.GetHashCode()))))))));
+        public override int GetHashCode() =>
+            Hash.Combine(
+                this.GuideLineHorizontalAnchorPoint.GetHashCode(),
+                Hash.Combine(
+                    this.Type,
+                    Hash.Combine(
+                        this.IsCollapsible,
+                        Hash.Combine(
+                            this.IsDefaultCollapsed,
+                            Hash.Combine(
+                                this.IsImplementation,
+                                Hash.Combine(
+                                    this.OutliningSpan.GetHashCode(),
+                                    Hash.Combine(
+                                        this.HeaderSpan.GetHashCode(),
+                                        Hash.Combine(
+                                            this.PrimaryHeaderSpan.GetHashCode(),
+                                            this.GuideLineSpan.GetHashCode()
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            );
 
-        public override bool Equals(object? obj)
-            => Equals(obj as StructureTag);
+        public override bool Equals(object? obj) => Equals(obj as StructureTag);
 
         public bool Equals(StructureTag? other)
         {
-            return other != null &&
-                this.GuideLineHorizontalAnchorPoint == other.GuideLineHorizontalAnchorPoint &&
-                this.Type == other.Type &&
-                this.IsCollapsible == other.IsCollapsible &&
-                this.IsDefaultCollapsed == other.IsDefaultCollapsed &&
-                this.IsImplementation == other.IsImplementation &&
-                _tagProvider.SpanEquals(this.Snapshot, this.OutliningSpan, other.Snapshot, other.OutliningSpan) &&
-                _tagProvider.SpanEquals(this.Snapshot, this.HeaderSpan, other.Snapshot, other.HeaderSpan) &&
-                _tagProvider.SpanEquals(this.Snapshot, this.PrimaryHeaderSpan, other.Snapshot, other.PrimaryHeaderSpan) &&
-                _tagProvider.SpanEquals(this.Snapshot, this.GuideLineSpan, other.Snapshot, other.GuideLineSpan);
+            return other != null
+                && this.GuideLineHorizontalAnchorPoint == other.GuideLineHorizontalAnchorPoint
+                && this.Type == other.Type
+                && this.IsCollapsible == other.IsCollapsible
+                && this.IsDefaultCollapsed == other.IsDefaultCollapsed
+                && this.IsImplementation == other.IsImplementation
+                && _tagProvider.SpanEquals(
+                    this.Snapshot,
+                    this.OutliningSpan,
+                    other.Snapshot,
+                    other.OutliningSpan
+                )
+                && _tagProvider.SpanEquals(
+                    this.Snapshot,
+                    this.HeaderSpan,
+                    other.Snapshot,
+                    other.HeaderSpan
+                )
+                && _tagProvider.SpanEquals(
+                    this.Snapshot,
+                    this.PrimaryHeaderSpan,
+                    other.Snapshot,
+                    other.PrimaryHeaderSpan
+                )
+                && _tagProvider.SpanEquals(
+                    this.Snapshot,
+                    this.GuideLineSpan,
+                    other.Snapshot,
+                    other.GuideLineSpan
+                );
         }
 
         public object? GetCollapsedForm()
@@ -110,7 +156,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
                 BlockTypes.PreprocessorRegion => PredefinedStructureTagTypes.PreprocessorRegion,
                 BlockTypes.Statement => PredefinedStructureTagTypes.Statement,
                 BlockTypes.Type => PredefinedStructureTagTypes.Type,
-                _ => PredefinedStructureTagTypes.Structural
+                _ => PredefinedStructureTagTypes.Structural,
             };
         }
     }

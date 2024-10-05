@@ -15,9 +15,7 @@ public class ConnectionItems : IDictionary<object, object?>
     /// Initializes a new instance of <see cref="ConnectionItems"/>.
     /// </summary>
     public ConnectionItems()
-        : this(new Dictionary<object, object?>())
-    {
-    }
+        : this(new Dictionary<object, object?>()) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ConnectionItems"/> with <paramref name="items"/>.
@@ -92,7 +90,10 @@ public class ConnectionItems : IDictionary<object, object?>
         return Items.Contains(item);
     }
 
-    void ICollection<KeyValuePair<object, object?>>.CopyTo(KeyValuePair<object, object?>[] array, int arrayIndex)
+    void ICollection<KeyValuePair<object, object?>>.CopyTo(
+        KeyValuePair<object, object?>[] array,
+        int arrayIndex
+    )
     {
         Items.CopyTo(array, arrayIndex);
     }
@@ -116,7 +117,9 @@ public class ConnectionItems : IDictionary<object, object?>
         return false;
     }
 
-    IEnumerator<KeyValuePair<object, object?>> IEnumerable<KeyValuePair<object, object?>>.GetEnumerator()
+    IEnumerator<KeyValuePair<object, object?>> IEnumerable<
+        KeyValuePair<object, object?>
+    >.GetEnumerator()
     {
         return Items.GetEnumerator();
     }

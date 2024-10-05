@@ -14,7 +14,9 @@ public class MiddlewareFilterAttributeTest
         // Arrange
         var middlewareFilterAttribute = new MiddlewareFilterAttribute(typeof(Pipeline1));
         var services = new ServiceCollection();
-        services.AddSingleton(new MiddlewareFilterBuilder(new MiddlewareFilterConfigurationProvider()));
+        services.AddSingleton(
+            new MiddlewareFilterBuilder(new MiddlewareFilterConfigurationProvider())
+        );
         var serviceProvider = services.BuildServiceProvider();
         var filterBuilderService = serviceProvider.GetRequiredService<MiddlewareFilterBuilder>();
         filterBuilderService.ApplicationBuilder = new ApplicationBuilder(serviceProvider);
@@ -22,10 +24,12 @@ public class MiddlewareFilterAttributeTest
         Pipeline1.ConfigurePipeline = (ab) =>
         {
             configureCallCount++;
-            ab.Use((httpContext, next) =>
-            {
-                return next(httpContext);
-            });
+            ab.Use(
+                (httpContext, next) =>
+                {
+                    return next(httpContext);
+                }
+            );
         };
 
         // Act

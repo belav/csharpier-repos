@@ -20,8 +20,8 @@ public static class GoogleExtensions
     /// </summary>
     /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
     /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
-    public static AuthenticationBuilder AddGoogle(this AuthenticationBuilder builder)
-        => builder.AddGoogle(GoogleDefaults.AuthenticationScheme, _ => { });
+    public static AuthenticationBuilder AddGoogle(this AuthenticationBuilder builder) =>
+        builder.AddGoogle(GoogleDefaults.AuthenticationScheme, _ => { });
 
     /// <summary>
     /// Adds Google OAuth-based authentication to <see cref="AuthenticationBuilder"/> using the default scheme.
@@ -33,8 +33,10 @@ public static class GoogleExtensions
     /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
     /// <param name="configureOptions">A delegate to configure <see cref="GoogleOptions"/>.</param>
     /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
-    public static AuthenticationBuilder AddGoogle(this AuthenticationBuilder builder, Action<GoogleOptions> configureOptions)
-        => builder.AddGoogle(GoogleDefaults.AuthenticationScheme, configureOptions);
+    public static AuthenticationBuilder AddGoogle(
+        this AuthenticationBuilder builder,
+        Action<GoogleOptions> configureOptions
+    ) => builder.AddGoogle(GoogleDefaults.AuthenticationScheme, configureOptions);
 
     /// <summary>
     /// Adds Google OAuth-based authentication to <see cref="AuthenticationBuilder"/> using the default scheme.
@@ -47,8 +49,11 @@ public static class GoogleExtensions
     /// <param name="authenticationScheme">The authentication scheme.</param>
     /// <param name="configureOptions">A delegate to configure <see cref="GoogleOptions"/>.</param>
     /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
-    public static AuthenticationBuilder AddGoogle(this AuthenticationBuilder builder, string authenticationScheme, Action<GoogleOptions> configureOptions)
-        => builder.AddGoogle(authenticationScheme, GoogleDefaults.DisplayName, configureOptions);
+    public static AuthenticationBuilder AddGoogle(
+        this AuthenticationBuilder builder,
+        string authenticationScheme,
+        Action<GoogleOptions> configureOptions
+    ) => builder.AddGoogle(authenticationScheme, GoogleDefaults.DisplayName, configureOptions);
 
     /// <summary>
     /// Adds Google OAuth-based authentication to <see cref="AuthenticationBuilder"/> using the default scheme.
@@ -62,6 +67,15 @@ public static class GoogleExtensions
     /// <param name="displayName">A display name for the authentication handler.</param>
     /// <param name="configureOptions">A delegate to configure <see cref="GoogleOptions"/>.</param>
     /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
-    public static AuthenticationBuilder AddGoogle(this AuthenticationBuilder builder, string authenticationScheme, string displayName, Action<GoogleOptions> configureOptions)
-        => builder.AddOAuth<GoogleOptions, GoogleHandler>(authenticationScheme, displayName, configureOptions);
+    public static AuthenticationBuilder AddGoogle(
+        this AuthenticationBuilder builder,
+        string authenticationScheme,
+        string displayName,
+        Action<GoogleOptions> configureOptions
+    ) =>
+        builder.AddOAuth<GoogleOptions, GoogleHandler>(
+            authenticationScheme,
+            displayName,
+            configureOptions
+        );
 }

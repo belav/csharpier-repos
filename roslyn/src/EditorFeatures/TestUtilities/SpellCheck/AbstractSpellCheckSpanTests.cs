@@ -37,8 +37,12 @@ public abstract class AbstractSpellCheckSpanTests
         Assert.Equal<SpellCheckSpan>(expected, actual);
     }
 
-    private static ImmutableArray<SpellCheckSpan> Flatten(IDictionary<string, ImmutableArray<TextSpan>> annotations)
-        => annotations.SelectManyAsArray(kvp => kvp.Value.Select(span => new SpellCheckSpan(span, ConvertKind(kvp.Key))));
+    private static ImmutableArray<SpellCheckSpan> Flatten(
+        IDictionary<string, ImmutableArray<TextSpan>> annotations
+    ) =>
+        annotations.SelectManyAsArray(kvp =>
+            kvp.Value.Select(span => new SpellCheckSpan(span, ConvertKind(kvp.Key)))
+        );
 
     private static SpellCheckKind ConvertKind(string key)
     {

@@ -11,17 +11,19 @@ namespace Microsoft.EntityFrameworkCore.SqlAzure;
 [SqlServerCondition(SqlServerCondition.IsSqlAzure)]
 public class SqlAzureConnectionTest : IClassFixture<SqlAzureFixture>
 {
-    public SqlAzureConnectionTest(SqlAzureFixture fixture)
-    {
-    }
+    public SqlAzureConnectionTest(SqlAzureFixture fixture) { }
 
     [ConditionalTheory]
     [InlineData(true)]
     [InlineData(false)]
     public void Connect_with_encryption(bool encryptionEnabled)
     {
-        var connectionStringBuilder =
-            new SqlConnectionStringBuilder(SqlServerTestStore.CreateConnectionString("adventureworks")) { Encrypt = encryptionEnabled };
+        var connectionStringBuilder = new SqlConnectionStringBuilder(
+            SqlServerTestStore.CreateConnectionString("adventureworks")
+        )
+        {
+            Encrypt = encryptionEnabled,
+        };
         var options = new DbContextOptionsBuilder();
         options.UseSqlServer(connectionStringBuilder.ConnectionString, b => b.ApplyConfiguration());
 

@@ -20,6 +20,7 @@ namespace Microsoft.AspNetCore.Server.HttpSys;
 internal sealed partial class Request
 {
     private X509Certificate2? _clientCert;
+
     // TODO: https://github.com/aspnet/HttpSysServer/issues/231
     // private byte[] _providedTokenBindingId;
     // private byte[] _referredTokenBindingId;
@@ -59,10 +60,15 @@ internal sealed partial class Request
 
         PathBase = string.Empty;
         Path = originalPath;
-        var prefix = requestContext.Server.Options.UrlPrefixes.GetPrefix((int)requestContext.UrlContext);
+        var prefix = requestContext.Server.Options.UrlPrefixes.GetPrefix(
+            (int)requestContext.UrlContext
+        );
 
         // 'OPTIONS * HTTP/1.1'
-        if (KnownMethod == HTTP_VERB.HttpVerbOPTIONS && string.Equals(RawUrl, "*", StringComparison.Ordinal))
+        if (
+            KnownMethod == HTTP_VERB.HttpVerbOPTIONS
+            && string.Equals(RawUrl, "*", StringComparison.Ordinal)
+        )
         {
             PathBase = string.Empty;
             Path = string.Empty;
@@ -109,8 +115,10 @@ internal sealed partial class Request
                 {
                     var baseValue = pathBase[baseOffset];
                     var offsetValue = originalPath[originalOffset];
-                    if (baseValue == offsetValue
-                        || char.ToUpperInvariant(baseValue) == char.ToUpperInvariant(offsetValue))
+                    if (
+                        baseValue == offsetValue
+                        || char.ToUpperInvariant(baseValue) == char.ToUpperInvariant(offsetValue)
+                    )
                     {
                         // case-insensitive match, continue
                         originalOffset++;
@@ -122,20 +130,33 @@ internal sealed partial class Request
                         originalOffset++;
                         baseOffset++;
                     }
-                    else if (baseValue == '/' && originalPath.AsSpan(originalOffset).StartsWith("%2F", StringComparison.OrdinalIgnoreCase))
+                    else if (
+                        baseValue == '/'
+                        && originalPath
+                            .AsSpan(originalOffset)
+                            .StartsWith("%2F", StringComparison.OrdinalIgnoreCase)
+                    )
                     {
                         // Http.Sys un-escapes this
                         originalOffset += 3;
                         baseOffset++;
                     }
-                    else if (baseOffset > 0 && pathBase[baseOffset - 1] == '/'
-                        && (offsetValue == '/' || offsetValue == '\\'))
+                    else if (
+                        baseOffset > 0
+                        && pathBase[baseOffset - 1] == '/'
+                        && (offsetValue == '/' || offsetValue == '\\')
+                    )
                     {
                         // Duplicate slash, skip
                         originalOffset++;
                     }
-                    else if (baseOffset > 0 && pathBase[baseOffset - 1] == '/'
-                        && originalPath.AsSpan(originalOffset).StartsWith("%2F", StringComparison.OrdinalIgnoreCase))
+                    else if (
+                        baseOffset > 0
+                        && pathBase[baseOffset - 1] == '/'
+                        && originalPath
+                            .AsSpan(originalOffset)
+                            .StartsWith("%2F", StringComparison.OrdinalIgnoreCase)
+                    )
                     {
                         // Duplicate slash equivalent, skip
                         originalOffset += 3;
@@ -154,7 +175,15 @@ internal sealed partial class Request
                 Path = originalPath[originalOffset..];
             }
         }
-        else if (requestContext.Server.Options.UrlPrefixes.TryMatchLongestPrefix(IsHttps, cookedUrl.GetHost()!, originalPath, out var pathBase, out var path))
+        else if (
+            requestContext.Server.Options.UrlPrefixes.TryMatchLongestPrefix(
+                IsHttps,
+                cookedUrl.GetHost()!,
+                originalPath,
+                out var pathBase,
+                out var path
+            )
+        )
         {
             PathBase = pathBase;
             Path = path;
@@ -212,8 +241,15 @@ internal sealed partial class Request
                 else
                 {
                     string? length = Headers[HeaderNames.ContentLength];
-                    if (length != null &&
-                        long.TryParse(length.Trim(), NumberStyles.None, CultureInfo.InvariantCulture.NumberFormat, out var value))
+                    if (
+                        length != null
+                        && long.TryParse(
+                            length.Trim(),
+                            NumberStyles.None,
+                            CultureInfo.InvariantCulture.NumberFormat,
+                            out var value
+                        )
+                    )
                     {
                         _contentBoundaryType = BoundaryType.ContentLength;
                         _contentLength = value;
@@ -278,7 +314,11 @@ internal sealed partial class Request
         get
         {
             // accessing the ContentLength property delay creates _contentBoundaryType
-            return (ContentLength.HasValue && ContentLength.Value > 0 && _contentBoundaryType == BoundaryType.ContentLength)
+            return (
+                    ContentLength.HasValue
+                    && ContentLength.Value > 0
+                    && _contentBoundaryType == BoundaryType.ContentLength
+                )
                 || _contentBoundaryType == BoundaryType.Chunked;
         }
     }
@@ -321,7 +361,8 @@ internal sealed partial class Request
     public string Scheme => IsHttps ? Constants.HttpsScheme : Constants.HttpScheme;
 
     // HTTP.Sys allows you to upgrade anything to opaque unless content-length > 0 or chunked are specified.
-    internal bool IsUpgradable => ProtocolVersion == HttpVersion.Version11 && !HasEntityBody && ComNetOS.IsWin8orLater;
+    internal bool IsUpgradable =>
+        ProtocolVersion == HttpVersion.Version11 && !HasEntityBody && ComNetOS.IsWin8orLater;
 
     internal WindowsPrincipal User { get; }
 
@@ -385,7 +426,9 @@ internal sealed partial class Request
     // Populates the client certificate.  The result may be null if there is no client cert.
     // TODO: Does it make sense for this to be invoked multiple times (e.g. renegotiate)? Client and server code appear to
     // enable this, but it's unclear what Http.Sys would do.
-    public async Task<X509Certificate2?> GetClientCertificateAsync(CancellationToken cancellationToken = default(CancellationToken))
+    public async Task<X509Certificate2?> GetClientCertificateAsync(
+        CancellationToken cancellationToken = default(CancellationToken)
+    )
     {
         if (SslStatus == SslStatus.Insecure)
         {
@@ -417,6 +460,7 @@ internal sealed partial class Request
         }
         return _clientCert;
     }
+
     /* TODO: https://github.com/aspnet/WebListener/issues/231
     private byte[] GetProvidedTokenBindingId()
     {
@@ -453,9 +497,21 @@ internal sealed partial class Request
         }
     }
     */
-    internal uint GetChunks(ref int dataChunkIndex, ref uint dataChunkOffset, byte[] buffer, int offset, int size)
+    internal uint GetChunks(
+        ref int dataChunkIndex,
+        ref uint dataChunkOffset,
+        byte[] buffer,
+        int offset,
+        int size
+    )
     {
-        return RequestContext.GetChunks(ref dataChunkIndex, ref dataChunkOffset, buffer, offset, size);
+        return RequestContext.GetChunks(
+            ref dataChunkIndex,
+            ref dataChunkOffset,
+            buffer,
+            offset,
+            size
+        );
     }
 
     // should only be called from RequestContext
@@ -482,13 +538,21 @@ internal sealed partial class Request
 
     private static partial class Log
     {
-        [LoggerMessage(LoggerEventIds.ErrorInReadingCertificate, LogLevel.Debug, "An error occurred reading the client certificate.", EventName = "ErrorInReadingCertificate")]
+        [LoggerMessage(
+            LoggerEventIds.ErrorInReadingCertificate,
+            LogLevel.Debug,
+            "An error occurred reading the client certificate.",
+            EventName = "ErrorInReadingCertificate"
+        )]
         public static partial void ErrorInReadingCertificate(ILogger logger, Exception exception);
     }
 
     private void RemoveContentLengthIfTransferEncodingContainsChunked()
     {
-        if (StringValues.IsNullOrEmpty(Headers.ContentLength)) { return; }
+        if (StringValues.IsNullOrEmpty(Headers.ContentLength))
+        {
+            return;
+        }
 
         var transferEncoding = Headers[HeaderNames.TransferEncoding].ToString();
         if (!IsChunked(transferEncoding))
@@ -522,7 +586,13 @@ internal sealed partial class Request
         }
 
         var index = transferEncoding.LastIndexOf(',');
-        if (transferEncoding.AsSpan().Slice(index + 1).Trim().Equals("chunked", StringComparison.OrdinalIgnoreCase))
+        if (
+            transferEncoding
+                .AsSpan()
+                .Slice(index + 1)
+                .Trim()
+                .Equals("chunked", StringComparison.OrdinalIgnoreCase)
+        )
         {
             return true;
         }

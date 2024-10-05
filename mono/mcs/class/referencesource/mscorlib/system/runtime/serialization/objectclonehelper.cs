@@ -16,37 +16,46 @@
 
 namespace System.Runtime.Serialization
 {
-    using System.Runtime.Remoting;
-    using System.Runtime.Remoting.Proxies;
-    using System.Runtime.Remoting.Messaging;
-    using System.Runtime.Serialization;
     using System;
     using System.Collections;
-    using System.Reflection;
     using System.Diagnostics;
     using System.Globalization;
+    using System.Reflection;
+    using System.Runtime.Remoting;
+    using System.Runtime.Remoting.Messaging;
+    using System.Runtime.Remoting.Proxies;
+    using System.Runtime.Serialization;
 
     internal static class ObjectCloneHelper
     {
         static readonly IFormatterConverter s_converter = new FormatterConverter();
+
         // Currently object cloner is used only to clone stuff across domains. If its used to clone objects within a domain
         // the Clone context will need to be created too..
-        static readonly StreamingContext    s_cloneContext = new StreamingContext(StreamingContextStates.CrossAppDomain);
-        static readonly ISerializationSurrogate  s_RemotingSurrogate = new RemotingSurrogate();
-        static readonly ISerializationSurrogate  s_ObjRefRemotingSurrogate = new ObjRefSurrogate();
-        
-        [System.Security.SecurityCritical]  // auto-generated
-        internal static object GetObjectData(object serObj, out string typeName, out string assemName, out string[] fieldNames, out object[] fieldValues)
+        static readonly StreamingContext s_cloneContext = new StreamingContext(
+            StreamingContextStates.CrossAppDomain
+        );
+        static readonly ISerializationSurrogate s_RemotingSurrogate = new RemotingSurrogate();
+        static readonly ISerializationSurrogate s_ObjRefRemotingSurrogate = new ObjRefSurrogate();
+
+        [System.Security.SecurityCritical] // auto-generated
+        internal static object GetObjectData(
+            object serObj,
+            out string typeName,
+            out string assemName,
+            out string[] fieldNames,
+            out object[] fieldValues
+        )
         {
             Type objectType = null;
             object retObj = null;
-            
+
             if (RemotingServices.IsTransparentProxy(serObj))
                 objectType = typeof(MarshalByRefObject);
             else
                 objectType = serObj.GetType();
-                
-            SerializationInfo  si  = new SerializationInfo(objectType, s_converter);
+
+            SerializationInfo si = new SerializationInfo(objectType, s_converter);
             if (serObj is ObjRef)
             {
                 s_ObjRefRemotingSurrogate.GetObjectData(serObj, si, s_cloneContext);
@@ -56,10 +65,16 @@ namespace System.Runtime.Serialization
 #if !MONO
                 // We can only try to smuggle objref's for actual CLR objects
                 //   or for RemotingProxy's.
-                if (!RemotingServices.IsTransparentProxy(serObj) ||
-                    RemotingServices.GetRealProxy(serObj) is RemotingProxy)
-                {                
-                    ObjRef objRef = RemotingServices.MarshalInternal((MarshalByRefObject)serObj, null, null);
+                if (
+                    !RemotingServices.IsTransparentProxy(serObj)
+                    || RemotingServices.GetRealProxy(serObj) is RemotingProxy
+                )
+                {
+                    ObjRef objRef = RemotingServices.MarshalInternal(
+                        (MarshalByRefObject)serObj,
+                        null,
+                        null
+                    );
                     if (objRef.CanSmuggle())
                     {
                         if (RemotingServices.IsTransparentProxy(serObj))
@@ -70,7 +85,8 @@ namespace System.Runtime.Serialization
                         }
                         else
                         {
-                            ServerIdentity srvId = (ServerIdentity)MarshalByRefObject.GetIdentity((MarshalByRefObject)serObj);
+                            ServerIdentity srvId = (ServerIdentity)
+                                MarshalByRefObject.GetIdentity((MarshalByRefObject)serObj);
                             srvId.SetHandle();
                             objRef.SetServerIdentity(srvId.GetHandle());
                             objRef.SetDomainID(AppDomain.CurrentDomain.GetId());
@@ -85,7 +101,6 @@ namespace System.Runtime.Serialization
                     // Deal with the non-smugglable remoting objects
                     s_RemotingSurrogate.GetObjectData(serObj, si, s_cloneContext);
                 }
-                
             }
             else if (serObj is ISerializable)
             {
@@ -94,7 +109,9 @@ namespace System.Runtime.Serialization
             else
             {
                 // Getting here means a bug in cloner
-                throw new ArgumentException(Environment.GetResourceString("Arg_SerializationException"));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Arg_SerializationException")
+                );
             }
 
             if (retObj == null)
@@ -115,15 +132,20 @@ namespace System.Runtime.Serialization
             return retObj;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal static SerializationInfo PrepareConstructorArgs(object serObj, string[] fieldNames, object[] fieldValues, out StreamingContext context)
+        [System.Security.SecurityCritical] // auto-generated
+        internal static SerializationInfo PrepareConstructorArgs(
+            object serObj,
+            string[] fieldNames,
+            object[] fieldValues,
+            out StreamingContext context
+        )
         {
             SerializationInfo si = null;
             if (serObj is ISerializable)
             {
                 si = new SerializationInfo(serObj.GetType(), s_converter);
 
-                for (int i =0; i < fieldNames.Length; i++)
+                for (int i = 0; i < fieldNames.Length; i++)
                 {
                     if (fieldNames[i] != null)
                         si.AddValue(fieldNames[i], fieldValues[i]);
@@ -145,7 +167,7 @@ namespace System.Runtime.Serialization
                         numIncomingFields++;
                     }
                 }
-                
+
                 MemberInfo[] mi = FormatterServices.GetSerializableMembers(serObj.GetType());
 
                 for (int index = 0; index < mi.Length; index++)
@@ -156,12 +178,17 @@ namespace System.Runtime.Serialization
                         // If we are missing a field value then it's not necessarily
                         // the end of the world: check whether the field is marked
                         // [OptionalField].
-                        Object [] attrs = mi[index].GetCustomAttributes(typeof(OptionalFieldAttribute), false);
+                        Object[] attrs = mi[index]
+                            .GetCustomAttributes(typeof(OptionalFieldAttribute), false);
                         if (attrs == null || attrs.Length == 0)
-                            throw new SerializationException(Environment.GetResourceString("Serialization_MissingMember",
-                                                                           mi[index],
-                                                                           serObj.GetType(),
-                                                                           typeof(OptionalFieldAttribute).FullName));
+                            throw new SerializationException(
+                                Environment.GetResourceString(
+                                    "Serialization_MissingMember",
+                                    mi[index],
+                                    serObj.GetType(),
+                                    typeof(OptionalFieldAttribute).FullName
+                                )
+                            );
                         continue;
                     }
 
@@ -175,6 +202,5 @@ namespace System.Runtime.Serialization
             return si;
         }
     }
-
 }
 #endif // FEATURE_REMOTING

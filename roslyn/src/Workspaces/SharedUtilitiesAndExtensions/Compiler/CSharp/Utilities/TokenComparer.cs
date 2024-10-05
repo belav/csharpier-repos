@@ -10,19 +10,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
 {
     internal class TokenComparer : IComparer<SyntaxToken>
     {
-        public static readonly IComparer<SyntaxToken> NormalInstance = new TokenComparer(specialCaseSystem: false);
-        public static readonly IComparer<SyntaxToken> SystemFirstInstance = new TokenComparer(specialCaseSystem: true);
+        public static readonly IComparer<SyntaxToken> NormalInstance = new TokenComparer(
+            specialCaseSystem: false
+        );
+        public static readonly IComparer<SyntaxToken> SystemFirstInstance = new TokenComparer(
+            specialCaseSystem: true
+        );
 
         private readonly bool _specialCaseSystem;
 
-        private TokenComparer(bool specialCaseSystem)
-            => _specialCaseSystem = specialCaseSystem;
+        private TokenComparer(bool specialCaseSystem) => _specialCaseSystem = specialCaseSystem;
 
         public int Compare(SyntaxToken x, SyntaxToken y)
         {
-            if (_specialCaseSystem &&
-                x.GetPreviousToken(includeSkipped: true).Kind() is SyntaxKind.UsingKeyword or SyntaxKind.StaticKeyword &&
-                y.GetPreviousToken(includeSkipped: true).Kind() is SyntaxKind.UsingKeyword or SyntaxKind.StaticKeyword)
+            if (
+                _specialCaseSystem
+                && x.GetPreviousToken(includeSkipped: true).Kind()
+                    is SyntaxKind.UsingKeyword
+                        or SyntaxKind.StaticKeyword
+                && y.GetPreviousToken(includeSkipped: true).Kind()
+                    is SyntaxKind.UsingKeyword
+                        or SyntaxKind.StaticKeyword
+            )
             {
                 var token1IsSystem = x.ValueText == nameof(System);
                 var token2IsSystem = y.ValueText == nameof(System);
@@ -55,11 +64,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             var string1 = x.ValueText;
             var string2 = y.ValueText;
 
-            // First check in a case insensitive manner.  This will put 
+            // First check in a case insensitive manner.  This will put
             // everything that starts with an 'a' or 'A' above everything
             // that starts with a 'b' or 'B'.
-            var compare = CultureInfo.InvariantCulture.CompareInfo.Compare(string1, string2,
-                CompareOptions.IgnoreCase | CompareOptions.IgnoreNonSpace | CompareOptions.IgnoreWidth);
+            var compare = CultureInfo.InvariantCulture.CompareInfo.Compare(
+                string1,
+                string2,
+                CompareOptions.IgnoreCase
+                    | CompareOptions.IgnoreNonSpace
+                    | CompareOptions.IgnoreWidth
+            );
             if (compare != 0)
             {
                 return compare;
@@ -67,8 +81,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
 
             // Now, once we've grouped such that 'a' words and 'A' words are
             // together, sort such that 'a' words come before 'A' words.
-            return CultureInfo.InvariantCulture.CompareInfo.Compare(string1, string2,
-                CompareOptions.IgnoreNonSpace | CompareOptions.IgnoreWidth);
+            return CultureInfo.InvariantCulture.CompareInfo.Compare(
+                string1,
+                string2,
+                CompareOptions.IgnoreNonSpace | CompareOptions.IgnoreWidth
+            );
         }
     }
 }

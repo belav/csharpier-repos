@@ -34,7 +34,10 @@ namespace System.Collections.Immutable.Tests
             }
         }
 
-        internal static void CollectionAssertAreEquivalent<T>(ICollection<T> expected, ICollection<T> actual)
+        internal static void CollectionAssertAreEquivalent<T>(
+            ICollection<T> expected,
+            ICollection<T> actual
+        )
         {
             Assert.Equal(expected.Count, actual.Count);
             foreach (T value in expected)
@@ -74,7 +77,10 @@ namespace System.Collections.Immutable.Tests
             return new DeferredToString(() => ToString(sequence));
         }
 
-        protected static void ManuallyEnumerateTest<T>(IList<T> expectedResults, IEnumerator<T> enumerator)
+        protected static void ManuallyEnumerateTest<T>(
+            IList<T> expectedResults,
+            IEnumerator<T> enumerator
+        )
         {
             T[] manualArray = new T[expectedResults.Count];
             int i = 0;
@@ -117,8 +123,7 @@ namespace System.Collections.Immutable.Tests
                 do
                 {
                     input = random.NextDouble();
-                }
-                while (!ensureUniqueness.Add(input));
+                } while (!ensureUniqueness.Add(input));
                 inputs[i] = input;
             }
 

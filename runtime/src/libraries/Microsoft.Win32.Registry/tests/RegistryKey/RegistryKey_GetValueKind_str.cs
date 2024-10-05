@@ -21,7 +21,6 @@ namespace Microsoft.Win32.RegistryTests
                 TestRegistryKey.Dispose();
                 TestRegistryKey.GetValueKind("FooBar");
             });
-
         }
 
         [Fact]

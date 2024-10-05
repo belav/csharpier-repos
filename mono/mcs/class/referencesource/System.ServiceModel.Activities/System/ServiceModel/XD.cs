@@ -13,12 +13,14 @@ namespace System.ServiceModel
     {
         public static class WorkflowServices
         {
-            public const string Namespace = "http://schemas.datacontract.org/2008/10/WorkflowServices";
+            public const string Namespace =
+                "http://schemas.datacontract.org/2008/10/WorkflowServices";
         }
 
         public static class DurableInstancing
         {
-            public const string Namespace = "http://schemas.datacontract.org/2004/07/System.Runtime.DurableInstancing";
+            public const string Namespace =
+                "http://schemas.datacontract.org/2004/07/System.Runtime.DurableInstancing";
         }
 
         public static class ContextHeader
@@ -31,7 +33,8 @@ namespace System.ServiceModel
 
         public static class WorkflowInstanceManagementService
         {
-            public const string ConfigurationName = "System.ServiceModel.Activities.IWorkflowInstanceManagement";
+            public const string ConfigurationName =
+                "System.ServiceModel.Activities.IWorkflowInstanceManagement";
             public const string ContractName = "IWorkflowInstanceManagement";
 
             public const string Abandon = "Abandon";
@@ -64,5 +67,3 @@ namespace System.ServiceModel
         }
     }
 }
-
-

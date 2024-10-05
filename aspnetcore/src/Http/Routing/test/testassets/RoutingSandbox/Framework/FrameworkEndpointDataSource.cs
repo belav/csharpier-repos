@@ -50,7 +50,10 @@ internal class FrameworkEndpointDataSource : EndpointDataSource, IEndpointConven
 
             foreach (var pattern in Patterns)
             {
-                var resolvedPattern = _routePatternTransformer.SubstituteRequiredValues(pattern, requiredValues);
+                var resolvedPattern = _routePatternTransformer.SubstituteRequiredValues(
+                    pattern,
+                    requiredValues
+                );
                 if (resolvedPattern == null)
                 {
                     continue;
@@ -59,7 +62,8 @@ internal class FrameworkEndpointDataSource : EndpointDataSource, IEndpointConven
                 var endpointBuilder = new RouteEndpointBuilder(
                     hubMethod.RequestDelegate,
                     resolvedPattern,
-                    order++);
+                    order++
+                );
                 endpointBuilder.DisplayName = $"{hubMethod.Hub}.{hubMethod.Method}";
 
                 foreach (var convention in _conventions)

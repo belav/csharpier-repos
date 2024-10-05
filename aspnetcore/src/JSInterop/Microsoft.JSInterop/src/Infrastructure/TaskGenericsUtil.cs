@@ -8,31 +8,38 @@ namespace Microsoft.JSInterop.Infrastructure;
 
 internal static class TaskGenericsUtil
 {
-    private static readonly ConcurrentDictionary<Type, ITaskResultGetter> _cachedResultGetters
-        = new ConcurrentDictionary<Type, ITaskResultGetter>();
+    private static readonly ConcurrentDictionary<Type, ITaskResultGetter> _cachedResultGetters =
+        new ConcurrentDictionary<Type, ITaskResultGetter>();
 
-    private static readonly ConcurrentDictionary<Type, ITcsResultSetter> _cachedResultSetters
-        = new ConcurrentDictionary<Type, ITcsResultSetter>();
+    private static readonly ConcurrentDictionary<Type, ITcsResultSetter> _cachedResultSetters =
+        new ConcurrentDictionary<Type, ITcsResultSetter>();
 
-    public static void SetTaskCompletionSourceResult(object taskCompletionSource, object? result)
-        => CreateResultSetter(taskCompletionSource).SetResult(taskCompletionSource, result);
+    public static void SetTaskCompletionSourceResult(object taskCompletionSource, object? result) =>
+        CreateResultSetter(taskCompletionSource).SetResult(taskCompletionSource, result);
 
-    public static void SetTaskCompletionSourceException(object taskCompletionSource, Exception exception)
-        => CreateResultSetter(taskCompletionSource).SetException(taskCompletionSource, exception);
+    public static void SetTaskCompletionSourceException(
+        object taskCompletionSource,
+        Exception exception
+    ) => CreateResultSetter(taskCompletionSource).SetException(taskCompletionSource, exception);
 
-    public static Type GetTaskCompletionSourceResultType(object taskCompletionSource)
-        => CreateResultSetter(taskCompletionSource).ResultType;
+    public static Type GetTaskCompletionSourceResultType(object taskCompletionSource) =>
+        CreateResultSetter(taskCompletionSource).ResultType;
 
     public static object? GetTaskResult(Task task)
     {
-        var getter = _cachedResultGetters.GetOrAdd(task.GetType(), taskInstanceType =>
-        {
-            var resultType = GetTaskResultType(taskInstanceType);
-            return resultType == null
-                ? new VoidTaskResultGetter()
-                : (ITaskResultGetter)Activator.CreateInstance(
-                    typeof(TaskResultGetter<>).MakeGenericType(resultType))!;
-        });
+        var getter = _cachedResultGetters.GetOrAdd(
+            task.GetType(),
+            taskInstanceType =>
+            {
+                var resultType = GetTaskResultType(taskInstanceType);
+                return resultType == null
+                    ? new VoidTaskResultGetter()
+                    : (ITaskResultGetter)
+                        Activator.CreateInstance(
+                            typeof(TaskResultGetter<>).MakeGenericType(resultType)
+                        )!;
+            }
+        );
         return getter.GetResult(task);
     }
 
@@ -40,16 +47,19 @@ internal static class TaskGenericsUtil
     {
         // It might be something derived from Task or Task<T>, so we have to scan
         // up the inheritance hierarchy to find the Task or Task<T>
-        while (taskType != typeof(Task) &&
-            (!taskType.IsGenericType || taskType.GetGenericTypeDefinition() != typeof(Task<>)))
+        while (
+            taskType != typeof(Task)
+            && (!taskType.IsGenericType || taskType.GetGenericTypeDefinition() != typeof(Task<>))
+        )
         {
-            taskType = taskType.BaseType
-                ?? throw new ArgumentException($"The type '{taskType.FullName}' is not inherited from '{typeof(Task).FullName}'.");
+            taskType =
+                taskType.BaseType
+                ?? throw new ArgumentException(
+                    $"The type '{taskType.FullName}' is not inherited from '{typeof(Task).FullName}'."
+                );
         }
 
-        return taskType.IsGenericType
-            ? taskType.GetGenericArguments()[0]
-            : null;
+        return taskType.IsGenericType ? taskType.GetGenericArguments()[0] : null;
     }
 
     interface ITcsResultSetter
@@ -103,11 +113,16 @@ internal static class TaskGenericsUtil
 
     private static ITcsResultSetter CreateResultSetter(object taskCompletionSource)
     {
-        return _cachedResultSetters.GetOrAdd(taskCompletionSource.GetType(), tcsType =>
-        {
-            var resultType = tcsType.GetGenericArguments()[0];
-            return (ITcsResultSetter)Activator.CreateInstance(
-                typeof(TcsResultSetter<>).MakeGenericType(resultType))!;
-        });
+        return _cachedResultSetters.GetOrAdd(
+            taskCompletionSource.GetType(),
+            tcsType =>
+            {
+                var resultType = tcsType.GetGenericArguments()[0];
+                return (ITcsResultSetter)
+                    Activator.CreateInstance(
+                        typeof(TcsResultSetter<>).MakeGenericType(resultType)
+                    )!;
+            }
+        );
     }
 }

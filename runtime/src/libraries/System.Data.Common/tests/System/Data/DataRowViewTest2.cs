@@ -91,7 +91,11 @@ namespace System.Data.Tests
             var ds = new DataSet();
             ds.Tables.Add(dtParent);
             ds.Tables.Add(dtChild);
-            DataRelation drel = new DataRelation("ParentChild", dtParent.Columns["ParentId"], dtChild.Columns["ParentId"]);
+            DataRelation drel = new DataRelation(
+                "ParentChild",
+                dtParent.Columns["ParentId"],
+                dtChild.Columns["ParentId"]
+            );
             ds.Relations.Add(drel);
 
             //DataView dvChild = null;
@@ -123,7 +127,11 @@ namespace System.Data.Tests
             var ds = new DataSet();
             ds.Tables.Add(dtParent);
             ds.Tables.Add(dtChild);
-            DataRelation drel = new DataRelation("ParentChild", dtParent.Columns["ParentId"], dtChild.Columns["ParentId"]);
+            DataRelation drel = new DataRelation(
+                "ParentChild",
+                dtParent.Columns["ParentId"],
+                dtChild.Columns["ParentId"]
+            );
             ds.Relations.Add(drel);
 
             //DataView dvChild = null;

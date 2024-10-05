@@ -20,7 +20,7 @@ public class HtmlHelperLabelExtensionsTest
 
         // Act
         var labelResult = helper.Label(expression: string.Empty);
-        var labelNullResult = helper.Label(expression: null);   // null is another alias for current model
+        var labelNullResult = helper.Label(expression: null); // null is another alias for current model
         var labelForResult = helper.LabelFor(m => m);
         var labelForModelResult = helper.LabelForModel();
 
@@ -76,7 +76,8 @@ public class HtmlHelperLabelExtensionsTest
     public void LabelHelpers_DisplayPropertyName()
     {
         // Arrange
-        var expectedLabel = "<label for=\"HtmlEncode[[Property1]]\">HtmlEncode[[Property1]]</label>";
+        var expectedLabel =
+            "<label for=\"HtmlEncode[[Property1]]\">HtmlEncode[[Property1]]</label>";
         var helper = DefaultTemplatesUtilities.GetHtmlHelper();
 
         // Act
@@ -113,7 +114,10 @@ public class HtmlHelperLabelExtensionsTest
         var provider = new EmptyModelMetadataProvider();
 
         var modelExplorer = provider
-            .GetModelExplorerForType(typeof(DefaultTemplatesUtilities.ObjectTemplateModel), model: null)
+            .GetModelExplorerForType(
+                typeof(DefaultTemplatesUtilities.ObjectTemplateModel),
+                model: null
+            )
             .GetExplorerForProperty(propertyName);
 
         var helper = DefaultTemplatesUtilities.GetHtmlHelper();
@@ -125,9 +129,18 @@ public class HtmlHelperLabelExtensionsTest
         var labelForModelResult = helper.LabelForModel();
 
         // Assert
-        Assert.Equal("<label for=\"\">HtmlEncode[[" + propertyName + "]]</label>", HtmlContentUtilities.HtmlContentToString(labelResult));
-        Assert.Equal("<label for=\"\">HtmlEncode[[" + propertyName + "]]</label>", HtmlContentUtilities.HtmlContentToString(labelForResult));
-        Assert.Equal("<label for=\"\">HtmlEncode[[" + propertyName + "]]</label>", HtmlContentUtilities.HtmlContentToString(labelForModelResult));
+        Assert.Equal(
+            "<label for=\"\">HtmlEncode[[" + propertyName + "]]</label>",
+            HtmlContentUtilities.HtmlContentToString(labelResult)
+        );
+        Assert.Equal(
+            "<label for=\"\">HtmlEncode[[" + propertyName + "]]</label>",
+            HtmlContentUtilities.HtmlContentToString(labelForResult)
+        );
+        Assert.Equal(
+            "<label for=\"\">HtmlEncode[[" + propertyName + "]]</label>",
+            HtmlContentUtilities.HtmlContentToString(labelForModelResult)
+        );
     }
 
     // If the metadata is for a type (not property), then Label(expression) will evaluate the expression
@@ -142,7 +155,10 @@ public class HtmlHelperLabelExtensionsTest
         var labelResult = helper.Label(expression: "value");
 
         // Assert
-        Assert.Equal("<label for=\"HtmlEncode[[value]]\">HtmlEncode[[value]]</label>", HtmlContentUtilities.HtmlContentToString(labelResult));
+        Assert.Equal(
+            "<label for=\"HtmlEncode[[value]]\">HtmlEncode[[value]]</label>",
+            HtmlContentUtilities.HtmlContentToString(labelResult)
+        );
     }
 
     // Following test is identical to LabelHelpers_ReturnEmptyForModel() from the HTML helpers' perspective. But,
@@ -160,7 +176,7 @@ public class HtmlHelperLabelExtensionsTest
 
         // Act
         var labelResult = helper.Label(expression: string.Empty);
-        var labelNullResult = helper.Label(expression: null);   // null is another alias for current model
+        var labelNullResult = helper.Label(expression: null); // null is another alias for current model
         var labelForResult = helper.LabelFor(m => m);
         var labelForModelResult = helper.LabelForModel();
 
@@ -189,7 +205,7 @@ public class HtmlHelperLabelExtensionsTest
 
         // Act
         var labelResult = helper.Label(expression: string.Empty);
-        var labelNullResult = helper.Label(expression: null);   // null is another alias for current model
+        var labelNullResult = helper.Label(expression: null); // null is another alias for current model
         var labelForResult = helper.LabelFor(m => m);
         var labelForModelResult = helper.LabelForModel();
 
@@ -270,9 +286,18 @@ public class HtmlHelperLabelExtensionsTest
         var labelForModelResult = helper.LabelForModel();
 
         // Assert
-        Assert.Equal("<label for=\"\">HtmlEncode[[" + displayName + "]]</label>", HtmlContentUtilities.HtmlContentToString(labelResult));
-        Assert.Equal("<label for=\"\">HtmlEncode[[" + displayName + "]]</label>", HtmlContentUtilities.HtmlContentToString(labelForResult));
-        Assert.Equal("<label for=\"\">HtmlEncode[[" + displayName + "]]</label>", HtmlContentUtilities.HtmlContentToString(labelForModelResult));
+        Assert.Equal(
+            "<label for=\"\">HtmlEncode[[" + displayName + "]]</label>",
+            HtmlContentUtilities.HtmlContentToString(labelResult)
+        );
+        Assert.Equal(
+            "<label for=\"\">HtmlEncode[[" + displayName + "]]</label>",
+            HtmlContentUtilities.HtmlContentToString(labelForResult)
+        );
+        Assert.Equal(
+            "<label for=\"\">HtmlEncode[[" + displayName + "]]</label>",
+            HtmlContentUtilities.HtmlContentToString(labelForModelResult)
+        );
     }
 
     // Prior to aspnet/Mvc#6638 fix, helpers generated nothing with this setup.
@@ -290,13 +315,20 @@ public class HtmlHelperLabelExtensionsTest
 
         var helper = DefaultTemplatesUtilities.GetHtmlHelper<string>(provider: provider);
         helper.ViewData.ModelExplorer = provider
-            .GetModelExplorerForType(typeof(DefaultTemplatesUtilities.ObjectTemplateModel), model: null)
-            .GetExplorerForProperty(nameof(DefaultTemplatesUtilities.ObjectTemplateModel.Property1));
-        helper.ViewData.TemplateInfo.HtmlFieldPrefix = nameof(DefaultTemplatesUtilities.ObjectTemplateModel.Property1);
+            .GetModelExplorerForType(
+                typeof(DefaultTemplatesUtilities.ObjectTemplateModel),
+                model: null
+            )
+            .GetExplorerForProperty(
+                nameof(DefaultTemplatesUtilities.ObjectTemplateModel.Property1)
+            );
+        helper.ViewData.TemplateInfo.HtmlFieldPrefix = nameof(
+            DefaultTemplatesUtilities.ObjectTemplateModel.Property1
+        );
 
         // Act
         var labelResult = helper.Label(expression: string.Empty);
-        var labelNullResult = helper.Label(expression: null);   // null is another alias for current model
+        var labelNullResult = helper.Label(expression: null); // null is another alias for current model
         var labelForResult = helper.LabelFor(m => m);
         var labelForModelResult = helper.LabelForModel();
 
@@ -321,7 +353,9 @@ public class HtmlHelperLabelExtensionsTest
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(provider: provider);
 
         // Act
-        var labelResult = helper.Label(expression: nameof(DefaultTemplatesUtilities.ObjectTemplateModel.Property1));
+        var labelResult = helper.Label(
+            expression: nameof(DefaultTemplatesUtilities.ObjectTemplateModel.Property1)
+        );
         var labelForResult = helper.LabelFor(m => m.Property1);
 
         // Assert
@@ -344,7 +378,8 @@ public class HtmlHelperLabelExtensionsTest
         // Act
         var labelResult = helper.Label(
             expression: nameof(DefaultTemplatesUtilities.ObjectTemplateModel.Property1),
-            labelText: "a label");
+            labelText: "a label"
+        );
         var labelForResult = helper.LabelFor(m => m.Property1, labelText: "a label");
 
         // Assert
@@ -368,7 +403,8 @@ public class HtmlHelperLabelExtensionsTest
         // Act
         var labelResult = helper.Label(
             expression: nameof(DefaultTemplatesUtilities.ObjectTemplateModel.Property1),
-            labelText: string.Empty);
+            labelText: string.Empty
+        );
         var labelForResult = helper.LabelFor(m => m.Property1, labelText: string.Empty);
 
         // Assert
@@ -394,8 +430,14 @@ public class HtmlHelperLabelExtensionsTest
         var labelForResult = helper.LabelFor(m => m.Property1);
 
         // Assert
-        Assert.Equal("<label for=\"HtmlEncode[[Property1]]\">HtmlEncode[[" + displayName + "]]</label>", HtmlContentUtilities.HtmlContentToString(labelResult));
-        Assert.Equal("<label for=\"HtmlEncode[[Property1]]\">HtmlEncode[[" + displayName + "]]</label>", HtmlContentUtilities.HtmlContentToString(labelForResult));
+        Assert.Equal(
+            "<label for=\"HtmlEncode[[Property1]]\">HtmlEncode[[" + displayName + "]]</label>",
+            HtmlContentUtilities.HtmlContentToString(labelResult)
+        );
+        Assert.Equal(
+            "<label for=\"HtmlEncode[[Property1]]\">HtmlEncode[[" + displayName + "]]</label>",
+            HtmlContentUtilities.HtmlContentToString(labelForResult)
+        );
     }
 
     [Theory]
@@ -406,7 +448,8 @@ public class HtmlHelperLabelExtensionsTest
     public void Label_DisplaysRightmostExpressionSegment_IfPropertiesNotFound(
         string expression,
         string expectedText,
-        string expectedId)
+        string expectedId
+    )
     {
         // Arrange
         var helper = DefaultTemplatesUtilities.GetHtmlHelper();
@@ -416,7 +459,14 @@ public class HtmlHelperLabelExtensionsTest
 
         // Assert
         // Label() falls back to expression name when DisplayName and PropertyName are null.
-        Assert.Equal("<label for=\"HtmlEncode[[" + expectedId + "]]\">HtmlEncode[[" + expectedText + "]]</label>", HtmlContentUtilities.HtmlContentToString(result));
+        Assert.Equal(
+            "<label for=\"HtmlEncode[["
+                + expectedId
+                + "]]\">HtmlEncode[["
+                + expectedText
+                + "]]</label>",
+            HtmlContentUtilities.HtmlContentToString(result)
+        );
     }
 
     [Fact]
@@ -427,10 +477,12 @@ public class HtmlHelperLabelExtensionsTest
 
         // Act & Assert
         var exception = Assert.Throws<InvalidOperationException>(
-            () => helper.LabelFor(model => new { foo = "Bar" }));
+            () => helper.LabelFor(model => new { foo = "Bar" })
+        );
         Assert.Equal(
             "Templates can be used only with field access, property access, single-dimension array index, or single-parameter custom indexer expressions.",
-            exception.Message);
+            exception.Message
+        );
     }
 
     [Fact]
@@ -444,7 +496,10 @@ public class HtmlHelperLabelExtensionsTest
         var result = helper.LabelFor(model => unknownKey);
 
         // Assert
-        Assert.Equal("<label for=\"HtmlEncode[[unknownKey]]\">HtmlEncode[[unknownKey]]</label>", HtmlContentUtilities.HtmlContentToString(result));
+        Assert.Equal(
+            "<label for=\"HtmlEncode[[unknownKey]]\">HtmlEncode[[unknownKey]]</label>",
+            HtmlContentUtilities.HtmlContentToString(result)
+        );
     }
 
     [Fact]
@@ -457,7 +512,10 @@ public class HtmlHelperLabelExtensionsTest
         var labelResult = helper.Label("Property1", labelText: "Hello");
 
         // Assert
-        Assert.Equal("<label for=\"HtmlEncode[[Property1]]\">HtmlEncode[[Hello]]</label>", HtmlContentUtilities.HtmlContentToString(labelResult));
+        Assert.Equal(
+            "<label for=\"HtmlEncode[[Property1]]\">HtmlEncode[[Hello]]</label>",
+            HtmlContentUtilities.HtmlContentToString(labelResult)
+        );
     }
 
     [Fact]
@@ -470,7 +528,10 @@ public class HtmlHelperLabelExtensionsTest
         var labelForResult = helper.LabelFor(m => m.Property1, labelText: "Hello");
 
         // Assert
-        Assert.Equal("<label for=\"HtmlEncode[[Property1]]\">HtmlEncode[[Hello]]</label>", HtmlContentUtilities.HtmlContentToString(labelForResult));
+        Assert.Equal(
+            "<label for=\"HtmlEncode[[Property1]]\">HtmlEncode[[Hello]]</label>",
+            HtmlContentUtilities.HtmlContentToString(labelForResult)
+        );
     }
 
     [Fact]
@@ -483,7 +544,10 @@ public class HtmlHelperLabelExtensionsTest
         var labelForModelResult = helper.LabelForModel(labelText: "Hello");
 
         // Assert
-        Assert.Equal("<label for=\"\">HtmlEncode[[Hello]]</label>", HtmlContentUtilities.HtmlContentToString(labelForModelResult));
+        Assert.Equal(
+            "<label for=\"\">HtmlEncode[[Hello]]</label>",
+            HtmlContentUtilities.HtmlContentToString(labelForModelResult)
+        );
     }
 
     [Fact]
@@ -493,10 +557,16 @@ public class HtmlHelperLabelExtensionsTest
         var helper = DefaultTemplatesUtilities.GetHtmlHelper();
 
         // Act
-        var labelForResult = helper.LabelFor(m => m.Property1, htmlAttributes: new { attr = "value" });
+        var labelForResult = helper.LabelFor(
+            m => m.Property1,
+            htmlAttributes: new { attr = "value" }
+        );
 
         // Assert
-        Assert.Equal("<label attr=\"HtmlEncode[[value]]\" for=\"HtmlEncode[[Property1]]\">HtmlEncode[[Property1]]</label>", HtmlContentUtilities.HtmlContentToString(labelForResult));
+        Assert.Equal(
+            "<label attr=\"HtmlEncode[[value]]\" for=\"HtmlEncode[[Property1]]\">HtmlEncode[[Property1]]</label>",
+            HtmlContentUtilities.HtmlContentToString(labelForResult)
+        );
     }
 
     [Fact]
@@ -506,10 +576,16 @@ public class HtmlHelperLabelExtensionsTest
         var helper = DefaultTemplatesUtilities.GetHtmlHelper();
 
         // Act
-        var labelForModelResult = helper.LabelForModel(labelText: "Hello", htmlAttributes: new { attr = "value" });
+        var labelForModelResult = helper.LabelForModel(
+            labelText: "Hello",
+            htmlAttributes: new { attr = "value" }
+        );
 
         // Assert
-        Assert.Equal("<label attr=\"HtmlEncode[[value]]\" for=\"\">HtmlEncode[[Hello]]</label>", HtmlContentUtilities.HtmlContentToString(labelForModelResult));
+        Assert.Equal(
+            "<label attr=\"HtmlEncode[[value]]\" for=\"\">HtmlEncode[[Hello]]</label>",
+            HtmlContentUtilities.HtmlContentToString(labelForModelResult)
+        );
     }
 
     private sealed class InnerClass

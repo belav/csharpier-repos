@@ -13,11 +13,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Precedence
     {
         public static readonly CSharpPatternPrecedenceService Instance = new();
 
-        private CSharpPatternPrecedenceService()
-        {
-        }
+        private CSharpPatternPrecedenceService() { }
 
-        public override OperatorPrecedence GetOperatorPrecedence(PatternSyntax pattern)
-            => pattern.GetOperatorPrecedence();
+        public override OperatorPrecedence GetOperatorPrecedence(PatternSyntax pattern) =>
+            pattern.GetOperatorPrecedence();
     }
 }

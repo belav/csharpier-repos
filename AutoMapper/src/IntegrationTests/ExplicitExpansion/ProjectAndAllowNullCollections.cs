@@ -2,7 +2,8 @@
 
 namespace AutoMapper.IntegrationTests.ExplicitExpansion;
 
-public class ProjectAndAllowNullCollections : IntegrationTest<ProjectAndAllowNullCollections.DatabaseInitializer>
+public class ProjectAndAllowNullCollections
+    : IntegrationTest<ProjectAndAllowNullCollections.DatabaseInitializer>
 {
     public class Foo
     {
@@ -107,22 +108,23 @@ public class ProjectAndAllowNullCollections : IntegrationTest<ProjectAndAllowNul
         }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(c =>
-    {
-        c.AllowNullCollections = true;
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(c =>
+        {
+            c.AllowNullCollections = true;
 
-        c.CreateProjection<Foo, FooDto>()
-            .ForMember(d => d.Bars, o => o.ExplicitExpansion())
-            .ForMember(d => d.Bazs, o => o.ExplicitExpansion());
+            c.CreateProjection<Foo, FooDto>()
+                .ForMember(d => d.Bars, o => o.ExplicitExpansion())
+                .ForMember(d => d.Bazs, o => o.ExplicitExpansion());
 
-        c.CreateProjection<Bar, BarDto>();
-        c.CreateProjection<Baz, BazDto>();
-    });
+            c.CreateProjection<Bar, BarDto>();
+            c.CreateProjection<Baz, BazDto>();
+        });
 
     [Fact]
     public void Should_work()
     {
-        using(var context = new MyContext())
+        using (var context = new MyContext())
         {
             var foos = ProjectTo<FooDto>(context.Foos.AsNoTracking(), null, m => m.Bars).ToList();
 

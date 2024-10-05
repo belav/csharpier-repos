@@ -31,7 +31,11 @@ using Microsoft.FSharp.Core;
 
 namespace Newtonsoft.Json.Tests.TestObjects.Money
 {
-    [Serializable, DebuggerDisplay("{__DebugDisplay(),nq}"), CompilationMapping(SourceConstructFlags.SumType)]
+    [
+        Serializable,
+        DebuggerDisplay("{__DebugDisplay(),nq}"),
+        CompilationMapping(SourceConstructFlags.SumType)
+    ]
     public class Currency
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never), CompilerGenerated]
@@ -64,7 +68,13 @@ namespace Newtonsoft.Json.Tests.TestObjects.Money
         [CompilerGenerated, DebuggerNonUserCode]
         internal object __DebugDisplay()
         {
-            return ExtraTopLevelOperators.PrintFormatToString<FSharpFunc<Currency, string>>(new PrintfFormat<FSharpFunc<Currency, string>, Unit, string, string, string>("%+0.8A")).Invoke(this);
+            return ExtraTopLevelOperators
+                .PrintFormatToString<FSharpFunc<Currency, string>>(
+                    new PrintfFormat<FSharpFunc<Currency, string>, Unit, string, string, string>(
+                        "%+0.8A"
+                    )
+                )
+                .Invoke(this);
         }
 
         [CompilerGenerated, DebuggerNonUserCode, DebuggerBrowsable(DebuggerBrowsableState.Never)]

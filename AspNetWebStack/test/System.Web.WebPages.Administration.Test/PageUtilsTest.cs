@@ -111,7 +111,11 @@ namespace System.Web.WebPages.Administration.Test
             response.Setup(c => c.Cookies).Returns(cookies);
 
             // Act
-            PageUtils.PersistFilter(response.Object, "my-cookie", new Dictionary<string, string>() { { "a", "b" }, { "x", "y" } });
+            PageUtils.PersistFilter(
+                response.Object,
+                "my-cookie",
+                new Dictionary<string, string>() { { "a", "b" }, { "x", "y" } }
+            );
 
             // Assert
             var cookie = cookies["my-cookie"];

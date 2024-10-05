@@ -92,10 +92,14 @@ namespace System.Buffers
     // For an alternative description of the algorithm, see
     // https://github.com/BurntSushi/aho-corasick/blob/8d735471fc12f0ca570cead8e17342274fae6331/src/packed/teddy/README.md
     // Has an O(i * m) worst-case, with the expected time closer to O(n) for good bucket distributions.
-    internal abstract class AsciiStringSearchValuesTeddyBase<TBucketized, TStartCaseSensitivity, TCaseSensitivity> : StringSearchValuesRabinKarp<TCaseSensitivity>
+    internal abstract class AsciiStringSearchValuesTeddyBase<
+        TBucketized,
+        TStartCaseSensitivity,
+        TCaseSensitivity
+    > : StringSearchValuesRabinKarp<TCaseSensitivity>
         where TBucketized : struct, SearchValues.IRuntimeConst
-        where TStartCaseSensitivity : struct, ICaseSensitivity  // Refers to the characters being matched by Teddy
-        where TCaseSensitivity : struct, ICaseSensitivity       // Refers to the rest of the value for the verification step
+        where TStartCaseSensitivity : struct, ICaseSensitivity // Refers to the characters being matched by Teddy
+        where TCaseSensitivity : struct, ICaseSensitivity // Refers to the rest of the value for the verification step
     {
         // We may be using N2 or N3 mode depending on whether we're checking 2 or 3 starting bytes for each bucket.
         // The result of ProcessInputN2 and ProcessInputN3 are offset by 1 and 2 positions respectively (MatchStartOffsetN2 and MatchStartOffsetN3).
@@ -111,30 +115,49 @@ namespace System.Buffers
         // If we have more than 8, the buckets will be string[], and TBucketized.Value will be true.
         private readonly EightPackedReferences _buckets;
 
-        private readonly Vector512<byte>
-            _n0Low, _n0High,
-            _n1Low, _n1High,
-            _n2Low, _n2High;
+        private readonly Vector512<byte> _n0Low,
+            _n0High,
+            _n1Low,
+            _n1High,
+            _n2Low,
+            _n2High;
 
-        protected AsciiStringSearchValuesTeddyBase(ReadOnlySpan<string> values, HashSet<string> uniqueValues, int n) : base(values, uniqueValues)
+        protected AsciiStringSearchValuesTeddyBase(
+            ReadOnlySpan<string> values,
+            HashSet<string> uniqueValues,
+            int n
+        )
+            : base(values, uniqueValues)
         {
             Debug.Assert(!TBucketized.Value);
             Debug.Assert(n is 2 or 3);
 
-            _buckets = new EightPackedReferences(MemoryMarshal.CreateReadOnlySpan(
-                ref Unsafe.As<string, object>(ref MemoryMarshal.GetReference(values)),
-                values.Length));
+            _buckets = new EightPackedReferences(
+                MemoryMarshal.CreateReadOnlySpan(
+                    ref Unsafe.As<string, object>(ref MemoryMarshal.GetReference(values)),
+                    values.Length
+                )
+            );
 
             (_n0Low, _n0High) = TeddyBucketizer.GenerateNonBucketizedFingerprint(values, offset: 0);
             (_n1Low, _n1High) = TeddyBucketizer.GenerateNonBucketizedFingerprint(values, offset: 1);
 
             if (n == 3)
             {
-                (_n2Low, _n2High) = TeddyBucketizer.GenerateNonBucketizedFingerprint(values, offset: 2);
+                (_n2Low, _n2High) = TeddyBucketizer.GenerateNonBucketizedFingerprint(
+                    values,
+                    offset: 2
+                );
             }
         }
 
-        protected AsciiStringSearchValuesTeddyBase(string[][] buckets, ReadOnlySpan<string> values, HashSet<string> uniqueValues, int n) : base(values, uniqueValues)
+        protected AsciiStringSearchValuesTeddyBase(
+            string[][] buckets,
+            ReadOnlySpan<string> values,
+            HashSet<string> uniqueValues,
+            int n
+        )
+            : base(values, uniqueValues)
         {
             Debug.Assert(TBucketized.Value);
             Debug.Assert(n is 2 or 3);
@@ -146,7 +169,10 @@ namespace System.Buffers
 
             if (n == 3)
             {
-                (_n2Low, _n2High) = TeddyBucketizer.GenerateBucketizedFingerprint(buckets, offset: 2);
+                (_n2Low, _n2High) = TeddyBucketizer.GenerateBucketizedFingerprint(
+                    buckets,
+                    offset: 2
+                );
             }
         }
 
@@ -156,7 +182,11 @@ namespace System.Buffers
         {
             // The behavior of the rest of the function remains the same if Avx2 or Avx512BW aren't supported
 #pragma warning disable IntrinsicsInSystemPrivateCoreLibAttributeNotSpecificEnough
-            if (Vector512.IsHardwareAccelerated && Avx512BW.IsSupported && span.Length >= CharsPerIterationAvx512 + MatchStartOffsetN2)
+            if (
+                Vector512.IsHardwareAccelerated
+                && Avx512BW.IsSupported
+                && span.Length >= CharsPerIterationAvx512 + MatchStartOffsetN2
+            )
             {
                 return IndexOfAnyN2Avx512(span);
             }
@@ -176,7 +206,11 @@ namespace System.Buffers
         {
             // The behavior of the rest of the function remains the same if Avx2 or Avx512BW aren't supported
 #pragma warning disable IntrinsicsInSystemPrivateCoreLibAttributeNotSpecificEnough
-            if (Vector512.IsHardwareAccelerated && Avx512BW.IsSupported && span.Length >= CharsPerIterationAvx512 + MatchStartOffsetN3)
+            if (
+                Vector512.IsHardwareAccelerated
+                && Avx512BW.IsSupported
+                && span.Length >= CharsPerIterationAvx512 + MatchStartOffsetN3
+            )
             {
                 return IndexOfAnyN3Avx512(span);
             }
@@ -202,31 +236,50 @@ namespace System.Buffers
             }
 
             ref char searchSpace = ref MemoryMarshal.GetReference(span);
-            ref char lastSearchSpaceStart = ref Unsafe.Add(ref searchSpace, span.Length - CharsPerIterationVector128);
+            ref char lastSearchSpaceStart = ref Unsafe.Add(
+                ref searchSpace,
+                span.Length - CharsPerIterationVector128
+            );
 
             searchSpace = ref Unsafe.Add(ref searchSpace, MatchStartOffsetN2);
 
-            Vector128<byte> n0Low = _n0Low._lower._lower, n0High = _n0High._lower._lower;
-            Vector128<byte> n1Low = _n1Low._lower._lower, n1High = _n1High._lower._lower;
+            Vector128<byte> n0Low = _n0Low._lower._lower,
+                n0High = _n0High._lower._lower;
+            Vector128<byte> n1Low = _n1Low._lower._lower,
+                n1High = _n1High._lower._lower;
             Vector128<byte> prev0 = Vector128<byte>.AllBitsSet;
 
-        Loop:
+            Loop:
             ValidateReadPosition(span, ref searchSpace);
-            Vector128<byte> input = TStartCaseSensitivity.TransformInput(LoadAndPack16AsciiChars(ref searchSpace));
+            Vector128<byte> input = TStartCaseSensitivity.TransformInput(
+                LoadAndPack16AsciiChars(ref searchSpace)
+            );
 
-            (Vector128<byte> result, prev0) = ProcessInputN2(input, prev0, n0Low, n0High, n1Low, n1High);
+            (Vector128<byte> result, prev0) = ProcessInputN2(
+                input,
+                prev0,
+                n0Low,
+                n0High,
+                n1Low,
+                n1High
+            );
 
             if (result != Vector128<byte>.Zero)
             {
                 goto CandidateFound;
             }
 
-        ContinueLoop:
+            ContinueLoop:
             searchSpace = ref Unsafe.Add(ref searchSpace, CharsPerIterationVector128);
 
             if (Unsafe.IsAddressGreaterThan(ref searchSpace, ref lastSearchSpaceStart))
             {
-                if (Unsafe.AreSame(ref searchSpace, ref Unsafe.Add(ref lastSearchSpaceStart, CharsPerIterationVector128)))
+                if (
+                    Unsafe.AreSame(
+                        ref searchSpace,
+                        ref Unsafe.Add(ref lastSearchSpaceStart, CharsPerIterationVector128)
+                    )
+                )
                 {
                     return -1;
                 }
@@ -238,7 +291,7 @@ namespace System.Buffers
             }
             goto Loop;
 
-        CandidateFound:
+            CandidateFound:
             if (TryFindMatch(span, ref searchSpace, result, MatchStartOffsetN2, out int offset))
             {
                 return offset;
@@ -254,31 +307,50 @@ namespace System.Buffers
             Debug.Assert(span.Length >= CharsPerIterationAvx2 + MatchStartOffsetN2);
 
             ref char searchSpace = ref MemoryMarshal.GetReference(span);
-            ref char lastSearchSpaceStart = ref Unsafe.Add(ref searchSpace, span.Length - CharsPerIterationAvx2);
+            ref char lastSearchSpaceStart = ref Unsafe.Add(
+                ref searchSpace,
+                span.Length - CharsPerIterationAvx2
+            );
 
             searchSpace = ref Unsafe.Add(ref searchSpace, MatchStartOffsetN2);
 
-            Vector256<byte> n0Low = _n0Low._lower, n0High = _n0High._lower;
-            Vector256<byte> n1Low = _n1Low._lower, n1High = _n1High._lower;
+            Vector256<byte> n0Low = _n0Low._lower,
+                n0High = _n0High._lower;
+            Vector256<byte> n1Low = _n1Low._lower,
+                n1High = _n1High._lower;
             Vector256<byte> prev0 = Vector256<byte>.AllBitsSet;
 
-        Loop:
+            Loop:
             ValidateReadPosition(span, ref searchSpace);
-            Vector256<byte> input = TStartCaseSensitivity.TransformInput(LoadAndPack32AsciiChars(ref searchSpace));
+            Vector256<byte> input = TStartCaseSensitivity.TransformInput(
+                LoadAndPack32AsciiChars(ref searchSpace)
+            );
 
-            (Vector256<byte> result, prev0) = ProcessInputN2(input, prev0, n0Low, n0High, n1Low, n1High);
+            (Vector256<byte> result, prev0) = ProcessInputN2(
+                input,
+                prev0,
+                n0Low,
+                n0High,
+                n1Low,
+                n1High
+            );
 
             if (result != Vector256<byte>.Zero)
             {
                 goto CandidateFound;
             }
 
-        ContinueLoop:
+            ContinueLoop:
             searchSpace = ref Unsafe.Add(ref searchSpace, CharsPerIterationAvx2);
 
             if (Unsafe.IsAddressGreaterThan(ref searchSpace, ref lastSearchSpaceStart))
             {
-                if (Unsafe.AreSame(ref searchSpace, ref Unsafe.Add(ref lastSearchSpaceStart, CharsPerIterationAvx2)))
+                if (
+                    Unsafe.AreSame(
+                        ref searchSpace,
+                        ref Unsafe.Add(ref lastSearchSpaceStart, CharsPerIterationAvx2)
+                    )
+                )
                 {
                     return -1;
                 }
@@ -290,7 +362,7 @@ namespace System.Buffers
             }
             goto Loop;
 
-        CandidateFound:
+            CandidateFound:
             if (TryFindMatch(span, ref searchSpace, result, MatchStartOffsetN2, out int offset))
             {
                 return offset;
@@ -306,31 +378,50 @@ namespace System.Buffers
             Debug.Assert(span.Length >= CharsPerIterationAvx512 + MatchStartOffsetN2);
 
             ref char searchSpace = ref MemoryMarshal.GetReference(span);
-            ref char lastSearchSpaceStart = ref Unsafe.Add(ref searchSpace, span.Length - CharsPerIterationAvx512);
+            ref char lastSearchSpaceStart = ref Unsafe.Add(
+                ref searchSpace,
+                span.Length - CharsPerIterationAvx512
+            );
 
             searchSpace = ref Unsafe.Add(ref searchSpace, MatchStartOffsetN2);
 
-            Vector512<byte> n0Low = _n0Low, n0High = _n0High;
-            Vector512<byte> n1Low = _n1Low, n1High = _n1High;
+            Vector512<byte> n0Low = _n0Low,
+                n0High = _n0High;
+            Vector512<byte> n1Low = _n1Low,
+                n1High = _n1High;
             Vector512<byte> prev0 = Vector512<byte>.AllBitsSet;
 
-        Loop:
+            Loop:
             ValidateReadPosition(span, ref searchSpace);
-            Vector512<byte> input = TStartCaseSensitivity.TransformInput(LoadAndPack64AsciiChars(ref searchSpace));
+            Vector512<byte> input = TStartCaseSensitivity.TransformInput(
+                LoadAndPack64AsciiChars(ref searchSpace)
+            );
 
-            (Vector512<byte> result, prev0) = ProcessInputN2(input, prev0, n0Low, n0High, n1Low, n1High);
+            (Vector512<byte> result, prev0) = ProcessInputN2(
+                input,
+                prev0,
+                n0Low,
+                n0High,
+                n1Low,
+                n1High
+            );
 
             if (result != Vector512<byte>.Zero)
             {
                 goto CandidateFound;
             }
 
-        ContinueLoop:
+            ContinueLoop:
             searchSpace = ref Unsafe.Add(ref searchSpace, CharsPerIterationAvx512);
 
             if (Unsafe.IsAddressGreaterThan(ref searchSpace, ref lastSearchSpaceStart))
             {
-                if (Unsafe.AreSame(ref searchSpace, ref Unsafe.Add(ref lastSearchSpaceStart, CharsPerIterationAvx512)))
+                if (
+                    Unsafe.AreSame(
+                        ref searchSpace,
+                        ref Unsafe.Add(ref lastSearchSpaceStart, CharsPerIterationAvx512)
+                    )
+                )
                 {
                     return -1;
                 }
@@ -342,7 +433,7 @@ namespace System.Buffers
             }
             goto Loop;
 
-        CandidateFound:
+            CandidateFound:
             if (TryFindMatch(span, ref searchSpace, result, MatchStartOffsetN2, out int offset))
             {
                 return offset;
@@ -361,16 +452,22 @@ namespace System.Buffers
             }
 
             ref char searchSpace = ref MemoryMarshal.GetReference(span);
-            ref char lastSearchSpaceStart = ref Unsafe.Add(ref searchSpace, span.Length - CharsPerIterationVector128);
+            ref char lastSearchSpaceStart = ref Unsafe.Add(
+                ref searchSpace,
+                span.Length - CharsPerIterationVector128
+            );
 
             searchSpace = ref Unsafe.Add(ref searchSpace, MatchStartOffsetN3);
 
             // All the input bitmaps are Vector128<byte>, duplicated 4 times up to Vector512<byte>.
             // They are stored as Vector512 to lower the overhead of routines that do load the full Vector512<byte>.
             // When using the Vector128 routine, we just load the first of those duplicates (._lower._lower).
-            Vector128<byte> n0Low = _n0Low._lower._lower, n0High = _n0High._lower._lower;
-            Vector128<byte> n1Low = _n1Low._lower._lower, n1High = _n1High._lower._lower;
-            Vector128<byte> n2Low = _n2Low._lower._lower, n2High = _n2High._lower._lower;
+            Vector128<byte> n0Low = _n0Low._lower._lower,
+                n0High = _n0High._lower._lower;
+            Vector128<byte> n1Low = _n1Low._lower._lower,
+                n1High = _n1High._lower._lower;
+            Vector128<byte> n2Low = _n2Low._lower._lower,
+                n2High = _n2High._lower._lower;
 
             // As matching is offset by 2 positions (MatchStartOffsetN3), we must remember the result of the previous loop iteration.
             // See the full description of TeddyHelper.ProcessInputN3 for more details about why these exist.
@@ -379,28 +476,45 @@ namespace System.Buffers
             Vector128<byte> prev0 = Vector128<byte>.AllBitsSet;
             Vector128<byte> prev1 = Vector128<byte>.AllBitsSet;
 
-        Loop:
+            Loop:
             // Load the input characters and normalize them to their uppercase variant if we're ignoring casing.
             // These characters may not be ASCII, but we know that the starting 3 characters of each value are.
             ValidateReadPosition(span, ref searchSpace);
-            Vector128<byte> input = TStartCaseSensitivity.TransformInput(LoadAndPack16AsciiChars(ref searchSpace));
+            Vector128<byte> input = TStartCaseSensitivity.TransformInput(
+                LoadAndPack16AsciiChars(ref searchSpace)
+            );
 
             // Find which buckets contain potential matches for each input position.
             // For a bucket to be marked as a potential match, its fingerprint must match for all 3 starting characters (all 6 nibbles).
-            (Vector128<byte> result, prev0, prev1) = ProcessInputN3(input, prev0, prev1, n0Low, n0High, n1Low, n1High, n2Low, n2High);
+            (Vector128<byte> result, prev0, prev1) = ProcessInputN3(
+                input,
+                prev0,
+                prev1,
+                n0Low,
+                n0High,
+                n1Low,
+                n1High,
+                n2Low,
+                n2High
+            );
 
             if (result != Vector128<byte>.Zero)
             {
                 goto CandidateFound;
             }
 
-        ContinueLoop:
+            ContinueLoop:
             // We haven't found a match. Update the input position and check if we've reached the end.
             searchSpace = ref Unsafe.Add(ref searchSpace, CharsPerIterationVector128);
 
             if (Unsafe.IsAddressGreaterThan(ref searchSpace, ref lastSearchSpaceStart))
             {
-                if (Unsafe.AreSame(ref searchSpace, ref Unsafe.Add(ref lastSearchSpaceStart, CharsPerIterationVector128)))
+                if (
+                    Unsafe.AreSame(
+                        ref searchSpace,
+                        ref Unsafe.Add(ref lastSearchSpaceStart, CharsPerIterationVector128)
+                    )
+                )
                 {
                     return -1;
                 }
@@ -414,7 +528,7 @@ namespace System.Buffers
             }
             goto Loop;
 
-        CandidateFound:
+            CandidateFound:
             // We found potential matches, but they may be false-positives, so we must verify each one.
             if (TryFindMatch(span, ref searchSpace, result, MatchStartOffsetN3, out int offset))
             {
@@ -431,33 +545,56 @@ namespace System.Buffers
             Debug.Assert(span.Length >= CharsPerIterationAvx2 + MatchStartOffsetN3);
 
             ref char searchSpace = ref MemoryMarshal.GetReference(span);
-            ref char lastSearchSpaceStart = ref Unsafe.Add(ref searchSpace, span.Length - CharsPerIterationAvx2);
+            ref char lastSearchSpaceStart = ref Unsafe.Add(
+                ref searchSpace,
+                span.Length - CharsPerIterationAvx2
+            );
 
             searchSpace = ref Unsafe.Add(ref searchSpace, MatchStartOffsetN3);
 
-            Vector256<byte> n0Low = _n0Low._lower, n0High = _n0High._lower;
-            Vector256<byte> n1Low = _n1Low._lower, n1High = _n1High._lower;
-            Vector256<byte> n2Low = _n2Low._lower, n2High = _n2High._lower;
+            Vector256<byte> n0Low = _n0Low._lower,
+                n0High = _n0High._lower;
+            Vector256<byte> n1Low = _n1Low._lower,
+                n1High = _n1High._lower;
+            Vector256<byte> n2Low = _n2Low._lower,
+                n2High = _n2High._lower;
             Vector256<byte> prev0 = Vector256<byte>.AllBitsSet;
             Vector256<byte> prev1 = Vector256<byte>.AllBitsSet;
 
-        Loop:
+            Loop:
             ValidateReadPosition(span, ref searchSpace);
-            Vector256<byte> input = TStartCaseSensitivity.TransformInput(LoadAndPack32AsciiChars(ref searchSpace));
+            Vector256<byte> input = TStartCaseSensitivity.TransformInput(
+                LoadAndPack32AsciiChars(ref searchSpace)
+            );
 
-            (Vector256<byte> result, prev0, prev1) = ProcessInputN3(input, prev0, prev1, n0Low, n0High, n1Low, n1High, n2Low, n2High);
+            (Vector256<byte> result, prev0, prev1) = ProcessInputN3(
+                input,
+                prev0,
+                prev1,
+                n0Low,
+                n0High,
+                n1Low,
+                n1High,
+                n2Low,
+                n2High
+            );
 
             if (result != Vector256<byte>.Zero)
             {
                 goto CandidateFound;
             }
 
-        ContinueLoop:
+            ContinueLoop:
             searchSpace = ref Unsafe.Add(ref searchSpace, CharsPerIterationAvx2);
 
             if (Unsafe.IsAddressGreaterThan(ref searchSpace, ref lastSearchSpaceStart))
             {
-                if (Unsafe.AreSame(ref searchSpace, ref Unsafe.Add(ref lastSearchSpaceStart, CharsPerIterationAvx2)))
+                if (
+                    Unsafe.AreSame(
+                        ref searchSpace,
+                        ref Unsafe.Add(ref lastSearchSpaceStart, CharsPerIterationAvx2)
+                    )
+                )
                 {
                     return -1;
                 }
@@ -470,7 +607,7 @@ namespace System.Buffers
             }
             goto Loop;
 
-        CandidateFound:
+            CandidateFound:
             if (TryFindMatch(span, ref searchSpace, result, MatchStartOffsetN3, out int offset))
             {
                 return offset;
@@ -486,33 +623,56 @@ namespace System.Buffers
             Debug.Assert(span.Length >= CharsPerIterationAvx512 + MatchStartOffsetN3);
 
             ref char searchSpace = ref MemoryMarshal.GetReference(span);
-            ref char lastSearchSpaceStart = ref Unsafe.Add(ref searchSpace, span.Length - CharsPerIterationAvx512);
+            ref char lastSearchSpaceStart = ref Unsafe.Add(
+                ref searchSpace,
+                span.Length - CharsPerIterationAvx512
+            );
 
             searchSpace = ref Unsafe.Add(ref searchSpace, MatchStartOffsetN3);
 
-            Vector512<byte> n0Low = _n0Low, n0High = _n0High;
-            Vector512<byte> n1Low = _n1Low, n1High = _n1High;
-            Vector512<byte> n2Low = _n2Low, n2High = _n2High;
+            Vector512<byte> n0Low = _n0Low,
+                n0High = _n0High;
+            Vector512<byte> n1Low = _n1Low,
+                n1High = _n1High;
+            Vector512<byte> n2Low = _n2Low,
+                n2High = _n2High;
             Vector512<byte> prev0 = Vector512<byte>.AllBitsSet;
             Vector512<byte> prev1 = Vector512<byte>.AllBitsSet;
 
-        Loop:
+            Loop:
             ValidateReadPosition(span, ref searchSpace);
-            Vector512<byte> input = TStartCaseSensitivity.TransformInput(LoadAndPack64AsciiChars(ref searchSpace));
+            Vector512<byte> input = TStartCaseSensitivity.TransformInput(
+                LoadAndPack64AsciiChars(ref searchSpace)
+            );
 
-            (Vector512<byte> result, prev0, prev1) = ProcessInputN3(input, prev0, prev1, n0Low, n0High, n1Low, n1High, n2Low, n2High);
+            (Vector512<byte> result, prev0, prev1) = ProcessInputN3(
+                input,
+                prev0,
+                prev1,
+                n0Low,
+                n0High,
+                n1Low,
+                n1High,
+                n2Low,
+                n2High
+            );
 
             if (result != Vector512<byte>.Zero)
             {
                 goto CandidateFound;
             }
 
-        ContinueLoop:
+            ContinueLoop:
             searchSpace = ref Unsafe.Add(ref searchSpace, CharsPerIterationAvx512);
 
             if (Unsafe.IsAddressGreaterThan(ref searchSpace, ref lastSearchSpaceStart))
             {
-                if (Unsafe.AreSame(ref searchSpace, ref Unsafe.Add(ref lastSearchSpaceStart, CharsPerIterationAvx512)))
+                if (
+                    Unsafe.AreSame(
+                        ref searchSpace,
+                        ref Unsafe.Add(ref lastSearchSpaceStart, CharsPerIterationAvx512)
+                    )
+                )
                 {
                     return -1;
                 }
@@ -525,7 +685,7 @@ namespace System.Buffers
             }
             goto Loop;
 
-        CandidateFound:
+            CandidateFound:
             if (TryFindMatch(span, ref searchSpace, result, MatchStartOffsetN3, out int offset))
             {
                 return offset;
@@ -534,11 +694,19 @@ namespace System.Buffers
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private bool TryFindMatch(ReadOnlySpan<char> span, ref char searchSpace, Vector128<byte> result, int matchStartOffset, out int offsetFromStart)
+        private bool TryFindMatch(
+            ReadOnlySpan<char> span,
+            ref char searchSpace,
+            Vector128<byte> result,
+            int matchStartOffset,
+            out int offsetFromStart
+        )
         {
             // 'resultMask' encodes the input positions where at least one bucket may contain a match.
             // These positions are offset by 'matchStartOffset' places.
-            uint resultMask = (~Vector128.Equals(result, Vector128<byte>.Zero)).ExtractMostSignificantBits();
+            uint resultMask = (
+                ~Vector128.Equals(result, Vector128<byte>.Zero)
+            ).ExtractMostSignificantBits();
 
             do
             {
@@ -546,7 +714,9 @@ namespace System.Buffers
 
                 // Calculate where in the input span this potential match begins.
                 ref char matchRef = ref Unsafe.Add(ref searchSpace, matchOffset - matchStartOffset);
-                offsetFromStart = (int)((nuint)Unsafe.ByteOffset(ref MemoryMarshal.GetReference(span), ref matchRef) / 2);
+                offsetFromStart = (int)(
+                    (nuint)Unsafe.ByteOffset(ref MemoryMarshal.GetReference(span), ref matchRef) / 2
+                );
                 int lengthRemaining = span.Length - offsetFromStart;
 
                 ValidateReadPosition(span, ref matchRef, lengthRemaining);
@@ -562,38 +732,56 @@ namespace System.Buffers
                     object? bucket = _buckets[candidateOffset];
                     Debug.Assert(bucket is not null);
 
-                    if (TBucketized.Value
-                        ? StartsWith<TCaseSensitivity>(ref matchRef, lengthRemaining, Unsafe.As<string[]>(bucket))
-                        : StartsWith<TCaseSensitivity>(ref matchRef, lengthRemaining, Unsafe.As<string>(bucket)))
+                    if (
+                        TBucketized.Value
+                            ? StartsWith<TCaseSensitivity>(
+                                ref matchRef,
+                                lengthRemaining,
+                                Unsafe.As<string[]>(bucket)
+                            )
+                            : StartsWith<TCaseSensitivity>(
+                                ref matchRef,
+                                lengthRemaining,
+                                Unsafe.As<string>(bucket)
+                            )
+                    )
                     {
                         return true;
                     }
 
                     candidateMask = BitOperations.ResetLowestSetBit(candidateMask);
-                }
-                while (candidateMask != 0);
+                } while (candidateMask != 0);
 
                 resultMask = BitOperations.ResetLowestSetBit(resultMask);
-            }
-            while (resultMask != 0);
+            } while (resultMask != 0);
 
             offsetFromStart = 0;
             return false;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private bool TryFindMatch(ReadOnlySpan<char> span, ref char searchSpace, Vector256<byte> result, int matchStartOffset, out int offsetFromStart)
+        private bool TryFindMatch(
+            ReadOnlySpan<char> span,
+            ref char searchSpace,
+            Vector256<byte> result,
+            int matchStartOffset,
+            out int offsetFromStart
+        )
         {
             // See comments in 'TryFindMatch' for Vector128<byte> above.
             // This method is the same, but checks the potential matches for 32 input positions.
-            uint resultMask = (~Vector256.Equals(result, Vector256<byte>.Zero)).ExtractMostSignificantBits();
+            uint resultMask = (
+                ~Vector256.Equals(result, Vector256<byte>.Zero)
+            ).ExtractMostSignificantBits();
 
             do
             {
                 int matchOffset = BitOperations.TrailingZeroCount(resultMask);
 
                 ref char matchRef = ref Unsafe.Add(ref searchSpace, matchOffset - matchStartOffset);
-                offsetFromStart = (int)((nuint)Unsafe.ByteOffset(ref MemoryMarshal.GetReference(span), ref matchRef) / 2);
+                offsetFromStart = (int)(
+                    (nuint)Unsafe.ByteOffset(ref MemoryMarshal.GetReference(span), ref matchRef) / 2
+                );
                 int lengthRemaining = span.Length - offsetFromStart;
 
                 ValidateReadPosition(span, ref matchRef, lengthRemaining);
@@ -607,38 +795,56 @@ namespace System.Buffers
                     object? bucket = _buckets[candidateOffset];
                     Debug.Assert(bucket is not null);
 
-                    if (TBucketized.Value
-                        ? StartsWith<TCaseSensitivity>(ref matchRef, lengthRemaining, Unsafe.As<string[]>(bucket))
-                        : StartsWith<TCaseSensitivity>(ref matchRef, lengthRemaining, Unsafe.As<string>(bucket)))
+                    if (
+                        TBucketized.Value
+                            ? StartsWith<TCaseSensitivity>(
+                                ref matchRef,
+                                lengthRemaining,
+                                Unsafe.As<string[]>(bucket)
+                            )
+                            : StartsWith<TCaseSensitivity>(
+                                ref matchRef,
+                                lengthRemaining,
+                                Unsafe.As<string>(bucket)
+                            )
+                    )
                     {
                         return true;
                     }
 
                     candidateMask = BitOperations.ResetLowestSetBit(candidateMask);
-                }
-                while (candidateMask != 0);
+                } while (candidateMask != 0);
 
                 resultMask = BitOperations.ResetLowestSetBit(resultMask);
-            }
-            while (resultMask != 0);
+            } while (resultMask != 0);
 
             offsetFromStart = 0;
             return false;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private bool TryFindMatch(ReadOnlySpan<char> span, ref char searchSpace, Vector512<byte> result, int matchStartOffset, out int offsetFromStart)
+        private bool TryFindMatch(
+            ReadOnlySpan<char> span,
+            ref char searchSpace,
+            Vector512<byte> result,
+            int matchStartOffset,
+            out int offsetFromStart
+        )
         {
             // See comments in 'TryFindMatch' for Vector128<byte> above.
             // This method is the same, but checks the potential matches for 64 input positions.
-            ulong resultMask = (~Vector512.Equals(result, Vector512<byte>.Zero)).ExtractMostSignificantBits();
+            ulong resultMask = (
+                ~Vector512.Equals(result, Vector512<byte>.Zero)
+            ).ExtractMostSignificantBits();
 
             do
             {
                 int matchOffset = BitOperations.TrailingZeroCount(resultMask);
 
                 ref char matchRef = ref Unsafe.Add(ref searchSpace, matchOffset - matchStartOffset);
-                offsetFromStart = (int)((nuint)Unsafe.ByteOffset(ref MemoryMarshal.GetReference(span), ref matchRef) / 2);
+                offsetFromStart = (int)(
+                    (nuint)Unsafe.ByteOffset(ref MemoryMarshal.GetReference(span), ref matchRef) / 2
+                );
                 int lengthRemaining = span.Length - offsetFromStart;
 
                 ValidateReadPosition(span, ref matchRef, lengthRemaining);
@@ -652,20 +858,28 @@ namespace System.Buffers
                     object? bucket = _buckets[candidateOffset];
                     Debug.Assert(bucket is not null);
 
-                    if (TBucketized.Value
-                        ? StartsWith<TCaseSensitivity>(ref matchRef, lengthRemaining, Unsafe.As<string[]>(bucket))
-                        : StartsWith<TCaseSensitivity>(ref matchRef, lengthRemaining, Unsafe.As<string>(bucket)))
+                    if (
+                        TBucketized.Value
+                            ? StartsWith<TCaseSensitivity>(
+                                ref matchRef,
+                                lengthRemaining,
+                                Unsafe.As<string[]>(bucket)
+                            )
+                            : StartsWith<TCaseSensitivity>(
+                                ref matchRef,
+                                lengthRemaining,
+                                Unsafe.As<string>(bucket)
+                            )
+                    )
                     {
                         return true;
                     }
 
                     candidateMask = BitOperations.ResetLowestSetBit(candidateMask);
-                }
-                while (candidateMask != 0);
+                } while (candidateMask != 0);
 
                 resultMask = BitOperations.ResetLowestSetBit(resultMask);
-            }
-            while (resultMask != 0);
+            } while (resultMask != 0);
 
             offsetFromStart = 0;
             return false;

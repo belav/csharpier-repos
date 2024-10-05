@@ -36,7 +36,10 @@ namespace CoreXml.Test.XLinq
 
                             if (flag)
                             {
-                                TestLog.WriteLine("ReadSubtree doesn't throw InvalidOp Exception on NodeType : " + nodeType);
+                                TestLog.WriteLine(
+                                    "ReadSubtree doesn't throw InvalidOp Exception on NodeType : "
+                                        + nodeType
+                                );
                                 throw new TestException(TestResult.Failed, "");
                             }
 
@@ -47,7 +50,9 @@ namespace CoreXml.Test.XLinq
                             }
                             catch (XmlException)
                             {
-                                TestLog.WriteLine("Cannot Read after an invalid operation exception");
+                                TestLog.WriteLine(
+                                    "Cannot Read after an invalid operation exception"
+                                );
                                 throw new TestException(TestResult.Failed, "");
                             }
                         }
@@ -67,7 +72,9 @@ namespace CoreXml.Test.XLinq
                                 }
                                 if (flag)
                                 {
-                                    TestLog.WriteLine("ReadSubtree doesn't throw InvalidOp Exception on Attribute Node Type");
+                                    TestLog.WriteLine(
+                                        "ReadSubtree doesn't throw InvalidOp Exception on Attribute Node Type"
+                                    );
                                     throw new TestException(TestResult.Failed, "");
                                 }
 
@@ -78,15 +85,18 @@ namespace CoreXml.Test.XLinq
                                 }
                                 catch (XmlException)
                                 {
-                                    TestLog.WriteLine("Cannot Read after an invalid operation exception");
+                                    TestLog.WriteLine(
+                                        "Cannot Read after an invalid operation exception"
+                                    );
                                     throw new TestException(TestResult.Failed, "");
                                 }
                             }
                         }
-                    }//end while
+                    } //end while
                 }
 
-                private string _xml = "<root><elem1><elempi/><?pi target?><elem2 xmlns='xyz'><elem/><!--Comment--><x:elem3 xmlns:x='pqr'><elem4 attr4='4'/></x:elem3></elem2></elem1><elem5/><elem6/></root>";
+                private string _xml =
+                    "<root><elem1><elempi/><?pi target?><elem2 xmlns='xyz'><elem/><!--Comment--><x:elem3 xmlns:x='pqr'><elem4 attr4='4'/></x:elem3></elem2></elem1><elem5/><elem6/></root>";
 
                 //[Variation("ReadSubtree Test on Root", Priority = 0, Params = new object[] { "root", "", "ELEMENT", "", "", "NONE" })]
                 //[Variation("ReadSubtree Test depth=1", Priority = 0, Params = new object[] { "elem1", "", "ELEMENT", "elem5", "", "ELEMENT" })]
@@ -119,13 +129,22 @@ namespace CoreXml.Test.XLinq
 
                     r.Read();
 
-                    TestLog.Compare(r.ReadState, ReadState.Interactive, "Reader state is not Interactive");
+                    TestLog.Compare(
+                        r.ReadState,
+                        ReadState.Interactive,
+                        "Reader state is not Interactive"
+                    );
                     TestLog.Compare(r.Name, name, "Subreader name doesn't match");
                     TestLog.Compare(r.Value, value, "Subreader value doesn't match");
-                    TestLog.Compare(r.NodeType.ToString().ToUpperInvariant(), type, "Subreader nodetype doesn't match");
+                    TestLog.Compare(
+                        r.NodeType.ToString().ToUpperInvariant(),
+                        type,
+                        "Subreader nodetype doesn't match"
+                    );
                     TestLog.Compare(r.Depth, 0, "Subreader Depth is not zero");
 
-                    while (r.Read()) ;
+                    while (r.Read())
+                        ;
                     r.Dispose();
 
                     TestLog.Compare(r.ReadState, ReadState.Closed, "Reader state is not Initial");
@@ -136,7 +155,11 @@ namespace CoreXml.Test.XLinq
 
                     TestLog.Compare(DataReader.Name, oname, "Main name doesn't match");
                     TestLog.Compare(DataReader.Value, ovalue, "Main value doesn't match");
-                    TestLog.Compare(DataReader.NodeType.ToString().ToUpperInvariant(), otype, "Main nodetype doesn't match");
+                    TestLog.Compare(
+                        DataReader.NodeType.ToString().ToUpperInvariant(),
+                        otype,
+                        "Main nodetype doesn't match"
+                    );
 
                     DataReader.Dispose();
                 }
@@ -184,7 +207,11 @@ namespace CoreXml.Test.XLinq
                     PositionOnElement(DataReader, "elem1");
                     XmlReader r = DataReader.ReadSubtree();
                     r.Read();
-                    TestLog.Compare(r.ReadOuterXml(), "<elem1><elem2 /></elem1>", "Outer Xml Fails");
+                    TestLog.Compare(
+                        r.ReadOuterXml(),
+                        "<elem1><elem2 /></elem1>",
+                        "Outer Xml Fails"
+                    );
                     TestLog.Compare(r.Read(), false, "Read returns true");
                     r.Dispose();
                     DataReader.Dispose();
@@ -218,7 +245,11 @@ namespace CoreXml.Test.XLinq
                     XmlReader r = DataReader.ReadSubtree();
                     r.Dispose();
 
-                    TestLog.Compare(DataReader.ReadState, ReadState.Interactive, "ReadState not interactive");
+                    TestLog.Compare(
+                        DataReader.ReadState,
+                        ReadState.Interactive,
+                        "ReadState not interactive"
+                    );
 
                     DataReader.Dispose();
                 }
@@ -238,11 +269,16 @@ namespace CoreXml.Test.XLinq
                 //[Variation("Nested Subtree reader calls", Priority = 2)]
                 public void v8()
                 {
-                    string xmlStr = "<elem1><elem2><elem3><elem4><elem5><elem6><elem7><elem8><elem9><elem0></elem0></elem9></elem8></elem7></elem6></elem5></elem4></elem3></elem2></elem1>";
+                    string xmlStr =
+                        "<elem1><elem2><elem3><elem4><elem5><elem6><elem7><elem8><elem9><elem0></elem0></elem9></elem8></elem7></elem6></elem5></elem4></elem3></elem2></elem1>";
                     XmlReader r = GetReader(new StringReader(xmlStr));
 
                     NestRead(r);
-                    TestLog.Compare(r.ReadState, ReadState.Closed, "Reader Read State is not closed");
+                    TestLog.Compare(
+                        r.ReadState,
+                        ReadState.Closed,
+                        "Reader Read State is not closed"
+                    );
                 }
 
                 //[Variation("ReadSubtree for element depth more than 4K chars", Priority = 2)]
@@ -254,8 +290,7 @@ namespace CoreXml.Test.XLinq
                     {
                         mnw.OpenElement();
                         mnw.CloseElement();
-                    }
-                    while (mnw.GetNodes().Length < 4096);
+                    } while (mnw.GetNodes().Length < 4096);
 
                     mnw.Finish();
 
@@ -264,14 +299,19 @@ namespace CoreXml.Test.XLinq
                     PositionOnElement(DataReader, "ELEMENT_2");
 
                     XmlReader r = DataReader.ReadSubtree();
-                    while (r.Read()) ;
+                    while (r.Read())
+                        ;
                     r.Dispose();
 
                     DataReader.Read();
 
                     TestLog.Compare(DataReader.Name, "ELEMENT_1", "Main name doesn't match");
                     TestLog.Compare(DataReader.Value, "", "Main value doesn't match");
-                    TestLog.Compare(DataReader.NodeType.ToString().ToUpperInvariant(), "ENDELEMENT", "Main nodetype doesn't match");
+                    TestLog.Compare(
+                        DataReader.NodeType.ToString().ToUpperInvariant(),
+                        "ENDELEMENT",
+                        "Main nodetype doesn't match"
+                    );
 
                     DataReader.Dispose();
                 }
@@ -279,11 +319,13 @@ namespace CoreXml.Test.XLinq
                 //[Variation("Multiple Namespaces on Subtree reader", Priority = 1)]
                 public void MultipleNamespacesOnSubtreeReader()
                 {
-                    string xmlStr = "<root xmlns:p1='a' xmlns:p2='b'><e p1:a='' p2:a=''></e></root>";
+                    string xmlStr =
+                        "<root xmlns:p1='a' xmlns:p2='b'><e p1:a='' p2:a=''></e></root>";
                     XmlReader DataReader = GetReader(new StringReader(xmlStr));
                     PositionOnElement(DataReader, "e");
                     XmlReader r = DataReader.ReadSubtree();
-                    while (r.Read()) ;
+                    while (r.Read())
+                        ;
                     r.Dispose();
                     DataReader.Dispose();
                 }

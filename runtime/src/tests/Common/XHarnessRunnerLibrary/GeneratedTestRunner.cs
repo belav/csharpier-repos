@@ -20,11 +20,12 @@ public sealed class GeneratedTestRunner : TestRunner
     private readonly Boolean _writeBase64TestResults;
 
     public GeneratedTestRunner(
-        LogWriter logger, 
-        Func<TestFilter?, TestSummary> runTestsCallback, 
+        LogWriter logger,
+        Func<TestFilter?, TestSummary> runTestsCallback,
         string assemblyName,
         Dictionary<string, string> testExclusionTable,
-        bool writeBase64TestResults)
+        bool writeBase64TestResults
+    )
         : base(logger)
     {
         _assemblyName = assemblyName;
@@ -77,26 +78,36 @@ public sealed class GeneratedTestRunner : TestRunner
     {
         foreach (string test in tests)
         {
-            var testNameClause = new TestFilter.NotClause(new TestFilter.NameClause(TestFilter.TermKind.DisplayName, test, true));
-            _filter = _filter is null ? testNameClause : new TestFilter.AndClause(_filter, testNameClause);
+            var testNameClause = new TestFilter.NotClause(
+                new TestFilter.NameClause(TestFilter.TermKind.DisplayName, test, true)
+            );
+            _filter = _filter is null
+                ? testNameClause
+                : new TestFilter.AndClause(_filter, testNameClause);
         }
     }
 
-    public override void SkipCategories(IEnumerable<string> categories)
-    {
-    }
+    public override void SkipCategories(IEnumerable<string> categories) { }
 
     public override void SkipMethod(string method, bool isExcluded)
     {
-        TestFilter.ISearchClause methodClause = new TestFilter.NameClause(TestFilter.TermKind.FullyQualifiedName, method, true);
+        TestFilter.ISearchClause methodClause = new TestFilter.NameClause(
+            TestFilter.TermKind.FullyQualifiedName,
+            method,
+            true
+        );
         if (isExcluded)
         {
             methodClause = new TestFilter.NotClause(methodClause);
-            _filter = _filter is null ? methodClause : new TestFilter.AndClause(_filter, methodClause);
+            _filter = _filter is null
+                ? methodClause
+                : new TestFilter.AndClause(_filter, methodClause);
         }
         else
         {
-            _filter = _filter is null ? methodClause : new TestFilter.OrClause(_filter, methodClause);
+            _filter = _filter is null
+                ? methodClause
+                : new TestFilter.OrClause(_filter, methodClause);
         }
     }
 

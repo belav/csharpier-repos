@@ -20,7 +20,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         private readonly ObservableCollection<AnalyzersFolderItem> _folderItems;
         private readonly IAnalyzersCommandHandler _commandHandler;
 
-        public AnalyzersFolderItemSource(Workspace workspace, ProjectId projectId, IVsHierarchyItem projectHierarchyItem, IAnalyzersCommandHandler commandHandler)
+        public AnalyzersFolderItemSource(
+            Workspace workspace,
+            ProjectId projectId,
+            IVsHierarchyItem projectHierarchyItem,
+            IAnalyzersCommandHandler commandHandler
+        )
         {
             _workspace = workspace;
             _projectId = projectId;
@@ -34,26 +39,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 
         public bool HasItems
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public IEnumerable Items
         {
-            get
-            {
-                return _folderItems;
-            }
+            get { return _folderItems; }
         }
 
         public object SourceItem
         {
-            get
-            {
-                return _projectHierarchyItem;
-            }
+            get { return _projectHierarchyItem; }
         }
 
         internal void Update()
@@ -69,7 +65,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                     _workspace,
                     _projectId,
                     _projectHierarchyItem,
-                    _commandHandler.AnalyzerFolderContextMenuController));
+                    _commandHandler.AnalyzerFolderContextMenuController
+                )
+            );
         }
     }
 }

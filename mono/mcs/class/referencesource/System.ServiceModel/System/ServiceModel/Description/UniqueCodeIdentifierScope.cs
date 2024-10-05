@@ -70,15 +70,15 @@ namespace System.ServiceModel.Description
 
             switch (uc)
             {
-                case UnicodeCategory.UppercaseLetter:        // Lu
-                case UnicodeCategory.LowercaseLetter:        // Ll
-                case UnicodeCategory.TitlecaseLetter:        // Lt
-                case UnicodeCategory.ModifierLetter:         // Lm
-                case UnicodeCategory.OtherLetter:            // Lo
-                case UnicodeCategory.DecimalDigitNumber:     // Nd
-                case UnicodeCategory.NonSpacingMark:         // Mn
-                case UnicodeCategory.SpacingCombiningMark:   // Mc
-                case UnicodeCategory.ConnectorPunctuation:   // Pc
+                case UnicodeCategory.UppercaseLetter: // Lu
+                case UnicodeCategory.LowercaseLetter: // Ll
+                case UnicodeCategory.TitlecaseLetter: // Lt
+                case UnicodeCategory.ModifierLetter: // Lm
+                case UnicodeCategory.OtherLetter: // Lo
+                case UnicodeCategory.DecimalDigitNumber: // Nd
+                case UnicodeCategory.NonSpacingMark: // Mn
+                case UnicodeCategory.SpacingCombiningMark: // Mc
+                case UnicodeCategory.ConnectorPunctuation: // Pc
                     return true;
                 default:
                     return false;
@@ -90,7 +90,12 @@ namespace System.ServiceModel.Description
             if (String.IsNullOrEmpty(identifier))
                 return defaultIdentifier;
 
-            if (identifier.Length <= MaxIdentifierLength && System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier(identifier))
+            if (
+                identifier.Length <= MaxIdentifierLength
+                && System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier(
+                    identifier
+                )
+            )
                 return identifier;
 
             StringBuilder builder = new StringBuilder();
@@ -130,15 +135,20 @@ namespace System.ServiceModel.Description
             get { return this.codeNamespace; }
         }
 
-        protected override void AddIdentifier(string identifier)
-        {
-        }
+        protected override void AddIdentifier(string identifier) { }
 
-        public CodeTypeReference AddUnique(CodeTypeDeclaration codeType, string name, string defaultName)
+        public CodeTypeReference AddUnique(
+            CodeTypeDeclaration codeType,
+            string name,
+            string defaultName
+        )
         {
             codeType.Name = base.AddUnique(name, defaultName);
             codeNamespace.Types.Add(codeType);
-            return ServiceContractGenerator.NamespaceHelper.GetCodeTypeReference(this.codeNamespace, codeType);
+            return ServiceContractGenerator.NamespaceHelper.GetCodeTypeReference(
+                this.codeNamespace,
+                codeType
+            );
         }
 
         public override bool IsUnique(string identifier)
@@ -150,7 +160,9 @@ namespace System.ServiceModel.Description
         {
             foreach (CodeTypeDeclaration codeType in codeNamespace.Types)
             {
-                if (String.Compare(codeType.Name, typeName, StringComparison.OrdinalIgnoreCase) == 0)
+                if (
+                    String.Compare(codeType.Name, typeName, StringComparison.OrdinalIgnoreCase) == 0
+                )
                 {
                     return true;
                 }

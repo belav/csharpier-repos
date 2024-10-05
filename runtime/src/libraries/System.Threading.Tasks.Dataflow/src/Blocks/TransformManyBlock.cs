@@ -24,15 +24,20 @@ namespace System.Threading.Tasks.Dataflow
     /// <typeparam name="TOutput">Specifies the type of data output by this <see cref="TransformManyBlock{TInput,TOutput}"/>.</typeparam>
     [DebuggerDisplay("{DebuggerDisplayContent,nq}")]
     [DebuggerTypeProxy(typeof(TransformManyBlock<,>.DebugView))]
-    public sealed partial class TransformManyBlock<TInput, TOutput> : IPropagatorBlock<TInput, TOutput>, IReceivableSourceBlock<TOutput>, IDebuggerDisplay
+    public sealed partial class TransformManyBlock<TInput, TOutput>
+        : IPropagatorBlock<TInput, TOutput>,
+            IReceivableSourceBlock<TOutput>,
+            IDebuggerDisplay
     {
         /// <summary>The target side.</summary>
         private readonly TargetCore<TInput> _target;
+
         /// <summary>
         /// Buffer used to reorder output sets that may have completed out-of-order between the target half and the source half.
         /// This specialized reordering buffer supports streaming out enumerables if the message is the next in line.
         /// </summary>
         private readonly ReorderingBuffer<IEnumerable<TOutput>>? _reorderingBuffer;
+
         /// <summary>The source side.</summary>
         private readonly SourceCore<TOutput> _source;
 
@@ -44,7 +49,10 @@ namespace System.Threading.Tasks.Dataflow
         /// employed, then multiple threads may try to access the source concurrently, in which case we need to manually
         /// synchronize all such access, and this lock is used for that purpose.
         /// </remarks>
-        private object ParallelSourceLock { get { return _source; } }
+        private object ParallelSourceLock
+        {
+            get { return _source; }
+        }
 
         /// <summary>Initializes the <see cref="TransformManyBlock{TInput,TOutput}"/> with the specified function.</summary>
         /// <param name="transform">
@@ -52,10 +60,8 @@ namespace System.Threading.Tasks.Dataflow
         /// will be made available as output from this <see cref="TransformManyBlock{TInput,TOutput}"/>.
         /// </param>
         /// <exception cref="System.ArgumentNullException">The <paramref name="transform"/> is null (Nothing in Visual Basic).</exception>
-        public TransformManyBlock(Func<TInput, IEnumerable<TOutput>> transform) :
-            this(transform, ExecutionDataflowBlockOptions.Default)
-        {
-        }
+        public TransformManyBlock(Func<TInput, IEnumerable<TOutput>> transform)
+            : this(transform, ExecutionDataflowBlockOptions.Default) { }
 
         /// <summary>Initializes the <see cref="TransformManyBlock{TInput,TOutput}"/> with the specified function and <see cref="ExecutionDataflowBlockOptions"/>.</summary>
         /// <param name="transform">
@@ -65,10 +71,21 @@ namespace System.Threading.Tasks.Dataflow
         /// <param name="dataflowBlockOptions">The options with which to configure this <see cref="TransformManyBlock{TInput,TOutput}"/>.</param>
         /// <exception cref="System.ArgumentNullException">The <paramref name="transform"/> is null (Nothing in Visual Basic).</exception>
         /// <exception cref="System.ArgumentNullException">The <paramref name="dataflowBlockOptions"/> is null (Nothing in Visual Basic).</exception>
-        public TransformManyBlock(Func<TInput, IEnumerable<TOutput>> transform, ExecutionDataflowBlockOptions dataflowBlockOptions)
+        public TransformManyBlock(
+            Func<TInput, IEnumerable<TOutput>> transform,
+            ExecutionDataflowBlockOptions dataflowBlockOptions
+        )
         {
-            if (transform == null) throw new ArgumentNullException(nameof(transform));
-            Initialize(messageWithId => ProcessMessage(transform, messageWithId), dataflowBlockOptions, ref _source, ref _target, ref _reorderingBuffer, TargetCoreOptions.None);
+            if (transform == null)
+                throw new ArgumentNullException(nameof(transform));
+            Initialize(
+                messageWithId => ProcessMessage(transform, messageWithId),
+                dataflowBlockOptions,
+                ref _source,
+                ref _target,
+                ref _reorderingBuffer,
+                TargetCoreOptions.None
+            );
         }
 
         /// <summary>Initializes the <see cref="TransformManyBlock{TInput,TOutput}"/> with the specified function.</summary>
@@ -77,9 +94,8 @@ namespace System.Threading.Tasks.Dataflow
         /// will be made available as output from this <see cref="TransformManyBlock{TInput,TOutput}"/>.
         /// </param>
         /// <exception cref="System.ArgumentNullException">The <paramref name="transform"/> is null (Nothing in Visual Basic).</exception>
-        public TransformManyBlock(Func<TInput, Task<IEnumerable<TOutput>>> transform) :
-            this(transform, ExecutionDataflowBlockOptions.Default)
-        { }
+        public TransformManyBlock(Func<TInput, Task<IEnumerable<TOutput>>> transform)
+            : this(transform, ExecutionDataflowBlockOptions.Default) { }
 
         /// <summary>Initializes the <see cref="TransformManyBlock{TInput,TOutput}"/> with the specified function and <see cref="ExecutionDataflowBlockOptions"/>.</summary>
         /// <param name="transform">
@@ -89,10 +105,21 @@ namespace System.Threading.Tasks.Dataflow
         /// <param name="dataflowBlockOptions">The options with which to configure this <see cref="TransformManyBlock{TInput,TOutput}"/>.</param>
         /// <exception cref="System.ArgumentNullException">The <paramref name="transform"/> is null (Nothing in Visual Basic).</exception>
         /// <exception cref="System.ArgumentNullException">The <paramref name="dataflowBlockOptions"/> is null (Nothing in Visual Basic).</exception>
-        public TransformManyBlock(Func<TInput, Task<IEnumerable<TOutput>>> transform, ExecutionDataflowBlockOptions dataflowBlockOptions)
+        public TransformManyBlock(
+            Func<TInput, Task<IEnumerable<TOutput>>> transform,
+            ExecutionDataflowBlockOptions dataflowBlockOptions
+        )
         {
-            if (transform == null) throw new ArgumentNullException(nameof(transform));
-            Initialize(messageWithId => ProcessMessageWithTask(transform, messageWithId), dataflowBlockOptions, ref _source, ref _target, ref _reorderingBuffer, TargetCoreOptions.UsesAsyncCompletion);
+            if (transform == null)
+                throw new ArgumentNullException(nameof(transform));
+            Initialize(
+                messageWithId => ProcessMessageWithTask(transform, messageWithId),
+                dataflowBlockOptions,
+                ref _source,
+                ref _target,
+                ref _reorderingBuffer,
+                TargetCoreOptions.UsesAsyncCompletion
+            );
         }
 
         private void Initialize(
@@ -101,9 +128,11 @@ namespace System.Threading.Tasks.Dataflow
             [NotNull] ref SourceCore<TOutput>? source,
             [NotNull] ref TargetCore<TInput>? target,
             ref ReorderingBuffer<IEnumerable<TOutput>>? reorderingBuffer,
-            TargetCoreOptions targetCoreOptions)
+            TargetCoreOptions targetCoreOptions
+        )
         {
-            if (dataflowBlockOptions == null) throw new ArgumentNullException(nameof(dataflowBlockOptions));
+            if (dataflowBlockOptions == null)
+                throw new ArgumentNullException(nameof(dataflowBlockOptions));
 
             // Ensure we have options that can't be changed by the caller
             dataflowBlockOptions = dataflowBlockOptions.DefaultOrClone();
@@ -112,51 +141,96 @@ namespace System.Threading.Tasks.Dataflow
             Action<ISourceBlock<TOutput>, int>? onItemsRemoved = null;
             if (dataflowBlockOptions.BoundedCapacity > 0)
             {
-                onItemsRemoved = static (owningSource, count) => ((TransformManyBlock<TInput, TOutput>)owningSource)._target.ChangeBoundingCount(-count);
+                onItemsRemoved = static (owningSource, count) =>
+                    ((TransformManyBlock<TInput, TOutput>)owningSource)._target.ChangeBoundingCount(
+                        -count
+                    );
             }
 
             // Initialize source component
-            source = new SourceCore<TOutput>(this, dataflowBlockOptions,
-                static owningSource => ((TransformManyBlock<TInput, TOutput>)owningSource)._target.Complete(exception: null, dropPendingMessages: true),
-                onItemsRemoved);
+            source = new SourceCore<TOutput>(
+                this,
+                dataflowBlockOptions,
+                static owningSource =>
+                    ((TransformManyBlock<TInput, TOutput>)owningSource)._target.Complete(
+                        exception: null,
+                        dropPendingMessages: true
+                    ),
+                onItemsRemoved
+            );
 
             // If parallelism is employed, we will need to support reordering messages that complete out-of-order.
             // However, a developer can override this with EnsureOrdered == false.
-            if (dataflowBlockOptions.SupportsParallelExecution && dataflowBlockOptions.EnsureOrdered)
+            if (
+                dataflowBlockOptions.SupportsParallelExecution && dataflowBlockOptions.EnsureOrdered
+            )
             {
                 reorderingBuffer = new ReorderingBuffer<IEnumerable<TOutput>>(
-                    this, static (source, messages) => ((TransformManyBlock<TInput, TOutput>)source)._source.AddMessages(messages));
+                    this,
+                    static (source, messages) =>
+                        ((TransformManyBlock<TInput, TOutput>)source)._source.AddMessages(messages)
+                );
             }
 
             // Create the underlying target and source
-            target = new TargetCore<TInput>(this, processMessageAction, _reorderingBuffer, dataflowBlockOptions, targetCoreOptions);
+            target = new TargetCore<TInput>(
+                this,
+                processMessageAction,
+                _reorderingBuffer,
+                dataflowBlockOptions,
+                targetCoreOptions
+            );
 
             // Link up the target half with the source half.  In doing so,
             // ensure exceptions are propagated, and let the source know no more messages will arrive.
             // As the target has completed, and as the target synchronously pushes work
             // through the reordering buffer when async processing completes,
             // we know for certain that no more messages will need to be sent to the source.
-            target.Completion.ContinueWith(static (completed, state) =>
-            {
-                var sourceCore = (SourceCore<TOutput>)state!;
-                if (completed.IsFaulted) sourceCore.AddAndUnwrapAggregateException(completed.Exception!);
-                sourceCore.Complete();
-            }, source, CancellationToken.None, Common.GetContinuationOptions(), TaskScheduler.Default);
+            target.Completion.ContinueWith(
+                static (completed, state) =>
+                {
+                    var sourceCore = (SourceCore<TOutput>)state!;
+                    if (completed.IsFaulted)
+                        sourceCore.AddAndUnwrapAggregateException(completed.Exception!);
+                    sourceCore.Complete();
+                },
+                source,
+                CancellationToken.None,
+                Common.GetContinuationOptions(),
+                TaskScheduler.Default
+            );
 
             // It is possible that the source half may fault on its own, e.g. due to a task scheduler exception.
             // In those cases we need to fault the target half to drop its buffered messages and to release its
             // reservations. This should not create an infinite loop, because all our implementations are designed
             // to handle multiple completion requests and to carry over only one.
-            source.Completion.ContinueWith(static (completed, state) =>
-            {
-                var thisBlock = ((TransformManyBlock<TInput, TOutput>)state!) as IDataflowBlock;
-                Debug.Assert(completed.IsFaulted, "The source must be faulted in order to trigger a target completion.");
-                thisBlock.Fault(completed.Exception!);
-            }, this, CancellationToken.None, Common.GetContinuationOptions() | TaskContinuationOptions.OnlyOnFaulted, TaskScheduler.Default);
+            source.Completion.ContinueWith(
+                static (completed, state) =>
+                {
+                    var thisBlock = ((TransformManyBlock<TInput, TOutput>)state!) as IDataflowBlock;
+                    Debug.Assert(
+                        completed.IsFaulted,
+                        "The source must be faulted in order to trigger a target completion."
+                    );
+                    thisBlock.Fault(completed.Exception!);
+                },
+                this,
+                CancellationToken.None,
+                Common.GetContinuationOptions() | TaskContinuationOptions.OnlyOnFaulted,
+                TaskScheduler.Default
+            );
 
             // Handle async cancellation requests by declining on the target
             Common.WireCancellationToComplete(
-                dataflowBlockOptions.CancellationToken, Completion, static (state, _) => ((TargetCore<TInput>)state!).Complete(exception: null, dropPendingMessages: true), target);
+                dataflowBlockOptions.CancellationToken,
+                Completion,
+                static (state, _) =>
+                    ((TargetCore<TInput>)state!).Complete(
+                        exception: null,
+                        dropPendingMessages: true
+                    ),
+                target
+            );
             DataflowEtwProvider etwLog = DataflowEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
@@ -167,7 +241,10 @@ namespace System.Threading.Tasks.Dataflow
         /// <summary>Processes the message with a user-provided transform function that returns an enumerable.</summary>
         /// <param name="transformFunction">The transform function to use to process the message.</param>
         /// <param name="messageWithId">The message to be processed.</param>
-        private void ProcessMessage(Func<TInput, IEnumerable<TOutput>> transformFunction, KeyValuePair<TInput, long> messageWithId)
+        private void ProcessMessage(
+            Func<TInput, IEnumerable<TOutput>> transformFunction,
+            KeyValuePair<TInput, long> messageWithId
+        )
         {
             bool userDelegateSucceeded = false;
             try
@@ -185,14 +262,18 @@ namespace System.Threading.Tasks.Dataflow
             {
                 // If the user delegate failed, store an empty set in order
                 // to update the bounding count and reordering buffer.
-                if (!userDelegateSucceeded) StoreOutputItems(messageWithId, null);
+                if (!userDelegateSucceeded)
+                    StoreOutputItems(messageWithId, null);
             }
         }
 
         /// <summary>Processes the message with a user-provided transform function that returns an observable.</summary>
         /// <param name="function">The transform function to use to process the message.</param>
         /// <param name="messageWithId">The message to be processed.</param>
-        private void ProcessMessageWithTask(Func<TInput, Task<IEnumerable<TOutput>>> function, KeyValuePair<TInput, long> messageWithId)
+        private void ProcessMessageWithTask(
+            Func<TInput, Task<IEnumerable<TOutput>>> function,
+            KeyValuePair<TInput, long> messageWithId
+        )
         {
             // Run the transform function to get the resulting task
             Task<IEnumerable<TOutput>>? task = null;
@@ -201,7 +282,10 @@ namespace System.Threading.Tasks.Dataflow
             {
                 task = function(messageWithId.Key);
             }
-            catch (Exception exc) { caughtException = exc; }
+            catch (Exception exc)
+            {
+                caughtException = exc;
+            }
 
             // If no task is available, either because null was returned or an exception was thrown, we're done.
             if (task == null)
@@ -210,8 +294,16 @@ namespace System.Threading.Tasks.Dataflow
                 // (or if the exception was cancellation, just ignore it).
                 if (caughtException != null && !Common.IsCooperativeCancellation(caughtException))
                 {
-                    Common.StoreDataflowMessageValueIntoExceptionData(caughtException, messageWithId.Key);
-                    _target.Complete(caughtException, dropPendingMessages: true, storeExceptionEvenIfAlreadyCompleting: true, unwrapInnerExceptions: false);
+                    Common.StoreDataflowMessageValueIntoExceptionData(
+                        caughtException,
+                        messageWithId.Key
+                    );
+                    _target.Complete(
+                        caughtException,
+                        dropPendingMessages: true,
+                        storeExceptionEvenIfAlreadyCompleting: true,
+                        unwrapInnerExceptions: false
+                    );
                 }
 
                 // Notify that we're done with this input and that we got no output for the input.
@@ -237,21 +329,28 @@ namespace System.Threading.Tasks.Dataflow
             // We got back a task.  Now wait for it to complete and store its results.
             // Unlike with TransformBlock and ActionBlock, We run the continuation on the user-provided
             // scheduler as we'll be running user code through enumerating the returned enumerable.
-            task.ContinueWith(static (completed, state) =>
-            {
-                var tuple = (Tuple<TransformManyBlock<TInput, TOutput>, KeyValuePair<TInput, long>>)state!;
-                tuple.Item1.AsyncCompleteProcessMessageWithTask(completed, tuple.Item2);
-            }, Tuple.Create(this, messageWithId),
-            CancellationToken.None,
-            Common.GetContinuationOptions(TaskContinuationOptions.ExecuteSynchronously),
-            _source.DataflowBlockOptions.TaskScheduler);
+            task.ContinueWith(
+                static (completed, state) =>
+                {
+                    var tuple =
+                        (Tuple<TransformManyBlock<TInput, TOutput>, KeyValuePair<TInput, long>>)
+                            state!;
+                    tuple.Item1.AsyncCompleteProcessMessageWithTask(completed, tuple.Item2);
+                },
+                Tuple.Create(this, messageWithId),
+                CancellationToken.None,
+                Common.GetContinuationOptions(TaskContinuationOptions.ExecuteSynchronously),
+                _source.DataflowBlockOptions.TaskScheduler
+            );
         }
 
         /// <summary>Completes the processing of an asynchronous message.</summary>
         /// <param name="completed">The completed task storing the output data generated for an input message.</param>
         /// <param name="messageWithId">The originating message</param>
         private void AsyncCompleteProcessMessageWithTask(
-            Task<IEnumerable<TOutput>> completed, KeyValuePair<TInput, long> messageWithId)
+            Task<IEnumerable<TOutput>> completed,
+            KeyValuePair<TInput, long> messageWithId
+        )
         {
             Debug.Assert(completed != null, "A task should have been provided.");
             Debug.Assert(completed.IsCompleted, "The task should have been in a final state.");
@@ -274,8 +373,16 @@ namespace System.Threading.Tasks.Dataflow
                             // The exception was not for cancellation. We must add the exception before declining
                             // and signaling completion, as the exception is part of the operation, and the completion
                             // conditions depend on this.
-                            Common.StoreDataflowMessageValueIntoExceptionData(exc, messageWithId.Key);
-                            _target.Complete(exc, dropPendingMessages: true, storeExceptionEvenIfAlreadyCompleting: true, unwrapInnerExceptions: false);
+                            Common.StoreDataflowMessageValueIntoExceptionData(
+                                exc,
+                                messageWithId.Key
+                            );
+                            _target.Complete(
+                                exc,
+                                dropPendingMessages: true,
+                                storeExceptionEvenIfAlreadyCompleting: true,
+                                unwrapInnerExceptions: false
+                            );
                         }
                     }
                     break;
@@ -284,8 +391,17 @@ namespace System.Threading.Tasks.Dataflow
                     // We must add the exception before declining and signaling completion, as the exception
                     // is part of the operation, and the completion conditions depend on this.
                     AggregateException aggregate = completed.Exception!;
-                    Common.StoreDataflowMessageValueIntoExceptionData(aggregate, messageWithId.Key, targetInnerExceptions: true);
-                    _target.Complete(aggregate, dropPendingMessages: true, storeExceptionEvenIfAlreadyCompleting: true, unwrapInnerExceptions: true);
+                    Common.StoreDataflowMessageValueIntoExceptionData(
+                        aggregate,
+                        messageWithId.Key,
+                        targetInnerExceptions: true
+                    );
+                    _target.Complete(
+                        aggregate,
+                        dropPendingMessages: true,
+                        storeExceptionEvenIfAlreadyCompleting: true,
+                        unwrapInnerExceptions: true
+                    );
                     goto case TaskStatus.Canceled;
                 case TaskStatus.Canceled:
                     StoreOutputItems(messageWithId, null); // notify the reordering buffer and decrement the bounding count
@@ -307,7 +423,9 @@ namespace System.Threading.Tasks.Dataflow
         /// <param name="messageWithId">The message with id.</param>
         /// <param name="outputItems">The output items to be persisted.</param>
         private void StoreOutputItems(
-            KeyValuePair<TInput, long> messageWithId, IEnumerable<TOutput>? outputItems)
+            KeyValuePair<TInput, long> messageWithId,
+            IEnumerable<TOutput>? outputItems
+        )
         {
             // If there's a reordering buffer, pass the data along to it.
             // The reordering buffer will handle all details, including bounding.
@@ -348,7 +466,10 @@ namespace System.Threading.Tasks.Dataflow
         private void StoreOutputItemsReordered(long id, IEnumerable<TOutput>? item)
         {
             Debug.Assert(_reorderingBuffer != null, "Expected a reordering buffer");
-            Debug.Assert(id != Common.INVALID_REORDERING_ID, "This ID should never have been handed out.");
+            Debug.Assert(
+                id != Common.INVALID_REORDERING_ID,
+                "This ID should never have been handed out."
+            );
 
             // Grab info about the transform
             TargetCore<TInput> target = _target;
@@ -358,7 +479,8 @@ namespace System.Threading.Tasks.Dataflow
             if (item == null)
             {
                 _reorderingBuffer.AddItem(id, null, false);
-                if (isBounded) target.ChangeBoundingCount(count: -1);
+                if (isBounded)
+                    target.ChangeBoundingCount(count: -1);
                 return;
             }
 
@@ -366,7 +488,8 @@ namespace System.Threading.Tasks.Dataflow
             // This avoids the cost of updating it once per output item (since each update requires synchronization).
             // Even if we're not bounding, we still want to determine whether the item is trusted so that we
             // can immediately dump it out once we take the lock if we're the next item.
-            IList<TOutput>? itemAsTrustedList = (IList<TOutput>?)(item as TOutput[]) ?? item as List<TOutput>;
+            IList<TOutput>? itemAsTrustedList =
+                (IList<TOutput>?)(item as TOutput[]) ?? item as List<TOutput>;
             if (itemAsTrustedList != null && isBounded)
             {
                 UpdateBoundingCountWithOutputCount(count: itemAsTrustedList.Count);
@@ -375,8 +498,13 @@ namespace System.Threading.Tasks.Dataflow
             // Determine whether this id is the next item, and if it is and if we have a trusted list,
             // try to output it immediately on the fast path.  If it can be output, we're done.
             // Otherwise, make forward progress based on whether we're next in line.
-            bool? isNextNullable = _reorderingBuffer.AddItemIfNextAndTrusted(id, itemAsTrustedList, itemAsTrustedList != null);
-            if (!isNextNullable.HasValue) return; // data was successfully output
+            bool? isNextNullable = _reorderingBuffer.AddItemIfNextAndTrusted(
+                id,
+                itemAsTrustedList,
+                itemAsTrustedList != null
+            );
+            if (!isNextNullable.HasValue)
+                return; // data was successfully output
             bool isNextItem = isNextNullable.Value;
 
             // By this point, either we're not the next item, in which case we need to make a copy of the
@@ -413,7 +541,8 @@ namespace System.Threading.Tasks.Dataflow
                         // If we're here because ToList threw an exception, then itemCount will be 0,
                         // and we still need to update the bounding count with this in order to counteract
                         // the increased bounding count for the corresponding input.
-                        if (isBounded) UpdateBoundingCountWithOutputCount(count: itemCount);
+                        if (isBounded)
+                            UpdateBoundingCountWithOutputCount(count: itemCount);
                     }
                 }
                 // else if the item isn't valid, the finally block will see itemCopy as null and output invalid
@@ -436,8 +565,14 @@ namespace System.Threading.Tasks.Dataflow
         private void StoreOutputItemsNonReorderedAtomic(IEnumerable<TOutput> outputItems)
         {
             Debug.Assert(_reorderingBuffer == null, "Expected not to have a reordering buffer");
-            Debug.Assert(outputItems is TOutput[] || outputItems is List<TOutput>, "outputItems must be a list we've already vetted as trusted");
-            if (_target.IsBounded) UpdateBoundingCountWithOutputCount(count: ((ICollection<TOutput>)outputItems).Count);
+            Debug.Assert(
+                outputItems is TOutput[] || outputItems is List<TOutput>,
+                "outputItems must be a list we've already vetted as trusted"
+            );
+            if (_target.IsBounded)
+                UpdateBoundingCountWithOutputCount(
+                    count: ((ICollection<TOutput>)outputItems).Count
+                );
 
             if (_target.DataflowBlockOptions.MaxDegreeOfParallelism == 1)
             {
@@ -465,8 +600,8 @@ namespace System.Threading.Tasks.Dataflow
             // we don't need to lock.  Similarly, if there's a reordering buffer, then
             // it guarantees that we're invoked serially, and we don't need to lock.
             bool isSerial =
-                _target.DataflowBlockOptions.MaxDegreeOfParallelism == 1 ||
-                _reorderingBuffer != null;
+                _target.DataflowBlockOptions.MaxDegreeOfParallelism == 1
+                || _reorderingBuffer != null;
 
             // If we're bounding, we need to increment the bounded count
             // for each individual item as we enumerate it.
@@ -481,8 +616,10 @@ namespace System.Threading.Tasks.Dataflow
                 {
                     foreach (TOutput item in outputItems)
                     {
-                        if (outputFirstItem) _target.ChangeBoundingCount(count: 1);
-                        else outputFirstItem = true;
+                        if (outputFirstItem)
+                            _target.ChangeBoundingCount(count: 1);
+                        else
+                            outputFirstItem = true;
 
                         if (isSerial)
                         {
@@ -499,7 +636,8 @@ namespace System.Threading.Tasks.Dataflow
                 }
                 finally
                 {
-                    if (!outputFirstItem) _target.ChangeBoundingCount(count: -1);
+                    if (!outputFirstItem)
+                        _target.ChangeBoundingCount(count: -1);
                 }
             }
             // If we're not bounding, just output each individual item.
@@ -536,13 +674,19 @@ namespace System.Threading.Tasks.Dataflow
             // the bounding count.
 
             Debug.Assert(_target.IsBounded, "Expected to be in bounding mode.");
-            if (count > 1) _target.ChangeBoundingCount(count - 1);
-            else if (count == 0) _target.ChangeBoundingCount(-1);
-            else Debug.Assert(count == 1, "Count shouldn't be negative.");
+            if (count > 1)
+                _target.ChangeBoundingCount(count - 1);
+            else if (count == 0)
+                _target.ChangeBoundingCount(-1);
+            else
+                Debug.Assert(count == 1, "Count shouldn't be negative.");
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Complete"]/*' />
-        public void Complete() { _target.Complete(exception: null, dropPendingMessages: false); }
+        public void Complete()
+        {
+            _target.Complete(exception: null, dropPendingMessages: false);
+        }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Fault"]/*' />
         void IDataflowBlock.Fault(Exception exception)
@@ -556,69 +700,117 @@ namespace System.Threading.Tasks.Dataflow
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="LinkTo"]/*' />
-        public IDisposable LinkTo(ITargetBlock<TOutput> target, DataflowLinkOptions linkOptions) { return _source.LinkTo(target, linkOptions); }
+        public IDisposable LinkTo(ITargetBlock<TOutput> target, DataflowLinkOptions linkOptions)
+        {
+            return _source.LinkTo(target, linkOptions);
+        }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="TryReceive"]/*' />
-        public bool TryReceive(Predicate<TOutput>? filter, [MaybeNullWhen(false)] out TOutput item) { return _source.TryReceive(filter, out item); }
+        public bool TryReceive(Predicate<TOutput>? filter, [MaybeNullWhen(false)] out TOutput item)
+        {
+            return _source.TryReceive(filter, out item);
+        }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="TryReceiveAll"]/*' />
-        public bool TryReceiveAll([NotNullWhen(true)] out IList<TOutput>? items) { return _source.TryReceiveAll(out items); }
+        public bool TryReceiveAll([NotNullWhen(true)] out IList<TOutput>? items)
+        {
+            return _source.TryReceiveAll(out items);
+        }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Completion"]/*' />
-        public Task Completion { get { return _source.Completion; } }
+        public Task Completion
+        {
+            get { return _source.Completion; }
+        }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Targets/Member[@name="InputCount"]/*' />
-        public int InputCount { get { return _target.InputCount; } }
+        public int InputCount
+        {
+            get { return _target.InputCount; }
+        }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="OutputCount"]/*' />
-        public int OutputCount { get { return _source.OutputCount; } }
+        public int OutputCount
+        {
+            get { return _source.OutputCount; }
+        }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Targets/Member[@name="OfferMessage"]/*' />
-        DataflowMessageStatus ITargetBlock<TInput>.OfferMessage(DataflowMessageHeader messageHeader, TInput messageValue, ISourceBlock<TInput>? source, bool consumeToAccept)
+        DataflowMessageStatus ITargetBlock<TInput>.OfferMessage(
+            DataflowMessageHeader messageHeader,
+            TInput messageValue,
+            ISourceBlock<TInput>? source,
+            bool consumeToAccept
+        )
         {
             return _target.OfferMessage(messageHeader, messageValue, source, consumeToAccept);
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="ConsumeMessage"]/*' />
-        TOutput? ISourceBlock<TOutput>.ConsumeMessage(DataflowMessageHeader messageHeader, ITargetBlock<TOutput> target, out bool messageConsumed)
+        TOutput? ISourceBlock<TOutput>.ConsumeMessage(
+            DataflowMessageHeader messageHeader,
+            ITargetBlock<TOutput> target,
+            out bool messageConsumed
+        )
         {
             return _source.ConsumeMessage(messageHeader, target, out messageConsumed);
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="ReserveMessage"]/*' />
-        bool ISourceBlock<TOutput>.ReserveMessage(DataflowMessageHeader messageHeader, ITargetBlock<TOutput> target)
+        bool ISourceBlock<TOutput>.ReserveMessage(
+            DataflowMessageHeader messageHeader,
+            ITargetBlock<TOutput> target
+        )
         {
             return _source.ReserveMessage(messageHeader, target);
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="ReleaseReservation"]/*' />
-        void ISourceBlock<TOutput>.ReleaseReservation(DataflowMessageHeader messageHeader, ITargetBlock<TOutput> target)
+        void ISourceBlock<TOutput>.ReleaseReservation(
+            DataflowMessageHeader messageHeader,
+            ITargetBlock<TOutput> target
+        )
         {
             _source.ReleaseReservation(messageHeader, target);
         }
 
         /// <summary>Gets the number of messages waiting to be processed.  This must only be used from the debugger as it avoids taking necessary locks.</summary>
-        private int InputCountForDebugger { get { return _target.GetDebuggingInformation().InputCount; } }
+        private int InputCountForDebugger
+        {
+            get { return _target.GetDebuggingInformation().InputCount; }
+        }
+
         /// <summary>Gets the number of messages waiting to be processed.  This must only be used from the debugger as it avoids taking necessary locks.</summary>
-        private int OutputCountForDebugger { get { return _source.GetDebuggingInformation().OutputCount; } }
+        private int OutputCountForDebugger
+        {
+            get { return _source.GetDebuggingInformation().OutputCount; }
+        }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="ToString"]/*' />
-        public override string ToString() { return Common.GetNameForDebugger(this, _source.DataflowBlockOptions); }
+        public override string ToString()
+        {
+            return Common.GetNameForDebugger(this, _source.DataflowBlockOptions);
+        }
 
         /// <summary>The data to display in the debugger display attribute.</summary>
         private object DebuggerDisplayContent =>
             $"{Common.GetNameForDebugger(this, _source.DataflowBlockOptions)}, InputCount = {InputCountForDebugger}, OutputCount = {OutputCountForDebugger}";
 
         /// <summary>Gets the data to display in the debugger display attribute for this instance.</summary>
-        object IDebuggerDisplay.Content { get { return DebuggerDisplayContent; } }
+        object IDebuggerDisplay.Content
+        {
+            get { return DebuggerDisplayContent; }
+        }
 
         /// <summary>Provides a debugger type proxy for the TransformManyBlock.</summary>
         private sealed class DebugView
         {
             /// <summary>The transform many block being viewed.</summary>
             private readonly TransformManyBlock<TInput, TOutput> _transformManyBlock;
+
             /// <summary>The target half of the block being viewed.</summary>
             private readonly TargetCore<TInput>.DebuggingInformation _targetDebuggingInformation;
+
             /// <summary>The source half of the block being viewed.</summary>
             private readonly SourceCore<TOutput>.DebuggingInformation _sourceDebuggingInformation;
 
@@ -626,37 +818,80 @@ namespace System.Threading.Tasks.Dataflow
             /// <param name="transformManyBlock">The transform being viewed.</param>
             public DebugView(TransformManyBlock<TInput, TOutput> transformManyBlock)
             {
-                Debug.Assert(transformManyBlock != null, "Need a block with which to construct the debug view.");
+                Debug.Assert(
+                    transformManyBlock != null,
+                    "Need a block with which to construct the debug view."
+                );
                 _transformManyBlock = transformManyBlock;
                 _targetDebuggingInformation = transformManyBlock._target.GetDebuggingInformation();
                 _sourceDebuggingInformation = transformManyBlock._source.GetDebuggingInformation();
             }
 
             /// <summary>Gets the messages waiting to be processed.</summary>
-            public IEnumerable<TInput> InputQueue { get { return _targetDebuggingInformation.InputQueue; } }
+            public IEnumerable<TInput> InputQueue
+            {
+                get { return _targetDebuggingInformation.InputQueue; }
+            }
+
             /// <summary>Gets any postponed messages.</summary>
-            public QueuedMap<ISourceBlock<TInput>, DataflowMessageHeader>? PostponedMessages { get { return _targetDebuggingInformation.PostponedMessages; } }
+            public QueuedMap<ISourceBlock<TInput>, DataflowMessageHeader>? PostponedMessages
+            {
+                get { return _targetDebuggingInformation.PostponedMessages; }
+            }
+
             /// <summary>Gets the messages waiting to be received.</summary>
-            public IEnumerable<TOutput> OutputQueue { get { return _sourceDebuggingInformation.OutputQueue; } }
+            public IEnumerable<TOutput> OutputQueue
+            {
+                get { return _sourceDebuggingInformation.OutputQueue; }
+            }
 
             /// <summary>Gets the number of input operations currently in flight.</summary>
-            public int CurrentDegreeOfParallelism { get { return _targetDebuggingInformation.CurrentDegreeOfParallelism; } }
+            public int CurrentDegreeOfParallelism
+            {
+                get { return _targetDebuggingInformation.CurrentDegreeOfParallelism; }
+            }
+
             /// <summary>Gets the task being used for output processing.</summary>
-            public Task? TaskForOutputProcessing { get { return _sourceDebuggingInformation.TaskForOutputProcessing; } }
+            public Task? TaskForOutputProcessing
+            {
+                get { return _sourceDebuggingInformation.TaskForOutputProcessing; }
+            }
 
             /// <summary>Gets the DataflowBlockOptions used to configure this block.</summary>
-            public ExecutionDataflowBlockOptions DataflowBlockOptions { get { return _targetDebuggingInformation.DataflowBlockOptions; } }
+            public ExecutionDataflowBlockOptions DataflowBlockOptions
+            {
+                get { return _targetDebuggingInformation.DataflowBlockOptions; }
+            }
+
             /// <summary>Gets whether the block is declining further messages.</summary>
-            public bool IsDecliningPermanently { get { return _targetDebuggingInformation.IsDecliningPermanently; } }
+            public bool IsDecliningPermanently
+            {
+                get { return _targetDebuggingInformation.IsDecliningPermanently; }
+            }
+
             /// <summary>Gets whether the block is completed.</summary>
-            public bool IsCompleted { get { return _sourceDebuggingInformation.IsCompleted; } }
+            public bool IsCompleted
+            {
+                get { return _sourceDebuggingInformation.IsCompleted; }
+            }
+
             /// <summary>Gets the block's Id.</summary>
-            public int Id { get { return Common.GetBlockId(_transformManyBlock); } }
+            public int Id
+            {
+                get { return Common.GetBlockId(_transformManyBlock); }
+            }
 
             /// <summary>Gets the set of all targets linked from this block.</summary>
-            public TargetRegistry<TOutput> LinkedTargets { get { return _sourceDebuggingInformation.LinkedTargets; } }
+            public TargetRegistry<TOutput> LinkedTargets
+            {
+                get { return _sourceDebuggingInformation.LinkedTargets; }
+            }
+
             /// <summary>Gets the set of all targets linked from this block.</summary>
-            public ITargetBlock<TOutput>? NextMessageReservedFor { get { return _sourceDebuggingInformation.NextMessageReservedFor; } }
+            public ITargetBlock<TOutput>? NextMessageReservedFor
+            {
+                get { return _sourceDebuggingInformation.NextMessageReservedFor; }
+            }
         }
     }
 }

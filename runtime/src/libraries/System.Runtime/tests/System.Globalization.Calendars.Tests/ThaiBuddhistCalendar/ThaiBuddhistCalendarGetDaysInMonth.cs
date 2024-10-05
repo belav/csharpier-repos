@@ -8,14 +8,19 @@ namespace System.Globalization.Tests
 {
     public class ThaiBuddhistCalendarGetDaysInMonth
     {
-        private static readonly RandomDataGenerator s_randomDataGenerator = new RandomDataGenerator();
+        private static readonly RandomDataGenerator s_randomDataGenerator =
+            new RandomDataGenerator();
 
         public static IEnumerable<object[]> GetDaysInMonth_TestData()
         {
             yield return new object[] { 1, 1 };
             yield return new object[] { 9999, 12 };
             yield return new object[] { 2000, 2 };
-            yield return new object[] { s_randomDataGenerator.GetInt16(-55) % 9999, s_randomDataGenerator.GetInt16(-55) % 12 + 1 };
+            yield return new object[]
+            {
+                s_randomDataGenerator.GetInt16(-55) % 9999,
+                s_randomDataGenerator.GetInt16(-55) % 12 + 1,
+            };
         }
 
         [Theory]

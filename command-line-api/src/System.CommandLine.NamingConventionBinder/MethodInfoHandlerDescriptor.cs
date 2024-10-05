@@ -12,12 +12,10 @@ internal class MethodInfoHandlerDescriptor : HandlerDescriptor
     private readonly MethodInfo _handlerMethodInfo;
     private readonly object? _invocationTarget;
 
-    public MethodInfoHandlerDescriptor(
-        MethodInfo handlerMethodInfo,
-        object? target = null)
+    public MethodInfoHandlerDescriptor(MethodInfo handlerMethodInfo, object? target = null)
     {
-        _handlerMethodInfo = handlerMethodInfo ??
-                             throw new ArgumentNullException(nameof(handlerMethodInfo));
+        _handlerMethodInfo =
+            handlerMethodInfo ?? throw new ArgumentNullException(nameof(handlerMethodInfo));
         _invocationTarget = target;
     }
 
@@ -25,22 +23,17 @@ internal class MethodInfoHandlerDescriptor : HandlerDescriptor
     {
         if (_invocationTarget is null)
         {
-            return new ModelBindingCommandHandler(
-                _handlerMethodInfo,
-                this);
+            return new ModelBindingCommandHandler(_handlerMethodInfo, this);
         }
         else
         {
-            return new ModelBindingCommandHandler(
-                _handlerMethodInfo,
-                this,
-                _invocationTarget);
+            return new ModelBindingCommandHandler(_handlerMethodInfo, this, _invocationTarget);
         }
     }
 
-    public override ModelDescriptor Parent => ModelDescriptor.FromType(_handlerMethodInfo.ReflectedType!);
+    public override ModelDescriptor Parent =>
+        ModelDescriptor.FromType(_handlerMethodInfo.ReflectedType!);
 
     private protected override IEnumerable<ParameterDescriptor> InitializeParameterDescriptors() =>
-        _handlerMethodInfo.GetParameters()
-                          .Select(p => new ParameterDescriptor(p, this));
+        _handlerMethodInfo.GetParameters().Select(p => new ParameterDescriptor(p, this));
 }

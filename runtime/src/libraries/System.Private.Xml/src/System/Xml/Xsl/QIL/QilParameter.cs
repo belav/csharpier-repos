@@ -20,12 +20,17 @@ namespace System.Xml.Xsl.Qil
         /// <summary>
         /// Construct a parameter
         /// </summary>
-        public QilParameter(QilNodeType nodeType, QilNode? defaultValue, QilNode? name, XmlQueryType xmlType) : base(nodeType, defaultValue)
+        public QilParameter(
+            QilNodeType nodeType,
+            QilNode? defaultValue,
+            QilNode? name,
+            XmlQueryType xmlType
+        )
+            : base(nodeType, defaultValue)
         {
             _name = name;
             this.xmlType = xmlType;
         }
-
 
         //-----------------------------------------------
         // IList<QilNode> methods -- override
@@ -51,13 +56,17 @@ namespace System.Xml.Xsl.Qil
             {
                 switch (index)
                 {
-                    case 0: Binding = value; break;
-                    case 1: _name = value; break;
-                    default: throw new IndexOutOfRangeException();
+                    case 0:
+                        Binding = value;
+                        break;
+                    case 1:
+                        _name = value;
+                        break;
+                    default:
+                        throw new IndexOutOfRangeException();
                 }
             }
         }
-
 
         //-----------------------------------------------
         // QilParameter methods

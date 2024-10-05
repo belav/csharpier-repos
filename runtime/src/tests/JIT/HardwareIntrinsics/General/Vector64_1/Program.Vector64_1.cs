@@ -8,9 +8,6 @@ namespace JIT.HardwareIntrinsics.General._Vector64_1
 {
     public static partial class Program
     {
-        static Program()
-        {
-
-        }
+        static Program() { }
     }
 }

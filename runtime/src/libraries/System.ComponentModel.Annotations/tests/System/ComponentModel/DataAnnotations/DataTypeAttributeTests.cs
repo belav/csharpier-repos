@@ -25,10 +25,14 @@ namespace System.ComponentModel.DataAnnotations.Tests
 
         protected override IEnumerable<TestCase> InvalidValues() => new TestCase[0];
 
-        private static readonly ValidationContext s_testValidationContext = new ValidationContext(new object());
+        private static readonly ValidationContext s_testValidationContext = new ValidationContext(
+            new object()
+        );
 
-        private static readonly DataType[] s_dataTypes = (DataType[])Enum.GetValues(typeof(DataType));
-        public static IEnumerable<object[]> DataTypes_TestData => s_dataTypes.Select(type => new object[] { type });
+        private static readonly DataType[] s_dataTypes = (DataType[])
+            Enum.GetValues(typeof(DataType));
+        public static IEnumerable<object[]> DataTypes_TestData =>
+            s_dataTypes.Select(type => new object[] { type });
 
         [Theory]
         [MemberData(nameof(DataTypes_TestData))]
@@ -40,7 +44,10 @@ namespace System.ComponentModel.DataAnnotations.Tests
             Assert.Equal(dataType, attribute.DataType);
             Assert.Null(attribute.CustomDataType);
 
-            bool expectedNull = dataType != DataType.Date && dataType != DataType.Time && dataType != DataType.Currency;
+            bool expectedNull =
+                dataType != DataType.Date
+                && dataType != DataType.Time
+                && dataType != DataType.Currency;
             Assert.Equal(expectedNull, attribute.DisplayFormat == null);
         }
 
@@ -58,7 +65,9 @@ namespace System.ComponentModel.DataAnnotations.Tests
         [Theory]
         [InlineData((DataType)(-1))]
         [InlineData(DataType.Upload + 1)]
-        public static void GetDataTypeName_InvalidDataType_ThrowsIndexOutOfRangeException(DataType dataType)
+        public static void GetDataTypeName_InvalidDataType_ThrowsIndexOutOfRangeException(
+            DataType dataType
+        )
         {
             DataTypeAttribute attribute = new DataTypeAttribute(dataType);
             Assert.Throws<IndexOutOfRangeException>(() => attribute.GetDataTypeName());
@@ -90,7 +99,9 @@ namespace System.ComponentModel.DataAnnotations.Tests
             else
             {
                 Assert.Throws<InvalidOperationException>(() => attribute.GetDataTypeName());
-                Assert.Throws<InvalidOperationException>(() => attribute.Validate(new object(), s_testValidationContext));
+                Assert.Throws<InvalidOperationException>(
+                    () => attribute.Validate(new object(), s_testValidationContext)
+                );
             }
         }
 
@@ -98,7 +109,11 @@ namespace System.ComponentModel.DataAnnotations.Tests
         [InlineData(DataType.Date, "{0:d}", true)]
         [InlineData(DataType.Time, "{0:t}", true)]
         [InlineData(DataType.Currency, "{0:C}", false)]
-        public static void DisplayFormat_ReturnsExpected(DataType dataType, string dataFormatString, bool applyFormatInEditMode)
+        public static void DisplayFormat_ReturnsExpected(
+            DataType dataType,
+            string dataFormatString,
+            bool applyFormatInEditMode
+        )
         {
             DataTypeAttribute attribute = new DataTypeAttribute(dataType);
             Assert.Equal(dataFormatString, attribute.DisplayFormat.DataFormatString);

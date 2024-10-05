@@ -31,98 +31,102 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Xml;
 
-namespace Microsoft.Build.BuildEngine {
-	public class TargetCollection : ICollection, IEnumerable {
-		
-		Dictionary <string, Target>	targetsByName;
-		Project				parentProject;
-	
-		internal TargetCollection (Project project)
-		{
-			this.targetsByName = new Dictionary <string, Target> (StringComparer.OrdinalIgnoreCase);
-			this.parentProject = project;
-		}
+namespace Microsoft.Build.BuildEngine
+{
+    public class TargetCollection : ICollection, IEnumerable
+    {
+        Dictionary<string, Target> targetsByName;
+        Project parentProject;
 
-		[MonoTODO]
-		public Target AddNewTarget (string targetName)
-		{
-			if (targetName == null)
-				throw new InvalidProjectFileException (
-					"The required attribute \"Name\" is missing from element <Target>.");
-		
-			XmlElement targetElement = parentProject.XmlDocument.CreateElement ("Target", Project.XmlNamespace);
-			parentProject.XmlDocument.DocumentElement.AppendChild (targetElement);
-			targetElement.SetAttribute ("Name", targetName);
-			
-			Target t = new Target (targetElement, parentProject, null);
-			
-			AddTarget (t);
-			
-			return t;
-		}
+        internal TargetCollection(Project project)
+        {
+            this.targetsByName = new Dictionary<string, Target>(StringComparer.OrdinalIgnoreCase);
+            this.parentProject = project;
+        }
 
-		internal void AddTarget (Target target)
-		{
-			if (targetsByName.ContainsKey (target.Name))
-				targetsByName.Remove (target.Name);
-			targetsByName.Add (target.Name, target);
-		}
+        [MonoTODO]
+        public Target AddNewTarget(string targetName)
+        {
+            if (targetName == null)
+                throw new InvalidProjectFileException(
+                    "The required attribute \"Name\" is missing from element <Target>."
+                );
 
-		public void CopyTo (Array array, int index)
-		{
-			targetsByName.Values.CopyTo ((Target[]) array, index);
-		}
+            XmlElement targetElement = parentProject.XmlDocument.CreateElement(
+                "Target",
+                Project.XmlNamespace
+            );
+            parentProject.XmlDocument.DocumentElement.AppendChild(targetElement);
+            targetElement.SetAttribute("Name", targetName);
 
-		public bool Exists (string targetName)
-		{
-			return targetsByName.ContainsKey (targetName);
-		}
+            Target t = new Target(targetElement, parentProject, null);
 
-		public IEnumerator GetEnumerator ()
-		{
-			foreach (KeyValuePair <string, Target> kvp in targetsByName)
-				yield return kvp.Value;
-		}
+            AddTarget(t);
 
-		internal IEnumerable<Target> AsIEnumerable ()
-		{
-			foreach (KeyValuePair <string, Target> kvp in targetsByName)
-				yield return kvp.Value;
-		}
+            return t;
+        }
 
-		public void RemoveTarget (Target targetToRemove)
-		{
-			if (targetToRemove == null)
-				throw new ArgumentNullException ();
-			
-			targetsByName.Remove (targetToRemove.Name);
-		}
+        internal void AddTarget(Target target)
+        {
+            if (targetsByName.ContainsKey(target.Name))
+                targetsByName.Remove(target.Name);
+            targetsByName.Add(target.Name, target);
+        }
 
-		public int Count {
-			get {
-				return targetsByName.Count;
-			}
-		}
+        public void CopyTo(Array array, int index)
+        {
+            targetsByName.Values.CopyTo((Target[])array, index);
+        }
 
-		public bool IsSynchronized {
-			get {
-				return false;
-			}
-		}
+        public bool Exists(string targetName)
+        {
+            return targetsByName.ContainsKey(targetName);
+        }
 
-		public object SyncRoot {
-			get {
-				return this;
-			}
-		}
+        public IEnumerator GetEnumerator()
+        {
+            foreach (KeyValuePair<string, Target> kvp in targetsByName)
+                yield return kvp.Value;
+        }
 
-		public Target this [string index] {
-			get {
-				if (targetsByName.ContainsKey (index))
-					return targetsByName [index];
-				else
-					return null;
-			}
-		}
-	}
+        internal IEnumerable<Target> AsIEnumerable()
+        {
+            foreach (KeyValuePair<string, Target> kvp in targetsByName)
+                yield return kvp.Value;
+        }
+
+        public void RemoveTarget(Target targetToRemove)
+        {
+            if (targetToRemove == null)
+                throw new ArgumentNullException();
+
+            targetsByName.Remove(targetToRemove.Name);
+        }
+
+        public int Count
+        {
+            get { return targetsByName.Count; }
+        }
+
+        public bool IsSynchronized
+        {
+            get { return false; }
+        }
+
+        public object SyncRoot
+        {
+            get { return this; }
+        }
+
+        public Target this[string index]
+        {
+            get
+            {
+                if (targetsByName.ContainsKey(index))
+                    return targetsByName[index];
+                else
+                    return null;
+            }
+        }
+    }
 }

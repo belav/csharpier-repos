@@ -14,7 +14,7 @@ internal static partial class Interop
             KP_IV = 1,
             KP_PERMISSIONS = 6,
             KP_ALGID = 7,
-            KP_KEYLEN = 9
+            KP_KEYLEN = 9,
         }
 
         [LibraryImport(Libraries.Advapi32, SetLastError = true)]
@@ -24,6 +24,7 @@ internal static partial class Interop
             CryptGetKeyParamFlags dwParam,
             byte[]? pbData,
             ref int pdwDataLen,
-            int dwFlags);
+            int dwFlags
+        );
     }
 }

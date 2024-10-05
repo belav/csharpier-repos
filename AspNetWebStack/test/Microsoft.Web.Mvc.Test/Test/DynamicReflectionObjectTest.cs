@@ -17,19 +17,28 @@ namespace Microsoft.Web.Mvc.Test
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
                 () => dro.baz,
-                "The property baz doesn't exist. There are no public properties on this object.");
+                "The property baz doesn't exist. There are no public properties on this object."
+            );
         }
 
         [Fact]
         public void UnknownPropertyThrows()
         {
             // Arrange
-            dynamic dro = DynamicReflectionObject.Wrap(new { foo = 3.4, biff = "Two", bar = 1 });
+            dynamic dro = DynamicReflectionObject.Wrap(
+                new
+                {
+                    foo = 3.4,
+                    biff = "Two",
+                    bar = 1,
+                }
+            );
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
                 () => dro.baz,
-                "The property baz doesn't exist. Supported properties are: bar, biff, foo.");
+                "The property baz doesn't exist. Supported properties are: bar, biff, foo."
+            );
         }
 
         [Fact]

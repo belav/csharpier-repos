@@ -2,10 +2,13 @@
 
 public abstract class A
 {
-	public abstract bool IsNode { get; }
+    public abstract bool IsNode { get; }
 }
 
 public abstract class B : A
 {
-	public override sealed bool IsNode { get { return true; } }
+    public sealed override bool IsNode
+    {
+        get { return true; }
+    }
 }

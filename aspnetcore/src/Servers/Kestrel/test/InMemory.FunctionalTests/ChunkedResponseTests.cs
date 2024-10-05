@@ -7,8 +7,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTransport;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTransport;
 using Microsoft.Extensions.Logging.Testing;
 using Xunit;
 
@@ -21,20 +21,25 @@ public class ChunkedResponseTests : LoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            var response = httpContext.Response;
-            await response.BodyWriter.WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("Hello "), 0, 6));
-            await response.BodyWriter.WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("World!"), 0, 6));
-        }, testContext))
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    var response = httpContext.Response;
+                    await response.BodyWriter.WriteAsync(
+                        new Memory<byte>(Encoding.ASCII.GetBytes("Hello "), 0, 6)
+                    );
+                    await response.BodyWriter.WriteAsync(
+                        new Memory<byte>(Encoding.ASCII.GetBytes("World!"), 0, 6)
+                    );
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host:",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host:", "", "");
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     $"Date: {testContext.DateHeaderValue}",
@@ -46,7 +51,8 @@ public class ChunkedResponseTests : LoggedTest
                     "World!",
                     "0",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -56,25 +62,27 @@ public class ChunkedResponseTests : LoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            await httpContext.Response.WriteAsync("Hello ");
-            await httpContext.Response.WriteAsync("World!");
-        }, testContext))
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    await httpContext.Response.WriteAsync("Hello ");
+                    await httpContext.Response.WriteAsync("World!");
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.0",
-                    "Connection: keep-alive",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.0", "Connection: keep-alive", "", "");
                 await connection.ReceiveEnd(
                     "HTTP/1.1 200 OK",
                     "Connection: close",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "Hello World!");
+                    "Hello World!"
+                );
             }
         }
     }
@@ -84,21 +92,26 @@ public class ChunkedResponseTests : LoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            httpContext.Request.Protocol = "HTTP/2"; // Doesn't support chunking. This change should be ignored.
-            var response = httpContext.Response;
-            await response.BodyWriter.WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("Hello "), 0, 6));
-            await response.BodyWriter.WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("World!"), 0, 6));
-        }, testContext))
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    httpContext.Request.Protocol = "HTTP/2"; // Doesn't support chunking. This change should be ignored.
+                    var response = httpContext.Response;
+                    await response.BodyWriter.WriteAsync(
+                        new Memory<byte>(Encoding.ASCII.GetBytes("Hello "), 0, 6)
+                    );
+                    await response.BodyWriter.WriteAsync(
+                        new Memory<byte>(Encoding.ASCII.GetBytes("World!"), 0, 6)
+                    );
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host:",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host:", "", "");
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     $"Date: {testContext.DateHeaderValue}",
@@ -110,7 +123,8 @@ public class ChunkedResponseTests : LoggedTest
                     "World!",
                     "0",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -120,20 +134,20 @@ public class ChunkedResponseTests : LoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            await httpContext.Response.WriteAsync("Hello ");
-            await httpContext.Response.WriteAsync("World!");
-        }, testContext))
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    await httpContext.Response.WriteAsync("Hello ");
+                    await httpContext.Response.WriteAsync("World!");
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host: ",
-                    "Connection: close",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host: ", "Connection: close", "", "");
                 await connection.ReceiveEnd(
                     "HTTP/1.1 200 OK",
                     "Connection: close",
@@ -146,7 +160,8 @@ public class ChunkedResponseTests : LoggedTest
                     "World!",
                     "0",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -156,19 +171,19 @@ public class ChunkedResponseTests : LoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory);
         var expectedString = new string('a', 10000);
-        await using (var server = new TestServer(async httpContext =>
-        {
-            await httpContext.Response.WriteAsync(expectedString);
-        }, testContext))
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    await httpContext.Response.WriteAsync(expectedString);
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host: ",
-                    "Connection: close",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host: ", "Connection: close", "", "");
                 await connection.ReceiveEnd(
                     "HTTP/1.1 200 OK",
                     "Connection: close",
@@ -183,7 +198,8 @@ public class ChunkedResponseTests : LoggedTest
                     new string('a', 1925),
                     "0",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -192,28 +208,30 @@ public class ChunkedResponseTests : LoggedTest
     [InlineData(4096)]
     [InlineData(10000)]
     [InlineData(100000)]
-    public async Task ResponsesAreChunkedAutomaticallyLargeChunksLargeResponseWithOverloadedWriteAsync(int length)
+    public async Task ResponsesAreChunkedAutomaticallyLargeChunksLargeResponseWithOverloadedWriteAsync(
+        int length
+    )
     {
         var testContext = new TestServiceContext(LoggerFactory);
         var expectedString = new string('a', length);
-        await using (var server = new TestServer(async httpContext =>
-        {
-            await httpContext.Response.StartAsync();
-            var memory = httpContext.Response.BodyWriter.GetMemory(length);
-            Assert.True(length <= memory.Length);
-            Encoding.ASCII.GetBytes(expectedString).CopyTo(memory);
-            httpContext.Response.BodyWriter.Advance(length);
-            await httpContext.Response.BodyWriter.FlushAsync();
-        }, testContext))
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    await httpContext.Response.StartAsync();
+                    var memory = httpContext.Response.BodyWriter.GetMemory(length);
+                    Assert.True(length <= memory.Length);
+                    Encoding.ASCII.GetBytes(expectedString).CopyTo(memory);
+                    httpContext.Response.BodyWriter.Advance(length);
+                    await httpContext.Response.BodyWriter.FlushAsync();
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host: ",
-                    "Connection: close",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host: ", "Connection: close", "", "");
                 await connection.ReceiveEnd(
                     "HTTP/1.1 200 OK",
                     "Connection: close",
@@ -224,7 +242,8 @@ public class ChunkedResponseTests : LoggedTest
                     new string('a', length),
                     "0",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -238,23 +257,23 @@ public class ChunkedResponseTests : LoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory);
         var expectedString = new string('a', partialLength);
-        await using (var server = new TestServer(async httpContext =>
-        {
-            await httpContext.Response.StartAsync();
-            var memory = httpContext.Response.BodyWriter.GetMemory(100000);
-            Encoding.ASCII.GetBytes(expectedString).CopyTo(memory);
-            httpContext.Response.BodyWriter.Advance(partialLength);
-            await httpContext.Response.BodyWriter.FlushAsync();
-        }, testContext))
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    await httpContext.Response.StartAsync();
+                    var memory = httpContext.Response.BodyWriter.GetMemory(100000);
+                    Encoding.ASCII.GetBytes(expectedString).CopyTo(memory);
+                    httpContext.Response.BodyWriter.Advance(partialLength);
+                    await httpContext.Response.BodyWriter.FlushAsync();
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host: ",
-                    "Connection: close",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host: ", "Connection: close", "", "");
                 await connection.ReceiveEnd(
                     "HTTP/1.1 200 OK",
                     "Connection: close",
@@ -265,7 +284,8 @@ public class ChunkedResponseTests : LoggedTest
                     new string('a', partialLength),
                     "0",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -275,20 +295,21 @@ public class ChunkedResponseTests : LoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            httpContext.Response.Headers["Connection"] = "close";
-            await httpContext.Response.WriteAsync("Hello ");
-            await httpContext.Response.WriteAsync("World!");
-        }, testContext))
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    httpContext.Response.Headers["Connection"] = "close";
+                    await httpContext.Response.WriteAsync("Hello ");
+                    await httpContext.Response.WriteAsync("World!");
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host: ",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host: ", "", "");
                 await connection.ReceiveEnd(
                     "HTTP/1.1 200 OK",
                     "Connection: close",
@@ -301,7 +322,8 @@ public class ChunkedResponseTests : LoggedTest
                     "World!",
                     "0",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -311,21 +333,26 @@ public class ChunkedResponseTests : LoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            var response = httpContext.Response;
-            await response.BodyWriter.WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("Hello "), 0, 6));
-            await response.BodyWriter.WriteAsync(new Memory<byte>(new byte[0], 0, 0));
-            await response.BodyWriter.WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("World!"), 0, 6));
-        }, testContext))
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    var response = httpContext.Response;
+                    await response.BodyWriter.WriteAsync(
+                        new Memory<byte>(Encoding.ASCII.GetBytes("Hello "), 0, 6)
+                    );
+                    await response.BodyWriter.WriteAsync(new Memory<byte>(new byte[0], 0, 0));
+                    await response.BodyWriter.WriteAsync(
+                        new Memory<byte>(Encoding.ASCII.GetBytes("World!"), 0, 6)
+                    );
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host: ",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host: ", "", "");
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     $"Date: {testContext.DateHeaderValue}",
@@ -337,7 +364,8 @@ public class ChunkedResponseTests : LoggedTest
                     "World!",
                     "0",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -349,39 +377,36 @@ public class ChunkedResponseTests : LoggedTest
 
         var flushed = new SemaphoreSlim(0, 1);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            var response = httpContext.Response;
-            await response.WriteAsync("");
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    var response = httpContext.Response;
+                    await response.WriteAsync("");
 
-            await flushed.WaitAsync();
+                    await flushed.WaitAsync();
 
-            await response.WriteAsync("Hello World!");
-        }, testContext))
+                    await response.WriteAsync("Hello World!");
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host: ",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host: ", "", "");
 
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     $"Date: {testContext.DateHeaderValue}",
                     "Transfer-Encoding: chunked",
                     "",
-                    "");
+                    ""
+                );
 
                 flushed.Release();
 
-                await connection.Receive(
-                    "c",
-                    "Hello World!",
-                    "0",
-                    "",
-                    "");
+                await connection.Receive("c", "Hello World!", "0", "", "");
             }
         }
     }
@@ -391,19 +416,20 @@ public class ChunkedResponseTests : LoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            var response = httpContext.Response;
-            await response.BodyWriter.WriteAsync(new Memory<byte>(new byte[0], 0, 0));
-        }, testContext))
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    var response = httpContext.Response;
+                    await response.BodyWriter.WriteAsync(new Memory<byte>(new byte[0], 0, 0));
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host: ",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host: ", "", "");
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     $"Date: {testContext.DateHeaderValue}",
@@ -411,7 +437,8 @@ public class ChunkedResponseTests : LoggedTest
                     "",
                     "0",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -421,22 +448,25 @@ public class ChunkedResponseTests : LoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            var response = httpContext.Response;
-            await response.BodyWriter.WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("Hello World!"), 0, 12));
-            throw new Exception();
-        }, testContext))
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    var response = httpContext.Response;
+                    await response.BodyWriter.WriteAsync(
+                        new Memory<byte>(Encoding.ASCII.GetBytes("Hello World!"), 0, 12)
+                    );
+                    throw new Exception();
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
                 // SendEnd is not called, so it isn't the client closing the connection.
                 // client closing the connection.
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host: ",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host: ", "", "");
                 await connection.ReceiveEnd(
                     "HTTP/1.1 200 OK",
                     $"Date: {testContext.DateHeaderValue}",
@@ -444,7 +474,8 @@ public class ChunkedResponseTests : LoggedTest
                     "",
                     "c",
                     "Hello World!",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -454,21 +485,22 @@ public class ChunkedResponseTests : LoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            var response = httpContext.Response;
-            await response.BodyWriter.WriteAsync(new Memory<byte>(new byte[0], 0, 0));
-            throw new Exception();
-        }, testContext))
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    var response = httpContext.Response;
+                    await response.BodyWriter.WriteAsync(new Memory<byte>(new byte[0], 0, 0));
+                    throw new Exception();
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
                 // SendEnd is not called, so it isn't the client closing the connection.
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host: ",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host: ", "", "");
 
                 // Headers are sent before connection is closed, but chunked body terminator isn't sent
                 await connection.ReceiveEnd(
@@ -476,7 +508,8 @@ public class ChunkedResponseTests : LoggedTest
                     $"Date: {testContext.DateHeaderValue}",
                     "Transfer-Encoding: chunked",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -488,24 +521,29 @@ public class ChunkedResponseTests : LoggedTest
 
         var flushWh = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            var response = httpContext.Response;
-            await response.BodyWriter.WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("Hello "), 0, 6));
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    var response = httpContext.Response;
+                    await response.BodyWriter.WriteAsync(
+                        new Memory<byte>(Encoding.ASCII.GetBytes("Hello "), 0, 6)
+                    );
 
-            // Don't complete response until client has received the first chunk.
-            await flushWh.Task.DefaultTimeout();
+                    // Don't complete response until client has received the first chunk.
+                    await flushWh.Task.DefaultTimeout();
 
-            await response.BodyWriter.WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("World!"), 0, 6));
-        }, testContext))
+                    await response.BodyWriter.WriteAsync(
+                        new Memory<byte>(Encoding.ASCII.GetBytes("World!"), 0, 6)
+                    );
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host: ",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host: ", "", "");
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     $"Date: {testContext.DateHeaderValue}",
@@ -513,16 +551,12 @@ public class ChunkedResponseTests : LoggedTest
                     "",
                     "6",
                     "Hello ",
-                    "");
+                    ""
+                );
 
                 flushWh.SetResult();
 
-                await connection.Receive(
-                    "6",
-                    "World!",
-                    "0",
-                    "",
-                    "");
+                await connection.Receive("6", "World!", "0", "", "");
             }
         }
     }
@@ -532,23 +566,30 @@ public class ChunkedResponseTests : LoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            var response = httpContext.Response;
-            response.Headers["Transfer-Encoding"] = "chunked";
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    var response = httpContext.Response;
+                    response.Headers["Transfer-Encoding"] = "chunked";
 
-            await response.BodyWriter.WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("6\r\nHello \r\n"), 0, 11));
-            await response.BodyWriter.WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("6\r\nWorld!\r\n"), 0, 11));
-            await response.BodyWriter.WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("0\r\n\r\n"), 0, 5));
-        }, testContext))
+                    await response.BodyWriter.WriteAsync(
+                        new Memory<byte>(Encoding.ASCII.GetBytes("6\r\nHello \r\n"), 0, 11)
+                    );
+                    await response.BodyWriter.WriteAsync(
+                        new Memory<byte>(Encoding.ASCII.GetBytes("6\r\nWorld!\r\n"), 0, 11)
+                    );
+                    await response.BodyWriter.WriteAsync(
+                        new Memory<byte>(Encoding.ASCII.GetBytes("0\r\n\r\n"), 0, 5)
+                    );
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host: ",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host: ", "", "");
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     $"Date: {testContext.DateHeaderValue}",
@@ -560,7 +601,8 @@ public class ChunkedResponseTests : LoggedTest
                     "World!",
                     "0",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -570,31 +612,32 @@ public class ChunkedResponseTests : LoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            var response = httpContext.Response;
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    var response = httpContext.Response;
 
-            await response.StartAsync();
-            var memory = response.BodyWriter.GetMemory();
-            var fisrtPartOfResponse = Encoding.ASCII.GetBytes("Hello ");
-            fisrtPartOfResponse.CopyTo(memory);
-            response.BodyWriter.Advance(6);
+                    await response.StartAsync();
+                    var memory = response.BodyWriter.GetMemory();
+                    var fisrtPartOfResponse = Encoding.ASCII.GetBytes("Hello ");
+                    fisrtPartOfResponse.CopyTo(memory);
+                    response.BodyWriter.Advance(6);
 
-            memory = response.BodyWriter.GetMemory();
-            var secondPartOfResponse = Encoding.ASCII.GetBytes("World!");
-            secondPartOfResponse.CopyTo(memory);
-            response.BodyWriter.Advance(6);
+                    memory = response.BodyWriter.GetMemory();
+                    var secondPartOfResponse = Encoding.ASCII.GetBytes("World!");
+                    secondPartOfResponse.CopyTo(memory);
+                    response.BodyWriter.Advance(6);
 
-            await response.BodyWriter.FlushAsync();
-        }, testContext))
+                    await response.BodyWriter.FlushAsync();
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host: ",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host: ", "", "");
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     $"Date: {testContext.DateHeaderValue}",
@@ -604,7 +647,8 @@ public class ChunkedResponseTests : LoggedTest
                     "Hello World!",
                     "0",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -614,30 +658,31 @@ public class ChunkedResponseTests : LoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            var response = httpContext.Response;
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    var response = httpContext.Response;
 
-            var memory = response.BodyWriter.GetMemory();
-            var fisrtPartOfResponse = Encoding.ASCII.GetBytes("Hello ");
-            fisrtPartOfResponse.CopyTo(memory);
-            response.BodyWriter.Advance(6);
+                    var memory = response.BodyWriter.GetMemory();
+                    var fisrtPartOfResponse = Encoding.ASCII.GetBytes("Hello ");
+                    fisrtPartOfResponse.CopyTo(memory);
+                    response.BodyWriter.Advance(6);
 
-            memory = response.BodyWriter.GetMemory();
-            var secondPartOfResponse = Encoding.ASCII.GetBytes("World!");
-            secondPartOfResponse.CopyTo(memory);
-            response.BodyWriter.Advance(6);
+                    memory = response.BodyWriter.GetMemory();
+                    var secondPartOfResponse = Encoding.ASCII.GetBytes("World!");
+                    secondPartOfResponse.CopyTo(memory);
+                    response.BodyWriter.Advance(6);
 
-            await response.BodyWriter.FlushAsync();
-        }, testContext))
+                    await response.BodyWriter.FlushAsync();
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host: ",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host: ", "", "");
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     $"Date: {testContext.DateHeaderValue}",
@@ -647,7 +692,8 @@ public class ChunkedResponseTests : LoggedTest
                     "Hello World!",
                     "0",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -659,33 +705,36 @@ public class ChunkedResponseTests : LoggedTest
         var semaphore = new SemaphoreSlim(initialCount: 0);
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            var response = httpContext.Response;
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    var response = httpContext.Response;
 
-            var memory = response.BodyWriter.GetMemory(5000);
-            length.Value = memory.Length;
-            semaphore.Release();
+                    var memory = response.BodyWriter.GetMemory(5000);
+                    length.Value = memory.Length;
+                    semaphore.Release();
 
-            var fisrtPartOfResponse = Encoding.ASCII.GetBytes(new string('a', memory.Length));
-            fisrtPartOfResponse.CopyTo(memory);
-            response.BodyWriter.Advance(memory.Length);
+                    var fisrtPartOfResponse = Encoding.ASCII.GetBytes(
+                        new string('a', memory.Length)
+                    );
+                    fisrtPartOfResponse.CopyTo(memory);
+                    response.BodyWriter.Advance(memory.Length);
 
-            memory = response.BodyWriter.GetMemory();
-            var secondPartOfResponse = Encoding.ASCII.GetBytes("World!");
-            secondPartOfResponse.CopyTo(memory);
-            response.BodyWriter.Advance(6);
+                    memory = response.BodyWriter.GetMemory();
+                    var secondPartOfResponse = Encoding.ASCII.GetBytes("World!");
+                    secondPartOfResponse.CopyTo(memory);
+                    response.BodyWriter.Advance(6);
 
-            await response.BodyWriter.FlushAsync();
-        }, testContext))
+                    await response.BodyWriter.FlushAsync();
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host: ",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host: ", "", "");
 
                 // Wait for length to be set
                 await semaphore.WaitAsync();
@@ -701,7 +750,8 @@ public class ChunkedResponseTests : LoggedTest
                     "World!",
                     "0",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -713,35 +763,38 @@ public class ChunkedResponseTests : LoggedTest
         var semaphore = new SemaphoreSlim(initialCount: 0);
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            var response = httpContext.Response;
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    var response = httpContext.Response;
 
-            await response.BodyWriter.FlushAsync();
+                    await response.BodyWriter.FlushAsync();
 
-            var memory = response.BodyWriter.GetMemory(5000);
-            length.Value = memory.Length;
-            semaphore.Release();
+                    var memory = response.BodyWriter.GetMemory(5000);
+                    length.Value = memory.Length;
+                    semaphore.Release();
 
-            var fisrtPartOfResponse = Encoding.ASCII.GetBytes(new string('a', memory.Length));
-            fisrtPartOfResponse.CopyTo(memory);
-            response.BodyWriter.Advance(memory.Length);
+                    var fisrtPartOfResponse = Encoding.ASCII.GetBytes(
+                        new string('a', memory.Length)
+                    );
+                    fisrtPartOfResponse.CopyTo(memory);
+                    response.BodyWriter.Advance(memory.Length);
 
-            memory = response.BodyWriter.GetMemory();
-            var secondPartOfResponse = Encoding.ASCII.GetBytes("World!");
-            secondPartOfResponse.CopyTo(memory);
-            response.BodyWriter.Advance(6);
+                    memory = response.BodyWriter.GetMemory();
+                    var secondPartOfResponse = Encoding.ASCII.GetBytes("World!");
+                    secondPartOfResponse.CopyTo(memory);
+                    response.BodyWriter.Advance(6);
 
-            await response.BodyWriter.FlushAsync();
-        }, testContext))
+                    await response.BodyWriter.FlushAsync();
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host: ",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host: ", "", "");
 
                 // Wait for length to be set
                 await semaphore.WaitAsync();
@@ -757,7 +810,8 @@ public class ChunkedResponseTests : LoggedTest
                     "World!",
                     "0",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -769,36 +823,37 @@ public class ChunkedResponseTests : LoggedTest
         var semaphore = new SemaphoreSlim(initialCount: 0);
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            var response = httpContext.Response;
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    var response = httpContext.Response;
 
-            await response.StartAsync();
+                    await response.StartAsync();
 
-            var memory = response.BodyWriter.GetMemory();
-            length = memory.Length - 1;
-            semaphore.Release();
+                    var memory = response.BodyWriter.GetMemory();
+                    length = memory.Length - 1;
+                    semaphore.Release();
 
-            var fisrtPartOfResponse = Encoding.ASCII.GetBytes(new string('a', length));
-            fisrtPartOfResponse.CopyTo(memory);
-            response.BodyWriter.Advance(length);
+                    var fisrtPartOfResponse = Encoding.ASCII.GetBytes(new string('a', length));
+                    fisrtPartOfResponse.CopyTo(memory);
+                    response.BodyWriter.Advance(length);
 
-            var secondMemory = response.BodyWriter.GetMemory(6);
+                    var secondMemory = response.BodyWriter.GetMemory(6);
 
-            var secondPartOfResponse = Encoding.ASCII.GetBytes("World!");
-            secondPartOfResponse.CopyTo(secondMemory);
-            response.BodyWriter.Advance(6);
+                    var secondPartOfResponse = Encoding.ASCII.GetBytes("World!");
+                    secondPartOfResponse.CopyTo(secondMemory);
+                    response.BodyWriter.Advance(6);
 
-            await response.BodyWriter.FlushAsync();
-        }, testContext))
+                    await response.BodyWriter.FlushAsync();
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host: ",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host: ", "", "");
 
                 // Wait for length to be set
                 await semaphore.WaitAsync();
@@ -814,7 +869,8 @@ public class ChunkedResponseTests : LoggedTest
                     "World!",
                     "0",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -824,29 +880,30 @@ public class ChunkedResponseTests : LoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            var response = httpContext.Response;
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    var response = httpContext.Response;
 
-            await response.StartAsync();
+                    await response.StartAsync();
 
-            var memory = response.BodyWriter.GetMemory(4096);
-            var fisrtPartOfResponse = Encoding.ASCII.GetBytes("Hello ");
-            fisrtPartOfResponse.CopyTo(memory);
-            response.BodyWriter.Advance(6);
+                    var memory = response.BodyWriter.GetMemory(4096);
+                    var fisrtPartOfResponse = Encoding.ASCII.GetBytes("Hello ");
+                    fisrtPartOfResponse.CopyTo(memory);
+                    response.BodyWriter.Advance(6);
 
-            var secondPartOfResponse = Encoding.ASCII.GetBytes("World!");
-            secondPartOfResponse.CopyTo(memory.Slice(6));
-            response.BodyWriter.Advance(6);
-        }, testContext))
+                    var secondPartOfResponse = Encoding.ASCII.GetBytes("World!");
+                    secondPartOfResponse.CopyTo(memory.Slice(6));
+                    response.BodyWriter.Advance(6);
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host: ",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host: ", "", "");
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     $"Date: {testContext.DateHeaderValue}",
@@ -856,7 +913,8 @@ public class ChunkedResponseTests : LoggedTest
                     "Hello World!",
                     "0",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -866,34 +924,35 @@ public class ChunkedResponseTests : LoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            var response = httpContext.Response;
-            await response.StartAsync();
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    var response = httpContext.Response;
+                    await response.StartAsync();
 
-            // To avoid using span in an async method
-            void NonAsyncMethod()
-            {
-                var span = response.BodyWriter.GetSpan(4096);
-                var fisrtPartOfResponse = Encoding.ASCII.GetBytes("Hello ");
-                fisrtPartOfResponse.CopyTo(span);
-                response.BodyWriter.Advance(6);
+                    // To avoid using span in an async method
+                    void NonAsyncMethod()
+                    {
+                        var span = response.BodyWriter.GetSpan(4096);
+                        var fisrtPartOfResponse = Encoding.ASCII.GetBytes("Hello ");
+                        fisrtPartOfResponse.CopyTo(span);
+                        response.BodyWriter.Advance(6);
 
-                var secondPartOfResponse = Encoding.ASCII.GetBytes("World!");
-                secondPartOfResponse.CopyTo(span.Slice(6));
-                response.BodyWriter.Advance(6);
-            }
+                        var secondPartOfResponse = Encoding.ASCII.GetBytes("World!");
+                        secondPartOfResponse.CopyTo(span.Slice(6));
+                        response.BodyWriter.Advance(6);
+                    }
 
-            NonAsyncMethod();
-        }, testContext))
+                    NonAsyncMethod();
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host: ",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host: ", "", "");
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     $"Date: {testContext.DateHeaderValue}",
@@ -903,7 +962,8 @@ public class ChunkedResponseTests : LoggedTest
                     "Hello World!",
                     "0",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -913,28 +973,29 @@ public class ChunkedResponseTests : LoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            var response = httpContext.Response;
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    var response = httpContext.Response;
 
-            await response.StartAsync();
+                    await response.StartAsync();
 
-            var memory = response.BodyWriter.GetMemory(4096);
+                    var memory = response.BodyWriter.GetMemory(4096);
 
-            var fisrtPartOfResponse = Encoding.ASCII.GetBytes("Hello ");
-            fisrtPartOfResponse.CopyTo(memory);
-            response.BodyWriter.Advance(6);
+                    var fisrtPartOfResponse = Encoding.ASCII.GetBytes("Hello ");
+                    fisrtPartOfResponse.CopyTo(memory);
+                    response.BodyWriter.Advance(6);
 
-            await response.WriteAsync("World!");
-        }, testContext))
+                    await response.WriteAsync("World!");
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host: ",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host: ", "", "");
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     $"Date: {testContext.DateHeaderValue}",
@@ -944,7 +1005,8 @@ public class ChunkedResponseTests : LoggedTest
                     "Hello World!",
                     "0",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -954,25 +1016,26 @@ public class ChunkedResponseTests : LoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            var response = httpContext.Response;
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    var response = httpContext.Response;
 
-            var memory = response.BodyWriter.GetMemory(4096);
-            var fisrtPartOfResponse = Encoding.ASCII.GetBytes("Hello ");
-            fisrtPartOfResponse.CopyTo(memory);
-            response.BodyWriter.Advance(6);
+                    var memory = response.BodyWriter.GetMemory(4096);
+                    var fisrtPartOfResponse = Encoding.ASCII.GetBytes("Hello ");
+                    fisrtPartOfResponse.CopyTo(memory);
+                    response.BodyWriter.Advance(6);
 
-            await response.WriteAsync("World!");
-        }, testContext))
+                    await response.WriteAsync("World!");
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host: ",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host: ", "", "");
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     $"Date: {testContext.DateHeaderValue}",
@@ -984,7 +1047,8 @@ public class ChunkedResponseTests : LoggedTest
                     "World!",
                     "0",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -994,28 +1058,29 @@ public class ChunkedResponseTests : LoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            var response = httpContext.Response;
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    var response = httpContext.Response;
 
-            await response.StartAsync();
+                    await response.StartAsync();
 
-            var memory = response.BodyWriter.GetMemory(0);
+                    var memory = response.BodyWriter.GetMemory(0);
 
-            // Headers are already written to memory, sliced appropriately
-            Assert.Equal(4005, memory.Length);
+                    // Headers are already written to memory, sliced appropriately
+                    Assert.Equal(4005, memory.Length);
 
-            memory = response.BodyWriter.GetMemory(1000000);
-            Assert.Equal(4005, memory.Length);
-        }, testContext))
+                    memory = response.BodyWriter.GetMemory(1000000);
+                    Assert.Equal(4005, memory.Length);
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host: ",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host: ", "", "");
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     $"Date: {testContext.DateHeaderValue}",
@@ -1023,7 +1088,8 @@ public class ChunkedResponseTests : LoggedTest
                     "",
                     "0",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -1033,32 +1099,34 @@ public class ChunkedResponseTests : LoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            var response = httpContext.Response;
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    var response = httpContext.Response;
 
-            var memory = response.BodyWriter.GetMemory(0);
+                    var memory = response.BodyWriter.GetMemory(0);
 
-            Assert.Equal(4096, memory.Length);
+                    Assert.Equal(4096, memory.Length);
 
-            memory = response.BodyWriter.GetMemory(1000000);
-            Assert.True(memory.Length >= 1000000);
-            await Task.CompletedTask;
-        }, testContext))
+                    memory = response.BodyWriter.GetMemory(1000000);
+                    Assert.True(memory.Length >= 1000000);
+                    await Task.CompletedTask;
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host: ",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host: ", "", "");
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -1070,23 +1138,24 @@ public class ChunkedResponseTests : LoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            var response = httpContext.Response;
-            var memory = response.BodyWriter.GetMemory(4096);
-            var fisrtPartOfResponse = Encoding.ASCII.GetBytes(new string('a', writeSize));
-            fisrtPartOfResponse.CopyTo(memory);
-            response.BodyWriter.Advance(writeSize);
-            await response.BodyWriter.FlushAsync();
-        }, testContext))
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    var response = httpContext.Response;
+                    var memory = response.BodyWriter.GetMemory(4096);
+                    var fisrtPartOfResponse = Encoding.ASCII.GetBytes(new string('a', writeSize));
+                    fisrtPartOfResponse.CopyTo(memory);
+                    response.BodyWriter.Advance(writeSize);
+                    await response.BodyWriter.FlushAsync();
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host: ",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host: ", "", "");
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     $"Date: {testContext.DateHeaderValue}",
@@ -1096,7 +1165,8 @@ public class ChunkedResponseTests : LoggedTest
                     new string('a', writeSize),
                     "0",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -1108,24 +1178,25 @@ public class ChunkedResponseTests : LoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            var response = httpContext.Response;
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    var response = httpContext.Response;
 
-            var memory = response.BodyWriter.GetMemory(4096);
-            var fisrtPartOfResponse = Encoding.ASCII.GetBytes(new string('a', writeSize));
-            fisrtPartOfResponse.CopyTo(memory);
-            response.BodyWriter.Advance(writeSize);
-            await response.BodyWriter.FlushAsync();
-        }, testContext))
+                    var memory = response.BodyWriter.GetMemory(4096);
+                    var fisrtPartOfResponse = Encoding.ASCII.GetBytes(new string('a', writeSize));
+                    fisrtPartOfResponse.CopyTo(memory);
+                    response.BodyWriter.Advance(writeSize);
+                    await response.BodyWriter.FlushAsync();
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host: ",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host: ", "", "");
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     $"Date: {testContext.DateHeaderValue}",
@@ -1135,7 +1206,8 @@ public class ChunkedResponseTests : LoggedTest
                     new string('a', writeSize),
                     "0",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -1143,31 +1215,31 @@ public class ChunkedResponseTests : LoggedTest
     [Fact]
     public async Task ChunkedWithBothPipeAndStreamWorks()
     {
-        await using (var server = new TestServer(async httpContext =>
-        {
-            var response = httpContext.Response;
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    var response = httpContext.Response;
 
-            var memory = response.BodyWriter.GetMemory(4096);
-            var fisrtPartOfResponse = Encoding.ASCII.GetBytes("hello,");
-            fisrtPartOfResponse.CopyTo(memory);
-            response.BodyWriter.Advance(6);
-            var secondPartOfResponse = Encoding.ASCII.GetBytes(" world");
-            secondPartOfResponse.CopyTo(memory.Slice(6));
-            response.BodyWriter.Advance(6);
+                    var memory = response.BodyWriter.GetMemory(4096);
+                    var fisrtPartOfResponse = Encoding.ASCII.GetBytes("hello,");
+                    fisrtPartOfResponse.CopyTo(memory);
+                    response.BodyWriter.Advance(6);
+                    var secondPartOfResponse = Encoding.ASCII.GetBytes(" world");
+                    secondPartOfResponse.CopyTo(memory.Slice(6));
+                    response.BodyWriter.Advance(6);
 
-            await response.Body.WriteAsync(Encoding.ASCII.GetBytes("hello, world"));
-            await response.BodyWriter.WriteAsync(Encoding.ASCII.GetBytes("hello, world"));
-            await response.WriteAsync("hello, world");
-
-        }, new TestServiceContext(LoggerFactory)))
+                    await response.Body.WriteAsync(Encoding.ASCII.GetBytes("hello, world"));
+                    await response.BodyWriter.WriteAsync(Encoding.ASCII.GetBytes("hello, world"));
+                    await response.WriteAsync("hello, world");
+                },
+                new TestServiceContext(LoggerFactory)
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host:",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host:", "", "");
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     $"Date: {server.Context.DateHeaderValue}",
@@ -1183,7 +1255,8 @@ public class ChunkedResponseTests : LoggedTest
                     "hello, world",
                     "0",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -1193,4 +1266,3 @@ public class ChunkedResponseTests : LoggedTest
         public int Value { get; set; }
     }
 }
-

@@ -13,7 +13,11 @@ namespace System.Tests
         public static void Ctor_Empty()
         {
             var exception = new NotImplementedException();
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: E_NOTIMPL, validateMessage: false);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: E_NOTIMPL,
+                validateMessage: false
+            );
         }
 
         [Fact]
@@ -21,7 +25,11 @@ namespace System.Tests
         {
             string message = "not implemented";
             var exception = new NotImplementedException(message);
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: E_NOTIMPL, message: message);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: E_NOTIMPL,
+                message: message
+            );
         }
 
         [Fact]
@@ -30,7 +38,12 @@ namespace System.Tests
             string message = "not implemented";
             var innerException = new Exception("Inner exception");
             var exception = new NotImplementedException(message, innerException);
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: E_NOTIMPL, innerException: innerException, message: message);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: E_NOTIMPL,
+                innerException: innerException,
+                message: message
+            );
         }
     }
 }

@@ -65,7 +65,8 @@ internal static unsafe class CryptoUtil
     // Allows callers to write "var x = Method() ?? Fail<T>(message);" as a convenience to guard
     // against a method returning null unexpectedly.
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static T Fail<T>(string message) where T : class
+    public static T Fail<T>(string message)
+        where T : class
     {
         throw Fail(message);
     }
@@ -92,7 +93,14 @@ internal static unsafe class CryptoUtil
     }
 
     [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-    public static bool TimeConstantBuffersAreEqual(byte[] bufA, int offsetA, int countA, byte[] bufB, int offsetB, int countB)
+    public static bool TimeConstantBuffersAreEqual(
+        byte[] bufA,
+        int offsetA,
+        int countA,
+        byte[] bufB,
+        int offsetB,
+        int countB
+    )
     {
         // Technically this is an early exit scenario, but it means that the caller did something bizarre.
         // An error at the call site isn't usable for timing attacks.
@@ -103,7 +111,8 @@ internal static unsafe class CryptoUtil
         {
             return CryptographicOperations.FixedTimeEquals(
                 bufA.AsSpan(start: offsetA, length: countA),
-                bufB.AsSpan(start: offsetB, length: countB));
+                bufB.AsSpan(start: offsetB, length: countB)
+            );
         }
 #else
         bool areEqual = true;

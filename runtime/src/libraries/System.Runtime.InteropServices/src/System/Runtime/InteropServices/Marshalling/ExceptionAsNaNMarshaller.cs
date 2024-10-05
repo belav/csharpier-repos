@@ -9,7 +9,11 @@ namespace System.Runtime.InteropServices.Marshalling
     /// Converts all exceptions to <see cref="IFloatingPointIeee754{T}.NaN"/>.
     /// </summary>
     /// <typeparam name="T">The unmanaged type to return the <c>NaN</c> value for.</typeparam>
-    [CustomMarshaller(typeof(Exception), MarshalMode.UnmanagedToManagedOut, typeof(ExceptionAsNaNMarshaller<>))]
+    [CustomMarshaller(
+        typeof(Exception),
+        MarshalMode.UnmanagedToManagedOut,
+        typeof(ExceptionAsNaNMarshaller<>)
+    )]
     public static class ExceptionAsNaNMarshaller<T>
         where T : unmanaged, IFloatingPointIeee754<T>
     {

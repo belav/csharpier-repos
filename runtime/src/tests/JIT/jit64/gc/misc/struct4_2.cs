@@ -23,7 +23,9 @@ public class Test_struct4_2
     [Fact]
     public static void TestEntryPoint()
     {
-        S sM, sM2, sM3;
+        S sM,
+            sM2,
+            sM3;
 
         sM.str = "test";
         sM2.str = "test2";

@@ -15,11 +15,9 @@ public class TestOperationReporter : IOperationReporter
         _output = output;
     }
 
-    public IReadOnlyList<(LogLevel Level, string Message)> Messages
-        => _messages;
+    public IReadOnlyList<(LogLevel Level, string Message)> Messages => _messages;
 
-    public void Clear()
-        => _messages.Clear();
+    public void Clear() => _messages.Clear();
 
     public void WriteInformation(string message)
     {

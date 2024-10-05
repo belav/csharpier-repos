@@ -16,13 +16,13 @@ namespace System.Linq.Tests
             {
                 new { Name = "Tim", Score = 90 },
                 new { Name = "Robert", Score = 45 },
-                new { Name = "Prakash", Score = 99 }
+                new { Name = "Prakash", Score = 99 },
             };
             var expected = new[]
             {
                 new { Name = "Prakash", Score = 99 },
                 new { Name = "Robert", Score = 45 },
-                new { Name = "Tim", Score = 90 }
+                new { Name = "Tim", Score = 90 },
             };
 
             Assert.Equal(expected, source.AsQueryable().OrderBy(e => e.Name, null));
@@ -34,7 +34,10 @@ namespace System.Linq.Tests
             string[] source = { "Prakash", "Alpha", "dan", "DAN", "Prakash" };
             string[] expected = { "Alpha", "dan", "DAN", "Prakash", "Prakash" };
 
-            Assert.Equal(expected, source.AsQueryable().OrderBy(e => e, StringComparer.OrdinalIgnoreCase));
+            Assert.Equal(
+                expected,
+                source.AsQueryable().OrderBy(e => e, StringComparer.OrdinalIgnoreCase)
+            );
         }
 
         [Fact]
@@ -57,21 +60,34 @@ namespace System.Linq.Tests
         public void NullKeySelector()
         {
             Expression<Func<DateTime, int>> keySelector = null;
-            AssertExtensions.Throws<ArgumentNullException>("keySelector", () => Enumerable.Empty<DateTime>().AsQueryable().OrderBy(keySelector));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "keySelector",
+                () => Enumerable.Empty<DateTime>().AsQueryable().OrderBy(keySelector)
+            );
         }
 
         [Fact]
         public void NullSourceComparer()
         {
             IQueryable<int> source = null;
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.OrderBy(i => i, Comparer<int>.Default));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.OrderBy(i => i, Comparer<int>.Default)
+            );
         }
 
         [Fact]
         public void NullKeySelectorComparer()
         {
             Expression<Func<DateTime, int>> keySelector = null;
-            AssertExtensions.Throws<ArgumentNullException>("keySelector", () => Enumerable.Empty<DateTime>().AsQueryable().OrderBy(keySelector, Comparer<int>.Default));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "keySelector",
+                () =>
+                    Enumerable
+                        .Empty<DateTime>()
+                        .AsQueryable()
+                        .OrderBy(keySelector, Comparer<int>.Default)
+            );
         }
 
         [Fact]
@@ -84,7 +100,10 @@ namespace System.Linq.Tests
         [Fact]
         public void OrderBy2()
         {
-            var count = new[] { 0, 1, 2 }.AsQueryable().OrderBy(n => n, Comparer<int>.Default).Count();
+            var count = new[] { 0, 1, 2 }
+                .AsQueryable()
+                .OrderBy(n => n, Comparer<int>.Default)
+                .Count();
             Assert.Equal(3, count);
         }
     }

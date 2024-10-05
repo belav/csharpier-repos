@@ -39,7 +39,8 @@ internal sealed class RuntimeCompilationFileProvider
             var message = Resources.FormatFileProvidersAreRequired(
                 typeof(MvcRazorRuntimeCompilationOptions).FullName,
                 nameof(MvcRazorRuntimeCompilationOptions.FileProviders),
-                typeof(IFileProvider).FullName);
+                typeof(IFileProvider).FullName
+            );
             throw new InvalidOperationException(message);
         }
         else if (fileProviders.Count == 1)

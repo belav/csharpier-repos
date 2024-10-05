@@ -28,7 +28,10 @@ internal sealed class JwtIssuer
 
         identity.AddClaim(new Claim(JwtRegisteredClaimNames.Sub, options.Name));
 
-        var id = Guid.NewGuid().ToString().GetHashCode().ToString("x", CultureInfo.InvariantCulture);
+        var id = Guid.NewGuid()
+            .ToString()
+            .GetHashCode()
+            .ToString("x", CultureInfo.InvariantCulture);
         identity.AddClaim(new Claim(JwtRegisteredClaimNames.Jti, id));
 
         if (options.Scopes is { } scopesToAdd)
@@ -50,14 +53,27 @@ internal sealed class JwtIssuer
         // creator methods and constructors don't provide a way of setting multiple
         // audiences. Instead, we have to register an `aud` claim for each audience
         // we want to add so that the multiple audiences are populated correctly.
-        if (options.Audiences is { Count: > 0} audiences)
+        if (options.Audiences is { Count: > 0 } audiences)
         {
-            identity.AddClaims(audiences.Select(aud => new Claim(JwtRegisteredClaimNames.Aud, aud)));
+            identity.AddClaims(
+                audiences.Select(aud => new Claim(JwtRegisteredClaimNames.Aud, aud))
+            );
         }
 
         var handler = new JwtSecurityTokenHandler();
-        var jwtSigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256Signature);
-        var jwtToken = handler.CreateJwtSecurityToken(Issuer, audience: null, identity, options.NotBefore, options.ExpiresOn, issuedAt: DateTime.UtcNow, jwtSigningCredentials);
+        var jwtSigningCredentials = new SigningCredentials(
+            _signingKey,
+            SecurityAlgorithms.HmacSha256Signature
+        );
+        var jwtToken = handler.CreateJwtSecurityToken(
+            Issuer,
+            audience: null,
+            identity,
+            options.NotBefore,
+            options.ExpiresOn,
+            issuedAt: DateTime.UtcNow,
+            jwtSigningCredentials
+        );
         return jwtToken;
     }
 
@@ -77,9 +93,13 @@ internal sealed class JwtIssuer
             IssuerSigningKey = _signingKey,
             ValidateAudience = false,
             ValidateIssuer = false,
-            ValidateIssuerSigningKey = true
+            ValidateIssuerSigningKey = true,
         };
-        if (handler.ValidateToken(encodedToken, tokenValidationParameters, out _).Identity?.IsAuthenticated == true)
+        if (
+            handler
+                .ValidateToken(encodedToken, tokenValidationParameters, out _)
+                .Identity?.IsAuthenticated == true
+        )
         {
             return true;
         }

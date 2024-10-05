@@ -12,7 +12,11 @@ namespace System.Diagnostics.Tracing
     {
         [NonEvent]
         [LibraryImport(RuntimeHelpers.QCall)]
-        private static partial void LogContentionLockCreated(nint LockID, nint AssociatedObjectID, ushort ClrInstanceID);
+        private static partial void LogContentionLockCreated(
+            nint LockID,
+            nint AssociatedObjectID,
+            ushort ClrInstanceID
+        );
 
         [NonEvent]
         [LibraryImport(RuntimeHelpers.QCall)]
@@ -21,38 +25,66 @@ namespace System.Diagnostics.Tracing
             ushort ClrInstanceID,
             nint LockID,
             nint AssociatedObjectID,
-            ulong LockOwnerThreadID);
+            ulong LockOwnerThreadID
+        );
 
         [NonEvent]
         [LibraryImport(RuntimeHelpers.QCall)]
         private static partial void LogContentionStop(
             ContentionFlagsMap ContentionFlags,
             ushort ClrInstanceID,
-            double DurationNs);
+            double DurationNs
+        );
 
         [NonEvent]
         [LibraryImport(RuntimeHelpers.QCall)]
-        private static partial void LogThreadPoolWorkerThreadStart(uint ActiveWorkerThreadCount, uint RetiredWorkerThreadCount, ushort ClrInstanceID);
+        private static partial void LogThreadPoolWorkerThreadStart(
+            uint ActiveWorkerThreadCount,
+            uint RetiredWorkerThreadCount,
+            ushort ClrInstanceID
+        );
 
         [NonEvent]
         [LibraryImport(RuntimeHelpers.QCall)]
-        private static partial void LogThreadPoolWorkerThreadStop(uint ActiveWorkerThreadCount, uint RetiredWorkerThreadCount, ushort ClrInstanceID);
+        private static partial void LogThreadPoolWorkerThreadStop(
+            uint ActiveWorkerThreadCount,
+            uint RetiredWorkerThreadCount,
+            ushort ClrInstanceID
+        );
 
         [NonEvent]
         [LibraryImport(RuntimeHelpers.QCall)]
-        private static partial void LogThreadPoolWorkerThreadWait(uint ActiveWorkerThreadCount, uint RetiredWorkerThreadCount, ushort ClrInstanceID);
+        private static partial void LogThreadPoolWorkerThreadWait(
+            uint ActiveWorkerThreadCount,
+            uint RetiredWorkerThreadCount,
+            ushort ClrInstanceID
+        );
 
         [NonEvent]
         [LibraryImport(RuntimeHelpers.QCall)]
-        private static partial void LogThreadPoolMinMaxThreads(ushort MinWorkerThreads, ushort MaxWorkerThreads, ushort MinIOCompletionThreads, ushort MaxIOCompletionThreads, ushort ClrInstanceID);
+        private static partial void LogThreadPoolMinMaxThreads(
+            ushort MinWorkerThreads,
+            ushort MaxWorkerThreads,
+            ushort MinIOCompletionThreads,
+            ushort MaxIOCompletionThreads,
+            ushort ClrInstanceID
+        );
 
         [NonEvent]
         [LibraryImport(RuntimeHelpers.QCall)]
-        private static partial void LogThreadPoolWorkerThreadAdjustmentSample(double Throughput, ushort ClrInstanceID);
+        private static partial void LogThreadPoolWorkerThreadAdjustmentSample(
+            double Throughput,
+            ushort ClrInstanceID
+        );
 
         [NonEvent]
         [LibraryImport(RuntimeHelpers.QCall)]
-        private static partial void LogThreadPoolWorkerThreadAdjustmentAdjustment(double AverageThroughput, uint NewWorkerThreadCount, ThreadAdjustmentReasonMap Reason, ushort ClrInstanceID);
+        private static partial void LogThreadPoolWorkerThreadAdjustmentAdjustment(
+            double AverageThroughput,
+            uint NewWorkerThreadCount,
+            ThreadAdjustmentReasonMap Reason,
+            ushort ClrInstanceID
+        );
 
         [NonEvent]
         [LibraryImport(RuntimeHelpers.QCall)]
@@ -67,7 +99,8 @@ namespace System.Diagnostics.Tracing
             double Confidence,
             double NewControlSetting,
             ushort NewThreadWaveMagnitude,
-            ushort ClrInstanceID);
+            ushort ClrInstanceID
+        );
 
         [NonEvent]
         [LibraryImport(RuntimeHelpers.QCall)]
@@ -75,14 +108,16 @@ namespace System.Diagnostics.Tracing
             IntPtr NativeOverlapped,
             IntPtr Overlapped,
             [MarshalAs(UnmanagedType.Bool)] bool MultiDequeues,
-            ushort ClrInstanceID);
+            ushort ClrInstanceID
+        );
 
         [NonEvent]
         [LibraryImport(RuntimeHelpers.QCall)]
         private static partial void LogThreadPoolIODequeue(
             IntPtr NativeOverlapped,
             IntPtr Overlapped,
-            ushort ClrInstanceID);
+            ushort ClrInstanceID
+        );
 
         [NonEvent]
         [LibraryImport(RuntimeHelpers.QCall)]
@@ -96,6 +131,7 @@ namespace System.Diagnostics.Tracing
         private static partial void LogThreadPoolIOPack(
             IntPtr NativeOverlapped,
             IntPtr Overlapped,
-            ushort ClrInstanceID);
+            ushort ClrInstanceID
+        );
     }
 }

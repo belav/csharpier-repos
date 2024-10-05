@@ -18,7 +18,10 @@ namespace System.ServiceModel.Activities.Presentation
         public static void RegisterMetadata(AttributeTableBuilder builder)
         {
             Type type = typeof(TransactedReceiveScope);
-            builder.AddCustomAttributes(type, new DesignerAttribute(typeof(TransactedReceiveScopeDesigner)));
+            builder.AddCustomAttributes(
+                type,
+                new DesignerAttribute(typeof(TransactedReceiveScopeDesigner))
+            );
             builder.AddCustomAttributes(type, type.GetProperty("Body"), BrowsableAttribute.No);
             builder.AddCustomAttributes(type, type.GetProperty("Request"), BrowsableAttribute.No);
             builder.AddCustomAttributes(type, type.GetProperty("Variables"), BrowsableAttribute.No);

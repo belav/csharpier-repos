@@ -53,14 +53,16 @@ public static class HostingEnvironmentExtensions
     /// <returns>True if the specified name is the same as the current environment, otherwise false.</returns>
     public static bool IsEnvironment(
         this IHostingEnvironment hostingEnvironment,
-        string environmentName)
+        string environmentName
+    )
     {
         ArgumentNullException.ThrowIfNull(hostingEnvironment);
 
         return string.Equals(
             hostingEnvironment.EnvironmentName,
             environmentName,
-            StringComparison.OrdinalIgnoreCase);
+            StringComparison.OrdinalIgnoreCase
+        );
     }
 }
 #pragma warning restore CS0618 // Type or member is obsolete

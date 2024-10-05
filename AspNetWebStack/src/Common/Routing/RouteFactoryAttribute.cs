@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-
 #if ASPNETWEBAPI
 using TRouteDictionary = System.Collections.Generic.IDictionary<string, object>;
 #else
@@ -17,7 +16,11 @@ namespace System.Web.Mvc.Routing
 #endif
 {
     /// <summary>Represents an attribute route that may contain custom constraints.</summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = false, AllowMultiple = true)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Method,
+        Inherited = false,
+        AllowMultiple = true
+    )]
     public abstract class RouteFactoryAttribute : Attribute, IDirectRouteFactory
     {
         private readonly string _template;

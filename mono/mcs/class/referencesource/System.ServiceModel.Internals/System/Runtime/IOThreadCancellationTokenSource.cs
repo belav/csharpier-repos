@@ -22,9 +22,7 @@ namespace System.Runtime
         }
 
         public IOThreadCancellationTokenSource(int timeout)
-            : this(TimeSpan.FromMilliseconds(timeout))
-        {
-        }
+            : this(TimeSpan.FromMilliseconds(timeout)) { }
 
         // NOTE: this property is NOT threadsafe. Potential race condition could be caused if you are accessing it
         // via different threads.

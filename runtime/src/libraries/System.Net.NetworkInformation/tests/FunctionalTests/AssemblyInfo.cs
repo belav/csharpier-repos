@@ -3,4 +3,7 @@
 
 using Xunit;
 
-[assembly: SkipOnPlatform(TestPlatforms.Browser, "System.Net.NetworkInformation is not supported on Browser")]
+[assembly: SkipOnPlatform(
+    TestPlatforms.Browser,
+    "System.Net.NetworkInformation is not supported on Browser"
+)]

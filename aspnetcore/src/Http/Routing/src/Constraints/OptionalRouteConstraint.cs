@@ -41,10 +41,10 @@ internal class OptionalRouteConstraint : IRouteConstraint
         IRouter? route,
         string routeKey,
         RouteValueDictionary values,
-        RouteDirection routeDirection)
+        RouteDirection routeDirection
+    )
 #else
-        string routeKey,
-        RouteValueDictionary values)
+        string routeKey, RouteValueDictionary values)
 #endif
     {
         ArgumentNullException.ThrowIfNull(routeKey);
@@ -54,13 +54,11 @@ internal class OptionalRouteConstraint : IRouteConstraint
         {
             return InnerConstraint.Match(
 #if !COMPONENTS
-                httpContext,
-                route,
+                httpContext, route,
 #endif
                 routeKey,
 #if !COMPONENTS
-                values,
-                routeDirection);
+                values, routeDirection);
 #else
                 values);
 #endif

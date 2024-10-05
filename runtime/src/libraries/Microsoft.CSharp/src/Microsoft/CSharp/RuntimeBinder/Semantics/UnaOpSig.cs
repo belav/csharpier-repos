@@ -11,11 +11,15 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
     {
         private class UnaOpSig
         {
-            protected UnaOpSig()
-            {
-            }
+            protected UnaOpSig() { }
 
-            public UnaOpSig(PredefinedType pt, UnaOpMask grfuom, int cuosSkip, PfnBindUnaOp pfn, UnaOpFuncKind fnkind)
+            public UnaOpSig(
+                PredefinedType pt,
+                UnaOpMask grfuom,
+                int cuosSkip,
+                PfnBindUnaOp pfn,
+                UnaOpFuncKind fnkind
+            )
             {
                 this.pt = pt;
                 this.grfuom = grfuom;
@@ -23,6 +27,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 this.pfn = pfn;
                 this.fnkind = fnkind;
             }
+
             public PredefinedType pt;
             public UnaOpMask grfuom;
             public int cuosSkip;
@@ -46,6 +51,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 _grflt = grflt;
                 this.fnkind = fnkind;
             }
+
             /***************************************************************************************************
                 Set the values of the UnaOpFullSig from the given UnaOpSig. The ExpressionBinder is needed to get
                 the predefined type. Returns true iff the predef type is found.
@@ -62,10 +68,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 _type = pt != PredefinedType.PT_UNDEFINEDINDEX ? GetPredefindType(pt) : null;
                 _grflt = LiftFlags.None;
             }
+
             public bool FPreDef()
             {
                 return pt != PredefinedType.PT_UNDEFINEDINDEX;
             }
+
             public bool isLifted()
             {
                 // This is a unary operator, so the second argument should be neither lifted nor converted.
@@ -76,9 +84,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     return false;
                 }
                 // We can't both convert and lift.
-                Debug.Assert(((_grflt & LiftFlags.Lift1) == 0) || ((_grflt & LiftFlags.Convert1) == 0));
+                Debug.Assert(
+                    ((_grflt & LiftFlags.Lift1) == 0) || ((_grflt & LiftFlags.Convert1) == 0)
+                );
                 return true;
             }
+
             public bool Convert()
             {
                 return (_grflt & LiftFlags.Convert1) != 0;

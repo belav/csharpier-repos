@@ -78,7 +78,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
 
             void ICollection<TValue>.Clear() => throw new NotSupportedException();
 
-            bool ICollection<TValue>.Contains(TValue item) => ((IList<TValue>)this).IndexOf(item) >= 0;
+            bool ICollection<TValue>.Contains(TValue item) =>
+                ((IList<TValue>)this).IndexOf(item) >= 0;
 
             void ICollection<TValue>.CopyTo(TValue[] array, int arrayIndex)
             {
@@ -132,9 +133,7 @@ namespace Microsoft.EntityFrameworkCore.Utilities
                 /// <summary>
                 /// Releases all resources used by the <see cref="OrderedDictionary{TKey, TValue}.ValueCollection.Enumerator" />.
                 /// </summary>
-                public void Dispose()
-                {
-                }
+                public void Dispose() { }
 
                 /// <summary>
                 /// Advances the enumerator to the next element of the <see cref="OrderedDictionary{TKey, TValue}.ValueCollection" />.

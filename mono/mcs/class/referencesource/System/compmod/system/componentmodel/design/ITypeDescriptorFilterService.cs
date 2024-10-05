@@ -1,17 +1,18 @@
 //------------------------------------------------------------------------------
 // <copyright file="ITypeDescriptorFilterService.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel.Design {
-    using System.Runtime.InteropServices;
-    using System.Diagnostics;
+namespace System.ComponentModel.Design
+{
     using System;
     using System.Collections;
     using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Runtime.InteropServices;
 
     /// <devdoc>
     ///    <para>
@@ -19,8 +20,8 @@ namespace System.ComponentModel.Design {
     ///       provides.
     ///    </para>
     /// </devdoc>
-    public interface ITypeDescriptorFilterService {
-
+    public interface ITypeDescriptorFilterService
+    {
         /// <devdoc>
         ///    <para>
         ///       Provides a way to filter the attributes from a component that are displayed to the user.
@@ -43,4 +44,3 @@ namespace System.ComponentModel.Design {
         bool FilterProperties(IComponent component, IDictionary properties);
     }
 }
-

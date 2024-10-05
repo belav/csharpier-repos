@@ -29,8 +29,10 @@ public class BinderTypeModelBinder : IModelBinder
             throw new ArgumentException(
                 Resources.FormatBinderType_MustBeIModelBinder(
                     binderType.FullName,
-                    typeof(IModelBinder).FullName),
-                nameof(binderType));
+                    typeof(IModelBinder).FullName
+                ),
+                nameof(binderType)
+            );
         }
 
         _factory = ActivatorUtilities.CreateFactory(binderType, Type.EmptyTypes);

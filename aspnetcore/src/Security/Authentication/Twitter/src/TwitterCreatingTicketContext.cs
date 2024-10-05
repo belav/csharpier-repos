@@ -35,7 +35,8 @@ public class TwitterCreatingTicketContext : ResultContext<TwitterOptions>
         string screenName,
         string accessToken,
         string accessTokenSecret,
-        JsonElement user)
+        JsonElement user
+    )
         : base(context, scheme, options)
     {
         UserId = userId;

@@ -9,7 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Identity.FunctionalTests;
 
-public abstract class RegistrationTests<TStartup, TContext> : IClassFixture<ServerFactory<TStartup, TContext>>
+public abstract class RegistrationTests<TStartup, TContext>
+    : IClassFixture<ServerFactory<TStartup, TContext>>
     where TStartup : class
     where TContext : DbContext
 {
@@ -24,11 +25,15 @@ public abstract class RegistrationTests<TStartup, TContext> : IClassFixture<Serv
     public async Task CanRegisterAUser()
     {
         // Arrange
-        void ConfigureTestServices(IServiceCollection services) { return; };
+        void ConfigureTestServices(IServiceCollection services)
+        {
+            return;
+        }
+        ;
 
         var client = ServerFactory
-                .WithWebHostBuilder(whb => whb.ConfigureServices(ConfigureTestServices))
-                .CreateClient();
+            .WithWebHostBuilder(whb => whb.ConfigureServices(ConfigureTestServices))
+            .CreateClient();
 
         var userName = $"{Guid.NewGuid()}@example.com";
         var password = $"[PLACEHOLDER]-1a";
@@ -41,10 +46,15 @@ public abstract class RegistrationTests<TStartup, TContext> : IClassFixture<Serv
     public async Task CanRegisterAUserWithRequiredConfirmation()
     {
         // Arrange
-        void ConfigureTestServices(IServiceCollection services) { services.Configure<IdentityOptions>(o => o.SignIn.RequireConfirmedAccount = true); };
+        void ConfigureTestServices(IServiceCollection services)
+        {
+            services.Configure<IdentityOptions>(o => o.SignIn.RequireConfirmedAccount = true);
+        }
+        ;
 
-        var server = ServerFactory
-                .WithWebHostBuilder(whb => whb.ConfigureServices(ConfigureTestServices));
+        var server = ServerFactory.WithWebHostBuilder(whb =>
+            whb.ConfigureServices(ConfigureTestServices)
+        );
         var client = server.CreateClient();
         var client2 = server.CreateClient();
 
@@ -52,7 +62,11 @@ public abstract class RegistrationTests<TStartup, TContext> : IClassFixture<Serv
         var password = $"[PLACEHOLDER]-1a";
 
         // Act & Assert
-        var register = await UserStories.RegisterNewUserAsyncWithConfirmation(client, userName, password);
+        var register = await UserStories.RegisterNewUserAsyncWithConfirmation(
+            client,
+            userName,
+            password
+        );
 
         // Since we aren't confirmed yet, login should fail until we confirm
         await UserStories.LoginFailsWithWrongPasswordAsync(client, userName, password);
@@ -62,8 +76,8 @@ public abstract class RegistrationTests<TStartup, TContext> : IClassFixture<Serv
 
     private class FakeEmailSender : IEmailSender
     {
-        public Task SendEmailAsync(string email, string subject, string htmlMessage)
-            => Task.CompletedTask;
+        public Task SendEmailAsync(string email, string subject, string htmlMessage) =>
+            Task.CompletedTask;
     }
 
     [Fact]
@@ -74,10 +88,12 @@ public abstract class RegistrationTests<TStartup, TContext> : IClassFixture<Serv
         {
             services.Configure<IdentityOptions>(o => o.SignIn.RequireConfirmedAccount = true);
             services.AddSingleton<IEmailSender, FakeEmailSender>();
-        };
+        }
+        ;
 
-        var server = ServerFactory
-                .WithWebHostBuilder(whb => whb.ConfigureServices(ConfigureTestServices));
+        var server = ServerFactory.WithWebHostBuilder(whb =>
+            whb.ConfigureServices(ConfigureTestServices)
+        );
         var client = server.CreateClient();
         var client2 = server.CreateClient();
 
@@ -85,7 +101,12 @@ public abstract class RegistrationTests<TStartup, TContext> : IClassFixture<Serv
         var password = $"[PLACEHOLDER]-1a";
 
         // Act & Assert
-        var register = await UserStories.RegisterNewUserAsyncWithConfirmation(client, userName, password, hasRealEmailSender: true);
+        var register = await UserStories.RegisterNewUserAsyncWithConfirmation(
+            client,
+            userName,
+            password,
+            hasRealEmailSender: true
+        );
 
         // Since we aren't confirmed yet, login should fail until we confirm
         await UserStories.LoginFailsWithWrongPasswordAsync(client, userName, password);
@@ -99,8 +120,8 @@ public abstract class RegistrationTests<TStartup, TContext> : IClassFixture<Serv
             services.SetupGlobalAuthorizeFilter();
 
         var client = ServerFactory
-                .WithWebHostBuilder(whb => whb.ConfigureServices(ConfigureTestServices))
-                .CreateClient();
+            .WithWebHostBuilder(whb => whb.ConfigureServices(ConfigureTestServices))
+            .CreateClient();
 
         var userName = $"{Guid.NewGuid()}@example.com";
         var password = $"[PLACEHOLDER]-1a";
@@ -114,8 +135,7 @@ public abstract class RegistrationTests<TStartup, TContext> : IClassFixture<Serv
     {
         // Arrange
         void ConfigureTestServices(IServiceCollection services) =>
-            services
-                .SetupTestThirdPartyLogin();
+            services.SetupTestThirdPartyLogin();
 
         var client = ServerFactory
             .WithWebHostBuilder(whb => whb.ConfigureServices(ConfigureTestServices))
@@ -135,8 +155,9 @@ public abstract class RegistrationTests<TStartup, TContext> : IClassFixture<Serv
         // Arrange
         void ConfigureTestServices(IServiceCollection services)
         {
-            services.Configure<IdentityOptions>(o => o.SignIn.RequireConfirmedAccount = true)
-                    .SetupTestThirdPartyLogin();
+            services
+                .Configure<IdentityOptions>(o => o.SignIn.RequireConfirmedAccount = true)
+                .SetupTestThirdPartyLogin();
         }
 
         var client = ServerFactory
@@ -148,7 +169,11 @@ public abstract class RegistrationTests<TStartup, TContext> : IClassFixture<Serv
         var email = $"{guid}@example.com";
 
         // Act & Assert
-        await UserStories.RegisterNewUserWithSocialLoginWithConfirmationAsync(client, userName, email);
+        await UserStories.RegisterNewUserWithSocialLoginWithConfirmationAsync(
+            client,
+            userName,
+            email
+        );
     }
 
     [Fact]
@@ -160,8 +185,8 @@ public abstract class RegistrationTests<TStartup, TContext> : IClassFixture<Serv
         {
             services.SetupTestEmailSender(emailSender);
             services
-                    .Configure<IdentityOptions>(o => o.SignIn.RequireConfirmedAccount = true)
-                    .SetupTestThirdPartyLogin();
+                .Configure<IdentityOptions>(o => o.SignIn.RequireConfirmedAccount = true)
+                .SetupTestThirdPartyLogin();
         }
 
         var client = ServerFactory
@@ -173,7 +198,12 @@ public abstract class RegistrationTests<TStartup, TContext> : IClassFixture<Serv
         var email = $"{guid}@example.com";
 
         // Act & Assert
-        await UserStories.RegisterNewUserWithSocialLoginWithConfirmationAsync(client, userName, email, hasRealEmailSender: true);
+        await UserStories.RegisterNewUserWithSocialLoginWithConfirmationAsync(
+            client,
+            userName,
+            email,
+            hasRealEmailSender: true
+        );
         Assert.Single(emailSender.SentEmails);
     }
 
@@ -182,8 +212,7 @@ public abstract class RegistrationTests<TStartup, TContext> : IClassFixture<Serv
     {
         // Arrange
         void ConfigureTestServices(IServiceCollection services) =>
-            services
-                .SetupTestThirdPartyLogin();
+            services.SetupTestThirdPartyLogin();
 
         var client = ServerFactory
             .WithWebHostBuilder(whb => whb.ConfigureServices(ConfigureTestServices))
@@ -194,7 +223,11 @@ public abstract class RegistrationTests<TStartup, TContext> : IClassFixture<Serv
         var email = $"{guid}@example.com";
 
         // Act & Assert
-        await UserStories.RegisterNewUserWithSocialLoginAsyncViaRegisterPage(client, userName, email);
+        await UserStories.RegisterNewUserWithSocialLoginAsyncViaRegisterPage(
+            client,
+            userName,
+            email
+        );
     }
 
     [Fact]
@@ -202,9 +235,7 @@ public abstract class RegistrationTests<TStartup, TContext> : IClassFixture<Serv
     {
         // Arrange
         void ConfigureTestServices(IServiceCollection services) =>
-            services
-                .SetupTestThirdPartyLogin()
-                .SetupGlobalAuthorizeFilter();
+            services.SetupTestThirdPartyLogin().SetupGlobalAuthorizeFilter();
 
         var client = ServerFactory
             .WithWebHostBuilder(whb => whb.ConfigureServices(ConfigureTestServices))
@@ -227,8 +258,11 @@ public abstract class RegistrationTests<TStartup, TContext> : IClassFixture<Serv
         void ConfigureTestServices(IServiceCollection services) =>
             services
                 .SetupTestThirdPartyLogin()
-                .SetupGetUserClaimsPrincipal(user =>
-                    authenticationMethod = user.FindFirstValue(ClaimTypes.AuthenticationMethod), IdentityConstants.ApplicationScheme);
+                .SetupGetUserClaimsPrincipal(
+                    user =>
+                        authenticationMethod = user.FindFirstValue(ClaimTypes.AuthenticationMethod),
+                    IdentityConstants.ApplicationScheme
+                );
 
         var client = ServerFactory
             .WithWebHostBuilder(whb => whb.ConfigureServices(ConfigureTestServices))

@@ -4,24 +4,25 @@
 
 namespace System.ServiceModel.Configuration
 {
-    using System.Net;
     using System.Configuration;
+    using System.Net;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
 
-    [ObsoleteAttribute ("PeerChannel feature is obsolete and will be removed in the future.", false)]
+    [ObsoleteAttribute("PeerChannel feature is obsolete and will be removed in the future.", false)]
     public partial class PeerTransportElement : BindingElementExtensionElement
     {
-        public PeerTransportElement()
-        {
-        }
+        public PeerTransportElement() { }
 
         public override Type BindingElementType
         {
             get { return typeof(PeerTransportBindingElement); }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.ListenIPAddress, DefaultValue = PeerTransportDefaults.ListenIPAddress)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ListenIPAddress,
+            DefaultValue = PeerTransportDefaults.ListenIPAddress
+        )]
         [System.ComponentModel.TypeConverter(typeof(PeerTransportListenAddressConverter))]
         [PeerTransportListenAddressValidator()]
         public IPAddress ListenIPAddress
@@ -30,7 +31,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.ListenIPAddress] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxBufferPoolSize, DefaultValue = TransportDefaults.MaxBufferPoolSize)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxBufferPoolSize,
+            DefaultValue = TransportDefaults.MaxBufferPoolSize
+        )]
         [LongValidator(MinValue = 1)]
         public long MaxBufferPoolSize
         {
@@ -38,7 +42,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.MaxBufferPoolSize] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxReceivedMessageSize, DefaultValue = TransportDefaults.MaxReceivedMessageSize)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxReceivedMessageSize,
+            DefaultValue = TransportDefaults.MaxReceivedMessageSize
+        )]
         [LongValidator(MinValue = 1)]
         public long MaxReceivedMessageSize
         {
@@ -46,8 +53,14 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.MaxReceivedMessageSize] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Port, DefaultValue = PeerTransportDefaults.Port)]
-        [IntegerValidator(MinValue = PeerTransportConstants.MinPort, MaxValue = PeerTransportConstants.MaxPort)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Port,
+            DefaultValue = PeerTransportDefaults.Port
+        )]
+        [IntegerValidator(
+            MinValue = PeerTransportConstants.MinPort,
+            MaxValue = PeerTransportConstants.MaxPort
+        )]
         public int Port
         {
             get { return (int)base[ConfigurationStrings.Port]; }
@@ -96,10 +109,19 @@ namespace System.ServiceModel.Configuration
         {
             base.InitializeFrom(bindingElement);
             PeerTransportBindingElement binding = (PeerTransportBindingElement)bindingElement;
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ListenIPAddress, binding.ListenIPAddress);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.ListenIPAddress,
+                binding.ListenIPAddress
+            );
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.Port, binding.Port);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxBufferPoolSize, binding.MaxBufferPoolSize);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxReceivedMessageSize, binding.MaxReceivedMessageSize);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.MaxBufferPoolSize,
+                binding.MaxBufferPoolSize
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.MaxReceivedMessageSize,
+                binding.MaxReceivedMessageSize
+            );
             this.Security.InitializeFrom(binding.Security);
         }
     }

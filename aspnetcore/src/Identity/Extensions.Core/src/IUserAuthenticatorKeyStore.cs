@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides an abstraction for a store which stores info about user's authenticator.
 /// </summary>
 /// <typeparam name="TUser">The type encapsulating a user.</typeparam>
-public interface IUserAuthenticatorKeyStore<TUser> : IUserStore<TUser> where TUser : class
+public interface IUserAuthenticatorKeyStore<TUser> : IUserStore<TUser>
+    where TUser : class
 {
     /// <summary>
     /// Sets the authenticator key for the specified <paramref name="user"/>.

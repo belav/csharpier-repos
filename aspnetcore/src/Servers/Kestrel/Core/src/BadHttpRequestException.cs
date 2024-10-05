@@ -10,14 +10,20 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core;
 /// <summary>
 /// An exception thrown when a malformed http request has been received.
 /// </summary>
-[Obsolete("Moved to Microsoft.AspNetCore.Http.BadHttpRequestException. See https://aka.ms/badhttprequestexception for details.")] // Never remove.
+[Obsolete(
+    "Moved to Microsoft.AspNetCore.Http.BadHttpRequestException. See https://aka.ms/badhttprequestexception for details."
+)] // Never remove.
 public sealed class BadHttpRequestException : Microsoft.AspNetCore.Http.BadHttpRequestException
 {
     internal BadHttpRequestException(string message, int statusCode, RequestRejectionReason reason)
-        : this(message, statusCode, reason, null)
-    { }
+        : this(message, statusCode, reason, null) { }
 
-    internal BadHttpRequestException(string message, int statusCode, RequestRejectionReason reason, HttpMethod? requiredMethod)
+    internal BadHttpRequestException(
+        string message,
+        int statusCode,
+        RequestRejectionReason reason,
+        HttpMethod? requiredMethod
+    )
         : base(message, statusCode)
     {
         Reason = reason;
@@ -31,7 +37,10 @@ public sealed class BadHttpRequestException : Microsoft.AspNetCore.Http.BadHttpR
     /// <summary>
     /// Gets the HTTP status code for this exception.
     /// </summary>
-    public new int StatusCode { get => base.StatusCode; }
+    public new int StatusCode
+    {
+        get => base.StatusCode;
+    }
 
     internal StringValues AllowedHeader { get; }
 

@@ -23,7 +23,8 @@ public class LoggingOptions : ILoggingOptions
     /// </summary>
     public virtual void Initialize(IDbContextOptions options)
     {
-        var coreOptions = options.FindExtension<CoreOptionsExtension>() ?? new CoreOptionsExtension();
+        var coreOptions =
+            options.FindExtension<CoreOptionsExtension>() ?? new CoreOptionsExtension();
 
         IsSensitiveDataLoggingEnabled = coreOptions.IsSensitiveDataLoggingEnabled;
         DetailedErrorsEnabled = coreOptions.DetailedErrorsEnabled;
@@ -38,36 +39,55 @@ public class LoggingOptions : ILoggingOptions
     /// </summary>
     public virtual void Validate(IDbContextOptions options)
     {
-        var coreOptions = options.FindExtension<CoreOptionsExtension>() ?? new CoreOptionsExtension();
+        var coreOptions =
+            options.FindExtension<CoreOptionsExtension>() ?? new CoreOptionsExtension();
 
         if (IsSensitiveDataLoggingEnabled != coreOptions.IsSensitiveDataLoggingEnabled)
         {
-            Check.DebugAssert(coreOptions.InternalServiceProvider != null, "InternalServiceProvider is null");
+            Check.DebugAssert(
+                coreOptions.InternalServiceProvider != null,
+                "InternalServiceProvider is null"
+            );
 
             throw new InvalidOperationException(
                 CoreStrings.SingletonOptionChanged(
                     nameof(DbContextOptionsBuilder.EnableSensitiveDataLogging),
-                    nameof(DbContextOptionsBuilder.UseInternalServiceProvider)));
+                    nameof(DbContextOptionsBuilder.UseInternalServiceProvider)
+                )
+            );
         }
 
         if (DetailedErrorsEnabled != coreOptions.DetailedErrorsEnabled)
         {
-            Check.DebugAssert(coreOptions.InternalServiceProvider != null, "InternalServiceProvider is null");
+            Check.DebugAssert(
+                coreOptions.InternalServiceProvider != null,
+                "InternalServiceProvider is null"
+            );
 
             throw new InvalidOperationException(
                 CoreStrings.SingletonOptionChanged(
                     nameof(DbContextOptionsBuilder.EnableDetailedErrors),
-                    nameof(DbContextOptionsBuilder.UseInternalServiceProvider)));
+                    nameof(DbContextOptionsBuilder.UseInternalServiceProvider)
+                )
+            );
         }
 
-        if (WarningsConfiguration.GetServiceProviderHashCode() != coreOptions.WarningsConfiguration.GetServiceProviderHashCode())
+        if (
+            WarningsConfiguration.GetServiceProviderHashCode()
+            != coreOptions.WarningsConfiguration.GetServiceProviderHashCode()
+        )
         {
-            Check.DebugAssert(coreOptions.InternalServiceProvider != null, "InternalServiceProvider is null");
+            Check.DebugAssert(
+                coreOptions.InternalServiceProvider != null,
+                "InternalServiceProvider is null"
+            );
 
             throw new InvalidOperationException(
                 CoreStrings.SingletonOptionChanged(
                     nameof(DbContextOptionsBuilder.ConfigureWarnings),
-                    nameof(DbContextOptionsBuilder.UseInternalServiceProvider)));
+                    nameof(DbContextOptionsBuilder.UseInternalServiceProvider)
+                )
+            );
         }
     }
 

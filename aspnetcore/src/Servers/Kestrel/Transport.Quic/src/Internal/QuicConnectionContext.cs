@@ -18,6 +18,7 @@ internal partial class QuicConnectionContext : TransportMultiplexedConnection
     internal PooledStreamStack<QuicStreamContext> StreamPool;
 
     private bool _streamPoolHeartbeatInitialized;
+
     // Ticks updated once per-second in heartbeat event.
     private long _heartbeatTimestamp;
     private readonly object _poolLock = new object();
@@ -26,7 +27,8 @@ internal partial class QuicConnectionContext : TransportMultiplexedConnection
     private readonly QuicConnection _connection;
     private readonly QuicTransportContext _context;
     private readonly ILogger _log;
-    private readonly CancellationTokenSource _connectionClosedTokenSource = new CancellationTokenSource();
+    private readonly CancellationTokenSource _connectionClosedTokenSource =
+        new CancellationTokenSource();
 
     private Task? _closeTask;
     private ExceptionDispatchInfo? _abortReason;
@@ -56,7 +58,9 @@ internal partial class QuicConnectionContext : TransportMultiplexedConnection
         {
             lock (_shutdownLock)
             {
-                _closeTask ??= _connection.CloseAsync(errorCode: _context.Options.DefaultCloseErrorCode).AsTask();
+                _closeTask ??= _connection
+                    .CloseAsync(errorCode: _context.Options.DefaultCloseErrorCode)
+                    .AsTask();
             }
 
             await _closeTask;
@@ -69,7 +73,12 @@ internal partial class QuicConnectionContext : TransportMultiplexedConnection
         await _connection.DisposeAsync();
     }
 
-    public override void Abort() => Abort(new ConnectionAbortedException("The connection was aborted by the application via MultiplexedConnectionContext.Abort()."));
+    public override void Abort() =>
+        Abort(
+            new ConnectionAbortedException(
+                "The connection was aborted by the application via MultiplexedConnectionContext.Abort()."
+            )
+        );
 
     public override void Abort(ConnectionAbortedException abortReason)
     {
@@ -89,7 +98,9 @@ internal partial class QuicConnectionContext : TransportMultiplexedConnection
     }
 
     [AsyncMethodBuilder(typeof(PoolingAsyncValueTaskMethodBuilder<>))]
-    public override async ValueTask<ConnectionContext?> AcceptAsync(CancellationToken cancellationToken = default)
+    public override async ValueTask<ConnectionContext?> AcceptAsync(
+        CancellationToken cancellationToken = default
+    )
     {
         try
         {
@@ -133,12 +144,14 @@ internal partial class QuicConnectionContext : TransportMultiplexedConnection
             _error = ex.ApplicationErrorCode;
             QuicLog.ConnectionAborted(_log, this, ex.ApplicationErrorCode.GetValueOrDefault(), ex);
 
-            ThreadPool.UnsafeQueueUserWorkItem(state =>
-            {
-                state.CancelConnectionClosedToken();
-            },
-            this,
-            preferLocal: false);
+            ThreadPool.UnsafeQueueUserWorkItem(
+                state =>
+                {
+                    state.CancelConnectionClosedToken();
+                },
+                this,
+                preferLocal: false
+            );
 
             // Throw error so consumer sees the connection is aborted by peer.
             throw new ConnectionResetException(ex.Message, ex);
@@ -152,7 +165,12 @@ internal partial class QuicConnectionContext : TransportMultiplexedConnection
                 // unexpected state. Abort connection and throw reason error.
                 if (_abortReason == null)
                 {
-                    Abort(new ConnectionAbortedException("Unexpected error when accepting stream.", ex));
+                    Abort(
+                        new ConnectionAbortedException(
+                            "Unexpected error when accepting stream.",
+                            ex
+                        )
+                    );
                 }
 
                 _abortReason!.Throw();
@@ -166,7 +184,12 @@ internal partial class QuicConnectionContext : TransportMultiplexedConnection
                 // For example, a console app makes a HTTP/3 request with HttpClient and then exits without disposing the client.
                 if (_abortReason == null)
                 {
-                    Abort(new ConnectionAbortedException("The connection timed out waiting for a response from the peer.", ex));
+                    Abort(
+                        new ConnectionAbortedException(
+                            "The connection timed out waiting for a response from the peer.",
+                            ex
+                        )
+                    );
                 }
 
                 _abortReason!.Throw();
@@ -174,7 +197,10 @@ internal partial class QuicConnectionContext : TransportMultiplexedConnection
         }
         catch (OperationCanceledException)
         {
-            Debug.Assert(cancellationToken.IsCancellationRequested, "Error requires cancellation is requested.");
+            Debug.Assert(
+                cancellationToken.IsCancellationRequested,
+                "Error requires cancellation is requested."
+            );
 
             lock (_shutdownLock)
             {
@@ -185,7 +211,9 @@ internal partial class QuicConnectionContext : TransportMultiplexedConnection
 #if DEBUG
         catch (Exception ex)
         {
-            Debug.Fail($"Unexpected exception in {nameof(QuicConnectionContext)}.{nameof(AcceptAsync)}: {ex}");
+            Debug.Fail(
+                $"Unexpected exception in {nameof(QuicConnectionContext)}.{nameof(AcceptAsync)}: {ex}"
+            );
             throw;
         }
 #endif
@@ -202,11 +230,18 @@ internal partial class QuicConnectionContext : TransportMultiplexedConnection
         }
         catch (Exception ex)
         {
-            _log.LogError(0, ex, $"Unexpected exception in {nameof(QuicConnectionContext)}.{nameof(CancelConnectionClosedToken)}.");
+            _log.LogError(
+                0,
+                ex,
+                $"Unexpected exception in {nameof(QuicConnectionContext)}.{nameof(CancelConnectionClosedToken)}."
+            );
         }
     }
 
-    public override async ValueTask<ConnectionContext> ConnectAsync(IFeatureCollection? features = null, CancellationToken cancellationToken = default)
+    public override async ValueTask<ConnectionContext> ConnectAsync(
+        IFeatureCollection? features = null,
+        CancellationToken cancellationToken = default
+    )
     {
         QuicStream quicStream;
 
@@ -215,16 +250,25 @@ internal partial class QuicConnectionContext : TransportMultiplexedConnection
         {
             if (streamDirectionFeature.CanRead)
             {
-                quicStream = await _connection.OpenOutboundStreamAsync(QuicStreamType.Bidirectional, cancellationToken);
+                quicStream = await _connection.OpenOutboundStreamAsync(
+                    QuicStreamType.Bidirectional,
+                    cancellationToken
+                );
             }
             else
             {
-                quicStream = await _connection.OpenOutboundStreamAsync(QuicStreamType.Unidirectional, cancellationToken);
+                quicStream = await _connection.OpenOutboundStreamAsync(
+                    QuicStreamType.Unidirectional,
+                    cancellationToken
+                );
             }
         }
         else
         {
-            quicStream = await _connection.OpenOutboundStreamAsync(QuicStreamType.Bidirectional, cancellationToken);
+            quicStream = await _connection.OpenOutboundStreamAsync(
+                QuicStreamType.Bidirectional,
+                cancellationToken
+            );
         }
 
         // Only a handful of control streams are created by the server and they last for the
@@ -253,10 +297,15 @@ internal partial class QuicConnectionContext : TransportMultiplexedConnection
                 var heartbeatFeature = Features.Get<IConnectionHeartbeatFeature>();
                 if (heartbeatFeature == null)
                 {
-                    throw new InvalidOperationException($"Required {nameof(IConnectionHeartbeatFeature)} not found in connection features.");
+                    throw new InvalidOperationException(
+                        $"Required {nameof(IConnectionHeartbeatFeature)} not found in connection features."
+                    );
                 }
 
-                heartbeatFeature.OnHeartbeat(static state => ((QuicConnectionContext)state).RemoveExpiredStreams(), this);
+                heartbeatFeature.OnHeartbeat(
+                    static state => ((QuicConnectionContext)state).RemoveExpiredStreams(),
+                    this
+                );
 
                 // Set timestamp for the first time. Timestamps are then updated in heartbeat.
                 var now = timeProvider.GetTimestamp();
@@ -267,7 +316,9 @@ internal partial class QuicConnectionContext : TransportMultiplexedConnection
 
             if (stream.CanReuse && StreamPool.Count < MaxStreamPoolSize)
             {
-                stream.PoolExpirationTimestamp = Volatile.Read(ref _heartbeatTimestamp) + StreamPoolExpirySeconds * timeProvider.TimestampFrequency;
+                stream.PoolExpirationTimestamp =
+                    Volatile.Read(ref _heartbeatTimestamp)
+                    + StreamPoolExpirySeconds * timeProvider.TimestampFrequency;
                 StreamPool.Push(stream);
 
                 QuicLog.StreamPooled(_log, stream);

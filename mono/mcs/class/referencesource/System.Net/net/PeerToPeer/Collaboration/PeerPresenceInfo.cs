@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="PeerPresenceInfo.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Net.PeerToPeer.Collaboration
@@ -16,33 +16,23 @@ namespace System.Net.PeerToPeer.Collaboration
         private PeerPresenceStatus m_peerPresenceStatus;
         private string m_descriptiveText;
 
-        public PeerPresenceInfo() {}
+        public PeerPresenceInfo() { }
 
-        public PeerPresenceInfo(PeerPresenceStatus presenceStatus, string description) {
+        public PeerPresenceInfo(PeerPresenceStatus presenceStatus, string description)
+        {
             m_peerPresenceStatus = presenceStatus;
             m_descriptiveText = description;
         }
 
         public PeerPresenceStatus PresenceStatus
         {
-            get{
-                return m_peerPresenceStatus;
-            }
-            set
-            {
-                m_peerPresenceStatus = value;
-            }
+            get { return m_peerPresenceStatus; }
+            set { m_peerPresenceStatus = value; }
         }
         public string DescriptiveText
         {
-            get{
-                return m_descriptiveText;
-            }
-            set
-            {
-                m_descriptiveText = value;
-            }
+            get { return m_descriptiveText; }
+            set { m_descriptiveText = value; }
         }
     }
-
 }

@@ -25,12 +25,14 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
     /// </summary>
     internal abstract class AbstractAwaitCompletionProvider : LSPCompletionProvider
     {
-        private const string AwaitCompletionTargetTokenPosition = nameof(AwaitCompletionTargetTokenPosition);
+        private const string AwaitCompletionTargetTokenPosition = nameof(
+            AwaitCompletionTargetTokenPosition
+        );
         private const string AppendConfigureAwait = nameof(AppendConfigureAwait);
         private const string MakeContainerAsync = nameof(MakeContainerAsync);
 
         /// <summary>
-        /// If 'await' should be placed at the current position.  If not present, it means to add 'await' prior 
+        /// If 'await' should be placed at the current position.  If not present, it means to add 'await' prior
         /// to the preceding expression.
         /// </summary>
         private const string AddAwaitAtCurrentPosition = nameof(AddAwaitAtCurrentPosition);
@@ -62,21 +64,32 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
         protected abstract SyntaxNode? GetAsyncSupportingDeclaration(SyntaxToken token);
 
-        protected abstract ITypeSymbol? GetTypeSymbolOfExpression(SemanticModel semanticModel, SyntaxNode potentialAwaitableExpression, CancellationToken cancellationToken);
-        protected abstract SyntaxNode? GetExpressionToPlaceAwaitInFrontOf(SyntaxTree syntaxTree, int position, CancellationToken cancellationToken);
-        protected abstract SyntaxToken? GetDotTokenLeftOfPosition(SyntaxTree syntaxTree, int position, CancellationToken cancellationToken);
+        protected abstract ITypeSymbol? GetTypeSymbolOfExpression(
+            SemanticModel semanticModel,
+            SyntaxNode potentialAwaitableExpression,
+            CancellationToken cancellationToken
+        );
+        protected abstract SyntaxNode? GetExpressionToPlaceAwaitInFrontOf(
+            SyntaxTree syntaxTree,
+            int position,
+            CancellationToken cancellationToken
+        );
+        protected abstract SyntaxToken? GetDotTokenLeftOfPosition(
+            SyntaxTree syntaxTree,
+            int position,
+            CancellationToken cancellationToken
+        );
 
-        protected virtual bool IsAwaitKeywordContext(SyntaxContext syntaxContext)
-            => syntaxContext.IsAwaitKeywordContext;
+        protected virtual bool IsAwaitKeywordContext(SyntaxContext syntaxContext) =>
+            syntaxContext.IsAwaitKeywordContext;
 
         private static bool IsConfigureAwaitable(Compilation compilation, ITypeSymbol symbol)
         {
             var originalDefinition = symbol.OriginalDefinition;
-            return
-                originalDefinition.Equals(compilation.TaskOfTType()) ||
-                originalDefinition.Equals(compilation.TaskType()) ||
-                originalDefinition.Equals(compilation.ValueTaskOfTType()) ||
-                originalDefinition.Equals(compilation.ValueTaskType());
+            return originalDefinition.Equals(compilation.TaskOfTType())
+                || originalDefinition.Equals(compilation.TaskType())
+                || originalDefinition.Equals(compilation.ValueTaskOfTType())
+                || originalDefinition.Equals(compilation.ValueTaskType());
         }
 
         public sealed override async Task ProvideCompletionsAsync(CompletionContext context)
@@ -85,11 +98,15 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             var position = context.Position;
             var cancellationToken = context.CancellationToken;
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            var syntaxTree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+            var syntaxTree = await document
+                .GetRequiredSyntaxTreeAsync(cancellationToken)
+                .ConfigureAwait(false);
             if (syntaxFacts.IsInNonUserCode(syntaxTree, position, cancellationToken))
                 return;
 
-            var syntaxContext = await context.GetSyntaxContextWithExistingSpeculativeModelAsync(document, cancellationToken).ConfigureAwait(false);
+            var syntaxContext = await context
+                .GetSyntaxContextWithExistingSpeculativeModelAsync(document, cancellationToken)
+                .ConfigureAwait(false);
 
             var isAwaitKeywordContext = IsAwaitKeywordContext(syntaxContext);
             var dotAwaitContext = GetDotAwaitKeywordContext(syntaxContext, cancellationToken);
@@ -101,22 +118,36 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
             using var builder = TemporaryArray<KeyValuePair<string, string>>.Empty;
 
-            builder.Add(new KeyValuePair<string, string>(AwaitCompletionTargetTokenPosition, token.SpanStart.ToString()));
+            builder.Add(
+                new KeyValuePair<string, string>(
+                    AwaitCompletionTargetTokenPosition,
+                    token.SpanStart.ToString()
+                )
+            );
 
-            var makeContainerAsync = declaration is not null && !SyntaxGenerator.GetGenerator(document).GetModifiers(declaration).IsAsync;
+            var makeContainerAsync =
+                declaration is not null
+                && !SyntaxGenerator.GetGenerator(document).GetModifiers(declaration).IsAsync;
             if (makeContainerAsync)
                 builder.Add(new KeyValuePair<string, string>(MakeContainerAsync, string.Empty));
 
             if (isAwaitKeywordContext)
             {
-                builder.Add(new KeyValuePair<string, string>(AddAwaitAtCurrentPosition, string.Empty));
+                builder.Add(
+                    new KeyValuePair<string, string>(AddAwaitAtCurrentPosition, string.Empty)
+                );
                 var properties = builder.ToImmutableAndClear();
 
-                context.AddItem(CreateCompletionItem(
-                    properties, _awaitKeyword, _awaitKeyword,
-                    FeaturesResources.Asynchronously_waits_for_the_task_to_finish,
-                    isComplexTextEdit: makeContainerAsync,
-                    appendConfigureAwait: false));
+                context.AddItem(
+                    CreateCompletionItem(
+                        properties,
+                        _awaitKeyword,
+                        _awaitKeyword,
+                        FeaturesResources.Asynchronously_waits_for_the_task_to_finish,
+                        isComplexTextEdit: makeContainerAsync,
+                        appendConfigureAwait: false
+                    )
+                );
             }
             else
             {
@@ -125,31 +156,54 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 var properties = builder.ToImmutableAndClear();
 
                 // add the `await` option that will remove the dot and add `await` to the start of the expression.
-                context.AddItem(CreateCompletionItem(
-                    properties, _awaitKeyword, _awaitKeyword,
-                    FeaturesResources.Await_the_preceding_expression,
-                    isComplexTextEdit: true,
-                    appendConfigureAwait: false));
+                context.AddItem(
+                    CreateCompletionItem(
+                        properties,
+                        _awaitKeyword,
+                        _awaitKeyword,
+                        FeaturesResources.Await_the_preceding_expression,
+                        isComplexTextEdit: true,
+                        appendConfigureAwait: false
+                    )
+                );
 
                 if (dotAwaitContext == DotAwaitContext.AwaitAndConfigureAwait)
                 {
                     // add the `awaitf` option to do the same, but also add .ConfigureAwait(false);
-                    properties = properties.Add(new KeyValuePair<string, string>(AppendConfigureAwait, string.Empty));
-                    context.AddItem(CreateCompletionItem(
-                        properties, _awaitfDisplayText, _awaitfFilterText,
-                        string.Format(FeaturesResources.Await_the_preceding_expression_and_add_ConfigureAwait_0, _falseKeyword),
-                        isComplexTextEdit: true,
-                        appendConfigureAwait: true));
+                    properties = properties.Add(
+                        new KeyValuePair<string, string>(AppendConfigureAwait, string.Empty)
+                    );
+                    context.AddItem(
+                        CreateCompletionItem(
+                            properties,
+                            _awaitfDisplayText,
+                            _awaitfFilterText,
+                            string.Format(
+                                FeaturesResources.Await_the_preceding_expression_and_add_ConfigureAwait_0,
+                                _falseKeyword
+                            ),
+                            isComplexTextEdit: true,
+                            appendConfigureAwait: true
+                        )
+                    );
                 }
             }
 
             return;
 
             static CompletionItem CreateCompletionItem(
-                ImmutableArray<KeyValuePair<string, string>> completionProperties, string displayText, string filterText, string tooltip, bool isComplexTextEdit, bool appendConfigureAwait)
+                ImmutableArray<KeyValuePair<string, string>> completionProperties,
+                string displayText,
+                string filterText,
+                string tooltip,
+                bool isComplexTextEdit,
+                bool appendConfigureAwait
+            )
             {
                 var description = appendConfigureAwait
-                    ? ImmutableArray.Create(new SymbolDisplayPart(SymbolDisplayPartKind.Text, null, tooltip))
+                    ? ImmutableArray.Create(
+                        new SymbolDisplayPart(SymbolDisplayPartKind.Text, null, tooltip)
+                    )
                     : RecommendedKeyword.CreateDisplayParts(displayText, tooltip);
 
                 return CommonCompletionItem.Create(
@@ -160,19 +214,28 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     glyph: Glyph.Keyword,
                     description: description,
                     isComplexTextEdit: isComplexTextEdit,
-                    properties: completionProperties);
+                    properties: completionProperties
+                );
             }
         }
 
-        public sealed override async Task<CompletionChange> GetChangeAsync(Document document, CompletionItem item, char? commitKey, CancellationToken cancellationToken)
+        public sealed override async Task<CompletionChange> GetChangeAsync(
+            Document document,
+            CompletionItem item,
+            char? commitKey,
+            CancellationToken cancellationToken
+        )
         {
             // IsComplexTextEdit is true when we want to add async to the container or place await in front of the expression.
             if (!item.IsComplexTextEdit)
-                return await base.GetChangeAsync(document, item, commitKey, cancellationToken).ConfigureAwait(false);
+                return await base.GetChangeAsync(document, item, commitKey, cancellationToken)
+                    .ConfigureAwait(false);
 
             using var _ = ArrayBuilder<TextChange>.GetInstance(out var builder);
 
-            var syntaxTree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+            var syntaxTree = await document
+                .GetRequiredSyntaxTreeAsync(cancellationToken)
+                .ConfigureAwait(false);
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var syntaxKinds = syntaxFacts.SyntaxKinds;
 
@@ -186,10 +249,16 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     // IsComplexTextEdit should only be true when GetAsyncSupportingDeclaration returns non-null.
                     // This is ensured by the ShouldMakeContainerAsync overrides.
                     Debug.Fail("Expected non-null value for declaration.");
-                    return await base.GetChangeAsync(document, item, commitKey, cancellationToken).ConfigureAwait(false);
+                    return await base.GetChangeAsync(document, item, commitKey, cancellationToken)
+                        .ConfigureAwait(false);
                 }
 
-                builder.Add(new TextChange(new TextSpan(GetSpanStart(declaration), 0), syntaxFacts.GetText(syntaxKinds.AsyncKeyword) + " "));
+                builder.Add(
+                    new TextChange(
+                        new TextSpan(GetSpanStart(declaration), 0),
+                        syntaxFacts.GetText(syntaxKinds.AsyncKeyword) + " "
+                    )
+                );
             }
 
             if (item.TryGetProperty(AddAwaitAtCurrentPosition, out var _))
@@ -200,7 +269,11 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             {
                 var position = item.Span.Start;
                 var dotToken = GetDotTokenLeftOfPosition(syntaxTree, position, cancellationToken);
-                var expr = GetExpressionToPlaceAwaitInFrontOf(syntaxTree, position, cancellationToken);
+                var expr = GetExpressionToPlaceAwaitInFrontOf(
+                    syntaxTree,
+                    position,
+                    cancellationToken
+                );
 
                 Contract.ThrowIfFalse(dotToken.HasValue);
                 Contract.ThrowIfNull(expr);
@@ -213,7 +286,12 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     ? $".{nameof(Task.ConfigureAwait)}({_falseKeyword})"
                     : "";
 
-                builder.Add(new TextChange(TextSpan.FromBounds(dotToken.Value.SpanStart, item.Span.End), replacementText));
+                builder.Add(
+                    new TextChange(
+                        TextSpan.FromBounds(dotToken.Value.SpanStart, item.Span.End),
+                        replacementText
+                    )
+                );
             }
 
             var text = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
@@ -237,11 +315,18 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         ///     <see cref="DotAwaitContext.AwaitOnly"/>, if await should be suggested for the expression left of the dot, but ConfigureAwait(false) not.
         ///     <see cref="DotAwaitContext.AwaitAndConfigureAwait"/>, if await should be suggested for the expression left of the dot and ConfigureAwait(false).
         /// </returns>
-        private DotAwaitContext GetDotAwaitKeywordContext(SyntaxContext syntaxContext, CancellationToken cancellationToken)
+        private DotAwaitContext GetDotAwaitKeywordContext(
+            SyntaxContext syntaxContext,
+            CancellationToken cancellationToken
+        )
         {
             var position = syntaxContext.Position;
             var syntaxTree = syntaxContext.SyntaxTree;
-            var potentialAwaitableExpression = GetExpressionToPlaceAwaitInFrontOf(syntaxTree, position, cancellationToken);
+            var potentialAwaitableExpression = GetExpressionToPlaceAwaitInFrontOf(
+                syntaxTree,
+                position,
+                cancellationToken
+            );
             if (potentialAwaitableExpression is not null)
             {
                 var parentOfAwaitable = potentialAwaitableExpression.Parent;
@@ -250,16 +335,29 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 if (!syntaxFacts.IsAwaitExpression(parentOfAwaitable))
                 {
                     var semanticModel = syntaxContext.SemanticModel;
-                    var symbol = GetTypeSymbolOfExpression(semanticModel, potentialAwaitableExpression, cancellationToken);
+                    var symbol = GetTypeSymbolOfExpression(
+                        semanticModel,
+                        potentialAwaitableExpression,
+                        cancellationToken
+                    );
                     if (symbol.IsAwaitableNonDynamic(semanticModel, position))
                     {
                         // We have a awaitable type left of the dot, that is not yet awaited.
                         // We need to check if await is valid at the insertion position.
-                        var syntaxContextAtInsertationPosition = syntaxContext.GetRequiredLanguageService<ISyntaxContextService>().CreateContext(
-                            document, syntaxContext.SemanticModel, potentialAwaitableExpression.SpanStart, cancellationToken);
+                        var syntaxContextAtInsertationPosition = syntaxContext
+                            .GetRequiredLanguageService<ISyntaxContextService>()
+                            .CreateContext(
+                                document,
+                                syntaxContext.SemanticModel,
+                                potentialAwaitableExpression.SpanStart,
+                                cancellationToken
+                            );
                         if (syntaxContextAtInsertationPosition.IsAwaitKeywordContext)
                         {
-                            return IsConfigureAwaitable(syntaxContext.SemanticModel.Compilation, symbol)
+                            return IsConfigureAwaitable(
+                                syntaxContext.SemanticModel.Compilation,
+                                symbol
+                            )
                                 ? DotAwaitContext.AwaitAndConfigureAwait
                                 : DotAwaitContext.AwaitOnly;
                         }

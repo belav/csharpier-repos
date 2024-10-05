@@ -34,16 +34,27 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, true)]
     internal class VSTypeScriptInProcLanguageClient(
-        [Import(AllowDefault = true)] IVSTypeScriptCapabilitiesProvider? typeScriptCapabilitiesProvider,
+        [Import(AllowDefault = true)]
+            IVSTypeScriptCapabilitiesProvider? typeScriptCapabilitiesProvider,
         VSTypeScriptLspServiceProvider lspServiceProvider,
         IGlobalOptionService globalOptions,
         ILspServiceLoggerFactory lspLoggerFactory,
         IThreadingContext threadingContext,
-        ExportProvider exportProvider) : AbstractInProcLanguageClient(lspServiceProvider, globalOptions, lspLoggerFactory, threadingContext, exportProvider)
+        ExportProvider exportProvider
+    )
+        : AbstractInProcLanguageClient(
+            lspServiceProvider,
+            globalOptions,
+            lspLoggerFactory,
+            threadingContext,
+            exportProvider
+        )
     {
-        private readonly IVSTypeScriptCapabilitiesProvider? _typeScriptCapabilitiesProvider = typeScriptCapabilitiesProvider;
+        private readonly IVSTypeScriptCapabilitiesProvider? _typeScriptCapabilitiesProvider =
+            typeScriptCapabilitiesProvider;
 
-        protected override ImmutableArray<string> SupportedLanguages => ImmutableArray.Create(InternalLanguageNames.TypeScript);
+        protected override ImmutableArray<string> SupportedLanguages =>
+            ImmutableArray.Create(InternalLanguageNames.TypeScript);
 
         public override ServerCapabilities GetCapabilities(ClientCapabilities clientCapabilities)
         {
@@ -71,17 +82,27 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
         /// they will get no diagnostics.  When not enabled we don't show the failure box (failure will still be recorded in the task status center)
         /// as the failure is not catastrophic.
         /// </summary>
-        public override bool ShowNotificationOnInitializeFailed => GlobalOptions.IsLspPullDiagnostics();
+        public override bool ShowNotificationOnInitializeFailed =>
+            GlobalOptions.IsLspPullDiagnostics();
 
-        public override WellKnownLspServerKinds ServerKind => WellKnownLspServerKinds.RoslynTypeScriptLspServer;
+        public override WellKnownLspServerKinds ServerKind =>
+            WellKnownLspServerKinds.RoslynTypeScriptLspServer;
 
-        private VSInternalServerCapabilities GetTypeScriptServerCapabilities(ClientCapabilities clientCapabilities)
+        private VSInternalServerCapabilities GetTypeScriptServerCapabilities(
+            ClientCapabilities clientCapabilities
+        )
         {
             if (_typeScriptCapabilitiesProvider != null)
             {
                 var serializedClientCapabilities = JsonConvert.SerializeObject(clientCapabilities);
-                var serializedServerCapabilities = _typeScriptCapabilitiesProvider.GetServerCapabilities(serializedClientCapabilities);
-                var typeScriptServerCapabilities = JsonConvert.DeserializeObject<VSInternalServerCapabilities>(serializedServerCapabilities);
+                var serializedServerCapabilities =
+                    _typeScriptCapabilitiesProvider.GetServerCapabilities(
+                        serializedClientCapabilities
+                    );
+                var typeScriptServerCapabilities =
+                    JsonConvert.DeserializeObject<VSInternalServerCapabilities>(
+                        serializedServerCapabilities
+                    );
                 Contract.ThrowIfNull(typeScriptServerCapabilities);
                 return typeScriptServerCapabilities;
             }

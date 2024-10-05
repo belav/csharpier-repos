@@ -17,9 +17,7 @@ namespace System.IdentityModel.Metadata
         /// Empty constructor.
         /// </summary>
         public LocalizedUri()
-            : this(null, null)
-        {
-        }
+            : this(null, null) { }
 
         /// <summary>
         /// Constructs a <see cref="LocalizedUri"/> with the <paramref name="uri"/> and <paramref name="language"/>.

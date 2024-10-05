@@ -11,18 +11,39 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
 {
-    internal partial class AbstractGenerateConversionService<TService, TSimpleNameSyntax, TExpressionSyntax, TInvocationExpressionSyntax>
+    internal partial class AbstractGenerateConversionService<
+        TService,
+        TSimpleNameSyntax,
+        TExpressionSyntax,
+        TInvocationExpressionSyntax
+    >
     {
-        protected new class State : AbstractGenerateParameterizedMemberService<TService, TSimpleNameSyntax, TExpressionSyntax, TInvocationExpressionSyntax>.State
+        protected new class State
+            : AbstractGenerateParameterizedMemberService<
+                TService,
+                TSimpleNameSyntax,
+                TExpressionSyntax,
+                TInvocationExpressionSyntax
+            >.State
         {
             public static async Task<State> GenerateConversionStateAsync(
-               TService service,
-               SemanticDocument document,
-               SyntaxNode interfaceNode,
-               CancellationToken cancellationToken)
+                TService service,
+                SemanticDocument document,
+                SyntaxNode interfaceNode,
+                CancellationToken cancellationToken
+            )
             {
                 var state = new State();
-                if (!await state.TryInitializeConversionAsync(service, document, interfaceNode, cancellationToken).ConfigureAwait(false))
+                if (
+                    !await state
+                        .TryInitializeConversionAsync(
+                            service,
+                            document,
+                            interfaceNode,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false)
+                )
                 {
                     return null;
                 }
@@ -34,18 +55,23 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 TService service,
                 SemanticDocument document,
                 SyntaxNode node,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 if (service.IsImplicitConversionGeneration(node))
                 {
-                    if (!TryInitializeImplicitConversion(service, document, node, cancellationToken))
+                    if (
+                        !TryInitializeImplicitConversion(service, document, node, cancellationToken)
+                    )
                     {
                         return SpecializedTasks.False;
                     }
                 }
                 else if (service.IsExplicitConversionGeneration(node))
                 {
-                    if (!TryInitializeExplicitConversion(service, document, node, cancellationToken))
+                    if (
+                        !TryInitializeExplicitConversion(service, document, node, cancellationToken)
+                    )
                     {
                         return SpecializedTasks.False;
                     }
@@ -54,17 +80,33 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 return TryFinishInitializingStateAsync(service, document, cancellationToken);
             }
 
-            private bool TryInitializeExplicitConversion(TService service, SemanticDocument document, SyntaxNode node, CancellationToken cancellationToken)
+            private bool TryInitializeExplicitConversion(
+                TService service,
+                SemanticDocument document,
+                SyntaxNode node,
+                CancellationToken cancellationToken
+            )
             {
                 MethodKind = MethodKind.Conversion;
-                if (!service.TryInitializeExplicitConversionState(
-                    document, node, ClassInterfaceModuleStructTypes, cancellationToken,
-                    out var identifierToken, out var methodSymbol, out var typeToGenerateIn))
+                if (
+                    !service.TryInitializeExplicitConversionState(
+                        document,
+                        node,
+                        ClassInterfaceModuleStructTypes,
+                        cancellationToken,
+                        out var identifierToken,
+                        out var methodSymbol,
+                        out var typeToGenerateIn
+                    )
+                )
                 {
                     return false;
                 }
 
-                ContainingType = document.SemanticModel.GetEnclosingNamedType(node.SpanStart, cancellationToken);
+                ContainingType = document.SemanticModel.GetEnclosingNamedType(
+                    node.SpanStart,
+                    cancellationToken
+                );
                 if (ContainingType == null)
                 {
                     return false;
@@ -78,17 +120,33 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 return true;
             }
 
-            private bool TryInitializeImplicitConversion(TService service, SemanticDocument document, SyntaxNode node, CancellationToken cancellationToken)
+            private bool TryInitializeImplicitConversion(
+                TService service,
+                SemanticDocument document,
+                SyntaxNode node,
+                CancellationToken cancellationToken
+            )
             {
                 MethodKind = MethodKind.Conversion;
-                if (!service.TryInitializeImplicitConversionState(
-                    document, node, ClassInterfaceModuleStructTypes, cancellationToken,
-                    out var identifierToken, out var methodSymbol, out var typeToGenerateIn))
+                if (
+                    !service.TryInitializeImplicitConversionState(
+                        document,
+                        node,
+                        ClassInterfaceModuleStructTypes,
+                        cancellationToken,
+                        out var identifierToken,
+                        out var methodSymbol,
+                        out var typeToGenerateIn
+                    )
+                )
                 {
                     return false;
                 }
 
-                ContainingType = document.SemanticModel.GetEnclosingNamedType(node.SpanStart, cancellationToken);
+                ContainingType = document.SemanticModel.GetEnclosingNamedType(
+                    node.SpanStart,
+                    cancellationToken
+                );
                 if (ContainingType == null)
                 {
                     return false;

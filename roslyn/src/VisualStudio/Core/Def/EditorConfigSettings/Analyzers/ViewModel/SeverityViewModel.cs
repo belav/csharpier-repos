@@ -16,7 +16,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers
             ServicesVSResources.Refactoring_Only,
             ServicesVSResources.Suggestion,
             ServicesVSResources.Warning,
-            ServicesVSResources.Error
+            ServicesVSResources.Error,
         ];
 
         private readonly int _selectedSeverityIndex;
@@ -59,8 +59,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers
             IsConfigurable = !setting.IsNotConfigurable;
 
             ToolTip = IsConfigurable
-                        ? ServicesVSResources.Severity
-                        : ServicesVSResources.This_rule_is_not_configurable;
+                ? ServicesVSResources.Severity
+                : ServicesVSResources.This_rule_is_not_configurable;
 
             _setting = setting;
         }

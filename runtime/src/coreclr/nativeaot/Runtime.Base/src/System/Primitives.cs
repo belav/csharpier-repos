@@ -8,22 +8,18 @@
 // Each of the data types has a data contract with the runtime. See the contract in the type definition
 //
 
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 namespace System
 {
     // CONTRACT with Runtime
     // Place holder type for type hierarchy, Compiler/Runtime requires this class
-    public abstract class ValueType
-    {
-    }
+    public abstract class ValueType { }
 
     // CONTRACT with Runtime, Compiler/Runtime requires this class
     // Place holder type for type hierarchy
-    public abstract class Enum : ValueType
-    {
-    }
+    public abstract class Enum : ValueType { }
 
     /*============================================================
     **
@@ -47,7 +43,6 @@ namespace System
         private bool _value;
 #pragma warning restore 0169
     }
-
 
     /*============================================================
     **
@@ -74,7 +69,6 @@ namespace System
         public const char MinValue = (char)0x00;
     }
 
-
     /*============================================================
     **
     ** Class:  SByte
@@ -98,7 +92,6 @@ namespace System
         public const sbyte MaxValue = (sbyte)0x7F;
         public const sbyte MinValue = unchecked((sbyte)0x80);
     }
-
 
     /*============================================================
     **
@@ -124,7 +117,6 @@ namespace System
         public const byte MaxValue = (byte)0xFF;
         public const byte MinValue = 0;
     }
-
 
     /*============================================================
     **
@@ -199,7 +191,6 @@ namespace System
         public const int MinValue = unchecked((int)0x80000000);
     }
 
-
     /*============================================================
     **
     ** Class:  UInt32
@@ -223,7 +214,6 @@ namespace System
         public const uint MaxValue = (uint)0xffffffff;
         public const uint MinValue = 0;
     }
-
 
     /*============================================================
     **
@@ -249,7 +239,6 @@ namespace System
         public const long MinValue = unchecked((long)0x8000000000000000L);
     }
 
-
     /*============================================================
     **
     ** Class:  UInt64
@@ -274,7 +263,6 @@ namespace System
         public const ulong MinValue = 0;
     }
 
-
     /*============================================================
     **
     ** Class:  Single
@@ -295,7 +283,6 @@ namespace System
     {
         private float _value;
     }
-
 
     /*============================================================
     **
@@ -318,7 +305,6 @@ namespace System
     {
         private double _value;
     }
-
 
     /*============================================================
     **
@@ -403,7 +389,7 @@ namespace System
         }
 
         [Intrinsic]
-        public static unsafe explicit operator void* (IntPtr value)
+        public static unsafe explicit operator void*(IntPtr value)
         {
             return value._value;
         }
@@ -497,13 +483,13 @@ namespace System
         }
 
         [Intrinsic]
-        public static unsafe explicit operator void* (UIntPtr value)
+        public static unsafe explicit operator void*(UIntPtr value)
         {
             return value._value;
         }
 
         [Intrinsic]
-        public static unsafe explicit operator uint (UIntPtr value)
+        public static unsafe explicit operator uint(UIntPtr value)
         {
 #if TARGET_64BIT
             return checked((uint)value._value);
@@ -513,7 +499,7 @@ namespace System
         }
 
         [Intrinsic]
-        public static unsafe explicit operator ulong (UIntPtr value)
+        public static unsafe explicit operator ulong(UIntPtr value)
         {
             return (ulong)value._value;
         }

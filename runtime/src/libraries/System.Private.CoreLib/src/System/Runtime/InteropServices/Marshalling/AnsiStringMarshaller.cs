@@ -10,7 +10,11 @@ namespace System.Runtime.InteropServices.Marshalling
     /// </summary>
     [CLSCompliant(false)]
     [CustomMarshaller(typeof(string), MarshalMode.Default, typeof(AnsiStringMarshaller))]
-    [CustomMarshaller(typeof(string), MarshalMode.ManagedToUnmanagedIn, typeof(ManagedToUnmanagedIn))]
+    [CustomMarshaller(
+        typeof(string),
+        MarshalMode.ManagedToUnmanagedIn,
+        typeof(ManagedToUnmanagedIn)
+    )]
     public static unsafe class AnsiStringMarshaller
     {
         /// <summary>
@@ -25,7 +29,7 @@ namespace System.Runtime.InteropServices.Marshalling
 
             int exactByteCount = Marshal.GetAnsiStringByteCount(managed); // Includes null terminator
             byte* mem = (byte*)Marshal.AllocCoTaskMem(exactByteCount);
-            Span<byte> buffer = new (mem, exactByteCount);
+            Span<byte> buffer = new(mem, exactByteCount);
 
             Marshal.GetAnsiStringBytes(managed, buffer); // Includes null terminator
             return mem;
@@ -36,15 +40,14 @@ namespace System.Runtime.InteropServices.Marshalling
         /// </summary>
         /// <param name="unmanaged">The unmanaged string to convert.</param>
         /// <returns>A managed string.</returns>
-        public static string? ConvertToManaged(byte* unmanaged)
-            => Marshal.PtrToStringAnsi((IntPtr)unmanaged);
+        public static string? ConvertToManaged(byte* unmanaged) =>
+            Marshal.PtrToStringAnsi((IntPtr)unmanaged);
 
         /// <summary>
         /// Frees the memory for the unmanaged string.
         /// </summary>
         /// <param name="unmanaged">The memory allocated for the unmanaged string.</param>
-        public static void Free(byte* unmanaged)
-            => Marshal.FreeCoTaskMem((IntPtr)unmanaged);
+        public static void Free(byte* unmanaged) => Marshal.FreeCoTaskMem((IntPtr)unmanaged);
 
         /// <summary>
         /// Custom marshaller to marshal a managed string as a ANSI unmanaged string.
@@ -82,7 +85,10 @@ namespace System.Runtime.InteropServices.Marshalling
                     int exactByteCount = Marshal.GetAnsiStringByteCount(managed); // Includes null terminator
                     if (exactByteCount > buffer.Length)
                     {
-                        buffer = new Span<byte>((byte*)NativeMemory.Alloc((nuint)exactByteCount), exactByteCount);
+                        buffer = new Span<byte>(
+                            (byte*)NativeMemory.Alloc((nuint)exactByteCount),
+                            exactByteCount
+                        );
                         _allocated = true;
                     }
                 }

@@ -18,19 +18,26 @@ namespace System.Formats.Tar
             // note: only the owner of a file, and root can change file permissions.
 
             const UnixFileMode OwnershipPermissions =
-                UnixFileMode.UserRead | UnixFileMode.UserWrite | UnixFileMode.UserExecute |
-                UnixFileMode.GroupRead | UnixFileMode.GroupWrite | UnixFileMode.GroupExecute |
-                UnixFileMode.OtherRead | UnixFileMode.OtherWrite |  UnixFileMode.OtherExecute;
+                UnixFileMode.UserRead
+                | UnixFileMode.UserWrite
+                | UnixFileMode.UserExecute
+                | UnixFileMode.GroupRead
+                | UnixFileMode.GroupWrite
+                | UnixFileMode.GroupExecute
+                | UnixFileMode.OtherRead
+                | UnixFileMode.OtherWrite
+                | UnixFileMode.OtherExecute;
 
             string filename = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
-            FileStreamOptions options = new()
-            {
-                Mode = FileMode.CreateNew,
-                UnixCreateMode = OwnershipPermissions,
-                Options = FileOptions.DeleteOnClose,
-                Access = FileAccess.Write,
-                BufferSize = 0
-            };
+            FileStreamOptions options =
+                new()
+                {
+                    Mode = FileMode.CreateNew,
+                    UnixCreateMode = OwnershipPermissions,
+                    Options = FileOptions.DeleteOnClose,
+                    Access = FileAccess.Write,
+                    BufferSize = 0,
+                };
             using var fs = new FileStream(filename, options);
             UnixFileMode actual = File.GetUnixFileMode(fs.SafeFileHandle);
 
@@ -39,8 +46,7 @@ namespace System.Formats.Tar
 
         private sealed class ReverseStringComparer : IComparer<string>
         {
-            public int Compare (string? x, string? y)
-                => StringComparer.Ordinal.Compare(y, x);
+            public int Compare(string? x, string? y) => StringComparer.Ordinal.Compare(y, x);
         }
 
         private static readonly ReverseStringComparer s_reverseStringComparer = new();
@@ -49,13 +55,18 @@ namespace System.Formats.Tar
 
         // Use a reverse-sorted dictionary to apply permission to children before their parents.
         // Otherwise we may apply a restrictive mask to the parent, that prevents us from changing a child.
-        internal static SortedDictionary<string, UnixFileMode>? CreatePendingModesDictionary()
-            => new SortedDictionary<string, UnixFileMode>(s_reverseStringComparer);
+        internal static SortedDictionary<string, UnixFileMode>? CreatePendingModesDictionary() =>
+            new SortedDictionary<string, UnixFileMode>(s_reverseStringComparer);
 
-        internal static void CreateDirectory(string fullPath, UnixFileMode? mode, SortedDictionary<string, UnixFileMode>? pendingModes)
+        internal static void CreateDirectory(
+            string fullPath,
+            UnixFileMode? mode,
+            SortedDictionary<string, UnixFileMode>? pendingModes
+        )
         {
             // Minimal permissions required for extracting.
-            const UnixFileMode ExtractPermissions = UnixFileMode.UserRead | UnixFileMode.UserWrite | UnixFileMode.UserExecute;
+            const UnixFileMode ExtractPermissions =
+                UnixFileMode.UserRead | UnixFileMode.UserWrite | UnixFileMode.UserExecute;
 
             Debug.Assert(pendingModes is not null);
 
@@ -65,7 +76,8 @@ namespace System.Formats.Tar
                 if (mode.HasValue)
                 {
                     // Ensure we have sufficient permissions to extract in the directory.
-                    bool hasExtractPermissions = (mode.Value & ExtractPermissions) == ExtractPermissions;
+                    bool hasExtractPermissions =
+                        (mode.Value & ExtractPermissions) == ExtractPermissions;
                     if (hasExtractPermissions)
                     {
                         pendingModes.Remove(fullPath);

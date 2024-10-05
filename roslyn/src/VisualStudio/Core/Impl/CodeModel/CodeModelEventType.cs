@@ -19,7 +19,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         BaseChange = 1 << 4,
         SigChange = 1 << 5,
         TypeRefChange = 1 << 6,
-        ArgChange = 1 << 7
+        ArgChange = 1 << 7,
     }
 
     internal static class CodeModelEventTypeExtensions
@@ -32,17 +32,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             }
 
             // Check that Add and Remove are not set
-            if ((eventType & CodeModelEventType.Add) == 0 &&
-                (eventType & CodeModelEventType.Remove) == 0)
+            if (
+                (eventType & CodeModelEventType.Add) == 0
+                && (eventType & CodeModelEventType.Remove) == 0
+            )
             {
                 // Check that one or more of the change flags are set
                 var allChanges =
-                    CodeModelEventType.Rename |
-                    CodeModelEventType.Unknown |
-                    CodeModelEventType.BaseChange |
-                    CodeModelEventType.SigChange |
-                    CodeModelEventType.TypeRefChange |
-                    CodeModelEventType.ArgChange;
+                    CodeModelEventType.Rename
+                    | CodeModelEventType.Unknown
+                    | CodeModelEventType.BaseChange
+                    | CodeModelEventType.SigChange
+                    | CodeModelEventType.TypeRefChange
+                    | CodeModelEventType.ArgChange;
 
                 if ((eventType & allChanges) != 0)
                 {

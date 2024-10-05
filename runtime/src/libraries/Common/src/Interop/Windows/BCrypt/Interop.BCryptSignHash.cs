@@ -4,7 +4,6 @@
 using System;
 using System.Runtime.InteropServices;
 using Internal.Cryptography;
-
 using Microsoft.Win32.SafeHandles;
 
 internal static partial class Interop
@@ -20,14 +19,16 @@ internal static partial class Interop
             byte* pbOutput,
             int cbOutput,
             out int pcbResult,
-            BCryptSignVerifyFlags dwFlags);
+            BCryptSignVerifyFlags dwFlags
+        );
 
         internal static unsafe NTSTATUS BCryptSignHashPkcs1(
             SafeBCryptKeyHandle key,
             ReadOnlySpan<byte> hash,
             Span<byte> destination,
             string hashAlgorithmName,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             fixed (char* pHashAlgorithmName = hashAlgorithmName)
             fixed (byte* pHash = &MemoryMarshal.GetReference(hash))
@@ -44,7 +45,8 @@ internal static partial class Interop
                     pDest,
                     destination.Length,
                     out bytesWritten,
-                    BCryptSignVerifyFlags.BCRYPT_PAD_PKCS1);
+                    BCryptSignVerifyFlags.BCRYPT_PAD_PKCS1
+                );
             }
         }
 
@@ -53,7 +55,8 @@ internal static partial class Interop
             ReadOnlySpan<byte> hash,
             Span<byte> destination,
             string hashAlgorithmName,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             fixed (char* pHashAlgorithmName = hashAlgorithmName)
             fixed (byte* pHash = &MemoryMarshal.GetReference(hash))
@@ -71,7 +74,8 @@ internal static partial class Interop
                     pDest,
                     destination.Length,
                     out bytesWritten,
-                    BCryptSignVerifyFlags.BCRYPT_PAD_PSS);
+                    BCryptSignVerifyFlags.BCRYPT_PAD_PSS
+                );
             }
         }
     }

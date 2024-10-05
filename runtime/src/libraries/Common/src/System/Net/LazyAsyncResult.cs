@@ -39,21 +39,22 @@ namespace System.Net
         }
 
 #if DEBUG
-        private bool _protectState;                 // Used by ContextAwareResult to prevent some calls.
+        private bool _protectState; // Used by ContextAwareResult to prevent some calls.
 #endif
 
-        private readonly object? _asyncObject;              // Caller's async object.
-        private readonly object? _asyncState;               // Caller's state object.
-        private AsyncCallback? _asyncCallback;     // Caller's callback method.
-        private object? _result;                   // Final IO result to be returned byt the End*() method.
-        private int _errorCode;                    // Win32 error code for Win32 IO async calls (that want to throw).
-        private int _intCompleted;                 // Sign bit indicates synchronous completion if set.
-                                                   // Remaining bits count the number of InvokeCallbak() calls.
+        private readonly object? _asyncObject; // Caller's async object.
+        private readonly object? _asyncState; // Caller's state object.
+        private AsyncCallback? _asyncCallback; // Caller's callback method.
+        private object? _result; // Final IO result to be returned byt the End*() method.
+        private int _errorCode; // Win32 error code for Win32 IO async calls (that want to throw).
+        private int _intCompleted; // Sign bit indicates synchronous completion if set.
 
-        private bool _endCalled;                   // True if the user called the End*() method.
-        private bool _userEvent;                   // True if the event has been (or is about to be) handed to the user
+        // Remaining bits count the number of InvokeCallbak() calls.
 
-        private object? _event;                    // Lazy allocated event to be returned in the IAsyncResult for the client to wait on.
+        private bool _endCalled; // True if the user called the End*() method.
+        private bool _userEvent; // True if the event has been (or is about to be) handed to the user
+
+        private object? _event; // Lazy allocated event to be returned in the IAsyncResult for the client to wait on.
 
         internal LazyAsyncResult(object? myObject, object? myState, AsyncCallback? myCallBack)
         {
@@ -61,38 +62,26 @@ namespace System.Net
             _asyncState = myState;
             _asyncCallback = myCallBack;
             _result = DBNull.Value;
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this);
         }
 
         // Interface method to return the original async object.
         internal object? AsyncObject
         {
-            get
-            {
-                return _asyncObject;
-            }
+            get { return _asyncObject; }
         }
 
         // Interface method to return the caller's state object.
         public object? AsyncState
         {
-            get
-            {
-                return _asyncState;
-            }
+            get { return _asyncState; }
         }
 
         protected AsyncCallback? AsyncCallback
         {
-            get
-            {
-                return _asyncCallback;
-            }
-
-            set
-            {
-                _asyncCallback = value;
-            }
+            get { return _asyncCallback; }
+            set { _asyncCallback = value; }
         }
 
         // Interface property to return a WaitHandle that can be waited on for I/O completion.
@@ -109,7 +98,9 @@ namespace System.Net
                 // Can't be called when state is protected.
                 if (_protectState)
                 {
-                    throw new InvalidOperationException("get_AsyncWaitHandle called in protected state");
+                    throw new InvalidOperationException(
+                        "get_AsyncWaitHandle called in protected state"
+                    );
                 }
 #endif
 
@@ -193,7 +184,9 @@ namespace System.Net
                 // Can't be called when state is protected.
                 if (_protectState)
                 {
-                    throw new InvalidOperationException("get_CompletedSynchronously called in protected state");
+                    throw new InvalidOperationException(
+                        "get_CompletedSynchronously called in protected state"
+                    );
                 }
 #endif
 
@@ -217,7 +210,9 @@ namespace System.Net
                 // Can't be called when state is protected.
                 if (_protectState)
                 {
-                    throw new InvalidOperationException("get_IsCompleted called in protected state");
+                    throw new InvalidOperationException(
+                        "get_IsCompleted called in protected state"
+                    );
                 }
 #endif
 
@@ -236,19 +231,13 @@ namespace System.Net
         // Use to see if something's completed without fixing CompletedSynchronously.
         internal bool InternalPeekCompleted
         {
-            get
-            {
-                return (_intCompleted & ~HighBit) != 0;
-            }
+            get { return (_intCompleted & ~HighBit) != 0; }
         }
 
         // Internal property for setting the IO result.
         internal object? Result
         {
-            get
-            {
-                return _result == DBNull.Value ? null : _result;
-            }
+            get { return _result == DBNull.Value ? null : _result; }
             set
             {
                 // Ideally this should never be called, since setting
@@ -258,7 +247,10 @@ namespace System.Net
                 // then the "result" parameter passed to InvokeCallback() will be ignored.
 
                 // It's an error to call after the result has been completed or with DBNull.
-                Debug.Assert(value != DBNull.Value, "Result can't be set to DBNull - it's a special internal value.");
+                Debug.Assert(
+                    value != DBNull.Value,
+                    "Result can't be set to DBNull - it's a special internal value."
+                );
 
                 Debug.Assert(!InternalPeekCompleted, "Called on completed result.");
                 _result = value;
@@ -267,27 +259,15 @@ namespace System.Net
 
         internal bool EndCalled
         {
-            get
-            {
-                return _endCalled;
-            }
-            set
-            {
-                _endCalled = value;
-            }
+            get { return _endCalled; }
+            set { _endCalled = value; }
         }
 
         // Internal property for setting the Win32 IO async error code.
         internal int ErrorCode
         {
-            get
-            {
-                return _errorCode;
-            }
-            set
-            {
-                _errorCode = value;
-            }
+            get { return _errorCode; }
+            set { _errorCode = value; }
         }
 
         // A method for completing the IO with a result and invoking the user's callback.
@@ -307,7 +287,10 @@ namespace System.Net
             _protectState = false;
 #endif
 
-            if ((_intCompleted & ~HighBit) == 0 && (Interlocked.Increment(ref _intCompleted) & ~HighBit) == 1)
+            if (
+                (_intCompleted & ~HighBit) == 0
+                && (Interlocked.Increment(ref _intCompleted) & ~HighBit) == 1
+            )
             {
                 // DBNull.Value is used to guarantee that the first caller wins,
                 // even if the result was set to null.
@@ -359,18 +342,21 @@ namespace System.Net
                 ++threadContext._nestedIOCount;
                 if (_asyncCallback != null)
                 {
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, "Invoking callback");
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Info(this, "Invoking callback");
 
                     if (threadContext._nestedIOCount >= ForceAsyncCount)
                     {
-                        if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, "*** OFFLOADED the user callback ****");
+                        if (NetEventSource.Log.IsEnabled())
+                            NetEventSource.Info(this, "*** OFFLOADED the user callback ****");
 
                         Task.Factory.StartNew(
                             s => WorkerThreadComplete(s!),
                             this,
                             CancellationToken.None,
                             TaskCreationOptions.DenyChildAttach,
-                            TaskScheduler.Default);
+                            TaskScheduler.Default
+                        );
 
                         offloaded = true;
                     }
@@ -381,7 +367,8 @@ namespace System.Net
                 }
                 else
                 {
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, "No callback to invoke");
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Info(this, "No callback to invoke");
                 }
             }
             finally
@@ -415,9 +402,7 @@ namespace System.Net
         // Custom instance cleanup method.
         //
         // Derived types override this method to release unmanaged resources associated with an IO request.
-        protected virtual void Cleanup()
-        {
-        }
+        protected virtual void Cleanup() { }
 
         internal object? InternalWaitForCompletion()
         {
@@ -444,7 +429,8 @@ namespace System.Net
             {
                 try
                 {
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"Waiting for completion event {waitHandle}");
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Info(this, $"Waiting for completion event {waitHandle}");
                     waitHandle.WaitOne(Timeout.Infinite);
                 }
                 catch (ObjectDisposedException)
@@ -486,7 +472,10 @@ namespace System.Net
         // It completes the result but doesn't do any of the notifications.
         internal void InternalCleanup()
         {
-            if ((_intCompleted & ~HighBit) == 0 && (Interlocked.Increment(ref _intCompleted) & ~HighBit) == 1)
+            if (
+                (_intCompleted & ~HighBit) == 0
+                && (Interlocked.Increment(ref _intCompleted) & ~HighBit) == 1
+            )
             {
                 // Set no result so that just in case there are waiters, they don't get stuck in the spin lock.
                 _result = null;

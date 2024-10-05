@@ -21,10 +21,7 @@ namespace ILCompiler.DependencyAnalysis
 
         public MethodDesc Method
         {
-            get
-            {
-                return _method;
-            }
+            get { return _method; }
         }
 
         public override int ClassCode => -1173492615;

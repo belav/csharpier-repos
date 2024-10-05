@@ -83,15 +83,27 @@ namespace System.Collections.Specialized.Tests
         [InlineData(50, false)]
         public void Add_Invalid(int count, bool caseInsensitive)
         {
-            HybridDictionary hybridDictionary = Helpers.CreateHybridDictionary(count, caseInsensitive);
-            AssertExtensions.Throws<ArgumentNullException>("key", () => hybridDictionary.Add(null, "value"));
+            HybridDictionary hybridDictionary = Helpers.CreateHybridDictionary(
+                count,
+                caseInsensitive
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "key",
+                () => hybridDictionary.Add(null, "value")
+            );
 
             hybridDictionary.Add("key", "value");
-            AssertExtensions.Throws<ArgumentException>(null, () => hybridDictionary.Add("key", "value"));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => hybridDictionary.Add("key", "value")
+            );
 
             if (caseInsensitive)
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => hybridDictionary.Add("KEY", "value"));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => hybridDictionary.Add("KEY", "value")
+                );
             }
             else
             {

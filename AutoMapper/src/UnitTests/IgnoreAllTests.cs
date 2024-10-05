@@ -14,11 +14,13 @@ public class When_overriding_global_ignore : AutoMapperSpecBase
         public int ShouldBeMapped { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.AddGlobalIgnore("ShouldBeMapped");
-        cfg.CreateMap<Source, Destination>().ForMember(d => d.ShouldBeMapped, o => o.MapFrom(src => 12));
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.AddGlobalIgnore("ShouldBeMapped");
+            cfg.CreateMap<Source, Destination>()
+                .ForMember(d => d.ShouldBeMapped, o => o.MapFrom(src => 12));
+        });
 
     protected override void Because_of()
     {
@@ -70,8 +72,8 @@ public class IgnoreAllTests
             cfg.CreateMap<Source, Destination>()
                 .ForMember(dest => dest.AnotherString_ShouldBeNullAfterwards, opt => opt.Ignore());
         });
-        
-        config.CreateMapper().Map<Source, Destination>(new Source{ShouldBeMapped = "true"});
+
+        config.CreateMapper().Map<Source, Destination>(new Source { ShouldBeMapped = "true" });
         config.AssertConfigurationIsValid();
     }
 
@@ -83,8 +85,8 @@ public class IgnoreAllTests
             cfg.AddGlobalIgnore("StartingWith");
             cfg.AddProfile<FooProfile>();
         });
-        
-        config.CreateMapper().Map<Source, Destination>(new Source{ShouldBeMapped = "true"});
+
+        config.CreateMapper().Map<Source, Destination>(new Source { ShouldBeMapped = "true" });
         config.AssertConfigurationIsValid();
     }
 
@@ -97,7 +99,9 @@ public class IgnoreAllTests
             cfg.CreateMap<Source, DestinationWrongType>();
         });
 
-        config.CreateMapper().Map<Source, DestinationWrongType>(new Source { ShouldBeMapped = "true" });
+        config
+            .CreateMapper()
+            .Map<Source, DestinationWrongType>(new Source { ShouldBeMapped = "true" });
         config.AssertConfigurationIsValid();
     }
 
@@ -111,7 +115,9 @@ public class IgnoreAllTests
                 .ForMember(dest => dest.AnotherString_ShouldBeNullAfterwards, opt => opt.Ignore());
         });
 
-        Destination destination = config.CreateMapper().Map<Source, Destination>(new Source { ShouldBeMapped = "true" });
+        Destination destination = config
+            .CreateMapper()
+            .Map<Source, Destination>(new Source { ShouldBeMapped = "true" });
         destination.StartingWith_ShouldBeNullAfterwards.ShouldBe(null);
         destination.StartingWith_ShouldNotBeMapped.ShouldBe(null);
     }
@@ -126,11 +132,14 @@ public class IgnoreAllTests
             cfg.CreateMap<Source, Destination>();
         });
 
-        Destination destination = config.CreateMapper().Map<Source, Destination>(new Source { ShouldBeMapped = "true" });
+        Destination destination = config
+            .CreateMapper()
+            .Map<Source, Destination>(new Source { ShouldBeMapped = "true" });
         destination.AnotherString_ShouldBeNullAfterwards.ShouldBe(null);
         destination.StartingWith_ShouldNotBeMapped.ShouldBe(null);
     }
 }
+
 public class IgnoreAttributeTests
 {
     public class Source
@@ -142,6 +151,7 @@ public class IgnoreAttributeTests
     public class Destination
     {
         public string ShouldBeMapped { get; set; }
+
         [IgnoreMap]
         public string ShouldNotBeMapped { get; set; }
     }
@@ -156,11 +166,7 @@ public class IgnoreAttributeTests
         });
         config.AssertConfigurationIsValid();
 
-        Source source = new Source
-        {
-            ShouldBeMapped = "Value1",
-            ShouldNotBeMapped = "Value2"
-        };
+        Source source = new Source { ShouldBeMapped = "Value1", ShouldNotBeMapped = "Value2" };
 
         Destination destination = config.CreateMapper().Map<Source, Destination>(source);
         destination.ShouldNotBeMapped.ShouldBe(null);
@@ -178,6 +184,7 @@ public class ReverseMapIgnoreAttributeTests
     public class Destination
     {
         public string ShouldBeMapped { get; set; }
+
         [IgnoreMap]
         public string ShouldNotBeMapped { get; set; }
     }
@@ -195,17 +202,14 @@ public class ReverseMapIgnoreAttributeTests
         Destination source = new Destination
         {
             ShouldBeMapped = "Value1",
-            ShouldNotBeMapped = "Value2"
+            ShouldNotBeMapped = "Value2",
         };
 
         Source destination = config.CreateMapper().Map<Destination, Source>(source);
         destination.ShouldNotBeMapped.ShouldBe(null);
-
     }
 
-    public class Source2
-    {
-    }
+    public class Source2 { }
 
     public class Destination2
     {
@@ -216,7 +220,9 @@ public class ReverseMapIgnoreAttributeTests
     [Fact]
     public void Sould_not_throw_exception_when_reverse_property_does_not_exist()
     {
-        typeof(ArgumentOutOfRangeException).ShouldNotBeThrownBy(() => new MapperConfiguration(cfg => cfg.CreateMap<Source2, Destination2>()
-             .ReverseMap()));
+        typeof(ArgumentOutOfRangeException).ShouldNotBeThrownBy(
+            () =>
+                new MapperConfiguration(cfg => cfg.CreateMap<Source2, Destination2>().ReverseMap())
+        );
     }
 }

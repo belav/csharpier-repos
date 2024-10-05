@@ -14,9 +14,7 @@ public class CompiledViewDescriptor
     /// <summary>
     /// Creates a new <see cref="CompiledViewDescriptor"/>.
     /// </summary>
-    public CompiledViewDescriptor()
-    {
-    }
+    public CompiledViewDescriptor() { }
 
     /// <summary>
     /// Creates a new <see cref="CompiledViewDescriptor"/>.
@@ -43,7 +41,9 @@ public class CompiledViewDescriptor
         if (item == null && attribute == null)
         {
             // We require at least one of these to be specified.
-            throw new ArgumentException(Resources.FormatCompiledViewDescriptor_NoData(nameof(item), nameof(attribute)));
+            throw new ArgumentException(
+                Resources.FormatCompiledViewDescriptor_NoData(nameof(item), nameof(attribute))
+            );
         }
 
         Item = item;
@@ -78,7 +78,9 @@ public class CompiledViewDescriptor
     /// <remarks>
     /// May be <c>null</c>.
     /// </remarks>
-    [Obsolete("Use Item instead. RazorViewAttribute has been superseded by RazorCompiledItem and will not be used by the runtime.")]
+    [Obsolete(
+        "Use Item instead. RazorViewAttribute has been superseded by RazorCompiledItem and will not be used by the runtime."
+    )]
     public RazorViewAttribute? ViewAttribute { get; set; }
 #pragma warning restore CS0618 // Type or member is obsolete
 

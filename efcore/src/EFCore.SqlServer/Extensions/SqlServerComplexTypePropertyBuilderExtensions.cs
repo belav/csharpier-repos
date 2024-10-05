@@ -31,7 +31,8 @@ public static class SqlServerComplexTypePropertyBuilderExtensions
     public static ComplexTypePropertyBuilder UseHiLo(
         this ComplexTypePropertyBuilder propertyBuilder,
         string? name = null,
-        string? schema = null)
+        string? schema = null
+    )
     {
         Check.NullButNotEmpty(name, nameof(name));
         Check.NullButNotEmpty(schema, nameof(schema));
@@ -73,8 +74,10 @@ public static class SqlServerComplexTypePropertyBuilderExtensions
     public static ComplexTypePropertyBuilder<TProperty> UseHiLo<TProperty>(
         this ComplexTypePropertyBuilder<TProperty> propertyBuilder,
         string? name = null,
-        string? schema = null)
-        => (ComplexTypePropertyBuilder<TProperty>)UseHiLo((ComplexTypePropertyBuilder)propertyBuilder, name, schema);
+        string? schema = null
+    ) =>
+        (ComplexTypePropertyBuilder<TProperty>)
+            UseHiLo((ComplexTypePropertyBuilder)propertyBuilder, name, schema);
 
     /// <summary>
     ///     Configures the key property to use a sequence-based key value generation pattern to generate values for new entities,
@@ -92,7 +95,8 @@ public static class SqlServerComplexTypePropertyBuilderExtensions
     public static ComplexTypePropertyBuilder UseSequence(
         this ComplexTypePropertyBuilder propertyBuilder,
         string? name = null,
-        string? schema = null)
+        string? schema = null
+    )
     {
         Check.NullButNotEmpty(name, nameof(name));
         Check.NullButNotEmpty(schema, nameof(schema));
@@ -127,8 +131,10 @@ public static class SqlServerComplexTypePropertyBuilderExtensions
     public static ComplexTypePropertyBuilder<TProperty> UseSequence<TProperty>(
         this ComplexTypePropertyBuilder<TProperty> propertyBuilder,
         string? name = null,
-        string? schema = null)
-        => (ComplexTypePropertyBuilder<TProperty>)UseSequence((ComplexTypePropertyBuilder)propertyBuilder, name, schema);
+        string? schema = null
+    ) =>
+        (ComplexTypePropertyBuilder<TProperty>)
+            UseSequence((ComplexTypePropertyBuilder)propertyBuilder, name, schema);
 
     /// <summary>
     ///     Configures the key property to use the SQL Server IDENTITY feature to generate values for new entities,
@@ -146,7 +152,8 @@ public static class SqlServerComplexTypePropertyBuilderExtensions
     public static ComplexTypePropertyBuilder UseIdentityColumn(
         this ComplexTypePropertyBuilder propertyBuilder,
         long seed = 1,
-        int increment = 1)
+        int increment = 1
+    )
     {
         var property = propertyBuilder.Metadata;
         property.SetValueGenerationStrategy(SqlServerValueGenerationStrategy.IdentityColumn);
@@ -176,8 +183,8 @@ public static class SqlServerComplexTypePropertyBuilderExtensions
     public static ComplexTypePropertyBuilder UseIdentityColumn(
         this ComplexTypePropertyBuilder propertyBuilder,
         int seed,
-        int increment = 1)
-        => propertyBuilder.UseIdentityColumn((long)seed, increment);
+        int increment = 1
+    ) => propertyBuilder.UseIdentityColumn((long)seed, increment);
 
     /// <summary>
     ///     Configures the key property to use the SQL Server IDENTITY feature to generate values for new entities,
@@ -196,8 +203,10 @@ public static class SqlServerComplexTypePropertyBuilderExtensions
     public static ComplexTypePropertyBuilder<TProperty> UseIdentityColumn<TProperty>(
         this ComplexTypePropertyBuilder<TProperty> propertyBuilder,
         long seed = 1,
-        int increment = 1)
-        => (ComplexTypePropertyBuilder<TProperty>)UseIdentityColumn((ComplexTypePropertyBuilder)propertyBuilder, seed, increment);
+        int increment = 1
+    ) =>
+        (ComplexTypePropertyBuilder<TProperty>)
+            UseIdentityColumn((ComplexTypePropertyBuilder)propertyBuilder, seed, increment);
 
     /// <summary>
     ///     Configures the key property to use the SQL Server IDENTITY feature to generate values for new entities,
@@ -216,8 +225,10 @@ public static class SqlServerComplexTypePropertyBuilderExtensions
     public static ComplexTypePropertyBuilder<TProperty> UseIdentityColumn<TProperty>(
         this ComplexTypePropertyBuilder<TProperty> propertyBuilder,
         int seed,
-        int increment = 1)
-        => (ComplexTypePropertyBuilder<TProperty>)UseIdentityColumn((ComplexTypePropertyBuilder)propertyBuilder, (long)seed, increment);
+        int increment = 1
+    ) =>
+        (ComplexTypePropertyBuilder<TProperty>)
+            UseIdentityColumn((ComplexTypePropertyBuilder)propertyBuilder, (long)seed, increment);
 
     /// <summary>
     ///     Configures whether the property's column is created as sparse when targeting SQL Server.
@@ -232,7 +243,10 @@ public static class SqlServerComplexTypePropertyBuilderExtensions
     /// <param name="propertyBuilder">The builder for the property being configured.</param>
     /// <param name="sparse">A value indicating whether the property's column is created as sparse.</param>
     /// <returns>A builder to further configure the property.</returns>
-    public static ComplexTypePropertyBuilder IsSparse(this ComplexTypePropertyBuilder propertyBuilder, bool sparse = true)
+    public static ComplexTypePropertyBuilder IsSparse(
+        this ComplexTypePropertyBuilder propertyBuilder,
+        bool sparse = true
+    )
     {
         propertyBuilder.Metadata.SetIsSparse(sparse);
 
@@ -254,6 +268,8 @@ public static class SqlServerComplexTypePropertyBuilderExtensions
     /// <returns>A builder to further configure the property.</returns>
     public static ComplexTypePropertyBuilder<TProperty> IsSparse<TProperty>(
         this ComplexTypePropertyBuilder<TProperty> propertyBuilder,
-        bool sparse = true)
-        => (ComplexTypePropertyBuilder<TProperty>)IsSparse((ComplexTypePropertyBuilder)propertyBuilder, sparse);
+        bool sparse = true
+    ) =>
+        (ComplexTypePropertyBuilder<TProperty>)
+            IsSparse((ComplexTypePropertyBuilder)propertyBuilder, sparse);
 }

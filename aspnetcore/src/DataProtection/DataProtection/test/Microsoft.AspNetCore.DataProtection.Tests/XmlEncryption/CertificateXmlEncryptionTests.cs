@@ -21,35 +21,56 @@ public class CertificateXmlEncryptorTests
         symmetricAlgorithm.GenerateKey();
 
         var mockInternalEncryptor = new Mock<IInternalCertificateXmlEncryptor>();
-        mockInternalEncryptor.Setup(o => o.PerformEncryption(It.IsAny<EncryptedXml>(), It.IsAny<XmlElement>()))
-            .Returns<EncryptedXml, XmlElement>((encryptedXml, element) =>
-            {
-                encryptedXml.AddKeyNameMapping("theKey", symmetricAlgorithm); // use symmetric encryption
-                return encryptedXml.Encrypt(element, "theKey");
-            });
+        mockInternalEncryptor
+            .Setup(o => o.PerformEncryption(It.IsAny<EncryptedXml>(), It.IsAny<XmlElement>()))
+            .Returns<EncryptedXml, XmlElement>(
+                (encryptedXml, element) =>
+                {
+                    encryptedXml.AddKeyNameMapping("theKey", symmetricAlgorithm); // use symmetric encryption
+                    return encryptedXml.Encrypt(element, "theKey");
+                }
+            );
 
         var mockInternalDecryptor = new Mock<IInternalEncryptedXmlDecryptor>();
-        mockInternalDecryptor.Setup(o => o.PerformPreDecryptionSetup(It.IsAny<EncryptedXml>()))
+        mockInternalDecryptor
+            .Setup(o => o.PerformPreDecryptionSetup(It.IsAny<EncryptedXml>()))
             .Callback<EncryptedXml>(encryptedXml =>
             {
                 encryptedXml.AddKeyNameMapping("theKey", symmetricAlgorithm); // use symmetric encryption
             });
 
         var serviceCollection = new ServiceCollection();
-        serviceCollection.AddSingleton<IInternalEncryptedXmlDecryptor>(mockInternalDecryptor.Object);
+        serviceCollection.AddSingleton<IInternalEncryptedXmlDecryptor>(
+            mockInternalDecryptor.Object
+        );
 
         var services = serviceCollection.BuildServiceProvider();
-        var encryptor = new CertificateXmlEncryptor(NullLoggerFactory.Instance, mockInternalEncryptor.Object);
+        var encryptor = new CertificateXmlEncryptor(
+            NullLoggerFactory.Instance,
+            mockInternalEncryptor.Object
+        );
         var decryptor = new EncryptedXmlDecryptor(services);
 
-        var originalXml = XElement.Parse(@"<mySecret value='265ee4ea-ade2-43b1-b706-09b259e58b6b' />");
+        var originalXml = XElement.Parse(
+            @"<mySecret value='265ee4ea-ade2-43b1-b706-09b259e58b6b' />"
+        );
 
         // Act & assert - run through encryptor and make sure we get back <EncryptedData> element
         var encryptedXmlInfo = encryptor.Encrypt(originalXml);
         Assert.Equal(typeof(EncryptedXmlDecryptor), encryptedXmlInfo.DecryptorType);
-        Assert.Equal(XName.Get("EncryptedData", "http://www.w3.org/2001/04/xmlenc#"), encryptedXmlInfo.EncryptedElement.Name);
-        Assert.Equal("http://www.w3.org/2001/04/xmlenc#Element", (string)encryptedXmlInfo.EncryptedElement.Attribute("Type"));
-        Assert.DoesNotContain("265ee4ea-ade2-43b1-b706-09b259e58b6b", encryptedXmlInfo.EncryptedElement.ToString(), StringComparison.OrdinalIgnoreCase);
+        Assert.Equal(
+            XName.Get("EncryptedData", "http://www.w3.org/2001/04/xmlenc#"),
+            encryptedXmlInfo.EncryptedElement.Name
+        );
+        Assert.Equal(
+            "http://www.w3.org/2001/04/xmlenc#Element",
+            (string)encryptedXmlInfo.EncryptedElement.Attribute("Type")
+        );
+        Assert.DoesNotContain(
+            "265ee4ea-ade2-43b1-b706-09b259e58b6b",
+            encryptedXmlInfo.EncryptedElement.ToString(),
+            StringComparison.OrdinalIgnoreCase
+        );
 
         // Act & assert - run through decryptor and make sure we get back the original value
         var roundTrippedElement = decryptor.Decrypt(encryptedXmlInfo.EncryptedElement);

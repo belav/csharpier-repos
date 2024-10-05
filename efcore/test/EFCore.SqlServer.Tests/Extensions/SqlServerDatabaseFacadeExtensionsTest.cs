@@ -10,10 +10,11 @@ namespace Microsoft.EntityFrameworkCore;
 public class SqlServerDatabaseFacadeExtensionsTest
 {
     [ConditionalFact]
-    public void Returns_appropriate_name()
-        => Assert.Equal(
+    public void Returns_appropriate_name() =>
+        Assert.Equal(
             typeof(SqlServerConnection).Assembly.GetName().Name,
-            new DatabaseProvider<SqlServerOptionsExtension>(new DatabaseProviderDependencies()).Name);
+            new DatabaseProvider<SqlServerOptionsExtension>(new DatabaseProviderDependencies()).Name
+        );
 
     [ConditionalFact]
     public void Is_configured_when_configuration_contains_associated_extension()
@@ -22,7 +23,10 @@ public class SqlServerDatabaseFacadeExtensionsTest
         optionsBuilder.UseSqlServer("Database=Crunchie");
 
         Assert.True(
-            new DatabaseProvider<SqlServerOptionsExtension>(new DatabaseProviderDependencies()).IsConfigured(optionsBuilder.Options));
+            new DatabaseProvider<SqlServerOptionsExtension>(
+                new DatabaseProviderDependencies()
+            ).IsConfigured(optionsBuilder.Options)
+        );
     }
 
     [ConditionalFact]
@@ -31,7 +35,10 @@ public class SqlServerDatabaseFacadeExtensionsTest
         var optionsBuilder = new DbContextOptionsBuilder();
 
         Assert.False(
-            new DatabaseProvider<SqlServerOptionsExtension>(new DatabaseProviderDependencies()).IsConfigured(optionsBuilder.Options));
+            new DatabaseProvider<SqlServerOptionsExtension>(
+                new DatabaseProviderDependencies()
+            ).IsConfigured(optionsBuilder.Options)
+        );
     }
 
     [ConditionalFact]
@@ -63,40 +70,42 @@ public class SqlServerDatabaseFacadeExtensionsTest
     public void Setting_CommandTimeout_to_negative_value_throws()
     {
         Assert.Throws<InvalidOperationException>(
-            () => new DbContextOptionsBuilder().UseSqlServer(
-                "No=LoveyDovey",
-                b => b.CommandTimeout(-55)));
+            () =>
+                new DbContextOptionsBuilder().UseSqlServer(
+                    "No=LoveyDovey",
+                    b => b.CommandTimeout(-55)
+                )
+        );
 
         using var context = new TimeoutContext();
         Assert.Null(context.Database.GetCommandTimeout());
 
+        Assert.Throws<ArgumentException>(() => context.Database.SetCommandTimeout(-3));
         Assert.Throws<ArgumentException>(
-            () => context.Database.SetCommandTimeout(-3));
+            () => context.Database.SetCommandTimeout(TimeSpan.FromSeconds(-3))
+        );
+
+        Assert.Throws<ArgumentException>(() => context.Database.SetCommandTimeout(-99));
         Assert.Throws<ArgumentException>(
-            () => context.Database.SetCommandTimeout(TimeSpan.FromSeconds(-3)));
+            () => context.Database.SetCommandTimeout(TimeSpan.FromSeconds(-99))
+        );
 
         Assert.Throws<ArgumentException>(
-            () => context.Database.SetCommandTimeout(-99));
-        Assert.Throws<ArgumentException>(
-            () => context.Database.SetCommandTimeout(TimeSpan.FromSeconds(-99)));
-
-        Assert.Throws<ArgumentException>(
-            () => context.Database.SetCommandTimeout(TimeSpan.FromSeconds(uint.MaxValue)));
+            () => context.Database.SetCommandTimeout(TimeSpan.FromSeconds(uint.MaxValue))
+        );
     }
 
     public class TimeoutContext : DbContext
     {
-        public TimeoutContext()
-        {
-        }
+        public TimeoutContext() { }
 
         public TimeoutContext(int? commandTimeout)
         {
             Database.SetCommandTimeout(commandTimeout);
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(SqlServerFixture.DefaultServiceProvider)
                 .UseSqlServer(new FakeDbConnection("A=B"));
     }
@@ -138,11 +147,13 @@ public class SqlServerDatabaseFacadeExtensionsTest
         using var context = new SqlServerUseInOnConfiguringContext();
         Assert.Equal(
             CoreStrings.RecursiveOnConfiguring,
-            Assert.Throws<InvalidOperationException>(
-                () =>
+            Assert
+                .Throws<InvalidOperationException>(() =>
                 {
                     var _ = context.Model; // Trigger context initialization
-                }).Message);
+                })
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -151,7 +162,9 @@ public class SqlServerDatabaseFacadeExtensionsTest
         using var context = new ProviderContext(
             new DbContextOptionsBuilder()
                 .UseInternalServiceProvider(SqlServerFixture.DefaultServiceProvider)
-                .UseSqlServer("Database=Maltesers").Options);
+                .UseSqlServer("Database=Maltesers")
+                .Options
+        );
         Assert.True(context.Database.IsSqlServer());
     }
 
@@ -161,7 +174,9 @@ public class SqlServerDatabaseFacadeExtensionsTest
         using var context = new ProviderOnModelContext(
             new DbContextOptionsBuilder()
                 .UseInternalServiceProvider(SqlServerFixture.DefaultServiceProvider)
-                .UseSqlServer("Database=Maltesers").Options);
+                .UseSqlServer("Database=Maltesers")
+                .Options
+        );
         var _ = context.Model; // Trigger context initialization
         Assert.True(context.IsSqlServerSet);
     }
@@ -172,7 +187,9 @@ public class SqlServerDatabaseFacadeExtensionsTest
         using var context = new ProviderConstructorContext(
             new DbContextOptionsBuilder()
                 .UseInternalServiceProvider(SqlServerFixture.DefaultServiceProvider)
-                .UseSqlServer("Database=Maltesers").Options);
+                .UseSqlServer("Database=Maltesers")
+                .Options
+        );
         var _ = context.Model; // Trigger context initialization
         Assert.True(context.IsSqlServerSet);
     }
@@ -183,14 +200,18 @@ public class SqlServerDatabaseFacadeExtensionsTest
         using var context = new ProviderUseInOnConfiguringContext(
             new DbContextOptionsBuilder()
                 .UseInternalServiceProvider(SqlServerFixture.DefaultServiceProvider)
-                .UseSqlServer("Database=Maltesers").Options);
+                .UseSqlServer("Database=Maltesers")
+                .Options
+        );
         Assert.Equal(
             CoreStrings.RecursiveOnConfiguring,
-            Assert.Throws<InvalidOperationException>(
-                () =>
+            Assert
+                .Throws<InvalidOperationException>(() =>
                 {
                     var _ = context.Model; // Trigger context initialization
-                }).Message);
+                })
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -199,42 +220,40 @@ public class SqlServerDatabaseFacadeExtensionsTest
         using var context = new ProviderContext(
             new DbContextOptionsBuilder()
                 .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
-                .UseInMemoryDatabase("Maltesers").Options);
+                .UseInMemoryDatabase("Maltesers")
+                .Options
+        );
         Assert.False(context.Database.IsSqlServer());
     }
 
     private class ProviderContext : DbContext
     {
-        protected ProviderContext()
-        {
-        }
+        protected ProviderContext() { }
 
         public ProviderContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         public bool? IsSqlServerSet { get; protected set; }
     }
 
     private class SqlServerOnConfiguringContext : ProviderContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(SqlServerFixture.DefaultServiceProvider)
                 .UseSqlServer("Database=Maltesers");
     }
 
     private class SqlServerOnModelContext : SqlServerOnConfiguringContext
     {
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => IsSqlServerSet = Database.IsSqlServer();
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            IsSqlServerSet = Database.IsSqlServer();
     }
 
     private class RelationalOnModelContext : SqlServerOnConfiguringContext
     {
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => IsSqlServerSet = Database.IsRelational();
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            IsSqlServerSet = Database.IsRelational();
     }
 
     private class SqlServerConstructorContext : SqlServerOnConfiguringContext
@@ -258,12 +277,10 @@ public class SqlServerDatabaseFacadeExtensionsTest
     private class ProviderOnModelContext : ProviderContext
     {
         public ProviderOnModelContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => IsSqlServerSet = Database.IsSqlServer();
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            IsSqlServerSet = Database.IsSqlServer();
     }
 
     private class ProviderConstructorContext : ProviderContext
@@ -278,11 +295,9 @@ public class SqlServerDatabaseFacadeExtensionsTest
     private class ProviderUseInOnConfiguringContext : ProviderContext
     {
         public ProviderUseInOnConfiguringContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => IsSqlServerSet = Database.IsSqlServer();
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            IsSqlServerSet = Database.IsSqlServer();
     }
 }

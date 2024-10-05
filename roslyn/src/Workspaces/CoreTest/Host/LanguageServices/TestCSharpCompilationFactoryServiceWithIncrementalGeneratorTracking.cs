@@ -3,9 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Composition;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Composition;
 using System.Text;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -14,40 +14,61 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.UnitTests
 {
-    [ExportLanguageService(typeof(ICompilationFactoryService), LanguageNames.CSharp, ServiceLayer.Test), Shared, PartNotDiscoverable]
-    internal class TestCSharpCompilationFactoryServiceWithIncrementalGeneratorTracking : ICompilationFactoryService
+    [
+        ExportLanguageService(
+            typeof(ICompilationFactoryService),
+            LanguageNames.CSharp,
+            ServiceLayer.Test
+        ),
+        Shared,
+        PartNotDiscoverable
+    ]
+    internal class TestCSharpCompilationFactoryServiceWithIncrementalGeneratorTracking
+        : ICompilationFactoryService
     {
-        private static readonly CSharpCompilationOptions s_defaultOptions = new(OutputKind.ConsoleApplication, concurrentBuild: false);
+        private static readonly CSharpCompilationOptions s_defaultOptions =
+            new(OutputKind.ConsoleApplication, concurrentBuild: false);
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestCSharpCompilationFactoryServiceWithIncrementalGeneratorTracking()
-        {
-        }
+        public TestCSharpCompilationFactoryServiceWithIncrementalGeneratorTracking() { }
 
-        Compilation ICompilationFactoryService.CreateCompilation(string assemblyName, CompilationOptions options)
+        Compilation ICompilationFactoryService.CreateCompilation(
+            string assemblyName,
+            CompilationOptions options
+        )
         {
             return CSharpCompilation.Create(
                 assemblyName,
-                options: (CSharpCompilationOptions)options ?? s_defaultOptions);
+                options: (CSharpCompilationOptions)options ?? s_defaultOptions
+            );
         }
 
-        Compilation ICompilationFactoryService.CreateSubmissionCompilation(string assemblyName, CompilationOptions options, Type? hostObjectType)
+        Compilation ICompilationFactoryService.CreateSubmissionCompilation(
+            string assemblyName,
+            CompilationOptions options,
+            Type? hostObjectType
+        )
         {
             return CSharpCompilation.CreateScriptCompilation(
                 assemblyName,
                 options: (CSharpCompilationOptions)options,
                 previousScriptCompilation: null,
-                globalsType: hostObjectType);
+                globalsType: hostObjectType
+            );
         }
 
-        CompilationOptions ICompilationFactoryService.GetDefaultCompilationOptions()
-            => s_defaultOptions;
+        CompilationOptions ICompilationFactoryService.GetDefaultCompilationOptions() =>
+            s_defaultOptions;
 
-        CompilationOptions? ICompilationFactoryService.TryParsePdbCompilationOptions(IReadOnlyDictionary<string, string> compilationOptionsMetadata)
+        CompilationOptions? ICompilationFactoryService.TryParsePdbCompilationOptions(
+            IReadOnlyDictionary<string, string> compilationOptionsMetadata
+        )
         {
-            if (!compilationOptionsMetadata.TryGetValue("output-kind", out var outputKindString) ||
-                !Enum.TryParse<OutputKind>(outputKindString, out var outputKind))
+            if (
+                !compilationOptionsMetadata.TryGetValue("output-kind", out var outputKindString)
+                || !Enum.TryParse<OutputKind>(outputKindString, out var outputKind)
+            )
             {
                 return null;
             }
@@ -55,9 +76,23 @@ namespace Microsoft.CodeAnalysis.UnitTests
             return new CSharpCompilationOptions(outputKind: outputKind);
         }
 
-        GeneratorDriver ICompilationFactoryService.CreateGeneratorDriver(ParseOptions parseOptions, ImmutableArray<ISourceGenerator> generators, AnalyzerConfigOptionsProvider optionsProvider, ImmutableArray<AdditionalText> additionalTexts)
+        GeneratorDriver ICompilationFactoryService.CreateGeneratorDriver(
+            ParseOptions parseOptions,
+            ImmutableArray<ISourceGenerator> generators,
+            AnalyzerConfigOptionsProvider optionsProvider,
+            ImmutableArray<AdditionalText> additionalTexts
+        )
         {
-            return CSharpGeneratorDriver.Create(generators, additionalTexts, (CSharpParseOptions)parseOptions, optionsProvider, new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+            return CSharpGeneratorDriver.Create(
+                generators,
+                additionalTexts,
+                (CSharpParseOptions)parseOptions,
+                optionsProvider,
+                new GeneratorDriverOptions(
+                    IncrementalGeneratorOutputKind.None,
+                    trackIncrementalGeneratorSteps: true
+                )
+            );
         }
     }
 }

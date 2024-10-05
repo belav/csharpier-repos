@@ -18,7 +18,13 @@ namespace Microsoft.CodeAnalysis
         /// <returns>True when parsing succeeds completely (i.e. every character in the string was consumed), false otherwise.</returns>
         internal static bool TryParse(string s, out Version version)
         {
-            return TryParse(s, allowWildcard: false, maxValue: ushort.MaxValue, allowPartialParse: true, version: out version);
+            return TryParse(
+                s,
+                allowWildcard: false,
+                maxValue: ushort.MaxValue,
+                allowPartialParse: true,
+                version: out version
+            );
         }
 
         /// <summary>
@@ -32,9 +38,19 @@ namespace Microsoft.CodeAnalysis
         /// If <paramref name="s"/> contains * the version build and/or revision numbers are set to <see cref="ushort.MaxValue"/>.
         /// </param>
         /// <returns>True when parsing succeeds completely (i.e. every character in the string was consumed), false otherwise.</returns>
-        internal static bool TryParseAssemblyVersion(string s, bool allowWildcard, out Version version)
+        internal static bool TryParseAssemblyVersion(
+            string s,
+            bool allowWildcard,
+            out Version version
+        )
         {
-            return TryParse(s, allowWildcard: allowWildcard, maxValue: ushort.MaxValue - 1, allowPartialParse: false, version: out version);
+            return TryParse(
+                s,
+                allowWildcard: allowWildcard,
+                maxValue: ushort.MaxValue - 1,
+                allowPartialParse: false,
+                version: out version
+            );
         }
 
         /// <summary>
@@ -50,7 +66,13 @@ namespace Microsoft.CodeAnalysis
         /// If <paramref name="s"/> contains * and wildcard is allowed the version build and/or revision numbers are set to <see cref="ushort.MaxValue"/>.
         /// </param>
         /// <returns>True when parsing succeeds completely (i.e. every character in the string was consumed), false otherwise.</returns>
-        private static bool TryParse(string s, bool allowWildcard, ushort maxValue, bool allowPartialParse, out Version version)
+        private static bool TryParse(
+            string s,
+            bool allowWildcard,
+            ushort maxValue,
+            bool allowPartialParse,
+            out Version version
+        )
         {
             Debug.Assert(!allowWildcard || maxValue < ushort.MaxValue);
 
@@ -77,8 +99,15 @@ namespace Microsoft.CodeAnalysis
             bool parseError = false;
             for (int i = 0; i < lastExplicitValue; i++)
             {
-
-                if (!ushort.TryParse(elements[i], NumberStyles.None, CultureInfo.InvariantCulture, out values[i]) || values[i] > maxValue)
+                if (
+                    !ushort.TryParse(
+                        elements[i],
+                        NumberStyles.None,
+                        CultureInfo.InvariantCulture,
+                        out values[i]
+                    )
+                    || values[i] > maxValue
+                )
                 {
                     if (!allowPartialParse)
                     {
@@ -150,7 +179,14 @@ namespace Microsoft.CodeAnalysis
         private static bool TryGetValue(string s, out ushort value)
         {
             System.Numerics.BigInteger number;
-            if (System.Numerics.BigInteger.TryParse(s, NumberStyles.None, CultureInfo.InvariantCulture, out number))
+            if (
+                System.Numerics.BigInteger.TryParse(
+                    s,
+                    NumberStyles.None,
+                    CultureInfo.InvariantCulture,
+                    out number
+                )
+            )
             {
                 //The old compiler would take the 16 least significant bits and use their value as the output
                 //so we'll do that too.
@@ -167,15 +203,18 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// If build and/or revision numbers are 65535 they are replaced with time-based values.
         /// </summary>
-        public static Version? GenerateVersionFromPatternAndCurrentTime(DateTime time, Version pattern)
+        public static Version? GenerateVersionFromPatternAndCurrentTime(
+            DateTime time,
+            Version pattern
+        )
         {
             if (pattern == null || pattern.Revision != ushort.MaxValue)
             {
                 return pattern;
             }
 
-            // MSDN doc on the attribute: 
-            // "The default build number increments daily. The default revision number is the number of seconds since midnight local time 
+            // MSDN doc on the attribute:
+            // "The default build number increments daily. The default revision number is the number of seconds since midnight local time
             // (without taking into account time zone adjustments for daylight saving time), divided by 2."
             if (time == default(DateTime))
             {

@@ -17,12 +17,19 @@ namespace Microsoft.CSharp.RuntimeBinder
         public BindingFlag BindingFlags => 0;
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        public Expr DispatchPayload(RuntimeBinder runtimeBinder, ArgumentObject[] arguments, LocalVariableSymbol[] locals)
-            => runtimeBinder.BindIsEvent(this, arguments, locals);
+        public Expr DispatchPayload(
+            RuntimeBinder runtimeBinder,
+            ArgumentObject[] arguments,
+            LocalVariableSymbol[] locals
+        ) => runtimeBinder.BindIsEvent(this, arguments, locals);
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        public void PopulateSymbolTableWithName(Type callingType, ArgumentObject[] arguments)
-            => SymbolTable.PopulateSymbolTableWithName(Name, null, arguments[0].Info.IsStaticType ? arguments[0].Value as Type : arguments[0].Type);
+        public void PopulateSymbolTableWithName(Type callingType, ArgumentObject[] arguments) =>
+            SymbolTable.PopulateSymbolTableWithName(
+                Name,
+                null,
+                arguments[0].Info.IsStaticType ? arguments[0].Value as Type : arguments[0].Type
+            );
 
         public bool IsBinderThatCanHaveRefReceiver => false;
 
@@ -40,9 +47,7 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// <param name="name">The name of the member to test.</param>
         /// <param name="callingContext">The <see cref="System.Type"/> that indicates where this operation is defined.</param>
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        public CSharpIsEventBinder(
-            string name,
-            Type callingContext)
+        public CSharpIsEventBinder(string name, Type callingContext)
         {
             Name = name;
             _callingContext = callingContext;
@@ -64,8 +69,7 @@ namespace Microsoft.CSharp.RuntimeBinder
                 return false;
             }
 
-            if (_callingContext != otherBinder._callingContext ||
-                Name != otherBinder.Name)
+            if (_callingContext != otherBinder._callingContext || Name != otherBinder.Name)
             {
                 return false;
             }
@@ -84,8 +88,11 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// <param name="target">The target of the dynamic binary operation.</param>
         /// <param name="args">The arguments to the dynamic event test.</param>
         /// <returns>The <see cref="DynamicMetaObject"/> representing the result of the binding.</returns>
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
         public override DynamicMetaObject Bind(DynamicMetaObject target, DynamicMetaObject[] args)
         {
             BinderHelper.ValidateBindArgument(target, nameof(target));

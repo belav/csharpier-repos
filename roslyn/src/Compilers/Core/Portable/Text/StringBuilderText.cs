@@ -21,8 +21,12 @@ namespace Microsoft.CodeAnalysis.Text
 
         private readonly Encoding? _encodingOpt;
 
-        public StringBuilderText(StringBuilder builder, Encoding? encodingOpt, SourceHashAlgorithm checksumAlgorithm)
-             : base(checksumAlgorithm: checksumAlgorithm)
+        public StringBuilderText(
+            StringBuilder builder,
+            Encoding? encodingOpt,
+            SourceHashAlgorithm checksumAlgorithm
+        )
+            : base(checksumAlgorithm: checksumAlgorithm)
         {
             RoslynDebug.Assert(builder != null);
 
@@ -56,7 +60,7 @@ namespace Microsoft.CodeAnalysis.Text
         /// </summary>
         /// <param name="position">The position to get the character from.</param>
         /// <returns>The character.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">When position is negative or 
+        /// <exception cref="ArgumentOutOfRangeException">When position is negative or
         /// greater than <see cref="Length"/>.</exception>
         public override char this[int position]
         {
@@ -85,7 +89,12 @@ namespace Microsoft.CodeAnalysis.Text
             return _builder.ToString(span.Start, span.Length);
         }
 
-        public override void CopyTo(int sourceIndex, char[] destination, int destinationIndex, int count)
+        public override void CopyTo(
+            int sourceIndex,
+            char[] destination,
+            int destinationIndex,
+            int count
+        )
         {
             _builder.CopyTo(sourceIndex, destination, destinationIndex, count);
         }

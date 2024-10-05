@@ -36,7 +36,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             public readonly long ReJITID;
 
             public override int GetHashCode() => HashCode.Combine(MethodID, ReJITID);
-            public override bool Equals([NotNullWhen(true)] object obj) => obj is JittedID id ? Equals(id) : false;
+
+            public override bool Equals([NotNullWhen(true)] object obj) =>
+                obj is JittedID id ? Equals(id) : false;
 
             public bool Equals(JittedID other)
             {
@@ -52,11 +54,13 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             TraceRuntimeDescToTypeSystemDesc idParser,
             int clrInstanceID,
             string preciseDebugInfoFile,
-            Logger logger)
+            Logger logger
+        )
         {
             // Capture the addresses of jitted code
             List<MemoryRegionInfo> infos = new List<MemoryRegionInfo>();
-            Dictionary<JittedID, MemoryRegionInfo> info = new Dictionary<JittedID, MemoryRegionInfo>();
+            Dictionary<JittedID, MemoryRegionInfo> info =
+                new Dictionary<JittedID, MemoryRegionInfo>();
             foreach (var e in p.EventsInProcess.ByEventType<MethodLoadUnloadTraceData>())
             {
                 if (e.ClrInstanceID != clrInstanceID)
@@ -69,21 +73,22 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 {
                     method = idParser.ResolveMethodID(e.MethodID, out _);
                 }
-                catch
-                {
-                }
+                catch { }
 
                 if (method != null)
                 {
                     JittedID jittedID = new JittedID(e.MethodID, 0);
                     if (!info.ContainsKey(jittedID))
                     {
-                        info.Add(jittedID, new MemoryRegionInfo
-                        {
-                            StartAddress = e.MethodStartAddress,
-                            EndAddress = e.MethodStartAddress + checked((uint)e.MethodSize),
-                            Method = method,
-                        });
+                        info.Add(
+                            jittedID,
+                            new MemoryRegionInfo
+                            {
+                                StartAddress = e.MethodStartAddress,
+                                EndAddress = e.MethodStartAddress + checked((uint)e.MethodSize),
+                                Method = method,
+                            }
+                        );
                     }
                 }
             }
@@ -100,21 +105,22 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 {
                     method = idParser.ResolveMethodID(e.MethodID, out _, throwIfNotFound: false);
                 }
-                catch
-                {
-                }
+                catch { }
 
                 if (method != null)
                 {
                     JittedID jittedID = new JittedID(e.MethodID, e.ReJITID);
                     if (!info.ContainsKey(jittedID))
                     {
-                        info.Add(jittedID, new MemoryRegionInfo
-                        {
-                            StartAddress = e.MethodStartAddress,
-                            EndAddress = e.MethodStartAddress + checked((uint)e.MethodSize),
-                            Method = method,
-                        });
+                        info.Add(
+                            jittedID,
+                            new MemoryRegionInfo
+                            {
+                                StartAddress = e.MethodStartAddress,
+                                EndAddress = e.MethodStartAddress + checked((uint)e.MethodSize),
+                                Method = method,
+                            }
+                        );
                     }
                 }
             }
@@ -131,40 +137,76 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 try
                 {
                     byte[] image = File.ReadAllBytes(module.FilePath);
-                    using (FileStream fstream = new FileStream(module.FilePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+                    using (
+                        FileStream fstream = new FileStream(
+                            module.FilePath,
+                            FileMode.Open,
+                            FileAccess.Read,
+                            FileShare.Read
+                        )
+                    )
                     {
-                        var r2rCheckPEReader = new System.Reflection.PortableExecutable.PEReader(fstream, System.Reflection.PortableExecutable.PEStreamOptions.LeaveOpen);
+                        var r2rCheckPEReader = new System.Reflection.PortableExecutable.PEReader(
+                            fstream,
+                            System.Reflection.PortableExecutable.PEStreamOptions.LeaveOpen
+                        );
 
-                        if (!ILCompiler.Reflection.ReadyToRun.ReadyToRunReader.IsReadyToRunImage(r2rCheckPEReader))
+                        if (
+                            !ILCompiler.Reflection.ReadyToRun.ReadyToRunReader.IsReadyToRunImage(
+                                r2rCheckPEReader
+                            )
+                        )
                             continue;
                     }
 
-                    var reader = new ILCompiler.Reflection.ReadyToRun.ReadyToRunReader(tsc, module.FilePath);
-                    foreach (var methodEntry in reader.GetCustomMethodToRuntimeFunctionMapping<TypeDesc, MethodDesc, R2RSigProviderContext>(sigProvider))
+                    var reader = new ILCompiler.Reflection.ReadyToRun.ReadyToRunReader(
+                        tsc,
+                        module.FilePath
+                    );
+                    foreach (
+                        var methodEntry in reader.GetCustomMethodToRuntimeFunctionMapping<
+                            TypeDesc,
+                            MethodDesc,
+                            R2RSigProviderContext
+                        >(sigProvider)
+                    )
                     {
                         foreach (var runtimeFunction in methodEntry.Value.RuntimeFunctions)
                         {
-                            infos.Add(new MemoryRegionInfo
-                            {
-                                StartAddress = module.ImageBase + (ulong)runtimeFunction.StartAddress,
-                                EndAddress = module.ImageBase + (ulong)runtimeFunction.StartAddress + (uint)runtimeFunction.Size,
-                                Method = methodEntry.Key,
-                                NativeToILMap = runtimeFunction.DebugInfo != null ? CreateNativeToILMap(methodEntry.Key, runtimeFunction.DebugInfo.BoundsList) : null,
-                            });
+                            infos.Add(
+                                new MemoryRegionInfo
+                                {
+                                    StartAddress =
+                                        module.ImageBase + (ulong)runtimeFunction.StartAddress,
+                                    EndAddress =
+                                        module.ImageBase
+                                        + (ulong)runtimeFunction.StartAddress
+                                        + (uint)runtimeFunction.Size,
+                                    Method = methodEntry.Key,
+                                    NativeToILMap =
+                                        runtimeFunction.DebugInfo != null
+                                            ? CreateNativeToILMap(
+                                                methodEntry.Key,
+                                                runtimeFunction.DebugInfo.BoundsList
+                                            )
+                                            : null,
+                                }
+                            );
                         }
                     }
                 }
                 catch
                 {
-                    logger.PrintWarning($"Failed to load method entry points from R2R module {module.FilePath}");
+                    logger.PrintWarning(
+                        $"Failed to load method entry points from R2R module {module.FilePath}"
+                    );
                 }
             }
 
             List<PreciseDebugInfo> preciseInfos = null;
             if (preciseDebugInfoFile != null)
             {
-                preciseInfos =
-                    File.ReadAllLines(preciseDebugInfoFile)
+                preciseInfos = File.ReadAllLines(preciseDebugInfoFile)
                     .Select(l => JsonSerializer.Deserialize<PreciseDebugInfo>(l))
                     .ToList();
             }
@@ -173,22 +215,35 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             {
                 foreach (PreciseDebugInfo preciseDebugInf in preciseInfos)
                 {
-                    if (info.TryGetValue(new JittedID((long)preciseDebugInf.MethodID, 0), out MemoryRegionInfo inf))
+                    if (
+                        info.TryGetValue(
+                            new JittedID((long)preciseDebugInf.MethodID, 0),
+                            out MemoryRegionInfo inf
+                        )
+                    )
                         inf.NativeToILMap = CreateNativeToILMap(idParser, preciseDebugInf);
                 }
             }
             else
             {
                 // Associate NativeToILMap with MethodLoad event found Memory Regions
-                foreach (MethodILToNativeMapTraceData e in p.EventsInProcess.ByEventType<MethodILToNativeMapTraceData>())
+                foreach (
+                    MethodILToNativeMapTraceData e in p.EventsInProcess.ByEventType<MethodILToNativeMapTraceData>()
+                )
                 {
-                    if (info.TryGetValue(new JittedID(e.MethodID, e.ReJITID), out MemoryRegionInfo inf))
+                    if (
+                        info.TryGetValue(
+                            new JittedID(e.MethodID, e.ReJITID),
+                            out MemoryRegionInfo inf
+                        )
+                    )
                         inf.NativeToILMap = CreateNativeToILMap(inf.Method, e);
                 }
             }
 
             // Sort the R2R data by StartAddress
-            MemoryRegionInfoStartAddressComparer startAddressComparer = new MemoryRegionInfoStartAddressComparer();
+            MemoryRegionInfoStartAddressComparer startAddressComparer =
+                new MemoryRegionInfoStartAddressComparer();
             infos.Sort(startAddressComparer);
 
             // For each method found via MethodLoad events, check to see if it exists in the infos array, and if it does not, build a list to add
@@ -218,7 +273,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 if (cur.EndAddress <= next.StartAddress)
                     continue;
 
-                logger.PrintWarning($"Overlap in memory ranges {cur.Method} overlaps with {next.Method}");
+                logger.PrintWarning(
+                    $"Overlap in memory ranges {cur.Method} overlaps with {next.Method}"
+                );
             }
 #endif
         }
@@ -243,28 +300,46 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
         private class MemoryRegionInfoStartAddressComparer : IComparer<MemoryRegionInfo>
         {
-            int IComparer<MemoryRegionInfo>.Compare(MemoryRegionInfo x, MemoryRegionInfo y) => x.StartAddress.CompareTo(y.StartAddress);
+            int IComparer<MemoryRegionInfo>.Compare(MemoryRegionInfo x, MemoryRegionInfo y) =>
+                x.StartAddress.CompareTo(y.StartAddress);
         }
 
-        private static KeyValueMap<uint, IPMapping> CreateNativeToILMap(MethodDesc method, List<DebugInfoBoundsEntry> boundsList)
+        private static KeyValueMap<uint, IPMapping> CreateNativeToILMap(
+            MethodDesc method,
+            List<DebugInfoBoundsEntry> boundsList
+        )
         {
             List<DebugInfoBoundsEntry> sorted = boundsList.OrderBy(e => e.NativeOffset).ToList();
 
-            return new(sorted.Select(e => e.NativeOffset).ToArray(), sorted.Select(e => new IPMapping((int)e.ILOffset, null, method)).ToArray());
+            return new(
+                sorted.Select(e => e.NativeOffset).ToArray(),
+                sorted.Select(e => new IPMapping((int)e.ILOffset, null, method)).ToArray()
+            );
         }
 
-        private static KeyValueMap<uint, IPMapping> CreateNativeToILMap(MethodDesc method, MethodILToNativeMapTraceData ev)
+        private static KeyValueMap<uint, IPMapping> CreateNativeToILMap(
+            MethodDesc method,
+            MethodILToNativeMapTraceData ev
+        )
         {
-            List<(uint rva, int ilOffset)> pairs = new List<(uint rva, int ilOffset)>(ev.CountOfMapEntries);
+            List<(uint rva, int ilOffset)> pairs = new List<(uint rva, int ilOffset)>(
+                ev.CountOfMapEntries
+            );
             for (int i = 0; i < ev.CountOfMapEntries; i++)
                 pairs.Add(((uint)ev.NativeOffset(i), ev.ILOffset(i)));
 
             pairs.RemoveAll(p => p.ilOffset < 0);
             pairs.Sort((p1, p2) => p1.rva.CompareTo(p2.rva));
-            return new(pairs.Select(p => p.rva).ToArray(), pairs.Select(p => new IPMapping(p.ilOffset, null, method)).ToArray());
+            return new(
+                pairs.Select(p => p.rva).ToArray(),
+                pairs.Select(p => new IPMapping(p.ilOffset, null, method)).ToArray()
+            );
         }
 
-        private static KeyValueMap<uint, IPMapping> CreateNativeToILMap(TraceRuntimeDescToTypeSystemDesc idParser, PreciseDebugInfo inf)
+        private static KeyValueMap<uint, IPMapping> CreateNativeToILMap(
+            TraceRuntimeDescToTypeSystemDesc idParser,
+            PreciseDebugInfo inf
+        )
         {
             Dictionary<uint, (InlineContext ctx, MethodDesc md)> byOrdinal = new();
             AddSubTree(inf.InlineTree);
@@ -285,7 +360,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 return new IPMapping(checked((int)preciseMapping.ILOffset), ctx, md);
             }
 
-            return new(ordered.Select(p => p.NativeOffset).ToArray(), ordered.Select(CreateMapping).ToArray());
+            return new(
+                ordered.Select(p => p.NativeOffset).ToArray(),
+                ordered.Select(CreateMapping).ToArray()
+            );
         }
     }
 
@@ -300,5 +378,6 @@ namespace Microsoft.Diagnostics.Tools.Pgo
     internal record struct IPMapping(
         int ILOffset,
         InlineContext InlineContext,
-        MethodDesc InlineeMethod);
+        MethodDesc InlineeMethod
+    );
 }

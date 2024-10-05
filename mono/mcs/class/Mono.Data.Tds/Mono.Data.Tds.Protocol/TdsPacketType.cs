@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,21 +30,22 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Data.Tds.Protocol {
-        public enum TdsPacketType
-	{
-		None = 0x0,
-		Query = 0x1,
-		Logon = 0x2,
-		Proc = 0x3,
-		Reply = 0x4,
-		Cancel = 0x6,
-		Bulk = 0x7,
-		Logon70 = 0x10,
-		SspAuth = 0x11,
-		Logoff = 0x71,
-		Normal = 0x0f,
-		DBRPC = 0xe6,
-		RPC = 0x3
-	}
+namespace Mono.Data.Tds.Protocol
+{
+    public enum TdsPacketType
+    {
+        None = 0x0,
+        Query = 0x1,
+        Logon = 0x2,
+        Proc = 0x3,
+        Reply = 0x4,
+        Cancel = 0x6,
+        Bulk = 0x7,
+        Logon70 = 0x10,
+        SspAuth = 0x11,
+        Logoff = 0x71,
+        Normal = 0x0f,
+        DBRPC = 0xe6,
+        RPC = 0x3,
+    }
 }

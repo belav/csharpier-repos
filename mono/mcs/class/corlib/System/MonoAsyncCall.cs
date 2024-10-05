@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,25 +34,22 @@
 //
 using System.Runtime.InteropServices;
 
-namespace System {
-
+namespace System
+{
 #pragma warning disable 169
 
-	[StructLayout (LayoutKind.Sequential)]
-	internal class MonoAsyncCall {
-		#region Sync with the unmanaged ASyncCall structure
-		object     msg;
-		IntPtr     cb_method;
-		object     cb_target;
-		object     state;
-		object     res;
-		object     out_args;
-		#endregion
-	}
+    [StructLayout(LayoutKind.Sequential)]
+    internal class MonoAsyncCall
+    {
+        #region Sync with the unmanaged ASyncCall structure
+        object msg;
+        IntPtr cb_method;
+        object cb_target;
+        object state;
+        object res;
+        object out_args;
+        #endregion
+    }
 
-#pragma warning restore 169	
-
+#pragma warning restore 169
 }
-
-
-

@@ -22,19 +22,29 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
     internal class CSharpEditorFactory : AbstractEditorFactory
     {
         public CSharpEditorFactory(IComponentModel componentModel)
-            : base(componentModel)
-        {
-        }
+            : base(componentModel) { }
 
         protected override string ContentTypeName => ContentTypeNames.CSharpContentType;
         protected override string LanguageName => LanguageNames.CSharp;
 
-        protected override Project GetProjectWithCorrectParseOptionsForProject(Project project, IVsHierarchy hierarchy)
+        protected override Project GetProjectWithCorrectParseOptionsForProject(
+            Project project,
+            IVsHierarchy hierarchy
+        )
         {
-            if (project.ParseOptions is CSharpParseOptions parseOptions &&
-                hierarchy is IVsBuildPropertyStorage propertyStorage &&
-                ErrorHandler.Succeeded(propertyStorage.GetPropertyValue("LangVersion", null, (uint)_PersistStorageType.PST_PROJECT_FILE, out var langVersionString)) &&
-                LanguageVersionFacts.TryParse(langVersionString, out var langVersion))
+            if (
+                project.ParseOptions is CSharpParseOptions parseOptions
+                && hierarchy is IVsBuildPropertyStorage propertyStorage
+                && ErrorHandler.Succeeded(
+                    propertyStorage.GetPropertyValue(
+                        "LangVersion",
+                        null,
+                        (uint)_PersistStorageType.PST_PROJECT_FILE,
+                        out var langVersionString
+                    )
+                )
+                && LanguageVersionFacts.TryParse(langVersionString, out var langVersion)
+            )
             {
                 return project.WithParseOptions(parseOptions.WithLanguageVersion(langVersion));
             }

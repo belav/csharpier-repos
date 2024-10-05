@@ -35,7 +35,10 @@ namespace Microsoft.Test.ModuleCore
                     KeywordParser.Tokens tokens = new KeywordParser.Tokens();
                     tokens.Equal = " ";
                     tokens.Separator = "/";
-                    Dictionary<string, string> options = KeywordParser.ParseKeywords(commandline, tokens);
+                    Dictionary<string, string> options = KeywordParser.ParseKeywords(
+                        commandline,
+                        tokens
+                    );
                     foreach (string key in options.Keys)
                         s_pproperties["CommandLine/" + key] = options[key];
                 }
@@ -67,7 +70,10 @@ namespace Microsoft.Test.ModuleCore
                         KeywordParser.Tokens tokens = new KeywordParser.Tokens();
                         tokens.Equal = " ";
                         tokens.Separator = "/";
-                        Dictionary<string, string> options = KeywordParser.ParseKeywords(commandLine, tokens);
+                        Dictionary<string, string> options = KeywordParser.ParseKeywords(
+                            commandLine,
+                            tokens
+                        );
                         foreach (string key in options.Keys)
                             TestInput.Properties["CommandLine/" + key] = options[key];
                     }
@@ -79,9 +85,7 @@ namespace Microsoft.Test.ModuleCore
         {
             bool ret = true;
             string testcasefilter = Properties["CommandLine/testcase"];
-            if (testcasefilter != null
-                && testcasefilter != "*"
-                && testcasefilter != testcasename)
+            if (testcasefilter != null && testcasefilter != "*" && testcasefilter != testcasename)
             {
                 ret = false;
             }
@@ -93,9 +97,11 @@ namespace Microsoft.Test.ModuleCore
         {
             bool ret = true;
             string variationfilter = s_pproperties["variation"];
-            if (variationfilter != null
+            if (
+                variationfilter != null
                 && variationfilter != "*"
-                && variationfilter != variationname)
+                && variationfilter != variationname
+            )
             {
                 ret = false;
             }
@@ -135,10 +141,7 @@ namespace Microsoft.Test.ModuleCore
                     s_pcommandline = TestInput.Properties["CommandLine"];
                 return s_pcommandline;
             }
-            set
-            {
-                s_pcommandline = value;
-            }
+            set { s_pcommandline = value; }
         }
 
         public static string Filter
@@ -214,10 +217,7 @@ namespace Microsoft.Test.ModuleCore
                     return StringEx.ToString(property.Value);
                 return null;
             }
-            set
-            {
-                this.Add(name).Value = value;
-            }
+            set { this.Add(name).Value = value; }
         }
 
         public virtual TestProp Get(string name)

@@ -32,9 +32,9 @@ using Microsoft.AspNetCore.Http.Connections.Internal;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Http.Timeouts;
 using Microsoft.AspNetCore.Internal;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.SignalR.Tests;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.Metrics.Testing;
 using Microsoft.Extensions.Hosting;
@@ -67,7 +67,9 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             context.Request.Method = "POST";
             context.Response.Body = ms;
             await dispatcher.ExecuteNegotiateAsync(context, new HttpConnectionDispatcherOptions());
-            var negotiateResponse = JsonConvert.DeserializeObject<JObject>(Encoding.UTF8.GetString(ms.ToArray()));
+            var negotiateResponse = JsonConvert.DeserializeObject<JObject>(
+                Encoding.UTF8.GetString(ms.ToArray())
+            );
             var connectionId = negotiateResponse.Value<string>("connectionId");
             var connectionToken = negotiateResponse.Value<string>("connectionToken");
             Assert.Null(connectionToken);
@@ -92,7 +94,9 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             context.Response.Body = ms;
             context.Request.QueryString = new QueryString("?negotiateVersion=1");
             await dispatcher.ExecuteNegotiateAsync(context, new HttpConnectionDispatcherOptions());
-            var negotiateResponse = JsonConvert.DeserializeObject<JObject>(Encoding.UTF8.GetString(ms.ToArray()));
+            var negotiateResponse = JsonConvert.DeserializeObject<JObject>(
+                Encoding.UTF8.GetString(ms.ToArray())
+            );
             var connectionId = negotiateResponse.Value<string>("connectionId");
             var connectionToken = negotiateResponse.Value<string>("connectionToken");
             Assert.True(manager.TryGetConnection(connectionToken, out var connectionContext));
@@ -117,9 +121,15 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             context.Request.Method = "POST";
             context.Response.Body = ms;
             context.Request.QueryString = new QueryString("?negotiateVersion=1");
-            var options = new HttpConnectionDispatcherOptions { TransportMaxBufferSize = 4, ApplicationMaxBufferSize = 4 };
+            var options = new HttpConnectionDispatcherOptions
+            {
+                TransportMaxBufferSize = 4,
+                ApplicationMaxBufferSize = 4,
+            };
             await dispatcher.ExecuteNegotiateAsync(context, options);
-            var negotiateResponse = JsonConvert.DeserializeObject<JObject>(Encoding.UTF8.GetString(ms.ToArray()));
+            var negotiateResponse = JsonConvert.DeserializeObject<JObject>(
+                Encoding.UTF8.GetString(ms.ToArray())
+            );
             var connectionToken = negotiateResponse.Value<string>("connectionToken");
             context.Request.QueryString = context.Request.QueryString.Add("id", connectionToken);
             Assert.True(manager.TryGetConnection(connectionToken, out var connection));
@@ -127,7 +137,9 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             await dispatcher.ExecuteAsync(context, options, c => Task.CompletedTask);
 
             // This write should complete immediately but it exceeds the writer threshold
-            var writeTask = connection.Application.Output.WriteAsync(new[] { (byte)'b', (byte)'y', (byte)'t', (byte)'e', (byte)'s' });
+            var writeTask = connection.Application.Output.WriteAsync(
+                new[] { (byte)'b', (byte)'y', (byte)'t', (byte)'e', (byte)'s' }
+            );
 
             Assert.False(writeTask.IsCompleted);
 
@@ -154,9 +166,15 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             context.Request.Method = "POST";
             context.Response.Body = ms;
             context.Request.QueryString = new QueryString("?negotiateVersion=Invalid");
-            var options = new HttpConnectionDispatcherOptions { TransportMaxBufferSize = 4, ApplicationMaxBufferSize = 4 };
+            var options = new HttpConnectionDispatcherOptions
+            {
+                TransportMaxBufferSize = 4,
+                ApplicationMaxBufferSize = 4,
+            };
             await dispatcher.ExecuteNegotiateAsync(context, options);
-            var negotiateResponse = JsonConvert.DeserializeObject<JObject>(Encoding.UTF8.GetString(ms.ToArray()));
+            var negotiateResponse = JsonConvert.DeserializeObject<JObject>(
+                Encoding.UTF8.GetString(ms.ToArray())
+            );
 
             var error = negotiateResponse.Value<string>("error");
             Assert.Equal("The client requested an invalid protocol version 'Invalid'", error);
@@ -182,12 +200,22 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             context.Request.Method = "POST";
             context.Response.Body = ms;
             context.Request.QueryString = new QueryString("");
-            var options = new HttpConnectionDispatcherOptions { TransportMaxBufferSize = 4, ApplicationMaxBufferSize = 4, MinimumProtocolVersion = 1 };
+            var options = new HttpConnectionDispatcherOptions
+            {
+                TransportMaxBufferSize = 4,
+                ApplicationMaxBufferSize = 4,
+                MinimumProtocolVersion = 1,
+            };
             await dispatcher.ExecuteNegotiateAsync(context, options);
-            var negotiateResponse = JsonConvert.DeserializeObject<JObject>(Encoding.UTF8.GetString(ms.ToArray()));
+            var negotiateResponse = JsonConvert.DeserializeObject<JObject>(
+                Encoding.UTF8.GetString(ms.ToArray())
+            );
 
             var error = negotiateResponse.Value<string>("error");
-            Assert.Equal("The client requested version '0', but the server does not support this version.", error);
+            Assert.Equal(
+                "The client requested version '0', but the server does not support this version.",
+                error
+            );
 
             var connectionId = negotiateResponse.Value<string>("connectionId");
             Assert.Null(connectionId);
@@ -236,7 +264,11 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                 var app = builder.Build();
 
                 // This task should complete immediately but it exceeds the writer threshold
-                var executeTask = dispatcher.ExecuteAsync(context, new HttpConnectionDispatcherOptions(), app);
+                var executeTask = dispatcher.ExecuteAsync(
+                    context,
+                    new HttpConnectionDispatcherOptions(),
+                    app
+                );
                 Assert.False(executeTask.IsCompleted);
                 await connection.Transport.Input.ConsumeAsync(10);
                 await executeTask.DefaultTimeout();
@@ -249,10 +281,16 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
     }
 
     [Theory]
-    [InlineData(HttpTransportType.LongPolling | HttpTransportType.WebSockets | HttpTransportType.ServerSentEvents)]
+    [InlineData(
+        HttpTransportType.LongPolling
+            | HttpTransportType.WebSockets
+            | HttpTransportType.ServerSentEvents
+    )]
     [InlineData(HttpTransportType.None)]
     [InlineData(HttpTransportType.LongPolling | HttpTransportType.WebSockets)]
-    public async Task NegotiateReturnsAvailableTransportsAfterFilteringByOptions(HttpTransportType transports)
+    public async Task NegotiateReturnsAvailableTransportsAfterFilteringByOptions(
+        HttpTransportType transports
+    )
     {
         using (StartVerifiableLog())
         {
@@ -269,13 +307,19 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             context.Request.Method = "POST";
             context.Response.Body = ms;
             context.Request.QueryString = new QueryString("?negotiateVersion=1");
-            await dispatcher.ExecuteNegotiateAsync(context, new HttpConnectionDispatcherOptions { Transports = transports });
+            await dispatcher.ExecuteNegotiateAsync(
+                context,
+                new HttpConnectionDispatcherOptions { Transports = transports }
+            );
 
-            var negotiateResponse = JsonConvert.DeserializeObject<JObject>(Encoding.UTF8.GetString(ms.ToArray()));
+            var negotiateResponse = JsonConvert.DeserializeObject<JObject>(
+                Encoding.UTF8.GetString(ms.ToArray())
+            );
             var availableTransports = HttpTransportType.None;
             foreach (var transport in negotiateResponse["availableTransports"])
             {
-                var transportType = (HttpTransportType)Enum.Parse(typeof(HttpTransportType), transport.Value<string>("transport"));
+                var transportType = (HttpTransportType)
+                    Enum.Parse(typeof(HttpTransportType), transport.Value<string>("transport"));
                 availableTransports |= transportType;
             }
 
@@ -287,7 +331,9 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
     [InlineData(HttpTransportType.WebSockets)]
     [InlineData(HttpTransportType.ServerSentEvents)]
     [InlineData(HttpTransportType.LongPolling)]
-    public async Task EndpointsThatAcceptConnectionId404WhenUnknownConnectionIdProvided(HttpTransportType transportType)
+    public async Task EndpointsThatAcceptConnectionId404WhenUnknownConnectionIdProvided(
+        HttpTransportType transportType
+    )
     {
         using (StartVerifiableLog())
         {
@@ -398,7 +444,10 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
 
                 Assert.Equal(StatusCodes.Status405MethodNotAllowed, context.Response.StatusCode);
                 await strm.FlushAsync();
-                Assert.Equal("POST requests are not allowed for WebSocket connections.", Encoding.UTF8.GetString(strm.ToArray()));
+                Assert.Equal(
+                    "POST requests are not allowed for WebSocket connections.",
+                    Encoding.UTF8.GetString(strm.ToArray())
+                );
             }
         }
     }
@@ -483,13 +532,22 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                 });
 
                 var app = builder.Build();
-                var task = dispatcher.ExecuteAsync(context, new HttpConnectionDispatcherOptions(), app);
+                var task = dispatcher.ExecuteAsync(
+                    context,
+                    new HttpConnectionDispatcherOptions(),
+                    app
+                );
 
                 // Pretend the transport closed because the client disconnected
                 if (context.WebSockets.IsWebSocketRequest)
                 {
-                    var ws = (TestWebSocketConnectionFeature)context.Features.Get<IHttpWebSocketFeature>();
-                    await ws.Client.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "", default);
+                    var ws = (TestWebSocketConnectionFeature)
+                        context.Features.Get<IHttpWebSocketFeature>();
+                    await ws.Client.CloseOutputAsync(
+                        WebSocketCloseStatus.NormalClosure,
+                        "",
+                        default
+                    );
                 }
                 else
                 {
@@ -547,7 +605,11 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                 });
 
                 var app = builder.Build();
-                var task = dispatcher.ExecuteAsync(context, new HttpConnectionDispatcherOptions(), app);
+                var task = dispatcher.ExecuteAsync(
+                    context,
+                    new HttpConnectionDispatcherOptions(),
+                    app
+                );
 
                 // Pretend the transport closed because the client disconnected
                 cts.Cancel();
@@ -555,7 +617,8 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                 await task.DefaultTimeout();
 
                 // We've been gone longer than the expiration time
-                connection.LastSeenTicks = Environment.TickCount64 - (long)disconnectTimeout.TotalMilliseconds - 1;
+                connection.LastSeenTicks =
+                    Environment.TickCount64 - (long)disconnectTimeout.TotalMilliseconds - 1;
 
                 // The application is still running here because the poll is only killed
                 // by the heartbeat so we pretend to do a scan and this should force the application task to complete
@@ -634,15 +697,30 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var waitTcs = new TaskCompletionSource();
 
             // This tests thread safety of sending multiple pieces of data to a connection at once
-            var executeTask1 = DispatcherExecuteAsync(dispatcher, connection, callerTracker, waitTcs.Task);
-            var executeTask2 = DispatcherExecuteAsync(dispatcher, connection, callerTracker, waitTcs.Task);
+            var executeTask1 = DispatcherExecuteAsync(
+                dispatcher,
+                connection,
+                callerTracker,
+                waitTcs.Task
+            );
+            var executeTask2 = DispatcherExecuteAsync(
+                dispatcher,
+                connection,
+                callerTracker,
+                waitTcs.Task
+            );
 
             waitTcs.SetResult();
 
             await Task.WhenAll(executeTask1, executeTask2);
         }
 
-        async Task DispatcherExecuteAsync(HttpConnectionDispatcher dispatcher, HttpConnectionContext connection, SemaphoreSlim callerTracker, Task waitTask)
+        async Task DispatcherExecuteAsync(
+            HttpConnectionDispatcher dispatcher,
+            HttpConnectionContext connection,
+            SemaphoreSlim callerTracker,
+            Task waitTask
+        )
         {
             using (var requestBody = new TrackingMemoryStream(callerTracker, waitTask))
             {
@@ -684,7 +762,11 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             _waitTask = waitTask;
         }
 
-        public override async Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
+        public override async Task CopyToAsync(
+            Stream destination,
+            int bufferSize,
+            CancellationToken cancellationToken
+        )
         {
             // Will return false if all available locks from semaphore are taken
             if (!_callerTracker.Wait(0))
@@ -771,7 +853,9 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                 context.Request.Headers["header1"] = "h1";
                 context.Request.Headers["header2"] = "h2";
                 context.Request.Headers["header3"] = "h3";
-                context.User = new ClaimsPrincipal(new ClaimsIdentity(new[] { new Claim("claim1", "claimValue") }));
+                context.User = new ClaimsPrincipal(
+                    new ClaimsIdentity(new[] { new Claim("claim1", "claimValue") })
+                );
                 context.TraceIdentifier = "requestid";
                 context.Connection.Id = "connectionid";
                 context.Connection.LocalIpAddress = IPAddress.Loopback;
@@ -786,7 +870,11 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                 var app = builder.Build();
 
                 // Start a poll
-                var task = dispatcher.ExecuteAsync(context, new HttpConnectionDispatcherOptions(), app);
+                var task = dispatcher.ExecuteAsync(
+                    context,
+                    new HttpConnectionDispatcherOptions(),
+                    app
+                );
                 Assert.True(task.IsCompleted);
                 Assert.Equal(StatusCodes.Status200OK, context.Response.StatusCode);
 
@@ -821,7 +909,10 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                 Assert.Equal("h2", connectionHttpContext.Request.Headers["header2"]);
                 Assert.Equal("h3", connectionHttpContext.Request.Headers["header3"]);
                 Assert.Equal("requestid", connectionHttpContext.TraceIdentifier);
-                Assert.Equal("claimValue", connectionHttpContext.User.Claims.FirstOrDefault().Value);
+                Assert.Equal(
+                    "claimValue",
+                    connectionHttpContext.User.Claims.FirstOrDefault().Value
+                );
                 Assert.Equal("connectionid", connectionHttpContext.Connection.Id);
                 Assert.Equal(IPAddress.Loopback, connectionHttpContext.Connection.LocalIpAddress);
                 Assert.Equal(4563, connectionHttpContext.Connection.LocalPort);
@@ -841,7 +932,9 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
     [Theory]
     [InlineData(HttpTransportType.ServerSentEvents)]
     [InlineData(HttpTransportType.LongPolling)]
-    public async Task EndpointsThatRequireConnectionId400WhenNoConnectionIdProvided(HttpTransportType transportType)
+    public async Task EndpointsThatRequireConnectionId400WhenNoConnectionIdProvided(
+        HttpTransportType transportType
+    )
     {
         using (StartVerifiableLog())
         {
@@ -881,7 +974,9 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
     [Theory]
     [InlineData(HttpTransportType.LongPolling)]
     [InlineData(HttpTransportType.ServerSentEvents)]
-    public async Task IOExceptionWhenReadingRequestReturns400Response(HttpTransportType transportType)
+    public async Task IOExceptionWhenReadingRequestReturns400Response(
+        HttpTransportType transportType
+    )
     {
         using (StartVerifiableLog())
         {
@@ -891,7 +986,15 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             connection.TransportType = transportType;
 
             var mockStream = new Mock<Stream>();
-            mockStream.Setup(m => m.CopyToAsync(It.IsAny<Stream>(), It.IsAny<int>(), It.IsAny<CancellationToken>())).Throws(new IOException());
+            mockStream
+                .Setup(m =>
+                    m.CopyToAsync(
+                        It.IsAny<Stream>(),
+                        It.IsAny<int>(),
+                        It.IsAny<CancellationToken>()
+                    )
+                )
+                .Throws(new IOException());
 
             using (var responseBody = new MemoryStream())
             {
@@ -910,7 +1013,11 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                 var qs = new QueryCollection(values);
                 context.Request.Query = qs;
 
-                await dispatcher.ExecuteAsync(context, new HttpConnectionDispatcherOptions(), c => Task.CompletedTask);
+                await dispatcher.ExecuteAsync(
+                    context,
+                    new HttpConnectionDispatcherOptions(),
+                    c => Task.CompletedTask
+                );
 
                 Assert.Equal(StatusCodes.Status400BadRequest, context.Response.StatusCode);
             }
@@ -951,11 +1058,19 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
     [InlineData(HttpTransportType.LongPolling, 200)]
     [InlineData(HttpTransportType.WebSockets, 404)]
     [InlineData(HttpTransportType.ServerSentEvents, 404)]
-    public async Task EndPointThatOnlySupportsLongPollingRejectsOtherTransports(HttpTransportType transportType, int status)
+    public async Task EndPointThatOnlySupportsLongPollingRejectsOtherTransports(
+        HttpTransportType transportType,
+        int status
+    )
     {
         using (StartVerifiableLog())
         {
-            await CheckTransportSupported(HttpTransportType.LongPolling, transportType, status, LoggerFactory);
+            await CheckTransportSupported(
+                HttpTransportType.LongPolling,
+                transportType,
+                status,
+                LoggerFactory
+            );
         }
     }
 
@@ -963,11 +1078,19 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
     [InlineData(HttpTransportType.ServerSentEvents, 200)]
     [InlineData(HttpTransportType.WebSockets, 404)]
     [InlineData(HttpTransportType.LongPolling, 404)]
-    public async Task EndPointThatOnlySupportsSSERejectsOtherTransports(HttpTransportType transportType, int status)
+    public async Task EndPointThatOnlySupportsSSERejectsOtherTransports(
+        HttpTransportType transportType,
+        int status
+    )
     {
         using (StartVerifiableLog())
         {
-            await CheckTransportSupported(HttpTransportType.ServerSentEvents, transportType, status, LoggerFactory);
+            await CheckTransportSupported(
+                HttpTransportType.ServerSentEvents,
+                transportType,
+                status,
+                LoggerFactory
+            );
         }
     }
 
@@ -975,21 +1098,37 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
     [InlineData(HttpTransportType.WebSockets, 200)]
     [InlineData(HttpTransportType.ServerSentEvents, 404)]
     [InlineData(HttpTransportType.LongPolling, 404)]
-    public async Task EndPointThatOnlySupportsWebSockesRejectsOtherTransports(HttpTransportType transportType, int status)
+    public async Task EndPointThatOnlySupportsWebSockesRejectsOtherTransports(
+        HttpTransportType transportType,
+        int status
+    )
     {
         using (StartVerifiableLog())
         {
-            await CheckTransportSupported(HttpTransportType.WebSockets, transportType, status, LoggerFactory);
+            await CheckTransportSupported(
+                HttpTransportType.WebSockets,
+                transportType,
+                status,
+                LoggerFactory
+            );
         }
     }
 
     [Theory]
     [InlineData(HttpTransportType.LongPolling, 404)]
-    public async Task EndPointThatOnlySupportsWebSocketsAndSSERejectsLongPolling(HttpTransportType transportType, int status)
+    public async Task EndPointThatOnlySupportsWebSocketsAndSSERejectsLongPolling(
+        HttpTransportType transportType,
+        int status
+    )
     {
         using (StartVerifiableLog())
         {
-            await CheckTransportSupported(HttpTransportType.WebSockets | HttpTransportType.ServerSentEvents, transportType, status, LoggerFactory);
+            await CheckTransportSupported(
+                HttpTransportType.WebSockets | HttpTransportType.ServerSentEvents,
+                transportType,
+                status,
+                LoggerFactory
+            );
         }
     }
 
@@ -1026,8 +1165,8 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
     {
         bool ExpectedErrors(WriteContext writeContext)
         {
-            return writeContext.LoggerName == typeof(HttpConnectionManager).FullName &&
-                   writeContext.EventId.Name == "FailedDispose";
+            return writeContext.LoggerName == typeof(HttpConnectionManager).FullName
+                && writeContext.EventId.Name == "FailedDispose";
         }
 
         using (StartVerifiableLog(expectedErrorsFilter: ExpectedErrors))
@@ -1091,8 +1230,16 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
         using (StartVerifiableLog())
         {
             var testMeterFactory = new TestMeterFactory();
-            using var connectionDuration = new MetricCollector<double>(testMeterFactory, HttpConnectionsMetrics.MeterName, "signalr.server.connection.duration");
-            using var currentConnections = new MetricCollector<long>(testMeterFactory, HttpConnectionsMetrics.MeterName, "signalr.server.active_connections");
+            using var connectionDuration = new MetricCollector<double>(
+                testMeterFactory,
+                HttpConnectionsMetrics.MeterName,
+                "signalr.server.connection.duration"
+            );
+            using var currentConnections = new MetricCollector<long>(
+                testMeterFactory,
+                HttpConnectionsMetrics.MeterName,
+                "signalr.server.active_connections"
+            );
 
             var metrics = new HttpConnectionsMetrics(testMeterFactory);
             var manager = CreateConnectionManager(LoggerFactory, metrics);
@@ -1119,8 +1266,15 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var exists = manager.TryGetConnection(connection.ConnectionId, out _);
             Assert.False(exists);
 
-            Assert.Collection(connectionDuration.GetMeasurementSnapshot(), m => AssertDuration(m, "normal_closure", "long_polling"));
-            Assert.Collection(currentConnections.GetMeasurementSnapshot(), m => AssertTransport(m, 1, "long_polling"), m => AssertTransport(m, -1, "long_polling"));
+            Assert.Collection(
+                connectionDuration.GetMeasurementSnapshot(),
+                m => AssertDuration(m, "normal_closure", "long_polling")
+            );
+            Assert.Collection(
+                currentConnections.GetMeasurementSnapshot(),
+                m => AssertTransport(m, 1, "long_polling"),
+                m => AssertTransport(m, -1, "long_polling")
+            );
         }
     }
 
@@ -1147,8 +1301,16 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             await dispatcher.ExecuteAsync(context, new HttpConnectionDispatcherOptions(), app);
             Assert.Equal(StatusCodes.Status200OK, context.Response.StatusCode);
 
-            using var connectionDuration = new MetricCollector<double>(testMeterFactory, HttpConnectionsMetrics.MeterName, "signalr.server.connection.duration");
-            using var currentConnections = new MetricCollector<long>(testMeterFactory, HttpConnectionsMetrics.MeterName, "signalr.server.active_connections");
+            using var connectionDuration = new MetricCollector<double>(
+                testMeterFactory,
+                HttpConnectionsMetrics.MeterName,
+                "signalr.server.connection.duration"
+            );
+            using var currentConnections = new MetricCollector<long>(
+                testMeterFactory,
+                HttpConnectionsMetrics.MeterName,
+                "signalr.server.active_connections"
+            );
 
             await dispatcher.ExecuteAsync(context, new HttpConnectionDispatcherOptions(), app);
 
@@ -1163,13 +1325,21 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
         }
     }
 
-    private static void AssertTransport(CollectedMeasurement<long> measurement, long expected, string transportType)
+    private static void AssertTransport(
+        CollectedMeasurement<long> measurement,
+        long expected,
+        string transportType
+    )
     {
         Assert.Equal(expected, measurement.Value);
         Assert.Equal(transportType.ToString(), (string)measurement.Tags["signalr.transport"]);
     }
 
-    private static void AssertDuration(CollectedMeasurement<double> measurement, string status, string transportType)
+    private static void AssertDuration(
+        CollectedMeasurement<double> measurement,
+        string status,
+        string transportType
+    )
     {
         Assert.True(measurement.Value > 0);
         Assert.Equal(status.ToString(), (string)measurement.Tags["signalr.connection.status"]);
@@ -1207,40 +1377,60 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
     {
         private readonly SyncPoint _sync;
         private bool _isSSE;
+
         public BlockingStream(SyncPoint sync, bool isSSE = false)
         {
             _sync = sync;
             _isSSE = isSSE;
         }
+
         public override bool CanRead => throw new NotImplementedException();
         public override bool CanSeek => throw new NotImplementedException();
         public override bool CanWrite => throw new NotImplementedException();
         public override long Length => throw new NotImplementedException();
-        public override long Position { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
+        public override long Position
+        {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
+
+        public override Task CopyToAsync(
+            Stream destination,
+            int bufferSize,
+            CancellationToken cancellationToken
+        )
         {
             throw new NotImplementedException();
         }
-        public override void Flush()
-        {
-        }
+
+        public override void Flush() { }
+
         public override int Read(byte[] buffer, int offset, int count)
         {
             throw new NotImplementedException();
         }
+
         public override long Seek(long offset, SeekOrigin origin)
         {
             throw new NotImplementedException();
         }
+
         public override void SetLength(long value)
         {
             throw new NotImplementedException();
         }
+
         public override void Write(byte[] buffer, int offset, int count)
         {
             throw new NotImplementedException();
         }
-        public override async Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+
+        public override async Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             if (_isSSE)
             {
@@ -1251,7 +1441,11 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             await _sync.WaitToContinue();
             cancellationToken.ThrowIfCancellationRequested();
         }
-        public override async ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+
+        public override async ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             if (_isSSE)
             {
@@ -1270,9 +1464,15 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
     {
         bool ExpectedErrors(WriteContext writeContext)
         {
-            return (writeContext.LoggerName == typeof(Internal.Transports.LongPollingServerTransport).FullName &&
-                   writeContext.EventId.Name == "LongPollingTerminated") ||
-                   (writeContext.LoggerName == typeof(HttpConnectionManager).FullName && writeContext.EventId.Name == "FailedDispose");
+            return (
+                    writeContext.LoggerName
+                        == typeof(Internal.Transports.LongPollingServerTransport).FullName
+                    && writeContext.EventId.Name == "LongPollingTerminated"
+                )
+                || (
+                    writeContext.LoggerName == typeof(HttpConnectionManager).FullName
+                    && writeContext.EventId.Name == "FailedDispose"
+                );
         }
 
         using (StartVerifiableLog(expectedErrorsFilter: ExpectedErrors))
@@ -1341,8 +1541,9 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
     {
         bool ExpectedErrors(WriteContext writeContext)
         {
-            return writeContext.LoggerName == typeof(Internal.Transports.WebSocketsServerTransport).FullName &&
-                   writeContext.EventId.Name == "ErrorWritingFrame";
+            return writeContext.LoggerName
+                    == typeof(Internal.Transports.WebSocketsServerTransport).FullName
+                && writeContext.EventId.Name == "ErrorWritingFrame";
         }
         using (StartVerifiableLog(expectedErrorsFilter: ExpectedErrors))
         {
@@ -1403,7 +1604,9 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
     [Theory]
     [InlineData(HttpTransportType.WebSockets)]
     [InlineData(HttpTransportType.ServerSentEvents)]
-    public async Task RequestToActiveConnectionId409ForStreamingTransports(HttpTransportType transportType)
+    public async Task RequestToActiveConnectionId409ForStreamingTransports(
+        HttpTransportType transportType
+    )
     {
         using (StartVerifiableLog())
         {
@@ -1438,7 +1641,11 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var ws = (TestWebSocketConnectionFeature)context1.Features.Get<IHttpWebSocketFeature>();
             if (ws != null)
             {
-                await ws.Client.CloseAsync(WebSocketCloseStatus.NormalClosure, "", CancellationToken.None);
+                await ws.Client.CloseAsync(
+                    WebSocketCloseStatus.NormalClosure,
+                    "",
+                    CancellationToken.None
+                );
             }
 
             manager.CloseConnections();
@@ -1539,7 +1746,9 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
 
             // Manually control PreviousPollTask instead of using a real PreviousPollTask, because a real
             // PreviousPollTask might complete too early when the second request cancels it.
-            var lastPollTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+            var lastPollTcs = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             connection.PreviousPollTask = lastPollTcs.Task;
 
             request1 = dispatcher.ExecuteAsync(context1, options, app);
@@ -1766,7 +1975,10 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
     [InlineData(HttpTransportType.LongPolling, null)]
     [InlineData(HttpTransportType.ServerSentEvents, TransferFormat.Text)]
     [InlineData(HttpTransportType.WebSockets, TransferFormat.Binary | TransferFormat.Text)]
-    public async Task TransferModeSet(HttpTransportType transportType, TransferFormat? expectedTransferFormats)
+    public async Task TransferModeSet(
+        HttpTransportType transportType,
+        TransferFormat? expectedTransferFormats
+    )
     {
         using (StartVerifiableLog())
         {
@@ -1836,7 +2048,10 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var currentUser = connection.User;
 
             var connectionHandlerTask = dispatcher.ExecuteAsync(context, options, app);
-            await connection.Transport.Output.WriteAsync(Encoding.UTF8.GetBytes("Unblock")).AsTask().DefaultTimeout();
+            await connection
+                .Transport.Output.WriteAsync(Encoding.UTF8.GetBytes("Unblock"))
+                .AsTask()
+                .DefaultTimeout();
             await connectionHandlerTask.DefaultTimeout();
 
             // This is the important check
@@ -1888,7 +2103,10 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var currentUser = connection.User;
 
             var connectionHandlerTask = dispatcher.ExecuteAsync(context, options, app);
-            await connection.Transport.Output.WriteAsync(Encoding.UTF8.GetBytes("Unblock")).AsTask().DefaultTimeout();
+            await connection
+                .Transport.Output.WriteAsync(Encoding.UTF8.GetBytes("Unblock"))
+                .AsTask()
+                .DefaultTimeout();
             await connectionHandlerTask.DefaultTimeout();
 
             // This is the important check
@@ -1975,14 +2193,18 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             Assert.True(connection.HasInherentKeepAlive);
 
             // Check via the feature as well to make sure it's there.
-            Assert.True(connection.Features.Get<IConnectionInherentKeepAliveFeature>().HasInherentKeepAlive);
+            Assert.True(
+                connection.Features.Get<IConnectionInherentKeepAliveFeature>().HasInherentKeepAlive
+            );
         }
     }
 
     [Theory]
     [InlineData(HttpTransportType.ServerSentEvents)]
     [InlineData(HttpTransportType.WebSockets)]
-    public async Task DeleteEndpointRejectsRequestToTerminateNonLongPollingTransport(HttpTransportType transportType)
+    public async Task DeleteEndpointRejectsRequestToTerminateNonLongPollingTransport(
+        HttpTransportType transportType
+    )
     {
         using (StartVerifiableLog())
         {
@@ -2008,7 +2230,9 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             // Issue the delete request
             var deleteContext = new DefaultHttpContext();
             deleteContext.Request.Path = "/foo";
-            deleteContext.Request.QueryString = new QueryString($"?id={connection.ConnectionToken}");
+            deleteContext.Request.QueryString = new QueryString(
+                $"?id={connection.ConnectionToken}"
+            );
             deleteContext.Request.Method = "DELETE";
             var ms = new MemoryStream();
             deleteContext.Response.Body = ms;
@@ -2018,7 +2242,10 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             // Verify the response from the DELETE request
             Assert.Equal(StatusCodes.Status400BadRequest, deleteContext.Response.StatusCode);
             Assert.Equal("text/plain", deleteContext.Response.ContentType);
-            Assert.Equal("Cannot terminate this connection using the DELETE endpoint.", Encoding.UTF8.GetString(ms.ToArray()));
+            Assert.Equal(
+                "Cannot terminate this connection using the DELETE endpoint.",
+                Encoding.UTF8.GetString(ms.ToArray())
+            );
         }
     }
 
@@ -2051,7 +2278,9 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             // Issue the delete request and make sure the poll completes
             var deleteContext = new DefaultHttpContext();
             deleteContext.Request.Path = "/foo";
-            deleteContext.Request.QueryString = new QueryString($"?id={connection.ConnectionToken}");
+            deleteContext.Request.QueryString = new QueryString(
+                $"?id={connection.ConnectionToken}"
+            );
             deleteContext.Request.Method = "DELETE";
 
             Assert.False(pollTask.IsCompleted);
@@ -2101,7 +2330,9 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             // Issue the delete request and make sure the poll completes
             var deleteContext = new DefaultHttpContext();
             deleteContext.Request.Path = "/foo";
-            deleteContext.Request.QueryString = new QueryString($"?id={connection.ConnectionToken}");
+            deleteContext.Request.QueryString = new QueryString(
+                $"?id={connection.ConnectionToken}"
+            );
             deleteContext.Request.Method = "DELETE";
 
             await dispatcher.ExecuteAsync(deleteContext, options, app).DefaultTimeout();
@@ -2132,7 +2363,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var options = new HttpConnectionDispatcherOptions
             {
                 TransportMaxBufferSize = 2,
-                ApplicationMaxBufferSize = 2
+                ApplicationMaxBufferSize = 2,
             };
             var connection = manager.CreateConnection(options);
             connection.TransportType = HttpTransportType.LongPolling;
@@ -2196,16 +2427,22 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             ConnectionDelegate connectionDelegate = async c =>
             {
                 await waitForMessageTcs1.Task.DefaultTimeout();
-                await c.Transport.Output.WriteAsync(Encoding.UTF8.GetBytes("Message1")).DefaultTimeout();
+                await c
+                    .Transport.Output.WriteAsync(Encoding.UTF8.GetBytes("Message1"))
+                    .DefaultTimeout();
                 messageTcs1.TrySetResult();
                 await waitForMessageTcs2.Task.DefaultTimeout();
-                await c.Transport.Output.WriteAsync(Encoding.UTF8.GetBytes("Message2")).DefaultTimeout();
+                await c
+                    .Transport.Output.WriteAsync(Encoding.UTF8.GetBytes("Message2"))
+                    .DefaultTimeout();
                 messageTcs2.TrySetResult();
             };
             {
                 var options = new HttpConnectionDispatcherOptions();
                 var context = MakeRequest("/foo", connection, new ServiceCollection());
-                await dispatcher.ExecuteAsync(context, options, connectionDelegate).DefaultTimeout();
+                await dispatcher
+                    .ExecuteAsync(context, options, connectionDelegate)
+                    .DefaultTimeout();
 
                 // second poll should have data
                 waitForMessageTcs1.SetResult();
@@ -2214,7 +2451,9 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                 var ms = new MemoryStream();
                 context.Response.Body = ms;
                 // Now send the second poll
-                await dispatcher.ExecuteAsync(context, options, connectionDelegate).DefaultTimeout();
+                await dispatcher
+                    .ExecuteAsync(context, options, connectionDelegate)
+                    .DefaultTimeout();
                 Assert.Equal("Message1", Encoding.UTF8.GetString(ms.ToArray()));
 
                 waitForMessageTcs2.SetResult();
@@ -2224,7 +2463,9 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                 ms.Seek(0, SeekOrigin.Begin);
                 context.Response.Body = ms;
                 // This is the third poll which gets the final message after the app is complete
-                await dispatcher.ExecuteAsync(context, options, connectionDelegate).DefaultTimeout();
+                await dispatcher
+                    .ExecuteAsync(context, options, connectionDelegate)
+                    .DefaultTimeout();
                 Assert.Equal("Message2", Encoding.UTF8.GetString(ms.ToArray()));
             }
         }
@@ -2247,9 +2488,14 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             context.Request.Method = "POST";
             context.Response.Body = ms;
             context.Request.QueryString = new QueryString("?negotiateVersion=1");
-            await dispatcher.ExecuteNegotiateAsync(context, new HttpConnectionDispatcherOptions { Transports = HttpTransportType.WebSockets });
+            await dispatcher.ExecuteNegotiateAsync(
+                context,
+                new HttpConnectionDispatcherOptions { Transports = HttpTransportType.WebSockets }
+            );
 
-            var negotiateResponse = JsonConvert.DeserializeObject<JObject>(Encoding.UTF8.GetString(ms.ToArray()));
+            var negotiateResponse = JsonConvert.DeserializeObject<JObject>(
+                Encoding.UTF8.GetString(ms.ToArray())
+            );
             var availableTransports = (JArray)negotiateResponse["availableTransports"];
 
             Assert.Empty(availableTransports);
@@ -2272,13 +2518,25 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             context.Request.Path = "/foo";
             context.Request.Method = "POST";
             context.Response.Body = ms;
-            context.Request.QueryString = new QueryString("?negotiateVersion=1&UseStatefulReconnect=true");
-            await dispatcher.ExecuteNegotiateAsync(context, new HttpConnectionDispatcherOptions { AllowStatefulReconnects = false });
+            context.Request.QueryString = new QueryString(
+                "?negotiateVersion=1&UseStatefulReconnect=true"
+            );
+            await dispatcher.ExecuteNegotiateAsync(
+                context,
+                new HttpConnectionDispatcherOptions { AllowStatefulReconnects = false }
+            );
 
-            var negotiateResponse = JsonConvert.DeserializeObject<JObject>(Encoding.UTF8.GetString(ms.ToArray()));
+            var negotiateResponse = JsonConvert.DeserializeObject<JObject>(
+                Encoding.UTF8.GetString(ms.ToArray())
+            );
             Assert.False(negotiateResponse.TryGetValue("useStatefulReconnect", out _));
 
-            Assert.True(manager.TryGetConnection(negotiateResponse["connectionToken"].ToString(), out var connection));
+            Assert.True(
+                manager.TryGetConnection(
+                    negotiateResponse["connectionToken"].ToString(),
+                    out var connection
+                )
+            );
 #pragma warning disable CA2252 // This API requires opting into preview features
             Assert.Null(connection.Features.Get<IStatefulReconnectFeature>());
 #pragma warning restore CA2252 // This API requires opting into preview features
@@ -2302,12 +2560,22 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             context.Request.Method = "POST";
             context.Response.Body = ms;
             context.Request.QueryString = new QueryString("?negotiateVersion=1");
-            await dispatcher.ExecuteNegotiateAsync(context, new HttpConnectionDispatcherOptions { AllowStatefulReconnects = true });
+            await dispatcher.ExecuteNegotiateAsync(
+                context,
+                new HttpConnectionDispatcherOptions { AllowStatefulReconnects = true }
+            );
 
-            var negotiateResponse = JsonConvert.DeserializeObject<JObject>(Encoding.UTF8.GetString(ms.ToArray()));
+            var negotiateResponse = JsonConvert.DeserializeObject<JObject>(
+                Encoding.UTF8.GetString(ms.ToArray())
+            );
             Assert.False(negotiateResponse.TryGetValue("useStatefulReconnect", out _));
 
-            Assert.True(manager.TryGetConnection(negotiateResponse["connectionToken"].ToString(), out var connection));
+            Assert.True(
+                manager.TryGetConnection(
+                    negotiateResponse["connectionToken"].ToString(),
+                    out var connection
+                )
+            );
 #pragma warning disable CA2252 // This API requires opting into preview features
             Assert.Null(connection.Features.Get<IStatefulReconnectFeature>());
 #pragma warning restore CA2252 // This API requires opting into preview features
@@ -2330,13 +2598,25 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             context.Request.Path = "/foo";
             context.Request.Method = "POST";
             context.Response.Body = ms;
-            context.Request.QueryString = new QueryString("?negotiateVersion=1&UseStatefulReconnect=true");
-            await dispatcher.ExecuteNegotiateAsync(context, new HttpConnectionDispatcherOptions { AllowStatefulReconnects = true });
+            context.Request.QueryString = new QueryString(
+                "?negotiateVersion=1&UseStatefulReconnect=true"
+            );
+            await dispatcher.ExecuteNegotiateAsync(
+                context,
+                new HttpConnectionDispatcherOptions { AllowStatefulReconnects = true }
+            );
 
-            var negotiateResponse = JsonConvert.DeserializeObject<JObject>(Encoding.UTF8.GetString(ms.ToArray()));
+            var negotiateResponse = JsonConvert.DeserializeObject<JObject>(
+                Encoding.UTF8.GetString(ms.ToArray())
+            );
             Assert.True((bool)negotiateResponse["useStatefulReconnect"]);
 
-            Assert.True(manager.TryGetConnection(negotiateResponse["connectionToken"].ToString(), out var connection));
+            Assert.True(
+                manager.TryGetConnection(
+                    negotiateResponse["connectionToken"].ToString(),
+                    out var connection
+                )
+            );
 #pragma warning disable CA2252 // This API requires opting into preview features
             Assert.NotNull(connection.Features.Get<IStatefulReconnectFeature>());
 #pragma warning restore CA2252 // This API requires opting into preview features
@@ -2352,7 +2632,11 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var options = new HttpConnectionDispatcherOptions() { AllowStatefulReconnects = true };
             options.WebSockets.CloseTimeout = TimeSpan.FromMilliseconds(1);
             // pretend negotiate occurred
-            var connection = manager.CreateConnection(options, negotiateVersion: 1, useStatefulReconnect: true);
+            var connection = manager.CreateConnection(
+                options,
+                negotiateVersion: 1,
+                useStatefulReconnect: true
+            );
             connection.TransportType = HttpTransportType.WebSockets;
 
             var dispatcher = CreateDispatcher(manager, LoggerFactory);
@@ -2375,20 +2659,27 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var firstMsg = new byte[] { 1, 4, 8, 9 };
             await connection.Application.Output.WriteAsync(firstMsg);
 
-            var websocketFeature = (TestWebSocketConnectionFeature)context.Features.Get<IHttpWebSocketFeature>();
+            var websocketFeature = (TestWebSocketConnectionFeature)
+                context.Features.Get<IHttpWebSocketFeature>();
             await websocketFeature.Accepted.DefaultTimeout();
             // Run the client socket
-            var webSocketMessage = await websocketFeature.Client.GetNextMessageAsync().DefaultTimeout();
+            var webSocketMessage = await websocketFeature
+                .Client.GetNextMessageAsync()
+                .DefaultTimeout();
 
             Assert.Equal(firstMsg, webSocketMessage.Buffer);
 
-            var calledOnReconnectedTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+            var calledOnReconnectedTcs = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 #pragma warning disable CA2252 // This API requires opting into preview features
-            reconnectFeature.OnReconnected((writer) =>
-            {
-                calledOnReconnectedTcs.SetResult();
-                return Task.CompletedTask;
-            });
+            reconnectFeature.OnReconnected(
+                (writer) =>
+                {
+                    calledOnReconnectedTcs.SetResult();
+                    return Task.CompletedTask;
+                }
+            );
 #pragma warning restore CA2252 // This API requires opting into preview features
 
             // New websocket connection with previous connection token
@@ -2407,7 +2698,8 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var secondMsg = new byte[] { 7, 6, 3, 2 };
             await connection.Application.Output.WriteAsync(secondMsg);
 
-            websocketFeature = (TestWebSocketConnectionFeature)context.Features.Get<IHttpWebSocketFeature>();
+            websocketFeature = (TestWebSocketConnectionFeature)
+                context.Features.Get<IHttpWebSocketFeature>();
             await websocketFeature.Accepted.DefaultTimeout();
             webSocketMessage = await websocketFeature.Client.GetNextMessageAsync().DefaultTimeout();
             Assert.Equal(secondMsg, webSocketMessage.Buffer);
@@ -2427,7 +2719,11 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var options = new HttpConnectionDispatcherOptions() { AllowStatefulReconnects = true };
             options.WebSockets.CloseTimeout = TimeSpan.FromMilliseconds(1);
             // pretend negotiate occurred
-            var connection = manager.CreateConnection(options, negotiateVersion: 1, useStatefulReconnect: true);
+            var connection = manager.CreateConnection(
+                options,
+                negotiateVersion: 1,
+                useStatefulReconnect: true
+            );
 
             var dispatcher = CreateDispatcher(manager, LoggerFactory);
             var services = new ServiceCollection();
@@ -2449,20 +2745,25 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var firstMsg = new byte[] { 1, 4, 8, 9 };
             await connection.Application.Output.WriteAsync(firstMsg);
 
-            var websocketFeature = (TestWebSocketConnectionFeature)context.Features.Get<IHttpWebSocketFeature>();
+            var websocketFeature = (TestWebSocketConnectionFeature)
+                context.Features.Get<IHttpWebSocketFeature>();
             await websocketFeature.Accepted.DefaultTimeout();
             // Run the client socket
-            var webSocketMessage = await websocketFeature.Client.GetNextMessageAsync().DefaultTimeout();
+            var webSocketMessage = await websocketFeature
+                .Client.GetNextMessageAsync()
+                .DefaultTimeout();
 
             Assert.Equal(firstMsg, webSocketMessage.Buffer);
 
             var called = false;
 #pragma warning disable CA2252 // This API requires opting into preview features
-            reconnectFeature.OnReconnected((writer) =>
-            {
-                called = true;
-                return Task.CompletedTask;
-            });
+            reconnectFeature.OnReconnected(
+                (writer) =>
+                {
+                    called = true;
+                    return Task.CompletedTask;
+                }
+            );
 #pragma warning restore CA2252 // This API requires opting into preview features
 
             // Disable will not allow new connection to override existing
@@ -2502,7 +2803,11 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             _syncPoint = syncPoint;
         }
 
-        public override async Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
+        public override async Task CopyToAsync(
+            Stream destination,
+            int bufferSize,
+            CancellationToken cancellationToken
+        )
         {
             await _syncPoint.WaitToContinue();
 
@@ -2519,7 +2824,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var options = new HttpConnectionDispatcherOptions
             {
                 TransportMaxBufferSize = 13,
-                ApplicationMaxBufferSize = 13
+                ApplicationMaxBufferSize = 13,
             };
 
             var connection = manager.CreateConnection(options);
@@ -2582,7 +2887,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var options = new HttpConnectionDispatcherOptions
             {
                 TransportMaxBufferSize = 13,
-                ApplicationMaxBufferSize = 13
+                ApplicationMaxBufferSize = 13,
             };
             var connection = manager.CreateConnection(options);
             connection.TransportType = HttpTransportType.LongPolling;
@@ -2613,7 +2918,9 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                 requestBody.Seek(0, SeekOrigin.Begin);
 
                 // Write some data to the pipe to fill it up and make the next write wait
-                await connection.ApplicationStream.WriteAsync(buffer, 0, buffer.Length).DefaultTimeout();
+                await connection
+                    .ApplicationStream.WriteAsync(buffer, 0, buffer.Length)
+                    .DefaultTimeout();
 
                 // Write. This will take the WriteLock and block because of back pressure
                 var sendTask = dispatcher.ExecuteAsync(context, options, app);
@@ -2639,7 +2946,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var options = new HttpConnectionDispatcherOptions
             {
                 TransportMaxBufferSize = 13,
-                ApplicationMaxBufferSize = 13
+                ApplicationMaxBufferSize = 13,
             };
             var connection = manager.CreateConnection(options);
             connection.TransportType = HttpTransportType.LongPolling;
@@ -2670,7 +2977,9 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                 requestBody.Seek(0, SeekOrigin.Begin);
 
                 // Write some data to the pipe to fill it up and make the next write wait
-                await connection.ApplicationStream.WriteAsync(buffer, 0, buffer.Length).DefaultTimeout();
+                await connection
+                    .ApplicationStream.WriteAsync(buffer, 0, buffer.Length)
+                    .DefaultTimeout();
 
                 // This will block until the pipe is unblocked
                 var sendTask = dispatcher.ExecuteAsync(context, options, app).DefaultTimeout();
@@ -2691,10 +3000,16 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
     {
         bool ExpectedErrors(WriteContext writeContext)
         {
-            return (writeContext.LoggerName.Equals("Microsoft.AspNetCore.Http.Connections.Internal.Transports.LongPollingTransport") &&
-                   writeContext.EventId.Name == "LongPollingTerminated") ||
-                   (writeContext.LoggerName == typeof(HttpConnectionManager).FullName &&
-                   writeContext.EventId.Name == "FailedDispose");
+            return (
+                    writeContext.LoggerName.Equals(
+                        "Microsoft.AspNetCore.Http.Connections.Internal.Transports.LongPollingTransport"
+                    )
+                    && writeContext.EventId.Name == "LongPollingTerminated"
+                )
+                || (
+                    writeContext.LoggerName == typeof(HttpConnectionManager).FullName
+                    && writeContext.EventId.Name == "FailedDispose"
+                );
         }
 
         using (StartVerifiableLog(expectedErrorsFilter: ExpectedErrors))
@@ -2738,7 +3053,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var options = new HttpConnectionDispatcherOptions
             {
                 TransportMaxBufferSize = 2,
-                ApplicationMaxBufferSize = 2
+                ApplicationMaxBufferSize = 2,
             };
             var connection = manager.CreateConnection(options);
             connection.TransportType = HttpTransportType.LongPolling;
@@ -2834,9 +3149,16 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
 
             _ = dispatcher.ExecuteAsync(context, options, app);
 
-            var websocket = (TestWebSocketConnectionFeature)context.Features.Get<IHttpWebSocketFeature>();
+            var websocket = (TestWebSocketConnectionFeature)
+                context.Features.Get<IHttpWebSocketFeature>();
             await websocket.Accepted.DefaultTimeout();
-            await websocket.Client.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "", cancellationToken: default).DefaultTimeout();
+            await websocket
+                .Client.CloseOutputAsync(
+                    WebSocketCloseStatus.NormalClosure,
+                    "",
+                    cancellationToken: default
+                )
+                .DefaultTimeout();
 
             await connection.ConnectionClosed.WaitForCancellationAsync().DefaultTimeout();
         }
@@ -2847,6 +3169,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
         public CancellationToken RequestAborted { get; set; }
 
         private readonly CancellationTokenSource _cts;
+
         public CustomHttpRequestLifetimeFeature()
         {
             _cts = new CancellationTokenSource();
@@ -2905,7 +3228,9 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
 
             var services = new ServiceCollection();
             services.AddSingleton<ServiceProviderConnectionHandler>();
-            services.AddSingleton(new MessageWrapper() { Buffer = new ReadOnlySequence<byte>(new byte[] { 1, 2, 3 }) });
+            services.AddSingleton(
+                new MessageWrapper() { Buffer = new ReadOnlySequence<byte>(new byte[] { 1, 2, 3 }) }
+            );
             var builder = new ConnectionBuilder(services.BuildServiceProvider());
             builder.UseConnectionHandler<ServiceProviderConnectionHandler>();
             var app = builder.Build();
@@ -2928,7 +3253,9 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             Assert.Equal(new byte[] { 1, 2, 3 }, memory.Slice(0, 3).ToArray());
 
             // Connection will use the original service provider so this will have no effect
-            services.AddSingleton(new MessageWrapper() { Buffer = new ReadOnlySequence<byte>(new byte[] { 4, 5, 6 }) });
+            services.AddSingleton(
+                new MessageWrapper() { Buffer = new ReadOnlySequence<byte>(new byte[] { 4, 5, 6 }) }
+            );
             pollContext = MakeRequest("/foo", connection, services);
             pollTask = dispatcher.ExecuteAsync(pollContext, options, app);
 
@@ -2957,11 +3284,24 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var services = new ServiceCollection();
             services.AddSingleton<ServiceProviderConnectionHandler>();
             var iteration = 0;
-            services.AddScoped(typeof(MessageWrapper), _ =>
-            {
-                iteration++;
-                return new MessageWrapper() { Buffer = new ReadOnlySequence<byte>(new byte[] { (byte)(iteration + 1), (byte)(iteration + 2), (byte)(iteration + 3) }) };
-            });
+            services.AddScoped(
+                typeof(MessageWrapper),
+                _ =>
+                {
+                    iteration++;
+                    return new MessageWrapper()
+                    {
+                        Buffer = new ReadOnlySequence<byte>(
+                            new byte[]
+                            {
+                                (byte)(iteration + 1),
+                                (byte)(iteration + 2),
+                                (byte)(iteration + 3),
+                            }
+                        ),
+                    };
+                }
+            );
 
             var builder = new ConnectionBuilder(services.BuildServiceProvider());
             builder.UseConnectionHandler<ServiceProviderConnectionHandler>();
@@ -3012,11 +3352,24 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var services = new ServiceCollection();
             services.AddSingleton<ServiceProviderConnectionHandler>();
             var iteration = 0;
-            services.AddScoped(typeof(MessageWrapper), _ =>
-            {
-                iteration++;
-                return new MessageWrapper() { Buffer = new ReadOnlySequence<byte>(new byte[] { (byte)(iteration + 1), (byte)(iteration + 2), (byte)(iteration + 3) }) };
-            });
+            services.AddScoped(
+                typeof(MessageWrapper),
+                _ =>
+                {
+                    iteration++;
+                    return new MessageWrapper()
+                    {
+                        Buffer = new ReadOnlySequence<byte>(
+                            new byte[]
+                            {
+                                (byte)(iteration + 1),
+                                (byte)(iteration + 2),
+                                (byte)(iteration + 3),
+                            }
+                        ),
+                    };
+                }
+            );
 
             var builder = new ConnectionBuilder(services.BuildServiceProvider());
             builder.UseConnectionHandler<ServiceProviderConnectionHandler>();
@@ -3031,7 +3384,9 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             // ServiceScope will be disposed here
             await connection.DisposeAsync().DefaultTimeout();
 
-            Assert.Throws<ObjectDisposedException>(() => connection.ServiceScope.Value.ServiceProvider.GetService<MessageWrapper>());
+            Assert.Throws<ObjectDisposedException>(
+                () => connection.ServiceScope.Value.ServiceProvider.GetService<MessageWrapper>()
+            );
         }
     }
 
@@ -3088,7 +3443,10 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
         {
             var manager = CreateConnectionManager(LoggerFactory, TimeSpan.FromSeconds(5));
             var dispatcher = CreateDispatcher(manager, LoggerFactory);
-            var options = new HttpConnectionDispatcherOptions() { CloseOnAuthenticationExpiration = true };
+            var options = new HttpConnectionDispatcherOptions()
+            {
+                CloseOnAuthenticationExpiration = true,
+            };
             var connection = manager.CreateConnection(options);
             connection.TransportType = HttpTransportType.LongPolling;
             var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
@@ -3134,67 +3492,103 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
     [InlineData(HttpTransportType.LongPolling)]
     [InlineData(HttpTransportType.ServerSentEvents)]
     [InlineData(HttpTransportType.WebSockets)]
-    public async Task AuthenticationExpirationSetOnAuthenticatedConnectionWithJWT(HttpTransportType transportType)
+    public async Task AuthenticationExpirationSetOnAuthenticatedConnectionWithJWT(
+        HttpTransportType transportType
+    )
     {
-        SymmetricSecurityKey SecurityKey = new SymmetricSecurityKey(SHA256.HashData(Guid.NewGuid().ToByteArray()));
+        SymmetricSecurityKey SecurityKey = new SymmetricSecurityKey(
+            SHA256.HashData(Guid.NewGuid().ToByteArray())
+        );
         JwtSecurityTokenHandler JwtTokenHandler = new JwtSecurityTokenHandler();
 
-        using var host = CreateHost(services =>
-        {
-            services.AddAuthentication(options =>
+        using var host = CreateHost(
+            services =>
             {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters =
-                    new TokenValidationParameters
+                services
+                    .AddAuthentication(options =>
                     {
-                        LifetimeValidator = (before, expires, token, parameters) => expires > DateTime.UtcNow,
-                        ValidateAudience = false,
-                        ValidateIssuer = false,
-                        ValidateActor = false,
-                        ValidateLifetime = true,
-                        IssuerSigningKey = SecurityKey
-                    };
-
-                options.Events = new JwtBearerEvents
-                {
-                    OnMessageReceived = context =>
+                        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                    })
+                    .AddJwtBearer(options =>
                     {
-                        var accessToken = context.Request.Query["access_token"];
-
-                        if (!string.IsNullOrEmpty(accessToken) &&
-                            (context.HttpContext.WebSockets.IsWebSocketRequest || context.Request.Headers["Accept"] == "text/event-stream"))
+                        options.TokenValidationParameters = new TokenValidationParameters
                         {
-                            context.Token = context.Request.Query["access_token"];
-                        }
-                        return Task.CompletedTask;
+                            LifetimeValidator = (before, expires, token, parameters) =>
+                                expires > DateTime.UtcNow,
+                            ValidateAudience = false,
+                            ValidateIssuer = false,
+                            ValidateActor = false,
+                            ValidateLifetime = true,
+                            IssuerSigningKey = SecurityKey,
+                        };
+
+                        options.Events = new JwtBearerEvents
+                        {
+                            OnMessageReceived = context =>
+                            {
+                                var accessToken = context.Request.Query["access_token"];
+
+                                if (
+                                    !string.IsNullOrEmpty(accessToken)
+                                    && (
+                                        context.HttpContext.WebSockets.IsWebSocketRequest
+                                        || context.Request.Headers["Accept"] == "text/event-stream"
+                                    )
+                                )
+                                {
+                                    context.Token = context.Request.Query["access_token"];
+                                }
+                                return Task.CompletedTask;
+                            },
+                        };
+                    });
+            },
+            endpoints =>
+            {
+                endpoints.MapConnectionHandler<AuthConnectionHandler>(
+                    "/foo",
+                    o => o.CloseOnAuthenticationExpiration = true
+                );
+
+                endpoints.MapGet(
+                    "/generatetoken",
+                    context =>
+                    {
+                        return context.Response.WriteAsync(GenerateToken(context));
                     }
-                };
-            });
-        }, endpoints =>
-        {
-            endpoints.MapConnectionHandler<AuthConnectionHandler>("/foo", o => o.CloseOnAuthenticationExpiration = true);
+                );
 
-            endpoints.MapGet("/generatetoken", context =>
-            {
-                return context.Response.WriteAsync(GenerateToken(context));
-            });
-
-            string GenerateToken(HttpContext httpContext)
-            {
-                var claims = new[] { new Claim(ClaimTypes.NameIdentifier, httpContext.Request.Query["user"]) };
-                var credentials = new SigningCredentials(SecurityKey, SecurityAlgorithms.HmacSha256);
-                var token = new JwtSecurityToken("SignalRTestServer", "SignalRTests", claims, expires: DateTime.UtcNow.AddMinutes(1), signingCredentials: credentials);
-                return JwtTokenHandler.WriteToken(token);
-            }
-        }, LoggerFactory);
+                string GenerateToken(HttpContext httpContext)
+                {
+                    var claims = new[]
+                    {
+                        new Claim(ClaimTypes.NameIdentifier, httpContext.Request.Query["user"]),
+                    };
+                    var credentials = new SigningCredentials(
+                        SecurityKey,
+                        SecurityAlgorithms.HmacSha256
+                    );
+                    var token = new JwtSecurityToken(
+                        "SignalRTestServer",
+                        "SignalRTests",
+                        claims,
+                        expires: DateTime.UtcNow.AddMinutes(1),
+                        signingCredentials: credentials
+                    );
+                    return JwtTokenHandler.WriteToken(token);
+                }
+            },
+            LoggerFactory
+        );
 
         host.Start();
 
         var manager = host.Services.GetRequiredService<HttpConnectionManager>();
-        var url = host.Services.GetService<IServer>().Features.Get<IServerAddressesFeature>().Addresses.Single();
+        var url = host
+            .Services.GetService<IServer>()
+            .Features.Get<IServerAddressesFeature>()
+            .Addresses.Single();
 
         string token = "";
         using (var client = new HttpClient())
@@ -3214,9 +3608,10 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                 AccessTokenProvider = () => Task.FromResult(token),
                 Transports = transportType,
                 DefaultTransferFormat = TransferFormat.Text,
-                HttpMessageHandlerFactory = handler => new GetNegotiateHttpHandler(handler, stream)
+                HttpMessageHandlerFactory = handler => new GetNegotiateHttpHandler(handler, stream),
             },
-            LoggerFactory);
+            LoggerFactory
+        );
 
         await connection.StartAsync();
 
@@ -3234,30 +3629,48 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
     [InlineData(HttpTransportType.LongPolling)]
     [InlineData(HttpTransportType.ServerSentEvents)]
     [InlineData(HttpTransportType.WebSockets)]
-    public async Task AuthenticationExpirationSetOnAuthenticatedConnectionWithCookies(HttpTransportType transportType)
+    public async Task AuthenticationExpirationSetOnAuthenticatedConnectionWithCookies(
+        HttpTransportType transportType
+    )
     {
-        using var host = CreateHost(services =>
-        {
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie();
-        }, endpoints =>
-        {
-            endpoints.MapConnectionHandler<AuthConnectionHandler>("/foo", o => o.CloseOnAuthenticationExpiration = true);
-
-            endpoints.MapGet("/signin", async context =>
+        using var host = CreateHost(
+            services =>
             {
-                var claims = new List<Claim>
-                {
-                        new Claim(ClaimTypes.NameIdentifier, context.Request.Query["user"])
-                };
-                await context.SignInAsync(new ClaimsPrincipal(new ClaimsIdentity(claims, "Cookies")));
-            });
-        }, LoggerFactory);
+                services
+                    .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                    .AddCookie();
+            },
+            endpoints =>
+            {
+                endpoints.MapConnectionHandler<AuthConnectionHandler>(
+                    "/foo",
+                    o => o.CloseOnAuthenticationExpiration = true
+                );
+
+                endpoints.MapGet(
+                    "/signin",
+                    async context =>
+                    {
+                        var claims = new List<Claim>
+                        {
+                            new Claim(ClaimTypes.NameIdentifier, context.Request.Query["user"]),
+                        };
+                        await context.SignInAsync(
+                            new ClaimsPrincipal(new ClaimsIdentity(claims, "Cookies"))
+                        );
+                    }
+                );
+            },
+            LoggerFactory
+        );
 
         host.Start();
 
         var manager = host.Services.GetRequiredService<HttpConnectionManager>();
-        var url = host.Services.GetService<IServer>().Features.Get<IServerAddressesFeature>().Addresses.Single();
+        var url = host
+            .Services.GetService<IServer>()
+            .Features.Get<IServerAddressesFeature>()
+            .Addresses.Single();
 
         var cookies = new CookieContainer();
         using (var client = new HttpClient(new HttpClientHandler() { CookieContainer = cookies }))
@@ -3276,9 +3689,10 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                 Transports = transportType,
                 DefaultTransferFormat = TransferFormat.Text,
                 HttpMessageHandlerFactory = handler => new GetNegotiateHttpHandler(handler, stream),
-                Cookies = cookies
+                Cookies = cookies,
             },
-            LoggerFactory);
+            LoggerFactory
+        );
 
         await connection.StartAsync();
 
@@ -3301,62 +3715,93 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
         var SecurityKey = new SymmetricSecurityKey(SHA256.HashData(Guid.NewGuid().ToByteArray()));
         var JwtTokenHandler = new JwtSecurityTokenHandler();
 
-        using var host = CreateHost(services =>
-        {
-            // Set default to Cookie auth but use JWT auth for the endpoint
-            // This makes sure we take the scheme into account when grabbing the token expiration
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            .AddCookie()
-            .AddJwtBearer(options =>
+        using var host = CreateHost(
+            services =>
             {
-                options.TokenValidationParameters =
-                    new TokenValidationParameters
+                // Set default to Cookie auth but use JWT auth for the endpoint
+                // This makes sure we take the scheme into account when grabbing the token expiration
+                services
+                    .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                    .AddCookie()
+                    .AddJwtBearer(options =>
                     {
-                        LifetimeValidator = (before, expires, token, parameters) => expires > DateTime.UtcNow,
-                        ValidateAudience = false,
-                        ValidateIssuer = false,
-                        ValidateActor = false,
-                        ValidateLifetime = true,
-                        IssuerSigningKey = SecurityKey
-                    };
-
-                options.Events = new JwtBearerEvents
-                {
-                    OnMessageReceived = context =>
-                    {
-                        var accessToken = context.Request.Query["access_token"];
-
-                        if (!string.IsNullOrEmpty(accessToken) &&
-                            (context.HttpContext.WebSockets.IsWebSocketRequest || context.Request.Headers["Accept"] == "text/event-stream"))
+                        options.TokenValidationParameters = new TokenValidationParameters
                         {
-                            context.Token = context.Request.Query["access_token"];
-                        }
-                        return Task.CompletedTask;
+                            LifetimeValidator = (before, expires, token, parameters) =>
+                                expires > DateTime.UtcNow,
+                            ValidateAudience = false,
+                            ValidateIssuer = false,
+                            ValidateActor = false,
+                            ValidateLifetime = true,
+                            IssuerSigningKey = SecurityKey,
+                        };
+
+                        options.Events = new JwtBearerEvents
+                        {
+                            OnMessageReceived = context =>
+                            {
+                                var accessToken = context.Request.Query["access_token"];
+
+                                if (
+                                    !string.IsNullOrEmpty(accessToken)
+                                    && (
+                                        context.HttpContext.WebSockets.IsWebSocketRequest
+                                        || context.Request.Headers["Accept"] == "text/event-stream"
+                                    )
+                                )
+                                {
+                                    context.Token = context.Request.Query["access_token"];
+                                }
+                                return Task.CompletedTask;
+                            },
+                        };
+                    });
+            },
+            endpoints =>
+            {
+                endpoints.MapConnectionHandler<JwtConnectionHandler>(
+                    "/foo",
+                    o => o.CloseOnAuthenticationExpiration = true
+                );
+
+                endpoints.MapGet(
+                    "/generatetoken",
+                    context =>
+                    {
+                        return context.Response.WriteAsync(GenerateToken(context));
                     }
-                };
-            });
-        }, endpoints =>
-        {
-            endpoints.MapConnectionHandler<JwtConnectionHandler>("/foo", o => o.CloseOnAuthenticationExpiration = true);
+                );
 
-            endpoints.MapGet("/generatetoken", context =>
-            {
-                return context.Response.WriteAsync(GenerateToken(context));
-            });
-
-            string GenerateToken(HttpContext httpContext)
-            {
-                var claims = new[] { new Claim(ClaimTypes.NameIdentifier, httpContext.Request.Query["user"]) };
-                var credentials = new SigningCredentials(SecurityKey, SecurityAlgorithms.HmacSha256);
-                var token = new JwtSecurityToken("SignalRTestServer", "SignalRTests", claims, expires: DateTime.UtcNow.AddMinutes(1), signingCredentials: credentials);
-                return JwtTokenHandler.WriteToken(token);
-            }
-        }, LoggerFactory);
+                string GenerateToken(HttpContext httpContext)
+                {
+                    var claims = new[]
+                    {
+                        new Claim(ClaimTypes.NameIdentifier, httpContext.Request.Query["user"]),
+                    };
+                    var credentials = new SigningCredentials(
+                        SecurityKey,
+                        SecurityAlgorithms.HmacSha256
+                    );
+                    var token = new JwtSecurityToken(
+                        "SignalRTestServer",
+                        "SignalRTests",
+                        claims,
+                        expires: DateTime.UtcNow.AddMinutes(1),
+                        signingCredentials: credentials
+                    );
+                    return JwtTokenHandler.WriteToken(token);
+                }
+            },
+            LoggerFactory
+        );
 
         host.Start();
 
         var manager = host.Services.GetRequiredService<HttpConnectionManager>();
-        var url = host.Services.GetService<IServer>().Features.Get<IServerAddressesFeature>().Addresses.Single();
+        var url = host
+            .Services.GetService<IServer>()
+            .Features.Get<IServerAddressesFeature>()
+            .Addresses.Single();
 
         string token;
         using (var client = new HttpClient())
@@ -3378,7 +3823,8 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                 DefaultTransferFormat = TransferFormat.Text,
                 HttpMessageHandlerFactory = handler => new GetNegotiateHttpHandler(handler, stream),
             },
-            LoggerFactory);
+            LoggerFactory
+        );
 
         await connection.StartAsync();
 
@@ -3395,18 +3841,25 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
     [Fact]
     public async Task AuthenticationExpirationSetToMaxValueByDefault()
     {
-        using var host = CreateHost(services =>
-        {
-            services.AddAuthentication();
-        }, endpoints =>
-        {
-            endpoints.MapConnectionHandler<TestConnectionHandler>("/foo");
-        }, LoggerFactory);
+        using var host = CreateHost(
+            services =>
+            {
+                services.AddAuthentication();
+            },
+            endpoints =>
+            {
+                endpoints.MapConnectionHandler<TestConnectionHandler>("/foo");
+            },
+            LoggerFactory
+        );
 
         host.Start();
 
         var manager = host.Services.GetRequiredService<HttpConnectionManager>();
-        var url = host.Services.GetService<IServer>().Features.Get<IServerAddressesFeature>().Addresses.Single();
+        var url = host
+            .Services.GetService<IServer>()
+            .Features.Get<IServerAddressesFeature>()
+            .Addresses.Single();
 
         url += "/foo";
         var stream = new MemoryStream();
@@ -3415,9 +3868,10 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             {
                 Url = new Uri(url),
                 DefaultTransferFormat = TransferFormat.Text,
-                HttpMessageHandlerFactory = handler => new GetNegotiateHttpHandler(handler, stream)
+                HttpMessageHandlerFactory = handler => new GetNegotiateHttpHandler(handler, stream),
             },
-            LoggerFactory);
+            LoggerFactory
+        );
 
         await connection.StartAsync();
 
@@ -3438,49 +3892,64 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
         using (StartVerifiableLog())
         {
             using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseKestrel()
-                .ConfigureLogging(o =>
+                .ConfigureWebHost(webHostBuilder =>
                 {
-                    o.AddProvider(new ForwardingLoggerProvider(LoggerFactory));
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddConnections();
+                    webHostBuilder
+                        .UseKestrel()
+                        .ConfigureLogging(o =>
+                        {
+                            o.AddProvider(new ForwardingLoggerProvider(LoggerFactory));
+                        })
+                        .ConfigureServices(services =>
+                        {
+                            services.AddConnections();
 
-                    // Since tests run in parallel, it's possible multiple servers will startup,
-                    // we use an ephemeral key provider and repository to avoid filesystem contention issues
-                    services.AddSingleton<IDataProtectionProvider, EphemeralDataProtectionProvider>();
+                            // Since tests run in parallel, it's possible multiple servers will startup,
+                            // we use an ephemeral key provider and repository to avoid filesystem contention issues
+                            services.AddSingleton<
+                                IDataProtectionProvider,
+                                EphemeralDataProtectionProvider
+                            >();
 
-                    services.Configure<KeyManagementOptions>(options =>
-                    {
-                        options.XmlRepository = new EphemeralXmlRepository();
-                    });
+                            services.Configure<KeyManagementOptions>(options =>
+                            {
+                                options.XmlRepository = new EphemeralXmlRepository();
+                            });
+                        })
+                        .Configure(app =>
+                        {
+                            app.Use(
+                                (c, n) =>
+                                {
+                                    c.Features.Set<IHttpRequestTimeoutFeature>(
+                                        new HttpRequestTimeoutFeature()
+                                    );
+                                    Assert.True(
+                                        (
+                                            (HttpRequestTimeoutFeature)
+                                                c.Features.Get<IHttpRequestTimeoutFeature>()
+                                        ).Enabled
+                                    );
+                                    return n(c);
+                                }
+                            );
+                            app.UseRouting();
+                            app.UseEndpoints(endpoints =>
+                            {
+                                endpoints.MapConnectionHandler<TestConnectionHandler>("/foo");
+                            });
+                        })
+                        .UseUrls("http://127.0.0.1:0");
                 })
-                .Configure(app =>
-                {
-                    app.Use((c, n) =>
-                    {
-                        c.Features.Set<IHttpRequestTimeoutFeature>(new HttpRequestTimeoutFeature());
-                        Assert.True(((HttpRequestTimeoutFeature)c.Features.Get<IHttpRequestTimeoutFeature>()).Enabled);
-                        return n(c);
-                    });
-                    app.UseRouting();
-                    app.UseEndpoints(endpoints =>
-                    {
-                        endpoints.MapConnectionHandler<TestConnectionHandler>("/foo");
-                    });
-                })
-                .UseUrls("http://127.0.0.1:0");
-            })
-            .Build();
+                .Build();
 
             host.Start();
 
             var manager = host.Services.GetRequiredService<HttpConnectionManager>();
-            var url = host.Services.GetService<IServer>().Features.Get<IServerAddressesFeature>().Addresses.Single();
+            var url = host
+                .Services.GetService<IServer>()
+                .Features.Get<IServerAddressesFeature>()
+                .Addresses.Single();
 
             var stream = new MemoryStream();
             var connection = new HttpConnection(
@@ -3489,16 +3958,26 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                     Url = new Uri(url + "/foo"),
                     Transports = transportType,
                     DefaultTransferFormat = TransferFormat.Text,
-                    HttpMessageHandlerFactory = handler => new GetNegotiateHttpHandler(handler, stream)
+                    HttpMessageHandlerFactory = handler => new GetNegotiateHttpHandler(
+                        handler,
+                        stream
+                    ),
                 },
-                LoggerFactory);
+                LoggerFactory
+            );
 
             await connection.StartAsync();
 
             var negotiateResponse = NegotiateProtocol.ParseResponse(stream.ToArray());
 
-            Assert.True(manager.TryGetConnection(negotiateResponse.ConnectionToken, out var context));
-            var feature = Assert.IsType<HttpRequestTimeoutFeature>(context.Features.Get<IHttpContextFeature>()?.HttpContext.Features.Get<IHttpRequestTimeoutFeature>());
+            Assert.True(
+                manager.TryGetConnection(negotiateResponse.ConnectionToken, out var context)
+            );
+            var feature = Assert.IsType<HttpRequestTimeoutFeature>(
+                context
+                    .Features.Get<IHttpContextFeature>()
+                    ?.HttpContext.Features.Get<IHttpRequestTimeoutFeature>()
+            );
             Assert.False(feature.Enabled);
 
             await connection.DisposeAsync();
@@ -3522,17 +4001,33 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var app = builder.Build();
             var context = MakeRequest("/foo", connection, services);
             context.Features.Set<IHttpRequestTimeoutFeature>(new HttpRequestTimeoutFeature());
-            Assert.True(((HttpRequestTimeoutFeature)context.Features.Get<IHttpRequestTimeoutFeature>()).Enabled);
+            Assert.True(
+                (
+                    (HttpRequestTimeoutFeature)context.Features.Get<IHttpRequestTimeoutFeature>()
+                ).Enabled
+            );
 
             // Initial poll will complete immediately
             await dispatcher.ExecuteAsync(context, options, app).DefaultTimeout();
-            Assert.False(((HttpRequestTimeoutFeature)context.Features.Get<IHttpRequestTimeoutFeature>()).Enabled);
+            Assert.False(
+                (
+                    (HttpRequestTimeoutFeature)context.Features.Get<IHttpRequestTimeoutFeature>()
+                ).Enabled
+            );
 
             context.Features.Set<IHttpRequestTimeoutFeature>(new HttpRequestTimeoutFeature());
-            Assert.True(((HttpRequestTimeoutFeature)context.Features.Get<IHttpRequestTimeoutFeature>()).Enabled);
+            Assert.True(
+                (
+                    (HttpRequestTimeoutFeature)context.Features.Get<IHttpRequestTimeoutFeature>()
+                ).Enabled
+            );
             var pollTask = dispatcher.ExecuteAsync(context, options, app);
             // disables on every poll
-            Assert.False(((HttpRequestTimeoutFeature)context.Features.Get<IHttpRequestTimeoutFeature>()).Enabled);
+            Assert.False(
+                (
+                    (HttpRequestTimeoutFeature)context.Features.Get<IHttpRequestTimeoutFeature>()
+                ).Enabled
+            );
 
             await connection.DisposeAsync().DefaultTimeout();
         }
@@ -3549,7 +4044,10 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             _stream = stream;
         }
 
-        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override async Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             var response = await base.SendAsync(request, cancellationToken);
             if (!_read)
@@ -3572,9 +4070,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             _loggerFactory = loggerFactory;
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         public ILogger CreateLogger(string categoryName)
         {
@@ -3582,49 +4078,60 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
         }
     }
 
-    private static IHost CreateHost(Action<IServiceCollection> configureServices, Action<IEndpointRouteBuilder> configureEndpoints,
-        ILoggerFactory loggerFactory)
+    private static IHost CreateHost(
+        Action<IServiceCollection> configureServices,
+        Action<IEndpointRouteBuilder> configureEndpoints,
+        ILoggerFactory loggerFactory
+    )
     {
         return new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseKestrel()
-                .ConfigureLogging(o =>
-                {
-                    o.AddProvider(new ForwardingLoggerProvider(loggerFactory));
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddConnections();
-                    configureServices(services);
-                    services.AddAuthorization();
-
-                    // Since tests run in parallel, it's possible multiple servers will startup,
-                    // we use an ephemeral key provider and repository to avoid filesystem contention issues
-                    services.AddSingleton<IDataProtectionProvider, EphemeralDataProtectionProvider>();
-
-                    services.Configure<KeyManagementOptions>(options =>
+                    .UseKestrel()
+                    .ConfigureLogging(o =>
                     {
-                        options.XmlRepository = new EphemeralXmlRepository();
-                    });
-                })
-                .Configure(app =>
-                {
-                    app.UseRouting();
-                    app.UseAuthentication();
-                    app.UseAuthorization();
-                    app.UseEndpoints(endpoints =>
+                        o.AddProvider(new ForwardingLoggerProvider(loggerFactory));
+                    })
+                    .ConfigureServices(services =>
                     {
-                        configureEndpoints(endpoints);
-                    });
-                })
-                .UseUrls("http://127.0.0.1:0");
+                        services.AddConnections();
+                        configureServices(services);
+                        services.AddAuthorization();
+
+                        // Since tests run in parallel, it's possible multiple servers will startup,
+                        // we use an ephemeral key provider and repository to avoid filesystem contention issues
+                        services.AddSingleton<
+                            IDataProtectionProvider,
+                            EphemeralDataProtectionProvider
+                        >();
+
+                        services.Configure<KeyManagementOptions>(options =>
+                        {
+                            options.XmlRepository = new EphemeralXmlRepository();
+                        });
+                    })
+                    .Configure(app =>
+                    {
+                        app.UseRouting();
+                        app.UseAuthentication();
+                        app.UseAuthorization();
+                        app.UseEndpoints(endpoints =>
+                        {
+                            configureEndpoints(endpoints);
+                        });
+                    })
+                    .UseUrls("http://127.0.0.1:0");
             })
             .Build();
     }
 
-    private static async Task CheckTransportSupported(HttpTransportType supportedTransports, HttpTransportType transportType, int status, ILoggerFactory loggerFactory)
+    private static async Task CheckTransportSupported(
+        HttpTransportType supportedTransports,
+        HttpTransportType transportType,
+        int status,
+        ILoggerFactory loggerFactory
+    )
     {
         var manager = CreateConnectionManager(loggerFactory);
         var connection = manager.CreateConnection();
@@ -3661,7 +4168,10 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             // Check the message for 404
             if (status == 404)
             {
-                Assert.Equal($"{transportType} transport not supported by this end point type", Encoding.UTF8.GetString(strm.ToArray()));
+                Assert.Equal(
+                    $"{transportType} transport not supported by this end point type",
+                    Encoding.UTF8.GetString(strm.ToArray())
+                );
             }
 
             // Check cache headers for LongPolling transport
@@ -3672,7 +4182,12 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
         }
     }
 
-    private static DefaultHttpContext MakeRequest(string path, HttpConnectionContext connection, IServiceCollection serviceCollection, string format = null)
+    private static DefaultHttpContext MakeRequest(
+        string path,
+        HttpConnectionContext connection,
+        IServiceCollection serviceCollection,
+        string format = null
+    )
     {
         var context = new DefaultHttpContext();
         context.Features.Set<IHttpResponseFeature>(new ResponseFeature());
@@ -3692,12 +4207,18 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
         return context;
     }
 
-    private static void SetTransport(HttpContext context, HttpTransportType transportType, SyncPoint sync = null)
+    private static void SetTransport(
+        HttpContext context,
+        HttpTransportType transportType,
+        SyncPoint sync = null
+    )
     {
         switch (transportType)
         {
             case HttpTransportType.WebSockets:
-                context.Features.Set<IHttpWebSocketFeature>(new TestWebSocketConnectionFeature(sync));
+                context.Features.Set<IHttpWebSocketFeature>(
+                    new TestWebSocketConnectionFeature(sync)
+                );
                 break;
             case HttpTransportType.ServerSentEvents:
                 context.Request.Headers["Accept"] = "text/event-stream";
@@ -3707,12 +4228,19 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
         }
     }
 
-    private static HttpConnectionManager CreateConnectionManager(ILoggerFactory loggerFactory, HttpConnectionsMetrics metrics = null)
+    private static HttpConnectionManager CreateConnectionManager(
+        ILoggerFactory loggerFactory,
+        HttpConnectionsMetrics metrics = null
+    )
     {
         return CreateConnectionManager(loggerFactory, null, metrics);
     }
 
-    private static HttpConnectionManager CreateConnectionManager(ILoggerFactory loggerFactory, TimeSpan? disconnectTimeout, HttpConnectionsMetrics metrics = null)
+    private static HttpConnectionManager CreateConnectionManager(
+        ILoggerFactory loggerFactory,
+        TimeSpan? disconnectTimeout,
+        HttpConnectionsMetrics metrics = null
+    )
     {
         var connectionOptions = new ConnectionOptions();
         connectionOptions.DisconnectTimeout = disconnectTimeout;
@@ -3720,7 +4248,8 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             loggerFactory ?? new LoggerFactory(),
             new EmptyApplicationLifetime(),
             Options.Create(connectionOptions),
-            metrics ?? new HttpConnectionsMetrics(new TestMeterFactory()));
+            metrics ?? new HttpConnectionsMetrics(new TestMeterFactory())
+        );
     }
 
     private string GetContentAsString(Stream body)
@@ -3740,9 +4269,17 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
         Assert.Equal("Thu, 01 Jan 1970 00:00:00 GMT", response.Headers.Expires);
     }
 
-    private static HttpConnectionDispatcher CreateDispatcher(HttpConnectionManager manager, ILoggerFactory loggerFactory, HttpConnectionsMetrics metrics = null)
+    private static HttpConnectionDispatcher CreateDispatcher(
+        HttpConnectionManager manager,
+        ILoggerFactory loggerFactory,
+        HttpConnectionsMetrics metrics = null
+    )
     {
-        return new HttpConnectionDispatcher(manager, loggerFactory, metrics ?? new HttpConnectionsMetrics(new TestMeterFactory()));
+        return new HttpConnectionDispatcher(
+            manager,
+            loggerFactory,
+            metrics ?? new HttpConnectionsMetrics(new TestMeterFactory())
+        );
     }
 }
 
@@ -3951,7 +4488,9 @@ public class ReconnectConnectionHandler : ConnectionHandler
 
         do
         {
-            _pause = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+            _pause = new TaskCompletionSource<bool>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
             while (true)
             {
@@ -3985,13 +4524,9 @@ public class ReconnectConnectionHandler : ConnectionHandler
 
 public class ResponseFeature : HttpResponseFeature
 {
-    public override void OnCompleted(Func<object, Task> callback, object state)
-    {
-    }
+    public override void OnCompleted(Func<object, Task> callback, object state) { }
 
-    public override void OnStarting(Func<object, Task> callback, object state)
-    {
-    }
+    public override void OnStarting(Func<object, Task> callback, object state) { }
 }
 
 public class MessageWrapper

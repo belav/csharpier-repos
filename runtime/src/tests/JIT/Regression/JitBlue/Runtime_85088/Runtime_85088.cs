@@ -30,9 +30,7 @@ public class Runtime_85088
                 f = Call(f);
             }
         }
-        catch
-        {
-        }
+        catch { }
 
         return f.X + f.Y;
     }
@@ -45,6 +43,7 @@ public class Runtime_85088
 
     private struct Foo
     {
-        public short X, Y;
+        public short X,
+            Y;
     }
 }

@@ -138,8 +138,12 @@ namespace System.Net.Primitives.Functional.Tests
 
             Assert.Throws<InvalidOperationException>(() => enumerator.Current); // Index < 0
 
-            enumerator.MoveNext(); enumerator.MoveNext(); enumerator.MoveNext();
-            enumerator.MoveNext(); enumerator.MoveNext(); enumerator.MoveNext();
+            enumerator.MoveNext();
+            enumerator.MoveNext();
+            enumerator.MoveNext();
+            enumerator.MoveNext();
+            enumerator.MoveNext();
+            enumerator.MoveNext();
 
             Assert.Throws<InvalidOperationException>(() => enumerator.Current); // Index >= count
 

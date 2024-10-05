@@ -21,7 +21,8 @@ namespace System.Linq.Parallel
     ///
     /// </summary>
     /// <typeparam name="TInputOutput"></typeparam>
-    internal sealed class IndexedWhereQueryOperator<TInputOutput> : UnaryQueryOperator<TInputOutput, TInputOutput>
+    internal sealed class IndexedWhereQueryOperator<TInputOutput>
+        : UnaryQueryOperator<TInputOutput, TInputOutput>
     {
         // Predicate function. Used to filter out non-matching elements during execution.
         private readonly Func<TInputOutput, int, bool> _predicate;
@@ -39,8 +40,10 @@ namespace System.Linq.Parallel
         //    predicate must be non null.
         //
 
-        internal IndexedWhereQueryOperator(IEnumerable<TInputOutput> child,
-                                           Func<TInputOutput, int, bool> predicate)
+        internal IndexedWhereQueryOperator(
+            IEnumerable<TInputOutput> child,
+            Func<TInputOutput, int, bool> predicate
+        )
             : base(child)
         {
             Debug.Assert(child != null, "child data source cannot be null");
@@ -67,21 +70,26 @@ namespace System.Linq.Parallel
             SetOrdinalIndexState(OrdinalIndexState.Increasing);
         }
 
-
         //---------------------------------------------------------------------------------------
         // Just opens the current operator, including opening the child and wrapping it with
         // partitions as needed.
         //
 
         internal override QueryResults<TInputOutput> Open(
-            QuerySettings settings, bool preferStriping)
+            QuerySettings settings,
+            bool preferStriping
+        )
         {
             QueryResults<TInputOutput> childQueryResults = Child.Open(settings, preferStriping);
             return new UnaryQueryOperatorResults(childQueryResults, this, settings, preferStriping);
         }
 
         internal override void WrapPartitionedStream<TKey>(
-            PartitionedStream<TInputOutput, TKey> inputStream, IPartitionedStreamRecipient<TInputOutput> recipient, bool preferStriping, QuerySettings settings)
+            PartitionedStream<TInputOutput, TKey> inputStream,
+            IPartitionedStreamRecipient<TInputOutput> recipient,
+            bool preferStriping,
+            QuerySettings settings
+        )
         {
             int partitionCount = inputStream.PartitionCount;
 
@@ -89,7 +97,13 @@ namespace System.Linq.Parallel
             PartitionedStream<TInputOutput, int> inputStreamInt;
             if (_prematureMerge)
             {
-                ListQueryResults<TInputOutput> listResults = ExecuteAndCollectResults(inputStream, partitionCount, Child.OutputOrdered, preferStriping, settings);
+                ListQueryResults<TInputOutput> listResults = ExecuteAndCollectResults(
+                    inputStream,
+                    partitionCount,
+                    Child.OutputOrdered,
+                    preferStriping,
+                    settings
+                );
                 inputStreamInt = listResults.GetPartitionedStream();
             }
             else
@@ -99,17 +113,22 @@ namespace System.Linq.Parallel
             }
 
             // Since the index is correct, the type of the index must be int
-            PartitionedStream<TInputOutput, int> outputStream =
-                new PartitionedStream<TInputOutput, int>(partitionCount, Util.GetDefaultComparer<int>(), OrdinalIndexState);
+            PartitionedStream<TInputOutput, int> outputStream = new PartitionedStream<
+                TInputOutput,
+                int
+            >(partitionCount, Util.GetDefaultComparer<int>(), OrdinalIndexState);
 
             for (int i = 0; i < partitionCount; i++)
             {
-                outputStream[i] = new IndexedWhereQueryOperatorEnumerator(inputStreamInt[i], _predicate, settings.CancellationState.MergedCancellationToken);
+                outputStream[i] = new IndexedWhereQueryOperatorEnumerator(
+                    inputStreamInt[i],
+                    _predicate,
+                    settings.CancellationState.MergedCancellationToken
+                );
             }
 
             recipient.Receive(outputStream);
         }
-
 
         //---------------------------------------------------------------------------------------
         // Returns an enumerable that represents the query executing sequentially.
@@ -117,10 +136,12 @@ namespace System.Linq.Parallel
 
         internal override IEnumerable<TInputOutput> AsSequentialQuery(CancellationToken token)
         {
-            IEnumerable<TInputOutput> wrappedChild = CancellableEnumerable.Wrap(Child.AsSequentialQuery(token), token);
+            IEnumerable<TInputOutput> wrappedChild = CancellableEnumerable.Wrap(
+                Child.AsSequentialQuery(token),
+                token
+            );
             return wrappedChild.Where(_predicate);
         }
-
 
         //---------------------------------------------------------------------------------------
         // Whether this operator performs a premature merge that would not be performed in
@@ -136,18 +157,23 @@ namespace System.Linq.Parallel
         // An enumerator that implements the filtering logic.
         //
 
-        private sealed class IndexedWhereQueryOperatorEnumerator : QueryOperatorEnumerator<TInputOutput, int>
+        private sealed class IndexedWhereQueryOperatorEnumerator
+            : QueryOperatorEnumerator<TInputOutput, int>
         {
             private readonly QueryOperatorEnumerator<TInputOutput, int> _source; // The data source to enumerate.
             private readonly Func<TInputOutput, int, bool> _predicate; // The predicate used for filtering.
             private readonly CancellationToken _cancellationToken;
             private Shared<int>? _outputLoopCount;
+
             //-----------------------------------------------------------------------------------
             // Instantiates a new enumerator.
             //
 
-            internal IndexedWhereQueryOperatorEnumerator(QueryOperatorEnumerator<TInputOutput, int> source, Func<TInputOutput, int, bool> predicate,
-                CancellationToken cancellationToken)
+            internal IndexedWhereQueryOperatorEnumerator(
+                QueryOperatorEnumerator<TInputOutput, int> source,
+                Func<TInputOutput, int, bool> predicate,
+                CancellationToken cancellationToken
+            )
             {
                 Debug.Assert(source != null);
                 Debug.Assert(predicate != null);
@@ -160,7 +186,10 @@ namespace System.Linq.Parallel
             // Moves to the next matching element in the underlying data stream.
             //
 
-            internal override bool MoveNext([MaybeNullWhen(false), AllowNull] ref TInputOutput currentElement, ref int currentKey)
+            internal override bool MoveNext(
+                [MaybeNullWhen(false), AllowNull] ref TInputOutput currentElement,
+                ref int currentKey
+            )
             {
                 Debug.Assert(_predicate != null, "expected a compiled operator");
 

@@ -7,7 +7,6 @@ using Xunit;
 
 public class test1
 {
-
     public static double f1()
     {
         return 1.0;

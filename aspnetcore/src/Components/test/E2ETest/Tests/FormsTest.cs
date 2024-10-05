@@ -17,10 +17,9 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
     public FormsTest(
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     protected override void InitializeAsyncCore()
     {
@@ -28,19 +27,23 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         Navigate(ServerPathBase, noReload: _serverFixture.ExecutionMode == ExecutionMode.Client);
     }
 
-    protected virtual IWebElement MountSimpleValidationComponent()
-        => Browser.MountTestComponent<SimpleValidationComponent>();
+    protected virtual IWebElement MountSimpleValidationComponent() =>
+        Browser.MountTestComponent<SimpleValidationComponent>();
 
-    protected virtual IWebElement MountTypicalValidationComponent()
-        => Browser.MountTestComponent<TypicalValidationComponent>();
+    protected virtual IWebElement MountTypicalValidationComponent() =>
+        Browser.MountTestComponent<TypicalValidationComponent>();
 
     [Fact]
     public async Task EditFormWorksWithDataAnnotationsValidator()
     {
         var appElement = MountSimpleValidationComponent();
         var form = appElement.FindElement(By.TagName("form"));
-        var userNameInput = appElement.FindElement(By.ClassName("user-name")).FindElement(By.TagName("input"));
-        var acceptsTermsInput = appElement.FindElement(By.ClassName("accepts-terms")).FindElement(By.TagName("input"));
+        var userNameInput = appElement
+            .FindElement(By.ClassName("user-name"))
+            .FindElement(By.TagName("input"));
+        var acceptsTermsInput = appElement
+            .FindElement(By.ClassName("accepts-terms"))
+            .FindElement(By.TagName("input"));
         var submitButton = appElement.FindElement(By.CssSelector("button[type=submit]"));
         var messagesAccessor = CreateValidationMessagesAccessor(appElement);
 
@@ -63,7 +66,10 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         // Can make another field invalid
         userNameInput.Clear();
         submitButton.Click();
-        Browser.Equal(new[] { "Please choose a username", "You must accept the terms" }, messagesAccessor);
+        Browser.Equal(
+            new[] { "Please choose a username", "You must accept the terms" },
+            messagesAccessor
+        );
         Browser.Equal("OnInvalidSubmit", () => appElement.FindElement(By.Id("last-callback")).Text);
 
         // Can make valid
@@ -79,7 +85,9 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
     {
         var appElement = Browser.MountTestComponent<ValidationComponentDI>();
         var form = appElement.FindElement(By.TagName("form"));
-        var userNameInput = appElement.FindElement(By.ClassName("the-quiz")).FindElement(By.TagName("input"));
+        var userNameInput = appElement
+            .FindElement(By.ClassName("the-quiz"))
+            .FindElement(By.TagName("input"));
         var submitButton = appElement.FindElement(By.CssSelector("button[type=submit]"));
         var messagesAccessor = CreateValidationMessagesAccessor(appElement);
 
@@ -98,11 +106,14 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
     public void InputTextInteractsWithEditContext()
     {
         var appElement = MountTypicalValidationComponent();
-        var nameInput = appElement.FindElement(By.ClassName("name")).FindElement(By.TagName("input"));
+        var nameInput = appElement
+            .FindElement(By.ClassName("name"))
+            .FindElement(By.TagName("input"));
         var messagesAccessor = CreateValidationMessagesAccessor(appElement);
         var summaryMessagesAccessor = CreateValidationMessagesAccessor(
             appElement.FindElement(By.ClassName("all-errors")),
-            ".validation-errors > .validation-message"); // Shows that the default class name for ValidationSummary is validation-errors
+            ".validation-errors > .validation-message"
+        ); // Shows that the default class name for ValidationSummary is validation-errors
 
         // InputText emits unmatched attributes
         Browser.Equal("Enter your name", () => nameInput.GetAttribute("placeholder"));
@@ -166,7 +177,9 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
     public void InputNumberInteractsWithEditContext_NullableFloat()
     {
         var appElement = MountTypicalValidationComponent();
-        var heightInput = appElement.FindElement(By.ClassName("height")).FindElement(By.TagName("input"));
+        var heightInput = appElement
+            .FindElement(By.ClassName("height"))
+            .FindElement(By.TagName("input"));
         var messagesAccessor = CreateValidationMessagesAccessor(appElement);
 
         // Validates on edit
@@ -190,7 +203,9 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
     public void InputTextAreaInteractsWithEditContext()
     {
         var appElement = MountTypicalValidationComponent();
-        var descriptionInput = appElement.FindElement(By.ClassName("description")).FindElement(By.TagName("textarea"));
+        var descriptionInput = appElement
+            .FindElement(By.ClassName("description"))
+            .FindElement(By.TagName("textarea"));
         var messagesAccessor = CreateValidationMessagesAccessor(appElement);
 
         // InputTextArea emits unmatched attributes
@@ -217,7 +232,9 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
     public void InputSelectInteractsWithEditContext()
     {
         var appElement = MountTypicalValidationComponent();
-        var ticketClassInput = new SelectElement(appElement.FindElement(By.ClassName("ticket-class")).FindElement(By.TagName("select")));
+        var ticketClassInput = new SelectElement(
+            appElement.FindElement(By.ClassName("ticket-class")).FindElement(By.TagName("select"))
+        );
         var select = ticketClassInput.WrappedElement;
         var messagesAccessor = CreateValidationMessagesAccessor(appElement);
 
@@ -239,7 +256,11 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
     public void InputSelectInteractsWithEditContext_BoolValues()
     {
         var appElement = MountTypicalValidationComponent();
-        var ticketClassInput = new SelectElement(appElement.FindElement(By.ClassName("select-bool-values")).FindElement(By.TagName("select")));
+        var ticketClassInput = new SelectElement(
+            appElement
+                .FindElement(By.ClassName("select-bool-values"))
+                .FindElement(By.TagName("select"))
+        );
         var select = ticketClassInput.WrappedElement;
         var messagesAccessor = CreateValidationMessagesAccessor(appElement);
 
@@ -247,16 +268,22 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         Browser.Equal("valid", () => select.GetAttribute("class"));
         ticketClassInput.SelectByText("true");
         Browser.Equal("modified invalid", () => select.GetAttribute("class"));
-        Browser.Equal(new[] { "77 + 33 = 100 is a false statement, unfortunately." }, messagesAccessor);
+        Browser.Equal(
+            new[] { "77 + 33 = 100 is a false statement, unfortunately." },
+            messagesAccessor
+        );
 
         // Nullable conversion can fail
         ticketClassInput.SelectByText("(select)");
         Browser.Equal("modified invalid", () => select.GetAttribute("class"));
-        Browser.Equal(new[]
-        {
+        Browser.Equal(
+            new[]
+            {
                 "77 + 33 = 100 is a false statement, unfortunately.",
-                "The IsSelectMathStatementTrue field is not valid."
-            }, messagesAccessor);
+                "The IsSelectMathStatementTrue field is not valid.",
+            },
+            messagesAccessor
+        );
 
         // Can become valid
         ticketClassInput.SelectByText("false");
@@ -267,12 +294,17 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
     public void InputSelectInteractsWithEditContext_MultipleAttribute()
     {
         var appElement = MountTypicalValidationComponent();
-        var citiesInput = new SelectElement(appElement.FindElement(By.ClassName("cities")).FindElement(By.TagName("select")));
+        var citiesInput = new SelectElement(
+            appElement.FindElement(By.ClassName("cities")).FindElement(By.TagName("select"))
+        );
         var select = citiesInput.WrappedElement;
         var messagesAccesor = CreateValidationMessagesAccessor(appElement);
 
         // Binding applies to option selection
-        Browser.Equal(new[] { "SanFrancisco" }, () => citiesInput.AllSelectedOptions.Select(option => option.GetAttribute("value")));
+        Browser.Equal(
+            new[] { "SanFrancisco" },
+            () => citiesInput.AllSelectedOptions.Select(option => option.GetAttribute("value"))
+        );
 
         // Validates on edit
         Browser.Equal("valid", () => select.GetAttribute("class"));
@@ -283,14 +315,22 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         citiesInput.SelectByIndex(1);
         citiesInput.SelectByIndex(3);
         Browser.Equal("modified invalid", () => select.GetAttribute("class"));
-        Browser.Equal(new[] { "The field SelectedCities must be a string or array type with a maximum length of '3'." }, messagesAccesor);
+        Browser.Equal(
+            new[]
+            {
+                "The field SelectedCities must be a string or array type with a maximum length of '3'.",
+            },
+            messagesAccesor
+        );
     }
 
     [Fact]
     public void InputSelectIgnoresMultipleAttribute()
     {
         var appElement = MountTypicalValidationComponent();
-        var ticketClassInput = new SelectElement(appElement.FindElement(By.ClassName("ticket-class")).FindElement(By.TagName("select")));
+        var ticketClassInput = new SelectElement(
+            appElement.FindElement(By.ClassName("ticket-class")).FindElement(By.TagName("select"))
+        );
         var select = ticketClassInput.WrappedElement;
 
         // Select does not have the 'multiple' attribute
@@ -310,12 +350,17 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
     {
         var appElement = MountTypicalValidationComponent();
         var selectParagraph = appElement.FindElement(By.ClassName("select-multiple-hostile"));
-        var hostileSelectInput = new SelectElement(selectParagraph.FindElement(By.TagName("select")));
+        var hostileSelectInput = new SelectElement(
+            selectParagraph.FindElement(By.TagName("select"))
+        );
         var select = hostileSelectInput.WrappedElement;
         var hostileSelectLabel = selectParagraph.FindElement(By.TagName("span"));
 
         // Check initial selection
-        Browser.Equal(new[] { "\"", "{" }, () => hostileSelectInput.AllSelectedOptions.Select(o => o.Text));
+        Browser.Equal(
+            new[] { "\"", "{" },
+            () => hostileSelectInput.AllSelectedOptions.Select(o => o.Text)
+        );
 
         hostileSelectInput.DeselectByIndex(0);
         hostileSelectInput.SelectByIndex(2);
@@ -328,8 +373,12 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
     public void InputCheckboxInteractsWithEditContext()
     {
         var appElement = MountTypicalValidationComponent();
-        var acceptsTermsInput = appElement.FindElement(By.ClassName("accepts-terms")).FindElement(By.TagName("input"));
-        var isEvilInput = appElement.FindElement(By.ClassName("is-evil")).FindElement(By.TagName("input"));
+        var acceptsTermsInput = appElement
+            .FindElement(By.ClassName("accepts-terms"))
+            .FindElement(By.TagName("input"));
+        var isEvilInput = appElement
+            .FindElement(By.ClassName("is-evil"))
+            .FindElement(By.TagName("input"));
         var messagesAccessor = CreateValidationMessagesAccessor(appElement);
 
         // InputCheckbox emits unmatched attributes
@@ -363,8 +412,10 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
 
         // By capturing the inputradio elements just once up front, we're implicitly showing
         // that they are retained as their values change
-        var unknownAirlineInput = FindAirlineInputs().First(i => string.Equals("Unknown", i.GetAttribute("value")));
-        var bestAirlineInput = FindAirlineInputs().First(i => string.Equals("BestAirline", i.GetAttribute("value")));
+        var unknownAirlineInput = FindAirlineInputs()
+            .First(i => string.Equals("Unknown", i.GetAttribute("value")));
+        var bestAirlineInput = FindAirlineInputs()
+            .First(i => string.Equals("BestAirline", i.GetAttribute("value")));
 
         // Validate selected inputs
         Browser.True(() => unknownAirlineInput.Selected);
@@ -389,8 +440,8 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         Browser.Equal("modified invalid", () => bestAirlineInput.GetAttribute("class"));
         Browser.Equal(new[] { "Pick a valid airline." }, messagesAccessor);
 
-        IReadOnlyCollection<IWebElement> FindAirlineInputs()
-            => appElement.FindElement(By.ClassName("airline")).FindElements(By.TagName("input"));
+        IReadOnlyCollection<IWebElement> FindAirlineInputs() =>
+            appElement.FindElement(By.ClassName("airline")).FindElements(By.TagName("input"));
     }
 
     [Fact]
@@ -405,25 +456,43 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         Browser.True(() => FindColorInputs().All(i => !i.Selected));
 
         // Invalidates on submit
-        Browser.True(() => FindCountryInputs().All(i => string.Equals("valid", i.GetAttribute("class"))));
-        Browser.True(() => FindColorInputs().All(i => string.Equals("valid", i.GetAttribute("class"))));
+        Browser.True(
+            () => FindCountryInputs().All(i => string.Equals("valid", i.GetAttribute("class")))
+        );
+        Browser.True(
+            () => FindColorInputs().All(i => string.Equals("valid", i.GetAttribute("class")))
+        );
 
         submitButton.Click();
 
-        Browser.True(() => FindCountryInputs().All(i => string.Equals("invalid", i.GetAttribute("class"))));
-        Browser.True(() => FindColorInputs().All(i => string.Equals("invalid", i.GetAttribute("class"))));
+        Browser.True(
+            () => FindCountryInputs().All(i => string.Equals("invalid", i.GetAttribute("class")))
+        );
+        Browser.True(
+            () => FindColorInputs().All(i => string.Equals("invalid", i.GetAttribute("class")))
+        );
 
         // Validates on edit
         FindCountryInputs().First().Click();
 
-        Browser.True(() => FindCountryInputs().All(i => string.Equals("modified valid", i.GetAttribute("class"))));
-        Browser.True(() => FindColorInputs().All(i => string.Equals("invalid", i.GetAttribute("class"))));
+        Browser.True(
+            () =>
+                FindCountryInputs()
+                    .All(i => string.Equals("modified valid", i.GetAttribute("class")))
+        );
+        Browser.True(
+            () => FindColorInputs().All(i => string.Equals("invalid", i.GetAttribute("class")))
+        );
 
         FindColorInputs().First().Click();
 
-        Browser.True(() => FindColorInputs().All(i => string.Equals("modified valid", i.GetAttribute("class"))));
+        Browser.True(
+            () =>
+                FindColorInputs().All(i => string.Equals("modified valid", i.GetAttribute("class")))
+        );
 
-        IReadOnlyCollection<IWebElement> FindCountryInputs() => group.FindElements(By.Name("country"));
+        IReadOnlyCollection<IWebElement> FindCountryInputs() =>
+            group.FindElements(By.Name("country"));
 
         IReadOnlyCollection<IWebElement> FindColorInputs() => group.FindElements(By.Name("color"));
     }
@@ -454,22 +523,28 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         Browser.Equal("modified invalid", () => FindFalseInput().GetAttribute("class"));
         Browser.Equal(new[] { "7 * 3 = 21 is a true statement." }, messagesAccessor);
 
-        IReadOnlyCollection<IWebElement> FindInputs()
-            => appElement.FindElement(By.ClassName("radio-group-bool-values")).FindElements(By.TagName("input"));
+        IReadOnlyCollection<IWebElement> FindInputs() =>
+            appElement
+                .FindElement(By.ClassName("radio-group-bool-values"))
+                .FindElements(By.TagName("input"));
 
-        IWebElement FindTrueInput()
-            => FindInputs().First(i => string.Equals("True", i.GetAttribute("value")));
+        IWebElement FindTrueInput() =>
+            FindInputs().First(i => string.Equals("True", i.GetAttribute("value")));
 
-        IWebElement FindFalseInput()
-            => FindInputs().First(i => string.Equals("False", i.GetAttribute("value")));
+        IWebElement FindFalseInput() =>
+            FindInputs().First(i => string.Equals("False", i.GetAttribute("value")));
     }
 
     [Fact]
     public void CanWireUpINotifyPropertyChangedToEditContext()
     {
         var appElement = Browser.MountTestComponent<NotifyPropertyChangedValidationComponent>();
-        var userNameInput = appElement.FindElement(By.ClassName("user-name")).FindElement(By.TagName("input"));
-        var acceptsTermsInput = appElement.FindElement(By.ClassName("accepts-terms")).FindElement(By.TagName("input"));
+        var userNameInput = appElement
+            .FindElement(By.ClassName("user-name"))
+            .FindElement(By.TagName("input"));
+        var acceptsTermsInput = appElement
+            .FindElement(By.ClassName("accepts-terms"))
+            .FindElement(By.TagName("input"));
         var submitButton = appElement.FindElement(By.CssSelector("button[type=submit]"));
         var messagesAccessor = CreateValidationMessagesAccessor(appElement);
         var submissionStatus = appElement.FindElement(By.Id("submission-status"));
@@ -482,7 +557,10 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
 
         // Submitting the form validates remaining fields
         submitButton.Click();
-        Browser.Equal(new[] { "That name is too long", "You must accept the terms" }, messagesAccessor);
+        Browser.Equal(
+            new[] { "That name is too long", "You must accept the terms" },
+            messagesAccessor
+        );
         Browser.Equal("modified invalid", () => userNameInput.GetAttribute("class"));
         Browser.Equal("invalid", () => acceptsTermsInput.GetAttribute("class"));
 
@@ -507,7 +585,10 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         var appElement = MountTypicalValidationComponent();
         var emailContainer = appElement.FindElement(By.ClassName("email"));
         var emailInput = emailContainer.FindElement(By.TagName("input"));
-        var emailMessagesAccessor = CreateValidationMessagesAccessor(emailContainer, ".special-email-css-class-override");
+        var emailMessagesAccessor = CreateValidationMessagesAccessor(
+            emailContainer,
+            ".special-email-css-class-override"
+        );
         var submitButton = appElement.FindElement(By.CssSelector("button[type=submit]"));
 
         // Doesn't show messages for other fields
@@ -516,11 +597,21 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
 
         // Updates on edit
         emailInput.SendKeys("abc\t");
-        Browser.Equal(new[] { "That doesn't look like a real email address" }, emailMessagesAccessor);
+        Browser.Equal(
+            new[] { "That doesn't look like a real email address" },
+            emailMessagesAccessor
+        );
 
         // Can show more than one message
         emailInput.SendKeys("too long too long too long\t");
-        Browser.Equal(new[] { "That doesn't look like a real email address", "We only accept very short email addresses (max 10 chars)" }, emailMessagesAccessor);
+        Browser.Equal(
+            new[]
+            {
+                "That doesn't look like a real email address",
+                "We only accept very short email addresses (max 10 chars)",
+            },
+            emailMessagesAccessor
+        );
 
         // Can become valid
         emailInput.Clear();
@@ -543,10 +634,16 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         emailInput.SendKeys("a@b.com\t");
 
         submitButton.Click();
-        Browser.Equal(new[] { "Email and confirm email do not match." }, confirmEmailValidationMessage);
+        Browser.Equal(
+            new[] { "Email and confirm email do not match." },
+            confirmEmailValidationMessage
+        );
 
         confirmInput.SendKeys("not-test@example.com\t");
-        Browser.Equal(new[] { "Email and confirm email do not match." }, confirmEmailValidationMessage);
+        Browser.Equal(
+            new[] { "Email and confirm email do not match." },
+            confirmEmailValidationMessage
+        );
 
         // Can become correct
         confirmInput.Clear();
@@ -559,7 +656,9 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
     public void InputComponentsCauseContainerToRerenderOnChange()
     {
         var appElement = MountTypicalValidationComponent();
-        var ticketClassInput = new SelectElement(appElement.FindElement(By.ClassName("ticket-class")).FindElement(By.TagName("select")));
+        var ticketClassInput = new SelectElement(
+            appElement.FindElement(By.ClassName("ticket-class")).FindElement(By.TagName("select"))
+        );
         var selectedTicketClassDisplay = appElement.FindElement(By.Id("selected-ticket-class"));
         var messagesAccessor = CreateValidationMessagesAccessor(appElement);
 
@@ -637,7 +736,10 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         var select = new SelectElement(appElement.FindElement(By.Id("select-cities")));
 
         // Assert that the binding works in the .NET -> JS direction
-        Browser.Equal(new[] { "\"sf\"", "\"sea\"" }, () => select.AllSelectedOptions.Select(option => option.GetAttribute("value")));
+        Browser.Equal(
+            new[] { "\"sf\"", "\"sea\"" },
+            () => select.AllSelectedOptions.Select(option => option.GetAttribute("value"))
+        );
 
         select.DeselectByIndex(0);
         select.SelectByIndex(1);
@@ -668,7 +770,9 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
     public void RespectsCustomFieldCssClassProvider()
     {
         var appElement = MountTypicalValidationComponent();
-        var socksInput = appElement.FindElement(By.ClassName("socks")).FindElement(By.TagName("input"));
+        var socksInput = appElement
+            .FindElement(By.ClassName("socks"))
+            .FindElement(By.TagName("input"));
         var messagesAccessor = CreateValidationMessagesAccessor(appElement);
 
         // Validates on edit
@@ -697,8 +801,11 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
     {
         var appElement = MountTypicalValidationComponent();
         var messagesAccessor = CreateValidationMessagesAccessor(appElement);
-        var nameInput = appElement.FindElement(By.ClassName("name")).FindElement(By.TagName("input"));
-        Func<string> lastLogEntryAccessor = () => appElement.FindElement(By.CssSelector(".submission-log-entry:last-of-type")).Text;
+        var nameInput = appElement
+            .FindElement(By.ClassName("name"))
+            .FindElement(By.TagName("input"));
+        Func<string> lastLogEntryAccessor = () =>
+            appElement.FindElement(By.CssSelector(".submission-log-entry:last-of-type")).Text;
 
         nameInput.SendKeys("01234567890123456789\t");
         Browser.Equal("modified invalid", () => nameInput.GetAttribute("class"));
@@ -750,7 +857,7 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         // change to the .NET model (because it's re-mutated to the same value again), the diff
         // still knows to update the DOM
         input.SendKeys(Keys.Control + "a"); // select all content
-        input.SendKeys("24h\t");            // replace content with new value
+        input.SendKeys("24h\t"); // replace content with new value
         Browser.Equal("24:00:00", () => input.GetDomProperty("value"));
     }
 
@@ -772,7 +879,7 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         // change to the .NET model (because it's re-mutated to the same value again), the diff
         // still knows to update the DOM
         input.SendKeys(Keys.Control + "a"); // select all content
-        input.SendKeys("24h\t");            // replace content with new value
+        input.SendKeys("24h\t"); // replace content with new value
         Browser.Equal("24:00:00", () => input.GetDomProperty("value"));
     }
 
@@ -848,7 +955,9 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
     public void InputSelectWorksWithMutatingSetter()
     {
         var appElement = Browser.MountTestComponent<InputsWithMutatingSetters>();
-        var input = new SelectElement(appElement.FindElement(By.Id("inputselect-with-mutating-setter")));
+        var input = new SelectElement(
+            appElement.FindElement(By.Id("inputselect-with-mutating-setter"))
+        );
 
         // Observe that the value can be mutated by the setter, and this shows up in the DOM
         input.SelectByValue("Wednesday");
@@ -867,19 +976,27 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
     public void InputSelectMultipleWorksWithMutatingSetter()
     {
         var appElement = Browser.MountTestComponent<InputsWithMutatingSetters>();
-        var input = new SelectElement(appElement.FindElement(By.Id("inputselectmultiple-with-mutating-setter")));
+        var input = new SelectElement(
+            appElement.FindElement(By.Id("inputselectmultiple-with-mutating-setter"))
+        );
 
         // Observe that the value can be mutated by the setter, and this shows up in the DOM
         input.SelectByValue("Wednesday");
         Browser.Equal("Wednesday", () => input.AllSelectedOptions.Single().Text);
         input.SelectByValue("Tuesday");
-        Browser.Equal("Monday+Wednesday", () => string.Join('+', input.AllSelectedOptions.Select(e => e.Text)));
+        Browser.Equal(
+            "Monday+Wednesday",
+            () => string.Join('+', input.AllSelectedOptions.Select(e => e.Text))
+        );
 
         // If the user then re-enters the same value, even though the setter doesn't cause any
         // change to the .NET model (because it's re-mutated to the same value again), the diff
         // still knows to update the DOM
         input.SelectByValue("Tuesday");
-        Browser.Equal("Monday+Wednesday", () => string.Join('+', input.AllSelectedOptions.Select(e => e.Text)));
+        Browser.Equal(
+            "Monday+Wednesday",
+            () => string.Join('+', input.AllSelectedOptions.Select(e => e.Text))
+        );
     }
 
     [Fact]
@@ -908,7 +1025,7 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         // change to the .NET model (because it's re-mutated to the same value again), the diff
         // still knows to update the DOM
         input.SendKeys(Keys.Control + "a"); // select all content
-        input.SendKeys("24h\t");            // replace content with new value
+        input.SendKeys("24h\t"); // replace content with new value
         Browser.Equal("24:00:00", () => input.GetDomProperty("value"));
     }
 
@@ -916,7 +1033,9 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
     public void InputSelectWorksWithoutEditContext()
     {
         var appElement = Browser.MountTestComponent<InputsWithoutEditForm>();
-        var selectElement = new SelectElement(appElement.FindElement(By.Id("selected-cities-input-select")));
+        var selectElement = new SelectElement(
+            appElement.FindElement(By.Id("selected-cities-input-select"))
+        );
         var selectedElementText = appElement.FindElement(By.Id("selected-cities-text"));
 
         // The bound value is expected and no class attribute exists
@@ -939,46 +1058,67 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
 
         // The bound value is expected and no inputs have a class attribute
         Browser.True(() => FindRadioInputs().All(input => !ElementHasAttribute(input, "class")));
-        Browser.True(() => FindRadioInputs().First(input => input.GetAttribute("value") == "Unknown").Selected);
+        Browser.True(
+            () =>
+                FindRadioInputs().First(input => input.GetAttribute("value") == "Unknown").Selected
+        );
         Browser.Equal("Unknown", () => selectedInputText.Text);
 
         FindRadioInputs().First().Click();
 
         // Value binding continues to work without an edit context and class attributes are unchanged
         Browser.True(() => FindRadioInputs().All(input => !ElementHasAttribute(input, "class")));
-        Browser.True(() => FindRadioInputs().First(input => input.GetAttribute("value") == "BestAirline").Selected);
+        Browser.True(
+            () =>
+                FindRadioInputs()
+                    .First(input => input.GetAttribute("value") == "BestAirline")
+                    .Selected
+        );
         Browser.Equal("BestAirline", () => selectedInputText.Text);
 
-        IReadOnlyCollection<IWebElement> FindRadioInputs()
-            => appElement.FindElement(By.ClassName("airlines")).FindElements(By.TagName("input"));
+        IReadOnlyCollection<IWebElement> FindRadioInputs() =>
+            appElement.FindElement(By.ClassName("airlines")).FindElements(By.TagName("input"));
     }
 
     [Fact]
     public void CanHaveModelLevelValidationErrors()
     {
         var appElement = Browser.MountTestComponent<ModelLevelValidationComponent>();
-        var isCatCheckbox = appElement.FindElement(By.ClassName("cattiness")).FindElement(By.TagName("input"));
+        var isCatCheckbox = appElement
+            .FindElement(By.ClassName("cattiness"))
+            .FindElement(By.TagName("input"));
         var ageInput = appElement.FindElement(By.ClassName("age")).FindElement(By.TagName("input"));
         var submitButton = appElement.FindElement(By.CssSelector("button[type=submit]"));
         var modelMessagesAccessor = CreateValidationMessagesAccessor(
             appElement.FindElement(By.ClassName("model-errors")),
-            "ul.model-summary-custom-class > .validation-message"); // This shows we can override the ul's CSS class
+            "ul.model-summary-custom-class > .validation-message"
+        ); // This shows we can override the ul's CSS class
         var allMessagesAccessor = CreateValidationMessagesAccessor(
-            appElement.FindElement(By.ClassName("all-errors")));
+            appElement.FindElement(By.ClassName("all-errors"))
+        );
 
         // Cause a property-level validation error
         ageInput.Clear();
         ageInput.SendKeys("-1");
         submitButton.Click();
-        Browser.Collection(allMessagesAccessor, x => Assert.Equal("Under-zeros should not be filling out forms", x));
+        Browser.Collection(
+            allMessagesAccessor,
+            x => Assert.Equal("Under-zeros should not be filling out forms", x)
+        );
         Browser.Empty(modelMessagesAccessor);
 
         // Cause a model-level validation error
         ageInput.Clear();
         ageInput.SendKeys("10");
         submitButton.Click();
-        Browser.Collection(allMessagesAccessor, x => Assert.Equal("Sorry, you're not old enough as a non-cat", x));
-        Browser.Collection(modelMessagesAccessor, x => Assert.Equal("Sorry, you're not old enough as a non-cat", x));
+        Browser.Collection(
+            allMessagesAccessor,
+            x => Assert.Equal("Sorry, you're not old enough as a non-cat", x)
+        );
+        Browser.Collection(
+            modelMessagesAccessor,
+            x => Assert.Equal("Sorry, you're not old enough as a non-cat", x)
+        );
 
         // Become valid
         isCatCheckbox.Click();
@@ -986,7 +1126,11 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         Browser.Empty(allMessagesAccessor);
         Browser.Empty(modelMessagesAccessor);
 
-        Func<string[]> logEntries = () => appElement.FindElements(By.ClassName("submission-log-entry")).Select(x => x.Text).ToArray();
+        Func<string[]> logEntries = () =>
+            appElement
+                .FindElements(By.ClassName("submission-log-entry"))
+                .Select(x => x.Text)
+                .ToArray();
         Browser.Collection(logEntries, x => Assert.Equal("OnValidSubmit", x));
     }
 
@@ -1023,12 +1167,17 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         Browser.DoesNotExist(By.Id("last-callback"));
     }
 
-    private Func<string[]> CreateValidationMessagesAccessor(IWebElement appElement, string messageSelector = ".validation-message")
+    private Func<string[]> CreateValidationMessagesAccessor(
+        IWebElement appElement,
+        string messageSelector = ".validation-message"
+    )
     {
-        return () => appElement.FindElements(By.CssSelector(messageSelector))
-            .Select(x => x.Text)
-            .OrderBy(x => x)
-            .ToArray();
+        return () =>
+            appElement
+                .FindElements(By.CssSelector(messageSelector))
+                .Select(x => x.Text)
+                .OrderBy(x => x)
+                .ToArray();
     }
 
     private void EnsureAttributeValue(IWebElement element, string attributeName, string value)
@@ -1044,6 +1193,10 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
     private bool ElementHasAttribute(IWebElement webElement, string attribute)
     {
         var jsExecutor = (IJavaScriptExecutor)Browser;
-        return (bool)jsExecutor.ExecuteScript($"return arguments[0].attributes['{attribute}'] !== undefined;", webElement);
+        return (bool)
+            jsExecutor.ExecuteScript(
+                $"return arguments[0].attributes['{attribute}'] !== undefined;",
+                webElement
+            );
     }
 }

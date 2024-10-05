@@ -1,34 +1,34 @@
 //------------------------------------------------------------------------------
 // <copyright file="CacheDependency.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  * CacheDependency.cs
- * 
+ *
  * Copyright (c) 1998-1999, Microsoft Corporation
- * 
+ *
  */
 
 
-namespace System.Web.Caching {
+namespace System.Web.Caching
+{
     using System.Collections;
-    using System.Text;
+    using System.Globalization;
     using System.IO;
+    using System.Security.Permissions;
+    using System.Text;
     using System.Threading;
     using System.Web.Util;
-    using System.Security.Permissions;
-    using System.Globalization;
 #if USE_MEMORY_CACHE
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Runtime.Caching;
 #endif
 
-
     /// <devdoc>
-    /// <para>The <see langword='CacheDependency'/> class tracks cache dependencies, which can be files, 
+    /// <para>The <see langword='CacheDependency'/> class tracks cache dependencies, which can be files,
     ///    directories, or keys to other objects in the System.Web.Cache.Cache. When an object of this class
     ///    is constructed, it immediately begins monitoring objects on which it is
     ///    dependent for changes. This avoids losing the changes made between the time the
@@ -37,49 +37,52 @@ namespace System.Web.Caching {
     /// </devdoc>
 
     // Overhead is 24 bytes + object header
-    public class CacheDependency : IDisposable {
-
+    public class CacheDependency : IDisposable
+    {
 #if DBG
-        bool                       _isUniqueIDInitialized;
+        bool _isUniqueIDInitialized;
 #endif
 
-        string                     _uniqueID;              // used by HttpCachePolicy for the ETag
-        object                     _depFileInfos;          // files to monitor for changes, either a DepFileInfo or array of DepFileInfos 
-        object                     _entries;               // cache entries we are dependent on, either a string or array of strings 
-        Action<Object, EventArgs>  _objNotify;             // Associated object to notify when a change occurs 
-        SafeBitVector32            _bits;                  // status bits for ready, used, changed, disposed  
-        DateTime                   _utcLastModified;       // Time of last modified item
+        string _uniqueID; // used by HttpCachePolicy for the ETag
+        object _depFileInfos; // files to monitor for changes, either a DepFileInfo or array of DepFileInfos
+        object _entries; // cache entries we are dependent on, either a string or array of strings
+        Action<Object, EventArgs> _objNotify; // Associated object to notify when a change occurs
+        SafeBitVector32 _bits; // status bits for ready, used, changed, disposed
+        DateTime _utcLastModified; // Time of last modified item
 #if USE_MEMORY_CACHE
         HostFileChangeMonitor _fileChangeMonitor;
         CacheEntryChangeMonitor _entryChangeMonitor;
 #endif
 
-        static readonly string[]        s_stringsEmpty;
-        static readonly DepCacheInfo[]  s_entriesEmpty;
+        static readonly string[] s_stringsEmpty;
+        static readonly DepCacheInfo[] s_entriesEmpty;
         static readonly CacheDependency s_dependencyEmpty;
-        static readonly DepFileInfo[]   s_depFileInfosEmpty;
+        static readonly DepFileInfo[] s_depFileInfosEmpty;
 
-        static readonly TimeSpan        FUTURE_FILETIME_BUFFER = new TimeSpan(0, 1, 0); // See VSWhidbey 400917
+        static readonly TimeSpan FUTURE_FILETIME_BUFFER = new TimeSpan(0, 1, 0); // See VSWhidbey 400917
 
-        const int BASE_INIT             = 0x01;
-        const int USED                  = 0x02;
-        const int CHANGED               = 0x04;
-        const int BASE_DISPOSED         = 0x08;
-        const int WANTS_DISPOSE         = 0x10;
-        const int DERIVED_INIT          = 0x20;
-        const int DERIVED_DISPOSED      = 0x40;
+        const int BASE_INIT = 0x01;
+        const int USED = 0x02;
+        const int CHANGED = 0x04;
+        const int BASE_DISPOSED = 0x08;
+        const int WANTS_DISPOSE = 0x10;
+        const int DERIVED_INIT = 0x20;
+        const int DERIVED_DISPOSED = 0x40;
 
-        internal class DepFileInfo {
-            internal string             _filename;
+        internal class DepFileInfo
+        {
+            internal string _filename;
             internal FileAttributesData _fad;
         }
 
-        internal class DepCacheInfo {
+        internal class DepCacheInfo
+        {
             internal CacheStoreProvider _cacheStore;
-            internal string             _key;
+            internal string _key;
         }
 
-        static CacheDependency() {
+        static CacheDependency()
+        {
             s_stringsEmpty = new string[0];
             s_entriesEmpty = new DepCacheInfo[0];
             s_dependencyEmpty = new CacheDependency(0);
@@ -87,287 +90,384 @@ namespace System.Web.Caching {
         }
 
         // creates an empty dependency which is used only by s_dependencyEmpty
-        private CacheDependency(int bogus) {
+        private CacheDependency(int bogus)
+        {
             Debug.Assert(s_dependencyEmpty == null, "s_dependencyEmpty == null");
         }
 
-
-
-        protected CacheDependency() {
+        protected CacheDependency()
+        {
             Init(true, null, null, null, DateTime.MaxValue);
         }
 
-
         /// <devdoc>
-        /// <para>Initializes a new instance of the System.Web.Cache.CacheDependency class. The new instance 
+        /// <para>Initializes a new instance of the System.Web.Cache.CacheDependency class. The new instance
         ///    monitors a file or directory for changes.</para>
         /// </devdoc>
-        public CacheDependency(string filename) :
-            this (filename, DateTime.MaxValue) {
-        }
-            
+        public CacheDependency(string filename)
+            : this(filename, DateTime.MaxValue) { }
 
-        public CacheDependency(string filename, DateTime start) {
-            if (filename == null) {
+        public CacheDependency(string filename, DateTime start)
+        {
+            if (filename == null)
+            {
                 return;
             }
 
             DateTime utcStart = DateTimeUtil.ConvertToUniversalTime(start);
-            string[] filenames = new string[1] {filename};
+            string[] filenames = new string[1] { filename };
             Init(true, filenames, null, null, utcStart);
-
         }
 
-
         /// <devdoc>
-        /// <para>Initializes a new instance of the System.Web.Cache.CacheDependency class. The new instance monitors an array 
+        /// <para>Initializes a new instance of the System.Web.Cache.CacheDependency class. The new instance monitors an array
         ///    files or directories for changes.</para>
         /// </devdoc>
-        public CacheDependency(string[] filenames) {
+        public CacheDependency(string[] filenames)
+        {
             Init(true, filenames, null, null, DateTime.MaxValue);
         }
 
-
-        public CacheDependency(string[] filenames, DateTime start) {
+        public CacheDependency(string[] filenames, DateTime start)
+        {
             DateTime utcStart = DateTimeUtil.ConvertToUniversalTime(start);
             Init(true, filenames, null, null, utcStart);
         }
 
-
         /// <devdoc>
-        /// <para>Initializes a new instance of the System.Web.Cache.CacheDependency class. The new instance monitors an 
+        /// <para>Initializes a new instance of the System.Web.Cache.CacheDependency class. The new instance monitors an
         ///    array files, directories, and cache keys for changes.</para>
         /// </devdoc>
-        public CacheDependency(string[] filenames, string[] cachekeys) {
+        public CacheDependency(string[] filenames, string[] cachekeys)
+        {
             Init(true, filenames, cachekeys, null, DateTime.MaxValue);
         }
 
-
-        public CacheDependency(string[] filenames, string[] cachekeys, DateTime start) {
+        public CacheDependency(string[] filenames, string[] cachekeys, DateTime start)
+        {
             DateTime utcStart = DateTimeUtil.ConvertToUniversalTime(start);
             Init(true, filenames, cachekeys, null, utcStart);
         }
 
-
-        public CacheDependency(string[] filenames, string[] cachekeys, CacheDependency dependency) {
+        public CacheDependency(string[] filenames, string[] cachekeys, CacheDependency dependency)
+        {
             Init(true, filenames, cachekeys, dependency, DateTime.MaxValue);
         }
 
-
-        public CacheDependency(string[] filenames, string[] cachekeys, CacheDependency dependency, DateTime start) {
+        public CacheDependency(
+            string[] filenames,
+            string[] cachekeys,
+            CacheDependency dependency,
+            DateTime start
+        )
+        {
             DateTime utcStart = DateTimeUtil.ConvertToUniversalTime(start);
             Init(true, filenames, cachekeys, dependency, utcStart);
         }
 
-        internal CacheDependency(int dummy, string filename) :
-            this(dummy, filename, DateTime.MaxValue) {
-        }
-            
-        internal CacheDependency(int dummy, string filename, DateTime utcStart) {
-            if (filename == null) {
+        internal CacheDependency(int dummy, string filename)
+            : this(dummy, filename, DateTime.MaxValue) { }
+
+        internal CacheDependency(int dummy, string filename, DateTime utcStart)
+        {
+            if (filename == null)
+            {
                 return;
             }
 
-            string[] filenames = new string[1] {filename};
+            string[] filenames = new string[1] { filename };
             Init(false, filenames, null, null, utcStart);
-
         }
 
-        internal CacheDependency(int dummy, string[] filenames) {
+        internal CacheDependency(int dummy, string[] filenames)
+        {
             Init(false, filenames, null, null, DateTime.MaxValue);
         }
 
-        internal CacheDependency(int dummy, string[] filenames, DateTime utcStart) {
+        internal CacheDependency(int dummy, string[] filenames, DateTime utcStart)
+        {
             Init(false, filenames, null, null, utcStart);
         }
 
-        internal CacheDependency(int dummy, string[] filenames, string[] cachekeys) {
+        internal CacheDependency(int dummy, string[] filenames, string[] cachekeys)
+        {
             Init(false, filenames, cachekeys, null, DateTime.MaxValue);
         }
 
-        internal CacheDependency(int dummy, string[] filenames, string[] cachekeys, DateTime utcStart) {
+        internal CacheDependency(
+            int dummy,
+            string[] filenames,
+            string[] cachekeys,
+            DateTime utcStart
+        )
+        {
             Init(false, filenames, cachekeys, null, utcStart);
         }
 
-        internal CacheDependency(int dummy, string[] filenames, string[] cachekeys, CacheDependency dependency) {
+        internal CacheDependency(
+            int dummy,
+            string[] filenames,
+            string[] cachekeys,
+            CacheDependency dependency
+        )
+        {
             Init(false, filenames, cachekeys, dependency, DateTime.MaxValue);
         }
 
-        internal CacheDependency(int dummy, string[] filenames, string[] cachekeys, CacheDependency dependency, DateTime utcStart) {
+        internal CacheDependency(
+            int dummy,
+            string[] filenames,
+            string[] cachekeys,
+            CacheDependency dependency,
+            DateTime utcStart
+        )
+        {
             Init(false, filenames, cachekeys, dependency, utcStart);
         }
 
 #if USE_MEMORY_CACHE
-        void OnChangedCallback(object state) {
+        void OnChangedCallback(object state)
+        {
             Debug.Trace("CacheDependencyFileChange", "OnChangedCallback fired");
-            NotifyDependencyChanged(this, EventArgs.Empty);            
+            NotifyDependencyChanged(this, EventArgs.Empty);
         }
 
-        void InitForMemoryCache(bool isPublic, string[] filenamesArg, string[] cachekeysArg, CacheDependency dependency, DateTime utcStart) {
+        void InitForMemoryCache(
+            bool isPublic,
+            string[] filenamesArg,
+            string[] cachekeysArg,
+            CacheDependency dependency,
+            DateTime utcStart
+        )
+        {
             bool dispose = true;
-            try {
+            try
+            {
                 MemCache memCache = HttpRuntime.InternalCache as MemCache;
                 _bits = new SafeBitVector32(0);
                 _utcLastModified = DateTime.MinValue;
                 IList<String> files = filenamesArg;
                 IList<String> keys = cachekeysArg;
-                if (dependency != null) {
-                    ReadOnlyCollection<string> filePaths = (dependency._fileChangeMonitor != null) ? dependency._fileChangeMonitor.FilePaths : null;
-                    ReadOnlyCollection<string> cacheKeys = (dependency._entryChangeMonitor != null) ? dependency._entryChangeMonitor.CacheKeys : null;
-                    if (filePaths != null || filenamesArg != null) {
-                        if (filePaths == null) {
+                if (dependency != null)
+                {
+                    ReadOnlyCollection<string> filePaths =
+                        (dependency._fileChangeMonitor != null)
+                            ? dependency._fileChangeMonitor.FilePaths
+                            : null;
+                    ReadOnlyCollection<string> cacheKeys =
+                        (dependency._entryChangeMonitor != null)
+                            ? dependency._entryChangeMonitor.CacheKeys
+                            : null;
+                    if (filePaths != null || filenamesArg != null)
+                    {
+                        if (filePaths == null)
+                        {
                             files = filenamesArg;
                         }
-                        else if (filenamesArg == null) {
+                        else if (filenamesArg == null)
+                        {
                             files = filePaths;
                         }
-                        else {
+                        else
+                        {
                             files = new List<String>(filenamesArg.Length + filePaths.Count);
-                            foreach (string f in filenamesArg) {
+                            foreach (string f in filenamesArg)
+                            {
                                 files.Add(f);
                             }
-                            foreach (string f in filePaths) {
+                            foreach (string f in filePaths)
+                            {
                                 files.Add(f);
                             }
                         }
                     }
-                    if (cacheKeys != null || cachekeysArg != null) {
-                        if (cacheKeys == null) {
+                    if (cacheKeys != null || cachekeysArg != null)
+                    {
+                        if (cacheKeys == null)
+                        {
                             keys = cachekeysArg;
                         }
-                        else if (cachekeysArg == null) {
+                        else if (cachekeysArg == null)
+                        {
                             keys = cacheKeys;
                         }
-                        else {
+                        else
+                        {
                             keys = new List<String>(cachekeysArg.Length + cacheKeys.Count);
-                            foreach (string f in cachekeysArg) {
+                            foreach (string f in cachekeysArg)
+                            {
                                 keys.Add(f);
                             }
-                            foreach (string f in cacheKeys) {
+                            foreach (string f in cacheKeys)
+                            {
                                 keys.Add(f);
                             }
                         }
                     }
                 }
-                
+
                 _fileChangeMonitor = (files != null) ? new HostFileChangeMonitor(files) : null;
-                _entryChangeMonitor = (keys != null) ? memCache.CreateCacheEntryChangeMonitor(keys, isPublic) : null;
-                
+                _entryChangeMonitor =
+                    (keys != null) ? memCache.CreateCacheEntryChangeMonitor(keys, isPublic) : null;
+
                 string uniqueId = null;
-                
-                if (_fileChangeMonitor != null) {
+
+                if (_fileChangeMonitor != null)
+                {
                     _utcLastModified = _fileChangeMonitor.LastModified.UtcDateTime;
                     uniqueId = _fileChangeMonitor.UniqueId;
                     _fileChangeMonitor.NotifyOnChanged(new OnChangedCallback(OnChangedCallback));
                 }
-                if (_entryChangeMonitor != null) {
+                if (_entryChangeMonitor != null)
+                {
                     DateTime utcLastModified = _entryChangeMonitor.LastModified.UtcDateTime;
-                    if (utcLastModified > _utcLastModified) {
+                    if (utcLastModified > _utcLastModified)
+                    {
                         _utcLastModified = utcLastModified;
                     }
                     uniqueId += _entryChangeMonitor.UniqueId;
                     _entryChangeMonitor.NotifyOnChanged(new OnChangedCallback(OnChangedCallback));
                 }
-                
+
                 _uniqueID = uniqueId;
 #if DBG
                 _isUniqueIDInitialized = true;
 #endif
                 // check if file has changed since the start time
-                if (utcStart < DateTime.MaxValue) {
-                    if (_utcLastModified > utcStart
-                        && !(_utcLastModified - DateTime.UtcNow > FUTURE_FILETIME_BUFFER)) {   // See VSWhidbey 400917
+                if (utcStart < DateTime.MaxValue)
+                {
+                    if (
+                        _utcLastModified > utcStart
+                        && !(_utcLastModified - DateTime.UtcNow > FUTURE_FILETIME_BUFFER)
+                    )
+                    { // See VSWhidbey 400917
                         _bits[CHANGED] = true;
                     }
                 }
 
                 _bits[BASE_INIT] = true;
-                if (dependency != null && dependency._bits[CHANGED]) {
+                if (dependency != null && dependency._bits[CHANGED])
+                {
                     _bits[CHANGED] = true;
                 }
-                if (_bits[WANTS_DISPOSE] || _bits[CHANGED]) {
-                    Debug.Trace("CacheDependencyInit", "WANTS_DISPOSE or CHANGED.  InitForMemoryCache calling DisposeInternal");
+                if (_bits[WANTS_DISPOSE] || _bits[CHANGED])
+                {
+                    Debug.Trace(
+                        "CacheDependencyInit",
+                        "WANTS_DISPOSE or CHANGED.  InitForMemoryCache calling DisposeInternal"
+                    );
                     DisposeInternal();
                 }
                 dispose = false;
             }
-            finally {
-                if (dispose) {
+            finally
+            {
+                if (dispose)
+                {
                     _bits[BASE_INIT] = true;
-                    Debug.Trace("CacheDependencyInit", "\n\nERROR in CacheDependency.InitForMemoryCache, calling DisposeInternal");
+                    Debug.Trace(
+                        "CacheDependencyInit",
+                        "\n\nERROR in CacheDependency.InitForMemoryCache, calling DisposeInternal"
+                    );
                     DisposeInternal();
                 }
             }
         }
 #endif
 
-        void Init(bool isPublic, string[] filenamesArg, string[] cachekeysArg, CacheDependency dependency, DateTime utcStart) {
+        void Init(
+            bool isPublic,
+            string[] filenamesArg,
+            string[] cachekeysArg,
+            CacheDependency dependency,
+            DateTime utcStart
+        )
+        {
 #if USE_MEMORY_CACHE
-            if (CacheInternal.UseMemoryCache) {
+            if (CacheInternal.UseMemoryCache)
+            {
                 InitForMemoryCache(isPublic, filenamesArg, cachekeysArg, dependency, utcStart);
                 return;
             }
 #endif
-            DepFileInfo[]   depFileInfos = s_depFileInfosEmpty;
+            DepFileInfo[] depFileInfos = s_depFileInfosEmpty;
             DepCacheInfo[] depEntries = s_entriesEmpty;
-            string []       filenames, cachekeys;
-            CacheStoreProvider     cache;
+            string[] filenames,
+                cachekeys;
+            CacheStoreProvider cache;
 
             _bits = new SafeBitVector32(0);
 
             // copy array argument contents so they can't be changed beneath us
-            if (filenamesArg != null) {
-                filenames = (string []) filenamesArg.Clone();
+            if (filenamesArg != null)
+            {
+                filenames = (string[])filenamesArg.Clone();
             }
-            else {
+            else
+            {
                 filenames = null;
             }
 
-            if (cachekeysArg != null) {
-                cachekeys = (string []) cachekeysArg.Clone();
+            if (cachekeysArg != null)
+            {
+                cachekeys = (string[])cachekeysArg.Clone();
             }
-            else {
+            else
+            {
                 cachekeys = null;
             }
 
             _utcLastModified = DateTime.MinValue;
 
-            try {
+            try
+            {
                 // validate filenames array
-                if (filenames == null) {
+                if (filenames == null)
+                {
                     filenames = s_stringsEmpty;
                 }
-                else {
-                    foreach (string f in filenames) {
-                        if (f == null) {
+                else
+                {
+                    foreach (string f in filenames)
+                    {
+                        if (f == null)
+                        {
                             throw new ArgumentNullException("filenamesArg");
                         }
 
                         // demand PathDiscovery if public
-                        if (isPublic) {
+                        if (isPublic)
+                        {
                             InternalSecurityPermissions.PathDiscovery(f).Demand();
                         }
                     }
                 }
 
-                if (cachekeys == null) {
+                if (cachekeys == null)
+                {
                     cachekeys = s_stringsEmpty;
                 }
-                else {
+                else
+                {
                     // validate cachekeys array
-                    foreach (string k in cachekeys) {
-                        if (k == null) {
+                    foreach (string k in cachekeys)
+                    {
+                        if (k == null)
+                        {
                             throw new ArgumentNullException("cachekeysArg");
                         }
                     }
                 }
 
                 // copy all parts of another dependency if provided
-                if (dependency == null) {
+                if (dependency == null)
+                {
                     dependency = s_dependencyEmpty;
                 }
-                else {
-                    if (dependency.GetType() != s_dependencyEmpty.GetType()) {
+                else
+                {
+                    if (dependency.GetType() != s_dependencyEmpty.GetType())
+                    {
                         throw new ArgumentException(SR.GetString(SR.Invalid_Dependency_Type));
                     }
 
@@ -379,7 +479,8 @@ namespace System.Web.Caching {
                     DateTime d_lastModified = dependency._utcLastModified;
 
                     // if the dependency we're copying has changed, we're done
-                    if (dependency._bits[CHANGED]) {
+                    if (dependency._bits[CHANGED])
+                    {
                         _bits[CHANGED] = true;
                         // There is nothing to dispose because we haven't started
                         // monitoring anything yet.  But we call DisposeInternal in
@@ -389,21 +490,25 @@ namespace System.Web.Caching {
                     }
 
                     // copy depFileInfos
-                    if (d_depFileInfos != null) {
-                        if (d_depFileInfos is DepFileInfo) {
-                            depFileInfos = new DepFileInfo[1] {(DepFileInfo) d_depFileInfos};
+                    if (d_depFileInfos != null)
+                    {
+                        if (d_depFileInfos is DepFileInfo)
+                        {
+                            depFileInfos = new DepFileInfo[1] { (DepFileInfo)d_depFileInfos };
                         }
-                        else {
-                            depFileInfos = (DepFileInfo[]) (d_depFileInfos);
-
+                        else
+                        {
+                            depFileInfos = (DepFileInfo[])(d_depFileInfos);
                         }
 
                         // verify that the object was fully constructed
                         // and that we have permission to discover the file
-                        foreach (DepFileInfo depFileInfo in depFileInfos) {
+                        foreach (DepFileInfo depFileInfo in depFileInfos)
+                        {
                             string f = depFileInfo._filename;
-                            
-                            if (f == null) {
+
+                            if (f == null)
+                            {
                                 _bits[CHANGED] = true;
                                 // There is nothing to dispose because we haven't started
                                 // monitoring anything yet.  But we call DisposeInternal in
@@ -413,22 +518,28 @@ namespace System.Web.Caching {
                             }
 
                             // demand PathDiscovery if public
-                            if (isPublic) {
+                            if (isPublic)
+                            {
                                 InternalSecurityPermissions.PathDiscovery(f).Demand();
                             }
                         }
                     }
 
                     // copy cache entries
-                    if (d_entries != null) {
-                        if (d_entries is DepCacheInfo) {
+                    if (d_entries != null)
+                    {
+                        if (d_entries is DepCacheInfo)
+                        {
                             depEntries = new DepCacheInfo[1] { (DepCacheInfo)(d_entries) };
                         }
-                        else {
+                        else
+                        {
                             depEntries = (DepCacheInfo[])(d_entries);
                             // verify that the object was fully constructed
-                            foreach (DepCacheInfo entry in depEntries) {
-                                if (entry == null) {
+                            foreach (DepCacheInfo entry in depEntries)
+                            {
+                                if (entry == null)
+                                {
                                     _bits[CHANGED] = true;
                                     // There is nothing to dispose because we haven't started
                                     // monitoring anything yet.  But we call DisposeInternal in
@@ -445,57 +556,84 @@ namespace System.Web.Caching {
 
                 // Monitor files for changes
                 int lenMyDepFileInfos = depFileInfos.Length + filenames.Length;
-                if (lenMyDepFileInfos > 0) {
+                if (lenMyDepFileInfos > 0)
+                {
                     DepFileInfo[] myDepFileInfos = new DepFileInfo[lenMyDepFileInfos];
                     FileChangeEventHandler handler = new FileChangeEventHandler(this.FileChange);
                     FileChangesMonitor fmon = HttpRuntime.FileChangesMonitor;
 
                     int i;
-                    for (i = 0; i < lenMyDepFileInfos; i++) {
+                    for (i = 0; i < lenMyDepFileInfos; i++)
+                    {
                         myDepFileInfos[i] = new DepFileInfo();
                     }
 
                     // monitor files from the existing dependency
                     // note that we don't check for start times in the existing dependency
                     i = 0;
-                    foreach (DepFileInfo depFileInfo in depFileInfos) {
-                        string  f = depFileInfo._filename;
+                    foreach (DepFileInfo depFileInfo in depFileInfos)
+                    {
+                        string f = depFileInfo._filename;
                         fmon.StartMonitoringPath(f, handler, out myDepFileInfos[i]._fad);
                         myDepFileInfos[i]._filename = f;
                         i++;
                     }
 
                     // monitor new files
-                    DateTime    utcNow = DateTime.MinValue;
-                    foreach (string f in filenames) {
-                        DateTime utcLastWrite = fmon.StartMonitoringPath(f, handler, out myDepFileInfos[i]._fad);
+                    DateTime utcNow = DateTime.MinValue;
+                    foreach (string f in filenames)
+                    {
+                        DateTime utcLastWrite = fmon.StartMonitoringPath(
+                            f,
+                            handler,
+                            out myDepFileInfos[i]._fad
+                        );
                         myDepFileInfos[i]._filename = f;
                         i++;
 
-                        if (utcLastWrite > _utcLastModified) {
+                        if (utcLastWrite > _utcLastModified)
+                        {
                             _utcLastModified = utcLastWrite;
                         }
 
                         // check if file has changed since the start time
-                        if (utcStart < DateTime.MaxValue) {
-                            if (utcNow == DateTime.MinValue) {
+                        if (utcStart < DateTime.MaxValue)
+                        {
+                            if (utcNow == DateTime.MinValue)
+                            {
                                 utcNow = DateTime.UtcNow;
                             }
-                            
-                            Debug.Trace("CacheDependencyInit", "file=" + f + "; utcStart=" + utcStart + "; utcLastWrite=" + utcLastWrite);
-                            if (utcLastWrite >= utcStart &&
-                                !(utcLastWrite - utcNow > FUTURE_FILETIME_BUFFER)) {   // See VSWhidbey 400917
-                                Debug.Trace("CacheDependencyInit", "changes occurred since start time for file " + f);
+
+                            Debug.Trace(
+                                "CacheDependencyInit",
+                                "file="
+                                    + f
+                                    + "; utcStart="
+                                    + utcStart
+                                    + "; utcLastWrite="
+                                    + utcLastWrite
+                            );
+                            if (
+                                utcLastWrite >= utcStart
+                                && !(utcLastWrite - utcNow > FUTURE_FILETIME_BUFFER)
+                            )
+                            { // See VSWhidbey 400917
+                                Debug.Trace(
+                                    "CacheDependencyInit",
+                                    "changes occurred since start time for file " + f
+                                );
                                 _bits[CHANGED] = true;
                                 break;
                             }
                         }
                     }
 
-                    if (myDepFileInfos.Length == 1) {
+                    if (myDepFileInfos.Length == 1)
+                    {
                         _depFileInfos = myDepFileInfos[0];
                     }
-                    else {
+                    else
+                    {
                         _depFileInfos = myDepFileInfos;
                     }
                 }
@@ -503,88 +641,112 @@ namespace System.Web.Caching {
                 // Monitor other cache entries for changes
                 int lenMyEntries = depEntries.Length + cachekeys.Length;
                 DateTime lastUpdated;
-                if (lenMyEntries > 0 && !_bits[CHANGED]) {
+                if (lenMyEntries > 0 && !_bits[CHANGED])
+                {
                     DepCacheInfo[] myEntries = new DepCacheInfo[lenMyEntries];
 
                     // Monitor entries from the existing cache dependency
                     int i = 0;
-                    foreach (DepCacheInfo entry in depEntries) {
+                    foreach (DepCacheInfo entry in depEntries)
+                    {
                         entry._cacheStore.AddDependent(entry._key, this, out lastUpdated);
                         myEntries[i++] = entry;
                     }
 
                     // Monitor new entries specified for this depenedency
                     // Entries must be added to cache, and created before the startTime
-                    cache = isPublic ? HttpRuntime.Cache.ObjectCache : HttpRuntime.Cache.InternalCache;
-                    foreach (string k in cachekeys) {
-                        if (cache.AddDependent(k, this, out lastUpdated)) {
+                    cache = isPublic
+                        ? HttpRuntime.Cache.ObjectCache
+                        : HttpRuntime.Cache.InternalCache;
+                    foreach (string k in cachekeys)
+                    {
+                        if (cache.AddDependent(k, this, out lastUpdated))
+                        {
                             myEntries[i++] = new DepCacheInfo() { _cacheStore = cache, _key = k };
 
-                            if (lastUpdated > _utcLastModified) {
+                            if (lastUpdated > _utcLastModified)
+                            {
                                 _utcLastModified = lastUpdated;
                             }
 
-                            if (lastUpdated > utcStart) {  // Cache item has been updated since start, consider changed
+                            if (lastUpdated > utcStart)
+                            { // Cache item has been updated since start, consider changed
 #if DBG
-                                Debug.Trace("CacheDependencyInit", "Changes occurred to entry since start time:" + k);
+                                Debug.Trace(
+                                    "CacheDependencyInit",
+                                    "Changes occurred to entry since start time:" + k
+                                );
 #endif
                                 _bits[CHANGED] = true;
                                 break;
                             }
                         }
-                        else {
-                            Debug.Trace("CacheDependencyInit", "Cache item not found to create dependency on:" + k);
+                        else
+                        {
+                            Debug.Trace(
+                                "CacheDependencyInit",
+                                "Cache item not found to create dependency on:" + k
+                            );
                             _bits[CHANGED] = true;
                             break;
                         }
                     }
 
-                    if (myEntries.Length == 1) {
+                    if (myEntries.Length == 1)
+                    {
                         _entries = myEntries[0];
                     }
-                    else {
+                    else
+                    {
                         _entries = myEntries;
                     }
                 }
 
                 _bits[BASE_INIT] = true;
-                if (dependency._bits[CHANGED]) {
+                if (dependency._bits[CHANGED])
+                {
                     _bits[CHANGED] = true;
                 }
- 
-                if (_bits[WANTS_DISPOSE] || _bits[CHANGED]) {
+
+                if (_bits[WANTS_DISPOSE] || _bits[CHANGED])
+                {
                     DisposeInternal();
                 }
 
                 Debug.Assert(_objNotify == null, "_objNotify == null");
             }
-            catch {
+            catch
+            {
                 // derived constructor will not execute due to the throw,
                 // so we just force a dispose on ourselves
                 _bits[BASE_INIT] = true;
                 DisposeInternal();
                 throw;
             }
-            finally {
+            finally
+            {
                 InitUniqueID();
             }
         }
 
-
-        public void Dispose() {
+        public void Dispose()
+        {
             // Set this bit just in case our derived ctor forgot to call FinishInit()
             _bits[DERIVED_INIT] = true;
-                
-            if (TakeOwnership()) {
+
+            if (TakeOwnership())
+            {
                 // Do the dispose only if the cache has not already used us
                 DisposeInternal();
             }
         }
 
-        protected internal void FinishInit() {
+        protected internal void FinishInit()
+        {
             _bits[DERIVED_INIT] = true;
 
-            if (_bits[WANTS_DISPOSE]) {
+            if (_bits[WANTS_DISPOSE])
+            {
                 DisposeInternal();
             }
         }
@@ -592,18 +754,23 @@ namespace System.Web.Caching {
         /*
          * Shutdown all dependency monitoring and firing of NotifyDependencyChanged notification.
          */
-        internal void DisposeInternal() {
+        internal void DisposeInternal()
+        {
             _bits[WANTS_DISPOSE] = true;
 
-            if (_bits[DERIVED_INIT]) {
-                if (_bits.ChangeValue(DERIVED_DISPOSED, true)) {
+            if (_bits[DERIVED_INIT])
+            {
+                if (_bits.ChangeValue(DERIVED_DISPOSED, true))
+                {
                     // Dispose derived classes
                     DependencyDispose();
                 }
             }
 
-            if (_bits[BASE_INIT]) {
-                if (_bits.ChangeValue(BASE_DISPOSED, true)) {
+            if (_bits[BASE_INIT])
+            {
+                if (_bits.ChangeValue(BASE_DISPOSED, true))
+                {
                     // Dispose ourself
                     DisposeOurself();
                 }
@@ -612,13 +779,15 @@ namespace System.Web.Caching {
 
         // Allow derived class to dispose itself
 
-        protected virtual void DependencyDispose() {
+        protected virtual void DependencyDispose()
+        {
             // We do our own dispose work in DisposeOurself, so that
             // we don't rely on derived classes calling their base
             // DependencyDispose for us to function correctly.
         }
 
-        void DisposeOurself() {
+        void DisposeOurself()
+        {
             // guarantee that we execute only once if an exception
             // is thrown from this function by nulling fields before
             // we access them
@@ -630,20 +799,25 @@ namespace System.Web.Caching {
             _entries = null;
 
             // stop monitoring files
-            if (l_depFileInfos != null) {
+            if (l_depFileInfos != null)
+            {
                 FileChangesMonitor fmon = HttpRuntime.FileChangesMonitor;
 
                 DepFileInfo oneDepFileInfo = l_depFileInfos as DepFileInfo;
-                if (oneDepFileInfo != null) {
+                if (oneDepFileInfo != null)
+                {
                     fmon.StopMonitoringPath(oneDepFileInfo._filename, this);
                 }
-                else {
-                    DepFileInfo[] depFileInfos = (DepFileInfo[]) l_depFileInfos;
-                    foreach (DepFileInfo depFileInfo in depFileInfos) {
+                else
+                {
+                    DepFileInfo[] depFileInfos = (DepFileInfo[])l_depFileInfos;
+                    foreach (DepFileInfo depFileInfo in depFileInfos)
+                    {
                         // ensure that we handle partially contructed
                         // objects by checking filename for null
-                        string  filename = depFileInfo._filename;
-                        if (filename != null) {
+                        string filename = depFileInfo._filename;
+                        if (filename != null)
+                        {
                             fmon.StopMonitoringPath(filename, this);
                         }
                     }
@@ -651,17 +825,22 @@ namespace System.Web.Caching {
             }
 
             // stop monitoring cache items
-            if (l_entries != null) {
+            if (l_entries != null)
+            {
                 DepCacheInfo oneEntry = l_entries as DepCacheInfo;
-                if (oneEntry != null) {
+                if (oneEntry != null)
+                {
                     oneEntry._cacheStore.RemoveDependent(oneEntry._key, this);
                 }
-                else {
+                else
+                {
                     DepCacheInfo[] entries = (DepCacheInfo[])l_entries;
-                    foreach (DepCacheInfo entry in entries) {
+                    foreach (DepCacheInfo entry in entries)
+                    {
                         // ensure that we handle partially contructed
                         // objects by checking entry for null
-                        if (entry != null) {
+                        if (entry != null)
+                        {
                             entry._cacheStore.RemoveDependent(entry._key, this);
                         }
                     }
@@ -669,10 +848,12 @@ namespace System.Web.Caching {
             }
 
 #if USE_MEMORY_CACHE
-            if (_fileChangeMonitor != null) {
+            if (_fileChangeMonitor != null)
+            {
                 _fileChangeMonitor.Dispose();
             }
-            if (_entryChangeMonitor != null) {
+            if (_entryChangeMonitor != null)
+            {
                 _entryChangeMonitor.Dispose();
             }
 #endif
@@ -681,7 +862,8 @@ namespace System.Web.Caching {
         /// <devdoc>
         ///    <para>Allow the first user to declare exclusive ownership of this dependency.</para>
         /// </devdoc>
-        public bool TakeOwnership() {
+        public bool TakeOwnership()
+        {
             return _bits.ChangeValue(USED, true);
         }
 
@@ -689,32 +871,37 @@ namespace System.Web.Caching {
         // Has a dependency changed?
         //
 
-        public bool HasChanged {
-            get {return _bits[CHANGED];}
+        public bool HasChanged
+        {
+            get { return _bits[CHANGED]; }
         }
 
-
-        public DateTime UtcLastModified {
-            get {
-                return _utcLastModified;
-            }
+        public DateTime UtcLastModified
+        {
+            get { return _utcLastModified; }
         }
 
-        protected void SetUtcLastModified(DateTime utcLastModified) {
+        protected void SetUtcLastModified(DateTime utcLastModified)
+        {
             _utcLastModified = utcLastModified;
         }
 
-        public void KeepDependenciesAlive() {
-            if (_entries != null) {
+        public void KeepDependenciesAlive()
+        {
+            if (_entries != null)
+            {
                 // update the last access time of every cache item that depends on this dependency
                 DepCacheInfo oneEntry = _entries as DepCacheInfo;
-                if (oneEntry != null) {
+                if (oneEntry != null)
+                {
                     oneEntry._cacheStore.Get(oneEntry._key);
                     return;
                 }
 
-                foreach (DepCacheInfo entry in (DepCacheInfo[])_entries) {
-                    if (entry != null) {
+                foreach (DepCacheInfo entry in (DepCacheInfo[])_entries)
+                {
+                    if (entry != null)
+                    {
                         object item = entry._cacheStore.Get(entry._key);
                     }
                 }
@@ -724,21 +911,25 @@ namespace System.Web.Caching {
         /// <devdoc>
         ///    <para>Add an Action to handle notifying interested party in changes to this dependency.</para>
         /// </devdoc>
-        public void SetCacheDependencyChanged(Action<Object, EventArgs> dependencyChangedAction) {
+        public void SetCacheDependencyChanged(Action<Object, EventArgs> dependencyChangedAction)
+        {
             Debug.Assert(_objNotify == null, "_objNotify == null");
 
             // Set this bit just in case our derived ctor forgot to call FinishInit()
             _bits[DERIVED_INIT] = true;
 
-            if (!_bits[BASE_DISPOSED]) {
+            if (!_bits[BASE_DISPOSED])
+            {
                 _objNotify = dependencyChangedAction;
             }
         }
 
-        internal void AppendFileUniqueId(DepFileInfo depFileInfo, StringBuilder sb) {
+        internal void AppendFileUniqueId(DepFileInfo depFileInfo, StringBuilder sb)
+        {
             FileAttributesData fad = depFileInfo._fad;
-                
-            if (fad == null) {
+
+            if (fad == null)
+            {
                 fad = FileAttributesData.NonExistantAttributesData;
             }
 
@@ -747,25 +938,32 @@ namespace System.Web.Caching {
             sb.Append(fad.FileSize.ToString(CultureInfo.InvariantCulture));
         }
 
-        void InitUniqueID() {
-            StringBuilder   sb = null;
-            object          l_depFileInfos, l_entries;
-                
+        void InitUniqueID()
+        {
+            StringBuilder sb = null;
+            object l_depFileInfos,
+                l_entries;
+
 #if !FEATURE_PAL // no File Change Monitoring
             // get unique id from files
             l_depFileInfos = _depFileInfos;
-            if (l_depFileInfos != null) {
+            if (l_depFileInfos != null)
+            {
                 DepFileInfo oneDepFileInfo = l_depFileInfos as DepFileInfo;
-                if (oneDepFileInfo != null) {
-                     sb = new StringBuilder();
+                if (oneDepFileInfo != null)
+                {
+                    sb = new StringBuilder();
                     AppendFileUniqueId(oneDepFileInfo, sb);
                 }
-                else {
-                    DepFileInfo[] depFileInfos = (DepFileInfo[]) l_depFileInfos;
-                    foreach (DepFileInfo depFileInfo in depFileInfos) {
+                else
+                {
+                    DepFileInfo[] depFileInfos = (DepFileInfo[])l_depFileInfos;
+                    foreach (DepFileInfo depFileInfo in depFileInfos)
+                    {
                         // ensure that we handle partially contructed
                         // objects by checking filename for null
-                        if (depFileInfo._filename != null) {
+                        if (depFileInfo._filename != null)
+                        {
                             if (sb == null)
                                 sb = new StringBuilder();
                             AppendFileUniqueId(depFileInfo, sb);
@@ -773,24 +971,29 @@ namespace System.Web.Caching {
                     }
                 }
             }
-            
+
 #endif // !FEATURE_PAL
             // get unique id from cache entries
             l_entries = _entries;
-            if (l_entries != null) {
+            if (l_entries != null)
+            {
                 DepCacheInfo oneEntry = l_entries as DepCacheInfo;
-                if (oneEntry != null) {
+                if (oneEntry != null)
+                {
                     if (sb == null)
                         sb = new StringBuilder();
                     sb.Append(oneEntry._key);
                     sb.Append(oneEntry.GetHashCode().ToString(CultureInfo.InvariantCulture));
                 }
-                else {
+                else
+                {
                     DepCacheInfo[] entries = (DepCacheInfo[])l_entries;
-                    foreach (DepCacheInfo entry in entries) {
+                    foreach (DepCacheInfo entry in entries)
+                    {
                         // ensure that we handle partially contructed
                         // objects by checking entry for null
-                        if (entry != null) {
+                        if (entry != null)
+                        {
                             if (sb == null)
                                 sb = new StringBuilder();
                             sb.Append(entry._key);
@@ -808,7 +1011,8 @@ namespace System.Web.Caching {
 #endif
         }
 
-        public virtual string GetUniqueID() {
+        public virtual string GetUniqueID()
+        {
 #if DBG
             Debug.Assert(_isUniqueIDInitialized == true, "_isUniqueIDInitialized == true");
 #endif
@@ -820,12 +1024,15 @@ namespace System.Web.Caching {
         // We only allow this event to be fired once.
         //
 
-        protected void NotifyDependencyChanged(Object sender, EventArgs e) {
-            if (_bits.ChangeValue(CHANGED, true)) {
+        protected void NotifyDependencyChanged(Object sender, EventArgs e)
+        {
+            if (_bits.ChangeValue(CHANGED, true))
+            {
                 _utcLastModified = DateTime.UtcNow;
 
                 Action<Object, EventArgs> action = _objNotify as Action<Object, EventArgs>;
-                if (action != null && !_bits[BASE_DISPOSED]) {
+                if (action != null && !_bits[BASE_DISPOSED])
+                {
                     Debug.Trace("CacheDependencyNotifyDependencyChanged", "change occurred");
                     action(sender, e);
                 }
@@ -837,62 +1044,79 @@ namespace System.Web.Caching {
         /// <devdoc>
         ///    <para>ItemRemoved should be called when an ICacheEntry we are monitoring has been removed.</para>
         /// </devdoc>
-        public void ItemRemoved() {
+        public void ItemRemoved()
+        {
             NotifyDependencyChanged(this, EventArgs.Empty);
         }
 
         //
         // FileChange is called when a file we are monitoring has changed.
         //
-        void FileChange(Object sender, FileChangeEvent e) {
-            Debug.Trace("CacheDependencyFileChange", "FileChange file=" + e.FileName + ";Action=" + e.Action);
+        void FileChange(Object sender, FileChangeEvent e)
+        {
+            Debug.Trace(
+                "CacheDependencyFileChange",
+                "FileChange file=" + e.FileName + ";Action=" + e.Action
+            );
             NotifyDependencyChanged(sender, e);
         }
 
         //
-        //  This will examine the dependency and determine if it's ONLY a file dependency or not 
+        //  This will examine the dependency and determine if it's ONLY a file dependency or not
         //
         internal virtual bool IsFileDependency()
         {
 #if USE_MEMORY_CACHE
-            if (CacheInternal.UseMemoryCache) {
-                if (_entryChangeMonitor != null) {
+            if (CacheInternal.UseMemoryCache)
+            {
+                if (_entryChangeMonitor != null)
+                {
                     return false;
                 }
-                
-                if (_fileChangeMonitor != null) {
+
+                if (_fileChangeMonitor != null)
+                {
                     return true;
                 }
                 return false;
             }
 #endif
 
-            object depInfos, l_entries;
+            object depInfos,
+                l_entries;
 
             // Check and see if we are dependent on any cache entries
             l_entries = _entries;
-            if (l_entries != null) {
+            if (l_entries != null)
+            {
                 DepCacheInfo oneEntry = l_entries as DepCacheInfo;
-                if (oneEntry != null) {
+                if (oneEntry != null)
+                {
                     return false;
                 }
-                else {
-                    DepCacheInfo[] entries = (DepCacheInfo[]) l_entries;
-                    if (entries != null && entries.Length > 0) {
+                else
+                {
+                    DepCacheInfo[] entries = (DepCacheInfo[])l_entries;
+                    if (entries != null && entries.Length > 0)
+                    {
                         return false;
                     }
                 }
             }
 
             depInfos = _depFileInfos;
-            if (depInfos != null) {
+            if (depInfos != null)
+            {
                 DepFileInfo oneDepFileInfo = depInfos as DepFileInfo;
-                if (oneDepFileInfo != null) {
+                if (oneDepFileInfo != null)
+                {
                     return true;
                 }
-                else {
-                    DepFileInfo[] depFileInfos = (DepFileInfo[]) depInfos;
-                    if (depFileInfos != null && depFileInfos.Length > 0) {
+                else
+                {
+                    DepFileInfo[] depFileInfos = (DepFileInfo[])depInfos;
+                    if (depFileInfos != null && depFileInfos.Length > 0)
+                    {
                         return true;
                     }
                 }
@@ -908,12 +1132,16 @@ namespace System.Web.Caching {
         public virtual string[] GetFileDependencies()
         {
 #if USE_MEMORY_CACHE
-            if (CacheInternal.UseMemoryCache) {
-                if (_fileChangeMonitor != null) {
+            if (CacheInternal.UseMemoryCache)
+            {
+                if (_fileChangeMonitor != null)
+                {
                     ReadOnlyCollection<string> paths = _fileChangeMonitor.FilePaths;
-                    if (paths != null && paths.Count > 0) {
+                    if (paths != null && paths.Count > 0)
+                    {
                         string[] aryPaths = new string[paths.Count];
-                        for (int i = 0; i < aryPaths.Length; i++) {
+                        for (int i = 0; i < aryPaths.Length; i++)
+                        {
                             aryPaths[i] = paths[i];
                         }
                         return aryPaths;
@@ -924,15 +1152,19 @@ namespace System.Web.Caching {
 #endif
             object depInfos = _depFileInfos;
 
-            if (depInfos != null) {
+            if (depInfos != null)
+            {
                 DepFileInfo oneDepFileInfo = depInfos as DepFileInfo;
-                if (oneDepFileInfo != null) {
-                    return new string[] {oneDepFileInfo._filename};
+                if (oneDepFileInfo != null)
+                {
+                    return new string[] { oneDepFileInfo._filename };
                 }
-                else {
-                    DepFileInfo[] depFileInfos = (DepFileInfo[]) depInfos;
+                else
+                {
+                    DepFileInfo[] depFileInfos = (DepFileInfo[])depInfos;
                     string[] names = new string[depFileInfos.Length];
-                    for (int i = 0; i < depFileInfos.Length; i++) {
+                    for (int i = 0; i < depFileInfos.Length; i++)
+                    {
                         names[i] = depFileInfos[i]._filename;
                     }
 
@@ -944,57 +1176,74 @@ namespace System.Web.Caching {
         }
     }
 
-    public sealed class AggregateCacheDependency : CacheDependency {
-        ArrayList   _dependencies;
-        bool        _disposed;
+    public sealed class AggregateCacheDependency : CacheDependency
+    {
+        ArrayList _dependencies;
+        bool _disposed;
 
-
-        public AggregateCacheDependency() {
+        public AggregateCacheDependency()
+        {
             // The ctor of every class derived from CacheDependency must call this.
             FinishInit();
         }
 
-
-        public void Add(params CacheDependency [] dependencies) {
+        public void Add(params CacheDependency[] dependencies)
+        {
             DateTime utcLastModified = DateTime.MinValue;
 
-            if (dependencies == null) {
+            if (dependencies == null)
+            {
                 throw new ArgumentNullException("dependencies");
             }
 
             // copy array argument contents so they can't be changed beneath us
-            dependencies = (CacheDependency []) dependencies.Clone();
+            dependencies = (CacheDependency[])dependencies.Clone();
 
             // validate contents
-            foreach (CacheDependency d in dependencies) {
-                if (d == null) {
+            foreach (CacheDependency d in dependencies)
+            {
+                if (d == null)
+                {
                     throw new ArgumentNullException("dependencies");
                 }
 
-                if (!d.TakeOwnership()) {
-                    throw new InvalidOperationException(SR.GetString(SR.Cache_dependency_used_more_that_once));
-                }            }
+                if (!d.TakeOwnership())
+                {
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Cache_dependency_used_more_that_once)
+                    );
+                }
+            }
 
             // add dependencies, and check if any have changed
             bool hasChanged = false;
-            lock (this) {
-                if (!_disposed) {
-                    if (_dependencies == null) {
+            lock (this)
+            {
+                if (!_disposed)
+                {
+                    if (_dependencies == null)
+                    {
                         _dependencies = new ArrayList();
                     }
 
                     _dependencies.AddRange(dependencies);
 
-                    foreach (CacheDependency d in dependencies) {
-                        d.SetCacheDependencyChanged((Object sender, EventArgs args) => {
-                            DependencyChanged(sender, args);
-                        });
+                    foreach (CacheDependency d in dependencies)
+                    {
+                        d.SetCacheDependencyChanged(
+                            (Object sender, EventArgs args) =>
+                            {
+                                DependencyChanged(sender, args);
+                            }
+                        );
 
-                        if (d.UtcLastModified > utcLastModified) {
+                        if (d.UtcLastModified > utcLastModified)
+                        {
                             utcLastModified = d.UtcLastModified;
                         }
 
-                        if (d.HasChanged) {
+                        if (d.HasChanged)
+                        {
                             hasChanged = true;
                             break;
                         }
@@ -1005,7 +1254,8 @@ namespace System.Web.Caching {
             SetUtcLastModified(utcLastModified);
 
             // if a dependency has changed, notify others that we have changed.
-            if (hasChanged) {
+            if (hasChanged)
+            {
                 NotifyDependencyChanged(this, EventArgs.Empty);
             }
         }
@@ -1013,19 +1263,25 @@ namespace System.Web.Caching {
         // Dispose our dependencies. Note that the call to this
         // function is thread safe.
 
-        protected override void DependencyDispose() {
+        protected override void DependencyDispose()
+        {
             CacheDependency[] dependencies = null;
 
-            lock (this) {
+            lock (this)
+            {
                 _disposed = true;
-                if (_dependencies != null) {
-                    dependencies = (CacheDependency[]) _dependencies.ToArray(typeof(CacheDependency));
+                if (_dependencies != null)
+                {
+                    dependencies = (CacheDependency[])
+                        _dependencies.ToArray(typeof(CacheDependency));
                     _dependencies = null;
                 }
             }
 
-            if (dependencies != null) {
-                foreach (CacheDependency d in dependencies) {
+            if (dependencies != null)
+            {
+                foreach (CacheDependency d in dependencies)
+                {
                     d.DisposeInternal();
                 }
             }
@@ -1034,38 +1290,47 @@ namespace System.Web.Caching {
         // Forward call from the aggregate to the CacheEntry
 
         /// <internalonly/>
-        void DependencyChanged(Object sender, EventArgs e) {
+        void DependencyChanged(Object sender, EventArgs e)
+        {
             NotifyDependencyChanged(sender, e);
         }
 
-
-        public override string GetUniqueID() {
+        public override string GetUniqueID()
+        {
             StringBuilder sb = null;
             CacheDependency[] dependencies = null;
 
             //VSWhidbey 354570: return null if this AggregateCacheDependency cannot otherwise return a unique ID
-            if (_dependencies == null) {
+            if (_dependencies == null)
+            {
                 return null;
             }
 
-            lock (this) {
-                if (_dependencies != null) {
-                    dependencies = (CacheDependency[]) _dependencies.ToArray(typeof(CacheDependency));
+            lock (this)
+            {
+                if (_dependencies != null)
+                {
+                    dependencies = (CacheDependency[])
+                        _dependencies.ToArray(typeof(CacheDependency));
                 }
             }
-            
-            if (dependencies != null) {
-                foreach (CacheDependency dependency in dependencies) {
+
+            if (dependencies != null)
+            {
+                foreach (CacheDependency dependency in dependencies)
+                {
                     string id = dependency.GetUniqueID();
 
-                    if (id == null) {
-                        // When AggregateCacheDependency contains a dependency for which GetUniqueID() returns null, 
-                        // it should return null itself.  This is because it can no longer generate a UniqueID that 
+                    if (id == null)
+                    {
+                        // When AggregateCacheDependency contains a dependency for which GetUniqueID() returns null,
+                        // it should return null itself.  This is because it can no longer generate a UniqueID that
                         // is guaranteed to be different when any of the dependencies change.
                         return null;
                     }
 
-                    if (sb == null) {
+                    if (sb == null)
+                    {
                         sb = new StringBuilder();
                     }
                     sb.Append(id);
@@ -1079,9 +1344,12 @@ namespace System.Web.Caching {
         {
             CacheDependency[] dependencies = null;
 
-            lock (this) {
-                if (_dependencies != null) {
-                    dependencies = (CacheDependency[]) _dependencies.ToArray(typeof(CacheDependency));
+            lock (this)
+            {
+                if (_dependencies != null)
+                {
+                    dependencies = (CacheDependency[])
+                        _dependencies.ToArray(typeof(CacheDependency));
                 }
             }
 
@@ -1096,19 +1364,25 @@ namespace System.Web.Caching {
             CacheDependency[] dependencies = null;
 
             dependencies = GetDependencyArray();
-            if (dependencies == null) {
+            if (dependencies == null)
+            {
                 return false;
             }
 
-            foreach (CacheDependency d in dependencies) {
+            foreach (CacheDependency d in dependencies)
+            {
                 // We should only check if the type is either CacheDependency or the Aggregate.
                 // Anything else, we can't guarantee that it's a file only dependency.
-                if ( ! object.ReferenceEquals(d.GetType(), typeof(CacheDependency)) &&
-                     ! object.ReferenceEquals(d.GetType(), typeof(AggregateCacheDependency)) ) {
-                     return false;
+                if (
+                    !object.ReferenceEquals(d.GetType(), typeof(CacheDependency))
+                    && !object.ReferenceEquals(d.GetType(), typeof(AggregateCacheDependency))
+                )
+                {
+                    return false;
                 }
 
-                if (! d.IsFileDependency()) {
+                if (!d.IsFileDependency())
+                {
                     return false;
                 }
             }
@@ -1126,21 +1400,26 @@ namespace System.Web.Caching {
             CacheDependency[] dependencies = null;
 
             dependencies = GetDependencyArray();
-            if (dependencies == null) {
+            if (dependencies == null)
+            {
                 return null;
             }
 
-            foreach (CacheDependency d in dependencies) {
+            foreach (CacheDependency d in dependencies)
+            {
                 // Check if the type is either CacheDependency or an Aggregate;
                 // for anything else, we can't guarantee it's a file only dependency.
-                if (object.ReferenceEquals(d.GetType(), typeof(CacheDependency))
-                    || object.ReferenceEquals(d.GetType(), typeof(AggregateCacheDependency))) {
-
+                if (
+                    object.ReferenceEquals(d.GetType(), typeof(CacheDependency))
+                    || object.ReferenceEquals(d.GetType(), typeof(AggregateCacheDependency))
+                )
+                {
                     string[] tmpFileNames = d.GetFileDependencies();
 
-                    if (tmpFileNames != null) {
-
-                        if (fileNames == null) {
+                    if (tmpFileNames != null)
+                    {
+                        if (fileNames == null)
+                        {
                             fileNames = new ArrayList();
                         }
 
@@ -1149,13 +1428,14 @@ namespace System.Web.Caching {
                 }
             }
 
-            if (fileNames != null) {
+            if (fileNames != null)
+            {
                 return (string[])fileNames.ToArray(typeof(string));
             }
-            else {
+            else
+            {
                 return null;
             }
         }
     }
 }
-

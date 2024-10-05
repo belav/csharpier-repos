@@ -45,7 +45,8 @@ public class DatabaseTable : Annotatable
     /// <summary>
     ///     The list of unique constraints defined on the table.
     /// </summary>
-    public virtual IList<DatabaseUniqueConstraint> UniqueConstraints { get; } = new List<DatabaseUniqueConstraint>();
+    public virtual IList<DatabaseUniqueConstraint> UniqueConstraints { get; } =
+        new List<DatabaseUniqueConstraint>();
 
     /// <summary>
     ///     The list of indexes defined on the table.

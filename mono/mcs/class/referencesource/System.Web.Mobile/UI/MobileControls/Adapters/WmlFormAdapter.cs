@@ -1,35 +1,42 @@
 //------------------------------------------------------------------------------
 // <copyright file="WmlFormAdapter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
 using System.Collections;
 using System.Collections.Specialized;
 using System.Globalization;
+using System.Security.Permissions;
+using System.Web.Security;
 using System.Web.UI.MobileControls;
 using System.Web.UI.MobileControls.Adapters;
-using System.Web.Security;
-using System.Security.Permissions;
 
 #if COMPILING_FOR_SHIPPED_SOURCE
 namespace System.Web.UI.MobileControls.ShippedAdapterSource
 #else
 namespace System.Web.UI.MobileControls.Adapters
-#endif    
+#endif
 
 {
-
     /*
      * WmlFormAdapter base class contains wml specific methods.
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
     /// <include file='doc\WmlFormAdapter.uex' path='docs/doc[@for="WmlFormAdapter"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class WmlFormAdapter : WmlControlAdapter
     {
         private IDictionary _postBackVariables = null;
@@ -37,35 +44,34 @@ namespace System.Web.UI.MobileControls.Adapters
         /// <include file='doc\WmlFormAdapter.uex' path='docs/doc[@for="WmlFormAdapter.Control"]/*' />
         protected new Form Control
         {
-            get
-            {
-                return (Form)base.Control;
-            }
+            get { return (Form)base.Control; }
         }
 
         /// <include file='doc\WmlFormAdapter.uex' path='docs/doc[@for="WmlFormAdapter.Render"]/*' />
         public override void Render(WmlMobileTextWriter writer)
         {
             String formsAuthCookieName = FormsAuthentication.FormsCookieName;
-            if(!Device.SupportsRedirectWithCookie)
+            if (!Device.SupportsRedirectWithCookie)
             {
-                if(!String.IsNullOrEmpty(formsAuthCookieName))
+                if (!String.IsNullOrEmpty(formsAuthCookieName))
                 {
                     HttpContext.Current.Response.Cookies.Remove(formsAuthCookieName);
                 }
             }
 
             writer.BeginForm(Control);
-            if (Page.Adapter.PersistCookielessData &&
-                Device.CanRenderOneventAndPrevElementsTogether &&
-                !String.IsNullOrEmpty(formsAuthCookieName) &&
-                Control == Page.ActiveForm )
+            if (
+                Page.Adapter.PersistCookielessData
+                && Device.CanRenderOneventAndPrevElementsTogether
+                && !String.IsNullOrEmpty(formsAuthCookieName)
+                && Control == Page.ActiveForm
+            )
             {
                 IDictionary dictionary = PageAdapter.CookielessDataDictionary;
-                if(dictionary != null)
+                if (dictionary != null)
                 {
                     String value = (String)dictionary[formsAuthCookieName];
-                    if(!String.IsNullOrEmpty(value))
+                    if (!String.IsNullOrEmpty(value))
                     {
                         writer.AddFormVariable("__facn", value, false);
                     }
@@ -92,7 +98,7 @@ namespace System.Web.UI.MobileControls.Adapters
                         writer.EndCustomMarkup();
                     }
 
-                    foreach(Control control in Control.Controls)
+                    foreach (Control control in Control.Controls)
                     {
                         if (control != header && control != footer)
                         {
@@ -133,25 +139,31 @@ namespace System.Web.UI.MobileControls.Adapters
             if (page < pageCount)
             {
                 String nextPageText = pagerStyle.GetNextPageText(page);
-                RenderPostBackEvent(writer, 
-                                    (page + 1).ToString(CultureInfo.InvariantCulture), 
-                                    writer.IsValidSoftkeyLabel(nextPageText) ? nextPageText 
-                                                                             : GetDefaultLabel(NextLabel),
-                                    true,
-                                    nextPageText, 
-                                    true);
+                RenderPostBackEvent(
+                    writer,
+                    (page + 1).ToString(CultureInfo.InvariantCulture),
+                    writer.IsValidSoftkeyLabel(nextPageText)
+                        ? nextPageText
+                        : GetDefaultLabel(NextLabel),
+                    true,
+                    nextPageText,
+                    true
+                );
             }
 
             if (page > 1)
             {
                 String prevPageText = pagerStyle.GetPreviousPageText(page);
-                RenderPostBackEvent(writer, 
-                                    (page - 1).ToString(CultureInfo.InvariantCulture), 
-                                    writer.IsValidSoftkeyLabel(prevPageText) ? prevPageText
-                                                                             : GetDefaultLabel(PreviousLabel),
-                                    true,
-                                    prevPageText, 
-                                    true);
+                RenderPostBackEvent(
+                    writer,
+                    (page - 1).ToString(CultureInfo.InvariantCulture),
+                    writer.IsValidSoftkeyLabel(prevPageText)
+                        ? prevPageText
+                        : GetDefaultLabel(PreviousLabel),
+                    true,
+                    prevPageText,
+                    true
+                );
             }
             writer.ExitStyle(pagerStyle);
         }
@@ -169,9 +181,12 @@ namespace System.Web.UI.MobileControls.Adapters
 
         private void BuildControlPostBacksRecursive(Control control)
         {
-            if (control is IPostBackDataHandler
+            if (
+                control is IPostBackDataHandler
                 && !(control is IPostBackEventHandler)
-                && control.Visible && control != Control)
+                && control.Visible
+                && control != Control
+            )
             {
                 MobileControl mobileCtl = control as MobileControl;
 
@@ -229,29 +244,32 @@ namespace System.Web.UI.MobileControls.Adapters
         protected internal virtual void RenderExtraCardElements(WmlMobileTextWriter writer)
         {
             Form form = this.Control as Form;
-            if((form != null) && (form.Script != null))
+            if ((form != null) && (form.Script != null))
             {
-                foreach(Control childControl in form.Script.Controls)
+                foreach (Control childControl in form.Script.Controls)
                 {
                     LiteralControl lc = childControl as LiteralControl;
-                    if(lc != null)
+                    if (lc != null)
                     {
                         writer.Write(lc.Text);
                     }
                     else
                     {
                         DataBoundLiteralControl dlc = childControl as DataBoundLiteralControl;
-                        if(dlc != null)
+                        if (dlc != null)
                         {
                             writer.Write(dlc.Text);
                         }
                     }
                 }
             }
-         }
+        }
 
         /// <include file='doc\WmlFormAdapter.uex' path='docs/doc[@for="WmlFormAdapter.RenderCardTag"]/*' />
-        protected internal virtual void RenderCardTag(WmlMobileTextWriter writer, IDictionary attributes)
+        protected internal virtual void RenderCardTag(
+            WmlMobileTextWriter writer,
+            IDictionary attributes
+        )
         {
             writer.WriteBeginTag("card");
             if (attributes != null)
@@ -273,7 +291,9 @@ namespace System.Web.UI.MobileControls.Adapters
 
         internal int GetSecondaryUIMode(Control control)
         {
-            return (control != null && _secondaryUIControl == control) ? _secondaryUIMode : NotSecondaryUI;
+            return (control != null && _secondaryUIControl == control)
+                ? _secondaryUIMode
+                : NotSecondaryUI;
         }
 
         internal void SetSecondaryUIMode(Control control, int mode)
@@ -283,7 +303,8 @@ namespace System.Web.UI.MobileControls.Adapters
                 if (_secondaryUIControl != null && _secondaryUIControl != control)
                 {
                     throw new Exception(
-                        SR.GetString(SR.FormAdapterMultiControlsAttemptSecondaryUI));
+                        SR.GetString(SR.FormAdapterMultiControlsAttemptSecondaryUI)
+                    );
                 }
                 _secondaryUIControl = control;
                 _secondaryUIMode = mode;
@@ -298,17 +319,14 @@ namespace System.Web.UI.MobileControls.Adapters
 
         internal Control SecondaryUIControl
         {
-            get
-            {
-                return _secondaryUIControl;
-            }
+            get { return _secondaryUIControl; }
         }
 
         //identical to method in htmlformadapter
         private static void SetControlPageRecursive(Control control, int page)
         {
             MobileControl mc = control as MobileControl;
-            if(mc != null)
+            if (mc != null)
             {
                 mc.FirstPage = page;
                 mc.LastPage = page;
@@ -320,17 +338,15 @@ namespace System.Web.UI.MobileControls.Adapters
                     MobileControl mobileChild = child as MobileControl;
                     if (mobileChild != null)
                     {
-                            mobileChild.FirstPage = page;
-                            mobileChild.LastPage = page;
+                        mobileChild.FirstPage = page;
+                        mobileChild.LastPage = page;
                     }
-                    else 
+                    else
                     {
                         SetControlPageRecursive(child, page);
                     }
                 }
             }
         }
-
     }
-
 }

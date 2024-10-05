@@ -29,16 +29,31 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             SourceAssemblySymbol sourceAssembly,
             SourceAssemblySymbol otherAssembly,
             SynthesizedTypeMaps synthesizedTypes,
-            IReadOnlyDictionary<ISymbolInternal, ImmutableArray<ISymbolInternal>>? otherSynthesizedMembers,
-            IReadOnlyDictionary<ISymbolInternal, ImmutableArray<ISymbolInternal>>? otherDeletedMembers)
+            IReadOnlyDictionary<
+                ISymbolInternal,
+                ImmutableArray<ISymbolInternal>
+            >? otherSynthesizedMembers,
+            IReadOnlyDictionary<
+                ISymbolInternal,
+                ImmutableArray<ISymbolInternal>
+            >? otherDeletedMembers
+        )
         {
-            _visitor = new Visitor(sourceAssembly, otherAssembly, synthesizedTypes, otherSynthesizedMembers, otherDeletedMembers, new DeepTranslator(otherAssembly.GetSpecialType(SpecialType.System_Object)));
+            _visitor = new Visitor(
+                sourceAssembly,
+                otherAssembly,
+                synthesizedTypes,
+                otherSynthesizedMembers,
+                otherDeletedMembers,
+                new DeepTranslator(otherAssembly.GetSpecialType(SpecialType.System_Object))
+            );
         }
 
         public CSharpSymbolMatcher(
             SynthesizedTypeMaps synthesizedTypes,
             SourceAssemblySymbol sourceAssembly,
-            PEAssemblySymbol otherAssembly)
+            PEAssemblySymbol otherAssembly
+        )
         {
             _visitor = new Visitor(
                 sourceAssembly,
@@ -46,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 synthesizedTypes,
                 otherSynthesizedMembers: null,
                 deepTranslator: null,
-                otherDeletedMembers: null);
+                otherDeletedMembers: null
+            );
         }
 
         public override Cci.IDefinition? MapDefinition(Cci.IDefinition definition)
@@ -83,8 +99,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             return null;
         }
 
-        internal bool TryGetAnonymousTypeValue(AnonymousTypeManager.AnonymousTypeOrDelegateTemplateSymbol template, out AnonymousTypeValue typeValue)
-            => _visitor.TryGetAnonymousTypeValue(template, out typeValue);
+        internal bool TryGetAnonymousTypeValue(
+            AnonymousTypeManager.AnonymousTypeOrDelegateTemplateSymbol template,
+            out AnonymousTypeValue typeValue
+        ) => _visitor.TryGetAnonymousTypeValue(template, out typeValue);
 
         private sealed class Visitor : CSharpSymbolVisitor<Symbol?>
         {
@@ -98,12 +116,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             /// Members that are not listed directly on their containing type or namespace symbol as they were synthesized in a lowering phase,
             /// after the symbol has been created.
             /// </summary>
-            private readonly IReadOnlyDictionary<ISymbolInternal, ImmutableArray<ISymbolInternal>>? _otherSynthesizedMembers;
+            private readonly IReadOnlyDictionary<
+                ISymbolInternal,
+                ImmutableArray<ISymbolInternal>
+            >? _otherSynthesizedMembers;
 
-            private readonly IReadOnlyDictionary<ISymbolInternal, ImmutableArray<ISymbolInternal>>? _otherDeletedMembers;
+            private readonly IReadOnlyDictionary<
+                ISymbolInternal,
+                ImmutableArray<ISymbolInternal>
+            >? _otherDeletedMembers;
 
             private readonly SymbolComparer _comparer;
-            private readonly ConcurrentDictionary<Symbol, Symbol?> _matches = new(ReferenceEqualityComparer.Instance);
+            private readonly ConcurrentDictionary<Symbol, Symbol?> _matches =
+                new(ReferenceEqualityComparer.Instance);
 
             /// <summary>
             /// A cache of members per type, populated when the first member for a given
@@ -111,15 +136,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             /// for caching, and indexing by name, is to avoid searching sequentially
             /// through all members of a given kind each time a member is matched.
             /// </summary>
-            private readonly ConcurrentDictionary<ISymbolInternal, IReadOnlyDictionary<string, ImmutableArray<ISymbolInternal>>> _otherMembers = new(ReferenceEqualityComparer.Instance);
+            private readonly ConcurrentDictionary<
+                ISymbolInternal,
+                IReadOnlyDictionary<string, ImmutableArray<ISymbolInternal>>
+            > _otherMembers = new(ReferenceEqualityComparer.Instance);
 
             public Visitor(
                 SourceAssemblySymbol sourceAssembly,
                 AssemblySymbol otherAssembly,
                 SynthesizedTypeMaps synthesizedTypes,
-                IReadOnlyDictionary<ISymbolInternal, ImmutableArray<ISymbolInternal>>? otherSynthesizedMembers,
-                IReadOnlyDictionary<ISymbolInternal, ImmutableArray<ISymbolInternal>>? otherDeletedMembers,
-                DeepTranslator? deepTranslator)
+                IReadOnlyDictionary<
+                    ISymbolInternal,
+                    ImmutableArray<ISymbolInternal>
+                >? otherSynthesizedMembers,
+                IReadOnlyDictionary<
+                    ISymbolInternal,
+                    ImmutableArray<ISymbolInternal>
+                >? otherDeletedMembers,
+                DeepTranslator? deepTranslator
+            )
             {
                 _synthesizedTypes = synthesizedTypes;
                 _sourceAssembly = sourceAssembly;
@@ -153,21 +188,38 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     return null;
                 }
 
-                var otherModifiers = VisitCustomModifiers(symbol.ElementTypeWithAnnotations.CustomModifiers);
+                var otherModifiers = VisitCustomModifiers(
+                    symbol.ElementTypeWithAnnotations.CustomModifiers
+                );
 
                 if (symbol.IsSZArray)
                 {
-                    return ArrayTypeSymbol.CreateSZArray(_otherAssembly, symbol.ElementTypeWithAnnotations.WithTypeAndModifiers(otherElementType, otherModifiers));
+                    return ArrayTypeSymbol.CreateSZArray(
+                        _otherAssembly,
+                        symbol.ElementTypeWithAnnotations.WithTypeAndModifiers(
+                            otherElementType,
+                            otherModifiers
+                        )
+                    );
                 }
 
-                return ArrayTypeSymbol.CreateMDArray(_otherAssembly, symbol.ElementTypeWithAnnotations.WithTypeAndModifiers(otherElementType, otherModifiers), symbol.Rank, symbol.Sizes, symbol.LowerBounds);
+                return ArrayTypeSymbol.CreateMDArray(
+                    _otherAssembly,
+                    symbol.ElementTypeWithAnnotations.WithTypeAndModifiers(
+                        otherElementType,
+                        otherModifiers
+                    ),
+                    symbol.Rank,
+                    symbol.Sizes,
+                    symbol.LowerBounds
+                );
             }
 
-            public override Symbol? VisitEvent(EventSymbol symbol)
-                => VisitNamedTypeMember(symbol, AreEventsEqual);
+            public override Symbol? VisitEvent(EventSymbol symbol) =>
+                VisitNamedTypeMember(symbol, AreEventsEqual);
 
-            public override Symbol? VisitField(FieldSymbol symbol)
-                => VisitNamedTypeMember(symbol, AreFieldsEqual);
+            public override Symbol? VisitField(FieldSymbol symbol) =>
+                VisitNamedTypeMember(symbol, AreFieldsEqual);
 
             public override Symbol? VisitMethod(MethodSymbol symbol)
             {
@@ -222,7 +274,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 }
 
                 // find a referenced assembly with the same source identity (modulo assembly version patterns):
-                foreach (var otherReferencedAssembly in _otherAssembly.Modules[0].ReferencedAssemblySymbols)
+                foreach (
+                    var otherReferencedAssembly in _otherAssembly
+                        .Modules[0]
+                        .ReferencedAssemblySymbols
+                )
                 {
                     if (IdentityEqualIgnoringVersionWildcard(assembly, otherReferencedAssembly))
                     {
@@ -233,14 +289,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 return null;
             }
 
-            private static bool IdentityEqualIgnoringVersionWildcard(AssemblySymbol left, AssemblySymbol right)
+            private static bool IdentityEqualIgnoringVersionWildcard(
+                AssemblySymbol left,
+                AssemblySymbol right
+            )
             {
                 var leftIdentity = left.Identity;
                 var rightIdentity = right.Identity;
 
-                return AssemblyIdentityComparer.SimpleNameComparer.Equals(leftIdentity.Name, rightIdentity.Name) &&
-                       (left.AssemblyVersionPattern ?? leftIdentity.Version).Equals(right.AssemblyVersionPattern ?? rightIdentity.Version) &&
-                       AssemblyIdentity.EqualIgnoringNameAndVersion(leftIdentity, rightIdentity);
+                return AssemblyIdentityComparer.SimpleNameComparer.Equals(
+                        leftIdentity.Name,
+                        rightIdentity.Name
+                    )
+                    && (left.AssemblyVersionPattern ?? leftIdentity.Version).Equals(
+                        right.AssemblyVersionPattern ?? rightIdentity.Version
+                    )
+                    && AssemblyIdentity.EqualIgnoringNameAndVersion(leftIdentity, rightIdentity);
             }
 
             public override Symbol? VisitNamespace(NamespaceSymbol @namespace)
@@ -290,19 +354,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     var otherTypeParameters = otherDef.GetAllTypeParameters();
                     bool translationFailed = false;
 
-                    var otherTypeArguments = typeArguments.SelectAsArray((t, v) =>
-                    {
-                        var newType = (TypeSymbol?)v.Visit(t.Type);
-
-                        if (newType is null)
+                    var otherTypeArguments = typeArguments.SelectAsArray(
+                        (t, v) =>
                         {
-                            // For a newly added type, there is no match in the previous generation, so it could be null.
-                            translationFailed = true;
-                            newType = t.Type;
-                        }
+                            var newType = (TypeSymbol?)v.Visit(t.Type);
 
-                        return t.WithTypeAndModifiers(newType, v.VisitCustomModifiers(t.CustomModifiers));
-                    }, this);
+                            if (newType is null)
+                            {
+                                // For a newly added type, there is no match in the previous generation, so it could be null.
+                                translationFailed = true;
+                                newType = t.Type;
+                            }
+
+                            return t.WithTypeAndModifiers(
+                                newType,
+                                v.VisitCustomModifiers(t.CustomModifiers)
+                            );
+                        },
+                        this
+                    );
 
                     if (translationFailed)
                     {
@@ -311,7 +381,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     }
 
                     // TODO: LambdaFrame has alpha renamed type parameters, should we rather fix that?
-                    var typeMap = new TypeMap(otherTypeParameters, otherTypeArguments, allowAlpha: true);
+                    var typeMap = new TypeMap(
+                        otherTypeParameters,
+                        otherTypeArguments,
+                        allowAlpha: true
+                    );
                     return typeMap.SubstituteNamedType(otherDef);
                 }
 
@@ -328,15 +402,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 switch (otherContainer.Kind)
                 {
                     case SymbolKind.Namespace:
-                        if (sourceType is AnonymousTypeManager.AnonymousTypeTemplateSymbol typeTemplate)
+                        if (
+                            sourceType
+                            is AnonymousTypeManager.AnonymousTypeTemplateSymbol typeTemplate
+                        )
                         {
-                            Debug.Assert((object)otherContainer == (object)_otherAssembly.GlobalNamespace);
+                            Debug.Assert(
+                                (object)otherContainer == (object)_otherAssembly.GlobalNamespace
+                            );
                             TryGetAnonymousTypeValue(typeTemplate, out var value);
                             return (NamedTypeSymbol?)value.Type?.GetInternalSymbol();
                         }
-                        else if (sourceType is AnonymousTypeManager.AnonymousDelegateTemplateSymbol delegateTemplate)
+                        else if (
+                            sourceType
+                            is AnonymousTypeManager.AnonymousDelegateTemplateSymbol delegateTemplate
+                        )
                         {
-                            Debug.Assert((object)otherContainer == (object)_otherAssembly.GlobalNamespace);
+                            Debug.Assert(
+                                (object)otherContainer == (object)_otherAssembly.GlobalNamespace
+                            );
                             if (delegateTemplate.HasIndexedName)
                             {
                                 TryGetAnonymousTypeValue(delegateTemplate, out var value);
@@ -351,7 +435,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
                         if (sourceType.IsAnonymousType)
                         {
-                            return Visit(AnonymousTypeManager.TranslateAnonymousTypeSymbol(sourceType));
+                            return Visit(
+                                AnonymousTypeManager.TranslateAnonymousTypeSymbol(sourceType)
+                            );
                         }
 
                         return FindMatchingMember(otherContainer, sourceType, AreNamedTypesEqual);
@@ -379,8 +465,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     return null;
                 }
 
-                var otherModifiers = VisitCustomModifiers(symbol.PointedAtTypeWithAnnotations.CustomModifiers);
-                return new PointerTypeSymbol(symbol.PointedAtTypeWithAnnotations.WithTypeAndModifiers(otherPointedAtType, otherModifiers));
+                var otherModifiers = VisitCustomModifiers(
+                    symbol.PointedAtTypeWithAnnotations.CustomModifiers
+                );
+                return new PointerTypeSymbol(
+                    symbol.PointedAtTypeWithAnnotations.WithTypeAndModifiers(
+                        otherPointedAtType,
+                        otherModifiers
+                    )
+                );
             }
 
             public override Symbol? VisitFunctionPointerType(FunctionPointerTypeSymbol symbol)
@@ -394,15 +487,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 }
 
                 var otherRefCustomModifiers = VisitCustomModifiers(sig.RefCustomModifiers);
-                var otherReturnTypeWithAnnotations = sig.ReturnTypeWithAnnotations.WithTypeAndModifiers(otherReturnType, VisitCustomModifiers(sig.ReturnTypeWithAnnotations.CustomModifiers));
+                var otherReturnTypeWithAnnotations =
+                    sig.ReturnTypeWithAnnotations.WithTypeAndModifiers(
+                        otherReturnType,
+                        VisitCustomModifiers(sig.ReturnTypeWithAnnotations.CustomModifiers)
+                    );
 
                 var otherParameterTypes = ImmutableArray<TypeWithAnnotations>.Empty;
-                ImmutableArray<ImmutableArray<CustomModifier>> otherParamRefCustomModifiers = default;
+                ImmutableArray<ImmutableArray<CustomModifier>> otherParamRefCustomModifiers =
+                    default;
 
                 if (sig.ParameterCount > 0)
                 {
-                    var otherParamsBuilder = ArrayBuilder<TypeWithAnnotations>.GetInstance(sig.ParameterCount);
-                    var otherParamRefCustomModifiersBuilder = ArrayBuilder<ImmutableArray<CustomModifier>>.GetInstance(sig.ParameterCount);
+                    var otherParamsBuilder = ArrayBuilder<TypeWithAnnotations>.GetInstance(
+                        sig.ParameterCount
+                    );
+                    var otherParamRefCustomModifiersBuilder = ArrayBuilder<
+                        ImmutableArray<CustomModifier>
+                    >.GetInstance(sig.ParameterCount);
 
                     foreach (var param in sig.Parameters)
                     {
@@ -414,19 +516,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                             return null;
                         }
 
-                        otherParamRefCustomModifiersBuilder.Add(VisitCustomModifiers(param.RefCustomModifiers));
-                        otherParamsBuilder.Add(param.TypeWithAnnotations.WithTypeAndModifiers(otherType, VisitCustomModifiers(param.TypeWithAnnotations.CustomModifiers)));
+                        otherParamRefCustomModifiersBuilder.Add(
+                            VisitCustomModifiers(param.RefCustomModifiers)
+                        );
+                        otherParamsBuilder.Add(
+                            param.TypeWithAnnotations.WithTypeAndModifiers(
+                                otherType,
+                                VisitCustomModifiers(param.TypeWithAnnotations.CustomModifiers)
+                            )
+                        );
                     }
 
                     otherParameterTypes = otherParamsBuilder.ToImmutableAndFree();
-                    otherParamRefCustomModifiers = otherParamRefCustomModifiersBuilder.ToImmutableAndFree();
+                    otherParamRefCustomModifiers =
+                        otherParamRefCustomModifiersBuilder.ToImmutableAndFree();
                 }
 
-                return symbol.SubstituteTypeSymbol(otherReturnTypeWithAnnotations, otherParameterTypes, otherRefCustomModifiers, otherParamRefCustomModifiers);
+                return symbol.SubstituteTypeSymbol(
+                    otherReturnTypeWithAnnotations,
+                    otherParameterTypes,
+                    otherRefCustomModifiers,
+                    otherParamRefCustomModifiers
+                );
             }
 
-            public override Symbol? VisitProperty(PropertySymbol symbol)
-                => VisitNamedTypeMember(symbol, ArePropertiesEqual);
+            public override Symbol? VisitProperty(PropertySymbol symbol) =>
+                VisitNamedTypeMember(symbol, ArePropertiesEqual);
 
             public override Symbol VisitTypeParameter(TypeParameterSymbol symbol)
             {
@@ -440,7 +555,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
                 var otherTypeParameters = otherContainer.Kind switch
                 {
-                    SymbolKind.NamedType or SymbolKind.ErrorType => ((NamedTypeSymbol)otherContainer).TypeParameters,
+                    SymbolKind.NamedType or SymbolKind.ErrorType => (
+                        (NamedTypeSymbol)otherContainer
+                    ).TypeParameters,
                     SymbolKind.Method => ((MethodSymbol)otherContainer).TypeParameters,
                     _ => throw ExceptionUtilities.UnexpectedValue(otherContainer.Kind),
                 };
@@ -448,7 +565,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 return otherTypeParameters[symbol.Ordinal];
             }
 
-            private ImmutableArray<CustomModifier> VisitCustomModifiers(ImmutableArray<CustomModifier> modifiers)
+            private ImmutableArray<CustomModifier> VisitCustomModifiers(
+                ImmutableArray<CustomModifier> modifiers
+            )
             {
                 return modifiers.SelectAsArray(VisitCustomModifier);
             }
@@ -458,39 +577,66 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 var type = (NamedTypeSymbol?)Visit(((CSharpCustomModifier)modifier).ModifierSymbol);
                 RoslynDebug.AssertNotNull(type);
 
-                return modifier.IsOptional ?
-                    CSharpCustomModifier.CreateOptional(type) :
-                    CSharpCustomModifier.CreateRequired(type);
+                return modifier.IsOptional
+                    ? CSharpCustomModifier.CreateOptional(type)
+                    : CSharpCustomModifier.CreateRequired(type);
             }
 
-            internal bool TryGetAnonymousDelegateValue(AnonymousTypeManager.AnonymousDelegateTemplateSymbol delegateSymbol, out SynthesizedDelegateValue otherDelegateSymbol)
+            internal bool TryGetAnonymousDelegateValue(
+                AnonymousTypeManager.AnonymousDelegateTemplateSymbol delegateSymbol,
+                out SynthesizedDelegateValue otherDelegateSymbol
+            )
             {
-                Debug.Assert((object)delegateSymbol.ContainingSymbol == (object)_sourceAssembly.GlobalNamespace);
+                Debug.Assert(
+                    (object)delegateSymbol.ContainingSymbol
+                        == (object)_sourceAssembly.GlobalNamespace
+                );
 
                 var key = new SynthesizedDelegateKey(delegateSymbol.MetadataName);
-                return _synthesizedTypes.AnonymousDelegates.TryGetValue(key, out otherDelegateSymbol);
+                return _synthesizedTypes.AnonymousDelegates.TryGetValue(
+                    key,
+                    out otherDelegateSymbol
+                );
             }
 
-            internal bool TryGetAnonymousTypeValue(AnonymousTypeManager.AnonymousTypeOrDelegateTemplateSymbol template, out AnonymousTypeValue otherType)
+            internal bool TryGetAnonymousTypeValue(
+                AnonymousTypeManager.AnonymousTypeOrDelegateTemplateSymbol template,
+                out AnonymousTypeValue otherType
+            )
             {
-                Debug.Assert((object)template.ContainingSymbol == (object)_sourceAssembly.GlobalNamespace);
+                Debug.Assert(
+                    (object)template.ContainingSymbol == (object)_sourceAssembly.GlobalNamespace
+                );
 
                 if (template is AnonymousTypeManager.AnonymousTypeTemplateSymbol typeTemplate)
                 {
-                    return _synthesizedTypes.AnonymousTypes.TryGetValue(typeTemplate.GetAnonymousTypeKey(), out otherType);
+                    return _synthesizedTypes.AnonymousTypes.TryGetValue(
+                        typeTemplate.GetAnonymousTypeKey(),
+                        out otherType
+                    );
                 }
 
-                var delegateTemplate = (AnonymousTypeManager.AnonymousDelegateTemplateSymbol)template;
+                var delegateTemplate =
+                    (AnonymousTypeManager.AnonymousDelegateTemplateSymbol)template;
                 Debug.Assert(delegateTemplate.DelegateInvokeMethod != null);
 
-                var key = new AnonymousDelegateWithIndexedNamePartialKey(delegateTemplate.Arity, delegateTemplate.DelegateInvokeMethod.ParameterCount);
-                if (_synthesizedTypes.AnonymousDelegatesWithIndexedNames.TryGetValue(key, out var otherTypeCandidates))
+                var key = new AnonymousDelegateWithIndexedNamePartialKey(
+                    delegateTemplate.Arity,
+                    delegateTemplate.DelegateInvokeMethod.ParameterCount
+                );
+                if (
+                    _synthesizedTypes.AnonymousDelegatesWithIndexedNames.TryGetValue(
+                        key,
+                        out var otherTypeCandidates
+                    )
+                )
                 {
                     // The key is partial (not unique). Find a matching Invoke method signature.
 
                     foreach (var otherTypeCandidate in otherTypeCandidates)
                     {
-                        var otherDelegateType = (NamedTypeSymbol?)otherTypeCandidate.Type.GetInternalSymbol();
+                        var otherDelegateType = (NamedTypeSymbol?)
+                            otherTypeCandidate.Type.GetInternalSymbol();
                         Debug.Assert(otherDelegateType is not null);
 
                         if (isCorrespondingAnonymousDelegate(delegateTemplate, otherDelegateType))
@@ -504,26 +650,41 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 otherType = default;
                 return false;
 
-                bool isCorrespondingAnonymousDelegate(NamedTypeSymbol type, NamedTypeSymbol otherType)
+                bool isCorrespondingAnonymousDelegate(
+                    NamedTypeSymbol type,
+                    NamedTypeSymbol otherType
+                )
                 {
                     Debug.Assert(type.Arity == otherType.Arity);
 
                     type = SubstituteTypeParameters(type);
                     otherType = SubstituteTypeParameters(otherType);
 
-                    return type.DelegateInvokeMethod is { } invokeMethod &&
-                        otherType.DelegateInvokeMethod is { } otherInvokeMethod &&
-                        invokeMethod.Parameters.SequenceEqual(otherInvokeMethod.Parameters,
-                            (x, y) => isCorrespondingType(x.TypeWithAnnotations, y.TypeWithAnnotations) &&
-                                x.ExplicitDefaultConstantValue == y.ExplicitDefaultConstantValue &&
-                                x.IsParams == y.IsParams) &&
-                        isCorrespondingType(invokeMethod.ReturnTypeWithAnnotations, otherInvokeMethod.ReturnTypeWithAnnotations);
+                    return type.DelegateInvokeMethod is { } invokeMethod
+                        && otherType.DelegateInvokeMethod is { } otherInvokeMethod
+                        && invokeMethod.Parameters.SequenceEqual(
+                            otherInvokeMethod.Parameters,
+                            (x, y) =>
+                                isCorrespondingType(x.TypeWithAnnotations, y.TypeWithAnnotations)
+                                && x.ExplicitDefaultConstantValue == y.ExplicitDefaultConstantValue
+                                && x.IsParams == y.IsParams
+                        )
+                        && isCorrespondingType(
+                            invokeMethod.ReturnTypeWithAnnotations,
+                            otherInvokeMethod.ReturnTypeWithAnnotations
+                        );
                 }
 
                 bool isCorrespondingType(TypeWithAnnotations type, TypeWithAnnotations expectedType)
                 {
-                    var otherType = type.WithTypeAndModifiers((TypeSymbol?)this.Visit(type.Type), this.VisitCustomModifiers(type.CustomModifiers));
-                    return otherType.Equals(expectedType, TypeCompareKind.CLRSignatureCompareOptions);
+                    var otherType = type.WithTypeAndModifiers(
+                        (TypeSymbol?)this.Visit(type.Type),
+                        this.VisitCustomModifiers(type.CustomModifiers)
+                    );
+                    return otherType.Equals(
+                        expectedType,
+                        TypeCompareKind.CLRSignatureCompareOptions
+                    );
                 }
             }
 
@@ -542,12 +703,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 return FindMatchingMember(otherType, member, predicate);
             }
 
-            private T? FindMatchingMember<T>(ISymbolInternal otherTypeOrNamespace, T sourceMember, Func<T, T, bool> predicate)
+            private T? FindMatchingMember<T>(
+                ISymbolInternal otherTypeOrNamespace,
+                T sourceMember,
+                Func<T, T, bool> predicate
+            )
                 where T : Symbol
             {
                 Debug.Assert(!string.IsNullOrEmpty(sourceMember.MetadataName));
 
-                var otherMembersByName = _otherMembers.GetOrAdd(otherTypeOrNamespace, GetAllEmittedMembers);
+                var otherMembersByName = _otherMembers.GetOrAdd(
+                    otherTypeOrNamespace,
+                    GetAllEmittedMembers
+                );
                 if (otherMembersByName.TryGetValue(sourceMember.MetadataName, out var otherMembers))
                 {
                     foreach (var otherMember in otherMembers)
@@ -568,8 +736,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 Debug.Assert(type.ElementTypeWithAnnotations.CustomModifiers.IsEmpty);
                 Debug.Assert(other.ElementTypeWithAnnotations.CustomModifiers.IsEmpty);
 
-                return type.HasSameShapeAs(other) &&
-                    AreTypesEqual(type.ElementType, other.ElementType);
+                return type.HasSameShapeAs(other)
+                    && AreTypesEqual(type.ElementType, other.ElementType);
             }
 
             private bool AreEventsEqual(EventSymbol @event, EventSymbol other)
@@ -597,10 +765,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 method = SubstituteTypeParameters(method);
                 other = SubstituteTypeParameters(other);
 
-                return _comparer.Equals(method.ReturnType, other.ReturnType) &&
-                    method.RefKind.Equals(other.RefKind) &&
-                    method.Parameters.SequenceEqual(other.Parameters, AreParametersEqual) &&
-                    method.TypeParameters.SequenceEqual(other.TypeParameters, AreTypesEqual);
+                return _comparer.Equals(method.ReturnType, other.ReturnType)
+                    && method.RefKind.Equals(other.RefKind)
+                    && method.Parameters.SequenceEqual(other.Parameters, AreParametersEqual)
+                    && method.TypeParameters.SequenceEqual(other.TypeParameters, AreTypesEqual);
             }
 
             private static MethodSymbol SubstituteTypeParameters(MethodSymbol method)
@@ -622,10 +790,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 Debug.Assert(StringOrdinalComparer.Equals(type.MetadataName, other.MetadataName));
 
                 // TODO: Test with overloads (from PE base class?) that have modifiers.
-                Debug.Assert(type.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.All(t => t.CustomModifiers.IsEmpty));
-                Debug.Assert(other.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.All(t => t.CustomModifiers.IsEmpty));
+                Debug.Assert(
+                    type.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.All(t =>
+                        t.CustomModifiers.IsEmpty
+                    )
+                );
+                Debug.Assert(
+                    other.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.All(t =>
+                        t.CustomModifiers.IsEmpty
+                    )
+                );
 
-                return type.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.SequenceEqual(other.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics, AreTypesEqual);
+                return type.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.SequenceEqual(
+                    other.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics,
+                    AreTypesEqual
+                );
             }
 
             private static NamedTypeSymbol SubstituteTypeParameters(NamedTypeSymbol type)
@@ -644,7 +823,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
             private bool AreNamespacesEqual(NamespaceSymbol @namespace, NamespaceSymbol other)
             {
-                Debug.Assert(StringOrdinalComparer.Equals(@namespace.MetadataName, other.MetadataName));
+                Debug.Assert(
+                    StringOrdinalComparer.Equals(@namespace.MetadataName, other.MetadataName)
+                );
                 return true;
             }
 
@@ -653,8 +834,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 Debug.Assert(parameter.Ordinal == other.Ordinal);
 
                 // allow a different ref-kind as long as the runtime type is the same:
-                return parameter.RefKind is RefKind.None == other.RefKind is RefKind.None &&
-                    _comparer.Equals(parameter.Type, other.Type);
+                return parameter.RefKind is RefKind.None == other.RefKind is RefKind.None
+                    && _comparer.Equals(parameter.Type, other.Type);
             }
 
             private bool ArePointerTypesEqual(PointerTypeSymbol type, PointerTypeSymbol other)
@@ -666,36 +847,81 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 return AreTypesEqual(type.PointedAtType, other.PointedAtType);
             }
 
-            private bool AreFunctionPointerTypesEqual(FunctionPointerTypeSymbol type, FunctionPointerTypeSymbol other)
+            private bool AreFunctionPointerTypesEqual(
+                FunctionPointerTypeSymbol type,
+                FunctionPointerTypeSymbol other
+            )
             {
                 var sig = type.Signature;
                 var otherSig = other.Signature;
 
-                ValidateFunctionPointerParamOrReturn(sig.ReturnTypeWithAnnotations, sig.RefKind, sig.RefCustomModifiers, allowOut: false);
-                ValidateFunctionPointerParamOrReturn(otherSig.ReturnTypeWithAnnotations, otherSig.RefKind, otherSig.RefCustomModifiers, allowOut: false);
-                if (sig.RefKind != otherSig.RefKind || !AreTypesEqual(sig.ReturnTypeWithAnnotations, otherSig.ReturnTypeWithAnnotations))
+                ValidateFunctionPointerParamOrReturn(
+                    sig.ReturnTypeWithAnnotations,
+                    sig.RefKind,
+                    sig.RefCustomModifiers,
+                    allowOut: false
+                );
+                ValidateFunctionPointerParamOrReturn(
+                    otherSig.ReturnTypeWithAnnotations,
+                    otherSig.RefKind,
+                    otherSig.RefCustomModifiers,
+                    allowOut: false
+                );
+                if (
+                    sig.RefKind != otherSig.RefKind
+                    || !AreTypesEqual(
+                        sig.ReturnTypeWithAnnotations,
+                        otherSig.ReturnTypeWithAnnotations
+                    )
+                )
                 {
                     return false;
                 }
 
-                return sig.Parameters.SequenceEqual(otherSig.Parameters, AreFunctionPointerParametersEqual);
+                return sig.Parameters.SequenceEqual(
+                    otherSig.Parameters,
+                    AreFunctionPointerParametersEqual
+                );
             }
 
-            private bool AreFunctionPointerParametersEqual(ParameterSymbol param, ParameterSymbol otherParam)
+            private bool AreFunctionPointerParametersEqual(
+                ParameterSymbol param,
+                ParameterSymbol otherParam
+            )
             {
-                ValidateFunctionPointerParamOrReturn(param.TypeWithAnnotations, param.RefKind, param.RefCustomModifiers, allowOut: true);
-                ValidateFunctionPointerParamOrReturn(otherParam.TypeWithAnnotations, otherParam.RefKind, otherParam.RefCustomModifiers, allowOut: true);
+                ValidateFunctionPointerParamOrReturn(
+                    param.TypeWithAnnotations,
+                    param.RefKind,
+                    param.RefCustomModifiers,
+                    allowOut: true
+                );
+                ValidateFunctionPointerParamOrReturn(
+                    otherParam.TypeWithAnnotations,
+                    otherParam.RefKind,
+                    otherParam.RefCustomModifiers,
+                    allowOut: true
+                );
 
-                return param.RefKind == otherParam.RefKind && AreTypesEqual(param.TypeWithAnnotations, otherParam.TypeWithAnnotations);
+                return param.RefKind == otherParam.RefKind
+                    && AreTypesEqual(param.TypeWithAnnotations, otherParam.TypeWithAnnotations);
             }
 
             [Conditional("DEBUG")]
-            private static void ValidateFunctionPointerParamOrReturn(TypeWithAnnotations type, RefKind refKind, ImmutableArray<CustomModifier> refCustomModifiers, bool allowOut)
+            private static void ValidateFunctionPointerParamOrReturn(
+                TypeWithAnnotations type,
+                RefKind refKind,
+                ImmutableArray<CustomModifier> refCustomModifiers,
+                bool allowOut
+            )
             {
                 Debug.Assert(type.CustomModifiers.IsEmpty);
                 Debug.Assert(verifyRefModifiers(refCustomModifiers, refKind, allowOut));
 
-                static bool verifyRefModifiers(ImmutableArray<CustomModifier> modifiers, RefKind refKind, bool allowOut)
+                static bool verifyRefModifiers(
+                    ImmutableArray<CustomModifier> modifiers,
+                    RefKind refKind,
+                    bool allowOut
+                )
                 {
                     Debug.Assert(RefKind.RefReadOnly == RefKind.In);
                     switch (refKind)
@@ -711,16 +937,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
             private bool ArePropertiesEqual(PropertySymbol property, PropertySymbol other)
             {
-                Debug.Assert(StringOrdinalComparer.Equals(property.MetadataName, other.MetadataName));
+                Debug.Assert(
+                    StringOrdinalComparer.Equals(property.MetadataName, other.MetadataName)
+                );
 
                 // Properties may be overloaded on their signature.
                 // ECMA: Within the rows owned by a given row in the TypeDef table, there shall be no duplicates based upon Name+Type [ERROR]
-                return _comparer.Equals(property.Type, other.Type) &&
-                    property.RefKind.Equals(other.RefKind) &&
-                    property.Parameters.SequenceEqual(other.Parameters, AreParametersEqual);
+                return _comparer.Equals(property.Type, other.Type)
+                    && property.RefKind.Equals(other.RefKind)
+                    && property.Parameters.SequenceEqual(other.Parameters, AreParametersEqual);
             }
 
-            private static bool AreTypeParametersEqual(TypeParameterSymbol type, TypeParameterSymbol other)
+            private static bool AreTypeParametersEqual(
+                TypeParameterSymbol type,
+                TypeParameterSymbol other
+            )
             {
                 Debug.Assert(type.Ordinal == other.Ordinal);
                 Debug.Assert(StringOrdinalComparer.Equals(type.Name, other.Name));
@@ -731,7 +962,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 Debug.Assert(type.HasValueTypeConstraint == other.HasValueTypeConstraint);
                 Debug.Assert(type.HasUnmanagedTypeConstraint == other.HasUnmanagedTypeConstraint);
                 Debug.Assert(type.HasReferenceTypeConstraint == other.HasReferenceTypeConstraint);
-                Debug.Assert(type.ConstraintTypesNoUseSiteDiagnostics.Length == other.ConstraintTypesNoUseSiteDiagnostics.Length);
+                Debug.Assert(
+                    type.ConstraintTypesNoUseSiteDiagnostics.Length
+                        == other.ConstraintTypesNoUseSiteDiagnostics.Length
+                );
                 return true;
             }
 
@@ -755,24 +989,36 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                         return AreArrayTypesEqual((ArrayTypeSymbol)type, (ArrayTypeSymbol)other);
 
                     case SymbolKind.PointerType:
-                        return ArePointerTypesEqual((PointerTypeSymbol)type, (PointerTypeSymbol)other);
+                        return ArePointerTypesEqual(
+                            (PointerTypeSymbol)type,
+                            (PointerTypeSymbol)other
+                        );
 
                     case SymbolKind.FunctionPointerType:
-                        return AreFunctionPointerTypesEqual((FunctionPointerTypeSymbol)type, (FunctionPointerTypeSymbol)other);
+                        return AreFunctionPointerTypesEqual(
+                            (FunctionPointerTypeSymbol)type,
+                            (FunctionPointerTypeSymbol)other
+                        );
 
                     case SymbolKind.NamedType:
                     case SymbolKind.ErrorType:
                         return AreNamedTypesEqual((NamedTypeSymbol)type, (NamedTypeSymbol)other);
 
                     case SymbolKind.TypeParameter:
-                        return AreTypeParametersEqual((TypeParameterSymbol)type, (TypeParameterSymbol)other);
+                        return AreTypeParametersEqual(
+                            (TypeParameterSymbol)type,
+                            (TypeParameterSymbol)other
+                        );
 
                     default:
                         throw ExceptionUtilities.UnexpectedValue(type.Kind);
                 }
             }
 
-            private IReadOnlyDictionary<string, ImmutableArray<ISymbolInternal>> GetAllEmittedMembers(ISymbolInternal symbol)
+            private IReadOnlyDictionary<
+                string,
+                ImmutableArray<ISymbolInternal>
+            > GetAllEmittedMembers(ISymbolInternal symbol)
             {
                 var members = ArrayBuilder<ISymbolInternal>.GetInstance();
 
@@ -790,7 +1036,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     members.AddRange(((NamespaceSymbol)symbol).GetMembers());
                 }
 
-                if (_otherSynthesizedMembers != null && _otherSynthesizedMembers.TryGetValue(symbol, out var synthesizedMembers))
+                if (
+                    _otherSynthesizedMembers != null
+                    && _otherSynthesizedMembers.TryGetValue(symbol, out var synthesizedMembers)
+                )
                 {
                     members.AddRange(synthesizedMembers);
                 }
@@ -800,7 +1049,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     members.AddRange(deletedMembers);
                 }
 
-                var result = members.ToDictionary(s => s.MetadataName, StringOrdinalComparer.Instance);
+                var result = members.ToDictionary(
+                    s => s.MetadataName,
+                    StringOrdinalComparer.Instance
+                );
                 members.Free();
                 return result;
             }
@@ -825,9 +1077,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     }
 
                     var visitedSource = (TypeSymbol?)_matcher.Visit(source);
-                    var visitedOther = (_deepTranslator != null) ? (TypeSymbol)_deepTranslator.Visit(other) : other;
+                    var visitedOther =
+                        (_deepTranslator != null)
+                            ? (TypeSymbol)_deepTranslator.Visit(other)
+                            : other;
 
-                    return visitedSource?.Equals(visitedOther, TypeCompareKind.IgnoreDynamicAndTupleNames | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes) == true;
+                    return visitedSource?.Equals(
+                            visitedOther,
+                            TypeCompareKind.IgnoreDynamicAndTupleNames
+                                | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                        ) == true;
                 }
             }
         }
@@ -839,7 +1098,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
             public DeepTranslator(NamedTypeSymbol systemObject)
             {
-                _matches = new ConcurrentDictionary<Symbol, Symbol>(ReferenceEqualityComparer.Instance);
+                _matches = new ConcurrentDictionary<Symbol, Symbol>(
+                    ReferenceEqualityComparer.Instance
+                );
                 _systemObject = systemObject;
             }
 
@@ -857,14 +1118,31 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             public override Symbol VisitArrayType(ArrayTypeSymbol symbol)
             {
                 var translatedElementType = (TypeSymbol)this.Visit(symbol.ElementType);
-                var translatedModifiers = VisitCustomModifiers(symbol.ElementTypeWithAnnotations.CustomModifiers);
+                var translatedModifiers = VisitCustomModifiers(
+                    symbol.ElementTypeWithAnnotations.CustomModifiers
+                );
 
                 if (symbol.IsSZArray)
                 {
-                    return ArrayTypeSymbol.CreateSZArray(symbol.BaseTypeNoUseSiteDiagnostics.ContainingAssembly, symbol.ElementTypeWithAnnotations.WithTypeAndModifiers(translatedElementType, translatedModifiers));
+                    return ArrayTypeSymbol.CreateSZArray(
+                        symbol.BaseTypeNoUseSiteDiagnostics.ContainingAssembly,
+                        symbol.ElementTypeWithAnnotations.WithTypeAndModifiers(
+                            translatedElementType,
+                            translatedModifiers
+                        )
+                    );
                 }
 
-                return ArrayTypeSymbol.CreateMDArray(symbol.BaseTypeNoUseSiteDiagnostics.ContainingAssembly, symbol.ElementTypeWithAnnotations.WithTypeAndModifiers(translatedElementType, translatedModifiers), symbol.Rank, symbol.Sizes, symbol.LowerBounds);
+                return ArrayTypeSymbol.CreateMDArray(
+                    symbol.BaseTypeNoUseSiteDiagnostics.ContainingAssembly,
+                    symbol.ElementTypeWithAnnotations.WithTypeAndModifiers(
+                        translatedElementType,
+                        translatedModifiers
+                    ),
+                    symbol.Rank,
+                    symbol.Sizes,
+                    symbol.LowerBounds
+                );
             }
 
             public override Symbol VisitDynamicType(DynamicTypeSymbol symbol)
@@ -878,12 +1156,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 if ((object)originalDef != type)
                 {
                     var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
-                    var translatedTypeArguments = type.GetAllTypeArguments(ref discardedUseSiteInfo).SelectAsArray((t, v) => t.WithTypeAndModifiers((TypeSymbol)v.Visit(t.Type),
-                                                                                                                                                  v.VisitCustomModifiers(t.CustomModifiers)),
-                                                                                                                 this);
+                    var translatedTypeArguments = type.GetAllTypeArguments(ref discardedUseSiteInfo)
+                        .SelectAsArray(
+                            (t, v) =>
+                                t.WithTypeAndModifiers(
+                                    (TypeSymbol)v.Visit(t.Type),
+                                    v.VisitCustomModifiers(t.CustomModifiers)
+                                ),
+                            this
+                        );
 
                     var translatedOriginalDef = (NamedTypeSymbol)this.Visit(originalDef);
-                    var typeMap = new TypeMap(translatedOriginalDef.GetAllTypeParameters(), translatedTypeArguments, allowAlpha: true);
+                    var typeMap = new TypeMap(
+                        translatedOriginalDef.GetAllTypeParameters(),
+                        translatedTypeArguments,
+                        allowAlpha: true
+                    );
                     return typeMap.SubstituteNamedType(translatedOriginalDef);
                 }
 
@@ -900,37 +1188,66 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             public override Symbol VisitPointerType(PointerTypeSymbol symbol)
             {
                 var translatedPointedAtType = (TypeSymbol)this.Visit(symbol.PointedAtType);
-                var translatedModifiers = VisitCustomModifiers(symbol.PointedAtTypeWithAnnotations.CustomModifiers);
-                return new PointerTypeSymbol(symbol.PointedAtTypeWithAnnotations.WithTypeAndModifiers(translatedPointedAtType, translatedModifiers));
+                var translatedModifiers = VisitCustomModifiers(
+                    symbol.PointedAtTypeWithAnnotations.CustomModifiers
+                );
+                return new PointerTypeSymbol(
+                    symbol.PointedAtTypeWithAnnotations.WithTypeAndModifiers(
+                        translatedPointedAtType,
+                        translatedModifiers
+                    )
+                );
             }
 
             public override Symbol VisitFunctionPointerType(FunctionPointerTypeSymbol symbol)
             {
                 var sig = symbol.Signature;
                 var translatedReturnType = (TypeSymbol)Visit(sig.ReturnType);
-                var translatedReturnTypeWithAnnotations = sig.ReturnTypeWithAnnotations.WithTypeAndModifiers(translatedReturnType, VisitCustomModifiers(sig.ReturnTypeWithAnnotations.CustomModifiers));
+                var translatedReturnTypeWithAnnotations =
+                    sig.ReturnTypeWithAnnotations.WithTypeAndModifiers(
+                        translatedReturnType,
+                        VisitCustomModifiers(sig.ReturnTypeWithAnnotations.CustomModifiers)
+                    );
                 var translatedRefCustomModifiers = VisitCustomModifiers(sig.RefCustomModifiers);
 
                 var translatedParameterTypes = ImmutableArray<TypeWithAnnotations>.Empty;
-                ImmutableArray<ImmutableArray<CustomModifier>> translatedParamRefCustomModifiers = default;
+                ImmutableArray<ImmutableArray<CustomModifier>> translatedParamRefCustomModifiers =
+                    default;
 
                 if (sig.ParameterCount > 0)
                 {
-                    var translatedParamsBuilder = ArrayBuilder<TypeWithAnnotations>.GetInstance(sig.ParameterCount);
-                    var translatedParamRefCustomModifiersBuilder = ArrayBuilder<ImmutableArray<CustomModifier>>.GetInstance(sig.ParameterCount);
+                    var translatedParamsBuilder = ArrayBuilder<TypeWithAnnotations>.GetInstance(
+                        sig.ParameterCount
+                    );
+                    var translatedParamRefCustomModifiersBuilder = ArrayBuilder<
+                        ImmutableArray<CustomModifier>
+                    >.GetInstance(sig.ParameterCount);
 
                     foreach (var param in sig.Parameters)
                     {
                         var translatedParamType = (TypeSymbol)Visit(param.Type);
-                        translatedParamsBuilder.Add(param.TypeWithAnnotations.WithTypeAndModifiers(translatedParamType, VisitCustomModifiers(param.TypeWithAnnotations.CustomModifiers)));
-                        translatedParamRefCustomModifiersBuilder.Add(VisitCustomModifiers(param.RefCustomModifiers));
+                        translatedParamsBuilder.Add(
+                            param.TypeWithAnnotations.WithTypeAndModifiers(
+                                translatedParamType,
+                                VisitCustomModifiers(param.TypeWithAnnotations.CustomModifiers)
+                            )
+                        );
+                        translatedParamRefCustomModifiersBuilder.Add(
+                            VisitCustomModifiers(param.RefCustomModifiers)
+                        );
                     }
 
                     translatedParameterTypes = translatedParamsBuilder.ToImmutableAndFree();
-                    translatedParamRefCustomModifiers = translatedParamRefCustomModifiersBuilder.ToImmutableAndFree();
+                    translatedParamRefCustomModifiers =
+                        translatedParamRefCustomModifiersBuilder.ToImmutableAndFree();
                 }
 
-                return symbol.SubstituteTypeSymbol(translatedReturnTypeWithAnnotations, translatedParameterTypes, translatedRefCustomModifiers, translatedParamRefCustomModifiers);
+                return symbol.SubstituteTypeSymbol(
+                    translatedReturnTypeWithAnnotations,
+                    translatedParameterTypes,
+                    translatedRefCustomModifiers,
+                    translatedParamRefCustomModifiers
+                );
             }
 
             public override Symbol VisitTypeParameter(TypeParameterSymbol symbol)
@@ -938,18 +1255,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 return symbol;
             }
 
-            private ImmutableArray<CustomModifier> VisitCustomModifiers(ImmutableArray<CustomModifier> modifiers)
+            private ImmutableArray<CustomModifier> VisitCustomModifiers(
+                ImmutableArray<CustomModifier> modifiers
+            )
             {
                 return modifiers.SelectAsArray(VisitCustomModifier);
             }
 
             private CustomModifier VisitCustomModifier(CustomModifier modifier)
             {
-                var translatedType = (NamedTypeSymbol)this.Visit(((CSharpCustomModifier)modifier).ModifierSymbol);
+                var translatedType = (NamedTypeSymbol)
+                    this.Visit(((CSharpCustomModifier)modifier).ModifierSymbol);
                 Debug.Assert((object)translatedType != null);
-                return modifier.IsOptional ?
-                    CSharpCustomModifier.CreateOptional(translatedType) :
-                    CSharpCustomModifier.CreateRequired(translatedType);
+                return modifier.IsOptional
+                    ? CSharpCustomModifier.CreateOptional(translatedType)
+                    : CSharpCustomModifier.CreateRequired(translatedType);
             }
         }
     }

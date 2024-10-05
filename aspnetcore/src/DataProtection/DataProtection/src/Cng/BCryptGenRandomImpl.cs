@@ -9,9 +9,7 @@ internal sealed unsafe class BCryptGenRandomImpl : IBCryptGenRandom
 {
     public static readonly BCryptGenRandomImpl Instance = new BCryptGenRandomImpl();
 
-    private BCryptGenRandomImpl()
-    {
-    }
+    private BCryptGenRandomImpl() { }
 
     public void GenRandom(byte* pbBuffer, uint cbBuffer)
     {

@@ -73,22 +73,31 @@ public class ExternalLoginModel : PageModel
     ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
-    public virtual IActionResult OnPost(string provider, [StringSyntax(StringSyntaxAttribute.Uri)] string? returnUrl = null) => throw new NotImplementedException();
+    public virtual IActionResult OnPost(
+        string provider,
+        [StringSyntax(StringSyntaxAttribute.Uri)] string? returnUrl = null
+    ) => throw new NotImplementedException();
 
     /// <summary>
     ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
-    public virtual Task<IActionResult> OnGetCallbackAsync([StringSyntax(StringSyntaxAttribute.Uri)] string? returnUrl = null, string? remoteError = null) => throw new NotImplementedException();
+    public virtual Task<IActionResult> OnGetCallbackAsync(
+        [StringSyntax(StringSyntaxAttribute.Uri)] string? returnUrl = null,
+        string? remoteError = null
+    ) => throw new NotImplementedException();
 
     /// <summary>
     ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
-    public virtual Task<IActionResult> OnPostConfirmationAsync([StringSyntax(StringSyntaxAttribute.Uri)] string? returnUrl = null) => throw new NotImplementedException();
+    public virtual Task<IActionResult> OnPostConfirmationAsync(
+        [StringSyntax(StringSyntaxAttribute.Uri)] string? returnUrl = null
+    ) => throw new NotImplementedException();
 }
 
-internal sealed class ExternalLoginModel<TUser> : ExternalLoginModel where TUser : class
+internal sealed class ExternalLoginModel<TUser> : ExternalLoginModel
+    where TUser : class
 {
     private readonly SignInManager<TUser> _signInManager;
     private readonly UserManager<TUser> _userManager;
@@ -102,7 +111,8 @@ internal sealed class ExternalLoginModel<TUser> : ExternalLoginModel where TUser
         UserManager<TUser> userManager,
         IUserStore<TUser> userStore,
         ILogger<ExternalLoginModel> logger,
-        IEmailSender<TUser> emailSender)
+        IEmailSender<TUser> emailSender
+    )
     {
         _signInManager = signInManager;
         _userManager = userManager;
@@ -117,12 +127,22 @@ internal sealed class ExternalLoginModel<TUser> : ExternalLoginModel where TUser
     public override IActionResult OnPost(string provider, string? returnUrl = null)
     {
         // Request a redirect to the external login provider.
-        var redirectUrl = Url.Page("./ExternalLogin", pageHandler: "Callback", values: new { returnUrl });
-        var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+        var redirectUrl = Url.Page(
+            "./ExternalLogin",
+            pageHandler: "Callback",
+            values: new { returnUrl }
+        );
+        var properties = _signInManager.ConfigureExternalAuthenticationProperties(
+            provider,
+            redirectUrl
+        );
         return new ChallengeResult(provider, properties);
     }
 
-    public override async Task<IActionResult> OnGetCallbackAsync(string? returnUrl = null, string? remoteError = null)
+    public override async Task<IActionResult> OnGetCallbackAsync(
+        string? returnUrl = null,
+        string? remoteError = null
+    )
     {
         returnUrl = returnUrl ?? Url.Content("~/");
         if (remoteError != null)
@@ -138,12 +158,21 @@ internal sealed class ExternalLoginModel<TUser> : ExternalLoginModel where TUser
         }
 
         // Sign in the user with this external login provider if the user already has a login.
-        var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
+        var result = await _signInManager.ExternalLoginSignInAsync(
+            info.LoginProvider,
+            info.ProviderKey,
+            isPersistent: false,
+            bypassTwoFactor: true
+        );
         if (result.Succeeded)
         {
             if (_logger.IsEnabled(LogLevel.Information))
             {
-                _logger.LogInformation(LoggerEventIds.UserLoggedInByExternalProvider, "User logged in with {LoginProvider} provider.", info.LoginProvider);
+                _logger.LogInformation(
+                    LoggerEventIds.UserLoggedInByExternalProvider,
+                    "User logged in with {LoginProvider} provider.",
+                    info.LoginProvider
+                );
             }
             return LocalRedirect(returnUrl);
         }
@@ -158,10 +187,7 @@ internal sealed class ExternalLoginModel<TUser> : ExternalLoginModel where TUser
             ProviderDisplayName = info.ProviderDisplayName;
             if (info.Principal.HasClaim(c => c.Type == ClaimTypes.Email))
             {
-                Input = new InputModel
-                {
-                    Email = info.Principal.FindFirstValue(ClaimTypes.Email)!
-                };
+                Input = new InputModel { Email = info.Principal.FindFirstValue(ClaimTypes.Email)! };
             }
             return Page();
         }
@@ -193,7 +219,11 @@ internal sealed class ExternalLoginModel<TUser> : ExternalLoginModel where TUser
                 {
                     if (_logger.IsEnabled(LogLevel.Information))
                     {
-                        _logger.LogInformation(LoggerEventIds.UserCreatedByExternalProvider, "User created an account using {Name} provider.", info.LoginProvider);
+                        _logger.LogInformation(
+                            LoggerEventIds.UserCreatedByExternalProvider,
+                            "User created an account using {Name} provider.",
+                            info.LoginProvider
+                        );
                     }
 
                     var userId = await _userManager.GetUserIdAsync(user);
@@ -202,15 +232,28 @@ internal sealed class ExternalLoginModel<TUser> : ExternalLoginModel where TUser
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
                         pageHandler: null,
-                        values: new { area = "Identity", userId = userId, code = code },
-                        protocol: Request.Scheme)!;
+                        values: new
+                        {
+                            area = "Identity",
+                            userId = userId,
+                            code = code,
+                        },
+                        protocol: Request.Scheme
+                    )!;
 
-                    await _emailSender.SendConfirmationLinkAsync(user, Input.Email, HtmlEncoder.Default.Encode(callbackUrl));
+                    await _emailSender.SendConfirmationLinkAsync(
+                        user,
+                        Input.Email,
+                        HtmlEncoder.Default.Encode(callbackUrl)
+                    );
 
                     // If account confirmation is required, we need to show the link if we don't have a real email sender
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
-                        return RedirectToPage("./RegisterConfirmation", new { Email = Input.Email });
+                        return RedirectToPage(
+                            "./RegisterConfirmation",
+                            new { Email = Input.Email }
+                        );
                     }
 
                     await _signInManager.SignInAsync(user, isPersistent: false, info.LoginProvider);
@@ -236,9 +279,11 @@ internal sealed class ExternalLoginModel<TUser> : ExternalLoginModel where TUser
         }
         catch
         {
-            throw new InvalidOperationException($"Can't create an instance of '{nameof(TUser)}'. " +
-                $"Ensure that '{nameof(TUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
-                $"override the external login page in /Areas/Identity/Pages/Account/ExternalLogin.cshtml");
+            throw new InvalidOperationException(
+                $"Can't create an instance of '{nameof(TUser)}'. "
+                    + $"Ensure that '{nameof(TUser)}' is not an abstract class and has a parameterless constructor, or alternatively "
+                    + $"override the external login page in /Areas/Identity/Pages/Account/ExternalLogin.cshtml"
+            );
         }
     }
 
@@ -246,7 +291,9 @@ internal sealed class ExternalLoginModel<TUser> : ExternalLoginModel where TUser
     {
         if (!_userManager.SupportsUserEmail)
         {
-            throw new NotSupportedException("The default UI requires a user store with email support.");
+            throw new NotSupportedException(
+                "The default UI requires a user store with email support."
+            );
         }
         return (IUserEmailStore<TUser>)_userStore;
     }

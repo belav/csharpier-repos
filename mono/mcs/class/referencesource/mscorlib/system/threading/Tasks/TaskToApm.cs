@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -24,8 +24,8 @@
 //
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-using System.IO;
 using System.Diagnostics.Contracts;
+using System.IO;
 
 namespace System.Threading.Tasks
 {
@@ -61,8 +61,11 @@ namespace System.Threading.Tasks
             else
             {
                 // Asynchronous completion
-                asyncResult = task.AsyncState == state ? (IAsyncResult)task : new TaskWrapperAsyncResult(task, state, completedSynchronously: false);
-                if (callback != null) 
+                asyncResult =
+                    task.AsyncState == state
+                        ? (IAsyncResult)task
+                        : new TaskWrapperAsyncResult(task, state, completedSynchronously: false);
+                if (callback != null)
                     InvokeCallbackWhenTaskCompletes(task, callback, asyncResult);
             }
             return asyncResult;
@@ -79,7 +82,10 @@ namespace System.Threading.Tasks
             if (twar != null)
             {
                 task = twar.Task;
-                Contract.Assert(task != null, "TaskWrapperAsyncResult should never wrap a null Task.");
+                Contract.Assert(
+                    task != null,
+                    "TaskWrapperAsyncResult should never wrap a null Task."
+                );
             }
             // Otherwise, the IAsyncResult should be a Task.
             else
@@ -104,7 +110,10 @@ namespace System.Threading.Tasks
             if (twar != null)
             {
                 task = twar.Task as Task<TResult>;
-                Contract.Assert(twar.Task != null, "TaskWrapperAsyncResult should never wrap a null Task.");
+                Contract.Assert(
+                    twar.Task != null,
+                    "TaskWrapperAsyncResult should never wrap a null Task."
+                );
             }
             // Otherwise, the IAsyncResult should be a Task<TResult>.
             else
@@ -122,7 +131,11 @@ namespace System.Threading.Tasks
         /// <param name="antecedent">The Task to await.</param>
         /// <param name="callback">The callback to invoke when the Task completes.</param>
         /// <param name="asyncResult">The Task used as the IAsyncResult.</param>
-        private static void InvokeCallbackWhenTaskCompletes(Task antecedent, AsyncCallback callback, IAsyncResult asyncResult)
+        private static void InvokeCallbackWhenTaskCompletes(
+            Task antecedent,
+            AsyncCallback callback,
+            IAsyncResult asyncResult
+        )
         {
             Contract.Requires(antecedent != null);
             Contract.Requires(callback != null);
@@ -131,24 +144,25 @@ namespace System.Threading.Tasks
             // We use OnCompleted rather than ContinueWith in order to avoid running synchronously
             // if the task has already completed by the time we get here.  This is separated out into
             // its own method currently so that we only pay for the closure if necessary.
-            antecedent.ConfigureAwait(continueOnCapturedContext:false)
-                      .GetAwaiter()
-                      .OnCompleted(() => callback(asyncResult));
+            antecedent
+                .ConfigureAwait(continueOnCapturedContext: false)
+                .GetAwaiter()
+                .OnCompleted(() => callback(asyncResult));
 
             // PERFORMANCE NOTE:
             // Assuming we're in the default ExecutionContext, the "slow path" of an incomplete
             // task will result in four allocations: the new IAsyncResult,  the delegate+closure
             // in this method, and the continuation object inside of OnCompleted (necessary
-            // to capture both the Action delegate and the ExecutionContext in a single object).  
-            // In the future, if performance requirements drove a need, those four 
+            // to capture both the Action delegate and the ExecutionContext in a single object).
+            // In the future, if performance requirements drove a need, those four
             // allocations could be reduced to one.  This would be achieved by having TaskWrapperAsyncResult
             // also implement ITaskCompletionAction (and optionally IThreadPoolWorkItem).  It would need
-            // additional fields to store the AsyncCallback and an ExecutionContext.  Once configured, 
-            // it would be set into the Task as a continuation.  Its Invoke method would then be run when 
-            // the antecedent completed, and, doing all of the necessary work to flow ExecutionContext, 
-            // it would invoke the AsyncCallback.  It could also have a field on it for the antecedent, 
-            // so that the End method would have access to the completed antecedent. For related examples, 
-            // see other implementations of ITaskCompletionAction, and in particular ReadWriteTask 
+            // additional fields to store the AsyncCallback and an ExecutionContext.  Once configured,
+            // it would be set into the Task as a continuation.  Its Invoke method would then be run when
+            // the antecedent completed, and, doing all of the necessary work to flow ExecutionContext,
+            // it would invoke the AsyncCallback.  It could also have a field on it for the antecedent,
+            // so that the End method would have access to the completed antecedent. For related examples,
+            // see other implementations of ITaskCompletionAction, and in particular ReadWriteTask
             // used in Stream.Begin/EndXx's implementation.
         }
 
@@ -160,8 +174,10 @@ namespace System.Threading.Tasks
         {
             /// <summary>The wrapped Task.</summary>
             internal readonly Task Task;
+
             /// <summary>The new AsyncState value.</summary>
             private readonly object m_state;
+
             /// <summary>The new CompletedSynchronously value.</summary>
             private readonly bool m_completedSynchronously;
 
@@ -169,24 +185,39 @@ namespace System.Threading.Tasks
             /// <param name="task">The Task to wrap.</param>
             /// <param name="state">The new AsyncState value</param>
             /// <param name="completedSynchronously">The new CompletedSynchronously value.</param>
-            internal TaskWrapperAsyncResult(Task task, object state, bool completedSynchronously) 
+            internal TaskWrapperAsyncResult(Task task, object state, bool completedSynchronously)
             {
                 Contract.Requires(task != null);
-                Contract.Requires(!completedSynchronously || task.IsCompleted, "If completedSynchronously is true, the task must be completed.");
+                Contract.Requires(
+                    !completedSynchronously || task.IsCompleted,
+                    "If completedSynchronously is true, the task must be completed."
+                );
 
                 this.Task = task;
                 m_state = state;
                 m_completedSynchronously = completedSynchronously;
             }
 
-            // The IAsyncResult implementation.  
+            // The IAsyncResult implementation.
             // - IsCompleted and AsyncWaitHandle just pass through to the Task.
             // - AsyncState and CompletedSynchronously return the corresponding values stored in this object.
 
-            object IAsyncResult.AsyncState { get { return m_state; } }
-            bool IAsyncResult.CompletedSynchronously { get { return m_completedSynchronously; } }
-            bool IAsyncResult.IsCompleted { get { return this.Task.IsCompleted; } }
-            WaitHandle IAsyncResult.AsyncWaitHandle { get { return ((IAsyncResult)this.Task).AsyncWaitHandle; } }
+            object IAsyncResult.AsyncState
+            {
+                get { return m_state; }
+            }
+            bool IAsyncResult.CompletedSynchronously
+            {
+                get { return m_completedSynchronously; }
+            }
+            bool IAsyncResult.IsCompleted
+            {
+                get { return this.Task.IsCompleted; }
+            }
+            WaitHandle IAsyncResult.AsyncWaitHandle
+            {
+                get { return ((IAsyncResult)this.Task).AsyncWaitHandle; }
+            }
         }
     }
 }

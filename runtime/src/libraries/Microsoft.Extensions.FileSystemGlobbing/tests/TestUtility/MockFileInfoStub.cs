@@ -11,7 +11,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.TestUtility
             FileSystemOperationRecorder recorder,
             DirectoryInfoBase parentDirectory,
             string fullName,
-            string name)
+            string name
+        )
         {
             Recorder = recorder;
             FullName = fullName;

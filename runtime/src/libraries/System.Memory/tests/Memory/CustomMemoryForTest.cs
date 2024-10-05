@@ -17,9 +17,8 @@ namespace System.MemoryTests
         private readonly int _offset;
         private readonly int _length;
 
-        public CustomMemoryForTest(T[] array) : this(array, 0, array.Length)
-        {
-        }
+        public CustomMemoryForTest(T[] array)
+            : this(array, 0, array.Length) { }
 
         public CustomMemoryForTest(T[] array, int offset, int length)
         {
@@ -55,7 +54,11 @@ namespace System.MemoryTests
                     }
 
                     var handle = GCHandle.Alloc(_array, GCHandleType.Pinned);
-                    return new MemoryHandle(Unsafe.Add<T>((void*)handle.AddrOfPinnedObject(), _offset + elementIndex), handle, this);
+                    return new MemoryHandle(
+                        Unsafe.Add<T>((void*)handle.AddrOfPinnedObject(), _offset + elementIndex),
+                        handle,
+                        this
+                    );
                 }
                 catch
                 {
@@ -84,7 +87,6 @@ namespace System.MemoryTests
             }
 
             _disposed = true;
-
         }
 
         public override void Unpin()

@@ -19,12 +19,19 @@ internal sealed class ForwardedHeadersOptionsSetup : IConfigureOptions<Forwarded
 
     public void Configure(ForwardedHeadersOptions options)
     {
-        if (!string.Equals("true", _configuration["ForwardedHeaders_Enabled"], StringComparison.OrdinalIgnoreCase))
+        if (
+            !string.Equals(
+                "true",
+                _configuration["ForwardedHeaders_Enabled"],
+                StringComparison.OrdinalIgnoreCase
+            )
+        )
         {
             return;
         }
 
-        options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+        options.ForwardedHeaders =
+            ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
         // Only loopback proxies are allowed by default. Clear that restriction because forwarders are
         // being enabled by explicit configuration.
         options.KnownNetworks.Clear();

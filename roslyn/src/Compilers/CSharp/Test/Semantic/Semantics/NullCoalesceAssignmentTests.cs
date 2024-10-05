@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void CoalescingAssignment_NoConversion()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void M(C c1, C c2)
@@ -35,7 +36,10 @@ class C
             var syntaxTree = comp.SyntaxTrees.Single();
             var syntaxRoot = syntaxTree.GetRoot();
             var semanticModel = comp.GetSemanticModel(syntaxTree);
-            var coalesceAssignment = syntaxRoot.DescendantNodes().OfType<AssignmentExpressionSyntax>().Single();
+            var coalesceAssignment = syntaxRoot
+                .DescendantNodes()
+                .OfType<AssignmentExpressionSyntax>()
+                .Single();
 
             assertTypeInfo(coalesceAssignment);
             assertTypeInfo(coalesceAssignment.Left);
@@ -48,14 +52,14 @@ class C
                 Assert.NotNull(typeInfo.Type);
                 Assert.Equal(cType.GetPublicSymbol(), typeInfo.Type);
                 Assert.Equal(cType.GetPublicSymbol(), typeInfo.ConvertedType);
-
             }
         }
 
         [Fact]
         public void CoalescingAssignment_ValueConversion()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void M(C c1, D d1)
@@ -73,7 +77,10 @@ class D : C {}";
             var syntaxTree = comp.SyntaxTrees.Single();
             var syntaxRoot = syntaxTree.GetRoot();
             var semanticModel = comp.GetSemanticModel(syntaxTree);
-            var coalesceAssignment = syntaxRoot.DescendantNodes().OfType<AssignmentExpressionSyntax>().Single();
+            var coalesceAssignment = syntaxRoot
+                .DescendantNodes()
+                .OfType<AssignmentExpressionSyntax>()
+                .Single();
 
             assertTypeInfo(coalesceAssignment);
             assertTypeInfo(coalesceAssignment.Left);
@@ -90,14 +97,14 @@ class D : C {}";
                 Assert.NotNull(typeInfo.Type);
                 Assert.Equal(cType, typeInfo.Type.GetSymbol());
                 Assert.Equal(cType.GetPublicSymbol(), typeInfo.ConvertedType);
-
             }
         }
 
         [Fact]
         public void CoalescingAssignment_AsConvertedExpression()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void M(D d1, D d2)
@@ -116,7 +123,10 @@ class D : C {}";
             var syntaxTree = comp.SyntaxTrees.Single();
             var syntaxRoot = syntaxTree.GetRoot();
             var semanticModel = comp.GetSemanticModel(syntaxTree);
-            var coalesceAssignment = syntaxRoot.DescendantNodes().OfType<AssignmentExpressionSyntax>().Single();
+            var coalesceAssignment = syntaxRoot
+                .DescendantNodes()
+                .OfType<AssignmentExpressionSyntax>()
+                .Single();
 
             var whenNullTypeInfo = semanticModel.GetTypeInfo(coalesceAssignment);
             Assert.NotEqual(default, whenNullTypeInfo);
@@ -133,14 +143,14 @@ class D : C {}";
                 Assert.NotNull(typeInfo.Type);
                 Assert.Equal(dType.GetPublicSymbol(), typeInfo.Type);
                 Assert.Equal(dType, typeInfo.ConvertedType.GetSymbol());
-
             }
         }
 
         [Fact]
         public void CoalesceAssignment_ConvertedToNonNullable()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void M(int? a, int b)
@@ -155,7 +165,10 @@ class C
             var syntaxTree = comp.SyntaxTrees.Single();
             var syntaxRoot = syntaxTree.GetRoot();
             var semanticModel = comp.GetSemanticModel(syntaxTree);
-            var coalesceAssignment = syntaxRoot.DescendantNodes().OfType<AssignmentExpressionSyntax>().Single();
+            var coalesceAssignment = syntaxRoot
+                .DescendantNodes()
+                .OfType<AssignmentExpressionSyntax>()
+                .Single();
 
             var int32 = comp.GetSpecialType(SpecialType.System_Int32);
             var coalesceType = semanticModel.GetTypeInfo(coalesceAssignment).Type;
@@ -166,7 +179,8 @@ class C
         [Fact]
         public void CoalesceAssignment_DefaultConvertedToNonNullable()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void M(int? a)
@@ -181,10 +195,20 @@ class C
             var syntaxTree = comp.SyntaxTrees.Single();
             var syntaxRoot = syntaxTree.GetRoot();
             var semanticModel = comp.GetSemanticModel(syntaxTree);
-            var defaultLiteral = syntaxRoot.DescendantNodes().OfType<LiteralExpressionSyntax>().Where(expr => expr.IsKind(SyntaxKind.DefaultLiteralExpression)).Single();
+            var defaultLiteral = syntaxRoot
+                .DescendantNodes()
+                .OfType<LiteralExpressionSyntax>()
+                .Where(expr => expr.IsKind(SyntaxKind.DefaultLiteralExpression))
+                .Single();
 
-            Assert.Equal(SpecialType.System_Int32, semanticModel.GetTypeInfo(defaultLiteral).Type.SpecialType);
-            Assert.Equal(SpecialType.System_Int32, semanticModel.GetTypeInfo(defaultLiteral).ConvertedType.SpecialType);
+            Assert.Equal(
+                SpecialType.System_Int32,
+                semanticModel.GetTypeInfo(defaultLiteral).Type.SpecialType
+            );
+            Assert.Equal(
+                SpecialType.System_Int32,
+                semanticModel.GetTypeInfo(defaultLiteral).ConvertedType.SpecialType
+            );
         }
     }
 }

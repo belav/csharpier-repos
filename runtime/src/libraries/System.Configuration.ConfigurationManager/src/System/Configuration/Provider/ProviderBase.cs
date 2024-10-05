@@ -14,7 +14,8 @@ namespace System.Configuration.Provider
 
         public virtual string Name => _name;
 
-        public virtual string Description => string.IsNullOrEmpty(_description) ? Name : _description;
+        public virtual string Description =>
+            string.IsNullOrEmpty(_description) ? Name : _description;
 
         public virtual void Initialize(string name, NameValueCollection config)
         {

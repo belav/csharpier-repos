@@ -9,54 +9,56 @@ namespace System.Activities.Core.Presentation
     using System.Activities.Presentation;
     using System.Activities.Presentation.Metadata;
     using System.Activities.Presentation.Model;
+    using System.Activities.Presentation.View;
+    using System.Activities.Presentation.View.OutlineView;
     using System.Activities.Statements;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.Runtime;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
     using System.Windows.Media;
     using System.Windows.Threading;
-    using System.Runtime;
-    using System.Collections.Generic;
-    using System.Activities.Presentation.View;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Collections.ObjectModel;
-    using System.Globalization;
-    using System.Activities.Presentation.View.OutlineView;
 
     partial class SwitchDesigner
     {
         const string ExpandViewStateKey = "IsExpanded";
 
-        public static readonly DependencyProperty CaseTypeProperty =
-            DependencyProperty.Register(
+        public static readonly DependencyProperty CaseTypeProperty = DependencyProperty.Register(
             "CaseType",
             typeof(Type),
             typeof(SwitchDesigner),
-            new UIPropertyMetadata(null));
+            new UIPropertyMetadata(null)
+        );
 
         public static readonly DependencyProperty SelectedCaseProperty =
             DependencyProperty.Register(
-            "SelectedCase",
-            typeof(ModelItem),
-            typeof(SwitchDesigner),
-            new UIPropertyMetadata(null));
+                "SelectedCase",
+                typeof(ModelItem),
+                typeof(SwitchDesigner),
+                new UIPropertyMetadata(null)
+            );
 
         public static readonly DependencyProperty ShowDefaultCaseExpandedProperty =
             DependencyProperty.Register(
-            "ShowDefaultCaseExpanded",
-            typeof(bool),
-            typeof(SwitchDesigner),
-            new UIPropertyMetadata(false));
+                "ShowDefaultCaseExpanded",
+                typeof(bool),
+                typeof(SwitchDesigner),
+                new UIPropertyMetadata(false)
+            );
 
-        public static readonly DependencyProperty NewKeyProperty =
-            DependencyProperty.Register(
+        public static readonly DependencyProperty NewKeyProperty = DependencyProperty.Register(
             "NewKey",
             typeof(object),
             typeof(SwitchDesigner),
-            new UIPropertyMetadata(null));
+            new UIPropertyMetadata(null)
+        );
 
         static TypeResolvingOptions argumentTypeResolvingOptions;
 
@@ -65,26 +67,14 @@ namespace System.Activities.Core.Presentation
 
         public bool ShowDefaultCaseExpanded
         {
-            get
-            {
-                return (bool)this.GetValue(ShowDefaultCaseExpandedProperty);
-            }
-            set
-            {
-                this.SetValue(ShowDefaultCaseExpandedProperty, value);
-            }
+            get { return (bool)this.GetValue(ShowDefaultCaseExpandedProperty); }
+            set { this.SetValue(ShowDefaultCaseExpandedProperty, value); }
         }
 
         ModelItem SelectedCase
         {
-            get
-            {
-                return (ModelItem)this.GetValue(SelectedCaseProperty);
-            }
-            set
-            {
-                this.SetValue(SelectedCaseProperty, value);
-            }
+            get { return (ModelItem)this.GetValue(SelectedCaseProperty); }
+            set { this.SetValue(SelectedCaseProperty, value); }
         }
 
         Type CaseType
@@ -109,7 +99,11 @@ namespace System.Activities.Core.Presentation
                     if (ContainsCaseKey(obj))
                     {
                         string key = obj != null ? obj.ToString() : "(null)";
-                        reason = string.Format(CultureInfo.CurrentCulture, SR.DuplicateCaseKey, key);
+                        reason = string.Format(
+                            CultureInfo.CurrentCulture,
+                            SR.DuplicateCaseKey,
+                            key
+                        );
                         return false;
                     }
                     return true;
@@ -124,12 +118,7 @@ namespace System.Activities.Core.Presentation
             {
                 if (defaultTypes == null)
                 {
-                    defaultTypes = new List<Type>
-                    {
-                        typeof(bool),
-                        typeof(int),
-                        typeof(string),
-                    };
+                    defaultTypes = new List<Type> { typeof(bool), typeof(int), typeof(string) };
                 }
                 return defaultTypes;
             }
@@ -182,11 +171,19 @@ namespace System.Activities.Core.Presentation
             this.Context.Items.Subscribe<Selection>(OnSelectionChanged);
             this.ModelItem.PropertyChanged += OnModelItemPropertyChanged;
 
-            ViewStateService viewStateService = this.Context.Services.GetService<ViewStateService>();
+            ViewStateService viewStateService =
+                this.Context.Services.GetService<ViewStateService>();
 
-            foreach (ModelItem modelItem in this.ModelItem.Properties["Cases"].Dictionary.Properties["ItemsCollection"].Collection)
+            foreach (
+                ModelItem modelItem in this.ModelItem
+                    .Properties["Cases"]
+                    .Dictionary
+                    .Properties["ItemsCollection"]
+                    .Collection
+            )
             {
-                bool? isExpanded = (bool?)viewStateService.RetrieveViewState(modelItem, ExpandViewStateKey);
+                bool? isExpanded = (bool?)
+                    viewStateService.RetrieveViewState(modelItem, ExpandViewStateKey);
                 if (isExpanded != null && isExpanded.Value)
                 {
                     this.SelectedCase = modelItem;
@@ -210,7 +207,13 @@ namespace System.Activities.Core.Presentation
             }
             else
             {
-                foreach (ModelItem caseObject in this.ModelItem.Properties["Cases"].Dictionary.Properties["ItemsCollection"].Collection)
+                foreach (
+                    ModelItem caseObject in this.ModelItem
+                        .Properties["Cases"]
+                        .Dictionary
+                        .Properties["ItemsCollection"]
+                        .Collection
+                )
                 {
                     if (IsDescendantOfCase(caseObject, selection.PrimarySelection))
                     {
@@ -272,29 +275,36 @@ namespace System.Activities.Core.Presentation
             ModelItem oldSelectedCase = this.SelectedCase;
             this.SelectedCase = newSelectedCase;
 
-            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (Action)(() =>
-            {
-                if (oldSelectedCase != null)
-                {
-                    CaseDesigner oldSelectedCaseDesigner = (CaseDesigner)oldSelectedCase.View;
-                    if (oldSelectedCaseDesigner != null)
+            this.Dispatcher.BeginInvoke(
+                DispatcherPriority.Normal,
+                (Action)(
+                    () =>
                     {
-                        oldSelectedCaseDesigner.ExpandState = false;
-                        oldSelectedCaseDesigner.PinState = false;
-                    }
-                }
-                if (newSelectedCase != null)
-                {
-                    CollapseDefaultView();
+                        if (oldSelectedCase != null)
+                        {
+                            CaseDesigner oldSelectedCaseDesigner = (CaseDesigner)
+                                oldSelectedCase.View;
+                            if (oldSelectedCaseDesigner != null)
+                            {
+                                oldSelectedCaseDesigner.ExpandState = false;
+                                oldSelectedCaseDesigner.PinState = false;
+                            }
+                        }
+                        if (newSelectedCase != null)
+                        {
+                            CollapseDefaultView();
 
-                    CaseDesigner newSelectedCaseDesigner = (CaseDesigner)newSelectedCase.View;
-                    if (newSelectedCaseDesigner != null)
-                    {
-                        newSelectedCaseDesigner.ExpandState = true;
-                        newSelectedCaseDesigner.PinState = true;
+                            CaseDesigner newSelectedCaseDesigner = (CaseDesigner)
+                                newSelectedCase.View;
+                            if (newSelectedCaseDesigner != null)
+                            {
+                                newSelectedCaseDesigner.ExpandState = true;
+                                newSelectedCaseDesigner.PinState = true;
+                            }
+                        }
                     }
-                }
-            }));
+                )
+            );
         }
 
         internal static void RegisterMetadata(AttributeTableBuilder builder)
@@ -302,10 +312,21 @@ namespace System.Activities.Core.Presentation
             Type type = typeof(Switch<>);
             builder.AddCustomAttributes(type, new DesignerAttribute(typeof(SwitchDesigner)));
             builder.AddCustomAttributes(type, type.GetProperty("Default"), BrowsableAttribute.No);
-            builder.AddCustomAttributes(type, new TypeResolvingOptionsAttribute(ArgumentTypeResolvingOptions));
+            builder.AddCustomAttributes(
+                type,
+                new TypeResolvingOptionsAttribute(ArgumentTypeResolvingOptions)
+            );
 
             // Hide Cases node in the treeview and display its child nodes directly.
-            builder.AddCustomAttributes(type, type.GetProperty("Cases"), new ShowPropertyInOutlineViewAttribute() { CurrentPropertyVisible = false, ChildNodePrefix = "Case : " });
+            builder.AddCustomAttributes(
+                type,
+                type.GetProperty("Cases"),
+                new ShowPropertyInOutlineViewAttribute()
+                {
+                    CurrentPropertyVisible = false,
+                    ChildNodePrefix = "Case : ",
+                }
+            );
         }
 
         void OnDefaultCaseViewMouseDown(object sender, MouseButtonEventArgs e)
@@ -406,16 +427,27 @@ namespace System.Activities.Core.Presentation
 
         void AddNewCase(object newKey)
         {
-            Type caseType = typeof(ModelItemKeyValuePair<,>).MakeGenericType(new Type[] { this.CaseType, typeof(Activity) });
-            object mutableKVPair = Activator.CreateInstance(caseType, new object[] { newKey, null });
+            Type caseType = typeof(ModelItemKeyValuePair<,>).MakeGenericType(
+                new Type[] { this.CaseType, typeof(Activity) }
+            );
+            object mutableKVPair = Activator.CreateInstance(
+                caseType,
+                new object[] { newKey, null }
+            );
             ModelProperty casesProp = this.ModelItem.Properties["Cases"];
             Fx.Assert(casesProp != null, "Property Cases is not available");
             ModelItem cases = casesProp.Value;
             Fx.Assert(cases != null, "Cannot get ModelItem from property Cases");
             ModelProperty itemsCollectionProp = cases.Properties["ItemsCollection"];
-            Fx.Assert(itemsCollectionProp != null, "Cannot get property ItemsCollection from Cases");
+            Fx.Assert(
+                itemsCollectionProp != null,
+                "Cannot get property ItemsCollection from Cases"
+            );
             ModelItemCollection itemsCollection = itemsCollectionProp.Collection;
-            Fx.Assert(itemsCollection != null, "Cannot get ModelItemCollection from property ItemsCollection");
+            Fx.Assert(
+                itemsCollection != null,
+                "Cannot get ModelItemCollection from property ItemsCollection"
+            );
             itemsCollection.Add(mutableKVPair);
 
             this.caseKeyBox.ResetText();
@@ -423,7 +455,9 @@ namespace System.Activities.Core.Presentation
 
         bool ContainsCaseKey(object key)
         {
-            Type caseType = typeof(ModelItemKeyValuePair<,>).MakeGenericType(new Type[] { this.CaseType, typeof(Activity) });
+            Type caseType = typeof(ModelItemKeyValuePair<,>).MakeGenericType(
+                new Type[] { this.CaseType, typeof(Activity) }
+            );
             ModelProperty casesProp = this.ModelItem.Properties["Cases"];
             ModelItem cases = casesProp.Value;
             ModelProperty itemsCollectionProp = cases.Properties["ItemsCollection"];
@@ -431,7 +465,10 @@ namespace System.Activities.Core.Presentation
 
             foreach (ModelItem item in itemsCollection)
             {
-                object itemKey = caseType.GetProperty("Key").GetGetMethod().Invoke(item.GetCurrentValue(), null);
+                object itemKey = caseType
+                    .GetProperty("Key")
+                    .GetGetMethod()
+                    .Invoke(item.GetCurrentValue(), null);
                 if ((itemKey != null && itemKey.Equals(key)) || (itemKey == key))
                 {
                     return true;

@@ -14,18 +14,17 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETests.ServerRenderingTests;
 
-public class RenderingTest : ServerTestBase<BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<App>>>
+public class RenderingTest
+    : ServerTestBase<BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<App>>>
 {
     public RenderingTest(
         BrowserFixture browserFixture,
         BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<App>> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
-    public override Task InitializeAsync()
-        => InitializeAsync(BrowserFixture.StreamingContext);
+    public override Task InitializeAsync() => InitializeAsync(BrowserFixture.StreamingContext);
 
     [Fact]
     [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/49975")]

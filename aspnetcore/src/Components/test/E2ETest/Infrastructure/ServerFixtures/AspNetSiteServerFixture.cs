@@ -21,14 +21,16 @@ public class AspNetSiteServerFixture : WebHostServerFixture
 
     public AspNetEnvironment Environment { get; set; } = AspNetEnvironment.Production;
 
-    public List<string> AdditionalArguments { get; set; } = new List<string> { "--test-execution-mode", "server" };
+    public List<string> AdditionalArguments { get; set; } =
+        new List<string> { "--test-execution-mode", "server" };
 
     protected override IHost CreateWebHost()
     {
         if (BuildWebHostMethod == null)
         {
             throw new InvalidOperationException(
-                $"No value was provided for {nameof(BuildWebHostMethod)}");
+                $"No value was provided for {nameof(BuildWebHostMethod)}"
+            );
         }
 
         var assembly = ApplicationAssembly ?? BuildWebHostMethod.Method.DeclaringType.Assembly;
@@ -40,14 +42,21 @@ public class AspNetSiteServerFixture : WebHostServerFixture
             host = E2ETestOptions.Instance.Sauce.HostName;
         }
 
-        return BuildWebHostMethod(new[]
-        {
-                "--urls", $"http://{host}:0",
-                "--contentroot", sampleSitePath,
-                "--environment", Environment.ToString(),
-            }.Concat(AdditionalArguments).ToArray());
+        return BuildWebHostMethod(
+            new[]
+            {
+                "--urls",
+                $"http://{host}:0",
+                "--contentroot",
+                sampleSitePath,
+                "--environment",
+                Environment.ToString(),
+            }
+                .Concat(AdditionalArguments)
+                .ToArray()
+        );
     }
 
-    private static string DefaultGetContentRoot(Assembly assembly)
-        => FindSampleOrTestSitePath(assembly.FullName);
+    private static string DefaultGetContentRoot(Assembly assembly) =>
+        FindSampleOrTestSitePath(assembly.FullName);
 }

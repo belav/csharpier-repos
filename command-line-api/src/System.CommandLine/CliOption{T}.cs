@@ -16,10 +16,8 @@ namespace System.CommandLine
         /// </summary>
         /// <param name="name">The name of the option. It's used for parsing, displaying Help and creating parse errors.</param>>
         /// <param name="aliases">Optional aliases. Used for parsing, suggestions and displayed in Help.</param>
-        public CliOption(string name, params string[] aliases) 
-            : this(name, aliases, new CliArgument<T>(name))
-        {
-        }
+        public CliOption(string name, params string[] aliases)
+            : this(name, aliases, new CliArgument<T>(name)) { }
 
         private protected CliOption(string name, string[] aliases, CliArgument<T> argument)
             : base(name, aliases)
@@ -41,14 +39,15 @@ namespace System.CommandLine
             get => _argument.CustomParser;
             set => _argument.CustomParser = value;
         }
-        
+
         internal sealed override CliArgument Argument => _argument;
 
         /// <summary>
         /// Configures the option to accept only the specified values, and to suggest them as command line completions.
         /// </summary>
         /// <param name="values">The values that are allowed for the option.</param>
-        public void AcceptOnlyFromAmong(params string[] values) => _argument.AcceptOnlyFromAmong(values);
+        public void AcceptOnlyFromAmong(params string[] values) =>
+            _argument.AcceptOnlyFromAmong(values);
 
         /// <summary>
         /// Configures the option to accept only values representing legal file paths.

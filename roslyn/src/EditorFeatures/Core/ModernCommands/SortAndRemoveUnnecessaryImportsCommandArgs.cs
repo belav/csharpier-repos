@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Editor.Commanding.Commands
     /// Arguments for the Sort and Remove Unused Usings command being invoked.
     /// </summary>
     [ExcludeFromCodeCoverage]
-    internal class SortAndRemoveUnnecessaryImportsCommandArgs(ITextView textView, ITextBuffer subjectBuffer) : EditorCommandArgs(textView, subjectBuffer)
-    {
-    }
+    internal class SortAndRemoveUnnecessaryImportsCommandArgs(
+        ITextView textView,
+        ITextBuffer subjectBuffer
+    ) : EditorCommandArgs(textView, subjectBuffer) { }
 }

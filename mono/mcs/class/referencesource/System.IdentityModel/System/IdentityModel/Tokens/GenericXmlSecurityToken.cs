@@ -4,17 +4,17 @@
 
 namespace System.IdentityModel.Tokens
 {
-    using System;    
+    using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Globalization;
-    using System.IO;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
+    using System.IO;
+    using System.Runtime.Serialization;
     using System.Security.Cryptography;
     using System.Security.Principal;
     using System.Xml;
-    using System.Runtime.Serialization;    
-    using System.Collections.Generic;
 
     public class GenericXmlSecurityToken : SecurityToken
     {
@@ -36,7 +36,7 @@ namespace System.IdentityModel.Tokens
             SecurityKeyIdentifierClause internalTokenReference,
             SecurityKeyIdentifierClause externalTokenReference,
             ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies
-            )
+        )
         {
             if (tokenXml == null)
             {
@@ -51,7 +51,8 @@ namespace System.IdentityModel.Tokens
 
             this.internalTokenReference = internalTokenReference;
             this.externalTokenReference = externalTokenReference;
-            this.authorizationPolicies = authorizationPolicies ?? EmptyReadOnlyCollection<IAuthorizationPolicy>.Instance;
+            this.authorizationPolicies =
+                authorizationPolicies ?? EmptyReadOnlyCollection<IAuthorizationPolicy>.Instance;
         }
 
         public override string Id
@@ -81,7 +82,7 @@ namespace System.IdentityModel.Tokens
 
         public XmlElement TokenXml
         {
-            get { return this.tokenXml;  }
+            get { return this.tokenXml; }
         }
 
         public SecurityToken ProofToken
@@ -96,7 +97,7 @@ namespace System.IdentityModel.Tokens
 
         public override ReadOnlyCollection<SecurityKey> SecurityKeys
         {
-            get 
+            get
             {
                 if (this.proofToken != null)
                     return this.proofToken.SecurityKeys;
@@ -104,7 +105,7 @@ namespace System.IdentityModel.Tokens
                     return EmptyReadOnlyCollection<SecurityKey>.Instance;
             }
         }
- 
+
         public override string ToString()
         {
             StringWriter writer = new StringWriter(CultureInfo.InvariantCulture);
@@ -115,7 +116,11 @@ namespace System.IdentityModel.Tokens
                 writer.WriteLine("   InternalTokenReference: {0}", this.internalTokenReference);
             if (this.externalTokenReference != null)
                 writer.WriteLine("   ExternalTokenReference: {0}", this.externalTokenReference);
-            writer.WriteLine("   Token Element: ({0}, {1})", this.tokenXml.LocalName, this.tokenXml.NamespaceURI);
+            writer.WriteLine(
+                "   Token Element: ({0}, {1})",
+                this.tokenXml.LocalName,
+                this.tokenXml.NamespaceURI
+            );
             return writer.ToString();
         }
 
@@ -123,27 +128,30 @@ namespace System.IdentityModel.Tokens
         {
             if (tokenXml != null)
             {
-                string id = tokenXml.GetAttribute(UtilityStrings.IdAttribute, UtilityStrings.Namespace);
-                if ( string.IsNullOrEmpty( id ) )
+                string id = tokenXml.GetAttribute(
+                    UtilityStrings.IdAttribute,
+                    UtilityStrings.Namespace
+                );
+                if (string.IsNullOrEmpty(id))
                 {
                     // special case SAML 1.1 as this is the only possible ID as
                     // spec is closed.  SAML 2.0 is xs:ID
                     id = tokenXml.GetAttribute("AssertionID");
 
                     // if we are still null, "Id"
-                    if ( string.IsNullOrEmpty( id ) )
+                    if (string.IsNullOrEmpty(id))
                     {
                         id = tokenXml.GetAttribute("Id");
                     }
 
-                    //This fixes the unecnrypted SAML 2.0 case. Eg: <Assertion ID="_05955298-214f-41e7-b4c3-84dbff7f01b9" 
+                    //This fixes the unecnrypted SAML 2.0 case. Eg: <Assertion ID="_05955298-214f-41e7-b4c3-84dbff7f01b9"
                     if (string.IsNullOrEmpty(id))
                     {
                         id = tokenXml.GetAttribute("ID");
                     }
                 }
 
-                if ( !string.IsNullOrEmpty(id) )
+                if (!string.IsNullOrEmpty(id))
                 {
                     return id;
                 }
@@ -154,10 +162,16 @@ namespace System.IdentityModel.Tokens
 
         public override bool CanCreateKeyIdentifierClause<T>()
         {
-            if (this.internalTokenReference != null && typeof(T) == this.internalTokenReference.GetType())
+            if (
+                this.internalTokenReference != null
+                && typeof(T) == this.internalTokenReference.GetType()
+            )
                 return true;
 
-            if (this.externalTokenReference != null && typeof(T) == this.externalTokenReference.GetType())
+            if (
+                this.externalTokenReference != null
+                && typeof(T) == this.externalTokenReference.GetType()
+            )
                 return true;
 
             return false;
@@ -165,26 +179,42 @@ namespace System.IdentityModel.Tokens
 
         public override T CreateKeyIdentifierClause<T>()
         {
-            if (this.internalTokenReference != null && typeof(T) == this.internalTokenReference.GetType())
+            if (
+                this.internalTokenReference != null
+                && typeof(T) == this.internalTokenReference.GetType()
+            )
                 return (T)this.internalTokenReference;
 
-            if (this.externalTokenReference != null && typeof(T) == this.externalTokenReference.GetType())
+            if (
+                this.externalTokenReference != null
+                && typeof(T) == this.externalTokenReference.GetType()
+            )
                 return (T)this.externalTokenReference;
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.UnableToCreateTokenReference)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new SecurityTokenException(SR.GetString(SR.UnableToCreateTokenReference))
+            );
         }
 
-        public override bool MatchesKeyIdentifierClause(SecurityKeyIdentifierClause keyIdentifierClause)
+        public override bool MatchesKeyIdentifierClause(
+            SecurityKeyIdentifierClause keyIdentifierClause
+        )
         {
-            if (this.internalTokenReference != null && this.internalTokenReference.Matches(keyIdentifierClause))
+            if (
+                this.internalTokenReference != null
+                && this.internalTokenReference.Matches(keyIdentifierClause)
+            )
             {
                 return true;
             }
-            else if (this.externalTokenReference != null && this.externalTokenReference.Matches(keyIdentifierClause))
+            else if (
+                this.externalTokenReference != null
+                && this.externalTokenReference.Matches(keyIdentifierClause)
+            )
             {
                 return true;
             }
-            
+
             return false;
         }
     }

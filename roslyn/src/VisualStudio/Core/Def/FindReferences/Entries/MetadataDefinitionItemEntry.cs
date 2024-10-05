@@ -24,7 +24,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             public MetadataDefinitionItemEntry(
                 AbstractTableDataSourceFindUsagesContext context,
                 RoslynDefinitionBucket definitionBucket,
-                IThreadingContext threadingContext)
+                IThreadingContext threadingContext
+            )
                 : base(definitionBucket, context.Presenter)
             {
                 _threadingContext = threadingContext;
@@ -37,7 +38,9 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                     case StandardTableKeyNames.ProjectName:
                         return DefinitionBucket.DefinitionItem.OriginationParts.JoinText();
                     case StandardTableKeyNames.DocumentName:
-                        return DefinitionBucket.DefinitionItem.Properties[AbstractReferenceFinder.ContainingTypeInfoPropertyName];
+                        return DefinitionBucket.DefinitionItem.Properties[
+                            AbstractReferenceFinder.ContainingTypeInfoPropertyName
+                        ];
                     case StandardTableKeyNames.Text:
                         return DefinitionBucket.DefinitionItem.DisplayParts.JoinText();
                     case StandardTableKeyNames.ItemOrigin:
@@ -47,19 +50,29 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 return null;
             }
 
-            public bool CanNavigateTo()
-                => true;
+            public bool CanNavigateTo() => true;
 
-            public async Task NavigateToAsync(NavigationOptions options, CancellationToken cancellationToken)
+            public async Task NavigateToAsync(
+                NavigationOptions options,
+                CancellationToken cancellationToken
+            )
             {
-                var location = await DefinitionBucket.DefinitionItem.GetNavigableLocationAsync(
-                    Presenter._workspace, cancellationToken).ConfigureAwait(false);
-                await location.TryNavigateToAsync(_threadingContext, options, cancellationToken).ConfigureAwait(false);
+                var location = await DefinitionBucket
+                    .DefinitionItem.GetNavigableLocationAsync(
+                        Presenter._workspace,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
+                await location
+                    .TryNavigateToAsync(_threadingContext, options, cancellationToken)
+                    .ConfigureAwait(false);
             }
 
-            protected override IList<Inline> CreateLineTextInlines()
-                => DefinitionBucket.DefinitionItem.DisplayParts
-                    .ToInlines(Presenter.ClassificationFormatMap, Presenter.TypeMap);
+            protected override IList<Inline> CreateLineTextInlines() =>
+                DefinitionBucket.DefinitionItem.DisplayParts.ToInlines(
+                    Presenter.ClassificationFormatMap,
+                    Presenter.TypeMap
+                );
         }
     }
 }

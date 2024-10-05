@@ -30,13 +30,19 @@ namespace System.Runtime.InteropServices.Tests
             yield return new object[] { typeof(IGenericInterface<string>) };
 
             yield return new object[] { typeof(GenericClass<>) };
-            yield return new object[] { typeof(GenericClass<>).GetTypeInfo().GenericTypeParameters[0] };
+            yield return new object[]
+            {
+                typeof(GenericClass<>).GetTypeInfo().GenericTypeParameters[0],
+            };
 
             yield return new object[] { typeof(ClassWithGuidAttribute) };
 
             if (PlatformDetection.IsReflectionEmitSupported)
             {
-                AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Assembly"), AssemblyBuilderAccess.RunAndCollect);
+                AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                    new AssemblyName("Assembly"),
+                    AssemblyBuilderAccess.RunAndCollect
+                );
                 ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
                 TypeBuilder typeBuilder = moduleBuilder.DefineType("Type");
                 Type collectibleType = typeBuilder.CreateType();
@@ -72,16 +78,28 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void GenerateGuidForType_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("type", () => Marshal.GenerateGuidForType(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => Marshal.GenerateGuidForType(null)
+            );
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void GenerateGuidForType_NotRuntimeType_ThrowsArgumentException()
         {
-            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Assembly"), AssemblyBuilderAccess.Run);
+            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                new AssemblyName("Assembly"),
+                AssemblyBuilderAccess.Run
+            );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
             TypeBuilder typeBuilder = moduleBuilder.DefineType("Type");
-            AssertExtensions.Throws<ArgumentException>("type", () => Marshal.GenerateGuidForType(typeBuilder));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => Marshal.GenerateGuidForType(typeBuilder)
+            );
         }
     }
 }

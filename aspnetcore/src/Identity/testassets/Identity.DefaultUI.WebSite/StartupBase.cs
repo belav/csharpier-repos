@@ -37,9 +37,11 @@ public class StartupBase<TUser, TContext>
                 //    Configuration.GetConnectionString("DefaultConnection"),
                 //    sqlOptions => sqlOptions.MigrationsAssembly("Identity.DefaultUI.WebSite")
                 //));
-                .UseSqlite("DataSource=:memory:"));
+                .UseSqlite("DataSource=:memory:")
+        );
 
-        services.AddDefaultIdentity<TUser>()
+        services
+            .AddDefaultIdentity<TUser>()
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<TContext>();
 
@@ -109,7 +111,9 @@ public class StartupBase<TUser, TContext>
                 case NullFileProvider:
                     break;
                 default:
-                    throw new InvalidOperationException($"Unknown provider '{currentProvider.GetType().Name}'");
+                    throw new InvalidOperationException(
+                        $"Unknown provider '{currentProvider.GetType().Name}'"
+                    );
             }
         }
     }

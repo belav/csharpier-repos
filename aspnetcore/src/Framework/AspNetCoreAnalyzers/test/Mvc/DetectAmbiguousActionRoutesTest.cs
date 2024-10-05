@@ -12,7 +12,8 @@ public partial class DetectAmbiguousActionRoutesTest
     public async Task SameRoutes_DifferentAction_HasDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 public class WeatherForecastController : ControllerBase
@@ -31,9 +32,14 @@ internal class Program
 }
 ";
 
-        var expectedDiagnostics = new[] {
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute).WithArguments("/a").WithLocation(0),
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute).WithArguments("/a").WithLocation(1)
+        var expectedDiagnostics = new[]
+        {
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
+                .WithArguments("/a")
+                .WithLocation(0),
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
+                .WithArguments("/a")
+                .WithLocation(1),
         };
 
         // Act & Assert
@@ -44,7 +50,8 @@ internal class Program
     public async Task ActionReplacementToken_DifferentActionNames_NoDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 public class WeatherForecastController : ControllerBase
@@ -71,7 +78,8 @@ internal class Program
     public async Task ActionReplacementToken_SameActionName_HasDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 public class WeatherForecastController : ControllerBase
@@ -90,9 +98,14 @@ internal class Program
 }
 ";
 
-        var expectedDiagnostics = new[] {
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute).WithArguments("[action]").WithLocation(0),
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute).WithArguments("[action]").WithLocation(1)
+        var expectedDiagnostics = new[]
+        {
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
+                .WithArguments("[action]")
+                .WithLocation(0),
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
+                .WithArguments("[action]")
+                .WithLocation(1),
         };
 
         // Act & Assert
@@ -103,7 +116,8 @@ internal class Program
     public async Task ActionReplacementToken_ActionNameAttribute_HasDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 public class WeatherForecastController : ControllerBase
@@ -123,9 +137,14 @@ internal class Program
 }
 ";
 
-        var expectedDiagnostics = new[] {
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute).WithArguments("[action]").WithLocation(0),
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute).WithArguments("[action]").WithLocation(1)
+        var expectedDiagnostics = new[]
+        {
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
+                .WithArguments("[action]")
+                .WithLocation(0),
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
+                .WithArguments("[action]")
+                .WithLocation(1),
         };
 
         // Act & Assert
@@ -136,7 +155,8 @@ internal class Program
     public async Task ActionReplacementToken_ActionNameAttributeNullValue_NoDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 public class WeatherForecastController : ControllerBase
@@ -164,7 +184,8 @@ internal class Program
     public async Task ActionReplacementToken_OnController_NoDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 [Route(""[controller]/[action]"")]
@@ -192,7 +213,8 @@ internal class Program
     public async Task ActionReplacementToken_OnBaseController_NoDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 [Route(""[controller]/[action]"")]
@@ -223,7 +245,8 @@ internal class Program
     public async Task ActionReplacementToken_OnBaseControllerButOverridden_HasDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 [Route(""[controller]/[action]"")]
@@ -247,9 +270,14 @@ internal class Program
 }
 ";
 
-        var expectedDiagnostics = new[] {
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute).WithArguments("{i}").WithLocation(0),
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute).WithArguments("{i}").WithLocation(1)
+        var expectedDiagnostics = new[]
+        {
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
+                .WithArguments("{i}")
+                .WithLocation(0),
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
+                .WithArguments("{i}")
+                .WithLocation(1),
         };
 
         // Act & Assert
@@ -260,7 +288,8 @@ internal class Program
     public async Task ActionReplacementToken_OnController_ActionName_NoDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 [Route(""[controller]/[action]"")]
@@ -289,7 +318,8 @@ internal class Program
     public async Task ActionReplacementToken_OnController_ActionNameOnBase_NoDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 public abstract class MyControllerBase : ControllerBase
@@ -322,7 +352,8 @@ internal class Program
     public async Task MixedRoutes_DifferentAction_HasDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 public class WeatherForecastController : ControllerBase
@@ -350,12 +381,23 @@ internal class Program
 }
 ";
 
-        var expectedDiagnostics = new[] {
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute).WithArguments("/a").WithLocation(0),
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute).WithArguments("/a").WithLocation(1),
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute).WithArguments("/a").WithLocation(2),
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute).WithArguments("/b").WithLocation(3),
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute).WithArguments("/b").WithLocation(4)
+        var expectedDiagnostics = new[]
+        {
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
+                .WithArguments("/a")
+                .WithLocation(0),
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
+                .WithArguments("/a")
+                .WithLocation(1),
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
+                .WithArguments("/a")
+                .WithLocation(2),
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
+                .WithArguments("/b")
+                .WithLocation(3),
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
+                .WithArguments("/b")
+                .WithLocation(4),
         };
 
         // Act & Assert
@@ -366,7 +408,8 @@ internal class Program
     public async Task SameRoutes_DifferentAction_HostAttribute_NoDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
@@ -395,7 +438,8 @@ internal class Program
     public async Task SameRoutes_SameAction_HostAttribute_HasDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
@@ -414,9 +458,14 @@ internal class Program
 }
 ";
 
-        var expectedDiagnostics = new[] {
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute).WithArguments("/a").WithLocation(0),
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute).WithArguments("/a").WithLocation(1)
+        var expectedDiagnostics = new[]
+        {
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
+                .WithArguments("/a")
+                .WithLocation(0),
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
+                .WithArguments("/a")
+                .WithLocation(1),
         };
 
         // Act & Assert
@@ -427,7 +476,8 @@ internal class Program
     public async Task SameRoutes_DifferentAction_AuthorizeAttribute_HasDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
@@ -448,9 +498,14 @@ internal class Program
 }
 ";
 
-        var expectedDiagnostics = new[] {
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute).WithArguments("/a").WithLocation(0),
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute).WithArguments("/a").WithLocation(1)
+        var expectedDiagnostics = new[]
+        {
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
+                .WithArguments("/a")
+                .WithLocation(0),
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
+                .WithArguments("/a")
+                .WithLocation(1),
         };
 
         // Act & Assert
@@ -461,7 +516,8 @@ internal class Program
     public async Task SameRoutes_SameAction_AuthorizeAttribute_HasDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
@@ -480,9 +536,14 @@ internal class Program
 }
 ";
 
-        var expectedDiagnostics = new[] {
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute).WithArguments("/a").WithLocation(0),
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute).WithArguments("/a").WithLocation(1)
+        var expectedDiagnostics = new[]
+        {
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
+                .WithArguments("/a")
+                .WithLocation(0),
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
+                .WithArguments("/a")
+                .WithLocation(1),
         };
 
         // Act & Assert
@@ -493,7 +554,8 @@ internal class Program
     public async Task DifferentRoutes_DifferentAction_NoDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 public class WeatherForecastController : ControllerBase
@@ -520,7 +582,8 @@ internal class Program
     public async Task SameRoute_DifferentMethods_NoDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 public class WeatherForecastController : ControllerBase
@@ -547,7 +610,8 @@ internal class Program
     public async Task SameRoute_DifferentMethods_Route_NoDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 public class WeatherForecastController : ControllerBase
@@ -574,7 +638,8 @@ internal class Program
     public async Task DuplicateRoutes_SameAction_HasDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 public class WeatherForecastController : ControllerBase
@@ -591,9 +656,14 @@ internal class Program
 }
 ";
 
-        var expectedDiagnostics = new[] {
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute).WithArguments("/").WithLocation(0),
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute).WithArguments("/").WithLocation(1)
+        var expectedDiagnostics = new[]
+        {
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
+                .WithArguments("/")
+                .WithLocation(0),
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
+                .WithArguments("/")
+                .WithLocation(1),
         };
 
         // Act & Assert
@@ -604,7 +674,8 @@ internal class Program
     public async Task DuplicateRoutes_HasHttpAttributes_NoDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 public class MyController : Controller
@@ -635,7 +706,8 @@ internal class Program
     public async Task DuplicateRoutes_HasDuplicateHttpAttributes_HasDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 public class MyController : Controller
@@ -656,9 +728,14 @@ internal class Program
 }
 ";
 
-        var expectedDiagnostics = new[] {
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute).WithArguments("Person").WithLocation(0),
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute).WithArguments("Person").WithLocation(1)
+        var expectedDiagnostics = new[]
+        {
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
+                .WithArguments("Person")
+                .WithLocation(0),
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
+                .WithArguments("Person")
+                .WithLocation(1),
         };
 
         // Act & Assert
@@ -669,7 +746,8 @@ internal class Program
     public async Task DuplicateRoutes_RouteAndGetVsGet_HasDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 public class MyController : Controller
@@ -689,13 +767,17 @@ internal class Program
 }
 ";
 
-        var expectedDiagnostics = new[] {
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute).WithArguments("Person").WithLocation(0),
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute).WithArguments("Person").WithLocation(1)
+        var expectedDiagnostics = new[]
+        {
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
+                .WithArguments("Person")
+                .WithLocation(0),
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
+                .WithArguments("Person")
+                .WithLocation(1),
         };
 
         // Act & Assert
         await VerifyCS.VerifyAnalyzerAsync(source, expectedDiagnostics);
     }
 }
-

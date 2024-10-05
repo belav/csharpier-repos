@@ -27,54 +27,44 @@ public partial class CosmosShapedQueryCompilingExpressionVisitor
 
                     var jObjectVariable = Variable(
                         typeof(JObject),
-                        "jObject" + _currentEntityIndex);
+                        "jObject" + _currentEntityIndex
+                    );
                     var variables = new List<ParameterExpression> { jObjectVariable };
 
                     var expressions = new List<Expression>
                     {
-                        Assign(
-                            jObjectVariable,
-                            TypeAs(
-                                valueBufferExpression,
-                                typeof(JObject))),
+                        Assign(jObjectVariable, TypeAs(valueBufferExpression, typeof(JObject))),
                         Condition(
                             Equal(jObjectVariable, Constant(null, jObjectVariable.Type)),
                             Constant(null, shaperExpression.Type),
-                            shaperExpression)
+                            shaperExpression
+                        ),
                     };
 
-                    return Block(
-                        shaperExpression.Type,
-                        variables,
-                        expressions);
+                    return Block(shaperExpression.Type, variables, expressions);
                 }
 
                 case CollectionShaperExpression collectionShaperExpression:
                 {
                     _currentEntityIndex++;
 
-                    var jArrayVariable = Variable(
-                        typeof(JArray),
-                        "jArray" + _currentEntityIndex);
+                    var jArrayVariable = Variable(typeof(JArray), "jArray" + _currentEntityIndex);
                     var variables = new List<ParameterExpression> { jArrayVariable };
 
                     var expressions = new List<Expression>
                     {
                         Assign(
                             jArrayVariable,
-                            TypeAs(
-                                collectionShaperExpression.Projection,
-                                typeof(JArray))),
+                            TypeAs(collectionShaperExpression.Projection, typeof(JArray))
+                        ),
                         Condition(
                             Equal(jArrayVariable, Constant(null, jArrayVariable.Type)),
                             Constant(null, collectionShaperExpression.Type),
-                            collectionShaperExpression)
+                            collectionShaperExpression
+                        ),
                     };
 
-                    return Block(
-                        collectionShaperExpression.Type,
-                        variables,
-                        expressions);
+                    return Block(collectionShaperExpression.Type, variables, expressions);
                 }
             }
 

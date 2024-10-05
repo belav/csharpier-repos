@@ -55,15 +55,15 @@ internal class RootCommand : CommandBase
     protected override int Execute(string[] _)
     {
         var commands = _args!.TakeWhile(a => a[0] != '-').ToList();
-        if (_help!.HasValue()
-            || ShouldHelp(commands))
+        if (_help!.HasValue() || ShouldHelp(commands))
         {
             return ShowHelp(_help.HasValue(), commands);
         }
 
         var (projectFile, startupProjectFile) = ResolveProjects(
             _project!.Value(),
-            _startupProject!.Value());
+            _startupProject!.Value()
+        );
 
         Reporter.WriteVerbose(Resources.UsingProject(projectFile));
         Reporter.WriteVerbose(Resources.UsingStartupProject(startupProjectFile));
@@ -74,7 +74,8 @@ internal class RootCommand : CommandBase
             _msbuildprojectextensionspath.Value(),
             _framework!.Value(),
             _configuration!.Value(),
-            _runtime!.Value());
+            _runtime!.Value()
+        );
 
         if (!_noBuild!.HasValue())
         {
@@ -88,17 +89,19 @@ internal class RootCommand : CommandBase
 
         var toolsPath = Path.Combine(
             Path.GetDirectoryName(typeof(Program).Assembly.Location)!,
-            "tools");
+            "tools"
+        );
 
-        var targetDir = Path.GetFullPath(Path.Combine(startupProject.ProjectDir!, startupProject.OutputPath!));
+        var targetDir = Path.GetFullPath(
+            Path.Combine(startupProject.ProjectDir!, startupProject.OutputPath!)
+        );
         var targetPath = Path.Combine(targetDir, project.TargetFileName!);
         var startupTargetPath = Path.Combine(targetDir, startupProject.TargetFileName!);
-        var depsFile = Path.Combine(
-            targetDir,
-            startupProject.AssemblyName + ".deps.json");
+        var depsFile = Path.Combine(targetDir, startupProject.AssemblyName + ".deps.json");
         var runtimeConfig = Path.Combine(
             targetDir,
-            startupProject.AssemblyName + ".runtimeconfig.json");
+            startupProject.AssemblyName + ".runtimeconfig.json"
+        );
         var projectAssetsFile = startupProject.ProjectAssetsFile;
 
         var targetFramework = new FrameworkName(startupProject.TargetFrameworkMoniker!);
@@ -107,22 +110,31 @@ internal class RootCommand : CommandBase
             executable = Path.Combine(
                 toolsPath,
                 "net461",
-                startupProject.PlatformTarget == "x86"
-                    ? "win-x86"
-                    : "any",
-                "ef.exe");
+                startupProject.PlatformTarget == "x86" ? "win-x86" : "any",
+                "ef.exe"
+            );
         }
         else if (targetFramework.Identifier == ".NETCoreApp")
         {
             if (targetFramework.Version < new Version(2, 0))
             {
                 throw new CommandException(
-                    Resources.NETCoreApp1StartupProject(startupProject.ProjectName, targetFramework.Version));
+                    Resources.NETCoreApp1StartupProject(
+                        startupProject.ProjectName,
+                        targetFramework.Version
+                    )
+                );
             }
 
             var targetPlatformIdentifier = startupProject.TargetPlatformIdentifier!;
-            if (targetPlatformIdentifier.Length != 0
-                && !string.Equals(targetPlatformIdentifier, "Windows", StringComparison.OrdinalIgnoreCase))
+            if (
+                targetPlatformIdentifier.Length != 0
+                && !string.Equals(
+                    targetPlatformIdentifier,
+                    "Windows",
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 executable = Path.Combine(
                     toolsPath,
@@ -131,9 +143,10 @@ internal class RootCommand : CommandBase
                     {
                         "x86" => "win-x86",
                         "ARM64" => "win-arm64",
-                        _ => "any"
+                        _ => "any",
                     },
-                    "ef.exe");
+                    "ef.exe"
+                );
             }
 
             executable = "dotnet";
@@ -146,7 +159,10 @@ internal class RootCommand : CommandBase
                 using var file = File.OpenRead(projectAssetsFile);
                 using var reader = JsonDocument.Parse(file);
                 var projectAssets = reader.RootElement;
-                var packageFolders = projectAssets.GetProperty("packageFolders").EnumerateObject().Select(p => p.Name);
+                var packageFolders = projectAssets
+                    .GetProperty("packageFolders")
+                    .EnumerateObject()
+                    .Select(p => p.Name);
 
                 foreach (var packageFolder in packageFolders)
                 {
@@ -170,12 +186,18 @@ internal class RootCommand : CommandBase
         }
         else if (targetFramework.Identifier == ".NETStandard")
         {
-            throw new CommandException(Resources.NETStandardStartupProject(startupProject.ProjectName));
+            throw new CommandException(
+                Resources.NETStandardStartupProject(startupProject.ProjectName)
+            );
         }
         else
         {
             throw new CommandException(
-                Resources.UnsupportedFramework(startupProject.ProjectName, targetFramework.Identifier));
+                Resources.UnsupportedFramework(
+                    startupProject.ProjectName,
+                    targetFramework.Identifier
+                )
+            );
         }
 
         args.AddRange(_args!);
@@ -202,8 +224,10 @@ internal class RootCommand : CommandBase
             args.Add(_configuration.Value()!);
         }
 
-        if (string.Equals(project.Nullable, "enable", StringComparison.OrdinalIgnoreCase)
-            || string.Equals(project.Nullable, "annotations", StringComparison.OrdinalIgnoreCase))
+        if (
+            string.Equals(project.Nullable, "enable", StringComparison.OrdinalIgnoreCase)
+            || string.Equals(project.Nullable, "annotations", StringComparison.OrdinalIgnoreCase)
+        )
         {
             args.Add("--nullable");
         }
@@ -235,9 +259,7 @@ internal class RootCommand : CommandBase
         return Exe.Run(executable, args, startupProject.ProjectDir);
     }
 
-    private static (string, string) ResolveProjects(
-        string? projectPath,
-        string? startupProjectPath)
+    private static (string, string) ResolveProjects(string? projectPath, string? startupProjectPath)
     {
         var projects = ResolveProjects(projectPath);
         var startupProjects = ResolveProjects(startupProjectPath);
@@ -247,7 +269,8 @@ internal class RootCommand : CommandBase
             throw new CommandException(
                 projectPath != null
                     ? Resources.MultipleProjectsInDirectory(projectPath)
-                    : Resources.MultipleProjects);
+                    : Resources.MultipleProjects
+            );
         }
 
         if (startupProjects.Count > 1)
@@ -255,23 +278,21 @@ internal class RootCommand : CommandBase
             throw new CommandException(
                 startupProjectPath != null
                     ? Resources.MultipleProjectsInDirectory(startupProjectPath)
-                    : Resources.MultipleStartupProjects);
+                    : Resources.MultipleStartupProjects
+            );
         }
 
-        if (projectPath != null
-            && projects.Count == 0)
+        if (projectPath != null && projects.Count == 0)
         {
             throw new CommandException(Resources.NoProjectInDirectory(projectPath));
         }
 
-        if (startupProjectPath != null
-            && startupProjects.Count == 0)
+        if (startupProjectPath != null && startupProjects.Count == 0)
         {
             throw new CommandException(Resources.NoProjectInDirectory(startupProjectPath));
         }
 
-        if (projectPath == null
-            && startupProjectPath == null)
+        if (projectPath == null && startupProjectPath == null)
         {
             return projects.Count == 0
                 ? throw new CommandException(Resources.NoProject)
@@ -307,23 +328,32 @@ internal class RootCommand : CommandBase
             }
         }
 
-        var projectFiles = Directory.EnumerateFiles(path, "*.*proj", SearchOption.TopDirectoryOnly)
-            .Where(f => !string.Equals(Path.GetExtension(f), ".xproj", StringComparison.OrdinalIgnoreCase))
-            .Take(2).ToList();
+        var projectFiles = Directory
+            .EnumerateFiles(path, "*.*proj", SearchOption.TopDirectoryOnly)
+            .Where(f =>
+                !string.Equals(Path.GetExtension(f), ".xproj", StringComparison.OrdinalIgnoreCase)
+            )
+            .Take(2)
+            .ToList();
 
         return projectFiles;
     }
 
-    private static string GetVersion()
-        => typeof(RootCommand).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()!
+    private static string GetVersion() =>
+        typeof(RootCommand)
+            .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()!
             .InformationalVersion;
 
-    private static bool ShouldHelp(IReadOnlyList<string> commands)
-        => commands.Count == 0
-            || (commands.Count == 1
-                && (commands[0] == "database"
-                    || commands[0] == "dbcontext"
-                    || commands[0] == "migrations"));
+    private static bool ShouldHelp(IReadOnlyList<string> commands) =>
+        commands.Count == 0
+        || (
+            commands.Count == 1
+            && (
+                commands[0] == "database"
+                || commands[0] == "dbcontext"
+                || commands[0] == "migrations"
+            )
+        );
 
     private int ShowHelp(bool help, IEnumerable<string> commands)
     {

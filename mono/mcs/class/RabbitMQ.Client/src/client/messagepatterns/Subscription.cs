@@ -55,15 +55,15 @@
 //
 //---------------------------------------------------------------------------
 using System;
-using System.IO;
 using System.Collections;
-
+using System.IO;
 using RabbitMQ.Client;
-using RabbitMQ.Client.Exceptions;
 using RabbitMQ.Client.Events;
+using RabbitMQ.Client.Exceptions;
 using RabbitMQ.Util;
 
-namespace RabbitMQ.Client.MessagePatterns {
+namespace RabbitMQ.Client.MessagePatterns
+{
     ///<summary>Manages a subscription to a queue or exchange.</summary>
     ///<remarks>
     ///<para>
@@ -91,11 +91,15 @@ namespace RabbitMQ.Client.MessagePatterns {
     /// called with the correct parameters.
     ///</para>
     ///</remarks>
-    public class Subscription: IEnumerable, IEnumerator, IDisposable {
+    public class Subscription : IEnumerable, IEnumerator, IDisposable
+    {
         protected IModel m_model;
 
         ///<summary>Retrieve the IModel our subscription is carried by.</summary>
-        public IModel Model { get { return m_model; } }
+        public IModel Model
+        {
+            get { return m_model; }
+        }
 
         protected string m_queueName;
         protected bool m_noAck;
@@ -108,23 +112,38 @@ namespace RabbitMQ.Client.MessagePatterns {
         ///<summary>Retrieve the queue name we have subscribed to. May
         ///be a server-generated name, depending on how the
         ///Subscription was constructed.</summary>
-        public string QueueName { get { return m_queueName; } }
+        public string QueueName
+        {
+            get { return m_queueName; }
+        }
+
         ///<summary>Retrieve the IBasicConsumer that is receiving the
         ///messages from the server for us. Normally, you will not
         ///need to access this property - use Next() and friends
         ///instead.</summary>
-        public IBasicConsumer Consumer { get { return m_consumer; } }
+        public IBasicConsumer Consumer
+        {
+            get { return m_consumer; }
+        }
+
         ///<summary>Retrieve the consumer-tag that this subscription
         ///is using. Will usually be a server-generated
         ///name.</summary>
-        public string ConsumerTag { get { return m_consumerTag; } }
+        public string ConsumerTag
+        {
+            get { return m_consumerTag; }
+        }
+
         ///<summary>Returns true if we are in "noAck" mode, where
         ///calls to Ack() will be no-ops, and where the server acks
         ///messages before they are delivered to us. Returns false if
         ///we are in a mode where calls to Ack() are required, and
         ///where such calls will actually send an acknowledgement
         ///message across the network to the server.</summary>
-        public bool NoAck { get { return m_noAck; } }
+        public bool NoAck
+        {
+            get { return m_noAck; }
+        }
 
         protected BasicDeliverEventArgs m_latestEvent;
 
@@ -133,7 +152,10 @@ namespace RabbitMQ.Client.MessagePatterns {
         ///end of the subscription has been reached, or the most
         ///recent value has already been Ack()ed. See also the
         ///documentation for Ack().</summary>
-        public BasicDeliverEventArgs LatestEvent { get { return m_latestEvent; } }
+        public BasicDeliverEventArgs LatestEvent
+        {
+            get { return m_latestEvent; }
+        }
 
         ///<summary>Creates a new Subscription in "noAck" mode,
         ///consuming from a fresh, exclusive, autodelete, anonymous
@@ -141,8 +163,12 @@ namespace RabbitMQ.Client.MessagePatterns {
         ///QueueName property of the Subscription. After creating the
         ///queue, the queue is bound to the named exchange, using
         ///Bind() with the given routingKey bind parameter.</summary>
-        public Subscription(IModel model, string exchangeName,
-                            string exchangeType, string routingKey)
+        public Subscription(
+            IModel model,
+            string exchangeName,
+            string exchangeType,
+            string routingKey
+        )
             : this(model)
         {
             Bind(exchangeName, exchangeType, routingKey);
@@ -153,7 +179,7 @@ namespace RabbitMQ.Client.MessagePatterns {
         ///queue. The name of the queue can be retrieved using the
         ///QueueName property of the Subscription.</summary>
         public Subscription(IModel model)
-            : this(model, null) {}
+            : this(model, null) { }
 
         ///<summary>Creates a new Subscription in "noAck" mode,
         ///consuming from a named queue. If the queueName parameter is
@@ -164,8 +190,13 @@ namespace RabbitMQ.Client.MessagePatterns {
         ///and starting the consumer, the queue is bound to the named
         ///exchange, using Bind() with the given routingKey bind
         ///parameter.</summary>
-        public Subscription(IModel model, string queueName, string exchangeName,
-                            string exchangeType, string routingKey)
+        public Subscription(
+            IModel model,
+            string queueName,
+            string exchangeName,
+            string exchangeType,
+            string routingKey
+        )
             : this(model, queueName)
         {
             Bind(exchangeName, exchangeType, routingKey);
@@ -178,7 +209,7 @@ namespace RabbitMQ.Client.MessagePatterns {
         ///declared using IModel.QueueDeclare() before
         ///IModel.BasicConsume() is called.</summary>
         public Subscription(IModel model, string queueName)
-            : this(model, queueName, true) {}
+            : this(model, queueName, true) { }
 
         ///<summary>Creates a new Subscription, with full control over
         ///both "noAck" mode and the name of the queue (which, if null
@@ -187,8 +218,14 @@ namespace RabbitMQ.Client.MessagePatterns {
         ///overloads). After declaring the queue and starting the
         ///consumer, the queue is bound to the named exchange, using
         ///Bind() with the given routingKey bind parameter.</summary>
-        public Subscription(IModel model, string queueName, bool noAck,
-                            string exchangeName, string exchangeType, string routingKey)
+        public Subscription(
+            IModel model,
+            string queueName,
+            bool noAck,
+            string exchangeName,
+            string exchangeType,
+            string routingKey
+        )
             : this(model, queueName, noAck)
         {
             Bind(exchangeName, exchangeType, routingKey);
@@ -202,10 +239,13 @@ namespace RabbitMQ.Client.MessagePatterns {
         public Subscription(IModel model, string queueName, bool noAck)
         {
             m_model = model;
-            if (queueName == null || queueName.Equals("")) {
+            if (queueName == null || queueName.Equals(""))
+            {
                 m_queueName = m_model.QueueDeclare();
                 m_shouldDelete = true;
-            } else {
+            }
+            else
+            {
                 m_queueName = m_model.QueueDeclare(queueName);
                 m_shouldDelete = false;
             }
@@ -223,12 +263,15 @@ namespace RabbitMQ.Client.MessagePatterns {
         ///IModel closes in any case).</summary>
         public void Close()
         {
-            try {
+            try
+            {
                 bool shouldCancelConsumer = false;
                 bool shouldDelete = false;
 
-                lock (m_consumerLock) {
-                    if (m_consumer != null) {
+                lock (m_consumerLock)
+                {
+                    if (m_consumer != null)
+                    {
                         shouldCancelConsumer = true;
                         m_consumer = null;
                     }
@@ -240,15 +283,19 @@ namespace RabbitMQ.Client.MessagePatterns {
                     m_shouldDelete = false;
                 }
 
-                if (shouldCancelConsumer) {
+                if (shouldCancelConsumer)
+                {
                     m_model.BasicCancel(m_consumerTag);
                     m_consumerTag = null;
                 }
 
-                if (shouldDelete) {
+                if (shouldDelete)
+                {
                     m_model.QueueDelete(m_queueName, false, false, false);
                 }
-            } catch (OperationInterruptedException) {
+            }
+            catch (OperationInterruptedException)
+            {
                 // We don't mind, here.
             }
         }
@@ -282,7 +329,8 @@ namespace RabbitMQ.Client.MessagePatterns {
         ///null.</summary>
         public void Ack()
         {
-            if (m_latestEvent != null) {
+            if (m_latestEvent != null)
+            {
                 Ack(m_latestEvent);
             }
         }
@@ -300,15 +348,18 @@ namespace RabbitMQ.Client.MessagePatterns {
         ///</remarks>
         public void Ack(BasicDeliverEventArgs evt)
         {
-            if (evt == null) {
+            if (evt == null)
+            {
                 return;
             }
 
-            if (!m_noAck) {
+            if (!m_noAck)
+            {
                 m_model.BasicAck(evt.DeliveryTag, false);
             }
 
-            if (evt == m_latestEvent) {
+            if (evt == m_latestEvent)
+            {
                 m_latestEvent = null;
             }
         }
@@ -333,18 +384,24 @@ namespace RabbitMQ.Client.MessagePatterns {
         ///</remarks>
         public BasicDeliverEventArgs Next()
         {
-            try {
+            try
+            {
                 // Alias the pointer as otherwise it may change out
                 // from under us by the operation of Close() from
                 // another thread.
                 QueueingBasicConsumer consumer = m_consumer;
-                if (consumer == null) {
+                if (consumer == null)
+                {
                     // Closed!
                     m_latestEvent = null;
-                } else {
-                    m_latestEvent = (BasicDeliverEventArgs) consumer.Queue.Dequeue();
                 }
-            } catch (EndOfStreamException) {
+                else
+                {
+                    m_latestEvent = (BasicDeliverEventArgs)consumer.Queue.Dequeue();
+                }
+            }
+            catch (EndOfStreamException)
+            {
                 m_latestEvent = null;
             }
             return m_latestEvent;
@@ -396,23 +453,30 @@ namespace RabbitMQ.Client.MessagePatterns {
         ///</remarks>
         public bool Next(int millisecondsTimeout, out BasicDeliverEventArgs result)
         {
-            try {
+            try
+            {
                 // Alias the pointer as otherwise it may change out
                 // from under us by the operation of Close() from
                 // another thread.
                 QueueingBasicConsumer consumer = m_consumer;
-                if (consumer == null) {
+                if (consumer == null)
+                {
                     // Closed!
                     m_latestEvent = null;
-                } else {
+                }
+                else
+                {
                     object qValue;
-                    if (!consumer.Queue.Dequeue(millisecondsTimeout, out qValue)) {
+                    if (!consumer.Queue.Dequeue(millisecondsTimeout, out qValue))
+                    {
                         result = null;
                         return false;
                     }
-                    m_latestEvent = (BasicDeliverEventArgs) qValue;
+                    m_latestEvent = (BasicDeliverEventArgs)qValue;
                 }
-            } catch (EndOfStreamException) {
+            }
+            catch (EndOfStreamException)
+            {
                 m_latestEvent = null;
             }
             result = m_latestEvent;
@@ -440,9 +504,12 @@ namespace RabbitMQ.Client.MessagePatterns {
         /// called explicitly on received deliveries.
         ///</para>
         ///</remarks>
-        object IEnumerator.Current {
-            get {
-                if (m_latestEvent == null) {
+        object IEnumerator.Current
+        {
+            get
+            {
+                if (m_latestEvent == null)
+                {
                     throw new InvalidOperationException();
                 }
                 return m_latestEvent;

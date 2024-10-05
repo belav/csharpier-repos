@@ -18,15 +18,22 @@ namespace ILVerify
 {
     public class Verifier
     {
-        private Lazy<ResourceManager> _stringResourceManager =
-            new Lazy<ResourceManager>(() => new ResourceManager("ILVerification.Strings", typeof(Verifier).GetTypeInfo().Assembly));
+        private Lazy<ResourceManager> _stringResourceManager = new Lazy<ResourceManager>(
+            () =>
+                new ResourceManager(
+                    "ILVerification.Strings",
+                    typeof(Verifier).GetTypeInfo().Assembly
+                )
+        );
 
         private ILVerifyTypeSystemContext _typeSystemContext;
         private VerifierOptions _verifierOptions;
 
-        public Verifier(IResolver resolver) : this(resolver, null){ }
+        public Verifier(IResolver resolver)
+            : this(resolver, null) { }
 
-        public Verifier(IResolver resolver, VerifierOptions verifierOptions) : this(new ILVerifyTypeSystemContext(resolver), verifierOptions) { }
+        public Verifier(IResolver resolver, VerifierOptions verifierOptions)
+            : this(new ILVerifyTypeSystemContext(resolver), verifierOptions) { }
 
         internal Verifier(ILVerifyTypeSystemContext context, VerifierOptions verifierOptions)
         {
@@ -78,7 +85,11 @@ namespace ILVerify
             }
         }
 
-        public IEnumerable<VerificationResult> Verify(PEReader peReader, TypeDefinitionHandle typeHandle, bool verifyMethods = false)
+        public IEnumerable<VerificationResult> Verify(
+            PEReader peReader,
+            TypeDefinitionHandle typeHandle,
+            bool verifyMethods = false
+        )
         {
             if (peReader == null)
             {
@@ -120,7 +131,10 @@ namespace ILVerify
             }
         }
 
-        public IEnumerable<VerificationResult> Verify(PEReader peReader, MethodDefinitionHandle methodHandle)
+        public IEnumerable<VerificationResult> Verify(
+            PEReader peReader,
+            MethodDefinitionHandle methodHandle
+        )
         {
             if (peReader == null)
             {
@@ -154,7 +168,10 @@ namespace ILVerify
             }
         }
 
-        private IEnumerable<VerificationResult> VerifyMethods(EcmaModule module, IEnumerable<MethodDefinitionHandle> methodHandles)
+        private IEnumerable<VerificationResult> VerifyMethods(
+            EcmaModule module,
+            IEnumerable<MethodDefinitionHandle> methodHandles
+        )
         {
             foreach (var methodHandle in methodHandles)
             {
@@ -172,7 +189,11 @@ namespace ILVerify
             }
         }
 
-        private IEnumerable<VerificationResult> VerifyMethod(EcmaModule module, MethodIL methodIL, MethodDefinitionHandle methodHandle)
+        private IEnumerable<VerificationResult> VerifyMethod(
+            EcmaModule module,
+            MethodIL methodIL,
+            MethodDefinitionHandle methodHandle
+        )
         {
             var builder = new ArrayBuilder<VerificationResult>();
             MethodDesc method = methodIL.OwningMethod;
@@ -181,20 +202,27 @@ namespace ILVerify
             {
                 var importer = new ILImporter(method, methodIL)
                 {
-                    SanityChecks = _verifierOptions.SanityChecks
+                    SanityChecks = _verifierOptions.SanityChecks,
                 };
 
                 importer.ReportVerificationError = (args, code) =>
                 {
-                    var codeResource = _stringResourceManager.Value.GetString(code.ToString(), CultureInfo.InvariantCulture);
+                    var codeResource = _stringResourceManager.Value.GetString(
+                        code.ToString(),
+                        CultureInfo.InvariantCulture
+                    );
 
-                    builder.Add(new VerificationResult()
-                    {
-                        Code = code,
-                        Method = methodHandle,
-                        ErrorArguments = args,
-                        Message = string.IsNullOrEmpty(codeResource) ? code.ToString() : codeResource
-                    });
+                    builder.Add(
+                        new VerificationResult()
+                        {
+                            Code = code,
+                            Method = methodHandle,
+                            ErrorArguments = args,
+                            Message = string.IsNullOrEmpty(codeResource)
+                                ? code.ToString()
+                                : codeResource,
+                        }
+                    );
                 };
 
                 importer.Verify();
@@ -205,11 +233,13 @@ namespace ILVerify
             }
             catch (BadImageFormatException)
             {
-                builder.Add(new VerificationResult()
-                {
-                    Method = methodHandle,
-                    Message = "Unable to resolve token"
-                });
+                builder.Add(
+                    new VerificationResult()
+                    {
+                        Method = methodHandle,
+                        Message = "Unable to resolve token",
+                    }
+                );
             }
             catch (NotImplementedException e)
             {
@@ -236,51 +266,64 @@ namespace ILVerify
 
             void reportException(Exception e)
             {
-                builder.Add(new VerificationResult()
-                {
-                    Method = methodHandle,
-                    Message = e.Message
-                });
+                builder.Add(
+                    new VerificationResult() { Method = methodHandle, Message = e.Message }
+                );
             }
 
             void reportTypeSystemException(TypeSystemException e)
             {
-                builder.Add(new VerificationResult()
-                {
-                    ExceptionID = e.StringID,
-                    Method = methodHandle,
-                    Message = e.Message
-                });
+                builder.Add(
+                    new VerificationResult()
+                    {
+                        ExceptionID = e.StringID,
+                        Method = methodHandle,
+                        Message = e.Message,
+                    }
+                );
             }
         }
 
-        private IEnumerable<VerificationResult> VerifyType(EcmaModule module, TypeDefinitionHandle typeHandle)
+        private IEnumerable<VerificationResult> VerifyType(
+            EcmaModule module,
+            TypeDefinitionHandle typeHandle
+        )
         {
             var builder = new ArrayBuilder<VerificationResult>();
 
             try
             {
-                TypeVerifier typeVerifier = new TypeVerifier(module, typeHandle, _typeSystemContext, _verifierOptions);
+                TypeVerifier typeVerifier = new TypeVerifier(
+                    module,
+                    typeHandle,
+                    _typeSystemContext,
+                    _verifierOptions
+                );
 
                 typeVerifier.ReportVerificationError = (code, args) =>
                 {
-                    builder.Add(new VerificationResult()
-                    {
-                        Code = code,
-                        Message = $"[MD]: Error: {_stringResourceManager.Value.GetString(code.ToString(), CultureInfo.InvariantCulture)}",
-                        Args = args
-                    });
+                    builder.Add(
+                        new VerificationResult()
+                        {
+                            Code = code,
+                            Message =
+                                $"[MD]: Error: {_stringResourceManager.Value.GetString(code.ToString(), CultureInfo.InvariantCulture)}",
+                            Args = args,
+                        }
+                    );
                 };
 
                 typeVerifier.Verify();
             }
             catch (BadImageFormatException)
             {
-                builder.Add(new VerificationResult()
-                {
-                    Type = typeHandle,
-                    Message = "Unable to resolve token"
-                });
+                builder.Add(
+                    new VerificationResult()
+                    {
+                        Type = typeHandle,
+                        Message = "Unable to resolve token",
+                    }
+                );
             }
             catch (NotImplementedException e)
             {
@@ -307,11 +350,7 @@ namespace ILVerify
 
             void reportException(Exception e)
             {
-                builder.Add(new VerificationResult()
-                {
-                    Type = typeHandle,
-                    Message = e.Message
-                });
+                builder.Add(new VerificationResult() { Type = typeHandle, Message = e.Message });
             }
         }
 

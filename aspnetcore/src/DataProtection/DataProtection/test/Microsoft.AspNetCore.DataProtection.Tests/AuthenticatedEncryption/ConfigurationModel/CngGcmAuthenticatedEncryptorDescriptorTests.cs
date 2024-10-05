@@ -12,19 +12,26 @@ public class CngGcmAuthenticatedEncryptorDescriptorTests
     {
         // Arrange
         var masterKey = Convert.ToBase64String(Encoding.UTF8.GetBytes("[PLACEHOLDER]"));
-        var descriptor = new CngGcmAuthenticatedEncryptorDescriptor(new CngGcmAuthenticatedEncryptorConfiguration()
-        {
-            EncryptionAlgorithm = "enc-alg",
-            EncryptionAlgorithmKeySize = 2048,
-            EncryptionAlgorithmProvider = "enc-alg-prov"
-        }, masterKey.ToSecret());
+        var descriptor = new CngGcmAuthenticatedEncryptorDescriptor(
+            new CngGcmAuthenticatedEncryptorConfiguration()
+            {
+                EncryptionAlgorithm = "enc-alg",
+                EncryptionAlgorithmKeySize = 2048,
+                EncryptionAlgorithmProvider = "enc-alg-prov",
+            },
+            masterKey.ToSecret()
+        );
 
         // Act
         var retVal = descriptor.ExportToXml();
 
         // Assert
-        Assert.Equal(typeof(CngGcmAuthenticatedEncryptorDescriptorDeserializer), retVal.DeserializerType);
-        var expectedXml = $@"
+        Assert.Equal(
+            typeof(CngGcmAuthenticatedEncryptorDescriptorDeserializer),
+            retVal.DeserializerType
+        );
+        var expectedXml =
+            $@"
                 <descriptor>
                   <encryption algorithm='enc-alg' keyLength='2048' provider='enc-alg-prov' />
                   <masterKey enc:requiresEncryption='true' xmlns:enc='http://schemas.asp.net/2015/03/dataProtection'>
@@ -39,18 +46,25 @@ public class CngGcmAuthenticatedEncryptorDescriptorTests
     {
         // Arrange
         var masterKey = Convert.ToBase64String(Encoding.UTF8.GetBytes("[PLACEHOLDER]"));
-        var descriptor = new CngGcmAuthenticatedEncryptorDescriptor(new CngGcmAuthenticatedEncryptorConfiguration()
-        {
-            EncryptionAlgorithm = "enc-alg",
-            EncryptionAlgorithmKeySize = 2048
-        }, masterKey.ToSecret());
+        var descriptor = new CngGcmAuthenticatedEncryptorDescriptor(
+            new CngGcmAuthenticatedEncryptorConfiguration()
+            {
+                EncryptionAlgorithm = "enc-alg",
+                EncryptionAlgorithmKeySize = 2048,
+            },
+            masterKey.ToSecret()
+        );
 
         // Act
         var retVal = descriptor.ExportToXml();
 
         // Assert
-        Assert.Equal(typeof(CngGcmAuthenticatedEncryptorDescriptorDeserializer), retVal.DeserializerType);
-        var expectedXml = $@"
+        Assert.Equal(
+            typeof(CngGcmAuthenticatedEncryptorDescriptorDeserializer),
+            retVal.DeserializerType
+        );
+        var expectedXml =
+            $@"
                 <descriptor>
                   <encryption algorithm='enc-alg' keyLength='2048' />
                   <masterKey enc:requiresEncryption='true' xmlns:enc='http://schemas.asp.net/2015/03/dataProtection'>

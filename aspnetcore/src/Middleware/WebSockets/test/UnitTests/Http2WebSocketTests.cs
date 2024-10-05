@@ -26,22 +26,24 @@ public class Http2WebSocketTests
                     app.Run(httpContext =>
                     {
                         Assert.True(httpContext.WebSockets.IsWebSocketRequest);
-                        Assert.Equal(new[] { "p1", "p2" }, httpContext.WebSockets.WebSocketRequestedProtocols);
+                        Assert.Equal(
+                            new[] { "p1", "p2" },
+                            httpContext.WebSockets.WebSocketRequestedProtocols
+                        );
                         return httpContext.WebSockets.AcceptWebSocketAsync("p2");
                     });
                 });
-            }).Start();
+            })
+            .Start();
 
         var testServer = host.GetTestServer();
 
         var result = await testServer.SendAsync(httpContext =>
         {
             httpContext.Request.Method = HttpMethods.Connect;
-            httpContext.Features.Set<IHttpExtendedConnectFeature>(new ConnectFeature()
-            {
-                IsExtendedConnect = true,
-                Protocol = "WebSocket",
-            });
+            httpContext.Features.Set<IHttpExtendedConnectFeature>(
+                new ConnectFeature() { IsExtendedConnect = true, Protocol = "WebSocket" }
+            );
             httpContext.Request.Headers.SecWebSocketVersion = Constants.Headers.SupportedVersion;
             httpContext.Request.Headers.SecWebSocketProtocol = "p1, p2";
         });

@@ -15,6 +15,7 @@ namespace System.Numerics
         /// The normal vector of the Plane.
         /// </summary>
         public Vector3 Normal;
+
         /// <summary>
         /// The distance of the Plane along its normal from the origin.
         /// </summary>
@@ -47,7 +48,7 @@ namespace System.Numerics
         /// <summary>
         /// Constructs a Plane from the given Vector4.
         /// </summary>
-        /// <param name="value">A vector whose first 3 elements describe the normal vector, 
+        /// <param name="value">A vector whose first 3 elements describe the normal vector,
         /// and whose W component defines the distance along that normal from the origin.</param>
         public Plane(Vector4 value)
         {
@@ -98,14 +99,12 @@ namespace System.Numerics
                 float ls = nx * nx + ny * ny + nz * nz;
                 float invNorm = 1.0f / (float)Math.Sqrt((double)ls);
 
-                Vector3 normal = new Vector3(
-                    nx * invNorm,
-                    ny * invNorm,
-                    nz * invNorm);
+                Vector3 normal = new Vector3(nx * invNorm, ny * invNorm, nz * invNorm);
 
                 return new Plane(
                     normal,
-                    -(normal.X * point1.X + normal.Y * point1.Y + normal.Z * point1.Z));
+                    -(normal.X * point1.X + normal.Y * point1.Y + normal.Z * point1.Z)
+                );
             }
         }
 
@@ -127,13 +126,14 @@ namespace System.Numerics
                     return value;
                 }
                 float normalLength = (float)Math.Sqrt(normalLengthSquared);
-                return new Plane(
-                    value.Normal / normalLength,
-                    value.D / normalLength);
+                return new Plane(value.Normal / normalLength, value.D / normalLength);
             }
             else
             {
-                float f = value.Normal.X * value.Normal.X + value.Normal.Y * value.Normal.Y + value.Normal.Z * value.Normal.Z;
+                float f =
+                    value.Normal.X * value.Normal.X
+                    + value.Normal.Y * value.Normal.Y
+                    + value.Normal.Z * value.Normal.Z;
 
                 if (Math.Abs(f - 1.0f) < FLT_EPSILON)
                 {
@@ -146,14 +146,15 @@ namespace System.Numerics
                     value.Normal.X * fInv,
                     value.Normal.Y * fInv,
                     value.Normal.Z * fInv,
-                    value.D * fInv);
+                    value.D * fInv
+                );
             }
         }
 
         /// <summary>
         /// Transforms a normalized Plane by a Matrix.
         /// </summary>
-        /// <param name="plane"> The normalized Plane to transform. 
+        /// <param name="plane"> The normalized Plane to transform.
         /// This Plane must already be normalized, so that its Normal vector is of unit length, before this method is called.</param>
         /// <param name="matrix">The transformation matrix to apply to the Plane.</param>
         /// <returns>The transformed Plane.</returns>
@@ -163,13 +164,17 @@ namespace System.Numerics
             Matrix4x4 m;
             Matrix4x4.Invert(matrix, out m);
 
-            float x = plane.Normal.X, y = plane.Normal.Y, z = plane.Normal.Z, w = plane.D;
+            float x = plane.Normal.X,
+                y = plane.Normal.Y,
+                z = plane.Normal.Z,
+                w = plane.D;
 
             return new Plane(
                 x * m.M11 + y * m.M12 + z * m.M13 + w * m.M14,
                 x * m.M21 + y * m.M22 + z * m.M23 + w * m.M24,
                 x * m.M31 + y * m.M32 + z * m.M33 + w * m.M34,
-                x * m.M41 + y * m.M42 + z * m.M43 + w * m.M44);
+                x * m.M41 + y * m.M42 + z * m.M43 + w * m.M44
+            );
         }
 
         /// <summary>
@@ -209,13 +214,16 @@ namespace System.Numerics
             float m23 = yz2 + wx2;
             float m33 = 1.0f - xx2 - yy2;
 
-            float x = plane.Normal.X, y = plane.Normal.Y, z = plane.Normal.Z;
+            float x = plane.Normal.X,
+                y = plane.Normal.Y,
+                z = plane.Normal.Z;
 
             return new Plane(
                 x * m11 + y * m21 + z * m31,
                 x * m12 + y * m22 + z * m32,
                 x * m13 + y * m23 + z * m33,
-                plane.D);
+                plane.D
+            );
         }
 
         /// <summary>
@@ -227,10 +235,10 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Dot(Plane plane, Vector4 value)
         {
-            return plane.Normal.X * value.X +
-                   plane.Normal.Y * value.Y +
-                   plane.Normal.Z * value.Z +
-                   plane.D * value.W;
+            return plane.Normal.X * value.X
+                + plane.Normal.Y * value.Y
+                + plane.Normal.Z * value.Z
+                + plane.D * value.W;
         }
 
         /// <summary>
@@ -248,10 +256,10 @@ namespace System.Numerics
             }
             else
             {
-                return plane.Normal.X * value.X +
-                       plane.Normal.Y * value.Y +
-                       plane.Normal.Z * value.Z +
-                       plane.D;
+                return plane.Normal.X * value.X
+                    + plane.Normal.Y * value.Y
+                    + plane.Normal.Z * value.Z
+                    + plane.D;
             }
         }
 
@@ -270,9 +278,9 @@ namespace System.Numerics
             }
             else
             {
-                return plane.Normal.X * value.X +
-                       plane.Normal.Y * value.Y +
-                       plane.Normal.Z * value.Z;
+                return plane.Normal.X * value.X
+                    + plane.Normal.Y * value.Y
+                    + plane.Normal.Z * value.Z;
             }
         }
 
@@ -285,10 +293,12 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool operator ==(Plane value1, Plane value2)
         {
-            return (value1.Normal.X == value2.Normal.X &&
-                    value1.Normal.Y == value2.Normal.Y &&
-                    value1.Normal.Z == value2.Normal.Z &&
-                    value1.D == value2.D);
+            return (
+                value1.Normal.X == value2.Normal.X
+                && value1.Normal.Y == value2.Normal.Y
+                && value1.Normal.Z == value2.Normal.Z
+                && value1.D == value2.D
+            );
         }
 
         /// <summary>
@@ -300,10 +310,12 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool operator !=(Plane value1, Plane value2)
         {
-            return (value1.Normal.X != value2.Normal.X ||
-                    value1.Normal.Y != value2.Normal.Y ||
-                    value1.Normal.Z != value2.Normal.Z ||
-                    value1.D != value2.D);
+            return (
+                value1.Normal.X != value2.Normal.X
+                || value1.Normal.Y != value2.Normal.Y
+                || value1.Normal.Z != value2.Normal.Z
+                || value1.D != value2.D
+            );
         }
 
         /// <summary>
@@ -320,10 +332,12 @@ namespace System.Numerics
             }
             else
             {
-                return (Normal.X == other.Normal.X &&
-                        Normal.Y == other.Normal.Y &&
-                        Normal.Z == other.Normal.Z &&
-                        D == other.D);
+                return (
+                    Normal.X == other.Normal.X
+                    && Normal.Y == other.Normal.Y
+                    && Normal.Z == other.Normal.Z
+                    && D == other.D
+                );
             }
         }
 

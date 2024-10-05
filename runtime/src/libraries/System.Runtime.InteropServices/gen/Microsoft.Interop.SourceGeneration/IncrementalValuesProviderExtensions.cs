@@ -9,24 +9,33 @@ namespace Microsoft.Interop
 {
     public static class IncrementalValuesProviderExtensions
     {
-        public static IncrementalValuesProvider<(T Left, U Right)> Zip<T, U>(this IncrementalValuesProvider<T> left, IncrementalValuesProvider<U> right)
+        public static IncrementalValuesProvider<(T Left, U Right)> Zip<T, U>(
+            this IncrementalValuesProvider<T> left,
+            IncrementalValuesProvider<U> right
+        )
         {
-            return left
-                .Collect()
+            return left.Collect()
                 .Combine(right.Collect())
-                .SelectMany((data, ct) =>
-                {
-                    if (data.Left.Length != data.Right.Length)
+                .SelectMany(
+                    (data, ct) =>
                     {
-                        throw new InvalidOperationException("The two value providers must provide the same number of values.");
+                        if (data.Left.Length != data.Right.Length)
+                        {
+                            throw new InvalidOperationException(
+                                "The two value providers must provide the same number of values."
+                            );
+                        }
+                        ImmutableArray<(T, U)>.Builder builder = ImmutableArray.CreateBuilder<(
+                            T,
+                            U
+                        )>(data.Left.Length);
+                        for (int i = 0; i < data.Left.Length; i++)
+                        {
+                            builder.Add((data.Left[i], data.Right[i]));
+                        }
+                        return builder.MoveToImmutable();
                     }
-                    ImmutableArray<(T, U)>.Builder builder = ImmutableArray.CreateBuilder<(T, U)>(data.Left.Length);
-                    for (int i = 0; i < data.Left.Length; i++)
-                    {
-                        builder.Add((data.Left[i], data.Right[i]));
-                    }
-                    return builder.MoveToImmutable();
-                });
+                );
         }
 
         /// <summary>
@@ -41,15 +50,22 @@ namespace Microsoft.Interop
         /// using this method to format the code in a separate step will reduce the amount of work the generator repeats when the
         /// output code will not change.
         /// </remarks>
-        public static IncrementalValuesProvider<TNode> SelectNormalized<TNode>(this IncrementalValuesProvider<TNode> provider)
+        public static IncrementalValuesProvider<TNode> SelectNormalized<TNode>(
+            this IncrementalValuesProvider<TNode> provider
+        )
             where TNode : SyntaxNode
         {
             return provider.Select((node, ct) => node.NormalizeWhitespace());
         }
 
-        public static (IncrementalValuesProvider<T>, IncrementalValuesProvider<T2>) Split<T, T2>(this IncrementalValuesProvider<(T, T2)> provider)
+        public static (IncrementalValuesProvider<T>, IncrementalValuesProvider<T2>) Split<T, T2>(
+            this IncrementalValuesProvider<(T, T2)> provider
+        )
         {
-            return (provider.Select(static (data, ct) => data.Item1), provider.Select(static (data, ct) => data.Item2));
+            return (
+                provider.Select(static (data, ct) => data.Item1),
+                provider.Select(static (data, ct) => data.Item2)
+            );
         }
     }
 }

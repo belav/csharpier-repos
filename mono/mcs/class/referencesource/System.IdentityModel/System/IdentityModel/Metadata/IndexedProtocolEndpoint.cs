@@ -16,9 +16,7 @@ namespace System.IdentityModel.Metadata
         /// <summary>
         /// Empty constructor.
         /// </summary>
-        public IndexedProtocolEndpoint()
-        {
-        }
+        public IndexedProtocolEndpoint() { }
 
         /// <summary>
         /// Constructs an indexed endpoint with the index number, binding, and the location.

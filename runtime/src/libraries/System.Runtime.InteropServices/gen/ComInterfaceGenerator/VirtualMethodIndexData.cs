@@ -14,20 +14,23 @@ namespace Microsoft.Interop
         bool ImplicitThisParameter,
         MarshalDirection Direction,
         bool ExceptionMarshallingDefined,
-        ExceptionMarshalling ExceptionMarshalling) : InteropAttributeData
+        ExceptionMarshalling ExceptionMarshalling
+    ) : InteropAttributeData
     {
-
-        public static VirtualMethodIndexData From(VirtualMethodIndexCompilationData virtualMethodIndex)
-            => new VirtualMethodIndexData(
+        public static VirtualMethodIndexData From(
+            VirtualMethodIndexCompilationData virtualMethodIndex
+        ) =>
+            new VirtualMethodIndexData(
                 virtualMethodIndex.Index,
                 virtualMethodIndex.ImplicitThisParameter,
                 virtualMethodIndex.Direction,
                 virtualMethodIndex.ExceptionMarshallingDefined,
-                virtualMethodIndex.ExceptionMarshalling)
+                virtualMethodIndex.ExceptionMarshalling
+            )
             {
                 IsUserDefined = virtualMethodIndex.IsUserDefined,
                 SetLastError = virtualMethodIndex.SetLastError,
-                StringMarshalling = virtualMethodIndex.StringMarshalling
+                StringMarshalling = virtualMethodIndex.StringMarshalling,
             };
     }
 
@@ -35,7 +38,8 @@ namespace Microsoft.Interop
     /// Contains the data related to a VirtualMethodIndexAttribute, with references to Roslyn symbols.
     /// Use <seealso cref="VirtualMethodIndexData"/> instead when using for incremental compilation state to avoid keeping a compilation alive
     /// </summary>
-    internal sealed record VirtualMethodIndexCompilationData(int Index) : InteropAttributeCompilationData
+    internal sealed record VirtualMethodIndexCompilationData(int Index)
+        : InteropAttributeCompilationData
     {
         public bool ImplicitThisParameter { get; init; }
 

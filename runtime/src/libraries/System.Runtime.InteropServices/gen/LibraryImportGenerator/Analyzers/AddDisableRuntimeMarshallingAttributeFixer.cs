@@ -22,48 +22,75 @@ namespace Microsoft.Interop.Analyzers
         private const string PropertiesFolderName = "Properties";
         private const string AssemblyInfoFileName = "AssemblyInfo.cs";
 
-        public override ImmutableArray<string> FixableDiagnosticIds { get; } = ImmutableArray.Create(GeneratorDiagnostics.Ids.TypeNotSupported);
+        public override ImmutableArray<string> FixableDiagnosticIds { get; } =
+            ImmutableArray.Create(GeneratorDiagnostics.Ids.TypeNotSupported);
 
         // TODO: Write a custom fix all provider
         public override FixAllProvider? GetFixAllProvider() => null;
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            List<Diagnostic> fixedDiagnostics = new(context.Diagnostics.Where(IsRequiresDiableRuntimeMarshallingDiagnostic));
+            List<Diagnostic> fixedDiagnostics =
+                new(context.Diagnostics.Where(IsRequiresDiableRuntimeMarshallingDiagnostic));
 
             if (fixedDiagnostics.Count > 0)
             {
                 context.RegisterCodeFix(
                     CodeAction.Create(
                         "Add DisableRuntimeMarshallingAttribute to the assembly.",
-                        ct => AddDisableRuntimeMarshallingAttributeApplicationToProject(context.Document.Project, ct),
-                        EquivalenceKey),
-                    fixedDiagnostics);
+                        ct =>
+                            AddDisableRuntimeMarshallingAttributeApplicationToProject(
+                                context.Document.Project,
+                                ct
+                            ),
+                        EquivalenceKey
+                    ),
+                    fixedDiagnostics
+                );
             }
 
             return Task.CompletedTask;
 
             static bool IsRequiresDiableRuntimeMarshallingDiagnostic(Diagnostic diagnostic)
             {
-                return diagnostic.Properties.ContainsKey(GeneratorDiagnosticProperties.AddDisableRuntimeMarshallingAttribute);
+                return diagnostic.Properties.ContainsKey(
+                    GeneratorDiagnosticProperties.AddDisableRuntimeMarshallingAttribute
+                );
             }
         }
 
-        private static async Task<Solution> AddDisableRuntimeMarshallingAttributeApplicationToProject(Project project, CancellationToken cancellationToken)
+        private static async Task<Solution> AddDisableRuntimeMarshallingAttributeApplicationToProject(
+            Project project,
+            CancellationToken cancellationToken
+        )
         {
             Document? assemblyInfo =
-                project.Documents.FirstOrDefault(IsPropertiesAssemblyInfo) ??
-                project.AddDocument(AssemblyInfoFileName, "", folders: new[] { PropertiesFolderName });
+                project.Documents.FirstOrDefault(IsPropertiesAssemblyInfo)
+                ?? project.AddDocument(
+                    AssemblyInfoFileName,
+                    "",
+                    folders: new[] { PropertiesFolderName }
+                );
 
-            DocumentEditor editor = await DocumentEditor.CreateAsync(assemblyInfo, cancellationToken).ConfigureAwait(false);
+            DocumentEditor editor = await DocumentEditor
+                .CreateAsync(assemblyInfo, cancellationToken)
+                .ConfigureAwait(false);
 
-            var syntaxRoot = await assemblyInfo.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var syntaxRoot = await assemblyInfo
+                .GetSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             editor.ReplaceNode(
                 syntaxRoot,
                 editor.Generator.AddAttributes(
                     syntaxRoot,
-                    editor.Generator.Attribute(editor.Generator.DottedName(TypeNames.System_Runtime_CompilerServices_DisableRuntimeMarshallingAttribute))));
+                    editor.Generator.Attribute(
+                        editor.Generator.DottedName(
+                            TypeNames.System_Runtime_CompilerServices_DisableRuntimeMarshallingAttribute
+                        )
+                    )
+                )
+            );
 
             return editor.GetChangedDocument().Project.Solution;
 

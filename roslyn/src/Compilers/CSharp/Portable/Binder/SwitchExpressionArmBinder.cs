@@ -19,33 +19,64 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly ExpressionVariableBinder _armScopeBinder;
         private readonly SwitchExpressionBinder _switchExpressionBinder;
 
-        public SwitchExpressionArmBinder(SwitchExpressionArmSyntax arm, ExpressionVariableBinder armScopeBinder, SwitchExpressionBinder switchExpressionBinder) : base(armScopeBinder)
+        public SwitchExpressionArmBinder(
+            SwitchExpressionArmSyntax arm,
+            ExpressionVariableBinder armScopeBinder,
+            SwitchExpressionBinder switchExpressionBinder
+        )
+            : base(armScopeBinder)
         {
             this._arm = arm;
             this._armScopeBinder = armScopeBinder;
             this._switchExpressionBinder = switchExpressionBinder;
         }
 
-        internal BoundSwitchExpressionArm BindSwitchExpressionArm(SwitchExpressionArmSyntax node, BindingDiagnosticBag diagnostics)
+        internal BoundSwitchExpressionArm BindSwitchExpressionArm(
+            SwitchExpressionArmSyntax node,
+            BindingDiagnosticBag diagnostics
+        )
         {
             Debug.Assert(node == _arm);
             TypeSymbol inputType = _switchExpressionBinder.GetInputType();
             return BindSwitchExpressionArm(node, inputType, diagnostics);
         }
 
-        internal override BoundSwitchExpressionArm BindSwitchExpressionArm(SwitchExpressionArmSyntax node, TypeSymbol switchGoverningType, BindingDiagnosticBag diagnostics)
+        internal override BoundSwitchExpressionArm BindSwitchExpressionArm(
+            SwitchExpressionArmSyntax node,
+            TypeSymbol switchGoverningType,
+            BindingDiagnosticBag diagnostics
+        )
         {
             Debug.Assert(node == _arm);
             Binder armBinder = this.GetRequiredBinder(node);
             bool hasErrors = switchGoverningType.IsErrorType();
             ImmutableArray<LocalSymbol> locals = _armScopeBinder.Locals;
-            BoundPattern pattern = armBinder.BindPattern(node.Pattern, switchGoverningType, permitDesignations: true, hasErrors, diagnostics);
-            BoundExpression? whenClause = node.WhenClause != null
-                ? armBinder.BindBooleanExpression(node.WhenClause.Condition, diagnostics)
-                : null;
-            BoundExpression armResult = armBinder.BindValue(node.Expression, diagnostics, BindValueKind.RValue);
+            BoundPattern pattern = armBinder.BindPattern(
+                node.Pattern,
+                switchGoverningType,
+                permitDesignations: true,
+                hasErrors,
+                diagnostics
+            );
+            BoundExpression? whenClause =
+                node.WhenClause != null
+                    ? armBinder.BindBooleanExpression(node.WhenClause.Condition, diagnostics)
+                    : null;
+            BoundExpression armResult = armBinder.BindValue(
+                node.Expression,
+                diagnostics,
+                BindValueKind.RValue
+            );
             var label = new GeneratedLabelSymbol("arm");
-            return new BoundSwitchExpressionArm(node, locals, pattern, whenClause, armResult, label, hasErrors | pattern.HasErrors);
+            return new BoundSwitchExpressionArm(
+                node,
+                locals,
+                pattern,
+                whenClause,
+                armResult,
+                label,
+                hasErrors | pattern.HasErrors
+            );
         }
     }
 }

@@ -19,31 +19,26 @@ namespace System.IdentityModel.Tokens
         bool disposable;
 
         public X509SecurityToken(X509Certificate2 certificate)
-            : this(certificate, SecurityUniqueId.Create().Value) 
-        { 
-        }
+            : this(certificate, SecurityUniqueId.Create().Value) { }
 
         public X509SecurityToken(X509Certificate2 certificate, string id)
-            : this(certificate, id, true)
-        {
-        }
+            : this(certificate, id, true) { }
 
         internal X509SecurityToken(X509Certificate2 certificate, bool clone)
-            : this(certificate, SecurityUniqueId.Create().Value, clone)
-        {
-        }
+            : this(certificate, SecurityUniqueId.Create().Value, clone) { }
 
         internal X509SecurityToken(X509Certificate2 certificate, bool clone, bool disposable)
-            : this(certificate, SecurityUniqueId.Create().Value, clone, disposable)
-        {
-        }
+            : this(certificate, SecurityUniqueId.Create().Value, clone, disposable) { }
 
         internal X509SecurityToken(X509Certificate2 certificate, string id, bool clone)
-            : this(certificate, id, clone, true)
-        {
-        }
+            : this(certificate, id, clone, true) { }
 
-        internal X509SecurityToken(X509Certificate2 certificate, string id, bool clone, bool disposable)
+        internal X509SecurityToken(
+            X509Certificate2 certificate,
+            string id,
+            bool clone,
+            bool disposable
+        )
         {
             if (certificate == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("certificate");
@@ -78,7 +73,7 @@ namespace System.IdentityModel.Tokens
 
         public override DateTime ValidFrom
         {
-            get 
+            get
             {
                 ThrowIfDisposed();
                 if (this.effectiveTime == SecurityUtils.MaxUtcDateTime)
@@ -89,7 +84,7 @@ namespace System.IdentityModel.Tokens
 
         public override DateTime ValidTo
         {
-            get 
+            get
             {
                 ThrowIfDisposed();
                 if (this.expirationTime == SecurityUtils.MinUtcDateTime)
@@ -100,7 +95,7 @@ namespace System.IdentityModel.Tokens
 
         public X509Certificate2 Certificate
         {
-            get 
+            get
             {
                 ThrowIfDisposed();
                 return this.certificate;
@@ -113,10 +108,10 @@ namespace System.IdentityModel.Tokens
             if (typeof(T) == typeof(X509SubjectKeyIdentifierClause))
                 return X509SubjectKeyIdentifierClause.CanCreateFrom(certificate);
 
-            return typeof(T) == typeof(X509ThumbprintKeyIdentifierClause) ||
-                   typeof(T) == typeof(X509IssuerSerialKeyIdentifierClause) ||
-                   typeof(T) == typeof(X509RawDataKeyIdentifierClause) ||
-                   base.CanCreateKeyIdentifierClause<T>();
+            return typeof(T) == typeof(X509ThumbprintKeyIdentifierClause)
+                || typeof(T) == typeof(X509IssuerSerialKeyIdentifierClause)
+                || typeof(T) == typeof(X509RawDataKeyIdentifierClause)
+                || base.CanCreateKeyIdentifierClause<T>();
         }
 
         public override T CreateKeyIdentifierClause<T>()
@@ -125,7 +120,12 @@ namespace System.IdentityModel.Tokens
             if (typeof(T) == typeof(X509SubjectKeyIdentifierClause))
             {
                 X509SubjectKeyIdentifierClause x509KeyIdentifierClause;
-                if (X509SubjectKeyIdentifierClause.TryCreateFrom(certificate, out x509KeyIdentifierClause))
+                if (
+                    X509SubjectKeyIdentifierClause.TryCreateFrom(
+                        certificate,
+                        out x509KeyIdentifierClause
+                    )
+                )
                     return x509KeyIdentifierClause as T;
             }
             else if (typeof(T) == typeof(X509ThumbprintKeyIdentifierClause))
@@ -144,22 +144,28 @@ namespace System.IdentityModel.Tokens
             return base.CreateKeyIdentifierClause<T>();
         }
 
-        public override bool MatchesKeyIdentifierClause(SecurityKeyIdentifierClause keyIdentifierClause)
+        public override bool MatchesKeyIdentifierClause(
+            SecurityKeyIdentifierClause keyIdentifierClause
+        )
         {
             ThrowIfDisposed();
-            X509SubjectKeyIdentifierClause subjectKeyIdentifierClause = keyIdentifierClause as X509SubjectKeyIdentifierClause;
+            X509SubjectKeyIdentifierClause subjectKeyIdentifierClause =
+                keyIdentifierClause as X509SubjectKeyIdentifierClause;
             if (subjectKeyIdentifierClause != null)
                 return subjectKeyIdentifierClause.Matches(certificate);
 
-            X509ThumbprintKeyIdentifierClause thumbprintKeyIdentifierClause = keyIdentifierClause as X509ThumbprintKeyIdentifierClause;
+            X509ThumbprintKeyIdentifierClause thumbprintKeyIdentifierClause =
+                keyIdentifierClause as X509ThumbprintKeyIdentifierClause;
             if (thumbprintKeyIdentifierClause != null)
                 return thumbprintKeyIdentifierClause.Matches(certificate);
 
-            X509IssuerSerialKeyIdentifierClause issuerKeyIdentifierClause = keyIdentifierClause as X509IssuerSerialKeyIdentifierClause;
+            X509IssuerSerialKeyIdentifierClause issuerKeyIdentifierClause =
+                keyIdentifierClause as X509IssuerSerialKeyIdentifierClause;
             if (issuerKeyIdentifierClause != null)
                 return issuerKeyIdentifierClause.Matches(certificate);
 
-            X509RawDataKeyIdentifierClause rawCertKeyIdentifierClause = keyIdentifierClause as X509RawDataKeyIdentifierClause;
+            X509RawDataKeyIdentifierClause rawCertKeyIdentifierClause =
+                keyIdentifierClause as X509RawDataKeyIdentifierClause;
             if (rawCertKeyIdentifierClause != null)
                 return rawCertKeyIdentifierClause.Matches(certificate);
 
@@ -179,7 +185,9 @@ namespace System.IdentityModel.Tokens
         {
             if (this.disposed)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ObjectDisposedException(this.GetType().FullName));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ObjectDisposedException(this.GetType().FullName)
+                );
             }
         }
     }

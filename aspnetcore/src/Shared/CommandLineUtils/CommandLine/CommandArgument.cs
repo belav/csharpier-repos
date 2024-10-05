@@ -20,9 +20,6 @@ internal sealed class CommandArgument
     public bool MultipleValues { get; set; }
     public string Value
     {
-        get
-        {
-            return Values.FirstOrDefault();
-        }
+        get { return Values.FirstOrDefault(); }
     }
 }

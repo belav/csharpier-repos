@@ -16,16 +16,22 @@ public class FormatWeekHelperTest
     [InlineData(2012, 1, 1, "2011-W52")]
     [InlineData(2005, 1, 1, "2004-W53")]
     [InlineData(2015, 12, 31, "2015-W53")]
-    public void GetFormattedWeek_ReturnsExpectedFormattedValue(int year, int month, int day, string expectedOutput)
+    public void GetFormattedWeek_ReturnsExpectedFormattedValue(
+        int year,
+        int month,
+        int day,
+        string expectedOutput
+    )
     {
         // Arrange
         var detailsProvider = new DefaultCompositeMetadataDetailsProvider(
-            Enumerable.Empty<IMetadataDetailsProvider>());
+            Enumerable.Empty<IMetadataDetailsProvider>()
+        );
         var key = ModelMetadataIdentity.ForType(typeof(DateTime));
-        var cache = new DefaultMetadataDetails(key, new ModelAttributes(
-            Array.Empty<object>(),
-            Array.Empty<object>(),
-            Array.Empty<object>()));
+        var cache = new DefaultMetadataDetails(
+            key,
+            new ModelAttributes(Array.Empty<object>(), Array.Empty<object>(), Array.Empty<object>())
+        );
 
         var provider = new EmptyModelMetadataProvider();
         var metadata = new DefaultModelMetadata(provider, detailsProvider, cache);

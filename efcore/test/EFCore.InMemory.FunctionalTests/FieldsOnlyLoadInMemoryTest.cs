@@ -3,16 +3,14 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class FieldsOnlyLoadInMemoryTest : FieldsOnlyLoadTestBase<FieldsOnlyLoadInMemoryTest.FieldsOnlyLoadInMemoryFixture>
+public class FieldsOnlyLoadInMemoryTest
+    : FieldsOnlyLoadTestBase<FieldsOnlyLoadInMemoryTest.FieldsOnlyLoadInMemoryFixture>
 {
     public FieldsOnlyLoadInMemoryTest(FieldsOnlyLoadInMemoryFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public class FieldsOnlyLoadInMemoryFixture : FieldsOnlyLoadFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => InMemoryTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => InMemoryTestStoreFactory.Instance;
     }
 }

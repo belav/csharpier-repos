@@ -15,26 +15,27 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 {
     internal static class ModifierFlagsExtensions
     {
-        private static readonly SortedList<ModifierFlags, SyntaxKind> s_modifierDefinitions = new()
-        {
-            { ModifierFlags.Public, SyntaxKind.PublicKeyword },
-            { ModifierFlags.Protected, SyntaxKind.ProtectedKeyword },
-            { ModifierFlags.Internal, SyntaxKind.InternalKeyword },
-            { ModifierFlags.Private, SyntaxKind.PrivateKeyword },
-            { ModifierFlags.Virtual, SyntaxKind.VirtualKeyword },
-            { ModifierFlags.Abstract, SyntaxKind.AbstractKeyword },
-            { ModifierFlags.New, SyntaxKind.NewKeyword },
-            { ModifierFlags.Override, SyntaxKind.OverrideKeyword },
-            { ModifierFlags.Sealed, SyntaxKind.SealedKeyword },
-            { ModifierFlags.Static, SyntaxKind.StaticKeyword },
-            { ModifierFlags.Extern, SyntaxKind.ExternKeyword },
-            { ModifierFlags.ReadOnly, SyntaxKind.ReadOnlyKeyword },
-            { ModifierFlags.Const, SyntaxKind.ConstKeyword },
-            { ModifierFlags.Volatile, SyntaxKind.VolatileKeyword },
-            { ModifierFlags.Unsafe, SyntaxKind.UnsafeKeyword },
-            { ModifierFlags.Async, SyntaxKind.AsyncKeyword },
-            { ModifierFlags.Partial, SyntaxKind.PartialKeyword }
-        };
+        private static readonly SortedList<ModifierFlags, SyntaxKind> s_modifierDefinitions =
+            new()
+            {
+                { ModifierFlags.Public, SyntaxKind.PublicKeyword },
+                { ModifierFlags.Protected, SyntaxKind.ProtectedKeyword },
+                { ModifierFlags.Internal, SyntaxKind.InternalKeyword },
+                { ModifierFlags.Private, SyntaxKind.PrivateKeyword },
+                { ModifierFlags.Virtual, SyntaxKind.VirtualKeyword },
+                { ModifierFlags.Abstract, SyntaxKind.AbstractKeyword },
+                { ModifierFlags.New, SyntaxKind.NewKeyword },
+                { ModifierFlags.Override, SyntaxKind.OverrideKeyword },
+                { ModifierFlags.Sealed, SyntaxKind.SealedKeyword },
+                { ModifierFlags.Static, SyntaxKind.StaticKeyword },
+                { ModifierFlags.Extern, SyntaxKind.ExternKeyword },
+                { ModifierFlags.ReadOnly, SyntaxKind.ReadOnlyKeyword },
+                { ModifierFlags.Const, SyntaxKind.ConstKeyword },
+                { ModifierFlags.Volatile, SyntaxKind.VolatileKeyword },
+                { ModifierFlags.Unsafe, SyntaxKind.UnsafeKeyword },
+                { ModifierFlags.Async, SyntaxKind.AsyncKeyword },
+                { ModifierFlags.Partial, SyntaxKind.PartialKeyword },
+            };
 
         public static ModifierFlags GetModifierFlags(this MemberDeclarationSyntax member)
         {
@@ -101,7 +102,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             return result;
         }
 
-        public static MemberDeclarationSyntax UpdateModifiers(this MemberDeclarationSyntax member, ModifierFlags flags)
+        public static MemberDeclarationSyntax UpdateModifiers(
+            this MemberDeclarationSyntax member,
+            ModifierFlags flags
+        )
         {
             // The starting token for this member may change, so we need to save
             // the leading trivia and reattach it after updating the modifiers.

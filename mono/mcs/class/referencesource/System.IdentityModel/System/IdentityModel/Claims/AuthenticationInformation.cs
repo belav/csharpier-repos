@@ -25,7 +25,7 @@ namespace System.Security.Claims
         {
             _authContexts = new Collection<AuthenticationContext>();
         }
-        
+
         /// <summary>
         /// Gets or sets the address of the authority that created the token.
         /// </summary>

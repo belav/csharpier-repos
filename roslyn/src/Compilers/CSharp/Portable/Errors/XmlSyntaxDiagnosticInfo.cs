@@ -13,17 +13,24 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly XmlParseErrorCode _xmlErrorCode;
 
         internal XmlSyntaxDiagnosticInfo(XmlParseErrorCode code, params object[] args)
-            : this(0, 0, code, args)
-        {
-        }
+            : this(0, 0, code, args) { }
 
-        internal XmlSyntaxDiagnosticInfo(int offset, int width, XmlParseErrorCode code, params object[] args)
+        internal XmlSyntaxDiagnosticInfo(
+            int offset,
+            int width,
+            XmlParseErrorCode code,
+            params object[] args
+        )
             : base(offset, width, ErrorCode.WRN_XMLParseError, args)
         {
             _xmlErrorCode = code;
         }
 
-        private XmlSyntaxDiagnosticInfo(XmlSyntaxDiagnosticInfo original, DiagnosticSeverity severity) : base(original, severity)
+        private XmlSyntaxDiagnosticInfo(
+            XmlSyntaxDiagnosticInfo original,
+            DiagnosticSeverity severity
+        )
+            : base(original, severity)
         {
             _xmlErrorCode = original._xmlErrorCode;
         }
@@ -47,7 +54,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return String.Format(formatProvider, messagePrefix, message);
             }
 
-            return String.Format(formatProvider, String.Format(formatProvider, messagePrefix, message), GetArgumentsToUse(formatProvider));
+            return String.Format(
+                formatProvider,
+                String.Format(formatProvider, messagePrefix, message),
+                GetArgumentsToUse(formatProvider)
+            );
         }
     }
 }

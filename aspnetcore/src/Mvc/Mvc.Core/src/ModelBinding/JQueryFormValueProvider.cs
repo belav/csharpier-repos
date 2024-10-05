@@ -24,10 +24,14 @@ public class JQueryFormValueProvider : JQueryValueProvider
     public JQueryFormValueProvider(
         BindingSource bindingSource,
         IDictionary<string, StringValues> values,
-        CultureInfo? culture)
+        CultureInfo? culture
+    )
         : base(bindingSource, values, culture)
     {
-        if (values.TryGetValue(FormValueHelper.CultureInvariantFieldName, out var invariantKeys) && invariantKeys.Count > 0)
+        if (
+            values.TryGetValue(FormValueHelper.CultureInvariantFieldName, out var invariantKeys)
+            && invariantKeys.Count > 0
+        )
         {
             _invariantValueKeys = new(invariantKeys, StringComparer.OrdinalIgnoreCase);
         }

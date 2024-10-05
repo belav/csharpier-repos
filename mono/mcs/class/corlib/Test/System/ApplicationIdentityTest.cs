@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,38 +27,37 @@
 //
 
 
-using NUnit.Framework;
 using System;
+using NUnit.Framework;
 
-namespace MonoTests.System {
+namespace MonoTests.System
+{
+    [TestFixture]
+    public class ApplicationIdentityTest
+    {
+        [Test]
+        public void ApplicationIdentity()
+        {
+            ApplicationIdentity appid = new ApplicationIdentity("Mono");
+            Assert.IsNull(appid.CodeBase, "CodeBase");
+            Assert.AreEqual("Mono, Culture=neutral", appid.FullName);
+            Assert.AreEqual("Mono, Culture=neutral", appid.ToString());
+        }
 
-	[TestFixture]
-	public class ApplicationIdentityTest {
+        [Test]
+        public void ApplicationIdentity_WithCulture()
+        {
+            ApplicationIdentity appid = new ApplicationIdentity("Mono, Culture=fr-ca");
+            Assert.IsNull(appid.CodeBase, "CodeBase");
+            Assert.AreEqual("Mono, Culture=fr-ca", appid.FullName);
+            Assert.AreEqual("Mono, Culture=fr-ca", appid.ToString());
+        }
 
-		[Test]
-		public void ApplicationIdentity ()
-		{
-			ApplicationIdentity appid = new ApplicationIdentity ("Mono");
-			Assert.IsNull (appid.CodeBase, "CodeBase");
-			Assert.AreEqual ("Mono, Culture=neutral", appid.FullName);
-			Assert.AreEqual ("Mono, Culture=neutral", appid.ToString ());
-		}
-
-		[Test]
-		public void ApplicationIdentity_WithCulture ()
-		{
-			ApplicationIdentity appid = new ApplicationIdentity ("Mono, Culture=fr-ca");
-			Assert.IsNull (appid.CodeBase, "CodeBase");
-			Assert.AreEqual ("Mono, Culture=fr-ca", appid.FullName);
-			Assert.AreEqual ("Mono, Culture=fr-ca", appid.ToString ());
-		}
-
-		[Test]
- 		[ExpectedException (typeof (ArgumentNullException))]
-		public void ApplicationIdentity_Null ()
-		{
-			new ApplicationIdentity (null);
-		}
-	}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ApplicationIdentity_Null()
+        {
+            new ApplicationIdentity(null);
+        }
+    }
 }
-

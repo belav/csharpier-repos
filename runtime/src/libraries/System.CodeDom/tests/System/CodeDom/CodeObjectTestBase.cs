@@ -7,7 +7,8 @@ using Xunit;
 
 namespace System.CodeDom.Tests
 {
-    public abstract class CodeObjectTestBase<T> : CodeDomTestBase where T : CodeObject, new()
+    public abstract class CodeObjectTestBase<T> : CodeDomTestBase
+        where T : CodeObject, new()
     {
         [Fact]
         public void Ctor_Default_ObjectBase()
@@ -24,7 +25,10 @@ namespace System.CodeDom.Tests
             Assert.Equal(new ListDictionary() { ["key1"] = "value" }, codeObject.UserData);
 
             codeObject.UserData.Add("key2", "value");
-            Assert.Equal(new ListDictionary() { ["key1"] = "value", ["key2"] = "value" }, codeObject.UserData);
+            Assert.Equal(
+                new ListDictionary() { ["key1"] = "value", ["key2"] = "value" },
+                codeObject.UserData
+            );
         }
     }
 

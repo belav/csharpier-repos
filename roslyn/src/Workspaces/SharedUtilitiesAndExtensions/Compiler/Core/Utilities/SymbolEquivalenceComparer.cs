@@ -28,20 +28,40 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
     /// equivalent if the above hold, even if one type has different members than the other.  Note:
     /// type parameters, and signature parameters are not considered 'children' when comparing
     /// symbols.
-    /// 
+    ///
     /// Options are provided to tweak the above slightly.  For example, by default, symbols are
     /// equivalent only if they come from the same assembly or different assemblies of the same simple name.
     /// However, one can ask if two symbols are equivalent even if their assemblies differ.
     /// </summary>
-    internal partial class SymbolEquivalenceComparer :
-        IEqualityComparer<ISymbol?>
+    internal partial class SymbolEquivalenceComparer : IEqualityComparer<ISymbol?>
     {
         private readonly ImmutableArray<EquivalenceVisitor> _equivalenceVisitors;
         private readonly ImmutableArray<GetHashCodeVisitor> _getHashCodeVisitors;
 
-        public static readonly SymbolEquivalenceComparer Instance = new(SimpleNameAssemblyComparer.Instance, distinguishRefFromOut: false, tupleNamesMustMatch: false, ignoreNullableAnnotations: true, objectAndDynamicCompareEqually: true);
-        public static readonly SymbolEquivalenceComparer TupleNamesMustMatchInstance = new(SimpleNameAssemblyComparer.Instance, distinguishRefFromOut: false, tupleNamesMustMatch: true, ignoreNullableAnnotations: true, objectAndDynamicCompareEqually: true);
-        public static readonly SymbolEquivalenceComparer IgnoreAssembliesInstance = new(assemblyComparerOpt: null, distinguishRefFromOut: false, tupleNamesMustMatch: false, ignoreNullableAnnotations: true, objectAndDynamicCompareEqually: true);
+        public static readonly SymbolEquivalenceComparer Instance =
+            new(
+                SimpleNameAssemblyComparer.Instance,
+                distinguishRefFromOut: false,
+                tupleNamesMustMatch: false,
+                ignoreNullableAnnotations: true,
+                objectAndDynamicCompareEqually: true
+            );
+        public static readonly SymbolEquivalenceComparer TupleNamesMustMatchInstance =
+            new(
+                SimpleNameAssemblyComparer.Instance,
+                distinguishRefFromOut: false,
+                tupleNamesMustMatch: true,
+                ignoreNullableAnnotations: true,
+                objectAndDynamicCompareEqually: true
+            );
+        public static readonly SymbolEquivalenceComparer IgnoreAssembliesInstance =
+            new(
+                assemblyComparerOpt: null,
+                distinguishRefFromOut: false,
+                tupleNamesMustMatch: false,
+                ignoreNullableAnnotations: true,
+                objectAndDynamicCompareEqually: true
+            );
 
         private readonly IEqualityComparer<IAssemblySymbol>? _assemblyComparerOpt;
         private readonly bool _tupleNamesMustMatch;
@@ -56,30 +76,84 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             bool distinguishRefFromOut,
             bool tupleNamesMustMatch,
             bool ignoreNullableAnnotations,
-            bool objectAndDynamicCompareEqually)
+            bool objectAndDynamicCompareEqually
+        )
         {
             _assemblyComparerOpt = assemblyComparerOpt;
             _tupleNamesMustMatch = tupleNamesMustMatch;
             _ignoreNullableAnnotations = ignoreNullableAnnotations;
             _objectAndDynamicCompareEqually = objectAndDynamicCompareEqually;
 
-            this.ParameterEquivalenceComparer = new ParameterSymbolEqualityComparer(this, distinguishRefFromOut);
-            this.SignatureTypeEquivalenceComparer = new SignatureTypeSymbolEquivalenceComparer(this);
+            this.ParameterEquivalenceComparer = new ParameterSymbolEqualityComparer(
+                this,
+                distinguishRefFromOut
+            );
+            this.SignatureTypeEquivalenceComparer = new SignatureTypeSymbolEquivalenceComparer(
+                this
+            );
 
             // There are only so many EquivalenceVisitors and GetHashCodeVisitors we can have.
             // Create them all up front.
             var equivalenceVisitorsBuilder = ImmutableArray.CreateBuilder<EquivalenceVisitor>();
-            equivalenceVisitorsBuilder.Add(new EquivalenceVisitor(this, compareMethodTypeParametersByIndex: true, objectAndDynamicCompareEqually: true));
-            equivalenceVisitorsBuilder.Add(new EquivalenceVisitor(this, compareMethodTypeParametersByIndex: true, objectAndDynamicCompareEqually: false));
-            equivalenceVisitorsBuilder.Add(new EquivalenceVisitor(this, compareMethodTypeParametersByIndex: false, objectAndDynamicCompareEqually: true));
-            equivalenceVisitorsBuilder.Add(new EquivalenceVisitor(this, compareMethodTypeParametersByIndex: false, objectAndDynamicCompareEqually: false));
+            equivalenceVisitorsBuilder.Add(
+                new EquivalenceVisitor(
+                    this,
+                    compareMethodTypeParametersByIndex: true,
+                    objectAndDynamicCompareEqually: true
+                )
+            );
+            equivalenceVisitorsBuilder.Add(
+                new EquivalenceVisitor(
+                    this,
+                    compareMethodTypeParametersByIndex: true,
+                    objectAndDynamicCompareEqually: false
+                )
+            );
+            equivalenceVisitorsBuilder.Add(
+                new EquivalenceVisitor(
+                    this,
+                    compareMethodTypeParametersByIndex: false,
+                    objectAndDynamicCompareEqually: true
+                )
+            );
+            equivalenceVisitorsBuilder.Add(
+                new EquivalenceVisitor(
+                    this,
+                    compareMethodTypeParametersByIndex: false,
+                    objectAndDynamicCompareEqually: false
+                )
+            );
             _equivalenceVisitors = equivalenceVisitorsBuilder.ToImmutable();
 
             var getHashCodeVisitorsBuilder = ImmutableArray.CreateBuilder<GetHashCodeVisitor>();
-            getHashCodeVisitorsBuilder.Add(new GetHashCodeVisitor(this, compareMethodTypeParametersByIndex: true, objectAndDynamicCompareEqually: true));
-            getHashCodeVisitorsBuilder.Add(new GetHashCodeVisitor(this, compareMethodTypeParametersByIndex: true, objectAndDynamicCompareEqually: false));
-            getHashCodeVisitorsBuilder.Add(new GetHashCodeVisitor(this, compareMethodTypeParametersByIndex: false, objectAndDynamicCompareEqually: true));
-            getHashCodeVisitorsBuilder.Add(new GetHashCodeVisitor(this, compareMethodTypeParametersByIndex: false, objectAndDynamicCompareEqually: false));
+            getHashCodeVisitorsBuilder.Add(
+                new GetHashCodeVisitor(
+                    this,
+                    compareMethodTypeParametersByIndex: true,
+                    objectAndDynamicCompareEqually: true
+                )
+            );
+            getHashCodeVisitorsBuilder.Add(
+                new GetHashCodeVisitor(
+                    this,
+                    compareMethodTypeParametersByIndex: true,
+                    objectAndDynamicCompareEqually: false
+                )
+            );
+            getHashCodeVisitorsBuilder.Add(
+                new GetHashCodeVisitor(
+                    this,
+                    compareMethodTypeParametersByIndex: false,
+                    objectAndDynamicCompareEqually: true
+                )
+            );
+            getHashCodeVisitorsBuilder.Add(
+                new GetHashCodeVisitor(
+                    this,
+                    compareMethodTypeParametersByIndex: false,
+                    objectAndDynamicCompareEqually: false
+                )
+            );
             _getHashCodeVisitors = getHashCodeVisitorsBuilder.ToImmutable();
         }
 
@@ -91,21 +165,33 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         // here.  So, instead, when asking if parameters are equal, we pass an appropriate flag so
         // that method type parameters are just compared by index and nothing else.
         private EquivalenceVisitor GetEquivalenceVisitor(
-            bool compareMethodTypeParametersByIndex = false, bool objectAndDynamicCompareEqually = false)
+            bool compareMethodTypeParametersByIndex = false,
+            bool objectAndDynamicCompareEqually = false
+        )
         {
-            var visitorIndex = GetVisitorIndex(compareMethodTypeParametersByIndex, objectAndDynamicCompareEqually);
+            var visitorIndex = GetVisitorIndex(
+                compareMethodTypeParametersByIndex,
+                objectAndDynamicCompareEqually
+            );
             return _equivalenceVisitors[visitorIndex];
         }
 
         private GetHashCodeVisitor GetGetHashCodeVisitor(
-            bool compareMethodTypeParametersByIndex, bool objectAndDynamicCompareEqually)
+            bool compareMethodTypeParametersByIndex,
+            bool objectAndDynamicCompareEqually
+        )
         {
-            var visitorIndex = GetVisitorIndex(compareMethodTypeParametersByIndex, objectAndDynamicCompareEqually);
+            var visitorIndex = GetVisitorIndex(
+                compareMethodTypeParametersByIndex,
+                objectAndDynamicCompareEqually
+            );
             return _getHashCodeVisitors[visitorIndex];
         }
 
         private static int GetVisitorIndex(
-            bool compareMethodTypeParametersByIndex, bool objectAndDynamicCompareEqually)
+            bool compareMethodTypeParametersByIndex,
+            bool objectAndDynamicCompareEqually
+        )
         {
             if (compareMethodTypeParametersByIndex)
             {
@@ -131,35 +217,52 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             }
         }
 
-        public bool ReturnTypeEquals(IMethodSymbol x, IMethodSymbol y, Dictionary<INamedTypeSymbol, INamedTypeSymbol>? equivalentTypesWithDifferingAssemblies = null)
-            => GetEquivalenceVisitor().ReturnTypesAreEquivalent(x, y, equivalentTypesWithDifferingAssemblies);
+        public bool ReturnTypeEquals(
+            IMethodSymbol x,
+            IMethodSymbol y,
+            Dictionary<INamedTypeSymbol, INamedTypeSymbol>? equivalentTypesWithDifferingAssemblies =
+                null
+        ) =>
+            GetEquivalenceVisitor()
+                .ReturnTypesAreEquivalent(x, y, equivalentTypesWithDifferingAssemblies);
 
         /// <summary>
         /// Compares given symbols <paramref name="x"/> and <paramref name="y"/> for equivalence.
         /// </summary>
-        public bool Equals(ISymbol? x, ISymbol? y)
-            => EqualsCore(x, y, equivalentTypesWithDifferingAssemblies: null);
+        public bool Equals(ISymbol? x, ISymbol? y) =>
+            EqualsCore(x, y, equivalentTypesWithDifferingAssemblies: null);
 
         /// <summary>
         /// Compares given symbols <paramref name="x"/> and <paramref name="y"/> for equivalence and populates <paramref name="equivalentTypesWithDifferingAssemblies"/>
         /// with equivalent non-nested named type key-value pairs that are contained in different assemblies.
-        /// These equivalent named type key-value pairs represent possibly equivalent forwarded types, but this API doesn't perform any type forwarding equivalence checks. 
+        /// These equivalent named type key-value pairs represent possibly equivalent forwarded types, but this API doesn't perform any type forwarding equivalence checks.
         /// </summary>
         /// <remarks>This API is only supported for <see cref="SymbolEquivalenceComparer.IgnoreAssembliesInstance"/>.</remarks>
-        public bool Equals(ISymbol? x, ISymbol? y, Dictionary<INamedTypeSymbol, INamedTypeSymbol>? equivalentTypesWithDifferingAssemblies)
+        public bool Equals(
+            ISymbol? x,
+            ISymbol? y,
+            Dictionary<INamedTypeSymbol, INamedTypeSymbol>? equivalentTypesWithDifferingAssemblies
+        )
         {
             Debug.Assert(_assemblyComparerOpt == null);
             return EqualsCore(x, y, equivalentTypesWithDifferingAssemblies);
         }
 
-        private bool EqualsCore(ISymbol? x, ISymbol? y, Dictionary<INamedTypeSymbol, INamedTypeSymbol>? equivalentTypesWithDifferingAssemblies)
-            => GetEquivalenceVisitor().AreEquivalent(x, y, equivalentTypesWithDifferingAssemblies);
+        private bool EqualsCore(
+            ISymbol? x,
+            ISymbol? y,
+            Dictionary<INamedTypeSymbol, INamedTypeSymbol>? equivalentTypesWithDifferingAssemblies
+        ) => GetEquivalenceVisitor().AreEquivalent(x, y, equivalentTypesWithDifferingAssemblies);
 
-        public int GetHashCode(ISymbol? x)
-            => GetGetHashCodeVisitor(compareMethodTypeParametersByIndex: false, objectAndDynamicCompareEqually: false).GetHashCode(x, currentHash: 0);
+        public int GetHashCode(ISymbol? x) =>
+            GetGetHashCodeVisitor(
+                    compareMethodTypeParametersByIndex: false,
+                    objectAndDynamicCompareEqually: false
+                )
+                .GetHashCode(x, currentHash: 0);
 
-        private static ISymbol UnwrapAlias(ISymbol symbol)
-            => symbol.IsKind(SymbolKind.Alias, out IAliasSymbol? alias) ? alias.Target : symbol;
+        private static ISymbol UnwrapAlias(ISymbol symbol) =>
+            symbol.IsKind(SymbolKind.Alias, out IAliasSymbol? alias) ? alias.Target : symbol;
 
         private static SymbolKind GetKindAndUnwrapAlias(ref ISymbol symbol)
         {
@@ -173,20 +276,23 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             return k;
         }
 
-        private static bool IsConstructedFromSelf(INamedTypeSymbol symbol)
-            => symbol.Equals(symbol.ConstructedFrom);
+        private static bool IsConstructedFromSelf(INamedTypeSymbol symbol) =>
+            symbol.Equals(symbol.ConstructedFrom);
 
-        private static bool IsConstructedFromSelf(IMethodSymbol symbol)
-            => symbol.Equals(symbol.ConstructedFrom);
+        private static bool IsConstructedFromSelf(IMethodSymbol symbol) =>
+            symbol.Equals(symbol.ConstructedFrom);
 
-        private static bool IsObjectType(ISymbol symbol)
-            => symbol.IsKind(SymbolKind.NamedType, out ITypeSymbol? typeSymbol) && typeSymbol.SpecialType == SpecialType.System_Object;
+        private static bool IsObjectType(ISymbol symbol) =>
+            symbol.IsKind(SymbolKind.NamedType, out ITypeSymbol? typeSymbol)
+            && typeSymbol.SpecialType == SpecialType.System_Object;
 
         private static bool CheckContainingType(IMethodSymbol x)
         {
-            if (x.MethodKind == MethodKind.DelegateInvoke &&
-                x.ContainingType != null &&
-                x.ContainingType.IsAnonymousType)
+            if (
+                x.MethodKind == MethodKind.DelegateInvoke
+                && x.ContainingType != null
+                && x.ContainingType.IsAnonymousType
+            )
             {
                 return false;
             }
@@ -213,11 +319,11 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             }
         }
 
-        private static bool IsPartialMethodDefinitionPart(IMethodSymbol symbol)
-            => symbol.PartialImplementationPart != null;
+        private static bool IsPartialMethodDefinitionPart(IMethodSymbol symbol) =>
+            symbol.PartialImplementationPart != null;
 
-        private static bool IsPartialMethodImplementationPart(IMethodSymbol symbol)
-            => symbol.PartialDefinitionPart != null;
+        private static bool IsPartialMethodImplementationPart(IMethodSymbol symbol) =>
+            symbol.PartialDefinitionPart != null;
 
         private static TypeKind GetTypeKind(INamedTypeSymbol x)
         {

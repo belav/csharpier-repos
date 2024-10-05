@@ -3,17 +3,19 @@ namespace System.Workflow.ComponentModel.Compiler
     using System;
     using System.CodeDom;
     using System.Collections;
-    using System.Globalization;
     using System.Collections.Generic;
-    using System.Text.RegularExpressions;
     using System.Collections.ObjectModel;
+    using System.Globalization;
+    using System.Text.RegularExpressions;
 
     /// <summary>
     /// Summary description for AttributeInfo.
     /// </summary>
     [CLSCompliant(false)]
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = true)]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class AttributeInfoAttribute : Attribute
     {
         private AttributeInfo attributeInfo;
@@ -26,21 +28,26 @@ namespace System.Workflow.ComponentModel.Compiler
             this.attributeInfo = attributeInfo;
         }
 
-        internal static AttributeInfoAttribute CreateAttributeInfoAttribute(Type attributeType, string[] argumentNames, object[] argumentValues)
+        internal static AttributeInfoAttribute CreateAttributeInfoAttribute(
+            Type attributeType,
+            string[] argumentNames,
+            object[] argumentValues
+        )
         {
-            return new AttributeInfoAttribute(new AttributeInfo(attributeType, argumentNames, argumentValues));
+            return new AttributeInfoAttribute(
+                new AttributeInfo(attributeType, argumentNames, argumentValues)
+            );
         }
 
         public AttributeInfo AttributeInfo
         {
-            get
-            {
-                return this.attributeInfo;
-            }
+            get { return this.attributeInfo; }
         }
     }
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class AttributeInfo
     {
         #region Members and Constructors
@@ -62,10 +69,7 @@ namespace System.Workflow.ComponentModel.Compiler
 
         public Type AttributeType
         {
-            get
-            {
-                return attributeType;
-            }
+            get { return attributeType; }
         }
 
         public ReadOnlyCollection<object> ArgumentValues
@@ -119,22 +123,32 @@ namespace System.Workflow.ComponentModel.Compiler
             }
 
             // creating the Attribute
-            Attribute attribute = (Attribute)Activator.CreateInstance(attributeType, constructorArguments.ToArray());
+            Attribute attribute = (Attribute)
+                Activator.CreateInstance(attributeType, constructorArguments.ToArray());
 
             // setting named properties
             for (int loop = 0; loop < propertyNames.Count; loop++)
             {
-                // 
-                attributeType.GetProperty(propertyNames[loop]).SetValue(attribute, propertyValues[loop], null);
+                //
+                attributeType
+                    .GetProperty(propertyNames[loop])
+                    .SetValue(attribute, propertyValues[loop], null);
             }
 
             return attribute;
         }
 
-        public object GetArgumentValueAs(IServiceProvider serviceProvider, int argumentIndex, Type requestedType)
+        public object GetArgumentValueAs(
+            IServiceProvider serviceProvider,
+            int argumentIndex,
+            Type requestedType
+        )
         {
             if (argumentIndex >= this.ArgumentValues.Count || argumentIndex < 0)
-                throw new ArgumentException(SR.GetString(SR.Error_InvalidArgumentIndex), "argumentIndex");
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_InvalidArgumentIndex),
+                    "argumentIndex"
+                );
 
             if (requestedType == null)
                 throw new ArgumentNullException("requestedType");
@@ -147,7 +161,7 @@ namespace System.Workflow.ComponentModel.Compiler
 
                 // string values read by the code-dom parser are double escaped, so
                 // remove the 2nd escaping (we need to leave the escaping in at parse time)
-                // in case the attribute argument is never processed and emitted as 
+                // in case the attribute argument is never processed and emitted as
                 // the code snippet
                 if (returnValue != null)
                 {
@@ -155,9 +169,7 @@ namespace System.Workflow.ComponentModel.Compiler
                     {
                         returnValue = Regex.Unescape(returnValue);
                     }
-                    catch
-                    {
-                    }
+                    catch { }
                 }
 
                 if (returnValue != null)
@@ -165,7 +177,10 @@ namespace System.Workflow.ComponentModel.Compiler
                     if (returnValue.EndsWith("\"", StringComparison.Ordinal))
                         returnValue = returnValue.Substring(0, returnValue.Length - 1);
 
-                    if (language == SupportedLanguages.CSharp && returnValue.StartsWith("@\"", StringComparison.Ordinal))
+                    if (
+                        language == SupportedLanguages.CSharp
+                        && returnValue.StartsWith("@\"", StringComparison.Ordinal)
+                    )
                         returnValue = returnValue.Substring(2, returnValue.Length - 2);
                     else if (returnValue.StartsWith("\"", StringComparison.Ordinal))
                         returnValue = returnValue.Substring(1, returnValue.Length - 1);
@@ -177,7 +192,12 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 string parseableValue = "";
                 bool firstValue = true;
-                foreach (string enumValue in (this.ArgumentValues[argumentIndex] as string).Split(new string[] { language == SupportedLanguages.CSharp ? "|" : "Or" }, StringSplitOptions.RemoveEmptyEntries))
+                foreach (
+                    string enumValue in (this.ArgumentValues[argumentIndex] as string).Split(
+                        new string[] { language == SupportedLanguages.CSharp ? "|" : "Or" },
+                        StringSplitOptions.RemoveEmptyEntries
+                    )
+                )
                 {
                     if (!firstValue)
                         parseableValue += ",";
@@ -195,17 +215,26 @@ namespace System.Workflow.ComponentModel.Compiler
             }
             else if (requestedType == typeof(bool))
             {
-                return System.Convert.ToBoolean(this.ArgumentValues[argumentIndex], CultureInfo.InvariantCulture);
+                return System.Convert.ToBoolean(
+                    this.ArgumentValues[argumentIndex],
+                    CultureInfo.InvariantCulture
+                );
             }
             else if (requestedType == typeof(Type))
             {
                 string typeName = "";
                 if (this.ArgumentValues[argumentIndex] is CodeTypeOfExpression)
-                    typeName = DesignTimeType.GetTypeNameFromCodeTypeReference((this.ArgumentValues[argumentIndex] as CodeTypeOfExpression).Type, null);
+                    typeName = DesignTimeType.GetTypeNameFromCodeTypeReference(
+                        (this.ArgumentValues[argumentIndex] as CodeTypeOfExpression).Type,
+                        null
+                    );
 
-                ITypeProvider typeProvider = serviceProvider.GetService(typeof(ITypeProvider)) as ITypeProvider;
+                ITypeProvider typeProvider =
+                    serviceProvider.GetService(typeof(ITypeProvider)) as ITypeProvider;
                 if (typeProvider == null)
-                    throw new Exception(SR.GetString(SR.General_MissingService, typeof(ITypeProvider).ToString()));
+                    throw new Exception(
+                        SR.GetString(SR.General_MissingService, typeof(ITypeProvider).ToString())
+                    );
 
                 Type returnType = ParseHelpers.ParseTypeName(typeProvider, language, typeName);
                 if (returnType == null)
@@ -214,17 +243,37 @@ namespace System.Workflow.ComponentModel.Compiler
                     string[] genericParamTypeNames = null;
                     string baseTypeName = string.Empty;
                     string elementDecorators = string.Empty;
-                    if (ParseHelpers.ParseTypeName(typeName, language == SupportedLanguages.CSharp ? ParseHelpers.ParseTypeNameLanguage.CSharp : ParseHelpers.ParseTypeNameLanguage.VB, out baseTypeName, out genericParamTypeNames, out elementDecorators))
+                    if (
+                        ParseHelpers.ParseTypeName(
+                            typeName,
+                            language == SupportedLanguages.CSharp
+                                ? ParseHelpers.ParseTypeNameLanguage.CSharp
+                                : ParseHelpers.ParseTypeNameLanguage.VB,
+                            out baseTypeName,
+                            out genericParamTypeNames,
+                            out elementDecorators
+                        )
+                    )
                     {
                         if (baseTypeName != null && genericParamTypeNames != null)
                         {
-                            string parsedTypeName = baseTypeName + "`" + genericParamTypeNames.Length.ToString(CultureInfo.InvariantCulture) + "[";
+                            string parsedTypeName =
+                                baseTypeName
+                                + "`"
+                                + genericParamTypeNames.Length.ToString(
+                                    CultureInfo.InvariantCulture
+                                )
+                                + "[";
                             foreach (string genericArg in genericParamTypeNames)
                             {
                                 if (genericArg != genericParamTypeNames[0])
                                     parsedTypeName += ",";
 
-                                Type genericArgType = ParseHelpers.ParseTypeName(typeProvider, language, genericArg);
+                                Type genericArgType = ParseHelpers.ParseTypeName(
+                                    typeProvider,
+                                    language,
+                                    genericArg
+                                );
                                 if (genericArgType != null)
                                     parsedTypeName += "[" + genericArgType.FullName + "]";
                                 else
@@ -232,7 +281,11 @@ namespace System.Workflow.ComponentModel.Compiler
                             }
                             parsedTypeName += "]";
 
-                            returnType = ParseHelpers.ParseTypeName(typeProvider, language, parsedTypeName);
+                            returnType = ParseHelpers.ParseTypeName(
+                                typeProvider,
+                                language,
+                                parsedTypeName
+                            );
                         }
                     }
                 }

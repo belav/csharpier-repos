@@ -15,18 +15,21 @@ public abstract class ErrorBoundaryBase : ComponentBase, IErrorBoundary
     /// <summary>
     /// The content to be displayed when there is no error.
     /// </summary>
-    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
 
     /// <summary>
     /// The content to be displayed when there is an error.
     /// </summary>
-    [Parameter] public RenderFragment<Exception>? ErrorContent { get; set; }
+    [Parameter]
+    public RenderFragment<Exception>? ErrorContent { get; set; }
 
     /// <summary>
     /// The maximum number of errors that can be handled. If more errors are received,
     /// they will be treated as fatal. Calling <see cref="Recover"/> resets the count.
     /// </summary>
-    [Parameter] public int MaximumErrorCount { get; set; } = 100;
+    [Parameter]
+    public int MaximumErrorCount { get; set; } = 100;
 
     /// <summary>
     /// Gets the current exception, or null if there is no exception.

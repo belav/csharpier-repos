@@ -4,9 +4,9 @@
 
 #nullable disable
 
+using System;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Roslyn.Test.Utilities;
-using System;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -14,16 +14,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class AsyncParsingTests : ParsingTests
     {
-        public AsyncParsingTests(ITestOutputHelper output) : base(output) { }
+        public AsyncParsingTests(ITestOutputHelper output)
+            : base(output) { }
 
         protected override SyntaxTree ParseTree(string text, CSharpParseOptions options)
         {
-            return SyntaxFactory.ParseSyntaxTree(text, options: (options ?? TestOptions.Regular).WithLanguageVersion(LanguageVersion.CSharp5));
+            return SyntaxFactory.ParseSyntaxTree(
+                text,
+                options: (options ?? TestOptions.Regular).WithLanguageVersion(
+                    LanguageVersion.CSharp5
+                )
+            );
         }
 
-        protected override CSharpSyntaxNode ParseNode(string text, CSharpParseOptions options = null)
+        protected override CSharpSyntaxNode ParseNode(
+            string text,
+            CSharpParseOptions options = null
+        )
         {
-            return SyntaxFactory.ParseExpression(text, options: (options ?? TestOptions.Regular).WithLanguageVersion(LanguageVersion.CSharp5));
+            return SyntaxFactory.ParseExpression(
+                text,
+                options: (options ?? TestOptions.Regular).WithLanguageVersion(
+                    LanguageVersion.CSharp5
+                )
+            );
         }
 
         private void TestVersions(Action<CSharpParseOptions> test)
@@ -37,12 +51,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void SimpleAsyncMethod()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async void M() { }
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -78,12 +94,14 @@ class C
         [Fact]
         public void MethodCalledAsync()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     void async() { }
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -118,12 +136,14 @@ class C
         [Fact]
         public void MethodReturningAsync()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async M() { }
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -158,12 +178,14 @@ class C
         [Fact]
         public void MethodAsyncAsync()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async async() { }
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -198,12 +220,14 @@ class C
         [Fact]
         public void MethodAsyncAsyncAsync()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async async async() { }
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -239,12 +263,14 @@ class C
         [Fact]
         public void MethodAsyncAsyncAsyncAsync()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async async async async() { }
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -283,13 +309,14 @@ class C
         public void MethodAsyncVarAsync()
         {
             UsingTree(
-@"class C
+                @"class C
 {
     static async void M(object async)
     {
         async.F();
     }
-}");
+}"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -350,7 +377,8 @@ class C
         [Fact]
         public void IncompleteAsync()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async
@@ -359,8 +387,11 @@ class C
                 //     async
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 10),
                 // (5,1): error CS1519: Invalid token '' in class, record, struct, or interface member declaration
-                // 
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "").WithArguments("").WithLocation(5, 1));
+                //
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "")
+                    .WithArguments("")
+                    .WithLocation(5, 1)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -384,7 +415,8 @@ class C
         [Fact]
         public void IncompleteAsyncAsync()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async async
@@ -393,8 +425,11 @@ class C
                 //     async async
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 16),
                 // (5,1): error CS1519: Invalid token '' in class, record, struct, or interface member declaration
-                // 
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "").WithArguments("").WithLocation(5, 1));
+                //
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "")
+                    .WithArguments("")
+                    .WithLocation(5, 1)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -420,14 +455,16 @@ class C
         [Fact]
         public void CompleteAsyncAsync1()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async async;
 ",
                 // (4,17): error CS1513: } expected
                 //     async async;
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 17));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 17)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -460,14 +497,16 @@ class C
         [Fact]
         public void CompleteAsyncAsync2()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async async = 1;
 ",
                 // (4,21): error CS1513: } expected
                 //     async async = 1;
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 21));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 21)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -508,7 +547,8 @@ class C
         [Fact]
         public void IncompleteAsyncAsyncAsync()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async async async
@@ -517,8 +557,11 @@ class C
                 //     async async async
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 22),
                 // (5,1): error CS1519: Invalid token '' in class, record, struct, or interface member declaration
-                // 
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "").WithArguments("").WithLocation(5, 1));
+                //
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "")
+                    .WithArguments("")
+                    .WithLocation(5, 1)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -545,14 +588,16 @@ class C
         [Fact]
         public void CompleteAsyncAsyncAsync()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async async async;
 ",
                 // (4,23): error CS1513: } expected
                 //     async async async;
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 23));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 23)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -586,7 +631,8 @@ class C
         [Fact]
         public void IncompleteAsyncAsyncAsyncAsync()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async async async async
@@ -595,8 +641,11 @@ class C
                 //     async async async async
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 28),
                 // (5,1): error CS1519: Invalid token '' in class, record, struct, or interface member declaration
-                // 
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "").WithArguments("").WithLocation(5, 1));
+                //
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "")
+                    .WithArguments("")
+                    .WithLocation(5, 1)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -624,14 +673,16 @@ class C
         [Fact]
         public void CompleteAsyncAsyncAsyncAsync()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async async async async;
 ",
                 // (4,29): error CS1513: } expected
                 //     async async async async;
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 29));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 29)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -668,7 +719,8 @@ class C
         public void IncompleteAsyncMember01()
         {
             // when parsing an incomplete member, treat 'async' as a modifier if it makes sense
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async Task<
@@ -678,7 +730,8 @@ class C
                 Diagnostic(ErrorCode.ERR_TypeExpected, "").WithLocation(4, 16),
                 // (4,16): error CS1003: Syntax error, '>' expected
                 //     async Task<
-                Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(">").WithLocation(4, 16));
+                Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(">").WithLocation(4, 16)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -714,7 +767,8 @@ class C
         public void IncompleteAsyncMember02()
         {
             // when parsing an incomplete member, treat 'async' as a modifier if it makes sense
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async Tasks.Task<
@@ -724,7 +778,8 @@ class C
                 Diagnostic(ErrorCode.ERR_TypeExpected, "").WithLocation(4, 22),
                 // (4,22): error CS1003: Syntax error, '>' expected
                 //     async Tasks.Task<
-                Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(">").WithLocation(4, 22));
+                Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(">").WithLocation(4, 22)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -768,7 +823,8 @@ class C
         public void IncompleteAsyncMember03()
         {
             // when parsing an incomplete member, treat 'async' as a modifier if it makes sense
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     static async Tasks.Task<
@@ -778,7 +834,8 @@ class C
                 Diagnostic(ErrorCode.ERR_TypeExpected, "").WithLocation(4, 29),
                 // (4,29): error CS1003: Syntax error, '>' expected
                 //     static async Tasks.Task<
-                Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(">").WithLocation(4, 29));
+                Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(">").WithLocation(4, 29)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -824,14 +881,17 @@ class C
         {
             // when parsing an incomplete member, treat 'async' as a modifier if it makes sense
             // negative case
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async operator+
 }",
                 // (4,19): error CS1534: Overloaded binary operator '+' takes two parameters
                 //     async operator+
-                Diagnostic(ErrorCode.ERR_BadBinOpArgs, "+").WithArguments("+").WithLocation(4, 19),
+                Diagnostic(ErrorCode.ERR_BadBinOpArgs, "+")
+                    .WithArguments("+")
+                    .WithLocation(4, 19),
                 // (4,20): error CS1003: Syntax error, '(' expected
                 //     async operator+
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments("(").WithLocation(4, 20),
@@ -840,7 +900,8 @@ class C
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(4, 20),
                 // (4,20): error CS1002: ; expected
                 //     async operator+
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(4, 20));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(4, 20)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -875,14 +936,18 @@ class C
         {
             // when parsing an incomplete member, treat 'async' as a modifier if it makes sense
             // negative case
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async Task<T>
 }",
                 // (5,1): error CS1519: Invalid token '}' in class, record, struct, or interface member declaration
                 // }
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "}").WithArguments("}").WithLocation(5, 1));
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "}")
+                    .WithArguments("}")
+                    .WithLocation(5, 1)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -919,14 +984,16 @@ class C
         {
             // when parsing an incomplete member, treat 'async' as a modifier if it makes sense
             // negative case
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async Task<T> f
 }",
                 // (4,20): error CS1002: ; expected
                 //     async Task<T> f
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(4, 20));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(4, 20)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -968,12 +1035,14 @@ class C
         [Fact]
         public void PropertyAsyncAsync()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async async { get; set; }
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1013,12 +1082,14 @@ class C
         [Fact]
         public void PropertyAsyncAsyncAsync()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async async async { get; set; }
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1059,12 +1130,14 @@ class C
         [Fact]
         public void EventAsyncAsync()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     event async async;
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1097,7 +1170,8 @@ class C
         [Fact]
         public void EventAsyncAsyncAsync1()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     event async async async;
@@ -1108,10 +1182,15 @@ class C
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "async").WithLocation(4, 23),
                 // (4,28): error CS1519: Invalid token ';' in class, record, struct, or interface member declaration
                 //     event async async async;
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";").WithArguments(";").WithLocation(4, 28),
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";")
+                    .WithArguments(";")
+                    .WithLocation(4, 28),
                 // (4,28): error CS1519: Invalid token ';' in class, record, struct, or interface member declaration
                 //     event async async async;
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";").WithArguments(";").WithLocation(4, 28));
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";")
+                    .WithArguments(";")
+                    .WithLocation(4, 28)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1151,12 +1230,14 @@ class C
         [Fact]
         public void EventAsyncAsyncAsync2()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async event async async;
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1190,12 +1271,14 @@ class C
         [Fact]
         public void AsyncModifierOnDelegateDeclaration()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     public async delegate void Goo();
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1425,7 +1508,8 @@ class C
         public void AsyncInterface()
         {
             // ... 'async' <typedecl> ...
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async interface
@@ -1441,7 +1525,8 @@ class C
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 20),
                 // (4,20): error CS1513: } expected
                 //     async interface
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 20));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 20)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1468,7 +1553,8 @@ class C
         public void AsyncPartialClass()
         {
             // ... 'async' 'partial' <typedecl> ...
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async partial class
@@ -1484,7 +1570,8 @@ class C
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 24),
                 // (4,24): error CS1513: } expected
                 //     async partial class
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 24));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 24)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1512,7 +1599,8 @@ class C
         public void AsyncEvent()
         {
             // ... 'async' <event> ...
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async event
@@ -1528,7 +1616,8 @@ class C
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 16),
                 // (4,16): error CS1513: } expected
                 //     async event
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 16));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 16)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1562,14 +1651,17 @@ class C
         public void AsyncPartialEvent()
         {
             // ... 'async' 'partial' <event> ...
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async partial event
 ",
                 // (4,19): error CS1519: Invalid token 'event' in class, record, struct, or interface member declaration
                 //     async partial event
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "event").WithArguments("event").WithLocation(4, 19),
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "event")
+                    .WithArguments("event")
+                    .WithLocation(4, 19),
                 // (4,24): error CS1031: Type expected
                 //     async partial event
                 Diagnostic(ErrorCode.ERR_TypeExpected, "").WithLocation(4, 24),
@@ -1581,7 +1673,8 @@ class C
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 24),
                 // (4,24): error CS1513: } expected
                 //     async partial event
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 24));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 24)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1622,7 +1715,8 @@ class C
         public void AsyncImplicitOperator()
         {
             // ... 'async' <implicit> <operator> ...
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async implicit operator
@@ -1641,7 +1735,8 @@ class C
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(4, 28),
                 // (4,28): error CS1513: } expected
                 //     async implicit operator
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 28));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 28)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1676,26 +1771,35 @@ class C
         public void AsyncPartialImplicitOperator()
         {
             // ... 'async' 'partial' <implicit> <operator> ...
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async partial implicit operator
 ",
                 // (4,11): error CS1553: Declaration is not valid; use '+ operator <dest-type> (...' instead
                 //     async partial implicit operator
-                Diagnostic(ErrorCode.ERR_BadOperatorSyntax, "partial").WithArguments("+").WithLocation(4, 11),
+                Diagnostic(ErrorCode.ERR_BadOperatorSyntax, "partial")
+                    .WithArguments("+")
+                    .WithLocation(4, 11),
                 // (4,19): error CS1003: Syntax error, 'operator' expected
                 //     async partial implicit operator
-                Diagnostic(ErrorCode.ERR_SyntaxError, "implicit").WithArguments("operator").WithLocation(4, 19),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "implicit")
+                    .WithArguments("operator")
+                    .WithLocation(4, 19),
                 // (4,19): error CS1037: Overloadable operator expected
                 //     async partial implicit operator
                 Diagnostic(ErrorCode.ERR_OvlOperatorExpected, "implicit").WithLocation(4, 19),
                 // (4,28): error CS1003: Syntax error, '(' expected
                 //     async partial implicit operator
-                Diagnostic(ErrorCode.ERR_SyntaxError, "operator").WithArguments("(").WithLocation(4, 28),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "operator")
+                    .WithArguments("(")
+                    .WithLocation(4, 28),
                 // (4,28): error CS1041: Identifier expected; 'operator' is a keyword
                 //     async partial implicit operator
-                Diagnostic(ErrorCode.ERR_IdentifierExpectedKW, "operator").WithArguments("", "operator").WithLocation(4, 28),
+                Diagnostic(ErrorCode.ERR_IdentifierExpectedKW, "operator")
+                    .WithArguments("", "operator")
+                    .WithLocation(4, 28),
                 // (4,36): error CS1026: ) expected
                 //     async partial implicit operator
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(4, 36),
@@ -1704,7 +1808,8 @@ class C
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(4, 36),
                 // (4,36): error CS1513: } expected
                 //     async partial implicit operator
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 36));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 36)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1739,7 +1844,8 @@ class C
         public void AsyncExplicitOperator()
         {
             // ... 'async' <explicit> <operator> ...
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async explicit operator
@@ -1758,7 +1864,8 @@ class C
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(4, 28),
                 // (4,28): error CS1513: } expected
                 //     async explicit operator
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 28));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 28)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1793,26 +1900,35 @@ class C
         public void AsyncPartialExplicitOperator()
         {
             // ... 'async' 'partial' <explicit> <operator> ...
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async partial explicit operator
 ",
                 // (4,11): error CS1553: Declaration is not valid; use '+ operator <dest-type> (...' instead
                 //     async partial explicit operator
-                Diagnostic(ErrorCode.ERR_BadOperatorSyntax, "partial").WithArguments("+").WithLocation(4, 11),
+                Diagnostic(ErrorCode.ERR_BadOperatorSyntax, "partial")
+                    .WithArguments("+")
+                    .WithLocation(4, 11),
                 // (4,19): error CS1003: Syntax error, 'operator' expected
                 //     async partial explicit operator
-                Diagnostic(ErrorCode.ERR_SyntaxError, "explicit").WithArguments("operator").WithLocation(4, 19),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "explicit")
+                    .WithArguments("operator")
+                    .WithLocation(4, 19),
                 // (4,19): error CS1037: Overloadable operator expected
                 //     async partial explicit operator
                 Diagnostic(ErrorCode.ERR_OvlOperatorExpected, "explicit").WithLocation(4, 19),
                 // (4,28): error CS1003: Syntax error, '(' expected
                 //     async partial explicit operator
-                Diagnostic(ErrorCode.ERR_SyntaxError, "operator").WithArguments("(").WithLocation(4, 28),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "operator")
+                    .WithArguments("(")
+                    .WithLocation(4, 28),
                 // (4,28): error CS1041: Identifier expected; 'operator' is a keyword
                 //     async partial explicit operator
-                Diagnostic(ErrorCode.ERR_IdentifierExpectedKW, "operator").WithArguments("", "operator").WithLocation(4, 28),
+                Diagnostic(ErrorCode.ERR_IdentifierExpectedKW, "operator")
+                    .WithArguments("", "operator")
+                    .WithLocation(4, 28),
                 // (4,36): error CS1026: ) expected
                 //     async partial explicit operator
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(4, 36),
@@ -1821,7 +1937,8 @@ class C
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(4, 36),
                 // (4,36): error CS1513: } expected
                 //     async partial explicit operator
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 36));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 36)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1856,26 +1973,28 @@ class C
         public void AsyncTypeOperator()
         {
             // ... 'async' <typename> <operator> ...
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async C operator
 ",
                 // (5,1): error CS1037: Overloadable operator expected
-                // 
+                //
                 Diagnostic(ErrorCode.ERR_OvlOperatorExpected, "").WithLocation(5, 1),
                 // (5,1): error CS1003: Syntax error, '(' expected
-                // 
+                //
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments("(").WithLocation(5, 1),
                 // (5,1): error CS1026: ) expected
-                // 
+                //
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(5, 1),
                 // (5,1): error CS1002: ; expected
-                // 
+                //
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(5, 1),
                 // (5,1): error CS1513: } expected
-                // 
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(5, 1));
+                //
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(5, 1)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1910,29 +2029,33 @@ class C
         public void AsyncPartialTypeOperator()
         {
             // ... 'async' 'partial' <typename> <operator> ...
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async partial int operator
 ",
                 // (4,19): error CS1519: Invalid token 'int' in class, record, struct, or interface member declaration
                 //     async partial int operator
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "int").WithArguments("int").WithLocation(4, 19),
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "int")
+                    .WithArguments("int")
+                    .WithLocation(4, 19),
                 // (5,1): error CS1037: Overloadable operator expected
-                // 
+                //
                 Diagnostic(ErrorCode.ERR_OvlOperatorExpected, "").WithLocation(5, 1),
                 // (5,1): error CS1003: Syntax error, '(' expected
-                // 
+                //
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments("(").WithLocation(5, 1),
                 // (5,1): error CS1026: ) expected
-                // 
+                //
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(5, 1),
                 // (5,1): error CS1002: ; expected
-                // 
+                //
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(5, 1),
                 // (5,1): error CS1513: } expected
-                // 
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(5, 1));
+                //
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(5, 1)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1974,7 +2097,8 @@ class C
         public void AsyncField()
         {
             // ... 'async' <typename> <membername> ...
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async C C
@@ -1984,7 +2108,8 @@ class C
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(4, 14),
                 // (4,14): error CS1513: } expected
                 //     async C C
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 14));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 14)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -2019,7 +2144,8 @@ class C
         public void AsyncPartialIndexer()
         {
             // ... 'async' 'partial' <typename> <membername> ...
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async partial C this
@@ -2038,7 +2164,8 @@ class C
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 25),
                 // (4,25): error CS1513: } expected
                 //     async partial C this
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 25));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 25)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -2076,13 +2203,17 @@ class C
         [Fact]
         public void AsyncTypeEndOfFile()
         {
-            UsingTree("class C { async T",
+            UsingTree(
+                "class C { async T",
                 // (1,18): error CS1519: Invalid token '' in class, record, struct, or interface member declaration
                 // class C { async T
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "").WithArguments("").WithLocation(1, 18),
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "")
+                    .WithArguments("")
+                    .WithLocation(1, 18),
                 // (1,18): error CS1513: } expected
                 // class C { async T
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 18));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 18)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -2109,10 +2240,14 @@ class C
         [Fact]
         public void AsyncTypeCloseCurly()
         {
-            UsingTree("class C { async T }",
+            UsingTree(
+                "class C { async T }",
                 // (1,19): error CS1519: Invalid token '}' in class, record, struct, or interface member declaration
                 // class C { async T }
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "}").WithArguments("}").WithLocation(1, 19));
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "}")
+                    .WithArguments("}")
+                    .WithLocation(1, 19)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -2140,18 +2275,23 @@ class C
         public void AsyncTypePredefinedType()
         {
             UsingTree(
-@"class C {
+                @"class C {
     async T
     int",
                 // (3,5): error CS1519: Invalid token 'int' in class, record, struct, or interface member declaration
                 //     int
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "int").WithArguments("int").WithLocation(3, 5),
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "int")
+                    .WithArguments("int")
+                    .WithLocation(3, 5),
                 // (3,8): error CS1519: Invalid token '' in class, record, struct, or interface member declaration
                 //     int
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "").WithArguments("").WithLocation(3, 8),
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "")
+                    .WithArguments("")
+                    .WithLocation(3, 8),
                 // (3,8): error CS1513: } expected
                 //     int
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(3, 8));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(3, 8)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -2186,18 +2326,23 @@ class C
         public void AsyncTypeModifier()
         {
             UsingTree(
-@"class C {
+                @"class C {
     async T
     public",
                 // (3,5): error CS1585: Member modifier 'public' must precede the member type and name
                 //     public
-                Diagnostic(ErrorCode.ERR_BadModifierLocation, "public").WithArguments("public").WithLocation(3, 5),
+                Diagnostic(ErrorCode.ERR_BadModifierLocation, "public")
+                    .WithArguments("public")
+                    .WithLocation(3, 5),
                 // (3,11): error CS1519: Invalid token '' in class, record, struct, or interface member declaration
                 //     public
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "").WithArguments("").WithLocation(3, 11),
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "")
+                    .WithArguments("")
+                    .WithLocation(3, 11),
                 // (3,11): error CS1513: } expected
                 //     public
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(3, 11));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(3, 11)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -2229,12 +2374,14 @@ class C
         public void AsyncTypeFollowedByTypeDecl()
         {
             UsingTree(
-@"class C {
+                @"class C {
     async T
 class",
                 // (3,1): error CS1519: Invalid token 'class' in class, record, struct, or interface member declaration
                 // class
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "class").WithArguments("class").WithLocation(3, 1),
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "class")
+                    .WithArguments("class")
+                    .WithLocation(3, 1),
                 // (3,6): error CS1001: Identifier expected
                 // class
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(3, 6),
@@ -2246,7 +2393,8 @@ class",
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(3, 6),
                 // (3,6): error CS1513: } expected
                 // class
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(3, 6));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(3, 6)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -2281,7 +2429,7 @@ class",
         public void AsyncTypeFollowedByNamespaceDecl()
         {
             UsingTree(
-@"class C {
+                @"class C {
     async T
 namespace",
                 // (2,12): error CS1513: } expected
@@ -2289,7 +2437,9 @@ namespace",
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(2, 12),
                 // (3,1): error CS1519: Invalid token 'namespace' in class, record, struct, or interface member declaration
                 // namespace
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "namespace").WithArguments("namespace").WithLocation(3, 1),
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "namespace")
+                    .WithArguments("namespace")
+                    .WithLocation(3, 1),
                 // (3,10): error CS1001: Identifier expected
                 // namespace
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(3, 10),
@@ -2298,7 +2448,8 @@ namespace",
                 Diagnostic(ErrorCode.ERR_LbraceExpected, "").WithLocation(3, 10),
                 // (3,10): error CS1513: } expected
                 // namespace
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(3, 10));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(3, 10)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -2336,13 +2487,16 @@ namespace",
         public void AsyncGenericType()
         {
             UsingTree(
-@"class Program
+                @"class Program
 {
     public async Task<IReadOnlyCollection<ProjectConfiguration>>
 }",
                 // (4,1): error CS1519: Invalid token '}' in class, record, struct, or interface member declaration
                 // }
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "}").WithArguments("}").WithLocation(4, 1));
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "}")
+                    .WithArguments("}")
+                    .WithLocation(4, 1)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -2391,16 +2545,24 @@ namespace",
         {
             var test = "class async { async async => null; }";
 
-            CreateCompilation(test, parseOptions: TestOptions.Regular5).VerifyDiagnostics(
-                // (1,7): warning CS8981: The type name 'async' only contains lower-cased ascii characters. Such names may become reserved for the language.
-                // class async { async async => null; }
-                Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "async").WithArguments("async").WithLocation(1, 7),
-                // (1,21): error CS0542: 'async': member names cannot be the same as their enclosing type
-                // class async { async async => null; }
-                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "async").WithArguments("async").WithLocation(1, 21),
-                // (1,27): error CS8026: Feature 'expression-bodied property' is not available in C# 5. Please use language version 6 or greater.
-                // class async { async async => null; }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion5, "=>").WithArguments("expression-bodied property", "6").WithLocation(1, 27));
+            CreateCompilation(test, parseOptions: TestOptions.Regular5)
+                .VerifyDiagnostics(
+                    // (1,7): warning CS8981: The type name 'async' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                    // class async { async async => null; }
+                    Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "async")
+                        .WithArguments("async")
+                        .WithLocation(1, 7),
+                    // (1,21): error CS0542: 'async': member names cannot be the same as their enclosing type
+                    // class async { async async => null; }
+                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "async")
+                        .WithArguments("async")
+                        .WithLocation(1, 21),
+                    // (1,27): error CS8026: Feature 'expression-bodied property' is not available in C# 5. Please use language version 6 or greater.
+                    // class async { async async => null; }
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion5, "=>")
+                        .WithArguments("expression-bodied property", "6")
+                        .WithLocation(1, 27)
+                );
 
             UsingTree(test);
 
@@ -2478,19 +2640,31 @@ namespace",
         {
             var text = "interface async { async this[async i] => null; }";
 
-            CreateCompilation(text, parseOptions: TestOptions.Regular5).VerifyDiagnostics(
-                // (1,11): warning CS8981: The type name 'async' only contains lower-cased ascii characters. Such names may become reserved for the language.
-                // interface async { async this[async i] => null; }
-                Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "async").WithArguments("async").WithLocation(1, 11),
-                // (1,39): error CS8026: Feature 'expression-bodied indexer' is not available in C# 5. Please use language version 6 or greater.
-                // interface async { async this[async i] => null; }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion5, "=>").WithArguments("expression-bodied indexer", "6").WithLocation(1, 39),
-                // (1,42): error CS8026: Feature 'default interface implementation' is not available in C# 5. Please use language version 8.0 or greater.
-                // interface async { async this[async i] => null; }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion5, "null").WithArguments("default interface implementation", "8.0").WithLocation(1, 42),
-                // (1,42): error CS8701: Target runtime doesn't support default interface implementation.
-                // interface async { async this[async i] => null; }
-                Diagnostic(ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation, "null").WithLocation(1, 42));
+            CreateCompilation(text, parseOptions: TestOptions.Regular5)
+                .VerifyDiagnostics(
+                    // (1,11): warning CS8981: The type name 'async' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                    // interface async { async this[async i] => null; }
+                    Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "async")
+                        .WithArguments("async")
+                        .WithLocation(1, 11),
+                    // (1,39): error CS8026: Feature 'expression-bodied indexer' is not available in C# 5. Please use language version 6 or greater.
+                    // interface async { async this[async i] => null; }
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion5, "=>")
+                        .WithArguments("expression-bodied indexer", "6")
+                        .WithLocation(1, 39),
+                    // (1,42): error CS8026: Feature 'default interface implementation' is not available in C# 5. Please use language version 8.0 or greater.
+                    // interface async { async this[async i] => null; }
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion5, "null")
+                        .WithArguments("default interface implementation", "8.0")
+                        .WithLocation(1, 42),
+                    // (1,42): error CS8701: Target runtime doesn't support default interface implementation.
+                    // interface async { async this[async i] => null; }
+                    Diagnostic(
+                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                            "null"
+                        )
+                        .WithLocation(1, 42)
+                );
 
             UsingTree(text);
 
@@ -2594,19 +2768,29 @@ namespace",
         {
             var test = "class async : async { async async.async => null; }";
 
-            CreateCompilation(test, parseOptions: TestOptions.Regular5).VerifyDiagnostics(
-                // (1,7): error CS0146: Circular base type dependency involving 'async' and 'async'
-                // class async : async { async async.async => null; }
-                Diagnostic(ErrorCode.ERR_CircularBase, "async").WithArguments("async", "async").WithLocation(1, 7),
-                // (1,7): warning CS8981: The type name 'async' only contains lower-cased ascii characters. Such names may become reserved for the language.
-                // class async : async { async async.async => null; }
-                Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "async").WithArguments("async").WithLocation(1, 7),
-                // (1,29): error CS0538: 'async' in explicit interface declaration is not an interface
-                // class async : async { async async.async => null; }
-                Diagnostic(ErrorCode.ERR_ExplicitInterfaceImplementationNotInterface, "async").WithArguments("async").WithLocation(1, 29),
-                // (1,41): error CS8026: Feature 'expression-bodied property' is not available in C# 5. Please use language version 6 or greater.
-                // class async : async { async async.async => null; }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion5, "=>").WithArguments("expression-bodied property", "6").WithLocation(1, 41));
+            CreateCompilation(test, parseOptions: TestOptions.Regular5)
+                .VerifyDiagnostics(
+                    // (1,7): error CS0146: Circular base type dependency involving 'async' and 'async'
+                    // class async : async { async async.async => null; }
+                    Diagnostic(ErrorCode.ERR_CircularBase, "async")
+                        .WithArguments("async", "async")
+                        .WithLocation(1, 7),
+                    // (1,7): warning CS8981: The type name 'async' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                    // class async : async { async async.async => null; }
+                    Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "async")
+                        .WithArguments("async")
+                        .WithLocation(1, 7),
+                    // (1,29): error CS0538: 'async' in explicit interface declaration is not an interface
+                    // class async : async { async async.async => null; }
+                    Diagnostic(ErrorCode.ERR_ExplicitInterfaceImplementationNotInterface, "async")
+                        .WithArguments("async")
+                        .WithLocation(1, 29),
+                    // (1,41): error CS8026: Feature 'expression-bodied property' is not available in C# 5. Please use language version 6 or greater.
+                    // class async : async { async async.async => null; }
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion5, "=>")
+                        .WithArguments("expression-bodied property", "6")
+                        .WithLocation(1, 41)
+                );
 
             UsingTree(test);
             N(SyntaxKind.CompilationUnit);

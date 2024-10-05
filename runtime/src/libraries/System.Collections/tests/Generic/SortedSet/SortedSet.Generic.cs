@@ -68,19 +68,19 @@ namespace System.Collections.Tests
             var set = (SortedSet<int>)CreateSortedSet(new[] { 7, 11, 3, 1, 5, 9, 13 }, 7, 7);
             for (int i = 0; i < 14; i++)
             {
-                for (int j = i; j < 14; j ++)
+                for (int j = i; j < 14; j++)
                 {
                     SortedSet<int> view = set.GetViewBetween(i, j);
 
-                    if (j < i || (j == i && i % 2 == 0) )
+                    if (j < i || (j == i && i % 2 == 0))
                     {
                         Assert.Equal(default(int), view.Min);
                         Assert.Equal(default(int), view.Max);
                     }
                     else
                     {
-                        Assert.Equal(i + ((i+1) % 2), view.Min);
-                        Assert.Equal(j - ((j+1) % 2), view.Max);
+                        Assert.Equal(i + ((i + 1) % 2), view.Min);
+                        Assert.Equal(j - ((j + 1) % 2), view.Max);
                     }
                 }
             }
@@ -110,7 +110,8 @@ namespace System.Collections.Tests
     }
 
     [OuterLoop]
-    public class SortedSet_Generic_Tests_EquatableBackwardsOrder : SortedSet_Generic_Tests<EquatableBackwardsOrder>
+    public class SortedSet_Generic_Tests_EquatableBackwardsOrder
+        : SortedSet_Generic_Tests<EquatableBackwardsOrder>
     {
         protected override EquatableBackwardsOrder CreateT(int seed)
         {
@@ -125,7 +126,8 @@ namespace System.Collections.Tests
     }
 
     [OuterLoop]
-    public class SortedSet_Generic_Tests_int_With_Comparer_SameAsDefaultComparer : SortedSet_Generic_Tests<int>
+    public class SortedSet_Generic_Tests_int_With_Comparer_SameAsDefaultComparer
+        : SortedSet_Generic_Tests<int>
     {
         protected override IEqualityComparer<int> GetIEqualityComparer()
         {
@@ -167,7 +169,8 @@ namespace System.Collections.Tests
     }
 
     [OuterLoop]
-    public class SortedSet_Generic_Tests_int_With_Comparer_HashCodeAlwaysReturnsZero : SortedSet_Generic_Tests<int>
+    public class SortedSet_Generic_Tests_int_With_Comparer_HashCodeAlwaysReturnsZero
+        : SortedSet_Generic_Tests<int>
     {
         protected override IEqualityComparer<int> GetIEqualityComparer()
         {

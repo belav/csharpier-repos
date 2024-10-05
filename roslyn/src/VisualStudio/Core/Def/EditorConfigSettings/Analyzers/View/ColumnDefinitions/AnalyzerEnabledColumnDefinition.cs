@@ -20,9 +20,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AnalyzerEnabledColumnDefinition()
-        {
-        }
+        public AnalyzerEnabledColumnDefinition() { }
 
         public override string Name => Enabled;
         public override string DisplayName => ServicesVSResources.Enabled;
@@ -30,7 +28,11 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers
         public override bool IsSortable => true;
         public override double MinWidth => 50;
 
-        public override bool TryCreateColumnContent(ITableEntryHandle entry, bool singleColumnView, out FrameworkElement content)
+        public override bool TryCreateColumnContent(
+            ITableEntryHandle entry,
+            bool singleColumnView,
+            out FrameworkElement content
+        )
         {
             var checkBox = new CheckBox();
             if (entry.TryGetValue(Name, out bool enabled))

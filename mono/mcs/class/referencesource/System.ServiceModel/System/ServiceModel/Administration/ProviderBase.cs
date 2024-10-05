@@ -9,11 +9,15 @@ namespace System.ServiceModel.Administration
 
     abstract class ProviderBase : IWmiProvider
     {
-        public static void FillCollectionInfo(ICollection info, IWmiInstance instance, string propertyName)
+        public static void FillCollectionInfo(
+            ICollection info,
+            IWmiInstance instance,
+            string propertyName
+        )
         {
             Fx.Assert(null != info, "");
             Fx.Assert(null != instance, "");
-//warning 56507 : Prefer 'string.IsNullOrEmpty(action)' over checks for null and/or emptiness.
+            //warning 56507 : Prefer 'string.IsNullOrEmpty(action)' over checks for null and/or emptiness.
 #pragma warning suppress 56507 //Microsoft; Asserting non-null object for marshalling reasons.  Empty string may be valid input.
             Fx.Assert(null != propertyName, "");
 
@@ -26,11 +30,15 @@ namespace System.ServiceModel.Administration
             instance.SetProperty(propertyName, data);
         }
 
-        public static void FillCollectionInfo(IEnumerable info, IWmiInstance instance, string propertyName)
+        public static void FillCollectionInfo(
+            IEnumerable info,
+            IWmiInstance instance,
+            string propertyName
+        )
         {
             Fx.Assert(null != info, "");
             Fx.Assert(null != instance, "");
-//warning 56507 : Prefer 'string.IsNullOrEmpty(action)' over checks for null and/or emptiness.
+            //warning 56507 : Prefer 'string.IsNullOrEmpty(action)' over checks for null and/or emptiness.
 #pragma warning suppress 56507 //Microsoft; Asserting non-null object for marshalling reasons.  Empty string may be valid input.
             Fx.Assert(null != propertyName, "");
 
@@ -39,7 +47,7 @@ namespace System.ServiceModel.Administration
             {
                 i++;
             }
-            
+
             string[] data = new string[i];
 
             i = 0;
@@ -52,28 +60,38 @@ namespace System.ServiceModel.Administration
 
         void IWmiProvider.EnumInstances(IWmiInstances instances)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new WbemNotSupportedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new WbemNotSupportedException()
+            );
         }
 
         bool IWmiProvider.GetInstance(IWmiInstance contract)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new WbemNotSupportedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new WbemNotSupportedException()
+            );
         }
 
         bool IWmiProvider.PutInstance(IWmiInstance instance)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new WbemNotSupportedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new WbemNotSupportedException()
+            );
         }
 
         bool IWmiProvider.DeleteInstance(IWmiInstance instance)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new WbemNotSupportedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new WbemNotSupportedException()
+            );
         }
 
         bool IWmiProvider.InvokeMethod(IWmiMethodContext method)
         {
             method.ReturnParameter = 0;
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new WbemNotSupportedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new WbemNotSupportedException()
+            );
         }
     }
 }

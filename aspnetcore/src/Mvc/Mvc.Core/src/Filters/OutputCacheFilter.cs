@@ -32,7 +32,12 @@ internal partial class OutputCacheFilter : IActionFilter
         var effectivePolicy = context.FindEffectivePolicy<IOutputCacheFilter>();
         if (effectivePolicy != null && effectivePolicy != this)
         {
-            Log.NotMostEffectiveFilter(_logger, GetType(), effectivePolicy.GetType(), typeof(IOutputCacheFilter));
+            Log.NotMostEffectiveFilter(
+                _logger,
+                GetType(),
+                effectivePolicy.GetType(),
+                typeof(IOutputCacheFilter)
+            );
             return;
         }
 
@@ -40,17 +45,28 @@ internal partial class OutputCacheFilter : IActionFilter
         if (outputCachingFeature == null)
         {
             throw new InvalidOperationException(
-                Resources.FormatOutputCacheAttribute_Requires_OutputCachingMiddleware(nameof(OutputCacheAttribute)));
+                Resources.FormatOutputCacheAttribute_Requires_OutputCachingMiddleware(
+                    nameof(OutputCacheAttribute)
+                )
+            );
         }
     }
 
-    public void OnActionExecuted(ActionExecutedContext context)
-    {
-    }
+    public void OnActionExecuted(ActionExecutedContext context) { }
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Debug, "Execution of filter {OverriddenFilter} is preempted by filter {OverridingFilter} which is the most effective filter implementing policy {FilterPolicy}.", EventName = "NotMostEffectiveFilter")]
-        public static partial void NotMostEffectiveFilter(ILogger logger, Type overriddenFilter, Type overridingFilter, Type filterPolicy);
+        [LoggerMessage(
+            1,
+            LogLevel.Debug,
+            "Execution of filter {OverriddenFilter} is preempted by filter {OverridingFilter} which is the most effective filter implementing policy {FilterPolicy}.",
+            EventName = "NotMostEffectiveFilter"
+        )]
+        public static partial void NotMostEffectiveFilter(
+            ILogger logger,
+            Type overriddenFilter,
+            Type overridingFilter,
+            Type filterPolicy
+        );
     }
 }

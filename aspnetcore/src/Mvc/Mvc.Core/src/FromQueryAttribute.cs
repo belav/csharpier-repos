@@ -9,8 +9,16 @@ namespace Microsoft.AspNetCore.Mvc;
 /// <summary>
 /// Specifies that a parameter or property should be bound using the request query string.
 /// </summary>
-[AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-public class FromQueryAttribute : Attribute, IBindingSourceMetadata, IModelNameProvider, IFromQueryMetadata
+[AttributeUsage(
+    AttributeTargets.Parameter | AttributeTargets.Property,
+    AllowMultiple = false,
+    Inherited = true
+)]
+public class FromQueryAttribute
+    : Attribute,
+        IBindingSourceMetadata,
+        IModelNameProvider,
+        IFromQueryMetadata
 {
     /// <inheritdoc />
     public BindingSource BindingSource => BindingSource.Query;

@@ -25,78 +25,18 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
         public static int MainMethod()
         {
             int i = 0;
-            sbyte[] x1 = new sbyte[]
-            {
-            1, 2, 3
-            }
-
-            ;
-            byte[] x2 = new byte[]
-            {
-            1, 2, 3
-            }
-
-            ;
-            short[] x3 = new short[]
-            {
-            1, 2, 3
-            }
-
-            ;
-            ushort[] x4 = new ushort[]
-            {
-            1, 2, 3
-            }
-
-            ;
-            int[] x5 = new int[]
-            {
-            1, 2, 3
-            }
-
-            ;
-            uint[] x6 = new uint[]
-            {
-            1, 2, 3
-            }
-
-            ;
-            long[] x7 = new long[]
-            {
-            1, 2, 3
-            }
-
-            ;
-            ulong[] x8 = new ulong[]
-            {
-            1, 2, 3
-            }
-
-            ;
-            char[] x9 = new char[]
-            {
-            '1', '2', '3'
-            }
-
-            ;
-            float[] x10 = new float[]
-            {
-            1.1f, 2.2f, 3.3f
-            }
-
-            ;
-            double[] x11 = new double[]
-            {
-            1.1, 2.2, 3.35
-            }
-
-            ;
-            decimal[] x12 = new decimal[]
-            {
-            1.1m, 22.2m, 33.3m
-            }
-
-            ;
+            sbyte[] x1 = new sbyte[] { 1, 2, 3 };
+            byte[] x2 = new byte[] { 1, 2, 3 };
+            short[] x3 = new short[] { 1, 2, 3 };
+            ushort[] x4 = new ushort[] { 1, 2, 3 };
+            int[] x5 = new int[] { 1, 2, 3 };
+            uint[] x6 = new uint[] { 1, 2, 3 };
+            long[] x7 = new long[] { 1, 2, 3 };
+            ulong[] x8 = new ulong[] { 1, 2, 3 };
+            char[] x9 = new char[] { '1', '2', '3' };
+            float[] x10 = new float[] { 1.1f, 2.2f, 3.3f };
+            double[] x11 = new double[] { 1.1, 2.2, 3.35 };
+            decimal[] x12 = new decimal[] { 1.1m, 22.2m, 33.3m };
             // IMPLICIT NUMERIC CONVERSIONS
             // sybte to short, int, long, float, double, decimal
             foreach (short y in (dynamic)x1)
@@ -389,8 +329,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freach002.freach002
 {
     // <Title> Dynamic in Foreach </Title>
@@ -401,29 +339,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
     //<Expects Status=success></Expects>
     // <Code>
 
-    public class A
-    {
-    }
+    public class A { }
 
-    public class B : A
-    {
-    }
+    public class B : A { }
 
-    public interface I1
-    {
-    }
+    public interface I1 { }
 
-    public interface I2 : I1
-    {
-    }
+    public interface I2 : I1 { }
 
-    public class CI1 : I1
-    {
-    }
+    public class CI1 : I1 { }
 
-    public class CI2 : I2
-    {
-    }
+    public class CI2 : I2 { }
 
     public class Test
     {
@@ -439,69 +365,32 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
             int i = 0;
             // IMPLICIT REFERENCE CONVERSIONS
             // Reference type to object
-            Test[] x1 = new Test[]
-            {
-            new Test(), new Test()}
-
-            ;
+            Test[] x1 = new Test[] { new Test(), new Test() };
             foreach (object y in (dynamic)x1)
                 i++;
             // Class-Type S to Class-Type T, S is derived from T
-            B[] x2 = new B[]
-            {
-            new B(), new B()}
-
-            ;
+            B[] x2 = new B[] { new B(), new B() };
             foreach (A y in (dynamic)x2)
                 i++;
             // Class-Type S to Interface-Type T, S implements T
-            CI1[] x3 = new CI1[]
-            {
-            new CI1(), new CI1()}
-
-            ;
+            CI1[] x3 = new CI1[] { new CI1(), new CI1() };
             foreach (I1 y in (dynamic)x3)
                 i++;
             // Interface-Type S to Interface-Type T, S is derived from T
-            I2[] x4 = new I2[]
-            {
-            new CI2(), new CI2()}
-
-            ;
+            I2[] x4 = new I2[] { new CI2(), new CI2() };
             foreach (I1 y in (dynamic)x4)
                 i++;
             // From array-type to System.Array
-            int[][] x5 = new int[][]
-            {
-            new int[]
-            {
-            1, 2, 3
-            }
-
-            , new int[]
-            {
-            4, 5, 6
-            }
-            }
-
-            ;
+            int[][] x5 = new int[][] { new int[] { 1, 2, 3 }, new int[] { 4, 5, 6 } };
             foreach (System.Array y in (dynamic)x5)
                 i++;
             // EXPLICIT REFERENCE CONVERSIONS
             // object to reference-type
-            object[] xr1 = new object[]
-            {
-            new Test(), new Test()}
-
-            ;
+            object[] xr1 = new object[] { new Test(), new Test() };
             foreach (Test y in (dynamic)xr1)
                 i++;
             // Class-Type S to Class-Type T, S is base class from T
-            A[] xr2 = new A[]
-            {
-            new B(), new B()}
-
-            ;
+            A[] xr2 = new A[] { new B(), new B() };
             foreach (B y in (dynamic)xr2)
                 i++;
             return 0;
@@ -509,8 +398,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freach003.freach003
 {
@@ -522,9 +409,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
     //<Expects Status=success></Expects>
     // <Code>
 
-    public struct S
-    {
-    }
+    public struct S { }
 
     public class Test
     {
@@ -539,41 +424,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
         {
             int i = 0;
             // Boxing Conversions
-            int[] x1 = new int[]
-            {
-            1, 2, 3
-            }
-
-            ;
-            S[] x2 = new S[]
-            {
-            new S(), new S()}
-
-            ;
-            decimal[] x3 = new decimal[]
-            {
-            1m, 2m, 3m
-            }
-
-            ;
-            int?[] x4 = new int?[]
-            {
-            1, 2, 3
-            }
-
-            ;
-            uint?[] x5 = new uint?[]
-            {
-            1, 2, 3
-            }
-
-            ;
-            decimal?[] x6 = new decimal?[]
-            {
-            1m, 2m, 3m
-            }
-
-            ;
+            int[] x1 = new int[] { 1, 2, 3 };
+            S[] x2 = new S[] { new S(), new S() };
+            decimal[] x3 = new decimal[] { 1m, 2m, 3m };
+            int?[] x4 = new int?[] { 1, 2, 3 };
+            uint?[] x5 = new uint?[] { 1, 2, 3 };
+            decimal?[] x6 = new decimal?[] { 1m, 2m, 3m };
             // Boxing to object
             foreach (object y in (dynamic)x1)
                 i++;
@@ -601,41 +457,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
             foreach (System.ValueType y in (dynamic)x6)
                 i++;
             // Unboxing Conversions
-            object[] xo1 = new object[]
-            {
-            1, 2, 3
-            }
-
-            ;
-            object[] xo2 = new object[]
-            {
-            new S(), new S()}
-
-            ;
-            object[] xo3 = new object[]
-            {
-            1m, 2m, 3m
-            }
-
-            ;
-            object[] xo4 = new object[]
-            {
-            (int ? )1, (int ? )2, (int ? )3
-            }
-
-            ;
-            object[] xo5 = new object[]
-            {
-            (uint ? )1, (uint ? )2, (uint ? )3
-            }
-
-            ;
-            object[] xo6 = new object[]
-            {
-            (decimal ? )1m, (decimal ? )2m, (decimal ? )3m
-            }
-
-            ;
+            object[] xo1 = new object[] { 1, 2, 3 };
+            object[] xo2 = new object[] { new S(), new S() };
+            object[] xo3 = new object[] { 1m, 2m, 3m };
+            object[] xo4 = new object[] { (int?)1, (int?)2, (int?)3 };
+            object[] xo5 = new object[] { (uint?)1, (uint?)2, (uint?)3 };
+            object[] xo6 = new object[] { (decimal?)1m, (decimal?)2m, (decimal?)3m };
             // Unboxing from object
             foreach (object y in (dynamic)xo1)
                 i++;
@@ -650,41 +477,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
             foreach (object y in (dynamic)xo6)
                 i++;
             // Unboxing Conversions
-            System.ValueType[] xv1 = new System.ValueType[]
-            {
-            1, 2, 3
-            }
-
-            ;
-            System.ValueType[] xv2 = new System.ValueType[]
-            {
-            new S(), new S()}
-
-            ;
-            System.ValueType[] xv3 = new System.ValueType[]
-            {
-            1m, 2m, 3m
-            }
-
-            ;
-            System.ValueType[] xv4 = new System.ValueType[]
-            {
-            (int ? )1, (int ? )2, (int ? )3
-            }
-
-            ;
-            System.ValueType[] xv5 = new System.ValueType[]
-            {
-            (uint ? )1, (uint ? )2, (uint ? )3
-            }
-
-            ;
+            System.ValueType[] xv1 = new System.ValueType[] { 1, 2, 3 };
+            System.ValueType[] xv2 = new System.ValueType[] { new S(), new S() };
+            System.ValueType[] xv3 = new System.ValueType[] { 1m, 2m, 3m };
+            System.ValueType[] xv4 = new System.ValueType[] { (int?)1, (int?)2, (int?)3 };
+            System.ValueType[] xv5 = new System.ValueType[] { (uint?)1, (uint?)2, (uint?)3 };
             System.ValueType[] xv6 = new System.ValueType[]
             {
-            (decimal ? )1m, (decimal ? )2m, (decimal ? )3m
-            }
-
-            ;
+                (decimal?)1m,
+                (decimal?)2m,
+                (decimal?)3m,
+            };
             // Unboxing from System.ValueType
             foreach (System.ValueType y in (dynamic)xv1)
                 i++;
@@ -704,8 +507,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freach004.freach004
 {
     // <Title> Dynamic in Foreach </Title>
@@ -720,14 +521,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
     {
         Red,
         Blue,
-        Green
+        Green,
     }
 
     public enum Cars
     {
         Toyota,
         Lexus,
-        BMW
+        BMW,
     }
 
     public class Test
@@ -742,90 +543,20 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
         public static int MainMethod()
         {
             int i = 0;
-            sbyte[] x1 = new sbyte[]
-            {
-            1, 2, 3
-            }
-
-            ;
-            byte[] x2 = new byte[]
-            {
-            1, 2, 3
-            }
-
-            ;
-            short[] x3 = new short[]
-            {
-            1, 2, 3
-            }
-
-            ;
-            ushort[] x4 = new ushort[]
-            {
-            1, 2, 3
-            }
-
-            ;
-            int[] x5 = new int[]
-            {
-            1, 2, 3
-            }
-
-            ;
-            uint[] x6 = new uint[]
-            {
-            1, 2, 3
-            }
-
-            ;
-            long[] x7 = new long[]
-            {
-            1, 2, 3
-            }
-
-            ;
-            ulong[] x8 = new ulong[]
-            {
-            1, 2, 3
-            }
-
-            ;
-            char[] x9 = new char[]
-            {
-            '1', '2', '3'
-            }
-
-            ;
-            float[] x10 = new float[]
-            {
-            1.1f, 2.2f, 3.3f
-            }
-
-            ;
-            double[] x11 = new double[]
-            {
-            1.1, 2.2, 3.35
-            }
-
-            ;
-            decimal[] x12 = new decimal[]
-            {
-            1.1m, 22.2m, 33.3m
-            }
-
-            ;
-            Color[] x13 = new Color[]
-            {
-            Color.Red, Color.Green
-            }
-
-            ;
-            Cars[] x14 = new Cars[]
-            {
-            Cars.Toyota, Cars.BMW
-            }
-
-            ;
+            sbyte[] x1 = new sbyte[] { 1, 2, 3 };
+            byte[] x2 = new byte[] { 1, 2, 3 };
+            short[] x3 = new short[] { 1, 2, 3 };
+            ushort[] x4 = new ushort[] { 1, 2, 3 };
+            int[] x5 = new int[] { 1, 2, 3 };
+            uint[] x6 = new uint[] { 1, 2, 3 };
+            long[] x7 = new long[] { 1, 2, 3 };
+            ulong[] x8 = new ulong[] { 1, 2, 3 };
+            char[] x9 = new char[] { '1', '2', '3' };
+            float[] x10 = new float[] { 1.1f, 2.2f, 3.3f };
+            double[] x11 = new double[] { 1.1, 2.2, 3.35 };
+            decimal[] x12 = new decimal[] { 1.1m, 22.2m, 33.3m };
+            Color[] x13 = new Color[] { Color.Red, Color.Green };
+            Cars[] x14 = new Cars[] { Cars.Toyota, Cars.BMW };
             // From sybte, byte, short, ushort, int, uint, long, ulong, char, float, double, decimal to enum-type
             foreach (Color y in (dynamic)x1)
                 i++;
@@ -885,8 +616,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freach005.freach005
 {
     // <Title> Dynamic in Foreach </Title>
@@ -899,12 +628,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
 
     public class Test
     {
-        public static implicit operator int (Test t)
+        public static implicit operator int(Test t)
         {
             return 5;
         }
 
-        public static explicit operator decimal (Test t)
+        public static explicit operator decimal(Test t)
         {
             return 10m;
         }
@@ -919,11 +648,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
         public static int MainMethod()
         {
             int i = 0;
-            Test[] x1 = new Test[]
-            {
-            new Test(), new Test()}
-
-            ;
+            Test[] x1 = new Test[] { new Test(), new Test() };
             // User-defined Implicit conversions
             foreach (int y in (dynamic)x1)
                 i++;
@@ -937,8 +662,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freach006.freach006
 {
@@ -962,20 +685,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
         public static int MainMethod()
         {
             int i = 0;
-            int[][] v1 = new int[][]
-            {
-            new int[]
-            {
-            4, 5
-            }
-
-            , new int[]
-            {
-            1, 2, 3
-            }
-            }
-
-            ;
+            int[][] v1 = new int[][] { new int[] { 4, 5 }, new int[] { 1, 2, 3 } };
             // Nested foreach statements
             foreach (dynamic y in (dynamic)v1)
             {
@@ -989,8 +699,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freach007.freach007
 {
@@ -1014,78 +722,18 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
         public static int MainMethod()
         {
             int i = 0;
-            sbyte?[] x1 = new sbyte?[]
-            {
-            1, 2, 3
-            }
-
-            ;
-            byte?[] x2 = new byte?[]
-            {
-            1, 2, 3
-            }
-
-            ;
-            short?[] x3 = new short?[]
-            {
-            1, 2, 3
-            }
-
-            ;
-            ushort?[] x4 = new ushort?[]
-            {
-            1, 2, 3
-            }
-
-            ;
-            int?[] x5 = new int?[]
-            {
-            1, 2, 3
-            }
-
-            ;
-            uint?[] x6 = new uint?[]
-            {
-            1, 2, 3
-            }
-
-            ;
-            long?[] x7 = new long?[]
-            {
-            1, 2, 3
-            }
-
-            ;
-            ulong?[] x8 = new ulong?[]
-            {
-            1, 2, 3
-            }
-
-            ;
-            char?[] x9 = new char?[]
-            {
-            '1', '2', '3'
-            }
-
-            ;
-            float?[] x10 = new float?[]
-            {
-            1.1f, 2.2f, 3.3f
-            }
-
-            ;
-            double?[] x11 = new double?[]
-            {
-            1.1, 2.2, 3.35
-            }
-
-            ;
-            decimal?[] x12 = new decimal?[]
-            {
-            1.1m, 22.2m, 33.3m
-            }
-
-            ;
+            sbyte?[] x1 = new sbyte?[] { 1, 2, 3 };
+            byte?[] x2 = new byte?[] { 1, 2, 3 };
+            short?[] x3 = new short?[] { 1, 2, 3 };
+            ushort?[] x4 = new ushort?[] { 1, 2, 3 };
+            int?[] x5 = new int?[] { 1, 2, 3 };
+            uint?[] x6 = new uint?[] { 1, 2, 3 };
+            long?[] x7 = new long?[] { 1, 2, 3 };
+            ulong?[] x8 = new ulong?[] { 1, 2, 3 };
+            char?[] x9 = new char?[] { '1', '2', '3' };
+            float?[] x10 = new float?[] { 1.1f, 2.2f, 3.3f };
+            double?[] x11 = new double?[] { 1.1, 2.2, 3.35 };
+            decimal?[] x12 = new decimal?[] { 1.1m, 22.2m, 33.3m };
             // IMPLICIT NUMERIC CONVERSIONS
             // sybte to short, int, long, float, double, decimal
             foreach (short? y in (dynamic)x1)
@@ -1378,8 +1026,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freach008.freach008
 {
     // <Title> Dynamic in Foreach </Title>
@@ -1394,14 +1040,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
     public class MyCollection : IEnumerable
     {
         private int[] _items;
+
         public MyCollection()
         {
-            _items = new int[5]
-            {
-            1, 4, 3, 2, 5
-            }
-
-            ;
+            _items = new int[5] { 1, 4, 3, 2, 5 };
         }
 
         public IEnumerator GetEnumerator()
@@ -1413,6 +1055,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
         {
             private int _nIndex;
             private MyCollection _collection;
+
             public MyEnumerator(MyCollection coll)
             {
                 _collection = coll;
@@ -1432,10 +1075,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
 
             public dynamic Current
             {
-                get
-                {
-                    return (_collection._items[_nIndex]);
-                }
+                get { return (_collection._items[_nIndex]); }
             }
         }
     }
@@ -1470,8 +1110,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freach009.freach009
 {
     // <Title> Dynamic in Foreach </Title>
@@ -1486,14 +1124,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
     public class MyCollection : IEnumerable
     {
         private int[] _items;
+
         public MyCollection()
         {
-            _items = new int[5]
-            {
-            1, 4, 3, 2, 5
-            }
-
-            ;
+            _items = new int[5] { 1, 4, 3, 2, 5 };
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -1505,6 +1139,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
         {
             private int _nIndex;
             private MyCollection _collection;
+
             public MyEnumerator(MyCollection coll)
             {
                 _collection = coll;
@@ -1524,10 +1159,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
 
             dynamic IEnumerator.Current
             {
-                get
-                {
-                    return (_collection._items[_nIndex]);
-                }
+                get { return (_collection._items[_nIndex]); }
             }
         }
     }
@@ -1562,8 +1194,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freach010.freach010
 {
     // <Title> Dynamic in Foreach </Title>
@@ -1578,14 +1208,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
     public class MyCollection : IEnumerable
     {
         private int[] _items;
+
         public MyCollection()
         {
-            _items = new int[5]
-            {
-            1, 4, 3, 2, 6
-            }
-
-            ;
+            _items = new int[5] { 1, 4, 3, 2, 6 };
         }
 
         public MyEnumerator GetEnumerator()
@@ -1602,6 +1228,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
         {
             private int _index;
             private MyCollection _collection;
+
             public MyEnumerator(MyCollection coll)
             {
                 _collection = coll;
@@ -1621,18 +1248,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
 
             public dynamic Current
             {
-                get
-                {
-                    return (_collection._items[_index]);
-                }
+                get { return (_collection._items[_index]); }
             }
 
             dynamic IEnumerator.Current
             {
-                get
-                {
-                    return (Current);
-                }
+                get { return (Current); }
             }
         }
     }
@@ -1666,8 +1287,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freach011.freach011
 {
     // <Title> Dynamic in Foreach </Title>
@@ -1678,9 +1297,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
     // <Expects Status=success></Expects>
     // <Code>
 
-    public class GenC<T>
-    {
-    }
+    public class GenC<T> { }
 
     public class Test
     {
@@ -1695,21 +1312,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
             int result = 0;
             int flag = 1;
             flag = 1;
-            dynamic darr = new string[2]
-            {
-            "aa", "bb"
-            }
-
-            ;
+            dynamic darr = new string[2] { "aa", "bb" };
             try
             {
-                foreach (int v in darr)
-                {
-                }
+                foreach (int v in darr) { }
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.NoExplicitConv, ex.Message, "string", "int"))
+                if (
+                    ErrorVerifier.Verify(ErrorMessageId.NoExplicitConv, ex.Message, "string", "int")
+                )
                 {
                     flag = 0;
                 }
@@ -1720,9 +1332,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
             dynamic darr2 = new string[2];
             try
             {
-                foreach (int v in darr2)
-                {
-                }
+                foreach (int v in darr2) { }
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {

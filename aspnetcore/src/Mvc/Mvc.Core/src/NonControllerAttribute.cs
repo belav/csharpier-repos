@@ -8,6 +8,4 @@ namespace Microsoft.AspNetCore.Mvc;
 /// is not considered a controller by the default controller discovery mechanism.
 /// </summary>
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-public sealed class NonControllerAttribute : Attribute
-{
-}
+public sealed class NonControllerAttribute : Attribute { }

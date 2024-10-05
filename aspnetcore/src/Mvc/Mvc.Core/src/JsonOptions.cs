@@ -32,19 +32,22 @@ public class JsonOptions
     /// Gets the <see cref="System.Text.Json.JsonSerializerOptions"/> used by <see cref="SystemTextJsonInputFormatter"/> and
     /// <see cref="SystemTextJsonOutputFormatter"/>.
     /// </summary>
-    public JsonSerializerOptions JsonSerializerOptions { get; } = new JsonSerializerOptions(JsonSerializerDefaults.Web)
-    {
-        // Limit the object graph we'll consume to a fixed depth. This prevents stackoverflow exceptions
-        // from deserialization errors that might occur from deeply nested objects.
-        // This value is the same for model binding and Json.Net's serialization.
-        MaxDepth = MvcOptions.DefaultMaxModelBindingRecursionDepth,
+    public JsonSerializerOptions JsonSerializerOptions { get; } =
+        new JsonSerializerOptions(JsonSerializerDefaults.Web)
+        {
+            // Limit the object graph we'll consume to a fixed depth. This prevents stackoverflow exceptions
+            // from deserialization errors that might occur from deeply nested objects.
+            // This value is the same for model binding and Json.Net's serialization.
+            MaxDepth = MvcOptions.DefaultMaxModelBindingRecursionDepth,
 
-        // The JsonSerializerOptions.GetTypeInfo method is called directly and needs a defined resolver
-        // setting the default resolver (reflection-based) but the user can overwrite it directly or by modifying
-        // the TypeInfoResolverChain. Use JsonTypeInfoResolver.Combine() to produce an empty TypeInfoResolver.
-        TypeInfoResolver = JsonSerializer.IsReflectionEnabledByDefault ? CreateDefaultTypeResolver() : JsonTypeInfoResolver.Combine()
-    };
+            // The JsonSerializerOptions.GetTypeInfo method is called directly and needs a defined resolver
+            // setting the default resolver (reflection-based) but the user can overwrite it directly or by modifying
+            // the TypeInfoResolverChain. Use JsonTypeInfoResolver.Combine() to produce an empty TypeInfoResolver.
+            TypeInfoResolver = JsonSerializer.IsReflectionEnabledByDefault
+                ? CreateDefaultTypeResolver()
+                : JsonTypeInfoResolver.Combine(),
+        };
 
-    private static IJsonTypeInfoResolver CreateDefaultTypeResolver()
-        => new DefaultJsonTypeInfoResolver();
+    private static IJsonTypeInfoResolver CreateDefaultTypeResolver() =>
+        new DefaultJsonTypeInfoResolver();
 }

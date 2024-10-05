@@ -30,16 +30,19 @@ using System.Xml;
 using Microsoft.Build.BuildEngine;
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.BuildEngine.Various {
-	[TestFixture]
-	public class DefaultTasks {
-		[Test]
-		public void TestDefaultTasks ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+namespace MonoTests.Microsoft.Build.BuildEngine.Various
+{
+    [TestFixture]
+    public class DefaultTasks
+    {
+        [Test]
+        public void TestDefaultTasks()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<Target Name='Main'>
 						<Message Text='Message' />
@@ -47,8 +50,8 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
-			proj.Build ("Main");
-		}
-	}
+            proj.LoadXml(documentString);
+            proj.Build("Main");
+        }
+    }
 }

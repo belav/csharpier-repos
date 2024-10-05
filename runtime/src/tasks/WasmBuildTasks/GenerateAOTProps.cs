@@ -25,26 +25,27 @@ namespace Microsoft.WebAssembly.Build.Tasks
 
         private const string s_originalItemNameMetadata = "OriginalItemName__";
         private const string s_conditionToUseMetadata = "ConditionToUse__";
-        private static readonly HashSet<string> s_metadataNamesToSkip = new()
-        {
-            "FullPath",
-            "RootDir",
-            "Filename",
-            "Extension",
-            "RelativeDir",
-            "Directory",
-            "RecursiveDir",
-            "Identity",
-            "ModifiedTime",
-            "CreatedTime",
-            "AccessedTime",
-            "DefiningProjectFullPath",
-            "DefiningProjectDirectory",
-            "DefiningProjectName",
-            "DefiningProjectExtension",
-            s_originalItemNameMetadata,
-            s_conditionToUseMetadata
-        };
+        private static readonly HashSet<string> s_metadataNamesToSkip =
+            new()
+            {
+                "FullPath",
+                "RootDir",
+                "Filename",
+                "Extension",
+                "RelativeDir",
+                "Directory",
+                "RecursiveDir",
+                "Identity",
+                "ModifiedTime",
+                "CreatedTime",
+                "AccessedTime",
+                "DefiningProjectFullPath",
+                "DefiningProjectDirectory",
+                "DefiningProjectName",
+                "DefiningProjectExtension",
+                s_originalItemNameMetadata,
+                s_conditionToUseMetadata,
+            };
 
         public override bool Execute()
         {
@@ -79,7 +80,9 @@ namespace Microsoft.WebAssembly.Build.Tasks
 
                 if (string.IsNullOrEmpty(name))
                 {
-                    Log.LogError($"Item {value} is missing {s_originalItemNameMetadata} metadata, for the item name");
+                    Log.LogError(
+                        $"Item {value} is missing {s_originalItemNameMetadata} metadata, for the item name"
+                    );
                     return false;
                 }
 
@@ -104,6 +107,5 @@ namespace Microsoft.WebAssembly.Build.Tasks
             File.WriteAllText(OutputFile, sb.ToString());
             return !Log.HasLoggedErrors;
         }
-
     }
 }

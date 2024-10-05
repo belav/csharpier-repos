@@ -1,6 +1,4 @@
 namespace Mono.Linker.Tests.Cases.References.Dependencies
 {
-	public class UsedReferencedAssembly
-	{
-	}
+    public class UsedReferencedAssembly { }
 }

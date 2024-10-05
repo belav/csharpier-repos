@@ -11,7 +11,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal sealed partial class LocalRewriter
     {
-        public override BoundNode? VisitMultipleLocalDeclarations(BoundMultipleLocalDeclarations node)
+        public override BoundNode? VisitMultipleLocalDeclarations(
+            BoundMultipleLocalDeclarations node
+        )
         {
             return VisitMultipleLocalDeclarationsBase(node);
         }
@@ -21,7 +23,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return VisitMultipleLocalDeclarationsBase(node);
         }
 
-        private BoundNode? VisitMultipleLocalDeclarationsBase(BoundMultipleLocalDeclarationsBase node)
+        private BoundNode? VisitMultipleLocalDeclarationsBase(
+            BoundMultipleLocalDeclarationsBase node
+        )
         {
             ArrayBuilder<BoundStatement>? inits = null;
 
@@ -42,7 +46,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (inits != null)
             {
-                return BoundStatementList.Synthesized(node.Syntax, node.HasErrors, inits.ToImmutableAndFree());
+                return BoundStatementList.Synthesized(
+                    node.Syntax,
+                    node.HasErrors,
+                    inits.ToImmutableAndFree()
+                );
             }
             else
             {
@@ -50,6 +58,5 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return null; // TODO: but what if hasErrors?  Have we lost that?
             }
         }
-
     }
 }

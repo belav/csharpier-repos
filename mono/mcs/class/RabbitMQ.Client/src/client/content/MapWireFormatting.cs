@@ -55,29 +55,33 @@
 //
 //---------------------------------------------------------------------------
 using System;
+using System.Collections;
+using System.IO;
 using System.Net;
 using System.Text;
-using System.IO;
-using System.Collections;
-
 using RabbitMQ.Client;
 using RabbitMQ.Util;
 
-namespace RabbitMQ.Client.Content {
+namespace RabbitMQ.Client.Content
+{
     ///<summary>Internal support class for use in reading and writing
     ///information binary-compatible with QPid's "MapMessage" wire
     ///encoding.</summary>
     ///<exception cref="ProtocolViolationException"/>
-    public class MapWireFormatting {
-        public static IDictionary ReadMap(NetworkBinaryReader reader) {
+    public class MapWireFormatting
+    {
+        public static IDictionary ReadMap(NetworkBinaryReader reader)
+        {
             int entryCount = BytesWireFormatting.ReadInt32(reader);
-            if (entryCount < 0) {
+            if (entryCount < 0)
+            {
                 string message = string.Format("Invalid (negative) entryCount: {0}", entryCount);
                 throw new ProtocolViolationException(message);
             }
 
             Hashtable table = new Hashtable(entryCount);
-            for (int entryIndex = 0; entryIndex < entryCount; entryIndex++) {
+            for (int entryIndex = 0; entryIndex < entryCount; entryIndex++)
+            {
                 string key = StreamWireFormatting.ReadUntypedString(reader);
                 object value = StreamWireFormatting.ReadObject(reader);
                 table[key] = value;
@@ -86,12 +90,14 @@ namespace RabbitMQ.Client.Content {
             return table;
         }
 
-        public static void WriteMap(NetworkBinaryWriter writer, IDictionary table) {
+        public static void WriteMap(NetworkBinaryWriter writer, IDictionary table)
+        {
             int entryCount = table.Count;
             BytesWireFormatting.WriteInt32(writer, entryCount);
 
-            foreach (DictionaryEntry entry in table) {
-                StreamWireFormatting.WriteUntypedString(writer, (string) entry.Key);
+            foreach (DictionaryEntry entry in table)
+            {
+                StreamWireFormatting.WriteUntypedString(writer, (string)entry.Key);
                 StreamWireFormatting.WriteObject(writer, entry.Value);
             }
         }

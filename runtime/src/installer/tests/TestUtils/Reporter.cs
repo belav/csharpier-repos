@@ -43,13 +43,15 @@ namespace Microsoft.DotNet.Cli.Build.Framework
                 _console?.Writer?.Write(message);
             }
         }
-        
+
         public void WriteBanner(string content)
         {
             string border = new string('*', content.Length + 6);
-            WriteLine($@"{border}
+            WriteLine(
+                $@"{border}
 *  {content}  *
-{border}".Green());
+{border}".Green()
+            );
         }
     }
 }

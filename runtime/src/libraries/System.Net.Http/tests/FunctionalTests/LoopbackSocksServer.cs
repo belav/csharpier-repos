@@ -17,17 +17,22 @@ namespace System.Net.Http.Functional.Tests
     {
         private readonly Socket _listener;
         private readonly List<Task> _connectionTasks = new();
-        private readonly TaskCompletionSource _serverStopped = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        private readonly TaskCompletionSource _serverStopped =
+            new(TaskCreationOptions.RunContinuationsAsynchronously);
 
         public int Port { get; }
 
-        private string? _username, _password;
+        private string? _username,
+            _password;
 
         public LoopbackSocksServer(string? username = null, string? password = null)
         {
             if (password != null && username == null)
             {
-                throw new ArgumentException("Password must be used together with username.", nameof(password));
+                throw new ArgumentException(
+                    "Password must be used together with username.",
+                    nameof(password)
+                );
             }
 
             _username = username;
@@ -48,13 +53,15 @@ namespace System.Net.Http.Functional.Tests
                     {
                         Socket s = await _listener.AcceptAsync().ConfigureAwait(false);
 
-                        _connectionTasks.Add(Task.Run(async () =>
-                        {
-                            using (var ns = new NetworkStream(s, ownsSocket: true))
+                        _connectionTasks.Add(
+                            Task.Run(async () =>
                             {
-                                await ProcessRequest(s, ns).ConfigureAwait(false);
-                            }
-                        }));
+                                using (var ns = new NetworkStream(s, ownsSocket: true))
+                                {
+                                    await ProcessRequest(s, ns).ConfigureAwait(false);
+                                }
+                            })
+                        );
                     }
                     catch
                     {
@@ -70,13 +77,15 @@ namespace System.Net.Http.Functional.Tests
         {
             int version = await ns.ReadByteAsync().ConfigureAwait(false);
 
-            await (version switch
-            {
-                4 => ProcessSocks4Request(clientSocket, ns),
-                5 => ProcessSocks5Request(clientSocket, ns),
-                -1 => throw new Exception("Early EOF"),
-                _ => throw new Exception("Bad request version")
-            }).ConfigureAwait(false);
+            await (
+                version switch
+                {
+                    4 => ProcessSocks4Request(clientSocket, ns),
+                    5 => ProcessSocks5Request(clientSocket, ns),
+                    -1 => throw new Exception("Early EOF"),
+                    _ => throw new Exception("Bad request version"),
+                }
+            ).ConfigureAwait(false);
         }
 
         private async Task ProcessSocks4Request(Socket clientSocket, NetworkStream ns)
@@ -218,10 +227,18 @@ namespace System.Net.Http.Functional.Tests
             await RelayHttpTraffic(clientSocket, ns, remoteHost, port).ConfigureAwait(false);
         }
 
-        private async Task RelayHttpTraffic(Socket clientSocket, NetworkStream clientStream, string remoteHost, int remotePort)
+        private async Task RelayHttpTraffic(
+            Socket clientSocket,
+            NetworkStream clientStream,
+            string remoteHost,
+            int remotePort
+        )
         {
             // Open connection to destination server.
-            using var serverSocket = new Socket(SocketType.Stream, ProtocolType.Tcp) { NoDelay = true };
+            using var serverSocket = new Socket(SocketType.Stream, ProtocolType.Tcp)
+            {
+                NoDelay = true,
+            };
             await serverSocket.ConnectAsync(remoteHost, remotePort).ConfigureAwait(false);
             var serverStream = new NetworkStream(serverSocket);
 
@@ -257,7 +274,8 @@ namespace System.Net.Http.Functional.Tests
             /// <summary>Closes sockets to cause both tasks to end, and eats connection reset/aborted errors.</summary>
             void HandleExceptions(Exception ex)
             {
-                SocketError sockErr = (ex.InnerException as SocketException)?.SocketErrorCode ?? SocketError.Success;
+                SocketError sockErr =
+                    (ex.InnerException as SocketException)?.SocketErrorCode ?? SocketError.Success;
 
                 // If aborted, the other task failed and is asking this task to end.
                 if (sockErr == SocketError.OperationAborted)
@@ -270,20 +288,19 @@ namespace System.Net.Http.Functional.Tests
                 {
                     clientSocket.Close();
                 }
-                catch (ObjectDisposedException)
-                {
-                }
+                catch (ObjectDisposedException) { }
 
                 try
                 {
                     serverSocket.Close();
                 }
-                catch (ObjectDisposedException)
-                {
-                }
+                catch (ObjectDisposedException) { }
 
                 // Eat reset/abort.
-                if (sockErr != SocketError.ConnectionReset && sockErr != SocketError.ConnectionAborted)
+                if (
+                    sockErr != SocketError.ConnectionReset
+                    && sockErr != SocketError.ConnectionAborted
+                )
                 {
                     ExceptionDispatchInfo.Capture(ex).Throw();
                 }

@@ -100,7 +100,9 @@ public class AsyncActionsController : Controller
         return new ValueTask<IActionResult>(Content(message));
     }
 
-    public ValueTask<IActionResult> PreCompletedValueTaskOfIActionResultExceptionAction(string message)
+    public ValueTask<IActionResult> PreCompletedValueTaskOfIActionResultExceptionAction(
+        string message
+    )
     {
         throw new CustomException();
     }
@@ -110,7 +112,9 @@ public class AsyncActionsController : Controller
         return new ValueTask<ContentResult>(Content(message));
     }
 
-    public ValueTask<ContentResult> PreCompletedValueTaskOfContentResultExceptionAction(string message)
+    public ValueTask<ContentResult> PreCompletedValueTaskOfContentResultExceptionAction(
+        string message
+    )
     {
         throw new CustomException();
     }
@@ -129,7 +133,8 @@ public class AsyncActionsController : Controller
     {
         return new CustomAwaitable<Message>(
             SimulateDelayMilliseconds,
-            new Message { Text = message });
+            new Message { Text = message }
+        );
     }
 
     public CustomAwaitable<Message> CustomAwaitableOfObjectExceptionAction(string message)
@@ -142,7 +147,9 @@ public class AsyncActionsController : Controller
         return new CustomAwaitable<IActionResult>(SimulateDelayMilliseconds, Content(message));
     }
 
-    public CustomAwaitable<IActionResult> CustomAwaitableOfIActionResultExceptionAction(string message)
+    public CustomAwaitable<IActionResult> CustomAwaitableOfIActionResultExceptionAction(
+        string message
+    )
     {
         throw new CustomException();
     }
@@ -152,7 +159,9 @@ public class AsyncActionsController : Controller
         return new CustomAwaitable<ContentResult>(SimulateDelayMilliseconds, Content(message));
     }
 
-    public CustomAwaitable<ContentResult> CustomAwaitableOfContentResultExceptionAction(string message)
+    public CustomAwaitable<ContentResult> CustomAwaitableOfContentResultExceptionAction(
+        string message
+    )
     {
         throw new CustomException();
     }
@@ -233,9 +242,7 @@ public class AsyncActionsController : Controller
             }
         }
 
-        public void GetResult()
-        {
-        }
+        public void GetResult() { }
     }
 
     public class CustomAwaiter<T> : CustomAwaiter
@@ -253,8 +260,7 @@ public class AsyncActionsController : Controller
 
     public class CustomException : Exception
     {
-        public CustomException() : base("This is a custom exception.")
-        {
-        }
+        public CustomException()
+            : base("This is a custom exception.") { }
     }
 }

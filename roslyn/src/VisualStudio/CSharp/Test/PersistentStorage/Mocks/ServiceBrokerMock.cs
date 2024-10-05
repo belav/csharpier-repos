@@ -20,12 +20,20 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices.Mocks
 
         internal Dictionary<ServiceMoniker, object> BrokeredServices { get; } = new();
 
-        public ValueTask<IDuplexPipe?> GetPipeAsync(ServiceMoniker serviceMoniker, ServiceActivationOptions options = default, CancellationToken cancellationToken = default)
+        public ValueTask<IDuplexPipe?> GetPipeAsync(
+            ServiceMoniker serviceMoniker,
+            ServiceActivationOptions options = default,
+            CancellationToken cancellationToken = default
+        )
         {
             throw new NotImplementedException();
         }
 
-        public ValueTask<T?> GetProxyAsync<T>(ServiceRpcDescriptor serviceDescriptor, ServiceActivationOptions options = default, CancellationToken cancellationToken = default)
+        public ValueTask<T?> GetProxyAsync<T>(
+            ServiceRpcDescriptor serviceDescriptor,
+            ServiceActivationOptions options = default,
+            CancellationToken cancellationToken = default
+        )
             where T : class
         {
             if (this.BrokeredServices.TryGetValue(serviceDescriptor.Moniker, out var service))
@@ -36,6 +44,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices.Mocks
             return default;
         }
 
-        internal void OnAvailabilityChanged(BrokeredServicesChangedEventArgs args) => this.AvailabilityChanged?.Invoke(this, args);
+        internal void OnAvailabilityChanged(BrokeredServicesChangedEventArgs args) =>
+            this.AvailabilityChanged?.Invoke(this, args);
     }
 }

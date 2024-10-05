@@ -1,7 +1,7 @@
 ﻿// ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>Microsoft</OWNER>
@@ -17,10 +17,12 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 {
     // An event registration token table stores mappings from delegates to event tokens, in order to support
     // sourcing WinRT style events from managed code.
-    public sealed class EventRegistrationTokenTable<T> where T : class
+    public sealed class EventRegistrationTokenTable<T>
+        where T : class
     {
         // Note this dictionary is also used as the synchronization object for this table
-        private Dictionary<EventRegistrationToken, T> m_tokens = new Dictionary<EventRegistrationToken, T>();
+        private Dictionary<EventRegistrationToken, T> m_tokens =
+            new Dictionary<EventRegistrationToken, T>();
 
         // Cached multicast delegate which will invoke all of the currently registered delegates.  This
         // will be accessed frequently in common coding paterns, so we don't want to calculate it repeatedly.
@@ -32,7 +34,12 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             // static check at construction time
             if (!typeof(Delegate).IsAssignableFrom(typeof(T)))
             {
-                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_EventTokenTableRequiresDelegate", typeof(T)));
+                throw new InvalidOperationException(
+                    Environment.GetResourceString(
+                        "InvalidOperation_EventTokenTableRequiresDelegate",
+                        typeof(T)
+                    )
+                );
             }
         }
 
@@ -40,11 +47,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         // in this table.  If the property is set, the new value will replace any existing token registrations.
         public T InvocationList
         {
-            get
-            {
-                return m_invokeList;
-            }
-
+            get { return m_invokeList; }
             set
             {
                 lock (m_tokens)
@@ -247,11 +250,17 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             }
         }
 
-        public static EventRegistrationTokenTable<T> GetOrCreateEventRegistrationTokenTable(ref EventRegistrationTokenTable<T> refEventTable)
+        public static EventRegistrationTokenTable<T> GetOrCreateEventRegistrationTokenTable(
+            ref EventRegistrationTokenTable<T> refEventTable
+        )
         {
             if (refEventTable == null)
             {
-                Interlocked.CompareExchange(ref refEventTable, new EventRegistrationTokenTable<T>(), null);
+                Interlocked.CompareExchange(
+                    ref refEventTable,
+                    new EventRegistrationTokenTable<T>(),
+                    null
+                );
             }
             return refEventTable;
         }

@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace DefaultNamespace
 {
     //@BEGINRENAME; Verify this renames
@@ -35,18 +36,15 @@ namespace DefaultNamespace
             return (a == 1 && b == -2 && c == 3 && d == -4 && e == 5 && f == -6 && g == 7);
         }
 
-
         //	public override Boolean Equals(Object o) { return (o instanceof V3); }
         //	public override int GetHashCode() { return 0; }
     }
-
 
     public class bug
     {
         [Fact]
         public static void TestEntryPoint()
         {
-
             int size = 32;
             V3[] tmpV3Array = new V3[size];
             Object[] VarArray = new Object[size];
@@ -55,7 +53,14 @@ namespace DefaultNamespace
             Array.Copy(VarArray, tmpV3Array, size);
             for (int i = 0; i < size; i++)
                 if (!tmpV3Array[i].Validate())
-                    throw new Exception("tmpV3Array[" + i + "] didn't validate correctly!  got: " + tmpV3Array[i] + "  expected: " + VarArray[i]);
+                    throw new Exception(
+                        "tmpV3Array["
+                            + i
+                            + "] didn't validate correctly!  got: "
+                            + tmpV3Array[i]
+                            + "  expected: "
+                            + VarArray[i]
+                    );
         }
     }
 }

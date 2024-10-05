@@ -20,26 +20,35 @@ public abstract partial class RequestDelegateCreationTests
             {
                 Id = 0,
                 Name = "Test Item",
-                IsComplete = false
+                IsComplete = false,
             };
             var withFilter = """
 .AddEndpointFilter((c, n) => n(c));
 """;
-            var fromBodyRequiredSource = """app.MapPost("/", ([FromBody] Todo todo) => TypedResults.Ok(todo));""";
-            var fromBodyEmptyBodyBehaviorSource = """app.MapPost("/", ([FromBody(EmptyBodyBehavior = EmptyBodyBehavior.Allow)] Todo todo) => TypedResults.Ok(todo));""";
-            var fromBodyAllowEmptySource = """app.MapPost("/", ([CustomFromBody(AllowEmpty = true)] Todo todo) => TypedResults.Ok(todo));""";
-            var fromBodyNullableSource = """app.MapPost("/", ([FromBody] Todo? todo) => TypedResults.Ok(todo));""";
+            var fromBodyRequiredSource =
+                """app.MapPost("/", ([FromBody] Todo todo) => TypedResults.Ok(todo));""";
+            var fromBodyEmptyBodyBehaviorSource =
+                """app.MapPost("/", ([FromBody(EmptyBodyBehavior = EmptyBodyBehavior.Allow)] Todo todo) => TypedResults.Ok(todo));""";
+            var fromBodyAllowEmptySource =
+                """app.MapPost("/", ([CustomFromBody(AllowEmpty = true)] Todo todo) => TypedResults.Ok(todo));""";
+            var fromBodyNullableSource =
+                """app.MapPost("/", ([FromBody] Todo? todo) => TypedResults.Ok(todo));""";
             var fromBodyDefaultValueSource = """
 #nullable disable
 IResult postTodoWithDefault([FromBody] Todo todo = null) => TypedResults.Ok(todo);
 app.MapPost("/", postTodoWithDefault);
 #nullable restore
 """;
-            var fromBodyAsParametersRequiredSource = """app.MapPost("/", ([AsParameters] ParametersListWithExplicitFromBody args) => TypedResults.Ok(args.Todo));""";
-            var fromBodyRequiredWithFilterSource = $"""app.MapPost("/", ([FromBody] Todo todo) => TypedResults.Ok(todo)){withFilter}""";
-            var fromBodyEmptyBehaviorWithFilterSource = $"""app.MapPost("/", ([FromBody(EmptyBodyBehavior = EmptyBodyBehavior.Allow)] Todo todo) => TypedResults.Ok(todo)){withFilter}""";
-            var fromBodyAllowEmptyWithFilterSource = $"""app.MapPost("/", ([CustomFromBody(AllowEmpty = true)] Todo todo) => TypedResults.Ok(todo)){withFilter}""";
-            var fromBodyNullableWithFilterSource = $"""app.MapPost("/", ([FromBody] Todo?  todo) => TypedResults.Ok(todo)){withFilter}""";
+            var fromBodyAsParametersRequiredSource =
+                """app.MapPost("/", ([AsParameters] ParametersListWithExplicitFromBody args) => TypedResults.Ok(args.Todo));""";
+            var fromBodyRequiredWithFilterSource =
+                $"""app.MapPost("/", ([FromBody] Todo todo) => TypedResults.Ok(todo)){withFilter}""";
+            var fromBodyEmptyBehaviorWithFilterSource =
+                $"""app.MapPost("/", ([FromBody(EmptyBodyBehavior = EmptyBodyBehavior.Allow)] Todo todo) => TypedResults.Ok(todo)){withFilter}""";
+            var fromBodyAllowEmptyWithFilterSource =
+                $"""app.MapPost("/", ([CustomFromBody(AllowEmpty = true)] Todo todo) => TypedResults.Ok(todo)){withFilter}""";
+            var fromBodyNullableWithFilterSource =
+                $"""app.MapPost("/", ([FromBody] Todo?  todo) => TypedResults.Ok(todo)){withFilter}""";
             var fromBodyDefaultValueWithFilterSource = $"""
 #nullable disable
 IResult postTodoWithDefault([FromBody] Todo todo = null) => TypedResults.Ok(todo);
@@ -76,19 +85,28 @@ app.MapPost("/", postTodoWithDefault){withFilter}
 
     [Theory]
     [MemberData(nameof(MapAction_ExplicitBodyParam_ComplexReturn_Data))]
-    public async Task MapAction_ExplicitBodyParam_ComplexReturn(string source, Todo requestData, int expectedStatusCode, string expectedBody)
+    public async Task MapAction_ExplicitBodyParam_ComplexReturn(
+        string source,
+        Todo requestData,
+        int expectedStatusCode,
+        string expectedBody
+    )
     {
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
         var httpContext = CreateHttpContext();
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(requestData is not null));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(requestData is not null)
+        );
         httpContext.Request.Headers["Content-Type"] = "application/json";
 
         var requestBodyBytes = JsonSerializer.SerializeToUtf8Bytes(requestData);
         var stream = new MemoryStream(requestBodyBytes);
         httpContext.Request.Body = stream;
-        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(CultureInfo.InvariantCulture);
+        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(
+            CultureInfo.InvariantCulture
+        );
 
         await endpoint.RequestDelegate(httpContext);
         await VerifyResponseBodyAsync(httpContext, expectedBody, expectedStatusCode);
@@ -102,7 +120,9 @@ app.MapPost("/", postTodoWithDefault){withFilter}
         var endpoint = GetEndpointFromCompilation(compilation);
 
         var httpContext = CreateHttpContext();
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(false));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(false)
+        );
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "0";
 
@@ -118,7 +138,7 @@ app.MapPost("/", postTodoWithDefault){withFilter}
         {
             Id = 0,
             Name = "Test Item",
-            IsComplete = false
+            IsComplete = false,
         };
         var source = $"""
 app.MapPost("/fromBodyRequired", ([FromBody] Todo todo) => TypedResults.Ok(todo));
@@ -179,7 +199,7 @@ app.MapPost("/", TestPipeReader);
             return new[]
             {
                 new object[] { testStreamSource },
-                new object[] { testPipeReaderSource }
+                new object[] { testPipeReaderSource },
             };
         }
     }
@@ -211,7 +231,7 @@ app.MapPost("/", TestPipeReader);
             return new[]
             {
                 new object[] { explicitTestStreamSource },
-                new object[] { explicitTestPipeReaderSource }
+                new object[] { explicitTestPipeReaderSource },
             };
         }
     }
@@ -224,15 +244,18 @@ app.MapPost("/", TestPipeReader);
         var endpoint = GetEndpointFromCompilation(compilation);
 
         var httpContext = CreateHttpContext();
-        var requestBodyBytes = JsonSerializer.SerializeToUtf8Bytes(new
-        {
-            Name = "Write more tests!"
-        });
+        var requestBodyBytes = JsonSerializer.SerializeToUtf8Bytes(
+            new { Name = "Write more tests!" }
+        );
 
         var stream = new MemoryStream(requestBodyBytes);
         httpContext.Request.Body = stream;
-        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(CultureInfo.InvariantCulture);
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(
+            CultureInfo.InvariantCulture
+        );
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -265,15 +288,18 @@ app.MapPost("/", TestPipeReader);
 
         var httpContext = CreateHttpContext();
 
-        var requestBodyBytes = JsonSerializer.SerializeToUtf8Bytes(new
-        {
-            Name = "Write more tests!"
-        });
+        var requestBodyBytes = JsonSerializer.SerializeToUtf8Bytes(
+            new { Name = "Write more tests!" }
+        );
 
         var stream = new MemoryStream(requestBodyBytes);
         httpContext.Request.Body = stream;
-        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(CultureInfo.InvariantCulture);
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(
+            CultureInfo.InvariantCulture
+        );
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -306,18 +332,21 @@ app.MapPost("/", TestPipeReader);
 
         var httpContext = CreateHttpContext();
 
-        var requestBodyBytes = JsonSerializer.SerializeToUtf8Bytes(new
-        {
-            Name = "Write more tests!"
-        });
+        var requestBodyBytes = JsonSerializer.SerializeToUtf8Bytes(
+            new { Name = "Write more tests!" }
+        );
 
         var pipeReader = PipeReader.Create(new MemoryStream(requestBodyBytes));
         var stream = pipeReader.AsStream();
         httpContext.Features.Set<IRequestBodyPipeFeature>(new PipeRequestBodyFeature(pipeReader));
         httpContext.Request.Body = stream;
 
-        httpContext.Request.Headers["Content-Length"] = requestBodyBytes.Length.ToString(CultureInfo.InvariantCulture);
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Request.Headers["Content-Length"] = requestBodyBytes.Length.ToString(
+            CultureInfo.InvariantCulture
+        );
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -325,7 +354,9 @@ app.MapPost("/", TestPipeReader);
         Assert.Same(httpContext.Request.BodyReader, pipeReader);
 
         // Assert that we can read the body from both the pipe reader and Stream after executing and verify that they are empty (the pipe reader isn't seekable here)
-        int read = await httpContext.Request.Body.ReadAsync(new byte[requestBodyBytes.Length].AsMemory());
+        int read = await httpContext.Request.Body.ReadAsync(
+            new byte[requestBodyBytes.Length].AsMemory()
+        );
         Assert.Equal(0, read);
 
         var result = await httpContext.Request.BodyReader.ReadAsync();
@@ -347,18 +378,21 @@ app.MapPost("/", TestPipeReader);
 
         var httpContext = CreateHttpContext();
 
-        var requestBodyBytes = JsonSerializer.SerializeToUtf8Bytes(new
-        {
-            Name = "Write more tests!"
-        });
+        var requestBodyBytes = JsonSerializer.SerializeToUtf8Bytes(
+            new { Name = "Write more tests!" }
+        );
 
         var pipeReader = PipeReader.Create(new MemoryStream(requestBodyBytes));
         var stream = pipeReader.AsStream();
         httpContext.Features.Set<IRequestBodyPipeFeature>(new PipeRequestBodyFeature(pipeReader));
         httpContext.Request.Body = stream;
 
-        httpContext.Request.Headers["Content-Length"] = requestBodyBytes.Length.ToString(CultureInfo.InvariantCulture);
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Request.Headers["Content-Length"] = requestBodyBytes.Length.ToString(
+            CultureInfo.InvariantCulture
+        );
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -366,7 +400,9 @@ app.MapPost("/", TestPipeReader);
         Assert.Same(httpContext.Request.BodyReader, pipeReader);
 
         // Assert that we can read the body from both the pipe reader and Stream after executing and verify that they are empty (the pipe reader isn't seekable here)
-        int read = await httpContext.Request.Body.ReadAsync(new byte[requestBodyBytes.Length].AsMemory());
+        int read = await httpContext.Request.Body.ReadAsync(
+            new byte[requestBodyBytes.Length].AsMemory()
+        );
         Assert.Equal(0, read);
 
         var result = await httpContext.Request.BodyReader.ReadAsync();
@@ -407,10 +443,7 @@ app.MapPost("/", TestAction);
     [Fact]
     public async Task RequestDelegateHandlesRequiredBodyStruct()
     {
-        var targetStruct = new BodyStruct
-        {
-            Id = 42
-        };
+        var targetStruct = new BodyStruct { Id = 42 };
 
         var source = $$"""
 void TestAction(HttpContext httpContext, BodyStruct bodyStruct)
@@ -423,13 +456,17 @@ app.MapPost("/", TestAction);
         var endpoint = GetEndpointFromCompilation(compilation);
 
         var httpContext = CreateHttpContext();
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
         httpContext.Request.Headers["Content-Type"] = "application/json";
 
         var requestBodyBytes = JsonSerializer.SerializeToUtf8Bytes(targetStruct);
         var stream = new MemoryStream(requestBodyBytes);
         httpContext.Request.Body = stream;
-        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(CultureInfo.InvariantCulture);
+        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(
+            CultureInfo.InvariantCulture
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -442,12 +479,28 @@ app.MapPost("/", TestAction);
         get
         {
             return new List<object[]>
+            {
+                new object[]
                 {
-                    new object[] { $@"string handler([CustomFromBody(AllowEmpty = false)] Todo todo) => todo?.ToString() ?? string.Empty", false },
-                    new object[] { $@"string handler([CustomFromBody(AllowEmpty = true)] Todo todo) => todo?.ToString() ?? string.Empty", true },
-                    new object[] { $@"string handler([CustomFromBody(AllowEmpty = true)] Todo? todo = null) => todo?.ToString() ?? string.Empty", true },
-                    new object[] { $@"string handler([CustomFromBody(AllowEmpty = false)] Todo? todo = null) => todo?.ToString() ?? string.Empty", true }
-                };
+                    $@"string handler([CustomFromBody(AllowEmpty = false)] Todo todo) => todo?.ToString() ?? string.Empty",
+                    false,
+                },
+                new object[]
+                {
+                    $@"string handler([CustomFromBody(AllowEmpty = true)] Todo todo) => todo?.ToString() ?? string.Empty",
+                    true,
+                },
+                new object[]
+                {
+                    $@"string handler([CustomFromBody(AllowEmpty = true)] Todo? todo = null) => todo?.ToString() ?? string.Empty",
+                    true,
+                },
+                new object[]
+                {
+                    $@"string handler([CustomFromBody(AllowEmpty = false)] Todo? todo = null) => todo?.ToString() ?? string.Empty",
+                    true,
+                },
+            };
         }
     }
 
@@ -474,7 +527,10 @@ app.MapPost("/", handler);
             var log = Assert.Single(logs);
             Assert.Equal(LogLevel.Debug, log.LogLevel);
             Assert.Equal(new EventId(4, "RequiredParameterNotProvided"), log.EventId);
-            Assert.Equal(@"Required parameter ""Todo todo"" was not provided from body.", log.Message);
+            Assert.Equal(
+                @"Required parameter ""Todo todo"" was not provided from body.",
+                log.Message
+            );
         }
         else
         {
@@ -482,5 +538,4 @@ app.MapPost("/", handler);
             Assert.False(httpContext.RequestAborted.IsCancellationRequested);
         }
     }
-
 }

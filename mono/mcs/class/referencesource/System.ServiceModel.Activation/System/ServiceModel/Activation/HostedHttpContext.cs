@@ -46,10 +46,7 @@ namespace System.ServiceModel.Activation
 
         public override string HttpMethod
         {
-            get
-            {
-                return result.GetHttpMethod();
-            }
+            get { return result.GetHttpMethod(); }
         }
 
         internal void CompleteWithException(Exception ex)
@@ -83,19 +80,34 @@ namespace System.ServiceModel.Activation
             }
         }
 
-        protected override Task<WebSocketContext> AcceptWebSocketCore(HttpResponseMessage response, string protocol)
+        protected override Task<WebSocketContext> AcceptWebSocketCore(
+            HttpResponseMessage response,
+            string protocol
+        )
         {
             this.BeforeAcceptWebSocket(response);
             this.webSocketContextTaskSource = new TaskCompletionSource<WebSocketContext>();
-            this.result.Application.Context.AcceptWebSocketRequest(PostAcceptWebSocket, new AspNetWebSocketOptions() { SubProtocol = protocol });
+            this.result.Application.Context.AcceptWebSocketRequest(
+                PostAcceptWebSocket,
+                new AspNetWebSocketOptions() { SubProtocol = protocol }
+            );
             this.result.OnReplySent();
             return this.webSocketContextTaskSource.Task;
         }
 
-        protected override void OnAcceptWebSocketSuccess(WebSocketContext context, HttpRequestMessage requestMessage)
+        protected override void OnAcceptWebSocketSuccess(
+            WebSocketContext context,
+            HttpRequestMessage requestMessage
+        )
         {
             // ASP.NET owns the WebSocket object and needs it during the cleanup process. We should not dispose the WebSocket in WCF layer.
-            base.OnAcceptWebSocketSuccess(context, this.remoteEndpointMessageProperty, null, false, requestMessage);
+            base.OnAcceptWebSocketSuccess(
+                context,
+                this.remoteEndpointMessageProperty,
+                null,
+                false,
+                requestMessage
+            );
         }
 
         void BeforeAcceptWebSocket(HttpResponseMessage response)
@@ -106,7 +118,10 @@ namespace System.ServiceModel.Activation
 
             if (this.requestContainer.TryGetAddressAndPort(out address, out port))
             {
-                this.remoteEndpointMessageProperty = new RemoteEndpointMessageProperty(address, port);
+                this.remoteEndpointMessageProperty = new RemoteEndpointMessageProperty(
+                    address,
+                    port
+                );
             }
 
             this.CloseHostedRequestContainer();
@@ -122,7 +137,10 @@ namespace System.ServiceModel.Activation
             return webSocketWaitingTask.Task;
         }
 
-        static void AppendHeaderFromHttpResponseMessageToResponse(HttpResponseMessage response, HostedHttpRequestAsyncResult result)
+        static void AppendHeaderFromHttpResponseMessageToResponse(
+            HttpResponseMessage response,
+            HostedHttpRequestAsyncResult result
+        )
         {
             HostedHttpContext.AppendHeaderToResponse(response.Headers, result);
             if (response.Content != null)
@@ -149,10 +167,7 @@ namespace System.ServiceModel.Activation
 
         public override bool IsWebSocketRequest
         {
-            get
-            {
-                return this.result.IsWebSocketRequest;
-            }
+            get { return this.result.IsWebSocketRequest; }
         }
 
         protected override void OnReply(Message message, TimeSpan timeout)
@@ -162,7 +177,11 @@ namespace System.ServiceModel.Activation
         }
 
         protected override IAsyncResult OnBeginReply(
-            Message message, TimeSpan timeout, AsyncCallback callback, object state)
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             this.CloseHostedRequestContainer();
             return base.OnBeginReply(message, timeout, callback, state);
@@ -194,12 +213,19 @@ namespace System.ServiceModel.Activation
             HttpInput httpInput = this.GetHttpInput(false);
 
             // work around http.sys keep alive bug with chunked requests, see MB 49676, this is fixed in Vista
-            if ((httpInput != null && httpInput.ContentLength == -1 && !OSEnvironmentHelper.IsVistaOrGreater) || !this.KeepAliveEnabled)
+            if (
+                (
+                    httpInput != null
+                    && httpInput.ContentLength == -1
+                    && !OSEnvironmentHelper.IsVistaOrGreater
+                ) || !this.KeepAliveEnabled
+            )
             {
                 result.SetConnectionClose();
             }
 
-            ICompressedMessageEncoder compressedMessageEncoder = this.Listener.MessageEncoderFactory.Encoder as ICompressedMessageEncoder;
+            ICompressedMessageEncoder compressedMessageEncoder =
+                this.Listener.MessageEncoderFactory.Encoder as ICompressedMessageEncoder;
             if (compressedMessageEncoder != null && compressedMessageEncoder.CompressionEnabled)
             {
                 string acceptEncoding = this.result.GetAcceptEncoding();
@@ -228,18 +254,27 @@ namespace System.ServiceModel.Activation
             byte[] preReadBuffer;
 
             public HostedHttpInput(HostedHttpContext hostedHttpContext)
-                : base(hostedHttpContext.Listener, true, hostedHttpContext.Listener.IsChannelBindingSupportEnabled)
+                : base(
+                    hostedHttpContext.Listener,
+                    true,
+                    hostedHttpContext.Listener.IsChannelBindingSupportEnabled
+                )
             {
                 AspNetPartialTrustHelpers.FailIfInPartialTrustOutsideAspNet();
 
                 this.hostedHttpContext = hostedHttpContext;
 
-                EnvelopeVersion envelopeVersion = hostedHttpContext.Listener.MessageEncoderFactory.Encoder.MessageVersion.Envelope;
+                EnvelopeVersion envelopeVersion = hostedHttpContext
+                    .Listener
+                    .MessageEncoderFactory
+                    .Encoder
+                    .MessageVersion
+                    .Envelope;
 
                 // MB#29602, perf optimization
                 if (envelopeVersion == EnvelopeVersion.Soap11)
                 {
-                    // For soap 1.1, use headers collection to get content-type since we need to pull in the headers 
+                    // For soap 1.1, use headers collection to get content-type since we need to pull in the headers
                     // collection for SOAP-Action anyways
                     this.contentType = hostedHttpContext.result.GetContentType();
                 }
@@ -256,24 +291,20 @@ namespace System.ServiceModel.Activation
                 // differentiate is by reading ahead
                 if (this.contentLength == 0)
                 {
-                    preReadBuffer = hostedHttpContext.result.GetPrereadBuffer(ref this.contentLength);
+                    preReadBuffer = hostedHttpContext.result.GetPrereadBuffer(
+                        ref this.contentLength
+                    );
                 }
             }
 
             public override long ContentLength
             {
-                get
-                {
-                    return this.contentLength;
-                }
+                get { return this.contentLength; }
             }
 
             protected override string ContentTypeCore
             {
-                get
-                {
-                    return this.contentType;
-                }
+                get { return this.contentType; }
             }
 
             protected override bool HasContent
@@ -283,40 +314,48 @@ namespace System.ServiceModel.Activation
 
             protected override string SoapActionHeader
             {
-                get
-                {
-                    return hostedHttpContext.result.GetSoapAction();
-                }
+                get { return hostedHttpContext.result.GetSoapAction(); }
             }
 
             protected override ChannelBinding ChannelBinding
             {
                 get
                 {
-                    return ChannelBindingUtility.DuplicateToken(hostedHttpContext.result.GetChannelBinding());
+                    return ChannelBindingUtility.DuplicateToken(
+                        hostedHttpContext.result.GetChannelBinding()
+                    );
                 }
             }
 
             protected override void AddProperties(Message message)
             {
-                HostedRequestContainer requestContainer = new HostedRequestContainer(this.hostedHttpContext.result);
+                HostedRequestContainer requestContainer = new HostedRequestContainer(
+                    this.hostedHttpContext.result
+                );
 
-                HttpRequestMessageProperty requestProperty = new HttpRequestMessageProperty(requestContainer);
+                HttpRequestMessageProperty requestProperty = new HttpRequestMessageProperty(
+                    requestContainer
+                );
 
                 requestProperty.Method = this.hostedHttpContext.HttpMethod;
 
                 // Uri.Query always includes the '?'
                 if (this.hostedHttpContext.result.RequestUri.Query.Length > 1)
                 {
-                    requestProperty.QueryString = this.hostedHttpContext.result.RequestUri.Query.Substring(1);
+                    requestProperty.QueryString =
+                        this.hostedHttpContext.result.RequestUri.Query.Substring(1);
                 }
 
                 message.Properties.Add(HttpRequestMessageProperty.Name, requestProperty);
 
-                message.Properties.Add(HostingMessageProperty.Name, CreateMessagePropertyFromHostedResult(this.hostedHttpContext.result));
+                message.Properties.Add(
+                    HostingMessageProperty.Name,
+                    CreateMessagePropertyFromHostedResult(this.hostedHttpContext.result)
+                );
                 message.Properties.Via = this.hostedHttpContext.result.RequestUri;
 
-                RemoteEndpointMessageProperty remoteEndpointProperty = new RemoteEndpointMessageProperty(requestContainer);
+                RemoteEndpointMessageProperty remoteEndpointProperty =
+                    new RemoteEndpointMessageProperty(requestContainer);
                 message.Properties.Add(RemoteEndpointMessageProperty.Name, remoteEndpointProperty);
 
                 this.hostedHttpContext.SetRequestContainer(requestContainer);
@@ -326,20 +365,40 @@ namespace System.ServiceModel.Activation
             {
                 message.Method = new HttpMethod(this.hostedHttpContext.result.GetHttpMethod());
                 message.RequestUri = this.hostedHttpContext.result.RequestUri;
-                foreach (string webHeaderKey in this.hostedHttpContext.result.Application.Context.Request.Headers.Keys)
+                foreach (
+                    string webHeaderKey in this.hostedHttpContext
+                        .result
+                        .Application
+                        .Context
+                        .Request
+                        .Headers
+                        .Keys
+                )
                 {
-                    message.AddHeader(webHeaderKey, this.hostedHttpContext.result.Application.Context.Request.Headers[webHeaderKey]);
+                    message.AddHeader(
+                        webHeaderKey,
+                        this.hostedHttpContext.result.Application.Context.Request.Headers[
+                            webHeaderKey
+                        ]
+                    );
                 }
 
-                HostedRequestContainer requestContainer = new HostedRequestContainer(this.hostedHttpContext.result);
-                RemoteEndpointMessageProperty remoteEndpointProperty = new RemoteEndpointMessageProperty(requestContainer);
+                HostedRequestContainer requestContainer = new HostedRequestContainer(
+                    this.hostedHttpContext.result
+                );
+                RemoteEndpointMessageProperty remoteEndpointProperty =
+                    new RemoteEndpointMessageProperty(requestContainer);
                 message.Properties.Add(RemoteEndpointMessageProperty.Name, remoteEndpointProperty);
             }
 
-            [Fx.Tag.SecurityNote(Critical = "Calls critical .ctor(HostedImpersonationContext)",
-                Safe = "Only accepts the incoming context from HostedHttpRequestAsyncResult which stores the context in a critical field")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Calls critical .ctor(HostedImpersonationContext)",
+                Safe = "Only accepts the incoming context from HostedHttpRequestAsyncResult which stores the context in a critical field"
+            )]
             [SecuritySafeCritical]
-            static HostingMessageProperty CreateMessagePropertyFromHostedResult(HostedHttpRequestAsyncResult result)
+            static HostingMessageProperty CreateMessagePropertyFromHostedResult(
+                HostedHttpRequestAsyncResult result
+            )
             {
                 return new HostingMessageProperty(result);
             }
@@ -374,24 +433,40 @@ namespace System.ServiceModel.Activation
                     this.result = hostedContext.result;
                 }
 
-                public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+                public override IAsyncResult BeginRead(
+                    byte[] buffer,
+                    int offset,
+                    int count,
+                    AsyncCallback callback,
+                    object state
+                )
                 {
                     if (!this.result.TryStartStreamedRead())
                     {
-                        throw FxTrace.Exception.AsError(new CommunicationObjectAbortedException(SR.RequestContextAborted));
+                        throw FxTrace.Exception.AsError(
+                            new CommunicationObjectAbortedException(SR.RequestContextAborted)
+                        );
                     }
 
                     bool throwing = true;
 
                     try
                     {
-                        IAsyncResult result = base.BeginRead(buffer, offset, count, callback, state);
+                        IAsyncResult result = base.BeginRead(
+                            buffer,
+                            offset,
+                            count,
+                            callback,
+                            state
+                        );
                         throwing = false;
                         return result;
                     }
                     catch (HttpException hostedException)
                     {
-                        throw FxTrace.Exception.AsError(CreateCommunicationException(hostedException));
+                        throw FxTrace.Exception.AsError(
+                            CreateCommunicationException(hostedException)
+                        );
                     }
                     finally
                     {
@@ -410,7 +485,9 @@ namespace System.ServiceModel.Activation
                     }
                     catch (HttpException hostedException)
                     {
-                        throw FxTrace.Exception.AsError(CreateCommunicationException(hostedException));
+                        throw FxTrace.Exception.AsError(
+                            CreateCommunicationException(hostedException)
+                        );
                     }
                     finally
                     {
@@ -422,7 +499,9 @@ namespace System.ServiceModel.Activation
                 {
                     if (!this.result.TryStartStreamedRead())
                     {
-                        throw FxTrace.Exception.AsError(new CommunicationObjectAbortedException(SR.RequestContextAborted));
+                        throw FxTrace.Exception.AsError(
+                            new CommunicationObjectAbortedException(SR.RequestContextAborted)
+                        );
                     }
 
                     try
@@ -431,7 +510,9 @@ namespace System.ServiceModel.Activation
                     }
                     catch (HttpException hostedException)
                     {
-                        throw FxTrace.Exception.AsError(CreateCommunicationException(hostedException));
+                        throw FxTrace.Exception.AsError(
+                            CreateCommunicationException(hostedException)
+                        );
                     }
                     finally
                     {
@@ -448,14 +529,18 @@ namespace System.ServiceModel.Activation
                         // Note that this code path can only be hit when GetBufferedInputStream() is called in HostedHttpRequestAsyncResult.GetInputStream(), which only
                         // happens when an Http Module which is executed before the WCF Http Handler has accessed the request stream via GetBufferedInputStream().
                         // This is the only case that throws because GetBufferlessInputStream(true) ignores maxRequestLength, and InputStream property throws when invoked, not when stream is read.
-                        return HttpInput.CreateHttpProtocolException(SR.Hosting_MaxRequestLengthExceeded, HttpStatusCode.RequestEntityTooLarge, null, hostedException);
+                        return HttpInput.CreateHttpProtocolException(
+                            SR.Hosting_MaxRequestLengthExceeded,
+                            HttpStatusCode.RequestEntityTooLarge,
+                            null,
+                            hostedException
+                        );
                     }
                     else
                     {
                         // This HttpException is thrown if client disconnects and a read operation is invoked on the stream.
                         return new CommunicationException(hostedException.Message, hostedException);
                     }
-
                 }
             }
         }
@@ -470,8 +555,12 @@ namespace System.ServiceModel.Activation
             bool isSettingMimeHeader = false;
             bool isSettingContentType = false;
 
-            public HostedRequestHttpOutput(HostedHttpRequestAsyncResult result, IHttpTransportFactorySettings settings,
-                Message message, HostedHttpContext context)
+            public HostedRequestHttpOutput(
+                HostedHttpRequestAsyncResult result,
+                IHttpTransportFactorySettings settings,
+                Message message,
+                HostedHttpContext context
+            )
                 : base(settings, message, false, false)
             {
                 AspNetPartialTrustHelpers.FailIfInPartialTrustOutsideAspNet();
@@ -510,7 +599,10 @@ namespace System.ServiceModel.Activation
                 }
                 else
                 {
-                    this.result.AppendHeader(HttpChannelUtilities.MIMEVersionHeader, this.mimeVersion);
+                    this.result.AppendHeader(
+                        HttpChannelUtilities.MIMEVersionHeader,
+                        this.mimeVersion
+                    );
                 }
             }
 
@@ -528,12 +620,18 @@ namespace System.ServiceModel.Activation
 
             protected override void SetContentEncoding(string contentEncoding)
             {
-                this.result.AppendHeader(HttpChannelUtilities.ContentEncodingHeader, contentEncoding);
+                this.result.AppendHeader(
+                    HttpChannelUtilities.ContentEncodingHeader,
+                    contentEncoding
+                );
             }
 
             protected override void SetContentLength(int contentLength)
             {
-                this.result.AppendHeader("content-length", contentLength.ToString(CultureInfo.InvariantCulture));
+                this.result.AppendHeader(
+                    "content-length",
+                    contentLength.ToString(CultureInfo.InvariantCulture)
+                );
             }
 
             protected override void SetStatusCode(HttpStatusCode statusCode)
@@ -551,7 +649,12 @@ namespace System.ServiceModel.Activation
                 bool retValue = base.PrepareHttpSend(message);
                 object property;
 
-                bool httpMethodIsHead = string.Compare(this.context.HttpMethod, "HEAD", StringComparison.OrdinalIgnoreCase) == 0;
+                bool httpMethodIsHead =
+                    string.Compare(
+                        this.context.HttpMethod,
+                        "HEAD",
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0;
                 if (httpMethodIsHead)
                 {
                     retValue = true;
@@ -559,7 +662,8 @@ namespace System.ServiceModel.Activation
 
                 if (message.Properties.TryGetValue(HttpResponseMessageProperty.Name, out property))
                 {
-                    HttpResponseMessageProperty responseProperty = (HttpResponseMessageProperty)property;
+                    HttpResponseMessageProperty responseProperty =
+                        (HttpResponseMessageProperty)property;
 
                     if (responseProperty.SuppressPreamble)
                     {
@@ -577,19 +681,33 @@ namespace System.ServiceModel.Activation
                     {
                         string name = responseHeaders.Keys[i];
                         string value = responseHeaders[i];
-                        if (string.Compare(name, "content-type", StringComparison.OrdinalIgnoreCase) == 0)
+                        if (
+                            string.Compare(name, "content-type", StringComparison.OrdinalIgnoreCase)
+                            == 0
+                        )
                         {
                             this.contentType = value;
                         }
-                        else if (string.Compare(name, HttpChannelUtilities.MIMEVersionHeader, StringComparison.OrdinalIgnoreCase) == 0)
+                        else if (
+                            string.Compare(
+                                name,
+                                HttpChannelUtilities.MIMEVersionHeader,
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
+                        )
                         {
                             this.mimeVersion = value;
                         }
-                        else if (string.Compare(name, "content-length", StringComparison.OrdinalIgnoreCase) == 0)
+                        else if (
+                            string.Compare(
+                                name,
+                                "content-length",
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
+                        )
                         {
                             int contentLength = -1;
-                            if (httpMethodIsHead &&
-                                int.TryParse(value, out contentLength))
+                            if (httpMethodIsHead && int.TryParse(value, out contentLength))
                             {
                                 this.SetContentLength(contentLength);
                             }
@@ -605,7 +723,6 @@ namespace System.ServiceModel.Activation
                         retValue = true;
                     }
                 }
-
                 else
                 {
                     this.SetStatusCode((HttpStatusCode)statusCode);
@@ -616,7 +733,12 @@ namespace System.ServiceModel.Activation
                     if (this.CanSendCompressedResponses)
                     {
                         string contentEncoding;
-                        if (HttpChannelUtilities.GetHttpResponseTypeAndEncodingForCompression(ref contentType, out contentEncoding))
+                        if (
+                            HttpChannelUtilities.GetHttpResponseTypeAndEncodingForCompression(
+                                ref contentType,
+                                out contentEncoding
+                            )
+                        )
                         {
                             result.SetContentEncoding(contentEncoding);
                         }
@@ -642,7 +764,10 @@ namespace System.ServiceModel.Activation
                 {
                     result.SetStatusDescription(message.ReasonPhrase);
                 }
-                HostedHttpContext.AppendHeaderFromHttpResponseMessageToResponse(message, this.result);
+                HostedHttpContext.AppendHeaderFromHttpResponseMessageToResponse(
+                    message,
+                    this.result
+                );
             }
 
             class HostedResponseOutputStream : BytesReadPositionStream
@@ -650,7 +775,10 @@ namespace System.ServiceModel.Activation
                 HostedHttpContext context;
                 HostedHttpRequestAsyncResult result;
 
-                public HostedResponseOutputStream(HostedHttpRequestAsyncResult result, HostedHttpContext context)
+                public HostedResponseOutputStream(
+                    HostedHttpRequestAsyncResult result,
+                    HostedHttpContext context
+                )
                     : base(result.GetOutputStream())
                 {
                     this.context = context;
@@ -674,7 +802,13 @@ namespace System.ServiceModel.Activation
                     }
                 }
 
-                public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+                public override IAsyncResult BeginWrite(
+                    byte[] buffer,
+                    int offset,
+                    int count,
+                    AsyncCallback callback,
+                    object state
+                )
                 {
                     try
                     {
@@ -722,11 +856,17 @@ namespace System.ServiceModel.Activation
                             if (this.context.Aborted)
                             {
                                 throw FxTrace.Exception.AsError(
-                                    new CommunicationObjectAbortedException(SR.RequestContextAborted, e));
+                                    new CommunicationObjectAbortedException(
+                                        SR.RequestContextAborted,
+                                        e
+                                    )
+                                );
                             }
                             else
                             {
-                                throw FxTrace.Exception.AsError(new CommunicationException(e.Message, e));
+                                throw FxTrace.Exception.AsError(
+                                    new CommunicationException(e.Message, e)
+                                );
                             }
                         }
                         else if (this.context.Aborted)
@@ -734,17 +874,27 @@ namespace System.ServiceModel.Activation
                             // See VsWhidbey (594450)
                             if (DiagnosticUtility.ShouldTraceError)
                             {
-                                TraceUtility.TraceEvent(TraceEventType.Error, TraceCode.RequestContextAbort, SR.TraceCodeRequestContextAbort, this, e);
+                                TraceUtility.TraceEvent(
+                                    TraceEventType.Error,
+                                    TraceCode.RequestContextAbort,
+                                    SR.TraceCodeRequestContextAbort,
+                                    this,
+                                    e
+                                );
                             }
 
-                            throw FxTrace.Exception.AsError(new CommunicationObjectAbortedException(SR.RequestContextAborted));
+                            throw FxTrace.Exception.AsError(
+                                new CommunicationObjectAbortedException(SR.RequestContextAborted)
+                            );
                         }
                     }
                 }
             }
         }
 
-        class HostedRequestContainer : RemoteEndpointMessageProperty.IRemoteEndpointProvider, HttpRequestMessageProperty.IHttpHeaderProvider
+        class HostedRequestContainer
+            : RemoteEndpointMessageProperty.IRemoteEndpointProvider,
+                HttpRequestMessageProperty.IHttpHeaderProvider
         {
             volatile bool isClosed;
             HostedHttpRequestAsyncResult result;
@@ -760,10 +910,7 @@ namespace System.ServiceModel.Activation
 
             object ThisLock
             {
-                get
-                {
-                    return this.thisLock;
-                }
+                get { return this.thisLock; }
             }
 
             // IIS properties are not valid once the reply occurs.
@@ -776,11 +923,14 @@ namespace System.ServiceModel.Activation
                 }
             }
 
-
-            [Fx.Tag.SecurityNote(Critical = "Calls getters with LinkDemands in ASP .NET objects",
-                Safe = "Does not leak control or mutable/harmful data, no potential for harm")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Calls getters with LinkDemands in ASP .NET objects",
+                Safe = "Does not leak control or mutable/harmful data, no potential for harm"
+            )]
             [SecuritySafeCritical]
-            void HttpRequestMessageProperty.IHttpHeaderProvider.CopyHeaders(WebHeaderCollection headers)
+            void HttpRequestMessageProperty.IHttpHeaderProvider.CopyHeaders(
+                WebHeaderCollection headers
+            )
             {
                 if (!this.isClosed)
                 {
@@ -788,14 +938,19 @@ namespace System.ServiceModel.Activation
                     {
                         if (!this.isClosed)
                         {
-                            HttpChannelUtilities.CopyHeadersToNameValueCollection(this.result.Application.Request.Headers, headers);                            
+                            HttpChannelUtilities.CopyHeadersToNameValueCollection(
+                                this.result.Application.Request.Headers,
+                                headers
+                            );
                         }
                     }
                 }
             }
 
-            [Fx.Tag.SecurityNote(Critical = "Calls getters with LinkDemands in ASP .NET objects",
-                Safe = "Does not leak control or mutable/harmful data, no potential for harm")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Calls getters with LinkDemands in ASP .NET objects",
+                Safe = "Does not leak control or mutable/harmful data, no potential for harm"
+            )]
             [SecuritySafeCritical]
             string RemoteEndpointMessageProperty.IRemoteEndpointProvider.GetAddress()
             {
@@ -812,9 +967,10 @@ namespace System.ServiceModel.Activation
                 return string.Empty;
             }
 
-
-            [Fx.Tag.SecurityNote(Critical = "Calls getters with LinkDemands in ASP .NET objects",
-                Safe = "Does not leak control or mutable/harmful data, no potential for harm")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Calls getters with LinkDemands in ASP .NET objects",
+                Safe = "Does not leak control or mutable/harmful data, no potential for harm"
+            )]
             [SecuritySafeCritical]
             int RemoteEndpointMessageProperty.IRemoteEndpointProvider.GetPort()
             {
@@ -826,8 +982,13 @@ namespace System.ServiceModel.Activation
                     {
                         if (!this.isClosed)
                         {
-                            string remotePort = this.result.Application.Request.ServerVariables["REMOTE_PORT"];
-                            if (string.IsNullOrEmpty(remotePort) || !int.TryParse(remotePort, out port))
+                            string remotePort = this.result.Application.Request.ServerVariables[
+                                "REMOTE_PORT"
+                            ];
+                            if (
+                                string.IsNullOrEmpty(remotePort)
+                                || !int.TryParse(remotePort, out port)
+                            )
                             {
                                 port = 0;
                             }
@@ -838,8 +999,10 @@ namespace System.ServiceModel.Activation
                 return port;
             }
 
-            [Fx.Tag.SecurityNote(Critical = "Calls getters with LinkDemands in ASP .NET objects",
-                Safe = "Does not leak control or mutable/harmful data, no potential for harm")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Calls getters with LinkDemands in ASP .NET objects",
+                Safe = "Does not leak control or mutable/harmful data, no potential for harm"
+            )]
             [SecuritySafeCritical]
             public bool TryGetAddressAndPort(out string address, out int port)
             {
@@ -854,7 +1017,8 @@ namespace System.ServiceModel.Activation
                         {
                             address = this.result.Application.Request.UserHostAddress;
 
-                            IServiceProvider provider = (IServiceProvider)result.Application.Context;
+                            IServiceProvider provider = (IServiceProvider)
+                                result.Application.Context;
                             port = GetRemotePort(provider);
                             return true;
                         }
@@ -863,12 +1027,17 @@ namespace System.ServiceModel.Activation
                 return false;
             }
 
-            [Fx.Tag.SecurityNote(Critical = "Asserts UnmanagedCode to get the HttpWorkerRequest.", Safe = "Only returns the remote port, doesn't leak the HttpWorkerRequest.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Asserts UnmanagedCode to get the HttpWorkerRequest.",
+                Safe = "Only returns the remote port, doesn't leak the HttpWorkerRequest."
+            )]
             [SecuritySafeCritical]
             [SecurityPermission(SecurityAction.Assert, UnmanagedCode = true)]
             static int GetRemotePort(IServiceProvider provider)
             {
-                return ((HttpWorkerRequest)provider.GetService(typeof(HttpWorkerRequest))).GetRemotePort();
+                return (
+                    (HttpWorkerRequest)provider.GetService(typeof(HttpWorkerRequest))
+                ).GetRemotePort();
             }
         }
     }

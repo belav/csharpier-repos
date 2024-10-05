@@ -32,8 +32,7 @@ public sealed class EphemeralDataProtectionProvider : IDataProtectionProvider
     /// Creates an ephemeral <see cref="IDataProtectionProvider"/>.
     /// </summary>
     public EphemeralDataProtectionProvider()
-        : this(NullLoggerFactory.Instance)
-    { }
+        : this(NullLoggerFactory.Instance) { }
 
     /// <summary>
     /// Creates an ephemeral <see cref="IDataProtectionProvider"/> with logging.
@@ -49,18 +48,25 @@ public sealed class EphemeralDataProtectionProvider : IDataProtectionProvider
             // Assertion for platform compat analyzer
             Debug.Assert(RuntimeInformation.IsOSPlatform(OSPlatform.Windows));
             // Fastest implementation: AES-256-GCM [CNG]
-            keyringProvider = new EphemeralKeyRing<CngGcmAuthenticatedEncryptorConfiguration>(loggerFactory);
+            keyringProvider = new EphemeralKeyRing<CngGcmAuthenticatedEncryptorConfiguration>(
+                loggerFactory
+            );
         }
         else
         {
             // Slowest implementation: AES-256-CBC + HMACSHA256 [Managed]
-            keyringProvider = new EphemeralKeyRing<ManagedAuthenticatedEncryptorConfiguration>(loggerFactory);
+            keyringProvider = new EphemeralKeyRing<ManagedAuthenticatedEncryptorConfiguration>(
+                loggerFactory
+            );
         }
 
         var logger = loggerFactory.CreateLogger<EphemeralDataProtectionProvider>();
         logger.UsingEphemeralDataProtectionProvider();
 
-        _dataProtectionProvider = new KeyRingBasedDataProtectionProvider(keyringProvider, loggerFactory);
+        _dataProtectionProvider = new KeyRingBasedDataProtectionProvider(
+            keyringProvider,
+            loggerFactory
+        );
     }
 
     /// <inheritdoc />
@@ -84,7 +90,10 @@ public sealed class EphemeralDataProtectionProvider : IDataProtectionProvider
 
         public Guid DefaultKeyId { get; }
 
-        public IAuthenticatedEncryptor? GetAuthenticatedEncryptorByKeyId(Guid keyId, out bool isRevoked)
+        public IAuthenticatedEncryptor? GetAuthenticatedEncryptorByKeyId(
+            Guid keyId,
+            out bool isRevoked
+        )
         {
             isRevoked = false;
             return (keyId == default(Guid)) ? DefaultAuthenticatedEncryptor : null;
@@ -102,19 +111,21 @@ public sealed class EphemeralDataProtectionProvider : IDataProtectionProvider
             {
                 Debug.Assert(RuntimeInformation.IsOSPlatform(OSPlatform.Windows));
 
-                var descriptor = (CngGcmAuthenticatedEncryptorDescriptor)new T().CreateNewDescriptor();
-                return new CngGcmAuthenticatedEncryptorFactory(loggerFactory)
-                    .CreateAuthenticatedEncryptorInstance(
-                        descriptor.MasterKey,
-                        cngConfiguration);
+                var descriptor = (CngGcmAuthenticatedEncryptorDescriptor)
+                    new T().CreateNewDescriptor();
+                return new CngGcmAuthenticatedEncryptorFactory(
+                    loggerFactory
+                ).CreateAuthenticatedEncryptorInstance(descriptor.MasterKey, cngConfiguration);
             }
-            else if (configuration is ManagedAuthenticatedEncryptorConfiguration managedConfiguration)
+            else if (
+                configuration is ManagedAuthenticatedEncryptorConfiguration managedConfiguration
+            )
             {
-                var descriptor = (ManagedAuthenticatedEncryptorDescriptor)new T().CreateNewDescriptor();
-                return new ManagedAuthenticatedEncryptorFactory(loggerFactory)
-                    .CreateAuthenticatedEncryptorInstance(
-                        descriptor.MasterKey,
-                        managedConfiguration);
+                var descriptor = (ManagedAuthenticatedEncryptorDescriptor)
+                    new T().CreateNewDescriptor();
+                return new ManagedAuthenticatedEncryptorFactory(
+                    loggerFactory
+                ).CreateAuthenticatedEncryptorInstance(descriptor.MasterKey, managedConfiguration);
             }
 
             return null;

@@ -11,8 +11,7 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests;
 public class BloggingContextWithSnapshotThatThrows : BloggingContext
 {
     public BloggingContextWithSnapshotThatThrows(DbContextOptions options)
-        : base(options)
-    { }
+        : base(options) { }
 
     [DbContext(typeof(BloggingContextWithSnapshotThatThrows))]
     public class BloggingContextWithSnapshotThatThrowsModelSnapshot : ModelSnapshot
@@ -27,7 +26,8 @@ public class BloggingContextWithSnapshotThatThrows : BloggingContext
     [Migration("111111111111111_MigrationOne")]
     public class MigrationOne : Migration
     {
-        public override IModel TargetModel => new BloggingContextWithSnapshotThatThrowsModelSnapshot().Model;
+        public override IModel TargetModel =>
+            new BloggingContextWithSnapshotThatThrowsModelSnapshot().Model;
 
         protected override void Up(MigrationBuilder migrationBuilder)
         {

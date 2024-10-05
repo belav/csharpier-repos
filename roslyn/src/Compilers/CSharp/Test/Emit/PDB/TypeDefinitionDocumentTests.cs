@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.PDB
         [Fact]
         public void ClassWithMethod()
         {
-            string source = @"
+            string source =
+                @"
 class M
 {
     public static void A()
@@ -37,7 +38,8 @@ class M
         [Fact]
         public void NestedClassWithMethod()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     class N
@@ -55,7 +57,8 @@ class C
         [Fact]
         public void MultiNestedClassWithMethod()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     class N
@@ -76,7 +79,8 @@ class C
         [Fact]
         public void PartialNestedClassWithMethod()
         {
-            string source1 = @"
+            string source1 =
+                @"
 partial class C
 {
     partial class N
@@ -88,7 +92,8 @@ partial class C
     }
 }
 ";
-            string source2 = @"
+            string source2 =
+                @"
 partial class C
 {
     partial class N
@@ -96,26 +101,26 @@ partial class C
     }
 }
 ";
-            TestTypeDefinitionDocuments(new[] { source1, source2 },
-                ("C", "2.cs"));
+            TestTypeDefinitionDocuments(new[] { source1, source2 }, ("C", "2.cs"));
         }
 
         [Fact]
         public void EmptyClass()
         {
-            string source = @"
+            string source =
+                @"
 class O
 {
 }
 ";
-            TestTypeDefinitionDocuments(new[] { source },
-                ("O", "1.cs"));
+            TestTypeDefinitionDocuments(new[] { source }, ("O", "1.cs"));
         }
 
         [Fact]
         public void EmptyNestedClass()
         {
-            string source = @"
+            string source =
+                @"
 class O
 {
     class N
@@ -123,14 +128,14 @@ class O
     }
 }
 ";
-            TestTypeDefinitionDocuments(new[] { source },
-                ("O", "1.cs"));
+            TestTypeDefinitionDocuments(new[] { source }, ("O", "1.cs"));
         }
 
         [Fact]
         public void EmptyMultiNestedClass()
         {
-            string source = @"
+            string source =
+                @"
 class O
 {
     class N
@@ -141,14 +146,14 @@ class O
     }
 }
 ";
-            TestTypeDefinitionDocuments(new[] { source },
-                ("O", "1.cs"));
+            TestTypeDefinitionDocuments(new[] { source }, ("O", "1.cs"));
         }
 
         [Fact]
         public void MultipleClassesAndFiles()
         {
-            string source1 = @"
+            string source1 =
+                @"
 class M
 {
     public static void A()
@@ -166,7 +171,8 @@ class O
 }
 ";
 
-            string source2 = @"
+            string source2 =
+                @"
 class C
 {
 }
@@ -176,72 +182,78 @@ class D
 }
 ";
 
-            TestTypeDefinitionDocuments(new[] { source1, source2 },
+            TestTypeDefinitionDocuments(
+                new[] { source1, source2 },
                 ("N", "1.cs"),
                 ("O", "1.cs"),
                 ("C", "2.cs"),
-                ("D", "2.cs"));
+                ("D", "2.cs")
+            );
         }
 
         [Fact]
         public void PartialClasses()
         {
-            string source1 = @"
+            string source1 =
+                @"
 partial class C
 {
 }
 ";
-            string source2 = @"
+            string source2 =
+                @"
 partial class C
 {
 }
 ";
-            TestTypeDefinitionDocuments(new[] { source1, source2 },
-                ("C", "1.cs, 2.cs"));
+            TestTypeDefinitionDocuments(new[] { source1, source2 }, ("C", "1.cs, 2.cs"));
         }
 
         [Fact]
         public void PartialClasses2()
         {
-            string source1 = @"
+            string source1 =
+                @"
 partial class C
 {
 }
 ";
-            string source2 = @"
+            string source2 =
+                @"
 partial class C
 {
     int x = 1;
     void M() { }
 }
 ";
-            TestTypeDefinitionDocuments(new[] { source1, source2 },
-                ("C", "1.cs"));
+            TestTypeDefinitionDocuments(new[] { source1, source2 }, ("C", "1.cs"));
         }
 
         [Fact]
         public void PartialClasses3()
         {
-            string source1 = @"
+            string source1 =
+                @"
 partial class C
 {
 }
 ";
-            string source2 = @"
+            string source2 =
+                @"
 partial class C
 {
     int x;
     void M() { }
 }
 ";
-            TestTypeDefinitionDocuments(new[] { source1, source2 },
-                ("C", "1.cs"));
+            TestTypeDefinitionDocuments(new[] { source1, source2 }, ("C", "1.cs"));
         }
 
         [Fact]
         public void Property()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public int X { get; set; }
@@ -254,7 +266,8 @@ class C
         [Fact]
         public void Fields()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     int x;
@@ -263,14 +276,14 @@ class C
 }
 ";
 
-            TestTypeDefinitionDocuments(new[] { source },
-                ("C", "1.cs"));
+            TestTypeDefinitionDocuments(new[] { source }, ("C", "1.cs"));
         }
 
         [Fact]
         public void Fields_WithInitializer()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     int x;
@@ -285,35 +298,36 @@ class C
         [Fact]
         public void AbstractMethod()
         {
-            string source = @"
+            string source =
+                @"
 abstract class C
 {
     public abstract void M();
 }
 ";
 
-            TestTypeDefinitionDocuments(new[] { source },
-                ("C", "1.cs"));
+            TestTypeDefinitionDocuments(new[] { source }, ("C", "1.cs"));
         }
 
         [Fact]
         public void ExternMethod()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public extern void M();
 }
 ";
 
-            TestTypeDefinitionDocuments(new[] { source },
-                ("C", "1.cs"));
+            TestTypeDefinitionDocuments(new[] { source }, ("C", "1.cs"));
         }
 
         [Fact]
         public void Interfaces()
         {
-            string source1 = @"
+            string source1 =
+                @"
 interface I1
 {
 }
@@ -323,32 +337,39 @@ partial interface I2
     public void F();
 }
 ";
-            string source2 = @"
+            string source2 =
+                @"
 partial interface I2
 {
 }
 ";
-            TestTypeDefinitionDocuments(new[] { source1, source2 },
+            TestTypeDefinitionDocuments(
+                new[] { source1, source2 },
                 ("I1", "1.cs"),
-                ("I2", "1.cs, 2.cs"));
+                ("I2", "1.cs, 2.cs")
+            );
         }
 
         [Fact]
         public void Record()
         {
-            string source = @"
+            string source =
+                @"
 record R(int X);
 ";
 
             // The compiler synthesized methods have document info so we don't expect a type document
-            TestTypeDefinitionDocuments(new[] { source, IsExternalInitTypeDefinition },
-                ("IsExternalInit", "2.cs"));
+            TestTypeDefinitionDocuments(
+                new[] { source, IsExternalInitTypeDefinition },
+                ("IsExternalInit", "2.cs")
+            );
         }
 
         [Fact]
         public void Record_SynthesizedMember()
         {
-            string source = @"
+            string source =
+                @"
 record R(int X)
 {
     protected virtual bool PrintMembers(System.Text.StringBuilder builder)
@@ -358,14 +379,17 @@ record R(int X)
 }
 ";
 
-            TestTypeDefinitionDocuments(new[] { source, IsExternalInitTypeDefinition },
-                ("IsExternalInit", "2.cs"));
+            TestTypeDefinitionDocuments(
+                new[] { source, IsExternalInitTypeDefinition },
+                ("IsExternalInit", "2.cs")
+            );
         }
 
         [Fact]
         public void Enum()
         {
-            string source = @"
+            string source =
+                @"
 enum E
 {
 }
@@ -377,15 +401,14 @@ enum E2
 }
 ";
 
-            TestTypeDefinitionDocuments(new[] { source },
-                ("E", "1.cs"),
-                ("E2", "1.cs"));
+            TestTypeDefinitionDocuments(new[] { source }, ("E", "1.cs"), ("E2", "1.cs"));
         }
 
         [Fact]
         public void Delegate()
         {
-            string source = @"
+            string source =
+                @"
 delegate void D(int a);
 
 class C
@@ -397,14 +420,14 @@ class C
 }
 ";
 
-            TestTypeDefinitionDocuments(new[] { source },
-                ("D", "1.cs"));
+            TestTypeDefinitionDocuments(new[] { source }, ("D", "1.cs"));
         }
 
         [Fact]
         public void AnonymousTypes()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M()
@@ -420,7 +443,8 @@ class C
         [Fact]
         public void LineDirectives()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
 #line 1 ""C.cs""
@@ -451,20 +475,37 @@ class F
 }
 ";
 
-            TestTypeDefinitionDocuments(new[] { source },
+            TestTypeDefinitionDocuments(
+                new[] { source },
                 ("C", "1.cs"),
                 ("D", "1.cs"),
                 ("E", "1.cs"),
-                ("F", "1.cs"));
+                ("F", "1.cs")
+            );
         }
 
-        private static void TestTypeDefinitionDocuments(string[] sources, params (string typeName, string documentName)[] expected)
+        private static void TestTypeDefinitionDocuments(
+            string[] sources,
+            params (string typeName, string documentName)[] expected
+        )
         {
-            var trees = sources.Select((s, i) => SyntaxFactory.ParseSyntaxTree(s, path: $"{i + 1}.cs", encoding: Encoding.UTF8)).ToArray();
+            var trees = sources
+                .Select(
+                    (s, i) =>
+                        SyntaxFactory.ParseSyntaxTree(
+                            s,
+                            path: $"{i + 1}.cs",
+                            encoding: Encoding.UTF8
+                        )
+                )
+                .ToArray();
             var compilation = CreateCompilation(trees, options: TestOptions.DebugDll);
 
             var pdbStream = new MemoryStream();
-            var pe = compilation.EmitToArray(EmitOptions.Default.WithDebugInformationFormat(DebugInformationFormat.PortablePdb), pdbStream: pdbStream);
+            var pe = compilation.EmitToArray(
+                EmitOptions.Default.WithDebugInformationFormat(DebugInformationFormat.PortablePdb),
+                pdbStream: pdbStream
+            );
             pdbStream.Position = 0;
 
             var metadata = ModuleMetadata.CreateFromImage(pe);
@@ -473,12 +514,24 @@ class F
             using var provider = MetadataReaderProvider.FromPortablePdbStream(pdbStream);
             var pdbReader = provider.GetMetadataReader();
 
-            var actual = from handle in pdbReader.CustomDebugInformation
-                         let entry = pdbReader.GetCustomDebugInformation(handle)
-                         where pdbReader.GetGuid(entry.Kind).Equals(PortableCustomDebugInfoKinds.TypeDefinitionDocuments)
-                         select (typeName: GetTypeName(entry.Parent), documentName: GetDocumentNames(entry.Value));
+            var actual =
+                from handle in pdbReader.CustomDebugInformation
+                let entry = pdbReader.GetCustomDebugInformation(handle)
+                where
+                    pdbReader
+                        .GetGuid(entry.Kind)
+                        .Equals(PortableCustomDebugInfoKinds.TypeDefinitionDocuments)
+                select (
+                    typeName: GetTypeName(entry.Parent),
+                    documentName: GetDocumentNames(entry.Value)
+                );
 
-            AssertEx.Equal(expected, actual, itemSeparator: ",\n", itemInspector: i => $"(\"{i.typeName}\", \"{i.documentName}\")");
+            AssertEx.Equal(
+                expected,
+                actual,
+                itemSeparator: ",\n",
+                itemInspector: i => $"(\"{i.typeName}\", \"{i.documentName}\")"
+            );
 
             string GetTypeName(EntityHandle handle)
             {

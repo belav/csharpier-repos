@@ -16,7 +16,8 @@ namespace System.Data.Entity.Design
     internal static class EntityViewGenerationConstants
     {
         internal static readonly string NamespaceName = "Edm_EntityMappingGeneratedViews";
-        internal static readonly string ViewGenerationCustomAttributeName = "System.Data.Mapping.EntityViewGenerationAttribute";
+        internal static readonly string ViewGenerationCustomAttributeName =
+            "System.Data.Mapping.EntityViewGenerationAttribute";
         internal static readonly string ViewGenerationTypeNamePrefix = "ViewsForBaseEntitySets";
         internal static readonly string BaseTypeName = "System.Data.Mapping.EntityViewContainer";
         internal static readonly string EdmEntityContainerName = "EdmEntityContainerName";

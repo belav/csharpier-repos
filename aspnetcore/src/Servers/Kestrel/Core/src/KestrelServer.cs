@@ -28,7 +28,11 @@ public class KestrelServer : IServer
     /// <param name="options">The Kestrel <see cref="IOptions{TOptions}"/>.</param>
     /// <param name="transportFactory">The <see cref="IConnectionListenerFactory"/>.</param>
     /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
-    public KestrelServer(IOptions<KestrelServerOptions> options, IConnectionListenerFactory transportFactory, ILoggerFactory loggerFactory)
+    public KestrelServer(
+        IOptions<KestrelServerOptions> options,
+        IConnectionListenerFactory transportFactory,
+        ILoggerFactory loggerFactory
+    )
     {
         _innerKestrelServer = new KestrelServerImpl(
             options,
@@ -36,7 +40,8 @@ public class KestrelServer : IServer
             Array.Empty<IMultiplexedConnectionListenerFactory>(),
             new SimpleHttpsConfigurationService(),
             loggerFactory,
-            new KestrelMetrics(new DummyMeterFactory()));
+            new KestrelMetrics(new DummyMeterFactory())
+        );
     }
 
     /// <inheritdoc />
@@ -48,7 +53,11 @@ public class KestrelServer : IServer
     public KestrelServerOptions Options => _innerKestrelServer.Options;
 
     /// <inheritdoc />
-    public Task StartAsync<TContext>(IHttpApplication<TContext> application, CancellationToken cancellationToken) where TContext : notnull
+    public Task StartAsync<TContext>(
+        IHttpApplication<TContext> application,
+        CancellationToken cancellationToken
+    )
+        where TContext : notnull
     {
         return _innerKestrelServer.StartAsync(application, cancellationToken);
     }
@@ -79,12 +88,19 @@ public class KestrelServer : IServer
     {
         public bool IsInitialized => true;
 
-        public void Initialize(IHostEnvironment hostEnvironment, ILogger<KestrelServer> serverLogger, ILogger<HttpsConnectionMiddleware> httpsLogger)
+        public void Initialize(
+            IHostEnvironment hostEnvironment,
+            ILogger<KestrelServer> serverLogger,
+            ILogger<HttpsConnectionMiddleware> httpsLogger
+        )
         {
             // Already initialized
         }
 
-        public void PopulateMultiplexedTransportFeatures(FeatureCollection features, ListenOptions listenOptions)
+        public void PopulateMultiplexedTransportFeatures(
+            FeatureCollection features,
+            ListenOptions listenOptions
+        )
         {
             throw new NotImplementedException(); // Not actually required by this impl, which never provides an IMultiplexedConnectionListenerFactory
         }
@@ -99,12 +115,17 @@ public class KestrelServer : IServer
             EndpointConfig endpoint,
             KestrelServerOptions serverOptions,
             CertificateConfig? defaultCertificateConfig,
-            ConfigurationReader configurationReader)
+            ConfigurationReader configurationReader
+        )
         {
             throw new NotImplementedException(); // Not actually required by this impl
         }
 
-        public ListenOptions UseHttpsWithSni(ListenOptions listenOptions, HttpsConnectionAdapterOptions httpsOptions, EndpointConfig endpoint)
+        public ListenOptions UseHttpsWithSni(
+            ListenOptions listenOptions,
+            HttpsConnectionAdapterOptions httpsOptions,
+            EndpointConfig endpoint
+        )
         {
             throw new NotImplementedException(); // Not actually required by this impl
         }

@@ -10,27 +10,38 @@ internal sealed class ClearCommand
 {
     public static void Register(ProjectCommandLineApplication app)
     {
-        app.Command("clear", cmd =>
-        {
-            cmd.Description = Resources.ClearCommand_Description;
-
-            var forceOption = cmd.Option(
-                "--force",
-                Resources.ClearCommand_ForceOption_Description,
-                CommandOptionType.NoValue);
-
-            cmd.HelpOption("-h|--help");
-
-            cmd.OnExecute(() =>
+        app.Command(
+            "clear",
+            cmd =>
             {
-                return Execute(cmd.Reporter, cmd.ProjectOption.Value(), forceOption.HasValue());
-            });
-        });
+                cmd.Description = Resources.ClearCommand_Description;
+
+                var forceOption = cmd.Option(
+                    "--force",
+                    Resources.ClearCommand_ForceOption_Description,
+                    CommandOptionType.NoValue
+                );
+
+                cmd.HelpOption("-h|--help");
+
+                cmd.OnExecute(() =>
+                {
+                    return Execute(cmd.Reporter, cmd.ProjectOption.Value(), forceOption.HasValue());
+                });
+            }
+        );
     }
 
     private static int Execute(IReporter reporter, string projectPath, bool force)
     {
-        if (!DevJwtCliHelpers.GetProjectAndSecretsId(projectPath, reporter, out var project, out var userSecretsId))
+        if (
+            !DevJwtCliHelpers.GetProjectAndSecretsId(
+                projectPath,
+                reporter,
+                out var project,
+                out var userSecretsId
+            )
+        )
         {
             return 1;
         }
@@ -54,7 +65,10 @@ internal sealed class ClearCommand
             }
         }
 
-        var appsettingsFilePath = Path.Combine(Path.GetDirectoryName(project), "appsettings.Development.json");
+        var appsettingsFilePath = Path.Combine(
+            Path.GetDirectoryName(project),
+            "appsettings.Development.json"
+        );
         foreach (var jwt in jwtStore.Jwts)
         {
             JwtAuthenticationSchemeSettings.RemoveScheme(appsettingsFilePath, jwt.Value.Scheme);

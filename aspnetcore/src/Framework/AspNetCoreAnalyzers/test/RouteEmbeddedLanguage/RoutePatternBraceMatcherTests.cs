@@ -14,7 +14,8 @@ public partial class RoutePatternBraceMatcherTests
     public async Task AfterLiteral_NoHighlight()
     {
         // Arrange & Act & Assert
-        await TestBraceMatchesAsync(@"
+        await TestBraceMatchesAsync(
+            @"
 using System.Diagnostics.CodeAnalysis;
 
 class Program
@@ -28,14 +29,16 @@ class Program
     {
     }
 }
-");
+"
+        );
     }
 
     [Fact]
     public async Task BeforeParameterStart_CompleteParameter_HighlightBraces()
     {
         // Arrange & Act & Assert
-        await TestBraceMatchesAsync(@"
+        await TestBraceMatchesAsync(
+            @"
 using System.Diagnostics.CodeAnalysis;
 
 class Program
@@ -49,14 +52,16 @@ class Program
     {
     }
 }
-");
+"
+        );
     }
 
     [Fact]
     public async Task BeforeParameterStart_IncompleteParameter_NoHighlight()
     {
         // Arrange & Act & Assert
-        await TestBraceMatchesAsync(@"
+        await TestBraceMatchesAsync(
+            @"
 using System.Diagnostics.CodeAnalysis;
 
 class Program
@@ -70,14 +75,16 @@ class Program
     {
     }
 }
-");
+"
+        );
     }
 
     [Fact]
     public async Task BeforeArgumentStart_CompleteParenAndParameter_HighlightParens()
     {
         // Arrange & Act & Assert
-        await TestBraceMatchesAsync(@"
+        await TestBraceMatchesAsync(
+            @"
 using System.Diagnostics.CodeAnalysis;
 
 class Program
@@ -91,14 +98,16 @@ class Program
     {
     }
 }
-");
+"
+        );
     }
 
     [Fact]
     public async Task BeforeArgumentStart_CompleteParenIncompleteParameter_HighlightParens()
     {
         // Arrange & Act & Assert
-        await TestBraceMatchesAsync(@"
+        await TestBraceMatchesAsync(
+            @"
 using System.Diagnostics.CodeAnalysis;
 
 class Program
@@ -112,14 +121,16 @@ class Program
     {
     }
 }
-");
+"
+        );
     }
 
     [Fact]
     public async Task AfterParameterStart_CompleteParameter_NoHighlight()
     {
         // Arrange & Act & Assert
-        await TestBraceMatchesAsync(@"
+        await TestBraceMatchesAsync(
+            @"
 using System.Diagnostics.CodeAnalysis;
 
 class Program
@@ -133,14 +144,16 @@ class Program
     {
     }
 }
-");
+"
+        );
     }
 
     [Fact]
     public async Task BeforeReplacementTokenStart_NotUsedWithMvc_NoHighlight()
     {
         // Arrange & Act & Assert
-        await TestBraceMatchesAsync(@"
+        await TestBraceMatchesAsync(
+            @"
 using System.Diagnostics.CodeAnalysis;
 
 class Program
@@ -154,14 +167,16 @@ class Program
     {
     }
 }
-");
+"
+        );
     }
 
     [Fact]
     public async Task BeforeReplacementTokenStart_MvcAction_HighlightReplacementTokenBrackets()
     {
         // Arrange & Act & Assert
-        await TestBraceMatchesAsync(@"
+        await TestBraceMatchesAsync(
+            @"
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Mvc;
 
@@ -179,12 +194,18 @@ public class TestController
     {
     }
 }
-");
+"
+        );
     }
 
     private async Task TestBraceMatchesAsync(string source)
     {
-        MarkupTestFile.GetPositionAndSpans(source, out var output, out int cursorPosition, out var spans);
+        MarkupTestFile.GetPositionAndSpans(
+            source,
+            out var output,
+            out int cursorPosition,
+            out var spans
+        );
 
         var result = await Runner.GetBraceMatchesAsync(cursorPosition, output);
         if (result == null)

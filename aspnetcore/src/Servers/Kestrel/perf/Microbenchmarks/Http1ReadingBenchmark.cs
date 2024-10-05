@@ -9,12 +9,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using BenchmarkDotNet.Attributes;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
-using Microsoft.AspNetCore.InternalTesting;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
@@ -22,6 +22,7 @@ public class Http1ReadingBenchmark
 {
     // Standard completed task
     private static readonly Func<object, Task> _syncTaskFunc = (obj) => Task.CompletedTask;
+
     // Non-standard completed task
     private static readonly Task _pseudoAsyncTask = Task.FromResult(27);
     private static readonly Func<object, Task> _pseudoAsyncTaskFunc = (obj) => _pseudoAsyncTask;
@@ -88,19 +89,27 @@ public class Http1ReadingBenchmark
     {
         ResetState();
 
-        return _http1Connection.RequestBody.ReadAsync(new byte[100], default(CancellationToken)).AsTask();
+        return _http1Connection
+            .RequestBody.ReadAsync(new byte[100], default(CancellationToken))
+            .AsTask();
     }
 
     private TestHttp1Connection MakeHttp1Connection()
     {
-        var options = new PipeOptions(_memoryPool, readerScheduler: PipeScheduler.Inline, writerScheduler: PipeScheduler.Inline, useSynchronizationContext: false);
+        var options = new PipeOptions(
+            _memoryPool,
+            readerScheduler: PipeScheduler.Inline,
+            writerScheduler: PipeScheduler.Inline,
+            useSynchronizationContext: false
+        );
         var pair = DuplexPipe.CreateConnectionPair(options, options);
         _pair = pair;
 
         var serviceContext = TestContextFactory.CreateServiceContext(
             serverOptions: new KestrelServerOptions(),
             httpParser: new HttpParser<Http1ParsingHandler>(),
-            dateHeaderValueManager: new DateHeaderValueManager(TimeProvider.System));
+            dateHeaderValueManager: new DateHeaderValueManager(TimeProvider.System)
+        );
 
         var connectionContext = TestContextFactory.CreateHttpConnectionContext(
             serviceContext: serviceContext,
@@ -108,12 +117,15 @@ public class Http1ReadingBenchmark
             transport: pair.Transport,
             timeoutControl: new TimeoutControl(timeoutHandler: null, TimeProvider.System),
             memoryPool: _memoryPool,
-            connectionFeatures: new FeatureCollection());
+            connectionFeatures: new FeatureCollection()
+        );
 
         var http1Connection = new TestHttp1Connection(connectionContext);
 
         http1Connection.Reset();
-        http1Connection.InitializeBodyControl(new Http1ContentLengthMessageBody(http1Connection, contentLength: 100, keepAlive: true));
+        http1Connection.InitializeBodyControl(
+            new Http1ContentLengthMessageBody(http1Connection, contentLength: 100, keepAlive: true)
+        );
         serviceContext.DateHeaderValueManager.OnHeartbeat();
 
         return http1Connection;
@@ -133,7 +145,7 @@ public class Http1ReadingBenchmark
     {
         None,
         Sync,
-        Async
+        Async,
     }
 
     [GlobalCleanup]

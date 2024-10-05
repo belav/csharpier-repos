@@ -7,17 +7,23 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
 public static class CosmosDbContextOptionsBuilderExtensions
 {
-    public static CosmosDbContextOptionsBuilder ApplyConfiguration(this CosmosDbContextOptionsBuilder optionsBuilder)
+    public static CosmosDbContextOptionsBuilder ApplyConfiguration(
+        this CosmosDbContextOptionsBuilder optionsBuilder
+    )
     {
         optionsBuilder
             .ExecutionStrategy(d => new TestCosmosExecutionStrategy(d))
             .RequestTimeout(TimeSpan.FromMinutes(20))
             .HttpClientFactory(
-                () => new HttpClient(
-                    new HttpClientHandler
-                    {
-                        ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-                    }))
+                () =>
+                    new HttpClient(
+                        new HttpClientHandler
+                        {
+                            ServerCertificateCustomValidationCallback =
+                                HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
+                        }
+                    )
+            )
             .ConnectionMode(ConnectionMode.Gateway);
 
         return optionsBuilder;

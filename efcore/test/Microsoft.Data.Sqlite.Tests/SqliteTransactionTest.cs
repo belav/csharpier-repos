@@ -43,7 +43,9 @@ public class SqliteTransactionTest
         using var connection = new SqliteConnection("Data Source=:memory:");
         connection.Open();
 
-        var ex = Assert.Throws<ArgumentException>(() => connection.BeginTransaction(isolationLevel));
+        var ex = Assert.Throws<ArgumentException>(
+            () => connection.BeginTransaction(isolationLevel)
+        );
 
         Assert.Equal(Resources.InvalidIsolationLevel(isolationLevel), ex.Message);
     }
@@ -74,7 +76,8 @@ public class SqliteTransactionTest
             connection2.DefaultTimeout = 1;
 
             var ex = Assert.Throws<SqliteException>(
-                () => connection2.ExecuteScalar<long>("SELECT * FROM Data;"));
+                () => connection2.ExecuteScalar<long>("SELECT * FROM Data;")
+            );
 
             Assert.Equal(SQLITE_LOCKED, ex.SqliteErrorCode);
             Assert.Equal(SQLITE_LOCKED_SHAREDCACHE, ex.SqliteExtendedErrorCode);
@@ -99,14 +102,13 @@ public class SqliteTransactionTest
 
             connection2.DefaultTimeout = 1;
 
-            var ex = Assert.Throws<SqliteException>(
-                () =>
+            var ex = Assert.Throws<SqliteException>(() =>
+            {
+                using (connection2.BeginTransaction(IsolationLevel.Serializable))
                 {
-                    using (connection2.BeginTransaction(IsolationLevel.Serializable))
-                    {
-                        connection2.ExecuteScalar<long>("SELECT * FROM Data;");
-                    }
-                });
+                    connection2.ExecuteScalar<long>("SELECT * FROM Data;");
+                }
+            });
 
             Assert.Equal(SQLITE_LOCKED, ex.SqliteErrorCode);
             Assert.Equal(SQLITE_LOCKED_SHAREDCACHE, ex.SqliteExtendedErrorCode);
@@ -324,6 +326,6 @@ public class SqliteTransactionTest
         Assert.Throws<SqliteException>(() => transaction.Rollback("MySavepointName"));
     }
 
-    private static void CreateTestTable(SqliteConnection connection)
-        => connection.ExecuteNonQuery("CREATE TABLE TestTable (TestColumn INTEGER)");
+    private static void CreateTestTable(SqliteConnection connection) =>
+        connection.ExecuteNonQuery("CREATE TABLE TestTable (TestColumn INTEGER)");
 }

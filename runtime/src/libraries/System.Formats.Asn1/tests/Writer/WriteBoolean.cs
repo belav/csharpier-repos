@@ -29,7 +29,11 @@ namespace System.Formats.Asn1.Tests.Writer
         [InlineData(AsnEncodingRules.CER, true, "8301FF")]
         [InlineData(AsnEncodingRules.DER, false, "830100")]
         [InlineData(AsnEncodingRules.DER, true, "8301FF")]
-        public void VerifyWriteBoolean_Context3(AsnEncodingRules ruleSet, bool value, string expectedHex)
+        public void VerifyWriteBoolean_Context3(
+            AsnEncodingRules ruleSet,
+            bool value,
+            string expectedHex
+        )
         {
             AsnWriter writer = new AsnWriter(ruleSet);
             writer.WriteBoolean(value, new Asn1Tag(TagClass.ContextSpecific, 3));
@@ -50,7 +54,8 @@ namespace System.Formats.Asn1.Tests.Writer
 
             AssertExtensions.Throws<ArgumentException>(
                 "tag",
-                () => writer.WriteBoolean(value, Asn1Tag.Null));
+                () => writer.WriteBoolean(value, Asn1Tag.Null)
+            );
         }
 
         [Theory]

@@ -15,9 +15,7 @@ namespace System.Speech.Recognition.SrgsGrammar
     [DebuggerTypeProxy(typeof(SrgsElementDebugDisplay))]
     public abstract class SrgsElement : MarshalByRefObject, IElement
     {
-        protected SrgsElement()
-        {
-        }
+        protected SrgsElement() { }
 
         #region Internal methods
 
@@ -43,9 +41,7 @@ namespace System.Speech.Recognition.SrgsGrammar
             }
         }
 
-        void IElement.PostParse(IElement parent)
-        {
-        }
+        void IElement.PostParse(IElement parent) { }
 
         #endregion
 
@@ -53,10 +49,7 @@ namespace System.Speech.Recognition.SrgsGrammar
 
         internal virtual SrgsElement[] Children
         {
-            get
-            {
-                return Array.Empty<SrgsElement>();
-            }
+            get { return Array.Empty<SrgsElement>(); }
         }
 
         #endregion
@@ -70,13 +63,11 @@ namespace System.Speech.Recognition.SrgsGrammar
             {
                 _elements = element.Children;
             }
+
             [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
             public SrgsElement[] AKeys
             {
-                get
-                {
-                    return _elements;
-                }
+                get { return _elements; }
             }
 
             private SrgsElement[] _elements;

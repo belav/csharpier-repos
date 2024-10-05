@@ -15,7 +15,7 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
     {
         BeforeRootElement,
         InRootElement,
-        AfterRootElement
+        AfterRootElement,
     }
 
     internal sealed class CanonicalWriter : XmlDictionaryWriter
@@ -54,12 +54,15 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
         private IAncestralNamespaceContextProvider _contextProvider;
 
         public CanonicalWriter(CanonicalEncoder encoder)
-            : this(encoder, null, false, null, 0)
-        {
-        }
+            : this(encoder, null, false, null, 0) { }
 
-        public CanonicalWriter(CanonicalEncoder encoder,
-            string[] inclusivePrefixes, bool includeComments, IPrefixGenerator prefixGenerator, int startingDepthForAttributePrefixGeneration)
+        public CanonicalWriter(
+            CanonicalEncoder encoder,
+            string[] inclusivePrefixes,
+            bool includeComments,
+            IPrefixGenerator prefixGenerator,
+            int startingDepthForAttributePrefixGeneration
+        )
         {
             _attributesToRender = new CanonicalAttributeManager();
             _encoder = encoder;
@@ -159,7 +162,10 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
 
         private bool ShouldDelegate
         {
-            get { return _bufferingWriter != null && (!_bufferOnlyRootElementContents || _depth > 0); }
+            get
+            {
+                return _bufferingWriter != null && (!_bufferOnlyRootElementContents || _depth > 0);
+            }
         }
 
         public int StartingDepthForAttributePrefixGeneration
@@ -187,7 +193,11 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             string prefix = null;
             if (_prefixGenerator != null)
             {
-                prefix = _prefixGenerator.GetPrefix(ns, _depth + _startingDepthForAttributePrefixGeneration, isForAttribute);
+                prefix = _prefixGenerator.GetPrefix(
+                    ns,
+                    _depth + _startingDepthForAttributePrefixGeneration,
+                    isForAttribute
+                );
             }
 
             if (prefix != null && LookupNamespace(prefix) == null)
@@ -202,9 +212,12 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
 
             do
             {
-                prefix = "d" + (_depth + _startingDepthForAttributePrefixGeneration) + "p" + ++_attributePrefixGenerationIndex;
-            }
-            while (LookupNamespace(prefix) != null);
+                prefix =
+                    "d"
+                    + (_depth + _startingDepthForAttributePrefixGeneration)
+                    + "p"
+                    + ++_attributePrefixGenerationIndex;
+            } while (LookupNamespace(prefix) != null);
             return prefix;
         }
 
@@ -264,7 +277,10 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             }
 
             OnPossibleEndOfStartTag(WriteState.Content);
-            _encoder.EncodeEndElement(_elements[_elementCount - 1].prefix, _elements[_elementCount - 1].localName);
+            _encoder.EncodeEndElement(
+                _elements[_elementCount - 1].prefix,
+                _elements[_elementCount - 1].localName
+            );
             PopElement();
             _manager.ExitElementContext();
             _depth--;
@@ -303,13 +319,20 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             {
                 for (int i = 0; i < _inclusivePrefixes.Length; i++)
                 {
-                    _manager.MarkToRenderForInclusivePrefix(_inclusivePrefixes[i], _depth == 0, _contextProvider);
+                    _manager.MarkToRenderForInclusivePrefix(
+                        _inclusivePrefixes[i],
+                        _depth == 0,
+                        _contextProvider
+                    );
                 }
             }
 
             _attributesToRender.Sort();
 
-            _encoder.EncodeStartElementOpen(_elements[_elementCount - 1].prefix, _elements[_elementCount - 1].localName);
+            _encoder.EncodeStartElementOpen(
+                _elements[_elementCount - 1].prefix,
+                _elements[_elementCount - 1].localName
+            );
             _manager.Render(_encoder);
             _attributesToRender.Encode(_encoder);
             _encoder.EncodeStartElementClose();
@@ -382,14 +405,18 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
 
         private void ThrowBadStateException(string call)
         {
-            throw new InvalidOperationException(string.Format("Invalid Operation for writer state: {0}, {1}", call, _state));
+            throw new InvalidOperationException(
+                string.Format("Invalid Operation for writer state: {0}, {1}", call, _state)
+            );
         }
 
         private void ThrowIfNotInStartState()
         {
             if (_state != WriteState.Start)
             {
-                throw new InvalidOperationException("Setting may be modified only when the writer is in Start State.");
+                throw new InvalidOperationException(
+                    "Setting may be modified only when the writer is in Start State."
+                );
             }
         }
 
@@ -430,7 +457,13 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
                         _base64Remainder = new byte[3];
                     }
 
-                    Buffer.BlockCopy(buffer, offset + count - _base64RemainderSize, _base64Remainder, 0, _base64RemainderSize);
+                    Buffer.BlockCopy(
+                        buffer,
+                        offset + count - _base64RemainderSize,
+                        _base64Remainder,
+                        0,
+                        _base64RemainderSize
+                    );
                     count -= _base64RemainderSize;
                 }
 
@@ -453,7 +486,13 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             while (count > 0)
             {
                 int nBytes = Math.Min(count, Base64ByteBufferSize);
-                int nChars = Convert.ToBase64CharArray(buffer, offset, nBytes, _conversionBuffer, 0);
+                int nChars = Convert.ToBase64CharArray(
+                    buffer,
+                    offset,
+                    nBytes,
+                    _conversionBuffer,
+                    0
+                );
                 WriteStringCore(_conversionBuffer, 0, nChars, true, true);
                 offset += nBytes;
                 count -= nBytes;
@@ -569,16 +608,30 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             OnPossibleEndOfBase64Content();
             if (_currentAttributePrefix == "xmlns")
             {
-                _manager.AddLocalNamespaceIfNotRedundant(_currentAttributeName, _currentAttributeValue);
+                _manager.AddLocalNamespaceIfNotRedundant(
+                    _currentAttributeName,
+                    _currentAttributeValue
+                );
             }
             else
             {
-                _attributesToRender.Add(_currentAttributePrefix, _currentAttributeName,
-                    _currentAttributeNamespace, _currentAttributeValue);
+                _attributesToRender.Add(
+                    _currentAttributePrefix,
+                    _currentAttributeName,
+                    _currentAttributeNamespace,
+                    _currentAttributeValue
+                );
                 if (_currentAttributePrefix.Length > 0)
                 {
-                    _manager.AddLocalNamespaceIfNotRedundant(_currentAttributePrefix, _currentAttributeNamespace);
-                    _manager.MarkToRenderForVisiblyUsedPrefix(_currentAttributePrefix, true, _contextProvider);
+                    _manager.AddLocalNamespaceIfNotRedundant(
+                        _currentAttributePrefix,
+                        _currentAttributeNamespace
+                    );
+                    _manager.MarkToRenderForVisiblyUsedPrefix(
+                        _currentAttributePrefix,
+                        true,
+                        _contextProvider
+                    );
                 }
             }
 
@@ -592,7 +645,11 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
                 _bufferingWriter.WriteEndAttribute();
                 if (_pendingBaseDeclarationNamespace != null)
                 {
-                    _bufferingWriter.WriteStartAttribute("xmlns", _pendingBaseDeclarationPrefix, null);
+                    _bufferingWriter.WriteStartAttribute(
+                        "xmlns",
+                        _pendingBaseDeclarationPrefix,
+                        null
+                    );
                     _bufferingWriter.WriteString(_pendingBaseDeclarationNamespace);
                     _bufferingWriter.WriteEndAttribute();
                     _pendingBaseDeclarationNamespace = null;
@@ -673,12 +730,13 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
                 {
                     prefix = string.Empty;
                 }
-
                 else if (prefix.Length > 0)
                 {
                     if (_state != WriteState.Attribute || LookupNamespace(string.Empty) != null)
                     {
-                        throw new InvalidOperationException(string.Format("Prefix not defined for namespace {0}", ns));
+                        throw new InvalidOperationException(
+                            string.Format("Prefix not defined for namespace {0}", ns)
+                        );
                     }
 
                     prefix = string.Empty;
@@ -690,7 +748,9 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             {
                 if (_state != WriteState.Attribute)
                 {
-                    throw new InvalidOperationException(string.Format("Prefix not defined for namespace: {0}", ns));
+                    throw new InvalidOperationException(
+                        string.Format("Prefix not defined for namespace: {0}", ns)
+                    );
                 }
 
                 if (BufferingWriter != null)
@@ -746,9 +806,17 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             }
         }
 
-        public override void WriteStartAttribute(string prefix, XmlDictionaryString localName, XmlDictionaryString ns)
+        public override void WriteStartAttribute(
+            string prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString ns
+        )
         {
-            WriteStartAttributeCore(ref prefix, localName == null ? null : localName.Value, ns == null ? null : ns.Value);
+            WriteStartAttributeCore(
+                ref prefix,
+                localName == null ? null : localName.Value,
+                ns == null ? null : ns.Value
+            );
             if (ShouldDelegate)
             {
                 _bufferingWriter.WriteStartAttribute(prefix, localName, ns);
@@ -793,12 +861,14 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
                 _currentAttributeName = localName;
                 _currentAttributeValue = string.Empty;
             }
-
             else
             {
                 if (localName.Length == 0)
                 {
-                    throw new ArgumentOutOfRangeException("localName", "Length must be greater than zero.");
+                    throw new ArgumentOutOfRangeException(
+                        "localName",
+                        "Length must be greater than zero."
+                    );
                 }
 
                 // non-namespace declaration attribute
@@ -813,7 +883,13 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
                         ns = LookupNamespace(prefix);
                         if (ns == null)
                         {
-                            throw new InvalidOperationException(string.Format("Undefined use of prefix at attribute: {0}, {1}", prefix, localName));
+                            throw new InvalidOperationException(
+                                string.Format(
+                                    "Undefined use of prefix at attribute: {0}, {1}",
+                                    prefix,
+                                    localName
+                                )
+                            );
                         }
                     }
                 }
@@ -858,9 +934,17 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             }
         }
 
-        public override void WriteStartElement(string prefix, XmlDictionaryString localName, XmlDictionaryString ns)
+        public override void WriteStartElement(
+            string prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString ns
+        )
         {
-            WriteStartElementCore(ref prefix, localName == null ? null : localName.Value, ns == null ? null : ns.Value);
+            WriteStartElementCore(
+                ref prefix,
+                localName == null ? null : localName.Value,
+                ns == null ? null : ns.Value
+            );
             if (ShouldDelegate)
             {
                 _bufferingWriter.WriteStartElement(prefix, localName, ns);
@@ -907,7 +991,13 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
                 ns = LookupNamespace(prefix);
                 if (ns == null)
                 {
-                    throw new InvalidOperationException(string.Format("Undefined use of prefix at Element: {0}, {1}", prefix, localName));
+                    throw new InvalidOperationException(
+                        string.Format(
+                            "Undefined use of prefix at Element: {0}, {1}",
+                            prefix,
+                            localName
+                        )
+                    );
                 }
             }
             else if (prefix == null)
@@ -995,7 +1085,13 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             }
         }
 
-        private void WriteStringCore(char[] buffer, int offset, int count, bool isRaw, bool isBase64Generated)
+        private void WriteStringCore(
+            char[] buffer,
+            int offset,
+            int count,
+            bool isRaw,
+            bool isBase64Generated
+        )
         {
             if (!isBase64Generated)
             {
@@ -1031,7 +1127,12 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
                 }
                 else
                 {
-                    _encoder.EncodeWithTranslation(buffer, offset, count, CanonicalEncoder.XmlStringType.TextContent);
+                    _encoder.EncodeWithTranslation(
+                        buffer,
+                        offset,
+                        count,
+                        CanonicalEncoder.XmlStringType.TextContent
+                    );
                 }
             }
         }
@@ -1201,7 +1302,11 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
 
             public int Compare(AttributeEntry x, AttributeEntry y)
             {
-                int namespaceCompareResult = string.Compare(x.namespaceUri, y.namespaceUri, StringComparison.Ordinal);
+                int namespaceCompareResult = string.Compare(
+                    x.namespaceUri,
+                    y.namespaceUri,
+                    StringComparison.Ordinal
+                );
                 if (namespaceCompareResult != 0)
                 {
                     return namespaceCompareResult;

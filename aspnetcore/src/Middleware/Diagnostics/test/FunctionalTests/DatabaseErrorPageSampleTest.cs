@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.InternalTesting;
 
 namespace Microsoft.AspNetCore.Diagnostics.FunctionalTests;
 
-public class DatabaseErrorPageSampleTest : IClassFixture<TestFixture<DatabaseErrorPageSample.Startup>>
+public class DatabaseErrorPageSampleTest
+    : IClassFixture<TestFixture<DatabaseErrorPageSample.Startup>>
 {
     public DatabaseErrorPageSampleTest(TestFixture<DatabaseErrorPageSample.Startup> fixture)
     {
@@ -30,6 +31,9 @@ public class DatabaseErrorPageSampleTest : IClassFixture<TestFixture<DatabaseErr
         // Assert
         var body = await response.Content.ReadAsStringAsync();
         Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
-        Assert.Contains("In Visual Studio, use the Package Manager Console to scaffold a new migration and apply it to the database:", body);
+        Assert.Contains(
+            "In Visual Studio, use the Package Manager Console to scaffold a new migration and apply it to the database:",
+            body
+        );
     }
 }

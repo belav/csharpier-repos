@@ -13,7 +13,9 @@ namespace Microsoft.Extensions.Caching.Memory
     {
         private static IMemoryCache CreateCache(bool trackLinkedCacheEntries = false)
         {
-            return new MemoryCache(new MemoryCacheOptions { TrackLinkedCacheEntries = trackLinkedCacheEntries });
+            return new MemoryCache(
+                new MemoryCacheOptions { TrackLinkedCacheEntries = trackLinkedCacheEntries }
+            );
         }
 
         [Fact]
@@ -88,11 +90,14 @@ namespace Microsoft.Extensions.Caching.Memory
             string key = "myKey";
             bool invoked = false;
 
-            var result = cache.GetOrCreate(key, e =>
-            {
-                invoked = true;
-                return obj;
-            });
+            var result = cache.GetOrCreate(
+                key,
+                e =>
+                {
+                    invoked = true;
+                    return obj;
+                }
+            );
 
             Assert.Same(obj, result);
             Assert.True(invoked);
@@ -109,11 +114,14 @@ namespace Microsoft.Extensions.Caching.Memory
             string key = "myKey";
             bool invoked = false;
 
-            var result = await cache.GetOrCreateAsync(key, e =>
-            {
-                invoked = true;
-                return Task.FromResult(obj);
-            });
+            var result = await cache.GetOrCreateAsync(
+                key,
+                e =>
+                {
+                    invoked = true;
+                    return Task.FromResult(obj);
+                }
+            );
 
             Assert.Same(obj, result);
             Assert.True(invoked);
@@ -133,11 +141,14 @@ namespace Microsoft.Extensions.Caching.Memory
 
             cache.Set(key, obj);
 
-            var result = cache.GetOrCreate(key, e =>
-            {
-                invoked = true;
-                return obj1;
-            });
+            var result = cache.GetOrCreate(
+                key,
+                e =>
+                {
+                    invoked = true;
+                    return obj1;
+                }
+            );
 
             Assert.False(invoked);
             Assert.Same(obj, result);
@@ -154,11 +165,14 @@ namespace Microsoft.Extensions.Caching.Memory
 
             cache.Set(key, obj);
 
-            var result = await cache.GetOrCreateAsync(key, e =>
-            {
-                invoked = true;
-                return Task.FromResult(obj1);
-            });
+            var result = await cache.GetOrCreateAsync(
+                key,
+                e =>
+                {
+                    invoked = true;
+                    return Task.FromResult(obj1);
+                }
+            );
 
             Assert.False(invoked);
             Assert.Same(obj, result);
@@ -167,20 +181,23 @@ namespace Microsoft.Extensions.Caching.Memory
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void GetOrCreate_WillNotCreateEmptyValue_WhenFactoryThrows(bool trackLinkedCacheEntries)
+        public void GetOrCreate_WillNotCreateEmptyValue_WhenFactoryThrows(
+            bool trackLinkedCacheEntries
+        )
         {
             var cache = CreateCache(trackLinkedCacheEntries);
             string key = "myKey";
             try
             {
-                cache.GetOrCreate<int>(key, entry =>
-                {
-                    throw new Exception();
-                });
+                cache.GetOrCreate<int>(
+                    key,
+                    entry =>
+                    {
+                        throw new Exception();
+                    }
+                );
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
 
             Assert.False(cache.TryGetValue(key, out int obj));
 
@@ -191,20 +208,23 @@ namespace Microsoft.Extensions.Caching.Memory
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public async Task GetOrCreateAsync_WillNotCreateEmptyValue_WhenFactoryThrows(bool trackLinkedCacheEntries)
+        public async Task GetOrCreateAsync_WillNotCreateEmptyValue_WhenFactoryThrows(
+            bool trackLinkedCacheEntries
+        )
         {
             var cache = CreateCache(trackLinkedCacheEntries);
             string key = "myKey";
             try
             {
-                await cache.GetOrCreateAsync<int>(key, entry =>
-                {
-                    throw new Exception();
-                });
+                await cache.GetOrCreateAsync<int>(
+                    key,
+                    entry =>
+                    {
+                        throw new Exception();
+                    }
+                );
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
 
             Assert.False(cache.TryGetValue(key, out int obj));
 
@@ -220,7 +240,9 @@ namespace Microsoft.Extensions.Caching.Memory
             object GetScope(ICacheEntry entry)
             {
                 // Use Type.GetType so that trimming can know what type we operate on
-                Type cacheEntryType = Type.GetType("Microsoft.Extensions.Caching.Memory.CacheEntry, Microsoft.Extensions.Caching.Memory");
+                Type cacheEntryType = Type.GetType(
+                    "Microsoft.Extensions.Caching.Memory.CacheEntry, Microsoft.Extensions.Caching.Memory"
+                );
                 Assert.Equal(cacheEntryType, entry.GetType());
                 return cacheEntryType
                     .GetField("_previous", BindingFlags.NonPublic | BindingFlags.Instance)
@@ -262,7 +284,6 @@ namespace Microsoft.Extensions.Caching.Memory
             Assert.False(cache.TryGetValue(key, out string obj));
         }
 
-
         [Fact]
         public void TryGetValue_WillCreateDefaultValueAndSucceed_WhenValueNull()
         {
@@ -298,34 +319,38 @@ namespace Microsoft.Extensions.Caching.Memory
             var callback2Invoked = new ManualResetEvent(false);
 
             var options1 = new MemoryCacheEntryOptions();
-            options1.PostEvictionCallbacks.Add(new PostEvictionCallbackRegistration()
-            {
-                EvictionCallback = (subkey, subValue, reason, state) =>
+            options1.PostEvictionCallbacks.Add(
+                new PostEvictionCallbackRegistration()
                 {
-                    Assert.Equal(key, subkey);
-                    Assert.Same(subValue, value1);
-                    Assert.Equal(EvictionReason.Replaced, reason);
-                    var localCallbackInvoked = (ManualResetEvent)state;
-                    localCallbackInvoked.Set();
-                },
-                State = callback1Invoked
-            });
+                    EvictionCallback = (subkey, subValue, reason, state) =>
+                    {
+                        Assert.Equal(key, subkey);
+                        Assert.Same(subValue, value1);
+                        Assert.Equal(EvictionReason.Replaced, reason);
+                        var localCallbackInvoked = (ManualResetEvent)state;
+                        localCallbackInvoked.Set();
+                    },
+                    State = callback1Invoked,
+                }
+            );
 
             var result = cache.Set(key, value1, options1);
             Assert.Same(value1, result);
 
             var value2 = new object();
             var options2 = new MemoryCacheEntryOptions();
-            options2.PostEvictionCallbacks.Add(new PostEvictionCallbackRegistration()
-            {
-                EvictionCallback = (subkey, subValue, reason, state) =>
+            options2.PostEvictionCallbacks.Add(
+                new PostEvictionCallbackRegistration()
                 {
-                    // Shouldn't be invoked.
-                    var localCallbackInvoked = (ManualResetEvent)state;
-                    localCallbackInvoked.Set();
-                },
-                State = callback2Invoked
-            });
+                    EvictionCallback = (subkey, subValue, reason, state) =>
+                    {
+                        // Shouldn't be invoked.
+                        var localCallbackInvoked = (ManualResetEvent)state;
+                        localCallbackInvoked.Set();
+                    },
+                    State = callback2Invoked,
+                }
+            );
             result = cache.Set(key, value2, options2);
             Assert.Same(value2, result);
             Assert.True(callback1Invoked.WaitOne(TimeSpan.FromSeconds(30)), "Callback1");
@@ -347,16 +372,18 @@ namespace Microsoft.Extensions.Caching.Memory
             EvictionReason actualReason = EvictionReason.None;
 
             var options1 = new MemoryCacheEntryOptions();
-            options1.PostEvictionCallbacks.Add(new PostEvictionCallbackRegistration()
-            {
-                EvictionCallback = (subkey, subValue, reason, state) =>
+            options1.PostEvictionCallbacks.Add(
+                new PostEvictionCallbackRegistration()
                 {
-                    actualReason = reason;
-                    var localCallbackInvoked = (ManualResetEvent)state;
-                    localCallbackInvoked.Set();
-                },
-                State = callback1Invoked
-            });
+                    EvictionCallback = (subkey, subValue, reason, state) =>
+                    {
+                        actualReason = reason;
+                        var localCallbackInvoked = (ManualResetEvent)state;
+                        localCallbackInvoked.Set();
+                    },
+                    State = callback1Invoked,
+                }
+            );
 
             var result = cache.Set(key, value1, options1);
             Assert.Same(value1, result);
@@ -417,7 +444,7 @@ namespace Microsoft.Extensions.Caching.Memory
 
             var notNullCallback = new PostEvictionCallbackRegistration()
             {
-                EvictionCallback = (_, _, _, _) => {}
+                EvictionCallback = (_, _, _, _) => { },
             };
 
             options.PostEvictionCallbacks.Add(notNullCallback);
@@ -438,18 +465,20 @@ namespace Microsoft.Extensions.Caching.Memory
             var callbackInvoked = new ManualResetEvent(false);
 
             var options = new MemoryCacheEntryOptions();
-            options.PostEvictionCallbacks.Add(new PostEvictionCallbackRegistration()
-            {
-                EvictionCallback = (subkey, subValue, reason, state) =>
+            options.PostEvictionCallbacks.Add(
+                new PostEvictionCallbackRegistration()
                 {
-                    Assert.Equal(key, subkey);
-                    Assert.Same(value, subValue);
-                    Assert.Equal(EvictionReason.Removed, reason);
-                    var localCallbackInvoked = (ManualResetEvent)state;
-                    localCallbackInvoked.Set();
-                },
-                State = callbackInvoked
-            });
+                    EvictionCallback = (subkey, subValue, reason, state) =>
+                    {
+                        Assert.Equal(key, subkey);
+                        Assert.Same(value, subValue);
+                        Assert.Equal(EvictionReason.Removed, reason);
+                        var localCallbackInvoked = (ManualResetEvent)state;
+                        localCallbackInvoked.Set();
+                    },
+                    State = callbackInvoked,
+                }
+            );
             var result = cache.Set(key, value, options);
             Assert.Same(value, result);
 
@@ -469,18 +498,20 @@ namespace Microsoft.Extensions.Caching.Memory
             var callbackInvoked = new ManualResetEvent(false);
 
             var options = new MemoryCacheEntryOptions();
-            options.PostEvictionCallbacks.Add(new PostEvictionCallbackRegistration()
-            {
-                EvictionCallback = (subkey, subValue, reason, state) =>
+            options.PostEvictionCallbacks.Add(
+                new PostEvictionCallbackRegistration()
                 {
-                    Assert.Equal(key, subkey);
-                    Assert.Same(value, subValue);
-                    Assert.Equal(EvictionReason.Removed, reason);
-                    var localCallbackInvoked = (ManualResetEvent)state;
-                    localCallbackInvoked.Set();
-                },
-                State = callbackInvoked
-            });
+                    EvictionCallback = (subkey, subValue, reason, state) =>
+                    {
+                        Assert.Equal(key, subkey);
+                        Assert.Same(value, subValue);
+                        Assert.Equal(EvictionReason.Removed, reason);
+                        var localCallbackInvoked = (ManualResetEvent)state;
+                        localCallbackInvoked.Set();
+                    },
+                    State = callbackInvoked,
+                }
+            );
             var result = cache.Set(key, value, options);
             Assert.Same(value, result);
 
@@ -502,19 +533,21 @@ namespace Microsoft.Extensions.Caching.Memory
             var callbackInvoked = new ManualResetEvent(false);
 
             var options = new MemoryCacheEntryOptions();
-            options.PostEvictionCallbacks.Add(new PostEvictionCallbackRegistration()
-            {
-                EvictionCallback = (subkey, subValue, reason, state) =>
+            options.PostEvictionCallbacks.Add(
+                new PostEvictionCallbackRegistration()
                 {
-                    Assert.Equal(key, subkey);
-                    Assert.Same(subValue, value);
-                    Assert.Equal(EvictionReason.Removed, reason);
-                    var localCallbackInvoked = (ManualResetEvent)state;
-                    cache.Set(key, obj2);
-                    localCallbackInvoked.Set();
-                },
-                State = callbackInvoked
-            });
+                    EvictionCallback = (subkey, subValue, reason, state) =>
+                    {
+                        Assert.Equal(key, subkey);
+                        Assert.Same(subValue, value);
+                        Assert.Equal(EvictionReason.Removed, reason);
+                        var localCallbackInvoked = (ManualResetEvent)state;
+                        cache.Set(key, obj2);
+                        localCallbackInvoked.Set();
+                    },
+                    State = callbackInvoked,
+                }
+            );
 
             var result = cache.Set(key, value, options);
             Assert.Same(value, result);
@@ -627,53 +660,76 @@ namespace Microsoft.Extensions.Caching.Memory
         [ActiveIssue("https://github.com/dotnet/runtime/issues/72890")]
         public void OvercapacityPurge_AreThreadSafe()
         {
-            var cache = new MemoryCache(new MemoryCacheOptions
-            {
-                ExpirationScanFrequency = TimeSpan.Zero,
-                SizeLimit = 10,
-                CompactionPercentage = 0.5
-            });
+            var cache = new MemoryCache(
+                new MemoryCacheOptions
+                {
+                    ExpirationScanFrequency = TimeSpan.Zero,
+                    SizeLimit = 10,
+                    CompactionPercentage = 0.5,
+                }
+            );
             var cts = new CancellationTokenSource();
             var limitExceeded = false;
 
-            var task0 = Task.Run(() =>
-            {
-                while (!cts.IsCancellationRequested)
+            var task0 = Task.Run(
+                () =>
                 {
-                    if (cache.Size > 10)
+                    while (!cts.IsCancellationRequested)
                     {
-                        limitExceeded = true;
-                        break;
+                        if (cache.Size > 10)
+                        {
+                            limitExceeded = true;
+                            break;
+                        }
+                        cache.Set(
+                            Guid.NewGuid(),
+                            Guid.NewGuid(),
+                            new MemoryCacheEntryOptions { Size = 1 }
+                        );
                     }
-                    cache.Set(Guid.NewGuid(), Guid.NewGuid(), new MemoryCacheEntryOptions { Size = 1 });
-                }
-            }, cts.Token);
+                },
+                cts.Token
+            );
 
-            var task1 = Task.Run(() =>
-            {
-                while (!cts.IsCancellationRequested)
+            var task1 = Task.Run(
+                () =>
                 {
-                    if (cache.Size > 10)
+                    while (!cts.IsCancellationRequested)
                     {
-                        limitExceeded = true;
-                        break;
+                        if (cache.Size > 10)
+                        {
+                            limitExceeded = true;
+                            break;
+                        }
+                        cache.Set(
+                            Guid.NewGuid(),
+                            Guid.NewGuid(),
+                            new MemoryCacheEntryOptions { Size = 1 }
+                        );
                     }
-                    cache.Set(Guid.NewGuid(), Guid.NewGuid(), new MemoryCacheEntryOptions { Size = 1 });
-                }
-            }, cts.Token);
+                },
+                cts.Token
+            );
 
-            var task2 = Task.Run(() =>
-            {
-                while (!cts.IsCancellationRequested)
+            var task2 = Task.Run(
+                () =>
                 {
-                    if (cache.Size > 10)
+                    while (!cts.IsCancellationRequested)
                     {
-                        limitExceeded = true;
-                        break;
+                        if (cache.Size > 10)
+                        {
+                            limitExceeded = true;
+                            break;
+                        }
+                        cache.Set(
+                            Guid.NewGuid(),
+                            Guid.NewGuid(),
+                            new MemoryCacheEntryOptions { Size = 1 }
+                        );
                     }
-                    cache.Set(Guid.NewGuid(), Guid.NewGuid(), new MemoryCacheEntryOptions { Size = 1 });
-                }
-            }, cts.Token);
+                },
+                cts.Token
+            );
 
             cts.CancelAfter(TimeSpan.FromSeconds(5));
             var task3 = Task.Delay(TimeSpan.FromSeconds(7));
@@ -693,12 +749,14 @@ namespace Microsoft.Extensions.Caching.Memory
         [ActiveIssue("https://github.com/dotnet/runtime/issues/72890")]
         public void AddAndReplaceEntries_AreThreadSafe()
         {
-            var cache = new MemoryCache(new MemoryCacheOptions
-            {
-                ExpirationScanFrequency = TimeSpan.Zero,
-                SizeLimit = 20,
-                CompactionPercentage = 0.5
-            });
+            var cache = new MemoryCache(
+                new MemoryCacheOptions
+                {
+                    ExpirationScanFrequency = TimeSpan.Zero,
+                    SizeLimit = 20,
+                    CompactionPercentage = 0.5,
+                }
+            );
             var cts = new CancellationTokenSource();
 
             var random = new Random();
@@ -708,7 +766,11 @@ namespace Microsoft.Extensions.Caching.Memory
                 while (!cts.IsCancellationRequested)
                 {
                     var entrySize = random.Next(0, 5);
-                    cache.Set(random.Next(0, 10), entrySize, new MemoryCacheEntryOptions { Size = entrySize });
+                    cache.Set(
+                        random.Next(0, 10),
+                        entrySize,
+                        new MemoryCacheEntryOptions { Size = entrySize }
+                    );
                 }
             });
 
@@ -717,7 +779,11 @@ namespace Microsoft.Extensions.Caching.Memory
                 while (!cts.IsCancellationRequested)
                 {
                     var entrySize = random.Next(0, 5);
-                    cache.Set(random.Next(0, 10), entrySize, new MemoryCacheEntryOptions { Size = entrySize });
+                    cache.Set(
+                        random.Next(0, 10),
+                        entrySize,
+                        new MemoryCacheEntryOptions { Size = entrySize }
+                    );
                 }
             });
 
@@ -726,7 +792,11 @@ namespace Microsoft.Extensions.Caching.Memory
                 while (!cts.IsCancellationRequested)
                 {
                     var entrySize = random.Next(0, 5);
-                    cache.Set(random.Next(0, 10), entrySize, new MemoryCacheEntryOptions { Size = entrySize });
+                    cache.Set(
+                        random.Next(0, 10),
+                        entrySize,
+                        new MemoryCacheEntryOptions { Size = entrySize }
+                    );
                 }
             });
 
@@ -770,28 +840,32 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             var cache = CreateCache();
             var value = new object();
-            Assert.Throws<ArgumentNullException>(() => cache.Set(null, value, expirationToken: null));
+            Assert.Throws<ArgumentNullException>(
+                () => cache.Set(null, value, expirationToken: null)
+            );
         }
 
         [Fact]
         public void TryGetValueFromCacheWithNullKeyThrows()
         {
             var cache = CreateCache();
-            Assert.Throws<ArgumentNullException>(() => cache.TryGetValue(null,out long result));
+            Assert.Throws<ArgumentNullException>(() => cache.TryGetValue(null, out long result));
         }
 
         [Fact]
         public void GetOrCreateFromCacheWithNullKeyThrows()
         {
             var cache = CreateCache();
-            Assert.Throws<ArgumentNullException>(() => cache.GetOrCreate<object>(null, null))
-;       }
+            Assert.Throws<ArgumentNullException>(() => cache.GetOrCreate<object>(null, null));
+        }
 
         [Fact]
         public async Task GetOrCreateAsyncFromCacheWithNullKeyThrows()
         {
             var cache = CreateCache();
-            await Assert.ThrowsAsync<ArgumentNullException>(async () => await cache.GetOrCreateAsync<object>(null, null));
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                async () => await cache.GetOrCreateAsync<object>(null, null)
+            );
         }
 
         [Fact]
@@ -802,16 +876,18 @@ namespace Microsoft.Extensions.Caching.Memory
             ManualResetEvent mre = new ManualResetEvent(false);
 
             var options = new MemoryCacheEntryOptions();
-            options.PostEvictionCallbacks.Add(new PostEvictionCallbackRegistration()
-            {
-                EvictionCallback = (key, value, reason, state) =>
+            options.PostEvictionCallbacks.Add(
+                new PostEvictionCallbackRegistration()
                 {
-                    Assert.Equal(cacheKey, key);
-                    Assert.Equal(cacheKey, value);
-                    Assert.Equal(EvictionReason.Removed, reason);
-                    mre.Set();
+                    EvictionCallback = (key, value, reason, state) =>
+                    {
+                        Assert.Equal(cacheKey, key);
+                        Assert.Equal(cacheKey, value);
+                        Assert.Equal(EvictionReason.Removed, reason);
+                        mre.Set();
+                    },
                 }
-            });
+            );
 
             var value = cache.GetOrCreate<string>(cacheKey, _ => cacheKey, options);
             Assert.Equal(cacheKey, value);
@@ -830,18 +906,24 @@ namespace Microsoft.Extensions.Caching.Memory
             ManualResetEvent mre = new ManualResetEvent(false);
 
             var options = new MemoryCacheEntryOptions();
-            options.PostEvictionCallbacks.Add(new PostEvictionCallbackRegistration()
-            {
-                EvictionCallback = (key, value, reason, state) =>
+            options.PostEvictionCallbacks.Add(
+                new PostEvictionCallbackRegistration()
                 {
-                    Assert.Equal(cacheKey, key);
-                    Assert.Equal(cacheKey, value);
-                    Assert.Equal(EvictionReason.Removed, reason);
-                    mre.Set();
+                    EvictionCallback = (key, value, reason, state) =>
+                    {
+                        Assert.Equal(cacheKey, key);
+                        Assert.Equal(cacheKey, value);
+                        Assert.Equal(EvictionReason.Removed, reason);
+                        mre.Set();
+                    },
                 }
-            });
+            );
 
-            var value = await cache.GetOrCreateAsync<string>(cacheKey, _ => Task.FromResult(cacheKey), options);
+            var value = await cache.GetOrCreateAsync<string>(
+                cacheKey,
+                _ => Task.FromResult(cacheKey),
+                options
+            );
             Assert.Equal(cacheKey, value);
             Assert.True(cache.TryGetValue(cacheKey, out _));
 
@@ -853,6 +935,7 @@ namespace Microsoft.Extensions.Caching.Memory
         private class TestKey
         {
             public override bool Equals(object obj) => true;
+
             public override int GetHashCode() => 0;
         }
     }

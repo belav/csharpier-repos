@@ -14,12 +14,19 @@ public class ResetAuthenticator : DefaultUIPage
     public ResetAuthenticator(
         HttpClient client,
         IHtmlDocument resetAuthenticator,
-        DefaultUIContext context)
+        DefaultUIContext context
+    )
         : base(client, resetAuthenticator, context)
     {
         Assert.True(Context.UserAuthenticated);
-        _resetAuthenticatorForm = HtmlAssert.HasForm("#reset-authenticator-form", resetAuthenticator);
-        _resetAuthenticatorButton = HtmlAssert.HasElement("#reset-authenticator-button", resetAuthenticator);
+        _resetAuthenticatorForm = HtmlAssert.HasForm(
+            "#reset-authenticator-form",
+            resetAuthenticator
+        );
+        _resetAuthenticatorButton = HtmlAssert.HasElement(
+            "#reset-authenticator-button",
+            resetAuthenticator
+        );
     }
 
     internal async Task<ResetAuthenticator> ResetAuthenticatorAsync()

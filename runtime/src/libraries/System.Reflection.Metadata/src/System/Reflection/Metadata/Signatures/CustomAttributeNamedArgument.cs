@@ -10,7 +10,12 @@ namespace System.Reflection.Metadata
         public TType Type { get; }
         public object? Value { get; }
 
-        public CustomAttributeNamedArgument(string? name, CustomAttributeNamedArgumentKind kind, TType type, object? value)
+        public CustomAttributeNamedArgument(
+            string? name,
+            CustomAttributeNamedArgumentKind kind,
+            TType type,
+            object? value
+        )
         {
             Name = name;
             Kind = kind;

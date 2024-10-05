@@ -24,28 +24,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
         [Fact]
         public void TestArgumentProviderOrder()
         {
-            var exportProvider = EditorTestCompositions.EditorFeaturesWpf.ExportProviderFactory.CreateExportProvider();
-            var argumentProviderExports = exportProvider.GetExports<ArgumentProvider, CompletionProviderMetadata>();
-            var orderedCSharpArgumentProviders = ExtensionOrderer.Order(argumentProviderExports.Where(export => export.Metadata.Language == LanguageNames.CSharp));
+            var exportProvider =
+                EditorTestCompositions.EditorFeaturesWpf.ExportProviderFactory.CreateExportProvider();
+            var argumentProviderExports = exportProvider.GetExports<
+                ArgumentProvider,
+                CompletionProviderMetadata
+            >();
+            var orderedCSharpArgumentProviders = ExtensionOrderer.Order(
+                argumentProviderExports.Where(export =>
+                    export.Metadata.Language == LanguageNames.CSharp
+                )
+            );
 
-            var actualOrder = orderedCSharpArgumentProviders.Select(x => x.Value.GetType()).ToArray();
+            var actualOrder = orderedCSharpArgumentProviders
+                .Select(x => x.Value.GetType())
+                .ToArray();
             var expectedOrder = new[]
             {
                 // Marker for start of built-in argument providers
                 typeof(FirstBuiltInArgumentProvider),
-
                 // Built-in providers
                 typeof(ContextVariableArgumentProvider),
                 typeof(OutVariableArgumentProvider),
                 typeof(DefaultArgumentProvider),
-
                 // Marker for end of built-in argument providers
                 typeof(LastBuiltInArgumentProvider),
             };
 
             AssertEx.EqualOrDiff(
                 string.Join(Environment.NewLine, expectedOrder.Select(x => x.FullName)),
-                string.Join(Environment.NewLine, actualOrder.Select(x => x.FullName)));
+                string.Join(Environment.NewLine, actualOrder.Select(x => x.FullName))
+            );
         }
 
         /// <summary>
@@ -57,9 +66,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
         [Fact]
         public void TestArgumentProviderOrderMetadata()
         {
-            var exportProvider = EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
-            var argumentProviderExports = exportProvider.GetExports<ArgumentProvider, CompletionProviderMetadata>();
-            var orderedCSharpArgumentProviders = ExtensionOrderer.Order(argumentProviderExports.Where(export => export.Metadata.Language == LanguageNames.CSharp));
+            var exportProvider =
+                EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
+            var argumentProviderExports = exportProvider.GetExports<
+                ArgumentProvider,
+                CompletionProviderMetadata
+            >();
+            var orderedCSharpArgumentProviders = ExtensionOrderer.Order(
+                argumentProviderExports.Where(export =>
+                    export.Metadata.Language == LanguageNames.CSharp
+                )
+            );
 
             for (var i = 0; i < orderedCSharpArgumentProviders.Count; i++)
             {
@@ -75,20 +92,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
 
                     // The last argument marker should be last; this is ensured by either the last "real" provider saying it comes before the
                     // marker, or the last argument marker comes after the last "real" provider.
-                    if (!orderedCSharpArgumentProviders[i].Metadata.AfterTyped.Contains(orderedCSharpArgumentProviders[i - 1].Metadata.Name))
+                    if (
+                        !orderedCSharpArgumentProviders[i]
+                            .Metadata.AfterTyped.Contains(
+                                orderedCSharpArgumentProviders[i - 1].Metadata.Name
+                            )
+                    )
                     {
                         // Make sure the last built-in provider comes before the marker
-                        Assert.Contains(orderedCSharpArgumentProviders[i].Metadata.Name, orderedCSharpArgumentProviders[i - 1].Metadata.BeforeTyped);
+                        Assert.Contains(
+                            orderedCSharpArgumentProviders[i].Metadata.Name,
+                            orderedCSharpArgumentProviders[i - 1].Metadata.BeforeTyped
+                        );
                     }
                 }
                 else
                 {
                     if (orderedCSharpArgumentProviders[i].Metadata.BeforeTyped.Any())
                     {
-                        Assert.Equal(orderedCSharpArgumentProviders.Last().Metadata.Name, Assert.Single(orderedCSharpArgumentProviders[i].Metadata.BeforeTyped));
+                        Assert.Equal(
+                            orderedCSharpArgumentProviders.Last().Metadata.Name,
+                            Assert.Single(orderedCSharpArgumentProviders[i].Metadata.BeforeTyped)
+                        );
                     }
 
-                    var after = Assert.Single(orderedCSharpArgumentProviders[i].Metadata.AfterTyped);
+                    var after = Assert.Single(
+                        orderedCSharpArgumentProviders[i].Metadata.AfterTyped
+                    );
                     Assert.Equal(orderedCSharpArgumentProviders[i - 1].Metadata.Name, after);
                 }
             }
@@ -97,9 +127,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
         [Fact]
         public void TestArgumentProviderFirstNameMetadata()
         {
-            var exportProvider = EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
-            var argumentProviderExports = exportProvider.GetExports<ArgumentProvider, CompletionProviderMetadata>();
-            var orderedCSharpArgumentProviders = ExtensionOrderer.Order(argumentProviderExports.Where(export => export.Metadata.Language == LanguageNames.CSharp));
+            var exportProvider =
+                EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
+            var argumentProviderExports = exportProvider.GetExports<
+                ArgumentProvider,
+                CompletionProviderMetadata
+            >();
+            var orderedCSharpArgumentProviders = ExtensionOrderer.Order(
+                argumentProviderExports.Where(export =>
+                    export.Metadata.Language == LanguageNames.CSharp
+                )
+            );
             var firstArgumentProvider = orderedCSharpArgumentProviders.First();
 
             Assert.Equal("FirstBuiltInArgumentProvider", firstArgumentProvider.Metadata.Name);
@@ -108,9 +146,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
         [Fact]
         public void TestArgumentProviderLastNameMetadata()
         {
-            var exportProvider = EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
-            var argumentProviderExports = exportProvider.GetExports<ArgumentProvider, CompletionProviderMetadata>();
-            var orderedCSharpArgumentProviders = ExtensionOrderer.Order(argumentProviderExports.Where(export => export.Metadata.Language == LanguageNames.CSharp));
+            var exportProvider =
+                EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
+            var argumentProviderExports = exportProvider.GetExports<
+                ArgumentProvider,
+                CompletionProviderMetadata
+            >();
+            var orderedCSharpArgumentProviders = ExtensionOrderer.Order(
+                argumentProviderExports.Where(export =>
+                    export.Metadata.Language == LanguageNames.CSharp
+                )
+            );
             var lastArgumentProvider = orderedCSharpArgumentProviders.Last();
 
             Assert.Equal("LastBuiltInArgumentProvider", lastArgumentProvider.Metadata.Name);
@@ -119,9 +165,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
         [Fact]
         public void TestArgumentProviderNameMetadata()
         {
-            var exportProvider = EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
-            var argumentProviderExports = exportProvider.GetExports<ArgumentProvider, CompletionProviderMetadata>();
-            var csharpArgumentProviders = argumentProviderExports.Where(export => export.Metadata.Language == LanguageNames.CSharp);
+            var exportProvider =
+                EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
+            var argumentProviderExports = exportProvider.GetExports<
+                ArgumentProvider,
+                CompletionProviderMetadata
+            >();
+            var csharpArgumentProviders = argumentProviderExports.Where(export =>
+                export.Metadata.Language == LanguageNames.CSharp
+            );
             foreach (var export in csharpArgumentProviders)
             {
                 Assert.Equal(export.Value.GetType().Name, export.Metadata.Name);

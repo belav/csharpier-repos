@@ -26,33 +26,27 @@ public class EntityQueryProvider : IAsyncQueryProvider
         _queryCompiler = queryCompiler;
     }
 
-    private static MethodInfo GenericCreateQueryMethod
-        => _genericCreateQueryMethod ??= typeof(EntityQueryProvider)
-            .GetMethod("CreateQuery", 1, BindingFlags.Instance | BindingFlags.Public, null, new[] { typeof(Expression) }, null)!;
+    private static MethodInfo GenericCreateQueryMethod =>
+        _genericCreateQueryMethod ??= typeof(EntityQueryProvider).GetMethod(
+            "CreateQuery",
+            1,
+            BindingFlags.Instance | BindingFlags.Public,
+            null,
+            new[] { typeof(Expression) },
+            null
+        )!;
 
-    private MethodInfo GenericExecuteMethod
-        => _genericExecuteMethod ??= _queryCompiler.GetType()
-            .GetMethod("Execute", 1, BindingFlags.Instance | BindingFlags.Public, null, new[] { typeof(Expression) }, null)!;
-
-    /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
-    /// </summary>
-    public virtual IQueryable<TElement> CreateQuery<TElement>(Expression expression)
-        => new EntityQueryable<TElement>(this, expression);
-
-    /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
-    /// </summary>
-    public virtual IQueryable CreateQuery(Expression expression)
-        => (IQueryable)GenericCreateQueryMethod
-            .MakeGenericMethod(expression.Type.GetSequenceType())
-            .Invoke(this, new object[] { expression })!;
+    private MethodInfo GenericExecuteMethod =>
+        _genericExecuteMethod ??= _queryCompiler
+            .GetType()
+            .GetMethod(
+                "Execute",
+                1,
+                BindingFlags.Instance | BindingFlags.Public,
+                null,
+                new[] { typeof(Expression) },
+                null
+            )!;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -60,8 +54,8 @@ public class EntityQueryProvider : IAsyncQueryProvider
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual TResult Execute<TResult>(Expression expression)
-        => _queryCompiler.Execute<TResult>(expression);
+    public virtual IQueryable<TElement> CreateQuery<TElement>(Expression expression) =>
+        new EntityQueryable<TElement>(this, expression);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -69,8 +63,30 @@ public class EntityQueryProvider : IAsyncQueryProvider
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual object Execute(Expression expression)
-        => GenericExecuteMethod.MakeGenericMethod(expression.Type)
+    public virtual IQueryable CreateQuery(Expression expression) =>
+        (IQueryable)
+            GenericCreateQueryMethod
+                .MakeGenericMethod(expression.Type.GetSequenceType())
+                .Invoke(this, new object[] { expression })!;
+
+    /// <summary>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    /// </summary>
+    public virtual TResult Execute<TResult>(Expression expression) =>
+        _queryCompiler.Execute<TResult>(expression);
+
+    /// <summary>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    /// </summary>
+    public virtual object Execute(Expression expression) =>
+        GenericExecuteMethod
+            .MakeGenericMethod(expression.Type)
             .Invoke(_queryCompiler, new object[] { expression })!;
 
     /// <summary>
@@ -79,6 +95,8 @@ public class EntityQueryProvider : IAsyncQueryProvider
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual TResult ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken = default)
-        => _queryCompiler.ExecuteAsync<TResult>(expression, cancellationToken);
+    public virtual TResult ExecuteAsync<TResult>(
+        Expression expression,
+        CancellationToken cancellationToken = default
+    ) => _queryCompiler.ExecuteAsync<TResult>(expression, cancellationToken);
 }

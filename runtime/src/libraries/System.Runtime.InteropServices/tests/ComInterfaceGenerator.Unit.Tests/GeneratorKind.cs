@@ -8,6 +8,6 @@ namespace ComInterfaceGenerator.Unit.Tests
         ComInterfaceGenerator,
         ComInterfaceGeneratorManagedObjectWrapper,
         ComInterfaceGeneratorComObjectWrapper,
-        VTableIndexStubGenerator
+        VTableIndexStubGenerator,
     }
 }

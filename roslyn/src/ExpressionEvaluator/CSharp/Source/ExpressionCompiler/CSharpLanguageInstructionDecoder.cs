@@ -3,18 +3,27 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using Microsoft.CodeAnalysis.ExpressionEvaluator;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE;
+using Microsoft.CodeAnalysis.ExpressionEvaluator;
 
 namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 {
-    [DkmReportNonFatalWatsonException(ExcludeExceptionType = typeof(NotImplementedException)), DkmContinueCorruptingException]
-    internal sealed class CSharpLanguageInstructionDecoder : LanguageInstructionDecoder<CSharpCompilation, MethodSymbol, PEModuleSymbol, TypeSymbol, TypeParameterSymbol, ParameterSymbol>
+    [
+        DkmReportNonFatalWatsonException(ExcludeExceptionType = typeof(NotImplementedException)),
+        DkmContinueCorruptingException
+    ]
+    internal sealed class CSharpLanguageInstructionDecoder
+        : LanguageInstructionDecoder<
+            CSharpCompilation,
+            MethodSymbol,
+            PEModuleSymbol,
+            TypeSymbol,
+            TypeParameterSymbol,
+            ParameterSymbol
+        >
     {
         public CSharpLanguageInstructionDecoder()
-            : base(CSharpInstructionDecoder.Instance)
-        {
-        }
+            : base(CSharpInstructionDecoder.Instance) { }
     }
 }

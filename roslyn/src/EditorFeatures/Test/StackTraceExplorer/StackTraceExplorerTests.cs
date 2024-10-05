@@ -30,7 +30,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.StackTraceExplorer
             AssertEx.NotNull(stackFrame);
 
             // Test that ToString() and reparsing keeps the same outcome
-            var reparsedResult = await StackTraceAnalyzer.AnalyzeAsync(stackFrame.ToString(), CancellationToken.None);
+            var reparsedResult = await StackTraceAnalyzer.AnalyzeAsync(
+                stackFrame.ToString(),
+                CancellationToken.None
+            );
             Assert.Single(reparsedResult.ParsedFrames);
 
             var reparsedFrame = reparsedResult.ParsedFrames[0] as ParsedStackFrame;
@@ -39,7 +42,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.StackTraceExplorer
 
             // Get the definition for the parsed frame
             var service = workspace.Services.GetRequiredService<IStackTraceExplorerService>();
-            var definition = await service.TryFindDefinitionAsync(workspace.CurrentSolution, stackFrame, StackFrameSymbolPart.Method, CancellationToken.None);
+            var definition = await service.TryFindDefinitionAsync(
+                workspace.CurrentSolution,
+                stackFrame,
+                StackFrameSymbolPart.Method,
+                CancellationToken.None
+            );
             AssertEx.NotNull(definition);
 
             // Get the symbol that was indicated in the source code by cursor position
@@ -54,7 +62,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.StackTraceExplorer
             AssertEx.NotNull(expectedSymbol);
 
             // Compare the definition found to the definition for the test symbol
-            var expectedDefinition = expectedSymbol.ToNonClassifiedDefinitionItem(workspace.CurrentSolution, includeHiddenLocations: true);
+            var expectedDefinition = expectedSymbol.ToNonClassifiedDefinitionItem(
+                workspace.CurrentSolution,
+                includeHiddenLocations: true
+            );
 
             Assert.Equal(expectedDefinition.IsExternal, definition.IsExternal);
             AssertEx.SetEqual(expectedDefinition.NameDisplayParts, definition.NameDisplayParts);
@@ -64,7 +75,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.StackTraceExplorer
             AssertEx.SetEqual(expectedDefinition.Tags, definition.Tags);
         }
 
-        private static void AssertContents(ImmutableArray<ParsedFrame> frames, params string[] contents)
+        private static void AssertContents(
+            ImmutableArray<ParsedFrame> frames,
+            params string[] contents
+        )
         {
             Assert.Equal(contents.Length, frames.Length);
             for (var i = 0; i < contents.Length; i++)
@@ -86,7 +100,8 @@ namespace ConsoleApp4
     {
         void [|M|]() {}
     }
-}");
+}"
+            );
         }
 
         [Theory]
@@ -116,7 +131,8 @@ namespace ConsoleApp
     {{
         void [|M|]({type} value) {{}}
     }}
-}}");
+}}"
+            );
         }
 
         [Fact]
@@ -132,7 +148,8 @@ namespace ConsoleApp4
     {
         void [|M|](string s) {}
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -148,7 +165,8 @@ namespace ConsoleApp4
     {
         void [|M|]() {}
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -164,7 +182,8 @@ namespace ConsoleApp4
     {
         void [|M|](string s) {}
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -180,7 +199,8 @@ namespace ConsoleApp4
     {
         void [|M|]() {}
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -195,7 +215,8 @@ namespace ConsoleApp
     {
         void [|M|](string s) { }
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -210,7 +231,8 @@ namespace ConsoleApp
     {
         void [|M|](string s) { }
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -225,7 +247,8 @@ namespace ConsoleApp
     {
         void [|M|](T s) { }
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -241,7 +264,8 @@ namespace ConsoleApp4
     {
         void [|M|]<T>(T t) {}
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -257,7 +281,8 @@ namespace ConsoleApp4
     {
         void [|M|]<T>(T t) {}
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -273,7 +298,8 @@ namespace ConsoleApp4
     {
         void [|M|]<T>(T t) {}
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -290,7 +316,8 @@ namespace ConsoleApp
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -311,7 +338,8 @@ namespace ConsoleApp
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -328,7 +356,8 @@ namespace ConsoleApp
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -345,7 +374,8 @@ namespace ConsoleApp
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -362,7 +392,8 @@ namespace ConsoleApp
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -379,7 +410,8 @@ namespace ConsoleApp
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -396,7 +428,8 @@ namespace ConsoleApp
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact(Skip = "Symbol search for nested types does not work")]
@@ -418,7 +451,8 @@ namespace ConsoleApp4
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact(Skip = "ref params do not work yet")]
@@ -437,7 +471,8 @@ namespace ConsoleApp4
             s = string.Empty;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact(Skip = "out params do not work yet")]
@@ -456,7 +491,8 @@ namespace ConsoleApp4
             s = string.Empty;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact(Skip = "in params do not work yet")]
@@ -475,7 +511,8 @@ namespace ConsoleApp4
             throw new Exception();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact(Skip = "Generated types/methods are not supported")]
@@ -505,7 +542,8 @@ namespace ConsoleApp4
             await task;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -525,7 +563,8 @@ namespace ConsoleApp4
             [|set|] => throw new Exception();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -545,7 +584,8 @@ namespace ConsoleApp4
             set => throw new Exception();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -565,7 +605,8 @@ namespace ConsoleApp4
             [|set|] => throw new Exception();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -585,7 +626,8 @@ namespace ConsoleApp4
             set => throw new Exception();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -613,7 +655,8 @@ namespace ConsoleApp4
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -647,7 +690,8 @@ namespace ConsoleApp4
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -681,7 +725,8 @@ namespace ConsoleApp4
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -709,19 +754,20 @@ namespace ConsoleApp4
         {
         }
     }
-}");
+}"
+            );
         }
 
         /// <summary>
         /// Behavior for this test needs some explanation. Note that if there are multiple
-        /// local functions within a container, they will be uniquely identified by the 
+        /// local functions within a container, they will be uniquely identified by the
         /// suffix. In this case we have g__Local|0_0 and g__Local|0_1 as the two local functions.
         /// Resolution doesn't try to reverse engineer how these suffixes get produced, which means
         /// that the first applicable symbol with the name "Local" inside the method "M" will be found.
         /// Since local function resolution is done by searching the descendents of the method "M", the top
         /// most local function matching the name will be the first the resolver sees and considers applicable.
         /// This should get the user close to what they want, and hopefully is rare enough that it won't
-        /// be frequently encountered. 
+        /// be frequently encountered.
         /// </summary>
         [Fact]
         public Task TestSymbolFound_ExceptionLine_NestedLocalFunctions()
@@ -746,7 +792,8 @@ class C
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact(Skip = "Top level local functions are not supported")]
@@ -761,7 +808,8 @@ LocalInTopLevelStatement();
 void [|LocalInTopLevelStatement|]()
 {
     throw new Exception();
-}");
+}"
+            );
         }
 
         [Fact(Skip = "The parser doesn't correctly handle ..ctor() methods yet")]
@@ -783,7 +831,8 @@ void [|LocalInTopLevelStatement|]()
             throw new Exception();
         }
     }
-}");
+}"
+            );
         }
 
         [Theory]
@@ -807,40 +856,53 @@ void [|LocalInTopLevelStatement|]()
 
         /// <summary>
         /// Tests cases where the text will technically parse and look like a symbol, but does not point to
-        /// a symbol in the solution. 
+        /// a symbol in the solution.
         /// </summary>
         [Theory]
         [InlineData("at __.__._()")]
         [InlineData("abcd!__.__._()")]
         public async Task TestInvalidSymbol(string line)
         {
-            using var workspace = TestWorkspace.CreateCSharp(@"
+            using var workspace = TestWorkspace.CreateCSharp(
+                @"
 class C
 {
-}");
+}"
+            );
 
             var result = await StackTraceAnalyzer.AnalyzeAsync(line, CancellationToken.None);
             Assert.Equal(1, result.ParsedFrames.Length);
 
             var parsedFame = result.ParsedFrames.OfType<ParsedStackFrame>().Single();
             var service = workspace.Services.GetRequiredService<IStackTraceExplorerService>();
-            var definition = await service.TryFindDefinitionAsync(workspace.CurrentSolution, parsedFame, StackFrameSymbolPart.Method, CancellationToken.None);
+            var definition = await service.TryFindDefinitionAsync(
+                workspace.CurrentSolution,
+                parsedFame,
+                StackFrameSymbolPart.Method,
+                CancellationToken.None
+            );
             Assert.Null(definition);
         }
 
         [Fact]
         public async Task TestActivityLogParsing()
         {
-            var activityLogException = @"Exception occurred while loading solution options: System.Runtime.InteropServices.COMException (0x8000FFFF): Catastrophic failure (Exception from HRESULT: 0x8000FFFF (E_UNEXPECTED))&#x000D;&#x000A;   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)&#x000D;&#x000A;   at Microsoft.VisualStudio.Shell.Package.Initialize()&#x000D;&#x000A;--- End of stack trace from previous location where exception was thrown ---&#x000D;&#x000A;   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw&lt;string&gt;()&#x000D;&#x000A;   at Microsoft.VisualStudio.Telemetry.WindowsErrorReporting.WatsonReport.GetClrWatsonExceptionInfo(Exception exceptionObject)";
+            var activityLogException =
+                @"Exception occurred while loading solution options: System.Runtime.InteropServices.COMException (0x8000FFFF): Catastrophic failure (Exception from HRESULT: 0x8000FFFF (E_UNEXPECTED))&#x000D;&#x000A;   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)&#x000D;&#x000A;   at Microsoft.VisualStudio.Shell.Package.Initialize()&#x000D;&#x000A;--- End of stack trace from previous location where exception was thrown ---&#x000D;&#x000A;   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw&lt;string&gt;()&#x000D;&#x000A;   at Microsoft.VisualStudio.Telemetry.WindowsErrorReporting.WatsonReport.GetClrWatsonExceptionInfo(Exception exceptionObject)";
 
-            var result = await StackTraceAnalyzer.AnalyzeAsync(activityLogException, CancellationToken.None);
-            AssertContents(result.ParsedFrames,
+            var result = await StackTraceAnalyzer.AnalyzeAsync(
+                activityLogException,
+                CancellationToken.None
+            );
+            AssertContents(
+                result.ParsedFrames,
                 @"Exception occurred while loading solution options: System.Runtime.InteropServices.COMException (0x8000FFFF): Catastrophic failure (Exception from HRESULT: 0x8000FFFF (E_UNEXPECTED))",
                 @"at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)",
                 @"at Microsoft.VisualStudio.Shell.Package.Initialize()",
                 @"--- End of stack trace from previous location where exception was thrown ---",
                 @"at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw<string>()",
-                @"at Microsoft.VisualStudio.Telemetry.WindowsErrorReporting.WatsonReport.GetClrWatsonExceptionInfo(Exception exceptionObject)");
+                @"at Microsoft.VisualStudio.Telemetry.WindowsErrorReporting.WatsonReport.GetClrWatsonExceptionInfo(Exception exceptionObject)"
+            );
         }
 
         [Fact]
@@ -849,17 +911,28 @@ class C
             var code = @"class C{}";
             using var workspace = TestWorkspace.CreateCSharp(code);
 
-            var result = await StackTraceAnalyzer.AnalyzeAsync("at System.String.ToLower()", CancellationToken.None);
+            var result = await StackTraceAnalyzer.AnalyzeAsync(
+                "at System.String.ToLower()",
+                CancellationToken.None
+            );
             Assert.Single(result.ParsedFrames);
 
             var frame = result.ParsedFrames[0] as ParsedStackFrame;
             AssertEx.NotNull(frame);
 
             var service = workspace.Services.GetRequiredService<IStackTraceExplorerService>();
-            var definition = await service.TryFindDefinitionAsync(workspace.CurrentSolution, frame, StackFrameSymbolPart.Method, CancellationToken.None);
+            var definition = await service.TryFindDefinitionAsync(
+                workspace.CurrentSolution,
+                frame,
+                StackFrameSymbolPart.Method,
+                CancellationToken.None
+            );
 
             AssertEx.NotNull(definition);
-            Assert.Equal("String.ToLower", definition.NameDisplayParts.ToVisibleDisplayString(includeLeftToRightMarker: false));
+            Assert.Equal(
+                "String.ToLower",
+                definition.NameDisplayParts.ToVisibleDisplayString(includeLeftToRightMarker: false)
+            );
         }
     }
 }

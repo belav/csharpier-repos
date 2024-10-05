@@ -20,7 +20,6 @@ namespace System.Web.UI.Design.WebControls.Util
     /// </devdoc>
     internal class WizardPanelChangingEventArgs : EventArgs
     {
-
         private WizardPanel _currentPanel;
 
         /// <devdoc>
@@ -31,4 +30,3 @@ namespace System.Web.UI.Design.WebControls.Util
         }
     }
 }
-

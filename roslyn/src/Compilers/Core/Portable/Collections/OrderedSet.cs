@@ -46,18 +46,12 @@ namespace Microsoft.CodeAnalysis.Collections
 
         public int Count
         {
-            get
-            {
-                return _list.Count;
-            }
+            get { return _list.Count; }
         }
 
         public T this[int index]
         {
-            get
-            {
-                return _list[index];
-            }
+            get { return _list[index]; }
         }
 
         public bool Contains(T item)
@@ -86,22 +80,16 @@ namespace Microsoft.CodeAnalysis.Collections
             _list.Clear();
         }
 
-        public bool IsProperSubsetOf(IEnumerable<T> other)
-            => _set.IsProperSubsetOf(other);
+        public bool IsProperSubsetOf(IEnumerable<T> other) => _set.IsProperSubsetOf(other);
 
-        public bool IsProperSupersetOf(IEnumerable<T> other)
-            => _set.IsProperSupersetOf(other);
+        public bool IsProperSupersetOf(IEnumerable<T> other) => _set.IsProperSupersetOf(other);
 
-        public bool IsSubsetOf(IEnumerable<T> other)
-            => _set.IsSubsetOf(other);
+        public bool IsSubsetOf(IEnumerable<T> other) => _set.IsSubsetOf(other);
 
-        public bool IsSupersetOf(IEnumerable<T> other)
-            => _set.IsSupersetOf(other);
+        public bool IsSupersetOf(IEnumerable<T> other) => _set.IsSupersetOf(other);
 
-        public bool Overlaps(IEnumerable<T> other)
-            => _set.Overlaps(other);
+        public bool Overlaps(IEnumerable<T> other) => _set.Overlaps(other);
 
-        public bool SetEquals(IEnumerable<T> other)
-            => _set.SetEquals(other);
+        public bool SetEquals(IEnumerable<T> other) => _set.SetEquals(other);
     }
 }

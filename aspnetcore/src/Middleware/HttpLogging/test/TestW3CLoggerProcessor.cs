@@ -15,7 +15,12 @@ internal sealed class TestW3CLoggerProcessor : W3CLoggerProcessor
     private bool _hasWritten;
     private readonly object _writeCountLock = new object();
 
-    public TestW3CLoggerProcessor(IOptionsMonitor<W3CLoggerOptions> options, IHostEnvironment environment, ILoggerFactory factory) : base(options, environment, factory)
+    public TestW3CLoggerProcessor(
+        IOptionsMonitor<W3CLoggerOptions> options,
+        IHostEnvironment environment,
+        ILoggerFactory factory
+    )
+        : base(options, environment, factory)
     {
         Lines = new List<string>();
     }
@@ -54,7 +59,10 @@ internal sealed class TestW3CLoggerProcessor : W3CLoggerProcessor
         return _tcs.Task;
     }
 
-    public override async Task OnFirstWrite(StreamWriter streamWriter, CancellationToken cancellationToken)
+    public override async Task OnFirstWrite(
+        StreamWriter streamWriter,
+        CancellationToken cancellationToken
+    )
     {
         if (!_hasWritten)
         {

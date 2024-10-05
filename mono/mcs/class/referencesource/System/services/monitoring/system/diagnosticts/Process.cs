@@ -1,35 +1,36 @@
 //------------------------------------------------------------------------------
 // <copyright file="Process.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 #if MONO
 #undef FEATURE_PAL
 #endif
 
-namespace System.Diagnostics {
-    using System.Text;
-    using System.Threading;
-    using System.Runtime.InteropServices;
-    using System.ComponentModel;
-    using System.ComponentModel.Design;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.ConstrainedExecution;
-    using System.Diagnostics;
+namespace System.Diagnostics
+{
     using System;
     using System.Collections;
-    using System.IO;
-    using Microsoft.Win32;        
-    using Microsoft.Win32.SafeHandles;
-    using System.Collections.Specialized;
     using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.ComponentModel.Design;
+    using System.Diagnostics;
     using System.Globalization;
+    using System.IO;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Security.Principal;
-    using System.Runtime.Versioning;
-    
+    using System.Text;
+    using System.Threading;
+    using Microsoft.Win32;
+    using Microsoft.Win32.SafeHandles;
+
     /// <devdoc>
     ///    <para>
     ///       Provides access to local and remote
@@ -37,16 +38,22 @@ namespace System.Diagnostics {
     ///    </para>
     /// </devdoc>
     [
-    MonitoringDescription(SR.ProcessDesc),
-    DefaultEvent("Exited"), 
-    DefaultProperty("StartInfo"),
-    Designer("System.Diagnostics.Design.ProcessDesigner, " + AssemblyRef.SystemDesign),
-    // Disabling partial trust scenarios
-    PermissionSet(SecurityAction.LinkDemand, Name="FullTrust"),
-    PermissionSet(SecurityAction.InheritanceDemand, Name="FullTrust"),
-    HostProtection(SharedState=true, Synchronization=true, ExternalProcessMgmt=true, SelfAffectingProcessMgmt=true)
+        MonitoringDescription(SR.ProcessDesc),
+        DefaultEvent("Exited"),
+        DefaultProperty("StartInfo"),
+        Designer("System.Diagnostics.Design.ProcessDesigner, " + AssemblyRef.SystemDesign),
+        // Disabling partial trust scenarios
+        PermissionSet(SecurityAction.LinkDemand, Name = "FullTrust"),
+        PermissionSet(SecurityAction.InheritanceDemand, Name = "FullTrust"),
+        HostProtection(
+            SharedState = true,
+            Synchronization = true,
+            ExternalProcessMgmt = true,
+            SelfAffectingProcessMgmt = true
+        )
     ]
-    public partial class Process : Component {
+    public partial class Process : Component
+    {
         //
         // FIELDS
         //
@@ -62,17 +69,16 @@ namespace System.Diagnostics {
 #endif
         Int32 m_processAccess;
 
-#if !FEATURE_PAL        
+#if !FEATURE_PAL
         ProcessThreadCollection threads;
         ProcessModuleCollection modules;
-#endif // !FEATURE_PAL        
+#endif // !FEATURE_PAL
 
 #if !MONO
         bool haveMainWindow;
-        IntPtr mainWindowHandle;  // no need to use SafeHandle for window        
+        IntPtr mainWindowHandle; // no need to use SafeHandle for window
         string mainWindowTitle;
 #endif
-        
         bool haveWorkingSetLimits;
         IntPtr minWorkingSet;
         IntPtr maxWorkingSet;
@@ -86,25 +92,24 @@ namespace System.Diagnostics {
         ProcessPriorityClass priorityClass;
 
         ProcessStartInfo startInfo;
-        
+
         bool watchForExit;
         bool watchingForExit;
         EventHandler onExited;
         bool exited;
         int exitCode;
         bool signaled;
-		
+
         DateTime exitTime;
         bool haveExitTime;
 
 #if !MONO
         bool responding;
         bool haveResponding;
-        
+
         bool priorityBoostEnabled;
         bool havePriorityBoostEnabled;
 #endif
-        
         bool raisedOnExited;
         RegisteredWaitHandle registeredWaitHandle;
         WaitHandle waitHandle;
@@ -114,34 +119,36 @@ namespace System.Diagnostics {
         StreamReader standardError;
         OperatingSystem operatingSystem;
         bool disposed;
-        
+
 #if !MONO
         static object s_CreateProcessLock = new object();
 #endif
-        
+
         // This enum defines the operation mode for redirected process stream.
         // We don't support switching between synchronous mode and asynchronous mode.
-        private enum StreamReadMode 
+        private enum StreamReadMode
         {
-            undefined, 
-            syncMode, 
-            asyncMode
+            undefined,
+            syncMode,
+            asyncMode,
         }
-        
+
         StreamReadMode outputStreamReadMode;
         StreamReadMode errorStreamReadMode;
-        
+
 #if MONO
         StreamReadMode inputStreamReadMode;
 #endif
-       
+
         // Support for asynchrously reading streams
         [Browsable(true), MonitoringDescription(SR.ProcessAssociated)]
-        //[System.Runtime.InteropServices.ComVisible(false)]        
+        //[System.Runtime.InteropServices.ComVisible(false)]
         public event DataReceivedEventHandler OutputDataReceived;
+
         [Browsable(true), MonitoringDescription(SR.ProcessAssociated)]
-        //[System.Runtime.InteropServices.ComVisible(false)]        
+        //[System.Runtime.InteropServices.ComVisible(false)]
         public event DataReceivedEventHandler ErrorDataReceived;
+
         // Abstract the stream details
         internal AsyncStreamReader output;
         internal AsyncStreamReader error;
@@ -152,7 +159,10 @@ namespace System.Diagnostics {
         private static SafeFileHandle InvalidPipeHandle = new SafeFileHandle(IntPtr.Zero, false);
 #endif
 #if DEBUG
-        internal static TraceSwitch processTracing = new TraceSwitch("processTracing", "Controls debug output from Process component");
+        internal static TraceSwitch processTracing = new TraceSwitch(
+            "processTracing",
+            "Controls debug output from Process component"
+        );
 #else
         internal static TraceSwitch processTracing = null;
 #endif
@@ -166,16 +176,22 @@ namespace System.Diagnostics {
         ///       Initializes a new instance of the <see cref='System.Diagnostics.Process'/> class.
         ///    </para>
         /// </devdoc>
-        public Process() {
+        public Process()
+        {
             this.machineName = ".";
             this.outputStreamReadMode = StreamReadMode.undefined;
-            this.errorStreamReadMode = StreamReadMode.undefined;            
+            this.errorStreamReadMode = StreamReadMode.undefined;
             this.m_processAccess = NativeMethods.PROCESS_ALL_ACCESS;
-        }        
-        
+        }
+
         [ResourceExposure(ResourceScope.Machine)]
-        Process(string machineName, bool isRemoteMachine, int processId, ProcessInfo processInfo) : base() {
-            Debug.Assert(SyntaxCheck.CheckMachineName(machineName), "The machine name should be valid!");
+        Process(string machineName, bool isRemoteMachine, int processId, ProcessInfo processInfo)
+            : base()
+        {
+            Debug.Assert(
+                SyntaxCheck.CheckMachineName(machineName),
+                "The machine name should be valid!"
+            );
 #if !MONO
             this.processInfo = processInfo;
 #endif
@@ -196,23 +212,31 @@ namespace System.Diagnostics {
         ///     Returns whether this process component is associated with a real process.
         /// </devdoc>
         /// <internalonly/>
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessAssociated)]
-        bool Associated {
-            get {
-                return haveProcessId || haveProcessHandle;
-            }
+        [
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessAssociated)
+        ]
+        bool Associated
+        {
+            get { return haveProcessId || haveProcessHandle; }
         }
 
- #if !FEATURE_PAL && !MONO
+#if !FEATURE_PAL && !MONO
         /// <devdoc>
         ///    <para>
         ///       Gets the base priority of
         ///       the associated process.
         ///    </para>
         /// </devdoc>
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessBasePriority)]
-        public int BasePriority {
-            get {
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessBasePriority)
+        ]
+        public int BasePriority
+        {
+            get
+            {
                 EnsureState(State.HaveProcessInfo);
                 return processInfo.basePriority;
             }
@@ -226,17 +250,25 @@ namespace System.Diagnostics {
         ///       value that was specified by the associated process when it was terminated.
         ///    </para>
         /// </devdoc>
-        [Browsable(false),DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessExitCode)]
-        public int ExitCode {
-            get {
+        [
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessExitCode)
+        ]
+        public int ExitCode
+        {
+            get
+            {
                 EnsureState(State.Exited);
 #if MONO
-                if (exitCode == -1 && !RuntimeInformation.IsOSPlatform (OSPlatform.Windows))
-                    throw new InvalidOperationException ("Cannot get the exit code from a non-child process on Unix");
+                if (exitCode == -1 && !RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    throw new InvalidOperationException(
+                        "Cannot get the exit code from a non-child process on Unix"
+                    );
 #endif
                 return exitCode;
             }
-          }
+        }
 
         /// <devdoc>
         ///    <para>
@@ -244,20 +276,33 @@ namespace System.Diagnostics {
         ///       value indicating whether the associated process has been terminated.
         ///    </para>
         /// </devdoc>
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessTerminated)]
-        public bool HasExited {
-            get {
-                if (!exited) {
+        [
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessTerminated)
+        ]
+        public bool HasExited
+        {
+            get
+            {
+                if (!exited)
+                {
                     EnsureState(State.Associated);
                     SafeProcessHandle handle = null;
-                    try {
-                        handle = GetProcessHandle(NativeMethods.PROCESS_QUERY_INFORMATION | NativeMethods.SYNCHRONIZE, false);
-                        if (handle.IsInvalid) {
+                    try
+                    {
+                        handle = GetProcessHandle(
+                            NativeMethods.PROCESS_QUERY_INFORMATION | NativeMethods.SYNCHRONIZE,
+                            false
+                        );
+                        if (handle.IsInvalid)
+                        {
                             exited = true;
                         }
-                        else {
+                        else
+                        {
                             int exitCode;
-                            
+
                             // Although this is the wrong way to check whether the process has exited,
                             // it was historically the way we checked for it, and a lot of code then took a dependency on
                             // the fact that this would always be set before the pipes were closed, so they would read
@@ -265,51 +310,55 @@ namespace System.Diagnostics {
                             // to allow 259 to function as a valid exit code and to break as few people as possible that
                             // took the ReadToEnd dependency, we check for an exit code before doing the more correct
                             // check to see if we have been signalled.
-                            if (NativeMethods.GetExitCodeProcess(handle, out exitCode) && exitCode != NativeMethods.STILL_ACTIVE) {
+                            if (
+                                NativeMethods.GetExitCodeProcess(handle, out exitCode)
+                                && exitCode != NativeMethods.STILL_ACTIVE
+                            )
+                            {
                                 this.exited = true;
-                                this.exitCode = exitCode;                                
+                                this.exitCode = exitCode;
                             }
-                            else {                                                        
-
-                                // The best check for exit is that the kernel process object handle is invalid, 
-                                // or that it is valid and signaled.  Checking if the exit code != STILL_ACTIVE 
+                            else
+                            {
+                                // The best check for exit is that the kernel process object handle is invalid,
+                                // or that it is valid and signaled.  Checking if the exit code != STILL_ACTIVE
                                 // does not guarantee the process is closed,
                                 // since some process could return an actual STILL_ACTIVE exit code (259).
                                 if (!signaled) // if we just came from WaitForExit, don't repeat
                                 {
                                     ProcessWaitHandle wh = null;
-                                    try 
+                                    try
                                     {
                                         wh = new ProcessWaitHandle(handle);
-                                        this.signaled = wh.WaitOne(0, false);					
+                                        this.signaled = wh.WaitOne(0, false);
                                     }
                                     finally
                                     {
-
                                         if (wh != null)
-                                        wh.Close();
+                                            wh.Close();
                                     }
                                 }
-                                if (signaled) 
+                                if (signaled)
                                 {
                                     /* If it's a non-child process, it's impossible to get its exit code on
                                      * Unix. We don't throw here, but GetExitCodeProcess (in the io-layer)
                                      * will set exitCode to -1, and we will throw if we try to call ExitCode */
-                                    if (!NativeMethods.GetExitCodeProcess(handle, out exitCode))                               
+                                    if (!NativeMethods.GetExitCodeProcess(handle, out exitCode))
                                         throw new Win32Exception();
-                                
+
                                     this.exited = true;
                                     this.exitCode = exitCode;
                                 }
                             }
-                        }	
+                        }
                     }
-                    finally 
+                    finally
                     {
                         ReleaseProcessHandle(handle);
                     }
 
-                    if (exited) {
+                    if (exited)
+                    {
                         RaiseOnExited();
                     }
                 }
@@ -317,48 +366,68 @@ namespace System.Diagnostics {
             }
         }
 
-        private ProcessThreadTimes GetProcessTimes() {
+        private ProcessThreadTimes GetProcessTimes()
+        {
             ProcessThreadTimes processTimes = new ProcessThreadTimes();
             SafeProcessHandle handle = null;
-            try {
+            try
+            {
                 int access = NativeMethods.PROCESS_QUERY_INFORMATION;
 
-                if (EnvironmentHelpers.IsWindowsVistaOrAbove()) 
+                if (EnvironmentHelpers.IsWindowsVistaOrAbove())
                     access = NativeMethods.PROCESS_QUERY_LIMITED_INFORMATION;
 
                 handle = GetProcessHandle(access, false);
-                if( handle.IsInvalid) {
+                if (handle.IsInvalid)
+                {
                     // On OS older than XP, we will not be able to get the handle for a process
-                    // after it terminates. 
-                    // On Windows XP and newer OS, the information about a process will stay longer. 
-                    throw new InvalidOperationException(SR.GetString(SR.ProcessHasExited, processId.ToString(CultureInfo.CurrentCulture)));
+                    // after it terminates.
+                    // On Windows XP and newer OS, the information about a process will stay longer.
+                    throw new InvalidOperationException(
+                        SR.GetString(
+                            SR.ProcessHasExited,
+                            processId.ToString(CultureInfo.CurrentCulture)
+                        )
+                    );
                 }
 
-                if (!NativeMethods.GetProcessTimes(handle, 
-                                                   out processTimes.create, 
-                                                   out processTimes.exit, 
-                                                   out processTimes.kernel, 
-                                                   out processTimes.user)) {
+                if (
+                    !NativeMethods.GetProcessTimes(
+                        handle,
+                        out processTimes.create,
+                        out processTimes.exit,
+                        out processTimes.kernel,
+                        out processTimes.user
+                    )
+                )
+                {
                     throw new Win32Exception();
                 }
-
             }
-            finally {
-                ReleaseProcessHandle(handle);                
+            finally
+            {
+                ReleaseProcessHandle(handle);
             }
             return processTimes;
         }
 
- #if !FEATURE_PAL
+#if !FEATURE_PAL
         /// <devdoc>
         ///    <para>
         ///       Gets the time that the associated process exited.
         ///    </para>
         /// </devdoc>
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessExitTime)]
-        public DateTime ExitTime {
-            get {
-                if (!haveExitTime) {
+        [
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessExitTime)
+        ]
+        public DateTime ExitTime
+        {
+            get
+            {
+                if (!haveExitTime)
+                {
                     EnsureState(State.IsNt | State.Exited);
                     exitTime = GetProcessTimes().ExitTime;
                     haveExitTime = true;
@@ -374,19 +443,27 @@ namespace System.Diagnostics {
         ///       if this component started the process.
         ///    </para>
         /// </devdoc>
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessHandle)]
-        public IntPtr Handle {
+        [
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessHandle)
+        ]
+        public IntPtr Handle
+        {
             [ResourceExposure(ResourceScope.Machine)]
             [ResourceConsumption(ResourceScope.Machine)]
-            get {
+            get
+            {
                 EnsureState(State.Associated);
                 return OpenProcessHandle(this.m_processAccess).DangerousGetHandle();
             }
         }
 
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]  
-        public SafeProcessHandle SafeHandle {
-            get {
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public SafeProcessHandle SafeHandle
+        {
+            get
+            {
                 EnsureState(State.Associated);
                 return OpenProcessHandle(this.m_processAccess);
             }
@@ -399,9 +476,14 @@ namespace System.Diagnostics {
         ///       with the process.
         ///    </para>
         /// </devdoc>
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessHandleCount)]
-        public int HandleCount {
-            get {
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessHandleCount)
+        ]
+        public int HandleCount
+        {
+            get
+            {
                 EnsureState(State.HaveProcessInfo);
                 return processInfo.handleCount;
             }
@@ -414,9 +496,14 @@ namespace System.Diagnostics {
         ///       the unique identifier for the associated process.
         ///    </para>
         /// </devdoc>
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessId)]
-        public int Id {
-            get {
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessId)
+        ]
+        public int Id
+        {
+            get
+            {
                 EnsureState(State.HaveId);
                 return processId;
             }
@@ -428,15 +515,21 @@ namespace System.Diagnostics {
         ///       the name of the computer on which the associated process is running.
         ///    </para>
         /// </devdoc>
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessMachineName)]
-        public string MachineName {
-            get {
+        [
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessMachineName)
+        ]
+        public string MachineName
+        {
+            get
+            {
                 EnsureState(State.Associated);
                 return machineName;
             }
         }
 
- #if !FEATURE_PAL
+#if !FEATURE_PAL
 
 #if !MONO
         /// <devdoc>
@@ -444,20 +537,29 @@ namespace System.Diagnostics {
         ///       Returns the window handle of the main window of the associated process.
         ///    </para>
         /// </devdoc>
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessMainWindowHandle)]
-        public IntPtr MainWindowHandle {
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessMainWindowHandle)
+        ]
+        public IntPtr MainWindowHandle
+        {
             [ResourceExposure(ResourceScope.Machine)]
             [ResourceConsumption(ResourceScope.Machine)]
-            get {
-                if (!haveMainWindow) {
+            get
+            {
+                if (!haveMainWindow)
+                {
                     EnsureState(State.IsLocal | State.HaveId);
                     mainWindowHandle = ProcessManager.GetMainWindowHandle(processId);
 
-                    if (mainWindowHandle != (IntPtr)0) {
+                    if (mainWindowHandle != (IntPtr)0)
+                    {
                         haveMainWindow = true;
-                    } else {
+                    }
+                    else
+                    {
                         // We do the following only for the side-effect that it will throw when if the process no longer exists on the system.  In Whidbey
-                        // we always did this check but have now changed it to just require a ProcessId. In the case where someone has called Refresh() 
+                        // we always did this check but have now changed it to just require a ProcessId. In the case where someone has called Refresh()
                         // and the process has exited this call will throw an exception where as the above code would return 0 as the handle.
                         EnsureState(State.HaveProcessInfo);
                     }
@@ -472,20 +574,33 @@ namespace System.Diagnostics {
         ///       the process. If the handle is zero (0), then an empty string is returned.
         ///    </para>
         /// </devdoc>
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessMainWindowTitle)]
-        public string MainWindowTitle {
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessMainWindowTitle)
+        ]
+        public string MainWindowTitle
+        {
             [ResourceExposure(ResourceScope.None)]
             [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-            get {
-                if (mainWindowTitle == null) {
+            get
+            {
+                if (mainWindowTitle == null)
+                {
                     IntPtr handle = MainWindowHandle;
-                    if (handle == (IntPtr)0) {
+                    if (handle == (IntPtr)0)
+                    {
                         mainWindowTitle = String.Empty;
                     }
-                    else {
-                        int length = NativeMethods.GetWindowTextLength(new HandleRef(this, handle)) * 2;
+                    else
+                    {
+                        int length =
+                            NativeMethods.GetWindowTextLength(new HandleRef(this, handle)) * 2;
                         StringBuilder builder = new StringBuilder(length);
-                        NativeMethods.GetWindowText(new HandleRef(this, handle), builder, builder.Capacity);
+                        NativeMethods.GetWindowText(
+                            new HandleRef(this, handle),
+                            builder,
+                            builder.Capacity
+                        );
                         mainWindowTitle = builder.ToString();
                     }
                 }
@@ -493,37 +608,45 @@ namespace System.Diagnostics {
             }
         }
 
-
-
         /// <devdoc>
         ///    <para>
         ///       Gets
         ///       the main module for the associated process.
         ///    </para>
         /// </devdoc>
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessMainModule)]
-        public ProcessModule MainModule {
+        [
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessMainModule)
+        ]
+        public ProcessModule MainModule
+        {
             [ResourceExposure(ResourceScope.Process)]
             [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-            get {
+            get
+            {
                 // We only return null if we couldn't find a main module.
                 // This could be because
                 //      1. The process hasn't finished loading the main module (most likely)
                 //      2. There are no modules loaded (possible for certain OS processes)
                 //      3. Possibly other?
-                
-                if (OperatingSystem.Platform == PlatformID.Win32NT) {
+
+                if (OperatingSystem.Platform == PlatformID.Win32NT)
+                {
                     EnsureState(State.HaveId | State.IsLocal);
-                    // on NT the first module is the main module                    
+                    // on NT the first module is the main module
                     ModuleInfo module = NtProcessManager.GetFirstModuleInfo(processId);
                     return new ProcessModule(module);
                 }
-                else {
-                    ProcessModuleCollection moduleCollection = Modules;                        
+                else
+                {
+                    ProcessModuleCollection moduleCollection = Modules;
                     // on 9x we have to do a little more work
                     EnsureState(State.HaveProcessInfo);
-                    foreach (ProcessModule pm in moduleCollection) {
-                        if (pm.moduleInfo.Id == processInfo.mainModuleId) {
+                    foreach (ProcessModule pm in moduleCollection)
+                    {
+                        if (pm.moduleInfo.Id == processInfo.mainModuleId)
+                        {
                             return pm;
                         }
                     }
@@ -539,17 +662,20 @@ namespace System.Diagnostics {
         ///       process.
         ///    </para>
         /// </devdoc>
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessMaxWorkingSet)]
-        public IntPtr MaxWorkingSet {
-            get {
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessMaxWorkingSet)
+        ]
+        public IntPtr MaxWorkingSet
+        {
+            get
+            {
                 EnsureWorkingSetLimits();
                 return maxWorkingSet;
             }
             [ResourceExposure(ResourceScope.Process)]
             [ResourceConsumption(ResourceScope.Process)]
-            set {
-                SetWorkingSetLimits(null, value);
-            }
+            set { SetWorkingSetLimits(null, value); }
         }
 
         /// <devdoc>
@@ -558,17 +684,20 @@ namespace System.Diagnostics {
         ///       process.
         ///    </para>
         /// </devdoc>
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessMinWorkingSet)]
-        public IntPtr MinWorkingSet {
-            get {
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessMinWorkingSet)
+        ]
+        public IntPtr MinWorkingSet
+        {
+            get
+            {
                 EnsureWorkingSetLimits();
                 return minWorkingSet;
             }
             [ResourceExposure(ResourceScope.Process)]
             [ResourceConsumption(ResourceScope.Process)]
-            set {
-                SetWorkingSetLimits(value, null);
-            }
+            set { SetWorkingSetLimits(value, null); }
         }
 
 #if !MONO
@@ -578,19 +707,29 @@ namespace System.Diagnostics {
         ///       the modules that have been loaded by the associated process.
         ///    </para>
         /// </devdoc>
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessModules)]
-        public ProcessModuleCollection Modules {
+        [
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessModules)
+        ]
+        public ProcessModuleCollection Modules
+        {
             [ResourceExposure(ResourceScope.None)]
             [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-            get {
-                if (modules == null) {
+            get
+            {
+                if (modules == null)
+                {
                     EnsureState(State.HaveId | State.IsLocal);
                     ModuleInfo[] moduleInfos = ProcessManager.GetModuleInfos(processId);
                     ProcessModule[] newModulesArray = new ProcessModule[moduleInfos.Length];
-                    for (int i = 0; i < moduleInfos.Length; i++) {
+                    for (int i = 0; i < moduleInfos.Length; i++)
+                    {
                         newModulesArray[i] = new ProcessModule(moduleInfos[i]);
                     }
-                    ProcessModuleCollection newModules = new ProcessModuleCollection(newModulesArray);
+                    ProcessModuleCollection newModules = new ProcessModuleCollection(
+                        newModulesArray
+                    );
                     modules = newModules;
                 }
                 return modules;
@@ -601,19 +740,31 @@ namespace System.Diagnostics {
         ///     Returns the amount of memory that the system has allocated on behalf of the
         ///     associated process that can not be written to the virtual memory paging file.
         /// </devdoc>
-        [Obsolete("This property has been deprecated.  Please use System.Diagnostics.Process.NonpagedSystemMemorySize64 instead.  http://go.microsoft.com/fwlink/?linkid=14202")]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessNonpagedSystemMemorySize)]
-        public int NonpagedSystemMemorySize {
-            get {
+        [Obsolete(
+            "This property has been deprecated.  Please use System.Diagnostics.Process.NonpagedSystemMemorySize64 instead.  http://go.microsoft.com/fwlink/?linkid=14202"
+        )]
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessNonpagedSystemMemorySize)
+        ]
+        public int NonpagedSystemMemorySize
+        {
+            get
+            {
                 EnsureState(State.HaveNtProcessInfo);
                 return unchecked((int)processInfo.poolNonpagedBytes);
             }
         }
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessNonpagedSystemMemorySize)]
-        [System.Runtime.InteropServices.ComVisible(false)]            
-        public long NonpagedSystemMemorySize64 {
-            get {
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessNonpagedSystemMemorySize)
+        ]
+        [System.Runtime.InteropServices.ComVisible(false)]
+        public long NonpagedSystemMemorySize64
+        {
+            get
+            {
                 EnsureState(State.HaveNtProcessInfo);
                 return processInfo.poolNonpagedBytes;
             }
@@ -623,47 +774,69 @@ namespace System.Diagnostics {
         ///     Returns the amount of memory that the associated process has allocated
         ///     that can be written to the virtual memory paging file.
         /// </devdoc>
-        [Obsolete("This property has been deprecated.  Please use System.Diagnostics.Process.PagedMemorySize64 instead.  http://go.microsoft.com/fwlink/?linkid=14202")]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessPagedMemorySize)]
-        public int PagedMemorySize {
-            get {
+        [Obsolete(
+            "This property has been deprecated.  Please use System.Diagnostics.Process.PagedMemorySize64 instead.  http://go.microsoft.com/fwlink/?linkid=14202"
+        )]
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessPagedMemorySize)
+        ]
+        public int PagedMemorySize
+        {
+            get
+            {
                 EnsureState(State.HaveNtProcessInfo);
                 return unchecked((int)processInfo.pageFileBytes);
             }
         }
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessPagedMemorySize)]
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessPagedMemorySize)
+        ]
         [System.Runtime.InteropServices.ComVisible(false)]
-        public long PagedMemorySize64 {
-            get {
+        public long PagedMemorySize64
+        {
+            get
+            {
                 EnsureState(State.HaveNtProcessInfo);
                 return processInfo.pageFileBytes;
             }
         }
 
-
         /// <devdoc>
         ///     Returns the amount of memory that the system has allocated on behalf of the
         ///     associated process that can be written to the virtual memory paging file.
         /// </devdoc>
-        [Obsolete("This property has been deprecated.  Please use System.Diagnostics.Process.PagedSystemMemorySize64 instead.  http://go.microsoft.com/fwlink/?linkid=14202")]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessPagedSystemMemorySize)]
-        public int PagedSystemMemorySize {
-            get {
+        [Obsolete(
+            "This property has been deprecated.  Please use System.Diagnostics.Process.PagedSystemMemorySize64 instead.  http://go.microsoft.com/fwlink/?linkid=14202"
+        )]
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessPagedSystemMemorySize)
+        ]
+        public int PagedSystemMemorySize
+        {
+            get
+            {
                 EnsureState(State.HaveNtProcessInfo);
                 return unchecked((int)processInfo.poolPagedBytes);
             }
         }
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessPagedSystemMemorySize)]
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessPagedSystemMemorySize)
+        ]
         [System.Runtime.InteropServices.ComVisible(false)]
-        public long PagedSystemMemorySize64 {
-            get {
+        public long PagedSystemMemorySize64
+        {
+            get
+            {
                 EnsureState(State.HaveNtProcessInfo);
                 return processInfo.poolPagedBytes;
             }
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -671,43 +844,67 @@ namespace System.Diagnostics {
         ///       allocated that could be written to the virtual memory paging file.
         ///    </para>
         /// </devdoc>
-        [Obsolete("This property has been deprecated.  Please use System.Diagnostics.Process.PeakPagedMemorySize64 instead.  http://go.microsoft.com/fwlink/?linkid=14202")]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessPeakPagedMemorySize)]
-        public int PeakPagedMemorySize {
-            get {
+        [Obsolete(
+            "This property has been deprecated.  Please use System.Diagnostics.Process.PeakPagedMemorySize64 instead.  http://go.microsoft.com/fwlink/?linkid=14202"
+        )]
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessPeakPagedMemorySize)
+        ]
+        public int PeakPagedMemorySize
+        {
+            get
+            {
                 EnsureState(State.HaveNtProcessInfo);
                 return unchecked((int)processInfo.pageFileBytesPeak);
             }
         }
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessPeakPagedMemorySize)]
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessPeakPagedMemorySize)
+        ]
         [System.Runtime.InteropServices.ComVisible(false)]
-        public long PeakPagedMemorySize64 {
-            get {
+        public long PeakPagedMemorySize64
+        {
+            get
+            {
                 EnsureState(State.HaveNtProcessInfo);
                 return processInfo.pageFileBytesPeak;
             }
         }
-        
+
         /// <devdoc>
         ///    <para>
         ///       Returns the maximum amount of physical memory that the associated
         ///       process required at once.
         ///    </para>
         /// </devdoc>
-        [Obsolete("This property has been deprecated.  Please use System.Diagnostics.Process.PeakWorkingSet64 instead.  http://go.microsoft.com/fwlink/?linkid=14202")]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessPeakWorkingSet)]
-        public int PeakWorkingSet {
-            get {
+        [Obsolete(
+            "This property has been deprecated.  Please use System.Diagnostics.Process.PeakWorkingSet64 instead.  http://go.microsoft.com/fwlink/?linkid=14202"
+        )]
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessPeakWorkingSet)
+        ]
+        public int PeakWorkingSet
+        {
+            get
+            {
                 EnsureState(State.HaveNtProcessInfo);
                 return unchecked((int)processInfo.workingSetPeak);
             }
         }
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessPeakWorkingSet)]
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessPeakWorkingSet)
+        ]
         [System.Runtime.InteropServices.ComVisible(false)]
-        public long PeakWorkingSet64 {
-            get {
+        public long PeakWorkingSet64
+        {
+            get
+            {
                 EnsureState(State.HaveNtProcessInfo);
                 return processInfo.workingSetPeak;
             }
@@ -717,30 +914,45 @@ namespace System.Diagnostics {
         ///     Returns the maximum amount of virtual memory that the associated
         ///     process has requested.
         /// </devdoc>
-        [Obsolete("This property has been deprecated.  Please use System.Diagnostics.Process.PeakVirtualMemorySize64 instead.  http://go.microsoft.com/fwlink/?linkid=14202")]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessPeakVirtualMemorySize)]
-        public int PeakVirtualMemorySize {
-            get {
+        [Obsolete(
+            "This property has been deprecated.  Please use System.Diagnostics.Process.PeakVirtualMemorySize64 instead.  http://go.microsoft.com/fwlink/?linkid=14202"
+        )]
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessPeakVirtualMemorySize)
+        ]
+        public int PeakVirtualMemorySize
+        {
+            get
+            {
                 EnsureState(State.HaveNtProcessInfo);
                 return unchecked((int)processInfo.virtualBytesPeak);
             }
         }
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessPeakVirtualMemorySize)]
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessPeakVirtualMemorySize)
+        ]
         [System.Runtime.InteropServices.ComVisible(false)]
-        public long PeakVirtualMemorySize64 {
-            get {
+        public long PeakVirtualMemorySize64
+        {
+            get
+            {
                 EnsureState(State.HaveNtProcessInfo);
                 return processInfo.virtualBytesPeak;
             }
         }
 #endif
 
-        private OperatingSystem OperatingSystem {
-            get {
-                if (operatingSystem == null) {
+        private OperatingSystem OperatingSystem
+        {
+            get
+            {
+                if (operatingSystem == null)
+                {
                     operatingSystem = Environment.OSVersion;
-                }                
+                }
                 return operatingSystem;
             }
         }
@@ -753,38 +965,50 @@ namespace System.Diagnostics {
         ///       has focus.
         ///    </para>
         /// </devdoc>
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessPriorityBoostEnabled)]
-        public bool PriorityBoostEnabled {
-            get {
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessPriorityBoostEnabled)
+        ]
+        public bool PriorityBoostEnabled
+        {
+            get
+            {
                 EnsureState(State.IsNt);
-                if (!havePriorityBoostEnabled) {
+                if (!havePriorityBoostEnabled)
+                {
                     SafeProcessHandle handle = null;
-                    try {
+                    try
+                    {
                         handle = GetProcessHandle(NativeMethods.PROCESS_QUERY_INFORMATION);
                         bool disabled = false;
-                        if (!NativeMethods.GetProcessPriorityBoost(handle, out disabled)) {
+                        if (!NativeMethods.GetProcessPriorityBoost(handle, out disabled))
+                        {
                             throw new Win32Exception();
                         }
                         priorityBoostEnabled = !disabled;
                         havePriorityBoostEnabled = true;
                     }
-                    finally {
+                    finally
+                    {
                         ReleaseProcessHandle(handle);
                     }
                 }
                 return priorityBoostEnabled;
             }
-            set {
+            set
+            {
                 EnsureState(State.IsNt);
                 SafeProcessHandle handle = null;
-                try {
+                try
+                {
                     handle = GetProcessHandle(NativeMethods.PROCESS_SET_INFORMATION);
                     if (!NativeMethods.SetProcessPriorityBoost(handle, !value))
                         throw new Win32Exception();
                     priorityBoostEnabled = value;
                     havePriorityBoostEnabled = true;
                 }
-                finally {
+                finally
+                {
                     ReleaseProcessHandle(handle);
                 }
             }
@@ -797,21 +1021,30 @@ namespace System.Diagnostics {
         ///       associated process.
         ///    </para>
         /// </devdoc>
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessPriorityClass)]
-        public ProcessPriorityClass PriorityClass {
-            get {
-                if (!havePriorityClass) {
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessPriorityClass)
+        ]
+        public ProcessPriorityClass PriorityClass
+        {
+            get
+            {
+                if (!havePriorityClass)
+                {
                     SafeProcessHandle handle = null;
-                    try {
+                    try
+                    {
                         handle = GetProcessHandle(NativeMethods.PROCESS_QUERY_INFORMATION);
                         int value = NativeMethods.GetPriorityClass(handle);
-                        if (value == 0) {
+                        if (value == 0)
+                        {
                             throw new Win32Exception();
                         }
                         priorityClass = (ProcessPriorityClass)value;
                         havePriorityClass = true;
                     }
-                    finally {
+                    finally
+                    {
                         ReleaseProcessHandle(handle);
                     }
                 }
@@ -819,30 +1052,52 @@ namespace System.Diagnostics {
             }
             [ResourceExposure(ResourceScope.Machine)]
             [ResourceConsumption(ResourceScope.Machine)]
-            set {
-                if (!Enum.IsDefined(typeof(ProcessPriorityClass), value)) { 
-                    throw new InvalidEnumArgumentException("value", (int)value, typeof(ProcessPriorityClass));
+            set
+            {
+                if (!Enum.IsDefined(typeof(ProcessPriorityClass), value))
+                {
+                    throw new InvalidEnumArgumentException(
+                        "value",
+                        (int)value,
+                        typeof(ProcessPriorityClass)
+                    );
                 }
 
 #if !MONO
                 // BelowNormal and AboveNormal are only available on Win2k and greater.
-                if (((value & (ProcessPriorityClass.BelowNormal | ProcessPriorityClass.AboveNormal)) != 0)   && 
-                    (OperatingSystem.Platform != PlatformID.Win32NT || OperatingSystem.Version.Major < 5)) {
-                    throw new PlatformNotSupportedException(SR.GetString(SR.PriorityClassNotSupported), null);
-                }                
+                if (
+                    (
+                        (
+                            value
+                            & (ProcessPriorityClass.BelowNormal | ProcessPriorityClass.AboveNormal)
+                        ) != 0
+                    )
+                    && (
+                        OperatingSystem.Platform != PlatformID.Win32NT
+                        || OperatingSystem.Version.Major < 5
+                    )
+                )
+                {
+                    throw new PlatformNotSupportedException(
+                        SR.GetString(SR.PriorityClassNotSupported),
+                        null
+                    );
+                }
 #endif // !MONO
-                                    
                 SafeProcessHandle handle = null;
 
-                try {
+                try
+                {
                     handle = GetProcessHandle(NativeMethods.PROCESS_SET_INFORMATION);
-                    if (!NativeMethods.SetPriorityClass(handle, (int)value)) {
+                    if (!NativeMethods.SetPriorityClass(handle, (int)value))
+                    {
                         throw new Win32Exception();
                     }
                     priorityClass = value;
                     havePriorityClass = true;
                 }
-                finally {
+                finally
+                {
                     ReleaseProcessHandle(handle);
                 }
             }
@@ -853,19 +1108,31 @@ namespace System.Diagnostics {
         ///     Returns the number of bytes that the associated process has allocated that cannot
         ///     be shared with other processes.
         /// </devdoc>
-        [Obsolete("This property has been deprecated.  Please use System.Diagnostics.Process.PrivateMemorySize64 instead.  http://go.microsoft.com/fwlink/?linkid=14202")]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessPrivateMemorySize)]
-        public int PrivateMemorySize {
-            get {
+        [Obsolete(
+            "This property has been deprecated.  Please use System.Diagnostics.Process.PrivateMemorySize64 instead.  http://go.microsoft.com/fwlink/?linkid=14202"
+        )]
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessPrivateMemorySize)
+        ]
+        public int PrivateMemorySize
+        {
+            get
+            {
                 EnsureState(State.HaveNtProcessInfo);
                 return unchecked((int)processInfo.privateBytes);
             }
         }
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessPrivateMemorySize)]
-        [System.Runtime.InteropServices.ComVisible(false)]            
-        public long PrivateMemorySize64 {
-            get {
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessPrivateMemorySize)
+        ]
+        [System.Runtime.InteropServices.ComVisible(false)]
+        public long PrivateMemorySize64
+        {
+            get
+            {
                 EnsureState(State.HaveNtProcessInfo);
                 return processInfo.privateBytes;
             }
@@ -876,9 +1143,14 @@ namespace System.Diagnostics {
         ///     Returns the amount of time the process has spent running code inside the operating
         ///     system core.
         /// </devdoc>
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessPrivilegedProcessorTime)]
-        public TimeSpan PrivilegedProcessorTime {
-            get {
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessPrivilegedProcessorTime)
+        ]
+        public TimeSpan PrivilegedProcessorTime
+        {
+            get
+            {
                 EnsureState(State.IsNt);
                 return GetProcessTimes().PrivilegedProcessorTime;
             }
@@ -891,38 +1163,55 @@ namespace System.Diagnostics {
         ///       the friendly name of the process.
         ///    </para>
         /// </devdoc>
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessProcessName)]
-        public string ProcessName {
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessProcessName)
+        ]
+        public string ProcessName
+        {
             [ResourceExposure(ResourceScope.None)]
             [ResourceConsumption(ResourceScope.Process, ResourceScope.Process)]
-            get {
+            get
+            {
                 EnsureState(State.HaveProcessInfo);
-                String processName =  processInfo.processName;
+                String processName = processInfo.processName;
                 //
                 // On some old NT-based OS like win2000, the process name from NTQuerySystemInformation is up to 15 characters.
                 // Processes executing notepad_1234567.exe and notepad_12345678.exe will have the same process name.
                 // GetProcessByNames will not be able find the process for notepad_12345678.exe.
                 // So we will try to replace the name of the process by its main module name if the name is 15 characters.
                 // However we can't always get the module name:
-                //     (1) Normal user will not be able to get module information about processes. 
+                //     (1) Normal user will not be able to get module information about processes.
                 //     (2) We can't get module information about remoting process.
                 // We can't get module name for a remote process
-                // 
-                if (processName.Length == 15 && ProcessManager.IsNt && ProcessManager.IsOSOlderThanXP && !isRemoteMachine) { 
-                    try {
+                //
+                if (
+                    processName.Length == 15
+                    && ProcessManager.IsNt
+                    && ProcessManager.IsOSOlderThanXP
+                    && !isRemoteMachine
+                )
+                {
+                    try
+                    {
                         String mainModuleName = MainModule.ModuleName;
-                        if (mainModuleName != null) {
-                            processInfo.processName = Path.ChangeExtension(Path.GetFileName(mainModuleName), null);
+                        if (mainModuleName != null)
+                        {
+                            processInfo.processName = Path.ChangeExtension(
+                                Path.GetFileName(mainModuleName),
+                                null
+                            );
                         }
                     }
-                    catch(Exception) {
-                        // If we can't access the module information, we can still use the might-be-truncated name. 
+                    catch (Exception)
+                    {
+                        // If we can't access the module information, we can still use the might-be-truncated name.
                         // We could fail for a few reasons:
                         // (1) We don't enough privilege to get module information.
                         // (2) The process could have terminated.
                     }
                 }
-                
+
                 return processInfo.processName;
             }
         }
@@ -933,20 +1222,34 @@ namespace System.Diagnostics {
         ///       or sets which processors the threads in this process can be scheduled to run on.
         ///    </para>
         /// </devdoc>
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessProcessorAffinity)]
-        public IntPtr ProcessorAffinity {
-            get {
-                if (!haveProcessorAffinity) {
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessProcessorAffinity)
+        ]
+        public IntPtr ProcessorAffinity
+        {
+            get
+            {
+                if (!haveProcessorAffinity)
+                {
                     SafeProcessHandle handle = null;
-                    try {
+                    try
+                    {
                         handle = GetProcessHandle(NativeMethods.PROCESS_QUERY_INFORMATION);
                         IntPtr processAffinity;
                         IntPtr systemAffinity;
-                        if (!NativeMethods.GetProcessAffinityMask(handle, out processAffinity, out systemAffinity))
+                        if (
+                            !NativeMethods.GetProcessAffinityMask(
+                                handle,
+                                out processAffinity,
+                                out systemAffinity
+                            )
+                        )
                             throw new Win32Exception();
                         processorAffinity = processAffinity;
                     }
-                    finally {
+                    finally
+                    {
                         ReleaseProcessHandle(handle);
                     }
                     haveProcessorAffinity = true;
@@ -955,17 +1258,20 @@ namespace System.Diagnostics {
             }
             [ResourceExposure(ResourceScope.Machine)]
             [ResourceConsumption(ResourceScope.Machine)]
-            set {
+            set
+            {
                 SafeProcessHandle handle = null;
-                try {
+                try
+                {
                     handle = GetProcessHandle(NativeMethods.PROCESS_SET_INFORMATION);
-                    if (!NativeMethods.SetProcessAffinityMask(handle, value)) 
+                    if (!NativeMethods.SetProcessAffinityMask(handle, value))
                         throw new Win32Exception();
-                        
+
                     processorAffinity = value;
                     haveProcessorAffinity = true;
                 }
-                finally {
+                finally
+                {
                     ReleaseProcessHandle(handle);
                 }
             }
@@ -977,30 +1283,52 @@ namespace System.Diagnostics {
         ///       interface of the process is responding.
         ///    </para>
         /// </devdoc>
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessResponding)]
-        public bool Responding {
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessResponding)
+        ]
+        public bool Responding
+        {
             [ResourceExposure(ResourceScope.None)]
             [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-            get {
-                if (!haveResponding) {
+            get
+            {
+                if (!haveResponding)
+                {
                     IntPtr mainWindow = MainWindowHandle;
-                    if (mainWindow == (IntPtr)0) {
+                    if (mainWindow == (IntPtr)0)
+                    {
                         responding = true;
                     }
-                    else {
+                    else
+                    {
                         IntPtr result;
-                        responding = NativeMethods.SendMessageTimeout(new HandleRef(this, mainWindow), NativeMethods.WM_NULL, IntPtr.Zero, IntPtr.Zero, NativeMethods.SMTO_ABORTIFHUNG, 5000, out result) != (IntPtr)0;
+                        responding =
+                            NativeMethods.SendMessageTimeout(
+                                new HandleRef(this, mainWindow),
+                                NativeMethods.WM_NULL,
+                                IntPtr.Zero,
+                                IntPtr.Zero,
+                                NativeMethods.SMTO_ABORTIFHUNG,
+                                5000,
+                                out result
+                            ) != (IntPtr)0;
                     }
                 }
                 return responding;
             }
         }
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessSessionId)]
-        public int SessionId {
-            get {
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessSessionId)
+        ]
+        public int SessionId
+        {
+            get
+            {
                 EnsureState(State.HaveNtProcessInfo);
-                return processInfo.sessionId;                
+                return processInfo.sessionId;
             }
         }
 #endif // !MONO
@@ -1014,17 +1342,26 @@ namespace System.Diagnostics {
         ///       .
         ///    </para>
         /// </devdoc>
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Content), MonitoringDescription(SR.ProcessStartInfo)]
-        public ProcessStartInfo StartInfo {
-            get {
-                if (startInfo == null) {
+        [
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
+            MonitoringDescription(SR.ProcessStartInfo)
+        ]
+        public ProcessStartInfo StartInfo
+        {
+            get
+            {
+                if (startInfo == null)
+                {
                     startInfo = new ProcessStartInfo(this);
-                }                
+                }
                 return startInfo;
             }
             [ResourceExposure(ResourceScope.Machine)]
-            set {
-                if (value == null) { 
+            set
+            {
+                if (value == null)
+                {
                     throw new ArgumentNullException("value");
                 }
                 startInfo = value;
@@ -1032,13 +1369,18 @@ namespace System.Diagnostics {
         }
 #endif
 
-#if !FEATURE_PAL        
+#if !FEATURE_PAL
         /// <devdoc>
         ///     Returns the time the associated process was started.
         /// </devdoc>
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessStartTime)]
-        public DateTime StartTime {
-            get {
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessStartTime)
+        ]
+        public DateTime StartTime
+        {
+            get
+            {
                 EnsureState(State.IsNt);
                 return GetProcessTimes().StartTime;
             }
@@ -1047,37 +1389,34 @@ namespace System.Diagnostics {
 
         /// <devdoc>
         ///   Represents the object used to marshal the event handler
-        ///   calls issued as a result of a Process exit. Normally 
-        ///   this property will  be set when the component is placed 
-        ///   inside a control or  a from, since those components are 
+        ///   calls issued as a result of a Process exit. Normally
+        ///   this property will  be set when the component is placed
+        ///   inside a control or  a from, since those components are
         ///   bound to a specific thread.
         /// </devdoc>
-        [
-        Browsable(false),
-        DefaultValue(null),         
-        MonitoringDescription(SR.ProcessSynchronizingObject)
-        ]
-        public ISynchronizeInvoke SynchronizingObject {
-            get {
-               if (this.synchronizingObject == null && DesignMode) {
+        [Browsable(false), DefaultValue(null), MonitoringDescription(SR.ProcessSynchronizingObject)]
+        public ISynchronizeInvoke SynchronizingObject
+        {
+            get
+            {
+                if (this.synchronizingObject == null && DesignMode)
+                {
                     IDesignerHost host = (IDesignerHost)GetService(typeof(IDesignerHost));
-                    if (host != null) {
+                    if (host != null)
+                    {
                         object baseComponent = host.RootComponent;
                         if (baseComponent != null && baseComponent is ISynchronizeInvoke)
                             this.synchronizingObject = (ISynchronizeInvoke)baseComponent;
-                    }                        
+                    }
                 }
 
                 return this.synchronizingObject;
             }
-            
-            set {
-                this.synchronizingObject = value;
-            }
+            set { this.synchronizingObject = value; }
         }
 
-#if !FEATURE_PAL        
-        
+#if !FEATURE_PAL
+
 #if !MONO
         /// <devdoc>
         ///    <para>
@@ -1085,19 +1424,32 @@ namespace System.Diagnostics {
         ///       process.
         ///    </para>
         /// </devdoc>
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessThreads)]
-        public ProcessThreadCollection Threads {
+        [
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessThreads)
+        ]
+        public ProcessThreadCollection Threads
+        {
             [ResourceExposure(ResourceScope.Process)]
             [ResourceConsumption(ResourceScope.Process)]
-            get {
-                if (threads == null) {
+            get
+            {
+                if (threads == null)
+                {
                     EnsureState(State.HaveProcessInfo);
                     int count = processInfo.threadInfoList.Count;
                     ProcessThread[] newThreadsArray = new ProcessThread[count];
-                    for (int i = 0; i < count; i++) {
-                        newThreadsArray[i] = new ProcessThread(isRemoteMachine, (ThreadInfo)processInfo.threadInfoList[i]);
+                    for (int i = 0; i < count; i++)
+                    {
+                        newThreadsArray[i] = new ProcessThread(
+                            isRemoteMachine,
+                            (ThreadInfo)processInfo.threadInfoList[i]
+                        );
                     }
-                    ProcessThreadCollection newThreads = new ProcessThreadCollection(newThreadsArray);
+                    ProcessThreadCollection newThreads = new ProcessThreadCollection(
+                        newThreadsArray
+                    );
                     threads = newThreads;
                 }
                 return threads;
@@ -1110,9 +1462,14 @@ namespace System.Diagnostics {
         ///     It is the sum of the <see cref='System.Diagnostics.Process.UserProcessorTime'/> and
         ///     <see cref='System.Diagnostics.Process.PrivilegedProcessorTime'/>.
         /// </devdoc>
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessTotalProcessorTime)]
-        public TimeSpan TotalProcessorTime {
-            get {
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessTotalProcessorTime)
+        ]
+        public TimeSpan TotalProcessorTime
+        {
+            get
+            {
                 EnsureState(State.IsNt);
                 return GetProcessTimes().TotalProcessorTime;
             }
@@ -1122,9 +1479,14 @@ namespace System.Diagnostics {
         ///     Returns the amount of time the associated process has spent running code
         ///     inside the application portion of the process (not the operating system core).
         /// </devdoc>
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessUserProcessorTime)]
-        public TimeSpan UserProcessorTime {
-            get {
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessUserProcessorTime)
+        ]
+        public TimeSpan UserProcessorTime
+        {
+            get
+            {
                 EnsureState(State.IsNt);
                 return GetProcessTimes().UserProcessorTime;
             }
@@ -1134,10 +1496,17 @@ namespace System.Diagnostics {
         /// <devdoc>
         ///     Returns the amount of virtual memory that the associated process has requested.
         /// </devdoc>
-        [Obsolete("This property has been deprecated.  Please use System.Diagnostics.Process.VirtualMemorySize64 instead.  http://go.microsoft.com/fwlink/?linkid=14202")]        
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessVirtualMemorySize)]
-        public int VirtualMemorySize {
-            get {
+        [Obsolete(
+            "This property has been deprecated.  Please use System.Diagnostics.Process.VirtualMemorySize64 instead.  http://go.microsoft.com/fwlink/?linkid=14202"
+        )]
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessVirtualMemorySize)
+        ]
+        public int VirtualMemorySize
+        {
+            get
+            {
                 EnsureState(State.HaveNtProcessInfo);
                 return unchecked((int)processInfo.virtualBytes);
             }
@@ -1147,10 +1516,15 @@ namespace System.Diagnostics {
 #endif // !FEATURE_PAL
 
 #if !MONO
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessVirtualMemorySize)]
-        [System.Runtime.InteropServices.ComVisible(false)]        
-        public long VirtualMemorySize64 {
-            get {
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessVirtualMemorySize)
+        ]
+        [System.Runtime.InteropServices.ComVisible(false)]
+        public long VirtualMemorySize64
+        {
+            get
+            {
                 EnsureState(State.HaveNtProcessInfo);
                 return processInfo.virtualBytes;
             }
@@ -1164,19 +1538,27 @@ namespace System.Diagnostics {
         ///       when the process terminates.
         ///    </para>
         /// </devdoc>
-        [Browsable(false), DefaultValue(false), MonitoringDescription(SR.ProcessEnableRaisingEvents)]
-        public bool EnableRaisingEvents {
-            get {
-                return watchForExit;
-            }
-            set {
-                if (value != watchForExit) {
-                    if (Associated) {
-                        if (value) {
+        [
+            Browsable(false),
+            DefaultValue(false),
+            MonitoringDescription(SR.ProcessEnableRaisingEvents)
+        ]
+        public bool EnableRaisingEvents
+        {
+            get { return watchForExit; }
+            set
+            {
+                if (value != watchForExit)
+                {
+                    if (Associated)
+                    {
+                        if (value)
+                        {
                             OpenProcessHandle();
                             EnsureWatchingForExit();
                         }
-                        else {
+                        else
+                        {
                             StopWatchingForExit();
                         }
                     }
@@ -1189,10 +1571,17 @@ namespace System.Diagnostics {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessStandardInput)]
-        public StreamWriter StandardInput {
-            get { 
-                if (standardInput == null) {
+        [
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessStandardInput)
+        ]
+        public StreamWriter StandardInput
+        {
+            get
+            {
+                if (standardInput == null)
+                {
                     throw new InvalidOperationException(SR.GetString(SR.CantGetStandardIn));
                 }
 
@@ -1206,20 +1595,29 @@ namespace System.Diagnostics {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessStandardOutput)]
-        public StreamReader StandardOutput {
-            get {
-                if (standardOutput == null) {
+        [
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessStandardOutput)
+        ]
+        public StreamReader StandardOutput
+        {
+            get
+            {
+                if (standardOutput == null)
+                {
                     throw new InvalidOperationException(SR.GetString(SR.CantGetStandardOut));
                 }
 
-                if(outputStreamReadMode == StreamReadMode.undefined) {
+                if (outputStreamReadMode == StreamReadMode.undefined)
+                {
                     outputStreamReadMode = StreamReadMode.syncMode;
                 }
-                else if (outputStreamReadMode != StreamReadMode.syncMode) {
-                    throw new InvalidOperationException(SR.GetString(SR.CantMixSyncAsyncOperation));                    
+                else if (outputStreamReadMode != StreamReadMode.syncMode)
+                {
+                    throw new InvalidOperationException(SR.GetString(SR.CantMixSyncAsyncOperation));
                 }
-                    
+
                 return standardOutput;
             }
         }
@@ -1227,18 +1625,27 @@ namespace System.Diagnostics {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessStandardError)]
-        public StreamReader StandardError {
-            get { 
-                if (standardError == null) {
+        [
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessStandardError)
+        ]
+        public StreamReader StandardError
+        {
+            get
+            {
+                if (standardError == null)
+                {
                     throw new InvalidOperationException(SR.GetString(SR.CantGetStandardError));
                 }
 
-                if(errorStreamReadMode == StreamReadMode.undefined) {
+                if (errorStreamReadMode == StreamReadMode.undefined)
+                {
                     errorStreamReadMode = StreamReadMode.syncMode;
                 }
-                else if (errorStreamReadMode != StreamReadMode.syncMode) {
-                    throw new InvalidOperationException(SR.GetString(SR.CantMixSyncAsyncOperation));                    
+                else if (errorStreamReadMode != StreamReadMode.syncMode)
+                {
+                    throw new InvalidOperationException(SR.GetString(SR.CantMixSyncAsyncOperation));
                 }
 
                 return standardError;
@@ -1250,10 +1657,17 @@ namespace System.Diagnostics {
         /// <devdoc>
         ///     Returns the total amount of physical memory the associated process.
         /// </devdoc>
-        [Obsolete("This property has been deprecated.  Please use System.Diagnostics.Process.WorkingSet64 instead.  http://go.microsoft.com/fwlink/?linkid=14202")]        
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessWorkingSet)]
-        public int WorkingSet {
-            get {
+        [Obsolete(
+            "This property has been deprecated.  Please use System.Diagnostics.Process.WorkingSet64 instead.  http://go.microsoft.com/fwlink/?linkid=14202"
+        )]
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessWorkingSet)
+        ]
+        public int WorkingSet
+        {
+            get
+            {
                 EnsureState(State.HaveNtProcessInfo);
                 return unchecked((int)processInfo.workingSet);
             }
@@ -1261,10 +1675,15 @@ namespace System.Diagnostics {
 #endif // !FEATURE_PAL && !MONO
 
 #if !MONO
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), MonitoringDescription(SR.ProcessWorkingSet)]
-        [System.Runtime.InteropServices.ComVisible(false)]        
-        public long WorkingSet64 {
-            get {
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.ProcessWorkingSet)
+        ]
+        [System.Runtime.InteropServices.ComVisible(false)]
+        public long WorkingSet64
+        {
+            get
+            {
                 EnsureState(State.HaveNtProcessInfo);
                 return processInfo.workingSet;
             }
@@ -1272,13 +1691,10 @@ namespace System.Diagnostics {
 #endif
 
         [Category("Behavior"), MonitoringDescription(SR.ProcessExited)]
-        public event EventHandler Exited {
-            add {
-                onExited += value;
-            }
-            remove {
-                onExited -= value;
-            }
+        public event EventHandler Exited
+        {
+            add { onExited += value; }
+            remove { onExited -= value; }
         }
 
 #if !FEATURE_PAL && !MONO
@@ -1288,14 +1704,25 @@ namespace System.Diagnostics {
         ///       to its main window.
         ///    </para>
         /// </devdoc>
-        [ResourceExposure(ResourceScope.Machine)]  // Review usages of this.
+        [ResourceExposure(ResourceScope.Machine)] // Review usages of this.
         [ResourceConsumption(ResourceScope.Machine)]
-        public bool CloseMainWindow() {
+        public bool CloseMainWindow()
+        {
             IntPtr mainWindowHandle = MainWindowHandle;
-            if (mainWindowHandle == (IntPtr)0) return false;
-            int style = NativeMethods.GetWindowLong(new HandleRef(this, mainWindowHandle), NativeMethods.GWL_STYLE);
-            if ((style & NativeMethods.WS_DISABLED) != 0) return false;
-            NativeMethods.PostMessage(new HandleRef(this, mainWindowHandle), NativeMethods.WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
+            if (mainWindowHandle == (IntPtr)0)
+                return false;
+            int style = NativeMethods.GetWindowLong(
+                new HandleRef(this, mainWindowHandle),
+                NativeMethods.GWL_STYLE
+            );
+            if ((style & NativeMethods.WS_DISABLED) != 0)
+                return false;
+            NativeMethods.PostMessage(
+                new HandleRef(this, mainWindowHandle),
+                NativeMethods.WM_CLOSE,
+                IntPtr.Zero,
+                IntPtr.Zero
+            );
             return true;
         }
 #endif // !FEATURE_PAL && !MONO
@@ -1305,12 +1732,15 @@ namespace System.Diagnostics {
         ///     If we used the process handle stored in the process object (we have all access to the handle,) don't release it.
         /// </devdoc>
         /// <internalonly/>
-        void ReleaseProcessHandle(SafeProcessHandle handle) {
-            if (handle == null) { 
-                return; 
+        void ReleaseProcessHandle(SafeProcessHandle handle)
+        {
+            if (handle == null)
+            {
+                return;
             }
 
-            if (haveProcessHandle && handle == m_processHandle) {
+            if (haveProcessHandle && handle == m_processHandle)
+            {
                 return;
             }
             Debug.WriteLineIf(processTracing.TraceVerbose, "Process - CloseHandle(process)");
@@ -1321,9 +1751,10 @@ namespace System.Diagnostics {
         ///     This is called from the threadpool when a proces exits.
         /// </devdoc>
         /// <internalonly/>
-        private void CompletionCallback(object context, bool wasSignaled) {
+        private void CompletionCallback(object context, bool wasSignaled)
+        {
             StopWatchingForExit();
-            RaiseOnExited();      
+            RaiseOnExited();
         }
 
         /// <internalonly/>
@@ -1332,15 +1763,18 @@ namespace System.Diagnostics {
         ///       Free any resources associated with this component.
         ///    </para>
         /// </devdoc>
-        protected override void Dispose(bool disposing) {
-            if( !disposed) {
-                if (disposing) {
+        protected override void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
                     //Dispose managed and unmanaged resources
                     Close();
                 }
                 this.disposed = true;
-                base.Dispose(disposing);                
-            }            
+                base.Dispose(disposing);
+            }
         }
 
         /// <devdoc>
@@ -1348,11 +1782,17 @@ namespace System.Diagnostics {
         ///       Frees any resources associated with this component.
         ///    </para>
         /// </devdoc>
-        public void Close() {
-            if (Associated) {
-                if (haveProcessHandle) {
+        public void Close()
+        {
+            if (Associated)
+            {
+                if (haveProcessHandle)
+                {
                     StopWatchingForExit();
-                    Debug.WriteLineIf(processTracing.TraceVerbose, "Process - CloseHandle(process) in Close()");
+                    Debug.WriteLineIf(
+                        processTracing.TraceVerbose,
+                        "Process - CloseHandle(process) in Close()"
+                    );
                     m_processHandle.Close();
                     m_processHandle = null;
                     haveProcessHandle = false;
@@ -1370,34 +1810,36 @@ namespace System.Diagnostics {
                 var tmpIn = standardInput;
                 standardInput = null;
                 if (inputStreamReadMode == StreamReadMode.undefined && tmpIn != null)
-                    tmpIn.Close ();
+                    tmpIn.Close();
 
                 var tmpOut = standardOutput;
                 standardOutput = null;
                 if (outputStreamReadMode == StreamReadMode.undefined && tmpOut != null)
-                    tmpOut.Close ();
+                    tmpOut.Close();
 
                 tmpOut = standardError;
                 standardError = null;
                 if (errorStreamReadMode == StreamReadMode.undefined && tmpOut != null)
-                    tmpOut.Close ();
+                    tmpOut.Close();
 
                 var tmpAsync = output;
                 output = null;
-                if (outputStreamReadMode == StreamReadMode.asyncMode && tmpAsync != null) {
-                    tmpAsync.CancelOperation ();
-                    tmpAsync.Close ();
+                if (outputStreamReadMode == StreamReadMode.asyncMode && tmpAsync != null)
+                {
+                    tmpAsync.CancelOperation();
+                    tmpAsync.Close();
                 }
 
                 tmpAsync = error;
                 error = null;
-                if (errorStreamReadMode == StreamReadMode.asyncMode && tmpAsync != null) {
-                    tmpAsync.CancelOperation ();
-                    tmpAsync.Close ();
+                if (errorStreamReadMode == StreamReadMode.asyncMode && tmpAsync != null)
+                {
+                    tmpAsync.CancelOperation();
+                    tmpAsync.Close();
                 }
 #else
                 //Don't call close on the Readers and writers
-                //since they might be referenced by somebody else while the 
+                //since they might be referenced by somebody else while the
                 //process is still alive but this method called.
                 standardOutput = null;
                 standardInput = null;
@@ -1405,7 +1847,7 @@ namespace System.Diagnostics {
 
                 output = null;
                 error = null;
-	
+
 #endif
 
                 Refresh();
@@ -1418,21 +1860,26 @@ namespace System.Diagnostics {
         /// <internalonly/>
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        void EnsureState(State state) {
-
+        void EnsureState(State state)
+        {
 #if !MONO
-            if ((state & State.IsWin2k) != (State)0) {
+            if ((state & State.IsWin2k) != (State)0)
+            {
 #if !FEATURE_PAL
-                if (OperatingSystem.Platform != PlatformID.Win32NT || OperatingSystem.Version.Major < 5)
+                if (
+                    OperatingSystem.Platform != PlatformID.Win32NT
+                    || OperatingSystem.Version.Major < 5
+                )
 #endif // !FEATURE_PAL
-                    throw new PlatformNotSupportedException(SR.GetString(SR.Win2kRequired));
+                throw new PlatformNotSupportedException(SR.GetString(SR.Win2kRequired));
             }
 
-            if ((state & State.IsNt) != (State)0) {
+            if ((state & State.IsNt) != (State)0)
+            {
 #if !FEATURE_PAL
                 if (OperatingSystem.Platform != PlatformID.Win32NT)
-#endif // !FEATURE_PAL                    
-                    throw new PlatformNotSupportedException(SR.GetString(SR.WinNTRequired));
+#endif // !FEATURE_PAL
+                throw new PlatformNotSupportedException(SR.GetString(SR.WinNTRequired));
             }
 #endif // !MONO
 
@@ -1440,13 +1887,17 @@ namespace System.Diagnostics {
                 if (!Associated)
                     throw new InvalidOperationException(SR.GetString(SR.NoAssociatedProcess));
 
-            if ((state & State.HaveId) != (State)0) {
-                if (!haveProcessId) {
+            if ((state & State.HaveId) != (State)0)
+            {
+                if (!haveProcessId)
+                {
 #if !FEATURE_PAL && !MONO
-                    if (haveProcessHandle) {
+                    if (haveProcessHandle)
+                    {
                         SetProcessId(ProcessManager.GetProcessIdFromHandle(m_processHandle));
-                     }
-                    else {                     
+                    }
+                    else
+                    {
                         EnsureState(State.Associated);
                         throw new InvalidOperationException(SR.GetString(SR.ProcessIdRequired));
                     }
@@ -1457,22 +1908,29 @@ namespace System.Diagnostics {
                 }
             }
 
-            if ((state & State.IsLocal) != (State)0 && isRemoteMachine) {
-                    throw new NotSupportedException(SR.GetString(SR.NotSupportedRemote));
+            if ((state & State.IsLocal) != (State)0 && isRemoteMachine)
+            {
+                throw new NotSupportedException(SR.GetString(SR.NotSupportedRemote));
             }
-            
-            if ((state & State.HaveProcessInfo) != (State)0) {
+
+            if ((state & State.HaveProcessInfo) != (State)0)
+            {
 #if !FEATURE_PAL && !MONO
-                if (processInfo == null) {
-                    if ((state & State.HaveId) == (State)0) EnsureState(State.HaveId);
+                if (processInfo == null)
+                {
+                    if ((state & State.HaveId) == (State)0)
+                        EnsureState(State.HaveId);
                     ProcessInfo[] processInfos = ProcessManager.GetProcessInfos(machineName);
-                    for (int i = 0; i < processInfos.Length; i++) {
-                        if (processInfos[i].processId == processId) {
+                    for (int i = 0; i < processInfos.Length; i++)
+                    {
+                        if (processInfos[i].processId == processId)
+                        {
                             this.processInfo = processInfos[i];
                             break;
                         }
                     }
-                    if (processInfo == null) {
+                    if (processInfo == null)
+                    {
                         throw new InvalidOperationException(SR.GetString(SR.NoProcessInfo));
                     }
                 }
@@ -1481,34 +1939,54 @@ namespace System.Diagnostics {
 #endif // !FEATURE_PAL && !MONO
             }
 
-            if ((state & State.Exited) != (State)0) {
-                if (!HasExited) {
+            if ((state & State.Exited) != (State)0)
+            {
+                if (!HasExited)
+                {
                     throw new InvalidOperationException(SR.GetString(SR.WaitTillExit));
                 }
-                
-                if (!haveProcessHandle) {
+
+                if (!haveProcessHandle)
+                {
                     throw new InvalidOperationException(SR.GetString(SR.NoProcessHandle));
                 }
             }
         }
-            
+
         /// <devdoc>
         ///     Make sure we are watching for a process exit.
         /// </devdoc>
         /// <internalonly/>
-        void EnsureWatchingForExit() {
-            if (!watchingForExit) {
-                lock (this) {
-                    if (!watchingForExit) {
-                        Debug.Assert(haveProcessHandle, "Process.EnsureWatchingForExit called with no process handle");
-                        Debug.Assert(Associated, "Process.EnsureWatchingForExit called with no associated process");
+        void EnsureWatchingForExit()
+        {
+            if (!watchingForExit)
+            {
+                lock (this)
+                {
+                    if (!watchingForExit)
+                    {
+                        Debug.Assert(
+                            haveProcessHandle,
+                            "Process.EnsureWatchingForExit called with no process handle"
+                        );
+                        Debug.Assert(
+                            Associated,
+                            "Process.EnsureWatchingForExit called with no associated process"
+                        );
                         watchingForExit = true;
-                        try {
+                        try
+                        {
                             this.waitHandle = new ProcessWaitHandle(m_processHandle);
-                            this.registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(this.waitHandle,
-                                new WaitOrTimerCallback(this.CompletionCallback), null, -1, true);                    
+                            this.registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(
+                                this.waitHandle,
+                                new WaitOrTimerCallback(this.CompletionCallback),
+                                null,
+                                -1,
+                                true
+                            );
                         }
-                        catch {
+                        catch
+                        {
                             watchingForExit = false;
                             throw;
                         }
@@ -1517,36 +1995,43 @@ namespace System.Diagnostics {
             }
         }
 
-#if !FEATURE_PAL    
+#if !FEATURE_PAL
 
         /// <devdoc>
         ///     Make sure we have obtained the min and max working set limits.
         /// </devdoc>
         /// <internalonly/>
-        void EnsureWorkingSetLimits() {
+        void EnsureWorkingSetLimits()
+        {
             EnsureState(State.IsNt);
-            if (!haveWorkingSetLimits) {
+            if (!haveWorkingSetLimits)
+            {
                 SafeProcessHandle handle = null;
-                try {
+                try
+                {
                     handle = GetProcessHandle(NativeMethods.PROCESS_QUERY_INFORMATION);
                     IntPtr min;
                     IntPtr max;
-                    if (!NativeMethods.GetProcessWorkingSetSize(handle, out min, out max)) {
+                    if (!NativeMethods.GetProcessWorkingSetSize(handle, out min, out max))
+                    {
                         throw new Win32Exception();
                     }
                     minWorkingSet = min;
                     maxWorkingSet = max;
                     haveWorkingSetLimits = true;
                 }
-                finally {
+                finally
+                {
                     ReleaseProcessHandle(handle);
                 }
             }
         }
 
-        public static void EnterDebugMode() {
+        public static void EnterDebugMode()
+        {
 #if !MONO
-            if (ProcessManager.IsNt) {
+            if (ProcessManager.IsNt)
+            {
                 SetPrivilege("SeDebugPrivilege", NativeMethods.SE_PRIVILEGE_ENABLED);
             }
 #endif
@@ -1555,7 +2040,8 @@ namespace System.Diagnostics {
 #if !MONO
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Process, ResourceScope.Process)]
-        private static void SetPrivilege(string privilegeName, int attrib) {
+        private static void SetPrivilege(string privilegeName, int attrib)
+        {
             IntPtr hToken = (IntPtr)0;
             NativeMethods.LUID debugValue = new NativeMethods.LUID();
 
@@ -1564,29 +2050,50 @@ namespace System.Diagnostics {
 
             // get the process token so we can adjust the privilege on it.  We DO need to
             // close the token when we're done with it.
-            if (!NativeMethods.OpenProcessToken(new HandleRef(null, processHandle), NativeMethods.TOKEN_ADJUST_PRIVILEGES, out hToken)) {
+            if (
+                !NativeMethods.OpenProcessToken(
+                    new HandleRef(null, processHandle),
+                    NativeMethods.TOKEN_ADJUST_PRIVILEGES,
+                    out hToken
+                )
+            )
+            {
                 throw new Win32Exception();
             }
 
-            try {
-                if (!NativeMethods.LookupPrivilegeValue(null, privilegeName, out debugValue)) {
+            try
+            {
+                if (!NativeMethods.LookupPrivilegeValue(null, privilegeName, out debugValue))
+                {
                     throw new Win32Exception();
                 }
-                
+
                 NativeMethods.TokenPrivileges tkp = new NativeMethods.TokenPrivileges();
                 tkp.Luid = debugValue;
                 tkp.Attributes = attrib;
-    
-                NativeMethods.AdjustTokenPrivileges(new HandleRef(null, hToken), false, tkp, 0, IntPtr.Zero, IntPtr.Zero);
-    
+
+                NativeMethods.AdjustTokenPrivileges(
+                    new HandleRef(null, hToken),
+                    false,
+                    tkp,
+                    0,
+                    IntPtr.Zero,
+                    IntPtr.Zero
+                );
+
                 // AdjustTokenPrivileges can return true even if it failed to
                 // set the privilege, so we need to use GetLastError
-                if (Marshal.GetLastWin32Error() != NativeMethods.ERROR_SUCCESS) {
+                if (Marshal.GetLastWin32Error() != NativeMethods.ERROR_SUCCESS)
+                {
                     throw new Win32Exception();
                 }
             }
-            finally {
-                Debug.WriteLineIf(processTracing.TraceVerbose, "Process - CloseHandle(processToken)");
+            finally
+            {
+                Debug.WriteLineIf(
+                    processTracing.TraceVerbose,
+                    "Process - CloseHandle(processToken)"
+                );
                 SafeNativeMethods.CloseHandle(hToken);
             }
         }
@@ -1595,13 +2102,15 @@ namespace System.Diagnostics {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static void LeaveDebugMode() {
+        public static void LeaveDebugMode()
+        {
 #if !MONO
-            if (ProcessManager.IsNt) {
+            if (ProcessManager.IsNt)
+            {
                 SetPrivilege("SeDebugPrivilege", 0);
             }
 #endif
-        }     
+        }
 
 #if !MONO
         /// <devdoc>
@@ -1612,12 +2121,21 @@ namespace System.Diagnostics {
         /// </devdoc>
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static Process GetProcessById(int processId, string machineName) {
-            if (!ProcessManager.IsProcessRunning(processId, machineName)) {
-                throw new ArgumentException(SR.GetString(SR.MissingProccess, processId.ToString(CultureInfo.CurrentCulture)));
+        public static Process GetProcessById(int processId, string machineName)
+        {
+            if (!ProcessManager.IsProcessRunning(processId, machineName))
+            {
+                throw new ArgumentException(
+                    SR.GetString(SR.MissingProccess, processId.ToString(CultureInfo.CurrentCulture))
+                );
             }
-            
-            return new Process(machineName, ProcessManager.IsRemoteMachine(machineName), processId, null);
+
+            return new Process(
+                machineName,
+                ProcessManager.IsRemoteMachine(machineName),
+                processId,
+                null
+            );
         }
 #endif
 
@@ -1629,7 +2147,8 @@ namespace System.Diagnostics {
         /// </devdoc>
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static Process GetProcessById(int processId) {
+        public static Process GetProcessById(int processId)
+        {
             return GetProcessById(processId, ".");
         }
 
@@ -1643,7 +2162,8 @@ namespace System.Diagnostics {
         /// </devdoc>
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static Process[] GetProcessesByName(string processName) {
+        public static Process[] GetProcessesByName(string processName)
+        {
             return GetProcessesByName(processName, ".");
         }
 
@@ -1656,19 +2176,31 @@ namespace System.Diagnostics {
         /// </devdoc>
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static Process[] GetProcessesByName(string processName, string machineName) {
-            if (processName == null) processName = String.Empty;
+        public static Process[] GetProcessesByName(string processName, string machineName)
+        {
+            if (processName == null)
+                processName = String.Empty;
             Process[] procs = GetProcesses(machineName);
             ArrayList list = new ArrayList();
 
-            for(int i = 0; i < procs.Length; i++) {                
-                if( String.Equals(processName, procs[i].ProcessName, StringComparison.OrdinalIgnoreCase)) {
-                    list.Add( procs[i]);                    
-                } else {
+            for (int i = 0; i < procs.Length; i++)
+            {
+                if (
+                    String.Equals(
+                        processName,
+                        procs[i].ProcessName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
+                {
+                    list.Add(procs[i]);
+                }
+                else
+                {
                     procs[i].Dispose();
                 }
             }
-            
+
             Process[] temp = new Process[list.Count];
             list.CopyTo(temp, 0);
             return temp;
@@ -1683,7 +2215,8 @@ namespace System.Diagnostics {
         /// </devdoc>
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static Process[] GetProcesses() {
+        public static Process[] GetProcesses()
+        {
             return GetProcesses(".");
         }
 
@@ -1697,19 +2230,31 @@ namespace System.Diagnostics {
         /// </devdoc>
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static Process[] GetProcesses(string machineName) {
+        public static Process[] GetProcesses(string machineName)
+        {
             bool isRemoteMachine = ProcessManager.IsRemoteMachine(machineName);
             ProcessInfo[] processInfos = ProcessManager.GetProcessInfos(machineName);
             Process[] processes = new Process[processInfos.Length];
-            for (int i = 0; i < processInfos.Length; i++) {
+            for (int i = 0; i < processInfos.Length; i++)
+            {
                 ProcessInfo processInfo = processInfos[i];
-                processes[i] = new Process(machineName, isRemoteMachine, processInfo.processId, processInfo);
+                processes[i] = new Process(
+                    machineName,
+                    isRemoteMachine,
+                    processInfo.processId,
+                    processInfo
+                );
             }
-            Debug.WriteLineIf(processTracing.TraceVerbose, "Process.GetProcesses(" + machineName + ")");
+            Debug.WriteLineIf(
+                processTracing.TraceVerbose,
+                "Process.GetProcesses(" + machineName + ")"
+            );
 #if DEBUG
-            if (processTracing.TraceVerbose) {
+            if (processTracing.TraceVerbose)
+            {
                 Debug.Indent();
-                for (int i = 0; i < processInfos.Length; i++) {
+                for (int i = 0; i < processInfos.Length; i++)
+                {
                     Debug.WriteLine(processes[i].Id + ": " + processes[i].ProcessName);
                 }
                 Debug.Unindent();
@@ -1719,7 +2264,7 @@ namespace System.Diagnostics {
         }
 #endif // !MONO
 
-#endif // !FEATURE_PAL        
+#endif // !FEATURE_PAL
 
         /// <devdoc>
         ///    <para>
@@ -1729,7 +2274,8 @@ namespace System.Diagnostics {
         /// </devdoc>
         [ResourceExposure(ResourceScope.Process)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Process)]
-        public static Process GetCurrentProcess() {
+        public static Process GetCurrentProcess()
+        {
             return new Process(".", false, NativeMethods.GetCurrentProcessId(), null);
         }
 
@@ -1738,56 +2284,89 @@ namespace System.Diagnostics {
         ///       Raises the <see cref='System.Diagnostics.Process.Exited'/> event.
         ///    </para>
         /// </devdoc>
-        protected void OnExited() {
+        protected void OnExited()
+        {
             EventHandler exited = onExited;
-            if (exited != null) {
+            if (exited != null)
+            {
                 if (this.SynchronizingObject != null && this.SynchronizingObject.InvokeRequired)
-                    this.SynchronizingObject.BeginInvoke(exited, new object[]{this, EventArgs.Empty});
-                else                        
-                   exited(this, EventArgs.Empty);                
-            }               
+                    this.SynchronizingObject.BeginInvoke(
+                        exited,
+                        new object[] { this, EventArgs.Empty }
+                    );
+                else
+                    exited(this, EventArgs.Empty);
+            }
         }
 
         /// <devdoc>
-        ///     Gets a short-term handle to the process, with the given access.  
+        ///     Gets a short-term handle to the process, with the given access.
         ///     If a handle is stored in current process object, then use it.
         ///     Note that the handle we stored in current process object will have all access we need.
         /// </devdoc>
         /// <internalonly/>
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        SafeProcessHandle GetProcessHandle(int access, bool throwIfExited) {
-            Debug.WriteLineIf(processTracing.TraceVerbose, "GetProcessHandle(access = 0x" + access.ToString("X8", CultureInfo.InvariantCulture) + ", throwIfExited = " + throwIfExited + ")");
+        SafeProcessHandle GetProcessHandle(int access, bool throwIfExited)
+        {
+            Debug.WriteLineIf(
+                processTracing.TraceVerbose,
+                "GetProcessHandle(access = 0x"
+                    + access.ToString("X8", CultureInfo.InvariantCulture)
+                    + ", throwIfExited = "
+                    + throwIfExited
+                    + ")"
+            );
 #if DEBUG
-            if (processTracing.TraceVerbose) {
+            if (processTracing.TraceVerbose)
+            {
                 StackFrame calledFrom = new StackTrace(true).GetFrame(0);
-                Debug.WriteLine("   called from " + calledFrom.GetFileName() + ", line " + calledFrom.GetFileLineNumber());
+                Debug.WriteLine(
+                    "   called from "
+                        + calledFrom.GetFileName()
+                        + ", line "
+                        + calledFrom.GetFileLineNumber()
+                );
             }
 #endif
-            if (haveProcessHandle) {
-                if (throwIfExited) {
+            if (haveProcessHandle)
+            {
+                if (throwIfExited)
+                {
                     // Since haveProcessHandle is true, we know we have the process handle
-                    // open with at least SYNCHRONIZE access, so we can wait on it with 
+                    // open with at least SYNCHRONIZE access, so we can wait on it with
                     // zero timeout to see if the process has exited.
                     ProcessWaitHandle waitHandle = null;
-                    try {
-                        waitHandle = new ProcessWaitHandle(m_processHandle);             
-                        if (waitHandle.WaitOne(0, false)) {
+                    try
+                    {
+                        waitHandle = new ProcessWaitHandle(m_processHandle);
+                        if (waitHandle.WaitOne(0, false))
+                        {
                             if (haveProcessId)
-                                throw new InvalidOperationException(SR.GetString(SR.ProcessHasExited, processId.ToString(CultureInfo.CurrentCulture)));
+                                throw new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.ProcessHasExited,
+                                        processId.ToString(CultureInfo.CurrentCulture)
+                                    )
+                                );
                             else
-                                throw new InvalidOperationException(SR.GetString(SR.ProcessHasExitedNoId));
+                                throw new InvalidOperationException(
+                                    SR.GetString(SR.ProcessHasExitedNoId)
+                                );
                         }
                     }
-                    finally {
-                        if( waitHandle != null) {
+                    finally
+                    {
+                        if (waitHandle != null)
+                        {
                             waitHandle.Close();
                         }
-                    }            
+                    }
                 }
                 return m_processHandle;
             }
-            else {
+            else
+            {
                 EnsureState(State.HaveId | State.IsLocal);
                 SafeProcessHandle handle = SafeProcessHandle.InvalidHandle;
 #if !FEATURE_PAL && !MONO
@@ -1795,25 +2374,38 @@ namespace System.Diagnostics {
 #else
                 IntPtr pseudohandle = NativeMethods.GetCurrentProcess();
                 // Get a real handle
-                if (!NativeMethods.DuplicateHandle (new HandleRef(this, pseudohandle), 
-                                                    new HandleRef(this, pseudohandle), 
-                                                    new HandleRef(this, pseudohandle), 
-                                                    out handle,
-                                                    0, 
-                                                    false, 
-                                                    NativeMethods.DUPLICATE_SAME_ACCESS | 
-                                                    NativeMethods.DUPLICATE_CLOSE_SOURCE)) {
+                if (
+                    !NativeMethods.DuplicateHandle(
+                        new HandleRef(this, pseudohandle),
+                        new HandleRef(this, pseudohandle),
+                        new HandleRef(this, pseudohandle),
+                        out handle,
+                        0,
+                        false,
+                        NativeMethods.DUPLICATE_SAME_ACCESS | NativeMethods.DUPLICATE_CLOSE_SOURCE
+                    )
+                )
+                {
                     throw new Win32Exception();
                 }
 #endif // !FEATURE_PAL && !MONO
-                if (throwIfExited && (access & NativeMethods.PROCESS_QUERY_INFORMATION) != 0) {         
-                    if (NativeMethods.GetExitCodeProcess(handle, out exitCode) && exitCode != NativeMethods.STILL_ACTIVE) {
-                        throw new InvalidOperationException(SR.GetString(SR.ProcessHasExited, processId.ToString(CultureInfo.CurrentCulture)));
+                if (throwIfExited && (access & NativeMethods.PROCESS_QUERY_INFORMATION) != 0)
+                {
+                    if (
+                        NativeMethods.GetExitCodeProcess(handle, out exitCode)
+                        && exitCode != NativeMethods.STILL_ACTIVE
+                    )
+                    {
+                        throw new InvalidOperationException(
+                            SR.GetString(
+                                SR.ProcessHasExited,
+                                processId.ToString(CultureInfo.CurrentCulture)
+                            )
+                        );
                     }
                 }
                 return handle;
             }
-
         }
 
         /// <devdoc>
@@ -1821,7 +2413,8 @@ namespace System.Diagnostics {
         ///     then it is reused.  If the process has exited, it throws an exception.
         /// </devdoc>
         /// <internalonly/>
-        SafeProcessHandle GetProcessHandle(int access) {
+        SafeProcessHandle GetProcessHandle(int access)
+        {
             return GetProcessHandle(access, true);
         }
 
@@ -1830,19 +2423,23 @@ namespace System.Diagnostics {
         ///     then it is reused.  If the process has exited, it throws an exception.
         /// </devdoc>
         /// <internalonly/>
-        SafeProcessHandle OpenProcessHandle() {
+        SafeProcessHandle OpenProcessHandle()
+        {
             return OpenProcessHandle(NativeMethods.PROCESS_ALL_ACCESS);
         }
 
-        SafeProcessHandle OpenProcessHandle(Int32 access) {
-            if (!haveProcessHandle) {
-                //Cannot open a new process handle if the object has been disposed, since finalization has been suppressed.            
-                if (this.disposed) {
+        SafeProcessHandle OpenProcessHandle(Int32 access)
+        {
+            if (!haveProcessHandle)
+            {
+                //Cannot open a new process handle if the object has been disposed, since finalization has been suppressed.
+                if (this.disposed)
+                {
                     throw new ObjectDisposedException(GetType().Name);
                 }
-                        
+
                 SetProcessHandle(GetProcessHandle(access));
-            }                
+            }
             return m_processHandle;
         }
 
@@ -1851,10 +2448,14 @@ namespace System.Diagnostics {
         ///     Raise the Exited event, but make sure we don't do it more than once.
         /// </devdoc>
         /// <internalonly/>
-        void RaiseOnExited() {
-            if (!raisedOnExited) {
-                lock (this) {
-                    if (!raisedOnExited) {
+        void RaiseOnExited()
+        {
+            if (!raisedOnExited)
+            {
+                lock (this)
+                {
+                    if (!raisedOnExited)
+                    {
                         raisedOnExited = true;
                         OnExited();
                     }
@@ -1871,14 +2472,15 @@ namespace System.Diagnostics {
         ///       to obtain a new value from the associated process.
         ///    </para>
         /// </devdoc>
-        public void Refresh() {
+        public void Refresh()
+        {
 #if !MONO
             processInfo = null;
 #endif
-#if !FEATURE_PAL            
+#if !FEATURE_PAL
             threads = null;
             modules = null;
-#endif // !FEATURE_PAL            
+#endif // !FEATURE_PAL
 #if !MONO
             mainWindowTitle = null;
 #endif
@@ -1903,10 +2505,12 @@ namespace System.Diagnostics {
         ///     Helper to associate a process handle with this component.
         /// </devdoc>
         /// <internalonly/>
-        void SetProcessHandle(SafeProcessHandle processHandle) {
+        void SetProcessHandle(SafeProcessHandle processHandle)
+        {
             this.m_processHandle = processHandle;
             this.haveProcessHandle = true;
-            if (watchForExit) {
+            if (watchForExit)
+            {
                 EnsureWatchingForExit();
             }
         }
@@ -1916,12 +2520,13 @@ namespace System.Diagnostics {
         /// </devdoc>
         /// <internalonly/>
         [ResourceExposure(ResourceScope.Machine)]
-        void SetProcessId(int processId) {
+        void SetProcessId(int processId)
+        {
             this.processId = processId;
             this.haveProcessId = true;
         }
 
-#if !FEATURE_PAL        
+#if !FEATURE_PAL
 
         /// <devdoc>
         ///     Helper to set minimum or maximum working set limits.
@@ -1929,48 +2534,61 @@ namespace System.Diagnostics {
         /// <internalonly/>
         [ResourceExposure(ResourceScope.Process)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        void SetWorkingSetLimits(object newMin, object newMax) {
+        void SetWorkingSetLimits(object newMin, object newMax)
+        {
             EnsureState(State.IsNt);
 
             SafeProcessHandle handle = null;
-            try {
-                handle = GetProcessHandle(NativeMethods.PROCESS_QUERY_INFORMATION | NativeMethods.PROCESS_SET_QUOTA);
+            try
+            {
+                handle = GetProcessHandle(
+                    NativeMethods.PROCESS_QUERY_INFORMATION | NativeMethods.PROCESS_SET_QUOTA
+                );
                 IntPtr min;
                 IntPtr max;
-                if (!NativeMethods.GetProcessWorkingSetSize(handle, out min, out max)) {
+                if (!NativeMethods.GetProcessWorkingSetSize(handle, out min, out max))
+                {
                     throw new Win32Exception();
                 }
-                
-                if (newMin != null) {
+
+                if (newMin != null)
+                {
                     min = (IntPtr)newMin;
                 }
-                
-                if (newMax != null) { 
+
+                if (newMax != null)
+                {
                     max = (IntPtr)newMax;
                 }
-                
-                if ((long)min > (long)max) {
-                    if (newMin != null) {
+
+                if ((long)min > (long)max)
+                {
+                    if (newMin != null)
+                    {
                         throw new ArgumentException(SR.GetString(SR.BadMinWorkset));
                     }
-                    else {
+                    else
+                    {
                         throw new ArgumentException(SR.GetString(SR.BadMaxWorkset));
                     }
                 }
-                
-                if (!NativeMethods.SetProcessWorkingSetSize(handle, min, max)) {
+
+                if (!NativeMethods.SetProcessWorkingSetSize(handle, min, max))
+                {
                     throw new Win32Exception();
                 }
-                
+
                 // The value may be rounded/changed by the OS, so go get it
-                if (!NativeMethods.GetProcessWorkingSetSize(handle, out min, out max)) {
+                if (!NativeMethods.GetProcessWorkingSetSize(handle, out min, out max))
+                {
                     throw new Win32Exception();
                 }
                 minWorkingSet = min;
                 maxWorkingSet = max;
                 haveWorkingSetLimits = true;
             }
-            finally {
+            finally
+            {
                 ReleaseProcessHandle(handle);
             }
         }
@@ -1983,26 +2601,32 @@ namespace System.Diagnostics {
         ///    <para>
         ///       Starts a process specified by the <see cref='System.Diagnostics.Process.StartInfo'/> property of this <see cref='System.Diagnostics.Process'/>
         ///       component and associates it with the
-        ///    <see cref='System.Diagnostics.Process'/> . If a process resource is reused 
+        ///    <see cref='System.Diagnostics.Process'/> . If a process resource is reused
         ///       rather than started, the reused process is associated with this <see cref='System.Diagnostics.Process'/>
         ///       component.
         ///    </para>
         /// </devdoc>
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        public bool Start() {
+        public bool Start()
+        {
             Close();
             ProcessStartInfo startInfo = StartInfo;
-            if (startInfo.FileName.Length == 0) 
+            if (startInfo.FileName.Length == 0)
                 throw new InvalidOperationException(SR.GetString(SR.FileNameMissing));
 
-            if (startInfo.UseShellExecute) {
-#if !FEATURE_PAL                
+            if (startInfo.UseShellExecute)
+            {
+#if !FEATURE_PAL
                 return StartWithShellExecuteEx(startInfo);
 #else
-                throw new InvalidOperationException(SR.GetString(SR.net_perm_invalid_val, "StartInfo.UseShellExecute", true));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.net_perm_invalid_val, "StartInfo.UseShellExecute", true)
+                );
 #endif // !FEATURE_PAL
-            } else {
+            }
+            else
+            {
                 return StartWithCreateProcess(startInfo);
             }
         }
@@ -2010,97 +2634,146 @@ namespace System.Diagnostics {
 #if !MONO
         [ResourceExposure(ResourceScope.Process)]
         [ResourceConsumption(ResourceScope.Process)]
-        private static void CreatePipeWithSecurityAttributes(out SafeFileHandle hReadPipe, out SafeFileHandle hWritePipe, NativeMethods.SECURITY_ATTRIBUTES lpPipeAttributes, int nSize) {
-            bool ret = NativeMethods.CreatePipe(out hReadPipe, out hWritePipe, lpPipeAttributes, nSize);
-            if (!ret || hReadPipe.IsInvalid || hWritePipe.IsInvalid) {
+        private static void CreatePipeWithSecurityAttributes(
+            out SafeFileHandle hReadPipe,
+            out SafeFileHandle hWritePipe,
+            NativeMethods.SECURITY_ATTRIBUTES lpPipeAttributes,
+            int nSize
+        )
+        {
+            bool ret = NativeMethods.CreatePipe(
+                out hReadPipe,
+                out hWritePipe,
+                lpPipeAttributes,
+                nSize
+            );
+            if (!ret || hReadPipe.IsInvalid || hWritePipe.IsInvalid)
+            {
                 throw new Win32Exception();
             }
         }
 
-        // Using synchronous Anonymous pipes for process input/output redirection means we would end up 
-        // wasting a worker threadpool thread per pipe instance. Overlapped pipe IO is desirable, since 
-        // it will take advantage of the NT IO completion port infrastructure. But we can't really use 
-        // Overlapped I/O for process input/output as it would break Console apps (managed Console class 
+        // Using synchronous Anonymous pipes for process input/output redirection means we would end up
+        // wasting a worker threadpool thread per pipe instance. Overlapped pipe IO is desirable, since
+        // it will take advantage of the NT IO completion port infrastructure. But we can't really use
+        // Overlapped I/O for process input/output as it would break Console apps (managed Console class
         // methods such as WriteLine as well as native CRT functions like printf) which are making an
         // assumption that the console standard handles (obtained via GetStdHandle()) are opened
         // for synchronous I/O and hence they can work fine with ReadFile/WriteFile synchrnously!
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        private void CreatePipe(out SafeFileHandle parentHandle, out SafeFileHandle childHandle, bool parentInputs) {
-            NativeMethods.SECURITY_ATTRIBUTES securityAttributesParent = new NativeMethods.SECURITY_ATTRIBUTES();
+        private void CreatePipe(
+            out SafeFileHandle parentHandle,
+            out SafeFileHandle childHandle,
+            bool parentInputs
+        )
+        {
+            NativeMethods.SECURITY_ATTRIBUTES securityAttributesParent =
+                new NativeMethods.SECURITY_ATTRIBUTES();
             securityAttributesParent.bInheritHandle = true;
-            
+
             SafeFileHandle hTmp = null;
-            try {
-                if (parentInputs) {
-                    CreatePipeWithSecurityAttributes(out childHandle, out hTmp, securityAttributesParent, 0);                                                          
-                } 
-                else {
-                    CreatePipeWithSecurityAttributes(out hTmp, 
-                                                          out childHandle, 
-                                                          securityAttributesParent, 
-                                                          0);                                                                              
+            try
+            {
+                if (parentInputs)
+                {
+                    CreatePipeWithSecurityAttributes(
+                        out childHandle,
+                        out hTmp,
+                        securityAttributesParent,
+                        0
+                    );
                 }
-                // Duplicate the parent handle to be non-inheritable so that the child process 
+                else
+                {
+                    CreatePipeWithSecurityAttributes(
+                        out hTmp,
+                        out childHandle,
+                        securityAttributesParent,
+                        0
+                    );
+                }
+                // Duplicate the parent handle to be non-inheritable so that the child process
                 // doesn't have access. This is done for correctness sake, exact reason is unclear.
-                // One potential theory is that child process can do something brain dead like 
+                // One potential theory is that child process can do something brain dead like
                 // closing the parent end of the pipe and there by getting into a blocking situation
-                // as parent will not be draining the pipe at the other end anymore. 
-                if (!NativeMethods.DuplicateHandle(new HandleRef(this, NativeMethods.GetCurrentProcess()), 
-                                                                   hTmp,
-                                                                   new HandleRef(this, NativeMethods.GetCurrentProcess()), 
-                                                                   out parentHandle,
-                                                                   0, 
-                                                                   false, 
-                                                                   NativeMethods.DUPLICATE_SAME_ACCESS)) {                                                                       
+                // as parent will not be draining the pipe at the other end anymore.
+                if (
+                    !NativeMethods.DuplicateHandle(
+                        new HandleRef(this, NativeMethods.GetCurrentProcess()),
+                        hTmp,
+                        new HandleRef(this, NativeMethods.GetCurrentProcess()),
+                        out parentHandle,
+                        0,
+                        false,
+                        NativeMethods.DUPLICATE_SAME_ACCESS
+                    )
+                )
+                {
                     throw new Win32Exception();
                 }
             }
-            finally {
-                if( hTmp != null && !hTmp.IsInvalid) {
+            finally
+            {
+                if (hTmp != null && !hTmp.IsInvalid)
+                {
                     hTmp.Close();
                 }
             }
-        }            
+        }
 
-        private static StringBuilder BuildCommandLine(string executableFileName, string arguments) {
+        private static StringBuilder BuildCommandLine(string executableFileName, string arguments)
+        {
             // Construct a StringBuilder with the appropriate command line
-            // to pass to CreateProcess.  If the filename isn't already 
+            // to pass to CreateProcess.  If the filename isn't already
             // in quotes, we quote it here.  This prevents some security
             // problems (it specifies exactly which part of the string
             // is the file to execute).
             StringBuilder commandLine = new StringBuilder();
             string fileName = executableFileName.Trim();
-            bool fileNameIsQuoted = (fileName.StartsWith("\"", StringComparison.Ordinal) && fileName.EndsWith("\"", StringComparison.Ordinal));
-            if (!fileNameIsQuoted) { 
+            bool fileNameIsQuoted = (
+                fileName.StartsWith("\"", StringComparison.Ordinal)
+                && fileName.EndsWith("\"", StringComparison.Ordinal)
+            );
+            if (!fileNameIsQuoted)
+            {
                 commandLine.Append("\"");
             }
-            
+
             commandLine.Append(fileName);
-            
-            if (!fileNameIsQuoted) {
+
+            if (!fileNameIsQuoted)
+            {
                 commandLine.Append("\"");
             }
-            
-            if (!String.IsNullOrEmpty(arguments)) {
+
+            if (!String.IsNullOrEmpty(arguments))
+            {
                 commandLine.Append(" ");
-                commandLine.Append(arguments);                
-            }                        
+                commandLine.Append(arguments);
+            }
 
             return commandLine;
         }
-        
+
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        private bool StartWithCreateProcess(ProcessStartInfo startInfo) {
-            if( startInfo.StandardOutputEncoding != null && !startInfo.RedirectStandardOutput) {
-                throw new InvalidOperationException(SR.GetString(SR.StandardOutputEncodingNotAllowed));
+        private bool StartWithCreateProcess(ProcessStartInfo startInfo)
+        {
+            if (startInfo.StandardOutputEncoding != null && !startInfo.RedirectStandardOutput)
+            {
+                throw new InvalidOperationException(
+                    SR.GetString(SR.StandardOutputEncodingNotAllowed)
+                );
             }
 
-            if( startInfo.StandardErrorEncoding != null && !startInfo.RedirectStandardError) {
-                throw new InvalidOperationException(SR.GetString(SR.StandardErrorEncodingNotAllowed));
-            }            
-            
+            if (startInfo.StandardErrorEncoding != null && !startInfo.RedirectStandardError)
+            {
+                throw new InvalidOperationException(
+                    SR.GetString(SR.StandardErrorEncodingNotAllowed)
+                );
+            }
+
             if (!string.IsNullOrEmpty(startInfo.Arguments) && startInfo.ArgumentList.Count > 0)
                 throw new InvalidOperationException(SR.ArgumentAndArgumentListInitialized);
 
@@ -2110,25 +2783,29 @@ namespace System.Diagnostics {
             //    * CreateProcess allows you to redirect all or none of the standard IO handles, so we use
             //      GetStdHandle for the handles that are not being redirected
 
-            //Cannot start a new process and store its handle if the object has been disposed, since finalization has been suppressed.            
-            if (this.disposed) {
+            //Cannot start a new process and store its handle if the object has been disposed, since finalization has been suppressed.
+            if (this.disposed)
+            {
                 throw new ObjectDisposedException(GetType().Name);
             }
 
             string arguments;
-            if (startInfo.ArgumentList.Count > 0) {
-                StringBuilder sb = new StringBuilder ();
-                Process.AppendArguments (sb, startInfo.ArgumentList);
-                arguments = sb.ToString ();
+            if (startInfo.ArgumentList.Count > 0)
+            {
+                StringBuilder sb = new StringBuilder();
+                Process.AppendArguments(sb, startInfo.ArgumentList);
+                arguments = sb.ToString();
             }
-            else {
+            else
+            {
                 arguments = startInfo.Arguments;
             }
 
             StringBuilder commandLine = BuildCommandLine(startInfo.FileName, arguments);
 
             NativeMethods.STARTUPINFO startupInfo = new NativeMethods.STARTUPINFO();
-            SafeNativeMethods.PROCESS_INFORMATION processInfo = new SafeNativeMethods.PROCESS_INFORMATION();
+            SafeNativeMethods.PROCESS_INFORMATION processInfo =
+                new SafeNativeMethods.PROCESS_INFORMATION();
             SafeProcessHandle procSH = new SafeProcessHandle();
             SafeThreadHandle threadSH = new SafeThreadHandle();
             bool retVal;
@@ -2137,169 +2814,289 @@ namespace System.Diagnostics {
             SafeFileHandle standardInputWritePipeHandle = null;
             SafeFileHandle standardOutputReadPipeHandle = null;
             SafeFileHandle standardErrorReadPipeHandle = null;
-            GCHandle environmentHandle = new GCHandle();            
-            lock (s_CreateProcessLock) {
-            try {
-                // set up the streams
-                if (startInfo.RedirectStandardInput || startInfo.RedirectStandardOutput || startInfo.RedirectStandardError) {                        
-                    if (startInfo.RedirectStandardInput) {
-                        CreatePipe(out standardInputWritePipeHandle, out startupInfo.hStdInput, true);
-                        } else {
-                        startupInfo.hStdInput  =  new SafeFileHandle(NativeMethods.GetStdHandle(NativeMethods.STD_INPUT_HANDLE), false);
-                    }
-    
-                    if (startInfo.RedirectStandardOutput) {                        
-                        CreatePipe(out standardOutputReadPipeHandle, out startupInfo.hStdOutput, false);
-                        } else {
-                        startupInfo.hStdOutput = new SafeFileHandle(NativeMethods.GetStdHandle(NativeMethods.STD_OUTPUT_HANDLE), false);
-                    }
-    
-                    if (startInfo.RedirectStandardError) {
-                        CreatePipe(out standardErrorReadPipeHandle, out startupInfo.hStdError, false);
-                        } else {
-                        startupInfo.hStdError = new SafeFileHandle(NativeMethods.GetStdHandle(NativeMethods.STD_ERROR_HANDLE), false);
-                    }
-    
-                    startupInfo.dwFlags = NativeMethods.STARTF_USESTDHANDLES;
-                }
-    
-                // set up the creation flags paramater
-                int creationFlags = 0;
-#if !FEATURE_PAL                
-                if (startInfo.CreateNoWindow)  creationFlags |= NativeMethods.CREATE_NO_WINDOW;               
-#endif // !FEATURE_PAL                
+            GCHandle environmentHandle = new GCHandle();
+            lock (s_CreateProcessLock)
+            {
+                try
+                {
+                    // set up the streams
+                    if (
+                        startInfo.RedirectStandardInput
+                        || startInfo.RedirectStandardOutput
+                        || startInfo.RedirectStandardError
+                    )
+                    {
+                        if (startInfo.RedirectStandardInput)
+                        {
+                            CreatePipe(
+                                out standardInputWritePipeHandle,
+                                out startupInfo.hStdInput,
+                                true
+                            );
+                        }
+                        else
+                        {
+                            startupInfo.hStdInput = new SafeFileHandle(
+                                NativeMethods.GetStdHandle(NativeMethods.STD_INPUT_HANDLE),
+                                false
+                            );
+                        }
 
-                // set up the environment block parameter
-                IntPtr environmentPtr = (IntPtr)0;
-                if (startInfo.environmentVariables != null) {
-                    bool unicode = false;
-#if !FEATURE_PAL                    
-                    if (ProcessManager.IsNt) {
-                        creationFlags |= NativeMethods.CREATE_UNICODE_ENVIRONMENT;                
-                        unicode = true;
+                        if (startInfo.RedirectStandardOutput)
+                        {
+                            CreatePipe(
+                                out standardOutputReadPipeHandle,
+                                out startupInfo.hStdOutput,
+                                false
+                            );
+                        }
+                        else
+                        {
+                            startupInfo.hStdOutput = new SafeFileHandle(
+                                NativeMethods.GetStdHandle(NativeMethods.STD_OUTPUT_HANDLE),
+                                false
+                            );
+                        }
+
+                        if (startInfo.RedirectStandardError)
+                        {
+                            CreatePipe(
+                                out standardErrorReadPipeHandle,
+                                out startupInfo.hStdError,
+                                false
+                            );
+                        }
+                        else
+                        {
+                            startupInfo.hStdError = new SafeFileHandle(
+                                NativeMethods.GetStdHandle(NativeMethods.STD_ERROR_HANDLE),
+                                false
+                            );
+                        }
+
+                        startupInfo.dwFlags = NativeMethods.STARTF_USESTDHANDLES;
                     }
+
+                    // set up the creation flags paramater
+                    int creationFlags = 0;
+#if !FEATURE_PAL
+                    if (startInfo.CreateNoWindow)
+                        creationFlags |= NativeMethods.CREATE_NO_WINDOW;
 #endif // !FEATURE_PAL
-                    
-                    byte[] environmentBytes = EnvironmentBlock.ToByteArray(startInfo.environmentVariables, unicode);
-                    environmentHandle = GCHandle.Alloc(environmentBytes, GCHandleType.Pinned);
-                    environmentPtr = environmentHandle.AddrOfPinnedObject();
-                }
 
-                string workingDirectory = startInfo.WorkingDirectory;
-                if (workingDirectory == string.Empty)
-                    workingDirectory = Environment.CurrentDirectory;
+                    // set up the environment block parameter
+                    IntPtr environmentPtr = (IntPtr)0;
+                    if (startInfo.environmentVariables != null)
+                    {
+                        bool unicode = false;
+#if !FEATURE_PAL
+                        if (ProcessManager.IsNt)
+                        {
+                            creationFlags |= NativeMethods.CREATE_UNICODE_ENVIRONMENT;
+                            unicode = true;
+                        }
+#endif // !FEATURE_PAL
+                        byte[] environmentBytes = EnvironmentBlock.ToByteArray(
+                            startInfo.environmentVariables,
+                            unicode
+                        );
+                        environmentHandle = GCHandle.Alloc(environmentBytes, GCHandleType.Pinned);
+                        environmentPtr = environmentHandle.AddrOfPinnedObject();
+                    }
 
-#if !FEATURE_PAL                    
-                if (startInfo.UserName.Length != 0) {                              
-                    if (startInfo.Password != null && startInfo.PasswordInClearText != null)
+                    string workingDirectory = startInfo.WorkingDirectory;
+                    if (workingDirectory == string.Empty)
+                        workingDirectory = Environment.CurrentDirectory;
+
+#if !FEATURE_PAL
+                    if (startInfo.UserName.Length != 0)
+                    {
+                        if (startInfo.Password != null && startInfo.PasswordInClearText != null)
                             throw new ArgumentException(SR.GetString(SR.CantSetDuplicatePassword));
 
-                    NativeMethods.LogonFlags logonFlags = (NativeMethods.LogonFlags)0;                    
-                    if( startInfo.LoadUserProfile) {
-                        logonFlags = NativeMethods.LogonFlags.LOGON_WITH_PROFILE;
-                    }
-
-                    IntPtr password = IntPtr.Zero;
-                    try {
-                        if( startInfo.Password != null) {
-                            password = Marshal.SecureStringToCoTaskMemUnicode(startInfo.Password);
-                        } else if( startInfo.PasswordInClearText != null) {
-                            password = Marshal.StringToCoTaskMemUni(startInfo.PasswordInClearText);
-                        } else {
-                            password = Marshal.StringToCoTaskMemUni(String.Empty);
+                        NativeMethods.LogonFlags logonFlags = (NativeMethods.LogonFlags)0;
+                        if (startInfo.LoadUserProfile)
+                        {
+                            logonFlags = NativeMethods.LogonFlags.LOGON_WITH_PROFILE;
                         }
 
-                        RuntimeHelpers.PrepareConstrainedRegions();
-                        try {} finally {
-                           retVal = NativeMethods.CreateProcessWithLogonW(
-                                   startInfo.UserName,
-                                   startInfo.Domain,
-                                   password,
-                                   logonFlags,
-                                   null,            // we don't need this since all the info is in commandLine
-                                   commandLine,
-                                   creationFlags,
-                                   environmentPtr,
-                                   workingDirectory,
-                                   startupInfo,        // pointer to STARTUPINFO
-                                   processInfo         // pointer to PROCESS_INFORMATION
-                               ); 
-                           if (!retVal)                            
-                              errorCode = Marshal.GetLastWin32Error();
-                           if ( processInfo.hProcess!= (IntPtr)0 && processInfo.hProcess!= (IntPtr)NativeMethods.INVALID_HANDLE_VALUE)
-                              procSH.InitialSetHandle(processInfo.hProcess);  
-                           if ( processInfo.hThread != (IntPtr)0 && processInfo.hThread != (IntPtr)NativeMethods.INVALID_HANDLE_VALUE)
-                              threadSH.InitialSetHandle(processInfo.hThread);            
-                        }
-                        if (!retVal){                            
-                                if (errorCode == NativeMethods.ERROR_BAD_EXE_FORMAT || errorCode == NativeMethods.ERROR_EXE_MACHINE_TYPE_MISMATCH) {
-                                throw new Win32Exception(errorCode, SR.GetString(SR.InvalidApplication));
+                        IntPtr password = IntPtr.Zero;
+                        try
+                        {
+                            if (startInfo.Password != null)
+                            {
+                                password = Marshal.SecureStringToCoTaskMemUnicode(
+                                    startInfo.Password
+                                );
+                            }
+                            else if (startInfo.PasswordInClearText != null)
+                            {
+                                password = Marshal.StringToCoTaskMemUni(
+                                    startInfo.PasswordInClearText
+                                );
+                            }
+                            else
+                            {
+                                password = Marshal.StringToCoTaskMemUni(String.Empty);
                             }
 
-                            throw new Win32Exception(errorCode);
+                            RuntimeHelpers.PrepareConstrainedRegions();
+                            try { }
+                            finally
+                            {
+                                retVal = NativeMethods.CreateProcessWithLogonW(
+                                    startInfo.UserName,
+                                    startInfo.Domain,
+                                    password,
+                                    logonFlags,
+                                    null, // we don't need this since all the info is in commandLine
+                                    commandLine,
+                                    creationFlags,
+                                    environmentPtr,
+                                    workingDirectory,
+                                    startupInfo, // pointer to STARTUPINFO
+                                    processInfo // pointer to PROCESS_INFORMATION
+                                );
+                                if (!retVal)
+                                    errorCode = Marshal.GetLastWin32Error();
+                                if (
+                                    processInfo.hProcess != (IntPtr)0
+                                    && processInfo.hProcess
+                                        != (IntPtr)NativeMethods.INVALID_HANDLE_VALUE
+                                )
+                                    procSH.InitialSetHandle(processInfo.hProcess);
+                                if (
+                                    processInfo.hThread != (IntPtr)0
+                                    && processInfo.hThread
+                                        != (IntPtr)NativeMethods.INVALID_HANDLE_VALUE
+                                )
+                                    threadSH.InitialSetHandle(processInfo.hThread);
+                            }
+                            if (!retVal)
+                            {
+                                if (
+                                    errorCode == NativeMethods.ERROR_BAD_EXE_FORMAT
+                                    || errorCode == NativeMethods.ERROR_EXE_MACHINE_TYPE_MISMATCH
+                                )
+                                {
+                                    throw new Win32Exception(
+                                        errorCode,
+                                        SR.GetString(SR.InvalidApplication)
+                                    );
+                                }
+
+                                throw new Win32Exception(errorCode);
+                            }
                         }
-                        } finally {
-                        if( password != IntPtr.Zero) {
-                            Marshal.ZeroFreeCoTaskMemUnicode(password);
+                        finally
+                        {
+                            if (password != IntPtr.Zero)
+                            {
+                                Marshal.ZeroFreeCoTaskMemUnicode(password);
+                            }
                         }
                     }
-                    } else {
+                    else
+                    {
 #endif // !FEATURE_PAL
                     RuntimeHelpers.PrepareConstrainedRegions();
-                    try {} finally {
-                       retVal = NativeMethods.CreateProcess (
-                               null,               // we don't need this since all the info is in commandLine
-                               commandLine,        // pointer to the command line string
-                               null,               // pointer to process security attributes, we don't need to inheriat the handle
-                               null,               // pointer to thread security attributes
-                               true,               // handle inheritance flag
-                               creationFlags,      // creation flags
-                               environmentPtr,     // pointer to new environment block
-                               workingDirectory,   // pointer to current directory name
-                               startupInfo,        // pointer to STARTUPINFO
-                               processInfo         // pointer to PROCESS_INFORMATION
-                           );
-                       if (!retVal)                            
-                              errorCode = Marshal.GetLastWin32Error();
-                       if ( processInfo.hProcess!= (IntPtr)0 && processInfo.hProcess!= (IntPtr)NativeMethods.INVALID_HANDLE_VALUE)
-                           procSH.InitialSetHandle(processInfo.hProcess);  
-                       if ( processInfo.hThread != (IntPtr)0 && processInfo.hThread != (IntPtr)NativeMethods.INVALID_HANDLE_VALUE)
-                          threadSH.InitialSetHandle(processInfo.hThread);                    
+                    try { }
+                    finally
+                    {
+                        retVal = NativeMethods.CreateProcess(
+                            null, // we don't need this since all the info is in commandLine
+                            commandLine, // pointer to the command line string
+                            null, // pointer to process security attributes, we don't need to inheriat the handle
+                            null, // pointer to thread security attributes
+                            true, // handle inheritance flag
+                            creationFlags, // creation flags
+                            environmentPtr, // pointer to new environment block
+                            workingDirectory, // pointer to current directory name
+                            startupInfo, // pointer to STARTUPINFO
+                            processInfo // pointer to PROCESS_INFORMATION
+                        );
+                        if (!retVal)
+                            errorCode = Marshal.GetLastWin32Error();
+                        if (
+                            processInfo.hProcess != (IntPtr)0
+                            && processInfo.hProcess != (IntPtr)NativeMethods.INVALID_HANDLE_VALUE
+                        )
+                            procSH.InitialSetHandle(processInfo.hProcess);
+                        if (
+                            processInfo.hThread != (IntPtr)0
+                            && processInfo.hThread != (IntPtr)NativeMethods.INVALID_HANDLE_VALUE
+                        )
+                            threadSH.InitialSetHandle(processInfo.hThread);
                     }
-                    if (!retVal) {
-                            if (errorCode == NativeMethods.ERROR_BAD_EXE_FORMAT || errorCode == NativeMethods.ERROR_EXE_MACHINE_TYPE_MISMATCH) {
-                          throw new Win32Exception(errorCode, SR.GetString(SR.InvalidApplication));
-                       }
+                    if (!retVal)
+                    {
+                        if (
+                            errorCode == NativeMethods.ERROR_BAD_EXE_FORMAT
+                            || errorCode == NativeMethods.ERROR_EXE_MACHINE_TYPE_MISMATCH
+                        )
+                        {
+                            throw new Win32Exception(
+                                errorCode,
+                                SR.GetString(SR.InvalidApplication)
+                            );
+                        }
                         throw new Win32Exception(errorCode);
                     }
-#if !FEATURE_PAL                    
-                }
+#if !FEATURE_PAL
+                    }
 #endif
-                } finally {
-                // free environment block
-                if (environmentHandle.IsAllocated) {
-                    environmentHandle.Free();   
                 }
+                finally
+                {
+                    // free environment block
+                    if (environmentHandle.IsAllocated)
+                    {
+                        environmentHandle.Free();
+                    }
 
-                startupInfo.Dispose();
-            }
+                    startupInfo.Dispose();
+                }
             }
 
-            if (startInfo.RedirectStandardInput) {
-                standardInput = new StreamWriter(new FileStream(standardInputWritePipeHandle, FileAccess.Write, 4096, false), Console.InputEncoding, 4096);
+            if (startInfo.RedirectStandardInput)
+            {
+                standardInput = new StreamWriter(
+                    new FileStream(standardInputWritePipeHandle, FileAccess.Write, 4096, false),
+                    Console.InputEncoding,
+                    4096
+                );
                 standardInput.AutoFlush = true;
             }
-            if (startInfo.RedirectStandardOutput) {
-                Encoding enc = (startInfo.StandardOutputEncoding != null) ? startInfo.StandardOutputEncoding : Console.OutputEncoding;
-                standardOutput = new StreamReader(new FileStream(standardOutputReadPipeHandle, FileAccess.Read, 4096, false), enc, true, 4096);
+            if (startInfo.RedirectStandardOutput)
+            {
+                Encoding enc =
+                    (startInfo.StandardOutputEncoding != null)
+                        ? startInfo.StandardOutputEncoding
+                        : Console.OutputEncoding;
+                standardOutput = new StreamReader(
+                    new FileStream(standardOutputReadPipeHandle, FileAccess.Read, 4096, false),
+                    enc,
+                    true,
+                    4096
+                );
             }
-            if (startInfo.RedirectStandardError) {
-                Encoding enc = (startInfo.StandardErrorEncoding != null) ? startInfo.StandardErrorEncoding : Console.OutputEncoding;
-                standardError = new StreamReader(new FileStream(standardErrorReadPipeHandle, FileAccess.Read, 4096, false), enc, true, 4096);
+            if (startInfo.RedirectStandardError)
+            {
+                Encoding enc =
+                    (startInfo.StandardErrorEncoding != null)
+                        ? startInfo.StandardErrorEncoding
+                        : Console.OutputEncoding;
+                standardError = new StreamReader(
+                    new FileStream(standardErrorReadPipeHandle, FileAccess.Read, 4096, false),
+                    enc,
+                    true,
+                    4096
+                );
             }
-            
+
             bool ret = false;
-            if (!procSH.IsInvalid) {
+            if (!procSH.IsInvalid)
+            {
                 SetProcessHandle(procSH);
                 SetProcessId(processInfo.dwProcessId);
                 threadSH.Close();
@@ -2307,7 +3104,6 @@ namespace System.Diagnostics {
             }
 
             return ret;
-
         }
 #endif // !MONO
 
@@ -2316,42 +3112,59 @@ namespace System.Diagnostics {
 #if !MONO
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        private bool StartWithShellExecuteEx(ProcessStartInfo startInfo) {                        
-            //Cannot start a new process and store its handle if the object has been disposed, since finalization has been suppressed.            
+        private bool StartWithShellExecuteEx(ProcessStartInfo startInfo)
+        {
+            //Cannot start a new process and store its handle if the object has been disposed, since finalization has been suppressed.
             if (this.disposed)
                 throw new ObjectDisposedException(GetType().Name);
 
-            if( !String.IsNullOrEmpty(startInfo.UserName) || (startInfo.Password != null) ) {
-                throw new InvalidOperationException(SR.GetString(SR.CantStartAsUser));                
+            if (!String.IsNullOrEmpty(startInfo.UserName) || (startInfo.Password != null))
+            {
+                throw new InvalidOperationException(SR.GetString(SR.CantStartAsUser));
             }
-            
-            if (startInfo.RedirectStandardInput || startInfo.RedirectStandardOutput || startInfo.RedirectStandardError) {
+
+            if (
+                startInfo.RedirectStandardInput
+                || startInfo.RedirectStandardOutput
+                || startInfo.RedirectStandardError
+            )
+            {
                 throw new InvalidOperationException(SR.GetString(SR.CantRedirectStreams));
             }
 
-            if (startInfo.StandardErrorEncoding != null) {
-                throw new InvalidOperationException(SR.GetString(SR.StandardErrorEncodingNotAllowed));
+            if (startInfo.StandardErrorEncoding != null)
+            {
+                throw new InvalidOperationException(
+                    SR.GetString(SR.StandardErrorEncodingNotAllowed)
+                );
             }
 
-            if (startInfo.StandardOutputEncoding != null) {
-                throw new InvalidOperationException(SR.GetString(SR.StandardOutputEncodingNotAllowed));
+            if (startInfo.StandardOutputEncoding != null)
+            {
+                throw new InvalidOperationException(
+                    SR.GetString(SR.StandardOutputEncodingNotAllowed)
+                );
             }
 
             // can't set env vars with ShellExecuteEx...
-            if (startInfo.environmentVariables != null) {
+            if (startInfo.environmentVariables != null)
+            {
                 throw new InvalidOperationException(SR.GetString(SR.CantUseEnvVars));
             }
 
             NativeMethods.ShellExecuteInfo shellExecuteInfo = new NativeMethods.ShellExecuteInfo();
             shellExecuteInfo.fMask = NativeMethods.SEE_MASK_NOCLOSEPROCESS;
-            if (startInfo.ErrorDialog) {
+            if (startInfo.ErrorDialog)
+            {
                 shellExecuteInfo.hwnd = startInfo.ErrorDialogParentHandle;
             }
-            else {
+            else
+            {
                 shellExecuteInfo.fMask |= NativeMethods.SEE_MASK_FLAG_NO_UI;
             }
 
-            switch (startInfo.WindowStyle) {
+            switch (startInfo.WindowStyle)
+            {
                 case ProcessWindowStyle.Hidden:
                     shellExecuteInfo.nShow = NativeMethods.SW_HIDE;
                     break;
@@ -2366,84 +3179,129 @@ namespace System.Diagnostics {
                     break;
             }
 
-            
-            try {
+            try
+            {
                 if (startInfo.FileName.Length != 0)
                     shellExecuteInfo.lpFile = Marshal.StringToHGlobalAuto(startInfo.FileName);
                 if (startInfo.Verb.Length != 0)
                     shellExecuteInfo.lpVerb = Marshal.StringToHGlobalAuto(startInfo.Verb);
                 if (startInfo.Arguments.Length != 0)
-                    shellExecuteInfo.lpParameters = Marshal.StringToHGlobalAuto(startInfo.Arguments);
+                    shellExecuteInfo.lpParameters = Marshal.StringToHGlobalAuto(
+                        startInfo.Arguments
+                    );
                 if (startInfo.WorkingDirectory.Length != 0)
-                    shellExecuteInfo.lpDirectory = Marshal.StringToHGlobalAuto(startInfo.WorkingDirectory);
+                    shellExecuteInfo.lpDirectory = Marshal.StringToHGlobalAuto(
+                        startInfo.WorkingDirectory
+                    );
 
                 shellExecuteInfo.fMask |= NativeMethods.SEE_MASK_FLAG_DDEWAIT;
 
                 ShellExecuteHelper executeHelper = new ShellExecuteHelper(shellExecuteInfo);
-                if (!executeHelper.ShellExecuteOnSTAThread()) {
+                if (!executeHelper.ShellExecuteOnSTAThread())
+                {
                     int error = executeHelper.ErrorCode;
-                    if (error == 0) {
-                        switch ((long)shellExecuteInfo.hInstApp) {
-                            case NativeMethods.SE_ERR_FNF: error = NativeMethods.ERROR_FILE_NOT_FOUND; break;
-                            case NativeMethods.SE_ERR_PNF: error = NativeMethods.ERROR_PATH_NOT_FOUND; break;
-                            case NativeMethods.SE_ERR_ACCESSDENIED: error = NativeMethods.ERROR_ACCESS_DENIED; break;
-                            case NativeMethods.SE_ERR_OOM: error = NativeMethods.ERROR_NOT_ENOUGH_MEMORY; break;
+                    if (error == 0)
+                    {
+                        switch ((long)shellExecuteInfo.hInstApp)
+                        {
+                            case NativeMethods.SE_ERR_FNF:
+                                error = NativeMethods.ERROR_FILE_NOT_FOUND;
+                                break;
+                            case NativeMethods.SE_ERR_PNF:
+                                error = NativeMethods.ERROR_PATH_NOT_FOUND;
+                                break;
+                            case NativeMethods.SE_ERR_ACCESSDENIED:
+                                error = NativeMethods.ERROR_ACCESS_DENIED;
+                                break;
+                            case NativeMethods.SE_ERR_OOM:
+                                error = NativeMethods.ERROR_NOT_ENOUGH_MEMORY;
+                                break;
                             case NativeMethods.SE_ERR_DDEFAIL:
                             case NativeMethods.SE_ERR_DDEBUSY:
-                            case NativeMethods.SE_ERR_DDETIMEOUT: error = NativeMethods.ERROR_DDE_FAIL; break;
-                            case NativeMethods.SE_ERR_SHARE: error = NativeMethods.ERROR_SHARING_VIOLATION; break;
-                            case NativeMethods.SE_ERR_NOASSOC: error = NativeMethods.ERROR_NO_ASSOCIATION; break;
-                            case NativeMethods.SE_ERR_DLLNOTFOUND: error = NativeMethods.ERROR_DLL_NOT_FOUND; break;
-                            default: error = (int)shellExecuteInfo.hInstApp; break;
+                            case NativeMethods.SE_ERR_DDETIMEOUT:
+                                error = NativeMethods.ERROR_DDE_FAIL;
+                                break;
+                            case NativeMethods.SE_ERR_SHARE:
+                                error = NativeMethods.ERROR_SHARING_VIOLATION;
+                                break;
+                            case NativeMethods.SE_ERR_NOASSOC:
+                                error = NativeMethods.ERROR_NO_ASSOCIATION;
+                                break;
+                            case NativeMethods.SE_ERR_DLLNOTFOUND:
+                                error = NativeMethods.ERROR_DLL_NOT_FOUND;
+                                break;
+                            default:
+                                error = (int)shellExecuteInfo.hInstApp;
+                                break;
                         }
                     }
-                    if( error == NativeMethods.ERROR_BAD_EXE_FORMAT || error == NativeMethods.ERROR_EXE_MACHINE_TYPE_MISMATCH) {
+                    if (
+                        error == NativeMethods.ERROR_BAD_EXE_FORMAT
+                        || error == NativeMethods.ERROR_EXE_MACHINE_TYPE_MISMATCH
+                    )
+                    {
                         throw new Win32Exception(error, SR.GetString(SR.InvalidApplication));
                     }
                     throw new Win32Exception(error);
                 }
-            
             }
-            finally {                
-                if (shellExecuteInfo.lpFile != (IntPtr)0) Marshal.FreeHGlobal(shellExecuteInfo.lpFile);
-                if (shellExecuteInfo.lpVerb != (IntPtr)0) Marshal.FreeHGlobal(shellExecuteInfo.lpVerb);
-                if (shellExecuteInfo.lpParameters != (IntPtr)0) Marshal.FreeHGlobal(shellExecuteInfo.lpParameters);
-                if (shellExecuteInfo.lpDirectory != (IntPtr)0) Marshal.FreeHGlobal(shellExecuteInfo.lpDirectory);
+            finally
+            {
+                if (shellExecuteInfo.lpFile != (IntPtr)0)
+                    Marshal.FreeHGlobal(shellExecuteInfo.lpFile);
+                if (shellExecuteInfo.lpVerb != (IntPtr)0)
+                    Marshal.FreeHGlobal(shellExecuteInfo.lpVerb);
+                if (shellExecuteInfo.lpParameters != (IntPtr)0)
+                    Marshal.FreeHGlobal(shellExecuteInfo.lpParameters);
+                if (shellExecuteInfo.lpDirectory != (IntPtr)0)
+                    Marshal.FreeHGlobal(shellExecuteInfo.lpDirectory);
             }
 
-            if (shellExecuteInfo.hProcess != (IntPtr)0) {                
+            if (shellExecuteInfo.hProcess != (IntPtr)0)
+            {
                 SafeProcessHandle handle = new SafeProcessHandle(shellExecuteInfo.hProcess);
                 SetProcessHandle(handle);
                 return true;
             }
-            
-            return false;            
+
+            return false;
         }
 #endif
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static Process Start( string fileName, string userName, SecureString password, string domain ) {
-            ProcessStartInfo startInfo = new ProcessStartInfo(fileName);            
+        public static Process Start(
+            string fileName,
+            string userName,
+            SecureString password,
+            string domain
+        )
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo(fileName);
             startInfo.UserName = userName;
             startInfo.Password = password;
             startInfo.Domain = domain;
             startInfo.UseShellExecute = false;
             return Start(startInfo);
         }
-        
+
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static Process Start( string fileName, string arguments, string userName, SecureString password, string domain ) {
-            ProcessStartInfo startInfo = new ProcessStartInfo(fileName, arguments);                        
+        public static Process Start(
+            string fileName,
+            string arguments,
+            string userName,
+            SecureString password,
+            string domain
+        )
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo(fileName, arguments);
             startInfo.UserName = userName;
             startInfo.Password = password;
             startInfo.Domain = domain;
-            startInfo.UseShellExecute = false;            
-            return Start(startInfo);            
+            startInfo.UseShellExecute = false;
+            return Start(startInfo);
         }
-
-
 #endif // !FEATURE_PAL
 
         /// <devdoc>
@@ -2455,7 +3313,8 @@ namespace System.Diagnostics {
         /// </devdoc>
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static Process Start(string fileName) {
+        public static Process Start(string fileName)
+        {
             return Start(new ProcessStartInfo(fileName));
         }
 
@@ -2469,7 +3328,8 @@ namespace System.Diagnostics {
         /// </devdoc>
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static Process Start(string fileName, string arguments) {
+        public static Process Start(string fileName, string arguments)
+        {
             return Start(new ProcessStartInfo(fileName, arguments));
         }
 
@@ -2483,16 +3343,18 @@ namespace System.Diagnostics {
         /// </devdoc>
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static Process Start(ProcessStartInfo startInfo) {
+        public static Process Start(ProcessStartInfo startInfo)
+        {
             Process process = new Process();
-            if (startInfo == null) throw new ArgumentNullException("startInfo");
+            if (startInfo == null)
+                throw new ArgumentNullException("startInfo");
             process.StartInfo = startInfo;
-            if (process.Start()) {
+            if (process.Start())
+            {
                 return process;
             }
             return null;
         }
-
 #endif // MONO_FEATURE_PROCESS_START
 
         /// <devdoc>
@@ -2503,14 +3365,17 @@ namespace System.Diagnostics {
         /// </devdoc>
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public void Kill() {
+        public void Kill()
+        {
             SafeProcessHandle handle = null;
-            try {
+            try
+            {
                 handle = GetProcessHandle(NativeMethods.PROCESS_TERMINATE);
                 if (!NativeMethods.TerminateProcess(handle, -1))
                     throw new Win32Exception();
             }
-            finally {
+            finally
+            {
                 ReleaseProcessHandle(handle);
             }
         }
@@ -2519,10 +3384,14 @@ namespace System.Diagnostics {
         ///     Make sure we are not watching for process exit.
         /// </devdoc>
         /// <internalonly/>
-        void StopWatchingForExit() {
-            if (watchingForExit) {
-                lock (this) {
-                    if (watchingForExit) {
+        void StopWatchingForExit()
+        {
+            if (watchingForExit)
+            {
+                lock (this)
+                {
+                    if (watchingForExit)
+                    {
                         watchingForExit = false;
                         registeredWaitHandle.Unregister(null);
                         waitHandle.Close();
@@ -2533,29 +3402,37 @@ namespace System.Diagnostics {
             }
         }
 
-        public override string ToString() {
-#if !FEATURE_PAL        
-            if (Associated) {
-                string processName  =  String.Empty;  
+        public override string ToString()
+        {
+#if !FEATURE_PAL
+            if (Associated)
+            {
+                string processName = String.Empty;
                 //
                 // On windows 9x, we can't map a handle to an id.
                 // So ProcessName will throw. We shouldn't throw in Process.ToString though.
                 // Process.GetProcesses should be used to get all the processes on the machine.
                 // The processes returned from it will have a nice name.
                 //
-                try {
+                try
+                {
                     processName = this.ProcessName;
-                }    
-                catch(PlatformNotSupportedException) {
                 }
-                if( processName.Length != 0) { 
-                    return String.Format(CultureInfo.CurrentCulture, "{0} ({1})", base.ToString(), processName);
+                catch (PlatformNotSupportedException) { }
+                if (processName.Length != 0)
+                {
+                    return String.Format(
+                        CultureInfo.CurrentCulture,
+                        "{0} ({1})",
+                        base.ToString(),
+                        processName
+                    );
                 }
                 return base.ToString();
-            }    
+            }
             else
-#endif // !FEATURE_PAL                
-                return base.ToString();
+#endif // !FEATURE_PAL
+            return base.ToString();
         }
 
         /// <devdoc>
@@ -2563,49 +3440,59 @@ namespace System.Diagnostics {
         ///       Instructs the <see cref='System.Diagnostics.Process'/> component to wait the specified number of milliseconds for the associated process to exit.
         ///    </para>
         /// </devdoc>
-        public bool WaitForExit(int milliseconds) {
+        public bool WaitForExit(int milliseconds)
+        {
             SafeProcessHandle handle = null;
-	     bool exited;
+            bool exited;
             ProcessWaitHandle processWaitHandle = null;
-            try {
-                handle = GetProcessHandle(NativeMethods.SYNCHRONIZE, false);                
-                if (handle.IsInvalid) {
+            try
+            {
+                handle = GetProcessHandle(NativeMethods.SYNCHRONIZE, false);
+                if (handle.IsInvalid)
+                {
                     exited = true;
                 }
-                else {
+                else
+                {
                     processWaitHandle = new ProcessWaitHandle(handle);
-                    if( processWaitHandle.WaitOne(milliseconds, false)) {
+                    if (processWaitHandle.WaitOne(milliseconds, false))
+                    {
                         exited = true;
                         signaled = true;
                     }
-                    else {
+                    else
+                    {
                         exited = false;
                         signaled = false;
                     }
                 }
 
                 // If we have a hard timeout, we cannot wait for the streams
-                if( output != null && milliseconds == -1) {
+                if (output != null && milliseconds == -1)
+                {
                     output.WaitUtilEOF();
                 }
 
-                if( error != null && milliseconds == -1) {
+                if (error != null && milliseconds == -1)
+                {
                     error.WaitUtilEOF();
                 }
             }
-            finally {
-                if( processWaitHandle != null) {
+            finally
+            {
+                if (processWaitHandle != null)
+                {
                     processWaitHandle.Close();
                 }
 
                 ReleaseProcessHandle(handle);
-
             }
-            
-            if (exited && watchForExit) {
+
+            if (exited && watchForExit)
+            {
                 RaiseOnExited();
             }
-			
+
             return exited;
         }
 
@@ -2615,11 +3502,12 @@ namespace System.Diagnostics {
         ///       indefinitely for the associated process to exit.
         ///    </para>
         /// </devdoc>
-        public void WaitForExit() {
+        public void WaitForExit()
+        {
             WaitForExit(-1);
         }
 
-#if !FEATURE_PAL        
+#if !FEATURE_PAL
 
         /// <devdoc>
         ///    <para>
@@ -2630,13 +3518,18 @@ namespace System.Diagnostics {
         ///       therefore a message loop.
         ///    </para>
         /// </devdoc>
-        public bool WaitForInputIdle(int milliseconds) {
+        public bool WaitForInputIdle(int milliseconds)
+        {
             SafeProcessHandle handle = null;
             bool idle;
-            try {
-                handle = GetProcessHandle(NativeMethods.SYNCHRONIZE | NativeMethods.PROCESS_QUERY_INFORMATION);
+            try
+            {
+                handle = GetProcessHandle(
+                    NativeMethods.SYNCHRONIZE | NativeMethods.PROCESS_QUERY_INFORMATION
+                );
                 int ret = NativeMethods.WaitForInputIdle(handle, milliseconds);
-                switch (ret) {
+                switch (ret)
+                {
                     case NativeMethods.WAIT_OBJECT_0:
                         idle = true;
                         break;
@@ -2648,7 +3541,8 @@ namespace System.Diagnostics {
                         throw new InvalidOperationException(SR.GetString(SR.InputIdleUnkownError));
                 }
             }
-            finally {
+            finally
+            {
                 ReleaseProcessHandle(handle);
             }
             return idle;
@@ -2661,11 +3555,12 @@ namespace System.Diagnostics {
         ///       is only applicable for processes with a user interface, therefore a message loop.
         ///    </para>
         /// </devdoc>
-        public bool WaitForInputIdle() {
+        public bool WaitForInputIdle()
+        {
             return WaitForInputIdle(Int32.MaxValue);
         }
 
-#endif // !FEATURE_PAL        
+#endif // !FEATURE_PAL
 
 #if MONO_FEATURE_PROCESS_START
         // Support for working asynchronously with streams
@@ -2677,32 +3572,40 @@ namespace System.Diagnostics {
         /// then the remaining information is returned. The user can add an event handler to OutputDataReceived.
         /// </para>
         /// </devdoc>
-        [System.Runtime.InteropServices.ComVisible(false)]        
-        public void BeginOutputReadLine() {
-
-            if(outputStreamReadMode == StreamReadMode.undefined) {
+        [System.Runtime.InteropServices.ComVisible(false)]
+        public void BeginOutputReadLine()
+        {
+            if (outputStreamReadMode == StreamReadMode.undefined)
+            {
                 outputStreamReadMode = StreamReadMode.asyncMode;
             }
-            else if (outputStreamReadMode != StreamReadMode.asyncMode) {
-                throw new InvalidOperationException(SR.GetString(SR.CantMixSyncAsyncOperation));                    
+            else if (outputStreamReadMode != StreamReadMode.asyncMode)
+            {
+                throw new InvalidOperationException(SR.GetString(SR.CantMixSyncAsyncOperation));
             }
-            
+
             if (pendingOutputRead)
                 throw new InvalidOperationException(SR.GetString(SR.PendingAsyncOperation));
 
             pendingOutputRead = true;
             // We can't detect if there's a pending sychronous read, tream also doesn't.
-            if (output == null) {
-                if (standardOutput == null) {
+            if (output == null)
+            {
+                if (standardOutput == null)
+                {
                     throw new InvalidOperationException(SR.GetString(SR.CantGetStandardOut));
                 }
 
                 Stream s = standardOutput.BaseStream;
-                output = new AsyncStreamReader(this, s, new UserCallBack(this.OutputReadNotifyUser), standardOutput.CurrentEncoding);
+                output = new AsyncStreamReader(
+                    this,
+                    s,
+                    new UserCallBack(this.OutputReadNotifyUser),
+                    standardOutput.CurrentEncoding
+                );
             }
             output.BeginReadLine();
         }
-
 
         /// <devdoc>
         /// <para>
@@ -2712,29 +3615,39 @@ namespace System.Diagnostics {
         /// then the remaining information is returned. The user can add an event handler to ErrorDataReceived.
         /// </para>
         /// </devdoc>
-        [System.Runtime.InteropServices.ComVisible(false)]        
-        public void BeginErrorReadLine() {
-
-            if(errorStreamReadMode == StreamReadMode.undefined) {
+        [System.Runtime.InteropServices.ComVisible(false)]
+        public void BeginErrorReadLine()
+        {
+            if (errorStreamReadMode == StreamReadMode.undefined)
+            {
                 errorStreamReadMode = StreamReadMode.asyncMode;
             }
-            else if (errorStreamReadMode != StreamReadMode.asyncMode) {
-                throw new InvalidOperationException(SR.GetString(SR.CantMixSyncAsyncOperation));                    
+            else if (errorStreamReadMode != StreamReadMode.asyncMode)
+            {
+                throw new InvalidOperationException(SR.GetString(SR.CantMixSyncAsyncOperation));
             }
-            
-            if (pendingErrorRead) {
+
+            if (pendingErrorRead)
+            {
                 throw new InvalidOperationException(SR.GetString(SR.PendingAsyncOperation));
             }
 
             pendingErrorRead = true;
             // We can't detect if there's a pending sychronous read, stream also doesn't.
-            if (error == null) {
-                if (standardError == null) {
+            if (error == null)
+            {
+                if (standardError == null)
+                {
                     throw new InvalidOperationException(SR.GetString(SR.CantGetStandardError));
                 }
 
                 Stream s = standardError.BaseStream;
-                error = new AsyncStreamReader(this, s, new UserCallBack(this.ErrorReadNotifyUser), standardError.CurrentEncoding);
+                error = new AsyncStreamReader(
+                    this,
+                    s,
+                    new UserCallBack(this.ErrorReadNotifyUser),
+                    standardError.CurrentEncoding
+                );
             }
             error.BeginReadLine();
         }
@@ -2746,11 +3659,14 @@ namespace System.Diagnostics {
         /// </para>
         /// </devdoc>
         [System.Runtime.InteropServices.ComVisible(false)]
-        public void CancelOutputRead() {        
-            if (output != null) {
+        public void CancelOutputRead()
+        {
+            if (output != null)
+            {
                 output.CancelOperation();
             }
-            else {
+            else
+            {
                 throw new InvalidOperationException(SR.GetString(SR.NoAsyncOperation));
             }
 
@@ -2763,42 +3679,53 @@ namespace System.Diagnostics {
         /// specified by BeginErrorReadLine().
         /// </para>
         /// </devdoc>
-        [System.Runtime.InteropServices.ComVisible(false)]        
-        public void CancelErrorRead() {
-            if (error != null) {
+        [System.Runtime.InteropServices.ComVisible(false)]
+        public void CancelErrorRead()
+        {
+            if (error != null)
+            {
                 error.CancelOperation();
             }
-            else {
+            else
+            {
                 throw new InvalidOperationException(SR.GetString(SR.NoAsyncOperation));
             }
 
             pendingErrorRead = false;
         }
 
-        internal void OutputReadNotifyUser(String data) {
+        internal void OutputReadNotifyUser(String data)
+        {
             // To avoid ---- between remove handler and raising the event
             DataReceivedEventHandler outputDataReceived = OutputDataReceived;
-            if (outputDataReceived != null) {
+            if (outputDataReceived != null)
+            {
                 DataReceivedEventArgs e = new DataReceivedEventArgs(data);
-                if (SynchronizingObject != null && SynchronizingObject.InvokeRequired) {
-                    SynchronizingObject.Invoke(outputDataReceived, new object[] {this, e});
+                if (SynchronizingObject != null && SynchronizingObject.InvokeRequired)
+                {
+                    SynchronizingObject.Invoke(outputDataReceived, new object[] { this, e });
                 }
-                else {
-                    outputDataReceived(this,e);  // Call back to user informing data is available.
+                else
+                {
+                    outputDataReceived(this, e); // Call back to user informing data is available.
                 }
             }
         }
 
-        internal void ErrorReadNotifyUser(String data) {
+        internal void ErrorReadNotifyUser(String data)
+        {
             // To avoid ---- between remove handler and raising the event
             DataReceivedEventHandler errorDataReceived = ErrorDataReceived;
-            if (errorDataReceived != null) {
+            if (errorDataReceived != null)
+            {
                 DataReceivedEventArgs e = new DataReceivedEventArgs(data);
-                if (SynchronizingObject != null && SynchronizingObject.InvokeRequired) {
-                    SynchronizingObject.Invoke(errorDataReceived, new object[] {this, e});
+                if (SynchronizingObject != null && SynchronizingObject.InvokeRequired)
+                {
+                    SynchronizingObject.Invoke(errorDataReceived, new object[] { this, e });
                 }
-                else {
-                    errorDataReceived(this,e); // Call back to user informing data is available.
+                else
+                {
+                    errorDataReceived(this, e); // Call back to user informing data is available.
                 }
             }
         }
@@ -2808,7 +3735,8 @@ namespace System.Diagnostics {
         ///     A desired internal state.
         /// </summary>
         /// <internalonly/>
-        enum State {
+        enum State
+        {
             HaveId = 0x1,
             IsLocal = 0x2,
             IsNt = 0x4,
@@ -2816,7 +3744,7 @@ namespace System.Diagnostics {
             Exited = 0x10,
             Associated = 0x20,
             IsWin2k = 0x40,
-            HaveNtProcessInfo = HaveProcessInfo | IsNt
+            HaveNtProcessInfo = HaveProcessInfo | IsNt,
         }
     }
 
@@ -2827,7 +3755,8 @@ namespace System.Diagnostics {
     ///     when Refresh is called on the component.
     /// </devdoc>
     /// <internalonly/>
-    internal class ProcessInfo {
+    internal class ProcessInfo
+    {
 #if !MONO
         public ArrayList threadInfoList = new ArrayList();
         public int basePriority;
@@ -2844,7 +3773,7 @@ namespace System.Diagnostics {
         public long pageFileBytes;
         public long privateBytes;
         public int mainModuleId; // used only for win9x - id is only for use with CreateToolHelp32
-        public int sessionId; 
+        public int sessionId;
 #endif
     }
 
@@ -2856,14 +3785,15 @@ namespace System.Diagnostics {
     ///     can throw it away all at once when Refresh is called on the component.
     /// </devdoc>
     /// <internalonly/>
-    internal class ThreadInfo {
+    internal class ThreadInfo
+    {
         public int threadId;
         public int processId;
         public int basePriority;
         public int currentPriority;
         public IntPtr startAddress;
         public ThreadState threadState;
-#if !FEATURE_PAL        
+#if !FEATURE_PAL
         public ThreadWaitReason threadWaitReason;
 #endif // !FEATURE_PAL
     }
@@ -2875,7 +3805,8 @@ namespace System.Diagnostics {
     ///     can throw it away all at once when Refresh is called on the component.
     /// </devdoc>
     /// <internalonly/>
-    internal class ModuleInfo {
+    internal class ModuleInfo
+    {
         public string baseName;
         public string fileName;
         public IntPtr baseOfDll;
@@ -2885,17 +3816,19 @@ namespace System.Diagnostics {
     }
 #endif
 
-    internal static class EnvironmentBlock {
-        public static byte[] ToByteArray(StringDictionary sd, bool unicode) {
+    internal static class EnvironmentBlock
+    {
+        public static byte[] ToByteArray(StringDictionary sd, bool unicode)
+        {
             // get the keys
             string[] keys = new string[sd.Count];
             byte[] envBlock = null;
             sd.Keys.CopyTo(keys, 0);
-            
+
             // get the values
             string[] values = new string[sd.Count];
             sd.Values.CopyTo(values, 0);
-            
+
             // sort both by the keys
             // Windows 2000 requires the environment block to be sorted by the key
             // It will first converting the case the strings and do ordinal comparison.
@@ -2903,7 +3836,8 @@ namespace System.Diagnostics {
 
             // create a list of null terminated "key=val" strings
             StringBuilder stringBuff = new StringBuilder();
-            for (int i = 0; i < sd.Count; ++ i) {
+            for (int i = 0; i < sd.Count; ++i)
+            {
                 stringBuff.Append(keys[i]);
                 stringBuff.Append('=');
                 stringBuff.Append(values[i]);
@@ -2911,111 +3845,121 @@ namespace System.Diagnostics {
             }
             // an extra null at the end indicates end of list.
             stringBuff.Append('\0');
-                        
-            if( unicode) {
-                envBlock = Encoding.Unicode.GetBytes(stringBuff.ToString());                        
+
+            if (unicode)
+            {
+                envBlock = Encoding.Unicode.GetBytes(stringBuff.ToString());
             }
-            else {
+            else
+            {
                 envBlock = Encoding.Default.GetBytes(stringBuff.ToString());
 
                 if (envBlock.Length > UInt16.MaxValue)
-                    throw new InvalidOperationException(SR.GetString(SR.EnvironmentBlockTooLong, envBlock.Length));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.EnvironmentBlockTooLong, envBlock.Length)
+                    );
             }
 
             return envBlock;
-        }        
+        }
     }
 
-    internal class OrdinalCaseInsensitiveComparer : IComparer {
-        internal static readonly OrdinalCaseInsensitiveComparer Default = new OrdinalCaseInsensitiveComparer();
-        
-        public int Compare(Object a, Object b) {
+    internal class OrdinalCaseInsensitiveComparer : IComparer
+    {
+        internal static readonly OrdinalCaseInsensitiveComparer Default =
+            new OrdinalCaseInsensitiveComparer();
+
+        public int Compare(Object a, Object b)
+        {
             String sa = a as String;
             String sb = b as String;
-            if (sa != null && sb != null) {
-                return String.Compare(sa, sb, StringComparison.OrdinalIgnoreCase); 
+            if (sa != null && sb != null)
+            {
+                return String.Compare(sa, sb, StringComparison.OrdinalIgnoreCase);
             }
-            return Comparer.Default.Compare(a,b);
+            return Comparer.Default.Compare(a, b);
         }
     }
 
-    internal class ProcessThreadTimes {
+    internal class ProcessThreadTimes
+    {
         internal long create;
-        internal long exit; 
-        internal long kernel; 
+        internal long exit;
+        internal long kernel;
         internal long user;
 
-        public DateTime StartTime {   
-            get {             
-                return DateTime.FromFileTime(create);
-            }
+        public DateTime StartTime
+        {
+            get { return DateTime.FromFileTime(create); }
         }
 
-        public DateTime ExitTime {
-            get {
-                return DateTime.FromFileTime(exit);
-            }
+        public DateTime ExitTime
+        {
+            get { return DateTime.FromFileTime(exit); }
         }
 
-        public TimeSpan PrivilegedProcessorTime {
-            get {
-                return new TimeSpan(kernel);
-            }
+        public TimeSpan PrivilegedProcessorTime
+        {
+            get { return new TimeSpan(kernel); }
         }
 
-        public TimeSpan UserProcessorTime {
-            get {
-                return new TimeSpan(user);
-            }
+        public TimeSpan UserProcessorTime
+        {
+            get { return new TimeSpan(user); }
         }
-        
-        public TimeSpan TotalProcessorTime {
-            get {
-                return new TimeSpan(user + kernel);
-            }
+
+        public TimeSpan TotalProcessorTime
+        {
+            get { return new TimeSpan(user + kernel); }
         }
     }
 
 #if !MONO
-    internal class ShellExecuteHelper {
+    internal class ShellExecuteHelper
+    {
         private NativeMethods.ShellExecuteInfo _executeInfo;
         private int _errorCode;
         private bool _succeeded;
-        
-        public ShellExecuteHelper(NativeMethods.ShellExecuteInfo executeInfo) {
-            _executeInfo = executeInfo;            
+
+        public ShellExecuteHelper(NativeMethods.ShellExecuteInfo executeInfo)
+        {
+            _executeInfo = executeInfo;
         }
 
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        public void ShellExecuteFunction()    {
-            if (!(_succeeded = NativeMethods.ShellExecuteEx(_executeInfo))) {
+        public void ShellExecuteFunction()
+        {
+            if (!(_succeeded = NativeMethods.ShellExecuteEx(_executeInfo)))
+            {
                 _errorCode = Marshal.GetLastWin32Error();
             }
         }
 
-        public bool ShellExecuteOnSTAThread() {
+        public bool ShellExecuteOnSTAThread()
+        {
             //
             // SHELL API ShellExecute() requires STA in order to work correctly.
             // If current thread is not a STA thread, we need to call ShellExecute on a new thread.
             //
-            if( Thread.CurrentThread.GetApartmentState() != ApartmentState.STA) {
+            if (Thread.CurrentThread.GetApartmentState() != ApartmentState.STA)
+            {
                 ThreadStart threadStart = new ThreadStart(this.ShellExecuteFunction);
                 Thread executionThread = new Thread(threadStart);
-                executionThread.SetApartmentState(ApartmentState.STA);    
+                executionThread.SetApartmentState(ApartmentState.STA);
                 executionThread.Start();
                 executionThread.Join();
-            }    
-            else {
+            }
+            else
+            {
                 ShellExecuteFunction();
             }
             return _succeeded;
-        }        
+        }
 
-        public int ErrorCode {
-            get { 
-                return _errorCode; 
-            }
+        public int ErrorCode
+        {
+            get { return _errorCode; }
         }
     }
 #endif

@@ -10,9 +10,8 @@ namespace System.Xml
     // Represents a collection of attributes that can be accessed by name or index.
     public sealed class XmlAttributeCollection : XmlNamedNodeMap, ICollection
     {
-        internal XmlAttributeCollection(XmlNode parent) : base(parent)
-        {
-        }
+        internal XmlAttributeCollection(XmlNode parent)
+            : base(parent) { }
 
         // Gets the attribute with the specified index.
         [System.Runtime.CompilerServices.IndexerName("ItemOf")]
@@ -43,8 +42,7 @@ namespace System.Xml
                 {
                     XmlAttribute node = (XmlAttribute)nodes[i];
 
-                    if (hash == node.LocalNameHash
-                        && name == node.Name)
+                    if (hash == node.LocalNameHash && name == node.Name)
                     {
                         return node;
                     }
@@ -66,9 +64,11 @@ namespace System.Xml
                 {
                     XmlAttribute node = (XmlAttribute)nodes[i];
 
-                    if (hash == node.LocalNameHash
+                    if (
+                        hash == node.LocalNameHash
                         && localName == node.LocalName
-                        && namespaceURI == node.NamespaceURI)
+                        && namespaceURI == node.NamespaceURI
+                    )
                     {
                         return node;
                     }
@@ -84,9 +84,11 @@ namespace System.Xml
             {
                 XmlAttribute tmp = (XmlAttribute)nodes[i];
 
-                if (tmp.LocalNameHash == node.LocalNameHash
+                if (
+                    tmp.LocalNameHash == node.LocalNameHash
                     && tmp.Name == node.Name
-                    && tmp.NamespaceURI == node.NamespaceURI)
+                    && tmp.NamespaceURI == node.NamespaceURI
+                )
                 {
                     return i;
                 }
@@ -100,9 +102,11 @@ namespace System.Xml
             for (int i = 0; i < nodes.Count; i++)
             {
                 XmlAttribute tmp = (XmlAttribute)nodes[i];
-                if (tmp.LocalNameHash == node.LocalNameHash
+                if (
+                    tmp.LocalNameHash == node.LocalNameHash
                     && tmp.LocalName == node.LocalName
-                    && tmp.NamespaceURI == node.NamespaceURI)
+                    && tmp.NamespaceURI == node.NamespaceURI
+                )
                 {
                     return i;
                 }
@@ -319,7 +323,12 @@ namespace System.Xml
             Debug.Assert(retNode is XmlAttribute);
             RemoveParentFromElementIdAttrMap((XmlAttribute)retNode);
             // after remove the attribute, we need to check if a default attribute node should be created and inserted into the tree
-            XmlAttribute? defattr = parent.OwnerDocument!.GetDefaultAttribute((XmlElement)parent, retNode.Prefix, retNode.LocalName, retNode.NamespaceURI);
+            XmlAttribute? defattr = parent.OwnerDocument!.GetDefaultAttribute(
+                (XmlElement)parent,
+                retNode.Prefix,
+                retNode.LocalName,
+                retNode.NamespaceURI
+            );
             if (defattr != null)
                 InsertNodeAt(i, defattr);
 
@@ -341,7 +350,11 @@ namespace System.Xml
                     return;
 
                 XmlName? attrname = parent.OwnerDocument.GetIDInfoByElement(parentElem.XmlName);
-                if (attrname != null && attrname.Prefix == attr.XmlName.Prefix && attrname.LocalName == attr.XmlName.LocalName)
+                if (
+                    attrname != null
+                    && attrname.Prefix == attr.XmlName.Prefix
+                    && attrname.LocalName == attr.XmlName.LocalName
+                )
                 {
                     parent.OwnerDocument.AddElementWithId(attr.Value, parentElem); //add the element into the hashtable
                 }
@@ -358,7 +371,11 @@ namespace System.Xml
                     return;
 
                 XmlName? attrname = parent.OwnerDocument.GetIDInfoByElement(parentElem.XmlName);
-                if (attrname != null && attrname.Prefix == attr.XmlName.Prefix && attrname.LocalName == attr.XmlName.LocalName)
+                if (
+                    attrname != null
+                    && attrname.Prefix == attr.XmlName.Prefix
+                    && attrname.LocalName == attr.XmlName.LocalName
+                )
                 {
                     parent.OwnerDocument.RemoveElementWithId(attr.Value, parentElem); //remove the element from the hashtable
                 }
@@ -389,7 +406,11 @@ namespace System.Xml
             //The returned attrname if not null is the name with namespaceURI being set to string.Empty
             //Because DTD doesn't support namespaceURI so all comparisons are based on no namespaceURI (string.Empty);
             XmlName? attrname = doc.GetIDInfoByElement(parentElem.XmlName);
-            if (attrname != null && attrname.Prefix == attrPrefix && attrname.LocalName == attrLocalName)
+            if (
+                attrname != null
+                && attrname.Prefix == attrPrefix
+                && attrname.LocalName == attrLocalName
+            )
             {
                 return true;
             }

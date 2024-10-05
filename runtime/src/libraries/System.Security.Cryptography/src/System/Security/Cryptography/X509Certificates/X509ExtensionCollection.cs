@@ -15,9 +15,7 @@ namespace System.Security.Cryptography.X509Certificates
 {
     public sealed class X509ExtensionCollection : ICollection, IEnumerable<X509Extension>
     {
-        public X509ExtensionCollection()
-        {
-        }
+        public X509ExtensionCollection() { }
 
         public int Count
         {
@@ -41,7 +39,10 @@ namespace System.Security.Cryptography.X509Certificates
                 if (index < 0)
                     throw new InvalidOperationException(SR.InvalidOperation_EnumNotStarted);
                 if (index >= _list.Count)
-                    throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_IndexMustBeLess);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(index),
+                        SR.ArgumentOutOfRange_IndexMustBeLess
+                    );
 
                 return _list[index];
             }
@@ -54,7 +55,13 @@ namespace System.Security.Cryptography.X509Certificates
                 string? oidValue = new Oid(oid).Value;
                 foreach (X509Extension extension in _list)
                 {
-                    if (string.Equals(extension.Oid!.Value, oidValue, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        string.Equals(
+                            extension.Oid!.Value,
+                            oidValue,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                         return extension;
                 }
                 return null;
@@ -81,7 +88,10 @@ namespace System.Security.Cryptography.X509Certificates
             if (array.Rank != 1)
                 throw new ArgumentException(SR.Arg_RankMultiDimNotSupported);
             if (index < 0 || index >= array.Length)
-                throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_IndexMustBeLess);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.ArgumentOutOfRange_IndexMustBeLess
+                );
             if (index + Count > array.Length)
                 throw new ArgumentException(SR.Argument_InvalidOffLen);
 

@@ -64,14 +64,19 @@ namespace System.Linq.Expressions.Interpreter
             }
         }
 
-        public override string ToString() => "New " + _constructor.DeclaringType!.Name + "(" + _constructor + ")";
+        public override string ToString() =>
+            "New " + _constructor.DeclaringType!.Name + "(" + _constructor + ")";
     }
 
     internal sealed class ByRefNewInstruction : NewInstruction
     {
         private readonly ByRefUpdater[] _byrefArgs;
 
-        internal ByRefNewInstruction(ConstructorInfo target, int argumentCount, ByRefUpdater[] byrefArgs)
+        internal ByRefNewInstruction(
+            ConstructorInfo target,
+            int argumentCount,
+            ByRefUpdater[] byrefArgs
+        )
             : base(target, argumentCount)
         {
             _byrefArgs = byrefArgs;

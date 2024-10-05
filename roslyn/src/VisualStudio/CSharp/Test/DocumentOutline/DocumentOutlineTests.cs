@@ -51,19 +51,32 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
             }
             """;
 
-        public DocumentOutlineTests(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
-        {
-        }
+        public DocumentOutlineTests(ITestOutputHelper testOutputHelper)
+            : base(testOutputHelper) { }
 
-        private async Task<(DocumentOutlineTestMocks mocks, (ImmutableArray<DocumentSymbolData> DocumentSymbolData, ITextSnapshot OriginalSnapshot), ImmutableArray<DocumentSymbolDataViewModel> uiItems)>
-            InitializeMocksAndDataModelAndUIItems(string testCode)
+        private async Task<(
+            DocumentOutlineTestMocks mocks,
+            (ImmutableArray<DocumentSymbolData> DocumentSymbolData, ITextSnapshot OriginalSnapshot),
+            ImmutableArray<DocumentSymbolDataViewModel> uiItems
+        )> InitializeMocksAndDataModelAndUIItems(string testCode)
         {
             await using var mocks = await CreateMocksAsync(testCode);
-            var response = await DocumentOutlineViewModel.DocumentSymbolsRequestAsync(mocks.TextBuffer, mocks.LanguageServiceBroker, mocks.FilePath, CancellationToken.None);
+            var response = await DocumentOutlineViewModel.DocumentSymbolsRequestAsync(
+                mocks.TextBuffer,
+                mocks.LanguageServiceBroker,
+                mocks.FilePath,
+                CancellationToken.None
+            );
             AssertEx.NotNull(response.Value);
 
-            var model = DocumentOutlineViewModel.CreateDocumentSymbolData(response.Value.response, response.Value.snapshot);
-            var uiItems = DocumentOutlineViewModel.GetDocumentSymbolItemViewModels(SortOption.Location, model);
+            var model = DocumentOutlineViewModel.CreateDocumentSymbolData(
+                response.Value.response,
+                response.Value.snapshot
+            );
+            var uiItems = DocumentOutlineViewModel.GetDocumentSymbolItemViewModels(
+                SortOption.Location,
+                model
+            );
             return (mocks, (model, response.Value.snapshot), uiItems);
         }
 
@@ -77,9 +90,12 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
 
             static ImmutableArray<DocumentSymbolDataViewModel> SortDocumentSymbols(
                 ImmutableArray<DocumentSymbolDataViewModel> documentSymbolData,
-                SortOption sortOption)
+                SortOption sortOption
+            )
             {
-                using var _ = ArrayBuilder<DocumentSymbolDataViewModel>.GetInstance(out var sortedDocumentSymbols);
+                using var _ = ArrayBuilder<DocumentSymbolDataViewModel>.GetInstance(
+                    out var sortedDocumentSymbols
+                );
                 documentSymbolData = Sort(documentSymbolData, sortOption);
                 foreach (var documentSymbol in documentSymbolData)
                 {
@@ -90,25 +106,49 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
                 return sortedDocumentSymbols.ToImmutable();
             }
 
-            static ImmutableArray<DocumentSymbolDataViewModel> Sort(ImmutableArray<DocumentSymbolDataViewModel> items, SortOption sortOption)
-                => (ImmutableArray<DocumentSymbolDataViewModel>)DocumentSymbolDataViewModelSorter.Instance.Convert([items, sortOption], typeof(ImmutableArray<DocumentSymbolDataViewModel>), parameter: null, CultureInfo.CurrentCulture);
+            static ImmutableArray<DocumentSymbolDataViewModel> Sort(
+                ImmutableArray<DocumentSymbolDataViewModel> items,
+                SortOption sortOption
+            ) =>
+                (ImmutableArray<DocumentSymbolDataViewModel>)
+                    DocumentSymbolDataViewModelSorter.Instance.Convert(
+                        [items, sortOption],
+                        typeof(ImmutableArray<DocumentSymbolDataViewModel>),
+                        parameter: null,
+                        CultureInfo.CurrentCulture
+                    );
 
-            static DocumentSymbolDataViewModel ReplaceChildren(DocumentSymbolDataViewModel symbolToUpdate, ImmutableArray<DocumentSymbolDataViewModel> newChildren)
+            static DocumentSymbolDataViewModel ReplaceChildren(
+                DocumentSymbolDataViewModel symbolToUpdate,
+                ImmutableArray<DocumentSymbolDataViewModel> newChildren
+            )
             {
                 var data = symbolToUpdate.Data;
                 var symbolData = data with { Children = ImmutableArray<DocumentSymbolData>.Empty };
                 return new DocumentSymbolDataViewModel(symbolData, newChildren);
             }
 
-            static void CheckSortedSymbols(ImmutableArray<DocumentSymbolDataViewModel> sortedSymbols, SortOption sortOption)
+            static void CheckSortedSymbols(
+                ImmutableArray<DocumentSymbolDataViewModel> sortedSymbols,
+                SortOption sortOption
+            )
             {
                 var actual = sortedSymbols;
                 var expected = sortOption switch
                 {
-                    SortOption.Name => sortedSymbols.OrderBy(static x => x.Data.Name, StringComparer.OrdinalIgnoreCase),
-                    SortOption.Location => sortedSymbols.OrderBy(static x => x.Data.RangeSpan.Start),
-                    SortOption.Type => sortedSymbols.OrderBy(static x => x.Data.SymbolKind).ThenBy(static x => x.Data.Name),
-                    _ => throw new InvalidOperationException($"The value for {nameof(sortOption)} is invalid: {sortOption}")
+                    SortOption.Name => sortedSymbols.OrderBy(
+                        static x => x.Data.Name,
+                        StringComparer.OrdinalIgnoreCase
+                    ),
+                    SortOption.Location => sortedSymbols.OrderBy(static x =>
+                        x.Data.RangeSpan.Start
+                    ),
+                    SortOption.Type => sortedSymbols
+                        .OrderBy(static x => x.Data.SymbolKind)
+                        .ThenBy(static x => x.Data.Name),
+                    _ => throw new InvalidOperationException(
+                        $"The value for {nameof(sortOption)} is invalid: {sortOption}"
+                    ),
                 };
 
                 Assert.True(expected.SequenceEqual(actual));
@@ -124,28 +164,63 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
             var (_, model, _) = await InitializeMocksAndDataModelAndUIItems(TestCode);
 
             // Empty search.  Should filter nothing.
-            var searchedSymbols = DocumentOutlineViewModel.SearchDocumentSymbolData(model.DocumentSymbolData, string.Empty, CancellationToken.None);
+            var searchedSymbols = DocumentOutlineViewModel.SearchDocumentSymbolData(
+                model.DocumentSymbolData,
+                string.Empty,
+                CancellationToken.None
+            );
             Assert.Equal(3, searchedSymbols.Length);
 
             // Search for 1 parent only (no children should match)
-            searchedSymbols = DocumentOutlineViewModel.SearchDocumentSymbolData(model.DocumentSymbolData, "foo", CancellationToken.None);
+            searchedSymbols = DocumentOutlineViewModel.SearchDocumentSymbolData(
+                model.DocumentSymbolData,
+                "foo",
+                CancellationToken.None
+            );
             Assert.Equal(1, searchedSymbols.Length);
-            Assert.Equal(0, searchedSymbols.Single(symbol => symbol.Name.Equals("foo")).Children.Length);
+            Assert.Equal(
+                0,
+                searchedSymbols.Single(symbol => symbol.Name.Equals("foo")).Children.Length
+            );
 
             // Search for children only (across 2 parents)
-            searchedSymbols = DocumentOutlineViewModel.SearchDocumentSymbolData(model.DocumentSymbolData, "Method", CancellationToken.None);
+            searchedSymbols = DocumentOutlineViewModel.SearchDocumentSymbolData(
+                model.DocumentSymbolData,
+                "Method",
+                CancellationToken.None
+            );
             Assert.Equal(2, searchedSymbols.Length);
-            Assert.Equal(2, searchedSymbols.Single(symbol => symbol.Name.Equals("MyClass")).Children.Length);
-            Assert.Equal(1, searchedSymbols.Single(symbol => symbol.Name.Equals("App")).Children.Length);
+            Assert.Equal(
+                2,
+                searchedSymbols.Single(symbol => symbol.Name.Equals("MyClass")).Children.Length
+            );
+            Assert.Equal(
+                1,
+                searchedSymbols.Single(symbol => symbol.Name.Equals("App")).Children.Length
+            );
 
             // Search for a parent and a child (of another parent)
-            searchedSymbols = DocumentOutlineViewModel.SearchDocumentSymbolData(model.DocumentSymbolData, "app", CancellationToken.None);
+            searchedSymbols = DocumentOutlineViewModel.SearchDocumentSymbolData(
+                model.DocumentSymbolData,
+                "app",
+                CancellationToken.None
+            );
             Assert.Equal(2, searchedSymbols.Length);
-            Assert.Equal(0, searchedSymbols.Single(symbol => symbol.Name.Equals("App")).Children.Length);
-            Assert.Equal(1, searchedSymbols.Single(symbol => symbol.Name.Equals("foo")).Children.Length);
+            Assert.Equal(
+                0,
+                searchedSymbols.Single(symbol => symbol.Name.Equals("App")).Children.Length
+            );
+            Assert.Equal(
+                1,
+                searchedSymbols.Single(symbol => symbol.Name.Equals("foo")).Children.Length
+            );
 
             // No search results found
-            searchedSymbols = DocumentOutlineViewModel.SearchDocumentSymbolData(model.DocumentSymbolData, "xyz", CancellationToken.None);
+            searchedSymbols = DocumentOutlineViewModel.SearchDocumentSymbolData(
+                model.DocumentSymbolData,
+                "xyz",
+                CancellationToken.None
+            );
             Assert.Equal(0, searchedSymbols.Length);
         }
 
@@ -157,7 +232,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
                 """
                 enum Test
                   { a, b }
-                """);
+                """
+            );
 
             Assert.Collection(
                 items,
@@ -176,8 +252,10 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
                         {
                             Assert.Equal(Glyph.EnumMemberPublic, item.Data.Glyph);
                             Assert.Equal("b", item.Data.Name);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [WpfFact]
@@ -187,7 +265,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
             var (_, _, items) = await InitializeMocksAndDataModelAndUIItems(
                 """
                 abstract class TypeName { public string PropertyName { get; } = "Value"; }
-                """);
+                """
+            );
 
             Assert.Collection(
                 items,
@@ -201,8 +280,10 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
                         {
                             Assert.Equal(Glyph.PropertyPublic, item.Data.Glyph);
                             Assert.Equal("PropertyName", item.Data.Name);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
     }
 }

@@ -22,8 +22,8 @@ public class SingularModificationCommandBatch : AffectedCountModificationCommand
     ///     Creates a new <see cref="SingularModificationCommandBatch" /> instance.
     /// </summary>
     /// <param name="dependencies">Service dependencies.</param>
-    public SingularModificationCommandBatch(ModificationCommandBatchFactoryDependencies dependencies)
-        : base(dependencies, maxBatchSize: 1)
-    {
-    }
+    public SingularModificationCommandBatch(
+        ModificationCommandBatchFactoryDependencies dependencies
+    )
+        : base(dependencies, maxBatchSize: 1) { }
 }

@@ -69,7 +69,8 @@ namespace System.Text.RegularExpressions.Symbolic
 
 #if DEBUG
         /// <summary>Pretty print the bitvector bv as the character set it represents.</summary>
-        public string PrettyPrint(BitVector bv, CharSetSolver solver) => solver.PrettyPrint(ConvertToBDD(bv, solver));
+        public string PrettyPrint(BitVector bv, CharSetSolver solver) =>
+            solver.PrettyPrint(ConvertToBDD(bv, solver));
 
         public BDD ConvertToBDD(BitVector set, CharSetSolver solver)
         {

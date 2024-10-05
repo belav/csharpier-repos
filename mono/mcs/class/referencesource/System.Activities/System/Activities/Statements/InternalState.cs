@@ -24,33 +24,34 @@ namespace System.Activities.Statements
     {
         // State denotes corresponding State object.
         State state;
-        
+
         // internal representation of transitions.
         Collection<InternalTransition> internalTransitions;
-        
+
         // number of running triggers
         Variable<int> currentRunningTriggers;
         Variable<bool> isExiting;
-        
-        // This bookmark is used to evaluate condition of a transition of this state. 
+
+        // This bookmark is used to evaluate condition of a transition of this state.
         Variable<Bookmark> evaluateConditionBookmark;
-        
+
         // Callback which is called when Entry is completed.
         CompletionCallback onEntryComplete;
-        
+
         // Callback which is called when Trigger is completed.
         CompletionCallback onTriggerComplete;
-        
+
         // Callback which is called when Condition is completed.
         CompletionCallback<bool> onConditionComplete;
-        
+
         // Callback which is called when Exit is completed.
         CompletionCallback onExitComplete;
-        
+
         // Callback which is used to start to evaluate Condition of a transition of this state.
         BookmarkCallback evaluateConditionCallback;
 
-        Dictionary<Activity, InternalTransition> triggerInternalTransitionMapping = new Dictionary<Activity, InternalTransition>();
+        Dictionary<Activity, InternalTransition> triggerInternalTransitionMapping =
+            new Dictionary<Activity, InternalTransition>();
 
         public InternalState(State state)
         {
@@ -75,21 +76,14 @@ namespace System.Activities.Statements
         /// Gets or sets EventManager is used to globally manage event queue such that triggered events can be processed in order.
         /// </summary>
         [RequiredArgument]
-        public InArgument<StateMachineEventManager> EventManager
-        {
-            get;
-            set;
-        }
+        public InArgument<StateMachineEventManager> EventManager { get; set; }
 
         /// <summary>
         /// Gets Entry activity that will be executed when state is entering.
         /// </summary>
         public Activity Entry
         {
-            get
-            {
-                return this.state.Entry;
-            }
+            get { return this.state.Entry; }
         }
 
         /// <summary>
@@ -97,10 +91,7 @@ namespace System.Activities.Statements
         /// </summary>
         public Activity Exit
         {
-            get
-            {
-                return this.state.Exit;
-            }
+            get { return this.state.Exit; }
         }
 
         /// <summary>
@@ -109,10 +100,7 @@ namespace System.Activities.Statements
         [DefaultValue(false)]
         public bool IsFinal
         {
-            get
-            {
-                return this.state.IsFinal;
-            }
+            get { return this.state.IsFinal; }
         }
 
         /// <summary>
@@ -120,10 +108,7 @@ namespace System.Activities.Statements
         /// </summary>
         public string StateId
         {
-            get
-            {
-                return this.state.StateId;
-            }
+            get { return this.state.StateId; }
         }
 
         /// <summary>
@@ -131,10 +116,7 @@ namespace System.Activities.Statements
         /// </summary>
         public Collection<Transition> Transitions
         {
-            get
-            {
-                return this.state.Transitions;
-            }
+            get { return this.state.Transitions; }
         }
 
         /// <summary>
@@ -142,10 +124,7 @@ namespace System.Activities.Statements
         /// </summary>
         public Collection<Variable> Variables
         {
-            get
-            {
-                return this.state.Variables;
-            }
+            get { return this.state.Variables; }
         }
 
         /// <summary>
@@ -154,18 +133,12 @@ namespace System.Activities.Statements
         /// </summary>
         public string StateMachineName
         {
-            get
-            {
-                return this.state.StateMachineName;
-            }
+            get { return this.state.StateMachineName; }
         }
 
         protected override bool CanInduceIdle
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         protected override void CacheMetadata(NativeActivityMetadata metadata)
@@ -185,22 +158,28 @@ namespace System.Activities.Statements
             this.ProcessTransitions(metadata);
             metadata.SetVariablesCollection(this.Variables);
 
-            RuntimeArgument eventManagerArgument = new RuntimeArgument("EventManager", this.EventManager.ArgumentType, ArgumentDirection.In);
+            RuntimeArgument eventManagerArgument = new RuntimeArgument(
+                "EventManager",
+                this.EventManager.ArgumentType,
+                ArgumentDirection.In
+            );
             metadata.Bind(this.EventManager, eventManagerArgument);
 
             metadata.SetArgumentsCollection(
-                new Collection<RuntimeArgument>
-                {
-                    eventManagerArgument
-                });
+                new Collection<RuntimeArgument> { eventManagerArgument }
+            );
 
             metadata.AddImplementationVariable(this.currentRunningTriggers);
             metadata.AddImplementationVariable(this.isExiting);
             metadata.AddImplementationVariable(this.evaluateConditionBookmark);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0",
-                        Justification = "The context is used by workflow runtime. The parameter should be fine.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1062:Validate arguments of public methods",
+            MessageId = "0",
+            Justification = "The context is used by workflow runtime. The parameter should be fine."
+        )]
         protected override void Execute(NativeActivityContext context)
         {
             StateMachineEventManager eventManager = this.EventManager.Get(context);
@@ -221,7 +200,10 @@ namespace System.Activities.Statements
             base.Cancel(context);
         }
 
-        protected override void OnCreateDynamicUpdateMap(NativeActivityUpdateMapMetadata metadata, Activity originalActivity)
+        protected override void OnCreateDynamicUpdateMap(
+            NativeActivityUpdateMapMetadata metadata,
+            Activity originalActivity
+        )
         {
             InternalState originalInternalState = (InternalState)originalActivity;
 
@@ -230,8 +212,16 @@ namespace System.Activities.Statements
             Activity entryActivityMatch = metadata.GetMatch(this.Entry);
             Activity exitActivityMatch = metadata.GetMatch(this.Exit);
 
-            if ((null != entryActivityMatch && !object.ReferenceEquals(entryActivityMatch, originalInternalState.Entry)) ||
-                (null != exitActivityMatch && !object.ReferenceEquals(exitActivityMatch, originalInternalState.Exit)))
+            if (
+                (
+                    null != entryActivityMatch
+                    && !object.ReferenceEquals(entryActivityMatch, originalInternalState.Entry)
+                )
+                || (
+                    null != exitActivityMatch
+                    && !object.ReferenceEquals(exitActivityMatch, originalInternalState.Exit)
+                )
+            )
             {
                 // original State.Entry/Exit is replaced with another child activities with InternalState
                 // new State.Entry/Exit is moved from another child activities within InternalState.
@@ -240,15 +230,17 @@ namespace System.Activities.Statements
             }
 
             int originalTriggerInUpdatedDefinition = 0;
-            
-            foreach (InternalTransition originalTransition in originalInternalState.internalTransitions)
+
+            foreach (
+                InternalTransition originalTransition in originalInternalState.internalTransitions
+            )
             {
                 if (metadata.IsReferenceToImportedChild(originalTransition.Trigger))
                 {
                     metadata.DisallowUpdateInsideThisActivity(SR.TriggerOrConditionIsReferenced);
                     return;
                 }
-                
+
                 if (!originalTransition.IsUnconditional)
                 {
                     // new Trigger activity
@@ -256,7 +248,9 @@ namespace System.Activities.Statements
                     {
                         if (metadata.IsReferenceToImportedChild(transitionData.Condition))
                         {
-                            metadata.DisallowUpdateInsideThisActivity(SR.TriggerOrConditionIsReferenced);
+                            metadata.DisallowUpdateInsideThisActivity(
+                                SR.TriggerOrConditionIsReferenced
+                            );
                             return;
                         }
                     }
@@ -278,14 +272,24 @@ namespace System.Activities.Statements
                 {
                     InternalTransition originalTransition;
 
-                    if (originalInternalState.triggerInternalTransitionMapping.TryGetValue(triggerMatch, out originalTransition))
+                    if (
+                        originalInternalState.triggerInternalTransitionMapping.TryGetValue(
+                            triggerMatch,
+                            out originalTransition
+                        )
+                    )
                     {
                         originalTriggerInUpdatedDefinition++;
 
                         if (originalTransition.IsUnconditional)
                         {
                             string errorMessage;
-                            bool canTransitionBeUpdated = ValidateDUInUnconditionalTransition(metadata, updatedTransition, originalTransition, out errorMessage);
+                            bool canTransitionBeUpdated = ValidateDUInUnconditionalTransition(
+                                metadata,
+                                updatedTransition,
+                                originalTransition,
+                                out errorMessage
+                            );
 
                             if (!canTransitionBeUpdated)
                             {
@@ -298,13 +302,20 @@ namespace System.Activities.Statements
                             if (updatedTransition.IsUnconditional)
                             {
                                 // cannot change the transition from condition to unconditional.
-                                metadata.DisallowUpdateInsideThisActivity(SR.ChangeConditionalTransitionToUnconditionalBlockDU);
+                                metadata.DisallowUpdateInsideThisActivity(
+                                    SR.ChangeConditionalTransitionToUnconditionalBlockDU
+                                );
                                 return;
                             }
                             else
                             {
                                 string errorMessage;
-                                bool canTransitionBeUpdated = ValidateDUInConditionTransition(metadata, updatedTransition, originalTransition, out errorMessage);
+                                bool canTransitionBeUpdated = ValidateDUInConditionTransition(
+                                    metadata,
+                                    updatedTransition,
+                                    originalTransition,
+                                    out errorMessage
+                                );
 
                                 if (!canTransitionBeUpdated)
                                 {
@@ -317,7 +328,9 @@ namespace System.Activities.Statements
                     else
                     {
                         // the trigger is an child activity moved from elsewhere within the state
-                        metadata.DisallowUpdateInsideThisActivity(SR.MovingActivitiesInStateBlockDU);
+                        metadata.DisallowUpdateInsideThisActivity(
+                            SR.MovingActivitiesInStateBlockDU
+                        );
                         return;
                     }
                 }
@@ -326,25 +339,38 @@ namespace System.Activities.Statements
                     // new Trigger activity
                     foreach (TransitionData transitionData in updatedTransition.TransitionDataList)
                     {
-                        if ((null != transitionData.Condition && null != metadata.GetMatch(transitionData.Condition)) ||
-                            (null != transitionData.Action && null != metadata.GetMatch(transitionData.Action)))
+                        if (
+                            (
+                                null != transitionData.Condition
+                                && null != metadata.GetMatch(transitionData.Condition)
+                            )
+                            || (
+                                null != transitionData.Action
+                                && null != metadata.GetMatch(transitionData.Action)
+                            )
+                        )
                         {
-                            // if a new transition is added, it is expected that the Condition/Action 
+                            // if a new transition is added, it is expected that the Condition/Action
                             // are newly created.
-                            metadata.DisallowUpdateInsideThisActivity(SR.ChangingTriggerOrUseOriginalConditionActionBlockDU);
+                            metadata.DisallowUpdateInsideThisActivity(
+                                SR.ChangingTriggerOrUseOriginalConditionActionBlockDU
+                            );
                             return;
                         }
                     }
                 }
             }
-            
-            if (originalTriggerInUpdatedDefinition != originalInternalState.internalTransitions.Count)
+
+            if (
+                originalTriggerInUpdatedDefinition
+                != originalInternalState.internalTransitions.Count
+            )
             {
                 // NOTE: in general, if the transition is removed when there are pending triggers,
                 // runtime would be able to detect the missing child activities.  However, in cases,
                 // where the transition is happening already (in between completion of Transition.Action
                 // callback but before InternalState is completed), the workflow definition can be unloaded
-                // and updated.  The InternalState is unable to trace the original transition that set the 
+                // and updated.  The InternalState is unable to trace the original transition that set the
                 // destination state index.  In that case, the update would fail at UpdateInstance.
                 // To simplify the model, it is more convenient to disallow removing existing transitions
                 // from an executing InternalState.  The only extra restriction it brings, is that it disables
@@ -355,7 +381,8 @@ namespace System.Activities.Statements
 
         protected override void UpdateInstance(NativeActivityUpdateContext updateContext)
         {
-            StateMachineEventManager eventManager = updateContext.GetValue(this.EventManager) as StateMachineEventManager;
+            StateMachineEventManager eventManager =
+                updateContext.GetValue(this.EventManager) as StateMachineEventManager;
             Fx.Assert(eventManager != null, "eventManager is available in every internalActivity.");
 
             if (eventManager.CurrentBeingProcessedEvent != null || eventManager.Queue.Any())
@@ -379,14 +406,21 @@ namespace System.Activities.Statements
             }
             else if (updateContext.GetValue(this.currentRunningTriggers) > 0)
             {
-                Fx.Assert(updateContext.GetValue(this.isExiting) != true, "No triggers have completed, state should not be transitioning.");
-                
+                Fx.Assert(
+                    updateContext.GetValue(this.isExiting) != true,
+                    "No triggers have completed, state should not be transitioning."
+                );
+
                 // the state is not transitioning yet and is persisted at trigger.
                 this.RescheduleNewlyAddedTriggers(updateContext);
             }
         }
 
-        static void AddTransitionData(NativeActivityMetadata metadata, InternalTransition internalTransition, Transition transition)
+        static void AddTransitionData(
+            NativeActivityMetadata metadata,
+            InternalTransition internalTransition,
+            Transition transition
+        )
         {
             TransitionData transitionData = new TransitionData();
             Activity<bool> condition = transition.Condition;
@@ -413,7 +447,10 @@ namespace System.Activities.Statements
             internalTransition.TransitionDataList.Add(transitionData);
         }
 
-        static void ProcessNextTriggerCompletedEvent(NativeActivityContext context, StateMachineEventManager eventManager)
+        static void ProcessNextTriggerCompletedEvent(
+            NativeActivityContext context,
+            StateMachineEventManager eventManager
+        )
         {
             eventManager.CurrentBeingProcessedEvent = null;
             eventManager.OnTransition = false;
@@ -428,9 +465,17 @@ namespace System.Activities.Statements
             }
         }
 
-        private static bool ValidateDUInConditionTransition(NativeActivityUpdateMapMetadata metadata, InternalTransition updatedTransition, InternalTransition originalTransition, out string errorMessage)
+        private static bool ValidateDUInConditionTransition(
+            NativeActivityUpdateMapMetadata metadata,
+            InternalTransition updatedTransition,
+            InternalTransition originalTransition,
+            out string errorMessage
+        )
         {
-            Fx.Assert(!originalTransition.IsUnconditional, "Transition should be conditional in the original definition.");
+            Fx.Assert(
+                !originalTransition.IsUnconditional,
+                "Transition should be conditional in the original definition."
+            );
             errorMessage = string.Empty;
 
             foreach (TransitionData updatedTData in updatedTransition.TransitionDataList)
@@ -455,14 +500,25 @@ namespace System.Activities.Statements
                 {
                     bool foundMatchingOriginalCondition = false;
 
-                    for (int transitionIndex = 0; transitionIndex < originalTransition.TransitionDataList.Count; transitionIndex++)
+                    for (
+                        int transitionIndex = 0;
+                        transitionIndex < originalTransition.TransitionDataList.Count;
+                        transitionIndex++
+                    )
                     {
-                        if (object.ReferenceEquals(originalTransition.TransitionDataList[transitionIndex].Condition, conditionMatch))
+                        if (
+                            object.ReferenceEquals(
+                                originalTransition.TransitionDataList[transitionIndex].Condition,
+                                conditionMatch
+                            )
+                        )
                         {
                             foundMatchingOriginalCondition = true;
 
                             // found the original matching condition in updated transition definition.
-                            TransitionData originalTData = originalTransition.TransitionDataList[transitionIndex];
+                            TransitionData originalTData = originalTransition.TransitionDataList[
+                                transitionIndex
+                            ];
 
                             Activity originalAction = originalTData.Action;
 
@@ -470,14 +526,20 @@ namespace System.Activities.Statements
                             // if this removed activity was executing, WF runtime would disallow the update.
                             Activity actionMatch = metadata.GetMatch(updatedTData.Action);
 
-                            if (null != actionMatch && !object.ReferenceEquals(originalAction, actionMatch))
+                            if (
+                                null != actionMatch
+                                && !object.ReferenceEquals(originalAction, actionMatch)
+                            )
                             {
                                 // Transition.Action is an activity moved from elsewhere within the InternalState
                                 errorMessage = SR.MovingActivitiesInStateBlockDU;
                                 return false;
                             }
 
-                            metadata.SaveOriginalValue(updatedTransition.Trigger, originalTransition.InternalTransitionIndex);
+                            metadata.SaveOriginalValue(
+                                updatedTransition.Trigger,
+                                originalTransition.InternalTransitionIndex
+                            );
                             metadata.SaveOriginalValue(updatedTData.Condition, transitionIndex);
                         }
                     }
@@ -494,9 +556,17 @@ namespace System.Activities.Statements
             return true;
         }
 
-        private static bool ValidateDUInUnconditionalTransition(NativeActivityUpdateMapMetadata metadata, InternalTransition updatedTransition, InternalTransition originalTransition, out string errorMessage)
+        private static bool ValidateDUInUnconditionalTransition(
+            NativeActivityUpdateMapMetadata metadata,
+            InternalTransition updatedTransition,
+            InternalTransition originalTransition,
+            out string errorMessage
+        )
         {
-            Fx.Assert(originalTransition.IsUnconditional, "Transition should be unconditional in the original definition.");
+            Fx.Assert(
+                originalTransition.IsUnconditional,
+                "Transition should be unconditional in the original definition."
+            );
             Activity originalAction = originalTransition.TransitionDataList[0].Action;
 
             foreach (TransitionData transitionData in updatedTransition.TransitionDataList)
@@ -505,8 +575,14 @@ namespace System.Activities.Statements
                 Activity actionMatch = metadata.GetMatch(updatedAction);
                 Activity conditionMatch = metadata.GetMatch(transitionData.Condition);
 
-                if ((null == originalAction && null != actionMatch) ||
-                    (null != originalAction && null != actionMatch && !object.ReferenceEquals(originalAction, actionMatch)))
+                if (
+                    (null == originalAction && null != actionMatch)
+                    || (
+                        null != originalAction
+                        && null != actionMatch
+                        && !object.ReferenceEquals(originalAction, actionMatch)
+                    )
+                )
                 {
                     // Transition.Action is an activity moved from elsewhere within the InternalState
                     errorMessage = SR.MovingActivitiesInStateBlockDU;
@@ -515,14 +591,20 @@ namespace System.Activities.Statements
             }
 
             errorMessage = string.Empty;
-            metadata.SaveOriginalValue(updatedTransition.Trigger, originalTransition.InternalTransitionIndex);
+            metadata.SaveOriginalValue(
+                updatedTransition.Trigger,
+                originalTransition.InternalTransitionIndex
+            );
             return true;
         }
 
         private void RescheduleNewlyAddedTriggers(NativeActivityUpdateContext updateContext)
         {
             // NOTE: triggers are scheduled already, so the state has completed executing State.Entry
-            Fx.Assert(this.internalTransitions.Count == this.triggerInternalTransitionMapping.Count, "Triggers mappings are correct.");
+            Fx.Assert(
+                this.internalTransitions.Count == this.triggerInternalTransitionMapping.Count,
+                "Triggers mappings are correct."
+            );
             List<Activity> newTriggers = new List<Activity>();
 
             foreach (InternalTransition transition in this.internalTransitions)
@@ -540,11 +622,14 @@ namespace System.Activities.Statements
                 updateContext.ScheduleActivity(newTrigger, this.onTriggerComplete);
             }
 
-            updateContext.SetValue<int>(this.currentRunningTriggers, updateContext.GetValue(this.currentRunningTriggers) + newTriggers.Count);
+            updateContext.SetValue<int>(
+                this.currentRunningTriggers,
+                updateContext.GetValue(this.currentRunningTriggers) + newTriggers.Count
+            );
         }
 
         /// <summary>
-        /// Used for Dynamic Update: after the instance is updated, if the statemachine is already transitioning, the index of the to-be-scheduled state 
+        /// Used for Dynamic Update: after the instance is updated, if the statemachine is already transitioning, the index of the to-be-scheduled state
         /// would need to be updated.
         /// </summary>
         /// <param name="updateContext">Dynamic Update context</param>
@@ -553,24 +638,35 @@ namespace System.Activities.Statements
         /// false otherwise and the update should fail.</returns>
         private bool UpdateEventManager(
             NativeActivityUpdateContext updateContext,
-            StateMachineEventManager eventManager)
+            StateMachineEventManager eventManager
+        )
         {
-            Fx.Assert(null != eventManager.CurrentBeingProcessedEvent, "The eventManager must have some info that needs to be updated during transition.");
+            Fx.Assert(
+                null != eventManager.CurrentBeingProcessedEvent,
+                "The eventManager must have some info that needs to be updated during transition."
+            );
 
             int updatedEventsInQueue = 0;
             int originalTriggerId = int.MinValue;
             int originalConditionIndex = int.MinValue;
-            bool updateCurrentEventSucceed = null == eventManager.CurrentBeingProcessedEvent ? true : false;
+            bool updateCurrentEventSucceed =
+                null == eventManager.CurrentBeingProcessedEvent ? true : false;
 
             foreach (InternalTransition transition in this.internalTransitions)
             {
                 object savedTriggerIndex = updateContext.GetSavedOriginalValue(transition.Trigger);
                 if (savedTriggerIndex != null)
                 {
-                    Fx.Assert(!updateContext.IsNewlyAdded(transition.Trigger), "the trigger in transition already exist.");
+                    Fx.Assert(
+                        !updateContext.IsNewlyAdded(transition.Trigger),
+                        "the trigger in transition already exist."
+                    );
 
-                    if (null != eventManager.CurrentBeingProcessedEvent &&
-                        eventManager.CurrentBeingProcessedEvent.TriggedId == (int)savedTriggerIndex)
+                    if (
+                        null != eventManager.CurrentBeingProcessedEvent
+                        && eventManager.CurrentBeingProcessedEvent.TriggedId
+                            == (int)savedTriggerIndex
+                    )
                     {
                         // found a match of the running trigger update the current processed event
                         // Don't match the trigger ID, match only when the Condition is also matched.
@@ -579,48 +675,84 @@ namespace System.Activities.Statements
                             if (transition.IsUnconditional)
                             {
                                 // executing transition before persist is unconditional
-                                originalTriggerId = eventManager.CurrentBeingProcessedEvent.TriggedId;
+                                originalTriggerId = eventManager
+                                    .CurrentBeingProcessedEvent
+                                    .TriggedId;
                                 originalConditionIndex = 0;
-                                eventManager.CurrentBeingProcessedEvent.TriggedId = transition.InternalTransitionIndex;
+                                eventManager.CurrentBeingProcessedEvent.TriggedId =
+                                    transition.InternalTransitionIndex;
 
                                 if (updateContext.GetValue(this.isExiting))
                                 {
-                                    Fx.Assert(eventManager.OnTransition, "The state is transitioning.");
-                                    updateContext.SetValue(this.Result, GetTo(transition.InternalTransitionIndex));
+                                    Fx.Assert(
+                                        eventManager.OnTransition,
+                                        "The state is transitioning."
+                                    );
+                                    updateContext.SetValue(
+                                        this.Result,
+                                        GetTo(transition.InternalTransitionIndex)
+                                    );
                                 }
 
                                 updateCurrentEventSucceed = true;
                             }
                             else
                             {
-                                updateContext.DisallowUpdate(SR.ChangeTransitionTypeDuringTransitioningBlockDU);
+                                updateContext.DisallowUpdate(
+                                    SR.ChangeTransitionTypeDuringTransitioningBlockDU
+                                );
                                 return false;
                             }
                         }
                         else if (eventManager.CurrentConditionIndex >= 0)
                         {
-                            Fx.Assert(!transition.IsUnconditional, "Cannot update a running conditional transition with a unconditional one.");
+                            Fx.Assert(
+                                !transition.IsUnconditional,
+                                "Cannot update a running conditional transition with a unconditional one."
+                            );
 
                             if (!transition.IsUnconditional)
                             {
                                 // executing transition before and after are conditional
-                                for (int updatedIndex = 0; updatedIndex < transition.TransitionDataList.Count; updatedIndex++)
+                                for (
+                                    int updatedIndex = 0;
+                                    updatedIndex < transition.TransitionDataList.Count;
+                                    updatedIndex++
+                                )
                                 {
-                                    Activity condition = transition.TransitionDataList[updatedIndex].Condition;
-                                    Fx.Assert(null != condition, "Conditional transition must have Condition activity.");
-                                    int? savedCondIndex = updateContext.GetSavedOriginalValue(condition) as int?;
+                                    Activity condition = transition
+                                        .TransitionDataList[updatedIndex]
+                                        .Condition;
+                                    Fx.Assert(
+                                        null != condition,
+                                        "Conditional transition must have Condition activity."
+                                    );
+                                    int? savedCondIndex =
+                                        updateContext.GetSavedOriginalValue(condition) as int?;
 
                                     if (eventManager.CurrentConditionIndex == savedCondIndex)
                                     {
-                                        originalTriggerId = eventManager.CurrentBeingProcessedEvent.TriggedId;
+                                        originalTriggerId = eventManager
+                                            .CurrentBeingProcessedEvent
+                                            .TriggedId;
                                         originalConditionIndex = eventManager.CurrentConditionIndex;
-                                        eventManager.CurrentBeingProcessedEvent.TriggedId = transition.InternalTransitionIndex;
+                                        eventManager.CurrentBeingProcessedEvent.TriggedId =
+                                            transition.InternalTransitionIndex;
                                         eventManager.CurrentConditionIndex = updatedIndex;
 
                                         if (updateContext.GetValue(this.isExiting))
                                         {
-                                            Fx.Assert(eventManager.OnTransition, "The state is transitioning.");
-                                            updateContext.SetValue(this.Result, this.GetTo(transition.InternalTransitionIndex, (int)updatedIndex));
+                                            Fx.Assert(
+                                                eventManager.OnTransition,
+                                                "The state is transitioning."
+                                            );
+                                            updateContext.SetValue(
+                                                this.Result,
+                                                this.GetTo(
+                                                    transition.InternalTransitionIndex,
+                                                    (int)updatedIndex
+                                                )
+                                            );
                                         }
 
                                         updateCurrentEventSucceed = true;
@@ -642,16 +774,20 @@ namespace System.Activities.Statements
                 }
             }
 
-            return eventManager.Queue.Count() == updatedEventsInQueue ? updateCurrentEventSucceed : false;
+            return eventManager.Queue.Count() == updatedEventsInQueue
+                ? updateCurrentEventSucceed
+                : false;
         }
 
         void ScheduleEntry(NativeActivityContext context)
         {
-            context.Track(new StateMachineStateRecord
-            {
-                StateMachineName = this.StateMachineName,
-                StateName = this.DisplayName,
-            });
+            context.Track(
+                new StateMachineStateRecord
+                {
+                    StateMachineName = this.StateMachineName,
+                    StateName = this.DisplayName,
+                }
+            );
 
             if (this.Entry != null)
             {
@@ -684,7 +820,10 @@ namespace System.Activities.Statements
                     context.ScheduleActivity(transition.Trigger, this.onTriggerComplete);
                 }
 
-                this.currentRunningTriggers.Set(context, this.currentRunningTriggers.Get(context) + this.internalTransitions.Count);
+                this.currentRunningTriggers.Set(
+                    context,
+                    this.currentRunningTriggers.Get(context) + this.internalTransitions.Count
+                );
             }
         }
 
@@ -701,14 +840,25 @@ namespace System.Activities.Statements
             else if (completedInstance.State == ActivityInstanceState.Closed)
             {
                 InternalTransition internalTransition = null;
-                this.triggerInternalTransitionMapping.TryGetValue(completedInstance.Activity, out internalTransition);
-                Fx.Assert(internalTransition != null, "internalTransition should be added into triggerInternalTransitionMapping in CacheMetadata.");
+                this.triggerInternalTransitionMapping.TryGetValue(
+                    completedInstance.Activity,
+                    out internalTransition
+                );
+                Fx.Assert(
+                    internalTransition != null,
+                    "internalTransition should be added into triggerInternalTransitionMapping in CacheMetadata."
+                );
 
                 StateMachineEventManager eventManager = this.EventManager.Get(context);
                 bool canBeProcessedImmediately;
                 eventManager.RegisterCompletedEvent(
-                    new TriggerCompletedEvent { Bookmark = this.evaluateConditionBookmark.Get(context), TriggedId = internalTransition.InternalTransitionIndex },
-                    out canBeProcessedImmediately);
+                    new TriggerCompletedEvent
+                    {
+                        Bookmark = this.evaluateConditionBookmark.Get(context),
+                        TriggedId = internalTransition.InternalTransitionIndex,
+                    },
+                    out canBeProcessedImmediately
+                );
 
                 if (canBeProcessedImmediately)
                 {
@@ -733,15 +883,18 @@ namespace System.Activities.Statements
             {
                 eventManager.CurrentConditionIndex = 0;
                 context.ScheduleActivity<bool>(
-                    this.GetCondition(
-                        triggerId,
-                        eventManager.CurrentConditionIndex),
+                    this.GetCondition(triggerId, eventManager.CurrentConditionIndex),
                     this.onConditionComplete,
-                    null);
+                    null
+                );
             }
         }
 
-        void OnConditionComplete(NativeActivityContext context, ActivityInstance completedInstance, bool result)
+        void OnConditionComplete(
+            NativeActivityContext context,
+            ActivityInstance completedInstance,
+            bool result
+        )
         {
             StateMachineEventManager eventManager = this.EventManager.Get(context);
             int triggerId = eventManager.CurrentBeingProcessedEvent.TriggedId;
@@ -754,20 +907,30 @@ namespace System.Activities.Statements
             {
                 // condition failed: reschedule trigger
                 int currentConditionIndex = eventManager.CurrentConditionIndex;
-                Fx.Assert(eventManager.CurrentConditionIndex >= 0, "Conditional Transition must have non-negative index.");
+                Fx.Assert(
+                    eventManager.CurrentConditionIndex >= 0,
+                    "Conditional Transition must have non-negative index."
+                );
                 InternalTransition transition = this.GetInternalTransition(triggerId);
                 currentConditionIndex++;
 
                 if (currentConditionIndex < transition.TransitionDataList.Count)
                 {
                     eventManager.CurrentConditionIndex = currentConditionIndex;
-                    context.ScheduleActivity<bool>(transition.TransitionDataList[currentConditionIndex].Condition, this.onConditionComplete, null);
+                    context.ScheduleActivity<bool>(
+                        transition.TransitionDataList[currentConditionIndex].Condition,
+                        this.onConditionComplete,
+                        null
+                    );
                 }
                 else
                 {
                     // Schedule current trigger again firstly.
                     context.ScheduleActivity(transition.Trigger, this.onTriggerComplete);
-                    this.currentRunningTriggers.Set(context, this.currentRunningTriggers.Get(context) + 1);
+                    this.currentRunningTriggers.Set(
+                        context,
+                        this.currentRunningTriggers.Get(context) + 1
+                    );
 
                     // check whether there is any other trigger completed.
                     ProcessNextTriggerCompletedEvent(context, eventManager);
@@ -795,10 +958,22 @@ namespace System.Activities.Statements
         void ScheduleAction(NativeActivityContext context)
         {
             StateMachineEventManager eventManager = this.EventManager.Get(context);
-            if (eventManager.IsReferredByBeingProcessedEvent(this.evaluateConditionBookmark.Get(context)))
+            if (
+                eventManager.IsReferredByBeingProcessedEvent(
+                    this.evaluateConditionBookmark.Get(context)
+                )
+            )
             {
-                InternalTransition transition = this.GetInternalTransition(eventManager.CurrentBeingProcessedEvent.TriggedId);
-                Activity action = transition.TransitionDataList[-1 == eventManager.CurrentConditionIndex ? 0 : eventManager.CurrentConditionIndex].Action;
+                InternalTransition transition = this.GetInternalTransition(
+                    eventManager.CurrentBeingProcessedEvent.TriggedId
+                );
+                Activity action = transition
+                    .TransitionDataList[
+                        -1 == eventManager.CurrentConditionIndex
+                            ? 0
+                            : eventManager.CurrentConditionIndex
+                    ]
+                    .Action;
 
                 if (action != null)
                 {
@@ -817,7 +992,12 @@ namespace System.Activities.Statements
                 InternalTransition internalTransition = null;
                 Activity triggerActivity = transition.ActiveTrigger;
 
-                if (!this.triggerInternalTransitionMapping.TryGetValue(triggerActivity, out internalTransition))
+                if (
+                    !this.triggerInternalTransitionMapping.TryGetValue(
+                        triggerActivity,
+                        out internalTransition
+                    )
+                )
                 {
                     metadata.AddChild(triggerActivity);
 
@@ -842,17 +1022,25 @@ namespace System.Activities.Statements
 
         Activity<bool> GetCondition(int triggerIndex, int conditionIndex)
         {
-            return this.internalTransitions[triggerIndex].TransitionDataList[conditionIndex].Condition;
+            return this.internalTransitions[triggerIndex]
+                .TransitionDataList[conditionIndex]
+                .Condition;
         }
 
         string GetTo(int triggerIndex, int conditionIndex = 0)
         {
-            return this.internalTransitions[triggerIndex].TransitionDataList[conditionIndex].To.StateId;
+            return this.internalTransitions[triggerIndex]
+                .TransitionDataList[conditionIndex]
+                .To
+                .StateId;
         }
 
         void AddEvaluateConditionBookmark(NativeActivityContext context)
         {
-            Bookmark bookmark = context.CreateBookmark(this.evaluateConditionCallback, BookmarkOptions.MultipleResume);
+            Bookmark bookmark = context.CreateBookmark(
+                this.evaluateConditionCallback,
+                BookmarkOptions.MultipleResume
+            );
             this.evaluateConditionBookmark.Set(context, bookmark);
             this.EventManager.Get(context).AddActiveBookmark(bookmark);
         }
@@ -873,20 +1061,33 @@ namespace System.Activities.Statements
             }
         }
 
-        void TakeTransition(NativeActivityContext context, StateMachineEventManager eventManager, int triggerId)
+        void TakeTransition(
+            NativeActivityContext context,
+            StateMachineEventManager eventManager,
+            int triggerId
+        )
         {
             this.EventManager.Get(context).OnTransition = true;
             InternalTransition transition = this.GetInternalTransition(triggerId);
 
             if (transition.IsUnconditional)
             {
-                Fx.Assert(-1 == eventManager.CurrentConditionIndex, "CurrentConditionIndex should be -1, if the transition is unconditional.");
+                Fx.Assert(
+                    -1 == eventManager.CurrentConditionIndex,
+                    "CurrentConditionIndex should be -1, if the transition is unconditional."
+                );
                 this.PrepareForExit(context, this.GetTo(triggerId));
             }
             else
             {
-                Fx.Assert(-1 != eventManager.CurrentConditionIndex, "CurrentConditionIndex should not be -1, if the transition is conditional.");
-                this.PrepareForExit(context, this.GetTo(triggerId, eventManager.CurrentConditionIndex));
+                Fx.Assert(
+                    -1 != eventManager.CurrentConditionIndex,
+                    "CurrentConditionIndex should not be -1, if the transition is conditional."
+                );
+                this.PrepareForExit(
+                    context,
+                    this.GetTo(triggerId, eventManager.CurrentConditionIndex)
+                );
             }
         }
 

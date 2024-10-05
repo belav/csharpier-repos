@@ -25,7 +25,8 @@ public class AtTimeZoneExpression : SqlExpression
         SqlExpression operand,
         SqlExpression timeZone,
         Type type,
-        RelationalTypeMapping? typeMapping)
+        RelationalTypeMapping? typeMapping
+    )
         : base(type, typeMapping)
     {
         Operand = operand;
@@ -58,8 +59,8 @@ public class AtTimeZoneExpression : SqlExpression
     /// <param name="operand">The <see cref="Operand" /> property of the result.</param>
     /// <param name="timeZone">The <see cref="TimeZone" /> property of the result.</param>
     /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-    public virtual AtTimeZoneExpression Update(SqlExpression operand, SqlExpression timeZone)
-        => operand != Operand || timeZone != TimeZone
+    public virtual AtTimeZoneExpression Update(SqlExpression operand, SqlExpression timeZone) =>
+        operand != Operand || timeZone != TimeZone
             ? new AtTimeZoneExpression(operand, timeZone, Type, TypeMapping)
             : this;
 
@@ -74,18 +75,18 @@ public class AtTimeZoneExpression : SqlExpression
     }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is AtTimeZoneExpression atTimeZoneExpression
-                && Equals(atTimeZoneExpression));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is AtTimeZoneExpression atTimeZoneExpression && Equals(atTimeZoneExpression)
+        );
 
-    private bool Equals(AtTimeZoneExpression atTimeZoneExpression)
-        => base.Equals(atTimeZoneExpression)
-            && Operand.Equals(atTimeZoneExpression.Operand)
-            && TimeZone.Equals(atTimeZoneExpression.TimeZone);
+    private bool Equals(AtTimeZoneExpression atTimeZoneExpression) =>
+        base.Equals(atTimeZoneExpression)
+        && Operand.Equals(atTimeZoneExpression.Operand)
+        && TimeZone.Equals(atTimeZoneExpression.TimeZone);
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => HashCode.Combine(base.GetHashCode(), Operand, TimeZone);
+    public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), Operand, TimeZone);
 }

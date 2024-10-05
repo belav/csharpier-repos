@@ -21,9 +21,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AnalyzerSeverityColumnDefinition()
-        {
-        }
+        public AnalyzerSeverityColumnDefinition() { }
 
         public override string Name => Severity;
         public override string DisplayName => ServicesVSResources.Severity;
@@ -31,7 +29,12 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers
         public override bool IsSortable => false;
         public override double MinWidth => 150;
 
-        public override bool TryCreateStringContent(ITableEntryHandle entry, bool truncatedText, bool singleColumnView, out string? content)
+        public override bool TryCreateStringContent(
+            ITableEntryHandle entry,
+            bool truncatedText,
+            bool singleColumnView,
+            out string? content
+        )
         {
             if (!entry.TryGetValue(Severity, out AnalyzerSetting setting))
             {
@@ -51,7 +54,11 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers
             return true;
         }
 
-        public override bool TryCreateColumnContent(ITableEntryHandle entry, bool singleColumnView, out FrameworkElement? content)
+        public override bool TryCreateColumnContent(
+            ITableEntryHandle entry,
+            bool singleColumnView,
+            out FrameworkElement? content
+        )
         {
             if (!entry.TryGetValue(Severity, out AnalyzerSetting severity))
             {

@@ -8,6 +8,7 @@ namespace Microsoft.CodeAnalysis.StringCopyPaste
 {
     internal static class StringCopyPasteOptionsStorage
     {
-        public static readonly PerLanguageOption2<bool> AutomaticallyFixStringContentsOnPaste = new("dotnet_fix_string_contents_on_paste", defaultValue: true);
+        public static readonly PerLanguageOption2<bool> AutomaticallyFixStringContentsOnPaste =
+            new("dotnet_fix_string_contents_on_paste", defaultValue: true);
     }
 }

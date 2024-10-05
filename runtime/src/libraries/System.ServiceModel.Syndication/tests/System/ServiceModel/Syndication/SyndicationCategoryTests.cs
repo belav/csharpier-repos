@@ -86,7 +86,10 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => new SyndicationCategorySubclass(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => new SyndicationCategorySubclass(null)
+            );
         }
 
         [Fact]
@@ -130,7 +133,12 @@ namespace System.ServiceModel.Syndication.Tests
         [InlineData("name", "http://www.w3.org/2000/xmlns/", "value", "version")]
         [InlineData("type", "ns", "value", "version")]
         [InlineData("name", "http://www.w3.org/2001/XMLSchema-instance", "value", "version")]
-        public void TryParseAttribute_Invoke_ReturnsFalse(string name, string ns, string value, string version)
+        public void TryParseAttribute_Invoke_ReturnsFalse(
+            string name,
+            string ns,
+            string value,
+            string version
+        )
         {
             var category = new SyndicationCategorySubclass();
             Assert.False(category.TryParseAttributeEntryPoint(name, ns, value, version));
@@ -158,19 +166,28 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteAttributeExtensions_Invoke_ReturnsExpected(string version)
         {
             var category = new SyndicationCategorySubclass();
-            CompareHelper.AssertEqualWriteOutput("", writer => category.WriteAttributeExtensionsEntryPoint(writer, version));
+            CompareHelper.AssertEqualWriteOutput(
+                "",
+                writer => category.WriteAttributeExtensionsEntryPoint(writer, version)
+            );
 
             category.AttributeExtensions.Add(new XmlQualifiedName("name1"), "value");
             category.AttributeExtensions.Add(new XmlQualifiedName("name2", "namespace"), "");
             category.AttributeExtensions.Add(new XmlQualifiedName("name3"), null);
-            CompareHelper.AssertEqualWriteOutput(@"name1=""value"" d0p1:name2="""" name3=""""", writer => category.WriteAttributeExtensionsEntryPoint(writer, "version"));
+            CompareHelper.AssertEqualWriteOutput(
+                @"name1=""value"" d0p1:name2="""" name3=""""",
+                writer => category.WriteAttributeExtensionsEntryPoint(writer, "version")
+            );
         }
 
         [Fact]
         public void WriteAttributeExtensions_NullWriter_ThrowsArgumentNullException()
         {
             var category = new SyndicationCategorySubclass();
-            AssertExtensions.Throws<ArgumentNullException>("writer", () => category.WriteAttributeExtensionsEntryPoint(null, "version"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "writer",
+                () => category.WriteAttributeExtensionsEntryPoint(null, "version")
+            );
         }
 
         [Theory]
@@ -180,39 +197,57 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteElementExtensions_Invoke_ReturnsExpected(string version)
         {
             var category = new SyndicationCategorySubclass();
-            CompareHelper.AssertEqualWriteOutput("", writer => category.WriteElementExtensionsEntryPoint(writer, version));
+            CompareHelper.AssertEqualWriteOutput(
+                "",
+                writer => category.WriteElementExtensionsEntryPoint(writer, version)
+            );
 
             category.ElementExtensions.Add(new ExtensionObject { Value = 10 });
             category.ElementExtensions.Add(new ExtensionObject { Value = 11 });
             CompareHelper.AssertEqualWriteOutput(
-@"<SyndicationCategoryTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
+                @"<SyndicationCategoryTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
     <Value>10</Value>
 </SyndicationCategoryTests.ExtensionObject>
 <SyndicationCategoryTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
     <Value>11</Value>
-</SyndicationCategoryTests.ExtensionObject>", writer => category.WriteElementExtensionsEntryPoint(writer, version));
+</SyndicationCategoryTests.ExtensionObject>",
+                writer => category.WriteElementExtensionsEntryPoint(writer, version)
+            );
         }
 
         [Fact]
         public void WriteElementExtensions_NullWriter_ThrowsArgumentNullException()
         {
             var category = new SyndicationCategorySubclass();
-            AssertExtensions.Throws<ArgumentNullException>("writer", () => category.WriteElementExtensionsEntryPoint(null, "version"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "writer",
+                () => category.WriteElementExtensionsEntryPoint(null, "version")
+            );
         }
 
         private class SyndicationCategorySubclass : SyndicationCategory
         {
-            public SyndicationCategorySubclass() : base() { }
+            public SyndicationCategorySubclass()
+                : base() { }
 
-            public SyndicationCategorySubclass(SyndicationCategory source) : base(source) { }
+            public SyndicationCategorySubclass(SyndicationCategory source)
+                : base(source) { }
 
-            public bool TryParseAttributeEntryPoint(string name, string ns, string value, string version) => TryParseAttribute(name, ns, value, version);
+            public bool TryParseAttributeEntryPoint(
+                string name,
+                string ns,
+                string value,
+                string version
+            ) => TryParseAttribute(name, ns, value, version);
 
-            public bool TryParseElementEntryPoint(XmlReader reader, string version) => TryParseElement(reader, version);
+            public bool TryParseElementEntryPoint(XmlReader reader, string version) =>
+                TryParseElement(reader, version);
 
-            public void WriteAttributeExtensionsEntryPoint(XmlWriter writer, string version) => WriteAttributeExtensions(writer, version);
+            public void WriteAttributeExtensionsEntryPoint(XmlWriter writer, string version) =>
+                WriteAttributeExtensions(writer, version);
 
-            public void WriteElementExtensionsEntryPoint(XmlWriter writer, string version) => WriteElementExtensions(writer, version);
+            public void WriteElementExtensionsEntryPoint(XmlWriter writer, string version) =>
+                WriteElementExtensions(writer, version);
         }
 
         [DataContract]

@@ -1,16 +1,23 @@
 static class Foo
 {
-	delegate string[,] SimpleDelegate();
+    delegate string[,] SimpleDelegate();
 
-	static void Baz(SimpleDelegate sd)
-	{
-		sd();
-	}
+    static void Baz(SimpleDelegate sd)
+    {
+        sd();
+    }
 
-	public static void Main(string[] args)
-	{
-		Baz(delegate() {
-			return new string[,] { { "aa" } , { "bb" } };
-		});
-	}
+    public static void Main(string[] args)
+    {
+        Baz(
+            delegate()
+            {
+                return new string[,]
+                {
+                    { "aa" },
+                    { "bb" },
+                };
+            }
+        );
+    }
 }

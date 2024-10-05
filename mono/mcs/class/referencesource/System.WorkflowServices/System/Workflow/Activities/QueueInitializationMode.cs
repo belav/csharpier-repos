@@ -10,6 +10,6 @@ namespace System.Workflow.Activities
     {
         Standalone,
         EventDriven,
-        StateMachine
+        StateMachine,
     }
 }

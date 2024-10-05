@@ -1,5 +1,5 @@
 //
-// DataListItemCollectionCas.cs 
+// DataListItemCollectionCas.cs
 //	- CAS unit tests for System.Web.UI.WebControls.DataListItemCollection
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,42 +27,44 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Collections;
 using System.Reflection;
 using System.Security.Permissions;
 using System.Web;
 using System.Web.UI.WebControls;
-
 using MonoTests.System.Web.UI.WebControls;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web.UI.WebControls {
+namespace MonoCasTests.System.Web.UI.WebControls
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class DataListItemCollectionCas : AspNetHostingMinimal
+    {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
+        {
+            DataListItemCollectionTest unit = new DataListItemCollectionTest();
+            unit.Constructor_Empty();
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class DataListItemCollectionCas : AspNetHostingMinimal {
+        // LinkDemand
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			DataListItemCollectionTest unit = new DataListItemCollectionTest ();
-			unit.Constructor_Empty ();
-		}
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
+        {
+            ConstructorInfo ci = this.Type.GetConstructor(new Type[1] { typeof(ArrayList) });
+            Assert.IsNotNull(ci, ".ctor(ArrayList)");
+            return ci.Invoke(new object[1] { new ArrayList() });
+        }
 
-		// LinkDemand
-
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (ArrayList) });
-			Assert.IsNotNull (ci, ".ctor(ArrayList)");
-			return ci.Invoke (new object[1] { new ArrayList () });
-		}
-
-		public override Type Type {
-			get { return typeof (DataListItemCollection); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(DataListItemCollection); }
+        }
+    }
 }

@@ -11,7 +11,8 @@ namespace System.Text.Json.Serialization.Tests
 {
     public abstract class NodeInteropTests : SerializerTests
     {
-        public NodeInteropTests(JsonSerializerWrapper serializerWrapper) : base(serializerWrapper) { }
+        public NodeInteropTests(JsonSerializerWrapper serializerWrapper)
+            : base(serializerWrapper) { }
 
         [Fact]
         public async Task CompareResultsAgainstSerializer()
@@ -41,7 +42,8 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public async Task NodesAsPocoProperties()
         {
-            const string Expected = "{\"MyString\":null,\"Node\":42,\"Array\":[43],\"Value\":44,\"IntValue\":45,\"Object\":{\"Property\":46}}";
+            const string Expected =
+                "{\"MyString\":null,\"Node\":42,\"Array\":[43],\"Value\":44,\"IntValue\":45,\"Object\":{\"Property\":46}}";
 
             var poco = new Poco
             {
@@ -49,10 +51,7 @@ namespace System.Text.Json.Serialization.Tests
                 Array = new JsonArray(43),
                 Value = (JsonValue)44,
                 IntValue = (JsonValue)45,
-                Object = new JsonObject
-                {
-                    ["Property"] = 46
-                }
+                Object = new JsonObject { ["Property"] = 46 },
             };
 
             string json = await Serializer.SerializeWrapper(poco);

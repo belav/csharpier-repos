@@ -30,7 +30,8 @@ namespace System
             // With no seed specified, if this is the base type, we can implement this however we like.
             // If it's a derived type, for compat we respect the previous implementation, so that overrides
             // are called as they were previously.
-            _impl = GetType() == typeof(Random) ? new XoshiroImpl() : new Net5CompatDerivedImpl(this);
+            _impl =
+                GetType() == typeof(Random) ? new XoshiroImpl() : new Net5CompatDerivedImpl(this);
 
         /// <summary>Initializes a new instance of the Random class, using the specified seed value.</summary>
         /// <param name="Seed">
@@ -41,7 +42,10 @@ namespace System
             // With a custom seed, if this is the base Random class, we still need to respect the same algorithm that's been
             // used in the past, but we can do so without having to deal with calling the right overrides in a derived type.
             // If this is a derived type, we need to handle always using the same overrides we've done previously.
-            _impl = GetType() == typeof(Random) ? new Net5CompatSeedImpl(Seed) : new Net5CompatDerivedImpl(this, Seed);
+            _impl =
+                GetType() == typeof(Random)
+                    ? new Net5CompatSeedImpl(Seed)
+                    : new Net5CompatDerivedImpl(this, Seed);
 
         /// <summary>Constructor used by <see cref="ThreadSafeRandom"/>.</summary>
         /// <param name="isThreadSafeRandom">Must be true.</param>
@@ -333,14 +337,20 @@ namespace System
         }
 
         private static void ThrowMinMaxValueSwapped() =>
-            throw new ArgumentOutOfRangeException("minValue", SR.Format(SR.Argument_MinMaxValue, "minValue", "maxValue"));
+            throw new ArgumentOutOfRangeException(
+                "minValue",
+                SR.Format(SR.Argument_MinMaxValue, "minValue", "maxValue")
+            );
 
         [Conditional("DEBUG")]
         private static void AssertInRange(long result, long minInclusive, long maxExclusive)
         {
             if (maxExclusive > minInclusive)
             {
-                Debug.Assert(result >= minInclusive && result < maxExclusive, $"Expected {minInclusive} <= {result} < {maxExclusive}");
+                Debug.Assert(
+                    result >= minInclusive && result < maxExclusive,
+                    $"Expected {minInclusive} <= {result} < {maxExclusive}"
+                );
             }
             else
             {
@@ -373,7 +383,8 @@ namespace System
             [ThreadStatic]
             private static XoshiroImpl? t_random;
 
-            public ThreadSafeRandom() : base(isThreadSafeRandom: true) { }
+            public ThreadSafeRandom()
+                : base(isThreadSafeRandom: true) { }
 
             private static XoshiroImpl LocalRandom => t_random ?? Create();
 

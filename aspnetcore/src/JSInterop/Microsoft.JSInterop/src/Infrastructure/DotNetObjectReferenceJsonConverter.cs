@@ -8,7 +8,10 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.JSInterop.Infrastructure;
 
-internal sealed class DotNetObjectReferenceJsonConverter<[DynamicallyAccessedMembers(JSInvokable)] TValue> : JsonConverter<DotNetObjectReference<TValue>> where TValue : class
+internal sealed class DotNetObjectReferenceJsonConverter<
+    [DynamicallyAccessedMembers(JSInvokable)] TValue
+> : JsonConverter<DotNetObjectReference<TValue>>
+    where TValue : class
 {
     public DotNetObjectReferenceJsonConverter(JSRuntime jsRuntime)
     {
@@ -19,7 +22,11 @@ internal sealed class DotNetObjectReferenceJsonConverter<[DynamicallyAccessedMem
 
     public JSRuntime JSRuntime { get; }
 
-    public override DotNetObjectReference<TValue> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override DotNetObjectReference<TValue> Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         long dotNetObjectId = 0;
 
@@ -27,7 +34,10 @@ internal sealed class DotNetObjectReferenceJsonConverter<[DynamicallyAccessedMem
         {
             if (reader.TokenType == JsonTokenType.PropertyName)
             {
-                if (dotNetObjectId == 0 && reader.ValueTextEquals(DotNetObjectRefKey.EncodedUtf8Bytes))
+                if (
+                    dotNetObjectId == 0
+                    && reader.ValueTextEquals(DotNetObjectRefKey.EncodedUtf8Bytes)
+                )
                 {
                     reader.Read();
                     dotNetObjectId = reader.GetInt64();
@@ -52,7 +62,11 @@ internal sealed class DotNetObjectReferenceJsonConverter<[DynamicallyAccessedMem
         return value;
     }
 
-    public override void Write(Utf8JsonWriter writer, DotNetObjectReference<TValue> value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        DotNetObjectReference<TValue> value,
+        JsonSerializerOptions options
+    )
     {
         var objectId = JSRuntime.TrackObjectReference<TValue>(value);
 

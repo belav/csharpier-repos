@@ -13,9 +13,8 @@ namespace System.Security.Cryptography
         ///   Initializes a new instance of the <see cref="AuthenticationTagMismatchException" /> class with default
         ///   properties.
         /// </summary>
-        public AuthenticationTagMismatchException() : base(SR.Cryptography_AuthTagMismatch)
-        {
-        }
+        public AuthenticationTagMismatchException()
+            : base(SR.Cryptography_AuthTagMismatch) { }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref="AuthenticationTagMismatchException" /> class with a specified
@@ -24,9 +23,8 @@ namespace System.Security.Cryptography
         /// <param name="message">
         ///   The error message that explains the reason for the exception.
         /// </param>
-        public AuthenticationTagMismatchException(string? message) : base(message)
-        {
-        }
+        public AuthenticationTagMismatchException(string? message)
+            : base(message) { }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref="AuthenticationTagMismatchException" /> class with a specified
@@ -40,8 +38,6 @@ namespace System.Security.Cryptography
         ///   <see langword="null" />, the current exception is raised in a catch block that handles the inner exception.
         /// </param>
         public AuthenticationTagMismatchException(string? message, Exception? inner)
-            : base(message, inner)
-        {
-        }
+            : base(message, inner) { }
     }
 }

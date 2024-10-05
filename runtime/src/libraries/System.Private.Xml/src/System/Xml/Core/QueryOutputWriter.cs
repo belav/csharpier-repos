@@ -29,7 +29,8 @@ namespace System.Xml
         private readonly bool _checkWellFormedDoc;
         private bool _hasDocElem;
         private bool _inAttr;
-        private readonly string? _systemId, _publicId;
+        private readonly string? _systemId,
+            _publicId;
         private int _depth;
 
         public QueryOutputWriter(XmlRawWriter writer, XmlWriterSettings settings)
@@ -76,7 +77,6 @@ namespace System.Xml
             }
         }
 
-
         //-----------------------------------------------
         // XmlWriter interface
         //-----------------------------------------------
@@ -86,10 +86,7 @@ namespace System.Xml
         /// </summary>
         internal override IXmlNamespaceResolver? NamespaceResolver
         {
-            get
-            {
-                return this._resolver;
-            }
+            get { return this._resolver; }
             set
             {
                 this._resolver = value;
@@ -162,10 +159,11 @@ namespace System.Xml
             if (_outputDocType)
             {
                 _wrapped.WriteDocType(
-                        string.IsNullOrEmpty(prefix) ? localName : $"{prefix}:{localName}",
-                        _publicId,
-                        _systemId,
-                        null);
+                    string.IsNullOrEmpty(prefix) ? localName : $"{prefix}:{localName}",
+                    _publicId,
+                    _systemId,
+                    null
+                );
 
                 _outputDocType = false;
             }
@@ -230,10 +228,7 @@ namespace System.Xml
 
         internal override bool SupportsNamespaceDeclarationInChunks
         {
-            get
-            {
-                return _wrapped.SupportsNamespaceDeclarationInChunks;
-            }
+            get { return _wrapped.SupportsNamespaceDeclarationInChunks; }
         }
 
         internal override void WriteStartNamespaceDeclaration(string prefix)
@@ -336,7 +331,6 @@ namespace System.Xml
         {
             _wrapped.Flush();
         }
-
 
         //-----------------------------------------------
         // Helper methods

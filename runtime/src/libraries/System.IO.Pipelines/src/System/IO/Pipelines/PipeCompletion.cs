@@ -37,7 +37,10 @@ namespace System.IO.Pipelines
             return GetCallbacks();
         }
 
-        public PipeCompletionCallbacks? AddCallback(Action<Exception?, object?> callback, object? state)
+        public PipeCompletionCallbacks? AddCallback(
+            Action<Exception?, object?> callback,
+            object? state
+        )
         {
             _callbacks ??= new List<PipeCompletionCallback>();
             _callbacks.Add(new PipeCompletionCallback(callback, state));

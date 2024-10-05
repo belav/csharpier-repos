@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="StyleSheet.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
@@ -13,18 +13,17 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Design;
 using System.Globalization;
+using System.Reflection;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.Mobile;
 using System.Web.UI;
 using System.Web.UI.Design.WebControls;
 using System.Web.UI.HtmlControls;
 using System.Web.Util;
-using System.Reflection;
-using System.Security.Permissions;
 
 namespace System.Web.UI.MobileControls
 {
-
     /*
      * Mobile StyleSheet class.
      */
@@ -32,17 +31,27 @@ namespace System.Web.UI.MobileControls
     [
         ControlBuilderAttribute(typeof(StyleSheetControlBuilder)),
         Designer(typeof(System.Web.UI.Design.MobileControls.StyleSheetDesigner)),
-        Editor(typeof(System.Web.UI.Design.MobileControls.StyleSheetComponentEditor),
-            typeof(ComponentEditor)),
+        Editor(
+            typeof(System.Web.UI.Design.MobileControls.StyleSheetComponentEditor),
+            typeof(ComponentEditor)
+        ),
         ToolboxData("<{0}:StyleSheet runat=\"server\"></{0}:StyleSheet>"),
         ToolboxItem(typeof(System.Web.UI.Design.WebControlToolboxItem))
     ]
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class StyleSheet : MobileControl
     {
-        private readonly static StyleSheet _default = new StyleSheet();
+        private static readonly StyleSheet _default = new StyleSheet();
         private StyleCollection _styles = new StyleCollection();
         private StyleSheet _externalStyleSheet;
         private ArrayList _duplicateStyles = new ArrayList();
@@ -76,10 +85,7 @@ namespace System.Web.UI.MobileControls
         /// <include file='doc\StyleSheet.uex' path='docs/doc[@for="StyleSheet.Default"]/*' />
         public static StyleSheet Default
         {
-            get
-            {
-                return _default;
-            }
+            get { return _default; }
         }
 
         /// <include file='doc\StyleSheet.uex' path='docs/doc[@for="StyleSheet.AddParsedSubObject"]/*' />
@@ -90,9 +96,9 @@ namespace System.Web.UI.MobileControls
                 Style style = (Style)o;
                 style.SetControl(this);
                 String name = style.Name;
-                if (String.IsNullOrEmpty(name)) {
-                    throw new Exception(
-                        SR.GetString(SR.StyleSheet_MustContainID));
+                if (String.IsNullOrEmpty(name))
+                {
+                    throw new Exception(SR.GetString(SR.StyleSheet_MustContainID));
                 }
                 // Remember any duplicate styles we encounter.  Validate()
                 // will throw if this list is not empty.
@@ -128,22 +134,26 @@ namespace System.Web.UI.MobileControls
             }
             set
             {
-                if (String.IsNullOrEmpty(name)) {
+                if (String.IsNullOrEmpty(name))
+                {
                     throw new ArgumentException(SR.GetString(SR.Style_EmptyName));
                 }
 
-                if (!String.Equals(name, value.Name, StringComparison.OrdinalIgnoreCase)) {
+                if (!String.Equals(name, value.Name, StringComparison.OrdinalIgnoreCase))
+                {
                     // If the Style doesn't yet have a name, assign it the one that
                     // it's being set as in the Stylesheet.
                     Debug.Assert(value.Name != null);
 
-                    if (value.Name.Length == 0) {
+                    if (value.Name.Length == 0)
+                    {
                         value.Name = name;
                     }
-                    else {
+                    else
+                    {
                         throw new ArgumentException(
-                            SR.GetString(SR.StyleSheet_InvalidStyleName,
-                                         value.Name, name));
+                            SR.GetString(SR.StyleSheet_InvalidStyleName, value.Name, name)
+                        );
                     }
                 }
 
@@ -160,9 +170,8 @@ namespace System.Web.UI.MobileControls
                     // design mode, as they do share styles, although in a very
                     // careful way that doesn't cause problems.)
                     throw new Exception(
-                        SR.GetString(SR.StyleSheet_StyleAlreadyOwned,
-                                     value.Name,
-                                     value.Control.ID));
+                        SR.GetString(SR.StyleSheet_StyleAlreadyOwned, value.Name, value.Control.ID)
+                    );
                 }
 
                 String lowerName = name.ToLower(CultureInfo.InvariantCulture);
@@ -176,29 +185,23 @@ namespace System.Web.UI.MobileControls
                     value.SetDirty();
                     ((IStateManager)value).TrackViewState();
                 }
-                
+
                 _styles[lowerName] = value;
             }
         }
 
         /// <include file='doc\StyleSheet.uex' path='docs/doc[@for="StyleSheet.Styles"]/*' />
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ICollection Styles
         {
-            get
-            {
-                return (ICollection)_styles;
-            }
+            get { return (ICollection)_styles; }
         }
 
         /// <include file='doc\StyleSheet.uex' path='docs/doc[@for="StyleSheet.Remove"]/*' />
         public void Remove(String name)
         {
             _saveAll = true;
-            if (!_styles.Remove (name))
+            if (!_styles.Remove(name))
             {
                 throw new ArgumentException(SR.GetString(SR.Style_StyleNotFound, name));
             }
@@ -208,7 +211,10 @@ namespace System.Web.UI.MobileControls
         [
             Bindable(true),
             DefaultValue(""),
-            Editor(typeof(System.Web.UI.Design.MobileControls.StyleSheetRefUrlEditor), typeof(UITypeEditor)),
+            Editor(
+                typeof(System.Web.UI.Design.MobileControls.StyleSheetRefUrlEditor),
+                typeof(UITypeEditor)
+            ),
             MobileCategory(SR.Category_Behavior),
             MobileSysDescription(SR.StyleSheet_ReferencePath)
         ]
@@ -238,22 +244,31 @@ namespace System.Web.UI.MobileControls
 
                 if (_externalStyleSheet == null && ReferencePath.Length > 0)
                 {
-                    // Should load relative to parent template control (which 
+                    // Should load relative to parent template control (which
                     // may be a page or a user control).
 
                     TemplateControl parent = (TemplateControl)Parent;
 
                     // First check if there are any circular references.
 
-                    String resolvedPath = UrlPath.Combine(parent.TemplateSourceDirectory,
-                                                          ReferencePath);
+                    String resolvedPath = UrlPath.Combine(
+                        parent.TemplateSourceDirectory,
+                        ReferencePath
+                    );
                     for (StyleSheet ss = Referrer; ss != null; ss = ss.Referrer)
                     {
-                        if (ss.ResolvedPath != null &&
-                                String.Compare(ss.ResolvedPath, resolvedPath, StringComparison.OrdinalIgnoreCase) == 0)
+                        if (
+                            ss.ResolvedPath != null
+                            && String.Compare(
+                                ss.ResolvedPath,
+                                resolvedPath,
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
+                        )
                         {
-                            throw new Exception(SR.GetString(SR.StyleSheet_LoopReference, 
-                                                             ResolvedPath));
+                            throw new Exception(
+                                SR.GetString(SR.StyleSheet_LoopReference, ResolvedPath)
+                            );
                         }
                     }
 
@@ -274,8 +289,7 @@ namespace System.Web.UI.MobileControls
                     }
                     if (_externalStyleSheet == null)
                     {
-                        throw new Exception(
-                            SR.GetString(SR.StyleSheet_NoStyleSheetInExternalFile));
+                        throw new Exception(SR.GetString(SR.StyleSheet_NoStyleSheetInExternalFile));
                     }
 
                     _externalStyleSheet.ResolvedPath = resolvedPath;
@@ -306,28 +320,14 @@ namespace System.Web.UI.MobileControls
 
         private StyleSheet Referrer
         {
-            get
-            {
-                return _referrer;
-            }
-
-            set
-            {
-                _referrer = value;
-            }
+            get { return _referrer; }
+            set { _referrer = value; }
         }
 
         private String ResolvedPath
         {
-            get
-            {
-                return _resolvedPath;
-            }
-
-            set
-            {
-                _resolvedPath = value;
-            }
+            get { return _resolvedPath; }
+            set { _resolvedPath = value; }
         }
 
         /// <include file='doc\StyleSheet.uex' path='docs/doc[@for="StyleSheet.TrackViewState"]/*' />
@@ -342,10 +342,7 @@ namespace System.Web.UI.MobileControls
 
         internal override bool RequiresForm
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <include file='doc\StyleSheet.uex' path='docs/doc[@for="StyleSheet.SaveViewState"]/*' />
@@ -452,18 +449,15 @@ namespace System.Web.UI.MobileControls
             Browsable(false),
             DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
         ]
-        public override bool Visible 
+        public override bool Visible
         {
             get
             {
-                // 
+                //
 
                 return base.Visible;
             }
-            set
-            {
-                base.Visible = value;
-            }
+            set { base.Visible = value; }
         }
 
         // Do not expose the EnableViewState property in the Designer
@@ -475,16 +469,9 @@ namespace System.Web.UI.MobileControls
         ]
         public override bool EnableViewState
         {
-            get
-            {
-                return base.EnableViewState;
-            }
-            set
-            {
-                base.EnableViewState = value;
-            }
+            get { return base.EnableViewState; }
+            set { base.EnableViewState = value; }
         }
-
 
         /////////////////////////////////////////////////////////////////////////
         //  END DESIGNER SUPPORT
@@ -512,12 +499,14 @@ namespace System.Web.UI.MobileControls
                     return String.Empty;
                 }
                 throw new Exception(
-                    SR.GetString(SR.StyleSheet_PropertyNotAccessible, "StyleReference"));
+                    SR.GetString(SR.StyleSheet_PropertyNotAccessible, "StyleReference")
+                );
             }
             set
             {
                 throw new Exception(
-                    SR.GetString(SR.StyleSheet_PropertyNotSettable, "StyleReference"));
+                    SR.GetString(SR.StyleSheet_PropertyNotSettable, "StyleReference")
+                );
             }
         }
 
@@ -540,8 +529,7 @@ namespace System.Web.UI.MobileControls
                 {
                     return null;
                 }
-                throw new Exception(
-                    SR.GetString(SR.StyleSheet_PropertyNotAccessible, "Font"));
+                throw new Exception(SR.GetString(SR.StyleSheet_PropertyNotAccessible, "Font"));
             }
         }
 
@@ -560,13 +548,11 @@ namespace System.Web.UI.MobileControls
                 {
                     return Alignment.NotSet;
                 }
-                throw new Exception(
-                    SR.GetString(SR.StyleSheet_PropertyNotAccessible, "Alignment"));
+                throw new Exception(SR.GetString(SR.StyleSheet_PropertyNotAccessible, "Alignment"));
             }
             set
             {
-                throw new Exception(
-                    SR.GetString(SR.StyleSheet_PropertyNotSettable, "Alignment"));
+                throw new Exception(SR.GetString(SR.StyleSheet_PropertyNotSettable, "Alignment"));
             }
         }
 
@@ -585,13 +571,11 @@ namespace System.Web.UI.MobileControls
                 {
                     return Wrapping.NotSet;
                 }
-                throw new Exception(
-                    SR.GetString(SR.StyleSheet_PropertyNotAccessible, "Wrapping"));
+                throw new Exception(SR.GetString(SR.StyleSheet_PropertyNotAccessible, "Wrapping"));
             }
             set
             {
-                throw new Exception(
-                    SR.GetString(SR.StyleSheet_PropertyNotSettable, "Wrapping"));
+                throw new Exception(SR.GetString(SR.StyleSheet_PropertyNotSettable, "Wrapping"));
             }
         }
 
@@ -610,13 +594,11 @@ namespace System.Web.UI.MobileControls
                 {
                     return Color.Empty;
                 }
-                throw new Exception(
-                    SR.GetString(SR.StyleSheet_PropertyNotAccessible, "ForeColor"));
+                throw new Exception(SR.GetString(SR.StyleSheet_PropertyNotAccessible, "ForeColor"));
             }
             set
             {
-                throw new Exception(
-                    SR.GetString(SR.StyleSheet_PropertyNotSettable, "ForeColor"));
+                throw new Exception(SR.GetString(SR.StyleSheet_PropertyNotSettable, "ForeColor"));
             }
         }
 
@@ -635,13 +617,11 @@ namespace System.Web.UI.MobileControls
                 {
                     return Color.Empty;
                 }
-                throw new Exception(
-                    SR.GetString(SR.StyleSheet_PropertyNotAccessible, "BackColor"));
+                throw new Exception(SR.GetString(SR.StyleSheet_PropertyNotAccessible, "BackColor"));
             }
             set
             {
-                throw new Exception(
-                    SR.GetString(SR.StyleSheet_PropertyNotSettable, "BackColor"));
+                throw new Exception(SR.GetString(SR.StyleSheet_PropertyNotSettable, "BackColor"));
             }
         }
 
@@ -661,21 +641,18 @@ namespace System.Web.UI.MobileControls
                     return true;
                 }
                 throw new Exception(
-                    SR.GetString(SR.StyleSheet_PropertyNotAccessible, "BreakAfter"));
+                    SR.GetString(SR.StyleSheet_PropertyNotAccessible, "BreakAfter")
+                );
             }
             set
             {
-                throw new Exception(
-                    SR.GetString(SR.StyleSheet_PropertyNotSettable, "BreakAfter"));
+                throw new Exception(SR.GetString(SR.StyleSheet_PropertyNotSettable, "BreakAfter"));
             }
         }
 
         internal ICollection DuplicateStyles
         {
-            get
-            {
-                return _duplicateStyles;
-            }
+            get { return _duplicateStyles; }
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -691,15 +668,8 @@ namespace System.Web.UI.MobileControls
         {
             public Style this[String name]
             {
-                get
-                {
-                    return (Style)BaseGet(name);
-                }
-
-                set
-                {
-                    BaseSet(name, value);
-                }
+                get { return (Style)BaseGet(name); }
+                set { BaseSet(name, value); }
             }
 
             public Style GetAt(int i)
@@ -725,9 +695,6 @@ namespace System.Web.UI.MobileControls
             {
                 BaseClear();
             }
-            
-
-
         }
     }
 
@@ -737,13 +704,21 @@ namespace System.Web.UI.MobileControls
      * Copyright (c) 2000 Microsoft Corporation
      */
     /// <include file='doc\StyleSheet.uex' path='docs/doc[@for="StyleSheetControlBuilder"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class StyleSheetControlBuilder : MobileControlBuilder
     {
         /// <include file='doc\StyleSheet.uex' path='docs/doc[@for="StyleSheetControlBuilder.GetChildControlType"]/*' />
-        public override Type GetChildControlType(String name, IDictionary attributes) 
+        public override Type GetChildControlType(String name, IDictionary attributes)
         {
             String lowerCaseName = name.ToLower(CultureInfo.InvariantCulture);
 
@@ -756,31 +731,30 @@ namespace System.Web.UI.MobileControls
             // a StyleSheet.
             // NOTE: Currently no way for third party extenders to add their
             // own styles.  They'll need to specify complete name and
-            // runat=server. 
+            // runat=server.
 
             Type type = null;
             switch (lowerCaseName)
             {
-              case "style":
-                if(InDesigner)
-                {
-                    // Indicate to the designer that it needs to add a prefix.
-                    System.Web.UI.Design.MobileControls.StyleSheetDesigner.SetRequiresDesignTimeChanges();
-                }
-                type = typeof(Style);
-                break;
+                case "style":
+                    if (InDesigner)
+                    {
+                        // Indicate to the designer that it needs to add a prefix.
+                        System.Web.UI.Design.MobileControls.StyleSheetDesigner.SetRequiresDesignTimeChanges();
+                    }
+                    type = typeof(Style);
+                    break;
 
-              case "pagerstyle":
-                type = typeof(PagerStyle);
-                break;
+                case "pagerstyle":
+                    type = typeof(PagerStyle);
+                    break;
 
-              default:
-                type = base.GetChildControlType(name, attributes);
-                break;
+                default:
+                    type = base.GetChildControlType(name, attributes);
+                    break;
             }
 
             return type;
         }
     }
-
 }

@@ -13,7 +13,10 @@ namespace Microsoft.Web.Mvc.Test
         public void GetTypeArgumentsIfMatch_ClosedTypeIsGenericAndMatches_ReturnsType()
         {
             // Act
-            Type[] typeArguments = TypeHelpers.GetTypeArgumentsIfMatch(typeof(List<int>), typeof(List<>));
+            Type[] typeArguments = TypeHelpers.GetTypeArgumentsIfMatch(
+                typeof(List<int>),
+                typeof(List<>)
+            );
 
             // Assert
             Assert.Equal(new[] { typeof(int) }, typeArguments);
@@ -23,7 +26,10 @@ namespace Microsoft.Web.Mvc.Test
         public void GetTypeArgumentsIfMatch_ClosedTypeIsGenericButDoesNotMatch_ReturnsNull()
         {
             // Act
-            Type[] typeArguments = TypeHelpers.GetTypeArgumentsIfMatch(typeof(int?), typeof(List<>));
+            Type[] typeArguments = TypeHelpers.GetTypeArgumentsIfMatch(
+                typeof(int?),
+                typeof(List<>)
+            );
 
             // Assert
             Assert.Null(typeArguments);

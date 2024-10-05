@@ -20,18 +20,18 @@ public abstract class LogoutModel : PageModel
     ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
-    public void OnGet()
-    {
-    }
+    public void OnGet() { }
 
     /// <summary>
     ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
-    public virtual Task<IActionResult> OnPost(string? returnUrl = null) => throw new NotImplementedException();
+    public virtual Task<IActionResult> OnPost(string? returnUrl = null) =>
+        throw new NotImplementedException();
 }
 
-internal sealed class LogoutModel<TUser> : LogoutModel where TUser : class
+internal sealed class LogoutModel<TUser> : LogoutModel
+    where TUser : class
 {
     private readonly SignInManager<TUser> _signInManager;
     private readonly ILogger<LogoutModel> _logger;

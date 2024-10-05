@@ -20,7 +20,10 @@ internal sealed class CompositePolicy : IOutputCachePolicy
     }
 
     /// <inheritdoc/>
-    async ValueTask IOutputCachePolicy.CacheRequestAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    async ValueTask IOutputCachePolicy.CacheRequestAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
         foreach (var policy in _policies)
         {
@@ -29,7 +32,10 @@ internal sealed class CompositePolicy : IOutputCachePolicy
     }
 
     /// <inheritdoc/>
-    async ValueTask IOutputCachePolicy.ServeFromCacheAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    async ValueTask IOutputCachePolicy.ServeFromCacheAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
         foreach (var policy in _policies)
         {
@@ -38,7 +44,10 @@ internal sealed class CompositePolicy : IOutputCachePolicy
     }
 
     /// <inheritdoc/>
-    async ValueTask IOutputCachePolicy.ServeResponseAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    async ValueTask IOutputCachePolicy.ServeResponseAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
         foreach (var policy in _policies)
         {

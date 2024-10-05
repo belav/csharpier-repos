@@ -1,97 +1,94 @@
 using System;
 
-public interface Hello {
-
-	bool MyMethod (int i);
+public interface Hello
+{
+    bool MyMethod(int i);
 }
 
-public interface Another : Hello {
-
-	int AnotherMethod (int i);
+public interface Another : Hello
+{
+    int AnotherMethod(int i);
 }
 
-public class Foo : Hello, Another {
+public class Foo : Hello, Another
+{
+    public bool MyMethod(int i)
+    {
+        if (i == 22)
+            return true;
+        else
+            return false;
+    }
 
-	public bool MyMethod (int i)
-	{
-		if (i == 22)
-			return true;
-		else
-			return false;
-	}
-
-	public int AnotherMethod (int i)
-	{
-		return i * 10;
-	}
-	
+    public int AnotherMethod(int i)
+    {
+        return i * 10;
+    }
 }
 
-public interface ITest {
-
-	bool TestMethod (int i, float j);
+public interface ITest
+{
+    bool TestMethod(int i, float j);
 }
 
-public class Blah : Foo {
+public class Blah : Foo
+{
+    public delegate void MyDelegate(int i, int j);
 
-	public delegate void MyDelegate (int i, int j);
+    void Bar(int i, int j)
+    {
+        Console.WriteLine(i + j);
+    }
 
-	void Bar (int i, int j)
-	{
-		Console.WriteLine (i+j);
-	}
-	
-	public static int Main ()
-	{
-		Blah k = new Blah ();
+    public static int Main()
+    {
+        Blah k = new Blah();
 
-		Foo f = k;
+        Foo f = k;
 
-		object o = k;
+        object o = k;
 
-		if (f is Foo)
-			Console.WriteLine ("I am a Foo!");
+        if (f is Foo)
+            Console.WriteLine("I am a Foo!");
 
-		Hello ihello = f;
+        Hello ihello = f;
 
-		Another ianother = f;
+        Another ianother = f;
 
-		ihello = ianother; 
+        ihello = ianother;
 
-		bool b = f.MyMethod (22);
+        bool b = f.MyMethod(22);
 
-		MyDelegate del = new MyDelegate (k.Bar);
+        MyDelegate del = new MyDelegate(k.Bar);
 
-		del (2, 3);
-		
-		Delegate tmp = del;
+        del(2, 3);
 
-		// Explicit reference conversions
-		
-		MyDelegate adel = (MyDelegate) tmp;
+        Delegate tmp = del;
 
-		adel (4, 7);
+        // Explicit reference conversions
 
-		Blah l = (Blah) o;
+        MyDelegate adel = (MyDelegate)tmp;
 
-		l.Bar (20, 30);
+        adel(4, 7);
 
-		l = (Blah) f;
+        Blah l = (Blah)o;
 
-		l.Bar (2, 5);
+        l.Bar(20, 30);
 
-		f = (Foo) ihello;
+        l = (Blah)f;
 
-		// The following cause exceptions even though they are supposed to work
-		// according to the spec
+        l.Bar(2, 5);
 
-		// This one sounds ridiculous !
-		// ITest t = (ITest) l;
-		
-		// ITest u = (ITest) ihello;
+        f = (Foo)ihello;
 
-		return 0;
+        // The following cause exceptions even though they are supposed to work
+        // according to the spec
 
-	}
+        // This one sounds ridiculous !
+        // ITest t = (ITest) l;
+
+        // ITest u = (ITest) ihello;
+
+        return 0;
+    }
 }
-

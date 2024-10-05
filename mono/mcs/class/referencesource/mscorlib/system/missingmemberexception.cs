@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
@@ -13,55 +13,70 @@
 **
 =============================================================================*/
 
-namespace System {
-    
+namespace System
+{
     using System;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.Runtime.CompilerServices;
     using System.Runtime.Remoting;
     using System.Runtime.Serialization;
-    using System.Runtime.CompilerServices;
-    using System.Globalization;
-        using System.Security.Permissions;
     using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
-    
+    using System.Security.Permissions;
+
     [System.Runtime.InteropServices.ComVisible(true)]
-    [Serializable] public class MissingMemberException : MemberAccessException, ISerializable {
-        public MissingMemberException() 
-            : base(Environment.GetResourceString("Arg_MissingMemberException")) {
-            SetErrorCode(__HResults.COR_E_MISSINGMEMBER);
-        }
-    
-        public MissingMemberException(String message) 
-            : base(message) {
-            SetErrorCode(__HResults.COR_E_MISSINGMEMBER);
-        }
-    
-        public MissingMemberException(String message, Exception inner) 
-            : base(message, inner) {
+    [Serializable]
+    public class MissingMemberException : MemberAccessException, ISerializable
+    {
+        public MissingMemberException()
+            : base(Environment.GetResourceString("Arg_MissingMemberException"))
+        {
             SetErrorCode(__HResults.COR_E_MISSINGMEMBER);
         }
 
-        protected MissingMemberException(SerializationInfo info, StreamingContext context) : base (info, context) {
+        public MissingMemberException(String message)
+            : base(message)
+        {
+            SetErrorCode(__HResults.COR_E_MISSINGMEMBER);
+        }
+
+        public MissingMemberException(String message, Exception inner)
+            : base(message, inner)
+        {
+            SetErrorCode(__HResults.COR_E_MISSINGMEMBER);
+        }
+
+        protected MissingMemberException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
             ClassName = (String)info.GetString("MMClassName");
             MemberName = (String)info.GetString("MMMemberName");
             Signature = (byte[])info.GetValue("MMSignature", typeof(byte[]));
         }
-    
+
         public override String Message
         {
-            [System.Security.SecuritySafeCritical]  // auto-generated
-            get {
-                if (ClassName == null) {
+            [System.Security.SecuritySafeCritical] // auto-generated
+            get
+            {
+                if (ClassName == null)
+                {
                     return base.Message;
-                } else {
+                }
+                else
+                {
                     // do any desired fixups to classname here.
-                    return Environment.GetResourceString("MissingMember_Name", 
-                                                                       ClassName + "." + MemberName +
-                                                                       (Signature != null ? " " + FormatSignature(Signature) : ""));
+                    return Environment.GetResourceString(
+                        "MissingMember_Name",
+                        ClassName
+                            + "."
+                            + MemberName
+                            + (Signature != null ? " " + FormatSignature(Signature) : "")
+                    );
                 }
             }
         }
-    
+
 #if MONO
         internal static string FormatSignature(byte[] signature)
         {
@@ -69,30 +84,31 @@ namespace System {
         }
 #else
         // Called to format signature
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern String FormatSignature(byte [] signature);
+        internal static extern String FormatSignature(byte[] signature);
 #endif
-    
-    
+
         // Potentially called from the EE
         private MissingMemberException(String className, String memberName, byte[] signature)
         {
-            ClassName   = className;
-            MemberName  = memberName;
-            Signature   = signature;
+            ClassName = className;
+            MemberName = memberName;
+            Signature = signature;
         }
-    
+
         public MissingMemberException(String className, String memberName)
         {
-            ClassName   = className;
-            MemberName  = memberName;
+            ClassName = className;
+            MemberName = memberName;
         }
-    
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public override void GetObjectData(SerializationInfo info, StreamingContext context) {
-            if (info==null) {
+
+        [System.Security.SecurityCritical] // auto-generated_required
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            if (info == null)
+            {
                 throw new ArgumentNullException("info");
             }
             Contract.EndContractBlock();
@@ -101,13 +117,12 @@ namespace System {
             info.AddValue("MMMemberName", MemberName, typeof(String));
             info.AddValue("MMSignature", Signature, typeof(byte[]));
         }
-    
-       
+
         // If ClassName != null, GetMessage will construct on the fly using it
         // and the other variables. This allows customization of the
         // format depending on the language environment.
-        protected String  ClassName;
-        protected String  MemberName;
-        protected byte[]  Signature;
+        protected String ClassName;
+        protected String MemberName;
+        protected byte[] Signature;
     }
 }

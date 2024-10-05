@@ -4,8 +4,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Reflection;
 using System.Diagnostics;
+using System.Reflection;
 using System.Runtime.Remoting.Messaging;
 using System.Workflow.ComponentModel;
 using System.Workflow.ComponentModel.Design;
@@ -21,10 +21,14 @@ namespace System.Workflow.Activities
     {
         private SetStateSubscription _setStateSubscription;
         private List<StateMachineSubscription> _eventQueue = new List<StateMachineSubscription>();
-        private Dictionary<IComparable, StateMachineSubscription> _subscriptions = new Dictionary<IComparable, StateMachineSubscription>();
+        private Dictionary<IComparable, StateMachineSubscription> _subscriptions =
+            new Dictionary<IComparable, StateMachineSubscription>();
         private StateMachineExecutionState _executionState;
 
-        internal StateMachineSubscriptionManager(StateMachineExecutionState executionState, Guid instanceId)
+        internal StateMachineSubscriptionManager(
+            StateMachineExecutionState executionState,
+            Guid instanceId
+        )
         {
             _executionState = executionState;
             _setStateSubscription = new SetStateSubscription(instanceId);
@@ -33,34 +37,22 @@ namespace System.Workflow.Activities
         #region Properties
         private List<StateMachineSubscription> EventQueue
         {
-            get
-            {
-                return this._eventQueue;
-            }
+            get { return this._eventQueue; }
         }
 
         internal StateMachineExecutionState ExecutionState
         {
-            get
-            {
-                return _executionState;
-            }
+            get { return _executionState; }
         }
 
         internal Dictionary<IComparable, StateMachineSubscription> Subscriptions
         {
-            get
-            {
-                return this._subscriptions;
-            }
+            get { return this._subscriptions; }
         }
 
         internal SetStateSubscription SetStateSubscription
         {
-            get
-            {
-                return _setStateSubscription;
-            }
+            get { return _setStateSubscription; }
         }
 
         #endregion Properties
@@ -81,30 +73,37 @@ namespace System.Workflow.Activities
 
         internal void ReevaluateSubscriptions(ActivityExecutionContext context)
         {
-            Dictionary<IComparable, StateMachineSubscription> subscriptions = this.GetSubscriptionsShallowCopy();
+            Dictionary<IComparable, StateMachineSubscription> subscriptions =
+                this.GetSubscriptionsShallowCopy();
             List<IComparable> subscribed = new List<IComparable>();
 
             StateActivity state = StateMachineHelpers.GetCurrentState(context);
             while (state != null)
             {
-
                 foreach (Activity activity in state.EnabledActivities)
                 {
                     EventDrivenActivity eventDriven = activity as EventDrivenActivity;
                     if (eventDriven == null)
                         continue;
 
-                    IEventActivity eventActivity = StateMachineHelpers.GetEventActivity(eventDriven);
+                    IEventActivity eventActivity = StateMachineHelpers.GetEventActivity(
+                        eventDriven
+                    );
                     IComparable queueName = eventActivity.QueueName;
                     if (queueName == null)
                         continue;
 
                     StateMachineSubscription subscription;
                     subscriptions.TryGetValue(queueName, out subscription);
-                    EventActivitySubscription eventActivitySubscription = subscription as EventActivitySubscription;
+                    EventActivitySubscription eventActivitySubscription =
+                        subscription as EventActivitySubscription;
                     if (eventActivitySubscription != null)
                     {
-                        if (eventActivitySubscription.EventDrivenName.Equals(eventDriven.QualifiedName))
+                        if (
+                            eventActivitySubscription.EventDrivenName.Equals(
+                                eventDriven.QualifiedName
+                            )
+                        )
                         {
                             // this EventDriven is already subscribed
                             subscribed.Add(queueName);
@@ -116,13 +115,21 @@ namespace System.Workflow.Activities
                             // if so, throws, since it is not valid to subscribe to the
                             // same event twice
                             if (eventActivitySubscription.StateName.Equals(state.QualifiedName))
-                                throw new InvalidOperationException(SR.GetStateAlreadySubscribesToThisEvent(state.QualifiedName, queueName));
+                                throw new InvalidOperationException(
+                                    SR.GetStateAlreadySubscribesToThisEvent(
+                                        state.QualifiedName,
+                                        queueName
+                                    )
+                                );
 
-                            // some other EventDriven is subscribed, so we need to unsubscribe if 
+                            // some other EventDriven is subscribed, so we need to unsubscribe if
                             // the event driven belongs to one of our parents
                             if (IsParentState(state, eventActivitySubscription.StateName))
                             {
-                                UnsubscribeAction unsubscribe = new UnsubscribeAction(eventActivitySubscription.StateName, eventActivitySubscription.EventDrivenName);
+                                UnsubscribeAction unsubscribe = new UnsubscribeAction(
+                                    eventActivitySubscription.StateName,
+                                    eventActivitySubscription.EventDrivenName
+                                );
                                 this.ExecutionState.EnqueueAction(unsubscribe);
                                 subscriptions.Remove(queueName);
                             }
@@ -134,7 +141,10 @@ namespace System.Workflow.Activities
                     if (subscribed.Contains(queueName))
                         continue;
 
-                    SubscribeAction subscribe = new SubscribeAction(state.QualifiedName, eventDriven.QualifiedName);
+                    SubscribeAction subscribe = new SubscribeAction(
+                        state.QualifiedName,
+                        eventDriven.QualifiedName
+                    );
                     this.ExecutionState.EnqueueAction(subscribe);
                     subscribed.Add(queueName);
                 }
@@ -159,7 +169,10 @@ namespace System.Workflow.Activities
             return false;
         }
 
-        internal void SubscribeEventDriven(ActivityExecutionContext context, EventDrivenActivity eventDriven)
+        internal void SubscribeEventDriven(
+            ActivityExecutionContext context,
+            EventDrivenActivity eventDriven
+        )
         {
             IEventActivity eventActivity = StateMachineHelpers.GetEventActivity(eventDriven);
             Activity activity = (Activity)eventActivity;
@@ -168,15 +181,20 @@ namespace System.Workflow.Activities
             SubscribeEventActivity(context, eventActivity);
         }
 
-        internal void UnsubscribeEventDriven(ActivityExecutionContext context, EventDrivenActivity eventDriven)
+        internal void UnsubscribeEventDriven(
+            ActivityExecutionContext context,
+            EventDrivenActivity eventDriven
+        )
         {
             Debug.Assert(IsEventDrivenSubscribed(eventDriven));
             IEventActivity eventActivity = StateMachineHelpers.GetEventActivity(eventDriven);
             UnsubscribeEventActivity(context, eventActivity);
         }
 
-        private StateMachineSubscription SubscribeEventActivity(ActivityExecutionContext context,
-            IEventActivity eventActivity)
+        private StateMachineSubscription SubscribeEventActivity(
+            ActivityExecutionContext context,
+            IEventActivity eventActivity
+        )
         {
             EventActivitySubscription subscription = new EventActivitySubscription();
             StateActivity state = (StateActivity)context.Activity;
@@ -191,8 +209,10 @@ namespace System.Workflow.Activities
             return subscription;
         }
 
-        private void UnsubscribeEventActivity(ActivityExecutionContext context,
-            IEventActivity eventActivity)
+        private void UnsubscribeEventActivity(
+            ActivityExecutionContext context,
+            IEventActivity eventActivity
+        )
         {
             if (context == null)
                 throw new ArgumentNullException("context");
@@ -206,9 +226,11 @@ namespace System.Workflow.Activities
             UnsubscribeEventActivity(context, eventActivity, subscription);
         }
 
-        private void UnsubscribeEventActivity(ActivityExecutionContext context,
+        private void UnsubscribeEventActivity(
+            ActivityExecutionContext context,
             IEventActivity eventActivity,
-            EventActivitySubscription subscription)
+            EventActivitySubscription subscription
+        )
         {
             if (context == null)
                 throw new ArgumentNullException("context");
@@ -227,7 +249,8 @@ namespace System.Workflow.Activities
         internal void CreateSetStateEventQueue(ActivityExecutionContext context)
         {
             this.SetStateSubscription.CreateQueue(context);
-            this.Subscriptions[this.SetStateSubscription.SubscriptionId] = this.SetStateSubscription;
+            this.Subscriptions[this.SetStateSubscription.SubscriptionId] =
+                this.SetStateSubscription;
         }
 
         internal void DeleteSetStateEventQueue(ActivityExecutionContext context)
@@ -239,7 +262,8 @@ namespace System.Workflow.Activities
         internal void SubscribeToSetStateEvent(ActivityExecutionContext context)
         {
             this.SetStateSubscription.Subscribe(context);
-            this.Subscriptions[this.SetStateSubscription.SubscriptionId] = this.SetStateSubscription;
+            this.Subscriptions[this.SetStateSubscription.SubscriptionId] =
+                this.SetStateSubscription;
         }
 
         internal void UnsubscribeToSetStateEvent(ActivityExecutionContext context)
@@ -261,11 +285,11 @@ namespace System.Workflow.Activities
             if ((queueName == null) || (!this.Subscriptions.ContainsKey(queueName)))
                 return null;
 
-            EventActivitySubscription subscription = this.Subscriptions[queueName] as EventActivitySubscription;
+            EventActivitySubscription subscription =
+                this.Subscriptions[queueName] as EventActivitySubscription;
 
             Activity activity = (Activity)eventActivity;
-            if (subscription == null ||
-                subscription.EventActivityName != activity.QualifiedName)
+            if (subscription == null || subscription.EventActivityName != activity.QualifiedName)
                 return null;
 
             return subscription;
@@ -285,12 +309,19 @@ namespace System.Workflow.Activities
         }
         */
 
-        internal static void DisableStateWorkflowQueues(ActivityExecutionContext context, StateActivity state)
+        internal static void DisableStateWorkflowQueues(
+            ActivityExecutionContext context,
+            StateActivity state
+        )
         {
             ChangeStateWorkflowQueuesState(context, state, false);
         }
 
-        private static void ChangeStateWorkflowQueuesState(ActivityExecutionContext context, StateActivity state, bool enabled)
+        private static void ChangeStateWorkflowQueuesState(
+            ActivityExecutionContext context,
+            StateActivity state,
+            bool enabled
+        )
         {
             foreach (Activity activity in state.EnabledActivities)
             {
@@ -300,7 +331,11 @@ namespace System.Workflow.Activities
             }
         }
 
-        internal static void ChangeEventDrivenQueueState(ActivityExecutionContext context, EventDrivenActivity eventDriven, bool enabled)
+        internal static void ChangeEventDrivenQueueState(
+            ActivityExecutionContext context,
+            EventDrivenActivity eventDriven,
+            bool enabled
+        )
         {
             IEventActivity eventActivity = StateMachineHelpers.GetEventActivity(eventDriven);
             IComparable queueName = GetQueueName(eventActivity);
@@ -311,9 +346,13 @@ namespace System.Workflow.Activities
                 workflowQueue.Enabled = enabled;
         }
 
-        internal static WorkflowQueue GetWorkflowQueue(ActivityExecutionContext context, IComparable queueName)
+        internal static WorkflowQueue GetWorkflowQueue(
+            ActivityExecutionContext context,
+            IComparable queueName
+        )
         {
-            WorkflowQueuingService workflowQueuingService = context.GetService<WorkflowQueuingService>();
+            WorkflowQueuingService workflowQueuingService =
+                context.GetService<WorkflowQueuingService>();
             if (workflowQueuingService.Exists(queueName))
             {
                 WorkflowQueue workflowQueue = workflowQueuingService.GetWorkflowQueue(queueName);
@@ -330,8 +369,14 @@ namespace System.Workflow.Activities
 
         private Dictionary<IComparable, StateMachineSubscription> GetSubscriptionsShallowCopy()
         {
-            Dictionary<IComparable, StateMachineSubscription> subscriptions = new Dictionary<IComparable, StateMachineSubscription>();
-            foreach (KeyValuePair<IComparable, StateMachineSubscription> dictionaryEntry in this.Subscriptions)
+            Dictionary<IComparable, StateMachineSubscription> subscriptions =
+                new Dictionary<IComparable, StateMachineSubscription>();
+            foreach (
+                KeyValuePair<
+                    IComparable,
+                    StateMachineSubscription
+                > dictionaryEntry in this.Subscriptions
+            )
             {
                 subscriptions.Add(dictionaryEntry.Key, dictionaryEntry.Value);
             }
@@ -345,7 +390,7 @@ namespace System.Workflow.Activities
             StateMachineSubscription subscription = GetSubscription(subscriptionId);
             if (subscription != null)
             {
-                // subscription can be null if we already unsubscribed to 
+                // subscription can be null if we already unsubscribed to
                 // this event
                 this.EventQueue.Add(subscription);
             }
@@ -357,7 +402,7 @@ namespace System.Workflow.Activities
             StateMachineSubscription subscription = GetSubscription(queueName);
             if (subscription != null)
             {
-                // subscription can be null if we already unsubscribed to 
+                // subscription can be null if we already unsubscribed to
                 // this event
                 this.EventQueue.Add(subscription);
             }
@@ -373,16 +418,23 @@ namespace System.Workflow.Activities
 
         private void RemoveFromQueue(Guid subscriptionId)
         {
-            this.EventQueue.RemoveAll(delegate(StateMachineSubscription subscription) { return subscription.SubscriptionId.Equals(subscriptionId); });
+            this.EventQueue.RemoveAll(
+                delegate(StateMachineSubscription subscription)
+                {
+                    return subscription.SubscriptionId.Equals(subscriptionId);
+                }
+            );
         }
 
         internal void ProcessQueue(ActivityExecutionContext context)
         {
             StateActivity currentState = StateMachineHelpers.GetCurrentState(context);
-            if (this.EventQueue.Count == 0 ||
-                this.ExecutionState.HasEnqueuedActions ||
-                this.ExecutionState.SchedulerBusy ||
-                currentState == null)
+            if (
+                this.EventQueue.Count == 0
+                || this.ExecutionState.HasEnqueuedActions
+                || this.ExecutionState.SchedulerBusy
+                || currentState == null
+            )
                 return;
 
             StateMachineSubscription subscription = Dequeue();
@@ -390,6 +442,5 @@ namespace System.Workflow.Activities
         }
 
         #endregion Event Queue Methods
-
     }
 }

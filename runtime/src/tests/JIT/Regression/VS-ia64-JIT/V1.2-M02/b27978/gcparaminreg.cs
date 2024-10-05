@@ -4,7 +4,7 @@
 
 // This test is intended to test using SSIs to report cases where
 // the address of an SSI escapes the current function.
-// Note that this probably needs to be modifies in msil to 
+// Note that this probably needs to be modifies in msil to
 // actually process the address of the local, rather than the local.
 
 using System;
@@ -36,6 +36,3 @@ public class test
         return 3;
     }
 }
-
-
-

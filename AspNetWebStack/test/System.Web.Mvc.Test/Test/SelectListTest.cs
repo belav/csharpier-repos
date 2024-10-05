@@ -91,7 +91,12 @@ namespace System.Web.Mvc.Test
             object selectedValue = new object();
 
             // Act
-            SelectList selectList = new SelectList(items, "SomeValueField", "SomeTextField", selectedValue);
+            SelectList selectList = new SelectList(
+                items,
+                "SomeValueField",
+                "SomeTextField",
+                selectedValue
+            );
             List<object> selectedValues = selectList.SelectedValues.Cast<object>().ToList();
 
             // Assert
@@ -117,11 +122,13 @@ namespace System.Web.Mvc.Test
             IEnumerable disabledValues = new[] { "B", "C" };
 
             // Act
-            SelectList selectList = new SelectList(items,
+            SelectList selectList = new SelectList(
+                items,
                 "Value",
                 "Text",
                 selectedValue,
-                disabledValues);
+                disabledValues
+            );
             List<object> selectedValues = selectList.SelectedValues.Cast<object>().ToList();
 
             // Assert
@@ -143,18 +150,29 @@ namespace System.Web.Mvc.Test
             // Arrange
             IEnumerable items = new[]
             {
-                new { Value = "A", Text = "Alice", Group = "AB" },
-                new { Value = "B", Text = "Bravo", Group = "AB" },
-                new { Value = "C", Text = "Charlie", Group = "C" },
+                new
+                {
+                    Value = "A",
+                    Text = "Alice",
+                    Group = "AB",
+                },
+                new
+                {
+                    Value = "B",
+                    Text = "Bravo",
+                    Group = "AB",
+                },
+                new
+                {
+                    Value = "C",
+                    Text = "Charlie",
+                    Group = "C",
+                },
             };
             object selectedValue = "A";
 
             // Act
-            SelectList selectList = new SelectList(items,
-                "Value",
-                "Text",
-                "Group",
-                selectedValue);
+            SelectList selectList = new SelectList(items, "Value", "Text", "Group", selectedValue);
             List<object> selectedValues = selectList.SelectedValues.Cast<object>().ToList();
 
             // Assert
@@ -173,21 +191,38 @@ namespace System.Web.Mvc.Test
             // Arrange
             IEnumerable items = new[]
             {
-                new { Value = "A", Text = "Alice", Group = "AB" },
-                new { Value = "B", Text = "Bravo", Group = "AB" },
-                new { Value = "C", Text = "Charlie", Group = "C" },
+                new
+                {
+                    Value = "A",
+                    Text = "Alice",
+                    Group = "AB",
+                },
+                new
+                {
+                    Value = "B",
+                    Text = "Bravo",
+                    Group = "AB",
+                },
+                new
+                {
+                    Value = "C",
+                    Text = "Charlie",
+                    Group = "C",
+                },
             };
             object selectedValue = "A";
             IEnumerable disabledGroups = new[] { "AB" };
 
             // Act
-            SelectList selectList = new SelectList(items,
+            SelectList selectList = new SelectList(
+                items,
                 "Value",
                 "Text",
                 "Group",
                 selectedValue,
                 null,
-                disabledGroups);
+                disabledGroups
+            );
             List<object> selectedValues = selectList.SelectedValues.Cast<object>().ToList();
 
             // Assert
@@ -207,20 +242,37 @@ namespace System.Web.Mvc.Test
             // Arrange
             IEnumerable items = new[]
             {
-                new { Value = "A", Text = "Alice", Group = "AB" },
-                new { Value = "B", Text = "Bravo", Group = "AB" },
-                new { Value = "C", Text = "Charlie", Group = "C" },
+                new
+                {
+                    Value = "A",
+                    Text = "Alice",
+                    Group = "AB",
+                },
+                new
+                {
+                    Value = "B",
+                    Text = "Bravo",
+                    Group = "AB",
+                },
+                new
+                {
+                    Value = "C",
+                    Text = "Charlie",
+                    Group = "C",
+                },
             };
             object selectedValue = "A";
             IEnumerable disabledValues = new[] { "A", "C" };
 
             // Act
-            SelectList selectList = new SelectList(items,
+            SelectList selectList = new SelectList(
+                items,
                 "Value",
                 "Text",
                 "Group",
                 selectedValue,
-                disabledValues);
+                disabledValues
+            );
             List<object> selectedValues = selectList.SelectedValues.Cast<object>().ToList();
 
             // Assert
@@ -242,8 +294,13 @@ namespace System.Web.Mvc.Test
             object selectedValue = new object();
 
             // Act
-            SelectList selectList = new SelectList(items, "SomeValueField", "SomeTextField", "SomeGroupField",
-                selectedValue);
+            SelectList selectList = new SelectList(
+                items,
+                "SomeValueField",
+                "SomeTextField",
+                "SomeGroupField",
+                selectedValue
+            );
             IEnumerable selectedValues = selectList.SelectedValues;
 
             // Assert

@@ -18,9 +18,7 @@ public class TimeOnlyToTicksConverter : ValueConverter<TimeOnly, long>
     ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
     /// </remarks>
     public TimeOnlyToTicksConverter()
-        : this(null)
-    {
-    }
+        : this(null) { }
 
     /// <summary>
     ///     Creates a new instance of this converter.
@@ -33,13 +31,11 @@ public class TimeOnlyToTicksConverter : ValueConverter<TimeOnly, long>
     ///     facets for the converted data.
     /// </param>
     public TimeOnlyToTicksConverter(ConverterMappingHints? mappingHints)
-        : base(v => v.Ticks, v => new TimeOnly(v), mappingHints)
-    {
-    }
+        : base(v => v.Ticks, v => new TimeOnly(v), mappingHints) { }
 
     /// <summary>
     ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
     /// </summary>
-    public static ValueConverterInfo DefaultInfo { get; }
-        = new(typeof(TimeOnly), typeof(long), i => new TimeOnlyToTicksConverter(i.MappingHints));
+    public static ValueConverterInfo DefaultInfo { get; } =
+        new(typeof(TimeOnly), typeof(long), i => new TimeOnlyToTicksConverter(i.MappingHints));
 }

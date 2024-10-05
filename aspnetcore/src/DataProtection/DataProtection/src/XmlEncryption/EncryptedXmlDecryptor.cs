@@ -26,9 +26,7 @@ public sealed class EncryptedXmlDecryptor : IInternalEncryptedXmlDecryptor, IXml
     /// Creates a new instance of an <see cref="EncryptedXmlDecryptor"/>.
     /// </summary>
     public EncryptedXmlDecryptor()
-        : this(services: null)
-    {
-    }
+        : this(services: null) { }
 
     /// <summary>
     /// Creates a new instance of an <see cref="EncryptedXmlDecryptor"/>.
@@ -48,12 +46,21 @@ public sealed class EncryptedXmlDecryptor : IInternalEncryptedXmlDecryptor, IXml
 #pragma warning disable SYSLIB0022 // Rijndael types are obsolete
     // RijndaelManaged (aka AES) is used by default. If we find another important algorithm, we should add it here as well.
     // In the meantime, a useful exception will be thrown in a trimmed app if the algorithm can't be found.
-    [DynamicDependency(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor, typeof(RijndaelManaged))]
+    [DynamicDependency(
+        DynamicallyAccessedMemberTypes.PublicParameterlessConstructor,
+        typeof(RijndaelManaged)
+    )]
 #pragma warning restore SYSLIB0022
-    [UnconditionalSuppressMessage("AOT", "IL2026:RequiresUnreferencedCode",
-        Justification = "The common algorithms are being preserved by the above DynamicDependency attributes.")]
-    [UnconditionalSuppressMessage("AOT", "IL3050:RequiresDynamicCode",
-        Justification = "Only XSLTs require dynamic code. The usage of EncryptedXml doesn't use XSLTs.")]
+    [UnconditionalSuppressMessage(
+        "AOT",
+        "IL2026:RequiresUnreferencedCode",
+        Justification = "The common algorithms are being preserved by the above DynamicDependency attributes."
+    )]
+    [UnconditionalSuppressMessage(
+        "AOT",
+        "IL3050:RequiresDynamicCode",
+        Justification = "Only XSLTs require dynamic code. The usage of EncryptedXml doesn't use XSLTs."
+    )]
     public XElement Decrypt(XElement encryptedElement)
     {
         ArgumentNullThrowHelper.ThrowIfNull(encryptedElement);
@@ -75,7 +82,9 @@ public sealed class EncryptedXmlDecryptor : IInternalEncryptedXmlDecryptor, IXml
         encryptedXml.DecryptDocument();
 
         // Strip the <root /> element back off and convert the XmlDocument to an XElement.
-        return XElement.Load(xmlDocument.DocumentElement!.FirstChild!.CreateNavigator()!.ReadSubtree());
+        return XElement.Load(
+            xmlDocument.DocumentElement!.FirstChild!.CreateNavigator()!.ReadSubtree()
+        );
     }
 
     void IInternalEncryptedXmlDecryptor.PerformPreDecryptionSetup(EncryptedXml encryptedXml)
@@ -90,9 +99,16 @@ public sealed class EncryptedXmlDecryptor : IInternalEncryptedXmlDecryptor, IXml
     {
         private readonly XmlKeyDecryptionOptions? _options;
 
-        [RequiresDynamicCode("XmlDsigXsltTransform uses XslCompiledTransform which requires dynamic code.")]
-        [RequiresUnreferencedCode("The algorithm implementations referenced in the XML payload might be removed.")]
-        public EncryptedXmlWithCertificateKeys(XmlKeyDecryptionOptions? options, XmlDocument document)
+        [RequiresDynamicCode(
+            "XmlDsigXsltTransform uses XslCompiledTransform which requires dynamic code."
+        )]
+        [RequiresUnreferencedCode(
+            "The algorithm implementations referenced in the XML payload might be removed."
+        )]
+        public EncryptedXmlWithCertificateKeys(
+            XmlKeyDecryptionOptions? options,
+            XmlDocument document
+        )
             : base(document)
         {
             _options = options;
@@ -141,7 +157,13 @@ public sealed class EncryptedXmlDecryptor : IInternalEncryptedXmlDecryptor, IXml
                     continue;
                 }
 
-                if (_options == null || !_options.TryGetKeyDecryptionCertificates(certInfo, out var keyDecryptionCerts))
+                if (
+                    _options == null
+                    || !_options.TryGetKeyDecryptionCertificates(
+                        certInfo,
+                        out var keyDecryptionCerts
+                    )
+                )
                 {
                     continue;
                 }
@@ -157,8 +179,13 @@ public sealed class EncryptedXmlDecryptor : IInternalEncryptedXmlDecryptor, IXml
                     {
                         if (privateKey != null)
                         {
-                            var useOAEP = encryptedKey.EncryptionMethod?.KeyAlgorithm == XmlEncRSAOAEPUrl;
-                            return DecryptKey(encryptedKey.CipherData.CipherValue!, privateKey, useOAEP);
+                            var useOAEP =
+                                encryptedKey.EncryptionMethod?.KeyAlgorithm == XmlEncRSAOAEPUrl;
+                            return DecryptKey(
+                                encryptedKey.CipherData.CipherValue!,
+                                privateKey,
+                                useOAEP
+                            );
                         }
                     }
                 }

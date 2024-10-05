@@ -1,11 +1,11 @@
 /* ****************************************************************************
  *
- * Copyright (c) Microsoft Corporation. 
+ * Copyright (c) Microsoft Corporation.
  *
- * This source code is subject to terms and conditions of the Apache License, Version 2.0. A 
- * copy of the license can be found in the License.html file at the root of this distribution. If 
- * you cannot locate the  Apache License, Version 2.0, please send an email to 
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound 
+ * This source code is subject to terms and conditions of the Apache License, Version 2.0. A
+ * copy of the license can be found in the License.html file at the root of this distribution. If
+ * you cannot locate the  Apache License, Version 2.0, please send an email to
+ * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
  * by the terms of the Apache License, Version 2.0.
  *
  * You must not remove this notice, or any other, from this software.
@@ -13,8 +13,8 @@
  *
  * ***************************************************************************/
 
-namespace System {
-   
+namespace System
+{
     /// <summary>
     /// Encapsulates a method that takes nine parameters and does not return a value.
     /// </summary>
@@ -36,8 +36,21 @@ namespace System {
     /// <param name="arg7">The seventh parameter of the method that this delegate encapsulates.</param>
     /// <param name="arg8">The eighth parameter of the method that this delegate encapsulates.</param>
     /// <param name="arg9">The ninth parameter of the method that this delegate encapsulates.</param>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes")]
-    public delegate void Action<in T1, in T2, in T3, in T4, in T5, in T6, in T7, in T8, in T9>(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6, T7 arg7, T8 arg8, T9 arg9);
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Design",
+        "CA1005:AvoidExcessiveParametersOnGenericTypes"
+    )]
+    public delegate void Action<in T1, in T2, in T3, in T4, in T5, in T6, in T7, in T8, in T9>(
+        T1 arg1,
+        T2 arg2,
+        T3 arg3,
+        T4 arg4,
+        T5 arg5,
+        T6 arg6,
+        T7 arg7,
+        T8 arg8,
+        T9 arg9
+    );
 
     /// <summary>
     /// Encapsulates a method that takes ten parameters and does not return a value.
@@ -62,8 +75,22 @@ namespace System {
     /// <param name="arg8">The eighth parameter of the method that this delegate encapsulates.</param>
     /// <param name="arg9">The ninth parameter of the method that this delegate encapsulates.</param>
     /// <param name="arg10">The tenth parameter of the method that this delegate encapsulates.</param>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes")]
-    public delegate void Action<in T1, in T2, in T3, in T4, in T5, in T6, in T7, in T8, in T9, in T10>(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6, T7 arg7, T8 arg8, T9 arg9, T10 arg10);
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Design",
+        "CA1005:AvoidExcessiveParametersOnGenericTypes"
+    )]
+    public delegate void Action<
+        in T1,
+        in T2,
+        in T3,
+        in T4,
+        in T5,
+        in T6,
+        in T7,
+        in T8,
+        in T9,
+        in T10
+    >(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6, T7 arg7, T8 arg8, T9 arg9, T10 arg10);
 
     /// <summary>
     /// Encapsulates a method that takes eleven parameters and does not return a value.
@@ -90,8 +117,35 @@ namespace System {
     /// <param name="arg9">The ninth parameter of the method that this delegate encapsulates.</param>
     /// <param name="arg10">The tenth parameter of the method that this delegate encapsulates.</param>
     /// <param name="arg11">The eleventh parameter of the method that this delegate encapsulates.</param>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes")]
-    public delegate void Action<in T1, in T2, in T3, in T4, in T5, in T6, in T7, in T8, in T9, in T10, in T11>(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6, T7 arg7, T8 arg8, T9 arg9, T10 arg10, T11 arg11);
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Design",
+        "CA1005:AvoidExcessiveParametersOnGenericTypes"
+    )]
+    public delegate void Action<
+        in T1,
+        in T2,
+        in T3,
+        in T4,
+        in T5,
+        in T6,
+        in T7,
+        in T8,
+        in T9,
+        in T10,
+        in T11
+    >(
+        T1 arg1,
+        T2 arg2,
+        T3 arg3,
+        T4 arg4,
+        T5 arg5,
+        T6 arg6,
+        T7 arg7,
+        T8 arg8,
+        T9 arg9,
+        T10 arg10,
+        T11 arg11
+    );
 
     /// <summary>
     /// Encapsulates a method that takes twelve parameters and does not return a value.
@@ -120,8 +174,37 @@ namespace System {
     /// <param name="arg10">The tenth parameter of the method that this delegate encapsulates.</param>
     /// <param name="arg11">The eleventh parameter of the method that this delegate encapsulates.</param>
     /// <param name="arg12">The twelfth parameter of the method that this delegate encapsulates.</param>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes")]
-    public delegate void Action<in T1, in T2, in T3, in T4, in T5, in T6, in T7, in T8, in T9, in T10, in T11, in T12>(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6, T7 arg7, T8 arg8, T9 arg9, T10 arg10, T11 arg11, T12 arg12);
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Design",
+        "CA1005:AvoidExcessiveParametersOnGenericTypes"
+    )]
+    public delegate void Action<
+        in T1,
+        in T2,
+        in T3,
+        in T4,
+        in T5,
+        in T6,
+        in T7,
+        in T8,
+        in T9,
+        in T10,
+        in T11,
+        in T12
+    >(
+        T1 arg1,
+        T2 arg2,
+        T3 arg3,
+        T4 arg4,
+        T5 arg5,
+        T6 arg6,
+        T7 arg7,
+        T8 arg8,
+        T9 arg9,
+        T10 arg10,
+        T11 arg11,
+        T12 arg12
+    );
 
     /// <summary>
     /// Encapsulates a method that takes thirteen parameters and does not return a value.
@@ -152,8 +235,39 @@ namespace System {
     /// <param name="arg11">The eleventh parameter of the method that this delegate encapsulates.</param>
     /// <param name="arg12">The twelfth parameter of the method that this delegate encapsulates.</param>
     /// <param name="arg13">The thirteenth parameter of the method that this delegate encapsulates.</param>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes")]
-    public delegate void Action<in T1, in T2, in T3, in T4, in T5, in T6, in T7, in T8, in T9, in T10, in T11, in T12, in T13>(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6, T7 arg7, T8 arg8, T9 arg9, T10 arg10, T11 arg11, T12 arg12, T13 arg13);
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Design",
+        "CA1005:AvoidExcessiveParametersOnGenericTypes"
+    )]
+    public delegate void Action<
+        in T1,
+        in T2,
+        in T3,
+        in T4,
+        in T5,
+        in T6,
+        in T7,
+        in T8,
+        in T9,
+        in T10,
+        in T11,
+        in T12,
+        in T13
+    >(
+        T1 arg1,
+        T2 arg2,
+        T3 arg3,
+        T4 arg4,
+        T5 arg5,
+        T6 arg6,
+        T7 arg7,
+        T8 arg8,
+        T9 arg9,
+        T10 arg10,
+        T11 arg11,
+        T12 arg12,
+        T13 arg13
+    );
 
     /// <summary>
     /// Encapsulates a method that takes fourteen parameters and does not return a value.
@@ -186,8 +300,41 @@ namespace System {
     /// <param name="arg12">The twelfth parameter of the method that this delegate encapsulates.</param>
     /// <param name="arg13">The thirteenth parameter of the method that this delegate encapsulates.</param>
     /// <param name="arg14">The fourteenth parameter of the method that this delegate encapsulates.</param>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes")]
-    public delegate void Action<in T1, in T2, in T3, in T4, in T5, in T6, in T7, in T8, in T9, in T10, in T11, in T12, in T13, in T14>(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6, T7 arg7, T8 arg8, T9 arg9, T10 arg10, T11 arg11, T12 arg12, T13 arg13, T14 arg14);
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Design",
+        "CA1005:AvoidExcessiveParametersOnGenericTypes"
+    )]
+    public delegate void Action<
+        in T1,
+        in T2,
+        in T3,
+        in T4,
+        in T5,
+        in T6,
+        in T7,
+        in T8,
+        in T9,
+        in T10,
+        in T11,
+        in T12,
+        in T13,
+        in T14
+    >(
+        T1 arg1,
+        T2 arg2,
+        T3 arg3,
+        T4 arg4,
+        T5 arg5,
+        T6 arg6,
+        T7 arg7,
+        T8 arg8,
+        T9 arg9,
+        T10 arg10,
+        T11 arg11,
+        T12 arg12,
+        T13 arg13,
+        T14 arg14
+    );
 
     /// <summary>
     /// Encapsulates a method that takes fifteen parameters and does not return a value.
@@ -222,8 +369,43 @@ namespace System {
     /// <param name="arg13">The thirteenth parameter of the method that this delegate encapsulates.</param>
     /// <param name="arg14">The fourteenth parameter of the method that this delegate encapsulates.</param>
     /// <param name="arg15">The fifteenth parameter of the method that this delegate encapsulates.</param>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes")]
-    public delegate void Action<in T1, in T2, in T3, in T4, in T5, in T6, in T7, in T8, in T9, in T10, in T11, in T12, in T13, in T14, in T15>(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6, T7 arg7, T8 arg8, T9 arg9, T10 arg10, T11 arg11, T12 arg12, T13 arg13, T14 arg14, T15 arg15);
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Design",
+        "CA1005:AvoidExcessiveParametersOnGenericTypes"
+    )]
+    public delegate void Action<
+        in T1,
+        in T2,
+        in T3,
+        in T4,
+        in T5,
+        in T6,
+        in T7,
+        in T8,
+        in T9,
+        in T10,
+        in T11,
+        in T12,
+        in T13,
+        in T14,
+        in T15
+    >(
+        T1 arg1,
+        T2 arg2,
+        T3 arg3,
+        T4 arg4,
+        T5 arg5,
+        T6 arg6,
+        T7 arg7,
+        T8 arg8,
+        T9 arg9,
+        T10 arg10,
+        T11 arg11,
+        T12 arg12,
+        T13 arg13,
+        T14 arg14,
+        T15 arg15
+    );
 
     /// <summary>
     /// Encapsulates a method that takes sixteen parameters and does not return a value.
@@ -260,7 +442,43 @@ namespace System {
     /// <param name="arg14">The fourteenth parameter of the method that this delegate encapsulates.</param>
     /// <param name="arg15">The fifteenth parameter of the method that this delegate encapsulates.</param>
     /// <param name="arg16">The sixteenth parameter of the method that this delegate encapsulates.</param>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes")]
-    public delegate void Action<in T1, in T2, in T3, in T4, in T5, in T6, in T7, in T8, in T9, in T10, in T11, in T12, in T13, in T14, in T15, in T16>(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6, T7 arg7, T8 arg8, T9 arg9, T10 arg10, T11 arg11, T12 arg12, T13 arg13, T14 arg14, T15 arg15, T16 arg16);
-
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Design",
+        "CA1005:AvoidExcessiveParametersOnGenericTypes"
+    )]
+    public delegate void Action<
+        in T1,
+        in T2,
+        in T3,
+        in T4,
+        in T5,
+        in T6,
+        in T7,
+        in T8,
+        in T9,
+        in T10,
+        in T11,
+        in T12,
+        in T13,
+        in T14,
+        in T15,
+        in T16
+    >(
+        T1 arg1,
+        T2 arg2,
+        T3 arg3,
+        T4 arg4,
+        T5 arg5,
+        T6 arg6,
+        T7 arg7,
+        T8 arg8,
+        T9 arg9,
+        T10 arg10,
+        T11 arg11,
+        T12 arg12,
+        T13 arg13,
+        T14 arg14,
+        T15 arg15,
+        T16 arg16
+    );
 }

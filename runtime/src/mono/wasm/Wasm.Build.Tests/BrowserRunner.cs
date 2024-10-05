@@ -4,8 +4,8 @@
 #nullable enable
 
 using System;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.Playwright;
@@ -19,11 +19,18 @@ internal class BrowserRunner : IAsyncDisposable
     private static Regex s_blazorUrlRegex = new Regex("Now listening on: (?<url>https?://.*$)");
     private static Regex s_appHostUrlRegex = new Regex("^App url: (?<url>https?://.*$)");
     private static Regex s_exitRegex = new Regex("WASM EXIT (?<exitCode>[0-9]+)$");
-    private static readonly Lazy<string> s_chromePath = new(() =>
-    {
-        string artifactsBinDir = Path.Combine(Path.GetDirectoryName(typeof(BuildTestBase).Assembly.Location)!, "..", "..", "..", "..");
-        return BrowserLocator.FindChrome(artifactsBinDir, "BROWSER_PATH_FOR_TESTS");
-    });
+    private static readonly Lazy<string> s_chromePath =
+        new(() =>
+        {
+            string artifactsBinDir = Path.Combine(
+                Path.GetDirectoryName(typeof(BuildTestBase).Assembly.Location)!,
+                "..",
+                "..",
+                "..",
+                ".."
+            );
+            return BrowserLocator.FindChrome(artifactsBinDir, "BROWSER_PATH_FOR_TESTS");
+        });
 
     public IPlaywright? Playwright { get; private set; }
     public IBrowser? Browser { get; private set; }
@@ -34,10 +41,8 @@ internal class BrowserRunner : IAsyncDisposable
 
     public BrowserRunner(ITestOutputHelper testOutput) => _testOutput = testOutput;
 
-    public async Task<string> StartServerAndGetUrlAsync(
-        ToolCommand cmd,
-        string args
-    ) {
+    public async Task<string> StartServerAndGetUrlAsync(ToolCommand cmd, string args)
+    {
         TaskCompletionSource<string> urlAvailable = new();
         Action<string?> outputHandler = msg =>
         {
@@ -85,19 +90,22 @@ internal class BrowserRunner : IAsyncDisposable
         return urlAvailable.Task.Result;
     }
 
-    public async Task<IBrowser> SpawnBrowserAsync(
-        string browserUrl,
-        bool headless = true
-    ) {
+    public async Task<IBrowser> SpawnBrowserAsync(string browserUrl, bool headless = true)
+    {
         var url = new Uri(browserUrl);
         Playwright = await Microsoft.Playwright.Playwright.CreateAsync();
         string[] chromeArgs = new[] { $"--explicitly-allowed-ports={url.Port}" };
-        _testOutput.WriteLine($"Launching chrome ('{s_chromePath.Value}') via playwright with args = {string.Join(',', chromeArgs)}");
-        return Browser = await Playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions{
-            ExecutablePath = s_chromePath.Value,
-            Headless = headless,
-            Args = chromeArgs
-        });
+        _testOutput.WriteLine(
+            $"Launching chrome ('{s_chromePath.Value}') via playwright with args = {string.Join(',', chromeArgs)}"
+        );
+        return Browser = await Playwright.Chromium.LaunchAsync(
+            new BrowserTypeLaunchOptions
+            {
+                ExecutablePath = s_chromePath.Value,
+                Headless = headless,
+                Args = chromeArgs,
+            }
+        );
     }
 
     // FIXME: options
@@ -107,12 +115,20 @@ internal class BrowserRunner : IAsyncDisposable
         bool headless = true,
         Action<IConsoleMessage>? onConsoleMessage = null,
         Action<string>? onError = null,
-        Func<string, string>? modifyBrowserUrl = null)
+        Func<string, string>? modifyBrowserUrl = null
+    )
     {
         var urlString = await StartServerAndGetUrlAsync(cmd, args);
         var browser = await SpawnBrowserAsync(urlString, headless);
         var context = await browser.NewContextAsync();
-        return await RunAsync(context, urlString, headless, onConsoleMessage, onError, modifyBrowserUrl);
+        return await RunAsync(
+            context,
+            urlString,
+            headless,
+            onConsoleMessage,
+            onError,
+            modifyBrowserUrl
+        );
     }
 
     public async Task<IPage> RunAsync(
@@ -123,9 +139,10 @@ internal class BrowserRunner : IAsyncDisposable
         Action<string>? onError = null,
         Func<string, string>? modifyBrowserUrl = null,
         bool resetExitedState = false
-    ) {
+    )
+    {
         if (resetExitedState)
-            _exited = new ();
+            _exited = new();
 
         if (modifyBrowserUrl != null)
             browserUrl = modifyBrowserUrl(browserUrl);
@@ -154,11 +171,13 @@ internal class BrowserRunner : IAsyncDisposable
         await Task.WhenAny(RunTask!, _exited.Task, Task.Delay(timeout));
         if (_exited.Task.IsCompleted)
         {
-            _testOutput.WriteLine ($"Exited with {await _exited.Task}");
+            _testOutput.WriteLine($"Exited with {await _exited.Task}");
             return;
         }
 
-        throw new Exception($"Timed out after {timeout.TotalSeconds}s waiting for 'WASM EXIT' message");
+        throw new Exception(
+            $"Timed out after {timeout.TotalSeconds}s waiting for 'WASM EXIT' message"
+        );
     }
 
     public async Task WaitForProcessExitAsync(TimeSpan timeout)
@@ -169,7 +188,7 @@ internal class BrowserRunner : IAsyncDisposable
         await Task.WhenAny(RunTask!, _exited.Task, Task.Delay(timeout));
         if (RunTask.IsCanceled)
         {
-            _testOutput.WriteLine ($"Exited with {(await RunTask).ExitCode}");
+            _testOutput.WriteLine($"Exited with {(await RunTask).ExitCode}");
             return;
         }
 

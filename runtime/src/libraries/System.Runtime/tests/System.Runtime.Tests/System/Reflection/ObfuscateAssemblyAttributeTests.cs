@@ -22,10 +22,7 @@ namespace System.Reflection.Tests
         [InlineData(false)]
         public void StripAfterObfuscation_Set_GetReturnsExpected(bool value)
         {
-            var attribute = new ObfuscateAssemblyAttribute(true)
-            {
-                StripAfterObfuscation = value
-            };
+            var attribute = new ObfuscateAssemblyAttribute(true) { StripAfterObfuscation = value };
             Assert.Equal(value, attribute.StripAfterObfuscation);
         }
     }

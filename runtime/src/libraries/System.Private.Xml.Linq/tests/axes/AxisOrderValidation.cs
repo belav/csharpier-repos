@@ -13,7 +13,8 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public static void NodesAfterSelfBeforeAndAfter()
         {
-            XText aText = new XText("a"), bText = new XText("b");
+            XText aText = new XText("a"),
+                bText = new XText("b");
             XElement a = new XElement("A", aText, bText);
             IEnumerable<XNode> nodes = aText.NodesAfterSelf();
             Assert.Equal(1, nodes.Count());
@@ -24,7 +25,8 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public static void NodesBeforeSelfBeforeAndAfter()
         {
-            XText aText = new XText("a"), bText = new XText("b");
+            XText aText = new XText("a"),
+                bText = new XText("b");
             XElement a = new XElement("A", aText, bText);
             IEnumerable<XNode> nodes = bText.NodesBeforeSelf();
             Assert.Equal(1, nodes.Count());
@@ -35,8 +37,10 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public static void AncestorsBeforeAndAfter()
         {
-            XText aText = new XText("a"), bText = new XText("b");
-            XElement a = new XElement("A", aText), b = new XElement("B", bText);
+            XText aText = new XText("a"),
+                bText = new XText("b");
+            XElement a = new XElement("A", aText),
+                b = new XElement("B", bText);
             a.Add(b);
             IEnumerable<XElement> nodes = bText.Ancestors();
             Assert.Equal(2, nodes.Count());
@@ -48,20 +52,25 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public static void AncestorsWithXNameBeforeAndAfter()
         {
-            XText aText = new XText("a"), bText = new XText("b");
-            XElement a = new XElement("A", aText), b = new XElement("B", bText);
+            XText aText = new XText("a"),
+                bText = new XText("b");
+            XElement a = new XElement("A", aText),
+                b = new XElement("B", bText);
             a.Add(b);
             IEnumerable<XElement> nodes = bText.Ancestors("B");
             Assert.Equal(1, nodes.Count());
-            bText.Remove(); a.Add(bText);
+            bText.Remove();
+            a.Add(bText);
             Assert.Equal(0, nodes.Count());
         }
 
         [Fact]
         public static void ElementsAfterSelfBeforeAndAfter()
         {
-            XText aText = new XText("a"), bText = new XText("b");
-            XElement a = new XElement("A", aText), b = new XElement("B", bText);
+            XText aText = new XText("a"),
+                bText = new XText("b");
+            XElement a = new XElement("A", aText),
+                b = new XElement("B", bText);
             a.Add(b);
             IEnumerable<XElement> nodes = aText.ElementsAfterSelf();
             Assert.Equal(1, nodes.Count());
@@ -72,8 +81,10 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public static void ElementsAfterSelfWithXNameBeforeAndAfter()
         {
-            XText aText = new XText("a"), bText = new XText("b");
-            XElement a = new XElement("A", aText), b = new XElement("B", bText);
+            XText aText = new XText("a"),
+                bText = new XText("b");
+            XElement a = new XElement("A", aText),
+                b = new XElement("B", bText);
             a.Add(b);
             IEnumerable<XElement> nodes = aText.ElementsAfterSelf("B");
             Assert.Equal(1, nodes.Count());
@@ -84,8 +95,10 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public static void ElementsBeforeSelfBeforeAndAfter()
         {
-            XText aText = new XText("a"), bText = new XText("b");
-            XElement a = new XElement("A", aText), b = new XElement("B", bText);
+            XText aText = new XText("a"),
+                bText = new XText("b");
+            XElement a = new XElement("A", aText),
+                b = new XElement("B", bText);
             aText.AddBeforeSelf(b);
             IEnumerable<XElement> nodes = aText.ElementsBeforeSelf();
             Assert.Equal(1, nodes.Count());
@@ -96,8 +109,10 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public static void ElementsBeforeSelfWithXNameBeforeAndAfter()
         {
-            XText aText = new XText("a"), bText = new XText("b");
-            XElement a = new XElement("A", aText), b = new XElement("B", bText);
+            XText aText = new XText("a"),
+                bText = new XText("b");
+            XElement a = new XElement("A", aText),
+                b = new XElement("B", bText);
             aText.AddBeforeSelf(b);
             IEnumerable<XElement> nodes = aText.ElementsBeforeSelf("B");
             Assert.Equal(1, nodes.Count());
@@ -108,7 +123,8 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public static void NodesOnXDocBeforeAndAfter()
         {
-            XText aText = new XText("a"), bText = new XText("b");
+            XText aText = new XText("a"),
+                bText = new XText("b");
             XElement a = new XElement("A", aText, bText);
             XDocument xDoc = new XDocument(a);
             IEnumerable<XNode> nodes = xDoc.Nodes();
@@ -120,7 +136,8 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public static void DescendantNodesOnXDocBeforeAndAfter()
         {
-            XElement a = new XElement("A", "a"), b = new XElement("B", "b");
+            XElement a = new XElement("A", "a"),
+                b = new XElement("B", "b");
             a.Add(b);
             XDocument xDoc = new XDocument(a);
             IEnumerable<XNode> nodes = xDoc.DescendantNodes();
@@ -132,7 +149,8 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public static void ElementsOnXDocBeforeAndAfter()
         {
-            XElement a = new XElement("A", "a"), b = new XElement("B", "b");
+            XElement a = new XElement("A", "a"),
+                b = new XElement("B", "b");
             a.Add(b);
             XDocument xDoc = new XDocument(a);
             IEnumerable<XElement> nodes = xDoc.Elements();
@@ -144,7 +162,8 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public static void ElementsWithXNameOnXDocBeforeAndAfter()
         {
-            XElement a = new XElement("A", "a"), b = new XElement("B", "b");
+            XElement a = new XElement("A", "a"),
+                b = new XElement("B", "b");
             a.Add(b);
             XDocument xDoc = new XDocument(a);
             IEnumerable<XElement> nodes = xDoc.Elements("A");
@@ -156,7 +175,8 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public static void DescendantsOnXDocBeforeAndAfter()
         {
-            XElement a = new XElement("A", "a"), b = new XElement("B", "b");
+            XElement a = new XElement("A", "a"),
+                b = new XElement("B", "b");
             a.Add(b);
             XDocument xDoc = new XDocument(a);
             IEnumerable<XElement> nodes = xDoc.Descendants("B");
@@ -168,8 +188,10 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public static void DescendantsWithXNameOnXDocBeforeAndAfter()
         {
-            XElement a = new XElement("A", "a"), b = new XElement("B", "b");
-            b.Add(b, b); a.Add(b);
+            XElement a = new XElement("A", "a"),
+                b = new XElement("B", "b");
+            b.Add(b, b);
+            a.Add(b);
             XDocument xDoc = new XDocument(a);
             IEnumerable<XElement> nodes = xDoc.Descendants("B");
             Assert.Equal(4, nodes.Count());
@@ -180,7 +202,8 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public static void NodesOnXElementBeforeAndAfter()
         {
-            XElement a = new XElement("A", "a"), b = new XElement("B", "b");
+            XElement a = new XElement("A", "a"),
+                b = new XElement("B", "b");
             a.Add(b);
             IEnumerable<XNode> nodes = a.Nodes();
             Assert.Equal(2, nodes.Count());
@@ -191,7 +214,8 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public static void DescendantNodesOnXElementBeforeAndAfter()
         {
-            XElement a = new XElement("A", "a"), b = new XElement("B", "b");
+            XElement a = new XElement("A", "a"),
+                b = new XElement("B", "b");
             a.Add(b);
             IEnumerable<XNode> nodes = a.DescendantNodes();
             Assert.Equal(3, nodes.Count());
@@ -202,7 +226,8 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public static void ElementsOnXElementBeforeAndAfter()
         {
-            XElement a = new XElement("A", "a"), b = new XElement("B", "b");
+            XElement a = new XElement("A", "a"),
+                b = new XElement("B", "b");
             IEnumerable<XElement> nodes = a.Elements();
             Assert.Equal(0, nodes.Count());
             a.Add(b, b, b, b);
@@ -212,7 +237,8 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public static void ElementsWithXNameOnXElementBeforeAndAfter()
         {
-            XElement a = new XElement("A", "a"), b = new XElement("B", "b");
+            XElement a = new XElement("A", "a"),
+                b = new XElement("B", "b");
             IEnumerable<XElement> nodes = a.Elements("B");
             Assert.Equal(0, nodes.Count());
             a.Add(b, b, b, b);
@@ -222,7 +248,8 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public static void DescendantsOnXElementBeforeAndAfter()
         {
-            XElement a = new XElement("A", "a"), b = new XElement("B", "b");
+            XElement a = new XElement("A", "a"),
+                b = new XElement("B", "b");
             a.Add(b);
             IEnumerable<XElement> nodes = a.Descendants();
             Assert.Equal(1, nodes.Count());
@@ -233,7 +260,8 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public static void DescendantsWithXNameOnXElementBeforeAndAfter()
         {
-            XElement a = new XElement("A", "a"), b = new XElement("B", "b");
+            XElement a = new XElement("A", "a"),
+                b = new XElement("B", "b");
             a.Add(b);
             IEnumerable<XElement> nodes = a.Descendants("B");
             Assert.Equal(1, nodes.Count());
@@ -244,7 +272,8 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public static void DescendantNodesAndSelfBeforeAndAfter()
         {
-            XElement a = new XElement("A", "a"), b = new XElement("B", "b");
+            XElement a = new XElement("A", "a"),
+                b = new XElement("B", "b");
             a.Add(b);
             IEnumerable<XNode> nodes = a.DescendantNodesAndSelf();
             Assert.Equal(4, nodes.Count());
@@ -255,7 +284,8 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public static void DescendantsAndSelfBeforeAndAfter()
         {
-            XElement a = new XElement("A", "a"), b = new XElement("B", "b");
+            XElement a = new XElement("A", "a"),
+                b = new XElement("B", "b");
             a.Add(b);
             IEnumerable<XElement> nodes = a.DescendantsAndSelf();
             Assert.Equal(2, nodes.Count());
@@ -266,7 +296,8 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public static void DescendantsAndSelfWithXNameBeforeAndAfter()
         {
-            XElement a = new XElement("A", "a"), b = new XElement("B", "b");
+            XElement a = new XElement("A", "a"),
+                b = new XElement("B", "b");
             a.Add(b);
             IEnumerable<XElement> nodes = a.DescendantsAndSelf("A");
             Assert.Equal(1, nodes.Count());
@@ -277,7 +308,8 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public static void AncestorsAndSelfBeforeAndAfter()
         {
-            XElement a = new XElement("A", "a"), b = new XElement("B", "b");
+            XElement a = new XElement("A", "a"),
+                b = new XElement("B", "b");
             a.Add(b);
             IEnumerable<XElement> nodes = b.AncestorsAndSelf();
             Assert.Equal(2, nodes.Count());
@@ -288,7 +320,8 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public static void AncestorsAndSelfWithXNameBeforeAndAfter()
         {
-            XElement a = new XElement("A", "a"), b = new XElement("B", "b");
+            XElement a = new XElement("A", "a"),
+                b = new XElement("B", "b");
             a.Add(b);
             IEnumerable<XElement> nodes = b.AncestorsAndSelf("A");
             Assert.Equal(1, nodes.Count());
@@ -321,7 +354,11 @@ namespace System.Xml.Linq.Tests
         {
             XDocument xDoc = TestData.GetDocumentWithContacts();
             IEnumerable<XNode> xNodes = xDoc.Root.DescendantNodesAndSelf().Reverse();
-            Assert.True(xNodes.InDocumentOrder().EqualsAll(xDoc.Root.DescendantNodesAndSelf(), XNode.DeepEquals));
+            Assert.True(
+                xNodes
+                    .InDocumentOrder()
+                    .EqualsAll(xDoc.Root.DescendantNodesAndSelf(), XNode.DeepEquals)
+            );
         }
 
         [Fact]
@@ -329,7 +366,11 @@ namespace System.Xml.Linq.Tests
         {
             XDocument xDoc = TestData.GetDocumentWithContacts();
             IEnumerable<XElement> xElement = xDoc.Root.DescendantsAndSelf().Reverse();
-            Assert.True(xElement.InDocumentOrder().EqualsAll(xDoc.Root.DescendantsAndSelf(), XNode.DeepEquals));
+            Assert.True(
+                xElement
+                    .InDocumentOrder()
+                    .EqualsAll(xDoc.Root.DescendantsAndSelf(), XNode.DeepEquals)
+            );
         }
 
         [Fact]
@@ -337,7 +378,9 @@ namespace System.Xml.Linq.Tests
         {
             XDocument xDoc = TestData.GetDocumentWithContacts();
             Random rnd = new Random();
-            var randomOrderedElements = xDoc.Root.DescendantNodesAndSelf().OrderBy(n => rnd.Next(0, int.MaxValue));
+            var randomOrderedElements = xDoc
+                .Root.DescendantNodesAndSelf()
+                .OrderBy(n => rnd.Next(0, int.MaxValue));
             using (var en = randomOrderedElements.InDocumentOrder().GetEnumerator())
             {
                 en.MoveNext();

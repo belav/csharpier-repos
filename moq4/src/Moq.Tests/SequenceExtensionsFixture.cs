@@ -3,7 +3,6 @@
 
 using System;
 using System.Threading.Tasks;
-
 using Xunit;
 
 namespace Moq.Tests
@@ -39,7 +38,9 @@ namespace Moq.Tests
 
             Assert.Equal(2, mock.Object.DoAsync().Result);
             Assert.Equal(3, mock.Object.DoAsync().Result);
-            await Assert.ThrowsAsync<InvalidOperationException>(async () => await mock.Object.DoAsync());
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await mock.Object.DoAsync()
+            );
         }
 
         [Fact]
@@ -54,7 +55,9 @@ namespace Moq.Tests
 
             Assert.Equal(2, mock.Object.DoValueAsync().Result);
             Assert.Equal(3, mock.Object.DoValueAsync().Result);
-            await Assert.ThrowsAsync<InvalidOperationException>(async () => await mock.Object.DoValueAsync());
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await mock.Object.DoValueAsync()
+            );
         }
 
         [Fact]
@@ -69,7 +72,9 @@ namespace Moq.Tests
 
             await mock.Object.DoVoidAsync();
             await mock.Object.DoVoidAsync();
-            await Assert.ThrowsAsync<InvalidOperationException>(async () => await mock.Object.DoVoidAsync());
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await mock.Object.DoVoidAsync()
+            );
         }
 
         [Fact]
@@ -84,16 +89,16 @@ namespace Moq.Tests
 
             await mock.Object.DoValueVoidAsync();
             await mock.Object.DoValueVoidAsync();
-            await Assert.ThrowsAsync<InvalidOperationException>(async () => await mock.Object.DoValueVoidAsync());
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await mock.Object.DoValueVoidAsync()
+            );
         }
 
         [Fact]
         public async Task PerformSequenceAsync_ReturnsAsync_for_Task_with_value_function()
         {
             var mock = new Mock<IFoo>();
-            mock.SetupSequence(m => m.DoAsync())
-                .ReturnsAsync(() => 1)
-                .ReturnsAsync(() => 2);
+            mock.SetupSequence(m => m.DoAsync()).ReturnsAsync(() => 1).ReturnsAsync(() => 2);
 
             Assert.Equal(1, await mock.Object.DoAsync());
             Assert.Equal(2, await mock.Object.DoAsync());
@@ -103,9 +108,7 @@ namespace Moq.Tests
         public async Task PerformSequenceAsync_ReturnsAsync_for_ValueTask_with_value_function()
         {
             var mock = new Mock<IFoo>();
-            mock.SetupSequence(m => m.DoValueAsync())
-                .ReturnsAsync(() => 1)
-                .ReturnsAsync(() => 2);
+            mock.SetupSequence(m => m.DoValueAsync()).ReturnsAsync(() => 1).ReturnsAsync(() => 2);
 
             Assert.Equal(1, await mock.Object.DoValueAsync());
             Assert.Equal(2, await mock.Object.DoValueAsync());
@@ -132,9 +135,7 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>();
 
-            mock.SetupSequence(x => x.Do())
-                .Throws<Exception>()
-                .Returns(1);
+            mock.SetupSequence(x => x.Do()).Throws<Exception>().Returns(1);
 
             Assert.Throws<Exception>(() => mock.Object.Do());
             Assert.Equal(1, mock.Object.Do());
@@ -179,8 +180,7 @@ namespace Moq.Tests
         {
             // Arrange: set up a sequence as the only setup and consume it
             var mock = new Mock<IFoo>();
-            mock.SetupSequence(m => m.Value)
-                .Returns("1");
+            mock.SetupSequence(m => m.Value).Returns("1");
             var _ = mock.Object.Value;
 
             // Act: ask sequence for value when it is exhausted
@@ -225,8 +225,7 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>();
             var i = 0;
-            mock.SetupSequence(m => m.Do())
-                .Returns(() => i);
+            mock.SetupSequence(m => m.Do()).Returns(() => i);
 
             i++;
 
@@ -238,8 +237,7 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>();
             var i = 0;
-            mock.SetupSequence(m => m.DoAsync())
-                .ReturnsAsync(() => i);
+            mock.SetupSequence(m => m.DoAsync()).ReturnsAsync(() => i);
 
             i++;
 
@@ -251,8 +249,7 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>();
             var i = 0;
-            mock.SetupSequence(m => m.DoValueAsync())
-                .ReturnsAsync(() => i);
+            mock.SetupSequence(m => m.DoValueAsync()).ReturnsAsync(() => i);
 
             i++;
 
@@ -264,8 +261,7 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>();
             Func<int> func = () => 1;
-            mock.SetupSequence(m => m.GetFunc())
-                .Returns(func);
+            mock.SetupSequence(m => m.GetFunc()).Returns(func);
 
             Assert.Equal(func, mock.Object.GetFunc());
         }

@@ -11,21 +11,22 @@ namespace System.Xml.Xsl.Runtime
     {
         private readonly WhitespaceRuleLookup _wsRules;
         private readonly BitStack _stkStrip;
-        private bool _shouldStrip, _preserveAdjacent;
+        private bool _shouldStrip,
+            _preserveAdjacent;
         private string? _val;
 
         public static XmlReader CreateReader(XmlReader baseReader, WhitespaceRuleLookup? wsRules)
         {
             if (wsRules == null)
             {
-                return baseReader;    // There is no rules to process
+                return baseReader; // There is no rules to process
             }
             XmlReaderSettings? readerSettings = baseReader.Settings;
             if (readerSettings != null)
             {
                 if (readerSettings.IgnoreWhitespace)
                 {
-                    return baseReader;        // V2 XmlReader that strips all WS
+                    return baseReader; // V2 XmlReader that strips all WS
                 }
             }
             else
@@ -33,18 +34,22 @@ namespace System.Xml.Xsl.Runtime
                 XmlTextReader? txtReader = baseReader as XmlTextReader;
                 if (txtReader != null && txtReader.WhitespaceHandling == WhitespaceHandling.None)
                 {
-                    return baseReader;        // V1 XmlTextReader that strips all WS
+                    return baseReader; // V1 XmlTextReader that strips all WS
                 }
                 XmlTextReaderImpl? txtReaderImpl = baseReader as XmlTextReaderImpl;
-                if (txtReaderImpl != null && txtReaderImpl.WhitespaceHandling == WhitespaceHandling.None)
+                if (
+                    txtReaderImpl != null
+                    && txtReaderImpl.WhitespaceHandling == WhitespaceHandling.None
+                )
                 {
-                    return baseReader;        // XmlTextReaderImpl that strips all WS
+                    return baseReader; // XmlTextReaderImpl that strips all WS
                 }
             }
             return new WhitespaceRuleReader(baseReader, wsRules);
         }
 
-        private WhitespaceRuleReader(XmlReader baseReader, WhitespaceRuleLookup wsRules) : base(baseReader)
+        private WhitespaceRuleReader(XmlReader baseReader, WhitespaceRuleLookup wsRules)
+            : base(baseReader)
         {
             Debug.Assert(wsRules != null);
 
@@ -87,7 +92,9 @@ namespace System.Xml.Xsl.Runtime
                             _stkStrip.PushBit(_shouldStrip);
 
                             // Strip if rules say we should and we're not within the scope of xml:space="preserve"
-                            _shouldStrip = _wsRules.ShouldStripSpace(base.LocalName, base.NamespaceURI) && (base.XmlSpace != XmlSpace.Preserve);
+                            _shouldStrip =
+                                _wsRules.ShouldStripSpace(base.LocalName, base.NamespaceURI)
+                                && (base.XmlSpace != XmlSpace.Preserve);
                         }
                         break;
 
@@ -127,9 +134,7 @@ namespace System.Xml.Xsl.Runtime
                         if (_shouldStrip)
                         {
                             // Save whitespace until it can be determined whether it will be stripped
-                            ws = ws == null ?
-                                base.Value :
-                                string.Concat(ws, base.Value);
+                            ws = ws == null ? base.Value : string.Concat(ws, base.Value);
 
                             // Read next event
                             continue;

@@ -30,7 +30,8 @@ namespace System.Data.Tests
     public class DataProvider
     {
         //A string containing all printable charachters.
-        private const string SAMPLE_STRING = "abcdefghijklmnopqrstuvwxyz1234567890~!@#$%^&*()_+-=[]\\|;:,./<>? ";
+        private const string SAMPLE_STRING =
+            "abcdefghijklmnopqrstuvwxyz1234567890~!@#$%^&*()_+-=[]\\|;:,./<>? ";
 
         public static DataTable CreateChildDataTable()
         {
@@ -42,18 +43,130 @@ namespace System.Data.Tests
             dtChild.Columns.Add("ChildDateTime", typeof(DateTime));
             dtChild.Columns.Add("ChildDouble", typeof(double));
 
-            dtChild.Rows.Add(new object[] { 1, 1, "1-String1", "1-String2", new DateTime(2000, 1, 1, 0, 0, 0, 0), 1.534 });
-            dtChild.Rows.Add(new object[] { 1, 2, "2-String1", "2-String2", DateTime.MaxValue, -1.534 });
-            dtChild.Rows.Add(new object[] { 1, 3, "3-String1", "3-String2", DateTime.MinValue, double.MaxValue / 10000 });
-            dtChild.Rows.Add(new object[] { 2, 1, "1-String1", "1-String2", new DateTime(1973, 6, 20, 0, 0, 0, 0), double.MinValue * 10000 });
-            dtChild.Rows.Add(new object[] { 2, 2, "2-String1", "2-String2", new DateTime(2008, 12, 1, 13, 59, 59, 59), 0.45 });
-            dtChild.Rows.Add(new object[] { 2, 3, "3-String1", "3-String2", new DateTime(2003, 1, 1, 1, 1, 1, 1), 0.55 });
-            dtChild.Rows.Add(new object[] { 5, 1, "1-String1", "1-String2", new DateTime(2002, 1, 1, 1, 1, 1, 1), 0 });
-            dtChild.Rows.Add(new object[] { 5, 2, "2-String1", "2-String2", new DateTime(2001, 1, 1, 1, 1, 1, 1), 10 });
-            dtChild.Rows.Add(new object[] { 5, 3, "3-String1", "3-String2", new DateTime(2000, 1, 1, 1, 1, 1, 1), 20 });
-            dtChild.Rows.Add(new object[] { 6, 1, "1-String1", "1-String2", new DateTime(2000, 1, 1, 1, 1, 1, 0), 25 });
-            dtChild.Rows.Add(new object[] { 6, 2, "2-String1", "2-String2", new DateTime(2000, 1, 1, 1, 1, 0, 0), 30 });
-            dtChild.Rows.Add(new object[] { 6, 3, "3-String1", "3-String2", new DateTime(2000, 1, 1, 0, 0, 0, 0), 35 });
+            dtChild.Rows.Add(
+                new object[]
+                {
+                    1,
+                    1,
+                    "1-String1",
+                    "1-String2",
+                    new DateTime(2000, 1, 1, 0, 0, 0, 0),
+                    1.534,
+                }
+            );
+            dtChild.Rows.Add(
+                new object[] { 1, 2, "2-String1", "2-String2", DateTime.MaxValue, -1.534 }
+            );
+            dtChild.Rows.Add(
+                new object[]
+                {
+                    1,
+                    3,
+                    "3-String1",
+                    "3-String2",
+                    DateTime.MinValue,
+                    double.MaxValue / 10000,
+                }
+            );
+            dtChild.Rows.Add(
+                new object[]
+                {
+                    2,
+                    1,
+                    "1-String1",
+                    "1-String2",
+                    new DateTime(1973, 6, 20, 0, 0, 0, 0),
+                    double.MinValue * 10000,
+                }
+            );
+            dtChild.Rows.Add(
+                new object[]
+                {
+                    2,
+                    2,
+                    "2-String1",
+                    "2-String2",
+                    new DateTime(2008, 12, 1, 13, 59, 59, 59),
+                    0.45,
+                }
+            );
+            dtChild.Rows.Add(
+                new object[]
+                {
+                    2,
+                    3,
+                    "3-String1",
+                    "3-String2",
+                    new DateTime(2003, 1, 1, 1, 1, 1, 1),
+                    0.55,
+                }
+            );
+            dtChild.Rows.Add(
+                new object[]
+                {
+                    5,
+                    1,
+                    "1-String1",
+                    "1-String2",
+                    new DateTime(2002, 1, 1, 1, 1, 1, 1),
+                    0,
+                }
+            );
+            dtChild.Rows.Add(
+                new object[]
+                {
+                    5,
+                    2,
+                    "2-String1",
+                    "2-String2",
+                    new DateTime(2001, 1, 1, 1, 1, 1, 1),
+                    10,
+                }
+            );
+            dtChild.Rows.Add(
+                new object[]
+                {
+                    5,
+                    3,
+                    "3-String1",
+                    "3-String2",
+                    new DateTime(2000, 1, 1, 1, 1, 1, 1),
+                    20,
+                }
+            );
+            dtChild.Rows.Add(
+                new object[]
+                {
+                    6,
+                    1,
+                    "1-String1",
+                    "1-String2",
+                    new DateTime(2000, 1, 1, 1, 1, 1, 0),
+                    25,
+                }
+            );
+            dtChild.Rows.Add(
+                new object[]
+                {
+                    6,
+                    2,
+                    "2-String1",
+                    "2-String2",
+                    new DateTime(2000, 1, 1, 1, 1, 0, 0),
+                    30,
+                }
+            );
+            dtChild.Rows.Add(
+                new object[]
+                {
+                    6,
+                    3,
+                    "3-String1",
+                    "3-String2",
+                    new DateTime(2000, 1, 1, 0, 0, 0, 0),
+                    35,
+                }
+            );
             dtChild.AcceptChanges();
             return dtChild;
         }
@@ -70,12 +183,72 @@ namespace System.Data.Tests
             dtParent.Columns.Add("ParentDouble", typeof(double));
             dtParent.Columns.Add("ParentBool", typeof(bool));
 
-            dtParent.Rows.Add(new object[] { 1, "1-String1", "1-String2", new DateTime(2005, 1, 1, 0, 0, 0, 0), 1.534, true });
-            dtParent.Rows.Add(new object[] { 2, "2-String1", "2-String2", new DateTime(2004, 1, 1, 0, 0, 0, 1), -1.534, true });
-            dtParent.Rows.Add(new object[] { 3, "3-String1", "3-String2", new DateTime(2003, 1, 1, 0, 0, 1, 0), double.MinValue * 10000, false });
-            dtParent.Rows.Add(new object[] { 4, "4-String1", "4-String2", new DateTime(2002, 1, 1, 0, 1, 0, 0), double.MaxValue / 10000, true });
-            dtParent.Rows.Add(new object[] { 5, "5-String1", "5-String2", new DateTime(2001, 1, 1, 1, 0, 0, 0), 0.755, true });
-            dtParent.Rows.Add(new object[] { 6, "6-String1", "6-String2", new DateTime(2000, 1, 1, 0, 0, 0, 0), 0.001, false });
+            dtParent.Rows.Add(
+                new object[]
+                {
+                    1,
+                    "1-String1",
+                    "1-String2",
+                    new DateTime(2005, 1, 1, 0, 0, 0, 0),
+                    1.534,
+                    true,
+                }
+            );
+            dtParent.Rows.Add(
+                new object[]
+                {
+                    2,
+                    "2-String1",
+                    "2-String2",
+                    new DateTime(2004, 1, 1, 0, 0, 0, 1),
+                    -1.534,
+                    true,
+                }
+            );
+            dtParent.Rows.Add(
+                new object[]
+                {
+                    3,
+                    "3-String1",
+                    "3-String2",
+                    new DateTime(2003, 1, 1, 0, 0, 1, 0),
+                    double.MinValue * 10000,
+                    false,
+                }
+            );
+            dtParent.Rows.Add(
+                new object[]
+                {
+                    4,
+                    "4-String1",
+                    "4-String2",
+                    new DateTime(2002, 1, 1, 0, 1, 0, 0),
+                    double.MaxValue / 10000,
+                    true,
+                }
+            );
+            dtParent.Rows.Add(
+                new object[]
+                {
+                    5,
+                    "5-String1",
+                    "5-String2",
+                    new DateTime(2001, 1, 1, 1, 0, 0, 0),
+                    0.755,
+                    true,
+                }
+            );
+            dtParent.Rows.Add(
+                new object[]
+                {
+                    6,
+                    "6-String1",
+                    "6-String2",
+                    new DateTime(2000, 1, 1, 0, 0, 0, 0),
+                    0.001,
+                    false,
+                }
+            );
             dtParent.AcceptChanges();
             return dtParent;
         }
@@ -113,12 +286,25 @@ namespace System.Data.Tests
                 //Get Columns
                 foreach (DataColumn dc in dt.Columns)
                 {
-                    strSchema += "ColumnName=" + dc.ColumnName + "\t" +
-                        "ColumnType=" + dc.DataType.Name + "\t" +
-                        "AllowDBNull=" + dc.AllowDBNull.ToString() + "\t" +
-                        "DefaultValue=" + dc.DefaultValue.ToString() + "\t" +
-                        "Unique=" + dc.Unique.ToString() + "\t" +
-                        "ReadOnly=" + dc.ReadOnly.ToString() + "\n";
+                    strSchema +=
+                        "ColumnName="
+                        + dc.ColumnName
+                        + "\t"
+                        + "ColumnType="
+                        + dc.DataType.Name
+                        + "\t"
+                        + "AllowDBNull="
+                        + dc.AllowDBNull.ToString()
+                        + "\t"
+                        + "DefaultValue="
+                        + dc.DefaultValue.ToString()
+                        + "\t"
+                        + "Unique="
+                        + dc.Unique.ToString()
+                        + "\t"
+                        + "ReadOnly="
+                        + dc.ReadOnly.ToString()
+                        + "\n";
                 }
                 strSchema += "\n";
             }
@@ -177,7 +363,7 @@ namespace System.Data.Tests
         }
 
         public static readonly string own_schema =
-$@"<?xml version=""1.0""?>
+            $@"<?xml version=""1.0""?>
 <xs:schema id=""test_dataset"" xmlns="""" xmlns:xs=""http://www.w3.org/2001/XMLSchema"" xmlns:msdata=""urn:schemas-microsoft-com:xml-msdata"">
   <xs:element name=""test_dataset"" msdata:IsDataSet=""true"" msdata:Locale=""fi-FI"">
     <xs:complexType>
@@ -223,7 +409,7 @@ $@"<?xml version=""1.0""?>
 </xs:schema>";
 
         public static readonly string own_schema1 =
-$@"<?xml version=""1.0"" standalone=""yes""?>
+            $@"<?xml version=""1.0"" standalone=""yes""?>
 <xs:schema id=""test_dataset"" xmlns="""" xmlns:xs=""http://www.w3.org/2001/XMLSchema"" xmlns:msdata=""urn:schemas-microsoft-com:xml-msdata"">
   <xs:element name=""test_dataset"" msdata:IsDataSet=""true"" msdata:MainDataTable=""test_table"" msdata:UseCurrentLocale=""true"">
     <xs:complexType>
@@ -256,7 +442,7 @@ $@"<?xml version=""1.0"" standalone=""yes""?>
 </xs:schema>";
 
         public static readonly string own_schema2 =
-$@"<?xml version=""1.0"" standalone=""yes""?>
+            $@"<?xml version=""1.0"" standalone=""yes""?>
 <xs:schema id=""test_dataset"" xmlns="""" xmlns:xs=""http://www.w3.org/2001/XMLSchema"" xmlns:msdata=""urn:schemas-microsoft-com:xml-msdata"">
   <xs:element name=""test_dataset"" msdata:IsDataSet=""true"" msdata:MainDataTable=""second_test_table"" msdata:UseCurrentLocale=""true"">
     <xs:complexType>
@@ -288,7 +474,7 @@ $@"<?xml version=""1.0"" standalone=""yes""?>
 </xs:schema>";
 
         public static readonly string store =
-@"<xsd:schema xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+            @"<xsd:schema xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
 
  <xsd:element name=""bookstore"" type=""bookstoreType""/>
 

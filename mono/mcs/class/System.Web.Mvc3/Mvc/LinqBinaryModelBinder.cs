@@ -1,10 +1,17 @@
-﻿namespace System.Web.Mvc {
+﻿namespace System.Web.Mvc
+{
     using System.Data.Linq;
 
-    public class LinqBinaryModelBinder : ByteArrayModelBinder {
-        public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext) {
+    public class LinqBinaryModelBinder : ByteArrayModelBinder
+    {
+        public override object BindModel(
+            ControllerContext controllerContext,
+            ModelBindingContext bindingContext
+        )
+        {
             byte[] byteValue = (byte[])base.BindModel(controllerContext, bindingContext);
-            if (byteValue == null) {
+            if (byteValue == null)
+            {
                 return null;
             }
 

@@ -7,7 +7,8 @@ namespace Microsoft.Extensions.ObjectPool;
 /// Default implementation for <see cref="PooledObjectPolicy{T}"/>.
 /// </summary>
 /// <typeparam name="T">The type of object which is being pooled.</typeparam>
-public class DefaultPooledObjectPolicy<T> : PooledObjectPolicy<T> where T : class, new()
+public class DefaultPooledObjectPolicy<T> : PooledObjectPolicy<T>
+    where T : class, new()
 {
     /// <inheritdoc />
     public override T Create()

@@ -26,11 +26,14 @@ namespace System.Web.WebPages.Administration
         internal const string RegisterVirtualPath = "~/Register.cshtml";
         internal const string EnableInstructionsVirtualPath = "~/EnableInstructions.cshtml";
 
-        private static ConcurrentDictionary<string, SiteAdmin> _adminModules = new ConcurrentDictionary<string, SiteAdmin>();
+        private static ConcurrentDictionary<string, SiteAdmin> _adminModules =
+            new ConcurrentDictionary<string, SiteAdmin>();
 
         // These only needs to be computed once per app domain
         private static readonly Lazy<bool?> _adminEnabled = new Lazy<bool?>(GetAdminEnabledSetting);
-        private static readonly Lazy<string> _adminVirtualPath = new Lazy<string>(GetDefaultVirtualPath);
+        private static readonly Lazy<string> _adminVirtualPath = new Lazy<string>(
+            GetDefaultVirtualPath
+        );
 
         private SiteAdmin(string startPageVirtualPath, string displayName, string description)
         {
@@ -82,13 +85,20 @@ namespace System.Web.WebPages.Administration
         internal static void RegisterAdminModule()
         {
             // Add a admin module as an application module (precompiled)
-            ApplicationPart.Register(new ApplicationPart(typeof(SiteAdmin).Assembly, AdminVirtualPath));
+            ApplicationPart.Register(
+                new ApplicationPart(typeof(SiteAdmin).Assembly, AdminVirtualPath)
+            );
         }
 
         private static bool? GetAdminEnabledSetting()
         {
             bool enabled;
-            if (Boolean.TryParse(ConfigurationManager.AppSettings[AdminEnabledAppSettingsKey], out enabled))
+            if (
+                Boolean.TryParse(
+                    ConfigurationManager.AppSettings[AdminEnabledAppSettingsKey],
+                    out enabled
+                )
+            )
             {
                 return enabled;
             }
@@ -121,7 +131,11 @@ namespace System.Web.WebPages.Administration
             return VirtualPathUtility.Combine(AdminVirtualPath, virtualPath);
         }
 
-        public static void Register(string startPageVirtualPath, string displayName, string description)
+        public static void Register(
+            string startPageVirtualPath,
+            string displayName,
+            string description
+        )
         {
             if (startPageVirtualPath == null)
             {
@@ -175,8 +189,12 @@ namespace System.Web.WebPages.Administration
             if (_adminModules.ContainsKey(module.StartPageVirtualPath))
             {
                 throw new InvalidOperationException(
-                    String.Format(CultureInfo.CurrentCulture,
-                                  AdminResources.ModuleAlreadyRegistered, module.StartPageVirtualPath));
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        AdminResources.ModuleAlreadyRegistered,
+                        module.StartPageVirtualPath
+                    )
+                );
             }
 
             // Add to the list of registered modules
@@ -215,9 +233,13 @@ namespace System.Web.WebPages.Administration
             return GetRedirectUrl(request, redirectUrl, VirtualPathUtility.ToAppRelative);
         }
 
-        internal static string GetRedirectUrl(HttpRequestBase request, string redirectUrl, Func<string, string> makeAppRelative)
+        internal static string GetRedirectUrl(
+            HttpRequestBase request,
+            string redirectUrl,
+            Func<string, string> makeAppRelative
+        )
         {
-            // If there's already a return url then use it, otherwise the app relative url of the 
+            // If there's already a return url then use it, otherwise the app relative url of the
             // current request to redirect to after signing in
             string returnUrl = GetReturnUrl(request) ?? makeAppRelative(request.RawUrl);
 

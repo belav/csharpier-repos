@@ -18,7 +18,8 @@ public static class WrapperProviderFactoriesExtensions
     /// supplied type, else null.</returns>
     public static IWrapperProvider? GetWrapperProvider(
         this IEnumerable<IWrapperProviderFactory> wrapperProviderFactories,
-        WrapperProviderContext wrapperProviderContext)
+        WrapperProviderContext wrapperProviderContext
+    )
     {
         ArgumentNullException.ThrowIfNull(wrapperProviderFactories);
         ArgumentNullException.ThrowIfNull(wrapperProviderContext);

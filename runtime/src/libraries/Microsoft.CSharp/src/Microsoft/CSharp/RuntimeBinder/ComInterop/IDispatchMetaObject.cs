@@ -20,16 +20,23 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             _self = self;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
-        public override DynamicMetaObject BindInvokeMember(InvokeMemberBinder binder, DynamicMetaObject[] args)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
+        public override DynamicMetaObject BindInvokeMember(
+            InvokeMemberBinder binder,
+            DynamicMetaObject[] args
+        )
         {
             Requires.NotNull(binder);
 
-            if (_self.TryGetMemberMethod(binder.Name, out ComMethodDesc method) ||
-                _self.TryGetMemberMethodExplicit(binder.Name, out method))
+            if (
+                _self.TryGetMemberMethod(binder.Name, out ComMethodDesc method)
+                || _self.TryGetMemberMethodExplicit(binder.Name, out method)
+            )
             {
-
                 bool[] isByRef = ComBinderHelpers.ProcessArgumentsForCom(ref args);
                 return BindComInvoke(args, method, binder.CallInfo, isByRef);
             }
@@ -37,8 +44,11 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             return base.BindInvokeMember(binder, args);
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
         public override DynamicMetaObject BindInvoke(InvokeBinder binder, DynamicMetaObject[] args)
         {
             Requires.NotNull(binder);
@@ -53,7 +63,12 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        private DynamicMetaObject BindComInvoke(DynamicMetaObject[] args, ComMethodDesc method, CallInfo callInfo, bool[] isByRef)
+        private DynamicMetaObject BindComInvoke(
+            DynamicMetaObject[] args,
+            ComMethodDesc method,
+            CallInfo callInfo,
+            bool[] isByRef
+        )
         {
             return new ComInvokeBinder(
                 callInfo,
@@ -63,14 +78,19 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                 Expression.Constant(method),
                 Expression.Property(
                     Helpers.Convert(Expression, typeof(IDispatchComObject)),
-                    typeof(IDispatchComObject).GetProperty(nameof(IDispatchComObject.DispatchObject))
+                    typeof(IDispatchComObject).GetProperty(
+                        nameof(IDispatchComObject.DispatchObject)
+                    )
                 ),
                 method
             ).Invoke();
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
         public override DynamicMetaObject BindGetMember(GetMemberBinder binder)
         {
             ComBinder.ComGetMemberBinder comBinder = binder as ComBinder.ComGetMemberBinder;
@@ -94,7 +114,6 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             if (_self.TryGetMemberMethodExplicit(binder.Name, out method))
             {
                 return BindGetMember(method, canReturnCallables);
-
             }
 
             // 4. Fallback
@@ -108,19 +127,31 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             {
                 if (method.ParamCount == 0)
                 {
-                    return BindComInvoke(DynamicMetaObject.EmptyMetaObjects, method, new CallInfo(0), Array.Empty<bool>());
+                    return BindComInvoke(
+                        DynamicMetaObject.EmptyMetaObjects,
+                        method,
+                        new CallInfo(0),
+                        Array.Empty<bool>()
+                    );
                 }
             }
 
             // ComGetMemberBinder does not expect callables. Try to call always.
             if (!canReturnCallables)
             {
-                return BindComInvoke(DynamicMetaObject.EmptyMetaObjects, method, new CallInfo(0), Array.Empty<bool>());
+                return BindComInvoke(
+                    DynamicMetaObject.EmptyMetaObjects,
+                    method,
+                    new CallInfo(0),
+                    Array.Empty<bool>()
+                );
             }
 
             return new DynamicMetaObject(
                 Expression.Call(
-                    typeof(ComRuntimeHelpers).GetMethod(nameof(ComRuntimeHelpers.CreateDispCallable)),
+                    typeof(ComRuntimeHelpers).GetMethod(
+                        nameof(ComRuntimeHelpers.CreateDispCallable)
+                    ),
                     Helpers.Convert(Expression, typeof(IDispatchComObject)),
                     Expression.Constant(method)
                 ),
@@ -132,23 +163,25 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         private DynamicMetaObject BindEvent(ComEventDesc eventDesc)
         {
             // BoundDispEvent CreateComEvent(object rcw, Guid sourceIid, int dispid)
-            Expression result =
-                Expression.Call(
-                    typeof(ComRuntimeHelpers).GetMethod(nameof(ComRuntimeHelpers.CreateComEvent)),
-                    ComObject.RcwFromComObject(Expression),
-                    Expression.Constant(eventDesc.SourceIID),
-                    Expression.Constant(eventDesc.Dispid)
-                );
-
-            return new DynamicMetaObject(
-                result,
-                IDispatchRestriction()
+            Expression result = Expression.Call(
+                typeof(ComRuntimeHelpers).GetMethod(nameof(ComRuntimeHelpers.CreateComEvent)),
+                ComObject.RcwFromComObject(Expression),
+                Expression.Constant(eventDesc.SourceIID),
+                Expression.Constant(eventDesc.Dispid)
             );
+
+            return new DynamicMetaObject(result, IDispatchRestriction());
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
-        public override DynamicMetaObject BindGetIndex(GetIndexBinder binder, DynamicMetaObject[] indexes)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
+        public override DynamicMetaObject BindGetIndex(
+            GetIndexBinder binder,
+            DynamicMetaObject[] indexes
+        )
         {
             Requires.NotNull(binder);
 
@@ -161,23 +194,37 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             return base.BindGetIndex(binder, indexes);
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
-        public override DynamicMetaObject BindSetIndex(SetIndexBinder binder, DynamicMetaObject[] indexes, DynamicMetaObject value)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
+        public override DynamicMetaObject BindSetIndex(
+            SetIndexBinder binder,
+            DynamicMetaObject[] indexes,
+            DynamicMetaObject value
+        )
         {
             Requires.NotNull(binder);
 
             if (_self.TryGetSetItem(out ComMethodDesc setItem))
             {
-
                 bool[] isByRef = ComBinderHelpers.ProcessArgumentsForCom(ref indexes);
                 isByRef = isByRef.AddLast(false);
 
-                DynamicMetaObject result = BindComInvoke(indexes.AddLast(value), setItem, binder.CallInfo, isByRef);
+                DynamicMetaObject result = BindComInvoke(
+                    indexes.AddLast(value),
+                    setItem,
+                    binder.CallInfo,
+                    isByRef
+                );
 
                 // Make sure to return the value; some languages need it.
                 return new DynamicMetaObject(
-                    Expression.Block(result.Expression, Expression.Convert(value.Expression, typeof(object))),
+                    Expression.Block(
+                        result.Expression,
+                        Expression.Convert(value.Expression, typeof(object))
+                    ),
                     result.Restrictions
                 );
             }
@@ -185,19 +232,25 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             return base.BindSetIndex(binder, indexes, value);
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
-        public override DynamicMetaObject BindSetMember(SetMemberBinder binder, DynamicMetaObject value)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
+        public override DynamicMetaObject BindSetMember(
+            SetMemberBinder binder,
+            DynamicMetaObject value
+        )
         {
             Requires.NotNull(binder);
 
             return
                 // 1. Check for simple property put
-                TryPropertyPut(binder, value) ??
-
+                TryPropertyPut(binder, value)
+                ??
                 // 2. Check for event handler hookup where the put is dropped
-                TryEventHandlerNoop(binder, value) ??
-
+                TryEventHandlerNoop(binder, value)
+                ??
                 // 3. Fallback
                 base.BindSetMember(binder, value);
         }
@@ -206,15 +259,28 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         private DynamicMetaObject TryPropertyPut(SetMemberBinder binder, DynamicMetaObject value)
         {
             bool holdsNull = value.Value == null && value.HasValue;
-            if (_self.TryGetPropertySetter(binder.Name, out ComMethodDesc method, value.LimitType, holdsNull) ||
-                _self.TryGetPropertySetterExplicit(binder.Name, out method, value.LimitType, holdsNull))
+            if (
+                _self.TryGetPropertySetter(
+                    binder.Name,
+                    out ComMethodDesc method,
+                    value.LimitType,
+                    holdsNull
+                )
+                || _self.TryGetPropertySetterExplicit(
+                    binder.Name,
+                    out method,
+                    value.LimitType,
+                    holdsNull
+                )
+            )
             {
                 BindingRestrictions restrictions = IDispatchRestriction();
-                Expression dispatch =
-                    Expression.Property(
-                        Helpers.Convert(Expression, typeof(IDispatchComObject)),
-                        typeof(IDispatchComObject).GetProperty(nameof(IDispatchComObject.DispatchObject))
-                    );
+                Expression dispatch = Expression.Property(
+                    Helpers.Convert(Expression, typeof(IDispatchComObject)),
+                    typeof(IDispatchComObject).GetProperty(
+                        nameof(IDispatchComObject.DispatchObject)
+                    )
+                );
 
                 DynamicMetaObject result = new ComInvokeBinder(
                     new CallInfo(1),
@@ -228,7 +294,10 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 
                 // Make sure to return the value; some languages need it.
                 return new DynamicMetaObject(
-                    Expression.Block(result.Expression, Expression.Convert(value.Expression, typeof(object))),
+                    Expression.Block(
+                        result.Expression,
+                        Expression.Convert(value.Expression, typeof(object))
+                    ),
                     result.Restrictions
                 );
             }
@@ -237,14 +306,27 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        private DynamicMetaObject TryEventHandlerNoop(SetMemberBinder binder, DynamicMetaObject value)
+        private DynamicMetaObject TryEventHandlerNoop(
+            SetMemberBinder binder,
+            DynamicMetaObject value
+        )
         {
-            if (_self.TryGetMemberEvent(binder.Name, out _) && value.LimitType == typeof(BoundDispEvent))
+            if (
+                _self.TryGetMemberEvent(binder.Name, out _)
+                && value.LimitType == typeof(BoundDispEvent)
+            )
             {
                 // Drop the event property set.
                 return new DynamicMetaObject(
                     Expression.Constant(null),
-                    value.Restrictions.Merge(IDispatchRestriction()).Merge(BindingRestrictions.GetTypeRestriction(value.Expression, typeof(BoundDispEvent)))
+                    value
+                        .Restrictions.Merge(IDispatchRestriction())
+                        .Merge(
+                            BindingRestrictions.GetTypeRestriction(
+                                value.Expression,
+                                typeof(BoundDispEvent)
+                            )
+                        )
                 );
             }
 
@@ -256,21 +338,26 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             return IDispatchRestriction(Expression, _self.ComTypeDesc);
         }
 
-        internal static BindingRestrictions IDispatchRestriction(Expression expr, ComTypeDesc typeDesc)
+        internal static BindingRestrictions IDispatchRestriction(
+            Expression expr,
+            ComTypeDesc typeDesc
+        )
         {
-            return BindingRestrictions.GetTypeRestriction(
-                expr, typeof(IDispatchComObject)
-            ).Merge(
-                BindingRestrictions.GetExpressionRestriction(
-                    Expression.Equal(
-                        Expression.Property(
-                            Helpers.Convert(expr, typeof(IDispatchComObject)),
-                            typeof(IDispatchComObject).GetProperty(nameof(IDispatchComObject.ComTypeDesc))
-                        ),
-                        Expression.Constant(typeDesc)
+            return BindingRestrictions
+                .GetTypeRestriction(expr, typeof(IDispatchComObject))
+                .Merge(
+                    BindingRestrictions.GetExpressionRestriction(
+                        Expression.Equal(
+                            Expression.Property(
+                                Helpers.Convert(expr, typeof(IDispatchComObject)),
+                                typeof(IDispatchComObject).GetProperty(
+                                    nameof(IDispatchComObject.ComTypeDesc)
+                                )
+                            ),
+                            Expression.Constant(typeDesc)
+                        )
                     )
-                )
-            );
+                );
         }
 
         protected override ComUnwrappedMetaObject UnwrapSelf()

@@ -20,12 +20,13 @@
 * SOFTWARE.
 *******************************************************************************/
 using System;
+
 namespace System.DirectoryServices.ActiveDirectory
 {
-	public enum ForestTrustCollisionType
-	{
-		TopLevelName,
-		Domain,
-		Other
-	}
+    public enum ForestTrustCollisionType
+    {
+        TopLevelName,
+        Domain,
+        Other,
+    }
 }

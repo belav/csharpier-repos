@@ -21,7 +21,10 @@ namespace Microsoft.Extensions.Logging
         /// <param name="factory">The extension method argument.</param>
         /// <returns>The <see cref="ILoggerFactory"/> so that additional calls can be chained.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [Obsolete("This method is retained only for compatibility. The recommended alternative is AddEventSourceLogger(this ILoggingBuilder builder).", error: true)]
+        [Obsolete(
+            "This method is retained only for compatibility. The recommended alternative is AddEventSourceLogger(this ILoggingBuilder builder).",
+            error: true
+        )]
         public static ILoggerFactory AddEventSourceLogger(this ILoggerFactory factory)
         {
             ThrowHelper.ThrowIfNull(factory);
@@ -41,9 +44,21 @@ namespace Microsoft.Extensions.Logging
             ThrowHelper.ThrowIfNull(builder);
 
             builder.Services.TryAddSingleton(LoggingEventSource.Instance);
-            builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<ILoggerProvider, EventSourceLoggerProvider>());
-            builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<IConfigureOptions<LoggerFilterOptions>, EventLogFiltersConfigureOptions>());
-            builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<IOptionsChangeTokenSource<LoggerFilterOptions>, EventLogFiltersConfigureOptionsChangeSource>());
+            builder.Services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<ILoggerProvider, EventSourceLoggerProvider>()
+            );
+            builder.Services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IConfigureOptions<LoggerFilterOptions>,
+                    EventLogFiltersConfigureOptions
+                >()
+            );
+            builder.Services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IOptionsChangeTokenSource<LoggerFilterOptions>,
+                    EventLogFiltersConfigureOptionsChangeSource
+                >()
+            );
             return builder;
         }
     }

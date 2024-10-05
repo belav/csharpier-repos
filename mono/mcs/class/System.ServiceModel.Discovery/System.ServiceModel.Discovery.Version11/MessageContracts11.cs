@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,105 +29,109 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
-using System.ServiceModel.Dispatcher;
 using System.ServiceModel.Discovery;
+using System.ServiceModel.Dispatcher;
 using System.Xml;
 
 namespace System.ServiceModel.Discovery.Version11
 {
-	internal class MessageContracts11
-	{
-		public const string NS = DiscoveryVersion.Namespace11;
-		public const string HelloAction = NS + "/Hello";
-		public const string ByeAction = NS + "/Bye";
-		public const string ProbeAction = NS + "/Probe";
-		public const string ProbeMatchAction = NS + "/ProbeMatches";
-		public const string ResolveAction = NS + "/Resolve";
-		public const string ResolveMatchAction = NS + "/ResolveMatches";
+    internal class MessageContracts11
+    {
+        public const string NS = DiscoveryVersion.Namespace11;
+        public const string HelloAction = NS + "/Hello";
+        public const string ByeAction = NS + "/Bye";
+        public const string ProbeAction = NS + "/Probe";
+        public const string ProbeMatchAction = NS + "/ProbeMatches";
+        public const string ResolveAction = NS + "/Resolve";
+        public const string ResolveMatchAction = NS + "/ResolveMatches";
 
-		[MessageContract (IsWrapped = false)]
-		public class OnlineAnnouncement
-		{
-			public OnlineAnnouncement ()
-			{
-				Id = new UniqueId ();
-			}
+        [MessageContract(IsWrapped = false)]
+        public class OnlineAnnouncement
+        {
+            public OnlineAnnouncement()
+            {
+                Id = new UniqueId();
+            }
 
-			[MessageHeader (Name = "AppSequence", Namespace = NS)]
-			public DiscoveryMessageSequence11 MessageSequence { get; set; }
-			[MessageHeader (Name = "MessageID", Namespace = "http://www.w3.org/2005/08/addressing")]
-			public UniqueId Id { get; set; }
+            [MessageHeader(Name = "AppSequence", Namespace = NS)]
+            public DiscoveryMessageSequence11 MessageSequence { get; set; }
 
-			[MessageBodyMember (Name = "Hello", Namespace = NS)]
-			public EndpointDiscoveryMetadata11 EndpointDiscoveryMetadata { get; set; }
-		}
+            [MessageHeader(Name = "MessageID", Namespace = "http://www.w3.org/2005/08/addressing")]
+            public UniqueId Id { get; set; }
 
-		[MessageContract (IsWrapped = false)]
-		public class OfflineAnnouncement
-		{
-			public OfflineAnnouncement ()
-			{
-				Id = new UniqueId ();
-			}
+            [MessageBodyMember(Name = "Hello", Namespace = NS)]
+            public EndpointDiscoveryMetadata11 EndpointDiscoveryMetadata { get; set; }
+        }
 
-			[MessageHeader (Name = "AppSequence", Namespace = NS)]
-			public DiscoveryMessageSequence11 MessageSequence { get; set; }
-			[MessageHeader (Name = "MessageID", Namespace = "http://www.w3.org/2005/08/addressing")]
-			public UniqueId Id { get; set; }
-			[MessageBodyMember (Name = "Bye", Namespace = NS)]
-			public EndpointDiscoveryMetadata11 EndpointDiscoveryMetadata { get; set; }
-		}
+        [MessageContract(IsWrapped = false)]
+        public class OfflineAnnouncement
+        {
+            public OfflineAnnouncement()
+            {
+                Id = new UniqueId();
+            }
 
-		[MessageContract (IsWrapped = false)]
-		public class FindRequest
-		{
-			public FindRequest ()
-			{
-				Id = new UniqueId ();
-			}
+            [MessageHeader(Name = "AppSequence", Namespace = NS)]
+            public DiscoveryMessageSequence11 MessageSequence { get; set; }
 
-			[MessageHeader (Name = "MessageID", Namespace = "http://www.w3.org/2005/08/addressing")]
-			public UniqueId Id { get; set; }
+            [MessageHeader(Name = "MessageID", Namespace = "http://www.w3.org/2005/08/addressing")]
+            public UniqueId Id { get; set; }
 
-			[MessageBodyMember (Name = "Probe", Namespace = NS)]
-			public FindCriteria11 Body { get; set; }
-		}
+            [MessageBodyMember(Name = "Bye", Namespace = NS)]
+            public EndpointDiscoveryMetadata11 EndpointDiscoveryMetadata { get; set; }
+        }
 
-		[MessageContract (IsWrapped = false)]
-		public class FindResponse
-		{
-			[MessageHeader (Name = "AppSequence", Namespace = NS)]
-			public DiscoveryMessageSequence11 MessageSequence { get; set; }
-			[MessageBodyMember (Name = "ProbeMatches", Namespace = NS)]
-			public FindResponse11 Body { get; set; }
-		}
+        [MessageContract(IsWrapped = false)]
+        public class FindRequest
+        {
+            public FindRequest()
+            {
+                Id = new UniqueId();
+            }
 
-		[CollectionDataContract (Name = "ProbeMatches", ItemName = "ProbeMatch", Namespace = NS)]
-		public class FindResponse11 : List<EndpointDiscoveryMetadata11>
-		{
-		}
+            [MessageHeader(Name = "MessageID", Namespace = "http://www.w3.org/2005/08/addressing")]
+            public UniqueId Id { get; set; }
 
-		[MessageContract (IsWrapped = false)]
-		public class ResolveRequest
-		{
-			public ResolveRequest ()
-			{
-				Id = new UniqueId ();
-			}
+            [MessageBodyMember(Name = "Probe", Namespace = NS)]
+            public FindCriteria11 Body { get; set; }
+        }
 
-			[MessageHeader (Name = "MessageID", Namespace = "http://www.w3.org/2005/08/addressing")]
-			public UniqueId Id { get; set; }
-			[MessageBodyMember (Name = "Resolve", Namespace = NS)]
-			public ResolveCriteria11 Body { get; set; }
-		}
+        [MessageContract(IsWrapped = false)]
+        public class FindResponse
+        {
+            [MessageHeader(Name = "AppSequence", Namespace = NS)]
+            public DiscoveryMessageSequence11 MessageSequence { get; set; }
 
-		[MessageContract (IsWrapped = false)]
-		public class ResolveResponse
-		{
-			[MessageHeader (Name = "AppSequence", Namespace = NS)]
-			public DiscoveryMessageSequence11 MessageSequence { get; set; }
-			[MessageBodyMember (Name = "ResolveMatches", Namespace = NS)]
-			public EndpointDiscoveryMetadata11 Body { get; set; }
-		}
-	}
+            [MessageBodyMember(Name = "ProbeMatches", Namespace = NS)]
+            public FindResponse11 Body { get; set; }
+        }
+
+        [CollectionDataContract(Name = "ProbeMatches", ItemName = "ProbeMatch", Namespace = NS)]
+        public class FindResponse11 : List<EndpointDiscoveryMetadata11> { }
+
+        [MessageContract(IsWrapped = false)]
+        public class ResolveRequest
+        {
+            public ResolveRequest()
+            {
+                Id = new UniqueId();
+            }
+
+            [MessageHeader(Name = "MessageID", Namespace = "http://www.w3.org/2005/08/addressing")]
+            public UniqueId Id { get; set; }
+
+            [MessageBodyMember(Name = "Resolve", Namespace = NS)]
+            public ResolveCriteria11 Body { get; set; }
+        }
+
+        [MessageContract(IsWrapped = false)]
+        public class ResolveResponse
+        {
+            [MessageHeader(Name = "AppSequence", Namespace = NS)]
+            public DiscoveryMessageSequence11 MessageSequence { get; set; }
+
+            [MessageBodyMember(Name = "ResolveMatches", Namespace = NS)]
+            public EndpointDiscoveryMetadata11 Body { get; set; }
+        }
+    }
 }

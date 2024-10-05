@@ -33,87 +33,84 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceProcess
 {
-	[TestFixture]
-	public class ServiceBaseTest
-	{
-		const int SOME_ERROR_CODE = 1;
+    [TestFixture]
+    public class ServiceBaseTest
+    {
+        const int SOME_ERROR_CODE = 1;
 
-		public partial class ServiceFoo : ServiceBase
-		{
-			public ServiceFoo ()
-			{
-				InitializeComponent ();
-			}
+        public partial class ServiceFoo : ServiceBase
+        {
+            public ServiceFoo()
+            {
+                InitializeComponent();
+            }
 
-			protected override void OnStart (string[] args)
-			{
-			}
+            protected override void OnStart(string[] args) { }
 
-			protected override void OnStop ()
-			{
-				ExitCode = SOME_ERROR_CODE;
-			}
+            protected override void OnStop()
+            {
+                ExitCode = SOME_ERROR_CODE;
+            }
 
-			public void StartHook ()
-			{
-				OnStart (new string [] { });
-			}
-		}
+            public void StartHook()
+            {
+                OnStart(new string[] { });
+            }
+        }
 
-		[Test]
-		public void StopCallsOnStop ()
-		{
-			var s = new ServiceFoo ();
-			Assert.AreEqual (0, s.ExitCode);
-			s.Stop ();
-			Assert.AreEqual (SOME_ERROR_CODE, s.ExitCode);
-		}
+        [Test]
+        public void StopCallsOnStop()
+        {
+            var s = new ServiceFoo();
+            Assert.AreEqual(0, s.ExitCode);
+            s.Stop();
+            Assert.AreEqual(SOME_ERROR_CODE, s.ExitCode);
+        }
 
-		[Test]
-		public void ExitCodeIsNotResetByBaseClassServiceBaseBetweenRuns ()
-		{
-			var s = new ServiceFoo ();
-			Assert.AreEqual (0, s.ExitCode);
-			s.Stop ();
-			Assert.AreEqual (SOME_ERROR_CODE, s.ExitCode);
-			s.StartHook ();
-			Assert.AreEqual (SOME_ERROR_CODE, s.ExitCode);
-		}
+        [Test]
+        public void ExitCodeIsNotResetByBaseClassServiceBaseBetweenRuns()
+        {
+            var s = new ServiceFoo();
+            Assert.AreEqual(0, s.ExitCode);
+            s.Stop();
+            Assert.AreEqual(SOME_ERROR_CODE, s.ExitCode);
+            s.StartHook();
+            Assert.AreEqual(SOME_ERROR_CODE, s.ExitCode);
+        }
 
-		partial class ServiceFoo
-		{
-			/// <summary>
-			/// Required designer variable.
-			/// </summary>
-			private IContainer components = null;
+        partial class ServiceFoo
+        {
+            /// <summary>
+            /// Required designer variable.
+            /// </summary>
+            private IContainer components = null;
 
-			/// <summary>
-			/// Clean up any resources being used.
-			/// </summary>
-			/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-			protected override void Dispose(bool disposing)
-			{
-				if (disposing && (components != null))
-				{
-					components.Dispose();
-				}
-				base.Dispose(disposing);
-			}
+            /// <summary>
+            /// Clean up any resources being used.
+            /// </summary>
+            /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+            protected override void Dispose(bool disposing)
+            {
+                if (disposing && (components != null))
+                {
+                    components.Dispose();
+                }
+                base.Dispose(disposing);
+            }
 
-			#region Component Designer generated code
+            #region Component Designer generated code
 
-			/// <summary>
-			/// Required method for Designer support - do not modify
-			/// the contents of this method with the code editor.
-			/// </summary>
-			private void InitializeComponent()
-			{
-				components = new Container();
-				this.ServiceName = "ServiceFoo";
-			}
+            /// <summary>
+            /// Required method for Designer support - do not modify
+            /// the contents of this method with the code editor.
+            /// </summary>
+            private void InitializeComponent()
+            {
+                components = new Container();
+                this.ServiceName = "ServiceFoo";
+            }
 
-			#endregion
-		}
-	}
+            #endregion
+        }
+    }
 }
-

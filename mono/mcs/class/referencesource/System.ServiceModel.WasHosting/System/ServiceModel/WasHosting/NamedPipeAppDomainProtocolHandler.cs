@@ -9,22 +9,29 @@ namespace System.ServiceModel.WasHosting
     using System.ServiceModel.Activation;
     using System.ServiceModel.Channels;
 
-    [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUninstantiatedInternalClasses,
-        Justification = "Instantiated by ASP.NET")]
+    [SuppressMessage(
+        FxCop.Category.Performance,
+        FxCop.Rule.AvoidUninstantiatedInternalClasses,
+        Justification = "Instantiated by ASP.NET"
+    )]
     class NamedPipeAppDomainProtocolHandler : BaseAppDomainProtocolHandler
     {
         HostedNamedPipeTransportManager transportManager;
 
         public NamedPipeAppDomainProtocolHandler()
-            : base(Uri.UriSchemeNetPipe)
-        { }
+            : base(Uri.UriSchemeNetPipe) { }
 
         protected override void OnStart()
         {
-            NamedPipeHostedTransportConfiguration configuration = 
-                HostedTransportConfigurationManager.GetConfiguration(Uri.UriSchemeNetPipe) as NamedPipeHostedTransportConfiguration;
+            NamedPipeHostedTransportConfiguration configuration =
+                HostedTransportConfigurationManager.GetConfiguration(Uri.UriSchemeNetPipe)
+                as NamedPipeHostedTransportConfiguration;
             transportManager = configuration.TransportManager as HostedNamedPipeTransportManager;
-            transportManager.Start(listenerChannelContext.ListenerChannelId, listenerChannelContext.Token, OnMessageReceived);
+            transportManager.Start(
+                listenerChannelContext.ListenerChannelId,
+                listenerChannelContext.Token,
+                OnMessageReceived
+            );
         }
 
         protected override void OnStop()
@@ -36,4 +43,3 @@ namespace System.ServiceModel.WasHosting
         }
     }
 }
-

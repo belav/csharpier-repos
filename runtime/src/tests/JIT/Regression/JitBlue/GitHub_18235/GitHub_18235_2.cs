@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 struct S0
 {
     public uint F0;
@@ -14,6 +15,7 @@ struct S0
 public class Program
 {
     static uint s_0;
+
     [Fact]
     public static int TestEntryPoint()
     {

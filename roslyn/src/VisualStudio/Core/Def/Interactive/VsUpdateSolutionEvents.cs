@@ -23,23 +23,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
 
         public VsUpdateSolutionEvents(
             IVsSolutionBuildManager buildManager,
-            TaskCompletionSource<bool> taskSource)
+            TaskCompletionSource<bool> taskSource
+        )
         {
             _taskSource = taskSource;
             _buildManager = buildManager;
 
-            Marshal.ThrowExceptionForHR(
-                buildManager.AdviseUpdateSolutionEvents(this, out _cookie));
+            Marshal.ThrowExceptionForHR(buildManager.AdviseUpdateSolutionEvents(this, out _cookie));
         }
 
-        public int OnActiveProjectCfgChange(IVsHierarchy hierarchy)
-            => VSConstants.S_OK;
+        public int OnActiveProjectCfgChange(IVsHierarchy hierarchy) => VSConstants.S_OK;
 
-        public int UpdateSolution_Begin(ref int cancelUpdate)
-            => VSConstants.S_OK;
+        public int UpdateSolution_Begin(ref int cancelUpdate) => VSConstants.S_OK;
 
-        public int UpdateSolution_Cancel()
-            => VSConstants.S_OK;
+        public int UpdateSolution_Cancel() => VSConstants.S_OK;
 
         public int UpdateSolution_Done(int succeeded, int modified, int cancelCommand)
         {
@@ -60,7 +57,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             return VSConstants.S_OK;
         }
 
-        public int UpdateSolution_StartUpdate(ref int cancelUpdate)
-            => VSConstants.S_OK;
+        public int UpdateSolution_StartUpdate(ref int cancelUpdate) => VSConstants.S_OK;
     }
 }

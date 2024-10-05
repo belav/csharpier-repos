@@ -20,7 +20,8 @@ namespace System.Threading
         internal struct ThreadCountReset : IDisposable
         {
             private readonly bool _reset;
-            private readonly int _worker, _io;
+            private readonly int _worker,
+                _io;
 
             internal ThreadCountReset(int worker, int io)
             {

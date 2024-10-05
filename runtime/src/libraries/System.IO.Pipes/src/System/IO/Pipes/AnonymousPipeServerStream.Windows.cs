@@ -12,7 +12,12 @@ namespace System.IO.Pipes
     /// </summary>
     public sealed partial class AnonymousPipeServerStream : PipeStream
     {
-        internal AnonymousPipeServerStream(PipeDirection direction, HandleInheritability inheritability, int bufferSize, PipeSecurity? pipeSecurity)
+        internal AnonymousPipeServerStream(
+            PipeDirection direction,
+            HandleInheritability inheritability,
+            int bufferSize,
+            PipeSecurity? pipeSecurity
+        )
             : base(direction, bufferSize)
         {
             if (direction == PipeDirection.InOut)
@@ -20,41 +25,74 @@ namespace System.IO.Pipes
                 throw new NotSupportedException(SR.NotSupported_AnonymousPipeUnidirectional);
             }
 
-            if (inheritability < HandleInheritability.None || inheritability > HandleInheritability.Inheritable)
+            if (
+                inheritability < HandleInheritability.None
+                || inheritability > HandleInheritability.Inheritable
+            )
             {
-                throw new ArgumentOutOfRangeException(nameof(inheritability), SR.ArgumentOutOfRange_HandleInheritabilityNoneOrInheritable);
+                throw new ArgumentOutOfRangeException(
+                    nameof(inheritability),
+                    SR.ArgumentOutOfRange_HandleInheritabilityNoneOrInheritable
+                );
             }
 
             Create(direction, inheritability, bufferSize, pipeSecurity);
         }
 
-        private void Create(PipeDirection direction, HandleInheritability inheritability, int bufferSize)
+        private void Create(
+            PipeDirection direction,
+            HandleInheritability inheritability,
+            int bufferSize
+        )
         {
             Create(direction, inheritability, bufferSize, null);
         }
 
-        private void Create(PipeDirection direction, HandleInheritability inheritability, int bufferSize, PipeSecurity? pipeSecurity)
+        private void Create(
+            PipeDirection direction,
+            HandleInheritability inheritability,
+            int bufferSize,
+            PipeSecurity? pipeSecurity
+        )
         {
-            Debug.Assert(direction != PipeDirection.InOut, "Anonymous pipe direction shouldn't be InOut");
+            Debug.Assert(
+                direction != PipeDirection.InOut,
+                "Anonymous pipe direction shouldn't be InOut"
+            );
             Debug.Assert(bufferSize >= 0, "bufferSize is negative");
 
             bool bSuccess;
-            SafePipeHandle serverHandle, clientHandle;
+            SafePipeHandle serverHandle,
+                clientHandle;
             SafePipeHandle newServerHandle;
 
             // Create the two pipe handles that make up the anonymous pipe.
             GCHandle pinningHandle = default;
             try
             {
-                Interop.Kernel32.SECURITY_ATTRIBUTES secAttrs = PipeStream.GetSecAttrs(inheritability, pipeSecurity, ref pinningHandle);
+                Interop.Kernel32.SECURITY_ATTRIBUTES secAttrs = PipeStream.GetSecAttrs(
+                    inheritability,
+                    pipeSecurity,
+                    ref pinningHandle
+                );
 
                 if (direction == PipeDirection.In)
                 {
-                    bSuccess = Interop.Kernel32.CreatePipe(out serverHandle, out clientHandle, ref secAttrs, bufferSize);
+                    bSuccess = Interop.Kernel32.CreatePipe(
+                        out serverHandle,
+                        out clientHandle,
+                        ref secAttrs,
+                        bufferSize
+                    );
                 }
                 else
                 {
-                    bSuccess = Interop.Kernel32.CreatePipe(out clientHandle, out serverHandle, ref secAttrs, bufferSize);
+                    bSuccess = Interop.Kernel32.CreatePipe(
+                        out clientHandle,
+                        out serverHandle,
+                        ref secAttrs,
+                        bufferSize
+                    );
                 }
             }
             finally
@@ -79,8 +117,15 @@ namespace System.IO.Pipes
             // process doesn't end up getting another copy of the server handle.  If it were to get a copy, the
             // OS wouldn't be able to inform the child that the server has closed its handle because it will see
             // that there is still one server handle that is open.
-            bSuccess = Interop.Kernel32.DuplicateHandle(Interop.Kernel32.GetCurrentProcess(), serverHandle, Interop.Kernel32.GetCurrentProcess(),
-                out newServerHandle, 0, false, Interop.Kernel32.HandleOptions.DUPLICATE_SAME_ACCESS);
+            bSuccess = Interop.Kernel32.DuplicateHandle(
+                Interop.Kernel32.GetCurrentProcess(),
+                serverHandle,
+                Interop.Kernel32.GetCurrentProcess(),
+                out newServerHandle,
+                0,
+                false,
+                Interop.Kernel32.HandleOptions.DUPLICATE_SAME_ACCESS
+            );
 
             if (!bSuccess)
             {

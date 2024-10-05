@@ -21,7 +21,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 
         private bool _needsLoadOnNextActivate = true;
 
-        protected abstract AbstractOptionPageControl CreateOptionPage(IServiceProvider serviceProvider, OptionStore optionStore);
+        protected abstract AbstractOptionPageControl CreateOptionPage(
+            IServiceProvider serviceProvider,
+            OptionStore optionStore
+        );
 
         protected AbstractOptionPageControl pageControl;
 
@@ -79,7 +82,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             //    saved. The intent here is the settings get reloaded so the next time you open the
             //    page they are properly populated.
             //
-            // We need to ignore the first case since the option store is static and shared among 
+            // We need to ignore the first case since the option store is static and shared among
             // pages. Each page will get this same call so we should ensure that our page has been
             // created first.
             //
@@ -108,7 +111,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             var changedOptions = s_optionStore.GetChangedOptions();
             OptionLogger.Log(changedOptions);
 
-            s_optionStore.GlobalOptions.SetGlobalOptions(changedOptions.SelectAsArray(entry => KeyValuePairUtil.Create(entry.key, entry.newValue)));
+            s_optionStore.GlobalOptions.SetGlobalOptions(
+                changedOptions.SelectAsArray(entry =>
+                    KeyValuePairUtil.Create(entry.key, entry.newValue)
+                )
+            );
 
             // Make sure we load the next time a page is activated, in case that options changed
             // programmatically between now and the next time the page is activated

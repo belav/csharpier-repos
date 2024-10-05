@@ -32,24 +32,25 @@ namespace System.Reflection.Metadata.Ecma335
             }
         }
 
-        public MetadataAggregator(MetadataReader baseReader, IReadOnlyList<MetadataReader> deltaReaders)
-            : this(baseReader, null, null, deltaReaders)
-        {
-        }
+        public MetadataAggregator(
+            MetadataReader baseReader,
+            IReadOnlyList<MetadataReader> deltaReaders
+        )
+            : this(baseReader, null, null, deltaReaders) { }
 
         public MetadataAggregator(
             IReadOnlyList<int>? baseTableRowCounts,
             IReadOnlyList<int>? baseHeapSizes,
-            IReadOnlyList<MetadataReader>? deltaReaders)
-            : this(null, baseTableRowCounts, baseHeapSizes, deltaReaders)
-        {
-        }
+            IReadOnlyList<MetadataReader>? deltaReaders
+        )
+            : this(null, baseTableRowCounts, baseHeapSizes, deltaReaders) { }
 
         private MetadataAggregator(
             MetadataReader? baseReader,
             IReadOnlyList<int>? baseTableRowCounts,
             IReadOnlyList<int>? baseHeapSizes,
-            IReadOnlyList<MetadataReader>? deltaReaders)
+            IReadOnlyList<MetadataReader>? deltaReaders
+        )
         {
             if (baseTableRowCounts == null)
             {
@@ -60,7 +61,10 @@ namespace System.Reflection.Metadata.Ecma335
 
                 if (baseReader.GetTableRowCount(TableIndex.EncMap) != 0)
                 {
-                    throw new ArgumentException(SR.BaseReaderMustBeFullMetadataReader, nameof(baseReader));
+                    throw new ArgumentException(
+                        SR.BaseReaderMustBeFullMetadataReader,
+                        nameof(baseReader)
+                    );
                 }
 
                 CalculateBaseCounts(baseReader, out baseTableRowCounts, out baseHeapSizes);
@@ -70,7 +74,10 @@ namespace System.Reflection.Metadata.Ecma335
             {
                 if (baseTableRowCounts.Count != MetadataTokens.TableCount)
                 {
-                    throw new ArgumentException(SR.Format(SR.ExpectedListOfSize, MetadataTokens.TableCount), nameof(baseTableRowCounts));
+                    throw new ArgumentException(
+                        SR.Format(SR.ExpectedListOfSize, MetadataTokens.TableCount),
+                        nameof(baseTableRowCounts)
+                    );
                 }
 
                 if (baseHeapSizes == null)
@@ -80,7 +87,10 @@ namespace System.Reflection.Metadata.Ecma335
 
                 if (baseHeapSizes.Count != MetadataTokens.HeapCount)
                 {
-                    throw new ArgumentException(SR.Format(SR.ExpectedListOfSize, MetadataTokens.HeapCount), nameof(baseTableRowCounts));
+                    throw new ArgumentException(
+                        SR.Format(SR.ExpectedListOfSize, MetadataTokens.HeapCount),
+                        nameof(baseTableRowCounts)
+                    );
                 }
             }
 
@@ -91,7 +101,10 @@ namespace System.Reflection.Metadata.Ecma335
 
             for (int i = 0; i < deltaReaders.Count; i++)
             {
-                if (deltaReaders[i].GetTableRowCount(TableIndex.EncMap) == 0 || !deltaReaders[i].IsMinimalDelta)
+                if (
+                    deltaReaders[i].GetTableRowCount(TableIndex.EncMap) == 0
+                    || !deltaReaders[i].IsMinimalDelta
+                )
                 {
                     throw new ArgumentException(SR.ReadersMustBeDeltaReaders, nameof(deltaReaders));
                 }
@@ -111,7 +124,8 @@ namespace System.Reflection.Metadata.Ecma335
         private static void CalculateBaseCounts(
             MetadataReader baseReader,
             out IReadOnlyList<int> baseTableRowCounts,
-            out IReadOnlyList<int> baseHeapSizes)
+            out IReadOnlyList<int> baseHeapSizes
+        )
         {
             int[] rowCounts = new int[MetadataTokens.TableCount];
             int[] heapSizes = new int[MetadataTokens.HeapCount];
@@ -132,7 +146,8 @@ namespace System.Reflection.Metadata.Ecma335
 
         private static ImmutableArray<ImmutableArray<int>> CalculateHeapSizes(
             IReadOnlyList<int> baseSizes,
-            IReadOnlyList<MetadataReader> deltaReaders)
+            IReadOnlyList<MetadataReader> deltaReaders
+        )
         {
             // GUID heap index is multiple of sizeof(Guid) == 16
             const int guidSize = 16;
@@ -150,29 +165,37 @@ namespace System.Reflection.Metadata.Ecma335
 
             for (int r = 0; r < deltaReaders.Count; r++)
             {
-                userStringSizes[r + 1] = userStringSizes[r] + deltaReaders[r].GetHeapSize(HeapIndex.UserString);
+                userStringSizes[r + 1] =
+                    userStringSizes[r] + deltaReaders[r].GetHeapSize(HeapIndex.UserString);
                 stringSizes[r + 1] = stringSizes[r] + deltaReaders[r].GetHeapSize(HeapIndex.String);
                 blobSizes[r + 1] = blobSizes[r] + deltaReaders[r].GetHeapSize(HeapIndex.Blob);
-                guidSizes[r + 1] = guidSizes[r] + deltaReaders[r].GetHeapSize(HeapIndex.Guid) / guidSize;
+                guidSizes[r + 1] =
+                    guidSizes[r] + deltaReaders[r].GetHeapSize(HeapIndex.Guid) / guidSize;
             }
 
             return ImmutableArray.Create(
                 userStringSizes.ToImmutableArray(),
                 stringSizes.ToImmutableArray(),
                 blobSizes.ToImmutableArray(),
-                guidSizes.ToImmutableArray());
+                guidSizes.ToImmutableArray()
+            );
         }
 
         private static ImmutableArray<ImmutableArray<RowCounts>> CalculateRowCounts(
             IReadOnlyList<int> baseRowCounts,
-            IReadOnlyList<MetadataReader> deltaReaders)
+            IReadOnlyList<MetadataReader> deltaReaders
+        )
         {
             // TODO: optimize - we don't need to allocate all these arrays
             var rowCounts = GetBaseRowCounts(baseRowCounts, generations: 1 + deltaReaders.Count);
 
             for (int generation = 1; generation <= deltaReaders.Count; generation++)
             {
-                CalculateDeltaRowCountsForGeneration(rowCounts, generation, ref deltaReaders[generation - 1].EncMapTable);
+                CalculateDeltaRowCountsForGeneration(
+                    rowCounts,
+                    generation,
+                    ref deltaReaders[generation - 1].EncMapTable
+                );
             }
 
             return ToImmutable(rowCounts);
@@ -190,7 +213,10 @@ namespace System.Reflection.Metadata.Ecma335
         }
 
         // internal for testing
-        internal static RowCounts[][] GetBaseRowCounts(IReadOnlyList<int> baseRowCounts, int generations)
+        internal static RowCounts[][] GetBaseRowCounts(
+            IReadOnlyList<int> baseRowCounts,
+            int generations
+        )
         {
             var rowCounts = new RowCounts[MetadataTokens.TableCount][];
 
@@ -204,11 +230,17 @@ namespace System.Reflection.Metadata.Ecma335
         }
 
         // internal for testing
-        internal static void CalculateDeltaRowCountsForGeneration(RowCounts[][] rowCounts, int generation, ref EnCMapTableReader encMapTable)
+        internal static void CalculateDeltaRowCountsForGeneration(
+            RowCounts[][] rowCounts,
+            int generation,
+            ref EnCMapTableReader encMapTable
+        )
         {
             foreach (var tableRowCounts in rowCounts)
             {
-                tableRowCounts[generation].AggregateInserts = tableRowCounts[generation - 1].AggregateInserts;
+                tableRowCounts[generation].AggregateInserts = tableRowCounts[
+                    generation - 1
+                ].AggregateInserts;
             }
 
             int mapRowCount = encMapTable.NumberOfRows;
@@ -274,8 +306,7 @@ namespace System.Reflection.Metadata.Ecma335
                     do
                     {
                         generation++;
-                    }
-                    while (generation < sizes.Length && sizes[generation] == size);
+                    } while (generation < sizes.Length && sizes[generation] == size);
                 }
                 else
                 {
@@ -288,7 +319,10 @@ namespace System.Reflection.Metadata.Ecma335
                 }
 
                 // GUID heap accumulates - previous heap is copied to the next generation
-                int relativeHeapOffset = (handle.Type == HandleType.Guid || generation == 0) ? heapOffset : heapOffset - sizes[generation - 1];
+                int relativeHeapOffset =
+                    (handle.Type == HandleType.Guid || generation == 0)
+                        ? heapOffset
+                        : heapOffset - sizes[generation - 1];
 
                 return new Handle((byte)handle.Type, relativeHeapOffset);
             }
@@ -317,15 +351,20 @@ namespace System.Reflection.Metadata.Ecma335
 
                     if (generation >= sizes.Length)
                     {
-                        throw new ArgumentException(SR.HandleBelongsToFutureGeneration, nameof(handle));
+                        throw new ArgumentException(
+                            SR.HandleBelongsToFutureGeneration,
+                            nameof(handle)
+                        );
                     }
                 }
 
                 // In each delta table updates always precede inserts.
-                int relativeRowId = (generation == 0) ? rowId :
-                    rowId -
-                    sizes[generation - 1].AggregateInserts +
-                    sizes[generation].Updates;
+                int relativeRowId =
+                    (generation == 0)
+                        ? rowId
+                        : rowId
+                            - sizes[generation - 1].AggregateInserts
+                            + sizes[generation].Updates;
 
                 return new Handle((byte)handle.Type, relativeRowId);
             }

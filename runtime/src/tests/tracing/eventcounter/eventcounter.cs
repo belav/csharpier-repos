@@ -1,15 +1,15 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using Xunit;
 #if USE_MDT_EVENTSOURCE
 using Microsoft.Diagnostics.Tracing;
 #else
 using System.Diagnostics.Tracing;
 #endif
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using Xunit;
 
 namespace BasicEventSourceTests
 {
@@ -22,7 +22,11 @@ namespace BasicEventSourceTests
 
             public SimpleEventSource(string _displayName, string _displayUnits)
             {
-                _myCounter = new EventCounter("test-counter", this) { DisplayName = _displayName, DisplayUnits = _displayUnits };
+                _myCounter = new EventCounter("test-counter", this)
+                {
+                    DisplayName = _displayName,
+                    DisplayUnits = _displayUnits,
+                };
             }
 
             public void WriteOne()
@@ -36,13 +40,13 @@ namespace BasicEventSourceTests
             private readonly string _targetSourceName;
             private readonly EventLevel _level;
             private Dictionary<string, string> args;
-            
+
             public HashSet<int> means;
             public string displayName;
             public string displayUnits;
             public int callbackCount;
             public ManualResetEvent sawEvent;
-            
+
             public SimpleEventListener(string targetSourceName, EventLevel level)
             {
                 // Store the arguments
@@ -51,12 +55,12 @@ namespace BasicEventSourceTests
                 displayName = "";
                 displayUnits = "";
                 callbackCount = 0;
-                means = new HashSet<int>(); 
+                means = new HashSet<int>();
                 args = new Dictionary<string, string>();
                 args.Add("EventCounterIntervalSec", "1");
                 sawEvent = new ManualResetEvent(false);
             }
-            
+
             protected override void OnEventSourceCreated(EventSource source)
             {
                 if (source.Name.Equals(_targetSourceName))
@@ -72,7 +76,8 @@ namespace BasicEventSourceTests
                     for (int i = 0; i < eventData.Payload.Count; i++)
                     {
                         // Decode the payload
-                        IDictionary<string, object> eventPayload = eventData.Payload[i] as IDictionary<string, object>;
+                        IDictionary<string, object> eventPayload =
+                            eventData.Payload[i] as IDictionary<string, object>;
                         foreach (KeyValuePair<string, object> payload in eventPayload)
                         {
                             if (payload.Key.Equals("Mean"))
@@ -100,7 +105,7 @@ namespace BasicEventSourceTests
             {
                 // we expect to see 1 because we wrote only 1s
                 // we *might* also see 0 because there is a period of time we didn't write stuff and got callback
-                if (!means.Contains(1)) 
+                if (!means.Contains(1))
                 {
                     Console.WriteLine("Mean doesn't have a 1");
                     return false;
@@ -112,9 +117,13 @@ namespace BasicEventSourceTests
         [Fact]
         public static int TestEntryPoint()
         {
-
             // Create an EventListener.
-            using (SimpleEventListener myListener = new SimpleEventListener("SimpleEventSource", EventLevel.Verbose))
+            using (
+                SimpleEventListener myListener = new SimpleEventListener(
+                    "SimpleEventSource",
+                    EventLevel.Verbose
+                )
+            )
             {
                 string displayName = "Mock Counter";
                 string displayUnits = "Count";
@@ -133,26 +142,32 @@ namespace BasicEventSourceTests
                 if (!myListener.validateMean())
                 {
                     Console.WriteLine("Test Failed - Incorrect mean calculation");
-                    return 1;                    
+                    return 1;
                 }
 
                 if (displayName != myListener.displayName)
                 {
                     Console.WriteLine("Test Failed");
-                    Console.WriteLine($"Expected to see {displayName} as DisplayName property in payload - saw {myListener.displayName}");
+                    Console.WriteLine(
+                        $"Expected to see {displayName} as DisplayName property in payload - saw {myListener.displayName}"
+                    );
                     return 1;
                 }
 
                 if (displayUnits != myListener.displayUnits)
                 {
                     Console.WriteLine("Test Failed");
-                    Console.WriteLine($"Expected to see {displayUnits} as DisplayUnits property in payload - saw {myListener.displayUnits}");
+                    Console.WriteLine(
+                        $"Expected to see {displayUnits} as DisplayUnits property in payload - saw {myListener.displayUnits}"
+                    );
                     return 1;
                 }
 
                 if (myListener.callbackCount == 0)
                 {
-                    Console.WriteLine("Test Failed: Expected to see 1 or more EventListener callback but got none");
+                    Console.WriteLine(
+                        "Test Failed: Expected to see 1 or more EventListener callback but got none"
+                    );
                 }
 
                 Console.WriteLine("Test passed");

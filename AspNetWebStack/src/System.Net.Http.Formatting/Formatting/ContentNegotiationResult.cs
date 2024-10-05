@@ -20,7 +20,10 @@ namespace System.Net.Http.Formatting
         /// </summary>
         /// <param name="formatter">The formatter.</param>
         /// <param name="mediaType">The preferred media type. Can be <c>null</c>.</param>
-        public ContentNegotiationResult(MediaTypeFormatter formatter, MediaTypeHeaderValue mediaType)
+        public ContentNegotiationResult(
+            MediaTypeFormatter formatter,
+            MediaTypeHeaderValue mediaType
+        )
         {
             if (formatter == null)
             {

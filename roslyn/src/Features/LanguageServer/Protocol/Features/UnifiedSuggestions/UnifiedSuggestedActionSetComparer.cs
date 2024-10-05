@@ -14,8 +14,7 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
     {
         private readonly TextSpan? _targetSpan;
 
-        public UnifiedSuggestedActionSetComparer(TextSpan? targetSpan)
-            => _targetSpan = targetSpan;
+        public UnifiedSuggestedActionSetComparer(TextSpan? targetSpan) => _targetSpan = targetSpan;
 
         private static int Distance(TextSpan? maybeA, TextSpan? maybeB)
         {
@@ -51,7 +50,11 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
 
         public int Compare(UnifiedSuggestedActionSet x, UnifiedSuggestedActionSet y)
         {
-            if (!_targetSpan.HasValue || !x.ApplicableToSpan.HasValue || !y.ApplicableToSpan.HasValue)
+            if (
+                !_targetSpan.HasValue
+                || !x.ApplicableToSpan.HasValue
+                || !y.ApplicableToSpan.HasValue
+            )
             {
                 // Not enough data to compare, consider them equal
                 return 0;

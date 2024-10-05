@@ -18,17 +18,23 @@ namespace System.Net.Http.Tests
 
             Type type = typeof(HttpContent);
             TypeInfo typeInfo = type.GetTypeInfo();
-            FieldInfo bufferedContentField = typeof(HttpContent).GetField("_bufferedContent",
-                BindingFlags.Instance | BindingFlags.NonPublic);
+            FieldInfo bufferedContentField = typeof(HttpContent).GetField(
+                "_bufferedContent",
+                BindingFlags.Instance | BindingFlags.NonPublic
+            );
             Assert.NotNull(bufferedContentField);
 
-            MemoryStream bufferedContentStream = bufferedContentField.GetValue(content) as MemoryStream;
+            MemoryStream bufferedContentStream =
+                bufferedContentField.GetValue(content) as MemoryStream;
             Assert.NotNull(bufferedContentStream);
 
             content.Dispose();
 
             // The following line will throw an ObjectDisposedException if the buffered-stream was correctly disposed.
-            Assert.Throws<ObjectDisposedException>(() => { string str = bufferedContentStream.Length.ToString(); });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                string str = bufferedContentStream.Length.ToString();
+            });
         }
 
         [Theory]
@@ -40,27 +46,44 @@ namespace System.Net.Http.Tests
         [InlineData(3, 50, 100, 149)]
         [InlineData(3, 50, 149, 149)]
         public async Task LoadIntoBufferAsync_ContentLengthSmallerThanActualData_ActualDataLargerThanMaxSize_ThrowsException(
-            int numberOfWrites, int sizeOfEachWrite, int reportedLength, int maxSize)
+            int numberOfWrites,
+            int sizeOfEachWrite,
+            int reportedLength,
+            int maxSize
+        )
         {
             Assert.InRange(maxSize, 1, (numberOfWrites * sizeOfEachWrite) - 1);
 
-            LieAboutLengthContent c = new LieAboutLengthContent(numberOfWrites, sizeOfEachWrite, reportedLength);
+            LieAboutLengthContent c = new LieAboutLengthContent(
+                numberOfWrites,
+                sizeOfEachWrite,
+                reportedLength
+            );
             Task t = c.LoadIntoBufferAsync(maxSize);
             await Assert.ThrowsAsync<HttpRequestException>(() => t);
         }
 
         private sealed class LieAboutLengthContent : HttpContent
         {
-            private readonly int _numberOfWrites, _sizeOfEachWrite, _reportedLength;
+            private readonly int _numberOfWrites,
+                _sizeOfEachWrite,
+                _reportedLength;
 
-            public LieAboutLengthContent(int numberOfWrites, int sizeOfEachWrite, int reportedLength)
+            public LieAboutLengthContent(
+                int numberOfWrites,
+                int sizeOfEachWrite,
+                int reportedLength
+            )
             {
                 _numberOfWrites = numberOfWrites;
                 _sizeOfEachWrite = sizeOfEachWrite;
                 _reportedLength = reportedLength;
             }
 
-            protected override async Task SerializeToStreamAsync(Stream stream, TransportContext context)
+            protected override async Task SerializeToStreamAsync(
+                Stream stream,
+                TransportContext context
+            )
             {
                 byte[] bytes = new byte[_sizeOfEachWrite];
                 for (int i = 0; i < _numberOfWrites; i++)

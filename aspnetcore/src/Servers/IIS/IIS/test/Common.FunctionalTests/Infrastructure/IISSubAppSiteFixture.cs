@@ -7,19 +7,22 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
 public class IISSubAppSiteFixture : IISTestSiteFixture
 {
-    public IISSubAppSiteFixture() : base(Configure)
-    {
-    }
+    public IISSubAppSiteFixture()
+        : base(Configure) { }
 
     private static void Configure(IISDeploymentParameters deploymentParameters)
     {
         if (deploymentParameters.ServerType == IntegrationTesting.ServerType.IIS)
         {
-            deploymentParameters.ServerConfigTemplateContent = File.ReadAllText("IIS.SubApp.Config");
+            deploymentParameters.ServerConfigTemplateContent = File.ReadAllText(
+                "IIS.SubApp.Config"
+            );
         }
         else // IIS Express
         {
-            using var stream = typeof(IISExpressDeployer).Assembly.GetManifestResourceStream("Microsoft.AspNetCore.Server.IntegrationTesting.IIS.Http.SubApp.config");
+            using var stream = typeof(IISExpressDeployer).Assembly.GetManifestResourceStream(
+                "Microsoft.AspNetCore.Server.IntegrationTesting.IIS.Http.SubApp.config"
+            );
             using var reader = new StreamReader(stream);
             deploymentParameters.ServerConfigTemplateContent = reader.ReadToEnd();
         }

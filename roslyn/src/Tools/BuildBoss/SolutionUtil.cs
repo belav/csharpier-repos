@@ -31,7 +31,6 @@ namespace BuildBoss
                     if (!line.StartsWith("Project"))
                     {
                         continue;
-
                     }
 
                     list.Add(ParseProjectLine(line));
@@ -51,7 +50,8 @@ namespace BuildBoss
                 relativeFilePath: filePath,
                 name: name,
                 projectGuid: Guid.Parse(guid),
-                typeGuid: Guid.Parse(typeGuid));
+                typeGuid: Guid.Parse(typeGuid)
+            );
         }
 
         private static string ParseStringLiteral(string line, ref int index)
@@ -72,7 +72,7 @@ namespace BuildBoss
             index = end + 1;
             return line.Substring(start, end - start);
 
-error:
+            error:
             throw new Exception($"Invalid project line {line}");
         }
     }

@@ -3,7 +3,6 @@
 
 using System.Linq;
 using System.Net.Http.Headers;
-
 using Xunit;
 
 namespace System.Net.Http.Tests
@@ -13,14 +12,28 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Ctor_NameNull_Throw()
         {
-            AssertExtensions.Throws<ArgumentNullException>("name", () => { NameValueWithParametersHeaderValue nameValue = new NameValueWithParametersHeaderValue(null); });
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () =>
+                {
+                    NameValueWithParametersHeaderValue nameValue =
+                        new NameValueWithParametersHeaderValue(null);
+                }
+            );
         }
 
         [Fact]
         public void Ctor_NameEmpty_Throw()
         {
             // null and empty should be treated the same. So we also throw for empty strings.
-            AssertExtensions.Throws<ArgumentException>("name", () => { NameValueWithParametersHeaderValue nameValue = new NameValueWithParametersHeaderValue(string.Empty); });
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                () =>
+                {
+                    NameValueWithParametersHeaderValue nameValue =
+                        new NameValueWithParametersHeaderValue(string.Empty);
+                }
+            );
         }
 
         [Fact]
@@ -28,7 +41,9 @@ namespace System.Net.Http.Tests
         {
             // Just make sure the base ctor gets called correctly. Validation of input parameters is done in the base
             // class.
-            NameValueWithParametersHeaderValue nameValue = new NameValueWithParametersHeaderValue("name");
+            NameValueWithParametersHeaderValue nameValue = new NameValueWithParametersHeaderValue(
+                "name"
+            );
             Assert.Equal("name", nameValue.Name);
             Assert.Null(nameValue.Value);
 
@@ -40,15 +55,23 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Parameters_AddNull_Throw()
         {
-            NameValueWithParametersHeaderValue nameValue = new NameValueWithParametersHeaderValue("name");
+            NameValueWithParametersHeaderValue nameValue = new NameValueWithParametersHeaderValue(
+                "name"
+            );
 
-            Assert.Throws<ArgumentNullException>(() => { nameValue.Parameters.Add(null); });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                nameValue.Parameters.Add(null);
+            });
         }
 
         [Fact]
         public void ToString_WithAndWithoutParameters_SerializedCorrectly()
         {
-            NameValueWithParametersHeaderValue nameValue = new NameValueWithParametersHeaderValue("text", "token");
+            NameValueWithParametersHeaderValue nameValue = new NameValueWithParametersHeaderValue(
+                "text",
+                "token"
+            );
             Assert.Equal("text=token", nameValue.ToString());
 
             nameValue.Parameters.Add(new NameValueHeaderValue("param1", "value1"));
@@ -59,8 +82,12 @@ namespace System.Net.Http.Tests
         [Fact]
         public void GetHashCode_ValuesUseDifferentValues_HashDiffersAccordingToRfc()
         {
-            NameValueWithParametersHeaderValue nameValue1 = new NameValueWithParametersHeaderValue("text");
-            NameValueWithParametersHeaderValue nameValue2 = new NameValueWithParametersHeaderValue("text");
+            NameValueWithParametersHeaderValue nameValue1 = new NameValueWithParametersHeaderValue(
+                "text"
+            );
+            NameValueWithParametersHeaderValue nameValue2 = new NameValueWithParametersHeaderValue(
+                "text"
+            );
 
             // NameValueWithParametersHeaderValue just calls methods of the base class. Just verify Parameters is used.
             Assert.Equal(nameValue1.GetHashCode(), nameValue2.GetHashCode());
@@ -76,8 +103,14 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Equals_ValuesUseDifferentValues_ValuesAreEqualOrDifferentAccordingToRfc()
         {
-            NameValueWithParametersHeaderValue nameValue1 = new NameValueWithParametersHeaderValue("text", "value");
-            NameValueWithParametersHeaderValue nameValue2 = new NameValueWithParametersHeaderValue("text", "value");
+            NameValueWithParametersHeaderValue nameValue1 = new NameValueWithParametersHeaderValue(
+                "text",
+                "value"
+            );
+            NameValueWithParametersHeaderValue nameValue2 = new NameValueWithParametersHeaderValue(
+                "text",
+                "value"
+            );
             NameValueHeaderValue nameValue3 = new NameValueHeaderValue("text", "value");
 
             // NameValueWithParametersHeaderValue just calls methods of the base class. Just verify Parameters is used.
@@ -95,9 +128,13 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Clone_Call_CloneFieldsMatchSourceFields()
         {
-            NameValueWithParametersHeaderValue source = new NameValueWithParametersHeaderValue("name", "value");
+            NameValueWithParametersHeaderValue source = new NameValueWithParametersHeaderValue(
+                "name",
+                "value"
+            );
             source.Parameters.Add(new NameValueHeaderValue("param1", "value1"));
-            NameValueWithParametersHeaderValue clone = (NameValueWithParametersHeaderValue)((ICloneable)source).Clone();
+            NameValueWithParametersHeaderValue clone = (NameValueWithParametersHeaderValue)
+                ((ICloneable)source).Clone();
             Assert.Equal(source.Name, clone.Name);
             Assert.Equal(source.Value, clone.Value);
             Assert.Equal(1, clone.Parameters.Count);
@@ -144,14 +181,24 @@ namespace System.Net.Http.Tests
         {
             NameValueWithParametersHeaderValue result = null;
 
-            CallGetNameValueWithParametersLength(" name = value ; param1 = value1 ,", 1, 31, out result);
+            CallGetNameValueWithParametersLength(
+                " name = value ; param1 = value1 ,",
+                1,
+                31,
+                out result
+            );
             Assert.Equal("name", result.Name);
             Assert.Equal("value", result.Value);
             Assert.Equal(1, result.Parameters.Count);
             Assert.Equal("param1", result.Parameters.First().Name);
             Assert.Equal("value1", result.Parameters.First().Value);
 
-            CallGetNameValueWithParametersLength(" name=value;param1=value1;param2=value2,next", 1, 38, out result);
+            CallGetNameValueWithParametersLength(
+                " name=value;param1=value1;param2=value2,next",
+                1,
+                38,
+                out result
+            );
             Assert.Equal("name", result.Name);
             Assert.Equal("value", result.Value);
             Assert.Equal(2, result.Parameters.Count);
@@ -160,7 +207,12 @@ namespace System.Net.Http.Tests
             Assert.Equal("param2", result.Parameters.ElementAt(1).Name);
             Assert.Equal("value2", result.Parameters.ElementAt(1).Value);
 
-            CallGetNameValueWithParametersLength(" name= value ;   param1 , next", 1, 23, out result);
+            CallGetNameValueWithParametersLength(
+                " name= value ;   param1 , next",
+                1,
+                23,
+                out result
+            );
             Assert.Equal("name", result.Name);
             Assert.Equal("value", result.Value);
             Assert.Equal(1, result.Parameters.Count);
@@ -190,7 +242,9 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Parse_SetOfValidValueStrings_ParsedCorrectly()
         {
-            NameValueWithParametersHeaderValue expected = new NameValueWithParametersHeaderValue("custom");
+            NameValueWithParametersHeaderValue expected = new NameValueWithParametersHeaderValue(
+                "custom"
+            );
             CheckValidParse(" custom  ", expected);
             CheckValidParse("custom", expected);
 
@@ -221,9 +275,14 @@ namespace System.Net.Http.Tests
 
         #region Helper methods
 
-        private void CheckValidParse(string input, NameValueWithParametersHeaderValue expectedResult)
+        private void CheckValidParse(
+            string input,
+            NameValueWithParametersHeaderValue expectedResult
+        )
         {
-            NameValueWithParametersHeaderValue result = NameValueWithParametersHeaderValue.Parse(input);
+            NameValueWithParametersHeaderValue result = NameValueWithParametersHeaderValue.Parse(
+                input
+            );
             Assert.Equal(expectedResult, result);
 
             Assert.True(NameValueWithParametersHeaderValue.TryParse(input, out result));
@@ -241,26 +300,53 @@ namespace System.Net.Http.Tests
 
         private void CheckInvalidParse(string input)
         {
-            Assert.Throws<FormatException>(() => { NameValueWithParametersHeaderValue.Parse(input); });
+            Assert.Throws<FormatException>(() =>
+            {
+                NameValueWithParametersHeaderValue.Parse(input);
+            });
 
-            Assert.False(NameValueWithParametersHeaderValue.TryParse(input, out NameValueWithParametersHeaderValue result));
+            Assert.False(
+                NameValueWithParametersHeaderValue.TryParse(
+                    input,
+                    out NameValueWithParametersHeaderValue result
+                )
+            );
             Assert.Null(result);
         }
 
-        private static void CallGetNameValueWithParametersLength(string input, int startIndex, int expectedLength,
-            out NameValueWithParametersHeaderValue result)
+        private static void CallGetNameValueWithParametersLength(
+            string input,
+            int startIndex,
+            int expectedLength,
+            out NameValueWithParametersHeaderValue result
+        )
         {
             object temp = null;
-            Assert.Equal(expectedLength, NameValueWithParametersHeaderValue.GetNameValueWithParametersLength(input,
-                startIndex, out temp));
+            Assert.Equal(
+                expectedLength,
+                NameValueWithParametersHeaderValue.GetNameValueWithParametersLength(
+                    input,
+                    startIndex,
+                    out temp
+                )
+            );
             result = temp as NameValueWithParametersHeaderValue;
         }
 
-        private static void CheckInvalidGetNameValueWithParametersLength(string input, int startIndex)
+        private static void CheckInvalidGetNameValueWithParametersLength(
+            string input,
+            int startIndex
+        )
         {
             object result = null;
-            Assert.Equal(0, NameValueWithParametersHeaderValue.GetNameValueWithParametersLength(input, startIndex,
-                out result));
+            Assert.Equal(
+                0,
+                NameValueWithParametersHeaderValue.GetNameValueWithParametersLength(
+                    input,
+                    startIndex,
+                    out result
+                )
+            );
             Assert.Null(result);
         }
         #endregion

@@ -14,14 +14,10 @@ namespace System.Net.Http
         private const string formData = "form-data";
 
         public MultipartFormDataContent()
-            : base(formData)
-        {
-        }
+            : base(formData) { }
 
         public MultipartFormDataContent(string boundary)
-            : base(formData, boundary)
-        {
-        }
+            : base(formData, boundary) { }
 
         public override void Add(HttpContent content)
         {
@@ -63,10 +59,15 @@ namespace System.Net.Http
             base.Add(content);
         }
 
-        protected override Task SerializeToStreamAsync(Stream stream, TransportContext? context, CancellationToken cancellationToken) =>
+        protected override Task SerializeToStreamAsync(
+            Stream stream,
+            TransportContext? context,
+            CancellationToken cancellationToken
+        ) =>
             // Only skip the original protected virtual SerializeToStreamAsync if this
             // isn't a derived type that may have overridden the behavior.
-            GetType() == typeof(MultipartFormDataContent) ? SerializeToStreamAsyncCore(stream, context, cancellationToken) :
-            base.SerializeToStreamAsync(stream, context, cancellationToken);
+            GetType() == typeof(MultipartFormDataContent)
+                ? SerializeToStreamAsyncCore(stream, context, cancellationToken)
+                : base.SerializeToStreamAsync(stream, context, cancellationToken);
     }
 }

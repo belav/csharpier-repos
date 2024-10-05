@@ -49,33 +49,31 @@ namespace System.ServiceModel.Channels
 
         internal bool IsHttpInputInitialized
         {
-            get
-            {
-                return this.httpInput != null;
-            }
+            get { return this.httpInput != null; }
         }
 
         internal EventTraceActivity EventTraceActivity
         {
-            get
-            {
-                return this.httpRequestContext.EventTraceActivity;
-            }
+            get { return this.httpRequestContext.EventTraceActivity; }
         }
 
         protected HttpRequestContext HttpRequestContext
         {
-            get
-            {
-                return this.httpRequestContext;
-            }
+            get { return this.httpRequestContext; }
         }
 
-        public static HttpPipeline CreateHttpPipeline(HttpRequestContext httpRequestContext, TransportIntegrationHandler transportIntegrationHandler, bool isWebSocketTransport)
+        public static HttpPipeline CreateHttpPipeline(
+            HttpRequestContext httpRequestContext,
+            TransportIntegrationHandler transportIntegrationHandler,
+            bool isWebSocketTransport
+        )
         {
             if (transportIntegrationHandler == null)
             {
-                Fx.Assert(!isWebSocketTransport, "isWebSocketTransport should be false if there's no HTTP message handler existing.");
+                Fx.Assert(
+                    !isWebSocketTransport,
+                    "isWebSocketTransport should be false if there's no HTTP message handler existing."
+                );
 
                 if (httpRequestContext.HttpMessagesSupported)
                 {
@@ -85,7 +83,11 @@ namespace System.ServiceModel.Channels
                 return new EmptyHttpPipeline(httpRequestContext);
             }
 
-            return NormalHttpPipeline.CreatePipeline(httpRequestContext, transportIntegrationHandler, isWebSocketTransport);
+            return NormalHttpPipeline.CreatePipeline(
+                httpRequestContext,
+                transportIntegrationHandler,
+                isWebSocketTransport
+            );
         }
 
         public static HttpPipeline GetHttpPipeline(HttpRequestMessage httpRequestMessage)
@@ -94,14 +96,26 @@ namespace System.ServiceModel.Channels
             object obj;
             if (!httpRequestMessage.Properties.TryGetValue(HttpPipelineKey, out obj) || obj == null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.GetString(SR.HttpPipelineMessagePropertyMissingError, HttpPipelineKey)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.HttpPipelineMessagePropertyMissingError, HttpPipelineKey)
+                    )
+                );
             }
 
             HttpPipeline httpPipeline = obj as HttpPipeline;
 
             if (httpPipeline == null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.GetString(SR.HttpPipelineMessagePropertyTypeError, HttpPipelineKey, typeof(HttpPipeline))));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.HttpPipelineMessagePropertyTypeError,
+                            HttpPipelineKey,
+                            typeof(HttpPipeline)
+                        )
+                    )
+                );
             }
 
             return httpPipeline;
@@ -117,7 +131,11 @@ namespace System.ServiceModel.Channels
 
         public abstract void SendReply(Message message, TimeSpan timeout);
 
-        public virtual AsyncCompletionResult SendAsyncReply(Message message, Action<object, HttpResponseMessage> asyncSendCallback, object state)
+        public virtual AsyncCompletionResult SendAsyncReply(
+            Message message,
+            Action<object, HttpResponseMessage> asyncSendCallback,
+            object state
+        )
         {
             this.TraceProcessResponseStop();
             return AsyncCompletionResult.Completed;
@@ -136,19 +154,28 @@ namespace System.ServiceModel.Channels
             this.httpRequestContext.Abort();
         }
 
-        internal abstract IAsyncResult BeginProcessInboundRequest(ReplyChannelAcceptor replyChannelAcceptor, Action dequeuedCallback, AsyncCallback callback, object state);
+        internal abstract IAsyncResult BeginProcessInboundRequest(
+            ReplyChannelAcceptor replyChannelAcceptor,
+            Action dequeuedCallback,
+            AsyncCallback callback,
+            object state
+        );
 
         internal abstract void EndProcessInboundRequest(IAsyncResult result);
 
-        protected abstract IAsyncResult BeginParseIncomingMessage(AsyncCallback asynCallback, object state);
+        protected abstract IAsyncResult BeginParseIncomingMessage(
+            AsyncCallback asynCallback,
+            object state
+        );
 
-        protected abstract Message EndParseIncomingMesssage(IAsyncResult result, out Exception requestException);
+        protected abstract Message EndParseIncomingMesssage(
+            IAsyncResult result,
+            out Exception requestException
+        );
 
         protected abstract void OnParseComplete(Message message, Exception requestException);
 
-        protected virtual void OnClose()
-        {
-        }
+        protected virtual void OnClose() { }
 
         protected void TraceProcessInboundRequestStart()
         {
@@ -210,17 +237,28 @@ namespace System.ServiceModel.Channels
 
         class EmptyHttpPipeline : HttpPipeline
         {
-            static Action<object> onRequestInitializationTimeout = Fx.ThunkCallback<object>(OnRequestInitializationTimeout);
+            static Action<object> onRequestInitializationTimeout = Fx.ThunkCallback<object>(
+                OnRequestInitializationTimeout
+            );
             IOThreadTimer requestInitializationTimer;
             bool requestInitializationTimerCancelled;
 
             public EmptyHttpPipeline(HttpRequestContext httpRequestContext)
                 : base(httpRequestContext)
             {
-                if (this.httpRequestContext.Listener.RequestInitializationTimeout != HttpTransportDefaults.RequestInitializationTimeout)
+                if (
+                    this.httpRequestContext.Listener.RequestInitializationTimeout
+                    != HttpTransportDefaults.RequestInitializationTimeout
+                )
                 {
-                    this.requestInitializationTimer = new IOThreadTimer(onRequestInitializationTimeout, this, false);
-                    this.requestInitializationTimer.Set(this.httpRequestContext.Listener.RequestInitializationTimeout);
+                    this.requestInitializationTimer = new IOThreadTimer(
+                        onRequestInitializationTimeout,
+                        this,
+                        false
+                    );
+                    this.requestInitializationTimer.Set(
+                        this.httpRequestContext.Listener.RequestInitializationTimeout
+                    );
                 }
             }
 
@@ -232,7 +270,9 @@ namespace System.ServiceModel.Channels
                 this.SendReplyCore(message, timeout);
             }
 
-            public override Task<HttpResponseMessage> Dispatch(HttpRequestMessage httpRequestMessage)
+            public override Task<HttpResponseMessage> Dispatch(
+                HttpRequestMessage httpRequestMessage
+            )
             {
                 // This method should never be called for an EmptyPipeline.
                 throw FxTrace.Exception.AsError(new NotSupportedException());
@@ -242,10 +282,17 @@ namespace System.ServiceModel.Channels
                 ReplyChannelAcceptor replyChannelAcceptor,
                 Action dequeuedCallback,
                 AsyncCallback callback,
-                object state)
+                object state
+            )
             {
                 this.TraceBeginProcessInboundRequestStart();
-                return new EnqueueMessageAsyncResult(replyChannelAcceptor, dequeuedCallback, this, callback, state);
+                return new EnqueueMessageAsyncResult(
+                    replyChannelAcceptor,
+                    dequeuedCallback,
+                    this,
+                    callback,
+                    state
+                );
             }
 
             internal override void EndProcessInboundRequest(IAsyncResult result)
@@ -254,27 +301,41 @@ namespace System.ServiceModel.Channels
                 this.TraceProcessInboundRequestStop();
             }
 
-            protected override IAsyncResult BeginParseIncomingMessage(AsyncCallback asynCallback, object state)
+            protected override IAsyncResult BeginParseIncomingMessage(
+                AsyncCallback asynCallback,
+                object state
+            )
             {
                 return this.HttpInput.BeginParseIncomingMessage(asynCallback, state);
             }
 
-            protected override Message EndParseIncomingMesssage(IAsyncResult result, out Exception requestException)
+            protected override Message EndParseIncomingMesssage(
+                IAsyncResult result,
+                out Exception requestException
+            )
             {
                 return this.HttpInput.EndParseIncomingMessage(result, out requestException);
             }
 
-            [System.Diagnostics.CodeAnalysis.SuppressMessage(FxCop.Category.ReliabilityBasic, "Reliability103:ThrowWrappedExceptionsRule",
-                    Justification = "The exceptions wrapped here will be thrown out later.")]
+            [System.Diagnostics.CodeAnalysis.SuppressMessage(
+                FxCop.Category.ReliabilityBasic,
+                "Reliability103:ThrowWrappedExceptionsRule",
+                Justification = "The exceptions wrapped here will be thrown out later."
+            )]
             protected override void OnParseComplete(Message message, Exception requestException)
             {
                 if (!this.CancelRequestInitializationTimer() && requestException == null)
                 {
-                    requestException = FxTrace.Exception.AsError(new TimeoutException(SR.GetString(
-                                                    SR.RequestInitializationTimeoutReached,
-                                                    this.HttpRequestContext.Listener.RequestInitializationTimeout,
-                                                    "RequestInitializationTimeout",
-                                                    typeof(HttpTransportBindingElement).Name)));
+                    requestException = FxTrace.Exception.AsError(
+                        new TimeoutException(
+                            SR.GetString(
+                                SR.RequestInitializationTimeoutReached,
+                                this.HttpRequestContext.Listener.RequestInitializationTimeout,
+                                "RequestInitializationTimeout",
+                                typeof(HttpTransportBindingElement).Name
+                            )
+                        )
+                    );
                 }
 
                 this.HttpRequestContext.SetMessage(message, requestException);
@@ -326,9 +387,7 @@ namespace System.ServiceModel.Channels
             HttpRequestMessageHttpInput httpRequestMessageHttpInput;
 
             public HttpMessageSupportedHttpPipeline(HttpRequestContext httpRequestContext)
-                : base(httpRequestContext)
-            {
-            }
+                : base(httpRequestContext) { }
 
             public HttpRequestMessageHttpInput HttpRequestMessageHttpInput
             {
@@ -336,8 +395,12 @@ namespace System.ServiceModel.Channels
                 {
                     if (this.httpRequestMessageHttpInput == null)
                     {
-                        this.httpRequestMessageHttpInput = this.HttpInput as HttpRequestMessageHttpInput;
-                        Fx.Assert(this.httpRequestMessageHttpInput != null, "The 'HttpInput' field should always be of type 'HttpRequestMessageHttpInput'.");
+                        this.httpRequestMessageHttpInput =
+                            this.HttpInput as HttpRequestMessageHttpInput;
+                        Fx.Assert(
+                            this.httpRequestMessageHttpInput != null,
+                            "The 'HttpInput' field should always be of type 'HttpRequestMessageHttpInput'."
+                        );
                     }
 
                     return this.httpRequestMessageHttpInput;
@@ -346,15 +409,19 @@ namespace System.ServiceModel.Channels
 
             public HttpRequestMessage HttpRequestMessage
             {
-                get
-                {
-                    return this.HttpRequestMessageHttpInput.HttpRequestMessage;
-                }
+                get { return this.HttpRequestMessageHttpInput.HttpRequestMessage; }
             }
 
-            protected override IAsyncResult BeginParseIncomingMessage(AsyncCallback asynCallback, object state)
+            protected override IAsyncResult BeginParseIncomingMessage(
+                AsyncCallback asynCallback,
+                object state
+            )
             {
-                return this.HttpRequestMessageHttpInput.BeginParseIncomingMessage(this.HttpRequestMessage, asynCallback, state);
+                return this.HttpRequestMessageHttpInput.BeginParseIncomingMessage(
+                    this.HttpRequestMessage,
+                    asynCallback,
+                    state
+                );
             }
 
             protected override void SendReplyCore(Message message, TimeSpan timeout)
@@ -363,7 +430,8 @@ namespace System.ServiceModel.Channels
                 ThreadTrace.Trace("Begin sending http reply");
                 HttpOutput httpOutput = this.GetHttpOutput(message);
 
-                HttpResponseMessage response = HttpResponseMessageProperty.GetHttpResponseMessageFromMessage(message);
+                HttpResponseMessage response =
+                    HttpResponseMessageProperty.GetHttpResponseMessageFromMessage(message);
                 if (response != null)
                 {
                     httpOutput.Send(response, timeout);
@@ -385,8 +453,11 @@ namespace System.ServiceModel.Channels
 
         class NormalHttpPipeline : HttpPipeline
         {
-            static readonly HttpResponseMessage internalServerErrorHttpResponseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
-            static Action<object> onCreateMessageAndEnqueue = Fx.ThunkCallback<object>(OnCreateMessageAndEnqueue);
+            static readonly HttpResponseMessage internalServerErrorHttpResponseMessage =
+                new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            static Action<object> onCreateMessageAndEnqueue = Fx.ThunkCallback<object>(
+                OnCreateMessageAndEnqueue
+            );
             static AsyncCallback onEnqueued = Fx.ThunkCallback(OnEnqueued);
 
             HttpRequestMessage httpRequestMessage;
@@ -406,28 +477,38 @@ namespace System.ServiceModel.Channels
             Action<object, HttpResponseMessage> asyncSendCallback;
             object asyncSendState;
 
-            public NormalHttpPipeline(HttpRequestContext httpRequestContext, TransportIntegrationHandler transportIntegrationHandler)
+            public NormalHttpPipeline(
+                HttpRequestContext httpRequestContext,
+                TransportIntegrationHandler transportIntegrationHandler
+            )
                 : base(httpRequestContext)
             {
                 this.defaultSendTimeout = httpRequestContext.DefaultSendTimeout;
 
-                this.cancellationTokenSource = new HttpPipelineCancellationTokenSource(httpRequestContext);
-                Fx.Assert(transportIntegrationHandler != null, "transportIntegrationHandler should not be null.");
+                this.cancellationTokenSource = new HttpPipelineCancellationTokenSource(
+                    httpRequestContext
+                );
+                Fx.Assert(
+                    transportIntegrationHandler != null,
+                    "transportIntegrationHandler should not be null."
+                );
                 this.transportIntegrationHandler = transportIntegrationHandler;
             }
 
             object ThisLock
             {
-                get
-                {
-                    return this.thisLock;
-                }
+                get { return this.thisLock; }
             }
 
-            public static HttpPipeline CreatePipeline(HttpRequestContext httpRequestContext, TransportIntegrationHandler transportIntegrationHandler, bool isWebSocketTransport)
+            public static HttpPipeline CreatePipeline(
+                HttpRequestContext httpRequestContext,
+                TransportIntegrationHandler transportIntegrationHandler,
+                bool isWebSocketTransport
+            )
             {
-                NormalHttpPipeline pipeline = isWebSocketTransport ? new WebSocketHttpPipeline(httpRequestContext, transportIntegrationHandler) :
-                                                                     new NormalHttpPipeline(httpRequestContext, transportIntegrationHandler);
+                NormalHttpPipeline pipeline = isWebSocketTransport
+                    ? new WebSocketHttpPipeline(httpRequestContext, transportIntegrationHandler)
+                    : new NormalHttpPipeline(httpRequestContext, transportIntegrationHandler);
                 pipeline.SetPipelineIncomingTimeout();
                 return pipeline;
             }
@@ -447,10 +528,16 @@ namespace System.ServiceModel.Channels
                         // We need this lock only in sync reply case. In this case, we hopped the thread in the request side, so it's possible to send the response here
                         // before the TransportIntegrationHandler is ready on another thread (thus a race condition). So we use the lock here. In the incoming path, we won't
                         // release the lock until the TransportIntegrationHandler is ready. Once we get the lock on the outgoing path, we can then call Wait() on this handler safely.
-                        Monitor.TryEnter(this.ThisLock, TimeoutHelper.ToMilliseconds(helper.RemainingTime()), ref lockTaken);
+                        Monitor.TryEnter(
+                            this.ThisLock,
+                            TimeoutHelper.ToMilliseconds(helper.RemainingTime()),
+                            ref lockTaken
+                        );
                         if (!lockTaken)
                         {
-                            throw FxTrace.Exception.AsError(new TimeoutException(SR.GetString(SR.TimeoutOnSend, timeout)));
+                            throw FxTrace.Exception.AsError(
+                                new TimeoutException(SR.GetString(SR.TimeoutOnSend, timeout))
+                            );
                         }
 
                         this.WaitTransportIntegrationHandlerTask(helper.RemainingTime());
@@ -465,14 +552,21 @@ namespace System.ServiceModel.Channels
 
                     if (this.transportIntegrationHandlerTask.Result != null)
                     {
-                        this.httpOutput.Send(this.transportIntegrationHandlerTask.Result, helper.RemainingTime());
+                        this.httpOutput.Send(
+                            this.transportIntegrationHandlerTask.Result,
+                            helper.RemainingTime()
+                        );
                     }
                 }
 
                 this.TraceProcessResponseStop();
             }
 
-            public override AsyncCompletionResult SendAsyncReply(Message message, Action<object, HttpResponseMessage> asyncSendCallback, object state)
+            public override AsyncCompletionResult SendAsyncReply(
+                Message message,
+                Action<object, HttpResponseMessage> asyncSendCallback,
+                object state
+            )
             {
                 this.TraceBeginProcessResponseStart();
                 this.isAsyncReply = true;
@@ -483,12 +577,20 @@ namespace System.ServiceModel.Channels
                 return AsyncCompletionResult.Queued;
             }
 
-            public override Task<HttpResponseMessage> Dispatch(HttpRequestMessage httpRequestMessage)
+            public override Task<HttpResponseMessage> Dispatch(
+                HttpRequestMessage httpRequestMessage
+            )
             {
                 this.httpRequestMessage = httpRequestMessage;
-                ((HttpRequestMessageHttpInput)this.HttpInput).SetHttpRequestMessage(httpRequestMessage);
-                Fx.Assert(this.channelModelIntegrationHandlerTask == null, "channelModelIntegrationHandlerTask should be null.");
-                this.channelModelIntegrationHandlerTask = new TaskCompletionSource<HttpResponseMessage>();
+                ((HttpRequestMessageHttpInput)this.HttpInput).SetHttpRequestMessage(
+                    httpRequestMessage
+                );
+                Fx.Assert(
+                    this.channelModelIntegrationHandlerTask == null,
+                    "channelModelIntegrationHandlerTask should be null."
+                );
+                this.channelModelIntegrationHandlerTask =
+                    new TaskCompletionSource<HttpResponseMessage>();
                 ActionItem.Schedule(NormalHttpPipeline.onCreateMessageAndEnqueue, this);
                 return this.channelModelIntegrationHandlerTask.Task;
             }
@@ -498,7 +600,12 @@ namespace System.ServiceModel.Channels
                 this.cancellationTokenSource.Cancel();
             }
 
-            internal override IAsyncResult BeginProcessInboundRequest(ReplyChannelAcceptor replyChannelAcceptor, Action dequeuedCallback, AsyncCallback callback, object state)
+            internal override IAsyncResult BeginProcessInboundRequest(
+                ReplyChannelAcceptor replyChannelAcceptor,
+                Action dequeuedCallback,
+                AsyncCallback callback,
+                object state
+            )
             {
                 try
                 {
@@ -506,14 +613,19 @@ namespace System.ServiceModel.Channels
                     this.TraceProcessInboundRequestStart();
                     this.replyChannelAcceptor = replyChannelAcceptor;
                     this.dequeuedCallback = dequeuedCallback;
-                    HttpRequestMessageHttpInput httpRequestMessageInput = (HttpRequestMessageHttpInput)this.HttpInput;
+                    HttpRequestMessageHttpInput httpRequestMessageInput =
+                        (HttpRequestMessageHttpInput)this.HttpInput;
 
                     this.httpRequestMessage = httpRequestMessageInput.HttpRequestMessage;
                     this.httpRequestMessage.Properties.Add(HttpPipelineKey, this);
 
                     lock (this.ThisLock)
                     {
-                        this.transportIntegrationHandlerTask = this.transportIntegrationHandler.ProcessPipelineAsync(this.httpRequestMessage, this.cancellationTokenSource.Token);
+                        this.transportIntegrationHandlerTask =
+                            this.transportIntegrationHandler.ProcessPipelineAsync(
+                                this.httpRequestMessage,
+                                this.cancellationTokenSource.Token
+                            );
                     }
 
                     this.SendHttpPipelineResponse();
@@ -553,12 +665,22 @@ namespace System.ServiceModel.Channels
                 CompletedAsyncResult.End(result);
             }
 
-            protected override IAsyncResult BeginParseIncomingMessage(AsyncCallback asynCallback, object state)
+            protected override IAsyncResult BeginParseIncomingMessage(
+                AsyncCallback asynCallback,
+                object state
+            )
             {
-                return this.HttpInput.BeginParseIncomingMessage(this.httpRequestMessage, asynCallback, state);
+                return this.HttpInput.BeginParseIncomingMessage(
+                    this.httpRequestMessage,
+                    asynCallback,
+                    state
+                );
             }
 
-            protected override Message EndParseIncomingMesssage(IAsyncResult result, out Exception requestException)
+            protected override Message EndParseIncomingMesssage(
+                IAsyncResult result,
+                out Exception requestException
+            )
             {
                 return this.HttpInput.EndParseIncomingMessage(result, out requestException);
             }
@@ -572,9 +694,14 @@ namespace System.ServiceModel.Channels
 
             protected virtual void SetPipelineIncomingTimeout()
             {
-                if (httpRequestContext.Listener.RequestInitializationTimeout != HttpTransportDefaults.RequestInitializationTimeout)
+                if (
+                    httpRequestContext.Listener.RequestInitializationTimeout
+                    != HttpTransportDefaults.RequestInitializationTimeout
+                )
                 {
-                    this.cancellationTokenSource.CancelAfter(httpRequestContext.Listener.RequestInitializationTimeout);
+                    this.cancellationTokenSource.CancelAfter(
+                        httpRequestContext.Listener.RequestInitializationTimeout
+                    );
                 }
             }
 
@@ -588,7 +715,11 @@ namespace System.ServiceModel.Channels
                 // will lead to a potential DOS attack to the system.
                 // HttpPipeline.Close() will always be called by HttpRequestContext.Abort() or Close()
                 // But if the ProcessInboundRequest method call was not successful, the SharedHttpTransportManager will start the receiving loop.
-                if (this.isShortCutResponse && this.wasProcessInboundRequestSuccessful && this.dequeuedCallback != null)
+                if (
+                    this.isShortCutResponse
+                    && this.wasProcessInboundRequestSuccessful
+                    && this.dequeuedCallback != null
+                )
                 {
                     this.dequeuedCallback.Invoke();
                 }
@@ -615,7 +746,7 @@ namespace System.ServiceModel.Channels
                                 this.cancellationTokenSource.Dispose();
                                 this.wasProcessInboundRequestSuccessful = true;
                                 //// shortcut scenario
-                                //// Currently we are always doing sync send even async send is enabled. 
+                                //// Currently we are always doing sync send even async send is enabled.
                                 this.SendAndClose(t.Result);
                             }
                             else if (this.isAsyncReply)
@@ -624,7 +755,9 @@ namespace System.ServiceModel.Channels
                             }
                         }
                     },
-                    TaskContinuationOptions.OnlyOnRanToCompletion | TaskContinuationOptions.ExecuteSynchronously);
+                    TaskContinuationOptions.OnlyOnRanToCompletion
+                        | TaskContinuationOptions.ExecuteSynchronously
+                );
             }
 
             protected void SendAndClose(HttpResponseMessage httpResponseMessage)
@@ -679,7 +812,13 @@ namespace System.ServiceModel.Channels
                 try
                 {
                     Fx.Assert(this.replyChannelAcceptor != null, "acceptor should not be null.");
-                    IAsyncResult result = new EnqueueMessageAsyncResult(this.replyChannelAcceptor, this.dequeuedCallback, this, onEnqueued, this);
+                    IAsyncResult result = new EnqueueMessageAsyncResult(
+                        this.replyChannelAcceptor,
+                        this.dequeuedCallback,
+                        this,
+                        onEnqueued,
+                        this
+                    );
                     if (result.CompletedSynchronously)
                     {
                         EnqueueMessageAsyncResult.End(result);
@@ -705,13 +844,23 @@ namespace System.ServiceModel.Channels
 
             HttpResponseMessage CreateHttpResponseMessage(Message message)
             {
-                HttpResponseMessage httpResponseMessage = HttpResponseMessageProperty.GetHttpResponseMessageFromMessage(message);
+                HttpResponseMessage httpResponseMessage =
+                    HttpResponseMessageProperty.GetHttpResponseMessageFromMessage(message);
                 if (httpResponseMessage == null)
                 {
-                    HttpResponseMessageProperty property = message.Properties.GetValue<HttpResponseMessageProperty>(HttpResponseMessageProperty.Name);
+                    HttpResponseMessageProperty property =
+                        message.Properties.GetValue<HttpResponseMessageProperty>(
+                            HttpResponseMessageProperty.Name
+                        );
                     httpResponseMessage = new HttpResponseMessage();
-                    httpResponseMessage.StatusCode = message.IsFault ? HttpStatusCode.InternalServerError : HttpStatusCode.OK;
-                    this.httpOutput.ConfigureHttpResponseMessage(message, httpResponseMessage, property);
+                    httpResponseMessage.StatusCode = message.IsFault
+                        ? HttpStatusCode.InternalServerError
+                        : HttpStatusCode.OK;
+                    this.httpOutput.ConfigureHttpResponseMessage(
+                        message,
+                        httpResponseMessage,
+                        property
+                    );
                 }
 
                 return httpResponseMessage;
@@ -738,7 +887,10 @@ namespace System.ServiceModel.Channels
                     if (httpResponseMessage.RequestMessage == null)
                     {
                         httpResponseMessage.RequestMessage = this.httpRequestMessage;
-                        Fx.Assert(httpResponseMessage.RequestMessage != null, "httpResponseMessage.RequestMessage should never be null.");
+                        Fx.Assert(
+                            httpResponseMessage.RequestMessage != null,
+                            "httpResponseMessage.RequestMessage should never be null."
+                        );
 
                         if (replyMessage != null)
                         {
@@ -746,9 +898,13 @@ namespace System.ServiceModel.Channels
                         }
                     }
 
-                    HttpChannelUtilities.EnsureHttpResponseMessageContentNotNull(httpResponseMessage);
+                    HttpChannelUtilities.EnsureHttpResponseMessageContentNotNull(
+                        httpResponseMessage
+                    );
 
-                    this.cancellationTokenSource.CancelAfter(TimeoutHelper.ToMilliseconds(this.defaultSendTimeout));
+                    this.cancellationTokenSource.CancelAfter(
+                        TimeoutHelper.ToMilliseconds(this.defaultSendTimeout)
+                    );
                     this.channelModelIntegrationHandlerTask.TrySetResult(httpResponseMessage);
                 }
 
@@ -757,17 +913,21 @@ namespace System.ServiceModel.Channels
 
             void WaitTransportIntegrationHandlerTask(TimeSpan timeout)
             {
-                Fx.Assert(this.transportIntegrationHandlerTask != null, "transportIntegrationHandlerTask should not be null.");
+                Fx.Assert(
+                    this.transportIntegrationHandlerTask != null,
+                    "transportIntegrationHandlerTask should not be null."
+                );
                 this.transportIntegrationHandlerTask.Wait(timeout, null, null);
                 this.wasProcessInboundRequestSuccessful = true;
             }
 
             class WebSocketHttpPipeline : NormalHttpPipeline
             {
-                public WebSocketHttpPipeline(HttpRequestContext httpRequestContext, TransportIntegrationHandler transportIntegrationHandler)
-                    : base(httpRequestContext, transportIntegrationHandler)
-                {
-                }
+                public WebSocketHttpPipeline(
+                    HttpRequestContext httpRequestContext,
+                    TransportIntegrationHandler transportIntegrationHandler
+                )
+                    : base(httpRequestContext, transportIntegrationHandler) { }
 
                 public override void SendReply(Message message, TimeSpan timeout)
                 {
@@ -778,7 +938,13 @@ namespace System.ServiceModel.Channels
 
                 protected override void SetPipelineIncomingTimeout()
                 {
-                    this.cancellationTokenSource.CancelAfter(TimeoutHelper.ToMilliseconds((httpRequestContext.Listener as IDefaultCommunicationTimeouts).OpenTimeout));
+                    this.cancellationTokenSource.CancelAfter(
+                        TimeoutHelper.ToMilliseconds(
+                            (
+                                httpRequestContext.Listener as IDefaultCommunicationTimeouts
+                            ).OpenTimeout
+                        )
+                    );
                 }
 
                 protected override void SendHttpPipelineResponse()
@@ -800,7 +966,11 @@ namespace System.ServiceModel.Channels
                             string protocol = null;
                             if (response.Headers.Contains(WebSocketHelper.SecWebSocketProtocol))
                             {
-                                foreach (string headerValue in response.Headers.GetValues(WebSocketHelper.SecWebSocketProtocol))
+                                foreach (
+                                    string headerValue in response.Headers.GetValues(
+                                        WebSocketHelper.SecWebSocketProtocol
+                                    )
+                                )
                                 {
                                     protocol = headerValue;
                                     break;
@@ -813,17 +983,26 @@ namespace System.ServiceModel.Channels
                             if (response.RequestMessage != null)
                             {
                                 HttpPipeline.RemoveHttpPipeline(response.RequestMessage);
-                                response.RequestMessage.Properties.Remove(RemoteEndpointMessageProperty.Name);
+                                response.RequestMessage.Properties.Remove(
+                                    RemoteEndpointMessageProperty.Name
+                                );
                             }
 
-                            // CSDMain 255817: There's a race condition that the channel could be dequeued and pipeline could be closed before the 
+                            // CSDMain 255817: There's a race condition that the channel could be dequeued and pipeline could be closed before the
                             // Listener.CreateWebSocketChannelAndEnqueue call finishes. In this case, we are actually calling BeginGetContext twice, thus
                             // cause the memory leak.
                             this.isShortCutResponse = false;
                             bool channelEnqueued;
                             try
                             {
-                                channelEnqueued = this.HttpRequestContext.Listener.CreateWebSocketChannelAndEnqueue(this.HttpRequestContext, this, response, protocol, this.dequeuedCallback);
+                                channelEnqueued =
+                                    this.HttpRequestContext.Listener.CreateWebSocketChannelAndEnqueue(
+                                        this.HttpRequestContext,
+                                        this,
+                                        response,
+                                        protocol,
+                                        this.dequeuedCallback
+                                    );
                             }
                             catch (Exception ex)
                             {
@@ -831,10 +1010,15 @@ namespace System.ServiceModel.Channels
                                 {
                                     if (TD.WebSocketConnectionFailedIsEnabled())
                                     {
-                                        TD.WebSocketConnectionFailed(this.EventTraceActivity, ex.Message);
+                                        TD.WebSocketConnectionFailed(
+                                            this.EventTraceActivity,
+                                            ex.Message
+                                        );
                                     }
 
-                                    this.HttpRequestContext.SendResponseAndClose(HttpStatusCode.InternalServerError);
+                                    this.HttpRequestContext.SendResponseAndClose(
+                                        HttpStatusCode.InternalServerError
+                                    );
                                 }
 
                                 throw;
@@ -845,17 +1029,25 @@ namespace System.ServiceModel.Channels
                             {
                                 if (TD.WebSocketConnectionDeclinedIsEnabled())
                                 {
-                                    TD.WebSocketConnectionDeclined(this.EventTraceActivity, HttpStatusCode.ServiceUnavailable.ToString());
+                                    TD.WebSocketConnectionDeclined(
+                                        this.EventTraceActivity,
+                                        HttpStatusCode.ServiceUnavailable.ToString()
+                                    );
                                 }
 
-                                this.httpRequestContext.SendResponseAndClose(HttpStatusCode.ServiceUnavailable);
+                                this.httpRequestContext.SendResponseAndClose(
+                                    HttpStatusCode.ServiceUnavailable
+                                );
                             }
                         }
                         else
                         {
                             if (TD.WebSocketConnectionDeclinedIsEnabled())
                             {
-                                TD.WebSocketConnectionDeclined(this.EventTraceActivity, response.StatusCode.ToString());
+                                TD.WebSocketConnectionDeclined(
+                                    this.EventTraceActivity,
+                                    response.StatusCode.ToString()
+                                );
                             }
 
                             this.SendAndClose(response);
@@ -876,7 +1068,8 @@ namespace System.ServiceModel.Channels
                 Action dequeuedCallback,
                 HttpPipeline pipeline,
                 AsyncCallback callback,
-                object state)
+                object state
+            )
                 : base(callback, state)
             {
                 this.pipeline = pipeline;
@@ -902,20 +1095,33 @@ namespace System.ServiceModel.Channels
 
             void CompleteParseAndEnqueue(IAsyncResult result)
             {
-                using (DiagnosticUtility.ShouldUseActivity ? ServiceModelActivity.BoundOperation(this.CallbackActivity) : null)
+                using (
+                    DiagnosticUtility.ShouldUseActivity
+                        ? ServiceModelActivity.BoundOperation(this.CallbackActivity)
+                        : null
+                )
                 {
                     Exception requestException;
-                    Message message = this.pipeline.EndParseIncomingMesssage(result, out requestException);
+                    Message message = this.pipeline.EndParseIncomingMesssage(
+                        result,
+                        out requestException
+                    );
                     if ((message == null) && (requestException == null))
                     {
                         throw FxTrace.Exception.AsError(
-                                new ProtocolException(
-                                    SR.GetString(SR.MessageXmlProtocolError),
-                                    new XmlException(SR.GetString(SR.MessageIsEmpty))));
+                            new ProtocolException(
+                                SR.GetString(SR.MessageXmlProtocolError),
+                                new XmlException(SR.GetString(SR.MessageIsEmpty))
+                            )
+                        );
                     }
 
                     this.pipeline.OnParseComplete(message, requestException);
-                    this.acceptor.Enqueue(this.pipeline.HttpRequestContext, this.dequeuedCallback, true);
+                    this.acceptor.Enqueue(
+                        this.pipeline.HttpRequestContext,
+                        this.dequeuedCallback,
+                        true
+                    );
                 }
             }
         }

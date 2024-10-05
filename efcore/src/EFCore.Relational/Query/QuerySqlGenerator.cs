@@ -17,24 +17,25 @@ namespace Microsoft.EntityFrameworkCore.Query;
 /// </summary>
 public class QuerySqlGenerator : SqlExpressionVisitor
 {
-    private static readonly Dictionary<ExpressionType, string> OperatorMap = new()
-    {
-        { ExpressionType.Equal, " = " },
-        { ExpressionType.NotEqual, " <> " },
-        { ExpressionType.GreaterThan, " > " },
-        { ExpressionType.GreaterThanOrEqual, " >= " },
-        { ExpressionType.LessThan, " < " },
-        { ExpressionType.LessThanOrEqual, " <= " },
-        { ExpressionType.AndAlso, " AND " },
-        { ExpressionType.OrElse, " OR " },
-        { ExpressionType.Add, " + " },
-        { ExpressionType.Subtract, " - " },
-        { ExpressionType.Multiply, " * " },
-        { ExpressionType.Divide, " / " },
-        { ExpressionType.Modulo, " % " },
-        { ExpressionType.And, " & " },
-        { ExpressionType.Or, " | " }
-    };
+    private static readonly Dictionary<ExpressionType, string> OperatorMap =
+        new()
+        {
+            { ExpressionType.Equal, " = " },
+            { ExpressionType.NotEqual, " <> " },
+            { ExpressionType.GreaterThan, " > " },
+            { ExpressionType.GreaterThanOrEqual, " >= " },
+            { ExpressionType.LessThan, " < " },
+            { ExpressionType.LessThanOrEqual, " <= " },
+            { ExpressionType.AndAlso, " AND " },
+            { ExpressionType.OrElse, " OR " },
+            { ExpressionType.Add, " + " },
+            { ExpressionType.Subtract, " - " },
+            { ExpressionType.Multiply, " * " },
+            { ExpressionType.Divide, " / " },
+            { ExpressionType.Modulo, " % " },
+            { ExpressionType.And, " & " },
+            { ExpressionType.Or, " | " },
+        };
 
     private readonly IRelationalCommandBuilderFactory _relationalCommandBuilderFactory;
     private readonly ISqlGenerationHelper _sqlGenerationHelper;
@@ -115,14 +116,12 @@ public class QuerySqlGenerator : SqlExpressionVisitor
     /// <summary>
     ///     The default alias separator.
     /// </summary>
-    protected virtual string AliasSeparator
-        => " AS ";
+    protected virtual string AliasSeparator => " AS ";
 
     /// <summary>
     ///     The current SQL command builder.
     /// </summary>
-    protected virtual IRelationalCommandBuilder Sql
-        => _relationalCommandBuilder;
+    protected virtual IRelationalCommandBuilder Sql => _relationalCommandBuilder;
 
     /// <summary>
     ///     Generates the head comment for tags.
@@ -167,9 +166,9 @@ public class QuerySqlGenerator : SqlExpressionVisitor
         return sqlFragmentExpression;
     }
 
-    private static bool IsNonComposedSetOperation(SelectExpression selectExpression)
-        => selectExpression is
-            {
+    private static bool IsNonComposedSetOperation(SelectExpression selectExpression) =>
+        selectExpression
+            is {
                 Tables: [SetOperationBase setOperation],
                 Predicate: null,
                 Orderings: [],
@@ -179,27 +178,39 @@ public class QuerySqlGenerator : SqlExpressionVisitor
                 Having: null,
                 GroupBy: []
             }
-            && selectExpression.Projection.Count == setOperation.Source1.Projection.Count
-            && selectExpression.Projection.Select(
-                    (pe, index) => pe.Expression is ColumnExpression column
-                        && string.Equals(column.TableAlias, setOperation.Alias, StringComparison.Ordinal)
-                        && string.Equals(
-                            column.Name, setOperation.Source1.Projection[index].Alias, StringComparison.Ordinal))
-                .All(e => e);
+        && selectExpression.Projection.Count == setOperation.Source1.Projection.Count
+        && selectExpression
+            .Projection.Select(
+                (pe, index) =>
+                    pe.Expression is ColumnExpression column
+                    && string.Equals(
+                        column.TableAlias,
+                        setOperation.Alias,
+                        StringComparison.Ordinal
+                    )
+                    && string.Equals(
+                        column.Name,
+                        setOperation.Source1.Projection[index].Alias,
+                        StringComparison.Ordinal
+                    )
+            )
+            .All(e => e);
 
     /// <inheritdoc />
     protected override Expression VisitDelete(DeleteExpression deleteExpression)
     {
         var selectExpression = deleteExpression.SelectExpression;
 
-        if (selectExpression.Offset == null
+        if (
+            selectExpression.Offset == null
             && selectExpression.Limit == null
             && selectExpression.Having == null
             && selectExpression.Orderings.Count == 0
             && selectExpression.GroupBy.Count == 0
             && selectExpression.Tables.Count == 1
             && selectExpression.Tables[0] == deleteExpression.Table
-            && selectExpression.Projection.Count == 0)
+            && selectExpression.Projection.Count == 0
+        )
         {
             _relationalCommandBuilder.Append("DELETE FROM ");
             Visit(deleteExpression.Table);
@@ -214,7 +225,10 @@ public class QuerySqlGenerator : SqlExpressionVisitor
         }
 
         throw new InvalidOperationException(
-            RelationalStrings.ExecuteOperationWithUnsupportedOperatorInSqlGeneration(nameof(RelationalQueryableExtensions.ExecuteDelete)));
+            RelationalStrings.ExecuteOperationWithUnsupportedOperatorInSqlGeneration(
+                nameof(RelationalQueryableExtensions.ExecuteDelete)
+            )
+        );
     }
 
     /// <inheritdoc />
@@ -287,7 +301,8 @@ public class QuerySqlGenerator : SqlExpressionVisitor
         {
             subQueryIndent!.Dispose();
 
-            _relationalCommandBuilder.AppendLine()
+            _relationalCommandBuilder
+                .AppendLine()
                 .Append(")")
                 .Append(AliasSeparator)
                 .Append(_sqlGenerationHelper.DelimitIdentifier(selectExpression.Alias));
@@ -309,22 +324,27 @@ public class QuerySqlGenerator : SqlExpressionVisitor
             return true;
         }
 
-        if (selectExpression is
-            {
-                Tables: [ValuesExpression valuesExpression],
-                Offset: null,
-                Limit: null,
-                IsDistinct: false,
-                Predicate: null,
-                Having: null,
-                Orderings.Count: 0,
-                GroupBy.Count: 0,
-            }
+        if (
+            selectExpression
+                is {
+                    Tables: [ValuesExpression valuesExpression],
+                    Offset: null,
+                    Limit: null,
+                    IsDistinct: false,
+                    Predicate: null,
+                    Having: null,
+                    Orderings.Count: 0,
+                    GroupBy.Count: 0,
+                }
             && selectExpression.Projection.Count == valuesExpression.ColumnNames.Count
-            && selectExpression.Projection.Select(
-                    (pe, index) => pe.Expression is ColumnExpression column
-                        && column.Name == valuesExpression.ColumnNames[index])
-                .All(e => e))
+            && selectExpression
+                .Projection.Select(
+                    (pe, index) =>
+                        pe.Expression is ColumnExpression column
+                        && column.Name == valuesExpression.ColumnNames[index]
+                )
+                .All(e => e)
+        )
         {
             GenerateValues(valuesExpression);
             return true;
@@ -336,24 +356,27 @@ public class QuerySqlGenerator : SqlExpressionVisitor
     /// <summary>
     ///     Generates a pseudo FROM clause. Required by some providers when a query has no actual FROM clause.
     /// </summary>
-    protected virtual void GeneratePseudoFromClause()
-    {
-    }
+    protected virtual void GeneratePseudoFromClause() { }
 
     /// <summary>
     ///     Generates empty projection for a SelectExpression.
     /// </summary>
     /// <param name="selectExpression">SelectExpression for which the empty projection will be generated.</param>
-    protected virtual void GenerateEmptyProjection(SelectExpression selectExpression)
-        => _relationalCommandBuilder.Append("1");
+    protected virtual void GenerateEmptyProjection(SelectExpression selectExpression) =>
+        _relationalCommandBuilder.Append("1");
 
     /// <inheritdoc />
     protected override Expression VisitProjection(ProjectionExpression projectionExpression)
     {
         Visit(projectionExpression.Expression);
 
-        if (projectionExpression.Alias != string.Empty
-            && !(projectionExpression.Expression is ColumnExpression column && column.Name == projectionExpression.Alias))
+        if (
+            projectionExpression.Alias != string.Empty
+            && !(
+                projectionExpression.Expression is ColumnExpression column
+                && column.Name == projectionExpression.Alias
+            )
+        )
         {
             _relationalCommandBuilder
                 .Append(AliasSeparator)
@@ -385,8 +408,9 @@ public class QuerySqlGenerator : SqlExpressionVisitor
                     .Append(".");
             }
 
-            _relationalCommandBuilder
-                .Append(_sqlGenerationHelper.DelimitIdentifier(sqlFunctionExpression.Name));
+            _relationalCommandBuilder.Append(
+                _sqlGenerationHelper.DelimitIdentifier(sqlFunctionExpression.Name)
+            );
         }
 
         if (!sqlFunctionExpression.IsNiladic)
@@ -400,12 +424,16 @@ public class QuerySqlGenerator : SqlExpressionVisitor
     }
 
     /// <inheritdoc />
-    protected override Expression VisitTableValuedFunction(TableValuedFunctionExpression tableValuedFunctionExpression)
+    protected override Expression VisitTableValuedFunction(
+        TableValuedFunctionExpression tableValuedFunctionExpression
+    )
     {
         if (!string.IsNullOrEmpty(tableValuedFunctionExpression.Schema))
         {
             _relationalCommandBuilder
-                .Append(_sqlGenerationHelper.DelimitIdentifier(tableValuedFunctionExpression.Schema))
+                .Append(
+                    _sqlGenerationHelper.DelimitIdentifier(tableValuedFunctionExpression.Schema)
+                )
                 .Append(".");
         }
 
@@ -413,9 +441,7 @@ public class QuerySqlGenerator : SqlExpressionVisitor
             ? tableValuedFunctionExpression.Name
             : _sqlGenerationHelper.DelimitIdentifier(tableValuedFunctionExpression.Name);
 
-        _relationalCommandBuilder
-            .Append(name)
-            .Append("(");
+        _relationalCommandBuilder.Append(name).Append("(");
 
         GenerateList(tableValuedFunctionExpression.Arguments, e => Visit(e));
 
@@ -442,7 +468,9 @@ public class QuerySqlGenerator : SqlExpressionVisitor
     protected override Expression VisitTable(TableExpression tableExpression)
     {
         _relationalCommandBuilder
-            .Append(_sqlGenerationHelper.DelimitIdentifier(tableExpression.Name, tableExpression.Schema))
+            .Append(
+                _sqlGenerationHelper.DelimitIdentifier(tableExpression.Name, tableExpression.Schema)
+            )
             .Append(AliasSeparator)
             .Append(_sqlGenerationHelper.DelimitIdentifier(tableExpression.Alias));
 
@@ -456,13 +484,18 @@ public class QuerySqlGenerator : SqlExpressionVisitor
 
         switch (fromSqlExpression.Arguments)
         {
-            case ConstantExpression { Value: CompositeRelationalParameter compositeRelationalParameter }:
+            case ConstantExpression
+            {
+                Value: CompositeRelationalParameter compositeRelationalParameter
+            }:
             {
                 var subParameters = compositeRelationalParameter.RelationalParameters;
                 substitutions = new string[subParameters.Count];
                 for (var i = 0; i < subParameters.Count; i++)
                 {
-                    substitutions[i] = _sqlGenerationHelper.GenerateParameterNamePlaceholder(subParameters[i].InvariantName);
+                    substitutions[i] = _sqlGenerationHelper.GenerateParameterNamePlaceholder(
+                        subParameters[i].InvariantName
+                    );
                 }
 
                 _relationalCommandBuilder.AddParameter(compositeRelationalParameter);
@@ -478,12 +511,16 @@ public class QuerySqlGenerator : SqlExpressionVisitor
                     var value = constantValues[i];
                     if (value is RawRelationalParameter rawRelationalParameter)
                     {
-                        substitutions[i] = _sqlGenerationHelper.GenerateParameterNamePlaceholder(rawRelationalParameter.InvariantName);
+                        substitutions[i] = _sqlGenerationHelper.GenerateParameterNamePlaceholder(
+                            rawRelationalParameter.InvariantName
+                        );
                         _relationalCommandBuilder.AddParameter(rawRelationalParameter);
                     }
                     else if (value is SqlConstantExpression sqlConstantExpression)
                     {
-                        substitutions[i] = sqlConstantExpression.TypeMapping!.GenerateSqlLiteral(sqlConstantExpression.Value);
+                        substitutions[i] = sqlConstantExpression.TypeMapping!.GenerateSqlLiteral(
+                            sqlConstantExpression.Value
+                        );
                     }
                 }
 
@@ -498,7 +535,9 @@ public class QuerySqlGenerator : SqlExpressionVisitor
                         fromSqlExpression.Arguments.GetType(),
                         fromSqlExpression.Arguments is ConstantExpression constantExpression
                             ? constantExpression.Value?.GetType()
-                            : null));
+                            : null
+                    )
+                );
         }
 
         // ReSharper disable once CoVariantArrayConversion
@@ -520,7 +559,8 @@ public class QuerySqlGenerator : SqlExpressionVisitor
             GenerateFromSql(fromSqlExpression);
         }
 
-        _relationalCommandBuilder.Append(")")
+        _relationalCommandBuilder
+            .Append(")")
             .Append(AliasSeparator)
             .Append(_sqlGenerationHelper.DelimitIdentifier(fromSqlExpression.Alias));
 
@@ -543,9 +583,12 @@ public class QuerySqlGenerator : SqlExpressionVisitor
             if (span.StartsWith("--"))
             {
                 var i = span.IndexOf('\n');
-                span = i > 0
-                    ? span[(i + 1)..].TrimStart()
-                    : throw new InvalidOperationException(RelationalStrings.FromSqlNonComposable);
+                span =
+                    i > 0
+                        ? span[(i + 1)..].TrimStart()
+                        : throw new InvalidOperationException(
+                            RelationalStrings.FromSqlNonComposable
+                        );
                 continue;
             }
 
@@ -553,9 +596,12 @@ public class QuerySqlGenerator : SqlExpressionVisitor
             if (span.StartsWith("/*"))
             {
                 var i = span.IndexOf("*/");
-                span = i > 0
-                    ? span[(i + 2)..].TrimStart()
-                    : throw new InvalidOperationException(RelationalStrings.FromSqlNonComposable);
+                span =
+                    i > 0
+                        ? span[(i + 2)..].TrimStart()
+                        : throw new InvalidOperationException(
+                            RelationalStrings.FromSqlNonComposable
+                        );
                 continue;
             }
 
@@ -573,14 +619,15 @@ public class QuerySqlGenerator : SqlExpressionVisitor
     /// <exception cref="InvalidOperationException">The given SQL isn't composable.</exception>
     protected virtual void CheckComposableSqlTrimmed(ReadOnlySpan<char> sql)
     {
-        sql = sql.StartsWith("SELECT", StringComparison.OrdinalIgnoreCase)
-            ? sql["SELECT".Length..]
-            : sql.StartsWith("WITH", StringComparison.OrdinalIgnoreCase)
-                ? sql["WITH".Length..]
-                : throw new InvalidOperationException(RelationalStrings.FromSqlNonComposable);
+        sql =
+            sql.StartsWith("SELECT", StringComparison.OrdinalIgnoreCase) ? sql["SELECT".Length..]
+            : sql.StartsWith("WITH", StringComparison.OrdinalIgnoreCase) ? sql["WITH".Length..]
+            : throw new InvalidOperationException(RelationalStrings.FromSqlNonComposable);
 
-        if (sql.Length > 0
-            && (char.IsWhiteSpace(sql[0]) || sql.StartsWith("--") || sql.StartsWith("/*")))
+        if (
+            sql.Length > 0
+            && (char.IsWhiteSpace(sql[0]) || sql.StartsWith("--") || sql.StartsWith("/*"))
+        )
         {
             return;
         }
@@ -591,7 +638,10 @@ public class QuerySqlGenerator : SqlExpressionVisitor
     /// <inheritdoc />
     protected override Expression VisitSqlBinary(SqlBinaryExpression sqlBinaryExpression)
     {
-        var requiresParentheses = RequiresParentheses(sqlBinaryExpression, sqlBinaryExpression.Left);
+        var requiresParentheses = RequiresParentheses(
+            sqlBinaryExpression,
+            sqlBinaryExpression.Left
+        );
 
         if (requiresParentheses)
         {
@@ -627,8 +677,9 @@ public class QuerySqlGenerator : SqlExpressionVisitor
     /// <inheritdoc />
     protected override Expression VisitSqlConstant(SqlConstantExpression sqlConstantExpression)
     {
-        _relationalCommandBuilder
-            .Append(sqlConstantExpression.TypeMapping!.GenerateSqlLiteral(sqlConstantExpression.Value));
+        _relationalCommandBuilder.Append(
+            sqlConstantExpression.TypeMapping!.GenerateSqlLiteral(sqlConstantExpression.Value)
+        );
 
         return sqlConstantExpression;
     }
@@ -647,13 +698,20 @@ public class QuerySqlGenerator : SqlExpressionVisitor
         // TODO: Note that we perform Equals comparison on the value converter. We should be able to do reference comparison, but for
         // that we need to ensure that there's only ever one type mapping instance (i.e. no type mappings are ever instantiated out of the
         // type mapping source). See #30677.
-        var parameter = _relationalCommandBuilder.Parameters.FirstOrDefault(
-            p =>
-                p.InvariantName == parameterName
-                && p is TypeMappedRelationalParameter { RelationalTypeMapping: var existingTypeMapping }
-                && string.Equals(existingTypeMapping.StoreType, typeMapping.StoreType, StringComparison.OrdinalIgnoreCase)
-                && (existingTypeMapping.Converter is null && typeMapping.Converter is null
-                    || existingTypeMapping.Converter is not null && existingTypeMapping.Converter.Equals(typeMapping.Converter)));
+        var parameter = _relationalCommandBuilder.Parameters.FirstOrDefault(p =>
+            p.InvariantName == parameterName
+            && p is TypeMappedRelationalParameter { RelationalTypeMapping: var existingTypeMapping }
+            && string.Equals(
+                existingTypeMapping.StoreType,
+                typeMapping.StoreType,
+                StringComparison.OrdinalIgnoreCase
+            )
+            && (
+                existingTypeMapping.Converter is null && typeMapping.Converter is null
+                || existingTypeMapping.Converter is not null
+                    && existingTypeMapping.Converter.Equals(typeMapping.Converter)
+            )
+        );
 
         if (parameter is null)
         {
@@ -663,15 +721,17 @@ public class QuerySqlGenerator : SqlExpressionVisitor
                 invariantName,
                 _sqlGenerationHelper.GenerateParameterName(parameterName),
                 sqlParameterExpression.TypeMapping!,
-                sqlParameterExpression.IsNullable);
+                sqlParameterExpression.IsNullable
+            );
         }
         else
         {
             parameterName = ((TypeMappedRelationalParameter)parameter).Name;
         }
 
-        _relationalCommandBuilder
-            .Append(_sqlGenerationHelper.GenerateParameterNamePlaceholder(parameterName));
+        _relationalCommandBuilder.Append(
+            _sqlGenerationHelper.GenerateParameterNamePlaceholder(parameterName)
+        );
 
         return sqlParameterExpression;
 
@@ -751,9 +811,7 @@ public class QuerySqlGenerator : SqlExpressionVisitor
     {
         Visit(collateExpression.Operand);
 
-        _relationalCommandBuilder
-            .Append(" COLLATE ")
-            .Append(collateExpression.Collation);
+        _relationalCommandBuilder.Append(" COLLATE ").Append(collateExpression.Collation);
 
         return collateExpression;
     }
@@ -783,9 +841,7 @@ public class QuerySqlGenerator : SqlExpressionVisitor
         {
             foreach (var whenClause in caseExpression.WhenClauses)
             {
-                _relationalCommandBuilder
-                    .AppendLine()
-                    .Append("WHEN ");
+                _relationalCommandBuilder.AppendLine().Append("WHEN ");
                 Visit(whenClause.Test);
                 _relationalCommandBuilder.Append(" THEN ");
                 Visit(whenClause.Result);
@@ -793,16 +849,12 @@ public class QuerySqlGenerator : SqlExpressionVisitor
 
             if (caseExpression.ElseResult != null)
             {
-                _relationalCommandBuilder
-                    .AppendLine()
-                    .Append("ELSE ");
+                _relationalCommandBuilder.AppendLine().Append("ELSE ");
                 Visit(caseExpression.ElseResult);
             }
         }
 
-        _relationalCommandBuilder
-            .AppendLine()
-            .Append("END");
+        _relationalCommandBuilder.AppendLine().Append("END");
 
         return caseExpression;
     }
@@ -815,7 +867,10 @@ public class QuerySqlGenerator : SqlExpressionVisitor
             case ExpressionType.Convert:
             {
                 _relationalCommandBuilder.Append("CAST(");
-                var requiresParentheses = RequiresParentheses(sqlUnaryExpression, sqlUnaryExpression.Operand);
+                var requiresParentheses = RequiresParentheses(
+                    sqlUnaryExpression,
+                    sqlUnaryExpression.Operand
+                );
                 if (requiresParentheses)
                 {
                     _relationalCommandBuilder.Append("(");
@@ -833,8 +888,7 @@ public class QuerySqlGenerator : SqlExpressionVisitor
                 break;
             }
 
-            case ExpressionType.Not
-                when sqlUnaryExpression.Type == typeof(bool):
+            case ExpressionType.Not when sqlUnaryExpression.Type == typeof(bool):
             {
                 switch (sqlUnaryExpression.Operand)
                 {
@@ -864,7 +918,10 @@ public class QuerySqlGenerator : SqlExpressionVisitor
             {
                 _relationalCommandBuilder.Append("~");
 
-                var requiresBrackets = RequiresParentheses(sqlUnaryExpression, sqlUnaryExpression.Operand);
+                var requiresBrackets = RequiresParentheses(
+                    sqlUnaryExpression,
+                    sqlUnaryExpression.Operand
+                );
                 if (requiresBrackets)
                 {
                     _relationalCommandBuilder.Append("(");
@@ -881,7 +938,10 @@ public class QuerySqlGenerator : SqlExpressionVisitor
 
             case ExpressionType.Equal:
             {
-                var requiresBrackets = RequiresParentheses(sqlUnaryExpression, sqlUnaryExpression.Operand);
+                var requiresBrackets = RequiresParentheses(
+                    sqlUnaryExpression,
+                    sqlUnaryExpression.Operand
+                );
                 if (requiresBrackets)
                 {
                     _relationalCommandBuilder.Append("(");
@@ -899,7 +959,10 @@ public class QuerySqlGenerator : SqlExpressionVisitor
 
             case ExpressionType.NotEqual:
             {
-                var requiresBrackets = RequiresParentheses(sqlUnaryExpression, sqlUnaryExpression.Operand);
+                var requiresBrackets = RequiresParentheses(
+                    sqlUnaryExpression,
+                    sqlUnaryExpression.Operand
+                );
                 if (requiresBrackets)
                 {
                     _relationalCommandBuilder.Append("(");
@@ -918,7 +981,10 @@ public class QuerySqlGenerator : SqlExpressionVisitor
             case ExpressionType.Negate:
             {
                 _relationalCommandBuilder.Append("-");
-                var requiresBrackets = RequiresParentheses(sqlUnaryExpression, sqlUnaryExpression.Operand);
+                var requiresBrackets = RequiresParentheses(
+                    sqlUnaryExpression,
+                    sqlUnaryExpression.Operand
+                );
                 if (requiresBrackets)
                 {
                     _relationalCommandBuilder.Append("(");
@@ -984,7 +1050,8 @@ public class QuerySqlGenerator : SqlExpressionVisitor
     {
         Check.DebugAssert(
             inExpression.ValuesParameter is null,
-            "InExpression.ValuesParameter must have been expanded to constants before SQL generation (i.e. in SqlNullabilityProcessor)");
+            "InExpression.ValuesParameter must have been expanded to constants before SQL generation (i.e. in SqlNullabilityProcessor)"
+        );
 
         Visit(inExpression.Item);
         _relationalCommandBuilder.Append(negated ? " NOT IN (" : " IN (");
@@ -1011,7 +1078,10 @@ public class QuerySqlGenerator : SqlExpressionVisitor
     /// <inheritdoc />
     protected override Expression VisitAtTimeZone(AtTimeZoneExpression atTimeZoneExpression)
     {
-        var requiresBrackets = RequiresParentheses(atTimeZoneExpression, atTimeZoneExpression.Operand);
+        var requiresBrackets = RequiresParentheses(
+            atTimeZoneExpression,
+            atTimeZoneExpression.Operand
+        );
 
         if (requiresBrackets)
         {
@@ -1049,16 +1119,14 @@ public class QuerySqlGenerator : SqlExpressionVisitor
     /// </summary>
     /// <param name="binaryExpression">A SQL binary operation.</param>
     /// <returns>A string representation of the binary operator.</returns>
-    protected virtual string GetOperator(SqlBinaryExpression binaryExpression)
-        => OperatorMap[binaryExpression.OperatorType];
+    protected virtual string GetOperator(SqlBinaryExpression binaryExpression) =>
+        OperatorMap[binaryExpression.OperatorType];
 
     /// <summary>
     ///     Generates a TOP construct in the relational command
     /// </summary>
     /// <param name="selectExpression">A select expression to use.</param>
-    protected virtual void GenerateTop(SelectExpression selectExpression)
-    {
-    }
+    protected virtual void GenerateTop(SelectExpression selectExpression) { }
 
     /// <summary>
     ///     Generates an ORDER BY clause in the relational command
@@ -1070,16 +1138,16 @@ public class QuerySqlGenerator : SqlExpressionVisitor
         {
             var orderings = selectExpression.Orderings.ToList();
 
-            if (selectExpression.Limit == null
-                && selectExpression.Offset == null)
+            if (selectExpression.Limit == null && selectExpression.Offset == null)
             {
-                orderings.RemoveAll(oe => oe.Expression is SqlConstantExpression or SqlParameterExpression);
+                orderings.RemoveAll(oe =>
+                    oe.Expression is SqlConstantExpression or SqlParameterExpression
+                );
             }
 
             if (orderings.Count > 0)
             {
-                _relationalCommandBuilder.AppendLine()
-                    .Append("ORDER BY ");
+                _relationalCommandBuilder.AppendLine().Append("ORDER BY ");
 
                 GenerateList(orderings, e => Visit(e));
             }
@@ -1094,8 +1162,7 @@ public class QuerySqlGenerator : SqlExpressionVisitor
     {
         if (selectExpression.Offset != null)
         {
-            _relationalCommandBuilder.AppendLine()
-                .Append("OFFSET ");
+            _relationalCommandBuilder.AppendLine().Append("OFFSET ");
 
             Visit(selectExpression.Offset);
 
@@ -1112,8 +1179,7 @@ public class QuerySqlGenerator : SqlExpressionVisitor
         }
         else if (selectExpression.Limit != null)
         {
-            _relationalCommandBuilder.AppendLine()
-                .Append("FETCH FIRST ");
+            _relationalCommandBuilder.AppendLine().Append("FETCH FIRST ");
 
             Visit(selectExpression.Limit);
 
@@ -1124,7 +1190,8 @@ public class QuerySqlGenerator : SqlExpressionVisitor
     private void GenerateList<T>(
         IReadOnlyList<T> items,
         Action<T> generationAction,
-        Action<IRelationalCommandBuilder>? joinAction = null)
+        Action<IRelationalCommandBuilder>? joinAction = null
+    )
     {
         joinAction ??= (isb => isb.Append(", "));
 
@@ -1189,7 +1256,9 @@ public class QuerySqlGenerator : SqlExpressionVisitor
     }
 
     /// <inheritdoc />
-    protected override Expression VisitScalarSubquery(ScalarSubqueryExpression scalarSubqueryExpression)
+    protected override Expression VisitScalarSubquery(
+        ScalarSubqueryExpression scalarSubqueryExpression
+    )
     {
         _relationalCommandBuilder.AppendLine("(");
         using (_relationalCommandBuilder.Indent())
@@ -1255,13 +1324,15 @@ public class QuerySqlGenerator : SqlExpressionVisitor
             .AppendLine(setOperation.IsDistinct ? string.Empty : " ALL");
         GenerateSetOperationOperand(setOperation, setOperation.Source2);
 
-        static string GetSetOperation(SetOperationBase operation)
-            => operation switch
+        static string GetSetOperation(SetOperationBase operation) =>
+            operation switch
             {
                 ExceptExpression => "EXCEPT",
                 IntersectExpression => "INTERSECT",
                 UnionExpression => "UNION",
-                _ => throw new InvalidOperationException(CoreStrings.UnknownEntity("SetOperationType"))
+                _ => throw new InvalidOperationException(
+                    CoreStrings.UnknownEntity("SetOperationType")
+                ),
             };
     }
 
@@ -1270,12 +1341,17 @@ public class QuerySqlGenerator : SqlExpressionVisitor
     /// </summary>
     /// <param name="setOperation">A set operation to use.</param>
     /// <param name="operand">A set operation operand to print.</param>
-    protected virtual void GenerateSetOperationOperand(SetOperationBase setOperation, SelectExpression operand)
+    protected virtual void GenerateSetOperationOperand(
+        SetOperationBase setOperation,
+        SelectExpression operand
+    )
     {
         // INTERSECT has higher precedence over UNION and EXCEPT, but otherwise evaluation is left-to-right.
         // To preserve meaning, add parentheses whenever a set operation is nested within a different set operation.
-        if (IsNonComposedSetOperation(operand)
-            && operand.Tables[0].GetType() != setOperation.GetType())
+        if (
+            IsNonComposedSetOperation(operand)
+            && operand.Tables[0].GetType() != setOperation.GetType()
+        )
         {
             _relationalCommandBuilder.AppendLine("(");
             using (_relationalCommandBuilder.Indent())
@@ -1299,7 +1375,8 @@ public class QuerySqlGenerator : SqlExpressionVisitor
             GenerateSetOperation(setOperation);
         }
 
-        _relationalCommandBuilder.AppendLine()
+        _relationalCommandBuilder
+            .AppendLine()
             .Append(")")
             .Append(AliasSeparator)
             .Append(_sqlGenerationHelper.DelimitIdentifier(setOperation.Alias));
@@ -1334,30 +1411,37 @@ public class QuerySqlGenerator : SqlExpressionVisitor
     {
         var selectExpression = updateExpression.SelectExpression;
 
-        if (selectExpression.Offset == null
+        if (
+            selectExpression.Offset == null
             && selectExpression.Limit == null
             && selectExpression.Having == null
             && selectExpression.Orderings.Count == 0
             && selectExpression.GroupBy.Count == 0
             && selectExpression.Projection.Count == 0
-            && (selectExpression.Tables.Count == 1
+            && (
+                selectExpression.Tables.Count == 1
                 || !ReferenceEquals(selectExpression.Tables[0], updateExpression.Table)
                 || selectExpression.Tables[1] is InnerJoinExpression
-                || selectExpression.Tables[1] is CrossJoinExpression))
+                || selectExpression.Tables[1] is CrossJoinExpression
+            )
+        )
         {
             _relationalCommandBuilder.Append("UPDATE ");
             Visit(updateExpression.Table);
             _relationalCommandBuilder.AppendLine();
             _relationalCommandBuilder.Append("SET ");
             _relationalCommandBuilder.Append(
-                $"{_sqlGenerationHelper.DelimitIdentifier(updateExpression.ColumnValueSetters[0].Column.Name)} = ");
+                $"{_sqlGenerationHelper.DelimitIdentifier(updateExpression.ColumnValueSetters[0].Column.Name)} = "
+            );
             Visit(updateExpression.ColumnValueSetters[0].Value);
             using (_relationalCommandBuilder.Indent())
             {
                 foreach (var columnValueSetter in updateExpression.ColumnValueSetters.Skip(1))
                 {
                     _relationalCommandBuilder.AppendLine(",");
-                    _relationalCommandBuilder.Append($"{_sqlGenerationHelper.DelimitIdentifier(columnValueSetter.Column.Name)} = ");
+                    _relationalCommandBuilder.Append(
+                        $"{_sqlGenerationHelper.DelimitIdentifier(columnValueSetter.Column.Name)} = "
+                    );
                     Visit(columnValueSetter.Value);
                 }
             }
@@ -1395,14 +1479,16 @@ public class QuerySqlGenerator : SqlExpressionVisitor
                     {
                         if (joinTable is PredicateJoinExpressionBase predicateJoinExpression)
                         {
-                            predicate = predicate == null
-                                ? predicateJoinExpression.JoinPredicate
-                                : new SqlBinaryExpression(
-                                    ExpressionType.AndAlso,
-                                    predicateJoinExpression.JoinPredicate,
-                                    predicate,
-                                    typeof(bool),
-                                    predicate.TypeMapping);
+                            predicate =
+                                predicate == null
+                                    ? predicateJoinExpression.JoinPredicate
+                                    : new SqlBinaryExpression(
+                                        ExpressionType.AndAlso,
+                                        predicateJoinExpression.JoinPredicate,
+                                        predicate,
+                                        typeof(bool),
+                                        predicate.TypeMapping
+                                    );
                         }
                     }
                 }
@@ -1418,7 +1504,10 @@ public class QuerySqlGenerator : SqlExpressionVisitor
         }
 
         throw new InvalidOperationException(
-            RelationalStrings.ExecuteOperationWithUnsupportedOperatorInSqlGeneration(nameof(RelationalQueryableExtensions.ExecuteUpdate)));
+            RelationalStrings.ExecuteOperationWithUnsupportedOperatorInSqlGeneration(
+                nameof(RelationalQueryableExtensions.ExecuteUpdate)
+            )
+        );
     }
 
     /// <inheritdoc />
@@ -1443,7 +1532,9 @@ public class QuerySqlGenerator : SqlExpressionVisitor
     {
         if (valuesExpression.RowValues.Count == 0)
         {
-            throw new InvalidOperationException(RelationalStrings.EmptyCollectionNotSupportedAsInlineQueryRoot);
+            throw new InvalidOperationException(
+                RelationalStrings.EmptyCollectionNotSupportedAsInlineQueryRoot
+            );
         }
 
         var rowValues = valuesExpression.RowValues;
@@ -1486,9 +1577,10 @@ public class QuerySqlGenerator : SqlExpressionVisitor
     }
 
     /// <inheritdoc />
-    protected override Expression VisitJsonScalar(JsonScalarExpression jsonScalarExpression)
-        => throw new InvalidOperationException(
-            RelationalStrings.JsonNodeMustBeHandledByProviderSpecificVisitor);
+    protected override Expression VisitJsonScalar(JsonScalarExpression jsonScalarExpression) =>
+        throw new InvalidOperationException(
+            RelationalStrings.JsonNodeMustBeHandledByProviderSpecificVisitor
+        );
 
     /// <summary>
     ///     Returns a bool value indicating if the inner SQL expression required to be put inside parenthesis when generating SQL for outer
@@ -1497,9 +1589,13 @@ public class QuerySqlGenerator : SqlExpressionVisitor
     /// <param name="outerExpression">The outer expression which provides context in which SQL is being generated.</param>
     /// <param name="innerExpression">The inner expression which may need to be put inside parenthesis.</param>
     /// <returns>A bool value indicating that parenthesis is required or not. </returns>
-    protected virtual bool RequiresParentheses(SqlExpression outerExpression, SqlExpression innerExpression)
+    protected virtual bool RequiresParentheses(
+        SqlExpression outerExpression,
+        SqlExpression innerExpression
+    )
     {
-        int outerPrecedence, innerPrecedence;
+        int outerPrecedence,
+            innerPrecedence;
 
         // Convert is rendered as a function (CAST()) and not as an operator, so we never need to add parentheses around the inner
         if (outerExpression is SqlUnaryExpression { OperatorType: ExpressionType.Convert })
@@ -1512,26 +1608,37 @@ public class QuerySqlGenerator : SqlExpressionVisitor
             case SqlUnaryExpression innerUnaryExpression:
             {
                 // If the same unary operator is used in both outer and inner (e.g. NOT NOT), no parentheses are needed
-                if (outerExpression is SqlUnaryExpression outerUnary
-                    && innerUnaryExpression.OperatorType == outerUnary.OperatorType)
+                if (
+                    outerExpression is SqlUnaryExpression outerUnary
+                    && innerUnaryExpression.OperatorType == outerUnary.OperatorType
+                )
                 {
                     // ... except for double negative (--), which is interpreted as a comment in SQL
                     return innerUnaryExpression.OperatorType == ExpressionType.Negate;
                 }
 
                 // If the provider defined precedence for the two expression, use that
-                if (TryGetOperatorInfo(outerExpression, out outerPrecedence, out _)
-                    && TryGetOperatorInfo(innerExpression, out innerPrecedence, out _))
+                if (
+                    TryGetOperatorInfo(outerExpression, out outerPrecedence, out _)
+                    && TryGetOperatorInfo(innerExpression, out innerPrecedence, out _)
+                )
                 {
                     return outerPrecedence >= innerPrecedence;
                 }
 
                 // Otherwise, wrap IS (NOT) NULL operation, except if it's in a logical operator
-                if (innerUnaryExpression.OperatorType is ExpressionType.Equal or ExpressionType.NotEqual
-                    && outerExpression is not SqlBinaryExpression
-                    {
-                        OperatorType: ExpressionType.AndAlso or ExpressionType.OrElse or ExpressionType.Not
-                    })
+                if (
+                    innerUnaryExpression.OperatorType
+                        is ExpressionType.Equal
+                            or ExpressionType.NotEqual
+                    && outerExpression
+                        is not SqlBinaryExpression
+                        {
+                            OperatorType: ExpressionType.AndAlso
+                                or ExpressionType.OrElse
+                                or ExpressionType.Not
+                        }
+                )
                 {
                     return true;
                 }
@@ -1542,15 +1649,28 @@ public class QuerySqlGenerator : SqlExpressionVisitor
             case SqlBinaryExpression innerBinaryExpression:
             {
                 // Precedence-wise AND is above OR but we still add parenthesis for ease of understanding
-                if (innerBinaryExpression.OperatorType is ExpressionType.AndAlso or ExpressionType.And
-                    && outerExpression is SqlBinaryExpression { OperatorType: ExpressionType.OrElse or ExpressionType.Or })
+                if (
+                    innerBinaryExpression.OperatorType
+                        is ExpressionType.AndAlso
+                            or ExpressionType.And
+                    && outerExpression
+                        is SqlBinaryExpression
+                        {
+                            OperatorType: ExpressionType.OrElse or ExpressionType.Or
+                        }
+                )
                 {
                     return true;
                 }
 
                 // If the provider defined precedence for the two expression, use that
-                if (TryGetOperatorInfo(outerExpression, out outerPrecedence, out var isOuterAssociative)
-                    && TryGetOperatorInfo(innerExpression, out innerPrecedence, out _))
+                if (
+                    TryGetOperatorInfo(
+                        outerExpression,
+                        out outerPrecedence,
+                        out var isOuterAssociative
+                    ) && TryGetOperatorInfo(innerExpression, out innerPrecedence, out _)
+                )
                 {
                     return outerPrecedence.CompareTo(innerPrecedence) switch
                     {
@@ -1566,7 +1686,7 @@ public class QuerySqlGenerator : SqlExpressionVisitor
                             || outerExpression.Type == typeof(float)
                             || outerExpression.Type == typeof(double)
                             || innerExpression.Type == typeof(float)
-                            || innerExpression.Type == typeof(double)
+                            || innerExpression.Type == typeof(double),
                     };
                 }
 
@@ -1591,7 +1711,10 @@ public class QuerySqlGenerator : SqlExpressionVisitor
                 return true;
             }
 
-            case CollateExpression or LikeExpression or AtTimeZoneExpression or JsonScalarExpression:
+            case CollateExpression
+            or LikeExpression
+            or AtTimeZoneExpression
+            or JsonScalarExpression:
                 return !TryGetOperatorInfo(outerExpression, out outerPrecedence, out _)
                     || !TryGetOperatorInfo(innerExpression, out innerPrecedence, out _)
                     || outerPrecedence >= innerPrecedence;
@@ -1622,7 +1745,11 @@ public class QuerySqlGenerator : SqlExpressionVisitor
     ///     The default implementation always returns false, so that parentheses almost always get added. Providers can override this method
     ///     to remove parentheses where they aren't necessary.
     /// </remarks>
-    protected virtual bool TryGetOperatorInfo(SqlExpression expression, out int precedence, out bool isAssociative)
+    protected virtual bool TryGetOperatorInfo(
+        SqlExpression expression,
+        out int precedence,
+        out bool isAssociative
+    )
     {
         (precedence, isAssociative) = (default, default);
         return false;

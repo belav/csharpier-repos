@@ -10,12 +10,13 @@ internal sealed class NoStorePolicy : IOutputCachePolicy
 {
     public static NoStorePolicy Instance = new();
 
-    private NoStorePolicy()
-    {
-    }
+    private NoStorePolicy() { }
 
     /// <inheritdoc />
-    ValueTask IOutputCachePolicy.ServeResponseAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    ValueTask IOutputCachePolicy.ServeResponseAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
         context.AllowCacheStorage = false;
 
@@ -23,13 +24,19 @@ internal sealed class NoStorePolicy : IOutputCachePolicy
     }
 
     /// <inheritdoc />
-    ValueTask IOutputCachePolicy.ServeFromCacheAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    ValueTask IOutputCachePolicy.ServeFromCacheAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
         return ValueTask.CompletedTask;
     }
 
     /// <inheritdoc />
-    ValueTask IOutputCachePolicy.CacheRequestAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    ValueTask IOutputCachePolicy.CacheRequestAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
         return ValueTask.CompletedTask;
     }

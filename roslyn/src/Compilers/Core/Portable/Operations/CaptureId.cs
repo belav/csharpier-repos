@@ -32,4 +32,3 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override int GetHashCode() => Value.GetHashCode();
     }
 }
-

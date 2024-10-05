@@ -33,7 +33,8 @@ internal sealed class MemoryPoolHttpRequestStreamReaderFactory : IHttpRequestStr
     /// </param>
     public MemoryPoolHttpRequestStreamReaderFactory(
         ArrayPool<byte> bytePool,
-        ArrayPool<char> charPool)
+        ArrayPool<char> charPool
+    )
     {
         ArgumentNullException.ThrowIfNull(bytePool);
         ArgumentNullException.ThrowIfNull(charPool);
@@ -48,6 +49,12 @@ internal sealed class MemoryPoolHttpRequestStreamReaderFactory : IHttpRequestStr
         ArgumentNullException.ThrowIfNull(stream);
         ArgumentNullException.ThrowIfNull(encoding);
 
-        return new HttpRequestStreamReader(stream, encoding, DefaultBufferSize, _bytePool, _charPool);
+        return new HttpRequestStreamReader(
+            stream,
+            encoding,
+            DefaultBufferSize,
+            _bytePool,
+            _charPool
+        );
     }
 }

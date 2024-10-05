@@ -1,19 +1,18 @@
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>Pallavit</OWNER>
 
 using System;
-using System.Security;
 using System.Collections;
 using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
+using System.Security;
 
 namespace System.Runtime.InteropServices.WindowsRuntime
 {
-
     // Local definition of Windows.Foundation.IClosable
     [ComImport]
     [Guid("30d5a829-7fa4-4026-83bb-d75bae4ea99e")]

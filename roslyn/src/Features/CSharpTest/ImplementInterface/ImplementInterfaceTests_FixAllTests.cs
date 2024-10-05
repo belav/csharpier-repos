@@ -8,7 +8,8 @@ using Microsoft.CodeAnalysis.Testing;
 using Xunit;
 using VerifyCS = Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions.CSharpCodeFixVerifier<
     Microsoft.CodeAnalysis.Testing.EmptyDiagnosticAnalyzer,
-    Microsoft.CodeAnalysis.CSharp.ImplementInterface.CSharpImplementInterfaceCodeFixProvider>;
+    Microsoft.CodeAnalysis.CSharp.ImplementInterface.CSharpImplementInterfaceCodeFixProvider
+>;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
 {
@@ -139,8 +140,12 @@ class B1 : I1, I2
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
-                CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne | CodeFixTestBehaviors.SkipFixAllInProjectCheck | CodeFixTestBehaviors.SkipFixAllInSolutionCheck,
-                CodeActionEquivalenceKey = "False;False;True:global::I1;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                CodeFixTestBehaviors =
+                    CodeFixTestBehaviors.FixOne
+                    | CodeFixTestBehaviors.SkipFixAllInProjectCheck
+                    | CodeFixTestBehaviors.SkipFixAllInSolutionCheck,
+                CodeActionEquivalenceKey =
+                    "False;False;True:global::I1;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 0,
             }.RunAsync();
         }
@@ -277,8 +282,12 @@ class B1 : I1, I2
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
-                CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne | CodeFixTestBehaviors.SkipFixAllInDocumentCheck | CodeFixTestBehaviors.SkipFixAllInSolutionCheck,
-                CodeActionEquivalenceKey = "False;False;True:global::I1;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                CodeFixTestBehaviors =
+                    CodeFixTestBehaviors.FixOne
+                    | CodeFixTestBehaviors.SkipFixAllInDocumentCheck
+                    | CodeFixTestBehaviors.SkipFixAllInSolutionCheck,
+                CodeActionEquivalenceKey =
+                    "False;False;True:global::I1;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 0,
             }.RunAsync();
         }
@@ -440,9 +449,13 @@ class B1 : {|CS0535:I1|}, I2
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
-                CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne | CodeFixTestBehaviors.SkipFixAllInDocumentCheck | CodeFixTestBehaviors.SkipFixAllInProjectCheck,
+                CodeFixTestBehaviors =
+                    CodeFixTestBehaviors.FixOne
+                    | CodeFixTestBehaviors.SkipFixAllInDocumentCheck
+                    | CodeFixTestBehaviors.SkipFixAllInProjectCheck,
                 DiagnosticSelector = diagnostics => diagnostics[1],
-                CodeActionEquivalenceKey = "True;False;False:global::I2;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                CodeActionEquivalenceKey =
+                    "True;False;False:global::I2;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 1,
             }.RunAsync();
         }
@@ -588,9 +601,13 @@ class B1 : {|CS0535:I1|}, I2
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
-                CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne | CodeFixTestBehaviors.SkipFixAllInDocumentCheck | CodeFixTestBehaviors.SkipFixAllInProjectCheck,
+                CodeFixTestBehaviors =
+                    CodeFixTestBehaviors.FixOne
+                    | CodeFixTestBehaviors.SkipFixAllInDocumentCheck
+                    | CodeFixTestBehaviors.SkipFixAllInProjectCheck,
                 DiagnosticSelector = diagnostics => diagnostics[1],
-                CodeActionEquivalenceKey = "True;False;False:global::I2;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
+                CodeActionEquivalenceKey =
+                    "True;False;False:global::I2;TestProject;Microsoft.CodeAnalysis.ImplementInterface.AbstractImplementInterfaceService+ImplementInterfaceCodeAction;",
                 CodeActionIndex = 1,
             }.RunAsync();
         }

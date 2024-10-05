@@ -17,8 +17,6 @@ namespace System.Diagnostics.Metrics
         public double MaxRelativeError { get; set; } = 0.001;
     }
 
-
-
     // This histogram ensures that the quantiles reported from the histogram are within some bounded % error of the correct
     // value. More mathematically, if we have a set of measurements where quantile X = Y, the histogram should always report a
     // value Y` where Y*(1-E) <= Y` <= Y*(1+E). E is our allowable error, so if E = 0.01 then the reported value Y` is
@@ -61,6 +59,7 @@ namespace System.Diagnostics.Metrics
                 Value = value;
                 Count = count;
             }
+
             public double Value;
             public int Count;
         }
@@ -115,7 +114,9 @@ namespace System.Diagnostics.Metrics
                 while (cur > target)
                 {
                     quantiles[nextQuantileIndex] = new QuantileValue(
-                        _config.Quantiles[nextQuantileIndex], b.Value);
+                        _config.Quantiles[nextQuantileIndex],
+                        b.Value
+                    );
                     nextQuantileIndex++;
                     if (nextQuantileIndex == _config.Quantiles.Length)
                     {
@@ -134,14 +135,14 @@ namespace System.Diagnostics.Metrics
             // iterate over the negative exponent buckets
             const int LowestNegativeOffset = ExponentArraySize / 2;
             // exponent = ExponentArraySize-1 encodes infinity and NaN, which we want to ignore
-            for (int exponent = ExponentArraySize-2; exponent >= LowestNegativeOffset; exponent--)
+            for (int exponent = ExponentArraySize - 2; exponent >= LowestNegativeOffset; exponent--)
             {
                 int[]? mantissaCounts = counters[exponent];
                 if (mantissaCounts == null)
                 {
                     continue;
                 }
-                for (int mantissa = _mantissaMax-1; mantissa >= 0; mantissa--)
+                for (int mantissa = _mantissaMax - 1; mantissa >= 0; mantissa--)
                 {
                     int count = mantissaCounts[mantissa];
                     if (count > 0)
@@ -153,7 +154,7 @@ namespace System.Diagnostics.Metrics
 
             // iterate over the positive exponent buckets
             // exponent = lowestNegativeOffset-1 encodes infinity and NaN, which we want to ignore
-            for (int exponent = 0; exponent < LowestNegativeOffset-1; exponent++)
+            for (int exponent = 0; exponent < LowestNegativeOffset - 1; exponent++)
             {
                 int[]? mantissaCounts = counters[exponent];
                 if (mantissaCounts == null)

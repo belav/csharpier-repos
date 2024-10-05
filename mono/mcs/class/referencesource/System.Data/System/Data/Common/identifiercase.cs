@@ -6,14 +6,12 @@
 // <owner current="true" primary="false">stevesta</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data.Common {
-
-    public enum IdentifierCase { 
+namespace System.Data.Common
+{
+    public enum IdentifierCase
+    {
         Unknown = 0,
         Insensitive = 1,
-        Sensitive = 2       
+        Sensitive = 2,
     }
 }
-
-
-

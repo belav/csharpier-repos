@@ -17,20 +17,27 @@ namespace System.Data.Metadata.Edm
         // v3.5 of .net framework
         internal const string ModelNamespace_1 = "http://schemas.microsoft.com/ado/2006/04/edm";
         internal const string ModelNamespace_1_1 = "http://schemas.microsoft.com/ado/2007/05/edm";
-        
+
         // v4 of .net framework
         internal const string ModelNamespace_2 = "http://schemas.microsoft.com/ado/2008/09/edm";
-        
+
         // v4 next of .net framework
         internal const string ModelNamespace_3 = "http://schemas.microsoft.com/ado/2009/11/edm";
-        
-        internal const string ProviderManifestNamespace = "http://schemas.microsoft.com/ado/2006/04/edm/providermanifest";
-        internal const string TargetNamespace_1 = "http://schemas.microsoft.com/ado/2006/04/edm/ssdl";
-        internal const string TargetNamespace_2 = "http://schemas.microsoft.com/ado/2009/02/edm/ssdl";
-        internal const string TargetNamespace_3 = "http://schemas.microsoft.com/ado/2009/11/edm/ssdl";
-        internal const string CodeGenerationSchemaNamespace = "http://schemas.microsoft.com/ado/2006/04/codegeneration";
-        internal const string EntityStoreSchemaGeneratorNamespace = "http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator";
-        internal const string AnnotationNamespace = "http://schemas.microsoft.com/ado/2009/02/edm/annotation";
+
+        internal const string ProviderManifestNamespace =
+            "http://schemas.microsoft.com/ado/2006/04/edm/providermanifest";
+        internal const string TargetNamespace_1 =
+            "http://schemas.microsoft.com/ado/2006/04/edm/ssdl";
+        internal const string TargetNamespace_2 =
+            "http://schemas.microsoft.com/ado/2009/02/edm/ssdl";
+        internal const string TargetNamespace_3 =
+            "http://schemas.microsoft.com/ado/2009/11/edm/ssdl";
+        internal const string CodeGenerationSchemaNamespace =
+            "http://schemas.microsoft.com/ado/2006/04/codegeneration";
+        internal const string EntityStoreSchemaGeneratorNamespace =
+            "http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator";
+        internal const string AnnotationNamespace =
+            "http://schemas.microsoft.com/ado/2009/02/edm/annotation";
 
         internal const string Alias = "Alias";
         internal const string Provider = "Provider";
@@ -43,10 +50,13 @@ namespace System.Data.Metadata.Edm
 
         //Numeric Constant to represent V1 of CSDL schema
         internal const double EdmVersionForV1 = 1.0;
+
         //Numeric Constant to represent V1.1 of CSDL schema
         internal const double EdmVersionForV1_1 = 1.1;
+
         //Numeric Constant to represent V2.0 of CSDL schema
         internal const double EdmVersionForV2 = 2.0;
+
         //Numeric Constant to represent V3.0 of CSDL schema
         internal const double EdmVersionForV3 = 3.0;
 
@@ -54,8 +64,6 @@ namespace System.Data.Metadata.Edm
         internal const double StoreVersionForV1 = 1.0;
         internal const double StoreVersionForV2 = 2.0;
         internal const double StoreVersionForV3 = 3.0;
-
-
 
         #region CDM Schema Xml NodeNames
         // Const element names in the CDM schema xml
@@ -96,7 +104,6 @@ namespace System.Data.Metadata.Edm
         internal const string MethodAccess = "MethodAccess";
         internal const string SetterAccess = "SetterAccess";
         internal const string GetterAccess = "GetterAccess";
-
 
         // const attribute names in the CDM schema XML
         internal const string Abstract = "Abstract";
@@ -187,7 +194,6 @@ namespace System.Data.Metadata.Edm
 
         internal const string XmlCommentStartString = "<!--";
         internal const string XmlCommentEndString = "-->";
-
 
         #endregion // CDM Schema Xml NodeNames
     }

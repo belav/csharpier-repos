@@ -26,7 +26,5 @@ public static class BasicTest
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Foo()
-    {
-    }
+    private static void Foo() { }
 }

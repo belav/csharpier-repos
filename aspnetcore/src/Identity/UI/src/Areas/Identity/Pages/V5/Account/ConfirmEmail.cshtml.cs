@@ -28,10 +28,12 @@ public abstract class ConfirmEmailModel : PageModel
     ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
-    public virtual Task<IActionResult> OnGetAsync(string userId, string code) => throw new NotImplementedException();
+    public virtual Task<IActionResult> OnGetAsync(string userId, string code) =>
+        throw new NotImplementedException();
 }
 
-internal sealed class ConfirmEmailModel<TUser> : ConfirmEmailModel where TUser : class
+internal sealed class ConfirmEmailModel<TUser> : ConfirmEmailModel
+    where TUser : class
 {
     private readonly UserManager<TUser> _userManager;
 
@@ -55,7 +57,9 @@ internal sealed class ConfirmEmailModel<TUser> : ConfirmEmailModel where TUser :
 
         code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
         var result = await _userManager.ConfirmEmailAsync(user, code);
-        StatusMessage = result.Succeeded ? "Thank you for confirming your email." : "Error confirming your email.";
+        StatusMessage = result.Succeeded
+            ? "Thank you for confirming your email."
+            : "Error confirming your email.";
         return Page();
     }
 }

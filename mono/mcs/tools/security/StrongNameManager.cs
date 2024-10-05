@@ -15,266 +15,294 @@ using System.Reflection;
 using System.Security;
 using System.Security.Cryptography;
 using System.Text;
-
 using Mono.Security.Cryptography;
 using Mono.Xml;
 
-namespace Mono.Security {
+namespace Mono.Security
+{
+    /* RUNTIME
+     *				yes
+     *	in_gac ---------------------------------\
+     *		|				|
+     *		| no				\/
+     *		|			return true
+     * CLASS LIBRARY|
+     *		|
+     * 		|
+     *		|
+     *	bool StrongNameManager.MustVerify
+     *		|
+     *		|
+     *		\/		not found
+     *		Token --------------------------\
+     *		|				|
+     *		| present ?			|
+     *		|				|
+     *		\/		not found	|
+     *	Assembly Name --------------------------|
+     *		|				|
+     *		| present ?			|
+     *		| or "*"			|
+     *		\/		not found	|
+     *		User ---------------------------|
+     *		|				|
+     *		| present ?			|
+     *		| or "*"			|
+     *		\/				\/
+     *	return false			return true
+     *	SKIP VERIFICATION		VERIFY ASSEMBLY
+     */
 
-	/* RUNTIME
-	 *				yes
-	 *	in_gac ---------------------------------\
-	 *		|				|
-	 *		| no				\/
-	 *		|			return true
-	 * CLASS LIBRARY|
-	 *		|
-	 * 		|
-	 *		|				
-	 *	bool StrongNameManager.MustVerify
-	 *		|
-	 *		|
-	 *		\/		not found	
-	 *		Token --------------------------\
-	 *		|				|
-	 *		| present ?			|
-	 *		|				|
-	 *		\/		not found	|
-	 *	Assembly Name --------------------------|
-	 *		|				|
-	 *		| present ?			|
-	 *		| or "*"			|
-	 *		\/		not found	|
-	 *		User ---------------------------|
-	 *		|				|
-	 *		| present ?			|
-	 *		| or "*"			|
-	 *		\/				\/
-	 *	return false			return true
-	 *	SKIP VERIFICATION		VERIFY ASSEMBLY
-	 */
+    internal class StrongNameManager
+    {
+        private class Element
+        {
+            internal Hashtable assemblies;
 
-	internal class StrongNameManager {
+            public Element()
+            {
+                assemblies = new Hashtable();
+            }
 
-		private class Element {
-			internal Hashtable assemblies;
+            public Element(string assembly, string users)
+                : this()
+            {
+                assemblies.Add(assembly, users);
+            }
 
-			public Element () 
-			{
-				assemblies = new Hashtable ();
-			}
+            public string GetUsers(string assembly)
+            {
+                return (string)assemblies[assembly];
+            }
+        }
 
-			public Element (string assembly, string users) : this ()
-			{
-				assemblies.Add (assembly, users);
-			}
+        private static Hashtable mappings;
+        private static Hashtable tokens;
 
-			public string GetUsers (string assembly) 
-			{
-				return (string) assemblies [assembly];
-			}
-		}
+        static StrongNameManager() { }
 
-		static private Hashtable mappings;
-		static private Hashtable tokens;
+        // note: more than one configuration file can be loaded at the
+        // same time (e.g. user specific and machine specific config).
+        static public void LoadConfig(string filename)
+        {
+            if (File.Exists(filename))
+            {
+                SecurityParser sp = new SecurityParser();
+                using (StreamReader sr = new StreamReader(filename))
+                {
+                    string xml = sr.ReadToEnd();
+                    sp.LoadXml(xml);
+                }
+                SecurityElement root = sp.ToXml();
+                if ((root != null) && (root.Tag == "configuration"))
+                {
+                    SecurityElement strongnames = root.SearchForChildByTag("strongNames");
+                    if ((strongnames != null) && (strongnames.Children.Count > 0))
+                    {
+                        SecurityElement mapping = strongnames.SearchForChildByTag(
+                            "pubTokenMapping"
+                        );
+                        if ((mapping != null) && (mapping.Children.Count > 0))
+                        {
+                            LoadMapping(mapping);
+                        }
 
-		static StrongNameManager () 
-		{
-		}
+                        SecurityElement settings = strongnames.SearchForChildByTag(
+                            "verificationSettings"
+                        );
+                        if ((settings != null) && (settings.Children.Count > 0))
+                        {
+                            LoadVerificationSettings(settings);
+                        }
+                    }
+                }
+            }
+        }
 
-		// note: more than one configuration file can be loaded at the 
-		// same time (e.g. user specific and machine specific config).
-		static public void LoadConfig (string filename) 
-		{
-			if (File.Exists (filename)) {
-				SecurityParser sp = new SecurityParser ();
-				using (StreamReader sr = new StreamReader (filename)) {
-					string xml = sr.ReadToEnd ();
-					sp.LoadXml (xml);
-				}
-				SecurityElement root = sp.ToXml ();
-				if ((root != null) && (root.Tag == "configuration")) {
-					SecurityElement strongnames  = root.SearchForChildByTag ("strongNames");
-					if ((strongnames != null) && (strongnames.Children.Count > 0)) {
-						SecurityElement mapping  = strongnames.SearchForChildByTag ("pubTokenMapping");
-						if ((mapping != null) && (mapping.Children.Count > 0)) {
-							LoadMapping (mapping);
-						}
+        private static void LoadMapping(SecurityElement mapping)
+        {
+            if (mappings == null)
+            {
+                mappings = new Hashtable();
+            }
 
-						SecurityElement settings = strongnames.SearchForChildByTag ("verificationSettings");
-						if ((settings != null) && (settings.Children.Count > 0)) {
-							LoadVerificationSettings (settings);
-						}
-					}
-				}
-			}
-		}
+            lock (mappings.SyncRoot)
+            {
+                foreach (SecurityElement item in mapping.Children)
+                {
+                    if (item.Tag != "map")
+                        continue;
 
-		static private void LoadMapping (SecurityElement mapping) 
-		{
-			if (mappings == null) {
-				mappings = new Hashtable ();
-			}
+                    string token = item.Attribute("Token");
+                    if ((token == null) || (token.Length != 16))
+                        continue; // invalid entry
+                    token = token.ToUpper(CultureInfo.InvariantCulture);
 
-			lock (mappings.SyncRoot) {
-				foreach (SecurityElement item in mapping.Children) {
-					if (item.Tag != "map")
-						continue;
+                    string publicKey = item.Attribute("PublicKey");
+                    if (publicKey == null)
+                        continue; // invalid entry
 
-					string token = item.Attribute ("Token");
-					if ((token == null) || (token.Length != 16))
-						continue; // invalid entry
-					token = token.ToUpper (CultureInfo.InvariantCulture);
+                    // watch for duplicate entries
+                    if (mappings[token] == null)
+                    {
+                        mappings.Add(token, publicKey);
+                    }
+                    else
+                    {
+                        // replace existing mapping
+                        mappings[token] = publicKey;
+                    }
+                }
+            }
+        }
 
-					string publicKey = item.Attribute ("PublicKey");
-					if (publicKey == null)
-						continue; // invalid entry
-				
-					// watch for duplicate entries
-					if (mappings [token] == null) {
-						mappings.Add (token, publicKey);
-					}
-					else {
-						// replace existing mapping
-						mappings [token] = publicKey;
-					}
-				}
-			}
-		}
+        private static void LoadVerificationSettings(SecurityElement settings)
+        {
+            if (tokens == null)
+            {
+                tokens = new Hashtable();
+            }
 
-		static private void LoadVerificationSettings (SecurityElement settings) 
-		{
-			if (tokens == null) {
-				tokens = new Hashtable ();
-			}
+            lock (tokens.SyncRoot)
+            {
+                foreach (SecurityElement item in settings.Children)
+                {
+                    if (item.Tag != "skip")
+                        continue;
 
-			lock (tokens.SyncRoot) {
-				foreach (SecurityElement item in settings.Children) {
-					if (item.Tag != "skip")
-						continue;
+                    string token = item.Attribute("Token");
+                    if (token == null)
+                        continue; // bad entry
+                    token = token.ToUpper(CultureInfo.InvariantCulture);
 
-					string token = item.Attribute ("Token");
-					if (token == null)
-						continue;	// bad entry
-					token = token.ToUpper (CultureInfo.InvariantCulture);
+                    string assembly = item.Attribute("Assembly");
+                    if (assembly == null)
+                        assembly = "*";
 
-					string assembly = item.Attribute ("Assembly");
-					if (assembly == null)
-						assembly = "*";
+                    string users = item.Attribute("Users");
+                    if (users == null)
+                        users = "*";
 
-					string users = item.Attribute ("Users");
-					if (users == null)
-						users = "*";
+                    Element el = (Element)tokens[token];
+                    if (el == null)
+                    {
+                        // new token
+                        el = new Element(assembly, users);
+                        tokens.Add(token, el);
+                        continue;
+                    }
 
-					Element el = (Element) tokens [token];
-					if (el == null) {
-						// new token
-						el = new Element (assembly, users);
-						tokens.Add (token, el);
-						continue;
-					}
+                    // existing token
+                    string a = (string)el.assemblies[assembly];
+                    if (a == null)
+                    {
+                        // new assembly
+                        el.assemblies.Add(assembly, users);
+                        continue;
+                    }
 
-					// existing token
-					string a = (string) el.assemblies [assembly];
-					if (a == null) {
-						// new assembly
-						el.assemblies.Add (assembly, users);
-						continue;
-					}
+                    // existing assembly
+                    if (users == "*")
+                    {
+                        // all users (drop current users)
+                        el.assemblies[assembly] = "*";
+                        continue;
+                    }
 
-					// existing assembly
-					if (users == "*") {
-						// all users (drop current users)
-						el.assemblies [assembly] = "*";
-						continue;
-					}
+                    // new users, add to existing
+                    string existing = (string)el.assemblies[assembly];
+                    string newusers = String.Concat(existing, ",", users);
+                    el.assemblies[assembly] = newusers;
+                }
+            }
+        }
 
-					// new users, add to existing
-					string existing = (string) el.assemblies [assembly];
-					string newusers = String.Concat (existing, ",", users);
-					el.assemblies [assembly] = newusers;
-				}
-			}
-		}
+        public static byte[] GetMappedPublicKey(byte[] token)
+        {
+            if ((mappings == null) || (token == null))
+                return null;
 
-		static public byte[] GetMappedPublicKey (byte[] token) 
-		{
-			if ((mappings == null) || (token == null))
-				return null;
+            string t = CryptoConvert.ToHex(token);
+            string pk = (string)mappings[t];
+            if (pk == null)
+                return null;
 
-			string t = CryptoConvert.ToHex (token);
-			string pk = (string) mappings [t];
-			if (pk == null)
-				return null;
+            return CryptoConvert.FromHex(pk);
+        }
 
-			return CryptoConvert.FromHex (pk);
-		}
+        // it is possible to skip verification for assemblies
+        // or a strongname public key using the "sn" tool.
+        // note: only the runtime checks if the assembly is loaded
+        // from the GAC to skip verification
+        static public bool MustVerify(AssemblyName an)
+        {
+            if ((an == null) || (tokens == null))
+                return true;
 
-		// it is possible to skip verification for assemblies 
-		// or a strongname public key using the "sn" tool.
-		// note: only the runtime checks if the assembly is loaded 
-		// from the GAC to skip verification
-		static public bool MustVerify (AssemblyName an)
-		{
-			if ((an == null) || (tokens == null))
-				return true;
+            string token = CryptoConvert.ToHex(an.GetPublicKeyToken());
+            Element el = (Element)tokens[token];
+            if (el != null)
+            {
+                // look for this specific assembly first
+                string users = el.GetUsers(an.Name);
+                if (users == null)
+                {
+                    // nothing for the specific assembly
+                    // so look for "*" assembly
+                    users = el.GetUsers("*");
+                }
 
-			string token = CryptoConvert.ToHex (an.GetPublicKeyToken ());
-			Element el = (Element) tokens [token];
-			if (el != null) {
-				// look for this specific assembly first
-				string users = el.GetUsers (an.Name);
-				if (users == null) {
-					// nothing for the specific assembly
-					// so look for "*" assembly
-					users = el.GetUsers ("*");
-				}
+                if (users != null)
+                {
+                    // applicable to any user ?
+                    if (users == "*")
+                        return false;
+                    // applicable to the current user ?
+                    return (users.IndexOf(Environment.UserName) < 0);
+                }
+            }
 
-				if (users != null) {
-					// applicable to any user ?
-					if (users == "*")
-						return false;
-					// applicable to the current user ?
-					return (users.IndexOf (Environment.UserName) < 0);
-				}
-			}
+            // we must check verify the strongname on the assembly
+            return true;
+        }
 
-			// we must check verify the strongname on the assembly
-			return true;
-		}
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Public Key Token\tAssemblies\t\tUsers");
+            sb.Append(Environment.NewLine);
+            if (tokens == null)
+            {
+                sb.Append("none");
+                return sb.ToString();
+            }
 
-		public override string ToString () 
-		{
-			StringBuilder sb = new StringBuilder ();
-			sb.Append ("Public Key Token\tAssemblies\t\tUsers");
-			sb.Append (Environment.NewLine);
-			if (tokens == null) {
-				sb.Append ("none");
-				return sb.ToString ();
-			}
-
-			foreach (DictionaryEntry token in tokens) {
-				sb.Append ((string)token.Key);
-				Element t = (Element) token.Value;
-				bool first = true;
-				foreach (DictionaryEntry assembly in t.assemblies) {
-					if (first) {
-						sb.Append ("\t");
-						first = false;
-					}
-					else {
-						sb.Append ("\t\t\t");
-					}
-					sb.Append ((string)assembly.Key);
-					sb.Append ("\t");
-					string users = (string)assembly.Value;
-					if (users == "*")
-						users = "All users";
-					sb.Append (users);
-					sb.Append (Environment.NewLine);
-				}
-			}
-			return sb.ToString ();
-		}
-	}
+            foreach (DictionaryEntry token in tokens)
+            {
+                sb.Append((string)token.Key);
+                Element t = (Element)token.Value;
+                bool first = true;
+                foreach (DictionaryEntry assembly in t.assemblies)
+                {
+                    if (first)
+                    {
+                        sb.Append("\t");
+                        first = false;
+                    }
+                    else
+                    {
+                        sb.Append("\t\t\t");
+                    }
+                    sb.Append((string)assembly.Key);
+                    sb.Append("\t");
+                    string users = (string)assembly.Value;
+                    if (users == "*")
+                        users = "All users";
+                    sb.Append(users);
+                    sb.Append(Environment.NewLine);
+                }
+            }
+            return sb.ToString();
+        }
+    }
 }

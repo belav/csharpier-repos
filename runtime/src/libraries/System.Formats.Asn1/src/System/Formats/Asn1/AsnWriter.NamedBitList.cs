@@ -64,7 +64,8 @@ namespace System.Formats.Asn1
         ///
         ///   <typeparamref name="TEnum"/> is not declared [<see cref="FlagsAttribute"/>].
         /// </exception>
-        public void WriteNamedBitList<TEnum>(TEnum value, Asn1Tag? tag = null) where TEnum : Enum
+        public void WriteNamedBitList<TEnum>(TEnum value, Asn1Tag? tag = null)
+            where TEnum : Enum
         {
             CheckUniversalTag(tag, UniversalTagNumber.BitString);
 
@@ -111,7 +112,8 @@ namespace System.Formats.Asn1
             {
                 throw new ArgumentException(
                     SR.Argument_NamedBitListRequiresFlagsEnum,
-                    nameof(tEnum));
+                    nameof(tEnum)
+                );
             }
 
             ulong integralValue;
@@ -166,10 +168,7 @@ namespace System.Formats.Asn1
                 int byteLen = (indexOfHighestSetBit / 8) + 1;
                 int unusedBitCount = 7 - (indexOfHighestSetBit % 8);
 
-                WriteBitString(
-                    temp.Slice(0, byteLen),
-                    unusedBitCount,
-                    tag);
+                WriteBitString(temp.Slice(0, byteLen), unusedBitCount, tag);
             }
         }
 

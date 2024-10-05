@@ -12,7 +12,11 @@ public class ServerNameSegmentTests
     [InlineData("foobar", 80, "foobar")]
     [InlineData("foobar", 443, "foobar")]
     [InlineData("foobar", 8080, "foobar")]
-    [InlineData("2001:0db8:85a3:0000:0000:8a2e:0370:7334", 8080, "[2001:0db8:85a3:0000:0000:8a2e:0370:7334]")]
+    [InlineData(
+        "2001:0db8:85a3:0000:0000:8a2e:0370:7334",
+        8080,
+        "[2001:0db8:85a3:0000:0000:8a2e:0370:7334]"
+    )]
     [InlineData("127.0.0.1", 8080, "127.0.0.1")]
     public void AssertServerNameIsCorrect(string host, int port, string expectedResult)
     {

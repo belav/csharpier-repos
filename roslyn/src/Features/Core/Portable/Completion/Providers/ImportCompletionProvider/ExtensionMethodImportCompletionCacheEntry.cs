@@ -16,14 +16,18 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         /// <summary>
         /// Mapping from the name of receiver type to extension method symbol infos.
         /// </summary>
-        public readonly MultiDictionary<string, DeclaredSymbolInfo> ReceiverTypeNameToExtensionMethodMap { get; }
+        public readonly MultiDictionary<
+            string,
+            DeclaredSymbolInfo
+        > ReceiverTypeNameToExtensionMethodMap { get; }
 
         public bool ContainsExtensionMethod => !ReceiverTypeNameToExtensionMethodMap.IsEmpty;
 
         private ExtensionMethodImportCompletionCacheEntry(
             Checksum checksum,
             string language,
-            MultiDictionary<string, DeclaredSymbolInfo> receiverTypeNameToExtensionMethodMap)
+            MultiDictionary<string, DeclaredSymbolInfo> receiverTypeNameToExtensionMethodMap
+        )
         {
             Checksum = checksum;
             Language = language;
@@ -35,19 +39,26 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             private readonly Checksum _checksum = checksum;
             private readonly string _language = langauge;
 
-            private readonly MultiDictionary<string, DeclaredSymbolInfo> _mapBuilder = new MultiDictionary<string, DeclaredSymbolInfo>(comparer);
+            private readonly MultiDictionary<string, DeclaredSymbolInfo> _mapBuilder =
+                new MultiDictionary<string, DeclaredSymbolInfo>(comparer);
 
             public ExtensionMethodImportCompletionCacheEntry ToCacheEntry()
             {
                 return new ExtensionMethodImportCompletionCacheEntry(
                     _checksum,
                     _language,
-                    _mapBuilder);
+                    _mapBuilder
+                );
             }
 
             public void AddItem(TopLevelSyntaxTreeIndex syntaxIndex)
             {
-                foreach (var (receiverType, symbolInfoIndices) in syntaxIndex.ReceiverTypeNameToExtensionMethodMap)
+                foreach (
+                    var (
+                        receiverType,
+                        symbolInfoIndices
+                    ) in syntaxIndex.ReceiverTypeNameToExtensionMethodMap
+                )
                 {
                     foreach (var index in symbolInfoIndices)
                     {

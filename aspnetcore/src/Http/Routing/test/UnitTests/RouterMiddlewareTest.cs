@@ -21,7 +21,7 @@ public class RouterMiddlewareTest
         services.AddLogging();
         var httpContext = new DefaultHttpContext
         {
-            RequestServices = services.BuildServiceProvider()
+            RequestServices = services.BuildServiceProvider(),
         };
 
         httpContext.Request.Path = "/foo/10";
@@ -51,14 +51,17 @@ public class RouterMiddlewareTest
 
         var route = new Route(handler, "/foo/{id}", Mock.Of<IInlineConstraintResolver>());
 
-        var middleware = new RouterMiddleware(context => Task.CompletedTask, NullLoggerFactory.Instance, route);
+        var middleware = new RouterMiddleware(
+            context => Task.CompletedTask,
+            NullLoggerFactory.Instance,
+            route
+        );
 
         // Act
         await middleware.Invoke(httpContext);
 
         // Assert
         Assert.True(routeHandlerExecuted);
-
     }
 
     [Fact]
@@ -70,7 +73,8 @@ public class RouterMiddlewareTest
 
         var sink = new TestSink(
             TestSink.EnableWithTypeName<RouterMiddleware>,
-            TestSink.EnableWithTypeName<RouterMiddleware>);
+            TestSink.EnableWithTypeName<RouterMiddleware>
+        );
         var loggerFactory = new TestLoggerFactory(sink, enabled: true);
 
         var httpContext = new DefaultHttpContext();
@@ -101,7 +105,8 @@ public class RouterMiddlewareTest
 
         var sink = new TestSink(
             TestSink.EnableWithTypeName<RouterMiddleware>,
-            TestSink.EnableWithTypeName<RouterMiddleware>);
+            TestSink.EnableWithTypeName<RouterMiddleware>
+        );
         var loggerFactory = new TestLoggerFactory(sink, enabled: true);
 
         var httpContext = new DefaultHttpContext();

@@ -13,7 +13,11 @@ namespace ILCompiler.Win32Resources
 {
     public unsafe partial class ResourceData
     {
-        private void ReadResourceData(BlobReader resourceReader, PEReader peFile, Func<object, object, ushort, bool> resourceFilter)
+        private void ReadResourceData(
+            BlobReader resourceReader,
+            PEReader peFile,
+            Func<object, object, ushort, bool> resourceFilter
+        )
         {
             DoResourceDirectoryRead(resourceReader, 0, ProcessOuterResource);
             return;
@@ -26,15 +30,27 @@ namespace ILCompiler.Win32Resources
                 DoResourceDirectoryRead(resourceReader, offset, ProcessNameList);
                 return;
 
-                void ProcessNameList(object name, uint offsetOfLanguageList, bool isNameListDictionaryEntry)
+                void ProcessNameList(
+                    object name,
+                    uint offsetOfLanguageList,
+                    bool isNameListDictionaryEntry
+                )
                 {
                     if (!isNameListDictionaryEntry)
                         throw new ArgumentException();
 
-                    DoResourceDirectoryRead(resourceReader, offsetOfLanguageList, ProcessLanguageList);
+                    DoResourceDirectoryRead(
+                        resourceReader,
+                        offsetOfLanguageList,
+                        ProcessLanguageList
+                    );
                     return;
 
-                    void ProcessLanguageList(object languageName, uint offsetOfLanguageListEntry, bool isLanguageListEntryIsDictionaryEntry)
+                    void ProcessLanguageList(
+                        object languageName,
+                        uint offsetOfLanguageListEntry,
+                        bool isLanguageListEntryIsDictionaryEntry
+                    )
                     {
                         if (languageName is string)
                             throw new ArgumentException();
@@ -43,10 +59,14 @@ namespace ILCompiler.Win32Resources
                             throw new ArgumentException();
 
                         resourceReader.Offset = checked((int)offsetOfLanguageListEntry);
-                        IMAGE_RESOURCE_DATA_ENTRY resourceData = new IMAGE_RESOURCE_DATA_ENTRY(ref resourceReader);
+                        IMAGE_RESOURCE_DATA_ENTRY resourceData = new IMAGE_RESOURCE_DATA_ENTRY(
+                            ref resourceReader
+                        );
 
                         // The actual resource data offset is relative to the start address of the file
-                        BlobReader resourceDataBlob = peFile.GetSectionData(checked((int)resourceData.OffsetToData)).GetReader(0, checked((int)resourceData.Size));
+                        BlobReader resourceDataBlob = peFile
+                            .GetSectionData(checked((int)resourceData.OffsetToData))
+                            .GetReader(0, checked((int)resourceData.Size));
                         byte[] data = resourceDataBlob.ReadBytes((int)resourceData.Size);
 
                         if (resourceFilter != null)
@@ -61,7 +81,11 @@ namespace ILCompiler.Win32Resources
             }
         }
 
-        private static void DoResourceDirectoryRead(BlobReader resourceReaderExternal, uint startOffset, Action<object, uint, bool> entry)
+        private static void DoResourceDirectoryRead(
+            BlobReader resourceReaderExternal,
+            uint startOffset,
+            Action<object, uint, bool> entry
+        )
         {
             // Create a copy of the Mu, so that we don't allow the delegate to affect its state
             BlobReader resourceReader = resourceReaderExternal;
@@ -69,7 +93,9 @@ namespace ILCompiler.Win32Resources
             IMAGE_RESOURCE_DIRECTORY directory = new IMAGE_RESOURCE_DIRECTORY(ref resourceReader);
             for (uint i = 0; i < directory.NumberOfNamedEntries + directory.NumberOfIdEntries; i++)
             {
-                IMAGE_RESOURCE_DIRECTORY_ENTRY directoryEntry = new IMAGE_RESOURCE_DIRECTORY_ENTRY(ref resourceReader);
+                IMAGE_RESOURCE_DIRECTORY_ENTRY directoryEntry = new IMAGE_RESOURCE_DIRECTORY_ENTRY(
+                    ref resourceReader
+                );
 
                 object name;
                 if ((directoryEntry.Name & 0x80000000) != 0)

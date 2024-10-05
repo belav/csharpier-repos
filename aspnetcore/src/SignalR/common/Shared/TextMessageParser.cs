@@ -10,7 +10,10 @@ namespace Microsoft.AspNetCore.Internal;
 internal static class TextMessageParser
 {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool TryParseMessage(ref ReadOnlySequence<byte> buffer, out ReadOnlySequence<byte> payload)
+    public static bool TryParseMessage(
+        ref ReadOnlySequence<byte> buffer,
+        out ReadOnlySequence<byte> payload
+    )
     {
         if (buffer.IsSingleSegment)
         {
@@ -34,7 +37,10 @@ internal static class TextMessageParser
         }
     }
 
-    private static bool TryParseMessageMultiSegment(ref ReadOnlySequence<byte> buffer, out ReadOnlySequence<byte> payload)
+    private static bool TryParseMessageMultiSegment(
+        ref ReadOnlySequence<byte> buffer,
+        out ReadOnlySequence<byte> payload
+    )
     {
         var position = buffer.PositionOf(TextMessageFormatter.RecordSeparator);
         if (position == null)

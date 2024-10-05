@@ -5,13 +5,13 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
 using System.Threading;
-using System.Diagnostics;
-using Roslyn.Utilities;
 using Microsoft.CodeAnalysis.Symbols;
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
@@ -27,9 +27,7 @@ namespace Microsoft.CodeAnalysis
             public readonly ImmutableArray<ModuleMetadata> Modules;
             public readonly PEAssembly? Assembly;
 
-            private Data()
-            {
-            }
+            private Data() { }
 
             public Data(ImmutableArray<ModuleMetadata> modules, PEAssembly assembly)
             {
@@ -70,7 +68,8 @@ namespace Microsoft.CodeAnalysis
         /// <remarks>
         /// Guarded by <see cref="CommonReferenceManager.SymbolCacheAndReferenceManagerStateGuard"/>.
         /// </remarks>
-        internal readonly WeakList<IAssemblySymbolInternal> CachedSymbols = new WeakList<IAssemblySymbolInternal>();
+        internal readonly WeakList<IAssemblySymbolInternal> CachedSymbols =
+            new WeakList<IAssemblySymbolInternal>();
 
         // creates a copy
         private AssemblyMetadata(AssemblyMetadata other, bool shareCachedSymbols)
@@ -94,7 +93,10 @@ namespace Microsoft.CodeAnalysis
             _initialModules = modules;
         }
 
-        internal AssemblyMetadata(ModuleMetadata manifestModule, Func<string, ModuleMetadata> moduleFactory)
+        internal AssemblyMetadata(
+            ModuleMetadata manifestModule,
+            Func<string, ModuleMetadata> moduleFactory
+        )
             : base(isImageOwner: true, id: MetadataId.CreateNewId())
         {
             Debug.Assert(manifestModule != null);
@@ -166,7 +168,13 @@ namespace Microsoft.CodeAnalysis
 
         internal static AssemblyMetadata CreateFromFile(ModuleMetadata manifestModule, string path)
         {
-            return new AssemblyMetadata(manifestModule, moduleName => ModuleMetadata.CreateFromFile(Path.Combine(Path.GetDirectoryName(path) ?? "", moduleName)));
+            return new AssemblyMetadata(
+                manifestModule,
+                moduleName =>
+                    ModuleMetadata.CreateFromFile(
+                        Path.Combine(Path.GetDirectoryName(path) ?? "", moduleName)
+                    )
+            );
         }
 
         /// <summary>
@@ -199,7 +207,10 @@ namespace Microsoft.CodeAnalysis
         {
             if (modules.IsDefaultOrEmpty)
             {
-                throw new ArgumentException(CodeAnalysisResources.AssemblyMustHaveAtLeastOneModule, nameof(modules));
+                throw new ArgumentException(
+                    CodeAnalysisResources.AssemblyMustHaveAtLeastOneModule,
+                    nameof(modules)
+                );
             }
 
             for (int i = 0; i < modules.Length; i++)
@@ -211,7 +222,10 @@ namespace Microsoft.CodeAnalysis
 
                 if (!modules[i].IsImageOwner)
                 {
-                    throw new ArgumentException(CodeAnalysisResources.ModuleCopyCannotBeUsedToCreateAssemblyMetadata, nameof(modules) + "[" + i + "]");
+                    throw new ArgumentException(
+                        CodeAnalysisResources.ModuleCopyCannotBeUsedToCreateAssemblyMetadata,
+                        nameof(modules) + "[" + i + "]"
+                    );
                 }
             }
 
@@ -251,7 +265,7 @@ namespace Microsoft.CodeAnalysis
         /// <remarks>
         /// The resulting copy shares the metadata images and metadata information read from them with the original.
         /// It doesn't own the underlying metadata images and is not responsible for its disposal.
-        /// 
+        ///
         /// This is used, for example, when a metadata cache needs to return the cached metadata to its users
         /// while keeping the ownership of the cached metadata object.
         /// </remarks>
@@ -327,7 +341,9 @@ namespace Microsoft.CodeAnalysis
                         var additionalModuleNames = _initialModules[0].GetModuleNames();
                         if (additionalModuleNames.Length > 0)
                         {
-                            moduleBuilder = ImmutableArray.CreateBuilder<ModuleMetadata>(1 + additionalModuleNames.Length);
+                            moduleBuilder = ImmutableArray.CreateBuilder<ModuleMetadata>(
+                                1 + additionalModuleNames.Length
+                            );
                             moduleBuilder.Add(_initialModules[0]);
 
                             foreach (string moduleName in additionalModuleNames)
@@ -342,7 +358,8 @@ namespace Microsoft.CodeAnalysis
                     var assembly = new PEAssembly(this, modules.SelectAsArray(m => m.Module));
                     var newData = new Data(modules, assembly);
 
-                    createdModulesUsed = Interlocked.CompareExchange(ref _lazyData, newData, null) == null;
+                    createdModulesUsed =
+                        Interlocked.CompareExchange(ref _lazyData, newData, null) == null;
                 }
                 finally
                 {
@@ -390,7 +407,9 @@ namespace Microsoft.CodeAnalysis
                 return;
             }
 
-            Debug.Assert(_initialModules.Length == 1 || _initialModules.Length == previousData.Modules.Length);
+            Debug.Assert(
+                _initialModules.Length == 1 || _initialModules.Length == previousData.Modules.Length
+            );
 
             // dispose additional modules created lazily:
             for (int i = _initialModules.Length; i < previousData.Modules.Length; i++)
@@ -418,7 +437,10 @@ namespace Microsoft.CodeAnalysis
             {
                 // Ignore winmd modules since runtime winmd modules may be loaded as non-primary modules.
                 var module = modules[i].Module;
-                if (!module.IsLinkedModule && module.MetadataReader.MetadataKind != MetadataKind.WindowsMetadata)
+                if (
+                    !module.IsLinkedModule
+                    && module.MetadataReader.MetadataKind != MetadataKind.WindowsMetadata
+                )
                 {
                     return false;
                 }
@@ -449,9 +471,20 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<string> aliases = default,
             bool embedInteropTypes = false,
             string? filePath = null,
-            string? display = null)
+            string? display = null
+        )
         {
-            return new MetadataImageReference(this, new MetadataReferenceProperties(MetadataImageKind.Assembly, aliases, embedInteropTypes), documentation, filePath, display);
+            return new MetadataImageReference(
+                this,
+                new MetadataReferenceProperties(
+                    MetadataImageKind.Assembly,
+                    aliases,
+                    embedInteropTypes
+                ),
+                documentation,
+                filePath,
+                display
+            );
         }
     }
 }

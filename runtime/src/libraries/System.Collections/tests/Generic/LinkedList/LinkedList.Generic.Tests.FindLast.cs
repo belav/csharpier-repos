@@ -17,7 +17,10 @@ namespace System.Collections.Tests
             LinkedList<T> linkedList = new LinkedList<T>();
             int seed = 21543;
             int arraySize = 16;
-            T[] headItems, tailItems, prependDefaultHeadItems, prependDefaultTailItems;
+            T[] headItems,
+                tailItems,
+                prependDefaultHeadItems,
+                prependDefaultTailItems;
 
             headItems = new T[arraySize];
             tailItems = new T[arraySize];
@@ -109,7 +112,13 @@ namespace System.Collections.Tests
 
             tempItems = new T[headItems.Length + prependDefaultTailItems.Length];
             Array.Copy(headItems, tempItems, headItems.Length);
-            Array.Copy(prependDefaultTailItems, 0, tempItems, headItems.Length, prependDefaultTailItems.Length);
+            Array.Copy(
+                prependDefaultTailItems,
+                0,
+                tempItems,
+                headItems.Length,
+                prependDefaultTailItems.Length
+            );
 
             VerifyFindLast(linkedList, tempItems);
 

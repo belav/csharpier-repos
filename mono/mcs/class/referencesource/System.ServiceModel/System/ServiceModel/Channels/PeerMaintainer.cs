@@ -14,7 +14,6 @@ namespace System.ServiceModel.Channels
     using System.Threading;
     using Microsoft.Win32;
 
-
     delegate void NeighborClosedHandler(IPeerNeighbor neighbor);
     delegate void NeighborConnectedHandler(IPeerNeighbor neighbor);
     delegate void MaintainerClosedHandler();
@@ -31,7 +30,12 @@ namespace System.ServiceModel.Channels
         int NonClosingNeighborCount { get; }
         bool IsOpen { get; }
 
-        IAsyncResult BeginOpenNeighbor(PeerNodeAddress to, TimeSpan timeout, AsyncCallback callback, object asyncState);
+        IAsyncResult BeginOpenNeighbor(
+            PeerNodeAddress to,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object asyncState
+        );
         IPeerNeighbor EndOpenNeighbor(IAsyncResult result);
 
         void CloseNeighbor(IPeerNeighbor neighbor, PeerCloseReason closeReason);
@@ -44,12 +48,18 @@ namespace System.ServiceModel.Channels
     interface IConnectAlgorithms : IDisposable
     {
         void Connect(TimeSpan timeout);
-        void Initialize(IPeerMaintainer maintainer, PeerNodeConfig config, int wantedConnectedNeighbors, Dictionary<EndpointAddress, Referral> referralCache);
+        void Initialize(
+            IPeerMaintainer maintainer,
+            PeerNodeConfig config,
+            int wantedConnectedNeighbors,
+            Dictionary<EndpointAddress, Referral> referralCache
+        );
         void PruneConnections();
         void UpdateEndpointsCollection(ICollection<PeerNodeAddress> src);
     }
 
-    class PeerMaintainerBase<TConnectAlgorithms> : IPeerMaintainer where TConnectAlgorithms : IConnectAlgorithms, new()
+    class PeerMaintainerBase<TConnectAlgorithms> : IPeerMaintainer
+        where TConnectAlgorithms : IConnectAlgorithms, new()
     {
         public delegate void ConnectCallback(Exception e);
 
@@ -63,7 +73,7 @@ namespace System.ServiceModel.Channels
         PeerNodeTraceRecord traceRecord;
 
         // Double-checked locking pattern requires volatile for read/write synchronization
-        volatile bool isRunningMaintenance = false;                    // true indicates performing connection Maintenance
+        volatile bool isRunningMaintenance = false; // true indicates performing connection Maintenance
         volatile bool isOpen = false;
         IOThreadTimer maintainerTimer;
         public event ReferralsAddedHandler ReferralsAdded;
@@ -73,7 +83,11 @@ namespace System.ServiceModel.Channels
             get { return thisLock; }
         }
 
-        public PeerMaintainerBase(PeerNodeConfig config, PeerNeighborManager neighborManager, PeerFlooder flooder)
+        public PeerMaintainerBase(
+            PeerNodeConfig config,
+            PeerNeighborManager neighborManager,
+            PeerFlooder flooder
+        )
         {
             this.neighborManager = neighborManager;
             this.flooder = flooder;
@@ -86,7 +100,7 @@ namespace System.ServiceModel.Channels
 
         // Maintainer is expected to validate and accept the contents of referrals
         // and to determine how many referrals it will accept from the array.
-        // Neighbor reference is passed in case the Maintainer decided to reject a referral 
+        // Neighbor reference is passed in case the Maintainer decided to reject a referral
         // based on invalid content and close the neighbor.
         public bool AddReferrals(IList<Referral> referrals, IPeerNeighbor neighbor)
         {
@@ -100,18 +114,24 @@ namespace System.ServiceModel.Channels
             }
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCallback(SR.GetString(SR.ResolverException), e);
+                if (Fx.IsFatal(e))
+                    throw;
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCallback(
+                    SR.GetString(SR.ResolverException),
+                    e
+                );
             }
             if (referrals != null && canShareReferrals)
             {
                 foreach (Referral referral in referrals)
                 {
                     // If any referral is invalid then the connection is bad so don't accept any referals from this neighbor.
-                    if (referral == null
-                    || referral.NodeId == PeerTransportConstants.InvalidNodeId
-                    || !PeerValidateHelper.ValidNodeAddress(referral.Address)
-                    || !PeerValidateHelper.ValidReferralNodeAddress(referral.Address))
+                    if (
+                        referral == null
+                        || referral.NodeId == PeerTransportConstants.InvalidNodeId
+                        || !PeerValidateHelper.ValidNodeAddress(referral.Address)
+                        || !PeerValidateHelper.ValidReferralNodeAddress(referral.Address)
+                    )
                     {
                         valid = false;
                         break;
@@ -124,7 +144,10 @@ namespace System.ServiceModel.Channels
                         foreach (Referral referral in referrals)
                         {
                             EndpointAddress key = referral.Address.EndpointAddress;
-                            if (referralCache.Count <= this.config.MaxReferralCacheSize && !referralCache.ContainsKey(key))
+                            if (
+                                referralCache.Count <= this.config.MaxReferralCacheSize
+                                && !referralCache.ContainsKey(key)
+                            )
                             {
                                 referralCache.Add(key, referral);
                             }
@@ -149,8 +172,10 @@ namespace System.ServiceModel.Channels
             {
                 isOpen = false;
             }
-            maintainerTimer.Cancel();                        // No reconnect while closed
-            SystemEvents.PowerModeChanged -= new PowerModeChangedEventHandler(SystemEvents_PowerModeChanged);
+            maintainerTimer.Cancel(); // No reconnect while closed
+            SystemEvents.PowerModeChanged -= new PowerModeChangedEventHandler(
+                SystemEvents_PowerModeChanged
+            );
             MaintainerClosedHandler handler = MaintainerClosed;
             if (handler != null)
             {
@@ -179,9 +204,17 @@ namespace System.ServiceModel.Channels
                 {
                     if (DiagnosticUtility.ShouldTraceInformation)
                     {
-                        PeerMaintainerTraceRecord record = new PeerMaintainerTraceRecord(SR.GetString(SR.PeerMaintainerInitialConnect, this.config.MeshId));
-                        TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.PeerMaintainerActivity, SR.GetString(SR.TraceCodePeerMaintainerActivity),
-                            record, this, null);
+                        PeerMaintainerTraceRecord record = new PeerMaintainerTraceRecord(
+                            SR.GetString(SR.PeerMaintainerInitialConnect, this.config.MeshId)
+                        );
+                        TraceUtility.TraceEvent(
+                            TraceEventType.Information,
+                            TraceCode.PeerMaintainerActivity,
+                            SR.GetString(SR.TraceCodePeerMaintainerActivity),
+                            record,
+                            this,
+                            null
+                        );
                     }
 
                     TimeoutHelper timeoutHelper = new TimeoutHelper(config.MaintainerTimeout);
@@ -190,14 +223,25 @@ namespace System.ServiceModel.Channels
                     // I am sure that research would be interested in doing such a thing.
                     try
                     {
-                        maintainerTimer.Cancel();                   // No reconnect until after connect has succeeded
+                        maintainerTimer.Cancel(); // No reconnect until after connect has succeeded
 
-                        using (IConnectAlgorithms connectAlgorithm = (IConnectAlgorithms)new TConnectAlgorithms())
+                        using (
+                            IConnectAlgorithms connectAlgorithm = (IConnectAlgorithms)
+                                new TConnectAlgorithms()
+                        )
                         {
-                            connectAlgorithm.Initialize(this, config, config.MinNeighbors, referralCache);
+                            connectAlgorithm.Initialize(
+                                this,
+                                config,
+                                config.MinNeighbors,
+                                referralCache
+                            );
                             if (referralCache.Count == 0)
                             {
-                                ReadOnlyCollection<PeerNodeAddress> addresses = ResolveNewAddresses(timeoutHelper.RemainingTime(), false);
+                                ReadOnlyCollection<PeerNodeAddress> addresses = ResolveNewAddresses(
+                                    timeoutHelper.RemainingTime(),
+                                    false
+                                );
                                 connectAlgorithm.UpdateEndpointsCollection(addresses);
                             }
                             if (isOpen)
@@ -209,9 +253,10 @@ namespace System.ServiceModel.Channels
 #pragma warning suppress 56500 // covered by FxCOP
                     catch (Exception e)
                     {
-                        if (Fx.IsFatal(e)) throw;
+                        if (Fx.IsFatal(e))
+                            throw;
                         DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
-                        exception = e;                              // Exeption is saved and transferred
+                        exception = e; // Exeption is saved and transferred
                     }
                     if (isOpen)
                     {
@@ -235,9 +280,11 @@ namespace System.ServiceModel.Channels
                         }
                         catch (Exception e)
                         {
-                            if (Fx.IsFatal(e)) throw;
+                            if (Fx.IsFatal(e))
+                                throw;
                             DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
-                            if (exception == null) exception = e;                // Exeption is saved and transferred via callback
+                            if (exception == null)
+                                exception = e; // Exeption is saved and transferred via callback
                         }
                     }
                     lock (ThisLock)
@@ -274,29 +321,57 @@ namespace System.ServiceModel.Channels
                 {
                     if (DiagnosticUtility.ShouldTraceInformation)
                     {
-                        PeerMaintainerTraceRecord record = new PeerMaintainerTraceRecord(SR.GetString(SR.PeerMaintainerStarting, this.config.MeshId));
-                        TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.PeerMaintainerActivity, SR.GetString(SR.TraceCodePeerMaintainerActivity),
-                            record, this, null);
+                        PeerMaintainerTraceRecord record = new PeerMaintainerTraceRecord(
+                            SR.GetString(SR.PeerMaintainerStarting, this.config.MeshId)
+                        );
+                        TraceUtility.TraceEvent(
+                            TraceEventType.Information,
+                            TraceCode.PeerMaintainerActivity,
+                            SR.GetString(SR.TraceCodePeerMaintainerActivity),
+                            record,
+                            this,
+                            null
+                        );
                     }
 
                     TimeoutHelper timeoutHelper = new TimeoutHelper(config.MaintainerTimeout);
                     try
                     {
-                        maintainerTimer.Cancel();                               // No reconnect until after connect has succeeded
+                        maintainerTimer.Cancel(); // No reconnect until after connect has succeeded
 
                         int currentlyConnected = neighborManager.ConnectedNeighborCount;
-                        if (currentlyConnected != config.IdealNeighbors)        // Already at ideal no work to do
+                        if (currentlyConnected != config.IdealNeighbors) // Already at ideal no work to do
                         {
-                            using (IConnectAlgorithms connectAlgorithm = (IConnectAlgorithms)new TConnectAlgorithms())
+                            using (
+                                IConnectAlgorithms connectAlgorithm = (IConnectAlgorithms)
+                                    new TConnectAlgorithms()
+                            )
                             {
-                                connectAlgorithm.Initialize(this, config, config.IdealNeighbors, referralCache);
+                                connectAlgorithm.Initialize(
+                                    this,
+                                    config,
+                                    config.IdealNeighbors,
+                                    referralCache
+                                );
                                 if (currentlyConnected > config.IdealNeighbors)
                                 {
                                     if (DiagnosticUtility.ShouldTraceInformation)
                                     {
-                                        PeerMaintainerTraceRecord record = new PeerMaintainerTraceRecord(SR.GetString(SR.PeerMaintainerPruneMode, this.config.MeshId));
-                                        TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.PeerMaintainerActivity, SR.GetString(SR.TraceCodePeerMaintainerActivity),
-                                            record, this, null);
+                                        PeerMaintainerTraceRecord record =
+                                            new PeerMaintainerTraceRecord(
+                                                SR.GetString(
+                                                    SR.PeerMaintainerPruneMode,
+                                                    this.config.MeshId
+                                                )
+                                            );
+                                        TraceUtility.TraceEvent(
+                                            TraceEventType.Information,
+                                            TraceCode.PeerMaintainerActivity,
+                                            SR.GetString(SR.TraceCodePeerMaintainerActivity),
+                                            record,
+                                            this,
+                                            null
+                                        );
                                     }
                                     connectAlgorithm.PruneConnections();
                                 }
@@ -308,14 +383,30 @@ namespace System.ServiceModel.Channels
                                 {
                                     if (referralCache.Count == 0)
                                     {
-                                        ReadOnlyCollection<PeerNodeAddress> addresses = ResolveNewAddresses(timeoutHelper.RemainingTime(), true);
+                                        ReadOnlyCollection<PeerNodeAddress> addresses =
+                                            ResolveNewAddresses(
+                                                timeoutHelper.RemainingTime(),
+                                                true
+                                            );
                                         connectAlgorithm.UpdateEndpointsCollection(addresses);
                                     }
                                     if (DiagnosticUtility.ShouldTraceInformation)
                                     {
-                                        PeerMaintainerTraceRecord record = new PeerMaintainerTraceRecord(SR.GetString(SR.PeerMaintainerConnectMode, this.config.MeshId));
-                                        TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.PeerMaintainerActivity, SR.GetString(SR.TraceCodePeerMaintainerActivity),
-                                            record, this, null);
+                                        PeerMaintainerTraceRecord record =
+                                            new PeerMaintainerTraceRecord(
+                                                SR.GetString(
+                                                    SR.PeerMaintainerConnectMode,
+                                                    this.config.MeshId
+                                                )
+                                            );
+                                        TraceUtility.TraceEvent(
+                                            TraceEventType.Information,
+                                            TraceCode.PeerMaintainerActivity,
+                                            SR.GetString(SR.TraceCodePeerMaintainerActivity),
+                                            record,
+                                            this,
+                                            null
+                                        );
                                     }
                                     connectAlgorithm.Connect(timeoutHelper.RemainingTime());
                                 }
@@ -325,7 +416,8 @@ namespace System.ServiceModel.Channels
 #pragma warning suppress 56500 // covered by FxCOP
                     catch (Exception e)
                     {
-                        if (Fx.IsFatal(e)) throw;
+                        if (Fx.IsFatal(e))
+                            throw;
                         DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
                         // We ---- all non Fatal exceptions because this is a worker thread, with no user code waiting
                     }
@@ -333,9 +425,17 @@ namespace System.ServiceModel.Channels
                     {
                         if (DiagnosticUtility.ShouldTraceInformation)
                         {
-                            PeerMaintainerTraceRecord record = new PeerMaintainerTraceRecord("Maintainer cycle finish");
-                            TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.PeerMaintainerActivity, SR.GetString(SR.TraceCodePeerMaintainerActivity),
-                                record, this, null);
+                            PeerMaintainerTraceRecord record = new PeerMaintainerTraceRecord(
+                                "Maintainer cycle finish"
+                            );
+                            TraceUtility.TraceEvent(
+                                TraceEventType.Information,
+                                TraceCode.PeerMaintainerActivity,
+                                SR.GetString(SR.TraceCodePeerMaintainerActivity),
+                                record,
+                                this,
+                                null
+                            );
                         }
                     }
                     ResetMaintenance();
@@ -370,13 +470,24 @@ namespace System.ServiceModel.Channels
                     try
                     {
                         TimeoutHelper timeoutHelper = new TimeoutHelper(config.MaintainerTimeout);
-                        maintainerTimer.Cancel();                   // No maintainer until after connect has succeeded
+                        maintainerTimer.Cancel(); // No maintainer until after connect has succeeded
 
-                        using (IConnectAlgorithms connectAlgorithm = (IConnectAlgorithms)new TConnectAlgorithms())
+                        using (
+                            IConnectAlgorithms connectAlgorithm = (IConnectAlgorithms)
+                                new TConnectAlgorithms()
+                        )
                         {
                             // Always go to the resolver for RefreshConnection
-                            ReadOnlyCollection<PeerNodeAddress> addresses = ResolveNewAddresses(timeoutHelper.RemainingTime(), true);
-                            connectAlgorithm.Initialize(this, config, neighborManager.ConnectedNeighborCount + 1, new Dictionary<EndpointAddress, Referral>());
+                            ReadOnlyCollection<PeerNodeAddress> addresses = ResolveNewAddresses(
+                                timeoutHelper.RemainingTime(),
+                                true
+                            );
+                            connectAlgorithm.Initialize(
+                                this,
+                                config,
+                                neighborManager.ConnectedNeighborCount + 1,
+                                new Dictionary<EndpointAddress, Referral>()
+                            );
                             if (addresses.Count > 0)
                             {
                                 if (isOpen)
@@ -405,11 +516,12 @@ namespace System.ServiceModel.Channels
                     {
                         try
                         {
-                            maintainerTimer.Set(config.MaintainerInterval);                 // No reconnect until after connect has succeeded
+                            maintainerTimer.Set(config.MaintainerInterval); // No reconnect until after connect has succeeded
                         }
                         catch (Exception e)
                         {
-                            if (Fx.IsFatal(e)) throw;
+                            if (Fx.IsFatal(e))
+                                throw;
                             DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
                             // We ---- all non Fatal exceptions because this is a worker thread, with no user code waiting
                         }
@@ -440,8 +552,12 @@ namespace System.ServiceModel.Channels
             }
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCallback(SR.GetString(SR.ResolverException), e);
+                if (Fx.IsFatal(e))
+                    throw;
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCallback(
+                    SR.GetString(SR.ResolverException),
+                    e
+                );
             }
 
             if (canShareReferrals)
@@ -473,7 +589,11 @@ namespace System.ServiceModel.Channels
                         EndpointAddress key = neighbor.ListenAddress.EndpointAddress;
                     }
 
-                    if (isOpen && !isRunningMaintenance && neighborManager.ConnectedNeighborCount < config.MinNeighbors)
+                    if (
+                        isOpen
+                        && !isRunningMaintenance
+                        && neighborManager.ConnectedNeighborCount < config.MinNeighbors
+                    )
                     {
                         maintainerTimer.Set(0);
                     }
@@ -507,16 +627,22 @@ namespace System.ServiceModel.Channels
             }
             lock (ThisLock)
             {
-                SystemEvents.PowerModeChanged += new PowerModeChangedEventHandler(SystemEvents_PowerModeChanged);
+                SystemEvents.PowerModeChanged += new PowerModeChangedEventHandler(
+                    SystemEvents_PowerModeChanged
+                );
                 isOpen = true;
             }
         }
 
         // Get some addresses and make sure they are not in my neighborlist
-        ReadOnlyCollection<PeerNodeAddress> ResolveNewAddresses(TimeSpan timeLeft, bool retryResolve)
+        ReadOnlyCollection<PeerNodeAddress> ResolveNewAddresses(
+            TimeSpan timeLeft,
+            bool retryResolve
+        )
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeLeft);
-            Dictionary<string, PeerNodeAddress> alreadySeen = new Dictionary<string, PeerNodeAddress>();
+            Dictionary<string, PeerNodeAddress> alreadySeen =
+                new Dictionary<string, PeerNodeAddress>();
             List<PeerNodeAddress> reply = new List<PeerNodeAddress>();
 
             // Is this address me
@@ -529,28 +655,56 @@ namespace System.ServiceModel.Channels
             if (DiagnosticUtility.ShouldTraceInformation)
             {
                 PeerMaintainerTraceRecord record = new PeerMaintainerTraceRecord("Resolving");
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.PeerMaintainerActivity, SR.GetString(SR.TraceCodePeerMaintainerActivity),
-                    record, this, null);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.PeerMaintainerActivity,
+                    SR.GetString(SR.TraceCodePeerMaintainerActivity),
+                    record,
+                    this,
+                    null
+                );
             }
 
-            for (int i = 0; i < nresolves && reply.Count < config.MaxResolveAddresses && isOpen && timeoutHelper.RemainingTime() > TimeSpan.Zero; i++)
+            for (
+                int i = 0;
+                i < nresolves
+                    && reply.Count < config.MaxResolveAddresses
+                    && isOpen
+                    && timeoutHelper.RemainingTime() > TimeSpan.Zero;
+                i++
+            )
             {
                 ReadOnlyCollection<PeerNodeAddress> addresses;
                 try
                 {
-                    addresses = config.Resolver.Resolve(config.MeshId, config.MaxResolveAddresses, timeoutHelper.RemainingTime());
+                    addresses = config.Resolver.Resolve(
+                        config.MeshId,
+                        config.MaxResolveAddresses,
+                        timeoutHelper.RemainingTime()
+                    );
                 }
                 catch (Exception e)
                 {
-                    if (Fx.IsFatal(e)) throw;
+                    if (Fx.IsFatal(e))
+                        throw;
                     if (DiagnosticUtility.ShouldTraceInformation)
                     {
-                        PeerMaintainerTraceRecord record = new PeerMaintainerTraceRecord("Resolve exception " + e.Message);
-                        TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.PeerMaintainerActivity, SR.GetString(SR.TraceCodePeerMaintainerActivity),
-                            record, this, null);
+                        PeerMaintainerTraceRecord record = new PeerMaintainerTraceRecord(
+                            "Resolve exception " + e.Message
+                        );
+                        TraceUtility.TraceEvent(
+                            TraceEventType.Information,
+                            TraceCode.PeerMaintainerActivity,
+                            SR.GetString(SR.TraceCodePeerMaintainerActivity),
+                            record,
+                            this,
+                            null
+                        );
                     }
 
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(SR.GetString(SR.ResolverException), e));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new CommunicationException(SR.GetString(SR.ResolverException), e)
+                    );
                 }
 
                 if (addresses != null)
@@ -599,7 +753,12 @@ namespace System.ServiceModel.Channels
             foreach (IPeerNeighbor neighbor in this.neighborManager.GetConnectedNeighbors())
             {
                 UtilityExtension utilityExtension = neighbor.Extensions.Find<UtilityExtension>();
-                if (utilityExtension != null && utilityExtension.IsAccurate && utilityExtension.LinkUtility < minUtility && !neighbor.IsClosing)
+                if (
+                    utilityExtension != null
+                    && utilityExtension.IsAccurate
+                    && utilityExtension.LinkUtility < minUtility
+                    && !neighbor.IsClosing
+                )
                 {
                     minUtility = utilityExtension.LinkUtility;
                     leastUsefulNeighbor = neighbor;
@@ -608,7 +767,12 @@ namespace System.ServiceModel.Channels
             return leastUsefulNeighbor;
         }
 
-        IAsyncResult IPeerMaintainer.BeginOpenNeighbor(PeerNodeAddress address, TimeSpan timeout, AsyncCallback callback, object asyncState)
+        IAsyncResult IPeerMaintainer.BeginOpenNeighbor(
+            PeerNodeAddress address,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object asyncState
+        )
         {
             lock (ThisLock)
             {
@@ -663,14 +827,15 @@ namespace System.ServiceModel.Channels
                 return;
             ActionItem.Schedule(new Action<object>(PingAndRefresh), null);
         }
-
     }
 
     partial class PeerMaintainer : PeerMaintainerBase<ConnectAlgorithms>
     {
-        public PeerMaintainer(PeerNodeConfig config, PeerNeighborManager neighborManager, PeerFlooder flooder)
-            : base(config, neighborManager, flooder)
-        {
-        }
+        public PeerMaintainer(
+            PeerNodeConfig config,
+            PeerNeighborManager neighborManager,
+            PeerFlooder flooder
+        )
+            : base(config, neighborManager, flooder) { }
     }
 }

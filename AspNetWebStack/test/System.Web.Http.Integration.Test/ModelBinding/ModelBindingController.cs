@@ -58,7 +58,9 @@ namespace System.Web.Http.ModelBinding
             return value;
         }
 
-        public int GetIntCustom([ValueProvider(typeof(RequestHeadersValueProviderFactory))] int value)
+        public int GetIntCustom(
+            [ValueProvider(typeof(RequestHeadersValueProviderFactory))] int value
+        )
         {
             return value;
         }
@@ -169,7 +171,9 @@ namespace System.Web.Http.ModelBinding
             return item;
         }
 
-        public ComplexTypeWithNestedCollection PostComplexTypeFromUriWithNestedCollection([FromUri] ComplexTypeWithNestedCollection value)
+        public ComplexTypeWithNestedCollection PostComplexTypeFromUriWithNestedCollection(
+            [FromUri] ComplexTypeWithNestedCollection value
+        )
         {
             return value;
         }
@@ -180,7 +184,10 @@ namespace System.Web.Http.ModelBinding
         }
 
         // check if HttpRequestMessage prevents binding other parameters
-        public int PostComplexTypeHttpRequestMessage(HttpRequestMessage request, ModelBindOrder order)
+        public int PostComplexTypeHttpRequestMessage(
+            HttpRequestMessage request,
+            ModelBindOrder order
+        )
         {
             return Int32.Parse(order.ItemName) + order.Quantity;
         }
@@ -190,7 +197,10 @@ namespace System.Web.Http.ModelBinding
             return value;
         }
 
-        public string PostWithOptionalBodyParameterAndUriParameter([FromUri]int id, [FromBody] string value = "default")
+        public string PostWithOptionalBodyParameterAndUriParameter(
+            [FromUri] int id,
+            [FromBody] string value = "default"
+        )
         {
             return value;
         }
@@ -240,15 +250,28 @@ namespace System.Web.Http.ModelBinding
 
             if (x.Customer != null)
             {
-                Assert.True(y.Customer != null, "Actual Customer was null but expected was " + x.Customer.Name);
+                Assert.True(
+                    y.Customer != null,
+                    "Actual Customer was null but expected was " + x.Customer.Name
+                );
             }
             else if (x.Customer == null)
             {
-                Assert.True(y.Customer == null, "Actual Customer was not null but should have been.");
+                Assert.True(
+                    y.Customer == null,
+                    "Actual Customer was not null but should have been."
+                );
             }
             else
             {
-                Assert.True(String.Equals(x.Customer.Name, y.Customer.Name, StringComparison.Ordinal), String.Format("Expected Customer.Name '{0}' but actual was '{1}'", x.Customer.Name, y.Customer.Name));
+                Assert.True(
+                    String.Equals(x.Customer.Name, y.Customer.Name, StringComparison.Ordinal),
+                    String.Format(
+                        "Expected Customer.Name '{0}' but actual was '{1}'",
+                        x.Customer.Name,
+                        y.Customer.Name
+                    )
+                );
             }
 
             return true;
@@ -271,6 +294,7 @@ namespace System.Web.Http.ModelBinding
     public class RequestHeaderValueProvider : IValueProvider
     {
         HttpActionContext _actionContext;
+
         public RequestHeaderValueProvider(HttpActionContext actionContext)
         {
             _actionContext = actionContext;
@@ -283,7 +307,9 @@ namespace System.Web.Http.ModelBinding
 
         public ValueProviderResult GetValue(string key)
         {
-            string result = _actionContext.ControllerContext.Request.Headers.GetValues(key).FirstOrDefault();
+            string result = _actionContext
+                .ControllerContext.Request.Headers.GetValues(key)
+                .FirstOrDefault();
             return result == null
                 ? null
                 : new ValueProviderResult(result, result, CultureInfo.CurrentCulture);

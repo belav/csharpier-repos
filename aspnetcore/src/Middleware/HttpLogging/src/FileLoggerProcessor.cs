@@ -25,7 +25,9 @@ internal partial class FileLoggerProcessor : IAsyncDisposable
     private bool _firstFile = true;
 
     private readonly IOptionsMonitor<W3CLoggerOptions> _options;
-    private readonly BlockingCollection<string> _messageQueue = new BlockingCollection<string>(_maxQueuedMessages);
+    private readonly BlockingCollection<string> _messageQueue = new BlockingCollection<string>(
+        _maxQueuedMessages
+    );
     private readonly ILogger _logger;
     private readonly List<string> _currentBatch = new List<string>();
     private readonly Task _outputTask;
@@ -37,7 +39,11 @@ internal partial class FileLoggerProcessor : IAsyncDisposable
     private readonly object _pathLock = new object();
     private ISet<string> _additionalHeaders;
 
-    public FileLoggerProcessor(IOptionsMonitor<W3CLoggerOptions> options, IHostEnvironment environment, ILoggerFactory factory)
+    public FileLoggerProcessor(
+        IOptionsMonitor<W3CLoggerOptions> options,
+        IHostEnvironment environment,
+        ILoggerFactory factory
+    )
     {
         _logger = factory.CreateLogger(typeof(FileLoggerProcessor));
 
@@ -72,7 +78,10 @@ internal partial class FileLoggerProcessor : IAsyncDisposable
                 loggerOptions = options;
 
                 // Move to a new file if the fields have changed
-                if (_fields != loggerOptions.LoggingFields || !_additionalHeaders.SetEquals(loggerOptions.AdditionalRequestHeaders))
+                if (
+                    _fields != loggerOptions.LoggingFields
+                    || !_additionalHeaders.SetEquals(loggerOptions.AdditionalRequestHeaders)
+                )
                 {
                     _fileNumber++;
                     if (_fileNumber >= W3CLoggerOptions.MaxFileCount)
@@ -152,7 +161,10 @@ internal partial class FileLoggerProcessor : IAsyncDisposable
         }
     }
 
-    private async Task WriteMessagesAsync(List<string> messages, CancellationToken cancellationToken)
+    private async Task WriteMessagesAsync(
+        List<string> messages,
+        CancellationToken cancellationToken
+    )
     {
         // Files are written up to _maxFileSize before rolling to a new file
         DateTime today = SystemDateTime.Now;
@@ -235,7 +247,6 @@ internal partial class FileLoggerProcessor : IAsyncDisposable
             RollFiles();
             streamWriter?.Dispose();
         }
-
     }
 
     internal bool TryCreateDirectory()
@@ -257,7 +268,11 @@ internal partial class FileLoggerProcessor : IAsyncDisposable
     }
 
     // Virtual for testing
-    internal virtual async Task WriteMessageAsync(string message, StreamWriter streamWriter, CancellationToken cancellationToken)
+    internal virtual async Task WriteMessageAsync(
+        string message,
+        StreamWriter streamWriter,
+        CancellationToken cancellationToken
+    )
     {
         if (cancellationToken.IsCancellationRequested)
         {
@@ -303,16 +318,21 @@ internal partial class FileLoggerProcessor : IAsyncDisposable
     {
         lock (_pathLock)
         {
-            var searchString = FormattableString.Invariant($"{_fileName}{date.Year:0000}{date.Month:00}{date.Day:00}.*.txt");
-            var files = new DirectoryInfo(_path)
-                .GetFiles(searchString);
+            var searchString = FormattableString.Invariant(
+                $"{_fileName}{date.Year:0000}{date.Month:00}{date.Day:00}.*.txt"
+            );
+            var files = new DirectoryInfo(_path).GetFiles(searchString);
 
             return files.Length == 0
                 ? 0
-                : files
-                    .Max(x => int.TryParse(x.Name.Split('.').ElementAtOrDefault(Index.FromEnd(2)), out var parsed)
+                : files.Max(x =>
+                    int.TryParse(
+                        x.Name.Split('.').ElementAtOrDefault(Index.FromEnd(2)),
+                        out var parsed
+                    )
                         ? parsed + 1
-                        : 0);
+                        : 0
+                );
         }
     }
 
@@ -326,7 +346,12 @@ internal partial class FileLoggerProcessor : IAsyncDisposable
                 _fileNumber = 0;
                 _maxFilesReached = false;
             }
-            return Path.Combine(_path, FormattableString.Invariant($"{_fileName}{date.Year:0000}{date.Month:00}{date.Day:00}.{_fileNumber:0000}.txt"));
+            return Path.Combine(
+                _path,
+                FormattableString.Invariant(
+                    $"{_fileName}{date.Year:0000}{date.Month:00}{date.Day:00}.{_fileNumber:0000}.txt"
+                )
+            );
         }
     }
 
@@ -337,14 +362,28 @@ internal partial class FileLoggerProcessor : IAsyncDisposable
 
     private static partial class Log
     {
-
-        [LoggerMessage(1, LogLevel.Debug, "Failed to write all messages.", EventName = "WriteMessagesFailed")]
+        [LoggerMessage(
+            1,
+            LogLevel.Debug,
+            "Failed to write all messages.",
+            EventName = "WriteMessagesFailed"
+        )]
         public static partial void WriteMessagesFailed(ILogger logger, Exception ex);
 
-        [LoggerMessage(2, LogLevel.Debug, "Failed to create directory {Path}.", EventName = "CreateDirectoryFailed")]
+        [LoggerMessage(
+            2,
+            LogLevel.Debug,
+            "Failed to create directory {Path}.",
+            EventName = "CreateDirectoryFailed"
+        )]
         public static partial void CreateDirectoryFailed(ILogger logger, string path, Exception ex);
 
-        [LoggerMessage(3, LogLevel.Warning, "Limit of 10000 files per day has been reached", EventName = "MaxFilesReached")]
+        [LoggerMessage(
+            3,
+            LogLevel.Warning,
+            "Limit of 10000 files per day has been reached",
+            EventName = "MaxFilesReached"
+        )]
         public static partial void MaxFilesReached(ILogger logger);
     }
 }

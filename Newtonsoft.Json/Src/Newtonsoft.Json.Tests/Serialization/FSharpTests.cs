@@ -50,11 +50,14 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   1,
   2,
   3
-]", json);
+]",
+                json
+            );
 
             FSharpList<int> l2 = JsonConvert.DeserializeObject<FSharpList<int>>(json);
 
@@ -69,11 +72,14 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   1,
   2,
   3
-]", json);
+]",
+                json
+            );
 
             FSharpSet<int> l2 = JsonConvert.DeserializeObject<FSharpSet<int>>(json);
 
@@ -84,7 +90,14 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void Map()
         {
-            FSharpMap<string, int> m1 = MapModule.OfSeq(new List<Tuple<string, int>> { Tuple.Create("one", 1), Tuple.Create("II", 2), Tuple.Create("3", 3) });
+            FSharpMap<string, int> m1 = MapModule.OfSeq(
+                new List<Tuple<string, int>>
+                {
+                    Tuple.Create("one", 1),
+                    Tuple.Create("II", 2),
+                    Tuple.Create("3", 3),
+                }
+            );
 
             string json = JsonConvert.SerializeObject(m1, Formatting.Indented);
 

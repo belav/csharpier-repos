@@ -44,7 +44,7 @@ namespace System.Reflection.Emit
     [StructLayout(LayoutKind.Sequential)]
     internal sealed partial class RuntimeFieldBuilder : FieldBuilder
     {
-#region Sync with MonoReflectionFieldBuilder in object-internals.h
+        #region Sync with MonoReflectionFieldBuilder in object-internals.h
         private FieldAttributes attrs;
         private Type type;
         private string name;
@@ -57,10 +57,17 @@ namespace System.Reflection.Emit
         private RuntimeFieldHandle handle;
         private Type[]? modReq;
         private Type[]? modOpt;
-#endregion
+        #endregion
 
-        [DynamicDependency(nameof(modOpt))]  // Automatically keeps all previous fields too due to StructLayout
-        internal RuntimeFieldBuilder(RuntimeTypeBuilder tb, string fieldName, Type type, FieldAttributes attributes, Type[]? modReq, Type[]? modOpt)
+        [DynamicDependency(nameof(modOpt))] // Automatically keeps all previous fields too due to StructLayout
+        internal RuntimeFieldBuilder(
+            RuntimeTypeBuilder tb,
+            string fieldName,
+            Type type,
+            FieldAttributes attributes,
+            Type[]? modReq,
+            Type[]? modOpt
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -92,10 +99,7 @@ namespace System.Reflection.Emit
 
         public override RuntimeFieldHandle FieldHandle
         {
-            get
-            {
-                throw CreateNotSupportedException();
-            }
+            get { throw CreateNotSupportedException(); }
         }
 
         public override Type FieldType
@@ -134,7 +138,10 @@ namespace System.Reflection.Emit
                 throw CreateNotSupportedException();
         }
 
-        public override int MetadataToken { get { return ((RuntimeModuleBuilder)typeb.Module).GetToken(this); } }
+        public override int MetadataToken
+        {
+            get { return ((RuntimeModuleBuilder)typeb.Module).GetToken(this); }
+        }
 
         public override object? GetValue(object? obj)
         {
@@ -160,9 +167,12 @@ namespace System.Reflection.Emit
 
         internal static PackingSize RVADataPackingSize(int size)
         {
-            if ((size % 8) == 0) return PackingSize.Size8;
-            if ((size % 4) == 0) return PackingSize.Size4;
-            if ((size % 2) == 0) return PackingSize.Size2;
+            if ((size % 8) == 0)
+                return PackingSize.Size8;
+            if ((size % 4) == 0)
+                return PackingSize.Size4;
+            if ((size % 2) == 0)
+                return PackingSize.Size2;
             return PackingSize.Size1;
         }
 
@@ -175,7 +185,10 @@ namespace System.Reflection.Emit
             def_value = defaultValue;
         }
 
-        protected override void SetCustomAttributeCore(ConstructorInfo con, ReadOnlySpan<byte> binaryAttribute)
+        protected override void SetCustomAttributeCore(
+            ConstructorInfo con,
+            ReadOnlySpan<byte> binaryAttribute
+        )
         {
             RejectIfCreated();
             CustomAttributeBuilder customBuilder = new CustomAttributeBuilder(con, binaryAttribute);
@@ -226,7 +239,13 @@ namespace System.Reflection.Emit
             offset = iOffset;
         }
 
-        public override void SetValue(object? obj, object? val, BindingFlags invokeAttr, Binder? binder, CultureInfo? culture)
+        public override void SetValue(
+            object? obj,
+            object? val,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            CultureInfo? culture
+        )
         {
             throw CreateNotSupportedException();
         }
@@ -248,7 +267,9 @@ namespace System.Reflection.Emit
             RuntimeTypeBuilder.ResolveUserTypes(modReq);
             RuntimeTypeBuilder.ResolveUserTypes(modOpt);
             if (marshal_info != null)
-                marshal_info.marshaltyperef = RuntimeTypeBuilder.ResolveUserType(marshal_info.marshaltyperef);
+                marshal_info.marshaltyperef = RuntimeTypeBuilder.ResolveUserType(
+                    marshal_info.marshaltyperef
+                );
         }
 
         internal FieldInfo RuntimeResolve()
@@ -260,10 +281,7 @@ namespace System.Reflection.Emit
 
         public override Module Module
         {
-            get
-            {
-                return base.Module;
-            }
+            get { return base.Module; }
         }
     }
 }

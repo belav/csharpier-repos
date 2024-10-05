@@ -5,14 +5,14 @@
 #nullable disable
 
 using System;
-using Microsoft.CodeAnalysis.Text;
-using Xunit;
-using System.Text;
-using System.IO;
-using Roslyn.Test.Utilities;
-using System.Security.Cryptography;
 using System.Collections.Immutable;
+using System.IO;
+using System.Security.Cryptography;
+using System.Text;
+using Microsoft.CodeAnalysis.Text;
+using Roslyn.Test.Utilities;
 using Roslyn.Utilities;
+using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests
 {
@@ -66,23 +66,33 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void FromString_Errors()
         {
-            Assert.Throws<ArgumentNullException>(() => SourceText.From((string)null, Encoding.UTF8));
+            Assert.Throws<ArgumentNullException>(
+                () => SourceText.From((string)null, Encoding.UTF8)
+            );
         }
 
         [Fact]
         public void FromStream_Errors()
         {
-            Assert.Throws<ArgumentNullException>(() => SourceText.From((Stream)null, Encoding.UTF8));
-            Assert.Throws<ArgumentException>(() => SourceText.From(new TestStream(canRead: false, canSeek: true), Encoding.UTF8));
-            Assert.Throws<NotImplementedException>(() => SourceText.From(new TestStream(canRead: true, canSeek: false), Encoding.UTF8));
+            Assert.Throws<ArgumentNullException>(
+                () => SourceText.From((Stream)null, Encoding.UTF8)
+            );
+            Assert.Throws<ArgumentException>(
+                () => SourceText.From(new TestStream(canRead: false, canSeek: true), Encoding.UTF8)
+            );
+            Assert.Throws<NotImplementedException>(
+                () => SourceText.From(new TestStream(canRead: true, canSeek: false), Encoding.UTF8)
+            );
         }
 
         [Fact]
         public void Indexer1()
         {
             var data = SourceText.From(string.Empty, Encoding.UTF8);
-            Assert.Throws<IndexOutOfRangeException>(
-                () => { var value = data[-1]; });
+            Assert.Throws<IndexOutOfRangeException>(() =>
+            {
+                var value = data[-1];
+            });
         }
 
         private void CheckEqualLine(TextLine first, TextLine second)
@@ -105,7 +115,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
 #endif
         }
 
-        private void CheckLine(SourceText text, int lineNumber, int start, int length, int newlineLength, string lineText)
+        private void CheckLine(
+            SourceText text,
+            int lineNumber,
+            int start,
+            int length,
+            int newlineLength,
+            string lineText
+        )
         {
             var textLine = text.Lines[lineNumber];
 
@@ -151,23 +168,58 @@ namespace Microsoft.CodeAnalysis.UnitTests
             string newLine = Environment.NewLine;
             var data = SourceText.From("goo" + newLine + " bar");
             Assert.Equal(2, data.Lines.Count);
-            CheckLine(data, lineNumber: 0, start: 0, length: 3, newlineLength: newLine.Length, lineText: "goo");
-            CheckLine(data, lineNumber: 1, start: 3 + newLine.Length, length: 4, newlineLength: 0, lineText: " bar");
+            CheckLine(
+                data,
+                lineNumber: 0,
+                start: 0,
+                length: 3,
+                newlineLength: newLine.Length,
+                lineText: "goo"
+            );
+            CheckLine(
+                data,
+                lineNumber: 1,
+                start: 3 + newLine.Length,
+                length: 4,
+                newlineLength: 0,
+                lineText: " bar"
+            );
         }
 
         [Fact]
         public void NewLines2()
         {
             var text =
-@"goo
+                @"goo
 bar
 baz";
             var data = SourceText.From(text);
             Assert.Equal(3, data.Lines.Count);
             var newlineLength = Environment.NewLine.Length;
-            CheckLine(data, lineNumber: 0, start: 0, length: 3, newlineLength: newlineLength, lineText: "goo");
-            CheckLine(data, lineNumber: 1, start: 3 + newlineLength, length: 3, newlineLength: newlineLength, lineText: "bar");
-            CheckLine(data, lineNumber: 2, start: 2 * (3 + newlineLength), length: 3, newlineLength: 0, lineText: "baz");
+            CheckLine(
+                data,
+                lineNumber: 0,
+                start: 0,
+                length: 3,
+                newlineLength: newlineLength,
+                lineText: "goo"
+            );
+            CheckLine(
+                data,
+                lineNumber: 1,
+                start: 3 + newlineLength,
+                length: 3,
+                newlineLength: newlineLength,
+                lineText: "bar"
+            );
+            CheckLine(
+                data,
+                lineNumber: 2,
+                start: 2 * (3 + newlineLength),
+                length: 3,
+                newlineLength: 0,
+                lineText: "baz"
+            );
         }
 
         [Fact]
@@ -202,7 +254,7 @@ baz";
         public void LinesGetText1()
         {
             var text =
-@"goo
+                @"goo
 bar baz";
             var data = SourceText.From(text);
             Assert.Equal(2, data.Lines.Count);
@@ -221,9 +273,15 @@ bar baz";
         [Fact]
         public void CheckSum_Utf8_BOM()
         {
-            var data = SourceText.From("The quick brown fox jumps over the lazy dog", Encoding.UTF8);
+            var data = SourceText.From(
+                "The quick brown fox jumps over the lazy dog",
+                Encoding.UTF8
+            );
             var checksum = data.GetChecksum();
-            Assert.Equal("88d3ed78 9b0bae8b ced8e348 91133516 b79ba9fb", ChecksumToHexQuads(checksum));
+            Assert.Equal(
+                "88d3ed78 9b0bae8b ced8e348 91133516 b79ba9fb",
+                ChecksumToHexQuads(checksum)
+            );
         }
 
         [Fact]

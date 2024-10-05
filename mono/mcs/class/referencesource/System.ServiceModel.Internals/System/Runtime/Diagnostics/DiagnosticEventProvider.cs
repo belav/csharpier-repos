@@ -5,16 +5,16 @@
 namespace System.Runtime.Diagnostics
 {
     using System;
-    using Microsoft.Win32;
-    using System.Globalization;
-    using System.Runtime.Interop;
-    using System.Threading;
-    using System.Security;
     using System.Collections.Generic;
-    using System.Security.Permissions;
-    using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Interop;
+    using System.Runtime.InteropServices;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Threading;
+    using Microsoft.Win32;
 
     // This is a class defined based on CLR's internal implementation of ETW provider
     // This class should be replaced with CLR's version (whenever avaialble) that exposes callback functionality
@@ -22,16 +22,18 @@ namespace System.Runtime.Diagnostics
     abstract class DiagnosticsEventProvider : IDisposable
     {
         [SecurityCritical]
-        [Fx.Tag.SecurityNote(Critical = "Calling Unsafe code; usage of UnsafeNativeMethods.EtwEnableCallback")]
-        UnsafeNativeMethods.EtwEnableCallback etwCallback;      // Trace Callback function
-        
-        long traceRegistrationHandle;                              // Trace Registration Handle
-        byte currentTraceLevel;                                    // Tracing Level
-        long anyKeywordMask;                                       // Trace Enable Flags
-        long allKeywordMask;                                       // Match all keyword
-        bool isProviderEnabled;                                    // Enabled flag from Trace callback
-        Guid providerId;                                           // Control Guid 
-        int isDisposed;                                            // when 1, provider has unregister        
+        [Fx.Tag.SecurityNote(
+            Critical = "Calling Unsafe code; usage of UnsafeNativeMethods.EtwEnableCallback"
+        )]
+        UnsafeNativeMethods.EtwEnableCallback etwCallback; // Trace Callback function
+
+        long traceRegistrationHandle; // Trace Registration Handle
+        byte currentTraceLevel; // Tracing Level
+        long anyKeywordMask; // Trace Enable Flags
+        long allKeywordMask; // Match all keyword
+        bool isProviderEnabled; // Enabled flag from Trace callback
+        Guid providerId; // Control Guid
+        int isDisposed; // when 1, provider has unregister
 
         [ThreadStatic]
         static WriteEventErrorCode errorCode; // The last return code stored from a WriteEvent call
@@ -43,18 +45,18 @@ namespace System.Runtime.Diagnostics
         const int traceEventMaximumSize = 65482;
         const int traceEventMaximumStringSize = 32724;
         const int WindowsVistaMajorNumber = 6;
-        
+
         [SuppressMessage(FxCop.Category.Design, FxCop.Rule.NestedTypesShouldNotBeVisible)]
         public enum WriteEventErrorCode : int
         {
             NoError,
             NoFreeBuffers,
-            EventTooBig
+            EventTooBig,
         }
-                
+
         /// <summary>
         /// Constructs a new EventProvider.  This causes the class to be registered with the OS
-        /// if an ETW controller turns on the logging then logging will start. 
+        /// if an ETW controller turns on the logging then logging will start.
         /// </summary>
         /// <param name="providerGuid">The GUID that identifies this provider to the system.</param>
         [SecurityCritical]
@@ -62,34 +64,46 @@ namespace System.Runtime.Diagnostics
         protected DiagnosticsEventProvider(Guid providerGuid)
         {
             this.providerId = providerGuid;
-	    var p = (int) Environment.OSVersion.Platform;
-	    if (p == 4 || p == 128)
-		    return;
+            var p = (int)Environment.OSVersion.Platform;
+            if (p == 4 || p == 128)
+                return;
             EtwRegister();
         }
 
         /// <summary>
         /// This method registers the controlGuid of this class with ETW.
-        /// We need to be running on Vista or above. If not a 
-        /// PlatformNotSupported exception will be thrown. 
+        /// We need to be running on Vista or above. If not a
+        /// PlatformNotSupported exception will be thrown.
         /// If for some reason the ETW EtwRegister call failed
-        /// a NotSupported exception will be thrown. 
-        /// </summary>        
+        /// a NotSupported exception will be thrown.
+        /// </summary>
         [SecurityCritical]
-        [SuppressMessage(FxCop.Category.ReliabilityBasic, FxCop.Rule.WrapExceptionsRule,
-            Justification = "Don't trace exceptions thrown from the initialization API.")]
+        [SuppressMessage(
+            FxCop.Category.ReliabilityBasic,
+            FxCop.Rule.WrapExceptionsRule,
+            Justification = "Don't trace exceptions thrown from the initialization API."
+        )]
         unsafe void EtwRegister()
         {
             this.etwCallback = new UnsafeNativeMethods.EtwEnableCallback(EtwEnableCallBack);
-            uint etwRegistrationStatus = UnsafeNativeMethods.EventRegister(ref this.providerId, this.etwCallback, null, ref this.traceRegistrationHandle);
+            uint etwRegistrationStatus = UnsafeNativeMethods.EventRegister(
+                ref this.providerId,
+                this.etwCallback,
+                null,
+                ref this.traceRegistrationHandle
+            );
             if (etwRegistrationStatus != 0)
             {
-                throw new InvalidOperationException(InternalSR.EtwRegistrationFailed(etwRegistrationStatus.ToString("x", CultureInfo.CurrentCulture)));
+                throw new InvalidOperationException(
+                    InternalSR.EtwRegistrationFailed(
+                        etwRegistrationStatus.ToString("x", CultureInfo.CurrentCulture)
+                    )
+                );
             }
         }
 
         //
-        // implement Dispose Pattern to early deregister from ETW instead of waiting for 
+        // implement Dispose Pattern to early deregister from ETW instead of waiting for
         // the finalizer to call deregistration.
         // Once the user is done with the provider it needs to call Close() or Dispose()
         // If neither are called the finalizer will unregister the provider anyway
@@ -99,8 +113,8 @@ namespace System.Runtime.Diagnostics
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-                
-        [System.Security.SecuritySafeCritical]        
+
+        [System.Security.SecuritySafeCritical]
         protected virtual void Dispose(bool disposing)
         {
             if ((this.isDisposed != 1) && (Interlocked.Exchange(ref this.isDisposed, 1) == 0))
@@ -111,7 +125,7 @@ namespace System.Runtime.Diagnostics
         }
 
         /// <summary>
-        /// This method deregisters the controlGuid of this class with ETW.        
+        /// This method deregisters the controlGuid of this class with ETW.
         /// </summary>
         public virtual void Close()
         {
@@ -125,30 +139,30 @@ namespace System.Runtime.Diagnostics
 
         /// <summary>
         /// This method un-registers from ETW.
-        /// </summary>                
+        /// </summary>
         [SuppressMessage(FxCop.Category.Usage, FxCop.Rule.DoNotIgnoreMethodResults)]
         [SecurityCritical]
         unsafe void Deregister()
         {
             // Unregister from ETW using the RegHandle saved from
-            // the register call.            
+            // the register call.
             if (this.traceRegistrationHandle != 0)
             {
                 UnsafeNativeMethods.EventUnregister(this.traceRegistrationHandle);
                 this.traceRegistrationHandle = 0;
             }
         }
-                
+
         [SecurityCritical]
         unsafe void EtwEnableCallBack(
-                        [In] ref System.Guid sourceId,
-                        [In] int isEnabled,
-                        [In] byte setLevel,
-                        [In] long anyKeyword,
-                        [In] long allKeyword,
-                        [In] void* filterData,
-                        [In] void* callbackContext
-                        )
+            [In] ref System.Guid sourceId,
+            [In] int isEnabled,
+            [In] byte setLevel,
+            [In] long anyKeyword,
+            [In] long allKeyword,
+            [In] void* filterData,
+            [In] void* callbackContext
+        )
         {
             this.isProviderEnabled = (isEnabled != 0);
             this.currentTraceLevel = setLevel;
@@ -157,7 +171,7 @@ namespace System.Runtime.Diagnostics
             OnControllerCommand();
         }
 
-        protected abstract void OnControllerCommand();            
+        protected abstract void OnControllerCommand();
 
         /// <summary>
         /// IsEnabled, method used to test if provider is enabled
@@ -180,18 +194,21 @@ namespace System.Runtime.Diagnostics
         {
             if (this.isProviderEnabled)
             {
-                if ((level <= this.currentTraceLevel) ||
-                    (this.currentTraceLevel == 0)) // This also covers the case of Level == 0.
-                {                    
+                if ((level <= this.currentTraceLevel) || (this.currentTraceLevel == 0)) // This also covers the case of Level == 0.
+                {
                     // Check if Keyword is enabled
-                    if ((keywords == 0) ||
-                        (((keywords & this.anyKeywordMask) != 0) &&
-                         ((keywords & this.allKeywordMask) == this.allKeywordMask)))
+                    if (
+                        (keywords == 0)
+                        || (
+                            ((keywords & this.anyKeywordMask) != 0)
+                            && ((keywords & this.allKeywordMask) == this.allKeywordMask)
+                        )
+                    )
                     {
                         return true;
                     }
-                }                
-            }           
+                }
+            }
 
             return false;
         }
@@ -202,13 +219,18 @@ namespace System.Runtime.Diagnostics
         /// <param name="eventDescriptor">
         /// EventDescriptor for the method to test
         /// </param>
-        [Fx.Tag.SecurityNote(Critical = "Calling Unsafe code; usage of EventDescriptor, which is protected by a LinkDemand")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calling Unsafe code; usage of EventDescriptor, which is protected by a LinkDemand"
+        )]
         [SecurityCritical]
         public bool IsEventEnabled(ref EventDescriptor eventDescriptor)
         {
             if (IsEnabled(eventDescriptor.Level, eventDescriptor.Keywords))
             {
-                return UnsafeNativeMethods.EventEnabled(this.traceRegistrationHandle, ref eventDescriptor);
+                return UnsafeNativeMethods.EventEnabled(
+                    this.traceRegistrationHandle,
+                    ref eventDescriptor
+                );
             }
 
             return false;
@@ -236,18 +258,22 @@ namespace System.Runtime.Diagnostics
                     break;
             }
         }
-        
+
         /// <summary>
         /// This routine is used by WriteEvent to unbox the object type and
-        /// to fill the passed in ETW data descriptor. 
+        /// to fill the passed in ETW data descriptor.
         /// </summary>
         /// <param name="data">argument to be decoded</param>
         /// <param name="dataDescriptor">pointer to the descriptor to be filled</param>
         /// <param name="dataBuffer">storage buffer for storing user data, needed because cant get the address of the object</param>
         /// <returns>null if the object is a basic type other than string. String otherwise</returns>
-        
+
         [SecurityCritical]
-        static unsafe string EncodeObject(ref object data, UnsafeNativeMethods.EventData* dataDescriptor, byte* dataBuffer)        
+        static unsafe string EncodeObject(
+            ref object data,
+            UnsafeNativeMethods.EventData* dataDescriptor,
+            byte* dataBuffer
+        )
         {
             dataDescriptor->Reserved = 0;
 
@@ -381,19 +407,25 @@ namespace System.Runtime.Diagnostics
             return null;
         }
 
-
         /// <summary>
         /// WriteMessageEvent, method to write a string with level and Keyword
         /// </summary>
         /// <param name="level">
-        /// Level  to test  
+        /// Level  to test
         /// </param>
         /// <param name="Keyword">
-        /// Keyword  to test 
-        /// </param>        
-        [Fx.Tag.SecurityNote(Critical = "Calling Unsafe code; usage of EventDescriptor, which is protected by a LinkDemand")]
+        /// Keyword  to test
+        /// </param>
+        [Fx.Tag.SecurityNote(
+            Critical = "Calling Unsafe code; usage of EventDescriptor, which is protected by a LinkDemand"
+        )]
         [SecurityCritical]
-        public bool WriteMessageEvent(EventTraceActivity eventTraceActivity, string eventMessage, byte eventLevel, long eventKeywords)
+        public bool WriteMessageEvent(
+            EventTraceActivity eventTraceActivity,
+            string eventMessage,
+            byte eventLevel,
+            long eventKeywords
+        )
         {
             int status = 0;
 
@@ -404,7 +436,7 @@ namespace System.Runtime.Diagnostics
 
             if (eventTraceActivity != null)
             {
-                SetActivityId(ref eventTraceActivity.ActivityId); 
+                SetActivityId(ref eventTraceActivity.ActivityId);
             }
 
             if (IsEnabled(eventLevel, eventKeywords))
@@ -418,7 +450,13 @@ namespace System.Runtime.Diagnostics
                 {
                     fixed (char* pdata = eventMessage)
                     {
-                        status = (int)UnsafeNativeMethods.EventWriteString(this.traceRegistrationHandle, eventLevel, eventKeywords, pdata);
+                        status = (int)
+                            UnsafeNativeMethods.EventWriteString(
+                                this.traceRegistrationHandle,
+                                eventLevel,
+                                eventKeywords,
+                                pdata
+                            );
                     }
 
                     if (status != 0)
@@ -435,8 +473,8 @@ namespace System.Runtime.Diagnostics
         /// WriteMessageEvent, method to write a string with level=0 and Keyword=0
         /// </summary>
         /// <param name="eventMessage">
-        /// Message to log  
-        /// </param> 
+        /// Message to log
+        /// </param>
         [SecurityCritical]
         [Fx.Tag.SecurityNote(Critical = "Accesses security critical code WriteMessageEvent")]
         public bool WriteMessageEvent(EventTraceActivity eventTraceActivity, string eventMessage)
@@ -448,12 +486,22 @@ namespace System.Runtime.Diagnostics
         /// WriteEvent, method to write a parameters with event schema properties
         /// </summary>
         /// <param name="EventDescriptor">
-        /// Event Descriptor for this event. 
-        /// </param>        
-        [SuppressMessage(FxCop.Category.Maintainability, FxCop.Rule.AvoidExcessiveComplexity, Justification = "Performance-critical code")]
-        [Fx.Tag.SecurityNote(Critical = "Calling Unsafe code; usage of EventDescriptor, which is protected by a LinkDemand")]
+        /// Event Descriptor for this event.
+        /// </param>
+        [SuppressMessage(
+            FxCop.Category.Maintainability,
+            FxCop.Rule.AvoidExcessiveComplexity,
+            Justification = "Performance-critical code"
+        )]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calling Unsafe code; usage of EventDescriptor, which is protected by a LinkDemand"
+        )]
         [SecurityCritical]
-        public bool WriteEvent(ref EventDescriptor eventDescriptor, EventTraceActivity eventTraceActivity, params object[] eventPayload)
+        public bool WriteEvent(
+            ref EventDescriptor eventDescriptor,
+            EventTraceActivity eventTraceActivity,
+            params object[] eventPayload
+        )
         {
             uint status = 0;
 
@@ -468,9 +516,11 @@ namespace System.Runtime.Diagnostics
 
                 unsafe
                 {
-                    if ((eventPayload == null)
+                    if (
+                        (eventPayload == null)
                         || (eventPayload.Length == 0)
-                        || (eventPayload.Length == 1))
+                        || (eventPayload.Length == 1)
+                    )
                     {
                         string dataString = null;
                         UnsafeNativeMethods.EventData userData;
@@ -501,25 +551,38 @@ namespace System.Runtime.Diagnostics
                             fixed (char* pdata = dataString)
                             {
                                 userData.DataPointer = (ulong)pdata;
-                                status = UnsafeNativeMethods.EventWrite(this.traceRegistrationHandle, ref eventDescriptor, (uint)argCount, &userData);
+                                status = UnsafeNativeMethods.EventWrite(
+                                    this.traceRegistrationHandle,
+                                    ref eventDescriptor,
+                                    (uint)argCount,
+                                    &userData
+                                );
                             }
                         }
                         else
                         {
                             if (argCount == 0)
                             {
-                                status = UnsafeNativeMethods.EventWrite(this.traceRegistrationHandle, ref eventDescriptor, 0, null);
+                                status = UnsafeNativeMethods.EventWrite(
+                                    this.traceRegistrationHandle,
+                                    ref eventDescriptor,
+                                    0,
+                                    null
+                                );
                             }
                             else
                             {
-                                status = UnsafeNativeMethods.EventWrite(this.traceRegistrationHandle, ref eventDescriptor, (uint)argCount, &userData);
+                                status = UnsafeNativeMethods.EventWrite(
+                                    this.traceRegistrationHandle,
+                                    ref eventDescriptor,
+                                    (uint)argCount,
+                                    &userData
+                                );
                             }
-
                         }
                     }
                     else
                     {
-
                         argCount = eventPayload.Length;
 
                         if (argCount > etwMaxNumberArguments)
@@ -527,8 +590,12 @@ namespace System.Runtime.Diagnostics
                             //
                             //too many arguments to log
                             //
-                            throw Fx.Exception.AsError(new ArgumentOutOfRangeException("eventPayload",
-                                InternalSR.EtwMaxNumberArgumentsExceeded(etwMaxNumberArguments)));
+                            throw Fx.Exception.AsError(
+                                new ArgumentOutOfRangeException(
+                                    "eventPayload",
+                                    InternalSR.EtwMaxNumberArgumentsExceeded(etwMaxNumberArguments)
+                                )
+                            );
                         }
 
                         uint totalEventSize = 0;
@@ -536,13 +603,16 @@ namespace System.Runtime.Diagnostics
                         int stringIndex = 0;
                         int[] stringPosition = new int[etwAPIMaxStringCount];
                         string[] dataString = new string[etwAPIMaxStringCount];
-                        UnsafeNativeMethods.EventData* userData = stackalloc UnsafeNativeMethods.EventData[argCount];
-                        UnsafeNativeMethods.EventData* userDataPtr = (UnsafeNativeMethods.EventData*)userData;
-                        byte* dataBuffer = stackalloc byte[basicTypeAllocationBufferSize * argCount]; // Assume 16 chars for non-string argument
+                        UnsafeNativeMethods.EventData* userData =
+                            stackalloc UnsafeNativeMethods.EventData[argCount];
+                        UnsafeNativeMethods.EventData* userDataPtr =
+                            (UnsafeNativeMethods.EventData*)userData;
+                        byte* dataBuffer =
+                            stackalloc byte[basicTypeAllocationBufferSize * argCount]; // Assume 16 chars for non-string argument
                         byte* currentBuffer = dataBuffer;
 
                         //
-                        // The loop below goes through all the arguments and fills in the data 
+                        // The loop below goes through all the arguments and fills in the data
                         // descriptors. For strings save the location in the dataString array.
                         // Caculates the total size of the event by adding the data descriptor
                         // size value set in EncodeObjec method.
@@ -552,7 +622,11 @@ namespace System.Runtime.Diagnostics
                             if (eventPayload[index] != null)
                             {
                                 string isString;
-                                isString = EncodeObject(ref eventPayload[index], userDataPtr, currentBuffer);
+                                isString = EncodeObject(
+                                    ref eventPayload[index],
+                                    userDataPtr,
+                                    currentBuffer
+                                );
                                 currentBuffer += basicTypeAllocationBufferSize;
                                 totalEventSize += userDataPtr->Size;
                                 userDataPtr++;
@@ -566,8 +640,14 @@ namespace System.Runtime.Diagnostics
                                     }
                                     else
                                     {
-                                        throw Fx.Exception.AsError(new ArgumentOutOfRangeException("eventPayload",
-                                            InternalSR.EtwAPIMaxStringCountExceeded(etwAPIMaxStringCount))); 
+                                        throw Fx.Exception.AsError(
+                                            new ArgumentOutOfRangeException(
+                                                "eventPayload",
+                                                InternalSR.EtwAPIMaxStringCountExceeded(
+                                                    etwAPIMaxStringCount
+                                                )
+                                            )
+                                        );
                                     }
                                 }
                             }
@@ -580,10 +660,18 @@ namespace System.Runtime.Diagnostics
                         }
 
                         //
-                        // now fix any string arguments and set the pointer on the data descriptor 
+                        // now fix any string arguments and set the pointer on the data descriptor
                         //
-                        fixed (char* v0 = dataString[0], v1 = dataString[1], v2 = dataString[2], v3 = dataString[3],
-                                v4 = dataString[4], v5 = dataString[5], v6 = dataString[6], v7 = dataString[7])
+                        fixed (
+                            char* v0 = dataString[0],
+                                v1 = dataString[1],
+                                v2 = dataString[2],
+                                v3 = dataString[3],
+                                v4 = dataString[4],
+                                v5 = dataString[5],
+                                v6 = dataString[6],
+                                v7 = dataString[7]
+                        )
                         {
                             userDataPtr = (UnsafeNativeMethods.EventData*)userData;
                             if (dataString[0] != null)
@@ -619,9 +707,13 @@ namespace System.Runtime.Diagnostics
                                 userDataPtr[stringPosition[7]].DataPointer = (ulong)v7;
                             }
 
-                            status = UnsafeNativeMethods.EventWrite(this.traceRegistrationHandle, ref eventDescriptor, (uint)argCount, userData);
+                            status = UnsafeNativeMethods.EventWrite(
+                                this.traceRegistrationHandle,
+                                ref eventDescriptor,
+                                (uint)argCount,
+                                userData
+                            );
                         }
-
                     }
                 }
             }
@@ -639,14 +731,20 @@ namespace System.Runtime.Diagnostics
         /// WriteEvent, method to write a string with event schema properties
         /// </summary>
         /// <param name="EventDescriptor">
-        /// Event Descriptor for this event. 
+        /// Event Descriptor for this event.
         /// </param>
         /// <param name="data">
-        /// string to log. 
-        /// </param> 
-        [Fx.Tag.SecurityNote(Critical = "Calling Unsafe code; usage of EventDescriptor, which is protected by a LinkDemand")]
+        /// string to log.
+        /// </param>
+        [Fx.Tag.SecurityNote(
+            Critical = "Calling Unsafe code; usage of EventDescriptor, which is protected by a LinkDemand"
+        )]
         [SecurityCritical]
-        public bool WriteEvent(ref EventDescriptor eventDescriptor, EventTraceActivity eventTraceActivity, string data)
+        public bool WriteEvent(
+            ref EventDescriptor eventDescriptor,
+            EventTraceActivity eventTraceActivity,
+            string data
+        )
         {
             uint status = 0;
             //check all strings for null
@@ -675,7 +773,12 @@ namespace System.Runtime.Diagnostics
                     fixed (char* pdata = data)
                     {
                         userData.DataPointer = (ulong)pdata;
-                        status = UnsafeNativeMethods.EventWrite(this.traceRegistrationHandle, ref eventDescriptor, 1, &userData);
+                        status = UnsafeNativeMethods.EventWrite(
+                            this.traceRegistrationHandle,
+                            ref eventDescriptor,
+                            1,
+                            &userData
+                        );
                     }
                 }
             }
@@ -692,17 +795,24 @@ namespace System.Runtime.Diagnostics
         /// WriteEvent, method to be used by generated code on a derived class
         /// </summary>
         /// <param name="EventDescriptor">
-        /// Event Descriptor for this event. 
+        /// Event Descriptor for this event.
         /// </param>
         /// <param name="count">
-        /// number of event descriptors 
+        /// number of event descriptors
         /// </param>
         /// <param name="data">
         /// pointer  do the event data
-        /// </param>                
-        [Fx.Tag.SecurityNote(Critical = "Calling Unsafe code; usage of EventDescriptor, which is protected by a LinkDemand")]
+        /// </param>
+        [Fx.Tag.SecurityNote(
+            Critical = "Calling Unsafe code; usage of EventDescriptor, which is protected by a LinkDemand"
+        )]
         [SecurityCritical]
-        internal protected bool WriteEvent(ref EventDescriptor eventDescriptor, EventTraceActivity eventTraceActivity, int dataCount, IntPtr data)
+        protected internal bool WriteEvent(
+            ref EventDescriptor eventDescriptor,
+            EventTraceActivity eventTraceActivity,
+            int dataCount,
+            IntPtr data
+        )
         {
             uint status = 0;
 
@@ -713,7 +823,12 @@ namespace System.Runtime.Diagnostics
 
             unsafe
             {
-                status = UnsafeNativeMethods.EventWrite(this.traceRegistrationHandle, ref eventDescriptor, (uint)dataCount, (UnsafeNativeMethods.EventData*)data);
+                status = UnsafeNativeMethods.EventWrite(
+                    this.traceRegistrationHandle,
+                    ref eventDescriptor,
+                    (uint)dataCount,
+                    (UnsafeNativeMethods.EventData*)data
+                );
             }
             if (status != 0)
             {
@@ -727,12 +842,23 @@ namespace System.Runtime.Diagnostics
         /// WriteTransferEvent, method to write a parameters with event schema properties
         /// </summary>
         /// <param name="eventDescriptor">
-        /// Event Descriptor for this event. 
-        /// </param>        
-        [SuppressMessage(FxCop.Category.Maintainability, FxCop.Rule.AvoidExcessiveComplexity, Justification = "Performance-critical code")]
-        [Fx.Tag.SecurityNote(Critical = "Calling Unsafe code; usage of EventDescriptor, which is protected by a LinkDemand")]
+        /// Event Descriptor for this event.
+        /// </param>
+        [SuppressMessage(
+            FxCop.Category.Maintainability,
+            FxCop.Rule.AvoidExcessiveComplexity,
+            Justification = "Performance-critical code"
+        )]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calling Unsafe code; usage of EventDescriptor, which is protected by a LinkDemand"
+        )]
         [SecurityCritical]
-        public bool WriteTransferEvent(ref EventDescriptor eventDescriptor, EventTraceActivity eventTraceActivity, Guid relatedActivityId, params object[] eventPayload)
+        public bool WriteTransferEvent(
+            ref EventDescriptor eventDescriptor,
+            EventTraceActivity eventTraceActivity,
+            Guid relatedActivityId,
+            params object[] eventPayload
+        )
         {
             // ActivityId is required when writing transfer event
             if (eventTraceActivity == null)
@@ -754,8 +880,12 @@ namespace System.Runtime.Diagnostics
                             //
                             //too many arguments to log
                             //
-                            throw Fx.Exception.AsError(new ArgumentOutOfRangeException("eventPayload",
-                                InternalSR.EtwMaxNumberArgumentsExceeded(etwMaxNumberArguments)));
+                            throw Fx.Exception.AsError(
+                                new ArgumentOutOfRangeException(
+                                    "eventPayload",
+                                    InternalSR.EtwMaxNumberArgumentsExceeded(etwMaxNumberArguments)
+                                )
+                            );
                         }
 
                         uint totalEventSize = 0;
@@ -763,13 +893,16 @@ namespace System.Runtime.Diagnostics
                         int stringIndex = 0;
                         int[] stringPosition = new int[etwAPIMaxStringCount]; //used to keep the position of strings in the eventPayload parameter
                         string[] dataString = new string[etwAPIMaxStringCount]; // string arrays from the eventPayload parameter
-                        UnsafeNativeMethods.EventData* userData = stackalloc UnsafeNativeMethods.EventData[argCount]; // allocation for the data descriptors
-                        UnsafeNativeMethods.EventData* userDataPtr = (UnsafeNativeMethods.EventData*)userData;
-                        byte* dataBuffer = stackalloc byte[basicTypeAllocationBufferSize * argCount]; // 16 byte for unboxing non-string argument
+                        UnsafeNativeMethods.EventData* userData =
+                            stackalloc UnsafeNativeMethods.EventData[argCount]; // allocation for the data descriptors
+                        UnsafeNativeMethods.EventData* userDataPtr =
+                            (UnsafeNativeMethods.EventData*)userData;
+                        byte* dataBuffer =
+                            stackalloc byte[basicTypeAllocationBufferSize * argCount]; // 16 byte for unboxing non-string argument
                         byte* currentBuffer = dataBuffer;
 
                         //
-                        // The loop below goes through all the arguments and fills in the data 
+                        // The loop below goes through all the arguments and fills in the data
                         // descriptors. For strings save the location in the dataString array.
                         // Caculates the total size of the event by adding the data descriptor
                         // size value set in EncodeObjec method.
@@ -779,7 +912,11 @@ namespace System.Runtime.Diagnostics
                             if (eventPayload[index] != null)
                             {
                                 string isString;
-                                isString = EncodeObject(ref eventPayload[index], userDataPtr, currentBuffer);
+                                isString = EncodeObject(
+                                    ref eventPayload[index],
+                                    userDataPtr,
+                                    currentBuffer
+                                );
                                 currentBuffer += basicTypeAllocationBufferSize;
                                 totalEventSize += userDataPtr->Size;
                                 userDataPtr++;
@@ -792,9 +929,15 @@ namespace System.Runtime.Diagnostics
                                         stringIndex++;
                                     }
                                     else
-                                    {                                        
-                                        throw Fx.Exception.AsError(new ArgumentOutOfRangeException("eventPayload",
-                                            InternalSR.EtwAPIMaxStringCountExceeded(etwAPIMaxStringCount)));  
+                                    {
+                                        throw Fx.Exception.AsError(
+                                            new ArgumentOutOfRangeException(
+                                                "eventPayload",
+                                                InternalSR.EtwAPIMaxStringCountExceeded(
+                                                    etwAPIMaxStringCount
+                                                )
+                                            )
+                                        );
                                     }
                                 }
                             }
@@ -806,8 +949,16 @@ namespace System.Runtime.Diagnostics
                             return false;
                         }
 
-                        fixed (char* v0 = dataString[0], v1 = dataString[1], v2 = dataString[2], v3 = dataString[3],
-                                v4 = dataString[4], v5 = dataString[5], v6 = dataString[6], v7 = dataString[7])
+                        fixed (
+                            char* v0 = dataString[0],
+                                v1 = dataString[1],
+                                v2 = dataString[2],
+                                v3 = dataString[3],
+                                v4 = dataString[4],
+                                v5 = dataString[5],
+                                v6 = dataString[6],
+                                v7 = dataString[7]
+                        )
                         {
                             userDataPtr = (UnsafeNativeMethods.EventData*)userData;
                             if (dataString[0] != null)
@@ -843,12 +994,26 @@ namespace System.Runtime.Diagnostics
                                 userDataPtr[stringPosition[7]].DataPointer = (ulong)v7;
                             }
 
-                            status = UnsafeNativeMethods.EventWriteTransfer(this.traceRegistrationHandle, ref eventDescriptor, ref eventTraceActivity.ActivityId, ref relatedActivityId, (uint)argCount, userData);
+                            status = UnsafeNativeMethods.EventWriteTransfer(
+                                this.traceRegistrationHandle,
+                                ref eventDescriptor,
+                                ref eventTraceActivity.ActivityId,
+                                ref relatedActivityId,
+                                (uint)argCount,
+                                userData
+                            );
                         }
                     }
                     else
                     {
-                        status = UnsafeNativeMethods.EventWriteTransfer(this.traceRegistrationHandle, ref eventDescriptor, ref eventTraceActivity.ActivityId, ref relatedActivityId, 0, null);
+                        status = UnsafeNativeMethods.EventWriteTransfer(
+                            this.traceRegistrationHandle,
+                            ref eventDescriptor,
+                            ref eventTraceActivity.ActivityId,
+                            ref relatedActivityId,
+                            0,
+                            null
+                        );
                     }
                 }
             }
@@ -861,10 +1026,18 @@ namespace System.Runtime.Diagnostics
 
             return true;
         }
-                        
+
         [SecurityCritical]
-        [Fx.Tag.SecurityNote(Critical = "Calling Unsafe code; usage of EventDescriptor, which is protected by a LinkDemand")]
-        protected bool WriteTransferEvent(ref EventDescriptor eventDescriptor, EventTraceActivity eventTraceActivity, Guid relatedActivityId, int dataCount, IntPtr data)
+        [Fx.Tag.SecurityNote(
+            Critical = "Calling Unsafe code; usage of EventDescriptor, which is protected by a LinkDemand"
+        )]
+        protected bool WriteTransferEvent(
+            ref EventDescriptor eventDescriptor,
+            EventTraceActivity eventTraceActivity,
+            Guid relatedActivityId,
+            int dataCount,
+            IntPtr data
+        )
         {
             // ActivityId is required when writing transfer event
             if (eventTraceActivity == null)
@@ -875,12 +1048,14 @@ namespace System.Runtime.Diagnostics
             uint status = 0;
             unsafe
             {
-                status = UnsafeNativeMethods.EventWriteTransfer(this.traceRegistrationHandle,
-                                                ref eventDescriptor,
-                                                ref eventTraceActivity.ActivityId,
-                                                ref relatedActivityId,
-                                                (uint)dataCount,
-                                                (UnsafeNativeMethods.EventData*)data);
+                status = UnsafeNativeMethods.EventWriteTransfer(
+                    this.traceRegistrationHandle,
+                    ref eventDescriptor,
+                    ref eventTraceActivity.ActivityId,
+                    ref relatedActivityId,
+                    (uint)dataCount,
+                    (UnsafeNativeMethods.EventData*)data
+                );
             }
 
             if (status != 0)
@@ -890,12 +1065,19 @@ namespace System.Runtime.Diagnostics
             }
             return true;
         }
-                
-        [SuppressMessage(FxCop.Category.Usage, FxCop.Rule.DoNotIgnoreMethodResults, MessageId = "System.Runtime.Interop.UnsafeNativeMethods.EventActivityIdControl(System.Int32,System.Guid@)")]        
+
+        [SuppressMessage(
+            FxCop.Category.Usage,
+            FxCop.Rule.DoNotIgnoreMethodResults,
+            MessageId = "System.Runtime.Interop.UnsafeNativeMethods.EventActivityIdControl(System.Int32,System.Guid@)"
+        )]
         [SecurityCritical]
         public static void SetActivityId(ref Guid id)
         {
-            UnsafeNativeMethods.EventActivityIdControl((int)ActivityControl.EVENT_ACTIVITY_CTRL_SET_ID, ref id);
+            UnsafeNativeMethods.EventActivityIdControl(
+                (int)ActivityControl.EVENT_ACTIVITY_CTRL_SET_ID,
+                ref id
+            );
         }
     }
 }

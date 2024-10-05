@@ -46,10 +46,13 @@ namespace System.ServiceModel.ComIntegration
         {
             AssemblyName assemblyName = new AssemblyName();
             assemblyName.Name = Guid.NewGuid().ToString();
-            assemblyBuilder = Thread.GetDomain().DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
+            assemblyBuilder = Thread
+                .GetDomain()
+                .DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
             DynamicModule = assemblyBuilder.DefineDynamicModule(Guid.NewGuid().ToString());
             interfaceToClassMap = new Dictionary<Type, Type>();
         }
+
         private Type[] GetParameterTypes(MethodInfo mInfo)
         {
             ParameterInfo[] parameters = mInfo.GetParameters();
@@ -62,7 +65,12 @@ namespace System.ServiceModel.ComIntegration
             return typeArray;
         }
 
-        [SuppressMessage(FxCop.Category.Usage, "CA2301:EmbeddableTypesInContainersRule", MessageId = "interfaceToClassMap", Justification = "No need to support type equivalence here.")]
+        [SuppressMessage(
+            FxCop.Category.Usage,
+            "CA2301:EmbeddableTypesInContainersRule",
+            MessageId = "interfaceToClassMap",
+            Justification = "No need to support type equivalence here."
+        )]
         internal Type FindOrCreateType(Type interfaceType)
         {
             if (!interfaceType.IsInterface)
@@ -75,25 +83,39 @@ namespace System.ServiceModel.ComIntegration
                 interfaceToClassMap.TryGetValue(interfaceType, out classType);
                 if (classType == null)
                 {
-                    TypeBuilder typeBuilder = DynamicModule.DefineType(interfaceType.Name + "MarshalByRefObject", TypeAttributes.Public | TypeAttributes.Class | TypeAttributes.Abstract,
-                       typeof(MarshalByRefObject), new Type[] { interfaceType });
+                    TypeBuilder typeBuilder = DynamicModule.DefineType(
+                        interfaceType.Name + "MarshalByRefObject",
+                        TypeAttributes.Public | TypeAttributes.Class | TypeAttributes.Abstract,
+                        typeof(MarshalByRefObject),
+                        new Type[] { interfaceType }
+                    );
                     Type[] ctorParams = new Type[] { typeof(ClassInterfaceType) };
-                    ConstructorInfo classCtorInfo = typeof(ClassInterfaceAttribute).GetConstructor(ctorParams);
-                    CustomAttributeBuilder attributeBuilder = new CustomAttributeBuilder(classCtorInfo,
-                                                               new object[] { ClassInterfaceType.None });
+                    ConstructorInfo classCtorInfo = typeof(ClassInterfaceAttribute).GetConstructor(
+                        ctorParams
+                    );
+                    CustomAttributeBuilder attributeBuilder = new CustomAttributeBuilder(
+                        classCtorInfo,
+                        new object[] { ClassInterfaceType.None }
+                    );
                     typeBuilder.SetCustomAttribute(attributeBuilder);
                     typeBuilder.AddInterfaceImplementation(interfaceType);
                     foreach (MethodInfo mInfo in interfaceType.GetMethods())
                     {
                         MethodBuilder methodInClass = null;
-                        methodInClass = typeBuilder.DefineMethod(mInfo.Name,
-                        MethodAttributes.Public | MethodAttributes.Virtual |
-                             MethodAttributes.Abstract | MethodAttributes.Abstract | MethodAttributes.HideBySig | MethodAttributes.NewSlot,
-                        mInfo.ReturnType, GetParameterTypes(mInfo));
+                        methodInClass = typeBuilder.DefineMethod(
+                            mInfo.Name,
+                            MethodAttributes.Public
+                                | MethodAttributes.Virtual
+                                | MethodAttributes.Abstract
+                                | MethodAttributes.Abstract
+                                | MethodAttributes.HideBySig
+                                | MethodAttributes.NewSlot,
+                            mInfo.ReturnType,
+                            GetParameterTypes(mInfo)
+                        );
                     }
                     classType = typeBuilder.CreateType();
                     interfaceToClassMap[interfaceType] = classType;
-
                 }
             }
             if (classType == null)

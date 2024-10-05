@@ -8,9 +8,7 @@ namespace System.Reflection.Emit
 {
     public abstract class ILGenerator
     {
-        protected ILGenerator()
-        {
-        }
+        protected ILGenerator() { }
 
         /// <summary>
         /// Creates a <see cref="Label"/> with the given id.
@@ -38,12 +36,26 @@ namespace System.Reflection.Emit
 
         public abstract void Emit(OpCode opcode, MethodInfo meth);
 
-        public abstract void EmitCalli(OpCode opcode, CallingConventions callingConvention,
-            Type? returnType, Type[]? parameterTypes, Type[]? optionalParameterTypes);
+        public abstract void EmitCalli(
+            OpCode opcode,
+            CallingConventions callingConvention,
+            Type? returnType,
+            Type[]? parameterTypes,
+            Type[]? optionalParameterTypes
+        );
 
-        public abstract void EmitCalli(OpCode opcode, CallingConvention unmanagedCallConv, Type? returnType, Type[]? parameterTypes);
+        public abstract void EmitCalli(
+            OpCode opcode,
+            CallingConvention unmanagedCallConv,
+            Type? returnType,
+            Type[]? parameterTypes
+        );
 
-        public abstract void EmitCall(OpCode opcode, MethodInfo methodInfo, Type[]? optionalParameterTypes);
+        public abstract void EmitCall(
+            OpCode opcode,
+            MethodInfo methodInfo,
+            Type[]? optionalParameterTypes
+        );
 
         public abstract void Emit(OpCode opcode, SignatureHelper signature);
 
@@ -85,7 +97,12 @@ namespace System.Reflection.Emit
         #endregion
 
         #region IL Macros
-        public virtual void ThrowException([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type excType)
+        public virtual void ThrowException(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                Type excType
+        )
         {
             // Emits the il to throw an exception
             ArgumentNullException.ThrowIfNull(excType);

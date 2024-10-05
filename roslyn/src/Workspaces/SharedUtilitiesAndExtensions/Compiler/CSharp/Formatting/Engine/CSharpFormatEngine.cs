@@ -18,21 +18,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             SyntaxFormattingOptions options,
             IEnumerable<AbstractFormattingRule> formattingRules,
             SyntaxToken startToken,
-            SyntaxToken endToken)
-            : base(TreeData.Create(node),
-                 options,
-                 formattingRules,
-                 startToken,
-                 endToken)
-        {
-        }
+            SyntaxToken endToken
+        )
+            : base(TreeData.Create(node), options, formattingRules, startToken, endToken) { }
 
         internal override IHeaderFacts HeaderFacts => CSharpHeaderFacts.Instance;
 
-        protected override AbstractTriviaDataFactory CreateTriviaFactory()
-            => new TriviaDataFactory(this.TreeData, this.Options);
+        protected override AbstractTriviaDataFactory CreateTriviaFactory() =>
+            new TriviaDataFactory(this.TreeData, this.Options);
 
-        protected override AbstractFormattingResult CreateFormattingResult(TokenStream tokenStream)
-            => new FormattingResult(this.TreeData, tokenStream, this.SpanToFormat);
+        protected override AbstractFormattingResult CreateFormattingResult(
+            TokenStream tokenStream
+        ) => new FormattingResult(this.TreeData, tokenStream, this.SpanToFormat);
     }
 }

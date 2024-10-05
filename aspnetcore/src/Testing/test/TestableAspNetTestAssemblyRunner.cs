@@ -19,16 +19,20 @@ public class TestableAspNetTestAssemblyRunner : AspNetTestAssemblyRunner
         IEnumerable<IXunitTestCase> testCases,
         IMessageSink diagnosticMessageSink,
         IMessageSink executionMessageSink,
-        ITestFrameworkExecutionOptions executionOptions) : base(
+        ITestFrameworkExecutionOptions executionOptions
+    )
+        : base(
             testAssembly,
             testCases,
             diagnosticMessageSink,
             executionMessageSink,
-            executionOptions)
-    {
-    }
+            executionOptions
+        ) { }
 
-    public static TestableAspNetTestAssemblyRunner Create(Type fixtureType, bool failTestCase = false)
+    public static TestableAspNetTestAssemblyRunner Create(
+        Type fixtureType,
+        bool failTestCase = false
+    )
     {
         var assembly = TestableAssembly.Create(fixtureType, failTestCase: failTestCase);
         var testAssembly = GetTestAssembly(assembly);
@@ -39,7 +43,8 @@ public class TestableAspNetTestAssemblyRunner : AspNetTestAssemblyRunner
             new[] { testCase },
             diagnosticMessageSink: new NullMessageSink(),
             executionMessageSink: new NullMessageSink(),
-            executionOptions: Mock.Of<ITestFrameworkExecutionOptions>());
+            executionOptions: Mock.Of<ITestFrameworkExecutionOptions>()
+        );
 
         // Do not call Xunit.Sdk.Reflector.Wrap(assembly) because it uses GetTypes() and that method
         // throws NotSupportedException for a dynamic assembly.
@@ -82,7 +87,8 @@ public class TestableAspNetTestAssemblyRunner : AspNetTestAssemblyRunner
             var testCollection = new TestCollection(
                 testAssembly,
                 collectionDefinition: null,
-                displayName: $"Mock collection for '{testAssemblyName}'.");
+                displayName: $"Mock collection for '{testAssemblyName}'."
+            );
 
             var type = assembly.GetType(TestableAssembly.TestClassName);
             var testClass = new TestClass(testCollection, Reflector.Wrap(type));
@@ -94,7 +100,8 @@ public class TestableAspNetTestAssemblyRunner : AspNetTestAssemblyRunner
                 diagnosticMessageSink: new NullMessageSink(),
                 defaultMethodDisplay: TestMethodDisplay.ClassAndMethod,
                 defaultMethodDisplayOptions: TestMethodDisplayOptions.None,
-                testMethod: testMethod);
+                testMethod: testMethod
+            );
         }
     }
 

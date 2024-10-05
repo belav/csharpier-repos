@@ -16,7 +16,12 @@ using Microsoft.CodeAnalysis.Shared.Utilities;
 
 namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
 {
-    internal partial class AbstractGenerateParameterizedMemberService<TService, TSimpleNameSyntax, TExpressionSyntax, TInvocationExpressionSyntax>
+    internal partial class AbstractGenerateParameterizedMemberService<
+        TService,
+        TSimpleNameSyntax,
+        TExpressionSyntax,
+        TInvocationExpressionSyntax
+    >
     {
         internal abstract class State
         {
@@ -54,21 +59,44 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 }
             }
 
-            protected async Task<bool> TryFinishInitializingStateAsync(TService service, SemanticDocument document, CancellationToken cancellationToken)
+            protected async Task<bool> TryFinishInitializingStateAsync(
+                TService service,
+                SemanticDocument document,
+                CancellationToken cancellationToken
+            )
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                TypeToGenerateIn = await SymbolFinder.FindSourceDefinitionAsync(TypeToGenerateIn, document.Project.Solution, cancellationToken).ConfigureAwait(false) as INamedTypeSymbol;
+                TypeToGenerateIn =
+                    await SymbolFinder
+                        .FindSourceDefinitionAsync(
+                            TypeToGenerateIn,
+                            document.Project.Solution,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false) as INamedTypeSymbol;
                 if (TypeToGenerateIn.IsErrorType())
                 {
                     return false;
                 }
 
-                if (!ValidateTypeToGenerateIn(TypeToGenerateIn, IsStatic, ClassInterfaceModuleStructTypes))
+                if (
+                    !ValidateTypeToGenerateIn(
+                        TypeToGenerateIn,
+                        IsStatic,
+                        ClassInterfaceModuleStructTypes
+                    )
+                )
                 {
                     return false;
                 }
 
-                if (!CodeGenerator.CanAdd(document.Project.Solution, TypeToGenerateIn, cancellationToken))
+                if (
+                    !CodeGenerator.CanAdd(
+                        document.Project.Solution,
+                        TypeToGenerateIn,
+                        cancellationToken
+                    )
+                )
                 {
                     return false;
                 }
@@ -77,15 +105,30 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 // errors.  In the former case we definitely want to offer to generate a method.  In
                 // the latter case, we want to generate a method *unless* there's an existing method
                 // with the same signature.
-                var existingMethods = TypeToGenerateIn.GetMembers(IdentifierToken.ValueText)
-                                                           .OfType<IMethodSymbol>();
+                var existingMethods = TypeToGenerateIn
+                    .GetMembers(IdentifierToken.ValueText)
+                    .OfType<IMethodSymbol>();
 
-                var destinationProvider = document.Project.Solution.Services.GetLanguageServices(TypeToGenerateIn.Language);
+                var destinationProvider = document.Project.Solution.Services.GetLanguageServices(
+                    TypeToGenerateIn.Language
+                );
                 var syntaxFacts = destinationProvider.GetService<ISyntaxFactsService>();
                 var syntaxFactory = destinationProvider.GetService<SyntaxGenerator>();
-                IsContainedInUnsafeType = service.ContainingTypesOrSelfHasUnsafeKeyword(TypeToGenerateIn);
-                var generatedMethod = await SignatureInfo.GenerateMethodAsync(syntaxFactory, false, cancellationToken).ConfigureAwait(false);
-                return !existingMethods.Any(m => SignatureComparer.Instance.HaveSameSignature(m, generatedMethod, caseSensitive: syntaxFacts.IsCaseSensitive, compareParameterName: true, isParameterCaseSensitive: syntaxFacts.IsCaseSensitive));
+                IsContainedInUnsafeType = service.ContainingTypesOrSelfHasUnsafeKeyword(
+                    TypeToGenerateIn
+                );
+                var generatedMethod = await SignatureInfo
+                    .GenerateMethodAsync(syntaxFactory, false, cancellationToken)
+                    .ConfigureAwait(false);
+                return !existingMethods.Any(m =>
+                    SignatureComparer.Instance.HaveSameSignature(
+                        m,
+                        generatedMethod,
+                        caseSensitive: syntaxFacts.IsCaseSensitive,
+                        compareParameterName: true,
+                        isParameterCaseSensitive: syntaxFacts.IsCaseSensitive
+                    )
+                );
             }
         }
     }

@@ -21,12 +21,13 @@ internal partial struct VirtualCharSequence
         }
 
         public bool MoveNext() => ++_position < _virtualCharSequence.Length;
+
         public VirtualChar Current => _virtualCharSequence[_position];
 
-        public void Reset()
-            => _position = -1;
+        public void Reset() => _position = -1;
 
         object? IEnumerator.Current => this.Current;
+
         public void Dispose() { }
     }
 }

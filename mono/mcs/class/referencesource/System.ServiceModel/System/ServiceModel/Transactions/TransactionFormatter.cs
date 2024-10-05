@@ -4,9 +4,9 @@
 namespace System.ServiceModel.Transactions
 {
     using System;
-    using System.ServiceModel.Channels;
     using System.Diagnostics;
     using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.Transactions;
 
     abstract class TransactionFormatter
@@ -59,10 +59,7 @@ namespace System.ServiceModel.Transactions
             }
         }
 
-        public abstract MessageHeader EmptyTransactionHeader
-        {
-            get;
-        }
+        public abstract MessageHeader EmptyTransactionHeader { get; }
 
         // Write transaction information to a message
         //
@@ -71,7 +68,7 @@ namespace System.ServiceModel.Transactions
         public abstract void WriteTransaction(Transaction transaction, Message message);
 
         // Read transaction information from a message
-        // 
+        //
         // Return a TransactionInfo instance if transaction headers are present in the message
         // Return null if no transaction headers are present in the message
         // Throw TransactionException if something goes wrong (e.g., malformed XML)

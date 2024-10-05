@@ -24,8 +24,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Editor
         /// </summary>
         public abstract IList<FSharpInlineRenameLocation> Locations { get; }
 
-        IList<InlineRenameLocation> IInlineRenameLocationSet.Locations
-            => Locations?.Select(x => new InlineRenameLocation(x.Document, x.TextSpan)).ToList();
+        IList<InlineRenameLocation> IInlineRenameLocationSet.Locations =>
+            Locations?.Select(x => new InlineRenameLocation(x.Document, x.TextSpan)).ToList();
 
         /// <summary>
         /// Returns the set of replacements and their possible resolutions if the user enters the
@@ -33,9 +33,15 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Editor
         /// and TextSpan in the original solution, and specify their new span and possible conflict
         /// resolution.
         /// </summary>
-        public abstract Task<FSharpInlineRenameReplacementInfo> GetReplacementsAsync(string replacementText, CancellationToken cancellationToken);
+        public abstract Task<FSharpInlineRenameReplacementInfo> GetReplacementsAsync(
+            string replacementText,
+            CancellationToken cancellationToken
+        );
 
-        async Task<IInlineRenameReplacementInfo> IInlineRenameLocationSet.GetReplacementsAsync(string replacementText, SymbolRenameOptions options, CancellationToken cancellationToken)
-            => await GetReplacementsAsync(replacementText, cancellationToken).ConfigureAwait(false);
+        async Task<IInlineRenameReplacementInfo> IInlineRenameLocationSet.GetReplacementsAsync(
+            string replacementText,
+            SymbolRenameOptions options,
+            CancellationToken cancellationToken
+        ) => await GetReplacementsAsync(replacementText, cancellationToken).ConfigureAwait(false);
     }
 }

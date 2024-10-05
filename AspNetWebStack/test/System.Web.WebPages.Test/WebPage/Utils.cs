@@ -15,7 +15,11 @@ namespace System.Web.WebPages.Test
 {
     public static class Utils
     {
-        public static string RenderWebPage(WebPage page, StartPage startPage = null, HttpRequestBase request = null)
+        public static string RenderWebPage(
+            WebPage page,
+            StartPage startPage = null,
+            HttpRequestBase request = null
+        )
         {
             var writer = new StringWriter();
 
@@ -31,10 +35,16 @@ namespace System.Web.WebPages.Test
             return writer.ToString();
         }
 
-        public static Mock<HttpContextBase> CreateTestContext(HttpRequestBase request = null, HttpResponseBase response = null, IDictionary items = null)
+        public static Mock<HttpContextBase> CreateTestContext(
+            HttpRequestBase request = null,
+            HttpResponseBase response = null,
+            IDictionary items = null
+        )
         {
             items = items ?? new Hashtable();
-            request = request ?? CreateTestRequest("default.cshtml", "http://localhost/default.cshtml").Object;
+            request =
+                request
+                ?? CreateTestRequest("default.cshtml", "http://localhost/default.cshtml").Object;
 
             if (response == null)
             {
@@ -64,38 +74,57 @@ namespace System.Web.WebPages.Test
             return mockRequest;
         }
 
-        public static string RenderWebPage(Action<WebPage> pageExecuteAction, string pagePath = "~/index.cshtml")
+        public static string RenderWebPage(
+            Action<WebPage> pageExecuteAction,
+            string pagePath = "~/index.cshtml"
+        )
         {
             var page = CreatePage(pageExecuteAction, pagePath);
             return RenderWebPage(page);
         }
 
-        public static MockPage CreatePage(Action<WebPage> pageExecuteAction, string pagePath = "~/index.cshtml")
+        public static MockPage CreatePage(
+            Action<WebPage> pageExecuteAction,
+            string pagePath = "~/index.cshtml"
+        )
         {
             var page = new MockPage()
             {
                 VirtualPath = pagePath,
-                ExecuteAction = p => { pageExecuteAction(p); }
+                ExecuteAction = p =>
+                {
+                    pageExecuteAction(p);
+                },
             };
             page.VirtualPathFactory = new HashVirtualPathFactory(page);
             page.DisplayModeProvider = new DisplayModeProvider();
             return page;
         }
 
-        public static MockStartPage CreateStartPage(Action<StartPage> pageExecuteAction, string pagePath = "~/_pagestart.cshtml")
+        public static MockStartPage CreateStartPage(
+            Action<StartPage> pageExecuteAction,
+            string pagePath = "~/_pagestart.cshtml"
+        )
         {
             var page = new MockStartPage()
             {
                 VirtualPath = pagePath,
-                ExecuteAction = p => { pageExecuteAction(p); }
+                ExecuteAction = p =>
+                {
+                    pageExecuteAction(p);
+                },
             };
             page.VirtualPathFactory = new HashVirtualPathFactory(page);
             page.DisplayModeProvider = new DisplayModeProvider();
             return page;
         }
 
-        public static string RenderWebPageWithSubPage(Action<WebPage> pageExecuteAction, Action<WebPage> subpageExecuteAction,
-                                                      string pagePath = "~/index.cshtml", string subpagePath = "~/subpage.cshtml")
+        public static string RenderWebPageWithSubPage(
+            Action<WebPage> pageExecuteAction,
+            Action<WebPage> subpageExecuteAction,
+            string pagePath = "~/index.cshtml",
+            string subpagePath = "~/subpage.cshtml"
+        )
         {
             var page = CreatePage(pageExecuteAction);
             var subPage = CreatePage(subpageExecuteAction, subpagePath);
@@ -114,7 +143,10 @@ namespace System.Web.WebPages.Test
         internal static IDisposable CreateHttpContext(string filename, string url)
         {
             var request = new HttpRequest(filename, url, null);
-            var httpContext = new HttpContext(request, new HttpResponse(new StringWriter(new StringBuilder())));
+            var httpContext = new HttpContext(
+                request,
+                new HttpResponse(new StringWriter(new StringBuilder()))
+            );
             HttpContext.Current = httpContext;
 
             return new DisposableAction(RestoreHttpContext);
@@ -133,21 +165,27 @@ namespace System.Web.WebPages.Test
         public static void SetupVirtualPathInAppDomain(string vpath, string contents)
         {
             var file = new Mock<VirtualFile>(vpath);
-            file.Setup(f => f.Open()).Returns(new MemoryStream(ASCIIEncoding.Default.GetBytes(contents)));
+            file.Setup(f => f.Open())
+                .Returns(new MemoryStream(ASCIIEncoding.Default.GetBytes(contents)));
             var vpp = new Mock<VirtualPathProvider>();
             vpp.Setup(p => p.FileExists(vpath)).Returns(true);
             vpp.Setup(p => p.GetFile(vpath)).Returns(file.Object);
             AppDomainUtils.SetAppData();
             var env = new HostingEnvironment();
 
-            var register = typeof(HostingEnvironment).GetMethod("RegisterVirtualPathProviderInternal", BindingFlags.Static | BindingFlags.NonPublic);
+            var register = typeof(HostingEnvironment).GetMethod(
+                "RegisterVirtualPathProviderInternal",
+                BindingFlags.Static | BindingFlags.NonPublic
+            );
             register.Invoke(null, new object[] { vpp.Object });
         }
 
         /// <summary>
         /// Assigns a common object factory to the pages.
         /// </summary>
-        internal static IVirtualPathFactory AssignObjectFactoriesAndDisplayModeProvider(params WebPageExecutingBase[] pages)
+        internal static IVirtualPathFactory AssignObjectFactoriesAndDisplayModeProvider(
+            params WebPageExecutingBase[] pages
+        )
         {
             var objectFactory = new HashVirtualPathFactory(pages);
             var displayModeProvider = new DisplayModeProvider();
@@ -164,7 +202,9 @@ namespace System.Web.WebPages.Test
             return objectFactory;
         }
 
-        internal static DisplayModeProvider AssignDisplayModeProvider(params WebPageRenderingBase[] pages)
+        internal static DisplayModeProvider AssignDisplayModeProvider(
+            params WebPageRenderingBase[] pages
+        )
         {
             var displayModeProvider = new DisplayModeProvider();
             foreach (var item in pages)

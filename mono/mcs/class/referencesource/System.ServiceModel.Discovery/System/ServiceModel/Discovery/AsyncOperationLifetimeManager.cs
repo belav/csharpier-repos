@@ -27,18 +27,12 @@ namespace System.ServiceModel.Discovery
 
         public bool IsAborted
         {
-            get
-            {
-                return this.isAborted;
-            }
+            get { return this.isAborted; }
         }
 
         public bool IsClosed
         {
-            get
-            {
-                return this.closeHandle != null;
-            }
+            get { return this.closeHandle != null; }
         }
 
         public bool TryAdd(AsyncOperationContext context)
@@ -103,7 +97,8 @@ namespace System.ServiceModel.Discovery
             return success;
         }
 
-        public bool TryLookup<T>(UniqueId operationId, out T context) where T : AsyncOperationContext
+        public bool TryLookup<T>(UniqueId operationId, out T context)
+            where T : AsyncOperationContext
         {
             AsyncOperationContext asyncContext = null;
             if (TryLookup(operationId, out asyncContext))
@@ -119,18 +114,19 @@ namespace System.ServiceModel.Discovery
             return false;
         }
 
-        public T Remove<T>(UniqueId operationId) where T : AsyncOperationContext
+        public T Remove<T>(UniqueId operationId)
+            where T : AsyncOperationContext
         {
             AsyncOperationContext context = null;
             bool setCloseHandle = false;
 
             lock (this.thisLock)
             {
-                if ((this.activeOperations.TryGetValue(operationId, out context)) &&
-                    (context is T))
+                if ((this.activeOperations.TryGetValue(operationId, out context)) && (context is T))
                 {
                     this.activeOperations.Remove(operationId);
-                    setCloseHandle = (this.closeHandle != null) && (this.activeOperations.Count == 0);
+                    setCloseHandle =
+                        (this.closeHandle != null) && (this.activeOperations.Count == 0);
                 }
                 else
                 {
@@ -174,7 +170,8 @@ namespace System.ServiceModel.Discovery
                 if (success)
                 {
                     this.activeOperations.Remove(context.OperationId);
-                    setCloseHandle = (this.closeHandle != null) && (this.activeOperations.Count == 0);
+                    setCloseHandle =
+                        (this.closeHandle != null) && (this.activeOperations.Count == 0);
                 }
             }
 
@@ -191,7 +188,9 @@ namespace System.ServiceModel.Discovery
             InitializeCloseHandle();
             if (!this.closeHandle.Wait(timeout))
             {
-                throw FxTrace.Exception.AsError(new TimeoutException(SR2.TimeoutOnOperation(timeout)));
+                throw FxTrace.Exception.AsError(
+                    new TimeoutException(SR2.TimeoutOnOperation(timeout))
+                );
             }
         }
 
@@ -227,10 +226,18 @@ namespace System.ServiceModel.Discovery
 
         class CloseAsyncResult : AsyncResult
         {
-            static Action<object, TimeoutException> onWaitCompleted = new Action<object, TimeoutException>(OnWaitCompleted);
+            static Action<object, TimeoutException> onWaitCompleted = new Action<
+                object,
+                TimeoutException
+            >(OnWaitCompleted);
             AsyncWaitHandle asyncWaitHandle;
 
-            internal CloseAsyncResult(AsyncWaitHandle asyncWaitHandle, TimeSpan timeout, AsyncCallback callback, object state)
+            internal CloseAsyncResult(
+                AsyncWaitHandle asyncWaitHandle,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.asyncWaitHandle = asyncWaitHandle;

@@ -30,7 +30,6 @@ namespace System.Runtime.InteropServices.Marshalling
             return hr;
         }
 
-        unsafe int IIUnknownStrategy.Release(void* thisPtr)
-            => Marshal.Release((nint)thisPtr);
+        unsafe int IIUnknownStrategy.Release(void* thisPtr) => Marshal.Release((nint)thisPtr);
     }
 }

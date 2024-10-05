@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Text;
 using System.Diagnostics;
+using System.Text;
 
 namespace Microsoft.DotNet.Cli.Build.Framework
 {
@@ -28,18 +28,24 @@ namespace Microsoft.DotNet.Cli.Build.Framework
         {
             if (ExitCode != 0)
             {
-                StringBuilder message = new StringBuilder($"Command failed with exit code {ExitCode}: {StartInfo.FileName} {StartInfo.Arguments}");
+                StringBuilder message = new StringBuilder(
+                    $"Command failed with exit code {ExitCode}: {StartInfo.FileName} {StartInfo.Arguments}"
+                );
 
                 if (!suppressOutput)
                 {
                     if (!string.IsNullOrEmpty(StdOut))
                     {
-                        message.AppendLine($"{Environment.NewLine}Standard Output:{Environment.NewLine}{StdOut}");
+                        message.AppendLine(
+                            $"{Environment.NewLine}Standard Output:{Environment.NewLine}{StdOut}"
+                        );
                     }
 
                     if (!string.IsNullOrEmpty(StdErr))
                     {
-                        message.AppendLine($"{Environment.NewLine}Standard Error:{Environment.NewLine}{StdErr}");
+                        message.AppendLine(
+                            $"{Environment.NewLine}Standard Error:{Environment.NewLine}{StdErr}"
+                        );
                     }
                 }
 

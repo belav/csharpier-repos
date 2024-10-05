@@ -29,18 +29,18 @@
 //
 
 using System.ComponentModel;
+using System.Data.SqlTypes;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Tests;
+using System.Text;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using System.IO;
-using System.Data.SqlTypes;
-using System.Globalization;
-using System.Text;
-using System.Diagnostics;
-using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft.DotNet.RemoteExecutor;
 using Xunit;
-using System.Tests;
 
 namespace System.Data.Tests
 {
@@ -238,7 +238,10 @@ namespace System.Data.Tests
             Assert.Equal(expected, TextString.ReplaceLineEndings());
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void ReadWriteXml()
         {
             var ds = new DataSet();
@@ -263,7 +266,10 @@ namespace System.Data.Tests
             Assert.Equal(expected, TextString.ReplaceLineEndings());
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void ReadWriteXmlDiffGram()
         {
             var ds = new DataSet();
@@ -278,8 +284,10 @@ namespace System.Data.Tests
             ds.WriteXml(writer, XmlWriteMode.DiffGram);
             TextString = writer.ToString();
 
-            Assert.Equal("<NewDataSet /><diffgr:diffgram xmlns:msdata=\"urn:schemas-microsoft-com:xml-msdata\" xmlns:diffgr=\"urn:schemas-microsoft-com:xml-diffgram-v1\" />", TextString);
-
+            Assert.Equal(
+                "<NewDataSet /><diffgr:diffgram xmlns:msdata=\"urn:schemas-microsoft-com:xml-msdata\" xmlns:diffgr=\"urn:schemas-microsoft-com:xml-diffgram-v1\" />",
+                TextString
+            );
 
             ds = new DataSet();
             ds.ReadXml(new StringReader(DataProvider.region));
@@ -288,7 +296,8 @@ namespace System.Data.Tests
             ds.ReadXml(new StringReader(DataProvider.region), XmlReadMode.DiffGram);
             ds.WriteXml(writer, XmlWriteMode.DiffGram);
 
-            string expected = @"<NewDataSet /><diffgr:diffgram xmlns:msdata=""urn:schemas-microsoft-com:xml-msdata"" xmlns:diffgr=""urn:schemas-microsoft-com:xml-diffgram-v1"" /><diffgr:diffgram xmlns:msdata=""urn:schemas-microsoft-com:xml-msdata"" xmlns:diffgr=""urn:schemas-microsoft-com:xml-diffgram-v1"">
+            string expected =
+                @"<NewDataSet /><diffgr:diffgram xmlns:msdata=""urn:schemas-microsoft-com:xml-msdata"" xmlns:diffgr=""urn:schemas-microsoft-com:xml-diffgram-v1"" /><diffgr:diffgram xmlns:msdata=""urn:schemas-microsoft-com:xml-msdata"" xmlns:diffgr=""urn:schemas-microsoft-com:xml-diffgram-v1"">
   <Root>
     <Region diffgr:id=""Region1"" msdata:rowOrder=""0"" diffgr:hasChanges=""inserted"">
       <RegionID>64</RegionID>
@@ -307,7 +316,10 @@ namespace System.Data.Tests
             Assert.Equal(expected, TextString.ReplaceLineEndings());
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void WriteXmlSchema()
         {
             using (new ThreadCultureChange("fi-FI"))
@@ -368,9 +380,10 @@ namespace System.Data.Tests
         {
             // see GetReady() for current culture
 
-            string xml = "<?xml version='1.0' encoding='utf-16'?><DataSet><xs:schema id='DS' xmlns='' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:msdata='urn:schemas-microsoft-com:xml-msdata'><xs:element name='DS' msdata:IsDataSet='true' " +
-              "msdata:UseCurrentLocale='true'"
-              + "><xs:complexType><xs:choice minOccurs='0' maxOccurs='unbounded' /></xs:complexType></xs:element></xs:schema><diffgr:diffgram xmlns:msdata='urn:schemas-microsoft-com:xml-msdata' xmlns:diffgr='urn:schemas-microsoft-com:xml-diffgram-v1' /></DataSet>";
+            string xml =
+                "<?xml version='1.0' encoding='utf-16'?><DataSet><xs:schema id='DS' xmlns='' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:msdata='urn:schemas-microsoft-com:xml-msdata'><xs:element name='DS' msdata:IsDataSet='true' "
+                + "msdata:UseCurrentLocale='true'"
+                + "><xs:complexType><xs:choice minOccurs='0' maxOccurs='unbounded' /></xs:complexType></xs:element></xs:schema><diffgr:diffgram xmlns:msdata='urn:schemas-microsoft-com:xml-msdata' xmlns:diffgr='urn:schemas-microsoft-com:xml-diffgram-v1' /></DataSet>";
             var ds = new DataSet();
             ds.DataSetName = "DS";
             XmlSerializer ser = new XmlSerializer(typeof(DataSet));
@@ -398,8 +411,7 @@ namespace System.Data.Tests
 
             dt.Columns.Add("Title", typeof(string));
             dt.Columns["Title"].AllowDBNull = false;
-            dt.Columns["Title"].ColumnMapping =
-            MappingType.Attribute;
+            dt.Columns["Title"].ColumnMapping = MappingType.Attribute;
 
             dt.Rows.Add(new object[] { 0, "Hospitals" });
             dt.Rows.Add(new object[] { 1, "Doctors" });
@@ -420,7 +432,8 @@ namespace System.Data.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/30154")]
         public void SerializeDataSet3()
         {
-            string xml = @"<?xml version=""1.0"" encoding=""utf-16""?><DataSet><xs:schema id=""Example"" xmlns="""" xmlns:xs=""http://www.w3.org/2001/XMLSchema"" xmlns:msdata=""urn:schemas-microsoft-com:xml-msdata""><xs:element name=""Example"" msdata:IsDataSet=""true""><xs:complexType><xs:choice maxOccurs=""unbounded"" minOccurs=""0""><xs:element name=""Packages""><xs:complexType><xs:attribute name=""ID"" type=""xs:int"" use=""required"" /><xs:attribute name=""ShipDate"" type=""xs:dateTime"" /><xs:attribute name=""Message"" type=""xs:string"" /><xs:attribute name=""Handlers"" type=""xs:int"" /></xs:complexType></xs:element></xs:choice></xs:complexType></xs:element></xs:schema><diffgr:diffgram xmlns:msdata=""urn:schemas-microsoft-com:xml-msdata"" xmlns:diffgr=""urn:schemas-microsoft-com:xml-diffgram-v1""><Example><Packages diffgr:id=""Packages1"" msdata:rowOrder=""0"" ID=""0"" ShipDate=""2004-10-11T17:46:18.6962302-05:00"" Message=""Received with no breakage!"" Handlers=""3"" /><Packages diffgr:id=""Packages2"" msdata:rowOrder=""1"" ID=""1"" /></Example></diffgr:diffgram></DataSet>";
+            string xml =
+                @"<?xml version=""1.0"" encoding=""utf-16""?><DataSet><xs:schema id=""Example"" xmlns="""" xmlns:xs=""http://www.w3.org/2001/XMLSchema"" xmlns:msdata=""urn:schemas-microsoft-com:xml-msdata""><xs:element name=""Example"" msdata:IsDataSet=""true""><xs:complexType><xs:choice maxOccurs=""unbounded"" minOccurs=""0""><xs:element name=""Packages""><xs:complexType><xs:attribute name=""ID"" type=""xs:int"" use=""required"" /><xs:attribute name=""ShipDate"" type=""xs:dateTime"" /><xs:attribute name=""Message"" type=""xs:string"" /><xs:attribute name=""Handlers"" type=""xs:int"" /></xs:complexType></xs:element></xs:choice></xs:complexType></xs:element></xs:schema><diffgr:diffgram xmlns:msdata=""urn:schemas-microsoft-com:xml-msdata"" xmlns:diffgr=""urn:schemas-microsoft-com:xml-diffgram-v1""><Example><Packages diffgr:id=""Packages1"" msdata:rowOrder=""0"" ID=""0"" ShipDate=""2004-10-11T17:46:18.6962302-05:00"" Message=""Received with no breakage!"" Handlers=""3"" /><Packages diffgr:id=""Packages2"" msdata:rowOrder=""1"" ID=""1"" /></Example></diffgr:diffgram></DataSet>";
 
             DataSet ds = new DataSet("Example");
 
@@ -429,23 +442,19 @@ namespace System.Data.Tests
             ds.Tables.Add(dt);
 
             // Add an ID DataColumn w/ ColumnMapping = MappingType.Attribute
-            dt.Columns.Add(new DataColumn("ID", typeof(int), "",
-                MappingType.Attribute));
+            dt.Columns.Add(new DataColumn("ID", typeof(int), "", MappingType.Attribute));
             dt.Columns["ID"].AllowDBNull = false;
 
             // Add a nullable DataColumn w/ ColumnMapping = MappingType.Attribute
-            dt.Columns.Add(new DataColumn("ShipDate",
-                typeof(DateTime), "", MappingType.Attribute));
+            dt.Columns.Add(new DataColumn("ShipDate", typeof(DateTime), "", MappingType.Attribute));
             dt.Columns["ShipDate"].AllowDBNull = true;
 
             // Add a nullable DataColumn w/ ColumnMapping = MappingType.Attribute
-            dt.Columns.Add(new DataColumn("Message",
-                typeof(string), "", MappingType.Attribute));
+            dt.Columns.Add(new DataColumn("Message", typeof(string), "", MappingType.Attribute));
             dt.Columns["Message"].AllowDBNull = true;
 
             // Add a nullable DataColumn w/ ColumnMapping = MappingType.Attribute
-            dt.Columns.Add(new DataColumn("Handlers",
-                typeof(int), "", MappingType.Attribute));
+            dt.Columns.Add(new DataColumn("Handlers", typeof(int), "", MappingType.Attribute));
             dt.Columns["Handlers"].AllowDBNull = true;
 
             // Add a non-null value row
@@ -471,13 +480,20 @@ namespace System.Data.Tests
             ser.Serialize(sw, ds);
 
             string result = sw.ToString();
-            Assert.Equal(xml, result.Replace("\r\n", "").Replace("\n", ""), ignoreCase: false, ignoreLineEndingDifferences: true, ignoreWhiteSpaceDifferences: true);
+            Assert.Equal(
+                xml,
+                result.Replace("\r\n", "").Replace("\n", ""),
+                ignoreCase: false,
+                ignoreLineEndingDifferences: true,
+                ignoreWhiteSpaceDifferences: true
+            );
         }
 
         [Fact]
         public void DeserializeDataSet()
         {
-            string xml = @"<DataSet>
+            string xml =
+                @"<DataSet>
   <diffgr:diffgram xmlns:msdata='urn:schemas-microsoft-com:xml-msdata' xmlns:diffgr='urn:schemas-microsoft-com:xml-diffgram-v1'>
     <Quota>
       <Dimension diffgr:id='Dimension1' msdata:rowOrder='0' Number='0' Title='Hospitals' />
@@ -486,8 +502,7 @@ namespace System.Data.Tests
   </diffgr:diffgram>
 </DataSet>";
             XmlSerializer ser = new XmlSerializer(typeof(DataSet));
-            ser.Deserialize(new XmlTextReader(
-                xml, XmlNodeType.Document, null));
+            ser.Deserialize(new XmlTextReader(xml, XmlNodeType.Document, null));
         }
 
         /* To be added
@@ -553,9 +568,12 @@ namespace System.Data.Tests
             col.ColumnName = "Name";
             col.DataType = typeof(string);
             table1.Columns.Add(col);
-            ForeignKeyConstraint fc = new ForeignKeyConstraint("FK1", table.Columns[0], table1.Columns[0]);
+            ForeignKeyConstraint fc = new ForeignKeyConstraint(
+                "FK1",
+                table.Columns[0],
+                table1.Columns[0]
+            );
             table1.Constraints.Add(fc);
-
 
             DataRow row = table.NewRow();
 
@@ -595,7 +613,10 @@ namespace System.Data.Tests
             Assert.Equal(set.Prefix, copySet.Prefix);
             Assert.Equal(set.Relations.Count, copySet.Relations.Count);
             Assert.Equal(set.Tables.Count, copySet.Tables.Count);
-            Assert.Equal(set.ExtendedProperties["TimeStamp"], copySet.ExtendedProperties["TimeStamp"]);
+            Assert.Equal(
+                set.ExtendedProperties["TimeStamp"],
+                copySet.ExtendedProperties["TimeStamp"]
+            );
             for (int i = 0; i < copySet.Tables.Count; i++)
             {
                 Assert.Equal(set.Tables[i].Rows.Count, copySet.Tables[i].Rows.Count);
@@ -611,7 +632,10 @@ namespace System.Data.Tests
             Assert.Equal(set.Prefix, copySet.Prefix);
             Assert.Equal(set.Relations.Count, copySet.Relations.Count);
             Assert.Equal(set.Tables.Count, copySet.Tables.Count);
-            Assert.Equal(set.ExtendedProperties["TimeStamp"], copySet.ExtendedProperties["TimeStamp"]);
+            Assert.Equal(
+                set.ExtendedProperties["TimeStamp"],
+                copySet.ExtendedProperties["TimeStamp"]
+            );
             for (int i = 0; i < copySet.Tables.Count; i++)
             {
                 Assert.Equal(0, copySet.Tables[i].Rows.Count);
@@ -659,7 +683,11 @@ namespace System.Data.Tests
             DataColumn[] childColumns = new DataColumn[1];
             childColumns[0] = ds.Tables["Files"].Columns["DirectoryID"];
 
-            ForeignKeyConstraint fk = new ForeignKeyConstraint("FK_Test", parentColumns, childColumns);
+            ForeignKeyConstraint fk = new ForeignKeyConstraint(
+                "FK_Test",
+                parentColumns,
+                childColumns
+            );
             ds.Tables["Files"].Constraints.Add(fk);
             ds.EnforceConstraints = true;
 
@@ -671,12 +699,14 @@ namespace System.Data.Tests
             Assert.Equal(1, cloned_ds.Tables["Directories"].Constraints.Count);
             Assert.Equal(1, cloned_ds.Tables["Files"].Constraints.Count);
 
-            ForeignKeyConstraint clonedFk = (ForeignKeyConstraint)cloned_ds.Tables["Files"].Constraints[0];
+            ForeignKeyConstraint clonedFk = (ForeignKeyConstraint)
+                cloned_ds.Tables["Files"].Constraints[0];
             Assert.Equal("FK_Test", clonedFk.ConstraintName);
             Assert.Equal(1, clonedFk.Columns.Length);
             Assert.Equal("DirectoryID", clonedFk.Columns[0].ColumnName);
 
-            UniqueConstraint clonedUc = (UniqueConstraint)cloned_ds.Tables["Directories"].Constraints[0];
+            UniqueConstraint clonedUc = (UniqueConstraint)
+                cloned_ds.Tables["Directories"].Constraints[0];
             UniqueConstraint origUc = (UniqueConstraint)ds.Tables["Directories"].Constraints[0];
             Assert.Equal(origUc.ConstraintName, clonedUc.ConstraintName);
             Assert.Equal(1, clonedUc.Columns.Length);
@@ -687,12 +717,14 @@ namespace System.Data.Tests
             Assert.Equal(1, copy_ds.Tables["Directories"].Constraints.Count);
             Assert.Equal(1, copy_ds.Tables["Files"].Constraints.Count);
 
-            ForeignKeyConstraint copyFk = (ForeignKeyConstraint)copy_ds.Tables["Files"].Constraints[0];
+            ForeignKeyConstraint copyFk = (ForeignKeyConstraint)
+                copy_ds.Tables["Files"].Constraints[0];
             Assert.Equal("FK_Test", copyFk.ConstraintName);
             Assert.Equal(1, copyFk.Columns.Length);
             Assert.Equal("DirectoryID", copyFk.Columns[0].ColumnName);
 
-            UniqueConstraint copyUc = (UniqueConstraint)copy_ds.Tables["Directories"].Constraints[0];
+            UniqueConstraint copyUc = (UniqueConstraint)
+                copy_ds.Tables["Directories"].Constraints[0];
             origUc = (UniqueConstraint)ds.Tables["Directories"].Constraints[0];
             Assert.Equal(origUc.ConstraintName, copyUc.ConstraintName);
             Assert.Equal(1, copyUc.Columns.Length);
@@ -702,7 +734,8 @@ namespace System.Data.Tests
         [Fact]
         public void WriteNestedTableXml()
         {
-            string xml = @"<NewDataSet>
+            string xml =
+                @"<NewDataSet>
   <tab1>
     <ident>1</ident>
     <name>hoge</name>
@@ -740,17 +773,22 @@ namespace System.Data.Tests
             Assert.Equal(sw.ToString().Replace("\r\n", "\n"), xml.Replace("\r\n", "\n"));
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void WriteXmlToStream()
         {
-            string xml = "<set><table1><col1>sample text</col1><col2/></table1><table2 attr='value'><col3>sample text 2</col3></table2></set>";
+            string xml =
+                "<set><table1><col1>sample text</col1><col2/></table1><table2 attr='value'><col3>sample text 2</col3></table2></set>";
             var ds = new DataSet();
             ds.ReadXml(new StringReader(xml));
             MemoryStream ms = new MemoryStream();
             ds.WriteXml(ms);
             MemoryStream ms2 = new MemoryStream(ms.ToArray());
             StreamReader sr = new StreamReader(ms2, Encoding.UTF8);
-            string result = @"<set>
+            string result =
+                @"<set>
   <table1>
     <col1>sample text</col1>
     <col2 />
@@ -765,7 +803,8 @@ namespace System.Data.Tests
         [Fact]
         public void WtiteXmlEncodedXml()
         {
-            string xml = @"<an_x0020_example_x0020_dataset.>
+            string xml =
+                @"<an_x0020_example_x0020_dataset.>
   <WOW_x0021__x0020_that_x0027_s_x0020_nasty...>
     <URL_x0020_is_x0020_http_x003A__x002F__x002F_www.go-mono.com>content string.</URL_x0020_is_x0020_http_x003A__x002F__x002F_www.go-mono.com>
   </WOW_x0021__x0020_that_x0027_s_x0020_nasty...>
@@ -779,10 +818,14 @@ namespace System.Data.Tests
             Assert.Equal(sw.ToString().Replace("\r\n", "\n"), xml.Replace("\r\n", "\n"));
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void ReadWriteXml2()
         {
-            string xml = "<FullTextResponse><Domains><AvailResponse info='y' name='novell-ximian-group' /><AvailResponse info='n' name='ximian' /></Domains></FullTextResponse>";
+            string xml =
+                "<FullTextResponse><Domains><AvailResponse info='y' name='novell-ximian-group' /><AvailResponse info='n' name='ximian' /></Domains></FullTextResponse>";
             var ds = new DataSet();
             ds.ReadXml(new StringReader(xml));
             DataSetAssertion.AssertDataSet("ds", ds, "FullTextResponse", 2, 1);
@@ -797,10 +840,14 @@ namespace System.Data.Tests
             Assert.Equal(xml, sw.ToString());
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void ReadWriteXml3()
         {
-            string input = @"<FullTextResponse>
+            string input =
+                @"<FullTextResponse>
   <Domains>
     <AvailResponse info='y' name='novell-ximian-group' />
     <AvailResponse info='n' name='ximian' />
@@ -821,12 +868,14 @@ namespace System.Data.Tests
         [Fact]
         public void WriteXmlSchema2()
         {
-            string xml = @"<myDataSet xmlns='NetFrameWork'><myTable><id>0</id><item>item 0</item></myTable><myTable><id>1</id><item>item 1</item></myTable><myTable><id>2</id><item>item 2</item></myTable><myTable><id>3</id><item>item 3</item></myTable><myTable><id>4</id><item>item 4</item></myTable><myTable><id>5</id><item>item 5</item></myTable><myTable><id>6</id><item>item 6</item></myTable><myTable><id>7</id><item>item 7</item></myTable><myTable><id>8</id><item>item 8</item></myTable><myTable><id>9</id><item>item 9</item></myTable></myDataSet>";
-            string schema = @"<?xml version='1.0' encoding='utf-16'?>
+            string xml =
+                @"<myDataSet xmlns='NetFrameWork'><myTable><id>0</id><item>item 0</item></myTable><myTable><id>1</id><item>item 1</item></myTable><myTable><id>2</id><item>item 2</item></myTable><myTable><id>3</id><item>item 3</item></myTable><myTable><id>4</id><item>item 4</item></myTable><myTable><id>5</id><item>item 5</item></myTable><myTable><id>6</id><item>item 6</item></myTable><myTable><id>7</id><item>item 7</item></myTable><myTable><id>8</id><item>item 8</item></myTable><myTable><id>9</id><item>item 9</item></myTable></myDataSet>";
+            string schema =
+                @"<?xml version='1.0' encoding='utf-16'?>
 <xs:schema id='myDataSet' targetNamespace='NetFrameWork' xmlns:mstns='NetFrameWork' xmlns='NetFrameWork' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:msdata='urn:schemas-microsoft-com:xml-msdata' attributeFormDefault='qualified' elementFormDefault='qualified'>
-  <xs:element name='myDataSet' msdata:IsDataSet='true' " +
-            "msdata:UseCurrentLocale='true'"
-            + @">
+  <xs:element name='myDataSet' msdata:IsDataSet='true' "
+                + "msdata:UseCurrentLocale='true'"
+                + @">
     <xs:complexType>
       <xs:choice minOccurs='0' maxOccurs='unbounded'>
         <xs:element name='myTable'>
@@ -881,11 +930,14 @@ namespace System.Data.Tests
         [Fact]
         public void WriteXmlSchema3()
         {
-            string xmlschema = @"<?xml version=""1.0"" encoding=""utf-16""?>
+            string xmlschema =
+                @"<?xml version=""1.0"" encoding=""utf-16""?>
 <xs:schema id=""ExampleDataSet"" xmlns="""" xmlns:xs=""http://www.w3.org/2001/XMLSchema"" xmlns:msdata=""urn:schemas-microsoft-com:xml-msdata"">
   <xs:element name=""ExampleDataSet"" msdata:IsDataSet=""true"" ";
             xmlschema = xmlschema + "msdata:UseCurrentLocale=\"true\"";
-            xmlschema = xmlschema + @">
+            xmlschema =
+                xmlschema
+                + @">
     <xs:complexType>
       <xs:choice minOccurs=""0"" maxOccurs=""unbounded"">
         <xs:element name=""ExampleDataTable"">
@@ -904,14 +956,18 @@ namespace System.Data.Tests
             DataSet ds = new DataSet("ExampleDataSet");
 
             ds.Tables.Add(new DataTable("ExampleDataTable"));
-            ds.Tables["ExampleDataTable"].Columns.Add(
-                new DataColumn("PrimaryKeyColumn", typeof(int), "", MappingType.Attribute));
+            ds.Tables["ExampleDataTable"]
+                .Columns.Add(
+                    new DataColumn("PrimaryKeyColumn", typeof(int), "", MappingType.Attribute)
+                );
             ds.Tables["ExampleDataTable"].Columns["PrimaryKeyColumn"].AllowDBNull = false;
 
-            ds.Tables["ExampleDataTable"].Constraints.Add(
-                "PK_ExampleDataTable",
-                ds.Tables["ExampleDataTable"].Columns["PrimaryKeyColumn"],
-                true);
+            ds.Tables["ExampleDataTable"]
+                .Constraints.Add(
+                    "PK_ExampleDataTable",
+                    ds.Tables["ExampleDataTable"].Columns["PrimaryKeyColumn"],
+                    true
+                );
 
             ds.AcceptChanges();
             StringWriter sw = new StringWriter();
@@ -925,11 +981,16 @@ namespace System.Data.Tests
         [Fact]
         public void WriteXmlSchema4()
         {
-            string xmlschema = @"<?xml version=""1.0"" encoding=""utf-16""?>
+            string xmlschema =
+                @"<?xml version=""1.0"" encoding=""utf-16""?>
 <xs:schema id=""Example"" xmlns="""" xmlns:xs=""http://www.w3.org/2001/XMLSchema"" xmlns:msdata=""urn:schemas-microsoft-com:xml-msdata"">
 ";
-            xmlschema = xmlschema + "  <xs:element name=\"Example\" msdata:IsDataSet=\"true\" msdata:UseCurrentLocale=\"true\"";
-            xmlschema = xmlschema + @">
+            xmlschema =
+                xmlschema
+                + "  <xs:element name=\"Example\" msdata:IsDataSet=\"true\" msdata:UseCurrentLocale=\"true\"";
+            xmlschema =
+                xmlschema
+                + @">
     <xs:complexType>
       <xs:choice minOccurs=""0"" maxOccurs=""unbounded"">
         <xs:element name=""MyType"">
@@ -948,12 +1009,10 @@ namespace System.Data.Tests
             DataTable dt = new DataTable("MyType");
             ds.Tables.Add(dt);
 
-            dt.Columns.Add(new DataColumn("ID", typeof(int), "",
-                MappingType.Attribute));
+            dt.Columns.Add(new DataColumn("ID", typeof(int), "", MappingType.Attribute));
             dt.Columns["ID"].AllowDBNull = false;
 
-            dt.Columns.Add(new DataColumn("Desc", typeof
-                (string), "", MappingType.Attribute));
+            dt.Columns.Add(new DataColumn("Desc", typeof(string), "", MappingType.Attribute));
 
             ds.AcceptChanges();
 
@@ -968,11 +1027,12 @@ namespace System.Data.Tests
         [Fact]
         public void WriteXmlSchema5()
         {
-            string xmlschema = @"<?xml version=""1.0"" encoding=""utf-16""?>
+            string xmlschema =
+                @"<?xml version=""1.0"" encoding=""utf-16""?>
 <xs:schema id=""Example"" xmlns="""" xmlns:xs=""http://www.w3.org/2001/XMLSchema"" xmlns:msdata=""urn:schemas-microsoft-com:xml-msdata"">
-" +
-"  <xs:element name=\"Example\" msdata:IsDataSet=\"true\" msdata:UseCurrentLocale=\"true\""
-              + @">
+"
+                + "  <xs:element name=\"Example\" msdata:IsDataSet=\"true\" msdata:UseCurrentLocale=\"true\""
+                + @">
     <xs:complexType>
       <xs:choice minOccurs=""0"" maxOccurs=""unbounded"">
         <xs:element name=""StandAlone"">
@@ -1018,24 +1078,20 @@ namespace System.Data.Tests
             ds.Tables.Add(dt1);
 
             // Add a ReadOnly column
-            dt1.Columns.Add(new DataColumn("ID", typeof(int), "",
-                MappingType.Attribute));
+            dt1.Columns.Add(new DataColumn("ID", typeof(int), "", MappingType.Attribute));
             dt1.Columns["ID"].AllowDBNull = false;
 
-            dt1.Columns.Add(new DataColumn("Desc", typeof
-                (string), "", MappingType.Attribute));
+            dt1.Columns.Add(new DataColumn("Desc", typeof(string), "", MappingType.Attribute));
             dt1.Columns["Desc"].AllowDBNull = false;
 
             // Add related DataTables with ReadOnly columns
             DataTable dt2 = new DataTable("Dimension");
             ds.Tables.Add(dt2);
-            dt2.Columns.Add(new DataColumn("Number", typeof
-                (int), "", MappingType.Attribute));
+            dt2.Columns.Add(new DataColumn("Number", typeof(int), "", MappingType.Attribute));
             dt2.Columns["Number"].AllowDBNull = false;
             dt2.Columns["Number"].ReadOnly = true;
 
-            dt2.Columns.Add(new DataColumn("Title", typeof
-                (string), "", MappingType.Attribute));
+            dt2.Columns.Add(new DataColumn("Title", typeof(string), "", MappingType.Attribute));
             dt2.Columns["Title"].AllowDBNull = false;
 
             dt2.Constraints.Add("PK_Dimension", dt2.Columns["Number"], true);
@@ -1043,26 +1099,28 @@ namespace System.Data.Tests
             DataTable dt3 = new DataTable("Element");
             ds.Tables.Add(dt3);
 
-            dt3.Columns.Add(new DataColumn("Dimension", typeof
-                (int), "", MappingType.Attribute));
+            dt3.Columns.Add(new DataColumn("Dimension", typeof(int), "", MappingType.Attribute));
             dt3.Columns["Dimension"].AllowDBNull = false;
             dt3.Columns["Dimension"].ReadOnly = true;
 
-            dt3.Columns.Add(new DataColumn("Number", typeof
-                (int), "", MappingType.Attribute));
+            dt3.Columns.Add(new DataColumn("Number", typeof(int), "", MappingType.Attribute));
             dt3.Columns["Number"].AllowDBNull = false;
             dt3.Columns["Number"].ReadOnly = true;
 
-            dt3.Columns.Add(new DataColumn("Title", typeof
-                (string), "", MappingType.Attribute));
+            dt3.Columns.Add(new DataColumn("Title", typeof(string), "", MappingType.Attribute));
             dt3.Columns["Title"].AllowDBNull = false;
 
-            dt3.Constraints.Add("PK_Element", new DataColumn[] {
-                dt3.Columns ["Dimension"],
-                dt3.Columns ["Number"] }, true);
+            dt3.Constraints.Add(
+                "PK_Element",
+                new DataColumn[] { dt3.Columns["Dimension"], dt3.Columns["Number"] },
+                true
+            );
 
-            ds.Relations.Add("FK_Element_To_Dimension",
-                dt2.Columns["Number"], dt3.Columns["Dimension"]);
+            ds.Relations.Add(
+                "FK_Element_To_Dimension",
+                dt2.Columns["Number"],
+                dt3.Columns["Dimension"]
+            );
 
             ds.AcceptChanges();
 
@@ -1077,11 +1135,12 @@ namespace System.Data.Tests
         [Fact]
         public void WriteXmlSchema6()
         {
-            string xmlschema = @"<?xml version=""1.0"" encoding=""utf-16""?>
+            string xmlschema =
+                @"<?xml version=""1.0"" encoding=""utf-16""?>
 <xs:schema id=""Example"" xmlns="""" xmlns:xs=""http://www.w3.org/2001/XMLSchema"" xmlns:msdata=""urn:schemas-microsoft-com:xml-msdata"">
-" +
-              @"  <xs:element name=""Example"" msdata:IsDataSet=""true"" msdata:UseCurrentLocale=""true"""
-              + @">
+"
+                + @"  <xs:element name=""Example"" msdata:IsDataSet=""true"" msdata:UseCurrentLocale=""true"""
+                + @">
     <xs:complexType>
       <xs:choice minOccurs=""0"" maxOccurs=""unbounded"">
         <xs:element name=""MyType"">
@@ -1104,8 +1163,8 @@ namespace System.Data.Tests
             // Add MyType DataTable
             ds.Tables.Add("MyType");
 
-            ds.Tables["MyType"].Columns.Add(new DataColumn(
-                "Desc", typeof(string), "", MappingType.Attribute));
+            ds.Tables["MyType"]
+                .Columns.Add(new DataColumn("Desc", typeof(string), "", MappingType.Attribute));
             ds.Tables["MyType"].Columns["Desc"].MaxLength = 32;
 
             ds.AcceptChanges();
@@ -1135,11 +1194,12 @@ namespace System.Data.Tests
         [Fact]
         public void WriteXmlExtendedProperties()
         {
-            string xml = @"<?xml version=""1.0"" encoding=""utf-16""?>
+            string xml =
+                @"<?xml version=""1.0"" encoding=""utf-16""?>
 <xs:schema id=""NewDataSet"" xmlns="""" xmlns:xs=""http://www.w3.org/2001/XMLSchema"" xmlns:msdata=""urn:schemas-microsoft-com:xml-msdata"" xmlns:msprop=""urn:schemas-microsoft-com:xml-msprop"">
-" +
-@"  <xs:element name=""NewDataSet"" msdata:IsDataSet=""true"" msdata:UseCurrentLocale=""true"" msprop:version=""version 2.1"">"
-              + @"
+"
+                + @"  <xs:element name=""NewDataSet"" msdata:IsDataSet=""true"" msdata:UseCurrentLocale=""true"" msprop:version=""version 2.1"">"
+                + @"
     <xs:complexType>
       <xs:choice minOccurs=""0"" maxOccurs=""unbounded"">
         <xs:element name=""Foo"">
@@ -1173,11 +1233,12 @@ namespace System.Data.Tests
         {
             // This is the MS output of WriteXmlSchema().
 
-            string xml = @"<Example>
+            string xml =
+                @"<Example>
   <xs:schema id=""Example"" xmlns="""" xmlns:xs=""http://www.w3.org/2001/XMLSchema"" xmlns:msdata=""urn:schemas-microsoft-com:xml-msdata"">
-" +
-@"    <xs:element name=""Example"" msdata:IsDataSet=""true"" msdata:UseCurrentLocale=""true"">"
-              + @"
+"
+                + @"    <xs:element name=""Example"" msdata:IsDataSet=""true"" msdata:UseCurrentLocale=""true"">"
+                + @"
       <xs:complexType>
         <xs:choice minOccurs=""0"" maxOccurs=""unbounded"">
           <xs:element name=""Dimension"">
@@ -1264,15 +1325,19 @@ namespace System.Data.Tests
             dt2.Columns.Add(new DataColumn("Number", typeof(int)));
             dt2.Columns["Number"].AllowDBNull = false;
 
-            dt2.Constraints.Add("PK_Element", new DataColumn[] {
-                dt2.Columns ["Dimension"],
-                dt2.Columns ["Number"] },
-                true);
+            dt2.Constraints.Add(
+                "PK_Element",
+                new DataColumn[] { dt2.Columns["Dimension"], dt2.Columns["Number"] },
+                true
+            );
 
             // Add DataRelations
-            ds.Relations.Add("FK_Element_To_Dimension",
+            ds.Relations.Add(
+                "FK_Element_To_Dimension",
                 dt1.Columns["Number"],
-                dt2.Columns["Dimension"], true);
+                dt2.Columns["Dimension"],
+                true
+            );
 
             // Add 2 Dimensions
             for (int i = 0; i < 2; i++)
@@ -1310,7 +1375,10 @@ namespace System.Data.Tests
             Assert.Equal(result.Replace("\r\n", "\n"), xml.Replace("\r\n", "\n"));
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void WriteXmlModeSchema1()
         {
             // Keeping the brackets as the test otherwise starts to fail.
@@ -1318,15 +1386,15 @@ namespace System.Data.Tests
                 using (new ThreadCultureChange("fi-FI"))
                 {
                     string SerializedDataTable =
-        @"<rdData>
+                        @"<rdData>
   <MyDataTable CustomerID='VINET' CompanyName='Vins et alcools Chevalier' ContactName='Paul Henriot' />
 </rdData>";
                     string expected =
-        @"<rdData>
+                        @"<rdData>
   <xs:schema id=""rdData"" xmlns="""" xmlns:xs=""http://www.w3.org/2001/XMLSchema"" xmlns:msdata=""urn:schemas-microsoft-com:xml-msdata"">
-    <xs:element name=""rdData"" msdata:IsDataSet=""true"" " +
-                      @"msdata:Locale=""en-US"">" +
-        @"
+    <xs:element name=""rdData"" msdata:IsDataSet=""true"" "
+                        + @"msdata:Locale=""en-US"">"
+                        + @"
       <xs:complexType>
         <xs:choice minOccurs=""0"" maxOccurs=""unbounded"">
           <xs:element name=""MyDataTable"">
@@ -1381,11 +1449,13 @@ namespace System.Data.Tests
             XmlSerializer serializer1 = new XmlSerializer(typeof(DataSet));
             DataSet ds = serializer1.Deserialize(reader) as DataSet;
             Assert.Equal(
-                    prevDs.Tables[0].Rows[0][0, DataRowVersion.Original].ToString(),
-    ds.Tables[0].Rows[0][0, DataRowVersion.Original].ToString());
+                prevDs.Tables[0].Rows[0][0, DataRowVersion.Original].ToString(),
+                ds.Tables[0].Rows[0][0, DataRowVersion.Original].ToString()
+            );
             Assert.Equal(
-                    prevDs.Tables[0].Rows[0][0, DataRowVersion.Current].ToString(),
-    ds.Tables[0].Rows[0][0, DataRowVersion.Current].ToString());
+                prevDs.Tables[0].Rows[0][0, DataRowVersion.Current].ToString(),
+                ds.Tables[0].Rows[0][0, DataRowVersion.Current].ToString()
+            );
         }
 
         [Fact]
@@ -1404,11 +1474,13 @@ namespace System.Data.Tests
             foreach (XmlSchemaElement d in xs.Items)
             {
                 Assert.Equal("d", d.Name);
-                XmlSchemaChoice dsc = (XmlSchemaChoice)((XmlSchemaComplexType)d.SchemaType).Particle;
+                XmlSchemaChoice dsc = (XmlSchemaChoice)
+                    ((XmlSchemaComplexType)d.SchemaType).Particle;
                 foreach (XmlSchemaElement t in dsc.Items)
                 {
                     Assert.Equal("t", t.Name);
-                    XmlSchemaSequence tss = (XmlSchemaSequence)((XmlSchemaComplexType)t.SchemaType).Particle;
+                    XmlSchemaSequence tss = (XmlSchemaSequence)
+                        ((XmlSchemaComplexType)t.SchemaType).Particle;
                     foreach (XmlSchemaElement c in tss.Items)
                     {
                         Assert.Equal("c", c.Name);
@@ -1434,7 +1506,9 @@ namespace System.Data.Tests
             parent.Columns.Add("id", typeof(int));
             child.Columns.Add("ref_id", typeof(int));
 
-            child.Constraints.Add(new ForeignKeyConstraint("fk_constraint", parent.Columns[0], child.Columns[0]));
+            child.Constraints.Add(
+                new ForeignKeyConstraint("fk_constraint", parent.Columns[0], child.Columns[0])
+            );
 
             DataRow dr = parent.NewRow();
             dr[0] = 1;
@@ -1471,7 +1545,6 @@ namespace System.Data.Tests
             parent.Columns.Add("id", typeof(int));
             parent.Columns.Add("name", typeof(string));
 
-
             child.Columns.Add("id", typeof(int));
             child.Columns.Add("parent", typeof(int));
             child.Columns.Add("name", typeof(string));
@@ -1487,9 +1560,11 @@ namespace System.Data.Tests
             child.Rows.Add(new object[] { 3, 3, "mono child 3" });
             child.AcceptChanges();
 
-            DataRelation relation = ds.Relations.Add("parent_child",
-                                  parent.Columns["id"],
-                                  child.Columns["parent"]);
+            DataRelation relation = ds.Relations.Add(
+                "parent_child",
+                parent.Columns["id"],
+                child.Columns["parent"]
+            );
 
             // modify the parent and get changes
             child.Rows[1]["parent"] = 4;
@@ -1525,9 +1600,11 @@ namespace System.Data.Tests
             child.Columns.Add("name", typeof(string));
             child.PrimaryKey = new DataColumn[] { child.Columns["id"] };
 
-            DataRelation relation = ds.Relations.Add("parent_child",
-                                  parent.Columns["id"],
-                                  child.Columns["parent"]);
+            DataRelation relation = ds.Relations.Add(
+                "parent_child",
+                parent.Columns["id"],
+                child.Columns["parent"]
+            );
 
             parent.Rows.Add(new object[] { 1, "mono test 1" });
             parent.Rows.Add(new object[] { 2, "mono test 2" });
@@ -1573,12 +1650,14 @@ namespace System.Data.Tests
             string xml = writer.ToString();
             Assert.True(xml.IndexOf("name=\"col.2_x003C_hi_x002F__x003E_\"") > 0);
             Assert.True(xml.IndexOf("name=\"_x0023_col3\"") > 0);
-            Assert.True(xml.IndexOf("<col.2_x003C_hi_x002F__x003E_>hi there</col.2_x003C_hi_x002F__x003E_>") > 0);
+            Assert.True(
+                xml.IndexOf("<col.2_x003C_hi_x002F__x003E_>hi there</col.2_x003C_hi_x002F__x003E_>")
+                    > 0
+            );
 
             // read xml
             DataSet data2 = new DataSet();
-            data2.ReadXml(new StringReader(
-                writer.GetStringBuilder().ToString()));
+            data2.ReadXml(new StringReader(writer.GetStringBuilder().ToString()));
         }
 
         [Fact]
@@ -1586,7 +1665,9 @@ namespace System.Data.Tests
         {
             DataSet ds = new DataSet();
 #pragma warning disable SYSLIB0038
-            Assert.Throws<InvalidEnumArgumentException>(() => ds.RemotingFormat = SerializationFormat.Binary);
+            Assert.Throws<InvalidEnumArgumentException>(
+                () => ds.RemotingFormat = SerializationFormat.Binary
+            );
 #pragma warning restore SYSLIB0038
         }
 
@@ -1597,7 +1678,10 @@ namespace System.Data.Tests
 
             static void RunTest()
             {
-                AppContext.SetSwitch("Switch.System.Data.AllowUnsafeSerializationFormatBinary", true);
+                AppContext.SetSwitch(
+                    "Switch.System.Data.AllowUnsafeSerializationFormatBinary",
+                    true
+                );
 
                 DataSet ds = new DataSet();
                 DataTable dt = new DataTable("MyTable");
@@ -1624,7 +1708,8 @@ namespace System.Data.Tests
         #region DataSet.CreateDataReader Tests and DataSet.Load Tests
 
         private DataSet _ds;
-        private DataTable _dt1,_dt2;
+        private DataTable _dt1,
+            _dt2;
 
         private void localSetup()
         {
@@ -1734,10 +1819,13 @@ namespace System.Data.Tests
         public void CreateDataReaderNoTable()
         {
             DataSet dsr = new DataSet();
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-           {
-               DataTableReader dtr = dsr.CreateDataReader();
-           });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    DataTableReader dtr = dsr.CreateDataReader();
+                }
+            );
         }
 
         internal struct FillErrorStruct
@@ -1746,6 +1834,7 @@ namespace System.Data.Tests
             internal string _tableName;
             internal int _rowKey;
             internal bool _contFlag;
+
             internal void init(string tbl, int row, bool cont, string err)
             {
                 _tableName = tbl;
@@ -1754,8 +1843,10 @@ namespace System.Data.Tests
                 _error = err;
             }
         }
+
         private readonly FillErrorStruct[] _fillErr = new FillErrorStruct[3];
         private int _fillErrCounter;
+
         private void FillErrorHandler(object sender, FillErrorEventArgs e)
         {
             e.Continue = _fillErr[_fillErrCounter]._contFlag;
@@ -1781,29 +1872,47 @@ namespace System.Data.Tests
         [Fact]
         public void Load_TableUnknown()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-           {
-               localSetup();
-               DataSet dsLoad = new DataSet("LoadTableUnknown");
-               DataTable table1 = new DataTable();
-               dsLoad.Tables.Add(table1);
-               DataTable table2 = new DataTable();
-               // table2 is not added to dsLoad [dsLoad.Tables.Add (table2);]
-               DataTableReader dtr = _ds.CreateDataReader();
-               dsLoad.Load(dtr, LoadOption.OverwriteChanges, table1, table2);
-           });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    localSetup();
+                    DataSet dsLoad = new DataSet("LoadTableUnknown");
+                    DataTable table1 = new DataTable();
+                    dsLoad.Tables.Add(table1);
+                    DataTable table2 = new DataTable();
+                    // table2 is not added to dsLoad [dsLoad.Tables.Add (table2);]
+                    DataTableReader dtr = _ds.CreateDataReader();
+                    dsLoad.Load(dtr, LoadOption.OverwriteChanges, table1, table2);
+                }
+            );
         }
 
         [Fact]
         public void Load_TableConflictT()
         {
             _fillErrCounter = 0;
-            _fillErr[0].init("Table1", 1, true,
-                "Input string was not in a correct format.Couldn't store <mono 1> in name1 Column.  Expected type is Double.");
-            _fillErr[1].init("Table1", 2, true,
-                "Input string was not in a correct format.Couldn't store <mono 2> in name1 Column.  Expected type is Double.");
-            _fillErr[2].init("Table1", 3, true,
-                "Input string was not in a correct format.Couldn't store <mono 3> in name1 Column.  Expected type is Double.");
+            _fillErr[0]
+                .init(
+                    "Table1",
+                    1,
+                    true,
+                    "Input string was not in a correct format.Couldn't store <mono 1> in name1 Column.  Expected type is Double."
+                );
+            _fillErr[1]
+                .init(
+                    "Table1",
+                    2,
+                    true,
+                    "Input string was not in a correct format.Couldn't store <mono 2> in name1 Column.  Expected type is Double."
+                );
+            _fillErr[2]
+                .init(
+                    "Table1",
+                    3,
+                    true,
+                    "Input string was not in a correct format.Couldn't store <mono 3> in name1 Column.  Expected type is Double."
+                );
             localSetup();
             DataSet dsLoad = new DataSet("LoadTableConflict");
             DataTable table1 = new DataTable();
@@ -1812,28 +1921,35 @@ namespace System.Data.Tests
             DataTable table2 = new DataTable();
             dsLoad.Tables.Add(table2);
             DataTableReader dtr = _ds.CreateDataReader();
-            dsLoad.Load(dtr, LoadOption.PreserveChanges,
-                     FillErrorHandler, table1, table2);
+            dsLoad.Load(dtr, LoadOption.PreserveChanges, FillErrorHandler, table1, table2);
         }
+
         [Fact]
         public void Load_TableConflictF()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                _fillErrCounter = 0;
-                _fillErr[0].init("Table1", 1, false,
-                    "Input string was not in a correct format.Couldn't store <mono 1> in name1 Column.  Expected type is Double.");
-                localSetup();
-                DataSet dsLoad = new DataSet("LoadTableConflict");
-                DataTable table1 = new DataTable();
-                table1.Columns.Add("name1", typeof(double));
-                dsLoad.Tables.Add(table1);
-                DataTable table2 = new DataTable();
-                dsLoad.Tables.Add(table2);
-                DataTableReader dtr = _ds.CreateDataReader();
-                dsLoad.Load(dtr, LoadOption.Upsert,
-                        FillErrorHandler, table1, table2);
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    _fillErrCounter = 0;
+                    _fillErr[0]
+                        .init(
+                            "Table1",
+                            1,
+                            false,
+                            "Input string was not in a correct format.Couldn't store <mono 1> in name1 Column.  Expected type is Double."
+                        );
+                    localSetup();
+                    DataSet dsLoad = new DataSet("LoadTableConflict");
+                    DataTable table1 = new DataTable();
+                    table1.Columns.Add("name1", typeof(double));
+                    dsLoad.Tables.Add(table1);
+                    DataTable table2 = new DataTable();
+                    dsLoad.Tables.Add(table2);
+                    DataTableReader dtr = _ds.CreateDataReader();
+                    dsLoad.Load(dtr, LoadOption.Upsert, FillErrorHandler, table1, table2);
+                }
+            );
         }
 
         [Fact]
@@ -1930,7 +2046,9 @@ namespace System.Data.Tests
             dt.Columns.Add(new DataColumn("Value1"));
             dt.Columns.Add(new DataColumn("Value2"));
             dsTest.Tables.Add(dt);
-            dsTest.ReadXml(new StringReader(@"
+            dsTest.ReadXml(
+                new StringReader(
+                    @"
 <diffgr:diffgram
    xmlns:msdata='urn:schemas-microsoft-com:xml-msdata'
    xmlns:diffgr='urn:schemas-microsoft-com:xml-diffgram-v1'>
@@ -1941,7 +2059,9 @@ namespace System.Data.Tests
     </_x0031_23>
   </MonoTouchTest>
 </diffgr:diffgram>
-"));
+"
+                )
+            );
             Assert.Equal("123", dsTest.Tables[0].TableName);
             Assert.Equal(1, dsTest.Tables[0].Rows.Count);
         }
@@ -1955,15 +2075,19 @@ namespace System.Data.Tests
                 Assert.Equal(_ds.Tables[tc].Rows.Count, dsLoad.Tables[tc].Rows.Count);
                 for (int cc = 0; cc < dsLoad.Tables[tc].Columns.Count; cc++)
                 {
-                    Assert.Equal(_ds.Tables[tc].Columns[cc].ColumnName,
-                             dsLoad.Tables[tc].Columns[cc].ColumnName);
+                    Assert.Equal(
+                        _ds.Tables[tc].Columns[cc].ColumnName,
+                        dsLoad.Tables[tc].Columns[cc].ColumnName
+                    );
                 }
                 for (int rc = 0; rc < dsLoad.Tables[tc].Rows.Count; rc++)
                 {
                     for (int cc = 0; cc < dsLoad.Tables[tc].Columns.Count; cc++)
                     {
-                        Assert.Equal(_ds.Tables[tc].Rows[rc].ItemArray[cc],
-                                 dsLoad.Tables[tc].Rows[rc].ItemArray[cc]);
+                        Assert.Equal(
+                            _ds.Tables[tc].Rows[rc].ItemArray[cc],
+                            dsLoad.Tables[tc].Rows[rc].ItemArray[cc]
+                        );
                     }
                 }
             }

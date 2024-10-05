@@ -44,7 +44,8 @@ namespace System.Numerics.Tests
             Assert.Equal(((uint)int.MaxValue + 1) / (8 * sizeof(uint)), (uint)bigInt._bits.Length);
 
             uint i = 0;
-            for (; i < (bigInt._bits.Length - 1); i++) {
+            for (; i < (bigInt._bits.Length - 1); i++)
+            {
                 Assert.Equal(0x00000000u, bigInt._bits[i]);
             }
 
@@ -63,10 +64,14 @@ namespace System.Numerics.Tests
             // - Last element: 0x40000000
             //                   ^------ (the '1' is now one position to the right)
 
-            Assert.Equal(((uint)int.MaxValue + 1) / (8 * sizeof(uint)), (uint)shiftedBigInt._bits.Length);
+            Assert.Equal(
+                ((uint)int.MaxValue + 1) / (8 * sizeof(uint)),
+                (uint)shiftedBigInt._bits.Length
+            );
 
             i = 0;
-            for (; i < (shiftedBigInt._bits.Length - 1); i++) {
+            for (; i < (shiftedBigInt._bits.Length - 1); i++)
+            {
                 Assert.Equal(0x00000000u, shiftedBigInt._bits[i]);
             }
 
@@ -210,7 +215,9 @@ namespace System.Numerics.Tests
             for (int i = 0; i < s_samples; i++)
             {
                 tempByteArray1 = GetRandomPosByteArray(s_random, 100);
-                tempByteArray2 = BitConverter.GetBytes(s_random.Next(8 * tempByteArray1.Length, 1000));
+                tempByteArray2 = BitConverter.GetBytes(
+                    s_random.Next(8 * tempByteArray1.Length, 1000)
+                );
                 if (!BitConverter.IsLittleEndian)
                 {
                     Array.Reverse(tempByteArray2);
@@ -222,7 +229,9 @@ namespace System.Numerics.Tests
             for (int i = 0; i < s_samples; i++)
             {
                 tempByteArray1 = GetRandomNegByteArray(s_random, 100);
-                tempByteArray2 = BitConverter.GetBytes(s_random.Next(8 * tempByteArray1.Length, 1000));
+                tempByteArray2 = BitConverter.GetBytes(
+                    s_random.Next(8 * tempByteArray1.Length, 1000)
+                );
                 if (!BitConverter.IsLittleEndian)
                 {
                     Array.Reverse(tempByteArray2);
@@ -285,6 +294,7 @@ namespace System.Numerics.Tests
             array[^1] = 0xFF;
             return array;
         }
+
         private static byte[] GetRandomLengthFirstUIntMaxSecondUIntMSBMaxArray(Random random)
         {
             int gap = random.Next(0, 128);

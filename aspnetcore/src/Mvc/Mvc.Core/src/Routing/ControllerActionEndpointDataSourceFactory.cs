@@ -14,7 +14,8 @@ internal sealed class ControllerActionEndpointDataSourceFactory
     public ControllerActionEndpointDataSourceFactory(
         ControllerActionEndpointDataSourceIdProvider dataSourceIdProvider,
         IActionDescriptorCollectionProvider actions,
-        ActionEndpointFactory factory)
+        ActionEndpointFactory factory
+    )
     {
         _dataSourceIdProvider = dataSourceIdProvider;
         _actions = actions;
@@ -23,6 +24,11 @@ internal sealed class ControllerActionEndpointDataSourceFactory
 
     public ControllerActionEndpointDataSource Create(OrderedEndpointsSequenceProvider orderProvider)
     {
-        return new ControllerActionEndpointDataSource(_dataSourceIdProvider, _actions, _factory, orderProvider);
+        return new ControllerActionEndpointDataSource(
+            _dataSourceIdProvider,
+            _actions,
+            _factory,
+            orderProvider
+        );
     }
 }

@@ -16,15 +16,24 @@ namespace Microsoft.CodeAnalysis.CSharp
     internal sealed class CSharpCommandLineParserService : ICommandLineParserService
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpCommandLineParserService()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpCommandLineParserService() { }
 
-        public CommandLineArguments Parse(IEnumerable<string> arguments, string baseDirectory, bool isInteractive, string sdkDirectory)
+        public CommandLineArguments Parse(
+            IEnumerable<string> arguments,
+            string baseDirectory,
+            bool isInteractive,
+            string sdkDirectory
+        )
         {
 #if SCRIPTING
-            var parser = isInteractive ? CSharpCommandLineParser.Interactive : CSharpCommandLineParser.Default;
+            var parser = isInteractive
+                ? CSharpCommandLineParser.Interactive
+                : CSharpCommandLineParser.Default;
 #else
             var parser = CSharpCommandLineParser.Default;
 #endif

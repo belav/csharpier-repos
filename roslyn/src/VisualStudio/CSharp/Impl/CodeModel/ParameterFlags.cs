@@ -13,6 +13,6 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
     {
         Ref = 1 << 0,
         Out = 1 << 1,
-        Params = 1 << 2
+        Params = 1 << 2,
     }
 }

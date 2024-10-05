@@ -14,9 +14,8 @@ namespace System.Speech.Recognition.SrgsGrammar
     public class SrgsSemanticInterpretationTag : SrgsElement, ISemanticTag
     {
         #region Constructors
-        public SrgsSemanticInterpretationTag()
-        {
-        }
+        public SrgsSemanticInterpretationTag() { }
+
         public SrgsSemanticInterpretationTag(string script)
         {
             Helpers.ThrowIfNull(script, nameof(script));
@@ -29,10 +28,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         #region public Properties
         public string Script
         {
-            get
-            {
-                return _script;
-            }
+            get { return _script; }
             set
             {
                 Helpers.ThrowIfNull(value, nameof(value));

@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.Editor
 {
     [MetadataAttribute]
     [AttributeUsage(AttributeTargets.Class)]
-    internal class ExportInteractiveAttribute(Type t, params string[] contentTypes) : ExportAttribute(t)
+    internal class ExportInteractiveAttribute(Type t, params string[] contentTypes)
+        : ExportAttribute(t)
     {
         public IEnumerable<string> ContentTypes { get; } = contentTypes;
     }

@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // <copyright file="Peer.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 using System;
-using System.Security.Permissions;
-using System.Security;
 using System.Runtime.CompilerServices;
+using System.Security;
+using System.Security.Permissions;
 
 // These types exist in System.Net.dll in Silverlight but in System.dll in the Framework.
 // Forward them so people can build portable libraries without changing assembly references.
@@ -40,7 +40,9 @@ using System.Runtime.CompilerServices;
 [assembly: TypeForwardedToAttribute(typeof(System.Net.WebHeaderCollection))]
 [assembly: TypeForwardedToAttribute(typeof(System.Net.WebRequest))]
 [assembly: TypeForwardedToAttribute(typeof(System.Net.WebResponse))]
-[assembly: TypeForwardedToAttribute(typeof(System.Net.NetworkInformation.NetworkAddressChangedEventHandler))]
+[assembly: TypeForwardedToAttribute(
+    typeof(System.Net.NetworkInformation.NetworkAddressChangedEventHandler)
+)]
 [assembly: TypeForwardedToAttribute(typeof(System.Net.NetworkInformation.NetworkChange))]
 [assembly: TypeForwardedToAttribute(typeof(System.Net.NetworkInformation.NetworkInterface))]
 
@@ -61,11 +63,10 @@ using System.Runtime.CompilerServices;
 [assembly: TypeForwardedToAttribute(typeof(System.Net.WriteStreamClosedEventArgs))]
 [assembly: TypeForwardedToAttribute(typeof(System.Net.WriteStreamClosedEventHandler))]
 
-
 [assembly: SecurityCritical]
 #pragma warning disable 618
-[assembly:SecurityPermission(SecurityAction.RequestMinimum, Execution = true)]
+[assembly: SecurityPermission(SecurityAction.RequestMinimum, Execution = true)]
+
+
 #pragma warning restore 618
-namespace System.Net.PeerToPeer
-{
-}
+namespace System.Net.PeerToPeer { }

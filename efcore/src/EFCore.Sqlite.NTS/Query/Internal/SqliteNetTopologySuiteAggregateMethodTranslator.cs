@@ -17,17 +17,27 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal;
 /// </summary>
 public class SqliteNetTopologySuiteAggregateMethodTranslator : IAggregateMethodCallTranslator
 {
-    private static readonly MethodInfo GeometryCombineMethod
-        = typeof(GeometryCombiner).GetRuntimeMethod(nameof(GeometryCombiner.Combine), new[] { typeof(IEnumerable<Geometry>) })!;
+    private static readonly MethodInfo GeometryCombineMethod =
+        typeof(GeometryCombiner).GetRuntimeMethod(
+            nameof(GeometryCombiner.Combine),
+            new[] { typeof(IEnumerable<Geometry>) }
+        )!;
 
-    private static readonly MethodInfo ConvexHullMethod
-        = typeof(ConvexHull).GetRuntimeMethod(nameof(ConvexHull.Create), new[] { typeof(IEnumerable<Geometry>) })!;
+    private static readonly MethodInfo ConvexHullMethod = typeof(ConvexHull).GetRuntimeMethod(
+        nameof(ConvexHull.Create),
+        new[] { typeof(IEnumerable<Geometry>) }
+    )!;
 
-    private static readonly MethodInfo UnionMethod
-        = typeof(UnaryUnionOp).GetRuntimeMethod(nameof(UnaryUnionOp.Union), new[] { typeof(IEnumerable<Geometry>) })!;
+    private static readonly MethodInfo UnionMethod = typeof(UnaryUnionOp).GetRuntimeMethod(
+        nameof(UnaryUnionOp.Union),
+        new[] { typeof(IEnumerable<Geometry>) }
+    )!;
 
-    private static readonly MethodInfo EnvelopeCombineMethod
-        = typeof(EnvelopeCombiner).GetRuntimeMethod(nameof(EnvelopeCombiner.CombineAsGeometry), new[] { typeof(IEnumerable<Geometry>) })!;
+    private static readonly MethodInfo EnvelopeCombineMethod =
+        typeof(EnvelopeCombiner).GetRuntimeMethod(
+            nameof(EnvelopeCombiner.CombineAsGeometry),
+            new[] { typeof(IEnumerable<Geometry>) }
+        )!;
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -37,7 +47,9 @@ public class SqliteNetTopologySuiteAggregateMethodTranslator : IAggregateMethodC
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public SqliteNetTopologySuiteAggregateMethodTranslator(ISqlExpressionFactory sqlExpressionFactory)
+    public SqliteNetTopologySuiteAggregateMethodTranslator(
+        ISqlExpressionFactory sqlExpressionFactory
+    )
     {
         _sqlExpressionFactory = sqlExpressionFactory;
     }
@@ -52,7 +64,8 @@ public class SqliteNetTopologySuiteAggregateMethodTranslator : IAggregateMethodC
         MethodInfo method,
         EnumerableExpression source,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
         if (source.Selector is not SqlExpression sqlExpression)
         {
@@ -73,20 +86,20 @@ public class SqliteNetTopologySuiteAggregateMethodTranslator : IAggregateMethodC
                         new[] { sqlExpression },
                         nullable: true,
                         argumentsPropagateNullability: new[] { false },
-                        typeof(Geometry))
+                        typeof(Geometry)
+                    ),
                 },
                 nullable: true,
                 argumentsPropagateNullability: new[] { true },
-                typeof(Geometry));
+                typeof(Geometry)
+            );
         }
 
-        var functionName = method == UnionMethod
-            ? "GUnion"
-            : method == GeometryCombineMethod
-                ? "Collect"
-                : method == EnvelopeCombineMethod
-                    ? "Extent"
-                    : null;
+        var functionName =
+            method == UnionMethod ? "GUnion"
+            : method == GeometryCombineMethod ? "Collect"
+            : method == EnvelopeCombineMethod ? "Extent"
+            : null;
 
         if (functionName is null)
         {
@@ -100,7 +113,8 @@ public class SqliteNetTopologySuiteAggregateMethodTranslator : IAggregateMethodC
             new[] { sqlExpression },
             nullable: true,
             argumentsPropagateNullability: new[] { false },
-            typeof(Geometry));
+            typeof(Geometry)
+        );
 
         void CombineAggregateTerms()
         {
@@ -108,7 +122,8 @@ public class SqliteNetTopologySuiteAggregateMethodTranslator : IAggregateMethodC
             {
                 sqlExpression = _sqlExpressionFactory.Case(
                     new List<CaseWhenClause> { new(source.Predicate, sqlExpression) },
-                    elseResult: null);
+                    elseResult: null
+                );
             }
 
             if (source.IsDistinct)

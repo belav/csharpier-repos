@@ -12,7 +12,9 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnreachableCode
 {
     internal static class RemoveUnreachableCodeHelpers
     {
-        public static ImmutableArray<ImmutableArray<StatementSyntax>> GetSubsequentUnreachableSections(StatementSyntax firstUnreachableStatement)
+        public static ImmutableArray<
+            ImmutableArray<StatementSyntax>
+        > GetSubsequentUnreachableSections(StatementSyntax firstUnreachableStatement)
         {
             ImmutableArray<StatementSyntax> siblingStatements;
             switch (firstUnreachableStatement.Parent)
@@ -58,17 +60,23 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnreachableCode
             var sections = ArrayBuilder<ImmutableArray<StatementSyntax>>.GetInstance();
 
             var currentSection = ArrayBuilder<StatementSyntax>.GetInstance();
-            var firstUnreachableStatementIndex = siblingStatements.IndexOf(firstUnreachableStatement);
+            var firstUnreachableStatementIndex = siblingStatements.IndexOf(
+                firstUnreachableStatement
+            );
 
-            for (int i = firstUnreachableStatementIndex + 1, n = siblingStatements.Length; i < n; i++)
+            for (
+                int i = firstUnreachableStatementIndex + 1, n = siblingStatements.Length;
+                i < n;
+                i++
+            )
             {
                 var currentStatement = siblingStatements[i];
                 if (currentStatement.IsKind(SyntaxKind.LabeledStatement))
                 {
-                    // In the case of a subsequent labeled statement, we don't want to consider it 
-                    // unreachable as there may be a 'goto' somewhere else to that label.  If the 
-                    // compiler actually thinks that label is unreachable, it will give an diagnostic 
-                    // on that label itself  and we can use that diagnostic to handle it and any 
+                    // In the case of a subsequent labeled statement, we don't want to consider it
+                    // unreachable as there may be a 'goto' somewhere else to that label.  If the
+                    // compiler actually thinks that label is unreachable, it will give an diagnostic
+                    // on that label itself  and we can use that diagnostic to handle it and any
                     // subsequent sections.
                     break;
                 }
@@ -79,7 +87,7 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnreachableCode
                     // in code that is otherwise unreachable.  It can still be called elsewhere.  If
                     // the local function itself is not called, there will be a particular diagnostic
                     // for that ("The variable XXX is declared but never used") and the user can choose
-                    // if they want to remove it or not. 
+                    // if they want to remove it or not.
                     var section = currentSection.ToImmutableAndFree();
                     AddIfNonEmpty(sections, section);
 
@@ -96,7 +104,10 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnreachableCode
             return sections.ToImmutableAndFree();
         }
 
-        private static void AddIfNonEmpty(ArrayBuilder<ImmutableArray<StatementSyntax>> sections, ImmutableArray<StatementSyntax> lastSection)
+        private static void AddIfNonEmpty(
+            ArrayBuilder<ImmutableArray<StatementSyntax>> sections,
+            ImmutableArray<StatementSyntax> lastSection
+        )
         {
             if (!lastSection.IsEmpty)
             {

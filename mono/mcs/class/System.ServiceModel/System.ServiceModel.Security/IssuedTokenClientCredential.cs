@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,76 +28,85 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
-using System.ServiceModel;
 using System.ServiceModel.Security.Tokens;
 
 namespace System.ServiceModel.Security
 {
-	[MonoTODO]
-	public sealed class IssuedTokenClientCredential
-	{
-		internal IssuedTokenClientCredential ()
-		{
-		}
+    [MonoTODO]
+    public sealed class IssuedTokenClientCredential
+    {
+        internal IssuedTokenClientCredential() { }
 
-		bool cache = true;
-		Dictionary<Uri,KeyedByTypeCollection<IEndpointBehavior>> behaviors =
-			new Dictionary<Uri,KeyedByTypeCollection<IEndpointBehavior>> ();
-		SecurityKeyEntropyMode entropy = SecurityKeyEntropyMode.CombinedEntropy;
-		KeyedByTypeCollection<IEndpointBehavior> local_behaviors =
-			new KeyedByTypeCollection<IEndpointBehavior> ();
-		EndpointAddress local_issuer_address;
-		Binding local_issuer_binding;
-		TimeSpan max_cache_time = TimeSpan.MaxValue;
-		// FIXME: could be related to LocalClientSecuritysettings.CookieRenewalThresholdPercentage ?
-		int renewal_threshold = 60;
+        bool cache = true;
+        Dictionary<Uri, KeyedByTypeCollection<IEndpointBehavior>> behaviors =
+            new Dictionary<Uri, KeyedByTypeCollection<IEndpointBehavior>>();
+        SecurityKeyEntropyMode entropy = SecurityKeyEntropyMode.CombinedEntropy;
+        KeyedByTypeCollection<IEndpointBehavior> local_behaviors =
+            new KeyedByTypeCollection<IEndpointBehavior>();
+        EndpointAddress local_issuer_address;
+        Binding local_issuer_binding;
+        TimeSpan max_cache_time = TimeSpan.MaxValue;
 
-		internal IssuedTokenClientCredential Clone ()
-		{
-			var ret = (IssuedTokenClientCredential) MemberwiseClone ();
-			ret.local_behaviors = new KeyedByTypeCollection<IEndpointBehavior> (local_behaviors);
-			ret.behaviors = new Dictionary<Uri,KeyedByTypeCollection<IEndpointBehavior>> (behaviors);
-			return ret;
-		}
+        // FIXME: could be related to LocalClientSecuritysettings.CookieRenewalThresholdPercentage ?
+        int renewal_threshold = 60;
 
-		public bool CacheIssuedTokens {
-			get { return cache; }
-			set { cache = value; }
-		}
+        internal IssuedTokenClientCredential Clone()
+        {
+            var ret = (IssuedTokenClientCredential)MemberwiseClone();
+            ret.local_behaviors = new KeyedByTypeCollection<IEndpointBehavior>(local_behaviors);
+            ret.behaviors = new Dictionary<Uri, KeyedByTypeCollection<IEndpointBehavior>>(
+                behaviors
+            );
+            return ret;
+        }
 
-		public int IssuedTokenRenewalThresholdPercentage {
-			get { return renewal_threshold; }
-			set { renewal_threshold = value; }
-		}
+        public bool CacheIssuedTokens
+        {
+            get { return cache; }
+            set { cache = value; }
+        }
 
-		public Dictionary<Uri,KeyedByTypeCollection<IEndpointBehavior>> IssuerChannelBehaviors {
-			get { return behaviors; }
-		}
+        public int IssuedTokenRenewalThresholdPercentage
+        {
+            get { return renewal_threshold; }
+            set { renewal_threshold = value; }
+        }
 
-		public SecurityKeyEntropyMode DefaultKeyEntropyMode {
-			get { return entropy; }
-			set { entropy = value; }
-		}
+        public Dictionary<Uri, KeyedByTypeCollection<IEndpointBehavior>> IssuerChannelBehaviors
+        {
+            get { return behaviors; }
+        }
 
-		public KeyedByTypeCollection<IEndpointBehavior> LocalIssuerChannelBehaviors { 
-			get { return local_behaviors; }
-		}
+        public SecurityKeyEntropyMode DefaultKeyEntropyMode
+        {
+            get { return entropy; }
+            set { entropy = value; }
+        }
 
-		public EndpointAddress LocalIssuerAddress {
-			get { return local_issuer_address; }
-			set { local_issuer_address = value; }
-		}
+        public KeyedByTypeCollection<IEndpointBehavior> LocalIssuerChannelBehaviors
+        {
+            get { return local_behaviors; }
+        }
 
-		public Binding LocalIssuerBinding {
-			get { return local_issuer_binding; }
-			set { local_issuer_binding = value; }
-		}
+        public EndpointAddress LocalIssuerAddress
+        {
+            get { return local_issuer_address; }
+            set { local_issuer_address = value; }
+        }
 
-		public TimeSpan MaxIssuedTokenCachingTime {
-			get { return max_cache_time; }
-			set { max_cache_time = value; }
-		}
-	}
+        public Binding LocalIssuerBinding
+        {
+            get { return local_issuer_binding; }
+            set { local_issuer_binding = value; }
+        }
+
+        public TimeSpan MaxIssuedTokenCachingTime
+        {
+            get { return max_cache_time; }
+            set { max_cache_time = value; }
+        }
+    }
 }

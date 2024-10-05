@@ -10,17 +10,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
     {
         public static readonly LambdaSyntaxFacts Instance = new CSharpLambdaSyntaxFacts();
 
-        private CSharpLambdaSyntaxFacts()
-        {
-        }
+        private CSharpLambdaSyntaxFacts() { }
 
-        public override SyntaxNode GetLambda(SyntaxNode lambdaOrLambdaBodySyntax)
-            => LambdaUtilities.GetLambda(lambdaOrLambdaBodySyntax);
+        public override SyntaxNode GetLambda(SyntaxNode lambdaOrLambdaBodySyntax) =>
+            LambdaUtilities.GetLambda(lambdaOrLambdaBodySyntax);
 
-        public override SyntaxNode? TryGetCorrespondingLambdaBody(SyntaxNode previousLambdaSyntax, SyntaxNode lambdaOrLambdaBodySyntax)
-            => LambdaUtilities.TryGetCorrespondingLambdaBody(lambdaOrLambdaBodySyntax, previousLambdaSyntax);
+        public override SyntaxNode? TryGetCorrespondingLambdaBody(
+            SyntaxNode previousLambdaSyntax,
+            SyntaxNode lambdaOrLambdaBodySyntax
+        ) =>
+            LambdaUtilities.TryGetCorrespondingLambdaBody(
+                lambdaOrLambdaBodySyntax,
+                previousLambdaSyntax
+            );
 
-        public override int GetDeclaratorPosition(SyntaxNode node)
-            => LambdaUtilities.GetDeclaratorPosition(node);
+        public override int GetDeclaratorPosition(SyntaxNode node) =>
+            LambdaUtilities.GetDeclaratorPosition(node);
     }
 }

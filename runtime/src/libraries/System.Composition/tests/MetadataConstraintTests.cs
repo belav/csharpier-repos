@@ -61,10 +61,11 @@ namespace System.Composition.UnitTests
         [Fact]
         public void ConstraintsCanBeAppliedToGenerics()
         {
-            var contract = new CompositionContract(typeof(SomeSetting<string>), null, new Dictionary<string, object>
-            {
-                { "SettingName", "TheName" }
-            });
+            var contract = new CompositionContract(
+                typeof(SomeSetting<string>),
+                null,
+                new Dictionary<string, object> { { "SettingName", "TheName" } }
+            );
 
             var c = CreateContainer(typeof(SomeSetting<>));
             object s;

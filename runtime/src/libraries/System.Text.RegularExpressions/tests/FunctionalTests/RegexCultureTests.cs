@@ -16,16 +16,55 @@ namespace System.Text.RegularExpressions.Tests
         {
             foreach (RegexEngine engine in RegexHelpers.AvailableEngines)
             {
-                yield return new object[] { engine, "^aa$", "aA", "da-DK", RegexOptions.None, false };
-                yield return new object[] { engine, "^aA$", "aA", "da-DK", RegexOptions.None, true };
-                yield return new object[] { engine, "^aa$", "aA", "da-DK", RegexOptions.IgnoreCase, true };
-                yield return new object[] { engine, "^aA$", "aA", "da-DK", RegexOptions.IgnoreCase, true };
+                yield return new object[]
+                {
+                    engine,
+                    "^aa$",
+                    "aA",
+                    "da-DK",
+                    RegexOptions.None,
+                    false,
+                };
+                yield return new object[]
+                {
+                    engine,
+                    "^aA$",
+                    "aA",
+                    "da-DK",
+                    RegexOptions.None,
+                    true,
+                };
+                yield return new object[]
+                {
+                    engine,
+                    "^aa$",
+                    "aA",
+                    "da-DK",
+                    RegexOptions.IgnoreCase,
+                    true,
+                };
+                yield return new object[]
+                {
+                    engine,
+                    "^aA$",
+                    "aA",
+                    "da-DK",
+                    RegexOptions.IgnoreCase,
+                    true,
+                };
             }
         }
 
         [Theory]
         [MemberData(nameof(CharactersComparedOneByOne_AnchoredPattern_TestData))]
-        public async Task CharactersComparedOneByOne_AnchoredPattern(RegexEngine engine, string pattern, string input, string culture, RegexOptions options, bool expected)
+        public async Task CharactersComparedOneByOne_AnchoredPattern(
+            RegexEngine engine,
+            string pattern,
+            string input,
+            string culture,
+            RegexOptions options,
+            bool expected
+        )
         {
             // Regex compares characters one by one.  If that changes, it could impact the behavior of
             // a case like this, where these characters are not the same, but the strings compare
@@ -42,13 +81,20 @@ namespace System.Text.RegularExpressions.Tests
             foreach (RegexEngine engine in RegexHelpers.AvailableEngines)
             {
                 yield return new object[] { engine, RegexOptions.None };
-                yield return new object[] { engine, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant };
+                yield return new object[]
+                {
+                    engine,
+                    RegexOptions.IgnoreCase | RegexOptions.CultureInvariant,
+                };
             }
         }
 
         [Theory]
         [MemberData(nameof(CharactersComparedOneByOne_Invariant_TestData))]
-        public async Task CharactersComparedOneByOne_Invariant(RegexEngine engine, RegexOptions options)
+        public async Task CharactersComparedOneByOne_Invariant(
+            RegexEngine engine,
+            RegexOptions options
+        )
         {
             // Regex compares characters one by one.  If that changes, it could impact the behavior of
             // a case like this, where these characters are not the same, but the strings compare
@@ -82,15 +128,42 @@ namespace System.Text.RegularExpressions.Tests
         }
 
         [Theory]
-        [MemberData(nameof(RegexHelpers.AvailableEngines_MemberData), MemberType = typeof(RegexHelpers))]
+        [MemberData(
+            nameof(RegexHelpers.AvailableEngines_MemberData),
+            MemberType = typeof(RegexHelpers)
+        )]
         public async Task CharactersLowercasedOneByOne(RegexEngine engine)
         {
             using (new ThreadCultureChange("en-US"))
             {
-                Assert.True((await RegexHelpers.GetRegexAsync(engine, "\uD801\uDC00", RegexOptions.IgnoreCase)).IsMatch("\uD801\uDC00"));
-                Assert.True((await RegexHelpers.GetRegexAsync(engine, "\uD801\uDC00", RegexOptions.IgnoreCase)).IsMatch("abcdefg\uD801\uDC00"));
-                Assert.True((await RegexHelpers.GetRegexAsync(engine, "\uD801", RegexOptions.IgnoreCase)).IsMatch("\uD801\uDC00"));
-                Assert.True((await RegexHelpers.GetRegexAsync(engine, "\uDC00", RegexOptions.IgnoreCase)).IsMatch("\uD801\uDC00"));
+                Assert.True(
+                    (
+                        await RegexHelpers.GetRegexAsync(
+                            engine,
+                            "\uD801\uDC00",
+                            RegexOptions.IgnoreCase
+                        )
+                    ).IsMatch("\uD801\uDC00")
+                );
+                Assert.True(
+                    (
+                        await RegexHelpers.GetRegexAsync(
+                            engine,
+                            "\uD801\uDC00",
+                            RegexOptions.IgnoreCase
+                        )
+                    ).IsMatch("abcdefg\uD801\uDC00")
+                );
+                Assert.True(
+                    (
+                        await RegexHelpers.GetRegexAsync(engine, "\uD801", RegexOptions.IgnoreCase)
+                    ).IsMatch("\uD801\uDC00")
+                );
+                Assert.True(
+                    (
+                        await RegexHelpers.GetRegexAsync(engine, "\uDC00", RegexOptions.IgnoreCase)
+                    ).IsMatch("\uD801\uDC00")
+                );
             }
         }
 
@@ -106,13 +179,23 @@ namespace System.Text.RegularExpressions.Tests
         /// </summary>
         [Theory]
         [MemberData(nameof(TurkishI_Is_Differently_LowerUpperCased_In_Turkish_Culture_TestData))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/37069", TestPlatforms.Android | TestPlatforms.LinuxBionic)]
-        public void TurkishI_Is_Differently_LowerUpperCased_In_Turkish_Culture(int length, RegexOptions options)
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/37069",
+            TestPlatforms.Android | TestPlatforms.LinuxBionic
+        )]
+        public void TurkishI_Is_Differently_LowerUpperCased_In_Turkish_Culture(
+            int length,
+            RegexOptions options
+        )
         {
             var turkish = new CultureInfo("tr-TR");
             string input = string.Concat(Enumerable.Repeat("I\u0131\u0130i", length / 2));
 
-            Regex[] cultInvariantRegex = Create(input, CultureInfo.InvariantCulture, options | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+            Regex[] cultInvariantRegex = Create(
+                input,
+                CultureInfo.InvariantCulture,
+                options | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant
+            );
             Regex[] turkishRegex = Create(input, turkish, options | RegexOptions.IgnoreCase);
 
             // same input and regex does match so far so good
@@ -131,8 +214,14 @@ namespace System.Text.RegularExpressions.Tests
 
             // Now comes the tricky part depending on the use locale in ToUpper the results differ
             // Hence the regular expression will not match if different locales were used
-            Assert.All(cultInvariantRegex, rex => Assert.True(rex.IsMatch(input.ToLowerInvariant())));
-            Assert.All(cultInvariantRegex, rex => Assert.False(rex.IsMatch(input.ToLower(turkish))));
+            Assert.All(
+                cultInvariantRegex,
+                rex => Assert.True(rex.IsMatch(input.ToLowerInvariant()))
+            );
+            Assert.All(
+                cultInvariantRegex,
+                rex => Assert.False(rex.IsMatch(input.ToLower(turkish)))
+            );
 
             Assert.All(turkishRegex, rex => Assert.False(rex.IsMatch(input.ToLowerInvariant())));
             Assert.All(turkishRegex, rex => Assert.True(rex.IsMatch(input.ToLower(turkish))));
@@ -154,26 +243,42 @@ namespace System.Text.RegularExpressions.Tests
                 return new Regex[]
                 {
                     new Regex(input, additional),
-                    new Regex(input, RegexOptions.Compiled | additional)
+                    new Regex(input, RegexOptions.Compiled | additional),
                 };
             }
         }
 
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "Doesn't support NonBacktracking")]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            "Doesn't support NonBacktracking"
+        )]
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/60568", TestPlatforms.Android | TestPlatforms.LinuxBionic)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/60568",
+            TestPlatforms.Android | TestPlatforms.LinuxBionic
+        )]
         public async Task TurkishI_Is_Differently_LowerUpperCased_In_Turkish_Culture_NonBacktracking()
         {
             var turkish = new CultureInfo("tr-TR");
             string input = "I\u0131\u0130i";
 
             // Use the input as the regex also
-            // Ignore the Compiled option here because it is a noop in combination with NonBacktracking 
-            Regex cultInvariantRegex = await RegexHelpers.GetRegexAsync(RegexEngine.NonBacktracking, input, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant, CultureInfo.InvariantCulture);
-            Regex turkishRegex = await RegexHelpers.GetRegexAsync(RegexEngine.NonBacktracking, input, RegexOptions.IgnoreCase, turkish);
+            // Ignore the Compiled option here because it is a noop in combination with NonBacktracking
+            Regex cultInvariantRegex = await RegexHelpers.GetRegexAsync(
+                RegexEngine.NonBacktracking,
+                input,
+                RegexOptions.IgnoreCase | RegexOptions.CultureInvariant,
+                CultureInfo.InvariantCulture
+            );
+            Regex turkishRegex = await RegexHelpers.GetRegexAsync(
+                RegexEngine.NonBacktracking,
+                input,
+                RegexOptions.IgnoreCase,
+                turkish
+            );
 
             Assert.True(cultInvariantRegex.IsMatch(input));
-            Assert.True(turkishRegex.IsMatch(input));    // <---------- This result differs from the result in the previous test!!!
+            Assert.True(turkishRegex.IsMatch(input)); // <---------- This result differs from the result in the previous test!!!
 
             // As above and no surprises here
             // The regexes recognize different lowercase variants of different versions of i differently
@@ -192,14 +297,22 @@ namespace System.Text.RegularExpressions.Tests
         }
 
         [Theory]
-        [MemberData(nameof(RegexHelpers.AvailableEngines_MemberData), MemberType = typeof(RegexHelpers))]
+        [MemberData(
+            nameof(RegexHelpers.AvailableEngines_MemberData),
+            MemberType = typeof(RegexHelpers)
+        )]
         public async Task TurkishCulture_Handling_Of_IgnoreCase(RegexEngine engine)
         {
             var turkish = new CultureInfo("tr-TR");
             string input = "I\u0131\u0130i";
             string pattern = "[H-J][\u0131-\u0140][\u0120-\u0130][h-j]";
 
-            Regex regex = await RegexHelpers.GetRegexAsync(engine, pattern, RegexOptions.IgnoreCase, turkish);
+            Regex regex = await RegexHelpers.GetRegexAsync(
+                engine,
+                pattern,
+                RegexOptions.IgnoreCase,
+                turkish
+            );
 
             // The pattern must trivially match the input because all of the letters fall in the given intervals
             // Ignoring case can only add more letters here -- not REMOVE letters
@@ -210,14 +323,31 @@ namespace System.Text.RegularExpressions.Tests
         {
             foreach (RegexEngine engine in RegexHelpers.AvailableEngines)
             {
-                yield return new object[] { engine, "I\u0131\u0130i", RegexOptions.None, "I\u0131\u0130i" };
-                yield return new object[] { engine, "I\u0131\u0130i", RegexOptions.IgnoreCase, "I\u0131\u0130i" };
+                yield return new object[]
+                {
+                    engine,
+                    "I\u0131\u0130i",
+                    RegexOptions.None,
+                    "I\u0131\u0130i",
+                };
+                yield return new object[]
+                {
+                    engine,
+                    "I\u0131\u0130i",
+                    RegexOptions.IgnoreCase,
+                    "I\u0131\u0130i",
+                };
             }
         }
 
         [Theory]
         [MemberData(nameof(TurkishCulture_MatchesWordChar_MemberData))]
-        public async Task TurkishCulture_MatchesWordChar(RegexEngine engine, string input, RegexOptions options, string expectedResult)
+        public async Task TurkishCulture_MatchesWordChar(
+            RegexEngine engine,
+            string input,
+            RegexOptions options,
+            string expectedResult
+        )
         {
             using (new ThreadCultureChange(new CultureInfo("tr-TR")))
             {
@@ -234,9 +364,14 @@ namespace System.Text.RegularExpressions.Tests
 
             foreach (RegexEngine engine in RegexHelpers.AvailableEngines)
             {
-                foreach (RegexOptions option in new[] { RegexOptions.None, RegexOptions.RightToLeft })
+                foreach (
+                    RegexOptions option in new[] { RegexOptions.None, RegexOptions.RightToLeft }
+                )
                 {
-                    if (RegexHelpers.IsNonBacktracking(engine) && (option & RegexOptions.RightToLeft) != 0)
+                    if (
+                        RegexHelpers.IsNonBacktracking(engine)
+                        && (option & RegexOptions.RightToLeft) != 0
+                    )
                     {
                         continue;
                     }
@@ -245,18 +380,98 @@ namespace System.Text.RegularExpressions.Tests
 
                     // Expected answers in the default en-US culture
                     yield return new object[] { "(?i:I)", option, engine, enUS, "xy\u0131ab", "" };
-                    yield return new object[] { "(?i:iI+)", option, engine, enUS, "abcIIIxyz", "III" };
-                    yield return new object[] { "(?i:iI+)", option, engine, enUS, "abcIi\u0130xyz", "Ii\u0130" };
-                    yield return new object[] { "(?i:iI+)", option, engine, enUS, "abcI\u0130ixyz", "I\u0130i" };
-                    yield return new object[] { "(?i:iI+)", option, engine, enUS, "abc\u0130IIxyz", "\u0130II" };
-                    yield return new object[] { "(?i:iI+)", option, engine, enUS, "abc\u0130\u0131Ixyz", "" };
-                    yield return new object[] { "(?i:iI+)", option, engine, enUS, "abc\u0130Iixyz", "\u0130Ii" };
-                    yield return new object[] { "(?i:[^IJKLM]I)", option, engine, enUS, "ii\u0130i\u0131ab", "" };
+                    yield return new object[]
+                    {
+                        "(?i:iI+)",
+                        option,
+                        engine,
+                        enUS,
+                        "abcIIIxyz",
+                        "III",
+                    };
+                    yield return new object[]
+                    {
+                        "(?i:iI+)",
+                        option,
+                        engine,
+                        enUS,
+                        "abcIi\u0130xyz",
+                        "Ii\u0130",
+                    };
+                    yield return new object[]
+                    {
+                        "(?i:iI+)",
+                        option,
+                        engine,
+                        enUS,
+                        "abcI\u0130ixyz",
+                        "I\u0130i",
+                    };
+                    yield return new object[]
+                    {
+                        "(?i:iI+)",
+                        option,
+                        engine,
+                        enUS,
+                        "abc\u0130IIxyz",
+                        "\u0130II",
+                    };
+                    yield return new object[]
+                    {
+                        "(?i:iI+)",
+                        option,
+                        engine,
+                        enUS,
+                        "abc\u0130\u0131Ixyz",
+                        "",
+                    };
+                    yield return new object[]
+                    {
+                        "(?i:iI+)",
+                        option,
+                        engine,
+                        enUS,
+                        "abc\u0130Iixyz",
+                        "\u0130Ii",
+                    };
+                    yield return new object[]
+                    {
+                        "(?i:[^IJKLM]I)",
+                        option,
+                        engine,
+                        enUS,
+                        "ii\u0130i\u0131ab",
+                        "",
+                    };
 
                     // Expected answers in the invariant culture
-                    yield return new object[] { "(?i:I)", option, engine, invariant, "xy\u0131ab", "" };
-                    yield return new object[] { "(?i:iI+)", option, engine, invariant, "abcIIIxyz", "III" };
-                    yield return new object[] { "(?i:iI+)", option, engine, invariant, "abc\u0130\u0131Ixyz", "" };
+                    yield return new object[]
+                    {
+                        "(?i:I)",
+                        option,
+                        engine,
+                        invariant,
+                        "xy\u0131ab",
+                        "",
+                    };
+                    yield return new object[]
+                    {
+                        "(?i:iI+)",
+                        option,
+                        engine,
+                        invariant,
+                        "abcIIIxyz",
+                        "III",
+                    };
+                    yield return new object[]
+                    {
+                        "(?i:iI+)",
+                        option,
+                        engine,
+                        invariant,
+                        "abc\u0130\u0131Ixyz",
+                        "",
+                    };
 
                     // Expected answers in the Turkish culture
                     //
@@ -264,20 +479,80 @@ namespace System.Text.RegularExpressions.Tests
                     // https://github.com/dotnet/runtime/issues/60568
                     if (!PlatformDetection.IsAndroid)
                     {
-                        yield return new object[] { "(?i:I)", option, engine, turkish, "xy\u0131ab", "\u0131" };
-                        yield return new object[] { "(?i:iI+)", option, engine, turkish, "abcIIIxyz", "" };
-                        yield return new object[] { "(?i:iI+)", option, engine, turkish, "abcIi\u0130xyz", "" };
-                        yield return new object[] { "(?i:iI+)", option, engine, turkish, "abcI\u0130ixyz", "" };
-                        yield return new object[] { "(?i:[^IJKLM]I)", option, engine, turkish, "ii\u0130i\u0131ab", "i\u0131" };
-                        yield return new object[] { "(?i)\u0049", option, engine, turkish, "\u0131", "\u0131" };
-                        yield return new object[] { "(?i)[a\u0049]", option, engine, turkish, "c\u0131c", "\u0131" };
+                        yield return new object[]
+                        {
+                            "(?i:I)",
+                            option,
+                            engine,
+                            turkish,
+                            "xy\u0131ab",
+                            "\u0131",
+                        };
+                        yield return new object[]
+                        {
+                            "(?i:iI+)",
+                            option,
+                            engine,
+                            turkish,
+                            "abcIIIxyz",
+                            "",
+                        };
+                        yield return new object[]
+                        {
+                            "(?i:iI+)",
+                            option,
+                            engine,
+                            turkish,
+                            "abcIi\u0130xyz",
+                            "",
+                        };
+                        yield return new object[]
+                        {
+                            "(?i:iI+)",
+                            option,
+                            engine,
+                            turkish,
+                            "abcI\u0130ixyz",
+                            "",
+                        };
+                        yield return new object[]
+                        {
+                            "(?i:[^IJKLM]I)",
+                            option,
+                            engine,
+                            turkish,
+                            "ii\u0130i\u0131ab",
+                            "i\u0131",
+                        };
+                        yield return new object[]
+                        {
+                            "(?i)\u0049",
+                            option,
+                            engine,
+                            turkish,
+                            "\u0131",
+                            "\u0131",
+                        };
+                        yield return new object[]
+                        {
+                            "(?i)[a\u0049]",
+                            option,
+                            engine,
+                            turkish,
+                            "c\u0131c",
+                            "\u0131",
+                        };
                     }
                 }
 
                 // None and Compiled are separated into the Match_In_Different_Cultures_CriticalCases test
                 if (RegexHelpers.IsNonBacktracking(engine))
                 {
-                    foreach (object[] data in Match_In_Different_Cultures_CriticalCases_TestData_For(engine))
+                    foreach (
+                        object[] data in Match_In_Different_Cultures_CriticalCases_TestData_For(
+                            engine
+                        )
+                    )
                     {
                         yield return data;
                     }
@@ -285,36 +560,112 @@ namespace System.Text.RegularExpressions.Tests
             }
         }
 
-        public static IEnumerable<object[]> Match_In_Different_Cultures_CriticalCases_TestData_For(RegexEngine engine)
+        public static IEnumerable<object[]> Match_In_Different_Cultures_CriticalCases_TestData_For(
+            RegexEngine engine
+        )
         {
             CultureInfo invariant = CultureInfo.InvariantCulture;
             CultureInfo turkish = new CultureInfo("tr-TR");
             RegexOptions options = RegexOptions.None;
 
             // Expected answers in the invariant culture
-            yield return new object[] { "(?i:iI+)", options, engine, invariant, "abcIi\u0130xyz", "Ii" };               // <-- failing for None, Compiled
-            yield return new object[] { "(?i:iI+)", options, engine, invariant, "abcI\u0130ixyz", "" };                 // <-- failing for Compiled
-            yield return new object[] { "(?i:iI+)", options, engine, invariant, "abc\u0130IIxyz", "II" };               // <-- failing for Compiled
-            yield return new object[] { "(?i:iI+)", options, engine, invariant, "abc\u0130Iixyz", "Ii" };               // <-- failing for Compiled
-            yield return new object[] { "(?i:[^IJKLM]I)", options, engine, invariant, "ii\u0130i\u0131ab", "\u0130i" }; // <-- failing for None, Compiled
+            yield return new object[]
+            {
+                "(?i:iI+)",
+                options,
+                engine,
+                invariant,
+                "abcIi\u0130xyz",
+                "Ii",
+            }; // <-- failing for None, Compiled
+            yield return new object[]
+            {
+                "(?i:iI+)",
+                options,
+                engine,
+                invariant,
+                "abcI\u0130ixyz",
+                "",
+            }; // <-- failing for Compiled
+            yield return new object[]
+            {
+                "(?i:iI+)",
+                options,
+                engine,
+                invariant,
+                "abc\u0130IIxyz",
+                "II",
+            }; // <-- failing for Compiled
+            yield return new object[]
+            {
+                "(?i:iI+)",
+                options,
+                engine,
+                invariant,
+                "abc\u0130Iixyz",
+                "Ii",
+            }; // <-- failing for Compiled
+            yield return new object[]
+            {
+                "(?i:[^IJKLM]I)",
+                options,
+                engine,
+                invariant,
+                "ii\u0130i\u0131ab",
+                "\u0130i",
+            }; // <-- failing for None, Compiled
 
             // Expected answers in the Turkish culture
             // Android produces unexpected results for tr-TR
             // https://github.com/dotnet/runtime/issues/60568
             if (!PlatformDetection.IsAndroid)
             {
-                yield return new object[] { "(?i:iI+)", options, engine, turkish, "abc\u0130IIxyz", "\u0130II" };           // <-- failing for None, Compiled
-                yield return new object[] { "(?i:iI+)", options, engine, turkish, "abc\u0130\u0131Ixyz", "\u0130\u0131I" }; // <-- failing for None, Compiled
-                yield return new object[] { "(?i:iI+)", options, engine, turkish, "abc\u0130Iixyz", "\u0130I" };            // <-- failing for None, Compiled
+                yield return new object[]
+                {
+                    "(?i:iI+)",
+                    options,
+                    engine,
+                    turkish,
+                    "abc\u0130IIxyz",
+                    "\u0130II",
+                }; // <-- failing for None, Compiled
+                yield return new object[]
+                {
+                    "(?i:iI+)",
+                    options,
+                    engine,
+                    turkish,
+                    "abc\u0130\u0131Ixyz",
+                    "\u0130\u0131I",
+                }; // <-- failing for None, Compiled
+                yield return new object[]
+                {
+                    "(?i:iI+)",
+                    options,
+                    engine,
+                    turkish,
+                    "abc\u0130Iixyz",
+                    "\u0130I",
+                }; // <-- failing for None, Compiled
             }
         }
 
         public static IEnumerable<object[]> Match_In_Different_Cultures_CriticalCases_TestData() =>
-            Match_In_Different_Cultures_CriticalCases_TestData_For(RegexEngine.Interpreter).Union(Match_In_Different_Cultures_CriticalCases_TestData_For(RegexEngine.Compiled));
+            Match_In_Different_Cultures_CriticalCases_TestData_For(RegexEngine.Interpreter)
+                .Union(
+                    Match_In_Different_Cultures_CriticalCases_TestData_For(RegexEngine.Compiled)
+                );
 
         [Theory]
         [MemberData(nameof(Match_In_Different_Cultures_TestData))]
-        public async Task Match_In_Different_Cultures(string pattern, RegexOptions options, RegexEngine engine, CultureInfo culture, string input, string match_expected)
+        public async Task Match_In_Different_Cultures(
+            string pattern,
+            RegexOptions options,
+            RegexEngine engine,
+            CultureInfo culture,
+            string input,
+            string match_expected
+        )
         {
             Regex r = await RegexHelpers.GetRegexAsync(engine, pattern, options, culture);
             Match match = r.Match(input);
@@ -325,7 +676,14 @@ namespace System.Text.RegularExpressions.Tests
         // .NET Framework doesn't use the Regex Casing table for case equivalences.
         [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework)]
         [MemberData(nameof(Match_In_Different_Cultures_CriticalCases_TestData))]
-        public async Task Match_In_Different_Cultures_CriticalCases(string pattern, RegexOptions options, RegexEngine engine, CultureInfo culture, string input, string match_expected)
+        public async Task Match_In_Different_Cultures_CriticalCases(
+            string pattern,
+            RegexOptions options,
+            RegexEngine engine,
+            CultureInfo culture,
+            string input,
+            string match_expected
+        )
         {
             Regex r = await RegexHelpers.GetRegexAsync(engine, pattern, options, culture);
             Match match = r.Match(input);

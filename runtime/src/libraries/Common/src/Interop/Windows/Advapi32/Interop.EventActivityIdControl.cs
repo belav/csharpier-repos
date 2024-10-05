@@ -9,6 +9,9 @@ internal static partial class Interop
     internal static partial class Advapi32
     {
         [LibraryImport(Libraries.Advapi32)]
-        internal static partial int EventActivityIdControl(ActivityControl ControlCode, ref Guid ActivityId);
+        internal static partial int EventActivityIdControl(
+            ActivityControl ControlCode,
+            ref Guid ActivityId
+        );
     }
 }

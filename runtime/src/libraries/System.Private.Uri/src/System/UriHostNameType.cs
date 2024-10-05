@@ -9,6 +9,6 @@ namespace System
         Basic,
         Dns,
         IPv4,
-        IPv6
+        IPv6,
     }
 }

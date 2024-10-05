@@ -16,24 +16,24 @@ using Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues;
 namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal sealed class CSharpRemoveUnusedParametersAndValuesDiagnosticAnalyzer : AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer
+    internal sealed class CSharpRemoveUnusedParametersAndValuesDiagnosticAnalyzer
+        : AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer
     {
         public CSharpRemoveUnusedParametersAndValuesDiagnosticAnalyzer()
-            : base(unusedValueExpressionStatementOption: CSharpCodeStyleOptions.UnusedValueExpressionStatement,
-                   unusedValueAssignmentOption: CSharpCodeStyleOptions.UnusedValueAssignment)
-        {
-        }
+            : base(
+                unusedValueExpressionStatementOption: CSharpCodeStyleOptions.UnusedValueExpressionStatement,
+                unusedValueAssignmentOption: CSharpCodeStyleOptions.UnusedValueAssignment
+            ) { }
 
         protected override ISyntaxFacts SyntaxFacts => CSharpSyntaxFacts.Instance;
 
-        protected override bool SupportsDiscard(SyntaxTree tree)
-            => tree.Options.LanguageVersion() >= LanguageVersion.CSharp7;
+        protected override bool SupportsDiscard(SyntaxTree tree) =>
+            tree.Options.LanguageVersion() >= LanguageVersion.CSharp7;
 
-        protected override bool MethodHasHandlesClause(IMethodSymbol method)
-            => false;
+        protected override bool MethodHasHandlesClause(IMethodSymbol method) => false;
 
-        protected override bool IsIfConditionalDirective(SyntaxNode node)
-            => node is IfDirectiveTriviaSyntax;
+        protected override bool IsIfConditionalDirective(SyntaxNode node) =>
+            node is IfDirectiveTriviaSyntax;
 
         protected override bool ReturnsThrow(SyntaxNode node)
         {
@@ -50,13 +50,17 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
             return methodSyntax.Body is { Statements: [ThrowStatementSyntax] };
         }
 
-        protected override CodeStyleOption2<UnusedValuePreference> GetUnusedValueExpressionStatementOption(AnalyzerOptionsProvider provider)
-            => ((CSharpAnalyzerOptionsProvider)provider).UnusedValueExpressionStatement;
+        protected override CodeStyleOption2<UnusedValuePreference> GetUnusedValueExpressionStatementOption(
+            AnalyzerOptionsProvider provider
+        ) => ((CSharpAnalyzerOptionsProvider)provider).UnusedValueExpressionStatement;
 
-        protected override CodeStyleOption2<UnusedValuePreference> GetUnusedValueAssignmentOption(AnalyzerOptionsProvider provider)
-            => ((CSharpAnalyzerOptionsProvider)provider).UnusedValueAssignment;
+        protected override CodeStyleOption2<UnusedValuePreference> GetUnusedValueAssignmentOption(
+            AnalyzerOptionsProvider provider
+        ) => ((CSharpAnalyzerOptionsProvider)provider).UnusedValueAssignment;
 
-        protected override bool ShouldBailOutFromRemovableAssignmentAnalysis(IOperation unusedSymbolWriteOperation)
+        protected override bool ShouldBailOutFromRemovableAssignmentAnalysis(
+            IOperation unusedSymbolWriteOperation
+        )
         {
             // We don't want to recommend removing the write operation if it is within a statement
             // that is not parented by an explicit block with curly braces.
@@ -66,17 +70,22 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
             // want to suggest removing the entire if statement as that might lead to change of semantics.
             // So, we conservatively bail out from removable assignment analysis for such cases.
 
-            var statementAncestor = unusedSymbolWriteOperation.Syntax.FirstAncestorOrSelf<StatementSyntax>()?.Parent;
+            var statementAncestor = unusedSymbolWriteOperation
+                .Syntax.FirstAncestorOrSelf<StatementSyntax>()
+                ?.Parent;
             return statementAncestor is not (BlockSyntax or SwitchSectionSyntax);
         }
 
         // C# does not have an explicit "call" statement syntax for invocations with explicit value discard.
-        protected override bool IsCallStatement(IExpressionStatementOperation expressionStatement)
-            => false;
+        protected override bool IsCallStatement(
+            IExpressionStatementOperation expressionStatement
+        ) => false;
 
-        protected override bool IsExpressionOfExpressionBody(IExpressionStatementOperation expressionStatementOperation)
-            => expressionStatementOperation.Parent is IBlockOperation blockOperation &&
-               !blockOperation.Syntax.IsKind(SyntaxKind.Block);
+        protected override bool IsExpressionOfExpressionBody(
+            IExpressionStatementOperation expressionStatementOperation
+        ) =>
+            expressionStatementOperation.Parent is IBlockOperation blockOperation
+            && !blockOperation.Syntax.IsKind(SyntaxKind.Block);
 
         protected override Location GetDefinitionLocationToFade(IOperation unusedDefinition)
         {
@@ -89,19 +98,27 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
                     return declarationPattern.Designation.GetLocation();
 
                 case RecursivePatternSyntax recursivePattern:
-                    Debug.Assert(recursivePattern.Designation is not null, "If we got to this point variable designation cannot be null");
+                    Debug.Assert(
+                        recursivePattern.Designation is not null,
+                        "If we got to this point variable designation cannot be null"
+                    );
                     return recursivePattern.Designation!.GetLocation();
 
                 case ListPatternSyntax listPattern:
-                    Debug.Assert(listPattern.Designation is not null, "If we got to this point variable designation cannot be null");
+                    Debug.Assert(
+                        listPattern.Designation is not null,
+                        "If we got to this point variable designation cannot be null"
+                    );
                     return listPattern.Designation!.GetLocation();
 
                 default:
                     // C# syntax node for foreach statement has no syntax node for the loop control variable declaration,
                     // so the operation tree has an IVariableDeclaratorOperation with the syntax mapped to the type node syntax instead of variable declarator syntax.
                     // Check if the unused definition syntax is the foreach statement's type node.
-                    if (unusedDefinition.Syntax.Parent is ForEachStatementSyntax forEachStatement &&
-                        forEachStatement.Type == unusedDefinition.Syntax)
+                    if (
+                        unusedDefinition.Syntax.Parent is ForEachStatementSyntax forEachStatement
+                        && forEachStatement.Type == unusedDefinition.Syntax
+                    )
                     {
                         return forEachStatement.Identifier.GetLocation();
                     }

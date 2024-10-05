@@ -15,16 +15,22 @@ namespace System.ServiceModel.Transactions
         CoordinationContext context;
         RequestSecurityTokenResponse issuedToken;
 
-        public WsatTransactionInfo(WsatProxy wsatProxy, 
-                                   CoordinationContext context,
-                                   RequestSecurityTokenResponse issuedToken)
+        public WsatTransactionInfo(
+            WsatProxy wsatProxy,
+            CoordinationContext context,
+            RequestSecurityTokenResponse issuedToken
+        )
         {
             this.wsatProxy = wsatProxy;
             this.context = context;
             this.issuedToken = issuedToken;
         }
 
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods, Justification = "The calls into CoordinationContext are safe.")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods,
+            Justification = "The calls into CoordinationContext are safe."
+        )]
         public override Transaction UnmarshalTransaction()
         {
             Transaction tx;
@@ -35,7 +41,10 @@ namespace System.ServiceModel.Transactions
             tx = this.wsatProxy.UnmarshalTransaction(this);
 
             // Cache extended information for subsequent marshal operations
-            WsatExtendedInformation info = new WsatExtendedInformation(context.Identifier, context.Expires);
+            WsatExtendedInformation info = new WsatExtendedInformation(
+                context.Identifier,
+                context.Expires
+            );
             info.TryCache(tx);
 
             // Cache the unmarshalled transaction for subsequent unmarshal operations

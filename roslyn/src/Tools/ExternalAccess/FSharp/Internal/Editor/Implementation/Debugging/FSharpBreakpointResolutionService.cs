@@ -28,10 +28,26 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor.Implement
             _service = service;
         }
 
-        public async Task<BreakpointResolutionResult?> ResolveBreakpointAsync(Document document, TextSpan textSpan, CancellationToken cancellationToken = default)
-            => (await _service.ResolveBreakpointAsync(document, textSpan, cancellationToken).ConfigureAwait(false))?.UnderlyingObject;
+        public async Task<BreakpointResolutionResult?> ResolveBreakpointAsync(
+            Document document,
+            TextSpan textSpan,
+            CancellationToken cancellationToken = default
+        ) =>
+            (
+                await _service
+                    .ResolveBreakpointAsync(document, textSpan, cancellationToken)
+                    .ConfigureAwait(false)
+            )?.UnderlyingObject;
 
-        public async Task<IEnumerable<BreakpointResolutionResult>> ResolveBreakpointsAsync(Solution solution, string name, CancellationToken cancellationToken = default)
-            => (await _service.ResolveBreakpointsAsync(solution, name, cancellationToken).ConfigureAwait(false)).Select(r => r.UnderlyingObject);
+        public async Task<IEnumerable<BreakpointResolutionResult>> ResolveBreakpointsAsync(
+            Solution solution,
+            string name,
+            CancellationToken cancellationToken = default
+        ) =>
+            (
+                await _service
+                    .ResolveBreakpointsAsync(solution, name, cancellationToken)
+                    .ConfigureAwait(false)
+            ).Select(r => r.UnderlyingObject);
     }
 }

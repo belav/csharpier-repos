@@ -44,13 +44,15 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             IThreadingContext threadingContext,
             Workspace workspace,
             IClassificationFormatMap formatMap,
-            ClassificationTypeMap typeMap)
+            ClassificationTypeMap typeMap
+        )
             : base(formatMap, typeMap)
         {
             _frame = frame;
             _threadingContext = threadingContext;
             _workspace = workspace;
-            _stackExplorerService = workspace.Services.GetRequiredService<IStackTraceExplorerService>();
+            _stackExplorerService =
+                workspace.Services.GetRequiredService<IStackTraceExplorerService>();
         }
 
         public override bool ShowMouseOver => true;
@@ -58,54 +60,74 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
         public void NavigateToClass()
         {
             var cancellationToken = _threadingContext.DisposalToken;
-            Task.Run(() => NavigateToClassAsync(cancellationToken), cancellationToken).ReportNonFatalErrorAsync();
+            Task.Run(() => NavigateToClassAsync(cancellationToken), cancellationToken)
+                .ReportNonFatalErrorAsync();
         }
 
         public async Task NavigateToClassAsync(CancellationToken cancellationToken)
         {
             try
             {
-                var definition = await GetDefinitionAsync(StackFrameSymbolPart.ContainingType, cancellationToken).ConfigureAwait(false);
-                await NavigateToDefinitionAsync(definition, cancellationToken).ConfigureAwait(false);
+                var definition = await GetDefinitionAsync(
+                        StackFrameSymbolPart.ContainingType,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
+                await NavigateToDefinitionAsync(definition, cancellationToken)
+                    .ConfigureAwait(false);
             }
-            catch (Exception ex) when (FatalError.ReportAndCatchUnlessCanceled(ex, cancellationToken))
-            {
-            }
+            catch (Exception ex)
+                when (FatalError.ReportAndCatchUnlessCanceled(ex, cancellationToken)) { }
         }
 
-        private async Task NavigateToDefinitionAsync(DefinitionItem? definition, CancellationToken cancellationToken)
+        private async Task NavigateToDefinitionAsync(
+            DefinitionItem? definition,
+            CancellationToken cancellationToken
+        )
         {
             if (definition is null)
                 return;
 
-            var location = await definition.GetNavigableLocationAsync(
-                _workspace, cancellationToken).ConfigureAwait(false);
-            await location.TryNavigateToAsync(
-                _threadingContext, new NavigationOptions(PreferProvisionalTab: true, ActivateTab: false), cancellationToken).ConfigureAwait(false);
+            var location = await definition
+                .GetNavigableLocationAsync(_workspace, cancellationToken)
+                .ConfigureAwait(false);
+            await location
+                .TryNavigateToAsync(
+                    _threadingContext,
+                    new NavigationOptions(PreferProvisionalTab: true, ActivateTab: false),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
         public void NavigateToSymbol()
         {
             var cancellationToken = _threadingContext.DisposalToken;
-            Task.Run(() => NavigateToMethodAsync(cancellationToken), cancellationToken).ReportNonFatalErrorAsync();
+            Task.Run(() => NavigateToMethodAsync(cancellationToken), cancellationToken)
+                .ReportNonFatalErrorAsync();
         }
 
         public async Task NavigateToMethodAsync(CancellationToken cancellationToken)
         {
             try
             {
-                var definition = await GetDefinitionAsync(StackFrameSymbolPart.Method, cancellationToken).ConfigureAwait(false);
-                await NavigateToDefinitionAsync(definition, cancellationToken).ConfigureAwait(false);
+                var definition = await GetDefinitionAsync(
+                        StackFrameSymbolPart.Method,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
+                await NavigateToDefinitionAsync(definition, cancellationToken)
+                    .ConfigureAwait(false);
             }
-            catch (Exception ex) when (FatalError.ReportAndCatchUnlessCanceled(ex, cancellationToken))
-            {
-            }
+            catch (Exception ex)
+                when (FatalError.ReportAndCatchUnlessCanceled(ex, cancellationToken)) { }
         }
 
         public void NavigateToFile()
         {
             var cancellationToken = _threadingContext.DisposalToken;
-            Task.Run(() => NavigateToFileAsync(cancellationToken), cancellationToken).ReportNonFatalErrorAsync();
+            Task.Run(() => NavigateToFileAsync(cancellationToken), cancellationToken)
+                .ReportNonFatalErrorAsync();
         }
 
         public async Task NavigateToFileAsync(CancellationToken cancellationToken)
@@ -117,9 +139,14 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
                 if (document is not null)
                 {
                     // While navigating do not activate the tab, which will change focus from the tool window
-                    var options = new NavigationOptions(PreferProvisionalTab: true, ActivateTab: false);
+                    var options = new NavigationOptions(
+                        PreferProvisionalTab: true,
+                        ActivateTab: false
+                    );
 
-                    var sourceText = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
+                    var sourceText = await document
+                        .GetValueTextAsync(cancellationToken)
+                        .ConfigureAwait(false);
 
                     // If the line number is larger than the total lines in the file
                     // then just go to the end of the file (lines count). This can happen
@@ -127,17 +154,26 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
                     // version of the file.
                     lineNumber = Math.Min(sourceText.Lines.Count, lineNumber);
 
-                    var navigationService = _workspace.Services.GetService<IDocumentNavigationService>();
+                    var navigationService =
+                        _workspace.Services.GetService<IDocumentNavigationService>();
                     if (navigationService is null)
                         return;
 
-                    var location = await navigationService.TryNavigateToLineAndOffsetAsync(
-                        _threadingContext, _workspace, document.Id, lineNumber - 1, offset: 0, options, cancellationToken).ConfigureAwait(false);
+                    var location = await navigationService
+                        .TryNavigateToLineAndOffsetAsync(
+                            _threadingContext,
+                            _workspace,
+                            document.Id,
+                            lineNumber - 1,
+                            offset: 0,
+                            options,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
             }
-            catch (Exception ex) when (FatalError.ReportAndCatchUnlessCanceled(ex, cancellationToken))
-            {
-            }
+            catch (Exception ex)
+                when (FatalError.ReportAndCatchUnlessCanceled(ex, cancellationToken)) { }
         }
 
         protected override IEnumerable<Inline> CreateInlines()
@@ -146,7 +182,10 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             var tree = _frame.Tree;
             var className = methodDeclaration.MemberAccessExpression.Left;
             var classLeadingTrivia = GetLeadingTrivia(className);
-            yield return MakeClassifiedRun(ClassificationTypeNames.Text, CreateString(classLeadingTrivia));
+            yield return MakeClassifiedRun(
+                ClassificationTypeNames.Text,
+                CreateString(classLeadingTrivia)
+            );
 
             //
             // Build the link to the class
@@ -154,12 +193,14 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
 
             var classLink = new Hyperlink();
             var classLinkText = className.ToString();
-            classLink.Inlines.Add(MakeClassifiedRun(ClassificationTypeNames.ClassName, classLinkText));
+            classLink.Inlines.Add(
+                MakeClassifiedRun(ClassificationTypeNames.ClassName, classLinkText)
+            );
             classLink.Click += (s, a) => NavigateToClass();
             classLink.RequestNavigate += (s, a) => NavigateToClass();
             yield return classLink;
 
-            // Since we're only using the left side of a qualified name, we expect 
+            // Since we're only using the left side of a qualified name, we expect
             // there to be no trivia on the right (trailing).
             Debug.Assert(GetTrailingTrivia(className).IsEmpty);
 
@@ -168,7 +209,9 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             //
             var methodLink = new Hyperlink();
             var methodTextBuilder = new StringBuilder();
-            methodTextBuilder.Append(methodDeclaration.MemberAccessExpression.DotToken.ToFullString());
+            methodTextBuilder.Append(
+                methodDeclaration.MemberAccessExpression.DotToken.ToFullString()
+            );
             methodTextBuilder.Append(methodDeclaration.MemberAccessExpression.Right.ToFullString());
 
             if (methodDeclaration.TypeArguments is not null)
@@ -177,7 +220,9 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             }
 
             methodTextBuilder.Append(methodDeclaration.ArgumentList.ToFullString());
-            methodLink.Inlines.Add(MakeClassifiedRun(ClassificationTypeNames.MethodName, methodTextBuilder.ToString()));
+            methodLink.Inlines.Add(
+                MakeClassifiedRun(ClassificationTypeNames.MethodName, methodTextBuilder.ToString())
+            );
             methodLink.Click += (s, a) => NavigateToSymbol();
             methodLink.RequestNavigate += (s, a) => NavigateToSymbol();
             yield return methodLink;
@@ -189,23 +234,34 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             {
                 var fileInformation = _frame.Root.FileInformationExpression;
                 var leadingTrivia = GetLeadingTrivia(fileInformation);
-                yield return MakeClassifiedRun(ClassificationTypeNames.Text, CreateString(leadingTrivia));
+                yield return MakeClassifiedRun(
+                    ClassificationTypeNames.Text,
+                    CreateString(leadingTrivia)
+                );
 
                 var fileLink = new Hyperlink();
                 var fileLinkText = _frame.Root.FileInformationExpression.ToString();
-                fileLink.Inlines.Add(MakeClassifiedRun(ClassificationTypeNames.Text, fileInformation.ToString()));
+                fileLink.Inlines.Add(
+                    MakeClassifiedRun(ClassificationTypeNames.Text, fileInformation.ToString())
+                );
                 fileLink.Click += (s, a) => NavigateToFile();
                 fileLink.RequestNavigate += (s, a) => NavigateToFile();
                 yield return fileLink;
 
                 var trailingTrivia = GetTrailingTrivia(fileInformation);
-                yield return MakeClassifiedRun(ClassificationTypeNames.Text, CreateString(trailingTrivia));
+                yield return MakeClassifiedRun(
+                    ClassificationTypeNames.Text,
+                    CreateString(trailingTrivia)
+                );
             }
 
             //
             // Don't lose the trailing trivia text
             //
-            yield return MakeClassifiedRun(ClassificationTypeNames.Text, _frame.Root.EndOfLineToken.ToFullString());
+            yield return MakeClassifiedRun(
+                ClassificationTypeNames.Text,
+                _frame.Root.EndOfLineToken.ToFullString()
+            );
         }
 
         private (Document? document, int lineNumber) GetDocumentAndLine()
@@ -215,18 +271,34 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
                 return (_cachedDocument, _cachedLineNumber);
             }
 
-            (_cachedDocument, _cachedLineNumber) = _stackExplorerService.GetDocumentAndLine(_workspace.CurrentSolution, _frame);
+            (_cachedDocument, _cachedLineNumber) = _stackExplorerService.GetDocumentAndLine(
+                _workspace.CurrentSolution,
+                _frame
+            );
             return (_cachedDocument, _cachedLineNumber);
         }
 
-        private async Task<DefinitionItem?> GetDefinitionAsync(StackFrameSymbolPart symbolPart, CancellationToken cancellationToken)
+        private async Task<DefinitionItem?> GetDefinitionAsync(
+            StackFrameSymbolPart symbolPart,
+            CancellationToken cancellationToken
+        )
         {
-            if (_definitionCache.TryGetValue(symbolPart, out var definition) && definition is not null)
+            if (
+                _definitionCache.TryGetValue(symbolPart, out var definition)
+                && definition is not null
+            )
             {
                 return definition;
             }
 
-            _definitionCache[symbolPart] = await _stackExplorerService.TryFindDefinitionAsync(_workspace.CurrentSolution, _frame, symbolPart, cancellationToken).ConfigureAwait(false);
+            _definitionCache[symbolPart] = await _stackExplorerService
+                .TryFindDefinitionAsync(
+                    _workspace.CurrentSolution,
+                    _frame,
+                    symbolPart,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return _definitionCache[symbolPart];
         }
 
@@ -265,7 +337,10 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
         /// <summary>
         /// Depth first traversal of the descendents of a node to the tokens
         /// </summary>
-        private static void GetLeafTokens(StackFrameNode node, ArrayBuilder<StackFrameToken> builder)
+        private static void GetLeafTokens(
+            StackFrameNode node,
+            ArrayBuilder<StackFrameToken> builder
+        )
         {
             foreach (var child in node)
             {

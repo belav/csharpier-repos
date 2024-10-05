@@ -12,14 +12,12 @@ namespace System.IdentityModel.Tokens
     /// </summary>
     public abstract class ProofDescriptor
     {
-        
         /// <summary>
-        /// Sets the appropriate things, such as requested proof token, inside the RSTR 
-        /// based on what is inside the proof descriptor instance. 
+        /// Sets the appropriate things, such as requested proof token, inside the RSTR
+        /// based on what is inside the proof descriptor instance.
         /// </summary>
         /// <param name="response">The RSTR object that this proof descriptor needs to modify.</param>
         public abstract void ApplyTo(RSTR response);
-
 
         /// <summary>
         /// Gets the key identifier that can be used inside issued to define the key

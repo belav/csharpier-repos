@@ -23,7 +23,8 @@ namespace System.Data.OleDb
 
         private object? _coercedValue;
 
-        private OleDbParameter(OleDbParameter source) : this()
+        private OleDbParameter(OleDbParameter source)
+            : this()
         { // V1.2.3300, Clone
             ADP.CheckArgumentNull(source, "source");
 
@@ -38,14 +39,8 @@ namespace System.Data.OleDb
 
         private object? CoercedValue
         { // V1.2.3300
-            get
-            {
-                return _coercedValue;
-            }
-            set
-            {
-                _coercedValue = value;
-            }
+            get { return _coercedValue; }
+            set { _coercedValue = value; }
         }
 
         [RefreshProperties(RefreshProperties.All)]
@@ -78,14 +73,8 @@ namespace System.Data.OleDb
 
         public override bool IsNullable
         { // V1.2.3300, XXXParameter V1.0.3300
-            get
-            {
-                return _isNullable;
-            }
-            set
-            {
-                _isNullable = value;
-            }
+            get { return _isNullable; }
+            set { _isNullable = value; }
         }
 
         internal const int Offset = 0;
@@ -132,26 +121,14 @@ namespace System.Data.OleDb
         [AllowNull]
         public override string SourceColumn
         { // V1.2.3300, XXXParameter V1.0.3300
-            get
-            {
-                return _sourceColumn ?? string.Empty;
-            }
-            set
-            {
-                _sourceColumn = value;
-            }
+            get { return _sourceColumn ?? string.Empty; }
+            set { _sourceColumn = value; }
         }
 
         public override bool SourceColumnNullMapping
         {
-            get
-            {
-                return _sourceColumnNullMapping;
-            }
-            set
-            {
-                _sourceColumnNullMapping = value;
-            }
+            get { return _sourceColumnNullMapping; }
+            set { _sourceColumnNullMapping = value; }
         }
 
         public override DataRowVersion SourceVersion

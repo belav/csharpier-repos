@@ -23,13 +23,22 @@ public class PageViewDataAttributeFilterTest
         var httpContext = new DefaultHttpContext();
         var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
         var pageContext = new PageContext(actionContext);
-        var context = new PageHandlerExecutingContext(pageContext, new IFilterMetadata[0], new HandlerMethodDescriptor(), new Dictionary<string, object>(), handler);
+        var context = new PageHandlerExecutingContext(
+            pageContext,
+            new IFilterMetadata[0],
+            new HandlerMethodDescriptor(),
+            new Dictionary<string, object>(),
+            handler
+        );
 
         // Act
         filter.OnPageHandlerExecuting(context);
 
         // Assert
-        var feature = Assert.Single(httpContext.Features, f => f.Key == typeof(IViewDataValuesProviderFeature));
+        var feature = Assert.Single(
+            httpContext.Features,
+            f => f.Key == typeof(IViewDataValuesProviderFeature)
+        );
         Assert.Same(filter, feature.Value);
     }
 
@@ -42,7 +51,13 @@ public class PageViewDataAttributeFilterTest
         var httpContext = new DefaultHttpContext();
         var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
         var pageContext = new PageContext(actionContext);
-        var context = new PageHandlerExecutingContext(pageContext, new IFilterMetadata[0], new HandlerMethodDescriptor(), new Dictionary<string, object>(), handler);
+        var context = new PageHandlerExecutingContext(
+            pageContext,
+            new IFilterMetadata[0],
+            new HandlerMethodDescriptor(),
+            new Dictionary<string, object>(),
+            handler
+        );
 
         // Act
         filter.OnPageHandlerExecuting(context);
@@ -58,17 +73,17 @@ public class PageViewDataAttributeFilterTest
         var type = typeof(TestModel);
         var properties = new[]
         {
-                new LifecycleProperty(type.GetProperty(nameof(TestModel.Prop1)), "Prop1"),
-                new LifecycleProperty(type.GetProperty(nameof(TestModel.Prop2)), "Prop2"),
-                new LifecycleProperty(type.GetProperty(nameof(TestModel.Prop3)), "Prop3"),
-            };
+            new LifecycleProperty(type.GetProperty(nameof(TestModel.Prop1)), "Prop1"),
+            new LifecycleProperty(type.GetProperty(nameof(TestModel.Prop2)), "Prop2"),
+            new LifecycleProperty(type.GetProperty(nameof(TestModel.Prop3)), "Prop3"),
+        };
 
         var controller = new TestModel();
-        var filter = new PageViewDataAttributeFilter(properties)
-        {
-            Subject = controller,
-        };
-        var viewData = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary());
+        var filter = new PageViewDataAttributeFilter(properties) { Subject = controller };
+        var viewData = new ViewDataDictionary(
+            new EmptyModelMetadataProvider(),
+            new ModelStateDictionary()
+        );
 
         // Act
         controller.Prop1 = "New-Value";
@@ -86,7 +101,8 @@ public class PageViewDataAttributeFilterTest
             {
                 Assert.Equal("Prop2", kvp.Key);
                 Assert.Equal("Test", kvp.Value);
-            });
+            }
+        );
     }
 
     public class TestModel

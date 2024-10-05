@@ -30,13 +30,11 @@ namespace Microsoft.CodeAnalysis.Formatting
                 return new LineColumn(
                     Line,
                     Column + delta.Spaces,
-                    WhitespaceOnly && delta.WhitespaceOnly);
+                    WhitespaceOnly && delta.WhitespaceOnly
+                );
             }
 
-            return new LineColumn(
-                Line + delta.Lines,
-                delta.Spaces,
-                delta.WhitespaceOnly);
+            return new LineColumn(Line + delta.Lines, delta.Spaces, delta.WhitespaceOnly);
         }
     }
 }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,286 +26,299 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
 using System.Security;
 using System.Security.Permissions;
+using NUnit.Framework;
 
-namespace MonoTests.System.Security.Permissions {
+namespace MonoTests.System.Security.Permissions
+{
+    [TestFixture]
+    public class ZoneIdentityPermissionTest
+    {
+        [Test]
+        public void PermissionStateNone()
+        {
+            ZoneIdentityPermission zip = new ZoneIdentityPermission(PermissionState.None);
+            Assert.AreEqual(SecurityZone.NoZone, zip.SecurityZone);
+        }
 
-	[TestFixture]
-	public class ZoneIdentityPermissionTest	{
+        [Test]
+        [Category("NotWorking")]
+        public void PermissionStateUnrestricted()
+        {
+            // In 2.0 Unrestricted are permitted for identity permissions
+            ZoneIdentityPermission zip = new ZoneIdentityPermission(PermissionState.Unrestricted);
+            Assert.AreEqual(SecurityZone.NoZone, zip.SecurityZone);
+            SecurityElement se = zip.ToXml();
+            Assert.AreEqual(5, se.Children.Count, "Count");
+            // and they aren't equals to None
+            Assert.IsFalse(zip.Equals(new ZoneIdentityPermission(PermissionState.None)));
+        }
 
-		[Test]
-		public void PermissionStateNone ()
-		{
-			ZoneIdentityPermission zip = new ZoneIdentityPermission (PermissionState.None);
-			Assert.AreEqual (SecurityZone.NoZone, zip.SecurityZone);
-		}
-		[Test]
-		[Category ("NotWorking")]
-		public void PermissionStateUnrestricted ()
-		{
-			// In 2.0 Unrestricted are permitted for identity permissions
-			ZoneIdentityPermission zip = new ZoneIdentityPermission (PermissionState.Unrestricted);
-			Assert.AreEqual (SecurityZone.NoZone, zip.SecurityZone);
-			SecurityElement se = zip.ToXml ();
-			Assert.AreEqual (5, se.Children.Count, "Count");
-			// and they aren't equals to None
-			Assert.IsFalse (zip.Equals (new ZoneIdentityPermission (PermissionState.None)));
-		}
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void PermissionStateInvalid ()
-		{
-			ZoneIdentityPermission zip = new ZoneIdentityPermission ((PermissionState)2);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void PermissionStateInvalid()
+        {
+            ZoneIdentityPermission zip = new ZoneIdentityPermission((PermissionState)2);
+        }
 
-		private bool Same (ZoneIdentityPermission zip1, ZoneIdentityPermission zip2)
-		{
-			return zip1.Equals (zip2);
-		}
+        private bool Same(ZoneIdentityPermission zip1, ZoneIdentityPermission zip2)
+        {
+            return zip1.Equals(zip2);
+        }
 
-		private ZoneIdentityPermission BasicTestZone (SecurityZone zone, bool special)
-		{
-			ZoneIdentityPermission zip = new ZoneIdentityPermission (zone);
-			Assert.AreEqual (zone, zip.SecurityZone, "SecurityZone");
-			
-			ZoneIdentityPermission copy = (ZoneIdentityPermission) zip.Copy ();
-			Assert.IsTrue (Same (zip, copy), "Equals-Copy");
-			Assert.IsTrue (zip.IsSubsetOf (copy), "IsSubset-1");
-			Assert.IsTrue (copy.IsSubsetOf (zip), "IsSubset-2");
-			if (special) {
-				Assert.IsFalse (zip.IsSubsetOf (null), "IsSubset-Null");
-			}
-			
-			IPermission intersect = zip.Intersect (copy);
-			if (special) {
-				Assert.IsTrue (intersect.IsSubsetOf (zip), "IsSubset-3");
-				Assert.IsFalse (Object.ReferenceEquals (zip, intersect), "!ReferenceEquals1");
-				Assert.IsTrue (intersect.IsSubsetOf (copy), "IsSubset-4");
-				Assert.IsFalse (Object.ReferenceEquals (copy, intersect), "!ReferenceEquals2");
-			}
+        private ZoneIdentityPermission BasicTestZone(SecurityZone zone, bool special)
+        {
+            ZoneIdentityPermission zip = new ZoneIdentityPermission(zone);
+            Assert.AreEqual(zone, zip.SecurityZone, "SecurityZone");
 
-			Assert.IsNull (zip.Intersect (null), "Intersect with null");
+            ZoneIdentityPermission copy = (ZoneIdentityPermission)zip.Copy();
+            Assert.IsTrue(Same(zip, copy), "Equals-Copy");
+            Assert.IsTrue(zip.IsSubsetOf(copy), "IsSubset-1");
+            Assert.IsTrue(copy.IsSubsetOf(zip), "IsSubset-2");
+            if (special)
+            {
+                Assert.IsFalse(zip.IsSubsetOf(null), "IsSubset-Null");
+            }
 
-			intersect = zip.Intersect (new ZoneIdentityPermission (PermissionState.None));
-			Assert.IsNull (intersect, "Intersect with PS.None");
+            IPermission intersect = zip.Intersect(copy);
+            if (special)
+            {
+                Assert.IsTrue(intersect.IsSubsetOf(zip), "IsSubset-3");
+                Assert.IsFalse(Object.ReferenceEquals(zip, intersect), "!ReferenceEquals1");
+                Assert.IsTrue(intersect.IsSubsetOf(copy), "IsSubset-4");
+                Assert.IsFalse(Object.ReferenceEquals(copy, intersect), "!ReferenceEquals2");
+            }
 
-			// note: can't be tested with PermissionState.Unrestricted
+            Assert.IsNull(zip.Intersect(null), "Intersect with null");
 
-			// XML roundtrip
-			SecurityElement se = zip.ToXml ();
-			copy.FromXml (se);
-			Assert.IsTrue (Same (zip, copy), "Equals-Xml");
+            intersect = zip.Intersect(new ZoneIdentityPermission(PermissionState.None));
+            Assert.IsNull(intersect, "Intersect with PS.None");
 
-			return zip;
-		}
+            // note: can't be tested with PermissionState.Unrestricted
 
-		[Test]
-		public void SecurityZone_Internet ()
-		{
-			BasicTestZone (SecurityZone.Internet, true);
-		}
+            // XML roundtrip
+            SecurityElement se = zip.ToXml();
+            copy.FromXml(se);
+            Assert.IsTrue(Same(zip, copy), "Equals-Xml");
 
-		[Test]
-		public void SecurityZone_Intranet ()
-		{
-			BasicTestZone (SecurityZone.Intranet, true);
-		}
+            return zip;
+        }
 
-		[Test]
-		public void SecurityZone_MyComputer ()
-		{
-			BasicTestZone (SecurityZone.MyComputer, true);
-		}
+        [Test]
+        public void SecurityZone_Internet()
+        {
+            BasicTestZone(SecurityZone.Internet, true);
+        }
 
-		[Test]
-		public void SecurityZone_NoZone ()
-		{
-			ZoneIdentityPermission zip = BasicTestZone (SecurityZone.NoZone, false);
-			Assert.IsNull (zip.ToXml ().Attribute ("Zone"), "Zone Attribute");
-			Assert.IsTrue (zip.IsSubsetOf (null), "IsSubset-Null");
-			IPermission intersect = zip.Intersect (zip);
-			Assert.IsNull (intersect, "Intersect with No Zone");
-			// NoZone is special as it is a subset of all zones
-			ZoneIdentityPermission ss = new ZoneIdentityPermission (SecurityZone.Internet);
-			Assert.IsTrue (zip.IsSubsetOf (ss), "IsSubset-Internet");
-			ss.SecurityZone = SecurityZone.Intranet;
-			Assert.IsTrue (zip.IsSubsetOf (ss), "IsSubset-Intranet");
-			ss.SecurityZone = SecurityZone.MyComputer;
-			Assert.IsTrue (zip.IsSubsetOf (ss), "IsSubset-MyComputer");
-			ss.SecurityZone = SecurityZone.NoZone;
-			Assert.IsTrue (zip.IsSubsetOf (ss), "IsSubset-NoZone");
-			ss.SecurityZone = SecurityZone.Trusted;
-			Assert.IsTrue (zip.IsSubsetOf (ss), "IsSubset-Trusted");
-			ss.SecurityZone = SecurityZone.Untrusted;
-			Assert.IsTrue (zip.IsSubsetOf (ss), "IsSubset-Untrusted");
-		}
+        [Test]
+        public void SecurityZone_Intranet()
+        {
+            BasicTestZone(SecurityZone.Intranet, true);
+        }
 
-		[Test]
-		public void SecurityZone_Trusted ()
-		{
-			BasicTestZone (SecurityZone.Trusted, true);
-		}
+        [Test]
+        public void SecurityZone_MyComputer()
+        {
+            BasicTestZone(SecurityZone.MyComputer, true);
+        }
 
-		[Test]
-		public void SecurityZone_Untrusted ()
-		{
-			BasicTestZone (SecurityZone.Untrusted, true);
-		}
+        [Test]
+        public void SecurityZone_NoZone()
+        {
+            ZoneIdentityPermission zip = BasicTestZone(SecurityZone.NoZone, false);
+            Assert.IsNull(zip.ToXml().Attribute("Zone"), "Zone Attribute");
+            Assert.IsTrue(zip.IsSubsetOf(null), "IsSubset-Null");
+            IPermission intersect = zip.Intersect(zip);
+            Assert.IsNull(intersect, "Intersect with No Zone");
+            // NoZone is special as it is a subset of all zones
+            ZoneIdentityPermission ss = new ZoneIdentityPermission(SecurityZone.Internet);
+            Assert.IsTrue(zip.IsSubsetOf(ss), "IsSubset-Internet");
+            ss.SecurityZone = SecurityZone.Intranet;
+            Assert.IsTrue(zip.IsSubsetOf(ss), "IsSubset-Intranet");
+            ss.SecurityZone = SecurityZone.MyComputer;
+            Assert.IsTrue(zip.IsSubsetOf(ss), "IsSubset-MyComputer");
+            ss.SecurityZone = SecurityZone.NoZone;
+            Assert.IsTrue(zip.IsSubsetOf(ss), "IsSubset-NoZone");
+            ss.SecurityZone = SecurityZone.Trusted;
+            Assert.IsTrue(zip.IsSubsetOf(ss), "IsSubset-Trusted");
+            ss.SecurityZone = SecurityZone.Untrusted;
+            Assert.IsTrue(zip.IsSubsetOf(ss), "IsSubset-Untrusted");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void SecurityZone_Invalid ()
-		{
-			ZoneIdentityPermission zip = new ZoneIdentityPermission ((SecurityZone)128);
-		}
+        [Test]
+        public void SecurityZone_Trusted()
+        {
+            BasicTestZone(SecurityZone.Trusted, true);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void Intersect_DifferentPermissions ()
-		{
-			ZoneIdentityPermission a = new ZoneIdentityPermission (SecurityZone.Trusted);
-			SecurityPermission b = new SecurityPermission (PermissionState.None);
-			a.Intersect (b);
-		}
+        [Test]
+        public void SecurityZone_Untrusted()
+        {
+            BasicTestZone(SecurityZone.Untrusted, true);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void IsSubsetOf_DifferentPermissions ()
-		{
-			ZoneIdentityPermission a = new ZoneIdentityPermission (SecurityZone.Trusted);
-			SecurityPermission b = new SecurityPermission (PermissionState.None);
-			a.IsSubsetOf (b);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void SecurityZone_Invalid()
+        {
+            ZoneIdentityPermission zip = new ZoneIdentityPermission((SecurityZone)128);
+        }
 
-		[Test]
-		public void Union () 
-		{
-			ZoneIdentityPermission a = new ZoneIdentityPermission (SecurityZone.Trusted);
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Intersect_DifferentPermissions()
+        {
+            ZoneIdentityPermission a = new ZoneIdentityPermission(SecurityZone.Trusted);
+            SecurityPermission b = new SecurityPermission(PermissionState.None);
+            a.Intersect(b);
+        }
 
-			ZoneIdentityPermission z = (ZoneIdentityPermission) a.Union (null);
-			Assert.IsTrue (Same (a, z), "Trusted+null");
-			Assert.IsFalse (Object.ReferenceEquals (a, z), "!ReferenceEquals1");
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void IsSubsetOf_DifferentPermissions()
+        {
+            ZoneIdentityPermission a = new ZoneIdentityPermission(SecurityZone.Trusted);
+            SecurityPermission b = new SecurityPermission(PermissionState.None);
+            a.IsSubsetOf(b);
+        }
 
-			z = (ZoneIdentityPermission) a.Union (new ZoneIdentityPermission (PermissionState.None));
-			Assert.IsTrue (Same (a, z), "Trusted+PS.None");
-			Assert.IsFalse (Object.ReferenceEquals (a, z), "!ReferenceEquals2");
+        [Test]
+        public void Union()
+        {
+            ZoneIdentityPermission a = new ZoneIdentityPermission(SecurityZone.Trusted);
 
-			// note: can't be tested with PermissionState.Unrestricted
+            ZoneIdentityPermission z = (ZoneIdentityPermission)a.Union(null);
+            Assert.IsTrue(Same(a, z), "Trusted+null");
+            Assert.IsFalse(Object.ReferenceEquals(a, z), "!ReferenceEquals1");
 
-			ZoneIdentityPermission n = new ZoneIdentityPermission (SecurityZone.NoZone);
-			z = (ZoneIdentityPermission) a.Union (n);
-			Assert.IsTrue (Same (a, z), "Trusted+NoZone");
-			Assert.IsFalse (Object.ReferenceEquals (a, z), "!ReferenceEquals3");
+            z = (ZoneIdentityPermission)a.Union(new ZoneIdentityPermission(PermissionState.None));
+            Assert.IsTrue(Same(a, z), "Trusted+PS.None");
+            Assert.IsFalse(Object.ReferenceEquals(a, z), "!ReferenceEquals2");
 
-			z = (ZoneIdentityPermission) n.Union (a);
-			Assert.IsTrue (Same (a, z), "NoZone+Trusted");
-			Assert.IsFalse (Object.ReferenceEquals (a, z), "!ReferenceEquals4");
-		}
-		[Category ("NotWorking")]
-		[Test]
-		public void Union_DifferentIdentities ()
-		{
-			ZoneIdentityPermission a = new ZoneIdentityPermission (SecurityZone.Trusted);
-			ZoneIdentityPermission b = new ZoneIdentityPermission (SecurityZone.Untrusted);
-			IPermission result = a.Union (b);
-			Assert.IsNotNull (result, "Union");
-			// new XML format is used to contain more than one site
-			SecurityElement se = result.ToXml ();
-			Assert.AreEqual (2, se.Children.Count, "Childs");
-			Assert.AreEqual (a.SecurityZone.ToString (), (se.Children [0] as SecurityElement).Attribute ("Zone"), "Zone#1");
-			Assert.AreEqual (b.SecurityZone.ToString (), (se.Children [1] as SecurityElement).Attribute ("Zone"), "Zone#2");
-			// strangely it is still versioned as 'version="1"'.
-			Assert.AreEqual ("1", se.Attribute ("version"), "Version");
-		}
+            // note: can't be tested with PermissionState.Unrestricted
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void Union_DifferentPermissions ()
-		{
-			ZoneIdentityPermission a = new ZoneIdentityPermission (SecurityZone.Trusted);
-			SecurityPermission b = new SecurityPermission (PermissionState.None);
-			a.Union (b);
-		}
+            ZoneIdentityPermission n = new ZoneIdentityPermission(SecurityZone.NoZone);
+            z = (ZoneIdentityPermission)a.Union(n);
+            Assert.IsTrue(Same(a, z), "Trusted+NoZone");
+            Assert.IsFalse(Object.ReferenceEquals(a, z), "!ReferenceEquals3");
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void FromXml_Null ()
-		{
-			ZoneIdentityPermission zip = new ZoneIdentityPermission (PermissionState.None);
-			zip.FromXml (null);
-		}
+            z = (ZoneIdentityPermission)n.Union(a);
+            Assert.IsTrue(Same(a, z), "NoZone+Trusted");
+            Assert.IsFalse(Object.ReferenceEquals(a, z), "!ReferenceEquals4");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void FromXml_WrongTag ()
-		{
-			ZoneIdentityPermission zip = new ZoneIdentityPermission (PermissionState.None);
-			SecurityElement se = zip.ToXml ();
-			se.Tag = "IMono"; // instead of IPermission
-			zip.FromXml (se);
-		}
+        [Category("NotWorking")]
+        [Test]
+        public void Union_DifferentIdentities()
+        {
+            ZoneIdentityPermission a = new ZoneIdentityPermission(SecurityZone.Trusted);
+            ZoneIdentityPermission b = new ZoneIdentityPermission(SecurityZone.Untrusted);
+            IPermission result = a.Union(b);
+            Assert.IsNotNull(result, "Union");
+            // new XML format is used to contain more than one site
+            SecurityElement se = result.ToXml();
+            Assert.AreEqual(2, se.Children.Count, "Childs");
+            Assert.AreEqual(
+                a.SecurityZone.ToString(),
+                (se.Children[0] as SecurityElement).Attribute("Zone"),
+                "Zone#1"
+            );
+            Assert.AreEqual(
+                b.SecurityZone.ToString(),
+                (se.Children[1] as SecurityElement).Attribute("Zone"),
+                "Zone#2"
+            );
+            // strangely it is still versioned as 'version="1"'.
+            Assert.AreEqual("1", se.Attribute("version"), "Version");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void FromXml_WrongTagCase ()
-		{
-			ZoneIdentityPermission zip = new ZoneIdentityPermission (PermissionState.None);
-			SecurityElement se = zip.ToXml ();
-			se.Tag = "IPERMISSION"; // instead of IPermission
-			zip.FromXml (se);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Union_DifferentPermissions()
+        {
+            ZoneIdentityPermission a = new ZoneIdentityPermission(SecurityZone.Trusted);
+            SecurityPermission b = new SecurityPermission(PermissionState.None);
+            a.Union(b);
+        }
 
-		[Test]
-		public void FromXml_WrongClass ()
-		{
-			ZoneIdentityPermission zip = new ZoneIdentityPermission (PermissionState.None);
-			SecurityElement se = zip.ToXml ();
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FromXml_Null()
+        {
+            ZoneIdentityPermission zip = new ZoneIdentityPermission(PermissionState.None);
+            zip.FromXml(null);
+        }
 
-			SecurityElement w = new SecurityElement (se.Tag);
-			w.AddAttribute ("class", "Wrong" + se.Attribute ("class"));
-			w.AddAttribute ("version", se.Attribute ("version"));
-			zip.FromXml (w);
-			// doesn't care of the class name at that stage
-			// anyway the class has already be created so...
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void FromXml_WrongTag()
+        {
+            ZoneIdentityPermission zip = new ZoneIdentityPermission(PermissionState.None);
+            SecurityElement se = zip.ToXml();
+            se.Tag = "IMono"; // instead of IPermission
+            zip.FromXml(se);
+        }
 
-		[Test]
-		public void FromXml_NoClass ()
-		{
-			ZoneIdentityPermission zip = new ZoneIdentityPermission (PermissionState.None);
-			SecurityElement se = zip.ToXml ();
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void FromXml_WrongTagCase()
+        {
+            ZoneIdentityPermission zip = new ZoneIdentityPermission(PermissionState.None);
+            SecurityElement se = zip.ToXml();
+            se.Tag = "IPERMISSION"; // instead of IPermission
+            zip.FromXml(se);
+        }
 
-			SecurityElement w = new SecurityElement (se.Tag);
-			w.AddAttribute ("version", se.Attribute ("version"));
-			zip.FromXml (w);
-			// doesn't even care of the class attribute presence
-		}
+        [Test]
+        public void FromXml_WrongClass()
+        {
+            ZoneIdentityPermission zip = new ZoneIdentityPermission(PermissionState.None);
+            SecurityElement se = zip.ToXml();
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void FromXml_WrongVersion ()
-		{
-			ZoneIdentityPermission zip = new ZoneIdentityPermission (PermissionState.None);
-			SecurityElement se = zip.ToXml ();
+            SecurityElement w = new SecurityElement(se.Tag);
+            w.AddAttribute("class", "Wrong" + se.Attribute("class"));
+            w.AddAttribute("version", se.Attribute("version"));
+            zip.FromXml(w);
+            // doesn't care of the class name at that stage
+            // anyway the class has already be created so...
+        }
 
-			SecurityElement w = new SecurityElement (se.Tag);
-			w.AddAttribute ("class", se.Attribute ("class"));
-			w.AddAttribute ("version", "2");
-			zip.FromXml (w);
-		}
+        [Test]
+        public void FromXml_NoClass()
+        {
+            ZoneIdentityPermission zip = new ZoneIdentityPermission(PermissionState.None);
+            SecurityElement se = zip.ToXml();
 
-		[Test]
-		public void FromXml_NoVersion ()
-		{
-			ZoneIdentityPermission zip = new ZoneIdentityPermission (PermissionState.None);
-			SecurityElement se = zip.ToXml ();
+            SecurityElement w = new SecurityElement(se.Tag);
+            w.AddAttribute("version", se.Attribute("version"));
+            zip.FromXml(w);
+            // doesn't even care of the class attribute presence
+        }
 
-			SecurityElement w = new SecurityElement (se.Tag);
-			w.AddAttribute ("class", se.Attribute ("class"));
-			zip.FromXml (w);
-		}
-	}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void FromXml_WrongVersion()
+        {
+            ZoneIdentityPermission zip = new ZoneIdentityPermission(PermissionState.None);
+            SecurityElement se = zip.ToXml();
+
+            SecurityElement w = new SecurityElement(se.Tag);
+            w.AddAttribute("class", se.Attribute("class"));
+            w.AddAttribute("version", "2");
+            zip.FromXml(w);
+        }
+
+        [Test]
+        public void FromXml_NoVersion()
+        {
+            ZoneIdentityPermission zip = new ZoneIdentityPermission(PermissionState.None);
+            SecurityElement se = zip.ToXml();
+
+            SecurityElement w = new SecurityElement(se.Tag);
+            w.AddAttribute("class", se.Attribute("class"));
+            zip.FromXml(w);
+        }
+    }
 }

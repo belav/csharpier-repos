@@ -18,13 +18,12 @@ namespace System.Xml.Xsl.Runtime
     [EditorBrowsable(EditorBrowsableState.Never)]
     public enum SetIteratorResult
     {
-        NoMoreNodes,                // Iteration is complete; there are no more nodes
-        InitRightIterator,          // Initialize right nested iterator
-        NeedLeftNode,               // The next node needs to be fetched from the left nested iterator
-        NeedRightNode,              // The next node needs to be fetched from the right nested iterator
-        HaveCurrentNode,            // This iterator's Current property is set to the next node in the iteration
+        NoMoreNodes, // Iteration is complete; there are no more nodes
+        InitRightIterator, // Initialize right nested iterator
+        NeedLeftNode, // The next node needs to be fetched from the left nested iterator
+        NeedRightNode, // The next node needs to be fetched from the right nested iterator
+        HaveCurrentNode, // This iterator's Current property is set to the next node in the iteration
     };
-
 
     /// <summary>
     /// This iterator manages two sets of nodes that are already in document order with no duplicates.
@@ -34,7 +33,8 @@ namespace System.Xml.Xsl.Runtime
     public struct UnionIterator
     {
         private XmlQueryRuntime _runtime;
-        private XPathNavigator _navCurr, _navOther;
+        private XPathNavigator _navCurr,
+            _navOther;
         private IteratorState _state;
 
         private enum IteratorState
@@ -149,7 +149,6 @@ namespace System.Xml.Xsl.Runtime
         }
     }
 
-
     /// <summary>
     /// This iterator manages two sets of nodes that are already in document order with no duplicates.
     /// This iterator returns the intersection of these sets in document order with no duplicates.
@@ -158,7 +157,8 @@ namespace System.Xml.Xsl.Runtime
     public struct IntersectIterator
     {
         private XmlQueryRuntime _runtime;
-        private XPathNavigator _navLeft, _navRight;
+        private XPathNavigator _navLeft,
+            _navRight;
         private IteratorState _state;
 
         private enum IteratorState
@@ -210,7 +210,10 @@ namespace System.Xml.Xsl.Runtime
 
                 case IteratorState.HaveCurrent:
                     // Just returned left node as current, so fetch new left and right nodes
-                    Debug.Assert(nestedNavigator == null, "null is passed to MoveNext after IteratorState.HaveCurrent has been returned.");
+                    Debug.Assert(
+                        nestedNavigator == null,
+                        "null is passed to MoveNext after IteratorState.HaveCurrent has been returned."
+                    );
                     _state = IteratorState.NeedLeftAndRight;
                     return SetIteratorResult.NeedLeftNode;
             }
@@ -251,7 +254,6 @@ namespace System.Xml.Xsl.Runtime
         }
     }
 
-
     /// <summary>
     /// This iterator manages two sets of nodes that are already in document order with no duplicates.
     /// This iterator returns the difference of these sets (Left - Right) in document order with no duplicates.
@@ -260,7 +262,8 @@ namespace System.Xml.Xsl.Runtime
     public struct DifferenceIterator
     {
         private XmlQueryRuntime _runtime;
-        private XPathNavigator _navLeft, _navRight;
+        private XPathNavigator _navLeft,
+            _navRight;
         private IteratorState _state;
 
         private enum IteratorState
@@ -310,7 +313,10 @@ namespace System.Xml.Xsl.Runtime
 
                 case IteratorState.HaveCurrent:
                     // Just returned left node as current, so fetch new left node
-                    Debug.Assert(nestedNavigator == null, "null is passed to MoveNext after IteratorState.HaveCurrent has been returned.");
+                    Debug.Assert(
+                        nestedNavigator == null,
+                        "null is passed to MoveNext after IteratorState.HaveCurrent has been returned."
+                    );
                     _state = IteratorState.NeedLeft;
                     return SetIteratorResult.NeedLeftNode;
             }

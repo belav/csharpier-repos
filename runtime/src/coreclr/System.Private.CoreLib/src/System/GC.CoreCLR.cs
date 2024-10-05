@@ -58,7 +58,7 @@ namespace System
         Failed = 1,
         Canceled = 2,
         Timeout = 3,
-        NotApplicable = 4
+        NotApplicable = 4,
     }
 
     public static partial class GC
@@ -77,11 +77,14 @@ namespace System
         {
             if ((kind < GCKind.Any) || (kind > GCKind.Background))
             {
-                throw new ArgumentOutOfRangeException(nameof(kind),
-                                      SR.Format(
-                                          SR.ArgumentOutOfRange_Bounds_Lower_Upper,
-                                          GCKind.Any,
-                                          GCKind.Background));
+                throw new ArgumentOutOfRangeException(
+                    nameof(kind),
+                    SR.Format(
+                        SR.ArgumentOutOfRange_Bounds_Lower_Upper,
+                        GCKind.Any,
+                        GCKind.Background
+                    )
+                );
             }
 
             var data = new GCMemoryInfoData();
@@ -90,7 +93,12 @@ namespace System
         }
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "GCInterface_StartNoGCRegion")]
-        internal static partial int _StartNoGCRegion(long totalSize, [MarshalAs(UnmanagedType.Bool)] bool lohSizeKnown, long lohSize, [MarshalAs(UnmanagedType.Bool)] bool disallowFullBlockingGC);
+        internal static partial int _StartNoGCRegion(
+            long totalSize,
+            [MarshalAs(UnmanagedType.Bool)] bool lohSizeKnown,
+            long lohSize,
+            [MarshalAs(UnmanagedType.Bool)] bool disallowFullBlockingGC
+        );
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "GCInterface_EndNoGCRegion")]
         internal static partial int _EndNoGCRegion();
@@ -104,7 +112,11 @@ namespace System
         };
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern Array AllocateNewArray(IntPtr typeHandle, int length, GC_ALLOC_FLAGS flags);
+        internal static extern Array AllocateNewArray(
+            IntPtr typeHandle,
+            int length,
+            GC_ALLOC_FLAGS flags
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern int GetGenerationWR(IntPtr handle);
@@ -158,12 +170,10 @@ namespace System
             _RemoveMemoryPressure((ulong)bytesAllocated);
         }
 
-
         // Returns the generation that obj is currently in.
         //
         [MethodImpl(MethodImplOptions.InternalCall)]
         public static extern int GetGeneration(object obj);
-
 
         // Forces a collection of all generations from 0 through Generation.
         //
@@ -191,7 +201,12 @@ namespace System
             Collect(generation, mode, blocking, compacting: aggressive);
         }
 
-        public static void Collect(int generation, GCCollectionMode mode, bool blocking, bool compacting)
+        public static void Collect(
+            int generation,
+            GCCollectionMode mode,
+            bool blocking,
+            bool compacting
+        )
         {
             ArgumentOutOfRangeException.ThrowIfNegative(generation);
 
@@ -199,7 +214,6 @@ namespace System
             {
                 throw new ArgumentOutOfRangeException(nameof(mode), SR.ArgumentOutOfRange_Enum);
             }
-
 
             int iInternalModes = 0;
 
@@ -212,15 +226,24 @@ namespace System
                 iInternalModes |= (int)InternalGCCollectionMode.Aggressive;
                 if (generation != MaxGeneration)
                 {
-                    throw new ArgumentException(SR.Argument_AggressiveGCRequiresMaxGeneration, nameof(generation));
+                    throw new ArgumentException(
+                        SR.Argument_AggressiveGCRequiresMaxGeneration,
+                        nameof(generation)
+                    );
                 }
                 if (!blocking)
                 {
-                    throw new ArgumentException(SR.Argument_AggressiveGCRequiresBlocking, nameof(blocking));
+                    throw new ArgumentException(
+                        SR.Argument_AggressiveGCRequiresBlocking,
+                        nameof(blocking)
+                    );
                 }
                 if (!compacting)
                 {
-                    throw new ArgumentException(SR.Argument_AggressiveGCRequiresCompacting, nameof(compacting));
+                    throw new ArgumentException(
+                        SR.Argument_AggressiveGCRequiresCompacting,
+                        nameof(compacting)
+                    );
                 }
             }
 
@@ -282,9 +305,7 @@ namespace System
         // Foo doesn't get finalized and the stream stays open.
         [MethodImpl(MethodImplOptions.NoInlining)] // disable optimizations
         [Intrinsic]
-        public static void KeepAlive(object? obj)
-        {
-        }
+        public static void KeepAlive(object? obj) { }
 
         // Returns the generation in which wo currently resides.
         //
@@ -348,7 +369,7 @@ namespace System
             // The value is "stable" when either the value is within 5% of the
             // previous call to GetTotalMemory, or if we have been sitting
             // here for more than x times (we don't want to loop forever here).
-            int reps = 20;  // Number of iterations
+            int reps = 20; // Number of iterations
             long newSize = size;
             float diff;
             do
@@ -363,14 +384,16 @@ namespace System
         }
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "GCInterface_RegisterFrozenSegment")]
-        private static partial IntPtr _RegisterFrozenSegment(IntPtr sectionAddress, nint sectionSize);
+        private static partial IntPtr _RegisterFrozenSegment(
+            IntPtr sectionAddress,
+            nint sectionSize
+        );
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "GCInterface_UnregisterFrozenSegment")]
         private static partial void _UnregisterFrozenSegment(IntPtr segmentHandle);
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         public static extern long GetAllocatedBytesForCurrentThread();
-
 
         /// <summary>
         /// Get a count of the bytes allocated over the lifetime of the process.
@@ -380,7 +403,10 @@ namespace System
         public static extern long GetTotalAllocatedBytes(bool precise = false);
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        private static extern bool _RegisterForFullGCNotification(int maxGenerationPercentage, int largeObjectHeapPercentage);
+        private static extern bool _RegisterForFullGCNotification(
+            int maxGenerationPercentage,
+            int largeObjectHeapPercentage
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern bool _CancelFullGCNotification();
@@ -391,24 +417,25 @@ namespace System
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern int _WaitForFullGCComplete(int millisecondsTimeout);
 
-        public static void RegisterForFullGCNotification(int maxGenerationThreshold, int largeObjectHeapThreshold)
+        public static void RegisterForFullGCNotification(
+            int maxGenerationThreshold,
+            int largeObjectHeapThreshold
+        )
         {
             if ((maxGenerationThreshold <= 0) || (maxGenerationThreshold >= 100))
             {
-                throw new ArgumentOutOfRangeException(nameof(maxGenerationThreshold),
-                                                      SR.Format(
-                                                          SR.ArgumentOutOfRange_Bounds_Lower_Upper,
-                                                          1,
-                                                          99));
+                throw new ArgumentOutOfRangeException(
+                    nameof(maxGenerationThreshold),
+                    SR.Format(SR.ArgumentOutOfRange_Bounds_Lower_Upper, 1, 99)
+                );
             }
 
             if ((largeObjectHeapThreshold <= 0) || (largeObjectHeapThreshold >= 100))
             {
-                throw new ArgumentOutOfRangeException(nameof(largeObjectHeapThreshold),
-                                                      SR.Format(
-                                                          SR.ArgumentOutOfRange_Bounds_Lower_Upper,
-                                                          1,
-                                                          99));
+                throw new ArgumentOutOfRangeException(
+                    nameof(largeObjectHeapThreshold),
+                    SR.Format(SR.ArgumentOutOfRange_Bounds_Lower_Upper, 1, 99)
+                );
             }
 
             if (!_RegisterForFullGCNotification(maxGenerationThreshold, largeObjectHeapThreshold))
@@ -453,7 +480,7 @@ namespace System
             Succeeded = 0,
             NotEnoughMemory = 1,
             AmountTooLarge = 2,
-            AlreadyInProgress = 3
+            AlreadyInProgress = 3,
         }
 
         private enum EndNoGCRegionStatus
@@ -461,10 +488,15 @@ namespace System
             Succeeded = 0,
             NotInProgress = 1,
             GCInduced = 2,
-            AllocationExceeded = 3
+            AllocationExceeded = 3,
         }
 
-        private static bool StartNoGCRegionWorker(long totalSize, bool hasLohSize, long lohSize, bool disallowFullBlockingGC)
+        private static bool StartNoGCRegionWorker(
+            long totalSize,
+            bool hasLohSize,
+            long lohSize,
+            bool disallowFullBlockingGC
+        )
         {
             ArgumentOutOfRangeException.ThrowIfNegativeOrZero(totalSize);
 
@@ -475,15 +507,25 @@ namespace System
                 ArgumentOutOfRangeException.ThrowIfGreaterThan(lohSize, totalSize);
             }
 
-            StartNoGCRegionStatus status = (StartNoGCRegionStatus)_StartNoGCRegion(totalSize, hasLohSize, lohSize, disallowFullBlockingGC);
+            StartNoGCRegionStatus status = (StartNoGCRegionStatus)_StartNoGCRegion(
+                totalSize,
+                hasLohSize,
+                lohSize,
+                disallowFullBlockingGC
+            );
             switch (status)
             {
                 case StartNoGCRegionStatus.NotEnoughMemory:
                     return false;
                 case StartNoGCRegionStatus.AlreadyInProgress:
-                    throw new InvalidOperationException(SR.InvalidOperationException_AlreadyInNoGCRegion);
+                    throw new InvalidOperationException(
+                        SR.InvalidOperationException_AlreadyInNoGCRegion
+                    );
                 case StartNoGCRegionStatus.AmountTooLarge:
-                    throw new ArgumentOutOfRangeException(nameof(totalSize), SR.ArgumentOutOfRangeException_NoGCRegionSizeTooLarge);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(totalSize),
+                        SR.ArgumentOutOfRangeException_NoGCRegionSizeTooLarge
+                    );
             }
 
             Debug.Assert(status == StartNoGCRegionStatus.Succeeded);
@@ -505,7 +547,11 @@ namespace System
             return StartNoGCRegionWorker(totalSize, false, 0, disallowFullBlockingGC);
         }
 
-        public static bool TryStartNoGCRegion(long totalSize, long lohSize, bool disallowFullBlockingGC)
+        public static bool TryStartNoGCRegion(
+            long totalSize,
+            long lohSize,
+            bool disallowFullBlockingGC
+        )
         {
             return StartNoGCRegionWorker(totalSize, true, lohSize, disallowFullBlockingGC);
         }
@@ -514,11 +560,15 @@ namespace System
         {
             EndNoGCRegionStatus status = (EndNoGCRegionStatus)_EndNoGCRegion();
             if (status == EndNoGCRegionStatus.NotInProgress)
-                throw new InvalidOperationException(SR.InvalidOperationException_NoGCRegionNotInProgress);
+                throw new InvalidOperationException(
+                    SR.InvalidOperationException_NoGCRegionNotInProgress
+                );
             else if (status == EndNoGCRegionStatus.GCInduced)
                 throw new InvalidOperationException(SR.InvalidOperationException_NoGCRegionInduced);
             else if (status == EndNoGCRegionStatus.AllocationExceeded)
-                throw new InvalidOperationException(SR.InvalidOperationException_NoGCRegionAllocationExceeded);
+                throw new InvalidOperationException(
+                    SR.InvalidOperationException_NoGCRegionAllocationExceeded
+                );
         }
 
         private readonly struct MemoryLoadChangeNotification
@@ -527,7 +577,11 @@ namespace System
             public float HighMemoryPercent { get; }
             public Action Notification { get; }
 
-            public MemoryLoadChangeNotification(float lowMemoryPercent, float highMemoryPercent, Action notification)
+            public MemoryLoadChangeNotification(
+                float lowMemoryPercent,
+                float highMemoryPercent,
+                Action notification
+            )
             {
                 LowMemoryPercent = lowMemoryPercent;
                 HighMemoryPercent = highMemoryPercent;
@@ -535,7 +589,8 @@ namespace System
             }
         }
 
-        private static readonly List<MemoryLoadChangeNotification> s_notifications = new List<MemoryLoadChangeNotification>();
+        private static readonly List<MemoryLoadChangeNotification> s_notifications =
+            new List<MemoryLoadChangeNotification>();
         private static float s_previousMemoryLoad = float.MaxValue;
 
         [MethodImpl(MethodImplOptions.InternalCall)]
@@ -569,8 +624,14 @@ namespace System
                 for (int i = 0; i < count; ++i)
                 {
                     // If s_notifications[i] changes from within s_previousMemoryLoad bound to outside s_previousMemoryLoad, we trigger the notification
-                    if (s_notifications[i].LowMemoryPercent <= s_previousMemoryLoad && s_previousMemoryLoad <= s_notifications[i].HighMemoryPercent
-                         && !(s_notifications[i].LowMemoryPercent <= currentMemoryLoad && currentMemoryLoad <= s_notifications[i].HighMemoryPercent))
+                    if (
+                        s_notifications[i].LowMemoryPercent <= s_previousMemoryLoad
+                        && s_previousMemoryLoad <= s_notifications[i].HighMemoryPercent
+                        && !(
+                            s_notifications[i].LowMemoryPercent <= currentMemoryLoad
+                            && currentMemoryLoad <= s_notifications[i].HighMemoryPercent
+                        )
+                    )
                     {
                         s_notifications[i].Notification();
                         // it will then be overwritten or removed
@@ -598,7 +659,11 @@ namespace System
         /// <param name="lowMemoryPercent">percent of HighMemoryLoadThreshold to use as lower bound. Must be a number >= 0 or an ArgumentOutOfRangeException will be thrown.</param>
         /// <param name="highMemoryPercent">percent of HighMemoryLoadThreshold use to use as lower bound. Must be a number > lowMemory or an ArgumentOutOfRangeException will be thrown. </param>
         /// <param name="notification">delegate to invoke when operation occurs</param>s
-        internal static void RegisterMemoryLoadChangeNotification(float lowMemoryPercent, float highMemoryPercent, Action notification)
+        internal static void RegisterMemoryLoadChangeNotification(
+            float lowMemoryPercent,
+            float highMemoryPercent,
+            Action notification
+        )
         {
             ArgumentOutOfRangeException.ThrowIfLessThan(highMemoryPercent, 0);
             ArgumentOutOfRangeException.ThrowIfGreaterThan(highMemoryPercent, 1.0);
@@ -608,7 +673,13 @@ namespace System
 
             lock (s_notifications)
             {
-                s_notifications.Add(new MemoryLoadChangeNotification(lowMemoryPercent, highMemoryPercent, notification));
+                s_notifications.Add(
+                    new MemoryLoadChangeNotification(
+                        lowMemoryPercent,
+                        highMemoryPercent,
+                        notification
+                    )
+                );
 
                 if (s_notifications.Count == 1)
                 {
@@ -661,21 +732,29 @@ namespace System
             NoGCRegionCallbackFinalizerWorkItem* pWorkItem = null;
             try
             {
-                pWorkItem = (NoGCRegionCallbackFinalizerWorkItem*)NativeMemory.AllocZeroed((nuint)sizeof(NoGCRegionCallbackFinalizerWorkItem));
+                pWorkItem = (NoGCRegionCallbackFinalizerWorkItem*)
+                    NativeMemory.AllocZeroed((nuint)sizeof(NoGCRegionCallbackFinalizerWorkItem));
                 pWorkItem->action = GCHandle.Alloc(callback);
                 pWorkItem->callback = &Callback;
 
-                EnableNoGCRegionCallbackStatus status = (EnableNoGCRegionCallbackStatus)_EnableNoGCRegionCallback(pWorkItem, totalSize);
+                EnableNoGCRegionCallbackStatus status =
+                    (EnableNoGCRegionCallbackStatus)_EnableNoGCRegionCallback(pWorkItem, totalSize);
                 if (status != EnableNoGCRegionCallbackStatus.Success)
                 {
                     switch (status)
                     {
                         case EnableNoGCRegionCallbackStatus.NotStarted:
-                            throw new InvalidOperationException(SR.Format(SR.InvalidOperationException_NoGCRegionNotInProgress));
+                            throw new InvalidOperationException(
+                                SR.Format(SR.InvalidOperationException_NoGCRegionNotInProgress)
+                            );
                         case EnableNoGCRegionCallbackStatus.InsufficientBudget:
-                            throw new InvalidOperationException(SR.Format(SR.InvalidOperationException_NoGCRegionAllocationExceeded));
+                            throw new InvalidOperationException(
+                                SR.Format(SR.InvalidOperationException_NoGCRegionAllocationExceeded)
+                            );
                         case EnableNoGCRegionCallbackStatus.AlreadyRegistered:
-                            throw new InvalidOperationException(SR.InvalidOperationException_NoGCRegionCallbackAlreadyRegistered);
+                            throw new InvalidOperationException(
+                                SR.InvalidOperationException_NoGCRegionCallbackAlreadyRegistered
+                            );
                     }
                     Debug.Assert(false);
                 }
@@ -705,7 +784,10 @@ namespace System
         }
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "GCInterface_EnableNoGCRegionCallback")]
-        private static unsafe partial EnableNoGCRegionCallbackStatus _EnableNoGCRegionCallback(NoGCRegionCallbackFinalizerWorkItem* callback, long totalSize);
+        private static unsafe partial EnableNoGCRegionCallbackStatus _EnableNoGCRegionCallback(
+            NoGCRegionCallbackFinalizerWorkItem* callback,
+            long totalSize
+        );
 
         internal static long GetGenerationBudget(int generation)
         {
@@ -769,7 +851,9 @@ namespace System
             if (pinned)
                 flags |= GC_ALLOC_FLAGS.GC_ALLOC_PINNED_OBJECT_HEAP;
 
-            return Unsafe.As<T[]>(AllocateNewArray(RuntimeTypeHandle.ToIntPtr(typeof(T[]).TypeHandle), length, flags));
+            return Unsafe.As<T[]>(
+                AllocateNewArray(RuntimeTypeHandle.ToIntPtr(typeof(T[]).TypeHandle), length, flags)
+            );
         }
 
         /// <summary>
@@ -787,7 +871,9 @@ namespace System
                 flags = GC_ALLOC_FLAGS.GC_ALLOC_PINNED_OBJECT_HEAP;
             }
 
-            return Unsafe.As<T[]>(AllocateNewArray(RuntimeTypeHandle.ToIntPtr(typeof(T[]).TypeHandle), length, flags));
+            return Unsafe.As<T[]>(
+                AllocateNewArray(RuntimeTypeHandle.ToIntPtr(typeof(T[]).TypeHandle), length, flags)
+            );
         }
 
         [MethodImpl(MethodImplOptions.InternalCall)]
@@ -808,7 +894,13 @@ namespace System
         }
 
         [UnmanagedCallersOnly]
-        private static unsafe void ConfigCallback(void* configurationContext, void* name, void* publicKey, GCConfigurationType type, long data)
+        private static unsafe void ConfigCallback(
+            void* configurationContext,
+            void* name,
+            void* publicKey,
+            GCConfigurationType type,
+            long data
+        )
         {
             // If the public key is null, it means that the corresponding configuration isn't publicly available
             // and therefore, we shouldn't add it to the configuration dictionary to return to the user.
@@ -820,7 +912,9 @@ namespace System
             Debug.Assert(name != null);
             Debug.Assert(configurationContext != null);
 
-            ref GCConfigurationContext context = ref Unsafe.As<byte, GCConfigurationContext>(ref *(byte*)configurationContext);
+            ref GCConfigurationContext context = ref Unsafe.As<byte, GCConfigurationContext>(
+                ref *(byte*)configurationContext
+            );
             Debug.Assert(context.Configurations != null);
             Dictionary<string, object> configurationDictionary = context.Configurations!;
 
@@ -832,11 +926,11 @@ namespace System
                     break;
 
                 case GCConfigurationType.StringUtf8:
-                    {
-                        string? dataAsString = Marshal.PtrToStringUTF8((nint)data);
-                        configurationDictionary[nameAsString] = dataAsString ?? string.Empty;
-                        break;
-                    }
+                {
+                    string? dataAsString = Marshal.PtrToStringUTF8((nint)data);
+                    configurationDictionary[nameAsString] = dataAsString ?? string.Empty;
+                    break;
+                }
 
                 case GCConfigurationType.Boolean:
                     configurationDictionary[nameAsString] = data != 0;
@@ -853,7 +947,7 @@ namespace System
         {
             GCConfigurationContext context = new GCConfigurationContext
             {
-                Configurations = new Dictionary<string, object>()
+                Configurations = new Dictionary<string, object>(),
             };
 
             _EnumerateConfigurationValues(Unsafe.AsPointer(ref context), &ConfigCallback);
@@ -865,11 +959,17 @@ namespace System
         {
             Int64,
             StringUtf8,
-            Boolean
+            Boolean,
         }
 
-        [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "GCInterface_EnumerateConfigurationValues")]
-        internal static unsafe partial void _EnumerateConfigurationValues(void* configurationDictionary, delegate* unmanaged<void*, void*, void*, GCConfigurationType, long, void> callback);
+        [LibraryImport(
+            RuntimeHelpers.QCall,
+            EntryPoint = "GCInterface_EnumerateConfigurationValues"
+        )]
+        internal static unsafe partial void _EnumerateConfigurationValues(
+            void* configurationDictionary,
+            delegate* unmanaged<void*, void*, void*, GCConfigurationType, long, void> callback
+        );
 
         internal enum RefreshMemoryStatus
         {
@@ -905,14 +1005,22 @@ namespace System
         /// </summary>
         public static void RefreshMemoryLimit()
         {
-            ulong heapHardLimit = (AppContext.GetData("GCHeapHardLimit") as ulong?) ?? ulong.MaxValue;
-            ulong heapHardLimitPercent = (AppContext.GetData("GCHeapHardLimitPercent") as ulong?) ?? ulong.MaxValue;
-            ulong heapHardLimitSOH = (AppContext.GetData("GCHeapHardLimitSOH") as ulong?) ?? ulong.MaxValue;
-            ulong heapHardLimitLOH = (AppContext.GetData("GCHeapHardLimitLOH") as ulong?) ?? ulong.MaxValue;
-            ulong heapHardLimitPOH = (AppContext.GetData("GCHeapHardLimitPOH") as ulong?) ?? ulong.MaxValue;
-            ulong heapHardLimitSOHPercent = (AppContext.GetData("GCHeapHardLimitSOHPercent") as ulong?) ?? ulong.MaxValue;
-            ulong heapHardLimitLOHPercent = (AppContext.GetData("GCHeapHardLimitLOHPercent") as ulong?) ?? ulong.MaxValue;
-            ulong heapHardLimitPOHPercent = (AppContext.GetData("GCHeapHardLimitPOHPercent") as ulong?) ?? ulong.MaxValue;
+            ulong heapHardLimit =
+                (AppContext.GetData("GCHeapHardLimit") as ulong?) ?? ulong.MaxValue;
+            ulong heapHardLimitPercent =
+                (AppContext.GetData("GCHeapHardLimitPercent") as ulong?) ?? ulong.MaxValue;
+            ulong heapHardLimitSOH =
+                (AppContext.GetData("GCHeapHardLimitSOH") as ulong?) ?? ulong.MaxValue;
+            ulong heapHardLimitLOH =
+                (AppContext.GetData("GCHeapHardLimitLOH") as ulong?) ?? ulong.MaxValue;
+            ulong heapHardLimitPOH =
+                (AppContext.GetData("GCHeapHardLimitPOH") as ulong?) ?? ulong.MaxValue;
+            ulong heapHardLimitSOHPercent =
+                (AppContext.GetData("GCHeapHardLimitSOHPercent") as ulong?) ?? ulong.MaxValue;
+            ulong heapHardLimitLOHPercent =
+                (AppContext.GetData("GCHeapHardLimitLOHPercent") as ulong?) ?? ulong.MaxValue;
+            ulong heapHardLimitPOHPercent =
+                (AppContext.GetData("GCHeapHardLimitPOHPercent") as ulong?) ?? ulong.MaxValue;
             GCHeapHardLimitInfo heapHardLimitInfo = new GCHeapHardLimitInfo
             {
                 HeapHardLimit = heapHardLimit,
@@ -924,13 +1032,19 @@ namespace System
                 HeapHardLimitLOHPercent = heapHardLimitLOHPercent,
                 HeapHardLimitPOHPercent = heapHardLimitPOHPercent,
             };
-            RefreshMemoryStatus status = (RefreshMemoryStatus)_RefreshMemoryLimit(heapHardLimitInfo);
+            RefreshMemoryStatus status = (RefreshMemoryStatus)_RefreshMemoryLimit(
+                heapHardLimitInfo
+            );
             switch (status)
             {
                 case RefreshMemoryStatus.HardLimitTooLow:
-                    throw new InvalidOperationException(SR.InvalidOperationException_HardLimitTooLow);
+                    throw new InvalidOperationException(
+                        SR.InvalidOperationException_HardLimitTooLow
+                    );
                 case RefreshMemoryStatus.HardLimitInvalid:
-                    throw new InvalidOperationException(SR.InvalidOperationException_HardLimitInvalid);
+                    throw new InvalidOperationException(
+                        SR.InvalidOperationException_HardLimitInvalid
+                    );
             }
             Debug.Assert(status == RefreshMemoryStatus.Succeeded);
         }

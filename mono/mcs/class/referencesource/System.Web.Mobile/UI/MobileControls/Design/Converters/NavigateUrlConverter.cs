@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // <copyright file="NavigateUrlConverter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.UI.Design.MobileControls.Converters
 {
-    using System.Diagnostics;
-    using System.ComponentModel;
     using System.Collections;
+    using System.ComponentModel;
+    using System.Diagnostics;
     using System.Globalization;
     using System.Web.UI.MobileControls;
 
@@ -16,11 +16,13 @@ namespace System.Web.UI.Design.MobileControls.Converters
     ///     Subclass of FormConverter to handle the special case where we want
     ///     to select a form OR a valid URL to navigate to.
     /// </summary>
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class NavigateUrlConverter : FormConverter
     {
         protected override ArrayList GetControls(ITypeDescriptorContext context)
@@ -35,12 +37,12 @@ namespace System.Web.UI.Design.MobileControls.Converters
 
             return formList;
         }
-        
+
         protected override String ProcessControlId(String id)
         {
             return "#" + id;
         }
-        
+
         /// <summary>
         ///     url = new value in OnPropertyChanged, we check to see if we need to
         ///           browse for the url.  If not, we just return this value.
@@ -49,10 +51,10 @@ namespace System.Web.UI.Design.MobileControls.Converters
         /// </summary>
         internal static String GetUrl(IComponent component, String url, String oldUrl)
         {
-            if(url == SR.GetString(SR.NavigateUrlConverter_SelectURITarget))
+            if (url == SR.GetString(SR.NavigateUrlConverter_SelectURITarget))
             {
                 url = UrlBuilder.BuildUrl(
-                    component, 
+                    component,
                     null,
                     oldUrl,
                     SR.GetString(SR.UrlPicker_DefaultCaption),

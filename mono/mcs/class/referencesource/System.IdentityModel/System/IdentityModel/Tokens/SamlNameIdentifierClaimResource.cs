@@ -3,8 +3,8 @@
 //-----------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Runtime.Serialization;
+using System.Text;
 
 namespace System.IdentityModel.Tokens
 {
@@ -38,27 +38,18 @@ namespace System.IdentityModel.Tokens
         }
 
         public string NameQualifier
-        { 
-            get 
-            { 
-                return this.nameQualifier; 
-            } 
+        {
+            get { return this.nameQualifier; }
         }
 
         public string Format
-        { 
-            get 
-            { 
-                return this.format; 
-            } 
+        {
+            get { return this.format; }
         }
 
         public string Name
-        { 
-            get 
-            { 
-                return this.name;
-            } 
+        {
+            get { return this.name; }
         }
 
         public override bool Equals(object obj)
@@ -73,13 +64,16 @@ namespace System.IdentityModel.Tokens
             if (rhs == null)
                 return false;
 
-            return ((this.nameQualifier == rhs.nameQualifier) && (this.format == rhs.format) && (this.name == rhs.name));
+            return (
+                (this.nameQualifier == rhs.nameQualifier)
+                && (this.format == rhs.format)
+                && (this.name == rhs.name)
+            );
         }
 
         public override int GetHashCode()
         {
             return this.name.GetHashCode();
         }
-
     }
 }

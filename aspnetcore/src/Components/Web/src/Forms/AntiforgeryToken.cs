@@ -15,7 +15,8 @@ public class AntiforgeryToken : IComponent
     private bool _hasRendered;
     private AntiforgeryRequestToken? _requestToken;
 
-    [Inject] IServiceProvider Services { get; set; } = default!;
+    [Inject]
+    IServiceProvider Services { get; set; } = default!;
 
     void IComponent.Attach(RenderHandle renderHandle)
     {

@@ -3,24 +3,24 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class NorthwindSelectQuerySqlServerTest : NorthwindSelectQueryRelationalTestBase<
-    NorthwindQuerySqlServerFixture<NoopModelCustomizer>>
+public class NorthwindSelectQuerySqlServerTest
+    : NorthwindSelectQueryRelationalTestBase<NorthwindQuerySqlServerFixture<NoopModelCustomizer>>
 {
     public NorthwindSelectQuerySqlServerTest(
         NorthwindQuerySqlServerFixture<NoopModelCustomizer> fixture,
-        ITestOutputHelper testOutputHelper)
+        ITestOutputHelper testOutputHelper
+    )
         : base(fixture)
     {
         ClearLog();
         Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
     }
 
-    protected override bool CanExecuteQueryString
-        => true;
+    protected override bool CanExecuteQueryString => true;
 
     [ConditionalFact]
-    public virtual void Check_all_tests_overridden()
-        => TestHelpers.AssertAllMethodsOverridden(GetType());
+    public virtual void Check_all_tests_overridden() =>
+        TestHelpers.AssertAllMethodsOverridden(GetType());
 
     public override async Task Projection_when_arithmetic_expression_precedence(bool async)
     {
@@ -30,7 +30,8 @@ public class NorthwindSelectQuerySqlServerTest : NorthwindSelectQueryRelationalT
             """
 SELECT [o].[OrderID] / ([o].[OrderID] / 2) AS [A], ([o].[OrderID] / [o].[OrderID]) / 2 AS [B]
 FROM [Orders] AS [o]
-""");
+"""
+        );
     }
 
     public override async Task Projection_when_arithmetic_expressions(bool async)
@@ -41,7 +42,8 @@ FROM [Orders] AS [o]
             """
 SELECT [o].[OrderID], [o].[OrderID] * 2 AS [Double], [o].[OrderID] + 23 AS [Add], 100000 - [o].[OrderID] AS [Sub], [o].[OrderID] / ([o].[OrderID] / 2) AS [Divide], 42 AS [Literal], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
 FROM [Orders] AS [o]
-""");
+"""
+        );
     }
 
     public override async Task Projection_when_arithmetic_mixed(bool async)
@@ -64,7 +66,8 @@ CROSS JOIN (
     ORDER BY [e].[EmployeeID]
 ) AS [t0]
 ORDER BY [t].[OrderID]
-""");
+"""
+        );
     }
 
     public override async Task Projection_when_null_value(bool async)
@@ -75,7 +78,8 @@ ORDER BY [t].[OrderID]
             """
 SELECT [c].[Region]
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override async Task Projection_when_client_evald_subquery(bool async)
@@ -88,7 +92,8 @@ SELECT [c].[CustomerID], [o].[CustomerID], [o].[OrderID]
 FROM [Customers] AS [c]
 LEFT JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
 ORDER BY [c].[CustomerID]
-""");
+"""
+        );
     }
 
     public override async Task Project_to_object_array(bool async)
@@ -100,7 +105,8 @@ ORDER BY [c].[CustomerID]
 SELECT [e].[EmployeeID], [e].[ReportsTo], [e].[Title]
 FROM [Employees] AS [e]
 WHERE [e].[EmployeeID] = 1
-""");
+"""
+        );
     }
 
     public override async Task Projection_of_entity_type_into_object_array(bool async)
@@ -113,7 +119,8 @@ SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[Cont
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] LIKE N'A%'
 ORDER BY [c].[CustomerID]
-""");
+"""
+        );
     }
 
     public override async Task Projection_of_multiple_entity_types_into_object_array(bool async)
@@ -127,7 +134,8 @@ FROM [Orders] AS [o]
 LEFT JOIN [Customers] AS [c] ON [o].[CustomerID] = [c].[CustomerID]
 WHERE [o].[OrderID] < 10300
 ORDER BY [o].[OrderID]
-""");
+"""
+        );
     }
 
     public override async Task Projection_of_entity_type_into_object_list(bool async)
@@ -139,7 +147,8 @@ ORDER BY [o].[OrderID]
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
 ORDER BY [c].[CustomerID]
-""");
+"""
+        );
     }
 
     public override async Task Project_to_int_array(bool async)
@@ -151,10 +160,13 @@ ORDER BY [c].[CustomerID]
 SELECT [e].[EmployeeID], [e].[ReportsTo]
 FROM [Employees] AS [e]
 WHERE [e].[EmployeeID] = 1
-""");
+"""
+        );
     }
 
-    public override async Task Select_bool_closure_with_order_parameter_with_cast_to_nullable(bool async)
+    public override async Task Select_bool_closure_with_order_parameter_with_cast_to_nullable(
+        bool async
+    )
     {
         await base.Select_bool_closure_with_order_parameter_with_cast_to_nullable(async);
 
@@ -164,7 +176,8 @@ WHERE [e].[EmployeeID] = 1
 
 SELECT @__boolean_0
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override async Task Select_scalar(bool async)
@@ -175,7 +188,8 @@ FROM [Customers] AS [c]
             """
 SELECT [c].[City]
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override async Task Select_anonymous_one(bool async)
@@ -186,7 +200,8 @@ FROM [Customers] AS [c]
             """
 SELECT [c].[City]
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override async Task Select_anonymous_two(bool async)
@@ -197,7 +212,8 @@ FROM [Customers] AS [c]
             """
 SELECT [c].[City], [c].[Phone]
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override async Task Select_anonymous_three(bool async)
@@ -208,7 +224,8 @@ FROM [Customers] AS [c]
             """
 SELECT [c].[City], [c].[Phone], [c].[Country]
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override async Task Select_anonymous_bool_constant_true(bool async)
@@ -219,7 +236,8 @@ FROM [Customers] AS [c]
             """
 SELECT [c].[CustomerID], CAST(1 AS bit) AS [ConstantTrue]
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override async Task Select_anonymous_constant_in_expression(bool async)
@@ -230,7 +248,8 @@ FROM [Customers] AS [c]
             """
 SELECT [c].[CustomerID], CAST(LEN([c].[CustomerID]) AS int) + 5 AS [Expression]
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override async Task Select_anonymous_conditional_expression(bool async)
@@ -244,7 +263,8 @@ SELECT [p].[ProductID], CASE
     ELSE CAST(0 AS bit)
 END AS [IsAvailable]
 FROM [Products] AS [p]
-""");
+"""
+        );
     }
 
     public override async Task Select_constant_int(bool async)
@@ -255,7 +275,8 @@ FROM [Products] AS [p]
             """
 SELECT 0
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override async Task Select_constant_null_string(bool async)
@@ -266,7 +287,8 @@ FROM [Customers] AS [c]
             """
 SELECT NULL
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override async Task Select_local(bool async)
@@ -279,7 +301,8 @@ FROM [Customers] AS [c]
 
 SELECT @__x_0
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override async Task Select_scalar_primitive_after_take(bool async)
@@ -292,7 +315,8 @@ FROM [Customers] AS [c]
 
 SELECT TOP(@__p_0) [e].[EmployeeID]
 FROM [Employees] AS [e]
-""");
+"""
+        );
     }
 
     public override async Task Select_project_filter(bool async)
@@ -304,7 +328,8 @@ FROM [Employees] AS [e]
 SELECT [c].[CompanyName]
 FROM [Customers] AS [c]
 WHERE [c].[City] = N'London'
-""");
+"""
+        );
     }
 
     public override async Task Select_project_filter2(bool async)
@@ -316,7 +341,8 @@ WHERE [c].[City] = N'London'
 SELECT [c].[City]
 FROM [Customers] AS [c]
 WHERE [c].[City] = N'London'
-""");
+"""
+        );
     }
 
     public override async Task Select_nested_collection(bool async)
@@ -334,7 +360,8 @@ LEFT JOIN (
 ) AS [t] ON [c].[CustomerID] = [t].[CustomerID]
 WHERE [c].[City] = N'London'
 ORDER BY [c].[CustomerID], [t].[OrderID]
-""");
+"""
+        );
     }
 
     public override async Task Select_nested_collection_multi_level(bool async)
@@ -356,7 +383,8 @@ LEFT JOIN (
 ) AS [t0] ON [c].[CustomerID] = [t0].[CustomerID]
 WHERE [c].[CustomerID] LIKE N'A%'
 ORDER BY [c].[CustomerID], [t0].[CustomerID], [t0].[OrderID]
-""");
+"""
+        );
     }
 
     public override async Task Select_nested_collection_multi_level2(bool async)
@@ -373,7 +401,8 @@ SELECT (
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] LIKE N'A%'
 ORDER BY [c].[CustomerID]
-""");
+"""
+        );
     }
 
     public override async Task Select_nested_collection_multi_level3(bool async)
@@ -390,7 +419,8 @@ SELECT (
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] LIKE N'A%'
 ORDER BY [c].[CustomerID]
-""");
+"""
+        );
     }
 
     public override async Task Select_nested_collection_multi_level4(bool async)
@@ -410,7 +440,8 @@ SELECT COALESCE((
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] LIKE N'A%'
 ORDER BY [c].[CustomerID]
-""");
+"""
+        );
     }
 
     public override async Task Select_nested_collection_multi_level5(bool async)
@@ -437,7 +468,8 @@ SELECT COALESCE((
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] LIKE N'A%'
 ORDER BY [c].[CustomerID]
-""");
+"""
+        );
     }
 
     public override async Task Select_nested_collection_multi_level6(bool async)
@@ -458,7 +490,8 @@ SELECT COALESCE((
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] LIKE N'A%'
 ORDER BY [c].[CustomerID]
-""");
+"""
+        );
     }
 
     public override async Task Select_nested_collection_count_using_anonymous_type(bool async)
@@ -473,7 +506,8 @@ SELECT (
     WHERE [c].[CustomerID] = [o].[CustomerID]) AS [Count]
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] LIKE N'A%'
-""");
+"""
+        );
     }
 
     public override async Task New_date_time_in_anonymous_type_works(bool async)
@@ -485,10 +519,13 @@ WHERE [c].[CustomerID] LIKE N'A%'
 SELECT 1
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] LIKE N'A%'
-""");
+"""
+        );
     }
 
-    public override async Task Select_non_matching_value_types_int_to_long_introduces_explicit_cast(bool async)
+    public override async Task Select_non_matching_value_types_int_to_long_introduces_explicit_cast(
+        bool async
+    )
     {
         await base.Select_non_matching_value_types_int_to_long_introduces_explicit_cast(async);
 
@@ -498,12 +535,17 @@ SELECT CAST([o].[OrderID] AS bigint)
 FROM [Orders] AS [o]
 WHERE [o].[CustomerID] = N'ALFKI'
 ORDER BY [o].[OrderID]
-""");
+"""
+        );
     }
 
-    public override async Task Select_non_matching_value_types_nullable_int_to_long_introduces_explicit_cast(bool async)
+    public override async Task Select_non_matching_value_types_nullable_int_to_long_introduces_explicit_cast(
+        bool async
+    )
     {
-        await base.Select_non_matching_value_types_nullable_int_to_long_introduces_explicit_cast(async);
+        await base.Select_non_matching_value_types_nullable_int_to_long_introduces_explicit_cast(
+            async
+        );
 
         AssertSql(
             """
@@ -511,12 +553,17 @@ SELECT CAST([o].[EmployeeID] AS bigint)
 FROM [Orders] AS [o]
 WHERE [o].[CustomerID] = N'ALFKI'
 ORDER BY [o].[OrderID]
-""");
+"""
+        );
     }
 
-    public override async Task Select_non_matching_value_types_nullable_int_to_int_doesnt_introduce_explicit_cast(bool async)
+    public override async Task Select_non_matching_value_types_nullable_int_to_int_doesnt_introduce_explicit_cast(
+        bool async
+    )
     {
-        await base.Select_non_matching_value_types_nullable_int_to_int_doesnt_introduce_explicit_cast(async);
+        await base.Select_non_matching_value_types_nullable_int_to_int_doesnt_introduce_explicit_cast(
+            async
+        );
 
         AssertSql(
             """
@@ -524,12 +571,17 @@ SELECT [o].[EmployeeID]
 FROM [Orders] AS [o]
 WHERE [o].[CustomerID] = N'ALFKI'
 ORDER BY [o].[OrderID]
-""");
+"""
+        );
     }
 
-    public override async Task Select_non_matching_value_types_int_to_nullable_int_doesnt_introduce_explicit_cast(bool async)
+    public override async Task Select_non_matching_value_types_int_to_nullable_int_doesnt_introduce_explicit_cast(
+        bool async
+    )
     {
-        await base.Select_non_matching_value_types_int_to_nullable_int_doesnt_introduce_explicit_cast(async);
+        await base.Select_non_matching_value_types_int_to_nullable_int_doesnt_introduce_explicit_cast(
+            async
+        );
 
         AssertSql(
             """
@@ -537,12 +589,17 @@ SELECT [o].[OrderID]
 FROM [Orders] AS [o]
 WHERE [o].[CustomerID] = N'ALFKI'
 ORDER BY [o].[OrderID]
-""");
+"""
+        );
     }
 
-    public override async Task Select_non_matching_value_types_from_binary_expression_introduces_explicit_cast(bool async)
+    public override async Task Select_non_matching_value_types_from_binary_expression_introduces_explicit_cast(
+        bool async
+    )
     {
-        await base.Select_non_matching_value_types_from_binary_expression_introduces_explicit_cast(async);
+        await base.Select_non_matching_value_types_from_binary_expression_introduces_explicit_cast(
+            async
+        );
 
         AssertSql(
             """
@@ -550,13 +607,17 @@ SELECT CAST([o].[OrderID] + [o].[OrderID] AS bigint)
 FROM [Orders] AS [o]
 WHERE [o].[CustomerID] = N'ALFKI'
 ORDER BY [o].[OrderID]
-""");
+"""
+        );
     }
 
     public override async Task Select_non_matching_value_types_from_binary_expression_nested_introduces_top_level_explicit_cast(
-        bool async)
+        bool async
+    )
     {
-        await base.Select_non_matching_value_types_from_binary_expression_nested_introduces_top_level_explicit_cast(async);
+        await base.Select_non_matching_value_types_from_binary_expression_nested_introduces_top_level_explicit_cast(
+            async
+        );
 
         AssertSql(
             """
@@ -564,12 +625,17 @@ SELECT CAST(CAST([o].[OrderID] AS bigint) + CAST([o].[OrderID] AS bigint) AS sma
 FROM [Orders] AS [o]
 WHERE [o].[CustomerID] = N'ALFKI'
 ORDER BY [o].[OrderID]
-""");
+"""
+        );
     }
 
-    public override async Task Select_non_matching_value_types_from_unary_expression_introduces_explicit_cast1(bool async)
+    public override async Task Select_non_matching_value_types_from_unary_expression_introduces_explicit_cast1(
+        bool async
+    )
     {
-        await base.Select_non_matching_value_types_from_unary_expression_introduces_explicit_cast1(async);
+        await base.Select_non_matching_value_types_from_unary_expression_introduces_explicit_cast1(
+            async
+        );
 
         AssertSql(
             """
@@ -577,12 +643,17 @@ SELECT CAST(-[o].[OrderID] AS bigint)
 FROM [Orders] AS [o]
 WHERE [o].[CustomerID] = N'ALFKI'
 ORDER BY [o].[OrderID]
-""");
+"""
+        );
     }
 
-    public override async Task Select_non_matching_value_types_from_unary_expression_introduces_explicit_cast2(bool async)
+    public override async Task Select_non_matching_value_types_from_unary_expression_introduces_explicit_cast2(
+        bool async
+    )
     {
-        await base.Select_non_matching_value_types_from_unary_expression_introduces_explicit_cast2(async);
+        await base.Select_non_matching_value_types_from_unary_expression_introduces_explicit_cast2(
+            async
+        );
 
         AssertSql(
             """
@@ -590,10 +661,13 @@ SELECT -CAST([o].[OrderID] AS bigint)
 FROM [Orders] AS [o]
 WHERE [o].[CustomerID] = N'ALFKI'
 ORDER BY [o].[OrderID]
-""");
+"""
+        );
     }
 
-    public override async Task Select_non_matching_value_types_from_length_introduces_explicit_cast(bool async)
+    public override async Task Select_non_matching_value_types_from_length_introduces_explicit_cast(
+        bool async
+    )
     {
         await base.Select_non_matching_value_types_from_length_introduces_explicit_cast(async);
 
@@ -603,10 +677,13 @@ SELECT CAST(CAST(LEN([o].[CustomerID]) AS int) AS bigint)
 FROM [Orders] AS [o]
 WHERE [o].[CustomerID] = N'ALFKI'
 ORDER BY [o].[OrderID]
-""");
+"""
+        );
     }
 
-    public override async Task Select_non_matching_value_types_from_method_call_introduces_explicit_cast(bool async)
+    public override async Task Select_non_matching_value_types_from_method_call_introduces_explicit_cast(
+        bool async
+    )
     {
         await base.Select_non_matching_value_types_from_method_call_introduces_explicit_cast(async);
 
@@ -616,12 +693,17 @@ SELECT CAST(ABS([o].[OrderID]) AS bigint)
 FROM [Orders] AS [o]
 WHERE [o].[CustomerID] = N'ALFKI'
 ORDER BY [o].[OrderID]
-""");
+"""
+        );
     }
 
-    public override async Task Select_non_matching_value_types_from_anonymous_type_introduces_explicit_cast(bool async)
+    public override async Task Select_non_matching_value_types_from_anonymous_type_introduces_explicit_cast(
+        bool async
+    )
     {
-        await base.Select_non_matching_value_types_from_anonymous_type_introduces_explicit_cast(async);
+        await base.Select_non_matching_value_types_from_anonymous_type_introduces_explicit_cast(
+            async
+        );
 
         AssertSql(
             """
@@ -629,7 +711,8 @@ SELECT CAST([o].[OrderID] AS bigint) AS [LongOrder], CAST([o].[OrderID] AS small
 FROM [Orders] AS [o]
 WHERE [o].[CustomerID] = N'ALFKI'
 ORDER BY [o].[OrderID]
-""");
+"""
+        );
     }
 
     public override async Task Select_conditional_with_null_comparison_in_test(bool async)
@@ -647,7 +730,8 @@ SELECT CASE
 END
 FROM [Orders] AS [o]
 WHERE [o].[CustomerID] = N'ALFKI'
-""");
+"""
+        );
     }
 
     public override async Task Select_over_10_nested_ternary_condition(bool isAsync)
@@ -671,7 +755,8 @@ SELECT CASE
     ELSE NULL
 END
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override async Task Projection_in_a_subquery_should_be_liftable(bool async)
@@ -686,7 +771,8 @@ SELECT [e].[EmployeeID]
 FROM [Employees] AS [e]
 ORDER BY [e].[EmployeeID]
 OFFSET @__p_0 ROWS
-""");
+"""
+        );
     }
 
     public override async Task Projection_containing_DateTime_subtraction(bool async)
@@ -698,12 +784,17 @@ OFFSET @__p_0 ROWS
 SELECT [o].[OrderDate]
 FROM [Orders] AS [o]
 WHERE [o].[OrderID] < 10300
-""");
+"""
+        );
     }
 
-    public override async Task Project_single_element_from_collection_with_OrderBy_Take_and_FirstOrDefault(bool async)
+    public override async Task Project_single_element_from_collection_with_OrderBy_Take_and_FirstOrDefault(
+        bool async
+    )
     {
-        await base.Project_single_element_from_collection_with_OrderBy_Take_and_FirstOrDefault(async);
+        await base.Project_single_element_from_collection_with_OrderBy_Take_and_FirstOrDefault(
+            async
+        );
 
         AssertSql(
             """
@@ -717,12 +808,17 @@ SELECT (
     ) AS [t]
     ORDER BY [t].[OrderID])
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
-    public override async Task Project_single_element_from_collection_with_OrderBy_Skip_and_FirstOrDefault(bool async)
+    public override async Task Project_single_element_from_collection_with_OrderBy_Skip_and_FirstOrDefault(
+        bool async
+    )
     {
-        await base.Project_single_element_from_collection_with_OrderBy_Skip_and_FirstOrDefault(async);
+        await base.Project_single_element_from_collection_with_OrderBy_Skip_and_FirstOrDefault(
+            async
+        );
 
         AssertSql(
             """
@@ -733,12 +829,17 @@ SELECT (
     ORDER BY [o].[OrderID]
     OFFSET 1 ROWS FETCH NEXT 1 ROWS ONLY)
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
-    public override async Task Project_single_element_from_collection_with_OrderBy_Distinct_and_FirstOrDefault(bool async)
+    public override async Task Project_single_element_from_collection_with_OrderBy_Distinct_and_FirstOrDefault(
+        bool async
+    )
     {
-        await base.Project_single_element_from_collection_with_OrderBy_Distinct_and_FirstOrDefault(async);
+        await base.Project_single_element_from_collection_with_OrderBy_Distinct_and_FirstOrDefault(
+            async
+        );
 
         AssertSql(
             """
@@ -747,14 +848,17 @@ SELECT (
     FROM [Orders] AS [o]
     WHERE [c].[CustomerID] = [o].[CustomerID])
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
-    public override async Task
-        Project_single_element_from_collection_with_OrderBy_Distinct_and_FirstOrDefault_followed_by_projecting_length(bool async)
+    public override async Task Project_single_element_from_collection_with_OrderBy_Distinct_and_FirstOrDefault_followed_by_projecting_length(
+        bool async
+    )
     {
         await base.Project_single_element_from_collection_with_OrderBy_Distinct_and_FirstOrDefault_followed_by_projecting_length(
-            async);
+            async
+        );
 
         AssertSql(
             """
@@ -766,12 +870,17 @@ SELECT (
         WHERE [c].[CustomerID] = [o].[CustomerID]
     ) AS [t])
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
-    public override async Task Project_single_element_from_collection_with_OrderBy_Take_and_SingleOrDefault(bool async)
+    public override async Task Project_single_element_from_collection_with_OrderBy_Take_and_SingleOrDefault(
+        bool async
+    )
     {
-        await base.Project_single_element_from_collection_with_OrderBy_Take_and_SingleOrDefault(async);
+        await base.Project_single_element_from_collection_with_OrderBy_Take_and_SingleOrDefault(
+            async
+        );
 
         AssertSql(
             """
@@ -786,12 +895,17 @@ SELECT (
     ORDER BY [t].[OrderID])
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] = N'ALFKI'
-""");
+"""
+        );
     }
 
-    public override async Task Project_single_element_from_collection_with_OrderBy_Take_and_FirstOrDefault_with_parameter(bool async)
+    public override async Task Project_single_element_from_collection_with_OrderBy_Take_and_FirstOrDefault_with_parameter(
+        bool async
+    )
     {
-        await base.Project_single_element_from_collection_with_OrderBy_Take_and_FirstOrDefault_with_parameter(async);
+        await base.Project_single_element_from_collection_with_OrderBy_Take_and_FirstOrDefault_with_parameter(
+            async
+        );
 
         AssertSql(
             """
@@ -807,12 +921,17 @@ SELECT (
     ) AS [t]
     ORDER BY [t].[OrderID])
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
-    public override async Task Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault(bool async)
+    public override async Task Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault(
+        bool async
+    )
     {
-        await base.Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault(async);
+        await base.Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault(
+            async
+        );
 
         AssertSql(
             """
@@ -826,16 +945,17 @@ SELECT (
     ) AS [t]
     ORDER BY [t].[OrderID], [t].[OrderDate] DESC)
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
-    public override async Task
-        Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault_followed_by_projection_of_length_property(
-            bool async)
+    public override async Task Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault_followed_by_projection_of_length_property(
+        bool async
+    )
     {
-        await base
-            .Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault_followed_by_projection_of_length_property(
-                async);
+        await base.Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault_followed_by_projection_of_length_property(
+            async
+        );
 
         AssertSql(
             """
@@ -849,12 +969,17 @@ SELECT (
     ) AS [t]
     ORDER BY [t].[OrderID], [t].[OrderDate] DESC)
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
-    public override async Task Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault_2(bool async)
+    public override async Task Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault_2(
+        bool async
+    )
     {
-        await base.Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault_2(async);
+        await base.Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault_2(
+            async
+        );
 
         AssertSql(
             """
@@ -868,12 +993,17 @@ SELECT (
     ) AS [t]
     ORDER BY [t].[CustomerID], [t].[OrderDate] DESC)
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
-    public override async Task Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault(bool async)
+    public override async Task Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault(
+        bool async
+    )
     {
-        await base.Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault(async);
+        await base.Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault(
+            async
+        );
 
         AssertSql(
             """
@@ -889,13 +1019,17 @@ SELECT COALESCE((
     ORDER BY [t].[ProductName]), 0)
 FROM [Orders] AS [o]
 WHERE [o].[OrderID] < 10300
-""");
+"""
+        );
     }
 
     public override async Task Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault_2(
-        bool async)
+        bool async
+    )
     {
-        await base.Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault_2(async);
+        await base.Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault_2(
+            async
+        );
 
         AssertSql(
             """
@@ -913,7 +1047,8 @@ OUTER APPLY (
     ORDER BY [t].[ProductName]
 ) AS [t0]
 WHERE [o].[OrderID] < 10250
-""");
+"""
+        );
     }
 
     public override async Task Select_datetime_year_component(bool async)
@@ -924,7 +1059,8 @@ WHERE [o].[OrderID] < 10250
             """
 SELECT DATEPART(year, [o].[OrderDate])
 FROM [Orders] AS [o]
-""");
+"""
+        );
     }
 
     public override async Task Select_datetime_month_component(bool async)
@@ -935,7 +1071,8 @@ FROM [Orders] AS [o]
             """
 SELECT DATEPART(month, [o].[OrderDate])
 FROM [Orders] AS [o]
-""");
+"""
+        );
     }
 
     public override async Task Select_datetime_day_of_year_component(bool async)
@@ -946,7 +1083,8 @@ FROM [Orders] AS [o]
             """
 SELECT DATEPART(dayofyear, [o].[OrderDate])
 FROM [Orders] AS [o]
-""");
+"""
+        );
     }
 
     public override async Task Select_datetime_day_component(bool async)
@@ -957,7 +1095,8 @@ FROM [Orders] AS [o]
             """
 SELECT DATEPART(day, [o].[OrderDate])
 FROM [Orders] AS [o]
-""");
+"""
+        );
     }
 
     public override async Task Select_datetime_hour_component(bool async)
@@ -968,7 +1107,8 @@ FROM [Orders] AS [o]
             """
 SELECT DATEPART(hour, [o].[OrderDate])
 FROM [Orders] AS [o]
-""");
+"""
+        );
     }
 
     public override async Task Select_datetime_minute_component(bool async)
@@ -979,7 +1119,8 @@ FROM [Orders] AS [o]
             """
 SELECT DATEPART(minute, [o].[OrderDate])
 FROM [Orders] AS [o]
-""");
+"""
+        );
     }
 
     public override async Task Select_datetime_second_component(bool async)
@@ -990,7 +1131,8 @@ FROM [Orders] AS [o]
             """
 SELECT DATEPART(second, [o].[OrderDate])
 FROM [Orders] AS [o]
-""");
+"""
+        );
     }
 
     public override async Task Select_datetime_millisecond_component(bool async)
@@ -1001,7 +1143,8 @@ FROM [Orders] AS [o]
             """
 SELECT DATEPART(millisecond, [o].[OrderDate])
 FROM [Orders] AS [o]
-""");
+"""
+        );
     }
 
     public override async Task Select_byte_constant(bool async)
@@ -1015,7 +1158,8 @@ SELECT CASE
     ELSE CAST(2 AS tinyint)
 END
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override async Task Select_short_constant(bool async)
@@ -1029,7 +1173,8 @@ SELECT CASE
     ELSE CAST(2 AS smallint)
 END
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override async Task Select_bool_constant(bool async)
@@ -1043,7 +1188,8 @@ SELECT CASE
     ELSE CAST(0 AS bit)
 END
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override async Task Anonymous_projection_AsNoTracking_Selector(bool async)
@@ -1054,7 +1200,8 @@ FROM [Customers] AS [c]
             """
 SELECT [o].[OrderDate]
 FROM [Orders] AS [o]
-""");
+"""
+        );
     }
 
     public override async Task Anonymous_projection_with_repeated_property_being_ordered(bool async)
@@ -1066,10 +1213,13 @@ FROM [Orders] AS [o]
 SELECT [c].[CustomerID] AS [A]
 FROM [Customers] AS [c]
 ORDER BY [c].[CustomerID]
-""");
+"""
+        );
     }
 
-    public override async Task Anonymous_projection_with_repeated_property_being_ordered_2(bool async)
+    public override async Task Anonymous_projection_with_repeated_property_being_ordered_2(
+        bool async
+    )
     {
         await base.Anonymous_projection_with_repeated_property_being_ordered_2(async);
 
@@ -1079,7 +1229,8 @@ SELECT [c].[CustomerID] AS [A], [o].[CustomerID] AS [B]
 FROM [Orders] AS [o]
 LEFT JOIN [Customers] AS [c] ON [o].[CustomerID] = [c].[CustomerID]
 ORDER BY [o].[CustomerID]
-""");
+"""
+        );
     }
 
     public override async Task Select_GetValueOrDefault_on_DateTime(bool async)
@@ -1090,7 +1241,8 @@ ORDER BY [o].[CustomerID]
             """
 SELECT [o].[OrderDate]
 FROM [Orders] AS [o]
-""");
+"""
+        );
     }
 
     public override async Task Select_GetValueOrDefault_on_DateTime_with_null_values(bool async)
@@ -1102,7 +1254,8 @@ FROM [Orders] AS [o]
 SELECT [o].[OrderDate]
 FROM [Customers] AS [c]
 LEFT JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
-""");
+"""
+        );
     }
 
     public override async Task Cast_on_top_level_projection_brings_explicit_Cast(bool async)
@@ -1113,7 +1266,8 @@ LEFT JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
             """
 SELECT CAST([o].[OrderID] AS float)
 FROM [Orders] AS [o]
-""");
+"""
+        );
     }
 
     public override async Task Projecting_nullable_struct(bool async)
@@ -1127,7 +1281,8 @@ SELECT [o].[CustomerID], CASE
     ELSE CAST(0 AS bit)
 END, [o].[OrderID], CAST(LEN([o].[CustomerID]) AS int)
 FROM [Orders] AS [o]
-""");
+"""
+        );
     }
 
     public override async Task Multiple_select_many_with_predicate(bool async)
@@ -1141,10 +1296,13 @@ FROM [Customers] AS [c]
 INNER JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
 INNER JOIN [Order Details] AS [o0] ON [o].[OrderID] = [o0].[OrderID]
 WHERE CAST([o0].[Discount] AS float) >= 0.25E0
-""");
+"""
+        );
     }
 
-    public override async Task SelectMany_without_result_selector_naked_collection_navigation(bool async)
+    public override async Task SelectMany_without_result_selector_naked_collection_navigation(
+        bool async
+    )
     {
         await base.SelectMany_without_result_selector_naked_collection_navigation(async);
 
@@ -1153,10 +1311,13 @@ WHERE CAST([o0].[Discount] AS float) >= 0.25E0
 SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
 FROM [Customers] AS [c]
 INNER JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
-""");
+"""
+        );
     }
 
-    public override async Task SelectMany_without_result_selector_collection_navigation_composed(bool async)
+    public override async Task SelectMany_without_result_selector_collection_navigation_composed(
+        bool async
+    )
     {
         await base.SelectMany_without_result_selector_collection_navigation_composed(async);
 
@@ -1165,7 +1326,8 @@ INNER JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
 SELECT [o].[CustomerID]
 FROM [Customers] AS [c]
 INNER JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
-""");
+"""
+        );
     }
 
     public override async Task SelectMany_correlated_with_outer_1(bool async)
@@ -1181,7 +1343,8 @@ CROSS APPLY (
     FROM [Orders] AS [o]
     WHERE [c].[CustomerID] = [o].[CustomerID]
 ) AS [t]
-""");
+"""
+        );
     }
 
     public override async Task SelectMany_correlated_with_outer_2(bool async)
@@ -1198,7 +1361,8 @@ CROSS APPLY (
     WHERE [c].[CustomerID] = [o].[CustomerID]
     ORDER BY [c].[City], [o].[OrderID]
 ) AS [t]
-""");
+"""
+        );
     }
 
     public override async Task SelectMany_correlated_with_outer_3(bool async)
@@ -1214,7 +1378,8 @@ OUTER APPLY (
     FROM [Orders] AS [o]
     WHERE [c].[CustomerID] = [o].[CustomerID]
 ) AS [t]
-""");
+"""
+        );
     }
 
     public override async Task SelectMany_correlated_with_outer_4(bool async)
@@ -1231,7 +1396,8 @@ OUTER APPLY (
     WHERE [c].[CustomerID] = [o].[CustomerID]
     ORDER BY [c].[City], [o].[OrderID]
 ) AS [t]
-""");
+"""
+        );
     }
 
     public override async Task SelectMany_correlated_with_outer_5(bool async)
@@ -1247,7 +1413,8 @@ OUTER APPLY (
     FROM [Orders] AS [o]
     WHERE [c].[CustomerID] <> [o].[CustomerID] OR [o].[CustomerID] IS NULL
 ) AS [t]
-""");
+"""
+        );
     }
 
     public override async Task SelectMany_correlated_with_outer_6(bool async)
@@ -1264,7 +1431,8 @@ OUTER APPLY (
     WHERE [c].[CustomerID] <> [o].[CustomerID] OR [o].[CustomerID] IS NULL
     ORDER BY [c].[City], [o].[OrderID]
 ) AS [t]
-""");
+"""
+        );
     }
 
     public override async Task SelectMany_correlated_with_outer_7(bool async)
@@ -1281,12 +1449,17 @@ OUTER APPLY (
     WHERE CAST(LEN([c].[CustomerID]) AS int) >= CAST(LEN([o].[CustomerID]) AS int)
     ORDER BY [c].[City], [o].[OrderID]
 ) AS [t]
-""");
+"""
+        );
     }
 
-    public override async Task FirstOrDefault_over_empty_collection_of_value_type_returns_correct_results(bool async)
+    public override async Task FirstOrDefault_over_empty_collection_of_value_type_returns_correct_results(
+        bool async
+    )
     {
-        await base.FirstOrDefault_over_empty_collection_of_value_type_returns_correct_results(async);
+        await base.FirstOrDefault_over_empty_collection_of_value_type_returns_correct_results(
+            async
+        );
 
         AssertSql(
             """
@@ -1297,10 +1470,13 @@ SELECT [c].[CustomerID], COALESCE((
     ORDER BY [o].[OrderID]), 0) AS [OrderId]
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] = N'FISSA'
-""");
+"""
+        );
     }
 
-    public override async Task Project_non_nullable_value_after_FirstOrDefault_on_empty_collection(bool async)
+    public override async Task Project_non_nullable_value_after_FirstOrDefault_on_empty_collection(
+        bool async
+    )
     {
         await base.Project_non_nullable_value_after_FirstOrDefault_on_empty_collection(async);
 
@@ -1311,11 +1487,14 @@ SELECT (
     FROM [Orders] AS [o]
     WHERE [o].[CustomerID] = N'John Doe')
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
-    public override Task Member_binding_after_ctor_arguments_fails_with_client_eval(bool async)
-        => AssertTranslationFailed(() => base.Member_binding_after_ctor_arguments_fails_with_client_eval(async));
+    public override Task Member_binding_after_ctor_arguments_fails_with_client_eval(bool async) =>
+        AssertTranslationFailed(
+            () => base.Member_binding_after_ctor_arguments_fails_with_client_eval(async)
+        );
 
     public override async Task Filtered_collection_projection_is_tracked(bool async)
     {
@@ -1332,7 +1511,8 @@ LEFT JOIN (
 ) AS [t] ON [c].[CustomerID] = [t].[CustomerID]
 WHERE [c].[CustomerID] LIKE N'A%'
 ORDER BY [c].[CustomerID]
-""");
+"""
+        );
     }
 
     public override async Task Filtered_collection_projection_with_to_list_is_tracked(bool async)
@@ -1350,13 +1530,17 @@ LEFT JOIN (
 ) AS [t] ON [c].[CustomerID] = [t].[CustomerID]
 WHERE [c].[CustomerID] LIKE N'A%'
 ORDER BY [c].[CustomerID]
-""");
+"""
+        );
     }
 
     public override async Task SelectMany_with_collection_being_correlated_subquery_which_references_inner_and_outer_entity(
-        bool async)
+        bool async
+    )
     {
-        await base.SelectMany_with_collection_being_correlated_subquery_which_references_inner_and_outer_entity(async);
+        await base.SelectMany_with_collection_being_correlated_subquery_which_references_inner_and_outer_entity(
+            async
+        );
 
         AssertSql(
             """
@@ -1367,17 +1551,20 @@ CROSS APPLY (
     FROM [Orders] AS [o]
     WHERE [c].[CustomerID] = [o].[CustomerID]
 ) AS [t]
-""");
+"""
+        );
     }
 
-    public override async Task
-        SelectMany_with_collection_being_correlated_subquery_which_references_non_mapped_properties_from_inner_and_outer_entity(
-            bool async)
+    public override async Task SelectMany_with_collection_being_correlated_subquery_which_references_non_mapped_properties_from_inner_and_outer_entity(
+        bool async
+    )
     {
         await AssertUnableToTranslateEFProperty(
-            () => base
-                .SelectMany_with_collection_being_correlated_subquery_which_references_non_mapped_properties_from_inner_and_outer_entity(
-                    async));
+            () =>
+                base.SelectMany_with_collection_being_correlated_subquery_which_references_non_mapped_properties_from_inner_and_outer_entity(
+                    async
+                )
+        );
 
         AssertSql();
     }
@@ -1391,10 +1578,13 @@ CROSS APPLY (
 SELECT 0
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] = N'ALFKI'
-""");
+"""
+        );
     }
 
-    public override async Task Select_chained_entity_navigation_doesnt_materialize_intermittent_entities(bool async)
+    public override async Task Select_chained_entity_navigation_doesnt_materialize_intermittent_entities(
+        bool async
+    )
     {
         await base.Select_chained_entity_navigation_doesnt_materialize_intermittent_entities(async);
 
@@ -1405,7 +1595,8 @@ FROM [Orders] AS [o]
 LEFT JOIN [Customers] AS [c] ON [o].[CustomerID] = [c].[CustomerID]
 LEFT JOIN [Orders] AS [o0] ON [c].[CustomerID] = [o0].[CustomerID]
 ORDER BY [o].[OrderID], [c].[CustomerID]
-""");
+"""
+        );
     }
 
     public override async Task Select_entity_compared_to_null(bool async)
@@ -1421,7 +1612,8 @@ END
 FROM [Orders] AS [o]
 LEFT JOIN [Customers] AS [c] ON [o].[CustomerID] = [c].[CustomerID]
 WHERE [o].[CustomerID] = N'ALFKI'
-""");
+"""
+        );
     }
 
     public override async Task Explicit_cast_in_arithmetic_operation_is_preserved(bool async)
@@ -1433,7 +1625,8 @@ WHERE [o].[CustomerID] = N'ALFKI'
 SELECT CAST([o].[OrderID] AS decimal(18,2)) / CAST([o].[OrderID] + 1000 AS decimal(18,2))
 FROM [Orders] AS [o]
 WHERE [o].[OrderID] = 10250
-""");
+"""
+        );
     }
 
     public override async Task SelectMany_whose_selector_references_outer_source(bool async)
@@ -1449,10 +1642,13 @@ CROSS APPLY (
     FROM [Orders] AS [o]
     WHERE [c].[CustomerID] = [o].[CustomerID]
 ) AS [t]
-""");
+"""
+        );
     }
 
-    public override async Task Collection_FirstOrDefault_with_entity_equality_check_in_projection(bool async)
+    public override async Task Collection_FirstOrDefault_with_entity_equality_check_in_projection(
+        bool async
+    )
     {
         await base.Collection_FirstOrDefault_with_entity_equality_check_in_projection(async);
 
@@ -1469,10 +1665,13 @@ SELECT CASE
     ELSE CAST(0 AS bit)
 END
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
-    public override async Task Collection_FirstOrDefault_with_nullable_unsigned_int_column(bool async)
+    public override async Task Collection_FirstOrDefault_with_nullable_unsigned_int_column(
+        bool async
+    )
     {
         await base.Collection_FirstOrDefault_with_nullable_unsigned_int_column(async);
 
@@ -1484,7 +1683,8 @@ SELECT (
     WHERE [c].[CustomerID] = [o].[CustomerID]
     ORDER BY [o].[OrderID])
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override async Task ToList_Count_in_projection_works(bool async)
@@ -1499,10 +1699,13 @@ SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[Cont
     WHERE [c].[CustomerID] = [o].[CustomerID]) AS [Count]
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] LIKE N'A%'
-""");
+"""
+        );
     }
 
-    public override async Task LastOrDefault_member_access_in_projection_translates_to_server(bool async)
+    public override async Task LastOrDefault_member_access_in_projection_translates_to_server(
+        bool async
+    )
     {
         await base.LastOrDefault_member_access_in_projection_translates_to_server(async);
 
@@ -1515,7 +1718,8 @@ SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[Cont
     ORDER BY [o].[OrderID]) AS [OrderDate]
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] LIKE N'A%'
-""");
+"""
+        );
     }
 
     public override async Task Projection_with_parameterized_constructor(bool async)
@@ -1527,10 +1731,13 @@ WHERE [c].[CustomerID] LIKE N'A%'
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] = N'ALFKI'
-""");
+"""
+        );
     }
 
-    public override async Task Projection_with_parameterized_constructor_with_member_assignment(bool async)
+    public override async Task Projection_with_parameterized_constructor_with_member_assignment(
+        bool async
+    )
     {
         await base.Projection_with_parameterized_constructor_with_member_assignment(async);
 
@@ -1539,7 +1746,8 @@ WHERE [c].[CustomerID] = N'ALFKI'
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] = N'ALFKI'
-""");
+"""
+        );
     }
 
     public override async Task Collection_projection_AsNoTracking_OrderBy(bool async)
@@ -1552,7 +1760,8 @@ SELECT [c].[CustomerID], [o].[OrderDate], [o].[OrderID]
 FROM [Customers] AS [c]
 LEFT JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
 ORDER BY [c].[CustomerID]
-""");
+"""
+        );
     }
 
     public override async Task Coalesce_over_nullable_uint(bool async)
@@ -1563,7 +1772,8 @@ ORDER BY [c].[CustomerID]
             """
 SELECT COALESCE([o].[EmployeeID], 0)
 FROM [Orders] AS [o]
-""");
+"""
+        );
     }
 
     public override async Task Project_uint_through_collection_FirstOrDefault(bool async)
@@ -1578,7 +1788,8 @@ SELECT (
     WHERE [c].[CustomerID] = [o].[CustomerID]
     ORDER BY [o].[OrderID])
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override async Task Project_keyless_entity_FirstOrDefault_without_orderby(bool async)
@@ -1599,7 +1810,8 @@ LEFT JOIN (
     ) AS [t]
     WHERE [t].[row] <= 1
 ) AS [t0] ON [c].[CompanyName] = [t0].[CompanyName]
-""");
+"""
+        );
     }
 
     public override async Task Reverse_changes_asc_order_to_desc(bool async)
@@ -1611,7 +1823,8 @@ LEFT JOIN (
 SELECT [e].[EmployeeID]
 FROM [Employees] AS [e]
 ORDER BY [e].[EmployeeID] DESC
-""");
+"""
+        );
     }
 
     public override async Task Reverse_changes_desc_order_to_asc(bool async)
@@ -1623,7 +1836,8 @@ ORDER BY [e].[EmployeeID] DESC
 SELECT [e].[EmployeeID]
 FROM [Employees] AS [e]
 ORDER BY [e].[EmployeeID]
-""");
+"""
+        );
     }
 
     public override async Task Reverse_after_multiple_orderbys(bool async)
@@ -1635,7 +1849,8 @@ ORDER BY [e].[EmployeeID]
 SELECT [e].[EmployeeID]
 FROM [Employees] AS [e]
 ORDER BY [e].[EmployeeID]
-""");
+"""
+        );
     }
 
     public override async Task Reverse_after_orderby_thenby(bool async)
@@ -1647,7 +1862,8 @@ ORDER BY [e].[EmployeeID]
 SELECT [e].[EmployeeID]
 FROM [Employees] AS [e]
 ORDER BY [e].[EmployeeID] DESC, [e].[City]
-""");
+"""
+        );
     }
 
     public override async Task Reverse_in_subquery_via_pushdown(bool async)
@@ -1667,7 +1883,8 @@ FROM (
         ORDER BY [e].[EmployeeID] DESC
     ) AS [t]
 ) AS [t0]
-""");
+"""
+        );
     }
 
     public override async Task Reverse_after_orderBy_and_take(bool async)
@@ -1685,7 +1902,8 @@ FROM (
     ORDER BY [e].[EmployeeID]
 ) AS [t]
 ORDER BY [t].[EmployeeID] DESC
-""");
+"""
+        );
     }
 
     public override async Task Reverse_in_join_outer(bool async)
@@ -1698,7 +1916,8 @@ SELECT [c].[CustomerID], [o].[OrderID]
 FROM [Customers] AS [c]
 INNER JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
 ORDER BY [c].[City], [c].[CustomerID] DESC
-""");
+"""
+        );
     }
 
     public override async Task Reverse_in_join_outer_with_take(bool async)
@@ -1717,7 +1936,8 @@ FROM (
 ) AS [t]
 INNER JOIN [Orders] AS [o] ON [t].[CustomerID] = [o].[CustomerID]
 ORDER BY [t].[CustomerID]
-""");
+"""
+        );
     }
 
     public override async Task Reverse_in_join_inner(bool async)
@@ -1730,7 +1950,8 @@ SELECT [c].[CustomerID], [o].[OrderID]
 FROM [Customers] AS [c]
 LEFT JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
 ORDER BY [c].[CustomerID]
-""");
+"""
+        );
     }
 
     public override async Task Reverse_in_join_inner_with_skip(bool async)
@@ -1750,7 +1971,8 @@ LEFT JOIN (
     OFFSET @__p_0 ROWS
 ) AS [t] ON [c].[CustomerID] = [t].[CustomerID]
 ORDER BY [c].[CustomerID]
-""");
+"""
+        );
     }
 
     public override async Task Reverse_in_SelectMany(bool async)
@@ -1763,7 +1985,8 @@ SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
 FROM [Customers] AS [c]
 INNER JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
 ORDER BY [c].[CustomerID] DESC
-""");
+"""
+        );
     }
 
     public override async Task Reverse_in_SelectMany_with_Take(bool async)
@@ -1787,7 +2010,8 @@ CROSS APPLY (
     ORDER BY [o].[OrderID] DESC
 ) AS [t0]
 ORDER BY [t].[CustomerID] DESC
-""");
+"""
+        );
     }
 
     public override async Task Reverse_in_projection_subquery(bool async)
@@ -1800,7 +2024,8 @@ SELECT [c].[CustomerID], [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].
 FROM [Customers] AS [c]
 OUTER APPLY [Orders] AS [o]
 ORDER BY [c].[CustomerID], [o].[OrderDate] DESC, [o].[OrderID]
-""");
+"""
+        );
     }
 
     public override async Task Reverse_in_projection_subquery_single_result(bool async)
@@ -1817,7 +2042,8 @@ OUTER APPLY (
     ORDER BY [o].[OrderDate] DESC, [o].[OrderID]
 ) AS [t]
 ORDER BY [c].[CustomerID]
-""");
+"""
+        );
     }
 
     public override async Task Reverse_in_projection_scalar_subquery(bool async)
@@ -1832,7 +2058,8 @@ SELECT COALESCE((
     ORDER BY [o].[OrderDate] DESC, [o].[OrderID]), 0)
 FROM [Customers] AS [c]
 ORDER BY [c].[CustomerID]
-""");
+"""
+        );
     }
 
     public override async Task Projection_AsEnumerable_projection(bool async)
@@ -1853,7 +2080,8 @@ WHERE [c].[CustomerID] LIKE N'A%' AND (
     FROM [Orders] AS [o]
     WHERE [o].[CustomerID] = [c].[CustomerID] AND [o].[OrderID] < 11000) > 0
 ORDER BY [c].[CustomerID]
-""");
+"""
+        );
     }
 
     public override async Task Projection_custom_type_in_both_sides_of_ternary(bool async)
@@ -1868,7 +2096,8 @@ SELECT CASE
 END
 FROM [Customers] AS [c]
 ORDER BY [c].[CustomerID]
-""");
+"""
+        );
     }
 
     public override async Task Projecting_multiple_collection_with_same_constant_works(bool async)
@@ -1883,10 +2112,13 @@ LEFT JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
 LEFT JOIN [Orders] AS [o0] ON [c].[CustomerID] = [o0].[CustomerID]
 WHERE [c].[CustomerID] = N'ALFKI'
 ORDER BY [c].[CustomerID], [o].[OrderID]
-""");
+"""
+        );
     }
 
-    public override async Task Custom_projection_reference_navigation_PK_to_FK_optimization(bool async)
+    public override async Task Custom_projection_reference_navigation_PK_to_FK_optimization(
+        bool async
+    )
     {
         await base.Custom_projection_reference_navigation_PK_to_FK_optimization(async);
 
@@ -1895,12 +2127,17 @@ ORDER BY [c].[CustomerID], [o].[OrderID]
 SELECT [o].[OrderID], [c].[CustomerID], [c].[City], [o].[OrderDate]
 FROM [Orders] AS [o]
 LEFT JOIN [Customers] AS [c] ON [o].[CustomerID] = [c].[CustomerID]
-""");
+"""
+        );
     }
 
-    public override async Task Projecting_Length_of_a_string_property_after_FirstOrDefault_on_correlated_collection(bool async)
+    public override async Task Projecting_Length_of_a_string_property_after_FirstOrDefault_on_correlated_collection(
+        bool async
+    )
     {
-        await base.Projecting_Length_of_a_string_property_after_FirstOrDefault_on_correlated_collection(async);
+        await base.Projecting_Length_of_a_string_property_after_FirstOrDefault_on_correlated_collection(
+            async
+        );
 
         AssertSql(
             """
@@ -1911,7 +2148,8 @@ SELECT (
     ORDER BY [o].[OrderID])
 FROM [Customers] AS [c]
 ORDER BY [c].[CustomerID]
-""");
+"""
+        );
     }
 
     public override async Task Projecting_count_of_navigation_which_is_generic_list(bool async)
@@ -1926,10 +2164,13 @@ SELECT (
     WHERE [c].[CustomerID] = [o].[CustomerID])
 FROM [Customers] AS [c]
 ORDER BY [c].[CustomerID]
-""");
+"""
+        );
     }
 
-    public override async Task Projecting_count_of_navigation_which_is_generic_collection(bool async)
+    public override async Task Projecting_count_of_navigation_which_is_generic_collection(
+        bool async
+    )
     {
         await base.Projecting_count_of_navigation_which_is_generic_collection(async);
 
@@ -1941,10 +2182,13 @@ SELECT (
     WHERE [c].[CustomerID] = [o].[CustomerID])
 FROM [Customers] AS [c]
 ORDER BY [c].[CustomerID]
-""");
+"""
+        );
     }
 
-    public override async Task Projecting_count_of_navigation_which_is_generic_collection_using_convert(bool async)
+    public override async Task Projecting_count_of_navigation_which_is_generic_collection_using_convert(
+        bool async
+    )
     {
         await base.Projecting_count_of_navigation_which_is_generic_collection_using_convert(async);
 
@@ -1954,10 +2198,13 @@ SELECT [c].[CustomerID], [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].
 FROM [Customers] AS [c]
 LEFT JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
 ORDER BY [c].[CustomerID]
-""");
+"""
+        );
     }
 
-    public override async Task Projection_take_projection_doesnt_project_intermittent_column(bool async)
+    public override async Task Projection_take_projection_doesnt_project_intermittent_column(
+        bool async
+    )
     {
         await base.Projection_take_projection_doesnt_project_intermittent_column(async);
 
@@ -1968,10 +2215,13 @@ ORDER BY [c].[CustomerID]
 SELECT TOP(@__p_0) [c].[CustomerID] + N' ' + COALESCE([c].[City], N'') AS [Aggregate]
 FROM [Customers] AS [c]
 ORDER BY [c].[CustomerID]
-""");
+"""
+        );
     }
 
-    public override async Task Projection_skip_projection_doesnt_project_intermittent_column(bool async)
+    public override async Task Projection_skip_projection_doesnt_project_intermittent_column(
+        bool async
+    )
     {
         await base.Projection_skip_projection_doesnt_project_intermittent_column(async);
 
@@ -1983,12 +2233,17 @@ SELECT [c].[CustomerID] + N' ' + COALESCE([c].[City], N'') AS [Aggregate]
 FROM [Customers] AS [c]
 ORDER BY [c].[CustomerID]
 OFFSET @__p_0 ROWS
-""");
+"""
+        );
     }
 
-    public override async Task Projection_Distinct_projection_preserves_columns_used_for_distinct_in_subquery(bool async)
+    public override async Task Projection_Distinct_projection_preserves_columns_used_for_distinct_in_subquery(
+        bool async
+    )
     {
-        await base.Projection_Distinct_projection_preserves_columns_used_for_distinct_in_subquery(async);
+        await base.Projection_Distinct_projection_preserves_columns_used_for_distinct_in_subquery(
+            async
+        );
 
         AssertSql(
             """
@@ -1997,7 +2252,8 @@ FROM (
     SELECT DISTINCT [c].[CustomerID], SUBSTRING([c].[CustomerID], 0 + 1, 1) AS [FirstLetter], N'Foo' AS [Foo]
     FROM [Customers] AS [c]
 ) AS [t]
-""");
+"""
+        );
     }
 
     public override async Task Projection_take_predicate_projection(bool async)
@@ -2016,10 +2272,13 @@ FROM (
 ) AS [t]
 WHERE [t].[CustomerID] LIKE N'A%'
 ORDER BY [t].[CustomerID]
-""");
+"""
+        );
     }
 
-    public override async Task Do_not_erase_projection_mapping_when_adding_single_projection(bool async)
+    public override async Task Do_not_erase_projection_mapping_when_adding_single_projection(
+        bool async
+    )
     {
         await base.Do_not_erase_projection_mapping_when_adding_single_projection(async);
 
@@ -2050,7 +2309,8 @@ LEFT JOIN (
 ) AS [t2] ON [o].[OrderID] = [t2].[OrderID]
 WHERE [o].[OrderID] < 10350
 ORDER BY [o].[OrderID], [t].[OrderID], [t].[ProductID], [t].[ProductID0], [t0].[OrderID], [t0].[ProductID], [t0].[ProductID0], [t2].[OrderID], [t2].[ProductID]
-""");
+"""
+        );
     }
 
     public override async Task Ternary_in_client_eval_assigns_correct_types(bool async)
@@ -2069,7 +2329,8 @@ END
 FROM [Orders] AS [o]
 WHERE [o].[OrderID] < 10300
 ORDER BY [o].[OrderID]
-""");
+"""
+        );
     }
 
     public override async Task Projecting_after_navigation_and_distinct(bool async)
@@ -2095,12 +2356,17 @@ OUTER APPLY (
     )
 ) AS [t0]
 ORDER BY [t].[CustomerID], [t0].[OrderID]
-""");
+"""
+        );
     }
 
-    public override async Task Correlated_collection_after_distinct_with_complex_projection_containing_original_identifier(bool async)
+    public override async Task Correlated_collection_after_distinct_with_complex_projection_containing_original_identifier(
+        bool async
+    )
     {
-        await base.Correlated_collection_after_distinct_with_complex_projection_containing_original_identifier(async);
+        await base.Correlated_collection_after_distinct_with_complex_projection_containing_original_identifier(
+            async
+        );
 
         AssertSql(
             """
@@ -2120,10 +2386,13 @@ OUTER APPLY (
     )
 ) AS [t0]
 ORDER BY [t].[OrderID]
-""");
+"""
+        );
     }
 
-    public override async Task Correlated_collection_after_distinct_not_containing_original_identifier(bool async)
+    public override async Task Correlated_collection_after_distinct_not_containing_original_identifier(
+        bool async
+    )
     {
         await base.Correlated_collection_after_distinct_not_containing_original_identifier(async);
 
@@ -2145,24 +2414,37 @@ OUTER APPLY (
     )
 ) AS [t0]
 ORDER BY [t].[OrderDate], [t].[CustomerID]
-""");
+"""
+        );
     }
 
-    public override async Task Correlated_collection_after_distinct_with_complex_projection_not_containing_original_identifier(bool async)
+    public override async Task Correlated_collection_after_distinct_with_complex_projection_not_containing_original_identifier(
+        bool async
+    )
     {
         // Identifier set for Distinct. Issue #24440.
         Assert.Equal(
             RelationalStrings.InsufficientInformationToIdentifyElementOfCollectionJoin,
-            (await Assert.ThrowsAsync<InvalidOperationException>(
-                () => base.Correlated_collection_after_distinct_with_complex_projection_not_containing_original_identifier(async)))
-            .Message);
+            (
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        base.Correlated_collection_after_distinct_with_complex_projection_not_containing_original_identifier(
+                            async
+                        )
+                )
+            ).Message
+        );
 
         AssertSql();
     }
 
-    public override async Task Correlated_collection_after_groupby_with_complex_projection_containing_original_identifier(bool async)
+    public override async Task Correlated_collection_after_groupby_with_complex_projection_containing_original_identifier(
+        bool async
+    )
     {
-        await base.Correlated_collection_after_groupby_with_complex_projection_containing_original_identifier(async);
+        await base.Correlated_collection_after_groupby_with_complex_projection_containing_original_identifier(
+            async
+        );
 
         AssertSql(
             """
@@ -2186,7 +2468,8 @@ OUTER APPLY (
     )
 ) AS [t1]
 ORDER BY [t0].[OrderID]
-""");
+"""
+        );
     }
 
     public override async Task Select_nested_collection_deep(bool async)
@@ -2209,7 +2492,8 @@ OUTER APPLY (
 ) AS [t0]
 WHERE [c].[City] = N'London'
 ORDER BY [c].[CustomerID], [t0].[OrderID], [t0].[OrderID00]
-""");
+"""
+        );
     }
 
     public override async Task Select_nested_collection_deep_distinct_no_identifiers(bool async)
@@ -2238,7 +2522,8 @@ OUTER APPLY (
     ) AS [t2]
 ) AS [t1]
 ORDER BY [t].[City], [t1].[OrderID], [t1].[OrderID00]
-""");
+"""
+        );
     }
 
     public override async Task Collection_include_over_result_of_single_non_scalar(bool async)
@@ -2265,10 +2550,13 @@ LEFT JOIN (
 LEFT JOIN [Order Details] AS [o2] ON [t0].[OrderID] = [o2].[OrderID]
 WHERE [c].[CustomerID] LIKE N'F%'
 ORDER BY [c].[CustomerID], [t].[OrderID], [t].[OrderID0], [t].[ProductID], [t0].[OrderID], [o2].[OrderID]
-""");
+"""
+        );
     }
 
-    public override async Task Collection_projection_selecting_outer_element_followed_by_take(bool async)
+    public override async Task Collection_projection_selecting_outer_element_followed_by_take(
+        bool async
+    )
     {
         await base.Collection_projection_selecting_outer_element_followed_by_take(async);
 
@@ -2294,10 +2582,13 @@ OUTER APPLY (
     WHERE [t].[CustomerID] = [o].[CustomerID]
 ) AS [t0]
 ORDER BY [t].[CustomerID], [t0].[OrderID]
-""");
+"""
+        );
     }
 
-    public override async Task Take_on_top_level_and_on_collection_projection_with_outer_apply(bool async)
+    public override async Task Take_on_top_level_and_on_collection_projection_with_outer_apply(
+        bool async
+    )
     {
         await base.Take_on_top_level_and_on_collection_projection_with_outer_apply(async);
 
@@ -2321,7 +2612,8 @@ OUTER APPLY (
     INNER JOIN [Products] AS [p] ON [t1].[ProductID] = [p].[ProductID]
 ) AS [t0]
 ORDER BY [t].[OrderID], [t0].[OrderID] DESC, [t0].[ProductID0]
-""");
+"""
+        );
     }
 
     public override async Task Take_on_correlated_collection_in_first(bool async)
@@ -2351,7 +2643,8 @@ OUTER APPLY (
     LEFT JOIN [Customers] AS [c0] ON [t1].[CustomerID] = [c0].[CustomerID]
 ) AS [t0]
 ORDER BY [t].[CustomerID], [t0].[OrderDate], [t0].[OrderID]
-""");
+"""
+        );
     }
 
     public override async Task Client_projection_via_ctor_arguments(bool async)
@@ -2371,10 +2664,13 @@ FROM (
 ) AS [t]
 LEFT JOIN [Orders] AS [o0] ON [t].[CustomerID] = [o0].[CustomerID]
 ORDER BY [t].[CustomerID]
-""");
+"""
+        );
     }
 
-    public override async Task Client_projection_with_string_initialization_with_scalar_subquery(bool async)
+    public override async Task Client_projection_with_string_initialization_with_scalar_subquery(
+        bool async
+    )
     {
         await base.Client_projection_with_string_initialization_with_scalar_subquery(async);
 
@@ -2386,7 +2682,8 @@ SELECT [c].[CustomerID], (
     WHERE [c].[CustomerID] = [o].[CustomerID] AND [o].[OrderID] < 11000), [c].[City], N'test' + COALESCE([c].[City], N'')
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] LIKE N'F%'
-""");
+"""
+        );
     }
 
     public override async Task MemberInit_in_projection_without_arguments(bool async)
@@ -2400,7 +2697,8 @@ FROM [Customers] AS [c]
 LEFT JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
 WHERE [c].[CustomerID] LIKE N'F%'
 ORDER BY [c].[CustomerID]
-""");
+"""
+        );
     }
 
     public override async Task VisitLambda_should_not_be_visited_trivially(bool async)
@@ -2412,7 +2710,8 @@ ORDER BY [c].[CustomerID]
 SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
 FROM [Orders] AS [o]
 WHERE [o].[CustomerID] LIKE N'A%'
-""");
+"""
+        );
     }
 
     public override async Task Select_anonymous_literal(bool async)
@@ -2423,7 +2722,8 @@ WHERE [o].[CustomerID] LIKE N'A%'
             """
 SELECT 10 AS [X]
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override async Task Select_anonymous_nested(bool async)
@@ -2434,7 +2734,8 @@ FROM [Customers] AS [c]
             """
 SELECT [c].[City], [c].[Country]
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override async Task Projection_when_arithmetic_mixed_subqueries(bool async)
@@ -2457,7 +2758,8 @@ CROSS JOIN (
     ORDER BY [e].[EmployeeID]
 ) AS [t0]
 ORDER BY [t].[OrderID]
-""");
+"""
+        );
     }
 
     public override async Task Select_datetime_Ticks_component(bool async)
@@ -2468,7 +2770,8 @@ ORDER BY [t].[OrderID]
             """
 SELECT [o].[OrderDate]
 FROM [Orders] AS [o]
-""");
+"""
+        );
     }
 
     public override async Task Select_datetime_TimeOfDay_component(bool async)
@@ -2479,7 +2782,8 @@ FROM [Orders] AS [o]
             """
 SELECT CONVERT(time, [o].[OrderDate])
 FROM [Orders] AS [o]
-""");
+"""
+        );
     }
 
     public override async Task Select_anonymous_with_object(bool async)
@@ -2490,7 +2794,8 @@ FROM [Orders] AS [o]
             """
 SELECT [c].[City], [c].[CustomerID], [c].[Address], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override async Task Client_method_in_projection_requiring_materialization_1(bool async)
@@ -2502,7 +2807,8 @@ FROM [Customers] AS [c]
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] LIKE N'A%'
-""");
+"""
+        );
     }
 
     public override async Task Select_datetime_DayOfWeek_component(bool async)
@@ -2513,7 +2819,8 @@ WHERE [c].[CustomerID] LIKE N'A%'
             """
 SELECT [o].[OrderDate]
 FROM [Orders] AS [o]
-""");
+"""
+        );
     }
 
     public override async Task Select_scalar_primitive(bool async)
@@ -2524,7 +2831,8 @@ FROM [Orders] AS [o]
             """
 SELECT [e].[EmployeeID]
 FROM [Employees] AS [e]
-""");
+"""
+        );
     }
 
     public override async Task Client_method_in_projection_requiring_materialization_2(bool async)
@@ -2536,7 +2844,8 @@ FROM [Employees] AS [e]
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] LIKE N'A%'
-""");
+"""
+        );
     }
 
     public override async Task Select_anonymous_empty(bool async)
@@ -2547,7 +2856,8 @@ WHERE [c].[CustomerID] LIKE N'A%'
             """
 SELECT 1
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override async Task Select_customer_table(bool async)
@@ -2558,7 +2868,8 @@ FROM [Customers] AS [c]
             """
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override async Task Select_into(bool async)
@@ -2570,7 +2881,8 @@ FROM [Customers] AS [c]
 SELECT [c].[CustomerID]
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] = N'ALFKI'
-""");
+"""
+        );
     }
 
     public override async Task Select_bool_closure(bool async)
@@ -2586,7 +2898,8 @@ FROM [Customers] AS [c]
             """
 SELECT 1
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override async Task Select_customer_identity(bool async)
@@ -2597,12 +2910,17 @@ FROM [Customers] AS [c]
             """
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
-    public override async Task Correlated_collection_after_groupby_with_complex_projection_not_containing_original_identifier(bool async)
+    public override async Task Correlated_collection_after_groupby_with_complex_projection_not_containing_original_identifier(
+        bool async
+    )
     {
-        await base.Correlated_collection_after_groupby_with_complex_projection_not_containing_original_identifier(async);
+        await base.Correlated_collection_after_groupby_with_complex_projection_not_containing_original_identifier(
+            async
+        );
 
         AssertSql(
             """
@@ -2626,10 +2944,13 @@ OUTER APPLY (
     )
 ) AS [t1]
 ORDER BY [t0].[CustomerID], [t0].[Complex]
-""");
+"""
+        );
     }
 
-    public override async Task Select_bool_closure_with_order_by_property_with_cast_to_nullable(bool async)
+    public override async Task Select_bool_closure_with_order_by_property_with_cast_to_nullable(
+        bool async
+    )
     {
         await base.Select_bool_closure_with_order_by_property_with_cast_to_nullable(async);
 
@@ -2658,7 +2979,8 @@ LEFT JOIN (
 ) AS [t] ON [c].[CustomerID] = [t].[CustomerID]
 WHERE [c].[CustomerID] LIKE N'F%'
 ORDER BY [c].[CustomerID], [t].[OrderID], [t].[OrderID0]
-""");
+"""
+        );
     }
 
     public override async Task List_from_result_of_single_result(bool async)
@@ -2675,7 +2997,8 @@ FROM (
 ) AS [t]
 LEFT JOIN [Orders] AS [o] ON [t].[CustomerID] = [o].[CustomerID]
 ORDER BY [t].[CustomerID]
-""");
+"""
+        );
     }
 
     public override async Task List_from_result_of_single_result_2(bool async)
@@ -2692,7 +3015,8 @@ FROM (
 ) AS [t]
 LEFT JOIN [Orders] AS [o] ON [t].[CustomerID] = [o].[CustomerID]
 ORDER BY [t].[CustomerID]
-""");
+"""
+        );
     }
 
     public override async Task List_from_result_of_single_result_3(bool async)
@@ -2717,7 +3041,8 @@ LEFT JOIN (
 ) AS [t0] ON [t].[CustomerID] = [t0].[CustomerID]
 LEFT JOIN [Order Details] AS [o0] ON [t0].[OrderID] = [o0].[OrderID]
 ORDER BY [t].[CustomerID], [t0].[OrderID], [o0].[OrderID]
-""");
+"""
+        );
     }
 
     public override async Task Using_enumerable_parameter_in_projection(bool async)
@@ -2729,12 +3054,12 @@ ORDER BY [t].[CustomerID], [t0].[OrderID], [o0].[OrderID]
 SELECT [c].[CustomerID]
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] LIKE N'F%'
-""");
+"""
+        );
     }
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
-    protected override void ClearLog()
-        => Fixture.TestSqlLoggerFactory.Clear();
+    protected override void ClearLog() => Fixture.TestSqlLoggerFactory.Clear();
 }

@@ -16,7 +16,7 @@ public abstract class HostMatcherPolicyIntegrationTestBase
     public async Task Match_Host()
     {
         // Arrange
-        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "contoso.com", });
+        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "contoso.com" });
 
         var matcher = CreateMatcher(endpoint);
         var httpContext = CreateContext("/hello", "contoso.com");
@@ -32,7 +32,7 @@ public abstract class HostMatcherPolicyIntegrationTestBase
     public async Task Match_HostWithPort()
     {
         // Arrange
-        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "contoso.com:8080", });
+        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "contoso.com:8080" });
 
         var matcher = CreateMatcher(endpoint);
         var httpContext = CreateContext("/hello", "contoso.com:8080");
@@ -48,7 +48,7 @@ public abstract class HostMatcherPolicyIntegrationTestBase
     public async Task Match_Host_Unicode()
     {
         // Arrange
-        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "æon.contoso.com", });
+        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "æon.contoso.com" });
 
         var matcher = CreateMatcher(endpoint);
         var httpContext = CreateContext("/hello", "æon.contoso.com");
@@ -64,7 +64,7 @@ public abstract class HostMatcherPolicyIntegrationTestBase
     public async Task Match_HostWithPort_IncorrectPort()
     {
         // Arrange
-        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "contoso.com:8080", });
+        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "contoso.com:8080" });
 
         var matcher = CreateMatcher(endpoint);
         var httpContext = CreateContext("/hello", "contoso.com:1111");
@@ -80,7 +80,7 @@ public abstract class HostMatcherPolicyIntegrationTestBase
     public async Task Match_HostWithPort_IncorrectHost()
     {
         // Arrange
-        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "contoso.com:8080", });
+        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "contoso.com:8080" });
 
         var matcher = CreateMatcher(endpoint);
         var httpContext = CreateContext("/hello", "www.contoso.com:8080");
@@ -96,7 +96,7 @@ public abstract class HostMatcherPolicyIntegrationTestBase
     public async Task Match_HostWithWildcard_Unicode()
     {
         // Arrange
-        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "*.contoso.com:8080", });
+        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "*.contoso.com:8080" });
 
         var matcher = CreateMatcher(endpoint);
         var httpContext = CreateContext("/hello", "æon.contoso.com:8080");
@@ -112,7 +112,7 @@ public abstract class HostMatcherPolicyIntegrationTestBase
     public async Task Match_HostWithWildcard_NoSubdomain()
     {
         // Arrange
-        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "*.contoso.com:8080", });
+        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "*.contoso.com:8080" });
 
         var matcher = CreateMatcher(endpoint);
         var httpContext = CreateContext("/hello", "contoso.com:8080");
@@ -128,7 +128,7 @@ public abstract class HostMatcherPolicyIntegrationTestBase
     public async Task Match_HostWithWildcard_Subdomain()
     {
         // Arrange
-        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "*.contoso.com:8080", });
+        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "*.contoso.com:8080" });
 
         var matcher = CreateMatcher(endpoint);
         var httpContext = CreateContext("/hello", "www.contoso.com:8080");
@@ -144,7 +144,7 @@ public abstract class HostMatcherPolicyIntegrationTestBase
     public async Task Match_HostWithWildcard_MultipleSubdomains()
     {
         // Arrange
-        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "*.contoso.com:8080", });
+        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "*.contoso.com:8080" });
 
         var matcher = CreateMatcher(endpoint);
         var httpContext = CreateContext("/hello", "www.blog.contoso.com:8080");
@@ -160,7 +160,7 @@ public abstract class HostMatcherPolicyIntegrationTestBase
     public async Task Match_HostWithWildcard_PrefixNotInSubdomain()
     {
         // Arrange
-        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "*.contoso.com:8080", });
+        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "*.contoso.com:8080" });
 
         var matcher = CreateMatcher(endpoint);
         var httpContext = CreateContext("/hello", "mycontoso.com:8080");
@@ -176,7 +176,10 @@ public abstract class HostMatcherPolicyIntegrationTestBase
     public async Task Match_HostAndHostWithWildcard_NoSubdomain()
     {
         // Arrange
-        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "contoso.com:8080", "*.contoso.com:8080", });
+        var endpoint = CreateEndpoint(
+            "/hello",
+            hosts: new string[] { "contoso.com:8080", "*.contoso.com:8080" }
+        );
 
         var matcher = CreateMatcher(endpoint);
         var httpContext = CreateContext("/hello", "contoso.com:8080");
@@ -192,7 +195,7 @@ public abstract class HostMatcherPolicyIntegrationTestBase
     public async Task Match_Host_CaseInsensitive()
     {
         // Arrange
-        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "Contoso.COM", });
+        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "Contoso.COM" });
 
         var matcher = CreateMatcher(endpoint);
         var httpContext = CreateContext("/hello", "contoso.com");
@@ -208,7 +211,7 @@ public abstract class HostMatcherPolicyIntegrationTestBase
     public async Task Match_HostWithPort_InferHttpPort()
     {
         // Arrange
-        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "contoso.com:80", });
+        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "contoso.com:80" });
 
         var matcher = CreateMatcher(endpoint);
         var httpContext = CreateContext("/hello", "contoso.com", "http");
@@ -224,7 +227,7 @@ public abstract class HostMatcherPolicyIntegrationTestBase
     public async Task Match_HostWithPort_InferHttpsPort()
     {
         // Arrange
-        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "contoso.com:443", });
+        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "contoso.com:443" });
 
         var matcher = CreateMatcher(endpoint);
         var httpContext = CreateContext("/hello", "contoso.com", "https");
@@ -240,7 +243,7 @@ public abstract class HostMatcherPolicyIntegrationTestBase
     public async Task Match_HostWithPort_NoHostHeader()
     {
         // Arrange
-        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "contoso.com:443", });
+        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "contoso.com:443" });
 
         var matcher = CreateMatcher(endpoint);
         var httpContext = CreateContext("/hello", null, "https");
@@ -256,7 +259,7 @@ public abstract class HostMatcherPolicyIntegrationTestBase
     public async Task Match_Port_NoHostHeader_InferHttpsPort()
     {
         // Arrange
-        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "*:443", });
+        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "*:443" });
 
         var matcher = CreateMatcher(endpoint);
         var httpContext = CreateContext("/hello", null, "https");
@@ -304,7 +307,7 @@ public abstract class HostMatcherPolicyIntegrationTestBase
     public async Task Match_WildcardHost_MatchesAnyHost()
     {
         // Arrange
-        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "*", });
+        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "*" });
 
         var matcher = CreateMatcher(endpoint);
         var httpContext = CreateContext("/hello", "contoso.com");
@@ -320,7 +323,7 @@ public abstract class HostMatcherPolicyIntegrationTestBase
     public async Task Match_WildcardHostAndWildcardPort_MatchesAnyHost()
     {
         // Arrange
-        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "*:*", });
+        var endpoint = CreateEndpoint("/hello", hosts: new string[] { "*:*" });
 
         var matcher = CreateMatcher(endpoint);
         var httpContext = CreateContext("/hello", "contoso.com");
@@ -336,7 +339,7 @@ public abstract class HostMatcherPolicyIntegrationTestBase
     public async Task Match_CatchAllRouteWithMatchingHost_Success()
     {
         // Arrange
-        var endpoint = CreateEndpoint("/{**path}", hosts: new string[] { "contoso.com", });
+        var endpoint = CreateEndpoint("/{**path}", hosts: new string[] { "contoso.com" });
 
         var matcher = CreateMatcher(endpoint);
         var httpContext = CreateContext("/hello", "contoso.com");
@@ -352,7 +355,7 @@ public abstract class HostMatcherPolicyIntegrationTestBase
     public async Task Match_CatchAllRouteFailureHost_NoMatch()
     {
         // Arrange
-        var endpoint = CreateEndpoint("/{**path}", hosts: new string[] { "contoso.com", });
+        var endpoint = CreateEndpoint("/{**path}", hosts: new string[] { "contoso.com" });
 
         var matcher = CreateMatcher(endpoint);
         var httpContext = CreateContext("/hello", "nomatch.com");
@@ -381,10 +384,7 @@ public abstract class HostMatcherPolicyIntegrationTestBase
         return builder.Build();
     }
 
-    internal static HttpContext CreateContext(
-        string path,
-        string host,
-        string scheme = null)
+    internal static HttpContext CreateContext(string path, string host, string scheme = null)
     {
         var httpContext = new DefaultHttpContext();
         if (host != null)
@@ -402,7 +402,8 @@ public abstract class HostMatcherPolicyIntegrationTestBase
         object defaults = null,
         object constraints = null,
         int order = 0,
-        string[] hosts = null)
+        string[] hosts = null
+    )
     {
         var metadata = new List<object>();
         if (hosts != null)
@@ -415,13 +416,15 @@ public abstract class HostMatcherPolicyIntegrationTestBase
             metadata.Add(new DynamicEndpointMetadata());
         }
 
-        var displayName = "endpoint: " + template + " " + string.Join(", ", hosts ?? new[] { "*:*" });
+        var displayName =
+            "endpoint: " + template + " " + string.Join(", ", hosts ?? new[] { "*:*" });
         return new RouteEndpoint(
             TestConstants.EmptyRequestDelegate,
             RoutePatternFactory.Parse(template, defaults, constraints),
             order,
             new EndpointMetadataCollection(metadata),
-            displayName);
+            displayName
+        );
     }
 
     internal (Matcher matcher, RouteEndpoint endpoint) CreateMatcher(string template)

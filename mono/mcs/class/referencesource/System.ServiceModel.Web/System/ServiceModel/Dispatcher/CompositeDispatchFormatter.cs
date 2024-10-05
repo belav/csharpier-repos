@@ -13,7 +13,11 @@ namespace System.ServiceModel.Dispatcher
     {
         IDispatchMessageFormatter reply;
         IDispatchMessageFormatter request;
-        public CompositeDispatchFormatter(IDispatchMessageFormatter request, IDispatchMessageFormatter reply)
+
+        public CompositeDispatchFormatter(
+            IDispatchMessageFormatter request,
+            IDispatchMessageFormatter reply
+        )
         {
             this.request = request;
             this.reply = reply;
@@ -24,10 +28,13 @@ namespace System.ServiceModel.Dispatcher
             this.request.DeserializeRequest(message, parameters);
         }
 
-        public Message SerializeReply(MessageVersion messageVersion, object[] parameters, object result)
+        public Message SerializeReply(
+            MessageVersion messageVersion,
+            object[] parameters,
+            object result
+        )
         {
             return this.reply.SerializeReply(messageVersion, parameters, result);
         }
     }
 }
-

@@ -12,9 +12,7 @@ internal sealed class VaryByHeaderPolicy : IOutputCachePolicy
 {
     private readonly StringValues _headerNames;
 
-    private VaryByHeaderPolicy()
-    {
-    }
+    private VaryByHeaderPolicy() { }
 
     public VaryByHeaderPolicy(string header, params string[] headerNames)
     {
@@ -36,7 +34,10 @@ internal sealed class VaryByHeaderPolicy : IOutputCachePolicy
     }
 
     /// <inheritdoc />
-    ValueTask IOutputCachePolicy.CacheRequestAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    ValueTask IOutputCachePolicy.CacheRequestAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
         // No vary by header?
         if (_headerNames.Count == 0)
@@ -45,19 +46,28 @@ internal sealed class VaryByHeaderPolicy : IOutputCachePolicy
             return ValueTask.CompletedTask;
         }
 
-        context.CacheVaryByRules.HeaderNames = StringValues.Concat(context.CacheVaryByRules.HeaderNames, _headerNames);
+        context.CacheVaryByRules.HeaderNames = StringValues.Concat(
+            context.CacheVaryByRules.HeaderNames,
+            _headerNames
+        );
 
         return ValueTask.CompletedTask;
     }
 
     /// <inheritdoc />
-    ValueTask IOutputCachePolicy.ServeFromCacheAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    ValueTask IOutputCachePolicy.ServeFromCacheAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
         return ValueTask.CompletedTask;
     }
 
     /// <inheritdoc />
-    ValueTask IOutputCachePolicy.ServeResponseAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    ValueTask IOutputCachePolicy.ServeResponseAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
         return ValueTask.CompletedTask;
     }

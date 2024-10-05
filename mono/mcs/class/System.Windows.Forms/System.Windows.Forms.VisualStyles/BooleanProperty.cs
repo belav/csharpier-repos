@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,20 +28,20 @@
 
 namespace System.Windows.Forms.VisualStyles
 {
-	public enum BooleanProperty
-	{
-		Transparent = 2201,
-		AutoSize = 2202,
-		BorderOnly = 2203,
-		Composited = 2204,
-		BackgroundFill = 2205,
-		GlyphTransparent = 2206,
-		GlyphOnly = 2207,
-		AlwaysShowSizingBar = 2208,
-		MirrorImage = 2209,
-		UniformSizing = 2210,
-		IntegralSizing = 2211,
-		SourceGrow = 2212,
-		SourceShrink = 2213
-	}
+    public enum BooleanProperty
+    {
+        Transparent = 2201,
+        AutoSize = 2202,
+        BorderOnly = 2203,
+        Composited = 2204,
+        BackgroundFill = 2205,
+        GlyphTransparent = 2206,
+        GlyphOnly = 2207,
+        AlwaysShowSizingBar = 2208,
+        MirrorImage = 2209,
+        UniformSizing = 2210,
+        IntegralSizing = 2211,
+        SourceGrow = 2212,
+        SourceShrink = 2213,
+    }
 }

@@ -28,7 +28,9 @@ namespace System.Security.Cryptography
                 HashAlgorithmNames.SHA256 => (64, 256 / 8),
                 HashAlgorithmNames.SHA384 => (128, 384 / 8),
                 HashAlgorithmNames.SHA512 => (128, 512 / 8),
-                _ => throw new CryptographicException(SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithmId)),
+                _ => throw new CryptographicException(
+                    SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithmId)
+                ),
             };
 
             _key = InitializeKey(key);
@@ -88,6 +90,7 @@ namespace System.Security.Cryptography
         }
 
         private void AppendInnerBuffer() => AppendPaddingBuffer(0x36, _hash1);
+
         private void AppendOuterBuffer() => AppendPaddingBuffer(0x5C, _hash2);
 
         private void AppendPaddingBuffer(byte paddingConstant, HashProvider hash)

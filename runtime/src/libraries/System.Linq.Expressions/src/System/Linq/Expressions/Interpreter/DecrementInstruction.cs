@@ -8,7 +8,14 @@ namespace System.Linq.Expressions.Interpreter
 {
     internal abstract class DecrementInstruction : Instruction
     {
-        private static Instruction? s_Int16, s_Int32, s_Int64, s_UInt16, s_UInt32, s_UInt64, s_Single, s_Double;
+        private static Instruction? s_Int16,
+            s_Int32,
+            s_Int64,
+            s_UInt16,
+            s_UInt32,
+            s_UInt64,
+            s_Single,
+            s_Double;
 
         public override int ConsumedStack => 1;
         public override int ProducedStack => 1;

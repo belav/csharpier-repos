@@ -7,13 +7,8 @@ public class Engine
 {
     public class EngineProxy : Engine, IF1Proxy
     {
-        public EngineProxy(
-            ILazyLoader loader,
-            int id,
-            string name)
-            : base(loader, id, name)
-        {
-        }
+        public EngineProxy(ILazyLoader loader, int id, string name)
+            : base(loader, id, name) { }
 
         public bool CreatedCalled { get; set; }
         public bool InitializingCalled { get; set; }
@@ -25,9 +20,7 @@ public class Engine
     private ICollection<Team> _teams;
     private ICollection<Gearbox> _gearboxes;
 
-    public Engine()
-    {
-    }
+    public Engine() { }
 
     public Engine(ILazyLoader loader, int id, string name)
     {

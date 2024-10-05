@@ -11,11 +11,17 @@ namespace Microsoft.CodeAnalysis.BraceMatching
 {
     internal interface IBraceMatchingService
     {
-        Task<BraceMatchingResult?> GetMatchingBracesAsync(Document document, int position, BraceMatchingOptions options, CancellationToken cancellationToken);
+        Task<BraceMatchingResult?> GetMatchingBracesAsync(
+            Document document,
+            int position,
+            BraceMatchingOptions options,
+            CancellationToken cancellationToken
+        );
     }
 
     [DataContract]
     internal readonly record struct BraceMatchingResult(
         [property: DataMember(Order = 0)] TextSpan LeftSpan,
-        [property: DataMember(Order = 1)] TextSpan RightSpan);
+        [property: DataMember(Order = 1)] TextSpan RightSpan
+    );
 }

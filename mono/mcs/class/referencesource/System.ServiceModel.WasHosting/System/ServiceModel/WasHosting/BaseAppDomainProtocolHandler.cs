@@ -7,28 +7,30 @@ namespace System.ServiceModel.WasHosting
     using System;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
-    using System.ServiceModel;
-    using System.ServiceModel.Channels;
-    using System.Web;
-    using System.Web.Hosting;
-    using System.ServiceModel.Activation;
-    using System.ServiceModel.Diagnostics;
     using System.Runtime;
     using System.Runtime.Diagnostics;
     using System.Runtime.InteropServices;
-
+    using System.ServiceModel;
+    using System.ServiceModel.Activation;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Diagnostics;
+    using System.Web;
+    using System.Web.Hosting;
 
     abstract class BaseAppDomainProtocolHandler : AppDomainProtocolHandler
     {
-        public readonly static TimeSpan DefaultStopTimeout = TimeSpan.FromSeconds(30);
+        public static readonly TimeSpan DefaultStopTimeout = TimeSpan.FromSeconds(30);
 
         string protocolId;
         IListenerChannelCallback listenerChannelCallback;
         protected ListenerChannelContext listenerChannelContext;
         object syncRoot = new object();
 
-        [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode,
-            Justification = "Instantiated by ASP.NET")]
+        [SuppressMessage(
+            FxCop.Category.Performance,
+            FxCop.Rule.AvoidUncalledPrivateCode,
+            Justification = "Instantiated by ASP.NET"
+        )]
         protected BaseAppDomainProtocolHandler(string protocolId)
             : base()
         {
@@ -37,10 +39,7 @@ namespace System.ServiceModel.WasHosting
 
         object ThisLock
         {
-            get
-            {
-                return this.syncRoot;
-            }
+            get { return this.syncRoot; }
         }
 
         protected void OnMessageReceived()
@@ -75,7 +74,11 @@ namespace System.ServiceModel.WasHosting
             int listenerChannelDataLength = listenerChannelCallback.GetBlobLength();
             byte[] listenerChannelData = new byte[listenerChannelDataLength];
             listenerChannelCallback.GetBlob(listenerChannelData, ref listenerChannelDataLength);
-            Debug.Print("BaseAppDomainProtocolHandler.StartListenerChannel() GetBlob() contains " + listenerChannelDataLength + " bytes");
+            Debug.Print(
+                "BaseAppDomainProtocolHandler.StartListenerChannel() GetBlob() contains "
+                    + listenerChannelDataLength
+                    + " bytes"
+            );
 
             listenerChannelContext = ListenerChannelContext.Hydrate(listenerChannelData);
 
@@ -89,29 +92,41 @@ namespace System.ServiceModel.WasHosting
                 OnStart();
 
                 listenerChannelCallback.ReportStarted();
-                Debug.Print("BaseAppDomainProtocolHandler.StartListenerChannel() called ReportStarted()");
+                Debug.Print(
+                    "BaseAppDomainProtocolHandler.StartListenerChannel() called ReportStarted()"
+                );
             }
             catch (CommunicationException exception)
             {
-                Debug.Print("BaseAppDomainProtocolHandler.StartListenerChannel() failed in OnStart():\r\n" + exception);
-                DiagnosticUtility.EventLog.LogEvent(TraceEventType.Error,
+                Debug.Print(
+                    "BaseAppDomainProtocolHandler.StartListenerChannel() failed in OnStart():\r\n"
+                        + exception
+                );
+                DiagnosticUtility.EventLog.LogEvent(
+                    TraceEventType.Error,
                     (ushort)System.Runtime.Diagnostics.EventLogCategory.WebHost,
                     (uint)System.Runtime.Diagnostics.EventLogEventId.WebHostFailedToListen,
                     listenerChannelContext.AppKey,
                     this.protocolId,
                     TraceUtility.CreateSourceString(this),
-                    exception.ToString());
+                    exception.ToString()
+                );
 
                 throw;
             }
         }
 
         protected virtual void OnStart() { }
+
         protected virtual void OnStop() { }
 
         public override void StopProtocol(bool immediate)
         {
-            Debug.Print("BaseAppDomainProtocolHandler.StopProtocol() immediate: " + immediate + " calling ReportStopped()");
+            Debug.Print(
+                "BaseAppDomainProtocolHandler.StopProtocol() immediate: "
+                    + immediate
+                    + " calling ReportStopped()"
+            );
 
             Stop();
             HostingEnvironment.UnregisterObject(this);
@@ -119,7 +134,13 @@ namespace System.ServiceModel.WasHosting
 
         public override void StopListenerChannel(int listenerChannelId, bool immediate)
         {
-            Debug.Print("BaseAppDomainProtocolHandler.StopListenerChannel() listenerChannelId: " + listenerChannelId + " immediate: " + immediate + " calling ReportStopped()");
+            Debug.Print(
+                "BaseAppDomainProtocolHandler.StopListenerChannel() listenerChannelId: "
+                    + listenerChannelId
+                    + " immediate: "
+                    + immediate
+                    + " calling ReportStopped()"
+            );
             if (listenerChannelId != listenerChannelContext.ListenerChannelId)
             {
                 DiagnosticUtility.DebugAssert("Invalid ListenerChannel ID!");
@@ -143,4 +164,3 @@ namespace System.ServiceModel.WasHosting
         }
     }
 }
-

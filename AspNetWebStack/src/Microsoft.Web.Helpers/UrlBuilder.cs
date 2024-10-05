@@ -12,7 +12,8 @@ namespace Microsoft.Web.Helpers
 {
     public class UrlBuilder
     {
-        private static readonly VirtualPathUtilityWrapper _defaultVirtualPathUtility = new VirtualPathUtilityWrapper();
+        private static readonly VirtualPathUtilityWrapper _defaultVirtualPathUtility =
+            new VirtualPathUtilityWrapper();
         private readonly VirtualPathUtilityBase _virtualPathUtility;
         private readonly StringBuilder _params = new StringBuilder();
         private string _path;
@@ -21,33 +22,30 @@ namespace Microsoft.Web.Helpers
         /// Constructs an Url with the current page's virtual path and no query string parameters
         /// </summary>
         public UrlBuilder()
-            : this(null, null)
-        {
-        }
+            : this(null, null) { }
 
         /// <summary>
         /// Constructs an Url with the specified path and no query string parameters.
         /// </summary>
         public UrlBuilder(string path)
-            : this(path, null)
-        {
-        }
+            : this(path, null) { }
 
         /// <summary>
-        /// Constructs an Url with the current page's virtual path and the parameters 
+        /// Constructs an Url with the current page's virtual path and the parameters
         /// </summary>
         /// <param name="parameters"></param>
         public UrlBuilder(object parameters)
-            : this(null, parameters)
-        {
-        }
+            : this(null, parameters) { }
 
         public UrlBuilder(string path, object parameters)
-            : this(GetHttpContext(), null, path, parameters)
-        {
-        }
+            : this(GetHttpContext(), null, path, parameters) { }
 
-        internal UrlBuilder(HttpContextBase httpContext, VirtualPathUtilityBase virtualPathUtility, string path, object parameters)
+        internal UrlBuilder(
+            HttpContextBase httpContext,
+            VirtualPathUtilityBase virtualPathUtility,
+            string path,
+            object parameters
+        )
         {
             _virtualPathUtility = virtualPathUtility;
             Uri uri;
@@ -126,9 +124,12 @@ namespace Microsoft.Web.Helpers
             if (!String.IsNullOrEmpty(name))
             {
                 _params.Append(_params.Length == 0 ? '?' : '&');
-                _params.Append(HttpUtility.UrlEncode(name))
+                _params
+                    .Append(HttpUtility.UrlEncode(name))
                     .Append('=')
-                    .Append(HttpUtility.UrlEncode(Convert.ToString(value, CultureInfo.InvariantCulture)));
+                    .Append(
+                        HttpUtility.UrlEncode(Convert.ToString(value, CultureInfo.InvariantCulture))
+                    );
             }
             return this;
         }

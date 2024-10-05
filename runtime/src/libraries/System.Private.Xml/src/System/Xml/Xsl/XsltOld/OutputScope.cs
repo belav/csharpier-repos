@@ -67,7 +67,14 @@ namespace System.Xml.Xsl.XsltOld
         [MemberNotNull(nameof(_nsUri))]
         [MemberNotNull(nameof(_prefix))]
         [MemberNotNull(nameof(_lang))]
-        internal void Init(string name, string nspace, string prefix, XmlSpace space, string lang, bool mixed)
+        internal void Init(
+            string name,
+            string nspace,
+            string prefix,
+            XmlSpace space,
+            string lang,
+            bool mixed
+        )
         {
             this.scopes = null;
             _name = name;
@@ -86,9 +93,7 @@ namespace System.Xml.Xsl.XsltOld
 
             for (NamespaceDecl? scope = this.scopes; scope != null; scope = scope.Next)
             {
-                if (Ref.Equal(scope.Uri, urn) &&
-                    scope.Prefix != null &&
-                    scope.Prefix.Length > 0)
+                if (Ref.Equal(scope.Uri, urn) && scope.Prefix != null && scope.Prefix.Length > 0)
                 {
                     prefix = scope.Prefix;
                     return true;

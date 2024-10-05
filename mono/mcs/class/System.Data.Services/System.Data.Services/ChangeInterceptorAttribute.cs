@@ -28,21 +28,24 @@
 
 using System.Diagnostics;
 
-namespace System.Data.Services {
-	[AttributeUsage (AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-	public sealed class ChangeInterceptorAttribute : Attribute {
-		public ChangeInterceptorAttribute (string entitySetName)
-		{
-			if (entitySetName == null)
-				throw new ArgumentNullException ("entitySetname");
+namespace System.Data.Services
+{
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
+    public sealed class ChangeInterceptorAttribute : Attribute
+    {
+        public ChangeInterceptorAttribute(string entitySetName)
+        {
+            if (entitySetName == null)
+                throw new ArgumentNullException("entitySetname");
 
-			this.entitySetName = entitySetName;
-		}
+            this.entitySetName = entitySetName;
+        }
 
-		private readonly string entitySetName;
-		public string EntitySetName {
-			[DebuggerStepThrough]
-			get { return this.entitySetName; }
-		}
-	}
+        private readonly string entitySetName;
+        public string EntitySetName
+        {
+            [DebuggerStepThrough]
+            get { return this.entitySetName; }
+        }
+    }
 }

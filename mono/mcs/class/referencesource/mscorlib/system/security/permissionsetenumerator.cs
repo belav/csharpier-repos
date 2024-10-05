@@ -1,59 +1,53 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
-namespace System.Security 
+namespace System.Security
 {
     //PermissionSetEnumerator.cs
-    
+
     using System;
     using System.Collections;
-    using TokenBasedSetEnumerator = System.Security.Util.TokenBasedSetEnumerator;
     using TokenBasedSet = System.Security.Util.TokenBasedSet;
-    
-    internal class PermissionSetEnumerator : IEnumerator 
+    using TokenBasedSetEnumerator = System.Security.Util.TokenBasedSetEnumerator;
+
+    internal class PermissionSetEnumerator : IEnumerator
     {
         PermissionSetEnumeratorInternal enm;
-        
+
         public Object Current
         {
-            get
-            {
-                return enm.Current;
-            }
+            get { return enm.Current; }
         }
 
         public bool MoveNext()
         {
             return enm.MoveNext();
         }
-        
+
         public void Reset()
         {
             enm.Reset();
         }
-        
+
         internal PermissionSetEnumerator(PermissionSet permSet)
         {
             enm = new PermissionSetEnumeratorInternal(permSet);
         }
     }
-    
-    internal struct PermissionSetEnumeratorInternal 
+
+    internal struct PermissionSetEnumeratorInternal
     {
         private PermissionSet m_permSet;
         private TokenBasedSetEnumerator enm;
-        
+
         public Object Current
         {
-            get
-            {
-                return enm.Current;
-            }
+            get { return enm.Current; }
         }
 
         internal PermissionSetEnumeratorInternal(PermissionSet permSet)
@@ -66,12 +60,12 @@ namespace System.Security
         {
             return enm.Index;
         }
-        
+
         public void Reset()
         {
             enm.Reset();
         }
-        
+
         public bool MoveNext()
         {
             while (enm.MoveNext())
@@ -102,4 +96,3 @@ namespace System.Security
         }
     }
 }
-

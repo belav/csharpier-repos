@@ -56,7 +56,10 @@ namespace System.Xml.Schema
 
         public XmlSchema() { }
 
-        public static XmlSchema? Read(TextReader reader, ValidationEventHandler? validationEventHandler)
+        public static XmlSchema? Read(
+            TextReader reader,
+            ValidationEventHandler? validationEventHandler
+        )
         {
             ArgumentNullException.ThrowIfNull(reader);
             return Read(new XmlTextReader(reader), validationEventHandler);
@@ -68,11 +71,19 @@ namespace System.Xml.Schema
             return Read(new XmlTextReader(stream), validationEventHandler);
         }
 
-        public static XmlSchema? Read(XmlReader reader, ValidationEventHandler? validationEventHandler)
+        public static XmlSchema? Read(
+            XmlReader reader,
+            ValidationEventHandler? validationEventHandler
+        )
         {
             ArgumentNullException.ThrowIfNull(reader);
             XmlNameTable nameTable = reader.NameTable;
-            Parser parser = new Parser(SchemaType.XSD, nameTable, new SchemaNames(nameTable), validationEventHandler);
+            Parser parser = new Parser(
+                SchemaType.XSD,
+                nameTable,
+                new SchemaNames(nameTable),
+                validationEventHandler
+            );
             try
             {
                 parser.Parse(reader, null);
@@ -147,10 +158,15 @@ namespace System.Xml.Schema
                 bool ignoreXS = false;
                 if (this.Namespaces != null)
                 { //User may have set both nsManager and Namespaces property on the XmlSchema object
-                    ignoreXS = this.Namespaces.TryLookupPrefix("xs", out _) || this.Namespaces.TryLookupNamespace(XmlReservedNs.NsXs, out _);
+                    ignoreXS =
+                        this.Namespaces.TryLookupPrefix("xs", out _)
+                        || this.Namespaces.TryLookupNamespace(XmlReservedNs.NsXs, out _);
                 }
-                if (!ignoreXS && namespaceManager.LookupPrefix(XmlReservedNs.NsXs) == null &&
-                    namespaceManager.LookupNamespace("xs") == null)
+                if (
+                    !ignoreXS
+                    && namespaceManager.LookupPrefix(XmlReservedNs.NsXs) == null
+                    && namespaceManager.LookupNamespace("xs") == null
+                )
                 {
                     ns.Add("xs", XmlReservedNs.NsXs);
                 }
@@ -164,7 +180,10 @@ namespace System.Xml.Schema
             }
             else if (this.Namespaces != null && this.Namespaces.Count > 0)
             {
-                if (!this.Namespaces.TryLookupPrefix("xs", out _) && !this.Namespaces.TryLookupNamespace(XmlReservedNs.NsXs, out _))
+                if (
+                    !this.Namespaces.TryLookupPrefix("xs", out _)
+                    && !this.Namespaces.TryLookupNamespace(XmlReservedNs.NsXs, out _)
+                )
                 { //Prefix xs not defined AND schema namespace not already mapped to a prefix
                     this.Namespaces.Add("xs", XmlReservedNs.NsXs);
                 }
@@ -182,7 +201,9 @@ namespace System.Xml.Schema
             serializer.Serialize(writer, this, ns);
         }
 
-        [Obsolete("XmlSchema.Compile has been deprecated. Use System.Xml.Schema.XmlSchemaSet for schema compilation and validation.")]
+        [Obsolete(
+            "XmlSchema.Compile has been deprecated. Use System.Xml.Schema.XmlSchemaSet for schema compilation and validation."
+        )]
         public void Compile(ValidationEventHandler? validationEventHandler)
         {
             SchemaInfo sInfo = new SchemaInfo();
@@ -190,7 +211,9 @@ namespace System.Xml.Schema
             CompileSchema(null, null, sInfo, null, validationEventHandler, NameTable, false);
         }
 
-        [Obsolete("XmlSchema.Compile has been deprecated. Use System.Xml.Schema.XmlSchemaSet for schema compilation and validation.")]
+        [Obsolete(
+            "XmlSchema.Compile has been deprecated. Use System.Xml.Schema.XmlSchemaSet for schema compilation and validation."
+        )]
         public void Compile(ValidationEventHandler? validationEventHandler, XmlResolver? resolver)
         {
             SchemaInfo sInfo = new SchemaInfo();
@@ -199,13 +222,25 @@ namespace System.Xml.Schema
         }
 
 #pragma warning disable 618
-        internal bool CompileSchema(XmlSchemaCollection? xsc, XmlResolver? resolver, SchemaInfo schemaInfo, string? ns, ValidationEventHandler? validationEventHandler, XmlNameTable nameTable, bool CompileContentModel)
+        internal bool CompileSchema(
+            XmlSchemaCollection? xsc,
+            XmlResolver? resolver,
+            SchemaInfo schemaInfo,
+            string? ns,
+            ValidationEventHandler? validationEventHandler,
+            XmlNameTable nameTable,
+            bool CompileContentModel
+        )
         {
             //Need to lock here to prevent multi-threading problems when same schema is added to set and compiled
             lock (this)
             {
                 //Preprocessing
-                SchemaCollectionPreprocessor prep = new SchemaCollectionPreprocessor(nameTable, null, validationEventHandler);
+                SchemaCollectionPreprocessor prep = new SchemaCollectionPreprocessor(
+                    nameTable,
+                    null,
+                    validationEventHandler
+                );
                 prep.XmlResolver = resolver;
                 if (!prep.Execute(this, ns, true, xsc))
                 {
@@ -213,7 +248,10 @@ namespace System.Xml.Schema
                 }
 
                 //Compilation
-                SchemaCollectionCompiler compiler = new SchemaCollectionCompiler(nameTable, validationEventHandler);
+                SchemaCollectionCompiler compiler = new SchemaCollectionCompiler(
+                    nameTable,
+                    validationEventHandler
+                );
                 _isCompiled = compiler.Execute(this, schemaInfo, CompileContentModel);
                 this.SetIsCompiled(_isCompiled);
                 return _isCompiled;
@@ -221,7 +259,11 @@ namespace System.Xml.Schema
         }
 #pragma warning restore 618
 
-        internal void CompileSchemaInSet(XmlNameTable nameTable, ValidationEventHandler? eventHandler, XmlSchemaCompilationSettings? compilationSettings)
+        internal void CompileSchemaInSet(
+            XmlNameTable nameTable,
+            ValidationEventHandler? eventHandler,
+            XmlSchemaCompilationSettings? compilationSettings
+        )
         {
             Debug.Assert(_isPreprocessed);
             Compiler setCompiler = new Compiler(nameTable, eventHandler, null, compilationSettings);
@@ -271,22 +313,26 @@ namespace System.Xml.Schema
             set { _version = value; }
         }
 
-        [XmlElement("include", typeof(XmlSchemaInclude)),
-         XmlElement("import", typeof(XmlSchemaImport)),
-         XmlElement("redefine", typeof(XmlSchemaRedefine))]
+        [
+            XmlElement("include", typeof(XmlSchemaInclude)),
+            XmlElement("import", typeof(XmlSchemaImport)),
+            XmlElement("redefine", typeof(XmlSchemaRedefine))
+        ]
         public XmlSchemaObjectCollection Includes
         {
             get { return _includes; }
         }
 
-        [XmlElement("annotation", typeof(XmlSchemaAnnotation)),
-         XmlElement("attribute", typeof(XmlSchemaAttribute)),
-         XmlElement("attributeGroup", typeof(XmlSchemaAttributeGroup)),
-         XmlElement("complexType", typeof(XmlSchemaComplexType)),
-         XmlElement("simpleType", typeof(XmlSchemaSimpleType)),
-         XmlElement("element", typeof(XmlSchemaElement)),
-         XmlElement("group", typeof(XmlSchemaGroup)),
-         XmlElement("notation", typeof(XmlSchemaNotation))]
+        [
+            XmlElement("annotation", typeof(XmlSchemaAnnotation)),
+            XmlElement("attribute", typeof(XmlSchemaAttribute)),
+            XmlElement("attributeGroup", typeof(XmlSchemaAttributeGroup)),
+            XmlElement("complexType", typeof(XmlSchemaComplexType)),
+            XmlElement("simpleType", typeof(XmlSchemaSimpleType)),
+            XmlElement("element", typeof(XmlSchemaElement)),
+            XmlElement("group", typeof(XmlSchemaGroup)),
+            XmlElement("notation", typeof(XmlSchemaNotation))
+        ]
         public XmlSchemaObjectCollection Items
         {
             get { return _items; }
@@ -296,10 +342,7 @@ namespace System.Xml.Schema
         [XmlIgnore]
         public bool IsCompiled
         {
-            get
-            {
-                return _isCompiled || _isCompiledBySet;
-            }
+            get { return _isCompiled || _isCompiledBySet; }
         }
 
         [XmlIgnore]
@@ -327,7 +370,8 @@ namespace System.Xml.Schema
         public XmlSchemaObjectTable Attributes => _attributes ??= new XmlSchemaObjectTable();
 
         [XmlIgnore]
-        public XmlSchemaObjectTable AttributeGroups => _attributeGroups ??= new XmlSchemaObjectTable();
+        public XmlSchemaObjectTable AttributeGroups =>
+            _attributeGroups ??= new XmlSchemaObjectTable();
 
         [XmlIgnore]
         public XmlSchemaObjectTable SchemaTypes => _types ??= new XmlSchemaObjectTable();
@@ -371,10 +415,7 @@ namespace System.Xml.Schema
         internal Uri? BaseUri
         {
             get { return _baseUri; }
-            set
-            {
-                _baseUri = value;
-            }
+            set { _baseUri = value; }
         }
 
         [XmlIgnore]
@@ -537,37 +578,49 @@ namespace System.Xml.Schema
         }
 
 #if TRUST_COMPILE_STATE
-        internal void AddCompiledInfo(SchemaInfo schemaInfo) {
+        internal void AddCompiledInfo(SchemaInfo schemaInfo)
+        {
             XmlQualifiedName itemName;
-            foreach (XmlSchemaElement element in elements.Values) {
+            foreach (XmlSchemaElement element in elements.Values)
+            {
                 itemName = element.QualifiedName;
                 schemaInfo.TargetNamespaces[itemName.Namespace] = true;
-                if (schemaInfo.ElementDecls[itemName] == null) {
+                if (schemaInfo.ElementDecls[itemName] == null)
+                {
                     schemaInfo.ElementDecls.Add(itemName, element.ElementDecl);
                 }
             }
-            foreach (XmlSchemaAttribute attribute in attributes.Values) {
+            foreach (XmlSchemaAttribute attribute in attributes.Values)
+            {
                 itemName = attribute.QualifiedName;
                 schemaInfo.TargetNamespaces[itemName.Namespace] = true;
-                if (schemaInfo.ElementDecls[itemName] == null) {
+                if (schemaInfo.ElementDecls[itemName] == null)
+                {
                     schemaInfo.AttributeDecls.Add(itemName, attribute.AttDef);
                 }
             }
-            foreach (XmlSchemaType type in types.Values) {
+            foreach (XmlSchemaType type in types.Values)
+            {
                 itemName = type.QualifiedName;
                 schemaInfo.TargetNamespaces[itemName.Namespace] = true;
                 XmlSchemaComplexType complexType = type as XmlSchemaComplexType;
-                if ((complexType == null || type != XmlSchemaComplexType.AnyType) && schemaInfo.ElementDeclsByType[itemName] == null) {
+                if (
+                    (complexType == null || type != XmlSchemaComplexType.AnyType)
+                    && schemaInfo.ElementDeclsByType[itemName] == null
+                )
+                {
                     schemaInfo.ElementDeclsByType.Add(itemName, type.ElementDecl);
                 }
             }
-            foreach (XmlSchemaNotation notation in notations.Values) {
+            foreach (XmlSchemaNotation notation in notations.Values)
+            {
                 itemName = notation.QualifiedName;
                 schemaInfo.TargetNamespaces[itemName.Namespace] = true;
                 SchemaNotation no = new SchemaNotation(itemName);
                 no.SystemLiteral = notation.System;
                 no.Pubid = notation.Public;
-                if (schemaInfo.Notations[itemName.Name] == null) {
+                if (schemaInfo.Notations[itemName.Name] == null)
+                {
                     schemaInfo.Notations.Add(itemName.Name, no);
                 }
             }

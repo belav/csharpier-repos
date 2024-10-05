@@ -91,6 +91,7 @@ namespace System.Runtime.InteropServices
             /// </summary>
             public IntPtr Vtable;
         }
+
         /// <summary>
         /// ABI for function dispatch of a COM interface.
         /// </summary>
@@ -113,7 +114,11 @@ namespace System.Runtime.InteropServices
         /// If the interface entries cannot be created and a negative <paramref name="count" /> or <code>null</code> and a non-zero <paramref name="count" /> are returned,
         /// the call to <see cref="GetOrCreateComInterfaceForObject(object, CreateComInterfaceFlags)"/> will throw a <see cref="ArgumentException"/>.
         /// </remarks>
-        protected abstract unsafe ComInterfaceEntry* ComputeVtables(object obj, CreateComInterfaceFlags flags, out int count);
+        protected abstract unsafe ComInterfaceEntry* ComputeVtables(
+            object obj,
+            CreateComInterfaceFlags flags,
+            out int count
+        );
 
         /// <summary>
         /// Create a managed object for the object pointed at by <paramref name="externalComObject"/> respecting the values of <paramref name="flags"/>.

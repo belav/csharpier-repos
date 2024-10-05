@@ -15,15 +15,19 @@ internal sealed unsafe class AsyncAcceptContext : IValueTaskSource<RequestContex
     private NativeOverlapped* _overlapped;
 
     // mutable struct; do not make this readonly
-    private ManualResetValueTaskSourceCore<RequestContext> _mrvts = new()
-    {
-        // We want to run continuations on the IO threads
-        RunContinuationsAsynchronously = false
-    };
+    private ManualResetValueTaskSourceCore<RequestContext> _mrvts =
+        new()
+        {
+            // We want to run continuations on the IO threads
+            RunContinuationsAsynchronously = false,
+        };
 
     private RequestContext? _requestContext;
 
-    internal AsyncAcceptContext(HttpSysListener server, IRequestContextFactory requestContextFactory)
+    internal AsyncAcceptContext(
+        HttpSysListener server,
+        IRequestContextFactory requestContextFactory
+    )
     {
         Server = server;
         _requestContextFactory = requestContextFactory;
@@ -39,8 +43,7 @@ internal sealed unsafe class AsyncAcceptContext : IValueTaskSource<RequestContex
         AllocateNativeRequest();
 
         var statusCode = QueueBeginGetContext();
-        if (statusCode != ErrorCodes.ERROR_SUCCESS &&
-            statusCode != ErrorCodes.ERROR_IO_PENDING)
+        if (statusCode != ErrorCodes.ERROR_SUCCESS && statusCode != ErrorCodes.ERROR_IO_PENDING)
         {
             // some other bad error, possible(?) return values are:
             // ERROR_INVALID_HANDLE, ERROR_INSUFFICIENT_BUFFER, ERROR_OPERATION_ABORTED
@@ -54,8 +57,7 @@ internal sealed unsafe class AsyncAcceptContext : IValueTaskSource<RequestContex
     {
         try
         {
-            if (errorCode != ErrorCodes.ERROR_SUCCESS &&
-                errorCode != ErrorCodes.ERROR_MORE_DATA)
+            if (errorCode != ErrorCodes.ERROR_SUCCESS && errorCode != ErrorCodes.ERROR_MORE_DATA)
             {
                 _mrvts.SetException(new HttpSysException((int)errorCode));
                 return;
@@ -80,8 +82,10 @@ internal sealed unsafe class AsyncAcceptContext : IValueTaskSource<RequestContex
                 // We need to issue a new request, either because auth failed, or because our buffer was too small the first time.
                 var statusCode = QueueBeginGetContext();
 
-                if (statusCode != ErrorCodes.ERROR_SUCCESS &&
-                    statusCode != ErrorCodes.ERROR_IO_PENDING)
+                if (
+                    statusCode != ErrorCodes.ERROR_SUCCESS
+                    && statusCode != ErrorCodes.ERROR_IO_PENDING
+                )
                 {
                     // someother bad error, possible(?) return values are:
                     // ERROR_INVALID_HANDLE, ERROR_INSUFFICIENT_BUFFER, ERROR_OPERATION_ABORTED
@@ -95,9 +99,14 @@ internal sealed unsafe class AsyncAcceptContext : IValueTaskSource<RequestContex
         }
     }
 
-    private static unsafe void IOWaitCallback(uint errorCode, uint numBytes, NativeOverlapped* nativeOverlapped)
+    private static unsafe void IOWaitCallback(
+        uint errorCode,
+        uint numBytes,
+        NativeOverlapped* nativeOverlapped
+    )
     {
-        var acceptContext = (AsyncAcceptContext)ThreadPoolBoundHandle.GetNativeOverlappedState(nativeOverlapped)!;
+        var acceptContext = (AsyncAcceptContext)
+            ThreadPoolBoundHandle.GetNativeOverlappedState(nativeOverlapped)!;
         acceptContext.IOCompleted(errorCode, numBytes);
     }
 
@@ -120,11 +129,16 @@ internal sealed unsafe class AsyncAcceptContext : IValueTaskSource<RequestContex
                 _requestContext.NativeRequest,
                 _requestContext.Size,
                 &bytesTransferred,
-                _overlapped);
+                _overlapped
+            );
 
-            if ((statusCode == ErrorCodes.ERROR_CONNECTION_INVALID
-                || statusCode == ErrorCodes.ERROR_INVALID_PARAMETER)
-                && _requestContext.RequestId != 0)
+            if (
+                (
+                    statusCode == ErrorCodes.ERROR_CONNECTION_INVALID
+                    || statusCode == ErrorCodes.ERROR_INVALID_PARAMETER
+                )
+                && _requestContext.RequestId != 0
+            )
             {
                 // ERROR_CONNECTION_INVALID:
                 // The client reset the connection between the time we got the MORE_DATA error and when we called HttpReceiveHttpRequest
@@ -146,14 +160,15 @@ internal sealed unsafe class AsyncAcceptContext : IValueTaskSource<RequestContex
                 AllocateNativeRequest(bytesTransferred);
                 retry = true;
             }
-            else if (statusCode == ErrorCodes.ERROR_SUCCESS
-                && HttpSysListener.SkipIOCPCallbackOnSuccess)
+            else if (
+                statusCode == ErrorCodes.ERROR_SUCCESS
+                && HttpSysListener.SkipIOCPCallbackOnSuccess
+            )
             {
                 // IO operation completed synchronously - callback won't be called to signal completion.
                 IOCompleted(statusCode, bytesTransferred);
             }
-        }
-        while (retry);
+        } while (retry);
         return statusCode;
     }
 
@@ -208,7 +223,12 @@ internal sealed unsafe class AsyncAcceptContext : IValueTaskSource<RequestContex
         return _mrvts.GetStatus(token);
     }
 
-    public void OnCompleted(Action<object?> continuation, object? state, short token, ValueTaskSourceOnCompletedFlags flags)
+    public void OnCompleted(
+        Action<object?> continuation,
+        object? state,
+        short token,
+        ValueTaskSourceOnCompletedFlags flags
+    )
     {
         _mrvts.OnCompleted(continuation, state, token, flags);
     }

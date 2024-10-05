@@ -16,14 +16,19 @@ internal class RetryHandler : DelegatingHandler
         HttpClientHandler httpClientHandler,
         ITestOutputHelper output,
         TimeSpan initialWaitTime,
-        int maxAttempts) : base(httpClientHandler)
+        int maxAttempts
+    )
+        : base(httpClientHandler)
     {
         _waitIntervalBeforeRetry = initialWaitTime;
         _output = output;
         _maxRetries = maxAttempts;
     }
 
-    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+    protected override async Task<HttpResponseMessage> SendAsync(
+        HttpRequestMessage request,
+        CancellationToken cancellationToken
+    )
     {
         HttpResponseMessage result = null;
         var url = request.RequestUri;
@@ -41,7 +46,9 @@ internal class RetryHandler : DelegatingHandler
                 }
                 else
                 {
-                    _output.WriteLine($"Request '{method} - {url}' failed with {result.StatusCode}.");
+                    _output.WriteLine(
+                        $"Request '{method} - {url}' failed with {result.StatusCode}."
+                    );
                 }
             }
             catch (Exception e)

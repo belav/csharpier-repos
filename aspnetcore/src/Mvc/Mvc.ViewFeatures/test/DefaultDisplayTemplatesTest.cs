@@ -19,24 +19,24 @@ public class DefaultDisplayTemplatesTest
         get
         {
             return new TheoryData<string, bool, string>
-                {
-                    { "Simple Display Text", false, "Simple Display Text" },
-                    { "Simple Display Text", true, "HtmlEncode[[Simple Display Text]]" },
-                    { "<blink>text</blink>", false, "<blink>text</blink>" },
-                    { "<blink>text</blink>", true, "HtmlEncode[[<blink>text</blink>]]" },
-                    { "&'\"", false, "&'\"" },
-                    { "&'\"", true, "HtmlEncode[[&'\"]]" },
-                    { " ¡ÿĀ", false, " ¡ÿĀ" },                                           // high ASCII
-                    { " ¡ÿĀ", true, "HtmlEncode[[ ¡ÿĀ]]" },
-                    { "Chinese西雅图Chars", false, "Chinese西雅图Chars" },
-                    { "Chinese西雅图Chars", true, "HtmlEncode[[Chinese西雅图Chars]]" },
-                    { "Unicode؃Format؃Char", false, "Unicode؃Format؃Char" },            // class Cf
-                    { "Unicode؃Format؃Char", true, "HtmlEncode[[Unicode؃Format؃Char]]" },
-                    { "UnicodeῼTitlecaseῼChar", false, "UnicodeῼTitlecaseῼChar" },       // class Lt
-                    { "UnicodeῼTitlecaseῼChar", true, "HtmlEncode[[UnicodeῼTitlecaseῼChar]]" },
-                    { "UnicodeःCombiningःChar", false, "UnicodeःCombiningःChar" },    // class Mc
-                    { "UnicodeःCombiningःChar", true, "HtmlEncode[[UnicodeःCombiningःChar]]" },
-                };
+            {
+                { "Simple Display Text", false, "Simple Display Text" },
+                { "Simple Display Text", true, "HtmlEncode[[Simple Display Text]]" },
+                { "<blink>text</blink>", false, "<blink>text</blink>" },
+                { "<blink>text</blink>", true, "HtmlEncode[[<blink>text</blink>]]" },
+                { "&'\"", false, "&'\"" },
+                { "&'\"", true, "HtmlEncode[[&'\"]]" },
+                { " ¡ÿĀ", false, " ¡ÿĀ" }, // high ASCII
+                { " ¡ÿĀ", true, "HtmlEncode[[ ¡ÿĀ]]" },
+                { "Chinese西雅图Chars", false, "Chinese西雅图Chars" },
+                { "Chinese西雅图Chars", true, "HtmlEncode[[Chinese西雅图Chars]]" },
+                { "Unicode؃Format؃Char", false, "Unicode؃Format؃Char" }, // class Cf
+                { "Unicode؃Format؃Char", true, "HtmlEncode[[Unicode؃Format؃Char]]" },
+                { "UnicodeῼTitlecaseῼChar", false, "UnicodeῼTitlecaseῼChar" }, // class Lt
+                { "UnicodeῼTitlecaseῼChar", true, "HtmlEncode[[UnicodeῼTitlecaseῼChar]]" },
+                { "UnicodeःCombiningःChar", false, "UnicodeःCombiningःChar" }, // class Mc
+                { "UnicodeःCombiningःChar", true, "HtmlEncode[[UnicodeःCombiningःChar]]" },
+            };
         }
     }
 
@@ -44,15 +44,23 @@ public class DefaultDisplayTemplatesTest
     public void ObjectTemplateDisplaysSimplePropertiesOnObjectByDefault()
     {
         var expected =
-            "<div class=\"HtmlEncode[[display-label]]\">HtmlEncode[[Property1]]</div>" + Environment.NewLine
-          + "<div class=\"HtmlEncode[[display-field]]\">Model = p1, ModelType = System.String, PropertyName = Property1," +
-                " SimpleDisplayText = p1</div>" + Environment.NewLine
-          + "<div class=\"HtmlEncode[[display-label]]\">HtmlEncode[[Prop2]]</div>" + Environment.NewLine
-          + "<div class=\"HtmlEncode[[display-field]]\">Model = (null), ModelType = System.String, PropertyName = Property2," +
-                " SimpleDisplayText = (null)</div>" + Environment.NewLine;
+            "<div class=\"HtmlEncode[[display-label]]\">HtmlEncode[[Property1]]</div>"
+            + Environment.NewLine
+            + "<div class=\"HtmlEncode[[display-field]]\">Model = p1, ModelType = System.String, PropertyName = Property1,"
+            + " SimpleDisplayText = p1</div>"
+            + Environment.NewLine
+            + "<div class=\"HtmlEncode[[display-label]]\">HtmlEncode[[Prop2]]</div>"
+            + Environment.NewLine
+            + "<div class=\"HtmlEncode[[display-field]]\">Model = (null), ModelType = System.String, PropertyName = Property2,"
+            + " SimpleDisplayText = (null)</div>"
+            + Environment.NewLine;
 
         // Arrange
-        var model = new DefaultTemplatesUtilities.ObjectTemplateModel { Property1 = "p1", Property2 = null };
+        var model = new DefaultTemplatesUtilities.ObjectTemplateModel
+        {
+            Property1 = "p1",
+            Property2 = null,
+        };
         var html = DefaultTemplatesUtilities.GetHtmlHelper(model);
 
         // Act
@@ -67,10 +75,12 @@ public class DefaultDisplayTemplatesTest
     {
         // Arrange
         var provider = new TestModelMetadataProvider();
-        provider.ForType<DefaultTemplatesUtilities.ObjectTemplateModel>().DisplayDetails(dd =>
-        {
-            dd.NullDisplayText = "(null value)";
-        });
+        provider
+            .ForType<DefaultTemplatesUtilities.ObjectTemplateModel>()
+            .DisplayDetails(dd =>
+            {
+                dd.NullDisplayText = "(null value)";
+            });
 
         var html = DefaultTemplatesUtilities.GetHtmlHelper(provider: provider);
 
@@ -86,18 +96,21 @@ public class DefaultDisplayTemplatesTest
     public void ObjectTemplateDisplaysSimpleDisplayTextWhenTemplateDepthGreaterThanOne(
         string simpleDisplayText,
         bool htmlEncode,
-        string expectedResult)
+        string expectedResult
+    )
     {
         // Arrange
         var model = new DefaultTemplatesUtilities.ObjectTemplateModel();
         model.Property1 = simpleDisplayText;
 
         var provider = new TestModelMetadataProvider();
-        provider.ForType<DefaultTemplatesUtilities.ObjectTemplateModel>().DisplayDetails(dd =>
-        {
-            dd.HtmlEncode = htmlEncode;
-            dd.SimpleDisplayProperty = "Property1";
-        });
+        provider
+            .ForType<DefaultTemplatesUtilities.ObjectTemplateModel>()
+            .DisplayDetails(dd =>
+            {
+                dd.HtmlEncode = htmlEncode;
+                dd.SimpleDisplayProperty = "Property1";
+            });
 
         var html = DefaultTemplatesUtilities.GetHtmlHelper(model, provider);
 
@@ -115,18 +128,35 @@ public class DefaultDisplayTemplatesTest
     public void ObjectTemplate_IgnoresPropertiesWith_ScaffoldColumnFalse()
     {
         // Arrange
-        var expected = "<div class=\"HtmlEncode[[display-label]]\">HtmlEncode[[Property1]]</div>" + Environment.NewLine +
-            "<div class=\"HtmlEncode[[display-field]]\"></div>" + Environment.NewLine +
-            "<div class=\"HtmlEncode[[display-label]]\">HtmlEncode[[Property3]]</div>" + Environment.NewLine +
-            "<div class=\"HtmlEncode[[display-field]]\"></div>" + Environment.NewLine;
+        var expected =
+            "<div class=\"HtmlEncode[[display-label]]\">HtmlEncode[[Property1]]</div>"
+            + Environment.NewLine
+            + "<div class=\"HtmlEncode[[display-field]]\"></div>"
+            + Environment.NewLine
+            + "<div class=\"HtmlEncode[[display-label]]\">HtmlEncode[[Property3]]</div>"
+            + Environment.NewLine
+            + "<div class=\"HtmlEncode[[display-field]]\"></div>"
+            + Environment.NewLine;
 
         var model = new DefaultTemplatesUtilities.ObjectWithScaffoldColumn();
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(v => v.GetView(/*executingFilePath*/ null, It.IsAny<string>(), /*isMainPage*/ false))
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
+            )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         viewEngine
-            .Setup(v => v.FindView(It.IsAny<ActionContext>(), It.IsAny<string>(), /*isMainPage*/ false))
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
+            )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(model, viewEngine.Object);
 
@@ -142,18 +172,26 @@ public class DefaultDisplayTemplatesTest
     {
         // Arrange
         var expected =
-            "Model = p1, ModelType = System.String, PropertyName = Property1, SimpleDisplayText = p1" +
-            "<div class=\"HtmlEncode[[display-label]]\">HtmlEncode[[Prop2]]</div>" + Environment.NewLine +
-            "<div class=\"HtmlEncode[[display-field]]\">Model = (null), ModelType = System.String, PropertyName = Property2," +
-                " SimpleDisplayText = (null)</div>" + Environment.NewLine;
+            "Model = p1, ModelType = System.String, PropertyName = Property1, SimpleDisplayText = p1"
+            + "<div class=\"HtmlEncode[[display-label]]\">HtmlEncode[[Prop2]]</div>"
+            + Environment.NewLine
+            + "<div class=\"HtmlEncode[[display-field]]\">Model = (null), ModelType = System.String, PropertyName = Property2,"
+            + " SimpleDisplayText = (null)</div>"
+            + Environment.NewLine;
 
-        var model = new DefaultTemplatesUtilities.ObjectTemplateModel { Property1 = "p1", Property2 = null };
+        var model = new DefaultTemplatesUtilities.ObjectTemplateModel
+        {
+            Property1 = "p1",
+            Property2 = null,
+        };
 
         var provider = new TestModelMetadataProvider();
-        provider.ForProperty<DefaultTemplatesUtilities.ObjectTemplateModel>("Property1").DisplayDetails(dd =>
-        {
-            dd.HideSurroundingHtml = true;
-        });
+        provider
+            .ForProperty<DefaultTemplatesUtilities.ObjectTemplateModel>("Property1")
+            .DisplayDetails(dd =>
+            {
+                dd.HideSurroundingHtml = true;
+            });
 
         var html = DefaultTemplatesUtilities.GetHtmlHelper(model, provider);
 
@@ -171,15 +209,15 @@ public class DefaultDisplayTemplatesTest
         var model = new OrderedModel();
         var html = DefaultTemplatesUtilities.GetHtmlHelper(model);
         var expectedProperties = new List<string>
-            {
-                "OrderedProperty3",
-                "OrderedProperty2",
-                "OrderedProperty1",
-                "Property3",
-                "Property1",
-                "Property2",
-                "LastProperty",
-            };
+        {
+            "OrderedProperty3",
+            "OrderedProperty2",
+            "OrderedProperty1",
+            "Property3",
+            "Property1",
+            "Property2",
+            "LastProperty",
+        };
 
         var stringBuilder = new StringBuilder();
         foreach (var property in expectedProperties)
@@ -187,14 +225,16 @@ public class DefaultDisplayTemplatesTest
             var label = string.Format(
                 CultureInfo.InvariantCulture,
                 "<div class=\"HtmlEncode[[display-label]]\">HtmlEncode[[{0}]]</div>",
-                property);
+                property
+            );
             stringBuilder.AppendLine(label);
 
             var value = string.Format(
                 CultureInfo.InvariantCulture,
-                "<div class=\"HtmlEncode[[display-field]]\">Model = (null), ModelType = System.String, PropertyName = {0}, " +
-                "SimpleDisplayText = (null)</div>",
-                property);
+                "<div class=\"HtmlEncode[[display-field]]\">Model = (null), ModelType = System.String, PropertyName = {0}, "
+                    + "SimpleDisplayText = (null)</div>",
+                property
+            );
             stringBuilder.AppendLine(value);
         }
         var expected = stringBuilder.ToString();
@@ -222,7 +262,10 @@ public class DefaultDisplayTemplatesTest
         var result = DefaultDisplayTemplates.HiddenInputTemplate(html);
 
         // Assert
-        Assert.Equal("HtmlEncode[[Formatted string]]", HtmlContentUtilities.HtmlContentToString(result));
+        Assert.Equal(
+            "HtmlEncode[[Formatted string]]",
+            HtmlContentUtilities.HtmlContentToString(result)
+        );
     }
 
     [Fact]
@@ -232,10 +275,12 @@ public class DefaultDisplayTemplatesTest
         var model = "Model string";
 
         var provider = new TestModelMetadataProvider();
-        provider.ForType<string>().DisplayDetails(dd =>
-        {
-            dd.HideSurroundingHtml = true;
-        });
+        provider
+            .ForType<string>()
+            .DisplayDetails(dd =>
+            {
+                dd.HideSurroundingHtml = true;
+            });
 
         var html = DefaultTemplatesUtilities.GetHtmlHelper(model, provider: provider);
         var viewData = html.ViewData;
@@ -255,13 +300,28 @@ public class DefaultDisplayTemplatesTest
     public void Display_FindsViewDataMember()
     {
         // Arrange
-        var model = new DefaultTemplatesUtilities.ObjectTemplateModel { Property1 = "Model string" };
+        var model = new DefaultTemplatesUtilities.ObjectTemplateModel
+        {
+            Property1 = "Model string",
+        };
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(v => v.GetView(/*executingFilePath*/ null, It.IsAny<string>(), /*isMainPage*/ false))
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
+            )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         viewEngine
-            .Setup(v => v.FindView(It.IsAny<ActionContext>(), It.IsAny<string>(), /*isMainPage*/ false))
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
+            )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(model, viewEngine.Object);
         helper.ViewData["Property1"] = "ViewData string";
@@ -270,20 +330,38 @@ public class DefaultDisplayTemplatesTest
         var result = helper.Display("Property1");
 
         // Assert
-        Assert.Equal("HtmlEncode[[ViewData string]]", HtmlContentUtilities.HtmlContentToString(result));
+        Assert.Equal(
+            "HtmlEncode[[ViewData string]]",
+            HtmlContentUtilities.HtmlContentToString(result)
+        );
     }
 
     [Fact]
     public void DisplayFor_FindsModel()
     {
         // Arrange
-        var model = new DefaultTemplatesUtilities.ObjectTemplateModel { Property1 = "Model string" };
+        var model = new DefaultTemplatesUtilities.ObjectTemplateModel
+        {
+            Property1 = "Model string",
+        };
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(v => v.GetView(/*executingFilePath*/ null, It.IsAny<string>(), /*isMainPage*/ false))
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
+            )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         viewEngine
-            .Setup(v => v.FindView(It.IsAny<ActionContext>(), It.IsAny<string>(), /*isMainPage*/ false))
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
+            )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(model, viewEngine.Object);
         helper.ViewData["Property1"] = "ViewData string";
@@ -292,20 +370,38 @@ public class DefaultDisplayTemplatesTest
         var result = helper.DisplayFor(m => m.Property1);
 
         // Assert
-        Assert.Equal("HtmlEncode[[Model string]]", HtmlContentUtilities.HtmlContentToString(result));
+        Assert.Equal(
+            "HtmlEncode[[Model string]]",
+            HtmlContentUtilities.HtmlContentToString(result)
+        );
     }
 
     [Fact]
     public void Display_FindsModel_IfNoViewDataMember()
     {
         // Arrange
-        var model = new DefaultTemplatesUtilities.ObjectTemplateModel { Property1 = "Model string" };
+        var model = new DefaultTemplatesUtilities.ObjectTemplateModel
+        {
+            Property1 = "Model string",
+        };
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(v => v.GetView(/*executingFilePath*/ null, It.IsAny<string>(), /*isMainPage*/ false))
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
+            )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         viewEngine
-            .Setup(v => v.FindView(It.IsAny<ActionContext>(), It.IsAny<string>(), /*isMainPage*/ false))
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
+            )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(model, viewEngine.Object);
 
@@ -313,7 +409,10 @@ public class DefaultDisplayTemplatesTest
         var result = helper.Display("Property1");
 
         // Assert
-        Assert.Equal("HtmlEncode[[Model string]]", HtmlContentUtilities.HtmlContentToString(result));
+        Assert.Equal(
+            "HtmlEncode[[Model string]]",
+            HtmlContentUtilities.HtmlContentToString(result)
+        );
     }
 
     [Theory]
@@ -322,13 +421,25 @@ public class DefaultDisplayTemplatesTest
     public void DisplayFor_FindsModel_EvenIfNullOrEmpty(string propertyValue)
     {
         // Arrange
-        var model = new DefaultTemplatesUtilities.ObjectTemplateModel { Property1 = propertyValue, };
+        var model = new DefaultTemplatesUtilities.ObjectTemplateModel { Property1 = propertyValue };
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(v => v.GetView(/*executingFilePath*/ null, It.IsAny<string>(), /*isMainPage*/ false))
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
+            )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         viewEngine
-            .Setup(v => v.FindView(It.IsAny<ActionContext>(), It.IsAny<string>(), /*isMainPage*/ false))
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
+            )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(model, viewEngine.Object);
         helper.ViewData["Property1"] = "ViewData string";
@@ -345,19 +456,33 @@ public class DefaultDisplayTemplatesTest
     {
         // Arrange
         var expectedMessage = "my exception message";
-        var model = new DefaultTemplatesUtilities.ObjectTemplateModel { Property1 = "Test string", };
+        var model = new DefaultTemplatesUtilities.ObjectTemplateModel { Property1 = "Test string" };
         var view = new Mock<IView>();
         view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>()))
-            .Returns(Task.Run(() =>
-            {
-                throw new ArgumentException(expectedMessage);
-            }));
+            .Returns(
+                Task.Run(() =>
+                {
+                    throw new ArgumentException(expectedMessage);
+                })
+            );
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(v => v.GetView(/*executingFilePath*/ null, It.IsAny<string>(), /*isMainPage*/ false))
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
+            )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         viewEngine
-            .Setup(v => v.FindView(It.IsAny<ActionContext>(), It.IsAny<string>(), /*isMainPage*/ false))
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
+            )
             .Returns(ViewEngineResult.Found("test-view", view.Object));
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(model, viewEngine.Object);
         helper.ViewData["Property1"] = "ViewData string";
@@ -373,16 +498,36 @@ public class DefaultDisplayTemplatesTest
         // Arrange
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(v => v.GetView(/*executingFilePath*/ null, It.IsAny<string>(), /*isMainPage*/ false))
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
+            )
             .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
         viewEngine
-            .Setup(v => v.FindView(It.IsAny<ActionContext>(), "DisplayTemplates/String", /*isMainPage*/ false))
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    "DisplayTemplates/String", /*isMainPage*/
+                    false
+                )
+            )
             .Returns(ViewEngineResult.Found(string.Empty, new Mock<IView>().Object))
             .Verifiable();
-        var html = DefaultTemplatesUtilities.GetHtmlHelper(new object(), viewEngine: viewEngine.Object);
+        var html = DefaultTemplatesUtilities.GetHtmlHelper(
+            new object(),
+            viewEngine: viewEngine.Object
+        );
 
         // Act & Assert
-        html.Display(expression: string.Empty, templateName: null, htmlFieldName: null, additionalViewData: null);
+        html.Display(
+            expression: string.Empty,
+            templateName: null,
+            htmlFieldName: null,
+            additionalViewData: null
+        );
         viewEngine.Verify();
     }
 
@@ -397,8 +542,10 @@ public class DefaultDisplayTemplatesTest
 
         [Display(Order = 23)]
         public string OrderedProperty3 { get; set; }
+
         [Display(Order = 23)]
         public string OrderedProperty2 { get; set; }
+
         [Display(Order = 23)]
         public string OrderedProperty1 { get; set; }
     }

@@ -12,28 +12,29 @@ namespace System.DirectoryServices.Protocols
     {
         private string _attributeName = "";
         internal bool _isSearchResult;
+
         // Does not request Unicode byte order mark prefix be emitted, but turn on error detection.
-        private static readonly UTF8Encoding s_utf8EncoderWithErrorDetection = new UTF8Encoding(false, true);
+        private static readonly UTF8Encoding s_utf8EncoderWithErrorDetection = new UTF8Encoding(
+            false,
+            true
+        );
+
         // No Error detection.
         private static readonly UTF8Encoding s_encoder = new UTF8Encoding();
 
-        public DirectoryAttribute()
-        {
-        }
+        public DirectoryAttribute() { }
 
-        public DirectoryAttribute(string name, string value) : this(name, (object)value)
-        {
-        }
+        public DirectoryAttribute(string name, string value)
+            : this(name, (object)value) { }
 
-        public DirectoryAttribute(string name, byte[] value) : this(name, (object)value)
-        {
-        }
+        public DirectoryAttribute(string name, byte[] value)
+            : this(name, (object)value) { }
 
-        public DirectoryAttribute(string name, Uri value) : this(name, (object)value)
-        {
-        }
+        public DirectoryAttribute(string name, Uri value)
+            : this(name, (object)value) { }
 
-        internal DirectoryAttribute(string name, object value) : this()
+        internal DirectoryAttribute(string name, object value)
+            : this()
         {
             ArgumentNullException.ThrowIfNull(name);
             ArgumentNullException.ThrowIfNull(value);
@@ -42,7 +43,8 @@ namespace System.DirectoryServices.Protocols
             Add(value);
         }
 
-        public DirectoryAttribute(string name, params object[] values) : this()
+        public DirectoryAttribute(string name, params object[] values)
+            : this()
         {
             ArgumentNullException.ThrowIfNull(name);
             ArgumentNullException.ThrowIfNull(values);
@@ -226,20 +228,26 @@ namespace System.DirectoryServices.Protocols
 
     public class DirectoryAttributeModification : DirectoryAttribute
     {
-        private DirectoryAttributeOperation _attributeOperation = DirectoryAttributeOperation.Replace;
+        private DirectoryAttributeOperation _attributeOperation =
+            DirectoryAttributeOperation.Replace;
 
-        public DirectoryAttributeModification()
-        {
-        }
+        public DirectoryAttributeModification() { }
 
         public DirectoryAttributeOperation Operation
         {
             get => _attributeOperation;
             set
             {
-                if (value < DirectoryAttributeOperation.Add || value > DirectoryAttributeOperation.Replace)
+                if (
+                    value < DirectoryAttributeOperation.Add
+                    || value > DirectoryAttributeOperation.Replace
+                )
                 {
-                    throw new InvalidEnumArgumentException(nameof(value), (int)value, typeof(DirectoryAttributeOperation));
+                    throw new InvalidEnumArgumentException(
+                        nameof(value),
+                        (int)value,
+                        typeof(DirectoryAttributeOperation)
+                    );
                 }
 
                 _attributeOperation = value;
@@ -282,19 +290,20 @@ namespace System.DirectoryServices.Protocols
             return Dictionary.Contains(objectName);
         }
 
-        public void CopyTo(DirectoryAttribute[] array, int index) => Dictionary.Values.CopyTo(array, index);
+        public void CopyTo(DirectoryAttribute[] array, int index) =>
+            Dictionary.Values.CopyTo(array, index);
     }
 
     public class DirectoryAttributeCollection : CollectionBase
     {
-        public DirectoryAttributeCollection()
-        {
-        }
+        public DirectoryAttributeCollection() { }
 
         public DirectoryAttribute this[int index]
         {
             get => (DirectoryAttribute)List[index];
-            set => List[index] = value ?? throw new ArgumentException(SR.NullDirectoryAttributeCollection);
+            set =>
+                List[index] =
+                    value ?? throw new ArgumentException(SR.NullDirectoryAttributeCollection);
         }
 
         public int Add(DirectoryAttribute attribute)
@@ -359,21 +368,24 @@ namespace System.DirectoryServices.Protocols
             }
             if (!(value is DirectoryAttribute))
             {
-                throw new ArgumentException(SR.Format(SR.InvalidValueType, nameof(DirectoryAttribute)), nameof(value));
+                throw new ArgumentException(
+                    SR.Format(SR.InvalidValueType, nameof(DirectoryAttribute)),
+                    nameof(value)
+                );
             }
         }
     }
 
     public class DirectoryAttributeModificationCollection : CollectionBase
     {
-        public DirectoryAttributeModificationCollection()
-        {
-        }
+        public DirectoryAttributeModificationCollection() { }
 
         public DirectoryAttributeModification this[int index]
         {
             get => (DirectoryAttributeModification)List[index];
-            set => List[index] = value ?? throw new ArgumentException(SR.NullDirectoryAttributeCollection);
+            set =>
+                List[index] =
+                    value ?? throw new ArgumentException(SR.NullDirectoryAttributeCollection);
         }
 
         public int Add(DirectoryAttributeModification attribute)
@@ -414,7 +426,8 @@ namespace System.DirectoryServices.Protocols
 
         public bool Contains(DirectoryAttributeModification value) => List.Contains(value);
 
-        public void CopyTo(DirectoryAttributeModification[] array, int index) => List.CopyTo(array, index);
+        public void CopyTo(DirectoryAttributeModification[] array, int index) =>
+            List.CopyTo(array, index);
 
         public int IndexOf(DirectoryAttributeModification value) => List.IndexOf(value);
 
@@ -438,7 +451,10 @@ namespace System.DirectoryServices.Protocols
             }
             if (!(value is DirectoryAttributeModification))
             {
-                throw new ArgumentException(SR.Format(SR.InvalidValueType, nameof(DirectoryAttributeModification)), nameof(value));
+                throw new ArgumentException(
+                    SR.Format(SR.InvalidValueType, nameof(DirectoryAttributeModification)),
+                    nameof(value)
+                );
             }
         }
     }

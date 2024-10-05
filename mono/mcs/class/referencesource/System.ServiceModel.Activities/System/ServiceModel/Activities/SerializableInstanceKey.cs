@@ -22,7 +22,9 @@ namespace System.ServiceModel.Activities
             this.value = instanceKey.Value;
             if (instanceKey.Metadata != null)
             {
-                this.metadata = new Dictionary<XName, SerializableInstanceValue>(instanceKey.Metadata.Count);
+                this.metadata = new Dictionary<XName, SerializableInstanceValue>(
+                    instanceKey.Metadata.Count
+                );
                 foreach (KeyValuePair<XName, InstanceValue> pair in instanceKey.Metadata)
                 {
                     this.metadata.Add(pair.Key, new SerializableInstanceValue(pair.Value));
@@ -31,22 +33,23 @@ namespace System.ServiceModel.Activities
         }
 
         [DataMember(EmitDefaultValue = false)]
-        [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode, Justification = "Called from Serialization")]
+        [SuppressMessage(
+            FxCop.Category.Performance,
+            FxCop.Rule.AvoidUncalledPrivateCode,
+            Justification = "Called from Serialization"
+        )]
         internal Guid Value
         {
-            get
-            {
-                return this.value;
-            }
-
-            set
-            {
-                this.value = value;
-            }
+            get { return this.value; }
+            set { this.value = value; }
         }
 
         [DataMember(EmitDefaultValue = false)]
-        [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode, Justification = "Called from Serialization")]
+        [SuppressMessage(
+            FxCop.Category.Performance,
+            FxCop.Rule.AvoidUncalledPrivateCode,
+            Justification = "Called from Serialization"
+        )]
         internal IDictionary<XName, SerializableInstanceValue> Metadata
         {
             get
@@ -60,11 +63,7 @@ namespace System.ServiceModel.Activities
                     return this.metadata;
                 }
             }
-
-            set
-            {
-                this.metadata = value;
-            }
+            set { this.metadata = value; }
         }
 
         public InstanceKey ToInstanceKey()

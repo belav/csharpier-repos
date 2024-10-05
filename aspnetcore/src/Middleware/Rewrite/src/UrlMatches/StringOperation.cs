@@ -9,5 +9,5 @@ internal enum StringOperationType
     Greater,
     GreaterEqual,
     Less,
-    LessEqual
+    LessEqual,
 }

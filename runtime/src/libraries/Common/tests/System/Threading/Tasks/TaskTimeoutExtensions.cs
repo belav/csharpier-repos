@@ -21,41 +21,83 @@ namespace System.Threading.Tasks
         public static Task WaitAsync(this Task task, CancellationToken cancellationToken) =>
             WaitAsync(task, Timeout.InfiniteTimeSpan, cancellationToken);
 
-        public async static Task WaitAsync(this Task task, TimeSpan timeout, CancellationToken cancellationToken)
+        public static async Task WaitAsync(
+            this Task task,
+            TimeSpan timeout,
+            CancellationToken cancellationToken
+        )
         {
             var tcs = new TaskCompletionSource<bool>();
-            using (new Timer(s => ((TaskCompletionSource<bool>)s).TrySetException(new TimeoutException()), tcs, timeout, Timeout.InfiniteTimeSpan))
-            using (cancellationToken.Register(s => ((TaskCompletionSource<bool>)s).TrySetCanceled(), tcs))
+            using (
+                new Timer(
+                    s => ((TaskCompletionSource<bool>)s).TrySetException(new TimeoutException()),
+                    tcs,
+                    timeout,
+                    Timeout.InfiniteTimeSpan
+                )
+            )
+            using (
+                cancellationToken.Register(
+                    s => ((TaskCompletionSource<bool>)s).TrySetCanceled(),
+                    tcs
+                )
+            )
             {
-                await(await Task.WhenAny(task, tcs.Task).ConfigureAwait(false)).ConfigureAwait(false);
+                await (await Task.WhenAny(task, tcs.Task).ConfigureAwait(false)).ConfigureAwait(
+                    false
+                );
             }
         }
 
-        public static Task<TResult> WaitAsync<TResult>(this Task<TResult> task, int millisecondsTimeout) =>
-            WaitAsync(task, TimeSpan.FromMilliseconds(millisecondsTimeout), default);
+        public static Task<TResult> WaitAsync<TResult>(
+            this Task<TResult> task,
+            int millisecondsTimeout
+        ) => WaitAsync(task, TimeSpan.FromMilliseconds(millisecondsTimeout), default);
 
         public static Task<TResult> WaitAsync<TResult>(this Task<TResult> task, TimeSpan timeout) =>
             WaitAsync(task, timeout, default);
 
-        public static Task<TResult> WaitAsync<TResult>(this Task<TResult> task, CancellationToken cancellationToken) =>
-            WaitAsync(task, Timeout.InfiniteTimeSpan, cancellationToken);
+        public static Task<TResult> WaitAsync<TResult>(
+            this Task<TResult> task,
+            CancellationToken cancellationToken
+        ) => WaitAsync(task, Timeout.InfiniteTimeSpan, cancellationToken);
 
-        public static async Task<TResult> WaitAsync<TResult>(this Task<TResult> task, TimeSpan timeout, CancellationToken cancellationToken)
+        public static async Task<TResult> WaitAsync<TResult>(
+            this Task<TResult> task,
+            TimeSpan timeout,
+            CancellationToken cancellationToken
+        )
         {
             var tcs = new TaskCompletionSource<TResult>();
-            using (new Timer(s => ((TaskCompletionSource<TResult>)s).TrySetException(new TimeoutException()), tcs, timeout, Timeout.InfiniteTimeSpan))
-            using (cancellationToken.Register(s => ((TaskCompletionSource<TResult>)s).TrySetCanceled(), tcs))
+            using (
+                new Timer(
+                    s => ((TaskCompletionSource<TResult>)s).TrySetException(new TimeoutException()),
+                    tcs,
+                    timeout,
+                    Timeout.InfiniteTimeSpan
+                )
+            )
+            using (
+                cancellationToken.Register(
+                    s => ((TaskCompletionSource<TResult>)s).TrySetCanceled(),
+                    tcs
+                )
+            )
             {
-                return await (await Task.WhenAny(task, tcs.Task).ConfigureAwait(false)).ConfigureAwait(false);
+                return await (
+                    await Task.WhenAny(task, tcs.Task).ConfigureAwait(false)
+                ).ConfigureAwait(false);
             }
         }
         #endregion
 
         public static async Task WhenAllOrAnyFailed(this Task[] tasks, int millisecondsTimeout) =>
-            await tasks.WhenAllOrAnyFailed().WaitAsync(TimeSpan.FromMilliseconds(millisecondsTimeout));
+            await tasks
+                .WhenAllOrAnyFailed()
+                .WaitAsync(TimeSpan.FromMilliseconds(millisecondsTimeout));
 
         public static async Task WhenAllOrAnyFailed(Task t1, Task t2, int millisecondsTimeout) =>
-            await new Task[] {t1, t2}.WhenAllOrAnyFailed(millisecondsTimeout);
+            await new Task[] { t1, t2 }.WhenAllOrAnyFailed(millisecondsTimeout);
 
         public static async Task WhenAllOrAnyFailed(this Task[] tasks)
         {
@@ -97,17 +139,22 @@ namespace System.Threading.Tasks
             var tcs = new TaskCompletionSource<bool>();
             foreach (Task t in tasks)
             {
-                t.ContinueWith(a =>
-                {
-                    if (a.GetRealException() is Exception e)
+                t.ContinueWith(
+                    a =>
                     {
-                        tcs.TrySetException(e);
-                    }
-                    else if (Interlocked.Decrement(ref remaining) == 0)
-                    {
-                        tcs.TrySetResult(true);
-                    }
-                }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.Default);
+                        if (a.GetRealException() is Exception e)
+                        {
+                            tcs.TrySetException(e);
+                        }
+                        else if (Interlocked.Decrement(ref remaining) == 0)
+                        {
+                            tcs.TrySetResult(true);
+                        }
+                    },
+                    CancellationToken.None,
+                    TaskContinuationOptions.None,
+                    TaskScheduler.Default
+                );
             }
             return tcs.Task;
         }

@@ -8,7 +8,9 @@ using System.Reflection;
 using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
 
-[assembly: MetadataUpdateHandler(typeof(Microsoft.AspNetCore.Components.Forms.EditContextDataAnnotationsExtensions))]
+[assembly: MetadataUpdateHandler(
+    typeof(Microsoft.AspNetCore.Components.Forms.EditContextDataAnnotationsExtensions)
+)]
 
 namespace Microsoft.AspNetCore.Components.Forms;
 
@@ -33,18 +35,24 @@ public static class EditContextDataAnnotationsExtensions
     /// </summary>
     /// <param name="editContext">The <see cref="EditContext"/>.</param>
     /// <returns>A disposable object whose disposal will remove DataAnnotations validation support from the <see cref="EditContext"/>.</returns>
-    [Obsolete("This API is obsolete and may be removed in future versions. Use the overload that accepts an IServiceProvider instead.")]
+    [Obsolete(
+        "This API is obsolete and may be removed in future versions. Use the overload that accepts an IServiceProvider instead."
+    )]
     public static IDisposable EnableDataAnnotationsValidation(this EditContext editContext)
     {
         return new DataAnnotationsEventSubscriptions(editContext, null!);
     }
+
     /// <summary>
     /// Enables DataAnnotations validation support for the <see cref="EditContext"/>.
     /// </summary>
     /// <param name="editContext">The <see cref="EditContext"/>.</param>
     /// <param name="serviceProvider">The <see cref="IServiceProvider"/> to be used in the <see cref="ValidationContext"/>.</param>
     /// <returns>A disposable object whose disposal will remove DataAnnotations validation support from the <see cref="EditContext"/>.</returns>
-    public static IDisposable EnableDataAnnotationsValidation(this EditContext editContext, IServiceProvider serviceProvider)
+    public static IDisposable EnableDataAnnotationsValidation(
+        this EditContext editContext,
+        IServiceProvider serviceProvider
+    )
     {
         ArgumentNullException.ThrowIfNull(serviceProvider);
         return new DataAnnotationsEventSubscriptions(editContext, serviceProvider);
@@ -59,13 +67,19 @@ public static class EditContextDataAnnotationsExtensions
 
     private sealed class DataAnnotationsEventSubscriptions : IDisposable
     {
-        private static readonly ConcurrentDictionary<(Type ModelType, string FieldName), PropertyInfo?> _propertyInfoCache = new();
+        private static readonly ConcurrentDictionary<
+            (Type ModelType, string FieldName),
+            PropertyInfo?
+        > _propertyInfoCache = new();
 
         private readonly EditContext _editContext;
         private readonly IServiceProvider? _serviceProvider;
         private readonly ValidationMessageStore _messages;
 
-        public DataAnnotationsEventSubscriptions(EditContext editContext, IServiceProvider serviceProvider)
+        public DataAnnotationsEventSubscriptions(
+            EditContext editContext,
+            IServiceProvider serviceProvider
+        )
         {
             _editContext = editContext ?? throw new ArgumentNullException(nameof(editContext));
             _serviceProvider = serviceProvider;
@@ -80,16 +94,24 @@ public static class EditContextDataAnnotationsExtensions
             }
         }
 
-        [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "Model types are expected to be defined in assemblies that do not get trimmed.")]
+        [UnconditionalSuppressMessage(
+            "Trimming",
+            "IL2026",
+            Justification = "Model types are expected to be defined in assemblies that do not get trimmed."
+        )]
         private void OnFieldChanged(object? sender, FieldChangedEventArgs eventArgs)
         {
             var fieldIdentifier = eventArgs.FieldIdentifier;
             if (TryGetValidatableProperty(fieldIdentifier, out var propertyInfo))
             {
                 var propertyValue = propertyInfo.GetValue(fieldIdentifier.Model);
-                var validationContext = new ValidationContext(fieldIdentifier.Model, _serviceProvider, items: null)
+                var validationContext = new ValidationContext(
+                    fieldIdentifier.Model,
+                    _serviceProvider,
+                    items: null
+                )
                 {
-                    MemberName = propertyInfo.Name
+                    MemberName = propertyInfo.Name,
                 };
                 var results = new List<ValidationResult>();
 
@@ -106,12 +128,25 @@ public static class EditContextDataAnnotationsExtensions
             }
         }
 
-        [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "Model types are expected to be defined in assemblies that do not get trimmed.")]
+        [UnconditionalSuppressMessage(
+            "Trimming",
+            "IL2026",
+            Justification = "Model types are expected to be defined in assemblies that do not get trimmed."
+        )]
         private void OnValidationRequested(object? sender, ValidationRequestedEventArgs e)
         {
-            var validationContext = new ValidationContext(_editContext.Model, _serviceProvider, items: null);
+            var validationContext = new ValidationContext(
+                _editContext.Model,
+                _serviceProvider,
+                items: null
+            );
             var validationResults = new List<ValidationResult>();
-            Validator.TryValidateObject(_editContext.Model, validationContext, validationResults, true);
+            Validator.TryValidateObject(
+                _editContext.Model,
+                validationContext,
+                validationResults,
+                true
+            );
 
             // Transfer results to the ValidationMessageStore
             _messages.Clear();
@@ -131,7 +166,10 @@ public static class EditContextDataAnnotationsExtensions
 
                 if (!hasMemberNames)
                 {
-                    _messages.Add(new FieldIdentifier(_editContext.Model, fieldName: string.Empty), validationResult.ErrorMessage!);
+                    _messages.Add(
+                        new FieldIdentifier(_editContext.Model, fieldName: string.Empty),
+                        validationResult.ErrorMessage!
+                    );
                 }
             }
 
@@ -151,8 +189,15 @@ public static class EditContextDataAnnotationsExtensions
             }
         }
 
-        [UnconditionalSuppressMessage("Trimming", "IL2080", Justification = "Model types are expected to be defined in assemblies that do not get trimmed.")]
-        private static bool TryGetValidatableProperty(in FieldIdentifier fieldIdentifier, [NotNullWhen(true)] out PropertyInfo? propertyInfo)
+        [UnconditionalSuppressMessage(
+            "Trimming",
+            "IL2080",
+            Justification = "Model types are expected to be defined in assemblies that do not get trimmed."
+        )]
+        private static bool TryGetValidatableProperty(
+            in FieldIdentifier fieldIdentifier,
+            [NotNullWhen(true)] out PropertyInfo? propertyInfo
+        )
         {
             var cacheKey = (ModelType: fieldIdentifier.Model.GetType(), fieldIdentifier.FieldName);
             if (!_propertyInfoCache.TryGetValue(cacheKey, out propertyInfo))

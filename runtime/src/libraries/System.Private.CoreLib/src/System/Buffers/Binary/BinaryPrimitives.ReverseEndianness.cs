@@ -6,7 +6,6 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Intrinsics;
-
 #pragma warning disable SA1121 // explicitly using type aliases instead of built-in types
 
 #if TARGET_64BIT
@@ -38,7 +37,8 @@ namespace System.Buffers.Binary
         /// <returns>The reversed value.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static short ReverseEndianness(short value) => (short)ReverseEndianness((ushort)value);
+        public static short ReverseEndianness(short value) =>
+            (short)ReverseEndianness((ushort)value);
 
         /// <summary>
         /// Reverses a primitive value by performing an endianness swap of the specified <see cref="int" /> value.
@@ -74,10 +74,7 @@ namespace System.Buffers.Binary
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Int128 ReverseEndianness(Int128 value)
         {
-            return new Int128(
-                ReverseEndianness(value.Lower),
-                ReverseEndianness(value.Upper)
-            );
+            return new Int128(ReverseEndianness(value.Lower), ReverseEndianness(value.Upper));
         }
 
         /// <summary>
@@ -115,7 +112,8 @@ namespace System.Buffers.Binary
         /// <param name="value">The value to reverse.</param>
         /// <returns>The reversed value.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static char ReverseEndianness(char value) => (char)ReverseEndianness((ushort)value);
+        internal static char ReverseEndianness(char value) =>
+            (char)ReverseEndianness((ushort)value);
 
         /// <summary>
         /// Reverses a primitive value by performing an endianness swap of the specified <see cref="uint" /> value.
@@ -175,7 +173,8 @@ namespace System.Buffers.Binary
         /// <returns>The reversed value.</returns>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static nuint ReverseEndianness(nuint value) => (nuint)ReverseEndianness((nuint_t)value);
+        public static nuint ReverseEndianness(nuint value) =>
+            (nuint)ReverseEndianness((nuint_t)value);
 
         /// <summary>
         /// Reverses a primitive value by performing an endianness swap of the specified <see cref="UInt128" /> value.
@@ -186,10 +185,7 @@ namespace System.Buffers.Binary
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static UInt128 ReverseEndianness(UInt128 value)
         {
-            return new UInt128(
-                ReverseEndianness(value.Lower),
-                ReverseEndianness(value.Upper)
-            );
+            return new UInt128(ReverseEndianness(value.Lower), ReverseEndianness(value.Upper));
         }
 
         /// <summary>Copies every primitive value from <paramref name="source"/> to <paramref name="destination"/>, reversing each primitive by performing an endianness swap as part of writing each.</summary>
@@ -198,8 +194,14 @@ namespace System.Buffers.Binary
         /// <remarks>The source and destination spans may overlap. The same span may be passed as both the source and the destination in order to reverse each element's endianness in place.</remarks>
         /// <exception cref="ArgumentException">The <paramref name="destination"/>'s length is smaller than that of the <paramref name="source"/>.</exception>
         [CLSCompliant(false)]
-        public static void ReverseEndianness(ReadOnlySpan<ushort> source, Span<ushort> destination) =>
-            ReverseEndianness<short, Int16EndiannessReverser>(MemoryMarshal.Cast<ushort, short>(source), MemoryMarshal.Cast<ushort, short>(destination));
+        public static void ReverseEndianness(
+            ReadOnlySpan<ushort> source,
+            Span<ushort> destination
+        ) =>
+            ReverseEndianness<short, Int16EndiannessReverser>(
+                MemoryMarshal.Cast<ushort, short>(source),
+                MemoryMarshal.Cast<ushort, short>(destination)
+            );
 
         /// <inheritdoc cref="ReverseEndianness(ReadOnlySpan{ushort}, Span{ushort})" />
         public static void ReverseEndianness(ReadOnlySpan<short> source, Span<short> destination) =>
@@ -208,7 +210,10 @@ namespace System.Buffers.Binary
         /// <inheritdoc cref="ReverseEndianness(ReadOnlySpan{ushort}, Span{ushort})" />
         [CLSCompliant(false)]
         public static void ReverseEndianness(ReadOnlySpan<uint> source, Span<uint> destination) =>
-            ReverseEndianness<int, Int32EndiannessReverser>(MemoryMarshal.Cast<uint, int>(source), MemoryMarshal.Cast<uint, int>(destination));
+            ReverseEndianness<int, Int32EndiannessReverser>(
+                MemoryMarshal.Cast<uint, int>(source),
+                MemoryMarshal.Cast<uint, int>(destination)
+            );
 
         /// <inheritdoc cref="ReverseEndianness(ReadOnlySpan{ushort}, Span{ushort})" />
         public static void ReverseEndianness(ReadOnlySpan<int> source, Span<int> destination) =>
@@ -217,7 +222,10 @@ namespace System.Buffers.Binary
         /// <inheritdoc cref="ReverseEndianness(ReadOnlySpan{ushort}, Span{ushort})" />
         [CLSCompliant(false)]
         public static void ReverseEndianness(ReadOnlySpan<ulong> source, Span<ulong> destination) =>
-            ReverseEndianness<long, Int64EndiannessReverser>(MemoryMarshal.Cast<ulong, long>(source), MemoryMarshal.Cast<ulong, long>(destination));
+            ReverseEndianness<long, Int64EndiannessReverser>(
+                MemoryMarshal.Cast<ulong, long>(source),
+                MemoryMarshal.Cast<ulong, long>(destination)
+            );
 
         /// <inheritdoc cref="ReverseEndianness(ReadOnlySpan{ushort}, Span{ushort})" />
         public static void ReverseEndianness(ReadOnlySpan<long> source, Span<long> destination) =>
@@ -227,23 +235,34 @@ namespace System.Buffers.Binary
         [CLSCompliant(false)]
         public static void ReverseEndianness(ReadOnlySpan<nuint> source, Span<nuint> destination) =>
 #if TARGET_64BIT
-            ReverseEndianness<long, Int64EndiannessReverser>(MemoryMarshal.Cast<nuint, long>(source), MemoryMarshal.Cast<nuint, long>(destination));
+            ReverseEndianness<long, Int64EndiannessReverser>(
+                MemoryMarshal.Cast<nuint, long>(source),
+                MemoryMarshal.Cast<nuint, long>(destination)
+            );
 #else
-            ReverseEndianness<int, Int32EndiannessReverser>(MemoryMarshal.Cast<nuint, int>(source), MemoryMarshal.Cast<nuint, int>(destination));
+            ReverseEndianness<int, Int32EndiannessReverser>(
+                MemoryMarshal.Cast<nuint, int>(source),
+                MemoryMarshal.Cast<nuint, int>(destination)
+            );
 #endif
 
         /// <inheritdoc cref="ReverseEndianness(ReadOnlySpan{ushort}, Span{ushort})" />
         public static void ReverseEndianness(ReadOnlySpan<nint> source, Span<nint> destination) =>
 #if TARGET_64BIT
-            ReverseEndianness<long, Int64EndiannessReverser>(MemoryMarshal.Cast<nint, long>(source), MemoryMarshal.Cast<nint, long>(destination));
+            ReverseEndianness<long, Int64EndiannessReverser>(
+                MemoryMarshal.Cast<nint, long>(source),
+                MemoryMarshal.Cast<nint, long>(destination)
+            );
 #else
-            ReverseEndianness<int, Int32EndiannessReverser>(MemoryMarshal.Cast<nint, int>(source), MemoryMarshal.Cast<nint, int>(destination));
+            ReverseEndianness<int, Int32EndiannessReverser>(
+                MemoryMarshal.Cast<nint, int>(source),
+                MemoryMarshal.Cast<nint, int>(destination)
+            );
 #endif
 
         private readonly struct Int16EndiannessReverser : IEndiannessReverser<short>
         {
-            public static short Reverse(short value) =>
-                ReverseEndianness(value);
+            public static short Reverse(short value) => ReverseEndianness(value);
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> Reverse(Vector128<short> vector) =>
@@ -256,33 +275,120 @@ namespace System.Buffers.Binary
 
         private readonly struct Int32EndiannessReverser : IEndiannessReverser<int>
         {
-            public static int Reverse(int value) =>
-                ReverseEndianness(value);
+            public static int Reverse(int value) => ReverseEndianness(value);
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> Reverse(Vector128<int> vector) =>
-                Vector128.Shuffle(vector.AsByte(), Vector128.Create((byte)3, 2, 1, 0, 7, 6, 5, 4, 11, 10, 9, 8, 15, 14, 13, 12)).AsInt32();
+                Vector128
+                    .Shuffle(
+                        vector.AsByte(),
+                        Vector128.Create((byte)3, 2, 1, 0, 7, 6, 5, 4, 11, 10, 9, 8, 15, 14, 13, 12)
+                    )
+                    .AsInt32();
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> Reverse(Vector256<int> vector) =>
-                Vector256.Shuffle(vector.AsByte(), Vector256.Create((byte)3, 2, 1, 0, 7, 6, 5, 4, 11, 10, 9, 8, 15, 14, 13, 12, 19, 18, 17, 16, 23, 22, 21, 20, 27, 26, 25, 24, 31, 30, 29, 28)).AsInt32();
+                Vector256
+                    .Shuffle(
+                        vector.AsByte(),
+                        Vector256.Create(
+                            (byte)3,
+                            2,
+                            1,
+                            0,
+                            7,
+                            6,
+                            5,
+                            4,
+                            11,
+                            10,
+                            9,
+                            8,
+                            15,
+                            14,
+                            13,
+                            12,
+                            19,
+                            18,
+                            17,
+                            16,
+                            23,
+                            22,
+                            21,
+                            20,
+                            27,
+                            26,
+                            25,
+                            24,
+                            31,
+                            30,
+                            29,
+                            28
+                        )
+                    )
+                    .AsInt32();
         }
 
         private readonly struct Int64EndiannessReverser : IEndiannessReverser<long>
         {
-            public static long Reverse(long value) =>
-                ReverseEndianness(value);
+            public static long Reverse(long value) => ReverseEndianness(value);
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> Reverse(Vector128<long> vector) =>
-                Vector128.Shuffle(vector.AsByte(), Vector128.Create((byte)7, 6, 5, 4, 3, 2, 1, 0, 15, 14, 13, 12, 11, 10, 9, 8)).AsInt64();
+                Vector128
+                    .Shuffle(
+                        vector.AsByte(),
+                        Vector128.Create((byte)7, 6, 5, 4, 3, 2, 1, 0, 15, 14, 13, 12, 11, 10, 9, 8)
+                    )
+                    .AsInt64();
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> Reverse(Vector256<long> vector) =>
-                Vector256.Shuffle(vector.AsByte(), Vector256.Create((byte)7, 6, 5, 4, 3, 2, 1, 0, 15, 14, 13, 12, 11, 10, 9, 8, 23, 22, 21, 20, 19, 18, 17, 16, 31, 30, 29, 28, 27, 26, 25, 24)).AsInt64();
+                Vector256
+                    .Shuffle(
+                        vector.AsByte(),
+                        Vector256.Create(
+                            (byte)7,
+                            6,
+                            5,
+                            4,
+                            3,
+                            2,
+                            1,
+                            0,
+                            15,
+                            14,
+                            13,
+                            12,
+                            11,
+                            10,
+                            9,
+                            8,
+                            23,
+                            22,
+                            21,
+                            20,
+                            19,
+                            18,
+                            17,
+                            16,
+                            31,
+                            30,
+                            29,
+                            28,
+                            27,
+                            26,
+                            25,
+                            24
+                        )
+                    )
+                    .AsInt64();
         }
 
-        private static void ReverseEndianness<T, TReverser>(ReadOnlySpan<T> source, Span<T> destination)
+        private static void ReverseEndianness<T, TReverser>(
+            ReadOnlySpan<T> source,
+            Span<T> destination
+        )
             where T : struct
             where TReverser : IEndiannessReverser<T>
         {
@@ -294,9 +400,11 @@ namespace System.Buffers.Binary
             ref T sourceRef = ref MemoryMarshal.GetReference(source);
             ref T destRef = ref MemoryMarshal.GetReference(destination);
 
-            if (Unsafe.AreSame(ref sourceRef, ref destRef) ||
-                !source.Overlaps(destination, out int elementOffset) ||
-                elementOffset < 0)
+            if (
+                Unsafe.AreSame(ref sourceRef, ref destRef)
+                || !source.Overlaps(destination, out int elementOffset)
+                || elementOffset < 0
+            )
             {
                 // Either there's no overlap between the source and the destination, or there's overlap but the
                 // destination starts at or before the source.  That means we can safely iterate from beginning
@@ -309,7 +417,11 @@ namespace System.Buffers.Binary
                 {
                     while (i <= source.Length - Vector256<T>.Count)
                     {
-                        Vector256.StoreUnsafe(TReverser.Reverse(Vector256.LoadUnsafe(ref sourceRef, (uint)i)), ref destRef, (uint)i);
+                        Vector256.StoreUnsafe(
+                            TReverser.Reverse(Vector256.LoadUnsafe(ref sourceRef, (uint)i)),
+                            ref destRef,
+                            (uint)i
+                        );
                         i += Vector256<T>.Count;
                     }
                 }
@@ -318,7 +430,11 @@ namespace System.Buffers.Binary
                 {
                     while (i <= source.Length - Vector128<T>.Count)
                     {
-                        Vector128.StoreUnsafe(TReverser.Reverse(Vector128.LoadUnsafe(ref sourceRef, (uint)i)), ref destRef, (uint)i);
+                        Vector128.StoreUnsafe(
+                            TReverser.Reverse(Vector128.LoadUnsafe(ref sourceRef, (uint)i)),
+                            ref destRef,
+                            (uint)i
+                        );
                         i += Vector128<T>.Count;
                     }
                 }
@@ -342,7 +458,11 @@ namespace System.Buffers.Binary
                     while (i >= Vector256<T>.Count)
                     {
                         i -= Vector256<T>.Count;
-                        Vector256.StoreUnsafe(TReverser.Reverse(Vector256.LoadUnsafe(ref sourceRef, (uint)i)), ref destRef, (uint)i);
+                        Vector256.StoreUnsafe(
+                            TReverser.Reverse(Vector256.LoadUnsafe(ref sourceRef, (uint)i)),
+                            ref destRef,
+                            (uint)i
+                        );
                     }
                 }
 
@@ -351,7 +471,11 @@ namespace System.Buffers.Binary
                     while (i >= Vector128<T>.Count)
                     {
                         i -= Vector128<T>.Count;
-                        Vector128.StoreUnsafe(TReverser.Reverse(Vector128.LoadUnsafe(ref sourceRef, (uint)i)), ref destRef, (uint)i);
+                        Vector128.StoreUnsafe(
+                            TReverser.Reverse(Vector128.LoadUnsafe(ref sourceRef, (uint)i)),
+                            ref destRef,
+                            (uint)i
+                        );
                     }
                 }
 
@@ -363,7 +487,8 @@ namespace System.Buffers.Binary
             }
         }
 
-        private interface IEndiannessReverser<T> where T : struct
+        private interface IEndiannessReverser<T>
+            where T : struct
         {
             static abstract T Reverse(T value);
             static abstract Vector128<T> Reverse(Vector128<T> vector);
@@ -372,8 +497,14 @@ namespace System.Buffers.Binary
 
         /// <inheritdoc cref="ReverseEndianness(ReadOnlySpan{ushort}, Span{ushort})" />
         [CLSCompliant(false)]
-        public static void ReverseEndianness(ReadOnlySpan<UInt128> source, Span<UInt128> destination) =>
-            ReverseEndianness(MemoryMarshal.Cast<UInt128, Int128>(source), MemoryMarshal.Cast<UInt128, Int128>(destination));
+        public static void ReverseEndianness(
+            ReadOnlySpan<UInt128> source,
+            Span<UInt128> destination
+        ) =>
+            ReverseEndianness(
+                MemoryMarshal.Cast<UInt128, Int128>(source),
+                MemoryMarshal.Cast<UInt128, Int128>(destination)
+            );
 
         /// <inheritdoc cref="ReverseEndianness(ReadOnlySpan{ushort}, Span{ushort})" />
         public static void ReverseEndianness(ReadOnlySpan<Int128> source, Span<Int128> destination)
@@ -383,9 +514,14 @@ namespace System.Buffers.Binary
                 ThrowDestinationTooSmall();
             }
 
-            if (Unsafe.AreSame(ref MemoryMarshal.GetReference(source), ref MemoryMarshal.GetReference(destination)) ||
-                !source.Overlaps(destination, out int elementOffset) ||
-                elementOffset < 0)
+            if (
+                Unsafe.AreSame(
+                    ref MemoryMarshal.GetReference(source),
+                    ref MemoryMarshal.GetReference(destination)
+                )
+                || !source.Overlaps(destination, out int elementOffset)
+                || elementOffset < 0
+            )
             {
                 // Iterate from beginning to end
                 for (int i = 0; i < source.Length; i++)

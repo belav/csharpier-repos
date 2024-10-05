@@ -9,9 +9,7 @@ namespace System.ComponentModel.Composition
 {
     public class ScopeExportFactoryTests
     {
-        public interface IFooContract
-        {
-        }
+        public interface IFooContract { }
 
         public interface IFooMetadata
         {
@@ -23,21 +21,15 @@ namespace System.ComponentModel.Composition
             IFooContract CreateFoo();
         }
 
-        public interface IBlahContract
-        {
-        }
+        public interface IBlahContract { }
 
         [Export(typeof(IFooContract))]
         [ExportMetadata("Name", "Foo")]
-        public class FooImpl : IFooContract
-        {
-        }
+        public class FooImpl : IFooContract { }
 
         [Export(typeof(IFooContract))]
         [ExportMetadata("Name", "Foo")]
-        public class Foo2Impl : IFooContract
-        {
-        }
+        public class Foo2Impl : IFooContract { }
 
         [Export(typeof(IFooContract))]
         public class Foo3Impl : IFooContract
@@ -156,7 +148,10 @@ namespace System.ComponentModel.Composition
                 foo2 = efFoo2.Value;
             }
 
-            Assert.True(((foo1 is FooImpl) && (foo2 is Foo2Impl)) || ((foo2 is FooImpl) && (foo1 is Foo2Impl)));
+            Assert.True(
+                ((foo1 is FooImpl) && (foo2 is Foo2Impl))
+                    || ((foo2 is FooImpl) && (foo1 is Foo2Impl))
+            );
         }
 
         [Fact]
@@ -270,11 +265,14 @@ namespace System.ComponentModel.Composition
 
     public class ScopeExportFactoryWithPublicSurface
     {
-        [Export] public class ClassA { }
+        [Export]
+        public class ClassA { }
 
-        [Export] public class ClassB { }
+        [Export]
+        public class ClassB { }
 
-        [Export] public class ClassC { }
+        [Export]
+        public class ClassC { }
 
         [Export]
         public class ClassRoot
@@ -296,9 +294,11 @@ namespace System.ComponentModel.Composition
             var c2 = new TypeCatalog(typeof(ClassA), typeof(ClassB), typeof(ClassC));
             var c3 = new TypeCatalog(typeof(ClassA), typeof(ClassB), typeof(ClassC));
             var c4 = new TypeCatalog(typeof(ClassA), typeof(ClassB), typeof(ClassC));
-            var sd = c1.AsScope(c2.AsScopeWithPublicSurface<ClassA>(),
-                                c3.AsScopeWithPublicSurface<ClassB>(),
-                                c4.AsScopeWithPublicSurface<ClassC>());
+            var sd = c1.AsScope(
+                c2.AsScopeWithPublicSurface<ClassA>(),
+                c3.AsScopeWithPublicSurface<ClassB>(),
+                c4.AsScopeWithPublicSurface<ClassC>()
+            );
 
             var container = new CompositionContainer(sd);
 
@@ -306,15 +306,16 @@ namespace System.ComponentModel.Composition
             var a = fromRoot.classA.CreateExport().Value;
             var b = fromRoot.classB.CreateExport().Value;
             var c = fromRoot.classC.CreateExport().Value;
-
         }
     }
 
     public class ScopeFactoryAutoResolveFromAncestorScope
     {
-        [Export] public class Root { }
+        [Export]
+        public class Root { }
 
-        [Export] public class Child { }
+        [Export]
+        public class Child { }
 
         [Export]
         public class ClassRoot
@@ -351,7 +352,10 @@ namespace System.ComponentModel.Composition
             var c2 = new TypeCatalog(typeof(ClassRoot), typeof(ClassA), typeof(Child));
             var sd = c1.AsScope(c2.AsScope());
 
-            var container = new CompositionContainer(sd, CompositionOptions.ExportCompositionService);
+            var container = new CompositionContainer(
+                sd,
+                CompositionOptions.ExportCompositionService
+            );
 
             var fromRoot = container.GetExportedValue<ClassRoot>();
             var a1 = fromRoot.classA.CreateExport().Value;
@@ -400,9 +404,7 @@ namespace System.ComponentModel.Composition
         }
 
         [Export]
-        public class ClassD
-        {
-        }
+        public class ClassD { }
 
         [Fact]
         public void DeeplyNestedCatalogPartitionedCatalog_ShouldWork()
@@ -427,7 +429,13 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void DeeplyNestedCatalogOverlappedCatalog_ShouldWork()
         {
-            var cat1 = new TypeCatalog(typeof(ClassRoot), typeof(ClassA), typeof(ClassB), typeof(ClassC), typeof(ClassD));
+            var cat1 = new TypeCatalog(
+                typeof(ClassRoot),
+                typeof(ClassA),
+                typeof(ClassB),
+                typeof(ClassC),
+                typeof(ClassD)
+            );
             var cat2 = cat1;
             var cat3 = cat1;
             var cat4 = cat1;
@@ -537,7 +545,6 @@ namespace System.ComponentModel.Composition
             Assert.Equal(8, b1.xxxx.InstanceValue);
             Assert.Equal(8, c1.xxxx.InstanceValue);
             Assert.Equal(2, c1.classD.xxxx.InstanceValue);
-
         }
     }
 
@@ -557,7 +564,13 @@ namespace System.ComponentModel.Composition
         public class ClassC
         {
             [ImportingConstructor]
-            public ClassC([ImportAttribute(RequiredCreationPolicy = CreationPolicy.NonShared, Source = ImportSource.NonLocal)]ClassXXXX xxxx)
+            public ClassC(
+                [ImportAttribute(
+                    RequiredCreationPolicy = CreationPolicy.NonShared,
+                    Source = ImportSource.NonLocal
+                )]
+                    ClassXXXX xxxx
+            )
             {
                 this.xxxx = xxxx;
             }
@@ -645,7 +658,10 @@ namespace System.ComponentModel.Composition
         public class ClassC
         {
             [Export]
-            [ImportAttribute(RequiredCreationPolicy = CreationPolicy.NonShared, Source = ImportSource.NonLocal)]
+            [ImportAttribute(
+                RequiredCreationPolicy = CreationPolicy.NonShared,
+                Source = ImportSource.NonLocal
+            )]
             public ClassXXXX xxxx;
 
             [Import]
@@ -724,9 +740,14 @@ namespace System.ComponentModel.Composition
         [Export]
         public class ClassA
         {
-            [ImportAttribute] public ClassB classB;
-            [ImportAttribute] public ClassC classC;
-            [ImportAttribute] public ClassD classD;
+            [ImportAttribute]
+            public ClassB classB;
+
+            [ImportAttribute]
+            public ClassC classC;
+
+            [ImportAttribute]
+            public ClassD classD;
 
             public int InstanceValue;
         }
@@ -734,26 +755,34 @@ namespace System.ComponentModel.Composition
         [Export]
         public class ClassB
         {
-            [ImportAttribute] public ClassA classA;
+            [ImportAttribute]
+            public ClassA classA;
         }
 
         [Export]
         public class ClassC
         {
-            [ImportAttribute] public ClassA classA;
+            [ImportAttribute]
+            public ClassA classA;
         }
 
         [Export]
         public class ClassD
         {
-            [ImportAttribute] public ClassA classA;
+            [ImportAttribute]
+            public ClassA classA;
         }
 
         [Fact]
         public void SelfExportFromExportFactory_ShouldSucceed()
         {
             var cat1 = new TypeCatalog(typeof(ClassRoot));
-            var cat2 = new TypeCatalog(typeof(ClassA), typeof(ClassB), typeof(ClassC), typeof(ClassD));
+            var cat2 = new TypeCatalog(
+                typeof(ClassA),
+                typeof(ClassB),
+                typeof(ClassC),
+                typeof(ClassD)
+            );
             var sd = cat1.AsScope(cat2.AsScope());
 
             var container = new CompositionContainer(sd);

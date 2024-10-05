@@ -21,6 +21,12 @@ namespace Microsoft.CodeAnalysis.Formatting
         /// <param name="syntaxFormattingOptions">Formatting options, if available. Null for non-Roslyn languages.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>The formatted document.</returns>
-        Task<Document> FormatAsync(Document document, IEnumerable<TextSpan>? spans, LineFormattingOptions lineFormattingOptions, SyntaxFormattingOptions? syntaxFormattingOptions, CancellationToken cancellationToken);
+        Task<Document> FormatAsync(
+            Document document,
+            IEnumerable<TextSpan>? spans,
+            LineFormattingOptions lineFormattingOptions,
+            SyntaxFormattingOptions? syntaxFormattingOptions,
+            CancellationToken cancellationToken
+        );
     }
 }

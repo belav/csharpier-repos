@@ -60,6 +60,7 @@ namespace System.Net
         UnsupportedMediaType = 415,
         RequestedRangeNotSatisfiable = 416,
         ExpectationFailed = 417,
+
         // From https://github.com/dotnet/runtime/issues/15650:
         // "It would be a mistake to add it to .NET now. See golang/go#21326,
         // nodejs/node#14644, requests/requests#4238 and aspnet/HttpAbstractions#915".
@@ -92,6 +93,6 @@ namespace System.Net
         LoopDetected = 508,
 
         NotExtended = 510,
-        NetworkAuthenticationRequired = 511
+        NetworkAuthenticationRequired = 511,
     }
 }

@@ -28,7 +28,9 @@ namespace System.Data.ProviderBase
             _fieldNames = fieldNames;
         }
 
-        public BasicFieldNameLookup(System.Collections.ObjectModel.ReadOnlyCollection<string> columnNames)
+        public BasicFieldNameLookup(
+            System.Collections.ObjectModel.ReadOnlyCollection<string> columnNames
+        )
         {
             int length = columnNames.Count;
             string[] fieldNames = new string[length];

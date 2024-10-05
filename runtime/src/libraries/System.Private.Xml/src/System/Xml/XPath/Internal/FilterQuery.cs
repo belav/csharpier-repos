@@ -13,12 +13,15 @@ namespace MS.Internal.Xml.XPath
         private readonly Query _cond;
         private readonly bool _noPosition;
 
-        public FilterQuery(Query qyParent, Query cond, bool noPosition) : base(qyParent)
+        public FilterQuery(Query qyParent, Query cond, bool noPosition)
+            : base(qyParent)
         {
             _cond = cond;
             _noPosition = noPosition;
         }
-        private FilterQuery(FilterQuery other) : base(other)
+
+        private FilterQuery(FilterQuery other)
+            : base(other)
         {
             _cond = Clone(other._cond);
             _noPosition = other._noPosition;
@@ -30,13 +33,20 @@ namespace MS.Internal.Xml.XPath
             base.Reset();
         }
 
-        public Query Condition { get { return _cond; } }
+        public Query Condition
+        {
+            get { return _cond; }
+        }
 
         public override void SetXsltContext(XsltContext input)
         {
             base.SetXsltContext(input);
             _cond.SetXsltContext(input);
-            if (_cond.StaticType != XPathResultType.Number && _cond.StaticType != XPathResultType.Any && _noPosition)
+            if (
+                _cond.StaticType != XPathResultType.Number
+                && _cond.StaticType != XPathResultType.Any
+                && _noPosition
+            )
             {
                 // BugBug: We can do such trick at Evaluate time only.
                 // But to do this FilterQuery should stop inherit from BaseAxisQuery
@@ -64,10 +74,14 @@ namespace MS.Internal.Xml.XPath
         internal bool EvaluatePredicate()
         {
             object value = _cond.Evaluate(qyInput);
-            if (value is XPathNodeIterator) return _cond.Advance() != null;
-            if (value is string) return ((string)value).Length != 0;
-            if (value is double) return (((double)value) == qyInput.CurrentPosition);
-            if (value is bool) return (bool)value;
+            if (value is XPathNodeIterator)
+                return _cond.Advance() != null;
+            if (value is string)
+                return ((string)value).Length != 0;
+            if (value is double)
+                return (((double)value) == qyInput.CurrentPosition);
+            if (value is bool)
+                return (bool)value;
             Debug.Assert(value is XPathNavigator, "Unknown value type");
             return true;
         }
@@ -113,7 +127,7 @@ namespace MS.Internal.Xml.XPath
                             }
                             AttributeQuery? attributeQuery = qyInput as AttributeQuery;
                             if (attributeQuery != null)
-                            {// @foo[3], but not @foo[expr][2]
+                            { // @foo[3], but not @foo[expr][2]
                                 XPathNavigator result = current.Clone();
                                 result.MoveToParent();
                                 int i = 0;
@@ -134,18 +148,45 @@ namespace MS.Internal.Xml.XPath
                         }
                         break;
                     case XPathResultType.NodeSet:
-                        _cond.Evaluate(new XPathSingletonIterator(current, /*moved:*/true));
+                        _cond.Evaluate(
+                            new XPathSingletonIterator(
+                                current, /*moved:*/
+                                true
+                            )
+                        );
                         return (_cond.Advance() != null) ? context : null;
                     case XPathResultType.Boolean:
                         if (_noPosition)
                         {
-                            return ((bool)_cond.Evaluate(new XPathSingletonIterator(current, /*moved:*/true))) ? context : null;
+                            return (
+                                (bool)
+                                    _cond.Evaluate(
+                                        new XPathSingletonIterator(
+                                            current, /*moved:*/
+                                            true
+                                        )
+                                    )
+                            )
+                                ? context
+                                : null;
                         }
                         break;
                     case XPathResultType.String:
                         if (_noPosition)
                         {
-                            return (((string)_cond.Evaluate(new XPathSingletonIterator(current, /*moved:*/true))).Length != 0) ? context : null;
+                            return (
+                                (
+                                    (string)
+                                        _cond.Evaluate(
+                                            new XPathSingletonIterator(
+                                                current, /*moved:*/
+                                                true
+                                            )
+                                        )
+                                ).Length != 0
+                            )
+                                ? context
+                                : null;
                         }
                         break;
                     case XPathResultType_Navigator:
@@ -155,7 +196,12 @@ namespace MS.Internal.Xml.XPath
                 }
                 /* Generic case */
                 {
-                    Evaluate(new XPathSingletonIterator(context, /*moved:*/true));
+                    Evaluate(
+                        new XPathSingletonIterator(
+                            context, /*moved:*/
+                            true
+                        )
+                    );
                     XPathNavigator? result;
                     while ((result = Advance()) != null)
                     {
@@ -173,10 +219,14 @@ namespace MS.Internal.Xml.XPath
         {
             get
             {
-                return QueryProps.Position | (qyInput.Properties & (QueryProps.Merge | QueryProps.Reverse));
+                return QueryProps.Position
+                    | (qyInput.Properties & (QueryProps.Merge | QueryProps.Reverse));
             }
         }
 
-        public override XPathNodeIterator Clone() { return new FilterQuery(this); }
+        public override XPathNodeIterator Clone()
+        {
+            return new FilterQuery(this);
+        }
     }
 }

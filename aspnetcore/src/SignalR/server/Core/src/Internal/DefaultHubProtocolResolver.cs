@@ -16,10 +16,15 @@ internal sealed partial class DefaultHubProtocolResolver : IHubProtocolResolver
 
     public IReadOnlyList<IHubProtocol> AllProtocols => _hubProtocols;
 
-    public DefaultHubProtocolResolver(IEnumerable<IHubProtocol> availableProtocols, ILogger<DefaultHubProtocolResolver> logger)
+    public DefaultHubProtocolResolver(
+        IEnumerable<IHubProtocol> availableProtocols,
+        ILogger<DefaultHubProtocolResolver> logger
+    )
     {
         _logger = logger ?? NullLogger<DefaultHubProtocolResolver>.Instance;
-        _availableProtocols = new Dictionary<string, IHubProtocol>(StringComparer.OrdinalIgnoreCase);
+        _availableProtocols = new Dictionary<string, IHubProtocol>(
+            StringComparer.OrdinalIgnoreCase
+        );
 
         foreach (var protocol in availableProtocols)
         {
@@ -33,7 +38,13 @@ internal sealed partial class DefaultHubProtocolResolver : IHubProtocolResolver
     {
         protocolName = protocolName ?? throw new ArgumentNullException(nameof(protocolName));
 
-        if (_availableProtocols.TryGetValue(protocolName, out var protocol) && (supportedProtocols == null || supportedProtocols.Contains(protocolName, StringComparer.OrdinalIgnoreCase)))
+        if (
+            _availableProtocols.TryGetValue(protocolName, out var protocol)
+            && (
+                supportedProtocols == null
+                || supportedProtocols.Contains(protocolName, StringComparer.OrdinalIgnoreCase)
+            )
+        )
         {
             Log.FoundImplementationForProtocol(_logger, protocolName);
             return protocol;
@@ -46,10 +57,27 @@ internal sealed partial class DefaultHubProtocolResolver : IHubProtocolResolver
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Debug, "Registered SignalR Protocol: {ProtocolName}, implemented by {ImplementationType}.", EventName = "RegisteredSignalRProtocol")]
-        public static partial void RegisteredSignalRProtocol(ILogger logger, string protocolName, Type implementationType);
+        [LoggerMessage(
+            1,
+            LogLevel.Debug,
+            "Registered SignalR Protocol: {ProtocolName}, implemented by {ImplementationType}.",
+            EventName = "RegisteredSignalRProtocol"
+        )]
+        public static partial void RegisteredSignalRProtocol(
+            ILogger logger,
+            string protocolName,
+            Type implementationType
+        );
 
-        [LoggerMessage(2, LogLevel.Debug, "Found protocol implementation for requested protocol: {ProtocolName}.", EventName = "FoundImplementationForProtocol")]
-        public static partial void FoundImplementationForProtocol(ILogger logger, string protocolName);
+        [LoggerMessage(
+            2,
+            LogLevel.Debug,
+            "Found protocol implementation for requested protocol: {ProtocolName}.",
+            EventName = "FoundImplementationForProtocol"
+        )]
+        public static partial void FoundImplementationForProtocol(
+            ILogger logger,
+            string protocolName
+        );
     }
 }

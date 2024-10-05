@@ -18,10 +18,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 {
     internal partial class SymbolTreeInfo
     {
-        private static readonly SimplePool<MultiDictionary<string, INamespaceOrTypeSymbol>> s_symbolMapPool = new(() => new());
+        private static readonly SimplePool<
+            MultiDictionary<string, INamespaceOrTypeSymbol>
+        > s_symbolMapPool = new(() => new());
 
-        private static MultiDictionary<string, INamespaceOrTypeSymbol> AllocateSymbolMap()
-            => s_symbolMapPool.Allocate();
+        private static MultiDictionary<string, INamespaceOrTypeSymbol> AllocateSymbolMap() =>
+            s_symbolMapPool.Allocate();
 
         private static void FreeSymbolMap(MultiDictionary<string, INamespaceOrTypeSymbol> symbolMap)
         {
@@ -29,11 +31,13 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             s_symbolMapPool.Free(symbolMap);
         }
 
-        private static string GetSourceKeySuffix(Project project)
-            => "_Source_" + project.FilePath;
+        private static string GetSourceKeySuffix(Project project) => "_Source_" + project.FilePath;
 
         public static Task<SymbolTreeInfo> GetInfoForSourceAssemblyAsync(
-            Project project, Checksum checksum, CancellationToken cancellationToken)
+            Project project,
+            Checksum checksum,
+            CancellationToken cancellationToken
+        )
         {
             var solution = project.Solution;
 
@@ -41,9 +45,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 solution.Services,
                 SolutionKey.ToSolutionKey(solution),
                 checksum,
-                createAsync: checksum => CreateSourceSymbolTreeInfoAsync(project, checksum, cancellationToken),
+                createAsync: checksum =>
+                    CreateSourceSymbolTreeInfoAsync(project, checksum, cancellationToken),
                 keySuffix: GetSourceKeySuffix(project),
-                cancellationToken);
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -52,49 +58,75 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         /// stale data.
         /// </summary>
         public static async Task<SymbolTreeInfo?> LoadAnyInfoForSourceAssemblyAsync(
-            Project project, CancellationToken cancellationToken)
+            Project project,
+            CancellationToken cancellationToken
+        )
         {
             return await LoadAsync(
-                project.Solution.Services,
-                SolutionKey.ToSolutionKey(project.Solution),
-                checksum: await GetSourceSymbolsChecksumAsync(project, cancellationToken).ConfigureAwait(false),
-                checksumMustMatch: false,
-                GetSourceKeySuffix(project),
-                cancellationToken).ConfigureAwait(false);
+                    project.Solution.Services,
+                    SolutionKey.ToSolutionKey(project.Solution),
+                    checksum: await GetSourceSymbolsChecksumAsync(project, cancellationToken)
+                        .ConfigureAwait(false),
+                    checksumMustMatch: false,
+                    GetSourceKeySuffix(project),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
         /// <summary>
         /// Cache of project to the checksum for it so that we don't have to expensively recompute
         /// this each time we get a project.
         /// </summary>
-        private static readonly ConditionalWeakTable<ProjectState, AsyncLazy<Checksum>> s_projectToSourceChecksum = new();
+        private static readonly ConditionalWeakTable<
+            ProjectState,
+            AsyncLazy<Checksum>
+        > s_projectToSourceChecksum = new();
 
-        public static Task<Checksum> GetSourceSymbolsChecksumAsync(Project project, CancellationToken cancellationToken)
+        public static Task<Checksum> GetSourceSymbolsChecksumAsync(
+            Project project,
+            CancellationToken cancellationToken
+        )
         {
             var lazy = s_projectToSourceChecksum.GetValue(
-                project.State, static p => AsyncLazy.Create(c => ComputeSourceSymbolsChecksumAsync(p, c)));
+                project.State,
+                static p => AsyncLazy.Create(c => ComputeSourceSymbolsChecksumAsync(p, c))
+            );
 
             return lazy.GetValueAsync(cancellationToken);
         }
 
-        private static async Task<Checksum> ComputeSourceSymbolsChecksumAsync(ProjectState projectState, CancellationToken cancellationToken)
+        private static async Task<Checksum> ComputeSourceSymbolsChecksumAsync(
+            ProjectState projectState,
+            CancellationToken cancellationToken
+        )
         {
             // The SymbolTree for source is built from the source-symbols from the project's compilation's
             // assembly.  Specifically, we only get the name, kind and parent/child relationship of all the
-            // child symbols.  So we want to be able to reuse the index as long as none of these have 
+            // child symbols.  So we want to be able to reuse the index as long as none of these have
             // changed.  The only thing that can make those source-symbols change in that manner are if
             // the text of any document changes, or if options for the project change.  So we build our
             // checksum out of that data.
-            var serializer = projectState.LanguageServices.SolutionServices.GetService<ISerializerService>();
-            var projectStateChecksums = await projectState.GetStateChecksumsAsync(cancellationToken).ConfigureAwait(false);
+            var serializer =
+                projectState.LanguageServices.SolutionServices.GetService<ISerializerService>();
+            var projectStateChecksums = await projectState
+                .GetStateChecksumsAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             // Order the documents by FilePath.  Default ordering in the RemoteWorkspace is
             // to be ordered by Guid (which is not consistent across VS sessions).
-            var textChecksumsTasks = projectState.DocumentStates.States.Values.OrderBy(state => state.FilePath, StringComparer.Ordinal).Select(async state =>
-            {
-                var documentStateChecksum = await state.GetStateChecksumsAsync(cancellationToken).ConfigureAwait(false);
-                return documentStateChecksum.Text;
-            });
+            var textChecksumsTasks = projectState
+                .DocumentStates.States.Values.OrderBy(
+                    state => state.FilePath,
+                    StringComparer.Ordinal
+                )
+                .Select(async state =>
+                {
+                    var documentStateChecksum = await state
+                        .GetStateChecksumsAsync(cancellationToken)
+                        .ConfigureAwait(false);
+                    return documentStateChecksum.Text;
+                });
 
             var compilationOptionsChecksum = projectStateChecksums.CompilationOptions;
             var parseOptionsChecksum = projectStateChecksums.ParseOptions;
@@ -106,7 +138,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             allChecksums.Add(compilationOptionsChecksum);
             allChecksums.Add(parseOptionsChecksum);
 
-            // Include serialization format version in our checksum.  That way if the 
+            // Include serialization format version in our checksum.  That way if the
             // version ever changes, all persisted data won't match the current checksum
             // we expect, and we'll recompute things.
             allChecksums.Add(SerializationFormatChecksum);
@@ -115,9 +147,14 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         }
 
         internal static async ValueTask<SymbolTreeInfo> CreateSourceSymbolTreeInfoAsync(
-            Project project, Checksum checksum, CancellationToken cancellationToken)
+            Project project,
+            Checksum checksum,
+            CancellationToken cancellationToken
+        )
         {
-            var compilation = await project.GetCompilationAsync(cancellationToken).ConfigureAwait(false);
+            var compilation = await project
+                .GetCompilationAsync(cancellationToken)
+                .ConfigureAwait(false);
             var assembly = compilation?.Assembly;
             if (assembly == null)
                 return CreateEmpty(checksum);
@@ -130,13 +167,19 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
                 var globalNamespaceName = assembly.GlobalNamespace.Name;
                 symbolMap.Add(globalNamespaceName, assembly.GlobalNamespace);
-                GenerateSourceNodes(globalNamespaceName, RootNodeParentIndex, symbolMap[globalNamespaceName], unsortedBuilderNodes);
+                GenerateSourceNodes(
+                    globalNamespaceName,
+                    RootNodeParentIndex,
+                    symbolMap[globalNamespaceName],
+                    unsortedBuilderNodes
+                );
 
                 return CreateSymbolTreeInfo(
                     checksum,
                     unsortedBuilderNodes.ToImmutable(),
                     inheritanceMap: new OrderPreservingMultiDictionary<string, string>(),
-                    receiverTypeNameToExtensionMethodMap: null);
+                    receiverTypeNameToExtensionMethodMap: null
+                );
             }
             finally
             {
@@ -148,7 +191,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             string name,
             int parentIndex,
             MultiDictionary<string, INamespaceOrTypeSymbol>.ValueSet symbolsWithSameName,
-            ArrayBuilder<BuilderNode> list)
+            ArrayBuilder<BuilderNode> list
+        )
         {
             // Add the node for this name, and record which parent it points at.  And keep track of the index of the
             // node we just added.
@@ -198,7 +242,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             }
         }
 
-        private static void AddChildNamespacesAndTypes(INamespaceOrTypeSymbol symbol, MultiDictionary<string, INamespaceOrTypeSymbol> symbolMap)
+        private static void AddChildNamespacesAndTypes(
+            INamespaceOrTypeSymbol symbol,
+            MultiDictionary<string, INamespaceOrTypeSymbol> symbolMap
+        )
         {
             if (symbol is INamespaceSymbol namespaceSymbol)
             {

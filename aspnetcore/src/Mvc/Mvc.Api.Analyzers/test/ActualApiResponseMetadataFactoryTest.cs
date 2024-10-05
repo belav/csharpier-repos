@@ -12,12 +12,13 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
 public class ActualApiResponseMetadataFactoryTest
 {
-    private static readonly string Namespace = typeof(ActualApiResponseMetadataFactoryTest).Namespace;
+    private static readonly string Namespace =
+        typeof(ActualApiResponseMetadataFactoryTest).Namespace;
 
     public enum ReturnOperationTestVariant
     {
         Default,
-        SwitchExpression
+        SwitchExpression,
     }
 
     [Fact]
@@ -25,7 +26,9 @@ public class ActualApiResponseMetadataFactoryTest
     {
         // Arrange
         var compilation = await GetCompilation("GetDefaultStatusCodeTest");
-        var attribute = compilation.GetTypeByMetadataName(typeof(TestActionResultUsingStatusCodesConstants).FullName).GetAttributes()[0];
+        var attribute = compilation
+            .GetTypeByMetadataName(typeof(TestActionResultUsingStatusCodesConstants).FullName)
+            .GetAttributes()[0];
 
         // Act
         var actual = ActualApiResponseMetadataFactory.GetDefaultStatusCode(attribute);
@@ -39,7 +42,9 @@ public class ActualApiResponseMetadataFactoryTest
     {
         // Arrange
         var compilation = await GetCompilation("GetDefaultStatusCodeTest");
-        var attribute = compilation.GetTypeByMetadataName(typeof(TestActionResultUsingHttpStatusCodeCast).FullName).GetAttributes()[0];
+        var attribute = compilation
+            .GetTypeByMetadataName(typeof(TestActionResultUsingHttpStatusCodeCast).FullName)
+            .GetAttributes()[0];
 
         // Act
         var actual = ActualApiResponseMetadataFactory.GetDefaultStatusCode(attribute);
@@ -52,7 +57,8 @@ public class ActualApiResponseMetadataFactoryTest
     public async Task InspectReturnExpression_ReturnsNull_IfReturnExpressionCannotBeFound()
     {
         // Arrange & Act
-        var source = @"
+        var source =
+            @"
             using Microsoft.AspNetCore.Mvc;
 
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
@@ -66,7 +72,10 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         }
     }
 }";
-        var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(GetType().Assembly, new[] { source });
+        var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(
+            GetType().Assembly,
+            new[] { source }
+        );
         var compilation = await project.GetCompilationAsync();
         Assert.True(ApiControllerSymbolCache.TryCreate(compilation, out var symbolCache));
 
@@ -75,12 +84,17 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 
         var method = (IMethodSymbol)returnType.GetMembers().First();
         var methodSyntax = syntaxTree.GetRoot().FindNode(method.Locations[0].SourceSpan);
-        var returnStatement = methodSyntax.DescendantNodes().OfType<ReturnStatementSyntax>().First();
-        var returnOperation = (IReturnOperation)compilation.GetSemanticModel(syntaxTree).GetOperation(returnStatement);
+        var returnStatement = methodSyntax
+            .DescendantNodes()
+            .OfType<ReturnStatementSyntax>()
+            .First();
+        var returnOperation = (IReturnOperation)
+            compilation.GetSemanticModel(syntaxTree).GetOperation(returnStatement);
 
         var actualResponseMetadata = ActualApiResponseMetadataFactory.InspectReturnOperation(
             symbolCache,
-            returnOperation);
+            returnOperation
+        );
 
         // Assert
         var metadata = Assert.Single(actualResponseMetadata);
@@ -90,7 +104,9 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
     [Theory]
     [InlineData(ReturnOperationTestVariant.Default)]
     [InlineData(ReturnOperationTestVariant.SwitchExpression)]
-    public async Task InspectReturnExpression_ReturnsStatusCodeFromDefaultStatusCodeAttributeOnActionResult(ReturnOperationTestVariant variant)
+    public async Task InspectReturnExpression_ReturnsStatusCodeFromDefaultStatusCodeAttributeOnActionResult(
+        ReturnOperationTestVariant variant
+    )
     {
         // Arrange & Act
         var actualResponseMetadata = await RunInspectReturnStatementSyntax(variant);
@@ -104,7 +120,9 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
     [Theory]
     [InlineData(ReturnOperationTestVariant.Default)]
     [InlineData(ReturnOperationTestVariant.SwitchExpression)]
-    public async Task InspectReturnExpression_ReturnsDefaultResponseMetadata_IfReturnedTypeIsNotActionResult(ReturnOperationTestVariant variant)
+    public async Task InspectReturnExpression_ReturnsDefaultResponseMetadata_IfReturnedTypeIsNotActionResult(
+        ReturnOperationTestVariant variant
+    )
     {
         // Arrange & Act
         var actualResponseMetadata = await RunInspectReturnStatementSyntax(variant);
@@ -118,7 +136,9 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
     [Theory]
     [InlineData(ReturnOperationTestVariant.Default)]
     [InlineData(ReturnOperationTestVariant.SwitchExpression)]
-    public async Task InspectReturnExpression_ReturnsStatusCodeFromStatusCodePropertyAssignment(ReturnOperationTestVariant variant)
+    public async Task InspectReturnExpression_ReturnsStatusCodeFromStatusCodePropertyAssignment(
+        ReturnOperationTestVariant variant
+    )
     {
         // Arrange & Act
         var actualResponseMetadata = await RunInspectReturnStatementSyntax(variant);
@@ -132,7 +152,9 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
     [Theory]
     [InlineData(ReturnOperationTestVariant.Default)]
     [InlineData(ReturnOperationTestVariant.SwitchExpression)]
-    public async Task InspectReturnExpression_ReturnsStatusCodeFromConstructorAssignment(ReturnOperationTestVariant variant)
+    public async Task InspectReturnExpression_ReturnsStatusCodeFromConstructorAssignment(
+        ReturnOperationTestVariant variant
+    )
     {
         // Arrange & Act
         var actualResponseMetadata = await RunInspectReturnStatementSyntax(variant);
@@ -146,7 +168,9 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
     [Theory]
     [InlineData(ReturnOperationTestVariant.Default)]
     [InlineData(ReturnOperationTestVariant.SwitchExpression)]
-    public async Task InspectReturnExpression_ReturnsStatusCodeFromHelperMethod(ReturnOperationTestVariant variant)
+    public async Task InspectReturnExpression_ReturnsStatusCodeFromHelperMethod(
+        ReturnOperationTestVariant variant
+    )
     {
         // Arrange & Act
         var actualResponseMetadata = await RunInspectReturnStatementSyntax(variant);
@@ -160,7 +184,9 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
     [Theory]
     [InlineData(ReturnOperationTestVariant.Default)]
     [InlineData(ReturnOperationTestVariant.SwitchExpression)]
-    public async Task InspectReturnExpression_UsesExplicitlySpecifiedStatusCode_ForActionResultWithDefaultStatusCode(ReturnOperationTestVariant variant)
+    public async Task InspectReturnExpression_UsesExplicitlySpecifiedStatusCode_ForActionResultWithDefaultStatusCode(
+        ReturnOperationTestVariant variant
+    )
     {
         // Arrange & Act
         var actualResponseMetadata = await RunInspectReturnStatementSyntax(variant);
@@ -174,7 +200,9 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
     [Theory]
     [InlineData(ReturnOperationTestVariant.Default)]
     [InlineData(ReturnOperationTestVariant.SwitchExpression)]
-    public async Task InspectReturnExpression_ReadsStatusCodeConstant(ReturnOperationTestVariant variant)
+    public async Task InspectReturnExpression_ReadsStatusCodeConstant(
+        ReturnOperationTestVariant variant
+    )
     {
         // Arrange & Act
         var actualResponseMetadata = await RunInspectReturnStatementSyntax(variant);
@@ -188,7 +216,9 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
     [Theory]
     [InlineData(ReturnOperationTestVariant.Default)]
     [InlineData(ReturnOperationTestVariant.SwitchExpression)]
-    public async Task InspectReturnExpression_DoesNotReadLocalFieldWithConstantValue(ReturnOperationTestVariant variant)
+    public async Task InspectReturnExpression_DoesNotReadLocalFieldWithConstantValue(
+        ReturnOperationTestVariant variant
+    )
     {
         // This is a gap in the analyzer. We're using this to document the current behavior and not an expecation.
         // Arrange & Act
@@ -202,7 +232,9 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
     [Theory]
     [InlineData(ReturnOperationTestVariant.Default)]
     [InlineData(ReturnOperationTestVariant.SwitchExpression)]
-    public async Task InspectReturnExpression_FallsBackToDefaultStatusCode_WhenAppliedStatusCodeCannotBeRead(ReturnOperationTestVariant variant)
+    public async Task InspectReturnExpression_FallsBackToDefaultStatusCode_WhenAppliedStatusCodeCannotBeRead(
+        ReturnOperationTestVariant variant
+    )
     {
         // This is a gap in the analyzer. We're using this to document the current behavior and not an expecation.
         // Arrange & Act
@@ -217,7 +249,9 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
     [Theory]
     [InlineData(ReturnOperationTestVariant.Default)]
     [InlineData(ReturnOperationTestVariant.SwitchExpression)]
-    public async Task InspectReturnExpression_SetsReturnType_WhenLiteralTypeIsSpecifiedInConstructor(ReturnOperationTestVariant variant)
+    public async Task InspectReturnExpression_SetsReturnType_WhenLiteralTypeIsSpecifiedInConstructor(
+        ReturnOperationTestVariant variant
+    )
     {
         // Arrange & Act
         var actualResponseMetadata = await RunInspectReturnStatementSyntax(variant);
@@ -231,7 +265,9 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
     [Theory]
     [InlineData(ReturnOperationTestVariant.Default)]
     [InlineData(ReturnOperationTestVariant.SwitchExpression)]
-    public async Task InspectReturnExpression_SetsReturnType_WhenLocalValueIsSpecifiedInConstructor(ReturnOperationTestVariant variant)
+    public async Task InspectReturnExpression_SetsReturnType_WhenLocalValueIsSpecifiedInConstructor(
+        ReturnOperationTestVariant variant
+    )
     {
         // Arrange & Act
         var actualResponseMetadata = await RunInspectReturnStatementSyntax(variant);
@@ -245,7 +281,9 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
     [Theory]
     [InlineData(ReturnOperationTestVariant.Default)]
     [InlineData(ReturnOperationTestVariant.SwitchExpression)]
-    public async Task InspectReturnExpression_SetsReturnType_WhenValueIsReturned(ReturnOperationTestVariant variant)
+    public async Task InspectReturnExpression_SetsReturnType_WhenValueIsReturned(
+        ReturnOperationTestVariant variant
+    )
     {
         // Arrange & Act
         var actualResponseMetadata = await RunInspectReturnStatementSyntax(variant);
@@ -259,7 +297,9 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
     [Theory]
     [InlineData(ReturnOperationTestVariant.Default)]
     [InlineData(ReturnOperationTestVariant.SwitchExpression)]
-    public async Task InspectReturnExpression_ReturnsNullReturnType_IfValueIsNotSpecified(ReturnOperationTestVariant variant)
+    public async Task InspectReturnExpression_ReturnsNullReturnType_IfValueIsNotSpecified(
+        ReturnOperationTestVariant variant
+    )
     {
         // Arrange & Act
         var actualResponseMetadata = await RunInspectReturnStatementSyntax(variant);
@@ -275,10 +315,15 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
     {
         // Arrange
         var typeName = typeof(TryGetActualResponseMetadataController).FullName;
-        var methodName = nameof(TryGetActualResponseMetadataController.ActionWithActionResultOfTReturningOkResult);
+        var methodName = nameof(
+            TryGetActualResponseMetadataController.ActionWithActionResultOfTReturningOkResult
+        );
 
         // Act
-        var (success, responseMetadatas, _) = await TryGetActualResponseMetadata(typeName, methodName);
+        var (success, responseMetadatas, _) = await TryGetActualResponseMetadata(
+            typeName,
+            methodName
+        );
 
         // Assert
         Assert.True(success);
@@ -288,7 +333,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             {
                 Assert.False(metadata.IsDefaultResponse);
                 Assert.Equal(200, metadata.StatusCode);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -296,10 +342,15 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
     {
         // Arrange
         var typeName = typeof(TryGetActualResponseMetadataController).FullName;
-        var methodName = nameof(TryGetActualResponseMetadataController.ActionWithActionResultOfTReturningModel);
+        var methodName = nameof(
+            TryGetActualResponseMetadataController.ActionWithActionResultOfTReturningModel
+        );
 
         // Act
-        var (success, responseMetadatas, _) = await TryGetActualResponseMetadata(typeName, methodName);
+        var (success, responseMetadatas, _) = await TryGetActualResponseMetadata(
+            typeName,
+            methodName
+        );
 
         // Assert
         Assert.True(success);
@@ -308,7 +359,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             metadata =>
             {
                 Assert.True(metadata.IsDefaultResponse);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -316,10 +368,15 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
     {
         // Arrange
         var typeName = typeof(TryGetActualResponseMetadataController).FullName;
-        var methodName = nameof(TryGetActualResponseMetadataController.ActionReturningNotFoundAndModel);
+        var methodName = nameof(
+            TryGetActualResponseMetadataController.ActionReturningNotFoundAndModel
+        );
 
         // Act
-        var (success, responseMetadatas, testSource) = await TryGetActualResponseMetadata(typeName, methodName);
+        var (success, responseMetadatas, testSource) = await TryGetActualResponseMetadata(
+            typeName,
+            methodName
+        );
 
         // Assert
         Assert.True(success);
@@ -329,13 +386,20 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             {
                 Assert.False(metadata.IsDefaultResponse);
                 Assert.Equal(204, metadata.StatusCode);
-                AnalyzerAssert.DiagnosticLocation(testSource.MarkerLocations["MM1"], metadata.ReturnOperation.Syntax.GetLocation());
+                AnalyzerAssert.DiagnosticLocation(
+                    testSource.MarkerLocations["MM1"],
+                    metadata.ReturnOperation.Syntax.GetLocation()
+                );
             },
             metadata =>
             {
                 Assert.True(metadata.IsDefaultResponse);
-                AnalyzerAssert.DiagnosticLocation(testSource.MarkerLocations["MM2"], metadata.ReturnOperation.Syntax.GetLocation());
-            });
+                AnalyzerAssert.DiagnosticLocation(
+                    testSource.MarkerLocations["MM2"],
+                    metadata.ReturnOperation.Syntax.GetLocation()
+                );
+            }
+        );
     }
 
     [Fact]
@@ -343,10 +407,15 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
     {
         // Arrange
         var typeName = typeof(TryGetActualResponseMetadataController).FullName;
-        var methodName = nameof(TryGetActualResponseMetadataController.ActionWithActionResultOfTReturningOkResultExpression);
+        var methodName = nameof(
+            TryGetActualResponseMetadataController.ActionWithActionResultOfTReturningOkResultExpression
+        );
 
         // Act
-        var (success, responseMetadatas, _) = await TryGetActualResponseMetadata(typeName, methodName);
+        var (success, responseMetadatas, _) = await TryGetActualResponseMetadata(
+            typeName,
+            methodName
+        );
 
         // Assert
         Assert.True(success);
@@ -356,13 +425,21 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             {
                 Assert.False(metadata.IsDefaultResponse);
                 Assert.Equal(200, metadata.StatusCode);
-            });
+            }
+        );
     }
 
-    private async Task<(bool result, IList<ActualApiResponseMetadata> responseMetadatas, TestSource testSource)> TryGetActualResponseMetadata(string typeName, string methodName)
+    private async Task<(
+        bool result,
+        IList<ActualApiResponseMetadata> responseMetadatas,
+        TestSource testSource
+    )> TryGetActualResponseMetadata(string typeName, string methodName)
     {
         var testSource = MvcTestSource.Read(GetType().Name, "TryGetActualResponseMetadataTests");
-        var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(GetType().Assembly, new[] { testSource.Source });
+        var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(
+            GetType().Assembly,
+            new[] { testSource.Source }
+        );
 
         var compilation = await GetCompilation("TryGetActualResponseMetadataTests");
 
@@ -371,15 +448,24 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         Assert.True(ApiControllerSymbolCache.TryCreate(compilation, out var symbolCache));
 
         var syntaxTree = method.DeclaringSyntaxReferences[0].SyntaxTree;
-        var methodSyntax = (MethodDeclarationSyntax)syntaxTree.GetRoot().FindNode(method.Locations[0].SourceSpan);
-        var methodOperation = (IMethodBodyBaseOperation)compilation.GetSemanticModel(syntaxTree).GetOperation(methodSyntax);
+        var methodSyntax = (MethodDeclarationSyntax)
+            syntaxTree.GetRoot().FindNode(method.Locations[0].SourceSpan);
+        var methodOperation = (IMethodBodyBaseOperation)
+            compilation.GetSemanticModel(syntaxTree).GetOperation(methodSyntax);
 
-        var result = ActualApiResponseMetadataFactory.TryGetActualResponseMetadata(symbolCache, methodOperation, out var responseMetadatas);
+        var result = ActualApiResponseMetadataFactory.TryGetActualResponseMetadata(
+            symbolCache,
+            methodOperation,
+            out var responseMetadatas
+        );
 
         return (result, responseMetadatas, testSource);
     }
 
-    private async Task<ActualApiResponseMetadata?[]> RunInspectReturnStatementSyntax(ReturnOperationTestVariant variant = ReturnOperationTestVariant.Default, [CallerMemberName] string test = null)
+    private async Task<ActualApiResponseMetadata?[]> RunInspectReturnStatementSyntax(
+        ReturnOperationTestVariant variant = ReturnOperationTestVariant.Default,
+        [CallerMemberName] string test = null
+    )
     {
         var testClassName = GetTestClassName(variant);
         var controllerTypeName = GetControllerTypeName(variant);
@@ -392,17 +478,28 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 
         var method = (IMethodSymbol)Assert.Single(controllerType.GetMembers(test));
         var methodSyntax = syntaxTree.GetRoot().FindNode(method.Locations[0].SourceSpan);
-        var returnStatement = methodSyntax.DescendantNodes().OfType<ReturnStatementSyntax>().First();
-        var returnOperation = (IReturnOperation)compilation.GetSemanticModel(syntaxTree).GetOperation(returnStatement);
+        var returnStatement = methodSyntax
+            .DescendantNodes()
+            .OfType<ReturnStatementSyntax>()
+            .First();
+        var returnOperation = (IReturnOperation)
+            compilation.GetSemanticModel(syntaxTree).GetOperation(returnStatement);
 
         return ActualApiResponseMetadataFactory.InspectReturnOperation(
             symbolCache,
-            returnOperation);
+            returnOperation
+        );
     }
 
-    private async Task<ActualApiResponseMetadata?[]> RunInspectReturnStatementSyntax(string source, string test)
+    private async Task<ActualApiResponseMetadata?[]> RunInspectReturnStatementSyntax(
+        string source,
+        string test
+    )
     {
-        var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(GetType().Assembly, new[] { source });
+        var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(
+            GetType().Assembly,
+            new[] { source }
+        );
         var compilation = await project.GetCompilationAsync();
         Assert.True(ApiControllerSymbolCache.TryCreate(compilation, out var symbolCache));
 
@@ -411,18 +508,26 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 
         var method = (IMethodSymbol)returnType.GetMembers().First();
         var methodSyntax = syntaxTree.GetRoot().FindNode(method.Locations[0].SourceSpan);
-        var returnStatement = methodSyntax.DescendantNodes().OfType<ReturnStatementSyntax>().First();
-        var returnOperation = (IReturnOperation)compilation.GetSemanticModel(syntaxTree).GetOperation(returnStatement);
+        var returnStatement = methodSyntax
+            .DescendantNodes()
+            .OfType<ReturnStatementSyntax>()
+            .First();
+        var returnOperation = (IReturnOperation)
+            compilation.GetSemanticModel(syntaxTree).GetOperation(returnStatement);
 
         return ActualApiResponseMetadataFactory.InspectReturnOperation(
             symbolCache,
-            returnOperation);
+            returnOperation
+        );
     }
 
     private Task<Compilation> GetCompilation(string test)
     {
         var testSource = MvcTestSource.Read(GetType().Name, test);
-        var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(GetType().Assembly, new[] { testSource.Source });
+        var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(
+            GetType().Assembly,
+            new[] { testSource.Source }
+        );
 
         return project.GetCompilationAsync();
     }
@@ -431,7 +536,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
     {
         return variant switch
         {
-            ReturnOperationTestVariant.SwitchExpression => "InspectReturnExpressionTestsForSwitchExpression",
+            ReturnOperationTestVariant.SwitchExpression =>
+                "InspectReturnExpressionTestsForSwitchExpression",
             _ => "InspectReturnExpressionTests",
         };
     }
@@ -440,7 +546,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
     {
         var controllerType = variant switch
         {
-            ReturnOperationTestVariant.SwitchExpression => typeof(TestFiles.InspectReturnExpressionTestsForSwitchExpression.TestController),
+            ReturnOperationTestVariant.SwitchExpression =>
+                typeof(TestFiles.InspectReturnExpressionTestsForSwitchExpression.TestController),
             _ => typeof(TestFiles.InspectReturnExpressionTests.TestController),
         };
 

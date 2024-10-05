@@ -11,15 +11,23 @@ internal static partial class Interop
     {
         internal enum PriorityWhich : int
         {
-            PRIO_PROCESS    = 0,
-            PRIO_PGRP       = 1,
-            PRIO_USER       = 2,
+            PRIO_PROCESS = 0,
+            PRIO_PGRP = 1,
+            PRIO_USER = 2,
         }
 
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetPriority", SetLastError = true)]
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_GetPriority",
+            SetLastError = true
+        )]
         private static partial int GetPriority(PriorityWhich which, int who);
 
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_SetPriority", SetLastError = true)]
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_SetPriority",
+            SetLastError = true
+        )]
         internal static partial int SetPriority(PriorityWhich which, int who, int nice);
 
         /// <summary>
@@ -35,28 +43,33 @@ internal static partial class Interop
             return Marshal.GetLastPInvokeError();
         }
 
-        internal static System.Diagnostics.ThreadPriorityLevel GetThreadPriorityFromNiceValue(int nice)
+        internal static System.Diagnostics.ThreadPriorityLevel GetThreadPriorityFromNiceValue(
+            int nice
+        )
         {
             Debug.Assert((nice >= -20) && (nice <= 20));
-            return
-                (nice < -15) ? ThreadPriorityLevel.TimeCritical :
-                (nice < -10) ? ThreadPriorityLevel.Highest :
-                (nice < -5)  ? ThreadPriorityLevel.AboveNormal :
-                (nice == 0)  ? ThreadPriorityLevel.Normal :
-                (nice <= 5)  ? ThreadPriorityLevel.BelowNormal :
-                (nice <= 10) ? ThreadPriorityLevel.Lowest :
-                ThreadPriorityLevel.Idle;
+            return (nice < -15) ? ThreadPriorityLevel.TimeCritical
+                : (nice < -10) ? ThreadPriorityLevel.Highest
+                : (nice < -5) ? ThreadPriorityLevel.AboveNormal
+                : (nice == 0) ? ThreadPriorityLevel.Normal
+                : (nice <= 5) ? ThreadPriorityLevel.BelowNormal
+                : (nice <= 10) ? ThreadPriorityLevel.Lowest
+                : ThreadPriorityLevel.Idle;
         }
 
-        internal static int GetNiceValueFromThreadPriority(System.Diagnostics.ThreadPriorityLevel priority)
+        internal static int GetNiceValueFromThreadPriority(
+            System.Diagnostics.ThreadPriorityLevel priority
+        )
         {
-            return (priority == ThreadPriorityLevel.TimeCritical ? -20 :
-                priority == ThreadPriorityLevel.Highest ? -15 :
-                priority == ThreadPriorityLevel.AboveNormal ? -10 :
-                priority == ThreadPriorityLevel.Normal ? 0 :
-                priority == ThreadPriorityLevel.BelowNormal ? 5 :
-                priority == ThreadPriorityLevel.Lowest ? 10 :
-                20);
+            return (
+                priority == ThreadPriorityLevel.TimeCritical ? -20
+                : priority == ThreadPriorityLevel.Highest ? -15
+                : priority == ThreadPriorityLevel.AboveNormal ? -10
+                : priority == ThreadPriorityLevel.Normal ? 0
+                : priority == ThreadPriorityLevel.BelowNormal ? 5
+                : priority == ThreadPriorityLevel.Lowest ? 10
+                : 20
+            );
         }
     }
 }

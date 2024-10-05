@@ -27,17 +27,34 @@ namespace System.Buffers.Text
         /// <exceptions>
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
-        public static unsafe bool TryParse(ReadOnlySpan<byte> source, out float value, out int bytesConsumed, char standardFormat = default)
+        public static unsafe bool TryParse(
+            ReadOnlySpan<byte> source,
+            out float value,
+            out int bytesConsumed,
+            char standardFormat = default
+        )
         {
-            Number.NumberBuffer number = new Number.NumberBuffer(Number.NumberBufferKind.FloatingPoint, stackalloc byte[Number.SingleNumberBufferLength]);
+            Number.NumberBuffer number = new Number.NumberBuffer(
+                Number.NumberBufferKind.FloatingPoint,
+                stackalloc byte[Number.SingleNumberBufferLength]
+            );
 
-            if (TryParseNormalAsFloatingPoint(source, ref number, out bytesConsumed, standardFormat))
+            if (
+                TryParseNormalAsFloatingPoint(source, ref number, out bytesConsumed, standardFormat)
+            )
             {
                 value = Number.NumberToFloat<float>(ref number);
                 return true;
             }
 
-            return TryParseAsSpecialFloatingPoint(source, float.PositiveInfinity, float.NegativeInfinity, float.NaN, out value, out bytesConsumed);
+            return TryParseAsSpecialFloatingPoint(
+                source,
+                float.PositiveInfinity,
+                float.NegativeInfinity,
+                float.NaN,
+                out value,
+                out bytesConsumed
+            );
         }
 
         /// <summary>
@@ -60,23 +77,45 @@ namespace System.Buffers.Text
         /// <exceptions>
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
-        public static unsafe bool TryParse(ReadOnlySpan<byte> source, out double value, out int bytesConsumed, char standardFormat = default)
+        public static unsafe bool TryParse(
+            ReadOnlySpan<byte> source,
+            out double value,
+            out int bytesConsumed,
+            char standardFormat = default
+        )
         {
-            Number.NumberBuffer number = new Number.NumberBuffer(Number.NumberBufferKind.FloatingPoint, stackalloc byte[Number.DoubleNumberBufferLength]);
+            Number.NumberBuffer number = new Number.NumberBuffer(
+                Number.NumberBufferKind.FloatingPoint,
+                stackalloc byte[Number.DoubleNumberBufferLength]
+            );
 
-            if (TryParseNormalAsFloatingPoint(source, ref number, out bytesConsumed, standardFormat))
+            if (
+                TryParseNormalAsFloatingPoint(source, ref number, out bytesConsumed, standardFormat)
+            )
             {
                 value = Number.NumberToFloat<double>(ref number);
                 return true;
             }
 
-            return TryParseAsSpecialFloatingPoint(source, double.PositiveInfinity, double.NegativeInfinity, double.NaN, out value, out bytesConsumed);
+            return TryParseAsSpecialFloatingPoint(
+                source,
+                double.PositiveInfinity,
+                double.NegativeInfinity,
+                double.NaN,
+                out value,
+                out bytesConsumed
+            );
         }
 
         //
         // Attempt to parse the regular floating points (the ones without names like "Infinity" and "NaN")
         //
-        private static bool TryParseNormalAsFloatingPoint(ReadOnlySpan<byte> source, ref Number.NumberBuffer number, out int bytesConsumed, char standardFormat)
+        private static bool TryParseNormalAsFloatingPoint(
+            ReadOnlySpan<byte> source,
+            ref Number.NumberBuffer number,
+            out int bytesConsumed,
+            char standardFormat
+        )
         {
             ParseNumberOptions options;
             switch (standardFormat)
@@ -95,7 +134,15 @@ namespace System.Buffers.Text
                 default:
                     return ParserHelpers.TryParseThrowFormatException(out bytesConsumed);
             }
-            if (!TryParseNumber(source, ref number, out bytesConsumed, options, out bool textUsedExponentNotation))
+            if (
+                !TryParseNumber(
+                    source,
+                    ref number,
+                    out bytesConsumed,
+                    options,
+                    out bool textUsedExponentNotation
+                )
+            )
             {
                 return false;
             }
@@ -110,7 +157,15 @@ namespace System.Buffers.Text
         //
         // Assuming the text doesn't look like a normal floating point, we attempt to parse it as one the special floating point values.
         //
-        private static bool TryParseAsSpecialFloatingPoint<T>(ReadOnlySpan<byte> source, T positiveInfinity, T negativeInfinity, T nan, out T value, out int bytesConsumed) where T : struct
+        private static bool TryParseAsSpecialFloatingPoint<T>(
+            ReadOnlySpan<byte> source,
+            T positiveInfinity,
+            T negativeInfinity,
+            T nan,
+            out T value,
+            out int bytesConsumed
+        )
+            where T : struct
         {
             int srcIndex = 0;
             int remaining = source.Length;
@@ -144,9 +199,11 @@ namespace System.Buffers.Text
 
             if (remaining >= 3)
             {
-                if ((((source[srcIndex] ^ (byte)('n')) & ~0x20) == 0) &&
-                    (((source[srcIndex + 1] ^ (byte)('a')) & ~0x20) == 0) &&
-                    (((source[srcIndex + 2] ^ (byte)('n')) & ~0x20) == 0))
+                if (
+                    (((source[srcIndex] ^ (byte)('n')) & ~0x20) == 0)
+                    && (((source[srcIndex + 1] ^ (byte)('a')) & ~0x20) == 0)
+                    && (((source[srcIndex + 2] ^ (byte)('n')) & ~0x20) == 0)
+                )
                 {
                     value = nan;
                     bytesConsumed = 3 + srcIndex;
@@ -156,12 +213,17 @@ namespace System.Buffers.Text
                 if (remaining >= 8)
                 {
                     const int infi = 0x69666E69;
-                    int diff = (BinaryPrimitives.ReadInt32LittleEndian(source.Slice(srcIndex)) ^ infi);
+                    int diff = (
+                        BinaryPrimitives.ReadInt32LittleEndian(source.Slice(srcIndex)) ^ infi
+                    );
 
                     if ((diff & ~0x20202020) == 0)
                     {
                         const int nity = 0x7974696E;
-                        diff = (BinaryPrimitives.ReadInt32LittleEndian(source.Slice(srcIndex + 4)) ^ nity);
+                        diff = (
+                            BinaryPrimitives.ReadInt32LittleEndian(source.Slice(srcIndex + 4))
+                            ^ nity
+                        );
 
                         if ((diff & ~0x20202020) == 0)
                         {

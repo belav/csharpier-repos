@@ -45,8 +45,7 @@ public sealed record RelationalModelValidatorDependencies
     ///     the constructor at any point in this process.
     /// </remarks>
     [EntityFrameworkInternal]
-    public RelationalModelValidatorDependencies(
-        IRelationalTypeMappingSource typeMappingSource)
+    public RelationalModelValidatorDependencies(IRelationalTypeMappingSource typeMappingSource)
     {
         TypeMappingSource = typeMappingSource;
     }

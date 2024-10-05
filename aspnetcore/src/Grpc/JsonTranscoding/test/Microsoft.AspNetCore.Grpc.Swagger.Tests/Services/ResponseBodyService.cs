@@ -3,6 +3,4 @@
 
 namespace Microsoft.AspNetCore.Grpc.Swagger.Tests.Services;
 
-public class ResponseBodyService : ResponseBody.ResponseBody.ResponseBodyBase
-{
-}
+public class ResponseBodyService : ResponseBody.ResponseBody.ResponseBodyBase { }

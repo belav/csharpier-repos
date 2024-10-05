@@ -61,9 +61,11 @@ internal static class ParsingHelpers
     // Quote items that contain commas and are not already quoted.
     private static string? QuoteIfNeeded(string? value)
     {
-        if (!string.IsNullOrEmpty(value) &&
-            value.Contains(',') &&
-            (value[0] != '"' || value[value.Length - 1] != '"'))
+        if (
+            !string.IsNullOrEmpty(value)
+            && value.Contains(',')
+            && (value[0] != '"' || value[value.Length - 1] != '"')
+        )
         {
             return $"\"{value}\"";
         }
@@ -72,8 +74,10 @@ internal static class ParsingHelpers
 
     private static string? DeQuote(string? value)
     {
-        if (!string.IsNullOrEmpty(value) &&
-            (value.Length > 1 && value[0] == '"' && value[value.Length - 1] == '"'))
+        if (
+            !string.IsNullOrEmpty(value)
+            && (value.Length > 1 && value[0] == '"' && value[value.Length - 1] == '"')
+        )
         {
             value = value.Substring(1, value.Length - 2);
         }
@@ -81,7 +85,11 @@ internal static class ParsingHelpers
         return value;
     }
 
-    public static void SetHeaderUnmodified(IHeaderDictionary headers, string key, StringValues? values)
+    public static void SetHeaderUnmodified(
+        IHeaderDictionary headers,
+        string key,
+        StringValues? values
+    )
     {
         ArgumentNullException.ThrowIfNull(headers);
         ArgumentException.ThrowIfNullOrEmpty(key);
@@ -96,7 +104,11 @@ internal static class ParsingHelpers
         }
     }
 
-    public static void AppendHeaderJoined(IHeaderDictionary headers, string key, params string[] values)
+    public static void AppendHeaderJoined(
+        IHeaderDictionary headers,
+        string key,
+        params string[] values
+    )
     {
         ArgumentNullException.ThrowIfNull(headers);
         ArgumentNullException.ThrowIfNull(key);
@@ -117,7 +129,11 @@ internal static class ParsingHelpers
         }
     }
 
-    public static void AppendHeaderUnmodified(IHeaderDictionary headers, string key, StringValues values)
+    public static void AppendHeaderUnmodified(
+        IHeaderDictionary headers,
+        string key,
+        StringValues values
+    )
     {
         ArgumentNullException.ThrowIfNull(headers);
         ArgumentNullException.ThrowIfNull(key);

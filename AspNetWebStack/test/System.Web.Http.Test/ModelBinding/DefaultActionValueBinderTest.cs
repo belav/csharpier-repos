@@ -19,12 +19,16 @@ namespace System.Web.Http.ModelBinding
         public void BindValuesAsync_Throws_Null_ActionDescriptor()
         {
             // Arrange
-            HttpActionDescriptor actionDescriptor = new ReflectedHttpActionDescriptor { MethodInfo = (MethodInfo)MethodInfo.GetCurrentMethod() };
+            HttpActionDescriptor actionDescriptor = new ReflectedHttpActionDescriptor
+            {
+                MethodInfo = (MethodInfo)MethodInfo.GetCurrentMethod(),
+            };
 
             // Act and Assert
             Assert.ThrowsArgumentNull(
                 () => new DefaultActionValueBinder().GetBinding(null),
-                "actionDescriptor");
+                "actionDescriptor"
+            );
         }
 
         private void Action_Int(int id) { }
@@ -69,7 +73,22 @@ namespace System.Web.Http.ModelBinding
         }
 
         // All types in this signature are model bound
-        private void Action_SimpleTypes(char ch, Byte b, Int16 i16, UInt16 u16, Int32 i32, UInt32 u32, Int64 i64, UInt64 u64, string s, DateTime d, Decimal dec, Guid g, DateTimeOffset dateTimeOffset, TimeSpan timespan) { }
+        private void Action_SimpleTypes(
+            char ch,
+            Byte b,
+            Int16 i16,
+            UInt16 u16,
+            Int32 i32,
+            UInt32 u32,
+            Int64 i64,
+            UInt64 u64,
+            string s,
+            DateTime d,
+            Decimal dec,
+            Guid g,
+            DateTimeOffset dateTimeOffset,
+            TimeSpan timespan
+        ) { }
 
         [Fact]
         public void Check_SimpleTypes_Are_ModelBound()
@@ -97,14 +116,18 @@ namespace System.Web.Http.ModelBinding
             AssertIsModelBound(binding, 0);
         }
 
-        private void Action_ComplexTypeWithStringConverter_Body_Override([FromBody] ComplexTypeWithStringConverter x) { }
+        private void Action_ComplexTypeWithStringConverter_Body_Override(
+            [FromBody] ComplexTypeWithStringConverter x
+        ) { }
 
         [Fact]
         public void Check_String_TypeConverter_With_Body_Override()
         {
             DefaultActionValueBinder binder = new DefaultActionValueBinder();
 
-            var binding = binder.GetBinding(GetAction("Action_ComplexTypeWithStringConverter_Body_Override"));
+            var binding = binder.GetBinding(
+                GetAction("Action_ComplexTypeWithStringConverter_Body_Override")
+            );
 
             Assert.Single(binding.ParameterBindings);
             AssertIsBody(binding, 0);
@@ -136,7 +159,6 @@ namespace System.Web.Http.ModelBinding
             AssertIsBody(binding, 0);
         }
 
-
         private void Action_IntArray(int[] arrayFrombody) { }
 
         [Fact]
@@ -149,7 +171,6 @@ namespace System.Web.Http.ModelBinding
             Assert.Single(binding.ParameterBindings);
             AssertIsBody(binding, 0);
         }
-
 
         private void Action_SimpleType_Body([FromBody] int i) { }
 
@@ -217,7 +238,6 @@ namespace System.Web.Http.ModelBinding
             AssertIsModelBound(binding, 0);
         }
 
-
         private void Action_Complex_ValueType(ComplexValueType complex) { }
 
         [Fact]
@@ -260,7 +280,10 @@ namespace System.Web.Http.ModelBinding
             AssertIsModelBound(binding, 0);
         }
 
-        private void Action_Two_Complex_Types(ComplexType complexBody1, ComplexType complexBody2) { }
+        private void Action_Two_Complex_Types(
+            ComplexType complexBody1,
+            ComplexType complexBody2
+        ) { }
 
         [Fact]
         public void Check_Two_Complex_Types_FromBody()
@@ -276,7 +299,10 @@ namespace System.Web.Http.ModelBinding
             AssertIsError(binding, 1);
         }
 
-        private void Action_Complex_Type_UriAndBody([FromUri] ComplexType complexUri, ComplexType complexBody) { }
+        private void Action_Complex_Type_UriAndBody(
+            [FromUri] ComplexType complexUri,
+            ComplexType complexBody
+        ) { }
 
         [Fact]
         public void Check_Complex_Type_FromBody_And_FromUri()
@@ -303,24 +329,30 @@ namespace System.Web.Http.ModelBinding
             AssertIsCancellationToken(binding, 0);
         }
 
-        private void Action_CustomModelBinder_On_Parameter_WithProvider([ModelBinder(typeof(CustomModelBinderProvider))] ComplexType complex) { }
+        private void Action_CustomModelBinder_On_Parameter_WithProvider(
+            [ModelBinder(typeof(CustomModelBinderProvider))] ComplexType complex
+        ) { }
 
         [Fact]
         public void Check_CustomModelBinder_On_Parameter()
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Services.ReplaceRange(typeof(ValueProviderFactory), new ValueProviderFactory[] {
-                new CustomValueProviderFactory(),
-            });
+            config.Services.ReplaceRange(
+                typeof(ValueProviderFactory),
+                new ValueProviderFactory[] { new CustomValueProviderFactory() }
+            );
 
             DefaultActionValueBinder binder = new DefaultActionValueBinder();
 
-            var binding = binder.GetBinding(GetAction("Action_CustomModelBinder_On_Parameter_WithProvider", config));
+            var binding = binder.GetBinding(
+                GetAction("Action_CustomModelBinder_On_Parameter_WithProvider", config)
+            );
 
             Assert.Single(binding.ParameterBindings);
             AssertIsModelBound(binding, 0);
 
-            ModelBinderParameterBinding p = (ModelBinderParameterBinding)binding.ParameterBindings[0];
+            ModelBinderParameterBinding p = (ModelBinderParameterBinding)
+                binding.ParameterBindings[0];
             Assert.IsType<CustomModelBinder>(p.Binder);
 
             // Since the ModelBinderAttribute didn't specify the valueproviders, we should pull those from config.
@@ -329,7 +361,9 @@ namespace System.Web.Http.ModelBinding
         }
 
         // Model binder attribute is on the type's declaration.
-        private void Action_ComplexParameter_With_ModelBinder(ComplexTypeWithModelBinder complex) { }
+        private void Action_ComplexParameter_With_ModelBinder(
+            ComplexTypeWithModelBinder complex
+        ) { }
 
         [Fact]
         public void Check_Parameter_With_ModelBinder_Attribute_On_Type()
@@ -342,7 +376,7 @@ namespace System.Web.Http.ModelBinding
             AssertIsModelBound(binding, 0);
         }
 
-        private void Action_Conflicting_Attributes([FromBody][FromUri] int i) { }
+        private void Action_Conflicting_Attributes([FromBody] [FromUri] int i) { }
 
         [Fact]
         public void Error_Conflicting_Attributes()
@@ -357,9 +391,8 @@ namespace System.Web.Http.ModelBinding
         }
 
         [FromBody]
-        class Widget
-        {
-        }
+        class Widget { }
+
         private void Action_Closest_Attribute_Wins([FromUri] Widget i) { }
 
         [Fact]
@@ -413,7 +446,6 @@ namespace System.Web.Http.ModelBinding
             AssertIsCustomBinder<HttpRequestParameterBinding>(binding, 0);
         }
 
-
         private void Action_CustomBindingAttribute([CustomBindingAttribute] int x) { }
 
         [Fact]
@@ -427,7 +459,11 @@ namespace System.Web.Http.ModelBinding
             Assert.Same(CustomBindingAttribute.MockBinding, parameterBinding);
         }
 
-        [AttributeUsage(AttributeTargets.Class | AttributeTargets.Parameter, Inherited = true, AllowMultiple = false)]
+        [AttributeUsage(
+            AttributeTargets.Class | AttributeTargets.Parameter,
+            Inherited = true,
+            AllowMultiple = false
+        )]
         private class CustomBindingAttribute : ParameterBindingAttribute
         {
             public static HttpParameterBinding MockBinding = new CustomBinding();
@@ -440,17 +476,18 @@ namespace System.Web.Http.ModelBinding
             private class CustomBinding : HttpParameterBinding
             {
                 public CustomBinding()
-                    : base(new Mock<HttpParameterDescriptor>().Object)
-                {
-                }
-                public override Threading.Tasks.Task ExecuteBindingAsync(Metadata.ModelMetadataProvider metadataProvider, HttpActionContext actionContext, CancellationToken cancellationToken)
+                    : base(new Mock<HttpParameterDescriptor>().Object) { }
+
+                public override Threading.Tasks.Task ExecuteBindingAsync(
+                    Metadata.ModelMetadataProvider metadataProvider,
+                    HttpActionContext actionContext,
+                    CancellationToken cancellationToken
+                )
                 {
                     throw new NotImplementedException();
                 }
             }
         }
-
-
 
         // Assert that the binding contract says the given parameter comes from the body
         private void AssertIsBody(HttpActionBinding binding, int paramIdx)
@@ -494,7 +531,6 @@ namespace System.Web.Http.ModelBinding
             Assert.False(p.WillReadBody);
         }
 
-
         // Helper to get an ActionDescriptor for a method name.
         private HttpActionDescriptor GetAction(string name)
         {
@@ -503,9 +539,18 @@ namespace System.Web.Http.ModelBinding
 
         private HttpActionDescriptor GetAction(string name, HttpConfiguration config)
         {
-            MethodInfo method = this.GetType().GetMethod(name, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            MethodInfo method = this.GetType()
+                .GetMethod(
+                    name,
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+                );
             Assert.NotNull(method);
-            return new ReflectedHttpActionDescriptor { MethodInfo = method, Configuration = config, ControllerDescriptor = GetControllerDescriptor(config) };
+            return new ReflectedHttpActionDescriptor
+            {
+                MethodInfo = method,
+                Configuration = config,
+                ControllerDescriptor = GetControllerDescriptor(config),
+            };
         }
 
         // Get a controller descriptor that's sufficiently initialized to use with parameter binding
@@ -515,25 +560,20 @@ namespace System.Web.Http.ModelBinding
         }
 
         // Complex type to use with tests
-        class ComplexType
-        {
-        }
+        class ComplexType { }
 
-        struct ComplexValueType
-        {
-        }
+        struct ComplexValueType { }
 
         // Complex type to use with tests
         [ModelBinder]
-        class ComplexTypeWithModelBinder
-        {
-        }
+        class ComplexTypeWithModelBinder { }
 
         // Add Type converter for string, which causes the type to be viewed as a Simple type.
         [TypeConverter(typeof(MyTypeConverter))]
         public class ComplexTypeWithStringConverter
         {
             public string Data { get; set; }
+
             public ComplexTypeWithStringConverter(string data)
             {
                 Data = data;
@@ -552,7 +592,11 @@ namespace System.Web.Http.ModelBinding
                 return base.CanConvertFrom(context, sourceType);
             }
 
-            public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
+            public override object ConvertFrom(
+                ITypeDescriptorContext context,
+                System.Globalization.CultureInfo culture,
+                object value
+            )
             {
                 if (value is string)
                 {
@@ -573,7 +617,10 @@ namespace System.Web.Http.ModelBinding
 
         class CustomModelBinder : IModelBinder
         {
-            public bool BindModel(HttpActionContext actionContext, ModelBindingContext bindingContext)
+            public bool BindModel(
+                HttpActionContext actionContext,
+                ModelBindingContext bindingContext
+            )
             {
                 throw new NotImplementedException();
             }

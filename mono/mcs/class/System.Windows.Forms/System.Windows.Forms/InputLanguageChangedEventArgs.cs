@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,44 +29,45 @@
 
 using System.Globalization;
 
-namespace System.Windows.Forms {
-	public class InputLanguageChangedEventArgs : EventArgs {
-		private CultureInfo	culture;
-		private byte		charset;
-		private InputLanguage	input_language;
+namespace System.Windows.Forms
+{
+    public class InputLanguageChangedEventArgs : EventArgs
+    {
+        private CultureInfo culture;
+        private byte charset;
+        private InputLanguage input_language;
 
-		#region Public Constructors
-		public InputLanguageChangedEventArgs(System.Globalization.CultureInfo culture, byte charSet) {
-			this.culture = culture;
-			this.charset = charSet;
-			this.input_language = InputLanguage.FromCulture(culture);
-		}
+        #region Public Constructors
+        public InputLanguageChangedEventArgs(System.Globalization.CultureInfo culture, byte charSet)
+        {
+            this.culture = culture;
+            this.charset = charSet;
+            this.input_language = InputLanguage.FromCulture(culture);
+        }
 
-		public InputLanguageChangedEventArgs(InputLanguage inputLanguage, byte charSet) {
-			this.culture = inputLanguage.Culture;
-			this.charset = charSet;
-			this.input_language = inputLanguage;
-		}
-		#endregion	// Public Constructors
+        public InputLanguageChangedEventArgs(InputLanguage inputLanguage, byte charSet)
+        {
+            this.culture = inputLanguage.Culture;
+            this.charset = charSet;
+            this.input_language = inputLanguage;
+        }
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
-		public byte CharSet {
-			get {
-				return this.charset;
-			}
-		}
+        #region Public Instance Properties
+        public byte CharSet
+        {
+            get { return this.charset; }
+        }
 
-		public CultureInfo Culture {
-			get {
-				return this.culture;
-			}
-		}
+        public CultureInfo Culture
+        {
+            get { return this.culture; }
+        }
 
-		public InputLanguage InputLanguage {
-			get {
-				return this.input_language;
-			}
-		}
-		#endregion	// Public Instance Properties
-	}
+        public InputLanguage InputLanguage
+        {
+            get { return this.input_language; }
+        }
+        #endregion	// Public Instance Properties
+    }
 }

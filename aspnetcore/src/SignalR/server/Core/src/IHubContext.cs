@@ -22,7 +22,8 @@ public interface IHubContext
 /// <summary>
 /// A context abstraction for a hub.
 /// </summary>
-public interface IHubContext<out THub> where THub : Hub
+public interface IHubContext<out THub>
+    where THub : Hub
 {
     /// <summary>
     /// Gets a <see cref="IHubClients"/> that can be used to invoke methods on clients connected to the hub.

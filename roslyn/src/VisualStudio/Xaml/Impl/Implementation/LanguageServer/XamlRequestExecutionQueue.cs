@@ -29,7 +29,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer
             IXamlLanguageServerFeedbackService? feedbackService,
             AbstractLanguageServer<RequestContext> languageServer,
             ILspLogger logger,
-            IHandlerProvider handlerProvider) : base(languageServer, logger, handlerProvider)
+            IHandlerProvider handlerProvider
+        )
+            : base(languageServer, logger, handlerProvider)
         {
             _projectService = projectService;
             _feedbackService = feedbackService;
@@ -39,13 +41,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer
             TRequestType request,
             string methodName,
             ILspServices lspServices,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var methodHandler = GetMethodHandler<TRequestType, TResponseType>(methodName);
             TextDocumentIdentifier? textDocument = null;
             if (methodHandler is ITextDocumentIdentifierHandler txtDocumentIdentifierHandler)
             {
-                if (txtDocumentIdentifierHandler is ITextDocumentIdentifierHandler<TRequestType, TextDocumentIdentifier> t)
+                if (
+                    txtDocumentIdentifierHandler
+                    is ITextDocumentIdentifierHandler<TRequestType, TextDocumentIdentifier> t
+                )
                 {
                     textDocument = t.GetTextDocumentIdentifier(request);
                 }
@@ -62,7 +68,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer
                 try
                 {
                     return await base.ExecuteAsync<TRequestType, TResponseType>(
-                        request, methodName, lspServices, cancellationToken).ConfigureAwait(false);
+                            request,
+                            methodName,
+                            lspServices,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
                 catch (Exception e) when (e is not OperationCanceledException)
                 {

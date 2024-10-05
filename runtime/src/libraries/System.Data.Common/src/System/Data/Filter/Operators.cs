@@ -21,37 +21,42 @@ namespace System.Data
         internal const int Between = 6;
 
         /* Beginning of Comparison (relationa) operators */
-        internal const int EqualTo = 7;     // =
+        internal const int EqualTo = 7; // =
         internal const int GreaterThen = 8; // >
-        internal const int LessThen = 9;        // <
+        internal const int LessThen = 9; // <
         internal const int GreaterOrEqual = 10; // >=
-        internal const int LessOrEqual = 11;    // <=
-        internal const int NotEqual = 12;       // <>
+        internal const int LessOrEqual = 11; // <=
+        internal const int NotEqual = 12; // <>
+
         /* End of Comparison (relational) operators */
 
         internal const int Is = 13;
         internal const int Like = 14;
 
         /* Beginning of arithmetic operators */
-        internal const int Plus = 15;           // +
-        internal const int Minus = 16;          // -
-        internal const int Multiply = 17;       // *
-        internal const int Divide = 18;     // /
+        internal const int Plus = 15; // +
+        internal const int Minus = 16; // -
+        internal const int Multiply = 17; // *
+        internal const int Divide = 18; // /
+
         //internal final static int IntegerDiv = 19;    // \
-        internal const int Modulo = 20;     // %
+        internal const int Modulo = 20; // %
+
         //internal final static int Exponent = 21;    // **
         /* End of arithmetic operators */
 
         /* Beginning of bitwise operators */
         internal const int BitwiseAnd = 22; // &
-        internal const int BitwiseOr = 23;      // |
+        internal const int BitwiseOr = 23; // |
         internal const int BitwiseXor = 24; // ^
         internal const int BitwiseNot = 25; // ~
+
         /* End of bitwise operators */
 
         /* Beginning of logical operators */
-        internal const int And = 26;        // AND
-        internal const int Or = 27;     // OR
+        internal const int And = 26; // AND
+        internal const int Or = 27; // OR
+
         // internal final static int Not is in the unary ops
         /* End of logical operators */
 
@@ -66,10 +71,10 @@ namespace System.Data
         internal const int True = 33;
         internal const int False = 34;
 
-        internal const int Date = 35;           // Date constant
-        internal const int GenUniqueId = 36;    // Generate unique ID
-        internal const int GenGUID = 37;       // Generate GUID
-        internal const int GUID = 38;          // GUID constant
+        internal const int Date = 35; // Date constant
+        internal const int GenUniqueId = 36; // Generate unique ID
+        internal const int GenGUID = 37; // Generate GUID
+        internal const int GUID = 38; // GUID constant
 
         internal const int IsNot = 39;
 
@@ -77,10 +82,12 @@ namespace System.Data
         {
             return (op == Plus || op == Minus || op == Multiply || op == Divide || op == Modulo);
         }
+
         internal static bool IsLogical(int op)
         {
             return (op == And || op == Or || op == Not || op == Is || op == IsNot);
         }
+
         internal static bool IsRelational(int op)
         {
             return ((EqualTo <= op) && (op <= NotEqual));
@@ -120,22 +127,38 @@ namespace System.Data
         {
             ReadOnlySpan<byte> priorities =
             [
-                PriStart,  // Noop
-                PriNeg, PriNeg, PriNot, // Unary -, +, Not
-                PriBetweenAnd, PriBetweenInLike, PriBetweenInLike,
-                PriRelOp, PriRelOp, PriRelOp, PriRelOp, PriRelOp, PriRelOp,
+                PriStart, // Noop
+                PriNeg,
+                PriNeg,
+                PriNot, // Unary -, +, Not
+                PriBetweenAnd,
+                PriBetweenInLike,
+                PriBetweenInLike,
+                PriRelOp,
+                PriRelOp,
+                PriRelOp,
+                PriRelOp,
+                PriRelOp,
+                PriRelOp,
                 PriIs,
-                PriBetweenInLike,                       // Like
-
-                PriPlusMinus, PriPlusMinus,             // +, -
-                PriMulDiv, PriMulDiv, PriIDiv, PriMod,  // *, /, \, Mod
-                PriExp,                                 // **
-
-                PriAnd, PriOr, PriXor, PriNot,
-                PriAnd, PriOr,
-
-                PriParen, PriProc, PriDot, PriDot,      // Proc, Iff, Qula, Dot..
-
+                PriBetweenInLike, // Like
+                PriPlusMinus,
+                PriPlusMinus, // +, -
+                PriMulDiv,
+                PriMulDiv,
+                PriIDiv,
+                PriMod, // *, /, \, Mod
+                PriExp, // **
+                PriAnd,
+                PriOr,
+                PriXor,
+                PriNot,
+                PriAnd,
+                PriOr,
+                PriParen,
+                PriProc,
+                PriDot,
+                PriDot, // Proc, Iff, Qula, Dot..
                 // anything beyond is PriMax
             ];
 
@@ -145,74 +168,67 @@ namespace System.Data
         /// <summary>
         ///     this is array used for error messages.
         /// </summary>
-        private static readonly string[] s_looks = new string[] {
+        private static readonly string[] s_looks = new string[]
+        {
             "", //Noop = 0;
-
             /* Unary operations */
 
-            "-",    //Negative = 1;
-            "+",    //UnaryPlus = 2;
-            "Not",  //Not = 3;
-
+            "-", //Negative = 1;
+            "+", //UnaryPlus = 2;
+            "Not", //Not = 3;
             /* Binary operations */
 
-            "BetweenAnd",   //BetweenAnd = 4;
-
-            "In",   //In = 5;
+            "BetweenAnd", //BetweenAnd = 4;
+            "In", //In = 5;
             "Between", //Between = 6;
-
             /* Beginning of Comparison (relationa) operators */
-            "=",    //EqualTo = 7;        // =
+            "=", //EqualTo = 7;        // =
             ">", //GreaterThen = 8;    // >
-            "<",    //LessThen = 9;        // <
+            "<", //LessThen = 9;        // <
             ">=", //GreaterOrEqual = 10;// >=
-            "<=",       //LessOrEqual = 11;    // <=
+            "<=", //LessOrEqual = 11;    // <=
             "<>", //NotEqual = 12;        // <>
             /* End of Comparison (relational) operators */
 
-            "Is",       //Is = 13;
+            "Is", //Is = 13;
             "Like", //Like = 14;
-
             /* Beginning of arithmetic operators */
-            "+",    //Plus = 15;            // +
+            "+", //Plus = 15;            // +
             "-", //Minus = 16;            // -
             "*", //Multiply = 17;        // *
-            "/",    //Divide = 18;        // /
+            "/", //Divide = 18;        // /
             "\\", //IntegerDiv = 19;    // \
             "Mod", //Modulo = 20;        // %
             "**", //Exponent = 21;    // **
             /* End of arithmetic operators */
 
             /* Beginning of bitwise operators */
-            "&",    //BitwiseAnd = 22;    // &
-            "|",    //BitwiseOr = 23;        // |
-            "^",    //BitwiseXor = 24;    // ^
-            "~",    //BitwiseNot = 25;    // ~
+            "&", //BitwiseAnd = 22;    // &
+            "|", //BitwiseOr = 23;        // |
+            "^", //BitwiseXor = 24;    // ^
+            "~", //BitwiseNot = 25;    // ~
             /* End of bitwise operators */
 
             /* Beginning of logical operators */
-            "And",  //And = 26;        // AND
-            "Or",       //Or = 27;        // OR
+            "And", //And = 26;        // AND
+            "Or", //Or = 27;        // OR
             // Not is in the unary ops
             /* End of logical operators */
 
             /* Calls/multi-valued stuff */
             "Proc", //Proc = 28;
-            "Iff",  //Iff = 29;
-            ".",    //Qual = 30;
-            ".",    //Dot = 31;
-
+            "Iff", //Iff = 29;
+            ".", //Qual = 30;
+            ".", //Dot = 31;
             /* 0-ary "operators" */
             "Null", //Null = 32;
             "True", //True = 33;
             "False", //False = 34;
-
             "Date", //Date = 35;            // Date constant
-            "GenUniqueId()",    //GenUniqueId = 36;    // Generate unique ID
-            "GenGuid()",    //GenGUID = 37;        // Generate GUID
-            "Guid {..}",    //GUID = 38;            // GUID constant
-
-            "Is Not",   //IsNot = 39;            // internal only
+            "GenUniqueId()", //GenUniqueId = 36;    // Generate unique ID
+            "GenGuid()", //GenGUID = 37;        // Generate GUID
+            "Guid {..}", //GUID = 38;            // GUID constant
+            "Is Not", //IsNot = 39;            // internal only
         };
 
         internal static string ToString(int op)

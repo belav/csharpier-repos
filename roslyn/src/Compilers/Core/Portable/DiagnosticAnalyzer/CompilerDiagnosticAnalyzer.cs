@@ -20,8 +20,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         // internal as this is called from tests
         internal abstract ImmutableArray<int> GetSupportedErrorCodes();
 
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
-            => InterlockedOperations.Initialize(
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+            InterlockedOperations.Initialize(
                 ref _supportedDiagnostics,
                 static @this =>
                 {
@@ -33,12 +33,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                     builder.Add(AnalyzerExecutor.GetAnalyzerExceptionDiagnosticDescriptor());
                     return builder.ToImmutableAndFree();
-                }, this);
+                },
+                this
+            );
 
         public sealed override void Initialize(AnalysisContext context)
         {
             context.EnableConcurrentExecution();
-            context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics);
+            context.ConfigureGeneratedCodeAnalysis(
+                GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics
+            );
 
             context.RegisterCompilationStartAction(c =>
             {

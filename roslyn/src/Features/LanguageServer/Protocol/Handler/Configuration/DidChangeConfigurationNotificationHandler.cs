@@ -19,7 +19,9 @@ using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Configuration
 {
     [Method(Methods.WorkspaceDidChangeConfigurationName)]
-    internal partial class DidChangeConfigurationNotificationHandler : ILspServiceNotificationHandler<LSP.DidChangeConfigurationParams>, IOnInitialized
+    internal partial class DidChangeConfigurationNotificationHandler
+        : ILspServiceNotificationHandler<LSP.DidChangeConfigurationParams>,
+            IOnInitialized
     {
         private bool _supportWorkspaceConfiguration;
         private readonly ILspLogger _lspLogger;
@@ -28,7 +30,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Configuration
         private readonly Guid _registrationId;
 
         /// <summary>
-        /// All the <see cref="ConfigurationItem.Section"/> needs to be refreshed from the client. 
+        /// All the <see cref="ConfigurationItem.Section"/> needs to be refreshed from the client.
         /// </summary>
         private readonly ImmutableArray<ConfigurationItem> _configurationItems;
 
@@ -36,18 +38,26 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Configuration
         /// The matching option and its language name needs to be refreshed. The order matches <see cref="_configurationItems"/> sent to the client.
         /// LanguageName would be null if the option is <see cref="ISingleValuedOption"/>.
         /// </summary>
-        private readonly ImmutableArray<(IOption2 option, string? lanugageName)> _optionsAndLanguageNamesToRefresh;
+        private readonly ImmutableArray<(
+            IOption2 option,
+            string? lanugageName
+        )> _optionsAndLanguageNamesToRefresh;
 
-        private static readonly ImmutableDictionary<string, string> s_languageNameToPrefix = ImmutableDictionary<string, string>.Empty
-            .Add(LanguageNames.CSharp, "csharp")
-            .Add(LanguageNames.VisualBasic, "visual_basic");
+        private static readonly ImmutableDictionary<string, string> s_languageNameToPrefix =
+            ImmutableDictionary<string, string>
+                .Empty.Add(LanguageNames.CSharp, "csharp")
+                .Add(LanguageNames.VisualBasic, "visual_basic");
 
-        public static readonly ImmutableArray<string> SupportedLanguages = ImmutableArray.Create(LanguageNames.CSharp, LanguageNames.VisualBasic);
+        public static readonly ImmutableArray<string> SupportedLanguages = ImmutableArray.Create(
+            LanguageNames.CSharp,
+            LanguageNames.VisualBasic
+        );
 
         public DidChangeConfigurationNotificationHandler(
             ILspLogger logger,
             IGlobalOptionService globalOptionService,
-            IClientLanguageServerManager clientLanguageServerManager)
+            IClientLanguageServerManager clientLanguageServerManager
+        )
         {
             _lspLogger = logger;
             _globalOptionService = globalOptionService;
@@ -55,15 +65,20 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Configuration
             _registrationId = Guid.NewGuid();
             _configurationItems = GenerateGlobalConfigurationItems();
             _optionsAndLanguageNamesToRefresh = GenerateOptionsNeedsToRefresh();
-            RoslynDebug.Assert(_configurationItems.Length == _optionsAndLanguageNamesToRefresh.Length);
+            RoslynDebug.Assert(
+                _configurationItems.Length == _optionsAndLanguageNamesToRefresh.Length
+            );
         }
 
         public bool MutatesSolutionState => true;
 
         public bool RequiresLSPSolution => false;
 
-        public Task HandleNotificationAsync(DidChangeConfigurationParams request, RequestContext requestContext, CancellationToken cancellationToken)
-            => RefreshOptionsAsync(cancellationToken);
+        public Task HandleNotificationAsync(
+            DidChangeConfigurationParams request,
+            RequestContext requestContext,
+            CancellationToken cancellationToken
+        ) => RefreshOptionsAsync(cancellationToken);
 
         private async Task RefreshOptionsAsync(CancellationToken cancellationToken)
         {
@@ -73,7 +88,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Configuration
                 return;
             }
 
-            var configurationsFromClient = await GetConfigurationsAsync(cancellationToken).ConfigureAwait(false);
+            var configurationsFromClient = await GetConfigurationsAsync(cancellationToken)
+                .ConfigureAwait(false);
             if (configurationsFromClient.IsEmpty)
             {
                 // Failed to get values from client, do nothing.
@@ -81,7 +97,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Configuration
             }
 
             // We always fetch VB and C# value from client if the option is IPerLanguageValuedOption.
-            RoslynDebug.Assert(configurationsFromClient.Length == SupportedOptions.Sum(option => option is IPerLanguageValuedOption ? 2 : 1));
+            RoslynDebug.Assert(
+                configurationsFromClient.Length
+                    == SupportedOptions.Sum(option => option is IPerLanguageValuedOption ? 2 : 1)
+            );
 
             // LSP ensures the order of result from client should match the order we sent from server.
             for (var i = 0; i < configurationsFromClient.Length; i++)
@@ -100,27 +119,45 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Configuration
             {
                 if (option is IPerLanguageValuedOption && languageName != null)
                 {
-                    _globalOptionService.SetGlobalOption(new OptionKey2(option, language: languageName), result);
+                    _globalOptionService.SetGlobalOption(
+                        new OptionKey2(option, language: languageName),
+                        result
+                    );
                 }
                 else
                 {
                     RoslynDebug.Assert(languageName == null);
-                    _globalOptionService.SetGlobalOption(new OptionKey2(option, language: null), result);
+                    _globalOptionService.SetGlobalOption(
+                        new OptionKey2(option, language: null),
+                        result
+                    );
                 }
             }
             else
             {
-                _lspLogger.LogWarning($"Failed to parse {valueFromClient} to type: {option.Type.Name}. {option.Name} would not be updated.");
+                _lspLogger.LogWarning(
+                    $"Failed to parse {valueFromClient} to type: {option.Type.Name}. {option.Name} would not be updated."
+                );
             }
         }
 
-        private async Task<ImmutableArray<string>> GetConfigurationsAsync(CancellationToken cancellationToken)
+        private async Task<ImmutableArray<string>> GetConfigurationsAsync(
+            CancellationToken cancellationToken
+        )
         {
             try
             {
-                var configurationParams = new ConfigurationParams() { Items = _configurationItems.AsArray() };
-                var options = await _clientLanguageServerManager.SendRequestAsync<ConfigurationParams, JArray>(
-                    Methods.WorkspaceConfigurationName, configurationParams, cancellationToken).ConfigureAwait(false);
+                var configurationParams = new ConfigurationParams()
+                {
+                    Items = _configurationItems.AsArray(),
+                };
+                var options = await _clientLanguageServerManager
+                    .SendRequestAsync<ConfigurationParams, JArray>(
+                        Methods.WorkspaceConfigurationName,
+                        configurationParams,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 // Failed to get result from client.
                 Contract.ThrowIfNull(options);
@@ -128,13 +165,19 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Configuration
             }
             catch (Exception e)
             {
-                _lspLogger.LogException(e, $"Exception occurs when make {Methods.WorkspaceConfigurationName}.");
+                _lspLogger.LogException(
+                    e,
+                    $"Exception occurs when make {Methods.WorkspaceConfigurationName}."
+                );
             }
 
             return ImmutableArray<string>.Empty;
         }
 
-        private static ImmutableArray<(IOption2 option, string? langaugeName)> GenerateOptionsNeedsToRefresh()
+        private static ImmutableArray<(
+            IOption2 option,
+            string? langaugeName
+        )> GenerateOptionsNeedsToRefresh()
         {
             using var _ = ArrayBuilder<(IOption2, string?)>.GetInstance(out var builder);
             foreach (var option in SupportedOptions)
@@ -170,18 +213,21 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Configuration
                 {
                     foreach (var language in SupportedLanguages)
                     {
-                        builder.Add(new ConfigurationItem()
-                        {
-                            Section = string.Concat(s_languageNameToPrefix[language], '|', fullOptionName),
-                        });
+                        builder.Add(
+                            new ConfigurationItem()
+                            {
+                                Section = string.Concat(
+                                    s_languageNameToPrefix[language],
+                                    '|',
+                                    fullOptionName
+                                ),
+                            }
+                        );
                     }
                 }
                 else
                 {
-                    builder.Add(new ConfigurationItem()
-                    {
-                        Section = fullOptionName,
-                    });
+                    builder.Add(new ConfigurationItem() { Section = fullOptionName });
                 }
             }
 

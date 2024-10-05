@@ -10,7 +10,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal static class SyntaxNodeExtensions
     {
-        public static TNode WithAnnotations<TNode>(this TNode node, params SyntaxAnnotation[] annotations) where TNode : CSharpSyntaxNode
+        public static TNode WithAnnotations<TNode>(
+            this TNode node,
+            params SyntaxAnnotation[] annotations
+        )
+            where TNode : CSharpSyntaxNode
         {
             return (TNode)node.Green.SetAnnotations(annotations).CreateRed();
         }
@@ -52,9 +56,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal static bool MayBeNameofOperator(this InvocationExpressionSyntax node)
         {
-            if (node.Expression.Kind() == SyntaxKind.IdentifierName &&
-                ((IdentifierNameSyntax)node.Expression).Identifier.ContextualKind() == SyntaxKind.NameOfKeyword &&
-                node.ArgumentList.Arguments.Count == 1)
+            if (
+                node.Expression.Kind() == SyntaxKind.IdentifierName
+                && ((IdentifierNameSyntax)node.Expression).Identifier.ContextualKind()
+                    == SyntaxKind.NameOfKeyword
+                && node.ArgumentList.Arguments.Count == 1
+            )
             {
                 ArgumentSyntax argument = node.ArgumentList.Arguments[0];
                 if (argument.NameColon == null && argument.RefOrOutKeyword == default)
@@ -71,7 +78,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// with the code that searches for binders.  We don't want the searcher
         /// to skip over any nodes that could have associated binders, especially
         /// if changes are made later.
-        /// 
+        ///
         /// "Local binder" is a term that refers to binders that are
         /// created by LocalBinderFactory.
         /// </summary>
@@ -80,7 +87,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxKind kind = syntax.Kind();
             switch (kind)
             {
-                case SyntaxKind.InvocationExpression when ((InvocationExpressionSyntax)syntax).MayBeNameofOperator():
+                case SyntaxKind.InvocationExpression
+                    when ((InvocationExpressionSyntax)syntax).MayBeNameofOperator():
                     return true;
                 case SyntaxKind.CatchClause:
                 case SyntaxKind.ParenthesizedLambdaExpression:
@@ -106,7 +114,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return false;
 
                 default:
-                    return syntax is StatementSyntax || IsValidScopeDesignator(syntax as ExpressionSyntax);
+                    return syntax is StatementSyntax
+                        || IsValidScopeDesignator(syntax as ExpressionSyntax);
             }
         }
 
@@ -125,7 +134,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 case SyntaxKind.ForStatement:
                     var forStmt = (ForStatementSyntax)parent;
-                    return forStmt.Condition == expression || forStmt.Incrementors.FirstOrDefault() == expression;
+                    return forStmt.Condition == expression
+                        || forStmt.Incrementors.FirstOrDefault() == expression;
 
                 case SyntaxKind.ForEachStatement:
                 case SyntaxKind.ForEachVariableStatement:
@@ -168,24 +178,24 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // In case of a declaration of a Span<T> variable
                 case SyntaxKind.EqualsValueClause:
-                    {
-                        SyntaxNode? variableDeclarator = parentNode.Parent;
+                {
+                    SyntaxNode? variableDeclarator = parentNode.Parent;
 
-                        return variableDeclarator.IsKind(SyntaxKind.VariableDeclarator) &&
-                            variableDeclarator.Parent.IsKind(SyntaxKind.VariableDeclaration);
-                    }
+                    return variableDeclarator.IsKind(SyntaxKind.VariableDeclarator)
+                        && variableDeclarator.Parent.IsKind(SyntaxKind.VariableDeclaration);
+                }
                 // In case of reassignment to a Span<T> variable
                 case SyntaxKind.SimpleAssignmentExpression:
-                    {
-                        return parentNode.Parent.IsKind(SyntaxKind.ExpressionStatement);
-                    }
+                {
+                    return parentNode.Parent.IsKind(SyntaxKind.ExpressionStatement);
+                }
             }
 
             return false;
         }
 
-        internal static CSharpSyntaxNode AnonymousFunctionBody(this SyntaxNode lambda)
-            => ((AnonymousFunctionExpressionSyntax)lambda).Body;
+        internal static CSharpSyntaxNode AnonymousFunctionBody(this SyntaxNode lambda) =>
+            ((AnonymousFunctionExpressionSyntax)lambda).Body;
 
         /// <summary>
         /// Given an initializer expression infer the name of anonymous property or tuple element.
@@ -219,7 +229,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        internal static RefKind GetRefKindInLocalOrReturn(this TypeSyntax syntax, BindingDiagnosticBag diagnostics)
+        internal static RefKind GetRefKindInLocalOrReturn(
+            this TypeSyntax syntax,
+            BindingDiagnosticBag diagnostics
+        )
         {
             syntax.SkipRefInLocalOrReturn(diagnostics, out var refKind);
             return refKind;
@@ -232,8 +245,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// cref="SkipRefInLocalOrReturn"/> or <see cref="SkipRefInField"/> depending on which language feature they are
         /// asking for.
         /// </summary>
-        internal static TypeSyntax SkipRef(this TypeSyntax syntax)
-            => SkipRefWorker(syntax, diagnostics: null, out _);
+        internal static TypeSyntax SkipRef(this TypeSyntax syntax) =>
+            SkipRefWorker(syntax, diagnostics: null, out _);
 
         internal static TypeSyntax SkipRefInField(this TypeSyntax syntax, out RefKind refKind)
         {
@@ -242,17 +255,25 @@ namespace Microsoft.CodeAnalysis.CSharp
             return SkipRefWorker(syntax, diagnostics: null, out refKind);
         }
 
-        internal static TypeSyntax SkipRefInLocalOrReturn(this TypeSyntax syntax, BindingDiagnosticBag? diagnostics, out RefKind refKind)
-            => SkipRefWorker(syntax, diagnostics, out refKind);
+        internal static TypeSyntax SkipRefInLocalOrReturn(
+            this TypeSyntax syntax,
+            BindingDiagnosticBag? diagnostics,
+            out RefKind refKind
+        ) => SkipRefWorker(syntax, diagnostics, out refKind);
 
-        private static TypeSyntax SkipRefWorker(TypeSyntax syntax, BindingDiagnosticBag? diagnostics, out RefKind refKind)
+        private static TypeSyntax SkipRefWorker(
+            TypeSyntax syntax,
+            BindingDiagnosticBag? diagnostics,
+            out RefKind refKind
+        )
         {
             if (syntax.Kind() == SyntaxKind.RefType)
             {
                 var refType = (RefTypeSyntax)syntax;
-                refKind = refType.ReadOnlyKeyword.Kind() == SyntaxKind.ReadOnlyKeyword
-                    ? RefKind.RefReadOnly
-                    : RefKind.Ref;
+                refKind =
+                    refType.ReadOnlyKeyword.Kind() == SyntaxKind.ReadOnlyKeyword
+                        ? RefKind.RefReadOnly
+                        : RefKind.Ref;
 
                 if (diagnostics != null)
                 {
@@ -263,18 +284,47 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     // Should only be called with diagnostics from a location where we're a return-type or local-type.
                     Debug.Assert(
-                        (current.Parent is ParenthesizedLambdaExpressionSyntax lambda && lambda.ReturnType == current) ||
-                        (current.Parent is LocalFunctionStatementSyntax localFunction && localFunction.ReturnType == current) ||
-                        (current.Parent is MethodDeclarationSyntax method && method.ReturnType == current) ||
-                        (current.Parent is BasePropertyDeclarationSyntax property && property.Type == current) ||
-                        (current.Parent is DelegateDeclarationSyntax delegateDeclaration && delegateDeclaration.ReturnType == current) ||
-                        (current.Parent is VariableDeclarationSyntax { Parent: LocalDeclarationStatementSyntax } variableDeclaration && variableDeclaration.Type == current));
+                        (
+                            current.Parent is ParenthesizedLambdaExpressionSyntax lambda
+                            && lambda.ReturnType == current
+                        )
+                            || (
+                                current.Parent is LocalFunctionStatementSyntax localFunction
+                                && localFunction.ReturnType == current
+                            )
+                            || (
+                                current.Parent is MethodDeclarationSyntax method
+                                && method.ReturnType == current
+                            )
+                            || (
+                                current.Parent is BasePropertyDeclarationSyntax property
+                                && property.Type == current
+                            )
+                            || (
+                                current.Parent is DelegateDeclarationSyntax delegateDeclaration
+                                && delegateDeclaration.ReturnType == current
+                            )
+                            || (
+                                current.Parent
+                                    is VariableDeclarationSyntax
+                                    {
+                                        Parent: LocalDeclarationStatementSyntax
+                                    } variableDeclaration
+                                && variableDeclaration.Type == current
+                            )
+                    );
 #endif
 
-                    MessageID.IDS_FeatureRefLocalsReturns.CheckFeatureAvailability(diagnostics, refType.RefKeyword);
+                    MessageID.IDS_FeatureRefLocalsReturns.CheckFeatureAvailability(
+                        diagnostics,
+                        refType.RefKeyword
+                    );
 
                     if (refType.ReadOnlyKeyword != default)
-                        MessageID.IDS_FeatureReadOnlyReferences.CheckFeatureAvailability(diagnostics, refType.ReadOnlyKeyword);
+                        MessageID.IDS_FeatureReadOnlyReferences.CheckFeatureAvailability(
+                            diagnostics,
+                            refType.ReadOnlyKeyword
+                        );
                 }
 
                 return refType.Type;
@@ -317,7 +367,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal static ExpressionSyntax? CheckAndUnwrapRefExpression(
             this ExpressionSyntax? syntax,
             BindingDiagnosticBag diagnostics,
-            out RefKind refKind)
+            out RefKind refKind
+        )
         {
             if (syntax is not RefExpressionSyntax { Expression: var expression } refExpression)
             {
@@ -325,18 +376,27 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return syntax;
             }
 
-            MessageID.IDS_FeatureRefLocalsReturns.CheckFeatureAvailability(diagnostics, refExpression.RefKeyword);
+            MessageID.IDS_FeatureRefLocalsReturns.CheckFeatureAvailability(
+                diagnostics,
+                refExpression.RefKeyword
+            );
 
             refKind = RefKind.Ref;
             expression.CheckDeconstructionCompatibleArgument(diagnostics);
             return expression;
         }
 
-        internal static void CheckDeconstructionCompatibleArgument(this ExpressionSyntax expression, BindingDiagnosticBag diagnostics)
+        internal static void CheckDeconstructionCompatibleArgument(
+            this ExpressionSyntax expression,
+            BindingDiagnosticBag diagnostics
+        )
         {
             if (IsDeconstructionCompatibleArgument(expression))
             {
-                diagnostics.Add(ErrorCode.ERR_VarInvocationLvalueReserved, expression.GetLocation());
+                diagnostics.Add(
+                    ErrorCode.ERR_VarInvocationLvalueReserved,
+                    expression.GetLocation()
+                );
             }
         }
 
@@ -355,8 +415,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var invocation = (InvocationExpressionSyntax)expression;
                 var invocationTarget = invocation.Expression;
 
-                return invocationTarget.Kind() == SyntaxKind.IdentifierName &&
-                    ((IdentifierNameSyntax)invocationTarget).IsVar;
+                return invocationTarget.Kind() == SyntaxKind.IdentifierName
+                    && ((IdentifierNameSyntax)invocationTarget).IsVar;
             }
 
             return false;

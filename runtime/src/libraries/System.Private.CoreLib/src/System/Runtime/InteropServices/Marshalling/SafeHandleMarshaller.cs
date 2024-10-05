@@ -9,10 +9,26 @@ namespace System.Runtime.InteropServices.Marshalling
     /// A marshaller for <see cref="SafeHandle"/>-derived types that marshals the handle following the lifetime rules for <see cref="SafeHandle"/>s.
     /// </summary>
     /// <typeparam name="T">The <see cref="SafeHandle"/>-derived type.</typeparam>
-    [CustomMarshaller(typeof(CustomMarshallerAttribute.GenericPlaceholder), MarshalMode.ManagedToUnmanagedIn, typeof(SafeHandleMarshaller<>.ManagedToUnmanagedIn))]
-    [CustomMarshaller(typeof(CustomMarshallerAttribute.GenericPlaceholder), MarshalMode.ManagedToUnmanagedRef, typeof(SafeHandleMarshaller<>.ManagedToUnmanagedRef))]
-    [CustomMarshaller(typeof(CustomMarshallerAttribute.GenericPlaceholder), MarshalMode.ManagedToUnmanagedOut, typeof(SafeHandleMarshaller<>.ManagedToUnmanagedOut))]
-    public static class SafeHandleMarshaller<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] T> where T : SafeHandle
+    [CustomMarshaller(
+        typeof(CustomMarshallerAttribute.GenericPlaceholder),
+        MarshalMode.ManagedToUnmanagedIn,
+        typeof(SafeHandleMarshaller<>.ManagedToUnmanagedIn)
+    )]
+    [CustomMarshaller(
+        typeof(CustomMarshallerAttribute.GenericPlaceholder),
+        MarshalMode.ManagedToUnmanagedRef,
+        typeof(SafeHandleMarshaller<>.ManagedToUnmanagedRef)
+    )]
+    [CustomMarshaller(
+        typeof(CustomMarshallerAttribute.GenericPlaceholder),
+        MarshalMode.ManagedToUnmanagedOut,
+        typeof(SafeHandleMarshaller<>.ManagedToUnmanagedOut)
+    )]
+    public static class SafeHandleMarshaller<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+            T
+    >
+        where T : SafeHandle
     {
         /// <summary>
         /// Custom marshaller to marshal a <see cref="SafeHandle"/> as its underlying handle value.

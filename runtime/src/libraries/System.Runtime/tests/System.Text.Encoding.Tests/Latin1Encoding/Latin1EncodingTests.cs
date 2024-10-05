@@ -72,8 +72,18 @@ namespace System.Text.Tests
         public static IEnumerable<object[]> Equals_TestData()
         {
             yield return new object[] { Encoding.GetEncoding("latin1"), Encoding.Latin1, true };
-            yield return new object[] { Encoding.GetEncoding("latin1"), Encoding.GetEncoding("latin1"), true };
-            yield return new object[] { Encoding.GetEncoding("latin1"), Encoding.GetEncoding("iso-8859-1"), true };
+            yield return new object[]
+            {
+                Encoding.GetEncoding("latin1"),
+                Encoding.GetEncoding("latin1"),
+                true,
+            };
+            yield return new object[]
+            {
+                Encoding.GetEncoding("latin1"),
+                Encoding.GetEncoding("iso-8859-1"),
+                true,
+            };
 
             yield return new object[] { Encoding.GetEncoding("latin1"), new object(), false };
             yield return new object[] { Encoding.GetEncoding("latin1"), null, false };

@@ -50,21 +50,21 @@ namespace Microsoft.CodeAnalysis.Scripting
         /// <exception cref="ArgumentException">The type of the specified <paramref name="value"/> isn't assignable to the type of the variable.</exception>
         public object Value
         {
-            get
-            {
-                return _field.GetValue(_instance);
-            }
-
+            get { return _field.GetValue(_instance); }
             set
             {
                 if (_field.IsInitOnly)
                 {
-                    throw new InvalidOperationException(ScriptingResources.CannotSetReadOnlyVariable);
+                    throw new InvalidOperationException(
+                        ScriptingResources.CannotSetReadOnlyVariable
+                    );
                 }
 
                 if (_field.IsLiteral)
                 {
-                    throw new InvalidOperationException(ScriptingResources.CannotSetConstantVariable);
+                    throw new InvalidOperationException(
+                        ScriptingResources.CannotSetConstantVariable
+                    );
                 }
 
                 _field.SetValue(_instance, value);

@@ -16,25 +16,39 @@ namespace Microsoft.AspNetCore.Analyzers.RouteHandlers.Fixers;
 [ExportCodeFixProvider(LanguageNames.CSharp), Shared]
 public class DetectMismatchedParameterOptionalityFixer : CodeFixProvider
 {
-    public override ImmutableArray<string> FixableDiagnosticIds { get; } = ImmutableArray.Create(DiagnosticDescriptors.DetectMismatchedParameterOptionality.Id);
+    public override ImmutableArray<string> FixableDiagnosticIds { get; } =
+        ImmutableArray.Create(DiagnosticDescriptors.DetectMismatchedParameterOptionality.Id);
 
-    public sealed override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
+    public sealed override FixAllProvider GetFixAllProvider() =>
+        WellKnownFixAllProviders.BatchFixer;
 
     public sealed override Task RegisterCodeFixesAsync(CodeFixContext context)
     {
         foreach (var diagnostic in context.Diagnostics)
         {
             context.RegisterCodeFix(
-                CodeAction.Create("Fix mismatched route parameter and argument optionality",
-                    cancellationToken => FixMismatchedParameterOptionalityAsync(diagnostic, context.Document, cancellationToken),
-                    equivalenceKey: DiagnosticDescriptors.DetectMismatchedParameterOptionality.Id),
-                diagnostic);
+                CodeAction.Create(
+                    "Fix mismatched route parameter and argument optionality",
+                    cancellationToken =>
+                        FixMismatchedParameterOptionalityAsync(
+                            diagnostic,
+                            context.Document,
+                            cancellationToken
+                        ),
+                    equivalenceKey: DiagnosticDescriptors.DetectMismatchedParameterOptionality.Id
+                ),
+                diagnostic
+            );
         }
 
         return Task.CompletedTask;
     }
 
-    private static async Task<Document> FixMismatchedParameterOptionalityAsync(Diagnostic diagnostic, Document document, CancellationToken cancellationToken)
+    private static async Task<Document> FixMismatchedParameterOptionalityAsync(
+        Diagnostic diagnostic,
+        Document document,
+        CancellationToken cancellationToken
+    )
     {
         var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
         if (root is null)

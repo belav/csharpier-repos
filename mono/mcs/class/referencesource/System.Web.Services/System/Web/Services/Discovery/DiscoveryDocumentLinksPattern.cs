@@ -1,10 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="DiscoveryDocumentLinksPattern.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Services.Discovery {
+namespace System.Web.Services.Discovery
+{
     using System;
     using System.Security.Permissions;
 
@@ -12,22 +13,23 @@ namespace System.Web.Services.Discovery {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public class DiscoveryDocumentLinksPattern : DiscoverySearchPattern {
+    public class DiscoveryDocumentLinksPattern : DiscoverySearchPattern
+    {
         /// <include file='doc\DiscoveryDocumentLinksPattern.uex' path='docs/doc[@for="DiscoveryDocumentLinksPattern.Pattern"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override string Pattern {
-            get {
-                return "*.disco";
-            }
+        public override string Pattern
+        {
+            get { return "*.disco"; }
         }
 
         /// <include file='doc\DiscoveryDocumentLinksPattern.uex' path='docs/doc[@for="DiscoveryDocumentLinksPattern.GetDiscoveryReference"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override DiscoveryReference GetDiscoveryReference(string filename) {
+        public override DiscoveryReference GetDiscoveryReference(string filename)
+        {
             return new DiscoveryDocumentReference(filename);
         }
     }

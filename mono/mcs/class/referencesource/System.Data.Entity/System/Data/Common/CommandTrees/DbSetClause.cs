@@ -9,10 +9,9 @@
 
 using System;
 using System.Collections.Generic;
-
-using System.Data.Metadata.Edm;
 using System.Data.Common.CommandTrees.Internal;
 using System.Data.Common.Utils;
+using System.Data.Metadata.Edm;
 using System.Diagnostics;
 
 namespace System.Data.Common.CommandTrees
@@ -20,7 +19,11 @@ namespace System.Data.Common.CommandTrees
     /// <summary>
     /// Specifies a clause in a modification operation setting the value of a property.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "Db")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1709:IdentifiersShouldBeCasedCorrectly",
+        MessageId = "Db"
+    )]
     public sealed class DbSetClause : DbModificationClause
     {
         private DbExpression _prop;
@@ -43,12 +46,9 @@ namespace System.Data.Common.CommandTrees
         /// </remarks>
         public DbExpression Property
         {
-            get
-            {
-                return _prop;
-            }
+            get { return _prop; }
         }
-        
+
         /// <summary>
         /// Gets an <see cref="DbExpression"/> that specifies the new value with which to update the property.
         /// </summary>
@@ -56,13 +56,10 @@ namespace System.Data.Common.CommandTrees
         /// Constrained to be a <see cref="DbConstantExpression"/> or <see cref="DbNullExpression"/>
         /// </remarks>
         public DbExpression Value
-        { 
-            get
-            {
-                return _val;
-            }
+        {
+            get { return _val; }
         }
-                
+
         internal override void DumpStructure(ExpressionDumper dumper)
         {
             dumper.Begin("DbSetClause");

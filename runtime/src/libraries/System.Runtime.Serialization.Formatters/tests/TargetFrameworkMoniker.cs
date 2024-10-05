@@ -13,6 +13,6 @@ namespace System.Runtime.Serialization.Formatters.Tests
         netfx472_3260,
         netcoreapp20,
         netcoreapp21,
-        netcoreapp30
+        netcoreapp30,
     }
 }

@@ -19,11 +19,15 @@ public class GrpcJsonTranscodingServiceExtensionsTests
 
         // Assert
         var serviceProvider = services.BuildServiceProvider();
-        var options1 = serviceProvider.GetRequiredService<IOptions<GrpcJsonTranscodingOptions>>().Value;
+        var options1 = serviceProvider
+            .GetRequiredService<IOptions<GrpcJsonTranscodingOptions>>()
+            .Value;
 
         Assert.NotNull(options1.JsonSettings);
 
-        var options2 = serviceProvider.GetRequiredService<IOptions<GrpcJsonTranscodingOptions>>().Value;
+        var options2 = serviceProvider
+            .GetRequiredService<IOptions<GrpcJsonTranscodingOptions>>()
+            .Value;
 
         Assert.Equal(options1, options2);
     }
@@ -37,14 +41,18 @@ public class GrpcJsonTranscodingServiceExtensionsTests
         var services = new ServiceCollection();
 
         // Act
-        services.AddGrpc().AddJsonTranscoding(o =>
-        {
-            o.JsonSettings = settings;
-        });
+        services
+            .AddGrpc()
+            .AddJsonTranscoding(o =>
+            {
+                o.JsonSettings = settings;
+            });
 
         // Assert
         var serviceProvider = services.BuildServiceProvider();
-        var options = serviceProvider.GetRequiredService<IOptions<GrpcJsonTranscodingOptions>>().Value;
+        var options = serviceProvider
+            .GetRequiredService<IOptions<GrpcJsonTranscodingOptions>>()
+            .Value;
 
         Assert.Equal(settings, options.JsonSettings);
     }

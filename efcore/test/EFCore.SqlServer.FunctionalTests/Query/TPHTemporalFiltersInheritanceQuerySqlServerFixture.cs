@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.TestModels.InheritanceModel;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class TPHTemporalFiltersInheritanceQuerySqlServerFixture : TPHFiltersInheritanceQuerySqlServerFixture
+public class TPHTemporalFiltersInheritanceQuerySqlServerFixture
+    : TPHFiltersInheritanceQuerySqlServerFixture
 {
-    protected override string StoreName
-        => "TemporalFiltersInheritanceQueryTest";
+    protected override string StoreName => "TemporalFiltersInheritanceQueryTest";
 
     public DateTime ChangesDate { get; private set; }
 
@@ -28,31 +28,44 @@ public class TPHTemporalFiltersInheritanceQuerySqlServerFixture : TPHFiltersInhe
 
         ChangesDate = new DateTime(2010, 1, 1);
 
-        context.RemoveRange(context.ChangeTracker.Entries().Where(e => e.Entity is Animal).Select(e => e.Entity));
-        context.RemoveRange(context.ChangeTracker.Entries().Where(e => e.Entity is Plant).Select(e => e.Entity));
-        context.RemoveRange(context.ChangeTracker.Entries().Where(e => e.Entity is Country).Select(e => e.Entity));
-        context.RemoveRange(context.ChangeTracker.Entries().Where(e => e.Entity is Drink).Select(e => e.Entity));
+        context.RemoveRange(
+            context.ChangeTracker.Entries().Where(e => e.Entity is Animal).Select(e => e.Entity)
+        );
+        context.RemoveRange(
+            context.ChangeTracker.Entries().Where(e => e.Entity is Plant).Select(e => e.Entity)
+        );
+        context.RemoveRange(
+            context.ChangeTracker.Entries().Where(e => e.Entity is Country).Select(e => e.Entity)
+        );
+        context.RemoveRange(
+            context.ChangeTracker.Entries().Where(e => e.Entity is Drink).Select(e => e.Entity)
+        );
         context.SaveChanges();
 
-        var tableNames = new List<string>
-        {
-            "Animals",
-            "Plants",
-            "Countries",
-            "Drinks"
-        };
+        var tableNames = new List<string> { "Animals", "Plants", "Countries", "Drinks" };
 
         foreach (var tableName in tableNames)
         {
-            context.Database.ExecuteSqlRaw($"ALTER TABLE [{tableName}] SET (SYSTEM_VERSIONING = OFF)");
-            context.Database.ExecuteSqlRaw($"ALTER TABLE [{tableName}] DROP PERIOD FOR SYSTEM_TIME");
-
-            context.Database.ExecuteSqlRaw($"UPDATE [{tableName + "History"}] SET PeriodStart = '2000-01-01T01:00:00.0000000Z'");
-            context.Database.ExecuteSqlRaw($"UPDATE [{tableName + "History"}] SET PeriodEnd = '2020-07-01T07:00:00.0000000Z'");
-
-            context.Database.ExecuteSqlRaw($"ALTER TABLE [{tableName}] ADD PERIOD FOR SYSTEM_TIME ([PeriodStart], [PeriodEnd])");
             context.Database.ExecuteSqlRaw(
-                $"ALTER TABLE [{tableName}] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [dbo].[{tableName + "History"}]))");
+                $"ALTER TABLE [{tableName}] SET (SYSTEM_VERSIONING = OFF)"
+            );
+            context.Database.ExecuteSqlRaw(
+                $"ALTER TABLE [{tableName}] DROP PERIOD FOR SYSTEM_TIME"
+            );
+
+            context.Database.ExecuteSqlRaw(
+                $"UPDATE [{tableName + "History"}] SET PeriodStart = '2000-01-01T01:00:00.0000000Z'"
+            );
+            context.Database.ExecuteSqlRaw(
+                $"UPDATE [{tableName + "History"}] SET PeriodEnd = '2020-07-01T07:00:00.0000000Z'"
+            );
+
+            context.Database.ExecuteSqlRaw(
+                $"ALTER TABLE [{tableName}] ADD PERIOD FOR SYSTEM_TIME ([PeriodStart], [PeriodEnd])"
+            );
+            context.Database.ExecuteSqlRaw(
+                $"ALTER TABLE [{tableName}] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [dbo].[{tableName + "History"}]))"
+            );
         }
     }
 }

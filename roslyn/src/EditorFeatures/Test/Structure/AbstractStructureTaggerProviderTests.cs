@@ -15,18 +15,28 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Structure
     {
         private static void TextContainsRegionOrUsing(string input, bool expected, string language)
         {
-            var exportProvider = EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
-            var buffer = EditorFactory.CreateBuffer(exportProvider, input.Split(new string[] { Environment.NewLine }, StringSplitOptions.None));
+            var exportProvider =
+                EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
+            var buffer = EditorFactory.CreateBuffer(
+                exportProvider,
+                input.Split(new string[] { Environment.NewLine }, StringSplitOptions.None)
+            );
             var textSnapshot = buffer.CurrentSnapshot;
 
-            var actual = AbstractStructureTaggerProvider.ContainsRegionOrImport(textSnapshot, collapseRegions: true, collapseImports: true, language);
+            var actual = AbstractStructureTaggerProvider.ContainsRegionOrImport(
+                textSnapshot,
+                collapseRegions: true,
+                collapseImports: true,
+                language
+            );
             Assert.Equal(expected, actual);
         }
 
         [Fact]
         public void UsingDirective()
         {
-            var input = @"
+            var input =
+                @"
 using System;
 ";
 
@@ -36,7 +46,8 @@ using System;
         [Fact]
         public void UsingDirectiveInNamespace()
         {
-            var input = @"
+            var input =
+                @"
 namespace Goo
 {
     using System;
@@ -49,7 +60,8 @@ namespace Goo
         [Fact]
         public void UsingStaticDirective()
         {
-            var input = @"
+            var input =
+                @"
 using static System;
 ";
 
@@ -59,7 +71,8 @@ using static System;
         [Fact]
         public void UsingAliasDirective()
         {
-            var input = @"
+            var input =
+                @"
 using A = System;
 ";
 
@@ -69,7 +82,8 @@ using A = System;
         [Fact]
         public void ExternAlias()
         {
-            var input = @"
+            var input =
+                @"
 extern alias Goo;
 ";
 
@@ -79,7 +93,8 @@ extern alias Goo;
         [Fact]
         public void ImportsStatement()
         {
-            var input = @"
+            var input =
+                @"
 Imports System
 ";
 
@@ -89,7 +104,8 @@ Imports System
         [Fact]
         public void ImportsAliasStatement()
         {
-            var input = @"
+            var input =
+                @"
 Imports A = System
 ";
 
@@ -99,7 +115,8 @@ Imports A = System
         [Fact]
         public void CSharpRegion1()
         {
-            var input = @"
+            var input =
+                @"
     #region
 ";
 
@@ -109,7 +126,8 @@ Imports A = System
         [Fact]
         public void CSharpRegion()
         {
-            var input = @"
+            var input =
+                @"
     #region Goo
 ";
 
@@ -119,7 +137,8 @@ Imports A = System
         [Fact]
         public void VisualBasicRegion()
         {
-            var input = @"
+            var input =
+                @"
 #Region Goo
 ";
 

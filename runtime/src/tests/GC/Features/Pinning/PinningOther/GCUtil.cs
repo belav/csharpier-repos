@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Runtime.InteropServices;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Security;
 
 public class GCUtil
@@ -25,7 +25,6 @@ public class GCUtil
     {
         gh.Free();
     }
-
 
     [SecuritySafeCritical]
     public static Object GetTarget(GCHandle gh)

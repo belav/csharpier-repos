@@ -15,7 +15,10 @@ namespace System.Web.Mvc.Test
         public void TryGetDefaultValue_FirstChecksDefaultValue()
         {
             // Arrange
-            Mock<ParameterInfo> mockPInfo = new Mock<ParameterInfo>() { DefaultValue = DefaultValue.Mock };
+            Mock<ParameterInfo> mockPInfo = new Mock<ParameterInfo>()
+            {
+                DefaultValue = DefaultValue.Mock,
+            };
             mockPInfo.Setup(p => p.DefaultValue).Returns(42);
             mockPInfo.Setup(p => p.Name).Returns("someParameter");
 
@@ -32,7 +35,9 @@ namespace System.Web.Mvc.Test
         public void TryGetDefaultValue_SecondChecksDefaultValueAttribute()
         {
             // Arrange
-            ParameterInfo pInfo = typeof(MyController).GetMethod("DefaultValues").GetParameters()[1]; // hasDefaultValue
+            ParameterInfo pInfo = typeof(MyController).GetMethod("DefaultValues").GetParameters()[
+                1
+            ]; // hasDefaultValue
 
             // Act
             object defaultValue;
@@ -47,7 +52,10 @@ namespace System.Web.Mvc.Test
         public void TryGetDefaultValue_RespectsNullDefaultValue()
         {
             // Arrange
-            Mock<ParameterInfo> mockPInfo = new Mock<ParameterInfo>() { DefaultValue = DefaultValue.Mock };
+            Mock<ParameterInfo> mockPInfo = new Mock<ParameterInfo>()
+            {
+                DefaultValue = DefaultValue.Mock,
+            };
             mockPInfo.Setup(p => p.DefaultValue).Returns(null);
             mockPInfo.Setup(p => p.Name).Returns("someParameter");
             mockPInfo
@@ -67,7 +75,9 @@ namespace System.Web.Mvc.Test
         public void TryGetDefaultValue_ReturnsFalseIfNoDefaultValue()
         {
             // Arrange
-            ParameterInfo pInfo = typeof(MyController).GetMethod("DefaultValues").GetParameters()[0]; // noDefaultValue
+            ParameterInfo pInfo = typeof(MyController).GetMethod("DefaultValues").GetParameters()[
+                0
+            ]; // noDefaultValue
 
             // Act
             object defaultValue;
@@ -111,7 +121,10 @@ namespace System.Web.Mvc.Test
             OptionalParamHelper<string>("abc", "stringParam");
         }
 
-        private static void DefaultValueAttributeHelper<TParam>(TParam expectedValue, string paramName)
+        private static void DefaultValueAttributeHelper<TParam>(
+            TParam expectedValue,
+            string paramName
+        )
         {
             ParameterTestHelper<TParam>(expectedValue, paramName, "AttributeDefaultValues");
         }
@@ -121,9 +134,16 @@ namespace System.Web.Mvc.Test
             ParameterTestHelper<TParam>(expectedValue, paramName, "OptionalParamDefaultValues");
         }
 
-        private static void ParameterTestHelper<TParam>(TParam expectedValue, string paramName, string actionMethodName)
+        private static void ParameterTestHelper<TParam>(
+            TParam expectedValue,
+            string paramName,
+            string actionMethodName
+        )
         {
-            ParameterInfo pInfo = typeof(MyController).GetMethod(actionMethodName).GetParameters().Single(p => p.Name == paramName);
+            ParameterInfo pInfo = typeof(MyController)
+                .GetMethod(actionMethodName)
+                .GetParameters()
+                .Single(p => p.Name == paramName);
             object returnValueObject;
             bool result = ParameterInfoUtil.TryGetDefaultValue(pInfo, out returnValueObject);
 
@@ -138,9 +158,10 @@ namespace System.Web.Mvc.Test
 
         private class MyController : Controller
         {
-            public void DefaultValues(string noDefaultValue, [DefaultValue("someValue")] string hasDefaultValue)
-            {
-            }
+            public void DefaultValues(
+                string noDefaultValue,
+                [DefaultValue("someValue")] string hasDefaultValue
+            ) { }
 
             public void AttributeDefaultValues(
                 [DefaultValue(true)] bool boolParam,
@@ -155,9 +176,7 @@ namespace System.Web.Mvc.Test
                 [DefaultValue(null)] object objectParam,
                 [DefaultValue((short)42)] short shortParam,
                 [DefaultValue("abc")] string stringParam
-                )
-            {
-            }
+            ) { }
 
             public void OptionalParamDefaultValues(
                 bool boolParam = true,
@@ -171,15 +190,13 @@ namespace System.Web.Mvc.Test
                 object objectParam = null,
                 short shortParam = 42,
                 string stringParam = "abc"
-                )
-            {
-            }
+            ) { }
         }
 
         private enum MyEnum
         {
             None = 0,
-            All = 1
+            All = 1,
         }
     }
 }

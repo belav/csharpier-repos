@@ -21,13 +21,15 @@ public class TestSummary
         public readonly string? SkipReason;
         public readonly string? Output;
 
-        public TestResult(string name,
-                          string containingTypeName,
-                          string methodName,
-                          TimeSpan duration,
-                          Exception? exception,
-                          string? skipReason,
-                          string? output)
+        public TestResult(
+            string name,
+            string containingTypeName,
+            string methodName,
+            TimeSpan duration,
+            Exception? exception,
+            string? skipReason,
+            string? output
+        )
         {
             Name = name;
             ContainingTypeName = containingTypeName;
@@ -41,8 +43,10 @@ public class TestSummary
         public string ToXmlString()
         {
             var testResultSb = new StringBuilder();
-            testResultSb.Append($@"<test name=""{Name}"" type=""{ContainingTypeName}"""
-                              + $@" method=""{MethodName}"" time=""{Duration.TotalSeconds:F6}""");
+            testResultSb.Append(
+                $@"<test name=""{Name}"" type=""{ContainingTypeName}"""
+                    + $@" method=""{MethodName}"" time=""{Duration.TotalSeconds:F6}"""
+            );
 
             // GH dotnet/runtime issue #92092: It is possible for tests to have
             // illegal XML characters in their output. So, we have to sanitize said
@@ -51,8 +55,8 @@ public class TestSummary
             // characters with their hexadecimal notation in SanitizeOutput().
 
             string outputElement = !string.IsNullOrWhiteSpace(Output)
-                                 ? $"<output><![CDATA[{SanitizeOutput(Output)}]]></output>"
-                                 : string.Empty;
+                ? $"<output><![CDATA[{SanitizeOutput(Output)}]]></output>"
+                : string.Empty;
 
             if (Exception is not null)
             {
@@ -62,7 +66,8 @@ public class TestSummary
                 {
                     if (tie.InnerException is not null)
                     {
-                        message = $"{message}\n INNER EXCEPTION--\n"
+                        message =
+                            $"{message}\n INNER EXCEPTION--\n"
                             + $"{tie.InnerException.GetType()}--\n"
                             + $"{tie.InnerException.Message}--\n"
                             + $"{tie.InnerException.StackTrace}";
@@ -74,14 +79,18 @@ public class TestSummary
                     message = "NoExceptionMessage";
                 }
 
-                testResultSb.Append($@" result=""Fail"">"
-                                  + $@"<failure exception-type=""{Exception.GetType()}"">"
-                                  + $"<message><![CDATA[{message}]]></message>"
-                                  + "<stack-trace><![CDATA[");
+                testResultSb.Append(
+                    $@" result=""Fail"">"
+                        + $@"<failure exception-type=""{Exception.GetType()}"">"
+                        + $"<message><![CDATA[{message}]]></message>"
+                        + "<stack-trace><![CDATA["
+                );
 
-                testResultSb.Append(!string.IsNullOrWhiteSpace(Exception.StackTrace)
-                                    ? Exception.StackTrace
-                                    : "NoStackTrace");
+                testResultSb.Append(
+                    !string.IsNullOrWhiteSpace(Exception.StackTrace)
+                        ? Exception.StackTrace
+                        : "NoStackTrace"
+                );
 
                 testResultSb.AppendLine($"]]></stack-trace></failure>{outputElement}</test>");
             }
@@ -89,9 +98,9 @@ public class TestSummary
             {
                 testResultSb.Append($@" result=""Skip""><reason><![CDATA[");
 
-                testResultSb.Append(!string.IsNullOrWhiteSpace(SkipReason)
-                                    ? SkipReason
-                                    : "No Known Skip Reason");
+                testResultSb.Append(
+                    !string.IsNullOrWhiteSpace(SkipReason) ? SkipReason : "No Known Skip Reason"
+                );
 
                 testResultSb.AppendLine("]]></reason></test>");
             }
@@ -140,10 +149,12 @@ public class TestSummary
     {
         // We are writing down both, date and time, in the same field here because
         // it's much simpler to parse later on in the XUnitLogChecker.
-        tempLogSw.WriteLine("<assembly\n"
-                        + $"    name=\"{assemblyName}\"\n"
-                        + $"    test-framework=\"XUnitWrapperGenerator-generated-runner\"\n"
-                        + $"    run-date-time=\"{_testRunStart.ToString("yyyy-MM-dd HH:mm:ss")}\">");
+        tempLogSw.WriteLine(
+            "<assembly\n"
+                + $"    name=\"{assemblyName}\"\n"
+                + $"    test-framework=\"XUnitWrapperGenerator-generated-runner\"\n"
+                + $"    run-date-time=\"{_testRunStart.ToString("yyyy-MM-dd HH:mm:ss")}\">"
+        );
     }
 
     public void WriteFooterToTempLog(StreamWriter tempLogSw)
@@ -157,18 +168,28 @@ public class TestSummary
         outTw.Flush();
     }
 
-    public void ReportPassedTest(string name,
-                                 string containingTypeName,
-                                 string methodName,
-                                 TimeSpan duration,
-                                 string output,
-                                 TextWriter outTw,
-                                 StreamWriter tempLogSw,
-                                 StreamWriter statsCsvSw)
+    public void ReportPassedTest(
+        string name,
+        string containingTypeName,
+        string methodName,
+        TimeSpan duration,
+        string output,
+        TextWriter outTw,
+        StreamWriter tempLogSw,
+        StreamWriter statsCsvSw
+    )
     {
         PassedTests++;
         TotalTests++;
-        var result = new TestResult(name, containingTypeName, methodName, duration, null, null, output);
+        var result = new TestResult(
+            name,
+            containingTypeName,
+            methodName,
+            duration,
+            null,
+            null,
+            output
+        );
         _testResults.Add(result);
 
         outTw.WriteLine("{0:HH:mm:ss.fff} Passed test: {1}", System.DateTime.Now, name);
@@ -179,19 +200,29 @@ public class TestSummary
         tempLogSw.Flush();
     }
 
-    public void ReportFailedTest(string name,
-                                 string containingTypeName,
-                                 string methodName,
-                                 TimeSpan duration,
-                                 Exception ex,
-                                 string output,
-                                 TextWriter outTw,
-                                 StreamWriter tempLogSw,
-                                 StreamWriter statsCsvSw)
+    public void ReportFailedTest(
+        string name,
+        string containingTypeName,
+        string methodName,
+        TimeSpan duration,
+        Exception ex,
+        string output,
+        TextWriter outTw,
+        StreamWriter tempLogSw,
+        StreamWriter statsCsvSw
+    )
     {
         FailedTests++;
         TotalTests++;
-        var result = new TestResult(name, containingTypeName, methodName, duration, ex, null, output);
+        var result = new TestResult(
+            name,
+            containingTypeName,
+            methodName,
+            duration,
+            ex,
+            null,
+            output
+        );
         _testResults.Add(result);
 
         outTw.WriteLine(ex);
@@ -203,17 +234,27 @@ public class TestSummary
         tempLogSw.Flush();
     }
 
-    public void ReportSkippedTest(string name,
-                                  string containingTypeName,
-                                  string methodName,
-                                  TimeSpan duration,
-                                  string reason,
-                                  StreamWriter tempLogSw,
-                                  StreamWriter statsCsvSw)
+    public void ReportSkippedTest(
+        string name,
+        string containingTypeName,
+        string methodName,
+        TimeSpan duration,
+        string reason,
+        StreamWriter tempLogSw,
+        StreamWriter statsCsvSw
+    )
     {
         SkippedTests++;
         TotalTests++;
-        var result = new TestResult(name, containingTypeName, methodName, duration, null, reason, null);
+        var result = new TestResult(
+            name,
+            containingTypeName,
+            methodName,
+            duration,
+            null,
+            reason,
+            null
+        );
         _testResults.Add(result);
 
         statsCsvSw.WriteLine($"{TotalTests},{PassedTests},{FailedTests},{SkippedTests}");
@@ -229,7 +270,8 @@ public class TestSummary
         // using StringBuilder here for simplicity of loaded IL.
         StringBuilder resultsFile = new();
         resultsFile.AppendLine("<assemblies>");
-        resultsFile.AppendLine($@"
+        resultsFile.AppendLine(
+            $@"
 <assembly
     name=""{assemblyName}""
     test-framework=""XUnitWrapperGenerator-generated-runner""
@@ -240,9 +282,11 @@ public class TestSummary
     passed=""{PassedTests}""
     failed=""{FailedTests}""
     skipped=""{SkippedTests}""
-    errors=""0"">");
+    errors=""0"">"
+        );
 
-        resultsFile.AppendLine($@"
+        resultsFile.AppendLine(
+            $@"
 <collection
     name=""Collection""
     time=""{totalRunSeconds}""
@@ -251,7 +295,8 @@ public class TestSummary
     failed=""{FailedTests}""
     skipped=""{SkippedTests}""
     errors=""0""
->");
+>"
+        );
 
         foreach (var test in _testResults)
         {

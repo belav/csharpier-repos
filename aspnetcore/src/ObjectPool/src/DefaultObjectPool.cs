@@ -12,7 +12,8 @@ namespace Microsoft.Extensions.ObjectPool;
 /// </summary>
 /// <typeparam name="T">The type to pool objects for.</typeparam>
 /// <remarks>This implementation keeps a cache of retained objects. This means that if objects are returned when the pool has already reached "maximumRetained" objects they will be available to be Garbage Collected.</remarks>
-public class DefaultObjectPool<T> : ObjectPool<T> where T : class
+public class DefaultObjectPool<T> : ObjectPool<T>
+    where T : class
 {
     private readonly Func<T> _createFunc;
     private readonly Func<T, bool> _returnFunc;
@@ -27,9 +28,7 @@ public class DefaultObjectPool<T> : ObjectPool<T> where T : class
     /// </summary>
     /// <param name="policy">The pooling policy to use.</param>
     public DefaultObjectPool(IPooledObjectPolicy<T> policy)
-        : this(policy, Environment.ProcessorCount * 2)
-    {
-    }
+        : this(policy, Environment.ProcessorCount * 2) { }
 
     /// <summary>
     /// Creates an instance of <see cref="DefaultObjectPool{T}"/>.
@@ -41,7 +40,7 @@ public class DefaultObjectPool<T> : ObjectPool<T> where T : class
         // cache the target interface methods, to avoid interface lookup overhead
         _createFunc = policy.Create;
         _returnFunc = policy.Return;
-        _maxCapacity = maximumRetained - 1;  // -1 to account for _fastItem
+        _maxCapacity = maximumRetained - 1; // -1 to account for _fastItem
     }
 
     /// <inheritdoc />

@@ -26,7 +26,10 @@ internal class TestRateLimiter : RateLimiter
         return new TestRateLimitLease(_alwaysAccept, null);
     }
 
-    protected override ValueTask<RateLimitLease> AcquireAsyncCore(int permitCount, CancellationToken cancellationToken)
+    protected override ValueTask<RateLimitLease> AcquireAsyncCore(
+        int permitCount,
+        CancellationToken cancellationToken
+    )
     {
         cancellationToken.ThrowIfCancellationRequested();
         return new ValueTask<RateLimitLease>(new TestRateLimitLease(_alwaysAccept, null));

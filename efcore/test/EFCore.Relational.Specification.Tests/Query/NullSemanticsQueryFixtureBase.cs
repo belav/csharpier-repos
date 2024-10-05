@@ -5,94 +5,95 @@ using Microsoft.EntityFrameworkCore.TestModels.NullSemanticsModel;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public abstract class NullSemanticsQueryFixtureBase : SharedStoreFixtureBase<NullSemanticsContext>, IQueryFixtureBase
+public abstract class NullSemanticsQueryFixtureBase
+    : SharedStoreFixtureBase<NullSemanticsContext>,
+        IQueryFixtureBase
 {
-    public Func<DbContext> GetContextCreator()
-        => () => CreateContext();
+    public Func<DbContext> GetContextCreator() => () => CreateContext();
 
-    public virtual ISetSource GetExpectedData()
-        => NullSemanticsData.Instance;
+    public virtual ISetSource GetExpectedData() => NullSemanticsData.Instance;
 
-    public IReadOnlyDictionary<Type, object> EntitySorters { get; } = new Dictionary<Type, Func<object, object>>
-    {
-        { typeof(NullSemanticsEntity1), e => ((NullSemanticsEntity1)e)?.Id },
-        { typeof(NullSemanticsEntity2), e => ((NullSemanticsEntity2)e)?.Id }
-    }.ToDictionary(e => e.Key, e => (object)e.Value);
-
-    public IReadOnlyDictionary<Type, object> EntityAsserters { get; } = new Dictionary<Type, Action<object, object>>
-    {
+    public IReadOnlyDictionary<Type, object> EntitySorters { get; } =
+        new Dictionary<Type, Func<object, object>>
         {
-            typeof(NullSemanticsEntity1), (e, a) =>
-            {
-                Assert.Equal(e == null, a == null);
-                if (a != null)
-                {
-                    var ee = (NullSemanticsEntity1)e;
-                    var aa = (NullSemanticsEntity1)a;
+            { typeof(NullSemanticsEntity1), e => ((NullSemanticsEntity1)e)?.Id },
+            { typeof(NullSemanticsEntity2), e => ((NullSemanticsEntity2)e)?.Id },
+        }.ToDictionary(e => e.Key, e => (object)e.Value);
 
-                    Assert.Equal(ee.Id, aa.Id);
-                    Assert.Equal(ee.BoolA, aa.BoolA);
-                    Assert.Equal(ee.BoolB, aa.BoolB);
-                    Assert.Equal(ee.BoolC, aa.BoolC);
-                    Assert.Equal(ee.IntA, aa.IntA);
-                    Assert.Equal(ee.IntB, aa.IntB);
-                    Assert.Equal(ee.IntC, aa.IntC);
-                    Assert.Equal(ee.StringA, aa.StringA);
-                    Assert.Equal(ee.StringB, aa.StringB);
-                    Assert.Equal(ee.StringC, aa.StringC);
-                    Assert.Equal(ee.NullableBoolA, aa.NullableBoolA);
-                    Assert.Equal(ee.NullableBoolB, aa.NullableBoolB);
-                    Assert.Equal(ee.NullableBoolC, aa.NullableBoolC);
-                    Assert.Equal(ee.NullableIntA, aa.NullableIntA);
-                    Assert.Equal(ee.NullableIntB, aa.NullableIntB);
-                    Assert.Equal(ee.NullableIntC, aa.NullableIntC);
-                    Assert.Equal(ee.NullableStringA, aa.NullableStringA);
-                    Assert.Equal(ee.NullableStringB, aa.NullableStringB);
-                    Assert.Equal(ee.NullableStringC, aa.NullableStringC);
-                }
-            }
-        },
+    public IReadOnlyDictionary<Type, object> EntityAsserters { get; } =
+        new Dictionary<Type, Action<object, object>>
         {
-            typeof(NullSemanticsEntity2), (e, a) =>
             {
-                Assert.Equal(e == null, a == null);
-                if (a != null)
+                typeof(NullSemanticsEntity1),
+                (e, a) =>
                 {
-                    var ee = (NullSemanticsEntity2)e;
-                    var aa = (NullSemanticsEntity2)a;
+                    Assert.Equal(e == null, a == null);
+                    if (a != null)
+                    {
+                        var ee = (NullSemanticsEntity1)e;
+                        var aa = (NullSemanticsEntity1)a;
 
-                    Assert.Equal(ee.Id, aa.Id);
-                    Assert.Equal(ee.BoolA, aa.BoolA);
-                    Assert.Equal(ee.BoolB, aa.BoolB);
-                    Assert.Equal(ee.BoolC, aa.BoolC);
-                    Assert.Equal(ee.IntA, aa.IntA);
-                    Assert.Equal(ee.IntB, aa.IntB);
-                    Assert.Equal(ee.IntC, aa.IntC);
-                    Assert.Equal(ee.StringA, aa.StringA);
-                    Assert.Equal(ee.StringB, aa.StringB);
-                    Assert.Equal(ee.StringC, aa.StringC);
-                    Assert.Equal(ee.NullableBoolA, aa.NullableBoolA);
-                    Assert.Equal(ee.NullableBoolB, aa.NullableBoolB);
-                    Assert.Equal(ee.NullableBoolC, aa.NullableBoolC);
-                    Assert.Equal(ee.NullableIntA, aa.NullableIntA);
-                    Assert.Equal(ee.NullableIntB, aa.NullableIntB);
-                    Assert.Equal(ee.NullableIntC, aa.NullableIntC);
-                    Assert.Equal(ee.NullableStringA, aa.NullableStringA);
-                    Assert.Equal(ee.NullableStringB, aa.NullableStringB);
-                    Assert.Equal(ee.NullableStringC, aa.NullableStringC);
+                        Assert.Equal(ee.Id, aa.Id);
+                        Assert.Equal(ee.BoolA, aa.BoolA);
+                        Assert.Equal(ee.BoolB, aa.BoolB);
+                        Assert.Equal(ee.BoolC, aa.BoolC);
+                        Assert.Equal(ee.IntA, aa.IntA);
+                        Assert.Equal(ee.IntB, aa.IntB);
+                        Assert.Equal(ee.IntC, aa.IntC);
+                        Assert.Equal(ee.StringA, aa.StringA);
+                        Assert.Equal(ee.StringB, aa.StringB);
+                        Assert.Equal(ee.StringC, aa.StringC);
+                        Assert.Equal(ee.NullableBoolA, aa.NullableBoolA);
+                        Assert.Equal(ee.NullableBoolB, aa.NullableBoolB);
+                        Assert.Equal(ee.NullableBoolC, aa.NullableBoolC);
+                        Assert.Equal(ee.NullableIntA, aa.NullableIntA);
+                        Assert.Equal(ee.NullableIntB, aa.NullableIntB);
+                        Assert.Equal(ee.NullableIntC, aa.NullableIntC);
+                        Assert.Equal(ee.NullableStringA, aa.NullableStringA);
+                        Assert.Equal(ee.NullableStringB, aa.NullableStringB);
+                        Assert.Equal(ee.NullableStringC, aa.NullableStringC);
+                    }
                 }
-            }
-        },
-    }.ToDictionary(e => e.Key, e => (object)e.Value);
+            },
+            {
+                typeof(NullSemanticsEntity2),
+                (e, a) =>
+                {
+                    Assert.Equal(e == null, a == null);
+                    if (a != null)
+                    {
+                        var ee = (NullSemanticsEntity2)e;
+                        var aa = (NullSemanticsEntity2)a;
 
-    protected override string StoreName
-        => "NullSemanticsQueryTest";
+                        Assert.Equal(ee.Id, aa.Id);
+                        Assert.Equal(ee.BoolA, aa.BoolA);
+                        Assert.Equal(ee.BoolB, aa.BoolB);
+                        Assert.Equal(ee.BoolC, aa.BoolC);
+                        Assert.Equal(ee.IntA, aa.IntA);
+                        Assert.Equal(ee.IntB, aa.IntB);
+                        Assert.Equal(ee.IntC, aa.IntC);
+                        Assert.Equal(ee.StringA, aa.StringA);
+                        Assert.Equal(ee.StringB, aa.StringB);
+                        Assert.Equal(ee.StringC, aa.StringC);
+                        Assert.Equal(ee.NullableBoolA, aa.NullableBoolA);
+                        Assert.Equal(ee.NullableBoolB, aa.NullableBoolB);
+                        Assert.Equal(ee.NullableBoolC, aa.NullableBoolC);
+                        Assert.Equal(ee.NullableIntA, aa.NullableIntA);
+                        Assert.Equal(ee.NullableIntB, aa.NullableIntB);
+                        Assert.Equal(ee.NullableIntC, aa.NullableIntC);
+                        Assert.Equal(ee.NullableStringA, aa.NullableStringA);
+                        Assert.Equal(ee.NullableStringB, aa.NullableStringB);
+                        Assert.Equal(ee.NullableStringC, aa.NullableStringC);
+                    }
+                }
+            },
+        }.ToDictionary(e => e.Key, e => (object)e.Value);
 
-    public new RelationalTestStore TestStore
-        => (RelationalTestStore)base.TestStore;
+    protected override string StoreName => "NullSemanticsQueryTest";
 
-    public TestSqlLoggerFactory TestSqlLoggerFactory
-        => (TestSqlLoggerFactory)ListLoggerFactory;
+    public new RelationalTestStore TestStore => (RelationalTestStore)base.TestStore;
+
+    public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
     public override NullSemanticsContext CreateContext()
     {
@@ -101,8 +102,8 @@ public abstract class NullSemanticsQueryFixtureBase : SharedStoreFixtureBase<Nul
         return context;
     }
 
-    protected override void Seed(NullSemanticsContext context)
-        => NullSemanticsContext.Seed(context);
+    protected override void Seed(NullSemanticsContext context) =>
+        NullSemanticsContext.Seed(context);
 
     protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
     {

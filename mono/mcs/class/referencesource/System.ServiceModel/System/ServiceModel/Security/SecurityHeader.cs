@@ -5,11 +5,10 @@
 namespace System.ServiceModel.Security
 {
     using System.Globalization;
-    using System.ServiceModel.Channels;
     using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.Xml;
-
     using DictionaryManager = System.IdentityModel.DictionaryManager;
     using ISecurityElement = System.IdentityModel.ISecurityElement;
 
@@ -28,10 +27,15 @@ namespace System.ServiceModel.Security
         MessageDirection transferDirection;
         SecurityHeaderLayout layout = SecurityHeaderLayout.Strict;
 
-        public SecurityHeader(Message message,
-            string actor, bool mustUnderstand, bool relay,
-            SecurityStandardsManager standardsManager, SecurityAlgorithmSuite algorithmSuite,
-            MessageDirection transferDirection)
+        public SecurityHeader(
+            Message message,
+            string actor,
+            bool mustUnderstand,
+            bool relay,
+            SecurityStandardsManager standardsManager,
+            SecurityAlgorithmSuite algorithmSuite,
+            MessageDirection transferDirection
+        )
         {
             if (message == null)
             {
@@ -43,7 +47,9 @@ namespace System.ServiceModel.Security
             }
             if (standardsManager == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("standardsManager");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "standardsManager"
+                );
             }
             if (algorithmSuite == null)
             {
@@ -117,10 +123,7 @@ namespace System.ServiceModel.Security
 
         public SecurityHeaderLayout Layout
         {
-            get
-            {
-                return this.layout;
-            }
+            get { return this.layout; }
             set
             {
                 ThrowIfProcessingStarted();
@@ -152,13 +155,22 @@ namespace System.ServiceModel.Security
         {
             if (this.processingStarted)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.OperationCannotBeDoneAfterProcessingIsStarted)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.OperationCannotBeDoneAfterProcessingIsStarted)
+                    )
+                );
             }
         }
 
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "{0}(Actor = '{1}')", GetType().Name, this.Actor);
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                "{0}(Actor = '{1}')",
+                GetType().Name,
+                this.Actor
+            );
         }
     }
 }

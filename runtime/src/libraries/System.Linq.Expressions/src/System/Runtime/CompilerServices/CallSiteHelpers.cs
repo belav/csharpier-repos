@@ -11,7 +11,9 @@ namespace System.Runtime.CompilerServices
     /// </summary>
     public static class CallSiteHelpers
     {
-        private static readonly Type s_knownNonDynamicMethodType = typeof(object).GetMethod(nameof(ToString))!.GetType();
+        private static readonly Type s_knownNonDynamicMethodType = typeof(object)
+            .GetMethod(nameof(ToString))!
+            .GetType();
 
         /// <summary>
         /// Checks if a <see cref="MethodBase"/> is internally used by DLR and should not
@@ -29,7 +31,10 @@ namespace System.Runtime.CompilerServices
             // non-static method. If it does, it is a dynamic method.
             // This could be improved if the CLR provides a way to attach some information
             // to the dynamic method we create, like CustomAttributes.
-            if (mb.Name == CallSite.CallSiteTargetMethodName && mb.GetType() != s_knownNonDynamicMethodType)
+            if (
+                mb.Name == CallSite.CallSiteTargetMethodName
+                && mb.GetType() != s_knownNonDynamicMethodType
+            )
             {
                 return true;
             }

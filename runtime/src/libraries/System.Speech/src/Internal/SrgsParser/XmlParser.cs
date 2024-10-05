@@ -33,9 +33,7 @@ namespace System.Speech.Internal.SrgsParser
                         uri = new Uri(_xmlTextReader.BaseURI);
                     }
 #pragma warning disable 56502 // Remove the empty catch statements warnings
-                    catch (UriFormatException)
-                    {
-                    }
+                    catch (UriFormatException) { }
 #pragma warning restore 56502
                 }
             }
@@ -93,7 +91,12 @@ namespace System.Speech.Internal.SrgsParser
             catch (XmlException eXml)
             {
                 _parser.RemoveAllRules();
-                ThrowSrgsExceptionWithPosition(_filename, _reader, SR.Get(SRID.InvalidXmlFormat), eXml);
+                ThrowSrgsExceptionWithPosition(
+                    _filename,
+                    _reader,
+                    SR.Get(SRID.InvalidXmlFormat),
+                    eXml
+                );
             }
             catch (FormatException e)
             {
@@ -117,7 +120,14 @@ namespace System.Speech.Internal.SrgsParser
         /// Tokens may also be delimited by double quotes.  In these cases, the double
         /// quotes token must be surrounded by white space or string boundary.
         /// </summary>
-        internal static void ParseText(IElement parent, string sChars, string pronunciation, string display, float reqConfidence, CreateTokenCallback createTokens)
+        internal static void ParseText(
+            IElement parent,
+            string sChars,
+            string pronunciation,
+            string display,
+            float reqConfidence,
+            CreateTokenCallback createTokens
+        )
         {
             sChars = sChars.Trim(Helpers._achTrimChars);
 
@@ -127,7 +137,7 @@ namespace System.Speech.Internal.SrgsParser
 
             for (int i = 0; i < achToken.Length; i = iTokenEnd + 1)
             {
-                if (achToken[i] == ' ')                            // Skip white spaces
+                if (achToken[i] == ' ') // Skip white spaces
                 {
                     iTokenEnd = i;
                     continue;
@@ -192,7 +202,12 @@ namespace System.Speech.Internal.SrgsParser
         /// Throws an Exception with the error specified by the resource ID.
         /// Add the line and column number if the XmlReader is a TextReader
         /// </summary>
-        internal static void ThrowSrgsExceptionWithPosition(string filename, XmlReader xmlReader, string sError, Exception innerException)
+        internal static void ThrowSrgsExceptionWithPosition(
+            string filename,
+            XmlReader xmlReader,
+            string sError,
+            Exception innerException
+        )
         {
             // Add the line and column number if the XmlReader is a XmlTextReader
             XmlTextReader xmlTextReader = xmlReader as XmlTextReader;
@@ -204,11 +219,25 @@ namespace System.Speech.Internal.SrgsParser
                 int position = xmlTextReader.LinePosition;
                 if (filename == null)
                 {
-                    sError += string.Format(CultureInfo.InvariantCulture, " [{0}={1}, {2}={3}]", sLine, line, sPosition, position);
+                    sError += string.Format(
+                        CultureInfo.InvariantCulture,
+                        " [{0}={1}, {2}={3}]",
+                        sLine,
+                        line,
+                        sPosition,
+                        position
+                    );
                 }
                 else
                 {
-                    sError = string.Format(CultureInfo.InvariantCulture, "{0}({1},{2}): error : {3}", filename, line, position, sError);
+                    sError = string.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0}({1},{2}): error : {3}",
+                        filename,
+                        line,
+                        position,
+                        sError
+                    );
                 }
             }
             throw new FormatException(sError, innerException);
@@ -221,10 +250,7 @@ namespace System.Speech.Internal.SrgsParser
         // Implementation of the internal interface ISrgsParser
         public IElementFactory ElementFactory
         {
-            set
-            {
-                _parser = value;
-            }
+            set { _parser = value; }
         }
 
         #endregion
@@ -237,7 +263,8 @@ namespace System.Speech.Internal.SrgsParser
 
         internal const string srgsNamespace = "http://www.w3.org/2001/06/grammar";
 
-        internal const string sapiNamespace = "http://schemas.microsoft.com/Speech/2002/06/SRGSExtensions";
+        internal const string sapiNamespace =
+            "http://schemas.microsoft.com/Speech/2002/06/SRGSExtensions";
 
         #endregion
 
@@ -364,7 +391,9 @@ namespace System.Speech.Internal.SrgsParser
                                     int pos = reader.Value.IndexOf('-');
                                     if (pos > 0)
                                     {
-                                        grammar.Culture = _langId = new CultureInfo(reader.Value.Substring(0, pos));
+                                        grammar.Culture = _langId = new CultureInfo(
+                                            reader.Value.Substring(0, pos)
+                                        );
                                     }
                                     else
                                     {
@@ -403,7 +432,10 @@ namespace System.Speech.Internal.SrgsParser
                                         break;
 
                                     default:
-                                        ThrowSrgsException(SRID.UnsupportedPhoneticAlphabet, reader.Value);
+                                        ThrowSrgsException(
+                                            SRID.UnsupportedPhoneticAlphabet,
+                                            reader.Value
+                                        );
                                         break;
                                 }
                                 break;
@@ -619,7 +651,8 @@ namespace System.Speech.Internal.SrgsParser
 
             ValidateRuleId(id);
 
-            bool hasScript = sInit != null || sParse != null || sError != null || sRecognition != null;
+            bool hasScript =
+                sInit != null || sParse != null || sError != null || sRecognition != null;
             IRule rule = grammar.CreateRule(id, publicRule, ruleDynamic, hasScript);
 
             if (!string.IsNullOrEmpty(sInit))
@@ -683,7 +716,11 @@ namespace System.Speech.Internal.SrgsParser
                             case "special":
                                 if (ruleRef != null)
                                 {
-                                    ThrowSrgsException(SRID.InvalidAttributeDefinedTwice, reader.Value, "special");
+                                    ThrowSrgsException(
+                                        SRID.InvalidAttributeDefinedTwice,
+                                        reader.Value,
+                                        "special"
+                                    );
                                 }
                                 switch (reader.Value)
                                 {
@@ -753,7 +790,12 @@ namespace System.Speech.Internal.SrgsParser
                     ThrowSrgsException(SRID.InvalidRuleRef, "uri");
                 }
 
-                ruleRef = _parser.CreateRuleRef(parent, new Uri(uri, UriKind.RelativeOrAbsolute), sAlias, sParams);
+                ruleRef = _parser.CreateRuleRef(
+                    parent,
+                    new Uri(uri, UriKind.RelativeOrAbsolute),
+                    sAlias,
+                    sParams
+                );
             }
             else
             {
@@ -821,11 +863,17 @@ namespace System.Speech.Internal.SrgsParser
                                 break;
 
                             case "repeat-prob":
-                                repeatProbability = Convert.ToSingle(reader.Value, CultureInfo.InvariantCulture);
+                                repeatProbability = Convert.ToSingle(
+                                    reader.Value,
+                                    CultureInfo.InvariantCulture
+                                );
                                 break;
 
                             case "weight":
-                                weight = Convert.ToSingle(reader.Value, CultureInfo.InvariantCulture);
+                                weight = Convert.ToSingle(
+                                    reader.Value,
+                                    CultureInfo.InvariantCulture
+                                );
                                 break;
 
                             default:
@@ -844,7 +892,14 @@ namespace System.Speech.Internal.SrgsParser
                 }
             }
 
-            IItem item = _parser.CreateItem(parent, rule, minRepeat, maxRepeat, repeatProbability, weight);
+            IItem item = _parser.CreateItem(
+                parent,
+                rule,
+                minRepeat,
+                maxRepeat,
+                repeatProbability,
+                weight
+            );
 
             // Process child elements.
             ProcessChildNodes(reader, item, rule, "item");
@@ -990,7 +1045,10 @@ namespace System.Speech.Internal.SrgsParser
                                         break;
 
                                     default:
-                                        ThrowSrgsException(SRID.InvalidReqConfAttribute, reader.Name);
+                                        ThrowSrgsException(
+                                            SRID.InvalidReqConfAttribute,
+                                            reader.Name
+                                        );
                                         break;
                                 }
                                 break;
@@ -1030,11 +1088,24 @@ namespace System.Speech.Internal.SrgsParser
         /// Tokens may also be delimited by double quotes.  In these cases, the double
         /// quotes token must be surrounded by white space or string boundary.
         /// </summary>
-        private void ParseText(IElement parent, string sChars, string pronunciation, string display, float reqConfidence)
+        private void ParseText(
+            IElement parent,
+            string sChars,
+            string pronunciation,
+            string display,
+            float reqConfidence
+        )
         {
             System.Diagnostics.Debug.Assert((parent != null) && (!string.IsNullOrEmpty(sChars)));
 
-            ParseText(parent, sChars, pronunciation, display, reqConfidence, new CreateTokenCallback(_parser.CreateToken));
+            ParseText(
+                parent,
+                sChars,
+                pronunciation,
+                display,
+                reqConfidence,
+                new CreateTokenCallback(_parser.CreateToken)
+            );
         }
 
         private IElement ParseTag(IElement parent, XmlReader reader)
@@ -1055,7 +1126,9 @@ namespace System.Speech.Internal.SrgsParser
                 return semanticTag;
             }
 
-            System.Diagnostics.Debug.Assert(_parser.Grammar.TagFormat == SrgsTagFormat.KeyValuePairs);
+            System.Diagnostics.Debug.Assert(
+                _parser.Grammar.TagFormat == SrgsTagFormat.KeyValuePairs
+            );
 
             IPropertyTag propertyTag = _parser.CreatePropertyTag(parent);
             string name;
@@ -1228,7 +1301,12 @@ namespace System.Speech.Internal.SrgsParser
             {
                 // Adds a placeholder for the rule.
                 // Once all the rules and scripts are read, the placeholder will be replaced with the proper rule.
-                _scripts.Add(new ForwardReference(sRule, _parser.AddScript(grammar, sRule, GetStringContent(reader), _filename, line)));
+                _scripts.Add(
+                    new ForwardReference(
+                        sRule,
+                        _parser.AddScript(grammar, sRule, GetStringContent(reader), _filename, line)
+                    )
+                );
             }
         }
 
@@ -1284,18 +1362,23 @@ namespace System.Speech.Internal.SrgsParser
             }
         }
 
-        private bool ProcessChildNodes(XmlReader reader, IElement parent, IRule rule, string parentName)
+        private bool ProcessChildNodes(
+            XmlReader reader,
+            IElement parent,
+            IRule rule,
+            string parentName
+        )
         {
             bool fFirstElement = true;
 
             // Create a list of name value tags for this scope
             List<IPropertyTag> tags = null;
 
-            reader.MoveToElement();                                 // Move to containing parent of attributes
+            reader.MoveToElement(); // Move to containing parent of attributes
             if (!reader.IsEmptyElement)
             {
-                reader.Read();                                      // Move to first child parent
-                while (reader.NodeType != XmlNodeType.EndElement)   // Process each child parent while not at end parent
+                reader.Read(); // Move to first child parent
+                while (reader.NodeType != XmlNodeType.EndElement) // Process each child parent while not at end parent
                 {
                     bool isInvalidNode = false;
 
@@ -1382,13 +1465,16 @@ namespace System.Speech.Internal.SrgsParser
                                 break;
 
                             default:
-                                reader.Skip();                      // Skip over parents in unknown namespaces
+                                reader.Skip(); // Skip over parents in unknown namespaces
                                 break;
                         }
                         isInvalidNode = ParseChildNodeElement(parent, isInvalidNode, child);
                         fFirstElement = false;
                     }
-                    else if (reader.NodeType == XmlNodeType.Text || reader.NodeType == XmlNodeType.CDATA)
+                    else if (
+                        reader.NodeType == XmlNodeType.Text
+                        || reader.NodeType == XmlNodeType.CDATA
+                    )
                     {
                         // Null if no children are allowed
                         if (parent == null)
@@ -1401,7 +1487,7 @@ namespace System.Speech.Internal.SrgsParser
                     }
                     else
                     {
-                        reader.Skip();                              // Skip over non-parent/text node types
+                        reader.Skip(); // Skip over non-parent/text node types
                     }
 
                     if (isInvalidNode)
@@ -1411,7 +1497,7 @@ namespace System.Speech.Internal.SrgsParser
                 }
             }
 
-            reader.Read();                                          // Move to next sibling
+            reader.Read(); // Move to next sibling
 
             // Generate the tags for this scope
             if (tags != null)
@@ -1563,7 +1649,11 @@ namespace System.Speech.Internal.SrgsParser
                                         break;
 
                                     case "tag":
-                                        if (fProcessedRules || _hasTagFormat && grammar.TagFormat != SrgsTagFormat.W3cV1)
+                                        if (
+                                            fProcessedRules
+                                            || _hasTagFormat
+                                                && grammar.TagFormat != SrgsTagFormat.W3cV1
+                                        )
                                         {
                                             ThrowSrgsException(SRID.InvalidGrammarOrdering);
                                         }
@@ -1630,11 +1720,11 @@ namespace System.Speech.Internal.SrgsParser
         {
             StringBuilder sb = new();
 
-            reader.MoveToElement();                                 // Move to containing element of attributes
+            reader.MoveToElement(); // Move to containing element of attributes
             if (!reader.IsEmptyElement)
             {
-                reader.Read();                                      // Move to first child element
-                while (reader.NodeType != XmlNodeType.EndElement)   // Process each child element while not at end element
+                reader.Read(); // Move to first child element
+                while (reader.NodeType != XmlNodeType.EndElement) // Process each child element while not at end element
                 {
                     sb.Append(reader.ReadString());
 
@@ -1650,13 +1740,13 @@ namespace System.Speech.Internal.SrgsParser
                                 break;
 
                             default:
-                                reader.Skip();                      // Skip over elements in unknown namespaces
+                                reader.Skip(); // Skip over elements in unknown namespaces
                                 break;
                         }
                     }
                     else if (reader.NodeType != XmlNodeType.EndElement)
                     {
-                        reader.Skip();                              // Skip over non-end element node types
+                        reader.Skip(); // Skip over non-end element node types
                     }
 
                     if (isInvalidNode)
@@ -1666,9 +1756,10 @@ namespace System.Speech.Internal.SrgsParser
                 }
             }
 
-            reader.Read();                                          // Move to next sibling
+            reader.Read(); // Move to next sibling
             return sb.ToString();
         }
+
         private static void ParsePropertyTag(string sTag, out string name, out object value)
         {
             // Default value
@@ -1708,7 +1799,11 @@ namespace System.Speech.Internal.SrgsParser
                     if (iEndQuote + 1 != cLenProperty)
                     {
                         // Invalid string value
-                        XmlParser.ThrowSrgsException(SRID.IncorrectAttributeValue, name, sTag.Substring(iEqual));
+                        XmlParser.ThrowSrgsException(
+                            SRID.IncorrectAttributeValue,
+                            name,
+                            sTag.Substring(iEqual)
+                        );
                     }
 
                     value = sTag.Substring(iEqual, iEndQuote - iEqual);
@@ -1748,7 +1843,11 @@ namespace System.Speech.Internal.SrgsParser
                             }
                             else
                             {
-                                XmlParser.ThrowSrgsException(SRID.InvalidNameValueProperty, name, sValue);
+                                XmlParser.ThrowSrgsException(
+                                    SRID.InvalidNameValueProperty,
+                                    name,
+                                    sValue
+                                );
                             }
                         }
                     }
@@ -1782,17 +1881,27 @@ namespace System.Speech.Internal.SrgsParser
                 }
                 else if (0 < sep)
                 {
-                    minRepeat = Convert.ToInt32(repeat.Substring(0, sep), CultureInfo.InvariantCulture);
+                    minRepeat = Convert.ToInt32(
+                        repeat.Substring(0, sep),
+                        CultureInfo.InvariantCulture
+                    );
                     if (sep < (repeat.Length - 1))
                     {
-                        maxRepeat = Convert.ToInt32(repeat.Substring(sep + 1), CultureInfo.InvariantCulture);
+                        maxRepeat = Convert.ToInt32(
+                            repeat.Substring(sep + 1),
+                            CultureInfo.InvariantCulture
+                        );
                     }
                     else
                     {
                         maxRepeat = int.MaxValue;
                     }
                     // Limit the range of valid values
-                    if (minRepeat < 0 || minRepeat > 255 || (maxRepeat != int.MaxValue && (maxRepeat < 0 || maxRepeat > 255)))
+                    if (
+                        minRepeat < 0
+                        || minRepeat > 255
+                        || (maxRepeat != int.MaxValue && (maxRepeat < 0 || maxRepeat > 255))
+                    )
                     {
                         XmlParser.ThrowSrgsException(SRID.MinMaxOutOfRange, minRepeat, maxRepeat);
                     }
@@ -1824,7 +1933,11 @@ namespace System.Speech.Internal.SrgsParser
                     attribute.Append(reader.NamespaceURI);
                     attribute.Append(':');
                 }
-                XmlParser.ThrowSrgsException(SRID.InvalidAttributeDefinedTwice, reader.Value, attribute);
+                XmlParser.ThrowSrgsException(
+                    SRID.InvalidAttributeDefinedTwice,
+                    reader.Value,
+                    attribute
+                );
             }
             dest = reader.Value;
         }
@@ -1834,7 +1947,13 @@ namespace System.Speech.Internal.SrgsParser
         {
             Helpers.ThrowIfEmptyOrNull(id, nameof(id));
 
-            if (!XmlReader.IsName(id) || (id == "NULL") || (id == "VOID") || (id == "GARBAGE") || (id.IndexOfAny(s_invalidRuleIdChars) != -1))
+            if (
+                !XmlReader.IsName(id)
+                || (id == "NULL")
+                || (id == "VOID")
+                || (id == "GARBAGE")
+                || (id.IndexOfAny(s_invalidRuleIdChars) != -1)
+            )
             {
                 XmlParser.ThrowSrgsException(SRID.InvalidRuleId, id);
             }
@@ -1847,7 +1966,13 @@ namespace System.Speech.Internal.SrgsParser
             // in srgs.xml: or  <ruleref uri="srgs.xml>
             if (_filename != null)
             {
-                if (uri.StartsWith(_shortFilename, StringComparison.Ordinal) && (uri.Length > _shortFilename.Length && uri[_shortFilename.Length] == '#' || uri.Length == _shortFilename.Length))
+                if (
+                    uri.StartsWith(_shortFilename, StringComparison.Ordinal)
+                    && (
+                        uri.Length > _shortFilename.Length && uri[_shortFilename.Length] == '#'
+                        || uri.Length == _shortFilename.Length
+                    )
+                )
                 {
                     ThrowSrgsException(SRID.InvalidRuleRefSelf);
                 }

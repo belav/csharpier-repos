@@ -4,9 +4,9 @@
 using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http.Metadata;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Routing.Patterns;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -20,17 +20,13 @@ public partial class CreatedAtRouteResultTests
         get
         {
             yield return new object[] { null };
-            yield return
-                new object[] {
-                        new Dictionary<string, string>() { { "hello", "world" } }
-                };
-            yield return
-                new object[] {
-                        new RouteValueDictionary(new Dictionary<string, string>() {
-                            { "test", "case" },
-                            { "sample", "route" }
-                        })
-                };
+            yield return new object[] { new Dictionary<string, string>() { { "hello", "world" } } };
+            yield return new object[]
+            {
+                new RouteValueDictionary(
+                    new Dictionary<string, string>() { { "test", "case" }, { "sample", "route" } }
+                ),
+            };
         }
     }
 
@@ -50,7 +46,10 @@ public partial class CreatedAtRouteResultTests
         // Assert
         Assert.Equal(StatusCodes.Status201Created, httpContext.Response.StatusCode);
         Assert.Equal(expectedUrl, httpContext.Response.Headers["Location"]);
-        Assert.Equal(new RouteValueDictionary(values), linkGenerator.RouteValuesAddress.ExplicitValues);
+        Assert.Equal(
+            new RouteValueDictionary(values),
+            linkGenerator.RouteValuesAddress.ExplicitValues
+        );
     }
 
     [Fact]
@@ -62,27 +61,38 @@ public partial class CreatedAtRouteResultTests
 
         var result = new CreatedAtRoute(
             routeName: null,
-            routeValues: new Dictionary<string, object>());
+            routeValues: new Dictionary<string, object>()
+        );
 
         // Act & Assert
         await ExceptionAssert.ThrowsAsync<InvalidOperationException>(
             async () => await result.ExecuteAsync(httpContext),
-        "No route matches the supplied values.");
+            "No route matches the supplied values."
+        );
     }
 
     [Fact]
     public void PopulateMetadata_AddsResponseTypeMetadata()
     {
         // Arrange
-        CreatedAtRoute MyApi() { throw new NotImplementedException(); }
+        CreatedAtRoute MyApi()
+        {
+            throw new NotImplementedException();
+        }
         var metadata = new List<object>();
-        var builder = new RouteEndpointBuilder(requestDelegate: null, RoutePatternFactory.Parse("/"), order: 0);
+        var builder = new RouteEndpointBuilder(
+            requestDelegate: null,
+            RoutePatternFactory.Parse("/"),
+            order: 0
+        );
 
         // Act
         PopulateMetadata<CreatedAtRoute>(((Delegate)MyApi).GetMethodInfo(), builder);
 
         // Assert
-        var producesResponseTypeMetadata = builder.Metadata.OfType<ProducesResponseTypeMetadata>().Last();
+        var producesResponseTypeMetadata = builder
+            .Metadata.OfType<ProducesResponseTypeMetadata>()
+            .Last();
         Assert.Equal(StatusCodes.Status201Created, producesResponseTypeMetadata.StatusCode);
         Assert.Equal(typeof(void), producesResponseTypeMetadata.Type);
     }
@@ -95,15 +105,38 @@ public partial class CreatedAtRouteResultTests
         HttpContext httpContext = null;
 
         // Act & Assert
-        Assert.ThrowsAsync<ArgumentNullException>("httpContext", () => result.ExecuteAsync(httpContext));
+        Assert.ThrowsAsync<ArgumentNullException>(
+            "httpContext",
+            () => result.ExecuteAsync(httpContext)
+        );
     }
 
     [Fact]
     public void PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull()
     {
         // Act & Assert
-        Assert.Throws<ArgumentNullException>("method", () => PopulateMetadata<CreatedAtRoute>(null, new RouteEndpointBuilder(requestDelegate: null, RoutePatternFactory.Parse("/"), order: 0)));
-        Assert.Throws<ArgumentNullException>("builder", () => PopulateMetadata<CreatedAtRoute>(((Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull).GetMethodInfo(), null));
+        Assert.Throws<ArgumentNullException>(
+            "method",
+            () =>
+                PopulateMetadata<CreatedAtRoute>(
+                    null,
+                    new RouteEndpointBuilder(
+                        requestDelegate: null,
+                        RoutePatternFactory.Parse("/"),
+                        order: 0
+                    )
+                )
+        );
+        Assert.Throws<ArgumentNullException>(
+            "builder",
+            () =>
+                PopulateMetadata<CreatedAtRoute>(
+                    (
+                        (Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull
+                    ).GetMethodInfo(),
+                    null
+                )
+        );
     }
 
     [Fact]
@@ -112,7 +145,8 @@ public partial class CreatedAtRouteResultTests
         // Arrange & Act
         var rawResult = new CreatedAtRoute(
             routeName: null,
-            routeValues: new Dictionary<string, object>());
+            routeValues: new Dictionary<string, object>()
+        );
 
         // Assert
         var result = Assert.IsAssignableFrom<IStatusCodeHttpResult>(rawResult);

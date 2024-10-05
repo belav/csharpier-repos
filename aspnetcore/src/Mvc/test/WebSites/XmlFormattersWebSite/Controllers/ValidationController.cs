@@ -13,11 +13,13 @@ public class ValidationController : Controller
     {
         // We want to verify that 'store' is model bound and also that the
         // model state has the errors we are expecting.
-        return new ObjectResult(new ModelBindingInfo()
-        {
-            Store = store,
-            ModelStateErrorMessages = GetModelStateErrorMessages(ModelState)
-        });
+        return new ObjectResult(
+            new ModelBindingInfo()
+            {
+                Store = store,
+                ModelStateErrorMessages = GetModelStateErrorMessages(ModelState),
+            }
+        );
     }
 
     // Cannot use 'SerializableError' here as 'RequiredAttribute' validation errors are added as exceptions
@@ -49,7 +51,14 @@ public class ValidationController : Controller
 
                     if (errorMessage != null)
                     {
-                        allErrorMessages.Add(string.Format(CultureInfo.InvariantCulture, "{0}:{1}", key, errorMessage));
+                        allErrorMessages.Add(
+                            string.Format(
+                                CultureInfo.InvariantCulture,
+                                "{0}:{1}",
+                                key,
+                                errorMessage
+                            )
+                        );
                     }
                 }
             }

@@ -19,14 +19,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void ImplicitClassSymbol()
         {
-            var c = CreateEmptyCompilation(@"
+            var c = CreateEmptyCompilation(
+                @"
 namespace N
 {
     void Goo()
     {
     }
 }
-", new[] { MscorlibRef });
+",
+                new[] { MscorlibRef }
+            );
             var n = ((NamespaceSymbol)c.Assembly.GlobalNamespace.GetMembers("N").Single());
             var implicitClass = ((NamedTypeSymbol)n.GetMembers().Single());
             Assert.Equal(0, implicitClass.GetAttributes().Length);
@@ -34,7 +37,10 @@ namespace N
             Assert.Equal(c.ObjectType, implicitClass.BaseType());
             Assert.Equal(0, implicitClass.Arity);
             Assert.True(implicitClass.IsImplicitlyDeclared);
-            Assert.Equal(SyntaxKind.NamespaceDeclaration, implicitClass.DeclaringSyntaxReferences.Single().GetSyntax().Kind());
+            Assert.Equal(
+                SyntaxKind.NamespaceDeclaration,
+                implicitClass.DeclaringSyntaxReferences.Single().GetSyntax().Kind()
+            );
             Assert.False(implicitClass.IsSubmissionClass);
             Assert.False(implicitClass.IsScriptClass);
 
@@ -50,12 +56,15 @@ namespace N
         [Fact]
         public void ScriptClassSymbol()
         {
-            var c = CreateCompilation(@"
+            var c = CreateCompilation(
+                @"
 base.ToString();
 void Goo()
 {
 }
-", parseOptions: TestOptions.Script);
+",
+                parseOptions: TestOptions.Script
+            );
 
             var scriptClass = (NamedTypeSymbol)c.Assembly.GlobalNamespace.GetMember("Script");
             Assert.Equal(0, scriptClass.GetAttributes().Length);
@@ -63,15 +72,22 @@ void Goo()
             Assert.Null(scriptClass.BaseType());
             Assert.Equal(0, scriptClass.Arity);
             Assert.True(scriptClass.IsImplicitlyDeclared);
-            Assert.Equal(SyntaxKind.CompilationUnit, scriptClass.DeclaringSyntaxReferences.Single().GetSyntax().Kind());
+            Assert.Equal(
+                SyntaxKind.CompilationUnit,
+                scriptClass.DeclaringSyntaxReferences.Single().GetSyntax().Kind()
+            );
             Assert.False(scriptClass.IsSubmissionClass);
             Assert.True(scriptClass.IsScriptClass);
 
             var tree = c.SyntaxTrees.Single();
             var model = c.GetSemanticModel(tree);
 
-            IEnumerable<IdentifierNameSyntax> identifiers = tree.GetCompilationUnitRoot().DescendantNodes().OfType<IdentifierNameSyntax>();
-            var toStringIdentifier = identifiers.Where(node => node.Identifier.ValueText.Equals("ToString")).Single();
+            IEnumerable<IdentifierNameSyntax> identifiers = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>();
+            var toStringIdentifier = identifiers
+                .Where(node => node.Identifier.ValueText.Equals("ToString"))
+                .Single();
 
             Assert.Null(model.GetSymbolInfo(toStringIdentifier).Symbol);
         }
@@ -79,9 +95,12 @@ void Goo()
         [Fact, WorkItem(531535, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/531535")]
         public void Events()
         {
-            var c = CreateCompilationWithMscorlib45(@"
+            var c = CreateCompilationWithMscorlib45(
+                @"
 event System.Action e;
-", parseOptions: TestOptions.Script);
+",
+                parseOptions: TestOptions.Script
+            );
 
             c.VerifyDiagnostics();
 
@@ -93,14 +112,16 @@ event System.Action e;
         [Fact]
         public void AliasQualifiedNamespaceName()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 namespace N::A
 {
     void Goo()
     {
     }
 }
-");
+"
+            );
             // Used to assert.
             comp.VerifyDiagnostics(
                 // (2,11): error CS7000: Unexpected use of an aliased name
@@ -108,13 +129,20 @@ namespace N::A
                 Diagnostic(ErrorCode.ERR_UnexpectedAliasedName, "N::A"),
                 // (4,10): error CS0116: A namespace does not directly contain members such as fields or methods
                 //     void Goo()
-                Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "Goo"));
+                Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "Goo")
+            );
 
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
 
-            var namespaceDecl = tree.GetCompilationUnitRoot().DescendantNodes().OfType<NamespaceDeclarationSyntax>().Single();
-            var methodDecl = tree.GetCompilationUnitRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
+            var namespaceDecl = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<NamespaceDeclarationSyntax>()
+                .Single();
+            var methodDecl = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .Single();
 
             Assert.Equal("A", model.GetDeclaredSymbol(namespaceDecl).Name);
             Assert.Equal("Goo", model.GetDeclaredSymbol(methodDecl).Name);

@@ -25,15 +25,20 @@ public static class SqliteNetTopologySuiteDbContextOptionsBuilderExtensions
     /// <param name="optionsBuilder">The build being used to configure SQLite.</param>
     /// <returns>The options builder so that further configuration can be chained.</returns>
     public static SqliteDbContextOptionsBuilder UseNetTopologySuite(
-        this SqliteDbContextOptionsBuilder optionsBuilder)
+        this SqliteDbContextOptionsBuilder optionsBuilder
+    )
     {
-        var coreOptionsBuilder = ((IRelationalDbContextOptionsBuilderInfrastructure)optionsBuilder).OptionsBuilder;
+        var coreOptionsBuilder = (
+            (IRelationalDbContextOptionsBuilderInfrastructure)optionsBuilder
+        ).OptionsBuilder;
         var infrastructure = (IDbContextOptionsBuilderInfrastructure)coreOptionsBuilder;
 #pragma warning disable EF1001 // Internal EF Core API usage.
         // #20566
-        var sqliteExtension = coreOptionsBuilder.Options.FindExtension<SqliteOptionsExtension>()
+        var sqliteExtension =
+            coreOptionsBuilder.Options.FindExtension<SqliteOptionsExtension>()
             ?? new SqliteOptionsExtension();
-        var ntsExtension = coreOptionsBuilder.Options.FindExtension<SqliteNetTopologySuiteOptionsExtension>()
+        var ntsExtension =
+            coreOptionsBuilder.Options.FindExtension<SqliteNetTopologySuiteOptionsExtension>()
             ?? new SqliteNetTopologySuiteOptionsExtension();
 
         infrastructure.AddOrUpdateExtension(sqliteExtension.WithLoadSpatialite(true));

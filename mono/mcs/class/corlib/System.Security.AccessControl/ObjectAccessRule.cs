@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,41 +31,48 @@ using System.Security.Principal;
 
 namespace System.Security.AccessControl
 {
-	public abstract class ObjectAccessRule : AccessRule
-	{
-		protected ObjectAccessRule (IdentityReference identity,
-					    int accessMask, bool isInherited,
-					    InheritanceFlags inheritanceFlags,
-					    PropagationFlags propagationFlags,
-					    Guid objectType,
-					    Guid inheritedObjectType,
-					    AccessControlType type)
-			: base (identity, accessMask, isInherited, inheritanceFlags, propagationFlags, type)
-		{
-			object_type = objectType;
-			inherited_object_type = inheritedObjectType;
-		}
+    public abstract class ObjectAccessRule : AccessRule
+    {
+        protected ObjectAccessRule(
+            IdentityReference identity,
+            int accessMask,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            Guid objectType,
+            Guid inheritedObjectType,
+            AccessControlType type
+        )
+            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, type)
+        {
+            object_type = objectType;
+            inherited_object_type = inheritedObjectType;
+        }
 
-		Guid object_type, inherited_object_type;
+        Guid object_type,
+            inherited_object_type;
 
-		public Guid InheritedObjectType {
-			get { return inherited_object_type; }
-		}
-		
-		public ObjectAceFlags ObjectFlags
-		{
-			get {
-				ObjectAceFlags ret = ObjectAceFlags.None;
-				if (object_type != Guid.Empty)
-					ret |= ObjectAceFlags.ObjectAceTypePresent;
-				if (inherited_object_type != Guid.Empty)
-					ret |= ObjectAceFlags.InheritedObjectAceTypePresent;
-				return ret;
-			}
-		}
-		
-		public Guid ObjectType {
-			get { return object_type; }
-		}
-	}
+        public Guid InheritedObjectType
+        {
+            get { return inherited_object_type; }
+        }
+
+        public ObjectAceFlags ObjectFlags
+        {
+            get
+            {
+                ObjectAceFlags ret = ObjectAceFlags.None;
+                if (object_type != Guid.Empty)
+                    ret |= ObjectAceFlags.ObjectAceTypePresent;
+                if (inherited_object_type != Guid.Empty)
+                    ret |= ObjectAceFlags.InheritedObjectAceTypePresent;
+                return ret;
+            }
+        }
+
+        public Guid ObjectType
+        {
+            get { return object_type; }
+        }
+    }
 }

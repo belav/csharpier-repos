@@ -50,7 +50,8 @@ internal sealed partial class WebHost : IWebHost, IAsyncDisposable
         IServiceProvider hostingServiceProvider,
         WebHostOptions options,
         IConfiguration config,
-        AggregateException? hostingStartupErrors)
+        AggregateException? hostingStartupErrors
+    )
     {
         ArgumentNullException.ThrowIfNull(appServices);
         ArgumentNullException.ThrowIfNull(hostingServiceProvider);
@@ -63,13 +64,16 @@ internal sealed partial class WebHost : IWebHost, IAsyncDisposable
         _hostingServiceProvider = hostingServiceProvider;
         _applicationServiceCollection.AddSingleton<ApplicationLifetime>();
         // There's no way to to register multiple service types per definition. See https://github.com/aspnet/DependencyInjection/issues/360
-        _applicationServiceCollection.AddSingleton<IHostApplicationLifetime>(services
-            => services.GetService<ApplicationLifetime>()!);
+        _applicationServiceCollection.AddSingleton<IHostApplicationLifetime>(services =>
+            services.GetService<ApplicationLifetime>()!
+        );
 #pragma warning disable CS0618 // Type or member is obsolete
-        _applicationServiceCollection.AddSingleton<AspNetCore.Hosting.IApplicationLifetime>(services
-            => services.GetService<ApplicationLifetime>()!);
-        _applicationServiceCollection.AddSingleton<Extensions.Hosting.IApplicationLifetime>(services
-            => services.GetService<ApplicationLifetime>()!);
+        _applicationServiceCollection.AddSingleton<AspNetCore.Hosting.IApplicationLifetime>(
+            services => services.GetService<ApplicationLifetime>()!
+        );
+        _applicationServiceCollection.AddSingleton<Extensions.Hosting.IApplicationLifetime>(
+            services => services.GetService<ApplicationLifetime>()!
+        );
 #pragma warning restore CS0618 // Type or member is obsolete
         _applicationServiceCollection.AddSingleton<HostedServiceExecutor>();
     }
@@ -78,7 +82,10 @@ internal sealed partial class WebHost : IWebHost, IAsyncDisposable
     {
         get
         {
-            Debug.Assert(_applicationServices != null, "Initialize must be called before accessing services.");
+            Debug.Assert(
+                _applicationServices != null,
+                "Initialize must be called before accessing services."
+            );
             return _applicationServices;
         }
     }
@@ -126,7 +133,9 @@ internal sealed partial class WebHost : IWebHost, IAsyncDisposable
         Debug.Assert(_applicationServices != null, "Initialize must be called first.");
 
         HostingEventSource.Log.HostStart();
-        _logger = _applicationServices.GetRequiredService<ILoggerFactory>().CreateLogger("Microsoft.AspNetCore.Hosting.Diagnostics");
+        _logger = _applicationServices
+            .GetRequiredService<ILoggerFactory>()
+            .CreateLogger("Microsoft.AspNetCore.Hosting.Diagnostics");
         Log.Starting(_logger);
 
         var application = BuildApplication();
@@ -142,7 +151,16 @@ internal sealed partial class WebHost : IWebHost, IAsyncDisposable
         var propagator = _applicationServices.GetRequiredService<DistributedContextPropagator>();
         var httpContextFactory = _applicationServices.GetRequiredService<IHttpContextFactory>();
         var hostingMetrics = _applicationServices.GetRequiredService<HostingMetrics>();
-        var hostingApp = new HostingApplication(application, _logger, diagnosticSource, activitySource, propagator, httpContextFactory, HostingEventSource.Log, hostingMetrics);
+        var hostingApp = new HostingApplication(
+            application,
+            _logger,
+            diagnosticSource,
+            activitySource,
+            propagator,
+            httpContextFactory,
+            HostingEventSource.Log,
+            hostingMetrics
+        );
         await Server.StartAsync(hostingApp, cancellationToken).ConfigureAwait(false);
         _startedServer = true;
 
@@ -190,7 +208,9 @@ internal sealed partial class WebHost : IWebHost, IAsyncDisposable
 
         if (startup == null)
         {
-            throw new InvalidOperationException($"No application configured. Please specify startup via IWebHostBuilder.UseStartup, IWebHostBuilder.Configure, injecting {nameof(IStartup)} or specifying the startup assembly via {nameof(WebHostDefaults.StartupAssemblyKey)} in the web host configuration.");
+            throw new InvalidOperationException(
+                $"No application configured. Please specify startup via IWebHostBuilder.UseStartup, IWebHostBuilder.Configure, injecting {nameof(IStartup)} or specifying the startup assembly via {nameof(WebHostDefaults.StartupAssemblyKey)} in the web host configuration."
+            );
         }
 
         _startup = startup;
@@ -206,7 +226,8 @@ internal sealed partial class WebHost : IWebHost, IAsyncDisposable
             _applicationServicesException?.Throw();
             EnsureServer();
 
-            var builderFactory = _applicationServices.GetRequiredService<IApplicationBuilderFactory>();
+            var builderFactory =
+                _applicationServices.GetRequiredService<IApplicationBuilderFactory>();
             var builder = builderFactory.CreateBuilder(Server.Features);
             builder.ApplicationServices = _applicationServices;
 
@@ -245,7 +266,12 @@ internal sealed partial class WebHost : IWebHost, IAsyncDisposable
             var hostingEnv = _applicationServices.GetRequiredService<IHostEnvironment>();
             var showDetailedErrors = hostingEnv.IsDevelopment() || _options.DetailedErrors;
 
-            return ErrorPageBuilder.BuildErrorPageApplication(hostingEnv.ContentRootFileProvider, logger, showDetailedErrors, ex);
+            return ErrorPageBuilder.BuildErrorPageApplication(
+                hostingEnv.ContentRootFileProvider,
+                logger,
+                showDetailedErrors,
+                ex
+            );
         }
     }
 
@@ -262,10 +288,13 @@ internal sealed partial class WebHost : IWebHost, IAsyncDisposable
             var addresses = serverAddressesFeature?.Addresses;
             if (addresses != null && !addresses.IsReadOnly && addresses.Count == 0)
             {
-                var urls = _config[WebHostDefaults.ServerUrlsKey] ?? _config[DeprecatedServerUrlsKey];
+                var urls =
+                    _config[WebHostDefaults.ServerUrlsKey] ?? _config[DeprecatedServerUrlsKey];
                 if (!string.IsNullOrEmpty(urls))
                 {
-                    serverAddressesFeature!.PreferHostingUrls = WebHostUtilities.ParseBool(_config[WebHostDefaults.PreferHostingUrlsKey]);
+                    serverAddressesFeature!.PreferHostingUrls = WebHostUtilities.ParseBool(
+                        _config[WebHostDefaults.PreferHostingUrlsKey]
+                    );
 
                     foreach (var value in urls.Split(';', StringSplitOptions.RemoveEmptyEntries))
                     {
@@ -357,13 +386,21 @@ internal sealed partial class WebHost : IWebHost, IAsyncDisposable
         [LoggerMessage(5, LogLevel.Debug, "Hosting shutdown", EventName = "Shutdown")]
         public static partial void Shutdown(ILogger logger);
 
-        [LoggerMessage(12, LogLevel.Debug, "Server shutdown exception", EventName = "ServerShutdownException")]
+        [LoggerMessage(
+            12,
+            LogLevel.Debug,
+            "Server shutdown exception",
+            EventName = "ServerShutdownException"
+        )]
         public static partial void ServerShutdownException(ILogger logger, Exception ex);
 
-        [LoggerMessage(13, LogLevel.Debug,
+        [LoggerMessage(
+            13,
+            LogLevel.Debug,
             "Loaded hosting startup assembly {assemblyName}",
             EventName = "HostingStartupAssemblyLoaded",
-            SkipEnabledCheck = true)]
+            SkipEnabledCheck = true
+        )]
         public static partial void StartupAssemblyLoaded(ILogger logger, string assemblyName);
     }
 }

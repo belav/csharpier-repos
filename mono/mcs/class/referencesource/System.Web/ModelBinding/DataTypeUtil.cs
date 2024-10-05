@@ -1,8 +1,10 @@
-﻿namespace System.Web.ModelBinding {
+﻿namespace System.Web.ModelBinding
+{
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    internal static class DataTypeUtil {
+    internal static class DataTypeUtil
+    {
         internal static readonly string CurrencyTypeName = DataType.Currency.ToString();
         internal static readonly string DateTypeName = DataType.Date.ToString();
         internal static readonly string DateTimeTypeName = DataType.DateTime.ToString();
@@ -22,16 +24,23 @@
 
         // This is a faster version of GetDataTypeName(). It internally calls ToString() on the enum
         // value, which can be quite slow because of value verification.
-        internal static string ToDataTypeName(this DataTypeAttribute attribute, Func<DataTypeAttribute, Boolean> isDataType = null) {
-            if (isDataType == null) {
+        internal static string ToDataTypeName(
+            this DataTypeAttribute attribute,
+            Func<DataTypeAttribute, Boolean> isDataType = null
+        )
+        {
+            if (isDataType == null)
+            {
                 isDataType = t => t.GetType().Equals(typeof(DataTypeAttribute));
             }
 
             // GetDataTypeName is virtual, so this is only safe if they haven't derived from DataTypeAttribute.
             // However, if they derive from DataTypeAttribute, they can help their own perf by overriding GetDataTypeName
             // and returning an appropriate string without invoking the ToString() on the enum.
-            if (isDataType(attribute)) {
-                switch (attribute.DataType) {
+            if (isDataType(attribute))
+            {
+                switch (attribute.DataType)
+                {
                     case DataType.Currency:
                         return CurrencyTypeName;
                     case DataType.Date:

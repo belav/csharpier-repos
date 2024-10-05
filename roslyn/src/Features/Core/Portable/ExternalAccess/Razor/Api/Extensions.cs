@@ -8,7 +8,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor.Api
 {
     internal static class Extensions
     {
-        public static bool IsRazorDocument(this Document document)
-            => Host.Extensions.IsRazorDocument(document);
+        public static bool IsRazorDocument(this Document document) =>
+            Host.Extensions.IsRazorDocument(document);
     }
 }

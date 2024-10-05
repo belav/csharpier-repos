@@ -7,7 +7,10 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Components.Endpoints.Forms;
 
-internal class EndpointAntiforgeryStateProvider(IAntiforgery antiforgery, PersistentComponentState state) : DefaultAntiforgeryStateProvider(state)
+internal class EndpointAntiforgeryStateProvider(
+    IAntiforgery antiforgery,
+    PersistentComponentState state
+) : DefaultAntiforgeryStateProvider(state)
 {
     private HttpContext? _context;
 
@@ -28,7 +31,9 @@ internal class EndpointAntiforgeryStateProvider(IAntiforgery antiforgery, Persis
         // If we need the tokens before we start streaming the response, we'll generate and store them;
         // otherwise we'll just retrieve them.
         // In case there are no tokens available, we are going to return null and no-op.
-        var tokens = !_context.Response.HasStarted ? antiforgery.GetAndStoreTokens(_context) : antiforgery.GetTokens(_context);
+        var tokens = !_context.Response.HasStarted
+            ? antiforgery.GetAndStoreTokens(_context)
+            : antiforgery.GetTokens(_context);
         if (tokens.RequestToken is null)
         {
             return null;

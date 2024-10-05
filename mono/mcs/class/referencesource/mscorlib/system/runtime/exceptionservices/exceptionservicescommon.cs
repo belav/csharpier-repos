@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
@@ -12,15 +12,16 @@
 **          handling/processing scenarios.
 **
 ** Created: 11/2/2010
-** 
+**
 ** <owner>Microsoft</owner>
-** 
+**
 =============================================================================*/
 
 #if FEATURE_EXCEPTIONDISPATCHINFO || MONO
-namespace System.Runtime.ExceptionServices {
+namespace System.Runtime.ExceptionServices
+{
     using System;
-    
+
     // This class defines support for seperating the exception dispatch details
     // (like stack trace, watson buckets, etc) from the actual managed exception
     // object. This allows us to track error (via the exception object) independent
@@ -41,23 +42,23 @@ namespace System.Runtime.ExceptionServices {
         private UIntPtr m_IPForWatsonBuckets;
         private Object m_WatsonBuckets;
 #endif
-        
+
         private ExceptionDispatchInfo(Exception exception)
         {
             // Copy over the details we need to save.
             m_Exception = exception;
 #if MONO
-			var traces = exception.captured_traces;
-			var count = traces == null ? 0 : traces.Length;
-			var stack_traces = new System.Diagnostics.StackTrace [count + 1];
-			if (count != 0)
-				Array.Copy (traces, 0, stack_traces, 0, count);
+            var traces = exception.captured_traces;
+            var count = traces == null ? 0 : traces.Length;
+            var stack_traces = new System.Diagnostics.StackTrace[count + 1];
+            if (count != 0)
+                Array.Copy(traces, 0, stack_traces, 0, count);
 
-			stack_traces [count] = new System.Diagnostics.StackTrace (exception, 0, true);
-			m_stackTrace = stack_traces;
+            stack_traces[count] = new System.Diagnostics.StackTrace(exception, 0, true);
+            m_stackTrace = stack_traces;
 #else
             m_remoteStackTrace = exception.RemoteStackTrace;
-            
+
             // NOTE: don't be tempted to pass the fields for the out params; the containing object
             //       might be relocated during the call so the pointers will no longer be valid.
             object stackTrace;
@@ -67,51 +68,35 @@ namespace System.Runtime.ExceptionServices {
             m_dynamicMethods = dynamicMethods;
 
             m_IPForWatsonBuckets = exception.IPForWatsonBuckets;
-            m_WatsonBuckets = exception.WatsonBuckets;                                                        
+            m_WatsonBuckets = exception.WatsonBuckets;
 #endif
         }
 
 #if !MONO
         internal UIntPtr IPForWatsonBuckets
         {
-            get
-            {
-                return m_IPForWatsonBuckets;   
-            }
+            get { return m_IPForWatsonBuckets; }
         }
 
         internal object WatsonBuckets
         {
-            get
-            {
-                return m_WatsonBuckets;   
-            }
+            get { return m_WatsonBuckets; }
         }
 #endif
-        
         internal object BinaryStackTraceArray
         {
-            get
-            {
-                return m_stackTrace;
-            }
+            get { return m_stackTrace; }
         }
 
 #if !MONO
         internal object DynamicMethodArray
         {
-            get
-            {
-                return m_dynamicMethods;
-            }
+            get { return m_dynamicMethods; }
         }
 
         internal string RemoteStackTrace
         {
-            get
-            {
-                return m_remoteStackTrace;
-            }
+            get { return m_remoteStackTrace; }
         }
 #endif
 
@@ -122,22 +107,21 @@ namespace System.Runtime.ExceptionServices {
         {
             if (source == null)
             {
-                throw new ArgumentNullException("source", Environment.GetResourceString("ArgumentNull_Obj"));
+                throw new ArgumentNullException(
+                    "source",
+                    Environment.GetResourceString("ArgumentNull_Obj")
+                );
             }
-            
+
             return new ExceptionDispatchInfo(source);
         }
-    
+
         // Return the exception object represented by this ExceptionDispatchInfo instance
         public Exception SourceException
         {
-
-            get
-            {
-                return m_Exception;   
-            }
+            get { return m_Exception; }
         }
-        
+
         // When a framework needs to "Rethrow" an exception on a thread different (but not necessarily so) from
         // where it was thrown, it should invoke this method against the ExceptionDispatchInfo (EDI)
         // created for the exception in question.
@@ -154,12 +138,12 @@ namespace System.Runtime.ExceptionServices {
             // Restore the exception dispatch details before throwing the exception.
             m_Exception.RestoreExceptionDispatchInfo(this);
 #endif
-            throw m_Exception; 
+            throw m_Exception;
         }
 
 #if MONO
         [System.Diagnostics.StackTraceHidden]
-        public static void Throw (Exception source) => Capture (source).Throw ();
+        public static void Throw(Exception source) => Capture(source).Throw();
 #endif
     }
 }

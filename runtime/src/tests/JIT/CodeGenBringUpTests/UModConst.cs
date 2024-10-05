@@ -117,9 +117,7 @@ public static class UModProgram
             UModConst.U4_Mod_0(42);
             return Fail;
         }
-        catch (DivideByZeroException)
-        {
-        }
+        catch (DivideByZeroException) { }
         catch (Exception)
         {
             return Fail;
@@ -167,9 +165,7 @@ public static class UModProgram
             UModConst.U8_Mod_0(42);
             return Fail;
         }
-        catch (DivideByZeroException)
-        {
-        }
+        catch (DivideByZeroException) { }
         catch (Exception)
         {
             return Fail;

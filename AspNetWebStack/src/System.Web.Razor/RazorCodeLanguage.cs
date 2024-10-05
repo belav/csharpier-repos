@@ -12,10 +12,13 @@ namespace System.Web.Razor
     /// </summary>
     public abstract class RazorCodeLanguage
     {
-        private static IDictionary<string, RazorCodeLanguage> _services = new Dictionary<string, RazorCodeLanguage>(StringComparer.OrdinalIgnoreCase)
+        private static IDictionary<string, RazorCodeLanguage> _services = new Dictionary<
+            string,
+            RazorCodeLanguage
+        >(StringComparer.OrdinalIgnoreCase)
         {
             { "cshtml", new CSharpRazorCodeLanguage() },
-            { "vbhtml", new VBRazorCodeLanguage() }
+            { "vbhtml", new VBRazorCodeLanguage() },
         };
 
         /// <summary>
@@ -56,6 +59,11 @@ namespace System.Web.Razor
         /// <summary>
         /// Constructs the code generator.  Must return a new instance on EVERY call to ensure thread-safety
         /// </summary>
-        public abstract RazorCodeGenerator CreateCodeGenerator(string className, string rootNamespaceName, string sourceFileName, RazorEngineHost host);
+        public abstract RazorCodeGenerator CreateCodeGenerator(
+            string className,
+            string rootNamespaceName,
+            string sourceFileName,
+            RazorEngineHost host
+        );
     }
 }

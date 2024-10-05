@@ -9,6 +9,6 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
         Dynamic,
         Runtime,
         Expressions,
-        ILEmit
+        ILEmit,
     }
 }

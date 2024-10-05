@@ -7,7 +7,10 @@ using Xunit;
 
 namespace System.Security.Cryptography.Dsa.Tests
 {
-    [SkipOnPlatform(TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst, "Not supported on Browser/iOS/tvOS/MacCatalyst")]
+    [SkipOnPlatform(
+        TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst,
+        "Not supported on Browser/iOS/tvOS/MacCatalyst"
+    )]
     public static class DSAXml
     {
         [Fact]
@@ -25,7 +28,8 @@ namespace System.Security.Cryptography.Dsa.Tests
   <G>CETEkOUu9Y4FkCxjbWTR1essYIKg1PO/0c4Hjoe0On73u+zhmk7+Km2cIp02AIPOqfch85sFuvlwUt78Z6WKKw==</G>
   <ign:Y>wwDg5n2HfmztOf7qqsHywr1WjmoyRnIn4Stq5FqNlHhUGkgKyAA4qshjgn1uOYQGGiWQXBi9JJmoOWY8PKRWBQ==</ign:Y>
 </DSAKeyValue>",
-                expectedParameters);
+                expectedParameters
+            );
         }
 
         [Fact]
@@ -43,7 +47,8 @@ namespace System.Security.Cryptography.Dsa.Tests
   <G>CETEkOUu9Y4FkCxjbWTR1essYIKg1PO/0c4Hjoe0On73u+zhmk7+Km2cIp02AIPOqfch85sFuvlwUt78Z6WKKw==</G>
   <P>1qi38cr3ppZNB2Y/xpHSL2q81Vw3rvWNIHRnQNgv4U4UY2NifZGSUULc3uOEvgoeBO1b9fRxSG9NmG1CoufflQ==</P>
 </DSAKeyValue>",
-                DSATestData.Dsa512Parameters);
+                DSATestData.Dsa512Parameters
+            );
         }
 
         [Fact]
@@ -73,7 +78,8 @@ gVpUm2/QztrwRLALfP4TUZAtdyfW1/tzYAOk4cTNjfv0MeT/RzPz+pLHZfDP+UTj7VaoW3WVPrFpASSJ
 
   </Y>
 </DSAKeyValue>",
-                expectedParameters);
+                expectedParameters
+            );
         }
 
         [Fact]
@@ -103,7 +109,8 @@ gVpUm2/QztrwRLALfP4TUZAtdyfW1/tzYAOk4cTNjfv0MeT/RzPz+pLHZfDP+UTj7VaoW3WVPrFpASSJ
 rDJpPhzXKtY+GgtugVfrvKZx09s=
   </X>
 </DSA>",
-                DSATestData.Dsa576Parameters);
+                DSATestData.Dsa576Parameters
+            );
         }
 
         [Fact]
@@ -138,7 +145,8 @@ xFk9WgKZEQ5xyX4SIaWgP+mmk1rt
 wTus47S0TeE=
   </Y>
 </DSAKeyValue>",
-                expectedParameters);
+                expectedParameters
+            );
         }
 
         [Fact]
@@ -179,7 +187,8 @@ S      9      R      /       j       6       9        C        v        C
 </X>
 </DSAKeyValue>
 ",
-                DSATestData.GetDSA1024Params());
+                DSATestData.GetDSA1024Params()
+            );
         }
 
         [ConditionalFact(typeof(DSAFactory), nameof(DSAFactory.SupportsFips186_3))]
@@ -219,7 +228,8 @@ S      9      R      /       j       6       9        C        v        C
     kt3Wo5FBhE0R/aIwt75rrA==
   </Y>
 </DSAKeyValue>",
-                expectedParameters);
+                expectedParameters
+            );
         }
 
         [ConditionalFact(typeof(DSAFactory), nameof(DSAFactory.SupportsFips186_3))]
@@ -257,7 +267,8 @@ S      9      R      /       j       6       9        C        v        C
   </Y>
   <X>yHG344loXbl9k03XAR+rB2/yfsQoL7AMDWRtKdXk5Q==</X>
 </DSAKeyValue>",
-                DSATestData.Dsa2048DeficientXParameters);
+                DSATestData.Dsa2048DeficientXParameters
+            );
         }
 
         [ConditionalFact(typeof(DSAFactory), nameof(DSAFactory.SupportsFips186_3))]
@@ -295,7 +306,8 @@ S      9      R      /       j       6       9        C        v        C
   </Y>
   <X>AMhxt+OJaF25fZNN1wEfqwdv8n7EKC+wDA1kbSnV5OU=</X>
 </DSAKeyValue>",
-                DSATestData.Dsa2048DeficientXParameters);
+                DSATestData.Dsa2048DeficientXParameters
+            );
         }
 
         [Theory]
@@ -307,19 +319,20 @@ S      9      R      /       j       6       9        C        v        C
                 DSATestData.Dsa512Parameters,
                 includePrivateParameters,
                 (
-                    "1qi38cr3ppZNB2Y/xpHSL2q81Vw3rvWNIHRnQNgv4U4UY2NifZGSUULc3uOEvgoe" +
-                    "BO1b9fRxSG9NmG1CoufflQ=="
+                    "1qi38cr3ppZNB2Y/xpHSL2q81Vw3rvWNIHRnQNgv4U4UY2NifZGSUULc3uOEvgoe"
+                    + "BO1b9fRxSG9NmG1CoufflQ=="
                 ),
                 "+rX2JdXV4WQwoe9jDr4ziXzCJPk=",
                 (
-                    "CETEkOUu9Y4FkCxjbWTR1essYIKg1PO/0c4Hjoe0On73u+zhmk7+Km2cIp02AIPO" +
-                    "qfch85sFuvlwUt78Z6WKKw=="
+                    "CETEkOUu9Y4FkCxjbWTR1essYIKg1PO/0c4Hjoe0On73u+zhmk7+Km2cIp02AIPO"
+                    + "qfch85sFuvlwUt78Z6WKKw=="
                 ),
                 (
-                    "wwDg5n2HfmztOf7qqsHywr1WjmoyRnIn4Stq5FqNlHhUGkgKyAA4qshjgn1uOYQG" +
-                    "GiWQXBi9JJmoOWY8PKRWBQ=="
+                    "wwDg5n2HfmztOf7qqsHywr1WjmoyRnIn4Stq5FqNlHhUGkgKyAA4qshjgn1uOYQG"
+                    + "GiWQXBi9JJmoOWY8PKRWBQ=="
                 ),
-                "Lj16hMhbZnheH2/nlpgrIrDLmLw=");
+                "Lj16hMhbZnheH2/nlpgrIrDLmLw="
+            );
         }
 
         [Theory]
@@ -331,19 +344,20 @@ S      9      R      /       j       6       9        C        v        C
                 DSATestData.Dsa576Parameters,
                 includePrivateParameters,
                 (
-                    "4hZzBr/9hrti9DJ7d4u/oHukIyPsVnsQa5VjiCvd1tfy7nNg8pmIjen0CmHHjQvY" +
-                    "RC76nDIrhorTZ7OUHXK3ozLJVOsWKRMr"
+                    "4hZzBr/9hrti9DJ7d4u/oHukIyPsVnsQa5VjiCvd1tfy7nNg8pmIjen0CmHHjQvY"
+                    + "RC76nDIrhorTZ7OUHXK3ozLJVOsWKRMr"
                 ),
                 "zNzsz18LLI/iOOLwbyITfxf66xs=",
                 (
-                    "rxfUBhMCB54zA0p3oFjdtLgyrLEUt7jS065EUd/4XrjdddRHQhg2nUhbIgZQZAYE" +
-                    "SrTmQH/apaKeldSWTKVZ6BxvfPzahyZl"
+                    "rxfUBhMCB54zA0p3oFjdtLgyrLEUt7jS065EUd/4XrjdddRHQhg2nUhbIgZQZAYE"
+                    + "SrTmQH/apaKeldSWTKVZ6BxvfPzahyZl"
                 ),
                 (
-                    "gVpUm2/QztrwRLALfP4TUZAtdyfW1/tzYAOk4cTNjfv0MeT/RzPz+pLHZfDP+UTj" +
-                    "7VaoW3WVPrFpASSJhbtfiROY6rXjlkXn"
+                    "gVpUm2/QztrwRLALfP4TUZAtdyfW1/tzYAOk4cTNjfv0MeT/RzPz+pLHZfDP+UTj"
+                    + "7VaoW3WVPrFpASSJhbtfiROY6rXjlkXn"
                 ),
-                "rDJpPhzXKtY+GgtugVfrvKZx09s=");
+                "rDJpPhzXKtY+GgtugVfrvKZx09s="
+            );
         }
 
         [Theory]
@@ -355,22 +369,23 @@ S      9      R      /       j       6       9        C        v        C
                 DSATestData.GetDSA1024Params(),
                 includePrivateParameters,
                 (
-                    "wW0mx01sFid5nAkYVI5VP+WMeIHaSEYpyvZDEfSyfP72vbDyEgaw/8SZmi/tU7Q7" +
-                    "nuKRDGjaLENqgBj0k49kcjafVkfQBbzJbiJZDMFePNTqDRMvXaWvaqoIB7DMTvNA" +
-                    "SvVC9FRrN73WpH5kETCDfbmTl8hFY119w20FN+SoSzE="
+                    "wW0mx01sFid5nAkYVI5VP+WMeIHaSEYpyvZDEfSyfP72vbDyEgaw/8SZmi/tU7Q7"
+                    + "nuKRDGjaLENqgBj0k49kcjafVkfQBbzJbiJZDMFePNTqDRMvXaWvaqoIB7DMTvNA"
+                    + "SvVC9FRrN73WpH5kETCDfbmTl8hFY119w20FN+SoSzE="
                 ),
                 "2DwOy3NVHi/jDVH89CNsZRiDrdc=",
                 (
-                    "a8NmtmNVVF4Jjx/pDlRptWfgn6edgX8rNntF3s1DAaWcgdaRH3aR03DhWsaSwEvB" +
-                    "GHLBcaf+ZU6WPX3aV1qemM4Cb7fTk0olhggTSo7F7WmirtyJQBtnrd5Cfxftrrct" +
-                    "evRdmrHVnhsT1O+9F8dkMwJn3eNSwg4FuA2zwQn+i5w="
+                    "a8NmtmNVVF4Jjx/pDlRptWfgn6edgX8rNntF3s1DAaWcgdaRH3aR03DhWsaSwEvB"
+                    + "GHLBcaf+ZU6WPX3aV1qemM4Cb7fTk0olhggTSo7F7WmirtyJQBtnrd5Cfxftrrct"
+                    + "evRdmrHVnhsT1O+9F8dkMwJn3eNSwg4FuA2zwQn+i5w="
                 ),
                 (
-                    "aQuzepFF4F1ue0fEV4mKrt1yUBydFuebGtdahyzwF6qQu/uQ8bO39cA8h+RuhyVm" +
-                    "VSb9NBV7JvWWofCZf1nz5l78YVpVLV51acX/xFk9WgKZEQ5xyX4SIaWgP+mmk1rt" +
-                    "2I7ws7L3nTqZ7XX3uHHm6vJoDZbVdKX0wTus47S0TeE="
+                    "aQuzepFF4F1ue0fEV4mKrt1yUBydFuebGtdahyzwF6qQu/uQ8bO39cA8h+RuhyVm"
+                    + "VSb9NBV7JvWWofCZf1nz5l78YVpVLV51acX/xFk9WgKZEQ5xyX4SIaWgP+mmk1rt"
+                    + "2I7ws7L3nTqZ7XX3uHHm6vJoDZbVdKX0wTus47S0TeE="
                 ),
-                "wCZ4AHd55S42BoIhS9R/j69CvC0=");
+                "wCZ4AHd55S42BoIhS9R/j69CvC0="
+            );
         }
 
         [ConditionalTheory(typeof(DSAFactory), nameof(DSAFactory.SupportsFips186_3))]
@@ -382,36 +397,37 @@ S      9      R      /       j       6       9        C        v        C
                 DSATestData.Dsa2048DeficientXParameters,
                 includePrivateParameters,
                 (
-                    "lNPks58XJz6PJ7MmkvfDTTVhi9J5VItHNpOcK6TnKRFsrqxgAelXBcJ9fPDDCLyn" +
-                    "ArtHEtS7RIoQeLYxFQ6rRVyRZ4phxRwtNx4Cu6xw6cLG2nV7V4IOyP0JbhBew2wH" +
-                    "ik/X3Yck0nXTAH+U8S/5YWcpPGZ7RncH8dyafAs0vE/EdbFdUSQKeJpTpWtk1pwe" +
-                    "ArfKOtNBs7b2yYbx4GW/5oDYfe5tlZHY445Xw3rCmDsnlL6v/ix7W2ykm5gSSHMy" +
-                    "XGHeb4IEEQGL6XI/4r2oMywTCIqjKghtFNbwAgEBP1FnhkPzKswAUl2yLwAg2S+c" +
-                    "L0CIuNNaHnZNzYtwwLPS6w=="
+                    "lNPks58XJz6PJ7MmkvfDTTVhi9J5VItHNpOcK6TnKRFsrqxgAelXBcJ9fPDDCLyn"
+                    + "ArtHEtS7RIoQeLYxFQ6rRVyRZ4phxRwtNx4Cu6xw6cLG2nV7V4IOyP0JbhBew2wH"
+                    + "ik/X3Yck0nXTAH+U8S/5YWcpPGZ7RncH8dyafAs0vE/EdbFdUSQKeJpTpWtk1pwe"
+                    + "ArfKOtNBs7b2yYbx4GW/5oDYfe5tlZHY445Xw3rCmDsnlL6v/ix7W2ykm5gSSHMy"
+                    + "XGHeb4IEEQGL6XI/4r2oMywTCIqjKghtFNbwAgEBP1FnhkPzKswAUl2yLwAg2S+c"
+                    + "L0CIuNNaHnZNzYtwwLPS6w=="
                 ),
                 "23CgOhWOnMudk9v3Z5bL68pFqHA+gqRYAViO5LaYWrM=",
                 (
-                    "PPDxRLcKu9RCYNksTgMq3wpZjmgyPiVK/4cQyejqm+GdDSr5OaoN7HbSB7bqzveC" +
-                    "TjZldTVjAcpfmF74/3r1UYuN8IhaasVw/i5cWVYXDnHydAGUAYyKCkp7D5z5av1+" +
-                    "JQJvqAuflya2xN/LxBBeuYaHyml/eXlAwTNbFEMR1H/yHk1cQ8AFhHhrwarkrYWK" +
-                    "wGM1HuRCNHC+URVShpTvzzEtnljU3dHAHig4M/TxSeX5vUVJMEQxthvg2tcXtTjF" +
-                    "zVL94ajmYZPonQnB4Hlo5vcH71YU6D5hEm9qXzk54HZzdFRL4yJcxPjzxQHVolJv" +
-                    "e7ZNZWp7vf5+cssW1x6KOA=="
+                    "PPDxRLcKu9RCYNksTgMq3wpZjmgyPiVK/4cQyejqm+GdDSr5OaoN7HbSB7bqzveC"
+                    + "TjZldTVjAcpfmF74/3r1UYuN8IhaasVw/i5cWVYXDnHydAGUAYyKCkp7D5z5av1+"
+                    + "JQJvqAuflya2xN/LxBBeuYaHyml/eXlAwTNbFEMR1H/yHk1cQ8AFhHhrwarkrYWK"
+                    + "wGM1HuRCNHC+URVShpTvzzEtnljU3dHAHig4M/TxSeX5vUVJMEQxthvg2tcXtTjF"
+                    + "zVL94ajmYZPonQnB4Hlo5vcH71YU6D5hEm9qXzk54HZzdFRL4yJcxPjzxQHVolJv"
+                    + "e7ZNZWp7vf5+cssW1x6KOA=="
                 ),
                 (
-                    "cHLO4Kgw8hUDAviwzw8HFHtsaxMs5k309uE7nofw8txeBXRBGbaVgJU1GndCqeRc" +
-                    "cuI+6L8AmMgv0tB4fyGXRwv7DLwhRirTiT3vfBoN80/VKVf/AcafdsVkwmjrzUPe" +
-                    "w3bfU4qIdK807QB7TkbQZgBoE3kxqlmjLodbKUKdtVY13rbcjL+GfUSUytXt7n5/" +
-                    "IF7o6LLIoFK0Uo9HySsfjP7J7QU8IeOnMb/yaa0JnEE9X8h4U1EWXnmqehQ6DH5V" +
-                    "Ye8DvOPPDe2c7YMWgC+Z3a0DLejBknDzuvWoJgiIkX/Nc+Sx1W+tFWPHHbyS9nJW" +
-                    "kt3Wo5FBhE0R/aIwt75rrA=="
+                    "cHLO4Kgw8hUDAviwzw8HFHtsaxMs5k309uE7nofw8txeBXRBGbaVgJU1GndCqeRc"
+                    + "cuI+6L8AmMgv0tB4fyGXRwv7DLwhRirTiT3vfBoN80/VKVf/AcafdsVkwmjrzUPe"
+                    + "w3bfU4qIdK807QB7TkbQZgBoE3kxqlmjLodbKUKdtVY13rbcjL+GfUSUytXt7n5/"
+                    + "IF7o6LLIoFK0Uo9HySsfjP7J7QU8IeOnMb/yaa0JnEE9X8h4U1EWXnmqehQ6DH5V"
+                    + "Ye8DvOPPDe2c7YMWgC+Z3a0DLejBknDzuvWoJgiIkX/Nc+Sx1W+tFWPHHbyS9nJW"
+                    + "kt3Wo5FBhE0R/aIwt75rrA=="
                 ),
                 // The rules from xmldsig say that these types are ds:CryptoBinary, which
                 // means they should leave off any leading 0x00 bytes.
                 //
                 // .NET Framework just treated it like base64Binary, though, and happily
                 // writes the unwanted zeroes.
-                "AMhxt+OJaF25fZNN1wEfqwdv8n7EKC+wDA1kbSnV5OU=");
+                "AMhxt+OJaF25fZNN1wEfqwdv8n7EKC+wDA1kbSnV5OU="
+            );
         }
 
         [ConditionalFact(typeof(DSAFactory), nameof(DSAFactory.SupportsKeyGeneration))]
@@ -450,7 +466,8 @@ S      9      R      /       j       6       9        C        v        C
             {
                 AssertExtensions.Throws<ArgumentNullException>(
                     "xmlString",
-                    () => dsa.FromXmlString(null));
+                    () => dsa.FromXmlString(null)
+                );
             }
         }
 
@@ -461,14 +478,17 @@ S      9      R      /       j       6       9        C        v        C
             {
                 // This is the DSA-512 test case, with an unfinished closing element.
                 Assert.Throws<CryptographicException>(
-                    () => dsa.FromXmlString(
-                        @"
+                    () =>
+                        dsa.FromXmlString(
+                            @"
 <DSAKeyValue xmlns:yep=""urn:ignored:yep"" xmlns:nope=""urn:ignored:nope"" xmlns:ign=""urn:ignored:ign"">
   <yep:P>1qi38cr3ppZNB2Y/xpHSL2q81Vw3rvWNIHRnQNgv4U4UY2NifZGSUULc3uOEvgoeBO1b9fRxSG9NmG1CoufflQ==</yep:P>
   <nope:Q>+rX2JdXV4WQwoe9jDr4ziXzCJPk=</nope:Q>
   <G>CETEkOUu9Y4FkCxjbWTR1essYIKg1PO/0c4Hjoe0On73u+zhmk7+Km2cIp02AIPOqfch85sFuvlwUt78Z6WKKw==</G>
   <ign:Y>wwDg5n2HfmztOf7qqsHywr1WjmoyRnIn4Stq5FqNlHhUGkgKyAA4qshjgn1uOYQGGiWQXBi9JJmoOWY8PKRWBQ==</ign:Y>
-</DSA"));
+</DSA"
+                        )
+                );
             }
         }
 
@@ -491,7 +511,8 @@ S      9      R      /       j       6       9        C        v        C
     evRdmrHVnhsT1O + 9F8dkMwJn3eNSwg4FuA2zwQn + i5w =
   </G>
   <ign:Y>wwDg5n2HfmztOf7qqsHywr1WjmoyRnIn4Stq5FqNlHhUGkgKyAA4qshjgn1uOYQGGiWQXBi9JJmoOWY8PKRWBQ==</ign:Y>
-</DSAKeyValue>");
+</DSAKeyValue>"
+                    );
                 }
                 catch (ArgumentException)
                 {
@@ -511,15 +532,18 @@ S      9      R      /       j       6       9        C        v        C
             {
                 // This is the DSA-576 test case, but with an element missing.
                 Assert.Throws<CryptographicException>(
-                    () => dsa.FromXmlString(
-                        @"
+                    () =>
+                        dsa.FromXmlString(
+                            @"
 <DSAKeyValue>
   <Y>wwDg5n2HfmztOf7qqsHywr1WjmoyRnIn4Stq5FqNlHhUGkgKyAA4qshjgn1uOYQGGiWQXBi9JJmoOWY8PKRWBQ==</Y>
   <Q>+rX2JdXV4WQwoe9jDr4ziXzCJPk=</Q>
   <BananaWeight unit=""lbs"">30000</BananaWeight>
   <X>Lj16hMhbZnheH2/nlpgrIrDLmLw=</X>
   <G>CETEkOUu9Y4FkCxjbWTR1essYIKg1PO/0c4Hjoe0On73u+zhmk7+Km2cIp02AIPOqfch85sFuvlwUt78Z6WKKw==</G>
-</DSAKeyValue>"));
+</DSAKeyValue>"
+                        )
+                );
             }
         }
 
@@ -530,15 +554,18 @@ S      9      R      /       j       6       9        C        v        C
             {
                 // This is the DSA-576 test case, but with an element missing.
                 Assert.Throws<CryptographicException>(
-                    () => dsa.FromXmlString(
-                        @"
+                    () =>
+                        dsa.FromXmlString(
+                            @"
 <DSAKeyValue>
   <Y>wwDg5n2HfmztOf7qqsHywr1WjmoyRnIn4Stq5FqNlHhUGkgKyAA4qshjgn1uOYQGGiWQXBi9JJmoOWY8PKRWBQ==</Y>
   <BananaWeight unit=""lbs"">30000</BananaWeight>
   <X>Lj16hMhbZnheH2/nlpgrIrDLmLw=</X>
   <G>CETEkOUu9Y4FkCxjbWTR1essYIKg1PO/0c4Hjoe0On73u+zhmk7+Km2cIp02AIPOqfch85sFuvlwUt78Z6WKKw==</G>
   <P>1qi38cr3ppZNB2Y/xpHSL2q81Vw3rvWNIHRnQNgv4U4UY2NifZGSUULc3uOEvgoeBO1b9fRxSG9NmG1CoufflQ==</P>
-</DSAKeyValue>"));
+</DSAKeyValue>"
+                        )
+                );
             }
         }
 
@@ -549,15 +576,18 @@ S      9      R      /       j       6       9        C        v        C
             {
                 // This is the DSA-576 test case, but with an element missing.
                 Assert.Throws<CryptographicException>(
-                    () => dsa.FromXmlString(
-                        @"
+                    () =>
+                        dsa.FromXmlString(
+                            @"
 <DSAKeyValue>
   <Y>wwDg5n2HfmztOf7qqsHywr1WjmoyRnIn4Stq5FqNlHhUGkgKyAA4qshjgn1uOYQGGiWQXBi9JJmoOWY8PKRWBQ==</Y>
   <Q>+rX2JdXV4WQwoe9jDr4ziXzCJPk=</Q>
   <BananaWeight unit=""lbs"">30000</BananaWeight>
   <X>Lj16hMhbZnheH2/nlpgrIrDLmLw=</X>
   <P>1qi38cr3ppZNB2Y/xpHSL2q81Vw3rvWNIHRnQNgv4U4UY2NifZGSUULc3uOEvgoeBO1b9fRxSG9NmG1CoufflQ==</P>
-</DSAKeyValue>"));
+</DSAKeyValue>"
+                        )
+                );
             }
         }
 
@@ -568,15 +598,18 @@ S      9      R      /       j       6       9        C        v        C
             {
                 // This is the DSA-576 test case, but with an element missing.
                 Assert.Throws<CryptographicException>(
-                    () => dsa.FromXmlString(
-                        @"
+                    () =>
+                        dsa.FromXmlString(
+                            @"
 <DSAKeyValue>
   <Q>+rX2JdXV4WQwoe9jDr4ziXzCJPk=</Q>
   <BananaWeight unit=""lbs"">30000</BananaWeight>
   <X>Lj16hMhbZnheH2/nlpgrIrDLmLw=</X>
   <G>CETEkOUu9Y4FkCxjbWTR1essYIKg1PO/0c4Hjoe0On73u+zhmk7+Km2cIp02AIPOqfch85sFuvlwUt78Z6WKKw==</G>
   <P>1qi38cr3ppZNB2Y/xpHSL2q81Vw3rvWNIHRnQNgv4U4UY2NifZGSUULc3uOEvgoeBO1b9fRxSG9NmG1CoufflQ==</P>
-</DSAKeyValue>"));
+</DSAKeyValue>"
+                        )
+                );
             }
         }
 
@@ -588,7 +621,8 @@ S      9      R      /       j       6       9        C        v        C
 
             using (DSA dsa = DSAFactory.Create())
             {
-                dsa.FromXmlString(@"
+                dsa.FromXmlString(
+                    @"
 <DSAKeyValue>
   <P>
     jfKklEkidqo9JXWbsGhpy+rA2Dr7jQz3y7gyTw14guXQdi/FtyEOr8Lprawyq3qs
@@ -607,7 +641,8 @@ S      9      R      /       j       6       9        C        v        C
   <Seed>1QFOS2DvK6i2IRtAYroyJOBCfdM=</Seed>
   <PgenCounter>aQ==</PgenCounter>
   <X>IHCzIj26Ny/eHA/8ey47SYsmBhQ=</X>
-</DSAKeyValue>");
+</DSAKeyValue>"
+                );
 
                 DSATestData.GetDSA1024_186_2(out DSAParameters expected, out _, out _);
                 DSAImportExport.AssertKeyEquals(expected, dsa.ExportParameters(true));
@@ -625,7 +660,8 @@ S      9      R      /       j       6       9        C        v        C
 
             using (DSA dsa = DSAFactory.Create())
             {
-                dsa.FromXmlString(@"
+                dsa.FromXmlString(
+                    @"
 <DSAKeyValue>
   <P>
     jfKklEkidqo9JXWbsGhpy+rA2Dr7jQz3y7gyTw14guXQdi/FtyEOr8Lprawyq3qs
@@ -644,7 +680,8 @@ S      9      R      /       j       6       9        C        v        C
   <Seed>1QFOS2DvK6i2IRtAYroyJOBCfdM=</Seed>
   <PgenCounter>aQ==</PgenCounter>
   <X>IHCzIj26Ny/eHA/8ey47SYsmBhQ=</X>
-</DSAKeyValue>");
+</DSAKeyValue>"
+                );
 
                 DSATestData.GetDSA1024_186_2(out DSAParameters expected, out _, out _);
                 DSAImportExport.AssertKeyEquals(expected, dsa.ExportParameters(true));
@@ -664,7 +701,9 @@ S      9      R      /       j       6       9        C        v        C
             using (DSA dsa = DSAFactory.Create())
             {
                 Assert.Throws<FormatException>(
-                    () => dsa.FromXmlString(@"
+                    () =>
+                        dsa.FromXmlString(
+                            @"
 <DSAKeyValue>
   <P>
     jfKklEkidqo9JXWbsGhpy+rA2Dr7jQz3y7gyTw14guXQdi/FtyEOr8Lprawyq3qs
@@ -683,7 +722,9 @@ S      9      R      /       j       6       9        C        v        C
   <Seed>1QFOS2DvK6i2IRtAYroyJOBCfdM=</Seed>
   <PgenCounter>aQ==</PgenCounter>
   <X>IHCzIj26Ny/eHA/8ey47SYsmBhQ=</X>
-</DSAKeyValue>"));
+</DSAKeyValue>"
+                        )
+                );
             }
         }
 
@@ -705,7 +746,8 @@ S      9      R      /       j       6       9        C        v        C
 
                 try
                 {
-                    dsa.FromXmlString(@"
+                    dsa.FromXmlString(
+                        @"
 <DSAKeyValue>
   <P>
     jfKklEkidqo9JXWbsGhpy+rA2Dr7jQz3y7gyTw14guXQdi/FtyEOr8Lprawyq3qs
@@ -724,7 +766,8 @@ S      9      R      /       j       6       9        C        v        C
   <Seed>1QFOS2DvK6i2IRtAYroyJOBCfdM=</Seed>
   <PgenCounter>ag==</PgenCounter>
   <X>IHCzIj26Ny/eHA/8ey47SYsmBhQ=</X>
-</DSAKeyValue>");
+</DSAKeyValue>"
+                    );
                 }
                 catch (CryptographicException)
                 {
@@ -751,7 +794,8 @@ S      9      R      /       j       6       9        C        v        C
 
             using (DSA dsa = DSAFactory.Create())
             {
-                dsa.FromXmlString(@"
+                dsa.FromXmlString(
+                    @"
 <DSAKeyValue>
   <P>
     jfKklEkidqo9JXWbsGhpy+rA2Dr7jQz3y7gyTw14guXQdi/FtyEOr8Lprawyq3qs
@@ -770,7 +814,8 @@ S      9      R      /       j       6       9        C        v        C
   <Seed>1QFOS2DvK6i2IRtAYroyJOBCfdM=</Seed>
   <PgenCounter>AQAAAGk=</PgenCounter>
   <X>IHCzIj26Ny/eHA/8ey47SYsmBhQ=</X>
-</DSAKeyValue>");
+</DSAKeyValue>"
+                );
 
                 DSATestData.GetDSA1024_186_2(out DSAParameters expected, out _, out _);
                 DSAImportExport.AssertKeyEquals(expected, dsa.ExportParameters(true));
@@ -786,7 +831,9 @@ S      9      R      /       j       6       9        C        v        C
             using (DSA dsa = DSAFactory.Create())
             {
                 Assert.Throws<CryptographicException>(
-                    () => dsa.FromXmlString(@"
+                    () =>
+                        dsa.FromXmlString(
+                            @"
 <DSAKeyValue>
   <P>
     jfKklEkidqo9JXWbsGhpy+rA2Dr7jQz3y7gyTw14guXQdi/FtyEOr8Lprawyq3qs
@@ -804,7 +851,9 @@ S      9      R      /       j       6       9        C        v        C
   <J>AgRO2deYCHK5/u5+ElWfz2J6fdI2PN/mnjBxceE11r5zt7x/DVqcoWAp2+dr</J>
   <Seed>1QFOS2DvK6i2IRtAYroyJOBCfdM=</Seed>
   <X>IHCzIj26Ny/eHA/8ey47SYsmBhQ=</X>
-</DSAKeyValue>"));
+</DSAKeyValue>"
+                        )
+                );
             }
         }
 
@@ -817,7 +866,9 @@ S      9      R      /       j       6       9        C        v        C
             using (DSA dsa = DSAFactory.Create())
             {
                 Assert.Throws<CryptographicException>(
-                    () => dsa.FromXmlString(@"
+                    () =>
+                        dsa.FromXmlString(
+                            @"
 <DSAKeyValue>
   <P>
     jfKklEkidqo9JXWbsGhpy+rA2Dr7jQz3y7gyTw14guXQdi/FtyEOr8Lprawyq3qs
@@ -835,7 +886,9 @@ S      9      R      /       j       6       9        C        v        C
   <J>AgRO2deYCHK5/u5+ElWfz2J6fdI2PN/mnjBxceE11r5zt7x/DVqcoWAp2+dr</J>
   <PgenCounter>aQ==</PgenCounter>
   <X>IHCzIj26Ny/eHA/8ey47SYsmBhQ=</X>
-</DSAKeyValue>"));
+</DSAKeyValue>"
+                        )
+                );
             }
         }
 
@@ -850,7 +903,8 @@ S      9      R      /       j       6       9        C        v        C
 
                 DSAImportExport.AssertKeyEquals(
                     expectedParameters,
-                    dsa.ExportParameters(includePrivateParameters));
+                    dsa.ExportParameters(includePrivateParameters)
+                );
             }
         }
 
@@ -861,7 +915,8 @@ S      9      R      /       j       6       9        C        v        C
             string expectedQ,
             string expectedG,
             string expectedY,
-            string expectedX)
+            string expectedX
+        )
         {
             IEnumerator<XElement> iter;
 
@@ -874,7 +929,6 @@ S      9      R      /       j       6       9        C        v        C
             AssertNextElement(iter, "Q", expectedQ);
             AssertNextElement(iter, "G", expectedG);
             AssertNextElement(iter, "Y", expectedY);
-
 
             // We don't produce J.
             // Seed isn't present in the input parameters, so it shouldn't be here.
@@ -889,7 +943,8 @@ S      9      R      /       j       6       9        C        v        C
 
         private static IEnumerator<XElement> VerifyRootAndGetChildren(
             DSA dsa,
-            bool includePrivateParameters)
+            bool includePrivateParameters
+        )
         {
             XDocument doc = XDocument.Parse(dsa.ToXmlString(includePrivateParameters));
             XElement root = doc.Root;
@@ -908,7 +963,8 @@ S      9      R      /       j       6       9        C        v        C
         private static void AssertNextElement(
             IEnumerator<XElement> iter,
             string localName,
-            string expectedValue)
+            string expectedValue
+        )
         {
             Assert.True(iter.MoveNext(), $"Move to {localName}");
 

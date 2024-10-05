@@ -15,20 +15,26 @@ internal static partial class ProcessTracker
     private static IntPtr IntiailizeProcessTracker()
     {
         // Requires Win8 or later
-        if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows) || Environment.OSVersion.Version < new Version(6, 2))
+        if (
+            !RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+            || Environment.OSVersion.Version < new Version(6, 2)
+        )
         {
             return IntPtr.Zero;
         }
 
         // Job name is optional but helps with diagnostics.  Job name must be unique if non-null.
-        var jobHandle = CreateJobObject(IntPtr.Zero, name: $"ProcessTracker{Environment.ProcessId}");
+        var jobHandle = CreateJobObject(
+            IntPtr.Zero,
+            name: $"ProcessTracker{Environment.ProcessId}"
+        );
 
         var extendedInfo = new JOBOBJECT_EXTENDED_LIMIT_INFORMATION
         {
             BasicLimitInformation = new JOBOBJECT_BASIC_LIMIT_INFORMATION
             {
-                LimitFlags = JOBOBJECTLIMIT.JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE
-            }
+                LimitFlags = JOBOBJECTLIMIT.JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE,
+            },
         };
 
         var length = Marshal.SizeOf(typeof(JOBOBJECT_EXTENDED_LIMIT_INFORMATION));
@@ -37,8 +43,14 @@ internal static partial class ProcessTracker
         {
             Marshal.StructureToPtr(extendedInfo, extendedInfoPtr, false);
 
-            if (!SetInformationJobObject(jobHandle, JobObjectInfoType.ExtendedLimitInformation,
-                extendedInfoPtr, (uint)length))
+            if (
+                !SetInformationJobObject(
+                    jobHandle,
+                    JobObjectInfoType.ExtendedLimitInformation,
+                    extendedInfoPtr,
+                    (uint)length
+                )
+            )
             {
                 throw new Win32Exception();
             }
@@ -63,13 +75,21 @@ internal static partial class ProcessTracker
         }
     }
 
-    [LibraryImport("kernel32.dll", EntryPoint = "CreateJobObjectW", StringMarshalling = StringMarshalling.Utf16)]
+    [LibraryImport(
+        "kernel32.dll",
+        EntryPoint = "CreateJobObjectW",
+        StringMarshalling = StringMarshalling.Utf16
+    )]
     private static partial IntPtr CreateJobObject(IntPtr lpJobAttributes, string name);
 
     [LibraryImport("kernel32.dll")]
     [return: MarshalAs(UnmanagedType.Bool)]
-    private static partial bool SetInformationJobObject(IntPtr job, JobObjectInfoType infoType,
-        IntPtr lpJobObjectInfo, uint cbJobObjectInfoLength);
+    private static partial bool SetInformationJobObject(
+        IntPtr job,
+        JobObjectInfoType infoType,
+        IntPtr lpJobObjectInfo,
+        uint cbJobObjectInfoLength
+    );
 
     [LibraryImport("kernel32.dll", SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
@@ -83,7 +103,7 @@ internal static partial class ProcessTracker
         EndOfJobTimeInformation = 6,
         ExtendedLimitInformation = 9,
         SecurityLimitInformation = 5,
-        GroupInformation = 11
+        GroupInformation = 11,
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -103,7 +123,7 @@ internal static partial class ProcessTracker
     [Flags]
     private enum JOBOBJECTLIMIT : uint
     {
-        JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE = 0x2000
+        JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE = 0x2000,
     }
 
     [StructLayout(LayoutKind.Sequential)]

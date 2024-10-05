@@ -111,7 +111,10 @@ public class LoggedTestXunitTests : TestLoggedTest
         LoggerFactory = loggerFactory;
         AddTestLogging(serviceCollection);
 
-        Assert.Same(loggerFactory, serviceCollection.BuildServiceProvider().GetRequiredService<ILoggerFactory>());
+        Assert.Same(
+            loggerFactory,
+            serviceCollection.BuildServiceProvider().GetRequiredService<ILoggerFactory>()
+        );
     }
 
     [ConditionalTheory]
@@ -177,7 +180,12 @@ public class TestLoggedTest : LoggedTest
     public bool SetupInvoked { get; private set; } = false;
     public bool ITestOutputHelperIsInitialized { get; private set; } = false;
 
-    public override void Initialize(TestContext context, MethodInfo methodInfo, object[] testMethodArguments, ITestOutputHelper testOutputHelper)
+    public override void Initialize(
+        TestContext context,
+        MethodInfo methodInfo,
+        object[] testMethodArguments,
+        ITestOutputHelper testOutputHelper
+    )
     {
         base.Initialize(context, methodInfo, testMethodArguments, testOutputHelper);
 

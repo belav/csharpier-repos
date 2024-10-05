@@ -16,7 +16,12 @@ namespace System.IO.Ports.Tests
         //The number of random bytes to receive
         private const int numRndByte = 8;
 
-        private enum ReadDataFromEnum { NonBuffered, Buffered, BufferedAndNonBuffered };
+        private enum ReadDataFromEnum
+        {
+            NonBuffered,
+            Buffered,
+            BufferedAndNonBuffered,
+        };
 
         #region Test Cases
         [ConditionalFact(nameof(HasLoopbackOrNullModem))]
@@ -76,7 +81,8 @@ namespace System.IO.Ports.Tests
                 var asyncReadTask = new Task(asyncRead.Read);
 
                 Debug.WriteLine(
-                    "Verifying that ReadByte() will read bytes that have been received after the call to Read was made");
+                    "Verifying that ReadByte() will read bytes that have been received after the call to Read was made"
+                );
 
                 com1.Encoding = Encoding.UTF8;
                 com2.Encoding = Encoding.UTF8;
@@ -97,11 +103,18 @@ namespace System.IO.Ports.Tests
 
                 if (null != asyncRead.Exception)
                 {
-                    Fail("Err_04448ajhied Unexpected exception thrown from async read:\n{0}", asyncRead.Exception);
+                    Fail(
+                        "Err_04448ajhied Unexpected exception thrown from async read:\n{0}",
+                        asyncRead.Exception
+                    );
                 }
                 else if (asyncRead.Result != byteXmitBuffer[0])
                 {
-                    Fail("Err_0158ahei Expected ReadChar to read {0}({0:X}) actual {1}({1:X})", byteXmitBuffer[0], asyncRead.Result);
+                    Fail(
+                        "Err_0158ahei Expected ReadChar to read {0}({0:X}) actual {1}({1:X})",
+                        byteXmitBuffer[0],
+                        asyncRead.Result
+                    );
                 }
                 else
                 {
@@ -111,8 +124,11 @@ namespace System.IO.Ports.Tests
 
                     if (1 + readResult != byteXmitBuffer.Length)
                     {
-                        Fail("Err_051884ajoedo Expected Read to read {0} bytes actually read {1}",
-                            byteXmitBuffer.Length - 1, readResult);
+                        Fail(
+                            "Err_051884ajoedo Expected Read to read {0} bytes actually read {1}",
+                            byteXmitBuffer.Length - 1,
+                            readResult
+                        );
                     }
                     else
                     {
@@ -122,7 +138,11 @@ namespace System.IO.Ports.Tests
                             {
                                 Fail(
                                     "Err_05188ahed Characters differ at {0} expected:{1}({1:X}) actual:{2}({2:X}) asyncRead.Result={3}",
-                                    i, byteXmitBuffer[i], byteRcvBuffer[i], asyncRead.Result);
+                                    i,
+                                    byteXmitBuffer[i],
+                                    byteRcvBuffer[i],
+                                    asyncRead.Result
+                                );
                             }
                         }
                     }
@@ -138,7 +158,6 @@ namespace System.IO.Ports.Tests
         {
             VerifyRead(encoding, ReadDataFromEnum.NonBuffered);
         }
-
 
         private void VerifyRead(Encoding encoding, ReadDataFromEnum readDataFrom)
         {
@@ -185,12 +204,10 @@ namespace System.IO.Ports.Tests
             }
         }
 
-
         private void VerifyReadNonBuffered(SerialPort com1, SerialPort com2, byte[] bytesToWrite)
         {
             VerifyBytesReadOnCom1FromCom2(com1, com2, bytesToWrite, bytesToWrite);
         }
-
 
         private void VerifyReadBuffered(SerialPort com1, SerialPort com2, byte[] bytesToWrite)
         {
@@ -198,18 +215,26 @@ namespace System.IO.Ports.Tests
             PerformReadOnCom1FromCom2(com1, com2, bytesToWrite);
         }
 
-
-        private void VerifyReadBufferedAndNonBuffered(SerialPort com1, SerialPort com2, byte[] bytesToWrite)
+        private void VerifyReadBufferedAndNonBuffered(
+            SerialPort com1,
+            SerialPort com2,
+            byte[] bytesToWrite
+        )
         {
             byte[] expectedBytes = new byte[(2 * bytesToWrite.Length)];
 
             BufferData(com1, com2, bytesToWrite);
             Buffer.BlockCopy(bytesToWrite, 0, expectedBytes, 0, bytesToWrite.Length);
-            Buffer.BlockCopy(bytesToWrite, 0, expectedBytes, bytesToWrite.Length, bytesToWrite.Length);
+            Buffer.BlockCopy(
+                bytesToWrite,
+                0,
+                expectedBytes,
+                bytesToWrite.Length,
+                bytesToWrite.Length
+            );
 
             VerifyBytesReadOnCom1FromCom2(com1, com2, bytesToWrite, expectedBytes);
         }
-
 
         private void BufferData(SerialPort com1, SerialPort com2, byte[] bytesToWrite)
         {
@@ -222,11 +247,20 @@ namespace System.IO.Ports.Tests
 
             if (com1.BytesToRead != bytesToWrite.Length)
             {
-                Fail("Err_7083zaz Expected com1.BytesToRead={0} actual={1}", bytesToWrite.Length, com1.BytesToRead);
+                Fail(
+                    "Err_7083zaz Expected com1.BytesToRead={0} actual={1}",
+                    bytesToWrite.Length,
+                    com1.BytesToRead
+                );
             }
         }
 
-        private void VerifyBytesReadOnCom1FromCom2(SerialPort com1, SerialPort com2, byte[] bytesToWrite, byte[] expectedBytes)
+        private void VerifyBytesReadOnCom1FromCom2(
+            SerialPort com1,
+            SerialPort com2,
+            byte[] bytesToWrite,
+            byte[] expectedBytes
+        )
         {
             com2.Write(bytesToWrite, 0, bytesToWrite.Length);
             com1.ReadTimeout = 500;
@@ -236,7 +270,11 @@ namespace System.IO.Ports.Tests
             PerformReadOnCom1FromCom2(com1, com2, expectedBytes);
         }
 
-        private void PerformReadOnCom1FromCom2(SerialPort com1, SerialPort com2, byte[] expectedBytes)
+        private void PerformReadOnCom1FromCom2(
+            SerialPort com1,
+            SerialPort com2,
+            byte[] expectedBytes
+        )
         {
             byte[] byteRcvBuffer = new byte[expectedBytes.Length];
             int readInt;
@@ -267,14 +305,22 @@ namespace System.IO.Ports.Tests
                 if (readInt != expectedBytes[i])
                 {
                     //If the byte read is not the expected byte
-                    Fail("ERROR!!!: Expected to read {0}  actual read byte {1}", (int)expectedBytes[i], readInt);
+                    Fail(
+                        "ERROR!!!: Expected to read {0}  actual read byte {1}",
+                        (int)expectedBytes[i],
+                        readInt
+                    );
                 }
 
                 i++;
 
                 if (expectedBytes.Length - i != com1.BytesToRead)
                 {
-                    Fail("ERROR!!!: Expected BytesToRead={0} actual={1}", expectedBytes.Length - i, com1.BytesToRead);
+                    Fail(
+                        "ERROR!!!: Expected BytesToRead={0} actual={1}",
+                        expectedBytes.Length - i,
+                        com1.BytesToRead
+                    );
                 }
             }
 
@@ -330,34 +376,22 @@ namespace System.IO.Ports.Tests
 
             public AutoResetEvent ReadStartedEvent
             {
-                get
-                {
-                    return _readStartedEvent;
-                }
+                get { return _readStartedEvent; }
             }
 
             public AutoResetEvent ReadCompletedEvent
             {
-                get
-                {
-                    return _readCompletedEvent;
-                }
+                get { return _readCompletedEvent; }
             }
 
             public int Result
             {
-                get
-                {
-                    return _result;
-                }
+                get { return _result; }
             }
 
             public Exception Exception
             {
-                get
-                {
-                    return _exception;
-                }
+                get { return _exception; }
             }
         }
         #endregion

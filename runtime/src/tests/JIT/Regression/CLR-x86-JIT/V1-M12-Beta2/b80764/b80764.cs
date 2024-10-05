@@ -6,7 +6,6 @@ using System;
 using System.Runtime.InteropServices;
 using Xunit;
 
-
 namespace JitTest
 {
     public class Test
@@ -37,7 +36,9 @@ namespace JitTest
         [Fact]
         public static unsafe void TestEntryPoint()
         {
-            byte* buf1 = stackalloc byte[100], buf2 = null, buf3 = null;
+            byte* buf1 = stackalloc byte[100],
+                buf2 = null,
+                buf3 = null;
             initbuf(buf1, 1);
             ckbuf(buf1, 1);
             try

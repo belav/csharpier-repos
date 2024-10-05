@@ -18,9 +18,8 @@ namespace System.DirectoryServices.AccountManagement
             _debugLogFile = debugLogFile;
         }
 
-        public ConfigSettings() : this(GlobalConfig.DefaultDebugLevel, null)
-        {
-        }
+        public ConfigSettings()
+            : this(GlobalConfig.DefaultDebugLevel, null) { }
 
         public DebugLevel DebugLevel
         {

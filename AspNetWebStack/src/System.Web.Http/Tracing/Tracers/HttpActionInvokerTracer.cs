@@ -35,7 +35,10 @@ namespace System.Web.Http.Tracing.Tracers
             get { return _innerInvoker; }
         }
 
-        Task<HttpResponseMessage> IHttpActionInvoker.InvokeActionAsync(HttpActionContext actionContext, CancellationToken cancellationToken)
+        Task<HttpResponseMessage> IHttpActionInvoker.InvokeActionAsync(
+            HttpActionContext actionContext,
+            CancellationToken cancellationToken
+        )
         {
             if (actionContext == null)
             {
@@ -48,16 +51,16 @@ namespace System.Web.Http.Tracing.Tracers
                 TraceLevel.Info,
                 _innerInvoker.GetType().Name,
                 InvokeActionAsyncMethodName,
-
                 beginTrace: (tr) =>
                 {
                     tr.Message = Error.Format(
                         SRResources.TraceActionInvokeMessage,
-                        FormattingUtilities.ActionInvokeToString(actionContext));
+                        FormattingUtilities.ActionInvokeToString(actionContext)
+                    );
                 },
-
-                execute: () => (Task<HttpResponseMessage>)_innerInvoker.InvokeActionAsync(actionContext, cancellationToken),
-
+                execute: () =>
+                    (Task<HttpResponseMessage>)
+                        _innerInvoker.InvokeActionAsync(actionContext, cancellationToken),
                 endTrace: (tr, result) =>
                 {
                     HttpResponseMessage response = result;
@@ -66,8 +69,8 @@ namespace System.Web.Http.Tracing.Tracers
                         tr.Status = response.StatusCode;
                     }
                 },
-
-                errorTrace: null);
+                errorTrace: null
+            );
         }
     }
 }

@@ -25,19 +25,25 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
     /// </summary>
     public static class HelpPageConfig
     {
-        [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters",
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1303:Do not pass literals as localized parameters",
             MessageId = "ROOT_PROJECT_NAMESPACE.Areas.HelpPage.TextSample.#ctor(System.String)",
-            Justification = "End users may choose to merge this string with existing localized resources.")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly",
+            Justification = "End users may choose to merge this string with existing localized resources."
+        )]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA2204:Literals should be spelled correctly",
             MessageId = "bsonspec",
-            Justification = "Part of a URI.")]
+            Justification = "Part of a URI."
+        )]
         public static void Register(HttpConfiguration config)
         {
             //// Uncomment the following to use the documentation from XML documentation file.
             //config.SetDocumentationProvider(new XmlDocumentationProvider(HttpContext.Current.Server.MapPath("~/App_Data/XmlDocument.xml")));
 
             //// Uncomment the following to use "sample string" as the sample for all actions that have string as the body parameter or return type.
-            //// Also, the string arrays will be used for IEnumerable<string>. The sample objects will be serialized into different media type 
+            //// Also, the string arrays will be used for IEnumerable<string>. The sample objects will be serialized into different media type
             //// formats by the available formatters.
             //config.SetSampleObjects(new Dictionary<Type, object>
             //{
@@ -57,7 +63,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             // The BsonMediaTypeFormatter (if available) is not used to serialize the TextSample object.
             config.SetSampleForMediaType(
                 new TextSample("Binary JSON content. See http://bsonspec.org for details."),
-                new MediaTypeHeaderValue("application/bson"));
+                new MediaTypeHeaderValue("application/bson")
+            );
 
             //// Uncomment the following to use "[0]=foo&[1]=bar" directly as the sample for all actions that support form URL encoded format
             //// and have IEnumerable<string> as the body parameter or return type.
@@ -97,8 +104,13 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
                     object items = sampleGenerator.GetSampleObject(itemsType);
 
                     // Fill in the other information needed to invoke the PageResult<T> constuctor
-                    Type[] parameterTypes = new Type[] { itemsType, typeof(Uri), typeof(long?), };
-                    object[] parameters = new object[] { items, null, (long)ObjectGenerator.DefaultCollectionSize, };
+                    Type[] parameterTypes = new Type[] { itemsType, typeof(Uri), typeof(long?) };
+                    object[] parameters = new object[]
+                    {
+                        items,
+                        null,
+                        (long)ObjectGenerator.DefaultCollectionSize,
+                    };
 
                     // Call PageResult(IEnumerable<T> items, Uri nextPageLink, long? count) constructor
                     ConstructorInfo constructor = type.GetConstructor(parameterTypes);

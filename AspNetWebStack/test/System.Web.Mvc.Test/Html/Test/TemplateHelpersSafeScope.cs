@@ -30,7 +30,13 @@ namespace System.Web.Mvc.Html.Test
             // Do not want templates to check disk for anything.
             var engine = new Mock<IViewEngine>(MockBehavior.Strict);
             engine
-                .Setup(e => e.FindPartialView(It.IsAny<ControllerContext>(), It.IsAny<string>(), It.IsAny<bool>()))
+                .Setup(e =>
+                    e.FindPartialView(
+                        It.IsAny<ControllerContext>(),
+                        It.IsAny<string>(),
+                        It.IsAny<bool>()
+                    )
+                )
                 .Returns(new ViewEngineResult(Enumerable.Empty<string>()));
 
             _oldEngines = ViewEngines.Engines.ToList();

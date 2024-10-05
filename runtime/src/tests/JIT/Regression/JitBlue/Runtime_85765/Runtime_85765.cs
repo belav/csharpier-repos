@@ -9,9 +9,8 @@ public class Runtime_85765
 {
     public struct S0
     {
-        public S0(bool f1): this()
-        {
-        }
+        public S0(bool f1)
+            : this() { }
     }
 
     public struct S1
@@ -46,7 +45,7 @@ public class Runtime_85765
     // ------
 
     [Fact]
-    public unsafe static void Test2()
+    public static unsafe void Test2()
     {
         byte* bytes = stackalloc byte[1024];
         bytes[0x1A] = 1;
@@ -56,7 +55,7 @@ public class Runtime_85765
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public unsafe static int Foo(byte* b)
+    public static unsafe int Foo(byte* b)
     {
         return Unsafe.ReadUnaligned<int>(ref b[0x1A]) + Unsafe.ReadUnaligned<int>(ref b[0x1B]);
     }

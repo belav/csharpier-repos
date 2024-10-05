@@ -6,8 +6,8 @@
 
 /*
  */
-namespace System.Web.UI {
-
+namespace System.Web.UI
+{
     using System;
     using System.Collections;
     using System.ComponentModel;
@@ -17,8 +17,8 @@ namespace System.Web.UI {
     /// <para></para>
     /// </devdoc>
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Class)]
-    public sealed class FilterableAttribute : Attribute {
-
+    public sealed class FilterableAttribute : Attribute
+    {
         /// <internalonly/>
         /// <devdoc>
         /// <para></para>
@@ -40,29 +40,32 @@ namespace System.Web.UI {
         private bool _filterable = false;
         private static Hashtable _filterableTypes;
 
-        static FilterableAttribute() {
+        static FilterableAttribute()
+        {
             // Create a synchronized wrapper
             _filterableTypes = Hashtable.Synchronized(new Hashtable());
         }
 
         /// <devdoc>
         /// </devdoc>
-        public FilterableAttribute(bool filterable) {
+        public FilterableAttribute(bool filterable)
+        {
             _filterable = filterable;
         }
 
         /// <devdoc>
         ///    <para> Indicates if the property is Filterable.</para>
         /// </devdoc>
-        public bool Filterable {
-            get {
-                return _filterable;
-            }
+        public bool Filterable
+        {
+            get { return _filterable; }
         }
 
         /// <internalonly/>
-        public override bool Equals(object obj) {
-            if (obj == this) {
+        public override bool Equals(object obj)
+        {
+            if (obj == this)
+            {
                 return true;
             }
 
@@ -71,37 +74,45 @@ namespace System.Web.UI {
         }
 
         /// <internalonly/>
-        public override int GetHashCode() {
+        public override int GetHashCode()
+        {
             return _filterable.GetHashCode();
         }
 
         /// <internalonly/>
-        public override bool IsDefaultAttribute() {
+        public override bool IsDefaultAttribute()
+        {
             return this.Equals(Default);
         }
 
-        public static bool IsObjectFilterable(Object instance) {
+        public static bool IsObjectFilterable(Object instance)
+        {
             if (instance == null)
                 throw new ArgumentNullException("instance");
 
             return IsTypeFilterable(instance.GetType());
         }
 
-        public static bool IsPropertyFilterable(PropertyDescriptor propertyDescriptor) {
-            FilterableAttribute filterableAttr = (FilterableAttribute)propertyDescriptor.Attributes[typeof(FilterableAttribute)];
-            if (filterableAttr != null) {
+        public static bool IsPropertyFilterable(PropertyDescriptor propertyDescriptor)
+        {
+            FilterableAttribute filterableAttr = (FilterableAttribute)
+                propertyDescriptor.Attributes[typeof(FilterableAttribute)];
+            if (filterableAttr != null)
+            {
                 return filterableAttr.Filterable;
             }
 
             return true;
         }
 
-        public static bool IsTypeFilterable(Type type) {
+        public static bool IsTypeFilterable(Type type)
+        {
             if (type == null)
                 throw new ArgumentNullException("type");
 
             object result = _filterableTypes[type];
-            if (result != null) {
+            if (result != null)
+            {
                 return (bool)result;
             }
 
@@ -114,4 +125,3 @@ namespace System.Web.UI {
         }
     }
 }
-

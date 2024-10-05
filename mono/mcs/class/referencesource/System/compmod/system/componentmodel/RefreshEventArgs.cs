@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // <copyright file="RefreshEventArgs.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel {
-
+namespace System.ComponentModel
+{
     using System;
     using System.Diagnostics;
     using System.Security.Permissions;
@@ -18,10 +18,10 @@ namespace System.ComponentModel {
     ///    </para>
     /// </devdoc>
     [HostProtection(SharedState = true)]
-    public class RefreshEventArgs : EventArgs {
-
+    public class RefreshEventArgs : EventArgs
+    {
         private object componentChanged;
-        private Type   typeChanged;
+        private Type typeChanged;
 
         /// <devdoc>
         ///    <para>
@@ -30,7 +30,8 @@ namespace System.ComponentModel {
         ///       changed.
         ///    </para>
         /// </devdoc>
-        public RefreshEventArgs(object componentChanged) {
+        public RefreshEventArgs(object componentChanged)
+        {
             this.componentChanged = componentChanged;
             this.typeChanged = componentChanged.GetType();
         }
@@ -42,7 +43,8 @@ namespace System.ComponentModel {
         ///       of component that has changed.
         ///    </para>
         /// </devdoc>
-        public RefreshEventArgs(Type typeChanged) {
+        public RefreshEventArgs(Type typeChanged)
+        {
             this.typeChanged = typeChanged;
         }
 
@@ -53,10 +55,9 @@ namespace System.ComponentModel {
         ///       extenders.
         ///    </para>
         /// </devdoc>
-        public object ComponentChanged {
-            get {
-                return componentChanged;
-            }
+        public object ComponentChanged
+        {
+            get { return componentChanged; }
         }
 
         /// <devdoc>
@@ -64,11 +65,9 @@ namespace System.ComponentModel {
         ///       Gets the type that has changed its properties, or events.
         ///    </para>
         /// </devdoc>
-        public Type TypeChanged {
-            get {
-                return typeChanged;
-            }
+        public Type TypeChanged
+        {
+            get { return typeChanged; }
         }
     }
 }
-

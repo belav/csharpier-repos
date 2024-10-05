@@ -13,7 +13,11 @@ namespace System.Tests
         public static void Ctor_Empty()
         {
             var exception = new PlatformNotSupportedException();
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_PLATFORMNOTSUPPORTED, validateMessage: false);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_PLATFORMNOTSUPPORTED,
+                validateMessage: false
+            );
         }
 
         [Fact]
@@ -21,7 +25,11 @@ namespace System.Tests
         {
             string message = "platform not supported";
             var exception = new PlatformNotSupportedException(message);
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_PLATFORMNOTSUPPORTED, message: message);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_PLATFORMNOTSUPPORTED,
+                message: message
+            );
         }
 
         [Fact]
@@ -30,7 +38,12 @@ namespace System.Tests
             string message = "platform not supported";
             var innerException = new Exception("Inner exception");
             var exception = new PlatformNotSupportedException(message, innerException);
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_PLATFORMNOTSUPPORTED, innerException: innerException, message: message);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_PLATFORMNOTSUPPORTED,
+                innerException: innerException,
+                message: message
+            );
         }
     }
 }

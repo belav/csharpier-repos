@@ -8,6 +8,6 @@ namespace System.Data
         Add = 1,
         Ignore = 2,
         Error = 3,
-        AddWithKey = 4
+        AddWithKey = 4,
     }
 }

@@ -21,7 +21,9 @@ internal sealed class GrpcXmlCommentsOperationFilter : IOperationFilter
 
     public void Apply(OpenApiOperation operation, OperationFilterContext context)
     {
-        var grpcMetadata = context.ApiDescription.ActionDescriptor.EndpointMetadata.OfType<GrpcMethodMetadata>().FirstOrDefault();
+        var grpcMetadata = context
+            .ApiDescription.ActionDescriptor.EndpointMetadata.OfType<GrpcMethodMetadata>()
+            .FirstOrDefault();
         if (grpcMetadata == null)
         {
             return;
@@ -63,14 +65,18 @@ internal sealed class GrpcXmlCommentsOperationFilter : IOperationFilter
     private void ApplyServiceTags(OpenApiOperation operation, Type controllerType)
     {
         var typeMemberName = XmlCommentsNodeNameHelper.GetMemberNameForType(controllerType);
-        var responseNodes = _xmlNavigator.Select($"/doc/members/member[@name='{typeMemberName}']/response");
+        var responseNodes = _xmlNavigator.Select(
+            $"/doc/members/member[@name='{typeMemberName}']/response"
+        );
         ApplyResponseTags(operation, responseNodes);
     }
 
     private bool TryApplyMethodTags(OpenApiOperation operation, MethodInfo methodInfo)
     {
         var methodMemberName = XmlCommentsNodeNameHelper.GetMemberNameForMethod(methodInfo);
-        var methodNode = _xmlNavigator.SelectSingleNode($"/doc/members/member[@name='{methodMemberName}']");
+        var methodNode = _xmlNavigator.SelectSingleNode(
+            $"/doc/members/member[@name='{methodMemberName}']"
+        );
 
         if (methodNode == null)
         {
@@ -95,7 +101,10 @@ internal sealed class GrpcXmlCommentsOperationFilter : IOperationFilter
         return true;
     }
 
-    private static void ApplyResponseTags(OpenApiOperation operation, XPathNodeIterator responseNodes)
+    private static void ApplyResponseTags(
+        OpenApiOperation operation,
+        XPathNodeIterator responseNodes
+    )
     {
         while (responseNodes.MoveNext())
         {

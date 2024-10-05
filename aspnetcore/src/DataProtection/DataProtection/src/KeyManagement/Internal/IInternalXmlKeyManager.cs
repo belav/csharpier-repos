@@ -18,7 +18,12 @@ public interface IInternalXmlKeyManager
     /// This API supports infrastructure and is not intended to be used
     /// directly from your code. This API may change or be removed in future releases.
     /// </summary>
-    IKey CreateNewKey(Guid keyId, DateTimeOffset creationDate, DateTimeOffset activationDate, DateTimeOffset expirationDate);
+    IKey CreateNewKey(
+        Guid keyId,
+        DateTimeOffset creationDate,
+        DateTimeOffset activationDate,
+        DateTimeOffset expirationDate
+    );
 
     /// <summary>
     /// This API supports infrastructure and is not intended to be used

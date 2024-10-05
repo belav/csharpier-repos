@@ -75,13 +75,15 @@ namespace RabbitMQ.Client.Events
 
         ///<summary>Constructor that fills the event's properties from
         ///its arguments.</summary>
-        public BasicDeliverEventArgs(string consumerTag,
-                                     ulong deliveryTag,
-                                     bool redelivered,
-                                     string exchange,
-                                     string routingKey,
-                                     IBasicProperties properties,
-                                     byte[] body)
+        public BasicDeliverEventArgs(
+            string consumerTag,
+            ulong deliveryTag,
+            bool redelivered,
+            string exchange,
+            string routingKey,
+            IBasicProperties properties,
+            byte[] body
+        )
         {
             m_consumerTag = consumerTag;
             m_deliveryTag = deliveryTag;

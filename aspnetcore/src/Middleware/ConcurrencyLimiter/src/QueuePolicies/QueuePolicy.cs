@@ -9,7 +9,5 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter;
 internal sealed class QueuePolicy : BasePolicy
 {
     public QueuePolicy(IOptions<QueuePolicyOptions> options)
-        : base(options, QueueProcessingOrder.OldestFirst)
-    {
-    }
+        : base(options, QueueProcessingOrder.OldestFirst) { }
 }

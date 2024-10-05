@@ -11,9 +11,20 @@ namespace Microsoft.Extensions.Internal;
 
 internal readonly struct AwaitableInfo
 {
-    private const BindingFlags Everything = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance;
-    private static readonly MethodInfo INotifyCompletion_OnCompleted = typeof(INotifyCompletion).GetMethod(nameof(INotifyCompletion.OnCompleted), Everything, new[] { typeof(Action) })!;
-    private static readonly MethodInfo ICriticalNotifyCompletion_UnsafeOnCompleted = typeof(ICriticalNotifyCompletion).GetMethod(nameof(ICriticalNotifyCompletion.UnsafeOnCompleted), Everything, new[] { typeof(Action) })!;
+    private const BindingFlags Everything =
+        BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance;
+    private static readonly MethodInfo INotifyCompletion_OnCompleted =
+        typeof(INotifyCompletion).GetMethod(
+            nameof(INotifyCompletion.OnCompleted),
+            Everything,
+            new[] { typeof(Action) }
+        )!;
+    private static readonly MethodInfo ICriticalNotifyCompletion_UnsafeOnCompleted =
+        typeof(ICriticalNotifyCompletion).GetMethod(
+            nameof(ICriticalNotifyCompletion.UnsafeOnCompleted),
+            Everything,
+            new[] { typeof(Action) }
+        )!;
 
     public Type AwaiterType { get; }
     public PropertyInfo AwaiterIsCompletedProperty { get; }
@@ -30,7 +41,8 @@ internal readonly struct AwaitableInfo
         MethodInfo awaiterOnCompletedMethod,
         MethodInfo? awaiterUnsafeOnCompletedMethod,
         Type resultType,
-        MethodInfo getAwaiterMethod)
+        MethodInfo getAwaiterMethod
+    )
     {
         AwaiterType = awaiterType;
         AwaiterIsCompletedProperty = awaiterIsCompletedProperty;
@@ -41,11 +53,17 @@ internal readonly struct AwaitableInfo
         GetAwaiterMethod = getAwaiterMethod;
     }
 
-    [UnconditionalSuppressMessage("Trimmer", "IL2070", Justification = "Reflecting over the async Task types contract")]
-    [UnconditionalSuppressMessage("Trimmer", "IL2075", Justification = "Reflecting over the async Task types contract")]
-    public static bool IsTypeAwaitable(
-        Type type,
-        out AwaitableInfo awaitableInfo)
+    [UnconditionalSuppressMessage(
+        "Trimmer",
+        "IL2070",
+        Justification = "Reflecting over the async Task types contract"
+    )]
+    [UnconditionalSuppressMessage(
+        "Trimmer",
+        "IL2075",
+        Justification = "Reflecting over the async Task types contract"
+    )]
+    public static bool IsTypeAwaitable(Type type, out AwaitableInfo awaitableInfo)
     {
         // Based on Roslyn code: http://source.roslyn.io/#Microsoft.CodeAnalysis.Workspaces/Shared/Extensions/ISymbolExtensions.cs,db4d48ba694b9347
 
@@ -61,7 +79,14 @@ internal readonly struct AwaitableInfo
         var awaiterType = getAwaiterMethod.ReturnType;
 
         // Awaiter must have property matching "bool IsCompleted { get; }"
-        var isCompletedProperty = awaiterType.GetProperty("IsCompleted", Everything, binder: null, returnType: typeof(bool), types: Type.EmptyTypes, modifiers: null);
+        var isCompletedProperty = awaiterType.GetProperty(
+            "IsCompleted",
+            Everything,
+            binder: null,
+            returnType: typeof(bool),
+            types: Type.EmptyTypes,
+            modifiers: null
+        );
         if (isCompletedProperty is null)
         {
             awaitableInfo = default(AwaitableInfo);
@@ -80,7 +105,8 @@ internal readonly struct AwaitableInfo
         var onCompletedMethod = INotifyCompletion_OnCompleted;
 
         // Awaiter optionally implements ICriticalNotifyCompletion
-        var implementsICriticalNotifyCompletion = typeof(ICriticalNotifyCompletion).IsAssignableFrom(awaiterType);
+        var implementsICriticalNotifyCompletion =
+            typeof(ICriticalNotifyCompletion).IsAssignableFrom(awaiterType);
         MethodInfo? unsafeOnCompletedMethod = null;
         if (implementsICriticalNotifyCompletion)
         {
@@ -104,7 +130,8 @@ internal readonly struct AwaitableInfo
             onCompletedMethod,
             unsafeOnCompletedMethod,
             getResultMethod.ReturnType,
-            getAwaiterMethod);
+            getAwaiterMethod
+        );
         return true;
     }
 }

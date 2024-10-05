@@ -21,8 +21,25 @@ namespace Microsoft.CodeAnalysis.QuickInfo
 {
     internal static class QuickInfoUtilities
     {
-        public static Task<QuickInfoItem> CreateQuickInfoItemAsync(SolutionServices services, SemanticModel semanticModel, TextSpan span, ImmutableArray<ISymbol> symbols, SymbolDescriptionOptions options, CancellationToken cancellationToken)
-            => CreateQuickInfoItemAsync(services, semanticModel, span, symbols, supportedPlatforms: null, showAwaitReturn: false, flowState: NullableFlowState.None, options, cancellationToken);
+        public static Task<QuickInfoItem> CreateQuickInfoItemAsync(
+            SolutionServices services,
+            SemanticModel semanticModel,
+            TextSpan span,
+            ImmutableArray<ISymbol> symbols,
+            SymbolDescriptionOptions options,
+            CancellationToken cancellationToken
+        ) =>
+            CreateQuickInfoItemAsync(
+                services,
+                semanticModel,
+                span,
+                symbols,
+                supportedPlatforms: null,
+                showAwaitReturn: false,
+                flowState: NullableFlowState.None,
+                options,
+                cancellationToken
+            );
 
         public static async Task<QuickInfoItem> CreateQuickInfoItemAsync(
             SolutionServices services,
@@ -33,10 +50,21 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             bool showAwaitReturn,
             NullableFlowState flowState,
             SymbolDescriptionOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var descriptionService = services.GetRequiredLanguageService<ISymbolDisplayService>(semanticModel.Language);
-            var groups = await descriptionService.ToDescriptionGroupsAsync(semanticModel, span.Start, symbols, options, cancellationToken).ConfigureAwait(false);
+            var descriptionService = services.GetRequiredLanguageService<ISymbolDisplayService>(
+                semanticModel.Language
+            );
+            var groups = await descriptionService
+                .ToDescriptionGroupsAsync(
+                    semanticModel,
+                    span.Start,
+                    symbols,
+                    options,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             using var _1 = ArrayBuilder<QuickInfoSection>.GetInstance(out var sections);
 
@@ -52,51 +80,89 @@ namespace Microsoft.CodeAnalysis.QuickInfo
                     return QuickInfoItem.Create(span, sections: sections.ToImmutable());
                 }
 
-                if (TryGetGroupText(SymbolDescriptionGroups.MainDescription, out var mainDescriptionTaggedParts))
+                if (
+                    TryGetGroupText(
+                        SymbolDescriptionGroups.MainDescription,
+                        out var mainDescriptionTaggedParts
+                    )
+                )
                 {
                     // We'll take the existing message and wrap it with a message saying this was returned from the task.
                     var defaultSymbol = "{0}";
-                    var symbolIndex = FeaturesResources.Awaited_task_returns_0.IndexOf(defaultSymbol);
+                    var symbolIndex = FeaturesResources.Awaited_task_returns_0.IndexOf(
+                        defaultSymbol
+                    );
 
                     var builder = ImmutableArray.CreateBuilder<TaggedText>();
                     builder.AddText(FeaturesResources.Awaited_task_returns_0[..symbolIndex]);
                     builder.AddRange(mainDescriptionTaggedParts);
-                    builder.AddText(FeaturesResources.Awaited_task_returns_0[(symbolIndex + defaultSymbol.Length)..]);
+                    builder.AddText(
+                        FeaturesResources.Awaited_task_returns_0[
+                            (symbolIndex + defaultSymbol.Length)..
+                        ]
+                    );
 
                     AddSection(QuickInfoSectionKinds.Description, builder.ToImmutable());
                 }
             }
-            else if (TryGetGroupText(SymbolDescriptionGroups.MainDescription, out var mainDescriptionTaggedParts))
+            else if (
+                TryGetGroupText(
+                    SymbolDescriptionGroups.MainDescription,
+                    out var mainDescriptionTaggedParts
+                )
+            )
             {
                 AddSection(QuickInfoSectionKinds.Description, mainDescriptionTaggedParts);
             }
 
-            if (groups.TryGetValue(SymbolDescriptionGroups.Documentation, out var docParts) && !docParts.IsDefaultOrEmpty)
+            if (
+                groups.TryGetValue(SymbolDescriptionGroups.Documentation, out var docParts)
+                && !docParts.IsDefaultOrEmpty
+            )
                 AddSection(QuickInfoSectionKinds.DocumentationComments, docParts);
 
-            if (options.QuickInfoOptions.ShowRemarksInQuickInfo &&
-                groups.TryGetValue(SymbolDescriptionGroups.RemarksDocumentation, out var remarksDocumentation) &&
-                !remarksDocumentation.IsEmpty)
+            if (
+                options.QuickInfoOptions.ShowRemarksInQuickInfo
+                && groups.TryGetValue(
+                    SymbolDescriptionGroups.RemarksDocumentation,
+                    out var remarksDocumentation
+                )
+                && !remarksDocumentation.IsEmpty
+            )
             {
                 var builder = ImmutableArray.CreateBuilder<TaggedText>();
                 if (!docParts.IsDefaultOrEmpty)
                     builder.AddLineBreak();
 
                 builder.AddRange(remarksDocumentation);
-                AddSection(QuickInfoSectionKinds.RemarksDocumentationComments, builder.ToImmutable());
+                AddSection(
+                    QuickInfoSectionKinds.RemarksDocumentationComments,
+                    builder.ToImmutable()
+                );
             }
 
-            if (groups.TryGetValue(SymbolDescriptionGroups.ReturnsDocumentation, out var returnsDocumentation) &&
-                !returnsDocumentation.IsDefaultOrEmpty)
+            if (
+                groups.TryGetValue(
+                    SymbolDescriptionGroups.ReturnsDocumentation,
+                    out var returnsDocumentation
+                ) && !returnsDocumentation.IsDefaultOrEmpty
+            )
             {
                 var builder = ImmutableArray.CreateBuilder<TaggedText>();
                 builder.AddLineBreak();
                 builder.AddRange(returnsDocumentation);
-                AddSection(QuickInfoSectionKinds.ReturnsDocumentationComments, builder.ToImmutable());
+                AddSection(
+                    QuickInfoSectionKinds.ReturnsDocumentationComments,
+                    builder.ToImmutable()
+                );
             }
 
-            if (groups.TryGetValue(SymbolDescriptionGroups.ValueDocumentation, out var valueDocumentation) &&
-                !valueDocumentation.IsDefaultOrEmpty)
+            if (
+                groups.TryGetValue(
+                    SymbolDescriptionGroups.ValueDocumentation,
+                    out var valueDocumentation
+                ) && !valueDocumentation.IsDefaultOrEmpty
+            )
             {
                 var builder = ImmutableArray.CreateBuilder<TaggedText>();
                 builder.AddLineBreak();
@@ -104,7 +170,12 @@ namespace Microsoft.CodeAnalysis.QuickInfo
                 AddSection(QuickInfoSectionKinds.ValueDocumentationComments, builder.ToImmutable());
             }
 
-            if (TryGetGroupText(SymbolDescriptionGroups.TypeParameterMap, out var typeParameterMapText))
+            if (
+                TryGetGroupText(
+                    SymbolDescriptionGroups.TypeParameterMap,
+                    out var typeParameterMapText
+                )
+            )
             {
                 var builder = ImmutableArray.CreateBuilder<TaggedText>();
                 builder.AddLineBreak();
@@ -112,7 +183,9 @@ namespace Microsoft.CodeAnalysis.QuickInfo
                 AddSection(QuickInfoSectionKinds.TypeParameters, builder.ToImmutable());
             }
 
-            if (TryGetGroupText(SymbolDescriptionGroups.StructuralTypes, out var anonymousTypesText))
+            if (
+                TryGetGroupText(SymbolDescriptionGroups.StructuralTypes, out var anonymousTypesText)
+            )
             {
                 var builder = ImmutableArray.CreateBuilder<TaggedText>();
                 builder.AddLineBreak();
@@ -121,7 +194,12 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             }
 
             using var _ = ArrayBuilder<TaggedText>.GetInstance(out var usageTextBuilder);
-            if (TryGetGroupText(SymbolDescriptionGroups.AwaitableUsageText, out var awaitableUsageText))
+            if (
+                TryGetGroupText(
+                    SymbolDescriptionGroups.AwaitableUsageText,
+                    out var awaitableUsageText
+                )
+            )
                 usageTextBuilder.AddRange(awaitableUsageText);
 
             if (supportedPlatforms != null)
@@ -132,14 +210,23 @@ namespace Microsoft.CodeAnalysis.QuickInfo
 
             var nullableMessage = flowState switch
             {
-                NullableFlowState.MaybeNull => string.Format(FeaturesResources._0_may_be_null_here, symbol.Name),
-                NullableFlowState.NotNull => string.Format(FeaturesResources._0_is_not_null_here, symbol.Name),
-                _ => null
+                NullableFlowState.MaybeNull => string.Format(
+                    FeaturesResources._0_may_be_null_here,
+                    symbol.Name
+                ),
+                NullableFlowState.NotNull => string.Format(
+                    FeaturesResources._0_is_not_null_here,
+                    symbol.Name
+                ),
+                _ => null,
             };
 
             if (nullableMessage != null)
             {
-                AddSection(QuickInfoSectionKinds.NullabilityAnalysis, ImmutableArray.Create(new TaggedText(TextTags.Text, nullableMessage)));
+                AddSection(
+                    QuickInfoSectionKinds.NullabilityAnalysis,
+                    ImmutableArray.Create(new TaggedText(TextTags.Text, nullableMessage))
+                );
             }
 
             if (TryGetGroupText(SymbolDescriptionGroups.Exceptions, out var exceptionsText))
@@ -154,11 +241,13 @@ namespace Microsoft.CodeAnalysis.QuickInfo
 
             return QuickInfoItem.Create(span, tags, sections.ToImmutable());
 
-            bool TryGetGroupText(SymbolDescriptionGroups group, out ImmutableArray<TaggedText> taggedParts)
-                => groups.TryGetValue(group, out taggedParts) && !taggedParts.IsDefaultOrEmpty;
+            bool TryGetGroupText(
+                SymbolDescriptionGroups group,
+                out ImmutableArray<TaggedText> taggedParts
+            ) => groups.TryGetValue(group, out taggedParts) && !taggedParts.IsDefaultOrEmpty;
 
-            void AddSection(string kind, ImmutableArray<TaggedText> taggedParts)
-                => sections.Add(QuickInfoSection.Create(kind, taggedParts));
+            void AddSection(string kind, ImmutableArray<TaggedText> taggedParts) =>
+                sections.Add(QuickInfoSection.Create(kind, taggedParts));
         }
     }
 }

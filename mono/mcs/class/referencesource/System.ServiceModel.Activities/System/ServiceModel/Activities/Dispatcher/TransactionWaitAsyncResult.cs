@@ -5,8 +5,8 @@
 namespace System.ServiceModel.Activities.Dispatcher
 {
     using System.Runtime;
-    using System.Transactions;
     using System.Threading;
+    using System.Transactions;
 
     sealed class TransactionWaitAsyncResult : AsyncResult
     {
@@ -18,7 +18,13 @@ namespace System.ServiceModel.Activities.Dispatcher
         [Fx.Tag.SynchronizationObject(Blocking = false)]
         object thisLock;
 
-        internal TransactionWaitAsyncResult(Transaction transaction, PersistenceContext persistenceContext, TimeSpan timeout, AsyncCallback callback, object state)
+        internal TransactionWaitAsyncResult(
+            Transaction transaction,
+            PersistenceContext persistenceContext,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
             : base(callback, state)
         {
             bool completeSelf = false;
@@ -31,7 +37,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                 // We want an "blocking" dependent transaction because we want to ensure the transaction
                 // does not commit successfully while we are still waiting in the queue for the PC transaction
                 // lock.
-                this.dependentTransaction = transaction.DependentClone(DependentCloneOption.BlockCommitUntilComplete);
+                this.dependentTransaction = transaction.DependentClone(
+                    DependentCloneOption.BlockCommitUntilComplete
+                );
             }
             else
             {
@@ -45,7 +53,7 @@ namespace System.ServiceModel.Activities.Dispatcher
             {
                 if (persistenceContext.QueueForTransactionLock(transaction, this))
                 {
-                    // If we were given a transaction in our constructor, we need to 
+                    // If we were given a transaction in our constructor, we need to
                     // create a volatile enlistment on it and complete the
                     // dependent clone that we created. This will allow the transaction to commit
                     // successfully when the time comes.
@@ -80,18 +88,12 @@ namespace System.ServiceModel.Activities.Dispatcher
 
         internal Transaction Transaction
         {
-            get
-            {
-                return this.dependentTransaction;
-            }
+            get { return this.dependentTransaction; }
         }
 
         object ThisLock
         {
-            get
-            {
-                return this.thisLock;
-            }
+            get { return this.thisLock; }
         }
 
         internal static Action<object> TimeoutCallbackAction
@@ -124,7 +126,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                 // If we have a dependent transaction, complete it now.
                 if (this.dependentTransaction != null)
                 {
-                    // If we were given a transaction in our constructor, we need to 
+                    // If we were given a transaction in our constructor, we need to
                     // create a volatile enlistment on it and complete the
                     // dependent clone that we created. This will allow the transaction to commit
                     // successfully when the time comes.
@@ -150,7 +152,10 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     if (!PersistenceContext.Enlistments.TryGetValue(key, out enlistment))
                     {
-                        enlistment = new PersistenceContextEnlistment(this.PersistenceContext, transactionToEnlist);
+                        enlistment = new PersistenceContextEnlistment(
+                            this.PersistenceContext,
+                            transactionToEnlist
+                        );
                         transactionToEnlist.EnlistVolatile(enlistment, EnlistmentOptions.None);
                         // We don't save of the Enlistment object returned from EnlistVolatile. We don't need
                         // it here. When our PersistenceContextEnlistment object gets notified on Prepare,
@@ -178,7 +183,10 @@ namespace System.ServiceModel.Activities.Dispatcher
         static void TimeoutCallback(object state)
         {
             TransactionWaitAsyncResult thisPtr = (TransactionWaitAsyncResult)state;
-            Fx.Assert(null != thisPtr, "TransactionWaitAsyncResult.TimeoutCallback called with an object that is not a TransactionWaitAsyncResult.");
+            Fx.Assert(
+                null != thisPtr,
+                "TransactionWaitAsyncResult.TimeoutCallback called with an object that is not a TransactionWaitAsyncResult."
+            );
 
             // As a general policy, we are not going to rollback the transaction because of this timeout. Instead, we are letting
             // the caller make the decision to rollback or not based on exception we are throwing. It could be that they could

@@ -39,35 +39,54 @@ public static class TestableAssembly
     public static readonly Assembly ThisAssembly = typeof(TestableAssembly).GetTypeInfo().Assembly;
     public static readonly string ThisAssemblyName = ThisAssembly.GetName().Name;
 
-    private static readonly TestOutputDirectoryAttribute ThisOutputDirectoryAttribute =
-        ThisAssembly.GetCustomAttributes().OfType<TestOutputDirectoryAttribute>().FirstOrDefault();
+    private static readonly TestOutputDirectoryAttribute ThisOutputDirectoryAttribute = ThisAssembly
+        .GetCustomAttributes()
+        .OfType<TestOutputDirectoryAttribute>()
+        .FirstOrDefault();
     public static readonly string BaseDirectory = ThisOutputDirectoryAttribute.BaseDirectory;
     public static readonly string TFM = ThisOutputDirectoryAttribute.TargetFramework;
 
     public const string TestClassName = "MyTestClass";
     public const string TestMethodName = "MyTestMethod";
 
-    public static Assembly Create(Type fixtureType, string logDirectory = null, bool failTestCase = false)
+    public static Assembly Create(
+        Type fixtureType,
+        string logDirectory = null,
+        bool failTestCase = false
+    )
     {
-        var frameworkConstructor = typeof(TestFrameworkAttribute)
-            .GetConstructor(new[] { typeof(string), typeof(string) });
+        var frameworkConstructor = typeof(TestFrameworkAttribute).GetConstructor(
+            new[] { typeof(string), typeof(string) }
+        );
         var frameworkBuilder = new CustomAttributeBuilder(
             frameworkConstructor,
-            new[] { "Microsoft.AspNetCore.InternalTesting.AspNetTestFramework", "Microsoft.AspNetCore.InternalTesting" });
+            new[]
+            {
+                "Microsoft.AspNetCore.InternalTesting.AspNetTestFramework",
+                "Microsoft.AspNetCore.InternalTesting",
+            }
+        );
 
-        var fixtureConstructor = typeof(AssemblyFixtureAttribute).GetConstructor(new[] { typeof(Type) });
+        var fixtureConstructor = typeof(AssemblyFixtureAttribute).GetConstructor(
+            new[] { typeof(Type) }
+        );
         var fixtureBuilder = new CustomAttributeBuilder(fixtureConstructor, new[] { fixtureType });
 
         var outputConstructor = typeof(TestOutputDirectoryAttribute).GetConstructor(
-            new[] { typeof(string), typeof(string), typeof(string) });
-        var outputBuilder = new CustomAttributeBuilder(outputConstructor, new[] { "false", TFM, logDirectory });
+            new[] { typeof(string), typeof(string), typeof(string) }
+        );
+        var outputBuilder = new CustomAttributeBuilder(
+            outputConstructor,
+            new[] { "false", TFM, logDirectory }
+        );
 
         var testAssemblyName = $"Test{Guid.NewGuid():n}";
         var assemblyName = new AssemblyName(testAssemblyName);
         var assembly = AssemblyBuilder.DefineDynamicAssembly(
             assemblyName,
             AssemblyBuilderAccess.Run,
-            new[] { frameworkBuilder, fixtureBuilder, outputBuilder });
+            new[] { frameworkBuilder, fixtureBuilder, outputBuilder }
+        );
 
         var module = assembly.DefineDynamicModule(testAssemblyName);
         var type = module.DefineType(TestClassName, TypeAttributes.Public);

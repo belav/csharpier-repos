@@ -17,7 +17,8 @@ namespace Templates.Test;
 
 public class BaselineTest : LoggedTest
 {
-    private static readonly string BaselineDefinitionFileResourceName = "Templates.Tests.template-baselines.json";
+    private static readonly string BaselineDefinitionFileResourceName =
+        "Templates.Tests.template-baselines.json";
 
     public BaselineTest(ProjectFactoryFixture projectFactory)
     {
@@ -30,7 +31,11 @@ public class BaselineTest : LoggedTest
     {
         get
         {
-            using (var stream = typeof(BaselineTest).Assembly.GetManifestResourceStream(BaselineDefinitionFileResourceName))
+            using (
+                var stream = typeof(BaselineTest).Assembly.GetManifestResourceStream(
+                    BaselineDefinitionFileResourceName
+                )
+            )
             {
                 using (var jsonReader = new JsonTextReader(new StreamReader(stream)))
                 {
@@ -42,7 +47,10 @@ public class BaselineTest : LoggedTest
                         {
                             data.Add(
                                 (string)scenarioName.Value["Arguments"],
-                                ((JArray)scenarioName.Value["Files"]).Select(s => (string)s).ToArray());
+                                ((JArray)scenarioName.Value["Files"])
+                                    .Select(s => (string)s)
+                                    .ToArray()
+                            );
                         }
                     }
 
@@ -70,47 +78,67 @@ public class BaselineTest : LoggedTest
     // and that the namespace declarations in the generated .cs files start with the project name
     [Theory]
     [MemberData(nameof(TemplateBaselines))]
-    public async Task Template_Produces_The_Right_Set_Of_FilesAsync(string arguments, string[] expectedFiles)
+    public async Task Template_Produces_The_Right_Set_Of_FilesAsync(
+        string arguments,
+        string[] expectedFiles
+    )
     {
         Project = await ProjectFactory.CreateProject(Output);
         await Project.RunDotNetNewRawAsync(arguments);
 
-        expectedFiles = expectedFiles.Select(f => f.Replace("{ProjectName}", Project.ProjectName)).ToArray();
+        expectedFiles = expectedFiles
+            .Select(f => f.Replace("{ProjectName}", Project.ProjectName))
+            .ToArray();
 
         foreach (var file in expectedFiles)
         {
             AssertFileExists(Project.TemplateOutputDir, file, shouldExist: true);
         }
 
-        var filesInFolder = Directory.EnumerateFiles(Project.TemplateOutputDir, "*", SearchOption.AllDirectories).ToArray();
+        var filesInFolder = Directory
+            .EnumerateFiles(Project.TemplateOutputDir, "*", SearchOption.AllDirectories)
+            .ToArray();
         foreach (var file in filesInFolder)
         {
-            var relativePath = file.Replace(Project.TemplateOutputDir, "").Replace("\\", "/").Trim('/');
-            if (relativePath.EndsWith(".csproj", StringComparison.Ordinal) ||
-                relativePath.EndsWith(".fsproj", StringComparison.Ordinal) ||
-                relativePath.EndsWith(".props", StringComparison.Ordinal) ||
-                relativePath.EndsWith(".sln", StringComparison.Ordinal) ||
-                relativePath.EndsWith(".targets", StringComparison.Ordinal) ||
-                relativePath.StartsWith("bin/", StringComparison.Ordinal) ||
-                relativePath.StartsWith("obj/", StringComparison.Ordinal) ||
-                relativePath.Contains("/bin/", StringComparison.Ordinal) ||
-                relativePath.Contains("/obj/", StringComparison.Ordinal))
+            var relativePath = file.Replace(Project.TemplateOutputDir, "")
+                .Replace("\\", "/")
+                .Trim('/');
+            if (
+                relativePath.EndsWith(".csproj", StringComparison.Ordinal)
+                || relativePath.EndsWith(".fsproj", StringComparison.Ordinal)
+                || relativePath.EndsWith(".props", StringComparison.Ordinal)
+                || relativePath.EndsWith(".sln", StringComparison.Ordinal)
+                || relativePath.EndsWith(".targets", StringComparison.Ordinal)
+                || relativePath.StartsWith("bin/", StringComparison.Ordinal)
+                || relativePath.StartsWith("obj/", StringComparison.Ordinal)
+                || relativePath.Contains("/bin/", StringComparison.Ordinal)
+                || relativePath.Contains("/obj/", StringComparison.Ordinal)
+            )
             {
                 continue;
             }
             Assert.Contains(relativePath, expectedFiles);
 
-            if (relativePath.EndsWith(".cs", StringComparison.Ordinal) && !relativePath.EndsWith("Extensions.cs", StringComparison.Ordinal))
+            if (
+                relativePath.EndsWith(".cs", StringComparison.Ordinal)
+                && !relativePath.EndsWith("Extensions.cs", StringComparison.Ordinal)
+            )
             {
                 var namespaceDeclarationPrefix = "namespace ";
                 var namespaceDeclaration = File.ReadLines(file)
-                    .SingleOrDefault(line => line.StartsWith(namespaceDeclarationPrefix, StringComparison.Ordinal))
+                    .SingleOrDefault(line =>
+                        line.StartsWith(namespaceDeclarationPrefix, StringComparison.Ordinal)
+                    )
                     ?.Substring(namespaceDeclarationPrefix.Length);
 
                 // nullable because Program.cs with top-level statements doesn't have a namespace declaration
                 if (namespaceDeclaration is not null)
                 {
-                    Assert.StartsWith(Project.ProjectName, namespaceDeclaration, StringComparison.Ordinal);
+                    Assert.StartsWith(
+                        Project.ProjectName,
+                        namespaceDeclaration,
+                        StringComparison.Ordinal
+                    );
                 }
             }
         }

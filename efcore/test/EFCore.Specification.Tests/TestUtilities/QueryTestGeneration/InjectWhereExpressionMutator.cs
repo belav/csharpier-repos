@@ -8,9 +8,7 @@ public class InjectWhereExpressionMutator : ExpressionMutator
     private ExpressionFinder _expressionFinder;
 
     public InjectWhereExpressionMutator(DbContext context)
-        : base(context)
-    {
-    }
+        : base(context) { }
 
     public override bool IsValid(Expression expression)
     {
@@ -28,7 +26,10 @@ public class InjectWhereExpressionMutator : ExpressionMutator
         var typeArgument = expressionToInject.Type.GetGenericArguments()[0];
         var prm = Expression.Parameter(typeArgument, "prm");
 
-        var candidateExpressions = new List<Expression> { Expression.Constant(random.Choose(new List<bool> { true, false })) };
+        var candidateExpressions = new List<Expression>
+        {
+            Expression.Constant(random.Choose(new List<bool> { true, false })),
+        };
 
         if (typeArgument == typeof(bool))
         {
@@ -45,16 +46,25 @@ public class InjectWhereExpressionMutator : ExpressionMutator
         }
 
         // compare two properties
-        var propertiesOfTheSameType = properties.GroupBy(p => p.PropertyType).Where(g => g.Count() > 1).ToList();
+        var propertiesOfTheSameType = properties
+            .GroupBy(p => p.PropertyType)
+            .Where(g => g.Count() > 1)
+            .ToList();
         if (propertiesOfTheSameType.Any())
         {
             var propertyGroup = random.Choose(propertiesOfTheSameType).ToList();
 
             var firstProperty = random.Choose(propertyGroup);
-            var secondProperty = random.Choose(propertyGroup.Where(p => p != firstProperty).ToList());
+            var secondProperty = random.Choose(
+                propertyGroup.Where(p => p != firstProperty).ToList()
+            );
 
             candidateExpressions.Add(
-                Expression.NotEqual(Expression.Property(prm, firstProperty), Expression.Property(prm, secondProperty)));
+                Expression.NotEqual(
+                    Expression.Property(prm, firstProperty),
+                    Expression.Property(prm, secondProperty)
+                )
+            );
         }
 
         // compare property to constant
@@ -64,7 +74,9 @@ public class InjectWhereExpressionMutator : ExpressionMutator
             candidateExpressions.Add(
                 Expression.NotEqual(
                     Expression.Property(prm, property),
-                    Expression.Default(property.PropertyType)));
+                    Expression.Default(property.PropertyType)
+                )
+            );
         }
 
         if (IsEntityType(typeArgument))
@@ -77,13 +89,16 @@ public class InjectWhereExpressionMutator : ExpressionMutator
             if (collectionNavigation != null)
             {
                 var any = EnumerableMethods.AnyWithoutPredicate.MakeGenericMethod(
-                    collectionNavigation.ForeignKey.DeclaringEntityType.ClrType);
+                    collectionNavigation.ForeignKey.DeclaringEntityType.ClrType
+                );
 
                 // collection.Any()
                 candidateExpressions.Add(
                     Expression.Call(
                         any,
-                        Expression.Property(prm, collectionNavigation.PropertyInfo)));
+                        Expression.Property(prm, collectionNavigation.PropertyInfo)
+                    )
+                );
             }
         }
 
@@ -97,7 +112,10 @@ public class InjectWhereExpressionMutator : ExpressionMutator
 
         var where = QueryableMethods.Where.MakeGenericMethod(typeArgument);
         var lambda = Expression.Lambda(lambdaBody, prm);
-        var injector = new ExpressionInjector(expressionToInject, e => Expression.Call(where, e, lambda));
+        var injector = new ExpressionInjector(
+            expressionToInject,
+            e => Expression.Call(where, e, lambda)
+        );
 
         return injector.Visit(expression);
     }
@@ -115,13 +133,17 @@ public class InjectWhereExpressionMutator : ExpressionMutator
 
         public override Expression Visit(Expression expression)
         {
-            if (expression is MethodCallExpression { Method.Name: "ThenInclude" or "ThenBy" or "ThenByDescending" or "Skip" or "Take" })
+            if (
+                expression is MethodCallExpression
+                {
+                    Method.Name: "ThenInclude" or "ThenBy" or "ThenByDescending" or "Skip" or "Take"
+                }
+            )
             {
                 return expression;
             }
 
-            if (expression != null
-                && IsQueryableResult(expression))
+            if (expression != null && IsQueryableResult(expression))
             {
                 FoundExpressions.Add(expression);
             }

@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,49 +29,46 @@
 
 
 using System;
-using System.Text;
+using System.Collections.Specialized;
 using System.Configuration;
 using System.Configuration.Provider;
-using System.Collections.Specialized;
+using System.Text;
 using NUnit.Framework;
 
-namespace MonoTests.System.Configuration.Provider {
+namespace MonoTests.System.Configuration.Provider
+{
+    class TestProviderBase : ProviderBase { }
 
-	class TestProviderBase : ProviderBase {
-	}
+    [TestFixture]
+    public class ProviderBaseTest
+    {
+        [Test]
+        public void Properties()
+        {
+            /* simulate what should happen with the following <provider> line:
+               <provider name="FooProvider" description="Provider for foos" />
+             */
 
-	[TestFixture]
-	public class ProviderBaseTest {
+            NameValueCollection extra_attrs = new NameValueCollection();
+            extra_attrs.Add("description", "Provider for foos");
 
-		[Test]
-		public void Properties ()
-		{
-			/* simulate what should happen with the following <provider> line:
-			   <provider name="FooProvider" description="Provider for foos" />
-			 */
+            TestProviderBase test = new TestProviderBase();
 
-			NameValueCollection extra_attrs = new NameValueCollection();
-			extra_attrs.Add ("description", "Provider for foos");
+            test.Initialize("FooProvider", extra_attrs);
 
-			TestProviderBase test = new TestProviderBase ();
+            Assert.AreEqual("FooProvider", test.Name, "A1");
+            Assert.AreEqual("Provider for foos", test.Description, "A2");
 
-			test.Initialize ("FooProvider", extra_attrs);
+            /* simulate what should happen with the following <provider> line:
+               <provider name="FooProvider" /> */
 
-			Assert.AreEqual ("FooProvider", test.Name, "A1");
-			Assert.AreEqual ("Provider for foos", test.Description, "A2");
+            extra_attrs = new NameValueCollection();
+            test = new TestProviderBase();
 
-			/* simulate what should happen with the following <provider> line:
-			   <provider name="FooProvider" /> */
+            test.Initialize("FooProvider", extra_attrs);
 
-			extra_attrs = new NameValueCollection();
-			test = new TestProviderBase ();
-
-			test.Initialize ("FooProvider", extra_attrs);
-
-			Assert.AreEqual ("FooProvider", test.Name, "A3");
-			Assert.AreEqual ("FooProvider", test.Description, "A4");
-		}
-	}
-
+            Assert.AreEqual("FooProvider", test.Name, "A3");
+            Assert.AreEqual("FooProvider", test.Description, "A4");
+        }
+    }
 }
-

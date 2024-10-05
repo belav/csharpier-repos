@@ -8,11 +8,11 @@ namespace System
     {
         public UriTemplateTrieIntraNodeLocation locationWithin;
         public UriTemplateTrieNode node;
+
         public UriTemplateTrieLocation(UriTemplateTrieNode n, UriTemplateTrieIntraNodeLocation i)
         {
             this.node = n;
             this.locationWithin = i;
         }
     }
-
 }

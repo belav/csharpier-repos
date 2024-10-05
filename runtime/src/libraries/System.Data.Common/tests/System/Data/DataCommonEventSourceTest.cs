@@ -13,27 +13,35 @@ namespace System.Data.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void InvokeCodeThatShouldFirEvents_EnsureEventsFired()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                using var listener = new TestEventListener("System.Data.DataCommonEventSource", EventLevel.Verbose);
-                var events = new ConcurrentQueue<EventWrittenEventArgs>();
-                listener.RunWithCallback(events.Enqueue, () =>
+            RemoteExecutor
+                .Invoke(() =>
                 {
-                    var dt = new DataTable("Players");
-                    dt.Columns.Add(new DataColumn("Name", typeof(string)));
-                    dt.Columns.Add(new DataColumn("Weight", typeof(int)));
+                    using var listener = new TestEventListener(
+                        "System.Data.DataCommonEventSource",
+                        EventLevel.Verbose
+                    );
+                    var events = new ConcurrentQueue<EventWrittenEventArgs>();
+                    listener.RunWithCallback(
+                        events.Enqueue,
+                        () =>
+                        {
+                            var dt = new DataTable("Players");
+                            dt.Columns.Add(new DataColumn("Name", typeof(string)));
+                            dt.Columns.Add(new DataColumn("Weight", typeof(int)));
 
-                    var ds = new DataSet();
-                    ds.Tables.Add(dt);
+                            var ds = new DataSet();
+                            ds.Tables.Add(dt);
 
-                    dt.Rows.Add("John", 150);
-                    dt.Rows.Add("Jane", 120);
+                            dt.Rows.Add("John", 150);
+                            dt.Rows.Add("Jane", 120);
 
-                    DataRow[] results = dt.Select("Weight < 140");
-                    Assert.Equal(1, results.Length);
-                });
-                Assert.True(events.Count > 0);
-            }).Dispose();
+                            DataRow[] results = dt.Select("Weight < 140");
+                            Assert.Equal(1, results.Length);
+                        }
+                    );
+                    Assert.True(events.Count > 0);
+                })
+                .Dispose();
         }
     }
 }

@@ -15,9 +15,9 @@ namespace Microsoft.CodeAnalysis.Host
     internal partial class TemporaryStorageService
     {
         /// <summary>
-        /// Our own abstraction on top of memory map file so that we can have shared views over mmf files. 
+        /// Our own abstraction on top of memory map file so that we can have shared views over mmf files.
         /// Otherwise, each view has minimum size of 64K due to requirement forced by windows.
-        /// 
+        ///
         /// most of our view will have short lifetime, but there are cases where view might live a bit longer such as
         /// metadata dll shadow copy. shared view will help those cases.
         /// </summary>
@@ -34,7 +34,12 @@ namespace Microsoft.CodeAnalysis.Host
         /// Update: Dispose, Finalization, and Resource Management</see>. Additional notes regarding operating system
         /// behavior leveraged for efficiency are given in comments.</para>
         /// </remarks>
-        internal sealed class MemoryMappedInfo(ReferenceCountedDisposable<MemoryMappedFile> memoryMappedFile, string name, long offset, long size) : IDisposable
+        internal sealed class MemoryMappedInfo(
+            ReferenceCountedDisposable<MemoryMappedFile> memoryMappedFile,
+            string name,
+            long offset,
+            long size
+        ) : IDisposable
         {
             /// <summary>
             /// The memory mapped file.
@@ -44,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Host
             /// However, the operating system does not actually close the views which are in use until the file handles
             /// are closed as well, even if the file is disposed first.</para>
             /// </remarks>
-            private readonly ReferenceCountedDisposable<MemoryMappedFile> _memoryMappedFile = memoryMappedFile;
+            private readonly ReferenceCountedDisposable<MemoryMappedFile> _memoryMappedFile =
+                memoryMappedFile;
 
             /// <summary>
             /// A weak reference to a read-only view for the memory mapped file.
@@ -62,9 +68,14 @@ namespace Microsoft.CodeAnalysis.Host
             private ReferenceCountedDisposable<MemoryMappedViewAccessor>.WeakReference _weakReadAccessor;
 
             public MemoryMappedInfo(string name, long offset, long size)
-                : this(new ReferenceCountedDisposable<MemoryMappedFile>(MemoryMappedFile.OpenExisting(name)), name, offset, size)
-            {
-            }
+                : this(
+                    new ReferenceCountedDisposable<MemoryMappedFile>(
+                        MemoryMappedFile.OpenExisting(name)
+                    ),
+                    name,
+                    offset,
+                    size
+                ) { }
 
             /// <summary>
             /// The name of the memory mapped file.
@@ -100,13 +111,25 @@ namespace Microsoft.CodeAnalysis.Host
                         {
                             using var memoryMappedFile = info._memoryMappedFile.TryAddReference();
                             if (memoryMappedFile is null)
-                                throw new ObjectDisposedException(typeof(MemoryMappedInfo).FullName);
+                                throw new ObjectDisposedException(
+                                    typeof(MemoryMappedInfo).FullName
+                                );
 
-                            return memoryMappedFile.Target.CreateViewAccessor(info.Offset, info.Size, MemoryMappedFileAccess.Read);
+                            return memoryMappedFile.Target.CreateViewAccessor(
+                                info.Offset,
+                                info.Size,
+                                MemoryMappedFileAccess.Read
+                            );
                         },
-                        this);
-                    streamAccessor = new ReferenceCountedDisposable<MemoryMappedViewAccessor>(rawAccessor);
-                    _weakReadAccessor = new ReferenceCountedDisposable<MemoryMappedViewAccessor>.WeakReference(streamAccessor);
+                        this
+                    );
+                    streamAccessor = new ReferenceCountedDisposable<MemoryMappedViewAccessor>(
+                        rawAccessor
+                    );
+                    _weakReadAccessor =
+                        new ReferenceCountedDisposable<MemoryMappedViewAccessor>.WeakReference(
+                            streamAccessor
+                        );
                 }
 
                 Debug.Assert(streamAccessor.Target.CanRead);
@@ -126,9 +149,14 @@ namespace Microsoft.CodeAnalysis.Host
                         if (memoryMappedFile is null)
                             throw new ObjectDisposedException(typeof(MemoryMappedInfo).FullName);
 
-                        return memoryMappedFile.Target.CreateViewStream(info.Offset, info.Size, MemoryMappedFileAccess.Write);
+                        return memoryMappedFile.Target.CreateViewStream(
+                            info.Offset,
+                            info.Size,
+                            MemoryMappedFileAccess.Write
+                        );
                     },
-                    this);
+                    this
+                );
             }
 
             /// <summary>
@@ -148,7 +176,10 @@ namespace Microsoft.CodeAnalysis.Host
             /// <param name="function">The function to execute.</param>
             /// <param name="argument">The argument to pass to the function.</param>
             /// <returns>The value returned by <paramref name="function"/>.</returns>
-            private static T RunWithCompactingGCFallback<TArg, T>(Func<TArg, T> function, TArg argument)
+            private static T RunWithCompactingGCFallback<TArg, T>(
+                Func<TArg, T> function,
+                TArg argument
+            )
             {
                 try
                 {
@@ -167,7 +198,8 @@ namespace Microsoft.CodeAnalysis.Host
                 GC.GetTotalMemory(forceFullCollection: true);
 
                 // compact the LOH
-                GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
+                GCSettings.LargeObjectHeapCompactionMode =
+                    GCLargeObjectHeapCompactionMode.CompactOnce;
                 GC.Collect();
             }
 
@@ -178,13 +210,21 @@ namespace Microsoft.CodeAnalysis.Host
                 _memoryMappedFile.Dispose();
             }
 
-            private sealed unsafe class MemoryMappedViewUnmanagedMemoryStream : UnmanagedMemoryStream
+            private sealed unsafe class MemoryMappedViewUnmanagedMemoryStream
+                : UnmanagedMemoryStream
             {
                 private readonly ReferenceCountedDisposable<MemoryMappedViewAccessor> _accessor;
                 private byte* _start;
 
-                public MemoryMappedViewUnmanagedMemoryStream(ReferenceCountedDisposable<MemoryMappedViewAccessor> accessor, long length)
-                    : base((byte*)accessor.Target.SafeMemoryMappedViewHandle.DangerousGetHandle() + accessor.Target.PointerOffset, length)
+                public MemoryMappedViewUnmanagedMemoryStream(
+                    ReferenceCountedDisposable<MemoryMappedViewAccessor> accessor,
+                    long length
+                )
+                    : base(
+                        (byte*)accessor.Target.SafeMemoryMappedViewHandle.DangerousGetHandle()
+                            + accessor.Target.PointerOffset,
+                        length
+                    )
                 {
                     _accessor = accessor;
                     _start = this.PositionPointer;
@@ -205,8 +245,7 @@ namespace Microsoft.CodeAnalysis.Host
                 /// <summary>
                 /// Get underlying native memory directly.
                 /// </summary>
-                public IntPtr GetPointer()
-                    => (IntPtr)_start;
+                public IntPtr GetPointer() => (IntPtr)_start;
             }
         }
     }

@@ -12,8 +12,14 @@ namespace System.ComponentModel.DataAnnotations.Tests
         protected override IEnumerable<TestCase> ValidValues()
         {
             yield return new TestCase(new RequiredAttribute(), "SomeString");
-            yield return new TestCase(new RequiredAttribute() { AllowEmptyStrings = true }, string.Empty);
-            yield return new TestCase(new RequiredAttribute() { AllowEmptyStrings = true }, " \t \r \n ");
+            yield return new TestCase(
+                new RequiredAttribute() { AllowEmptyStrings = true },
+                string.Empty
+            );
+            yield return new TestCase(
+                new RequiredAttribute() { AllowEmptyStrings = true },
+                " \t \r \n "
+            );
             yield return new TestCase(new RequiredAttribute(), new object());
 
             // default value types are always valid
@@ -31,7 +37,10 @@ namespace System.ComponentModel.DataAnnotations.Tests
             yield return new TestCase(requiredAttribute, 0.1);
             yield return new TestCase(requiredAttribute, TimeSpan.MaxValue);
             yield return new TestCase(requiredAttribute, DateTime.MaxValue);
-            yield return new TestCase(requiredAttribute, Guid.Parse("c3436566-4083-4bbe-8b56-f9c278162c4b"));
+            yield return new TestCase(
+                requiredAttribute,
+                Guid.Parse("c3436566-4083-4bbe-8b56-f9c278162c4b")
+            );
 
             // Populated System.Nullable values are always valid
             yield return new TestCase(new RequiredAttribute(), (bool?)false);
@@ -44,8 +53,14 @@ namespace System.ComponentModel.DataAnnotations.Tests
         protected override IEnumerable<TestCase> InvalidValues()
         {
             yield return new TestCase(new RequiredAttribute(), null);
-            yield return new TestCase(new RequiredAttribute() { AllowEmptyStrings = false }, string.Empty);
-            yield return new TestCase(new RequiredAttribute() { AllowEmptyStrings = false }, " \t \r \n ");
+            yield return new TestCase(
+                new RequiredAttribute() { AllowEmptyStrings = false },
+                string.Empty
+            );
+            yield return new TestCase(
+                new RequiredAttribute() { AllowEmptyStrings = false },
+                " \t \r \n "
+            );
         }
 
         [Fact]

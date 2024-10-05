@@ -7,7 +7,6 @@ using System.Net.Test.Common;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-
 using Xunit;
 using Xunit.Abstractions;
 
@@ -17,23 +16,32 @@ namespace System.Net.Http.Functional.Tests
 
     public abstract class ResponseStreamTest : HttpClientHandlerTestBase
     {
-        public ResponseStreamTest(ITestOutputHelper output) : base(output) { }
+        public ResponseStreamTest(ITestOutputHelper output)
+            : base(output) { }
 
         public static IEnumerable<object[]> RemoteServersAndReadModes()
         {
-            foreach (Configuration.Http.RemoteServer remoteServer in Configuration.Http.RemoteServers)
+            foreach (
+                Configuration.Http.RemoteServer remoteServer in Configuration.Http.RemoteServers
+            )
             {
                 for (int i = 0; i < 8; i++)
                 {
                     yield return new object[] { remoteServer, i };
                 }
             }
-
         }
 
-        [OuterLoop("Uses external servers", typeof(PlatformDetection), nameof(PlatformDetection.LocalEchoServerIsNotAvailable))]
+        [OuterLoop(
+            "Uses external servers",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.LocalEchoServerIsNotAvailable)
+        )]
         [Theory, MemberData(nameof(RemoteServersAndReadModes))]
-        public async Task GetStreamAsync_ReadToEnd_Success(Configuration.Http.RemoteServer remoteServer, int readMode)
+        public async Task GetStreamAsync_ReadToEnd_Success(
+            Configuration.Http.RemoteServer remoteServer,
+            int readMode
+        )
         {
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer))
             {
@@ -71,7 +79,9 @@ namespace System.Net.Http.Functional.Tests
 
                         case 3:
                             // Individual calls to ReadAsync(Array)
-                            while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) != 0)
+                            while (
+                                (bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) != 0
+                            )
                             {
                                 ms.Write(buffer, 0, bytesRead);
                             }
@@ -126,12 +136,23 @@ namespace System.Net.Http.Functional.Tests
             }
         }
 
-        [OuterLoop("Uses external servers", typeof(PlatformDetection), nameof(PlatformDetection.LocalEchoServerIsNotAvailable))]
+        [OuterLoop(
+            "Uses external servers",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.LocalEchoServerIsNotAvailable)
+        )]
         [Theory, MemberData(nameof(RemoteServersMemberData))]
-        public async Task GetAsync_UseResponseHeadersReadAndCallLoadIntoBuffer_Success(Configuration.Http.RemoteServer remoteServer)
+        public async Task GetAsync_UseResponseHeadersReadAndCallLoadIntoBuffer_Success(
+            Configuration.Http.RemoteServer remoteServer
+        )
         {
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer))
-            using (HttpResponseMessage response = await client.GetAsync(remoteServer.EchoUri, HttpCompletionOption.ResponseHeadersRead))
+            using (
+                HttpResponseMessage response = await client.GetAsync(
+                    remoteServer.EchoUri,
+                    HttpCompletionOption.ResponseHeadersRead
+                )
+            )
             {
                 await response.Content.LoadIntoBufferAsync();
 
@@ -141,16 +162,28 @@ namespace System.Net.Http.Functional.Tests
                     responseBody,
                     response.Content.Headers.ContentMD5,
                     false,
-                    null);
+                    null
+                );
             }
         }
 
-        [OuterLoop("Uses external servers", typeof(PlatformDetection), nameof(PlatformDetection.LocalEchoServerIsNotAvailable))]
+        [OuterLoop(
+            "Uses external servers",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.LocalEchoServerIsNotAvailable)
+        )]
         [Theory, MemberData(nameof(RemoteServersMemberData))]
-        public async Task GetAsync_UseResponseHeadersReadAndCopyToMemoryStream_Success(Configuration.Http.RemoteServer remoteServer)
+        public async Task GetAsync_UseResponseHeadersReadAndCopyToMemoryStream_Success(
+            Configuration.Http.RemoteServer remoteServer
+        )
         {
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer))
-            using (HttpResponseMessage response = await client.GetAsync(remoteServer.EchoUri, HttpCompletionOption.ResponseHeadersRead))
+            using (
+                HttpResponseMessage response = await client.GetAsync(
+                    remoteServer.EchoUri,
+                    HttpCompletionOption.ResponseHeadersRead
+                )
+            )
             {
                 var memoryStream = new MemoryStream();
                 await response.Content.CopyToAsync(memoryStream);
@@ -164,14 +197,21 @@ namespace System.Net.Http.Functional.Tests
                         responseBody,
                         response.Content.Headers.ContentMD5,
                         false,
-                        null);
+                        null
+                    );
                 }
             }
         }
 
-        [OuterLoop("Uses external servers", typeof(PlatformDetection), nameof(PlatformDetection.LocalEchoServerIsNotAvailable))]
+        [OuterLoop(
+            "Uses external servers",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.LocalEchoServerIsNotAvailable)
+        )]
         [Theory, MemberData(nameof(RemoteServersMemberData))]
-        public async Task GetStreamAsync_ReadZeroBytes_Success(Configuration.Http.RemoteServer remoteServer)
+        public async Task GetStreamAsync_ReadZeroBytes_Success(
+            Configuration.Http.RemoteServer remoteServer
+        )
         {
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer))
             using (Stream stream = await client.GetStreamAsync(remoteServer.EchoUri))
@@ -184,15 +224,25 @@ namespace System.Net.Http.Functional.Tests
             }
         }
 
-        [OuterLoop("Uses external servers", typeof(PlatformDetection), nameof(PlatformDetection.LocalEchoServerIsNotAvailable))]
+        [OuterLoop(
+            "Uses external servers",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.LocalEchoServerIsNotAvailable)
+        )]
         [Theory, MemberData(nameof(RemoteServersMemberData))]
-        public async Task ReadAsStreamAsync_Cancel_TaskIsCanceled(Configuration.Http.RemoteServer remoteServer)
+        public async Task ReadAsStreamAsync_Cancel_TaskIsCanceled(
+            Configuration.Http.RemoteServer remoteServer
+        )
         {
             var cts = new CancellationTokenSource();
 
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer))
-            using (HttpResponseMessage response =
-                    await client.GetAsync(remoteServer.EchoUri, HttpCompletionOption.ResponseHeadersRead))
+            using (
+                HttpResponseMessage response = await client.GetAsync(
+                    remoteServer.EchoUri,
+                    HttpCompletionOption.ResponseHeadersRead
+                )
+            )
             using (Stream stream = await response.Content.ReadAsStreamAsync(TestAsync))
             {
                 var buffer = new byte[2048];
@@ -209,9 +259,10 @@ namespace System.Net.Http.Functional.Tests
                     // With WinHttpHandler, we may fault because canceling the task destroys the request handle
                     // which may randomly cause an ObjectDisposedException (or other exception).
                     Assert.True(
-                        task.Status == TaskStatus.RanToCompletion ||
-                        task.Status == TaskStatus.Canceled ||
-                        task.Status == TaskStatus.Faulted);
+                        task.Status == TaskStatus.RanToCompletion
+                            || task.Status == TaskStatus.Canceled
+                            || task.Status == TaskStatus.Faulted
+                    );
                 }
                 else
                 {
@@ -222,8 +273,9 @@ namespace System.Net.Http.Functional.Tests
                     }
 
                     Assert.True(
-                        task.Status == TaskStatus.RanToCompletion ||
-                        task.Status == TaskStatus.Canceled);
+                        task.Status == TaskStatus.RanToCompletion
+                            || task.Status == TaskStatus.Canceled
+                    );
                 }
             }
         }
@@ -233,10 +285,17 @@ namespace System.Net.Http.Functional.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBrowser))]
         public async Task BrowserHttpHandler_Streaming()
         {
-            var WebAssemblyEnableStreamingRequestKey = new HttpRequestOptionsKey<bool>("WebAssemblyEnableStreamingRequest");
-            var WebAssemblyEnableStreamingResponseKey = new HttpRequestOptionsKey<bool>("WebAssemblyEnableStreamingResponse");
+            var WebAssemblyEnableStreamingRequestKey = new HttpRequestOptionsKey<bool>(
+                "WebAssemblyEnableStreamingRequest"
+            );
+            var WebAssemblyEnableStreamingResponseKey = new HttpRequestOptionsKey<bool>(
+                "WebAssemblyEnableStreamingResponse"
+            );
 
-            var req = new HttpRequestMessage(HttpMethod.Post, Configuration.Http.RemoteHttp2Server.BaseUri + "echobody.ashx");
+            var req = new HttpRequestMessage(
+                HttpMethod.Post,
+                Configuration.Http.RemoteHttp2Server.BaseUri + "echobody.ashx"
+            );
 
             req.Options.Set(WebAssemblyEnableStreamingRequestKey, true);
             req.Options.Set(WebAssemblyEnableStreamingResponseKey, true);
@@ -245,25 +304,37 @@ namespace System.Net.Http.Functional.Tests
             Random.Shared.NextBytes(body);
 
             int readOffset = 0;
-            req.Content = new StreamContent(new DelegateStream(
-                canReadFunc: () => true,
-                readFunc: (buffer, offset, count) => throw new FormatException(),
-                readAsyncFunc: async (buffer, offset, count, cancellationToken) =>
-                {
-                    await Task.Delay(1);
-                    if (readOffset < body.Length)
+            req.Content = new StreamContent(
+                new DelegateStream(
+                    canReadFunc: () => true,
+                    readFunc: (buffer, offset, count) => throw new FormatException(),
+                    readAsyncFunc: async (buffer, offset, count, cancellationToken) =>
                     {
-                        int send = Math.Min(body.Length - readOffset, count);
-                        body.AsSpan(readOffset, send).CopyTo(buffer.AsSpan(offset, send));
-                        readOffset += send;
-                        return send;
+                        await Task.Delay(1);
+                        if (readOffset < body.Length)
+                        {
+                            int send = Math.Min(body.Length - readOffset, count);
+                            body.AsSpan(readOffset, send).CopyTo(buffer.AsSpan(offset, send));
+                            readOffset += send;
+                            return send;
+                        }
+                        return 0;
                     }
-                    return 0;
-                }));
+                )
+            );
 
-            using (HttpClient client = CreateHttpClientForRemoteServer(Configuration.Http.RemoteHttp2Server))
+            using (
+                HttpClient client = CreateHttpClientForRemoteServer(
+                    Configuration.Http.RemoteHttp2Server
+                )
+            )
             // we need to switch off Response buffering of default ResponseContentRead option
-            using (HttpResponseMessage response = await client.SendAsync(req, HttpCompletionOption.ResponseHeadersRead))
+            using (
+                HttpResponseMessage response = await client.SendAsync(
+                    req,
+                    HttpCompletionOption.ResponseHeadersRead
+                )
+            )
             {
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                 // Streaming requests can't set Content-Length
@@ -279,7 +350,10 @@ namespace System.Net.Http.Functional.Tests
                 do
                 {
                     fetchedCount = await stream.ReadAsync(buffer, 0, buffer.Length);
-                    Assert.True(body.AsSpan(totalCount, fetchedCount).SequenceEqual(buffer.AsSpan(0, fetchedCount)));
+                    Assert.True(
+                        body.AsSpan(totalCount, fetchedCount)
+                            .SequenceEqual(buffer.AsSpan(0, fetchedCount))
+                    );
                     totalCount += fetchedCount;
                 } while (fetchedCount != 0);
                 Assert.Equal(body.Length, totalCount);
@@ -290,39 +364,60 @@ namespace System.Net.Http.Functional.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBrowser))]
         public async Task BrowserHttpHandler_StreamingRequest()
         {
-            var WebAssemblyEnableStreamingRequestKey = new HttpRequestOptionsKey<bool>("WebAssemblyEnableStreamingRequest");
+            var WebAssemblyEnableStreamingRequestKey = new HttpRequestOptionsKey<bool>(
+                "WebAssemblyEnableStreamingRequest"
+            );
 
-            var req = new HttpRequestMessage(HttpMethod.Post, Configuration.Http.Http2RemoteVerifyUploadServer);
+            var req = new HttpRequestMessage(
+                HttpMethod.Post,
+                Configuration.Http.Http2RemoteVerifyUploadServer
+            );
 
             req.Options.Set(WebAssemblyEnableStreamingRequestKey, true);
 
             int size = 1500 * 1024 * 1024;
-            int multipartOverhead = 125 + 4 /* "test" */;
+            int multipartOverhead =
+                125
+                + 4 /* "test" */
+            ;
             int remaining = size;
             var content = new MultipartFormDataContent();
-            content.Add(new StreamContent(new DelegateStream(
-                canReadFunc: () => true,
-                readFunc: (buffer, offset, count) => throw new FormatException(),
-                readAsyncFunc: (buffer, offset, count, cancellationToken) =>
-                {
-                    if (remaining > 0)
-                    {
-                        int send = Math.Min(remaining, count);
-                        buffer.AsSpan(offset, send).Fill(65);
-                        remaining -= send;
-                        return Task.FromResult(send);
-                    }
-                    return Task.FromResult(0);
-                })), "test");
+            content.Add(
+                new StreamContent(
+                    new DelegateStream(
+                        canReadFunc: () => true,
+                        readFunc: (buffer, offset, count) => throw new FormatException(),
+                        readAsyncFunc: (buffer, offset, count, cancellationToken) =>
+                        {
+                            if (remaining > 0)
+                            {
+                                int send = Math.Min(remaining, count);
+                                buffer.AsSpan(offset, send).Fill(65);
+                                remaining -= send;
+                                return Task.FromResult(send);
+                            }
+                            return Task.FromResult(0);
+                        }
+                    )
+                ),
+                "test"
+            );
             req.Content = content;
 
             req.Content.Headers.Add("Content-MD5-Skip", "browser");
 
-            using (HttpClient client = CreateHttpClientForRemoteServer(Configuration.Http.RemoteHttp2Server))
+            using (
+                HttpClient client = CreateHttpClientForRemoteServer(
+                    Configuration.Http.RemoteHttp2Server
+                )
+            )
             using (HttpResponseMessage response = await client.SendAsync(req))
             {
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-                Assert.Equal((size + multipartOverhead).ToString(), Assert.Single(response.Headers.GetValues("X-HttpRequest-Body-Length")));
+                Assert.Equal(
+                    (size + multipartOverhead).ToString(),
+                    Assert.Single(response.Headers.GetValues("X-HttpRequest-Body-Length"))
+                );
                 // Streaming requests can't set Content-Length
                 Assert.False(response.Headers.Contains("X-HttpRequest-Headers-ContentLength"));
             }
@@ -333,31 +428,51 @@ namespace System.Net.Http.Functional.Tests
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsBrowser))]
         [InlineData(false)]
         [InlineData(true)]
-        public async Task BrowserHttpHandler_StreamingRequest_ThrowFromContentCopy_RequestFails(bool syncFailure)
+        public async Task BrowserHttpHandler_StreamingRequest_ThrowFromContentCopy_RequestFails(
+            bool syncFailure
+        )
         {
-            var WebAssemblyEnableStreamingRequestKey = new HttpRequestOptionsKey<bool>("WebAssemblyEnableStreamingRequest");
+            var WebAssemblyEnableStreamingRequestKey = new HttpRequestOptionsKey<bool>(
+                "WebAssemblyEnableStreamingRequest"
+            );
 
-            var req = new HttpRequestMessage(HttpMethod.Post, Configuration.Http.Http2RemoteEchoServer);
+            var req = new HttpRequestMessage(
+                HttpMethod.Post,
+                Configuration.Http.Http2RemoteEchoServer
+            );
 
             req.Options.Set(WebAssemblyEnableStreamingRequestKey, true);
 
             Exception error = new FormatException();
-            req.Content = new StreamContent(new DelegateStream(
-                canSeekFunc: () => true,
-                lengthFunc: () => 12345678,
-                positionGetFunc: () => 0,
-                canReadFunc: () => true,
-                readFunc: (buffer, offset, count) => throw new FormatException(),
-                readAsyncFunc: (buffer, offset, count, cancellationToken) => syncFailure ? throw error : Task.Delay(1).ContinueWith<int>(_ => throw error)));
+            req.Content = new StreamContent(
+                new DelegateStream(
+                    canSeekFunc: () => true,
+                    lengthFunc: () => 12345678,
+                    positionGetFunc: () => 0,
+                    canReadFunc: () => true,
+                    readFunc: (buffer, offset, count) => throw new FormatException(),
+                    readAsyncFunc: (buffer, offset, count, cancellationToken) =>
+                        syncFailure
+                            ? throw error
+                            : Task.Delay(1).ContinueWith<int>(_ => throw error)
+                )
+            );
 
-            using (HttpClient client = CreateHttpClientForRemoteServer(Configuration.Http.RemoteHttp2Server))
+            using (
+                HttpClient client = CreateHttpClientForRemoteServer(
+                    Configuration.Http.RemoteHttp2Server
+                )
+            )
             {
-                Assert.Same(error, await Assert.ThrowsAsync<FormatException>(() => client.SendAsync(req)));
+                Assert.Same(
+                    error,
+                    await Assert.ThrowsAsync<FormatException>(() => client.SendAsync(req))
+                );
             }
         }
 
-        public static TheoryData CancelRequestReadFunctions
-            => new TheoryData<bool, Func<Task<int>>>
+        public static TheoryData CancelRequestReadFunctions =>
+            new TheoryData<bool, Func<Task<int>>>
             {
                 { false, () => Task.FromResult(0) },
                 { true, () => Task.FromResult(0) },
@@ -370,39 +485,61 @@ namespace System.Net.Http.Functional.Tests
         [OuterLoop]
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsBrowser))]
         [MemberData(nameof(CancelRequestReadFunctions))]
-        public async Task BrowserHttpHandler_StreamingRequest_CancelRequest(bool cancelAsync, Func<Task<int>> readFunc)
+        public async Task BrowserHttpHandler_StreamingRequest_CancelRequest(
+            bool cancelAsync,
+            Func<Task<int>> readFunc
+        )
         {
-            var WebAssemblyEnableStreamingRequestKey = new HttpRequestOptionsKey<bool>("WebAssemblyEnableStreamingRequest");
+            var WebAssemblyEnableStreamingRequestKey = new HttpRequestOptionsKey<bool>(
+                "WebAssemblyEnableStreamingRequest"
+            );
 
-            var req = new HttpRequestMessage(HttpMethod.Post, Configuration.Http.Http2RemoteEchoServer);
+            var req = new HttpRequestMessage(
+                HttpMethod.Post,
+                Configuration.Http.Http2RemoteEchoServer
+            );
 
             req.Options.Set(WebAssemblyEnableStreamingRequestKey, true);
 
             using var cts = new CancellationTokenSource();
             var token = cts.Token;
-            int readNotCancelledCount = 0, readCancelledCount = 0;
-            req.Content = new StreamContent(new DelegateStream(
-                canReadFunc: () => true,
-                readFunc: (buffer, offset, count) => throw new FormatException(),
-                readAsyncFunc: async (buffer, offset, count, cancellationToken) =>
-                {
-                    if (cancelAsync) await Task.Delay(1);
-                    Assert.Equal(token.IsCancellationRequested, cancellationToken.IsCancellationRequested);
-                    if (!token.IsCancellationRequested)
+            int readNotCancelledCount = 0,
+                readCancelledCount = 0;
+            req.Content = new StreamContent(
+                new DelegateStream(
+                    canReadFunc: () => true,
+                    readFunc: (buffer, offset, count) => throw new FormatException(),
+                    readAsyncFunc: async (buffer, offset, count, cancellationToken) =>
                     {
-                        readNotCancelledCount++;
-                        cts.Cancel();
+                        if (cancelAsync)
+                            await Task.Delay(1);
+                        Assert.Equal(
+                            token.IsCancellationRequested,
+                            cancellationToken.IsCancellationRequested
+                        );
+                        if (!token.IsCancellationRequested)
+                        {
+                            readNotCancelledCount++;
+                            cts.Cancel();
+                        }
+                        else
+                        {
+                            readCancelledCount++;
+                        }
+                        return await readFunc();
                     }
-                    else
-                    {
-                        readCancelledCount++;
-                    }
-                    return await readFunc();
-                }));
+                )
+            );
 
-            using (HttpClient client = CreateHttpClientForRemoteServer(Configuration.Http.RemoteHttp2Server))
+            using (
+                HttpClient client = CreateHttpClientForRemoteServer(
+                    Configuration.Http.RemoteHttp2Server
+                )
+            )
             {
-                TaskCanceledException ex = await Assert.ThrowsAsync<TaskCanceledException>(() => client.SendAsync(req, token));
+                TaskCanceledException ex = await Assert.ThrowsAsync<TaskCanceledException>(
+                    () => client.SendAsync(req, token)
+                );
                 Assert.Equal(token, ex.CancellationToken);
                 Assert.Equal(1, readNotCancelledCount);
                 Assert.Equal(0, readCancelledCount);
@@ -413,25 +550,39 @@ namespace System.Net.Http.Functional.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBrowser))]
         public async Task BrowserHttpHandler_StreamingRequest_Http1Fails()
         {
-            var WebAssemblyEnableStreamingRequestKey = new HttpRequestOptionsKey<bool>("WebAssemblyEnableStreamingRequest");
+            var WebAssemblyEnableStreamingRequestKey = new HttpRequestOptionsKey<bool>(
+                "WebAssemblyEnableStreamingRequest"
+            );
 
-            var req = new HttpRequestMessage(HttpMethod.Post, Configuration.Http.RemoteHttp11Server.BaseUri);
+            var req = new HttpRequestMessage(
+                HttpMethod.Post,
+                Configuration.Http.RemoteHttp11Server.BaseUri
+            );
 
             req.Options.Set(WebAssemblyEnableStreamingRequestKey, true);
 
             int readCount = 0;
-            req.Content = new StreamContent(new DelegateStream(
-                canReadFunc: () => true,
-                readFunc: (buffer, offset, count) => throw new FormatException(),
-                readAsyncFunc: (buffer, offset, count, cancellationToken) =>
-                {
-                    readCount++;
-                    return Task.FromResult(1);
-                }));
+            req.Content = new StreamContent(
+                new DelegateStream(
+                    canReadFunc: () => true,
+                    readFunc: (buffer, offset, count) => throw new FormatException(),
+                    readAsyncFunc: (buffer, offset, count, cancellationToken) =>
+                    {
+                        readCount++;
+                        return Task.FromResult(1);
+                    }
+                )
+            );
 
-            using (HttpClient client = CreateHttpClientForRemoteServer(Configuration.Http.RemoteHttp11Server))
+            using (
+                HttpClient client = CreateHttpClientForRemoteServer(
+                    Configuration.Http.RemoteHttp11Server
+                )
+            )
             {
-                HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(() => client.SendAsync(req));
+                HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(
+                    () => client.SendAsync(req)
+                );
                 Assert.Equal("TypeError: Failed to fetch", ex.Message);
                 Assert.Equal(1, readCount);
             }
@@ -441,21 +592,38 @@ namespace System.Net.Http.Functional.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBrowser))]
         public async Task BrowserHttpHandler_StreamingResponse()
         {
-            var WebAssemblyEnableStreamingResponseKey = new HttpRequestOptionsKey<bool>("WebAssemblyEnableStreamingResponse");
+            var WebAssemblyEnableStreamingResponseKey = new HttpRequestOptionsKey<bool>(
+                "WebAssemblyEnableStreamingResponse"
+            );
 
             var size = 1500 * 1024 * 1024;
-            var req = new HttpRequestMessage(HttpMethod.Get, Configuration.Http.RemoteSecureHttp11Server.BaseUri + "large.ashx?size=" + size);
+            var req = new HttpRequestMessage(
+                HttpMethod.Get,
+                Configuration.Http.RemoteSecureHttp11Server.BaseUri + "large.ashx?size=" + size
+            );
 
             req.Options.Set(WebAssemblyEnableStreamingResponseKey, true);
 
-            using (HttpClient client = CreateHttpClientForRemoteServer(Configuration.Http.RemoteSecureHttp11Server))
+            using (
+                HttpClient client = CreateHttpClientForRemoteServer(
+                    Configuration.Http.RemoteSecureHttp11Server
+                )
+            )
             // we need to switch off Response buffering of default ResponseContentRead option
-            using (HttpResponseMessage response = await client.SendAsync(req, HttpCompletionOption.ResponseHeadersRead))
+            using (
+                HttpResponseMessage response = await client.SendAsync(
+                    req,
+                    HttpCompletionOption.ResponseHeadersRead
+                )
+            )
             {
                 // Streaming response uses StreamContent
                 Assert.Equal(typeof(StreamContent), response.Content.GetType());
 
-                Assert.Equal("application/octet-stream", response.Content.Headers.ContentType.MediaType);
+                Assert.Equal(
+                    "application/octet-stream",
+                    response.Content.Headers.ContentType.MediaType
+                );
                 Assert.True(size == response.Content.Headers.ContentLength, "ContentLength");
 
                 var stream = await response.Content.ReadAsStreamAsync();
@@ -479,25 +647,33 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(TransferType.Chunked, TransferError.ChunkSizeTooLarge)]
         public async Task ReadAsStreamAsync_InvalidServerResponse_ThrowsIOException(
             TransferType transferType,
-            TransferError transferError)
+            TransferError transferError
+        )
         {
-            await StartTransferTypeAndErrorServer(transferType, transferError, async uri =>
-            {
-                if (PlatformDetection.IsBrowser) // TypeError: Failed to fetch
+            await StartTransferTypeAndErrorServer(
+                transferType,
+                transferError,
+                async uri =>
                 {
-                    await Assert.ThrowsAsync<HttpRequestException>(() => ReadAsStreamHelper(uri));
+                    if (PlatformDetection.IsBrowser) // TypeError: Failed to fetch
+                    {
+                        await Assert.ThrowsAsync<HttpRequestException>(
+                            () => ReadAsStreamHelper(uri)
+                        );
+                    }
+                    else if (IsWinHttpHandler)
+                    {
+                        await Assert.ThrowsAsync<IOException>(() => ReadAsStreamHelper(uri));
+                    }
+                    else
+                    {
+                        HttpIOException exception = await Assert.ThrowsAsync<HttpIOException>(
+                            () => ReadAsStreamHelper(uri)
+                        );
+                        Assert.Equal(HttpRequestError.ResponseEnded, exception.HttpRequestError);
+                    }
                 }
-                else if (IsWinHttpHandler)
-                {
-                    await Assert.ThrowsAsync<IOException>(() => ReadAsStreamHelper(uri));
-                }
-                else
-                {
-                    HttpIOException exception = await Assert.ThrowsAsync<HttpIOException>(() => ReadAsStreamHelper(uri));
-                    Assert.Equal(HttpRequestError.ResponseEnded, exception.HttpRequestError);
-                }
-                
-            });
+            );
         }
 
         [Theory]
@@ -506,12 +682,17 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(TransferType.Chunked, TransferError.None)]
         public async Task ReadAsStreamAsync_ValidServerResponse_Success(
             TransferType transferType,
-            TransferError transferError)
+            TransferError transferError
+        )
         {
-            await StartTransferTypeAndErrorServer(transferType, transferError, async uri =>
-            {
-                await ReadAsStreamHelper(uri);
-            });
+            await StartTransferTypeAndErrorServer(
+                transferType,
+                transferError,
+                async uri =>
+                {
+                    await ReadAsStreamHelper(uri);
+                }
+            );
         }
 
         [Theory]
@@ -520,21 +701,31 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(TransferType.Chunked, TransferError.None)]
         public async Task ReadAsStreamAsync_StreamCanReadIsFalseAfterDispose(
             TransferType transferType,
-            TransferError transferError)
+            TransferError transferError
+        )
         {
-            await StartTransferTypeAndErrorServer(transferType, transferError, async uri =>
-            {
-                using (HttpClient client = CreateHttpClient())
-                using (HttpResponseMessage response = await client.GetAsync(uri, HttpCompletionOption.ResponseHeadersRead))
+            await StartTransferTypeAndErrorServer(
+                transferType,
+                transferError,
+                async uri =>
                 {
-                    Stream stream = await response.Content.ReadAsStreamAsync();
-                    Assert.True(stream.CanRead);
+                    using (HttpClient client = CreateHttpClient())
+                    using (
+                        HttpResponseMessage response = await client.GetAsync(
+                            uri,
+                            HttpCompletionOption.ResponseHeadersRead
+                        )
+                    )
+                    {
+                        Stream stream = await response.Content.ReadAsStreamAsync();
+                        Assert.True(stream.CanRead);
 
-                    stream.Dispose();
+                        stream.Dispose();
 
-                    Assert.False(stream.CanRead);
+                        Assert.False(stream.CanRead);
+                    }
                 }
-            });
+            );
         }
 #endif
 
@@ -542,7 +733,7 @@ namespace System.Net.Http.Functional.Tests
         {
             None = 0,
             ContentLength,
-            Chunked
+            Chunked,
         }
 
         public enum TransferError
@@ -550,77 +741,99 @@ namespace System.Net.Http.Functional.Tests
             None = 0,
             ContentLengthTooLarge,
             ChunkSizeTooLarge,
-            MissingChunkTerminator
+            MissingChunkTerminator,
         }
 
         public static Task StartTransferTypeAndErrorServer(
             TransferType transferType,
             TransferError transferError,
-            Func<Uri, Task> clientFunc)
+            Func<Uri, Task> clientFunc
+        )
         {
             return LoopbackServer.CreateClientAndServerAsync(
                 clientFunc,
-                server => server.AcceptConnectionAsync(async connection =>
-                {
-                    // Read past request headers.
-                    await connection.ReadRequestHeaderAsync();
+                server =>
+                    server.AcceptConnectionAsync(async connection =>
+                    {
+                        // Read past request headers.
+                        await connection.ReadRequestHeaderAsync();
 
-                    // Determine response transfer headers.
-                    string transferHeader = null;
-                    string content = "This is some response content.";
-                    if (transferType == TransferType.ContentLength)
-                    {
-                        transferHeader = transferError == TransferError.ContentLengthTooLarge ?
-                            $"Content-Length: {content.Length + 42}\r\n" :
-                            $"Content-Length: {content.Length}\r\n";
-                    }
-                    else if (transferType == TransferType.Chunked)
-                    {
-                        transferHeader = "Transfer-Encoding: chunked\r\n";
-                    }
-
-                    // Write response header
-                    await connection.WriteStringAsync("HTTP/1.1 200 OK\r\n").ConfigureAwait(false);
-                    await connection.WriteStringAsync($"Date: {DateTimeOffset.UtcNow:R}\r\n").ConfigureAwait(false);
-                    await connection.WriteStringAsync(LoopbackServer.CorsHeaders).ConfigureAwait(false);
-                    await connection.WriteStringAsync("Content-Type: text/plain\r\n").ConfigureAwait(false);
-                    if (!string.IsNullOrEmpty(transferHeader))
-                    {
-                        await connection.WriteStringAsync(transferHeader).ConfigureAwait(false);
-                    }
-                    await connection.WriteStringAsync("\r\n").ConfigureAwait(false);
-
-                    // Write response body
-                    if (transferType == TransferType.Chunked)
-                    {
-                        string chunkSizeInHex = string.Format(
-                            "{0:x}\r\n",
-                            content.Length + (transferError == TransferError.ChunkSizeTooLarge ? 42 : 0));
-                        await connection.WriteStringAsync(chunkSizeInHex).ConfigureAwait(false);
-                        await connection.WriteStringAsync($"{content}\r\n").ConfigureAwait(false);
-                        if (transferError != TransferError.MissingChunkTerminator)
+                        // Determine response transfer headers.
+                        string transferHeader = null;
+                        string content = "This is some response content.";
+                        if (transferType == TransferType.ContentLength)
                         {
-                            await connection.WriteStringAsync("0\r\n\r\n").ConfigureAwait(false);
+                            transferHeader =
+                                transferError == TransferError.ContentLengthTooLarge
+                                    ? $"Content-Length: {content.Length + 42}\r\n"
+                                    : $"Content-Length: {content.Length}\r\n";
                         }
-                    }
-                    else
-                    {
-                        await connection.WriteStringAsync($"{content}").ConfigureAwait(false);
-                    }
-                }));
+                        else if (transferType == TransferType.Chunked)
+                        {
+                            transferHeader = "Transfer-Encoding: chunked\r\n";
+                        }
+
+                        // Write response header
+                        await connection
+                            .WriteStringAsync("HTTP/1.1 200 OK\r\n")
+                            .ConfigureAwait(false);
+                        await connection
+                            .WriteStringAsync($"Date: {DateTimeOffset.UtcNow:R}\r\n")
+                            .ConfigureAwait(false);
+                        await connection
+                            .WriteStringAsync(LoopbackServer.CorsHeaders)
+                            .ConfigureAwait(false);
+                        await connection
+                            .WriteStringAsync("Content-Type: text/plain\r\n")
+                            .ConfigureAwait(false);
+                        if (!string.IsNullOrEmpty(transferHeader))
+                        {
+                            await connection.WriteStringAsync(transferHeader).ConfigureAwait(false);
+                        }
+                        await connection.WriteStringAsync("\r\n").ConfigureAwait(false);
+
+                        // Write response body
+                        if (transferType == TransferType.Chunked)
+                        {
+                            string chunkSizeInHex = string.Format(
+                                "{0:x}\r\n",
+                                content.Length
+                                    + (transferError == TransferError.ChunkSizeTooLarge ? 42 : 0)
+                            );
+                            await connection.WriteStringAsync(chunkSizeInHex).ConfigureAwait(false);
+                            await connection
+                                .WriteStringAsync($"{content}\r\n")
+                                .ConfigureAwait(false);
+                            if (transferError != TransferError.MissingChunkTerminator)
+                            {
+                                await connection
+                                    .WriteStringAsync("0\r\n\r\n")
+                                    .ConfigureAwait(false);
+                            }
+                        }
+                        else
+                        {
+                            await connection.WriteStringAsync($"{content}").ConfigureAwait(false);
+                        }
+                    })
+            );
         }
 
         private async Task ReadAsStreamHelper(Uri serverUri)
         {
             using (HttpClient client = CreateHttpClient())
             {
-                using (var response = await client.GetAsync(
-                    serverUri,
-                    HttpCompletionOption.ResponseHeadersRead))
+                using (
+                    var response = await client.GetAsync(
+                        serverUri,
+                        HttpCompletionOption.ResponseHeadersRead
+                    )
+                )
                 using (var stream = await response.Content.ReadAsStreamAsync(TestAsync))
                 {
                     var buffer = new byte[1];
-                    while (await stream.ReadAsync(buffer, 0, 1) > 0) ;
+                    while (await stream.ReadAsync(buffer, 0, 1) > 0)
+                        ;
                 }
             }
         }

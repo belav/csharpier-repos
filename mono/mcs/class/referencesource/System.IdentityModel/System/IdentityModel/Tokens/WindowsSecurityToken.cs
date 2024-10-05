@@ -6,10 +6,10 @@ namespace System.IdentityModel.Tokens
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Security.Principal;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
     using System.IdentityModel.Tokens;
+    using System.Security.Principal;
 
     public class WindowsSecurityToken : SecurityToken, IDisposable
     {
@@ -21,33 +21,50 @@ namespace System.IdentityModel.Tokens
         bool disposed = false;
 
         public WindowsSecurityToken(WindowsIdentity windowsIdentity)
-            : this(windowsIdentity, SecurityUniqueId.Create().Value)
-        {
-        }
+            : this(windowsIdentity, SecurityUniqueId.Create().Value) { }
 
         public WindowsSecurityToken(WindowsIdentity windowsIdentity, string id)
-            : this(windowsIdentity, id, null)
-        {
-        }
+            : this(windowsIdentity, id, null) { }
 
-        public WindowsSecurityToken(WindowsIdentity windowsIdentity, string id, string authenticationType)
+        public WindowsSecurityToken(
+            WindowsIdentity windowsIdentity,
+            string id,
+            string authenticationType
+        )
         {
             DateTime effectiveTime = DateTime.UtcNow;
-            Initialize( id, authenticationType, effectiveTime, DateTime.UtcNow.AddHours( 10 ), windowsIdentity, true );
+            Initialize(
+                id,
+                authenticationType,
+                effectiveTime,
+                DateTime.UtcNow.AddHours(10),
+                windowsIdentity,
+                true
+            );
         }
 
-        protected WindowsSecurityToken()
+        protected WindowsSecurityToken() { }
+
+        protected void Initialize(
+            string id,
+            DateTime effectiveTime,
+            DateTime expirationTime,
+            WindowsIdentity windowsIdentity,
+            bool clone
+        )
         {
+            Initialize(id, null, effectiveTime, expirationTime, windowsIdentity, clone);
         }
 
-        protected void Initialize(string id, DateTime effectiveTime, DateTime expirationTime, WindowsIdentity windowsIdentity, bool clone)
+        protected void Initialize(
+            string id,
+            string authenticationType,
+            DateTime effectiveTime,
+            DateTime expirationTime,
+            WindowsIdentity windowsIdentity,
+            bool clone
+        )
         {
-            Initialize( id, null, effectiveTime, expirationTime, windowsIdentity, clone );
-        }
-
-        protected void Initialize(string id, string authenticationType, DateTime effectiveTime, DateTime expirationTime, WindowsIdentity windowsIdentity, bool clone)
-        {
-
             if (windowsIdentity == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("windowsIdentity");
 
@@ -58,7 +75,9 @@ namespace System.IdentityModel.Tokens
             this.authenticationType = authenticationType;
             this.effectiveTime = effectiveTime;
             this.expirationTime = expirationTime;
-            this.windowsIdentity = clone ? SecurityUtils.CloneWindowsIdentityIfNecessary(windowsIdentity, authenticationType) : windowsIdentity;
+            this.windowsIdentity = clone
+                ? SecurityUtils.CloneWindowsIdentityIfNecessary(windowsIdentity, authenticationType)
+                : windowsIdentity;
         }
 
         public override string Id
@@ -112,7 +131,9 @@ namespace System.IdentityModel.Tokens
         {
             if (this.disposed)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ObjectDisposedException(this.GetType().FullName));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ObjectDisposedException(this.GetType().FullName)
+                );
             }
         }
     }

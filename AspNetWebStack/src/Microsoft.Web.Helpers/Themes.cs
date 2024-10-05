@@ -32,7 +32,13 @@ namespace Microsoft.Web.Helpers
 
         private static ThemesImplementation Implementation
         {
-            get { return new ThemesImplementation(HostingEnvironment.VirtualPathProvider, ScopeStorage.CurrentScope); }
+            get
+            {
+                return new ThemesImplementation(
+                    HostingEnvironment.VirtualPathProvider,
+                    ScopeStorage.CurrentScope
+                );
+            }
         }
 
         public static void Initialize(string themeDirectory, string defaultTheme)

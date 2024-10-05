@@ -10,13 +10,23 @@ namespace Microsoft.CodeAnalysis
 {
     internal abstract partial class CommonCompiler
     {
-        internal sealed class LoggingMetadataFileReferenceResolver : MetadataReferenceResolver, IEquatable<LoggingMetadataFileReferenceResolver>
+        internal sealed class LoggingMetadataFileReferenceResolver
+            : MetadataReferenceResolver,
+                IEquatable<LoggingMetadataFileReferenceResolver>
         {
             private readonly TouchedFileLogger? _logger;
             private readonly RelativePathResolver _pathResolver;
-            private readonly Func<string, MetadataReferenceProperties, PortableExecutableReference> _provider;
+            private readonly Func<
+                string,
+                MetadataReferenceProperties,
+                PortableExecutableReference
+            > _provider;
 
-            public LoggingMetadataFileReferenceResolver(RelativePathResolver pathResolver, Func<string, MetadataReferenceProperties, PortableExecutableReference> provider, TouchedFileLogger? logger)
+            public LoggingMetadataFileReferenceResolver(
+                RelativePathResolver pathResolver,
+                Func<string, MetadataReferenceProperties, PortableExecutableReference> provider,
+                TouchedFileLogger? logger
+            )
             {
                 Debug.Assert(pathResolver != null);
                 Debug.Assert(provider != null);
@@ -26,7 +36,11 @@ namespace Microsoft.CodeAnalysis
                 _logger = logger;
             }
 
-            public override ImmutableArray<PortableExecutableReference> ResolveReference(string reference, string? baseFilePath, MetadataReferenceProperties properties)
+            public override ImmutableArray<PortableExecutableReference> ResolveReference(
+                string reference,
+                string? baseFilePath,
+                MetadataReferenceProperties properties
+            )
             {
                 string? fullPath = _pathResolver.ResolvePath(reference, baseFilePath);
 
@@ -49,7 +63,8 @@ namespace Microsoft.CodeAnalysis
                 throw new NotImplementedException();
             }
 
-            public override bool Equals(object? obj) => obj is LoggingMetadataFileReferenceResolver other && Equals(other);
+            public override bool Equals(object? obj) =>
+                obj is LoggingMetadataFileReferenceResolver other && Equals(other);
         }
     }
 }

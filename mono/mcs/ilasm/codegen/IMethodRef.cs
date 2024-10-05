@@ -10,28 +10,16 @@
 
 using System;
 
+namespace Mono.ILASM
+{
+    public interface IMethodRef
+    {
+        PEAPI.Method PeapiMethod { get; }
 
-namespace Mono.ILASM {
+        PEAPI.CallConv CallConv { get; set; }
 
-        public interface IMethodRef {
+        void Resolve(CodeGen code_gen);
 
-                PEAPI.Method PeapiMethod {
-                        get;
-                }
-
-		PEAPI.CallConv CallConv {
-			get;
-			set;
-		}
-
-                void Resolve (CodeGen code_gen);
-
-		BaseTypeRef Owner {
-			get;
-		}
-        }
-
+        BaseTypeRef Owner { get; }
+    }
 }
-
-
-

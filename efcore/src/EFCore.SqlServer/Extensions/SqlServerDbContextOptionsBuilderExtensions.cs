@@ -37,9 +37,12 @@ public static class SqlServerDbContextOptionsExtensions
     /// <returns>The options builder so that further configuration can be chained.</returns>
     public static DbContextOptionsBuilder UseSqlServer(
         this DbContextOptionsBuilder optionsBuilder,
-        Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction = null)
+        Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction = null
+    )
     {
-        ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(GetOrCreateExtension(optionsBuilder));
+        ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
+            GetOrCreateExtension(optionsBuilder)
+        );
 
         return ApplyConfiguration(optionsBuilder, sqlServerOptionsAction);
     }
@@ -59,9 +62,11 @@ public static class SqlServerDbContextOptionsExtensions
     public static DbContextOptionsBuilder UseSqlServer(
         this DbContextOptionsBuilder optionsBuilder,
         string? connectionString,
-        Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction = null)
+        Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction = null
+    )
     {
-        var extension = (SqlServerOptionsExtension)GetOrCreateExtension(optionsBuilder).WithConnectionString(connectionString);
+        var extension = (SqlServerOptionsExtension)
+            GetOrCreateExtension(optionsBuilder).WithConnectionString(connectionString);
         ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(extension);
 
         return ApplyConfiguration(optionsBuilder, sqlServerOptionsAction);
@@ -88,8 +93,8 @@ public static class SqlServerDbContextOptionsExtensions
     public static DbContextOptionsBuilder UseSqlServer(
         this DbContextOptionsBuilder optionsBuilder,
         DbConnection connection,
-        Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction = null)
-        => UseSqlServer(optionsBuilder, connection, false, sqlServerOptionsAction);
+        Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction = null
+    ) => UseSqlServer(optionsBuilder, connection, false, sqlServerOptionsAction);
 
     // Note: Decision made to use DbConnection not SqlConnection: Issue #772
     /// <summary>
@@ -117,11 +122,13 @@ public static class SqlServerDbContextOptionsExtensions
         this DbContextOptionsBuilder optionsBuilder,
         DbConnection connection,
         bool contextOwnsConnection,
-        Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction = null)
+        Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction = null
+    )
     {
         Check.NotNull(connection, nameof(connection));
 
-        var extension = (SqlServerOptionsExtension)GetOrCreateExtension(optionsBuilder).WithConnection(connection, contextOwnsConnection);
+        var extension = (SqlServerOptionsExtension)
+            GetOrCreateExtension(optionsBuilder).WithConnection(connection, contextOwnsConnection);
         ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(extension);
 
         return ApplyConfiguration(optionsBuilder, sqlServerOptionsAction);
@@ -148,10 +155,11 @@ public static class SqlServerDbContextOptionsExtensions
     /// <returns>The options builder so that further configuration can be chained.</returns>
     public static DbContextOptionsBuilder<TContext> UseSqlServer<TContext>(
         this DbContextOptionsBuilder<TContext> optionsBuilder,
-        Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction = null)
-        where TContext : DbContext
-        => (DbContextOptionsBuilder<TContext>)UseSqlServer(
-            (DbContextOptionsBuilder)optionsBuilder, sqlServerOptionsAction);
+        Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction = null
+    )
+        where TContext : DbContext =>
+        (DbContextOptionsBuilder<TContext>)
+            UseSqlServer((DbContextOptionsBuilder)optionsBuilder, sqlServerOptionsAction);
 
     /// <summary>
     ///     Configures the context to connect to a Microsoft SQL Server database.
@@ -169,10 +177,15 @@ public static class SqlServerDbContextOptionsExtensions
     public static DbContextOptionsBuilder<TContext> UseSqlServer<TContext>(
         this DbContextOptionsBuilder<TContext> optionsBuilder,
         string? connectionString,
-        Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction = null)
-        where TContext : DbContext
-        => (DbContextOptionsBuilder<TContext>)UseSqlServer(
-            (DbContextOptionsBuilder)optionsBuilder, connectionString, sqlServerOptionsAction);
+        Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction = null
+    )
+        where TContext : DbContext =>
+        (DbContextOptionsBuilder<TContext>)
+            UseSqlServer(
+                (DbContextOptionsBuilder)optionsBuilder,
+                connectionString,
+                sqlServerOptionsAction
+            );
 
     // Note: Decision made to use DbConnection not SqlConnection: Issue #772
     /// <summary>
@@ -196,10 +209,15 @@ public static class SqlServerDbContextOptionsExtensions
     public static DbContextOptionsBuilder<TContext> UseSqlServer<TContext>(
         this DbContextOptionsBuilder<TContext> optionsBuilder,
         DbConnection connection,
-        Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction = null)
-        where TContext : DbContext
-        => (DbContextOptionsBuilder<TContext>)UseSqlServer(
-            (DbContextOptionsBuilder)optionsBuilder, connection, sqlServerOptionsAction);
+        Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction = null
+    )
+        where TContext : DbContext =>
+        (DbContextOptionsBuilder<TContext>)
+            UseSqlServer(
+                (DbContextOptionsBuilder)optionsBuilder,
+                connection,
+                sqlServerOptionsAction
+            );
 
     // Note: Decision made to use DbConnection not SqlConnection: Issue #772
     /// <summary>
@@ -228,24 +246,34 @@ public static class SqlServerDbContextOptionsExtensions
         this DbContextOptionsBuilder<TContext> optionsBuilder,
         DbConnection connection,
         bool contextOwnsConnection,
-        Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction = null)
-        where TContext : DbContext
-        => (DbContextOptionsBuilder<TContext>)UseSqlServer(
-            (DbContextOptionsBuilder)optionsBuilder, connection, contextOwnsConnection, sqlServerOptionsAction);
+        Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction = null
+    )
+        where TContext : DbContext =>
+        (DbContextOptionsBuilder<TContext>)
+            UseSqlServer(
+                (DbContextOptionsBuilder)optionsBuilder,
+                connection,
+                contextOwnsConnection,
+                sqlServerOptionsAction
+            );
 
-    private static SqlServerOptionsExtension GetOrCreateExtension(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.Options.FindExtension<SqlServerOptionsExtension>()
-            ?? new SqlServerOptionsExtension();
+    private static SqlServerOptionsExtension GetOrCreateExtension(
+        DbContextOptionsBuilder optionsBuilder
+    ) =>
+        optionsBuilder.Options.FindExtension<SqlServerOptionsExtension>()
+        ?? new SqlServerOptionsExtension();
 
     private static DbContextOptionsBuilder ApplyConfiguration(
         DbContextOptionsBuilder optionsBuilder,
-        Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction)
+        Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction
+    )
     {
         ConfigureWarnings(optionsBuilder);
 
         sqlServerOptionsAction?.Invoke(new SqlServerDbContextOptionsBuilder(optionsBuilder));
 
-        var extension = (SqlServerOptionsExtension)GetOrCreateExtension(optionsBuilder).ApplyDefaults(optionsBuilder.Options);
+        var extension = (SqlServerOptionsExtension)
+            GetOrCreateExtension(optionsBuilder).ApplyDefaults(optionsBuilder.Options);
         ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(extension);
 
         return optionsBuilder;
@@ -253,16 +281,23 @@ public static class SqlServerDbContextOptionsExtensions
 
     private static void ConfigureWarnings(DbContextOptionsBuilder optionsBuilder)
     {
-        var coreOptionsExtension
-            = optionsBuilder.Options.FindExtension<CoreOptionsExtension>()
+        var coreOptionsExtension =
+            optionsBuilder.Options.FindExtension<CoreOptionsExtension>()
             ?? new CoreOptionsExtension();
 
-        coreOptionsExtension = RelationalOptionsExtension.WithDefaultWarningConfiguration(coreOptionsExtension);
+        coreOptionsExtension = RelationalOptionsExtension.WithDefaultWarningConfiguration(
+            coreOptionsExtension
+        );
 
         coreOptionsExtension = coreOptionsExtension.WithWarningsConfiguration(
             coreOptionsExtension.WarningsConfiguration.TryWithExplicit(
-                SqlServerEventId.ConflictingValueGenerationStrategiesWarning, WarningBehavior.Throw));
+                SqlServerEventId.ConflictingValueGenerationStrategiesWarning,
+                WarningBehavior.Throw
+            )
+        );
 
-        ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(coreOptionsExtension);
+        ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
+            coreOptionsExtension
+        );
     }
 }

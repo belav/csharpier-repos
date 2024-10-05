@@ -10,14 +10,28 @@ namespace Microsoft.AspNetCore.InternalTesting;
 
 public class AspNetTestFrameworkExecutor : XunitTestFrameworkExecutor
 {
-    public AspNetTestFrameworkExecutor(AssemblyName assemblyName, ISourceInformationProvider sourceInformationProvider, IMessageSink diagnosticMessageSink)
-        : base(assemblyName, sourceInformationProvider, diagnosticMessageSink)
-    {
-    }
+    public AspNetTestFrameworkExecutor(
+        AssemblyName assemblyName,
+        ISourceInformationProvider sourceInformationProvider,
+        IMessageSink diagnosticMessageSink
+    )
+        : base(assemblyName, sourceInformationProvider, diagnosticMessageSink) { }
 
-    protected override async void RunTestCases(IEnumerable<IXunitTestCase> testCases, IMessageSink executionMessageSink, ITestFrameworkExecutionOptions executionOptions)
+    protected override async void RunTestCases(
+        IEnumerable<IXunitTestCase> testCases,
+        IMessageSink executionMessageSink,
+        ITestFrameworkExecutionOptions executionOptions
+    )
     {
-        using (var assemblyRunner = new AspNetTestAssemblyRunner(TestAssembly, testCases, DiagnosticMessageSink, executionMessageSink, executionOptions))
+        using (
+            var assemblyRunner = new AspNetTestAssemblyRunner(
+                TestAssembly,
+                testCases,
+                DiagnosticMessageSink,
+                executionMessageSink,
+                executionOptions
+            )
+        )
         {
             await assemblyRunner.RunAsync().ConfigureAwait(false);
         }

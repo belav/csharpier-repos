@@ -9,6 +9,6 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
         ContainingMember,
         ContainingType,
         ContainingProject,
-        DependentProjects
+        DependentProjects,
     }
 }

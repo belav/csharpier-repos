@@ -3,7 +3,6 @@
 
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-
 using Internal.Runtime;
 
 namespace System
@@ -20,14 +19,10 @@ namespace System
 #pragma warning restore
 
         // Creates a new instance of an Object.
-        public Object()
-        {
-        }
+        public Object() { }
 
 #pragma warning disable CA1821 // Remove empty Finalizers
-        ~Object()
-        {
-        }
+        ~Object() { }
 #pragma warning restore CA1821
 
         public virtual bool Equals(object o)
@@ -59,7 +54,9 @@ namespace System
         /// </summary>
         internal uint GetRawObjectDataSize()
         {
-            return GetMethodTable()->BaseSize - (uint)sizeof(ObjHeader) - (uint)sizeof(MethodTable*);
+            return GetMethodTable()->BaseSize
+                - (uint)sizeof(ObjHeader)
+                - (uint)sizeof(MethodTable*);
         }
     }
 }

@@ -1,49 +1,51 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
-namespace System.Globalization {
-    using System.Text;
-    using System.Runtime.Remoting;
+namespace System.Globalization
+{
     using System;
+    using System.Runtime.Remoting;
     using System.Security;
+    using System.Text;
 
     //
-    // Data item for EncodingTable.  Along with EncodingTable, they are used by 
+    // Data item for EncodingTable.  Along with EncodingTable, they are used by
     // System.Text.Encoding.
-    // 
+    //
     // This class stores a pointer to the internal data and the index into that data
     // where our required information is found.  We load the code page, flags and uiFamilyCodePage
     // immediately because they don't require creating an object.  Creating any of the string
     // names is delayed until somebody actually asks for them and the names are then cached.
-    
+
     [Serializable]
     internal class CodePageDataItem
     {
-        internal int    m_dataIndex;
-        internal int    m_uiFamilyCodePage;
+        internal int m_dataIndex;
+        internal int m_uiFamilyCodePage;
         internal String m_webName;
         internal String m_headerName;
         internal String m_bodyName;
-        internal uint   m_flags;
-    
+        internal uint m_flags;
+
         [SecurityCritical]
-        unsafe internal CodePageDataItem(int dataIndex) {
+        internal unsafe CodePageDataItem(int dataIndex)
+        {
             m_dataIndex = dataIndex;
             m_uiFamilyCodePage = EncodingTable.codePageDataPtr[dataIndex].uiFamilyCodePage;
             m_flags = EncodingTable.codePageDataPtr[dataIndex].flags;
         }
 
-		static readonly char [] sep = {'|'};
+        static readonly char[] sep = { '|' };
 
         [System.Security.SecurityCritical]
-        unsafe internal static String CreateString(string pStrings, uint index)
+        internal static unsafe String CreateString(string pStrings, uint index)
         {
             if (pStrings[0] == '|') // |str1|str2|str3
             {
-				return pStrings.Split (sep, StringSplitOptions.RemoveEmptyEntries) [index];
-				/*
+                return pStrings.Split(sep, StringSplitOptions.RemoveEmptyEntries)[index];
+                /*
                 int start = 1;
                 
                 for (int i = 1; true; i ++)
@@ -72,52 +74,61 @@ namespace System.Globalization {
             }
             else
             {
-				return pStrings;
+                return pStrings;
                 //return new String(pStrings);
             }
         }
 
-        unsafe public String WebName {
-            [System.Security.SecuritySafeCritical]  // auto-generated
-            get {
-                if (m_webName==null) {
+        public unsafe String WebName
+        {
+            [System.Security.SecuritySafeCritical] // auto-generated
+            get
+            {
+                if (m_webName == null)
+                {
                     m_webName = CreateString(EncodingTable.codePageDataPtr[m_dataIndex].Names, 0);
                 }
                 return m_webName;
             }
         }
-    
-        public virtual int UIFamilyCodePage {
-            get {
-                return m_uiFamilyCodePage;
-            }
+
+        public virtual int UIFamilyCodePage
+        {
+            get { return m_uiFamilyCodePage; }
         }
-    
-        unsafe public String HeaderName {
-            [System.Security.SecuritySafeCritical]  // auto-generated
-            get {
-                if (m_headerName==null) {
-                    m_headerName = CreateString(EncodingTable.codePageDataPtr[m_dataIndex].Names, 1);
+
+        public unsafe String HeaderName
+        {
+            [System.Security.SecuritySafeCritical] // auto-generated
+            get
+            {
+                if (m_headerName == null)
+                {
+                    m_headerName = CreateString(
+                        EncodingTable.codePageDataPtr[m_dataIndex].Names,
+                        1
+                    );
                 }
                 return m_headerName;
             }
         }
-    
-        unsafe public String BodyName {
-            [System.Security.SecuritySafeCritical]  // auto-generated
-            get {
-                if (m_bodyName==null) {
+
+        public unsafe String BodyName
+        {
+            [System.Security.SecuritySafeCritical] // auto-generated
+            get
+            {
+                if (m_bodyName == null)
+                {
                     m_bodyName = CreateString(EncodingTable.codePageDataPtr[m_dataIndex].Names, 2);
                 }
                 return m_bodyName;
             }
-        }    
+        }
 
-        unsafe public uint Flags {
-            get {
-                return (m_flags);
-            }
+        public unsafe uint Flags
+        {
+            get { return (m_flags); }
         }
     }
 }
-

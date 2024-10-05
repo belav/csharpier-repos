@@ -15,10 +15,16 @@ using System.Web.Razor.Tokenizer.Symbols;
 
 namespace System.Web.Razor.Tokenizer
 {
-    public abstract partial class Tokenizer<TSymbol, TSymbolType> : StateMachine<TSymbol>, ITokenizer
+    public abstract partial class Tokenizer<TSymbol, TSymbolType>
+        : StateMachine<TSymbol>,
+            ITokenizer
         where TSymbol : SymbolBase<TSymbolType>
     {
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "TextDocumentReader does not require disposal")]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "TextDocumentReader does not require disposal"
+        )]
         protected Tokenizer(ITextDocument source)
         {
             if (source == null)
@@ -90,7 +96,12 @@ namespace System.Web.Razor.Tokenizer
             CurrentState = StartState;
         }
 
-        protected abstract TSymbol CreateSymbol(SourceLocation start, string content, TSymbolType type, IEnumerable<RazorError> errors);
+        protected abstract TSymbol CreateSymbol(
+            SourceLocation start,
+            string content,
+            TSymbolType type,
+            IEnumerable<RazorError> errors
+        );
 
         protected TSymbol Single(TSymbolType type)
         {
@@ -106,7 +117,11 @@ namespace System.Web.Razor.Tokenizer
             {
                 charFilter = Char.ToLower;
             }
-            while (!EndOfFile && position < input.Length && charFilter(CurrentCharacter) == charFilter(input[position++]))
+            while (
+                !EndOfFile
+                && position < input.Length
+                && charFilter(CurrentCharacter) == charFilter(input[position++])
+            )
             {
                 TakeCurrent();
             }
@@ -139,9 +154,14 @@ namespace System.Web.Razor.Tokenizer
         protected void ResumeSymbol(TSymbol previous)
         {
             // Verify the symbol can be resumed
-            if (previous.Start.AbsoluteIndex + previous.Content.Length != CurrentStart.AbsoluteIndex)
+            if (
+                previous.Start.AbsoluteIndex + previous.Content.Length
+                != CurrentStart.AbsoluteIndex
+            )
             {
-                throw new InvalidOperationException(RazorResources.Tokenizer_CannotResumeSymbolUnlessIsPrevious);
+                throw new InvalidOperationException(
+                    RazorResources.Tokenizer_CannotResumeSymbolUnlessIsPrevious
+                );
             }
 
             // Reset the start point
@@ -170,7 +190,8 @@ namespace System.Web.Razor.Tokenizer
 
         protected Func<char, bool> CharOrWhiteSpace(char character)
         {
-            return c => c == character || ParserHelpers.IsWhitespace(c) || ParserHelpers.IsNewLine(c);
+            return c =>
+                c == character || ParserHelpers.IsWhitespace(c) || ParserHelpers.IsNewLine(c);
         }
 
         protected void TakeCurrent()
@@ -235,16 +256,22 @@ namespace System.Web.Razor.Tokenizer
                     State next = () =>
                     {
                         Buffer.Append(star);
-                        return Transition(EndSymbol(start, RazorCommentStarType), () =>
-                        {
-                            if (CurrentCharacter != '@')
+                        return Transition(
+                            EndSymbol(start, RazorCommentStarType),
+                            () =>
                             {
-                                // We've been moved since last time we were asked for a symbol... reset the state
-                                return Transition(StartState);
+                                if (CurrentCharacter != '@')
+                                {
+                                    // We've been moved since last time we were asked for a symbol... reset the state
+                                    return Transition(StartState);
+                                }
+                                TakeCurrent();
+                                return Transition(
+                                    EndSymbol(RazorCommentTransitionType),
+                                    StartState
+                                );
                             }
-                            TakeCurrent();
-                            return Transition(EndSymbol(RazorCommentTransitionType), StartState);
-                        });
+                        );
                     };
 
                     if (HaveContent)
@@ -317,11 +344,21 @@ namespace System.Web.Razor.Tokenizer
             return true;
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "This only occurs in Release builds, where this method is empty by design")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This only occurs in Release builds, where this method is empty by design"
+        )]
         [Conditional("DEBUG")]
         internal void AssertCurrent(char current)
         {
-            Debug.Assert(CurrentCharacter == current, "CurrentCharacter Assumption violated", "Assumed that the current character would be {0}, but it is actually {1}", current, CurrentCharacter);
+            Debug.Assert(
+                CurrentCharacter == current,
+                "CurrentCharacter Assumption violated",
+                "Assumed that the current character would be {0}, but it is actually {1}",
+                current,
+                CurrentCharacter
+            );
         }
 
         ISymbol ITokenizer.NextSymbol()
@@ -338,7 +375,16 @@ namespace System.Web.Razor.Tokenizer
 
         public string DebugDisplay
         {
-            get { return String.Format(CultureInfo.InvariantCulture, "[{0}] [{1}] [{2}]", _read.ToString(), CurrentCharacter, Remaining); }
+            get
+            {
+                return String.Format(
+                    CultureInfo.InvariantCulture,
+                    "[{0}] [{1}] [{2}]",
+                    _read.ToString(),
+                    CurrentCharacter,
+                    Remaining
+                );
+            }
         }
 
         public string Remaining

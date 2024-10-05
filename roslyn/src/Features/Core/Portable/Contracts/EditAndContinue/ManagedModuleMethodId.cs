@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using System.Runtime.Serialization;
 using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.Serialization;
 
 namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue
 {
@@ -24,11 +24,9 @@ namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue
         /// <param name="token">Method token.</param>
         /// <param name="version">Method version.</param>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// If <paramref name="token"/> is less or equals 0x06000000 or <paramref name="version"/> is less or equals zero. 
+        /// If <paramref name="token"/> is less or equals 0x06000000 or <paramref name="version"/> is less or equals zero.
         /// </exception>
-        public ManagedModuleMethodId(
-            int token,
-            int version)
+        public ManagedModuleMethodId(int token, int version)
         {
             // 0x06 means that the token is for a MethodDef.
             // Valid method tokens are expected to be greather than 0x06000000.
@@ -51,7 +49,7 @@ namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue
         /// MethodVersion is a 1-based index. This will be '1' for methods that have not
         /// been edited through Edit-and-continue. For edited methods, the version indicates
         /// the EnC apply of this method.
-        /// Thus, if the user does 5 EnC applies and a particular method is only edited in the 5th apply, 
+        /// Thus, if the user does 5 EnC applies and a particular method is only edited in the 5th apply,
         /// then there are two method ids for this method, and they have Version = 1 and Version = 5.
         ///
         /// The debugger needs to deal with old versions of the method because they will
@@ -60,7 +58,7 @@ namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue
         /// methods. In other words, if the user sets a breakpoint within the catch block of a
         /// non-leaf method, the debugger needs to set that breakpoint within the old version
         /// of the method.
-        /// 
+        ///
         /// In scenarios such as function breakpoint binding, the value '0' may used to
         /// indicate the current version of the method.
         /// </summary>
@@ -72,13 +70,16 @@ namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue
             return Token == other.Token && Version == other.Version;
         }
 
-        public override bool Equals(object? obj) => obj is ManagedModuleMethodId method && Equals(method);
+        public override bool Equals(object? obj) =>
+            obj is ManagedModuleMethodId method && Equals(method);
 
         public override int GetHashCode() => Token ^ Version;
 
-        public static bool operator ==(ManagedModuleMethodId left, ManagedModuleMethodId right) => left.Equals(right);
+        public static bool operator ==(ManagedModuleMethodId left, ManagedModuleMethodId right) =>
+            left.Equals(right);
 
-        public static bool operator !=(ManagedModuleMethodId left, ManagedModuleMethodId right) => !(left == right);
+        public static bool operator !=(ManagedModuleMethodId left, ManagedModuleMethodId right) =>
+            !(left == right);
 
         internal string GetDebuggerDisplay() => $"0x{Token:X8} v{Version}";
     }

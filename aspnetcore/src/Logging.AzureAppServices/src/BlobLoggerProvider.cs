@@ -27,14 +27,19 @@ public class BlobLoggerProvider : BatchingLoggerProvider
     /// Creates a new instance of <see cref="BlobLoggerProvider"/>
     /// </summary>
     /// <param name="options">The options to use when creating a provider.</param>
-    [SuppressMessage("ApiDesign", "RS0022:Constructor make noninheritable base class inheritable", Justification = "Required for backwards compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0022:Constructor make noninheritable base class inheritable",
+        Justification = "Required for backwards compatibility"
+    )]
     public BlobLoggerProvider(IOptionsMonitor<AzureBlobLoggerOptions> options)
         : this(options, null)
     {
         _blobReferenceFactory = name => new BlobAppendReferenceWrapper(
             options.CurrentValue.ContainerUrl,
             name,
-            _httpClient);
+            _httpClient
+        );
     }
 
     /// <summary>
@@ -44,15 +49,19 @@ public class BlobLoggerProvider : BatchingLoggerProvider
     /// <param name="options">Options to be used in creating a logger.</param>
     internal BlobLoggerProvider(
         IOptionsMonitor<AzureBlobLoggerOptions> options,
-        Func<string, ICloudAppendBlob> blobReferenceFactory) :
-        base(options)
+        Func<string, ICloudAppendBlob> blobReferenceFactory
+    )
+        : base(options)
     {
         _options = options;
         _blobReferenceFactory = blobReferenceFactory;
         _httpClient = new HttpClient();
     }
 
-    internal override async Task WriteMessagesAsync(IEnumerable<LogMessage> messages, CancellationToken cancellationToken)
+    internal override async Task WriteMessagesAsync(
+        IEnumerable<LogMessage> messages,
+        CancellationToken cancellationToken
+    )
     {
         var eventGroups = messages.GroupBy(GetBlobKey);
         var options = _options.CurrentValue;
@@ -61,10 +70,13 @@ public class BlobLoggerProvider : BatchingLoggerProvider
         foreach (var eventGroup in eventGroups)
         {
             var key = eventGroup.Key;
-            string blobName = options.FileNameFormat(new AzureBlobLoggerContext(
-                options.ApplicationName,
-                identifier,
-                new DateTimeOffset(key.Year, key.Month, key.Day, key.Hour, 0, 0, TimeSpan.Zero)));
+            string blobName = options.FileNameFormat(
+                new AzureBlobLoggerContext(
+                    options.ApplicationName,
+                    identifier,
+                    new DateTimeOffset(key.Year, key.Month, key.Day, key.Hour, 0, 0, TimeSpan.Zero)
+                )
+            );
 
             var blob = _blobReferenceFactory(blobName);
 
@@ -86,9 +98,6 @@ public class BlobLoggerProvider : BatchingLoggerProvider
 
     private (int Year, int Month, int Day, int Hour) GetBlobKey(LogMessage e)
     {
-        return (e.Timestamp.Year,
-            e.Timestamp.Month,
-            e.Timestamp.Day,
-            e.Timestamp.Hour);
+        return (e.Timestamp.Year, e.Timestamp.Month, e.Timestamp.Day, e.Timestamp.Hour);
     }
 }

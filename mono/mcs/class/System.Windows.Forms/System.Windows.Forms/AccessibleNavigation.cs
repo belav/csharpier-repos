@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -25,15 +25,17 @@
 
 // COMPLETE
 
-namespace System.Windows.Forms {
-	public enum AccessibleNavigation {
-		Up		= 1,
-		Down		= 2,
-		Left		= 3,
-		Right		= 4,
-		Next		= 5,
-		Previous	= 6,
-		FirstChild	= 7,
-		LastChild	= 8
-	}
+namespace System.Windows.Forms
+{
+    public enum AccessibleNavigation
+    {
+        Up = 1,
+        Down = 2,
+        Left = 3,
+        Right = 4,
+        Next = 5,
+        Previous = 6,
+        FirstChild = 7,
+        LastChild = 8,
+    }
 }

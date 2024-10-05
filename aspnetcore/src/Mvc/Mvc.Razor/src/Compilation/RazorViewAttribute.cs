@@ -6,7 +6,9 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Compilation;
 /// <summary>
 /// This class is replaced by RazorCompiledItem and will not be used by the runtime.
 /// </summary>
-[Obsolete("This attribute has been superseded by RazorCompiledItem and will not be used by the runtime.")]
+[Obsolete(
+    "This attribute has been superseded by RazorCompiledItem and will not be used by the runtime."
+)]
 [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
 public class RazorViewAttribute : Attribute
 {

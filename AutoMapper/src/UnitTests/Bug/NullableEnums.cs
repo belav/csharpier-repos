@@ -2,15 +2,27 @@
 
 public class NullableEnums : AutoMapperSpecBase
 {
-    public class Src { public EnumType? A { get; set; } }
-    public class Dst { public EnumType? A { get; set; } }
-
-    public enum EnumType { One, Two }
-
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
+    public class Src
     {
-        cfg.CreateMap<Src, Dst>();
-    });
+        public EnumType? A { get; set; }
+    }
+
+    public class Dst
+    {
+        public EnumType? A { get; set; }
+    }
+
+    public enum EnumType
+    {
+        One,
+        Two,
+    }
+
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Src, Dst>();
+        });
 
     [Fact]
     public void TestNullableEnum()
@@ -18,5 +30,5 @@ public class NullableEnums : AutoMapperSpecBase
         var d = Mapper.Map(new Src { A = null }, new Dst { A = EnumType.One });
 
         d.A.ShouldBeNull();
-    } 
+    }
 }

@@ -6,18 +6,24 @@ namespace System.ServiceModel.ComIntegration
     using System;
     using System.Runtime;
     using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
     using System.ServiceModel.Channels;
     using System.Threading;
-    using System.Runtime.Versioning;
 
     class ProxySupportWrapper
     {
-        internal delegate int DelegateDllGetClassObject([In, MarshalAs(UnmanagedType.LPStruct)] Guid clsid, [In, MarshalAs(UnmanagedType.LPStruct)] Guid iid, ref IClassFactory ppv);
+        internal delegate int DelegateDllGetClassObject(
+            [In, MarshalAs(UnmanagedType.LPStruct)] Guid clsid,
+            [In, MarshalAs(UnmanagedType.LPStruct)] Guid iid,
+            ref IClassFactory ppv
+        );
 
         const string fileName = @"ServiceMonikerSupport.dll";
         const string functionName = @"DllGetClassObject";
 
-        static readonly Guid ClsidProxyInstanceProvider = new Guid("(BF0514FB-6912-4659-AD69-B727E5B7ADD4)");
+        static readonly Guid ClsidProxyInstanceProvider = new Guid(
+            "(BF0514FB-6912-4659-AD69-B727E5B7ADD4)"
+        );
 
         // Double-checked locking pattern requires volatile for read/write synchronization
         volatile SafeLibraryHandle monikerSupportLibrary;
@@ -50,9 +56,21 @@ namespace System.ServiceModel.ComIntegration
                     if (null == monikerSupportLibrary)
                     {
                         getCODelegate = null;
-                        using (RegistryHandle regKey = RegistryHandle.GetCorrectBitnessHKLMSubkey((IntPtr.Size == 8), ServiceModelInstallStrings.WinFXRegistryKey))
+                        using (
+                            RegistryHandle regKey = RegistryHandle.GetCorrectBitnessHKLMSubkey(
+                                (IntPtr.Size == 8),
+                                ServiceModelInstallStrings.WinFXRegistryKey
+                            )
+                        )
                         {
-                            string file = regKey.GetStringValue(ServiceModelInstallStrings.RuntimeInstallPathName).TrimEnd('\0') + "\\" + fileName;
+                            string file =
+                                regKey
+                                    .GetStringValue(
+                                        ServiceModelInstallStrings.RuntimeInstallPathName
+                                    )
+                                    .TrimEnd('\0')
+                                + "\\"
+                                + fileName;
                             SafeLibraryHandle tempLibrary = UnsafeNativeMethods.LoadLibrary(file);
                             tempLibrary.DoNotFreeLibraryOnRelease();
 
@@ -60,7 +78,9 @@ namespace System.ServiceModel.ComIntegration
                             if (monikerSupportLibrary.IsInvalid)
                             {
                                 monikerSupportLibrary.SetHandleAsInvalid();
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(Error.ServiceMonikerSupportLoadFailed(file));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    Error.ServiceMonikerSupportLoadFailed(file)
+                                );
                             }
                         }
                     }
@@ -75,16 +95,27 @@ namespace System.ServiceModel.ComIntegration
                     {
                         try
                         {
-                            IntPtr procaddr = UnsafeNativeMethods.GetProcAddress(monikerSupportLibrary, functionName);
-                            getCODelegate = (DelegateDllGetClassObject)Marshal.GetDelegateForFunctionPointer(procaddr, typeof(DelegateDllGetClassObject));
-
+                            IntPtr procaddr = UnsafeNativeMethods.GetProcAddress(
+                                monikerSupportLibrary,
+                                functionName
+                            );
+                            getCODelegate = (DelegateDllGetClassObject)
+                                Marshal.GetDelegateForFunctionPointer(
+                                    procaddr,
+                                    typeof(DelegateDllGetClassObject)
+                                );
                         }
                         catch (Exception e)
                         {
                             if (Fx.IsFatal(e))
                                 throw;
 
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ComPlusProxyProviderException(SR.GetString(SR.FailedProxyProviderCreation), e));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new ComPlusProxyProviderException(
+                                    SR.GetString(SR.FailedProxyProviderCreation),
+                                    e
+                                )
+                            );
                         }
                     }
                 }
@@ -97,7 +128,8 @@ namespace System.ServiceModel.ComIntegration
             {
                 getCODelegate(ClsidProxyInstanceProvider, typeof(IClassFactory).GUID, ref cf);
 
-                proxyProvider = cf.CreateInstance(null, typeof(IProxyProvider).GUID) as IProxyProvider;
+                proxyProvider =
+                    cf.CreateInstance(null, typeof(IProxyProvider).GUID) as IProxyProvider;
                 Thread.MemoryBarrier();
             }
             catch (Exception e)
@@ -105,7 +137,12 @@ namespace System.ServiceModel.ComIntegration
                 if (Fx.IsFatal(e))
                     throw;
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ComPlusProxyProviderException(SR.GetString(SR.FailedProxyProviderCreation), e));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ComPlusProxyProviderException(
+                        SR.GetString(SR.FailedProxyProviderCreation),
+                        e
+                    )
+                );
             }
             finally
             {
@@ -119,7 +156,6 @@ namespace System.ServiceModel.ComIntegration
             return proxyProvider;
         }
     }
-
 
     internal static class OuterProxyWrapper
     {
@@ -140,10 +176,11 @@ namespace System.ServiceModel.ComIntegration
             Marshal.ReleaseComObject(proxyProvider);
 
             if (hr != HR.S_OK)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new COMException(SR.GetString(SR.FailedProxyProviderCreation), hr));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new COMException(SR.GetString(SR.FailedProxyProviderCreation), hr)
+                );
 
             return pOuter;
-
         }
 
         public static IntPtr CreateDispatchProxy(IntPtr pOuter, IPseudoDispatch proxy)
@@ -160,11 +197,11 @@ namespace System.ServiceModel.ComIntegration
             Marshal.ReleaseComObject(proxyProvider);
 
             if (hr != HR.S_OK)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new COMException(SR.GetString(SR.FailedProxyProviderCreation), hr));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new COMException(SR.GetString(SR.FailedProxyProviderCreation), hr)
+                );
 
             return pInner;
-
         }
     }
 }
-     

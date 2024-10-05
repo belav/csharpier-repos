@@ -20,7 +20,8 @@ public static class LogValuesAssert
     public static void Contains(
         string key,
         object value,
-        IEnumerable<KeyValuePair<string, object>> actualValues)
+        IEnumerable<KeyValuePair<string, object>> actualValues
+    )
     {
         Contains(new[] { new KeyValuePair<string, object>(key, value) }, actualValues);
     }
@@ -33,7 +34,8 @@ public static class LogValuesAssert
     /// <param name="actualValues">Actual set of values</param>
     public static void Contains(
         IEnumerable<KeyValuePair<string, object>> expectedValues,
-        IEnumerable<KeyValuePair<string, object>> actualValues)
+        IEnumerable<KeyValuePair<string, object>> actualValues
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(expectedValues);
         ArgumentNullThrowHelper.ThrowIfNull(actualValues);
@@ -46,7 +48,8 @@ public static class LogValuesAssert
             {
                 throw new EqualException(
                     expected: GetString(expectedValues),
-                    actual: GetString(actualValues));
+                    actual: GetString(actualValues)
+                );
             }
         }
     }

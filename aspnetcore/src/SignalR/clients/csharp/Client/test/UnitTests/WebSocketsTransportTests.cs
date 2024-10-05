@@ -5,8 +5,8 @@ using System.Net.WebSockets;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Http.Connections.Client;
 using Microsoft.AspNetCore.Http.Connections.Client.Internal;
-using Microsoft.AspNetCore.SignalR.Tests;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.SignalR.Tests;
 
 namespace Microsoft.AspNetCore.SignalR.Client.Tests;
 
@@ -27,10 +27,16 @@ public class WebSocketsTransportTests : VerifiableLoggedTest
 
         using (StartVerifiableLog())
         {
-            var webSocketsTransport = new WebSocketsTransport(options, loggerFactory: LoggerFactory, () => Task.FromResult<string>(null), null);
+            var webSocketsTransport = new WebSocketsTransport(
+                options,
+                loggerFactory: LoggerFactory,
+                () => Task.FromResult<string>(null),
+                null
+            );
 
-            await webSocketsTransport.StartAsync(
-                new Uri("http://fakeuri.org"), TransferFormat.Text).DefaultTimeout();
+            await webSocketsTransport
+                .StartAsync(new Uri("http://fakeuri.org"), TransferFormat.Text)
+                .DefaultTimeout();
 
             await webSocketsTransport.StopAsync().DefaultTimeout();
 
@@ -40,7 +46,8 @@ public class WebSocketsTransportTests : VerifiableLoggedTest
 
     internal class TestWebSocket : WebSocket
     {
-        public Task ConnectAsync(Uri uri, CancellationToken cancellationToken) => Task.CompletedTask;
+        public Task ConnectAsync(Uri uri, CancellationToken cancellationToken) =>
+            Task.CompletedTask;
 
         public override WebSocketCloseStatus? CloseStatus => null;
 
@@ -52,10 +59,17 @@ public class WebSocketsTransportTests : VerifiableLoggedTest
 
         public override void Abort() { }
 
-        public override Task CloseAsync(WebSocketCloseStatus closeStatus, string statusDescription, CancellationToken cancellationToken)
-            => Task.CompletedTask;
+        public override Task CloseAsync(
+            WebSocketCloseStatus closeStatus,
+            string statusDescription,
+            CancellationToken cancellationToken
+        ) => Task.CompletedTask;
 
-        public override async Task CloseOutputAsync(WebSocketCloseStatus closeStatus, string statusDescription, CancellationToken cancellationToken)
+        public override async Task CloseOutputAsync(
+            WebSocketCloseStatus closeStatus,
+            string statusDescription,
+            CancellationToken cancellationToken
+        )
         {
             await cancellationToken.WaitForCancellationAsync();
             cancellationToken.ThrowIfCancellationRequested();
@@ -63,14 +77,22 @@ public class WebSocketsTransportTests : VerifiableLoggedTest
 
         public override void Dispose() { }
 
-        public override async Task<WebSocketReceiveResult> ReceiveAsync(ArraySegment<byte> buffer, CancellationToken cancellationToken)
+        public override async Task<WebSocketReceiveResult> ReceiveAsync(
+            ArraySegment<byte> buffer,
+            CancellationToken cancellationToken
+        )
         {
             await cancellationToken.WaitForCancellationAsync();
             cancellationToken.ThrowIfCancellationRequested();
             return new WebSocketReceiveResult(0, WebSocketMessageType.Text, true);
         }
 
-        public override async Task SendAsync(ArraySegment<byte> buffer, WebSocketMessageType messageType, bool endOfMessage, CancellationToken cancellationToken)
+        public override async Task SendAsync(
+            ArraySegment<byte> buffer,
+            WebSocketMessageType messageType,
+            bool endOfMessage,
+            CancellationToken cancellationToken
+        )
         {
             await cancellationToken.WaitForCancellationAsync();
             cancellationToken.ThrowIfCancellationRequested();

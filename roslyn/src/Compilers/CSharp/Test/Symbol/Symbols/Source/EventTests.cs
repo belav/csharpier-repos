@@ -4,14 +4,14 @@
 
 #nullable disable
 
+using System;
+using System.Linq;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Roslyn.Test.Utilities;
-using System;
-using System.Linq;
 using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Source
@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Source
         public void EventInStructFollowedByClassDecl()
         {
             var text =
-@"using System;
+                @"using System;
 struct Test1
 {
     event MyEvent ITest.Clicked;
@@ -40,7 +40,13 @@ class main1
             var comp = CreateCompilation(text);
 
             var actualSymbols = comp.Assembly.GlobalNamespace.GetMembers();
-            var actual = string.Join(", ", actualSymbols.Where(s => !s.IsImplicitlyDeclared).Select(symbol => symbol.Name).OrderBy(name => name));
+            var actual = string.Join(
+                ", ",
+                actualSymbols
+                    .Where(s => !s.IsImplicitlyDeclared)
+                    .Select(symbol => symbol.Name)
+                    .OrderBy(name => name)
+            );
             Assert.Equal("main1, Test1", actual);
         }
 
@@ -48,7 +54,8 @@ class main1
         [Fact]
         public void EventEscapedIdentifier()
         {
-            var text = @"
+            var text =
+                @"
 delegate void @out();
 class C1
 {
@@ -56,7 +63,8 @@ class C1
 }
 ";
             var comp = CreateCompilation(Parse(text));
-            NamedTypeSymbol c1 = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace.GetMembers("C1").Single();
+            NamedTypeSymbol c1 = (NamedTypeSymbol)
+                comp.SourceModule.GlobalNamespace.GetMembers("C1").Single();
             //EventSymbol ein = c1.GetMembers("in").Single();
             //Assert.Equal("in", ein.Name);
             //Assert.Equal("C1.@in", ein.ToString());
@@ -68,7 +76,8 @@ class C1
         [Fact]
         public void InstanceFieldLikeEventDeclaration()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     public virtual event System.Action E;
@@ -107,7 +116,8 @@ class C
         [Fact]
         public void StaticFieldLikeEventDeclaration()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     internal static event System.Action E;
@@ -145,7 +155,8 @@ class C
         [Fact]
         public void InstanceCustomEventDeclaration()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     protected event System.Action E { add { } remove { } }
@@ -180,7 +191,8 @@ class C
         [Fact]
         public void StaticCustomEventDeclaration()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     private static event System.Action E { add { } remove { } }
@@ -215,7 +227,8 @@ class C
         [Fact]
         public void UseAccessorParameter()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     protected event System.Action E 
@@ -238,7 +251,7 @@ class C
         public void EventInvocation()
         {
             var text =
-@"using System;
+                @"using System;
 public class Program
 {
     static void Main()
@@ -300,12 +313,26 @@ public class E
 
             var compVerifier = CompileAndVerify(text, expectedOutput: "T1H1H2T2H2T3T4H1H2T5H2T6");
             compVerifier.VerifyDiagnostics(DiagnosticDescription.None);
-            var semanticModel = compVerifier.Compilation.GetSemanticModel(compVerifier.Compilation.SyntaxTrees.Single());
+            var semanticModel = compVerifier.Compilation.GetSemanticModel(
+                compVerifier.Compilation.SyntaxTrees.Single()
+            );
 
-            var eventSymbol1 = semanticModel.LookupSymbols(text.IndexOf("/*anchorE_1*/", StringComparison.Ordinal), name: "E1").SingleOrDefault() as IEventSymbol;
+            var eventSymbol1 =
+                semanticModel
+                    .LookupSymbols(
+                        text.IndexOf("/*anchorE_1*/", StringComparison.Ordinal),
+                        name: "E1"
+                    )
+                    .SingleOrDefault() as IEventSymbol;
             Assert.NotNull(eventSymbol1);
 
-            var eventSymbol2 = semanticModel.LookupSymbols(text.IndexOf("/*anchorE_2*/", StringComparison.Ordinal), name: "E1").SingleOrDefault() as IEventSymbol;
+            var eventSymbol2 =
+                semanticModel
+                    .LookupSymbols(
+                        text.IndexOf("/*anchorE_2*/", StringComparison.Ordinal),
+                        name: "E1"
+                    )
+                    .SingleOrDefault() as IEventSymbol;
             Assert.NotNull(eventSymbol2);
         }
 
@@ -313,7 +340,8 @@ public class E
         [Fact()]
         public void FieldLikeEventAccessorIsSynthesized()
         {
-            var text = @"
+            var text =
+                @"
 delegate void D();
 class C
 {
@@ -332,7 +360,8 @@ class C
         [Fact, WorkItem(7845, "https://github.com/dotnet/roslyn/issues/7845")]
         public void EventWithDynamicAttribute_DynamicAttributeIsSynthesized()
         {
-            var source = @"
+            var source =
+                @"
 class A
 {
         public event System.Action<dynamic> E1;
@@ -352,16 +381,28 @@ class A
                 Assert.Equal("System.Action<dynamic>", p.Type.ToTestDisplayString());
 
                 Assert.Equal(1, e1.AddMethod.ParameterTypesWithAnnotations.Length);
-                Assert.Equal("System.Action<dynamic>", e1.AddMethod.ParameterTypesWithAnnotations[0].ToTestDisplayString());
+                Assert.Equal(
+                    "System.Action<dynamic>",
+                    e1.AddMethod.ParameterTypesWithAnnotations[0].ToTestDisplayString()
+                );
 
                 Assert.Equal(1, e1.RemoveMethod.ParameterTypesWithAnnotations.Length);
-                Assert.Equal("System.Action<dynamic>", e1.RemoveMethod.ParameterTypesWithAnnotations[0].ToTestDisplayString());
+                Assert.Equal(
+                    "System.Action<dynamic>",
+                    e1.RemoveMethod.ParameterTypesWithAnnotations[0].ToTestDisplayString()
+                );
 
                 Assert.Equal(1, e2.AddMethod.ParameterTypesWithAnnotations.Length);
-                Assert.Equal("System.Action<dynamic>", e2.AddMethod.ParameterTypesWithAnnotations[0].ToTestDisplayString());
+                Assert.Equal(
+                    "System.Action<dynamic>",
+                    e2.AddMethod.ParameterTypesWithAnnotations[0].ToTestDisplayString()
+                );
 
                 Assert.Equal(1, e2.RemoveMethod.ParameterTypesWithAnnotations.Length);
-                Assert.Equal("System.Action<dynamic>", e2.RemoveMethod.ParameterTypesWithAnnotations[0].ToTestDisplayString());
+                Assert.Equal(
+                    "System.Action<dynamic>",
+                    e2.RemoveMethod.ParameterTypesWithAnnotations[0].ToTestDisplayString()
+                );
 
                 Assert.Equal(1, e1.GetAttributes(AttributeDescription.DynamicAttribute).Count());
                 Assert.Equal(1, e2.GetAttributes(AttributeDescription.DynamicAttribute).Count());
@@ -374,38 +415,51 @@ class A
         [Fact, WorkItem(7845, "https://github.com/dotnet/roslyn/issues/7845")]
         public void EventFieldWithDynamicAttribute_CannotCompileWithoutSystemCore()
         {
-            var source = @"
+            var source =
+                @"
 public class A
 {
     public event System.Action<dynamic> E1;
 }";
-            var libComp = CreateEmptyCompilation(source, new[] { MscorlibRef }).VerifyDiagnostics(
-                // (4,32): error CS1980: Cannot define a class or member that utilizes 'dynamic' because the compiler required type 'System.Runtime.CompilerServices.DynamicAttribute' cannot be found. Are you missing a reference?
-                //     public event System.Action<dynamic> E1;
-                Diagnostic(ErrorCode.ERR_DynamicAttributeMissing, "dynamic").WithArguments("System.Runtime.CompilerServices.DynamicAttribute").WithLocation(4, 32),
-                // (4,41): warning CS0067: The event 'A.E1' is never used
-                //     public event System.Action<dynamic> E1;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E1").WithArguments("A.E1").WithLocation(4, 41));
+            var libComp = CreateEmptyCompilation(source, new[] { MscorlibRef })
+                .VerifyDiagnostics(
+                    // (4,32): error CS1980: Cannot define a class or member that utilizes 'dynamic' because the compiler required type 'System.Runtime.CompilerServices.DynamicAttribute' cannot be found. Are you missing a reference?
+                    //     public event System.Action<dynamic> E1;
+                    Diagnostic(ErrorCode.ERR_DynamicAttributeMissing, "dynamic")
+                        .WithArguments("System.Runtime.CompilerServices.DynamicAttribute")
+                        .WithLocation(4, 32),
+                    // (4,41): warning CS0067: The event 'A.E1' is never used
+                    //     public event System.Action<dynamic> E1;
+                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E1")
+                        .WithArguments("A.E1")
+                        .WithLocation(4, 41)
+                );
         }
 
         [Fact, WorkItem(7845, "https://github.com/dotnet/roslyn/issues/7845")]
         public void EventWithDynamicAttribute_CannotCompileWithoutSystemCore()
         {
-            var source = @"
+            var source =
+                @"
 public class A
 {
     public event System.Action<dynamic> E1 { add {} remove {} }
 }";
-            var libComp = CreateEmptyCompilation(source, references: new[] { MscorlibRef }).VerifyDiagnostics(
-                // (4,32): error CS1980: Cannot define a class or member that utilizes 'dynamic' because the compiler required type 'System.Runtime.CompilerServices.DynamicAttribute' cannot be found. Are you missing a reference?
-                //     public event System.Action<dynamic> E1 { add {} remove {} }
-                Diagnostic(ErrorCode.ERR_DynamicAttributeMissing, "dynamic").WithArguments("System.Runtime.CompilerServices.DynamicAttribute").WithLocation(4, 32));
+            var libComp = CreateEmptyCompilation(source, references: new[] { MscorlibRef })
+                .VerifyDiagnostics(
+                    // (4,32): error CS1980: Cannot define a class or member that utilizes 'dynamic' because the compiler required type 'System.Runtime.CompilerServices.DynamicAttribute' cannot be found. Are you missing a reference?
+                    //     public event System.Action<dynamic> E1 { add {} remove {} }
+                    Diagnostic(ErrorCode.ERR_DynamicAttributeMissing, "dynamic")
+                        .WithArguments("System.Runtime.CompilerServices.DynamicAttribute")
+                        .WithLocation(4, 32)
+                );
         }
 
         [Fact, WorkItem(7845, "https://github.com/dotnet/roslyn/issues/7845")]
         public void EventFieldWithDynamicAttribute_IsLoadedAsDynamic()
         {
-            var libText = @"
+            var libText =
+                @"
 public class C 
 {
     public event System.Action<dynamic> E1;
@@ -415,7 +469,8 @@ public class C
             var libComp = CreateCompilation(source: libText).VerifyDiagnostics();
             var libAssemblyRef = libComp.EmitToImageReference();
 
-            var source = @"
+            var source =
+                @"
 class LambdaConsumer
 {
     static void Main()
@@ -432,25 +487,39 @@ class LambdaConsumer
                 var tree = compilation.SyntaxTrees.First();
                 var model = compilation.GetSemanticModel(tree);
 
-                var lambdaSyntax = tree.GetRoot().DescendantNodes().OfType<SimpleLambdaExpressionSyntax>().First();
+                var lambdaSyntax = tree.GetRoot()
+                    .DescendantNodes()
+                    .OfType<SimpleLambdaExpressionSyntax>()
+                    .First();
                 Assert.Equal("f => f.Print()", lambdaSyntax.ToFullString());
 
                 var lambdaTypeInfo = model.GetTypeInfo(lambdaSyntax);
-                Assert.Equal("System.Action<dynamic>", lambdaTypeInfo.ConvertedType.ToTestDisplayString());
+                Assert.Equal(
+                    "System.Action<dynamic>",
+                    lambdaTypeInfo.ConvertedType.ToTestDisplayString()
+                );
 
-                var parameterSyntax = lambdaSyntax.DescendantNodes().OfType<ParameterSyntax>().First();
+                var parameterSyntax = lambdaSyntax
+                    .DescendantNodes()
+                    .OfType<ParameterSyntax>()
+                    .First();
                 var parameterSymbol = model.GetDeclaredSymbol(parameterSyntax);
                 Assert.Equal("dynamic", parameterSymbol.Type.ToTestDisplayString());
             };
 
-            CompileAndVerify(source: source, references: new[] { TargetFrameworkUtil.StandardCSharpReference, libAssemblyRef },
-                                                    expectedOutput: "Print method ran.", sourceSymbolValidator: validator);
+            CompileAndVerify(
+                source: source,
+                references: new[] { TargetFrameworkUtil.StandardCSharpReference, libAssemblyRef },
+                expectedOutput: "Print method ran.",
+                sourceSymbolValidator: validator
+            );
         }
 
         [Fact, WorkItem(7845, "https://github.com/dotnet/roslyn/issues/7845")]
         public void EventWithDynamicAttribute_IsLoadedAsDynamic()
         {
-            var libText = @"
+            var libText =
+                @"
 public class C {
     private System.Action<dynamic> _e1;
     public event System.Action<dynamic> E1 { add { _e1 = value; } remove {} }
@@ -461,7 +530,8 @@ public class C {
             libComp.VerifyDiagnostics();
             var libAssemblyRef = libComp.EmitToImageReference();
 
-            var source = @"
+            var source =
+                @"
 class D
 {
     static void Main()
@@ -478,25 +548,38 @@ class D
                 var tree = compilation.SyntaxTrees.First();
                 var model = compilation.GetSemanticModel(tree);
 
-                var lambdaSyntax = tree.GetRoot().DescendantNodes().OfType<SimpleLambdaExpressionSyntax>().First();
+                var lambdaSyntax = tree.GetRoot()
+                    .DescendantNodes()
+                    .OfType<SimpleLambdaExpressionSyntax>()
+                    .First();
                 Assert.Equal("f => f.Print()", lambdaSyntax.ToFullString());
 
                 var lambdaTypeInfo = model.GetTypeInfo(lambdaSyntax);
-                Assert.Equal("System.Action<dynamic>", lambdaTypeInfo.ConvertedType.ToTestDisplayString());
+                Assert.Equal(
+                    "System.Action<dynamic>",
+                    lambdaTypeInfo.ConvertedType.ToTestDisplayString()
+                );
 
-                var parameterSyntax = lambdaSyntax.DescendantNodes().OfType<ParameterSyntax>().First();
+                var parameterSyntax = lambdaSyntax
+                    .DescendantNodes()
+                    .OfType<ParameterSyntax>()
+                    .First();
                 var parameterSymbol = model.GetDeclaredSymbol(parameterSyntax);
                 Assert.Equal("dynamic", parameterSymbol.Type.ToTestDisplayString());
             };
 
-            var compilationVerifier = CompileAndVerify(source: source, references: new[] { TargetFrameworkUtil.StandardCSharpReference, libAssemblyRef },
-                                                    expectedOutput: "Print method ran.");
+            var compilationVerifier = CompileAndVerify(
+                source: source,
+                references: new[] { TargetFrameworkUtil.StandardCSharpReference, libAssemblyRef },
+                expectedOutput: "Print method ran."
+            );
         }
 
         [Fact, WorkItem(7845, "https://github.com/dotnet/roslyn/issues/7845")]
         public void EventFieldWithDynamicAttribute_IsLoadedAsDynamicViaCompilationRef()
         {
-            var libText = @"
+            var libText =
+                @"
 public class C 
 {
     public event System.Action<dynamic> E1;
@@ -505,7 +588,8 @@ public class C
 }";
             var libComp = CreateCompilation(libText);
             var libCompRef = new CSharpCompilationReference(libComp);
-            var source = @"
+            var source =
+                @"
 class D
 {
     static void Main()
@@ -516,16 +600,19 @@ class D
     }
 }";
             var expectedOutput = "Print method ran.";
-            var compilationVerifier = CompileAndVerify(source: source,
+            var compilationVerifier = CompileAndVerify(
+                source: source,
                 references: new[] { libCompRef },
                 targetFramework: TargetFramework.StandardAndCSharp,
-                expectedOutput: expectedOutput);
+                expectedOutput: expectedOutput
+            );
         }
 
         [Fact, WorkItem(7845, "https://github.com/dotnet/roslyn/issues/7845")]
         public void EventFieldWithDynamicAttribute_CanBeOverridden()
         {
-            var libText = @"
+            var libText =
+                @"
 public class C 
 {
     public virtual event System.Action<dynamic> E1 { add { System.Console.WriteLine(""Not called""); } remove {} }
@@ -534,7 +621,8 @@ public class C
 }";
             var libComp = CreateCompilation(source: libText);
             var libAssemblyRef = libComp.EmitToImageReference();
-            var source = @"
+            var source =
+                @"
 class B : C
 {
     public override event System.Action<dynamic> E1;
@@ -568,7 +656,7 @@ class A
     static void Print(object o) => System.Console.WriteLine(""Printed: "" + (System.String)o);
 }";
             var expectedOutput =
-@"Success1: Alice
+                @"Success1: Alice
 Success2
 Success3: Charlie
 Printed: Alice
@@ -579,13 +667,15 @@ Printed: Charlie
                 source: source,
                 targetFramework: TargetFramework.StandardAndCSharp,
                 references: new[] { libAssemblyRef },
-                expectedOutput: expectedOutput);
+                expectedOutput: expectedOutput
+            );
         }
 
         [Fact, WorkItem(7845, "https://github.com/dotnet/roslyn/issues/7845")]
         public void EventWithDynamicAttribute_OverriddenTypeDoesntLeak()
         {
-            var libText = @"
+            var libText =
+                @"
 public class CL1
 {
     public virtual event System.Action<dynamic> E1 { add {} remove {} }
@@ -594,7 +684,8 @@ public class CL1
             var libComp = CreateCompilation(source: libText);
             var libAssemblyRef = libComp.EmitToImageReference();
 
-            var source = @"
+            var source =
+                @"
 public class CL2 : CL1
 {
     public override event System.Action<object> E1;
@@ -611,13 +702,18 @@ public class CL2 : CL1
                 Assert.Equal("System.Action<System.Object>", e2.Type.ToTestDisplayString());
             };
 
-            CompileAndVerify(source: source, references: new[] { libAssemblyRef }, symbolValidator: validator);
+            CompileAndVerify(
+                source: source,
+                references: new[] { libAssemblyRef },
+                symbolValidator: validator
+            );
         }
 
         [Fact, WorkItem(7845, "https://github.com/dotnet/roslyn/issues/7845")]
         public void EventFieldWithDynamicAttribute_OverriddenTypeDoesntLeak()
         {
-            var libText = @"
+            var libText =
+                @"
 public class CL1
 {
     public virtual event System.Action<dynamic> E1;
@@ -626,7 +722,8 @@ public class CL1
             var libComp = CreateCompilation(source: libText);
             var libAssemblyRef = libComp.EmitToImageReference();
 
-            var source = @"
+            var source =
+                @"
 public class CL2 : CL1
 {
     public override event System.Action<object> E1;
@@ -643,7 +740,11 @@ public class CL2 : CL1
                 Assert.Equal("System.Action<System.Object>", e2.Type.ToTestDisplayString());
             };
 
-            CompileAndVerify(source: source, references: new[] { libAssemblyRef }, symbolValidator: validator);
+            CompileAndVerify(
+                source: source,
+                references: new[] { libAssemblyRef },
+                symbolValidator: validator
+            );
         }
 
         [Fact, WorkItem(7845, "https://github.com/dotnet/roslyn/issues/7845")]
@@ -659,7 +760,8 @@ public class CL2 : CL1
             // The important thing here is that the .event doesn't have a DynamicAttribute, but the add and remove accessors do.
             // Because of that the event will only be loaded as Action<object>, not Action<dynamic>
 
-            var ilSource = @"
+            var ilSource =
+                @"
 .assembly extern System.Core
 {
   .publickeytoken = (B7 7A 5C 56 19 34 E0 89 )                         // .z\V.4..
@@ -793,7 +895,8 @@ public class CL2 : CL1
 ";
             #endregion
 
-            var source = @"
+            var source =
+                @"
 class D
 {
     static void Main()
@@ -807,8 +910,11 @@ class D
     }
 }
 ";
-            var compVerifier = CompileAndVerify(source, new[] { TargetFrameworkUtil.StandardCSharpReference, CompileIL(ilSource) },
-                                                expectedOutput: "Event raised");
+            var compVerifier = CompileAndVerify(
+                source,
+                new[] { TargetFrameworkUtil.StandardCSharpReference, CompileIL(ilSource) },
+                expectedOutput: "Event raised"
+            );
 
             var comp = (CSharpCompilation)compVerifier.Compilation;
             var classSymbol = (PENamedTypeSymbol)comp.GetTypeByMetadataName("C");
@@ -819,15 +925,20 @@ class D
         [Fact]
         public void StaticEventDoesNotRequireInstanceReceiver()
         {
-            var source = @"using System;
+            var source =
+                @"using System;
 class C
 {
     public static event EventHandler E;
 }";
-            var compilation = CreateCompilation(source).VerifyDiagnostics(
-                // (4,38): warning CS0067: The event 'C.E' is never used
-                //     public static event EventHandler E;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E").WithArguments("C.E").WithLocation(4, 38));
+            var compilation = CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (4,38): warning CS0067: The event 'C.E' is never used
+                    //     public static event EventHandler E;
+                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E")
+                        .WithArguments("C.E")
+                        .WithLocation(4, 38)
+                );
             var eventSymbol = compilation.GetMember<EventSymbol>("C.E");
             Assert.False(eventSymbol.RequiresInstanceReceiver);
         }
@@ -835,15 +946,20 @@ class C
         [Fact]
         public void InstanceEventRequiresInstanceReceiver()
         {
-            var source = @"using System;
+            var source =
+                @"using System;
 class C
 {
     public event EventHandler E;
 }";
-            var compilation = CreateCompilation(source).VerifyDiagnostics(
-                // (4,31): warning CS0067: The event 'C.E' is never used
-                //     public event EventHandler E;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E").WithArguments("C.E").WithLocation(4, 31));
+            var compilation = CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (4,31): warning CS0067: The event 'C.E' is never used
+                    //     public event EventHandler E;
+                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E")
+                        .WithArguments("C.E")
+                        .WithLocation(4, 31)
+                );
             var eventSymbol = compilation.GetMember<EventSymbol>("C.E");
             Assert.True(eventSymbol.RequiresInstanceReceiver);
         }
@@ -856,7 +972,7 @@ class C
         public void VoidEvent()
         {
             var text =
-@"interface I
+                @"interface I
 {
     event void E;
 }
@@ -865,25 +981,27 @@ class C
     event void E;
 }
 ";
-            CreateCompilation(text).VerifyDiagnostics(
-                // (3,11): error CS1547: Keyword 'void' cannot be used in this context
-                Diagnostic(ErrorCode.ERR_NoVoidHere, "void"),
-                // (7,11): error CS1547: Keyword 'void' cannot be used in this context
-                Diagnostic(ErrorCode.ERR_NoVoidHere, "void"),
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    // (3,11): error CS1547: Keyword 'void' cannot be used in this context
+                    Diagnostic(ErrorCode.ERR_NoVoidHere, "void"),
+                    // (7,11): error CS1547: Keyword 'void' cannot be used in this context
+                    Diagnostic(ErrorCode.ERR_NoVoidHere, "void"),
+                    //CONSIDER: it would be nice to suppress these
 
-                //CONSIDER: it would be nice to suppress these
-
-                // (7,11): error CS0670: Field cannot have void type
-                Diagnostic(ErrorCode.ERR_FieldCantHaveVoidType, "void"),
-                // (7,16): warning CS0067: The event 'C.E' is never used
-                //     event void E;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E").WithArguments("C.E"));
+                    // (7,11): error CS0670: Field cannot have void type
+                    Diagnostic(ErrorCode.ERR_FieldCantHaveVoidType, "void"),
+                    // (7,16): warning CS0067: The event 'C.E' is never used
+                    //     event void E;
+                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E").WithArguments("C.E")
+                );
         }
 
         [Fact]
         public void Assignment()
         {
-            var text = @"
+            var text =
+                @"
 class DeclaringType
 {
     public event System.Action<int> e { add { } remove { } }
@@ -906,22 +1024,28 @@ class OtherType
     }
 }
 ";
-            CreateCompilation(text).VerifyDiagnostics(
-                // (9,9): error CS0079: The event 'DeclaringType.e' can only appear on the left hand side of += or -=
-                //         e = null; //CS0079
-                Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "e").WithArguments("DeclaringType.e"),
-                // (19,11): error CS0079: The event 'DeclaringType.e' can only appear on the left hand side of += or -=
-                //         d.e = null; //CS0079
-                Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "e").WithArguments("DeclaringType.e"),
-                // (20,11): error CS0070: The event 'DeclaringType.f' can only appear on the left hand side of += or -= (except when used from within the type 'DeclaringType')
-                //         d.f = null; //CS0070
-                Diagnostic(ErrorCode.ERR_BadEventUsage, "f").WithArguments("DeclaringType.f", "DeclaringType"));
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    // (9,9): error CS0079: The event 'DeclaringType.e' can only appear on the left hand side of += or -=
+                    //         e = null; //CS0079
+                    Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "e")
+                        .WithArguments("DeclaringType.e"),
+                    // (19,11): error CS0079: The event 'DeclaringType.e' can only appear on the left hand side of += or -=
+                    //         d.e = null; //CS0079
+                    Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "e")
+                        .WithArguments("DeclaringType.e"),
+                    // (20,11): error CS0070: The event 'DeclaringType.f' can only appear on the left hand side of += or -= (except when used from within the type 'DeclaringType')
+                    //         d.f = null; //CS0070
+                    Diagnostic(ErrorCode.ERR_BadEventUsage, "f")
+                        .WithArguments("DeclaringType.f", "DeclaringType")
+                );
         }
 
         [Fact]
         public void Overriding()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class C
@@ -974,32 +1098,34 @@ class E : D
     }
 }
 ";
-            CreateCompilation(text).VerifyDiagnostics(
-                // (17,9): error CS0079: The event 'C.e' can only appear on the left hand side of += or -=
-                //         e = null; //CS0079
-                Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "e").WithArguments("C.e"),
-                // (34,9): error CS0070: The event 'C.f' can only appear on the left hand side of += or -= (except when used from within the type 'C')
-                //         f = null; //CS0070 (since the least-overridden event is field-like)
-                Diagnostic(ErrorCode.ERR_BadEventUsage, "f").WithArguments("C.f", "C"),
-                // (49,9): error CS0079: The event 'C.e' can only appear on the left hand side of += or -=
-                //         e = null; //CS0079
-                Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "e").WithArguments("C.e"),
-
-                // (24,39): warning CS0414: The field 'D.e' is assigned but its value is never used
-                //     public override event Action<int> e;
-                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "e").WithArguments("D.e"),
-                // (45,46): warning CS0414: The field 'E.f' is assigned but its value is never used
-                //     public sealed override event Action<int> f;
-                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "f").WithArguments("E.f"),
-                // (13,38): warning CS0414: The field 'C.f' is assigned but its value is never used
-                //     public virtual event Action<int> f;
-                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "f").WithArguments("C.f"));
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    // (17,9): error CS0079: The event 'C.e' can only appear on the left hand side of += or -=
+                    //         e = null; //CS0079
+                    Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "e").WithArguments("C.e"),
+                    // (34,9): error CS0070: The event 'C.f' can only appear on the left hand side of += or -= (except when used from within the type 'C')
+                    //         f = null; //CS0070 (since the least-overridden event is field-like)
+                    Diagnostic(ErrorCode.ERR_BadEventUsage, "f").WithArguments("C.f", "C"),
+                    // (49,9): error CS0079: The event 'C.e' can only appear on the left hand side of += or -=
+                    //         e = null; //CS0079
+                    Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "e").WithArguments("C.e"),
+                    // (24,39): warning CS0414: The field 'D.e' is assigned but its value is never used
+                    //     public override event Action<int> e;
+                    Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "e").WithArguments("D.e"),
+                    // (45,46): warning CS0414: The field 'E.f' is assigned but its value is never used
+                    //     public sealed override event Action<int> f;
+                    Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "f").WithArguments("E.f"),
+                    // (13,38): warning CS0414: The field 'C.f' is assigned but its value is never used
+                    //     public virtual event Action<int> f;
+                    Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "f").WithArguments("C.f")
+                );
         }
 
         [Fact]
         public void EventAccessibility()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     private event System.Action e1;
@@ -1033,44 +1159,45 @@ class D
     }
 }
 ";
-            CreateCompilation(text).VerifyDiagnostics(
-                // (21,11): error CS0122: 'C.e1' is inaccessible due to its protection level
-                //         c.e1 = null; //CS0122
-                Diagnostic(ErrorCode.ERR_BadAccess, "e1").WithArguments("C.e1"),
-                // (22,11): error CS0122: 'C.e2' is inaccessible due to its protection level
-                //         c.e2 = null; //CS0122
-                Diagnostic(ErrorCode.ERR_BadAccess, "e2").WithArguments("C.e2"),
-                // (23,11): error CS0070: The event 'C.e3' can only appear on the left hand side of += or -= (except when used from within the type 'C')
-                //         c.e3 = null; //CS0070
-                Diagnostic(ErrorCode.ERR_BadEventUsage, "e3").WithArguments("C.e3", "C"),
-                // (24,11): error CS0070: The event 'C.e4' can only appear on the left hand side of += or -= (except when used from within the type 'C')
-                //         c.e4 = null; //CS0070
-                Diagnostic(ErrorCode.ERR_BadEventUsage, "e4").WithArguments("C.e4", "C"),
-                // (25,11): error CS0070: The event 'C.e5' can only appear on the left hand side of += or -= (except when used from within the type 'C')
-                //         c.e5 = null; //CS0070
-                Diagnostic(ErrorCode.ERR_BadEventUsage, "e5").WithArguments("C.e5", "C"),
-                // (27,11): error CS0122: 'C.f1' is inaccessible due to its protection level
-                //         c.f1 = null; //CS0122 (Dev10 also reports CS0079)
-                Diagnostic(ErrorCode.ERR_BadAccess, "f1").WithArguments("C.f1"),
-                // (28,11): error CS0122: 'C.f2' is inaccessible due to its protection level
-                //         c.f2 = null; //CS0122 (Dev10 also reports CS0079)
-                Diagnostic(ErrorCode.ERR_BadAccess, "f2").WithArguments("C.f2"),
-                // (29,11): error CS0079: The event 'C.f3' can only appear on the left hand side of += or -=
-                //         c.f3 = null; //CS0079
-                Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "f3").WithArguments("C.f3"),
-                // (30,11): error CS0079: The event 'C.f4' can only appear on the left hand side of += or -=
-                //         c.f4 = null; //CS0079
-                Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "f4").WithArguments("C.f4"),
-                // (31,11): error CS0079: The event 'C.f5' can only appear on the left hand side of += or -=
-                //         c.f5 = null; //CS0079
-                Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "f5").WithArguments("C.f5"),
-
-                // (4,33): warning CS0067: The event 'C.e1' is never used
-                //     private event System.Action e1;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "e1").WithArguments("C.e1"),
-                // (5,35): warning CS0067: The event 'C.e2' is never used
-                //     protected event System.Action e2;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "e2").WithArguments("C.e2"));
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    // (21,11): error CS0122: 'C.e1' is inaccessible due to its protection level
+                    //         c.e1 = null; //CS0122
+                    Diagnostic(ErrorCode.ERR_BadAccess, "e1").WithArguments("C.e1"),
+                    // (22,11): error CS0122: 'C.e2' is inaccessible due to its protection level
+                    //         c.e2 = null; //CS0122
+                    Diagnostic(ErrorCode.ERR_BadAccess, "e2").WithArguments("C.e2"),
+                    // (23,11): error CS0070: The event 'C.e3' can only appear on the left hand side of += or -= (except when used from within the type 'C')
+                    //         c.e3 = null; //CS0070
+                    Diagnostic(ErrorCode.ERR_BadEventUsage, "e3").WithArguments("C.e3", "C"),
+                    // (24,11): error CS0070: The event 'C.e4' can only appear on the left hand side of += or -= (except when used from within the type 'C')
+                    //         c.e4 = null; //CS0070
+                    Diagnostic(ErrorCode.ERR_BadEventUsage, "e4").WithArguments("C.e4", "C"),
+                    // (25,11): error CS0070: The event 'C.e5' can only appear on the left hand side of += or -= (except when used from within the type 'C')
+                    //         c.e5 = null; //CS0070
+                    Diagnostic(ErrorCode.ERR_BadEventUsage, "e5").WithArguments("C.e5", "C"),
+                    // (27,11): error CS0122: 'C.f1' is inaccessible due to its protection level
+                    //         c.f1 = null; //CS0122 (Dev10 also reports CS0079)
+                    Diagnostic(ErrorCode.ERR_BadAccess, "f1").WithArguments("C.f1"),
+                    // (28,11): error CS0122: 'C.f2' is inaccessible due to its protection level
+                    //         c.f2 = null; //CS0122 (Dev10 also reports CS0079)
+                    Diagnostic(ErrorCode.ERR_BadAccess, "f2").WithArguments("C.f2"),
+                    // (29,11): error CS0079: The event 'C.f3' can only appear on the left hand side of += or -=
+                    //         c.f3 = null; //CS0079
+                    Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "f3").WithArguments("C.f3"),
+                    // (30,11): error CS0079: The event 'C.f4' can only appear on the left hand side of += or -=
+                    //         c.f4 = null; //CS0079
+                    Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "f4").WithArguments("C.f4"),
+                    // (31,11): error CS0079: The event 'C.f5' can only appear on the left hand side of += or -=
+                    //         c.f5 = null; //CS0079
+                    Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "f5").WithArguments("C.f5"),
+                    // (4,33): warning CS0067: The event 'C.e1' is never used
+                    //     private event System.Action e1;
+                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "e1").WithArguments("C.e1"),
+                    // (5,35): warning CS0067: The event 'C.e2' is never used
+                    //     protected event System.Action e2;
+                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "e2").WithArguments("C.e2")
+                );
         }
 
         /// <summary>
@@ -1080,7 +1207,8 @@ class D
         [Fact]
         public void InterfaceRaiseAccessor()
         {
-            var ilSource = @"
+            var ilSource =
+                @"
 .class interface public abstract auto ansi Interface
 {
 
@@ -1109,7 +1237,8 @@ class D
 } // end of class Interface
 ";
 
-            var csharpSource = @"
+            var csharpSource =
+                @"
 class C : Interface
 {
     // not implementing event or raise (separate error for each)
@@ -1128,30 +1257,35 @@ class E : Interface
 }
 ";
 
-            CreateCompilationWithILAndMscorlib40(csharpSource, ilSource).VerifyDiagnostics(
-                // (2,7): error CS0535: 'C' does not implement interface member 'Interface.raise_e(object, object)'
-                // class C : Interface
-                Diagnostic(ErrorCode.ERR_UnimplementedInterfaceMember, "Interface").WithArguments("C", "Interface.raise_e(object, object)"),
-                // (2,7): error CS0535: 'C' does not implement interface member 'Interface.e'
-                // class C : Interface
-                Diagnostic(ErrorCode.ERR_UnimplementedInterfaceMember, "Interface").WithArguments("C", "Interface.e"),
-                // (7,7): error CS0535: 'D' does not implement interface member 'Interface.raise_e(object, object)'
-                // class D : Interface
-                Diagnostic(ErrorCode.ERR_UnimplementedInterfaceMember, "Interface").WithArguments("D", "Interface.raise_e(object, object)"),
-
-                // (15,32): warning CS0067: The event 'E.e' is never used
-                //     public event System.Action e;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "e").WithArguments("E.e"),
-                // (9,32): warning CS0067: The event 'D.e' is never used
-                //     public event System.Action e;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "e").WithArguments("D.e"));
+            CreateCompilationWithILAndMscorlib40(csharpSource, ilSource)
+                .VerifyDiagnostics(
+                    // (2,7): error CS0535: 'C' does not implement interface member 'Interface.raise_e(object, object)'
+                    // class C : Interface
+                    Diagnostic(ErrorCode.ERR_UnimplementedInterfaceMember, "Interface")
+                        .WithArguments("C", "Interface.raise_e(object, object)"),
+                    // (2,7): error CS0535: 'C' does not implement interface member 'Interface.e'
+                    // class C : Interface
+                    Diagnostic(ErrorCode.ERR_UnimplementedInterfaceMember, "Interface")
+                        .WithArguments("C", "Interface.e"),
+                    // (7,7): error CS0535: 'D' does not implement interface member 'Interface.raise_e(object, object)'
+                    // class D : Interface
+                    Diagnostic(ErrorCode.ERR_UnimplementedInterfaceMember, "Interface")
+                        .WithArguments("D", "Interface.raise_e(object, object)"),
+                    // (15,32): warning CS0067: The event 'E.e' is never used
+                    //     public event System.Action e;
+                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "e").WithArguments("E.e"),
+                    // (9,32): warning CS0067: The event 'D.e' is never used
+                    //     public event System.Action e;
+                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "e").WithArguments("D.e")
+                );
         }
 
         [WorkItem(541704, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541704")]
         [Fact]
         public void OperationsInDeclaringType()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     event System.Action E;
@@ -1179,40 +1313,45 @@ class C
     }
 }
 ";
-            CreateCompilation(text).VerifyDiagnostics(
-                // (15,9): error CS0023: Operator '++' cannot be applied to operand of type 'System.Action'
-                //         E++; //CS0023
-                Diagnostic(ErrorCode.ERR_BadUnaryOp, "E++").WithArguments("++", "System.Action"),
-                // (16,9): error CS0019: Operator '|=' cannot be applied to operands of type 'System.Action' and 'bool'
-                //         E |= true; //CS0019 (Dev10 also reports CS0029)
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "E |= true").WithArguments("|=", "System.Action", "bool"),
-                // (18,9): error CS0079: The event 'C.F' can only appear on the left hand side of += or -=
-                //         F = a; //CS0079
-                Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "F").WithArguments("C.F"),
-                // (20,13): error CS0079: The event 'C.F' can only appear on the left hand side of += or -=
-                //         a = F; //CS0079
-                Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "F").WithArguments("C.F"),
-                // (21,20): error CS0079: The event 'C.F' can only appear on the left hand side of += or -=
-                //         Method(ref F); //CS0079
-                Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "F").WithArguments("C.F"),
-                // (22,9): error CS0079: The event 'C.F' can only appear on the left hand side of += or -=
-                //         F.Invoke(); //CS0079
-                Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "F").WithArguments("C.F"),
-                // (23,19): error CS0079: The event 'C.F' can only appear on the left hand side of += or -=
-                //         bool b2 = F is System.Action; //CS0079
-                Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "F").WithArguments("C.F"),
-                // (24,9): error CS0079: The event 'C.F' can only appear on the left hand side of += or -=
-                //         F++; //CS0079
-                Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "F").WithArguments("C.F"),
-                // (25,9): error CS0079: The event 'C.F' can only appear on the left hand side of += or -=
-                //         F |= true; //CS0079
-                Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "F").WithArguments("C.F"));
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    // (15,9): error CS0023: Operator '++' cannot be applied to operand of type 'System.Action'
+                    //         E++; //CS0023
+                    Diagnostic(ErrorCode.ERR_BadUnaryOp, "E++")
+                        .WithArguments("++", "System.Action"),
+                    // (16,9): error CS0019: Operator '|=' cannot be applied to operands of type 'System.Action' and 'bool'
+                    //         E |= true; //CS0019 (Dev10 also reports CS0029)
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "E |= true")
+                        .WithArguments("|=", "System.Action", "bool"),
+                    // (18,9): error CS0079: The event 'C.F' can only appear on the left hand side of += or -=
+                    //         F = a; //CS0079
+                    Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "F").WithArguments("C.F"),
+                    // (20,13): error CS0079: The event 'C.F' can only appear on the left hand side of += or -=
+                    //         a = F; //CS0079
+                    Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "F").WithArguments("C.F"),
+                    // (21,20): error CS0079: The event 'C.F' can only appear on the left hand side of += or -=
+                    //         Method(ref F); //CS0079
+                    Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "F").WithArguments("C.F"),
+                    // (22,9): error CS0079: The event 'C.F' can only appear on the left hand side of += or -=
+                    //         F.Invoke(); //CS0079
+                    Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "F").WithArguments("C.F"),
+                    // (23,19): error CS0079: The event 'C.F' can only appear on the left hand side of += or -=
+                    //         bool b2 = F is System.Action; //CS0079
+                    Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "F").WithArguments("C.F"),
+                    // (24,9): error CS0079: The event 'C.F' can only appear on the left hand side of += or -=
+                    //         F++; //CS0079
+                    Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "F").WithArguments("C.F"),
+                    // (25,9): error CS0079: The event 'C.F' can only appear on the left hand side of += or -=
+                    //         F |= true; //CS0079
+                    Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "F").WithArguments("C.F")
+                );
         }
 
         [Fact]
         public void OperationsInNonDeclaringType()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     public event System.Action E;
@@ -1243,55 +1382,58 @@ class D
     }
 }
 ";
-            CreateCompilation(text).VerifyDiagnostics(
-                // (12,11): error CS0070: The event 'C.E' can only appear on the left hand side of += or -= (except when used from within the type 'C')
-                //         c.E = a; //CS0070
-                Diagnostic(ErrorCode.ERR_BadEventUsage, "E").WithArguments("C.E", "C"),
-                // (14,15): error CS0070: The event 'C.E' can only appear on the left hand side of += or -= (except when used from within the type 'C')
-                //         a = c.E; //CS0070
-                Diagnostic(ErrorCode.ERR_BadEventUsage, "E").WithArguments("C.E", "C"),
-                // (15,22): error CS0070: The event 'C.E' can only appear on the left hand side of += or -= (except when used from within the type 'C')
-                //         Method(ref c.E, c); //CS0070
-                Diagnostic(ErrorCode.ERR_BadEventUsage, "E").WithArguments("C.E", "C"),
-                // (16,11): error CS0070: The event 'C.E' can only appear on the left hand side of += or -= (except when used from within the type 'C')
-                //         c.E.Invoke(); //CS0070
-                Diagnostic(ErrorCode.ERR_BadEventUsage, "E").WithArguments("C.E", "C"),
-                // (17,21): error CS0070: The event 'C.E' can only appear on the left hand side of += or -= (except when used from within the type 'C')
-                //         bool b1 = c.E is System.Action; //CS0070
-                Diagnostic(ErrorCode.ERR_BadEventUsage, "E").WithArguments("C.E", "C"),
-                // (18,11): error CS0070: The event 'C.E' can only appear on the left hand side of += or -= (except when used from within the type 'C')
-                //         c.E++; //CS0070
-                Diagnostic(ErrorCode.ERR_BadEventUsage, "E").WithArguments("C.E", "C"),
-                // (19,11): error CS0070: The event 'C.E' can only appear on the left hand side of += or -= (except when used from within the type 'C')
-                //         c.E |= true; //CS0070
-                Diagnostic(ErrorCode.ERR_BadEventUsage, "E").WithArguments("C.E", "C"),
-                // (21,11): error CS0079: The event 'C.F' can only appear on the left hand side of += or -=
-                //         c.F = a; //CS0079
-                Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "F").WithArguments("C.F"),
-                // (23,15): error CS0079: The event 'C.F' can only appear on the left hand side of += or -=
-                //         a = c.F; //CS0079
-                Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "F").WithArguments("C.F"),
-                // (24,22): error CS0079: The event 'C.F' can only appear on the left hand side of += or -=
-                //         Method(ref c.F, c); //CS0079
-                Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "F").WithArguments("C.F"),
-                // (25,11): error CS0079: The event 'C.F' can only appear on the left hand side of += or -=
-                //         c.F.Invoke(); //CS0079
-                Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "F").WithArguments("C.F"),
-                // (26,21): error CS0079: The event 'C.F' can only appear on the left hand side of += or -=
-                //         bool b2 = c.F is System.Action; //CS0079
-                Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "F").WithArguments("C.F"),
-                // (27,11): error CS0079: The event 'C.F' can only appear on the left hand side of += or -=
-                //         c.F++; //CS0079
-                Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "F").WithArguments("C.F"),
-                // (28,11): error CS0079: The event 'C.F' can only appear on the left hand side of += or -=
-                //         c.F |= true; //CS0079
-                Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "F").WithArguments("C.F"));
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    // (12,11): error CS0070: The event 'C.E' can only appear on the left hand side of += or -= (except when used from within the type 'C')
+                    //         c.E = a; //CS0070
+                    Diagnostic(ErrorCode.ERR_BadEventUsage, "E").WithArguments("C.E", "C"),
+                    // (14,15): error CS0070: The event 'C.E' can only appear on the left hand side of += or -= (except when used from within the type 'C')
+                    //         a = c.E; //CS0070
+                    Diagnostic(ErrorCode.ERR_BadEventUsage, "E").WithArguments("C.E", "C"),
+                    // (15,22): error CS0070: The event 'C.E' can only appear on the left hand side of += or -= (except when used from within the type 'C')
+                    //         Method(ref c.E, c); //CS0070
+                    Diagnostic(ErrorCode.ERR_BadEventUsage, "E").WithArguments("C.E", "C"),
+                    // (16,11): error CS0070: The event 'C.E' can only appear on the left hand side of += or -= (except when used from within the type 'C')
+                    //         c.E.Invoke(); //CS0070
+                    Diagnostic(ErrorCode.ERR_BadEventUsage, "E").WithArguments("C.E", "C"),
+                    // (17,21): error CS0070: The event 'C.E' can only appear on the left hand side of += or -= (except when used from within the type 'C')
+                    //         bool b1 = c.E is System.Action; //CS0070
+                    Diagnostic(ErrorCode.ERR_BadEventUsage, "E").WithArguments("C.E", "C"),
+                    // (18,11): error CS0070: The event 'C.E' can only appear on the left hand side of += or -= (except when used from within the type 'C')
+                    //         c.E++; //CS0070
+                    Diagnostic(ErrorCode.ERR_BadEventUsage, "E").WithArguments("C.E", "C"),
+                    // (19,11): error CS0070: The event 'C.E' can only appear on the left hand side of += or -= (except when used from within the type 'C')
+                    //         c.E |= true; //CS0070
+                    Diagnostic(ErrorCode.ERR_BadEventUsage, "E").WithArguments("C.E", "C"),
+                    // (21,11): error CS0079: The event 'C.F' can only appear on the left hand side of += or -=
+                    //         c.F = a; //CS0079
+                    Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "F").WithArguments("C.F"),
+                    // (23,15): error CS0079: The event 'C.F' can only appear on the left hand side of += or -=
+                    //         a = c.F; //CS0079
+                    Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "F").WithArguments("C.F"),
+                    // (24,22): error CS0079: The event 'C.F' can only appear on the left hand side of += or -=
+                    //         Method(ref c.F, c); //CS0079
+                    Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "F").WithArguments("C.F"),
+                    // (25,11): error CS0079: The event 'C.F' can only appear on the left hand side of += or -=
+                    //         c.F.Invoke(); //CS0079
+                    Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "F").WithArguments("C.F"),
+                    // (26,21): error CS0079: The event 'C.F' can only appear on the left hand side of += or -=
+                    //         bool b2 = c.F is System.Action; //CS0079
+                    Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "F").WithArguments("C.F"),
+                    // (27,11): error CS0079: The event 'C.F' can only appear on the left hand side of += or -=
+                    //         c.F++; //CS0079
+                    Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "F").WithArguments("C.F"),
+                    // (28,11): error CS0079: The event 'C.F' can only appear on the left hand side of += or -=
+                    //         c.F |= true; //CS0079
+                    Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "F").WithArguments("C.F")
+                );
         }
 
         [Fact]
         public void ConversionFails()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     event System.Action E;
@@ -1304,23 +1446,27 @@ class C
     }
 }
 ";
-            CreateCompilation(text).VerifyDiagnostics(
-                // (9,9): error CS1593: Delegate 'System.Action' does not take 1 arguments
-                //         E += x => { };
-                Diagnostic(ErrorCode.ERR_BadDelArgCount, "E += x => { }").WithArguments("System.Action", "1"),
-                // (10,9): error CS0029: Cannot implicitly convert type 'System.Action<int>' to 'System.Action'
-                //         F += new System.Action<int>(x => {});
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "F += new System.Action<int>(x => {})").WithArguments("System.Action<int>", "System.Action"),
-
-                // (4,25): warning CS0067: The event 'C.E' is never used
-                //     event System.Action E;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E").WithArguments("C.E"));
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    // (9,9): error CS1593: Delegate 'System.Action' does not take 1 arguments
+                    //         E += x => { };
+                    Diagnostic(ErrorCode.ERR_BadDelArgCount, "E += x => { }")
+                        .WithArguments("System.Action", "1"),
+                    // (10,9): error CS0029: Cannot implicitly convert type 'System.Action<int>' to 'System.Action'
+                    //         F += new System.Action<int>(x => {});
+                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "F += new System.Action<int>(x => {})")
+                        .WithArguments("System.Action<int>", "System.Action"),
+                    // (4,25): warning CS0067: The event 'C.E' is never used
+                    //     event System.Action E;
+                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E").WithArguments("C.E")
+                );
         }
 
         [Fact]
         public void StructEvent1()
         {
-            var text = @"
+            var text =
+                @"
 struct S
 {
     event System.Action E;
@@ -1345,25 +1491,36 @@ struct S
     }
 }
 ";
-            CreateCompilation(text, parseOptions: TestOptions.Regular10).VerifyDiagnostics(
-                // (11,5): error CS0171: Field 'S.E' must be fully assigned before control is returned to the caller. Consider updating to language version '11.0' to auto-default the field.
-                //     S(int unused1, int unused2)
-                Diagnostic(ErrorCode.ERR_UnassignedThisUnsupportedVersion, "S").WithArguments("S.E", "11.0").WithLocation(11, 5),
-                // (22,9): error CS1612: Cannot modify the return value of 'S.This' because it is not a variable
-                //         This.E = null; //CS1612: receiver is not a variable
-                Diagnostic(ErrorCode.ERR_ReturnNotLValue, "This").WithArguments("S.This").WithLocation(22, 9));
+            CreateCompilation(text, parseOptions: TestOptions.Regular10)
+                .VerifyDiagnostics(
+                    // (11,5): error CS0171: Field 'S.E' must be fully assigned before control is returned to the caller. Consider updating to language version '11.0' to auto-default the field.
+                    //     S(int unused1, int unused2)
+                    Diagnostic(ErrorCode.ERR_UnassignedThisUnsupportedVersion, "S")
+                        .WithArguments("S.E", "11.0")
+                        .WithLocation(11, 5),
+                    // (22,9): error CS1612: Cannot modify the return value of 'S.This' because it is not a variable
+                    //         This.E = null; //CS1612: receiver is not a variable
+                    Diagnostic(ErrorCode.ERR_ReturnNotLValue, "This")
+                        .WithArguments("S.This")
+                        .WithLocation(22, 9)
+                );
 
-            CreateCompilation(text, parseOptions: TestOptions.Regular11).VerifyDiagnostics(
-                // (22,9): error CS1612: Cannot modify the return value of 'S.This' because it is not a variable
-                //         This.E = null; //CS1612: receiver is not a variable
-                Diagnostic(ErrorCode.ERR_ReturnNotLValue, "This").WithArguments("S.This").WithLocation(22, 9));
+            CreateCompilation(text, parseOptions: TestOptions.Regular11)
+                .VerifyDiagnostics(
+                    // (22,9): error CS1612: Cannot modify the return value of 'S.This' because it is not a variable
+                    //         This.E = null; //CS1612: receiver is not a variable
+                    Diagnostic(ErrorCode.ERR_ReturnNotLValue, "This")
+                        .WithArguments("S.This")
+                        .WithLocation(22, 9)
+                );
         }
 
         [WorkItem(546356, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546356")]
         [Fact]
         public void StructEvent2()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 struct S
@@ -1384,21 +1541,23 @@ struct S
 }
 ";
 
-            CreateCompilation(source).VerifyDiagnostics(
-                // (17,9): error CS1612: Cannot modify the return value of 'S.Make()' because it is not a variable
-                //         Make().P += 1; // CS1612
-                Diagnostic(ErrorCode.ERR_ReturnNotLValue, "Make()").WithArguments("S.Make()"),
-
-                // (6,18): warning CS0067: The event 'S.E' is never used
-                //     event Action E;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E").WithArguments("S.E"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (17,9): error CS1612: Cannot modify the return value of 'S.Make()' because it is not a variable
+                    //         Make().P += 1; // CS1612
+                    Diagnostic(ErrorCode.ERR_ReturnNotLValue, "Make()").WithArguments("S.Make()"),
+                    // (6,18): warning CS0067: The event 'S.E' is never used
+                    //     event Action E;
+                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E").WithArguments("S.E")
+                );
         }
 
         [WorkItem(546356, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546356")]
         [Fact]
         public void StructEvent3()
         {
-            var source = @"
+            var source =
+                @"
 struct S
 {
     event System.Action E;
@@ -1424,13 +1583,17 @@ struct S
 }
 ";
 
-            CreateCompilation(source).VerifyDiagnostics(
-                // (12,9): error CS1612: Cannot modify the return value of 'S.Property' because it is not a variable
-                //         Property.E = null;
-                Diagnostic(ErrorCode.ERR_ReturnNotLValue, "Property").WithArguments("S.Property"),
-                // (13,9): error CS1612: Cannot modify the return value of 'S.Method()' because it is not a variable
-                //         Method().E = null;
-                Diagnostic(ErrorCode.ERR_ReturnNotLValue, "Method()").WithArguments("S.Method()"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (12,9): error CS1612: Cannot modify the return value of 'S.Property' because it is not a variable
+                    //         Property.E = null;
+                    Diagnostic(ErrorCode.ERR_ReturnNotLValue, "Property")
+                        .WithArguments("S.Property"),
+                    // (13,9): error CS1612: Cannot modify the return value of 'S.Method()' because it is not a variable
+                    //         Method().E = null;
+                    Diagnostic(ErrorCode.ERR_ReturnNotLValue, "Method()")
+                        .WithArguments("S.Method()")
+                );
         }
 
         // CONSIDER: it would be nice to test this scenario with an event from metadata,
@@ -1438,7 +1601,8 @@ struct S
         [Fact]
         public void UseMissingAccessor()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     event System.Action E { remove { } } //CS0065
@@ -1449,11 +1613,12 @@ class C
     }
 }
 ";
-            var expected = new[] {
+            var expected = new[]
+            {
                 // (4,25): error CS0065: 'C.E': event property must have both add and remove accessors
                 //     event System.Action E { remove { } }
-                Diagnostic(ErrorCode.ERR_EventNeedsBothAccessors, "E").WithArguments("C.E")
-                };
+                Diagnostic(ErrorCode.ERR_EventNeedsBothAccessors, "E").WithArguments("C.E"),
+            };
 
             CreateCompilation(text).VerifyDiagnostics(expected).VerifyEmitDiagnostics(expected);
 
@@ -1464,7 +1629,8 @@ class C
         [Fact]
         public void UseMissingAccessorInInterface()
         {
-            var text = @"
+            var text =
+                @"
 delegate void myDelegate(int name = 1);
 interface i1
 {
@@ -1472,14 +1638,18 @@ interface i1
 }
 ";
 
-            CreateCompilation(text).VerifyDiagnostics(
-                Diagnostic(ErrorCode.ERR_EventNeedsBothAccessors, "myevent").WithArguments("i1.myevent"));
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    Diagnostic(ErrorCode.ERR_EventNeedsBothAccessors, "myevent")
+                        .WithArguments("i1.myevent")
+                );
         }
 
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         public void CS1545ERR_BindToBogusProp2_AccessorSignatureMismatch()
         {
-            var ilSource = @"
+            var ilSource =
+                @"
 .class public auto ansi beforefieldinit Base
        extends [mscorlib]System.Object
 {
@@ -1561,7 +1731,8 @@ interface i1
 } // end of class Base
 ";
 
-            var csharpSource = @"
+            var csharpSource =
+                @"
 class C
 {
     void Method(Base b)
@@ -1578,31 +1749,40 @@ class C
 }
 ";
 
-            CreateCompilationWithILAndMscorlib40(csharpSource, ilSource).VerifyDiagnostics(
-                // (7,11): error CS1545: Property, indexer, or event 'Base.Event1' is not supported by the language; try directly calling accessor methods 'Base.Event0.add' or 'Base.Event7.add'
-                //         b.Event1 += null;
-                Diagnostic(ErrorCode.ERR_BindToBogusProp2, "Event1").WithArguments("Base.Event1", "Base.Event0.add", "Base.Event7.add"),
-                // (8,11): error CS1545: Property, indexer, or event 'Base.Event2' is not supported by the language; try directly calling accessor methods 'Base.Event7.add' or 'Base.Event0.add'
-                //         b.Event2 += null;
-                Diagnostic(ErrorCode.ERR_BindToBogusProp2, "Event2").WithArguments("Base.Event2", "Base.Event7.add", "Base.Event0.add"),
-                // (9,11): error CS1545: Property, indexer, or event 'Base.Event3' is not supported by the language; try directly calling accessor methods 'Base.Event7.add' or 'Base.Event7.add'
-                //         b.Event3 += null;
-                Diagnostic(ErrorCode.ERR_BindToBogusProp2, "Event3").WithArguments("Base.Event3", "Base.Event7.add", "Base.Event7.add"),
-                // (10,11): error CS1545: Property, indexer, or event 'Base.Event4' is not supported by the language; try directly calling accessor methods 'Base.Event0.add' or 'Base.Event0.add'
-                //         b.Event4 += null;
-                Diagnostic(ErrorCode.ERR_BindToBogusProp2, "Event4").WithArguments("Base.Event4", "Base.Event0.add", "Base.Event0.add"),
-                // (11,11): error CS1545: Property, indexer, or event 'Base.Event5' is not supported by the language; try directly calling accessor methods 'Base.Event0.add' or 'Base.Event7.add'
-                //         b.Event5 += null;
-                Diagnostic(ErrorCode.ERR_BindToBogusProp2, "Event5").WithArguments("Base.Event5", "Base.Event0.add", "Base.Event7.add"),
-                // (12,11): error CS1545: Property, indexer, or event 'Base.Event6' is not supported by the language; try directly calling accessor methods 'Base.Event7.add' or 'Base.Event0.add'
-                //         b.Event6 += null;
-                Diagnostic(ErrorCode.ERR_BindToBogusProp2, "Event6").WithArguments("Base.Event6", "Base.Event7.add", "Base.Event0.add"));
+            CreateCompilationWithILAndMscorlib40(csharpSource, ilSource)
+                .VerifyDiagnostics(
+                    // (7,11): error CS1545: Property, indexer, or event 'Base.Event1' is not supported by the language; try directly calling accessor methods 'Base.Event0.add' or 'Base.Event7.add'
+                    //         b.Event1 += null;
+                    Diagnostic(ErrorCode.ERR_BindToBogusProp2, "Event1")
+                        .WithArguments("Base.Event1", "Base.Event0.add", "Base.Event7.add"),
+                    // (8,11): error CS1545: Property, indexer, or event 'Base.Event2' is not supported by the language; try directly calling accessor methods 'Base.Event7.add' or 'Base.Event0.add'
+                    //         b.Event2 += null;
+                    Diagnostic(ErrorCode.ERR_BindToBogusProp2, "Event2")
+                        .WithArguments("Base.Event2", "Base.Event7.add", "Base.Event0.add"),
+                    // (9,11): error CS1545: Property, indexer, or event 'Base.Event3' is not supported by the language; try directly calling accessor methods 'Base.Event7.add' or 'Base.Event7.add'
+                    //         b.Event3 += null;
+                    Diagnostic(ErrorCode.ERR_BindToBogusProp2, "Event3")
+                        .WithArguments("Base.Event3", "Base.Event7.add", "Base.Event7.add"),
+                    // (10,11): error CS1545: Property, indexer, or event 'Base.Event4' is not supported by the language; try directly calling accessor methods 'Base.Event0.add' or 'Base.Event0.add'
+                    //         b.Event4 += null;
+                    Diagnostic(ErrorCode.ERR_BindToBogusProp2, "Event4")
+                        .WithArguments("Base.Event4", "Base.Event0.add", "Base.Event0.add"),
+                    // (11,11): error CS1545: Property, indexer, or event 'Base.Event5' is not supported by the language; try directly calling accessor methods 'Base.Event0.add' or 'Base.Event7.add'
+                    //         b.Event5 += null;
+                    Diagnostic(ErrorCode.ERR_BindToBogusProp2, "Event5")
+                        .WithArguments("Base.Event5", "Base.Event0.add", "Base.Event7.add"),
+                    // (12,11): error CS1545: Property, indexer, or event 'Base.Event6' is not supported by the language; try directly calling accessor methods 'Base.Event7.add' or 'Base.Event0.add'
+                    //         b.Event6 += null;
+                    Diagnostic(ErrorCode.ERR_BindToBogusProp2, "Event6")
+                        .WithArguments("Base.Event6", "Base.Event7.add", "Base.Event0.add")
+                );
         }
 
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         public void CallAccessorsDirectly()
         {
-            var ilSource = @"
+            var ilSource =
+                @"
 .class public auto ansi beforefieldinit Base
        extends [mscorlib]System.Object
 {
@@ -1654,7 +1834,8 @@ class C
 } // end of class Base
 ";
 
-            var csharpSource = @"
+            var csharpSource =
+                @"
 class C
 {
     void Method(Base b)
@@ -1665,16 +1846,20 @@ class C
 }
 ";
 
-            CreateCompilationWithILAndMscorlib40(csharpSource, ilSource).VerifyDiagnostics(
-                // (7,11): error CS0571: 'Base.Event2.add': cannot explicitly call operator or accessor
-                //         b.add_Event2(null);
-                Diagnostic(ErrorCode.ERR_CantCallSpecialMethod, "add_Event2").WithArguments("Base.Event2.add"));
+            CreateCompilationWithILAndMscorlib40(csharpSource, ilSource)
+                .VerifyDiagnostics(
+                    // (7,11): error CS0571: 'Base.Event2.add': cannot explicitly call operator or accessor
+                    //         b.add_Event2(null);
+                    Diagnostic(ErrorCode.ERR_CantCallSpecialMethod, "add_Event2")
+                        .WithArguments("Base.Event2.add")
+                );
         }
 
         [Fact]
         public void BogusAccessorSignatures()
         {
-            var ilSource = @"
+            var ilSource =
+                @"
 .class public auto ansi beforefieldinit Base
        extends [mscorlib]System.Object
 {
@@ -1747,7 +1932,8 @@ class C
 } // end of class Base
 ";
 
-            var csharpSource = @"
+            var csharpSource =
+                @"
 class C
 {
     void Method(Base b)
@@ -1760,25 +1946,48 @@ class C
 }
 ";
 
-            CreateCompilationWithILAndMscorlib40(csharpSource, ilSource).VerifyDiagnostics(
-                // (6,11): error CS1545: Property, indexer, or event 'Base.Event1' is not supported by the language; try directly calling accessor methods 'Base.add_Event1(System.Action)' or 'Base.remove_Event(System.Action<int>)'
-                //         b.Event1 += null;
-                Diagnostic(ErrorCode.ERR_BindToBogusProp2, "Event1").WithArguments("Base.Event1", "Base.add_Event1(System.Action)", "Base.remove_Event(System.Action<int>)"),
-                // (7,11): error CS1545: Property, indexer, or event 'Base.Event2' is not supported by the language; try directly calling accessor methods 'Base.add_Event2(System.Action<long>)' or 'Base.remove_Event(System.Action<int>)'
-                //         b.Event2 += null;
-                Diagnostic(ErrorCode.ERR_BindToBogusProp2, "Event2").WithArguments("Base.Event2", "Base.add_Event2(System.Action<long>)", "Base.remove_Event(System.Action<int>)"),
-                // (8,11): error CS1545: Property, indexer, or event 'Base.Event3' is not supported by the language; try directly calling accessor methods 'Base.add_Event3(System.Action<int>, int)' or 'Base.remove_Event(System.Action<int>)'
-                //         b.Event3 += null;
-                Diagnostic(ErrorCode.ERR_BindToBogusProp2, "Event3").WithArguments("Base.Event3", "Base.add_Event3(System.Action<int>, int)", "Base.remove_Event(System.Action<int>)"),
-                // (9,11): error CS1545: Property, indexer, or event 'Base.Event4' is not supported by the language; try directly calling accessor methods 'Base.add_Event4(System.Action<int>)' or 'Base.remove_Event(System.Action<int>)'
-                //         b.Event4 += null;
-                Diagnostic(ErrorCode.ERR_BindToBogusProp2, "Event4").WithArguments("Base.Event4", "Base.add_Event4(System.Action<int>)", "Base.remove_Event(System.Action<int>)"));
+            CreateCompilationWithILAndMscorlib40(csharpSource, ilSource)
+                .VerifyDiagnostics(
+                    // (6,11): error CS1545: Property, indexer, or event 'Base.Event1' is not supported by the language; try directly calling accessor methods 'Base.add_Event1(System.Action)' or 'Base.remove_Event(System.Action<int>)'
+                    //         b.Event1 += null;
+                    Diagnostic(ErrorCode.ERR_BindToBogusProp2, "Event1")
+                        .WithArguments(
+                            "Base.Event1",
+                            "Base.add_Event1(System.Action)",
+                            "Base.remove_Event(System.Action<int>)"
+                        ),
+                    // (7,11): error CS1545: Property, indexer, or event 'Base.Event2' is not supported by the language; try directly calling accessor methods 'Base.add_Event2(System.Action<long>)' or 'Base.remove_Event(System.Action<int>)'
+                    //         b.Event2 += null;
+                    Diagnostic(ErrorCode.ERR_BindToBogusProp2, "Event2")
+                        .WithArguments(
+                            "Base.Event2",
+                            "Base.add_Event2(System.Action<long>)",
+                            "Base.remove_Event(System.Action<int>)"
+                        ),
+                    // (8,11): error CS1545: Property, indexer, or event 'Base.Event3' is not supported by the language; try directly calling accessor methods 'Base.add_Event3(System.Action<int>, int)' or 'Base.remove_Event(System.Action<int>)'
+                    //         b.Event3 += null;
+                    Diagnostic(ErrorCode.ERR_BindToBogusProp2, "Event3")
+                        .WithArguments(
+                            "Base.Event3",
+                            "Base.add_Event3(System.Action<int>, int)",
+                            "Base.remove_Event(System.Action<int>)"
+                        ),
+                    // (9,11): error CS1545: Property, indexer, or event 'Base.Event4' is not supported by the language; try directly calling accessor methods 'Base.add_Event4(System.Action<int>)' or 'Base.remove_Event(System.Action<int>)'
+                    //         b.Event4 += null;
+                    Diagnostic(ErrorCode.ERR_BindToBogusProp2, "Event4")
+                        .WithArguments(
+                            "Base.Event4",
+                            "Base.add_Event4(System.Action<int>)",
+                            "Base.remove_Event(System.Action<int>)"
+                        )
+                );
         }
 
         [Fact]
         public void InaccessibleAccessor()
         {
-            var ilSource = @"
+            var ilSource =
+                @"
 .class public auto ansi beforefieldinit Base
        extends [mscorlib]System.Object
 {
@@ -1834,7 +2043,8 @@ class C
 } // end of class Base
 ";
 
-            var csharpSource = @"
+            var csharpSource =
+                @"
 class C
 {
     void Method(Base b)
@@ -1851,13 +2061,17 @@ class C
             compilation.VerifyDiagnostics(
                 // (6,9): error CS0122: 'Base.Event1.add' is inaccessible due to its protection level
                 //         b.Event1 += null;
-                Diagnostic(ErrorCode.ERR_BadAccess, "b.Event1 += null").WithArguments("Base.Event1.add"),
+                Diagnostic(ErrorCode.ERR_BadAccess, "b.Event1 += null")
+                    .WithArguments("Base.Event1.add"),
                 // (7,9): error CS0122: 'Base.Event2.add' is inaccessible due to its protection level
                 //         b.Event2 += null;
-                Diagnostic(ErrorCode.ERR_BadAccess, "b.Event2 += null").WithArguments("Base.Event2.add"),
+                Diagnostic(ErrorCode.ERR_BadAccess, "b.Event2 += null")
+                    .WithArguments("Base.Event2.add"),
                 // (8,9): error CS0122: 'Base.Event3.add' is inaccessible due to its protection level
                 //         b.Event3 += null;
-                Diagnostic(ErrorCode.ERR_BadAccess, "b.Event3 += null").WithArguments("Base.Event3.add"));
+                Diagnostic(ErrorCode.ERR_BadAccess, "b.Event3 += null")
+                    .WithArguments("Base.Event3.add")
+            );
 
             var @class = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("Base");
             var event1 = @class.GetMember<EventSymbol>("Event1");
@@ -1884,7 +2098,8 @@ class C
         [Fact]
         public void EventAccessorDoesNotHideMethod()
         {
-            const string cSharpSource = @"
+            const string cSharpSource =
+                @"
 interface IA {
     void add_E(string e);
 }
@@ -1907,7 +2122,8 @@ class Program {
         [Fact]
         public void EventAccessorDoesNotConflictWithMethod()
         {
-            const string cSharpSource = @"
+            const string cSharpSource =
+                @"
 interface IA {
     void add_E(string e);
 }
@@ -1932,7 +2148,8 @@ class Program {
         [Fact]
         public void CannotAccessEventThroughParenthesizedType()
         {
-            const string cSharpSource = @"
+            const string cSharpSource =
+                @"
 class Program
 {
     static event System.Action E;
@@ -1943,16 +2160,20 @@ class Program
     }
 }
 ";
-            CreateCompilation(cSharpSource).VerifyDiagnostics(
-                // (8,10): error CS0119: 'Program' is a 'type', which is not valid in the given context
-                //         (Program).E();
-                Diagnostic(ErrorCode.ERR_BadSKunknown, "Program").WithArguments("Program", "type"));
+            CreateCompilation(cSharpSource)
+                .VerifyDiagnostics(
+                    // (8,10): error CS0119: 'Program' is a 'type', which is not valid in the given context
+                    //         (Program).E();
+                    Diagnostic(ErrorCode.ERR_BadSKunknown, "Program")
+                        .WithArguments("Program", "type")
+                );
         }
 
         [Fact]
         public void CustomEventInvocable()
         {
-            const string cSharpSource = @"
+            const string cSharpSource =
+                @"
 class Outer
 {
     public static void Q()
@@ -1973,17 +2194,21 @@ class Outer
     }
 }
 ";
-            CreateCompilation(cSharpSource).VerifyDiagnostics(
-                // (16,17): error CS0079: The event 'Outer.Goo.Q' can only appear on the left hand side of += or -=
-                //                 Q();
-                Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "Q").WithArguments("Outer.Goo.Q"));
+            CreateCompilation(cSharpSource)
+                .VerifyDiagnostics(
+                    // (16,17): error CS0079: The event 'Outer.Goo.Q' can only appear on the left hand side of += or -=
+                    //                 Q();
+                    Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "Q")
+                        .WithArguments("Outer.Goo.Q")
+                );
         }
 
         [WorkItem(542461, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542461")]
         [Fact]
         public void EventMustDelegate()
         {
-            const string cSharpSource = @"
+            const string cSharpSource =
+                @"
 using System;
 namespace MyCollections
 {
@@ -2040,39 +2265,44 @@ namespace TestEvents
 }
 
 ";
-            CreateCompilation(cSharpSource).VerifyDiagnostics(
-                // (9,43): error CS0066: 'MyCollections.ListWithChangedEvent.Changed': event must be of a delegate type
-                //         public event ListWithChangedEvent Changed;
-                Diagnostic(ErrorCode.ERR_EventNotDelegate, "Changed").WithArguments("MyCollections.ListWithChangedEvent.Changed"),
+            CreateCompilation(cSharpSource)
+                .VerifyDiagnostics(
+                    // (9,43): error CS0066: 'MyCollections.ListWithChangedEvent.Changed': event must be of a delegate type
+                    //         public event ListWithChangedEvent Changed;
+                    Diagnostic(ErrorCode.ERR_EventNotDelegate, "Changed")
+                        .WithArguments("MyCollections.ListWithChangedEvent.Changed"),
+                    // Dev10 doesn't report this cascading error, but it seems reasonable since the field isn't a delegate.
 
-                // Dev10 doesn't report this cascading error, but it seems reasonable since the field isn't a delegate.
-
-                // (13,17): error CS0149: Method name expected
-                //                 Changed(this, e);
-                Diagnostic(ErrorCode.ERR_MethodNameExpected, "Changed"));
+                    // (13,17): error CS0149: Method name expected
+                    //                 Changed(this, e);
+                    Diagnostic(ErrorCode.ERR_MethodNameExpected, "Changed")
+                );
         }
 
         [WorkItem(543791, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543791")]
         [Fact]
         public void MultipleDeclaratorsOneError()
         {
-            var source = @"
+            var source =
+                @"
 class A
 {
     event Unknown a, b;
 }
 ";
 
-            CreateCompilation(source).VerifyDiagnostics(
-                // (4,5): error CS0246: The type or namespace name 'Unknown' could not be found (are you missing a using directive or an assembly reference?)
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Unknown").WithArguments("Unknown"),
-
-                // (4,19): warning CS0067: The event 'A.a' is never used
-                //     event Unknown a, b;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "a").WithArguments("A.a"),
-                // (4,22): warning CS0067: The event 'A.b' is never used
-                //     event Unknown a, b;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "b").WithArguments("A.b"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (4,5): error CS0246: The type or namespace name 'Unknown' could not be found (are you missing a using directive or an assembly reference?)
+                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Unknown")
+                        .WithArguments("Unknown"),
+                    // (4,19): warning CS0067: The event 'A.a' is never used
+                    //     event Unknown a, b;
+                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "a").WithArguments("A.a"),
+                    // (4,22): warning CS0067: The event 'A.b' is never used
+                    //     event Unknown a, b;
+                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "b").WithArguments("A.b")
+                );
         }
 
         [WorkItem(545682, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545682")]
@@ -2080,7 +2310,7 @@ class A
         public void EventHidingMethod()
         {
             var source1 =
-@".class public A
+                @".class public A
 {
   .method public hidebysig specialname rtspecialname instance void .ctor() { ret }
   .method public instance void E1() { ret }
@@ -2106,7 +2336,7 @@ class A
 }";
             var reference1 = CompileIL(source1);
             var source2 =
-@"class C
+                @"class C
 {
     static void M(B b)
     {
@@ -2117,88 +2347,110 @@ class A
             var compilation2 = CreateCompilation(source2, new[] { reference1 });
             compilation2.VerifyDiagnostics(
                 // (5, 11): error CS0079: The event 'B.E1' can only appear on the left hand side of += or -=
-                Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "E1").WithArguments("B.E1").WithLocation(5, 11));
+                Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "E1")
+                    .WithArguments("B.E1")
+                    .WithLocation(5, 11)
+            );
         }
 
         [WorkItem(547071, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/547071")]
         [Fact]
         public void InvalidEventDeclarations()
         {
-            CreateCompilation("event this").VerifyDiagnostics(
-                // (1,7): error CS1031: Type expected
-                // event this
-                Diagnostic(ErrorCode.ERR_TypeExpected, "this"),
-                // (1,11): error CS1514: { expected
-                // event this
-                Diagnostic(ErrorCode.ERR_LbraceExpected, ""),
-                // (1,11): error CS1513: } expected
-                // event this
-                Diagnostic(ErrorCode.ERR_RbraceExpected, ""),
-                // (1,7): error CS0065: '<invalid-global-code>.': event property must have both add and remove accessors
-                // event this
-                Diagnostic(ErrorCode.ERR_EventNeedsBothAccessors, "").WithArguments("<invalid-global-code>."));
+            CreateCompilation("event this")
+                .VerifyDiagnostics(
+                    // (1,7): error CS1031: Type expected
+                    // event this
+                    Diagnostic(ErrorCode.ERR_TypeExpected, "this"),
+                    // (1,11): error CS1514: { expected
+                    // event this
+                    Diagnostic(ErrorCode.ERR_LbraceExpected, ""),
+                    // (1,11): error CS1513: } expected
+                    // event this
+                    Diagnostic(ErrorCode.ERR_RbraceExpected, ""),
+                    // (1,7): error CS0065: '<invalid-global-code>.': event property must have both add and remove accessors
+                    // event this
+                    Diagnostic(ErrorCode.ERR_EventNeedsBothAccessors, "")
+                        .WithArguments("<invalid-global-code>.")
+                );
 
-            CreateCompilation("event System.Action E<T>").VerifyDiagnostics(
-                // (1,21): error CS7002: Unexpected use of a generic name
-                // event System.Action E<T>
-                Diagnostic(ErrorCode.ERR_UnexpectedGenericName, "E"),
-                // (1,25): error CS1514: { expected
-                // event System.Action E<T>
-                Diagnostic(ErrorCode.ERR_LbraceExpected, ""),
-                // (1,25): error CS1513: } expected
-                // event System.Action E<T>
-                Diagnostic(ErrorCode.ERR_RbraceExpected, ""),
-                // (1,21): error CS0065: '<invalid-global-code>.E': event property must have both add and remove accessors
-                // event System.Action E<T>
-                Diagnostic(ErrorCode.ERR_EventNeedsBothAccessors, "E").WithArguments("<invalid-global-code>.E"));
+            CreateCompilation("event System.Action E<T>")
+                .VerifyDiagnostics(
+                    // (1,21): error CS7002: Unexpected use of a generic name
+                    // event System.Action E<T>
+                    Diagnostic(ErrorCode.ERR_UnexpectedGenericName, "E"),
+                    // (1,25): error CS1514: { expected
+                    // event System.Action E<T>
+                    Diagnostic(ErrorCode.ERR_LbraceExpected, ""),
+                    // (1,25): error CS1513: } expected
+                    // event System.Action E<T>
+                    Diagnostic(ErrorCode.ERR_RbraceExpected, ""),
+                    // (1,21): error CS0065: '<invalid-global-code>.E': event property must have both add and remove accessors
+                    // event System.Action E<T>
+                    Diagnostic(ErrorCode.ERR_EventNeedsBothAccessors, "E")
+                        .WithArguments("<invalid-global-code>.E")
+                );
 
-            CreateCompilation("event").VerifyDiagnostics(
-                // (1,6): error CS1031: Type expected
-                // event
-                Diagnostic(ErrorCode.ERR_TypeExpected, ""),
-                // (1,6): error CS1514: { expected
-                // event
-                Diagnostic(ErrorCode.ERR_LbraceExpected, ""),
-                // (1,6): error CS1513: } expected
-                // event
-                Diagnostic(ErrorCode.ERR_RbraceExpected, ""),
-                // (1,6): error CS0065: '<invalid-global-code>.': event property must have both add and remove accessors
-                // event
-                Diagnostic(ErrorCode.ERR_EventNeedsBothAccessors, "").WithArguments("<invalid-global-code>."));
+            CreateCompilation("event")
+                .VerifyDiagnostics(
+                    // (1,6): error CS1031: Type expected
+                    // event
+                    Diagnostic(ErrorCode.ERR_TypeExpected, ""),
+                    // (1,6): error CS1514: { expected
+                    // event
+                    Diagnostic(ErrorCode.ERR_LbraceExpected, ""),
+                    // (1,6): error CS1513: } expected
+                    // event
+                    Diagnostic(ErrorCode.ERR_RbraceExpected, ""),
+                    // (1,6): error CS0065: '<invalid-global-code>.': event property must have both add and remove accessors
+                    // event
+                    Diagnostic(ErrorCode.ERR_EventNeedsBothAccessors, "")
+                        .WithArguments("<invalid-global-code>.")
+                );
 
-            CreateCompilation("event System.Action ").VerifyDiagnostics(
-                // (1,21): error CS1001: Identifier expected
-                // event System.Action 
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, ""),
-                // (1,21): error CS1514: { expected
-                // event System.Action 
-                Diagnostic(ErrorCode.ERR_LbraceExpected, ""),
-                // (1,21): error CS1513: } expected
-                // event System.Action 
-                Diagnostic(ErrorCode.ERR_RbraceExpected, ""),
-                // (1,21): error CS0065: '<invalid-global-code>.': event property must have both add and remove accessors
-                // event System.Action 
-                Diagnostic(ErrorCode.ERR_EventNeedsBothAccessors, "").WithArguments("<invalid-global-code>."));
+            CreateCompilation("event System.Action ")
+                .VerifyDiagnostics(
+                    // (1,21): error CS1001: Identifier expected
+                    // event System.Action
+                    Diagnostic(ErrorCode.ERR_IdentifierExpected, ""),
+                    // (1,21): error CS1514: { expected
+                    // event System.Action
+                    Diagnostic(ErrorCode.ERR_LbraceExpected, ""),
+                    // (1,21): error CS1513: } expected
+                    // event System.Action
+                    Diagnostic(ErrorCode.ERR_RbraceExpected, ""),
+                    // (1,21): error CS0065: '<invalid-global-code>.': event property must have both add and remove accessors
+                    // event System.Action
+                    Diagnostic(ErrorCode.ERR_EventNeedsBothAccessors, "")
+                        .WithArguments("<invalid-global-code>.")
+                );
 
-            CreateCompilation("event System.Action System.IFormattable.").VerifyDiagnostics(
-                // (1,40): error CS0071: An explicit interface implementation of an event must use event accessor syntax
-                // event System.Action System.IFormattable.
-                Diagnostic(ErrorCode.ERR_ExplicitEventFieldImpl, ".").WithLocation(1, 40),
-                // (1,41): error CS1001: Identifier expected
-                // event System.Action System.IFormattable.
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(1, 41),
-                // (1,21): error CS0540: '<invalid-global-code>.': containing type does not implement interface 'IFormattable'
-                // event System.Action System.IFormattable.
-                Diagnostic(ErrorCode.ERR_ClassDoesntImplementInterface, "System.IFormattable").WithArguments("<invalid-global-code>.", "System.IFormattable").WithLocation(1, 21),
-                // (1,41): error CS0539: '<invalid-global-code>.' in explicit interface declaration is not a member of interface
-                // event System.Action System.IFormattable.
-                Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "").WithArguments("<invalid-global-code>.").WithLocation(1, 41));
+            CreateCompilation("event System.Action System.IFormattable.")
+                .VerifyDiagnostics(
+                    // (1,40): error CS0071: An explicit interface implementation of an event must use event accessor syntax
+                    // event System.Action System.IFormattable.
+                    Diagnostic(ErrorCode.ERR_ExplicitEventFieldImpl, ".").WithLocation(1, 40),
+                    // (1,41): error CS1001: Identifier expected
+                    // event System.Action System.IFormattable.
+                    Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(1, 41),
+                    // (1,21): error CS0540: '<invalid-global-code>.': containing type does not implement interface 'IFormattable'
+                    // event System.Action System.IFormattable.
+                    Diagnostic(ErrorCode.ERR_ClassDoesntImplementInterface, "System.IFormattable")
+                        .WithArguments("<invalid-global-code>.", "System.IFormattable")
+                        .WithLocation(1, 21),
+                    // (1,41): error CS0539: '<invalid-global-code>.' in explicit interface declaration is not a member of interface
+                    // event System.Action System.IFormattable.
+                    Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "")
+                        .WithArguments("<invalid-global-code>.")
+                        .WithLocation(1, 41)
+                );
         }
 
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         public void OverriddenEventCustomModifiers()
         {
-            var il = @"
+            var il =
+                @"
 .class public auto ansi beforefieldinit Base
        extends [mscorlib]System.Object
 {
@@ -2231,7 +2483,8 @@ class A
 } // end of class Base
 ";
 
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Derived1 : Base
@@ -2253,34 +2506,51 @@ class Derived2 : Base
             comp.VerifyDiagnostics(
                 // (6,41): warning CS0067: The event 'Derived1.E' is never used
                 //     public override event Action<int[]> E;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E").WithArguments("Derived1.E"));
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E").WithArguments("Derived1.E")
+            );
 
             var global = comp.GlobalNamespace;
 
             var @base = global.GetMember<NamedTypeSymbol>("Base");
             var baseEvent = @base.GetMember<EventSymbol>("E");
             var baseEventType = baseEvent.Type;
-            Assert.Equal("System.Action<System.Int32 modopt(System.Int64) []>", baseEventType.ToTestDisplayString()); // Note modopt
+            Assert.Equal(
+                "System.Action<System.Int32 modopt(System.Int64) []>",
+                baseEventType.ToTestDisplayString()
+            ); // Note modopt
 
             var derived1 = global.GetMember<NamedTypeSymbol>("Derived1");
             var event1 = derived1.GetMember<EventSymbol>("E");
             Assert.Equal(baseEventType, event1.Type);
             Assert.Equal(baseEventType, event1.AssociatedField.Type);
-            Assert.Equal(baseEventType, event1.AddMethod.ParameterTypesWithAnnotations.Single().Type);
-            Assert.Equal(baseEventType, event1.RemoveMethod.ParameterTypesWithAnnotations.Single().Type);
+            Assert.Equal(
+                baseEventType,
+                event1.AddMethod.ParameterTypesWithAnnotations.Single().Type
+            );
+            Assert.Equal(
+                baseEventType,
+                event1.RemoveMethod.ParameterTypesWithAnnotations.Single().Type
+            );
 
             var derived2 = global.GetMember<NamedTypeSymbol>("Derived2");
             var event2 = derived2.GetMember<EventSymbol>("E");
             Assert.Equal(baseEventType, event2.Type);
             Assert.Null(event2.AssociatedField);
-            Assert.Equal(baseEventType, event2.AddMethod.ParameterTypesWithAnnotations.Single().Type);
-            Assert.Equal(baseEventType, event2.RemoveMethod.ParameterTypesWithAnnotations.Single().Type);
+            Assert.Equal(
+                baseEventType,
+                event2.AddMethod.ParameterTypesWithAnnotations.Single().Type
+            );
+            Assert.Equal(
+                baseEventType,
+                event2.RemoveMethod.ParameterTypesWithAnnotations.Single().Type
+            );
         }
 
         [Fact]
         public void OverriddenAccessorName()
         {
-            var il = @"
+            var il =
+                @"
 .class public auto ansi beforefieldinit Base
        extends [mscorlib]System.Object
 {
@@ -2313,7 +2583,8 @@ class Derived2 : Base
 } // end of class Base
 ";
 
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Derived1 : Base
@@ -2335,7 +2606,8 @@ class Derived2 : Base
             comp.VerifyDiagnostics(
                 // (6,34): warning CS0067: The event 'Derived1.E' is never used
                 //     public override event Action E;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E").WithArguments("Derived1.E"));
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E").WithArguments("Derived1.E")
+            );
 
             var derived1 = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("Derived1");
             var event1 = derived1.GetMember<EventSymbol>("E");
@@ -2351,7 +2623,8 @@ class Derived2 : Base
         [Fact, WorkItem(570905, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/570905")]
         public void OverriddenAccessorName_BaseMissingAccessor()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Base
@@ -2381,7 +2654,8 @@ class Derived2 : Base
                 Diagnostic(ErrorCode.ERR_EventNeedsBothAccessors, "E").WithArguments("Base.E"),
                 // (11,34): warning CS0067: The event 'Derived1.E' is never used
                 //     public override event Action E;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E").WithArguments("Derived1.E"));
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E").WithArguments("Derived1.E")
+            );
 
             var derived1 = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("Derived1");
             var event1 = derived1.GetMember<EventSymbol>("E");
@@ -2398,7 +2672,8 @@ class Derived2 : Base
         [Fact]
         public void AbstractFieldLikeEvent()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 public abstract class A
@@ -2422,7 +2697,7 @@ public abstract class A
         public void AbstractBaseEvent()
         {
             var source =
-@"using System;
+                @"using System;
 
 namespace ConsoleApplication3
 {
@@ -2454,23 +2729,31 @@ namespace ConsoleApplication3
         }
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (14,19): error CS0205: Cannot call an abstract base member: 'BaseWithAbstractEvent.MyEvent'
-                //             add { base.MyEvent += value; } // error
-                Diagnostic(ErrorCode.ERR_AbstractBaseCall, "base.MyEvent += value").WithArguments("ConsoleApplication3.BaseWithAbstractEvent.MyEvent").WithLocation(14, 19),
-                // (15,22): error CS0205: Cannot call an abstract base member: 'BaseWithAbstractEvent.MyEvent'
-                //             remove { base.MyEvent -= value; } // error
-                Diagnostic(ErrorCode.ERR_AbstractBaseCall, "base.MyEvent -= value").WithArguments("ConsoleApplication3.BaseWithAbstractEvent.MyEvent").WithLocation(15, 22),
-                // (20,13): error CS0205: Cannot call an abstract base member: 'BaseWithAbstractEvent.MyEvent'
-                //             base.MyEvent += Goo; // error
-                Diagnostic(ErrorCode.ERR_AbstractBaseCall, "base.MyEvent += Goo").WithArguments("ConsoleApplication3.BaseWithAbstractEvent.MyEvent").WithLocation(20, 13)
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (14,19): error CS0205: Cannot call an abstract base member: 'BaseWithAbstractEvent.MyEvent'
+                    //             add { base.MyEvent += value; } // error
+                    Diagnostic(ErrorCode.ERR_AbstractBaseCall, "base.MyEvent += value")
+                        .WithArguments("ConsoleApplication3.BaseWithAbstractEvent.MyEvent")
+                        .WithLocation(14, 19),
+                    // (15,22): error CS0205: Cannot call an abstract base member: 'BaseWithAbstractEvent.MyEvent'
+                    //             remove { base.MyEvent -= value; } // error
+                    Diagnostic(ErrorCode.ERR_AbstractBaseCall, "base.MyEvent -= value")
+                        .WithArguments("ConsoleApplication3.BaseWithAbstractEvent.MyEvent")
+                        .WithLocation(15, 22),
+                    // (20,13): error CS0205: Cannot call an abstract base member: 'BaseWithAbstractEvent.MyEvent'
+                    //             base.MyEvent += Goo; // error
+                    Diagnostic(ErrorCode.ERR_AbstractBaseCall, "base.MyEvent += Goo")
+                        .WithArguments("ConsoleApplication3.BaseWithAbstractEvent.MyEvent")
+                        .WithLocation(20, 13)
                 );
         }
 
         [Fact, WorkItem(40092, "https://github.com/dotnet/roslyn/issues/40092")]
         public void ExternEventInitializer()
         {
-            var text = @"
+            var text =
+                @"
 delegate void D();
 
 class Test
@@ -2480,10 +2763,14 @@ class Test
     public extern event D e = null; // 1
 }
 ";
-            CreateCompilation(text).VerifyDiagnostics(
-                // (8,27): error CS8760: 'Test.e': extern event cannot have initializer
-                //     public extern event D e = null; // 1
-                Diagnostic(ErrorCode.ERR_ExternEventInitializer, "e").WithArguments("Test.e").WithLocation(8, 27));
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    // (8,27): error CS8760: 'Test.e': extern event cannot have initializer
+                    //     public extern event D e = null; // 1
+                    Diagnostic(ErrorCode.ERR_ExternEventInitializer, "e")
+                        .WithArguments("Test.e")
+                        .WithLocation(8, 27)
+                );
         }
 
         #endregion

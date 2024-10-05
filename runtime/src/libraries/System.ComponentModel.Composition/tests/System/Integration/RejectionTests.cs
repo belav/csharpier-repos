@@ -45,7 +45,8 @@ namespace Tests.Integration
             var container = ContainerFactory.CreateWithAttributedCatalog(
                 typeof(MyImporter),
                 typeof(Extension1),
-                typeof(Extension2));
+                typeof(Extension2)
+            );
 
             var importer = container.GetExportedValue<MyImporter>();
 
@@ -105,10 +106,15 @@ namespace Tests.Integration
         }
 
         public interface IMissing { }
+
         public interface ISingle { }
+
         public interface IMultiple { }
+
         public interface IConditional { }
+
         public class SingleImpl : ISingle { }
+
         public class MultipleImpl : IMultiple { }
 
         public class NoImportPart
@@ -184,7 +190,10 @@ namespace Tests.Integration
         [Fact]
         public void Rejection_TransitiveDependenciesSatisfied()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(Needy), typeof(NoImportPart));
+            var container = ContainerFactory.CreateWithAttributedCatalog(
+                typeof(Needy),
+                typeof(NoImportPart)
+            );
             var needy = container.GetExportedValue<Needy>();
             Assert.NotNull(needy);
             Assert.IsType<SingleImpl>(needy.SingleImport);
@@ -193,10 +202,14 @@ namespace Tests.Integration
         [Fact]
         public void Rejection_TransitiveDependenciesUnsatisfied_ShouldThrowCardinalityMismatch()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(Needy), typeof(MissingImportPart));
+            var container = ContainerFactory.CreateWithAttributedCatalog(
+                typeof(Needy),
+                typeof(MissingImportPart)
+            );
 
-            ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
-                container.GetExportedValue<Needy>());
+            ExceptionAssert.Throws<ImportCardinalityMismatchException>(
+                () => container.GetExportedValue<Needy>()
+            );
         }
 
         public class MissingImportPart : NoImportPart
@@ -210,8 +223,9 @@ namespace Tests.Integration
         {
             var container = ContainerFactory.Create();
 
-            ExceptionAssert.Throws<ChangeRejectedException>(() =>
-                container.ComposeParts(new MissingImportPart()));
+            ExceptionAssert.Throws<ChangeRejectedException>(
+                () => container.ComposeParts(new MissingImportPart())
+            );
         }
 
         [Fact]
@@ -235,8 +249,7 @@ namespace Tests.Integration
             var export = container.GetExportedValue<Needy>();
 
             // Should not be able to remove the addedPart because someone depends on it.
-            ExceptionAssert.Throws<ChangeRejectedException>(() =>
-                container.Compose(removeBatch));
+            ExceptionAssert.Throws<ChangeRejectedException>(() => container.Compose(removeBatch));
         }
 
         [Fact]
@@ -252,15 +265,17 @@ namespace Tests.Integration
             var export = container.GetExport<Needy>();
 
             // Cannot add another import because it would break existing promised compositions
-            ExceptionAssert.Throws<ChangeRejectedException>(() =>
-                container.ComposeParts(new NoImportPart()));
+            ExceptionAssert.Throws<ChangeRejectedException>(
+                () => container.ComposeParts(new NoImportPart())
+            );
 
             // Instansitate the object
             var needy = export.Value;
 
             // Cannot add another import because it would break existing compositions
-            ExceptionAssert.Throws<ChangeRejectedException>(() =>
-                container.ComposeParts(new NoImportPart()));
+            ExceptionAssert.Throws<ChangeRejectedException>(
+                () => container.ComposeParts(new NoImportPart())
+            );
         }
 
         [Fact]
@@ -271,7 +286,10 @@ namespace Tests.Integration
             // promise can be moved around even for not-recomposable imports but once the object is
             // pulled on it is fixed from that point on.
 
-            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(Needy), typeof(NoImportPart));
+            var container = ContainerFactory.CreateWithAttributedCatalog(
+                typeof(Needy),
+                typeof(NoImportPart)
+            );
 
             // Add the missing dependency for Needy
             container.ComposeParts(new NoImportPart());
@@ -288,11 +306,13 @@ namespace Tests.Integration
             var needy = export.Value;
 
             // Cannot add another import because it would break existing compositions
-            ExceptionAssert.Throws<ChangeRejectedException>(() =>
-                container.ComposeParts(new NoImportPart()));
+            ExceptionAssert.Throws<ChangeRejectedException>(
+                () => container.ComposeParts(new NoImportPart())
+            );
         }
 
         public interface ILoopA { }
+
         public interface ILoopB { }
 
         [Export(typeof(ILoopA))]
@@ -333,7 +353,9 @@ namespace Tests.Integration
         [Fact]
         public void Rejection_TheClemensLoop()
         {
-            var catalog = new TypeCatalog(new Type[] { typeof(LoopA1), typeof(LoopA2), typeof(LoopB1), typeof(LoopB2) });
+            var catalog = new TypeCatalog(
+                new Type[] { typeof(LoopA1), typeof(LoopA2), typeof(LoopB1), typeof(LoopB2) }
+            );
             var container = new CompositionContainer(catalog);
             var exportsA = container.GetExportedValues<ILoopA>();
             var exportsB = container.GetExportedValues<ILoopB>();
@@ -370,7 +392,6 @@ namespace Tests.Integration
         {
             [Export("WorkItem.Id")]
             public string Id = "MyId";
-
         }
 
         [Fact]
@@ -406,7 +427,11 @@ namespace Tests.Integration
         [Fact]
         public void AppliedStateStored_ShouldRevertStateOnFailure()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(AllWorkItems), typeof(WorkItem), typeof(Ids));
+            var container = ContainerFactory.CreateWithAttributedCatalog(
+                typeof(AllWorkItems),
+                typeof(WorkItem),
+                typeof(Ids)
+            );
 
             var workItems = container.GetExportedValue<AllWorkItems>();
 
@@ -417,8 +442,7 @@ namespace Tests.Integration
             batch.AddExportedValue("WorkItem.Id", "B");
             batch.AddPart(new ClassWithMissingImport());
 
-            ExceptionAssert.Throws<ChangeRejectedException>(() =>
-                container.Compose(batch));
+            ExceptionAssert.Throws<ChangeRejectedException>(() => container.Compose(batch));
 
             Assert.Equal("MyId", workItems.WorkItems[0].Value.Id);
         }
@@ -433,7 +457,10 @@ namespace Tests.Integration
         [Fact]
         public void OptionalImportWithMissingDependency_ShouldRejectAndComposeFine()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(OptionalImporter), typeof(ClassWithMissingImport));
+            var container = ContainerFactory.CreateWithAttributedCatalog(
+                typeof(OptionalImporter),
+                typeof(ClassWithMissingImport)
+            );
 
             var importer = container.GetExportedValue<OptionalImporter>();
 

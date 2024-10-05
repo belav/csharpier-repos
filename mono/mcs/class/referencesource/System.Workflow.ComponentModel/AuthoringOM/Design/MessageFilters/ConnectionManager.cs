@@ -1,15 +1,15 @@
 ﻿namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.Text;
-    using System.Drawing;
-    using System.Diagnostics;
     using System.Collections;
-    using System.Windows.Forms;
-    using System.Drawing.Drawing2D;
     using System.Collections.Generic;
-    using System.ComponentModel.Design;
     using System.Collections.ObjectModel;
+    using System.ComponentModel.Design;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Drawing2D;
+    using System.Text;
+    using System.Windows.Forms;
     using System.Workflow.ComponentModel.Design;
 
     #region Class ConnectionManager
@@ -17,8 +17,14 @@
     internal sealed class ConnectionManager : WorkflowDesignerMessageFilter, IDesignerGlyphProvider
     {
         #region Members and Constructor
-        internal static Cursor SnappedConnectionCursor = new Cursor(typeof(WorkflowView), "Resources.Connector.cur");
-        internal static Cursor NewConnectorCursor = new Cursor(typeof(WorkflowView), "Resources.ConnectorDraw.cur");
+        internal static Cursor SnappedConnectionCursor = new Cursor(
+            typeof(WorkflowView),
+            "Resources.Connector.cur"
+        );
+        internal static Cursor NewConnectorCursor = new Cursor(
+            typeof(WorkflowView),
+            "Resources.ConnectorDraw.cur"
+        );
 
         private const int HighlightDistance = 20;
         private const int SnapHighlightDistance = 20;
@@ -31,23 +37,22 @@
         private Nullable<Point> initialDragPoint = null;
         private HitTestInfo dragPointHitInfo = null;
 
-        public ConnectionManager()
-        {
-
-        }
+        public ConnectionManager() { }
 
         protected override void Initialize(WorkflowView parentView)
         {
             base.Initialize(parentView);
 
-            IServiceContainer serviceContainer = GetService(typeof(IServiceContainer)) as IServiceContainer;
+            IServiceContainer serviceContainer =
+                GetService(typeof(IServiceContainer)) as IServiceContainer;
             if (serviceContainer != null)
             {
                 serviceContainer.RemoveService(typeof(ConnectionManager));
                 serviceContainer.AddService(typeof(ConnectionManager), this);
             }
 
-            IDesignerGlyphProviderService glyphProviderService = GetService(typeof(IDesignerGlyphProviderService)) as IDesignerGlyphProviderService;
+            IDesignerGlyphProviderService glyphProviderService =
+                GetService(typeof(IDesignerGlyphProviderService)) as IDesignerGlyphProviderService;
             if (glyphProviderService != null)
                 glyphProviderService.AddGlyphProvider(this);
         }
@@ -58,11 +63,14 @@
             {
                 if (disposing)
                 {
-                    IServiceContainer serviceContainer = GetService(typeof(IServiceContainer)) as IServiceContainer;
+                    IServiceContainer serviceContainer =
+                        GetService(typeof(IServiceContainer)) as IServiceContainer;
                     if (serviceContainer != null)
                         serviceContainer.RemoveService(typeof(ConnectionManager));
 
-                    IDesignerGlyphProviderService glyphProviderService = GetService(typeof(IDesignerGlyphProviderService)) as IDesignerGlyphProviderService;
+                    IDesignerGlyphProviderService glyphProviderService =
+                        GetService(typeof(IDesignerGlyphProviderService))
+                        as IDesignerGlyphProviderService;
                     if (glyphProviderService != null)
                         glyphProviderService.RemoveGlyphProvider(this);
                 }
@@ -102,7 +110,7 @@
                 EndEditing(null);
             }
 
-            //Update the cursor 
+            //Update the cursor
             bool processedMessage = (this.initialDragPoint != null);
             processedMessage |= UpdateCursor(cursorPoint);
             return processedMessage;
@@ -121,14 +129,24 @@
                 if ((eventArgs.Button & MouseButtons.Left) == MouseButtons.Left)
                 {
                     //Check if we can start editing a connector
-                    if (!EditingInProgress && this.initialDragPoint != null &&
-                        (Math.Abs(this.initialDragPoint.Value.X - logicalPoint.X) > SystemInformation.DragSize.Width ||
-                        Math.Abs(this.initialDragPoint.Value.Y - logicalPoint.Y) > SystemInformation.DragSize.Height))
+                    if (
+                        !EditingInProgress
+                        && this.initialDragPoint != null
+                        && (
+                            Math.Abs(this.initialDragPoint.Value.X - logicalPoint.X)
+                                > SystemInformation.DragSize.Width
+                            || Math.Abs(this.initialDragPoint.Value.Y - logicalPoint.Y)
+                                > SystemInformation.DragSize.Height
+                        )
+                    )
                     {
-                        BeginEditing(GetConnectorEditor(this.initialDragPoint.Value, this.dragPointHitInfo), this.initialDragPoint.Value);
+                        BeginEditing(
+                            GetConnectorEditor(this.initialDragPoint.Value, this.dragPointHitInfo),
+                            this.initialDragPoint.Value
+                        );
                     }
 
-                    //If the editing is in progress then pump the messages to the edited connector 
+                    //If the editing is in progress then pump the messages to the edited connector
                     if (EditingInProgress)
                     {
                         ContinueEditing(logicalPoint);
@@ -139,8 +157,17 @@
                 else
                 {
                     //Show the points from where we can start drawing connectors
-                    FreeformActivityDesigner connectorContainer = ConnectionManager.GetConnectorContainer(MessageHitTestContext.AssociatedDesigner);
-                    ConnectablePoints = (connectorContainer != null && connectorContainer.EnableUserDrawnConnectors) ? GetHighlightableConnectionPoints(logicalPoint, MessageHitTestContext.AssociatedDesigner) : null;
+                    FreeformActivityDesigner connectorContainer =
+                        ConnectionManager.GetConnectorContainer(
+                            MessageHitTestContext.AssociatedDesigner
+                        );
+                    ConnectablePoints =
+                        (connectorContainer != null && connectorContainer.EnableUserDrawnConnectors)
+                            ? GetHighlightableConnectionPoints(
+                                logicalPoint,
+                                MessageHitTestContext.AssociatedDesigner
+                            )
+                            : null;
                 }
 
                 cursorPoint = logicalPoint;
@@ -157,14 +184,24 @@
             Point clientPoint = new Point(eventArgs.X, eventArgs.Y);
             WorkflowView workflowView = ParentView;
 
-            if (workflowView != null && workflowView.IsClientPointInActiveLayout(clientPoint) && !EditingInProgress)
+            if (
+                workflowView != null
+                && workflowView.IsClientPointInActiveLayout(clientPoint)
+                && !EditingInProgress
+            )
             {
                 //Highlight the connection points to indicate where user can start drawing connectors
-                FreeformActivityDesigner connectorContainer = ConnectionManager.GetConnectorContainer(MessageHitTestContext.AssociatedDesigner);
+                FreeformActivityDesigner connectorContainer =
+                    ConnectionManager.GetConnectorContainer(
+                        MessageHitTestContext.AssociatedDesigner
+                    );
                 if (connectorContainer != null && connectorContainer.EnableUserDrawnConnectors)
                 {
                     Point logicalPoint = workflowView.ClientPointToLogical(clientPoint);
-                    ConnectablePoints = GetHighlightableConnectionPoints(logicalPoint, MessageHitTestContext.AssociatedDesigner);
+                    ConnectablePoints = GetHighlightableConnectionPoints(
+                        logicalPoint,
+                        MessageHitTestContext.AssociatedDesigner
+                    );
                     cursorPoint = logicalPoint;
                 }
             }
@@ -191,7 +228,7 @@
 
         protected override bool OnMouseUp(MouseEventArgs eventArgs)
         {
-            //If left button is not down then return 
+            //If left button is not down then return
             Point cursorPoint = Point.Empty;
             bool processedMessage = EditingInProgress;
 
@@ -225,17 +262,31 @@
             return eventArgs.Handled;
         }
 
-        protected override bool OnPaint(PaintEventArgs e, Rectangle viewPort, AmbientTheme ambientTheme)
+        protected override bool OnPaint(
+            PaintEventArgs e,
+            Rectangle viewPort,
+            AmbientTheme ambientTheme
+        )
         {
             //Draw the selected connectors at top of the z level
             Connector selectedConnector = null;
-            ISelectionService selectionService = GetService(typeof(ISelectionService)) as ISelectionService;
+            ISelectionService selectionService =
+                GetService(typeof(ISelectionService)) as ISelectionService;
             foreach (object selectedComponents in selectionService.GetSelectedComponents())
             {
                 Connector connector = Connector.GetConnectorFromSelectedObject(selectedComponents);
                 if (connector != null)
                 {
-                    connector.OnPaintSelected(new ActivityDesignerPaintEventArgs(e.Graphics, connector.ParentDesigner.Bounds, viewPort, connector.ParentDesigner.DesignerTheme), (selectedComponents == selectionService.PrimarySelection), new Point[] { });
+                    connector.OnPaintSelected(
+                        new ActivityDesignerPaintEventArgs(
+                            e.Graphics,
+                            connector.ParentDesigner.Bounds,
+                            viewPort,
+                            connector.ParentDesigner.DesignerTheme
+                        ),
+                        (selectedComponents == selectionService.PrimarySelection),
+                        new Point[] { }
+                    );
                     if (selectedComponents == selectionService.PrimarySelection)
                         selectedConnector = connector;
                 }
@@ -245,14 +296,37 @@
             if (selectedConnector != null)
             {
                 ConnectorEditor editableConnector = new ConnectorEditor(selectedConnector);
-                editableConnector.OnPaint(new ActivityDesignerPaintEventArgs(e.Graphics, selectedConnector.ParentDesigner.Bounds, viewPort, selectedConnector.ParentDesigner.DesignerTheme), true, true);
+                editableConnector.OnPaint(
+                    new ActivityDesignerPaintEventArgs(
+                        e.Graphics,
+                        selectedConnector.ParentDesigner.Bounds,
+                        viewPort,
+                        selectedConnector.ParentDesigner.DesignerTheme
+                    ),
+                    true,
+                    true
+                );
             }
 
             //If editing is in progress then draw the connector being edited
             if (EditingInProgress)
             {
-                FreeformActivityDesigner designer = (this.connectorEditor.EditedConnector.ParentDesigner != null) ? this.connectorEditor.EditedConnector.ParentDesigner : ConnectionManager.GetConnectorContainer(this.connectorEditor.EditedConnector.Source.AssociatedDesigner);
-                this.connectorEditor.OnPaint(new ActivityDesignerPaintEventArgs(e.Graphics, designer.Bounds, viewPort, designer.DesignerTheme), false, false);
+                FreeformActivityDesigner designer =
+                    (this.connectorEditor.EditedConnector.ParentDesigner != null)
+                        ? this.connectorEditor.EditedConnector.ParentDesigner
+                        : ConnectionManager.GetConnectorContainer(
+                            this.connectorEditor.EditedConnector.Source.AssociatedDesigner
+                        );
+                this.connectorEditor.OnPaint(
+                    new ActivityDesignerPaintEventArgs(
+                        e.Graphics,
+                        designer.Bounds,
+                        viewPort,
+                        designer.DesignerTheme
+                    ),
+                    false,
+                    false
+                );
             }
 
             return false;
@@ -265,23 +339,40 @@
             Connector connector = null;
 
             //First check if we are editing a existing selected connector
-            ISelectionService selectionService = GetService(typeof(ISelectionService)) as ISelectionService;
+            ISelectionService selectionService =
+                GetService(typeof(ISelectionService)) as ISelectionService;
             if (selectionService != null)
             {
-                Connector selectedConnector = Connector.GetConnectorFromSelectedObject(selectionService.PrimarySelection);
-                if (selectedConnector != null && selectedConnector.ParentDesigner.EnableUserDrawnConnectors && new ConnectorEditor(selectedConnector).HitTest(editPoint))
+                Connector selectedConnector = Connector.GetConnectorFromSelectedObject(
+                    selectionService.PrimarySelection
+                );
+                if (
+                    selectedConnector != null
+                    && selectedConnector.ParentDesigner.EnableUserDrawnConnectors
+                    && new ConnectorEditor(selectedConnector).HitTest(editPoint)
+                )
                     connector = selectedConnector;
             }
 
             //Then check if the hit is on a ConnectionPoint for drawing new connectors
             if (connector == null)
             {
-                ConnectionPointHitTestInfo connectionPointHitTestInfo = messageContext as ConnectionPointHitTestInfo;
-                if (connectionPointHitTestInfo != null && connectionPointHitTestInfo.ConnectionPoint != null)
+                ConnectionPointHitTestInfo connectionPointHitTestInfo =
+                    messageContext as ConnectionPointHitTestInfo;
+                if (
+                    connectionPointHitTestInfo != null
+                    && connectionPointHitTestInfo.ConnectionPoint != null
+                )
                 {
-                    FreeformActivityDesigner connectorContainer = ConnectionManager.GetConnectorContainer(connectionPointHitTestInfo.AssociatedDesigner);
+                    FreeformActivityDesigner connectorContainer =
+                        ConnectionManager.GetConnectorContainer(
+                            connectionPointHitTestInfo.AssociatedDesigner
+                        );
                     if (connectorContainer != null && connectorContainer.EnableUserDrawnConnectors)
-                        connector = connectorContainer.CreateConnector(connectionPointHitTestInfo.ConnectionPoint, connectionPointHitTestInfo.ConnectionPoint);
+                        connector = connectorContainer.CreateConnector(
+                            connectionPointHitTestInfo.ConnectionPoint,
+                            connectionPointHitTestInfo.ConnectionPoint
+                        );
                 }
             }
 
@@ -290,18 +381,32 @@
 
         private bool CanBeginEditing(Point editPoint, HitTestInfo messageContext)
         {
-            ISelectionService selectionService = GetService(typeof(ISelectionService)) as ISelectionService;
+            ISelectionService selectionService =
+                GetService(typeof(ISelectionService)) as ISelectionService;
             if (selectionService != null)
             {
-                Connector selectedConnector = Connector.GetConnectorFromSelectedObject(selectionService.PrimarySelection);
-                if (selectedConnector != null && selectedConnector.ParentDesigner.EnableUserDrawnConnectors && new ConnectorEditor(selectedConnector).HitTest(editPoint))
+                Connector selectedConnector = Connector.GetConnectorFromSelectedObject(
+                    selectionService.PrimarySelection
+                );
+                if (
+                    selectedConnector != null
+                    && selectedConnector.ParentDesigner.EnableUserDrawnConnectors
+                    && new ConnectorEditor(selectedConnector).HitTest(editPoint)
+                )
                     return true;
             }
 
-            ConnectionPointHitTestInfo connectionPointHitTestInfo = messageContext as ConnectionPointHitTestInfo;
-            if (connectionPointHitTestInfo != null && connectionPointHitTestInfo.ConnectionPoint != null)
+            ConnectionPointHitTestInfo connectionPointHitTestInfo =
+                messageContext as ConnectionPointHitTestInfo;
+            if (
+                connectionPointHitTestInfo != null
+                && connectionPointHitTestInfo.ConnectionPoint != null
+            )
             {
-                FreeformActivityDesigner connectorContainer = ConnectionManager.GetConnectorContainer(connectionPointHitTestInfo.AssociatedDesigner);
+                FreeformActivityDesigner connectorContainer =
+                    ConnectionManager.GetConnectorContainer(
+                        connectionPointHitTestInfo.AssociatedDesigner
+                    );
                 if (connectorContainer != null && connectorContainer.EnableUserDrawnConnectors)
                     return true;
             }
@@ -331,10 +436,18 @@
             ConnectionPoint[] snapableConnectionPoints = null;
             if (this.connectorEditor.EditedConectionPoint != null)
             {
-                ConnectionPoint sourceConnectionPoint = this.connectorEditor.EditedConnector.Source == this.connectorEditor.EditedConectionPoint ?
-                    this.connectorEditor.EditedConnector.Target :
-                    this.connectorEditor.EditedConnector.Source;
-                snapableConnectionPoints = GetSnappableConnectionPoints(editPoint, sourceConnectionPoint, this.connectorEditor.EditedConectionPoint, MessageHitTestContext.AssociatedDesigner, out this.snappedConnectionPoint);
+                ConnectionPoint sourceConnectionPoint =
+                    this.connectorEditor.EditedConnector.Source
+                    == this.connectorEditor.EditedConectionPoint
+                        ? this.connectorEditor.EditedConnector.Target
+                        : this.connectorEditor.EditedConnector.Source;
+                snapableConnectionPoints = GetSnappableConnectionPoints(
+                    editPoint,
+                    sourceConnectionPoint,
+                    this.connectorEditor.EditedConectionPoint,
+                    MessageHitTestContext.AssociatedDesigner,
+                    out this.snappedConnectionPoint
+                );
             }
 
             ConnectablePoints = snapableConnectionPoints;
@@ -357,17 +470,28 @@
                     ConnectionPoint[] snapableConnectionPoints = null;
                     if (this.connectorEditor.EditedConectionPoint != null)
                     {
-                        ConnectionPoint sourceConnectionPoint = this.connectorEditor.EditedConnector.Source == this.connectorEditor.EditedConectionPoint ?
-                            this.connectorEditor.EditedConnector.Target :
-                            this.connectorEditor.EditedConnector.Source;
-                        snapableConnectionPoints = GetSnappableConnectionPoints(editPoint.Value, sourceConnectionPoint, this.connectorEditor.EditedConectionPoint, MessageHitTestContext.AssociatedDesigner, out this.snappedConnectionPoint);
+                        ConnectionPoint sourceConnectionPoint =
+                            this.connectorEditor.EditedConnector.Source
+                            == this.connectorEditor.EditedConectionPoint
+                                ? this.connectorEditor.EditedConnector.Target
+                                : this.connectorEditor.EditedConnector.Source;
+                        snapableConnectionPoints = GetSnappableConnectionPoints(
+                            editPoint.Value,
+                            sourceConnectionPoint,
+                            this.connectorEditor.EditedConectionPoint,
+                            MessageHitTestContext.AssociatedDesigner,
+                            out this.snappedConnectionPoint
+                        );
                     }
 
                     if (SnappedConnectionPoint != null)
                         editPoint = SnappedConnectionPoint.Location;
                 }
 
-                this.connectorEditor.OnEndEditing((editPoint != null) ? editPoint.Value : Point.Empty, (editPoint != null));
+                this.connectorEditor.OnEndEditing(
+                    (editPoint != null) ? editPoint.Value : Point.Empty,
+                    (editPoint != null)
+                );
             }
 
             this.initialDragPoint = null;
@@ -380,19 +504,12 @@
 
         private bool EditingInProgress
         {
-            get
-            {
-                return (this.connectorEditor != null);
-            }
+            get { return (this.connectorEditor != null); }
         }
 
         private ConnectionPoint[] ConnectablePoints
         {
-            get
-            {
-                return this.connectablePoints;
-            }
-
+            get { return this.connectablePoints; }
             set
             {
                 WorkflowView workflowView = ParentView;
@@ -443,13 +560,21 @@
                     //Fall back and check if we are hovering on any edit points
                     if (cursorToSet == Cursors.Default)
                     {
-                        ISelectionService selectionService = GetService(typeof(ISelectionService)) as ISelectionService;
+                        ISelectionService selectionService =
+                            GetService(typeof(ISelectionService)) as ISelectionService;
                         if (selectionService != null)
                         {
-                            Connector selectedConnector = Connector.GetConnectorFromSelectedObject(selectionService.PrimarySelection);
-                            if (selectedConnector != null && selectedConnector.ParentDesigner.EnableUserDrawnConnectors)
+                            Connector selectedConnector = Connector.GetConnectorFromSelectedObject(
+                                selectionService.PrimarySelection
+                            );
+                            if (
+                                selectedConnector != null
+                                && selectedConnector.ParentDesigner.EnableUserDrawnConnectors
+                            )
                             {
-                                ConnectorEditor connectorEditor = new ConnectorEditor(selectedConnector);
+                                ConnectorEditor connectorEditor = new ConnectorEditor(
+                                    selectedConnector
+                                );
                                 cursorToSet = connectorEditor.GetCursor(cursorPoint.Value);
                             }
                         }
@@ -458,10 +583,14 @@
             }
 
             WorkflowView workflowView = ParentView;
-            if (workflowView != null &&
-                (cursorToSet != Cursors.Default ||
-                    workflowView.Cursor == ConnectionManager.SnappedConnectionCursor ||
-                    workflowView.Cursor == ConnectionManager.NewConnectorCursor))
+            if (
+                workflowView != null
+                && (
+                    cursorToSet != Cursors.Default
+                    || workflowView.Cursor == ConnectionManager.SnappedConnectionCursor
+                    || workflowView.Cursor == ConnectionManager.NewConnectorCursor
+                )
+            )
             {
                 workflowView.Cursor = cursorToSet;
             }
@@ -471,13 +600,12 @@
 
         internal ConnectionPoint SnappedConnectionPoint
         {
-            get
-            {
-                return this.snappedConnectionPoint;
-            }
+            get { return this.snappedConnectionPoint; }
         }
 
-        internal static FreeformActivityDesigner GetConnectorContainer(ActivityDesigner associatedDesigner)
+        internal static FreeformActivityDesigner GetConnectorContainer(
+            ActivityDesigner associatedDesigner
+        )
         {
             //This function will walk up the parent chain of the designers and give the topmost container of connectors
             FreeformActivityDesigner connectorContainer = null;
@@ -498,17 +626,26 @@
             return connectorContainer;
         }
 
-        private static ConnectionPoint[] GetSnappableConnectionPoints(Point currentPoint, ConnectionPoint sourceConnectionPoint, ConnectionPoint activeConnectionPoint, ActivityDesigner activityDesigner, out ConnectionPoint snappedConnectionPoint)
+        private static ConnectionPoint[] GetSnappableConnectionPoints(
+            Point currentPoint,
+            ConnectionPoint sourceConnectionPoint,
+            ConnectionPoint activeConnectionPoint,
+            ActivityDesigner activityDesigner,
+            out ConnectionPoint snappedConnectionPoint
+        )
         {
             //If the activity designer is composite activity designer then we will go through its children else we will go through its connection points
             snappedConnectionPoint = null;
 
             List<ConnectionPoint> snappableConnectionPoints = new List<ConnectionPoint>();
 
-            FreeformActivityDesigner connectorContainer = ConnectionManager.GetConnectorContainer(activeConnectionPoint.AssociatedDesigner);
+            FreeformActivityDesigner connectorContainer = ConnectionManager.GetConnectorContainer(
+                activeConnectionPoint.AssociatedDesigner
+            );
             if (connectorContainer != null)
             {
-                FreeformActivityDesigner freeFormDesigner = activityDesigner as FreeformActivityDesigner;
+                FreeformActivityDesigner freeFormDesigner =
+                    activityDesigner as FreeformActivityDesigner;
                 List<ActivityDesigner> designersToCheck = new List<ActivityDesigner>();
                 designersToCheck.Add(activityDesigner);
                 if (freeFormDesigner != null)
@@ -522,15 +659,25 @@
                         bool addValidSnapPoints = false;
                         List<ConnectionPoint> validSnapPoints = new List<ConnectionPoint>();
 
-                        ReadOnlyCollection<ConnectionPoint> snapPoints = designer.GetConnectionPoints(DesignerEdges.All);
+                        ReadOnlyCollection<ConnectionPoint> snapPoints =
+                            designer.GetConnectionPoints(DesignerEdges.All);
                         foreach (ConnectionPoint snapPoint in snapPoints)
                         {
-                            if (!snapPoint.Equals(activeConnectionPoint) &&
-                                connectorContainer.CanConnectContainedDesigners(sourceConnectionPoint, snapPoint))
+                            if (
+                                !snapPoint.Equals(activeConnectionPoint)
+                                && connectorContainer.CanConnectContainedDesigners(
+                                    sourceConnectionPoint,
+                                    snapPoint
+                                )
+                            )
                             {
                                 validSnapPoints.Add(snapPoint);
 
-                                double distanceToDesigner = DesignerGeometryHelper.DistanceFromPointToRectangle(currentPoint, snapPoint.Bounds);
+                                double distanceToDesigner =
+                                    DesignerGeometryHelper.DistanceFromPointToRectangle(
+                                        currentPoint,
+                                        snapPoint.Bounds
+                                    );
                                 if (distanceToDesigner <= ConnectionManager.SnapHighlightDistance)
                                 {
                                     addValidSnapPoints = true;
@@ -550,7 +697,11 @@
 
                 if (snappedConnectionPoint != null)
                 {
-                    foreach (ConnectionPoint connectionPoint in snappedConnectionPoint.AssociatedDesigner.GetConnectionPoints(DesignerEdges.All))
+                    foreach (
+                        ConnectionPoint connectionPoint in snappedConnectionPoint.AssociatedDesigner.GetConnectionPoints(
+                            DesignerEdges.All
+                        )
+                    )
                     {
                         if (!snappableConnectionPoints.Contains(connectionPoint))
                             snappableConnectionPoints.Add(connectionPoint);
@@ -561,12 +712,16 @@
             return snappableConnectionPoints.ToArray();
         }
 
-        private static ConnectionPoint[] GetHighlightableConnectionPoints(Point currentPoint, ActivityDesigner activityDesigner)
+        private static ConnectionPoint[] GetHighlightableConnectionPoints(
+            Point currentPoint,
+            ActivityDesigner activityDesigner
+        )
         {
             List<ConnectionPoint> highlightablePoints = new List<ConnectionPoint>();
             List<ActivityDesigner> designersToCheck = new List<ActivityDesigner>();
 
-            FreeformActivityDesigner freeFormDesigner = activityDesigner as FreeformActivityDesigner;
+            FreeformActivityDesigner freeFormDesigner =
+                activityDesigner as FreeformActivityDesigner;
             if (freeFormDesigner != null)
                 designersToCheck.AddRange(freeFormDesigner.ContainedDesigners);
 
@@ -575,7 +730,9 @@
             foreach (ActivityDesigner designer in designersToCheck)
             {
                 bool addSnapPoints = (designer.Bounds.Contains(currentPoint));
-                ReadOnlyCollection<ConnectionPoint> snapPoints = designer.GetConnectionPoints(DesignerEdges.All);
+                ReadOnlyCollection<ConnectionPoint> snapPoints = designer.GetConnectionPoints(
+                    DesignerEdges.All
+                );
                 if (!addSnapPoints)
                 {
                     foreach (ConnectionPoint snapPoint in snapPoints)
@@ -597,7 +754,9 @@
         #endregion
 
         #region IDesignerGlyphProvider Members
-        ActivityDesignerGlyphCollection IDesignerGlyphProvider.GetGlyphs(ActivityDesigner activityDesigner)
+        ActivityDesignerGlyphCollection IDesignerGlyphProvider.GetGlyphs(
+            ActivityDesigner activityDesigner
+        )
         {
             ActivityDesignerGlyphCollection glyphCollection = new ActivityDesignerGlyphCollection();
             ConnectionPoint[] connectablePoints = ConnectablePoints;

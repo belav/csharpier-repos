@@ -29,54 +29,58 @@
 
 
 using System;
+using System.CodeDom;
 using System.Collections;
-using System.Reflection;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.ComponentModel.Design.Serialization;
-using System.CodeDom;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace System.Windows.Forms.Design
 {
-	internal class ControlCodeDomSerializer : ComponentCodeDomSerializer
-	{
+    internal class ControlCodeDomSerializer : ComponentCodeDomSerializer
+    {
+        public ControlCodeDomSerializer() { }
 
-		public ControlCodeDomSerializer ()
-		{
-		}
+        public override object Serialize(IDesignerSerializationManager manager, object value)
+        {
+            if (value == null)
+                throw new ArgumentNullException("value");
+            if (manager == null)
+                throw new ArgumentNullException("manager");
 
-		public override object Serialize (IDesignerSerializationManager manager, object value)
-		{
-			if (value == null)
-				throw new ArgumentNullException ("value");
-			if (manager == null)
-				throw new ArgumentNullException ("manager");
+            if (!(value is Control))
+                throw new InvalidOperationException("value is not a Control");
 
-			if (!(value is Control))
-				throw new InvalidOperationException ("value is not a Control");
+            object serialized = base.Serialize(manager, value);
+            CodeStatementCollection statements = serialized as CodeStatementCollection;
+            if (statements != null)
+            { // the root control is serialized to CodeExpression
+                ICollection childControls =
+                    TypeDescriptor.GetProperties(value)["Controls"].GetValue(value) as ICollection;
+                if (childControls.Count > 0)
+                {
+                    CodeExpression componentRef = base.GetExpression(manager, value);
 
-			object serialized = base.Serialize (manager, value);
-			CodeStatementCollection statements = serialized as CodeStatementCollection;
-			if (statements != null) { // the root control is serialized to CodeExpression
-				ICollection childControls = TypeDescriptor.GetProperties (value)["Controls"].GetValue (value) as ICollection;
-				if (childControls.Count > 0) {
-					CodeExpression componentRef = base.GetExpression (manager, value);
-
-					CodeStatement statement = new CodeExpressionStatement (
-						new CodeMethodInvokeExpression (componentRef, "SuspendLayout"));
-					statement.UserData["statement-order"] = "begin";
-					statements.Add (statement);
-					statement = new CodeExpressionStatement (
-						new CodeMethodInvokeExpression (componentRef, "ResumeLayout", 
-										new CodeExpression[] { 
-											new CodePrimitiveExpression (false) }));
-					statement.UserData["statement-order"] = "end";
-					statements.Add (statement);
-					serialized = statements;
-				}
-			}
-			return serialized;
-		}
-	}
+                    CodeStatement statement = new CodeExpressionStatement(
+                        new CodeMethodInvokeExpression(componentRef, "SuspendLayout")
+                    );
+                    statement.UserData["statement-order"] = "begin";
+                    statements.Add(statement);
+                    statement = new CodeExpressionStatement(
+                        new CodeMethodInvokeExpression(
+                            componentRef,
+                            "ResumeLayout",
+                            new CodeExpression[] { new CodePrimitiveExpression(false) }
+                        )
+                    );
+                    statement.UserData["statement-order"] = "end";
+                    statements.Add(statement);
+                    serialized = statements;
+                }
+            }
+            return serialized;
+        }
+    }
 }

@@ -2,9 +2,9 @@
 
 class C
 {
-	public static void Main ()
-	{
-		dynamic d = new A();
-		d.Test ();
-	}
+    public static void Main()
+    {
+        dynamic d = new A();
+        d.Test();
+    }
 }

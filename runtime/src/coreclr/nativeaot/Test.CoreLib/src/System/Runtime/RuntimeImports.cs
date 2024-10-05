@@ -3,8 +3,8 @@
 
 using System;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using Internal.Runtime;
 
 namespace System.Runtime
@@ -41,26 +41,48 @@ namespace System.Runtime
         }
 
         [DllImport(RuntimeLibrary, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern unsafe IntPtr RhRegisterFrozenSegment(void* pSegmentStart, nuint allocSize, nuint commitSize, nuint reservedSize);
+        internal static extern unsafe IntPtr RhRegisterFrozenSegment(
+            void* pSegmentStart,
+            nuint allocSize,
+            nuint commitSize,
+            nuint reservedSize
+        );
 
         [DllImport(RuntimeLibrary, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern unsafe void RhUpdateFrozenSegment(IntPtr seg, void* allocated, void* committed);
+        internal static extern unsafe void RhUpdateFrozenSegment(
+            IntPtr seg,
+            void* allocated,
+            void* committed
+        );
 
         [DllImport(RuntimeLibrary, CallingConvention = CallingConvention.Cdecl)]
         internal static extern void RhUnregisterFrozenSegment(IntPtr pSegmentHandle);
 
         [RuntimeImport(RuntimeLibrary, "RhpGetModuleSection")]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern IntPtr RhGetModuleSection(ref TypeManagerHandle module, ReadyToRunSectionType section, out int length);
+        private static extern IntPtr RhGetModuleSection(
+            ref TypeManagerHandle module,
+            ReadyToRunSectionType section,
+            out int length
+        );
 
-        internal static IntPtr RhGetModuleSection(TypeManagerHandle module, ReadyToRunSectionType section, out int length)
+        internal static IntPtr RhGetModuleSection(
+            TypeManagerHandle module,
+            ReadyToRunSectionType section,
+            out int length
+        )
         {
             return RhGetModuleSection(ref module, section, out length);
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhpCreateTypeManager")]
-        internal static extern unsafe TypeManagerHandle RhpCreateTypeManager(IntPtr osModule, IntPtr moduleHeader, IntPtr* pClasslibFunctions, int nClasslibFunctions);
+        internal static extern unsafe TypeManagerHandle RhpCreateTypeManager(
+            IntPtr osModule,
+            IntPtr moduleHeader,
+            IntPtr* pClasslibFunctions,
+            int nClasslibFunctions
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhpRegisterOsModule")]
@@ -76,18 +98,22 @@ namespace System.Runtime
         [RuntimeImport(RuntimeLibrary, "RhNewObject")]
         private static extern unsafe object RhNewObject(MethodTable* pEEType);
 
-        internal static unsafe object RhNewObject(EETypePtr pEEType)
-            => RhNewObject(pEEType.ToPointer());
+        internal static unsafe object RhNewObject(EETypePtr pEEType) =>
+            RhNewObject(pEEType.ToPointer());
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhNewArray")]
         private static extern unsafe Array RhNewArray(MethodTable* pEEType, int length);
 
-        internal static unsafe Array RhNewArray(EETypePtr pEEType, int length)
-            => RhNewArray(pEEType.ToPointer(), length);
+        internal static unsafe Array RhNewArray(EETypePtr pEEType, int length) =>
+            RhNewArray(pEEType.ToPointer(), length);
 
         [DllImport(RuntimeLibrary)]
-        internal static extern unsafe void RhAllocateNewObject(IntPtr pEEType, uint flags, void* pResult);
+        internal static extern unsafe void RhAllocateNewObject(
+            IntPtr pEEType,
+            uint flags,
+            void* pResult
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhpFallbackFailFast")]
@@ -98,17 +124,29 @@ namespace System.Runtime
         //
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhpLockCmpXchg32")]
-        internal static extern int InterlockedCompareExchange(ref int location1, int value, int comparand);
+        internal static extern int InterlockedCompareExchange(
+            ref int location1,
+            int value,
+            int comparand
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhpLockCmpXchg64")]
-        internal static extern long InterlockedCompareExchange(ref long location1, long value, long comparand);
+        internal static extern long InterlockedCompareExchange(
+            ref long location1,
+            long value,
+            long comparand
+        );
 
         // Moves memory from smem to dmem. Size must be a positive value.
         // This copy uses an intrinsic to be safe for copying arbitrary bits of
         // heap memory
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhBulkMoveWithWriteBarrier")]
-        internal static extern unsafe void RhBulkMoveWithWriteBarrier(ref byte dmem, ref byte smem, nuint size);
+        internal static extern unsafe void RhBulkMoveWithWriteBarrier(
+            ref byte dmem,
+            ref byte smem,
+            nuint size
+        );
     }
 }

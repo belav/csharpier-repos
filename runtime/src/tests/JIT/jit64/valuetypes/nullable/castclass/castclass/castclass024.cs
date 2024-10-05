@@ -3,28 +3,34 @@
 
 // <Area> Nullable - CastClass </Area>
 // <Title> Nullable type with castclass expr  </Title>
-// <Description>  
+// <Description>
 // checking type of NotEmptyStructA using cast expr
-// </Description> 
-// <RelatedBugs> </RelatedBugs>  
+// </Description>
+// <RelatedBugs> </RelatedBugs>
 //<Expects Status=success></Expects>
-// <Code> 
+// <Code>
 
 
-using System.Runtime.InteropServices;
 using System;
+using System.Runtime.InteropServices;
 using Xunit;
 
 public class NullableTest
 {
     private static bool BoxUnboxToNQ(object o)
     {
-        return Helper.Compare((NotEmptyStructA)(ValueType)o, Helper.Create(default(NotEmptyStructA)));
+        return Helper.Compare(
+            (NotEmptyStructA)(ValueType)o,
+            Helper.Create(default(NotEmptyStructA))
+        );
     }
 
     private static bool BoxUnboxToQ(object o)
     {
-        return Helper.Compare((NotEmptyStructA?)(ValueType)o, Helper.Create(default(NotEmptyStructA)));
+        return Helper.Compare(
+            (NotEmptyStructA?)(ValueType)o,
+            Helper.Create(default(NotEmptyStructA))
+        );
     }
 
     [Fact]
@@ -38,5 +44,3 @@ public class NullableTest
             return ExitCode.Failed;
     }
 }
-
-

@@ -56,7 +56,8 @@ internal ref struct ReverseStringBuilder
             // We rent new memory with a length sufficiently larger than the initial buffer
             // and copy the contents over.
             var remainingLength = -startIndex;
-            var sizeToRent = _currentBuffer.Length + Math.Max(MinimumRentedArraySize, remainingLength * 2);
+            var sizeToRent =
+                _currentBuffer.Length + Math.Max(MinimumRentedArraySize, remainingLength * 2);
             var newBuffer = s_arrayPool.Rent(sizeToRent);
             _fallbackSequenceSegment = new(newBuffer);
 
@@ -88,13 +89,21 @@ internal ref struct ReverseStringBuilder
         }
     }
 
-    public void InsertFront<T>(T value) where T : ISpanFormattable
+    public void InsertFront<T>(T value)
+        where T : ISpanFormattable
     {
         // This is large enough for any integer value (10 digits plus the possible sign).
         // We won't try to optimize for anything larger.
         Span<char> result = stackalloc char[11];
 
-        if (value.TryFormat(result, out var charsWritten, format: default, CultureInfo.InvariantCulture))
+        if (
+            value.TryFormat(
+                result,
+                out var charsWritten,
+                format: default,
+                CultureInfo.InvariantCulture
+            )
+        )
         {
             InsertFront(result[..charsWritten]);
         }
@@ -104,11 +113,11 @@ internal ref struct ReverseStringBuilder
         }
     }
 
-    public void InsertFront(IFormattable formattable)
-        => InsertFront(formattable.ToString(null, CultureInfo.InvariantCulture));
+    public void InsertFront(IFormattable formattable) =>
+        InsertFront(formattable.ToString(null, CultureInfo.InvariantCulture));
 
-    public override readonly string ToString()
-        => _fallbackSequenceSegment is null
+    public override readonly string ToString() =>
+        _fallbackSequenceSegment is null
             ? new(_currentBuffer[_nextEndIndex..])
             : _fallbackSequenceSegment.ToString(_nextEndIndex);
 

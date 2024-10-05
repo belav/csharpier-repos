@@ -52,7 +52,13 @@ namespace System.Web.Helpers.Test
             {
                 using (var bw = new BinaryWriter(ms))
                 {
-                    using (var deriveBytes = new Rfc2898DeriveBytes("my-password", salt, iterations: 1000))
+                    using (
+                        var deriveBytes = new Rfc2898DeriveBytes(
+                            "my-password",
+                            salt,
+                            iterations: 1000
+                        )
+                    )
                     {
                         bw.Write((byte)0x00); // version identifier
                         bw.Write(salt); // salt
@@ -81,7 +87,8 @@ namespace System.Web.Helpers.Test
         public void VerifyHashedPassword_CorrectPassword_ReturnsTrue()
         {
             // Arrange
-            string hashedPassword = "ALyuoraY/cIWD1hjo+K81/pf83qo6Q6T+UBYcXN9P3A9WHLvEY10f+lwW5qPG6h9xw=="; // this is for 'my-password'
+            string hashedPassword =
+                "ALyuoraY/cIWD1hjo+K81/pf83qo6Q6T+UBYcXN9P3A9WHLvEY10f+lwW5qPG6h9xw=="; // this is for 'my-password'
 
             // Act
             bool retVal = Crypto.VerifyHashedPassword(hashedPassword, "my-password");
@@ -94,7 +101,8 @@ namespace System.Web.Helpers.Test
         public void VerifyHashedPassword_IncorrectPassword_ReturnsFalse()
         {
             // Arrange
-            string hashedPassword = "ALyuoraY/cIWD1hjo+K81/pf83qo6Q6T+UBYcXN9P3A9WHLvEY10f+lwW5qPG6h9xw=="; // this is for 'my-password'
+            string hashedPassword =
+                "ALyuoraY/cIWD1hjo+K81/pf83qo6Q6T+UBYcXN9P3A9WHLvEY10f+lwW5qPG6h9xw=="; // this is for 'my-password'
 
             // Act
             bool retVal = Crypto.VerifyHashedPassword(hashedPassword, "some-other-password");
@@ -146,14 +154,18 @@ namespace System.Web.Helpers.Test
         public void SHA1HashTest_WithNull_ThrowsException()
         {
             Assert.Throws<ArgumentNullException>(() => Crypto.SHA1((string)null));
-            Assert.Throws<ArgumentNullException>(() => Crypto.Hash((byte[])null, algorithm: "SHa1"));
+            Assert.Throws<ArgumentNullException>(
+                () => Crypto.Hash((byte[])null, algorithm: "SHa1")
+            );
         }
 
         [Fact]
         public void SHA256HashTest_WithNull_ThrowsException()
         {
             Assert.Throws<ArgumentNullException>(() => Crypto.SHA256((string)null));
-            Assert.Throws<ArgumentNullException>(() => Crypto.Hash((byte[])null, algorithm: "sHa256"));
+            Assert.Throws<ArgumentNullException>(
+                () => Crypto.Hash((byte[])null, algorithm: "sHa256")
+            );
         }
 
         [Fact]
@@ -166,7 +178,10 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void HashWithUnknownAlg_ThrowsException()
         {
-            Assert.Throws<InvalidOperationException>(() => Crypto.Hash("sdflksd", algorithm: "hao"), "The hash algorithm 'hao' is not supported, valid values are: sha256, sha1, md5");
+            Assert.Throws<InvalidOperationException>(
+                () => Crypto.Hash("sdflksd", algorithm: "hao"),
+                "The hash algorithm 'hao' is not supported, valid values are: sha256, sha1, md5"
+            );
         }
     }
 }

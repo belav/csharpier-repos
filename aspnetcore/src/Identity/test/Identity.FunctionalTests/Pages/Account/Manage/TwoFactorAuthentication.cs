@@ -11,7 +11,11 @@ public class TwoFactorAuthentication : DefaultUIPage
     private readonly IHtmlAnchorElement _enableAuthenticatorLink;
     private readonly IHtmlAnchorElement _resetAuthenticatorLink;
 
-    public TwoFactorAuthentication(HttpClient client, IHtmlDocument twoFactor, DefaultUIContext context)
+    public TwoFactorAuthentication(
+        HttpClient client,
+        IHtmlDocument twoFactor,
+        DefaultUIContext context
+    )
         : base(client, twoFactor, context)
     {
         if (Context.CookiePolicyAccepted)
@@ -27,7 +31,10 @@ public class TwoFactorAuthentication : DefaultUIPage
         }
         else
         {
-            Assert.Contains("You must accept the policy before you can enable two factor authentication.", twoFactor.DocumentElement.TextContent);
+            Assert.Contains(
+                "You must accept the policy before you can enable two factor authentication.",
+                twoFactor.DocumentElement.TextContent
+            );
         }
     }
 

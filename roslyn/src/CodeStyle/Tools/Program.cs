@@ -22,38 +22,53 @@ namespace CodeStyleConfigFileGenerator
         private const int ExpectedArguments = 4;
 
         private static readonly string s_neverTag = EnforceOnBuild.Never.ToCustomTag();
-        private static readonly string s_whenExplicitlyEnabledTag = EnforceOnBuild.WhenExplicitlyEnabled.ToCustomTag();
+        private static readonly string s_whenExplicitlyEnabledTag =
+            EnforceOnBuild.WhenExplicitlyEnabled.ToCustomTag();
         private static readonly string s_recommendedTag = EnforceOnBuild.Recommended.ToCustomTag();
-        private static readonly string s_highlyRecommendedTag = EnforceOnBuild.HighlyRecommended.ToCustomTag();
+        private static readonly string s_highlyRecommendedTag =
+            EnforceOnBuild.HighlyRecommended.ToCustomTag();
 
         public static int Main(string[] args)
         {
             if (args.Length != ExpectedArguments)
             {
-                Console.Error.WriteLine($"Excepted {ExpectedArguments} arguments, found {args.Length}: {string.Join(';', args)}");
+                Console.Error.WriteLine(
+                    $"Excepted {ExpectedArguments} arguments, found {args.Length}: {string.Join(';', args)}"
+                );
                 return 1;
             }
 
             var language = args[0];
             var outputDir = args[1];
             var targetsFileName = args[2];
-            var assemblyList = args[3].Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries).ToImmutableArray();
+            var assemblyList = args[3]
+                .Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries)
+                .ToImmutableArray();
 
             CreateGlobalConfigFiles(language, outputDir, assemblyList);
             CreateTargetsFile(language, outputDir, targetsFileName);
             return 0;
         }
 
-        private static void CreateGlobalConfigFiles(string language, string outputDir, ImmutableArray<string> assemblyList)
+        private static void CreateGlobalConfigFiles(
+            string language,
+            string outputDir,
+            ImmutableArray<string> assemblyList
+        )
         {
             Debug.Assert(language is "CSharp" or "VisualBasic");
-            var languageForGetAnalyzers = language == "CSharp" ? LanguageNames.CSharp : LanguageNames.VisualBasic;
+            var languageForGetAnalyzers =
+                language == "CSharp" ? LanguageNames.CSharp : LanguageNames.VisualBasic;
 
             var allRulesById = new SortedList<string, DiagnosticDescriptor>();
             foreach (var assembly in assemblyList)
             {
-                var analyzerFileReference = new AnalyzerFileReference(assembly, AnalyzerAssemblyLoader.Instance);
-                analyzerFileReference.AnalyzerLoadFailed += AnalyzerFileReference_AnalyzerLoadFailed;
+                var analyzerFileReference = new AnalyzerFileReference(
+                    assembly,
+                    AnalyzerAssemblyLoader.Instance
+                );
+                analyzerFileReference.AnalyzerLoadFailed +=
+                    AnalyzerFileReference_AnalyzerLoadFailed;
                 var analyzers = analyzerFileReference.GetAnalyzers(languageForGetAnalyzers);
 
                 foreach (var analyzer in analyzers)
@@ -72,19 +87,23 @@ namespace CodeStyleConfigFileGenerator
                     configDir,
                     $"AnalysisLevelStyle_{analysisMode}.editorconfig".ToLowerInvariant(),
                     (AnalysisMode)analysisMode!,
-                    allRulesById);
+                    allRulesById
+                );
             }
 
             return;
 
-            static void AnalyzerFileReference_AnalyzerLoadFailed(object? sender, AnalyzerLoadFailureEventArgs e)
-                => throw e.Exception ?? new InvalidOperationException(e.Message);
+            static void AnalyzerFileReference_AnalyzerLoadFailed(
+                object? sender,
+                AnalyzerLoadFailureEventArgs e
+            ) => throw e.Exception ?? new InvalidOperationException(e.Message);
 
             static void CreateGlobalconfig(
                 string folder,
                 string configFileName,
                 AnalysisMode analysisMode,
-                SortedList<string, DiagnosticDescriptor> sortedRulesById)
+                SortedList<string, DiagnosticDescriptor> sortedRulesById
+            )
             {
                 var text = GetGlobalconfigText(analysisMode, sortedRulesById);
                 var directory = Directory.CreateDirectory(folder);
@@ -93,7 +112,10 @@ namespace CodeStyleConfigFileGenerator
                 return;
 
                 // Local functions
-                static string GetGlobalconfigText(AnalysisMode analysisMode, SortedList<string, DiagnosticDescriptor> sortedRulesById)
+                static string GetGlobalconfigText(
+                    AnalysisMode analysisMode,
+                    SortedList<string, DiagnosticDescriptor> sortedRulesById
+                )
                 {
                     var result = new StringBuilder();
                     StartGlobalconfig();
@@ -134,27 +156,49 @@ namespace CodeStyleConfigFileGenerator
 
                         bool AddRule(DiagnosticDescriptor rule)
                         {
-                            var (isEnabledByDefault, severity) = GetEnabledByDefaultAndSeverity(rule, analysisMode);
-                            if (rule.IsEnabledByDefault == isEnabledByDefault &&
-                                severity == rule.DefaultSeverity)
+                            var (isEnabledByDefault, severity) = GetEnabledByDefaultAndSeverity(
+                                rule,
+                                analysisMode
+                            );
+                            if (
+                                rule.IsEnabledByDefault == isEnabledByDefault
+                                && severity == rule.DefaultSeverity
+                            )
                             {
                                 // Rule had the same default severity and enabled state.
                                 // We do not need to generate any entry.
                                 return false;
                             }
 
-                            var severityString = isEnabledByDefault ? severity.ToEditorConfigString() : EditorConfigSeverityStrings.None;
+                            var severityString = isEnabledByDefault
+                                ? severity.ToEditorConfigString()
+                                : EditorConfigSeverityStrings.None;
 
                             result.AppendLine();
                             result.AppendLine($"# {rule.Id}: {rule.Title}");
-                            result.AppendLine($"dotnet_diagnostic.{rule.Id}.severity = {severityString}");
+                            result.AppendLine(
+                                $"dotnet_diagnostic.{rule.Id}.severity = {severityString}"
+                            );
                             return true;
                         }
 
-                        (bool isEnabledByDefault, DiagnosticSeverity effectiveSeverity) GetEnabledByDefaultAndSeverity(DiagnosticDescriptor rule, AnalysisMode analysisMode)
+                        (
+                            bool isEnabledByDefault,
+                            DiagnosticSeverity effectiveSeverity
+                        ) GetEnabledByDefaultAndSeverity(
+                            DiagnosticDescriptor rule,
+                            AnalysisMode analysisMode
+                        )
                         {
-                            Debug.Assert(rule.CustomTags.Any(c => c == s_neverTag || c == s_whenExplicitlyEnabledTag || c == s_recommendedTag || c == s_highlyRecommendedTag),
-                                $"DiagnosticDescriptor for '{rule.Id}' must have a {nameof(EnforceOnBuild)} custom tag");
+                            Debug.Assert(
+                                rule.CustomTags.Any(c =>
+                                    c == s_neverTag
+                                    || c == s_whenExplicitlyEnabledTag
+                                    || c == s_recommendedTag
+                                    || c == s_highlyRecommendedTag
+                                ),
+                                $"DiagnosticDescriptor for '{rule.Id}' must have a {nameof(EnforceOnBuild)} custom tag"
+                            );
 
                             bool isEnabledInNonDefaultMode;
                             switch (analysisMode)
@@ -165,17 +209,23 @@ namespace CodeStyleConfigFileGenerator
 
                                 case AnalysisMode.All:
                                     // Escalate all rules which can be enabled on build.
-                                    isEnabledInNonDefaultMode = !rule.CustomTags.Contains(s_neverTag);
+                                    isEnabledInNonDefaultMode = !rule.CustomTags.Contains(
+                                        s_neverTag
+                                    );
                                     break;
 
                                 case AnalysisMode.Minimum:
                                     // Escalate all highly recommended rules.
-                                    isEnabledInNonDefaultMode = rule.CustomTags.Contains(s_highlyRecommendedTag);
+                                    isEnabledInNonDefaultMode = rule.CustomTags.Contains(
+                                        s_highlyRecommendedTag
+                                    );
                                     break;
 
                                 case AnalysisMode.Recommended:
                                     // Escalate all recommended and highly recommended rules.
-                                    isEnabledInNonDefaultMode = rule.CustomTags.Contains(s_highlyRecommendedTag) || rule.CustomTags.Contains(s_recommendedTag);
+                                    isEnabledInNonDefaultMode =
+                                        rule.CustomTags.Contains(s_highlyRecommendedTag)
+                                        || rule.CustomTags.Contains(s_recommendedTag);
                                     break;
 
                                 case AnalysisMode.Default:
@@ -187,18 +237,26 @@ namespace CodeStyleConfigFileGenerator
                                     throw ExceptionUtilities.UnexpectedValue(analysisMode);
                             }
 
-                            return (isEnabledByDefault: rule.IsEnabledByDefault,
-                                    effectiveSeverity: isEnabledInNonDefaultMode ? DiagnosticSeverity.Warning : rule.DefaultSeverity);
+                            return (
+                                isEnabledByDefault: rule.IsEnabledByDefault,
+                                effectiveSeverity: isEnabledInNonDefaultMode
+                                    ? DiagnosticSeverity.Warning
+                                    : rule.DefaultSeverity
+                            );
                         }
                     }
                 }
             }
         }
 
-        private static void CreateTargetsFile(string language, string outputDir, string targetsFileName)
+        private static void CreateTargetsFile(
+            string language,
+            string outputDir,
+            string targetsFileName
+        )
         {
             var fileContents =
-$@"<Project>{GetTargetContents(language)}
+                $@"<Project>{GetTargetContents(language)}
 </Project>";
 
             var directory = Directory.CreateDirectory(outputDir);
@@ -247,9 +305,15 @@ $@"<Project>{GetTargetContents(language)}
                           <!-- Set the default analysis mode, if not set by the user -->
                           <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle>$(AnalysisLevelSuffixStyle)</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle>
                           <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle)' == ''">$(AnalysisModeStyle)</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle>
-                          <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle)' == 'AllEnabledByDefault'">{nameof(AnalysisMode.All)}</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle>
-                          <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle)' == 'AllDisabledByDefault'">{nameof(AnalysisMode.None)}</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle>
-                          <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle)' == ''">{nameof(AnalysisMode.Default)}</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle>
+                          <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle)' == 'AllEnabledByDefault'">{nameof(
+                        AnalysisMode.All
+                    )}</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle>
+                          <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle)' == 'AllDisabledByDefault'">{nameof(
+                        AnalysisMode.None
+                    )}</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle>
+                          <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle)' == ''">{nameof(
+                        AnalysisMode.Default
+                    )}</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle>
 
                           <_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysis{language}CodeStyle>AnalysisLevelStyle_$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle).editorconfig</_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysis{language}CodeStyle>
                           <_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysis{language}CodeStyle>$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysis{language}CodeStyle.ToLowerInvariant())</_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysis{language}CodeStyle>
@@ -269,7 +333,7 @@ $@"<Project>{GetTargetContents(language)}
                           <CompilerVisibleProperty Include="EffectiveAnalysisLevelStyle" />
                         </ItemGroup>
                       </Target>
-
+                    
                     """;
             }
         }
@@ -281,7 +345,7 @@ $@"<Project>{GetTargetContents(language)}
             None,
             Minimum,
             Recommended,
-            All
+            All,
         }
 
         private sealed class AnalyzerAssemblyLoader : IAnalyzerAssemblyLoader

@@ -10,11 +10,12 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
-internal partial class Http2Stream : IHttp2StreamIdFeature,
-                                     IHttpMinRequestBodyDataRateFeature,
-                                     IHttpResetFeature,
-                                     IHttpResponseTrailersFeature,
-                                     IPersistentStateFeature
+internal partial class Http2Stream
+    : IHttp2StreamIdFeature,
+        IHttpMinRequestBodyDataRateFeature,
+        IHttpResetFeature,
+        IHttpResponseTrailersFeature,
+        IPersistentStateFeature
 {
     private IHeaderDictionary? _userTrailers;
 
@@ -27,7 +28,9 @@ internal partial class Http2Stream : IHttp2StreamIdFeature,
         {
             if (ResponseTrailers == null)
             {
-                ResponseTrailers = new HttpResponseTrailers(ServerOptions.ResponseHeaderEncodingSelector);
+                ResponseTrailers = new HttpResponseTrailers(
+                    ServerOptions.ResponseHeaderEncodingSelector
+                );
                 if (HasResponseCompleted)
                 {
                     ResponseTrailers.SetReadOnly();
@@ -61,7 +64,9 @@ internal partial class Http2Stream : IHttp2StreamIdFeature,
 
     void IHttpResetFeature.Reset(int errorCode)
     {
-        var abortReason = new ConnectionAbortedException(CoreStrings.FormatHttp2StreamResetByApplication((Http2ErrorCode)errorCode));
+        var abortReason = new ConnectionAbortedException(
+            CoreStrings.FormatHttp2StreamResetByApplication((Http2ErrorCode)errorCode)
+        );
         ApplicationAbort(abortReason, (Http2ErrorCode)errorCode);
     }
 

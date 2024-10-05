@@ -7,6 +7,6 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query;
 
 public class NavigationsQuerySqliteTests : NavigationsQueryTests
 {
-    protected override AdventureWorksContextBase CreateContext()
-        => AdventureWorksSqliteFixture.CreateContext();
+    protected override AdventureWorksContextBase CreateContext() =>
+        AdventureWorksSqliteFixture.CreateContext();
 }

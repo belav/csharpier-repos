@@ -8,6 +8,7 @@ using Xunit;
 namespace SimpleArray_01
 {
     public delegate void RngTest();
+
     public class Class1
     {
         [Fact]
@@ -15,12 +16,15 @@ namespace SimpleArray_01
         {
             int retVal = 100;
             int testNum = 0;
-            RngTest[] Tests ={  new RngTest(Test.Test1),
-                        new RngTest(Test.Test2),
-                        new RngTest(Test.Test3),
-                        new RngTest(Test.Test4),
-                        new RngTest(Test.Test5),
-                        new RngTest(Test.Test6)};
+            RngTest[] Tests =
+            {
+                new RngTest(Test.Test1),
+                new RngTest(Test.Test2),
+                new RngTest(Test.Test3),
+                new RngTest(Test.Test4),
+                new RngTest(Test.Test5),
+                new RngTest(Test.Test6),
+            };
             foreach (RngTest test in Tests)
             {
                 testNum++;
@@ -56,11 +60,12 @@ namespace SimpleArray_01
             return bResult;
         }
     }
+
     internal class Test
     {
         /********************************************************************************************
-		* RngChk shall not be eliminated when direct access to an out bound element within the loop 
-		*********************************************************************************************/
+        * RngChk shall not be eliminated when direct access to an out bound element within the loop
+        *********************************************************************************************/
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test1()
         {
@@ -73,8 +78,8 @@ namespace SimpleArray_01
         }
 
         /********************************************************************************************
-		* RngChk shall not be eliminated if the loop upper limit is larger than the array bound
-		********************************************************************************************/
+        * RngChk shall not be eliminated if the loop upper limit is larger than the array bound
+        ********************************************************************************************/
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test2()
         {
@@ -85,9 +90,10 @@ namespace SimpleArray_01
                 numbers[index] = index * index;
             }
         }
+
         /********************************************************************************************
-		* RngChk is eliminated properly when reverse iterate through the array
-		********************************************************************************************/
+        * RngChk is eliminated properly when reverse iterate through the array
+        ********************************************************************************************/
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test3()
         {
@@ -99,9 +105,10 @@ namespace SimpleArray_01
                 numbers[index] = index * index;
             }
         }
+
         /********************************************************************************************
-		* RngChk is not eliminated if the array is modified
-		********************************************************************************************/
+        * RngChk is not eliminated if the array is modified
+        ********************************************************************************************/
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test4()
         {
@@ -115,9 +122,10 @@ namespace SimpleArray_01
                 numbers[index] = index * index;
             }
         }
+
         /********************************************************************************************
-		* RngChk is not eliminated if the upper limit of the array is modified
-		********************************************************************************************/
+        * RngChk is not eliminated if the upper limit of the array is modified
+        ********************************************************************************************/
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test5()
         {
@@ -131,9 +139,10 @@ namespace SimpleArray_01
                 numbers[index] = index * index;
             }
         }
+
         /********************************************************************************************
-		* RngChk is not eliminated if induction variable is modified
-		********************************************************************************************/
+        * RngChk is not eliminated if induction variable is modified
+        ********************************************************************************************/
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test6()
         {

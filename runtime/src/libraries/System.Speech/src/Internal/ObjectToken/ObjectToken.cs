@@ -40,7 +40,11 @@ namespace System.Speech.Internal.ObjectTokens
         /// you are creating ObjectTokens with this function.
         /// </summary>
         /// <returns>ObjectToken object</returns>
-        internal static ObjectToken Open(string sCategoryId, string sTokenId, bool fCreateIfNotExist)
+        internal static ObjectToken Open(
+            string sCategoryId,
+            string sTokenId,
+            bool fCreateIfNotExist
+        )
         {
             ISpObjectToken sapiObjectToken = (ISpObjectToken)new SpObjectToken();
 
@@ -108,18 +112,12 @@ namespace System.Speech.Internal.ObjectTokens
 
         internal RegistryDataKey Attributes
         {
-            get
-            {
-                return _attributes ??= OpenKey("Attributes");
-            }
+            get { return _attributes ??= OpenKey("Attributes"); }
         }
 
         internal ISpObjectToken SAPIToken
         {
-            get
-            {
-                return _sapiObjectToken;
-            }
+            get { return _sapiObjectToken; }
         }
 
         /// <summary>
@@ -198,7 +196,11 @@ namespace System.Speech.Internal.ObjectTokens
             get
             {
                 string description = string.Empty;
-                string sCultureId = string.Format(CultureInfo.InvariantCulture, "{0:x}", CultureInfo.CurrentUICulture.LCID);
+                string sCultureId = string.Format(
+                    CultureInfo.InvariantCulture,
+                    "{0:x}",
+                    CultureInfo.CurrentUICulture.LCID
+                );
                 if (!TryGetString(sCultureId, out description))
                 {
                     TryGetString(null, out description);
@@ -213,7 +215,11 @@ namespace System.Speech.Internal.ObjectTokens
 
         #region ISpObjectToken Implementation
 
-        public void SetId([MarshalAs(UnmanagedType.LPWStr)] string pszCategoryId, [MarshalAs(UnmanagedType.LPWStr)] string pszTokenId, [MarshalAs(UnmanagedType.Bool)] bool fCreateIfNotExist)
+        public void SetId(
+            [MarshalAs(UnmanagedType.LPWStr)] string pszCategoryId,
+            [MarshalAs(UnmanagedType.LPWStr)] string pszTokenId,
+            [MarshalAs(UnmanagedType.Bool)] bool fCreateIfNotExist
+        )
         {
             throw new NotImplementedException();
         }
@@ -223,14 +229,48 @@ namespace System.Speech.Internal.ObjectTokens
             ppszCoMemTokenId = Marshal.StringToCoTaskMemUni(Id);
         }
 
-        public void Slot15() { throw new NotImplementedException(); } // void GetCategory(out ISpObjectTokenCategory ppTokenCategory);
-        public void Slot16() { throw new NotImplementedException(); } // void CreateInstance(object pUnkOuter, UInt32 dwClsContext, ref Guid riid, ref IntPtr ppvObject);
-        public void Slot17() { throw new NotImplementedException(); } // void GetStorageFileName(ref Guid clsidCaller, [MarshalAs(UnmanagedType.LPWStr)] string pszValueName, [MarshalAs(UnmanagedType.LPWStr)] string pszFileNameSpecifier, UInt32 nFolder, [MarshalAs(UnmanagedType.LPWStr)] out string ppszFilePath);
-        public void Slot18() { throw new NotImplementedException(); } // void RemoveStorageFileName(ref Guid clsidCaller, [MarshalAs(UnmanagedType.LPWStr)] string pszKeyName, int fDeleteFile);
-        public void Slot19() { throw new NotImplementedException(); } // void Remove(ref Guid pclsidCaller);
-        public void Slot20() { throw new NotImplementedException(); } // void IsUISupported([MarshalAs(UnmanagedType.LPWStr)] string pszTypeOfUI, IntPtr pvExtraData, UInt32 cbExtraData, object punkObject, ref Int32 pfSupported);
-        public void Slot21() { throw new NotImplementedException(); } // void DisplayUI(UInt32 hWndParent, [MarshalAs(UnmanagedType.LPWStr)] string pszTitle, [MarshalAs(UnmanagedType.LPWStr)] string pszTypeOfUI, IntPtr pvExtraData, UInt32 cbExtraData, object punkObject);
-        public void MatchesAttributes([MarshalAs(UnmanagedType.LPWStr)] string pszAttributes, [MarshalAs(UnmanagedType.Bool)] out bool pfMatches) { throw new NotImplementedException(); }
+        public void Slot15()
+        {
+            throw new NotImplementedException();
+        } // void GetCategory(out ISpObjectTokenCategory ppTokenCategory);
+
+        public void Slot16()
+        {
+            throw new NotImplementedException();
+        } // void CreateInstance(object pUnkOuter, UInt32 dwClsContext, ref Guid riid, ref IntPtr ppvObject);
+
+        public void Slot17()
+        {
+            throw new NotImplementedException();
+        } // void GetStorageFileName(ref Guid clsidCaller, [MarshalAs(UnmanagedType.LPWStr)] string pszValueName, [MarshalAs(UnmanagedType.LPWStr)] string pszFileNameSpecifier, UInt32 nFolder, [MarshalAs(UnmanagedType.LPWStr)] out string ppszFilePath);
+
+        public void Slot18()
+        {
+            throw new NotImplementedException();
+        } // void RemoveStorageFileName(ref Guid clsidCaller, [MarshalAs(UnmanagedType.LPWStr)] string pszKeyName, int fDeleteFile);
+
+        public void Slot19()
+        {
+            throw new NotImplementedException();
+        } // void Remove(ref Guid pclsidCaller);
+
+        public void Slot20()
+        {
+            throw new NotImplementedException();
+        } // void IsUISupported([MarshalAs(UnmanagedType.LPWStr)] string pszTypeOfUI, IntPtr pvExtraData, UInt32 cbExtraData, object punkObject, ref Int32 pfSupported);
+
+        public void Slot21()
+        {
+            throw new NotImplementedException();
+        } // void DisplayUI(UInt32 hWndParent, [MarshalAs(UnmanagedType.LPWStr)] string pszTitle, [MarshalAs(UnmanagedType.LPWStr)] string pszTypeOfUI, IntPtr pvExtraData, UInt32 cbExtraData, object punkObject);
+
+        public void MatchesAttributes(
+            [MarshalAs(UnmanagedType.LPWStr)] string pszAttributes,
+            [MarshalAs(UnmanagedType.Bool)] out bool pfMatches
+        )
+        {
+            throw new NotImplementedException();
+        }
 
         #endregion
 
@@ -285,12 +325,28 @@ namespace System.Speech.Internal.ObjectTokens
                 }
                 else
                 {
-                    Debug.Fail("Cannot query for interface " + typeof(ISpObjectWithToken).GUID + " from COM class " + clsid);
+                    Debug.Fail(
+                        "Cannot query for interface "
+                            + typeof(ISpObjectWithToken).GUID
+                            + " from COM class "
+                            + clsid
+                    );
                 }
             }
             catch (Exception e)
             {
-                if (e is MissingMethodException || e is TypeLoadException || e is FileLoadException || e is FileNotFoundException || e is MethodAccessException || e is MemberAccessException || e is TargetInvocationException || e is InvalidComObjectException || e is NotSupportedException || e is FormatException)
+                if (
+                    e is MissingMethodException
+                    || e is TypeLoadException
+                    || e is FileLoadException
+                    || e is FileNotFoundException
+                    || e is MethodAccessException
+                    || e is MemberAccessException
+                    || e is TargetInvocationException
+                    || e is InvalidComObjectException
+                    || e is NotSupportedException
+                    || e is FormatException
+                )
                 {
                     throw new ArgumentException(SR.Get(SRID.TokenCannotCreateInstance));
                 }
@@ -308,11 +364,16 @@ namespace System.Speech.Internal.ObjectTokens
         #region Private Types
 
         //--- ISpObjectWithToken ----------------------------------------------------
-        [ComImport, Guid("5B559F40-E952-11D2-BB91-00C04F8EE6C0"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+        [
+            ComImport,
+            Guid("5B559F40-E952-11D2-BB91-00C04F8EE6C0"),
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown)
+        ]
         private interface ISpObjectWithToken
         {
             [PreserveSig]
             int SetObjectToken(ISpObjectToken pToken);
+
             [PreserveSig]
             int GetObjectToken(IntPtr ppToken);
         }

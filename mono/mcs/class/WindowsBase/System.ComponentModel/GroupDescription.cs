@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,47 +27,47 @@ using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
 
-namespace System.ComponentModel {
+namespace System.ComponentModel
+{
+    public abstract class GroupDescription : INotifyPropertyChanged
+    {
+        readonly ObservableCollection<object> groupNames;
 
-	public abstract class GroupDescription : INotifyPropertyChanged
-	{
-		readonly ObservableCollection<object> groupNames;
+        protected GroupDescription()
+        {
+            groupNames = new ObservableCollection<object>();
+        }
 
-		protected GroupDescription ()
-		{
-			groupNames = new ObservableCollection<object> ();
-		}
+        public ObservableCollection<object> GroupNames
+        {
+            get { return groupNames; }
+        }
 
-		public ObservableCollection<object> GroupNames {
-			get { return groupNames; }
-		}
+        event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
+        {
+            add { PropertyChanged += value; }
+            remove { PropertyChanged -= value; }
+        }
 
-		event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged {
-			add { PropertyChanged += value; }
-			remove { PropertyChanged -= value; }
-		}
+        protected virtual event PropertyChangedEventHandler PropertyChanged;
 
-		protected virtual event PropertyChangedEventHandler PropertyChanged;
+        public virtual bool NamesMatch(object groupName, object itemName)
+        {
+            return Equals(groupName, itemName);
+        }
 
-		public virtual bool NamesMatch (object groupName, object itemName)
-		{
-			return Equals (groupName, itemName);
-		}
+        protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, e);
+        }
 
-		protected virtual void OnPropertyChanged (PropertyChangedEventArgs e)
-		{
-			if (PropertyChanged != null)
-				PropertyChanged (this, e);
-		}
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool ShouldSerializeGroupNames()
+        {
+            return GroupNames.Count != 0;
+        }
 
-		[EditorBrowsable (EditorBrowsableState.Never)]
-		public bool ShouldSerializeGroupNames ()
-		{
-			return GroupNames.Count != 0;
-		}
-
-		public abstract object GroupNameFromItem (object item, int level, CultureInfo culture);
-
-	}
-
+        public abstract object GroupNameFromItem(object item, int level, CultureInfo culture);
+    }
 }

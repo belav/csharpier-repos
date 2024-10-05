@@ -3,8 +3,8 @@
 
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing.Constraints;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.Routing.Constraints;
 using Moq;
 
 namespace Microsoft.AspNetCore.Routing.Tests;
@@ -12,19 +12,20 @@ namespace Microsoft.AspNetCore.Routing.Tests;
 public class RegexRouteConstraintTests
 {
     [Theory]
-    [InlineData("abc", "abc", true)]    // simple match
-    [InlineData("Abc", "abc", true)]    // case insensitive match
-    [InlineData("Abc ", "abc", true)]   // Extra space on input match (because we don't add ^({0})$
-    [InlineData("Abcd", "abc", true)]   // Extra char
-    [InlineData("^Abcd", "abc", true)]  // Extra special char
-    [InlineData("Abc", " abc", false)]  // Missing char
+    [InlineData("abc", "abc", true)] // simple match
+    [InlineData("Abc", "abc", true)] // case insensitive match
+    [InlineData("Abc ", "abc", true)] // Extra space on input match (because we don't add ^({0})$
+    [InlineData("Abcd", "abc", true)] // Extra char
+    [InlineData("^Abcd", "abc", true)] // Extra special char
+    [InlineData("Abc", " abc", false)] // Missing char
     [InlineData("123-456-2334", @"^\d{3}-\d{3}-\d{4}$", true)] // ssn
     [InlineData(@"12/4/2013", @"^\d{1,2}\/\d{1,2}\/\d{4}$", true)] // date
     [InlineData(@"abc@def.com", @"^\w+[\w\.]*\@\w+((-\w+)|(\w*))\.[a-z]{2,3}$", true)] // email
     public void RegexConstraintBuildRegexVerbatimFromInput(
         string routeValue,
         string constraintValue,
-        bool shouldMatch)
+        bool shouldMatch
+    )
     {
         // Arrange
         var constraint = new RegexRouteConstraint(constraintValue);
@@ -36,7 +37,8 @@ public class RegexRouteConstraintTests
             route: new Mock<IRouter>().Object,
             routeKey: "controller",
             values: values,
-            routeDirection: RouteDirection.IncomingRequest);
+            routeDirection: RouteDirection.IncomingRequest
+        );
 
         // Assert
         Assert.Equal(shouldMatch, match);
@@ -55,7 +57,8 @@ public class RegexRouteConstraintTests
             route: new Mock<IRouter>().Object,
             routeKey: "controller",
             values: values,
-            routeDirection: RouteDirection.IncomingRequest);
+            routeDirection: RouteDirection.IncomingRequest
+        );
 
         // Assert
         Assert.True(match);
@@ -74,7 +77,8 @@ public class RegexRouteConstraintTests
             route: new Mock<IRouter>().Object,
             routeKey: "controller",
             values: values,
-            routeDirection: RouteDirection.IncomingRequest);
+            routeDirection: RouteDirection.IncomingRequest
+        );
 
         // Assert
         Assert.False(match);
@@ -93,7 +97,8 @@ public class RegexRouteConstraintTests
             route: new Mock<IRouter>().Object,
             routeKey: "controller",
             values: values,
-            routeDirection: RouteDirection.IncomingRequest);
+            routeDirection: RouteDirection.IncomingRequest
+        );
 
         // Assert
         Assert.False(match);
@@ -123,7 +128,8 @@ public class RegexRouteConstraintTests
                 route: new Mock<IRouter>().Object,
                 routeKey: "controller",
                 values: values,
-                routeDirection: RouteDirection.IncomingRequest);
+                routeDirection: RouteDirection.IncomingRequest
+            );
 
             // Assert
             Assert.False(match);

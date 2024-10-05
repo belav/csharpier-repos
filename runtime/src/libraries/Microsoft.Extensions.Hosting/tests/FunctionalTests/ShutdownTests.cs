@@ -17,10 +17,8 @@ namespace Microsoft.AspNetCore.Hosting.FunctionalTests
     public class ShutdownTests
     {
         private static readonly string StartedMessage = "Started";
-        private static readonly string CompletionMessage = "Stopping firing\n" +
-                                                            "Stopping end\n" +
-                                                            "Stopped firing\n" +
-                                                            "Stopped end";
+        private static readonly string CompletionMessage =
+            "Stopping firing\n" + "Stopping end\n" + "Stopped firing\n" + "Stopped end";
         private readonly ITestOutputHelper _output;
 
         public ShutdownTests(ITestOutputHelper output)
@@ -60,22 +58,29 @@ namespace Microsoft.AspNetCore.Hosting.FunctionalTests
             var deploymentParameters = new DeploymentParameters(
                 applicationPath,
                 RuntimeFlavor.CoreClr,
-                RuntimeArchitecture.x64)
+                RuntimeArchitecture.x64
+            )
             {
                 TargetFramework = $"net{version.Major}.{version.Minor}",
                 ApplicationType = ApplicationType.Portable,
                 PublishApplicationBeforeDeployment = true,
-                StatusMessagesEnabled = false
+                StatusMessagesEnabled = false,
             };
 
             deploymentParameters.EnvironmentVariables["DOTNET_STARTMECHANIC"] = shutdownMechanic;
 
-            using (var deployer = new SelfHostDeployer(deploymentParameters, xunitTestLoggerFactory))
+            using (
+                var deployer = new SelfHostDeployer(deploymentParameters, xunitTestLoggerFactory)
+            )
             {
                 var result = await deployer.DeployAsync();
 
-                var started = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-                var completed = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+                var started = new TaskCompletionSource<int>(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
+                var completed = new TaskCompletionSource<int>(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
                 var output = string.Empty;
                 deployer.HostProcess.OutputDataReceived += (sender, args) =>
                 {
@@ -137,7 +142,7 @@ namespace Microsoft.AspNetCore.Hosting.FunctionalTests
                 FileName = "kill",
                 Arguments = processId.ToString(),
                 RedirectStandardOutput = true,
-                UseShellExecute = false
+                UseShellExecute = false,
             };
 
             var process = Process.Start(startInfo);

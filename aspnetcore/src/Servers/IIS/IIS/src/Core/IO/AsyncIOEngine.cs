@@ -219,16 +219,13 @@ internal sealed partial class AsyncIOEngine : IAsyncIOEngine, IDisposable
     }
 
     private AsyncReadOperation GetReadOperation() =>
-        Interlocked.Exchange(ref _cachedAsyncReadOperation, null) ??
-        new AsyncReadOperation(this);
+        Interlocked.Exchange(ref _cachedAsyncReadOperation, null) ?? new AsyncReadOperation(this);
 
     private AsyncWriteOperation GetWriteOperation() =>
-        Interlocked.Exchange(ref _cachedAsyncWriteOperation, null) ??
-        new AsyncWriteOperation(this);
+        Interlocked.Exchange(ref _cachedAsyncWriteOperation, null) ?? new AsyncWriteOperation(this);
 
     private AsyncFlushOperation GetFlushOperation() =>
-        Interlocked.Exchange(ref _cachedAsyncFlushOperation, null) ??
-        new AsyncFlushOperation(this);
+        Interlocked.Exchange(ref _cachedAsyncFlushOperation, null) ?? new AsyncFlushOperation(this);
 
     private void ReturnOperation(AsyncReadOperation operation)
     {

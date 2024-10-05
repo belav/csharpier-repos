@@ -7,5 +7,5 @@ internal enum PatternSyntax
 {
     ECMAScript,
     Wildcard,
-    ExactMatch
+    ExactMatch,
 }

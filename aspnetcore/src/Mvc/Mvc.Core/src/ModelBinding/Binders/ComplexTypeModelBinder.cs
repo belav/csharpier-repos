@@ -15,7 +15,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 /// <summary>
 /// <see cref="IModelBinder"/> implementation for binding complex types.
 /// </summary>
-[Obsolete("This type is obsolete and will be removed in a future version. Use ComplexObjectModelBinder instead.")]
+[Obsolete(
+    "This type is obsolete and will be removed in a future version. Use ComplexObjectModelBinder instead."
+)]
 public partial class ComplexTypeModelBinder : IModelBinder
 {
     // Don't want a new public enum because communication between the private and internal methods of this class
@@ -24,9 +26,11 @@ public partial class ComplexTypeModelBinder : IModelBinder
     // Model contains only properties that are expected to bind from value providers and no value provider has
     // matching data.
     internal const int NoDataAvailable = 0;
+
     // If model contains properties that are expected to bind from value providers, no value provider has matching
     // data. Remaining (greedy) properties might bind successfully.
     internal const int GreedyPropertiesMayHaveData = 1;
+
     // Model contains at least one property that is expected to bind from value providers and a value provider has
     // matching data.
     internal const int ValueProviderDataAvailable = 2;
@@ -44,10 +48,9 @@ public partial class ComplexTypeModelBinder : IModelBinder
     /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
     public ComplexTypeModelBinder(
         IDictionary<ModelMetadata, IModelBinder> propertyBinders,
-        ILoggerFactory loggerFactory)
-        : this(propertyBinders, loggerFactory, allowValidatingTopLevelNodes: true)
-    {
-    }
+        ILoggerFactory loggerFactory
+    )
+        : this(propertyBinders, loggerFactory, allowValidatingTopLevelNodes: true) { }
 
     /// <summary>
     /// Creates a new <see cref="ComplexTypeModelBinder"/>.
@@ -65,7 +68,8 @@ public partial class ComplexTypeModelBinder : IModelBinder
     public ComplexTypeModelBinder(
         IDictionary<ModelMetadata, IModelBinder> propertyBinders,
         ILoggerFactory loggerFactory,
-        bool allowValidatingTopLevelNodes)
+        bool allowValidatingTopLevelNodes
+    )
     {
         ArgumentNullException.ThrowIfNull(propertyBinders);
         ArgumentNullException.ThrowIfNull(loggerFactory);
@@ -94,7 +98,10 @@ public partial class ComplexTypeModelBinder : IModelBinder
 
     private async Task BindModelCoreAsync(ModelBindingContext bindingContext, int propertyData)
     {
-        Debug.Assert(propertyData == GreedyPropertiesMayHaveData || propertyData == ValueProviderDataAvailable);
+        Debug.Assert(
+            propertyData == GreedyPropertiesMayHaveData
+                || propertyData == ValueProviderDataAvailable
+        );
 
         // Create model first (if necessary) to avoid reporting errors about properties when activation fails.
         if (bindingContext.Model == null)
@@ -122,9 +129,11 @@ public partial class ComplexTypeModelBinder : IModelBinder
                     // an earlier loop-completing property. Postpone binding this property too.
                     continue;
                 }
-                else if (!bindingContext.IsTopLevelObject &&
-                    !propertyBindingSucceeded &&
-                    propertyData == GreedyPropertiesMayHaveData)
+                else if (
+                    !bindingContext.IsTopLevelObject
+                    && !propertyBindingSucceeded
+                    && propertyData == GreedyPropertiesMayHaveData
+                )
                 {
                     // Have no confirmation of data for the current instance. Postpone completing the loop until
                     // we _know_ the current instance is useful. Recursion would otherwise occur prior to the
@@ -167,7 +176,10 @@ public partial class ComplexTypeModelBinder : IModelBinder
                 if (_propertyBinders[property] is PlaceholderBinder)
                 {
                     var fieldName = property.BinderModelName ?? property.PropertyName;
-                    var modelName = ModelNames.CreatePropertyModelName(bindingContext.ModelName, fieldName);
+                    var modelName = ModelNames.CreatePropertyModelName(
+                        bindingContext.ModelName,
+                        fieldName
+                    );
                     await BindProperty(bindingContext, property, fieldName, modelName);
                 }
             }
@@ -178,12 +190,16 @@ public partial class ComplexTypeModelBinder : IModelBinder
         // 1. The top-level model has no public settable properties.
         // 2. All properties in a [BindRequired] model have [BindNever] or are otherwise excluded from binding.
         // 3. No data exists for any property.
-        if (!attemptedPropertyBinding &&
-            bindingContext.IsTopLevelObject &&
-            modelMetadata.IsBindingRequired)
+        if (
+            !attemptedPropertyBinding
+            && bindingContext.IsTopLevelObject
+            && modelMetadata.IsBindingRequired
+        )
         {
             var messageProvider = modelMetadata.ModelBindingMessageProvider;
-            var message = messageProvider.MissingBindRequiredValueAccessor(bindingContext.FieldName);
+            var message = messageProvider.MissingBindRequiredValueAccessor(
+                bindingContext.FieldName
+            );
             bindingContext.ModelState.TryAddModelError(bindingContext.ModelName, message);
         }
 
@@ -209,9 +225,11 @@ public partial class ComplexTypeModelBinder : IModelBinder
         //
         // This logic is intended to maximize correctness but does not avoid infinite loops or recursion when a
         // greedy model binder succeeds unconditionally.
-        if (!bindingContext.IsTopLevelObject &&
-            !propertyBindingSucceeded &&
-            propertyData == GreedyPropertiesMayHaveData)
+        if (
+            !bindingContext.IsTopLevelObject
+            && !propertyBindingSucceeded
+            && propertyData == GreedyPropertiesMayHaveData
+        )
         {
             bindingContext.Result = ModelBindingResult.Failed();
             return;
@@ -227,9 +245,15 @@ public partial class ComplexTypeModelBinder : IModelBinder
     /// <param name="bindingContext">The <see cref="ModelBindingContext"/> for the container model.</param>
     /// <param name="propertyMetadata">The <see cref="ModelMetadata"/> for the model property.</param>
     /// <returns><c>true</c> if the model property can be bound, otherwise <c>false</c>.</returns>
-    protected virtual bool CanBindProperty(ModelBindingContext bindingContext, ModelMetadata propertyMetadata)
+    protected virtual bool CanBindProperty(
+        ModelBindingContext bindingContext,
+        ModelMetadata propertyMetadata
+    )
     {
-        var metadataProviderFilter = bindingContext.ModelMetadata.PropertyFilterProvider?.PropertyFilter;
+        var metadataProviderFilter = bindingContext
+            .ModelMetadata
+            .PropertyFilterProvider
+            ?.PropertyFilter;
         if (metadataProviderFilter?.Invoke(propertyMetadata) == false)
         {
             return false;
@@ -257,26 +281,32 @@ public partial class ComplexTypeModelBinder : IModelBinder
         ModelBindingContext bindingContext,
         ModelMetadata property,
         string fieldName,
-        string modelName)
+        string modelName
+    )
     {
         // Pass complex (including collection) values down so that binding system does not unnecessarily
         // recreate instances or overwrite inner properties that are not bound. No need for this with simple
         // values because they will be overwritten if binding succeeds. Arrays are never reused because they
         // cannot be resized.
         object propertyModel = null;
-        if (property.PropertyGetter != null &&
-            property.IsComplexType &&
-            !property.ModelType.IsArray)
+        if (
+            property.PropertyGetter != null
+            && property.IsComplexType
+            && !property.ModelType.IsArray
+        )
         {
             propertyModel = property.PropertyGetter(bindingContext.Model);
         }
 
         ModelBindingResult result;
-        using (bindingContext.EnterNestedScope(
-            modelMetadata: property,
-            fieldName: fieldName,
-            modelName: modelName,
-            model: propertyModel))
+        using (
+            bindingContext.EnterNestedScope(
+                modelMetadata: property,
+                fieldName: fieldName,
+                modelName: modelName,
+                model: propertyModel
+            )
+        )
         {
             await BindProperty(bindingContext);
             result = bindingContext.Result;
@@ -288,7 +318,9 @@ public partial class ComplexTypeModelBinder : IModelBinder
         }
         else if (property.IsBindingRequired)
         {
-            var message = property.ModelBindingMessageProvider.MissingBindRequiredValueAccessor(fieldName);
+            var message = property.ModelBindingMessageProvider.MissingBindRequiredValueAccessor(
+                fieldName
+            );
             bindingContext.ModelState.TryAddModelError(modelName, message);
         }
 
@@ -395,11 +427,14 @@ public partial class ComplexTypeModelBinder : IModelBinder
             // Otherwise, check whether the (perhaps filtered) value providers have a match.
             var fieldName = propertyMetadata.BinderModelName ?? propertyMetadata.PropertyName;
             var modelName = ModelNames.CreatePropertyModelName(bindingContext.ModelName, fieldName);
-            using (bindingContext.EnterNestedScope(
-                modelMetadata: propertyMetadata,
-                fieldName: fieldName,
-                modelName: modelName,
-                model: null))
+            using (
+                bindingContext.EnterNestedScope(
+                    modelMetadata: propertyMetadata,
+                    fieldName: fieldName,
+                    modelName: modelName,
+                    model: null
+                )
+            )
             {
                 // If any property can be bound from a value provider, then success.
                 if (bindingContext.ValueProvider.ContainsPrefix(bindingContext.ModelName))
@@ -422,7 +457,8 @@ public partial class ComplexTypeModelBinder : IModelBinder
     // Internal for tests
     internal static bool CanUpdatePropertyInternal(ModelMetadata propertyMetadata)
     {
-        return !propertyMetadata.IsReadOnly || CanUpdateReadOnlyProperty(propertyMetadata.ModelType);
+        return !propertyMetadata.IsReadOnly
+            || CanUpdateReadOnlyProperty(propertyMetadata.ModelType);
     }
 
     private static bool CanUpdateReadOnlyProperty(Type propertyType)
@@ -476,7 +512,11 @@ public partial class ComplexTypeModelBinder : IModelBinder
                 // alternative.
                 if (!bindingContext.IsTopLevelObject)
                 {
-                    throw new InvalidOperationException(Resources.FormatComplexTypeModelBinder_NoParameterlessConstructor_ForType(modelType.FullName));
+                    throw new InvalidOperationException(
+                        Resources.FormatComplexTypeModelBinder_NoParameterlessConstructor_ForType(
+                            modelType.FullName
+                        )
+                    );
                 }
 
                 var metadata = bindingContext.ModelMetadata;
@@ -486,17 +526,23 @@ public partial class ComplexTypeModelBinder : IModelBinder
                         throw new InvalidOperationException(
                             Resources.FormatComplexTypeModelBinder_NoParameterlessConstructor_ForParameter(
                                 modelType.FullName,
-                                metadata.ParameterName));
+                                metadata.ParameterName
+                            )
+                        );
                     case ModelMetadataKind.Property:
                         throw new InvalidOperationException(
                             Resources.FormatComplexTypeModelBinder_NoParameterlessConstructor_ForProperty(
                                 modelType.FullName,
                                 metadata.PropertyName,
-                                bindingContext.ModelMetadata.ContainerType.FullName));
+                                bindingContext.ModelMetadata.ContainerType.FullName
+                            )
+                        );
                     case ModelMetadataKind.Type:
                         throw new InvalidOperationException(
                             Resources.FormatComplexTypeModelBinder_NoParameterlessConstructor_ForType(
-                                modelType.FullName));
+                                modelType.FullName
+                            )
+                        );
                 }
             }
 
@@ -519,7 +565,8 @@ public partial class ComplexTypeModelBinder : IModelBinder
         ModelBindingContext bindingContext,
         string modelName,
         ModelMetadata propertyMetadata,
-        ModelBindingResult result)
+        ModelBindingResult result
+    )
     {
         ArgumentNullException.ThrowIfNull(bindingContext);
         ArgumentNullException.ThrowIfNull(modelName);
@@ -552,7 +599,8 @@ public partial class ComplexTypeModelBinder : IModelBinder
     private static void AddModelError(
         Exception exception,
         string modelName,
-        ModelBindingContext bindingContext)
+        ModelBindingContext bindingContext
+    )
     {
         var targetInvocationException = exception as TargetInvocationException;
         if (targetInvocationException?.InnerException != null)
@@ -571,16 +619,34 @@ public partial class ComplexTypeModelBinder : IModelBinder
 
     private static partial class Log
     {
-        public static void NoPublicSettableProperties(ILogger logger, ModelBindingContext bindingContext)
-            => NoPublicSettableProperties(logger, bindingContext.ModelName, bindingContext.ModelType);
+        public static void NoPublicSettableProperties(
+            ILogger logger,
+            ModelBindingContext bindingContext
+        ) => NoPublicSettableProperties(logger, bindingContext.ModelName, bindingContext.ModelType);
 
-        [LoggerMessage(17, LogLevel.Debug, "Could not bind to model with name '{ModelName}' and type '{ModelType}' as the type has no public settable properties.", EventName = "NoPublicSettableProperties")]
-        private static partial void NoPublicSettableProperties(ILogger logger, string modelName, Type modelType);
+        [LoggerMessage(
+            17,
+            LogLevel.Debug,
+            "Could not bind to model with name '{ModelName}' and type '{ModelType}' as the type has no public settable properties.",
+            EventName = "NoPublicSettableProperties"
+        )]
+        private static partial void NoPublicSettableProperties(
+            ILogger logger,
+            string modelName,
+            Type modelType
+        );
 
-        public static void CannotBindToComplexType(ILogger logger, ModelBindingContext bindingContext)
-            => CannotBindToComplexType(logger, bindingContext.ModelType);
+        public static void CannotBindToComplexType(
+            ILogger logger,
+            ModelBindingContext bindingContext
+        ) => CannotBindToComplexType(logger, bindingContext.ModelType);
 
-        [LoggerMessage(18, LogLevel.Debug, "Could not bind to model of type '{ModelType}' as there were no values in the request for any of the properties.", EventName = "CannotBindToComplexType")]
+        [LoggerMessage(
+            18,
+            LogLevel.Debug,
+            "Could not bind to model of type '{ModelType}' as there were no values in the request for any of the properties.",
+            EventName = "CannotBindToComplexType"
+        )]
         private static partial void CannotBindToComplexType(ILogger logger, Type modelType);
     }
 }

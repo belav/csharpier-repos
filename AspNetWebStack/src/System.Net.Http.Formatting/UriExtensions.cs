@@ -57,7 +57,11 @@ namespace System.Net.Http
         /// <param name="type">The type of the object to read.</param>
         /// <param name="value">An object to be initialized with this instance or null if the conversion cannot be performed.</param>
         /// <returns><c>true</c> if the query component can be read as the specified type; otherwise <c>false</c>.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1007:UseGenericsWhereAppropriate", Justification = "This is the non-generic version.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1007:UseGenericsWhereAppropriate",
+            Justification = "This is the non-generic version."
+        )]
         public static bool TryReadQueryAs(this Uri address, Type type, out object value)
         {
             if (address == null)
@@ -92,7 +96,11 @@ namespace System.Net.Http
         /// <param name="address">The <see cref="Uri"/> instance from which to read.</param>
         /// <param name="value">An object to be initialized with this instance or null if the conversion cannot be performed.</param>
         /// <returns><c>true</c> if the query component can be read as the specified type; otherwise <c>false</c>.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The T represents the output parameter, not an input parameter.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "The T represents the output parameter, not an input parameter."
+        )]
         public static bool TryReadQueryAs<T>(this Uri address, out T value)
         {
             if (address == null)

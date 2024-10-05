@@ -57,7 +57,12 @@ namespace System.DirectoryServices.Tests
         [InlineData(null, null, null, (AuthenticationTypes)int.MinValue)]
         [InlineData("", "", "", AuthenticationTypes.Anonymous)]
         [InlineData("Path", "UserName", "Password", AuthenticationTypes.None)]
-        public void Ctor_Path_UserName_Password_AuthenticationType(string path, string userName, string password, AuthenticationTypes authenticationType)
+        public void Ctor_Path_UserName_Password_AuthenticationType(
+            string path,
+            string userName,
+            string password,
+            AuthenticationTypes authenticationType
+        )
         {
             var entry = new DirectoryEntry(path, userName, password, authenticationType);
             Assert.Equal(path ?? string.Empty, entry.Path);
@@ -81,7 +86,9 @@ namespace System.DirectoryServices.Tests
         [InlineData(AuthenticationTypes.Secure)]
         [InlineData(AuthenticationTypes.Anonymous)]
         [InlineData((AuthenticationTypes)int.MinValue)]
-        public void AuthenticationType_Set_GetReturnsExpected(AuthenticationTypes authenticationType)
+        public void AuthenticationType_Set_GetReturnsExpected(
+            AuthenticationTypes authenticationType
+        )
         {
             var entry = new DirectoryEntry { AuthenticationType = authenticationType };
             Assert.Equal(authenticationType, entry.AuthenticationType);
@@ -139,8 +146,17 @@ namespace System.DirectoryServices.Tests
             Assert.Throws<ObjectDisposedException>(() => entry.CopyTo(disposedEntry, "newName"));
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoServer), nameof(PlatformDetection.IsNotWindowsIoTCore))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34442", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoServer),
+            nameof(PlatformDetection.IsNotWindowsIoTCore)
+        )]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34442",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void DeleteTree_NoObject_ThrowsCOMException()
         {
             var entry = new DirectoryEntry("path");
@@ -229,7 +245,10 @@ namespace System.DirectoryServices.Tests
         public void ObjectSecurity_SetNull_ThrowsArgumentnullExceptioN()
         {
             var entry = new DirectoryEntry();
-            AssertExtensions.Throws<ArgumentNullException>("value", () => entry.ObjectSecurity = null);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => entry.ObjectSecurity = null
+            );
         }
     }
 }

@@ -13,9 +13,14 @@ using Newtonsoft.Json;
 
 namespace System.Web.Http.Tracing.Tracers
 {
-    public class JsonMediaTypeFormatterTracerTest : ReadWriteMediaTypeFormatterTracerTestBase<JsonMediaTypeFormatter>
+    public class JsonMediaTypeFormatterTracerTest
+        : ReadWriteMediaTypeFormatterTracerTestBase<JsonMediaTypeFormatter>
     {
-        public override MediaTypeFormatter CreateTracer(JsonMediaTypeFormatter formatter, HttpRequestMessage request, ITraceWriter traceWriter)
+        public override MediaTypeFormatter CreateTracer(
+            JsonMediaTypeFormatter formatter,
+            HttpRequestMessage request,
+            ITraceWriter traceWriter
+        )
         {
             return new JsonMediaTypeFormatterTracer(formatter, traceWriter, request);
         }
@@ -26,11 +31,19 @@ namespace System.Web.Http.Tracing.Tracers
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage();
             JsonMediaTypeFormatter innerFormatter = new JsonMediaTypeFormatter();
-            innerFormatter.UseDataContractJsonSerializer = !innerFormatter.UseDataContractJsonSerializer;
-            JsonMediaTypeFormatterTracer tracer = new JsonMediaTypeFormatterTracer(innerFormatter, new TestTraceWriter(), request);
+            innerFormatter.UseDataContractJsonSerializer =
+                !innerFormatter.UseDataContractJsonSerializer;
+            JsonMediaTypeFormatterTracer tracer = new JsonMediaTypeFormatterTracer(
+                innerFormatter,
+                new TestTraceWriter(),
+                request
+            );
 
             // Act & Assert
-            Assert.Equal(innerFormatter.UseDataContractJsonSerializer, tracer.UseDataContractJsonSerializer);
+            Assert.Equal(
+                innerFormatter.UseDataContractJsonSerializer,
+                tracer.UseDataContractJsonSerializer
+            );
         }
 
         [Fact]
@@ -40,7 +53,11 @@ namespace System.Web.Http.Tracing.Tracers
             HttpRequestMessage request = new HttpRequestMessage();
             JsonMediaTypeFormatter innerFormatter = new JsonMediaTypeFormatter();
             innerFormatter.MaxDepth = innerFormatter.MaxDepth + 1;
-            JsonMediaTypeFormatterTracer tracer = new JsonMediaTypeFormatterTracer(innerFormatter, new TestTraceWriter(), request);
+            JsonMediaTypeFormatterTracer tracer = new JsonMediaTypeFormatterTracer(
+                innerFormatter,
+                new TestTraceWriter(),
+                request
+            );
 
             // Act & Assert
             Assert.Equal(innerFormatter.MaxDepth, tracer.MaxDepth);
@@ -53,7 +70,11 @@ namespace System.Web.Http.Tracing.Tracers
             HttpRequestMessage request = new HttpRequestMessage();
             JsonMediaTypeFormatter innerFormatter = new JsonMediaTypeFormatter();
             innerFormatter.Indent = !innerFormatter.Indent;
-            JsonMediaTypeFormatterTracer tracer = new JsonMediaTypeFormatterTracer(innerFormatter, new TestTraceWriter(), request);
+            JsonMediaTypeFormatterTracer tracer = new JsonMediaTypeFormatterTracer(
+                innerFormatter,
+                new TestTraceWriter(),
+                request
+            );
 
             // Act & Assert
             Assert.Equal(innerFormatter.Indent, tracer.Indent);
@@ -65,8 +86,15 @@ namespace System.Web.Http.Tracing.Tracers
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage();
             JsonSerializerSettings serializerSettings = new JsonSerializerSettings();
-            JsonMediaTypeFormatter innerFormatter = new JsonMediaTypeFormatter() { SerializerSettings = serializerSettings };
-            JsonMediaTypeFormatterTracer tracer = new JsonMediaTypeFormatterTracer(innerFormatter, new TestTraceWriter(), request);
+            JsonMediaTypeFormatter innerFormatter = new JsonMediaTypeFormatter()
+            {
+                SerializerSettings = serializerSettings,
+            };
+            JsonMediaTypeFormatterTracer tracer = new JsonMediaTypeFormatterTracer(
+                innerFormatter,
+                new TestTraceWriter(),
+                request
+            );
 
             // Act & Assert
             Assert.Same(innerFormatter.SerializerSettings, tracer.SerializerSettings);
@@ -77,7 +105,11 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             JsonMediaTypeFormatter expectedInner = new JsonMediaTypeFormatter();
-            JsonMediaTypeFormatterTracer productUnderTest = new JsonMediaTypeFormatterTracer(expectedInner, new TestTraceWriter(), new HttpRequestMessage());
+            JsonMediaTypeFormatterTracer productUnderTest = new JsonMediaTypeFormatterTracer(
+                expectedInner,
+                new TestTraceWriter(),
+                new HttpRequestMessage()
+            );
 
             // Act
             JsonMediaTypeFormatter actualInner = productUnderTest.Inner;
@@ -91,10 +123,16 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             JsonMediaTypeFormatter expectedInner = new JsonMediaTypeFormatter();
-            JsonMediaTypeFormatterTracer productUnderTest = new JsonMediaTypeFormatterTracer(expectedInner, new TestTraceWriter(), new HttpRequestMessage());
+            JsonMediaTypeFormatterTracer productUnderTest = new JsonMediaTypeFormatterTracer(
+                expectedInner,
+                new TestTraceWriter(),
+                new HttpRequestMessage()
+            );
 
             // Act
-            JsonMediaTypeFormatter actualInner = Decorator.GetInner(productUnderTest as JsonMediaTypeFormatter);
+            JsonMediaTypeFormatter actualInner = Decorator.GetInner(
+                productUnderTest as JsonMediaTypeFormatter
+            );
 
             // Assert
             Assert.Same(expectedInner, actualInner);
@@ -111,54 +149,75 @@ namespace System.Web.Http.Tracing.Tracers
                     {
                         new List<TraceRecord>
                         {
-                            new TraceRecord(request, TraceCategories.FormattingCategory, TraceLevel.Info)
+                            new TraceRecord(
+                                request,
+                                TraceCategories.FormattingCategory,
+                                TraceLevel.Info
+                            )
                             {
                                 Kind = TraceKind.Begin,
                                 Operation = "ReadFromStreamAsync",
                                 Message = "Type='SampleType', content-type='application/json'",
-                                Operator = "JsonMediaTypeFormatter"
+                                Operator = "JsonMediaTypeFormatter",
                             },
-                            new TraceRecord(request, TraceCategories.FormattingCategory, TraceLevel.Info)
+                            new TraceRecord(
+                                request,
+                                TraceCategories.FormattingCategory,
+                                TraceLevel.Info
+                            )
                             {
                                 Kind = TraceKind.End,
                                 Operation = "ReadFromStreamAsync",
                                 Message = "Value read='System.Net.Http.Formatting.SampleType'",
-                                Operator = "JsonMediaTypeFormatter"
+                                Operator = "JsonMediaTypeFormatter",
                             },
                         },
                         request,
-                        "{\"Number\":42}"
+                        "{\"Number\":42}",
                     },
                     new object[]
                     {
                         new List<TraceRecord>
                         {
-                            new TraceRecord(request, TraceCategories.FormattingCategory, TraceLevel.Info)
+                            new TraceRecord(
+                                request,
+                                TraceCategories.FormattingCategory,
+                                TraceLevel.Info
+                            )
                             {
                                 Kind = TraceKind.Begin,
                                 Operation = "ReadFromStreamAsync",
                                 Message = "Type='SampleType', content-type='application/json'",
-                                Operator = "JsonMediaTypeFormatter"
+                                Operator = "JsonMediaTypeFormatter",
                             },
-                            new TraceRecord(request, TraceCategories.FormattingCategory, TraceLevel.Error)
+                            new TraceRecord(
+                                request,
+                                TraceCategories.FormattingCategory,
+                                TraceLevel.Error
+                            )
                             {
                                 Kind = TraceKind.Trace,
                                 Operation = "ReadFromStreamAsync",
                                 Operator = "JsonMediaTypeFormatter",
                                 Exception = new JsonReaderException(
-                                    "Unterminated string. Expected delimiter: \". Path '', line 1, position 12.")
+                                    "Unterminated string. Expected delimiter: \". Path '', line 1, position 12."
+                                ),
                             },
-                            new TraceRecord(request, TraceCategories.FormattingCategory, TraceLevel.Info)
+                            new TraceRecord(
+                                request,
+                                TraceCategories.FormattingCategory,
+                                TraceLevel.Info
+                            )
                             {
                                 Kind = TraceKind.End,
                                 Operation = "ReadFromStreamAsync",
                                 Message = "Value read='null'",
-                                Operator = "JsonMediaTypeFormatter"
+                                Operator = "JsonMediaTypeFormatter",
                             },
                         },
                         request,
-                        "{\"Number:42}"
-                    }
+                        "{\"Number:42}",
+                    },
                 };
             }
         }
@@ -166,9 +225,11 @@ namespace System.Web.Http.Tracing.Tracers
         [Theory]
         [ReplaceCulture]
         [PropertyData("RequestBodies")]
-        public async Task ReadFromStreamAsync_LogErrorFromJsonRequestBody(IList<TraceRecord> expectedTraces,
-                                                                    HttpRequestMessage request,
-                                                                    string requestBody)
+        public async Task ReadFromStreamAsync_LogErrorFromJsonRequestBody(
+            IList<TraceRecord> expectedTraces,
+            HttpRequestMessage request,
+            string requestBody
+        )
         {
             // Arrange
             var formatter = new JsonMediaTypeFormatter();
@@ -181,19 +242,23 @@ namespace System.Web.Http.Tracing.Tracers
             var tracer = new MediaTypeFormatterTracer(formatter, traceWriter, request);
 
             // Act
-            await tracer.ReadFromStreamAsync(typeof(SampleType),
-                                       await content.ReadAsStreamAsync(),
-                                       content, loggerMock.Object
-                                      );
+            await tracer.ReadFromStreamAsync(
+                typeof(SampleType),
+                await content.ReadAsStreamAsync(),
+                content,
+                loggerMock.Object
+            );
 
             // Assert
             // Error must always be marked as handled at ReadFromStream in BaseJsonMediaTypeFormatters,
             // so it would ﻿not propagate to here.
             // Note that regarding the exception's comparison in the record we only compare its message,
             // because we cannot get the exact exception and message would be enough for logging.
-            Assert.Equal<TraceRecord>(expectedTraces,
-                                      traceWriter.Traces,
-                                      new TraceRecordComparer() { IgnoreExceptionReference = true });
+            Assert.Equal<TraceRecord>(
+                expectedTraces,
+                traceWriter.Traces,
+                new TraceRecordComparer() { IgnoreExceptionReference = true }
+            );
         }
     }
 }

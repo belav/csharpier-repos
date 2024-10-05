@@ -12,12 +12,23 @@ namespace System.DirectoryServices.ActiveDirectory
         // To disable public/protected constructors for this class
         private Locator() { }
 
-        internal static DomainControllerInfo GetDomainControllerInfo(string? computerName, string? domainName, string? siteName, long flags)
+        internal static DomainControllerInfo GetDomainControllerInfo(
+            string? computerName,
+            string? domainName,
+            string? siteName,
+            long flags
+        )
         {
             int errorCode = 0;
             DomainControllerInfo domainControllerInfo;
 
-            errorCode = DsGetDcNameWrapper(computerName, domainName, siteName, flags, out domainControllerInfo);
+            errorCode = DsGetDcNameWrapper(
+                computerName,
+                domainName,
+                siteName,
+                flags,
+                out domainControllerInfo
+            );
 
             if (errorCode != 0)
             {
@@ -27,7 +38,13 @@ namespace System.DirectoryServices.ActiveDirectory
             return domainControllerInfo;
         }
 
-        internal static int DsGetDcNameWrapper(string? computerName, string? domainName, string? siteName, long flags, out DomainControllerInfo domainControllerInfo)
+        internal static int DsGetDcNameWrapper(
+            string? computerName,
+            string? domainName,
+            string? siteName,
+            long flags,
+            out DomainControllerInfo domainControllerInfo
+        )
         {
             IntPtr pDomainControllerInfo = IntPtr.Zero;
             int result = 0;
@@ -42,7 +59,14 @@ namespace System.DirectoryServices.ActiveDirectory
                 siteName = null;
             }
 
-            result = NativeMethods.DsGetDcName(computerName, domainName, IntPtr.Zero, siteName, (int)(flags | (long)PrivateLocatorFlags.ReturnDNSName), out pDomainControllerInfo);
+            result = NativeMethods.DsGetDcName(
+                computerName,
+                domainName,
+                IntPtr.Zero,
+                siteName,
+                (int)(flags | (long)PrivateLocatorFlags.ReturnDNSName),
+                out pDomainControllerInfo
+            );
             if (result == 0)
             {
                 try
@@ -69,7 +93,12 @@ namespace System.DirectoryServices.ActiveDirectory
             return result;
         }
 
-        internal static ArrayList EnumerateDomainControllers(DirectoryContext context, string? domainName, string? siteName, long dcFlags)
+        internal static ArrayList EnumerateDomainControllers(
+            DirectoryContext context,
+            string? domainName,
+            string? siteName,
+            long dcFlags
+        )
         {
             Hashtable? allDCs = null;
             ArrayList dcs = new ArrayList();
@@ -88,7 +117,18 @@ namespace System.DirectoryServices.ActiveDirectory
                 //
                 DomainControllerInfo domainControllerInfo;
 
-                int errorCode = DsGetDcNameWrapper(null, domainName, null, dcFlags & (long)(PrivateLocatorFlags.GCRequired | PrivateLocatorFlags.DSWriteableRequired | PrivateLocatorFlags.OnlyLDAPNeeded), out domainControllerInfo);
+                int errorCode = DsGetDcNameWrapper(
+                    null,
+                    domainName,
+                    null,
+                    dcFlags
+                        & (long)(
+                            PrivateLocatorFlags.GCRequired
+                            | PrivateLocatorFlags.DSWriteableRequired
+                            | PrivateLocatorFlags.OnlyLDAPNeeded
+                        ),
+                    out domainControllerInfo
+                );
                 if (errorCode == 0)
                 {
                     siteName = domainControllerInfo.ClientSiteName;
@@ -109,7 +149,11 @@ namespace System.DirectoryServices.ActiveDirectory
 
             foreach (string dcName in allDCs.Keys)
             {
-                DirectoryContext dcContext = Utils.GetNewDirectoryContext(dcName, DirectoryContextType.DirectoryServer, context);
+                DirectoryContext dcContext = Utils.GetNewDirectoryContext(
+                    dcName,
+                    DirectoryContextType.DirectoryServer,
+                    context
+                );
 
                 if ((dcFlags & (long)PrivateLocatorFlags.GCRequired) != 0)
                 {
@@ -139,21 +183,42 @@ namespace System.DirectoryServices.ActiveDirectory
             string? dcDnsHostName = null;
             int result = 0;
 
-            result = NativeMethods.DsGetDcOpen(domainName, (int)optionFlags, siteName, IntPtr.Zero, null, (int)dcFlags, out retGetDcContext);
+            result = NativeMethods.DsGetDcOpen(
+                domainName,
+                (int)optionFlags,
+                siteName,
+                IntPtr.Zero,
+                null,
+                (int)dcFlags,
+                out retGetDcContext
+            );
             if (result == 0)
             {
                 try
                 {
-                    result = NativeMethods.DsGetDcNext(retGetDcContext, ref sockAddressCountPtr, out sockAddressList, out dcDnsHostNamePtr);
+                    result = NativeMethods.DsGetDcNext(
+                        retGetDcContext,
+                        ref sockAddressCountPtr,
+                        out sockAddressList,
+                        out dcDnsHostNamePtr
+                    );
 
-                    if (result != 0 && result != NativeMethods.ERROR_FILE_MARK_DETECTED && result != NativeMethods.DNS_ERROR_RCODE_NAME_ERROR && result != NativeMethods.ERROR_NO_MORE_ITEMS)
+                    if (
+                        result != 0
+                        && result != NativeMethods.ERROR_FILE_MARK_DETECTED
+                        && result != NativeMethods.DNS_ERROR_RCODE_NAME_ERROR
+                        && result != NativeMethods.ERROR_NO_MORE_ITEMS
+                    )
                     {
                         throw ExceptionHelper.GetExceptionFromErrorCode(result);
                     }
 
                     while (result != NativeMethods.ERROR_NO_MORE_ITEMS)
                     {
-                        if (result != NativeMethods.ERROR_FILE_MARK_DETECTED && result != NativeMethods.DNS_ERROR_RCODE_NAME_ERROR)
+                        if (
+                            result != NativeMethods.ERROR_FILE_MARK_DETECTED
+                            && result != NativeMethods.DNS_ERROR_RCODE_NAME_ERROR
+                        )
                         {
                             try
                             {
@@ -175,8 +240,18 @@ namespace System.DirectoryServices.ActiveDirectory
                             }
                         }
 
-                        result = NativeMethods.DsGetDcNext(retGetDcContext, ref sockAddressCountPtr, out sockAddressList, out dcDnsHostNamePtr);
-                        if (result != 0 && result != NativeMethods.ERROR_FILE_MARK_DETECTED && result != NativeMethods.DNS_ERROR_RCODE_NAME_ERROR && result != NativeMethods.ERROR_NO_MORE_ITEMS)
+                        result = NativeMethods.DsGetDcNext(
+                            retGetDcContext,
+                            ref sockAddressCountPtr,
+                            out sockAddressList,
+                            out dcDnsHostNamePtr
+                        );
+                        if (
+                            result != 0
+                            && result != NativeMethods.ERROR_FILE_MARK_DETECTED
+                            && result != NativeMethods.DNS_ERROR_RCODE_NAME_ERROR
+                            && result != NativeMethods.ERROR_NO_MORE_ITEMS
+                        )
                         {
                             throw ExceptionHelper.GetExceptionFromErrorCode(result);
                         }
@@ -233,7 +308,14 @@ namespace System.DirectoryServices.ActiveDirectory
             }
 
             // Call DnsQuery
-            result = NativeMethods.DnsQuery(recordName, NativeMethods.DnsSrvData, options, IntPtr.Zero, out dnsResults, IntPtr.Zero);
+            result = NativeMethods.DnsQuery(
+                recordName,
+                NativeMethods.DnsSrvData,
+                options,
+                IntPtr.Zero,
+                out dnsResults,
+                IntPtr.Zero
+            );
             if (result == 0)
             {
                 try

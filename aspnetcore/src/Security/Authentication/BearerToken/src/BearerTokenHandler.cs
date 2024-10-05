@@ -13,11 +13,18 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Authentication.BearerToken;
 
-internal sealed class BearerTokenHandler(IOptionsMonitor<BearerTokenOptions> optionsMonitor, ILoggerFactory loggerFactory, UrlEncoder urlEncoder)
-    : SignInAuthenticationHandler<BearerTokenOptions>(optionsMonitor, loggerFactory, urlEncoder)
+internal sealed class BearerTokenHandler(
+    IOptionsMonitor<BearerTokenOptions> optionsMonitor,
+    ILoggerFactory loggerFactory,
+    UrlEncoder urlEncoder
+) : SignInAuthenticationHandler<BearerTokenOptions>(optionsMonitor, loggerFactory, urlEncoder)
 {
-    private static readonly AuthenticateResult FailedUnprotectingToken = AuthenticateResult.Fail("Unprotected token failed");
-    private static readonly AuthenticateResult TokenExpired = AuthenticateResult.Fail("Token expired");
+    private static readonly AuthenticateResult FailedUnprotectingToken = AuthenticateResult.Fail(
+        "Unprotected token failed"
+    );
+    private static readonly AuthenticateResult TokenExpired = AuthenticateResult.Fail(
+        "Token expired"
+    );
 
     private new BearerTokenEvents Events => (BearerTokenEvents)base.Events!;
 
@@ -61,7 +68,10 @@ internal sealed class BearerTokenHandler(IOptionsMonitor<BearerTokenOptions> opt
         return base.HandleChallengeAsync(properties);
     }
 
-    protected override async Task HandleSignInAsync(ClaimsPrincipal user, AuthenticationProperties? properties)
+    protected override async Task HandleSignInAsync(
+        ClaimsPrincipal user,
+        AuthenticationProperties? properties
+    )
     {
         var utcNow = TimeProvider.GetUtcNow();
 
@@ -70,7 +80,9 @@ internal sealed class BearerTokenHandler(IOptionsMonitor<BearerTokenOptions> opt
 
         var response = new AccessTokenResponse
         {
-            AccessToken = Options.BearerTokenProtector.Protect(CreateBearerTicket(user, properties)),
+            AccessToken = Options.BearerTokenProtector.Protect(
+                CreateBearerTicket(user, properties)
+            ),
             ExpiresIn = (long)Options.BearerTokenExpiration.TotalSeconds,
             RefreshToken = Options.RefreshTokenProtector.Protect(CreateRefreshTicket(user, utcNow)),
         };
@@ -80,16 +92,22 @@ internal sealed class BearerTokenHandler(IOptionsMonitor<BearerTokenOptions> opt
         await Context.Response.WriteAsJsonAsync(response, ResolveAccessTokenJsonTypeInfo(Context));
     }
 
-    private static JsonTypeInfo<AccessTokenResponse> ResolveAccessTokenJsonTypeInfo(HttpContext httpContext)
+    private static JsonTypeInfo<AccessTokenResponse> ResolveAccessTokenJsonTypeInfo(
+        HttpContext httpContext
+    )
     {
         // Attempt to resolve options from DI then fall back to static options
-        var typeInfo = httpContext.RequestServices.GetService<IOptions<JsonOptions>>()
-            ?.Value?.SerializerOptions?.GetTypeInfo(typeof(AccessTokenResponse)) as JsonTypeInfo<AccessTokenResponse>;
+        var typeInfo =
+            httpContext
+                .RequestServices.GetService<IOptions<JsonOptions>>()
+                ?.Value?.SerializerOptions?.GetTypeInfo(typeof(AccessTokenResponse))
+            as JsonTypeInfo<AccessTokenResponse>;
         return typeInfo ?? BearerTokenJsonSerializerContext.Default.AccessTokenResponse;
     }
 
     // No-op to avoid interfering with any mass sign-out logic.
-    protected override Task HandleSignOutAsync(AuthenticationProperties? properties) => Task.CompletedTask;
+    protected override Task HandleSignOutAsync(AuthenticationProperties? properties) =>
+        Task.CompletedTask;
 
     private string? GetBearerTokenOrNull()
     {
@@ -100,14 +118,16 @@ internal sealed class BearerTokenHandler(IOptionsMonitor<BearerTokenOptions> opt
             : null;
     }
 
-    private AuthenticationTicket CreateBearerTicket(ClaimsPrincipal user, AuthenticationProperties properties)
-        => new(user, properties, $"{Scheme.Name}:AccessToken");
+    private AuthenticationTicket CreateBearerTicket(
+        ClaimsPrincipal user,
+        AuthenticationProperties properties
+    ) => new(user, properties, $"{Scheme.Name}:AccessToken");
 
     private AuthenticationTicket CreateRefreshTicket(ClaimsPrincipal user, DateTimeOffset utcNow)
     {
         var refreshProperties = new AuthenticationProperties
         {
-            ExpiresUtc = utcNow + Options.RefreshTokenExpiration
+            ExpiresUtc = utcNow + Options.RefreshTokenExpiration,
         };
 
         return new AuthenticationTicket(user, refreshProperties, $"{Scheme.Name}:RefreshToken");

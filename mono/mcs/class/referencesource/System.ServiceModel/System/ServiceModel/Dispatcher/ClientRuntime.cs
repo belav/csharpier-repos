@@ -6,8 +6,8 @@ namespace System.ServiceModel.Dispatcher
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Net;
     using System.Runtime;
@@ -15,30 +15,35 @@ namespace System.ServiceModel.Dispatcher
     using System.ServiceModel.Security;
     using System.Xml;
 
-    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Compat", Justification = "Compat is an accepted abbreviation")]
+    [SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Compat",
+        Justification = "Compat is an accepted abbreviation"
+    )]
     [EditorBrowsable(EditorBrowsableState.Never)]
     public class ClientRuntimeCompatBase
     {
         internal ClientRuntimeCompatBase() { }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [Obsolete("This API supports the .NET Framework infrastructure and is not intended to be used directly from your code.", true)]
+        [Obsolete(
+            "This API supports the .NET Framework infrastructure and is not intended to be used directly from your code.",
+            true
+        )]
         public IList<IClientMessageInspector> MessageInspectors
         {
-            get
-            {
-                return this.messageInspectors;
-            }
+            get { return this.messageInspectors; }
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [Obsolete("This API supports the .NET Framework infrastructure and is not intended to be used directly from your code.", true)]
+        [Obsolete(
+            "This API supports the .NET Framework infrastructure and is not intended to be used directly from your code.",
+            true
+        )]
         public KeyedCollection<string, ClientOperation> Operations
         {
-            get
-            {
-                return this.compatOperations;
-            }
+            get { return this.compatOperations; }
         }
         internal SynchronizedCollection<IClientMessageInspector> messageInspectors;
         internal SynchronizedKeyedCollection<string, ClientOperation> operations;
@@ -67,9 +72,11 @@ namespace System.ServiceModel.Dispatcher
         bool messageVersionNoneFaultsEnabled;
 
         internal ClientRuntime(DispatchRuntime dispatchRuntime, SharedRuntimeState shared)
-            : this(dispatchRuntime.EndpointDispatcher.ContractName,
-                   dispatchRuntime.EndpointDispatcher.ContractNamespace,
-                   shared)
+            : this(
+                dispatchRuntime.EndpointDispatcher.ContractName,
+                dispatchRuntime.EndpointDispatcher.ContractNamespace,
+                shared
+            )
         {
             if (dispatchRuntime == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("dispatchRuntime");
@@ -97,9 +104,15 @@ namespace System.ServiceModel.Dispatcher
             this.compatOperations = new OperationCollectionWrapper(operations);
             this.channelInitializers = new ProxyBehaviorCollection<IChannelInitializer>(this);
             this.messageInspectors = new ProxyBehaviorCollection<IClientMessageInspector>(this);
-            this.interactiveChannelInitializers = new ProxyBehaviorCollection<IInteractiveChannelInitializer>(this);
+            this.interactiveChannelInitializers =
+                new ProxyBehaviorCollection<IInteractiveChannelInitializer>(this);
 
-            this.unhandled = new ClientOperation(this, "*", MessageHeaders.WildcardAction, MessageHeaders.WildcardAction);
+            this.unhandled = new ClientOperation(
+                this,
+                "*",
+                MessageHeaders.WildcardAction,
+                MessageHeaders.WildcardAction
+            );
             this.unhandled.InternalFormatter = new MessageOperationFormatter();
             this.maxFaultSize = TransportDefaults.MaxFaultSize;
         }
@@ -209,10 +222,7 @@ namespace System.ServiceModel.Dispatcher
 
         public bool MessageVersionNoneFaultsEnabled
         {
-            get
-            {
-                return this.messageVersionNoneFaultsEnabled;
-            }
+            get { return this.messageVersionNoneFaultsEnabled; }
             set
             {
                 this.InvalidateRuntime();
@@ -256,7 +266,9 @@ namespace System.ServiceModel.Dispatcher
                     if (this.IsOnServer)
                     {
                         string text = SR.GetString(SR.SFxSetEnableFaultsOnChannelDispatcher0);
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(text));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(text)
+                        );
                     }
                     else
                     {
@@ -274,10 +286,7 @@ namespace System.ServiceModel.Dispatcher
 
         public int MaxFaultSize
         {
-            get
-            {
-                return this.maxFaultSize;
-            }
+            get { return this.maxFaultSize; }
             set
             {
                 this.InvalidateRuntime();
@@ -310,7 +319,9 @@ namespace System.ServiceModel.Dispatcher
                     if (this.IsOnServer)
                     {
                         string text = SR.GetString(SR.SFxSetManualAddresssingOnChannelDispatcher0);
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(text));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(text)
+                        );
                     }
                     else
                     {
@@ -452,7 +463,10 @@ namespace System.ServiceModel.Dispatcher
             {
                 return true;
             }
-            if (this.MessageVersionNoneFaultsEnabled && IsMessageVersionNoneFault(ref reply, this.MaxFaultSize))
+            if (
+                this.MessageVersionNoneFaultsEnabled
+                && IsMessageVersionNoneFault(ref reply, this.MaxFaultSize)
+            )
             {
                 return true;
             }
@@ -466,7 +480,8 @@ namespace System.ServiceModel.Dispatcher
             {
                 return false;
             }
-            HttpResponseMessageProperty prop = message.Properties[HttpResponseMessageProperty.Name] as HttpResponseMessageProperty;
+            HttpResponseMessageProperty prop =
+                message.Properties[HttpResponseMessageProperty.Name] as HttpResponseMessageProperty;
             if (prop == null || prop.StatusCode != HttpStatusCode.InternalServerError)
             {
                 return false;
@@ -479,7 +494,10 @@ namespace System.ServiceModel.Dispatcher
                 {
                     using (XmlDictionaryReader reader = copy.GetReaderAtBodyContents())
                     {
-                        return reader.IsStartElement(XD.MessageDictionary.Fault, MessageVersion.None.Envelope.DictionaryNamespace);
+                        return reader.IsStartElement(
+                            XD.MessageDictionary.Fault,
+                            MessageVersion.None.Envelope.DictionaryNamespace
+                        );
                     }
                 }
             }
@@ -556,7 +574,9 @@ namespace System.ServiceModel.Dispatcher
                 if (item == null)
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("item");
                 if (item.Parent != this.outer)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.SFxMismatchedOperationParent));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        SR.GetString(SR.SFxMismatchedOperationParent)
+                    );
 
                 this.outer.InvalidateRuntime();
                 base.InsertItem(index, item);
@@ -573,30 +593,73 @@ namespace System.ServiceModel.Dispatcher
                 if (item == null)
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("item");
                 if (item.Parent != this.outer)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.SFxMismatchedOperationParent));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        SR.GetString(SR.SFxMismatchedOperationParent)
+                    );
 
                 this.outer.InvalidateRuntime();
                 base.SetItem(index, item);
             }
 
-            internal void InternalClearItems() { this.ClearItems(); }
-            internal string InternalGetKeyForItem(ClientOperation item) { return this.GetKeyForItem(item); }
-            internal void InternalInsertItem(int index, ClientOperation item) { this.InsertItem(index, item); }
-            internal void InternalRemoveItem(int index) { this.RemoveItem(index); }
-            internal void InternalSetItem(int index, ClientOperation item) { this.SetItem(index, item); }
-        }
+            internal void InternalClearItems()
+            {
+                this.ClearItems();
+            }
 
+            internal string InternalGetKeyForItem(ClientOperation item)
+            {
+                return this.GetKeyForItem(item);
+            }
+
+            internal void InternalInsertItem(int index, ClientOperation item)
+            {
+                this.InsertItem(index, item);
+            }
+
+            internal void InternalRemoveItem(int index)
+            {
+                this.RemoveItem(index);
+            }
+
+            internal void InternalSetItem(int index, ClientOperation item)
+            {
+                this.SetItem(index, item);
+            }
+        }
 
         class OperationCollectionWrapper : KeyedCollection<string, ClientOperation>
         {
             OperationCollection inner;
-            internal OperationCollectionWrapper(OperationCollection inner) { this.inner = inner; }
-            protected override void ClearItems() { this.inner.InternalClearItems(); }
-            protected override string GetKeyForItem(ClientOperation item) { return this.inner.InternalGetKeyForItem(item); }
-            protected override void InsertItem(int index, ClientOperation item) { this.inner.InternalInsertItem(index, item); }
-            protected override void RemoveItem(int index) { this.inner.InternalRemoveItem(index); }
-            protected override void SetItem(int index, ClientOperation item) { this.inner.InternalSetItem(index, item); }
-        }
 
+            internal OperationCollectionWrapper(OperationCollection inner)
+            {
+                this.inner = inner;
+            }
+
+            protected override void ClearItems()
+            {
+                this.inner.InternalClearItems();
+            }
+
+            protected override string GetKeyForItem(ClientOperation item)
+            {
+                return this.inner.InternalGetKeyForItem(item);
+            }
+
+            protected override void InsertItem(int index, ClientOperation item)
+            {
+                this.inner.InternalInsertItem(index, item);
+            }
+
+            protected override void RemoveItem(int index)
+            {
+                this.inner.InternalRemoveItem(index);
+            }
+
+            protected override void SetItem(int index, ClientOperation item)
+            {
+                this.inner.InternalSetItem(index, item);
+            }
+        }
     }
 }

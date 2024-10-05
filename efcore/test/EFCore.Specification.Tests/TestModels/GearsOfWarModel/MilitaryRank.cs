@@ -14,5 +14,5 @@ public enum MilitaryRank
     Captain = 16,
     Major = 32,
     Colonel = 64,
-    General = 128
+    General = 128,
 }

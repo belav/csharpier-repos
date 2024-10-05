@@ -8,7 +8,7 @@ namespace System.Activities.DurableInstancing
 
     class LoadRetryConstantStrategy : ILoadRetryStrategy
     {
-        static readonly TimeSpan defaultRetryDelay = TimeSpan.FromSeconds(5);        
+        static readonly TimeSpan defaultRetryDelay = TimeSpan.FromSeconds(5);
 
         public TimeSpan RetryDelay(int retryAttempt)
         {

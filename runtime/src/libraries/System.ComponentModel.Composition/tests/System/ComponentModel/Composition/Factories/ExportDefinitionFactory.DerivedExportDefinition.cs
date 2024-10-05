@@ -13,7 +13,10 @@ namespace System.ComponentModel.Composition.Factories
             private readonly string _contractName;
             private readonly IDictionary<string, object> _metadata;
 
-            public DerivedExportDefinition(string contractName, IDictionary<string, object> metadata)
+            public DerivedExportDefinition(
+                string contractName,
+                IDictionary<string, object> metadata
+            )
             {
                 _contractName = contractName;
                 _metadata = metadata ?? new Dictionary<string, object>();

@@ -11,9 +11,7 @@ public class EchoMiddleware
     /// Instantiates a new <see cref="EchoMiddleware"/>.
     /// </summary>
     /// <param name="next">The next middleware in the pipeline.</param>
-    public EchoMiddleware(RequestDelegate next)
-    {
-    }
+    public EchoMiddleware(RequestDelegate next) { }
 
     /// <summary>
     /// Echo the request's path in the response. Does not invoke later middleware in the pipeline.

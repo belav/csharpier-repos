@@ -6,10 +6,8 @@ using Grpc.Core;
 
 namespace Server;
 
-public class JsonTranscodingGreeterService : Transcoding.JsonTranscodingGreeter.JsonTranscodingGreeterBase
-{
-
-}
+public class JsonTranscodingGreeterService
+    : Transcoding.JsonTranscodingGreeter.JsonTranscodingGreeterBase { }
 
 public class GreeterService : Greeter.GreeterBase
 {
@@ -32,9 +30,14 @@ public class GreeterService : Greeter.GreeterBase
         return Task.FromResult(new HelloReply { Message = $"Hello {request.Name}" });
     }
 
-    public override Task<HelloReply> SayHelloFrom(HelloRequestFrom request, ServerCallContext context)
+    public override Task<HelloReply> SayHelloFrom(
+        HelloRequestFrom request,
+        ServerCallContext context
+    )
     {
         _logger.LogInformation($"Sending hello to {request.Name} from {request.From}");
-        return Task.FromResult(new HelloReply { Message = $"Hello {request.Name} from {request.From}" });
+        return Task.FromResult(
+            new HelloReply { Message = $"Hello {request.Name} from {request.From}" }
+        );
     }
 }

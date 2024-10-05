@@ -4,16 +4,16 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls.WebParts {
-
+namespace System.Web.UI.WebControls.WebParts
+{
     using System;
     using System.ComponentModel;
 
     /// <devdoc>
     /// </devdoc>
     [AttributeUsage(AttributeTargets.Property)]
-    public sealed class WebBrowsableAttribute : Attribute {
-
+    public sealed class WebBrowsableAttribute : Attribute
+    {
         /// <devdoc>
         /// </devdoc>
         public static readonly WebBrowsableAttribute Yes = new WebBrowsableAttribute(true);
@@ -30,26 +30,28 @@ namespace System.Web.UI.WebControls.WebParts {
 
         /// <devdoc>
         /// </devdoc>
-        public WebBrowsableAttribute() : this(true) {
-        }
+        public WebBrowsableAttribute()
+            : this(true) { }
 
         /// <devdoc>
         /// </devdoc>
-        public WebBrowsableAttribute(bool browsable) {
+        public WebBrowsableAttribute(bool browsable)
+        {
             _browsable = browsable;
         }
 
         /// <devdoc>
         /// </devdoc>
-        public bool Browsable {
-            get {
-                return _browsable;
-            }
+        public bool Browsable
+        {
+            get { return _browsable; }
         }
 
         /// <internalonly/>
-        public override bool Equals(object obj) {
-            if (obj == this) {
+        public override bool Equals(object obj)
+        {
+            if (obj == this)
+            {
                 return true;
             }
 
@@ -58,12 +60,14 @@ namespace System.Web.UI.WebControls.WebParts {
         }
 
         /// <internalonly/>
-        public override int GetHashCode() {
+        public override int GetHashCode()
+        {
             return _browsable.GetHashCode();
         }
 
         /// <internalonly/>
-        public override bool IsDefaultAttribute() {
+        public override bool IsDefaultAttribute()
+        {
             return this.Equals(Default);
         }
     }

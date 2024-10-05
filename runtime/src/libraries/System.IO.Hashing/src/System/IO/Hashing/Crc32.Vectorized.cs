@@ -20,7 +20,9 @@ namespace System.IO.Hashing
             && VectorHelper.IsSupported
             // Vectorization can process spans as short as a single vector (16 bytes), but if ARM intrinsics are supported they
             // seem to be more performant for spans less than 8 vectors (128 bytes).
-            && source.Length >= Vector128<byte>.Count * (System.Runtime.Intrinsics.Arm.Crc32.IsSupported ? 8 : 1);
+            && source.Length
+                >= Vector128<byte>.Count
+                    * (System.Runtime.Intrinsics.Arm.Crc32.IsSupported ? 8 : 1);
 
         // Processes the bytes in source in 64 byte chunks using carryless/polynomial multiplication intrinsics,
         // followed by processing 16 byte chunks, and then processing remaining bytes individually. Requires
@@ -95,8 +97,11 @@ namespace System.IO.Hashing
             // Single fold blocks of 16, if any.
             while (length >= Vector128<byte>.Count)
             {
-                x1 = FoldPolynomialPair(Vector128.LoadUnsafe(ref srcRef).AsUInt64(), x1,
-                    Vector128.Create(0x01751997d0UL, 0x00ccaa009eUL));
+                x1 = FoldPolynomialPair(
+                    Vector128.LoadUnsafe(ref srcRef).AsUInt64(),
+                    x1,
+                    Vector128.Create(0x01751997d0UL, 0x00ccaa009eUL)
+                );
 
                 srcRef = ref Unsafe.Add(ref srcRef, Vector128<byte>.Count);
                 length -= Vector128<byte>.Count;
@@ -104,10 +109,13 @@ namespace System.IO.Hashing
 
             // Fold 128 bits to 64 bits.
             Vector128<ulong> bitmask = Vector128.Create(~0, 0, ~0, 0).AsUInt64();
-            x1 = ShiftRightBytesInVector(x1, 8) ^
-                 CarrylessMultiplyLower(x1, Vector128.CreateScalar(0x00ccaa009eUL));
-            x1 = CarrylessMultiplyLower(x1 & bitmask, Vector128.CreateScalar(0x0163cd6124UL)) ^ // k5, k0
-                 ShiftRightBytesInVector(x1, 4);
+            x1 =
+                ShiftRightBytesInVector(x1, 8)
+                ^ CarrylessMultiplyLower(x1, Vector128.CreateScalar(0x00ccaa009eUL));
+            x1 =
+                CarrylessMultiplyLower(x1 & bitmask, Vector128.CreateScalar(0x0163cd6124UL))
+                ^ // k5, k0
+                ShiftRightBytesInVector(x1, 4);
 
             // Reduce to 32 bits.
             kConstants = Vector128.Create(0x01db710641UL, 0x01f7011641UL); // polynomial

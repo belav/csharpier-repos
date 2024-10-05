@@ -4,11 +4,13 @@
 /// Auto map to this destination type from the specified source type.
 /// Discovered during scanning assembly scanning for configuration when calling <see cref="O:AutoMapper.IMapperConfigurationExpression.AddMaps"/>
 /// </summary>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct, AllowMultiple = true)]
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct,
+    AllowMultiple = true
+)]
 public sealed class AutoMapAttribute : Attribute
 {
-    public AutoMapAttribute(Type sourceType) 
-        => SourceType = sourceType;
+    public AutoMapAttribute(Type sourceType) => SourceType = sourceType;
 
     public Type SourceType { get; }
     public bool ReverseMap { get; set; }

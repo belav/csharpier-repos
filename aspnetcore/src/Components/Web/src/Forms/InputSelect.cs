@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Components.Forms;
 /// <summary>
 /// A dropdown selection component.
 /// </summary>
-public class InputSelect<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue> : InputBase<TValue>
+public class InputSelect<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue>
+    : InputBase<TValue>
 {
     private readonly bool _isMultipleSelect;
 
@@ -25,7 +26,8 @@ public class InputSelect<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTy
     /// <summary>
     /// Gets or sets the child content to be rendering inside the select element.
     /// </summary>
-    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
 
     /// <summary>
     /// Gets or sets the <c>select</c> <see cref="ElementReference"/>.
@@ -33,7 +35,8 @@ public class InputSelect<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTy
     /// May be <see langword="null"/> if accessed before the component is rendered.
     /// </para>
     /// </summary>
-    [DisallowNull] public ElementReference? Element { get; protected set; }
+    [DisallowNull]
+    public ElementReference? Element { get; protected set; }
 
     /// <inheritdoc />
     protected override void BuildRenderTree(RenderTreeBuilder builder)
@@ -47,13 +50,29 @@ public class InputSelect<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTy
         if (_isMultipleSelect)
         {
             builder.AddAttribute(5, "value", BindConverter.FormatValue(CurrentValue)?.ToString());
-            builder.AddAttribute(6, "onchange", EventCallback.Factory.CreateBinder<string?[]?>(this, SetCurrentValueAsStringArray, default));
+            builder.AddAttribute(
+                6,
+                "onchange",
+                EventCallback.Factory.CreateBinder<string?[]?>(
+                    this,
+                    SetCurrentValueAsStringArray,
+                    default
+                )
+            );
             builder.SetUpdatesAttributeName("value");
         }
         else
         {
             builder.AddAttribute(7, "value", CurrentValueAsString);
-            builder.AddAttribute(8, "onchange", EventCallback.Factory.CreateBinder<string?>(this, __value => CurrentValueAsString = __value, default));
+            builder.AddAttribute(
+                8,
+                "onchange",
+                EventCallback.Factory.CreateBinder<string?>(
+                    this,
+                    __value => CurrentValueAsString = __value,
+                    default
+                )
+            );
             builder.SetUpdatesAttributeName("value");
         }
 
@@ -63,8 +82,11 @@ public class InputSelect<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTy
     }
 
     /// <inheritdoc />
-    protected override bool TryParseValueFromString(string? value, [MaybeNullWhen(false)] out TValue result, [NotNullWhen(false)] out string? validationErrorMessage)
-        => this.TryParseSelectableValueFromString(value, out result, out validationErrorMessage);
+    protected override bool TryParseValueFromString(
+        string? value,
+        [MaybeNullWhen(false)] out TValue result,
+        [NotNullWhen(false)] out string? validationErrorMessage
+    ) => this.TryParseSelectableValueFromString(value, out result, out validationErrorMessage);
 
     /// <inheritdoc />
     protected override string? FormatValueAsString(TValue? value)
@@ -84,7 +106,11 @@ public class InputSelect<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTy
 
     private void SetCurrentValueAsStringArray(string?[]? value)
     {
-        CurrentValue = BindConverter.TryConvertTo<TValue>(value, CultureInfo.CurrentCulture, out var result)
+        CurrentValue = BindConverter.TryConvertTo<TValue>(
+            value,
+            CultureInfo.CurrentCulture,
+            out var result
+        )
             ? result
             : default;
     }

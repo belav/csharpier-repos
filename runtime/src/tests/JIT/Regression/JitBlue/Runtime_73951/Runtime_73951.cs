@@ -10,6 +10,7 @@ public class Runtime_73951
 {
     [ThreadStatic]
     public static IRuntime s_rt;
+
     [ThreadStatic]
     public static S1 s_17;
 
@@ -37,6 +38,7 @@ public class Runtime_73951
     public class C0
     {
         public ushort F1;
+
         public C0(ushort f1)
         {
             F1 = f1;
@@ -54,7 +56,9 @@ public class Runtime_73951
     {
         public object F0;
         public S0 F1;
-        public S1(object f0) : this()
+
+        public S1(object f0)
+            : this()
         {
             F0 = f0;
         }

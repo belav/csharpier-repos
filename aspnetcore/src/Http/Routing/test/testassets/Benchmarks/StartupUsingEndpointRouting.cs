@@ -21,8 +21,9 @@ public class StartupUsingEndpointRouting
 
         app.UseEndpoints(endpoints =>
         {
-            var endpointDataSource = new DefaultEndpointDataSource(new[]
-            {
+            var endpointDataSource = new DefaultEndpointDataSource(
+                new[]
+                {
                     new RouteEndpoint(
                         requestDelegate: (httpContext) =>
                         {
@@ -36,8 +37,10 @@ public class StartupUsingEndpointRouting
                         routePattern: RoutePatternFactory.Parse("/plaintext"),
                         order: 0,
                         metadata: EndpointMetadataCollection.Empty,
-                        displayName: "Plaintext"),
-            });
+                        displayName: "Plaintext"
+                    ),
+                }
+            );
 
             endpoints.DataSources.Add(endpointDataSource);
         });

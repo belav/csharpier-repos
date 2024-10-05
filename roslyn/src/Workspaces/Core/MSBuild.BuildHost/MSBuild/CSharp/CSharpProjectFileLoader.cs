@@ -11,13 +11,15 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal partial class CSharpProjectFileLoader : ProjectFileLoader
     {
-        public CSharpProjectFileLoader()
-        {
-        }
+        public CSharpProjectFileLoader() { }
 
         public override string Language => LanguageNames.CSharp;
 
-        protected override ProjectFile CreateProjectFile(MSB.Evaluation.Project? project, ProjectBuildManager buildManager, DiagnosticLog log)
+        protected override ProjectFile CreateProjectFile(
+            MSB.Evaluation.Project? project,
+            ProjectBuildManager buildManager,
+            DiagnosticLog log
+        )
         {
             return new CSharpProjectFile(this, project, buildManager, log);
         }

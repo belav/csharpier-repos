@@ -35,7 +35,10 @@ namespace System.Runtime.DurableInstancing
             return Name.GetHashCode();
         }
 
-        public static bool operator ==(InstancePersistenceEvent left, InstancePersistenceEvent right)
+        public static bool operator ==(
+            InstancePersistenceEvent left,
+            InstancePersistenceEvent right
+        )
         {
             if (object.ReferenceEquals(left, right))
             {
@@ -51,7 +54,10 @@ namespace System.Runtime.DurableInstancing
             }
         }
 
-        public static bool operator !=(InstancePersistenceEvent left, InstancePersistenceEvent right)
+        public static bool operator !=(
+            InstancePersistenceEvent left,
+            InstancePersistenceEvent right
+        )
         {
             return !(left == right);
         }
@@ -63,9 +69,7 @@ namespace System.Runtime.DurableInstancing
         static T instance;
 
         protected InstancePersistenceEvent(XName name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         public static T Value
         {

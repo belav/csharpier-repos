@@ -20,7 +20,11 @@ namespace System.Linq.Parallel.Tests
 
         public static IEnumerable<object[]> DistinctData(int[] counts)
         {
-            foreach (object[] results in Sources.Ranges(counts.Select(x => x * DuplicateFactor).DefaultIfEmpty(Sources.OuterLoopCount)))
+            foreach (
+                object[] results in Sources.Ranges(
+                    counts.Select(x => x * DuplicateFactor).DefaultIfEmpty(Sources.OuterLoopCount)
+                )
+            )
             {
                 yield return new object[] { results[0], ((int)results[1]) / DuplicateFactor };
             }
@@ -30,11 +34,26 @@ namespace System.Linq.Parallel.Tests
         {
             foreach (int count in counts.DefaultIfEmpty(Sources.OuterLoopCount))
             {
-                int[] source = Enumerable.Range(0, count * DuplicateFactor).Select(x => x % count).ToArray();
+                int[] source = Enumerable
+                    .Range(0, count * DuplicateFactor)
+                    .Select(x => x % count)
+                    .ToArray();
 
-                yield return new object[] { Labeled.Label("Array", source.AsParallel().AsOrdered()), count };
-                yield return new object[] { Labeled.Label("List", source.ToList().AsParallel().AsOrdered()), count };
-                yield return new object[] { Labeled.Label("Enumerable", source.AsEnumerable().AsParallel().AsOrdered()), count };
+                yield return new object[]
+                {
+                    Labeled.Label("Array", source.AsParallel().AsOrdered()),
+                    count,
+                };
+                yield return new object[]
+                {
+                    Labeled.Label("List", source.ToList().AsParallel().AsOrdered()),
+                    count,
+                };
+                yield return new object[]
+                {
+                    Labeled.Label("Enumerable", source.AsEnumerable().AsParallel().AsOrdered()),
+                    count,
+                };
             }
         }
 
@@ -46,7 +65,11 @@ namespace System.Linq.Parallel.Tests
         public static void Distinct_Unordered(int count, int uniqueCount)
         {
             IntegerRangeSet seen = new IntegerRangeSet(0, uniqueCount);
-            foreach (int i in UnorderedSources.Default(count).Distinct(new ModularCongruenceComparer(uniqueCount)))
+            foreach (
+                int i in UnorderedSources
+                    .Default(count)
+                    .Distinct(new ModularCongruenceComparer(uniqueCount))
+            )
             {
                 seen.Add(i % uniqueCount);
             }
@@ -75,7 +98,12 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(DistinctData), new int[] { /* Sources.OuterLoopCount */ })]
+        [MemberData(
+            nameof(DistinctData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
         public static void Distinct_Longrunning(Labeled<ParallelQuery<int>> labeled, int count)
         {
             Distinct(labeled, count);
@@ -86,7 +114,13 @@ namespace System.Linq.Parallel.Tests
         public static void Distinct_Unordered_NotPipelined(int count, int uniqueCount)
         {
             IntegerRangeSet seen = new IntegerRangeSet(0, uniqueCount);
-            Assert.All(UnorderedSources.Default(count).Distinct(new ModularCongruenceComparer(uniqueCount)).ToList(), x => seen.Add(x % uniqueCount));
+            Assert.All(
+                UnorderedSources
+                    .Default(count)
+                    .Distinct(new ModularCongruenceComparer(uniqueCount))
+                    .ToList(),
+                x => seen.Add(x % uniqueCount)
+            );
             seen.AssertComplete();
         }
 
@@ -94,7 +128,10 @@ namespace System.Linq.Parallel.Tests
         [OuterLoop]
         public static void Distinct_Unordered_NotPipelined_Longrunning()
         {
-            Distinct_Unordered_NotPipelined(Sources.OuterLoopCount, Sources.OuterLoopCount / DuplicateFactor);
+            Distinct_Unordered_NotPipelined(
+                Sources.OuterLoopCount,
+                Sources.OuterLoopCount / DuplicateFactor
+            );
         }
 
         [Theory]
@@ -103,21 +140,35 @@ namespace System.Linq.Parallel.Tests
         {
             ParallelQuery<int> query = labeled.Item;
             int seen = 0;
-            Assert.All(query.Distinct(new ModularCongruenceComparer(count)).ToList(), x => Assert.Equal(seen++, x % count));
+            Assert.All(
+                query.Distinct(new ModularCongruenceComparer(count)).ToList(),
+                x => Assert.Equal(seen++, x % count)
+            );
             Assert.Equal(count, seen);
         }
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(DistinctData), new int[] { /* Sources.OuterLoopCount */ })]
-        public static void Distinct_NotPiplined_Longrunning(Labeled<ParallelQuery<int>> labeled, int count)
+        [MemberData(
+            nameof(DistinctData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
+        public static void Distinct_NotPiplined_Longrunning(
+            Labeled<ParallelQuery<int>> labeled,
+            int count
+        )
         {
             Distinct_NotPipelined(labeled, count);
         }
 
         [Theory]
         [MemberData(nameof(DistinctSourceMultipleData), new[] { 0, 1, 2, 16 })]
-        public static void Distinct_Unordered_SourceMultiple(Labeled<ParallelQuery<int>> labeled, int count)
+        public static void Distinct_Unordered_SourceMultiple(
+            Labeled<ParallelQuery<int>> labeled,
+            int count
+        )
         {
             // The difference between this test and the previous, is that it's not possible to
             // get non-unique results from ParallelEnumerable.Range()...
@@ -130,8 +181,16 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(DistinctSourceMultipleData), new int[] { /* Sources.OuterLoopCount */ })]
-        public static void Distinct_Unordered_SourceMultiple_Longrunning(Labeled<ParallelQuery<int>> labeled, int count)
+        [MemberData(
+            nameof(DistinctSourceMultipleData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
+        public static void Distinct_Unordered_SourceMultiple_Longrunning(
+            Labeled<ParallelQuery<int>> labeled,
+            int count
+        )
         {
             Distinct_Unordered_SourceMultiple(labeled, count);
         }
@@ -147,8 +206,16 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(DistinctSourceMultipleData), new int[] { /* Sources.OuterLoopCount */ })]
-        public static void Distinct_SourceMultiple_Longrunning(Labeled<ParallelQuery<int>> labeled, int count)
+        [MemberData(
+            nameof(DistinctSourceMultipleData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
+        public static void Distinct_SourceMultiple_Longrunning(
+            Labeled<ParallelQuery<int>> labeled,
+            int count
+        )
         {
             Distinct_SourceMultiple(labeled, count);
         }
@@ -156,7 +223,10 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Distinct_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<int>)null).Distinct());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<int>)null).Distinct()
+            );
         }
     }
 }

@@ -11,39 +11,55 @@ namespace System.Web.Mvc
         private readonly bool _cacheAttributeInstances;
 
         public FilterAttributeFilterProvider()
-            : this(true)
-        {
-        }
+            : this(true) { }
 
         public FilterAttributeFilterProvider(bool cacheAttributeInstances)
         {
             _cacheAttributeInstances = cacheAttributeInstances;
         }
 
-        protected virtual IEnumerable<FilterAttribute> GetActionAttributes(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+        protected virtual IEnumerable<FilterAttribute> GetActionAttributes(
+            ControllerContext controllerContext,
+            ActionDescriptor actionDescriptor
+        )
         {
             return actionDescriptor.GetFilterAttributes(_cacheAttributeInstances);
         }
 
-        protected virtual IEnumerable<FilterAttribute> GetControllerAttributes(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+        protected virtual IEnumerable<FilterAttribute> GetControllerAttributes(
+            ControllerContext controllerContext,
+            ActionDescriptor actionDescriptor
+        )
         {
-            return actionDescriptor.ControllerDescriptor.GetFilterAttributes(_cacheAttributeInstances);
+            return actionDescriptor.ControllerDescriptor.GetFilterAttributes(
+                _cacheAttributeInstances
+            );
         }
 
-        public virtual IEnumerable<Filter> GetFilters(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+        public virtual IEnumerable<Filter> GetFilters(
+            ControllerContext controllerContext,
+            ActionDescriptor actionDescriptor
+        )
         {
             // Results are low in number in the common case so use yield return to avoid creating intermediate collections or nested enumerables
             if (controllerContext.Controller != null)
             {
-                foreach (FilterAttribute attr in GetControllerAttributes(controllerContext, actionDescriptor))
+                foreach (
+                    FilterAttribute attr in GetControllerAttributes(
+                        controllerContext,
+                        actionDescriptor
+                    )
+                )
                 {
                     yield return new Filter(attr, FilterScope.Controller, order: null);
                 }
-                foreach (FilterAttribute attr in GetActionAttributes(controllerContext, actionDescriptor))
+                foreach (
+                    FilterAttribute attr in GetActionAttributes(controllerContext, actionDescriptor)
+                )
                 {
                     yield return new Filter(attr, FilterScope.Action, order: null);
                 }
-            }             
+            }
         }
     }
 }

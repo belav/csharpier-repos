@@ -36,9 +36,7 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
 
             Log("Worker created");
 
-            var receiver = new WorkerReceiver(
-                new StreamReader(Console.OpenStandardInput()),
-                this);
+            var receiver = new WorkerReceiver(new StreamReader(Console.OpenStandardInput()), this);
 
             receiver.Start();
 
@@ -55,9 +53,17 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
             Log("Worker sent pong command with value {0}.", value);
         }
 
-        public async Task ConnectAsync(string targetAddress, HttpTransportType transportType, int numberOfConnections)
+        public async Task ConnectAsync(
+            string targetAddress,
+            HttpTransportType transportType,
+            int numberOfConnections
+        )
         {
-            Log("Worker received connect command with target address {0} and number of connections {1}", targetAddress, numberOfConnections);
+            Log(
+                "Worker received connect command with target address {0} and number of connections {1}",
+                targetAddress,
+                numberOfConnections
+            );
 
             _targetConnectionCount += numberOfConnections;
             for (var count = 0; count < numberOfConnections; count++)
@@ -73,7 +79,11 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
 
         public Task StartTestAsync(TimeSpan sendInterval, int sendBytes)
         {
-            Log("Worker received start test command with interval {0} and message size {1}.", sendInterval, sendBytes);
+            Log(
+                "Worker received start test command with interval {0} and message size {1}.",
+                sendInterval,
+                sendBytes
+            );
 
             foreach (var client in _clients)
             {
@@ -164,9 +174,7 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
                 {
                     await Task.Delay(5000, cancellationToken);
                 }
-                catch (TaskCanceledException)
-                {
-                }
+                catch (TaskCanceledException) { }
             }
         }
     }

@@ -1,24 +1,26 @@
 //------------------------------------------------------------------------------
 // <copyright file="ValidatedMobileControlConverter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.UI.Design.MobileControls.Converters
 {
-    using System.Diagnostics;
     using System.Collections;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Web.UI;
     using System.Web.UI.Design.MobileControls.Adapters;
     using System.Web.UI.MobileControls;
 
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
-    internal class ValidatedMobileControlConverter: StringConverter
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
+    internal class ValidatedMobileControlConverter : StringConverter
     {
         private Form GetContainingForm(MobileControl mc)
         {
@@ -42,7 +44,7 @@ namespace System.Web.UI.Design.MobileControls.Converters
             return null;
         }
 
-        protected virtual Object [] GetValidatableControls(Object instance)
+        protected virtual Object[] GetValidatableControls(Object instance)
         {
             System.Web.UI.MobileControls.BaseValidator thisValidator = null;
 
@@ -51,7 +53,7 @@ namespace System.Web.UI.Design.MobileControls.Converters
                 Array controlList = (Array)instance;
                 Debug.Assert(controlList.Length > 0);
 
-                thisValidator = (BaseValidator) controlList.GetValue(0);
+                thisValidator = (BaseValidator)controlList.GetValue(0);
                 Form firstForm = GetContainingForm(thisValidator);
 
                 for (int i = 1; i < controlList.Length; i++)
@@ -66,15 +68,14 @@ namespace System.Web.UI.Design.MobileControls.Converters
 
             if (instance is System.Web.UI.MobileControls.BaseValidator)
             {
-                thisValidator = (System.Web.UI.MobileControls.BaseValidator) instance;
+                thisValidator = (System.Web.UI.MobileControls.BaseValidator)instance;
             }
             else if (instance is ChoicePropertyFilter)
             {
-                IDeviceSpecificDesigner designer = 
-                    ((ChoicePropertyFilter)instance).Designer;
+                IDeviceSpecificDesigner designer = ((ChoicePropertyFilter)instance).Designer;
 
-                thisValidator = designer.UnderlyingObject 
-                    as System.Web.UI.MobileControls.BaseValidator;
+                thisValidator =
+                    designer.UnderlyingObject as System.Web.UI.MobileControls.BaseValidator;
             }
 
             if (thisValidator == null)
@@ -95,7 +96,7 @@ namespace System.Web.UI.Design.MobileControls.Converters
                     container = site.Container;
                     Debug.Assert(container != null);
 
-                    foreach(IComponent component in container.Components)
+                    foreach (IComponent component in container.Components)
                     {
                         Control control = component as Control;
                         if (control != null && CanBeValidated(control))
@@ -147,13 +148,12 @@ namespace System.Web.UI.Design.MobileControls.Converters
             }
 
             // Control must have a ValidationProperty attribute
-            ValidationPropertyAttribute valProp = 
-                (ValidationPropertyAttribute) 
+            ValidationPropertyAttribute valProp = (ValidationPropertyAttribute)
                 TypeDescriptor.GetAttributes(control)[typeof(ValidationPropertyAttribute)];
 
             if (null != valProp && null != valProp.Name)
             {
-                return true;    
+                return true;
             }
 
             return false;
@@ -181,7 +181,7 @@ namespace System.Web.UI.Design.MobileControls.Converters
                 return null;
             }
 
-            Object [] objValues = GetValidatableControls(context.Instance);
+            Object[] objValues = GetValidatableControls(context.Instance);
             if (objValues != null)
             {
                 return new StandardValuesCollection(objValues);
@@ -189,7 +189,7 @@ namespace System.Web.UI.Design.MobileControls.Converters
             else
             {
                 return null;
-            }            
+            }
         }
 
         /// <summary>
@@ -203,7 +203,7 @@ namespace System.Web.UI.Design.MobileControls.Converters
         /// </param>
         /// <returns>
         ///    <para>
-        ///    <see langword='true'/> if the specified context contains exclusive standard 
+        ///    <see langword='true'/> if the specified context contains exclusive standard
         ///       values, otherwise <see langword='false'/>.
         ///    </para>
         /// </returns>
@@ -223,13 +223,13 @@ namespace System.Web.UI.Design.MobileControls.Converters
         /// </param>
         /// <returns>
         ///    <para>
-        ///    <see langword='true'/> if the specified context conatins supported standard 
+        ///    <see langword='true'/> if the specified context conatins supported standard
         ///       values, otherwise <see langword='false'/>.
         ///    </para>
         /// </returns>
         public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
         {
             return true;
-        }        
-    }    
+        }
+    }
 }

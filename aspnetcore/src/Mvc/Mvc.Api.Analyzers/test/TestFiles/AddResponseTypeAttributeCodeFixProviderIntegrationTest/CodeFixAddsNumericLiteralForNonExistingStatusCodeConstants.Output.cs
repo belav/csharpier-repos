@@ -4,7 +4,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers._OUTPUT_
 {
     [ApiController]
     [Route("[controller]/[action]")]
-    public class CodeFixAddsNumericLiteralForNonExistingStatusCodeConstantsController : ControllerBase
+    public class CodeFixAddsNumericLiteralForNonExistingStatusCodeConstantsController
+        : ControllerBase
     {
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(345)]

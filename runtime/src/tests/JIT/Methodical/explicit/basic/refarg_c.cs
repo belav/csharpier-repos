@@ -12,7 +12,10 @@ namespace Test_refarg_c_cs
         private AA _self = null;
         public char mm = 'Q';
 
-        public AA() { _self = this; }
+        public AA()
+        {
+            _self = this;
+        }
 
         ~AA()
         {
@@ -33,6 +36,7 @@ namespace Test_refarg_c_cs
     {
         private static AA s_aa = new AA();
         public static int exitCode = 1;
+
         private static void Litter()
         {
             GC.Collect();

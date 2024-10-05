@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,21 +30,19 @@ using System.Windows.Converters;
 using System.Windows.Markup;
 using NUnit.Framework;
 
-namespace MonoTests.System.Windows.Markup {
+namespace MonoTests.System.Windows.Markup
+{
+    [TestFixture]
+    public class ConstructorArgumentAttributeTest
+    {
+        [Test]
+        public void CtorTest()
+        {
+            ConstructorArgumentAttribute attr = new ConstructorArgumentAttribute("argName");
+            Assert.AreEqual("argName", attr.ArgumentName);
 
-	[TestFixture]
-	public class ConstructorArgumentAttributeTest
-	{
-		[Test]
-		public void CtorTest ()
-		{
-			ConstructorArgumentAttribute attr = new ConstructorArgumentAttribute ("argName");
-			Assert.AreEqual ("argName", attr.ArgumentName);
-
-			attr = new ConstructorArgumentAttribute (null);
-			Assert.IsNull (attr.ArgumentName);
-		}
-
-	}
-
+            attr = new ConstructorArgumentAttribute(null);
+            Assert.IsNull(attr.ArgumentName);
+        }
+    }
 }

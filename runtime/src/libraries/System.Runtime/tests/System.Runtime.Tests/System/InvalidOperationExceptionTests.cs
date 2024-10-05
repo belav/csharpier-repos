@@ -13,7 +13,11 @@ namespace System.Tests
         public static void Ctor_Empty()
         {
             var exception = new InvalidOperationException();
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_INVALIDOPERATION, validateMessage: false);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_INVALIDOPERATION,
+                validateMessage: false
+            );
         }
 
         [Fact]
@@ -21,7 +25,11 @@ namespace System.Tests
         {
             string message = "invalid operation";
             var exception = new InvalidOperationException(message);
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_INVALIDOPERATION, message: message);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_INVALIDOPERATION,
+                message: message
+            );
         }
 
         [Fact]
@@ -30,7 +38,12 @@ namespace System.Tests
             string message = "invalid operation";
             var innerException = new Exception("Inner exception");
             var exception = new InvalidOperationException(message, innerException);
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_INVALIDOPERATION, innerException: innerException, message: message);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_INVALIDOPERATION,
+                innerException: innerException,
+                message: message
+            );
         }
     }
 }

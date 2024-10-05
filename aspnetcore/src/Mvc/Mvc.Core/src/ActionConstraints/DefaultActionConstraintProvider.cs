@@ -28,9 +28,7 @@ internal sealed class DefaultActionConstraintProvider : IActionConstraintProvide
     }
 
     /// <inheritdoc />
-    public void OnProvidersExecuted(ActionConstraintProviderContext context)
-    {
-    }
+    public void OnProvidersExecuted(ActionConstraintProviderContext context) { }
 
     private static void ProvideConstraint(ActionConstraintItem item, IServiceProvider services)
     {

@@ -49,6 +49,6 @@ namespace System.Diagnostics
         /// <devdoc>
         ///     Indicates a process that has priority above Normal but below High.
         /// </devdoc>
-        AboveNormal = 0x8000
+        AboveNormal = 0x8000,
     }
 }

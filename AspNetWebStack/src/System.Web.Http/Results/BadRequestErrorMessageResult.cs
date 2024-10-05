@@ -25,23 +25,34 @@ namespace System.Web.Http.Results
         /// <param name="contentNegotiator">The content negotiator to handle content negotiation.</param>
         /// <param name="request">The request message which led to this result.</param>
         /// <param name="formatters">The formatters to use to negotiate and format the content.</param>
-        public BadRequestErrorMessageResult(string message, IContentNegotiator contentNegotiator,
-            HttpRequestMessage request, IEnumerable<MediaTypeFormatter> formatters)
-            : this(message, new NegotiatedContentResult<HttpError>.DirectDependencyProvider(contentNegotiator, request,
-                formatters))
-        {
-        }
+        public BadRequestErrorMessageResult(
+            string message,
+            IContentNegotiator contentNegotiator,
+            HttpRequestMessage request,
+            IEnumerable<MediaTypeFormatter> formatters
+        )
+            : this(
+                message,
+                new NegotiatedContentResult<HttpError>.DirectDependencyProvider(
+                    contentNegotiator,
+                    request,
+                    formatters
+                )
+            ) { }
 
         /// <summary>Initializes a new instance of the <see cref="BadRequestErrorMessageResult"/> class.</summary>
         /// <param name="message">The user-visible error message.</param>
         /// <param name="controller">The controller from which to obtain the dependencies needed for execution.</param>
         public BadRequestErrorMessageResult(string message, ApiController controller)
-            : this(message, new NegotiatedContentResult<HttpError>.ApiControllerDependencyProvider(controller))
-        {
-        }
+            : this(
+                message,
+                new NegotiatedContentResult<HttpError>.ApiControllerDependencyProvider(controller)
+            ) { }
 
-        private BadRequestErrorMessageResult(string message,
-            NegotiatedContentResult<HttpError>.IDependencyProvider dependencies)
+        private BadRequestErrorMessageResult(
+            string message,
+            NegotiatedContentResult<HttpError>.IDependencyProvider dependencies
+        )
         {
             if (message == null)
             {
@@ -87,8 +98,13 @@ namespace System.Web.Http.Results
         private HttpResponseMessage Execute()
         {
             HttpError error = new HttpError(_message);
-            return NegotiatedContentResult<HttpError>.Execute(HttpStatusCode.BadRequest, error,
-                _dependencies.ContentNegotiator, _dependencies.Request, _dependencies.Formatters);
+            return NegotiatedContentResult<HttpError>.Execute(
+                HttpStatusCode.BadRequest,
+                error,
+                _dependencies.ContentNegotiator,
+                _dependencies.Request,
+                _dependencies.Formatters
+            );
         }
     }
 }

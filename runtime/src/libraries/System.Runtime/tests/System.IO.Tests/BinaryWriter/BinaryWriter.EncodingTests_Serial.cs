@@ -17,7 +17,10 @@ namespace System.IO.Tests
     {
         [OuterLoop("Allocates a lot of memory")]
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.Is64BitProcess))]
-        [SkipOnPlatform(TestPlatforms.Android, "OOM on Android could be uncatchable & kill the test runner")]
+        [SkipOnPlatform(
+            TestPlatforms.Android,
+            "OOM on Android could be uncatchable & kill the test runner"
+        )]
         public unsafe void WriteChars_VeryLargeArray_DoesNotOverflow()
         {
             const nuint INT32_OVERFLOW_SIZE = (nuint)int.MaxValue + 3;
@@ -27,19 +30,31 @@ namespace System.IO.Tests
             {
                 try
                 {
-                    unmanagedBuffer = SafeBufferUtil.CreateSafeBuffer(INT32_OVERFLOW_SIZE * sizeof(byte));
+                    unmanagedBuffer = SafeBufferUtil.CreateSafeBuffer(
+                        INT32_OVERFLOW_SIZE * sizeof(byte)
+                    );
                 }
                 catch (OutOfMemoryException)
                 {
-                    throw new SkipTestException($"Unable to execute {nameof(WriteChars_VeryLargeArray_DoesNotOverflow)} due to OOM"); // skip test in low-mem conditions
+                    throw new SkipTestException(
+                        $"Unable to execute {nameof(WriteChars_VeryLargeArray_DoesNotOverflow)} due to OOM"
+                    ); // skip test in low-mem conditions
                 }
 
                 Assert.True((long)unmanagedBuffer.ByteLength > int.MaxValue);
 
                 // reuse same memory for input and output to avoid allocating more memory and OOMs
-                Span<char> span = new Span<char>((char*)unmanagedBuffer.DangerousGetHandle(), (int)(INT32_OVERFLOW_SIZE / sizeof(char)));
+                Span<char> span = new Span<char>(
+                    (char*)unmanagedBuffer.DangerousGetHandle(),
+                    (int)(INT32_OVERFLOW_SIZE / sizeof(char))
+                );
                 span.Fill('\u0224'); // LATIN CAPITAL LETTER Z WITH HOOK
-                Stream outStream = new UnmanagedMemoryStream(unmanagedBuffer, 0, (long)unmanagedBuffer.ByteLength, FileAccess.ReadWrite);
+                Stream outStream = new UnmanagedMemoryStream(
+                    unmanagedBuffer,
+                    0,
+                    (long)unmanagedBuffer.ByteLength,
+                    FileAccess.ReadWrite
+                );
                 BinaryWriter writer = new BinaryWriter(outStream);
 
                 writer.Write(span); // will write slightly more than int.MaxValue bytes to the output

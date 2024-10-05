@@ -7,6 +7,9 @@ namespace System.Web.Mvc
 {
     public abstract class ModelValidatorProvider
     {
-        public abstract IEnumerable<ModelValidator> GetValidators(ModelMetadata metadata, ControllerContext context);
+        public abstract IEnumerable<ModelValidator> GetValidators(
+            ModelMetadata metadata,
+            ControllerContext context
+        );
     }
 }

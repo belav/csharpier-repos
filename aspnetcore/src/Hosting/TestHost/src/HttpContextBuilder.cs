@@ -13,12 +13,14 @@ internal sealed class HttpContextBuilder : IHttpBodyControlFeature, IHttpResetFe
     private readonly bool _preserveExecutionContext;
     private readonly HttpContext _httpContext;
 
-    private readonly TaskCompletionSource<HttpContext> _responseTcs = new TaskCompletionSource<HttpContext>(TaskCreationOptions.RunContinuationsAsynchronously);
+    private readonly TaskCompletionSource<HttpContext> _responseTcs =
+        new TaskCompletionSource<HttpContext>(TaskCreationOptions.RunContinuationsAsynchronously);
     private readonly ResponseBodyReaderStream _responseReaderStream;
     private readonly ResponseBodyPipeWriter _responsePipeWriter;
     private readonly ResponseFeature _responseFeature;
     private readonly RequestLifetimeFeature _requestLifetimeFeature;
-    private readonly ResponseTrailersFeature _responseTrailersFeature = new ResponseTrailersFeature();
+    private readonly ResponseTrailersFeature _responseTrailersFeature =
+        new ResponseTrailersFeature();
     private bool _pipelineFinished;
     private bool _returningResponse;
     private object? _testContext;
@@ -27,7 +29,11 @@ internal sealed class HttpContextBuilder : IHttpBodyControlFeature, IHttpResetFe
     private Action<HttpContext>? _responseReadCompleteCallback;
     private Func<PipeWriter, Task>? _sendRequestStream;
 
-    internal HttpContextBuilder(ApplicationWrapper application, bool allowSynchronousIO, bool preserveExecutionContext)
+    internal HttpContextBuilder(
+        ApplicationWrapper application,
+        bool allowSynchronousIO,
+        bool preserveExecutionContext
+    )
     {
         _application = application ?? throw new ArgumentNullException(nameof(application));
         AllowSynchronousIO = allowSynchronousIO;
@@ -43,9 +49,16 @@ internal sealed class HttpContextBuilder : IHttpBodyControlFeature, IHttpResetFe
         _requestPipe = new Pipe();
 
         var responsePipe = new Pipe();
-        _responseReaderStream = new ResponseBodyReaderStream(responsePipe, ClientInitiatedAbort, ResponseBodyReadComplete);
+        _responseReaderStream = new ResponseBodyReaderStream(
+            responsePipe,
+            ClientInitiatedAbort,
+            ResponseBodyReadComplete
+        );
         _responsePipeWriter = new ResponseBodyPipeWriter(responsePipe, ReturnResponseMessageAsync);
-        _responseFeature.Body = new ResponseBodyWriterStream(_responsePipeWriter, () => AllowSynchronousIO);
+        _responseFeature.Body = new ResponseBodyWriterStream(
+            _responsePipeWriter,
+            () => AllowSynchronousIO
+        );
         _responseFeature.BodyWriter = _responsePipeWriter;
 
         _httpContext.Features.Set<IHttpBodyControlFeature>(this);
@@ -72,7 +85,9 @@ internal sealed class HttpContextBuilder : IHttpBodyControlFeature, IHttpResetFe
         _sendRequestStream = sendRequestStream;
     }
 
-    internal void RegisterResponseReadCompleteCallback(Action<HttpContext> responseReadCompleteCallback)
+    internal void RegisterResponseReadCompleteCallback(
+        Action<HttpContext> responseReadCompleteCallback
+    )
     {
         _responseReadCompleteCallback = responseReadCompleteCallback;
     }
@@ -89,8 +104,10 @@ internal sealed class HttpContextBuilder : IHttpBodyControlFeature, IHttpResetFe
         async Task RunRequestAsync()
         {
             // HTTP/2 specific features must be added after the request has been configured.
-            if (HttpProtocol.IsHttp2(_httpContext.Request.Protocol) ||
-                HttpProtocol.IsHttp3(_httpContext.Request.Protocol))
+            if (
+                HttpProtocol.IsHttp2(_httpContext.Request.Protocol)
+                || HttpProtocol.IsHttp3(_httpContext.Request.Protocol)
+            )
             {
                 _httpContext.Features.Set<IHttpResetFeature>(this);
             }
@@ -154,14 +171,22 @@ internal sealed class HttpContextBuilder : IHttpBodyControlFeature, IHttpResetFe
         // Async offload, don't let the test code block the caller.
         if (_preserveExecutionContext)
         {
-            _ = Task.Factory.StartNew(RunRequestAsync, default, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+            _ = Task.Factory.StartNew(
+                RunRequestAsync,
+                default,
+                TaskCreationOptions.DenyChildAttach,
+                TaskScheduler.Default
+            );
         }
         else
         {
-            ThreadPool.UnsafeQueueUserWorkItem(_ =>
-            {
-                _ = RunRequestAsync();
-            }, null);
+            ThreadPool.UnsafeQueueUserWorkItem(
+                _ =>
+                {
+                    _ = RunRequestAsync();
+                },
+                null
+            );
         }
 
         return _responseTcs.Task;
@@ -197,7 +222,10 @@ internal sealed class HttpContextBuilder : IHttpBodyControlFeature, IHttpResetFe
         }
         catch (Exception ex)
         {
-            throw new InvalidOperationException("An error occurred when completing the request. Request delegate may have finished while there is a pending read of the request body.", ex);
+            throw new InvalidOperationException(
+                "An error occurred when completing the request. Request delegate may have finished while there is a pending read of the request body.",
+                ex
+            );
         }
     }
 
@@ -234,17 +262,20 @@ internal sealed class HttpContextBuilder : IHttpBodyControlFeature, IHttpResetFe
             {
                 newFeatures[pair.Key] = pair.Value;
             }
-            var serverResponseFeature = _httpContext.Features.GetRequiredFeature<IHttpResponseFeature>();
+            var serverResponseFeature =
+                _httpContext.Features.GetRequiredFeature<IHttpResponseFeature>();
             // The client gets a deep copy of this so they can interact with the body stream independently of the server.
             var clientResponseFeature = new HttpResponseFeature()
             {
                 StatusCode = serverResponseFeature.StatusCode,
                 ReasonPhrase = serverResponseFeature.ReasonPhrase,
                 Headers = serverResponseFeature.Headers,
-                Body = _responseReaderStream
+                Body = _responseReaderStream,
             };
             newFeatures.Set<IHttpResponseFeature>(clientResponseFeature);
-            newFeatures.Set<IHttpResponseBodyFeature>(new StreamResponseBodyFeature(_responseReaderStream));
+            newFeatures.Set<IHttpResponseBodyFeature>(
+                new StreamResponseBodyFeature(_responseReaderStream)
+            );
             _responseTcs.TrySetResult(new DefaultHttpContext(newFeatures));
         }
     }

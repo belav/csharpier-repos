@@ -22,8 +22,10 @@ namespace System.Formats.Cbor
         /// <para>The written data is not accepted under the current conformance mode.</para></exception>
         public void WriteSingle(float value)
         {
-            if (!CborConformanceModeHelpers.RequiresPreservingFloatPrecision(ConformanceMode) &&
-                 TryConvertSingleToHalf(value, out var half))
+            if (
+                !CborConformanceModeHelpers.RequiresPreservingFloatPrecision(ConformanceMode)
+                && TryConvertSingleToHalf(value, out var half)
+            )
             {
                 WriteHalf(half);
             }
@@ -42,8 +44,10 @@ namespace System.Formats.Cbor
         /// <para>The written data is not accepted under the current conformance mode.</para></exception>
         public void WriteDouble(double value)
         {
-            if (!CborConformanceModeHelpers.RequiresPreservingFloatPrecision(ConformanceMode) &&
-                 TryConvertDoubleToSingle(value, out float single))
+            if (
+                !CborConformanceModeHelpers.RequiresPreservingFloatPrecision(ConformanceMode)
+                && TryConvertDoubleToSingle(value, out float single)
+            )
             {
                 if (TryConvertSingleToHalf(single, out var half))
                 {
@@ -59,10 +63,13 @@ namespace System.Formats.Cbor
                 WriteDoubleCore(value);
             }
         }
+
         private void WriteSingleCore(float value)
         {
             EnsureWriteCapacity(1 + sizeof(float));
-            WriteInitialByte(new CborInitialByte(CborMajorType.Simple, CborAdditionalInfo.Additional32BitData));
+            WriteInitialByte(
+                new CborInitialByte(CborMajorType.Simple, CborAdditionalInfo.Additional32BitData)
+            );
             CborHelpers.WriteSingleBigEndian(_buffer.AsSpan(_offset), value);
             _offset += sizeof(float);
             AdvanceDataItemCounters();
@@ -71,7 +78,9 @@ namespace System.Formats.Cbor
         private void WriteDoubleCore(double value)
         {
             EnsureWriteCapacity(1 + sizeof(double));
-            WriteInitialByte(new CborInitialByte(CborMajorType.Simple, CborAdditionalInfo.Additional64BitData));
+            WriteInitialByte(
+                new CborInitialByte(CborMajorType.Simple, CborAdditionalInfo.Additional64BitData)
+            );
             CborHelpers.WriteDoubleBigEndian(_buffer.AsSpan(_offset), value);
             _offset += sizeof(double);
             AdvanceDataItemCounters();
@@ -113,17 +122,25 @@ namespace System.Formats.Cbor
             if (value < (CborSimpleValue)CborAdditionalInfo.Additional8BitData)
             {
                 EnsureWriteCapacity(1);
-                WriteInitialByte(new CborInitialByte(CborMajorType.Simple, (CborAdditionalInfo)value));
+                WriteInitialByte(
+                    new CborInitialByte(CborMajorType.Simple, (CborAdditionalInfo)value)
+                );
             }
-            else if (value <= (CborSimpleValue)CborAdditionalInfo.IndefiniteLength &&
-                     CborConformanceModeHelpers.RequireCanonicalSimpleValueEncodings(ConformanceMode))
+            else if (
+                value <= (CborSimpleValue)CborAdditionalInfo.IndefiniteLength
+                && CborConformanceModeHelpers.RequireCanonicalSimpleValueEncodings(ConformanceMode)
+            )
             {
-                throw new ArgumentOutOfRangeException(SR.Format(SR.Cbor_ConformanceMode_InvalidSimpleValueEncoding, ConformanceMode));
+                throw new ArgumentOutOfRangeException(
+                    SR.Format(SR.Cbor_ConformanceMode_InvalidSimpleValueEncoding, ConformanceMode)
+                );
             }
             else
             {
                 EnsureWriteCapacity(2);
-                WriteInitialByte(new CborInitialByte(CborMajorType.Simple, CborAdditionalInfo.Additional8BitData));
+                WriteInitialByte(
+                    new CborInitialByte(CborMajorType.Simple, CborAdditionalInfo.Additional8BitData)
+                );
                 _buffer[_offset++] = (byte)value;
             }
 
@@ -134,7 +151,8 @@ namespace System.Formats.Cbor
         private static bool TryConvertDoubleToSingle(double value, out float result)
         {
             result = (float)value;
-            return double.IsNaN(value) || BitConverter.DoubleToInt64Bits(result) == BitConverter.DoubleToInt64Bits(value);
+            return double.IsNaN(value)
+                || BitConverter.DoubleToInt64Bits(result) == BitConverter.DoubleToInt64Bits(value);
         }
     }
 }

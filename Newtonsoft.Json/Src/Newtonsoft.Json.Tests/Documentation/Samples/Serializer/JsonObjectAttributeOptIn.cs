@@ -64,7 +64,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             {
                 Id = Guid.NewGuid(),
                 Name = "ImportantLegalDocuments.docx",
-                Size = 50 * 1024
+                Size = 50 * 1024,
             };
 
             string json = JsonConvert.SerializeObject(file, Formatting.Indented);
@@ -76,10 +76,13 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Name"": ""ImportantLegalDocuments.docx"",
   ""Size"": 51200
-}", json);
+}",
+                json
+            );
         }
     }
 }

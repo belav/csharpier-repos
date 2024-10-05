@@ -52,6 +52,7 @@ internal sealed class RequestDelegateFactoryContext
     public bool ReadForm { get; set; }
     public bool ReadFormFile { get; set; }
     public ParameterInfo? FirstFormRequestBodyParameter { get; set; }
+
     // Properties for constructing and managing filters
     public Expression? MethodCall { get; set; }
     public Type[] ArgumentTypes { get; set; } = Array.Empty<Type>();

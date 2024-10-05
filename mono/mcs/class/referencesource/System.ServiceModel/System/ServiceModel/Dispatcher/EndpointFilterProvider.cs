@@ -5,8 +5,8 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Channels;
     using System.Runtime.Serialization;
+    using System.ServiceModel.Channels;
 
     class EndpointFilterProvider
     {
@@ -16,7 +16,10 @@ namespace System.ServiceModel.Dispatcher
         public EndpointFilterProvider(params string[] initiatingActions)
         {
             this.mutex = new object();
-            this.initiatingActions = new SynchronizedCollection<string>(this.mutex, initiatingActions);            
+            this.initiatingActions = new SynchronizedCollection<string>(
+                this.mutex,
+                initiatingActions
+            );
         }
 
         public SynchronizedCollection<string> InitiatingActions
@@ -31,7 +34,7 @@ namespace System.ServiceModel.Dispatcher
                 priority = 1;
                 if (initiatingActions.Count == 0)
                     return new MatchNoneMessageFilter();
-                    
+
                 string[] actions = new string[initiatingActions.Count];
                 int index = 0;
                 for (int i = 0; i < initiatingActions.Count; i++)
@@ -42,13 +45,12 @@ namespace System.ServiceModel.Dispatcher
                         priority = 0;
                         return new MatchAllMessageFilter();
                     }
-                    actions[index] = currentAction;                    
+                    actions[index] = currentAction;
                     ++index;
                 }
 
                 return new ActionMessageFilter(actions);
-            }            
+            }
         }
     }
 }
-

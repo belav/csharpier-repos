@@ -39,14 +39,16 @@ public static class StaticFileExtensions
     /// Files are served from the path specified in <see cref="IWebHostEnvironment.WebRootPath"/>
     /// or <see cref="IWebHostEnvironment.WebRootFileProvider"/> which defaults to the 'wwwroot' subfolder.
     /// </remarks>
-    public static IApplicationBuilder UseStaticFiles(this IApplicationBuilder app, string requestPath)
+    public static IApplicationBuilder UseStaticFiles(
+        this IApplicationBuilder app,
+        string requestPath
+    )
     {
         ArgumentNullException.ThrowIfNull(app);
 
-        return app.UseStaticFiles(new StaticFileOptions
-        {
-            RequestPath = new PathString(requestPath)
-        });
+        return app.UseStaticFiles(
+            new StaticFileOptions { RequestPath = new PathString(requestPath) }
+        );
     }
 
     /// <summary>
@@ -55,7 +57,10 @@ public static class StaticFileExtensions
     /// <param name="app"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public static IApplicationBuilder UseStaticFiles(this IApplicationBuilder app, StaticFileOptions options)
+    public static IApplicationBuilder UseStaticFiles(
+        this IApplicationBuilder app,
+        StaticFileOptions options
+    )
     {
         ArgumentNullException.ThrowIfNull(app);
         ArgumentNullException.ThrowIfNull(options);

@@ -9,10 +9,12 @@ namespace Microsoft.AspNetCore.Mvc;
 /// <inheritdoc />
 /// <typeparam name="TFilter">The <see cref="Type"/> of filter to find.</typeparam>
 [DebuggerDisplay("Type = {ServiceType}, Order = {Order}")]
-public class ServiceFilterAttribute<TFilter> : ServiceFilterAttribute where TFilter : IFilterMetadata
+public class ServiceFilterAttribute<TFilter> : ServiceFilterAttribute
+    where TFilter : IFilterMetadata
 {
     /// <summary>
     /// Instantiates a new <see cref="ServiceFilterAttribute"/> instance.
     /// </summary>
-    public ServiceFilterAttribute() : base(typeof(TFilter)) { }
+    public ServiceFilterAttribute()
+        : base(typeof(TFilter)) { }
 }

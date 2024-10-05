@@ -29,21 +29,22 @@
 using System;
 using System.Xml;
 using Microsoft.Build.BuildEngine;
+using MonoTests.Helpers;
 using NUnit.Framework;
 
-using MonoTests.Helpers;
+namespace MonoTests.Microsoft.Build.BuildEngine.Various
+{
+    [TestFixture]
+    public class Conditions
+    {
+        [Test]
+        public void TestCondition1()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-namespace MonoTests.Microsoft.Build.BuildEngine.Various {
-	[TestFixture]
-	public class Conditions {
-
-		[Test]
-		public void TestCondition1 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
-
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
 						<A Condition='true'></A>
@@ -55,22 +56,23 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
+            proj.LoadXml(documentString);
 
-			Assert.IsNotNull (proj.EvaluatedProperties ["A"], "A1");
-			Assert.IsNull (proj.EvaluatedProperties ["B"], "A2");
-			Assert.IsNotNull (proj.EvaluatedProperties ["C"], "A3");
-			Assert.IsNull (proj.EvaluatedProperties ["D"], "A4");
-			Assert.IsNotNull (proj.EvaluatedProperties ["E"], "A5");
-		}
+            Assert.IsNotNull(proj.EvaluatedProperties["A"], "A1");
+            Assert.IsNull(proj.EvaluatedProperties["B"], "A2");
+            Assert.IsNotNull(proj.EvaluatedProperties["C"], "A3");
+            Assert.IsNull(proj.EvaluatedProperties["D"], "A4");
+            Assert.IsNotNull(proj.EvaluatedProperties["E"], "A5");
+        }
 
-		[Test]
-		public void TestCondition2 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+        [Test]
+        public void TestCondition2()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
 						<A Condition='true or true'></A>
@@ -81,21 +83,22 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
+            proj.LoadXml(documentString);
 
-			Assert.IsNotNull (proj.EvaluatedProperties ["A"], "A1");
-			Assert.IsNull (proj.EvaluatedProperties ["B"], "A2");
-			Assert.IsNotNull (proj.EvaluatedProperties ["C"], "A3");
-			Assert.IsNotNull (proj.EvaluatedProperties ["D"], "A4");
-		}
+            Assert.IsNotNull(proj.EvaluatedProperties["A"], "A1");
+            Assert.IsNull(proj.EvaluatedProperties["B"], "A2");
+            Assert.IsNotNull(proj.EvaluatedProperties["C"], "A3");
+            Assert.IsNotNull(proj.EvaluatedProperties["D"], "A4");
+        }
 
-		[Test]
-		public void TestCondition3 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+        [Test]
+        public void TestCondition3()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
 						<A Condition='true and true'></A>
@@ -106,21 +109,22 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
+            proj.LoadXml(documentString);
 
-			Assert.IsNotNull (proj.EvaluatedProperties ["A"], "A1");
-			Assert.IsNull (proj.EvaluatedProperties ["B"], "A2");
-			Assert.IsNull (proj.EvaluatedProperties ["C"], "A3");
-			Assert.IsNull (proj.EvaluatedProperties ["D"], "A4");
-		}
+            Assert.IsNotNull(proj.EvaluatedProperties["A"], "A1");
+            Assert.IsNull(proj.EvaluatedProperties["B"], "A2");
+            Assert.IsNull(proj.EvaluatedProperties["C"], "A3");
+            Assert.IsNull(proj.EvaluatedProperties["D"], "A4");
+        }
 
-		[Test]
-		public void TestCondition4 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+        [Test]
+        public void TestCondition4()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
 						<A Condition='!true'></A>
@@ -129,19 +133,20 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
+            proj.LoadXml(documentString);
 
-			Assert.IsNull (proj.EvaluatedProperties ["A"], "A1");
-			Assert.IsNotNull (proj.EvaluatedProperties ["B"], "A2");
-		}
+            Assert.IsNull(proj.EvaluatedProperties["A"], "A1");
+            Assert.IsNotNull(proj.EvaluatedProperties["B"], "A2");
+        }
 
-		[Test]
-		public void TestCondition5 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+        [Test]
+        public void TestCondition5()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
 						<a Condition='-1 &lt; 0'></a>
@@ -160,30 +165,31 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
+            proj.LoadXml(documentString);
 
-			Assert.IsNotNull (proj.EvaluatedProperties ["a"], "A1");
-			Assert.IsNotNull (proj.EvaluatedProperties ["b"], "A2");
-			Assert.IsNotNull (proj.EvaluatedProperties ["c"], "A3");
-			Assert.IsNotNull (proj.EvaluatedProperties ["d"], "A4");
-			Assert.IsNull (proj.EvaluatedProperties ["e"], "A5");
-			Assert.IsNotNull (proj.EvaluatedProperties ["f"], "A6");
-			Assert.IsNotNull (proj.EvaluatedProperties ["g"], "A7");
-			Assert.IsNull (proj.EvaluatedProperties ["h"], "A8");
-			Assert.IsNotNull (proj.EvaluatedProperties ["i"], "A1");
-			Assert.IsNotNull (proj.EvaluatedProperties ["j"], "A2");
-			Assert.IsNull (proj.EvaluatedProperties ["k"], "A3");
-			Assert.IsNull (proj.EvaluatedProperties ["l"], "A4");
-		}
+            Assert.IsNotNull(proj.EvaluatedProperties["a"], "A1");
+            Assert.IsNotNull(proj.EvaluatedProperties["b"], "A2");
+            Assert.IsNotNull(proj.EvaluatedProperties["c"], "A3");
+            Assert.IsNotNull(proj.EvaluatedProperties["d"], "A4");
+            Assert.IsNull(proj.EvaluatedProperties["e"], "A5");
+            Assert.IsNotNull(proj.EvaluatedProperties["f"], "A6");
+            Assert.IsNotNull(proj.EvaluatedProperties["g"], "A7");
+            Assert.IsNull(proj.EvaluatedProperties["h"], "A8");
+            Assert.IsNotNull(proj.EvaluatedProperties["i"], "A1");
+            Assert.IsNotNull(proj.EvaluatedProperties["j"], "A2");
+            Assert.IsNull(proj.EvaluatedProperties["k"], "A3");
+            Assert.IsNull(proj.EvaluatedProperties["l"], "A4");
+        }
 
-		[Test]
-		[Category ("NotWorking")]
-		public void TestCondition6 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+        [Test]
+        [Category("NotWorking")]
+        public void TestCondition6()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
 						<A>true</A>
@@ -196,22 +202,23 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
+            proj.LoadXml(documentString);
 
-			Assert.IsNotNull (proj.EvaluatedProperties ["C"], "A1");
-			Assert.IsNull (proj.EvaluatedProperties ["D"], "A2");
-			Assert.IsNotNull (proj.EvaluatedProperties ["E"], "A3");
-			Assert.IsNull (proj.EvaluatedProperties ["F"], "A4");
-		}
+            Assert.IsNotNull(proj.EvaluatedProperties["C"], "A1");
+            Assert.IsNull(proj.EvaluatedProperties["D"], "A2");
+            Assert.IsNotNull(proj.EvaluatedProperties["E"], "A3");
+            Assert.IsNull(proj.EvaluatedProperties["F"], "A4");
+        }
 
-		[Test]
-		[Category ("NotWorking")]
-		public void TestCondition7 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+        [Test]
+        [Category("NotWorking")]
+        public void TestCondition7()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
 						<A>true</A>
@@ -229,17 +236,18 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
-			Assert.IsTrue (proj.Build ("1"), "A1");
-		}
+            proj.LoadXml(documentString);
+            Assert.IsTrue(proj.Build("1"), "A1");
+        }
 
-		[Test]
-		public void TestCondition8 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+        [Test]
+        public void TestCondition8()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
 						<A Condition='true == true'></A>
@@ -251,22 +259,23 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
+            proj.LoadXml(documentString);
 
-			Assert.IsNotNull (proj.EvaluatedProperties ["A"], "A1");
-			Assert.IsNull (proj.EvaluatedProperties ["B"], "A2");
-			Assert.IsNotNull (proj.EvaluatedProperties ["C"], "A3");
-			Assert.IsNull (proj.EvaluatedProperties ["D"], "A4");
-			Assert.IsNotNull (proj.EvaluatedProperties ["E"], "A5");
-		}
+            Assert.IsNotNull(proj.EvaluatedProperties["A"], "A1");
+            Assert.IsNull(proj.EvaluatedProperties["B"], "A2");
+            Assert.IsNotNull(proj.EvaluatedProperties["C"], "A3");
+            Assert.IsNull(proj.EvaluatedProperties["D"], "A4");
+            Assert.IsNotNull(proj.EvaluatedProperties["E"], "A5");
+        }
 
-		[Test]
-		public void TestCondition9 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+        [Test]
+        public void TestCondition9()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
 						<A Condition=""'A' == 'A'""></A>
@@ -277,47 +286,52 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
+            proj.LoadXml(documentString);
 
-			Assert.IsNotNull (proj.EvaluatedProperties ["A"], "A1");
-			Assert.IsNotNull (proj.EvaluatedProperties ["B"], "A2");
-			Assert.IsNotNull (proj.EvaluatedProperties ["C"], "A3");
-			Assert.IsNull (proj.EvaluatedProperties ["D"], "A4");
-		}
+            Assert.IsNotNull(proj.EvaluatedProperties["A"], "A1");
+            Assert.IsNotNull(proj.EvaluatedProperties["B"], "A2");
+            Assert.IsNotNull(proj.EvaluatedProperties["C"], "A3");
+            Assert.IsNull(proj.EvaluatedProperties["D"], "A4");
+        }
 
-		[Test]
-		[Category ("NotDotNet")]
-		public void TestCondition10 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+        [Test]
+        [Category("NotDotNet")]
+        public void TestCondition10()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
 						<A Condition="" !'true' ""></A>
 						<B Condition="" 'on' == 'true' ""></B>
 						<C Condition="" 4 == 4.0 and 04 == 4""></C>
 						<D Condition="" !(false and false) ==  !false or !false ""></D>
-						<E Condition="" Exists ('" + TestResourceHelper.GetFullPathOfResource ("Test/resources/Import.csproj") + @"') ""></E>
+						<E Condition="" Exists ('"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/Import.csproj")
+                + @"') ""></E>
 					</PropertyGroup>
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
+            proj.LoadXml(documentString);
 
-			Assert.IsNull (proj.EvaluatedProperties ["A"], "A1");
-			Assert.IsNotNull (proj.EvaluatedProperties ["B"], "A2");
-			Assert.IsNotNull (proj.EvaluatedProperties ["C"], "A3");
-			Assert.IsNotNull (proj.EvaluatedProperties ["D"], "A4");
-			Assert.IsNotNull (proj.EvaluatedProperties ["E"], "A5");
-		}
-		[Test]
-		public void TestCondition11 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
-			string documentString = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
+            Assert.IsNull(proj.EvaluatedProperties["A"], "A1");
+            Assert.IsNotNull(proj.EvaluatedProperties["B"], "A2");
+            Assert.IsNotNull(proj.EvaluatedProperties["C"], "A3");
+            Assert.IsNotNull(proj.EvaluatedProperties["D"], "A4");
+            Assert.IsNotNull(proj.EvaluatedProperties["E"], "A5");
+        }
+
+        [Test]
+        public void TestCondition11()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
+            string documentString =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 	<PropertyGroup>
 		<FooProp>true</FooProp>
 	</PropertyGroup>
@@ -329,24 +343,25 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 	</ItemGroup>
 </Project>";
 
-			proj.LoadXml (documentString);
+            proj.LoadXml(documentString);
 
-			BuildItemGroup bgp = proj.GetEvaluatedItemsByName ("List1");
-			Assert.IsNotNull (bgp, "Expected values in List1");
-			Assert.AreEqual (3, bgp.Count, "A1");
-			Assert.AreEqual ("fr_a.txt", bgp [0].FinalItemSpec, "A2");
-			Assert.AreEqual ("fr_b.txt", bgp [1].FinalItemSpec, "A3");
-			Assert.AreEqual ("fr_c.txt", bgp [2].FinalItemSpec, "A4");
-		}
+            BuildItemGroup bgp = proj.GetEvaluatedItemsByName("List1");
+            Assert.IsNotNull(bgp, "Expected values in List1");
+            Assert.AreEqual(3, bgp.Count, "A1");
+            Assert.AreEqual("fr_a.txt", bgp[0].FinalItemSpec, "A2");
+            Assert.AreEqual("fr_b.txt", bgp[1].FinalItemSpec, "A3");
+            Assert.AreEqual("fr_c.txt", bgp[2].FinalItemSpec, "A4");
+        }
 
-		// Test shortcircuiting
-		[Test]
-		public void TestCondition12 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+        // Test shortcircuiting
+        [Test]
+        public void TestCondition12()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
 						<A Condition=""'$(NonExistant)' != '' and $(NonExistant)""></A>
@@ -354,18 +369,19 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
+            proj.LoadXml(documentString);
 
-			Assert.IsNull (proj.EvaluatedProperties ["A"], "A1");
-		}
+            Assert.IsNull(proj.EvaluatedProperties["A"], "A1");
+        }
 
-		[Test]
-		public void TestCondition_References ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+        [Test]
+        public void TestCondition_References()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
 						<A Condition=""$([System.String]::new('test').StartsWith(`te`))"">valid</A>
@@ -373,18 +389,19 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
+            proj.LoadXml(documentString);
 
-			Assert.AreEqual ("valid", proj.GetEvaluatedProperty ("A"), "#1");
-		}
+            Assert.AreEqual("valid", proj.GetEvaluatedProperty("A"), "#1");
+        }
 
-		[Test]
-		public void TestHasTrailingSlash1 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+        [Test]
+        public void TestHasTrailingSlash1()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
 						<EmptyProp></EmptyProp>
@@ -401,23 +418,24 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
+            proj.LoadXml(documentString);
 
-			Assert.IsNull (proj.EvaluatedProperties ["A"], "A1");
-			Assert.IsNotNull (proj.EvaluatedProperties ["B"], "A2");
-			Assert.IsNotNull (proj.EvaluatedProperties ["C"], "A3");
-			Assert.IsNull (proj.EvaluatedProperties ["D"], "A4");
-			Assert.IsNull (proj.EvaluatedProperties ["E"], "A5");
-		}
+            Assert.IsNull(proj.EvaluatedProperties["A"], "A1");
+            Assert.IsNotNull(proj.EvaluatedProperties["B"], "A2");
+            Assert.IsNotNull(proj.EvaluatedProperties["C"], "A3");
+            Assert.IsNull(proj.EvaluatedProperties["D"], "A4");
+            Assert.IsNull(proj.EvaluatedProperties["E"], "A5");
+        }
 
-		[Test]
-		[ExpectedException (typeof (InvalidProjectFileException))]
-		public void TestUnknownFunction ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+        [Test]
+        [ExpectedException(typeof(InvalidProjectFileException))]
+        public void TestUnknownFunction()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
 						<A Condition="" NonExistantFunction('$(EmptyProp)') ""></A>
@@ -425,17 +443,18 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
-		}
+            proj.LoadXml(documentString);
+        }
 
-		[Test]
-		[ExpectedException (typeof (InvalidProjectFileException))]
-		public void TestIncorrectCondition1 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+        [Test]
+        [ExpectedException(typeof(InvalidProjectFileException))]
+        public void TestIncorrectCondition1()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
 						<A Condition='x'>A</A>
@@ -443,19 +462,20 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
-		}
+            proj.LoadXml(documentString);
+        }
 
-		// A reference to an item list at position 1 is not allowed in this condition "@(A)".
-		[Test]
-		[ExpectedException (typeof (InvalidProjectFileException))]
-		[Category ("NotWorking")]
-		public void TestIncorrectCondition2 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+        // A reference to an item list at position 1 is not allowed in this condition "@(A)".
+        [Test]
+        [ExpectedException(typeof(InvalidProjectFileException))]
+        [Category("NotWorking")]
+        public void TestIncorrectCondition2()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
 						<A Condition='@(A)'>A</A>
@@ -463,19 +483,20 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
-		}
+            proj.LoadXml(documentString);
+        }
 
-		// Found an unexpected character '%' at position 0 in condition \%(A)\.
-		[Test]
-		[ExpectedException (typeof (InvalidProjectFileException))]
-		[Category ("NotWorking")]
-		public void TestIncorrectCondition3 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+        // Found an unexpected character '%' at position 0 in condition \%(A)\.
+        [Test]
+        [ExpectedException(typeof(InvalidProjectFileException))]
+        [Category("NotWorking")]
+        public void TestIncorrectCondition3()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
 						<A Condition='%(A)'>A</A>
@@ -483,19 +504,20 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
-		}
+            proj.LoadXml(documentString);
+        }
 
-		// Found an unexpected character '%' at position 0 in condition "%(A)\.
-		[Test]
-		[ExpectedException (typeof (InvalidProjectFileException))]
-		[Category ("NotWorking")]
-		public void TestIncorrectCondition4 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+        // Found an unexpected character '%' at position 0 in condition "%(A)\.
+        [Test]
+        [ExpectedException(typeof(InvalidProjectFileException))]
+        [Category("NotWorking")]
+        public void TestIncorrectCondition4()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<ItemGroup>
 						<A Include='a' Condition='%(A)' />
@@ -503,17 +525,18 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
-		}
+            proj.LoadXml(documentString);
+        }
 
-		[Test]
-		[ExpectedException (typeof (InvalidProjectFileException))]
-		public void TestIncorrectCondition5 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+        [Test]
+        [ExpectedException(typeof(InvalidProjectFileException))]
+        public void TestIncorrectCondition5()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<ItemGroup>
 						<A Include='a' Condition="" '  == ''  "" />
@@ -521,17 +544,18 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
-		}
+            proj.LoadXml(documentString);
+        }
 
-		[Test]
-		[ExpectedException (typeof (InvalidProjectFileException))]
-		public void TestIncorrectCondition6 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+        [Test]
+        [ExpectedException(typeof(InvalidProjectFileException))]
+        public void TestIncorrectCondition6()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<ItemGroup>
 						<A Include='a' Condition=""'$(NonExistant)' != '' or $(NonExistant)""/>
@@ -539,8 +563,7 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
-		}
-
-	}
+            proj.LoadXml(documentString);
+        }
+    }
 }

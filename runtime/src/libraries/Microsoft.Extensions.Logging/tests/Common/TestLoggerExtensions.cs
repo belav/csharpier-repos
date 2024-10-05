@@ -22,7 +22,8 @@ namespace Microsoft.Extensions.Logging.Test
         public class ActionMatchedInfo
         {
             public static Action<ILogger, string, string, Exception> MessageDelegate;
-            public const string NamedStringFormat = "Request matched controller '{controller}' and action '{action}'.";
+            public const string NamedStringFormat =
+                "Request matched controller '{controller}' and action '{action}'.";
             public const string FormatString = "Request matched controller '{0}' and action '{1}'.";
 
             static ActionMatchedInfo()
@@ -30,7 +31,8 @@ namespace Microsoft.Extensions.Logging.Test
                 MessageDelegate = LoggerMessage.Define<string, string>(
                     LogLevel.Information,
                     eventId: 1,
-                    formatString: NamedStringFormat);
+                    formatString: NamedStringFormat
+                );
             }
         }
 
@@ -71,7 +73,11 @@ namespace Microsoft.Extensions.Logging.Test
         }
 
         public static void ActionMatched(
-            this ILogger logger, string controller, string action, Exception exception = null)
+            this ILogger logger,
+            string controller,
+            string action,
+            Exception exception = null
+        )
         {
             ActionMatchedInfo.MessageDelegate(logger, controller, action, exception);
         }
@@ -86,12 +92,21 @@ namespace Microsoft.Extensions.Logging.Test
             return ScopeWithOneParameter.ScopeDelegate(logger, requestId);
         }
 
-        public static IDisposable ScopeWithTwoParams(this ILogger logger, string param1, string param2)
+        public static IDisposable ScopeWithTwoParams(
+            this ILogger logger,
+            string param1,
+            string param2
+        )
         {
             return ScopeInfoWithTwoParameters.ScopeDelegate(logger, param1, param2);
         }
 
-        public static IDisposable ScopeWithThreeParams(this ILogger logger, string param1, string param2, int param3)
+        public static IDisposable ScopeWithThreeParams(
+            this ILogger logger,
+            string param1,
+            string param2,
+            int param3
+        )
         {
             return ScopeInfoWithThreeParameters.ScopeDelegate(logger, param1, param2, param3);
         }

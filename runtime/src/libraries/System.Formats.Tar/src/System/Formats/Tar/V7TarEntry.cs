@@ -10,9 +10,7 @@ namespace System.Formats.Tar
     {
         // Constructor called when reading a TarEntry from a TarReader.
         internal V7TarEntry(TarHeader header, TarReader readerOfOrigin)
-            : base(header, readerOfOrigin, TarEntryFormat.V7)
-        {
-        }
+            : base(header, readerOfOrigin, TarEntryFormat.V7) { }
 
         /// <summary>
         /// Initializes a new <see cref="V7TarEntry"/> instance with the specified entry type and entry name.
@@ -25,9 +23,7 @@ namespace System.Formats.Tar
         /// <para>-or-</para>
         /// <para><paramref name="entryType"/> is not supported for creating an entry.</para></exception>
         public V7TarEntry(TarEntryType entryType, string entryName)
-            : base(entryType, entryName, TarEntryFormat.V7, isGea: false)
-        {
-        }
+            : base(entryType, entryName, TarEntryFormat.V7, isGea: false) { }
 
         /// <summary>
         /// Initializes a new <see cref="V7TarEntry"/> instance by converting the specified <paramref name="other"/> entry into the V7 format.
@@ -36,11 +32,10 @@ namespace System.Formats.Tar
         /// <para>-or-</para>
         /// <para>The entry type of <paramref name="other"/> is not supported for conversion to the V7 format.</para></exception>
         public V7TarEntry(TarEntry other)
-            : base(other, TarEntryFormat.V7)
-        {
-        }
+            : base(other, TarEntryFormat.V7) { }
 
         // Determines if the current instance's entry type supports setting a data stream.
-        internal override bool IsDataStreamSetterSupported() => EntryType == TarEntryType.V7RegularFile;
+        internal override bool IsDataStreamSetterSupported() =>
+            EntryType == TarEntryType.V7RegularFile;
     }
 }

@@ -35,7 +35,10 @@ public class RazorClassLibraryTemplateTest : LoggedTest
     {
         var project = await ProjectFactory.CreateProject(Output);
 
-        await project.RunDotNetNewAsync("razorclasslib", args: new[] { "--support-pages-and-views", "true" });
+        await project.RunDotNetNewAsync(
+            "razorclasslib",
+            args: new[] { "--support-pages-and-views", "true" }
+        );
 
         await project.RunDotNetPublishAsync();
 
@@ -47,7 +50,10 @@ public class RazorClassLibraryTemplateTest : LoggedTest
     }
 
     [ConditionalFact]
-    [SkipOnHelix("https://github.com/dotnet/aspnetcore/issues/28090", Queues = HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64)]
+    [SkipOnHelix(
+        "https://github.com/dotnet/aspnetcore/issues/28090",
+        Queues = HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64
+    )]
     public async Task RazorClassLibraryTemplateAsync()
     {
         var project = await ProjectFactory.CreateProject(Output);

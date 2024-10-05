@@ -13,19 +13,40 @@ namespace System.Xml.Tests
         {
             // for function TestMoveToContent1
             {
-                this.AddChild(new CVariation(TestMoveToContent1) { Attribute = new Variation("MoveToContent on Skip XmlDeclaration") { Pri = 0 } });
+                this.AddChild(
+                    new CVariation(TestMoveToContent1)
+                    {
+                        Attribute = new Variation("MoveToContent on Skip XmlDeclaration")
+                        {
+                            Pri = 0,
+                        },
+                    }
+                );
             }
-
 
             // for function TestMoveToContent3
             {
-                this.AddChild(new CVariation(TestMoveToContent3) { Attribute = new Variation("MoveToContent on Read through All invalid Content Node(PI, Comment and whitespace)") { Pri = 0 } });
+                this.AddChild(
+                    new CVariation(TestMoveToContent3)
+                    {
+                        Attribute = new Variation(
+                            "MoveToContent on Read through All invalid Content Node(PI, Comment and whitespace)"
+                        )
+                        {
+                            Pri = 0,
+                        },
+                    }
+                );
             }
-
 
             // for function TestMoveToContent5
             {
-                this.AddChild(new CVariation(TestMoveToContent5) { Attribute = new Variation("MoveToContent on Attribute") { Pri = 0 } });
+                this.AddChild(
+                    new CVariation(TestMoveToContent5)
+                    {
+                        Attribute = new Variation("MoveToContent on Attribute") { Pri = 0 },
+                    }
+                );
             }
         }
     }

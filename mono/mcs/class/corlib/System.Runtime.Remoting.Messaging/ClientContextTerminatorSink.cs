@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,91 +36,92 @@ using System.Runtime.Remoting.Contexts;
 
 namespace System.Runtime.Remoting.Messaging
 {
-	internal class ClientContextTerminatorSink: IMessageSink
-	{
-		Context _context;
+    internal class ClientContextTerminatorSink : IMessageSink
+    {
+        Context _context;
 
-		public ClientContextTerminatorSink(Context ctx)
-		{
-			_context = ctx;
-		}
+        public ClientContextTerminatorSink(Context ctx)
+        {
+            _context = ctx;
+        }
 
-		public IMessage SyncProcessMessage (IMessage msg)
-		{
-			IMessage res;
+        public IMessage SyncProcessMessage(IMessage msg)
+        {
+            IMessage res;
 
-			Context.NotifyGlobalDynamicSinks (true, msg, true, false);
-			_context.NotifyDynamicSinks (true, msg, true, false);
+            Context.NotifyGlobalDynamicSinks(true, msg, true, false);
+            _context.NotifyDynamicSinks(true, msg, true, false);
 
-			if (msg is IConstructionCallMessage)
-			{
-				res = ActivationServices.RemoteActivate ((IConstructionCallMessage)msg);
-			}
-			else
-			{
-				Identity identity = RemotingServices.GetMessageTargetIdentity (msg);
-				res = identity.ChannelSink.SyncProcessMessage (msg);
-			}
+            if (msg is IConstructionCallMessage)
+            {
+                res = ActivationServices.RemoteActivate((IConstructionCallMessage)msg);
+            }
+            else
+            {
+                Identity identity = RemotingServices.GetMessageTargetIdentity(msg);
+                res = identity.ChannelSink.SyncProcessMessage(msg);
+            }
 
-			Context.NotifyGlobalDynamicSinks (false, msg, true, false);
-			_context.NotifyDynamicSinks (false, msg, true, false);
+            Context.NotifyGlobalDynamicSinks(false, msg, true, false);
+            _context.NotifyDynamicSinks(false, msg, true, false);
 
-			return res;
-		}
+            return res;
+        }
 
-		public IMessageCtrl AsyncProcessMessage (IMessage msg, IMessageSink replySink)
-		{
-			if (_context.HasDynamicSinks || Context.HasGlobalDynamicSinks)
-			{
-				Context.NotifyGlobalDynamicSinks (true, msg, true, true);
-				_context.NotifyDynamicSinks (true, msg, true, true);
+        public IMessageCtrl AsyncProcessMessage(IMessage msg, IMessageSink replySink)
+        {
+            if (_context.HasDynamicSinks || Context.HasGlobalDynamicSinks)
+            {
+                Context.NotifyGlobalDynamicSinks(true, msg, true, true);
+                _context.NotifyDynamicSinks(true, msg, true, true);
 
-				// replySink is null when calling a one way method
-				if (replySink != null) replySink = new ClientContextReplySink (_context, replySink);
-			}
-			Identity identity = RemotingServices.GetMessageTargetIdentity (msg);
-			IMessageCtrl res = identity.ChannelSink.AsyncProcessMessage (msg, replySink);
+                // replySink is null when calling a one way method
+                if (replySink != null)
+                    replySink = new ClientContextReplySink(_context, replySink);
+            }
+            Identity identity = RemotingServices.GetMessageTargetIdentity(msg);
+            IMessageCtrl res = identity.ChannelSink.AsyncProcessMessage(msg, replySink);
 
-			if (replySink == null && (_context.HasDynamicSinks || Context.HasGlobalDynamicSinks))
-			{
-				Context.NotifyGlobalDynamicSinks (false, msg, true, true);
-				_context.NotifyDynamicSinks (false, msg, true, true);
-			}
-			return res;
-		}
+            if (replySink == null && (_context.HasDynamicSinks || Context.HasGlobalDynamicSinks))
+            {
+                Context.NotifyGlobalDynamicSinks(false, msg, true, true);
+                _context.NotifyDynamicSinks(false, msg, true, true);
+            }
+            return res;
+        }
 
-		public IMessageSink NextSink 
-		{ 
-			get { return null; }
-		}	
-	}
+        public IMessageSink NextSink
+        {
+            get { return null; }
+        }
+    }
 
-	class ClientContextReplySink: IMessageSink
-	{
-		IMessageSink _replySink;
-		Context _context;
+    class ClientContextReplySink : IMessageSink
+    {
+        IMessageSink _replySink;
+        Context _context;
 
-		public ClientContextReplySink (Context ctx, IMessageSink replySink)
-		{
-			_replySink = replySink;
-			_context = ctx;
-		}
+        public ClientContextReplySink(Context ctx, IMessageSink replySink)
+        {
+            _replySink = replySink;
+            _context = ctx;
+        }
 
-		public IMessage SyncProcessMessage (IMessage msg)
-		{
-			Context.NotifyGlobalDynamicSinks (false, msg, true, true);
-			_context.NotifyDynamicSinks (false, msg, true, true);
-			return _replySink.SyncProcessMessage (msg);
-		}
+        public IMessage SyncProcessMessage(IMessage msg)
+        {
+            Context.NotifyGlobalDynamicSinks(false, msg, true, true);
+            _context.NotifyDynamicSinks(false, msg, true, true);
+            return _replySink.SyncProcessMessage(msg);
+        }
 
-		public IMessageCtrl AsyncProcessMessage (IMessage msg, IMessageSink replySink)
-		{
-			throw new NotSupportedException ();
-		}	
+        public IMessageCtrl AsyncProcessMessage(IMessage msg, IMessageSink replySink)
+        {
+            throw new NotSupportedException();
+        }
 
-		public IMessageSink NextSink 
-		{ 
-			get { return _replySink; }
-		}	
-	}
+        public IMessageSink NextSink
+        {
+            get { return _replySink; }
+        }
+    }
 }

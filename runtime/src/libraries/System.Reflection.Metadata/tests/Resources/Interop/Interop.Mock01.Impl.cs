@@ -7,9 +7,16 @@ namespace MockInterop01.Impl
 {
     public class IFooImplExp : IFoo
     {
-        InteropEnum IFoo.IFooReadOnlyProp { get { return InteropEnum.White; } }
+        InteropEnum IFoo.IFooReadOnlyProp
+        {
+            get { return InteropEnum.White; }
+        }
 
-        ComplexStruct IFoo.MethodForStruct(ref UnionStruct p1, out InteropDeleWithStructArray p2) { p2 = null; return new ComplexStruct(); }
+        ComplexStruct IFoo.MethodForStruct(ref UnionStruct p1, out InteropDeleWithStructArray p2)
+        {
+            p2 = null;
+            return new ComplexStruct();
+        }
 
         string IFoo.this[string p, IFoo p2]
         {
@@ -28,19 +35,18 @@ namespace MockInterop01.Impl
     public struct IBarImplImp : IBar
     {
         public object DoSomething(params string[] ary)
-        { return null; }
+        {
+            return null;
+        }
 
         public object Register(ref object p)
         {
             return p;
         }
-        public void UnRegister(object o)
-        {
-        }
 
-        public void LibFunc(decimal p1, DateTime p2)
-        {
-        }
+        public void UnRegister(object o) { }
+
+        public void LibFunc(decimal p1, DateTime p2) { }
     }
 
     public class EventImpl : IEventEvent
@@ -51,15 +57,20 @@ namespace MockInterop01.Impl
 
         public void Fire1(IFoo p)
         {
-            if (OnEvent01 != null) OnEvent01(p);
+            if (OnEvent01 != null)
+                OnEvent01(p);
         }
+
         public void Fire2(InteropEnum p)
         {
-            if (OnEvent02 != null) OnEvent02(p);
+            if (OnEvent02 != null)
+                OnEvent02(p);
         }
+
         public void Fire3(ComplexStruct p)
         {
-            if (OnEvent03 != null) OnEvent03(p);
+            if (OnEvent03 != null)
+                OnEvent03(p);
         }
     }
 }

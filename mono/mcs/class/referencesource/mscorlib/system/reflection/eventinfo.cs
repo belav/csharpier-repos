@@ -1,10 +1,10 @@
 // ==++==
-// 
+//
 //   Copyright(c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 namespace System.Reflection
 {
@@ -12,9 +12,9 @@ namespace System.Reflection
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
+    using System.Runtime.ConstrainedExecution;
     using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
-    using System.Runtime.ConstrainedExecution;
     using System.Security.Permissions;
     using RuntimeTypeCache = System.RuntimeType.RuntimeTypeCache;
 
@@ -37,8 +37,12 @@ namespace System.Reflection
             if (ReferenceEquals(left, right))
                 return true;
 
-            if ((object)left == null || (object)right == null ||
-                left is RuntimeEventInfo || right is RuntimeEventInfo)
+            if (
+                (object)left == null
+                || (object)right == null
+                || left is RuntimeEventInfo
+                || right is RuntimeEventInfo
+            )
             {
                 return false;
             }
@@ -62,7 +66,10 @@ namespace System.Reflection
         }
 
         #region MemberInfo Overrides
-        public override MemberTypes MemberType { get { return MemberTypes.Event; } }
+        public override MemberTypes MemberType
+        {
+            get { return MemberTypes.Event; }
+        }
         #endregion
 
         #region Public Abstract\Virtual Members
@@ -83,35 +90,38 @@ namespace System.Reflection
         #region Public Members
         public virtual MethodInfo AddMethod
         {
-            get
-            {
-                return GetAddMethod(true);
-            }
+            get { return GetAddMethod(true); }
         }
 
         public virtual MethodInfo RemoveMethod
         {
-            get
-            {
-                return GetRemoveMethod(true);
-            }
+            get { return GetRemoveMethod(true); }
         }
 
         public virtual MethodInfo RaiseMethod
         {
-            get
-            {
-                return GetRaiseMethod(true);
-            }
+            get { return GetRaiseMethod(true); }
         }
 
-        public MethodInfo[] GetOtherMethods() { return GetOtherMethods(false); }
+        public MethodInfo[] GetOtherMethods()
+        {
+            return GetOtherMethods(false);
+        }
 
-        public MethodInfo GetAddMethod() { return GetAddMethod(false); }
-   
-        public MethodInfo GetRemoveMethod() { return GetRemoveMethod(false); }
+        public MethodInfo GetAddMethod()
+        {
+            return GetAddMethod(false);
+        }
 
-        public MethodInfo GetRaiseMethod() { return GetRaiseMethod(false); }
+        public MethodInfo GetRemoveMethod()
+        {
+            return GetRemoveMethod(false);
+        }
+
+        public MethodInfo GetRaiseMethod()
+        {
+            return GetRaiseMethod(false);
+        }
 
         [DebuggerStepThroughAttribute]
         [Diagnostics.DebuggerHidden]
@@ -120,11 +130,18 @@ namespace System.Reflection
             MethodInfo addMethod = GetAddMethod();
 
             if (addMethod == null)
-                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_NoPublicAddMethod"));
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("InvalidOperation_NoPublicAddMethod")
+                );
 
 #if FEATURE_COMINTEROP
-            if (addMethod.ReturnType == typeof(System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken))
-                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_NotSupportedOnWinRTEvent"));
+            if (
+                addMethod.ReturnType
+                == typeof(System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken)
+            )
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("InvalidOperation_NotSupportedOnWinRTEvent")
+                );
 
             // Must be a normal non-WinRT event
             Contract.Assert(addMethod.ReturnType == typeof(void));
@@ -140,14 +157,21 @@ namespace System.Reflection
             MethodInfo removeMethod = GetRemoveMethod();
 
             if (removeMethod == null)
-                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_NoPublicRemoveMethod"));
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("InvalidOperation_NoPublicRemoveMethod")
+                );
 
 #if FEATURE_COMINTEROP
             ParameterInfo[] parameters = removeMethod.GetParametersNoCopy();
             Contract.Assert(parameters != null && parameters.Length == 1);
 
-            if (parameters[0].ParameterType == typeof(System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken))
-                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_NotSupportedOnWinRTEvent"));
+            if (
+                parameters[0].ParameterType
+                == typeof(System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken)
+            )
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("InvalidOperation_NotSupportedOnWinRTEvent")
+                );
 
             // Must be a normal non-WinRT event
             Contract.Assert(parameters[0].ParameterType.BaseType == typeof(MulticastDelegate));
@@ -156,9 +180,9 @@ namespace System.Reflection
             removeMethod.Invoke(target, new object[] { handler });
         }
 
-        public virtual Type EventHandlerType 
+        public virtual Type EventHandlerType
         {
-            get 
+            get
             {
                 MethodInfo m = GetAddMethod(true);
 
@@ -176,17 +200,14 @@ namespace System.Reflection
                 return null;
             }
         }
-        public bool IsSpecialName 
+        public bool IsSpecialName
         {
-            get 
-            {
-                return(Attributes & EventAttributes.SpecialName) != 0;
-            }
+            get { return (Attributes & EventAttributes.SpecialName) != 0; }
         }
 
-        public virtual bool IsMulticast 
+        public virtual bool IsMulticast
         {
-            get 
+            get
             {
                 Type cl = EventHandlerType;
                 Type mc = typeof(MulticastDelegate);
@@ -211,14 +232,29 @@ namespace System.Reflection
             throw new NotImplementedException();
         }
 
-        void _EventInfo.GetIDsOfNames([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId)
+        void _EventInfo.GetIDsOfNames(
+            [In] ref Guid riid,
+            IntPtr rgszNames,
+            uint cNames,
+            uint lcid,
+            IntPtr rgDispId
+        )
         {
             throw new NotImplementedException();
         }
 
-        // If you implement this method, make sure to include _EventInfo.Invoke in VM\DangerousAPIs.h and 
+        // If you implement this method, make sure to include _EventInfo.Invoke in VM\DangerousAPIs.h and
         // include _EventInfo in SystemDomain::IsReflectionInvocationMethod in AppDomain.cpp.
-        void _EventInfo.Invoke(uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr)
+        void _EventInfo.Invoke(
+            uint dispIdMember,
+            [In] ref Guid riid,
+            uint lcid,
+            short wFlags,
+            IntPtr pDispParams,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            IntPtr puArgErr
+        )
         {
             throw new NotImplementedException();
         }
@@ -226,19 +262,20 @@ namespace System.Reflection
     }
 
     [Serializable]
-    internal unsafe sealed class RuntimeEventInfo : EventInfo, ISerializable
+    internal sealed unsafe class RuntimeEventInfo : EventInfo, ISerializable
     {
         #region Private Data Members
         private int m_token;
         private EventAttributes m_flags;
         private string m_name;
+
         [System.Security.SecurityCritical]
         private void* m_utf8name;
         private RuntimeTypeCache m_reflectedTypeCache;
         private RuntimeMethodInfo m_addMethod;
         private RuntimeMethodInfo m_removeMethod;
         private RuntimeMethodInfo m_raiseMethod;
-        private MethodInfo[] m_otherMethod;        
+        private MethodInfo[] m_otherMethod;
         private RuntimeType m_declaringType;
         private BindingFlags m_bindingFlags;
         #endregion
@@ -248,8 +285,14 @@ namespace System.Reflection
         {
             // Used for dummy head node during population
         }
-        [System.Security.SecurityCritical]  // auto-generated
-        internal RuntimeEventInfo(int tkEvent, RuntimeType declaredType, RuntimeTypeCache reflectedTypeCache, out bool isPrivate)
+
+        [System.Security.SecurityCritical] // auto-generated
+        internal RuntimeEventInfo(
+            int tkEvent,
+            RuntimeType declaredType,
+            RuntimeTypeCache reflectedTypeCache,
+            out bool isPrivate
+        )
         {
             Contract.Requires(declaredType != null);
             Contract.Requires(reflectedTypeCache != null);
@@ -258,18 +301,28 @@ namespace System.Reflection
             MetadataImport scope = declaredType.GetRuntimeModule().MetadataImport;
 
             m_token = tkEvent;
-            m_reflectedTypeCache = reflectedTypeCache;        
+            m_reflectedTypeCache = reflectedTypeCache;
             m_declaringType = declaredType;
-            
 
             RuntimeType reflectedType = reflectedTypeCache.GetRuntimeType();
 
             scope.GetEventProps(tkEvent, out m_utf8name, out m_flags);
 
             RuntimeMethodInfo dummy;
-            Associates.AssignAssociates(scope, tkEvent, declaredType, reflectedType, 
-                out m_addMethod, out m_removeMethod, out m_raiseMethod, 
-                out dummy, out dummy, out m_otherMethod, out isPrivate, out m_bindingFlags);
+            Associates.AssignAssociates(
+                scope,
+                tkEvent,
+                declaredType,
+                reflectedType,
+                out m_addMethod,
+                out m_removeMethod,
+                out m_raiseMethod,
+                out dummy,
+                out dummy,
+                out m_otherMethod,
+                out isPrivate,
+                out m_bindingFlags
+            );
         }
         #endregion
 
@@ -282,19 +335,25 @@ namespace System.Reflection
             if ((object)m == null)
                 return false;
 
-            return m.m_token == m_token &&
-                RuntimeTypeHandle.GetModule(m_declaringType).Equals(
-                    RuntimeTypeHandle.GetModule(m.m_declaringType));
+            return m.m_token == m_token
+                && RuntimeTypeHandle
+                    .GetModule(m_declaringType)
+                    .Equals(RuntimeTypeHandle.GetModule(m.m_declaringType));
         }
 
-        internal BindingFlags BindingFlags { get { return m_bindingFlags; } }
+        internal BindingFlags BindingFlags
+        {
+            get { return m_bindingFlags; }
+        }
         #endregion
 
         #region Object Overrides
-        public override String ToString() 
+        public override String ToString()
         {
             if (m_addMethod == null || m_addMethod.GetParametersNoCopy().Length == 0)
-                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_NoPublicAddMethod"));
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("InvalidOperation_NoPublicAddMethod")
+                );
 
             return m_addMethod.GetParametersNoCopy()[0].ParameterType.FormatTypeName() + " " + Name;
         }
@@ -314,13 +373,16 @@ namespace System.Reflection
 
             RuntimeType attributeRuntimeType = attributeType.UnderlyingSystemType as RuntimeType;
 
-            if (attributeRuntimeType == null) 
-                throw new ArgumentException(Environment.GetResourceString("Arg_MustBeType"),"attributeType");
+            if (attributeRuntimeType == null)
+                throw new ArgumentException(
+                    Environment.GetResourceString("Arg_MustBeType"),
+                    "attributeType"
+                );
 
             return CustomAttribute.GetCustomAttributes(this, attributeRuntimeType);
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         public override bool IsDefined(Type attributeType, bool inherit)
         {
             if (attributeType == null)
@@ -329,8 +391,11 @@ namespace System.Reflection
 
             RuntimeType attributeRuntimeType = attributeType.UnderlyingSystemType as RuntimeType;
 
-            if (attributeRuntimeType == null) 
-                throw new ArgumentException(Environment.GetResourceString("Arg_MustBeType"),"attributeType");
+            if (attributeRuntimeType == null)
+                throw new ArgumentException(
+                    Environment.GetResourceString("Arg_MustBeType"),
+                    "attributeType"
+                );
 
             return CustomAttribute.IsDefined(this, attributeRuntimeType);
         }
@@ -342,42 +407,52 @@ namespace System.Reflection
         #endregion
 
         #region MemberInfo Overrides
-        public override MemberTypes MemberType { get { return MemberTypes.Event; } }
-        public override String Name 
+        public override MemberTypes MemberType
         {
-            [System.Security.SecuritySafeCritical]  // auto-generated
-            get 
+            get { return MemberTypes.Event; }
+        }
+        public override String Name
+        {
+            [System.Security.SecuritySafeCritical] // auto-generated
+            get
             {
                 if (m_name == null)
                     m_name = new Utf8String(m_utf8name).ToString();
-                
-                return m_name; 
-            } 
+
+                return m_name;
+            }
         }
-        public override Type DeclaringType { get { return m_declaringType; } }
+        public override Type DeclaringType
+        {
+            get { return m_declaringType; }
+        }
         public override Type ReflectedType
         {
-            get
-            {
-                return ReflectedTypeInternal;
-            }
+            get { return ReflectedTypeInternal; }
         }
 
         private RuntimeType ReflectedTypeInternal
         {
-            get
-            {
-                return m_reflectedTypeCache.GetRuntimeType();
-            }
+            get { return m_reflectedTypeCache.GetRuntimeType(); }
         }
 
-        public override int MetadataToken { get { return m_token; } }
-        public override Module Module { get { return GetRuntimeModule(); } }
-        internal RuntimeModule GetRuntimeModule() { return m_declaringType.GetRuntimeModule(); }
+        public override int MetadataToken
+        {
+            get { return m_token; }
+        }
+        public override Module Module
+        {
+            get { return GetRuntimeModule(); }
+        }
+
+        internal RuntimeModule GetRuntimeModule()
+        {
+            return m_declaringType.GetRuntimeModule();
+        }
         #endregion
 
         #region ISerializable
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             if (info == null)
@@ -389,24 +464,25 @@ namespace System.Reflection
                 Name,
                 ReflectedTypeInternal,
                 null,
-                MemberTypes.Event);
+                MemberTypes.Event
+            );
         }
         #endregion
 
         #region EventInfo Overrides
-        public override MethodInfo[] GetOtherMethods(bool nonPublic) 
+        public override MethodInfo[] GetOtherMethods(bool nonPublic)
         {
             List<MethodInfo> ret = new List<MethodInfo>();
 
             if ((object)m_otherMethod == null)
                 return new MethodInfo[0];
 
-            for(int i = 0; i < m_otherMethod.Length; i ++)
+            for (int i = 0; i < m_otherMethod.Length; i++)
             {
                 if (Associates.IncludeAccessor((MethodInfo)m_otherMethod[i], nonPublic))
                     ret.Add(m_otherMethod[i]);
             }
-            
+
             return ret.ToArray();
         }
 
@@ -434,14 +510,10 @@ namespace System.Reflection
             return m_raiseMethod;
         }
 
-        public override EventAttributes Attributes 
+        public override EventAttributes Attributes
         {
-            get
-            {
-                return m_flags;
-            }
+            get { return m_flags; }
         }
-        #endregion    
+        #endregion
     }
-
 }

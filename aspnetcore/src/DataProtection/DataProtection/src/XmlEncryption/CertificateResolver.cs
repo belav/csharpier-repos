@@ -32,16 +32,21 @@ public class CertificateResolver : ICertificateResolver
             ?? GetCertificateFromStore(StoreLocation.LocalMachine, thumbprint);
     }
 
-    private static X509Certificate2? GetCertificateFromStore(StoreLocation location, string thumbprint)
+    private static X509Certificate2? GetCertificateFromStore(
+        StoreLocation location,
+        string thumbprint
+    )
     {
         var store = new X509Store(location);
         try
         {
             store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
-            var matchingCerts = store.Certificates.Find(X509FindType.FindByThumbprint, thumbprint, validOnly: true);
-            return (matchingCerts != null && matchingCerts.Count > 0)
-                ? matchingCerts[0]
-                : null;
+            var matchingCerts = store.Certificates.Find(
+                X509FindType.FindByThumbprint,
+                thumbprint,
+                validOnly: true
+            );
+            return (matchingCerts != null && matchingCerts.Count > 0) ? matchingCerts[0] : null;
         }
         catch (CryptographicException)
         {
@@ -57,4 +62,3 @@ public class CertificateResolver : ICertificateResolver
         }
     }
 }
-

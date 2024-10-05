@@ -17,7 +17,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal abstract class SourceMemberMethodSymbol : LocalFunctionOrSourceMemberMethodSymbol, IAttributeTargetSymbol
+    internal abstract class SourceMemberMethodSymbol
+        : LocalFunctionOrSourceMemberMethodSymbol,
+            IAttributeTargetSymbol
     {
         // The flags type is used to compact many different bits of information.
         protected struct Flags
@@ -25,7 +27,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // We currently pack everything into a 32 bit int with the following layout:
             //
             // |              |a|b|e|n|vvv|yy|s|r|q|z|kkk|wwwww|
-            // 
+            //
             // w = method kind.  5 bits.
             // k = ref kind.  3 bits.
             // z = isExtensionMethod. 1 bit.
@@ -51,26 +53,33 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             private const int IsExtensionMethodOffset = RefKindOffset + RefKindSize;
             private const int IsExtensionMethodSize = 1;
 
-            private const int IsMetadataVirtualIgnoringInterfaceChangesOffset = IsExtensionMethodOffset + IsExtensionMethodSize;
+            private const int IsMetadataVirtualIgnoringInterfaceChangesOffset =
+                IsExtensionMethodOffset + IsExtensionMethodSize;
             private const int IsMetadataVirtualIgnoringInterfaceChangesSize = 1;
 
-            private const int IsMetadataVirtualOffset = IsMetadataVirtualIgnoringInterfaceChangesOffset + IsMetadataVirtualIgnoringInterfaceChangesSize;
+            private const int IsMetadataVirtualOffset =
+                IsMetadataVirtualIgnoringInterfaceChangesOffset
+                + IsMetadataVirtualIgnoringInterfaceChangesSize;
             private const int IsMetadataVirtualSize = 1;
 
-            private const int IsMetadataVirtualLockedOffset = IsMetadataVirtualOffset + IsMetadataVirtualSize;
+            private const int IsMetadataVirtualLockedOffset =
+                IsMetadataVirtualOffset + IsMetadataVirtualSize;
             private const int IsMetadataVirtualLockedSize = 1;
 
-            private const int ReturnsVoidOffset = IsMetadataVirtualLockedOffset + IsMetadataVirtualLockedSize;
+            private const int ReturnsVoidOffset =
+                IsMetadataVirtualLockedOffset + IsMetadataVirtualLockedSize;
             private const int ReturnsVoidSize = 2;
 
             private const int NullableContextOffset = ReturnsVoidOffset + ReturnsVoidSize;
             private const int NullableContextSize = 3;
             private const int NullableContextMask = (1 << NullableContextSize) - 1;
 
-            private const int IsNullableAnalysisEnabledOffset = NullableContextOffset + NullableContextSize;
+            private const int IsNullableAnalysisEnabledOffset =
+                NullableContextOffset + NullableContextSize;
             private const int IsNullableAnalysisEnabledSize = 1;
 
-            private const int IsExpressionBodiedOffset = IsNullableAnalysisEnabledOffset + IsNullableAnalysisEnabledSize;
+            private const int IsExpressionBodiedOffset =
+                IsNullableAnalysisEnabledOffset + IsNullableAnalysisEnabledSize;
             private const int IsExpressionBodiedSize = 1;
 
             private const int HasAnyBodyOffset = IsExpressionBodiedOffset + IsExpressionBodiedSize;
@@ -84,8 +93,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             private const int HasAnyBodyBit = 1 << HasAnyBodyOffset;
             private const int IsExpressionBodiedBit = 1 << IsExpressionBodiedOffset;
             private const int IsExtensionMethodBit = 1 << IsExtensionMethodOffset;
-            private const int IsMetadataVirtualIgnoringInterfaceChangesBit = 1 << IsMetadataVirtualIgnoringInterfaceChangesOffset;
-            private const int IsMetadataVirtualBit = 1 << IsMetadataVirtualIgnoringInterfaceChangesOffset;
+            private const int IsMetadataVirtualIgnoringInterfaceChangesBit =
+                1 << IsMetadataVirtualIgnoringInterfaceChangesOffset;
+            private const int IsMetadataVirtualBit =
+                1 << IsMetadataVirtualIgnoringInterfaceChangesOffset;
             private const int IsMetadataVirtualLockedBit = 1 << IsMetadataVirtualLockedOffset;
             private const int IsVarargBit = 1 << IsVarargOffset;
 
@@ -110,7 +121,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 int bits = _flags;
                 Debug.Assert((bits & ReturnsVoidIsSetBit) == 0);
                 Debug.Assert(value || (bits & ReturnsVoidBit) == 0);
-                ThreadSafeFlagOperations.Set(ref _flags, ReturnsVoidIsSetBit | (value ? ReturnsVoidBit : 0));
+                ThreadSafeFlagOperations.Set(
+                    ref _flags,
+                    ReturnsVoidIsSetBit | (value ? ReturnsVoidBit : 0)
+                );
             }
 
             public MethodKind MethodKind
@@ -159,13 +173,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // Verify masks are sufficient for values.
                 Debug.Assert(EnumUtilities.ContainsAllValues<MethodKind>(MethodKindMask));
                 Debug.Assert(EnumUtilities.ContainsAllValues<RefKind>(RefKindMask));
-                Debug.Assert(EnumUtilities.ContainsAllValues<NullableContextKind>(NullableContextMask));
+                Debug.Assert(
+                    EnumUtilities.ContainsAllValues<NullableContextKind>(NullableContextMask)
+                );
             }
 #endif
 
             private static bool ModifiersRequireMetadataVirtual(DeclarationModifiers modifiers)
             {
-                return (modifiers & (DeclarationModifiers.Abstract | DeclarationModifiers.Virtual | DeclarationModifiers.Override)) != 0;
+                return (
+                        modifiers
+                        & (
+                            DeclarationModifiers.Abstract
+                            | DeclarationModifiers.Virtual
+                            | DeclarationModifiers.Override
+                        )
+                    ) != 0;
             }
 
             public Flags(
@@ -179,23 +202,33 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 bool isExtensionMethod,
                 bool isNullableAnalysisEnabled,
                 bool isVararg,
-                bool isExplicitInterfaceImplementation)
+                bool isExplicitInterfaceImplementation
+            )
             {
                 Debug.Assert(!returnsVoid || returnsVoidIsSet);
 
-                bool isMetadataVirtual = (isExplicitInterfaceImplementation && (declarationModifiers & DeclarationModifiers.Static) == 0) || ModifiersRequireMetadataVirtual(declarationModifiers);
+                bool isMetadataVirtual =
+                    (
+                        isExplicitInterfaceImplementation
+                        && (declarationModifiers & DeclarationModifiers.Static) == 0
+                    ) || ModifiersRequireMetadataVirtual(declarationModifiers);
 
                 int methodKindInt = ((int)methodKind & MethodKindMask) << MethodKindOffset;
                 int refKindInt = ((int)refKind & RefKindMask) << RefKindOffset;
                 int hasAnyBodyInt = hasAnyBody ? HasAnyBodyBit : 0;
                 int isExpressionBodyInt = isExpressionBodied ? IsExpressionBodiedBit : 0;
                 int isExtensionMethodInt = isExtensionMethod ? IsExtensionMethodBit : 0;
-                int isNullableAnalysisEnabledInt = isNullableAnalysisEnabled ? IsNullableAnalysisEnabledBit : 0;
+                int isNullableAnalysisEnabledInt = isNullableAnalysisEnabled
+                    ? IsNullableAnalysisEnabledBit
+                    : 0;
                 int isVarargInt = isVararg ? IsVarargBit : 0;
-                int isMetadataVirtualIgnoringInterfaceImplementationChangesInt = isMetadataVirtual ? IsMetadataVirtualIgnoringInterfaceChangesBit : 0;
+                int isMetadataVirtualIgnoringInterfaceImplementationChangesInt = isMetadataVirtual
+                    ? IsMetadataVirtualIgnoringInterfaceChangesBit
+                    : 0;
                 int isMetadataVirtualInt = isMetadataVirtual ? IsMetadataVirtualBit : 0;
 
-                _flags = methodKindInt
+                _flags =
+                    methodKindInt
                     | refKindInt
                     | hasAnyBodyInt
                     | isExpressionBodyInt
@@ -218,20 +251,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 bool isExtensionMethod,
                 bool isNullableAnalysisEnabled,
                 bool isVararg,
-                bool isExplicitInterfaceImplementation)
-                : this(methodKind,
-                       refKind,
-                       declarationModifiers,
-                       returnsVoid: returnsVoid,
-                       returnsVoidIsSet: returnsVoidIsSet,
-                       hasAnyBody: false,
-                       isExpressionBodied: isExpressionBodied,
-                       isExtensionMethod: isExtensionMethod,
-                       isNullableAnalysisEnabled: isNullableAnalysisEnabled,
-                       isVararg: isVararg,
-                       isExplicitInterfaceImplementation: isExplicitInterfaceImplementation)
-            {
-            }
+                bool isExplicitInterfaceImplementation
+            )
+                : this(
+                    methodKind,
+                    refKind,
+                    declarationModifiers,
+                    returnsVoid: returnsVoid,
+                    returnsVoidIsSet: returnsVoidIsSet,
+                    hasAnyBody: false,
+                    isExpressionBodied: isExpressionBodied,
+                    isExtensionMethod: isExtensionMethod,
+                    isNullableAnalysisEnabled: isNullableAnalysisEnabled,
+                    isVararg: isVararg,
+                    isExplicitInterfaceImplementation: isExplicitInterfaceImplementation
+                ) { }
 
             public bool IsMetadataVirtual(bool ignoreInterfaceImplementationChanges = false)
             {
@@ -265,12 +299,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             public bool TryGetNullableContext(out byte? value)
             {
-                return ((NullableContextKind)((_flags >> NullableContextOffset) & NullableContextMask)).TryGetByte(out value);
+                return (
+                    (NullableContextKind)((_flags >> NullableContextOffset) & NullableContextMask)
+                ).TryGetByte(out value);
             }
 
             public bool SetNullableContext(byte? value)
             {
-                return ThreadSafeFlagOperations.Set(ref _flags, (((int)value.ToNullableContextFlags() & NullableContextMask) << NullableContextOffset));
+                return ThreadSafeFlagOperations.Set(
+                    ref _flags,
+                    (
+                        ((int)value.ToNullableContextFlags() & NullableContextMask)
+                        << NullableContextOffset
+                    )
+                );
             }
         }
 
@@ -297,10 +339,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return _cachedDiagnostics; }
         }
 
-        internal ImmutableArray<Diagnostic> SetDiagnostics(ImmutableArray<Diagnostic> newSet, out bool diagsWritten)
+        internal ImmutableArray<Diagnostic> SetDiagnostics(
+            ImmutableArray<Diagnostic> newSet,
+            out bool diagsWritten
+        )
         {
-            //return the diagnostics that were actually saved in the event that there were two threads racing. 
-            diagsWritten = ImmutableInterlocked.InterlockedInitialize(ref _cachedDiagnostics, newSet);
+            //return the diagnostics that were actually saved in the event that there were two threads racing.
+            diagsWritten = ImmutableInterlocked.InterlockedInitialize(
+                ref _cachedDiagnostics,
+                newSet
+            );
             return _cachedDiagnostics;
         }
 
@@ -309,7 +357,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SyntaxReference syntaxReferenceOpt,
             Location location,
             bool isIterator,
-            (DeclarationModifiers declarationModifiers, Flags flags) modifiersAndFlags)
+            (DeclarationModifiers declarationModifiers, Flags flags) modifiersAndFlags
+        )
             : base(syntaxReferenceOpt, isIterator)
         {
             Debug.Assert(containingType is not null);
@@ -322,27 +371,45 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             flags = modifiersAndFlags.flags;
         }
 
-        protected void CheckEffectiveAccessibility(TypeWithAnnotations returnType, ImmutableArray<ParameterSymbol> parameters, BindingDiagnosticBag diagnostics)
+        protected void CheckEffectiveAccessibility(
+            TypeWithAnnotations returnType,
+            ImmutableArray<ParameterSymbol> parameters,
+            BindingDiagnosticBag diagnostics
+        )
         {
-            if (this.DeclaredAccessibility <= Accessibility.Private || MethodKind == MethodKind.ExplicitInterfaceImplementation)
+            if (
+                this.DeclaredAccessibility <= Accessibility.Private
+                || MethodKind == MethodKind.ExplicitInterfaceImplementation
+            )
             {
                 return;
             }
 
-            ErrorCode code = (this.MethodKind == MethodKind.Conversion || this.MethodKind == MethodKind.UserDefinedOperator) ?
-                ErrorCode.ERR_BadVisOpReturn :
-                ErrorCode.ERR_BadVisReturnType;
+            ErrorCode code =
+                (
+                    this.MethodKind == MethodKind.Conversion
+                    || this.MethodKind == MethodKind.UserDefinedOperator
+                )
+                    ? ErrorCode.ERR_BadVisOpReturn
+                    : ErrorCode.ERR_BadVisReturnType;
 
-            var useSiteInfo = new CompoundUseSiteInfo<AssemblySymbol>(diagnostics, ContainingAssembly);
+            var useSiteInfo = new CompoundUseSiteInfo<AssemblySymbol>(
+                diagnostics,
+                ContainingAssembly
+            );
             if (!this.IsNoMoreVisibleThan(returnType, ref useSiteInfo))
             {
                 // Inconsistent accessibility: return type '{1}' is less accessible than method '{0}'
                 diagnostics.Add(code, GetFirstLocation(), this, returnType.Type);
             }
 
-            code = (this.MethodKind == MethodKind.Conversion || this.MethodKind == MethodKind.UserDefinedOperator) ?
-                ErrorCode.ERR_BadVisOpParam :
-                ErrorCode.ERR_BadVisParamType;
+            code =
+                (
+                    this.MethodKind == MethodKind.Conversion
+                    || this.MethodKind == MethodKind.UserDefinedOperator
+                )
+                    ? ErrorCode.ERR_BadVisOpParam
+                    : ErrorCode.ERR_BadVisParamType;
 
             foreach (var parameter in parameters)
             {
@@ -356,7 +423,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             diagnostics.Add(GetFirstLocation(), useSiteInfo);
         }
 
-        protected void CheckFileTypeUsage(TypeWithAnnotations returnType, ImmutableArray<ParameterSymbol> parameters, BindingDiagnosticBag diagnostics)
+        protected void CheckFileTypeUsage(
+            TypeWithAnnotations returnType,
+            ImmutableArray<ParameterSymbol> parameters,
+            BindingDiagnosticBag diagnostics
+        )
         {
             if (ContainingType.HasFileLocalTypes())
             {
@@ -365,14 +436,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (returnType.Type.HasFileLocalTypes())
             {
-                diagnostics.Add(ErrorCode.ERR_FileTypeDisallowedInSignature, GetFirstLocation(), returnType.Type, ContainingType);
+                diagnostics.Add(
+                    ErrorCode.ERR_FileTypeDisallowedInSignature,
+                    GetFirstLocation(),
+                    returnType.Type,
+                    ContainingType
+                );
             }
 
             foreach (var param in parameters)
             {
                 if (param.Type.HasFileLocalTypes())
                 {
-                    diagnostics.Add(ErrorCode.ERR_FileTypeDisallowedInSignature, GetFirstLocation(), param.Type, ContainingType);
+                    diagnostics.Add(
+                        ErrorCode.ERR_FileTypeDisallowedInSignature,
+                        GetFirstLocation(),
+                        param.Type,
+                        ContainingType
+                    );
                 }
             }
         }
@@ -387,9 +468,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool isExtensionMethod,
             bool isNullableAnalysisEnabled,
             bool isVarArg,
-            bool isExplicitInterfaceImplementation)
+            bool isExplicitInterfaceImplementation
+        )
         {
-            return new Flags(methodKind, refKind, declarationModifiers, returnsVoid, returnsVoidIsSet, isExpressionBodied, isExtensionMethod, isNullableAnalysisEnabled, isVarArg, isExplicitInterfaceImplementation);
+            return new Flags(
+                methodKind,
+                refKind,
+                declarationModifiers,
+                returnsVoid,
+                returnsVoidIsSet,
+                isExpressionBodied,
+                isExtensionMethod,
+                isNullableAnalysisEnabled,
+                isVarArg,
+                isExplicitInterfaceImplementation
+            );
         }
 
         protected void SetReturnsVoid(bool returnsVoid)
@@ -461,7 +554,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         // allow the same thread to see the return type and parameters from the syntax (though
                         // they do not yet take on their final values), we return here.
 
-                        // Due to the fact that LazyMethodChecks is potentially reentrant, we must use a 
+                        // Due to the fact that LazyMethodChecks is potentially reentrant, we must use a
                         // reentrant lock to avoid deadlock and cannot assert that at this point method checks
                         // have completed (state.HasComplete(CompletionPart.FinishMethodChecks)).
                     }
@@ -477,52 +570,34 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public sealed override Symbol ContainingSymbol
         {
-            get
-            {
-                return _containingType;
-            }
+            get { return _containingType; }
         }
 
         public override NamedTypeSymbol ContainingType
         {
-            get
-            {
-                return _containingType;
-            }
+            get { return _containingType; }
         }
 
         public override Symbol AssociatedSymbol
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         #region Flags
 
         public override bool ReturnsVoid
         {
-            get
-            {
-                return flags.ReturnsVoid;
-            }
+            get { return flags.ReturnsVoid; }
         }
 
         public sealed override MethodKind MethodKind
         {
-            get
-            {
-                return this.flags.MethodKind;
-            }
+            get { return this.flags.MethodKind; }
         }
 
         public override bool IsExtensionMethod
         {
-            get
-            {
-                return this.flags.IsExtensionMethod;
-            }
+            get { return this.flags.IsExtensionMethod; }
         }
 
         // TODO (tomat): sealed
@@ -538,9 +613,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // then we will mark the method as newslot and specify the
             // override explicitly (see GetExplicitImplementationOverrides
             // in NamedTypeSymbolAdapter.cs).
-            return this.IsOverride ?
-                this.RequiresExplicitOverride(out _) :
-                !this.IsStatic && this.IsMetadataVirtual(ignoreInterfaceImplementationChanges);
+            return this.IsOverride
+                ? this.RequiresExplicitOverride(out _)
+                : !this.IsStatic && this.IsMetadataVirtual(ignoreInterfaceImplementationChanges);
         }
 
         // TODO (tomat): sealed?
@@ -557,106 +632,67 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override Accessibility DeclaredAccessibility
         {
-            get
-            {
-                return ModifierUtils.EffectiveAccessibility(this.DeclarationModifiers);
-            }
+            get { return ModifierUtils.EffectiveAccessibility(this.DeclarationModifiers); }
         }
 
         internal bool HasExternModifier
         {
-            get
-            {
-                return (this.DeclarationModifiers & DeclarationModifiers.Extern) != 0;
-            }
+            get { return (this.DeclarationModifiers & DeclarationModifiers.Extern) != 0; }
         }
 
         public override bool IsExtern
         {
-            get
-            {
-                return HasExternModifier;
-            }
+            get { return HasExternModifier; }
         }
 
         public sealed override bool IsSealed
         {
-            get
-            {
-                return (this.DeclarationModifiers & DeclarationModifiers.Sealed) != 0;
-            }
+            get { return (this.DeclarationModifiers & DeclarationModifiers.Sealed) != 0; }
         }
 
         public sealed override bool IsAbstract
         {
-            get
-            {
-                return (this.DeclarationModifiers & DeclarationModifiers.Abstract) != 0;
-            }
+            get { return (this.DeclarationModifiers & DeclarationModifiers.Abstract) != 0; }
         }
 
         public sealed override bool IsOverride
         {
-            get
-            {
-                return (this.DeclarationModifiers & DeclarationModifiers.Override) != 0;
-            }
+            get { return (this.DeclarationModifiers & DeclarationModifiers.Override) != 0; }
         }
 
         internal bool IsPartial
         {
-            get
-            {
-                return (this.DeclarationModifiers & DeclarationModifiers.Partial) != 0;
-            }
+            get { return (this.DeclarationModifiers & DeclarationModifiers.Partial) != 0; }
         }
 
         public sealed override bool IsVirtual
         {
-            get
-            {
-                return (this.DeclarationModifiers & DeclarationModifiers.Virtual) != 0;
-            }
+            get { return (this.DeclarationModifiers & DeclarationModifiers.Virtual) != 0; }
         }
 
         internal bool IsNew
         {
-            get
-            {
-                return (this.DeclarationModifiers & DeclarationModifiers.New) != 0;
-            }
+            get { return (this.DeclarationModifiers & DeclarationModifiers.New) != 0; }
         }
 
         public sealed override bool IsStatic
         {
-            get
-            {
-                return (this.DeclarationModifiers & DeclarationModifiers.Static) != 0;
-            }
+            get { return (this.DeclarationModifiers & DeclarationModifiers.Static) != 0; }
         }
 
         internal bool IsUnsafe
         {
-            get
-            {
-                return (this.DeclarationModifiers & DeclarationModifiers.Unsafe) != 0;
-            }
+            get { return (this.DeclarationModifiers & DeclarationModifiers.Unsafe) != 0; }
         }
 
         public sealed override bool IsAsync
         {
-            get
-            {
-                return (this.DeclarationModifiers & DeclarationModifiers.Async) != 0;
-            }
+            get { return (this.DeclarationModifiers & DeclarationModifiers.Async) != 0; }
         }
 
         internal override bool IsDeclaredReadOnly
         {
-            get
-            {
-                return (this.DeclarationModifiers & DeclarationModifiers.ReadOnly) != 0;
-            }
+            get { return (this.DeclarationModifiers & DeclarationModifiers.ReadOnly) != 0; }
         }
 
         internal override bool IsInitOnly => false;
@@ -665,7 +701,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                var cc = IsVararg ? Cci.CallingConvention.ExtraArguments : Cci.CallingConvention.Default;
+                var cc = IsVararg
+                    ? Cci.CallingConvention.ExtraArguments
+                    : Cci.CallingConvention.Default;
 
                 if (IsGenericMethod)
                 {
@@ -698,9 +736,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         return (accessor.Body, accessor.ExpressionBody);
 
                     case ArrowExpressionClauseSyntax arrowExpression:
-                        Debug.Assert(arrowExpression.Parent.Kind() == SyntaxKind.PropertyDeclaration ||
-                                     arrowExpression.Parent.Kind() == SyntaxKind.IndexerDeclaration ||
-                                     this is SynthesizedClosureMethod);
+                        Debug.Assert(
+                            arrowExpression.Parent.Kind() == SyntaxKind.PropertyDeclaration
+                                || arrowExpression.Parent.Kind() == SyntaxKind.IndexerDeclaration
+                                || this is SynthesizedClosureMethod
+                        );
                         return (null, arrowExpression);
 
                     case BlockSyntax block:
@@ -721,7 +761,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return null;
             }
 
-            Binder result = (binderFactoryOpt ?? this.DeclaringCompilation.GetBinderFactory(contextNode.SyntaxTree)).GetBinder(contextNode);
+            Binder result = (
+                binderFactoryOpt
+                ?? this.DeclaringCompilation.GetBinderFactory(contextNode.SyntaxTree)
+            ).GetBinder(contextNode);
 #if DEBUG
             Binder current = result;
             do
@@ -732,62 +775,74 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
 
                 current = current.Next;
-            }
-            while (current != null);
+            } while (current != null);
 
             Debug.Assert(current is InMethodBinder);
 #endif
             return result;
         }
 
-        internal abstract ExecutableCodeBinder TryGetBodyBinder(BinderFactory binderFactoryOpt = null, bool ignoreAccessibility = false);
+        internal abstract ExecutableCodeBinder TryGetBodyBinder(
+            BinderFactory binderFactoryOpt = null,
+            bool ignoreAccessibility = false
+        );
 
-        protected ExecutableCodeBinder TryGetBodyBinderFromSyntax(BinderFactory binderFactoryOpt = null, bool ignoreAccessibility = false)
+        protected ExecutableCodeBinder TryGetBodyBinderFromSyntax(
+            BinderFactory binderFactoryOpt = null,
+            bool ignoreAccessibility = false
+        )
         {
             Binder inMethod = TryGetInMethodBinder(binderFactoryOpt);
-            return inMethod == null ? null : new ExecutableCodeBinder(SyntaxNode, this, inMethod.WithAdditionalFlags(ignoreAccessibility ? BinderFlags.IgnoreAccessibility : BinderFlags.None));
+            return inMethod == null
+                ? null
+                : new ExecutableCodeBinder(
+                    SyntaxNode,
+                    this,
+                    inMethod.WithAdditionalFlags(
+                        ignoreAccessibility ? BinderFlags.IgnoreAccessibility : BinderFlags.None
+                    )
+                );
         }
 
         /// <summary>
-        /// Overridden by <see cref="SourceOrdinaryMethodSymbol"/>, 
+        /// Overridden by <see cref="SourceOrdinaryMethodSymbol"/>,
         /// which might return locations of partial methods.
         /// </summary>
-        public override ImmutableArray<Location> Locations
-            => ImmutableArray.Create(_location);
+        public override ImmutableArray<Location> Locations => ImmutableArray.Create(_location);
 
-        public override Location TryGetFirstLocation()
-            => _location;
+        public override Location TryGetFirstLocation() => _location;
 
-        public override string GetDocumentationCommentXml(CultureInfo preferredCulture = null, bool expandIncludes = false, CancellationToken cancellationToken = default(CancellationToken))
+        public override string GetDocumentationCommentXml(
+            CultureInfo preferredCulture = null,
+            bool expandIncludes = false,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            ref var lazyDocComment = ref expandIncludes ? ref this.lazyExpandedDocComment : ref this.lazyDocComment;
-            return SourceDocumentationCommentUtils.GetAndCacheDocumentationComment(this, expandIncludes, ref lazyDocComment);
+            ref var lazyDocComment = ref expandIncludes
+                ? ref this.lazyExpandedDocComment
+                : ref this.lazyDocComment;
+            return SourceDocumentationCommentUtils.GetAndCacheDocumentationComment(
+                this,
+                expandIncludes,
+                ref lazyDocComment
+            );
         }
 
         #endregion
 
         public override ImmutableArray<CustomModifier> RefCustomModifiers
         {
-            get
-            {
-                return ImmutableArray<CustomModifier>.Empty;
-            }
+            get { return ImmutableArray<CustomModifier>.Empty; }
         }
 
         public sealed override ImmutableArray<TypeWithAnnotations> TypeArgumentsWithAnnotations
         {
-            get
-            {
-                return GetTypeParametersAsTypeArguments();
-            }
+            get { return GetTypeParametersAsTypeArguments(); }
         }
 
         public sealed override int Arity
         {
-            get
-            {
-                return TypeParameters.Length;
-            }
+            get { return TypeParameters.Length; }
         }
 
         internal sealed override bool TryGetThisParameter(out ParameterSymbol thisParameter)
@@ -798,7 +853,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return true;
             }
 
-            Interlocked.CompareExchange(ref _lazyThisParameter, new ThisParameterSymbol(this), null);
+            Interlocked.CompareExchange(
+                ref _lazyThisParameter,
+                new ThisParameterSymbol(this),
+                null
+            );
             thisParameter = _lazyThisParameter;
             return true;
         }
@@ -806,10 +865,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         //overridden appropriately in SourceMemberMethodSymbol
         public override ImmutableArray<MethodSymbol> ExplicitInterfaceImplementations
         {
-            get
-            {
-                return ImmutableArray<MethodSymbol>.Empty;
-            }
+            get { return ImmutableArray<MethodSymbol>.Empty; }
         }
 
         internal sealed override OverriddenOrHiddenMembersResult OverriddenOrHiddenMembers
@@ -819,7 +875,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 this.LazyMethodChecks();
                 if (_lazyOverriddenOrHiddenMembers == null)
                 {
-                    Interlocked.CompareExchange(ref _lazyOverriddenOrHiddenMembers, this.MakeOverriddenOrHiddenMembers(), null);
+                    Interlocked.CompareExchange(
+                        ref _lazyOverriddenOrHiddenMembers,
+                        this.MakeOverriddenOrHiddenMembers(),
+                        null
+                    );
                 }
 
                 return _lazyOverriddenOrHiddenMembers;
@@ -836,7 +896,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return state.HasComplete(part);
         }
 
-        internal override void ForceComplete(SourceLocation locationOpt, CancellationToken cancellationToken)
+        internal override void ForceComplete(
+            SourceLocation locationOpt,
+            CancellationToken cancellationToken
+        )
         {
             while (true)
             {
@@ -899,27 +962,34 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                     default:
                         // any other values are completion parts intended for other kinds of symbols
-                        state.NotePartComplete(CompletionPart.All & ~CompletionPart.MethodSymbolAll);
+                        state.NotePartComplete(
+                            CompletionPart.All & ~CompletionPart.MethodSymbolAll
+                        );
                         break;
                 }
 
                 state.SpinWaitComplete(incompletePart, cancellationToken);
             }
 
-done:
-// Don't return until we've seen all of the CompletionParts. This ensures all
-// diagnostics have been reported (not necessarily on this thread).
+            done:
+            // Don't return until we've seen all of the CompletionParts. This ensures all
+            // diagnostics have been reported (not necessarily on this thread).
             CompletionPart allParts = CompletionPart.MethodSymbolAll;
             state.SpinWaitComplete(allParts, cancellationToken);
         }
 
         protected sealed override void NoteAttributesComplete(bool forReturnType)
         {
-            var part = forReturnType ? CompletionPart.ReturnTypeAttributes : CompletionPart.Attributes;
+            var part = forReturnType
+                ? CompletionPart.ReturnTypeAttributes
+                : CompletionPart.Attributes;
             state.NotePartComplete(part);
         }
 
-        internal override void AfterAddingTypeMembersChecks(ConversionsBase conversions, BindingDiagnosticBag diagnostics)
+        internal override void AfterAddingTypeMembersChecks(
+            ConversionsBase conversions,
+            BindingDiagnosticBag diagnostics
+        )
         {
             base.AfterAddingTypeMembersChecks(conversions, diagnostics);
 
@@ -927,13 +997,23 @@ done:
 
             if (IsDeclaredReadOnly && !ContainingType.IsReadOnly)
             {
-                compilation.EnsureIsReadOnlyAttributeExists(diagnostics, _location, modifyCompilation: true);
+                compilation.EnsureIsReadOnlyAttributeExists(
+                    diagnostics,
+                    _location,
+                    modifyCompilation: true
+                );
             }
 
-            if (compilation.ShouldEmitNullableAttributes(this) &&
-                ShouldEmitNullableContextValue(out _))
+            if (
+                compilation.ShouldEmitNullableAttributes(this)
+                && ShouldEmitNullableContextValue(out _)
+            )
             {
-                compilation.EnsureNullableContextAttributeExists(diagnostics, _location, modifyCompilation: true);
+                compilation.EnsureNullableContextAttributeExists(
+                    diagnostics,
+                    _location,
+                    modifyCompilation: true
+                );
             }
         }
 
@@ -977,27 +1057,41 @@ done:
             return flags.IsNullableAnalysisEnabled;
         }
 
-        internal override void AddSynthesizedAttributes(PEModuleBuilder moduleBuilder, ref ArrayBuilder<SynthesizedAttributeData> attributes)
+        internal override void AddSynthesizedAttributes(
+            PEModuleBuilder moduleBuilder,
+            ref ArrayBuilder<SynthesizedAttributeData> attributes
+        )
         {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
             if (IsDeclaredReadOnly && !ContainingType.IsReadOnly)
             {
-                AddSynthesizedAttribute(ref attributes, moduleBuilder.SynthesizeIsReadOnlyAttribute(this));
+                AddSynthesizedAttribute(
+                    ref attributes,
+                    moduleBuilder.SynthesizeIsReadOnlyAttribute(this)
+                );
             }
 
             var compilation = this.DeclaringCompilation;
 
-            if (compilation.ShouldEmitNullableAttributes(this) &&
-                ShouldEmitNullableContextValue(out byte nullableContextValue))
+            if (
+                compilation.ShouldEmitNullableAttributes(this)
+                && ShouldEmitNullableContextValue(out byte nullableContextValue)
+            )
             {
-                AddSynthesizedAttribute(ref attributes, moduleBuilder.SynthesizeNullableContextAttribute(this, nullableContextValue));
+                AddSynthesizedAttribute(
+                    ref attributes,
+                    moduleBuilder.SynthesizeNullableContextAttribute(this, nullableContextValue)
+                );
             }
 
             if (this.RequiresExplicitOverride(out _))
             {
                 // On platforms where it is present, add PreserveBaseOverridesAttribute when a methodimpl is used to override a class method.
-                AddSynthesizedAttribute(ref attributes, moduleBuilder.SynthesizePreserveBaseOverridesAttribute());
+                AddSynthesizedAttribute(
+                    ref attributes,
+                    moduleBuilder.SynthesizePreserveBaseOverridesAttribute()
+                );
             }
 
             bool isAsync = this.IsAsync;
@@ -1011,28 +1105,48 @@ done:
             // The async state machine type is not synthesized until the async method body is rewritten. If we are
             // only emitting metadata the method body will not have been rewritten, and the async state machine
             // type will not have been created. In this case, omit the attribute.
-            if (moduleBuilder.CompilationState.TryGetStateMachineType(this, out NamedTypeSymbol stateMachineType))
+            if (
+                moduleBuilder.CompilationState.TryGetStateMachineType(
+                    this,
+                    out NamedTypeSymbol stateMachineType
+                )
+            )
             {
-                var arg = new TypedConstant(compilation.GetWellKnownType(WellKnownType.System_Type),
-                    TypedConstantKind.Type, stateMachineType.GetUnboundGenericTypeOrSelf());
+                var arg = new TypedConstant(
+                    compilation.GetWellKnownType(WellKnownType.System_Type),
+                    TypedConstantKind.Type,
+                    stateMachineType.GetUnboundGenericTypeOrSelf()
+                );
 
                 if (isAsync && isIterator)
                 {
-                    AddSynthesizedAttribute(ref attributes,
-                        compilation.TrySynthesizeAttribute(WellKnownMember.System_Runtime_CompilerServices_AsyncIteratorStateMachineAttribute__ctor,
-                            ImmutableArray.Create(arg)));
+                    AddSynthesizedAttribute(
+                        ref attributes,
+                        compilation.TrySynthesizeAttribute(
+                            WellKnownMember.System_Runtime_CompilerServices_AsyncIteratorStateMachineAttribute__ctor,
+                            ImmutableArray.Create(arg)
+                        )
+                    );
                 }
                 else if (isAsync)
                 {
-                    AddSynthesizedAttribute(ref attributes,
-                        compilation.TrySynthesizeAttribute(WellKnownMember.System_Runtime_CompilerServices_AsyncStateMachineAttribute__ctor,
-                            ImmutableArray.Create(arg)));
+                    AddSynthesizedAttribute(
+                        ref attributes,
+                        compilation.TrySynthesizeAttribute(
+                            WellKnownMember.System_Runtime_CompilerServices_AsyncStateMachineAttribute__ctor,
+                            ImmutableArray.Create(arg)
+                        )
+                    );
                 }
                 else if (isIterator)
                 {
-                    AddSynthesizedAttribute(ref attributes,
-                        compilation.TrySynthesizeAttribute(WellKnownMember.System_Runtime_CompilerServices_IteratorStateMachineAttribute__ctor,
-                            ImmutableArray.Create(arg)));
+                    AddSynthesizedAttribute(
+                        ref attributes,
+                        compilation.TrySynthesizeAttribute(
+                            WellKnownMember.System_Runtime_CompilerServices_IteratorStateMachineAttribute__ctor,
+                            ImmutableArray.Create(arg)
+                        )
+                    );
                 }
             }
 
@@ -1041,7 +1155,10 @@ done:
                 // Regular async (not async-iterator) kick-off method calls MoveNext, which contains user code.
                 // This means we need to emit DebuggerStepThroughAttribute in order
                 // to have correct stepping behavior during debugging.
-                AddSynthesizedAttribute(ref attributes, compilation.SynthesizeDebuggerStepThroughAttribute());
+                AddSynthesizedAttribute(
+                    ref attributes,
+                    compilation.SynthesizeDebuggerStepThroughAttribute()
+                );
             }
         }
 
@@ -1063,24 +1180,52 @@ done:
             // in that case ("member cannot be both extern and abstract").
         }
 
-        protected void CheckFeatureAvailabilityAndRuntimeSupport(SyntaxNode declarationSyntax, Location location, bool hasBody, BindingDiagnosticBag diagnostics)
+        protected void CheckFeatureAvailabilityAndRuntimeSupport(
+            SyntaxNode declarationSyntax,
+            Location location,
+            bool hasBody,
+            BindingDiagnosticBag diagnostics
+        )
         {
             if (_containingType.IsInterface)
             {
-                if ((!IsStatic || MethodKind is MethodKind.StaticConstructor) &&
-                    (hasBody || IsExplicitInterfaceImplementation))
+                if (
+                    (!IsStatic || MethodKind is MethodKind.StaticConstructor)
+                    && (hasBody || IsExplicitInterfaceImplementation)
+                )
                 {
-                    Binder.CheckFeatureAvailability(declarationSyntax, MessageID.IDS_DefaultInterfaceImplementation, diagnostics, location);
+                    Binder.CheckFeatureAvailability(
+                        declarationSyntax,
+                        MessageID.IDS_DefaultInterfaceImplementation,
+                        diagnostics,
+                        location
+                    );
                 }
 
-                if ((((hasBody || IsExtern) && !(IsStatic && IsVirtual)) || IsExplicitInterfaceImplementation) && !ContainingAssembly.RuntimeSupportsDefaultInterfaceImplementation)
+                if (
+                    (
+                        ((hasBody || IsExtern) && !(IsStatic && IsVirtual))
+                        || IsExplicitInterfaceImplementation
+                    ) && !ContainingAssembly.RuntimeSupportsDefaultInterfaceImplementation
+                )
                 {
-                    diagnostics.Add(ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation, location);
+                    diagnostics.Add(
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        location
+                    );
                 }
 
-                if (((!hasBody && IsAbstract) || IsVirtual) && !IsExplicitInterfaceImplementation && IsStatic && !ContainingAssembly.RuntimeSupportsStaticAbstractMembersInInterfaces)
+                if (
+                    ((!hasBody && IsAbstract) || IsVirtual)
+                    && !IsExplicitInterfaceImplementation
+                    && IsStatic
+                    && !ContainingAssembly.RuntimeSupportsStaticAbstractMembersInInterfaces
+                )
                 {
-                    diagnostics.Add(ErrorCode.ERR_RuntimeDoesNotSupportStaticAbstractMembersInInterfaces, location);
+                    diagnostics.Add(
+                        ErrorCode.ERR_RuntimeDoesNotSupportStaticAbstractMembersInInterfaces,
+                        location
+                    );
                 }
             }
         }

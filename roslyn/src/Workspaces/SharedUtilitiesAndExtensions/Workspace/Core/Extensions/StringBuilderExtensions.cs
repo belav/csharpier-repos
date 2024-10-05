@@ -11,7 +11,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
     internal static class StringBuilderExtensions
     {
-        public static StringBuilder AppendJoinedValues<T>(this StringBuilder builder, string separator, ImmutableArray<T> values, Action<T, StringBuilder> append)
+        public static StringBuilder AppendJoinedValues<T>(
+            this StringBuilder builder,
+            string separator,
+            ImmutableArray<T> values,
+            Action<T, StringBuilder> append
+        )
         {
             var first = true;
             foreach (var value in values)

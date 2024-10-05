@@ -31,17 +31,18 @@ public class PackageTests
         }
 
         _output = output;
-        _packageLayoutRoot = SkipOnHelixAttribute.OnHelix() ?
-            Path.Combine(
+        _packageLayoutRoot = SkipOnHelixAttribute.OnHelix()
+            ? Path.Combine(
                 Environment.GetEnvironmentVariable("HELIX_WORKITEM_ROOT"),
-                "Packages.Layout") :
-            TestData.GetPackageLayoutRoot();
-        var packageRoot = SkipOnHelixAttribute.OnHelix() ?
-            Environment.GetEnvironmentVariable("HELIX_WORKITEM_ROOT") :
-            TestData.GetPackagesFolder();
+                "Packages.Layout"
+            )
+            : TestData.GetPackageLayoutRoot();
+        var packageRoot = SkipOnHelixAttribute.OnHelix()
+            ? Environment.GetEnvironmentVariable("HELIX_WORKITEM_ROOT")
+            : TestData.GetPackagesFolder();
         var packages = Directory
-                        .GetFiles(packageRoot, "*.nupkg", SearchOption.AllDirectories)
-                        .Where(file => !file.EndsWith(".symbols.nupkg", StringComparison.OrdinalIgnoreCase));
+            .GetFiles(packageRoot, "*.nupkg", SearchOption.AllDirectories)
+            .Where(file => !file.EndsWith(".symbols.nupkg", StringComparison.OrdinalIgnoreCase));
 
         if (Directory.Exists(_packageLayoutRoot))
         {
@@ -50,7 +51,10 @@ public class PackageTests
 
         foreach (var package in packages)
         {
-            var outputPath = Path.Combine(_packageLayoutRoot, Path.GetFileNameWithoutExtension(package));
+            var outputPath = Path.Combine(
+                _packageLayoutRoot,
+                Path.GetFileNameWithoutExtension(package)
+            );
             ZipFile.ExtractToDirectory(package, outputPath);
         }
     }
@@ -68,7 +72,14 @@ public class PackageTests
         var expectedVersion = Version.Parse(versionStringWithoutPrereleaseTag);
 
         string[] helixTestRunnerToolPackages = { "dotnet-serve", "dotnet-ef", "dotnet-dump" };
-        string[] toolAssembliesToSkip = { "System.", "Microsoft.", "Azure.", "Newtonsoft.", "aspnetcorev2" };
+        string[] toolAssembliesToSkip =
+        {
+            "System.",
+            "Microsoft.",
+            "Azure.",
+            "Newtonsoft.",
+            "aspnetcorev2",
+        };
 
         foreach (var packageDir in Directory.GetDirectories(_packageLayoutRoot))
         {
@@ -79,7 +90,11 @@ public class PackageTests
             }
 
             // Don't test helix test runner tool packages
-            if (helixTestRunnerToolPackages.Any(s => packageDir.Contains(s, StringComparison.OrdinalIgnoreCase)))
+            if (
+                helixTestRunnerToolPackages.Any(s =>
+                    packageDir.Contains(s, StringComparison.OrdinalIgnoreCase)
+                )
+            )
             {
                 continue;
             }
@@ -119,8 +134,14 @@ public class PackageTests
             var packageToolsDir = Path.Combine(packageDir, "tools");
             if (Directory.Exists(packageToolsDir))
             {
-                var assemblies = Directory.GetFiles(packageToolsDir, "*.dll", SearchOption.AllDirectories)
-                    .Where(f => !toolAssembliesToSkip.Any(s => Path.GetFileNameWithoutExtension(f).Contains(s, StringComparison.OrdinalIgnoreCase)));
+                var assemblies = Directory
+                    .GetFiles(packageToolsDir, "*.dll", SearchOption.AllDirectories)
+                    .Where(f =>
+                        !toolAssembliesToSkip.Any(s =>
+                            Path.GetFileNameWithoutExtension(f)
+                                .Contains(s, StringComparison.OrdinalIgnoreCase)
+                        )
+                    );
                 foreach (var assembly in assemblies)
                 {
                     using var fileStream = File.OpenRead(assembly);
@@ -142,4 +163,3 @@ public class PackageTests
         return tfm.StartsWith("net4", StringComparison.OrdinalIgnoreCase);
     }
 }
-

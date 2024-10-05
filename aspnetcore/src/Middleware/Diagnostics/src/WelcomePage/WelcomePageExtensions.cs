@@ -18,7 +18,10 @@ public static class WelcomePageExtensions
     /// <param name="app"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public static IApplicationBuilder UseWelcomePage(this IApplicationBuilder app, WelcomePageOptions options)
+    public static IApplicationBuilder UseWelcomePage(
+        this IApplicationBuilder app,
+        WelcomePageOptions options
+    )
     {
         ArgumentNullException.ThrowIfNull(app);
         ArgumentNullException.ThrowIfNull(options);
@@ -36,10 +39,7 @@ public static class WelcomePageExtensions
     {
         ArgumentNullException.ThrowIfNull(app);
 
-        return app.UseWelcomePage(new WelcomePageOptions
-        {
-            Path = path
-        });
+        return app.UseWelcomePage(new WelcomePageOptions { Path = path });
     }
 
     /// <summary>
@@ -52,10 +52,7 @@ public static class WelcomePageExtensions
     {
         ArgumentNullException.ThrowIfNull(app);
 
-        return app.UseWelcomePage(new WelcomePageOptions
-        {
-            Path = new PathString(path)
-        });
+        return app.UseWelcomePage(new WelcomePageOptions { Path = new PathString(path) });
     }
 
     /// <summary>

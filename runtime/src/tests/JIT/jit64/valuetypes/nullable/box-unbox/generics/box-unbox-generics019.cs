@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 
-using System.Runtime.InteropServices;
 using System;
+using System.Runtime.InteropServices;
 using Xunit;
 
 public class NullableTest
@@ -29,5 +29,3 @@ public class NullableTest
             return ExitCode.Failed;
     }
 }
-
-

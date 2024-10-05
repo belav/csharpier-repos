@@ -16,7 +16,25 @@ public class ApiBehaviorOptionsSetupTest
     public void Configure_AddsClientErrorMappings()
     {
         // Arrange
-        var expected = new[] { 400, 401, 403, 404, 405, 406, 408, 409, 412, 415, 422, 426, 500, 502, 503, 504 };
+        var expected = new[]
+        {
+            400,
+            401,
+            403,
+            404,
+            405,
+            406,
+            408,
+            409,
+            412,
+            415,
+            422,
+            426,
+            500,
+            502,
+            503,
+            504,
+        };
         var optionsSetup = new ApiBehaviorOptionsSetup();
         var options = new ApiBehaviorOptions();
 
@@ -35,11 +53,17 @@ public class ApiBehaviorOptionsSetupTest
         var factory = GetProblemDetailsFactory();
 
         // Act
-        var result = ApiBehaviorOptionsSetup.ProblemDetailsInvalidModelStateResponse(factory, actionContext);
+        var result = ApiBehaviorOptionsSetup.ProblemDetailsInvalidModelStateResponse(
+            factory,
+            actionContext
+        );
 
         // Assert
         var badRequest = Assert.IsType<BadRequestObjectResult>(result);
-        Assert.Equal(new[] { "application/problem+json", "application/problem+xml" }, badRequest.ContentTypes.OrderBy(c => c));
+        Assert.Equal(
+            new[] { "application/problem+json", "application/problem+xml" },
+            badRequest.ContentTypes.OrderBy(c => c)
+        );
 
         var problemDetails = Assert.IsType<ValidationProblemDetails>(badRequest.Value);
         Assert.Equal(400, problemDetails.Status);
@@ -54,14 +78,22 @@ public class ApiBehaviorOptionsSetupTest
         var link = "http://mylink";
         var actionContext = GetActionContext();
 
-        var factory = GetProblemDetailsFactory(options => options.ClientErrorMapping[400].Link = link);
+        var factory = GetProblemDetailsFactory(options =>
+            options.ClientErrorMapping[400].Link = link
+        );
 
         // Act
-        var result = ApiBehaviorOptionsSetup.ProblemDetailsInvalidModelStateResponse(factory, actionContext);
+        var result = ApiBehaviorOptionsSetup.ProblemDetailsInvalidModelStateResponse(
+            factory,
+            actionContext
+        );
 
         // Assert
         var badRequest = Assert.IsType<BadRequestObjectResult>(result);
-        Assert.Equal(new[] { "application/problem+json", "application/problem+xml" }, badRequest.ContentTypes.OrderBy(c => c));
+        Assert.Equal(
+            new[] { "application/problem+json", "application/problem+xml" },
+            badRequest.ContentTypes.OrderBy(c => c)
+        );
 
         var problemDetails = Assert.IsType<ValidationProblemDetails>(badRequest.Value);
         Assert.Equal(400, problemDetails.Status);
@@ -74,18 +106,31 @@ public class ApiBehaviorOptionsSetupTest
     {
         // Arrange
         var actionContext = GetActionContext();
-        var factory = Mock.Of<ProblemDetailsFactory>(m => m.CreateValidationProblemDetails(It.IsAny<HttpContext>(), It.IsAny<ModelStateDictionary>(), null, null, null, null, null) == new ValidationProblemDetails
-        {
-            Status = 422,
-        });
+        var factory = Mock.Of<ProblemDetailsFactory>(m =>
+            m.CreateValidationProblemDetails(
+                It.IsAny<HttpContext>(),
+                It.IsAny<ModelStateDictionary>(),
+                null,
+                null,
+                null,
+                null,
+                null
+            ) == new ValidationProblemDetails { Status = 422 }
+        );
 
         // Act
-        var result = ApiBehaviorOptionsSetup.ProblemDetailsInvalidModelStateResponse(factory, actionContext);
+        var result = ApiBehaviorOptionsSetup.ProblemDetailsInvalidModelStateResponse(
+            factory,
+            actionContext
+        );
 
         // Assert
         var objectResult = Assert.IsType<ObjectResult>(result);
         Assert.Equal(422, objectResult.StatusCode);
-        Assert.Equal(new[] { "application/problem+json", "application/problem+xml" }, objectResult.ContentTypes.OrderBy(c => c));
+        Assert.Equal(
+            new[] { "application/problem+json", "application/problem+xml" },
+            objectResult.ContentTypes.OrderBy(c => c)
+        );
 
         var problemDetails = Assert.IsType<ValidationProblemDetails>(objectResult.Value);
         Assert.Equal(422, problemDetails.Status);
@@ -102,7 +147,10 @@ public class ApiBehaviorOptionsSetupTest
             var factory = GetProblemDetailsFactory();
 
             // Act
-            var result = ApiBehaviorOptionsSetup.ProblemDetailsInvalidModelStateResponse(factory, actionContext);
+            var result = ApiBehaviorOptionsSetup.ProblemDetailsInvalidModelStateResponse(
+                factory,
+                actionContext
+            );
 
             // Assert
             var badRequest = Assert.IsType<BadRequestObjectResult>(result);
@@ -119,7 +167,10 @@ public class ApiBehaviorOptionsSetupTest
         var factory = GetProblemDetailsFactory();
 
         // Act
-        var result = ApiBehaviorOptionsSetup.ProblemDetailsInvalidModelStateResponse(factory, actionContext);
+        var result = ApiBehaviorOptionsSetup.ProblemDetailsInvalidModelStateResponse(
+            factory,
+            actionContext
+        );
 
         // Assert
         var badRequest = Assert.IsType<BadRequestObjectResult>(result);
@@ -127,7 +178,9 @@ public class ApiBehaviorOptionsSetupTest
         Assert.Equal("42", problemDetails.Extensions["traceId"]);
     }
 
-    private static ProblemDetailsFactory GetProblemDetailsFactory(Action<ApiBehaviorOptions> configure = null)
+    private static ProblemDetailsFactory GetProblemDetailsFactory(
+        Action<ApiBehaviorOptions> configure = null
+    )
     {
         var options = new ApiBehaviorOptions();
         var setup = new ApiBehaviorOptionsSetup();

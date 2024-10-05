@@ -4,10 +4,10 @@
 #nullable enable
 
 using System.Diagnostics;
+using Microsoft.AspNetCore.Routing.Patterns;
 #if !COMPONENTS
 using System.Linq;
 #endif
-using Microsoft.AspNetCore.Routing.Patterns;
 
 namespace Microsoft.AspNetCore.Routing.Template;
 
@@ -135,7 +135,9 @@ internal static class RoutePrecedence
         if (length > 28)
         {
             // An OverflowException will be thrown by Math.Pow when greater than 28
-            throw new InvalidOperationException("Route exceeds the maximum number of allowed segments of 28 and is unable to be processed.");
+            throw new InvalidOperationException(
+                "Route exceeds the maximum number of allowed segments of 28 and is unable to be processed."
+            );
         }
     }
 
@@ -246,7 +248,10 @@ internal static class RoutePrecedence
     // see description on ComputeInboundPrecedenceDigit(TemplateSegment segment)
     //
     // With a RoutePattern, parameters with a required value are treated as a literal segment
-    internal static int ComputeInboundPrecedenceDigit(RoutePattern routePattern, RoutePatternPathSegment pathSegment)
+    internal static int ComputeInboundPrecedenceDigit(
+        RoutePattern routePattern,
+        RoutePatternPathSegment pathSegment
+    )
     {
         if (pathSegment.Parts.Count > 1)
         {
@@ -263,8 +268,10 @@ internal static class RoutePrecedence
         else if (part is RoutePatternParameterPart parameterPart)
         {
             // Parameter with a required value is matched as a literal
-            if (routePattern.RequiredValues.TryGetValue(parameterPart.Name, out var requiredValue) &&
-                !RouteValueEqualityComparer.Default.Equals(requiredValue, string.Empty))
+            if (
+                routePattern.RequiredValues.TryGetValue(parameterPart.Name, out var requiredValue)
+                && !RouteValueEqualityComparer.Default.Equals(requiredValue, string.Empty)
+            )
             {
                 return 1;
             }

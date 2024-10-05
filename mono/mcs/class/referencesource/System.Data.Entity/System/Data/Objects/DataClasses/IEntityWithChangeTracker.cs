@@ -19,7 +19,7 @@ namespace System.Data.Objects.DataClasses
         /// <summary>
         /// Used by the change tracker to provide an interface that the data class will use to report changes.
         /// </summary>
-        /// <param name="changeTracker">Reference to the change tracker that is managing this entity</param>        
+        /// <param name="changeTracker">Reference to the change tracker that is managing this entity</param>
         void SetChangeTracker(IEntityChangeTracker changeTracker);
     }
 }

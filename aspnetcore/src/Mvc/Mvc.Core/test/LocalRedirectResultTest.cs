@@ -86,9 +86,7 @@ public class LocalRedirectResultTest
     [InlineData("", "/\\foo")]
     [InlineData("", "Home/About")]
     [InlineData("/myapproot", "http://www.example.com")]
-    public async Task Execute_Throws_ForNonLocalUrl(
-        string appRoot,
-        string contentPath)
+    public async Task Execute_Throws_ForNonLocalUrl(string appRoot, string contentPath)
     {
         // Arrange
         var httpContext = GetHttpContext(appRoot);
@@ -96,11 +94,14 @@ public class LocalRedirectResultTest
         var result = new LocalRedirectResult(contentPath);
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => result.ExecuteResultAsync(actionContext));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => result.ExecuteResultAsync(actionContext)
+        );
         Assert.Equal(
-            "The supplied URL is not local. A URL with an absolute path is considered local if it does not " +
-            "have a host/authority part. URLs using virtual paths ('~/') are also local.",
-            exception.Message);
+            "The supplied URL is not local. A URL with an absolute path is considered local if it does not "
+                + "have a host/authority part. URLs using virtual paths ('~/') are also local.",
+            exception.Message
+        );
     }
 
     [Theory]
@@ -108,9 +109,7 @@ public class LocalRedirectResultTest
     [InlineData("", "~/\\")]
     [InlineData("", "~//foo")]
     [InlineData("", "~/\\foo")]
-    public async Task Execute_Throws_ForNonLocalUrlTilde(
-        string appRoot,
-        string contentPath)
+    public async Task Execute_Throws_ForNonLocalUrlTilde(string appRoot, string contentPath)
     {
         // Arrange
         var httpContext = GetHttpContext(appRoot);
@@ -118,11 +117,14 @@ public class LocalRedirectResultTest
         var result = new LocalRedirectResult(contentPath);
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => result.ExecuteResultAsync(actionContext));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => result.ExecuteResultAsync(actionContext)
+        );
         Assert.Equal(
-            "The supplied URL is not local. A URL with an absolute path is considered local if it does not " +
-            "have a host/authority part. URLs using virtual paths ('~/') are also local.",
-            exception.Message);
+            "The supplied URL is not local. A URL with an absolute path is considered local if it does not "
+                + "have a host/authority part. URLs using virtual paths ('~/') are also local.",
+            exception.Message
+        );
     }
 
     private static ActionContext GetActionContext(HttpContext httpContext)
@@ -136,14 +138,16 @@ public class LocalRedirectResultTest
     private static IServiceProvider GetServiceProvider()
     {
         var serviceCollection = new ServiceCollection();
-        serviceCollection.AddSingleton<IActionResultExecutor<LocalRedirectResult>, LocalRedirectResultExecutor>();
+        serviceCollection.AddSingleton<
+            IActionResultExecutor<LocalRedirectResult>,
+            LocalRedirectResultExecutor
+        >();
         serviceCollection.AddSingleton<IUrlHelperFactory, UrlHelperFactory>();
         serviceCollection.AddTransient<ILoggerFactory, LoggerFactory>();
         return serviceCollection.BuildServiceProvider();
     }
 
-    private static HttpContext GetHttpContext(
-        string appRoot)
+    private static HttpContext GetHttpContext(string appRoot)
     {
         var httpContext = new DefaultHttpContext();
         httpContext.RequestServices = GetServiceProvider();

@@ -31,7 +31,9 @@ public class Chat : Hub
 
     public Task SendToConnection(string connectionId, string name, string message)
     {
-        return Clients.Client(connectionId).SendAsync("Send", $"Private message from {name}: {message}");
+        return Clients
+            .Client(connectionId)
+            .SendAsync("Send", $"Private message from {name}: {message}");
     }
 
     public Task SendToGroup(string groupName, string name, string message)

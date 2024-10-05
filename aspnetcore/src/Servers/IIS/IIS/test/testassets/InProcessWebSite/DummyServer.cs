@@ -11,11 +11,12 @@ namespace TestSite;
 
 public class DummyServer : IServer
 {
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 
-    public Task StartAsync<TContext>(IHttpApplication<TContext> application, CancellationToken cancellationToken)
+    public Task StartAsync<TContext>(
+        IHttpApplication<TContext> application,
+        CancellationToken cancellationToken
+    )
     {
         return Task.Delay(TimeSpan.MaxValue);
     }

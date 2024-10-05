@@ -16,7 +16,11 @@ internal sealed class HubCallerClients : IHubCallerClients
     // so we can prevent users from making blocking client calls by returning a custom ISingleClientProxy instance
     internal bool InvokeAllowed { get; set; }
 
-    public HubCallerClients(IHubClients hubClients, string connectionId, ChannelBasedSemaphore parallelInvokes)
+    public HubCallerClients(
+        IHubClients hubClients,
+        string connectionId,
+        ChannelBasedSemaphore parallelInvokes
+    )
     {
         _connectionId = connectionId;
         _hubClients = hubClients;
@@ -46,6 +50,7 @@ internal sealed class HubCallerClients : IHubCallerClients
     }
 
     IClientProxy IHubClients<IClientProxy>.Client(string connectionId) => Client(connectionId);
+
     public ISingleClientProxy Client(string connectionId)
     {
         if (!InvokeAllowed)
@@ -105,12 +110,22 @@ internal sealed class HubCallerClients : IHubCallerClients
             _proxy = hubClients;
         }
 
-        public Task<T> InvokeCoreAsync<T>(string method, object?[] args, CancellationToken cancellationToken = default)
+        public Task<T> InvokeCoreAsync<T>(
+            string method,
+            object?[] args,
+            CancellationToken cancellationToken = default
+        )
         {
-            throw new InvalidOperationException("Client results inside OnConnectedAsync Hub methods are not allowed.");
+            throw new InvalidOperationException(
+                "Client results inside OnConnectedAsync Hub methods are not allowed."
+            );
         }
 
-        public Task SendCoreAsync(string method, object?[] args, CancellationToken cancellationToken = default)
+        public Task SendCoreAsync(
+            string method,
+            object?[] args,
+            CancellationToken cancellationToken = default
+        )
         {
             return _proxy.SendCoreAsync(method, args, cancellationToken);
         }
@@ -127,7 +142,11 @@ internal sealed class HubCallerClients : IHubCallerClients
             _hubCallerClients = hubCallerClients;
         }
 
-        public async Task<T> InvokeCoreAsync<T>(string method, object?[] args, CancellationToken cancellationToken = default)
+        public async Task<T> InvokeCoreAsync<T>(
+            string method,
+            object?[] args,
+            CancellationToken cancellationToken = default
+        )
         {
             // Releases the Channel that is blocking pending invokes, which in turn can block the receive loop.
             // Because we are waiting for a result from the client we need to let the receive loop run otherwise we'll be blocked forever
@@ -141,7 +160,11 @@ internal sealed class HubCallerClients : IHubCallerClients
             return result;
         }
 
-        public Task SendCoreAsync(string method, object?[] args, CancellationToken cancellationToken = default)
+        public Task SendCoreAsync(
+            string method,
+            object?[] args,
+            CancellationToken cancellationToken = default
+        )
         {
             return _proxy.SendCoreAsync(method, args, cancellationToken);
         }

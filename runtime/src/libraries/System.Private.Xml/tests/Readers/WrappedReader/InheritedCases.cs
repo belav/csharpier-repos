@@ -97,235 +97,149 @@ namespace System.Xml.WrappedReaderTests
     }
 
     [TestCase(Name = "ErrorCondition", Desc = "WrappedReader")]
-    internal class TCErrorConditionReader : TCErrorCondition
-    {
-    }
+    internal class TCErrorConditionReader : TCErrorCondition { }
 
     [TestCase(Name = "XMLException", Desc = "WrappedReader")]
-    public class TCXMLExceptionReader : TCXMLException
-    {
-    }
+    public class TCXMLExceptionReader : TCXMLException { }
 
     [TestCase(Name = "LinePos", Desc = "WrappedReader")]
-    public class TCLinePosReader : TCLinePos
-    {
-    }
+    public class TCLinePosReader : TCLinePos { }
 
     [TestCase(Name = "Depth", Desc = "WrappedReader")]
-    internal class TCDepthReader : TCDepth
-    {
-    }
+    internal class TCDepthReader : TCDepth { }
 
     [TestCase(Name = "Namespace", Desc = "WrappedReader")]
-    internal class TCNamespaceReader : TCNamespace
-    {
-    }
+    internal class TCNamespaceReader : TCNamespace { }
 
     [TestCase(Name = "LookupNamespace", Desc = "WrappedReader")]
-    internal class TCLookupNamespaceReader : TCLookupNamespace
-    {
-    }
+    internal class TCLookupNamespaceReader : TCLookupNamespace { }
 
     [TestCase(Name = "HasValue", Desc = "WrappedReader")]
-    internal class TCHasValueReader : TCHasValue
-    {
-    }
+    internal class TCHasValueReader : TCHasValue { }
 
     [TestCase(Name = "IsEmptyElement", Desc = "WrappedReader")]
-    internal class TCIsEmptyElementReader : TCIsEmptyElement
-    {
-    }
+    internal class TCIsEmptyElementReader : TCIsEmptyElement { }
 
     [TestCase(Name = "XmlSpace", Desc = "WrappedReader")]
-    internal class TCXmlSpaceReader : TCXmlSpace
-    {
-    }
+    internal class TCXmlSpaceReader : TCXmlSpace { }
 
     [TestCase(Name = "XmlLang", Desc = "WrappedReader")]
-    internal class TCXmlLangReader : TCXmlLang
-    {
-    }
+    internal class TCXmlLangReader : TCXmlLang { }
 
     [TestCase(Name = "Skip", Desc = "WrappedReader")]
-    internal class TCSkipReader : TCSkip
-    {
-    }
+    internal class TCSkipReader : TCSkip { }
 
     [TestCase(Name = "InvalidXML", Desc = "WrappedReader")]
-    internal class TCInvalidXMLReader : TCInvalidXML
-    {
-    }
+    internal class TCInvalidXMLReader : TCInvalidXML { }
 
     [TestCase(Name = "AttributeAccess", Desc = "WrappedReader")]
-    internal class TCAttributeAccessReader : TCAttributeAccess
-    {
-    }
+    internal class TCAttributeAccessReader : TCAttributeAccess { }
 
     [TestCase(Name = "This(Name) and This(Name, Namespace)", Desc = "WrappedReader")]
-    internal class TCThisNameReader : TCThisName
-    {
-    }
+    internal class TCThisNameReader : TCThisName { }
 
-    [TestCase(Name = "MoveToAttribute(Name) and MoveToAttribute(Name, Namespace)", Desc = "WrappedReader")]
-    internal class TCMoveToAttributeReader : TCMoveToAttribute
-    {
-    }
+    [TestCase(
+        Name = "MoveToAttribute(Name) and MoveToAttribute(Name, Namespace)",
+        Desc = "WrappedReader"
+    )]
+    internal class TCMoveToAttributeReader : TCMoveToAttribute { }
 
     [TestCase(Name = "GetAttribute (Ordinal)", Desc = "WrappedReader")]
-    internal class TCGetAttributeOrdinalReader : TCGetAttributeOrdinal
-    {
-    }
+    internal class TCGetAttributeOrdinalReader : TCGetAttributeOrdinal { }
 
-    [TestCase(Name = "GetAttribute(Name) and GetAttribute(Name, Namespace)", Desc = "WrappedReader")]
-    internal class TCGetAttributeNameReader : TCGetAttributeName
-    {
-    }
+    [TestCase(
+        Name = "GetAttribute(Name) and GetAttribute(Name, Namespace)",
+        Desc = "WrappedReader"
+    )]
+    internal class TCGetAttributeNameReader : TCGetAttributeName { }
 
     [TestCase(Name = "This [Ordinal]", Desc = "WrappedReader")]
-    internal class TCThisOrdinalReader : TCThisOrdinal
-    {
-    }
+    internal class TCThisOrdinalReader : TCThisOrdinal { }
 
     [TestCase(Name = "MoveToAttribute(Ordinal)", Desc = "WrappedReader")]
-    internal class TCMoveToAttributeOrdinalReader : TCMoveToAttributeOrdinal
-    {
-    }
+    internal class TCMoveToAttributeOrdinalReader : TCMoveToAttributeOrdinal { }
 
     [TestCase(Name = "MoveToFirstAttribute()", Desc = "WrappedReader")]
-    internal class TCMoveToFirstAttributeReader : TCMoveToFirstAttribute
-    {
-    }
+    internal class TCMoveToFirstAttributeReader : TCMoveToFirstAttribute { }
 
     [TestCase(Name = "MoveToNextAttribute()", Desc = "WrappedReader")]
-    internal class TCMoveToNextAttributeReader : TCMoveToNextAttribute
-    {
-    }
+    internal class TCMoveToNextAttributeReader : TCMoveToNextAttribute { }
 
     [TestCase(Name = "Attribute Test when NodeType != Attributes", Desc = "WrappedReader")]
-    internal class TCAttributeTestReader : TCAttributeTest
-    {
-    }
+    internal class TCAttributeTestReader : TCAttributeTest { }
 
     [TestCase(Name = "Attributes test on XmlDeclaration DCR52258", Desc = "WrappedReader")]
-    internal class TCAttributeXmlDeclarationReader : TCAttributeXmlDeclaration
-    {
-    }
+    internal class TCAttributeXmlDeclarationReader : TCAttributeXmlDeclaration { }
 
     [TestCase(Name = "xmlns as local name DCR50345", Desc = "WrappedReader")]
-    internal class TCXmlnsReader : TCXmlns
-    {
-    }
+    internal class TCXmlnsReader : TCXmlns { }
 
     [TestCase(Name = "bounded namespace to xmlns prefix DCR50881", Desc = "WrappedReader")]
-    internal class TCXmlnsPrefixReader : TCXmlnsPrefix
-    {
-    }
+    internal class TCXmlnsPrefixReader : TCXmlnsPrefix { }
 
     [TestCase(Name = "ReadInnerXml", Desc = "WrappedReader")]
-    internal class TCReadInnerXmlReader : TCReadInnerXml
-    {
-    }
+    internal class TCReadInnerXmlReader : TCReadInnerXml { }
 
     [TestCase(Name = "MoveToContent", Desc = "WrappedReader")]
-    internal class TCMoveToContentReader : TCMoveToContent
-    {
-    }
+    internal class TCMoveToContentReader : TCMoveToContent { }
 
     [TestCase(Name = "IsStartElement", Desc = "WrappedReader")]
-    internal class TCIsStartElementReader : TCIsStartElement
-    {
-    }
+    internal class TCIsStartElementReader : TCIsStartElement { }
 
     [TestCase(Name = "ReadStartElement", Desc = "WrappedReader")]
-    internal class TCReadStartElementReader : TCReadStartElement
-    {
-    }
+    internal class TCReadStartElementReader : TCReadStartElement { }
 
     [TestCase(Name = "ReadEndElement", Desc = "WrappedReader")]
-    internal class TCReadEndElementReader : TCReadEndElement
-    {
-    }
+    internal class TCReadEndElementReader : TCReadEndElement { }
 
     [TestCase(Name = "ResolveEntity and ReadAttributeValue", Desc = "WrappedReader")]
-    internal class TCResolveEntityReader : TCResolveEntity
-    {
-    }
+    internal class TCResolveEntityReader : TCResolveEntity { }
 
     [TestCase(Name = "ReadAttributeValue", Desc = "WrappedReader")]
-    internal class TCReadAttributeValueReader : TCReadAttributeValue
-    {
-    }
+    internal class TCReadAttributeValueReader : TCReadAttributeValue { }
 
     [TestCase(Name = "Read", Desc = "WrappedReader")]
-    internal class TCReadReader : TCRead2
-    {
-    }
+    internal class TCReadReader : TCRead2 { }
 
     [TestCase(Name = "MoveToElement", Desc = "WrappedReader")]
-    internal class TCMoveToElementReader : TCMoveToElement
-    {
-    }
+    internal class TCMoveToElementReader : TCMoveToElement { }
 
     [TestCase(Name = "Dispose", Desc = "WrappedReader")]
-    internal class TCDisposeReader : TCDispose
-    {
-    }
+    internal class TCDisposeReader : TCDispose { }
 
     [TestCase(Name = "Buffer Boundaries", Desc = "WrappedReader")]
-    internal class TCBufferBoundariesReader : TCBufferBoundaries
-    {
-    }
+    internal class TCBufferBoundariesReader : TCBufferBoundaries { }
 
     //[TestCase(Name = "BeforeRead", Desc = "BeforeRead")]
     //[TestCase(Name = "AfterReadIsFalse", Desc = "AfterReadIsFalse")]
     //[TestCase(Name = "AfterCloseInTheMiddle", Desc = "AfterCloseInTheMiddle")]
     //[TestCase(Name = "AfterClose", Desc = "AfterClose")]
-    internal class TCXmlNodeIntegrityTestFile : TCXMLIntegrityBase
-    {
-    }
+    internal class TCXmlNodeIntegrityTestFile : TCXMLIntegrityBase { }
 
     [TestCase(Name = "Read Subtree", Desc = "WrappedReader")]
-    internal class TCReadSubtreeReader : TCReadSubtree
-    {
-    }
+    internal class TCReadSubtreeReader : TCReadSubtree { }
 
     [TestCase(Name = "ReadToDescendant", Desc = "WrappedReader")]
-    internal class TCReadToDescendantReader : TCReadToDescendant
-    {
-    }
+    internal class TCReadToDescendantReader : TCReadToDescendant { }
 
     [TestCase(Name = "ReadToNextSibling", Desc = "WrappedReader")]
-    internal class TCReadToNextSiblingReader : TCReadToNextSibling
-    {
-    }
+    internal class TCReadToNextSiblingReader : TCReadToNextSibling { }
 
     [TestCase(Name = "ReadValue", Desc = "WrappedReader")]
-    internal class TCReadValueReader : TCReadValue
-    {
-    }
+    internal class TCReadValueReader : TCReadValue { }
 
     [TestCase(Name = "ReadContentAsBase64", Desc = "WrappedReader")]
-    internal class TCReadContentAsBase64Reader : TCReadContentAsBase64
-    {
-    }
+    internal class TCReadContentAsBase64Reader : TCReadContentAsBase64 { }
 
     [TestCase(Name = "ReadElementContentAsBase64", Desc = "WrappedReader")]
-    internal class TCReadElementContentAsBase64Reader : TCReadElementContentAsBase64
-    {
-    }
+    internal class TCReadElementContentAsBase64Reader : TCReadElementContentAsBase64 { }
 
     [TestCase(Name = "ReadContentAsBinHex", Desc = "WrappedReader")]
-    internal class TCReadContentAsBinHexReader : TCReadContentAsBinHex
-    {
-    }
+    internal class TCReadContentAsBinHexReader : TCReadContentAsBinHex { }
 
     [TestCase(Name = "ReadElementContentAsBinHex", Desc = "WrappedReader")]
-    internal class TCReadElementContentAsBinHexReader : TCReadElementContentAsBinHex
-    {
-    }
+    internal class TCReadElementContentAsBinHexReader : TCReadElementContentAsBinHex { }
 
     [TestCase(Name = "ReadToFollowing", Desc = "WrappedReader")]
-    internal class TCReadToFollowingReader : TCReadToFollowing
-    {
-    }
+    internal class TCReadToFollowingReader : TCReadToFollowing { }
 }

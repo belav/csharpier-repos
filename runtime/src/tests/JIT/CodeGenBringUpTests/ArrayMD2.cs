@@ -22,7 +22,8 @@ public class BringUpTest_ArrayMD2
     [Fact]
     public static int TestEntryPoint()
     {
-        if (ArrayMD2(1, 1) != 42) return Fail;
+        if (ArrayMD2(1, 1) != 42)
+            return Fail;
         return Pass;
     }
 }

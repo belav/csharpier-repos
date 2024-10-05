@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddUsing
         public async Task TestSimpleQuery()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -28,7 +28,7 @@ class Program
         var q = [|from x in args
                 select x|]}
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -38,14 +38,15 @@ class Program
     {
         var q = from x in args
                 select x}
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestSimpleWhere()
         {
             await TestInRegularAndScriptAsync(
-@"class Test
+                @"class Test
 {
     public void SimpleWhere()
     {
@@ -59,7 +60,7 @@ class Program
                       select n|];
     }
 }",
-@"using System.Linq;
+                @"using System.Linq;
 
 class Test
 {
@@ -74,7 +75,8 @@ class Test
                       where n < 5
                       select n;
     }
-}");
+}"
+            );
         }
     }
 }

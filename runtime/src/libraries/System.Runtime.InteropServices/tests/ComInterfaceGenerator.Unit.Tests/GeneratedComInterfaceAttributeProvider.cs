@@ -12,11 +12,10 @@ namespace ComInterfaceGenerator.Unit.Tests
     {
         private ComInterfaceOptions? _options;
 
-        public GeneratedComInterfaceAttributeProvider()
-        {
-        }
+        public GeneratedComInterfaceAttributeProvider() { }
 
-        public GeneratedComInterfaceAttributeProvider(ComInterfaceOptions options) => _options = options;
+        public GeneratedComInterfaceAttributeProvider(ComInterfaceOptions options) =>
+            _options = options;
 
         public string VirtualMethodIndex(
             int index,
@@ -26,21 +25,28 @@ namespace ComInterfaceGenerator.Unit.Tests
             Type? StringMarshallingCustomType = null,
             bool? SetLastError = null,
             ExceptionMarshalling? ExceptionMarshalling = null,
-            Type? ExceptionMarshallingType = null)
-                => "";
+            Type? ExceptionMarshallingType = null
+        ) => "";
 
         public string UnmanagedObjectUnwrapper(Type t) => "";
 
-        public string GeneratedComInterface(StringMarshalling? stringMarshalling = null, Type? stringMarshallingCustomType = null)
+        public string GeneratedComInterface(
+            StringMarshalling? stringMarshalling = null,
+            Type? stringMarshallingCustomType = null
+        )
         {
             List<string> arguments = new();
             if (stringMarshalling is not null)
             {
-                arguments.Add($"StringMarshalling = {typeof(StringMarshalling).FullName}.{stringMarshalling!.Value}");
+                arguments.Add(
+                    $"StringMarshalling = {typeof(StringMarshalling).FullName}.{stringMarshalling!.Value}"
+                );
             }
             if (stringMarshallingCustomType is not null)
             {
-                arguments.Add($"StringMarshallingCustomType = typeof({stringMarshallingCustomType!.FullName})");
+                arguments.Add(
+                    $"StringMarshallingCustomType = typeof({stringMarshallingCustomType!.FullName})"
+                );
             }
             if (_options is not null)
             {

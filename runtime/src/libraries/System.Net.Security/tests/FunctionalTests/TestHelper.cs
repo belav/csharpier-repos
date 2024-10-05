@@ -5,11 +5,11 @@ using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Net.Test.Common;
+using System.Runtime.CompilerServices;
 using System.Security.Authentication;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography.X509Certificates.Tests.Common;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,26 +19,24 @@ namespace System.Net.Security.Tests
 {
     public static class TestHelper
     {
-        private static readonly X509KeyUsageExtension s_eeKeyUsage =
-            new X509KeyUsageExtension(
-                X509KeyUsageFlags.DigitalSignature | X509KeyUsageFlags.KeyEncipherment | X509KeyUsageFlags.DataEncipherment,
-                critical: false);
+        private static readonly X509KeyUsageExtension s_eeKeyUsage = new X509KeyUsageExtension(
+            X509KeyUsageFlags.DigitalSignature
+                | X509KeyUsageFlags.KeyEncipherment
+                | X509KeyUsageFlags.DataEncipherment,
+            critical: false
+        );
 
         private static readonly X509EnhancedKeyUsageExtension s_tlsServerEku =
             new X509EnhancedKeyUsageExtension(
-                new OidCollection
-                {
-                    new Oid("1.3.6.1.5.5.7.3.1", null)
-                },
-                false);
+                new OidCollection { new Oid("1.3.6.1.5.5.7.3.1", null) },
+                false
+            );
 
         private static readonly X509EnhancedKeyUsageExtension s_tlsClientEku =
             new X509EnhancedKeyUsageExtension(
-                new OidCollection
-                {
-                    new Oid("1.3.6.1.5.5.7.3.2", null)
-                },
-                false);
+                new OidCollection { new Oid("1.3.6.1.5.5.7.3.2", null) },
+                false
+            );
 
         private static readonly X509BasicConstraintsExtension s_eeConstraints =
             new X509BasicConstraintsExtension(false, false, 0, false);
@@ -46,15 +44,25 @@ namespace System.Net.Security.Tests
         public static readonly byte[] s_ping = "PING"u8.ToArray();
         public static readonly byte[] s_pong = "PONG"u8.ToArray();
 
-        public static bool AllowAnyServerCertificate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        public static bool AllowAnyServerCertificate(
+            object sender,
+            X509Certificate certificate,
+            X509Chain chain,
+            SslPolicyErrors sslPolicyErrors
+        )
         {
             return true;
         }
 
-        public static (SslStream ClientStream, SslStream ServerStream) GetConnectedSslStreams(bool leaveInnerStreamOpen = false)
+        public static (SslStream ClientStream, SslStream ServerStream) GetConnectedSslStreams(
+            bool leaveInnerStreamOpen = false
+        )
         {
             (Stream clientStream, Stream serverStream) = GetConnectedStreams();
-            return (new SslStream(clientStream, leaveInnerStreamOpen), new SslStream(serverStream, leaveInnerStreamOpen));
+            return (
+                new SslStream(clientStream, leaveInnerStreamOpen),
+                new SslStream(serverStream, leaveInnerStreamOpen)
+            );
         }
 
         public static (Stream ClientStream, Stream ServerStream) GetConnectedStreams()
@@ -65,47 +73,89 @@ namespace System.Net.Security.Tests
                 return GetConnectedTcpStreams();
             }
 
-            return ConnectedStreams.CreateBidirectional(initialBufferSize: 4096, maxBufferSize: int.MaxValue);
+            return ConnectedStreams.CreateBidirectional(
+                initialBufferSize: 4096,
+                maxBufferSize: int.MaxValue
+            );
         }
 
-        internal static (NetworkStream ClientStream, NetworkStream ServerStream) GetConnectedTcpStreams()
+        internal static (
+            NetworkStream ClientStream,
+            NetworkStream ServerStream
+        ) GetConnectedTcpStreams()
         {
-            using (Socket listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                Socket listener = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
             {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
 
-                var clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                var clientSocket = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                );
                 clientSocket.Connect(listener.LocalEndPoint);
                 Socket serverSocket = listener.Accept();
 
                 serverSocket.NoDelay = true;
                 clientSocket.NoDelay = true;
 
-                return (new NetworkStream(clientSocket, ownsSocket: true), new NetworkStream(serverSocket, ownsSocket: true));
+                return (
+                    new NetworkStream(clientSocket, ownsSocket: true),
+                    new NetworkStream(serverSocket, ownsSocket: true)
+                );
             }
         }
 
-        internal static async Task<(NetworkStream ClientStream, NetworkStream ServerStream)> GetConnectedTcpStreamsAsync()
+        internal static async Task<(
+            NetworkStream ClientStream,
+            NetworkStream ServerStream
+        )> GetConnectedTcpStreamsAsync()
         {
-            using (Socket listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                Socket listener = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
             {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
 
-                var clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                var clientSocket = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                );
                 Task<Socket> acceptTask = listener.AcceptAsync(CancellationToken.None).AsTask();
-                await clientSocket.ConnectAsync(listener.LocalEndPoint).WaitAsync(TestConfiguration.PassingTestTimeout);
-                Socket serverSocket = await acceptTask.WaitAsync(TestConfiguration.PassingTestTimeout);
+                await clientSocket
+                    .ConnectAsync(listener.LocalEndPoint)
+                    .WaitAsync(TestConfiguration.PassingTestTimeout);
+                Socket serverSocket = await acceptTask.WaitAsync(
+                    TestConfiguration.PassingTestTimeout
+                );
 
                 serverSocket.NoDelay = true;
                 clientSocket.NoDelay = true;
 
-                return (new NetworkStream(clientSocket, ownsSocket: true), new NetworkStream(serverSocket, ownsSocket: true));
+                return (
+                    new NetworkStream(clientSocket, ownsSocket: true),
+                    new NetworkStream(serverSocket, ownsSocket: true)
+                );
             }
         }
 
-        internal static void CleanupCertificates([CallerMemberName] string? testName = null, StoreName storeName = StoreName.CertificateAuthority)
+        internal static void CleanupCertificates(
+            [CallerMemberName] string? testName = null,
+            StoreName storeName = StoreName.CertificateAuthority
+        )
         {
             string caName = $"O={testName}";
             try
@@ -123,7 +173,8 @@ namespace System.Net.Security.Tests
                     }
                 }
             }
-            catch { };
+            catch { }
+            ;
 
             try
             {
@@ -140,7 +191,8 @@ namespace System.Net.Security.Tests
                     }
                 }
             }
-            catch { };
+            catch { }
+            ;
         }
 
         internal static X509ExtensionCollection BuildTlsServerCertExtensions(string serverName)
@@ -148,7 +200,10 @@ namespace System.Net.Security.Tests
             return BuildTlsCertExtensions(serverName, true);
         }
 
-        private static X509ExtensionCollection BuildTlsCertExtensions(string targetName, bool serverCertificate)
+        private static X509ExtensionCollection BuildTlsCertExtensions(
+            string targetName,
+            bool serverCertificate
+        )
         {
             X509ExtensionCollection extensions = new X509ExtensionCollection();
 
@@ -162,12 +217,16 @@ namespace System.Net.Security.Tests
             return extensions;
         }
 
-        internal static (X509Certificate2 certificate, X509Certificate2Collection) GenerateCertificates(
-                    string targetName,
-                    [CallerMemberName] string? testName = null,
-                    bool longChain = false,
-                    bool serverCertificate = true,
-                    bool ephemeralKey = false)
+        internal static (
+            X509Certificate2 certificate,
+            X509Certificate2Collection
+        ) GenerateCertificates(
+            string targetName,
+            [CallerMemberName] string? testName = null,
+            bool longChain = false,
+            bool serverCertificate = true,
+            bool ephemeralKey = false
+        )
         {
             const int keySize = 2048;
             if (PlatformDetection.IsWindows && testName != null)
@@ -176,7 +235,10 @@ namespace System.Net.Security.Tests
             }
 
             X509Certificate2Collection chain = new X509Certificate2Collection();
-            X509ExtensionCollection extensions = BuildTlsCertExtensions(targetName, serverCertificate);
+            X509ExtensionCollection extensions = BuildTlsCertExtensions(
+                targetName,
+                serverCertificate
+            );
 
             CertificateAuthority.BuildPrivatePki(
                 PkiOptions.IssuerRevocationViaCrl,
@@ -188,7 +250,8 @@ namespace System.Net.Security.Tests
                 subjectName: targetName,
                 testName: testName,
                 keySize: keySize,
-                extensions: extensions);
+                extensions: extensions
+            );
 
             // Walk the intermediates backwards so we build the chain collection as
             // Issuer3
@@ -211,14 +274,22 @@ namespace System.Net.Security.Tests
             if (!ephemeralKey && PlatformDetection.IsWindows)
             {
                 X509Certificate2 ephemeral = endEntity;
-                endEntity = new X509Certificate2(endEntity.Export(X509ContentType.Pfx), (string?)null, X509KeyStorageFlags.Exportable);
+                endEntity = new X509Certificate2(
+                    endEntity.Export(X509ContentType.Pfx),
+                    (string?)null,
+                    X509KeyStorageFlags.Exportable
+                );
                 ephemeral.Dispose();
             }
 
             return (endEntity, chain);
         }
 
-        internal static async Task PingPong(SslStream client, SslStream server, CancellationToken cancellationToken = default)
+        internal static async Task PingPong(
+            SslStream client,
+            SslStream server,
+            CancellationToken cancellationToken = default
+        )
         {
             byte[] buffer = new byte[s_ping.Length];
             ValueTask t = client.WriteAsync(s_ping, cancellationToken);
@@ -226,7 +297,12 @@ namespace System.Net.Security.Tests
             int remains = s_ping.Length;
             while (remains > 0)
             {
-                int readLength = await server.ReadAsync(buffer, buffer.Length - remains, remains, cancellationToken);
+                int readLength = await server.ReadAsync(
+                    buffer,
+                    buffer.Length - remains,
+                    remains,
+                    cancellationToken
+                );
                 Assert.True(readLength > 0);
                 remains -= readLength;
             }
@@ -237,7 +313,12 @@ namespace System.Net.Security.Tests
             remains = s_pong.Length;
             while (remains > 0)
             {
-                int readLength = await client.ReadAsync(buffer, buffer.Length - remains, remains, cancellationToken);
+                int readLength = await client.ReadAsync(
+                    buffer,
+                    buffer.Length - remains,
+                    remains,
+                    cancellationToken
+                );
                 Assert.True(readLength > 0);
                 remains -= readLength;
             }
@@ -246,7 +327,10 @@ namespace System.Net.Security.Tests
             await t;
         }
 
-        internal static string GetTestSNIName(string testMethodName, params SslProtocols?[] protocols)
+        internal static string GetTestSNIName(
+            string testMethodName,
+            params SslProtocols?[] protocols
+        )
         {
             static string ProtocolToString(SslProtocols? protocol)
             {
@@ -254,7 +338,8 @@ namespace System.Net.Security.Tests
             }
 
             var args = string.Join(".", protocols.Select(p => ProtocolToString(p)));
-            var name = testMethodName.Length > 63 ? testMethodName.Substring(0, 63) : testMethodName;
+            var name =
+                testMethodName.Length > 63 ? testMethodName.Substring(0, 63) : testMethodName;
 
             name = $"{name}.{args}";
             if (PlatformDetection.IsAndroid)

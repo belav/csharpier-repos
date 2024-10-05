@@ -6,9 +6,9 @@ namespace System.ServiceModel.Channels
 {
     using System.Runtime;
     using System.ServiceModel;
+    using System.Threading;
     using System.Transactions;
     using SR = System.ServiceModel.SR;
-    using System.Threading;
 
     sealed class MsmqInputSessionChannel : InputChannel, IInputSessionChannel
     {
@@ -24,7 +24,11 @@ namespace System.ServiceModel.Channels
         // count of messages that have been completed but the transaction has not been committed
         int uncommittedMessageCount;
 
-        public MsmqInputSessionChannel(MsmqInputSessionChannelListener listener, Transaction associatedTx, ReceiveContext sessiongramReceiveContext)
+        public MsmqInputSessionChannel(
+            MsmqInputSessionChannelListener listener,
+            Transaction associatedTx,
+            ReceiveContext sessiongramReceiveContext
+        )
             : base(listener, new EndpointAddress(listener.Uri))
         {
             this.session = new InputSession();
@@ -36,7 +40,10 @@ namespace System.ServiceModel.Channels
 
                 // only enlist if we are running in a non-receive context mode
                 this.associatedTx = associatedTx;
-                this.associatedTx.EnlistVolatile(new TransactionEnlistment(this, this.associatedTx), EnlistmentOptions.None);
+                this.associatedTx.EnlistVolatile(
+                    new TransactionEnlistment(this, this.associatedTx),
+                    EnlistmentOptions.None
+                );
             }
             else
             {
@@ -54,10 +61,7 @@ namespace System.ServiceModel.Channels
 
         int TotalPendingItems
         {
-            get
-            {
-                return this.InternalPendingItems + this.incompleteMessageCount;
-            }
+            get { return this.InternalPendingItems + this.incompleteMessageCount; }
         }
 
         void DetachTransaction(bool aborted)
@@ -102,7 +106,11 @@ namespace System.ServiceModel.Channels
             return this.BeginReceive(this.DefaultReceiveTimeout, callback, state);
         }
 
-        public override IAsyncResult BeginReceive(TimeSpan timeout, AsyncCallback callback, object state)
+        public override IAsyncResult BeginReceive(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return InputChannel.HelpBeginReceive(this, timeout, callback, state);
         }
@@ -133,7 +141,11 @@ namespace System.ServiceModel.Channels
             return receiveSuccessful;
         }
 
-        public override IAsyncResult BeginTryReceive(TimeSpan timeout, AsyncCallback callback, object state)
+        public override IAsyncResult BeginTryReceive(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             ThrowIfFaulted();
             if (CommunicationState.Closed == this.State || CommunicationState.Closing == this.State)
@@ -150,7 +162,8 @@ namespace System.ServiceModel.Channels
 
         public override bool EndTryReceive(IAsyncResult result, out Message message)
         {
-            CompletedAsyncResult<bool, Message> completedResult = result as CompletedAsyncResult<bool, Message>;
+            CompletedAsyncResult<bool, Message> completedResult =
+                result as CompletedAsyncResult<bool, Message>;
 
             if (null != completedResult)
             {
@@ -182,7 +195,9 @@ namespace System.ServiceModel.Channels
                 if (this.associatedTx != null)
                 {
                     // Channel.Abort called within the associated transaction
-                    Exception e = DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MsmqSessionChannelAbort)));
+                    Exception e = DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.MsmqSessionChannelAbort))
+                    );
                     RollbackTransaction(e);
                 }
                 this.sessiongramReceiveContext.Abandon(TimeSpan.MaxValue);
@@ -194,7 +209,9 @@ namespace System.ServiceModel.Channels
                     // no need for rollback, it will happen automatically when this condition is hit in the Prepare() call
                     this.Fault();
                     this.sessiongramReceiveContext.Abandon(TimeSpan.MaxValue);
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MsmqSessionPrematureClose)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.MsmqSessionPrematureClose))
+                    );
                 }
             }
         }
@@ -212,7 +229,11 @@ namespace System.ServiceModel.Channels
                 {
                     RollbackTransaction(null);
                     this.Fault();
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MsmqSessionMessagesNotConsumed)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.MsmqSessionMessagesNotConsumed)
+                        )
+                    );
                 }
             }
         }
@@ -241,7 +262,11 @@ namespace System.ServiceModel.Channels
             base.OnClose(timeout);
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             OnCloseCore(false);
             return base.OnBeginClose(timeout, callback, state);
@@ -266,18 +291,26 @@ namespace System.ServiceModel.Channels
 
         void EnsureReceiveContextTransaction()
         {
-            // if this is the first time we are seeing this transaction in receivecontext enabled mode then enlist and 
+            // if this is the first time we are seeing this transaction in receivecontext enabled mode then enlist and
             // associate the session channel with this transaction
             if (Transaction.Current == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new InvalidOperationException(SR.GetString(SR.MsmqTransactionRequired)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                    new InvalidOperationException(SR.GetString(SR.MsmqTransactionRequired))
+                );
             }
 
             if (this.associatedTx == null)
             {
                 this.associatedTx = Transaction.Current;
-                this.associatedTx.EnlistVolatile(new ReceiveContextTransactionEnlistment(this, this.associatedTx, this.sessiongramReceiveContext),
-                    EnlistmentOptions.EnlistDuringPrepareRequired);
+                this.associatedTx.EnlistVolatile(
+                    new ReceiveContextTransactionEnlistment(
+                        this,
+                        this.associatedTx,
+                        this.sessiongramReceiveContext
+                    ),
+                    EnlistmentOptions.EnlistDuringPrepareRequired
+                );
             }
             else
             {
@@ -285,13 +318,17 @@ namespace System.ServiceModel.Channels
                 {
                     RollbackTransaction(null);
                     this.Fault();
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new InvalidOperationException(SR.GetString(SR.MsmqSameTransactionExpected)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                        new InvalidOperationException(SR.GetString(SR.MsmqSameTransactionExpected))
+                    );
                 }
 
                 if (TransactionStatus.Active != Transaction.Current.TransactionInformation.Status)
                 {
                     this.Fault();
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new InvalidOperationException(SR.GetString(SR.MsmqTransactionNotActive)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                        new InvalidOperationException(SR.GetString(SR.MsmqTransactionNotActive))
+                    );
                 }
             }
         }
@@ -304,14 +341,18 @@ namespace System.ServiceModel.Channels
                 {
                     RollbackTransaction(null);
                     this.Fault();
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new InvalidOperationException(SR.GetString(SR.MsmqSameTransactionExpected)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                        new InvalidOperationException(SR.GetString(SR.MsmqSameTransactionExpected))
+                    );
                 }
 
                 if (TransactionStatus.Active != Transaction.Current.TransactionInformation.Status)
                 {
                     RollbackTransaction(null);
                     this.Fault();
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new InvalidOperationException(SR.GetString(SR.MsmqTransactionNotActive)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                        new InvalidOperationException(SR.GetString(SR.MsmqTransactionNotActive))
+                    );
                 }
             }
         }
@@ -340,14 +381,32 @@ namespace System.ServiceModel.Channels
                 this.channel.AbandonMessage(timeout);
             }
 
-            protected override IAsyncResult OnBeginAbandon(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginAbandon(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
-                return SessionReceiveContextAsyncResult.CreateAbandon(this, timeout, callback, state);
+                return SessionReceiveContextAsyncResult.CreateAbandon(
+                    this,
+                    timeout,
+                    callback,
+                    state
+                );
             }
 
-            protected override IAsyncResult OnBeginComplete(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginComplete(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
-                return SessionReceiveContextAsyncResult.CreateComplete(this, timeout, callback, state);
+                return SessionReceiveContextAsyncResult.CreateComplete(
+                    this,
+                    timeout,
+                    callback,
+                    state
+                );
             }
 
             protected override void OnComplete(TimeSpan timeout)
@@ -374,7 +433,13 @@ namespace System.ServiceModel.Channels
                 static Action<object> onComplete;
                 static Action<object> onAbandon;
 
-                SessionReceiveContextAsyncResult(MsmqSessionReceiveContext receiveContext, TimeSpan timeout, AsyncCallback callback, object state, Action<object> target)
+                SessionReceiveContextAsyncResult(
+                    MsmqSessionReceiveContext receiveContext,
+                    TimeSpan timeout,
+                    AsyncCallback callback,
+                    object state,
+                    Action<object> target
+                )
                     : base(callback, state)
                 {
                     this.completionTransaction = Transaction.Current;
@@ -383,27 +448,50 @@ namespace System.ServiceModel.Channels
                     ActionItem.Schedule(target, this);
                 }
 
-                public static IAsyncResult CreateComplete(MsmqSessionReceiveContext receiveContext, TimeSpan timeout, AsyncCallback callback, object state)
+                public static IAsyncResult CreateComplete(
+                    MsmqSessionReceiveContext receiveContext,
+                    TimeSpan timeout,
+                    AsyncCallback callback,
+                    object state
+                )
                 {
                     if (onComplete == null)
                     {
                         onComplete = new Action<object>(OnComplete);
                     }
-                    return new SessionReceiveContextAsyncResult(receiveContext, timeout, callback, state, onComplete);
+                    return new SessionReceiveContextAsyncResult(
+                        receiveContext,
+                        timeout,
+                        callback,
+                        state,
+                        onComplete
+                    );
                 }
 
-                public static IAsyncResult CreateAbandon(MsmqSessionReceiveContext receiveContext, TimeSpan timeout, AsyncCallback callback, object state)
+                public static IAsyncResult CreateAbandon(
+                    MsmqSessionReceiveContext receiveContext,
+                    TimeSpan timeout,
+                    AsyncCallback callback,
+                    object state
+                )
                 {
                     if (onAbandon == null)
                     {
                         onAbandon = new Action<object>(OnAbandon);
                     }
-                    return new SessionReceiveContextAsyncResult(receiveContext, timeout, callback, state, onAbandon);
+                    return new SessionReceiveContextAsyncResult(
+                        receiveContext,
+                        timeout,
+                        callback,
+                        state,
+                        onAbandon
+                    );
                 }
 
                 static void OnComplete(object parameter)
                 {
-                    SessionReceiveContextAsyncResult result = parameter as SessionReceiveContextAsyncResult;
+                    SessionReceiveContextAsyncResult result =
+                        parameter as SessionReceiveContextAsyncResult;
                     Transaction savedTransaction = Transaction.Current;
                     Transaction.Current = result.completionTransaction;
 
@@ -433,7 +521,8 @@ namespace System.ServiceModel.Channels
 
                 static void OnAbandon(object parameter)
                 {
-                    SessionReceiveContextAsyncResult result = parameter as SessionReceiveContextAsyncResult;
+                    SessionReceiveContextAsyncResult result =
+                        parameter as SessionReceiveContextAsyncResult;
                     Exception completionException = null;
                     try
                     {
@@ -461,7 +550,11 @@ namespace System.ServiceModel.Channels
             Transaction transaction;
             ReceiveContext sessiongramReceiveContext;
 
-            public ReceiveContextTransactionEnlistment(MsmqInputSessionChannel channel, Transaction transaction, ReceiveContext receiveContext)
+            public ReceiveContextTransactionEnlistment(
+                MsmqInputSessionChannel channel,
+                Transaction transaction,
+                ReceiveContext receiveContext
+            )
             {
                 this.channel = channel;
                 this.transaction = transaction;
@@ -474,7 +567,11 @@ namespace System.ServiceModel.Channels
                 // Note that we are not placing any restriction on the channel state
                 if (this.channel.TotalPendingItems > 0 || this.channel.sessiongramDoomed)
                 {
-                    Exception e = DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MsmqSessionChannelHasPendingItems)));
+                    Exception e = DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.MsmqSessionChannelHasPendingItems)
+                        )
+                    );
                     this.sessiongramReceiveContext.Abandon(TimeSpan.MaxValue);
                     preparingEnlistment.ForceRollback(e);
                     this.channel.Fault();
@@ -537,9 +634,16 @@ namespace System.ServiceModel.Channels
             public void Prepare(PreparingEnlistment preparingEnlistment)
             {
                 // Abort if this happens before all messges are consumed
-                if (this.channel.State == CommunicationState.Opened && this.channel.InternalPendingItems > 0)
+                if (
+                    this.channel.State == CommunicationState.Opened
+                    && this.channel.InternalPendingItems > 0
+                )
                 {
-                    Exception e = DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MsmqSessionChannelsMustBeClosed)));
+                    Exception e = DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.MsmqSessionChannelsMustBeClosed)
+                        )
+                    );
                     preparingEnlistment.ForceRollback(e);
                     this.channel.Fault();
                 }

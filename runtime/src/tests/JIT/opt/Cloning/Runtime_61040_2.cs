@@ -11,8 +11,10 @@ struct StructWithHoles
 {
     [FieldOffset(0)]
     public int Index;
+
     [FieldOffset(5)]
     public byte B;
+
     [FieldOffset(8)]
     public int C;
 }
@@ -22,15 +24,18 @@ public class Runtime_61040_2
     static int z = 0;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void JitUse(int arg) { z += arg; }
-    
+    static void JitUse(int arg)
+    {
+        z += arg;
+    }
+
     [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.AggressiveOptimization)]
     static int Problem(StructWithHoles a, StructWithHoles b, int[] d)
     {
         var a1 = a;
         var b1 = b;
 
-        try 
+        try
         {
             for (a1.Index = 0; a1.Index < 10; a1.Index = a1.Index + 1)
             {
@@ -47,5 +52,6 @@ public class Runtime_61040_2
     }
 
     [Fact]
-    public static int TestEntryPoint() => Problem(new() { Index = 0 }, new() { Index = 100_000_000 }, new int[10]);
+    public static int TestEntryPoint() =>
+        Problem(new() { Index = 0 }, new() { Index = 100_000_000 }, new int[10]);
 }

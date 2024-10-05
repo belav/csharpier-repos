@@ -9,10 +9,8 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeEvpCipherCtxHandle : SafeHandle
     {
-        public SafeEvpCipherCtxHandle() :
-            base(IntPtr.Zero, ownsHandle: true)
-        {
-        }
+        public SafeEvpCipherCtxHandle()
+            : base(IntPtr.Zero, ownsHandle: true) { }
 
         protected override bool ReleaseHandle()
         {

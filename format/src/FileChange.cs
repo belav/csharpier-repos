@@ -14,7 +14,11 @@ namespace Microsoft.CodeAnalysis.Tools
 
         public string FormatDescription { get; }
 
-        public FileChange(LinePosition changePosition, string diagnosticId, string formatDescription)
+        public FileChange(
+            LinePosition changePosition,
+            string diagnosticId,
+            string formatDescription
+        )
         {
             // LinePosition is zero based so we need to increment to report numbers people expect.
             LineNumber = changePosition.Line + 1;

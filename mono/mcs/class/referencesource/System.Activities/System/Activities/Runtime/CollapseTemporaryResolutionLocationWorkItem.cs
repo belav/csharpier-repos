@@ -13,7 +13,10 @@ namespace System.Activities.Runtime
     {
         private Location location;
 
-        public CollapseTemporaryResolutionLocationWorkItem(Location location, ActivityInstance instance)
+        public CollapseTemporaryResolutionLocationWorkItem(
+            Location location,
+            ActivityInstance instance
+        )
             : base(instance)
         {
             this.location = location;
@@ -35,7 +38,7 @@ namespace System.Activities.Runtime
             get { return this.location; }
             set { this.location = value; }
         }
-       
+
         public override void TraceScheduled()
         {
             TraceRuntimeWorkItemScheduled();
@@ -53,7 +56,9 @@ namespace System.Activities.Runtime
 
         public override bool Execute(ActivityExecutor executor, BookmarkManager bookmarkManager)
         {
-            this.location.TemporaryResolutionEnvironment.CollapseTemporaryResolutionLocation(this.location);
+            this.location.TemporaryResolutionEnvironment.CollapseTemporaryResolutionLocation(
+                this.location
+            );
             return true;
         }
 

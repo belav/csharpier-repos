@@ -21,14 +21,10 @@ namespace System.Web.Mvc
         /// Initializes a new instance of the <see cref="UrlHelper"/> class.
         /// </summary>
         /// <remarks>The default constructor is intended for use by unit testing only.</remarks>
-        public UrlHelper()
-        {
-        }
+        public UrlHelper() { }
 
         public UrlHelper(RequestContext requestContext)
-            : this(requestContext, RouteTable.Routes)
-        {
-        }
+            : this(requestContext, RouteTable.Routes) { }
 
         public UrlHelper(RequestContext requestContext, RouteCollection routeCollection)
         {
@@ -55,47 +51,146 @@ namespace System.Web.Mvc
 
         public virtual string Action(string actionName)
         {
-            return GenerateUrl(null /* routeName */, actionName, null, (RouteValueDictionary)null /* routeValues */);
+            return GenerateUrl(
+                null /* routeName */
+                ,
+                actionName,
+                null,
+                (RouteValueDictionary)null /* routeValues */
+            );
         }
 
         public virtual string Action(string actionName, object routeValues)
         {
-            return GenerateUrl(null /* routeName */, actionName, null /* controllerName */, TypeHelper.ObjectToDictionary(routeValues));
+            return GenerateUrl(
+                null /* routeName */
+                ,
+                actionName,
+                null /* controllerName */
+                ,
+                TypeHelper.ObjectToDictionary(routeValues)
+            );
         }
 
         public virtual string Action(string actionName, RouteValueDictionary routeValues)
         {
-            return GenerateUrl(null /* routeName */, actionName, null /* controllerName */, routeValues);
+            return GenerateUrl(
+                null /* routeName */
+                ,
+                actionName,
+                null /* controllerName */
+                ,
+                routeValues
+            );
         }
 
         public virtual string Action(string actionName, string controllerName)
         {
-            return GenerateUrl(null /* routeName */, actionName, controllerName, (RouteValueDictionary)null /* routeValues */);
+            return GenerateUrl(
+                null /* routeName */
+                ,
+                actionName,
+                controllerName,
+                (RouteValueDictionary)null /* routeValues */
+            );
         }
 
         public virtual string Action(string actionName, string controllerName, object routeValues)
         {
-            return GenerateUrl(null /* routeName */, actionName, controllerName, TypeHelper.ObjectToDictionary(routeValues));
+            return GenerateUrl(
+                null /* routeName */
+                ,
+                actionName,
+                controllerName,
+                TypeHelper.ObjectToDictionary(routeValues)
+            );
         }
 
-        public virtual string Action(string actionName, string controllerName, RouteValueDictionary routeValues)
+        public virtual string Action(
+            string actionName,
+            string controllerName,
+            RouteValueDictionary routeValues
+        )
         {
-            return GenerateUrl(null /* routeName */, actionName, controllerName, routeValues);
+            return GenerateUrl(
+                null /* routeName */
+                ,
+                actionName,
+                controllerName,
+                routeValues
+            );
         }
 
-        public virtual string Action(string actionName, string controllerName, RouteValueDictionary routeValues, string protocol)
+        public virtual string Action(
+            string actionName,
+            string controllerName,
+            RouteValueDictionary routeValues,
+            string protocol
+        )
         {
-            return GenerateUrl(null /* routeName */, actionName, controllerName, protocol, null /* hostName */, null /* fragment */, routeValues, RouteCollection, RequestContext, true /* includeImplicitMvcValues */);
+            return GenerateUrl(
+                null /* routeName */
+                ,
+                actionName,
+                controllerName,
+                protocol,
+                null /* hostName */
+                ,
+                null /* fragment */
+                ,
+                routeValues,
+                RouteCollection,
+                RequestContext,
+                true /* includeImplicitMvcValues */
+            );
         }
 
-        public virtual string Action(string actionName, string controllerName, object routeValues, string protocol)
+        public virtual string Action(
+            string actionName,
+            string controllerName,
+            object routeValues,
+            string protocol
+        )
         {
-            return GenerateUrl(null /* routeName */, actionName, controllerName, protocol, null /* hostName */, null /* fragment */, TypeHelper.ObjectToDictionary(routeValues), RouteCollection, RequestContext, true /* includeImplicitMvcValues */);
+            return GenerateUrl(
+                null /* routeName */
+                ,
+                actionName,
+                controllerName,
+                protocol,
+                null /* hostName */
+                ,
+                null /* fragment */
+                ,
+                TypeHelper.ObjectToDictionary(routeValues),
+                RouteCollection,
+                RequestContext,
+                true /* includeImplicitMvcValues */
+            );
         }
 
-        public virtual string Action(string actionName, string controllerName, RouteValueDictionary routeValues, string protocol, string hostName)
+        public virtual string Action(
+            string actionName,
+            string controllerName,
+            RouteValueDictionary routeValues,
+            string protocol,
+            string hostName
+        )
         {
-            return GenerateUrl(null /* routeName */, actionName, controllerName, protocol, hostName, null /* fragment */, routeValues, RouteCollection, RequestContext, true /* includeImplicitMvcValues */);
+            return GenerateUrl(
+                null /* routeName */
+                ,
+                actionName,
+                controllerName,
+                protocol,
+                hostName,
+                null /* fragment */
+                ,
+                routeValues,
+                RouteCollection,
+                RequestContext,
+                true /* includeImplicitMvcValues */
+            );
         }
 
         public virtual string Content(string contentPath)
@@ -103,7 +198,11 @@ namespace System.Web.Mvc
             return GenerateContentUrl(contentPath, RequestContext.HttpContext);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1055:UriReturnValuesShouldNotBeStrings", Justification = "As the return value will used only for rendering, string return value is more appropriate.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1055:UriReturnValuesShouldNotBeStrings",
+            Justification = "As the return value will used only for rendering, string return value is more appropriate."
+        )]
         public static string GenerateContentUrl(string contentPath, HttpContextBase httpContext)
         {
             if (String.IsNullOrEmpty(contentPath))
@@ -127,22 +226,66 @@ namespace System.Web.Mvc
         }
 
         //REVIEW: Should we have an overload that takes Uri?
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", Justification = "Needs to take same parameters as HttpUtility.UrlEncode()")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "For consistency, all helpers are instance methods.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            Justification = "Needs to take same parameters as HttpUtility.UrlEncode()"
+        )]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "For consistency, all helpers are instance methods."
+        )]
         public virtual string Encode(string url)
         {
             return HttpUtility.UrlEncode(url);
         }
 
-        private string GenerateUrl(string routeName, string actionName, string controllerName, RouteValueDictionary routeValues)
+        private string GenerateUrl(
+            string routeName,
+            string actionName,
+            string controllerName,
+            RouteValueDictionary routeValues
+        )
         {
-            return GenerateUrl(routeName, actionName, controllerName, routeValues, RouteCollection, RequestContext, true /* includeImplicitMvcValues */);
+            return GenerateUrl(
+                routeName,
+                actionName,
+                controllerName,
+                routeValues,
+                RouteCollection,
+                RequestContext,
+                true /* includeImplicitMvcValues */
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1055:UriReturnValuesShouldNotBeStrings", Justification = "As the return value will used only for rendering, string return value is more appropriate.")]
-        public static string GenerateUrl(string routeName, string actionName, string controllerName, string protocol, string hostName, string fragment, RouteValueDictionary routeValues, RouteCollection routeCollection, RequestContext requestContext, bool includeImplicitMvcValues)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1055:UriReturnValuesShouldNotBeStrings",
+            Justification = "As the return value will used only for rendering, string return value is more appropriate."
+        )]
+        public static string GenerateUrl(
+            string routeName,
+            string actionName,
+            string controllerName,
+            string protocol,
+            string hostName,
+            string fragment,
+            RouteValueDictionary routeValues,
+            RouteCollection routeCollection,
+            RequestContext requestContext,
+            bool includeImplicitMvcValues
+        )
         {
-            string url = GenerateUrl(routeName, actionName, controllerName, routeValues, routeCollection, requestContext, includeImplicitMvcValues);
+            string url = GenerateUrl(
+                routeName,
+                actionName,
+                controllerName,
+                routeValues,
+                routeCollection,
+                requestContext,
+                includeImplicitMvcValues
+            );
 
             if (url != null)
             {
@@ -160,9 +303,16 @@ namespace System.Web.Mvc
                     string port = String.Empty;
                     string requestProtocol = requestUrl.Scheme;
 
-                    if (String.Equals(protocol, requestProtocol, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        String.Equals(protocol, requestProtocol, StringComparison.OrdinalIgnoreCase)
+                    )
                     {
-                        port = requestUrl.IsDefaultPort ? String.Empty : (":" + Convert.ToString(requestUrl.Port, CultureInfo.InvariantCulture));
+                        port = requestUrl.IsDefaultPort
+                            ? String.Empty
+                            : (
+                                ":"
+                                + Convert.ToString(requestUrl.Port, CultureInfo.InvariantCulture)
+                            );
                     }
 
                     url = protocol + Uri.SchemeDelimiter + hostName + port + url;
@@ -172,8 +322,20 @@ namespace System.Web.Mvc
             return url;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1055:UriReturnValuesShouldNotBeStrings", Justification = "As the return value will used only for rendering, string return value is more appropriate.")]
-        public static string GenerateUrl(string routeName, string actionName, string controllerName, RouteValueDictionary routeValues, RouteCollection routeCollection, RequestContext requestContext, bool includeImplicitMvcValues)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1055:UriReturnValuesShouldNotBeStrings",
+            Justification = "As the return value will used only for rendering, string return value is more appropriate."
+        )]
+        public static string GenerateUrl(
+            string routeName,
+            string actionName,
+            string controllerName,
+            RouteValueDictionary routeValues,
+            RouteCollection routeCollection,
+            RequestContext requestContext,
+            bool includeImplicitMvcValues
+        )
         {
             if (routeCollection == null)
             {
@@ -185,74 +347,183 @@ namespace System.Web.Mvc
                 throw new ArgumentNullException("requestContext");
             }
 
-            RouteValueDictionary mergedRouteValues = RouteValuesHelpers.MergeRouteValues(actionName, controllerName, requestContext.RouteData.Values, routeValues, includeImplicitMvcValues);
+            RouteValueDictionary mergedRouteValues = RouteValuesHelpers.MergeRouteValues(
+                actionName,
+                controllerName,
+                requestContext.RouteData.Values,
+                routeValues,
+                includeImplicitMvcValues
+            );
 
-            VirtualPathData vpd = routeCollection.GetVirtualPathForArea(requestContext, routeName, mergedRouteValues);
+            VirtualPathData vpd = routeCollection.GetVirtualPathForArea(
+                requestContext,
+                routeName,
+                mergedRouteValues
+            );
             if (vpd == null)
             {
                 return null;
             }
 
-            string modifiedUrl = UrlUtil.GenerateClientUrl(requestContext.HttpContext, vpd.VirtualPath);
+            string modifiedUrl = UrlUtil.GenerateClientUrl(
+                requestContext.HttpContext,
+                vpd.VirtualPath
+            );
             return modifiedUrl;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "0#", Justification = "Response.Redirect() takes its URI as a string parameter.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "0#",
+            Justification = "Response.Redirect() takes its URI as a string parameter."
+        )]
         public virtual bool IsLocalUrl(string url)
         {
             // TODO this should call the System.Web.dll API once it gets added to the framework and MVC takes a dependency on it.
             return RequestExtensions.IsUrlLocalToHost(RequestContext.HttpContext.Request, url);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1055:UriReturnValuesShouldNotBeStrings", Justification = "As the return value will used only for rendering, string return value is more appropriate.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1055:UriReturnValuesShouldNotBeStrings",
+            Justification = "As the return value will used only for rendering, string return value is more appropriate."
+        )]
         public virtual string RouteUrl(object routeValues)
         {
-            return RouteUrl(null /* routeName */, routeValues);
+            return RouteUrl(
+                null /* routeName */
+                ,
+                routeValues
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1055:UriReturnValuesShouldNotBeStrings", Justification = "As the return value will used only for rendering, string return value is more appropriate.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1055:UriReturnValuesShouldNotBeStrings",
+            Justification = "As the return value will used only for rendering, string return value is more appropriate."
+        )]
         public virtual string RouteUrl(RouteValueDictionary routeValues)
         {
-            return RouteUrl(null /* routeName */, routeValues);
+            return RouteUrl(
+                null /* routeName */
+                ,
+                routeValues
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1055:UriReturnValuesShouldNotBeStrings", Justification = "As the return value will used only for rendering, string return value is more appropriate.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1055:UriReturnValuesShouldNotBeStrings",
+            Justification = "As the return value will used only for rendering, string return value is more appropriate."
+        )]
         public virtual string RouteUrl(string routeName)
         {
-            return RouteUrl(routeName, (object)null /* routeValues */);
+            return RouteUrl(
+                routeName,
+                (object)null /* routeValues */
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1055:UriReturnValuesShouldNotBeStrings", Justification = "As the return value will used only for rendering, string return value is more appropriate.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1055:UriReturnValuesShouldNotBeStrings",
+            Justification = "As the return value will used only for rendering, string return value is more appropriate."
+        )]
         public virtual string RouteUrl(string routeName, object routeValues)
         {
-            return RouteUrl(routeName, routeValues, null /* protocol */);
+            return RouteUrl(
+                routeName,
+                routeValues,
+                null /* protocol */
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1055:UriReturnValuesShouldNotBeStrings", Justification = "As the return value will used only for rendering, string return value is more appropriate.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1055:UriReturnValuesShouldNotBeStrings",
+            Justification = "As the return value will used only for rendering, string return value is more appropriate."
+        )]
         public virtual string RouteUrl(string routeName, RouteValueDictionary routeValues)
         {
-            return RouteUrl(routeName, routeValues, null /* protocol */, null /* hostName */);
+            return RouteUrl(
+                routeName,
+                routeValues,
+                null /* protocol */
+                ,
+                null /* hostName */
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1055:UriReturnValuesShouldNotBeStrings", Justification = "As the return value will used only for rendering, string return value is more appropriate.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1055:UriReturnValuesShouldNotBeStrings",
+            Justification = "As the return value will used only for rendering, string return value is more appropriate."
+        )]
         public virtual string RouteUrl(string routeName, object routeValues, string protocol)
         {
-            return GenerateUrl(routeName, null /* actionName */, null /* controllerName */, protocol, null /* hostName */, null /* fragment */, TypeHelper.ObjectToDictionary(routeValues), RouteCollection, RequestContext, false /* includeImplicitMvcValues */);
+            return GenerateUrl(
+                routeName,
+                null /* actionName */
+                ,
+                null /* controllerName */
+                ,
+                protocol,
+                null /* hostName */
+                ,
+                null /* fragment */
+                ,
+                TypeHelper.ObjectToDictionary(routeValues),
+                RouteCollection,
+                RequestContext,
+                false /* includeImplicitMvcValues */
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1055:UriReturnValuesShouldNotBeStrings", Justification = "As the return value will used only for rendering, string return value is more appropriate.")]
-        public virtual string RouteUrl(string routeName, RouteValueDictionary routeValues, string protocol, string hostName)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1055:UriReturnValuesShouldNotBeStrings",
+            Justification = "As the return value will used only for rendering, string return value is more appropriate."
+        )]
+        public virtual string RouteUrl(
+            string routeName,
+            RouteValueDictionary routeValues,
+            string protocol,
+            string hostName
+        )
         {
-            return GenerateUrl(routeName, null /* actionName */, null /* controllerName */, protocol, hostName, null /* fragment */, routeValues, RouteCollection, RequestContext, false /* includeImplicitMvcValues */);
+            return GenerateUrl(
+                routeName,
+                null /* actionName */
+                ,
+                null /* controllerName */
+                ,
+                protocol,
+                hostName,
+                null /* fragment */
+                ,
+                routeValues,
+                RouteCollection,
+                RequestContext,
+                false /* includeImplicitMvcValues */
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1055:UriReturnValuesShouldNotBeStrings", Justification = "As the return value will used only for rendering, string return value is more appropriate.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1055:UriReturnValuesShouldNotBeStrings",
+            Justification = "As the return value will used only for rendering, string return value is more appropriate."
+        )]
         public virtual string HttpRouteUrl(string routeName, object routeValues)
         {
             return HttpRouteUrl(routeName, TypeHelper.ObjectToDictionary(routeValues));
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1055:UriReturnValuesShouldNotBeStrings", Justification = "As the return value will used only for rendering, string return value is more appropriate.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1055:UriReturnValuesShouldNotBeStrings",
+            Justification = "As the return value will used only for rendering, string return value is more appropriate."
+        )]
         public virtual string HttpRouteUrl(string routeName, RouteValueDictionary routeValues)
         {
             if (routeValues == null)
@@ -273,7 +544,8 @@ namespace System.Web.Mvc
                 }
             }
 
-            return GenerateUrl(routeName,
+            return GenerateUrl(
+                routeName,
                 actionName: null,
                 controllerName: null,
                 protocol: null,
@@ -282,7 +554,8 @@ namespace System.Web.Mvc
                 routeValues: routeValues,
                 routeCollection: RouteCollection,
                 requestContext: RequestContext,
-                includeImplicitMvcValues: false);
+                includeImplicitMvcValues: false
+            );
         }
     }
 }

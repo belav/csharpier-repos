@@ -3,18 +3,22 @@
 
 using System;
 using System.Runtime.InteropServices;
-
 using HeapAllocFlags = Interop.Kernel32.HeapAllocFlags;
 
 namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeHeapAllocHandle : SafeBuffer, IDisposable
     {
-        public SafeHeapAllocHandle() : base(true) { }
+        public SafeHeapAllocHandle()
+            : base(true) { }
 
         internal static SafeHeapAllocHandle Alloc(int size)
         {
-            SafeHeapAllocHandle result = Interop.Kernel32.HeapAlloc(s_hHeap, HeapAllocFlags.None, size);
+            SafeHeapAllocHandle result = Interop.Kernel32.HeapAlloc(
+                s_hHeap,
+                HeapAllocFlags.None,
+                size
+            );
             if (result.IsInvalid)
             {
                 result.SetHandleAsInvalid();

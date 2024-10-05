@@ -13,37 +13,69 @@ namespace System.Xml.Tests
         {
             // for function TXmlns1
             {
-                this.AddChild(new CVariation(TXmlns1) { Attribute = new Variation("Name, LocalName, Prefix and Value with xmlns=ns attribute") { Pri = 0 } });
+                this.AddChild(
+                    new CVariation(TXmlns1)
+                    {
+                        Attribute = new Variation(
+                            "Name, LocalName, Prefix and Value with xmlns=ns attribute"
+                        )
+                        {
+                            Pri = 0,
+                        },
+                    }
+                );
             }
-
 
             // for function TXmlns2
             {
-                this.AddChild(new CVariation(TXmlns2) { Attribute = new Variation("Name, LocalName, Prefix and Value with xmlns:p=ns attribute") });
+                this.AddChild(
+                    new CVariation(TXmlns2)
+                    {
+                        Attribute = new Variation(
+                            "Name, LocalName, Prefix and Value with xmlns:p=ns attribute"
+                        ),
+                    }
+                );
             }
-
 
             // for function TXmlns3
             {
-                this.AddChild(new CVariation(TXmlns3) { Attribute = new Variation("LookupNamespace with xmlns=ns attribute") });
+                this.AddChild(
+                    new CVariation(TXmlns3)
+                    {
+                        Attribute = new Variation("LookupNamespace with xmlns=ns attribute"),
+                    }
+                );
             }
-
 
             // for function TXmlns4
             {
-                this.AddChild(new CVariation(TXmlns4) { Attribute = new Variation("MoveToAttribute access on xmlns attribute") });
+                this.AddChild(
+                    new CVariation(TXmlns4)
+                    {
+                        Attribute = new Variation("MoveToAttribute access on xmlns attribute"),
+                    }
+                );
             }
-
 
             // for function TXmlns5
             {
-                this.AddChild(new CVariation(TXmlns5) { Attribute = new Variation("GetAttribute access on xmlns attribute") });
+                this.AddChild(
+                    new CVariation(TXmlns5)
+                    {
+                        Attribute = new Variation("GetAttribute access on xmlns attribute"),
+                    }
+                );
             }
-
 
             // for function TXmlns6
             {
-                this.AddChild(new CVariation(TXmlns6) { Attribute = new Variation("this[xmlns] attribute access") });
+                this.AddChild(
+                    new CVariation(TXmlns6)
+                    {
+                        Attribute = new Variation("this[xmlns] attribute access"),
+                    }
+                );
             }
         }
     }

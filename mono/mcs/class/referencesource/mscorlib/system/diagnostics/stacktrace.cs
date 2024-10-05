@@ -1,26 +1,27 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
-namespace System.Diagnostics {
-    using System.Text;
-    using System.Threading;
+namespace System.Diagnostics
+{
     using System;
-    using System.Security;
-    using System.Security.Permissions;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
     using System.IO;
     using System.Reflection;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
-    using System.Globalization;
+    using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
     using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
-    
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
+
     // READ ME:
-    // Modifying the order or fields of this object may require other changes 
-    // to the unmanaged definition of the StackFrameHelper class, in 
+    // Modifying the order or fields of this object may require other changes
+    // to the unmanaged definition of the StackFrameHelper class, in
     // VM\DebugDebugger.h. The binder will catch some of these layout problems.
     [Serializable]
     internal class StackFrameHelper : IDisposable
@@ -29,13 +30,14 @@ namespace System.Diagnostics {
         private Thread targetThread;
         private int[] rgiOffset;
         private int[] rgiILOffset;
+
         // this field is here only for backwards compatibility of serialization format
         private MethodBase[] rgMethodBase;
 
 #pragma warning disable 414
         // dynamicMethods is an array of System.Resolver objects, used to keep
         // DynamicMethodDescs alive for the lifetime of StackFrameHelper.
-        private Object dynamicMethods; // Field is not used from managed.        
+        private Object dynamicMethods; // Field is not used from managed.
 
         [NonSerialized]
         private IntPtr[] rgMethodHandle;
@@ -44,11 +46,13 @@ namespace System.Diagnostics {
         private int[] rgiLoadedPeSize;
         private IntPtr[] rgInMemoryPdbAddress;
         private int[] rgiInMemoryPdbSize;
+
         // if rgiMethodToken[i] == 0, then don't attempt to get the portable PDB source/info
         private int[] rgiMethodToken;
         private String[] rgFilename;
         private int[] rgiLineNumber;
         private int[] rgiColumnNumber;
+
 #if FEATURE_EXCEPTIONDISPATCHINFO
         [OptionalField]
         private bool[] rgiLastFrameFromForeignExceptionStackTrace;
@@ -57,16 +61,25 @@ namespace System.Diagnostics {
         private int iFrameCount;
 #pragma warning restore 414
 
-        private delegate void GetSourceLineInfoDelegate(string assemblyPath, IntPtr loadedPeAddress, int loadedPeSize,
-            IntPtr inMemoryPdbAddress, int inMemoryPdbSize, int methodToken, int ilOffset, 
-            out string sourceFile, out int sourceLine, out int sourceColumn);
+        private delegate void GetSourceLineInfoDelegate(
+            string assemblyPath,
+            IntPtr loadedPeAddress,
+            int loadedPeSize,
+            IntPtr inMemoryPdbAddress,
+            int inMemoryPdbSize,
+            int methodToken,
+            int ilOffset,
+            out string sourceFile,
+            out int sourceLine,
+            out int sourceColumn
+        );
 
         private static Type s_symbolsType = null;
         private static MethodInfo s_symbolsMethodInfo = null;
 
         [ThreadStatic]
         private static int t_reentrancy = 0;
-        
+
         public StackFrameHelper(Thread target)
         {
             targetThread = target;
@@ -92,16 +105,16 @@ namespace System.Diagnostics {
 
             // 0 means capture all frames.  For StackTraces from an Exception, the EE always
             // captures all frames.  For other uses of StackTraces, we can abort stack walking after
-            // some limit if we want to by setting this to a non-zero value.  In Whidbey this was 
+            // some limit if we want to by setting this to a non-zero value.  In Whidbey this was
             // hard-coded to 512, but some customers complained.  There shouldn't be any need to limit
             // this as memory/CPU is no longer allocated up front.  If there is some reason to provide a
-            // limit in the future, then we should expose it in the managed API so applications can 
+            // limit in the future, then we should expose it in the managed API so applications can
             // override it.
             iFrameCount = 0;
         }
 
         //
-        // Initializes the stack trace helper. If fNeedFileInfo is true, initializes rgFilename, 
+        // Initializes the stack trace helper. If fNeedFileInfo is true, initializes rgFilename,
         // rgiLineNumber and rgiColumnNumber fields using the portable PDB reader if not already
         // done by GetStackFramesInternal (on Windows for old PDB format).
         //
@@ -126,24 +139,30 @@ namespace System.Diagnostics {
                 {
                     s_symbolsType = Type.GetType(
                         "System.Diagnostics.StackTraceSymbols, System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-                        throwOnError: false);
+                        throwOnError: false
+                    );
 
                     if (s_symbolsType == null)
                     {
                         return;
                     }
 
-                    s_symbolsMethodInfo = s_symbolsType.GetMethod("GetSourceLineInfo",
-                                                                  new Type[] { typeof(string),
-                                                                               typeof(IntPtr),
-                                                                               typeof(int),
-                                                                               typeof(IntPtr),
-                                                                               typeof(int),
-                                                                               typeof(int),
-                                                                               typeof(int),
-                                                                               typeof(string).MakeByRefType(),
-                                                                               typeof(int).MakeByRefType(),
-                                                                               typeof(int).MakeByRefType() });
+                    s_symbolsMethodInfo = s_symbolsType.GetMethod(
+                        "GetSourceLineInfo",
+                        new Type[]
+                        {
+                            typeof(string),
+                            typeof(IntPtr),
+                            typeof(int),
+                            typeof(IntPtr),
+                            typeof(int),
+                            typeof(int),
+                            typeof(int),
+                            typeof(string).MakeByRefType(),
+                            typeof(int).MakeByRefType(),
+                            typeof(int).MakeByRefType(),
+                        }
+                    );
                     if (s_symbolsMethodInfo == null)
                         return;
                 }
@@ -154,7 +173,11 @@ namespace System.Diagnostics {
                     object target = Activator.CreateInstance(s_symbolsType);
 
                     // Create an instance delegate for the GetSourceLineInfo method
-                    getSourceLineInfo = (GetSourceLineInfoDelegate)s_symbolsMethodInfo.CreateDelegate(typeof(GetSourceLineInfoDelegate), target);
+                    getSourceLineInfo = (GetSourceLineInfoDelegate)
+                        s_symbolsMethodInfo.CreateDelegate(
+                            typeof(GetSourceLineInfoDelegate),
+                            target
+                        );
                 }
 
                 for (int index = 0; index < iFrameCount; index++)
@@ -163,21 +186,27 @@ namespace System.Diagnostics {
                     // ENC or the source/line info was already retrieved, the method token is 0.
                     if (rgiMethodToken[index] != 0)
                     {
-                        getSourceLineInfo(rgAssemblyPath[index], rgLoadedPeAddress[index], rgiLoadedPeSize[index],
-                            rgInMemoryPdbAddress[index], rgiInMemoryPdbSize[index], rgiMethodToken[index],
-                            rgiILOffset[index], out rgFilename[index], out rgiLineNumber[index], out rgiColumnNumber[index]);
+                        getSourceLineInfo(
+                            rgAssemblyPath[index],
+                            rgLoadedPeAddress[index],
+                            rgiLoadedPeSize[index],
+                            rgInMemoryPdbAddress[index],
+                            rgiInMemoryPdbSize[index],
+                            rgiMethodToken[index],
+                            rgiILOffset[index],
+                            out rgFilename[index],
+                            out rgiLineNumber[index],
+                            out rgiColumnNumber[index]
+                        );
                     }
                 }
             }
-            catch
-            {
-            }
+            catch { }
             finally
             {
                 t_reentrancy--;
             }
         }
-
 
         void IDisposable.Dispose()
         {
@@ -192,39 +221,69 @@ namespace System.Diagnostics {
         }
 
         [System.Security.SecuritySafeCritical]
-        public virtual MethodBase GetMethodBase(int i) 
-        { 
+        public virtual MethodBase GetMethodBase(int i)
+        {
             // There may be a better way to do this.
             // we got RuntimeMethodHandles here and we need to go to MethodBase
             // but we don't know whether the reflection info has been initialized
             // or not. So we call GetMethods and GetConstructors on the type
             // and then we fetch the proper MethodBase!!
             IntPtr mh = rgMethodHandle[i];
-            
-            if (mh.IsNull()) 
+
+            if (mh.IsNull())
                 return null;
 
-            IRuntimeMethodInfo mhReal = RuntimeMethodHandle.GetTypicalMethodDefinition(new RuntimeMethodInfoStub(mh, this));
+            IRuntimeMethodInfo mhReal = RuntimeMethodHandle.GetTypicalMethodDefinition(
+                new RuntimeMethodInfoStub(mh, this)
+            );
 
             return RuntimeType.GetMethodBase(mhReal);
         }
 
-        public virtual int GetOffset(int i) { return rgiOffset[i];}
-        public virtual int GetILOffset(int i) { return rgiILOffset[i];}
-        public virtual String GetFilename(int i) { return rgFilename == null ? null : rgFilename[i];}
-        public virtual int GetLineNumber(int i) { return rgiLineNumber == null ? 0 : rgiLineNumber[i];}
-        public virtual int GetColumnNumber(int i) { return rgiColumnNumber == null ? 0 : rgiColumnNumber[i];}
+        public virtual int GetOffset(int i)
+        {
+            return rgiOffset[i];
+        }
+
+        public virtual int GetILOffset(int i)
+        {
+            return rgiILOffset[i];
+        }
+
+        public virtual String GetFilename(int i)
+        {
+            return rgFilename == null ? null : rgFilename[i];
+        }
+
+        public virtual int GetLineNumber(int i)
+        {
+            return rgiLineNumber == null ? 0 : rgiLineNumber[i];
+        }
+
+        public virtual int GetColumnNumber(int i)
+        {
+            return rgiColumnNumber == null ? 0 : rgiColumnNumber[i];
+        }
 
 #if FEATURE_EXCEPTIONDISPATCHINFO
-        public virtual bool IsLastFrameFromForeignExceptionStackTrace(int i) 
-        { 
-            return (rgiLastFrameFromForeignExceptionStackTrace == null)?false:rgiLastFrameFromForeignExceptionStackTrace[i];
-        } 
+        public virtual bool IsLastFrameFromForeignExceptionStackTrace(int i)
+        {
+            return (rgiLastFrameFromForeignExceptionStackTrace == null)
+                ? false
+                : rgiLastFrameFromForeignExceptionStackTrace[i];
+        }
 #endif // FEATURE_EXCEPTIONDISPATCHINFO
 
-        public virtual int GetNumberOfFrames() { return iFrameCount;}
-        public virtual void SetNumberOfFrames(int i) { iFrameCount = i;}
-    
+        public virtual int GetNumberOfFrames()
+        {
+            return iFrameCount;
+        }
+
+        public virtual void SetNumberOfFrames(int i)
+        {
+            iFrameCount = i;
+        }
+
         //
         // serialization implementation
         //
@@ -236,12 +295,14 @@ namespace System.Diagnostics {
             // For compatibility with Everett we need to assign the rgMethodBase field as that is the field
             // that will be serialized
             rgMethodBase = (rgMethodHandle == null) ? null : new MethodBase[rgMethodHandle.Length];
-            if (rgMethodHandle != null) 
+            if (rgMethodHandle != null)
             {
-                for (int i = 0; i < rgMethodHandle.Length; i++) 
+                for (int i = 0; i < rgMethodHandle.Length; i++)
                 {
                     if (!rgMethodHandle[i].IsNull())
-                        rgMethodBase[i] = RuntimeType.GetMethodBase(new RuntimeMethodInfoStub(rgMethodHandle[i], this));
+                        rgMethodBase[i] = RuntimeType.GetMethodBase(
+                            new RuntimeMethodInfoStub(rgMethodHandle[i], this)
+                        );
                 }
             }
         }
@@ -259,9 +320,9 @@ namespace System.Diagnostics {
         {
             // after we are done deserializing we need to transform the rgMethodBase in rgMethodHandle
             rgMethodHandle = (rgMethodBase == null) ? null : new IntPtr[rgMethodBase.Length];
-            if (rgMethodBase != null) 
+            if (rgMethodBase != null)
             {
-                for (int i = 0; i < rgMethodBase.Length; i++) 
+                for (int i = 0; i < rgMethodBase.Length; i++)
                 {
                     if (rgMethodBase[i] != null)
                         rgMethodHandle[i] = rgMethodBase[i].MethodHandle.Value;
@@ -270,15 +331,14 @@ namespace System.Diagnostics {
             rgMethodBase = null;
         }
     }
-    
-    
+
     // Class which represents a description of a stack trace
-    // There is no good reason for the methods of this class to be virtual.  
-    // In order to ensure trusted code can trust the data it gets from a 
+    // There is no good reason for the methods of this class to be virtual.
+    // In order to ensure trusted code can trust the data it gets from a
     // StackTrace, we use an InheritanceDemand to prevent partially-trusted
     // subclasses.
 #if !FEATURE_CORECLR
-    [SecurityPermission(SecurityAction.InheritanceDemand, UnmanagedCode=true)]
+    [SecurityPermission(SecurityAction.InheritanceDemand, UnmanagedCode = true)]
 #endif
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]
@@ -302,57 +362,58 @@ namespace System.Diagnostics {
 
         // Constructs a stack trace from the current location.
         //
-        #if FEATURE_CORECLR
+#if FEATURE_CORECLR
         [System.Security.SecurityCritical] // auto-generated
-        #endif
+#endif
         public StackTrace(bool fNeedFileInfo)
         {
             m_iNumOfFrames = 0;
             m_iMethodsToSkip = 0;
             CaptureStackTrace(METHODS_TO_SKIP, fNeedFileInfo, null, null);
         }
-    
+
         // Constructs a stack trace from the current location, in a caller's
         // frame
         //
-        #if FEATURE_CORECLR
+#if FEATURE_CORECLR
         [System.Security.SecurityCritical] // auto-generated
-        #endif
+#endif
         public StackTrace(int skipFrames)
         {
-    
             if (skipFrames < 0)
-                throw new ArgumentOutOfRangeException("skipFrames", 
-                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum"));
+                throw new ArgumentOutOfRangeException(
+                    "skipFrames",
+                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum")
+                );
             Contract.EndContractBlock();
-    
+
             m_iNumOfFrames = 0;
             m_iMethodsToSkip = 0;
-    
-            CaptureStackTrace(skipFrames+METHODS_TO_SKIP, false, null, null);
+
+            CaptureStackTrace(skipFrames + METHODS_TO_SKIP, false, null, null);
         }
- 
+
         // Constructs a stack trace from the current location, in a caller's
         // frame
         //
-        #if FEATURE_CORECLR
+#if FEATURE_CORECLR
         [System.Security.SecurityCritical] // auto-generated
-        #endif
+#endif
         public StackTrace(int skipFrames, bool fNeedFileInfo)
         {
-    
             if (skipFrames < 0)
-                throw new ArgumentOutOfRangeException("skipFrames", 
-                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum"));
+                throw new ArgumentOutOfRangeException(
+                    "skipFrames",
+                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum")
+                );
             Contract.EndContractBlock();
-    
+
             m_iNumOfFrames = 0;
             m_iMethodsToSkip = 0;
-    
-            CaptureStackTrace(skipFrames+METHODS_TO_SKIP, fNeedFileInfo, null, null);
+
+            CaptureStackTrace(skipFrames + METHODS_TO_SKIP, fNeedFileInfo, null, null);
         }
- 
-    
+
         // Constructs a stack trace from the current location.
         public StackTrace(Exception e)
         {
@@ -367,9 +428,9 @@ namespace System.Diagnostics {
 
         // Constructs a stack trace from the current location.
         //
-        #if FEATURE_CORECLR
+#if FEATURE_CORECLR
         [System.Security.SecurityCritical] // auto-generated
-        #endif
+#endif
         public StackTrace(Exception e, bool fNeedFileInfo)
         {
             if (e == null)
@@ -380,53 +441,56 @@ namespace System.Diagnostics {
             m_iMethodsToSkip = 0;
             CaptureStackTrace(METHODS_TO_SKIP, fNeedFileInfo, null, e);
         }
-    
+
         // Constructs a stack trace from the current location, in a caller's
         // frame
         //
-        #if FEATURE_CORECLR
+#if FEATURE_CORECLR
         [System.Security.SecurityCritical] // auto-generated
-        #endif
+#endif
         public StackTrace(Exception e, int skipFrames)
         {
             if (e == null)
                 throw new ArgumentNullException("e");
 
             if (skipFrames < 0)
-                throw new ArgumentOutOfRangeException("skipFrames", 
-                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum"));
+                throw new ArgumentOutOfRangeException(
+                    "skipFrames",
+                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum")
+                );
             Contract.EndContractBlock();
-    
+
             m_iNumOfFrames = 0;
             m_iMethodsToSkip = 0;
-    
-            CaptureStackTrace(skipFrames+METHODS_TO_SKIP, false, null, e);
+
+            CaptureStackTrace(skipFrames + METHODS_TO_SKIP, false, null, e);
         }
- 
+
         // Constructs a stack trace from the current location, in a caller's
         // frame
         //
-        #if FEATURE_CORECLR
+#if FEATURE_CORECLR
         [System.Security.SecurityCritical] // auto-generated
-        #endif
+#endif
         public StackTrace(Exception e, int skipFrames, bool fNeedFileInfo)
         {
             if (e == null)
                 throw new ArgumentNullException("e");
 
             if (skipFrames < 0)
-                throw new ArgumentOutOfRangeException("skipFrames", 
-                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum"));
+                throw new ArgumentOutOfRangeException(
+                    "skipFrames",
+                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum")
+                );
             Contract.EndContractBlock();
-    
+
             m_iNumOfFrames = 0;
             m_iMethodsToSkip = 0;
-    
-            CaptureStackTrace(skipFrames+METHODS_TO_SKIP, fNeedFileInfo, null, e);
+
+            CaptureStackTrace(skipFrames + METHODS_TO_SKIP, fNeedFileInfo, null, e);
         }
- 
-    
-        // Constructs a "fake" stack trace, just containing a single frame.  
+
+        // Constructs a "fake" stack trace, just containing a single frame.
         // Does not have the overhead of a full stack trace.
         //
         public StackTrace(StackFrame frame)
@@ -437,59 +501,69 @@ namespace System.Diagnostics {
             m_iNumOfFrames = 1;
         }
 
-
         // Constructs a stack trace for the given thread
         //
-        #if FEATURE_CORECLR
+#if FEATURE_CORECLR
         [System.Security.SecurityCritical] // auto-generated
-        #endif
-        [Obsolete("This constructor has been deprecated.  Please use a constructor that does not require a Thread parameter.  http://go.microsoft.com/fwlink/?linkid=14202")]
+#endif
+        [Obsolete(
+            "This constructor has been deprecated.  Please use a constructor that does not require a Thread parameter.  http://go.microsoft.com/fwlink/?linkid=14202"
+        )]
         public StackTrace(Thread targetThread, bool needFileInfo)
-        {    
+        {
             m_iNumOfFrames = 0;
             m_iMethodsToSkip = 0;
 
             CaptureStackTrace(METHODS_TO_SKIP, needFileInfo, targetThread, null);
-
         }
 
         [System.Security.SecuritySafeCritical]
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern void GetStackFramesInternal(StackFrameHelper sfh, int iSkip, bool fNeedFileInfo, Exception e);
-    
+        internal static extern void GetStackFramesInternal(
+            StackFrameHelper sfh,
+            int iSkip,
+            bool fNeedFileInfo,
+            Exception e
+        );
+
         internal static int CalculateFramesToSkip(StackFrameHelper StackF, int iNumFrames)
         {
             int iRetVal = 0;
             String PackageName = "System.Diagnostics";
-    
+
             // Check if this method is part of the System.Diagnostics
-            // package. If so, increment counter keeping track of 
+            // package. If so, increment counter keeping track of
             // System.Diagnostics functions
             for (int i = 0; i < iNumFrames; i++)
             {
                 MethodBase mb = StackF.GetMethodBase(i);
                 if (mb != null)
-                {               
+                {
                     Type t = mb.DeclaringType;
-                    if (t == null)  
+                    if (t == null)
                         break;
                     String ns = t.Namespace;
-                    if (ns == null)     
+                    if (ns == null)
                         break;
                     if (String.Compare(ns, PackageName, StringComparison.Ordinal) != 0)
                         break;
                 }
                 iRetVal++;
             }
-    
+
             return iRetVal;
         }
-    
+
         // Retrieves an object with stack trace information encoded.
         // It leaves out the first "iSkip" lines of the stacktrace.
         //
-        private void CaptureStackTrace(int iSkip, bool fNeedFileInfo, Thread targetThread, Exception e)
+        private void CaptureStackTrace(
+            int iSkip,
+            bool fNeedFileInfo,
+            Thread targetThread,
+            Exception e
+        )
         {
             m_iMethodsToSkip += iSkip;
 
@@ -517,7 +591,9 @@ namespace System.Diagnostics {
                         sfTemp.SetILOffset(StackF.GetILOffset(i));
 
 #if FEATURE_EXCEPTIONDISPATCHINFO
-                    sfTemp.SetIsLastFrameFromForeignExceptionStackTrace(StackF.IsLastFrameFromForeignExceptionStackTrace(i));
+                        sfTemp.SetIsLastFrameFromForeignExceptionStackTrace(
+                            StackF.IsLastFrameFromForeignExceptionStackTrace(i)
+                        );
 #endif // FEATURE_EXCEPTIONDISPATCHINFO
 
                         if (fNeedFileInfo)
@@ -541,54 +617,52 @@ namespace System.Diagnostics {
                         m_iNumOfFrames = 0;
                     }
                 }
-
                 // In case this is the same object being re-used, set frames to null
                 else
                     frames = null;
             }
         }
-    
+
         // Property to get the number of frames in the stack trace
         //
         public virtual int FrameCount
         {
-            get { return m_iNumOfFrames;}
+            get { return m_iNumOfFrames; }
         }
-    
-    
+
         // Returns a given stack frame.  Stack frames are numbered starting at
         // zero, which is the last stack frame pushed.
         //
         public virtual StackFrame GetFrame(int index)
         {
             if ((frames != null) && (index < m_iNumOfFrames) && (index >= 0))
-                return frames[index+m_iMethodsToSkip];
-    
+                return frames[index + m_iMethodsToSkip];
+
             return null;
         }
 
         // Returns an array of all stack frames for this stacktrace.
         // The array is ordered and sized such that GetFrames()[i] == GetFrame(i)
-        // The nth element of this array is the same as GetFrame(n). 
+        // The nth element of this array is the same as GetFrame(n).
         // The length of the array is the same as FrameCount.
-        // 
+        //
         [ComVisible(false)]
-        public virtual StackFrame [] GetFrames()
+        public virtual StackFrame[] GetFrames()
         {
             if (frames == null || m_iNumOfFrames <= 0)
                 return null;
-                
+
             // We have to return a subset of the array. Unfortunately this
             // means we have to allocate a new array and copy over.
-            StackFrame [] array = new StackFrame[m_iNumOfFrames];
+            StackFrame[] array = new StackFrame[m_iNumOfFrames];
             Array.Copy(frames, m_iMethodsToSkip, array, 0, m_iNumOfFrames);
             return array;
         }
-    
+
         // Builds a readable representation of the stack trace
         //
 #if FEATURE_CORECLR
-        [System.Security.SecuritySafeCritical] 
+        [System.Security.SecuritySafeCritical]
 #endif
         public override String ToString()
         {
@@ -596,32 +670,33 @@ namespace System.Diagnostics {
             return ToString(TraceFormat.TrailingNewLine);
         }
 
-        // TraceFormat is Used to specify options for how the 
+        // TraceFormat is Used to specify options for how the
         // string-representation of a StackTrace should be generated.
-        internal enum TraceFormat 
+        internal enum TraceFormat
         {
             Normal,
-            TrailingNewLine,        // include a trailing new line character
-            NoResourceLookup    // to prevent infinite resource recusion
+            TrailingNewLine, // include a trailing new line character
+            NoResourceLookup // to prevent infinite resource recusion
+            ,
         }
-            
-        // Builds a readable representation of the stack trace, specifying 
+
+        // Builds a readable representation of the stack trace, specifying
         // the format for backwards compatibility.
-        #if FEATURE_CORECLR
+#if FEATURE_CORECLR
         [System.Security.SecurityCritical] // auto-generated
-        #endif
+#endif
         internal String ToString(TraceFormat traceFormat)
         {
-            bool displayFilenames = true;   // we'll try, but demand may fail
+            bool displayFilenames = true; // we'll try, but demand may fail
             String word_At = "at";
             String inFileLineNum = "in {0}:line {1}";
 
-            if(traceFormat != TraceFormat.NoResourceLookup)
+            if (traceFormat != TraceFormat.NoResourceLookup)
             {
                 word_At = Environment.GetResourceString("Word_At");
                 inFileLineNum = Environment.GetResourceString("StackTrace_InFileLineNumber");
             }
-            
+
             bool fFirstFrame = true;
             StringBuilder sb = new StringBuilder(255);
             for (int iFrameIndex = 0; iFrameIndex < m_iNumOfFrames; iFrameIndex++)
@@ -635,13 +710,13 @@ namespace System.Diagnostics {
                         fFirstFrame = false;
                     else
                         sb.Append(Environment.NewLine);
-                    
+
                     sb.AppendFormat(CultureInfo.InvariantCulture, "   {0} ", word_At);
 
                     Type t = mb.DeclaringType;
-                     // if there is a type (non global method) print it
+                    // if there is a type (non global method) print it
                     if (t != null)
-                    {                                   
+                    {
                         sb.Append(t.FullName.Replace('+', '.'));
                         sb.Append(".");
                     }
@@ -652,7 +727,7 @@ namespace System.Diagnostics {
                     {
                         Type[] typars = ((MethodInfo)mb).GetGenericArguments();
                         sb.Append("[");
-                        int k=0;
+                        int k = 0;
                         bool fFirstTyParam = true;
                         while (k < typars.Length)
                         {
@@ -661,10 +736,10 @@ namespace System.Diagnostics {
                             else
                                 fFirstTyParam = false;
 
-                            sb.Append(typars[k].Name);             
+                            sb.Append(typars[k].Name);
                             k++;
-                        }   
-                        sb.Append("]");    
+                        }
+                        sb.Append("]");
                     }
 
                     // arguments printing
@@ -681,8 +756,8 @@ namespace System.Diagnostics {
                         String typeName = "<UnknownType>";
                         if (pi[j].ParameterType != null)
                             typeName = pi[j].ParameterType.Name;
-                        sb.Append(typeName + " " + pi[j].Name);             
-                    }   
+                        sb.Append(typeName + " " + pi[j].Name);
+                    }
                     sb.Append(")");
 
                     // source location printing
@@ -691,7 +766,7 @@ namespace System.Diagnostics {
                         // If we don't have a PDB or PDB-reading is disabled for the module,
                         // then the file name will be null.
                         String fileName = null;
-                        
+
                         // Getting the filename from a StackFrame is a privileged operation - we won't want
                         // to disclose full path names to arbitrarily untrusted code.  Rather than just omit
                         // this we could probably trim to just the filename so it's still mostly usefull.
@@ -715,11 +790,16 @@ namespace System.Diagnostics {
                             displayFilenames = false;
                         }
 
-                        if (fileName != null) 
+                        if (fileName != null)
                         {
                             // tack on " in c:\tmp\MyFile.cs:line 5"
                             sb.Append(' ');
-                            sb.AppendFormat(CultureInfo.InvariantCulture, inFileLineNum, fileName, sf.GetFileLineNumber());
+                            sb.AppendFormat(
+                                CultureInfo.InvariantCulture,
+                                inFileLineNum,
+                                fileName,
+                                sf.GetFileLineNumber()
+                            );
                         }
                     }
 
@@ -727,31 +807,34 @@ namespace System.Diagnostics {
                     if (sf.GetIsLastFrameFromForeignExceptionStackTrace())
                     {
                         sb.Append(Environment.NewLine);
-                        sb.Append(Environment.GetResourceString("Exception_EndStackTraceFromPreviousThrow"));
+                        sb.Append(
+                            Environment.GetResourceString(
+                                "Exception_EndStackTraceFromPreviousThrow"
+                            )
+                        );
                     }
 #endif // FEATURE_EXCEPTIONDISPATCHINFO
                 }
             }
 
-            if(traceFormat == TraceFormat.TrailingNewLine)
+            if (traceFormat == TraceFormat.TrailingNewLine)
                 sb.Append(Environment.NewLine);
-            
-            return sb.ToString(); 
+
+            return sb.ToString();
         }
 
         // This helper is called from within the EE to construct a string representation
         // of the current stack trace.
-        #if FEATURE_CORECLR
+#if FEATURE_CORECLR
         [System.Security.SecurityCritical] // auto-generated
-        #endif
+#endif
         private static String GetManagedStackTraceStringHelper(bool fNeedFileInfo)
         {
-            // Note all the frames in System.Diagnostics will be skipped when capturing 
+            // Note all the frames in System.Diagnostics will be skipped when capturing
             // a normal stack trace (not from an exception) so we don't need to explicitly
             // skip the GetManagedStackTraceStringHelper frame.
             StackTrace st = new StackTrace(0, fNeedFileInfo);
             return st.ToString();
         }
     }
-
 }

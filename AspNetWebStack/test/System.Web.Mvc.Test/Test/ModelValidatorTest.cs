@@ -15,23 +15,29 @@ namespace System.Web.Mvc.Test
         public void ConstructorGuards()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(null, typeof(object));
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                null,
+                typeof(object)
+            );
             ControllerContext context = new ControllerContext();
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(
-                () => new TestableModelValidator(null, context),
-                "metadata");
+            Assert.ThrowsArgumentNull(() => new TestableModelValidator(null, context), "metadata");
             Assert.ThrowsArgumentNull(
                 () => new TestableModelValidator(metadata, null),
-                "controllerContext");
+                "controllerContext"
+            );
         }
 
         [Fact]
         public void ValuesSet()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(() => 15, typeof(string), "Length");
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
+                () => 15,
+                typeof(string),
+                "Length"
+            );
             ControllerContext context = new ControllerContext();
 
             // Act
@@ -46,7 +52,11 @@ namespace System.Web.Mvc.Test
         public void NoClientRulesByDefault()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(() => 15, typeof(string), "Length");
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
+                () => 15,
+                typeof(string),
+                "Length"
+            );
             ControllerContext context = new ControllerContext();
 
             // Act
@@ -60,7 +70,11 @@ namespace System.Web.Mvc.Test
         public void IsRequiredFalseByDefault()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(() => 15, typeof(string), "Length");
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
+                () => 15,
+                typeof(string),
+                "Length"
+            );
             ControllerContext context = new ControllerContext();
 
             // Act
@@ -73,7 +87,8 @@ namespace System.Web.Mvc.Test
         [Fact]
         public void GetModelValidator_DoesNotReadPropertyValues()
         {
-            ModelValidatorProvider[] originalProviders = ModelValidatorProviders.Providers.ToArray();
+            ModelValidatorProvider[] originalProviders =
+                ModelValidatorProviders.Providers.ToArray();
             try
             {
                 // Arrange
@@ -81,11 +96,17 @@ namespace System.Web.Mvc.Test
                 ModelValidatorProviders.Providers.Add(new ObservableModelValidatorProvider());
 
                 ObservableModel model = new ObservableModel();
-                ModelMetadata metadata = new EmptyModelMetadataProvider().GetMetadataForType(() => model, typeof(ObservableModel));
+                ModelMetadata metadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    () => model,
+                    typeof(ObservableModel)
+                );
                 ControllerContext controllerContext = new ControllerContext();
 
                 // Act
-                ModelValidator validator = ModelValidator.GetModelValidator(metadata, controllerContext);
+                ModelValidator validator = ModelValidator.GetModelValidator(
+                    metadata,
+                    controllerContext
+                );
                 ModelValidationResult[] results = validator.Validate(model).ToArray();
 
                 // Assert
@@ -103,17 +124,21 @@ namespace System.Web.Mvc.Test
 
         private class ObservableModelValidatorProvider : ModelValidatorProvider
         {
-            public override IEnumerable<ModelValidator> GetValidators(ModelMetadata metadata, ControllerContext context)
+            public override IEnumerable<ModelValidator> GetValidators(
+                ModelMetadata metadata,
+                ControllerContext context
+            )
             {
                 return new ModelValidator[] { new ObservableModelValidator(metadata, context) };
             }
 
             private class ObservableModelValidator : ModelValidator
             {
-                public ObservableModelValidator(ModelMetadata metadata, ControllerContext controllerContext)
-                    : base(metadata, controllerContext)
-                {
-                }
+                public ObservableModelValidator(
+                    ModelMetadata metadata,
+                    ControllerContext controllerContext
+                )
+                    : base(metadata, controllerContext) { }
 
                 public override IEnumerable<ModelValidationResult> Validate(object container)
                 {
@@ -147,7 +172,10 @@ namespace System.Web.Mvc.Test
             // Arrange
             ControllerContext context = new ControllerContext();
             DataErrorInfo1 model = new DataErrorInfo1 { Error = "Some Type Error" };
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(() => model, model.GetType());
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                () => model,
+                model.GetType()
+            );
             ModelValidator validator = ModelValidator.GetModelValidator(metadata, context);
 
             // Act
@@ -165,7 +193,10 @@ namespace System.Web.Mvc.Test
             ControllerContext context = new ControllerContext();
             DataErrorInfo1 model = new DataErrorInfo1();
             model["SomeStringProperty"] = "Some Property Error";
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(() => model, model.GetType());
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                () => model,
+                model.GetType()
+            );
             ModelValidator validator = ModelValidator.GetModelValidator(metadata, context);
 
             // Act
@@ -184,7 +215,10 @@ namespace System.Web.Mvc.Test
             DataErrorInfo1 model = new DataErrorInfo1 { Error = "Some Type Error" };
             model["SomeStringProperty"] = "Some Property Error";
             model["SomeOtherStringProperty"] = "Some Other Property Error";
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(() => model, model.GetType());
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                () => model,
+                model.GetType()
+            );
             ModelValidator validator = ModelValidator.GetModelValidator(metadata, context);
 
             // Act
@@ -201,9 +235,7 @@ namespace System.Web.Mvc.Test
         private class TestableModelValidator : ModelValidator
         {
             public TestableModelValidator(ModelMetadata metadata, ControllerContext context)
-                : base(metadata, context)
-            {
-            }
+                : base(metadata, context) { }
 
             public override IEnumerable<ModelValidationResult> Validate(object container)
             {
@@ -213,7 +245,9 @@ namespace System.Web.Mvc.Test
 
         private class DataErrorInfo1 : IDataErrorInfo
         {
-            private readonly Dictionary<string, string> _errors = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            private readonly Dictionary<string, string> _errors = new Dictionary<string, string>(
+                StringComparer.OrdinalIgnoreCase
+            );
 
             public string SomeStringProperty { get; set; }
 

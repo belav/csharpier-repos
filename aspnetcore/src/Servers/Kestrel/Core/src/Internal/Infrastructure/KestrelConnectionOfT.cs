@@ -8,18 +8,21 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
-internal sealed class KestrelConnection<T> : KestrelConnection, IThreadPoolWorkItem where T : BaseConnectionContext
+internal sealed class KestrelConnection<T> : KestrelConnection, IThreadPoolWorkItem
+    where T : BaseConnectionContext
 {
     private readonly Func<T, Task> _connectionDelegate;
     private readonly T _transportConnection;
 
-    public KestrelConnection(long id,
-                             ServiceContext serviceContext,
-                             TransportConnectionManager transportConnectionManager,
-                             Func<T, Task> connectionDelegate,
-                             T connectionContext,
-                             KestrelTrace logger,
-                             ConnectionMetricsContext connectionMetricsContext)
+    public KestrelConnection(
+        long id,
+        ServiceContext serviceContext,
+        TransportConnectionManager transportConnectionManager,
+        Func<T, Task> connectionDelegate,
+        T connectionContext,
+        KestrelTrace logger,
+        ConnectionMetricsContext connectionMetricsContext
+    )
         : base(id, serviceContext, transportConnectionManager, logger, connectionMetricsContext)
     {
         _connectionDelegate = connectionDelegate;
@@ -71,7 +74,12 @@ internal sealed class KestrelConnection<T> : KestrelConnection, IThreadPoolWorkI
                 catch (Exception ex)
                 {
                     unhandledException = ex;
-                    Logger.LogError(0, ex, "Unhandled exception while processing {ConnectionId}.", connectionContext.ConnectionId);
+                    Logger.LogError(
+                        0,
+                        ex,
+                        "Unhandled exception while processing {ConnectionId}.",
+                        connectionContext.ConnectionId
+                    );
                 }
             }
         }
@@ -87,7 +95,13 @@ internal sealed class KestrelConnection<T> : KestrelConnection, IThreadPoolWorkI
 
             Logger.ConnectionStop(connectionContext.ConnectionId);
             KestrelEventSource.Log.ConnectionStop(connectionContext);
-            Metrics.ConnectionStop(MetricsContext, unhandledException, metricsTagsFeature?.TagsList, startTimestamp, currentTimestamp);
+            Metrics.ConnectionStop(
+                MetricsContext,
+                unhandledException,
+                metricsTagsFeature?.TagsList,
+                startTimestamp,
+                currentTimestamp
+            );
 
             // Dispose the transport connection, this needs to happen before removing it from the
             // connection manager so that we only signal completion of this connection after the transport
@@ -102,6 +116,7 @@ internal sealed class KestrelConnection<T> : KestrelConnection, IThreadPoolWorkI
     {
         ICollection<KeyValuePair<string, object?>> IConnectionMetricsTagsFeature.Tags => TagsList;
 
-        public List<KeyValuePair<string, object?>> TagsList { get; } = new List<KeyValuePair<string, object?>>();
+        public List<KeyValuePair<string, object?>> TagsList { get; } =
+            new List<KeyValuePair<string, object?>>();
     }
 }

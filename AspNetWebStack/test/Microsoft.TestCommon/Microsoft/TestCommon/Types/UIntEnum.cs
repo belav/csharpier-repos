@@ -7,6 +7,6 @@ namespace Microsoft.TestCommon.Types
     {
         FirstUInt,
         SecondUInt,
-        ThirdUInt
+        ThirdUInt,
     }
 }

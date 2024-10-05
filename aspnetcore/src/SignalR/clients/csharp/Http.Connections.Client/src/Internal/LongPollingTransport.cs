@@ -21,6 +21,7 @@ internal sealed partial class LongPollingTransport : ITransport
     private readonly HttpConnectionOptions _httpConnectionOptions;
     private IDuplexPipe? _application;
     private IDuplexPipe? _transport;
+
     // Volatile so that the poll loop sees the updated value set from a different thread
     private volatile Exception? _error;
 
@@ -32,18 +33,31 @@ internal sealed partial class LongPollingTransport : ITransport
 
     public PipeWriter Output => _transport!.Output;
 
-    public LongPollingTransport(HttpClient httpClient, HttpConnectionOptions? httpConnectionOptions = null, ILoggerFactory? loggerFactory = null)
+    public LongPollingTransport(
+        HttpClient httpClient,
+        HttpConnectionOptions? httpConnectionOptions = null,
+        ILoggerFactory? loggerFactory = null
+    )
     {
         _httpClient = httpClient;
-        _logger = (loggerFactory ?? NullLoggerFactory.Instance).CreateLogger<LongPollingTransport>();
+        _logger = (
+            loggerFactory ?? NullLoggerFactory.Instance
+        ).CreateLogger<LongPollingTransport>();
         _httpConnectionOptions = httpConnectionOptions ?? new();
     }
 
-    public async Task StartAsync(Uri url, TransferFormat transferFormat, CancellationToken cancellationToken = default)
+    public async Task StartAsync(
+        Uri url,
+        TransferFormat transferFormat,
+        CancellationToken cancellationToken = default
+    )
     {
         if (transferFormat != TransferFormat.Binary && transferFormat != TransferFormat.Text)
         {
-            throw new ArgumentException($"The '{transferFormat}' transfer format is not supported by this transport.", nameof(transferFormat));
+            throw new ArgumentException(
+                $"The '{transferFormat}' transfer format is not supported by this transport.",
+                nameof(transferFormat)
+            );
         }
 
         Log.StartTransport(_logger, transferFormat);
@@ -51,13 +65,20 @@ internal sealed partial class LongPollingTransport : ITransport
         // Make initial long polling request
         // Server uses first long polling request to finish initializing connection and it returns without data
         var request = new HttpRequestMessage(HttpMethod.Get, url);
-        using (var response = await _httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false))
+        using (
+            var response = await _httpClient
+                .SendAsync(request, cancellationToken)
+                .ConfigureAwait(false)
+        )
         {
             response.EnsureSuccessStatusCode();
         }
 
         // Create the pipe pair (Application's writer is connected to Transport's reader, and vice versa)
-        var pair = DuplexPipe.CreateConnectionPair(_httpConnectionOptions.TransportPipeOptions, _httpConnectionOptions.AppPipeOptions);
+        var pair = DuplexPipe.CreateConnectionPair(
+            _httpConnectionOptions.TransportPipeOptions,
+            _httpConnectionOptions.AppPipeOptions
+        );
 
         _transport = pair.Transport;
         _application = pair.Application;
@@ -154,7 +175,9 @@ internal sealed partial class LongPollingTransport : ITransport
 
                 try
                 {
-                    response = await _httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
+                    response = await _httpClient
+                        .SendAsync(request, cancellationToken)
+                        .ConfigureAwait(false);
                 }
                 catch (OperationCanceledException)
                 {
@@ -163,7 +186,10 @@ internal sealed partial class LongPollingTransport : ITransport
                     // just want to start a new poll.
                     continue;
                 }
-                catch (WebException ex) when (!OperatingSystem.IsBrowser() && ex.Status == WebExceptionStatus.RequestCanceled)
+                catch (WebException ex)
+                    when (!OperatingSystem.IsBrowser()
+                        && ex.Status == WebExceptionStatus.RequestCanceled
+                    )
                 {
                     // SendAsync on .NET Framework doesn't reliably throw OperationCanceledException.
                     // Catch the WebException and test it.
@@ -175,7 +201,10 @@ internal sealed partial class LongPollingTransport : ITransport
 
                 response.EnsureSuccessStatusCode();
 
-                if (response.StatusCode == HttpStatusCode.NoContent || cancellationToken.IsCancellationRequested)
+                if (
+                    response.StatusCode == HttpStatusCode.NoContent
+                    || cancellationToken.IsCancellationRequested
+                )
                 {
                     Log.ClosingConnection(_logger);
 
@@ -186,13 +215,17 @@ internal sealed partial class LongPollingTransport : ITransport
                 {
                     Log.ReceivedMessages(_logger);
 #if NETCOREAPP
-                    await response.Content.CopyToAsync(applicationStream, cancellationToken).ConfigureAwait(false);
+                    await response
+                        .Content.CopyToAsync(applicationStream, cancellationToken)
+                        .ConfigureAwait(false);
 
 #else
                     await response.Content.CopyToAsync(applicationStream).ConfigureAwait(false);
 #endif
 
-                    var flushResult = await _application.Output.FlushAsync(cancellationToken).ConfigureAwait(false);
+                    var flushResult = await _application
+                        .Output.FlushAsync(cancellationToken)
+                        .ConfigureAwait(false);
 
                     // We canceled in the middle of applying back pressure
                     // or if the consumer is done

@@ -42,10 +42,12 @@ namespace System.Data.Tests
             xml = sw.ToString();
         }
 
-        private void GenerateTestData(out DataSet ds,
-                              out DataTable dtMainInDS,
-                              out DataTable dtChildInDS,
-                              out DataTable dtMain)
+        private void GenerateTestData(
+            out DataSet ds,
+            out DataTable dtMainInDS,
+            out DataTable dtChildInDS,
+            out DataTable dtMain
+        )
         {
             ds = new DataSet("MyDataSet");
 
@@ -101,21 +103,24 @@ namespace System.Data.Tests
             ds.Tables.Add(dtChildInDS);
 
             // Set up the relation in the dataset.
-            ds.Relations.Add(new DataRelation("MainToChild",
-                                              dtMainInDS.Columns["ID"],
-                                              dtChildInDS.Columns["PID"]));
+            ds.Relations.Add(
+                new DataRelation(
+                    "MainToChild",
+                    dtMainInDS.Columns["ID"],
+                    dtChildInDS.Columns["PID"]
+                )
+            );
         }
 
         [Fact]
         public void TestWriteXml()
         {
             DataSet ds;
-            DataTable dtMainInDS, dtChildInDS, dtMain;
+            DataTable dtMainInDS,
+                dtChildInDS,
+                dtMain;
 
-            GenerateTestData(out ds,
-                             out dtMainInDS,
-                             out dtChildInDS,
-                             out dtMain);
+            GenerateTestData(out ds, out dtMainInDS, out dtChildInDS, out dtMain);
 
             StringWriter sw = new StringWriter();
 
@@ -280,7 +285,10 @@ namespace System.Data.Tests
 
             Assert.Equal("NewDataSet", doc.DocumentElement.Name);
             Assert.Equal("NewDataSet", doc.DocumentElement.FirstChild.Attributes["id"].Value);
-            Assert.Equal("NewDataSet", doc.DocumentElement.FirstChild.FirstChild.Attributes["name"].Value);
+            Assert.Equal(
+                "NewDataSet",
+                doc.DocumentElement.FirstChild.FirstChild.Attributes["name"].Value
+            );
 
             xmlDTWriteSchemaNoDS = sw.ToString();
 
@@ -298,12 +306,11 @@ namespace System.Data.Tests
             // the schema included.  This means that we can only read in XML
             // that was generated with the WriteSchema flag.
             DataSet ds;
-            DataTable dtMainInDS, dtChildInDS, dtMain;
+            DataTable dtMainInDS,
+                dtChildInDS,
+                dtMain;
 
-            GenerateTestData(out ds,
-                             out dtMainInDS,
-                             out dtChildInDS,
-                             out dtMain);
+            GenerateTestData(out ds, out dtMainInDS, out dtChildInDS, out dtMain);
 
             StringWriter sw = new StringWriter();
 
@@ -328,10 +335,14 @@ namespace System.Data.Tests
             DataTable newdt = new DataTable();
 
             // DataTable does not support schema inference from Xml.
-            Assert.Throws<InvalidOperationException>(() => newdt.ReadXml(new StringReader(xmlDTNone)));
+            Assert.Throws<InvalidOperationException>(
+                () => newdt.ReadXml(new StringReader(xmlDTNone))
+            );
 
             // DataTable does not support schema inference from Xml.
-            Assert.Throws<InvalidOperationException>(() => newdt.ReadXml(new StringReader(xmlDTDiffGram)));
+            Assert.Throws<InvalidOperationException>(
+                () => newdt.ReadXml(new StringReader(xmlDTDiffGram))
+            );
 
             DataTable multiTable = new DataTable();
             multiTable.ReadXml(new StringReader(xmlMultiTable));

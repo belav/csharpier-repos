@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -15,14 +15,13 @@
 
 using System;
 using System.Diagnostics;
-using System.Security.Permissions;
-using System.Runtime.InteropServices;
-using System.Threading;
 using System.Diagnostics.Contracts;
+using System.Runtime.InteropServices;
+using System.Security.Permissions;
+using System.Threading;
 
 namespace System.Threading
 {
-
     /// <summary>
     /// Represents a synchronization primitive that is signaled when its count reaches zero.
     /// </summary>
@@ -46,8 +45,8 @@ namespace System.Threading
         // wait.
 
         private int m_initialCount; // The original # of signals the latch was instantiated with.
-        private volatile int m_currentCount;  // The # of outstanding signals before the latch transitions to a signaled state.
-        private ManualResetEventSlim m_event;   // An event used to manage blocking and signaling.
+        private volatile int m_currentCount; // The # of outstanding signals before the latch transitions to a signaled state.
+        private ManualResetEventSlim m_event; // An event used to manage blocking and signaling.
         private volatile bool m_disposed; // Whether the latch has been disposed.
 
         /// <summary>
@@ -86,7 +85,7 @@ namespace System.Threading
         /// </value>
         public int CurrentCount
         {
-            get 
+            get
             {
                 int observedCount = m_currentCount;
                 return observedCount < 0 ? 0 : observedCount;
@@ -121,7 +120,7 @@ namespace System.Threading
         }
 
         /// <summary>
-        /// Gets a <see cref="T:System.Threading.WaitHandle"/> that is used to wait for the event to be set. 
+        /// Gets a <see cref="T:System.Threading.WaitHandle"/> that is used to wait for the event to be set.
         /// </summary>
         /// <value>A <see cref="T:System.Threading.WaitHandle"/> that is used to wait for the event to be set.</value>
         /// <exception cref="T:System.ObjectDisposedException">The current instance has already been disposed.</exception>
@@ -193,7 +192,9 @@ namespace System.Threading
 
             if (m_currentCount <= 0)
             {
-                throw new InvalidOperationException(Environment.GetResourceString("CountdownEvent_Decrement_BelowZero"));
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("CountdownEvent_Decrement_BelowZero")
+                );
             }
 #pragma warning disable 0420
             int newCount = Interlocked.Decrement(ref m_currentCount);
@@ -207,7 +208,9 @@ namespace System.Threading
             {
                 //if the count is decremented below zero, then throw, it's OK to keep the count negative, and we shouldn't set the event here
                 //because there was a thread already which decremented it to zero and set the event
-                throw new InvalidOperationException(Environment.GetResourceString("CountdownEvent_Decrement_BelowZero"));
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("CountdownEvent_Decrement_BelowZero")
+                );
             }
 
             return false;
@@ -247,13 +250,21 @@ namespace System.Threading
                 // If the latch is already signaled, we will fail.
                 if (observedCount < signalCount)
                 {
-                    throw new InvalidOperationException(Environment.GetResourceString("CountdownEvent_Decrement_BelowZero"));
+                    throw new InvalidOperationException(
+                        Environment.GetResourceString("CountdownEvent_Decrement_BelowZero")
+                    );
                 }
 
                 // This disables the "CS0420: a reference to a volatile field will not be treated as volatile" warning
                 // for this statement.  This warning is clearly senseless for Interlocked operations.
 #pragma warning disable 0420
-                if (Interlocked.CompareExchange(ref m_currentCount, observedCount - signalCount, observedCount) == observedCount)
+                if (
+                    Interlocked.CompareExchange(
+                        ref m_currentCount,
+                        observedCount - signalCount,
+                        observedCount
+                    ) == observedCount
+                )
 #pragma warning restore 0420
                 {
                     break;
@@ -320,7 +331,9 @@ namespace System.Threading
         {
             if (!TryAddCount(signalCount))
             {
-                throw new InvalidOperationException(Environment.GetResourceString("CountdownEvent_Increment_AlreadyZero"));
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("CountdownEvent_Increment_AlreadyZero")
+                );
             }
         }
 
@@ -361,13 +374,21 @@ namespace System.Threading
                 }
                 else if (observedCount > (Int32.MaxValue - signalCount))
                 {
-                    throw new InvalidOperationException(Environment.GetResourceString("CountdownEvent_Increment_AlreadyMax"));
+                    throw new InvalidOperationException(
+                        Environment.GetResourceString("CountdownEvent_Increment_AlreadyMax")
+                    );
                 }
 
                 // This disables the "CS0420: a reference to a volatile field will not be treated as volatile" warning
                 // for this statement.  This warning is clearly senseless for Interlocked operations.
 #pragma warning disable 0420
-                if (Interlocked.CompareExchange(ref m_currentCount, observedCount + signalCount, observedCount) == observedCount)
+                if (
+                    Interlocked.CompareExchange(
+                        ref m_currentCount,
+                        observedCount + signalCount,
+                        observedCount
+                    ) == observedCount
+                )
 #pragma warning restore 0420
                 {
                     break;
@@ -442,7 +463,6 @@ namespace System.Threading
             Wait(Timeout.Infinite, new CancellationToken());
         }
 
-
         /// <summary>
         /// Blocks the current thread until the <see cref="T:System.Threading.CountdownEvent"/> is set, while
         /// observing a <see cref="T:System.Threading.CancellationToken"/>.
@@ -451,7 +471,7 @@ namespace System.Threading
         /// observe.</param>
         /// <remarks>
         /// The caller of this method blocks indefinitely until the current instance is set. The caller will
-        /// return immediately if the event is currently in a set state.  If the 
+        /// return immediately if the event is currently in a set state.  If the
         /// <see cref="T:System.Threading.CancellationToken">CancellationToken</see> being observed
         /// is canceled during the wait operation, an <see cref="T:System.OperationCanceledException"/>
         /// will be thrown.

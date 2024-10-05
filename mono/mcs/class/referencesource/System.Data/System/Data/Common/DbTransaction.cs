@@ -6,46 +6,39 @@
 // <owner current="true" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data.Common {
-
+namespace System.Data.Common
+{
     using System;
     using System.Data;
 
-    public abstract class DbTransaction : MarshalByRefObject, IDbTransaction { // V1.2.3300
-        protected DbTransaction() : base() {
+    public abstract class DbTransaction : MarshalByRefObject, IDbTransaction
+    { // V1.2.3300
+        protected DbTransaction()
+            : base() { }
+
+        public DbConnection Connection
+        {
+            get { return DbConnection; }
         }
 
-        public DbConnection Connection {
-            get {
-                return DbConnection;
-            }
+        IDbConnection IDbTransaction.Connection
+        {
+            get { return DbConnection; }
         }
 
-        IDbConnection IDbTransaction.Connection {
-            get {
-                return DbConnection;
-            }
-        }
+        protected abstract DbConnection DbConnection { get; }
 
-        abstract protected DbConnection DbConnection {
-            get;
-        }
+        public abstract IsolationLevel IsolationLevel { get; }
 
-        abstract public IsolationLevel IsolationLevel {
-            get;
-        }
+        public abstract void Commit();
 
-        abstract public void Commit();
-
-        public void Dispose() {
+        public void Dispose()
+        {
             Dispose(true);
         }
 
-        protected virtual void Dispose(bool disposing) {
-        }
+        protected virtual void Dispose(bool disposing) { }
 
-        abstract public void Rollback();
-
+        public abstract void Rollback();
     }
-
 }

@@ -6,9 +6,7 @@ namespace Microsoft.EntityFrameworkCore;
 public abstract class QueryExpressionInterceptionTestBase : InterceptionTestBase
 {
     protected QueryExpressionInterceptionTestBase(InterceptionFixtureBase fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     [ConditionalTheory]
     [InlineData(false, false)]
@@ -46,7 +44,8 @@ public abstract class QueryExpressionInterceptionTestBase : InterceptionTestBase
 
         using var context = CreateContext(
             new IInterceptor[] { new TestQueryExpressionInterceptor(), interceptor1, interceptor2 },
-            new IInterceptor[] { interceptor3, interceptor4, new TestQueryExpressionInterceptor() });
+            new IInterceptor[] { interceptor3, interceptor4, new TestQueryExpressionInterceptor() }
+        );
 
         using var listener = Fixture.SubscribeToDiagnosticListener(context.ContextId);
 
@@ -63,7 +62,8 @@ public abstract class QueryExpressionInterceptionTestBase : InterceptionTestBase
 
         listener.AssertEventsInOrder(
             CoreEventId.QueryCompilationStarting.Name,
-            CoreEventId.QueryExecutionPlanned.Name);
+            CoreEventId.QueryExecutionPlanned.Name
+        );
 
         _ = async ? await query.ToListAsync() : query.ToList();
     }
@@ -94,19 +94,26 @@ public abstract class QueryExpressionInterceptionTestBase : InterceptionTestBase
     {
         public override Expression QueryCompilationStarting(
             Expression queryExpression,
-            QueryExpressionEventData eventData)
-            => base.QueryCompilationStarting(new SingularityTypeExpressionVisitor().Visit(queryExpression), eventData);
+            QueryExpressionEventData eventData
+        ) =>
+            base.QueryCompilationStarting(
+                new SingularityTypeExpressionVisitor().Visit(queryExpression),
+                eventData
+            );
 
         private class SingularityTypeExpressionVisitor : ExpressionVisitor
         {
-            protected override Expression VisitBinary(BinaryExpression node)
-                => node.Right is ConstantExpression { Value: "Black Hole" }
+            protected override Expression VisitBinary(BinaryExpression node) =>
+                node.Right is ConstantExpression { Value: "Black Hole" }
                     ? Expression.Equal(node.Left, Expression.Constant("Bing Bang"))
                     : base.VisitBinary(node);
         }
     }
 
-    protected static void AssertNormalOutcome(DbContext context, TestQueryExpressionInterceptor interceptor)
+    protected static void AssertNormalOutcome(
+        DbContext context,
+        TestQueryExpressionInterceptor interceptor
+    )
     {
         Assert.Same(context, interceptor.Context);
         Assert.True(interceptor.QueryCompilationStartingCalled);
@@ -121,7 +128,8 @@ public abstract class QueryExpressionInterceptionTestBase : InterceptionTestBase
 
         public virtual Expression QueryCompilationStarting(
             Expression queryExpression,
-            QueryExpressionEventData eventData)
+            QueryExpressionEventData eventData
+        )
         {
             QueryCompilationStartingCalled = true;
             Context = eventData.Context;

@@ -8,8 +8,8 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.Windows.Forms;
 using System.Design;
+using System.Windows.Forms;
 
 namespace System.Web.UI.Design.WebControls
 {
@@ -28,8 +28,15 @@ namespace System.Web.UI.Design.WebControls
         ///       Makes the dialog RTL if the resources for this dll have been localized to a RTL language.
         ///    </para>
         /// </devdoc>
-        public static DialogResult Show(IWin32Window owner, string text, string caption, MessageBoxButtons buttons, MessageBoxIcon icon,
-                                        MessageBoxDefaultButton defaultButton, MessageBoxOptions options)
+        public static DialogResult Show(
+            IWin32Window owner,
+            string text,
+            string caption,
+            MessageBoxButtons buttons,
+            MessageBoxIcon icon,
+            MessageBoxDefaultButton defaultButton,
+            MessageBoxOptions options
+        )
         {
             if (RTLAwareMessageBox.IsRTLResources)
             {
@@ -44,12 +51,7 @@ namespace System.Web.UI.Design.WebControls
         /// </devdoc>
         public static bool IsRTLResources
         {
-            get
-            {
-                return Strings.RTL != "RTL_False";
-            }
+            get { return Strings.RTL != "RTL_False"; }
         }
     }
 }
-
-

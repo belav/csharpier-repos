@@ -17,7 +17,9 @@ namespace Internal.Runtime.CompilerHelpers
             return Type.GetTypeFromHandle(typeHandle);
         }
 
-        public static RuntimeTypeHandle TypeHandleToRuntimeTypeHandleMaybeNull(RuntimeTypeHandle typeHandle)
+        public static RuntimeTypeHandle TypeHandleToRuntimeTypeHandleMaybeNull(
+            RuntimeTypeHandle typeHandle
+        )
         {
             return typeHandle;
         }

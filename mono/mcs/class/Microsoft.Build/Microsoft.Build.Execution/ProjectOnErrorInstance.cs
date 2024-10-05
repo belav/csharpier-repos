@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,40 +29,40 @@ using Microsoft.Build.Construction;
 
 namespace Microsoft.Build.Execution
 {
-	public class ProjectOnErrorInstance : ProjectTargetInstanceChild
-	{
-		internal ProjectOnErrorInstance (ProjectOnErrorElement xml)
-		{
-			condition = xml.Condition;
-			ExecuteTargets = xml.ExecuteTargetsAttribute;
-			//this.FullPath = fullPath;
-			condition_location = xml.ConditionLocation;
-			ExecuteTargetsLocation = xml.ExecuteTargetsAttributeLocation;
-			location = xml.Location;
-		}
-		
-		readonly string condition;
-		
-		public override string Condition {
-			get { return condition; }
-		}
+    public class ProjectOnErrorInstance : ProjectTargetInstanceChild
+    {
+        internal ProjectOnErrorInstance(ProjectOnErrorElement xml)
+        {
+            condition = xml.Condition;
+            ExecuteTargets = xml.ExecuteTargetsAttribute;
+            //this.FullPath = fullPath;
+            condition_location = xml.ConditionLocation;
+            ExecuteTargetsLocation = xml.ExecuteTargetsAttributeLocation;
+            location = xml.Location;
+        }
 
-		public string ExecuteTargets { get; private set; }
-		
-		readonly ElementLocation condition_location, location;
-		
-		public
-		override ElementLocation ConditionLocation {
-			get { return condition_location; }
-		}
+        readonly string condition;
 
-		public
-		ElementLocation ExecuteTargetsLocation { get; private set; }
+        public override string Condition
+        {
+            get { return condition; }
+        }
 
-		public
-		override ElementLocation Location {
-			get { return location; }
-		}
-	}
+        public string ExecuteTargets { get; private set; }
+
+        readonly ElementLocation condition_location,
+            location;
+
+        public override ElementLocation ConditionLocation
+        {
+            get { return condition_location; }
+        }
+
+        public ElementLocation ExecuteTargetsLocation { get; private set; }
+
+        public override ElementLocation Location
+        {
+            get { return location; }
+        }
+    }
 }
-

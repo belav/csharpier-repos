@@ -7,11 +7,11 @@ namespace System.Workflow.Activities.Design
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Drawing;
     using System.Data;
+    using System.Drawing;
+    using System.Drawing.Drawing2D;
     using System.Text;
     using System.Windows.Forms;
-    using System.Drawing.Drawing2D;
 
     internal partial class GradientPanel : Panel
     {
@@ -85,10 +85,25 @@ namespace System.Workflow.Activities.Design
             frameRect.Y -= Margin.Top;
             frameRect.Width += Margin.Left + Margin.Right;
             frameRect.Height += Margin.Top + Margin.Bottom;
-            Rectangle shadowRect = new Rectangle(frameRect.X, frameRect.Y + 6, frameRect.Width, frameRect.Height - 5);
+            Rectangle shadowRect = new Rectangle(
+                frameRect.X,
+                frameRect.Y + 6,
+                frameRect.Width,
+                frameRect.Height - 5
+            );
             glossHeight = frameRect.Height / 3;
-            Brush glossBrush = new LinearGradientBrush(new Point(frameRect.Left, frameRect.Top), new Point(frameRect.Left, frameRect.Top + glossHeight + 1), Color.FromArgb(120, 255, 255, 255), Color.FromArgb(60, 255, 255, 255)); // SolidBrush(Color.FromArgb(32, 255, 255, 255));
-            Brush frameBrush = new LinearGradientBrush(new Point(frameRect.Left, frameRect.Top), new Point(frameRect.Left, frameRect.Bottom), BaseColor, LightingColor);
+            Brush glossBrush = new LinearGradientBrush(
+                new Point(frameRect.Left, frameRect.Top),
+                new Point(frameRect.Left, frameRect.Top + glossHeight + 1),
+                Color.FromArgb(120, 255, 255, 255),
+                Color.FromArgb(60, 255, 255, 255)
+            ); // SolidBrush(Color.FromArgb(32, 255, 255, 255));
+            Brush frameBrush = new LinearGradientBrush(
+                new Point(frameRect.Left, frameRect.Top),
+                new Point(frameRect.Left, frameRect.Bottom),
+                BaseColor,
+                LightingColor
+            );
             Graphics outputGraphics = e.Graphics;
             if (DropShadow)
             {
@@ -114,7 +129,8 @@ namespace System.Workflow.Activities.Design
                     outputGraphics.DrawPath(shadowPen, RoundedRect(shadowRect));
                     shadowPen.Color = Color.FromArgb(shadowIntensity - 1, 0, 0, 0);
                     shadowIntensity += 8;
-                    shadowPen.Width = shadowPen.Width - 2;;
+                    shadowPen.Width = shadowPen.Width - 2;
+                    ;
                 }
                 return shadowRect;
             }
@@ -149,10 +165,12 @@ namespace System.Workflow.Activities.Design
             path.AddArc(arc, 180, 90);
             arc.X = frame.Right - diameter;
             path.AddArc(arc, 270, 90);
-            path.AddLine(new Point(frame.Right, frame.Top + glossHeight), new Point(frame.Left, frame.Top + glossHeight));
+            path.AddLine(
+                new Point(frame.Right, frame.Top + glossHeight),
+                new Point(frame.Left, frame.Top + glossHeight)
+            );
             path.CloseFigure();
             return path;
         }
-
     }
 }

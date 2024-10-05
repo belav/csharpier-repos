@@ -62,12 +62,24 @@ namespace System.Runtime.InteropServices.Tests.Common
             const int CLSCTX_INPROC_SERVER = 1;
             const int REGCLS_MULTIPLEUSE = 1;
             void* classFactory = ComObjectFactory.Create();
-            int res = CoRegisterClassObject(in clsid, classFactory, CLSCTX_INPROC_SERVER, REGCLS_MULTIPLEUSE, out int cookie);
+            int res = CoRegisterClassObject(
+                in clsid,
+                classFactory,
+                CLSCTX_INPROC_SERVER,
+                REGCLS_MULTIPLEUSE,
+                out int cookie
+            );
             Xunit.Assert.Equal(ComConstants.S_OK, res);
             Marshal.Release((IntPtr)classFactory);
 
             [DllImport("Ole32")]
-            static extern int CoRegisterClassObject(in Guid clsid, void* factory, int clsContext, int flags, out int registerCookie);
+            static extern int CoRegisterClassObject(
+                in Guid clsid,
+                void* factory,
+                int clsContext,
+                int flags,
+                out int registerCookie
+            );
         }
 
         // Create an instance of a COM object class factory
@@ -191,7 +203,17 @@ namespace System.Runtime.InteropServices.Tests.Common
             public delegate* unmanaged<void*, uint*, int> GetTypeInfoCount;
             public delegate* unmanaged<void*, int, int, void**, int> GetTypeInfo;
             public delegate* unmanaged<void*, Guid*, void**, uint, uint, int*, int> GetIDsOfNames;
-            public delegate* unmanaged<void*, int, Guid*, uint, short, void*, void*, void*, uint*, int> Invoke;
+            public delegate* unmanaged<
+                void*,
+                int,
+                Guid*,
+                uint,
+                short,
+                void*,
+                void*,
+                void*,
+                uint*,
+                int> Invoke;
         }
 
         // The COM ABI requires the first pointer field to be the vtable
@@ -242,7 +264,8 @@ namespace System.Runtime.InteropServices.Tests.Common
         private static int GetTypeInfoCount(void* instance, uint* i) => ComConstants.E_NOTIMPL;
 
         [UnmanagedCallersOnly]
-        private static int GetTypeInfo(void* instance, int itinfo, int lcid, void** i) => ComConstants.E_NOTIMPL;
+        private static int GetTypeInfo(void* instance, int itinfo, int lcid, void** i) =>
+            ComConstants.E_NOTIMPL;
 
         [UnmanagedCallersOnly]
         private static int GetIDsOfNames(
@@ -251,7 +274,8 @@ namespace System.Runtime.InteropServices.Tests.Common
             void** namesRaw,
             uint namesCount,
             uint lcid,
-            int* dispIdsRaw) => ComConstants.E_NOTIMPL;
+            int* dispIdsRaw
+        ) => ComConstants.E_NOTIMPL;
 
         [UnmanagedCallersOnly]
         private static int Invoke(
@@ -263,7 +287,8 @@ namespace System.Runtime.InteropServices.Tests.Common
             void* pDispParams,
             void* VarResult,
             void* pExcepInfo,
-            void* puArgErr) => ComConstants.E_NOTIMPL;
+            void* puArgErr
+        ) => ComConstants.E_NOTIMPL;
     }
 
     [ComImport]
@@ -294,7 +319,7 @@ namespace System.Runtime.InteropServices.Tests.Common
     [ClassInterface(ClassInterfaceType.None)]
     public class IInspectableComObject : IInspectableInterface { }
 
-    public class IInspectableManagedObject : IInspectableInterface {}
+    public class IInspectableManagedObject : IInspectableInterface { }
 
     public class SubComImportObject : ComImportObject { }
 
@@ -334,7 +359,7 @@ namespace System.Runtime.InteropServices.Tests.Common
     public class ManagedAutoDispatchClass { }
 
     [ClassInterface(ClassInterfaceType.AutoDual)]
-    public class ManagedAutoDualClass{ }
+    public class ManagedAutoDualClass { }
 
     [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
     [Guid("710D252E-22BF-4A33-9544-40D8D03C29FF")]

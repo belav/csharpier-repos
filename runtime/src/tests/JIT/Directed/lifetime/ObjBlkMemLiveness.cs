@@ -5,8 +5,8 @@
 // Test that memory liveness does not miss a memory use (in the form of an OBJ/BLK).
 
 using System;
-using System.Runtime.Intrinsics;
 using System.Runtime.CompilerServices;
+using System.Runtime.Intrinsics;
 using Xunit;
 
 public unsafe class ObjBlkLiveness

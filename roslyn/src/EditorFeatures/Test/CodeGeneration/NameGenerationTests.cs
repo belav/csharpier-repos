@@ -15,12 +15,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
         [Fact]
         public void TestIdentifierName()
         {
-            Test(
-                f => f.IdentifierName("a"),
-                cs: "a",
-                csSimple: "a",
-                vb: "a",
-                vbSimple: "a");
+            Test(f => f.IdentifierName("a"), cs: "a", csSimple: "a", vb: "a", vbSimple: "a");
         }
 
         [Fact]
@@ -31,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                 cs: "@int",
                 csSimple: "@int",
                 vb: "int",
-                vbSimple: "int");
+                vbSimple: "int"
+            );
         }
 
         [Fact]
@@ -42,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                 cs: "Integer",
                 csSimple: "Integer",
                 vb: "[Integer]",
-                vbSimple: "[Integer]");
+                vbSimple: "[Integer]"
+            );
         }
 
         [Fact]
@@ -53,7 +50,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                 cs: "Outer<Inner1>",
                 csSimple: null,
                 vb: "Outer(Of Inner1)",
-                vbSimple: null);
+                vbSimple: null
+            );
         }
 
         [Fact]
@@ -64,7 +62,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                 cs: "Outer<Inner1, Inner2>",
                 csSimple: null,
                 vb: "Outer(Of Inner1, Inner2)",
-                vbSimple: null);
+                vbSimple: null
+            );
         }
 
         [Fact]
@@ -75,7 +74,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                 cs: "@int<@string, @bool>",
                 csSimple: null,
                 vb: "int(Of [string], bool)",
-                vbSimple: null);
+                vbSimple: null
+            );
         }
 
         [Fact]
@@ -86,7 +86,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                 cs: "Integer<String, Boolean>",
                 csSimple: null,
                 vb: "[Integer](Of [String], [Boolean])",
-                vbSimple: null);
+                vbSimple: null
+            );
         }
 
         [Fact]
@@ -97,7 +98,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                 cs: "Outer.Inner1",
                 csSimple: "Outer.Inner1",
                 vb: "Outer.Inner1",
-                vbSimple: "Outer.Inner1");
+                vbSimple: "Outer.Inner1"
+            );
         }
 
         [Fact]
@@ -108,7 +110,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                 cs: "@int.@string",
                 csSimple: "@int.@string",
                 vb: "int.[string]",
-                vbSimple: "int.string");
+                vbSimple: "int.string"
+            );
         }
 
         [Fact]
@@ -119,37 +122,40 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                 cs: "Integer.String",
                 csSimple: "Integer.String",
                 vb: "[Integer].[String]",
-                vbSimple: "Integer.String");
+                vbSimple: "Integer.String"
+            );
         }
 
         [Fact]
         public void TestQualifiedGenericName1()
         {
             Test(
-                f => f.QualifiedName(
-                    f.IdentifierName("One"),
-                    f.GenericName("Outer",
-                        CreateClass("Inner1"),
-                        CreateClass("Inner2"))),
+                f =>
+                    f.QualifiedName(
+                        f.IdentifierName("One"),
+                        f.GenericName("Outer", CreateClass("Inner1"), CreateClass("Inner2"))
+                    ),
                 cs: "One.Outer<Inner1, Inner2>",
                 csSimple: "One.Outer<Inner1, Inner2>",
                 vb: "One.Outer(Of Inner1, Inner2)",
-                vbSimple: "One.Outer(Of Inner1, Inner2)");
+                vbSimple: "One.Outer(Of Inner1, Inner2)"
+            );
         }
 
         [Fact]
         public void TestQualifiedGenericName2()
         {
             Test(
-                f => f.QualifiedName(
-                    f.GenericName("Outer",
-                        CreateClass("Inner1"),
-                        CreateClass("Inner2")),
-                    f.IdentifierName("One")),
+                f =>
+                    f.QualifiedName(
+                        f.GenericName("Outer", CreateClass("Inner1"), CreateClass("Inner2")),
+                        f.IdentifierName("One")
+                    ),
                 cs: "Outer<Inner1, Inner2>.One",
                 csSimple: "Outer<Inner1, Inner2>.One",
                 vb: "Outer(Of Inner1, Inner2).One",
-                vbSimple: "Outer(Of Inner1, Inner2).One");
+                vbSimple: "Outer(Of Inner1, Inner2).One"
+            );
         }
     }
 }

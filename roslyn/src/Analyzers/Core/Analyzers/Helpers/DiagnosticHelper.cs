@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             NotificationOption2 notificationOption,
             IEnumerable<Location>? additionalLocations,
             ImmutableDictionary<string, string?>? properties,
-            params object[] messageArgs)
+            params object[] messageArgs
+        )
         {
             if (descriptor == null)
             {
@@ -59,7 +60,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 message = new LocalizableStringWithArguments(descriptor.MessageFormat, messageArgs);
             }
 
-            return CreateWithMessage(descriptor, location, notificationOption, additionalLocations, properties, message);
+            return CreateWithMessage(
+                descriptor,
+                location,
+                notificationOption,
+                additionalLocations,
+                properties,
+                message
+            );
         }
 
         /// <summary>
@@ -87,15 +95,25 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             NotificationOption2 notificationOption,
             ImmutableArray<Location> additionalLocations,
             ImmutableArray<Location> additionalUnnecessaryLocations,
-            params object[] messageArgs)
+            params object[] messageArgs
+        )
         {
             if (additionalUnnecessaryLocations.IsEmpty)
             {
-                return Create(descriptor, location, notificationOption, additionalLocations, ImmutableDictionary<string, string?>.Empty, messageArgs);
+                return Create(
+                    descriptor,
+                    location,
+                    notificationOption,
+                    additionalLocations,
+                    ImmutableDictionary<string, string?>.Empty,
+                    messageArgs
+                );
             }
 
-            var tagIndices = ImmutableDictionary<string, IEnumerable<int>>.Empty
-                .Add(WellKnownDiagnosticTags.Unnecessary, Enumerable.Range(additionalLocations.Length, additionalUnnecessaryLocations.Length));
+            var tagIndices = ImmutableDictionary<string, IEnumerable<int>>.Empty.Add(
+                WellKnownDiagnosticTags.Unnecessary,
+                Enumerable.Range(additionalLocations.Length, additionalUnnecessaryLocations.Length)
+            );
             return CreateWithLocationTags(
                 descriptor,
                 location,
@@ -103,7 +121,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 additionalLocations.AddRange(additionalUnnecessaryLocations),
                 tagIndices,
                 ImmutableDictionary<string, string?>.Empty,
-                messageArgs);
+                messageArgs
+            );
         }
 
         /// <summary>
@@ -136,15 +155,25 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             ImmutableArray<Location> additionalLocations,
             ImmutableArray<Location> additionalUnnecessaryLocations,
             ImmutableDictionary<string, string?>? properties,
-            params object[] messageArgs)
+            params object[] messageArgs
+        )
         {
             if (additionalUnnecessaryLocations.IsEmpty)
             {
-                return Create(descriptor, location, notificationOption, additionalLocations, properties, messageArgs);
+                return Create(
+                    descriptor,
+                    location,
+                    notificationOption,
+                    additionalLocations,
+                    properties,
+                    messageArgs
+                );
             }
 
-            var tagIndices = ImmutableDictionary<string, IEnumerable<int>>.Empty
-                .Add(WellKnownDiagnosticTags.Unnecessary, Enumerable.Range(additionalLocations.Length, additionalUnnecessaryLocations.Length));
+            var tagIndices = ImmutableDictionary<string, IEnumerable<int>>.Empty.Add(
+                WellKnownDiagnosticTags.Unnecessary,
+                Enumerable.Range(additionalLocations.Length, additionalUnnecessaryLocations.Length)
+            );
             return CreateWithLocationTags(
                 descriptor,
                 location,
@@ -152,7 +181,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 additionalLocations.AddRange(additionalUnnecessaryLocations),
                 tagIndices,
                 properties,
-                messageArgs);
+                messageArgs
+            );
         }
 
         /// <summary>
@@ -182,20 +212,35 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             IEnumerable<Location> additionalLocations,
             IDictionary<string, IEnumerable<int>> tagIndices,
             ImmutableDictionary<string, string?>? properties,
-            params object[] messageArgs)
+            params object[] messageArgs
+        )
         {
             Contract.ThrowIfTrue(additionalLocations.IsEmpty());
             Contract.ThrowIfTrue(tagIndices.IsEmpty());
 
             properties ??= ImmutableDictionary<string, string?>.Empty;
-            properties = properties.AddRange(tagIndices.Select(kvp => new KeyValuePair<string, string?>(kvp.Key, EncodeIndices(kvp.Value, additionalLocations.Count()))));
+            properties = properties.AddRange(
+                tagIndices.Select(kvp => new KeyValuePair<string, string?>(
+                    kvp.Key,
+                    EncodeIndices(kvp.Value, additionalLocations.Count())
+                ))
+            );
 
-            return Create(descriptor, location, notificationOption, additionalLocations, properties, messageArgs);
+            return Create(
+                descriptor,
+                location,
+                notificationOption,
+                additionalLocations,
+                properties,
+                messageArgs
+            );
 
             static string EncodeIndices(IEnumerable<int> indices, int additionalLocationsLength)
             {
                 // Ensure that the provided tag index is a valid index into additional locations.
-                Contract.ThrowIfFalse(indices.All(idx => idx >= 0 && idx < additionalLocationsLength));
+                Contract.ThrowIfFalse(
+                    indices.All(idx => idx >= 0 && idx < additionalLocationsLength)
+                );
 
                 using var stream = new MemoryStream();
                 var serializer = new DataContractJsonSerializer(typeof(IEnumerable<int>));
@@ -231,7 +276,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             NotificationOption2 notificationOption,
             IEnumerable<Location>? additionalLocations,
             ImmutableDictionary<string, string?>? properties,
-            LocalizableString message)
+            LocalizableString message
+        )
         {
             if (descriptor == null)
             {
@@ -246,7 +292,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 effectiveSeverity.ToDiagnosticSeverity() ?? descriptor.DefaultSeverity,
                 descriptor.DefaultSeverity,
                 descriptor.IsEnabledByDefault,
-                warningLevel: effectiveSeverity.WithDefaultSeverity(descriptor.DefaultSeverity) == ReportDiagnostic.Error ? 0 : 1,
+                warningLevel: effectiveSeverity.WithDefaultSeverity(descriptor.DefaultSeverity)
+                == ReportDiagnostic.Error
+                    ? 0
+                    : 1,
                 effectiveSeverity == ReportDiagnostic.Suppress,
                 descriptor.Title,
                 descriptor.Description,
@@ -254,9 +303,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 location,
                 additionalLocations,
                 GetEffectiveCustomTags(descriptor, notificationOption),
-                properties);
+                properties
+            );
 
-            static IEnumerable<string> GetEffectiveCustomTags(DiagnosticDescriptor descriptor, NotificationOption2 notificationOption)
+            static IEnumerable<string> GetEffectiveCustomTags(
+                DiagnosticDescriptor descriptor,
+                NotificationOption2 notificationOption
+            )
             {
                 var isCustomConfigured = notificationOption.IsExplicitlySpecified;
                 var hasCustomConfigurableTag = false;
@@ -288,8 +341,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return null;
 
             // These diagnostics are hidden and not configurable, so help link can never be shown and is not applicable.
-            if (id == RemoveUnnecessaryImports.RemoveUnnecessaryImportsConstants.DiagnosticFixableId ||
-                id == "IDE0005_gen")
+            if (
+                id == RemoveUnnecessaryImports.RemoveUnnecessaryImportsConstants.DiagnosticFixableId
+                || id == "IDE0005_gen"
+            )
             {
                 return null;
             }
@@ -303,7 +358,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             private readonly LocalizableString _messageFormat;
             private readonly string[] _formatArguments;
 
-            public LocalizableStringWithArguments(LocalizableString messageFormat, params object[] formatArguments)
+            public LocalizableStringWithArguments(
+                LocalizableString messageFormat,
+                params object[] formatArguments
+            )
             {
                 if (messageFormat == null)
                 {
@@ -327,22 +385,30 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 var messageFormat = _messageFormat.ToString(formatProvider);
                 return messageFormat != null
-                    ? (_formatArguments.Length > 0 ? string.Format(formatProvider, messageFormat, _formatArguments) : messageFormat)
+                    ? (
+                        _formatArguments.Length > 0
+                            ? string.Format(formatProvider, messageFormat, _formatArguments)
+                            : messageFormat
+                    )
                     : string.Empty;
             }
 
             protected override bool AreEqual(object? other)
             {
-                return other is LocalizableStringWithArguments otherResourceString &&
-                    _messageFormat.Equals(otherResourceString._messageFormat) &&
-                    _formatArguments.SequenceEqual(otherResourceString._formatArguments, (a, b) => a == b);
+                return other is LocalizableStringWithArguments otherResourceString
+                    && _messageFormat.Equals(otherResourceString._messageFormat)
+                    && _formatArguments.SequenceEqual(
+                        otherResourceString._formatArguments,
+                        (a, b) => a == b
+                    );
             }
 
             protected override int GetHash()
             {
                 return Hash.Combine(
                     _messageFormat.GetHashCode(),
-                    Hash.CombineValues(_formatArguments));
+                    Hash.CombineValues(_formatArguments)
+                );
             }
         }
     }

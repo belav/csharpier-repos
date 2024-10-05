@@ -16,7 +16,13 @@ internal sealed class RequestBufferingStream : BufferingStream
 
     public bool HasLogged { get; private set; }
 
-    public RequestBufferingStream(Stream innerStream, int limit, ILogger logger, Encoding encoding, bool logOnFinish)
+    public RequestBufferingStream(
+        Stream innerStream,
+        int limit,
+        ILogger logger,
+        Encoding encoding,
+        bool logOnFinish
+    )
         : base(innerStream, logger)
     {
         _logger = logger;
@@ -26,7 +32,10 @@ internal sealed class RequestBufferingStream : BufferingStream
         _logOnFinish = logOnFinish;
     }
 
-    public override async ValueTask<int> ReadAsync(Memory<byte> destination, CancellationToken cancellationToken = default)
+    public override async ValueTask<int> ReadAsync(
+        Memory<byte> destination,
+        CancellationToken cancellationToken = default
+    )
     {
         var res = await _innerStream.ReadAsync(destination, cancellationToken);
 
@@ -41,7 +50,12 @@ internal sealed class RequestBufferingStream : BufferingStream
         return res;
     }
 
-    public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override async Task<int> ReadAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         var res = await _innerStream.ReadAsync(buffer.AsMemory(offset, count), cancellationToken);
 
@@ -129,16 +143,23 @@ internal sealed class RequestBufferingStream : BufferingStream
         }
     }
 
-    private string GetStatus(bool showCompleted) => _status switch
-    {
-        BodyStatus.None => "[Not consumed by app]",
-        BodyStatus.Incomplete => "[Only partially consumed by app]",
-        BodyStatus.Complete => showCompleted ? "[Completed]" : "",
-        BodyStatus.Truncated => "[Truncated by RequestBodyLogLimit]",
-        _ => throw new NotImplementedException(_status.ToString()),
-    };
+    private string GetStatus(bool showCompleted) =>
+        _status switch
+        {
+            BodyStatus.None => "[Not consumed by app]",
+            BodyStatus.Incomplete => "[Only partially consumed by app]",
+            BodyStatus.Complete => showCompleted ? "[Completed]" : "",
+            BodyStatus.Truncated => "[Truncated by RequestBodyLogLimit]",
+            _ => throw new NotImplementedException(_status.ToString()),
+        };
 
-    public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+    public override IAsyncResult BeginRead(
+        byte[] buffer,
+        int offset,
+        int count,
+        AsyncCallback? callback,
+        object? state
+    )
     {
         return TaskToApm.Begin(ReadAsync(buffer, offset, count), callback, state);
     }

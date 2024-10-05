@@ -29,58 +29,58 @@ using System.Runtime.InteropServices;
 
 namespace Mono
 {
-	/*
-	 * The purpose of this class is to be used by test such as for instance
-	 * the xamarin-macios test suite to examine and test the Mono.Native
-	 * library.
-	 */
-	static class MonoNativePlatform
-	{
-		[DllImport ("System.Native")]
-		extern static int mono_native_get_platform_type ();
+    /*
+     * The purpose of this class is to be used by test such as for instance
+     * the xamarin-macios test suite to examine and test the Mono.Native
+     * library.
+     */
+    static class MonoNativePlatform
+    {
+        [DllImport("System.Native")]
+        static extern int mono_native_get_platform_type();
 
-		public static MonoNativePlatformType GetPlatformType ()
-		{
-			return (MonoNativePlatformType)mono_native_get_platform_type ();
-		}
+        public static MonoNativePlatformType GetPlatformType()
+        {
+            return (MonoNativePlatformType)mono_native_get_platform_type();
+        }
 
-		/*
-		 * Test Suite Use Only.
-		 */
-		[MethodImpl (MethodImplOptions.InternalCall)]
-		extern static int IncrementInternalCounter ();
+        /*
+         * Test Suite Use Only.
+         */
+        [MethodImpl(MethodImplOptions.InternalCall)]
+        static extern int IncrementInternalCounter();
 
-		[DllImport ("System.Native")]
-		extern static int mono_native_is_initialized ();
+        [DllImport("System.Native")]
+        static extern int mono_native_is_initialized();
 
-		[DllImport ("System.Native")]
-		extern static int mono_native_initialize ();
+        [DllImport("System.Native")]
+        static extern int mono_native_initialize();
 
-		/*
-		 * This method is called by the xamarin-macios test suite
-		 * to register the `IncrementInternalCounter` icall.
-		 *
-		 * It ensures that the native library can call
-		 * `mono_add_internal_call_with_flags` and the mtouch and mmp
-		 * tools can correctly deal with it.
-		 */
-		public static void Initialize ()
-		{
-			mono_native_initialize ();
-		}
+        /*
+         * This method is called by the xamarin-macios test suite
+         * to register the `IncrementInternalCounter` icall.
+         *
+         * It ensures that the native library can call
+         * `mono_add_internal_call_with_flags` and the mtouch and mmp
+         * tools can correctly deal with it.
+         */
+        public static void Initialize()
+        {
+            mono_native_initialize();
+        }
 
-		public static bool IsInitialized ()
-		{
-			return mono_native_is_initialized () != 0;
-		}
+        public static bool IsInitialized()
+        {
+            return mono_native_is_initialized() != 0;
+        }
 
-		/*
-		 * Test Suite Use Only.
-		 */
-		internal static int TestInternalCounter ()
-		{
-			// Atomically increments internal counter, for testing purposes only.
-			return IncrementInternalCounter ();
-		}
-	}
+        /*
+         * Test Suite Use Only.
+         */
+        internal static int TestInternalCounter()
+        {
+            // Atomically increments internal counter, for testing purposes only.
+            return IncrementInternalCounter();
+        }
+    }
 }

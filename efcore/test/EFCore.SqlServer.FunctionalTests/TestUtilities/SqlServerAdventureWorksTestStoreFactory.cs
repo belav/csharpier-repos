@@ -7,12 +7,11 @@ public class SqlServerAdventureWorksTestStoreFactory : SqlServerTestStoreFactory
 {
     public static new SqlServerAdventureWorksTestStoreFactory Instance { get; } = new();
 
-    protected SqlServerAdventureWorksTestStoreFactory()
-    {
-    }
+    protected SqlServerAdventureWorksTestStoreFactory() { }
 
-    public override TestStore GetOrCreate(string storeName)
-        => SqlServerTestStore.GetOrCreateWithScriptPath(
+    public override TestStore GetOrCreate(string storeName) =>
+        SqlServerTestStore.GetOrCreateWithScriptPath(
             "adventureworks",
-            Path.Combine("SqlAzure", "adventureworks.sql"));
+            Path.Combine("SqlAzure", "adventureworks.sql")
+        );
 }

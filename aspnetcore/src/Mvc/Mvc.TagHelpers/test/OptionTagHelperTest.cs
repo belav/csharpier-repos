@@ -10,340 +10,467 @@ public class OptionTagHelperTest
 {
     // Original content, selected attribute, value attribute, selected values (to place in TagHelperContext.Items)
     // and expected tag helper output.
-    public static TheoryData<string, string, string, ICollection<string>, TagHelperOutput> GeneratesExpectedDataSet
+    public static TheoryData<
+        string,
+        string,
+        string,
+        ICollection<string>,
+        TagHelperOutput
+    > GeneratesExpectedDataSet
     {
         get
         {
             return new TheoryData<string, string, string, ICollection<string>, TagHelperOutput>
+            {
+                // original content, selected, value, selected values,
+                // expected tag helper output - attributes, content
                 {
-                    // original content, selected, value, selected values,
-                    // expected tag helper output - attributes, content
-                    {
-                        null, null, null, null,
-                        GetTagHelperOutput(
-                            "not-option",
-                            new TagHelperAttributeList
-                            {
-                                { "label", "my-label" }
-                            },
-                            "")
-                    },
-                    {
-                        null, string.Empty, "value", null,
-                        GetTagHelperOutput(
-                            "not-option",
-                            new TagHelperAttributeList
-                            {
-                                { "label", "my-label" }, { "value", "value" }, { "selected", "" }
-                            },
-                            "")
-                    },
-                    {
-                        null, "selected", "value", null,
-                        GetTagHelperOutput(
-                            "not-option",
-                            new TagHelperAttributeList
-                            {
-                                { "label", "my-label" }, { "value", "value" }, { "selected", "selected" }
-                            },
-                            "")
-                    },
-                    {
-                        null, null, "value", new HashSet<string>(),
-                        GetTagHelperOutput(
-                            "not-option",
-                            new TagHelperAttributeList
-                            {
-                                { "label", "my-label" }, { "value", "value" }
-                            },
-                            "")
-                    },
-                    {
-                        null, null, "value", new HashSet<string>(new [] { string.Empty, }),
-                        GetTagHelperOutput(
-                            "not-option",
-                            new TagHelperAttributeList
-                            {
-                                { "label", "my-label" }, { "value", "value" }
-                            },
-                            "")
-                    },
-                    {
-                        null, string.Empty, "value", new HashSet<string>(new [] { string.Empty, }),
-                        GetTagHelperOutput(
-                            "not-option",
-                            new TagHelperAttributeList
-                            {
-                                { "label", "my-label" }, { "value", "value" }, { "selected", "" }
-                            },
-                            "")
-                    },
-                    {
-                        null, null, "value", new HashSet<string>(new [] { "value", }),
-                        GetTagHelperOutput(
-                            "not-option",
-                            new TagHelperAttributeList
-                            {
-                                { "label", "my-label" }, { "value", "value" }, { "selected", "selected" }
-                            },
-                            "")
-                    },
-                    {
-                        null, null, "value", new HashSet<string>(new [] { string.Empty, "value", }),
-                        GetTagHelperOutput(
-                            "not-option",
-                            new TagHelperAttributeList
-                            {
-                                { "label", "my-label" }, { "value", "value" }, { "selected", "selected" }
-                            },
-                            "")
-                    },
-                    {
-                        string.Empty, null, null, null,
-                        GetTagHelperOutput(
-                            "not-option",
-                            new TagHelperAttributeList
-                            {
-                                { "label", "my-label" }
-                            },
-                        "")
-                    },
-                    {
-                        string.Empty, string.Empty, null, null,
-                        GetTagHelperOutput(
-                            "not-option",
-                            new TagHelperAttributeList
-                            {
-                                { "label", "my-label" }, { "selected", "" }
-                            },
-                            "")
-                    },
-                    {
-                        string.Empty, "selected", null, null,
-                        GetTagHelperOutput(
-                            "not-option",
-                            new TagHelperAttributeList
-                            {
-                                { "label", "my-label" }, { "selected", "selected" }
-                            },
-                            "")
-                    },
-                    {
-                        string.Empty, null, null, new HashSet<string>(),
-                        GetTagHelperOutput(
-                            "not-option",
-                            new TagHelperAttributeList
-                            {
-                                { "label", "my-label" }
-                            },
-                            "")
-                    },
-                    {
-                        string.Empty, null, null, new HashSet<string>(new [] { string.Empty, }),
-                        GetTagHelperOutput(
-                            "not-option",
-                            new TagHelperAttributeList
-                            {
-                                { "label", "my-label" }, { "selected", "selected" }
-                            },
-                            "")
-                    },
-                    {
-                        string.Empty, string.Empty, null,
-                        new HashSet<string>(new [] { string.Empty, }),
-                        GetTagHelperOutput(
-                            "not-option",
-                            new TagHelperAttributeList
-                            {
-                                { "label", "my-label" }, { "selected", "" }
-                            },
-                            "")
-                    },
-                    {
-                        string.Empty, null, null, new HashSet<string>(new [] { "text", }),
-                        GetTagHelperOutput(
-                            "not-option",
-                            new TagHelperAttributeList
-                            {
-                                { "label", "my-label" }
-                            },
-                            "")
-                    },
-                    {
-                        string.Empty, null, null,
-                        new HashSet<string>(new [] { string.Empty, "text", }),
-                        GetTagHelperOutput(
-                            "not-option",
-                            new TagHelperAttributeList
-                            {
-                                { "label", "my-label" }, { "selected", "selected" }
-                            },
-                            "")
-                    },
-                    {
-                        "text", null, null, null,
-                        GetTagHelperOutput(
-                            "not-option",
-                            new TagHelperAttributeList
-                            {
-                                { "label", "my-label" }
-                            },
-                            "text")
-                    },
-                    {
-                        "text", string.Empty, null, null,
-                        GetTagHelperOutput(
-                            "not-option",
-                            new TagHelperAttributeList
-                            {
-                                { "label", "my-label" }, { "selected", "" }
-                            },
-                            "text")
-                    },
-                    {
-                        "text", "selected", null, null,
-                        GetTagHelperOutput(
-                            "not-option",
-                            new TagHelperAttributeList
-                            {
-                                { "label", "my-label" }, { "selected", "selected" }
-                            },
-                            "text")
-                    },
-                    {
-                        "text", null, null, new HashSet<string>(),
-                        GetTagHelperOutput(
-                            "not-option",
-                            new TagHelperAttributeList
-                            {
-                                { "label", "my-label" }
-                            },
-                            "text")
-                    },
-                    {
-                        "text", null, null, new HashSet<string>(new [] { string.Empty, }),
-                        GetTagHelperOutput(
-                            "not-option",
-                            new TagHelperAttributeList
-                            {
-                                { "label", "my-label" }
-                            },
-                            "text")
-                    },
-                    {
-                        "HtmlEncode[[text]]", null, null, new HashSet<string>(new [] { "text", }),
-                        GetTagHelperOutput(
-                            "not-option",
-                            new TagHelperAttributeList
-                            {
-                                { "label", "my-label" }, { "selected", "selected" }
-                            },
-                            "HtmlEncode[[text]]")
-                    },
-                    {
-                        "text", string.Empty, null, new HashSet<string>(new [] { "text", }),
-                        GetTagHelperOutput(
-                            "not-option",
-                            new TagHelperAttributeList
-                            {
-                                { "label", "my-label" }, { "selected", "" }
-                            },
-                            "text")
-                    },
-                    {
-                        "HtmlEncode[[text]]", null, null,
-                        new HashSet<string>(new [] { string.Empty, "text", }),
-                        GetTagHelperOutput(
-                            "not-option",
-                            new TagHelperAttributeList
-                            {
-                                { "label", "my-label" }, { "selected", "selected" }
-                            },
-                            "HtmlEncode[[text]]")
-                    },
-                    {
-                        "text", string.Empty, "value", null,
-                        GetTagHelperOutput(
-                            "not-option",
-                            new TagHelperAttributeList
-                            {
-                                { "label", "my-label" }, { "value", "value" }, { "selected", "" }
-                            },
-                            "text")
-                    },
-                    {
-                        "text", "selected", "value", null,
-                        GetTagHelperOutput(
-                            "not-option",
-                            new TagHelperAttributeList
-                            {
-                                { "label", "my-label" }, { "value", "value" }, { "selected", "selected" }
-                            },
-                            "text")
-                    },
-                    {
-                        "text", null, "value", new HashSet<string>(),
-                        GetTagHelperOutput(
-                            "not-option",
-                            new TagHelperAttributeList
-                            {
-                                { "label", "my-label" }, { "value", "value" }
-                            },
-                            "text")
-                    },
-                    {
-                        "text", null, "value", new HashSet<string>(new [] { string.Empty, }),
-                        GetTagHelperOutput(
-                            "not-option",
-                            new TagHelperAttributeList
-                            {
-                                { "label", "my-label" }, { "value", "value" }
-                            },
-                            "text")
-                    },
-                    {
-                        "text", string.Empty, "value",
-                        new HashSet<string>(new [] { string.Empty, }),
-                        GetTagHelperOutput(
-                            "not-option",
-                            new TagHelperAttributeList
-                            {
-                                { "label", "my-label" }, { "value", "value" }, { "selected", "" }
-                            },
-                            "text")
-                    },
-                    {
-                        "text", null, "value", new HashSet<string>(new [] { "text", }),
-                        GetTagHelperOutput(
-                            "not-option",
-                            new TagHelperAttributeList
-                            {
-                                { "label", "my-label" }, { "value", "value" }
-                            },
-                            "text")
-                    },
-                    {
-                        "text", null, "value", new HashSet<string>(new [] { "value", }),
-                        GetTagHelperOutput(
-                            "not-option",
-                            new TagHelperAttributeList
-                            {
-                                { "label", "my-label" }, { "value", "value" }, { "selected", "selected" }
-                            },
-                            "text")
-                    },
-                    {
-                        "text", null, "value",
-                        new HashSet<string>(new [] { string.Empty, "value", }),
-                        GetTagHelperOutput(
-                            "not-option",
-                            new TagHelperAttributeList
-                            {
-                                { "label", "my-label" }, { "value", "value" }, { "selected", "selected" }
-                            },
-                            "text")
-                    }
-                };
+                    null,
+                    null,
+                    null,
+                    null,
+                    GetTagHelperOutput(
+                        "not-option",
+                        new TagHelperAttributeList { { "label", "my-label" } },
+                        ""
+                    )
+                },
+                {
+                    null,
+                    string.Empty,
+                    "value",
+                    null,
+                    GetTagHelperOutput(
+                        "not-option",
+                        new TagHelperAttributeList
+                        {
+                            { "label", "my-label" },
+                            { "value", "value" },
+                            { "selected", "" },
+                        },
+                        ""
+                    )
+                },
+                {
+                    null,
+                    "selected",
+                    "value",
+                    null,
+                    GetTagHelperOutput(
+                        "not-option",
+                        new TagHelperAttributeList
+                        {
+                            { "label", "my-label" },
+                            { "value", "value" },
+                            { "selected", "selected" },
+                        },
+                        ""
+                    )
+                },
+                {
+                    null,
+                    null,
+                    "value",
+                    new HashSet<string>(),
+                    GetTagHelperOutput(
+                        "not-option",
+                        new TagHelperAttributeList
+                        {
+                            { "label", "my-label" },
+                            { "value", "value" },
+                        },
+                        ""
+                    )
+                },
+                {
+                    null,
+                    null,
+                    "value",
+                    new HashSet<string>(new[] { string.Empty }),
+                    GetTagHelperOutput(
+                        "not-option",
+                        new TagHelperAttributeList
+                        {
+                            { "label", "my-label" },
+                            { "value", "value" },
+                        },
+                        ""
+                    )
+                },
+                {
+                    null,
+                    string.Empty,
+                    "value",
+                    new HashSet<string>(new[] { string.Empty }),
+                    GetTagHelperOutput(
+                        "not-option",
+                        new TagHelperAttributeList
+                        {
+                            { "label", "my-label" },
+                            { "value", "value" },
+                            { "selected", "" },
+                        },
+                        ""
+                    )
+                },
+                {
+                    null,
+                    null,
+                    "value",
+                    new HashSet<string>(new[] { "value" }),
+                    GetTagHelperOutput(
+                        "not-option",
+                        new TagHelperAttributeList
+                        {
+                            { "label", "my-label" },
+                            { "value", "value" },
+                            { "selected", "selected" },
+                        },
+                        ""
+                    )
+                },
+                {
+                    null,
+                    null,
+                    "value",
+                    new HashSet<string>(new[] { string.Empty, "value" }),
+                    GetTagHelperOutput(
+                        "not-option",
+                        new TagHelperAttributeList
+                        {
+                            { "label", "my-label" },
+                            { "value", "value" },
+                            { "selected", "selected" },
+                        },
+                        ""
+                    )
+                },
+                {
+                    string.Empty,
+                    null,
+                    null,
+                    null,
+                    GetTagHelperOutput(
+                        "not-option",
+                        new TagHelperAttributeList { { "label", "my-label" } },
+                        ""
+                    )
+                },
+                {
+                    string.Empty,
+                    string.Empty,
+                    null,
+                    null,
+                    GetTagHelperOutput(
+                        "not-option",
+                        new TagHelperAttributeList { { "label", "my-label" }, { "selected", "" } },
+                        ""
+                    )
+                },
+                {
+                    string.Empty,
+                    "selected",
+                    null,
+                    null,
+                    GetTagHelperOutput(
+                        "not-option",
+                        new TagHelperAttributeList
+                        {
+                            { "label", "my-label" },
+                            { "selected", "selected" },
+                        },
+                        ""
+                    )
+                },
+                {
+                    string.Empty,
+                    null,
+                    null,
+                    new HashSet<string>(),
+                    GetTagHelperOutput(
+                        "not-option",
+                        new TagHelperAttributeList { { "label", "my-label" } },
+                        ""
+                    )
+                },
+                {
+                    string.Empty,
+                    null,
+                    null,
+                    new HashSet<string>(new[] { string.Empty }),
+                    GetTagHelperOutput(
+                        "not-option",
+                        new TagHelperAttributeList
+                        {
+                            { "label", "my-label" },
+                            { "selected", "selected" },
+                        },
+                        ""
+                    )
+                },
+                {
+                    string.Empty,
+                    string.Empty,
+                    null,
+                    new HashSet<string>(new[] { string.Empty }),
+                    GetTagHelperOutput(
+                        "not-option",
+                        new TagHelperAttributeList { { "label", "my-label" }, { "selected", "" } },
+                        ""
+                    )
+                },
+                {
+                    string.Empty,
+                    null,
+                    null,
+                    new HashSet<string>(new[] { "text" }),
+                    GetTagHelperOutput(
+                        "not-option",
+                        new TagHelperAttributeList { { "label", "my-label" } },
+                        ""
+                    )
+                },
+                {
+                    string.Empty,
+                    null,
+                    null,
+                    new HashSet<string>(new[] { string.Empty, "text" }),
+                    GetTagHelperOutput(
+                        "not-option",
+                        new TagHelperAttributeList
+                        {
+                            { "label", "my-label" },
+                            { "selected", "selected" },
+                        },
+                        ""
+                    )
+                },
+                {
+                    "text",
+                    null,
+                    null,
+                    null,
+                    GetTagHelperOutput(
+                        "not-option",
+                        new TagHelperAttributeList { { "label", "my-label" } },
+                        "text"
+                    )
+                },
+                {
+                    "text",
+                    string.Empty,
+                    null,
+                    null,
+                    GetTagHelperOutput(
+                        "not-option",
+                        new TagHelperAttributeList { { "label", "my-label" }, { "selected", "" } },
+                        "text"
+                    )
+                },
+                {
+                    "text",
+                    "selected",
+                    null,
+                    null,
+                    GetTagHelperOutput(
+                        "not-option",
+                        new TagHelperAttributeList
+                        {
+                            { "label", "my-label" },
+                            { "selected", "selected" },
+                        },
+                        "text"
+                    )
+                },
+                {
+                    "text",
+                    null,
+                    null,
+                    new HashSet<string>(),
+                    GetTagHelperOutput(
+                        "not-option",
+                        new TagHelperAttributeList { { "label", "my-label" } },
+                        "text"
+                    )
+                },
+                {
+                    "text",
+                    null,
+                    null,
+                    new HashSet<string>(new[] { string.Empty }),
+                    GetTagHelperOutput(
+                        "not-option",
+                        new TagHelperAttributeList { { "label", "my-label" } },
+                        "text"
+                    )
+                },
+                {
+                    "HtmlEncode[[text]]",
+                    null,
+                    null,
+                    new HashSet<string>(new[] { "text" }),
+                    GetTagHelperOutput(
+                        "not-option",
+                        new TagHelperAttributeList
+                        {
+                            { "label", "my-label" },
+                            { "selected", "selected" },
+                        },
+                        "HtmlEncode[[text]]"
+                    )
+                },
+                {
+                    "text",
+                    string.Empty,
+                    null,
+                    new HashSet<string>(new[] { "text" }),
+                    GetTagHelperOutput(
+                        "not-option",
+                        new TagHelperAttributeList { { "label", "my-label" }, { "selected", "" } },
+                        "text"
+                    )
+                },
+                {
+                    "HtmlEncode[[text]]",
+                    null,
+                    null,
+                    new HashSet<string>(new[] { string.Empty, "text" }),
+                    GetTagHelperOutput(
+                        "not-option",
+                        new TagHelperAttributeList
+                        {
+                            { "label", "my-label" },
+                            { "selected", "selected" },
+                        },
+                        "HtmlEncode[[text]]"
+                    )
+                },
+                {
+                    "text",
+                    string.Empty,
+                    "value",
+                    null,
+                    GetTagHelperOutput(
+                        "not-option",
+                        new TagHelperAttributeList
+                        {
+                            { "label", "my-label" },
+                            { "value", "value" },
+                            { "selected", "" },
+                        },
+                        "text"
+                    )
+                },
+                {
+                    "text",
+                    "selected",
+                    "value",
+                    null,
+                    GetTagHelperOutput(
+                        "not-option",
+                        new TagHelperAttributeList
+                        {
+                            { "label", "my-label" },
+                            { "value", "value" },
+                            { "selected", "selected" },
+                        },
+                        "text"
+                    )
+                },
+                {
+                    "text",
+                    null,
+                    "value",
+                    new HashSet<string>(),
+                    GetTagHelperOutput(
+                        "not-option",
+                        new TagHelperAttributeList
+                        {
+                            { "label", "my-label" },
+                            { "value", "value" },
+                        },
+                        "text"
+                    )
+                },
+                {
+                    "text",
+                    null,
+                    "value",
+                    new HashSet<string>(new[] { string.Empty }),
+                    GetTagHelperOutput(
+                        "not-option",
+                        new TagHelperAttributeList
+                        {
+                            { "label", "my-label" },
+                            { "value", "value" },
+                        },
+                        "text"
+                    )
+                },
+                {
+                    "text",
+                    string.Empty,
+                    "value",
+                    new HashSet<string>(new[] { string.Empty }),
+                    GetTagHelperOutput(
+                        "not-option",
+                        new TagHelperAttributeList
+                        {
+                            { "label", "my-label" },
+                            { "value", "value" },
+                            { "selected", "" },
+                        },
+                        "text"
+                    )
+                },
+                {
+                    "text",
+                    null,
+                    "value",
+                    new HashSet<string>(new[] { "text" }),
+                    GetTagHelperOutput(
+                        "not-option",
+                        new TagHelperAttributeList
+                        {
+                            { "label", "my-label" },
+                            { "value", "value" },
+                        },
+                        "text"
+                    )
+                },
+                {
+                    "text",
+                    null,
+                    "value",
+                    new HashSet<string>(new[] { "value" }),
+                    GetTagHelperOutput(
+                        "not-option",
+                        new TagHelperAttributeList
+                        {
+                            { "label", "my-label" },
+                            { "value", "value" },
+                            { "selected", "selected" },
+                        },
+                        "text"
+                    )
+                },
+                {
+                    "text",
+                    null,
+                    "value",
+                    new HashSet<string>(new[] { string.Empty, "value" }),
+                    GetTagHelperOutput(
+                        "not-option",
+                        new TagHelperAttributeList
+                        {
+                            { "label", "my-label" },
+                            { "value", "value" },
+                            { "selected", "selected" },
+                        },
+                        "text"
+                    )
+                },
+            };
         }
     }
 
@@ -354,8 +481,13 @@ public class OptionTagHelperTest
     {
         get
         {
-            return GeneratesExpectedDataSet.Where(
-                entry => (entry[1] != null || entry[3] == null || ((ICollection<string>)(entry[3])).Count == 0));
+            return GeneratesExpectedDataSet.Where(entry =>
+                (
+                    entry[1] != null
+                    || entry[3] == null
+                    || ((ICollection<string>)(entry[3])).Count == 0
+                )
+            );
         }
     }
 
@@ -364,10 +496,7 @@ public class OptionTagHelperTest
     // cases.
     public static IEnumerable<object[]> DoesNotUseViewContextDataSet
     {
-        get
-        {
-            return GeneratesExpectedDataSet.Where(entry => entry[1] != null);
-        }
+        get { return GeneratesExpectedDataSet.Where(entry => entry[1] != null); }
     }
 
     [Theory]
@@ -377,13 +506,11 @@ public class OptionTagHelperTest
         string selected,
         string value,
         ICollection<string> currentValues,
-        TagHelperOutput expectedTagHelperOutput)
+        TagHelperOutput expectedTagHelperOutput
+    )
     {
         // Arrange
-        var originalAttributes = new TagHelperAttributeList
-            {
-                { "label", "my-label" },
-            };
+        var originalAttributes = new TagHelperAttributeList { { "label", "my-label" } };
         if (selected != null)
         {
             originalAttributes.Add("selected", selected);
@@ -399,7 +526,8 @@ public class OptionTagHelperTest
             tagName: "option",
             allAttributes: contextAttributes,
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
+            uniqueId: "test"
+        );
 
         var output = new TagHelperOutput(
             expectedTagHelperOutput.TagName,
@@ -409,9 +537,10 @@ public class OptionTagHelperTest
                 // GetChildContentAsync should not be invoked since we are setting the content below.
                 Assert.True(false);
                 return Task.FromResult<TagHelperContent>(null);
-            })
+            }
+        )
         {
-            TagMode = TagMode.StartTagAndEndTag
+            TagMode = TagMode.StartTagAndEndTag,
         };
 
         output.Content.SetContent(originalContent);
@@ -421,8 +550,10 @@ public class OptionTagHelperTest
         var viewContext = TestableHtmlGenerator.GetViewContext(
             model: null,
             htmlGenerator: htmlGenerator,
-            metadataProvider: metadataProvider);
-        tagHelperContext.Items[typeof(SelectTagHelper)] = currentValues == null ? null : new CurrentValues(currentValues);
+            metadataProvider: metadataProvider
+        );
+        tagHelperContext.Items[typeof(SelectTagHelper)] =
+            currentValues == null ? null : new CurrentValues(currentValues);
         var tagHelper = new OptionTagHelper(htmlGenerator)
         {
             Value = value,
@@ -449,29 +580,31 @@ public class OptionTagHelperTest
         string selected,
         string value,
         ICollection<string> currentValues,
-        TagHelperOutput _)
+        TagHelperOutput _
+    )
     {
         // Arrange
         var originalAttributes = new TagHelperAttributeList
-            {
-                { "label", "my-label" },
-                { "selected", selected },
-            };
+        {
+            { "label", "my-label" },
+            { "selected", selected },
+        };
         var originalTagName = "not-option";
 
         var contextAttributes = new TagHelperAttributeList
-            {
-                { "label", "my-label" },
-                { "selected", selected },
-                { "value", value },
-            };
+        {
+            { "label", "my-label" },
+            { "selected", selected },
+            { "value", value },
+        };
         var originalPreContent = "original pre-content";
         var originalPostContent = "original post-content";
         var tagHelperContext = new TagHelperContext(
             tagName: "option",
             allAttributes: contextAttributes,
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
+            uniqueId: "test"
+        );
         var output = new TagHelperOutput(
             originalTagName,
             originalAttributes,
@@ -480,7 +613,8 @@ public class OptionTagHelperTest
                 var tagHelperContent = new DefaultTagHelperContent();
                 tagHelperContent.SetContent(originalContent);
                 return Task.FromResult<TagHelperContent>(tagHelperContent);
-            })
+            }
+        )
         {
             TagMode = TagMode.StartTagAndEndTag,
         };
@@ -493,8 +627,10 @@ public class OptionTagHelperTest
         var viewContext = TestableHtmlGenerator.GetViewContext(
             model: null,
             htmlGenerator: htmlGenerator,
-            metadataProvider: metadataProvider);
-        tagHelperContext.Items[typeof(SelectTagHelper)] = currentValues == null ? null : new CurrentValues(currentValues);
+            metadataProvider: metadataProvider
+        );
+        tagHelperContext.Items[typeof(SelectTagHelper)] =
+            currentValues == null ? null : new CurrentValues(currentValues);
         var tagHelper = new OptionTagHelper(htmlGenerator)
         {
             Value = value,
@@ -513,29 +649,31 @@ public class OptionTagHelperTest
         string selected,
         string value,
         ICollection<string> _,
-        TagHelperOutput __)
+        TagHelperOutput __
+    )
     {
         // Arrange
         var originalAttributes = new TagHelperAttributeList
-            {
-                { "label", "my-label" },
-                { "selected", selected },
-            };
+        {
+            { "label", "my-label" },
+            { "selected", selected },
+        };
         var originalTagName = "not-option";
 
         var contextAttributes = new TagHelperAttributeList
-            {
-                { "label", "my-label" },
-                { "selected", selected },
-                { "value", value },
-            };
+        {
+            { "label", "my-label" },
+            { "selected", selected },
+            { "value", value },
+        };
         var originalPreContent = "original pre-content";
         var originalPostContent = "original post-content";
         var tagHelperContext = new TagHelperContext(
             tagName: "option",
             allAttributes: contextAttributes,
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
+            uniqueId: "test"
+        );
 
         var output = new TagHelperOutput(
             originalTagName,
@@ -545,7 +683,8 @@ public class OptionTagHelperTest
                 var tagHelperContent = new DefaultTagHelperContent();
                 tagHelperContent.SetContent(originalContent);
                 return Task.FromResult<TagHelperContent>(tagHelperContent);
-            })
+            }
+        )
         {
             TagMode = TagMode.StartTagAndEndTag,
         };
@@ -556,10 +695,7 @@ public class OptionTagHelperTest
         var metadataProvider = new EmptyModelMetadataProvider();
         var htmlGenerator = new TestableHtmlGenerator(metadataProvider);
 
-        var tagHelper = new OptionTagHelper(htmlGenerator)
-        {
-            Value = value,
-        };
+        var tagHelper = new OptionTagHelper(htmlGenerator) { Value = value };
 
         // Act & Assert (does not throw)
         // Tag helper would throw an NRE if it used ViewContext or Generator values.
@@ -567,13 +703,17 @@ public class OptionTagHelperTest
     }
 
     private static TagHelperOutput GetTagHelperOutput(
-        string tagName, TagHelperAttributeList attributes, string content)
+        string tagName,
+        TagHelperAttributeList attributes,
+        string content
+    )
     {
         var tagHelperOutput = new TagHelperOutput(
             tagName,
             attributes,
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                new DefaultTagHelperContent()));
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        );
         tagHelperOutput.Content.SetContent(content);
 
         return tagHelperOutput;

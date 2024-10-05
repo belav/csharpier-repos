@@ -50,7 +50,11 @@ public class InputFile : ComponentBase, IInputFileJsCallbacks, IDisposable
         if (firstRender)
         {
             _jsCallbacksRelay = new InputFileJsCallbacksRelay(this);
-            await JSRuntime.InvokeVoidAsync(InputFileInterop.Init, _jsCallbacksRelay.DotNetReference, _inputFileElement);
+            await JSRuntime.InvokeVoidAsync(
+                InputFileInterop.Init,
+                _jsCallbacksRelay.DotNetReference,
+                _inputFileElement
+            );
         }
     }
 
@@ -60,21 +64,41 @@ public class InputFile : ComponentBase, IInputFileJsCallbacks, IDisposable
         builder.OpenElement(0, "input");
         builder.AddMultipleAttributes(1, AdditionalAttributes);
         builder.AddAttribute(2, "type", "file");
-        builder.AddElementReferenceCapture(3, elementReference => _inputFileElement = elementReference);
+        builder.AddElementReferenceCapture(
+            3,
+            elementReference => _inputFileElement = elementReference
+        );
         builder.CloseElement();
     }
 
-    internal Stream OpenReadStream(BrowserFile file, long maxAllowedSize, CancellationToken cancellationToken)
-        => new BrowserFileStream(
+    internal Stream OpenReadStream(
+        BrowserFile file,
+        long maxAllowedSize,
+        CancellationToken cancellationToken
+    ) =>
+        new BrowserFileStream(
             JSRuntime,
             _inputFileElement,
             file,
             maxAllowedSize,
-            cancellationToken);
+            cancellationToken
+        );
 
-    internal async ValueTask<IBrowserFile> ConvertToImageFileAsync(BrowserFile file, string format, int maxWidth, int maxHeight)
+    internal async ValueTask<IBrowserFile> ConvertToImageFileAsync(
+        BrowserFile file,
+        string format,
+        int maxWidth,
+        int maxHeight
+    )
     {
-        var imageFile = await JSRuntime.InvokeAsync<BrowserFile>(InputFileInterop.ToImageFile, _inputFileElement, file.Id, format, maxWidth, maxHeight);
+        var imageFile = await JSRuntime.InvokeAsync<BrowserFile>(
+            InputFileInterop.ToImageFile,
+            _inputFileElement,
+            file.Id,
+            format,
+            maxWidth,
+            maxHeight
+        );
 
         if (imageFile is null)
         {

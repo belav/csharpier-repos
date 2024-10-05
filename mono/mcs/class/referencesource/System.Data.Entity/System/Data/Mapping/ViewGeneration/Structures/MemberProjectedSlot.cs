@@ -8,14 +8,14 @@
 //---------------------------------------------------------------------
 
 using System.Collections.Generic;
-using System.Text;
-using System.Diagnostics;
 using System.Data.Common.CommandTrees;
 using System.Data.Common.CommandTrees.ExpressionBuilder;
 using System.Data.Common.Utils;
-using System.Data.Metadata.Edm;
 using System.Data.Mapping.ViewGeneration.CqlGeneration;
 using System.Data.Mapping.ViewGeneration.Utils;
+using System.Data.Metadata.Edm;
+using System.Diagnostics;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.Structures
 {
@@ -49,7 +49,12 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         #endregion
 
         #region Methods
-        internal override StringBuilder AsEsql(StringBuilder builder, MemberPath outputMember, string blockAlias, int indentLevel)
+        internal override StringBuilder AsEsql(
+            StringBuilder builder,
+            MemberPath outputMember,
+            string blockAlias,
+            int indentLevel
+        )
         {
             TypeUsage outputMemberStoreTypeUsage;
             if (NeedToCastCqlValue(outputMember, out outputMemberStoreTypeUsage))
@@ -84,7 +89,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         /// True iff <see cref=" m_memberPath"/> and <paramref name="outputMember"/> types do not match,
         /// We assume that the mapping loader has already checked that the casts are ok and emitted warnings.
         /// </summary>
-        private bool NeedToCastCqlValue(MemberPath outputMember, out TypeUsage outputMemberTypeUsage)
+        private bool NeedToCastCqlValue(
+            MemberPath outputMember,
+            out TypeUsage outputMemberTypeUsage
+        )
         {
             TypeUsage memberPathTypeUsage = Helper.GetModelTypeUsage(m_memberPath.LeafEdmMember);
             outputMemberTypeUsage = Helper.GetModelTypeUsage(outputMember.LeafEdmMember);
@@ -140,7 +148,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         /// association set end. Returns the list of slots.  Returns null if even one of the key slots is not present in slots.
         /// </summary>
         /// <param name="prefix">corresponds to an entity set or an association end</param>
-        internal static List<MemberProjectedSlot> GetKeySlots(IEnumerable<MemberProjectedSlot> slots, MemberPath prefix)
+        internal static List<MemberProjectedSlot> GetKeySlots(
+            IEnumerable<MemberProjectedSlot> slots,
+            MemberPath prefix
+        )
         {
             // Get the entity type of the hosted end or entity set
             EntitySet entitySet = prefix.EntitySet;
@@ -158,12 +169,18 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         /// Searches for members in <paramref name="slots"/> and returns the corresponding slots in the same order as present in
         /// <paramref name="members"/>. Returns null if even one member is not present in slots.
         /// </summary>
-        internal static List<MemberProjectedSlot> GetSlots(IEnumerable<MemberProjectedSlot> slots, IEnumerable<MemberPath> members)
+        internal static List<MemberProjectedSlot> GetSlots(
+            IEnumerable<MemberProjectedSlot> slots,
+            IEnumerable<MemberPath> members
+        )
         {
             List<MemberProjectedSlot> result = new List<MemberProjectedSlot>();
             foreach (MemberPath member in members)
             {
-                MemberProjectedSlot slot = GetSlotForMember(Helpers.AsSuperTypeList<MemberProjectedSlot, ProjectedSlot>(slots), member);
+                MemberProjectedSlot slot = GetSlotForMember(
+                    Helpers.AsSuperTypeList<MemberProjectedSlot, ProjectedSlot>(slots),
+                    member
+                );
                 if (slot == null)
                 {
                     return null;
@@ -176,7 +193,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         /// <summary>
         /// Searches for <paramref name="member"/> in <paramref name="slots"/> and returns the corresponding slot. If none is found, returns null.
         /// </summary>
-        internal static MemberProjectedSlot GetSlotForMember(IEnumerable<ProjectedSlot> slots, MemberPath member)
+        internal static MemberProjectedSlot GetSlotForMember(
+            IEnumerable<ProjectedSlot> slots,
+            MemberPath member
+        )
         {
             foreach (MemberProjectedSlot slot in slots)
             {

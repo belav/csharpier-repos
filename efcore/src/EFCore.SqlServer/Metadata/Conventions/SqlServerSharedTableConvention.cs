@@ -23,22 +23,28 @@ public class SqlServerSharedTableConvention : SharedTableConvention
     /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
     public SqlServerSharedTableConvention(
         ProviderConventionSetBuilderDependencies dependencies,
-        RelationalConventionSetBuilderDependencies relationalDependencies)
-        : base(dependencies, relationalDependencies)
-    {
-    }
+        RelationalConventionSetBuilderDependencies relationalDependencies
+    )
+        : base(dependencies, relationalDependencies) { }
 
     /// <inheritdoc />
-    protected override bool IndexesUniqueAcrossTables
-        => false;
+    protected override bool IndexesUniqueAcrossTables => false;
 
     /// <inheritdoc />
-    protected override bool AreCompatible(IReadOnlyKey key, IReadOnlyKey duplicateKey, in StoreObjectIdentifier storeObject)
-        => base.AreCompatible(key, duplicateKey, storeObject)
-            && key.AreCompatibleForSqlServer(duplicateKey, storeObject, shouldThrow: false);
+    protected override bool AreCompatible(
+        IReadOnlyKey key,
+        IReadOnlyKey duplicateKey,
+        in StoreObjectIdentifier storeObject
+    ) =>
+        base.AreCompatible(key, duplicateKey, storeObject)
+        && key.AreCompatibleForSqlServer(duplicateKey, storeObject, shouldThrow: false);
 
     /// <inheritdoc />
-    protected override bool AreCompatible(IReadOnlyIndex index, IReadOnlyIndex duplicateIndex, in StoreObjectIdentifier storeObject)
-        => base.AreCompatible(index, duplicateIndex, storeObject)
-            && index.AreCompatibleForSqlServer(duplicateIndex, storeObject, shouldThrow: false);
+    protected override bool AreCompatible(
+        IReadOnlyIndex index,
+        IReadOnlyIndex duplicateIndex,
+        in StoreObjectIdentifier storeObject
+    ) =>
+        base.AreCompatible(index, duplicateIndex, storeObject)
+        && index.AreCompatibleForSqlServer(duplicateIndex, storeObject, shouldThrow: false);
 }

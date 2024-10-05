@@ -16,7 +16,11 @@ namespace System.ServiceModel.Channels
         string nextUpgrade;
         bool isOpen;
 
-        protected StreamSecurityUpgradeInitiatorBase(string upgradeString, EndpointAddress remoteAddress, Uri via)
+        protected StreamSecurityUpgradeInitiatorBase(
+            string upgradeString,
+            EndpointAddress remoteAddress,
+            Uri via
+        )
         {
             this.remoteAddress = remoteAddress;
             this.via = via;
@@ -25,21 +29,19 @@ namespace System.ServiceModel.Channels
 
         protected EndpointAddress RemoteAddress
         {
-            get
-            {
-                return this.remoteAddress;
-            }
+            get { return this.remoteAddress; }
         }
 
         protected Uri Via
         {
-            get
-            {
-                return this.via;
-            }
+            get { return this.via; }
         }
 
-        public override IAsyncResult BeginInitiateUpgrade(Stream stream, AsyncCallback callback, object state)
+        public override IAsyncResult BeginInitiateUpgrade(
+            Stream stream,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (stream == null)
             {
@@ -76,7 +78,11 @@ namespace System.ServiceModel.Channels
         {
             if (!securityUpgraded)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.OperationInvalidBeforeSecurityNegotiation)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.OperationInvalidBeforeSecurityNegotiation)
+                    )
+                );
             }
 
             return this.remoteSecurity;
@@ -123,9 +129,18 @@ namespace System.ServiceModel.Channels
             this.isOpen = false;
         }
 
-        protected abstract IAsyncResult OnBeginInitiateUpgrade(Stream stream, AsyncCallback callback, object state);
-        protected abstract Stream OnEndInitiateUpgrade(IAsyncResult result,
-            out SecurityMessageProperty remoteSecurity);
-        protected abstract Stream OnInitiateUpgrade(Stream stream, out SecurityMessageProperty remoteSecurity);
+        protected abstract IAsyncResult OnBeginInitiateUpgrade(
+            Stream stream,
+            AsyncCallback callback,
+            object state
+        );
+        protected abstract Stream OnEndInitiateUpgrade(
+            IAsyncResult result,
+            out SecurityMessageProperty remoteSecurity
+        );
+        protected abstract Stream OnInitiateUpgrade(
+            Stream stream,
+            out SecurityMessageProperty remoteSecurity
+        );
     }
 }

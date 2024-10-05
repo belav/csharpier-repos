@@ -17,8 +17,7 @@ internal sealed unsafe partial class SafeLibraryHandle : SafeHandleZeroOrMinusOn
 {
     // Called by P/Invoke when returning SafeHandles
     public SafeLibraryHandle()
-        : base(ownsHandle: true)
-    { }
+        : base(ownsHandle: true) { }
 
     /// <summary>
     /// Returns a value stating whether the library exports a given proc.
@@ -39,7 +38,11 @@ internal sealed unsafe partial class SafeLibraryHandle : SafeHandleZeroOrMinusOn
         const uint GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS = 0x00000004U;
         const uint GET_MODULE_HANDLE_EX_FLAG_PIN = 0x00000001U;
 
-        bool retVal = UnsafeNativeMethods.GetModuleHandleEx(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_PIN, this, out _);
+        bool retVal = UnsafeNativeMethods.GetModuleHandleEx(
+            GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_PIN,
+            this,
+            out _
+        );
         if (!retVal)
         {
             UnsafeNativeMethods.ThrowExceptionForLastWin32Error();
@@ -59,20 +62,30 @@ internal sealed unsafe partial class SafeLibraryHandle : SafeHandleZeroOrMinusOn
 
         LocalAllocHandle messageHandle;
         int numCharsOutput = UnsafeNativeMethods.FormatMessage(
-            dwFlags: FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_HMODULE | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
+            dwFlags: FORMAT_MESSAGE_ALLOCATE_BUFFER
+                | FORMAT_MESSAGE_FROM_HMODULE
+                | FORMAT_MESSAGE_FROM_SYSTEM
+                | FORMAT_MESSAGE_IGNORE_INSERTS,
             lpSource: this,
             dwMessageId: (uint)messageId,
-            dwLanguageId: 0 /* ignore current culture */,
+            dwLanguageId: 0 /* ignore current culture */
+            ,
             lpBuffer: out messageHandle,
-            nSize: 0 /* unused */,
-            Arguments: IntPtr.Zero /* unused */);
+            nSize: 0 /* unused */
+            ,
+            Arguments: IntPtr.Zero /* unused */
+        );
 
         if (numCharsOutput != 0 && messageHandle != null && !messageHandle.IsInvalid)
         {
             // Successfully retrieved the message.
             using (messageHandle)
             {
-                return new string((char*)messageHandle.DangerousGetHandle(), 0, numCharsOutput).Trim();
+                return new string(
+                    (char*)messageHandle.DangerousGetHandle(),
+                    0,
+                    numCharsOutput
+                ).Trim();
             }
         }
         else
@@ -85,7 +98,8 @@ internal sealed unsafe partial class SafeLibraryHandle : SafeHandleZeroOrMinusOn
     /// <summary>
     /// Gets a delegate pointing to a given export from this library.
     /// </summary>
-    public TDelegate? GetProcAddress<TDelegate>(string lpProcName, bool throwIfNotFound = true) where TDelegate : class
+    public TDelegate? GetProcAddress<TDelegate>(string lpProcName, bool throwIfNotFound = true)
+        where TDelegate : class
     {
         IntPtr pfnProc = UnsafeNativeMethods.GetProcAddress(this, lpProcName);
         if (pfnProc == IntPtr.Zero)
@@ -110,7 +124,11 @@ internal sealed unsafe partial class SafeLibraryHandle : SafeHandleZeroOrMinusOn
     {
         const uint LOAD_LIBRARY_SEARCH_SYSTEM32 = 0x00000800U; // from libloaderapi.h
 
-        SafeLibraryHandle handle = UnsafeNativeMethods.LoadLibraryEx(filename, IntPtr.Zero, LOAD_LIBRARY_SEARCH_SYSTEM32);
+        SafeLibraryHandle handle = UnsafeNativeMethods.LoadLibraryEx(
+            filename,
+            IntPtr.Zero,
+            LOAD_LIBRARY_SEARCH_SYSTEM32
+        );
         if (handle == null || handle.IsInvalid)
         {
             UnsafeNativeMethods.ThrowExceptionForLastWin32Error();
@@ -135,13 +153,13 @@ internal sealed unsafe partial class SafeLibraryHandle : SafeHandleZeroOrMinusOn
         [DllImport("kernel32.dll", EntryPoint = "FormatMessageW", SetLastError = true)]
         public static extern int FormatMessage(
 #endif
-           uint dwFlags,
-           SafeLibraryHandle lpSource,
-           uint dwMessageId,
-           uint dwLanguageId,
-           out LocalAllocHandle lpBuffer,
-           uint nSize,
-           IntPtr Arguments
+            uint dwFlags,
+            SafeLibraryHandle lpSource,
+            uint dwMessageId,
+            uint dwLanguageId,
+            out LocalAllocHandle lpBuffer,
+            uint nSize,
+            IntPtr Arguments
         );
 
         // http://msdn.microsoft.com/en-us/library/ms683152(v=vs.85).aspx
@@ -169,7 +187,8 @@ internal sealed unsafe partial class SafeLibraryHandle : SafeHandleZeroOrMinusOn
 #endif
             uint dwFlags,
             SafeLibraryHandle lpModuleName, // can point to a location within the module if GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS is set
-            out IntPtr phModule);
+            out IntPtr phModule
+        );
 
         // http://msdn.microsoft.com/en-us/library/ms683212(v=vs.85).aspx
 #if NET7_0_OR_GREATER
@@ -180,7 +199,8 @@ internal sealed unsafe partial class SafeLibraryHandle : SafeHandleZeroOrMinusOn
         internal static extern IntPtr GetProcAddress(
 #endif
             SafeLibraryHandle hModule,
-            [MarshalAs(UnmanagedType.LPStr)] string lpProcName);
+            [MarshalAs(UnmanagedType.LPStr)] string lpProcName
+        );
 
         // http://msdn.microsoft.com/en-us/library/windows/desktop/ms684179(v=vs.85).aspx
 #if NET7_0_OR_GREATER
@@ -192,7 +212,8 @@ internal sealed unsafe partial class SafeLibraryHandle : SafeHandleZeroOrMinusOn
 #endif
             [MarshalAs(UnmanagedType.LPWStr)] string lpFileName,
             IntPtr hFile,
-            uint dwFlags);
+            uint dwFlags
+        );
 
 #pragma warning disable CS8763 // A method marked [DoesNotReturn] should not return.
         [DoesNotReturn]

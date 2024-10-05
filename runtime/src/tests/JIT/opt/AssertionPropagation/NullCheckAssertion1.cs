@@ -8,7 +8,9 @@ using Xunit;
 
 public class Sample3
 {
-    [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+    [System.Runtime.CompilerServices.MethodImplAttribute(
+        System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+    )]
     private static void func(object o)
     {
         if (o == null)

@@ -31,8 +31,18 @@ namespace System.IO.Tests
             byte[] expected = RandomNumberGenerator.GetBytes(fileSize);
             File.WriteAllBytes(filePath, expected);
 
-            using (SafeFileHandle handle = File.OpenHandle(filePath, FileMode.Open, options: GetFileOptions(asyncHandle)))
-            using (SectorAlignedMemory<byte> buffer = SectorAlignedMemory<byte>.Allocate(Environment.SystemPageSize))
+            using (
+                SafeFileHandle handle = File.OpenHandle(
+                    filePath,
+                    FileMode.Open,
+                    options: GetFileOptions(asyncHandle)
+                )
+            )
+            using (
+                SectorAlignedMemory<byte> buffer = SectorAlignedMemory<byte>.Allocate(
+                    Environment.SystemPageSize
+                )
+            )
             {
                 int current = 0;
                 int total = 0;
@@ -43,11 +53,14 @@ namespace System.IO.Tests
                         ? await RandomAccess.ReadAsync(handle, buffer.Memory, fileOffset: total)
                         : RandomAccess.Read(handle, buffer.GetSpan(), fileOffset: total);
 
-                    Assert.True(expected.AsSpan(total, current).SequenceEqual(buffer.GetSpan().Slice(0, current)));
+                    Assert.True(
+                        expected
+                            .AsSpan(total, current)
+                            .SequenceEqual(buffer.GetSpan().Slice(0, current))
+                    );
 
                     total += current;
-                }
-                while (current != 0);
+                } while (current != 0);
 
                 Assert.Equal(fileSize, total);
             }
@@ -62,9 +75,23 @@ namespace System.IO.Tests
             byte[] expected = RandomNumberGenerator.GetBytes(fileSize);
             File.WriteAllBytes(filePath, expected);
 
-            using (SafeFileHandle handle = File.OpenHandle(filePath, FileMode.Open, options: GetFileOptions(asyncHandle)))
-            using (SectorAlignedMemory<byte> buffer_1 = SectorAlignedMemory<byte>.Allocate(Environment.SystemPageSize))
-            using (SectorAlignedMemory<byte> buffer_2 = SectorAlignedMemory<byte>.Allocate(Environment.SystemPageSize))
+            using (
+                SafeFileHandle handle = File.OpenHandle(
+                    filePath,
+                    FileMode.Open,
+                    options: GetFileOptions(asyncHandle)
+                )
+            )
+            using (
+                SectorAlignedMemory<byte> buffer_1 = SectorAlignedMemory<byte>.Allocate(
+                    Environment.SystemPageSize
+                )
+            )
+            using (
+                SectorAlignedMemory<byte> buffer_2 = SectorAlignedMemory<byte>.Allocate(
+                    Environment.SystemPageSize
+                )
+            )
             {
                 long current = 0;
                 long total = 0;
@@ -82,9 +109,17 @@ namespace System.IO.Tests
                         : RandomAccess.Read(handle, buffers, fileOffset: total);
 
                     int takeFromFirst = Math.Min(buffer_1.Memory.Length, (int)current);
-                    Assert.True(expected.AsSpan((int)total, takeFromFirst).SequenceEqual(buffer_1.GetSpan().Slice(0, takeFromFirst)));
+                    Assert.True(
+                        expected
+                            .AsSpan((int)total, takeFromFirst)
+                            .SequenceEqual(buffer_1.GetSpan().Slice(0, takeFromFirst))
+                    );
                     int takeFromSecond = (int)current - takeFromFirst;
-                    Assert.True(expected.AsSpan((int)total + takeFromFirst, takeFromSecond).SequenceEqual(buffer_2.GetSpan().Slice(0, takeFromSecond)));
+                    Assert.True(
+                        expected
+                            .AsSpan((int)total + takeFromFirst, takeFromSecond)
+                            .SequenceEqual(buffer_2.GetSpan().Slice(0, takeFromSecond))
+                    );
 
                     total += current;
                 } while (current == buffer_1.Memory.Length + buffer_2.Memory.Length);
@@ -102,8 +137,18 @@ namespace System.IO.Tests
             int fileSize = bufferSize * 10;
             byte[] content = RandomNumberGenerator.GetBytes(fileSize);
 
-            using (SafeFileHandle handle = File.OpenHandle(filePath, FileMode.CreateNew, FileAccess.Write, FileShare.None, GetFileOptions(asyncHandle)))
-            using (SectorAlignedMemory<byte> buffer = SectorAlignedMemory<byte>.Allocate(bufferSize))
+            using (
+                SafeFileHandle handle = File.OpenHandle(
+                    filePath,
+                    FileMode.CreateNew,
+                    FileAccess.Write,
+                    FileShare.None,
+                    GetFileOptions(asyncHandle)
+                )
+            )
+            using (
+                SectorAlignedMemory<byte> buffer = SectorAlignedMemory<byte>.Allocate(bufferSize)
+            )
             {
                 int total = 0;
 
@@ -137,9 +182,21 @@ namespace System.IO.Tests
             int fileSize = bufferSize * 10;
             byte[] content = RandomNumberGenerator.GetBytes(fileSize);
 
-            using (SafeFileHandle handle = File.OpenHandle(filePath, FileMode.CreateNew, FileAccess.Write, FileShare.None, GetFileOptions(asyncHandle)))
-            using (SectorAlignedMemory<byte> buffer_1 = SectorAlignedMemory<byte>.Allocate(bufferSize))
-            using (SectorAlignedMemory<byte> buffer_2 = SectorAlignedMemory<byte>.Allocate(bufferSize))
+            using (
+                SafeFileHandle handle = File.OpenHandle(
+                    filePath,
+                    FileMode.CreateNew,
+                    FileAccess.Write,
+                    FileShare.None,
+                    GetFileOptions(asyncHandle)
+                )
+            )
+            using (
+                SectorAlignedMemory<byte> buffer_1 = SectorAlignedMemory<byte>.Allocate(bufferSize)
+            )
+            using (
+                SectorAlignedMemory<byte> buffer_2 = SectorAlignedMemory<byte>.Allocate(bufferSize)
+            )
             {
                 long total = 0;
 
@@ -184,17 +241,33 @@ namespace System.IO.Tests
             int fileSize = bufferSize * 2;
             byte[] content = RandomNumberGenerator.GetBytes(fileSize);
 
-            using (SafeFileHandle handle = File.OpenHandle(filePath, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None, FileOptions.Asynchronous | NoBuffering))
+            using (
+                SafeFileHandle handle = File.OpenHandle(
+                    filePath,
+                    FileMode.CreateNew,
+                    FileAccess.ReadWrite,
+                    FileShare.None,
+                    FileOptions.Asynchronous | NoBuffering
+                )
+            )
             using (SectorAlignedMemory<byte> buffer = SectorAlignedMemory<byte>.Allocate(fileSize))
             {
                 Memory<byte> firstHalf = buffer.Memory.Slice(0, bufferSize);
                 Memory<byte> secondHalf = buffer.Memory.Slice(bufferSize);
 
                 content.AsSpan().CopyTo(buffer.GetSpan());
-                await RandomAccess.WriteAsync(handle, new ReadOnlyMemory<byte>[] { firstHalf, secondHalf }, 0);
+                await RandomAccess.WriteAsync(
+                    handle,
+                    new ReadOnlyMemory<byte>[] { firstHalf, secondHalf },
+                    0
+                );
 
                 buffer.GetSpan().Clear();
-                long nRead = await RandomAccess.ReadAsync(handle, new Memory<byte>[] { firstHalf, secondHalf }, 0);
+                long nRead = await RandomAccess.ReadAsync(
+                    handle,
+                    new Memory<byte>[] { firstHalf, secondHalf },
+                    0
+                );
 
                 Assert.Equal(buffer.GetSpan().Length, nRead);
                 AssertExtensions.SequenceEqual(buffer.GetSpan(), content.AsSpan());
@@ -205,7 +278,13 @@ namespace System.IO.Tests
         public async Task ReadWriteAsyncUsingEmptyBuffers()
         {
             string filePath = GetTestFilePath();
-            using SafeFileHandle handle = File.OpenHandle(filePath, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None, FileOptions.Asynchronous | NoBuffering);
+            using SafeFileHandle handle = File.OpenHandle(
+                filePath,
+                FileMode.CreateNew,
+                FileAccess.ReadWrite,
+                FileShare.None,
+                FileOptions.Asynchronous | NoBuffering
+            );
 
             long nRead = await RandomAccess.ReadAsync(handle, Array.Empty<Memory<byte>>(), 0);
             Assert.Equal(0, nRead);
@@ -221,8 +300,18 @@ namespace System.IO.Tests
             byte[] expected = RandomNumberGenerator.GetBytes(fileSize);
             File.WriteAllBytes(filePath, expected);
 
-            using FileStream fileStream = new (filePath, FileMode.Open, FileAccess.Read, FileShare.None, 0, GetFileOptions(asyncHandle));
-            using SectorAlignedMemory<byte> buffer = SectorAlignedMemory<byte>.Allocate(Environment.SystemPageSize);
+            using FileStream fileStream =
+                new(
+                    filePath,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.None,
+                    0,
+                    GetFileOptions(asyncHandle)
+                );
+            using SectorAlignedMemory<byte> buffer = SectorAlignedMemory<byte>.Allocate(
+                Environment.SystemPageSize
+            );
 
             int current = 0;
             int total = 0;
@@ -233,11 +322,14 @@ namespace System.IO.Tests
                     ? await fileStream.ReadAsync(buffer.Memory)
                     : fileStream.Read(buffer.GetSpan());
 
-                Assert.True(expected.AsSpan(total, current).SequenceEqual(buffer.GetSpan().Slice(0, current)));
+                Assert.True(
+                    expected
+                        .AsSpan(total, current)
+                        .SequenceEqual(buffer.GetSpan().Slice(0, current))
+                );
 
                 total += current;
-            }
-            while (current != 0);
+            } while (current != 0);
 
             Assert.Equal(fileSize, total);
         }
@@ -260,9 +352,17 @@ namespace System.IO.Tests
             // works because both the system page size and the storage device's sector size are typically powers of 2
             // meaning the system page size (which is typically 4,096 bytes) will be a multiple of the sector size
             // (which is typically 512 bytes) hence meeting the requirements for unbuffered I/O.
-            byte[] randomBytes = RandomNumberGenerator.GetBytes(pageSizeMultiple * Environment.SystemPageSize);
+            byte[] randomBytes = RandomNumberGenerator.GetBytes(
+                pageSizeMultiple * Environment.SystemPageSize
+            );
 
-            using (SafeFileHandle handle = File.OpenHandle(testFilePath, FileMode.CreateNew, FileAccess.Write))
+            using (
+                SafeFileHandle handle = File.OpenHandle(
+                    testFilePath,
+                    FileMode.CreateNew,
+                    FileAccess.Write
+                )
+            )
             {
                 // Write random bytes to file. NOTE: this write does NOT use unbuffered I/O, i.e. the written bytes
                 // should end up in the file system cache so we can then flush them to disk below.
@@ -277,8 +377,19 @@ namespace System.IO.Tests
             // FlushToDisk() worked correctly, the bytes we read should match the bytes we wrote above. NOTE: unbuffered
             // I/O requires the buffer we read into to be aligned to the storage device's sector size which is why we use
             // the SectorAlignedMemory<T> type here.
-            using (SafeFileHandle handle = File.OpenHandle(testFilePath, FileMode.Open, FileAccess.Read, options: NoBuffering))
-            using (SectorAlignedMemory<byte> buffer = SectorAlignedMemory<byte>.Allocate(randomBytes.Length))
+            using (
+                SafeFileHandle handle = File.OpenHandle(
+                    testFilePath,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    options: NoBuffering
+                )
+            )
+            using (
+                SectorAlignedMemory<byte> buffer = SectorAlignedMemory<byte>.Allocate(
+                    randomBytes.Length
+                )
+            )
             {
                 int currentBytesRead = 0;
                 int nextFileReadOffset = 0;
@@ -290,16 +401,22 @@ namespace System.IO.Tests
                     // that the call to FlushToDisk() above worked correctly and the bytes we wrote to the file are now
                     // on disk. If we used buffered I/O here, the bytes would be read from the file system cache instead
                     // of from disk, which would defeat the purpose of this test.
-                    currentBytesRead = RandomAccess.Read(handle, buffer.GetSpan(), fileOffset: nextFileReadOffset);
+                    currentBytesRead = RandomAccess.Read(
+                        handle,
+                        buffer.GetSpan(),
+                        fileOffset: nextFileReadOffset
+                    );
 
-                    Span<byte> expectedBytes = randomBytes.AsSpan(nextFileReadOffset, currentBytesRead);
+                    Span<byte> expectedBytes = randomBytes.AsSpan(
+                        nextFileReadOffset,
+                        currentBytesRead
+                    );
                     Span<byte> actualBytes = buffer.GetSpan().Slice(0, currentBytesRead);
 
                     Assert.True(expectedBytes.SequenceEqual(actualBytes));
 
                     nextFileReadOffset += currentBytesRead;
-                }
-                while (currentBytesRead != 0);
+                } while (currentBytesRead != 0);
 
                 // At this point, we should have read the entire file.
                 Assert.Equal(randomBytes.Length, nextFileReadOffset);
@@ -307,6 +424,7 @@ namespace System.IO.Tests
         }
 
         // when using FileOptions.Asynchronous we are testing Scatter&Gather APIs on Windows (FILE_FLAG_OVERLAPPED requirement)
-        private static FileOptions GetFileOptions(bool asyncHandle) => (asyncHandle ? FileOptions.Asynchronous : FileOptions.None) | NoBuffering; 
+        private static FileOptions GetFileOptions(bool asyncHandle) =>
+            (asyncHandle ? FileOptions.Asynchronous : FileOptions.None) | NoBuffering;
     }
 }

@@ -8,30 +8,15 @@ namespace System.ServiceModel.Configuration
 
     public interface IBindingConfigurationElement
     {
-        TimeSpan CloseTimeout
-        {
-            get;
-        }
+        TimeSpan CloseTimeout { get; }
 
-        string Name
-        {
-            get;
-        }
+        string Name { get; }
 
-        TimeSpan OpenTimeout
-        {
-            get;
-        }
+        TimeSpan OpenTimeout { get; }
 
-        TimeSpan ReceiveTimeout
-        {
-            get;
-        }
+        TimeSpan ReceiveTimeout { get; }
 
-        TimeSpan SendTimeout
-        {
-            get;
-        }
+        TimeSpan SendTimeout { get; }
 
         void ApplyConfiguration(Binding binding);
     }

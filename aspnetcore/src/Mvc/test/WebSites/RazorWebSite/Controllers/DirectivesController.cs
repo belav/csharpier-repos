@@ -14,8 +14,10 @@ public class DirectivesController : Controller
 
     public IActionResult ViewInheritsBasePageFromViewImports()
     {
-        return View("/Views/Directives/Scoped/ViewInheritsBasePageFromViewImports.cshtml",
-                    new Person { Name = "Person2" });
+        return View(
+            "/Views/Directives/Scoped/ViewInheritsBasePageFromViewImports.cshtml",
+            new Person { Name = "Person2" }
+        );
     }
 
     public IActionResult ViewReplacesTModelTokenFromInheritedBasePages()
@@ -23,10 +25,7 @@ public class DirectivesController : Controller
         var model = new Person
         {
             Name = "Bob",
-            Address = new Address
-            {
-                ZipCode = "98052"
-            }
+            Address = new Address { ZipCode = "98052" },
         };
 
         return View("/Views/InheritingInherits/Index.cshtml", model);

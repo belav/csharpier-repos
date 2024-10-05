@@ -7,7 +7,10 @@ internal static partial class Interop
 {
     internal static partial class Sys
     {
-        [LibraryImport(Interop.Libraries.SystemNative, EntryPoint = "SystemNative_GetSystemTimeAsTicks")]
+        [LibraryImport(
+            Interop.Libraries.SystemNative,
+            EntryPoint = "SystemNative_GetSystemTimeAsTicks"
+        )]
         [SuppressGCTransition]
         internal static partial long GetSystemTimeAsTicks();
     }

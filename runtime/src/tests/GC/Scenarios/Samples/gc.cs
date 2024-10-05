@@ -26,30 +26,34 @@ PARTICULAR PURPOSE.
 using System;
 using System.Threading;
 
-
 ///////////////////////////////////////////////////////////////////////////////
 
 
 // Note that deriving from Object is optional since it is always implied
-public class BaseObj : Object {
-    private String name;    // Each object has a name to help identify it
+public class BaseObj : Object
+{
+    private String name; // Each object has a name to help identify it
 
     // Note that explicitly calling the base class's constructor is
     // optional since the compiler ensures it anyway.
     // Also note that there is no concept of a destructor.
-    public BaseObj(String name) : base() {
+    public BaseObj(String name)
+        : base()
+    {
         this.name = name;
         Display("BaseObj Constructor");
     }
 
-    public void Display(String status) {
+    public void Display(String status)
+    {
         Application.Display(String.Format("Obj({0}): {1}", name, status));
     }
 
     // A Finalize method is the closest thing to a destructor but many of the
     // semantics are different. The demos in this application demonstrate this.
     //protected override void Finalize() {
-    ~BaseObj() {
+    ~BaseObj()
+    {
         Display("BaseObj Finalize");
 
         // If possible, do not have a Finalize method for your class. Finalize
@@ -74,7 +78,6 @@ public class BaseObj : Object {
     }
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////
 
 
@@ -82,48 +85,55 @@ public class BaseObj : Object {
 // Finalize methods are NOT automatically called. By contrast, base class
 // destructors (in unmanaged code) are automatically called.
 // This is one example of how destructors and Finalize methods differ.
-public class DerivedObj : BaseObj {
-    public DerivedObj(String s) : base(s) {
+public class DerivedObj : BaseObj
+{
+    public DerivedObj(String s)
+        : base(s)
+    {
         Display("DerivedObj Constructor");
     }
 
     //protected override void Finalize() {
-      ~DerivedObj() {
+    ~DerivedObj()
+    {
         Display("DerivedObj Finalize");
 
         // The GC has a special thread dedicated to executing Finalize
         // methods. You can tell that this thread is different from the
         // application's main thread by comparing the thread's hash codes.
-        Display("Finalize thread's hash code: "
-            + Thread.CurrentThread.GetHashCode());
+        Display("Finalize thread's hash code: " + Thread.CurrentThread.GetHashCode());
 
         // BaseObj's Finalize is NOT called unless you execute the line below
         // base.Finalize();        //commented by vaishak due to breaking change
     }
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////
 
 
 // This class shows how an object can resurrect itself
-public class ResurrectObj : BaseObj {
-
+public class ResurrectObj : BaseObj
+{
     // Indicates if object should resurrect itself when collected
-    private Boolean allowResurrection = true;   // Assume resurrection
+    private Boolean allowResurrection = true; // Assume resurrection
 
-    public ResurrectObj(String s) : base(s) {
+    public ResurrectObj(String s)
+        : base(s)
+    {
         Display("ResurrectObj Constructor");
     }
 
-    public void SetResurrection(Boolean allowResurrection) {
+    public void SetResurrection(Boolean allowResurrection)
+    {
         this.allowResurrection = allowResurrection;
     }
 
     //protected override void Finalize() {
-      ~ResurrectObj() {
+    ~ResurrectObj()
+    {
         Display("ResurrectObj Finalize");
-        if (allowResurrection) {
+        if (allowResurrection)
+        {
             Display("This object is being resurrected");
             // Resurrect this object by making something refer to it
             Application.ResObjHolder = this;
@@ -142,41 +152,48 @@ public class ResurrectObj : BaseObj {
             // the referenced object to be resurrected as well. This object
             // can continue to use the referenced object even though it was
             // finalized.
-
-        } else {
+        }
+        else
+        {
             Display("This object is NOT being resurrected");
         }
     }
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////
 
 
 // This class shows how the GC improves performance using generations
-public class GenObj : BaseObj {
-    public GenObj(String s) : base(s) {
+public class GenObj : BaseObj
+{
+    public GenObj(String s)
+        : base(s)
+    {
         Display("GenObj Constructor");
     }
 
-    public void DisplayGeneration() {
+    public void DisplayGeneration()
+    {
         Display(String.Format("Generation: {0}", GC.GetGeneration(this)));
     }
 }
-
 
 ///////////////////////////////////////////////////////////////////////////////
 
 
 // This class shows the proper way to implement explicit cleanup.
-public class DisposeObj : BaseObj {
-    public DisposeObj(String s) : base(s) {
+public class DisposeObj : BaseObj
+{
+    public DisposeObj(String s)
+        : base(s)
+    {
         Display("DisposeObj Constructor");
     }
 
     // When an object of this type wants to be explicitly cleaned-up, the user
     // of this object should call Dispose at the desired code location.
-    public void Dispose() {
+    public void Dispose()
+    {
         Display("DisposeObj Dispose");
         // Usually Dispose() calls Finalize so that you can
         // implement all the cleanup code in one place.
@@ -189,7 +206,8 @@ public class DisposeObj : BaseObj {
 
     // Put the object cleanup code in the Finalize method
     //protected override void Finalize() {
-    ~DisposeObj(){
+    ~DisposeObj()
+    {
         Display("DisposeObj Finalize");
         // This function can be called by Dispose() or by the GC
         // If called by Dispose, the application's thread executes this code
@@ -197,44 +215,50 @@ public class DisposeObj : BaseObj {
     }
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////
 
 
 // This class represents the application itself
-class Application {
-    static private int indent = 0;
+class Application
+{
+    private static int indent = 0;
 
-    static public void Display(String s) {
+    public static void Display(String s)
+    {
         for (int x = 0; x < indent * 3; x++)
             Console.Write(" ");
         Console.WriteLine(s);
     }
 
-    static public void Display(int preIndent, String s, int postIndent) {
+    public static void Display(int preIndent, String s, int postIndent)
+    {
         indent += preIndent;
         Display(s);
         indent += postIndent;
     }
 
-    static public void Collect() {
+    public static void Collect()
+    {
         Display(0, "Forcing a garbage collection", 0);
         GC.Collect();
     }
 
-    static public void Collect(int generation) {
+    public static void Collect(int generation)
+    {
         Display(0, "Forcing a garbage collection of generation " + generation, 0);
         GC.Collect(generation);
     }
 
-    static public void WaitForFinalizers() {
+    public static void WaitForFinalizers()
+    {
         Display(0, "Waiting for Finalizers to complete", +1);
         GC.WaitForPendingFinalizers();
         Display(-1, "Finalizers are complete", 0);
     }
 
     // This method demonstrates how the GC works.
-    private static void Introduction() {
+    private static void Introduction()
+    {
         Display(0, "\n\nDemo start: Introduction to Garbage Collection.", +1);
 
         // Create a new DerivedObj in the managed heap
@@ -266,15 +290,14 @@ class Application {
         Display(-1, "Demo stop: Introduction to Garbage Collection.", 0);
     }
 
-
     // This reference is accessed in the ResurrectObj.Finalize method and
     // is used to create a strong reference to an object (resurrecting it).
-    static public ResurrectObj ResObjHolder;    // Defaults to null
-
+    static public ResurrectObj ResObjHolder; // Defaults to null
 
     // These methods demonstrate how the GC supports resurrection.
     // NOTE: Resurrection is discouraged.
-    private static void ResurrectionInit() {
+    private static void ResurrectionInit()
+    {
         // Create a ResurrectionObj
         ResurrectObj obj = new ResurrectObj("Resurrection");
 
@@ -282,7 +305,8 @@ class Application {
         obj = null;
     }
 
-    private static void ResurrectionDemo() {
+    private static void ResurrectionDemo()
+    {
         Display(0, "\n\nDemo start: Object Resurrection.", +1);
 
         // Create a ResurrectionObj and drop it on the floor.
@@ -312,14 +336,14 @@ class Application {
         Display(-1, "Demo stop: Object Resurrection.", 0);
     }
 
-
     // This method demonstrates how to implement a type that allows its users
     // to explicitly dispose/close the object. For many object's this paradigm
     // is strongly encouranged.
-    private static void DisposeDemo() {
+    private static void DisposeDemo()
+    {
         Display(0, "\n\nDemo start: Disposing an object versus Finalize.", +1);
         DisposeObj obj = new DisposeObj("Explicitly disposed");
-        obj.Dispose();  // Explicitly cleanup this object, Finalize should run
+        obj.Dispose(); // Explicitly cleanup this object, Finalize should run
         obj = null;
         Collect();
         WaitForFinalizers(); // Finalize should NOT run (it was suppressed)
@@ -331,12 +355,12 @@ class Application {
         Display(-1, "Demo stop: Disposing an object versus Finalize.", 0);
     }
 
-
     // This method demonstrates the unbalanced nature of ReRegisterForFinalize
     // and SuppressFinalize. The main point is if your code makes multiple
     // calls to ReRegisterForFinalize (without intervening calls to
     // SuppressFinalize) the Finalize method may get called multiple times.
-    private static void FinalizationQDemo() {
+    private static void FinalizationQDemo()
+    {
         Display(0, "\n\nDemo start: Suppressing and ReRegistering for Finalize.", +1);
         // Since this object has a Finalize method, a reference to the object
         // will be added to the finalization queue.
@@ -359,7 +383,7 @@ class Application {
         // Sets the same bit effectively doing nothing!
         GC.SuppressFinalize(obj);
 
-        obj = null;   // Remove the strong reference to the object.
+        obj = null; // Remove the strong reference to the object.
 
         // Force a GC so that the object gets finalized
         Collect();
@@ -368,11 +392,11 @@ class Application {
         Display(-1, "Demo stop: Suppressing and ReRegistering for Finalize.", 0);
     }
 
-
     // This method demonstrates how objects are promoted between generations.
     // Applications could take advantage of this info to improve performance
     // but most applications will ignore this information.
-    private static void GenerationDemo() {
+    private static void GenerationDemo()
+    {
         Display(0, "\n\nDemo start: Understanding Generations.", +1);
 
         // Let's see how many generations the managed heap supports (we know it's 2)
@@ -382,32 +406,31 @@ class Application {
         GenObj obj = new GenObj("Generation");
 
         // Since this object is newly created, it should be in generation 0
-        obj.DisplayGeneration();    // Displays 0
+        obj.DisplayGeneration(); // Displays 0
 
         // Performing a GC promotes the object's generation
         Collect();
-        obj.DisplayGeneration();    // Displays 1
+        obj.DisplayGeneration(); // Displays 1
 
         Collect();
-        obj.DisplayGeneration();    // Displays 2
+        obj.DisplayGeneration(); // Displays 2
 
         Collect();
-        obj.DisplayGeneration();    // Displays 2   (max generation)
+        obj.DisplayGeneration(); // Displays 2   (max generation)
 
-        obj = null;             // Destroy the strong reference to this object
+        obj = null; // Destroy the strong reference to this object
 
-        Collect(0);             // Collect objects in generation 0
-        WaitForFinalizers();    // We should see nothing
+        Collect(0); // Collect objects in generation 0
+        WaitForFinalizers(); // We should see nothing
 
-        Collect(1);             // Collect objects in generation 1
-        WaitForFinalizers();    // We should see nothing
+        Collect(1); // Collect objects in generation 1
+        WaitForFinalizers(); // We should see nothing
 
-        Collect(2);             // Same as Collect()
-        WaitForFinalizers();    // Now, we should see the Finalize method run
+        Collect(2); // Same as Collect()
+        WaitForFinalizers(); // Now, we should see the Finalize method run
 
         Display(-1, "Demo stop: Understanding Generations.", 0);
     }
-
 
     // This method demonstrates how weak references (WR) work. A WR allows
     // the GC to collect objects if the managed heap is low on memory.
@@ -415,10 +438,16 @@ class Application {
     // data that they want to keep around to improve performance. But, if the
     // system is low on memory, the objects can be destroyed and replaced when
     // the app knows that it needs it again.
-    private static void WeakRefDemo(Boolean trackResurrection) {
-        Display(0, String.Format(
-            "\n\nDemo start: WeakReferences that {0}track resurrections.",
-            trackResurrection ? "" : "do not "), +1);
+    private static void WeakRefDemo(Boolean trackResurrection)
+    {
+        Display(
+            0,
+            String.Format(
+                "\n\nDemo start: WeakReferences that {0}track resurrections.",
+                trackResurrection ? "" : "do not "
+            ),
+            +1
+        );
 
         // Create an object
         BaseObj obj = new BaseObj("WeakRef");
@@ -432,17 +461,17 @@ class Application {
         obj.Display("Still exists");
 
         // Let's remove the strong reference to the object
-        obj = null;     // Destroy strong reference to this object
+        obj = null; // Destroy strong reference to this object
 
         // The following line creates a strong reference to the object
-        obj = (BaseObj) wr.Target;
+        obj = (BaseObj)wr.Target;
         Display("Strong reference to object obtained: " + (obj != null));
 
-        obj = null;     // Destroy strong reference to this object again.
+        obj = null; // Destroy strong reference to this object again.
 
         // The GC considers the object to be unreachable and collects it.
         Collect();
-        WaitForFinalizers();    // Finalize should run.
+        WaitForFinalizers(); // Finalize should run.
 
         // This object resurrects itself when its Finalize method is called.
         // If wr is NOT tracking resurrection, wr thinks the object is dead
@@ -459,10 +488,11 @@ class Application {
         //    obj = (Object) wr.Target;  // returns null
 
         // The following line attempts to create a strong reference to the object
-        obj = (BaseObj) wr.Target;
+        obj = (BaseObj)wr.Target;
         Display("Strong reference to object obtained: " + (obj != null));
 
-        if (obj != null) {
+        if (obj != null)
+        {
             // The strong reference was obtained so this wr must be
             // tracking resurrection. At this point we have a strong
             // reference to an object that has been finalized but its memory
@@ -474,15 +504,15 @@ class Application {
             // Collect reclaims the object's memory since this object
             // has no Finalize method registered for it anymore.
             Collect();
-            WaitForFinalizers();    // We should see nothing here
+            WaitForFinalizers(); // We should see nothing here
 
-            obj = (BaseObj) wr.Target;  // This now returns null
+            obj = (BaseObj)wr.Target; // This now returns null
             Display("Strong reference to object obtained: " + (obj != null));
         }
 
         // Cleanup everything about this demo so there is no affect on the next demo
-        obj = null;           // Destroy strong reference (if it exists)
-        wr = null;            // Destroy the WeakReference object (optional)
+        obj = null; // Destroy strong reference (if it exists)
+        wr = null; // Destroy the WeakReference object (optional)
         Collect();
         WaitForFinalizers();
 
@@ -492,13 +522,19 @@ class Application {
         // a non-null value, then the object is alive and will stay alive
         // since you have a reference to it. If Target returns null, then the
         // object is dead.
-        Display(-1, String.Format("Demo stop: WeakReferences that {0}track resurrections.",
-            trackResurrection ? "" : "do not "), 0);
+        Display(
+            -1,
+            String.Format(
+                "Demo stop: WeakReferences that {0}track resurrections.",
+                trackResurrection ? "" : "do not "
+            ),
+            0
+        );
     }
 
-
-    public static int Main() {
-    // Environment.ExitCode = 1;
+    public static int Main()
+    {
+        // Environment.ExitCode = 1;
         Display("To fully understand this sample, you should step through the");
         Display("code in the debugger while monitoring the output generated.\n");
         Display("NOTE: The demos in this application assume that no garbage");
@@ -506,13 +542,13 @@ class Application {
         Display("      objects are small in size and few are allocated.\n");
         Display("Main thread's hash code: " + Thread.CurrentThread.GetHashCode());
 
-        Introduction();      // GC introduction
-        ResurrectionDemo();  // Demos object resurrection
-        DisposeDemo();       // Demos the use of Dispose & Finalize
+        Introduction(); // GC introduction
+        ResurrectionDemo(); // Demos object resurrection
+        DisposeDemo(); // Demos the use of Dispose & Finalize
         FinalizationQDemo(); // Demos the use of SuppressFinalize & ReRegisterForFinalize
-        GenerationDemo();    // Demos GC generations
-        WeakRefDemo(false);  // Demos WeakReferences without resurrection tracking
-        WeakRefDemo(true);   // Demos WeakReferences with resurrection tracking
+        GenerationDemo(); // Demos GC generations
+        WeakRefDemo(false); // Demos WeakReferences without resurrection tracking
+        WeakRefDemo(true); // Demos WeakReferences with resurrection tracking
 
         // Demos Finalize on Shutdown semantics (this demo is inline)
         Display(0, "\n\nDemo start: Finalize on shutdown.", +1);
@@ -523,7 +559,7 @@ class Application {
         // This is the last line of code executed before the application terminates.
         Display(-1, "Demo stop: Finalize on shutdown (application is now terminating)", 0);
 
-    return 100;
+        return 100;
     }
 }
 

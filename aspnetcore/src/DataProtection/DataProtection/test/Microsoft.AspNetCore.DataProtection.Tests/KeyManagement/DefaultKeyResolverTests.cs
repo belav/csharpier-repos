@@ -126,7 +126,11 @@ public class DefaultKeyResolverTests
     {
         // Arrange
         var key1 = CreateKey("2015-03-01 00:00:00Z", "2016-03-01 00:00:00Z");
-        var key2 = CreateKey("2015-03-02 00:00:00Z", "2016-03-01 00:00:00Z", createEncryptorThrows: true);
+        var key2 = CreateKey(
+            "2015-03-02 00:00:00Z",
+            "2016-03-01 00:00:00Z",
+            createEncryptorThrows: true
+        );
         var resolver = CreateDefaultKeyResolver();
 
         // Act
@@ -189,13 +193,36 @@ public class DefaultKeyResolverTests
     {
         // Arrange
         var resolver = CreateDefaultKeyResolver();
-        var key1 = CreateKey("2010-01-01 00:00:00Z", "2010-01-01 00:00:00Z", creationDate: "2000-01-01 00:00:00Z");
-        var key2 = CreateKey("2010-01-01 00:00:00Z", "2010-01-01 00:00:00Z", creationDate: "2000-01-02 00:00:00Z");
-        var key3 = CreateKey("2010-01-01 00:00:00Z", "2010-01-01 00:00:00Z", creationDate: "2000-01-03 00:00:00Z", isRevoked: true);
-        var key4 = CreateKey("2010-01-01 00:00:00Z", "2010-01-01 00:00:00Z", creationDate: "2000-01-04 00:00:00Z");
+        var key1 = CreateKey(
+            "2010-01-01 00:00:00Z",
+            "2010-01-01 00:00:00Z",
+            creationDate: "2000-01-01 00:00:00Z"
+        );
+        var key2 = CreateKey(
+            "2010-01-01 00:00:00Z",
+            "2010-01-01 00:00:00Z",
+            creationDate: "2000-01-02 00:00:00Z"
+        );
+        var key3 = CreateKey(
+            "2010-01-01 00:00:00Z",
+            "2010-01-01 00:00:00Z",
+            creationDate: "2000-01-03 00:00:00Z",
+            isRevoked: true
+        );
+        var key4 = CreateKey(
+            "2010-01-01 00:00:00Z",
+            "2010-01-01 00:00:00Z",
+            creationDate: "2000-01-04 00:00:00Z"
+        );
 
         // Act
-        var resolution = resolver.ResolveDefaultKeyPolicy("2000-01-05 00:00:00Z", key1, key2, key3, key4);
+        var resolution = resolver.ResolveDefaultKeyPolicy(
+            "2000-01-05 00:00:00Z",
+            key1,
+            key2,
+            key3,
+            key4
+        );
 
         // Assert
         Assert.Same(key2, resolution.FallbackKey);
@@ -206,14 +233,37 @@ public class DefaultKeyResolverTests
     public void ResolveDefaultKeyPolicy_FallbackKey_SelectsLatestBeforePriorPropagationWindow_IgnoresFailures()
     {
         // Arrange
-        var key1 = CreateKey("2010-01-01 00:00:00Z", "2010-01-01 00:00:00Z", creationDate: "2000-01-01 00:00:00Z");
-        var key2 = CreateKey("2010-01-01 00:00:00Z", "2010-01-01 00:00:00Z", creationDate: "2000-01-02 00:00:00Z");
-        var key3 = CreateKey("2010-01-01 00:00:00Z", "2010-01-01 00:00:00Z", creationDate: "2000-01-03 00:00:00Z", createEncryptorThrows: true);
-        var key4 = CreateKey("2010-01-01 00:00:00Z", "2010-01-01 00:00:00Z", creationDate: "2000-01-04 00:00:00Z");
+        var key1 = CreateKey(
+            "2010-01-01 00:00:00Z",
+            "2010-01-01 00:00:00Z",
+            creationDate: "2000-01-01 00:00:00Z"
+        );
+        var key2 = CreateKey(
+            "2010-01-01 00:00:00Z",
+            "2010-01-01 00:00:00Z",
+            creationDate: "2000-01-02 00:00:00Z"
+        );
+        var key3 = CreateKey(
+            "2010-01-01 00:00:00Z",
+            "2010-01-01 00:00:00Z",
+            creationDate: "2000-01-03 00:00:00Z",
+            createEncryptorThrows: true
+        );
+        var key4 = CreateKey(
+            "2010-01-01 00:00:00Z",
+            "2010-01-01 00:00:00Z",
+            creationDate: "2000-01-04 00:00:00Z"
+        );
         var resolver = CreateDefaultKeyResolver();
 
         // Act
-        var resolution = resolver.ResolveDefaultKeyPolicy("2000-01-05 00:00:00Z", key1, key2, key3, key4);
+        var resolution = resolver.ResolveDefaultKeyPolicy(
+            "2000-01-05 00:00:00Z",
+            key1,
+            key2,
+            key3,
+            key4
+        );
 
         // Assert
         Assert.Same(key2, resolution.FallbackKey);
@@ -225,9 +275,22 @@ public class DefaultKeyResolverTests
     {
         // Arrange
         var resolver = CreateDefaultKeyResolver();
-        var key1 = CreateKey("2010-01-01 00:00:00Z", "2010-01-01 00:00:00Z", creationDate: "2000-01-03 00:00:00Z", isRevoked: true);
-        var key2 = CreateKey("2010-01-01 00:00:00Z", "2010-01-01 00:00:00Z", creationDate: "2000-01-04 00:00:00Z");
-        var key3 = CreateKey("2010-01-01 00:00:00Z", "2010-01-01 00:00:00Z", creationDate: "2000-01-05 00:00:00Z");
+        var key1 = CreateKey(
+            "2010-01-01 00:00:00Z",
+            "2010-01-01 00:00:00Z",
+            creationDate: "2000-01-03 00:00:00Z",
+            isRevoked: true
+        );
+        var key2 = CreateKey(
+            "2010-01-01 00:00:00Z",
+            "2010-01-01 00:00:00Z",
+            creationDate: "2000-01-04 00:00:00Z"
+        );
+        var key3 = CreateKey(
+            "2010-01-01 00:00:00Z",
+            "2010-01-01 00:00:00Z",
+            creationDate: "2000-01-05 00:00:00Z"
+        );
 
         // Act
         var resolution = resolver.ResolveDefaultKeyPolicy("2000-01-05 00:00:00Z", key1, key2, key3);
@@ -242,13 +305,29 @@ public class DefaultKeyResolverTests
         return new DefaultKeyResolver(NullLoggerFactory.Instance);
     }
 
-    private static IKey CreateKey(string activationDate, string expirationDate, string creationDate = null, bool isRevoked = false, bool createEncryptorThrows = false)
+    private static IKey CreateKey(
+        string activationDate,
+        string expirationDate,
+        string creationDate = null,
+        bool isRevoked = false,
+        bool createEncryptorThrows = false
+    )
     {
         var mockKey = new Mock<IKey>();
         mockKey.Setup(o => o.KeyId).Returns(Guid.NewGuid());
-        mockKey.Setup(o => o.CreationDate).Returns((creationDate != null) ? DateTimeOffset.ParseExact(creationDate, "u", CultureInfo.InvariantCulture) : DateTimeOffset.MinValue);
-        mockKey.Setup(o => o.ActivationDate).Returns(DateTimeOffset.ParseExact(activationDate, "u", CultureInfo.InvariantCulture));
-        mockKey.Setup(o => o.ExpirationDate).Returns(DateTimeOffset.ParseExact(expirationDate, "u", CultureInfo.InvariantCulture));
+        mockKey
+            .Setup(o => o.CreationDate)
+            .Returns(
+                (creationDate != null)
+                    ? DateTimeOffset.ParseExact(creationDate, "u", CultureInfo.InvariantCulture)
+                    : DateTimeOffset.MinValue
+            );
+        mockKey
+            .Setup(o => o.ActivationDate)
+            .Returns(DateTimeOffset.ParseExact(activationDate, "u", CultureInfo.InvariantCulture));
+        mockKey
+            .Setup(o => o.ExpirationDate)
+            .Returns(DateTimeOffset.ParseExact(expirationDate, "u", CultureInfo.InvariantCulture));
         mockKey.Setup(o => o.IsRevoked).Returns(isRevoked);
         if (createEncryptorThrows)
         {
@@ -265,8 +344,15 @@ public class DefaultKeyResolverTests
 
 internal static class DefaultKeyResolverExtensions
 {
-    public static DefaultKeyResolution ResolveDefaultKeyPolicy(this IDefaultKeyResolver resolver, string now, params IKey[] allKeys)
+    public static DefaultKeyResolution ResolveDefaultKeyPolicy(
+        this IDefaultKeyResolver resolver,
+        string now,
+        params IKey[] allKeys
+    )
     {
-        return resolver.ResolveDefaultKeyPolicy(DateTimeOffset.ParseExact(now, "u", CultureInfo.InvariantCulture), (IEnumerable<IKey>)allKeys);
+        return resolver.ResolveDefaultKeyPolicy(
+            DateTimeOffset.ParseExact(now, "u", CultureInfo.InvariantCulture),
+            (IEnumerable<IKey>)allKeys
+        );
     }
 }

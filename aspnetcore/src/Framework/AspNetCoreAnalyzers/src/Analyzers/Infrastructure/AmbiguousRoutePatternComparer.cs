@@ -31,7 +31,10 @@ internal sealed class AmbiguousRoutePatternComparer : IEqualityComparer<RoutePat
             var equal = xPart switch
             {
                 RoutePatternSegmentSeparatorNode _ => yPart is RoutePatternSegmentSeparatorNode,
-                RoutePatternSegmentNode xSegment => Equals(xSegment, yPart as RoutePatternSegmentNode),
+                RoutePatternSegmentNode xSegment => Equals(
+                    xSegment,
+                    yPart as RoutePatternSegmentNode
+                ),
                 _ => throw new InvalidOperationException($"Unexpected part type '{xPart.Kind}'."),
             };
 
@@ -64,10 +67,18 @@ internal sealed class AmbiguousRoutePatternComparer : IEqualityComparer<RoutePat
             var equal = xChild switch
             {
                 RoutePatternOptionalSeparatorNode _ => yChild is RoutePatternOptionalSeparatorNode,
-                RoutePatternReplacementNode xReplacement => yChild is RoutePatternReplacementNode yReplacement && IgnoreCaseEquals(xReplacement.TextToken.Value, yReplacement.TextToken.Value),
-                RoutePatternLiteralNode xLiteral => yChild is RoutePatternLiteralNode yLiteral && IgnoreCaseEquals(xLiteral.LiteralToken.Value, yLiteral.LiteralToken.Value),
-                RoutePatternParameterNode xParameter => Equals(xParameter, yChild as RoutePatternParameterNode),
-                _ => throw new InvalidOperationException($"Unexpected segment node type '{xChild.Kind}'."),
+                RoutePatternReplacementNode xReplacement => yChild
+                    is RoutePatternReplacementNode yReplacement
+                    && IgnoreCaseEquals(xReplacement.TextToken.Value, yReplacement.TextToken.Value),
+                RoutePatternLiteralNode xLiteral => yChild is RoutePatternLiteralNode yLiteral
+                    && IgnoreCaseEquals(xLiteral.LiteralToken.Value, yLiteral.LiteralToken.Value),
+                RoutePatternParameterNode xParameter => Equals(
+                    xParameter,
+                    yChild as RoutePatternParameterNode
+                ),
+                _ => throw new InvalidOperationException(
+                    $"Unexpected segment node type '{xChild.Kind}'."
+                ),
             };
 
             if (!equal)
@@ -100,8 +111,14 @@ internal sealed class AmbiguousRoutePatternComparer : IEqualityComparer<RoutePat
         }
 
         // Only parameter policies differentiate between parameters.
-        var xParameterPolicies = x.ParameterParts.Where(p => p.Kind == RoutePatternKind.ParameterPolicy).OfType<RoutePatternPolicyParameterPartNode>().ToList();
-        var yParameterPolicies = y.ParameterParts.Where(p => p.Kind == RoutePatternKind.ParameterPolicy).OfType<RoutePatternPolicyParameterPartNode>().ToList();
+        var xParameterPolicies = x
+            .ParameterParts.Where(p => p.Kind == RoutePatternKind.ParameterPolicy)
+            .OfType<RoutePatternPolicyParameterPartNode>()
+            .ToList();
+        var yParameterPolicies = y
+            .ParameterParts.Where(p => p.Kind == RoutePatternKind.ParameterPolicy)
+            .OfType<RoutePatternPolicyParameterPartNode>()
+            .ToList();
 
         if (xParameterPolicies.Count != yParameterPolicies.Count)
         {
@@ -122,7 +139,10 @@ internal sealed class AmbiguousRoutePatternComparer : IEqualityComparer<RoutePat
         return true;
     }
 
-    private static bool Equals(RoutePatternPolicyParameterPartNode x, RoutePatternPolicyParameterPartNode y)
+    private static bool Equals(
+        RoutePatternPolicyParameterPartNode x,
+        RoutePatternPolicyParameterPartNode y
+    )
     {
         if (x.PolicyFragments.Length != y.PolicyFragments.Length)
         {
@@ -136,9 +156,18 @@ internal sealed class AmbiguousRoutePatternComparer : IEqualityComparer<RoutePat
 
             var equal = xPart switch
             {
-                RoutePatternPolicyFragment xFragment => yPart is RoutePatternPolicyFragment yFragment && Equals(xFragment.ArgumentToken.Value, yFragment.ArgumentToken.Value),
-                RoutePatternPolicyFragmentEscapedNode xFragmentEscaped => yPart is RoutePatternPolicyFragmentEscapedNode yFragmentEscaped && Equals(xFragmentEscaped.ArgumentToken.Value, yFragmentEscaped.ArgumentToken.Value),
-                _ => throw new InvalidOperationException($"Unexpected policy node type '{xPart.Kind}'."),
+                RoutePatternPolicyFragment xFragment => yPart
+                    is RoutePatternPolicyFragment yFragment
+                    && Equals(xFragment.ArgumentToken.Value, yFragment.ArgumentToken.Value),
+                RoutePatternPolicyFragmentEscapedNode xFragmentEscaped => yPart
+                    is RoutePatternPolicyFragmentEscapedNode yFragmentEscaped
+                    && Equals(
+                        xFragmentEscaped.ArgumentToken.Value,
+                        yFragmentEscaped.ArgumentToken.Value
+                    ),
+                _ => throw new InvalidOperationException(
+                    $"Unexpected policy node type '{xPart.Kind}'."
+                ),
             };
 
             if (!equal)

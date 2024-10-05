@@ -18,11 +18,16 @@ internal sealed class ThrowingPipeWriter : PipeWriter
 
     public override void CancelPendingFlush() => throw new InvalidOperationException(_message);
 
-    public override void Complete(Exception? exception = null) => throw new InvalidOperationException(_message);
+    public override void Complete(Exception? exception = null) =>
+        throw new InvalidOperationException(_message);
 
-    public override ValueTask<FlushResult> FlushAsync(CancellationToken cancellationToken = default) => throw new InvalidOperationException(_message);
+    public override ValueTask<FlushResult> FlushAsync(
+        CancellationToken cancellationToken = default
+    ) => throw new InvalidOperationException(_message);
 
-    public override Memory<byte> GetMemory(int sizeHint = 0) => throw new InvalidOperationException(_message);
+    public override Memory<byte> GetMemory(int sizeHint = 0) =>
+        throw new InvalidOperationException(_message);
 
-    public override Span<byte> GetSpan(int sizeHint = 0) => throw new InvalidOperationException(_message);
+    public override Span<byte> GetSpan(int sizeHint = 0) =>
+        throw new InvalidOperationException(_message);
 }

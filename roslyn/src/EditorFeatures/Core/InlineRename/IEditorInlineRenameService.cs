@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Editor
         public Document Document { get; }
         public TextSpan TextSpan { get; }
 
-        public InlineRenameLocation(Document document, TextSpan textSpan) : this()
+        public InlineRenameLocation(Document document, TextSpan textSpan)
+            : this()
         {
             this.Document = document;
             this.TextSpan = textSpan;
@@ -62,7 +63,7 @@ namespace Microsoft.CodeAnalysis.Editor
         /// <summary>
         /// File rename is allowed
         /// </summary>
-        Allowed
+        Allowed,
     }
 
     internal readonly struct InlineRenameReplacement
@@ -71,7 +72,12 @@ namespace Microsoft.CodeAnalysis.Editor
         public TextSpan OriginalSpan { get; }
         public TextSpan NewSpan { get; }
 
-        public InlineRenameReplacement(InlineRenameReplacementKind kind, TextSpan originalSpan, TextSpan newSpan) : this()
+        public InlineRenameReplacement(
+            InlineRenameReplacementKind kind,
+            TextSpan originalSpan,
+            TextSpan newSpan
+        )
+            : this()
         {
             this.Kind = kind;
             this.OriginalSpan = originalSpan;
@@ -79,9 +85,7 @@ namespace Microsoft.CodeAnalysis.Editor
         }
 
         internal InlineRenameReplacement(RelatedLocation location, TextSpan newSpan)
-            : this(GetReplacementKind(location), location.ConflictCheckSpan, newSpan)
-        {
-        }
+            : this(GetReplacementKind(location), location.ConflictCheckSpan, newSpan) { }
 
         private static InlineRenameReplacementKind GetReplacementKind(RelatedLocation location)
         {
@@ -128,7 +132,9 @@ namespace Microsoft.CodeAnalysis.Editor
 
     internal static class InlineRenameReplacementInfoExtensions
     {
-        public static IEnumerable<InlineRenameReplacementKind> GetAllReplacementKinds(this IInlineRenameReplacementInfo info)
+        public static IEnumerable<InlineRenameReplacementKind> GetAllReplacementKinds(
+            this IInlineRenameReplacementInfo info
+        )
         {
             var replacements = info.DocumentIds.SelectMany(info.GetReplacements);
             return replacements.Select(r => r.Kind);
@@ -150,7 +156,11 @@ namespace Microsoft.CodeAnalysis.Editor
         /// and TextSpan in the original solution, and specify their new span and possible conflict
         /// resolution.
         /// </summary>
-        Task<IInlineRenameReplacementInfo> GetReplacementsAsync(string replacementText, SymbolRenameOptions options, CancellationToken cancellationToken);
+        Task<IInlineRenameReplacementInfo> GetReplacementsAsync(
+            string replacementText,
+            SymbolRenameOptions options,
+            CancellationToken cancellationToken
+        );
     }
 
     internal interface IInlineRenameInfo
@@ -161,7 +171,7 @@ namespace Microsoft.CodeAnalysis.Editor
         bool CanRename { get; }
 
         /// <summary>
-        /// Provides the reason that can be displayed to the user if the entity at the selected 
+        /// Provides the reason that can be displayed to the user if the entity at the selected
         /// location cannot be renamed.
         /// </summary>
         string LocalizedErrorMessage { get; }
@@ -213,35 +223,55 @@ namespace Microsoft.CodeAnalysis.Editor
         /// Returns the actual span that should be edited in the buffer for a given rename reference
         /// location.
         /// </summary>
-        TextSpan GetReferenceEditSpan(InlineRenameLocation location, string triggerText, CancellationToken cancellationToken);
+        TextSpan GetReferenceEditSpan(
+            InlineRenameLocation location,
+            string triggerText,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Returns the actual span that should be edited in the buffer for a given rename conflict
         /// location.
         /// </summary>
-        TextSpan? GetConflictEditSpan(InlineRenameLocation location, string triggerText, string replacementText, CancellationToken cancellationToken);
+        TextSpan? GetConflictEditSpan(
+            InlineRenameLocation location,
+            string triggerText,
+            string replacementText,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
-        /// Determine the set of locations to rename given the provided options. May be called 
+        /// Determine the set of locations to rename given the provided options. May be called
         /// multiple times.  For example, this can be called one time for the initial set of
         /// locations to rename, as well as any time the rename options are changed by the user.
         /// </summary>
-        Task<IInlineRenameLocationSet> FindRenameLocationsAsync(SymbolRenameOptions options, CancellationToken cancellationToken);
+        Task<IInlineRenameLocationSet> FindRenameLocationsAsync(
+            SymbolRenameOptions options,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
-        /// Called before the rename is applied to the specified documents in the workspace.  Return 
+        /// Called before the rename is applied to the specified documents in the workspace.  Return
         /// <see langword="true"/> if rename should proceed, or <see langword="false"/> if it should be canceled.
         /// </summary>
-        bool TryOnBeforeGlobalSymbolRenamed(Workspace workspace, IEnumerable<DocumentId> changedDocumentIDs, string replacementText);
+        bool TryOnBeforeGlobalSymbolRenamed(
+            Workspace workspace,
+            IEnumerable<DocumentId> changedDocumentIDs,
+            string replacementText
+        );
 
         /// <summary>
-        /// Called after the rename is applied to the specified documents in the workspace.  Return 
+        /// Called after the rename is applied to the specified documents in the workspace.  Return
         /// <see langword="true"/> if this operation succeeded, or <see langword="false"/> if it failed.
         /// </summary>
-        bool TryOnAfterGlobalSymbolRenamed(Workspace workspace, IEnumerable<DocumentId> changedDocumentIDs, string replacementText);
+        bool TryOnAfterGlobalSymbolRenamed(
+            Workspace workspace,
+            IEnumerable<DocumentId> changedDocumentIDs,
+            string replacementText
+        );
 
         /// <summary>
-        /// Returns information about the file rename capabilities of 
+        /// Returns information about the file rename capabilities of
         /// an inline rename
         /// </summary>
         InlineRenameFileRenameInfo GetFileRenameInfo();
@@ -254,6 +284,10 @@ namespace Microsoft.CodeAnalysis.Editor
     /// </summary>
     internal interface IEditorInlineRenameService : ILanguageService
     {
-        Task<IInlineRenameInfo> GetRenameInfoAsync(Document document, int position, CancellationToken cancellationToken);
+        Task<IInlineRenameInfo> GetRenameInfoAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        );
     }
 }

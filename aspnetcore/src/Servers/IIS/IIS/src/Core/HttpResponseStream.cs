@@ -40,7 +40,13 @@ internal sealed class HttpResponseStream : WriteOnlyStreamInternal
         WriteAsync(buffer, offset, count, default).GetAwaiter().GetResult();
     }
 
-    public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+    public override IAsyncResult BeginWrite(
+        byte[] buffer,
+        int offset,
+        int count,
+        AsyncCallback? callback,
+        object? state
+    )
     {
         return TaskToApm.Begin(WriteAsync(buffer, offset, count), callback, state);
     }
@@ -50,14 +56,25 @@ internal sealed class HttpResponseStream : WriteOnlyStreamInternal
         TaskToApm.End(asyncResult);
     }
 
-    public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override Task WriteAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         ValidateState(cancellationToken);
 
-        return _context.WriteAsync(new ReadOnlyMemory<byte>(buffer, offset, count), cancellationToken);
+        return _context.WriteAsync(
+            new ReadOnlyMemory<byte>(buffer, offset, count),
+            cancellationToken
+        );
     }
 
-    public override ValueTask WriteAsync(ReadOnlyMemory<byte> source, CancellationToken cancellationToken = default)
+    public override ValueTask WriteAsync(
+        ReadOnlyMemory<byte> source,
+        CancellationToken cancellationToken = default
+    )
     {
         ValidateState(cancellationToken);
 
@@ -100,7 +117,10 @@ internal sealed class HttpResponseStream : WriteOnlyStreamInternal
                 }
                 break;
             case HttpStreamState.Closed:
-                throw new ObjectDisposedException(nameof(HttpResponseStream), CoreStrings.WritingToResponseBodyAfterResponseCompleted);
+                throw new ObjectDisposedException(
+                    nameof(HttpResponseStream),
+                    CoreStrings.WritingToResponseBodyAfterResponseCompleted
+                );
             case HttpStreamState.Aborted:
                 if (cancellationToken.IsCancellationRequested)
                 {

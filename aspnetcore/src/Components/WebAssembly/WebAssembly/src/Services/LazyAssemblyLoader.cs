@@ -2,12 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices.JavaScript;
 using System.Runtime.Loader;
-using Microsoft.JSInterop;
-using System.Linq;
 using System.Runtime.Versioning;
+using Microsoft.JSInterop;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Services;
 
@@ -22,9 +22,7 @@ public sealed partial class LazyAssemblyLoader
     /// Initializes a new instance of <see cref="LazyAssemblyLoader"/>.
     /// </summary>
     /// <param name="jsRuntime">The <see cref="IJSRuntime"/>.</param>
-    public LazyAssemblyLoader(IJSRuntime jsRuntime)
-    {
-    }
+    public LazyAssemblyLoader(IJSRuntime jsRuntime) { }
 
     /// <summary>
     /// In a browser context, calling this method will fetch the assemblies requested
@@ -45,7 +43,9 @@ public sealed partial class LazyAssemblyLoader
         return LoadAssembliesInServerAsync(assembliesToLoad);
     }
 
-    private static Task<IEnumerable<Assembly>> LoadAssembliesInServerAsync(IEnumerable<string> assembliesToLoad)
+    private static Task<IEnumerable<Assembly>> LoadAssembliesInServerAsync(
+        IEnumerable<string> assembliesToLoad
+    )
     {
         var loadedAssemblies = new List<Assembly>();
 
@@ -58,7 +58,9 @@ public sealed partial class LazyAssemblyLoader
         }
         catch (FileNotFoundException ex)
         {
-            throw new InvalidOperationException($"Unable to find the following assembly: {ex.FileName}. Make sure that the appplication is referencing the assemblies and that they are present in the output folder.");
+            throw new InvalidOperationException(
+                $"Unable to find the following assembly: {ex.FileName}. Make sure that the appplication is referencing the assemblies and that they are present in the output folder."
+            );
         }
 
         return Task.FromResult<IEnumerable<Assembly>>(loadedAssemblies);
@@ -66,7 +68,9 @@ public sealed partial class LazyAssemblyLoader
 
     [RequiresUnreferencedCode("Types and members the loaded assemblies depend on might be removed")]
     [SupportedOSPlatform("browser")]
-    private static async Task<IEnumerable<Assembly>> LoadAssembliesInClientAsync(IEnumerable<string> assembliesToLoad)
+    private static async Task<IEnumerable<Assembly>> LoadAssembliesInClientAsync(
+        IEnumerable<string> assembliesToLoad
+    )
     {
         var newAssembliesToLoad = assembliesToLoad.ToList();
         var loadedAssemblies = new List<Assembly>();
@@ -86,7 +90,9 @@ public sealed partial class LazyAssemblyLoader
                 }
 
                 var assemblyName = Path.GetFileNameWithoutExtension(newAssembliesToLoad[i]);
-                var assembly = AssemblyLoadContext.Default.Assemblies.FirstOrDefault(a => a.GetName().Name == assemblyName);
+                var assembly = AssemblyLoadContext.Default.Assemblies.FirstOrDefault(a =>
+                    a.GetName().Name == assemblyName
+                );
                 if (assembly != null)
                 {
                     loadedAssemblies.Add(assembly);

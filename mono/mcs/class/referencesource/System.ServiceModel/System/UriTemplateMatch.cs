@@ -6,12 +6,14 @@ namespace System
 {
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
+    using System.Net;
     using System.Runtime;
     using System.Runtime.CompilerServices;
     using System.ServiceModel.Channels;
-    using System.Net;
 
-    [TypeForwardedFrom("System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35")]
+    [TypeForwardedFrom(
+        "System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
     public class UriTemplateMatch
     {
         Uri baseUri;
@@ -26,17 +28,18 @@ namespace System
         Uri originalBaseUri;
         HttpRequestMessageProperty requestProp;
 
-        public UriTemplateMatch()
-        {
-        }
+        public UriTemplateMatch() { }
 
-        public Uri BaseUri   // the base address, untouched
+        public Uri BaseUri // the base address, untouched
         {
             get
             {
                 if (this.baseUri == null && this.originalBaseUri != null)
                 {
-                    this.baseUri = UriTemplate.RewriteUri(this.originalBaseUri, this.requestProp.Headers[HttpRequestHeader.Host]);
+                    this.baseUri = UriTemplate.RewriteUri(
+                        this.originalBaseUri,
+                        this.requestProp.Headers[HttpRequestHeader.Host]
+                    );
                 }
                 return this.baseUri;
             }
@@ -60,16 +63,10 @@ namespace System
         }
         public object Data
         {
-            get
-            {
-                return this.data;
-            }
-            set
-            {
-                this.data = value;
-            }
+            get { return this.data; }
+            set { this.data = value; }
         }
-        public NameValueCollection QueryParameters  // the result of UrlUtility.ParseQueryString (keys and values are decoded)
+        public NameValueCollection QueryParameters // the result of UrlUtility.ParseQueryString (keys and values are decoded)
         {
             get
             {
@@ -80,7 +77,7 @@ namespace System
                 return this.queryParameters;
             }
         }
-        public Collection<string> RelativePathSegments  // entire Path (after the base address), decoded
+        public Collection<string> RelativePathSegments // entire Path (after the base address), decoded
         {
             get
             {
@@ -91,29 +88,17 @@ namespace System
                 return this.relativePathSegments;
             }
         }
-        public Uri RequestUri  // uri on the wire, untouched
+        public Uri RequestUri // uri on the wire, untouched
         {
-            get
-            {
-                return this.requestUri;
-            }
-            set
-            {
-                this.requestUri = value;
-            }
+            get { return this.requestUri; }
+            set { this.requestUri = value; }
         }
         public UriTemplate Template // which one got matched
         {
-            get
-            {
-                return this.template;
-            }
-            set
-            {
-                this.template = value;
-            }
+            get { return this.template; }
+            set { this.template = value; }
         }
-        public Collection<string> WildcardPathSegments  // just the Path part matched by "*", decoded
+        public Collection<string> WildcardPathSegments // just the Path part matched by "*", decoded
         {
             get
             {
@@ -129,11 +114,13 @@ namespace System
         {
             this.queryParameters = new NameValueCollection(queryParameters);
         }
+
         internal void SetRelativePathSegments(Collection<string> segments)
         {
             Fx.Assert(segments != null, "segments != null");
             this.relativePathSegments = segments;
         }
+
         internal void SetWildcardPathSegmentsStart(int startOffset)
         {
             Fx.Assert(startOffset >= 0, "startOffset >= 0");
@@ -158,12 +145,17 @@ namespace System
                 this.queryParameters = new NameValueCollection();
             }
         }
+
         void PopulateWildcardSegments()
         {
             if (wildcardSegmentsStartOffset != -1)
             {
                 this.wildcardPathSegments = new Collection<string>();
-                for (int i = this.wildcardSegmentsStartOffset; i < this.RelativePathSegments.Count; ++i)
+                for (
+                    int i = this.wildcardSegmentsStartOffset;
+                    i < this.RelativePathSegments.Count;
+                    ++i
+                )
                 {
                     this.wildcardPathSegments.Add(this.RelativePathSegments[i]);
                 }

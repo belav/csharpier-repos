@@ -12,6 +12,7 @@ namespace System.Net.Mail
     public sealed class AttachmentCollection : Collection<Attachment>, IDisposable
     {
         private bool _disposed;
+
         internal AttachmentCollection() { }
 
         public void Dispose()

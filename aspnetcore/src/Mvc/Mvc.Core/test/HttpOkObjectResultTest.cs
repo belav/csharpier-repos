@@ -19,15 +19,11 @@ public class HttpOkObjectResultTest
         get
         {
             return new TheoryData<object>
-                {
-                    null,
-                    "Test string",
-                    new Person
-                    {
-                        Id = 274,
-                        Name = "George",
-                    }
-                };
+            {
+                null,
+                "Test string",
+                new Person { Id = 274, Name = "George" },
+            };
         }
     }
 
@@ -50,10 +46,7 @@ public class HttpOkObjectResultTest
         // Arrange
         var result = new OkObjectResult(value);
 
-        var httpContext = new DefaultHttpContext
-        {
-            RequestServices = CreateServices(),
-        };
+        var httpContext = new DefaultHttpContext { RequestServices = CreateServices() };
         var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
 
         // Act
@@ -67,14 +60,19 @@ public class HttpOkObjectResultTest
     {
         var options = Options.Create(new MvcOptions());
         options.Value.OutputFormatters.Add(new StringOutputFormatter());
-        options.Value.OutputFormatters.Add(SystemTextJsonOutputFormatter.CreateFormatter(new JsonOptions()));
+        options.Value.OutputFormatters.Add(
+            SystemTextJsonOutputFormatter.CreateFormatter(new JsonOptions())
+        );
 
         var services = new ServiceCollection();
-        services.AddSingleton<IActionResultExecutor<ObjectResult>>(new ObjectResultExecutor(
-            new DefaultOutputFormatterSelector(options, NullLoggerFactory.Instance),
-            new TestHttpResponseStreamWriterFactory(),
-            NullLoggerFactory.Instance,
-            options));
+        services.AddSingleton<IActionResultExecutor<ObjectResult>>(
+            new ObjectResultExecutor(
+                new DefaultOutputFormatterSelector(options, NullLoggerFactory.Instance),
+                new TestHttpResponseStreamWriterFactory(),
+                NullLoggerFactory.Instance,
+                options
+            )
+        );
 
         return services.BuildServiceProvider();
     }

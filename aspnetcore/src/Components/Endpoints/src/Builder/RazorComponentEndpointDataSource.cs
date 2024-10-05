@@ -14,7 +14,9 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components.Endpoints;
 
-internal class RazorComponentEndpointDataSource<[DynamicallyAccessedMembers(Component)] TRootComponent> : EndpointDataSource
+internal class RazorComponentEndpointDataSource<
+    [DynamicallyAccessedMembers(Component)] TRootComponent
+> : EndpointDataSource
 {
     private readonly object _lock = new();
     private readonly List<Action<EndpointBuilder>> _conventions = new();
@@ -38,7 +40,8 @@ internal class RazorComponentEndpointDataSource<[DynamicallyAccessedMembers(Comp
         IEnumerable<RenderModeEndpointProvider> renderModeEndpointProviders,
         IApplicationBuilder applicationBuilder,
         RazorComponentEndpointFactory factory,
-        HotReloadService? hotReloadService = null)
+        HotReloadService? hotReloadService = null
+    )
     {
         _builder = builder;
         _applicationBuilder = applicationBuilder;
@@ -50,7 +53,8 @@ internal class RazorComponentEndpointDataSource<[DynamicallyAccessedMembers(Comp
             builder,
             _options,
             _conventions,
-            _finallyConventions);
+            _finallyConventions
+        );
 
         _cancellationTokenSource = new CancellationTokenSource();
         _changeToken = new CancellationChangeToken(_cancellationTokenSource.Token);
@@ -99,11 +103,19 @@ internal class RazorComponentEndpointDataSource<[DynamicallyAccessedMembers(Comp
             var endpoints = new List<Endpoint>();
             var context = _builder.Build();
             var configuredRenderModesMetadata = new ConfiguredRenderModesMetadata(
-                Options.ConfiguredRenderModes.ToArray());
+                Options.ConfiguredRenderModes.ToArray()
+            );
 
             foreach (var definition in context.Pages)
             {
-                _factory.AddEndpoints(endpoints, typeof(TRootComponent), definition, _conventions, _finallyConventions, configuredRenderModesMetadata);
+                _factory.AddEndpoints(
+                    endpoints,
+                    typeof(TRootComponent),
+                    definition,
+                    _conventions,
+                    _finallyConventions,
+                    configuredRenderModesMetadata
+                );
             }
 
             ICollection<IComponentRenderMode> renderModes = Options.ConfiguredRenderModes;
@@ -122,15 +134,18 @@ internal class RazorComponentEndpointDataSource<[DynamicallyAccessedMembers(Comp
                             provider.GetEndpointBuilders(renderMode, _applicationBuilder.New()),
                             renderMode,
                             _conventions,
-                            _finallyConventions);
+                            _finallyConventions
+                        );
                     }
                 }
 
                 if (!found)
                 {
-                    throw new InvalidOperationException($"Unable to find a provider for the render mode: {renderMode.GetType().FullName}. This generally " +
-                        "means that a call to 'AddInteractiveWebAssemblyComponents' or 'AddInteractiveServerComponents' is missing. " +
-                        "For example, change builder.Services.AddRazorComponents() to builder.Services.AddRazorComponents().AddInteractiveServerComponents().");
+                    throw new InvalidOperationException(
+                        $"Unable to find a provider for the render mode: {renderMode.GetType().FullName}. This generally "
+                            + "means that a call to 'AddInteractiveWebAssemblyComponents' or 'AddInteractiveServerComponents' is missing. "
+                            + "For example, change builder.Services.AddRazorComponents() to builder.Services.AddRazorComponents().AddInteractiveServerComponents()."
+                    );
                 }
             }
 
@@ -139,7 +154,7 @@ internal class RazorComponentEndpointDataSource<[DynamicallyAccessedMembers(Comp
             _cancellationTokenSource = new CancellationTokenSource();
             _changeToken = new CancellationChangeToken(_cancellationTokenSource.Token);
             oldCancellationTokenSource?.Cancel();
-            if (_hotReloadService is { MetadataUpdateSupported : true })
+            if (_hotReloadService is { MetadataUpdateSupported: true })
             {
                 ChangeToken.OnChange(_hotReloadService.GetChangeToken, UpdateEndpoints);
             }

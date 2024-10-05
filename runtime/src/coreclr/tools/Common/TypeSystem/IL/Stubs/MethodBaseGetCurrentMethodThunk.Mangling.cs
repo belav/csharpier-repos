@@ -9,18 +9,12 @@ namespace Internal.IL.Stubs
     {
         MethodDesc IPrefixMangledMethod.BaseMethod
         {
-            get
-            {
-                return Method;
-            }
+            get { return Method; }
         }
 
         string IPrefixMangledMethod.Prefix
         {
-            get
-            {
-                return "GetCurrentMethod";
-            }
+            get { return "GetCurrentMethod"; }
         }
     }
 }

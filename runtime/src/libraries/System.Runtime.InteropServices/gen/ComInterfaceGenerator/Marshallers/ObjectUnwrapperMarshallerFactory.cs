@@ -15,21 +15,31 @@ namespace Microsoft.Interop
     internal sealed class ObjectUnwrapperMarshallerFactory : IMarshallingGeneratorFactory
     {
         private readonly IMarshallingGeneratorFactory _inner;
+
         public ObjectUnwrapperMarshallerFactory(IMarshallingGeneratorFactory inner)
         {
             _inner = inner;
         }
 
-        public ResolvedGenerator Create(TypePositionInfo info, StubCodeContext context)
-            => info.MarshallingAttributeInfo is ObjectUnwrapperInfo ? ResolvedGenerator.Resolved(new Marshaller()) : _inner.Create(info, context);
+        public ResolvedGenerator Create(TypePositionInfo info, StubCodeContext context) =>
+            info.MarshallingAttributeInfo is ObjectUnwrapperInfo
+                ? ResolvedGenerator.Resolved(new Marshaller())
+                : _inner.Create(info, context);
 
         private sealed class Marshaller : IMarshallingGenerator
         {
-            public ManagedTypeInfo AsNativeType(TypePositionInfo info) => new PointerTypeInfo("void*", "void*", false);
-            public IEnumerable<StatementSyntax> Generate(TypePositionInfo info, StubCodeContext context)
+            public ManagedTypeInfo AsNativeType(TypePositionInfo info) =>
+                new PointerTypeInfo("void*", "void*", false);
+
+            public IEnumerable<StatementSyntax> Generate(
+                TypePositionInfo info,
+                StubCodeContext context
+            )
             {
                 Debug.Assert(info.MarshallingAttributeInfo is ObjectUnwrapperInfo);
-                TypeSyntax unwrapperType = ((ObjectUnwrapperInfo)info.MarshallingAttributeInfo).UnwrapperType;
+                TypeSyntax unwrapperType = (
+                    (ObjectUnwrapperInfo)info.MarshallingAttributeInfo
+                ).UnwrapperType;
                 if (context.CurrentStage != StubCodeContext.Stage.Unmarshal)
                 {
                     yield break;
@@ -39,24 +49,44 @@ namespace Microsoft.Interop
 
                 // <managed> = (<managedType>)UnmanagedObjectUnwrapper.GetObjectFormUnmanagedWrapper<TUnmanagedUnwrapper>(<native>);
                 yield return AssignmentStatement(
-                        IdentifierName(managedIdentifier),
-                        CastExpression(
-                            info.ManagedType.Syntax,
-                            MethodInvocation(
-                                    TypeSyntaxes.UnmanagedObjectUnwrapper,
-                                    GenericName(Identifier("GetObjectForUnmanagedWrapper"))
-                                        .WithTypeArgumentList(
-                                            TypeArgumentList(
-                                                SingletonSeparatedList(
-                                                    unwrapperType))),
-                                    Argument(IdentifierName(nativeIdentifier)))));
+                    IdentifierName(managedIdentifier),
+                    CastExpression(
+                        info.ManagedType.Syntax,
+                        MethodInvocation(
+                            TypeSyntaxes.UnmanagedObjectUnwrapper,
+                            GenericName(Identifier("GetObjectForUnmanagedWrapper"))
+                                .WithTypeArgumentList(
+                                    TypeArgumentList(SingletonSeparatedList(unwrapperType))
+                                ),
+                            Argument(IdentifierName(nativeIdentifier))
+                        )
+                    )
+                );
             }
 
-            public SignatureBehavior GetNativeSignatureBehavior(TypePositionInfo info) => SignatureBehavior.NativeType;
-            public ValueBoundaryBehavior GetValueBoundaryBehavior(TypePositionInfo info, StubCodeContext context) => ValueBoundaryBehavior.NativeIdentifier;
-            public ByValueMarshalKindSupport SupportsByValueMarshalKind(ByValueContentsMarshalKind marshalKind, TypePositionInfo info, StubCodeContext context, out GeneratorDiagnostic? diagnostic)
-                => ByValueMarshalKindSupportDescriptor.Default.GetSupport(marshalKind, info, context, out diagnostic);
-            public bool UsesNativeIdentifier(TypePositionInfo info, StubCodeContext context) => true;
+            public SignatureBehavior GetNativeSignatureBehavior(TypePositionInfo info) =>
+                SignatureBehavior.NativeType;
+
+            public ValueBoundaryBehavior GetValueBoundaryBehavior(
+                TypePositionInfo info,
+                StubCodeContext context
+            ) => ValueBoundaryBehavior.NativeIdentifier;
+
+            public ByValueMarshalKindSupport SupportsByValueMarshalKind(
+                ByValueContentsMarshalKind marshalKind,
+                TypePositionInfo info,
+                StubCodeContext context,
+                out GeneratorDiagnostic? diagnostic
+            ) =>
+                ByValueMarshalKindSupportDescriptor.Default.GetSupport(
+                    marshalKind,
+                    info,
+                    context,
+                    out diagnostic
+                );
+
+            public bool UsesNativeIdentifier(TypePositionInfo info, StubCodeContext context) =>
+                true;
         }
     }
 }

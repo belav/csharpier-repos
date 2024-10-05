@@ -30,82 +30,91 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities {
-	
-	[ComVisible (false)]
-	public class ComClass {
-	
-		string	clsId;
-		string	description;
-		string	progId;
-		string	threadingModel;
-		string	tlbId;
-		string	xmlClsId;
-		string	xmlDescription;
-		string	xmlProgId;
-		string	xmlThreadingModel;
-		string	xmlTlbId;
-	
-		[MonoTODO]
-		public ComClass ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public string ClsId {
-			get { return clsId; }
-		}
-		
-		[MonoTODO]
-		public string Description {
-			get { return description; }
-		}
-		
-		[MonoTODO]
-		public string ProgId {
-			get { return progId; }
-		}
-		
-		[MonoTODO]
-		public string ThreadingModel {
-			get { return threadingModel; }
-		}
-		
-		[MonoTODO]
-		public string TlbId {
-			get { return tlbId; }
-		}
-		
-		[MonoTODO]
-		public string XmlClsId {
-			get { return xmlClsId; }
-			set { xmlClsId = value; }
-		}
-		
-		[MonoTODO]
-		public string XmlDescription {
-			get { return xmlDescription; }
-			set { xmlDescription = value; }
-		}
-		
-		[MonoTODO]
-		public string XmlProgId {
-			get { return xmlProgId; }
-			set { xmlProgId = value; }
-		}
-		
-		[MonoTODO]
-		public string XmlThreadingModel {
-			get { return xmlThreadingModel; }
-			set { xmlThreadingModel = value; }
-		}
-		
-		[MonoTODO]
-		public string XmlTlbId {
-			get { return xmlTlbId; }
-			set { xmlTlbId = value; }
-		}
-	}
-}
+namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities
+{
+    [ComVisible(false)]
+    public class ComClass
+    {
+        string clsId;
+        string description;
+        string progId;
+        string threadingModel;
+        string tlbId;
+        string xmlClsId;
+        string xmlDescription;
+        string xmlProgId;
+        string xmlThreadingModel;
+        string xmlTlbId;
 
+        [MonoTODO]
+        public ComClass()
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public string ClsId
+        {
+            get { return clsId; }
+        }
+
+        [MonoTODO]
+        public string Description
+        {
+            get { return description; }
+        }
+
+        [MonoTODO]
+        public string ProgId
+        {
+            get { return progId; }
+        }
+
+        [MonoTODO]
+        public string ThreadingModel
+        {
+            get { return threadingModel; }
+        }
+
+        [MonoTODO]
+        public string TlbId
+        {
+            get { return tlbId; }
+        }
+
+        [MonoTODO]
+        public string XmlClsId
+        {
+            get { return xmlClsId; }
+            set { xmlClsId = value; }
+        }
+
+        [MonoTODO]
+        public string XmlDescription
+        {
+            get { return xmlDescription; }
+            set { xmlDescription = value; }
+        }
+
+        [MonoTODO]
+        public string XmlProgId
+        {
+            get { return xmlProgId; }
+            set { xmlProgId = value; }
+        }
+
+        [MonoTODO]
+        public string XmlThreadingModel
+        {
+            get { return xmlThreadingModel; }
+            set { xmlThreadingModel = value; }
+        }
+
+        [MonoTODO]
+        public string XmlTlbId
+        {
+            get { return xmlTlbId; }
+            set { xmlTlbId = value; }
+        }
+    }
+}

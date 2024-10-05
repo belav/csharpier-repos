@@ -24,16 +24,29 @@ public class AuthenticationTests : LoggedTest
     [InlineData(AuthenticationSchemes.NTLM)]
     // [InlineData(AuthenticationSchemes.Digest)]
     [InlineData(AuthenticationSchemes.Basic)]
-    [InlineData(AuthenticationSchemes.Negotiate | AuthenticationSchemes.NTLM | /*AuthenticationSchemes.Digest |*/ AuthenticationSchemes.Basic)]
+    [InlineData(
+        AuthenticationSchemes.Negotiate
+            | AuthenticationSchemes.NTLM
+            | /*AuthenticationSchemes.Digest |*/
+            AuthenticationSchemes.Basic
+    )]
     public async Task AuthTypes_AllowAnonymous_NoChallenge(AuthenticationSchemes authType)
     {
-        using (var server = Utilities.CreateDynamicHost(authType, AllowAnoymous, out var address, httpContext =>
-        {
-            Assert.NotNull(httpContext.User);
-            Assert.NotNull(httpContext.User.Identity);
-            Assert.False(httpContext.User.Identity.IsAuthenticated);
-            return Task.FromResult(0);
-        }, LoggerFactory))
+        using (
+            var server = Utilities.CreateDynamicHost(
+                authType,
+                AllowAnoymous,
+                out var address,
+                httpContext =>
+                {
+                    Assert.NotNull(httpContext.User);
+                    Assert.NotNull(httpContext.User.Identity);
+                    Assert.False(httpContext.User.Identity.IsAuthenticated);
+                    return Task.FromResult(0);
+                },
+                LoggerFactory
+            )
+        )
         {
             var response = await SendRequestAsync(address);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -48,14 +61,26 @@ public class AuthenticationTests : LoggedTest
     [InlineData(AuthenticationSchemes.Basic)]
     public async Task AuthType_RequireAuth_ChallengesAdded(AuthenticationSchemes authType)
     {
-        using (var server = Utilities.CreateDynamicHost(authType, DenyAnoymous, out var address, httpContext =>
-        {
-            throw new NotImplementedException();
-        }, LoggerFactory))
+        using (
+            var server = Utilities.CreateDynamicHost(
+                authType,
+                DenyAnoymous,
+                out var address,
+                httpContext =>
+                {
+                    throw new NotImplementedException();
+                },
+                LoggerFactory
+            )
+        )
         {
             var response = await SendRequestAsync(address);
             Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
-            Assert.Equal(authType.ToString(), response.Headers.WwwAuthenticate.ToString(), StringComparer.OrdinalIgnoreCase);
+            Assert.Equal(
+                authType.ToString(),
+                response.Headers.WwwAuthenticate.ToString(),
+                StringComparer.OrdinalIgnoreCase
+            );
         }
     }
 
@@ -64,20 +89,34 @@ public class AuthenticationTests : LoggedTest
     [InlineData(AuthenticationSchemes.NTLM)]
     // [InlineData(AuthenticationSchemes.Digest)] // TODO: Not implemented
     [InlineData(AuthenticationSchemes.Basic)]
-    public async Task AuthType_AllowAnonymousButSpecify401_ChallengesAdded(AuthenticationSchemes authType)
+    public async Task AuthType_AllowAnonymousButSpecify401_ChallengesAdded(
+        AuthenticationSchemes authType
+    )
     {
-        using (var server = Utilities.CreateDynamicHost(authType, AllowAnoymous, out var address, httpContext =>
-        {
-            Assert.NotNull(httpContext.User);
-            Assert.NotNull(httpContext.User.Identity);
-            Assert.False(httpContext.User.Identity.IsAuthenticated);
-            httpContext.Response.StatusCode = 401;
-            return Task.FromResult(0);
-        }, LoggerFactory))
+        using (
+            var server = Utilities.CreateDynamicHost(
+                authType,
+                AllowAnoymous,
+                out var address,
+                httpContext =>
+                {
+                    Assert.NotNull(httpContext.User);
+                    Assert.NotNull(httpContext.User.Identity);
+                    Assert.False(httpContext.User.Identity.IsAuthenticated);
+                    httpContext.Response.StatusCode = 401;
+                    return Task.FromResult(0);
+                },
+                LoggerFactory
+            )
+        )
         {
             var response = await SendRequestAsync(address);
             Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
-            Assert.Equal(authType.ToString(), response.Headers.WwwAuthenticate.ToString(), StringComparer.OrdinalIgnoreCase);
+            Assert.Equal(
+                authType.ToString(),
+                response.Headers.WwwAuthenticate.ToString(),
+                StringComparer.OrdinalIgnoreCase
+            );
         }
     }
 
@@ -85,25 +124,33 @@ public class AuthenticationTests : LoggedTest
     public async Task MultipleAuthTypes_AllowAnonymousButSpecify401_ChallengesAdded()
     {
         string address;
-        using (Utilities.CreateHttpAuthServer(
-            AuthenticationSchemes.Negotiate
-            | AuthenticationSchemes.NTLM
-            /* | AuthenticationSchemes.Digest TODO: Not implemented */
-            | AuthenticationSchemes.Basic,
-            true,
-            out address,
-            httpContext =>
-        {
-            Assert.NotNull(httpContext.User);
-            Assert.NotNull(httpContext.User.Identity);
-            Assert.False(httpContext.User.Identity.IsAuthenticated);
-            httpContext.Response.StatusCode = 401;
-            return Task.FromResult(0);
-        }, LoggerFactory))
+        using (
+            Utilities.CreateHttpAuthServer(
+                AuthenticationSchemes.Negotiate
+                    | AuthenticationSchemes.NTLM
+                    /* | AuthenticationSchemes.Digest TODO: Not implemented */
+                    | AuthenticationSchemes.Basic,
+                true,
+                out address,
+                httpContext =>
+                {
+                    Assert.NotNull(httpContext.User);
+                    Assert.NotNull(httpContext.User.Identity);
+                    Assert.False(httpContext.User.Identity.IsAuthenticated);
+                    httpContext.Response.StatusCode = 401;
+                    return Task.FromResult(0);
+                },
+                LoggerFactory
+            )
+        )
         {
             var response = await SendRequestAsync(address);
             Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
-            Assert.Equal("Negotiate, NTLM, basic", response.Headers.WwwAuthenticate.ToString(), StringComparer.OrdinalIgnoreCase);
+            Assert.Equal(
+                "Negotiate, NTLM, basic",
+                response.Headers.WwwAuthenticate.ToString(),
+                StringComparer.OrdinalIgnoreCase
+            );
         }
     }
 
@@ -112,30 +159,43 @@ public class AuthenticationTests : LoggedTest
     [InlineData(AuthenticationSchemes.NTLM)]
     // [InlineData(AuthenticationSchemes.Digest)] // TODO: Not implemented
     // [InlineData(AuthenticationSchemes.Basic)] // Doesn't work with default creds
-    [InlineData(AuthenticationSchemes.Negotiate | AuthenticationSchemes.NTLM | /* AuthenticationSchemes.Digest |*/ AuthenticationSchemes.Basic)]
+    [InlineData(
+        AuthenticationSchemes.Negotiate
+            | AuthenticationSchemes.NTLM
+            | /* AuthenticationSchemes.Digest |*/
+            AuthenticationSchemes.Basic
+    )]
     public async Task AuthTypes_AllowAnonymousButSpecify401_Success(AuthenticationSchemes authType)
     {
         int requestId = 0;
-        using (var server = Utilities.CreateDynamicHost(authType, AllowAnoymous, out var address, httpContext =>
-        {
-            Assert.NotNull(httpContext.User);
-            Assert.NotNull(httpContext.User.Identity);
-            if (requestId == 0)
-            {
-                Assert.False(httpContext.User.Identity.IsAuthenticated);
-                httpContext.Response.StatusCode = 401;
-            }
-            else if (requestId == 1)
-            {
-                Assert.True(httpContext.User.Identity.IsAuthenticated);
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
-            requestId++;
-            return Task.FromResult(0);
-        }, LoggerFactory))
+        using (
+            var server = Utilities.CreateDynamicHost(
+                authType,
+                AllowAnoymous,
+                out var address,
+                httpContext =>
+                {
+                    Assert.NotNull(httpContext.User);
+                    Assert.NotNull(httpContext.User.Identity);
+                    if (requestId == 0)
+                    {
+                        Assert.False(httpContext.User.Identity.IsAuthenticated);
+                        httpContext.Response.StatusCode = 401;
+                    }
+                    else if (requestId == 1)
+                    {
+                        Assert.True(httpContext.User.Identity.IsAuthenticated);
+                    }
+                    else
+                    {
+                        throw new NotImplementedException();
+                    }
+                    requestId++;
+                    return Task.FromResult(0);
+                },
+                LoggerFactory
+            )
+        )
         {
             var response = await SendRequestAsync(address, useDefaultCredentials: true);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -147,16 +207,29 @@ public class AuthenticationTests : LoggedTest
     [InlineData(AuthenticationSchemes.NTLM)]
     // [InlineData(AuthenticationSchemes.Digest)] // TODO: Not implemented
     // [InlineData(AuthenticationSchemes.Basic)] // Doesn't work with default creds
-    [InlineData(AuthenticationSchemes.Negotiate | AuthenticationSchemes.NTLM | /* AuthenticationSchemes.Digest |*/ AuthenticationSchemes.Basic)]
+    [InlineData(
+        AuthenticationSchemes.Negotiate
+            | AuthenticationSchemes.NTLM
+            | /* AuthenticationSchemes.Digest |*/
+            AuthenticationSchemes.Basic
+    )]
     public async Task AuthTypes_RequireAuth_Success(AuthenticationSchemes authType)
     {
-        using (var server = Utilities.CreateDynamicHost(authType, DenyAnoymous, out var address, httpContext =>
-        {
-            Assert.NotNull(httpContext.User);
-            Assert.NotNull(httpContext.User.Identity);
-            Assert.True(httpContext.User.Identity.IsAuthenticated);
-            return Task.FromResult(0);
-        }, LoggerFactory))
+        using (
+            var server = Utilities.CreateDynamicHost(
+                authType,
+                DenyAnoymous,
+                out var address,
+                httpContext =>
+                {
+                    Assert.NotNull(httpContext.User);
+                    Assert.NotNull(httpContext.User.Identity);
+                    Assert.True(httpContext.User.Identity.IsAuthenticated);
+                    return Task.FromResult(0);
+                },
+                LoggerFactory
+            )
+        )
         {
             var response = await SendRequestAsync(address, useDefaultCredentials: true);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -167,22 +240,32 @@ public class AuthenticationTests : LoggedTest
     [ConditionalFact]
     public async Task AuthTypes_AccessUserInOnCompleted_Success()
     {
-        var completed = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var completed = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         string userName = null;
         var authTypes = AuthenticationSchemes.Negotiate | AuthenticationSchemes.NTLM;
-        using (var server = Utilities.CreateDynamicHost(authTypes, DenyAnoymous, out var address, httpContext =>
-        {
-            Assert.NotNull(httpContext.User);
-            Assert.NotNull(httpContext.User.Identity);
-            Assert.True(httpContext.User.Identity.IsAuthenticated);
-            httpContext.Response.OnCompleted(() =>
-            {
-                userName = httpContext.User.Identity.Name;
-                completed.SetResult();
-                return Task.CompletedTask;
-            });
-            return Task.FromResult(0);
-        }, LoggerFactory))
+        using (
+            var server = Utilities.CreateDynamicHost(
+                authTypes,
+                DenyAnoymous,
+                out var address,
+                httpContext =>
+                {
+                    Assert.NotNull(httpContext.User);
+                    Assert.NotNull(httpContext.User.Identity);
+                    Assert.True(httpContext.User.Identity.IsAuthenticated);
+                    httpContext.Response.OnCompleted(() =>
+                    {
+                        userName = httpContext.User.Identity.Name;
+                        completed.SetResult();
+                        return Task.CompletedTask;
+                    });
+                    return Task.FromResult(0);
+                },
+                LoggerFactory
+            )
+        )
         {
             var response = await SendRequestAsync(address, useDefaultCredentials: true);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -196,19 +279,36 @@ public class AuthenticationTests : LoggedTest
     [InlineData(AuthenticationSchemes.NTLM)]
     // [InlineData(AuthenticationSchemes.Digest)]
     [InlineData(AuthenticationSchemes.Basic)]
-    [InlineData(AuthenticationSchemes.Negotiate | AuthenticationSchemes.NTLM | /*AuthenticationSchemes.Digest |*/ AuthenticationSchemes.Basic)]
+    [InlineData(
+        AuthenticationSchemes.Negotiate
+            | AuthenticationSchemes.NTLM
+            | /*AuthenticationSchemes.Digest |*/
+            AuthenticationSchemes.Basic
+    )]
     public async Task AuthTypes_AuthenticateWithNoUser_NoResults(AuthenticationSchemes authType)
     {
-        var authTypeList = authType.ToString().Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
-        using (var server = Utilities.CreateDynamicHost(authType, AllowAnoymous, out var address, async httpContext =>
-        {
-            Assert.NotNull(httpContext.User);
-            Assert.NotNull(httpContext.User.Identity);
-            Assert.False(httpContext.User.Identity.IsAuthenticated);
-            var authResults = await httpContext.AuthenticateAsync(HttpSysDefaults.AuthenticationScheme);
-            Assert.False(authResults.Succeeded);
-            Assert.True(authResults.None);
-        }, LoggerFactory))
+        var authTypeList = authType
+            .ToString()
+            .Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        using (
+            var server = Utilities.CreateDynamicHost(
+                authType,
+                AllowAnoymous,
+                out var address,
+                async httpContext =>
+                {
+                    Assert.NotNull(httpContext.User);
+                    Assert.NotNull(httpContext.User.Identity);
+                    Assert.False(httpContext.User.Identity.IsAuthenticated);
+                    var authResults = await httpContext.AuthenticateAsync(
+                        HttpSysDefaults.AuthenticationScheme
+                    );
+                    Assert.False(authResults.Succeeded);
+                    Assert.True(authResults.None);
+                },
+                LoggerFactory
+            )
+        )
         {
             var response = await SendRequestAsync(address);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -221,17 +321,32 @@ public class AuthenticationTests : LoggedTest
     [InlineData(AuthenticationSchemes.NTLM)]
     // [InlineData(AuthenticationSchemes.Digest)]
     // [InlineData(AuthenticationSchemes.Basic)] // Doesn't work with default creds
-    [InlineData(AuthenticationSchemes.Negotiate | AuthenticationSchemes.NTLM | /*AuthenticationSchemes.Digest |*/ AuthenticationSchemes.Basic)]
+    [InlineData(
+        AuthenticationSchemes.Negotiate
+            | AuthenticationSchemes.NTLM
+            | /*AuthenticationSchemes.Digest |*/
+            AuthenticationSchemes.Basic
+    )]
     public async Task AuthTypes_AuthenticateWithUser_OneResult(AuthenticationSchemes authType)
     {
-        using (var server = Utilities.CreateDynamicHost(authType, DenyAnoymous, out var address, async httpContext =>
-        {
-            Assert.NotNull(httpContext.User);
-            Assert.NotNull(httpContext.User.Identity);
-            Assert.True(httpContext.User.Identity.IsAuthenticated);
-            var authResults = await httpContext.AuthenticateAsync(HttpSysDefaults.AuthenticationScheme);
-            Assert.True(authResults.Succeeded);
-        }, LoggerFactory))
+        using (
+            var server = Utilities.CreateDynamicHost(
+                authType,
+                DenyAnoymous,
+                out var address,
+                async httpContext =>
+                {
+                    Assert.NotNull(httpContext.User);
+                    Assert.NotNull(httpContext.User.Identity);
+                    Assert.True(httpContext.User.Identity.IsAuthenticated);
+                    var authResults = await httpContext.AuthenticateAsync(
+                        HttpSysDefaults.AuthenticationScheme
+                    );
+                    Assert.True(authResults.Succeeded);
+                },
+                LoggerFactory
+            )
+        )
         {
             var response = await SendRequestAsync(address, useDefaultCredentials: true);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -243,17 +358,34 @@ public class AuthenticationTests : LoggedTest
     [InlineData(AuthenticationSchemes.NTLM)]
     // [InlineData(AuthenticationSchemes.Digest)]
     [InlineData(AuthenticationSchemes.Basic)]
-    [InlineData(AuthenticationSchemes.Negotiate | AuthenticationSchemes.NTLM | /*AuthenticationSchemes.Digest |*/ AuthenticationSchemes.Basic)]
-    public async Task AuthTypes_ChallengeWithoutAuthTypes_AllChallengesSent(AuthenticationSchemes authType)
+    [InlineData(
+        AuthenticationSchemes.Negotiate
+            | AuthenticationSchemes.NTLM
+            | /*AuthenticationSchemes.Digest |*/
+            AuthenticationSchemes.Basic
+    )]
+    public async Task AuthTypes_ChallengeWithoutAuthTypes_AllChallengesSent(
+        AuthenticationSchemes authType
+    )
     {
-        var authTypeList = authType.ToString().Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
-        using (var server = Utilities.CreateDynamicHost(authType, AllowAnoymous, out var address, httpContext =>
-        {
-            Assert.NotNull(httpContext.User);
-            Assert.NotNull(httpContext.User.Identity);
-            Assert.False(httpContext.User.Identity.IsAuthenticated);
-            return httpContext.ChallengeAsync(HttpSysDefaults.AuthenticationScheme);
-        }, LoggerFactory))
+        var authTypeList = authType
+            .ToString()
+            .Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        using (
+            var server = Utilities.CreateDynamicHost(
+                authType,
+                AllowAnoymous,
+                out var address,
+                httpContext =>
+                {
+                    Assert.NotNull(httpContext.User);
+                    Assert.NotNull(httpContext.User.Identity);
+                    Assert.False(httpContext.User.Identity.IsAuthenticated);
+                    return httpContext.ChallengeAsync(HttpSysDefaults.AuthenticationScheme);
+                },
+                LoggerFactory
+            )
+        )
         {
             var response = await SendRequestAsync(address);
             Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
@@ -266,17 +398,34 @@ public class AuthenticationTests : LoggedTest
     [InlineData(AuthenticationSchemes.NTLM)]
     // [InlineData(AuthenticationSchemes.Digest)]
     [InlineData(AuthenticationSchemes.Basic)]
-    [InlineData(AuthenticationSchemes.Negotiate | AuthenticationSchemes.NTLM | /*AuthenticationSchemes.Digest |*/ AuthenticationSchemes.Basic)]
-    public async Task AuthTypes_ChallengeWithAllAuthTypes_AllChallengesSent(AuthenticationSchemes authType)
+    [InlineData(
+        AuthenticationSchemes.Negotiate
+            | AuthenticationSchemes.NTLM
+            | /*AuthenticationSchemes.Digest |*/
+            AuthenticationSchemes.Basic
+    )]
+    public async Task AuthTypes_ChallengeWithAllAuthTypes_AllChallengesSent(
+        AuthenticationSchemes authType
+    )
     {
-        var authTypeList = authType.ToString().Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
-        using (var server = Utilities.CreateDynamicHost(authType, AllowAnoymous, out var address, async httpContext =>
-        {
-            Assert.NotNull(httpContext.User);
-            Assert.NotNull(httpContext.User.Identity);
-            Assert.False(httpContext.User.Identity.IsAuthenticated);
-            await httpContext.ChallengeAsync(HttpSysDefaults.AuthenticationScheme);
-        }, LoggerFactory))
+        var authTypeList = authType
+            .ToString()
+            .Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        using (
+            var server = Utilities.CreateDynamicHost(
+                authType,
+                AllowAnoymous,
+                out var address,
+                async httpContext =>
+                {
+                    Assert.NotNull(httpContext.User);
+                    Assert.NotNull(httpContext.User.Identity);
+                    Assert.False(httpContext.User.Identity.IsAuthenticated);
+                    await httpContext.ChallengeAsync(HttpSysDefaults.AuthenticationScheme);
+                },
+                LoggerFactory
+            )
+        )
         {
             var response = await SendRequestAsync(address);
             Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
@@ -287,14 +436,26 @@ public class AuthenticationTests : LoggedTest
     [ConditionalFact]
     public async Task AuthTypes_OneChallengeSent()
     {
-        var authTypes = AuthenticationSchemes.Negotiate | AuthenticationSchemes.NTLM | /*AuthenticationSchemes.Digest |*/ AuthenticationSchemes.Basic;
-        using (var server = Utilities.CreateDynamicHost(authTypes, AllowAnoymous, out var address, httpContext =>
-        {
-            Assert.NotNull(httpContext.User);
-            Assert.NotNull(httpContext.User.Identity);
-            Assert.False(httpContext.User.Identity.IsAuthenticated);
-            return httpContext.ChallengeAsync(HttpSysDefaults.AuthenticationScheme);
-        }, LoggerFactory))
+        var authTypes =
+            AuthenticationSchemes.Negotiate
+            | AuthenticationSchemes.NTLM
+            | /*AuthenticationSchemes.Digest |*/
+            AuthenticationSchemes.Basic;
+        using (
+            var server = Utilities.CreateDynamicHost(
+                authTypes,
+                AllowAnoymous,
+                out var address,
+                httpContext =>
+                {
+                    Assert.NotNull(httpContext.User);
+                    Assert.NotNull(httpContext.User.Identity);
+                    Assert.False(httpContext.User.Identity.IsAuthenticated);
+                    return httpContext.ChallengeAsync(HttpSysDefaults.AuthenticationScheme);
+                },
+                LoggerFactory
+            )
+        )
         {
             var response = await SendRequestAsync(address);
             Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
@@ -307,20 +468,35 @@ public class AuthenticationTests : LoggedTest
     [InlineData(AuthenticationSchemes.NTLM)]
     // [InlineData(AuthenticationSchemes.Digest)]
     [InlineData(AuthenticationSchemes.Basic)]
-    [InlineData(AuthenticationSchemes.Negotiate | AuthenticationSchemes.NTLM | /*AuthenticationSchemes.Digest |*/ AuthenticationSchemes.Basic)]
+    [InlineData(
+        AuthenticationSchemes.Negotiate
+            | AuthenticationSchemes.NTLM
+            | /*AuthenticationSchemes.Digest |*/
+            AuthenticationSchemes.Basic
+    )]
     [InlineData(AuthenticationSchemes.Negotiate | AuthenticationSchemes.NTLM)]
     [InlineData(AuthenticationSchemes.Negotiate | AuthenticationSchemes.Basic)]
     [InlineData(AuthenticationSchemes.NTLM | AuthenticationSchemes.Basic)]
     public async Task AuthTypes_ChallengeWillAskForAllEnabledSchemes(AuthenticationSchemes authType)
     {
-        var authTypeList = authType.ToString().Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
-        using (var server = Utilities.CreateDynamicHost(authType, AllowAnoymous, out var address, httpContext =>
-        {
-            Assert.NotNull(httpContext.User);
-            Assert.NotNull(httpContext.User.Identity);
-            Assert.False(httpContext.User.Identity.IsAuthenticated);
-            return httpContext.ChallengeAsync(HttpSysDefaults.AuthenticationScheme);
-        }, LoggerFactory))
+        var authTypeList = authType
+            .ToString()
+            .Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        using (
+            var server = Utilities.CreateDynamicHost(
+                authType,
+                AllowAnoymous,
+                out var address,
+                httpContext =>
+                {
+                    Assert.NotNull(httpContext.User);
+                    Assert.NotNull(httpContext.User.Identity);
+                    Assert.False(httpContext.User.Identity.IsAuthenticated);
+                    return httpContext.ChallengeAsync(HttpSysDefaults.AuthenticationScheme);
+                },
+                LoggerFactory
+            )
+        )
         {
             var response = await SendRequestAsync(address);
             Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
@@ -331,14 +507,26 @@ public class AuthenticationTests : LoggedTest
     [ConditionalFact]
     public async Task AuthTypes_Forbid_Forbidden()
     {
-        var authTypes = AuthenticationSchemes.Negotiate | AuthenticationSchemes.NTLM | /*AuthenticationSchemes.Digest |*/ AuthenticationSchemes.Basic;
-        using (var server = Utilities.CreateDynamicHost(authTypes, AllowAnoymous, out var address, httpContext =>
-        {
-            Assert.NotNull(httpContext.User);
-            Assert.NotNull(httpContext.User.Identity);
-            Assert.False(httpContext.User.Identity.IsAuthenticated);
-            return httpContext.ForbidAsync(HttpSysDefaults.AuthenticationScheme);
-        }, LoggerFactory))
+        var authTypes =
+            AuthenticationSchemes.Negotiate
+            | AuthenticationSchemes.NTLM
+            | /*AuthenticationSchemes.Digest |*/
+            AuthenticationSchemes.Basic;
+        using (
+            var server = Utilities.CreateDynamicHost(
+                authTypes,
+                AllowAnoymous,
+                out var address,
+                httpContext =>
+                {
+                    Assert.NotNull(httpContext.User);
+                    Assert.NotNull(httpContext.User.Identity);
+                    Assert.False(httpContext.User.Identity.IsAuthenticated);
+                    return httpContext.ForbidAsync(HttpSysDefaults.AuthenticationScheme);
+                },
+                LoggerFactory
+            )
+        )
         {
             var response = await SendRequestAsync(address);
             Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
@@ -351,15 +539,25 @@ public class AuthenticationTests : LoggedTest
     [InlineData(AuthenticationSchemes.NTLM)]
     // [InlineData(AuthenticationSchemes.Digest)] // Not implemented
     // [InlineData(AuthenticationSchemes.Basic)] // Can't log in with UseDefaultCredentials
-    public async Task AuthTypes_UnathorizedAuthenticatedAuthType_Unauthorized(AuthenticationSchemes authType)
+    public async Task AuthTypes_UnathorizedAuthenticatedAuthType_Unauthorized(
+        AuthenticationSchemes authType
+    )
     {
-        using (var server = Utilities.CreateDynamicHost(authType, DenyAnoymous, out var address, httpContext =>
-        {
-            Assert.NotNull(httpContext.User);
-            Assert.NotNull(httpContext.User.Identity);
-            Assert.True(httpContext.User.Identity.IsAuthenticated);
-            return httpContext.ChallengeAsync(HttpSysDefaults.AuthenticationScheme, null);
-        }, LoggerFactory))
+        using (
+            var server = Utilities.CreateDynamicHost(
+                authType,
+                DenyAnoymous,
+                out var address,
+                httpContext =>
+                {
+                    Assert.NotNull(httpContext.User);
+                    Assert.NotNull(httpContext.User.Identity);
+                    Assert.True(httpContext.User.Identity.IsAuthenticated);
+                    return httpContext.ChallengeAsync(HttpSysDefaults.AuthenticationScheme, null);
+                },
+                LoggerFactory
+            )
+        )
         {
             var response = await SendRequestAsync(address, useDefaultCredentials: true);
             Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
@@ -373,34 +571,50 @@ public class AuthenticationTests : LoggedTest
     [InlineData(AuthenticationSchemes.NTLM)]
     // [InlineData(AuthenticationSchemes.Digest)] // TODO: Not implemented
     // [InlineData(AuthenticationSchemes.Basic)] // Doesn't work with default creds
-    [InlineData(AuthenticationSchemes.Negotiate | AuthenticationSchemes.NTLM | /* AuthenticationSchemes.Digest |*/ AuthenticationSchemes.Basic)]
+    [InlineData(
+        AuthenticationSchemes.Negotiate
+            | AuthenticationSchemes.NTLM
+            | /* AuthenticationSchemes.Digest |*/
+            AuthenticationSchemes.Basic
+    )]
     public async Task AuthTypes_DisableAutomaticAuthentication(AuthenticationSchemes authType)
     {
-        using (var server = Utilities.CreateDynamicHost(out var address, options =>
-        {
-            options.Authentication.AutomaticAuthentication = false;
-            options.Authentication.Schemes = authType;
-            options.Authentication.AllowAnonymous = DenyAnoymous;
-        },
-        async httpContext =>
-        {
-            Assert.NotNull(httpContext.User);
-            Assert.NotNull(httpContext.User.Identity);
-            Assert.False(httpContext.User.Identity.IsAuthenticated);
+        using (
+            var server = Utilities.CreateDynamicHost(
+                out var address,
+                options =>
+                {
+                    options.Authentication.AutomaticAuthentication = false;
+                    options.Authentication.Schemes = authType;
+                    options.Authentication.AllowAnonymous = DenyAnoymous;
+                },
+                async httpContext =>
+                {
+                    Assert.NotNull(httpContext.User);
+                    Assert.NotNull(httpContext.User.Identity);
+                    Assert.False(httpContext.User.Identity.IsAuthenticated);
 
-            var authenticateResult = await httpContext.AuthenticateAsync(HttpSysDefaults.AuthenticationScheme);
+                    var authenticateResult = await httpContext.AuthenticateAsync(
+                        HttpSysDefaults.AuthenticationScheme
+                    );
 
-            Assert.NotNull(authenticateResult.Principal);
-            Assert.NotNull(authenticateResult.Principal.Identity);
-            Assert.True(authenticateResult.Principal.Identity.IsAuthenticated);
-        }, LoggerFactory))
+                    Assert.NotNull(authenticateResult.Principal);
+                    Assert.NotNull(authenticateResult.Principal.Identity);
+                    Assert.True(authenticateResult.Principal.Identity.IsAuthenticated);
+                },
+                LoggerFactory
+            )
+        )
         {
             var response = await SendRequestAsync(address, useDefaultCredentials: true);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
     }
 
-    private async Task<HttpResponseMessage> SendRequestAsync(string uri, bool useDefaultCredentials = false)
+    private async Task<HttpResponseMessage> SendRequestAsync(
+        string uri,
+        bool useDefaultCredentials = false
+    )
     {
         HttpClientHandler handler = new HttpClientHandler();
         handler.UseDefaultCredentials = useDefaultCredentials;

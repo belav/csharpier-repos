@@ -12,7 +12,11 @@ namespace Microsoft.CodeAnalysis.Emit
         public readonly Cci.ITypeReference Type;
         public readonly SynthesizedLocalKind SynthesizedKind;
 
-        public EncHoistedLocalMetadata(string name, Cci.ITypeReference type, SynthesizedLocalKind synthesizedKind)
+        public EncHoistedLocalMetadata(
+            string name,
+            Cci.ITypeReference type,
+            SynthesizedLocalKind synthesizedKind
+        )
         {
             Debug.Assert(name != null);
             Debug.Assert(type != null);

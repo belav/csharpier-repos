@@ -13,21 +13,36 @@ namespace System
     public partial class Enum
     {
         [MethodImpl(MethodImplOptions.InternalCall)]
-        private static extern void GetEnumValuesAndNames(QCallTypeHandle enumType, out ulong[] values, out string[] names);
+        private static extern void GetEnumValuesAndNames(
+            QCallTypeHandle enumType,
+            out ulong[] values,
+            out string[] names
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        private static extern void InternalBoxEnum(QCallTypeHandle enumType, ObjectHandleOnStack res, long value);
+        private static extern void InternalBoxEnum(
+            QCallTypeHandle enumType,
+            ObjectHandleOnStack res,
+            long value
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern CorElementType InternalGetCorElementType(QCallTypeHandle enumType);
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        private static extern void InternalGetUnderlyingType(QCallTypeHandle enumType, ObjectHandleOnStack res);
+        private static extern void InternalGetUnderlyingType(
+            QCallTypeHandle enumType,
+            ObjectHandleOnStack res
+        );
 
         private static object InternalBoxEnum(RuntimeType enumType, long value)
         {
             object? res = null;
-            InternalBoxEnum(new QCallTypeHandle(ref enumType), ObjectHandleOnStack.Create(ref res), value);
+            InternalBoxEnum(
+                new QCallTypeHandle(ref enumType),
+                ObjectHandleOnStack.Create(ref res),
+                value
+            );
             return res!;
         }
 
@@ -46,23 +61,40 @@ namespace System
         internal static RuntimeType InternalGetUnderlyingType(RuntimeType enumType)
         {
             RuntimeType? res = null;
-            InternalGetUnderlyingType(new QCallTypeHandle(ref enumType), ObjectHandleOnStack.Create(ref res));
+            InternalGetUnderlyingType(
+                new QCallTypeHandle(ref enumType),
+                ObjectHandleOnStack.Create(ref res)
+            );
             return res!;
         }
 
-        private static unsafe EnumInfo<TStorage> GetEnumInfo<TStorage>(RuntimeType enumType, bool getNames = true)
+        private static unsafe EnumInfo<TStorage> GetEnumInfo<TStorage>(
+            RuntimeType enumType,
+            bool getNames = true
+        )
             where TStorage : struct, INumber<TStorage>
         {
             Debug.Assert(
-                typeof(TStorage) == typeof(byte) || typeof(TStorage) == typeof(ushort) || typeof(TStorage) == typeof(uint) || typeof(TStorage) == typeof(ulong) ||
-                typeof(TStorage) == typeof(nuint) || typeof(TStorage) == typeof(float) || typeof(TStorage) == typeof(double) || typeof(TStorage) == typeof(char));
+                typeof(TStorage) == typeof(byte)
+                    || typeof(TStorage) == typeof(ushort)
+                    || typeof(TStorage) == typeof(uint)
+                    || typeof(TStorage) == typeof(ulong)
+                    || typeof(TStorage) == typeof(nuint)
+                    || typeof(TStorage) == typeof(float)
+                    || typeof(TStorage) == typeof(double)
+                    || typeof(TStorage) == typeof(char)
+            );
 
             EnumInfo<TStorage>? entry = enumType.Cache.EnumInfo as EnumInfo<TStorage>;
             Debug.Assert(entry is null || entry.Names is not null);
 
             if (entry == null)
             {
-                GetEnumValuesAndNames(new QCallTypeHandle(ref enumType), out ulong[]? uint64Values, out string[]? names);
+                GetEnumValuesAndNames(
+                    new QCallTypeHandle(ref enumType),
+                    out ulong[]? uint64Values,
+                    out string[]? names
+                );
                 Debug.Assert(names is not null);
                 Debug.Assert(uint64Values is not null);
 

@@ -8,11 +8,18 @@ namespace System.Web.Razor.Generator
 {
     public class CodeGenerationCompleteEventArgs : EventArgs
     {
-        public CodeGenerationCompleteEventArgs(string virtualPath, string physicalPath, CodeCompileUnit generatedCode)
+        public CodeGenerationCompleteEventArgs(
+            string virtualPath,
+            string physicalPath,
+            CodeCompileUnit generatedCode
+        )
         {
             if (String.IsNullOrEmpty(virtualPath))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "virtualPath");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "virtualPath"
+                );
             }
             if (generatedCode == null)
             {

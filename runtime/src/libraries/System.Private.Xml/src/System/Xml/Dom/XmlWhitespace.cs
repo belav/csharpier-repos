@@ -10,7 +10,8 @@ namespace System.Xml
     // Represents the text content of an element or attribute.
     public class XmlWhitespace : XmlCharacterData
     {
-        protected internal XmlWhitespace(string? strData, XmlDocument doc) : base(strData, doc)
+        protected internal XmlWhitespace(string? strData, XmlDocument doc)
+            : base(strData, doc)
         {
             if (!doc.IsLoading && !CheckOnData(strData))
                 throw new ArgumentException(SR.Xdom_WS_Char);
@@ -19,28 +20,19 @@ namespace System.Xml
         // Gets the name of the node.
         public override string Name
         {
-            get
-            {
-                return OwnerDocument!.strNonSignificantWhitespaceName;
-            }
+            get { return OwnerDocument!.strNonSignificantWhitespaceName; }
         }
 
         // Gets the name of the current node without the namespace prefix.
         public override string LocalName
         {
-            get
-            {
-                return OwnerDocument!.strNonSignificantWhitespaceName;
-            }
+            get { return OwnerDocument!.strNonSignificantWhitespaceName; }
         }
 
         // Gets the type of the current node.
         public override XmlNodeType NodeType
         {
-            get
-            {
-                return XmlNodeType.Whitespace;
-            }
+            get { return XmlNodeType.Whitespace; }
         }
 
         public override XmlNode? ParentNode
@@ -69,10 +61,7 @@ namespace System.Xml
 
         public override string? Value
         {
-            get
-            {
-                return Data;
-            }
+            get { return Data; }
             set
             {
                 if (CheckOnData(value))
@@ -113,10 +102,7 @@ namespace System.Xml
 
         internal override bool IsText
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override XmlNode? PreviousText

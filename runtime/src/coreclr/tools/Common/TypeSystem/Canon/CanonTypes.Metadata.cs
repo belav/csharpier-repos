@@ -3,9 +3,7 @@
 
 using System;
 using System.Collections.Generic;
-
 using Internal.NativeFormat;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem

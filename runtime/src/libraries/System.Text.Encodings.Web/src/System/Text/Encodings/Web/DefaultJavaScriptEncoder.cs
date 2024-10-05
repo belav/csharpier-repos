@@ -8,17 +8,23 @@ namespace System.Text.Encodings.Web
 {
     internal sealed class DefaultJavaScriptEncoder : JavaScriptEncoder
     {
-        internal static readonly DefaultJavaScriptEncoder BasicLatinSingleton = new DefaultJavaScriptEncoder(new TextEncoderSettings(UnicodeRanges.BasicLatin));
-        internal static readonly DefaultJavaScriptEncoder UnsafeRelaxedEscapingSingleton = new DefaultJavaScriptEncoder(new TextEncoderSettings(UnicodeRanges.All), allowMinimalJsonEscaping: true);
+        internal static readonly DefaultJavaScriptEncoder BasicLatinSingleton =
+            new DefaultJavaScriptEncoder(new TextEncoderSettings(UnicodeRanges.BasicLatin));
+        internal static readonly DefaultJavaScriptEncoder UnsafeRelaxedEscapingSingleton =
+            new DefaultJavaScriptEncoder(
+                new TextEncoderSettings(UnicodeRanges.All),
+                allowMinimalJsonEscaping: true
+            );
 
         private readonly OptimizedInboxTextEncoder _innerEncoder;
 
         internal DefaultJavaScriptEncoder(TextEncoderSettings settings)
-            : this(settings, allowMinimalJsonEscaping: false)
-        {
-        }
+            : this(settings, allowMinimalJsonEscaping: false) { }
 
-        private DefaultJavaScriptEncoder(TextEncoderSettings settings, bool allowMinimalJsonEscaping)
+        private DefaultJavaScriptEncoder(
+            TextEncoderSettings settings,
+            bool allowMinimalJsonEscaping
+        )
         {
             if (settings is null)
             {
@@ -30,10 +36,18 @@ namespace System.Text.Encodings.Web
             // '`' (U+0060 GRAVE ACCENT) is ECMAScript-sensitive (see ECMA-262).
 
             _innerEncoder = allowMinimalJsonEscaping
-                ? new OptimizedInboxTextEncoder(EscaperImplementation.SingletonMinimallyEscaped, settings.GetAllowedCodePointsBitmap(), forbidHtmlSensitiveCharacters: false,
-                    extraCharactersToEscape: stackalloc char[] { '\"', '\\' })
-                : new OptimizedInboxTextEncoder(EscaperImplementation.Singleton, settings.GetAllowedCodePointsBitmap(), forbidHtmlSensitiveCharacters: true,
-                    extraCharactersToEscape: stackalloc char[] { '\\', '`' });
+                ? new OptimizedInboxTextEncoder(
+                    EscaperImplementation.SingletonMinimallyEscaped,
+                    settings.GetAllowedCodePointsBitmap(),
+                    forbidHtmlSensitiveCharacters: false,
+                    extraCharactersToEscape: stackalloc char[] { '\"', '\\' }
+                )
+                : new OptimizedInboxTextEncoder(
+                    EscaperImplementation.Singleton,
+                    settings.GetAllowedCodePointsBitmap(),
+                    forbidHtmlSensitiveCharacters: true,
+                    extraCharactersToEscape: stackalloc char[] { '\\', '`' }
+                );
         }
 
         public override int MaxOutputCharactersPerInputCharacter => 6; // "\uXXXX" for a single char ("\uXXXX\uYYYY" [12 chars] for supplementary scalar value)
@@ -44,26 +58,60 @@ namespace System.Text.Encodings.Web
          */
 
 #pragma warning disable CS0618 // some of the adapters are intentionally marked [Obsolete]
-        private protected override OperationStatus EncodeCore(ReadOnlySpan<char> source, Span<char> destination, out int charsConsumed, out int charsWritten, bool isFinalBlock)
-            => _innerEncoder.Encode(source, destination, out charsConsumed, out charsWritten, isFinalBlock);
+        private protected override OperationStatus EncodeCore(
+            ReadOnlySpan<char> source,
+            Span<char> destination,
+            out int charsConsumed,
+            out int charsWritten,
+            bool isFinalBlock
+        ) =>
+            _innerEncoder.Encode(
+                source,
+                destination,
+                out charsConsumed,
+                out charsWritten,
+                isFinalBlock
+            );
 
-        private protected override OperationStatus EncodeUtf8Core(ReadOnlySpan<byte> utf8Source, Span<byte> utf8Destination, out int bytesConsumed, out int bytesWritten, bool isFinalBlock)
-            => _innerEncoder.EncodeUtf8(utf8Source, utf8Destination, out bytesConsumed, out bytesWritten, isFinalBlock);
+        private protected override OperationStatus EncodeUtf8Core(
+            ReadOnlySpan<byte> utf8Source,
+            Span<byte> utf8Destination,
+            out int bytesConsumed,
+            out int bytesWritten,
+            bool isFinalBlock
+        ) =>
+            _innerEncoder.EncodeUtf8(
+                utf8Source,
+                utf8Destination,
+                out bytesConsumed,
+                out bytesWritten,
+                isFinalBlock
+            );
 
-        private protected override int FindFirstCharacterToEncode(ReadOnlySpan<char> text)
-            => _innerEncoder.GetIndexOfFirstCharToEncode(text);
+        private protected override int FindFirstCharacterToEncode(ReadOnlySpan<char> text) =>
+            _innerEncoder.GetIndexOfFirstCharToEncode(text);
 
-        public override unsafe int FindFirstCharacterToEncode(char* text, int textLength)
-            => _innerEncoder.FindFirstCharacterToEncode(text, textLength);
+        public override unsafe int FindFirstCharacterToEncode(char* text, int textLength) =>
+            _innerEncoder.FindFirstCharacterToEncode(text, textLength);
 
-        public override int FindFirstCharacterToEncodeUtf8(ReadOnlySpan<byte> utf8Text)
-            => _innerEncoder.GetIndexOfFirstByteToEncode(utf8Text);
+        public override int FindFirstCharacterToEncodeUtf8(ReadOnlySpan<byte> utf8Text) =>
+            _innerEncoder.GetIndexOfFirstByteToEncode(utf8Text);
 
-        public override unsafe bool TryEncodeUnicodeScalar(int unicodeScalar, char* buffer, int bufferLength, out int numberOfCharactersWritten)
-            => _innerEncoder.TryEncodeUnicodeScalar(unicodeScalar, buffer, bufferLength, out numberOfCharactersWritten);
+        public override unsafe bool TryEncodeUnicodeScalar(
+            int unicodeScalar,
+            char* buffer,
+            int bufferLength,
+            out int numberOfCharactersWritten
+        ) =>
+            _innerEncoder.TryEncodeUnicodeScalar(
+                unicodeScalar,
+                buffer,
+                bufferLength,
+                out numberOfCharactersWritten
+            );
 
-        public override bool WillEncode(int unicodeScalar)
-            => !_innerEncoder.IsScalarValueAllowed(new Rune(unicodeScalar));
+        public override bool WillEncode(int unicodeScalar) =>
+            !_innerEncoder.IsScalarValueAllowed(new Rune(unicodeScalar));
 #pragma warning restore CS0618
 
         /*
@@ -72,8 +120,11 @@ namespace System.Text.Encodings.Web
 
         private sealed class EscaperImplementation : ScalarEscaperBase
         {
-            internal static readonly EscaperImplementation Singleton = new EscaperImplementation(allowMinimalEscaping: false);
-            internal static readonly EscaperImplementation SingletonMinimallyEscaped = new EscaperImplementation(allowMinimalEscaping: true);
+            internal static readonly EscaperImplementation Singleton = new EscaperImplementation(
+                allowMinimalEscaping: false
+            );
+            internal static readonly EscaperImplementation SingletonMinimallyEscaped =
+                new EscaperImplementation(allowMinimalEscaping: true);
 
             // Map stores the second byte for any ASCII input that can be escaped as the two-element sequence
             // REVERSE SOLIDUS followed by a single character. For example, <LF> maps to the two chars "\n".
@@ -114,12 +165,15 @@ namespace System.Text.Encodings.Web
             {
                 if (_preescapedMap.TryLookup(value, out byte preescapedForm))
                 {
-                    if (!SpanUtility.IsValidIndex(destination, 1)) { goto OutOfSpace; }
+                    if (!SpanUtility.IsValidIndex(destination, 1))
+                    {
+                        goto OutOfSpace;
+                    }
                     destination[0] = (byte)'\\';
                     destination[1] = preescapedForm;
                     return 2;
 
-                OutOfSpace:
+                    OutOfSpace:
                     return -1;
                 }
 
@@ -132,7 +186,10 @@ namespace System.Text.Encodings.Web
                     if (value.IsBmp)
                     {
                         // Write 6 bytes: "\uXXXX"
-                        if (!SpanUtility.IsValidIndex(destination, 5)) { goto OutOfSpaceInner; }
+                        if (!SpanUtility.IsValidIndex(destination, 5))
+                        {
+                            goto OutOfSpaceInner;
+                        }
                         destination[0] = (byte)'\\';
                         destination[1] = (byte)'u';
                         HexConverter.ToBytesBuffer((byte)value.Value, destination, 4);
@@ -142,12 +199,23 @@ namespace System.Text.Encodings.Web
                     else
                     {
                         // Write 12 bytes: "\uXXXX\uYYYY"
-                        UnicodeHelpers.GetUtf16SurrogatePairFromAstralScalarValue((uint)value.Value, out char highSurrogate, out char lowSurrogate);
-                        if (!SpanUtility.IsValidIndex(destination, 11)) { goto OutOfSpaceInner; }
+                        UnicodeHelpers.GetUtf16SurrogatePairFromAstralScalarValue(
+                            (uint)value.Value,
+                            out char highSurrogate,
+                            out char lowSurrogate
+                        );
+                        if (!SpanUtility.IsValidIndex(destination, 11))
+                        {
+                            goto OutOfSpaceInner;
+                        }
                         destination[0] = (byte)'\\';
                         destination[1] = (byte)'u';
                         HexConverter.ToBytesBuffer((byte)highSurrogate, destination, 4);
-                        HexConverter.ToBytesBuffer((byte)((uint)highSurrogate >> 8), destination, 2);
+                        HexConverter.ToBytesBuffer(
+                            (byte)((uint)highSurrogate >> 8),
+                            destination,
+                            2
+                        );
                         destination[6] = (byte)'\\';
                         destination[7] = (byte)'u';
                         HexConverter.ToBytesBuffer((byte)lowSurrogate, destination, 10);
@@ -155,7 +223,7 @@ namespace System.Text.Encodings.Web
                         return 12;
                     }
 
-                OutOfSpaceInner:
+                    OutOfSpaceInner:
 
                     return -1;
                 }
@@ -165,12 +233,15 @@ namespace System.Text.Encodings.Web
             {
                 if (_preescapedMap.TryLookup(value, out byte preescapedForm))
                 {
-                    if (!SpanUtility.IsValidIndex(destination, 1)) { goto OutOfSpace; }
+                    if (!SpanUtility.IsValidIndex(destination, 1))
+                    {
+                        goto OutOfSpace;
+                    }
                     destination[0] = '\\';
                     destination[1] = (char)preescapedForm;
                     return 2;
 
-                OutOfSpace:
+                    OutOfSpace:
                     return -1;
                 }
 
@@ -183,7 +254,10 @@ namespace System.Text.Encodings.Web
                     if (value.IsBmp)
                     {
                         // Write 6 chars: "\uXXXX"
-                        if (!SpanUtility.IsValidIndex(destination, 5)) { goto OutOfSpaceInner; }
+                        if (!SpanUtility.IsValidIndex(destination, 5))
+                        {
+                            goto OutOfSpaceInner;
+                        }
                         destination[0] = '\\';
                         destination[1] = 'u';
                         HexConverter.ToCharsBuffer((byte)value.Value, destination, 4);
@@ -193,12 +267,23 @@ namespace System.Text.Encodings.Web
                     else
                     {
                         // Write 12 chars: "\uXXXX\uYYYY"
-                        UnicodeHelpers.GetUtf16SurrogatePairFromAstralScalarValue((uint)value.Value, out char highSurrogate, out char lowSurrogate);
-                        if (!SpanUtility.IsValidIndex(destination, 11)) { goto OutOfSpaceInner; }
+                        UnicodeHelpers.GetUtf16SurrogatePairFromAstralScalarValue(
+                            (uint)value.Value,
+                            out char highSurrogate,
+                            out char lowSurrogate
+                        );
+                        if (!SpanUtility.IsValidIndex(destination, 11))
+                        {
+                            goto OutOfSpaceInner;
+                        }
                         destination[0] = '\\';
                         destination[1] = 'u';
                         HexConverter.ToCharsBuffer((byte)highSurrogate, destination, 4);
-                        HexConverter.ToCharsBuffer((byte)((uint)highSurrogate >> 8), destination, 2);
+                        HexConverter.ToCharsBuffer(
+                            (byte)((uint)highSurrogate >> 8),
+                            destination,
+                            2
+                        );
                         destination[6] = '\\';
                         destination[7] = 'u';
                         HexConverter.ToCharsBuffer((byte)lowSurrogate, destination, 10);
@@ -206,7 +291,7 @@ namespace System.Text.Encodings.Web
                         return 12;
                     }
 
-                OutOfSpaceInner:
+                    OutOfSpaceInner:
 
                     return -1;
                 }

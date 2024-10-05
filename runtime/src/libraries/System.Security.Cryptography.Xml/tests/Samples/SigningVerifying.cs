@@ -16,17 +16,15 @@ namespace System.Security.Cryptography.Xml.Tests
     // Verifying: https://msdn.microsoft.com/en-us/library/ms229745(v=vs.110).aspx
     public class SigningAndVerifying
     {
-        const string ExampleXml = @"<?xml version=""1.0""?>
+        const string ExampleXml =
+            @"<?xml version=""1.0""?>
 <example>
 <test>some text node</test>
 </example>";
 
         private static void SignXml(XmlDocument doc, RSA key)
         {
-            var signedXml = new SignedXml(doc)
-            {
-                SigningKey = key
-            };
+            var signedXml = new SignedXml(doc) { SigningKey = key };
 
             var reference = new Reference();
             reference.Uri = "";

@@ -28,7 +28,8 @@ public class TestResourceManagerStringLocalizerFactory : ResourceManagerStringLo
         IOptions<LocalizationOptions> localizationOptions,
         ResourceLocationAttribute resourceLocationAttribute,
         RootNamespaceAttribute rootNamespaceAttribute,
-        ILoggerFactory loggerFactory)
+        ILoggerFactory loggerFactory
+    )
         : base(localizationOptions, loggerFactory)
     {
         _resourceLocationAttribute = resourceLocationAttribute;
@@ -45,7 +46,10 @@ public class TestResourceManagerStringLocalizerFactory : ResourceManagerStringLo
         return _rootNamespaceAttribute;
     }
 
-    protected override ResourceManagerStringLocalizer CreateResourceManagerStringLocalizer(Assembly assembly, string baseName)
+    protected override ResourceManagerStringLocalizer CreateResourceManagerStringLocalizer(
+        Assembly assembly,
+        string baseName
+    )
     {
         BaseName = baseName;
         Assembly = assembly;
@@ -64,18 +68,22 @@ public class ResourceManagerStringLocalizerFactoryTest
         var options = new Mock<IOptions<LocalizationOptions>>();
         options.Setup(o => o.Value).Returns(locOptions);
 
-        var resourceLocationAttribute = new ResourceLocationAttribute(Path.Combine("My", "Resources"));
+        var resourceLocationAttribute = new ResourceLocationAttribute(
+            Path.Combine("My", "Resources")
+        );
         var loggerFactory = NullLoggerFactory.Instance;
         var typeFactory = new TestResourceManagerStringLocalizerFactory(
             options.Object,
             resourceLocationAttribute,
             rootNamespaceAttribute: null,
-            loggerFactory: loggerFactory);
+            loggerFactory: loggerFactory
+        );
         var stringFactory = new TestResourceManagerStringLocalizerFactory(
             options.Object,
             resourceLocationAttribute,
             rootNamespaceAttribute: null,
-            loggerFactory: loggerFactory);
+            loggerFactory: loggerFactory
+        );
         var type = typeof(ResourceManagerStringLocalizerFactoryTest);
         var assemblyName = new AssemblyName(type.Assembly.FullName);
 
@@ -96,7 +104,10 @@ public class ResourceManagerStringLocalizerFactoryTest
         var options = new Mock<IOptions<LocalizationOptions>>();
         options.Setup(o => o.Value).Returns(locOptions);
         var loggerFactory = NullLoggerFactory.Instance;
-        var factory = new ResourceManagerStringLocalizerFactory(localizationOptions: options.Object, loggerFactory: loggerFactory);
+        var factory = new ResourceManagerStringLocalizerFactory(
+            localizationOptions: options.Object,
+            loggerFactory: loggerFactory
+        );
 
         // Act
         var result1 = factory.Create(typeof(ResourceManagerStringLocalizerFactoryTest));
@@ -114,7 +125,10 @@ public class ResourceManagerStringLocalizerFactoryTest
         var options = new Mock<IOptions<LocalizationOptions>>();
         options.Setup(o => o.Value).Returns(locOptions);
         var loggerFactory = NullLoggerFactory.Instance;
-        var factory = new ResourceManagerStringLocalizerFactory(localizationOptions: options.Object, loggerFactory: loggerFactory);
+        var factory = new ResourceManagerStringLocalizerFactory(
+            localizationOptions: options.Object,
+            loggerFactory: loggerFactory
+        );
 
         // Act
         var result1 = factory.Create(typeof(ResourceManagerStringLocalizerFactoryTest));
@@ -141,7 +155,8 @@ public class ResourceManagerStringLocalizerFactoryTest
             options.Object,
             resourceLocationAttribute: null,
             rootNamespaceAttribute: rootNamespaceAttribute,
-            loggerFactory: loggerFactory);
+            loggerFactory: loggerFactory
+        );
 
         var type = typeof(Model);
 
@@ -170,7 +185,8 @@ public class ResourceManagerStringLocalizerFactoryTest
             options.Object,
             resourceLocationAttribute,
             rootNamespaceAttribute,
-            loggerFactory);
+            loggerFactory
+        );
 
         var type = typeof(Model);
 
@@ -194,13 +210,18 @@ public class ResourceManagerStringLocalizerFactoryTest
             options.Object,
             resourceLocationAttribute: null,
             rootNamespaceAttribute: null,
-            loggerFactory: loggerFactory);
+            loggerFactory: loggerFactory
+        );
 
         // Act
         factory.Create(typeof(ResourceManagerStringLocalizerFactoryTest));
 
         // Assert
-        Assert.Equal("Microsoft.Extensions.Localization.Tests.My.Resources." + nameof(ResourceManagerStringLocalizerFactoryTest), factory.BaseName);
+        Assert.Equal(
+            "Microsoft.Extensions.Localization.Tests.My.Resources."
+                + nameof(ResourceManagerStringLocalizerFactoryTest),
+            factory.BaseName
+        );
     }
 
     [Fact]
@@ -211,7 +232,10 @@ public class ResourceManagerStringLocalizerFactoryTest
         var options = new Mock<IOptions<LocalizationOptions>>();
         options.Setup(o => o.Value).Returns(locOptions);
         var loggerFactory = NullLoggerFactory.Instance;
-        var factory = new ResourceManagerStringLocalizerFactory(localizationOptions: options.Object, loggerFactory: loggerFactory);
+        var factory = new ResourceManagerStringLocalizerFactory(
+            localizationOptions: options.Object,
+            loggerFactory: loggerFactory
+        );
         var location = typeof(ResourceManagerStringLocalizer).Assembly.FullName;
 
         // Act
@@ -230,7 +254,10 @@ public class ResourceManagerStringLocalizerFactoryTest
         var options = new Mock<IOptions<LocalizationOptions>>();
         options.Setup(o => o.Value).Returns(locOptions);
         var loggerFactory = NullLoggerFactory.Instance;
-        var factory = new ResourceManagerStringLocalizerFactory(localizationOptions: options.Object, loggerFactory: loggerFactory);
+        var factory = new ResourceManagerStringLocalizerFactory(
+            localizationOptions: options.Object,
+            loggerFactory: loggerFactory
+        );
         var location = typeof(ResourceManagerStringLocalizer).Assembly.FullName;
 
         // Act
@@ -249,9 +276,16 @@ public class ResourceManagerStringLocalizerFactoryTest
         var options = new Mock<IOptions<LocalizationOptions>>();
         options.Setup(o => o.Value).Returns(locOptions);
         var loggerFactory = NullLoggerFactory.Instance;
-        var factory = new ResourceManagerStringLocalizerFactory(localizationOptions: options.Object, loggerFactory: loggerFactory);
-        var location1 = new AssemblyName(typeof(ResourceManagerStringLocalizer).Assembly.FullName).Name;
-        var location2 = new AssemblyName(typeof(ResourceManagerStringLocalizerFactoryTest).Assembly.FullName).Name;
+        var factory = new ResourceManagerStringLocalizerFactory(
+            localizationOptions: options.Object,
+            loggerFactory: loggerFactory
+        );
+        var location1 = new AssemblyName(
+            typeof(ResourceManagerStringLocalizer).Assembly.FullName
+        ).Name;
+        var location2 = new AssemblyName(
+            typeof(ResourceManagerStringLocalizerFactoryTest).Assembly.FullName
+        ).Name;
 
         // Act
         var result1 = factory.Create("baseName", location1);
@@ -274,13 +308,20 @@ public class ResourceManagerStringLocalizerFactoryTest
             options.Object,
             resourceLocationAttribute: null,
             rootNamespaceAttribute: null,
-            loggerFactory: loggerFactory);
+            loggerFactory: loggerFactory
+        );
 
         // Act
-        var result1 = factory.Create("baseName", location: "Microsoft.Extensions.Localization.Tests");
+        var result1 = factory.Create(
+            "baseName",
+            location: "Microsoft.Extensions.Localization.Tests"
+        );
 
         // Assert
-        Assert.Equal("Microsoft.Extensions.Localization.Tests.My.Resources.baseName", factory.BaseName);
+        Assert.Equal(
+            "Microsoft.Extensions.Localization.Tests.My.Resources.baseName",
+            factory.BaseName
+        );
     }
 
     [Fact]
@@ -291,7 +332,10 @@ public class ResourceManagerStringLocalizerFactoryTest
         var options = new Mock<IOptions<LocalizationOptions>>();
         options.Setup(o => o.Value).Returns(locOptions);
         var loggerFactory = NullLoggerFactory.Instance;
-        var factory = new ResourceManagerStringLocalizerFactory(localizationOptions: options.Object, loggerFactory: loggerFactory);
+        var factory = new ResourceManagerStringLocalizerFactory(
+            localizationOptions: options.Object,
+            loggerFactory: loggerFactory
+        );
 
         // Act & Assert
         Assert.Throws<ArgumentNullException>(() => factory.Create("baseName", location: null!));

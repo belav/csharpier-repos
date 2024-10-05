@@ -6,12 +6,10 @@ using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-
 using Moq.Properties;
 
 namespace Moq.Expressions.Visitors
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal class ConstructorCallVisitor : ExpressionVisitor
@@ -100,7 +98,9 @@ namespace Moq.Expressions.Visitors
                         string.Format(
                             CultureInfo.CurrentCulture,
                             Resources.UnsupportedExpression,
-                            node.ToStringFixed()));
+                            node.ToStringFixed()
+                        )
+                    );
             }
         }
 
@@ -115,7 +115,9 @@ namespace Moq.Expressions.Visitors
                 var argumentExtractor = Expression.Lambda<Func<object[]>>(
                     Expression.NewArrayInit(
                         typeof(object),
-                        node.Arguments.Select(a => Expression.Convert(a, typeof(object)))));
+                        node.Arguments.Select(a => Expression.Convert(a, typeof(object)))
+                    )
+                );
                 arguments = ExpressionCompiler.Instance.Compile(argumentExtractor).Invoke();
             }
             return node;

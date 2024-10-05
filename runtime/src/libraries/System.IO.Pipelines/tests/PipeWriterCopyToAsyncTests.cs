@@ -18,7 +18,9 @@ namespace System.IO.Pipelines.Tests
         {
             var pipe = new Pipe();
             MemoryStream stream = null;
-            var ex = await Assert.ThrowsAsync<ArgumentNullException>(() => stream.CopyToAsync(pipe.Writer));
+            var ex = await Assert.ThrowsAsync<ArgumentNullException>(
+                () => stream.CopyToAsync(pipe.Writer)
+            );
             Assert.Equal("source", ex.ParamName);
         }
 
@@ -26,7 +28,9 @@ namespace System.IO.Pipelines.Tests
         public async Task CopyToAsyncThrowsArgumentNullExceptionForNullDestination()
         {
             var stream = new MemoryStream();
-            var ex = await Assert.ThrowsAsync<ArgumentNullException>(() => stream.CopyToAsync(null));
+            var ex = await Assert.ThrowsAsync<ArgumentNullException>(
+                () => stream.CopyToAsync(null)
+            );
             Assert.Equal("destination", ex.ParamName);
         }
 
@@ -34,7 +38,9 @@ namespace System.IO.Pipelines.Tests
         public async Task CopyToAsyncThrowsTaskCanceledExceptionForAlreadyCancelledToken()
         {
             var pipe = new Pipe();
-            await Assert.ThrowsAsync<TaskCanceledException>(() => new MemoryStream().CopyToAsync(pipe.Writer, new CancellationToken(true)));
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                () => new MemoryStream().CopyToAsync(pipe.Writer, new CancellationToken(true))
+            );
         }
 
         [Fact]
@@ -98,7 +104,12 @@ namespace System.IO.Pipelines.Tests
         {
             byte[] helloBytes = "Hello World"u8.ToArray();
 
-            var pipe = new Pipe(new PipeOptions(pauseWriterThreshold: helloBytes.Length - 1, resumeWriterThreshold: 0));
+            var pipe = new Pipe(
+                new PipeOptions(
+                    pauseWriterThreshold: helloBytes.Length - 1,
+                    resumeWriterThreshold: 0
+                )
+            );
             var stream = new MemoryStream(helloBytes);
             Task task = stream.CopyToAsync(pipe.Writer);
 
@@ -117,7 +128,12 @@ namespace System.IO.Pipelines.Tests
         {
             byte[] helloBytes = "Hello World"u8.ToArray();
 
-            var pipe = new Pipe(new PipeOptions(pauseWriterThreshold: helloBytes.Length - 1, resumeWriterThreshold: 0));
+            var pipe = new Pipe(
+                new PipeOptions(
+                    pauseWriterThreshold: helloBytes.Length - 1,
+                    resumeWriterThreshold: 0
+                )
+            );
             var stream = new MemoryStream(helloBytes);
             var cts = new CancellationTokenSource();
             Task task = stream.CopyToAsync(pipe.Writer, cts.Token);

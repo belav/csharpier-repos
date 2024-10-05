@@ -2,9 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
-using Internal.Text;
 using ILCompiler.Win32Resources;
+using Internal.Text;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {
@@ -19,7 +18,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             _size = -1;
         }
 
-        public override ObjectNodeSection GetSection(NodeFactory factory) => ObjectNodeSection.TextSection;
+        public override ObjectNodeSection GetSection(NodeFactory factory) =>
+            ObjectNodeSection.TextSection;
 
         public override bool IsShareable => false;
 

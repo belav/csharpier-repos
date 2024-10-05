@@ -10,9 +10,7 @@ namespace CodeGenTests
     public class IntOr
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static void SideEffect()
-        {
-        }
+        static void SideEffect() { }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool Test_UInt32_UInt32_CastByte_Or(uint x, uint y)
@@ -49,9 +47,9 @@ namespace CodeGenTests
         [Fact]
         public static int TestEntryPoint()
         {
-            uint leftMostBit  = 0b10000000000000000000000000000000;
+            uint leftMostBit = 0b10000000000000000000000000000000;
             uint rightMostBit = 0b00000000000000000000000000000001;
-            uint noBits       = 0b00000000000000000000000000000000;
+            uint noBits = 0b00000000000000000000000000000000;
 
             if (!Test_UInt32_UInt32_CastByte_Or(leftMostBit, leftMostBit))
                 return 0;

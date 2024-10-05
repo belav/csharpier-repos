@@ -45,7 +45,8 @@ namespace System.Collections.Specialized.Tests
             Assert.Throws<InvalidOperationException>(() => enumerator.Current);
 
             // Enumerator has finished
-            while (enumerator.MoveNext()) ;
+            while (enumerator.MoveNext())
+                ;
             Assert.Throws<InvalidOperationException>(() => enumerator.Current);
             Assert.False(enumerator.MoveNext());
 

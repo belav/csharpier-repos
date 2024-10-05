@@ -8,9 +8,9 @@ public struct S0
 {
     public object F0;
     public object F1;
-    public S0(object f1) : this()
-    {
-    }
+
+    public S0(object f1)
+        : this() { }
 }
 
 public class Program
@@ -18,6 +18,11 @@ public class Program
     [Fact]
     public static void TestEntryPoint()
     {
-        GC.KeepAlive(new S0[,] { { new S0(new object()) } });
+        GC.KeepAlive(
+            new S0[,]
+            {
+                { new S0(new object()) },
+            }
+        );
     }
 }

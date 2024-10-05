@@ -32,30 +32,50 @@ namespace Microsoft.CodeAnalysis.BraceMatching
     [ContentType(ContentTypeNames.RoslynContentType)]
     [TagType(typeof(BraceHighlightTag))]
     [method: ImportingConstructor]
-    [method: SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
+    [method: SuppressMessage(
+        "RoslynDiagnosticsReliability",
+        "RS0033:Importing constructor should be [Obsolete]",
+        Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+    )]
     internal sealed class BraceHighlightingViewTaggerProvider(
         IThreadingContext threadingContext,
         IBraceMatchingService braceMatcherService,
         IGlobalOptionService globalOptions,
         [Import(AllowDefault = true)] ITextBufferVisibilityTracker visibilityTracker,
-        IAsynchronousOperationListenerProvider listenerProvider) : AsynchronousViewTaggerProvider<BraceHighlightTag>(threadingContext, globalOptions, visibilityTracker, listenerProvider.GetListener(FeatureAttribute.BraceHighlighting))
+        IAsynchronousOperationListenerProvider listenerProvider
+    )
+        : AsynchronousViewTaggerProvider<BraceHighlightTag>(
+            threadingContext,
+            globalOptions,
+            visibilityTracker,
+            listenerProvider.GetListener(FeatureAttribute.BraceHighlighting)
+        )
     {
         private readonly IBraceMatchingService _braceMatcherService = braceMatcherService;
 
-        protected sealed override ImmutableArray<IOption2> Options { get; } = ImmutableArray.Create<IOption2>(BraceMatchingOptionsStorage.BraceMatching);
+        protected sealed override ImmutableArray<IOption2> Options { get; } =
+            ImmutableArray.Create<IOption2>(BraceMatchingOptionsStorage.BraceMatching);
 
         protected override TaggerDelay EventChangeDelay => TaggerDelay.NearImmediate;
 
-        protected override ITaggerEventSource CreateEventSource(ITextView textView, ITextBuffer subjectBuffer)
+        protected override ITaggerEventSource CreateEventSource(
+            ITextView textView,
+            ITextBuffer subjectBuffer
+        )
         {
             return TaggerEventSources.Compose(
                 TaggerEventSources.OnTextChanged(subjectBuffer),
                 TaggerEventSources.OnCaretPositionChanged(textView, subjectBuffer),
-                TaggerEventSources.OnParseOptionChanged(subjectBuffer));
+                TaggerEventSources.OnParseOptionChanged(subjectBuffer)
+            );
         }
 
         protected override Task ProduceTagsAsync(
-            TaggerContext<BraceHighlightTag> context, DocumentSnapshotSpan documentSnapshotSpan, int? caretPosition, CancellationToken cancellationToken)
+            TaggerContext<BraceHighlightTag> context,
+            DocumentSnapshotSpan documentSnapshotSpan,
+            int? caretPosition,
+            CancellationToken cancellationToken
+        )
         {
             var document = documentSnapshotSpan.Document;
             if (!caretPosition.HasValue || document == null)
@@ -66,18 +86,42 @@ namespace Microsoft.CodeAnalysis.BraceMatching
             var options = GlobalOptions.GetBraceMatchingOptions(document.Project.Language);
 
             return ProduceTagsAsync(
-                context, document, documentSnapshotSpan.SnapshotSpan.Snapshot, caretPosition.Value, options, cancellationToken);
+                context,
+                document,
+                documentSnapshotSpan.SnapshotSpan.Snapshot,
+                caretPosition.Value,
+                options,
+                cancellationToken
+            );
         }
 
         internal async Task ProduceTagsAsync(
-            TaggerContext<BraceHighlightTag> context, Document document, ITextSnapshot snapshot, int position, BraceMatchingOptions options, CancellationToken cancellationToken)
+            TaggerContext<BraceHighlightTag> context,
+            Document document,
+            ITextSnapshot snapshot,
+            int position,
+            BraceMatchingOptions options,
+            CancellationToken cancellationToken
+        )
         {
-            using (Logger.LogBlock(FunctionId.Tagger_BraceHighlighting_TagProducer_ProduceTags, cancellationToken))
+            using (
+                Logger.LogBlock(
+                    FunctionId.Tagger_BraceHighlighting_TagProducer_ProduceTags,
+                    cancellationToken
+                )
+            )
             {
                 if (position >= 0 && position <= snapshot.Length)
                 {
-                    var (bracesLeftOfPosition, bracesRightOfPosition) = await GetAllMatchingBracesAsync(
-                        _braceMatcherService, document, position, options, cancellationToken).ConfigureAwait(false);
+                    var (bracesLeftOfPosition, bracesRightOfPosition) =
+                        await GetAllMatchingBracesAsync(
+                                _braceMatcherService,
+                                document,
+                                position,
+                                options,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
 
                     AddBraces(context, snapshot, bracesLeftOfPosition);
                     AddBraces(context, snapshot, bracesRightOfPosition);
@@ -89,28 +133,34 @@ namespace Microsoft.CodeAnalysis.BraceMatching
         /// Given code like   ()^()  (where ^ is the caret position), returns the two pairs of
         /// matching braces on the left and the right of the position.  Note: a brace matching
         /// pair is only returned if the position is on the left-side of hte start brace, or the
-        /// right side of end brace.  So, for example, if you have (^()), then only the inner 
+        /// right side of end brace.  So, for example, if you have (^()), then only the inner
         /// braces are returned as the position is not on the right-side of the outer braces.
-        /// 
+        ///
         /// This function also works for multi-character braces i.e.  ([  ])   In this case,
-        /// the rule is that the position has to be on the left side of the start brace, or 
+        /// the rule is that the position has to be on the left side of the start brace, or
         /// inside the start brace (but not at the end).  So,    ^([   ])  will return this
         /// as a brace match, as will  (^[    ]).  But   ([^   ])  will not.
-        /// 
+        ///
         /// The same goes for the braces on the the left of the caret.  i.e.:   ([   ])^
         /// will return the braces on the left, as will   ([   ]^).  But   ([   ^]) will not.
         /// </summary>
-        private static async Task<(BraceMatchingResult? leftOfPosition, BraceMatchingResult? rightOfPosition)> GetAllMatchingBracesAsync(
+        private static async Task<(
+            BraceMatchingResult? leftOfPosition,
+            BraceMatchingResult? rightOfPosition
+        )> GetAllMatchingBracesAsync(
             IBraceMatchingService service,
             Document document,
             int position,
             BraceMatchingOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // These are the matching spans when checking the token to the right of the position.
-            var rightOfPosition = await service.GetMatchingBracesAsync(document, position, options, cancellationToken).ConfigureAwait(false);
+            var rightOfPosition = await service
+                .GetMatchingBracesAsync(document, position, options, cancellationToken)
+                .ConfigureAwait(false);
 
-            // The braces to the right of the position should only be added if the position is 
+            // The braces to the right of the position should only be added if the position is
             // actually within the span of the start brace.  Note that this is what we want for
             // single character braces as well as multi char braces.  i.e. if the user has:
             //
@@ -120,10 +170,9 @@ namespace Microsoft.CodeAnalysis.BraceMatching
             //      ^<@ @>  // then <@ and @> are matching braces.
             //      <^@ @>  // then <@ and @> are matching braces.
             //      <@^ @>  // then <@ and @> are not matching braces.
-            if (rightOfPosition.HasValue &&
-                !rightOfPosition.Value.LeftSpan.Contains(position))
+            if (rightOfPosition.HasValue && !rightOfPosition.Value.LeftSpan.Contains(position))
             {
-                // Not a valid match.  
+                // Not a valid match.
                 rightOfPosition = null;
             }
 
@@ -144,11 +193,15 @@ namespace Microsoft.CodeAnalysis.BraceMatching
             //      { ^}
             //      <@ ^@>
 
-            var leftOfPosition = await service.GetMatchingBracesAsync(document, position - 1, options, cancellationToken).ConfigureAwait(false);
+            var leftOfPosition = await service
+                .GetMatchingBracesAsync(document, position - 1, options, cancellationToken)
+                .ConfigureAwait(false);
 
-            if (leftOfPosition.HasValue &&
-                position <= leftOfPosition.Value.RightSpan.End &&
-                position > leftOfPosition.Value.RightSpan.Start)
+            if (
+                leftOfPosition.HasValue
+                && position <= leftOfPosition.Value.RightSpan.End
+                && position > leftOfPosition.Value.RightSpan.Start
+            )
             {
                 // Found a valid pair on the left of us.
                 return (leftOfPosition, rightOfPosition);
@@ -161,17 +214,22 @@ namespace Microsoft.CodeAnalysis.BraceMatching
         private static void AddBraces(
             TaggerContext<BraceHighlightTag> context,
             ITextSnapshot snapshot,
-            BraceMatchingResult? braces)
+            BraceMatchingResult? braces
+        )
         {
             if (braces.HasValue)
             {
-                context.AddTag(snapshot.GetTagSpan(braces.Value.LeftSpan.ToSpan(), BraceHighlightTag.StartTag));
-                context.AddTag(snapshot.GetTagSpan(braces.Value.RightSpan.ToSpan(), BraceHighlightTag.EndTag));
+                context.AddTag(
+                    snapshot.GetTagSpan(braces.Value.LeftSpan.ToSpan(), BraceHighlightTag.StartTag)
+                );
+                context.AddTag(
+                    snapshot.GetTagSpan(braces.Value.RightSpan.ToSpan(), BraceHighlightTag.EndTag)
+                );
             }
         }
 
         // Safe to directly compare as BraceHighlightTag uses singleton instances.
-        protected override bool TagEquals(BraceHighlightTag tag1, BraceHighlightTag tag2)
-            => tag1 == tag2;
+        protected override bool TagEquals(BraceHighlightTag tag1, BraceHighlightTag tag2) =>
+            tag1 == tag2;
     }
 }

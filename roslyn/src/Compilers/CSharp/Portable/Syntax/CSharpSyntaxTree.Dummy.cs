@@ -56,9 +56,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 get { return CSharpParseOptions.Default; }
             }
 
-            [Obsolete("Obsolete due to performance problems, use CompilationOptions.SyntaxTreeOptionsProvider instead", error: false)]
-            public override ImmutableDictionary<string, ReportDiagnostic> DiagnosticOptions
-                => throw ExceptionUtilities.Unreachable();
+            [Obsolete(
+                "Obsolete due to performance problems, use CompilationOptions.SyntaxTreeOptionsProvider instead",
+                error: false
+            )]
+            public override ImmutableDictionary<string, ReportDiagnostic> DiagnosticOptions =>
+                throw ExceptionUtilities.Unreachable();
 
             public override string FilePath
             {
@@ -86,16 +89,25 @@ namespace Microsoft.CodeAnalysis.CSharp
                 get { return true; }
             }
 
-            public override FileLinePositionSpan GetLineSpan(TextSpan span, CancellationToken cancellationToken = default(CancellationToken))
+            public override FileLinePositionSpan GetLineSpan(
+                TextSpan span,
+                CancellationToken cancellationToken = default(CancellationToken)
+            )
             {
                 return default(FileLinePositionSpan);
             }
 
-            public override SyntaxTree WithRootAndOptions(SyntaxNode root, ParseOptions options)
-                => Create((CSharpSyntaxNode)root, (CSharpParseOptions)options, FilePath, Encoding, ChecksumAlgorithm);
+            public override SyntaxTree WithRootAndOptions(SyntaxNode root, ParseOptions options) =>
+                Create(
+                    (CSharpSyntaxNode)root,
+                    (CSharpParseOptions)options,
+                    FilePath,
+                    Encoding,
+                    ChecksumAlgorithm
+                );
 
-            public override SyntaxTree WithFilePath(string path)
-                => Create(_node, Options, path, Encoding, ChecksumAlgorithm);
+            public override SyntaxTree WithFilePath(string path) =>
+                Create(_node, Options, path, Encoding, ChecksumAlgorithm);
         }
     }
 }

@@ -27,10 +27,18 @@ public class ApiExplorerRouteAndPathParametersInformationController
     public void GetMultipleParametersInSegment(string month, string day, string year) { }
 
     [HttpGet("MultipleParametersInMultipleSegments/{month:range(1,12)}/{day:int?}/{year:int?}")]
-    public void GetMultipleParametersInMultipleSegments(string month, string day, string year = "") { }
+    public void GetMultipleParametersInMultipleSegments(
+        string month,
+        string day,
+        string year = ""
+    ) { }
 
     [HttpGet("MultipleTypesOfParameters/{path}/{pathAndQuery}/{pathAndFromBody}")]
-    public void MultipleTypesOfParameters(string query, string pathAndQuery, [FromBody] string pathAndFromBody) { }
+    public void MultipleTypesOfParameters(
+        string query,
+        string pathAndQuery,
+        [FromBody] string pathAndFromBody
+    ) { }
 
     [HttpGet("CatchAllAndConstraint/{*integer:int}")]
     public void GetIntegers(string integer) { }

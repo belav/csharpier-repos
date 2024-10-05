@@ -5,10 +5,10 @@
 namespace System.ServiceModel.Administration
 {
     using System;
-    using System.ServiceModel.Description;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Runtime.Serialization;
+    using System.ServiceModel.Description;
 
     internal sealed class EndpointInfoCollection : Collection<EndpointInfo>
     {

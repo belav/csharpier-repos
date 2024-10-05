@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,42 +26,39 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Net;
+using NUnit.Framework;
 
-namespace MonoTests.System.Net {
+namespace MonoTests.System.Net
+{
+    [TestFixture]
+    public class EndPointTest
+    {
+        class ConcreteEndPoint : EndPoint { }
 
-	[TestFixture]
-	public class EndPointTest {
+        [Test]
+        [ExpectedException(typeof(NotImplementedException))]
+        public void AddressFamily()
+        {
+            ConcreteEndPoint ep = new ConcreteEndPoint();
+            Assert.IsNotNull(ep.AddressFamily);
+        }
 
-		class ConcreteEndPoint : EndPoint {
-		}
+        [Test]
+        [ExpectedException(typeof(NotImplementedException))]
+        public void Create()
+        {
+            ConcreteEndPoint ep = new ConcreteEndPoint();
+            Assert.IsNotNull(ep.Create(null));
+        }
 
-		[Test]
-		[ExpectedException (typeof (NotImplementedException))]
-		public void AddressFamily ()
-		{
-			ConcreteEndPoint ep = new ConcreteEndPoint ();
-			Assert.IsNotNull (ep.AddressFamily);
-		}
-
-		[Test]
-		[ExpectedException (typeof (NotImplementedException))]
-		public void Create ()
-		{
-			ConcreteEndPoint ep = new ConcreteEndPoint ();
-			Assert.IsNotNull (ep.Create (null));
-		}
-
-		[Test]
-		[ExpectedException (typeof (NotImplementedException))]
-		public void Serialize ()
-		{
-			ConcreteEndPoint ep = new ConcreteEndPoint ();
-			Assert.IsNotNull (ep.Serialize ());
-		}
-	}
+        [Test]
+        [ExpectedException(typeof(NotImplementedException))]
+        public void Serialize()
+        {
+            ConcreteEndPoint ep = new ConcreteEndPoint();
+            Assert.IsNotNull(ep.Serialize());
+        }
+    }
 }
-

@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 
 using System.Collections.Generic;
@@ -11,7 +11,14 @@ namespace System.Runtime.CompilerServices
     /// <summary>
     /// Indicates that the use of <see cref="System.Object"/> on a member is meant to be treated as a dynamically dispatched type.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.ReturnValue | AttributeTargets.Class | AttributeTargets.Struct)]
+    [AttributeUsage(
+        AttributeTargets.Field
+            | AttributeTargets.Parameter
+            | AttributeTargets.Property
+            | AttributeTargets.ReturnValue
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+    )]
     public sealed class DynamicAttribute : Attribute
     {
         private readonly bool[] _transformFlags;
@@ -62,10 +69,7 @@ namespace System.Runtime.CompilerServices
         /// </summary>
         public IList<bool> TransformFlags
         {
-            get
-            {
-                return Array.AsReadOnly(this._transformFlags);
-            }
+            get { return Array.AsReadOnly(this._transformFlags); }
         }
     }
 }

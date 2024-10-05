@@ -39,7 +39,8 @@ public class SkipTakeCollapsingExpressionVisitor : ExpressionVisitor
     public virtual Expression Process(
         Expression queryExpression,
         IReadOnlyDictionary<string, object?> parametersValues,
-        out bool canCache)
+        out bool canCache
+    )
     {
         _parameterValues = parametersValues;
         _canCache = true;
@@ -61,18 +62,22 @@ public class SkipTakeCollapsingExpressionVisitor : ExpressionVisitor
     {
         if (extensionExpression is SelectExpression selectExpression)
         {
-            if (IsZero(selectExpression.Limit)
-                && IsZero(selectExpression.Offset))
+            if (IsZero(selectExpression.Limit) && IsZero(selectExpression.Offset))
             {
                 return selectExpression.Update(
                     selectExpression.Projection,
                     selectExpression.Tables,
-                    selectExpression.GroupBy.Count > 0 ? selectExpression.Predicate : _sqlExpressionFactory.Constant(false),
+                    selectExpression.GroupBy.Count > 0
+                        ? selectExpression.Predicate
+                        : _sqlExpressionFactory.Constant(false),
                     selectExpression.GroupBy,
-                    selectExpression.GroupBy.Count > 0 ? _sqlExpressionFactory.Constant(false) : null,
+                    selectExpression.GroupBy.Count > 0
+                        ? _sqlExpressionFactory.Constant(false)
+                        : null,
                     new List<OrderingExpression>(0),
                     limit: null,
-                    offset: null);
+                    offset: null
+                );
             }
 
             bool IsZero(SqlExpression? sqlExpression)

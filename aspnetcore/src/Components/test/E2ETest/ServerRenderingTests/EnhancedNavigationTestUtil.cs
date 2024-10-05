@@ -11,7 +11,11 @@ namespace Microsoft.AspNetCore.Components.E2ETests.ServerRenderingTests;
 
 public static class EnhancedNavigationTestUtil
 {
-    public static void SuppressEnhancedNavigation<TServerFixture>(ServerTestBase<TServerFixture> fixture, bool shouldSuppress, bool skipNavigation = false)
+    public static void SuppressEnhancedNavigation<TServerFixture>(
+        ServerTestBase<TServerFixture> fixture,
+        bool shouldSuppress,
+        bool skipNavigation = false
+    )
         where TServerFixture : ServerFixture
     {
         if (shouldSuppress)
@@ -26,10 +30,15 @@ public static class EnhancedNavigationTestUtil
                 browser.Equal("Hello", () => browser.Exists(By.TagName("h1")).Text);
             }
 
-            ((IJavaScriptExecutor)browser).ExecuteScript("sessionStorage.setItem('suppress-enhanced-navigation', 'true')");
+            ((IJavaScriptExecutor)browser).ExecuteScript(
+                "sessionStorage.setItem('suppress-enhanced-navigation', 'true')"
+            );
         }
     }
 
-    public static long GetScrollY(this IWebDriver browser)
-        => Convert.ToInt64(((IJavaScriptExecutor)browser).ExecuteScript("return window.scrollY"), CultureInfo.CurrentCulture);
+    public static long GetScrollY(this IWebDriver browser) =>
+        Convert.ToInt64(
+            ((IJavaScriptExecutor)browser).ExecuteScript("return window.scrollY"),
+            CultureInfo.CurrentCulture
+        );
 }

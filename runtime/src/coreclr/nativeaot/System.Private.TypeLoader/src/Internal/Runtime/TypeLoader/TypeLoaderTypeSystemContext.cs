@@ -3,7 +3,6 @@
 
 using System;
 using System.Diagnostics;
-
 using Internal.TypeSystem;
 
 namespace Internal.Runtime.TypeLoader
@@ -14,14 +13,17 @@ namespace Internal.Runtime.TypeLoader
     /// </summary>
     public partial class TypeLoaderTypeSystemContext : TypeSystemContext
     {
-        private static readonly NoMetadataRuntimeInterfacesAlgorithm s_noMetadataRuntimeInterfacesAlgorithm = new NoMetadataRuntimeInterfacesAlgorithm();
-        private static readonly NativeLayoutInterfacesAlgorithm s_nativeLayoutInterfacesAlgorithm = new NativeLayoutInterfacesAlgorithm();
+        private static readonly NoMetadataRuntimeInterfacesAlgorithm s_noMetadataRuntimeInterfacesAlgorithm =
+            new NoMetadataRuntimeInterfacesAlgorithm();
+        private static readonly NativeLayoutInterfacesAlgorithm s_nativeLayoutInterfacesAlgorithm =
+            new NativeLayoutInterfacesAlgorithm();
 
-        public TypeLoaderTypeSystemContext(TargetDetails targetDetails) : base(targetDetails)
-        {
-        }
+        public TypeLoaderTypeSystemContext(TargetDetails targetDetails)
+            : base(targetDetails) { }
 
-        protected override RuntimeInterfacesAlgorithm GetRuntimeInterfacesAlgorithmForDefType(DefType type)
+        protected override RuntimeInterfacesAlgorithm GetRuntimeInterfacesAlgorithmForDefType(
+            DefType type
+        )
         {
             if (type.RetrieveRuntimeTypeHandleIfPossible())
             {
@@ -41,14 +43,19 @@ namespace Internal.Runtime.TypeLoader
             throw new NotImplementedException();
         }
 
-        protected override RuntimeInterfacesAlgorithm GetRuntimeInterfacesAlgorithmForNonPointerArrayType(ArrayType type)
+        protected override RuntimeInterfacesAlgorithm GetRuntimeInterfacesAlgorithmForNonPointerArrayType(
+            ArrayType type
+        )
         {
             // At runtime, we're instantiating an Array<T> instantiation as the template, so we know we'll always have
             // a NativeLayoutInterfacesAlgorithm to work with
             return s_nativeLayoutInterfacesAlgorithm;
         }
 
-        public override DefType GetWellKnownType(WellKnownType wellKnownType, bool throwIfNotFound = true)
+        public override DefType GetWellKnownType(
+            WellKnownType wellKnownType,
+            bool throwIfNotFound = true
+        )
         {
             switch (wellKnownType)
             {
@@ -122,7 +129,9 @@ namespace Internal.Runtime.TypeLoader
                     return (DefType)ResolveRuntimeTypeHandle(typeof(RuntimeTypeHandle).TypeHandle);
 
                 case WellKnownType.RuntimeMethodHandle:
-                    return (DefType)ResolveRuntimeTypeHandle(typeof(RuntimeMethodHandle).TypeHandle);
+                    return (DefType)ResolveRuntimeTypeHandle(
+                        typeof(RuntimeMethodHandle).TypeHandle
+                    );
 
                 case WellKnownType.RuntimeFieldHandle:
                     return (DefType)ResolveRuntimeTypeHandle(typeof(RuntimeFieldHandle).TypeHandle);
@@ -138,12 +147,23 @@ namespace Internal.Runtime.TypeLoader
             }
         }
 
-        protected internal override Instantiation ConvertInstantiationToCanonForm(Instantiation instantiation, CanonicalFormKind kind, out bool changed)
+        protected internal override Instantiation ConvertInstantiationToCanonForm(
+            Instantiation instantiation,
+            CanonicalFormKind kind,
+            out bool changed
+        )
         {
-            return StandardCanonicalizationAlgorithm.ConvertInstantiationToCanonForm(instantiation, kind, out changed);
+            return StandardCanonicalizationAlgorithm.ConvertInstantiationToCanonForm(
+                instantiation,
+                kind,
+                out changed
+            );
         }
 
-        protected internal override TypeDesc ConvertToCanon(TypeDesc typeToConvert, CanonicalFormKind kind)
+        protected internal override TypeDesc ConvertToCanon(
+            TypeDesc typeToConvert,
+            CanonicalFormKind kind
+        )
         {
             return StandardCanonicalizationAlgorithm.ConvertToCanon(typeToConvert, kind);
         }

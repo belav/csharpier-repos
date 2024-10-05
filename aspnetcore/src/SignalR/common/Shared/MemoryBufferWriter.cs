@@ -135,7 +135,11 @@ internal sealed class MemoryBufferWriter : Stream, IBufferWriter<byte>
         destination.Write(_currentSegment.AsSpan(0, _position));
     }
 
-    public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
+    public override Task CopyToAsync(
+        Stream destination,
+        int bufferSize,
+        CancellationToken cancellationToken
+    )
     {
         if (_completedSegments == null && _currentSegment is not null)
         {
@@ -198,9 +202,13 @@ internal sealed class MemoryBufferWriter : Stream, IBufferWriter<byte>
             {
                 var segment = _completedSegments[i];
 #if NETCOREAPP
-                await destination.WriteAsync(segment.Buffer.AsMemory(0, segment.Length), cancellationToken).ConfigureAwait(false);
+                await destination
+                    .WriteAsync(segment.Buffer.AsMemory(0, segment.Length), cancellationToken)
+                    .ConfigureAwait(false);
 #else
-                await destination.WriteAsync(segment.Buffer, 0, segment.Length, cancellationToken).ConfigureAwait(false);
+                await destination
+                    .WriteAsync(segment.Buffer, 0, segment.Length, cancellationToken)
+                    .ConfigureAwait(false);
 #endif
             }
         }
@@ -208,9 +216,13 @@ internal sealed class MemoryBufferWriter : Stream, IBufferWriter<byte>
         if (_currentSegment is not null)
         {
 #if NETCOREAPP
-            await destination.WriteAsync(_currentSegment.AsMemory(0, _position), cancellationToken).ConfigureAwait(false);
+            await destination
+                .WriteAsync(_currentSegment.AsMemory(0, _position), cancellationToken)
+                .ConfigureAwait(false);
 #else
-            await destination.WriteAsync(_currentSegment, 0, _position, cancellationToken).ConfigureAwait(false);
+            await destination
+                .WriteAsync(_currentSegment, 0, _position, cancellationToken)
+                .ConfigureAwait(false);
 #endif
         }
     }
@@ -274,9 +286,14 @@ internal sealed class MemoryBufferWriter : Stream, IBufferWriter<byte>
     }
 
     public override void Flush() { }
+
     public override Task FlushAsync(CancellationToken cancellationToken) => Task.CompletedTask;
-    public override int Read(byte[] buffer, int offset, int count) => throw new NotSupportedException();
+
+    public override int Read(byte[] buffer, int offset, int count) =>
+        throw new NotSupportedException();
+
     public override long Seek(long offset, SeekOrigin origin) => throw new NotSupportedException();
+
     public override void SetLength(long value) => throw new NotSupportedException();
 
     public override void WriteByte(byte value)

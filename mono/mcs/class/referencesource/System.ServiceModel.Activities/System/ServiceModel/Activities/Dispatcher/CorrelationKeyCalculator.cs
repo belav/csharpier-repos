@@ -14,8 +14,8 @@ namespace System.ServiceModel.Activities.Dispatcher
     using System.ServiceModel.Channels;
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Dispatcher;
-    using System.Xml.Linq;
     using System.Text;
+    using System.Xml.Linq;
     using SR2 = System.ServiceModel.Activities.SR;
 
     class CorrelationKeyCalculator
@@ -33,15 +33,27 @@ namespace System.ServiceModel.Activities.Dispatcher
             this.keyCache = new CorrelationKeyCache();
         }
 
-        public void AddQuery(MessageFilter where, MessageQueryTable<string> select,
-            IDictionary<string, MessageQueryTable<string>> selectAdditional, bool isContextQuery)
+        public void AddQuery(
+            MessageFilter where,
+            MessageQueryTable<string> select,
+            IDictionary<string, MessageQueryTable<string>> selectAdditional,
+            bool isContextQuery
+        )
         {
-            SelectRuntime selectRuntime = new SelectRuntime { Select = select, SelectAdditional = selectAdditional, IsContextQuery = isContextQuery };
+            SelectRuntime selectRuntime = new SelectRuntime
+            {
+                Select = select,
+                SelectAdditional = selectAdditional,
+                IsContextQuery = isContextQuery,
+            };
             this.whereRuntime.Add(where, selectRuntime);
         }
 
-        public bool CalculateKeys(Message message, out InstanceKey instanceKey,
-            out ICollection<InstanceKey> additionalKeys)
+        public bool CalculateKeys(
+            Message message,
+            out InstanceKey instanceKey,
+            out ICollection<InstanceKey> additionalKeys
+        )
         {
             MessageCalculator calculator = this.messageCalculator;
 
@@ -53,8 +65,12 @@ namespace System.ServiceModel.Activities.Dispatcher
             return calculator.CalculateKeys(message, null, out instanceKey, out additionalKeys);
         }
 
-        public bool CalculateKeys(MessageBuffer buffer, Message messageToReadHeaders, out InstanceKey instanceKey,
-          out ICollection<InstanceKey> additionalKeys)
+        public bool CalculateKeys(
+            MessageBuffer buffer,
+            Message messageToReadHeaders,
+            out InstanceKey instanceKey,
+            out ICollection<InstanceKey> additionalKeys
+        )
         {
             MessageBufferCalculator calculator = this.bufferCalculator;
 
@@ -63,7 +79,12 @@ namespace System.ServiceModel.Activities.Dispatcher
                 calculator = this.bufferCalculator = new MessageBufferCalculator(this);
             }
 
-            return calculator.CalculateKeys(buffer, messageToReadHeaders, out instanceKey, out additionalKeys);
+            return calculator.CalculateKeys(
+                buffer,
+                messageToReadHeaders,
+                out instanceKey,
+                out additionalKeys
+            );
         }
 
         abstract class Calculator<T>
@@ -75,8 +96,12 @@ namespace System.ServiceModel.Activities.Dispatcher
                 this.parent = parent;
             }
 
-            public bool CalculateKeys(T target, Message messageToReadHeaders, out InstanceKey instanceKey,
-                out ICollection<InstanceKey> additionalKeys)
+            public bool CalculateKeys(
+                T target,
+                Message messageToReadHeaders,
+                out InstanceKey instanceKey,
+                out ICollection<InstanceKey> additionalKeys
+            )
             {
                 SelectRuntime select;
 
@@ -85,7 +110,14 @@ namespace System.ServiceModel.Activities.Dispatcher
 
                 // this is a query on the serverside, either Receive or SendReply
                 // Where
-                if (!this.ExecuteWhere(target, messageToReadHeaders, this.parent.whereRuntime, out select))
+                if (
+                    !this.ExecuteWhere(
+                        target,
+                        messageToReadHeaders,
+                        this.parent.whereRuntime,
+                        out select
+                    )
+                )
                 {
                     return false;
                 }
@@ -97,7 +129,14 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     bool allOptional = true;
 
-                    foreach (KeyValuePair<MessageQuery, string> result in this.ExecuteSelect(target, messageToReadHeaders, select.Select, select.IsContextQuery))
+                    foreach (
+                        KeyValuePair<MessageQuery, string> result in this.ExecuteSelect(
+                            target,
+                            messageToReadHeaders,
+                            select.Select,
+                            select.IsContextQuery
+                        )
+                    )
                     {
                         if (!(result.Key is OptionalMessageQuery))
                         {
@@ -114,7 +153,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                     {
                         if (!allOptional)
                         {
-                            throw FxTrace.Exception.AsError(new ProtocolException(SR2.EmptyCorrelationQueryResults));
+                            throw FxTrace.Exception.AsError(
+                                new ProtocolException(SR2.EmptyCorrelationQueryResults)
+                            );
                         }
                     }
                     else
@@ -127,8 +168,10 @@ namespace System.ServiceModel.Activities.Dispatcher
                     }
                 }
 
-                // SelectAdditional                
-                foreach (KeyValuePair<string, MessageQueryTable<string>> item in select.SelectAdditional)
+                // SelectAdditional
+                foreach (
+                    KeyValuePair<string, MessageQueryTable<string>> item in select.SelectAdditional
+                )
                 {
                     if (additionalKeys == null)
                     {
@@ -140,7 +183,14 @@ namespace System.ServiceModel.Activities.Dispatcher
                     InstanceKey additionalKey = InstanceKey.InvalidKey;
                     bool allOptional = true;
 
-                    foreach (KeyValuePair<MessageQuery, string> result in this.ExecuteSelect(target, messageToReadHeaders, item.Value, select.IsContextQuery))
+                    foreach (
+                        KeyValuePair<MessageQuery, string> result in this.ExecuteSelect(
+                            target,
+                            messageToReadHeaders,
+                            item.Value,
+                            select.IsContextQuery
+                        )
+                    )
                     {
                         if (!(result.Key is OptionalMessageQuery))
                         {
@@ -157,12 +207,21 @@ namespace System.ServiceModel.Activities.Dispatcher
                     {
                         if (!allOptional)
                         {
-                            throw FxTrace.Exception.AsError(new ProtocolException(SR2.EmptyCorrelationQueryResults));
+                            throw FxTrace.Exception.AsError(
+                                new ProtocolException(SR2.EmptyCorrelationQueryResults)
+                            );
                         }
                     }
                     else
                     {
-                        additionalKey = new CorrelationKey(values, this.parent.scopeName.ToString(), null) { Name = item.Key };
+                        additionalKey = new CorrelationKey(
+                            values,
+                            this.parent.scopeName.ToString(),
+                            null
+                        )
+                        {
+                            Name = item.Key,
+                        };
                         if (TD.TraceCorrelationKeysIsEnabled())
                         {
                             TraceCorrelationKeys(additionalKey, values);
@@ -177,7 +236,7 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             CorrelationKey GetInstanceKey(Dictionary<string, string> values)
             {
-                // We only optimize for upto 3 keys                
+                // We only optimize for upto 3 keys
                 if (values.Count <= 3)
                 {
                     CorrelationKey correlationKey;
@@ -187,7 +246,11 @@ namespace System.ServiceModel.Activities.Dispatcher
                         return correlationKey;
                     }
 
-                    correlationKey = new CorrelationKey(values, this.parent.scopeName.ToString(), null);
+                    correlationKey = new CorrelationKey(
+                        values,
+                        this.parent.scopeName.ToString(),
+                        null
+                    );
                     this.parent.keyCache.Add(cacheKey, correlationKey);
                     return correlationKey;
                 }
@@ -195,11 +258,19 @@ namespace System.ServiceModel.Activities.Dispatcher
                 return new CorrelationKey(values, this.parent.scopeName.ToString(), null);
             }
 
-            protected abstract IEnumerable<KeyValuePair<MessageQuery, string>> ExecuteSelect(T target, Message messageToReadHeaders,
-                MessageQueryTable<string> select, bool IsContextQuery);
+            protected abstract IEnumerable<KeyValuePair<MessageQuery, string>> ExecuteSelect(
+                T target,
+                Message messageToReadHeaders,
+                MessageQueryTable<string> select,
+                bool IsContextQuery
+            );
 
-            protected abstract bool ExecuteWhere(T target, Message messageToReadHeaders, MessageFilterTable<SelectRuntime> whereRuntime,
-                out SelectRuntime select);
+            protected abstract bool ExecuteWhere(
+                T target,
+                Message messageToReadHeaders,
+                MessageFilterTable<SelectRuntime> whereRuntime,
+                out SelectRuntime select
+            );
 
             void TraceCorrelationKeys(InstanceKey instanceKey, Dictionary<string, string> values)
             {
@@ -208,22 +279,25 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     keyValueAsString.Append(pair.Key).Append(":").Append(pair.Value).Append(',');
                 }
-                TD.TraceCorrelationKeys(instanceKey.Value, keyValueAsString.ToString(), this.parent.scopeName.ToString());
+                TD.TraceCorrelationKeys(
+                    instanceKey.Value,
+                    keyValueAsString.ToString(),
+                    this.parent.scopeName.ToString()
+                );
             }
-
         }
 
         class MessageBufferCalculator : Calculator<MessageBuffer>
         {
-
             public MessageBufferCalculator(CorrelationKeyCalculator parent)
-                : base(parent)
-            {
+                : base(parent) { }
 
-            }
-
-            protected override IEnumerable<KeyValuePair<MessageQuery, string>> ExecuteSelect(MessageBuffer target, Message messageToReadHeaders,
-                MessageQueryTable<string> select, bool isContextQuery)
+            protected override IEnumerable<KeyValuePair<MessageQuery, string>> ExecuteSelect(
+                MessageBuffer target,
+                Message messageToReadHeaders,
+                MessageQueryTable<string> select,
+                bool isContextQuery
+            )
             {
                 if (isContextQuery && messageToReadHeaders != null)
                 {
@@ -236,32 +310,48 @@ namespace System.ServiceModel.Activities.Dispatcher
                 }
             }
 
-            protected override bool ExecuteWhere(MessageBuffer target, Message messageToReadHeaders, MessageFilterTable<SelectRuntime> whereRuntime,
-                out SelectRuntime select)
+            protected override bool ExecuteWhere(
+                MessageBuffer target,
+                Message messageToReadHeaders,
+                MessageFilterTable<SelectRuntime> whereRuntime,
+                out SelectRuntime select
+            )
             {
                 return whereRuntime.GetMatchingValue(target, messageToReadHeaders, out select);
             }
         }
 
-        [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode,
-            Justification = "Will use this once correlation with streaming is fixed")]
+        [SuppressMessage(
+            FxCop.Category.Performance,
+            FxCop.Rule.AvoidUncalledPrivateCode,
+            Justification = "Will use this once correlation with streaming is fixed"
+        )]
         class MessageCalculator : Calculator<Message>
         {
-            [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode,
-                Justification = "Will use this once correlation with streaming is fixed")]
+            [SuppressMessage(
+                FxCop.Category.Performance,
+                FxCop.Rule.AvoidUncalledPrivateCode,
+                Justification = "Will use this once correlation with streaming is fixed"
+            )]
             public MessageCalculator(CorrelationKeyCalculator parent)
-                : base(parent)
-            {
-            }
+                : base(parent) { }
 
-            protected override IEnumerable<KeyValuePair<MessageQuery, string>> ExecuteSelect(Message target, Message messageToReadHeaders,
-                MessageQueryTable<string> select, bool isContextQuery)
+            protected override IEnumerable<KeyValuePair<MessageQuery, string>> ExecuteSelect(
+                Message target,
+                Message messageToReadHeaders,
+                MessageQueryTable<string> select,
+                bool isContextQuery
+            )
             {
                 return select.Evaluate<string>(target);
             }
 
-            protected override bool ExecuteWhere(Message target, Message messageToReadHeaders, MessageFilterTable<SelectRuntime> whereRuntime,
-                out SelectRuntime select)
+            protected override bool ExecuteWhere(
+                Message target,
+                Message messageToReadHeaders,
+                MessageFilterTable<SelectRuntime> whereRuntime,
+                out SelectRuntime select
+            )
             {
                 // messageToReadHeaders is not used in case of MessageCalculator
                 return whereRuntime.GetMatchingValue(target, out select);
@@ -275,8 +365,8 @@ namespace System.ServiceModel.Activities.Dispatcher
             internal bool IsContextQuery { get; set; }
         }
 
-        // Needs to seperate from the generic calculator as all jitted types 
-        // should share the same cache. 
+        // Needs to seperate from the generic calculator as all jitted types
+        // should share the same cache.
         class CorrelationKeyCache
         {
             HopperCache cache;
@@ -306,7 +396,7 @@ namespace System.ServiceModel.Activities.Dispatcher
 
         abstract class CorrelationCacheKey
         {
-            static internal CorrelationCacheKey CreateKey(Dictionary<string, string> keys)
+            internal static CorrelationCacheKey CreateKey(Dictionary<string, string> keys)
             {
                 if (keys.Count == 1)
                 {
@@ -331,12 +421,18 @@ namespace System.ServiceModel.Activities.Dispatcher
 
                 public SingleCacheKey(Dictionary<string, string> keys)
                 {
-                    Fx.Assert(keys.Count == 1, "Cannot intialize CorrelationCacheSingleKey with multiple key values.");
+                    Fx.Assert(
+                        keys.Count == 1,
+                        "Cannot intialize CorrelationCacheSingleKey with multiple key values."
+                    );
                     foreach (KeyValuePair<string, string> keyValue in keys)
                     {
                         this.key = keyValue.Key;
                         this.value = keyValue.Value;
-                        this.hashCode = CombineHashCodes(this.key.GetHashCode(), this.value.GetHashCode());
+                        this.hashCode = CombineHashCodes(
+                            this.key.GetHashCode(),
+                            this.value.GetHashCode()
+                        );
                         return;
                     }
                 }
@@ -344,9 +440,11 @@ namespace System.ServiceModel.Activities.Dispatcher
                 public override bool Equals(object obj)
                 {
                     SingleCacheKey target = obj as SingleCacheKey;
-                    return (target != null &&
-                        (this.hashCode == target.hashCode) &&
-                        ((this.key == target.key) && (this.value == target.value)));
+                    return (
+                        target != null
+                        && (this.hashCode == target.hashCode)
+                        && ((this.key == target.key) && (this.value == target.value))
+                    );
                 }
 
                 public override int GetHashCode()
@@ -376,14 +474,20 @@ namespace System.ServiceModel.Activities.Dispatcher
                     MultipleCacheKey target = obj as MultipleCacheKey;
                     if (target != null)
                     {
-                        if ((this.hashCode == target.hashCode) &&
-                            (this.keyValues.Count == target.keyValues.Count))
+                        if (
+                            (this.hashCode == target.hashCode)
+                            && (this.keyValues.Count == target.keyValues.Count)
+                        )
                         {
                             string sourceValue;
-                            foreach (KeyValuePair<string, string> targetKeyValue in target.keyValues)
+                            foreach (
+                                KeyValuePair<string, string> targetKeyValue in target.keyValues
+                            )
                             {
-                                if (!this.keyValues.TryGetValue(targetKeyValue.Key, out sourceValue) ||
-                                    sourceValue != targetKeyValue.Value)
+                                if (
+                                    !this.keyValues.TryGetValue(targetKeyValue.Key, out sourceValue)
+                                    || sourceValue != targetKeyValue.Value
+                                )
                                 {
                                     return false;
                                 }
@@ -403,6 +507,5 @@ namespace System.ServiceModel.Activities.Dispatcher
                 }
             }
         }
-
     }
 }

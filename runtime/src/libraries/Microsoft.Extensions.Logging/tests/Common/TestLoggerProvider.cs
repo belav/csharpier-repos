@@ -13,10 +13,8 @@ namespace Microsoft.Extensions.Logging.Test
     {
         private readonly Func<LogLevel, bool> _filter;
 
-        public TestLoggerProvider(TestSink testSink, bool isEnabled) :
-            this(testSink, _ => isEnabled)
-        {
-        }
+        public TestLoggerProvider(TestSink testSink, bool isEnabled)
+            : this(testSink, _ => isEnabled) { }
 
         public TestLoggerProvider(TestSink testSink, Func<LogLevel, bool> filter)
         {
@@ -41,8 +39,7 @@ namespace Microsoft.Extensions.Logging.Test
 
     public class TestLoggerProvider2 : TestLoggerProvider
     {
-        public TestLoggerProvider2(TestSink testSink) : base(testSink, true)
-        {
-        }
+        public TestLoggerProvider2(TestSink testSink)
+            : base(testSink, true) { }
     }
 }

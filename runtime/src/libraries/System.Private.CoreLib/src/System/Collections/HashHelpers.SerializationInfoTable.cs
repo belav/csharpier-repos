@@ -19,7 +19,11 @@ namespace System.Collections
             get
             {
                 if (s_serializationInfoTable == null)
-                    Interlocked.CompareExchange(ref s_serializationInfoTable, new ConditionalWeakTable<object, SerializationInfo>(), null);
+                    Interlocked.CompareExchange(
+                        ref s_serializationInfoTable,
+                        new ConditionalWeakTable<object, SerializationInfo>(),
+                        null
+                    );
 
                 return s_serializationInfoTable;
             }

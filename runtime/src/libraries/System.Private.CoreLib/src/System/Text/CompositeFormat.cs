@@ -17,11 +17,19 @@ namespace System.Text
         /// Every segment represents either a literal or a format hole, based on whether Literal
         /// is non-null or ArgIndex is non-negative.
         /// </remarks>
-        internal readonly (string? Literal, int ArgIndex, int Alignment, string? Format)[] _segments;
+        internal readonly (
+            string? Literal,
+            int ArgIndex,
+            int Alignment,
+            string? Format
+        )[] _segments;
+
         /// <summary>The sum of the lengths of all of the literals in <see cref="_segments"/>.</summary>
         internal readonly int _literalLength;
+
         /// <summary>The number of segments in <see cref="_segments"/> that represent format holes.</summary>
         internal readonly int _formattedCount;
+
         /// <summary>The number of args required to satisfy the format holes.</summary>
         /// <remarks>This is equal to one more than the largest index required by any format hole.</remarks>
         internal readonly int _argsRequired;
@@ -29,7 +37,10 @@ namespace System.Text
         /// <summary>Initializes the instance.</summary>
         /// <param name="format">The composite format string that was parsed.</param>
         /// <param name="segments">The parsed segments.</param>
-        private CompositeFormat(string format, (string? Literal, int ArgIndex, int Alignment, string? Format)[] segments)
+        private CompositeFormat(
+            string format,
+            (string? Literal, int ArgIndex, int Alignment, string? Format)[] segments
+        )
         {
             // Store the format.
             Debug.Assert(format is not null);
@@ -40,10 +51,17 @@ namespace System.Text
             _segments = segments;
 
             // Compute derivative information from the segments.
-            int literalLength = 0, formattedCount = 0, argsRequired = 0;
-            foreach ((string? Literal, int ArgIndex, int Alignment, string? Format) segment in segments)
+            int literalLength = 0,
+                formattedCount = 0,
+                argsRequired = 0;
+            foreach (
+                (string? Literal, int ArgIndex, int Alignment, string? Format) segment in segments
+            )
             {
-                Debug.Assert((segment.Literal is not null) ^ (segment.ArgIndex >= 0), "The segment should represent a literal or a format hole, but not both.");
+                Debug.Assert(
+                    (segment.Literal is not null) ^ (segment.ArgIndex >= 0),
+                    "The segment should represent a literal or a format hole, but not both."
+                );
 
                 if (segment.Literal is string literal)
                 {
@@ -70,11 +88,14 @@ namespace System.Text
         /// <returns>The parsed <see cref="CompositeFormat"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="format"/> is null.</exception>
         /// <exception cref="FormatException">A format item in <paramref name="format"/> is invalid.</exception>
-        public static CompositeFormat Parse([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format)
+        public static CompositeFormat Parse(
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format
+        )
         {
             ArgumentNullException.ThrowIfNull(format);
 
-            var segments = new List<(string? Literal, int ArgIndex, int Alignment, string? Format)>();
+            var segments =
+                new List<(string? Literal, int ArgIndex, int Alignment, string? Format)>();
             int failureOffset = default;
             ExceptionResource failureReason = default;
             if (!TryParseLiterals(format, segments, ref failureOffset, ref failureReason))
@@ -109,7 +130,12 @@ namespace System.Text
         /// <param name="failureOffset">The offset at which a parsing error occured if <see langword="false"/> is returned.</param>
         /// <param name="failureReason">The reason for a parsing failure if <see langword="false"/> is returned.</param>
         /// <returns>true if the format string can be parsed successfully; otherwise, false.</returns>
-        private static bool TryParseLiterals(ReadOnlySpan<char> format, List<(string? Literal, int ArgIndex, int Alignment, string? Format)> segments, ref int failureOffset, ref ExceptionResource failureReason)
+        private static bool TryParseLiterals(
+            ReadOnlySpan<char> format,
+            List<(string? Literal, int ArgIndex, int Alignment, string? Format)> segments,
+            ref int failureOffset,
+            ref ExceptionResource failureReason
+        )
         {
             // This parsing logic is copied from string.Format.  It's the same code modified to not format
             // as part of parsing and instead store the parsed literals and argument specifiers (alignment
@@ -231,8 +257,7 @@ namespace System.Text
                             {
                                 goto FailureUnclosedFormatItem;
                             }
-                        }
-                        while (ch == ' ');
+                        } while (ch == ' ');
 
                         // Consume an optional minus sign indicating left alignment.
                         int leftJustify = 1;

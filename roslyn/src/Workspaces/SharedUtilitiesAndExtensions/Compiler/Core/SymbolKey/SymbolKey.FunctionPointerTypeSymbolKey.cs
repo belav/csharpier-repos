@@ -11,11 +11,15 @@ namespace Microsoft.CodeAnalysis
 {
     internal partial struct SymbolKey
     {
-        private sealed class FunctionPointerTypeSymbolKey : AbstractSymbolKey<IFunctionPointerTypeSymbol>
+        private sealed class FunctionPointerTypeSymbolKey
+            : AbstractSymbolKey<IFunctionPointerTypeSymbol>
         {
             public static readonly FunctionPointerTypeSymbolKey Instance = new();
 
-            public sealed override void Create(IFunctionPointerTypeSymbol symbol, SymbolKeyWriter visitor)
+            public sealed override void Create(
+                IFunctionPointerTypeSymbol symbol,
+                SymbolKeyWriter visitor
+            )
             {
                 var callingConvention = symbol.Signature.CallingConvention;
                 visitor.WriteInteger((int)callingConvention);
@@ -32,20 +36,29 @@ namespace Microsoft.CodeAnalysis
             }
 
             protected sealed override SymbolKeyResolution Resolve(
-                SymbolKeyReader reader, IFunctionPointerTypeSymbol? contextualSymbol, out string? failureReason)
+                SymbolKeyReader reader,
+                IFunctionPointerTypeSymbol? contextualSymbol,
+                out string? failureReason
+            )
             {
                 var callingConvention = (SignatureCallingConvention)reader.ReadInteger();
 
                 var callingConventionModifiers = ImmutableArray<INamedTypeSymbol>.Empty;
                 if (callingConvention == SignatureCallingConvention.Unmanaged)
                 {
-                    using var modifiersBuilder = reader.ReadSymbolKeyArray<IFunctionPointerTypeSymbol, INamedTypeSymbol>(
+                    using var modifiersBuilder = reader.ReadSymbolKeyArray<
+                        IFunctionPointerTypeSymbol,
+                        INamedTypeSymbol
+                    >(
                         contextualSymbol,
-                        static (contextualSymbol, i) => SafeGet(contextualSymbol.Signature.UnmanagedCallingConventionTypes, i),
-                        out var conventionTypesFailureReason);
+                        static (contextualSymbol, i) =>
+                            SafeGet(contextualSymbol.Signature.UnmanagedCallingConventionTypes, i),
+                        out var conventionTypesFailureReason
+                    );
                     if (conventionTypesFailureReason != null)
                     {
-                        failureReason = $"({nameof(FunctionPointerTypeSymbolKey)} {nameof(callingConventionModifiers)} failed -> {conventionTypesFailureReason})";
+                        failureReason =
+                            $"({nameof(FunctionPointerTypeSymbolKey)} {nameof(callingConventionModifiers)} failed -> {conventionTypesFailureReason})";
                         return default;
                     }
 
@@ -53,23 +66,33 @@ namespace Microsoft.CodeAnalysis
                 }
 
                 var returnRefKind = reader.ReadRefKind();
-                var returnType = reader.ReadSymbolKey(contextualSymbol?.Signature.ReturnType, out var returnTypeFailureReason);
+                var returnType = reader.ReadSymbolKey(
+                    contextualSymbol?.Signature.ReturnType,
+                    out var returnTypeFailureReason
+                );
                 using var paramRefKinds = reader.ReadRefKindArray();
-                using var parameterTypes = reader.ReadSymbolKeyArray<IFunctionPointerTypeSymbol, ITypeSymbol>(
+                using var parameterTypes = reader.ReadSymbolKeyArray<
+                    IFunctionPointerTypeSymbol,
+                    ITypeSymbol
+                >(
                     contextualSymbol,
-                    static (contextualSymbol, i) => SafeGet(contextualSymbol.Signature.Parameters, i)?.Type,
-                    out var parameterTypesFailureReason);
+                    static (contextualSymbol, i) =>
+                        SafeGet(contextualSymbol.Signature.Parameters, i)?.Type,
+                    out var parameterTypesFailureReason
+                );
 
                 if (returnTypeFailureReason != null)
                 {
-                    failureReason = $"({nameof(FunctionPointerTypeSymbolKey)} {nameof(returnType)} failed -> {returnTypeFailureReason})";
+                    failureReason =
+                        $"({nameof(FunctionPointerTypeSymbolKey)} {nameof(returnType)} failed -> {returnTypeFailureReason})";
                     return default;
                 }
 
                 if (parameterTypesFailureReason != null)
                 {
                     Contract.ThrowIfFalse(parameterTypes.IsDefault);
-                    failureReason = $"({nameof(FunctionPointerTypeSymbolKey)} {nameof(parameterTypes)} failed -> {parameterTypesFailureReason})";
+                    failureReason =
+                        $"({nameof(FunctionPointerTypeSymbolKey)} {nameof(parameterTypes)} failed -> {parameterTypesFailureReason})";
                     return default;
                 }
 
@@ -83,13 +106,22 @@ namespace Microsoft.CodeAnalysis
 
                 if (reader.Compilation.Language == LanguageNames.VisualBasic)
                 {
-                    failureReason = $"({nameof(FunctionPointerTypeSymbolKey)} is not supported in {LanguageNames.VisualBasic})";
+                    failureReason =
+                        $"({nameof(FunctionPointerTypeSymbolKey)} is not supported in {LanguageNames.VisualBasic})";
                     return default;
                 }
 
                 failureReason = null;
-                return new SymbolKeyResolution(reader.Compilation.CreateFunctionPointerTypeSymbol(
-                    returnTypeSymbol, returnRefKind, parameterTypes.ToImmutable(), paramRefKinds.ToImmutable(), callingConvention, callingConventionModifiers));
+                return new SymbolKeyResolution(
+                    reader.Compilation.CreateFunctionPointerTypeSymbol(
+                        returnTypeSymbol,
+                        returnRefKind,
+                        parameterTypes.ToImmutable(),
+                        paramRefKinds.ToImmutable(),
+                        callingConvention,
+                        callingConventionModifiers
+                    )
+                );
             }
         }
     }

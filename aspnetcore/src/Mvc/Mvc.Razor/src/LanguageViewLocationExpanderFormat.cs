@@ -22,5 +22,5 @@ public enum LanguageViewLocationExpanderFormat
     /// <example>
     /// Home/Views/Index.en-US.chtml
     /// </example>
-    Suffix
+    Suffix,
 }

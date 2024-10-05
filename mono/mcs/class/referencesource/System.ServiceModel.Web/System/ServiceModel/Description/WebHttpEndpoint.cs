@@ -15,9 +15,11 @@ namespace System.ServiceModel.Description
     {
         static Type WebHttpEndpointType = typeof(WebHttpEndpoint);
 
-        public WebHttpEndpoint(ContractDescription contract) :
-            this(contract, null /* address */)
-        { }
+        public WebHttpEndpoint(ContractDescription contract)
+            : this(
+                contract,
+                null /* address */
+            ) { }
 
         public WebHttpEndpoint(ContractDescription contract, EndpointAddress address)
             : base(contract, address)
@@ -51,12 +53,20 @@ namespace System.ServiceModel.Description
 
         WebHttpBehavior WebHttpBehavior
         {
-            get 
+            get
             {
                 WebHttpBehavior webHttpBehavior = this.Behaviors.Find<WebHttpBehavior>();
                 if (webHttpBehavior == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(SR2.WebBehaviorNotFoundWithEndpoint, typeof(WebHttpEndpoint).Name, typeof(WebHttpBehavior).Name)));                
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.WebBehaviorNotFoundWithEndpoint,
+                                typeof(WebHttpEndpoint).Name,
+                                typeof(WebHttpBehavior).Name
+                            )
+                        )
+                    );
                 }
                 return webHttpBehavior;
             }
@@ -67,5 +77,4 @@ namespace System.ServiceModel.Description
             get { return WebHttpEndpointType; }
         }
     }
-
 }

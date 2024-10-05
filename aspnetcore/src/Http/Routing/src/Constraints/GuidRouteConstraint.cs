@@ -17,7 +17,10 @@ namespace Microsoft.AspNetCore.Routing.Constraints;
 /// Matches values specified in any of the five formats "N", "D", "B", "P", or "X",
 /// supported by Guid.ToString(string) and Guid.ToString(String, IFormatProvider) methods.
 /// </summary>
-public class GuidRouteConstraint : IRouteConstraint, IParameterLiteralNodeMatchingPolicy, ICachableParameterPolicy
+public class GuidRouteConstraint
+    : IRouteConstraint,
+        IParameterLiteralNodeMatchingPolicy,
+        ICachableParameterPolicy
 #else
 internal class GuidRouteConstraint : IRouteConstraint
 #endif
@@ -29,10 +32,10 @@ internal class GuidRouteConstraint : IRouteConstraint
         IRouter? route,
         string routeKey,
         RouteValueDictionary values,
-        RouteDirection routeDirection)
+        RouteDirection routeDirection
+    )
 #else
-        string routeKey,
-        RouteValueDictionary values)
+        string routeKey, RouteValueDictionary values)
 #endif
     {
         ArgumentNullException.ThrowIfNull(routeKey);

@@ -27,25 +27,29 @@ namespace System.Xml.Schema
             set { _baseType = value; }
         }
 
-        [XmlElement("length", typeof(XmlSchemaLengthFacet)),
-         XmlElement("minLength", typeof(XmlSchemaMinLengthFacet)),
-         XmlElement("maxLength", typeof(XmlSchemaMaxLengthFacet)),
-         XmlElement("pattern", typeof(XmlSchemaPatternFacet)),
-         XmlElement("enumeration", typeof(XmlSchemaEnumerationFacet)),
-         XmlElement("maxInclusive", typeof(XmlSchemaMaxInclusiveFacet)),
-         XmlElement("maxExclusive", typeof(XmlSchemaMaxExclusiveFacet)),
-         XmlElement("minInclusive", typeof(XmlSchemaMinInclusiveFacet)),
-         XmlElement("minExclusive", typeof(XmlSchemaMinExclusiveFacet)),
-         XmlElement("totalDigits", typeof(XmlSchemaTotalDigitsFacet)),
-         XmlElement("fractionDigits", typeof(XmlSchemaFractionDigitsFacet)),
-         XmlElement("whiteSpace", typeof(XmlSchemaWhiteSpaceFacet))]
+        [
+            XmlElement("length", typeof(XmlSchemaLengthFacet)),
+            XmlElement("minLength", typeof(XmlSchemaMinLengthFacet)),
+            XmlElement("maxLength", typeof(XmlSchemaMaxLengthFacet)),
+            XmlElement("pattern", typeof(XmlSchemaPatternFacet)),
+            XmlElement("enumeration", typeof(XmlSchemaEnumerationFacet)),
+            XmlElement("maxInclusive", typeof(XmlSchemaMaxInclusiveFacet)),
+            XmlElement("maxExclusive", typeof(XmlSchemaMaxExclusiveFacet)),
+            XmlElement("minInclusive", typeof(XmlSchemaMinInclusiveFacet)),
+            XmlElement("minExclusive", typeof(XmlSchemaMinExclusiveFacet)),
+            XmlElement("totalDigits", typeof(XmlSchemaTotalDigitsFacet)),
+            XmlElement("fractionDigits", typeof(XmlSchemaFractionDigitsFacet)),
+            XmlElement("whiteSpace", typeof(XmlSchemaWhiteSpaceFacet))
+        ]
         public XmlSchemaObjectCollection Facets
         {
             get { return _facets; }
         }
 
-        [XmlElement("attribute", typeof(XmlSchemaAttribute)),
-         XmlElement("attributeGroup", typeof(XmlSchemaAttributeGroupRef))]
+        [
+            XmlElement("attribute", typeof(XmlSchemaAttribute)),
+            XmlElement("attributeGroup", typeof(XmlSchemaAttributeGroupRef))
+        ]
         public XmlSchemaObjectCollection Attributes
         {
             get { return _attributes; }

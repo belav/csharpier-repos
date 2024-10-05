@@ -11,33 +11,37 @@ namespace System.DirectoryServices.Protocols
     {
         IsLeaf = 0x23,
         InvalidCredentials = 49,
+
         // The following values are defined in the LDAP C API standard, and are used in Windows Winldap.h.
         // See https://tools.ietf.org/html/draft-ietf-ldapext-ldap-c-api-05
         // Servers built from OpenLDAP headers use negative numbers for some, as shown below.
         // See https://github.com/openldap/openldap/blob/70488c22bf69be2a2c84127692413b815d8f9044/include/ldap.h#L724-L749
-        ServerDown = 0x51,            // -1 from OpenLDAP servers
-        LocalError = 0x52,            // -2
-        EncodingError = 0x53,         // -3
-        DecodingError = 0x54,         // -4
-        TimeOut = 0x55,               // -5
-        AuthUnknown = 0x56,           // -6
-        FilterError = 0x57,           // -7
-        UserCancelled = 0x58,         // -8
-        ParameterError = 0x59,        // -9
-        NoMemory = 0x5a,              // -10
-        ConnectError = 0x5b,          // -11
-        NotSupported = 0x5c,          // -12
-        NoResultsReturned = 0x5e,     // -13
-        ControlNotFound = 0x5d,       // -14
-        MoreResults = 0x5f,           // -15
-        ClientLoop = 0x60,            // -16
+        ServerDown = 0x51, // -1 from OpenLDAP servers
+        LocalError = 0x52, // -2
+        EncodingError = 0x53, // -3
+        DecodingError = 0x54, // -4
+        TimeOut = 0x55, // -5
+        AuthUnknown = 0x56, // -6
+        FilterError = 0x57, // -7
+        UserCancelled = 0x58, // -8
+        ParameterError = 0x59, // -9
+        NoMemory = 0x5a, // -10
+        ConnectError = 0x5b, // -11
+        NotSupported = 0x5c, // -12
+        NoResultsReturned = 0x5e, // -13
+        ControlNotFound = 0x5d, // -14
+        MoreResults = 0x5f, // -15
+        ClientLoop = 0x60, // -16
         ReferralLimitExceeded = 0x61, // -17
-        SendTimeOut = 0x70
+        SendTimeOut = 0x70,
     }
 
     internal static class LdapErrorMappings
     {
-        private static readonly Dictionary<LdapError, string> s_resultCodeMapping = new Dictionary<LdapError, string>(capacity: 20)
+        private static readonly Dictionary<LdapError, string> s_resultCodeMapping = new Dictionary<
+            LdapError,
+            string
+        >(capacity: 20)
         {
             { LdapError.IsLeaf, SR.LDAP_IS_LEAF },
             { LdapError.InvalidCredentials, SR.LDAP_INVALID_CREDENTIALS },
@@ -58,7 +62,7 @@ namespace System.DirectoryServices.Protocols
             { LdapError.MoreResults, SR.LDAP_MORE_RESULTS_TO_RETURN },
             { LdapError.ClientLoop, SR.LDAP_CLIENT_LOOP },
             { LdapError.ReferralLimitExceeded, SR.LDAP_REFERRAL_LIMIT_EXCEEDED },
-            { LdapError.SendTimeOut, SR.LDAP_SEND_TIMEOUT }
+            { LdapError.SendTimeOut, SR.LDAP_SEND_TIMEOUT },
         };
 
         internal static int NormalizeResultCode(int errorCode)
@@ -78,7 +82,11 @@ namespace System.DirectoryServices.Protocols
         internal static bool IsLdapError(int errorCode)
         {
             LdapError error = (LdapError)NormalizeResultCode(errorCode);
-            if (error == LdapError.IsLeaf || error == LdapError.InvalidCredentials || error == LdapError.SendTimeOut)
+            if (
+                error == LdapError.IsLeaf
+                || error == LdapError.InvalidCredentials
+                || error == LdapError.SendTimeOut
+            )
             {
                 return true;
             }
@@ -88,41 +96,54 @@ namespace System.DirectoryServices.Protocols
     }
 
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.DirectoryServices.Protocols, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.DirectoryServices.Protocols, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     public class LdapException : DirectoryException, ISerializable
     {
         private int _errorCode;
 
 #if NET8_0_OR_GREATER
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
 #endif
-        protected LdapException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        protected LdapException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
-        public LdapException() : base() { }
+        public LdapException()
+            : base() { }
 
-        public LdapException(string message) : base(message) { }
+        public LdapException(string message)
+            : base(message) { }
 
-        public LdapException(string message, Exception inner) : base(message, inner) { }
+        public LdapException(string message, Exception inner)
+            : base(message, inner) { }
 
         public LdapException(int errorCode)
-                : base(SR.Format(SR.DefaultLdapError, LdapErrorMappings.NormalizeResultCode(errorCode)))
+            : base(SR.Format(SR.DefaultLdapError, LdapErrorMappings.NormalizeResultCode(errorCode)))
         {
             ErrorCode = errorCode;
         }
 
-        public LdapException(int errorCode, string message) : base(message)
+        public LdapException(int errorCode, string message)
+            : base(message)
         {
             ErrorCode = errorCode;
         }
 
-        public LdapException(int errorCode, string message, string serverErrorMessage) : base(message)
+        public LdapException(int errorCode, string message, string serverErrorMessage)
+            : base(message)
         {
             ErrorCode = errorCode;
             ServerErrorMessage = serverErrorMessage;
         }
 
-        public LdapException(int errorCode, string message, Exception inner) : base(message, inner)
+        public LdapException(int errorCode, string message, Exception inner)
+            : base(message, inner)
         {
             ErrorCode = errorCode;
         }
@@ -130,10 +151,7 @@ namespace System.DirectoryServices.Protocols
         public int ErrorCode
         {
             get => _errorCode;
-            private set
-            {
-                _errorCode = LdapErrorMappings.NormalizeResultCode(value);
-            }
+            private set { _errorCode = LdapErrorMappings.NormalizeResultCode(value); }
         }
 
         public string ServerErrorMessage { get; }
@@ -142,32 +160,39 @@ namespace System.DirectoryServices.Protocols
     }
 
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.DirectoryServices.Protocols, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.DirectoryServices.Protocols, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     public class TlsOperationException : DirectoryOperationException
     {
 #if NET8_0_OR_GREATER
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
 #endif
-        protected TlsOperationException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        protected TlsOperationException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
-        public TlsOperationException() : base() { }
+        public TlsOperationException()
+            : base() { }
 
-        public TlsOperationException(string message) : base(message) { }
+        public TlsOperationException(string message)
+            : base(message) { }
 
-        public TlsOperationException(string message, Exception inner) : base(message, inner) { }
+        public TlsOperationException(string message, Exception inner)
+            : base(message, inner) { }
 
-        public TlsOperationException(DirectoryResponse response) : base(response)
-        {
-        }
+        public TlsOperationException(DirectoryResponse response)
+            : base(response) { }
 
-        public TlsOperationException(DirectoryResponse response, string message) : base(response, message)
-        {
-        }
+        public TlsOperationException(DirectoryResponse response, string message)
+            : base(response, message) { }
 
-        public TlsOperationException(DirectoryResponse response, string message, Exception inner) : base(response, message, inner)
-        {
-        }
+        public TlsOperationException(DirectoryResponse response, string message, Exception inner)
+            : base(response, message, inner) { }
     }
 
     internal static class ErrorChecking

@@ -11,7 +11,7 @@ internal static partial class Interop
         internal enum CryptDecryptFlags : int
         {
             CRYPT_OAEP = 0x00000040,
-            CRYPT_DECRYPT_RSA_NO_PADDING_CHECK = 0x00000020
+            CRYPT_DECRYPT_RSA_NO_PADDING_CHECK = 0x00000020,
         }
 
         [LibraryImport(Libraries.Advapi32, SetLastError = true)]
@@ -22,6 +22,7 @@ internal static partial class Interop
             [MarshalAs(UnmanagedType.Bool)] bool Final,
             int dwFlags,
             byte[] pbData,
-            ref int pdwDataLen);
+            ref int pdwDataLen
+        );
     }
 }

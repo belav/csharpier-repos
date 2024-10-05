@@ -21,9 +21,11 @@ namespace System.Text
             /// </summary>
             private const int MaxSmallInputElementCount = 32;
 
-            public UTF8EncodingSealed(bool encoderShouldEmitUTF8Identifier) : base(encoderShouldEmitUTF8Identifier) { }
+            public UTF8EncodingSealed(bool encoderShouldEmitUTF8Identifier)
+                : base(encoderShouldEmitUTF8Identifier) { }
 
-            public override ReadOnlySpan<byte> Preamble => _emitUTF8Identifier ? PreambleSpan : default;
+            public override ReadOnlySpan<byte> Preamble =>
+                _emitUTF8Identifier ? PreambleSpan : default;
 
             public override object Clone()
             {
@@ -31,10 +33,7 @@ namespace System.Text
                 // We don't want to do this because it violates the invariants we have set for the sealed type.
                 // Instead, we'll create a new instance of the base UTF8Encoding type and mark it mutable.
 
-                return new UTF8Encoding(_emitUTF8Identifier)
-                {
-                    IsReadOnly = false
-                };
+                return new UTF8Encoding(_emitUTF8Identifier) { IsReadOnly = false };
             }
 
             public override byte[] GetBytes(string s)
@@ -57,15 +56,23 @@ namespace System.Text
                 Debug.Assert(s != null);
                 Debug.Assert(s.Length <= MaxSmallInputElementCount);
 
-                byte* pDestination = stackalloc byte[MaxSmallInputElementCount * MaxUtf8BytesPerChar];
+                byte* pDestination =
+                    stackalloc byte[MaxSmallInputElementCount * MaxUtf8BytesPerChar];
 
                 int sourceLength = s.Length; // hoist this to avoid having the JIT auto-insert null checks
                 int bytesWritten;
 
                 fixed (char* pSource = s)
                 {
-                    bytesWritten = GetBytesCommon(pSource, sourceLength, pDestination, MaxSmallInputElementCount * MaxUtf8BytesPerChar);
-                    Debug.Assert(0 <= bytesWritten && bytesWritten <= s.Length * MaxUtf8BytesPerChar);
+                    bytesWritten = GetBytesCommon(
+                        pSource,
+                        sourceLength,
+                        pDestination,
+                        MaxSmallInputElementCount * MaxUtf8BytesPerChar
+                    );
+                    Debug.Assert(
+                        0 <= bytesWritten && bytesWritten <= s.Length * MaxUtf8BytesPerChar
+                    );
                 }
 
                 return new Span<byte>(ref *pDestination, bytesWritten).ToArray(); // this overload of Span ctor doesn't validate length
@@ -86,7 +93,10 @@ namespace System.Text
                     {
                         throw new ArgumentOutOfRangeException(
                             paramName: nameof(charCount),
-                            message: (charCount < 0) ? SR.ArgumentOutOfRange_NeedNonNegNum : SR.ArgumentOutOfRange_GetByteCountOverflow);
+                            message: (charCount < 0)
+                                ? SR.ArgumentOutOfRange_NeedNonNegNum
+                                : SR.ArgumentOutOfRange_GetByteCountOverflow
+                        );
                     }
                 }
 
@@ -108,7 +118,10 @@ namespace System.Text
                     {
                         throw new ArgumentOutOfRangeException(
                             paramName: nameof(byteCount),
-                            message: (byteCount < 0) ? SR.ArgumentOutOfRange_NeedNonNegNum : SR.ArgumentOutOfRange_GetCharCountOverflow);
+                            message: (byteCount < 0)
+                                ? SR.ArgumentOutOfRange_NeedNonNegNum
+                                : SR.ArgumentOutOfRange_GetCharCountOverflow
+                        );
                     }
                 }
 
@@ -142,7 +155,12 @@ namespace System.Text
 
                 fixed (byte* pSource = bytes)
                 {
-                    charsWritten = GetCharsCommon(pSource, sourceLength, pDestination, MaxSmallInputElementCount);
+                    charsWritten = GetCharsCommon(
+                        pSource,
+                        sourceLength,
+                        pDestination,
+                        MaxSmallInputElementCount
+                    );
                     Debug.Assert(0 <= charsWritten && charsWritten <= sourceLength); // should never have more output chars than input bytes
                 }
 
@@ -150,7 +168,11 @@ namespace System.Text
             }
 
             /// <inheritdoc/>
-            public override bool TryGetBytes(ReadOnlySpan<char> chars, Span<byte> bytes, out int bytesWritten)
+            public override bool TryGetBytes(
+                ReadOnlySpan<char> chars,
+                Span<byte> bytes,
+                out int bytesWritten
+            )
             {
                 return base.TryGetBytes(chars, bytes, out bytesWritten);
             }
@@ -158,15 +180,23 @@ namespace System.Text
             /// <summary>Same as Encoding.UTF8.TryGetBytes, except with refs, returning the number of bytes written (or -1 if the operation fails), and optimized for a constant input.</summary>
             [MethodImpl(MethodImplOptions.NoInlining)]
             [Intrinsic] // Can be unrolled by JIT
-            internal static unsafe int ReadUtf8(ref char input, int inputLength, ref byte output, int outputLength)
+            internal static unsafe int ReadUtf8(
+                ref char input,
+                int inputLength,
+                ref byte output,
+                int outputLength
+            )
             {
                 fixed (char* pInput = &input)
                 fixed (byte* pOutput = &output)
                 {
                     return s_default.GetBytesCommon(
-                        pInput, inputLength,
-                        pOutput, outputLength,
-                        throwForDestinationOverflow: false);
+                        pInput,
+                        inputLength,
+                        pOutput,
+                        outputLength,
+                        throwForDestinationOverflow: false
+                    );
                 }
             }
         }

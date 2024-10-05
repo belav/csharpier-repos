@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -23,5 +24,4 @@ namespace Test
             }
         }
     }
-
 }

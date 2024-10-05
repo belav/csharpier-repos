@@ -8,8 +8,6 @@ namespace System.Runtime.CompilerServices
     public sealed class EnumeratorCancellationAttribute : Attribute
     {
         /// <summary>Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.EnumeratorCancellationAttribute" /> class.</summary>
-        public EnumeratorCancellationAttribute()
-        {
-        }
+        public EnumeratorCancellationAttribute() { }
     }
 }

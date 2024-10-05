@@ -14,7 +14,8 @@ public class Wstest : Executable
 
     public static Wstest Default => _instance.Value;
 
-    public Wstest(string path) : base(path) { }
+    public Wstest(string path)
+        : base(path) { }
 
     private static Wstest Create()
     {

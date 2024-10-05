@@ -4,10 +4,11 @@ namespace DebuggerTests
 {
     public class ClassWithPdbDeleted
     {
-        private int propA {get;}
-        public int propB {get;}
-        protected int propC {get;}
+        private int propA { get; }
+        public int propB { get; }
+        protected int propC { get; }
         public int d;
+
         public ClassWithPdbDeleted()
         {
             propA = 10;

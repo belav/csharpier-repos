@@ -45,6 +45,6 @@ public readonly struct HtmlRootComponent
     /// Writes the component's latest output as HTML to the specified writer.
     /// </summary>
     /// <param name="output">The output destination.</param>
-    public void WriteHtmlTo(TextWriter output)
-        => _renderer?.WriteComponentHtml(_componentId, output);
+    public void WriteHtmlTo(TextWriter output) =>
+        _renderer?.WriteComponentHtml(_componentId, output);
 }

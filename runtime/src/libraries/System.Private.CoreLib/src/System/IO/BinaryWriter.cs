@@ -34,13 +34,11 @@ namespace System.IO
         }
 
         // BinaryWriter never emits a BOM, so can use Encoding.UTF8 fast singleton
-        public BinaryWriter(Stream output) : this(output, Encoding.UTF8, false)
-        {
-        }
+        public BinaryWriter(Stream output)
+            : this(output, Encoding.UTF8, false) { }
 
-        public BinaryWriter(Stream output, Encoding encoding) : this(output, encoding, false)
-        {
-        }
+        public BinaryWriter(Stream output, Encoding encoding)
+            : this(output, encoding, false) { }
 
         public BinaryWriter(Stream output, Encoding encoding, bool leaveOpen)
         {
@@ -233,9 +231,15 @@ namespace System.IO
             ArgumentOutOfRangeException.ThrowIfNegative(index);
             ArgumentOutOfRangeException.ThrowIfNegative(count);
             if (index > chars.Length - count)
-                throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_IndexCount);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.ArgumentOutOfRange_IndexCount
+                );
 
-            WriteCharsCommonWithoutLengthPrefix(chars.AsSpan(index, count), useThisWriteOverride: false);
+            WriteCharsCommonWithoutLengthPrefix(
+                chars.AsSpan(index, count),
+                useThisWriteOverride: false
+            );
         }
 
         // Writes a double to this stream. The current position of the stream is
@@ -333,7 +337,10 @@ namespace System.IO
         //
         public virtual void Write(Half value)
         {
-            Span<byte> buffer = stackalloc byte[sizeof(ushort) /* = sizeof(Half) */];
+            Span<byte> buffer =
+                stackalloc byte[
+                    sizeof(ushort) /* = sizeof(Half) */
+                ];
             BinaryPrimitives.WriteHalfLittleEndian(buffer, value);
             OutStream.Write(buffer);
         }
@@ -359,7 +366,12 @@ namespace System.IO
                     Span<byte> buffer = stackalloc byte[128];
                     int actualByteCount = _encoding.GetBytes(value, buffer.Slice(1));
                     buffer[0] = (byte)actualByteCount; // bypass call to Write7BitEncodedInt
-                    OutStream.Write(buffer.Slice(0, actualByteCount + 1 /* length prefix */));
+                    OutStream.Write(
+                        buffer.Slice(
+                            0,
+                            actualByteCount + 1 /* length prefix */
+                        )
+                    );
                     return;
                 }
                 else if (value.Length <= MaxArrayPoolRentalSize / 3)
@@ -410,7 +422,10 @@ namespace System.IO
             WriteCharsCommonWithoutLengthPrefix(chars, useThisWriteOverride: true);
         }
 
-        private void WriteCharsCommonWithoutLengthPrefix(ReadOnlySpan<char> chars, bool useThisWriteOverride)
+        private void WriteCharsCommonWithoutLengthPrefix(
+            ReadOnlySpan<char> chars,
+            bool useThisWriteOverride
+        )
         {
             // If our input is truly enormous, the call to GetMaxByteCount might overflow,
             // which we want to avoid. Theoretically, any Encoding could expand from chars -> bytes
@@ -446,7 +461,14 @@ namespace System.IO
 
             do
             {
-                encoder.Convert(chars, rented, flush: true, out int charsConsumed, out int bytesWritten, out completed);
+                encoder.Convert(
+                    chars,
+                    rented,
+                    flush: true,
+                    out int charsConsumed,
+                    out int bytesWritten,
+                    out completed
+                );
                 if (bytesWritten != 0)
                 {
                     WriteToOutStream(rented, 0, bytesWritten, useThisWriteOverride);

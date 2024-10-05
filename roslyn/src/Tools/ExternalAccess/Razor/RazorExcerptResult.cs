@@ -20,7 +20,13 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
 
         public readonly TextSpan Span;
 
-        public RazorExcerptResult(SourceText content, TextSpan mappedSpan, ImmutableArray<ClassifiedSpan> classifiedSpans, Document document, TextSpan span)
+        public RazorExcerptResult(
+            SourceText content,
+            TextSpan mappedSpan,
+            ImmutableArray<ClassifiedSpan> classifiedSpans,
+            Document document,
+            TextSpan span
+        )
         {
             Content = content;
             MappedSpan = mappedSpan;

@@ -1,40 +1,33 @@
 //------------------------------------------------------------------------------
 // <copyright file="LocalDB.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 // <owner current="true" primary="true">antonam</owner>
 //------------------------------------------------------------------------------
 
 
 namespace System.Data
 {
+    using System.Collections;
     using System.Configuration;
-    using System.Collections;    
 
     internal sealed class LocalDBInstanceElement : ConfigurationElement
     {
         [ConfigurationProperty("name", IsRequired = true)]
         public string Name
         {
-            get
-            {
-                return this["name"] as string;
-            }
+            get { return this["name"] as string; }
         }
 
         [ConfigurationProperty("version", IsRequired = true)]
         public string Version
         {
-            get
-            {
-                return this["version"] as string;
-            }
+            get { return this["version"] as string; }
         }
     }
 
     internal sealed class LocalDBInstancesCollection : ConfigurationElementCollection
     {
-
         private class TrimOrdinalIgnoreCaseStringComparer : IComparer
         {
             public int Compare(object x, object y)
@@ -47,16 +40,15 @@ namespace System.Data
                 if (yStr != null)
                     y = yStr.Trim();
 
-                return StringComparer.OrdinalIgnoreCase.Compare(x,y);
+                return StringComparer.OrdinalIgnoreCase.Compare(x, y);
             }
         }
 
-        static readonly TrimOrdinalIgnoreCaseStringComparer s_comparer = new TrimOrdinalIgnoreCaseStringComparer();
+        static readonly TrimOrdinalIgnoreCaseStringComparer s_comparer =
+            new TrimOrdinalIgnoreCaseStringComparer();
 
         internal LocalDBInstancesCollection()
-            : base(s_comparer)
-        {
-        }
+            : base(s_comparer) { }
 
         protected override ConfigurationElement CreateNewElement()
         {
@@ -67,7 +59,6 @@ namespace System.Data
         {
             return ((LocalDBInstanceElement)element).Name;
         }
-        
     }
 
     internal sealed class LocalDBConfigurationSection : ConfigurationSection
@@ -77,7 +68,8 @@ namespace System.Data
         {
             get
             {
-                return (LocalDBInstancesCollection)this["localdbinstances"] ?? new LocalDBInstancesCollection();
+                return (LocalDBInstancesCollection)this["localdbinstances"]
+                    ?? new LocalDBInstancesCollection();
             }
         }
     }

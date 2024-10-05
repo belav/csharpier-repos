@@ -27,8 +27,7 @@ namespace Roslyn.Utilities
             _hashCode = hashCode;
         }
 
-        public static ReferenceHolder<T> Strong(T value)
-            => new(value);
+        public static ReferenceHolder<T> Strong(T value) => new(value);
 
         public static ReferenceHolder<T> Weak(T value)
         {
@@ -38,7 +37,10 @@ namespace Roslyn.Utilities
                 return Strong(value);
             }
 
-            return new ReferenceHolder<T>(new WeakReference<T>(value), ReferenceEqualityComparer.GetHashCode(value));
+            return new ReferenceHolder<T>(
+                new WeakReference<T>(value),
+                ReferenceEqualityComparer.GetHashCode(value)
+            );
         }
 
         public T? TryGetTarget()
@@ -51,8 +53,7 @@ namespace Roslyn.Utilities
 
         public override bool Equals(object? obj)
         {
-            return obj is ReferenceHolder<T> other
-                && Equals(other);
+            return obj is ReferenceHolder<T> other && Equals(other);
         }
 
         public bool Equals(ReferenceHolder<T> other)
@@ -68,7 +69,9 @@ namespace Roslyn.Utilities
                     // different objects have both been collected, but the runtime hash codes for the objects were
                     // equal. Callers can ensure this case is not encountered by structuring equality checks such that
                     // at least one of the objects is alive at the time Equals is called.
-                    return y is null && other._weakReference is object && _hashCode == other._hashCode;
+                    return y is null
+                        && other._weakReference is object
+                        && _hashCode == other._hashCode;
                 }
                 else
                 {
@@ -96,8 +99,8 @@ namespace Roslyn.Utilities
             /// </summary>
             /// <param name="hashCode">The hash code of the collected value.</param>
             /// <returns>A weak <see cref="ReferenceHolder{T}"/> which was already collected.</returns>
-            public static ReferenceHolder<T> ReleasedWeak(int hashCode)
-                => new(new WeakReference<T>(null!), hashCode);
+            public static ReferenceHolder<T> ReleasedWeak(int hashCode) =>
+                new(new WeakReference<T>(null!), hashCode);
         }
     }
 }

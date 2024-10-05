@@ -1,36 +1,51 @@
-﻿namespace System.Web.ModelBinding {
+﻿namespace System.Web.ModelBinding
+{
     using System;
 
-    public class DefaultModelBinder : IModelBinder {
-
-        public DefaultModelBinder() {
+    public class DefaultModelBinder : IModelBinder
+    {
+        public DefaultModelBinder()
+        {
             Providers = ModelBinderProviders.Providers;
         }
 
-        public ModelBinderProviderCollection Providers {
-            get;
-            private set;
-        }
+        public ModelBinderProviderCollection Providers { get; private set; }
 
-        public bool BindModel(ModelBindingExecutionContext modelBindingExecutionContext, ModelBindingContext bindingContext) {
+        public bool BindModel(
+            ModelBindingExecutionContext modelBindingExecutionContext,
+            ModelBindingContext bindingContext
+        )
+        {
             ModelBindingContext newBindingContext = bindingContext;
             IModelBinder binder = Providers.GetBinder(modelBindingExecutionContext, bindingContext);
-            if (binder == null && !String.IsNullOrEmpty(bindingContext.ModelName)
-                && bindingContext.ModelMetadata.IsComplexType) {
-
+            if (
+                binder == null
+                && !String.IsNullOrEmpty(bindingContext.ModelName)
+                && bindingContext.ModelMetadata.IsComplexType
+            )
+            {
                 // fallback to empty prefix?
-                newBindingContext = new ModelBindingContext(bindingContext) { 
+                newBindingContext = new ModelBindingContext(bindingContext)
+                {
                     ModelName = String.Empty,
-                    ModelMetadata = bindingContext.ModelMetadata
+                    ModelMetadata = bindingContext.ModelMetadata,
                 };
                 binder = Providers.GetBinder(modelBindingExecutionContext, newBindingContext);
             }
 
-            if (binder != null) {
-                bool boundSuccessfully = binder.BindModel(modelBindingExecutionContext, newBindingContext);
-                if (boundSuccessfully) {
+            if (binder != null)
+            {
+                bool boundSuccessfully = binder.BindModel(
+                    modelBindingExecutionContext,
+                    newBindingContext
+                );
+                if (boundSuccessfully)
+                {
                     // run validation
-                    newBindingContext.ValidationNode.Validate(modelBindingExecutionContext, parentNode:null);
+                    newBindingContext.ValidationNode.Validate(
+                        modelBindingExecutionContext,
+                        parentNode: null
+                    );
                     return true;
                 }
             }

@@ -49,8 +49,10 @@ namespace JitTest_array1_refany_cs
             TestRef(__makeref(genericArray));
             for (int i = 0; i < 16; i++)
             {
-                if (genericArray.GetValue(i) == null ||
-                    genericArray.GetValue(i).GetType() != typeof(Test))
+                if (
+                    genericArray.GetValue(i) == null
+                    || genericArray.GetValue(i).GetType() != typeof(Test)
+                )
                     return 1;
             }
 
@@ -59,7 +61,11 @@ namespace JitTest_array1_refany_cs
             if (al[0] != 2 || al[1] != 3 || al[2] != 4)
                 return 2;
 
-            ulong[,] aul2 = new ulong[,] { { 1, 2, 3 }, { 4, 5, 6 } };
+            ulong[,] aul2 = new ulong[,]
+            {
+                { 1, 2, 3 },
+                { 4, 5, 6 },
+            };
             TestRef(__makeref(aul2));
             for (int i = 0; i < 2; i++)
             {

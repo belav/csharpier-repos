@@ -49,7 +49,12 @@ public class GenerateSharedFrameworkDepsFile : Microsoft.Build.Utilities.Task
 
     private void ExecuteCore()
     {
-        var target = new TargetInfo(TargetFramework, RuntimeIdentifier, string.Empty, isPortable: false);
+        var target = new TargetInfo(
+            TargetFramework,
+            RuntimeIdentifier,
+            string.Empty,
+            isPortable: false
+        );
         var runtimeFiles = new List<RuntimeFile>();
         var nativeFiles = new List<RuntimeFile>();
         var resourceAssemblies = new List<ResourceAssembly>();
@@ -69,31 +74,37 @@ public class GenerateSharedFrameworkDepsFile : Microsoft.Build.Utilities.Task
             }
             else
             {
-                var runtimeFile = new RuntimeFile(fileName,
+                var runtimeFile = new RuntimeFile(
+                    fileName,
                     fileVersion: fileVersion,
-                    assemblyVersion: assemblyVersion.ToString());
+                    assemblyVersion: assemblyVersion.ToString()
+                );
                 runtimeFiles.Add(runtimeFile);
                 platformManifest.Add($"{fileName}|{FrameworkName}|{assemblyVersion}|{fileVersion}");
             }
         }
 
-        var runtimeLibrary = new RuntimeLibrary("package",
-           RuntimePackageName,
-           FrameworkVersion,
-           hash: string.Empty,
-           runtimeAssemblyGroups: new[] { new RuntimeAssetGroup(string.Empty, runtimeFiles) },
-           nativeLibraryGroups: new[] { new RuntimeAssetGroup(string.Empty, nativeFiles) },
-           Enumerable.Empty<ResourceAssembly>(),
-           Array.Empty<Dependency>(),
-           hashPath: null,
-           path: $"{RuntimePackageName.ToLowerInvariant()}/{FrameworkVersion}",
-           serviceable: true);
+        var runtimeLibrary = new RuntimeLibrary(
+            "package",
+            RuntimePackageName,
+            FrameworkVersion,
+            hash: string.Empty,
+            runtimeAssemblyGroups: new[] { new RuntimeAssetGroup(string.Empty, runtimeFiles) },
+            nativeLibraryGroups: new[] { new RuntimeAssetGroup(string.Empty, nativeFiles) },
+            Enumerable.Empty<ResourceAssembly>(),
+            Array.Empty<Dependency>(),
+            hashPath: null,
+            path: $"{RuntimePackageName.ToLowerInvariant()}/{FrameworkVersion}",
+            serviceable: true
+        );
 
-        var context = new DependencyContext(target,
+        var context = new DependencyContext(
+            target,
             CompilationOptions.Default,
             Enumerable.Empty<CompilationLibrary>(),
             new[] { runtimeLibrary },
-            Enumerable.Empty<RuntimeFallbacks>());
+            Enumerable.Empty<RuntimeFallbacks>()
+        );
 
         Directory.CreateDirectory(Path.GetDirectoryName(DepsFilePath));
         Directory.CreateDirectory(Path.GetDirectoryName(PlatformManifestOutputPath));
@@ -101,7 +112,8 @@ public class GenerateSharedFrameworkDepsFile : Microsoft.Build.Utilities.Task
         File.WriteAllText(
             PlatformManifestOutputPath,
             string.Join("\n", platformManifest.OrderBy(n => n)),
-            Encoding.UTF8);
+            Encoding.UTF8
+        );
 
         try
         {

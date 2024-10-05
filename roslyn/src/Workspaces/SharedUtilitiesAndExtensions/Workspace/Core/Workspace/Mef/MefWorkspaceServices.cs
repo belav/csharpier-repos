@@ -14,7 +14,10 @@ using Microsoft.CodeAnalysis.Host;
 using Microsoft.CodeAnalysis.Host.Mef;
 using Roslyn.Utilities;
 
-[assembly: DebuggerTypeProxy(typeof(MefWorkspaceServices.LazyServiceMetadataDebuggerProxy), Target = typeof(ImmutableArray<Lazy<IWorkspaceService, WorkspaceServiceMetadata>>))]
+[assembly: DebuggerTypeProxy(
+    typeof(MefWorkspaceServices.LazyServiceMetadataDebuggerProxy),
+    Target = typeof(ImmutableArray<Lazy<IWorkspaceService, WorkspaceServiceMetadata>>)
+)]
 
 namespace Microsoft.CodeAnalysis.Host.Mef
 {
@@ -23,15 +26,22 @@ namespace Microsoft.CodeAnalysis.Host.Mef
         private readonly IMefHostExportProvider _exportProvider;
         private readonly Workspace _workspace;
 
-        private readonly ImmutableArray<Lazy<IWorkspaceService, WorkspaceServiceMetadata>> _services;
+        private readonly ImmutableArray<
+            Lazy<IWorkspaceService, WorkspaceServiceMetadata>
+        > _services;
 
         // map of type name to workspace service
-        private ImmutableDictionary<Type, Lazy<IWorkspaceService, WorkspaceServiceMetadata>> _serviceMap
-            = ImmutableDictionary<Type, Lazy<IWorkspaceService, WorkspaceServiceMetadata>>.Empty;
+        private ImmutableDictionary<
+            Type,
+            Lazy<IWorkspaceService, WorkspaceServiceMetadata>
+        > _serviceMap = ImmutableDictionary<
+            Type,
+            Lazy<IWorkspaceService, WorkspaceServiceMetadata>
+        >.Empty;
 
         // accumulated cache for language services
-        private ImmutableDictionary<string, MefLanguageServices> _languageServicesMap
-            = ImmutableDictionary<string, MefLanguageServices>.Empty;
+        private ImmutableDictionary<string, MefLanguageServices> _languageServicesMap =
+            ImmutableDictionary<string, MefLanguageServices>.Empty;
 
         public MefWorkspaceServices(IMefHostExportProvider host, Workspace workspace)
         {
@@ -40,7 +50,10 @@ namespace Microsoft.CodeAnalysis.Host.Mef
 
             var services = host.GetExports<IWorkspaceService, WorkspaceServiceMetadata>();
             var factories = host.GetExports<IWorkspaceServiceFactory, WorkspaceServiceMetadata>()
-                .Select(lz => new Lazy<IWorkspaceService, WorkspaceServiceMetadata>(() => lz.Value.CreateService(this), lz.Metadata));
+                .Select(lz => new Lazy<IWorkspaceService, WorkspaceServiceMetadata>(
+                    () => lz.Value.CreateService(this),
+                    lz.Metadata
+                ));
 
             _services = services.Concat(factories).ToImmutableArray();
         }
@@ -77,23 +90,34 @@ namespace Microsoft.CodeAnalysis.Host.Mef
             }
         }
 
-        private bool TryGetService(Type serviceType, out Lazy<IWorkspaceService, WorkspaceServiceMetadata> service)
+        private bool TryGetService(
+            Type serviceType,
+            out Lazy<IWorkspaceService, WorkspaceServiceMetadata> service
+        )
         {
             if (!_serviceMap.TryGetValue(serviceType, out service))
             {
-                service = ImmutableInterlocked.GetOrAdd(ref _serviceMap, serviceType, svctype =>
-                {
-                    // Pick from list of exported factories and instances
-                    // PERF: Hoist AssemblyQualifiedName out of inner lambda to avoid repeated string allocations.
-                    var assemblyQualifiedName = svctype.AssemblyQualifiedName;
-                    return PickWorkspaceService(_services.Where(lz => lz.Metadata.ServiceType == assemblyQualifiedName));
-                });
+                service = ImmutableInterlocked.GetOrAdd(
+                    ref _serviceMap,
+                    serviceType,
+                    svctype =>
+                    {
+                        // Pick from list of exported factories and instances
+                        // PERF: Hoist AssemblyQualifiedName out of inner lambda to avoid repeated string allocations.
+                        var assemblyQualifiedName = svctype.AssemblyQualifiedName;
+                        return PickWorkspaceService(
+                            _services.Where(lz => lz.Metadata.ServiceType == assemblyQualifiedName)
+                        );
+                    }
+                );
             }
 
             return service != null;
         }
 
-        private Lazy<IWorkspaceService, WorkspaceServiceMetadata> PickWorkspaceService(IEnumerable<Lazy<IWorkspaceService, WorkspaceServiceMetadata>> services)
+        private Lazy<IWorkspaceService, WorkspaceServiceMetadata> PickWorkspaceService(
+            IEnumerable<Lazy<IWorkspaceService, WorkspaceServiceMetadata>> services
+        )
         {
             Lazy<IWorkspaceService, WorkspaceServiceMetadata> service;
 #if !CODE_STYLE
@@ -137,7 +161,11 @@ namespace Microsoft.CodeAnalysis.Host.Mef
             return null;
         }
 
-        private static bool TryGetServiceByLayer(string layer, IEnumerable<Lazy<IWorkspaceService, WorkspaceServiceMetadata>> services, out Lazy<IWorkspaceService, WorkspaceServiceMetadata> service)
+        private static bool TryGetServiceByLayer(
+            string layer,
+            IEnumerable<Lazy<IWorkspaceService, WorkspaceServiceMetadata>> services,
+            out Lazy<IWorkspaceService, WorkspaceServiceMetadata> service
+        )
         {
             service = services.SingleOrDefault(lz => lz.Metadata.Layer == layer);
             return service != null;
@@ -149,9 +177,15 @@ namespace Microsoft.CodeAnalysis.Host.Mef
         {
             if (_languages == null)
             {
-                var list = _exportProvider.GetExports<ILanguageService, LanguageServiceMetadata>().Select(lz => lz.Metadata.Language).Concat(
-                           _exportProvider.GetExports<ILanguageServiceFactory, LanguageServiceMetadata>().Select(lz => lz.Metadata.Language))
-                           .Distinct();
+                var list = _exportProvider
+                    .GetExports<ILanguageService, LanguageServiceMetadata>()
+                    .Select(lz => lz.Metadata.Language)
+                    .Concat(
+                        _exportProvider
+                            .GetExports<ILanguageServiceFactory, LanguageServiceMetadata>()
+                            .Select(lz => lz.Metadata.Language)
+                    )
+                    .Distinct();
 
                 Interlocked.CompareExchange(ref _languages, list, null);
             }
@@ -164,15 +198,20 @@ namespace Microsoft.CodeAnalysis.Host.Mef
             get { return this.GetSupportedLanguages(); }
         }
 
-        public override bool IsSupported(string languageName)
-            => this.GetSupportedLanguages().Contains(languageName);
+        public override bool IsSupported(string languageName) =>
+            this.GetSupportedLanguages().Contains(languageName);
 
         public override HostLanguageServices GetLanguageServices(string languageName)
         {
             var currentServicesMap = _languageServicesMap;
             if (!currentServicesMap.TryGetValue(languageName, out var languageServices))
             {
-                languageServices = ImmutableInterlocked.GetOrAdd(ref _languageServicesMap, languageName, static (languageName, self) => new MefLanguageServices(self, languageName), this);
+                languageServices = ImmutableInterlocked.GetOrAdd(
+                    ref _languageServicesMap,
+                    languageName,
+                    static (languageName, self) => new MefLanguageServices(self, languageName),
+                    this
+                );
             }
 
             if (languageServices.HasServices)
@@ -188,7 +227,9 @@ namespace Microsoft.CodeAnalysis.Host.Mef
             }
         }
 
-        public override IEnumerable<TLanguageService> FindLanguageServices<TLanguageService>(MetadataFilter filter)
+        public override IEnumerable<TLanguageService> FindLanguageServices<TLanguageService>(
+            MetadataFilter filter
+        )
         {
             foreach (var language in this.SupportedLanguages)
             {
@@ -205,13 +246,17 @@ namespace Microsoft.CodeAnalysis.Host.Mef
             }
         }
 
-        internal bool TryGetLanguageServices(string languageName, out MefLanguageServices languageServices)
-            => _languageServicesMap.TryGetValue(languageName, out languageServices);
+        internal bool TryGetLanguageServices(
+            string languageName,
+            out MefLanguageServices languageServices
+        ) => _languageServicesMap.TryGetValue(languageName, out languageServices);
 
-        internal sealed class LazyServiceMetadataDebuggerProxy(ImmutableArray<Lazy<IWorkspaceService, WorkspaceServiceMetadata>> services)
+        internal sealed class LazyServiceMetadataDebuggerProxy(
+            ImmutableArray<Lazy<IWorkspaceService, WorkspaceServiceMetadata>> services
+        )
         {
-            public (string type, string layer)[] Metadata
-                => services.Select(s => (s.Metadata.ServiceType, s.Metadata.Layer)).ToArray();
+            public (string type, string layer)[] Metadata =>
+                services.Select(s => (s.Metadata.ServiceType, s.Metadata.Layer)).ToArray();
         }
     }
 }

@@ -16,7 +16,12 @@ namespace System.ServiceModel
         int count;
         TimeoutHelper timeoutHelper;
 
-        public OpenCollectionAsyncResult(TimeSpan timeout, AsyncCallback otherCallback, object state, IList<ICommunicationObject> collection)
+        public OpenCollectionAsyncResult(
+            TimeSpan timeout,
+            AsyncCallback otherCallback,
+            object state,
+            IList<ICommunicationObject> collection
+        )
             : base(otherCallback, state)
         {
             this.timeoutHelper = new TimeoutHelper(timeout);
@@ -35,7 +40,8 @@ namespace System.ServiceModel
                 if (this.exception != null)
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(this.exception);
                 CallbackState callbackState = new CallbackState(this, collection[index]);
-                IAsyncResult result = collection[index].BeginOpen(this.timeoutHelper.RemainingTime(), nestedCallback, callbackState);
+                IAsyncResult result = collection[index]
+                    .BeginOpen(this.timeoutHelper.RemainingTime(), nestedCallback, callbackState);
                 if (result.CompletedSynchronously)
                 {
                     collection[index].EndOpen(result);

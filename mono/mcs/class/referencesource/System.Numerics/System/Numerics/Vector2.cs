@@ -16,19 +16,34 @@ namespace System.Numerics
         /// <summary>
         /// Returns the vector (0,0).
         /// </summary>
-        public static Vector2 Zero { get { return new Vector2(); } }
+        public static Vector2 Zero
+        {
+            get { return new Vector2(); }
+        }
+
         /// <summary>
         /// Returns the vector (1,1).
         /// </summary>
-        public static Vector2 One { get { return new Vector2(1.0f, 1.0f); } }
+        public static Vector2 One
+        {
+            get { return new Vector2(1.0f, 1.0f); }
+        }
+
         /// <summary>
         /// Returns the vector (1,0).
         /// </summary>
-        public static Vector2 UnitX { get { return new Vector2(1.0f, 0.0f); } }
+        public static Vector2 UnitX
+        {
+            get { return new Vector2(1.0f, 0.0f); }
+        }
+
         /// <summary>
         /// Returns the vector (0,1).
         /// </summary>
-        public static Vector2 UnitY { get { return new Vector2(0.0f, 1.0f); } }
+        public static Vector2 UnitY
+        {
+            get { return new Vector2(0.0f, 1.0f); }
+        }
         #endregion Public Static Properties
 
         #region Public instance methods
@@ -76,7 +91,7 @@ namespace System.Numerics
         }
 
         /// <summary>
-        /// Returns a String representing this Vector2 instance, using the specified format to format individual elements 
+        /// Returns a String representing this Vector2 instance, using the specified format to format individual elements
         /// and the given IFormatProvider.
         /// </summary>
         /// <param name="format">The format of individual elements.</param>
@@ -200,9 +215,7 @@ namespace System.Numerics
                 float ls = value.X * value.X + value.Y * value.Y;
                 float invNorm = 1.0f / (float)Math.Sqrt((double)ls);
 
-                return new Vector2(
-                    value.X * invNorm,
-                    value.Y * invNorm);
+                return new Vector2(value.X * invNorm, value.Y * invNorm);
             }
         }
 
@@ -226,7 +239,8 @@ namespace System.Numerics
 
                 return new Vector2(
                     vector.X - 2.0f * dot * normal.X,
-                    vector.Y - 2.0f * dot * normal.Y);
+                    vector.Y - 2.0f * dot * normal.Y
+                );
             }
         }
 
@@ -264,7 +278,8 @@ namespace System.Numerics
         {
             return new Vector2(
                 value1.X + (value2.X - value1.X) * amount,
-                value1.Y + (value2.Y - value1.Y) * amount);
+                value1.Y + (value2.Y - value1.Y) * amount
+            );
         }
 
         /// <summary>
@@ -278,7 +293,8 @@ namespace System.Numerics
         {
             return new Vector2(
                 position.X * matrix.M11 + position.Y * matrix.M21 + matrix.M31,
-                position.X * matrix.M12 + position.Y * matrix.M22 + matrix.M32);
+                position.X * matrix.M12 + position.Y * matrix.M22 + matrix.M32
+            );
         }
 
         /// <summary>
@@ -292,7 +308,8 @@ namespace System.Numerics
         {
             return new Vector2(
                 position.X * matrix.M11 + position.Y * matrix.M21 + matrix.M41,
-                position.X * matrix.M12 + position.Y * matrix.M22 + matrix.M42);
+                position.X * matrix.M12 + position.Y * matrix.M22 + matrix.M42
+            );
         }
 
         /// <summary>
@@ -306,7 +323,8 @@ namespace System.Numerics
         {
             return new Vector2(
                 normal.X * matrix.M11 + normal.Y * matrix.M21,
-                normal.X * matrix.M12 + normal.Y * matrix.M22);
+                normal.X * matrix.M12 + normal.Y * matrix.M22
+            );
         }
 
         /// <summary>
@@ -320,7 +338,8 @@ namespace System.Numerics
         {
             return new Vector2(
                 normal.X * matrix.M11 + normal.Y * matrix.M21,
-                normal.X * matrix.M12 + normal.Y * matrix.M22);
+                normal.X * matrix.M12 + normal.Y * matrix.M22
+            );
         }
 
         /// <summary>
@@ -344,12 +363,13 @@ namespace System.Numerics
 
             return new Vector2(
                 value.X * (1.0f - yy2 - zz2) + value.Y * (xy2 - wz2),
-                value.X * (xy2 + wz2) + value.Y * (1.0f - xx2 - zz2));
+                value.X * (xy2 + wz2) + value.Y * (1.0f - xx2 - zz2)
+            );
         }
         #endregion Public Static Methods
 
         #region Public operator methods
-        // all the below methods should be inlined as they are 
+        // all the below methods should be inlined as they are
         // implemented over JIT intrinsics
 
         /// <summary>

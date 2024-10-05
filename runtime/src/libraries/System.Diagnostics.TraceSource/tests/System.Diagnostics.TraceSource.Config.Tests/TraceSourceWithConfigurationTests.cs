@@ -15,7 +15,9 @@ namespace System.Diagnostics.TraceSourceConfigTests
 
         private static void CreateAndLoadConfigFile(string filename)
         {
-            Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(
+                ConfigurationUserLevel.None
+            );
             string dir = Path.GetDirectoryName(config.FilePath);
             string from = Path.Combine(dir, filename);
 
@@ -41,18 +43,27 @@ namespace System.Diagnostics.TraceSourceConfigTests
             CreateAndLoadConfigFile("testhost_ConfigWithRuntime.config");
 
             TraceSource mySource = new TraceSource("TraceSourceApp");
-            StringTraceListener origListener = (StringTraceListener)mySource.Listeners["origListener"];
-            StringTraceListener secondListener = (StringTraceListener)mySource.Listeners["secondListener"];
+            StringTraceListener origListener = (StringTraceListener)
+                mySource.Listeners["origListener"];
+            StringTraceListener secondListener = (StringTraceListener)
+                mySource.Listeners["secondListener"];
 
             // Issue an error and a warning message. Only the error message should be logged.
             mySource.TraceEvent(TraceEventType.Error, 1, "Error message.");
             mySource.TraceEvent(TraceEventType.Warning, 2, "Warning message.");
 
-            Assert.Equal($"TraceSourceApp Error: 1 : Error message.{Environment.NewLine}", origListener.Output);
-            Assert.Equal($"TraceSourceApp Error: 1 : Error message.{Environment.NewLine}", secondListener.Output);
+            Assert.Equal(
+                $"TraceSourceApp Error: 1 : Error message.{Environment.NewLine}",
+                origListener.Output
+            );
+            Assert.Equal(
+                $"TraceSourceApp Error: 1 : Error message.{Environment.NewLine}",
+                secondListener.Output
+            );
 
             // Save the original settings from the configuration file.
-            EventTypeFilter configFilter = (EventTypeFilter)mySource.Listeners["origListener"].Filter;
+            EventTypeFilter configFilter = (EventTypeFilter)
+                mySource.Listeners["origListener"].Filter;
             Assert.NotNull(configFilter);
 
             // Create a new filter that logs warnings.
@@ -71,11 +82,16 @@ namespace System.Diagnostics.TraceSourceConfigTests
 
             // Both should be logged for origListener.
             Assert.Equal(
-                $"TraceSourceApp Critical: 3 : Critical message.{Environment.NewLine}" +
-                $"TraceSourceApp Warning: 4 : Warning message.{Environment.NewLine}", origListener.Output);
+                $"TraceSourceApp Critical: 3 : Critical message.{Environment.NewLine}"
+                    + $"TraceSourceApp Warning: 4 : Warning message.{Environment.NewLine}",
+                origListener.Output
+            );
 
             // secondListener is unchanged and doesn't log warnings.
-            Assert.Equal($"TraceSourceApp Critical: 3 : Critical message.{Environment.NewLine}", secondListener.Output);
+            Assert.Equal(
+                $"TraceSourceApp Critical: 3 : Critical message.{Environment.NewLine}",
+                secondListener.Output
+            );
 
             // Restore the original filter settings.
             origListener.Clear();
@@ -86,8 +102,14 @@ namespace System.Diagnostics.TraceSourceConfigTests
             mySource.TraceEvent(TraceEventType.Error, 5, "Error message.");
             mySource.TraceInformation("Informational message.");
 
-            Assert.Equal($"TraceSourceApp Error: 5 : Error message.{Environment.NewLine}", origListener.Output);
-            Assert.Equal($"TraceSourceApp Error: 5 : Error message.{Environment.NewLine}", secondListener.Output);
+            Assert.Equal(
+                $"TraceSourceApp Error: 5 : Error message.{Environment.NewLine}",
+                origListener.Output
+            );
+            Assert.Equal(
+                $"TraceSourceApp Error: 5 : Error message.{Environment.NewLine}",
+                secondListener.Output
+            );
 
             origListener.Clear();
             secondListener.Clear();
@@ -102,7 +124,10 @@ namespace System.Diagnostics.TraceSourceConfigTests
             // Use a SourceSwitch that logs Error.
             CreateAndLoadConfigFile("testhost_RemoveSwitch_before.config");
 
-            SourceSwitch sswitch = new SourceSwitch("Refresh_RemoveSwitch_sourceSwitchToBeRemoved", "Warning");
+            SourceSwitch sswitch = new SourceSwitch(
+                "Refresh_RemoveSwitch_sourceSwitchToBeRemoved",
+                "Warning"
+            );
             Assert.Equal("Warning", sswitch.DefaultValue);
             Assert.Equal("Error", sswitch.Value);
 
@@ -111,8 +136,10 @@ namespace System.Diagnostics.TraceSourceConfigTests
 
             Log();
             Assert.Equal(
-                $"Refresh_RemoveSwitch Error: 1 : Error message.{Environment.NewLine}" +
-                $"Refresh_RemoveSwitch Critical: 3 : Critical message.{Environment.NewLine}", listener.Output);
+                $"Refresh_RemoveSwitch Error: 1 : Error message.{Environment.NewLine}"
+                    + $"Refresh_RemoveSwitch Critical: 3 : Critical message.{Environment.NewLine}",
+                listener.Output
+            );
 
             // Change the switch to log All.
             listener.Clear();
@@ -155,7 +182,10 @@ namespace System.Diagnostics.TraceSourceConfigTests
             Trace.Refresh();
 
             mySource.TraceInformation("Informational message.");
-            Assert.Equal($"Refresh_ChangeSwitch Information: 0 : Informational message.{Environment.NewLine}", listener.Output);
+            Assert.Equal(
+                $"Refresh_ChangeSwitch Information: 0 : Informational message.{Environment.NewLine}",
+                listener.Output
+            );
 
             listener.Close();
             mySource.Close();
@@ -169,15 +199,22 @@ namespace System.Diagnostics.TraceSourceConfigTests
             // Use a SourceSwitch that logs Error.
             CreateAndLoadConfigFile("testhost_RemoveSource_before.config");
 
-            TraceSource mySourceToBeRemoved = new TraceSource("Refresh_RemoveSource", SourceLevels.Warning);
+            TraceSource mySourceToBeRemoved = new TraceSource(
+                "Refresh_RemoveSource",
+                SourceLevels.Warning
+            );
             Assert.Equal(SourceLevels.Warning, mySourceToBeRemoved.DefaultLevel);
             Assert.Equal(SourceLevels.Error, mySourceToBeRemoved.Switch.Level); // Config has Error.
             Assert.Equal("Error", mySourceToBeRemoved.Switch.Value);
 
-            StringTraceListener listenerToBeRemoved = (StringTraceListener)mySourceToBeRemoved.Listeners["listener"];
+            StringTraceListener listenerToBeRemoved = (StringTraceListener)
+                mySourceToBeRemoved.Listeners["listener"];
             listenerToBeRemoved.Clear();
             mySourceToBeRemoved.TraceEvent(TraceEventType.Error, 1, "Error message.");
-            Assert.Equal($"Refresh_RemoveSource Error: 1 : Error message.{Environment.NewLine}", listenerToBeRemoved.Output);
+            Assert.Equal(
+                $"Refresh_RemoveSource Error: 1 : Error message.{Environment.NewLine}",
+                listenerToBeRemoved.Output
+            );
 
             // Change the switch to log All.
             listenerToBeRemoved.Clear();
@@ -207,22 +244,28 @@ namespace System.Diagnostics.TraceSourceConfigTests
 
             TraceSource mySource = new("TraceSource_NoListeners");
             Assert.Equal(1, mySource.Listeners.Count); // The default listener was removed via the config
-            StringTraceListener dynamicallyAddedListener = (StringTraceListener)mySource.Listeners[0];
+            StringTraceListener dynamicallyAddedListener = (StringTraceListener)
+                mySource.Listeners[0];
 
             // Only the Critical should be logged.
             // The config setting was to only log Error, but changed to Critical in the event handler.
             Log();
-            Assert.Equal($"TraceSource_NoListeners Critical: 3 : Critical message.{Environment.NewLine}", dynamicallyAddedListener.Output);
+            Assert.Equal(
+                $"TraceSource_NoListeners Critical: 3 : Critical message.{Environment.NewLine}",
+                dynamicallyAddedListener.Output
+            );
 
             // Log all.
             dynamicallyAddedListener.Clear();
             mySource.Switch.Level = SourceLevels.All;
             Log();
             Assert.Equal(
-                $"TraceSource_NoListeners Error: 1 : Error message.{Environment.NewLine}" +
-                $"TraceSource_NoListeners Warning: 2 : Warning message.{Environment.NewLine}" +
-                $"TraceSource_NoListeners Critical: 3 : Critical message.{Environment.NewLine}" +
-                $"TraceSource_NoListeners Information: 0 : Informational message.{Environment.NewLine}", dynamicallyAddedListener.Output);
+                $"TraceSource_NoListeners Error: 1 : Error message.{Environment.NewLine}"
+                    + $"TraceSource_NoListeners Warning: 2 : Warning message.{Environment.NewLine}"
+                    + $"TraceSource_NoListeners Critical: 3 : Critical message.{Environment.NewLine}"
+                    + $"TraceSource_NoListeners Information: 0 : Informational message.{Environment.NewLine}",
+                dynamicallyAddedListener.Output
+            );
 
             dynamicallyAddedListener.Clear();
             mySource.Close();
@@ -238,7 +281,10 @@ namespace System.Diagnostics.TraceSourceConfigTests
             }
         }
 
-        private void SubscribeToTraceSource_Initializing(object? sender, InitializingTraceSourceEventArgs e)
+        private void SubscribeToTraceSource_Initializing(
+            object? sender,
+            InitializingTraceSourceEventArgs e
+        )
         {
             TraceSource traceSource = e.TraceSource;
             if (traceSource.Name == "TraceSource_NoListeners")
@@ -282,7 +328,9 @@ namespace System.Diagnostics.TraceSourceConfigTests
 
             // The referenced S.R.ConfigurationManager.dll is NetStandard, which does not support EventLogTraceListener.
             mySource = new("EventLogTraceListener");
-            Exception e = Assert.Throws<ConfigurationErrorsException>(() => mySource.Listeners[1].Name);
+            Exception e = Assert.Throws<ConfigurationErrorsException>(
+                () => mySource.Listeners[1].Name
+            );
             Assert.IsType<PlatformNotSupportedException>(e.InnerException);
 
             mySource = new("TextWriterTraceListener");
@@ -312,8 +360,9 @@ namespace System.Diagnostics.TraceSourceConfigTests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/74244", TestPlatforms.tvOS)]
         public void Switch_MissingValue_Throws()
         {
-            Exception e = Assert.Throws<ConfigurationErrorsException>(() =>
-                CreateAndLoadConfigFile("testhost_Switch_MissingValue_Throws.config"));
+            Exception e = Assert.Throws<ConfigurationErrorsException>(
+                () => CreateAndLoadConfigFile("testhost_Switch_MissingValue_Throws.config")
+            );
 
             Assert.Contains("'value'", e.ToString());
         }

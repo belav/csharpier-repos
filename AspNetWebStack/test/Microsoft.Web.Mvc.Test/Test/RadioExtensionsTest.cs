@@ -19,12 +19,24 @@ namespace Microsoft.Web.Mvc.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper(new ViewDataDictionary());
 
             // Act
-            MvcHtmlString[] html = htmlHelper.RadioButtonList("FooList", GetRadioButtonListData(false));
+            MvcHtmlString[] html = htmlHelper.RadioButtonList(
+                "FooList",
+                GetRadioButtonListData(false)
+            );
 
             // Assert
-            Assert.Equal(@"<input id=""FooList"" name=""FooList"" type=""radio"" value=""foo"" />", html[0].ToHtmlString());
-            Assert.Equal(@"<input id=""FooList"" name=""FooList"" type=""radio"" value=""bar"" />", html[1].ToHtmlString());
-            Assert.Equal(@"<input id=""FooList"" name=""FooList"" type=""radio"" value=""baz"" />", html[2].ToHtmlString());
+            Assert.Equal(
+                @"<input id=""FooList"" name=""FooList"" type=""radio"" value=""foo"" />",
+                html[0].ToHtmlString()
+            );
+            Assert.Equal(
+                @"<input id=""FooList"" name=""FooList"" type=""radio"" value=""bar"" />",
+                html[1].ToHtmlString()
+            );
+            Assert.Equal(
+                @"<input id=""FooList"" name=""FooList"" type=""radio"" value=""baz"" />",
+                html[2].ToHtmlString()
+            );
         }
 
         [Fact]
@@ -34,27 +46,53 @@ namespace Microsoft.Web.Mvc.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper(new ViewDataDictionary());
 
             // Act
-            MvcHtmlString[] html = htmlHelper.RadioButtonList("FooList", GetRadioButtonListData(true));
+            MvcHtmlString[] html = htmlHelper.RadioButtonList(
+                "FooList",
+                GetRadioButtonListData(true)
+            );
 
             // Assert
-            Assert.Equal(@"<input id=""FooList"" name=""FooList"" type=""radio"" value=""foo"" />", html[0].ToHtmlString());
-            Assert.Equal(@"<input id=""FooList"" name=""FooList"" type=""radio"" value=""bar"" />", html[1].ToHtmlString());
-            Assert.Equal(@"<input checked=""checked"" id=""FooList"" name=""FooList"" type=""radio"" value=""baz"" />", html[2].ToHtmlString());
+            Assert.Equal(
+                @"<input id=""FooList"" name=""FooList"" type=""radio"" value=""foo"" />",
+                html[0].ToHtmlString()
+            );
+            Assert.Equal(
+                @"<input id=""FooList"" name=""FooList"" type=""radio"" value=""bar"" />",
+                html[1].ToHtmlString()
+            );
+            Assert.Equal(
+                @"<input checked=""checked"" id=""FooList"" name=""FooList"" type=""radio"" value=""baz"" />",
+                html[2].ToHtmlString()
+            );
         }
 
         [Fact]
         public void RadioButtonListItemSelectedWithValueFromViewData()
         {
             // Arrange
-            HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper(new ViewDataDictionary(new { foolist = "bar" }));
+            HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper(
+                new ViewDataDictionary(new { foolist = "bar" })
+            );
 
             // Act
-            MvcHtmlString[] html = htmlHelper.RadioButtonList("FooList", GetRadioButtonListData(false));
+            MvcHtmlString[] html = htmlHelper.RadioButtonList(
+                "FooList",
+                GetRadioButtonListData(false)
+            );
 
             // Assert
-            Assert.Equal(@"<input id=""FooList"" name=""FooList"" type=""radio"" value=""foo"" />", html[0].ToHtmlString());
-            Assert.Equal(@"<input checked=""checked"" id=""FooList"" name=""FooList"" type=""radio"" value=""bar"" />", html[1].ToHtmlString());
-            Assert.Equal(@"<input id=""FooList"" name=""FooList"" type=""radio"" value=""baz"" />", html[2].ToHtmlString());
+            Assert.Equal(
+                @"<input id=""FooList"" name=""FooList"" type=""radio"" value=""foo"" />",
+                html[0].ToHtmlString()
+            );
+            Assert.Equal(
+                @"<input checked=""checked"" id=""FooList"" name=""FooList"" type=""radio"" value=""bar"" />",
+                html[1].ToHtmlString()
+            );
+            Assert.Equal(
+                @"<input id=""FooList"" name=""FooList"" type=""radio"" value=""baz"" />",
+                html[2].ToHtmlString()
+            );
         }
 
         [Fact]
@@ -64,12 +102,25 @@ namespace Microsoft.Web.Mvc.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper(new ViewDataDictionary());
 
             // Act
-            MvcHtmlString[] html = htmlHelper.RadioButtonList("FooList", GetRadioButtonListData(true), new { attr1 = "value1" });
+            MvcHtmlString[] html = htmlHelper.RadioButtonList(
+                "FooList",
+                GetRadioButtonListData(true),
+                new { attr1 = "value1" }
+            );
 
             // Assert
-            Assert.Equal(@"<input attr1=""value1"" id=""FooList"" name=""FooList"" type=""radio"" value=""foo"" />", html[0].ToHtmlString());
-            Assert.Equal(@"<input attr1=""value1"" id=""FooList"" name=""FooList"" type=""radio"" value=""bar"" />", html[1].ToHtmlString());
-            Assert.Equal(@"<input attr1=""value1"" checked=""checked"" id=""FooList"" name=""FooList"" type=""radio"" value=""baz"" />", html[2].ToHtmlString());
+            Assert.Equal(
+                @"<input attr1=""value1"" id=""FooList"" name=""FooList"" type=""radio"" value=""foo"" />",
+                html[0].ToHtmlString()
+            );
+            Assert.Equal(
+                @"<input attr1=""value1"" id=""FooList"" name=""FooList"" type=""radio"" value=""bar"" />",
+                html[1].ToHtmlString()
+            );
+            Assert.Equal(
+                @"<input attr1=""value1"" checked=""checked"" id=""FooList"" name=""FooList"" type=""radio"" value=""baz"" />",
+                html[2].ToHtmlString()
+            );
         }
 
         [Fact]
@@ -79,12 +130,25 @@ namespace Microsoft.Web.Mvc.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper(new ViewDataDictionary());
 
             // Act
-            MvcHtmlString[] html = htmlHelper.RadioButtonList("FooList", GetRadioButtonListData(true), new { foo_bar = "baz" });
+            MvcHtmlString[] html = htmlHelper.RadioButtonList(
+                "FooList",
+                GetRadioButtonListData(true),
+                new { foo_bar = "baz" }
+            );
 
             // Assert
-            Assert.Equal(@"<input foo-bar=""baz"" id=""FooList"" name=""FooList"" type=""radio"" value=""foo"" />", html[0].ToHtmlString());
-            Assert.Equal(@"<input foo-bar=""baz"" id=""FooList"" name=""FooList"" type=""radio"" value=""bar"" />", html[1].ToHtmlString());
-            Assert.Equal(@"<input checked=""checked"" foo-bar=""baz"" id=""FooList"" name=""FooList"" type=""radio"" value=""baz"" />", html[2].ToHtmlString());
+            Assert.Equal(
+                @"<input foo-bar=""baz"" id=""FooList"" name=""FooList"" type=""radio"" value=""foo"" />",
+                html[0].ToHtmlString()
+            );
+            Assert.Equal(
+                @"<input foo-bar=""baz"" id=""FooList"" name=""FooList"" type=""radio"" value=""bar"" />",
+                html[1].ToHtmlString()
+            );
+            Assert.Equal(
+                @"<input checked=""checked"" foo-bar=""baz"" id=""FooList"" name=""FooList"" type=""radio"" value=""baz"" />",
+                html[2].ToHtmlString()
+            );
         }
 
         [Fact]
@@ -94,12 +158,25 @@ namespace Microsoft.Web.Mvc.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper(new ViewDataDictionary());
 
             // Act
-            MvcHtmlString[] html = htmlHelper.RadioButtonList("FooList", GetRadioButtonListData(true), new RouteValueDictionary(new { attr1 = "value1" }));
+            MvcHtmlString[] html = htmlHelper.RadioButtonList(
+                "FooList",
+                GetRadioButtonListData(true),
+                new RouteValueDictionary(new { attr1 = "value1" })
+            );
 
             // Assert
-            Assert.Equal(@"<input attr1=""value1"" id=""FooList"" name=""FooList"" type=""radio"" value=""foo"" />", html[0].ToHtmlString());
-            Assert.Equal(@"<input attr1=""value1"" id=""FooList"" name=""FooList"" type=""radio"" value=""bar"" />", html[1].ToHtmlString());
-            Assert.Equal(@"<input attr1=""value1"" checked=""checked"" id=""FooList"" name=""FooList"" type=""radio"" value=""baz"" />", html[2].ToHtmlString());
+            Assert.Equal(
+                @"<input attr1=""value1"" id=""FooList"" name=""FooList"" type=""radio"" value=""foo"" />",
+                html[0].ToHtmlString()
+            );
+            Assert.Equal(
+                @"<input attr1=""value1"" id=""FooList"" name=""FooList"" type=""radio"" value=""bar"" />",
+                html[1].ToHtmlString()
+            );
+            Assert.Equal(
+                @"<input attr1=""value1"" checked=""checked"" id=""FooList"" name=""FooList"" type=""radio"" value=""baz"" />",
+                html[2].ToHtmlString()
+            );
         }
 
         [Fact]
@@ -112,9 +189,18 @@ namespace Microsoft.Web.Mvc.Test
             MvcHtmlString[] html = htmlHelper.RadioButtonList("FooList");
 
             // Assert
-            Assert.Equal(@"<input id=""FooList"" name=""FooList"" type=""radio"" value=""foo"" />", html[0].ToHtmlString());
-            Assert.Equal(@"<input id=""FooList"" name=""FooList"" type=""radio"" value=""bar"" />", html[1].ToHtmlString());
-            Assert.Equal(@"<input id=""FooList"" name=""FooList"" type=""radio"" value=""baz"" />", html[2].ToHtmlString());
+            Assert.Equal(
+                @"<input id=""FooList"" name=""FooList"" type=""radio"" value=""foo"" />",
+                html[0].ToHtmlString()
+            );
+            Assert.Equal(
+                @"<input id=""FooList"" name=""FooList"" type=""radio"" value=""bar"" />",
+                html[1].ToHtmlString()
+            );
+            Assert.Equal(
+                @"<input id=""FooList"" name=""FooList"" type=""radio"" value=""baz"" />",
+                html[2].ToHtmlString()
+            );
         }
 
         [Fact]
@@ -127,9 +213,18 @@ namespace Microsoft.Web.Mvc.Test
             MvcHtmlString[] html = htmlHelper.RadioButtonList("FooList");
 
             // Assert
-            Assert.Equal(@"<input id=""FooList"" name=""FooList"" type=""radio"" value=""foo"" />", html[0].ToHtmlString());
-            Assert.Equal(@"<input id=""FooList"" name=""FooList"" type=""radio"" value=""bar"" />", html[1].ToHtmlString());
-            Assert.Equal(@"<input checked=""checked"" id=""FooList"" name=""FooList"" type=""radio"" value=""baz"" />", html[2].ToHtmlString());
+            Assert.Equal(
+                @"<input id=""FooList"" name=""FooList"" type=""radio"" value=""foo"" />",
+                html[0].ToHtmlString()
+            );
+            Assert.Equal(
+                @"<input id=""FooList"" name=""FooList"" type=""radio"" value=""bar"" />",
+                html[1].ToHtmlString()
+            );
+            Assert.Equal(
+                @"<input checked=""checked"" id=""FooList"" name=""FooList"" type=""radio"" value=""baz"" />",
+                html[2].ToHtmlString()
+            );
         }
 
         [Fact]
@@ -142,9 +237,18 @@ namespace Microsoft.Web.Mvc.Test
             MvcHtmlString[] html = htmlHelper.RadioButtonList("FooList", new { attr1 = "value1" });
 
             // Assert
-            Assert.Equal(@"<input attr1=""value1"" id=""FooList"" name=""FooList"" type=""radio"" value=""foo"" />", html[0].ToHtmlString());
-            Assert.Equal(@"<input attr1=""value1"" id=""FooList"" name=""FooList"" type=""radio"" value=""bar"" />", html[1].ToHtmlString());
-            Assert.Equal(@"<input attr1=""value1"" checked=""checked"" id=""FooList"" name=""FooList"" type=""radio"" value=""baz"" />", html[2].ToHtmlString());
+            Assert.Equal(
+                @"<input attr1=""value1"" id=""FooList"" name=""FooList"" type=""radio"" value=""foo"" />",
+                html[0].ToHtmlString()
+            );
+            Assert.Equal(
+                @"<input attr1=""value1"" id=""FooList"" name=""FooList"" type=""radio"" value=""bar"" />",
+                html[1].ToHtmlString()
+            );
+            Assert.Equal(
+                @"<input attr1=""value1"" checked=""checked"" id=""FooList"" name=""FooList"" type=""radio"" value=""baz"" />",
+                html[2].ToHtmlString()
+            );
         }
 
         [Fact]
@@ -157,9 +261,18 @@ namespace Microsoft.Web.Mvc.Test
             MvcHtmlString[] html = htmlHelper.RadioButtonList("FooList", new { foo_bar = "baz" });
 
             // Assert
-            Assert.Equal(@"<input foo-bar=""baz"" id=""FooList"" name=""FooList"" type=""radio"" value=""foo"" />", html[0].ToHtmlString());
-            Assert.Equal(@"<input foo-bar=""baz"" id=""FooList"" name=""FooList"" type=""radio"" value=""bar"" />", html[1].ToHtmlString());
-            Assert.Equal(@"<input checked=""checked"" foo-bar=""baz"" id=""FooList"" name=""FooList"" type=""radio"" value=""baz"" />", html[2].ToHtmlString());
+            Assert.Equal(
+                @"<input foo-bar=""baz"" id=""FooList"" name=""FooList"" type=""radio"" value=""foo"" />",
+                html[0].ToHtmlString()
+            );
+            Assert.Equal(
+                @"<input foo-bar=""baz"" id=""FooList"" name=""FooList"" type=""radio"" value=""bar"" />",
+                html[1].ToHtmlString()
+            );
+            Assert.Equal(
+                @"<input checked=""checked"" foo-bar=""baz"" id=""FooList"" name=""FooList"" type=""radio"" value=""baz"" />",
+                html[2].ToHtmlString()
+            );
         }
 
         [Fact]
@@ -169,12 +282,24 @@ namespace Microsoft.Web.Mvc.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper(GetRadioButtonListViewData(true));
 
             // Act
-            MvcHtmlString[] html = htmlHelper.RadioButtonList("FooList", new RouteValueDictionary(new { attr1 = "value1" }));
+            MvcHtmlString[] html = htmlHelper.RadioButtonList(
+                "FooList",
+                new RouteValueDictionary(new { attr1 = "value1" })
+            );
 
             // Assert
-            Assert.Equal(@"<input attr1=""value1"" id=""FooList"" name=""FooList"" type=""radio"" value=""foo"" />", html[0].ToHtmlString());
-            Assert.Equal(@"<input attr1=""value1"" id=""FooList"" name=""FooList"" type=""radio"" value=""bar"" />", html[1].ToHtmlString());
-            Assert.Equal(@"<input attr1=""value1"" checked=""checked"" id=""FooList"" name=""FooList"" type=""radio"" value=""baz"" />", html[2].ToHtmlString());
+            Assert.Equal(
+                @"<input attr1=""value1"" id=""FooList"" name=""FooList"" type=""radio"" value=""foo"" />",
+                html[0].ToHtmlString()
+            );
+            Assert.Equal(
+                @"<input attr1=""value1"" id=""FooList"" name=""FooList"" type=""radio"" value=""bar"" />",
+                html[1].ToHtmlString()
+            );
+            Assert.Equal(
+                @"<input attr1=""value1"" checked=""checked"" id=""FooList"" name=""FooList"" type=""radio"" value=""baz"" />",
+                html[2].ToHtmlString()
+            );
         }
 
         [Fact]
@@ -184,8 +309,13 @@ namespace Microsoft.Web.Mvc.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper(GetRadioButtonListViewData(true));
 
             // Act / Assert
-            Assert.Throws<InvalidOperationException>(() => 
-                htmlHelper.RadioButtonList("WrongFooList", new RouteValueDictionary(new { attr1 = "value1" })));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    htmlHelper.RadioButtonList(
+                        "WrongFooList",
+                        new RouteValueDictionary(new { attr1 = "value1" })
+                    )
+            );
         }
 
         [Fact]
@@ -197,8 +327,13 @@ namespace Microsoft.Web.Mvc.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper(viewData);
 
             // Act / Assert
-            Assert.Throws<InvalidOperationException>(() => 
-                htmlHelper.RadioButtonList("FooList", new RouteValueDictionary(new { attr1 = "value1" })));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    htmlHelper.RadioButtonList(
+                        "FooList",
+                        new RouteValueDictionary(new { attr1 = "value1" })
+                    )
+            );
         }
 
         [Fact]
@@ -209,8 +344,14 @@ namespace Microsoft.Web.Mvc.Test
             SelectList selectList = GetRadioButtonListData(true);
 
             // Act / Assert
-            Assert.Throws<ArgumentException>(() => 
-                htmlHelper.RadioButtonList("", selectList, new RouteValueDictionary(new { attr1 = "value1" })));
+            Assert.Throws<ArgumentException>(
+                () =>
+                    htmlHelper.RadioButtonList(
+                        "",
+                        selectList,
+                        new RouteValueDictionary(new { attr1 = "value1" })
+                    )
+            );
         }
 
         [Fact]
@@ -220,8 +361,14 @@ namespace Microsoft.Web.Mvc.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper(GetRadioButtonListViewData(true));
 
             // Act / Assert
-            Assert.Throws<ArgumentNullException>(() => 
-                htmlHelper.RadioButtonList("FooBar", null, new RouteValueDictionary(new { attr1 = "value1" })));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    htmlHelper.RadioButtonList(
+                        "FooBar",
+                        null,
+                        new RouteValueDictionary(new { attr1 = "value1" })
+                    )
+            );
         }
 
         private static SelectList GetRadioButtonListData(bool selectBaz)

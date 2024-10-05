@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides the APIs for user sign in.
 /// </summary>
 /// <typeparam name="TUser">The type encapsulating a user.</typeparam>
-public class SignInManager<TUser> where TUser : class
+public class SignInManager<TUser>
+    where TUser : class
 {
     private const string LoginProviderKey = "LoginProvider";
     private const string XsrfKey = "XsrfId";
@@ -37,13 +38,15 @@ public class SignInManager<TUser> where TUser : class
     /// <param name="logger">The logger used to log messages, warnings and errors.</param>
     /// <param name="schemes">The scheme provider that is used enumerate the authentication schemes.</param>
     /// <param name="confirmation">The <see cref="IUserConfirmation{TUser}"/> used check whether a user account is confirmed.</param>
-    public SignInManager(UserManager<TUser> userManager,
+    public SignInManager(
+        UserManager<TUser> userManager,
         IHttpContextAccessor contextAccessor,
         IUserClaimsPrincipalFactory<TUser> claimsFactory,
         IOptions<IdentityOptions> optionsAccessor,
         ILogger<SignInManager<TUser>> logger,
         IAuthenticationSchemeProvider schemes,
-        IUserConfirmation<TUser> confirmation)
+        IUserConfirmation<TUser> confirmation
+    )
     {
         ArgumentNullException.ThrowIfNull(userManager);
         ArgumentNullException.ThrowIfNull(contextAccessor);
@@ -100,10 +103,7 @@ public class SignInManager<TUser> where TUser : class
             }
             return context;
         }
-        set
-        {
-            _context = value;
-        }
+        set { _context = value; }
     }
 
     /// <summary>
@@ -111,7 +111,8 @@ public class SignInManager<TUser> where TUser : class
     /// </summary>
     /// <param name="user">The user to create a <see cref="ClaimsPrincipal"/> for.</param>
     /// <returns>The task object representing the asynchronous operation, containing the ClaimsPrincipal for the specified user.</returns>
-    public virtual async Task<ClaimsPrincipal> CreateUserPrincipalAsync(TUser user) => await ClaimsFactory.CreateAsync(user);
+    public virtual async Task<ClaimsPrincipal> CreateUserPrincipalAsync(TUser user) =>
+        await ClaimsFactory.CreateAsync(user);
 
     /// <summary>
     /// Returns true if the principal has an identity with the application cookie identity
@@ -121,8 +122,8 @@ public class SignInManager<TUser> where TUser : class
     public virtual bool IsSignedIn(ClaimsPrincipal principal)
     {
         ArgumentNullException.ThrowIfNull(principal);
-        return principal.Identities != null &&
-            principal.Identities.Any(i => i.AuthenticationType == AuthenticationScheme);
+        return principal.Identities != null
+            && principal.Identities.Any(i => i.AuthenticationType == AuthenticationScheme);
     }
 
     /// <summary>
@@ -135,19 +136,36 @@ public class SignInManager<TUser> where TUser : class
     /// </returns>
     public virtual async Task<bool> CanSignInAsync(TUser user)
     {
-        if (Options.SignIn.RequireConfirmedEmail && !(await UserManager.IsEmailConfirmedAsync(user)))
+        if (
+            Options.SignIn.RequireConfirmedEmail && !(await UserManager.IsEmailConfirmedAsync(user))
+        )
         {
-            Logger.LogDebug(EventIds.UserCannotSignInWithoutConfirmedEmail, "User cannot sign in without a confirmed email.");
+            Logger.LogDebug(
+                EventIds.UserCannotSignInWithoutConfirmedEmail,
+                "User cannot sign in without a confirmed email."
+            );
             return false;
         }
-        if (Options.SignIn.RequireConfirmedPhoneNumber && !(await UserManager.IsPhoneNumberConfirmedAsync(user)))
+        if (
+            Options.SignIn.RequireConfirmedPhoneNumber
+            && !(await UserManager.IsPhoneNumberConfirmedAsync(user))
+        )
         {
-            Logger.LogDebug(EventIds.UserCannotSignInWithoutConfirmedPhoneNumber, "User cannot sign in without a confirmed phone number.");
+            Logger.LogDebug(
+                EventIds.UserCannotSignInWithoutConfirmedPhoneNumber,
+                "User cannot sign in without a confirmed phone number."
+            );
             return false;
         }
-        if (Options.SignIn.RequireConfirmedAccount && !(await _confirmation.IsConfirmedAsync(UserManager, user)))
+        if (
+            Options.SignIn.RequireConfirmedAccount
+            && !(await _confirmation.IsConfirmedAsync(UserManager, user))
+        )
         {
-            Logger.LogDebug(EventIds.UserCannotSignInWithoutConfirmedAccount, "User cannot sign in without a confirmed account.");
+            Logger.LogDebug(
+                EventIds.UserCannotSignInWithoutConfirmedAccount,
+                "User cannot sign in without a confirmed account."
+            );
             return false;
         }
         return true;
@@ -190,9 +208,21 @@ public class SignInManager<TUser> where TUser : class
     /// <param name="isPersistent">Flag indicating whether the sign-in cookie should persist after the browser is closed.</param>
     /// <param name="authenticationMethod">Name of the method used to authenticate the user.</param>
     /// <returns>The task object representing the asynchronous operation.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required for backwards compatibility")]
-    public virtual Task SignInAsync(TUser user, bool isPersistent, string? authenticationMethod = null)
-        => SignInAsync(user, new AuthenticationProperties { IsPersistent = isPersistent }, authenticationMethod);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required for backwards compatibility"
+    )]
+    public virtual Task SignInAsync(
+        TUser user,
+        bool isPersistent,
+        string? authenticationMethod = null
+    ) =>
+        SignInAsync(
+            user,
+            new AuthenticationProperties { IsPersistent = isPersistent },
+            authenticationMethod
+        );
 
     /// <summary>
     /// Signs in the specified <paramref name="user"/>.
@@ -201,8 +231,16 @@ public class SignInManager<TUser> where TUser : class
     /// <param name="authenticationProperties">Properties applied to the login and authentication cookie.</param>
     /// <param name="authenticationMethod">Name of the method used to authenticate the user.</param>
     /// <returns>The task object representing the asynchronous operation.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required for backwards compatibility")]
-    public virtual Task SignInAsync(TUser user, AuthenticationProperties authenticationProperties, string? authenticationMethod = null)
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required for backwards compatibility"
+    )]
+    public virtual Task SignInAsync(
+        TUser user,
+        AuthenticationProperties authenticationProperties,
+        string? authenticationMethod = null
+    )
     {
         IList<Claim> additionalClaims = Array.Empty<Claim>();
         if (authenticationMethod != null)
@@ -220,8 +258,16 @@ public class SignInManager<TUser> where TUser : class
     /// <param name="isPersistent">Flag indicating whether the sign-in cookie should persist after the browser is closed.</param>
     /// <param name="additionalClaims">Additional claims that will be stored in the cookie.</param>
     /// <returns>The task object representing the asynchronous operation.</returns>
-    public virtual Task SignInWithClaimsAsync(TUser user, bool isPersistent, IEnumerable<Claim> additionalClaims)
-        => SignInWithClaimsAsync(user, new AuthenticationProperties { IsPersistent = isPersistent }, additionalClaims);
+    public virtual Task SignInWithClaimsAsync(
+        TUser user,
+        bool isPersistent,
+        IEnumerable<Claim> additionalClaims
+    ) =>
+        SignInWithClaimsAsync(
+            user,
+            new AuthenticationProperties { IsPersistent = isPersistent },
+            additionalClaims
+        );
 
     /// <summary>
     /// Signs in the specified <paramref name="user"/>.
@@ -230,16 +276,22 @@ public class SignInManager<TUser> where TUser : class
     /// <param name="authenticationProperties">Properties applied to the login and authentication cookie.</param>
     /// <param name="additionalClaims">Additional claims that will be stored in the cookie.</param>
     /// <returns>The task object representing the asynchronous operation.</returns>
-    public virtual async Task SignInWithClaimsAsync(TUser user, AuthenticationProperties? authenticationProperties, IEnumerable<Claim> additionalClaims)
+    public virtual async Task SignInWithClaimsAsync(
+        TUser user,
+        AuthenticationProperties? authenticationProperties,
+        IEnumerable<Claim> additionalClaims
+    )
     {
         var userPrincipal = await CreateUserPrincipalAsync(user);
         foreach (var claim in additionalClaims)
         {
             userPrincipal.Identities.First().AddClaim(claim);
         }
-        await Context.SignInAsync(AuthenticationScheme,
+        await Context.SignInAsync(
+            AuthenticationScheme,
             userPrincipal,
-            authenticationProperties ?? new AuthenticationProperties());
+            authenticationProperties ?? new AuthenticationProperties()
+        );
 
         // This is useful for updating claims immediately when hitting MapIdentityApi's /account/info endpoint with cookies.
         Context.User = userPrincipal;
@@ -276,11 +328,19 @@ public class SignInManager<TUser> where TUser : class
             return null;
         }
         var user = await UserManager.GetUserAsync(principal);
-        if (await ValidateSecurityStampAsync(user, principal.FindFirstValue(Options.ClaimsIdentity.SecurityStampClaimType)))
+        if (
+            await ValidateSecurityStampAsync(
+                user,
+                principal.FindFirstValue(Options.ClaimsIdentity.SecurityStampClaimType)
+            )
+        )
         {
             return user;
         }
-        Logger.LogDebug(EventIds.SecurityStampValidationFailedId4, "Failed to validate a security stamp.");
+        Logger.LogDebug(
+            EventIds.SecurityStampValidationFailedId4,
+            "Failed to validate a security stamp."
+        );
         return null;
     }
 
@@ -292,18 +352,28 @@ public class SignInManager<TUser> where TUser : class
     /// <param name="principal">The principal whose stamp should be validated.</param>
     /// <returns>The task object representing the asynchronous operation. The task will contain the <typeparamref name="TUser"/>
     /// if the stamp matches the persisted value, otherwise it will return null.</returns>
-    public virtual async Task<TUser?> ValidateTwoFactorSecurityStampAsync(ClaimsPrincipal? principal)
+    public virtual async Task<TUser?> ValidateTwoFactorSecurityStampAsync(
+        ClaimsPrincipal? principal
+    )
     {
         if (principal == null || principal.Identity?.Name == null)
         {
             return null;
         }
         var user = await UserManager.FindByIdAsync(principal.Identity.Name);
-        if (await ValidateSecurityStampAsync(user, principal.FindFirstValue(Options.ClaimsIdentity.SecurityStampClaimType)))
+        if (
+            await ValidateSecurityStampAsync(
+                user,
+                principal.FindFirstValue(Options.ClaimsIdentity.SecurityStampClaimType)
+            )
+        )
         {
             return user;
         }
-        Logger.LogDebug(EventIds.TwoFactorSecurityStampValidationFailed, "Failed to validate a security stamp.");
+        Logger.LogDebug(
+            EventIds.TwoFactorSecurityStampValidationFailed,
+            "Failed to validate a security stamp."
+        );
         return null;
     }
 
@@ -314,10 +384,17 @@ public class SignInManager<TUser> where TUser : class
     /// <param name="user">The user whose stamp should be validated.</param>
     /// <param name="securityStamp">The expected security stamp value.</param>
     /// <returns>The result of the validation.</returns>
-    public virtual async Task<bool> ValidateSecurityStampAsync(TUser? user, string? securityStamp)
-        => user != null &&
+    public virtual async Task<bool> ValidateSecurityStampAsync(
+        TUser? user,
+        string? securityStamp
+    ) =>
+        user != null
+        &&
         // Only validate the security stamp if the store supports it
-        (!UserManager.SupportsUserSecurityStamp || securityStamp == await UserManager.GetSecurityStampAsync(user));
+        (
+            !UserManager.SupportsUserSecurityStamp
+            || securityStamp == await UserManager.GetSecurityStampAsync(user)
+        );
 
     /// <summary>
     /// Attempts to sign in the specified <paramref name="user"/> and <paramref name="password"/> combination
@@ -329,15 +406,17 @@ public class SignInManager<TUser> where TUser : class
     /// <param name="lockoutOnFailure">Flag indicating if the user account should be locked if the sign in fails.</param>
     /// <returns>The task object representing the asynchronous operation containing the <see name="SignInResult"/>
     /// for the sign-in attempt.</returns>
-    public virtual async Task<SignInResult> PasswordSignInAsync(TUser user, string password,
-        bool isPersistent, bool lockoutOnFailure)
+    public virtual async Task<SignInResult> PasswordSignInAsync(
+        TUser user,
+        string password,
+        bool isPersistent,
+        bool lockoutOnFailure
+    )
     {
         ArgumentNullException.ThrowIfNull(user);
 
         var attempt = await CheckPasswordSignInAsync(user, password, lockoutOnFailure);
-        return attempt.Succeeded
-            ? await SignInOrTwoFactorAsync(user, isPersistent)
-            : attempt;
+        return attempt.Succeeded ? await SignInOrTwoFactorAsync(user, isPersistent) : attempt;
     }
 
     /// <summary>
@@ -350,8 +429,12 @@ public class SignInManager<TUser> where TUser : class
     /// <param name="lockoutOnFailure">Flag indicating if the user account should be locked if the sign in fails.</param>
     /// <returns>The task object representing the asynchronous operation containing the <see name="SignInResult"/>
     /// for the sign-in attempt.</returns>
-    public virtual async Task<SignInResult> PasswordSignInAsync(string userName, string password,
-        bool isPersistent, bool lockoutOnFailure)
+    public virtual async Task<SignInResult> PasswordSignInAsync(
+        string userName,
+        string password,
+        bool isPersistent,
+        bool lockoutOnFailure
+    )
     {
         var user = await UserManager.FindByNameAsync(userName);
         if (user == null)
@@ -371,7 +454,11 @@ public class SignInManager<TUser> where TUser : class
     /// <returns>The task object representing the asynchronous operation containing the <see name="SignInResult"/>
     /// for the sign-in attempt.</returns>
     /// <returns></returns>
-    public virtual async Task<SignInResult> CheckPasswordSignInAsync(TUser user, string password, bool lockoutOnFailure)
+    public virtual async Task<SignInResult> CheckPasswordSignInAsync(
+        TUser user,
+        string password,
+        bool lockoutOnFailure
+    )
     {
         ArgumentNullException.ThrowIfNull(user);
 
@@ -383,9 +470,17 @@ public class SignInManager<TUser> where TUser : class
 
         if (await UserManager.CheckPasswordAsync(user, password))
         {
-            var alwaysLockout = AppContext.TryGetSwitch("Microsoft.AspNetCore.Identity.CheckPasswordSignInAlwaysResetLockoutOnSuccess", out var enabled) && enabled;
+            var alwaysLockout =
+                AppContext.TryGetSwitch(
+                    "Microsoft.AspNetCore.Identity.CheckPasswordSignInAlwaysResetLockoutOnSuccess",
+                    out var enabled
+                ) && enabled;
             // Only reset the lockout when not in quirks mode if either TFA is not enabled or the client is remembered for TFA.
-            if (alwaysLockout || !await IsTwoFactorEnabledAsync(user) || await IsTwoFactorClientRememberedAsync(user))
+            if (
+                alwaysLockout
+                || !await IsTwoFactorEnabledAsync(user)
+                || await IsTwoFactorClientRememberedAsync(user)
+            )
             {
                 var resetLockoutResult = await ResetLockoutWithResult(user);
                 if (!resetLockoutResult.Succeeded)
@@ -404,7 +499,8 @@ public class SignInManager<TUser> where TUser : class
         if (UserManager.SupportsUserLockout && lockoutOnFailure)
         {
             // If lockout is requested, increment access failed count which might lock out the user
-            var incrementLockoutResult = await UserManager.AccessFailedAsync(user) ?? IdentityResult.Success;
+            var incrementLockoutResult =
+                await UserManager.AccessFailedAsync(user) ?? IdentityResult.Success;
             if (!incrementLockoutResult.Succeeded)
             {
                 // Return the same failure we do when resetting the lockout fails after a correct password.
@@ -437,7 +533,9 @@ public class SignInManager<TUser> where TUser : class
 
         var userId = await UserManager.GetUserIdAsync(user);
         var result = await Context.AuthenticateAsync(IdentityConstants.TwoFactorRememberMeScheme);
-        return (result?.Principal != null && result.Principal.FindFirstValue(ClaimTypes.Name) == userId);
+        return (
+            result?.Principal != null && result.Principal.FindFirstValue(ClaimTypes.Name) == userId
+        );
     }
 
     /// <summary>
@@ -449,9 +547,11 @@ public class SignInManager<TUser> where TUser : class
     public virtual async Task RememberTwoFactorClientAsync(TUser user)
     {
         var principal = await StoreRememberClient(user);
-        await Context.SignInAsync(IdentityConstants.TwoFactorRememberMeScheme,
+        await Context.SignInAsync(
+            IdentityConstants.TwoFactorRememberMeScheme,
             principal,
-            new AuthenticationProperties { IsPersistent = true });
+            new AuthenticationProperties { IsPersistent = true }
+        );
     }
 
     /// <summary>
@@ -476,17 +576,30 @@ public class SignInManager<TUser> where TUser : class
             return SignInResult.Failed;
         }
 
-        var result = await UserManager.RedeemTwoFactorRecoveryCodeAsync(twoFactorInfo.User, recoveryCode);
+        var result = await UserManager.RedeemTwoFactorRecoveryCodeAsync(
+            twoFactorInfo.User,
+            recoveryCode
+        );
         if (result.Succeeded)
         {
-            return await DoTwoFactorSignInAsync(twoFactorInfo.User, twoFactorInfo, isPersistent: false, rememberClient: false);
+            return await DoTwoFactorSignInAsync(
+                twoFactorInfo.User,
+                twoFactorInfo,
+                isPersistent: false,
+                rememberClient: false
+            );
         }
 
         // We don't protect against brute force attacks since codes are expected to be random.
         return SignInResult.Failed;
     }
 
-    private async Task<SignInResult> DoTwoFactorSignInAsync(TUser user, TwoFactorAuthenticationInfo twoFactorInfo, bool isPersistent, bool rememberClient)
+    private async Task<SignInResult> DoTwoFactorSignInAsync(
+        TUser user,
+        TwoFactorAuthenticationInfo twoFactorInfo,
+        bool isPersistent,
+        bool rememberClient
+    )
     {
         var resetLockoutResult = await ResetLockoutWithResult(user);
         if (!resetLockoutResult.Succeeded)
@@ -531,7 +644,11 @@ public class SignInManager<TUser> where TUser : class
     /// two factor authentication prompts.</param>
     /// <returns>The task object representing the asynchronous operation containing the <see name="SignInResult"/>
     /// for the sign-in attempt.</returns>
-    public virtual async Task<SignInResult> TwoFactorAuthenticatorSignInAsync(string code, bool isPersistent, bool rememberClient)
+    public virtual async Task<SignInResult> TwoFactorAuthenticatorSignInAsync(
+        string code,
+        bool isPersistent,
+        bool rememberClient
+    )
     {
         var twoFactorInfo = await RetrieveTwoFactorInfoAsync();
         if (twoFactorInfo == null)
@@ -546,14 +663,21 @@ public class SignInManager<TUser> where TUser : class
             return error;
         }
 
-        if (await UserManager.VerifyTwoFactorTokenAsync(user, Options.Tokens.AuthenticatorTokenProvider, code))
+        if (
+            await UserManager.VerifyTwoFactorTokenAsync(
+                user,
+                Options.Tokens.AuthenticatorTokenProvider,
+                code
+            )
+        )
         {
             return await DoTwoFactorSignInAsync(user, twoFactorInfo, isPersistent, rememberClient);
         }
         // If the token is incorrect, record the failure which also may cause the user to be locked out
         if (UserManager.SupportsUserLockout)
         {
-            var incrementLockoutResult = await UserManager.AccessFailedAsync(user) ?? IdentityResult.Success;
+            var incrementLockoutResult =
+                await UserManager.AccessFailedAsync(user) ?? IdentityResult.Success;
             if (!incrementLockoutResult.Succeeded)
             {
                 // Return the same failure we do when resetting the lockout fails after a correct two factor code.
@@ -579,7 +703,12 @@ public class SignInManager<TUser> where TUser : class
     /// two factor authentication prompts.</param>
     /// <returns>The task object representing the asynchronous operation containing the <see name="SignInResult"/>
     /// for the sign-in attempt.</returns>
-    public virtual async Task<SignInResult> TwoFactorSignInAsync(string provider, string code, bool isPersistent, bool rememberClient)
+    public virtual async Task<SignInResult> TwoFactorSignInAsync(
+        string provider,
+        string code,
+        bool isPersistent,
+        bool rememberClient
+    )
     {
         var twoFactorInfo = await RetrieveTwoFactorInfoAsync();
         if (twoFactorInfo == null)
@@ -600,7 +729,8 @@ public class SignInManager<TUser> where TUser : class
         // If the token is incorrect, record the failure which also may cause the user to be locked out
         if (UserManager.SupportsUserLockout)
         {
-            var incrementLockoutResult = await UserManager.AccessFailedAsync(user) ?? IdentityResult.Success;
+            var incrementLockoutResult =
+                await UserManager.AccessFailedAsync(user) ?? IdentityResult.Success;
             if (!incrementLockoutResult.Succeeded)
             {
                 // Return the same failure we do when resetting the lockout fails after a correct two factor code.
@@ -640,8 +770,11 @@ public class SignInManager<TUser> where TUser : class
     /// <param name="isPersistent">Flag indicating whether the sign-in cookie should persist after the browser is closed.</param>
     /// <returns>The task object representing the asynchronous operation containing the <see name="SignInResult"/>
     /// for the sign-in attempt.</returns>
-    public virtual Task<SignInResult> ExternalLoginSignInAsync(string loginProvider, string providerKey, bool isPersistent)
-        => ExternalLoginSignInAsync(loginProvider, providerKey, isPersistent, bypassTwoFactor: false);
+    public virtual Task<SignInResult> ExternalLoginSignInAsync(
+        string loginProvider,
+        string providerKey,
+        bool isPersistent
+    ) => ExternalLoginSignInAsync(loginProvider, providerKey, isPersistent, bypassTwoFactor: false);
 
     /// <summary>
     /// Signs in a user via a previously registered third party login, as an asynchronous operation.
@@ -652,7 +785,12 @@ public class SignInManager<TUser> where TUser : class
     /// <param name="bypassTwoFactor">Flag indicating whether to bypass two factor authentication.</param>
     /// <returns>The task object representing the asynchronous operation containing the <see name="SignInResult"/>
     /// for the sign-in attempt.</returns>
-    public virtual async Task<SignInResult> ExternalLoginSignInAsync(string loginProvider, string providerKey, bool isPersistent, bool bypassTwoFactor)
+    public virtual async Task<SignInResult> ExternalLoginSignInAsync(
+        string loginProvider,
+        string providerKey,
+        bool isPersistent,
+        bool bypassTwoFactor
+    )
     {
         var user = await UserManager.FindByLoginAsync(loginProvider, providerKey);
         if (user == null)
@@ -672,7 +810,9 @@ public class SignInManager<TUser> where TUser : class
     /// Gets a collection of <see cref="Authentication.AuthenticationScheme"/>s for the known external login providers.
     /// </summary>
     /// <returns>A collection of <see cref="Authentication.AuthenticationScheme"/>s for the known external login providers.</returns>
-    public virtual async Task<IEnumerable<AuthenticationScheme>> GetExternalAuthenticationSchemesAsync()
+    public virtual async Task<
+        IEnumerable<AuthenticationScheme>
+    > GetExternalAuthenticationSchemesAsync()
     {
         var schemes = await _schemes.GetAllSchemesAsync();
         return schemes.Where(s => !string.IsNullOrEmpty(s.DisplayName));
@@ -684,36 +824,45 @@ public class SignInManager<TUser> where TUser : class
     /// <param name="expectedXsrf">Flag indication whether a Cross Site Request Forgery token was expected in the current request.</param>
     /// <returns>The task object representing the asynchronous operation containing the <see name="ExternalLoginInfo"/>
     /// for the sign-in attempt.</returns>
-    public virtual async Task<ExternalLoginInfo?> GetExternalLoginInfoAsync(string? expectedXsrf = null)
+    public virtual async Task<ExternalLoginInfo?> GetExternalLoginInfoAsync(
+        string? expectedXsrf = null
+    )
     {
         var auth = await Context.AuthenticateAsync(IdentityConstants.ExternalScheme);
         var items = auth?.Properties?.Items;
-        if (auth?.Principal == null || items == null || !items.TryGetValue(LoginProviderKey, out var provider))
+        if (
+            auth?.Principal == null
+            || items == null
+            || !items.TryGetValue(LoginProviderKey, out var provider)
+        )
         {
             return null;
         }
 
         if (expectedXsrf != null)
         {
-            if (!items.TryGetValue(XsrfKey, out var userId) ||
-                userId != expectedXsrf)
+            if (!items.TryGetValue(XsrfKey, out var userId) || userId != expectedXsrf)
             {
                 return null;
             }
         }
 
-        var providerKey = auth.Principal.FindFirstValue(ClaimTypes.NameIdentifier) ?? auth.Principal.FindFirstValue("sub");
+        var providerKey =
+            auth.Principal.FindFirstValue(ClaimTypes.NameIdentifier)
+            ?? auth.Principal.FindFirstValue("sub");
         if (providerKey == null || provider == null)
         {
             return null;
         }
 
-        var providerDisplayName = (await GetExternalAuthenticationSchemesAsync()).FirstOrDefault(p => p.Name == provider)?.DisplayName
-                                    ?? provider;
+        var providerDisplayName =
+            (await GetExternalAuthenticationSchemesAsync())
+                .FirstOrDefault(p => p.Name == provider)
+                ?.DisplayName ?? provider;
         return new ExternalLoginInfo(auth.Principal, provider, providerKey, providerDisplayName)
         {
             AuthenticationTokens = auth.Properties?.GetTokens(),
-            AuthenticationProperties = auth.Properties
+            AuthenticationProperties = auth.Properties,
         };
     }
 
@@ -722,13 +871,18 @@ public class SignInManager<TUser> where TUser : class
     /// </summary>
     /// <param name="externalLogin">The information from the external login provider.</param>
     /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/> of the operation.</returns>
-    public virtual async Task<IdentityResult> UpdateExternalAuthenticationTokensAsync(ExternalLoginInfo externalLogin)
+    public virtual async Task<IdentityResult> UpdateExternalAuthenticationTokensAsync(
+        ExternalLoginInfo externalLogin
+    )
     {
         ArgumentNullException.ThrowIfNull(externalLogin);
 
         if (externalLogin.AuthenticationTokens != null && externalLogin.AuthenticationTokens.Any())
         {
-            var user = await UserManager.FindByLoginAsync(externalLogin.LoginProvider, externalLogin.ProviderKey);
+            var user = await UserManager.FindByLoginAsync(
+                externalLogin.LoginProvider,
+                externalLogin.ProviderKey
+            );
             if (user == null)
             {
                 return IdentityResult.Failed();
@@ -736,7 +890,12 @@ public class SignInManager<TUser> where TUser : class
 
             foreach (var token in externalLogin.AuthenticationTokens)
             {
-                var result = await UserManager.SetAuthenticationTokenAsync(user, externalLogin.LoginProvider, token.Name, token.Value);
+                var result = await UserManager.SetAuthenticationTokenAsync(
+                    user,
+                    externalLogin.LoginProvider,
+                    token.Name,
+                    token.Value
+                );
                 if (!result.Succeeded)
                 {
                     return result;
@@ -754,7 +913,11 @@ public class SignInManager<TUser> where TUser : class
     /// <param name="redirectUrl">The external login URL users should be redirected to during the login flow.</param>
     /// <param name="userId">The current user's identifier, which will be used to provide CSRF protection.</param>
     /// <returns>A configured <see cref="AuthenticationProperties"/>.</returns>
-    public virtual AuthenticationProperties ConfigureExternalAuthenticationProperties(string? provider, [StringSyntax(StringSyntaxAttribute.Uri)] string? redirectUrl, string? userId = null)
+    public virtual AuthenticationProperties ConfigureExternalAuthenticationProperties(
+        string? provider,
+        [StringSyntax(StringSyntaxAttribute.Uri)] string? redirectUrl,
+        string? userId = null
+    )
     {
         var properties = new AuthenticationProperties { RedirectUri = redirectUrl };
         properties.Items[LoginProviderKey] = provider;
@@ -785,12 +948,16 @@ public class SignInManager<TUser> where TUser : class
     internal async Task<ClaimsPrincipal> StoreRememberClient(TUser user)
     {
         var userId = await UserManager.GetUserIdAsync(user);
-        var rememberBrowserIdentity = new ClaimsIdentity(IdentityConstants.TwoFactorRememberMeScheme);
+        var rememberBrowserIdentity = new ClaimsIdentity(
+            IdentityConstants.TwoFactorRememberMeScheme
+        );
         rememberBrowserIdentity.AddClaim(new Claim(ClaimTypes.Name, userId));
         if (UserManager.SupportsUserSecurityStamp)
         {
             var stamp = await UserManager.GetSecurityStampAsync(user);
-            rememberBrowserIdentity.AddClaim(new Claim(Options.ClaimsIdentity.SecurityStampClaimType, stamp));
+            rememberBrowserIdentity.AddClaim(
+                new Claim(Options.ClaimsIdentity.SecurityStampClaimType, stamp)
+            );
         }
         return new ClaimsPrincipal(rememberBrowserIdentity);
     }
@@ -802,10 +969,10 @@ public class SignInManager<TUser> where TUser : class
     /// <returns>
     /// The task object representing the asynchronous operation containing true if the user has two factor enabled.
     /// </returns>
-    public virtual async Task<bool> IsTwoFactorEnabledAsync(TUser user)
-        => UserManager.SupportsUserTwoFactor &&
-        await UserManager.GetTwoFactorEnabledAsync(user) &&
-        (await UserManager.GetValidTwoFactorProvidersAsync(user)).Count > 0;
+    public virtual async Task<bool> IsTwoFactorEnabledAsync(TUser user) =>
+        UserManager.SupportsUserTwoFactor
+        && await UserManager.GetTwoFactorEnabledAsync(user)
+        && (await UserManager.GetValidTwoFactorProvidersAsync(user)).Count > 0;
 
     /// <summary>
     /// Signs in the specified <paramref name="user"/> if <paramref name="bypassTwoFactor"/> is set to false.
@@ -816,7 +983,12 @@ public class SignInManager<TUser> where TUser : class
     /// <param name="loginProvider">The login provider to use. Default is null</param>
     /// <param name="bypassTwoFactor">Flag indicating whether to bypass two factor authentication. Default is false</param>
     /// <returns>Returns a <see cref="SignInResult"/></returns>
-    protected virtual async Task<SignInResult> SignInOrTwoFactorAsync(TUser user, bool isPersistent, string? loginProvider = null, bool bypassTwoFactor = false)
+    protected virtual async Task<SignInResult> SignInOrTwoFactorAsync(
+        TUser user,
+        bool isPersistent,
+        string? loginProvider = null,
+        bool bypassTwoFactor = false
+    )
     {
         if (!bypassTwoFactor && await IsTwoFactorEnabledAsync(user))
         {
@@ -824,17 +996,16 @@ public class SignInManager<TUser> where TUser : class
             {
                 // Allow the two-factor flow to continue later within the same request with or without a TwoFactorUserIdScheme in
                 // the event that the two-factor code or recovery code has already been provided as is the case for MapIdentityApi.
-                _twoFactorInfo = new()
-                {
-                    User = user,
-                    LoginProvider = loginProvider,
-                };
+                _twoFactorInfo = new() { User = user, LoginProvider = loginProvider };
 
                 if (await _schemes.GetSchemeAsync(IdentityConstants.TwoFactorUserIdScheme) != null)
                 {
                     // Store the userId for use after two factor check
                     var userId = await UserManager.GetUserIdAsync(user);
-                    await Context.SignInAsync(IdentityConstants.TwoFactorUserIdScheme, StoreTwoFactorInfo(userId, loginProvider));
+                    await Context.SignInAsync(
+                        IdentityConstants.TwoFactorUserIdScheme,
+                        StoreTwoFactorInfo(userId, loginProvider)
+                    );
                 }
 
                 return SignInResult.TwoFactorRequired;
@@ -847,7 +1018,11 @@ public class SignInManager<TUser> where TUser : class
         }
         if (loginProvider == null)
         {
-            await SignInWithClaimsAsync(user, isPersistent, new Claim[] { new Claim("amr", "pwd") });
+            await SignInWithClaimsAsync(
+                user,
+                isPersistent,
+                new Claim[] { new Claim("amr", "pwd") }
+            );
         }
         else
         {
@@ -937,7 +1112,8 @@ public class SignInManager<TUser> where TUser : class
         if (UserManager.SupportsUserLockout)
         {
             // The IdentityResult should not be null according to the annotations, but our own tests return null and I'm trying to limit breakages.
-            var result = await UserManager.ResetAccessFailedCountAsync(user) ?? IdentityResult.Success;
+            var result =
+                await UserManager.ResetAccessFailedCountAsync(user) ?? IdentityResult.Success;
 
             if (!result.Succeeded)
             {
@@ -979,7 +1155,8 @@ public class SignInManager<TUser> where TUser : class
 
     private sealed class IdentityResultException : Exception
     {
-        internal IdentityResultException(IdentityResult result) : base()
+        internal IdentityResultException(IdentityResult result)
+            : base()
         {
             IdentityResult = result;
         }

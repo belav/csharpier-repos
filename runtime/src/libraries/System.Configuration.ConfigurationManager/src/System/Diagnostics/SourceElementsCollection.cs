@@ -8,16 +8,19 @@ using System.Xml;
 
 namespace System.Diagnostics
 {
-    [ConfigurationCollection(typeof(SourceElement),
+    [ConfigurationCollection(
+        typeof(SourceElement),
         AddItemName = "source",
-        CollectionType = ConfigurationElementCollectionType.BasicMap)]
+        CollectionType = ConfigurationElementCollectionType.BasicMap
+    )]
     internal sealed class SourceElementsCollection : ConfigurationElementCollection
     {
         public new SourceElement this[string name] => (SourceElement)BaseGet(name);
 
         protected override string ElementName => "source";
 
-        public override ConfigurationElementCollectionType CollectionType => ConfigurationElementCollectionType.BasicMap;
+        public override ConfigurationElementCollectionType CollectionType =>
+            ConfigurationElementCollectionType.BasicMap;
 
         protected override ConfigurationElement CreateNewElement()
         {
@@ -26,18 +29,28 @@ namespace System.Diagnostics
             return se;
         }
 
-        protected override object GetElementKey(ConfigurationElement element) => ((SourceElement)element).Name;
+        protected override object GetElementKey(ConfigurationElement element) =>
+            ((SourceElement)element).Name;
     }
-
 
     internal sealed class SourceElement : ConfigurationElement
     {
         private static readonly ConfigurationPropertyCollection _properties = new();
-        private static readonly ConfigurationProperty _propName = new("name", typeof(string), "", ConfigurationPropertyOptions.IsRequired);
-        private static readonly ConfigurationProperty _propSwitchName = new("switchName", typeof(string), null, ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationProperty _propSwitchValue = new("switchValue", typeof(string), null, ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationProperty _propSwitchType = new("switchType", typeof(string), null, ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationProperty _propListeners = new("listeners", typeof(ListenerElementsCollection), new ListenerElementsCollection(), ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propName =
+            new("name", typeof(string), "", ConfigurationPropertyOptions.IsRequired);
+        private static readonly ConfigurationProperty _propSwitchName =
+            new("switchName", typeof(string), null, ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propSwitchValue =
+            new("switchValue", typeof(string), null, ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propSwitchType =
+            new("switchType", typeof(string), null, ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propListeners =
+            new(
+                "listeners",
+                typeof(ListenerElementsCollection),
+                new ListenerElementsCollection(),
+                ConfigurationPropertyOptions.None
+            );
 
         private StringDictionary _attributes;
 
@@ -53,7 +66,8 @@ namespace System.Diagnostics
         public StringDictionary Attributes => _attributes ??= new StringDictionary();
 
         [ConfigurationProperty("listeners")]
-        public ListenerElementsCollection Listeners => (ListenerElementsCollection)this[_propListeners];
+        public ListenerElementsCollection Listeners =>
+            (ListenerElementsCollection)this[_propListeners];
 
         [ConfigurationProperty("name", IsRequired = true, DefaultValue = "")]
         public string Name => (string)this[_propName];
@@ -69,7 +83,10 @@ namespace System.Diagnostics
         [ConfigurationProperty("switchType")]
         public string SwitchType => (string)this[_propSwitchType];
 
-        protected internal override void DeserializeElement(XmlReader reader, bool serializeCollectionKey)
+        protected internal override void DeserializeElement(
+            XmlReader reader,
+            bool serializeCollectionKey
+        )
         {
             base.DeserializeElement(reader, serializeCollectionKey);
 
@@ -114,16 +131,21 @@ namespace System.Diagnostics
         }
 
         // Account for optional attributes from custom listeners.
-        protected internal override bool SerializeElement(XmlWriter writer, bool serializeCollectionKey)
+        protected internal override bool SerializeElement(
+            XmlWriter writer,
+            bool serializeCollectionKey
+        )
         {
             bool DataToWrite = base.SerializeElement(writer, serializeCollectionKey);
             DataToWrite = DataToWrite || ((_attributes != null) && (_attributes.Count > 0));
             return DataToWrite;
         }
 
-        protected internal override void Unmerge(ConfigurationElement sourceElement,
-                                                 ConfigurationElement parentElement,
-                                                 ConfigurationSaveMode saveMode)
+        protected internal override void Unmerge(
+            ConfigurationElement sourceElement,
+            ConfigurationElement parentElement,
+            ConfigurationSaveMode saveMode
+        )
         {
             base.Unmerge(sourceElement, parentElement, saveMode);
 

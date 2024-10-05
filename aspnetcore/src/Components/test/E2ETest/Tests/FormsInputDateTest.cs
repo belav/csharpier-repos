@@ -23,10 +23,9 @@ public class FormsInputDateTest : ServerTestBase<ToggleExecutionModeServerFixtur
     public FormsInputDateTest(
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     protected override void InitializeAsyncCore()
     {
@@ -37,7 +36,9 @@ public class FormsInputDateTest : ServerTestBase<ToggleExecutionModeServerFixtur
     public void InputDateInteractsWithEditContext_NonNullableDateTime()
     {
         var appElement = Browser.MountTestComponent<TypicalValidationComponent>();
-        var renewalDateInput = appElement.FindElement(By.ClassName("renewal-date")).FindElement(By.TagName("input"));
+        var renewalDateInput = appElement
+            .FindElement(By.ClassName("renewal-date"))
+            .FindElement(By.TagName("input"));
         var messagesAccessor = CreateValidationMessagesAccessor(appElement);
 
         // InputDate emits unmatched attributes
@@ -69,7 +70,9 @@ public class FormsInputDateTest : ServerTestBase<ToggleExecutionModeServerFixtur
     public void InputDateInteractsWithEditContext_NullableDateTimeOffset()
     {
         var appElement = Browser.MountTestComponent<TypicalValidationComponent>();
-        var expiryDateInput = appElement.FindElement(By.ClassName("expiry-date")).FindElement(By.TagName("input"));
+        var expiryDateInput = appElement
+            .FindElement(By.ClassName("expiry-date"))
+            .FindElement(By.TagName("input"));
         var messagesAccessor = CreateValidationMessagesAccessor(appElement);
 
         // Validates on edit
@@ -93,8 +96,12 @@ public class FormsInputDateTest : ServerTestBase<ToggleExecutionModeServerFixtur
     {
         var appElement = Browser.MountTestComponent<TypicalValidationComponent>();
         var messagesAccessor = CreateValidationMessagesAccessor(appElement);
-        var departureTimeInput = appElement.FindElement(By.ClassName("departure-time")).FindElement(By.Id("time-input"));
-        var includeSecondsCheckbox = appElement.FindElement(By.ClassName("departure-time")).FindElement(By.Id("time-seconds-checkbox"));
+        var departureTimeInput = appElement
+            .FindElement(By.ClassName("departure-time"))
+            .FindElement(By.Id("time-input"));
+        var includeSecondsCheckbox = appElement
+            .FindElement(By.ClassName("departure-time"))
+            .FindElement(By.Id("time-seconds-checkbox"));
 
         // Ensure we're not using a custom step
         if (includeSecondsCheckbox.Selected)
@@ -115,13 +122,19 @@ public class FormsInputDateTest : ServerTestBase<ToggleExecutionModeServerFixtur
         Browser.Equal(new[] { "The DepartureTime field must be a time." }, messagesAccessor);
     }
 
-    [Fact(Skip = "This functionality doesn't work on Edge/Chrome - tracked as https://github.com/dotnet/aspnetcore/issues/38471")]
+    [Fact(
+        Skip = "This functionality doesn't work on Edge/Chrome - tracked as https://github.com/dotnet/aspnetcore/issues/38471"
+    )]
     public void InputDateInteractsWithEditContext_TimeInput_Step()
     {
         var appElement = Browser.MountTestComponent<TypicalValidationComponent>();
         var messagesAccessor = CreateValidationMessagesAccessor(appElement);
-        var departureTimeInput = appElement.FindElement(By.ClassName("departure-time")).FindElement(By.Id("time-input"));
-        var includeSecondsCheckbox = appElement.FindElement(By.ClassName("departure-time")).FindElement(By.Id("time-seconds-checkbox"));
+        var departureTimeInput = appElement
+            .FindElement(By.ClassName("departure-time"))
+            .FindElement(By.Id("time-input"));
+        var includeSecondsCheckbox = appElement
+            .FindElement(By.ClassName("departure-time"))
+            .FindElement(By.Id("time-seconds-checkbox"));
 
         // Ensure we're using a custom step
         if (!includeSecondsCheckbox.Selected)
@@ -146,7 +159,9 @@ public class FormsInputDateTest : ServerTestBase<ToggleExecutionModeServerFixtur
     public void InputDateInteractsWithEditContext_MonthInput()
     {
         var appElement = Browser.MountTestComponent<TypicalValidationComponent>();
-        var visitMonthInput = appElement.FindElement(By.ClassName("visit-month")).FindElement(By.TagName("input"));
+        var visitMonthInput = appElement
+            .FindElement(By.ClassName("visit-month"))
+            .FindElement(By.TagName("input"));
         var messagesAccessor = CreateValidationMessagesAccessor(appElement);
 
         // Validates on edit
@@ -176,8 +191,12 @@ public class FormsInputDateTest : ServerTestBase<ToggleExecutionModeServerFixtur
     {
         var appElement = Browser.MountTestComponent<TypicalValidationComponent>();
         var messagesAccessor = CreateValidationMessagesAccessor(appElement);
-        var appointmentInput = appElement.FindElement(By.ClassName("appointment-date-time")).FindElement(By.Id("datetime-local-input"));
-        var includeSecondsCheckbox = appElement.FindElement(By.ClassName("appointment-date-time")).FindElement(By.Id("datetime-local-seconds-checkbox"));
+        var appointmentInput = appElement
+            .FindElement(By.ClassName("appointment-date-time"))
+            .FindElement(By.Id("datetime-local-input"));
+        var includeSecondsCheckbox = appElement
+            .FindElement(By.ClassName("appointment-date-time"))
+            .FindElement(By.Id("datetime-local-seconds-checkbox"));
 
         // Ensure we're not using a custom step
         if (includeSecondsCheckbox.Selected)
@@ -193,12 +212,18 @@ public class FormsInputDateTest : ServerTestBase<ToggleExecutionModeServerFixtur
         // Empty is invalid because it's not nullable
         appointmentInput.Clear();
         Browser.Equal("modified invalid", () => appointmentInput.GetAttribute("class"));
-        Browser.Equal(new[] { "The AppointmentDateAndTime field must be a date and time." }, messagesAccessor);
+        Browser.Equal(
+            new[] { "The AppointmentDateAndTime field must be a date and time." },
+            messagesAccessor
+        );
 
         // Invalid year (11111)
         appointmentInput.SendKeys($"111111111{Keys.ArrowRight}11111");
         Browser.Equal("modified invalid", () => appointmentInput.GetAttribute("class"));
-        Browser.Equal(new[] { "The AppointmentDateAndTime field must be a date and time." }, messagesAccessor);
+        Browser.Equal(
+            new[] { "The AppointmentDateAndTime field must be a date and time." },
+            messagesAccessor
+        );
 
         // Can become valid again
         appointmentInput.Clear();
@@ -212,8 +237,12 @@ public class FormsInputDateTest : ServerTestBase<ToggleExecutionModeServerFixtur
     {
         var appElement = Browser.MountTestComponent<TypicalValidationComponent>();
         var messagesAccessor = CreateValidationMessagesAccessor(appElement);
-        var appointmentInput = appElement.FindElement(By.ClassName("appointment-date-time")).FindElement(By.Id("datetime-local-input"));
-        var includeSecondsCheckbox = appElement.FindElement(By.ClassName("appointment-date-time")).FindElement(By.Id("datetime-local-seconds-checkbox"));
+        var appointmentInput = appElement
+            .FindElement(By.ClassName("appointment-date-time"))
+            .FindElement(By.Id("datetime-local-input"));
+        var includeSecondsCheckbox = appElement
+            .FindElement(By.ClassName("appointment-date-time"))
+            .FindElement(By.Id("datetime-local-seconds-checkbox"));
 
         // Ensure we're using a custom step
         if (!includeSecondsCheckbox.Selected)
@@ -229,16 +258,20 @@ public class FormsInputDateTest : ServerTestBase<ToggleExecutionModeServerFixtur
 
         // Input works when starting with a non-zero seconds value
         // Move to the beginning of the input and put the new value
-        appointmentInput.SendKeys(string.Concat(Enumerable.Repeat(Keys.ArrowLeft, 6)) + $"10101970{Keys.ArrowRight}105321");
+        appointmentInput.SendKeys(
+            string.Concat(Enumerable.Repeat(Keys.ArrowLeft, 6)) + $"10101970{Keys.ArrowRight}105321"
+        );
         Browser.Equal("modified valid", () => appointmentInput.GetAttribute("class"));
         Browser.Equal("1970-10-10T10:53:21", () => appointmentInput.GetAttribute("value"));
     }
 
     private Func<string[]> CreateValidationMessagesAccessor(IWebElement appElement)
     {
-        return () => appElement.FindElements(By.ClassName("validation-message"))
-            .Select(x => x.Text)
-            .OrderBy(x => x)
-            .ToArray();
+        return () =>
+            appElement
+                .FindElements(By.ClassName("validation-message"))
+                .Select(x => x.Text)
+                .OrderBy(x => x)
+                .ToArray();
     }
 }

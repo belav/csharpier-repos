@@ -1,10 +1,10 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.DotNet.Cli.Build;
-using Microsoft.DotNet.Cli.Build.Framework;
 using System;
 using System.IO;
+using Microsoft.DotNet.Cli.Build;
+using Microsoft.DotNet.Cli.Build.Framework;
 
 namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
 {
@@ -14,20 +14,27 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         {
             private const string resolve_component_dependencies = "resolve_component_dependencies";
             private const string run_app_and_resolve = "run_app_and_resolve";
-            private const string run_app_and_resolve_multithreaded = "run_app_and_resolve_multithreaded";
+            private const string run_app_and_resolve_multithreaded =
+                "run_app_and_resolve_multithreaded";
 
             public DotNetCli DotNetWithNetCoreApp { get; }
 
             public TestApp FrameworkReferenceApp { get; }
 
-            public string NativeHostPath { get => _nativeHostingState.NativeHostPath; }
+            public string NativeHostPath
+            {
+                get => _nativeHostingState.NativeHostPath;
+            }
 
             private readonly NativeHosting.SharedTestStateBase _nativeHostingState;
 
             public ComponentSharedTestStateBase()
             {
                 var dotNetBuilder = DotNet("WithNetCoreApp")
-                    .AddMicrosoftNETCoreAppFrameworkMockCoreClr("4.0.0", builder => CustomizeDotNetWithNetCoreAppMicrosoftNETCoreApp(builder));
+                    .AddMicrosoftNETCoreAppFrameworkMockCoreClr(
+                        "4.0.0",
+                        builder => CustomizeDotNetWithNetCoreAppMicrosoftNETCoreApp(builder)
+                    );
                 CustomizeDotNetWithNetCoreApp(dotNetBuilder);
                 DotNetWithNetCoreApp = dotNetBuilder.Build();
 
@@ -36,22 +43,34 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 _nativeHostingState = new NativeHosting.SharedTestStateBase();
             }
 
-            protected virtual TestApp CreateTestFrameworkReferenceApp() => CreateFrameworkReferenceApp(MicrosoftNETCoreApp, "4.0.0");
+            protected virtual TestApp CreateTestFrameworkReferenceApp() =>
+                CreateFrameworkReferenceApp(MicrosoftNETCoreApp, "4.0.0");
 
-            protected virtual void CustomizeDotNetWithNetCoreAppMicrosoftNETCoreApp(NetCoreAppBuilder builder)
+            protected virtual void CustomizeDotNetWithNetCoreAppMicrosoftNETCoreApp(
+                NetCoreAppBuilder builder
+            ) { }
+
+            protected virtual void CustomizeDotNetWithNetCoreApp(DotNetBuilder builder) { }
+
+            public CommandResult RunComponentResolutionTest(
+                TestApp component,
+                Action<Command> commandCustomizer = null
+            )
             {
+                return RunComponentResolutionTest(
+                    component.AppDll,
+                    FrameworkReferenceApp,
+                    DotNetWithNetCoreApp.GreatestVersionHostFxrPath,
+                    commandCustomizer
+                );
             }
 
-            protected virtual void CustomizeDotNetWithNetCoreApp(DotNetBuilder builder)
-            {
-            }
-
-            public CommandResult RunComponentResolutionTest(TestApp component, Action<Command> commandCustomizer = null)
-            {
-                return RunComponentResolutionTest(component.AppDll, FrameworkReferenceApp, DotNetWithNetCoreApp.GreatestVersionHostFxrPath, commandCustomizer);
-            }
-
-            public CommandResult RunComponentResolutionTest(string componentPath, TestApp hostApp, string hostFxrFolder, Action<Command> commandCustomizer = null)
+            public CommandResult RunComponentResolutionTest(
+                string componentPath,
+                TestApp hostApp,
+                string hostFxrFolder,
+                Action<Command> commandCustomizer = null
+            )
             {
                 string[] args =
                 {
@@ -59,24 +78,37 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                     run_app_and_resolve,
                     Path.Combine(hostFxrFolder, Binaries.HostFxr.FileName),
                     hostApp.AppDll,
-                    componentPath
+                    componentPath,
                 };
 
-                Command command = Command.Create(NativeHostPath, args)
+                Command command = Command
+                    .Create(NativeHostPath, args)
                     .EnableTracingAndCaptureOutputs()
                     .MultilevelLookup(false);
                 commandCustomizer?.Invoke(command);
 
-                return command.Execute()
-                    .StdErrAfter("corehost_resolve_component_dependencies = {");
+                return command.Execute().StdErrAfter("corehost_resolve_component_dependencies = {");
             }
 
-            public CommandResult RunComponentResolutionMultiThreadedTest(TestApp componentOne, TestApp componentTwo)
+            public CommandResult RunComponentResolutionMultiThreadedTest(
+                TestApp componentOne,
+                TestApp componentTwo
+            )
             {
-                return RunComponentResolutionMultiThreadedTest(componentOne.AppDll, componentTwo.AppDll, FrameworkReferenceApp, DotNetWithNetCoreApp.GreatestVersionHostFxrPath);
+                return RunComponentResolutionMultiThreadedTest(
+                    componentOne.AppDll,
+                    componentTwo.AppDll,
+                    FrameworkReferenceApp,
+                    DotNetWithNetCoreApp.GreatestVersionHostFxrPath
+                );
             }
 
-            public CommandResult RunComponentResolutionMultiThreadedTest(string componentOnePath, string componentTwoPath, TestApp hostApp, string hostFxrFolder)
+            public CommandResult RunComponentResolutionMultiThreadedTest(
+                string componentOnePath,
+                string componentTwoPath,
+                TestApp hostApp,
+                string hostFxrFolder
+            )
             {
                 string[] args =
                 {
@@ -85,10 +117,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                     Path.Combine(hostFxrFolder, Binaries.HostFxr.FileName),
                     hostApp.AppDll,
                     componentOnePath,
-                    componentTwoPath
+                    componentTwoPath,
                 };
 
-                return Command.Create(NativeHostPath, args)
+                return Command
+                    .Create(NativeHostPath, args)
                     .EnableTracingAndCaptureOutputs()
                     .MultilevelLookup(false)
                     .Execute();

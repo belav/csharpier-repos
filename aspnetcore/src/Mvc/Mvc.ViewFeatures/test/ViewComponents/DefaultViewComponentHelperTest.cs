@@ -34,16 +34,21 @@ public class DefaultViewComponentHelperTest
         var descriptor = CreateDescriptorForType(typeof(ViewComponentSingleParam));
 
         // Act
-        var argumentDictionary = DefaultViewComponentHelper.GetArgumentDictionary(descriptor, new { a = 0 });
+        var argumentDictionary = DefaultViewComponentHelper.GetArgumentDictionary(
+            descriptor,
+            new { a = 0 }
+        );
 
         // Assert
-        Assert.Collection(argumentDictionary,
+        Assert.Collection(
+            argumentDictionary,
             item =>
             {
                 Assert.Equal("a", item.Key);
                 Assert.IsType<int>(item.Value);
                 Assert.Equal(0, item.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -57,13 +62,15 @@ public class DefaultViewComponentHelperTest
         var argumentDictionary = DefaultViewComponentHelper.GetArgumentDictionary(descriptor, 0);
 
         // Assert
-        Assert.Collection(argumentDictionary,
+        Assert.Collection(
+            argumentDictionary,
             item =>
             {
                 Assert.Equal("a", item.Key);
                 Assert.IsType<int>(item.Value);
                 Assert.Equal(0, item.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -74,10 +81,14 @@ public class DefaultViewComponentHelperTest
         var descriptor = CreateDescriptorForType(typeof(ViewComponentMultipleParam));
 
         // Act
-        var argumentDictionary = DefaultViewComponentHelper.GetArgumentDictionary(descriptor, new { a = 0, b = "foo" });
+        var argumentDictionary = DefaultViewComponentHelper.GetArgumentDictionary(
+            descriptor,
+            new { a = 0, b = "foo" }
+        );
 
         // Assert
-        Assert.Collection(argumentDictionary,
+        Assert.Collection(
+            argumentDictionary,
             item1 =>
             {
                 Assert.Equal("a", item1.Key);
@@ -89,7 +100,8 @@ public class DefaultViewComponentHelperTest
                 Assert.Equal("b", item2.Key);
                 Assert.IsType<string>(item2.Value);
                 Assert.Equal("foo", item2.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -101,16 +113,21 @@ public class DefaultViewComponentHelperTest
         var expectedValue = new object();
 
         // Act
-        var argumentDictionary = DefaultViewComponentHelper.GetArgumentDictionary(descriptor, expectedValue);
+        var argumentDictionary = DefaultViewComponentHelper.GetArgumentDictionary(
+            descriptor,
+            expectedValue
+        );
 
         // Assert
-        Assert.Collection(argumentDictionary,
+        Assert.Collection(
+            argumentDictionary,
             item =>
             {
                 Assert.Equal("o", item.Key);
                 Assert.IsType<object>(item.Value);
                 Assert.Same(expectedValue, item.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -119,22 +136,24 @@ public class DefaultViewComponentHelperTest
         // Arrange
         var helper = CreateHelper();
         var descriptor = CreateDescriptorForType(typeof(ViewComponentSingleParam));
-        var arguments = new Dictionary<string, object>
-            {
-                { "a", 10 }
-            };
+        var arguments = new Dictionary<string, object> { { "a", 10 } };
 
         // Act
-        var argumentDictionary = DefaultViewComponentHelper.GetArgumentDictionary(descriptor, arguments);
+        var argumentDictionary = DefaultViewComponentHelper.GetArgumentDictionary(
+            descriptor,
+            arguments
+        );
 
         // Assert
-        Assert.Collection(argumentDictionary,
+        Assert.Collection(
+            argumentDictionary,
             item =>
             {
                 Assert.Equal("a", item.Key);
                 Assert.IsType<int>(item.Value);
                 Assert.Equal(10, item.Value);
-            });
+            }
+        );
     }
 
     private DefaultViewComponentHelper CreateHelper()
@@ -149,7 +168,8 @@ public class DefaultViewComponentHelperTest
             new HtmlTestEncoder(),
             selector,
             invokerFactory,
-            viewBufferScope);
+            viewBufferScope
+        );
     }
 
     private ViewComponentDescriptor CreateDescriptorForType(Type componentType)
@@ -182,9 +202,7 @@ public class DefaultViewComponentHelperTest
     private class FilteredViewComponentDescriptorProvider : DefaultViewComponentDescriptorProvider
     {
         public FilteredViewComponentDescriptorProvider(params Type[] allowedTypes)
-            : base(GetApplicationPartManager(allowedTypes.Select(t => t.GetTypeInfo())))
-        {
-        }
+            : base(GetApplicationPartManager(allowedTypes.Select(t => t.GetTypeInfo()))) { }
 
         private static ApplicationPartManager GetApplicationPartManager(IEnumerable<TypeInfo> types)
         {
@@ -196,9 +214,16 @@ public class DefaultViewComponentHelperTest
 
         private class TestFeatureProvider : IApplicationFeatureProvider<ViewComponentFeature>
         {
-            public void PopulateFeature(IEnumerable<ApplicationPart> parts, ViewComponentFeature feature)
+            public void PopulateFeature(
+                IEnumerable<ApplicationPart> parts,
+                ViewComponentFeature feature
+            )
             {
-                foreach (var type in parts.OfType<IApplicationPartTypeProvider>().SelectMany(p => p.Types))
+                foreach (
+                    var type in parts
+                        .OfType<IApplicationPartTypeProvider>()
+                        .SelectMany(p => p.Types)
+                )
                 {
                     feature.ViewComponents.Add(type);
                 }

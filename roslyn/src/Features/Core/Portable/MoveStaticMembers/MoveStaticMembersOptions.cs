@@ -27,16 +27,14 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
 
         public ImmutableArray<ISymbol> SelectedMembers { get; }
 
-        public static MoveStaticMembersOptions Cancelled = new(
-            string.Empty,
-            string.Empty,
-            ImmutableArray<ISymbol>.Empty,
-            isCancelled: true);
+        public static MoveStaticMembersOptions Cancelled =
+            new(string.Empty, string.Empty, ImmutableArray<ISymbol>.Empty, isCancelled: true);
 
         public MoveStaticMembersOptions(
             INamedTypeSymbol destination,
             ImmutableArray<ISymbol> selectedMembers,
-            bool isCancelled = false)
+            bool isCancelled = false
+        )
         {
             var sourceLocation = destination.DeclaringSyntaxReferences.First();
             RoslynDebug.AssertNotNull(sourceLocation.SyntaxTree);
@@ -54,7 +52,8 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
             string fileName,
             string fullTypeName,
             ImmutableArray<ISymbol> selectedMembers,
-            bool isCancelled = false)
+            bool isCancelled = false
+        )
         {
             IsCancelled = isCancelled;
             FileName = fileName;
@@ -62,7 +61,10 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
             Destination = null;
             var namespacesAndType = fullTypeName.Split(separator: '.');
             TypeName = namespacesAndType.Last();
-            NamespaceDisplay = string.Join(separator: ".", namespacesAndType.Take(namespacesAndType.Length - 1));
+            NamespaceDisplay = string.Join(
+                separator: ".",
+                namespacesAndType.Take(namespacesAndType.Length - 1)
+            );
             SelectedMembers = selectedMembers;
         }
     }

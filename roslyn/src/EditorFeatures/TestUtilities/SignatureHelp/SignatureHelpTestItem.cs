@@ -31,7 +31,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
         public readonly int? CurrentParameterIndex;
 
         /// <summary>
-        /// Description of the method, such as the list of anonymous types: 
+        /// Description of the method, such as the list of anonymous types:
         /// Anonymous Types:
         ///     'a is new { string Name, int Age }
         /// </summary>
@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
             string? description = null,
             string? prettyPrintedSignature = null,
             bool isSelected = false,
-            ImmutableArray<string>? classificationTypeNames = null)
+            ImmutableArray<string>? classificationTypeNames = null
+        )
         {
             this.Signature = signature;
             this.MethodDocumentation = methodDocumentation;

@@ -11,11 +11,11 @@ namespace System.Web.Http.ValueProviders.Providers
     public class RouteDataValueProvider : NameValuePairsValueProvider
     {
         public RouteDataValueProvider(HttpActionContext actionContext, CultureInfo culture)
-            : base(GetRouteValues(actionContext.ControllerContext.RouteData), culture)
-        {
-        }
+            : base(GetRouteValues(actionContext.ControllerContext.RouteData), culture) { }
 
-        internal static IEnumerable<KeyValuePair<string, string>> GetRouteValues(IHttpRouteData routeData)
+        internal static IEnumerable<KeyValuePair<string, string>> GetRouteValues(
+            IHttpRouteData routeData
+        )
         {
             foreach (KeyValuePair<string, object> pair in routeData.Values)
             {

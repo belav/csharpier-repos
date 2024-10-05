@@ -14,8 +14,6 @@ namespace System.Runtime.CompilerServices
     public sealed class IsReadOnlyAttribute : Attribute
     {
         /// <summary>Initializes the attribute.</summary>
-        public IsReadOnlyAttribute()
-        {
-        }
+        public IsReadOnlyAttribute() { }
     }
 }

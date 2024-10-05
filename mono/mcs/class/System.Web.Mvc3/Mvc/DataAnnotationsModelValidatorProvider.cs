@@ -1,4 +1,5 @@
-﻿namespace System.Web.Mvc {
+﻿namespace System.Web.Mvc
+{
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -9,10 +10,17 @@
     using System.Web.Mvc.Resources;
 
     // A factory for validators based on ValidationAttribute
-    public delegate ModelValidator DataAnnotationsModelValidationFactory(ModelMetadata metadata, ControllerContext context, ValidationAttribute attribute);
+    public delegate ModelValidator DataAnnotationsModelValidationFactory(
+        ModelMetadata metadata,
+        ControllerContext context,
+        ValidationAttribute attribute
+    );
 
     // A factory for validators based on IValidatableObject
-    public delegate ModelValidator DataAnnotationsValidatableObjectAdapterFactory(ModelMetadata metadata, ControllerContext context);
+    public delegate ModelValidator DataAnnotationsValidatableObjectAdapterFactory(
+        ModelMetadata metadata,
+        ControllerContext context
+    );
 
     /// <summary>
     /// An implementation of <see cref="ModelValidatorProvider"/> which providers validators
@@ -23,77 +31,115 @@
     /// <see cref="IClientValidatable"/>. The logic to support IClientValidatable
     /// is implemented in <see cref="DataAnnotationsModelValidator"/>.
     /// </summary>
-    public class DataAnnotationsModelValidatorProvider : AssociatedValidatorProvider {
+    public class DataAnnotationsModelValidatorProvider : AssociatedValidatorProvider
+    {
         private static bool _addImplicitRequiredAttributeForValueTypes = true;
         private static ReaderWriterLockSlim _adaptersLock = new ReaderWriterLockSlim();
 
         // Factories for validation attributes
 
-        internal static DataAnnotationsModelValidationFactory DefaultAttributeFactory =
-            (metadata, context, attribute) => new DataAnnotationsModelValidator(metadata, context, attribute);
+        internal static DataAnnotationsModelValidationFactory DefaultAttributeFactory = (
+            metadata,
+            context,
+            attribute
+        ) => new DataAnnotationsModelValidator(metadata, context, attribute);
 
-        internal static Dictionary<Type, DataAnnotationsModelValidationFactory> AttributeFactories = new Dictionary<Type, DataAnnotationsModelValidationFactory>() {
+        internal static Dictionary<Type, DataAnnotationsModelValidationFactory> AttributeFactories =
+            new Dictionary<Type, DataAnnotationsModelValidationFactory>()
             {
-                typeof(RangeAttribute),
-                (metadata, context, attribute) => new RangeAttributeAdapter(metadata, context, (RangeAttribute)attribute)
-            },
-            {
-                typeof(RegularExpressionAttribute),
-                (metadata, context, attribute) => new RegularExpressionAttributeAdapter(metadata, context, (RegularExpressionAttribute)attribute)
-            },
-            {
-                typeof(RequiredAttribute),
-                (metadata, context, attribute) => new RequiredAttributeAdapter(metadata, context, (RequiredAttribute)attribute)
-            },
-            {
-                typeof(StringLengthAttribute),
-                (metadata, context, attribute) => new StringLengthAttributeAdapter(metadata, context, (StringLengthAttribute)attribute)
-            },
-        };
+                {
+                    typeof(RangeAttribute),
+                    (metadata, context, attribute) =>
+                        new RangeAttributeAdapter(metadata, context, (RangeAttribute)attribute)
+                },
+                {
+                    typeof(RegularExpressionAttribute),
+                    (metadata, context, attribute) =>
+                        new RegularExpressionAttributeAdapter(
+                            metadata,
+                            context,
+                            (RegularExpressionAttribute)attribute
+                        )
+                },
+                {
+                    typeof(RequiredAttribute),
+                    (metadata, context, attribute) =>
+                        new RequiredAttributeAdapter(
+                            metadata,
+                            context,
+                            (RequiredAttribute)attribute
+                        )
+                },
+                {
+                    typeof(StringLengthAttribute),
+                    (metadata, context, attribute) =>
+                        new StringLengthAttributeAdapter(
+                            metadata,
+                            context,
+                            (StringLengthAttribute)attribute
+                        )
+                },
+            };
 
         // Factories for IValidatableObject models
 
-        internal static DataAnnotationsValidatableObjectAdapterFactory DefaultValidatableFactory =
-            (metadata, context) => new ValidatableObjectAdapter(metadata, context);
+        internal static DataAnnotationsValidatableObjectAdapterFactory DefaultValidatableFactory = (
+            metadata,
+            context
+        ) => new ValidatableObjectAdapter(metadata, context);
 
-        internal static Dictionary<Type, DataAnnotationsValidatableObjectAdapterFactory> ValidatableFactories = new Dictionary<Type, DataAnnotationsValidatableObjectAdapterFactory>();
+        internal static Dictionary<
+            Type,
+            DataAnnotationsValidatableObjectAdapterFactory
+        > ValidatableFactories =
+            new Dictionary<Type, DataAnnotationsValidatableObjectAdapterFactory>();
 
-        public static bool AddImplicitRequiredAttributeForValueTypes {
-            get {
-                return _addImplicitRequiredAttributeForValueTypes;
-            }
-            set {
-                _addImplicitRequiredAttributeForValueTypes = value;
-            }
+        public static bool AddImplicitRequiredAttributeForValueTypes
+        {
+            get { return _addImplicitRequiredAttributeForValueTypes; }
+            set { _addImplicitRequiredAttributeForValueTypes = value; }
         }
 
-        protected override IEnumerable<ModelValidator> GetValidators(ModelMetadata metadata, ControllerContext context, IEnumerable<Attribute> attributes) {
+        protected override IEnumerable<ModelValidator> GetValidators(
+            ModelMetadata metadata,
+            ControllerContext context,
+            IEnumerable<Attribute> attributes
+        )
+        {
             _adaptersLock.EnterReadLock();
 
-            try {
+            try
+            {
                 List<ModelValidator> results = new List<ModelValidator>();
 
                 // Add an implied [Required] attribute for any non-nullable value type,
                 // unless they've configured us not to do that.
-                if (AddImplicitRequiredAttributeForValueTypes &&
-                        metadata.IsRequired &&
-                        !attributes.Any(a => a is RequiredAttribute)) {
+                if (
+                    AddImplicitRequiredAttributeForValueTypes
+                    && metadata.IsRequired
+                    && !attributes.Any(a => a is RequiredAttribute)
+                )
+                {
                     attributes = attributes.Concat(new[] { new RequiredAttribute() });
                 }
 
                 // Produce a validator for each validation attribute we find
-                foreach (ValidationAttribute attribute in attributes.OfType<ValidationAttribute>()) {
+                foreach (ValidationAttribute attribute in attributes.OfType<ValidationAttribute>())
+                {
                     DataAnnotationsModelValidationFactory factory;
-                    if (!AttributeFactories.TryGetValue(attribute.GetType(), out factory)) {
+                    if (!AttributeFactories.TryGetValue(attribute.GetType(), out factory))
+                    {
                         factory = DefaultAttributeFactory;
                     }
                     results.Add(factory(metadata, context, attribute));
                 }
 
                 // Produce a validator if the type supports IValidatableObject
-                if (typeof(IValidatableObject).IsAssignableFrom(metadata.ModelType)) {
+                if (typeof(IValidatableObject).IsAssignableFrom(metadata.ModelType))
+                {
                     DataAnnotationsValidatableObjectAdapterFactory factory;
-                    if (!ValidatableFactories.TryGetValue(metadata.ModelType, out factory)) {
+                    if (!ValidatableFactories.TryGetValue(metadata.ModelType, out factory))
+                    {
                         factory = DefaultValidatableFactory;
                     }
                     results.Add(factory(metadata, context));
@@ -101,60 +147,90 @@
 
                 return results;
             }
-            finally {
+            finally
+            {
                 _adaptersLock.ExitReadLock();
             }
         }
 
         #region Validation attribute adapter registration
 
-        public static void RegisterAdapter(Type attributeType, Type adapterType) {
+        public static void RegisterAdapter(Type attributeType, Type adapterType)
+        {
             ValidateAttributeType(attributeType);
             ValidateAttributeAdapterType(adapterType);
-            ConstructorInfo constructor = GetAttributeAdapterConstructor(attributeType, adapterType);
+            ConstructorInfo constructor = GetAttributeAdapterConstructor(
+                attributeType,
+                adapterType
+            );
 
             _adaptersLock.EnterWriteLock();
 
-            try {
-                AttributeFactories[attributeType] = (metadata, context, attribute) => (ModelValidator)constructor.Invoke(new object[] { metadata, context, attribute });
+            try
+            {
+                AttributeFactories[attributeType] = (metadata, context, attribute) =>
+                    (ModelValidator)
+                        constructor.Invoke(new object[] { metadata, context, attribute });
             }
-            finally {
+            finally
+            {
                 _adaptersLock.ExitWriteLock();
             }
         }
 
-        public static void RegisterAdapterFactory(Type attributeType, DataAnnotationsModelValidationFactory factory) {
+        public static void RegisterAdapterFactory(
+            Type attributeType,
+            DataAnnotationsModelValidationFactory factory
+        )
+        {
             ValidateAttributeType(attributeType);
             ValidateAttributeFactory(factory);
 
             _adaptersLock.EnterWriteLock();
 
-            try {
+            try
+            {
                 AttributeFactories[attributeType] = factory;
             }
-            finally {
+            finally
+            {
                 _adaptersLock.ExitWriteLock();
             }
         }
 
-        public static void RegisterDefaultAdapter(Type adapterType) {
+        public static void RegisterDefaultAdapter(Type adapterType)
+        {
             ValidateAttributeAdapterType(adapterType);
-            ConstructorInfo constructor = GetAttributeAdapterConstructor(typeof(ValidationAttribute), adapterType);
+            ConstructorInfo constructor = GetAttributeAdapterConstructor(
+                typeof(ValidationAttribute),
+                adapterType
+            );
 
-            DefaultAttributeFactory = (metadata, context, attribute) => (ModelValidator)constructor.Invoke(new object[] { metadata, context, attribute });
+            DefaultAttributeFactory = (metadata, context, attribute) =>
+                (ModelValidator)constructor.Invoke(new object[] { metadata, context, attribute });
         }
 
-        public static void RegisterDefaultAdapterFactory(DataAnnotationsModelValidationFactory factory) {
+        public static void RegisterDefaultAdapterFactory(
+            DataAnnotationsModelValidationFactory factory
+        )
+        {
             ValidateAttributeFactory(factory);
 
             DefaultAttributeFactory = factory;
         }
 
-        // Helpers 
+        // Helpers
 
-        private static ConstructorInfo GetAttributeAdapterConstructor(Type attributeType, Type adapterType) {
-            ConstructorInfo constructor = adapterType.GetConstructor(new[] { typeof(ModelMetadata), typeof(ControllerContext), attributeType });
-            if (constructor == null) {
+        private static ConstructorInfo GetAttributeAdapterConstructor(
+            Type attributeType,
+            Type adapterType
+        )
+        {
+            ConstructorInfo constructor = adapterType.GetConstructor(
+                new[] { typeof(ModelMetadata), typeof(ControllerContext), attributeType }
+            );
+            if (constructor == null)
+            {
                 throw new ArgumentException(
                     String.Format(
                         CultureInfo.CurrentCulture,
@@ -171,11 +247,14 @@
             return constructor;
         }
 
-        private static void ValidateAttributeAdapterType(Type adapterType) {
-            if (adapterType == null) {
+        private static void ValidateAttributeAdapterType(Type adapterType)
+        {
+            if (adapterType == null)
+            {
                 throw new ArgumentNullException("adapterType");
             }
-            if (!typeof(ModelValidator).IsAssignableFrom(adapterType)) {
+            if (!typeof(ModelValidator).IsAssignableFrom(adapterType))
+            {
                 throw new ArgumentException(
                     String.Format(
                         CultureInfo.CurrentCulture,
@@ -188,11 +267,14 @@
             }
         }
 
-        private static void ValidateAttributeType(Type attributeType) {
-            if (attributeType == null) {
+        private static void ValidateAttributeType(Type attributeType)
+        {
+            if (attributeType == null)
+            {
                 throw new ArgumentNullException("attributeType");
             }
-            if (!typeof(ValidationAttribute).IsAssignableFrom(attributeType)) {
+            if (!typeof(ValidationAttribute).IsAssignableFrom(attributeType))
+            {
                 throw new ArgumentException(
                     String.Format(
                         CultureInfo.CurrentCulture,
@@ -200,12 +282,15 @@
                         attributeType.FullName,
                         typeof(ValidationAttribute).FullName
                     ),
-                    "attributeType");
+                    "attributeType"
+                );
             }
         }
 
-        private static void ValidateAttributeFactory(DataAnnotationsModelValidationFactory factory) {
-            if (factory == null) {
+        private static void ValidateAttributeFactory(DataAnnotationsModelValidationFactory factory)
+        {
+            if (factory == null)
+            {
                 throw new ArgumentNullException("factory");
             }
         }
@@ -221,17 +306,21 @@
         /// which takes two parameters of types <see cref="ModelMetadata"/> and
         /// <see cref="ControllerContext"/>.
         /// </summary>
-        public static void RegisterValidatableObjectAdapter(Type modelType, Type adapterType) {
+        public static void RegisterValidatableObjectAdapter(Type modelType, Type adapterType)
+        {
             ValidateValidatableModelType(modelType);
             ValidateValidatableAdapterType(adapterType);
             ConstructorInfo constructor = GetValidatableAdapterConstructor(adapterType);
 
             _adaptersLock.EnterWriteLock();
 
-            try {
-                ValidatableFactories[modelType] = (metadata, context) => (ModelValidator)constructor.Invoke(new object[] { metadata, context });
+            try
+            {
+                ValidatableFactories[modelType] = (metadata, context) =>
+                    (ModelValidator)constructor.Invoke(new object[] { metadata, context });
             }
-            finally {
+            finally
+            {
                 _adaptersLock.ExitWriteLock();
             }
         }
@@ -240,16 +329,22 @@
         /// Registers an adapter factory for the given <see cref="modelType"/>, which must
         /// implement <see cref="IValidatableObject"/>.
         /// </summary>
-        public static void RegisterValidatableObjectAdapterFactory(Type modelType, DataAnnotationsValidatableObjectAdapterFactory factory) {
+        public static void RegisterValidatableObjectAdapterFactory(
+            Type modelType,
+            DataAnnotationsValidatableObjectAdapterFactory factory
+        )
+        {
             ValidateValidatableModelType(modelType);
             ValidateValidatableFactory(factory);
 
             _adaptersLock.EnterWriteLock();
 
-            try {
+            try
+            {
                 ValidatableFactories[modelType] = factory;
             }
-            finally {
+            finally
+            {
                 _adaptersLock.ExitWriteLock();
             }
         }
@@ -261,28 +356,37 @@
         /// which takes two parameters of types <see cref="ModelMetadata"/> and
         /// <see cref="ControllerContext"/>.
         /// </summary>
-        public static void RegisterDefaultValidatableObjectAdapter(Type adapterType) {
+        public static void RegisterDefaultValidatableObjectAdapter(Type adapterType)
+        {
             ValidateValidatableAdapterType(adapterType);
             ConstructorInfo constructor = GetValidatableAdapterConstructor(adapterType);
 
-            DefaultValidatableFactory = (metadata, context) => (ModelValidator)constructor.Invoke(new object[] { metadata, context });
+            DefaultValidatableFactory = (metadata, context) =>
+                (ModelValidator)constructor.Invoke(new object[] { metadata, context });
         }
 
         /// <summary>
         /// Registers the default adapter factory for objects which implement
         /// <see cref="IValidatableObject"/>.
         /// </summary>
-        public static void RegisterDefaultValidatableObjectAdapterFactory(DataAnnotationsValidatableObjectAdapterFactory factory) {
+        public static void RegisterDefaultValidatableObjectAdapterFactory(
+            DataAnnotationsValidatableObjectAdapterFactory factory
+        )
+        {
             ValidateValidatableFactory(factory);
 
             DefaultValidatableFactory = factory;
         }
 
-        // Helpers 
+        // Helpers
 
-        private static ConstructorInfo GetValidatableAdapterConstructor(Type adapterType) {
-            ConstructorInfo constructor = adapterType.GetConstructor(new[] { typeof(ModelMetadata), typeof(ControllerContext) });
-            if (constructor == null) {
+        private static ConstructorInfo GetValidatableAdapterConstructor(Type adapterType)
+        {
+            ConstructorInfo constructor = adapterType.GetConstructor(
+                new[] { typeof(ModelMetadata), typeof(ControllerContext) }
+            );
+            if (constructor == null)
+            {
                 throw new ArgumentException(
                     String.Format(
                         CultureInfo.CurrentCulture,
@@ -298,11 +402,14 @@
             return constructor;
         }
 
-        private static void ValidateValidatableAdapterType(Type adapterType) {
-            if (adapterType == null) {
+        private static void ValidateValidatableAdapterType(Type adapterType)
+        {
+            if (adapterType == null)
+            {
                 throw new ArgumentNullException("adapterType");
             }
-            if (!typeof(ModelValidator).IsAssignableFrom(adapterType)) {
+            if (!typeof(ModelValidator).IsAssignableFrom(adapterType))
+            {
                 throw new ArgumentException(
                     String.Format(
                         CultureInfo.CurrentCulture,
@@ -310,15 +417,19 @@
                         adapterType.FullName,
                         typeof(ModelValidator).FullName
                     ),
-                    "adapterType");
+                    "adapterType"
+                );
             }
         }
 
-        private static void ValidateValidatableModelType(Type modelType) {
-            if (modelType == null) {
+        private static void ValidateValidatableModelType(Type modelType)
+        {
+            if (modelType == null)
+            {
                 throw new ArgumentNullException("modelType");
             }
-            if (!typeof(IValidatableObject).IsAssignableFrom(modelType)) {
+            if (!typeof(IValidatableObject).IsAssignableFrom(modelType))
+            {
                 throw new ArgumentException(
                     String.Format(
                         CultureInfo.CurrentCulture,
@@ -331,8 +442,12 @@
             }
         }
 
-        private static void ValidateValidatableFactory(DataAnnotationsValidatableObjectAdapterFactory factory) {
-            if (factory == null) {
+        private static void ValidateValidatableFactory(
+            DataAnnotationsValidatableObjectAdapterFactory factory
+        )
+        {
+            if (factory == null)
+            {
                 throw new ArgumentNullException("factory");
             }
         }

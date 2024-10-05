@@ -10,12 +10,24 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
     /// Use this attribute to export a <see cref="IEmbeddedLanguageDocumentHighlighter"/>.
     /// </summary>
     internal class ExportEmbeddedLanguageDocumentHighlighterAttribute(
-        string name, string[] languages, bool supportsUnannotatedAPIs, params string[] identifiers) : ExportEmbeddedLanguageFeatureServiceAttribute(typeof(IEmbeddedLanguageDocumentHighlighter), name, languages, supportsUnannotatedAPIs, identifiers)
+        string name,
+        string[] languages,
+        bool supportsUnannotatedAPIs,
+        params string[] identifiers
+    )
+        : ExportEmbeddedLanguageFeatureServiceAttribute(
+            typeof(IEmbeddedLanguageDocumentHighlighter),
+            name,
+            languages,
+            supportsUnannotatedAPIs,
+            identifiers
+        )
     {
         public ExportEmbeddedLanguageDocumentHighlighterAttribute(
-            string name, string[] languages, params string[] identifiers)
-            : this(name, languages, supportsUnannotatedAPIs: false, identifiers)
-        {
-        }
+            string name,
+            string[] languages,
+            params string[] identifiers
+        )
+            : this(name, languages, supportsUnannotatedAPIs: false, identifiers) { }
     }
 }

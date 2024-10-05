@@ -89,13 +89,15 @@ namespace Microsoft.Extensions.FileProviders.Physical
                 _entries = _info
                     .EnumerateFileSystemInfos()
                     .Where(info => !FileSystemInfoHelper.IsExcluded(info, _filters))
-                    .Select<FileSystemInfo, IFileInfo>(info => info switch
-                    {
-                        FileInfo file => new PhysicalFileInfo(file),
-                        DirectoryInfo dir => new PhysicalDirectoryInfo(dir),
-                        // shouldn't happen unless BCL introduces new implementation of base type
-                        _ => throw new InvalidOperationException(SR.UnexpectedFileSystemInfo)
-                    });
+                    .Select<FileSystemInfo, IFileInfo>(info =>
+                        info switch
+                        {
+                            FileInfo file => new PhysicalFileInfo(file),
+                            DirectoryInfo dir => new PhysicalDirectoryInfo(dir),
+                            // shouldn't happen unless BCL introduces new implementation of base type
+                            _ => throw new InvalidOperationException(SR.UnexpectedFileSystemInfo),
+                        }
+                    );
             }
             catch (Exception ex) when (ex is DirectoryNotFoundException or IOException)
             {

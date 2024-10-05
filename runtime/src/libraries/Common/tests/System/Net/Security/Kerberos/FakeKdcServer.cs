@@ -33,7 +33,8 @@ class FakeKdcServer
         _tcpListener.Start();
 
         var cancellationToken = _cancellationTokenSource.Token;
-        Task.Run(async () => {
+        Task.Run(async () =>
+        {
             try
             {
                 byte[] sizeBuffer = new byte[4];
@@ -46,17 +47,22 @@ class FakeKdcServer
                     var messageSize = BinaryPrimitives.ReadInt32BigEndian(sizeBuffer);
                     var requestRented = ArrayPool<byte>.Shared.Rent(messageSize);
                     var request = requestRented.AsMemory(0, messageSize);
-                    await socketStream.ReadExactlyAsync(request);                    
+                    await socketStream.ReadExactlyAsync(request);
                     var response = await _kdcServer.ProcessMessage(request);
                     ArrayPool<byte>.Shared.Return(requestRented);
                     var responseLength = response.Length + 4;
                     var responseRented = ArrayPool<byte>.Shared.Rent(responseLength);
-                    BinaryPrimitives.WriteInt32BigEndian(responseRented.AsSpan(0, 4), responseLength);
+                    BinaryPrimitives.WriteInt32BigEndian(
+                        responseRented.AsSpan(0, 4),
+                        responseLength
+                    );
                     response.CopyTo(responseRented.AsMemory(4, responseLength));
-                    await socketStream.WriteAsync(responseRented.AsMemory(0, responseLength + 4), cancellationToken);
+                    await socketStream.WriteAsync(
+                        responseRented.AsMemory(0, responseLength + 4),
+                        cancellationToken
+                    );
                     ArrayPool<byte>.Shared.Return(responseRented);
-                }
-                while (!cancellationToken.IsCancellationRequested);
+                } while (!cancellationToken.IsCancellationRequested);
             }
             finally
             {

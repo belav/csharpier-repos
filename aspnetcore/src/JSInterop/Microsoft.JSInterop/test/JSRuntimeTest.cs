@@ -22,7 +22,8 @@ public class JSRuntimeTest
         runtime.InvokeAsync<object>("test identifier 2", "some other arg");
 
         // Assert
-        Assert.Collection(runtime.BeginInvokeCalls,
+        Assert.Collection(
+            runtime.BeginInvokeCalls,
             call =>
             {
                 Assert.Equal("test identifier 1", call.Identifier);
@@ -33,7 +34,8 @@ public class JSRuntimeTest
                 Assert.Equal("test identifier 2", call.Identifier);
                 Assert.Equal("[\"some other arg\"]", call.ArgsJson);
                 Assert.NotEqual(runtime.BeginInvokeCalls[0].AsyncHandle, call.AsyncHandle);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -74,7 +76,11 @@ public class JSRuntimeTest
         var runtime = new TestJSRuntime();
 
         // Act
-        var task = runtime.InvokeAsync<object>("test identifier 1", cts.Token, new object[] { "arg1", 123, true });
+        var task = runtime.InvokeAsync<object>(
+            "test identifier 1",
+            cts.Token,
+            new object[] { "arg1", 123, true }
+        );
 
         cts.Cancel();
 
@@ -91,7 +97,11 @@ public class JSRuntimeTest
         var runtime = new TestJSRuntime();
 
         // Act
-        var task = runtime.InvokeAsync<object>("test identifier 1", cts.Token, new object[] { "arg1", 123, true });
+        var task = runtime.InvokeAsync<object>(
+            "test identifier 1",
+            cts.Token,
+            new object[] { "arg1", 123, true }
+        );
 
         cts.Cancel();
 
@@ -117,8 +127,9 @@ public class JSRuntimeTest
         // Act/Assert: Task can be completed
         runtime.EndInvokeJS(
             runtime.BeginInvokeCalls[1].AsyncHandle,
-            /* succeeded: */ true,
-            ref reader);
+            /* succeeded: */true,
+            ref reader
+        );
         Assert.False(unrelatedTask.IsCompleted);
         Assert.True(task.IsCompleted);
         Assert.Equal("my result", task.Result);
@@ -137,8 +148,9 @@ public class JSRuntimeTest
         // Act/Assert: Task can be completed
         runtime.EndInvokeJS(
             runtime.BeginInvokeCalls[0].AsyncHandle,
-            /* succeeded: */ true,
-            ref reader);
+            /* succeeded: */true,
+            ref reader
+        );
         Assert.True(task.IsCompleted);
         var poco = task.Result;
         Debug.Assert(poco != null);
@@ -160,8 +172,9 @@ public class JSRuntimeTest
         // Act/Assert: Task can be completed
         runtime.EndInvokeJS(
             runtime.BeginInvokeCalls[0].AsyncHandle,
-            /* succeeded: */ true,
-            ref reader);
+            /* succeeded: */true,
+            ref reader
+        );
         Assert.True(task.IsCompleted);
         var poco = task.Result;
         Debug.Assert(poco != null);
@@ -187,8 +200,9 @@ public class JSRuntimeTest
         // Act/Assert: Task can be failed
         runtime.EndInvokeJS(
             runtime.BeginInvokeCalls[1].AsyncHandle,
-            /* succeeded: */ false,
-            ref reader);
+            /* succeeded: */false,
+            ref reader
+        );
         Assert.False(unrelatedTask.IsCompleted);
         Assert.True(task.IsCompleted);
 
@@ -214,8 +228,9 @@ public class JSRuntimeTest
         // Act/Assert: Task can be failed
         runtime.EndInvokeJS(
             runtime.BeginInvokeCalls[1].AsyncHandle,
-            /* succeeded: */ true,
-            ref reader);
+            /* succeeded: */true,
+            ref reader
+        );
         Assert.False(unrelatedTask.IsCompleted);
 
         return AssertTask();
@@ -264,20 +279,25 @@ public class JSRuntimeTest
         // Showing we can pass the DotNetObject either as top-level args or nested
         var obj1Ref = DotNetObjectReference.Create(obj1);
         var obj1DifferentRef = DotNetObjectReference.Create(obj1);
-        runtime.InvokeAsync<object>("test identifier",
+        runtime.InvokeAsync<object>(
+            "test identifier",
             obj1Ref,
             new Dictionary<string, object>
             {
-                    { "obj2", DotNetObjectReference.Create(obj2) },
-                    { "obj3", DotNetObjectReference.Create(obj3) },
-                    { "obj1SameRef", obj1Ref },
-                    { "obj1DifferentRef", obj1DifferentRef },
-            });
+                { "obj2", DotNetObjectReference.Create(obj2) },
+                { "obj3", DotNetObjectReference.Create(obj3) },
+                { "obj1SameRef", obj1Ref },
+                { "obj1DifferentRef", obj1DifferentRef },
+            }
+        );
 
         // Assert: Serialized as expected
         var call = runtime.BeginInvokeCalls.Single();
         Assert.Equal("test identifier", call.Identifier);
-        Assert.Equal("[{\"__dotNetObject\":1},{\"obj2\":{\"__dotNetObject\":2},\"obj3\":{\"__dotNetObject\":3},\"obj1SameRef\":{\"__dotNetObject\":1},\"obj1DifferentRef\":{\"__dotNetObject\":4}}]", call.ArgsJson);
+        Assert.Equal(
+            "[{\"__dotNetObject\":1},{\"obj2\":{\"__dotNetObject\":2},\"obj3\":{\"__dotNetObject\":3},\"obj1SameRef\":{\"__dotNetObject\":1},\"obj1DifferentRef\":{\"__dotNetObject\":4}}]",
+            call.ArgsJson
+        );
 
         // Assert: Objects were tracked
         Assert.Same(obj1Ref, runtime.GetObjectReference(1));
@@ -383,11 +403,16 @@ public class JSRuntimeTest
         var byteArray = new byte[] { 1, 5, 7 };
 
         // Act
-        var ex = Assert.Throws<ArgumentOutOfRangeException>(() => runtime.ReceiveByteArray(7, byteArray));
+        var ex = Assert.Throws<ArgumentOutOfRangeException>(
+            () => runtime.ReceiveByteArray(7, byteArray)
+        );
 
         // Assert
         Assert.Equal(2, runtime.ByteArraysToBeRevived.Count);
-        Assert.Equal("Element id '7' cannot be added to the byte arrays to be revived with length '2'.", ex.Message);
+        Assert.Equal(
+            "Element id '7' cannot be added to the byte arrays to be revived with length '2'.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -412,10 +437,16 @@ public class JSRuntimeTest
         var dataReference = new JSStreamReference(runtime, 10, 10);
 
         // Act
-        var exception = await Assert.ThrowsAsync<NotSupportedException>(async () => await runtime.ReadJSDataAsStreamAsync(dataReference, 10, CancellationToken.None));
+        var exception = await Assert.ThrowsAsync<NotSupportedException>(
+            async () =>
+                await runtime.ReadJSDataAsStreamAsync(dataReference, 10, CancellationToken.None)
+        );
 
         // Assert
-        Assert.Equal("The current JavaScript runtime does not support reading data streams.", exception.Message);
+        Assert.Equal(
+            "The current JavaScript runtime does not support reading data streams.",
+            exception.Message
+        );
     }
 
     private class JSError
@@ -444,10 +475,7 @@ public class JSRuntimeTest
 
         public TimeSpan? DefaultTimeout
         {
-            set
-            {
-                base.DefaultAsyncTimeout = value;
-            }
+            set { base.DefaultAsyncTimeout = value; }
         }
 
         public class BeginInvokeAsyncArgs
@@ -465,28 +493,46 @@ public class JSRuntimeTest
             public JSError? ResultError { get; set; }
         }
 
-        protected internal override void EndInvokeDotNet(DotNetInvocationInfo invocationInfo, in DotNetInvocationResult invocationResult)
+        protected internal override void EndInvokeDotNet(
+            DotNetInvocationInfo invocationInfo,
+            in DotNetInvocationResult invocationResult
+        )
         {
-            EndInvokeDotNetCalls.Add(new EndInvokeDotNetArgs
-            {
-                CallId = invocationInfo.CallId,
-                Success = invocationResult.Success,
-                ResultJson = invocationResult.ResultJson,
-                ResultError = invocationResult.Success ? null : new JSError(invocationInfo, invocationResult.Exception),
-            });
+            EndInvokeDotNetCalls.Add(
+                new EndInvokeDotNetArgs
+                {
+                    CallId = invocationInfo.CallId,
+                    Success = invocationResult.Success,
+                    ResultJson = invocationResult.ResultJson,
+                    ResultError = invocationResult.Success
+                        ? null
+                        : new JSError(invocationInfo, invocationResult.Exception),
+                }
+            );
         }
 
-        protected override void BeginInvokeJS(long asyncHandle, string identifier, string? argsJson, JSCallResultType resultType, long targetInstanceId)
+        protected override void BeginInvokeJS(
+            long asyncHandle,
+            string identifier,
+            string? argsJson,
+            JSCallResultType resultType,
+            long targetInstanceId
+        )
         {
-            BeginInvokeCalls.Add(new BeginInvokeAsyncArgs
-            {
-                AsyncHandle = asyncHandle,
-                Identifier = identifier,
-                ArgsJson = argsJson,
-            });
+            BeginInvokeCalls.Add(
+                new BeginInvokeAsyncArgs
+                {
+                    AsyncHandle = asyncHandle,
+                    Identifier = identifier,
+                    ArgsJson = argsJson,
+                }
+            );
         }
 
-        protected internal override Task TransmitStreamAsync(long streamId, DotNetStreamReference dotNetStreamReference)
+        protected internal override Task TransmitStreamAsync(
+            long streamId,
+            DotNetStreamReference dotNetStreamReference
+        )
         {
             // No-op
             return Task.CompletedTask;

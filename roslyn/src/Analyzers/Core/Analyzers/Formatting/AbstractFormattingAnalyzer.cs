@@ -7,27 +7,36 @@ using Microsoft.CodeAnalysis.Formatting;
 
 namespace Microsoft.CodeAnalysis.CodeStyle
 {
-    internal abstract class AbstractFormattingAnalyzer
-        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal abstract class AbstractFormattingAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         protected AbstractFormattingAnalyzer()
             : base(
                 IDEDiagnosticIds.FormattingDiagnosticId,
                 EnforceOnBuildValues.Formatting,
                 option: null,
-                new LocalizableResourceString(nameof(AnalyzersResources.Fix_formatting), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)),
-                new LocalizableResourceString(nameof(AnalyzersResources.Fix_formatting), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)))
-        {
-        }
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Fix_formatting),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Fix_formatting),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                )
+            ) { }
 
-        public sealed override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
+        public sealed override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
 
         protected abstract ISyntaxFormatting SyntaxFormatting { get; }
 
-        protected sealed override void InitializeWorker(AnalysisContext context)
-            => context.RegisterCompilationStartAction(context =>
-                context.RegisterSyntaxTreeAction(treeContext => AnalyzeSyntaxTree(treeContext, context.Compilation.Options)));
+        protected sealed override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterCompilationStartAction(context =>
+                context.RegisterSyntaxTreeAction(treeContext =>
+                    AnalyzeSyntaxTree(treeContext, context.Compilation.Options)
+                )
+            );
 
         /// <summary>
         /// Fixing formatting is high priority.  It's something the user wants to be able to fix quickly, is driven by
@@ -36,13 +45,21 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         /// </summary>
         public override bool IsHighPriority => true;
 
-        private void AnalyzeSyntaxTree(SyntaxTreeAnalysisContext context, CompilationOptions compilationOptions)
+        private void AnalyzeSyntaxTree(
+            SyntaxTreeAnalysisContext context,
+            CompilationOptions compilationOptions
+        )
         {
             if (ShouldSkipAnalysis(context, compilationOptions, notification: null))
                 return;
 
             var options = context.GetAnalyzerOptions().GetSyntaxFormattingOptions(SyntaxFormatting);
-            FormattingAnalyzerHelper.AnalyzeSyntaxTree(context, SyntaxFormatting, Descriptor, options);
+            FormattingAnalyzerHelper.AnalyzeSyntaxTree(
+                context,
+                SyntaxFormatting,
+                Descriptor,
+                options
+            );
         }
     }
 }

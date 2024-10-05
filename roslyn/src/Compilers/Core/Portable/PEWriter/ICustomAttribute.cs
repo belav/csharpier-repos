@@ -31,18 +31,12 @@ namespace Microsoft.Cci
         /// <summary>
         /// The number of positional arguments.
         /// </summary>
-        int ArgumentCount
-        {
-            get;
-        }
+        int ArgumentCount { get; }
 
         /// <summary>
         /// The number of named arguments.
         /// </summary>
-        ushort NamedArgumentCount
-        {
-            get;
-        }
+        ushort NamedArgumentCount { get; }
 
         /// <summary>
         /// The type of the attribute. For example System.AttributeUsageAttribute.

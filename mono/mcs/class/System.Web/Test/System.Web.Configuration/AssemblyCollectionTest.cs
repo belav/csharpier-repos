@@ -1,5 +1,5 @@
 //
-// AssemblyCollectionTest.cs 
+// AssemblyCollectionTest.cs
 //	- unit tests for System.Web.Configuration.AssemblyCollection
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,44 +28,42 @@
 //
 
 
-using NUnit.Framework;
-
 using System;
 using System.Configuration;
-using System.Web.Configuration;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Security;
+using NUnit.Framework;
 
-namespace MonoTests.System.Web.Configuration {
+namespace MonoTests.System.Web.Configuration
+{
+    [TestFixture]
+    public class AssemblyCollectionTest
+    {
+        [Test]
+        public void DuplicateKey()
+        {
+            AssemblyCollection c = new AssemblyCollection();
+            c.Add(new AssemblyInfo("System.Web.dll"));
+            c.Add(new AssemblyInfo("System.Web.dll"));
+        }
 
-	[TestFixture]
-	public class AssemblyCollectionTest  {
+        [Test]
+        public void GetByName()
+        {
+            AssemblyCollection c = new AssemblyCollection();
+            AssemblyInfo a = new AssemblyInfo("System.Web.dll");
+            c.Add(a);
+            Assert.AreEqual(a, c["System.Web.dll"]);
+        }
 
-		[Test]
-		public void DuplicateKey ()
-		{
-			AssemblyCollection c = new AssemblyCollection ();
-			c.Add (new AssemblyInfo ("System.Web.dll"));
-			c.Add (new AssemblyInfo ("System.Web.dll"));
-		}
-
-		[Test]
-		public void GetByName ()
-		{
-			AssemblyCollection c = new AssemblyCollection ();
-			AssemblyInfo a = new AssemblyInfo ("System.Web.dll");
-			c.Add (a);
-			Assert.AreEqual (a, c["System.Web.dll"]);
-		}
-
-		[Test]
-		public void GetByNameFailure ()
-		{
-			AssemblyCollection c = new AssemblyCollection ();
-			AssemblyInfo a = new AssemblyInfo ("System.Web.dll");
-			c.Add (a);
-			Assert.IsNull (c["System.Net.dll"]);
-		}
-	}
+        [Test]
+        public void GetByNameFailure()
+        {
+            AssemblyCollection c = new AssemblyCollection();
+            AssemblyInfo a = new AssemblyInfo("System.Web.dll");
+            c.Add(a);
+            Assert.IsNull(c["System.Net.dll"]);
+        }
+    }
 }
-

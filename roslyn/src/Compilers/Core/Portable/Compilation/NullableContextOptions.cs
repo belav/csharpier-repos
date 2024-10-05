@@ -36,8 +36,10 @@ namespace Microsoft.CodeAnalysis
 
     public static class NullableContextOptionsExtensions
     {
-        private static bool IsFlagSet(NullableContextOptions context, NullableContextOptions flag) =>
-            (context & flag) == flag;
+        private static bool IsFlagSet(
+            NullableContextOptions context,
+            NullableContextOptions flag
+        ) => (context & flag) == flag;
 
         /// <summary>
         /// Returns whether nullable warnings are enabled.

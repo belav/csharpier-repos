@@ -34,7 +34,10 @@ namespace ILCompiler
 
                 public P Payload { get; private set; }
 
-                public IEnumerable<Edge> Edges { get { return _edges; } }
+                public IEnumerable<Edge> Edges
+                {
+                    get { return _edges; }
+                }
 
                 public void AddEdge(Vertex toVertex, bool flagged)
                 {
@@ -56,7 +59,6 @@ namespace ILCompiler
                     _edges.Add(newEdge);
                     return;
                 }
-
 
                 /// <summary>
                 /// If true, we have established that this vertex is part of a cycle in which at least one edge is flagged (abbreviated as "flagged cycle"

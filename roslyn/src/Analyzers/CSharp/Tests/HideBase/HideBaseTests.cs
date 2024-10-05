@@ -17,12 +17,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.HideBase
     public class HideBaseTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public HideBaseTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new HideBaseCodeFixProvider());
+        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new HideBaseCodeFixProvider());
 
         [Fact]
         public async Task TestAddNewToProperty()
@@ -49,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.HideBase
                 {
                     public static new App Current { get; set; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -85,7 +85,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.HideBase
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -113,7 +114,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.HideBase
                 {
                     public new int Test;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/18391")]
@@ -141,7 +143,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.HideBase
                 {
                     public new const int Test = Application.Test + 1;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/14455")]
@@ -155,12 +158,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.HideBase
                 """
                 class A { internal const int i = 0; }
                 class B : A { internal new const int i = 1; }
-                """);
+                """
+            );
         }
 
         [Fact]
-        public async Task TestAddNewToDisorderedModifiers()
-            => await TestInRegularAndScript1Async(
+        public async Task TestAddNewToDisorderedModifiers() =>
+            await TestInRegularAndScript1Async(
                 """
                 class Application
                 {
@@ -182,11 +186,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.HideBase
                 {
                     static public new int Test;
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public async Task TestAddNewToOrderedModifiersWithTrivia()
-            => await TestInRegularAndScript1Async(
+        public async Task TestAddNewToOrderedModifiersWithTrivia() =>
+            await TestInRegularAndScript1Async(
                 """
                 class Application
                 {
@@ -208,6 +213,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.HideBase
                 {
                     /* start */ public /* middle */ new readonly /* end */ int Test;
                 }
-                """);
+                """
+            );
     }
 }

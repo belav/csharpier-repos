@@ -13,18 +13,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
 {
     [ComVisible(true)]
     [ComDefaultInterface(typeof(EnvDTE.CodeVariable))]
-    public sealed class ExternalCodeVariable : AbstractExternalCodeMember, EnvDTE.CodeVariable, EnvDTE80.CodeVariable2
+    public sealed class ExternalCodeVariable
+        : AbstractExternalCodeMember,
+            EnvDTE.CodeVariable,
+            EnvDTE80.CodeVariable2
     {
-        internal static EnvDTE.CodeVariable Create(CodeModelState state, ProjectId projectId, ISymbol symbol)
+        internal static EnvDTE.CodeVariable Create(
+            CodeModelState state,
+            ProjectId projectId,
+            ISymbol symbol
+        )
         {
             var element = new ExternalCodeVariable(state, projectId, symbol);
             return (EnvDTE.CodeVariable)ComAggregate.CreateAggregatedObject(element);
         }
 
         private ExternalCodeVariable(CodeModelState state, ProjectId projectId, ISymbol symbol)
-            : base(state, projectId, symbol)
-        {
-        }
+            : base(state, projectId, symbol) { }
 
         private ITypeSymbol GetSymbolType()
         {
@@ -51,15 +56,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
 
         public object InitExpression
         {
-            get
-            {
-                throw Exceptions.ThrowEFail();
-            }
-
-            set
-            {
-                throw Exceptions.ThrowEFail();
-            }
+            get { throw Exceptions.ThrowEFail(); }
+            set { throw Exceptions.ThrowEFail(); }
         }
 
         public bool IsConstant
@@ -71,14 +69,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
                     return false;
                 }
 
-                return fieldSymbol.IsConst
-                    || fieldSymbol.IsReadOnly;
+                return fieldSymbol.IsConst || fieldSymbol.IsReadOnly;
             }
-
-            set
-            {
-                throw Exceptions.ThrowEFail();
-            }
+            set { throw Exceptions.ThrowEFail(); }
         }
 
         public EnvDTE.CodeTypeRef Type
@@ -93,11 +86,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
 
                 return CodeTypeRef.Create(this.State, this, this.ProjectId, type);
             }
-
-            set
-            {
-                throw Exceptions.ThrowEFail();
-            }
+            set { throw Exceptions.ThrowEFail(); }
         }
 
         public EnvDTE80.vsCMConstKind ConstKind
@@ -122,11 +111,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
                     return EnvDTE80.vsCMConstKind.vsCMConstKindNone;
                 }
             }
-
-            set
-            {
-                throw Exceptions.ThrowEFail();
-            }
+            set { throw Exceptions.ThrowEFail(); }
         }
 
         public bool IsGeneric

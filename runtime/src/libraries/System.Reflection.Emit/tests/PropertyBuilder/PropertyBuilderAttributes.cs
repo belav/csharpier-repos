@@ -12,11 +12,21 @@ namespace System.Reflection.Emit.Tests
         [InlineData(PropertyAttributes.None)]
         [InlineData(PropertyAttributes.RTSpecialName)]
         [InlineData(PropertyAttributes.SpecialName)]
-        [InlineData(PropertyAttributes.SpecialName | PropertyAttributes.RTSpecialName | PropertyAttributes.None | PropertyAttributes.HasDefault)]
+        [InlineData(
+            PropertyAttributes.SpecialName
+                | PropertyAttributes.RTSpecialName
+                | PropertyAttributes.None
+                | PropertyAttributes.HasDefault
+        )]
         public void ExecutePosTest(PropertyAttributes attributes)
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);
-            PropertyBuilder property = type.DefineProperty("TestProperty", attributes, typeof(int), null);
+            PropertyBuilder property = type.DefineProperty(
+                "TestProperty",
+                attributes,
+                typeof(int),
+                null
+            );
             Assert.Equal(attributes, property.Attributes);
         }
     }

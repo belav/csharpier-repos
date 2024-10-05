@@ -12,9 +12,15 @@ namespace System.ServiceModel
     public class ProtocolException : CommunicationException
     {
         public ProtocolException() { }
-        public ProtocolException(string message) : base(message) { }
-        public ProtocolException(string message, Exception innerException) : base(message, innerException) { }
-        protected ProtocolException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+
+        public ProtocolException(string message)
+            : base(message) { }
+
+        public ProtocolException(string message, Exception innerException)
+            : base(message, innerException) { }
+
+        protected ProtocolException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
         internal static ProtocolException ReceiveShutdownReturnedNonNull(Message message)
         {
@@ -23,19 +29,27 @@ namespace System.ServiceModel
                 try
                 {
                     MessageFault fault = MessageFault.CreateFault(message, 64 * 1024);
-                    FaultReasonText reason = fault.Reason.GetMatchingTranslation(CultureInfo.CurrentCulture);
+                    FaultReasonText reason = fault.Reason.GetMatchingTranslation(
+                        CultureInfo.CurrentCulture
+                    );
                     string text = SR.GetString(SR.ReceiveShutdownReturnedFault, reason.Text);
                     return new ProtocolException(text);
                 }
                 catch (QuotaExceededException)
                 {
-                    string text = SR.GetString(SR.ReceiveShutdownReturnedLargeFault, message.Headers.Action);
+                    string text = SR.GetString(
+                        SR.ReceiveShutdownReturnedLargeFault,
+                        message.Headers.Action
+                    );
                     return new ProtocolException(text);
                 }
             }
             else
             {
-                string text = SR.GetString(SR.ReceiveShutdownReturnedMessage, message.Headers.Action);
+                string text = SR.GetString(
+                    SR.ReceiveShutdownReturnedMessage,
+                    message.Headers.Action
+                );
                 return new ProtocolException(text);
             }
         }
@@ -47,19 +61,27 @@ namespace System.ServiceModel
                 try
                 {
                     MessageFault fault = MessageFault.CreateFault(message, 64 * 1024);
-                    FaultReasonText reason = fault.Reason.GetMatchingTranslation(CultureInfo.CurrentCulture);
+                    FaultReasonText reason = fault.Reason.GetMatchingTranslation(
+                        CultureInfo.CurrentCulture
+                    );
                     string text = SR.GetString(SR.OneWayOperationReturnedFault, reason.Text);
                     return new ProtocolException(text);
                 }
                 catch (QuotaExceededException)
                 {
-                    string text = SR.GetString(SR.OneWayOperationReturnedLargeFault, message.Headers.Action);
+                    string text = SR.GetString(
+                        SR.OneWayOperationReturnedLargeFault,
+                        message.Headers.Action
+                    );
                     return new ProtocolException(text);
                 }
             }
             else
             {
-                string text = SR.GetString(SR.OneWayOperationReturnedMessage, message.Headers.Action);
+                string text = SR.GetString(
+                    SR.OneWayOperationReturnedMessage,
+                    message.Headers.Action
+                );
                 return new ProtocolException(text);
             }
         }

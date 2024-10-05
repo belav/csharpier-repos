@@ -20,13 +20,19 @@ namespace System.Activities
             return SynchronizationContextHelper.defaultContext;
         }
 
-        public static SynchronizationContext CloneSynchronizationContext(SynchronizationContext context)
+        public static SynchronizationContext CloneSynchronizationContext(
+            SynchronizationContext context
+        )
         {
             Fx.Assert(context != null, "null context parameter");
-            WFDefaultSynchronizationContext wfDefaultContext = context as WFDefaultSynchronizationContext;
+            WFDefaultSynchronizationContext wfDefaultContext =
+                context as WFDefaultSynchronizationContext;
             if (wfDefaultContext != null)
             {
-                Fx.Assert(SynchronizationContextHelper.defaultContext != null, "We must have set the static member by now!");
+                Fx.Assert(
+                    SynchronizationContextHelper.defaultContext != null,
+                    "We must have set the static member by now!"
+                );
                 return SynchronizationContextHelper.defaultContext;
             }
             else
@@ -37,13 +43,17 @@ namespace System.Activities
 
         class WFDefaultSynchronizationContext : SynchronizationContext
         {
-            public WFDefaultSynchronizationContext()
-            {
-            }
+            public WFDefaultSynchronizationContext() { }
 
             public override void Post(SendOrPostCallback d, object state)
             {
-                ActionItem.Schedule(delegate(object s) { d(s); }, state);
+                ActionItem.Schedule(
+                    delegate(object s)
+                    {
+                        d(s);
+                    },
+                    state
+                );
             }
 
             public override void Send(SendOrPostCallback d, object state)

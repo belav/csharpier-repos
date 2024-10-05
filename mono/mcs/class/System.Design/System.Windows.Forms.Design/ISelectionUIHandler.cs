@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,20 +33,20 @@ using System.Drawing;
 
 namespace System.Windows.Forms.Design
 {
-	internal interface ISelectionUIHandler
-	{
-		bool BeginDrag (object[] components, SelectionRules rules, int initialX, int initialY);
-		void DragMoved (object[] components, Rectangle offset);
-		void EndDrag (object[] components, bool cancel);
-		Rectangle GetComponentBounds (object component);
-		SelectionRules GetComponentRules (object component);
-		Rectangle GetSelectionClipRect (object component);
-		void OleDragDrop (DragEventArgs de);
-		void OleDragEnter (DragEventArgs de);
-		void OleDragLeave ();
-		void OleDragOver (DragEventArgs de);
-		void OnSelectionDoubleClick (IComponent component);
-		bool QueryBeginDrag (object[] components, SelectionRules rules, int initialX, int initialY);
-		void ShowContextMenu (IComponent component);
-	}
+    internal interface ISelectionUIHandler
+    {
+        bool BeginDrag(object[] components, SelectionRules rules, int initialX, int initialY);
+        void DragMoved(object[] components, Rectangle offset);
+        void EndDrag(object[] components, bool cancel);
+        Rectangle GetComponentBounds(object component);
+        SelectionRules GetComponentRules(object component);
+        Rectangle GetSelectionClipRect(object component);
+        void OleDragDrop(DragEventArgs de);
+        void OleDragEnter(DragEventArgs de);
+        void OleDragLeave();
+        void OleDragOver(DragEventArgs de);
+        void OnSelectionDoubleClick(IComponent component);
+        bool QueryBeginDrag(object[] components, SelectionRules rules, int initialX, int initialY);
+        void ShowContextMenu(IComponent component);
+    }
 }

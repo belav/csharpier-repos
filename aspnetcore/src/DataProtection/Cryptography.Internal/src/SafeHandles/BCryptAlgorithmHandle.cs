@@ -29,7 +29,15 @@ internal sealed unsafe class BCryptAlgorithmHandle : BCryptHandle
     private BCryptHashHandle CreateHashCore(byte* pbKey, uint cbKey)
     {
         BCryptHashHandle retVal;
-        int ntstatus = UnsafeNativeMethods.BCryptCreateHash(this, out retVal, IntPtr.Zero, 0, pbKey, cbKey, dwFlags: 0);
+        int ntstatus = UnsafeNativeMethods.BCryptCreateHash(
+            this,
+            out retVal,
+            IntPtr.Zero,
+            0,
+            pbKey,
+            cbKey,
+            dwFlags: 0
+        );
         UnsafeNativeMethods.ThrowExceptionForBCryptStatus(ntstatus);
         CryptoUtil.AssertSafeHandleIsValid(retVal);
 
@@ -52,7 +60,15 @@ internal sealed unsafe class BCryptAlgorithmHandle : BCryptHandle
     public BCryptKeyHandle GenerateSymmetricKey(byte* pbSecret, uint cbSecret)
     {
         BCryptKeyHandle retVal;
-        int ntstatus = UnsafeNativeMethods.BCryptGenerateSymmetricKey(this, out retVal, IntPtr.Zero, 0, pbSecret, cbSecret, 0);
+        int ntstatus = UnsafeNativeMethods.BCryptGenerateSymmetricKey(
+            this,
+            out retVal,
+            IntPtr.Zero,
+            0,
+            pbSecret,
+            cbSecret,
+            0
+        );
         UnsafeNativeMethods.ThrowExceptionForBCryptStatus(ntstatus);
         CryptoUtil.AssertSafeHandleIsValid(retVal);
 
@@ -68,8 +84,17 @@ internal sealed unsafe class BCryptAlgorithmHandle : BCryptHandle
         const int StackAllocCharSize = 128;
 
         // First, calculate how many characters are in the name.
-        uint byteLengthOfNameWithTerminatingNull = GetProperty(Constants.BCRYPT_ALGORITHM_NAME, null, 0);
-        CryptoUtil.Assert(byteLengthOfNameWithTerminatingNull % sizeof(char) == 0 && byteLengthOfNameWithTerminatingNull > sizeof(char) && byteLengthOfNameWithTerminatingNull <= StackAllocCharSize * sizeof(char), "byteLengthOfNameWithTerminatingNull % sizeof(char) == 0 && byteLengthOfNameWithTerminatingNull > sizeof(char) && byteLengthOfNameWithTerminatingNull <= StackAllocCharSize * sizeof(char)");
+        uint byteLengthOfNameWithTerminatingNull = GetProperty(
+            Constants.BCRYPT_ALGORITHM_NAME,
+            null,
+            0
+        );
+        CryptoUtil.Assert(
+            byteLengthOfNameWithTerminatingNull % sizeof(char) == 0
+                && byteLengthOfNameWithTerminatingNull > sizeof(char)
+                && byteLengthOfNameWithTerminatingNull <= StackAllocCharSize * sizeof(char),
+            "byteLengthOfNameWithTerminatingNull % sizeof(char) == 0 && byteLengthOfNameWithTerminatingNull > sizeof(char) && byteLengthOfNameWithTerminatingNull <= StackAllocCharSize * sizeof(char)"
+        );
         uint numCharsWithoutNull = (byteLengthOfNameWithTerminatingNull - 1) / sizeof(char);
 
         if (numCharsWithoutNull == 0)
@@ -78,8 +103,15 @@ internal sealed unsafe class BCryptAlgorithmHandle : BCryptHandle
         }
 
         char* pBuffer = stackalloc char[StackAllocCharSize];
-        uint numBytesCopied = GetProperty(Constants.BCRYPT_ALGORITHM_NAME, pBuffer, byteLengthOfNameWithTerminatingNull);
-        CryptoUtil.Assert(numBytesCopied == byteLengthOfNameWithTerminatingNull, "numBytesCopied == byteLengthOfNameWithTerminatingNull");
+        uint numBytesCopied = GetProperty(
+            Constants.BCRYPT_ALGORITHM_NAME,
+            pBuffer,
+            byteLengthOfNameWithTerminatingNull
+        );
+        CryptoUtil.Assert(
+            numBytesCopied == byteLengthOfNameWithTerminatingNull,
+            "numBytesCopied == byteLengthOfNameWithTerminatingNull"
+        );
         return new string(pBuffer, 0, (int)numCharsWithoutNull);
     }
 
@@ -89,7 +121,11 @@ internal sealed unsafe class BCryptAlgorithmHandle : BCryptHandle
     public uint GetCipherBlockLength()
     {
         uint cipherBlockLength;
-        uint numBytesCopied = GetProperty(Constants.BCRYPT_BLOCK_LENGTH, &cipherBlockLength, sizeof(uint));
+        uint numBytesCopied = GetProperty(
+            Constants.BCRYPT_BLOCK_LENGTH,
+            &cipherBlockLength,
+            sizeof(uint)
+        );
         CryptoUtil.Assert(numBytesCopied == sizeof(uint), "numBytesCopied == sizeof(uint)");
         return cipherBlockLength;
     }
@@ -100,7 +136,11 @@ internal sealed unsafe class BCryptAlgorithmHandle : BCryptHandle
     public uint GetHashBlockLength()
     {
         uint hashBlockLength;
-        uint numBytesCopied = GetProperty(Constants.BCRYPT_HASH_BLOCK_LENGTH, &hashBlockLength, sizeof(uint));
+        uint numBytesCopied = GetProperty(
+            Constants.BCRYPT_HASH_BLOCK_LENGTH,
+            &hashBlockLength,
+            sizeof(uint)
+        );
         CryptoUtil.Assert(numBytesCopied == sizeof(uint), "numBytesCopied == sizeof(uint)");
         return hashBlockLength;
     }
@@ -111,8 +151,15 @@ internal sealed unsafe class BCryptAlgorithmHandle : BCryptHandle
     public BCRYPT_KEY_LENGTHS_STRUCT GetSupportedKeyLengths()
     {
         BCRYPT_KEY_LENGTHS_STRUCT supportedKeyLengths;
-        uint numBytesCopied = GetProperty(Constants.BCRYPT_KEY_LENGTHS, &supportedKeyLengths, (uint)sizeof(BCRYPT_KEY_LENGTHS_STRUCT));
-        CryptoUtil.Assert(numBytesCopied == sizeof(BCRYPT_KEY_LENGTHS_STRUCT), "numBytesCopied == sizeof(BCRYPT_KEY_LENGTHS_STRUCT)");
+        uint numBytesCopied = GetProperty(
+            Constants.BCRYPT_KEY_LENGTHS,
+            &supportedKeyLengths,
+            (uint)sizeof(BCRYPT_KEY_LENGTHS_STRUCT)
+        );
+        CryptoUtil.Assert(
+            numBytesCopied == sizeof(BCRYPT_KEY_LENGTHS_STRUCT),
+            "numBytesCopied == sizeof(BCRYPT_KEY_LENGTHS_STRUCT)"
+        );
         return supportedKeyLengths;
     }
 
@@ -122,12 +169,20 @@ internal sealed unsafe class BCryptAlgorithmHandle : BCryptHandle
     public uint GetHashDigestLength()
     {
         uint digestLength;
-        uint numBytesCopied = GetProperty(Constants.BCRYPT_HASH_LENGTH, &digestLength, sizeof(uint));
+        uint numBytesCopied = GetProperty(
+            Constants.BCRYPT_HASH_LENGTH,
+            &digestLength,
+            sizeof(uint)
+        );
         CryptoUtil.Assert(numBytesCopied == sizeof(uint), "numBytesCopied == sizeof(uint)");
         return digestLength;
     }
 
-    public static BCryptAlgorithmHandle OpenAlgorithmHandle(string algorithmId, string? implementation = null, bool hmac = false)
+    public static BCryptAlgorithmHandle OpenAlgorithmHandle(
+        string algorithmId,
+        string? implementation = null,
+        bool hmac = false
+    )
     {
         // from bcrypt.h
         const uint BCRYPT_ALG_HANDLE_HMAC_FLAG = 0x00000008;
@@ -136,12 +191,21 @@ internal sealed unsafe class BCryptAlgorithmHandle : BCryptHandle
         const int STATUS_NOT_FOUND = unchecked((int)0xC0000225);
 
         BCryptAlgorithmHandle algHandle;
-        int ntstatus = UnsafeNativeMethods.BCryptOpenAlgorithmProvider(out algHandle, algorithmId, implementation, dwFlags: (hmac) ? BCRYPT_ALG_HANDLE_HMAC_FLAG : 0);
+        int ntstatus = UnsafeNativeMethods.BCryptOpenAlgorithmProvider(
+            out algHandle,
+            algorithmId,
+            implementation,
+            dwFlags: (hmac) ? BCRYPT_ALG_HANDLE_HMAC_FLAG : 0
+        );
 
         // error checking
         if (ntstatus == STATUS_NOT_FOUND)
         {
-            string message = String.Format(CultureInfo.CurrentCulture, Resources.BCryptAlgorithmHandle_ProviderNotFound, algorithmId);
+            string message = String.Format(
+                CultureInfo.CurrentCulture,
+                Resources.BCryptAlgorithmHandle_ProviderNotFound,
+                algorithmId
+            );
             throw new CryptographicException(message);
         }
         UnsafeNativeMethods.ThrowExceptionForBCryptStatus(ntstatus);
@@ -160,7 +224,15 @@ internal sealed unsafe class BCryptAlgorithmHandle : BCryptHandle
     {
         fixed (char* pszChainingMode = chainingMode)
         {
-            SetProperty(Constants.BCRYPT_CHAINING_MODE, pszChainingMode, checked((uint)(chainingMode.Length + 1 /* null terminator */) * sizeof(char)));
+            SetProperty(
+                Constants.BCRYPT_CHAINING_MODE,
+                pszChainingMode,
+                checked(
+                    (uint)(
+                        chainingMode.Length + 1 /* null terminator */
+                    ) * sizeof(char)
+                )
+            );
         }
     }
 }

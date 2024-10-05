@@ -11,8 +11,6 @@ namespace Microsoft.Win32.SafeHandles
         /// Creates a <see cref="T:Microsoft.Win32.SafeHandles.SafeMemoryMappedFileHandle" />.
         /// </summary>
         public SafeMemoryMappedFileHandle()
-            : base(true)
-        {
-        }
+            : base(true) { }
     }
 }

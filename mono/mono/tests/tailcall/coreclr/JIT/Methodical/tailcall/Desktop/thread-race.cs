@@ -3,8 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Threading;
 using System.Runtime.CompilerServices;
+using System.Threading;
 
 internal class Repro
 {
@@ -68,9 +68,12 @@ internal class Repro
         s_threadsCompleted = true;
 
         s_myMutex.WaitOne();
-        if (0 == s_threadSum[0]) s_threadSum[0] = sum;
-        if (0 == s_threadSum[1]) s_threadSum[1] = sum;
-        if (0 == s_threadSum[2]) s_threadSum[2] = sum;
+        if (0 == s_threadSum[0])
+            s_threadSum[0] = sum;
+        if (0 == s_threadSum[1])
+            s_threadSum[1] = sum;
+        if (0 == s_threadSum[2])
+            s_threadSum[2] = sum;
         s_myMutex.ReleaseMutex();
     }
 

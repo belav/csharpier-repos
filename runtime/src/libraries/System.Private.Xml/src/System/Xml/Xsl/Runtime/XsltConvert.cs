@@ -46,7 +46,10 @@ namespace System.Xml.Xsl.Runtime
             }
             else
             {
-                Debug.Assert(itemType == typeof(bool), $"Unexpected type of atomic sequence {itemType}");
+                Debug.Assert(
+                    itemType == typeof(bool),
+                    $"Unexpected type of atomic sequence {itemType}"
+                );
                 return item.ValueAsBoolean;
             }
         }
@@ -60,7 +63,6 @@ namespace System.Xml.Xsl.Runtime
 
             return ToBoolean(listItems[0]);
         }
-
 
         //------------------------------------------------------------------------
         // ToDouble (internal type to internal type)
@@ -90,7 +92,10 @@ namespace System.Xml.Xsl.Runtime
             }
             else
             {
-                Debug.Assert(itemType == typeof(bool), $"Unexpected type of atomic sequence {itemType}");
+                Debug.Assert(
+                    itemType == typeof(bool),
+                    $"Unexpected type of atomic sequence {itemType}"
+                );
                 return item.ValueAsBoolean ? 1d : 0d;
             }
         }
@@ -105,7 +110,6 @@ namespace System.Xml.Xsl.Runtime
             return ToDouble(listItems[0]);
         }
 
-
         //------------------------------------------------------------------------
         // ToNode (internal type to internal type)
         //------------------------------------------------------------------------
@@ -118,7 +122,10 @@ namespace System.Xml.Xsl.Runtime
             {
                 // Create Navigator over text node containing string value of item
                 XPathDocument doc = new XPathDocument();
-                XmlRawWriter writer = doc.LoadFromWriter(XPathDocument.LoadFlags.AtomizeNames, string.Empty);
+                XmlRawWriter writer = doc.LoadFromWriter(
+                    XPathDocument.LoadFlags.AtomizeNames,
+                    string.Empty
+                );
                 writer.WriteString(ToString(item));
                 writer.Close();
                 return doc.CreateNavigator();
@@ -141,7 +148,6 @@ namespace System.Xml.Xsl.Runtime
             throw new XslTransformException(SR.Xslt_NodeSetNotNode, string.Empty);
         }
 
-
         //------------------------------------------------------------------------
         // ToNodes (internal type to internal type)
         //------------------------------------------------------------------------
@@ -160,7 +166,6 @@ namespace System.Xml.Xsl.Runtime
 
             return XmlILStorageConverter.ItemsToNavigators(listItems);
         }
-
 
         //------------------------------------------------------------------------
         // ToString (internal type to internal type)
@@ -192,7 +197,6 @@ namespace System.Xml.Xsl.Runtime
             return ToString(listItems[0]);
         }
 
-
         //------------------------------------------------------------------------
         // External type to internal type
         //------------------------------------------------------------------------
@@ -217,24 +221,32 @@ namespace System.Xml.Xsl.Runtime
             return (double)value;
         }
 
-
         //------------------------------------------------------------------------
         // Internal type to external type
         //------------------------------------------------------------------------
 
         public static decimal ToDecimal(double value)
         {
-            checked { return (decimal)value; }
+            checked
+            {
+                return (decimal)value;
+            }
         }
 
         public static int ToInt(double value)
         {
-            checked { return (int)value; }
+            checked
+            {
+                return (int)value;
+            }
         }
 
         public static long ToLong(double value)
         {
-            checked { return (long)value; }
+            checked
+            {
+                return (long)value;
+            }
         }
 
         public static DateTime ToDateTime(string value)
@@ -242,14 +254,19 @@ namespace System.Xml.Xsl.Runtime
             return (DateTime)(new XsdDateTime(value, XsdDateTimeFlags.AllXsd));
         }
 
-
         //------------------------------------------------------------------------
         // External type to external type
         //------------------------------------------------------------------------
 
-        internal static XmlAtomicValue ConvertToType(XmlAtomicValue value, XmlQueryType destinationType)
+        internal static XmlAtomicValue ConvertToType(
+            XmlAtomicValue value,
+            XmlQueryType destinationType
+        )
         {
-            Debug.Assert(destinationType.IsStrict && destinationType.IsAtomicValue, "Can only convert to strict atomic type.");
+            Debug.Assert(
+                destinationType.IsStrict && destinationType.IsAtomicValue,
+                "Can only convert to strict atomic type."
+            );
 
             // This conversion matrix should match the one in XmlILVisitor.GetXsltConvertMethod
             switch (destinationType.TypeCode)
@@ -266,12 +283,18 @@ namespace System.Xml.Xsl.Runtime
 
                 case XmlTypeCode.DateTime:
                     if (value.XmlType.TypeCode == XmlTypeCode.String)
-                        return new XmlAtomicValue(destinationType.SchemaType, ToDateTime(value.Value));
+                        return new XmlAtomicValue(
+                            destinationType.SchemaType,
+                            ToDateTime(value.Value)
+                        );
                     break;
 
                 case XmlTypeCode.Decimal:
                     if (value.XmlType.TypeCode == XmlTypeCode.Double)
-                        return new XmlAtomicValue(destinationType.SchemaType, ToDecimal(value.ValueAsDouble));
+                        return new XmlAtomicValue(
+                            destinationType.SchemaType,
+                            ToDecimal(value.ValueAsDouble)
+                        );
                     break;
 
                 case XmlTypeCode.Double:
@@ -283,18 +306,27 @@ namespace System.Xml.Xsl.Runtime
                             return new XmlAtomicValue(destinationType.SchemaType, ToDouble(value));
 
                         case XmlTypeCode.Decimal:
-                            return new XmlAtomicValue(destinationType.SchemaType, ToDouble((decimal)value.ValueAs(typeof(decimal), null)));
+                            return new XmlAtomicValue(
+                                destinationType.SchemaType,
+                                ToDouble((decimal)value.ValueAs(typeof(decimal), null))
+                            );
 
                         case XmlTypeCode.Int:
                         case XmlTypeCode.Long:
-                            return new XmlAtomicValue(destinationType.SchemaType, ToDouble(value.ValueAsLong));
+                            return new XmlAtomicValue(
+                                destinationType.SchemaType,
+                                ToDouble(value.ValueAsLong)
+                            );
                     }
                     break;
 
                 case XmlTypeCode.Int:
                 case XmlTypeCode.Long:
                     if (value.XmlType.TypeCode == XmlTypeCode.Double)
-                        return new XmlAtomicValue(destinationType.SchemaType, ToLong(value.ValueAsDouble));
+                        return new XmlAtomicValue(
+                            destinationType.SchemaType,
+                            ToLong(value.ValueAsDouble)
+                        );
                     break;
 
                 case XmlTypeCode.String:
@@ -306,15 +338,19 @@ namespace System.Xml.Xsl.Runtime
                             return new XmlAtomicValue(destinationType.SchemaType, ToString(value));
 
                         case XmlTypeCode.DateTime:
-                            return new XmlAtomicValue(destinationType.SchemaType, ToString(value.ValueAsDateTime));
+                            return new XmlAtomicValue(
+                                destinationType.SchemaType,
+                                ToString(value.ValueAsDateTime)
+                            );
                     }
                     break;
             }
 
-            Debug.Fail($"Conversion from {value.XmlType.QualifiedName.Name} to {destinationType} is not supported.");
+            Debug.Fail(
+                $"Conversion from {value.XmlType.QualifiedName.Name} to {destinationType} is not supported."
+            );
             return value;
         }
-
 
         //------------------------------------------------------------------------
         // EnsureXXX methods (TreatAs)
@@ -337,7 +373,6 @@ namespace System.Xml.Xsl.Runtime
             return XmlILStorageConverter.ItemsToNavigators(listItems);
         }
 
-
         //------------------------------------------------------------------------
         // InferXsltType
         //------------------------------------------------------------------------
@@ -347,26 +382,46 @@ namespace System.Xml.Xsl.Runtime
         /// </summary>
         internal static XmlQueryType InferXsltType(Type clrType)
         {
-            if (clrType == typeof(bool)) return XmlQueryTypeFactory.BooleanX;
-            if (clrType == typeof(byte)) return XmlQueryTypeFactory.DoubleX;
-            if (clrType == typeof(decimal)) return XmlQueryTypeFactory.DoubleX;
-            if (clrType == typeof(DateTime)) return XmlQueryTypeFactory.StringX;
-            if (clrType == typeof(double)) return XmlQueryTypeFactory.DoubleX;
-            if (clrType == typeof(short)) return XmlQueryTypeFactory.DoubleX;
-            if (clrType == typeof(int)) return XmlQueryTypeFactory.DoubleX;
-            if (clrType == typeof(long)) return XmlQueryTypeFactory.DoubleX;
-            if (clrType == typeof(IXPathNavigable)) return XmlQueryTypeFactory.NodeNotRtf;
-            if (clrType == typeof(sbyte)) return XmlQueryTypeFactory.DoubleX;
-            if (clrType == typeof(float)) return XmlQueryTypeFactory.DoubleX;
-            if (clrType == typeof(string)) return XmlQueryTypeFactory.StringX;
-            if (clrType == typeof(ushort)) return XmlQueryTypeFactory.DoubleX;
-            if (clrType == typeof(uint)) return XmlQueryTypeFactory.DoubleX;
-            if (clrType == typeof(ulong)) return XmlQueryTypeFactory.DoubleX;
-            if (clrType == typeof(XPathNavigator[])) return XmlQueryTypeFactory.NodeSDod;
-            if (clrType == typeof(XPathNavigator)) return XmlQueryTypeFactory.NodeNotRtf;
-            if (clrType == typeof(XPathNodeIterator)) return XmlQueryTypeFactory.NodeSDod;
-            if (clrType.IsEnum) return XmlQueryTypeFactory.DoubleX;
-            if (clrType == typeof(void)) return XmlQueryTypeFactory.Empty;
+            if (clrType == typeof(bool))
+                return XmlQueryTypeFactory.BooleanX;
+            if (clrType == typeof(byte))
+                return XmlQueryTypeFactory.DoubleX;
+            if (clrType == typeof(decimal))
+                return XmlQueryTypeFactory.DoubleX;
+            if (clrType == typeof(DateTime))
+                return XmlQueryTypeFactory.StringX;
+            if (clrType == typeof(double))
+                return XmlQueryTypeFactory.DoubleX;
+            if (clrType == typeof(short))
+                return XmlQueryTypeFactory.DoubleX;
+            if (clrType == typeof(int))
+                return XmlQueryTypeFactory.DoubleX;
+            if (clrType == typeof(long))
+                return XmlQueryTypeFactory.DoubleX;
+            if (clrType == typeof(IXPathNavigable))
+                return XmlQueryTypeFactory.NodeNotRtf;
+            if (clrType == typeof(sbyte))
+                return XmlQueryTypeFactory.DoubleX;
+            if (clrType == typeof(float))
+                return XmlQueryTypeFactory.DoubleX;
+            if (clrType == typeof(string))
+                return XmlQueryTypeFactory.StringX;
+            if (clrType == typeof(ushort))
+                return XmlQueryTypeFactory.DoubleX;
+            if (clrType == typeof(uint))
+                return XmlQueryTypeFactory.DoubleX;
+            if (clrType == typeof(ulong))
+                return XmlQueryTypeFactory.DoubleX;
+            if (clrType == typeof(XPathNavigator[]))
+                return XmlQueryTypeFactory.NodeSDod;
+            if (clrType == typeof(XPathNavigator))
+                return XmlQueryTypeFactory.NodeNotRtf;
+            if (clrType == typeof(XPathNodeIterator))
+                return XmlQueryTypeFactory.NodeSDod;
+            if (clrType.IsEnum)
+                return XmlQueryTypeFactory.DoubleX;
+            if (clrType == typeof(void))
+                return XmlQueryTypeFactory.Empty;
 
             return XmlQueryTypeFactory.ItemS;
         }

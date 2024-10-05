@@ -120,8 +120,8 @@ namespace System.Runtime.InteropServices
     {
         // ! Do not add or rearrange fields as the EE depends on this layout.
         //------------------------------------------------------------------
-        protected IntPtr handle;    // This must be protected so derived classes can use out params.
-        private bool _isClosed;     // Set by SetHandleAsInvalid or Close/Dispose/finalization.
+        protected IntPtr handle; // This must be protected so derived classes can use out params.
+        private bool _isClosed; // Set by SetHandleAsInvalid or Close/Dispose/finalization.
 
         // Creates a CriticalHandle class.  Users must then set the Handle property or allow P/Invoke marshaling to set it implicitly.
         protected CriticalHandle(IntPtr invalidHandleValue)
@@ -167,10 +167,7 @@ namespace System.Runtime.InteropServices
         // of the handle's designated illegal values). CriticalHandle itself doesn't
         // know what an invalid handle looks like, so this method is abstract and
         // must be provided by a derived type.
-        public abstract bool IsInvalid
-        {
-            get;
-        }
+        public abstract bool IsInvalid { get; }
 
         public void Close()
         {

@@ -46,10 +46,16 @@ namespace System.Web.WebPages.Test
 
             Mock<HttpResponseBase> httpResponse = new Mock<HttpResponseBase>();
             httpResponse.SetupGet(r => r.Output).Returns(writer);
-            Mock<HttpRequestBase> httpRequest = Utils.CreateTestRequest("~/index.cshtml", "~/index.cshtml");
+            Mock<HttpRequestBase> httpRequest = Utils.CreateTestRequest(
+                "~/index.cshtml",
+                "~/index.cshtml"
+            );
             httpRequest.SetupGet(r => r.IsLocal).Returns(true);
             httpRequest.Setup(r => r.MapPath(It.IsAny<string>())).Returns<string>(p => p);
-            Mock<HttpContextBase> context = Utils.CreateTestContext(httpRequest.Object, httpResponse.Object);
+            Mock<HttpContextBase> context = Utils.CreateTestContext(
+                httpRequest.Object,
+                httpResponse.Object
+            );
             var page = Utils.CreatePage(p => p.Write(contents));
 
             // Act
@@ -66,15 +72,19 @@ namespace System.Web.WebPages.Test
         public void GenerateSourceFilesHeaderGenerates2047EncodedValue()
         {
             // Arrange
-            string headerKey = null, headerValue = null;
+            string headerKey = null,
+                headerValue = null;
             var context = new Mock<HttpContextBase>();
             var response = new Mock<HttpResponseBase>();
-            response.Setup(c => c.AddHeader(It.IsAny<string>(), It.IsAny<string>())).Callback(
-                (string key, string value) =>
-                {
-                    headerKey = key;
-                    headerValue = value;
-                });
+            response
+                .Setup(c => c.AddHeader(It.IsAny<string>(), It.IsAny<string>()))
+                .Callback(
+                    (string key, string value) =>
+                    {
+                        headerKey = key;
+                        headerValue = value;
+                    }
+                );
             context.Setup(c => c.Response).Returns(response.Object);
             context.Setup(c => c.Items).Returns(new Hashtable());
 
@@ -95,11 +105,24 @@ namespace System.Web.WebPages.Test
         public void HttpHandlerGeneratesSourceFilesHeadersIfRequestIsLocal()
         {
             // Arrange
-            string pagePath = "~/index.cshtml", layoutPath = "~/Layout.cshtml", layoutPageName = "Layout.cshtml";
-            var page = Utils.CreatePage(p => { p.Layout = layoutPageName; }, pagePath);
-            var layoutPage = Utils.CreatePage(p => { p.RenderBody(); }, layoutPath);
+            string pagePath = "~/index.cshtml",
+                layoutPath = "~/Layout.cshtml",
+                layoutPageName = "Layout.cshtml";
+            var page = Utils.CreatePage(
+                p =>
+                {
+                    p.Layout = layoutPageName;
+                },
+                pagePath
+            );
+            var layoutPage = Utils.CreatePage(
+                p =>
+                {
+                    p.RenderBody();
+                },
+                layoutPath
+            );
             Utils.AssignObjectFactoriesAndDisplayModeProvider(layoutPage, page);
-
 
             var headers = new NameValueCollection();
             var request = Utils.CreateTestRequest(pagePath, pagePath);
@@ -110,8 +133,12 @@ namespace System.Web.WebPages.Test
             var response = new Mock<HttpResponseBase>() { CallBase = true };
             response.SetupGet(r => r.Headers).Returns(headers);
             response.SetupGet(r => r.Output).Returns(TextWriter.Null);
-            response.Setup(r => r.AppendHeader(It.IsAny<string>(), It.IsAny<string>())).Callback<string, string>((name, value) => headers.Add(name, value));
-            response.Setup(r => r.AddHeader(It.IsAny<string>(), It.IsAny<string>())).Callback<string, string>((name, value) => headers.Add(name, value));
+            response
+                .Setup(r => r.AppendHeader(It.IsAny<string>(), It.IsAny<string>()))
+                .Callback<string, string>((name, value) => headers.Add(name, value));
+            response
+                .Setup(r => r.AddHeader(It.IsAny<string>(), It.IsAny<string>()))
+                .Callback<string, string>((name, value) => headers.Add(name, value));
             response.Setup(r => r.Cookies).Returns(new HttpCookieCollection());
 
             var context = Utils.CreateTestContext(request.Object, response.Object);
@@ -121,8 +148,14 @@ namespace System.Web.WebPages.Test
             webPageHttpHandler.ProcessRequestInternal(context.Object);
 
             // Assert
-            Assert.Equal(LatestRazorVersion.MajorMinor, headers[WebPageHttpHandler.WebPagesVersionHeaderName]);
-            Assert.Equal("=?UTF-8?B?fi9pbmRleC5jc2h0bWx8fi9MYXlvdXQuY3NodG1s?=", headers["X-SourceFiles"]);
+            Assert.Equal(
+                LatestRazorVersion.MajorMinor,
+                headers[WebPageHttpHandler.WebPagesVersionHeaderName]
+            );
+            Assert.Equal(
+                "=?UTF-8?B?fi9pbmRleC5jc2h0bWx8fi9MYXlvdXQuY3NodG1s?=",
+                headers["X-SourceFiles"]
+            );
         }
 
         [Fact]
@@ -130,7 +163,10 @@ namespace System.Web.WebPages.Test
         {
             var contents = "test";
             var httpContext = Utils.CreateTestContext().Object;
-            var page = Utils.CreatePage(p => { throw new InvalidOperationException(contents); });
+            var page = Utils.CreatePage(p =>
+            {
+                throw new InvalidOperationException(contents);
+            });
             var e = Assert.Throws<HttpUnhandledException>(
                 () => new WebPageHttpHandler(page).ProcessRequestInternal(httpContext)
             );
@@ -143,10 +179,14 @@ namespace System.Web.WebPages.Test
         {
             var contents = "test";
             var httpContext = Utils.CreateTestContext().Object;
-            var page = Utils.CreatePage(p => { throw new SecurityException(contents); });
+            var page = Utils.CreatePage(p =>
+            {
+                throw new SecurityException(contents);
+            });
             Assert.Throws<SecurityException>(
                 () => new WebPageHttpHandler(page).ProcessRequestInternal(httpContext),
-                contents);
+                contents
+            );
         }
 
         [Fact]
@@ -161,11 +201,20 @@ namespace System.Web.WebPages.Test
             var mockBuildManager = new Mock<IVirtualPathFactory>();
             var virtualPath = "~/hello/test.cshtml";
             var page = Utils.CreatePage(p => p.Write(contents));
-            mockBuildManager.Setup(c => c.Exists(It.Is<string>(p => p.Equals(virtualPath)))).Returns<string>(_ => true).Verifiable();
-            mockBuildManager.Setup(c => c.CreateInstance(It.Is<string>(p => p.Equals(virtualPath)))).Returns(page).Verifiable();
+            mockBuildManager
+                .Setup(c => c.Exists(It.Is<string>(p => p.Equals(virtualPath))))
+                .Returns<string>(_ => true)
+                .Verifiable();
+            mockBuildManager
+                .Setup(c => c.CreateInstance(It.Is<string>(p => p.Equals(virtualPath))))
+                .Returns(page)
+                .Verifiable();
 
             // Act
-            IHttpHandler handler = WebPageHttpHandler.CreateFromVirtualPath(virtualPath, new VirtualPathFactoryManager(mockBuildManager.Object));
+            IHttpHandler handler = WebPageHttpHandler.CreateFromVirtualPath(
+                virtualPath,
+                new VirtualPathFactoryManager(mockBuildManager.Object)
+            );
             WebPageHttpHandler webPageHttpHandler = Assert.IsType<WebPageHttpHandler>(handler);
             webPageHttpHandler.ProcessRequestInternal(httpContext.Object);
 
@@ -178,7 +227,11 @@ namespace System.Web.WebPages.Test
         public void VersionHeaderTest()
         {
             Mock<HttpResponseBase> mockResponse = new Mock<HttpResponseBase>();
-            mockResponse.Setup(response => response.AppendHeader("X-AspNetWebPages-Version", LatestRazorVersion.MajorMinor)).Verifiable();
+            mockResponse
+                .Setup(response =>
+                    response.AppendHeader("X-AspNetWebPages-Version", LatestRazorVersion.MajorMinor)
+                )
+                .Verifiable();
 
             Mock<HttpContextBase> mockContext = new Mock<HttpContextBase>();
             mockContext.SetupGet(context => context.Response).Returns(mockResponse.Object);
@@ -195,10 +248,16 @@ namespace System.Web.WebPages.Test
             var handler = new WebPageHttpHandler(new DummyPage());
             var mockBuildManager = new Mock<IVirtualPathFactory>();
             mockBuildManager.Setup(c => c.CreateInstance(It.IsAny<string>())).Returns(handler);
-            mockBuildManager.Setup(c => c.Exists(It.Is<string>(p => p.Equals(virtualPath)))).Returns<string>(_ => true).Verifiable();
+            mockBuildManager
+                .Setup(c => c.Exists(It.Is<string>(p => p.Equals(virtualPath))))
+                .Returns<string>(_ => true)
+                .Verifiable();
 
             // Act
-            var result = WebPageHttpHandler.CreateFromVirtualPath(virtualPath, new VirtualPathFactoryManager(mockBuildManager.Object));
+            var result = WebPageHttpHandler.CreateFromVirtualPath(
+                virtualPath,
+                new VirtualPathFactoryManager(mockBuildManager.Object)
+            );
 
             // Assert
             Assert.Equal(handler, result);
@@ -219,8 +278,14 @@ namespace System.Web.WebPages.Test
             mockFactory.Setup(c => c.CreateInstance(handlerVirtualPath)).Returns(handler);
 
             // Act
-            var handlerResult = WebPageHttpHandler.CreateFromVirtualPath(handlerVirtualPath, mockFactory.Object);
-            var pageResult = WebPageHttpHandler.CreateFromVirtualPath(pageVirtualPath, mockFactory.Object);
+            var handlerResult = WebPageHttpHandler.CreateFromVirtualPath(
+                handlerVirtualPath,
+                mockFactory.Object
+            );
+            var pageResult = WebPageHttpHandler.CreateFromVirtualPath(
+                pageVirtualPath,
+                mockFactory.Object
+            );
 
             // Assert
             Assert.Equal(handler, handlerResult);
@@ -236,14 +301,14 @@ namespace System.Web.WebPages.Test
             var response = new Mock<HttpResponseBase>();
             response.SetupGet(r => r.Output).Returns(textWriter);
 
-            return Utils.CreateTestContext(request: request.Object, response: response.Object).Object;
+            return Utils
+                .CreateTestContext(request: request.Object, response: response.Object)
+                .Object;
         }
 
         private sealed class DummyPage : WebPage
         {
-            public override void Execute()
-            {
-            }
+            public override void Execute() { }
         }
     }
 }

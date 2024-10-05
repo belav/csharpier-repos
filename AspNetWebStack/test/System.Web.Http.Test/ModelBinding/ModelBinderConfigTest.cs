@@ -15,7 +15,12 @@ namespace System.Web.Http.ModelBinding
         public void GetUserResourceString_NullControllerContext_ReturnsNull()
         {
             // Act
-            string customResourceString = ModelBinderConfig.GetUserResourceString(null /* controllerContext */, "someResourceName", "someResourceClassKey");
+            string customResourceString = ModelBinderConfig.GetUserResourceString(
+                null /* controllerContext */
+                ,
+                "someResourceName",
+                "someResourceClassKey"
+            );
 
             // Assert
             Assert.Null(customResourceString);
@@ -25,13 +30,26 @@ namespace System.Web.Http.ModelBinding
         public void TypeConversionErrorMessageProvider_DefaultValue()
         {
             // Arrange
-            ModelMetadata metadata = new ModelMetadata(new Mock<ModelMetadataProvider>().Object, null, null, typeof(int), "SomePropertyName");
+            ModelMetadata metadata = new ModelMetadata(
+                new Mock<ModelMetadataProvider>().Object,
+                null,
+                null,
+                typeof(int),
+                "SomePropertyName"
+            );
 
             // Act
-            string errorString = ModelBinderConfig.TypeConversionErrorMessageProvider(null, metadata, "some incoming value");
+            string errorString = ModelBinderConfig.TypeConversionErrorMessageProvider(
+                null,
+                metadata,
+                "some incoming value"
+            );
 
             // Assert
-            Assert.Equal("The value 'some incoming value' is not valid for SomePropertyName.", errorString);
+            Assert.Equal(
+                "The value 'some incoming value' is not valid for SomePropertyName.",
+                errorString
+            );
         }
 
         [Fact]
@@ -43,7 +61,11 @@ namespace System.Web.Http.ModelBinding
             // Act & assert
             try
             {
-                MemberHelper.TestPropertyWithDefaultInstance(wrapper, "TypeConversionErrorMessageProvider", (ModelBinderErrorMessageProvider)DummyErrorSelector);
+                MemberHelper.TestPropertyWithDefaultInstance(
+                    wrapper,
+                    "TypeConversionErrorMessageProvider",
+                    (ModelBinderErrorMessageProvider)DummyErrorSelector
+                );
             }
             finally
             {
@@ -55,10 +77,20 @@ namespace System.Web.Http.ModelBinding
         public void ValueRequiredErrorMessageProvider_DefaultValue()
         {
             // Arrange
-            ModelMetadata metadata = new ModelMetadata(new Mock<ModelMetadataProvider>().Object, null, null, typeof(int), "SomePropertyName");
+            ModelMetadata metadata = new ModelMetadata(
+                new Mock<ModelMetadataProvider>().Object,
+                null,
+                null,
+                typeof(int),
+                "SomePropertyName"
+            );
 
             // Act
-            string errorString = ModelBinderConfig.ValueRequiredErrorMessageProvider(null, metadata, "some incoming value");
+            string errorString = ModelBinderConfig.ValueRequiredErrorMessageProvider(
+                null,
+                metadata,
+                "some incoming value"
+            );
 
             // Assert
             Assert.Equal("A value is required.", errorString);
@@ -73,7 +105,11 @@ namespace System.Web.Http.ModelBinding
             // Act & assert
             try
             {
-                MemberHelper.TestPropertyWithDefaultInstance(wrapper, "ValueRequiredErrorMessageProvider", (ModelBinderErrorMessageProvider)DummyErrorSelector);
+                MemberHelper.TestPropertyWithDefaultInstance(
+                    wrapper,
+                    "ValueRequiredErrorMessageProvider",
+                    (ModelBinderErrorMessageProvider)DummyErrorSelector
+                );
             }
             finally
             {
@@ -81,7 +117,11 @@ namespace System.Web.Http.ModelBinding
             }
         }
 
-        private string DummyErrorSelector(HttpActionContext actionContext, ModelMetadata modelMetadata, object incomingValue)
+        private string DummyErrorSelector(
+            HttpActionContext actionContext,
+            ModelMetadata modelMetadata,
+            object incomingValue
+        )
         {
             throw new NotImplementedException();
         }

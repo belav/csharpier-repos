@@ -51,7 +51,9 @@ public class JsonPatchDocument : IJsonPatchDocument
     {
         ArgumentNullThrowHelper.ThrowIfNull(path);
 
-        Operations.Add(new Operation("add", PathHelpers.ValidateAndNormalizePath(path), null, value));
+        Operations.Add(
+            new Operation("add", PathHelpers.ValidateAndNormalizePath(path), null, value)
+        );
         return this;
     }
 
@@ -65,7 +67,9 @@ public class JsonPatchDocument : IJsonPatchDocument
     {
         ArgumentNullThrowHelper.ThrowIfNull(path);
 
-        Operations.Add(new Operation("remove", PathHelpers.ValidateAndNormalizePath(path), null, null));
+        Operations.Add(
+            new Operation("remove", PathHelpers.ValidateAndNormalizePath(path), null, null)
+        );
         return this;
     }
 
@@ -80,7 +84,9 @@ public class JsonPatchDocument : IJsonPatchDocument
     {
         ArgumentNullThrowHelper.ThrowIfNull(path);
 
-        Operations.Add(new Operation("replace", PathHelpers.ValidateAndNormalizePath(path), null, value));
+        Operations.Add(
+            new Operation("replace", PathHelpers.ValidateAndNormalizePath(path), null, value)
+        );
         return this;
     }
 
@@ -95,7 +101,9 @@ public class JsonPatchDocument : IJsonPatchDocument
     {
         ArgumentNullThrowHelper.ThrowIfNull(path);
 
-        Operations.Add(new Operation("test", PathHelpers.ValidateAndNormalizePath(path), null, value));
+        Operations.Add(
+            new Operation("test", PathHelpers.ValidateAndNormalizePath(path), null, value)
+        );
         return this;
     }
 
@@ -111,7 +119,13 @@ public class JsonPatchDocument : IJsonPatchDocument
         ArgumentNullThrowHelper.ThrowIfNull(from);
         ArgumentNullThrowHelper.ThrowIfNull(path);
 
-        Operations.Add(new Operation("move", PathHelpers.ValidateAndNormalizePath(path), PathHelpers.ValidateAndNormalizePath(from)));
+        Operations.Add(
+            new Operation(
+                "move",
+                PathHelpers.ValidateAndNormalizePath(path),
+                PathHelpers.ValidateAndNormalizePath(from)
+            )
+        );
         return this;
     }
 
@@ -127,7 +141,13 @@ public class JsonPatchDocument : IJsonPatchDocument
         ArgumentNullThrowHelper.ThrowIfNull(from);
         ArgumentNullThrowHelper.ThrowIfNull(path);
 
-        Operations.Add(new Operation("copy", PathHelpers.ValidateAndNormalizePath(path), PathHelpers.ValidateAndNormalizePath(from)));
+        Operations.Add(
+            new Operation(
+                "copy",
+                PathHelpers.ValidateAndNormalizePath(path),
+                PathHelpers.ValidateAndNormalizePath(from)
+            )
+        );
         return this;
     }
 
@@ -149,7 +169,11 @@ public class JsonPatchDocument : IJsonPatchDocument
     /// <param name="logErrorAction">Action to log errors</param>
     public void ApplyTo(object objectToApplyTo, Action<JsonPatchError> logErrorAction)
     {
-        ApplyTo(objectToApplyTo, new ObjectAdapter(ContractResolver, logErrorAction, AdapterFactory.Default), logErrorAction);
+        ApplyTo(
+            objectToApplyTo,
+            new ObjectAdapter(ContractResolver, logErrorAction, AdapterFactory.Default),
+            logErrorAction
+        );
     }
 
     /// <summary>
@@ -158,7 +182,11 @@ public class JsonPatchDocument : IJsonPatchDocument
     /// <param name="objectToApplyTo">Object to apply the JsonPatchDocument to</param>
     /// <param name="adapter">IObjectAdapter instance to use when applying</param>
     /// <param name="logErrorAction">Action to log errors</param>
-    public void ApplyTo(object objectToApplyTo, IObjectAdapter adapter, Action<JsonPatchError> logErrorAction)
+    public void ApplyTo(
+        object objectToApplyTo,
+        IObjectAdapter adapter,
+        Action<JsonPatchError> logErrorAction
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(objectToApplyTo);
         ArgumentNullThrowHelper.ThrowIfNull(adapter);

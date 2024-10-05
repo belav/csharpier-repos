@@ -5,12 +5,16 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
-    using System.ServiceModel.Channels;
     using System.ServiceModel;
+    using System.ServiceModel.Channels;
 
     public interface ICallContextInitializer
     {
-        object BeforeInvoke(InstanceContext instanceContext, IClientChannel channel, Message message);
+        object BeforeInvoke(
+            InstanceContext instanceContext,
+            IClientChannel channel,
+            Message message
+        );
         void AfterInvoke(object correlationState);
     }
 }

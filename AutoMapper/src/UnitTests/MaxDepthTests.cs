@@ -53,7 +53,9 @@ public class MaxDepthTests
     [Fact]
     public void Second_level_children_is_empty_with_max_depth_1()
     {
-        var config = new MapperConfiguration(cfg => cfg.CreateMap<Source, Destination>().MaxDepth(1));
+        var config = new MapperConfiguration(cfg =>
+            cfg.CreateMap<Source, Destination>().MaxDepth(1)
+        );
         var destination = config.CreateMapper().Map<Source, Destination>(_source);
         destination.Children.ShouldBeEmpty();
     }
@@ -61,7 +63,9 @@ public class MaxDepthTests
     [Fact]
     public void Second_level_children_are_not_null_with_max_depth_2()
     {
-        var config = new MapperConfiguration(cfg => cfg.CreateMap<Source, Destination>().MaxDepth(2));
+        var config = new MapperConfiguration(cfg =>
+            cfg.CreateMap<Source, Destination>().MaxDepth(2)
+        );
         var destination = config.CreateMapper().Map<Source, Destination>(_source);
         foreach (var child in destination.Children)
         {
@@ -74,7 +78,9 @@ public class MaxDepthTests
     [Fact]
     public void Third_level_children_is_empty_with_max_depth_2()
     {
-        var config = new MapperConfiguration(cfg => cfg.CreateMap<Source, Destination>().MaxDepth(2));
+        var config = new MapperConfiguration(cfg =>
+            cfg.CreateMap<Source, Destination>().MaxDepth(2)
+        );
         var destination = config.CreateMapper().Map<Source, Destination>(_source);
         foreach (var child in destination.Children)
         {
@@ -85,7 +91,9 @@ public class MaxDepthTests
     [Fact]
     public void Third_level_children_are_not_null_max_depth_3()
     {
-        var config = new MapperConfiguration(cfg => cfg.CreateMap<Source, Destination>().MaxDepth(3));
+        var config = new MapperConfiguration(cfg =>
+            cfg.CreateMap<Source, Destination>().MaxDepth(3)
+        );
         var destination = config.CreateMapper().Map<Source, Destination>(_source);
         foreach (var child in destination.Children)
         {

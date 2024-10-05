@@ -12,11 +12,13 @@ public class Program
     {
         for (int i = 0; i < 10; i++)
         {
-            // In the associated AwaitUnsafeOnCompleted, the 
+            // In the associated AwaitUnsafeOnCompleted, the
             // jit should devirtualize, remove the box,
             // and change to call unboxed entry, passing
             // extra context argument.
-            await new ValueTask<string>(Task.Delay(1).ContinueWith(_ => default(string))).ConfigureAwait(false);
+            await new ValueTask<string>(
+                Task.Delay(1).ContinueWith(_ => default(string))
+            ).ConfigureAwait(false);
         }
     }
 

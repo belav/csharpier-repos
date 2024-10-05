@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,21 +31,27 @@
 using System;
 using Mono.Security.X509;
 
-namespace Mono.Security.X509.Stores {
+namespace Mono.Security.X509.Stores
+{
+    public interface ICertificateStore
+    {
+        // properties
 
-	public interface ICertificateStore {
+        X509CertificateCollection Certificates { get; }
+        IntPtr Handle { get; }
 
-		// properties
+        // methods
 
-		X509CertificateCollection Certificates { get; }
-		IntPtr Handle { get; }
+        void Open(
+            string name,
+            string location,
+            bool readOnly,
+            bool createIfNonExisting,
+            bool includeArchives
+        );
+        void Close();
 
-		// methods
-
-		void Open (string name, string location, bool readOnly, bool createIfNonExisting, bool includeArchives);
-		void Close ();
-		
-		void Add (X509Certificate certificate);
-		void Remove (X509Certificate certificate);
-	}
+        void Add(X509Certificate certificate);
+        void Remove(X509Certificate certificate);
+    }
 }

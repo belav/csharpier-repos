@@ -15,6 +15,7 @@ public class MultidimensionalArrays : AutoMapperSpecBase
         {
             Value = value;
         }
+
         public int Value { get; set; }
     }
 
@@ -23,14 +24,21 @@ public class MultidimensionalArrays : AutoMapperSpecBase
         public int Value { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Source, Destination>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>();
+        });
 
     protected override void Because_of()
     {
-        _source = new[,] { { _e, _e, new Source(2) },  { _e, new Source(11), _e }, { new Source(20), _e, _e }, {_e, _e, _e } };
+        _source = new[,]
+        {
+            { _e, _e, new Source(2) },
+            { _e, new Source(11), _e },
+            { new Source(20), _e, _e },
+            { _e, _e, _e },
+        };
         _destination = Mapper.Map<Destination[,]>(_source);
     }
 
@@ -51,11 +59,12 @@ public class FillMultidimensionalArray : NonValidatingSpecBase
 {
     int[,] _source;
     MultidimensionalArrayFiller _filler;
+
     protected override void Because_of()
     {
-        _source = new int[4,3];
+        _source = new int[4, 3];
         _filler = new MultidimensionalArrayFiller(_source);
-        for(int index = 0; index < _source.Length; index++)
+        for (int index = 0; index < _source.Length; index++)
         {
             _filler.NewValue(index);
         }
@@ -65,7 +74,7 @@ public class FillMultidimensionalArray : NonValidatingSpecBase
     public void Should_set_values_in_array()
     {
         int index = 0;
-        foreach(var value in _source)
+        foreach (var value in _source)
         {
             value.ShouldBe(index);
             index++;

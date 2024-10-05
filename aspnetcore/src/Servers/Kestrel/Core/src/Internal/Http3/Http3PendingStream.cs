@@ -37,7 +37,11 @@ internal sealed class Http3PendingStream
         Context.Transport.Output.Complete(exception);
     }
 
-    public async ValueTask<long> ReadNextStreamHeaderAsync(Http3StreamContext context, long streamId, Http3StreamType? advanceOn)
+    public async ValueTask<long> ReadNextStreamHeaderAsync(
+        Http3StreamContext context,
+        long streamId,
+        Http3StreamType? advanceOn
+    )
     {
         var Input = context.Transport.Input;
         var advance = false;
@@ -60,7 +64,11 @@ internal sealed class Http3PendingStream
 
                 if (!readableBuffer.IsEmpty)
                 {
-                    var value = VariableLengthIntegerHelper.GetInteger(readableBuffer, out consumed, out _);
+                    var value = VariableLengthIntegerHelper.GetInteger(
+                        readableBuffer,
+                        out consumed,
+                        out _
+                    );
                     if (value != -1)
                     {
                         if (!advanceOn.HasValue || value == (long)advanceOn)
@@ -79,7 +87,11 @@ internal sealed class Http3PendingStream
         }
         catch (Exception)
         {
-            throw new Http3PendingStreamException(CoreStrings.AttemptedToReadHeaderOnAbortedStream, streamId, _abortedException);
+            throw new Http3PendingStreamException(
+                CoreStrings.AttemptedToReadHeaderOnAbortedStream,
+                streamId,
+                _abortedException
+            );
         }
         finally
         {

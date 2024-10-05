@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -12,8 +12,8 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Diagnostics.Contracts;
+using System.Threading.Tasks;
 
 namespace System.Linq.Parallel
 {
@@ -39,13 +39,19 @@ namespace System.Linq.Parallel
         //     ignoreOutput - whether we're enumerating "for effect" or for output.
         //
 
-        internal OrderPreservingMergeHelper(PartitionedStream<TInputOutput, TKey> partitions, TaskScheduler taskScheduler, 
-            CancellationState cancellationState, int queryId)
+        internal OrderPreservingMergeHelper(
+            PartitionedStream<TInputOutput, TKey> partitions,
+            TaskScheduler taskScheduler,
+            CancellationState cancellationState,
+            int queryId
+        )
         {
             Contract.Assert(partitions != null);
 
-            TraceHelpers.TraceInfo("KeyOrderPreservingMergeHelper::.ctor(..): creating an order preserving merge helper");
-            
+            TraceHelpers.TraceInfo(
+                "KeyOrderPreservingMergeHelper::.ctor(..): creating an order preserving merge helper"
+            );
+
             m_taskGroupState = new QueryTaskGroupState(cancellationState, queryId);
             m_partitions = partitions;
             m_results = new Shared<TInputOutput[]>(null);
@@ -61,7 +67,12 @@ namespace System.Linq.Parallel
 
         void IMergeHelper<TInputOutput>.Execute()
         {
-            OrderPreservingSpoolingTask<TInputOutput, TKey>.Spool(m_taskGroupState, m_partitions, m_results, m_taskScheduler);
+            OrderPreservingSpoolingTask<TInputOutput, TKey>.Spool(
+                m_taskGroupState,
+                m_partitions,
+                m_results,
+                m_taskScheduler
+            );
         }
 
         //-----------------------------------------------------------------------------------
@@ -73,7 +84,6 @@ namespace System.Linq.Parallel
             Contract.Assert(m_results.Value != null);
             return ((IEnumerable<TInputOutput>)m_results.Value).GetEnumerator();
         }
-
 
         //-----------------------------------------------------------------------------------
         // Returns the results as an array.

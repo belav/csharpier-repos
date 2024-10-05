@@ -23,26 +23,23 @@ namespace System.Data
         /// <summary>
         /// Initializes a new instance of ProviderIncompatibleException
         /// </summary>
-        public ProviderIncompatibleException() 
-            : base() 
-        { }
+        public ProviderIncompatibleException()
+            : base() { }
 
         /// <summary>
         /// Initializes a new instance of ProviderIncompatibleException
         /// </summary>
         /// <param name="message"></param>
-        public ProviderIncompatibleException(string message) 
-            : base(message) 
-        { }
-        
+        public ProviderIncompatibleException(string message)
+            : base(message) { }
+
         /// <summary>
         /// Constructor that takes a message and an inner exception
         /// </summary>
         /// <param name="message"></param>
         /// <param name="innerException"></param>
         public ProviderIncompatibleException(string message, Exception innerException)
-            : base(message, innerException) 
-        { }
+            : base(message, innerException) { }
 
         /// <summary>
         /// Initializes a new instance of ProviderIncompatibleException
@@ -50,8 +47,6 @@ namespace System.Data
         /// <param name="info"></param>
         /// <param name="context"></param>
         private ProviderIncompatibleException(SerializationInfo info, StreamingContext context)
-            : base(info, context) 
-        { }
+            : base(info, context) { }
     }
 }
-

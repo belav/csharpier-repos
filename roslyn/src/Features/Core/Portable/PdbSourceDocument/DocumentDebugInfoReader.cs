@@ -35,7 +35,11 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
 
         public ImmutableArray<SourceDocument> FindSourceDocuments(EntityHandle entityHandle)
         {
-            var documentHandles = SymbolSourceDocumentFinder.FindDocumentHandles(entityHandle, _dllReader, _pdbReader);
+            var documentHandles = SymbolSourceDocumentFinder.FindDocumentHandles(
+                entityHandle,
+                _dllReader,
+                _pdbReader
+            );
 
             using var _ = ArrayBuilder<SourceDocument>.GetInstance(out var sourceDocuments);
 
@@ -51,7 +55,15 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
                 var embeddedTextBytes = TryGetEmbeddedTextBytes(handle);
                 var sourceLinkUrl = TryGetSourceLinkUrl(handle);
 
-                sourceDocuments.Add(new SourceDocument(filePath, hashAlgorithm, checksum, embeddedTextBytes, sourceLinkUrl));
+                sourceDocuments.Add(
+                    new SourceDocument(
+                        filePath,
+                        hashAlgorithm,
+                        checksum,
+                        embeddedTextBytes,
+                        sourceLinkUrl
+                    )
+                );
             }
 
             return sourceDocuments.ToImmutable();
@@ -67,10 +79,15 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             if (documentName is null)
                 return null;
 
-            foreach (var cdiHandle in _pdbReader.GetCustomDebugInformation(EntityHandle.ModuleDefinition))
+            foreach (
+                var cdiHandle in _pdbReader.GetCustomDebugInformation(EntityHandle.ModuleDefinition)
+            )
             {
                 var cdi = _pdbReader.GetCustomDebugInformation(cdiHandle);
-                if (_pdbReader.GetGuid(cdi.Kind) == PortableCustomDebugInfoKinds.SourceLink && !cdi.Value.IsNil)
+                if (
+                    _pdbReader.GetGuid(cdi.Kind) == PortableCustomDebugInfoKinds.SourceLink
+                    && !cdi.Value.IsNil
+                )
                 {
                     var blobReader = _pdbReader.GetBlobReader(cdi.Value);
                     var sourceLinkJson = blobReader.ReadUTF8(blobReader.Length);
@@ -107,10 +124,15 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
         {
             using var _ = PooledDictionary<string, string>.GetInstance(out var result);
 
-            foreach (var handle in _pdbReader.GetCustomDebugInformation(EntityHandle.ModuleDefinition))
+            foreach (
+                var handle in _pdbReader.GetCustomDebugInformation(EntityHandle.ModuleDefinition)
+            )
             {
                 var customDebugInformation = _pdbReader.GetCustomDebugInformation(handle);
-                if (_pdbReader.GetGuid(customDebugInformation.Kind) == PortableCustomDebugInfoKinds.CompilationOptions)
+                if (
+                    _pdbReader.GetGuid(customDebugInformation.Kind)
+                    == PortableCustomDebugInfoKinds.CompilationOptions
+                )
                 {
                     var blobReader = _pdbReader.GetBlobReader(customDebugInformation.Value);
 

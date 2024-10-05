@@ -18,13 +18,15 @@ internal static partial class Interop
             ReadOnlySpan<byte> pbKeyBlob,
             int isPrivateKey,
             out SafeSecKeyRefHandle ppKeyOut,
-            out int pOSStatus) =>
+            out int pOSStatus
+        ) =>
             AppleCryptoNative_SecKeyImportEphemeral(
                 ref MemoryMarshal.GetReference(pbKeyBlob),
                 pbKeyBlob.Length,
                 isPrivateKey,
                 out ppKeyOut,
-                out pOSStatus);
+                out pOSStatus
+            );
 
         [LibraryImport(Libraries.AppleCryptoNative)]
         private static partial int AppleCryptoNative_SecKeyImportEphemeral(
@@ -32,9 +34,13 @@ internal static partial class Interop
             int cbKeyBlob,
             int isPrivateKey,
             out SafeSecKeyRefHandle ppKeyOut,
-            out int pOSStatus);
+            out int pOSStatus
+        );
 
-        internal static SafeSecKeyRefHandle ImportEphemeralKey(ReadOnlySpan<byte> keyBlob, bool hasPrivateKey)
+        internal static SafeSecKeyRefHandle ImportEphemeralKey(
+            ReadOnlySpan<byte> keyBlob,
+            bool hasPrivateKey
+        )
         {
             Debug.Assert(keyBlob != null);
 
@@ -45,7 +51,8 @@ internal static partial class Interop
                 keyBlob,
                 hasPrivateKey ? 1 : 0,
                 out keyHandle,
-                out osStatus);
+                out osStatus
+            );
 
             if (ret == 1 && !keyHandle.IsInvalid)
             {
@@ -70,12 +77,14 @@ internal static partial class Interop
             int exportPrivate,
             SafeCreateHandle cfExportPassphrase,
             out SafeCFDataHandle cfDataOut,
-            out int pOSStatus);
+            out int pOSStatus
+        );
 
         internal static SafeCFDataHandle SecKeyExportData(
             SafeSecKeyRefHandle? key,
             bool exportPrivate,
-            ReadOnlySpan<char> password)
+            ReadOnlySpan<char> password
+        )
         {
             SafeCreateHandle exportPassword = exportPrivate
                 ? CoreFoundation.CFStringCreateFromSpan(password)
@@ -92,7 +101,8 @@ internal static partial class Interop
                     exportPrivate ? 1 : 0,
                     exportPassword,
                     out cfData,
-                    out osStatus);
+                    out osStatus
+                );
             }
             finally
             {
@@ -121,7 +131,8 @@ internal static partial class Interop
         internal static byte[] SecKeyExport(
             SafeSecKeyRefHandle? key,
             bool exportPrivate,
-            string password)
+            string password
+        )
         {
             using (SafeCFDataHandle cfData = SecKeyExportData(key, exportPrivate, password))
             {

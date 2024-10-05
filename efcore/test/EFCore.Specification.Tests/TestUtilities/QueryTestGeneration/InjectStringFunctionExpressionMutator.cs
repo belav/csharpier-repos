@@ -8,9 +8,7 @@ public class InjectStringFunctionExpressionMutator : ExpressionMutator
     private readonly ExpressionFinder _expressionFinder = new();
 
     public InjectStringFunctionExpressionMutator(DbContext context)
-        : base(context)
-    {
-    }
+        : base(context) { }
 
     public override bool IsValid(Expression expression)
     {
@@ -22,12 +20,22 @@ public class InjectStringFunctionExpressionMutator : ExpressionMutator
     public override Expression Apply(Expression expression, Random random)
     {
         var i = random.Next(_expressionFinder.FoundExpressions.Count);
-        var methodNames = new[] { nameof(string.ToLower), nameof(string.ToUpper), nameof(string.Trim) };
+        var methodNames = new[]
+        {
+            nameof(string.ToLower),
+            nameof(string.ToUpper),
+            nameof(string.Trim),
+        };
 
-        var methodInfos = methodNames.Select(n => typeof(string).GetRuntimeMethod(n, new Type[] { })).ToList();
+        var methodInfos = methodNames
+            .Select(n => typeof(string).GetRuntimeMethod(n, new Type[] { }))
+            .ToList();
         var methodInfo = methodInfos[random.Next(methodInfos.Count)];
 
-        var injector = new ExpressionInjector(_expressionFinder.FoundExpressions[i], e => Expression.Call(e, methodInfo));
+        var injector = new ExpressionInjector(
+            _expressionFinder.FoundExpressions[i],
+            e => Expression.Call(e, methodInfo)
+        );
 
         return injector.Visit(expression);
     }
@@ -41,11 +49,16 @@ public class InjectStringFunctionExpressionMutator : ExpressionMutator
 
         public override Expression Visit(Expression node)
         {
-            if (_insideLambda
+            if (
+                _insideLambda
                 && !_insideEFProperty
                 && node?.Type == typeof(string)
                 && node.NodeType != ExpressionType.Parameter
-                && (node.NodeType != ExpressionType.Constant || ((ConstantExpression)node)?.Value != null))
+                && (
+                    node.NodeType != ExpressionType.Constant
+                    || ((ConstantExpression)node)?.Value != null
+                )
+            )
             {
                 FoundExpressions.Add(node);
             }
@@ -55,8 +68,7 @@ public class InjectStringFunctionExpressionMutator : ExpressionMutator
 
         protected override Expression VisitMethodCall(MethodCallExpression node)
         {
-            if (node != null
-                && node.Method.IsEFPropertyMethod())
+            if (node != null && node.Method.IsEFPropertyMethod())
             {
                 var oldInsideEFProperty = _insideEFProperty;
                 _insideEFProperty = true;

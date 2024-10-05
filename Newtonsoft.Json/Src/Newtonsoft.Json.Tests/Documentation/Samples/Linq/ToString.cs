@@ -46,7 +46,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
         public void Example()
         {
             #region Usage
-            JObject o = JObject.Parse(@"{'string1':'value','integer2':99,'datetime3':'2000-05-23T00:00:00'}");
+            JObject o = JObject.Parse(
+                @"{'string1':'value','integer2':99,'datetime3':'2000-05-23T00:00:00'}"
+            );
 
             Console.WriteLine(o.ToString());
             // {

@@ -6,6 +6,7 @@ namespace System.ServiceModel.Channels
     using System.Diagnostics;
     using System.Net;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
     using System.Security;
     using System.Security.Authentication.ExtendedProtection;
     using System.ServiceModel;
@@ -13,7 +14,6 @@ namespace System.ServiceModel.Channels
     using System.ServiceModel.Diagnostics.Application;
     using System.ServiceModel.Dispatcher;
     using System.Threading;
-    using System.Runtime.Diagnostics;
 
     class SharedHttpTransportManager : HttpTransportManager
     {
@@ -33,7 +33,8 @@ namespace System.ServiceModel.Channels
         {
             this.onGetContext = Fx.ThunkCallback(new AsyncCallback(OnGetContext));
             this.onMessageDequeued = new Action(OnMessageDequeued);
-            this.unsafeConnectionNtlmAuthentication = channelListener.UnsafeConnectionNtlmAuthentication;
+            this.unsafeConnectionNtlmAuthentication =
+                channelListener.UnsafeConnectionNtlmAuthentication;
             this.onContextReceived = new AsyncCallback(this.HandleHttpContextReceived);
             this.listenerRWLock = new ReaderWriterLockSlim();
 
@@ -59,7 +60,8 @@ namespace System.ServiceModel.Channels
                 return false;
             }
 
-            return channelListener.UnsafeConnectionNtlmAuthentication == this.unsafeConnectionNtlmAuthentication
+            return channelListener.UnsafeConnectionNtlmAuthentication
+                    == this.unsafeConnectionNtlmAuthentication
                 && base.IsCompatible(channelListener);
         }
 
@@ -111,8 +113,10 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls into critical method ExecutionContext.SuppressFlow",
-            Safe = "Doesn't leak information\\resources; the callback that is invoked is safe")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls into critical method ExecutionContext.SuppressFlow",
+            Safe = "Doesn't leak information\\resources; the callback that is invoked is safe"
+        )]
         [SecuritySafeCritical]
         IAsyncResult BeginGetContext(bool startListening)
         {
@@ -246,7 +250,10 @@ namespace System.ServiceModel.Channels
                 {
                     // Continue the loop with the async result if it completed synchronously.
                     listenerContextResult = this.BeginGetContext(false);
-                    if ((listenerContextResult == null) || !listenerContextResult.CompletedSynchronously)
+                    if (
+                        (listenerContextResult == null)
+                        || !listenerContextResult.CompletedSynchronously
+                    )
                     {
                         return;
                     }
@@ -281,9 +288,17 @@ namespace System.ServiceModel.Channels
 
             // Grab the activity from the context and set that as the surrounding activity.
             // If a message appears, we will transfer to the message's activity next
-            using (DiagnosticUtility.ShouldUseActivity ? ServiceModelActivity.BoundOperation(this.Activity) : null)
+            using (
+                DiagnosticUtility.ShouldUseActivity
+                    ? ServiceModelActivity.BoundOperation(this.Activity)
+                    : null
+            )
             {
-                ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity ? ServiceModelActivity.CreateBoundedActivityWithTransferInOnly(listenerContext.Request.RequestTraceIdentifier) : null;                
+                ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity
+                    ? ServiceModelActivity.CreateBoundedActivityWithTransferInOnly(
+                        listenerContext.Request.RequestTraceIdentifier
+                    )
+                    : null;
                 try
                 {
                     if (activity != null)
@@ -292,25 +307,41 @@ namespace System.ServiceModel.Channels
                     }
                     if (DiagnosticUtility.ShouldTraceInformation)
                     {
-                        TraceUtility.TraceHttpConnectionInformation(listenerContext.Request.LocalEndPoint.ToString(),
-                            listenerContext.Request.RemoteEndPoint.ToString(), this);
+                        TraceUtility.TraceHttpConnectionInformation(
+                            listenerContext.Request.LocalEndPoint.ToString(),
+                            listenerContext.Request.RemoteEndPoint.ToString(),
+                            this
+                        );
                     }
 
                     base.TraceMessageReceived(eventTraceActivity, this.ListenUri);
 
                     HttpChannelListener channelListener;
-                    if (base.TryLookupUri(listenerContext.Request.Url,
-                                        listenerContext.Request.HttpMethod,
-                                        this.HostNameComparisonMode,
-                                        listenerContext.Request.IsWebSocketRequest,
-                                        out channelListener))
+                    if (
+                        base.TryLookupUri(
+                            listenerContext.Request.Url,
+                            listenerContext.Request.HttpMethod,
+                            this.HostNameComparisonMode,
+                            listenerContext.Request.IsWebSocketRequest,
+                            out channelListener
+                        )
+                    )
                     {
-                        HttpRequestContext context = HttpRequestContext.CreateContext(channelListener, listenerContext, eventTraceActivity);
+                        HttpRequestContext context = HttpRequestContext.CreateContext(
+                            channelListener,
+                            listenerContext,
+                            eventTraceActivity
+                        );
 
-                        IAsyncResult httpContextReceivedResult = channelListener.BeginHttpContextReceived(context,
-                                                                                                        onMessageDequeued,
-                                                                                                        onContextReceived,
-                                                                                                        DiagnosticUtility.ShouldUseActivity ? (object)new ActivityHolder(activity, context) : (object)context);
+                        IAsyncResult httpContextReceivedResult =
+                            channelListener.BeginHttpContextReceived(
+                                context,
+                                onMessageDequeued,
+                                onContextReceived,
+                                DiagnosticUtility.ShouldUseActivity
+                                    ? (object)new ActivityHolder(activity, context)
+                                    : (object)context
+                            );
                         if (httpContextReceivedResult.CompletedSynchronously)
                         {
                             enqueued = EndHttpContextReceived(httpContextReceivedResult);
@@ -326,11 +357,11 @@ namespace System.ServiceModel.Channels
                         HandleMessageReceiveFailed(listenerContext);
                     }
                 }
-                finally 
+                finally
                 {
                     if (DiagnosticUtility.ShouldUseActivity && activity != null)
                     {
-                        if (!enqueued) 
+                        if (!enqueued)
                         {
                             // Error during enqueuing
                             activity.Dispose();
@@ -384,7 +415,9 @@ namespace System.ServiceModel.Channels
             if (!enqueued) // onMessageDequeued will handle this in the enqueued case
             {
                 listenerContextResult = this.BeginGetContext(false);
-                if ((listenerContextResult == null) || !listenerContextResult.CompletedSynchronously)
+                if (
+                    (listenerContextResult == null) || !listenerContextResult.CompletedSynchronously
+                )
                 {
                     return;
                 }
@@ -396,15 +429,20 @@ namespace System.ServiceModel.Channels
 
         static bool EndHttpContextReceived(IAsyncResult httpContextReceivedResult)
         {
-            using (DiagnosticUtility.ShouldUseActivity ? (ActivityHolder)httpContextReceivedResult.AsyncState : null)
+            using (
+                DiagnosticUtility.ShouldUseActivity
+                    ? (ActivityHolder)httpContextReceivedResult.AsyncState
+                    : null
+            )
             {
-                HttpChannelListener channelListener =
-                    (DiagnosticUtility.ShouldUseActivity ?
-                        ((ActivityHolder)httpContextReceivedResult.AsyncState).context :
-                        (HttpRequestContext)httpContextReceivedResult.AsyncState).Listener;
+                HttpChannelListener channelListener = (
+                    DiagnosticUtility.ShouldUseActivity
+                        ? ((ActivityHolder)httpContextReceivedResult.AsyncState).context
+                        : (HttpRequestContext)httpContextReceivedResult.AsyncState
+                ).Listener;
 
                 return channelListener.EndHttpContextReceived(httpContextReceivedResult);
-            }            
+            }
         }
 
         bool HandleHttpException(HttpListenerException e)
@@ -414,7 +452,9 @@ namespace System.ServiceModel.Channels
                 case UnsafeNativeMethods.ERROR_NOT_ENOUGH_MEMORY:
                 case UnsafeNativeMethods.ERROR_OUTOFMEMORY:
                 case UnsafeNativeMethods.ERROR_NO_SYSTEM_RESOURCES:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InsufficientMemoryException(SR.GetString(SR.InsufficentMemory), e));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InsufficientMemoryException(SR.GetString(SR.InsufficentMemory), e)
+                    );
                 default:
                     return ExceptionHandler.HandleTransportExceptionHelper(e);
             }
@@ -425,7 +465,13 @@ namespace System.ServiceModel.Channels
             TraceMessageReceiveFailed();
 
             // no match -- 405 or 404
-            if (string.Compare(listenerContext.Request.HttpMethod, "POST", StringComparison.OrdinalIgnoreCase) != 0)
+            if (
+                string.Compare(
+                    listenerContext.Request.HttpMethod,
+                    "POST",
+                    StringComparison.OrdinalIgnoreCase
+                ) != 0
+            )
             {
                 listenerContext.Response.StatusCode = (int)HttpStatusCode.MethodNotAllowed;
                 listenerContext.Response.Headers.Add(HttpResponseHeader.Allow, "POST");
@@ -448,8 +494,12 @@ namespace System.ServiceModel.Channels
 
             if (DiagnosticUtility.ShouldTraceWarning)
             {
-                TraceUtility.TraceEvent(TraceEventType.Warning, TraceCode.HttpChannelMessageReceiveFailed,
-                    SR.GetString(SR.TraceCodeHttpChannelMessageReceiveFailed), (object)null);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Warning,
+                    TraceCode.HttpChannelMessageReceiveFailed,
+                    SR.GetString(SR.TraceCodeHttpChannelMessageReceiveFailed),
+                    (object)null
+                );
             }
         }
 
@@ -533,7 +583,14 @@ namespace System.ServiceModel.Channels
                     break;
 
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.UnrecognizedHostNameComparisonMode, HostNameComparisonMode.ToString())));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.UnrecognizedHostNameComparisonMode,
+                                HostNameComparisonMode.ToString()
+                            )
+                        )
+                    );
             }
 
             string path = ListenUri.GetComponents(UriComponents.Path, UriFormat.Unescaped);
@@ -546,8 +603,9 @@ namespace System.ServiceModel.Channels
             string httpListenUrl = string.Concat(Scheme, "://", host, ":", ListenUri.Port, path);
 
             listener.UnsafeConnectionNtlmAuthentication = this.unsafeConnectionNtlmAuthentication;
-            listener.AuthenticationSchemeSelectorDelegate =
-                new AuthenticationSchemeSelector(SelectAuthenticationScheme);
+            listener.AuthenticationSchemeSelectorDelegate = new AuthenticationSchemeSelector(
+                SelectAuthenticationScheme
+            );
 
             if (ExtendedProtectionPolicy.OSSupportsExtendedProtection)
             {
@@ -585,7 +643,9 @@ namespace System.ServiceModel.Channels
                         listenStartedEvent = null;
                         if (listenStartedException != null)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(listenStartedException);
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                listenStartedException
+                            );
                         }
                     }
                     startedListening = true;
@@ -605,23 +665,53 @@ namespace System.ServiceModel.Channels
                 switch (listenerException.NativeErrorCode)
                 {
                     case UnsafeNativeMethods.ERROR_ALREADY_EXISTS:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new AddressAlreadyInUseException(SR.GetString(SR.HttpRegistrationAlreadyExists, httpListenUrl), listenerException));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new AddressAlreadyInUseException(
+                                SR.GetString(SR.HttpRegistrationAlreadyExists, httpListenUrl),
+                                listenerException
+                            )
+                        );
 
                     case UnsafeNativeMethods.ERROR_SHARING_VIOLATION:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new AddressAlreadyInUseException(SR.GetString(SR.HttpRegistrationPortInUse, httpListenUrl, ListenUri.Port), listenerException));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new AddressAlreadyInUseException(
+                                SR.GetString(
+                                    SR.HttpRegistrationPortInUse,
+                                    httpListenUrl,
+                                    ListenUri.Port
+                                ),
+                                listenerException
+                            )
+                        );
 
                     case UnsafeNativeMethods.ERROR_ACCESS_DENIED:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new AddressAccessDeniedException(SR.GetString(SR.HttpRegistrationAccessDenied, httpListenUrl), listenerException));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new AddressAccessDeniedException(
+                                SR.GetString(SR.HttpRegistrationAccessDenied, httpListenUrl),
+                                listenerException
+                            )
+                        );
 
                     case UnsafeNativeMethods.ERROR_ALLOTTED_SPACE_EXCEEDED:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(SR.GetString(SR.HttpRegistrationLimitExceeded, httpListenUrl), listenerException));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new CommunicationException(
+                                SR.GetString(SR.HttpRegistrationLimitExceeded, httpListenUrl),
+                                listenerException
+                            )
+                        );
 
                     case UnsafeNativeMethods.ERROR_INVALID_PARAMETER:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.HttpInvalidListenURI, ListenUri.OriginalString), listenerException));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.HttpInvalidListenURI, ListenUri.OriginalString),
+                                listenerException
+                            )
+                        );
 
                     default:
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            HttpChannelUtilities.CreateCommunicationException(listenerException));
+                            HttpChannelUtilities.CreateCommunicationException(listenerException)
+                        );
                 }
             }
             finally
@@ -639,8 +729,15 @@ namespace System.ServiceModel.Channels
             {
                 AuthenticationSchemes result;
                 HttpChannelListener channelListener;
-                if (base.TryLookupUri(request.Url, request.HttpMethod,
-                    this.HostNameComparisonMode, request.IsWebSocketRequest, out channelListener))
+                if (
+                    base.TryLookupUri(
+                        request.Url,
+                        request.HttpMethod,
+                        this.HostNameComparisonMode,
+                        request.IsWebSocketRequest,
+                        out channelListener
+                    )
+                )
                 {
                     result = channelListener.AuthenticationScheme;
                 }
@@ -669,14 +766,21 @@ namespace System.ServiceModel.Channels
             try
             {
                 HttpChannelListener channelListener;
-                if (base.TryLookupUri(request.Url, request.HttpMethod,
-                    this.HostNameComparisonMode, request.IsWebSocketRequest, out channelListener))
+                if (
+                    base.TryLookupUri(
+                        request.Url,
+                        request.HttpMethod,
+                        this.HostNameComparisonMode,
+                        request.IsWebSocketRequest,
+                        out channelListener
+                    )
+                )
                 {
                     result = channelListener.ExtendedProtectionPolicy;
                 }
                 else
                 {
-                    //if the listener isn't found, then the auth scheme will be anonymous 
+                    //if the listener isn't found, then the auth scheme will be anonymous
                     //(see SelectAuthenticationScheme function) and will fall through to the
                     //404 Not Found code path, so it doesn't really matter what we return from here...
                     result = ChannelBindingUtility.DisabledPolicy;

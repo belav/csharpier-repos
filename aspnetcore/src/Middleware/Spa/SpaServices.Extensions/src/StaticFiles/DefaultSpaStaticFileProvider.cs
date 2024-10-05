@@ -17,20 +17,21 @@ internal sealed class DefaultSpaStaticFileProvider : ISpaStaticFileProvider
 
     public DefaultSpaStaticFileProvider(
         IServiceProvider serviceProvider,
-        SpaStaticFilesOptions options)
+        SpaStaticFilesOptions options
+    )
     {
         ArgumentNullException.ThrowIfNull(options);
 
         if (string.IsNullOrEmpty(options.RootPath))
         {
-            throw new ArgumentException($"The {nameof(options.RootPath)} property " +
-                $"of {nameof(options)} cannot be null or empty.");
+            throw new ArgumentException(
+                $"The {nameof(options.RootPath)} property "
+                    + $"of {nameof(options)} cannot be null or empty."
+            );
         }
 
         var env = serviceProvider.GetRequiredService<IWebHostEnvironment>();
-        var absoluteRootPath = Path.Combine(
-            env.ContentRootPath,
-            options.RootPath);
+        var absoluteRootPath = Path.Combine(env.ContentRootPath, options.RootPath);
 
         // PhysicalFileProvider will throw if you pass a non-existent path,
         // but we don't want that scenario to be an error because for SPA

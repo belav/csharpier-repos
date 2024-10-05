@@ -11,10 +11,22 @@ namespace System.Threading.Channels.Tests
 {
     public class BoundedChannelTests : ChannelTestBase
     {
-        protected override Channel<T> CreateChannel<T>() => Channel.CreateBounded<T>(new BoundedChannelOptions(1) { AllowSynchronousContinuations = AllowSynchronousContinuations });
+        protected override Channel<T> CreateChannel<T>() =>
+            Channel.CreateBounded<T>(
+                new BoundedChannelOptions(1)
+                {
+                    AllowSynchronousContinuations = AllowSynchronousContinuations,
+                }
+            );
+
         protected override Channel<T> CreateFullChannel<T>()
         {
-            var c = Channel.CreateBounded<T>(new BoundedChannelOptions(1) { AllowSynchronousContinuations = AllowSynchronousContinuations });
+            var c = Channel.CreateBounded<T>(
+                new BoundedChannelOptions(1)
+                {
+                    AllowSynchronousContinuations = AllowSynchronousContinuations,
+                }
+            );
             c.Writer.WriteAsync(default).AsTask().Wait();
             return c;
         }
@@ -96,7 +108,12 @@ namespace System.Threading.Channels.Tests
         [InlineData(10000)]
         public void TryWrite_TryRead_Many_DropOldest(int bufferedCapacity)
         {
-            var c = Channel.CreateBounded<int>(new BoundedChannelOptions(bufferedCapacity) { FullMode = BoundedChannelFullMode.DropOldest });
+            var c = Channel.CreateBounded<int>(
+                new BoundedChannelOptions(bufferedCapacity)
+                {
+                    FullMode = BoundedChannelFullMode.DropOldest,
+                }
+            );
 
             for (int i = 0; i < bufferedCapacity * 2; i++)
             {
@@ -120,7 +137,12 @@ namespace System.Threading.Channels.Tests
         [InlineData(10000)]
         public void WriteAsync_TryRead_Many_DropOldest(int bufferedCapacity)
         {
-            var c = Channel.CreateBounded<int>(new BoundedChannelOptions(bufferedCapacity) { FullMode = BoundedChannelFullMode.DropOldest });
+            var c = Channel.CreateBounded<int>(
+                new BoundedChannelOptions(bufferedCapacity)
+                {
+                    FullMode = BoundedChannelFullMode.DropOldest,
+                }
+            );
 
             for (int i = 0; i < bufferedCapacity * 2; i++)
             {
@@ -144,7 +166,12 @@ namespace System.Threading.Channels.Tests
         [InlineData(10000)]
         public void TryWrite_TryRead_Many_DropNewest(int bufferedCapacity)
         {
-            var c = Channel.CreateBounded<int>(new BoundedChannelOptions(bufferedCapacity) { FullMode = BoundedChannelFullMode.DropNewest });
+            var c = Channel.CreateBounded<int>(
+                new BoundedChannelOptions(bufferedCapacity)
+                {
+                    FullMode = BoundedChannelFullMode.DropNewest,
+                }
+            );
 
             for (int i = 0; i < bufferedCapacity * 2; i++)
             {
@@ -170,7 +197,12 @@ namespace System.Threading.Channels.Tests
         [InlineData(10000)]
         public void WriteAsync_TryRead_Many_DropNewest(int bufferedCapacity)
         {
-            var c = Channel.CreateBounded<int>(new BoundedChannelOptions(bufferedCapacity) { FullMode = BoundedChannelFullMode.DropNewest });
+            var c = Channel.CreateBounded<int>(
+                new BoundedChannelOptions(bufferedCapacity)
+                {
+                    FullMode = BoundedChannelFullMode.DropNewest,
+                }
+            );
 
             for (int i = 0; i < bufferedCapacity * 2; i++)
             {
@@ -193,7 +225,9 @@ namespace System.Threading.Channels.Tests
         [Fact]
         public async Task TryWrite_DropNewest_WrappedAroundInternalQueue()
         {
-            var c = Channel.CreateBounded<int>(new BoundedChannelOptions(3) { FullMode = BoundedChannelFullMode.DropNewest });
+            var c = Channel.CreateBounded<int>(
+                new BoundedChannelOptions(3) { FullMode = BoundedChannelFullMode.DropNewest }
+            );
 
             // Move head of dequeue beyond the beginning
             Assert.True(c.Writer.TryWrite(1));
@@ -220,7 +254,12 @@ namespace System.Threading.Channels.Tests
         [InlineData(10000)]
         public void TryWrite_TryRead_Many_Ignore(int bufferedCapacity)
         {
-            var c = Channel.CreateBounded<int>(new BoundedChannelOptions(bufferedCapacity) { FullMode = BoundedChannelFullMode.DropWrite });
+            var c = Channel.CreateBounded<int>(
+                new BoundedChannelOptions(bufferedCapacity)
+                {
+                    FullMode = BoundedChannelFullMode.DropWrite,
+                }
+            );
 
             for (int i = 0; i < bufferedCapacity * 2; i++)
             {
@@ -244,7 +283,12 @@ namespace System.Threading.Channels.Tests
         [InlineData(10000)]
         public void WriteAsync_TryRead_Many_Ignore(int bufferedCapacity)
         {
-            var c = Channel.CreateBounded<int>(new BoundedChannelOptions(bufferedCapacity) { FullMode = BoundedChannelFullMode.DropWrite });
+            var c = Channel.CreateBounded<int>(
+                new BoundedChannelOptions(bufferedCapacity)
+                {
+                    FullMode = BoundedChannelFullMode.DropWrite,
+                }
+            );
 
             for (int i = 0; i < bufferedCapacity * 2; i++)
             {
@@ -267,11 +311,13 @@ namespace System.Threading.Channels.Tests
         {
             bool dropDelegateCalled = false;
 
-            Channel<int> c = Channel.CreateBounded<int>(new BoundedChannelOptions(1) { FullMode = BoundedChannelFullMode.Wait },
+            Channel<int> c = Channel.CreateBounded<int>(
+                new BoundedChannelOptions(1) { FullMode = BoundedChannelFullMode.Wait },
                 item =>
                 {
                     dropDelegateCalled = true;
-                });
+                }
+            );
 
             Assert.True(c.Writer.TryWrite(1));
             Assert.False(c.Writer.TryWrite(1));
@@ -284,11 +330,13 @@ namespace System.Threading.Channels.Tests
         {
             bool dropDelegateCalled = false;
 
-            Channel<int> c = Channel.CreateBounded<int>(new BoundedChannelOptions(1) { FullMode = BoundedChannelFullMode.Wait },
+            Channel<int> c = Channel.CreateBounded<int>(
+                new BoundedChannelOptions(1) { FullMode = BoundedChannelFullMode.Wait },
                 item =>
                 {
                     dropDelegateCalled = true;
-                });
+                }
+            );
 
             // First async write should pass
             await c.Writer.WriteAsync(1);
@@ -310,7 +358,10 @@ namespace System.Threading.Channels.Tests
         [MemberData(nameof(ChannelDropModes))]
         public void DroppedDelegateIsNull_SyncWrites(BoundedChannelFullMode boundedChannelFullMode)
         {
-            Channel<int> c = Channel.CreateBounded<int>(new BoundedChannelOptions(1) { FullMode = boundedChannelFullMode }, itemDropped: null);
+            Channel<int> c = Channel.CreateBounded<int>(
+                new BoundedChannelOptions(1) { FullMode = boundedChannelFullMode },
+                itemDropped: null
+            );
 
             Assert.True(c.Writer.TryWrite(5));
             Assert.True(c.Writer.TryWrite(5));
@@ -318,9 +369,14 @@ namespace System.Threading.Channels.Tests
 
         [Theory]
         [MemberData(nameof(ChannelDropModes))]
-        public async Task DroppedDelegateIsNull_AsyncWrites(BoundedChannelFullMode boundedChannelFullMode)
+        public async Task DroppedDelegateIsNull_AsyncWrites(
+            BoundedChannelFullMode boundedChannelFullMode
+        )
         {
-            Channel<int> c = Channel.CreateBounded<int>(new BoundedChannelOptions(1) { FullMode = boundedChannelFullMode }, itemDropped: null);
+            Channel<int> c = Channel.CreateBounded<int>(
+                new BoundedChannelOptions(1) { FullMode = boundedChannelFullMode },
+                itemDropped: null
+            );
 
             await c.Writer.WriteAsync(5);
             await c.Writer.WriteAsync(5);
@@ -328,7 +384,9 @@ namespace System.Threading.Channels.Tests
 
         [Theory]
         [MemberData(nameof(ChannelDropModes))]
-        public void DroppedDelegateCalledOnChannelFull_SyncWrites(BoundedChannelFullMode boundedChannelFullMode)
+        public void DroppedDelegateCalledOnChannelFull_SyncWrites(
+            BoundedChannelFullMode boundedChannelFullMode
+        )
         {
             var droppedItems = new HashSet<int>();
 
@@ -338,10 +396,10 @@ namespace System.Threading.Channels.Tests
             }
 
             const int channelCapacity = 10;
-            var c = Channel.CreateBounded<int>(new BoundedChannelOptions(channelCapacity)
-            {
-                FullMode = boundedChannelFullMode
-            }, AddDroppedItem);
+            var c = Channel.CreateBounded<int>(
+                new BoundedChannelOptions(channelCapacity) { FullMode = boundedChannelFullMode },
+                AddDroppedItem
+            );
 
             for (int i = 0; i < channelCapacity; i++)
             {
@@ -360,38 +418,45 @@ namespace System.Threading.Channels.Tests
             Assert.Equal(10, droppedItems.Count);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [MemberData(nameof(ChannelDropModes))]
-        public void DroppedDelegateCalledAfterLockReleased_SyncWrites(BoundedChannelFullMode boundedChannelFullMode)
+        public void DroppedDelegateCalledAfterLockReleased_SyncWrites(
+            BoundedChannelFullMode boundedChannelFullMode
+        )
         {
             Channel<int> c = null;
             bool dropDelegateCalled = false;
 
-            c = Channel.CreateBounded<int>(new BoundedChannelOptions(1)
-            {
-                FullMode = boundedChannelFullMode
-            }, (droppedItem) =>
-            {
-                if (dropDelegateCalled)
+            c = Channel.CreateBounded<int>(
+                new BoundedChannelOptions(1) { FullMode = boundedChannelFullMode },
+                (droppedItem) =>
                 {
-                    // Prevent infinite callbacks being called
-                    return;
+                    if (dropDelegateCalled)
+                    {
+                        // Prevent infinite callbacks being called
+                        return;
+                    }
+
+                    dropDelegateCalled = true;
+
+                    // Dropped delegate should not be called while holding the channel lock.
+                    // Verify this by trying to write into the channel from different thread.
+                    // If lock is held during callback, this should effectively cause deadlock.
+                    var mres = new ManualResetEventSlim();
+                    ThreadPool.QueueUserWorkItem(
+                        delegate
+                        {
+                            c.Writer.TryWrite(3);
+                            mres.Set();
+                        }
+                    );
+
+                    mres.Wait();
                 }
-
-                dropDelegateCalled = true;
-
-                // Dropped delegate should not be called while holding the channel lock.
-                // Verify this by trying to write into the channel from different thread.
-                // If lock is held during callback, this should effectively cause deadlock.
-                var mres = new ManualResetEventSlim();
-                ThreadPool.QueueUserWorkItem(delegate
-                {
-                    c.Writer.TryWrite(3);
-                    mres.Set();
-                });
-
-                mres.Wait();
-            });
+            );
 
             Assert.True(c.Writer.TryWrite(1));
             Assert.True(c.Writer.TryWrite(2));
@@ -399,38 +464,45 @@ namespace System.Threading.Channels.Tests
             Assert.True(dropDelegateCalled);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [MemberData(nameof(ChannelDropModes))]
-        public async Task DroppedDelegateCalledAfterLockReleased_AsyncWrites(BoundedChannelFullMode boundedChannelFullMode)
+        public async Task DroppedDelegateCalledAfterLockReleased_AsyncWrites(
+            BoundedChannelFullMode boundedChannelFullMode
+        )
         {
             Channel<int> c = null;
             bool dropDelegateCalled = false;
 
-            c = Channel.CreateBounded<int>(new BoundedChannelOptions(1)
-            {
-                FullMode = boundedChannelFullMode
-            }, (droppedItem) =>
-            {
-                if (dropDelegateCalled)
+            c = Channel.CreateBounded<int>(
+                new BoundedChannelOptions(1) { FullMode = boundedChannelFullMode },
+                (droppedItem) =>
                 {
-                    // Prevent infinite callbacks being called
-                    return;
+                    if (dropDelegateCalled)
+                    {
+                        // Prevent infinite callbacks being called
+                        return;
+                    }
+
+                    dropDelegateCalled = true;
+
+                    // Dropped delegate should not be called while holding the channel synchronisation lock.
+                    // Verify this by trying to write into the channel from different thread.
+                    // If lock is held during callback, this should effectively cause deadlock.
+                    var mres = new ManualResetEventSlim();
+                    ThreadPool.QueueUserWorkItem(
+                        delegate
+                        {
+                            c.Writer.TryWrite(11);
+                            mres.Set();
+                        }
+                    );
+
+                    mres.Wait();
                 }
-
-                dropDelegateCalled = true;
-
-                // Dropped delegate should not be called while holding the channel synchronisation lock.
-                // Verify this by trying to write into the channel from different thread.
-                // If lock is held during callback, this should effectively cause deadlock.
-                var mres = new ManualResetEventSlim();
-                ThreadPool.QueueUserWorkItem(delegate
-                {
-                    c.Writer.TryWrite(11);
-                    mres.Set();
-                });
-
-                mres.Wait();
-            });
+            );
 
             await c.Writer.WriteAsync(1);
             await c.Writer.WriteAsync(2);
@@ -440,7 +512,9 @@ namespace System.Threading.Channels.Tests
 
         [Theory]
         [MemberData(nameof(ChannelDropModes))]
-        public async Task DroppedDelegateCalledOnChannelFull_AsyncWrites(BoundedChannelFullMode boundedChannelFullMode)
+        public async Task DroppedDelegateCalledOnChannelFull_AsyncWrites(
+            BoundedChannelFullMode boundedChannelFullMode
+        )
         {
             var droppedItems = new HashSet<int>();
 
@@ -450,10 +524,10 @@ namespace System.Threading.Channels.Tests
             }
 
             const int channelCapacity = 10;
-            var c = Channel.CreateBounded<int>(new BoundedChannelOptions(channelCapacity)
-            {
-                FullMode = boundedChannelFullMode
-            }, AddDroppedItem);
+            var c = Channel.CreateBounded<int>(
+                new BoundedChannelOptions(channelCapacity) { FullMode = boundedChannelFullMode },
+                AddDroppedItem
+            );
 
             for (int i = 0; i < channelCapacity; i++)
             {
@@ -511,11 +585,16 @@ namespace System.Threading.Channels.Tests
             }
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(1)]
         [InlineData(10)]
         [InlineData(10000)]
-        public void SingleProducerConsumer_ConcurrentReadWrite_WithBufferedCapacity_Success(int bufferedCapacity)
+        public void SingleProducerConsumer_ConcurrentReadWrite_WithBufferedCapacity_Success(
+            int bufferedCapacity
+        )
         {
             var c = Channel.CreateBounded<int>(bufferedCapacity);
 
@@ -534,14 +613,20 @@ namespace System.Threading.Channels.Tests
                     {
                         Assert.Equal(i, await c.Reader.ReadAsync());
                     }
-                }));
+                })
+            );
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(1)]
         [InlineData(10)]
         [InlineData(10000)]
-        public void ManyProducerConsumer_ConcurrentReadWrite_WithBufferedCapacity_Success(int bufferedCapacity)
+        public void ManyProducerConsumer_ConcurrentReadWrite_WithBufferedCapacity_Success(
+            int bufferedCapacity
+        )
         {
             var c = Channel.CreateBounded<int>(bufferedCapacity);
 
@@ -612,20 +697,44 @@ namespace System.Threading.Channels.Tests
             Assert.True(await write2);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [MemberData(nameof(ThreeBools))]
-        public void AllowSynchronousContinuations_Reading_ContinuationsInvokedAccordingToSetting(bool allowSynchronousContinuations, bool cancelable, bool waitToReadAsync)
+        public void AllowSynchronousContinuations_Reading_ContinuationsInvokedAccordingToSetting(
+            bool allowSynchronousContinuations,
+            bool cancelable,
+            bool waitToReadAsync
+        )
         {
-            var c = Channel.CreateBounded<int>(new BoundedChannelOptions(1) { AllowSynchronousContinuations = allowSynchronousContinuations });
+            var c = Channel.CreateBounded<int>(
+                new BoundedChannelOptions(1)
+                {
+                    AllowSynchronousContinuations = allowSynchronousContinuations,
+                }
+            );
 
-            CancellationToken ct = cancelable ? new CancellationTokenSource().Token : CancellationToken.None;
+            CancellationToken ct = cancelable
+                ? new CancellationTokenSource().Token
+                : CancellationToken.None;
 
             int expectedId = Environment.CurrentManagedThreadId;
-            Task t = waitToReadAsync ? (Task)c.Reader.WaitToReadAsync(ct).AsTask() : c.Reader.ReadAsync(ct).AsTask();
-            Task r = t.ContinueWith(_ =>
-            {
-                Assert.Equal(allowSynchronousContinuations && !cancelable, expectedId == Environment.CurrentManagedThreadId);
-            }, CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
+            Task t = waitToReadAsync
+                ? (Task)c.Reader.WaitToReadAsync(ct).AsTask()
+                : c.Reader.ReadAsync(ct).AsTask();
+            Task r = t.ContinueWith(
+                _ =>
+                {
+                    Assert.Equal(
+                        allowSynchronousContinuations && !cancelable,
+                        expectedId == Environment.CurrentManagedThreadId
+                    );
+                },
+                CancellationToken.None,
+                TaskContinuationOptions.ExecuteSynchronously,
+                TaskScheduler.Default
+            );
 
             Assert.True(c.Writer.WriteAsync(42).IsCompletedSuccessfully);
             ((IAsyncResult)r).AsyncWaitHandle.WaitOne(); // avoid inlining the continuation
@@ -635,20 +744,35 @@ namespace System.Threading.Channels.Tests
         [ConditionalTheory]
         [InlineData(false)]
         [InlineData(true)]
-        public void AllowSynchronousContinuations_CompletionTask_ContinuationsInvokedAccordingToSetting(bool allowSynchronousContinuations)
+        public void AllowSynchronousContinuations_CompletionTask_ContinuationsInvokedAccordingToSetting(
+            bool allowSynchronousContinuations
+        )
         {
             if (!allowSynchronousContinuations && !PlatformDetection.IsThreadingSupported)
             {
                 throw new SkipTestException(nameof(PlatformDetection.IsThreadingSupported));
             }
 
-            var c = Channel.CreateBounded<int>(new BoundedChannelOptions(1) { AllowSynchronousContinuations = allowSynchronousContinuations });
+            var c = Channel.CreateBounded<int>(
+                new BoundedChannelOptions(1)
+                {
+                    AllowSynchronousContinuations = allowSynchronousContinuations,
+                }
+            );
 
             int expectedId = Environment.CurrentManagedThreadId;
-            Task r = c.Reader.Completion.ContinueWith(_ =>
-            {
-                Assert.Equal(allowSynchronousContinuations, expectedId == Environment.CurrentManagedThreadId);
-            }, CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
+            Task r = c.Reader.Completion.ContinueWith(
+                _ =>
+                {
+                    Assert.Equal(
+                        allowSynchronousContinuations,
+                        expectedId == Environment.CurrentManagedThreadId
+                    );
+                },
+                CancellationToken.None,
+                TaskContinuationOptions.ExecuteSynchronously,
+                TaskScheduler.Default
+            );
 
             Assert.True(c.Writer.TryComplete());
             ((IAsyncResult)r).AsyncWaitHandle.WaitOne(); // avoid inlining the continuation

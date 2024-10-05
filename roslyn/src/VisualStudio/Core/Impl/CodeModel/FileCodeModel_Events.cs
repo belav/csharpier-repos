@@ -21,7 +21,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
         public void FireEvents()
         {
-            _ = _codeElementTable.CleanUpDeadObjectsAsync(State.ProjectCodeModelFactory.Listener).ReportNonFatalErrorAsync();
+            _ = _codeElementTable
+                .CleanUpDeadObjectsAsync(State.ProjectCodeModelFactory.Listener)
+                .ReportNonFatalErrorAsync();
 
             if (this.IsZombied)
             {
@@ -43,8 +45,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             _lastSyntaxTree = newTree;
 
-            if (oldTree == newTree ||
-                oldTree.IsEquivalentTo(newTree, topLevel: true))
+            if (oldTree == newTree || oldTree.IsEquivalentTo(newTree, topLevel: true))
             {
                 return;
             }
@@ -55,37 +56,66 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 return;
             }
 
-            var projectCodeModel = this.State.ProjectCodeModelFactory.GetProjectCodeModel(document.Project.Id);
+            var projectCodeModel = this.State.ProjectCodeModelFactory.GetProjectCodeModel(
+                document.Project.Id
+            );
             if (projectCodeModel == null)
             {
                 return;
             }
 
-            if (!projectCodeModel.TryGetCachedFileCodeModel(this.Workspace.GetFilePath(GetDocumentId()), out _))
+            if (
+                !projectCodeModel.TryGetCachedFileCodeModel(
+                    this.Workspace.GetFilePath(GetDocumentId()),
+                    out _
+                )
+            )
             {
                 return;
             }
 
-            var extensibility = (EnvDTE80.IVsExtensibility2)this.State.ServiceProvider.GetService(typeof(EnvDTE.IVsExtensibility));
+            var extensibility = (EnvDTE80.IVsExtensibility2)
+                this.State.ServiceProvider.GetService(typeof(EnvDTE.IVsExtensibility));
             if (extensibility == null)
                 return;
 
             foreach (var codeModelEvent in eventQueue)
             {
-                GetElementsForCodeModelEvent(codeModelEvent, out var element, out var parentElement);
+                GetElementsForCodeModelEvent(
+                    codeModelEvent,
+                    out var element,
+                    out var parentElement
+                );
 
                 if (codeModelEvent.Type == CodeModelEventType.Add)
                 {
-                    extensibility.FireCodeModelEvent(ElementAddedDispId, element, EnvDTE80.vsCMChangeKind.vsCMChangeKindUnknown);
+                    extensibility.FireCodeModelEvent(
+                        ElementAddedDispId,
+                        element,
+                        EnvDTE80.vsCMChangeKind.vsCMChangeKindUnknown
+                    );
                 }
                 else if (codeModelEvent.Type == CodeModelEventType.Remove)
                 {
-                    extensibility.FireCodeModelEvent3(ElementDeletedDispId2, parentElement, element, EnvDTE80.vsCMChangeKind.vsCMChangeKindUnknown);
-                    extensibility.FireCodeModelEvent(ElementDeletedDispId, element, EnvDTE80.vsCMChangeKind.vsCMChangeKindUnknown);
+                    extensibility.FireCodeModelEvent3(
+                        ElementDeletedDispId2,
+                        parentElement,
+                        element,
+                        EnvDTE80.vsCMChangeKind.vsCMChangeKindUnknown
+                    );
+                    extensibility.FireCodeModelEvent(
+                        ElementDeletedDispId,
+                        element,
+                        EnvDTE80.vsCMChangeKind.vsCMChangeKindUnknown
+                    );
                 }
                 else if (codeModelEvent.Type.IsChange())
                 {
-                    extensibility.FireCodeModelEvent(ElementChangedDispId, element, ConvertToChangeKind(codeModelEvent.Type));
+                    extensibility.FireCodeModelEvent(
+                        ElementChangedDispId,
+                        element,
+                        ConvertToChangeKind(codeModelEvent.Type)
+                    );
                 }
                 else
                 {
@@ -134,13 +164,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         }
 
         // internal for testing
-        internal void GetElementsForCodeModelEvent(CodeModelEvent codeModelEvent, out EnvDTE.CodeElement? element, out object? parentElement)
+        internal void GetElementsForCodeModelEvent(
+            CodeModelEvent codeModelEvent,
+            out EnvDTE.CodeElement? element,
+            out object? parentElement
+        )
         {
             parentElement = GetParentElementForCodeModelEvent(codeModelEvent);
 
             if (codeModelEvent.Node == null)
             {
-                element = this.CodeModelService.CreateUnknownRootNamespaceCodeElement(this.State, this);
+                element = this.CodeModelService.CreateUnknownRootNamespaceCodeElement(
+                    this.State,
+                    this
+                );
             }
             else if (this.CodeModelService.IsParameterNode(codeModelEvent.Node))
             {
@@ -152,13 +189,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             }
             else if (this.CodeModelService.IsAttributeArgumentNode(codeModelEvent.Node))
             {
-                element = GetAttributeArgumentElementForCodeModelEvent(codeModelEvent, parentElement);
+                element = GetAttributeArgumentElementForCodeModelEvent(
+                    codeModelEvent,
+                    parentElement
+                );
             }
             else
             {
                 if (codeModelEvent.Type == CodeModelEventType.Remove)
                 {
-                    element = this.CodeModelService.CreateUnknownCodeElement(this.State, this, codeModelEvent.Node);
+                    element = this.CodeModelService.CreateUnknownCodeElement(
+                        this.State,
+                        this,
+                        codeModelEvent.Node
+                    );
                 }
                 else
                 {
@@ -176,19 +220,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
         private object? GetParentElementForCodeModelEvent(CodeModelEvent codeModelEvent)
         {
-            if (this.CodeModelService.IsParameterNode(codeModelEvent.Node) ||
-                this.CodeModelService.IsAttributeArgumentNode(codeModelEvent.Node))
+            if (
+                this.CodeModelService.IsParameterNode(codeModelEvent.Node)
+                || this.CodeModelService.IsAttributeArgumentNode(codeModelEvent.Node)
+            )
             {
                 if (codeModelEvent.ParentNode != null)
                 {
-                    return this.GetOrCreateCodeElement<EnvDTE.CodeElement>(codeModelEvent.ParentNode);
+                    return this.GetOrCreateCodeElement<EnvDTE.CodeElement>(
+                        codeModelEvent.ParentNode
+                    );
                 }
             }
             else if (this.CodeModelService.IsAttributeNode(codeModelEvent.Node))
             {
                 if (codeModelEvent.ParentNode != null)
                 {
-                    return this.GetOrCreateCodeElement<EnvDTE.CodeElement>(codeModelEvent.ParentNode);
+                    return this.GetOrCreateCodeElement<EnvDTE.CodeElement>(
+                        codeModelEvent.ParentNode
+                    );
                 }
                 else
                 {
@@ -197,10 +247,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             }
             else if (codeModelEvent.Type == CodeModelEventType.Remove)
             {
-                if (codeModelEvent.ParentNode != null &&
-                    codeModelEvent.ParentNode.Parent != null)
+                if (codeModelEvent.ParentNode != null && codeModelEvent.ParentNode.Parent != null)
                 {
-                    return this.GetOrCreateCodeElement<EnvDTE.CodeElement>(codeModelEvent.ParentNode);
+                    return this.GetOrCreateCodeElement<EnvDTE.CodeElement>(
+                        codeModelEvent.ParentNode
+                    );
                 }
                 else
                 {
@@ -211,16 +262,35 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             return null;
         }
 
-        private EnvDTE.CodeElement? GetParameterElementForCodeModelEvent(CodeModelEvent codeModelEvent, object? parentElement)
-            => parentElement switch
+        private EnvDTE.CodeElement? GetParameterElementForCodeModelEvent(
+            CodeModelEvent codeModelEvent,
+            object? parentElement
+        ) =>
+            parentElement switch
             {
-                EnvDTE.CodeDelegate parentDelegate => GetParameterElementForCodeModelEvent(codeModelEvent, parentDelegate.Parameters, parentElement),
-                EnvDTE.CodeFunction parentFunction => GetParameterElementForCodeModelEvent(codeModelEvent, parentFunction.Parameters, parentElement),
-                EnvDTE80.CodeProperty2 parentProperty => GetParameterElementForCodeModelEvent(codeModelEvent, parentProperty.Parameters, parentElement),
+                EnvDTE.CodeDelegate parentDelegate => GetParameterElementForCodeModelEvent(
+                    codeModelEvent,
+                    parentDelegate.Parameters,
+                    parentElement
+                ),
+                EnvDTE.CodeFunction parentFunction => GetParameterElementForCodeModelEvent(
+                    codeModelEvent,
+                    parentFunction.Parameters,
+                    parentElement
+                ),
+                EnvDTE80.CodeProperty2 parentProperty => GetParameterElementForCodeModelEvent(
+                    codeModelEvent,
+                    parentProperty.Parameters,
+                    parentElement
+                ),
                 _ => null,
             };
 
-        private EnvDTE.CodeElement? GetParameterElementForCodeModelEvent(CodeModelEvent codeModelEvent, EnvDTE.CodeElements? parentParameters, object? parentElement)
+        private EnvDTE.CodeElement? GetParameterElementForCodeModelEvent(
+            CodeModelEvent codeModelEvent,
+            EnvDTE.CodeElements? parentParameters,
+            object? parentElement
+        )
         {
             if (parentParameters == null)
             {
@@ -231,10 +301,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             if (codeModelEvent.Type == CodeModelEventType.Remove)
             {
-                var parentCodeElement = ComAggregate.TryGetManagedObject<AbstractCodeMember>(parentElement);
+                var parentCodeElement = ComAggregate.TryGetManagedObject<AbstractCodeMember>(
+                    parentElement
+                );
                 if (parentCodeElement != null)
                 {
-                    return (EnvDTE.CodeElement)CodeParameter.Create(this.State, parentCodeElement, parameterName);
+                    return (EnvDTE.CodeElement)
+                        CodeParameter.Create(this.State, parentCodeElement, parameterName);
                 }
             }
             else
@@ -245,7 +318,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             return null;
         }
 
-        private EnvDTE.CodeElement? GetAttributeElementForCodeModelEvent(CodeModelEvent codeModelEvent, object? parentElement)
+        private EnvDTE.CodeElement? GetAttributeElementForCodeModelEvent(
+            CodeModelEvent codeModelEvent,
+            object? parentElement
+        )
         {
             var node = codeModelEvent.Node;
             var parentNode = codeModelEvent.ParentNode;
@@ -253,52 +329,111 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             switch (parentElement)
             {
                 case EnvDTE.CodeType parentType:
-                    return GetAttributeElementForCodeModelEvent(node, parentNode, eventType, parentType.Attributes, parentElement);
+                    return GetAttributeElementForCodeModelEvent(
+                        node,
+                        parentNode,
+                        eventType,
+                        parentType.Attributes,
+                        parentElement
+                    );
                 case EnvDTE.CodeFunction parentFunction:
-                    return GetAttributeElementForCodeModelEvent(node, parentNode, eventType, parentFunction.Attributes, parentElement);
+                    return GetAttributeElementForCodeModelEvent(
+                        node,
+                        parentNode,
+                        eventType,
+                        parentFunction.Attributes,
+                        parentElement
+                    );
                 case EnvDTE.CodeProperty parentProperty:
-                    return GetAttributeElementForCodeModelEvent(node, parentNode, eventType, parentProperty.Attributes, parentElement);
+                    return GetAttributeElementForCodeModelEvent(
+                        node,
+                        parentNode,
+                        eventType,
+                        parentProperty.Attributes,
+                        parentElement
+                    );
                 case EnvDTE80.CodeEvent parentEvent:
-                    return GetAttributeElementForCodeModelEvent(node, parentNode, eventType, parentEvent.Attributes, parentElement);
+                    return GetAttributeElementForCodeModelEvent(
+                        node,
+                        parentNode,
+                        eventType,
+                        parentEvent.Attributes,
+                        parentElement
+                    );
                 case EnvDTE.CodeVariable parentVariable:
-                    return GetAttributeElementForCodeModelEvent(node, parentNode, eventType, parentVariable.Attributes, parentElement);
+                    return GetAttributeElementForCodeModelEvent(
+                        node,
+                        parentNode,
+                        eventType,
+                        parentVariable.Attributes,
+                        parentElement
+                    );
                 case EnvDTE.FileCodeModel parentFileCodeModel:
-                    {
-                        var fileCodeModel = ComAggregate.GetManagedObject<FileCodeModel>(parentElement);
-                        parentNode = fileCodeModel.GetSyntaxRoot();
+                {
+                    var fileCodeModel = ComAggregate.GetManagedObject<FileCodeModel>(parentElement);
+                    parentNode = fileCodeModel.GetSyntaxRoot();
 
-                        return GetAttributeElementForCodeModelEvent(node, parentNode, eventType, parentFileCodeModel.CodeElements, parentElement);
-                    }
+                    return GetAttributeElementForCodeModelEvent(
+                        node,
+                        parentNode,
+                        eventType,
+                        parentFileCodeModel.CodeElements,
+                        parentElement
+                    );
+                }
             }
 
             return null;
         }
 
-        private EnvDTE.CodeElement? GetAttributeElementForCodeModelEvent(SyntaxNode node, SyntaxNode parentNode, CodeModelEventType eventType, EnvDTE.CodeElements? elementsToSearch, object parentObject)
+        private EnvDTE.CodeElement? GetAttributeElementForCodeModelEvent(
+            SyntaxNode node,
+            SyntaxNode parentNode,
+            CodeModelEventType eventType,
+            EnvDTE.CodeElements? elementsToSearch,
+            object parentObject
+        )
         {
             if (elementsToSearch == null)
             {
                 return null;
             }
 
-            CodeModelService.GetAttributeNameAndOrdinal(parentNode, node, out var name, out var ordinal);
+            CodeModelService.GetAttributeNameAndOrdinal(
+                parentNode,
+                node,
+                out var name,
+                out var ordinal
+            );
 
             if (eventType == CodeModelEventType.Remove)
             {
                 if (parentObject is EnvDTE.CodeElement)
                 {
-                    var parentCodeElement = ComAggregate.TryGetManagedObject<AbstractCodeElement>(parentObject);
+                    var parentCodeElement = ComAggregate.TryGetManagedObject<AbstractCodeElement>(
+                        parentObject
+                    );
                     if (parentCodeElement != null)
                     {
-                        return (EnvDTE.CodeElement)CodeAttribute.Create(this.State, this, parentCodeElement, name, ordinal);
+                        return (EnvDTE.CodeElement)
+                            CodeAttribute.Create(
+                                this.State,
+                                this,
+                                parentCodeElement,
+                                name,
+                                ordinal
+                            );
                     }
                 }
                 else if (parentObject is EnvDTE.FileCodeModel)
                 {
-                    var parentFileCodeModel = ComAggregate.TryGetManagedObject<FileCodeModel>(parentObject);
+                    var parentFileCodeModel = ComAggregate.TryGetManagedObject<FileCodeModel>(
+                        parentObject
+                    );
                     if (parentFileCodeModel != null && parentFileCodeModel == this)
                     {
-                        return (EnvDTE.CodeElement)CodeAttribute.Create(this.State, this, null, name, ordinal);
+                        return (EnvDTE.CodeElement)
+                            CodeAttribute.Create(this.State, this, null, name, ordinal);
                     }
                 }
             }
@@ -327,31 +462,49 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             return null;
         }
 
-        private EnvDTE.CodeElement? GetAttributeArgumentElementForCodeModelEvent(CodeModelEvent codeModelEvent, object? parentElement)
+        private EnvDTE.CodeElement? GetAttributeArgumentElementForCodeModelEvent(
+            CodeModelEvent codeModelEvent,
+            object? parentElement
+        )
         {
             if (parentElement is EnvDTE80.CodeAttribute2 parentAttribute)
             {
-                return GetAttributeArgumentForCodeModelEvent(codeModelEvent, parentAttribute.Arguments, parentElement);
+                return GetAttributeArgumentForCodeModelEvent(
+                    codeModelEvent,
+                    parentAttribute.Arguments,
+                    parentElement
+                );
             }
 
             return null;
         }
 
-        private EnvDTE.CodeElement? GetAttributeArgumentForCodeModelEvent(CodeModelEvent codeModelEvent, EnvDTE.CodeElements? parentAttributeArguments, object parentElement)
+        private EnvDTE.CodeElement? GetAttributeArgumentForCodeModelEvent(
+            CodeModelEvent codeModelEvent,
+            EnvDTE.CodeElements? parentAttributeArguments,
+            object parentElement
+        )
         {
             if (parentAttributeArguments == null)
             {
                 return null;
             }
 
-            CodeModelService.GetAttributeArgumentParentAndIndex(codeModelEvent.Node, out _, out var ordinal);
+            CodeModelService.GetAttributeArgumentParentAndIndex(
+                codeModelEvent.Node,
+                out _,
+                out var ordinal
+            );
 
             if (codeModelEvent.Type == CodeModelEventType.Remove)
             {
-                var parentCodeElement = ComAggregate.TryGetManagedObject<CodeAttribute>(parentElement);
+                var parentCodeElement = ComAggregate.TryGetManagedObject<CodeAttribute>(
+                    parentElement
+                );
                 if (parentCodeElement != null)
                 {
-                    return (EnvDTE.CodeElement)CodeAttributeArgument.Create(this.State, parentCodeElement, ordinal);
+                    return (EnvDTE.CodeElement)
+                        CodeAttributeArgument.Create(this.State, parentCodeElement, ordinal);
                 }
             }
             else

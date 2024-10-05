@@ -28,7 +28,8 @@ public class InMemoryDatabase : Database, IInMemoryDatabase
         IDbContextOptions options,
         IDesignTimeModel designTimeModel,
         IUpdateAdapterFactory updateAdapterFactory,
-        IDiagnosticsLogger<DbLoggerCategory.Update> updateLogger)
+        IDiagnosticsLogger<DbLoggerCategory.Update> updateLogger
+    )
         : base(dependencies)
     {
         _store = storeCache.GetStore(options);
@@ -43,8 +44,7 @@ public class InMemoryDatabase : Database, IInMemoryDatabase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IInMemoryStore Store
-        => _store;
+    public virtual IInMemoryStore Store => _store;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -52,8 +52,8 @@ public class InMemoryDatabase : Database, IInMemoryDatabase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override int SaveChanges(IList<IUpdateEntry> entries)
-        => _store.ExecuteTransaction(entries, _updateLogger);
+    public override int SaveChanges(IList<IUpdateEntry> entries) =>
+        _store.ExecuteTransaction(entries, _updateLogger);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -63,8 +63,9 @@ public class InMemoryDatabase : Database, IInMemoryDatabase
     /// </summary>
     public override Task<int> SaveChangesAsync(
         IList<IUpdateEntry> entries,
-        CancellationToken cancellationToken = default)
-        => cancellationToken.IsCancellationRequested
+        CancellationToken cancellationToken = default
+    ) =>
+        cancellationToken.IsCancellationRequested
             ? Task.FromCanceled<int>(cancellationToken)
             : Task.FromResult(_store.ExecuteTransaction(entries, _updateLogger));
 
@@ -74,6 +75,6 @@ public class InMemoryDatabase : Database, IInMemoryDatabase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool EnsureDatabaseCreated()
-        => _store.EnsureCreated(_updateAdapterFactory, _designTimeModel.Model, _updateLogger);
+    public virtual bool EnsureDatabaseCreated() =>
+        _store.EnsureCreated(_updateAdapterFactory, _designTimeModel.Model, _updateLogger);
 }

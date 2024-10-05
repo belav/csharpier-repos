@@ -22,7 +22,11 @@ public interface TestItf1<TT>
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    protected static void TestMethod3(TestItf1<TT> subscriber, IPublisher<TT> publisher, StackFrame[] expectedFrames)
+    protected static void TestMethod3(
+        TestItf1<TT> subscriber,
+        IPublisher<TT> publisher,
+        StackFrame[] expectedFrames
+    )
     {
         StackFrame.Validate(Environment.StackTrace, expectedFrames);
     }
@@ -78,7 +82,11 @@ public interface TestItf3<TT> : TestItf1<TT>
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    protected static void TestMethod8(TestItf1<TT> subscriber, IPublisher<TT> publisher, StackFrame[] expectedFrames)
+    protected static void TestMethod8(
+        TestItf1<TT> subscriber,
+        IPublisher<TT> publisher,
+        StackFrame[] expectedFrames
+    )
     {
         StackFrame.Validate(Environment.StackTrace, expectedFrames);
     }
@@ -122,17 +130,73 @@ public class Program : ProgramBase<InputData>, TestItf2<InputData>
     {
         var t1 = this as TestItf1<InputData>;
         t1.TestMethod1(null, new[] { new StackFrame("TestItf1`1", "TestMethod1") });
-        t1.TestMethod2(null, new[] { new StackFrame("TestItf1`1", "TestMethod3"), new StackFrame("TestItf1`1", "TestMethod2") });
-        t1.TestMethod4(null, new[] { new StackFrame("TestItf1`1", "TestMethod3"), new StackFrame("Program", "TestMethod4") });
-        t1.TestMethod5(null, new[] { new StackFrame("TestItf1`1", "TestMethod3"), new StackFrame(new[] { "TestItf2`1", "TestItf1" }, "TestMethod5") });
+        t1.TestMethod2(
+            null,
+            new[]
+            {
+                new StackFrame("TestItf1`1", "TestMethod3"),
+                new StackFrame("TestItf1`1", "TestMethod2"),
+            }
+        );
+        t1.TestMethod4(
+            null,
+            new[]
+            {
+                new StackFrame("TestItf1`1", "TestMethod3"),
+                new StackFrame("Program", "TestMethod4"),
+            }
+        );
+        t1.TestMethod5(
+            null,
+            new[]
+            {
+                new StackFrame("TestItf1`1", "TestMethod3"),
+                new StackFrame(new[] { "TestItf2`1", "TestItf1" }, "TestMethod5"),
+            }
+        );
 
         var t3 = this as TestItf3<InputData>;
-        t3.TestMethod6(null, new[] { new StackFrame("TestItf1`1", "TestMethod3"), new StackFrame("TestItf3`1", "TestMethod6") });
-        t3.TestMethod7(null, new[] { new StackFrame("TestItf3`1", "TestMethod8"), new StackFrame("TestItf3`1", "TestMethod7") });
-        t3.TestMethod9(null, new[] { new StackFrame("TestItf3`1", "TestMethod8"), new StackFrame(new[] { "TestItf4`1", "TestItf3" }, "TestMethod9") });
+        t3.TestMethod6(
+            null,
+            new[]
+            {
+                new StackFrame("TestItf1`1", "TestMethod3"),
+                new StackFrame("TestItf3`1", "TestMethod6"),
+            }
+        );
+        t3.TestMethod7(
+            null,
+            new[]
+            {
+                new StackFrame("TestItf3`1", "TestMethod8"),
+                new StackFrame("TestItf3`1", "TestMethod7"),
+            }
+        );
+        t3.TestMethod9(
+            null,
+            new[]
+            {
+                new StackFrame("TestItf3`1", "TestMethod8"),
+                new StackFrame(new[] { "TestItf4`1", "TestItf3" }, "TestMethod9"),
+            }
+        );
 
-        t1.TestMethod10(null, new[] { new StackFrame("TestItf1`1", "TestMethod3"), new StackFrame("ProgramBase`1", "TestMethod10") });
-        t1.TestMethod11(null, new[] { new StackFrame("TestItf1`1", "TestMethod3"), new StackFrame("ProgramBase`1", "TestMethod11") });
+        t1.TestMethod10(
+            null,
+            new[]
+            {
+                new StackFrame("TestItf1`1", "TestMethod3"),
+                new StackFrame("ProgramBase`1", "TestMethod10"),
+            }
+        );
+        t1.TestMethod11(
+            null,
+            new[]
+            {
+                new StackFrame("TestItf1`1", "TestMethod3"),
+                new StackFrame("ProgramBase`1", "TestMethod11"),
+            }
+        );
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -149,10 +213,10 @@ public class InputData
 
 public class StackFrame
 {
-    public string [] ClassName { get; set; }
+    public string[] ClassName { get; set; }
     public string MethodName { get; set; } = string.Empty;
 
-    public StackFrame(string [] className, string methodName)
+    public StackFrame(string[] className, string methodName)
     {
         ClassName = className;
         MethodName = methodName;
@@ -179,8 +243,11 @@ public class StackFrame
         {
             var line = lines[index++].Trim();
 
-
-            if (!line.StartsWith($"at {frame.ClassName[0]}") || !line.Contains($".{frame.MethodName}") || (frame.ClassName.Length > 1 && !line.Contains($".{frame.ClassName[1]}")))
+            if (
+                !line.StartsWith($"at {frame.ClassName[0]}")
+                || !line.Contains($".{frame.MethodName}")
+                || (frame.ClassName.Length > 1 && !line.Contains($".{frame.ClassName[1]}"))
+            )
             {
                 Console.WriteLine($"Expected {frame.ClassName}.{frame.MethodName} but got {line}");
                 Console.WriteLine(testStack);

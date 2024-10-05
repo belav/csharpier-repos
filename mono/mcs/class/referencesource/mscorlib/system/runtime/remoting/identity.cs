@@ -1,35 +1,35 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
-namespace System.Runtime.Remoting {
-    using System.Globalization;
-    using System.Runtime.Remoting;
-    using System.Runtime.Remoting.Contexts;
-    using System.Runtime.Remoting.Messaging;
-    using System.Runtime.Remoting.Activation;
-    using System.Runtime.Remoting.Lifetime;
-    using System.Security.Cryptography;
-    using Microsoft.Win32;
-    using System.Threading;
+namespace System.Runtime.Remoting
+{
     using System;
     //  Identity is the base class for remoting identities. An instance of Identity (or a derived class)
     //  is associated with each instance of a remoted object. Likewise, an instance of Identity is
     //  associated with each instance of a remoting proxy.
     //
     using System.Collections;
-    internal class Identity {
+    using System.Globalization;
+    using System.Runtime.Remoting;
+    using System.Runtime.Remoting.Activation;
+    using System.Runtime.Remoting.Contexts;
+    using System.Runtime.Remoting.Lifetime;
+    using System.Runtime.Remoting.Messaging;
+    using System.Security.Cryptography;
+    using System.Threading;
+    using Microsoft.Win32;
+
+    internal class Identity
+    {
         // We use a Guid to create a URI from. Each time a new URI is needed we increment
         // the sequence number and append it to the statically inited Guid.
         // private static readonly Guid IDGuid = Guid.NewGuid();
 
         internal static String ProcessIDGuid
         {
-            get
-            {
-                return SharedStatics.Remoting_Identity_IDGuid;
-            }
+            get { return SharedStatics.Remoting_Identity_IDGuid; }
         }
 
         // We need the original and the configured one because we have to compare
@@ -47,22 +47,22 @@ namespace System.Runtime.Remoting {
                 else
                     return s_originalAppDomainGuid;
             } // get
-
         } // AppDomainGuid
 
-        private static String s_originalAppDomainGuidString = "/" + s_originalAppDomainGuid.ToLower(CultureInfo.InvariantCulture) + "/";
+        private static String s_originalAppDomainGuidString =
+            "/" + s_originalAppDomainGuid.ToLower(CultureInfo.InvariantCulture) + "/";
         private static String s_configuredAppDomainGuidString = null;
 
-        private static String s_IDGuidString = "/" + s_originalAppDomainGuid.ToLower(CultureInfo.InvariantCulture) + "/";
+        private static String s_IDGuidString =
+            "/" + s_originalAppDomainGuid.ToLower(CultureInfo.InvariantCulture) + "/";
 
-        // Used to get random numbers 
+        // Used to get random numbers
         private static RNGCryptoServiceProvider s_rng = new RNGCryptoServiceProvider();
 
         internal static String IDGuidString
         {
             get { return s_IDGuidString; }
         }
-
 
         internal static String RemoveAppNameOrAppGuidIfNecessary(String uri)
         {
@@ -109,7 +109,17 @@ namespace System.Runtime.Remoting {
                 // add +2 to appName length for surrounding slashes
                 if (uri.Length > (appName.Length + 2))
                 {
-                    if (String.Compare(uri, 1, appName, 0, appName.Length, true, CultureInfo.InvariantCulture) == 0)
+                    if (
+                        String.Compare(
+                            uri,
+                            1,
+                            appName,
+                            0,
+                            appName.Length,
+                            true,
+                            CultureInfo.InvariantCulture
+                        ) == 0
+                    )
                     {
                         // now, make sure there is a slash after "/<appname>" in uri
                         if (uri[appName.Length + 1] == '/')
@@ -126,7 +136,6 @@ namespace System.Runtime.Remoting {
             uri = uri.Substring(1);
             return uri;
         } // RemoveAppNameOrAppGuidIfNecessary
-
 
         private static bool StringStartsWith(String s1, String prefix)
         {
@@ -146,13 +155,13 @@ namespace System.Runtime.Remoting {
         // from remote (x-appdomain & higher) clients ... however
         // x-context proxies continue to work as expected.
 
-        protected const int IDFLG_DISCONNECTED_FULL= 0x00000001;
+        protected const int IDFLG_DISCONNECTED_FULL = 0x00000001;
         protected const int IDFLG_DISCONNECTED_REM = 0x00000002;
-        protected const int IDFLG_IN_IDTABLE       = 0x00000004;
+        protected const int IDFLG_IN_IDTABLE = 0x00000004;
 
-        protected const int IDFLG_CONTEXT_BOUND    = 0x00000010;
-        protected const int IDFLG_WELLKNOWN        = 0x00000100;
-        protected const int IDFLG_SERVER_SINGLECALL= 0x00000200;
+        protected const int IDFLG_CONTEXT_BOUND = 0x00000010;
+        protected const int IDFLG_WELLKNOWN = 0x00000100;
+        protected const int IDFLG_SERVER_SINGLECALL = 0x00000200;
         protected const int IDFLG_SERVER_SINGLETON = 0x00000400;
 
         internal int _flags;
@@ -178,7 +187,10 @@ namespace System.Runtime.Remoting {
         // Set  when Identity is initializing and not yet ready for use.
         private volatile bool _initializing;
 
-        internal static String ProcessGuid {get {return ProcessIDGuid;}}
+        internal static String ProcessGuid
+        {
+            get { return ProcessIDGuid; }
+        }
 
         private static int GetNextSeqNum()
         {
@@ -191,14 +203,13 @@ namespace System.Runtime.Remoting {
             // rate, we will end up creating too many of these tiny byte-arrays
             // causing pressure on GC!
             // One option would be to have a buff in the managed thread class
-            // and use that to get a chunk of random bytes consuming 
-            // 18 bytes at a time. 
+            // and use that to get a chunk of random bytes consuming
+            // 18 bytes at a time.
             // This would avoid the need to have a lock across threads.
             Byte[] randomBytes = new byte[18];
             s_rng.GetBytes(randomBytes);
             return randomBytes;
         }
-
 
         // Constructs a new identity using the given the URI. This is used for
         // creating client side identities.
@@ -206,13 +217,16 @@ namespace System.Runtime.Remoting {
         //
         internal Identity(String objURI, String URL)
         {
-            BCLDebug.Assert(objURI!=null,"objURI should not be null here");
+            BCLDebug.Assert(objURI != null, "objURI should not be null here");
             if (URL != null)
             {
                 _flags |= IDFLG_WELLKNOWN;
                 _URL = URL;
             }
-            SetOrCreateURI(objURI, true /*calling from ID ctor*/);
+            SetOrCreateURI(
+                objURI,
+                true /*calling from ID ctor*/
+            );
         }
 
         // Constructs a new identity. This is used for creating server side
@@ -224,53 +238,54 @@ namespace System.Runtime.Remoting {
         //
         internal Identity(bool bContextBound)
         {
-            if(bContextBound)
+            if (bContextBound)
                 _flags |= IDFLG_CONTEXT_BOUND;
         }
 
-        internal bool IsContextBound {
-            get  {
-                return (_flags&IDFLG_CONTEXT_BOUND) == IDFLG_CONTEXT_BOUND;
-            }
+        internal bool IsContextBound
+        {
+            get { return (_flags & IDFLG_CONTEXT_BOUND) == IDFLG_CONTEXT_BOUND; }
         }
 
-        internal bool IsInitializing {
-            get  {
-                return (_initializing);
-            }
-            set {
-                _initializing = value;
-            }
+        internal bool IsInitializing
+        {
+            get { return (_initializing); }
+            set { _initializing = value; }
         }
 
         internal bool IsWellKnown()
         {
-            return (_flags&IDFLG_WELLKNOWN) == IDFLG_WELLKNOWN;
+            return (_flags & IDFLG_WELLKNOWN) == IDFLG_WELLKNOWN;
         }
 
         internal void SetInIDTable()
         {
-            while(true) {
+            while (true)
+            {
                 int currentFlags = _flags;
                 int newFlags = _flags | IDFLG_IN_IDTABLE;
-                if(currentFlags == Interlocked.CompareExchange(ref _flags, newFlags, currentFlags))
+                if (currentFlags == Interlocked.CompareExchange(ref _flags, newFlags, currentFlags))
                     break;
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal void ResetInIDTable(bool bResetURI)
         {
-            BCLDebug.Assert(IdentityHolder.TableLock.IsWriterLockHeld, "IDTable should be write-locked");
-            while(true) {
+            BCLDebug.Assert(
+                IdentityHolder.TableLock.IsWriterLockHeld,
+                "IDTable should be write-locked"
+            );
+            while (true)
+            {
                 int currentFlags = _flags;
                 int newFlags = _flags & (~IDFLG_IN_IDTABLE);
-                if(currentFlags == Interlocked.CompareExchange(ref _flags, newFlags, currentFlags))
+                if (currentFlags == Interlocked.CompareExchange(ref _flags, newFlags, currentFlags))
                     break;
             }
             // bResetURI is true for the external API call to Disconnect, it is
-            // false otherwise. Thus when a user Disconnects an object 
-            // its URI will get reset but if lifetime service times it out 
+            // false otherwise. Thus when a user Disconnects an object
+            // its URI will get reset but if lifetime service times it out
             // it will not clear out the URIs
             if (bResetURI)
             {
@@ -281,22 +296,25 @@ namespace System.Runtime.Remoting {
 
         internal bool IsInIDTable()
         {
-            return((_flags & IDFLG_IN_IDTABLE) == IDFLG_IN_IDTABLE);
+            return ((_flags & IDFLG_IN_IDTABLE) == IDFLG_IN_IDTABLE);
         }
 
         internal void SetFullyConnected()
         {
             BCLDebug.Assert(
                 this is ServerIdentity,
-                "should be setting these flags for srvIDs only!");
+                "should be setting these flags for srvIDs only!"
+            );
             BCLDebug.Assert(
                 (_ObjURI != null),
-                "Object must be assigned a URI to be fully connected!");
+                "Object must be assigned a URI to be fully connected!"
+            );
 
-            while(true) {
+            while (true)
+            {
                 int currentFlags = _flags;
                 int newFlags = _flags & (~(IDFLG_DISCONNECTED_FULL | IDFLG_DISCONNECTED_REM));
-                if(currentFlags == Interlocked.CompareExchange(ref _flags, newFlags, currentFlags))
+                if (currentFlags == Interlocked.CompareExchange(ref _flags, newFlags, currentFlags))
                     break;
             }
         }
@@ -305,23 +323,26 @@ namespace System.Runtime.Remoting {
         {
             BCLDebug.Assert(
                 this is ServerIdentity,
-                "should be setting these flags for srvIDs only!");
-            return (_flags&IDFLG_DISCONNECTED_FULL) == IDFLG_DISCONNECTED_FULL;
+                "should be setting these flags for srvIDs only!"
+            );
+            return (_flags & IDFLG_DISCONNECTED_FULL) == IDFLG_DISCONNECTED_FULL;
         }
 
         internal bool IsRemoteDisconnected()
         {
             BCLDebug.Assert(
                 this is ServerIdentity,
-                "should be setting these flags for srvIDs only!");
-            return (_flags&IDFLG_DISCONNECTED_REM) == IDFLG_DISCONNECTED_REM;
+                "should be setting these flags for srvIDs only!"
+            );
+            return (_flags & IDFLG_DISCONNECTED_REM) == IDFLG_DISCONNECTED_REM;
         }
 
         internal bool IsDisconnected()
         {
             BCLDebug.Assert(
                 this is ServerIdentity,
-                "should be setting these flags for srvIDs only!");
+                "should be setting these flags for srvIDs only!"
+            );
             return (IsFullyDisconnected() || IsRemoteDisconnected());
         }
 
@@ -330,7 +351,7 @@ namespace System.Runtime.Remoting {
         {
             get
             {
-                if(IsWellKnown())
+                if (IsWellKnown())
                 {
                     return _URL;
                 }
@@ -348,16 +369,13 @@ namespace System.Runtime.Remoting {
 
         internal MarshalByRefObject TPOrObject
         {
-            get
-            {
-                return (MarshalByRefObject) _tpOrObject;
-            }
+            get { return (MarshalByRefObject)_tpOrObject; }
         }
 
-       //   Set the transparentProxy field protecting against ----s. The returned transparent
-       //   proxy could be different than the one the caller is attempting to set.
-       //
-        internal Object  RaceSetTransparentProxy(Object tpObj)
+        //   Set the transparentProxy field protecting against ----s. The returned transparent
+        //   proxy could be different than the one the caller is attempting to set.
+        //
+        internal Object RaceSetTransparentProxy(Object tpObj)
         {
             if (_tpOrObject == null)
                 Interlocked.CompareExchange(ref _tpOrObject, tpObj, null);
@@ -367,87 +385,66 @@ namespace System.Runtime.Remoting {
         // Get the ObjRef.
         internal ObjRef ObjectRef
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get
-            {
-                return (ObjRef) _objRef;
-            }
+            [System.Security.SecurityCritical] // auto-generated
+            get { return (ObjRef)_objRef; }
         }
 
-       //   Set the objRef field protecting against ----s. The returned objRef
-       //   could be different than the one the caller is attempting to set.
-       //
-        [System.Security.SecurityCritical]  // auto-generated
-        internal ObjRef  RaceSetObjRef(ObjRef objRefGiven)
+        //   Set the objRef field protecting against ----s. The returned objRef
+        //   could be different than the one the caller is attempting to set.
+        //
+        [System.Security.SecurityCritical] // auto-generated
+        internal ObjRef RaceSetObjRef(ObjRef objRefGiven)
         {
             if (_objRef == null)
             {
                 Interlocked.CompareExchange(ref _objRef, objRefGiven, null);
             }
-            return (ObjRef) _objRef;
+            return (ObjRef)_objRef;
         }
-
 
         // Get the ChannelSink.
         internal IMessageSink ChannelSink
         {
-            get { return (IMessageSink) _channelSink;}
+            get { return (IMessageSink)_channelSink; }
         }
 
-       //   Set the channelSink field protecting against ----s. The returned
-       //   channelSink proxy could be different than the one the caller is
-       //   attempting to set.
-       //
-        internal IMessageSink  RaceSetChannelSink(IMessageSink channelSink)
+        //   Set the channelSink field protecting against ----s. The returned
+        //   channelSink proxy could be different than the one the caller is
+        //   attempting to set.
+        //
+        internal IMessageSink RaceSetChannelSink(IMessageSink channelSink)
         {
             if (_channelSink == null)
             {
-                Interlocked.CompareExchange(
-                                        ref _channelSink,
-                                        channelSink,
-                                        null);
+                Interlocked.CompareExchange(ref _channelSink, channelSink, null);
             }
-            return (IMessageSink) _channelSink;
+            return (IMessageSink)_channelSink;
         }
 
         // Get/Set the Envoy Sink chain..
         internal IMessageSink EnvoyChain
         {
-            get
-            {
-                return (IMessageSink)_envoyChain;
-            }
+            get { return (IMessageSink)_envoyChain; }
         }
 
         // Get/Set Lease
         internal Lease Lease
         {
-            get
-            {
-                return _lease;
-            }
-            set
-            {
-                _lease = value;
-            }
+            get { return _lease; }
+            set { _lease = value; }
         }
 
-
-       //   Set the channelSink field protecting against ----s. The returned
-       //   channelSink proxy could be different than the one the caller is
-       //   attempting to set.
-       //
-        internal IMessageSink RaceSetEnvoyChain(
-                    IMessageSink envoyChain)
+        //   Set the channelSink field protecting against ----s. The returned
+        //   channelSink proxy could be different than the one the caller is
+        //   attempting to set.
+        //
+        internal IMessageSink RaceSetEnvoyChain(IMessageSink envoyChain)
         {
             if (_envoyChain == null)
             {
-                Interlocked.CompareExchange(
-                                ref _envoyChain,
-                                envoyChain,
-                                null);
+                Interlocked.CompareExchange(ref _envoyChain, envoyChain, null);
             }
-            return (IMessageSink) _envoyChain;
+            return (IMessageSink)_envoyChain;
         }
 
         // A URI is lazily generated for the identity based on a GUID.
@@ -459,24 +456,35 @@ namespace System.Runtime.Remoting {
 
         internal void SetOrCreateURI(String uri, bool bIdCtor)
         {
-            if(bIdCtor == false)
+            if (bIdCtor == false)
             {
                 // This method is called either from the ID Constructor or
                 // with a writeLock on the ID Table
-                BCLDebug.Assert(IdentityHolder.TableLock.IsWriterLockHeld, "IDTable should be write-locked");
-                if (null != _ObjURI) {
+                BCLDebug.Assert(
+                    IdentityHolder.TableLock.IsWriterLockHeld,
+                    "IDTable should be write-locked"
+                );
+                if (null != _ObjURI)
+                {
                     throw new RemotingException(
-                        Environment.GetResourceString("Remoting_SetObjectUriForMarshal__UriExists"));
+                        Environment.GetResourceString("Remoting_SetObjectUriForMarshal__UriExists")
+                    );
                 }
             }
 
-            if(null == uri)
+            if (null == uri)
             {
                 // We insert the tick count, so that the uri is not 100% predictable.
                 // (i.e. perhaps we should consider using a random number as well)
                 String random = System.Convert.ToBase64String(GetRandomBytes());
                 // Need to replace the '/' with '_' since '/' is not a valid uri char
-                _ObjURI = (IDGuidString + random.Replace('/',  '_') + "_" + GetNextSeqNum().ToString(CultureInfo.InvariantCulture.NumberFormat) + ".rem").ToLower(CultureInfo.InvariantCulture);
+                _ObjURI = (
+                    IDGuidString
+                    + random.Replace('/', '_')
+                    + "_"
+                    + GetNextSeqNum().ToString(CultureInfo.InvariantCulture.NumberFormat)
+                    + ".rem"
+                ).ToLower(CultureInfo.InvariantCulture);
             }
             else
             {
@@ -494,7 +502,7 @@ namespace System.Runtime.Remoting {
             return IDGuidString + GetNextSeqNum();
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [System.Diagnostics.Conditional("_DEBUG")]
         internal virtual void AssertValid()
         {
@@ -503,19 +511,20 @@ namespace System.Runtime.Remoting {
                 Identity resolvedIdentity = IdentityHolder.ResolveIdentity(URI);
                 BCLDebug.Assert(
                     (resolvedIdentity == null) || (resolvedIdentity == this),
-                    "Server ID mismatch with URI");
+                    "Server ID mismatch with URI"
+                );
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal bool AddProxySideDynamicProperty(IDynamicProperty prop)
         {
-            lock(this)
+            lock (this)
             {
                 if (_dph == null)
                 {
                     DynamicPropertyHolder dph = new DynamicPropertyHolder();
-                    lock(this)
+                    lock (this)
                     {
                         if (_dph == null)
                         {
@@ -527,17 +536,20 @@ namespace System.Runtime.Remoting {
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal bool RemoveProxySideDynamicProperty(String name)
         {
-            lock(this)
+            lock (this)
             {
                 if (_dph == null)
                 {
                     throw new RemotingException(
                         String.Format(
-                            CultureInfo.CurrentCulture, Environment.GetResourceString("Remoting_Contexts_NoProperty"),
-                            name));
+                            CultureInfo.CurrentCulture,
+                            Environment.GetResourceString("Remoting_Contexts_NoProperty"),
+                            name
+                        )
+                    );
                 }
                 return _dph.RemoveDynamicProperty(name);
             }
@@ -545,7 +557,7 @@ namespace System.Runtime.Remoting {
 
         internal ArrayWithSize ProxySideDynamicSinks
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get
             {
                 if (_dph == null)
@@ -559,11 +571,11 @@ namespace System.Runtime.Remoting {
             }
         }
 
-    #if _DEBUG
+#if _DEBUG
         public override String ToString()
         {
             return ("IDENTITY: " + " URI = " + _ObjURI);
         }
-    #endif
+#endif
     }
 }

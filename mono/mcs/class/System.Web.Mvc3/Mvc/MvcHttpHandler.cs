@@ -1,55 +1,96 @@
-﻿namespace System.Web.Mvc {
+﻿namespace System.Web.Mvc
+{
     using System;
     using System.Web;
     using System.Web.Mvc.Async;
     using System.Web.Routing;
     using System.Web.SessionState;
 
-    public class MvcHttpHandler : UrlRoutingHandler, IHttpAsyncHandler, IRequiresSessionState {
-
+    public class MvcHttpHandler : UrlRoutingHandler, IHttpAsyncHandler, IRequiresSessionState
+    {
         private static readonly object _processRequestTag = new object();
 
-        protected virtual IAsyncResult BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, object state) {
+        protected virtual IAsyncResult BeginProcessRequest(
+            HttpContext httpContext,
+            AsyncCallback callback,
+            object state
+        )
+        {
             HttpContextBase iHttpContext = new HttpContextWrapper(httpContext);
             return BeginProcessRequest(iHttpContext, callback, state);
         }
 
-        protected internal virtual IAsyncResult BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, object state) {
+        protected internal virtual IAsyncResult BeginProcessRequest(
+            HttpContextBase httpContext,
+            AsyncCallback callback,
+            object state
+        )
+        {
             IHttpHandler httpHandler = GetHttpHandler(httpContext);
             IHttpAsyncHandler httpAsyncHandler = httpHandler as IHttpAsyncHandler;
 
-            if (httpAsyncHandler != null) {
+            if (httpAsyncHandler != null)
+            {
                 // asynchronous handler
-                BeginInvokeDelegate beginDelegate = delegate(AsyncCallback asyncCallback, object asyncState) {
-                    return httpAsyncHandler.BeginProcessRequest(HttpContext.Current, asyncCallback, asyncState);
+                BeginInvokeDelegate beginDelegate = delegate(
+                    AsyncCallback asyncCallback,
+                    object asyncState
+                )
+                {
+                    return httpAsyncHandler.BeginProcessRequest(
+                        HttpContext.Current,
+                        asyncCallback,
+                        asyncState
+                    );
                 };
-                EndInvokeDelegate endDelegate = delegate(IAsyncResult asyncResult) {
+                EndInvokeDelegate endDelegate = delegate(IAsyncResult asyncResult)
+                {
                     httpAsyncHandler.EndProcessRequest(asyncResult);
                 };
-                return AsyncResultWrapper.Begin(callback, state, beginDelegate, endDelegate, _processRequestTag);
+                return AsyncResultWrapper.Begin(
+                    callback,
+                    state,
+                    beginDelegate,
+                    endDelegate,
+                    _processRequestTag
+                );
             }
-            else {
+            else
+            {
                 // synchronous handler
-                Action action = delegate {
+                Action action = delegate
+                {
                     httpHandler.ProcessRequest(HttpContext.Current);
                 };
-                return AsyncResultWrapper.BeginSynchronous(callback, state, action, _processRequestTag);
+                return AsyncResultWrapper.BeginSynchronous(
+                    callback,
+                    state,
+                    action,
+                    _processRequestTag
+                );
             }
         }
 
-        protected internal virtual void EndProcessRequest(IAsyncResult asyncResult) {
+        protected internal virtual void EndProcessRequest(IAsyncResult asyncResult)
+        {
             AsyncResultWrapper.End(asyncResult, _processRequestTag);
         }
 
-        private static IHttpHandler GetHttpHandler(HttpContextBase httpContext) {
+        private static IHttpHandler GetHttpHandler(HttpContextBase httpContext)
+        {
             DummyHttpHandler dummyHandler = new DummyHttpHandler();
             dummyHandler.PublicProcessRequest(httpContext);
             return dummyHandler.HttpHandler;
         }
 
         // synchronous code
-        protected override void VerifyAndProcessRequest(IHttpHandler httpHandler, HttpContextBase httpContext) {
-            if (httpHandler == null) {
+        protected override void VerifyAndProcessRequest(
+            IHttpHandler httpHandler,
+            HttpContextBase httpContext
+        )
+        {
+            if (httpHandler == null)
+            {
                 throw new ArgumentNullException("httpHandler");
             }
 
@@ -57,11 +98,17 @@
         }
 
         #region IHttpAsyncHandler Members
-        IAsyncResult IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, object extraData) {
+        IAsyncResult IHttpAsyncHandler.BeginProcessRequest(
+            HttpContext context,
+            AsyncCallback cb,
+            object extraData
+        )
+        {
             return BeginProcessRequest(context, cb, extraData);
         }
 
-        void IHttpAsyncHandler.EndProcessRequest(IAsyncResult result) {
+        void IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+        {
             EndProcessRequest(result);
         }
         #endregion
@@ -72,18 +119,23 @@
         // only the lookup portion of UrlRoutingHandler.ProcessRequest(), then intercept the handler it returns
         // and execute it asynchronously.
 
-        private sealed class DummyHttpHandler : UrlRoutingHandler {
+        private sealed class DummyHttpHandler : UrlRoutingHandler
+        {
             public IHttpHandler HttpHandler;
 
-            public void PublicProcessRequest(HttpContextBase httpContext) {
+            public void PublicProcessRequest(HttpContextBase httpContext)
+            {
                 ProcessRequest(httpContext);
             }
 
-            protected override void VerifyAndProcessRequest(IHttpHandler httpHandler, HttpContextBase httpContext) {
+            protected override void VerifyAndProcessRequest(
+                IHttpHandler httpHandler,
+                HttpContextBase httpContext
+            )
+            {
                 // don't process the request, just store a reference to it
                 HttpHandler = httpHandler;
             }
         }
-
     }
 }

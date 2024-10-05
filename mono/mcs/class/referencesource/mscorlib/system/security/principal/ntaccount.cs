@@ -1,22 +1,22 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
+using System;
+using System.Diagnostics.Contracts;
+using System.Globalization;
+using System.Runtime.InteropServices;
+using System.Security.Permissions;
 using Microsoft.Win32;
 using Microsoft.Win32.SafeHandles;
-using System;
-using System.Runtime.InteropServices;
-using System.Globalization;
-using System.Security.Permissions;
-using System.Diagnostics.Contracts;
 
 namespace System.Security.Principal
 {
-[System.Runtime.InteropServices.ComVisible(false)]
+    [System.Runtime.InteropServices.ComVisible(false)]
     public sealed class NTAccount : IdentityReference
     {
         #region Private members
@@ -37,30 +37,39 @@ namespace System.Security.Principal
 
         #region Constructors
 
-        public NTAccount( string domainName, string accountName )
+        public NTAccount(string domainName, string accountName)
         {
-            if ( accountName == null )
+            if (accountName == null)
             {
-                throw new ArgumentNullException( "accountName" );
+                throw new ArgumentNullException("accountName");
             }
 
-            if ( accountName.Length == 0 )
+            if (accountName.Length == 0)
             {
-                throw new ArgumentException( Environment.GetResourceString( "Argument_StringZeroLength" ), "accountName" );
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_StringZeroLength"),
+                    "accountName"
+                );
             }
 
-            if ( accountName.Length > MaximumAccountNameLength )
+            if (accountName.Length > MaximumAccountNameLength)
             {
-                throw new ArgumentException( Environment.GetResourceString( "IdentityReference_AccountNameTooLong" ), "accountName");  
+                throw new ArgumentException(
+                    Environment.GetResourceString("IdentityReference_AccountNameTooLong"),
+                    "accountName"
+                );
             }
 
-            if ( domainName != null && domainName.Length > MaximumDomainNameLength )
+            if (domainName != null && domainName.Length > MaximumDomainNameLength)
             {
-                throw new ArgumentException( Environment.GetResourceString( "IdentityReference_DomainNameTooLong" ), "domainName");  
-            }   
+                throw new ArgumentException(
+                    Environment.GetResourceString("IdentityReference_DomainNameTooLong"),
+                    "domainName"
+                );
+            }
             Contract.EndContractBlock();
 
-            if ( domainName == null || domainName.Length == 0 )
+            if (domainName == null || domainName.Length == 0)
             {
                 _Name = accountName;
             }
@@ -70,21 +79,34 @@ namespace System.Security.Principal
             }
         }
 
-        public NTAccount( string name )
+        public NTAccount(string name)
         {
-            if ( name == null )
+            if (name == null)
             {
-                throw new ArgumentNullException( "name" );
+                throw new ArgumentNullException("name");
             }
 
-            if ( name.Length == 0 )
+            if (name.Length == 0)
             {
-                throw new ArgumentException( Environment.GetResourceString( "Argument_StringZeroLength" ), "name" );
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_StringZeroLength"),
+                    "name"
+                );
             }
 
-            if ( name.Length > ( MaximumDomainNameLength + 1 /* '\' */ + MaximumAccountNameLength ))
+            if (
+                name.Length
+                > (
+                    MaximumDomainNameLength
+                    + 1 /* '\' */
+                    + MaximumAccountNameLength
+                )
+            )
             {
-                throw new ArgumentException( Environment.GetResourceString( "IdentityReference_AccountNameTooLong" ), "name");  
+                throw new ArgumentException(
+                    Environment.GetResourceString("IdentityReference_AccountNameTooLong"),
+                    "name"
+                );
             }
             Contract.EndContractBlock();
 
@@ -99,13 +121,13 @@ namespace System.Security.Principal
             get { return ToString(); }
         }
 
-        public override bool IsValidTargetType( Type targetType )
+        public override bool IsValidTargetType(Type targetType)
         {
-            if ( targetType == typeof( SecurityIdentifier ))
+            if (targetType == typeof(SecurityIdentifier))
             {
                 return true;
             }
-            else if ( targetType == typeof( NTAccount ))
+            else if (targetType == typeof(NTAccount))
             {
                 return true;
             }
@@ -117,52 +139,56 @@ namespace System.Security.Principal
 
         [SecurityPermission(SecurityAction.Demand, ControlPrincipal = true)]
         [SecuritySafeCritical]
-        public override IdentityReference Translate( Type targetType )
+        public override IdentityReference Translate(Type targetType)
         {
-            if ( targetType == null ) 
+            if (targetType == null)
             {
-                throw new ArgumentNullException( "targetType" );
+                throw new ArgumentNullException("targetType");
             }
             Contract.EndContractBlock();
-        
-            if ( targetType == typeof( NTAccount ))
+
+            if (targetType == typeof(NTAccount))
             {
                 return this; // assumes that NTAccount objects are immutable
             }
-            else if ( targetType == typeof( SecurityIdentifier ))
+            else if (targetType == typeof(SecurityIdentifier))
             {
-                IdentityReferenceCollection irSource = new IdentityReferenceCollection( 1 );
-                irSource.Add( this );
+                IdentityReferenceCollection irSource = new IdentityReferenceCollection(1);
+                irSource.Add(this);
                 IdentityReferenceCollection irTarget;
 
-                irTarget = NTAccount.Translate( irSource, targetType, true );
+                irTarget = NTAccount.Translate(irSource, targetType, true);
 
                 return irTarget[0];
             }
             else
             {
-                throw new ArgumentException( Environment.GetResourceString( "IdentityReference_MustBeIdentityReference" ), "targetType" );
+                throw new ArgumentException(
+                    Environment.GetResourceString("IdentityReference_MustBeIdentityReference"),
+                    "targetType"
+                );
             }
         }
 
-        public override bool Equals( object o )
+        public override bool Equals(object o)
         {
-            if ( o == null )
+            if (o == null)
             {
                 return false;
             }
 
             NTAccount nta = o as NTAccount;
 
-            if ( nta == null )
+            if (nta == null)
             {
                 return false;
             }
 
-            return ( this == nta ); // invokes operator==
+            return (this == nta); // invokes operator==
         }
 
-        public override int GetHashCode() {
+        public override int GetHashCode()
+        {
             return StringComparer.InvariantCultureIgnoreCase.GetHashCode(_Name);
         }
 
@@ -171,93 +197,114 @@ namespace System.Security.Principal
             return _Name;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal static IdentityReferenceCollection Translate( IdentityReferenceCollection sourceAccounts, Type targetType, bool forceSuccess)
+        [System.Security.SecurityCritical] // auto-generated
+        internal static IdentityReferenceCollection Translate(
+            IdentityReferenceCollection sourceAccounts,
+            Type targetType,
+            bool forceSuccess
+        )
         {
             bool SomeFailed = false;
             IdentityReferenceCollection Result;
-        
-            
-            Result = Translate( sourceAccounts, targetType, out SomeFailed );
 
-            if (forceSuccess && SomeFailed) {
+            Result = Translate(sourceAccounts, targetType, out SomeFailed);
 
+            if (forceSuccess && SomeFailed)
+            {
                 IdentityReferenceCollection UnmappedIdentities = new IdentityReferenceCollection();
 
-                foreach (IdentityReference id in Result) 
-                {    
-                    if (id.GetType() != targetType) 
+                foreach (IdentityReference id in Result)
+                {
+                    if (id.GetType() != targetType)
                     {
                         UnmappedIdentities.Add(id);
                     }
                 }
 
-                throw new IdentityNotMappedException(Environment.GetResourceString("IdentityReference_IdentityNotMapped"), UnmappedIdentities);
+                throw new IdentityNotMappedException(
+                    Environment.GetResourceString("IdentityReference_IdentityNotMapped"),
+                    UnmappedIdentities
+                );
             }
 
             return Result;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal static IdentityReferenceCollection Translate( IdentityReferenceCollection sourceAccounts, Type targetType, out bool someFailed )
+        [System.Security.SecurityCritical] // auto-generated
+        internal static IdentityReferenceCollection Translate(
+            IdentityReferenceCollection sourceAccounts,
+            Type targetType,
+            out bool someFailed
+        )
         {
-            if ( sourceAccounts == null )
+            if (sourceAccounts == null)
             {
-                throw new ArgumentNullException( "sourceAccounts" );
+                throw new ArgumentNullException("sourceAccounts");
             }
             Contract.EndContractBlock();
 
-            if ( targetType == typeof( SecurityIdentifier ))
+            if (targetType == typeof(SecurityIdentifier))
             {
-                return TranslateToSids( sourceAccounts, out someFailed );
+                return TranslateToSids(sourceAccounts, out someFailed);
             }
 
-            throw new ArgumentException( Environment.GetResourceString( "IdentityReference_MustBeIdentityReference" ), "targetType" );
+            throw new ArgumentException(
+                Environment.GetResourceString("IdentityReference_MustBeIdentityReference"),
+                "targetType"
+            );
         }
 
         #endregion
 
         #region Operators
 
-        public static bool operator==( NTAccount left, NTAccount right )
+        public static bool operator ==(NTAccount left, NTAccount right)
         {
             object l = left;
             object r = right;
 
-            if ( l == null && r == null )
+            if (l == null && r == null)
             {
                 return true;
             }
-            else if ( l == null || r == null )
+            else if (l == null || r == null)
             {
                 return false;
             }
             else
             {
-                return ( left.ToString().Equals(right.ToString(), StringComparison.OrdinalIgnoreCase));
+                return (
+                    left.ToString().Equals(right.ToString(), StringComparison.OrdinalIgnoreCase)
+                );
             }
         }
 
-        public static bool operator!=( NTAccount left, NTAccount right )
+        public static bool operator !=(NTAccount left, NTAccount right)
         {
-            return !( left == right ); // invoke operator==
+            return !(left == right); // invoke operator==
         }
 
         #endregion
 
         #region Private methods
 
-        [System.Security.SecurityCritical]  // auto-generated
-        private static IdentityReferenceCollection TranslateToSids( IdentityReferenceCollection sourceAccounts, out bool someFailed )
+        [System.Security.SecurityCritical] // auto-generated
+        private static IdentityReferenceCollection TranslateToSids(
+            IdentityReferenceCollection sourceAccounts,
+            out bool someFailed
+        )
         {
-            if ( sourceAccounts == null )
+            if (sourceAccounts == null)
             {
-                throw new ArgumentNullException( "sourceAccounts" );
+                throw new ArgumentNullException("sourceAccounts");
             }
 
-            if ( sourceAccounts.Count == 0 )
+            if (sourceAccounts.Count == 0)
             {
-                throw new ArgumentException( Environment.GetResourceString( "Arg_EmptyCollection" ), "sourceAccounts" );
+                throw new ArgumentException(
+                    Environment.GetResourceString("Arg_EmptyCollection"),
+                    "sourceAccounts"
+                );
             }
             Contract.EndContractBlock();
 
@@ -271,25 +318,33 @@ namespace System.Security.Principal
                 // Construct an array of unicode strings
                 //
 
-                Win32Native.UNICODE_STRING[] Names = new Win32Native.UNICODE_STRING[ sourceAccounts.Count ];
+                Win32Native.UNICODE_STRING[] Names = new Win32Native.UNICODE_STRING[
+                    sourceAccounts.Count
+                ];
 
                 int currentName = 0;
-                foreach ( IdentityReference id in sourceAccounts )
+                foreach (IdentityReference id in sourceAccounts)
                 {
                     NTAccount nta = id as NTAccount;
 
-                    if ( nta == null )
+                    if (nta == null)
                     {
-                        throw new ArgumentException(  Environment.GetResourceString( "Argument_ImproperType" ), "sourceAccounts" );
+                        throw new ArgumentException(
+                            Environment.GetResourceString("Argument_ImproperType"),
+                            "sourceAccounts"
+                        );
                     }
 
                     Names[currentName].Buffer = nta.ToString();
 
                     if (Names[currentName].Buffer.Length * 2 + 2 > ushort.MaxValue)
                     {
-                        // this should never happen since we are already validating account name length in constructor and 
+                        // this should never happen since we are already validating account name length in constructor and
                         // it is less than this limit
-                        Contract.Assert(false, "NTAccount::TranslateToSids - source account name is too long.");
+                        Contract.Assert(
+                            false,
+                            "NTAccount::TranslateToSids - source account name is too long."
+                        );
                         throw new SystemException();
                     }
 
@@ -302,7 +357,7 @@ namespace System.Security.Principal
                 // Open LSA policy (for lookup requires it)
                 //
 
-                LsaHandle = Win32.LsaOpenPolicy( null, PolicyRights.POLICY_LOOKUP_NAMES );
+                LsaHandle = Win32.LsaOpenPolicy(null, PolicyRights.POLICY_LOOKUP_NAMES);
 
                 //
                 // Now perform the actual lookup
@@ -311,13 +366,26 @@ namespace System.Security.Principal
                 someFailed = false;
                 uint ReturnCode;
 
-                if ( Win32.LsaLookupNames2Supported )
+                if (Win32.LsaLookupNames2Supported)
                 {
-                    ReturnCode = Win32Native.LsaLookupNames2( LsaHandle, 0, sourceAccounts.Count, Names, ref ReferencedDomainsPtr, ref SidsPtr );
+                    ReturnCode = Win32Native.LsaLookupNames2(
+                        LsaHandle,
+                        0,
+                        sourceAccounts.Count,
+                        Names,
+                        ref ReferencedDomainsPtr,
+                        ref SidsPtr
+                    );
                 }
                 else
                 {
-                    ReturnCode = Win32Native.LsaLookupNames( LsaHandle, sourceAccounts.Count, Names, ref ReferencedDomainsPtr, ref SidsPtr );
+                    ReturnCode = Win32Native.LsaLookupNames(
+                        LsaHandle,
+                        sourceAccounts.Count,
+                        Names,
+                        ref ReferencedDomainsPtr,
+                        ref SidsPtr
+                    );
                 }
 
                 //
@@ -325,29 +393,42 @@ namespace System.Security.Principal
                 // based on the return code and the value of the forceSuccess argument
                 //
 
-                if ( ReturnCode == Win32Native.STATUS_NO_MEMORY ||
-                    ReturnCode == Win32Native.STATUS_INSUFFICIENT_RESOURCES )
+                if (
+                    ReturnCode == Win32Native.STATUS_NO_MEMORY
+                    || ReturnCode == Win32Native.STATUS_INSUFFICIENT_RESOURCES
+                )
                 {
                     throw new OutOfMemoryException();
                 }
-                else if ( ReturnCode == Win32Native.STATUS_ACCESS_DENIED )
+                else if (ReturnCode == Win32Native.STATUS_ACCESS_DENIED)
                 {
                     throw new UnauthorizedAccessException();
                 }
-                else if ( ReturnCode == Win32Native.STATUS_NONE_MAPPED ||
-                    ReturnCode == Win32Native.STATUS_SOME_NOT_MAPPED )
+                else if (
+                    ReturnCode == Win32Native.STATUS_NONE_MAPPED
+                    || ReturnCode == Win32Native.STATUS_SOME_NOT_MAPPED
+                )
                 {
                     someFailed = true;
                 }
-                else if ( ReturnCode != 0 )
+                else if (ReturnCode != 0)
                 {
-                    int win32ErrorCode = Win32Native.LsaNtStatusToWinError(unchecked((int)ReturnCode));
+                    int win32ErrorCode = Win32Native.LsaNtStatusToWinError(
+                        unchecked((int)ReturnCode)
+                    );
 
                     if (win32ErrorCode != Win32Native.ERROR_TRUSTED_RELATIONSHIP_FAILURE)
                     {
-                        Contract.Assert( false, string.Format( CultureInfo.InvariantCulture, "Win32Native.LsaLookupNames(2) returned unrecognized error {0}", win32ErrorCode ));
+                        Contract.Assert(
+                            false,
+                            string.Format(
+                                CultureInfo.InvariantCulture,
+                                "Win32Native.LsaLookupNames(2) returned unrecognized error {0}",
+                                win32ErrorCode
+                            )
+                        );
                     }
-                    
+
                     throw new SystemException(Win32Native.GetMessage(win32ErrorCode));
                 }
 
@@ -355,15 +436,21 @@ namespace System.Security.Principal
                 // Interpret the results and generate SID objects
                 //
 
-                IdentityReferenceCollection Result = new IdentityReferenceCollection( sourceAccounts.Count );
+                IdentityReferenceCollection Result = new IdentityReferenceCollection(
+                    sourceAccounts.Count
+                );
 
-                if ( ReturnCode == 0 || ReturnCode == Win32Native.STATUS_SOME_NOT_MAPPED )
+                if (ReturnCode == 0 || ReturnCode == Win32Native.STATUS_SOME_NOT_MAPPED)
                 {
-                    if ( Win32.LsaLookupNames2Supported )
+                    if (Win32.LsaLookupNames2Supported)
                     {
-                        SidsPtr.Initialize((uint)sourceAccounts.Count, (uint)Marshal.SizeOf(typeof(Win32Native.LSA_TRANSLATED_SID2)));
+                        SidsPtr.Initialize(
+                            (uint)sourceAccounts.Count,
+                            (uint)Marshal.SizeOf(typeof(Win32Native.LSA_TRANSLATED_SID2))
+                        );
                         Win32.InitializeReferencedDomainsPointer(ReferencedDomainsPtr);
-                        Win32Native.LSA_TRANSLATED_SID2[] translatedSids = new Win32Native.LSA_TRANSLATED_SID2[sourceAccounts.Count];
+                        Win32Native.LSA_TRANSLATED_SID2[] translatedSids =
+                            new Win32Native.LSA_TRANSLATED_SID2[sourceAccounts.Count];
                         SidsPtr.ReadArray(0, translatedSids, 0, translatedSids.Length);
 
                         for (int i = 0; i < sourceAccounts.Count; i++)
@@ -381,31 +468,49 @@ namespace System.Security.Principal
                                 case SidNameUse.Alias:
                                 case SidNameUse.Computer:
                                 case SidNameUse.WellKnownGroup:
-                                    Result.Add( new SecurityIdentifier( Lts.Sid, true ));
+                                    Result.Add(new SecurityIdentifier(Lts.Sid, true));
                                     break;
 
                                 default:
-                                    someFailed = true;                         
-                                    Result.Add( sourceAccounts[i] );
+                                    someFailed = true;
+                                    Result.Add(sourceAccounts[i]);
                                     break;
                             }
                         }
                     }
                     else
                     {
-                        SidsPtr.Initialize((uint)sourceAccounts.Count, (uint)Marshal.SizeOf(typeof(Win32Native.LSA_TRANSLATED_SID)));
+                        SidsPtr.Initialize(
+                            (uint)sourceAccounts.Count,
+                            (uint)Marshal.SizeOf(typeof(Win32Native.LSA_TRANSLATED_SID))
+                        );
                         Win32.InitializeReferencedDomainsPointer(ReferencedDomainsPtr);
-                        Win32Native.LSA_REFERENCED_DOMAIN_LIST rdl = ReferencedDomainsPtr.Read<Win32Native.LSA_REFERENCED_DOMAIN_LIST>(0);
-                        SecurityIdentifier[] ReferencedDomains = new SecurityIdentifier[ rdl.Entries ];
+                        Win32Native.LSA_REFERENCED_DOMAIN_LIST rdl =
+                            ReferencedDomainsPtr.Read<Win32Native.LSA_REFERENCED_DOMAIN_LIST>(0);
+                        SecurityIdentifier[] ReferencedDomains = new SecurityIdentifier[
+                            rdl.Entries
+                        ];
 
                         for (int i = 0; i < rdl.Entries; i++)
                         {
-                            Win32Native.LSA_TRUST_INFORMATION ti = ( Win32Native.LSA_TRUST_INFORMATION )Marshal.PtrToStructure( new IntPtr(( long )rdl.Domains + i * Marshal.SizeOf( typeof( Win32Native.LSA_TRUST_INFORMATION ))), typeof( Win32Native.LSA_TRUST_INFORMATION ));
-                    
-                            ReferencedDomains[i] = new SecurityIdentifier( ti.Sid, true );
+                            Win32Native.LSA_TRUST_INFORMATION ti =
+                                (Win32Native.LSA_TRUST_INFORMATION)
+                                    Marshal.PtrToStructure(
+                                        new IntPtr(
+                                            (long)rdl.Domains
+                                                + i
+                                                    * Marshal.SizeOf(
+                                                        typeof(Win32Native.LSA_TRUST_INFORMATION)
+                                                    )
+                                        ),
+                                        typeof(Win32Native.LSA_TRUST_INFORMATION)
+                                    );
+
+                            ReferencedDomains[i] = new SecurityIdentifier(ti.Sid, true);
                         }
 
-                        Win32Native.LSA_TRANSLATED_SID[] translatedSids = new Win32Native.LSA_TRANSLATED_SID[sourceAccounts.Count];
+                        Win32Native.LSA_TRANSLATED_SID[] translatedSids =
+                            new Win32Native.LSA_TRANSLATED_SID[sourceAccounts.Count];
                         SidsPtr.ReadArray(0, translatedSids, 0, translatedSids.Length);
 
                         for (int i = 0; i < sourceAccounts.Count; i++)
@@ -419,13 +524,18 @@ namespace System.Security.Principal
                                 case SidNameUse.Alias:
                                 case SidNameUse.Computer:
                                 case SidNameUse.WellKnownGroup:
-                                    Result.Add( new SecurityIdentifier( ReferencedDomains[ Lts.DomainIndex ], Lts.Rid ));
+                                    Result.Add(
+                                        new SecurityIdentifier(
+                                            ReferencedDomains[Lts.DomainIndex],
+                                            Lts.Rid
+                                        )
+                                    );
                                     break;
 
                                 default:
-                                   someFailed = true;
-                                   Result.Add( sourceAccounts[i] );
-                                   break;
+                                    someFailed = true;
+                                    Result.Add(sourceAccounts[i]);
+                                    break;
                             }
                         }
                     }
@@ -434,7 +544,7 @@ namespace System.Security.Principal
                 {
                     for (int i = 0; i < sourceAccounts.Count; i++)
                     {
-                        Result.Add( sourceAccounts[i] );
+                        Result.Add(sourceAccounts[i]);
                     }
                 }
 

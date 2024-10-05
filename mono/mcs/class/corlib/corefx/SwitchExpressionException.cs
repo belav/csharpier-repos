@@ -19,10 +19,11 @@ namespace System.Runtime.CompilerServices
         public SwitchExpressionException()
             : base(SR.Arg_SwitchExpressionException) { }
 
-        public SwitchExpressionException(Exception innerException) :
-            base(SR.Arg_SwitchExpressionException, innerException) { }
+        public SwitchExpressionException(Exception innerException)
+            : base(SR.Arg_SwitchExpressionException, innerException) { }
 
-        public SwitchExpressionException(object unmatchedValue) : this()
+        public SwitchExpressionException(object unmatchedValue)
+            : this()
         {
             UnmatchedValue = unmatchedValue;
         }
@@ -33,7 +34,8 @@ namespace System.Runtime.CompilerServices
             UnmatchedValue = info.GetValue(nameof(UnmatchedValue), typeof(object));
         }
 
-        public SwitchExpressionException(string message) : base(message) { }
+        public SwitchExpressionException(string message)
+            : base(message) { }
 
         public SwitchExpressionException(string message, Exception innerException)
             : base(message, innerException) { }
@@ -58,7 +60,10 @@ namespace System.Runtime.CompilerServices
                 {
                     return base.Message;
                 }
-                string valueMessage = SR.Format(SR.SwitchExpressionException_UnmatchedValue, UnmatchedValue.ToString());
+                string valueMessage = SR.Format(
+                    SR.SwitchExpressionException_UnmatchedValue,
+                    UnmatchedValue.ToString()
+                );
                 return base.Message + Environment.NewLine + valueMessage;
             }
         }

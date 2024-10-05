@@ -18,7 +18,10 @@ namespace System.ComponentModel
         /// translation context.
         /// </summary>
         [RequiresUnreferencedCode(TypeConverter.RequiresUnreferencedCodeMessage)]
-        public AmbientValueAttribute([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type, string value)
+        public AmbientValueAttribute(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type,
+            string value
+        )
         {
             // The try/catch here is because attributes should never throw exceptions. We would fail to
             // load an otherwise normal class.
@@ -26,9 +29,7 @@ namespace System.ComponentModel
             {
                 Value = TypeDescriptor.GetConverter(type).ConvertFromInvariantString(value);
             }
-            catch
-            {
-            }
+            catch { }
         }
 
         /// <summary>

@@ -95,7 +95,9 @@ public class PolicyHttpMessageHandler : DelegatingHandler
     /// Creates a new <see cref="PolicyHttpMessageHandler"/>.
     /// </summary>
     /// <param name="policySelector">A function which can select the desired policy for a given <see cref="HttpRequestMessage"/>.</param>
-    public PolicyHttpMessageHandler(Func<HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>> policySelector)
+    public PolicyHttpMessageHandler(
+        Func<HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>> policySelector
+    )
     {
         if (policySelector == null)
         {
@@ -106,7 +108,10 @@ public class PolicyHttpMessageHandler : DelegatingHandler
     }
 
     /// <inheritdoc />
-    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+    protected override async Task<HttpResponseMessage> SendAsync(
+        HttpRequestMessage request,
+        CancellationToken cancellationToken
+    )
     {
         if (request == null)
         {
@@ -128,7 +133,9 @@ public class PolicyHttpMessageHandler : DelegatingHandler
         try
         {
             var policy = _policy ?? SelectPolicy(request);
-            response = await policy.ExecuteAsync((c, ct) => SendCoreAsync(request, c, ct), context, cancellationToken).ConfigureAwait(false);
+            response = await policy
+                .ExecuteAsync((c, ct) => SendCoreAsync(request, c, ct), context, cancellationToken)
+                .ConfigureAwait(false);
         }
         finally
         {
@@ -148,7 +155,11 @@ public class PolicyHttpMessageHandler : DelegatingHandler
     /// <param name="context">The <see cref="Context"/>.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/>.</param>
     /// <returns>Returns a <see cref="Task{HttpResponseMessage}"/> that will yield a response when completed.</returns>
-    protected virtual async Task<HttpResponseMessage> SendCoreAsync(HttpRequestMessage request, Context context, CancellationToken cancellationToken)
+    protected virtual async Task<HttpResponseMessage> SendCoreAsync(
+        HttpRequestMessage request,
+        Context context,
+        CancellationToken cancellationToken
+    )
     {
         if (request == null)
         {
@@ -160,7 +171,10 @@ public class PolicyHttpMessageHandler : DelegatingHandler
             throw new ArgumentNullException(nameof(context));
         }
 
-        if (request.Properties.TryGetValue(PriorResponseKey, out var priorResult) && priorResult is IDisposable disposable)
+        if (
+            request.Properties.TryGetValue(PriorResponseKey, out var priorResult)
+            && priorResult is IDisposable disposable
+        )
         {
             // This is a retry, dispose the prior response to free up the connection.
             request.Properties.Remove(PriorResponseKey);
@@ -181,7 +195,8 @@ public class PolicyHttpMessageHandler : DelegatingHandler
         {
             var message = Resources.FormatPolicyHttpMessageHandler_PolicySelector_ReturnedNull(
                 "policySelector",
-                "Policy.NoOpAsync<HttpResponseMessage>()");
+                "Policy.NoOpAsync<HttpResponseMessage>()"
+            );
             throw new InvalidOperationException(message);
         }
 

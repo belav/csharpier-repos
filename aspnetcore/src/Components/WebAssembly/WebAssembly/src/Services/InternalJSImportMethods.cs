@@ -14,48 +14,48 @@ internal partial class InternalJSImportMethods : IInternalJSImportMethods
 
     private InternalJSImportMethods() { }
 
-    public string GetPersistedState()
-        => GetPersistedStateCore();
+    public string GetPersistedState() => GetPersistedStateCore();
 
-    [UnconditionalSuppressMessage("Trimming", "IL2067", Justification = "These are root components which belong to the user and are in assemblies that don't get trimmed.")]
+    [UnconditionalSuppressMessage(
+        "Trimming",
+        "IL2067",
+        Justification = "These are root components which belong to the user and are in assemblies that don't get trimmed."
+    )]
     public static async Task<RootComponentOperationBatch> GetInitialComponentUpdate()
     {
         var components = await GetInitialUpdateCore();
         return DefaultWebAssemblyJSRuntime.DeserializeOperations(components);
     }
 
-    public string GetApplicationEnvironment()
-        => GetApplicationEnvironmentCore();
+    public string GetApplicationEnvironment() => GetApplicationEnvironmentCore();
 
-    public void NavigationManager_EnableNavigationInterception(int rendererId)
-        => NavigationManager_EnableNavigationInterceptionCore(rendererId);
+    public void NavigationManager_EnableNavigationInterception(int rendererId) =>
+        NavigationManager_EnableNavigationInterceptionCore(rendererId);
 
-    public void NavigationManager_ScrollToElement(string id)
-        => NavigationManager_ScrollToElementCore(id);
+    public void NavigationManager_ScrollToElement(string id) =>
+        NavigationManager_ScrollToElementCore(id);
 
-    public string NavigationManager_GetLocationHref()
-        => NavigationManager_GetLocationHrefCore();
+    public string NavigationManager_GetLocationHref() => NavigationManager_GetLocationHrefCore();
 
-    public string NavigationManager_GetBaseUri()
-        => NavigationManager_GetBaseUriCore();
+    public string NavigationManager_GetBaseUri() => NavigationManager_GetBaseUriCore();
 
-    public void NavigationManager_SetHasLocationChangingListeners(int rendererId, bool value)
-        => NavigationManager_SetHasLocationChangingListenersCore(rendererId, value);
+    public void NavigationManager_SetHasLocationChangingListeners(int rendererId, bool value) =>
+        NavigationManager_SetHasLocationChangingListenersCore(rendererId, value);
 
-    public int RegisteredComponents_GetRegisteredComponentsCount()
-        => RegisteredComponents_GetRegisteredComponentsCountCore();
+    public int RegisteredComponents_GetRegisteredComponentsCount() =>
+        RegisteredComponents_GetRegisteredComponentsCountCore();
 
-    public string RegisteredComponents_GetAssembly(int id)
-        => RegisteredComponents_GetAssemblyCore(id);
+    public string RegisteredComponents_GetAssembly(int id) =>
+        RegisteredComponents_GetAssemblyCore(id);
 
-    public string RegisteredComponents_GetTypeName(int id)
-        => RegisteredComponents_GetTypeNameCore(id);
+    public string RegisteredComponents_GetTypeName(int id) =>
+        RegisteredComponents_GetTypeNameCore(id);
 
-    public string RegisteredComponents_GetParameterDefinitions(int id)
-        => RegisteredComponents_GetParameterDefinitionsCore(id);
+    public string RegisteredComponents_GetParameterDefinitions(int id) =>
+        RegisteredComponents_GetParameterDefinitionsCore(id);
 
-    public string RegisteredComponents_GetParameterValues(int id)
-        => RegisteredComponents_GetParameterValuesCore(id);
+    public string RegisteredComponents_GetParameterValues(int id) =>
+        RegisteredComponents_GetParameterValuesCore(id);
 
     [JSImport("Blazor._internal.getPersistedState", "blazor-internal")]
     private static partial string GetPersistedStateCore();
@@ -79,7 +79,10 @@ internal partial class InternalJSImportMethods : IInternalJSImportMethods
     private static partial string NavigationManager_GetBaseUriCore();
 
     [JSImport(BrowserNavigationManagerInterop.SetHasLocationChangingListeners, "blazor-internal")]
-    private static partial void NavigationManager_SetHasLocationChangingListenersCore(int rendererId, bool value);
+    private static partial void NavigationManager_SetHasLocationChangingListenersCore(
+        int rendererId,
+        bool value
+    );
 
     [JSImport(RegisteredComponentsInterop.GetRegisteredComponentsCount, "blazor-internal")]
     private static partial int RegisteredComponents_GetRegisteredComponentsCountCore();

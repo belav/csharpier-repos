@@ -6,7 +6,11 @@ using System.Runtime.Versioning;
 
 namespace System.Security.Cryptography
 {
-    [Obsolete(Obsoletions.DerivedCryptographicTypesMessage, DiagnosticId = Obsoletions.DerivedCryptographicTypesDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.DerivedCryptographicTypesMessage,
+        DiagnosticId = Obsoletions.DerivedCryptographicTypesDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
     [EditorBrowsable(EditorBrowsableState.Never)]
     [UnsupportedOSPlatform("browser")]
     public sealed class AesManaged : Aes
@@ -62,11 +66,19 @@ namespace System.Security.Cryptography
 
         public override KeySizes[] LegalBlockSizes => _impl.LegalBlockSizes;
         public override KeySizes[] LegalKeySizes => _impl.LegalKeySizes;
+
         public override ICryptoTransform CreateEncryptor() => _impl.CreateEncryptor();
-        public override ICryptoTransform CreateEncryptor(byte[] rgbKey, byte[]? rgbIV) => _impl.CreateEncryptor(rgbKey, rgbIV);
+
+        public override ICryptoTransform CreateEncryptor(byte[] rgbKey, byte[]? rgbIV) =>
+            _impl.CreateEncryptor(rgbKey, rgbIV);
+
         public override ICryptoTransform CreateDecryptor() => _impl.CreateDecryptor();
-        public override ICryptoTransform CreateDecryptor(byte[] rgbKey, byte[]? rgbIV) => _impl.CreateDecryptor(rgbKey, rgbIV);
+
+        public override ICryptoTransform CreateDecryptor(byte[] rgbKey, byte[]? rgbIV) =>
+            _impl.CreateDecryptor(rgbKey, rgbIV);
+
         public override void GenerateIV() => _impl.GenerateIV();
+
         public override void GenerateKey() => _impl.GenerateKey();
 
         protected override void Dispose(bool disposing)

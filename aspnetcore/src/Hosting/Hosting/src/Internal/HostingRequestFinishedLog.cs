@@ -11,9 +11,11 @@ using static HostingRequestStartingLog;
 
 internal sealed class HostingRequestFinishedLog : IReadOnlyList<KeyValuePair<string, object?>>
 {
-    internal static readonly Func<object, Exception?, string> Callback = (state, exception) => ((HostingRequestFinishedLog)state).ToString();
+    internal static readonly Func<object, Exception?, string> Callback = (state, exception) =>
+        ((HostingRequestFinishedLog)state).ToString();
 
-    private const string OriginalFormat = "Request finished {Protocol} {Method} {Scheme}://{Host}{PathBase}{Path}{QueryString} - {StatusCode} {ContentLength} {ContentType} {ElapsedMilliseconds}ms";
+    private const string OriginalFormat =
+        "Request finished {Protocol} {Method} {Scheme}://{Host}{PathBase}{Path}{QueryString} - {StatusCode} {ContentLength} {ContentType} {ElapsedMilliseconds}ms";
     private readonly HostingApplication.Context _context;
 
     private string? _cachedToString;
@@ -32,17 +34,35 @@ internal sealed class HostingRequestFinishedLog : IReadOnlyList<KeyValuePair<str
 
             return index switch
             {
-                0 => new KeyValuePair<string, object?>("ElapsedMilliseconds", Elapsed.TotalMilliseconds),
-                1 => new KeyValuePair<string, object?>(nameof(response.StatusCode), response.StatusCode),
-                2 => new KeyValuePair<string, object?>(nameof(response.ContentType), response.ContentType),
-                3 => new KeyValuePair<string, object?>(nameof(response.ContentLength), response.ContentLength),
+                0 => new KeyValuePair<string, object?>(
+                    "ElapsedMilliseconds",
+                    Elapsed.TotalMilliseconds
+                ),
+                1 => new KeyValuePair<string, object?>(
+                    nameof(response.StatusCode),
+                    response.StatusCode
+                ),
+                2 => new KeyValuePair<string, object?>(
+                    nameof(response.ContentType),
+                    response.ContentType
+                ),
+                3 => new KeyValuePair<string, object?>(
+                    nameof(response.ContentLength),
+                    response.ContentLength
+                ),
                 4 => new KeyValuePair<string, object?>(nameof(request.Protocol), request.Protocol),
                 5 => new KeyValuePair<string, object?>(nameof(request.Method), request.Method),
                 6 => new KeyValuePair<string, object?>(nameof(request.Scheme), request.Scheme),
                 7 => new KeyValuePair<string, object?>(nameof(request.Host), request.Host.Value),
-                8 => new KeyValuePair<string, object?>(nameof(request.PathBase), request.PathBase.Value),
+                8 => new KeyValuePair<string, object?>(
+                    nameof(request.PathBase),
+                    request.PathBase.Value
+                ),
                 9 => new KeyValuePair<string, object?>(nameof(request.Path), request.Path.Value),
-                10 => new KeyValuePair<string, object?>(nameof(request.QueryString), request.QueryString.Value),
+                10 => new KeyValuePair<string, object?>(
+                    nameof(request.QueryString),
+                    request.QueryString.Value
+                ),
                 11 => new KeyValuePair<string, object?>("{OriginalFormat}", OriginalFormat),
                 _ => throw new ArgumentOutOfRangeException(nameof(index)),
             };
@@ -63,7 +83,8 @@ internal sealed class HostingRequestFinishedLog : IReadOnlyList<KeyValuePair<str
 
             var request = _context.HttpContext.Request;
             var response = _context.HttpContext.Response;
-            _cachedToString = $"Request finished {request.Protocol} {request.Method} {request.Scheme}://{request.Host.Value}{request.PathBase.Value}{request.Path.Value}{request.QueryString.Value} - {response.StatusCode.ToString(CultureInfo.InvariantCulture)} {ValueOrEmptyMarker(response.ContentLength)} {EscapedValueOrEmptyMarker(response.ContentType)} {Elapsed.TotalMilliseconds.ToString("0.0000", CultureInfo.InvariantCulture)}ms";
+            _cachedToString =
+                $"Request finished {request.Protocol} {request.Method} {request.Scheme}://{request.Host.Value}{request.PathBase.Value}{request.Path.Value}{request.QueryString.Value} - {response.StatusCode.ToString(CultureInfo.InvariantCulture)} {ValueOrEmptyMarker(response.ContentLength)} {EscapedValueOrEmptyMarker(response.ContentType)} {Elapsed.TotalMilliseconds.ToString("0.0000", CultureInfo.InvariantCulture)}ms";
         }
 
         return _cachedToString;

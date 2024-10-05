@@ -34,7 +34,7 @@ public class GitHub_1133
     {
         s_dt = dt;
     }
-    
+
     [Fact]
     public static int TestEntryPoint()
     {

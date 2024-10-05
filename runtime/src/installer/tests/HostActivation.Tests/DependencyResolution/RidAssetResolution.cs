@@ -14,6 +14,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
     public abstract class RidAssetResolutionBase : ComponentDependencyResolutionBase
     {
         private static Version UseRidGraphDisabledVersion = new Version(8, 0);
+
         public class TestSetup
         {
             // Explicit RID (environment variable) to set when running the test
@@ -47,14 +48,15 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 }
             }
 
-            public override string ToString() => $"""
-                {nameof(Rid)}: {(Rid ?? "<null>")}
-                {nameof(UseRidGraph)}: {(UseRidGraph.HasValue ? UseRidGraph : "<null>")}
-                {nameof(HasRidGraph)}: {HasRidGraph}
-                [computed]
-                  {nameof(ShouldUseRidGraph)}: {ShouldUseRidGraph}
-                  {nameof(ShouldUseFallbackRid)}: {ShouldUseFallbackRid}
-                """;
+            public override string ToString() =>
+                $"""
+                    {nameof(Rid)}: {(Rid ?? "<null>")}
+                    {nameof(UseRidGraph)}: {(UseRidGraph.HasValue ? UseRidGraph : "<null>")}
+                    {nameof(HasRidGraph)}: {HasRidGraph}
+                    [computed]
+                      {nameof(ShouldUseRidGraph)}: {ShouldUseRidGraph}
+                      {nameof(ShouldUseFallbackRid)}: {ShouldUseFallbackRid}
+                    """;
         };
 
         public class ResolvedPaths
@@ -69,7 +71,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             Action<NetCoreAppBuilder.RuntimeLibraryBuilder> assetsCustomizer,
             TestSetup setup,
             ResolvedPaths expected,
-            Action<NetCoreAppBuilder> appCustomizer = null);
+            Action<NetCoreAppBuilder> appCustomizer = null
+        );
 
         protected TestApp UpdateAppConfigForTest(TestApp app, TestSetup setup, bool copyOnUpdate)
         {
@@ -82,7 +85,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             RuntimeConfig config = RuntimeConfig.FromFile(app.RuntimeConfigJson);
 
             if (setup.UseRidGraph.HasValue)
-                config.WithProperty("System.Runtime.Loader.UseRidGraph", setup.UseRidGraph.ToString());
+                config.WithProperty(
+                    "System.Runtime.Loader.UseRidGraph",
+                    setup.UseRidGraph.ToString()
+                );
 
             config.Save();
 
@@ -101,7 +107,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         private const string MacOSAssembly = "osx/MacOSAssembly.dll";
         private const string WindowsAssembly = "win/WindowsAssembly.dll";
 
-        private static (string included, string excluded) GetExpectedPathsforCurrentRid(string linux, string macos, string windows)
+        private static (string included, string excluded) GetExpectedPathsforCurrentRid(
+            string linux,
+            string macos,
+            string windows
+        )
         {
             if (OperatingSystem.IsLinux())
                 return (linux, $"{macos};{windows}");
@@ -115,15 +125,24 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             return (null, $"{linux};{macos};{windows}");
         }
 
-        private void RidSpecificAssemblyImpl(TestSetup setup, string includedPath, string excludedPath)
+        private void RidSpecificAssemblyImpl(
+            TestSetup setup,
+            string includedPath,
+            string excludedPath
+        )
         {
             RunTest(
-                p => p
-                    .WithAssemblyGroup("win", g => g.WithAsset(WindowsAssembly))
-                    .WithAssemblyGroup("linux", g => g.WithAsset(LinuxAssembly))
-                    .WithAssemblyGroup("osx", g => g.WithAsset(MacOSAssembly)),
+                p =>
+                    p.WithAssemblyGroup("win", g => g.WithAsset(WindowsAssembly))
+                        .WithAssemblyGroup("linux", g => g.WithAsset(LinuxAssembly))
+                        .WithAssemblyGroup("osx", g => g.WithAsset(MacOSAssembly)),
                 setup,
-                new ResolvedPaths() { IncludedAssemblyPaths = includedPath, ExcludedAssemblyPaths = excludedPath });
+                new ResolvedPaths()
+                {
+                    IncludedAssemblyPaths = includedPath,
+                    ExcludedAssemblyPaths = excludedPath,
+                }
+            );
         }
 
         [Theory]
@@ -131,12 +150,22 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         [InlineData("win10-x64", WindowsAssembly, $"{LinuxAssembly};{MacOSAssembly}")]
         [InlineData("linux-x64", LinuxAssembly, $"{MacOSAssembly};{WindowsAssembly}")]
         [InlineData("osx-x64", MacOSAssembly, $"{LinuxAssembly};{WindowsAssembly}")]
-        public void RidSpecificAssembly_RidGraph(string rid, string includedPath, string excludedPath)
+        public void RidSpecificAssembly_RidGraph(
+            string rid,
+            string includedPath,
+            string excludedPath
+        )
         {
             RidSpecificAssemblyImpl(
-                new TestSetup() { Rid = rid, HasRidGraph = true, UseRidGraph = true },
+                new TestSetup()
+                {
+                    Rid = rid,
+                    HasRidGraph = true,
+                    UseRidGraph = true,
+                },
                 includedPath,
-                excludedPath);
+                excludedPath
+            );
         }
 
         [Theory]
@@ -154,7 +183,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         [InlineData(UnknownRid, false, true)]
         [InlineData(UnknownRid, false, false)]
         [InlineData(UnknownRid, false, null)]
-        public void RidSpecificAssembly_CurrentRid(string rid, bool hasRuntimeFallbacks, bool? useRidGraph)
+        public void RidSpecificAssembly_CurrentRid(
+            string rid,
+            bool hasRuntimeFallbacks,
+            bool? useRidGraph
+        )
         {
             // When not using the RID graph, the host uses the target OS for which it was built to determine applicable
             // RIDs that apply, so it can find both the arch-specific and the OS-only assets.
@@ -165,13 +198,23 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             if (useRidGraph != true || hasRuntimeFallbacks)
             {
                 // Host should resolve to the RID corresponding to the platform on which it is running
-                (includedPath, excludedPath) = GetExpectedPathsforCurrentRid(LinuxAssembly, MacOSAssembly, WindowsAssembly);
+                (includedPath, excludedPath) = GetExpectedPathsforCurrentRid(
+                    LinuxAssembly,
+                    MacOSAssembly,
+                    WindowsAssembly
+                );
             }
 
             RidSpecificAssemblyImpl(
-                new TestSetup() { Rid = rid, HasRidGraph = hasRuntimeFallbacks, UseRidGraph = useRidGraph },
+                new TestSetup()
+                {
+                    Rid = rid,
+                    HasRidGraph = hasRuntimeFallbacks,
+                    UseRidGraph = useRidGraph,
+                },
                 includedPath,
-                excludedPath);
+                excludedPath
+            );
         }
 
         [Fact]
@@ -182,8 +225,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             string assetPath = $"{FallbackRid}/{FallbackRid}Asset";
             RunTest(
                 p => p.WithAssemblyGroup(FallbackRid, g => g.WithAsset(assetPath)),
-                new TestSetup() { Rid = null, HasRidGraph = false, UseRidGraph = true },
-                new ResolvedPaths() { IncludedAssemblyPaths = assetPath });
+                new TestSetup()
+                {
+                    Rid = null,
+                    HasRidGraph = false,
+                    UseRidGraph = true,
+                },
+                new ResolvedPaths() { IncludedAssemblyPaths = assetPath }
+            );
         }
 
         [Theory]
@@ -212,18 +261,41 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             RunTest(
                 p => p.WithAssemblyGroup(UnknownRid, g => g.WithAsset(assetPath)),
                 new TestSetup() { Rid = UnknownRid, UseRidGraph = useRidGraph },
-                new ResolvedPaths() { IncludedAssemblyPaths = includedPath, ExcludedAssemblyPaths = excludedPath });
+                new ResolvedPaths()
+                {
+                    IncludedAssemblyPaths = includedPath,
+                    ExcludedAssemblyPaths = excludedPath,
+                }
+            );
         }
 
-        private void RidSpecificNativeLibraryImpl(TestSetup setup, string includedPath, string excludedPath)
+        private void RidSpecificNativeLibraryImpl(
+            TestSetup setup,
+            string includedPath,
+            string excludedPath
+        )
         {
             RunTest(
-                p => p
-                    .WithNativeLibraryGroup("win", g => g.WithAsset("win/WindowsNativeLibrary.dll"))
-                    .WithNativeLibraryGroup("linux", g => g.WithAsset("linux/LinuxNativeLibrary.so"))
-                    .WithNativeLibraryGroup("osx", g => g.WithAsset("osx/MacOSNativeLibrary.dylib")),
+                p =>
+                    p.WithNativeLibraryGroup(
+                            "win",
+                            g => g.WithAsset("win/WindowsNativeLibrary.dll")
+                        )
+                        .WithNativeLibraryGroup(
+                            "linux",
+                            g => g.WithAsset("linux/LinuxNativeLibrary.so")
+                        )
+                        .WithNativeLibraryGroup(
+                            "osx",
+                            g => g.WithAsset("osx/MacOSNativeLibrary.dylib")
+                        ),
                 setup,
-                new ResolvedPaths() { IncludedNativeLibraryPaths = includedPath, ExcludedNativeLibraryPaths = excludedPath });
+                new ResolvedPaths()
+                {
+                    IncludedNativeLibraryPaths = includedPath,
+                    ExcludedNativeLibraryPaths = excludedPath,
+                }
+            );
         }
 
         [Theory]
@@ -231,11 +303,22 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         [InlineData("win10-x64", "win", "linux;osx")]
         [InlineData("linux-x64", "linux", "osx;win")]
         [InlineData("osx-x64", "osx", "linux;win")]
-        public void RidSpecificNativeLibrary_RidGraph(string rid, string includedPath, string excludedPath)
+        public void RidSpecificNativeLibrary_RidGraph(
+            string rid,
+            string includedPath,
+            string excludedPath
+        )
         {
             RidSpecificNativeLibraryImpl(
-                new TestSetup() { Rid = rid, HasRidGraph = true, UseRidGraph = true },
-                includedPath, excludedPath);
+                new TestSetup()
+                {
+                    Rid = rid,
+                    HasRidGraph = true,
+                    UseRidGraph = true,
+                },
+                includedPath,
+                excludedPath
+            );
         }
 
         [Theory]
@@ -253,7 +336,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         [InlineData(UnknownRid, false, true)]
         [InlineData(UnknownRid, false, false)]
         [InlineData(UnknownRid, false, null)]
-        public void RidSpecificNativeLibrary_CurrentRid(string rid, bool hasRuntimeFallbacks, bool? useRidGraph)
+        public void RidSpecificNativeLibrary_CurrentRid(
+            string rid,
+            bool hasRuntimeFallbacks,
+            bool? useRidGraph
+        )
         {
             // When not using the RID graph, the host uses the target OS for which it was built to determine applicable
             // RIDs that apply, so it can find both the arch-specific and the OS-only assets.
@@ -264,13 +351,23 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             if (useRidGraph != true || hasRuntimeFallbacks)
             {
                 // Host should resolve to the RID corresponding to the platform on which it is running
-                (includedPath, excludedPath) = GetExpectedPathsforCurrentRid("linux/", "osx/", "win/");
+                (includedPath, excludedPath) = GetExpectedPathsforCurrentRid(
+                    "linux/",
+                    "osx/",
+                    "win/"
+                );
             }
 
             RidSpecificNativeLibraryImpl(
-                new TestSetup() { Rid = rid, HasRidGraph = hasRuntimeFallbacks, UseRidGraph = useRidGraph },
+                new TestSetup()
+                {
+                    Rid = rid,
+                    HasRidGraph = hasRuntimeFallbacks,
+                    UseRidGraph = useRidGraph,
+                },
                 includedPath,
-                excludedPath);
+                excludedPath
+            );
         }
 
         [Fact]
@@ -281,8 +378,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             string assetPath = $"{FallbackRid}/{FallbackRid}Asset";
             RunTest(
                 p => p.WithNativeLibraryGroup(FallbackRid, g => g.WithAsset(assetPath)),
-                new TestSetup() { Rid = null, HasRidGraph = false, UseRidGraph = true },
-                new ResolvedPaths() { IncludedNativeLibraryPaths = $"{FallbackRid}/" });
+                new TestSetup()
+                {
+                    Rid = null,
+                    HasRidGraph = false,
+                    UseRidGraph = true,
+                },
+                new ResolvedPaths() { IncludedNativeLibraryPaths = $"{FallbackRid}/" }
+            );
         }
 
         [Theory]
@@ -311,7 +414,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             RunTest(
                 p => p.WithNativeLibraryGroup(UnknownRid, g => g.WithAsset(assetPath)),
                 new TestSetup() { Rid = UnknownRid, UseRidGraph = useRidGraph },
-                new ResolvedPaths() { IncludedNativeLibraryPaths = includedPath, ExcludedNativeLibraryPaths = excludedPath });
+                new ResolvedPaths()
+                {
+                    IncludedNativeLibraryPaths = includedPath,
+                    ExcludedNativeLibraryPaths = excludedPath,
+                }
+            );
         }
 
         [Theory]
@@ -321,12 +429,18 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         public void MostSpecificRidAssemblySelected_RidGraph(string rid, string expectedPath)
         {
             RunTest(
-                p => p
-                    .WithAssemblyGroup("any", g => g.WithAsset("any/ManagedAny.dll"))
-                    .WithAssemblyGroup("win", g => g.WithAsset("win/ManagedWin.dll"))
-                    .WithAssemblyGroup("win-x64", g => g.WithAsset("win-x64/ManagedWin64.dll")),
-                new TestSetup() { Rid = rid, HasRidGraph = true, UseRidGraph = true },
-                new ResolvedPaths() { IncludedAssemblyPaths = expectedPath });
+                p =>
+                    p.WithAssemblyGroup("any", g => g.WithAsset("any/ManagedAny.dll"))
+                        .WithAssemblyGroup("win", g => g.WithAsset("win/ManagedWin.dll"))
+                        .WithAssemblyGroup("win-x64", g => g.WithAsset("win-x64/ManagedWin64.dll")),
+                new TestSetup()
+                {
+                    Rid = rid,
+                    HasRidGraph = true,
+                    UseRidGraph = true,
+                },
+                new ResolvedPaths() { IncludedAssemblyPaths = expectedPath }
+            );
         }
 
         // The build RID from the test context should match the build RID of the host under test
@@ -338,7 +452,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         private static string CurrentOSAsset = $"{CurrentOS}/{CurrentOS}Asset.dll";
 
         // Append a different architecture - arm64 if current architecture is x64, otherwise x64
-        private static string DifferentArch = $"{CurrentOS}-{(TestContext.BuildArchitecture == "x64" ? "arm64" : "x64")}";
+        private static string DifferentArch =
+            $"{CurrentOS}-{(TestContext.BuildArchitecture == "x64" ? "arm64" : "x64")}";
         private static string DifferentArchAsset = $"{DifferentArch}/{DifferentArch}Asset.dll";
 
         [Theory]
@@ -354,7 +469,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         [InlineData(false, false, true)]
         [InlineData(false, false, false)]
         [InlineData(false, false, null)]
-        public void MostSpecificRidAssemblySelected(bool includeCurrentArch, bool hasRuntimeFallbacks, bool? useRidGraph)
+        public void MostSpecificRidAssemblySelected(
+            bool includeCurrentArch,
+            bool hasRuntimeFallbacks,
+            bool? useRidGraph
+        )
         {
             // When not using the RID graph, the host uses the target OS for which it was built to determine applicable
             // RIDs that apply, so it can find both the arch-specific and the OS-only assets.
@@ -375,7 +494,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 }
             }
 
-            RunTest(p =>
+            RunTest(
+                p =>
                 {
                     p.WithAssemblyGroup(CurrentOS, g => g.WithAsset(CurrentOSAsset));
                     p.WithAssemblyGroup(DifferentArch, g => g.WithAsset(DifferentArchAsset));
@@ -385,8 +505,18 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                     }
                 },
                 // RID is computed at run-time
-                new TestSetup() { Rid = null, HasRidGraph = hasRuntimeFallbacks, UseRidGraph = useRidGraph },
-                new ResolvedPaths() { IncludedAssemblyPaths = includedPath, ExcludedAssemblyPaths = excludedPath });
+                new TestSetup()
+                {
+                    Rid = null,
+                    HasRidGraph = hasRuntimeFallbacks,
+                    UseRidGraph = useRidGraph,
+                },
+                new ResolvedPaths()
+                {
+                    IncludedAssemblyPaths = includedPath,
+                    ExcludedAssemblyPaths = excludedPath,
+                }
+            );
         }
 
         [Theory]
@@ -396,12 +526,21 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         public void MostSpecificRidNativeLibrarySelected_RidGraph(string rid, string expectedPath)
         {
             RunTest(
-                p => p
-                    .WithNativeLibraryGroup("any", g => g.WithAsset("any/NativeAny.dll"))
-                    .WithNativeLibraryGroup("win", g => g.WithAsset("win/NativeWin.dll"))
-                    .WithNativeLibraryGroup("win-x64", g => g.WithAsset("win-x64/NativeWin64.dll")),
-                new TestSetup() { Rid = rid, HasRidGraph = true, UseRidGraph = true },
-                new ResolvedPaths() { IncludedNativeLibraryPaths = expectedPath });
+                p =>
+                    p.WithNativeLibraryGroup("any", g => g.WithAsset("any/NativeAny.dll"))
+                        .WithNativeLibraryGroup("win", g => g.WithAsset("win/NativeWin.dll"))
+                        .WithNativeLibraryGroup(
+                            "win-x64",
+                            g => g.WithAsset("win-x64/NativeWin64.dll")
+                        ),
+                new TestSetup()
+                {
+                    Rid = rid,
+                    HasRidGraph = true,
+                    UseRidGraph = true,
+                },
+                new ResolvedPaths() { IncludedNativeLibraryPaths = expectedPath }
+            );
         }
 
         [Theory]
@@ -417,7 +556,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         [InlineData(false, false, true)]
         [InlineData(false, false, false)]
         [InlineData(false, false, null)]
-        public void MostSpecificRidNativeLibrarySelected(bool includeCurrentArch, bool hasRuntimeFallbacks, bool? useRidGraph)
+        public void MostSpecificRidNativeLibrarySelected(
+            bool includeCurrentArch,
+            bool hasRuntimeFallbacks,
+            bool? useRidGraph
+        )
         {
             // When not using the RID graph, the host uses the target OS for which it was built to determine applicable
             // RIDs that apply, so it can find both the arch-specific and the OS-only assets.
@@ -438,7 +581,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 }
             }
 
-            RunTest(p =>
+            RunTest(
+                p =>
                 {
                     p.WithNativeLibraryGroup(CurrentOS, g => g.WithAsset(CurrentOSAsset));
                     p.WithNativeLibraryGroup(DifferentArch, g => g.WithAsset(DifferentArchAsset));
@@ -448,25 +592,49 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                     }
                 },
                 // RID is computed at run-time
-                new TestSetup() { Rid = null, HasRidGraph = hasRuntimeFallbacks, UseRidGraph = useRidGraph },
-                new ResolvedPaths() { IncludedNativeLibraryPaths = includedPath, ExcludedNativeLibraryPaths = excludedPath });
+                new TestSetup()
+                {
+                    Rid = null,
+                    HasRidGraph = hasRuntimeFallbacks,
+                    UseRidGraph = useRidGraph,
+                },
+                new ResolvedPaths()
+                {
+                    IncludedNativeLibraryPaths = includedPath,
+                    ExcludedNativeLibraryPaths = excludedPath,
+                }
+            );
         }
 
         [Theory]
         [InlineData("win10-x64", "win/ManagedWin.dll", "native/win-x64")]
         [InlineData("win10-x86", "win/ManagedWin.dll", "native/win-x86")]
         [InlineData("linux-x64", "any/ManagedAny.dll", "native/linux")]
-        public void MostSpecificRidAssemblySelectedPerType_RidGraph(string rid, string expectedAssemblyPath, string expectedNativePath)
+        public void MostSpecificRidAssemblySelectedPerType_RidGraph(
+            string rid,
+            string expectedAssemblyPath,
+            string expectedNativePath
+        )
         {
             RunTest(
-                p => p
-                    .WithAssemblyGroup("any", g => g.WithAsset("any/ManagedAny.dll"))
-                    .WithAssemblyGroup("win", g => g.WithAsset("win/ManagedWin.dll"))
-                    .WithNativeLibraryGroup("win-x64", g => g.WithAsset("native/win-x64/n.dll"))
-                    .WithNativeLibraryGroup("win-x86", g => g.WithAsset("native/win-x86/n.dll"))
-                    .WithNativeLibraryGroup("linux", g => g.WithAsset("native/linux/n.so")),
-                new TestSetup() { Rid = rid, HasRidGraph = true, UseRidGraph = true },
-                new ResolvedPaths() { IncludedAssemblyPaths = expectedAssemblyPath, IncludedNativeLibraryPaths = expectedNativePath });
+                p =>
+                    p.WithAssemblyGroup("any", g => g.WithAsset("any/ManagedAny.dll"))
+                        .WithAssemblyGroup("win", g => g.WithAsset("win/ManagedWin.dll"))
+                        .WithNativeLibraryGroup("win-x64", g => g.WithAsset("native/win-x64/n.dll"))
+                        .WithNativeLibraryGroup("win-x86", g => g.WithAsset("native/win-x86/n.dll"))
+                        .WithNativeLibraryGroup("linux", g => g.WithAsset("native/linux/n.so")),
+                new TestSetup()
+                {
+                    Rid = rid,
+                    HasRidGraph = true,
+                    UseRidGraph = true,
+                },
+                new ResolvedPaths()
+                {
+                    IncludedAssemblyPaths = expectedAssemblyPath,
+                    IncludedNativeLibraryPaths = expectedNativePath,
+                }
+            );
         }
 
         [Theory]
@@ -476,7 +644,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         [InlineData(false, true)]
         [InlineData(false, false)]
         [InlineData(false, null)]
-        public void MostSpecificRidAssemblySelectedPerType(bool hasRuntimeFallbacks, bool? useRidGraph)
+        public void MostSpecificRidAssemblySelectedPerType(
+            bool hasRuntimeFallbacks,
+            bool? useRidGraph
+        )
         {
             // When not using the RID graph, the host uses the target OS for which it was built to determine applicable
             // RIDs that apply, so it can find both the arch-specific and the OS-only assets.
@@ -495,52 +666,117 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             }
 
             RunTest(
-                p => p
-                    .WithAssemblyGroup(CurrentOS, g => g.WithAsset(CurrentOSAsset))
-                    .WithNativeLibraryGroup(CurrentOS, g => g.WithAsset($"native/{CurrentOSAsset}"))
-                    .WithNativeLibraryGroup(CurrentRid, g => g.WithAsset($"native/{CurrentRidAsset}")),
+                p =>
+                    p.WithAssemblyGroup(CurrentOS, g => g.WithAsset(CurrentOSAsset))
+                        .WithNativeLibraryGroup(
+                            CurrentOS,
+                            g => g.WithAsset($"native/{CurrentOSAsset}")
+                        )
+                        .WithNativeLibraryGroup(
+                            CurrentRid,
+                            g => g.WithAsset($"native/{CurrentRidAsset}")
+                        ),
                 // RID is computed at run-time
-                new TestSetup() { Rid = null, HasRidGraph = hasRuntimeFallbacks, UseRidGraph = useRidGraph },
+                new TestSetup()
+                {
+                    Rid = null,
+                    HasRidGraph = hasRuntimeFallbacks,
+                    UseRidGraph = useRidGraph,
+                },
                 new ResolvedPaths()
                 {
-                    IncludedAssemblyPaths = includedAssemblyPath, ExcludedAssemblyPaths = excludedAssemblyPath,
-                    IncludedNativeLibraryPaths = includedNativePath, ExcludedNativeLibraryPaths = excludedNativePath
-                });
+                    IncludedAssemblyPaths = includedAssemblyPath,
+                    ExcludedAssemblyPaths = excludedAssemblyPath,
+                    IncludedNativeLibraryPaths = includedNativePath,
+                    ExcludedNativeLibraryPaths = excludedNativePath,
+                }
+            );
         }
 
         [Theory]
         // For "win" RIDs the DependencyLib which is RID-agnostic will not be included,
         // since there are other assembly (runtime) assets with more specific RID match.
-        [InlineData("win10-x64", "win/ManagedWin.dll;win/AnotherWin.dll", "native/win10-x64;native/win10-x64-2")]
+        [InlineData(
+            "win10-x64",
+            "win/ManagedWin.dll;win/AnotherWin.dll",
+            "native/win10-x64;native/win10-x64-2"
+        )]
         [InlineData("win10-x86", "win/ManagedWin.dll;win/AnotherWin.dll", "native/win-x86")]
         // For "linux" on the other hand the DependencyLib will be resolved because there are
         // no RID-specific assembly assets available.
         [InlineData("linux-x64", "DependencyLib.dll", "native/linux")]
-        public void MostSpecificRidAssemblySelectedPerTypeMultipleAssets_RidGraph(string rid, string expectedAssemblyPath, string expectedNativePath)
+        public void MostSpecificRidAssemblySelectedPerTypeMultipleAssets_RidGraph(
+            string rid,
+            string expectedAssemblyPath,
+            string expectedNativePath
+        )
         {
             RunTest(
                 assetsCustomizer: null,
-                appCustomizer: b => b
-                    .WithPackage("ridSpecificLib", "1.0.0", p => p
-                        .WithAssemblyGroup(null, g => g.WithAsset("DependencyLib.dll"))
-                        .WithAssemblyGroup("win", g => g.WithAsset("win/ManagedWin.dll"))
-                        .WithAssemblyGroup("win", g => g.WithAsset("win/AnotherWin.dll"))
-                        .WithNativeLibraryGroup("win10-x64", g => g.WithAsset("native/win10-x64/n1.dll"))
-                        .WithNativeLibraryGroup("win10-x64", g => g.WithAsset("native/win10-x64/n2.dll"))
-                        .WithNativeLibraryGroup("win10-x64", g => g.WithAsset("native/win10-x64-2/n3.dll"))
-                        .WithNativeLibraryGroup("win-x86", g => g.WithAsset("native/win-x86/n1.dll"))
-                        .WithNativeLibraryGroup("win-x86", g => g.WithAsset("native/win-x86/n2.dll"))
-                        .WithNativeLibraryGroup("linux", g => g.WithAsset("native/linux/n.so")))
-                    .WithPackage("ridAgnosticLib", "2.0.0", p => p
-                        .WithAssemblyGroup(null, g => g.WithAsset("PortableLib.dll").WithAsset("PortableLib2.dll"))),
-                setup: new TestSetup() { Rid = rid, HasRidGraph = true, UseRidGraph = true },
+                appCustomizer: b =>
+                    b.WithPackage(
+                            "ridSpecificLib",
+                            "1.0.0",
+                            p =>
+                                p.WithAssemblyGroup(null, g => g.WithAsset("DependencyLib.dll"))
+                                    .WithAssemblyGroup(
+                                        "win",
+                                        g => g.WithAsset("win/ManagedWin.dll")
+                                    )
+                                    .WithAssemblyGroup(
+                                        "win",
+                                        g => g.WithAsset("win/AnotherWin.dll")
+                                    )
+                                    .WithNativeLibraryGroup(
+                                        "win10-x64",
+                                        g => g.WithAsset("native/win10-x64/n1.dll")
+                                    )
+                                    .WithNativeLibraryGroup(
+                                        "win10-x64",
+                                        g => g.WithAsset("native/win10-x64/n2.dll")
+                                    )
+                                    .WithNativeLibraryGroup(
+                                        "win10-x64",
+                                        g => g.WithAsset("native/win10-x64-2/n3.dll")
+                                    )
+                                    .WithNativeLibraryGroup(
+                                        "win-x86",
+                                        g => g.WithAsset("native/win-x86/n1.dll")
+                                    )
+                                    .WithNativeLibraryGroup(
+                                        "win-x86",
+                                        g => g.WithAsset("native/win-x86/n2.dll")
+                                    )
+                                    .WithNativeLibraryGroup(
+                                        "linux",
+                                        g => g.WithAsset("native/linux/n.so")
+                                    )
+                        )
+                        .WithPackage(
+                            "ridAgnosticLib",
+                            "2.0.0",
+                            p =>
+                                p.WithAssemblyGroup(
+                                    null,
+                                    g =>
+                                        g.WithAsset("PortableLib.dll").WithAsset("PortableLib2.dll")
+                                )
+                        ),
+                setup: new TestSetup()
+                {
+                    Rid = rid,
+                    HasRidGraph = true,
+                    UseRidGraph = true,
+                },
                 // PortableLib and PortableLib2 are from a separate package which has no RID specific assets,
                 // so the RID-agnostic assets are always included
                 expected: new ResolvedPaths()
                 {
-                    IncludedAssemblyPaths = expectedAssemblyPath + ";PortableLib.dll;PortableLib2.dll",
-                    IncludedNativeLibraryPaths = expectedNativePath
-                });
+                    IncludedAssemblyPaths =
+                        expectedAssemblyPath + ";PortableLib.dll;PortableLib2.dll",
+                    IncludedNativeLibraryPaths = expectedNativePath,
+                }
+            );
         }
 
         [Theory]
@@ -550,7 +786,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         [InlineData(false, true)]
         [InlineData(false, false)]
         [InlineData(false, null)]
-        public void MostSpecificRidAssemblySelectedPerTypeMultipleAssets(bool hasRuntimeFallbacks, bool? useRidGraph)
+        public void MostSpecificRidAssemblySelectedPerTypeMultipleAssets(
+            bool hasRuntimeFallbacks,
+            bool? useRidGraph
+        )
         {
             // When not using the RID graph, the host uses the target OS for which it was built to determine applicable
             // RIDs that apply, so it can find both the arch-specific and the OS-only assets.
@@ -558,50 +797,100 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             // the current RID, so the OS-only asset remains excluded if there are no fallbacks.
             string suffix = ".2";
             string includedAssemblyPath = "ridSpecificLib.dll";
-            string excludedAssemblyPath = $"{CurrentOSAsset};{CurrentOS}/{CurrentOS}Asset{suffix}.dll";
+            string excludedAssemblyPath =
+                $"{CurrentOSAsset};{CurrentOS}/{CurrentOS}Asset{suffix}.dll";
             string includedNativePath = null;
             if (useRidGraph != true || hasRuntimeFallbacks)
             {
                 includedAssemblyPath = $"{CurrentOSAsset};{CurrentOS}/{CurrentOS}Asset{suffix}.dll";
                 excludedAssemblyPath = "ridSpecificLib.dll";
-                includedNativePath = $"native/{CurrentRid}/;native/{CurrentRid}{suffix}/;native{suffix}/{CurrentRid}/";
+                includedNativePath =
+                    $"native/{CurrentRid}/;native/{CurrentRid}{suffix}/;native{suffix}/{CurrentRid}/";
             }
 
             RunTest(
                 assetsCustomizer: null,
-                appCustomizer: b => b
-                    .WithPackage("ridSpecificLib", "1.0.0", p => p
-                        .WithAssemblyGroup(null, g => g.WithAsset("ridSpecificLib.dll"))
-                        .WithAssemblyGroup(CurrentOS, g => g.WithAsset(CurrentOSAsset))
-                        .WithAssemblyGroup(CurrentOS, g => g.WithAsset($"{CurrentOS}/{CurrentOS}Asset{suffix}.dll"))
-                        .WithNativeLibraryGroup(CurrentOS, g => g.WithAsset($"native/{CurrentOSAsset}"))
-                        .WithNativeLibraryGroup(CurrentRid, g => g.WithAsset($"native/{CurrentRidAsset}"))
-                        .WithNativeLibraryGroup(CurrentRid, g => g.WithAsset($"native/{CurrentRid}{suffix}/Asset"))
-                        .WithNativeLibraryGroup(CurrentRid, g => g.WithAsset($"native{suffix}/{CurrentRidAsset}")))
-                    .WithPackage("noRidMatch", "1.0.0", p => p
-                        .WithAssemblyGroup(null, g => g.WithAsset("noRidMatch.dll"))
-                        .WithAssemblyGroup(DifferentArch, g => g.WithAsset(DifferentArchAsset))
-                        .WithNativeLibraryGroup(null, g => g.WithAsset($"noRidMatch"))
-                        .WithNativeLibraryGroup(DifferentArch, g => g.WithAsset($"native/{DifferentArchAsset}")))
-                    .WithPackage("ridAgnosticLib", "1.0.0", p => p
-                        .WithAssemblyGroup(null, g => g.WithAsset("PortableLib.dll").WithAsset("PortableLib2.dll"))),
-                setup: new TestSetup() { Rid = null, HasRidGraph = hasRuntimeFallbacks, UseRidGraph = useRidGraph },
+                appCustomizer: b =>
+                    b.WithPackage(
+                            "ridSpecificLib",
+                            "1.0.0",
+                            p =>
+                                p.WithAssemblyGroup(null, g => g.WithAsset("ridSpecificLib.dll"))
+                                    .WithAssemblyGroup(CurrentOS, g => g.WithAsset(CurrentOSAsset))
+                                    .WithAssemblyGroup(
+                                        CurrentOS,
+                                        g =>
+                                            g.WithAsset($"{CurrentOS}/{CurrentOS}Asset{suffix}.dll")
+                                    )
+                                    .WithNativeLibraryGroup(
+                                        CurrentOS,
+                                        g => g.WithAsset($"native/{CurrentOSAsset}")
+                                    )
+                                    .WithNativeLibraryGroup(
+                                        CurrentRid,
+                                        g => g.WithAsset($"native/{CurrentRidAsset}")
+                                    )
+                                    .WithNativeLibraryGroup(
+                                        CurrentRid,
+                                        g => g.WithAsset($"native/{CurrentRid}{suffix}/Asset")
+                                    )
+                                    .WithNativeLibraryGroup(
+                                        CurrentRid,
+                                        g => g.WithAsset($"native{suffix}/{CurrentRidAsset}")
+                                    )
+                        )
+                        .WithPackage(
+                            "noRidMatch",
+                            "1.0.0",
+                            p =>
+                                p.WithAssemblyGroup(null, g => g.WithAsset("noRidMatch.dll"))
+                                    .WithAssemblyGroup(
+                                        DifferentArch,
+                                        g => g.WithAsset(DifferentArchAsset)
+                                    )
+                                    .WithNativeLibraryGroup(null, g => g.WithAsset($"noRidMatch"))
+                                    .WithNativeLibraryGroup(
+                                        DifferentArch,
+                                        g => g.WithAsset($"native/{DifferentArchAsset}")
+                                    )
+                        )
+                        .WithPackage(
+                            "ridAgnosticLib",
+                            "1.0.0",
+                            p =>
+                                p.WithAssemblyGroup(
+                                    null,
+                                    g =>
+                                        g.WithAsset("PortableLib.dll").WithAsset("PortableLib2.dll")
+                                )
+                        ),
+                setup: new TestSetup()
+                {
+                    Rid = null,
+                    HasRidGraph = hasRuntimeFallbacks,
+                    UseRidGraph = useRidGraph,
+                },
                 // PortableLib and PortableLib2 are from a separate package which has no RID specific assets,
                 // so the RID-agnostic assets are always included. noRidMatch is from a package where none of
                 // RID-specific assets match, so the RID-agnostic asset is included.
                 expected: new ResolvedPaths()
                 {
-                    IncludedAssemblyPaths = $"{includedAssemblyPath};noRidMatch.dll;PortableLib.dll;PortableLib2.dll",
+                    IncludedAssemblyPaths =
+                        $"{includedAssemblyPath};noRidMatch.dll;PortableLib.dll;PortableLib2.dll",
                     ExcludedAssemblyPaths = $"{excludedAssemblyPath};{DifferentArchAsset}",
                     IncludedNativeLibraryPaths = $"{includedNativePath};/",
-                    ExcludedNativeLibraryPaths = $"native/{CurrentOS}/;native/{DifferentArch}/"
-                });
+                    ExcludedNativeLibraryPaths = $"native/{CurrentOS}/;native/{DifferentArch}/",
+                }
+            );
         }
 
         protected static void UseFallbacksFromBuiltDotNet(NetCoreAppBuilder builder)
         {
             IReadOnlyList<RuntimeFallbacks> fallbacks;
-            string depsJson = Path.Combine(TestContext.BuiltDotNet.GreatestVersionSharedFxPath, $"{Constants.MicrosoftNETCoreApp}.deps.json");
+            string depsJson = Path.Combine(
+                TestContext.BuiltDotNet.GreatestVersionSharedFxPath,
+                $"{Constants.MicrosoftNETCoreApp}.deps.json"
+            );
             using (FileStream fileStream = File.Open(depsJson, FileMode.Open))
             using (DependencyContextJsonReader reader = new DependencyContextJsonReader())
             {
@@ -620,23 +909,32 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             public DotNetCli DotNetWithNetCoreApp_RuntimeFallbacks { get; }
             public DotNetCli DotNetWithNetCoreApp_NoRuntimeFallbacks { get; }
 
-            public AppSharedTestState() : base()
+            public AppSharedTestState()
+                : base()
             {
                 DotNetWithNetCoreApp_RuntimeFallbacks = DotNet("WithNetCoreApp_RuntimeFallbacks")
-                    .AddMicrosoftNETCoreAppFrameworkMockCoreClr("4.0.0", UseFallbacksFromBuiltDotNet)
+                    .AddMicrosoftNETCoreAppFrameworkMockCoreClr(
+                        "4.0.0",
+                        UseFallbacksFromBuiltDotNet
+                    )
                     .Build();
 
-                DotNetWithNetCoreApp_NoRuntimeFallbacks = DotNet("WithNetCoreApp_NoRuntimeFallbacks")
-                    .AddMicrosoftNETCoreAppFrameworkMockCoreClr("4.0.0", b => b.RuntimeFallbacks.Clear())
+                DotNetWithNetCoreApp_NoRuntimeFallbacks = DotNet(
+                        "WithNetCoreApp_NoRuntimeFallbacks"
+                    )
+                    .AddMicrosoftNETCoreAppFrameworkMockCoreClr(
+                        "4.0.0",
+                        b => b.RuntimeFallbacks.Clear()
+                    )
                     .Build();
             }
         }
     }
 
     // Run the tests on a framework dependent app
-    public class PortableAppRidAssetResolution :
-        RidAssetResolutionBase,
-        IClassFixture<RidAssetResolutionBase.AppSharedTestState>
+    public class PortableAppRidAssetResolution
+        : RidAssetResolutionBase,
+            IClassFixture<RidAssetResolutionBase.AppSharedTestState>
     {
         private AppSharedTestState SharedState { get; }
 
@@ -649,18 +947,29 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             Action<NetCoreAppBuilder.RuntimeLibraryBuilder> assetsCustomizer,
             TestSetup setup,
             ResolvedPaths expected,
-            Action<NetCoreAppBuilder> appCustomizer)
+            Action<NetCoreAppBuilder> appCustomizer
+        )
         {
-            using (TestApp app = NetCoreAppBuilder.PortableForNETCoreApp(SharedState.FrameworkReferenceApp)
-                .WithProject(p => { p.WithAssemblyGroup(null, g => g.WithMainAssembly()); assetsCustomizer?.Invoke(p); })
-                .WithCustomizer(appCustomizer)
-                .Build())
+            using (
+                TestApp app = NetCoreAppBuilder
+                    .PortableForNETCoreApp(SharedState.FrameworkReferenceApp)
+                    .WithProject(p =>
+                    {
+                        p.WithAssemblyGroup(null, g => g.WithMainAssembly());
+                        assetsCustomizer?.Invoke(p);
+                    })
+                    .WithCustomizer(appCustomizer)
+                    .Build()
+            )
             {
                 DotNetCli dotnet;
                 if (setup.HasRidGraph)
                 {
                     // Use the fallbacks from the product when testing the computed RID
-                    dotnet = setup.Rid == null ? SharedState.DotNetWithNetCoreApp_RuntimeFallbacks : SharedState.DotNetWithNetCoreApp;
+                    dotnet =
+                        setup.Rid == null
+                            ? SharedState.DotNetWithNetCoreApp_RuntimeFallbacks
+                            : SharedState.DotNetWithNetCoreApp;
                 }
                 else
                 {
@@ -669,11 +978,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
 
                 UpdateAppConfigForTest(app, setup, copyOnUpdate: false);
 
-                var result = dotnet.Exec(app.AppDll)
+                var result = dotnet
+                    .Exec(app.AppDll)
                     .EnableTracingAndCaptureOutputs()
                     .RuntimeId(setup.Rid)
                     .Execute();
-                result.Should().Pass()
+                result
+                    .Should()
+                    .Pass()
                     .And.HaveResolvedAssembly(expected.IncludedAssemblyPaths, app)
                     .And.NotHaveResolvedAssembly(expected.ExcludedAssemblyPaths, app)
                     .And.HaveResolvedNativeLibraryPath(expected.IncludedNativeLibraryPaths, app)
@@ -688,13 +1000,15 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
     }
 
     // Run the tests on a portable component hosted by a framework dependent app
-    public class PortableComponentOnFrameworkDependentAppRidAssetResolution :
-        RidAssetResolutionBase,
-        IClassFixture<RidAssetResolutionBase.AppSharedTestState>
+    public class PortableComponentOnFrameworkDependentAppRidAssetResolution
+        : RidAssetResolutionBase,
+            IClassFixture<RidAssetResolutionBase.AppSharedTestState>
     {
         private AppSharedTestState SharedState { get; }
 
-        public PortableComponentOnFrameworkDependentAppRidAssetResolution(AppSharedTestState sharedState)
+        public PortableComponentOnFrameworkDependentAppRidAssetResolution(
+            AppSharedTestState sharedState
+        )
         {
             SharedState = sharedState;
         }
@@ -703,49 +1017,78 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             Action<NetCoreAppBuilder.RuntimeLibraryBuilder> assetsCustomizer,
             TestSetup setup,
             ResolvedPaths expected,
-            Action<NetCoreAppBuilder> appCustomizer)
+            Action<NetCoreAppBuilder> appCustomizer
+        )
         {
-            var component = SharedState.CreateComponentWithNoDependencies(b => b
-                .WithPackage("NativeDependency", "1.0.0", p => assetsCustomizer?.Invoke(p))
-                .WithCustomizer(appCustomizer));
+            var component = SharedState.CreateComponentWithNoDependencies(b =>
+                b.WithPackage("NativeDependency", "1.0.0", p => assetsCustomizer?.Invoke(p))
+                    .WithCustomizer(appCustomizer)
+            );
 
             DotNetCli dotnet;
             if (setup.HasRidGraph)
             {
                 // Use the fallbacks from the product when testing the computed RID
-                dotnet = setup.Rid == null ? SharedState.DotNetWithNetCoreApp_RuntimeFallbacks : SharedState.DotNetWithNetCoreApp;
+                dotnet =
+                    setup.Rid == null
+                        ? SharedState.DotNetWithNetCoreApp_RuntimeFallbacks
+                        : SharedState.DotNetWithNetCoreApp;
             }
             else
             {
                 dotnet = SharedState.DotNetWithNetCoreApp_NoRuntimeFallbacks;
             }
 
-            TestApp app = UpdateAppConfigForTest(SharedState.FrameworkReferenceApp, setup, copyOnUpdate: true);
+            TestApp app = UpdateAppConfigForTest(
+                SharedState.FrameworkReferenceApp,
+                setup,
+                copyOnUpdate: true
+            );
 
-            var result = SharedState.RunComponentResolutionTest(component.AppDll, app, dotnet.GreatestVersionHostFxrPath, command => command
-                .RuntimeId(setup.Rid));
-            result.Should().Pass()
+            var result = SharedState.RunComponentResolutionTest(
+                component.AppDll,
+                app,
+                dotnet.GreatestVersionHostFxrPath,
+                command => command.RuntimeId(setup.Rid)
+            );
+            result
+                .Should()
+                .Pass()
                 .And.HaveSuccessfullyResolvedComponentDependencies()
-                .And.HaveResolvedComponentDependencyAssembly(expected.IncludedAssemblyPaths, component)
-                .And.NotHaveResolvedComponentDependencyAssembly(expected.ExcludedAssemblyPaths, component)
-                .And.HaveResolvedComponentDependencyNativeLibraryPath(expected.IncludedNativeLibraryPaths, component)
-                .And.NotHaveResolvedComponentDependencyNativeLibraryPath(expected.ExcludedNativeLibraryPaths, component)
+                .And.HaveResolvedComponentDependencyAssembly(
+                    expected.IncludedAssemblyPaths,
+                    component
+                )
+                .And.NotHaveResolvedComponentDependencyAssembly(
+                    expected.ExcludedAssemblyPaths,
+                    component
+                )
+                .And.HaveResolvedComponentDependencyNativeLibraryPath(
+                    expected.IncludedNativeLibraryPaths,
+                    component
+                )
+                .And.NotHaveResolvedComponentDependencyNativeLibraryPath(
+                    expected.ExcludedNativeLibraryPaths,
+                    component
+                )
                 .And.HaveReadRidGraph(setup.ShouldUseRidGraph)
                 .And.NotHaveUsedFrameworkProbe(dotnet.GreatestVersionSharedFxPath);
 
             if (setup.ShouldUseFallbackRid.HasValue)
-                    result.Should().HaveUsedFallbackRid(setup.ShouldUseFallbackRid.Value);
+                result.Should().HaveUsedFallbackRid(setup.ShouldUseFallbackRid.Value);
         }
     }
 
     // Run the tests on a portable component hosted by a self-contained app
-    public class PortableComponentOnSelfContainedAppRidAssetResolution :
-        RidAssetResolutionBase,
-        IClassFixture<PortableComponentOnSelfContainedAppRidAssetResolution.ComponentSharedTestState>
+    public class PortableComponentOnSelfContainedAppRidAssetResolution
+        : RidAssetResolutionBase,
+            IClassFixture<PortableComponentOnSelfContainedAppRidAssetResolution.ComponentSharedTestState>
     {
         private ComponentSharedTestState SharedState { get; }
 
-        public PortableComponentOnSelfContainedAppRidAssetResolution(ComponentSharedTestState sharedState)
+        public PortableComponentOnSelfContainedAppRidAssetResolution(
+            ComponentSharedTestState sharedState
+        )
         {
             SharedState = sharedState;
         }
@@ -754,17 +1097,20 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             Action<NetCoreAppBuilder.RuntimeLibraryBuilder> assetsCustomizer,
             TestSetup setup,
             ResolvedPaths expected,
-            Action<NetCoreAppBuilder> appCustomizer)
+            Action<NetCoreAppBuilder> appCustomizer
+        )
         {
-            var component = SharedState.CreateComponentWithNoDependencies(b => b
-                .WithPackage("NativeDependency", "1.0.0", p => assetsCustomizer?.Invoke(p))
-                .WithCustomizer(appCustomizer));
+            var component = SharedState.CreateComponentWithNoDependencies(b =>
+                b.WithPackage("NativeDependency", "1.0.0", p => assetsCustomizer?.Invoke(p))
+                    .WithCustomizer(appCustomizer)
+            );
 
             TestApp app;
             if (setup.HasRidGraph)
             {
                 // Use the fallbacks from the product when testing the computed RID
-                app = setup.Rid == null ? SharedState.HostApp_RuntimeFallbacks : SharedState.HostApp;
+                app =
+                    setup.Rid == null ? SharedState.HostApp_RuntimeFallbacks : SharedState.HostApp;
             }
             else
             {
@@ -773,14 +1119,32 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
 
             app = UpdateAppConfigForTest(app, setup, copyOnUpdate: true);
 
-            var result = SharedState.RunComponentResolutionTest(component.AppDll, app, app.Location, command => command
-                .RuntimeId(setup.Rid));
-            result.Should().Pass()
+            var result = SharedState.RunComponentResolutionTest(
+                component.AppDll,
+                app,
+                app.Location,
+                command => command.RuntimeId(setup.Rid)
+            );
+            result
+                .Should()
+                .Pass()
                 .And.HaveSuccessfullyResolvedComponentDependencies()
-                .And.HaveResolvedComponentDependencyAssembly(expected.IncludedAssemblyPaths, component)
-                .And.NotHaveResolvedComponentDependencyAssembly(expected.ExcludedAssemblyPaths, component)
-                .And.HaveResolvedComponentDependencyNativeLibraryPath(expected.IncludedNativeLibraryPaths, component)
-                .And.NotHaveResolvedComponentDependencyNativeLibraryPath(expected.ExcludedNativeLibraryPaths, component)
+                .And.HaveResolvedComponentDependencyAssembly(
+                    expected.IncludedAssemblyPaths,
+                    component
+                )
+                .And.NotHaveResolvedComponentDependencyAssembly(
+                    expected.ExcludedAssemblyPaths,
+                    component
+                )
+                .And.HaveResolvedComponentDependencyNativeLibraryPath(
+                    expected.IncludedNativeLibraryPaths,
+                    component
+                )
+                .And.NotHaveResolvedComponentDependencyNativeLibraryPath(
+                    expected.ExcludedNativeLibraryPaths,
+                    component
+                )
                 .And.HaveReadRidGraph(setup.ShouldUseRidGraph);
 
             if (setup.ShouldUseFallbackRid.HasValue)
@@ -797,15 +1161,18 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             {
                 HostApp = CreateSelfContainedAppWithMockCoreClr(
                     "ComponentHostSelfContainedApp",
-                    b => b.WithStandardRuntimeFallbacks());
+                    b => b.WithStandardRuntimeFallbacks()
+                );
 
                 HostApp_RuntimeFallbacks = CreateSelfContainedAppWithMockCoreClr(
                     "ComponentHostSelfContainedApp_RuntimeFallbacks",
-                    UseFallbacksFromBuiltDotNet);
+                    UseFallbacksFromBuiltDotNet
+                );
 
                 HostApp_NoRuntimeFallbacks = CreateSelfContainedAppWithMockCoreClr(
                     "ComponentHostSelfContainedApp_NoRuntimeFallbacks",
-                    b => b.RuntimeFallbacks.Clear());
+                    b => b.RuntimeFallbacks.Clear()
+                );
             }
         }
     }

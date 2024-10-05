@@ -14,7 +14,11 @@ internal sealed class ToLowerSegment : PatternSegment
         _pattern = pattern;
     }
 
-    public override string? Evaluate(RewriteContext context, BackReferenceCollection? ruleBackReferences, BackReferenceCollection? conditionBackReferences)
+    public override string? Evaluate(
+        RewriteContext context,
+        BackReferenceCollection? ruleBackReferences,
+        BackReferenceCollection? conditionBackReferences
+    )
     {
         // PERF as we share the string builder across the context, we need to make a new one here to evaluate
         // lowercase segments.

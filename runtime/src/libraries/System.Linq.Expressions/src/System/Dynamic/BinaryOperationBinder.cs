@@ -39,7 +39,10 @@ namespace System.Dynamic
         /// <param name="target">The target of the dynamic binary operation.</param>
         /// <param name="arg">The right hand side operand of the dynamic binary operation.</param>
         /// <returns>The <see cref="DynamicMetaObject"/> representing the result of the binding.</returns>
-        public DynamicMetaObject FallbackBinaryOperation(DynamicMetaObject target, DynamicMetaObject arg)
+        public DynamicMetaObject FallbackBinaryOperation(
+            DynamicMetaObject target,
+            DynamicMetaObject arg
+        )
         {
             return FallbackBinaryOperation(target, arg, null);
         }
@@ -51,7 +54,11 @@ namespace System.Dynamic
         /// <param name="arg">The right hand side operand of the dynamic binary operation.</param>
         /// <param name="errorSuggestion">The binding result in case the binding fails, or null.</param>
         /// <returns>The <see cref="DynamicMetaObject"/> representing the result of the binding.</returns>
-        public abstract DynamicMetaObject FallbackBinaryOperation(DynamicMetaObject target, DynamicMetaObject arg, DynamicMetaObject? errorSuggestion);
+        public abstract DynamicMetaObject FallbackBinaryOperation(
+            DynamicMetaObject target,
+            DynamicMetaObject arg,
+            DynamicMetaObject? errorSuggestion
+        );
 
         /// <summary>
         /// Performs the binding of the dynamic binary operation.
@@ -59,7 +66,10 @@ namespace System.Dynamic
         /// <param name="target">The target of the dynamic operation.</param>
         /// <param name="args">An array of arguments of the dynamic operation.</param>
         /// <returns>The <see cref="DynamicMetaObject"/> representing the result of the binding.</returns>
-        public sealed override DynamicMetaObject Bind(DynamicMetaObject target, DynamicMetaObject[] args)
+        public sealed override DynamicMetaObject Bind(
+            DynamicMetaObject target,
+            DynamicMetaObject[] args
+        )
         {
             ArgumentNullException.ThrowIfNull(target);
             ArgumentNullException.ThrowIfNull(args);

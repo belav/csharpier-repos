@@ -18,7 +18,10 @@ public static class GenericHostWebHostBuilderExtensions
     /// <param name="builder">The <see cref="IHostBuilder"/> to add the <see cref="IWebHostBuilder"/> to.</param>
     /// <param name="configure">The delegate that configures the <see cref="IWebHostBuilder"/>.</param>
     /// <returns>The <see cref="IHostBuilder"/>.</returns>
-    public static IHostBuilder ConfigureWebHost(this IHostBuilder builder, Action<IWebHostBuilder> configure)
+    public static IHostBuilder ConfigureWebHost(
+        this IHostBuilder builder,
+        Action<IWebHostBuilder> configure
+    )
     {
         ArgumentNullException.ThrowIfNull(configure);
 
@@ -32,13 +35,18 @@ public static class GenericHostWebHostBuilderExtensions
     /// <param name="configure">The delegate that configures the <see cref="IWebHostBuilder"/>.</param>
     /// <param name="configureWebHostBuilder">The delegate that configures the <see cref="WebHostBuilderOptions"/>.</param>
     /// <returns>The <see cref="IHostBuilder"/>.</returns>
-    public static IHostBuilder ConfigureWebHost(this IHostBuilder builder, Action<IWebHostBuilder> configure, Action<WebHostBuilderOptions> configureWebHostBuilder)
+    public static IHostBuilder ConfigureWebHost(
+        this IHostBuilder builder,
+        Action<IWebHostBuilder> configure,
+        Action<WebHostBuilderOptions> configureWebHostBuilder
+    )
     {
         return ConfigureWebHost(
             builder,
             static (hostBuilder, options) => new GenericWebHostBuilder(hostBuilder, options),
             configure,
-            configureWebHostBuilder);
+            configureWebHostBuilder
+        );
     }
 
     /// <summary>
@@ -48,20 +56,26 @@ public static class GenericHostWebHostBuilderExtensions
     /// <param name="configure">The delegate that configures the <see cref="IWebHostBuilder"/>.</param>
     /// <param name="configureWebHostBuilder">The delegate that configures the <see cref="WebHostBuilderOptions"/>.</param>
     /// <returns>The <see cref="IHostBuilder"/>.</returns>
-    public static IHostBuilder ConfigureSlimWebHost(this IHostBuilder builder, Action<IWebHostBuilder> configure, Action<WebHostBuilderOptions> configureWebHostBuilder)
+    public static IHostBuilder ConfigureSlimWebHost(
+        this IHostBuilder builder,
+        Action<IWebHostBuilder> configure,
+        Action<WebHostBuilderOptions> configureWebHostBuilder
+    )
     {
         return ConfigureWebHost(
             builder,
             static (hostBuilder, options) => new SlimWebHostBuilder(hostBuilder, options),
             configure,
-            configureWebHostBuilder);
+            configureWebHostBuilder
+        );
     }
 
     private static IHostBuilder ConfigureWebHost(
         this IHostBuilder builder,
         Func<IHostBuilder, WebHostBuilderOptions, IWebHostBuilder> createWebHostBuilder,
         Action<IWebHostBuilder> configure,
-        Action<WebHostBuilderOptions> configureWebHostBuilder)
+        Action<WebHostBuilderOptions> configureWebHostBuilder
+    )
     {
         ArgumentNullException.ThrowIfNull(configure);
         ArgumentNullException.ThrowIfNull(configureWebHostBuilder);
@@ -76,7 +90,9 @@ public static class GenericHostWebHostBuilderExtensions
         configureWebHostBuilder(webHostBuilderOptions);
         var webhostBuilder = createWebHostBuilder(builder, webHostBuilderOptions);
         configure(webhostBuilder);
-        builder.ConfigureServices((context, services) => services.AddHostedService<GenericWebHostService>());
+        builder.ConfigureServices(
+            (context, services) => services.AddHostedService<GenericWebHostService>()
+        );
         return builder;
     }
 }

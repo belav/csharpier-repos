@@ -52,5 +52,4 @@ namespace System.Net.Security
             DisposeInternal();
         }
     }
-
 }

@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.IO;
-using System.Text;
-using System.Linq;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XmlDiff;
@@ -19,6 +19,7 @@ namespace CoreXml.Test.XLinq
         private XmlDiff _diff = null;
         private XmlReaderSettings _rsx;
         private XmlReaderSettings _rsxNoWs;
+
         public BridgeHelpers()
         {
             _diff = new XmlDiff();
@@ -34,7 +35,8 @@ namespace CoreXml.Test.XLinq
         //BridgeHelpers constants
         public const string TestSaveFileName = "testSave.xml";
         public const string ST_XML = "xml";
-        public const string strBase64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+        public const string strBase64 =
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
         public const string strBinHex = "0123456789ABCDEF";
         public static string pLbNormEnt1 = "se3_1.ent";
         public static string pLbNormEnt2 = "se3_2.ent";
@@ -113,9 +115,17 @@ namespace CoreXml.Test.XLinq
 
         public XmlReader GetReader(string strSource, bool preserveWhitespace)
         {
-            using (XmlReader r = XmlReader.Create(FilePathUtil.getStream(strSource), preserveWhitespace ? _rsx : _rsxNoWs))
+            using (
+                XmlReader r = XmlReader.Create(
+                    FilePathUtil.getStream(strSource),
+                    preserveWhitespace ? _rsx : _rsxNoWs
+                )
+            )
             {
-                XDocument doc = XDocument.Load(r, preserveWhitespace ? LoadOptions.PreserveWhitespace : LoadOptions.None);
+                XDocument doc = XDocument.Load(
+                    r,
+                    preserveWhitespace ? LoadOptions.PreserveWhitespace : LoadOptions.None
+                );
                 return doc.CreateReader();
             }
         }
@@ -180,7 +190,9 @@ namespace CoreXml.Test.XLinq
             {
                 if (!_diff.Compare(r1, r2))
                 {
-                    TestLog.WriteLine("Mismatch : expected: " + expectedXml + "\n actual: " + doc.ToString());
+                    TestLog.WriteLine(
+                        "Mismatch : expected: " + expectedXml + "\n actual: " + doc.ToString()
+                    );
                     return false;
                 }
             }
@@ -225,12 +237,19 @@ namespace CoreXml.Test.XLinq
             rs.CloseInput = true;
             _diff.Option = XmlDiffOption.IgnoreAttributeOrder;
 
-            using (XmlReader r1 = XmlReader.Create(FilePathUtil.getStream(FullPath(baselineFile)), rs))
+            using (
+                XmlReader r1 = XmlReader.Create(FilePathUtil.getStream(FullPath(baselineFile)), rs)
+            )
             using (XmlReader r2 = doc.CreateReader())
             {
                 if (!_diff.Compare(r1, r2))
                 {
-                    TestLog.WriteLine("Mismatch : expected: " + this.GetString(FullPath(baselineFile)) + "\n actual: " + doc.ToString());
+                    TestLog.WriteLine(
+                        "Mismatch : expected: "
+                            + this.GetString(FullPath(baselineFile))
+                            + "\n actual: "
+                            + doc.ToString()
+                    );
                     return false;
                 }
             }
@@ -272,7 +291,13 @@ namespace CoreXml.Test.XLinq
             return;
         }
 
-        public static void WriteToBuffer(ref byte[] destBuff, ref int destStart, byte[] srcBuff, int srcStart, int count)
+        public static void WriteToBuffer(
+            ref byte[] destBuff,
+            ref int destStart,
+            byte[] srcBuff,
+            int srcStart,
+            int count
+        )
         {
             EnsureSpace(ref destBuff, destStart + count - 1);
             for (int i = srcStart; i < srcStart + count; i++)
@@ -281,11 +306,19 @@ namespace CoreXml.Test.XLinq
             }
         }
 
-        public static void WriteToBuffer(ref byte[] destBuffer, ref int destBuffLen, string strValue)
+        public static void WriteToBuffer(
+            ref byte[] destBuffer,
+            ref int destBuffLen,
+            string strValue
+        )
         {
             for (int i = 0; i < strValue.Length; i++)
             {
-                WriteToBuffer(ref destBuffer, ref destBuffLen, System.BitConverter.GetBytes(strValue[i]));
+                WriteToBuffer(
+                    ref destBuffer,
+                    ref destBuffLen,
+                    System.BitConverter.GetBytes(strValue[i])
+                );
             }
             WriteToBuffer(ref destBuffer, ref destBuffLen, System.BitConverter.GetBytes('\0'));
         }
@@ -305,7 +338,13 @@ namespace CoreXml.Test.XLinq
             TestLog.Compare(ws, WriteState.Element, "WriteState should be Element");
         }
 
-        public void VerifyInvalidWrite(string methodName, int iBufferSize, int iIndex, int iCount, Type exceptionType)
+        public void VerifyInvalidWrite(
+            string methodName,
+            int iBufferSize,
+            int iIndex,
+            int iCount,
+            Type exceptionType
+        )
         {
             byte[] byteBuffer = new byte[iBufferSize];
             for (int i = 0; i < iBufferSize; i++)
@@ -370,7 +409,12 @@ namespace CoreXml.Test.XLinq
             return base64;
         }
 
-        public static bool VerifyNode(XmlReader r, XmlNodeType eExpNodeType, string strExpName, string strExpValue)
+        public static bool VerifyNode(
+            XmlReader r,
+            XmlNodeType eExpNodeType,
+            string strExpName,
+            string strExpValue
+        )
         {
             bool bPassed = true;
 
@@ -400,13 +444,23 @@ namespace CoreXml.Test.XLinq
             return bPassed;
         }
 
-        public void CompareNode(XmlReader r, XmlNodeType eExpNodeType, string strExpName, string strExpValue)
+        public void CompareNode(
+            XmlReader r,
+            XmlNodeType eExpNodeType,
+            string strExpName,
+            string strExpValue
+        )
         {
             bool bNode = VerifyNode(r, eExpNodeType, strExpName, strExpValue);
             TestLog.Compare(bNode, "VerifyNode failed");
         }
 
-        public void CheckXmlException(string expectedCode, XmlException e, int expectedLine, int expectedPosition)
+        public void CheckXmlException(
+            string expectedCode,
+            XmlException e,
+            int expectedLine,
+            int expectedPosition
+        )
         {
             TestLog.Compare(e.LineNumber, expectedLine, "CheckXmlException:LineNumber");
             TestLog.Compare(e.LinePosition, expectedPosition, "CheckXmlException:LinePosition");
@@ -424,7 +478,10 @@ namespace CoreXml.Test.XLinq
 
             while (r.Read() && r.NodeType != nodeType)
             {
-                if (nodeType == XmlNodeType.ProcessingInstruction && r.NodeType == XmlNodeType.XmlDeclaration)
+                if (
+                    nodeType == XmlNodeType.ProcessingInstruction
+                    && r.NodeType == XmlNodeType.XmlDeclaration
+                )
                 {
                     if (string.Compare(Name, 0, ST_XML, 0, 3) != 0)
                         return;
@@ -455,7 +512,10 @@ namespace CoreXml.Test.XLinq
             }
             if (r.EOF)
             {
-                throw new TestException(TestResult.Failed, "Couldn't find element '" + strElementName + "'");
+                throw new TestException(
+                    TestResult.Failed,
+                    "Couldn't find element '" + strElementName + "'"
+                );
             }
         }
 
@@ -470,8 +530,6 @@ namespace CoreXml.Test.XLinq
             sb.Append("</root>");
             return GetReaderStr(sb.ToString());
         }
-
-
 
         public XmlReader CreateReaderIgnoreWS(string fileName)
         {
@@ -533,9 +591,7 @@ namespace CoreXml.Test.XLinq
                 throw new TestException(TestResult.Failed, "");
         }
 
-        public static void DeleteTestFile(string strFileName)
-        {
-        }
+        public static void DeleteTestFile(string strFileName) { }
 
         public static void CreateByteTestFile(string strFileName)
         {
@@ -561,7 +617,7 @@ namespace CoreXml.Test.XLinq
         public static void CreateEncodedTestFile(string strFileName, Encoding encode)
         {
             var ms = new MemoryStream();
-            
+
             using var tw = new StreamWriter(ms, encoding: encode, leaveOpen: true);
 
             tw.WriteLine("<root>");
@@ -573,7 +629,7 @@ namespace CoreXml.Test.XLinq
         public static void CreateWhitespaceHandlingTestFile(string strFileName)
         {
             var ms = new MemoryStream();
-            
+
             using var tw = new StreamWriter(ms, leaveOpen: true);
 
             tw.WriteLine("<!DOCTYPE dt [");
@@ -599,7 +655,7 @@ namespace CoreXml.Test.XLinq
         public static void CreateGenericTestFile(string strFileName)
         {
             var ms = new MemoryStream();
-            
+
             using var tw = new StreamWriter(ms, leaveOpen: true);
 
             tw.WriteLine("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
@@ -619,8 +675,12 @@ namespace CoreXml.Test.XLinq
             tw.WriteLine("<!ENTITY e2 \"&ext3; e2bar\">");
             tw.WriteLine("<!ENTITY e3 \"&e1; e3bzee \">");
             tw.WriteLine("<!ENTITY e4 \"&e3; e4gee\">");
-            tw.WriteLine("<!ATTLIST elem1 child1 CDATA #IMPLIED child2 CDATA \"&e2;\" child3 CDATA #REQUIRED>");
-            tw.WriteLine("<!ATTLIST root xmlns:something CDATA #FIXED \"something\" xmlns:my CDATA #FIXED \"my\" xmlns:dt CDATA #FIXED \"urn:uuid:C2F41010-65B3-11d1-A29F-00AA00C14882/\">");
+            tw.WriteLine(
+                "<!ATTLIST elem1 child1 CDATA #IMPLIED child2 CDATA \"&e2;\" child3 CDATA #REQUIRED>"
+            );
+            tw.WriteLine(
+                "<!ATTLIST root xmlns:something CDATA #FIXED \"something\" xmlns:my CDATA #FIXED \"my\" xmlns:dt CDATA #FIXED \"urn:uuid:C2F41010-65B3-11d1-A29F-00AA00C14882/\">"
+            );
             tw.WriteLine("<!ATTLIST ISDEFAULT d1 CDATA #FIXED \"d1value\">");
 
             tw.WriteLine("<!ATTLIST MULTISPACES att IDREFS #IMPLIED>");
@@ -628,12 +688,16 @@ namespace CoreXml.Test.XLinq
 
             tw.WriteLine("]>");
             tw.WriteLine("<PLAY>");
-            tw.WriteLine("<root xmlns:something=\"something\" xmlns:my=\"my\" xmlns:dt=\"urn:uuid:C2F41010-65B3-11d1-A29F-00AA00C14882/\">");
+            tw.WriteLine(
+                "<root xmlns:something=\"something\" xmlns:my=\"my\" xmlns:dt=\"urn:uuid:C2F41010-65B3-11d1-A29F-00AA00C14882/\">"
+            );
             tw.WriteLine("<elem1 child1=\"\" child2=\"&e2;\" child3=\"something\">");
             tw.WriteLine("text node two &e1; text node three");
             tw.WriteLine("</elem1>");
             tw.WriteLine("&e2;");
-            tw.WriteLine("<![CDATA[ This section contains characters that should not be interpreted as markup. For example, characters ', \",");
+            tw.WriteLine(
+                "<![CDATA[ This section contains characters that should not be interpreted as markup. For example, characters ', \","
+            );
             tw.WriteLine("<, >, and & are all fine here.]]>");
             tw.WriteLine("<elem2 att1=\"id1\" att2=\"up\" att3=\"attribute3\"> ");
             tw.WriteLine("<a />");
@@ -657,16 +721,26 @@ namespace CoreXml.Test.XLinq
             tw.WriteLine("</elem2>");
             tw.WriteLine("<elem2 att1=\"id2\"></elem2>");
             tw.WriteLine("</root>");
-            tw.Write("<ENTITY1 att1='xxx&lt;xxx&#65;xxx&#x43;xxx&e1;xxx'>xxx&gt;xxx&#66;xxx&#x44;xxx&e1;xxx</ENTITY1>");
-            tw.WriteLine("<ENTITY2 att1='xxx&lt;xxx&#65;xxx&#x43;xxx&e1;xxx'>xxx&gt;xxx&#66;xxx&#x44;xxx&e1;xxx</ENTITY2>");
-            tw.WriteLine("<ENTITY3 att1='xxx&lt;xxx&#65;xxx&#x43;xxx&e1;xxx'>xxx&gt;xxx&#66;xxx&#x44;xxx&e1;xxx</ENTITY3>");
-            tw.WriteLine("<ENTITY4 att1='xxx&lt;xxx&#65;xxx&#x43;xxx&e1;xxx'>xxx&gt;xxx&#66;xxx&#x44;xxx&e1;xxx</ENTITY4>");
+            tw.Write(
+                "<ENTITY1 att1='xxx&lt;xxx&#65;xxx&#x43;xxx&e1;xxx'>xxx&gt;xxx&#66;xxx&#x44;xxx&e1;xxx</ENTITY1>"
+            );
+            tw.WriteLine(
+                "<ENTITY2 att1='xxx&lt;xxx&#65;xxx&#x43;xxx&e1;xxx'>xxx&gt;xxx&#66;xxx&#x44;xxx&e1;xxx</ENTITY2>"
+            );
+            tw.WriteLine(
+                "<ENTITY3 att1='xxx&lt;xxx&#65;xxx&#x43;xxx&e1;xxx'>xxx&gt;xxx&#66;xxx&#x44;xxx&e1;xxx</ENTITY3>"
+            );
+            tw.WriteLine(
+                "<ENTITY4 att1='xxx&lt;xxx&#65;xxx&#x43;xxx&e1;xxx'>xxx&gt;xxx&#66;xxx&#x44;xxx&e1;xxx</ENTITY4>"
+            );
             tw.WriteLine("<ENTITY5>&ext3;</ENTITY5>");
             tw.WriteLine("<ATTRIBUTE1 />");
             tw.WriteLine("<ATTRIBUTE2 a1='a1value' />");
             tw.WriteLine("<ATTRIBUTE3 a1='a1value' a2='a2value' a3='a3value' />");
             tw.WriteLine("<ATTRIBUTE4 a1='' />");
-            tw.WriteLine("<ATTRIBUTE5 CRLF='x\r\nx' CR='x\rx' LF='x\nx' MS='x     x' TAB='x\tx' />");
+            tw.WriteLine(
+                "<ATTRIBUTE5 CRLF='x\r\nx' CR='x\rx' LF='x\nx' MS='x     x' TAB='x\tx' />"
+            );
             tw.WriteLine("<?PI1a a\r\n\rb ?>");
             tw.WriteLine("<!--comm\r\n\rent-->");
             tw.WriteLine("<![CDATA[cd\r\n\rata]]>");
@@ -678,7 +752,9 @@ namespace CoreXml.Test.XLinq
             tw.WriteLine("<WHITESPACE3>\t<ELEM />\t</WHITESPACE3>");
             tw.WriteLine("<SKIP1 /><AFTERSKIP1 />");
             tw.WriteLine("<SKIP2></SKIP2><AFTERSKIP2 />");
-            tw.WriteLine("<SKIP3><ELEM1 /><ELEM2>xxx yyy</ELEM2><ELEM3 /></SKIP3><AFTERSKIP3></AFTERSKIP3>");
+            tw.WriteLine(
+                "<SKIP3><ELEM1 /><ELEM2>xxx yyy</ELEM2><ELEM3 /></SKIP3><AFTERSKIP3></AFTERSKIP3>"
+            );
             tw.WriteLine("<SKIP4><ELEM1 /><ELEM2>xxx<ELEM3 /></ELEM2></SKIP4>");
             tw.WriteLine("<CHARS1>0123456789</CHARS1>");
             tw.WriteLine("<CHARS2>xxx<MARKUP />yyy</CHARS2>");
@@ -707,68 +783,132 @@ namespace CoreXml.Test.XLinq
             tw.WriteLine("<INTEGER>9999</INTEGER>");
             tw.WriteLine("<FLOAT>99.99</FLOAT>");
             tw.WriteLine("<DECIMAL>.09</DECIMAL>");
-            tw.WriteLine("<CONTENT><e1 a1='a1value' a2='a2value'><e2 a1='a1value' a2='a2value'><e3 a1='a1value' a2='a2value'>leave</e3></e2></e1></CONTENT>");
+            tw.WriteLine(
+                "<CONTENT><e1 a1='a1value' a2='a2value'><e2 a1='a1value' a2='a2value'><e3 a1='a1value' a2='a2value'>leave</e3></e2></e1></CONTENT>"
+            );
             tw.WriteLine("<TITLE><!-- this is a comment--></TITLE>");
             tw.WriteLine("<PGROUP>");
-            tw.WriteLine("<ACT0 xmlns:foo=\"http://www.foo.com\" foo:Attr0=\"0\" foo:Attr1=\"1111111101\" foo:Attr2=\"222222202\" foo:Attr3=\"333333303\" foo:Attr4=\"444444404\" foo:Attr5=\"555555505\" foo:Attr6=\"666666606\" foo:Attr7=\"777777707\" foo:Attr8=\"888888808\" foo:Attr9=\"999999909\" />");
-            tw.WriteLine("<ACT1 Attr0=\'0\' Attr1=\'1111111101\' Attr2=\'222222202\' Attr3=\'333333303\' Attr4=\'444444404\' Attr5=\'555555505\' Attr6=\'666666606\' Attr7=\'777777707\' Attr8=\'888888808\' Attr9=\'999999909\' />");
-            tw.WriteLine("<QUOTE1 Attr0=\"0\" Attr1=\'1111111101\' Attr2=\"222222202\" Attr3=\'333333303\' />");
+            tw.WriteLine(
+                "<ACT0 xmlns:foo=\"http://www.foo.com\" foo:Attr0=\"0\" foo:Attr1=\"1111111101\" foo:Attr2=\"222222202\" foo:Attr3=\"333333303\" foo:Attr4=\"444444404\" foo:Attr5=\"555555505\" foo:Attr6=\"666666606\" foo:Attr7=\"777777707\" foo:Attr8=\"888888808\" foo:Attr9=\"999999909\" />"
+            );
+            tw.WriteLine(
+                "<ACT1 Attr0=\'0\' Attr1=\'1111111101\' Attr2=\'222222202\' Attr3=\'333333303\' Attr4=\'444444404\' Attr5=\'555555505\' Attr6=\'666666606\' Attr7=\'777777707\' Attr8=\'888888808\' Attr9=\'999999909\' />"
+            );
+            tw.WriteLine(
+                "<QUOTE1 Attr0=\"0\" Attr1=\'1111111101\' Attr2=\"222222202\" Attr3=\'333333303\' />"
+            );
             tw.WriteLine("<PERSONA>DROMIO OF EPHESUS</PERSONA>");
-            tw.WriteLine("<QUOTE2 Attr0=\"0\" Attr1=\"1111111101\" Attr2=\'222222202\' Attr3=\'333333303\' />");
-            tw.WriteLine("<QUOTE3 Attr0=\'0\' Attr1=\"1111111101\" Attr2=\'222222202\' Attr3=\"333333303\" />");
+            tw.WriteLine(
+                "<QUOTE2 Attr0=\"0\" Attr1=\"1111111101\" Attr2=\'222222202\' Attr3=\'333333303\' />"
+            );
+            tw.WriteLine(
+                "<QUOTE3 Attr0=\'0\' Attr1=\"1111111101\" Attr2=\'222222202\' Attr3=\"333333303\" />"
+            );
             tw.WriteLine("<EMPTY1 />");
             tw.WriteLine("<EMPTY2 val=\"abc\" />");
             tw.WriteLine("<EMPTY3></EMPTY3>");
             tw.WriteLine("<NONEMPTY0></NONEMPTY0>");
             tw.WriteLine("<NONEMPTY1>ABCDE</NONEMPTY1>");
             tw.WriteLine("<NONEMPTY2 val=\"abc\">1234</NONEMPTY2>");
-            tw.WriteLine("<ACT2 Attr0=\"10\" Attr1=\"1111111011\" Attr2=\"222222012\" Attr3=\"333333013\" Attr4=\"444444014\" Attr5=\"555555015\" Attr6=\"666666016\" Attr7=\"777777017\" Attr8=\"888888018\" Attr9=\"999999019\" />");
+            tw.WriteLine(
+                "<ACT2 Attr0=\"10\" Attr1=\"1111111011\" Attr2=\"222222012\" Attr3=\"333333013\" Attr4=\"444444014\" Attr5=\"555555015\" Attr6=\"666666016\" Attr7=\"777777017\" Attr8=\"888888018\" Attr9=\"999999019\" />"
+            );
             tw.WriteLine("<GRPDESCR>twin brothers, and sons to Aegeon and Aemilia.</GRPDESCR>");
             tw.WriteLine("</PGROUP>");
             tw.WriteLine("<PGROUP>");
             tw.Flush();
             tw.WriteLine("<XMLLANG0 xml:lang=\"en-US\">What color &e1; is it?</XMLLANG0>");
-            tw.Write("<XMLLANG1 xml:lang=\"en-GB\">What color is it?<a><b><c>Language Test</c><PERSONA>DROMIO OF EPHESUS</PERSONA></b></a></XMLLANG1>");
+            tw.Write(
+                "<XMLLANG1 xml:lang=\"en-GB\">What color is it?<a><b><c>Language Test</c><PERSONA>DROMIO OF EPHESUS</PERSONA></b></a></XMLLANG1>"
+            );
             tw.WriteLine("<NOXMLLANG />");
             tw.WriteLine("<EMPTY_XMLLANG Attr0=\"0\" xml:lang=\"en-US\" />");
-            tw.WriteLine("<XMLLANG2 xml:lang=\"en-US\">What color is it?<TITLE><!-- this is a comment--></TITLE><XMLLANG1 xml:lang=\"en-GB\">Testing language<XMLLANG0 xml:lang=\"en-US\">What color is it?</XMLLANG0>haha </XMLLANG1>hihihi</XMLLANG2>");
+            tw.WriteLine(
+                "<XMLLANG2 xml:lang=\"en-US\">What color is it?<TITLE><!-- this is a comment--></TITLE><XMLLANG1 xml:lang=\"en-GB\">Testing language<XMLLANG0 xml:lang=\"en-US\">What color is it?</XMLLANG0>haha </XMLLANG1>hihihi</XMLLANG2>"
+            );
             tw.WriteLine("<DONEXMLLANG />");
             tw.WriteLine("<XMLSPACE1 xml:space=\'default\'>&lt; &gt;</XMLSPACE1>");
-            tw.Write("<XMLSPACE2 xml:space=\'preserve\'>&lt; &gt;<a><!-- comment--><b><?PI1a?><c>Space Test</c><PERSONA>DROMIO OF SYRACUSE</PERSONA></b></a></XMLSPACE2>");
+            tw.Write(
+                "<XMLSPACE2 xml:space=\'preserve\'>&lt; &gt;<a><!-- comment--><b><?PI1a?><c>Space Test</c><PERSONA>DROMIO OF SYRACUSE</PERSONA></b></a></XMLSPACE2>"
+            );
             tw.WriteLine("<NOSPACE />");
             tw.WriteLine("<EMPTY_XMLSPACE Attr0=\"0\" xml:space=\'default\' />");
-            tw.WriteLine("<XMLSPACE2A xml:space=\'default\'>&lt; <XMLSPACE3 xml:space=\'preserve\'>  &lt; &gt; <XMLSPACE4 xml:space=\'default\'>  &lt; &gt;  </XMLSPACE4> test </XMLSPACE3> &gt;</XMLSPACE2A>");
-            tw.WriteLine("<GRPDESCR>twin brothers, and attendants on the two Antipholuses.</GRPDESCR>");
+            tw.WriteLine(
+                "<XMLSPACE2A xml:space=\'default\'>&lt; <XMLSPACE3 xml:space=\'preserve\'>  &lt; &gt; <XMLSPACE4 xml:space=\'default\'>  &lt; &gt;  </XMLSPACE4> test </XMLSPACE3> &gt;</XMLSPACE2A>"
+            );
+            tw.WriteLine(
+                "<GRPDESCR>twin brothers, and attendants on the two Antipholuses.</GRPDESCR>"
+            );
             tw.WriteLine("<DOCNAMESPACE>");
-            tw.WriteLine("<NAMESPACE0 xmlns:bar=\"1\"><bar:check>Namespace=1</bar:check></NAMESPACE0>");
-            tw.WriteLine("<NAMESPACE1 xmlns:bar=\"1\"><a><b><c><d><bar:check>Namespace=1</bar:check><bar:check2></bar:check2></d></c></b></a></NAMESPACE1>");
+            tw.WriteLine(
+                "<NAMESPACE0 xmlns:bar=\"1\"><bar:check>Namespace=1</bar:check></NAMESPACE0>"
+            );
+            tw.WriteLine(
+                "<NAMESPACE1 xmlns:bar=\"1\"><a><b><c><d><bar:check>Namespace=1</bar:check><bar:check2></bar:check2></d></c></b></a></NAMESPACE1>"
+            );
             tw.WriteLine("<NONAMESPACE>Namespace=\"\"</NONAMESPACE>");
             tw.WriteLine("<EMPTY_NAMESPACE bar:Attr0=\"0\" xmlns:bar=\"1\" />");
             tw.WriteLine("<EMPTY_NAMESPACE1 Attr0=\"0\" xmlns=\"14\" />");
             tw.WriteLine("<EMPTY_NAMESPACE2 Attr0=\"0\" xmlns=\"14\"></EMPTY_NAMESPACE2>");
-            tw.WriteLine("<NAMESPACE2 xmlns:bar=\"1\"><a><b><c xmlns:bar=\"2\"><d><bar:check>Namespace=2</bar:check></d></c></b></a></NAMESPACE2>");
-            tw.WriteLine("<NAMESPACE3 xmlns=\"1\"><a xmlns:a=\"2\" xmlns:b=\"3\" xmlns:c=\"4\"><b xmlns:d=\"5\" xmlns:e=\"6\" xmlns:f='7'><c xmlns:d=\"8\" xmlns:e=\"9\" xmlns:f=\"10\">");
-            tw.WriteLine("<d xmlns:g=\"11\" xmlns:h=\"12\"><check>Namespace=1</check><testns xmlns=\"100\"><empty100 /><check100>Namespace=100</check100></testns><check1>Namespace=1</check1><d:check8>Namespace=8</d:check8></d></c><d:check5>Namespace=5</d:check5></b></a>");
-            tw.WriteLine("<a13 a:check=\"Namespace=13\" xmlns:a=\"13\" /><check14 xmlns=\"14\">Namespace=14</check14></NAMESPACE3>");
+            tw.WriteLine(
+                "<NAMESPACE2 xmlns:bar=\"1\"><a><b><c xmlns:bar=\"2\"><d><bar:check>Namespace=2</bar:check></d></c></b></a></NAMESPACE2>"
+            );
+            tw.WriteLine(
+                "<NAMESPACE3 xmlns=\"1\"><a xmlns:a=\"2\" xmlns:b=\"3\" xmlns:c=\"4\"><b xmlns:d=\"5\" xmlns:e=\"6\" xmlns:f='7'><c xmlns:d=\"8\" xmlns:e=\"9\" xmlns:f=\"10\">"
+            );
+            tw.WriteLine(
+                "<d xmlns:g=\"11\" xmlns:h=\"12\"><check>Namespace=1</check><testns xmlns=\"100\"><empty100 /><check100>Namespace=100</check100></testns><check1>Namespace=1</check1><d:check8>Namespace=8</d:check8></d></c><d:check5>Namespace=5</d:check5></b></a>"
+            );
+            tw.WriteLine(
+                "<a13 a:check=\"Namespace=13\" xmlns:a=\"13\" /><check14 xmlns=\"14\">Namespace=14</check14></NAMESPACE3>"
+            );
             tw.WriteLine("<NONAMESPACE>Namespace=\"\"</NONAMESPACE>");
-            tw.WriteLine("<NONAMESPACE1 Attr1=\"one\" xmlns=\"1000\">Namespace=\"\"</NONAMESPACE1>");
+            tw.WriteLine(
+                "<NONAMESPACE1 Attr1=\"one\" xmlns=\"1000\">Namespace=\"\"</NONAMESPACE1>"
+            );
             tw.WriteLine("</DOCNAMESPACE>");
             tw.WriteLine("</PGROUP>");
             tw.WriteLine("<GOTOCONTENT>some text<![CDATA[cdata info]]></GOTOCONTENT>");
-            tw.WriteLine("<SKIPCONTENT att1=\"\">  <!-- comment1--> \n <?PI_SkipContent instruction?></SKIPCONTENT>");
-            tw.WriteLine("<MIXCONTENT>  <!-- comment1-->some text<?PI_SkipContent instruction?><![CDATA[cdata info]]></MIXCONTENT>");
+            tw.WriteLine(
+                "<SKIPCONTENT att1=\"\">  <!-- comment1--> \n <?PI_SkipContent instruction?></SKIPCONTENT>"
+            );
+            tw.WriteLine(
+                "<MIXCONTENT>  <!-- comment1-->some text<?PI_SkipContent instruction?><![CDATA[cdata info]]></MIXCONTENT>"
+            );
             tw.WriteLine("<A att=\"123\">1<B>2<C>3<D>4<E>5<F>6<G>7<H>8<I>9<J>10");
-            tw.WriteLine("<A1 att=\"456\">11<B1>12<C1>13<D1>14<E1>15<F1>16<G1>17<H1>18<I1>19<J1>20");
-            tw.WriteLine("<A2 att=\"789\">21<B2>22<C2>23<D2>24<E2>25<F2>26<G2>27<H2>28<I2>29<J2>30");
-            tw.WriteLine("<A3 att=\"123\">31<B3>32<C3>33<D3>34<E3>35<F3>36<G3>37<H3>38<I3>39<J3>40");
-            tw.WriteLine("<A4 att=\"456\">41<B4>42<C4>43<D4>44<E4>45<F4>46<G4>47<H4>48<I4>49<J4>50");
-            tw.WriteLine("<A5 att=\"789\">51<B5>52<C5>53<D5>54<E5>55<F5>56<G5>57<H5>58<I5>59<J5>60");
-            tw.WriteLine("<A6 att=\"123\">61<B6>62<C6>63<D6>64<E6>65<F6>66<G6>67<H6>68<I6>69<J6>70");
-            tw.WriteLine("<A7 att=\"456\">71<B7>72<C7>73<D7>74<E7>75<F7>76<G7>77<H7>78<I7>79<J7>80");
-            tw.WriteLine("<A8 att=\"789\">81<B8>82<C8>83<D8>84<E8>85<F8>86<G8>87<H8>88<I8>89<J8>90");
-            tw.WriteLine("<A9 att=\"123\">91<B9>92<C9>93<D9>94<E9>95<F9>96<G9>97<H9>98<I9>99<J9>100");
-            tw.WriteLine("<A10 att=\"123\">101<B10>102<C10>103<D10>104<E10>105<F10>106<G10>107<H10>108<I10>109<J10>110");
-            tw.WriteLine("</J10>109</I10>108</H10>107</G10>106</F10>105</E10>104</D10>103</C10>102</B10>101</A10>");
+            tw.WriteLine(
+                "<A1 att=\"456\">11<B1>12<C1>13<D1>14<E1>15<F1>16<G1>17<H1>18<I1>19<J1>20"
+            );
+            tw.WriteLine(
+                "<A2 att=\"789\">21<B2>22<C2>23<D2>24<E2>25<F2>26<G2>27<H2>28<I2>29<J2>30"
+            );
+            tw.WriteLine(
+                "<A3 att=\"123\">31<B3>32<C3>33<D3>34<E3>35<F3>36<G3>37<H3>38<I3>39<J3>40"
+            );
+            tw.WriteLine(
+                "<A4 att=\"456\">41<B4>42<C4>43<D4>44<E4>45<F4>46<G4>47<H4>48<I4>49<J4>50"
+            );
+            tw.WriteLine(
+                "<A5 att=\"789\">51<B5>52<C5>53<D5>54<E5>55<F5>56<G5>57<H5>58<I5>59<J5>60"
+            );
+            tw.WriteLine(
+                "<A6 att=\"123\">61<B6>62<C6>63<D6>64<E6>65<F6>66<G6>67<H6>68<I6>69<J6>70"
+            );
+            tw.WriteLine(
+                "<A7 att=\"456\">71<B7>72<C7>73<D7>74<E7>75<F7>76<G7>77<H7>78<I7>79<J7>80"
+            );
+            tw.WriteLine(
+                "<A8 att=\"789\">81<B8>82<C8>83<D8>84<E8>85<F8>86<G8>87<H8>88<I8>89<J8>90"
+            );
+            tw.WriteLine(
+                "<A9 att=\"123\">91<B9>92<C9>93<D9>94<E9>95<F9>96<G9>97<H9>98<I9>99<J9>100"
+            );
+            tw.WriteLine(
+                "<A10 att=\"123\">101<B10>102<C10>103<D10>104<E10>105<F10>106<G10>107<H10>108<I10>109<J10>110"
+            );
+            tw.WriteLine(
+                "</J10>109</I10>108</H10>107</G10>106</F10>105</E10>104</D10>103</C10>102</B10>101</A10>"
+            );
             tw.WriteLine("</J9>99</I9>98</H9>97</G9>96</F9>95</E9>94</D9>93</C9>92</B9>91</A9>");
             tw.WriteLine("</J8>89</I8>88</H8>87</G8>86</F8>85</E8>84</D8>83</C8>82</B8>81</A8>");
             tw.WriteLine("</J7>79</I7>78</H7>77</G7>76</F7>75</E7>74</D7>73</C7>72</B7>71</A7>");
@@ -782,7 +922,9 @@ namespace CoreXml.Test.XLinq
             tw.WriteLine("<EMPTY4 val=\"abc\"></EMPTY4>");
             tw.WriteLine("<COMPLEX>Text<!-- comment --><![CDATA[cdata]]></COMPLEX>");
             tw.WriteLine("<DUMMY />");
-            tw.WriteLine("<MULTISPACES att=' \r\n \t \r\r\n  n1  \r\n \t \r\r\n  n2  \r\n \t \r\r\n ' />");
+            tw.WriteLine(
+                "<MULTISPACES att=' \r\n \t \r\r\n  n1  \r\n \t \r\r\n  n2  \r\n \t \r\r\n ' />"
+            );
             tw.WriteLine("<CAT>AB<![CDATA[CD]]> </CAT>");
             tw.WriteLine("<CATMIXED>AB<![CDATA[CD]]> </CATMIXED>");
 
@@ -807,7 +949,7 @@ namespace CoreXml.Test.XLinq
             twDTD.WriteLine("att2 CDATA #IMPLIED");
             twDTD.WriteLine("att3 CDATA #IMPLIED>");
             twDTD.WriteLine("<!ATTLIST a refs IDREFS #IMPLIED>");
-            
+
             FilePathUtil.addStream("AllNodeTypes.dtd", msDTD);
 
             // Create Ent file
@@ -825,7 +967,9 @@ namespace CoreXml.Test.XLinq
             var ms = new MemoryStream();
             using var tw = new StreamWriter(ms, leaveOpen: true);
 
-            tw.WriteLine("<?xml version=\"1.0\"?><!DOCTYPE Root [<!ELEMENT Root ANY><!ELEMENT E ANY><!ATTLIST E	A1 NOTATION (N) #IMPLIED>]>");
+            tw.WriteLine(
+                "<?xml version=\"1.0\"?><!DOCTYPE Root [<!ELEMENT Root ANY><!ELEMENT E ANY><!ATTLIST E	A1 NOTATION (N) #IMPLIED>]>"
+            );
             tw.WriteLine("<Root><E A1=\"N\" /></Root>");
 
             FilePathUtil.addStream(strFileName, ms);
@@ -836,7 +980,9 @@ namespace CoreXml.Test.XLinq
             var ms = new MemoryStream();
             using var tw = new StreamWriter(ms, leaveOpen: true);
 
-            tw.WriteLine("<?xml version=\"1.0\"?><!DOCTYPE Root [<!ELEMENT Root ANY><!ELEMENT E ANY><!ATTLIST E	IMAGE_FORMAT (bmp|jpg|gif) #IMPLIED>]>");
+            tw.WriteLine(
+                "<?xml version=\"1.0\"?><!DOCTYPE Root [<!ELEMENT Root ANY><!ELEMENT E ANY><!ATTLIST E	IMAGE_FORMAT (bmp|jpg|gif) #IMPLIED>]>"
+            );
             tw.Write("<Root><E A1=\"gif\" /></Root>");
 
             FilePathUtil.addStream(strFileName, ms);
@@ -847,7 +993,9 @@ namespace CoreXml.Test.XLinq
             var ms = new MemoryStream();
             using var tw = new StreamWriter(ms, leaveOpen: true);
 
-            tw.Write("<!DOCTYPE foo [<!ELEMENT foo (e1, e2, e3)><!ENTITY bar \"<e1> <e4 /> </e1> <e2> that </e2>\">");
+            tw.Write(
+                "<!DOCTYPE foo [<!ELEMENT foo (e1, e2, e3)><!ENTITY bar \"<e1> <e4 /> </e1> <e2> that </e2>\">"
+            );
             tw.Write("<!ELEMENT e1 (e4)><!ELEMENT e2 ANY><!ELEMENT e3 ANY><!ELEMENT e4 ANY>]>");
             tw.Write("<foo>&bar;<e3 /></foo>");
 
@@ -859,7 +1007,9 @@ namespace CoreXml.Test.XLinq
             var ms = new MemoryStream();
             using var tw = new StreamWriter(ms, leaveOpen: true);
 
-            tw.Write("<!DOCTYPE foo [<!ELEMENT foo (e1, e2, e3)><!ENTITY bar \"<e1> <e4 /> </e1> <e2> that </e2></e2>\">");
+            tw.Write(
+                "<!DOCTYPE foo [<!ELEMENT foo (e1, e2, e3)><!ENTITY bar \"<e1> <e4 /> </e1> <e2> that </e2></e2>\">"
+            );
             tw.Write("<!ELEMENT e1 (e4)><!ELEMENT e2 ANY><!ELEMENT e3 ANY><!ELEMENT e4 ANY>]>");
             tw.Write("<foo>&bar;<e3 /></foo>");
 
@@ -871,7 +1021,9 @@ namespace CoreXml.Test.XLinq
             var ms = new MemoryStream();
             using var tw = new StreamWriter(ms, leaveOpen: true);
 
-            tw.Write("<!DOCTYPE foo [<!ELEMENT foo (e1, e2, e3)><!ENTITY bar \"<e1> this </e1> <e2> that </e2>\">");
+            tw.Write(
+                "<!DOCTYPE foo [<!ELEMENT foo (e1, e2, e3)><!ENTITY bar \"<e1> this </e1> <e2> that </e2>\">"
+            );
             tw.Write("<!ELEMENT e1 (e4)><!ELEMENT e2 ANY><!ELEMENT e3 ANY><!ELEMENT e4 ANY>]>");
             tw.Write("<foo>&bar;<e3 /></foo>");
 
@@ -910,8 +1062,12 @@ namespace CoreXml.Test.XLinq
             var ms = new MemoryStream();
             using var tw = new StreamWriter(ms, leaveOpen: true);
 
-            tw.WriteLine("<Schema xmlns=\"uuid:BDC6E3F0-6DA3-11d1-A2A3-00AA00C14882\"><ElementType content=\"empty\" name=\"tt\"></ElementType>");
-            tw.WriteLine("<ElementType content=\"eltOnly\" order=\"seq\" name=\"bar\" model=\"closed\"><element type=\"tt\" /><element type=\"tt\" /></ElementType>");
+            tw.WriteLine(
+                "<Schema xmlns=\"uuid:BDC6E3F0-6DA3-11d1-A2A3-00AA00C14882\"><ElementType content=\"empty\" name=\"tt\"></ElementType>"
+            );
+            tw.WriteLine(
+                "<ElementType content=\"eltOnly\" order=\"seq\" name=\"bar\" model=\"closed\"><element type=\"tt\" /><element type=\"tt\" /></ElementType>"
+            );
             tw.WriteLine("</Schema>");
 
             FilePathUtil.addStream(strFileName, ms);
@@ -922,7 +1078,9 @@ namespace CoreXml.Test.XLinq
             var ms = new MemoryStream();
             using var tw = new StreamWriter(ms, leaveOpen: true);
 
-            tw.WriteLine("<NAMESPACE0 xmlns:bar=\"1\"><bar1:check>Namespace=1</bar1:check></NAMESPACE0>");
+            tw.WriteLine(
+                "<NAMESPACE0 xmlns:bar=\"1\"><bar1:check>Namespace=1</bar1:check></NAMESPACE0>"
+            );
 
             FilePathUtil.addStream(strFileName, ms);
         }
@@ -933,15 +1091,27 @@ namespace CoreXml.Test.XLinq
             using var tw = new StreamWriter(ms, leaveOpen: true);
 
             tw.WriteLine("<DOCNAMESPACE>");
-            tw.WriteLine("<NAMESPACE0 xmlns:bar=\"1\"><bar:check>Namespace=1</bar:check></NAMESPACE0>");
-            tw.WriteLine("<NAMESPACE1 xmlns:bar=\"1\"><a><b><c><d><bar:check>Namespace=1</bar:check></d></c></b></a></NAMESPACE1>");
+            tw.WriteLine(
+                "<NAMESPACE0 xmlns:bar=\"1\"><bar:check>Namespace=1</bar:check></NAMESPACE0>"
+            );
+            tw.WriteLine(
+                "<NAMESPACE1 xmlns:bar=\"1\"><a><b><c><d><bar:check>Namespace=1</bar:check></d></c></b></a></NAMESPACE1>"
+            );
             tw.WriteLine("<NONAMESPACE>Namespace=\"\"</NONAMESPACE>");
             tw.WriteLine("<EMPTY_NAMESPACE bar:Attr0=\"0\" xmlns:bar=\"1\" />");
             tw.WriteLine("<EMPTY_NAMESPACE1 Attr0=\"0\" xmlns=\"14\" />");
-            tw.WriteLine("<NAMESPACE2 xmlns:bar=\"1\"><a><b><c xmlns:bar=\"2\"><d><bar:check>Namespace=2</bar:check></d></c></b></a></NAMESPACE2>");
-            tw.WriteLine("<NAMESPACE3 xmlns=\"1\"><a xmlns:a=\"2\" xmlns:b=\"3\" xmlns:c=\"4\"><b xmlns:d=\"5\" xmlns:e=\"6\" xmlns:f='7'><c xmlns:d=\"8\" xmlns:e=\"9\" xmlns:f=\"10\">");
-            tw.WriteLine("<d xmlns:g=\"11\" xmlns:h=\"12\"><check>Namespace=1</check><testns xmlns=\"100\"><check100>Namespace=100</check100></testns><check1>Namespace=1</check1><d:check8>Namespace=8</d:check8></d></c><d:check5>Namespace=5</d:check5></b></a>");
-            tw.WriteLine("<a13 a:check=\"Namespace=13\" xmlns:a=\"13\" /><check14 xmlns=\"14\">Namespace=14</check14></NAMESPACE3>");
+            tw.WriteLine(
+                "<NAMESPACE2 xmlns:bar=\"1\"><a><b><c xmlns:bar=\"2\"><d><bar:check>Namespace=2</bar:check></d></c></b></a></NAMESPACE2>"
+            );
+            tw.WriteLine(
+                "<NAMESPACE3 xmlns=\"1\"><a xmlns:a=\"2\" xmlns:b=\"3\" xmlns:c=\"4\"><b xmlns:d=\"5\" xmlns:e=\"6\" xmlns:f='7'><c xmlns:d=\"8\" xmlns:e=\"9\" xmlns:f=\"10\">"
+            );
+            tw.WriteLine(
+                "<d xmlns:g=\"11\" xmlns:h=\"12\"><check>Namespace=1</check><testns xmlns=\"100\"><check100>Namespace=100</check100></testns><check1>Namespace=1</check1><d:check8>Namespace=8</d:check8></d></c><d:check5>Namespace=5</d:check5></b></a>"
+            );
+            tw.WriteLine(
+                "<a13 a:check=\"Namespace=13\" xmlns:a=\"13\" /><check14 xmlns=\"14\">Namespace=14</check14></NAMESPACE3>"
+            );
             tw.WriteLine("<NONAMESPACE>Namespace=\"\"</NONAMESPACE>");
             tw.WriteLine("</DOCNAMESPACE>");
 
@@ -957,10 +1127,14 @@ namespace CoreXml.Test.XLinq
             tw.WriteLine("<PERSONA>DROMIO OF EPHESUS</PERSONA>");
             tw.WriteLine("<PERSONA>DROMIO OF SYRACUSE</PERSONA>");
             tw.WriteLine("<XMLLANG0 xml:lang=\"en-US\">What color is it?</XMLLANG0>");
-            tw.Write("<XMLLANG1 xml:lang=\"en-GB\">What color is it?<a><b><c>Language Test</c><PERSONA>DROMIO OF EPHESUS</PERSONA></b></a></XMLLANG1>");
+            tw.Write(
+                "<XMLLANG1 xml:lang=\"en-GB\">What color is it?<a><b><c>Language Test</c><PERSONA>DROMIO OF EPHESUS</PERSONA></b></a></XMLLANG1>"
+            );
             tw.WriteLine("<NOXMLLANG />");
             tw.WriteLine("<EMPTY_XMLLANG Attr0=\"0\" xml:lang=\"en-US\" />");
-            tw.WriteLine("<XMLLANG2 xml:lang=\"en-US\">What color is it?<TITLE><!-- this is a comment--></TITLE><XMLLANG1 xml:lang=\"en-GB\">Testing language<XMLLANG0 xml:lang=\"en-US\">What color is it?</XMLLANG0>haha </XMLLANG1>hihihi</XMLLANG2>");
+            tw.WriteLine(
+                "<XMLLANG2 xml:lang=\"en-US\">What color is it?<TITLE><!-- this is a comment--></TITLE><XMLLANG1 xml:lang=\"en-GB\">Testing language<XMLLANG0 xml:lang=\"en-US\">What color is it?</XMLLANG0>haha </XMLLANG1>hihihi</XMLLANG2>"
+            );
             tw.WriteLine("<DONEXMLLANG />");
             tw.WriteLine("</PGROUP>");
 
@@ -976,11 +1150,17 @@ namespace CoreXml.Test.XLinq
             tw.WriteLine("<PERSONA>DROMIO OF EPHESUS</PERSONA>");
             tw.WriteLine("<PERSONA>DROMIO OF SYRACUSE</PERSONA>");
             tw.WriteLine("<XMLSPACE1 xml:space=\'default\'>&lt; &gt;</XMLSPACE1>");
-            tw.Write("<XMLSPACE2 xml:space=\'preserve\'>&lt; &gt;<a><b><c>Space Test</c><PERSONA>DROMIO OF SYRACUSE</PERSONA></b></a></XMLSPACE2>");
+            tw.Write(
+                "<XMLSPACE2 xml:space=\'preserve\'>&lt; &gt;<a><b><c>Space Test</c><PERSONA>DROMIO OF SYRACUSE</PERSONA></b></a></XMLSPACE2>"
+            );
             tw.WriteLine("<NOSPACE />");
             tw.WriteLine("<EMPTY_XMLSPACE Attr0=\"0\" xml:space=\'default\' />");
-            tw.WriteLine("<XMLSPACE2A xml:space=\'default\'>&lt; <XMLSPACE3 xml:space=\'preserve\'>  &lt; &gt; <XMLSPACE4 xml:space=\'default\'>  &lt; &gt;  </XMLSPACE4> test </XMLSPACE3> &gt;</XMLSPACE2A>");
-            tw.WriteLine("<GRPDESCR>twin brothers, and attendants on the two Antipholuses.</GRPDESCR>");
+            tw.WriteLine(
+                "<XMLSPACE2A xml:space=\'default\'>&lt; <XMLSPACE3 xml:space=\'preserve\'>  &lt; &gt; <XMLSPACE4 xml:space=\'default\'>  &lt; &gt;  </XMLSPACE4> test </XMLSPACE3> &gt;</XMLSPACE2A>"
+            );
+            tw.WriteLine(
+                "<GRPDESCR>twin brothers, and attendants on the two Antipholuses.</GRPDESCR>"
+            );
             tw.WriteLine("</PGROUP>");
 
             FilePathUtil.addStream(strFileName, ms);
@@ -1009,17 +1189,29 @@ namespace CoreXml.Test.XLinq
 
             for (i = 0; i < strBase64.Length; i++)
             {
-                WriteToBuffer(ref Wbase64, ref Wbase64len, System.BitConverter.GetBytes(strBase64[i]));
+                WriteToBuffer(
+                    ref Wbase64,
+                    ref Wbase64len,
+                    System.BitConverter.GetBytes(strBase64[i])
+                );
             }
 
             for (i = 52; i < strBase64.Length; i++)
             {
-                WriteToBuffer(ref WNumOnly, ref WNumOnlylen, System.BitConverter.GetBytes(strBase64[i]));
+                WriteToBuffer(
+                    ref WNumOnly,
+                    ref WNumOnlylen,
+                    System.BitConverter.GetBytes(strBase64[i])
+                );
             }
 
             for (i = 0; i < strBase64.Length - 12; i++)
             {
-                WriteToBuffer(ref WTextOnly, ref WTextOnlylen, System.BitConverter.GetBytes(strBase64[i]));
+                WriteToBuffer(
+                    ref WTextOnly,
+                    ref WTextOnlylen,
+                    System.BitConverter.GetBytes(strBase64[i])
+                );
             }
 
             var ms = new MemoryStream();
@@ -1075,17 +1267,29 @@ namespace CoreXml.Test.XLinq
 
             for (i = 0; i < strBinHex.Length; i++)
             {
-                WriteToBuffer(ref Wbinhex, ref Wbinhexlen, System.BitConverter.GetBytes(strBinHex[i]));
+                WriteToBuffer(
+                    ref Wbinhex,
+                    ref Wbinhexlen,
+                    System.BitConverter.GetBytes(strBinHex[i])
+                );
             }
 
             for (i = 0; i < 10; i++)
             {
-                WriteToBuffer(ref WNumOnly, ref WNumOnlylen, System.BitConverter.GetBytes(strBinHex[i]));
+                WriteToBuffer(
+                    ref WNumOnly,
+                    ref WNumOnlylen,
+                    System.BitConverter.GetBytes(strBinHex[i])
+                );
             }
 
             for (i = 10; i < strBinHex.Length; i++)
             {
-                WriteToBuffer(ref WTextOnly, ref WTextOnlylen, System.BitConverter.GetBytes(strBinHex[i]));
+                WriteToBuffer(
+                    ref WTextOnly,
+                    ref WTextOnlylen,
+                    System.BitConverter.GetBytes(strBinHex[i])
+                );
             }
 
             var ms = new MemoryStream();
@@ -1145,11 +1349,14 @@ namespace CoreXml.Test.XLinq
 
             FilePathUtil.addStream(strFileName, ms);
         }
+
         public static void CreateXSLTStyleSheetWCopyTestFile(string strFileName)
         {
             var ms = new MemoryStream();
             using var tw = new StreamWriter(ms, leaveOpen: true);
-            tw.WriteLine("<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">");
+            tw.WriteLine(
+                "<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">"
+            );
             tw.WriteLine("<xsl:template match=\"/\">");
             tw.WriteLine("<xsl:copy-of select=\"/\" />");
             tw.WriteLine("</xsl:template>");
@@ -1272,7 +1479,10 @@ namespace CoreXml.Test.XLinq
                         r.ResolveEntity();
                 }
 
-                if (r.NodeType == XmlNodeType.ProcessingInstruction && r.NodeType == XmlNodeType.XmlDeclaration)
+                if (
+                    r.NodeType == XmlNodeType.ProcessingInstruction
+                    && r.NodeType == XmlNodeType.XmlDeclaration
+                )
                 {
                     if (string.Compare(r.Name, 0, ST_XML, 0, 3) != 0)
                         return true;
@@ -1345,18 +1555,12 @@ namespace CoreXml.Test.XLinq
 
         public override int Depth
         {
-            get
-            {
-                return _tr.Depth;
-            }
+            get { return _tr.Depth; }
         }
 
         public override string Value
         {
-            get
-            {
-                return _tr.Value;
-            }
+            get { return _tr.Value; }
         }
 
         public override bool MoveToElement()
@@ -1366,26 +1570,17 @@ namespace CoreXml.Test.XLinq
 
         public override bool IsEmptyElement
         {
-            get
-            {
-                return _tr.IsEmptyElement;
-            }
+            get { return _tr.IsEmptyElement; }
         }
 
         public override string LocalName
         {
-            get
-            {
-                return _tr.LocalName;
-            }
+            get { return _tr.LocalName; }
         }
 
         public override XmlNodeType NodeType
         {
-            get
-            {
-                return _tr.NodeType;
-            }
+            get { return _tr.NodeType; }
         }
 
         public override bool MoveToNextAttribute()
@@ -1410,26 +1605,17 @@ namespace CoreXml.Test.XLinq
 
         public override bool EOF
         {
-            get
-            {
-                return _tr.EOF;
-            }
+            get { return _tr.EOF; }
         }
 
         public override bool HasValue
         {
-            get
-            {
-                return _tr.HasValue;
-            }
+            get { return _tr.HasValue; }
         }
 
         public override string NamespaceURI
         {
-            get
-            {
-                return _tr.NamespaceURI;
-            }
+            get { return _tr.NamespaceURI; }
         }
 
         public override bool Read()
@@ -1439,18 +1625,12 @@ namespace CoreXml.Test.XLinq
 
         public override XmlNameTable NameTable
         {
-            get
-            {
-                return _tr.NameTable;
-            }
+            get { return _tr.NameTable; }
         }
 
         public override bool CanResolveEntity
         {
-            get
-            {
-                return _tr.CanResolveEntity;
-            }
+            get { return _tr.CanResolveEntity; }
         }
 
         public override void ResolveEntity()
@@ -1475,10 +1655,7 @@ namespace CoreXml.Test.XLinq
 
         public override string BaseURI
         {
-            get
-            {
-                return _tr.BaseURI;
-            }
+            get { return _tr.BaseURI; }
         }
 
         public override bool ReadAttributeValue()
@@ -1488,10 +1665,7 @@ namespace CoreXml.Test.XLinq
 
         public override string Prefix
         {
-            get
-            {
-                return _tr.Prefix;
-            }
+            get { return _tr.Prefix; }
         }
 
         public override bool MoveToAttribute(string name, string ns)
@@ -1506,18 +1680,12 @@ namespace CoreXml.Test.XLinq
 
         public override int AttributeCount
         {
-            get
-            {
-                return _tr.AttributeCount;
-            }
+            get { return _tr.AttributeCount; }
         }
 
         public override ReadState ReadState
         {
-            get
-            {
-                return _tr.ReadState;
-            }
+            get { return _tr.ReadState; }
         }
     }
 
@@ -1639,26 +1807,17 @@ namespace CoreXml.Test.XLinq
 
         public override WriteState WriteState
         {
-            get
-            {
-                return _writer.WriteState;
-            }
+            get { return _writer.WriteState; }
         }
 
         public override XmlSpace XmlSpace
         {
-            get
-            {
-                return _writer.XmlSpace;
-            }
+            get { return _writer.XmlSpace; }
         }
 
         public override string XmlLang
         {
-            get
-            {
-                return _writer.XmlLang;
-            }
+            get { return _writer.XmlLang; }
         }
 
         public new void Dispose()

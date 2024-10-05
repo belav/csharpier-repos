@@ -18,8 +18,7 @@ namespace System.Diagnostics.Tracing
     /// <typeparam name="DataType">
     /// The type of object that is handled by this implementation.
     /// </typeparam>
-    internal abstract class TraceLoggingTypeInfo<DataType>
-        : TraceLoggingTypeInfo
+    internal abstract class TraceLoggingTypeInfo<DataType> : TraceLoggingTypeInfo
     {
         private static TraceLoggingTypeInfo<DataType> instance;
 
@@ -60,14 +59,9 @@ namespace System.Diagnostics.Tracing
             EventLevel level,
             EventOpcode opcode,
             EventKeywords keywords,
-            EventTags tags)
-        : base(
-            typeof(DataType),
-            name,
-            level,
-            opcode,
-            keywords,
-            tags)
+            EventTags tags
+        )
+            : base(typeof(DataType), name, level, opcode, keywords, tags)
         {
             return;
         }
@@ -81,10 +75,7 @@ namespace System.Diagnostics.Tracing
         /// </summary>
         public static TraceLoggingTypeInfo<DataType> Instance
         {
-            get
-            {
-                return instance ?? InitInstance();
-            }
+            get { return instance ?? InitInstance(); }
         }
 
         /// <summary>
@@ -104,9 +95,7 @@ namespace System.Diagnostics.Tracing
         /// <param name="value">
         /// The value for which data is to be written.
         /// </param>
-        public abstract void WriteData(
-            TraceLoggingDataCollector collector,
-            ref DataType value);
+        public abstract void WriteData(TraceLoggingDataCollector collector, ref DataType value);
 
         /// <summary>
         /// When overridden in a derived class, writes the data (fields) for an instance
@@ -129,9 +118,7 @@ namespace System.Diagnostics.Tracing
         /// (even for value types) if the property from which the value was read is
         /// missing or null.
         /// </param>
-        public override void WriteObjectData(
-            TraceLoggingDataCollector collector,
-            object value)
+        public override void WriteObjectData(TraceLoggingDataCollector collector, object value)
         {
             var val = value == null ? default(DataType) : (DataType)value;
             this.WriteData(collector, ref val);
@@ -144,7 +131,10 @@ namespace System.Diagnostics.Tracing
                 var recursionCheckCount = recursionCheck.Count;
                 var newInstance = Statics.CreateDefaultTypeInfo<DataType>(recursionCheck);
                 Interlocked.CompareExchange(ref instance, newInstance, null);
-                recursionCheck.RemoveRange(recursionCheckCount, recursionCheck.Count - recursionCheckCount);
+                recursionCheck.RemoveRange(
+                    recursionCheckCount,
+                    recursionCheck.Count - recursionCheckCount
+                );
             }
 
             return instance;

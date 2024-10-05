@@ -15,34 +15,54 @@ using Microsoft.CodeAnalysis.Diagnostics;
 namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConstructorInitializerPlacement
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal sealed class ConstructorInitializerPlacementDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal sealed class ConstructorInitializerPlacementDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public ConstructorInitializerPlacementDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.ConstructorInitializerPlacementDiagnosticId,
-                   EnforceOnBuildValues.ConstructorInitializerPlacement,
-                   CSharpCodeStyleOptions.AllowBlankLineAfterColonInConstructorInitializer,
-                   new LocalizableResourceString(
-                       nameof(CSharpAnalyzersResources.Blank_line_not_allowed_after_constructor_initializer_colon), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
+            : base(
+                IDEDiagnosticIds.ConstructorInitializerPlacementDiagnosticId,
+                EnforceOnBuildValues.ConstructorInitializerPlacement,
+                CSharpCodeStyleOptions.AllowBlankLineAfterColonInConstructorInitializer,
+                new LocalizableResourceString(
+                    nameof(
+                        CSharpAnalyzersResources.Blank_line_not_allowed_after_constructor_initializer_colon
+                    ),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                )
+            ) { }
+
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
+
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterCompilationStartAction(context =>
+                context.RegisterSyntaxTreeAction(treeContext =>
+                    AnalyzeTree(treeContext, context.Compilation.Options)
+                )
+            );
+
+        private void AnalyzeTree(
+            SyntaxTreeAnalysisContext context,
+            CompilationOptions compilationOptions
+        )
         {
-        }
-
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
-
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterCompilationStartAction(context =>
-                context.RegisterSyntaxTreeAction(treeContext => AnalyzeTree(treeContext, context.Compilation.Options)));
-
-        private void AnalyzeTree(SyntaxTreeAnalysisContext context, CompilationOptions compilationOptions)
-        {
-            var option = context.GetCSharpAnalyzerOptions().AllowBlankLineAfterColonInConstructorInitializer;
-            if (option.Value || ShouldSkipAnalysis(context, compilationOptions, option.Notification))
+            var option = context
+                .GetCSharpAnalyzerOptions()
+                .AllowBlankLineAfterColonInConstructorInitializer;
+            if (
+                option.Value || ShouldSkipAnalysis(context, compilationOptions, option.Notification)
+            )
                 return;
 
             Recurse(context, option.Notification, context.GetAnalysisRoot(findInTrivia: false));
         }
 
-        private void Recurse(SyntaxTreeAnalysisContext context, NotificationOption2 notificationOption, SyntaxNode node)
+        private void Recurse(
+            SyntaxTreeAnalysisContext context,
+            NotificationOption2 notificationOption,
+            SyntaxNode node
+        )
         {
             context.CancellationToken.ThrowIfCancellationRequested();
 
@@ -64,7 +84,10 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConstructorInitializerPlacement
         }
 
         private void ProcessConstructorInitializer(
-            SyntaxTreeAnalysisContext context, NotificationOption2 notificationOption, ConstructorInitializerSyntax initializer)
+            SyntaxTreeAnalysisContext context,
+            NotificationOption2 notificationOption,
+            ConstructorInitializerSyntax initializer
+        )
         {
             var sourceText = context.Tree.GetText(context.CancellationToken);
 
@@ -85,15 +108,22 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConstructorInitializerPlacement
             if (colonToken.TrailingTrivia.Any(t => !t.IsWhitespaceOrEndOfLine()))
                 return;
 
-            if (thisOrBaseKeyword.LeadingTrivia.Any(t => !t.IsWhitespaceOrEndOfLine() && !t.IsSingleOrMultiLineComment()))
+            if (
+                thisOrBaseKeyword.LeadingTrivia.Any(t =>
+                    !t.IsWhitespaceOrEndOfLine() && !t.IsSingleOrMultiLineComment()
+                )
+            )
                 return;
 
-            context.ReportDiagnostic(DiagnosticHelper.Create(
-                this.Descriptor,
-                colonToken.GetLocation(),
-                notificationOption,
-                additionalLocations: ImmutableArray.Create(initializer.GetLocation()),
-                properties: null));
+            context.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    this.Descriptor,
+                    colonToken.GetLocation(),
+                    notificationOption,
+                    additionalLocations: ImmutableArray.Create(initializer.GetLocation()),
+                    properties: null
+                )
+            );
         }
     }
 }

@@ -10,7 +10,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 /// <summary>
 /// Associates a model object with it's corresponding <see cref="ModelMetadata"/>.
 /// </summary>
-[DebuggerDisplay("DeclaredType = {Metadata.ModelType.Name}, PropertyName = {Metadata.PropertyName}")]
+[DebuggerDisplay(
+    "DeclaredType = {Metadata.ModelType.Name}, PropertyName = {Metadata.PropertyName}"
+)]
 public class ModelExplorer
 {
     private readonly IModelMetadataProvider _metadataProvider;
@@ -28,7 +30,8 @@ public class ModelExplorer
     public ModelExplorer(
         IModelMetadataProvider metadataProvider,
         ModelMetadata metadata,
-        object model)
+        object model
+    )
     {
         ArgumentNullException.ThrowIfNull(metadataProvider);
         ArgumentNullException.ThrowIfNull(metadata);
@@ -49,7 +52,8 @@ public class ModelExplorer
         IModelMetadataProvider metadataProvider,
         ModelExplorer container,
         ModelMetadata metadata,
-        Func<object, object> modelAccessor)
+        Func<object, object> modelAccessor
+    )
     {
         ArgumentNullException.ThrowIfNull(metadataProvider);
         ArgumentNullException.ThrowIfNull(container);
@@ -72,7 +76,8 @@ public class ModelExplorer
         IModelMetadataProvider metadataProvider,
         ModelExplorer container,
         ModelMetadata metadata,
-        object model)
+        object model
+    )
     {
         ArgumentNullException.ThrowIfNull(metadataProvider);
         ArgumentNullException.ThrowIfNull(metadata);
@@ -189,10 +194,13 @@ public class ModelExplorer
                     PropertyHelper propertyHelper = null;
                     for (var j = 0; j < propertyHelpers.Length; j++)
                     {
-                        if (string.Equals(
-                            propertyMetadata.PropertyName,
-                            propertyHelpers[j].Property.Name,
-                            StringComparison.Ordinal))
+                        if (
+                            string.Equals(
+                                propertyMetadata.PropertyName,
+                                propertyHelpers[j].Property.Name,
+                                StringComparison.Ordinal
+                            )
+                        )
                         {
                             propertyHelper = propertyHelpers[j];
                             break;
@@ -362,7 +370,10 @@ public class ModelExplorer
     /// The returned <see cref="ModelExplorer"/> will have the current instance set as its <see cref="Container"/>.
     /// </para>
     /// </remarks>
-    public ModelExplorer GetExplorerForExpression(Type modelType, Func<object, object> modelAccessor)
+    public ModelExplorer GetExplorerForExpression(
+        Type modelType,
+        Func<object, object> modelAccessor
+    )
     {
         ArgumentNullException.ThrowIfNull(modelType);
 
@@ -387,7 +398,10 @@ public class ModelExplorer
     /// The returned <see cref="ModelExplorer"/> will have the current instance set as its <see cref="Container"/>.
     /// </para>
     /// </remarks>
-    public ModelExplorer GetExplorerForExpression(ModelMetadata metadata, Func<object, object> modelAccessor)
+    public ModelExplorer GetExplorerForExpression(
+        ModelMetadata metadata,
+        Func<object, object> modelAccessor
+    )
     {
         ArgumentNullException.ThrowIfNull(metadata);
 
@@ -409,17 +423,25 @@ public class ModelExplorer
 
     private ModelExplorer CreateExplorerForProperty(
         ModelMetadata propertyMetadata,
-        PropertyHelper propertyHelper)
+        PropertyHelper propertyHelper
+    )
     {
         if (propertyHelper == null)
         {
-            return new ModelExplorer(_metadataProvider, this, propertyMetadata, modelAccessor: null);
+            return new ModelExplorer(
+                _metadataProvider,
+                this,
+                propertyMetadata,
+                modelAccessor: null
+            );
         }
 
-        var modelAccessor = new Func<object, object>((c) =>
-        {
-            return c == null ? null : propertyHelper.GetValue(c);
-        });
+        var modelAccessor = new Func<object, object>(
+            (c) =>
+            {
+                return c == null ? null : propertyHelper.GetValue(c);
+            }
+        );
 
         return new ModelExplorer(_metadataProvider, this, propertyMetadata, modelAccessor);
     }

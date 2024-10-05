@@ -17,7 +17,9 @@ internal sealed class IISServerSetupFilter : IStartupFilter
             var server = app.ApplicationServices.GetService<IServer>();
             if (server?.GetType() != typeof(IISHttpServer))
             {
-                throw new InvalidOperationException("Application is running inside IIS process but is not configured to use IIS server.");
+                throw new InvalidOperationException(
+                    "Application is running inside IIS process but is not configured to use IIS server."
+                );
             }
 
             next(app);

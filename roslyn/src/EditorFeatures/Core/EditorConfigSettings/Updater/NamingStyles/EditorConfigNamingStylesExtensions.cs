@@ -18,10 +18,16 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
         public static bool TryGetParseResultForRule(
             this EditorConfigNamingStyles editorConfigNamingStyles,
             NamingStyleSetting namingStyleSetting,
-            [NotNullWhen(true)] out NamingStyleOption? namingStyleOption)
+            [NotNullWhen(true)] out NamingStyleOption? namingStyleOption
+        )
         {
             namingStyleOption = null;
-            foreach (var (option, optionAsNamingStyle) in editorConfigNamingStyles.Rules.AsNamingStyleSettings())
+            foreach (
+                var (
+                    option,
+                    optionAsNamingStyle
+                ) in editorConfigNamingStyles.Rules.AsNamingStyleSettings()
+            )
             {
                 if (AreSameRule(optionAsNamingStyle, namingStyleSetting))
                 {
@@ -32,10 +38,10 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
 
             return false;
 
-            static bool AreSameRule(NamingStyleSetting left, NamingStyleSetting right)
-                => left.Severity == right.Severity &&
-                   AreSameSymbolSpec(left.Type, right.Type) &&
-                   AreSameNamingStyle(left.Style, right.Style);
+            static bool AreSameRule(NamingStyleSetting left, NamingStyleSetting right) =>
+                left.Severity == right.Severity
+                && AreSameSymbolSpec(left.Type, right.Type)
+                && AreSameNamingStyle(left.Style, right.Style);
 
             static bool AreSameSymbolSpec(SymbolSpecification? left, SymbolSpecification? right)
             {
@@ -49,36 +55,47 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
                     return false;
                 }
 
-                return left.ApplicableSymbolKindList.SequenceEqual(right!.ApplicableSymbolKindList) &&
-                       left.ApplicableAccessibilityList.SequenceEqual(right.ApplicableAccessibilityList) &&
-                       left.RequiredModifierList.SequenceEqual(right.RequiredModifierList);
+                return left.ApplicableSymbolKindList.SequenceEqual(right!.ApplicableSymbolKindList)
+                    && left.ApplicableAccessibilityList.SequenceEqual(
+                        right.ApplicableAccessibilityList
+                    )
+                    && left.RequiredModifierList.SequenceEqual(right.RequiredModifierList);
             }
 
-            static bool AreSameNamingStyle(NamingStyle left, NamingStyle right)
-                => left.Prefix == right.Prefix &&
-                   left.Suffix == right.Suffix &&
-                   left.WordSeparator == right.WordSeparator &&
-                   left.CapitalizationScheme == right.CapitalizationScheme;
+            static bool AreSameNamingStyle(NamingStyle left, NamingStyle right) =>
+                left.Prefix == right.Prefix
+                && left.Suffix == right.Suffix
+                && left.WordSeparator == right.WordSeparator
+                && left.CapitalizationScheme == right.CapitalizationScheme;
         }
 
-        public static ImmutableArray<(NamingStyleOption namingStyleOption, NamingStyleSetting namingStyleSetting)> AsNamingStyleSettings(this ImmutableArray<NamingStyleOption> namingStyleOptions)
-            => namingStyleOptions.SelectAsArray(rule => (rule, NamingStyleSetting.FromParseResult(rule)));
+        public static ImmutableArray<(
+            NamingStyleOption namingStyleOption,
+            NamingStyleSetting namingStyleSetting
+        )> AsNamingStyleSettings(this ImmutableArray<NamingStyleOption> namingStyleOptions) =>
+            namingStyleOptions.SelectAsArray(rule =>
+                (rule, NamingStyleSetting.FromParseResult(rule))
+            );
 
-        public static NamingStyle AsNamingStyle(this NamingScheme namingScheme)
-            => new(
+        public static NamingStyle AsNamingStyle(this NamingScheme namingScheme) =>
+            new(
                 Guid.NewGuid(),
                 namingScheme.OptionName,
                 namingScheme.Prefix,
                 namingScheme.Suffix,
                 namingScheme.WordSeparator,
-                namingScheme.Capitalization);
+                namingScheme.Capitalization
+            );
 
-        public static SymbolSpecification AsSymbolSpecification(this ApplicableSymbolInfo applicableSymbolInfo)
-            => new(
+        public static SymbolSpecification AsSymbolSpecification(
+            this ApplicableSymbolInfo applicableSymbolInfo
+        ) =>
+            new(
                 Guid.NewGuid(),
                 applicableSymbolInfo.OptionName,
                 applicableSymbolInfo.SymbolKinds,
                 applicableSymbolInfo.Accessibilities,
-                applicableSymbolInfo.Modifiers);
+                applicableSymbolInfo.Modifiers
+            );
     }
 }

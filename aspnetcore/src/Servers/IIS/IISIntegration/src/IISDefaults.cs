@@ -12,10 +12,12 @@ public class IISDefaults
     /// Default authentication scheme, which is "Windows".
     /// </summary>
     public const string AuthenticationScheme = "Windows";
+
     /// <summary>
     /// Default negotiate string, which is "Negotiate".
     /// </summary>
     public const string Negotiate = "Negotiate";
+
     /// <summary>
     /// Default NTLM string, which is "NTLM".
     /// </summary>

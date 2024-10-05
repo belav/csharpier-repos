@@ -3,27 +3,27 @@
 
 using System.Net;
 using System.Net.Http.Json;
-using Microsoft.AspNetCore.Server.IIS.FunctionalTests.Utilities;
 using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.HttpSys;
-
+using Microsoft.AspNetCore.Server.IIS.FunctionalTests.Utilities;
 #if !IIS_FUNCTIONALS
 using Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
 #if IISEXPRESS_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.IISExpress.FunctionalTests.InProcess;
+
 #endif
 
 #else
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests.InProcess;
+
 #endif
 
 [Collection(PublishedSitesCollection.Name)]
-public class HttpSysRequestInfoTests: IISFunctionalTestBase
+public class HttpSysRequestInfoTests : IISFunctionalTestBase
 {
-    public HttpSysRequestInfoTests(PublishedSitesFixture fixture) : base(fixture)
-    {
-    }
+    public HttpSysRequestInfoTests(PublishedSitesFixture fixture)
+        : base(fixture) { }
 
     [ConditionalFact]
     [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2)]

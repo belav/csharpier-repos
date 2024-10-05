@@ -24,7 +24,5 @@ public interface IApiResponseTypeMetadataProvider
     /// The <see cref="Type"/> for which the supported content types are desired.
     /// </param>
     /// <returns>Content types which are supported by the <see cref="Formatters.IOutputFormatter"/>.</returns>
-    IReadOnlyList<string>? GetSupportedContentTypes(
-        string contentType,
-        Type objectType);
+    IReadOnlyList<string>? GetSupportedContentTypes(string contentType, Type objectType);
 }

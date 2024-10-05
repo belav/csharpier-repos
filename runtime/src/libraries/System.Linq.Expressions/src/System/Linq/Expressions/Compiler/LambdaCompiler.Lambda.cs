@@ -66,7 +66,11 @@ namespace System.Linq.Expressions.Compiler
             // new Closure(constantPool, currentHoistedLocals)
             if (boundConstants)
             {
-                _boundConstants.EmitConstant(this, inner._boundConstants.ToArray(), typeof(object[]));
+                _boundConstants.EmitConstant(
+                    this,
+                    inner._boundConstants.ToArray(),
+                    typeof(object[])
+                );
             }
             else
             {
@@ -139,8 +143,13 @@ namespace System.Linq.Expressions.Compiler
             else
             {
                 // When the lambda does not have a name or the name is empty, generate a unique name for it.
-                string name = String.IsNullOrEmpty(lambda.Name) ? GetUniqueMethodName() : lambda.Name;
-                MethodBuilder mb = _typeBuilder.DefineMethod(name, MethodAttributes.Private | MethodAttributes.Static);
+                string name = String.IsNullOrEmpty(lambda.Name)
+                    ? GetUniqueMethodName()
+                    : lambda.Name;
+                MethodBuilder mb = _typeBuilder.DefineMethod(
+                    name,
+                    MethodAttributes.Private | MethodAttributes.Static
+                );
                 impl = new LambdaCompiler(_tree, lambda, mb);
             }
 #endif
@@ -184,14 +193,18 @@ namespace System.Linq.Expressions.Compiler
 #if FEATURE_COMPILE_TO_METHODBUILDER
         private static string GetUniqueMethodName()
         {
-            return "<ExpressionCompilerImplementationDetails>{" + System.Threading.Interlocked.Increment(ref s_counter) + "}lambda_method";
+            return "<ExpressionCompilerImplementationDetails>{"
+                + System.Threading.Interlocked.Increment(ref s_counter)
+                + "}lambda_method";
         }
 #endif
 
         private void EmitLambdaBody()
         {
             // The lambda body is the "last" expression of the lambda
-            CompilationFlags tailCallFlag = _lambda.TailCall ? CompilationFlags.EmitAsTail : CompilationFlags.EmitAsNoTail;
+            CompilationFlags tailCallFlag = _lambda.TailCall
+                ? CompilationFlags.EmitAsTail
+                : CompilationFlags.EmitAsNoTail;
             EmitLambdaBody(null, false, tailCallFlag);
         }
 

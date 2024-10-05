@@ -39,7 +39,8 @@ namespace MonoTests.System.Configuration
         [Fact]
         public void CanConvertFrom()
         {
-            CommaDelimitedStringCollectionConverter cv = new CommaDelimitedStringCollectionConverter();
+            CommaDelimitedStringCollectionConverter cv =
+                new CommaDelimitedStringCollectionConverter();
 
             Assert.True(cv.CanConvertFrom(null, typeof(string)), "A1");
             Assert.False(cv.CanConvertFrom(null, typeof(TimeSpan)), "A2");
@@ -50,7 +51,8 @@ namespace MonoTests.System.Configuration
         [Fact]
         public void CanConvertTo()
         {
-            CommaDelimitedStringCollectionConverter cv = new CommaDelimitedStringCollectionConverter();
+            CommaDelimitedStringCollectionConverter cv =
+                new CommaDelimitedStringCollectionConverter();
 
             Assert.True(cv.CanConvertTo(null, typeof(string)), "A1");
             Assert.False(cv.CanConvertTo(null, typeof(TimeSpan)), "A2");
@@ -61,7 +63,8 @@ namespace MonoTests.System.Configuration
         [Fact]
         public void ConvertFrom()
         {
-            CommaDelimitedStringCollectionConverter cv = new CommaDelimitedStringCollectionConverter();
+            CommaDelimitedStringCollectionConverter cv =
+                new CommaDelimitedStringCollectionConverter();
             object o;
             CommaDelimitedStringCollection col;
 
@@ -82,7 +85,8 @@ namespace MonoTests.System.Configuration
         [Fact]
         public void ConvertFrom_TypeError()
         {
-            CommaDelimitedStringCollectionConverter cv = new CommaDelimitedStringCollectionConverter();
+            CommaDelimitedStringCollectionConverter cv =
+                new CommaDelimitedStringCollectionConverter();
             object o = null;
 
             Assert.Throws<InvalidCastException>(() => o = cv.ConvertFrom(null, null, 59));
@@ -92,7 +96,8 @@ namespace MonoTests.System.Configuration
         [Fact]
         public void ConvertTo()
         {
-            CommaDelimitedStringCollectionConverter cv = new CommaDelimitedStringCollectionConverter();
+            CommaDelimitedStringCollectionConverter cv =
+                new CommaDelimitedStringCollectionConverter();
             CommaDelimitedStringCollection col = new CommaDelimitedStringCollection();
             col.Add("hi");
             col.Add("bye");
@@ -103,7 +108,8 @@ namespace MonoTests.System.Configuration
         [Fact]
         public void ConvertTo_NullError()
         {
-            CommaDelimitedStringCollectionConverter cv = new CommaDelimitedStringCollectionConverter();
+            CommaDelimitedStringCollectionConverter cv =
+                new CommaDelimitedStringCollectionConverter();
 
             Assert.Null(cv.ConvertTo(null, null, null, typeof(string)));
         }
@@ -111,9 +117,13 @@ namespace MonoTests.System.Configuration
         [Fact]
         public void ConvertTo_TypeError()
         {
-            CommaDelimitedStringCollectionConverter cv = new CommaDelimitedStringCollectionConverter();
+            CommaDelimitedStringCollectionConverter cv =
+                new CommaDelimitedStringCollectionConverter();
 
-            AssertExtensions.Throws<ArgumentException>(null, () => cv.ConvertTo(null, null, 59, typeof(string)));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => cv.ConvertTo(null, null, 59, typeof(string))
+            );
         }
     }
 }

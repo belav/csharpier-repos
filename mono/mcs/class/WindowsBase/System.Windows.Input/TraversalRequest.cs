@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -25,25 +25,27 @@
 
 using System;
 
-namespace System.Windows.Input {
+namespace System.Windows.Input
+{
+    public class TraversalRequest
+    {
+        bool wrapped;
+        FocusNavigationDirection focusNavigationDirection;
 
-	public class TraversalRequest
-	{
-		bool wrapped;
-		FocusNavigationDirection focusNavigationDirection;
+        public TraversalRequest(FocusNavigationDirection focusNavigationDirection)
+        {
+            this.focusNavigationDirection = focusNavigationDirection;
+        }
 
-		public TraversalRequest (FocusNavigationDirection focusNavigationDirection)
-		{
-			this.focusNavigationDirection = focusNavigationDirection;
-		}
+        public FocusNavigationDirection FocusNavigationDirection
+        {
+            get { return focusNavigationDirection; }
+        }
 
-		public FocusNavigationDirection FocusNavigationDirection {
-			get { return focusNavigationDirection; }
-		}
-
-		public bool Wrapped {
-			get { return wrapped; }
-			set { wrapped = value; }
-		}
-	}
+        public bool Wrapped
+        {
+            get { return wrapped; }
+            set { wrapped = value; }
+        }
+    }
 }

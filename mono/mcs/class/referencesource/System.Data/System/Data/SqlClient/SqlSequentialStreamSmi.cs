@@ -4,15 +4,20 @@ using Microsoft.SqlServer.Server;
 
 namespace System.Data.SqlClient
 {
-    sealed internal class SqlSequentialStreamSmi : System.IO.Stream
+    internal sealed class SqlSequentialStreamSmi : System.IO.Stream
     {
         private SmiEventSink_Default _sink;
         private ITypedGettersV3 _getters;
-        private int _columnIndex;       // The index of out column in the table
-        private long _position;         // Current position in the stream
-        private long _length;           // Total length of the stream
+        private int _columnIndex; // The index of out column in the table
+        private long _position; // Current position in the stream
+        private long _length; // Total length of the stream
 
-        internal SqlSequentialStreamSmi(SmiEventSink_Default sink, ITypedGettersV3 getters, int columnIndex, long length)
+        internal SqlSequentialStreamSmi(
+            SmiEventSink_Default sink,
+            ITypedGettersV3 getters,
+            int columnIndex,
+            long length
+        )
         {
             _sink = sink;
             _getters = getters;
@@ -36,8 +41,7 @@ namespace System.Data.SqlClient
             get { return false; }
         }
 
-        public override void Flush()
-        { }
+        public override void Flush() { }
 
         public override long Length
         {
@@ -49,7 +53,7 @@ namespace System.Data.SqlClient
             get { throw ADP.NotSupported(); }
             set { throw ADP.NotSupported(); }
         }
-        
+
         internal int ColumnIndex
         {
             get { return _columnIndex; }
@@ -71,7 +75,15 @@ namespace System.Data.SqlClient
                 int bytesRead = 0;
                 if (bytesNeeded > 0)
                 {
-                    bytesRead = ValueUtilsSmi.GetBytes_Unchecked(_sink, _getters, _columnIndex, _position, buffer, offset, bytesNeeded);
+                    bytesRead = ValueUtilsSmi.GetBytes_Unchecked(
+                        _sink,
+                        _getters,
+                        _columnIndex,
+                        _position,
+                        buffer,
+                        offset,
+                        bytesNeeded
+                    );
                     _position += bytesRead;
                 }
                 return bytesRead;
@@ -82,7 +94,7 @@ namespace System.Data.SqlClient
                 throw ADP.ErrorReadingFromStream(ex);
             }
         }
-        
+
         public override long Seek(long offset, IO.SeekOrigin origin)
         {
             throw ADP.NotSupported();

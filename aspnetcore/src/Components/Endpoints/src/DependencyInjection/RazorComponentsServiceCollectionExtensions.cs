@@ -30,8 +30,14 @@ public static class RazorComponentsServiceCollectionExtensions
     /// <param name="services">The service collection.</param>
     /// <param name="configure">An <see cref="Action{RazorComponentOptions}"/> to configure the provided <see cref="RazorComponentsServiceOptions"/>.</param>
     /// <returns>An <see cref="IRazorComponentsBuilder"/> that can be used to further configure the Razor component services.</returns>
-    [RequiresUnreferencedCode("Razor Components does not currently support trimming or native AOT.", Url = "https://aka.ms/aspnet/nativeaot")]
-    public static IRazorComponentsBuilder AddRazorComponents(this IServiceCollection services, Action<RazorComponentsServiceOptions>? configure = null)
+    [RequiresUnreferencedCode(
+        "Razor Components does not currently support trimming or native AOT.",
+        Url = "https://aka.ms/aspnet/nativeaot"
+    )]
+    public static IRazorComponentsBuilder AddRazorComponents(
+        this IServiceCollection services,
+        Action<RazorComponentsServiceOptions>? configure = null
+    )
     {
         ArgumentNullException.ThrowIfNull(services);
 
@@ -51,23 +57,39 @@ public static class RazorComponentsServiceCollectionExtensions
         services.TryAddScoped<IRazorComponentEndpointInvoker, RazorComponentEndpointInvoker>();
 
         // Common services required for components server side rendering
-        services.TryAddSingleton<ServerComponentSerializer>(services => new ServerComponentSerializer(services.GetRequiredService<IDataProtectionProvider>()));
+        services.TryAddSingleton<ServerComponentSerializer>(
+            services => new ServerComponentSerializer(
+                services.GetRequiredService<IDataProtectionProvider>()
+            )
+        );
         services.TryAddSingleton<WebAssemblyComponentSerializer>();
         services.TryAddScoped<EndpointHtmlRenderer>();
-        services.TryAddScoped<IComponentPrerenderer>(services => services.GetRequiredService<EndpointHtmlRenderer>());
+        services.TryAddScoped<IComponentPrerenderer>(services =>
+            services.GetRequiredService<EndpointHtmlRenderer>()
+        );
         services.TryAddScoped<NavigationManager, HttpNavigationManager>();
         services.TryAddScoped<IJSRuntime, UnsupportedJavaScriptRuntime>();
         services.TryAddScoped<INavigationInterception, UnsupportedNavigationInterception>();
         services.TryAddScoped<IScrollToLocationHash, UnsupportedScrollToLocationHash>();
         services.TryAddScoped<ComponentStatePersistenceManager>();
-        services.TryAddScoped<PersistentComponentState>(sp => sp.GetRequiredService<ComponentStatePersistenceManager>().State);
+        services.TryAddScoped<PersistentComponentState>(sp =>
+            sp.GetRequiredService<ComponentStatePersistenceManager>().State
+        );
         services.TryAddScoped<IErrorBoundaryLogger, PrerenderingErrorBoundaryLogger>();
         services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<IPostConfigureOptions<RazorComponentsServiceOptions>, DefaultRazorComponentsServiceOptionsConfiguration>());
+            ServiceDescriptor.Singleton<
+                IPostConfigureOptions<RazorComponentsServiceOptions>,
+                DefaultRazorComponentsServiceOptionsConfiguration
+            >()
+        );
         services.TryAddScoped<EndpointRoutingStateProvider>();
-        services.TryAddScoped<IRoutingStateProvider>(sp => sp.GetRequiredService<EndpointRoutingStateProvider>());
+        services.TryAddScoped<IRoutingStateProvider>(sp =>
+            sp.GetRequiredService<EndpointRoutingStateProvider>()
+        );
         services.AddSupplyValueFromQueryProvider();
-        services.TryAddCascadingValue(sp => sp.GetRequiredService<EndpointHtmlRenderer>().HttpContext);
+        services.TryAddCascadingValue(sp =>
+            sp.GetRequiredService<EndpointHtmlRenderer>().HttpContext
+        );
 
         // Form handling
         services.AddSupplyValueFromFormProvider();
@@ -83,7 +105,8 @@ public static class RazorComponentsServiceCollectionExtensions
         return new DefaultRazorComponentsBuilder(services);
     }
 
-    private sealed class DefaultRazorComponentsBuilder(IServiceCollection services) : IRazorComponentsBuilder
+    private sealed class DefaultRazorComponentsBuilder(IServiceCollection services)
+        : IRazorComponentsBuilder
     {
         public IServiceCollection Services { get; } = services;
     }

@@ -25,38 +25,71 @@ public class MyNavigator : XPathNavigator
     }
 
     /// <include file='doc\XPathNavigator.uex' path='docs/doc[@for="XPathNavigator.NodeType"]/*' />
-    public override XPathNodeType NodeType { get { return _xn.NodeType; } }
+    public override XPathNodeType NodeType
+    {
+        get { return _xn.NodeType; }
+    }
 
     /// <include file='doc\XPathNavigator.uex' path='docs/doc[@for="XPathNavigator.LocalName"]/*' />
-    public override string LocalName { get { return _xn.LocalName; } }
+    public override string LocalName
+    {
+        get { return _xn.LocalName; }
+    }
 
     /// <include file='doc\XPathNavigator.uex' path='docs/doc[@for="XPathNavigator.NamespaceURI"]/*' />
-    public override string NamespaceURI { get { return _xn.NamespaceURI; } }
+    public override string NamespaceURI
+    {
+        get { return _xn.NamespaceURI; }
+    }
 
     /// <include file='doc\XPathNavigator.uex' path='docs/doc[@for="XPathNavigator.Name"]/*' />
-    public override string Name { get { return _xn.Name; } }
+    public override string Name
+    {
+        get { return _xn.Name; }
+    }
 
     /// <include file='doc\XPathNavigator.uex' path='docs/doc[@for="XPathNavigator.Prefix"]/*' />
-    public override string Prefix { get { return _xn.Prefix; } }
+    public override string Prefix
+    {
+        get { return _xn.Prefix; }
+    }
 
     /// <include file='doc\XPathNavigator.uex' path='docs/doc[@for="XPathNavigator.Value"]/*' />
-    public override string Value { get { return _xn.Value; } }
+    public override string Value
+    {
+        get { return _xn.Value; }
+    }
 
     /// <include file='doc\XPathNavigator.uex' path='docs/doc[@for="XPathNavigator.BaseURI"]/*' />
-    public override string BaseURI { get { return _xn.BaseURI; } }
+    public override string BaseURI
+    {
+        get { return _xn.BaseURI; }
+    }
 
     /// <include file='doc\XPathNavigator.uex' path='docs/doc[@for="XPathNavigator.XmlLang"]/*' />
-    public override string XmlLang { get { return _xn.XmlLang; } }
+    public override string XmlLang
+    {
+        get { return _xn.XmlLang; }
+    }
 
     /// <include file='doc\XPathNavigator.uex' path='docs/doc[@for="XPathNavigator.IsEmptyElement"]/*' />
-    public override bool IsEmptyElement { get { return _xn.IsEmptyElement; } }
+    public override bool IsEmptyElement
+    {
+        get { return _xn.IsEmptyElement; }
+    }
 
     /// <include file='doc\XPathNavigator.uex' path='docs/doc[@for="XPathNavigator.NameTable"]/*' />
-    public override XmlNameTable NameTable { get { return _xn.NameTable; } }
+    public override XmlNameTable NameTable
+    {
+        get { return _xn.NameTable; }
+    }
 
     // Attributes
     /// <include file='doc\XPathNavigator.uex' path='docs/doc[@for="XPathNavigator.HasAttributes"]/*' />
-    public override bool HasAttributes { get { return _xn.HasAttributes; } }
+    public override bool HasAttributes
+    {
+        get { return _xn.HasAttributes; }
+    }
 
     /// <include file='doc\XPathNavigator.uex' path='docs/doc[@for="XPathNavigator.GetAttribute"]/*' />
     public override string GetAttribute(string localName, string namespaceURI)
@@ -127,7 +160,10 @@ public class MyNavigator : XPathNavigator
     }
 
     /// <include file='doc\XPathNavigator.uex' path='docs/doc[@for="XPathNavigator.HasChildren"]/*' />
-    public override bool HasChildren { get { return _xn.HasChildren; } }
+    public override bool HasChildren
+    {
+        get { return _xn.HasChildren; }
+    }
 
     /// <include file='doc\XPathNavigator.uex' path='docs/doc[@for="XPathNavigator.MoveToFirstChild"]/*' />
     public override bool MoveToFirstChild()

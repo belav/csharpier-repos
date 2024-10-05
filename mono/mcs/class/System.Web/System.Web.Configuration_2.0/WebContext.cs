@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,46 +31,54 @@
 using System;
 using System.Configuration;
 
+namespace System.Web.Configuration
+{
+    public sealed class WebContext
+    {
+        WebApplicationLevel pathLevel;
+        string site;
+        string applicationPath;
+        string path;
+        string locationSubPath;
 
-namespace System.Web.Configuration {
+        public WebContext(
+            WebApplicationLevel pathLevel,
+            string site,
+            string applicationPath,
+            string path,
+            string locationSubPath
+        )
+        {
+            this.pathLevel = pathLevel;
+            this.site = site;
+            this.applicationPath = applicationPath;
+            this.path = path;
+            this.locationSubPath = locationSubPath;
+        }
 
-	public sealed class WebContext
-	{
-		WebApplicationLevel pathLevel;
-		string site;
-		string applicationPath;
-		string path;
-		string locationSubPath;
+        public WebApplicationLevel ApplicationLevel
+        {
+            get { return pathLevel; }
+        }
 
-		public WebContext (WebApplicationLevel pathLevel, string site, string applicationPath, string path, string locationSubPath)
-		{
-			this.pathLevel = pathLevel;
-			this.site = site;
-			this.applicationPath = applicationPath;
-			this.path = path;
-			this.locationSubPath = locationSubPath;
-		}
+        public string ApplicationPath
+        {
+            get { return applicationPath; }
+        }
 
-		public WebApplicationLevel ApplicationLevel {
-			get { return pathLevel; }
-		}
+        public string LocationSubPath
+        {
+            get { return locationSubPath; }
+        }
 
-		public string ApplicationPath {
-			get { return applicationPath; }
-		}
+        public string Path
+        {
+            get { return path; }
+        }
 
-		public string LocationSubPath {
-			get { return locationSubPath; }
-		}
-
-		public string Path {
-			get { return path; }
-		}
-
-		public string Site {
-			get { return site; }
-		}
-	}
+        public string Site
+        {
+            get { return site; }
+        }
+    }
 }
-
-

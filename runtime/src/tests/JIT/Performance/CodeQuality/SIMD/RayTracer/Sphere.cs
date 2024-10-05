@@ -9,7 +9,12 @@ internal class Sphere : SceneObject
     public Vector Center;
     public float Radius;
 
-    public Sphere(Vector center, double radius, Surface surface) : base(surface) { Center = center; Radius = (float)radius; }
+    public Sphere(Vector center, double radius, Surface surface)
+        : base(surface)
+    {
+        Center = center;
+        Radius = (float)radius;
+    }
 
     public override ISect Intersect(Ray ray)
     {
@@ -25,7 +30,8 @@ internal class Sphere : SceneObject
             double disc = Math.Pow(Radius, 2) - (Vector.Dot(eo, eo) - Math.Pow(v, 2));
             dist = disc < 0 ? 0 : v - (float)Math.Sqrt(disc);
         }
-        if (dist == 0) return ISect.Null;
+        if (dist == 0)
+            return ISect.Null;
         return new ISect(this, ray, dist);
     }
 
@@ -34,4 +40,3 @@ internal class Sphere : SceneObject
         return Vector.Norm(Vector.Minus(pos, Center));
     }
 }
-

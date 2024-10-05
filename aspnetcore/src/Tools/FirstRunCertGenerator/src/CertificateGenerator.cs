@@ -12,6 +12,10 @@ public static class CertificateGenerator
     {
         var manager = CertificateManager.Instance;
         var now = DateTimeOffset.Now;
-        manager.EnsureAspNetCoreHttpsDevelopmentCertificate(now, now.AddYears(1), isInteractive: false);
+        manager.EnsureAspNetCoreHttpsDevelopmentCertificate(
+            now,
+            now.AddYears(1),
+            isInteractive: false
+        );
     }
 }

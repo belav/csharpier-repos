@@ -30,60 +30,59 @@
 using System;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_HtmlControls
 {
-	public class HtmlGenericControl_ctor_
-		: GHTBaseWeb 
-	{
-		protected GHTWebControls.GHTSubTest GHTSubTest1;
-		protected GHTWebControls.GHTSubTest GHTSubTest2;
-		protected GHTWebControls.GHTSubTest GHTSubTest3;
-		protected GHTWebControls.GHTSubTest GHTSubTest4;
-		protected System.Web.UI.HtmlControls.HtmlGenericControl myDiv1;
-		protected System.Web.UI.HtmlControls.HtmlGenericControl mySpan1;
-		protected System.Web.UI.HtmlControls.HtmlGenericControl myParagraph1;
-		protected System.Web.UI.HtmlControls.HtmlGenericControl myParagraph2;
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
+    public class HtmlGenericControl_ctor_ : GHTBaseWeb
+    {
+        protected GHTWebControls.GHTSubTest GHTSubTest1;
+        protected GHTWebControls.GHTSubTest GHTSubTest2;
+        protected GHTWebControls.GHTSubTest GHTSubTest3;
+        protected GHTWebControls.GHTSubTest GHTSubTest4;
+        protected System.Web.UI.HtmlControls.HtmlGenericControl myDiv1;
+        protected System.Web.UI.HtmlControls.HtmlGenericControl mySpan1;
+        protected System.Web.UI.HtmlControls.HtmlGenericControl myParagraph1;
+        protected System.Web.UI.HtmlControls.HtmlGenericControl myParagraph2;
 
-		}
-		#endregion
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			//Put user code to initialize the page here
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
 
-			System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
-			GHTTestBegin(frm);
-			GHTActiveSubTest = GHTSubTest4;
-			try 
-			{
-				GHTSubTestAddResult(myParagraph2.TagName);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            //Put user code to initialize the page here
 
-			GHTTestEnd();
-		}
-	}
+            System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
+            GHTTestBegin(frm);
+            GHTActiveSubTest = GHTSubTest4;
+            try
+            {
+                GHTSubTestAddResult(myParagraph2.TagName);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+
+            GHTTestEnd();
+        }
+    }
 }

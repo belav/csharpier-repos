@@ -64,7 +64,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Features.Completion
         EndTag,
 
         /// <summary>
-        /// The completion represents a type prefix for an attached property 
+        /// The completion represents a type prefix for an attached property
         /// or property elements (i.e. "Grid.").
         /// </summary>
         TypePrefix,
@@ -72,7 +72,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Features.Completion
         /// <summary>
         /// The completion is returned for event handler values indicating
         /// that the language service expects the name of an event handler.
-        /// The description of the event handler is found in 
+        /// The description of the event handler is found in
         /// EventDescription property.
         /// </summary>
         EventHandlerDescription,

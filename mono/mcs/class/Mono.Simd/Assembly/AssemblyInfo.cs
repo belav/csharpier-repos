@@ -28,21 +28,21 @@
 using System;
 using System.Reflection;
 using System.Resources;
-using System.Security;
-using System.Security.Permissions;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Security;
+using System.Security.Permissions;
 
 // General Information about the system assembly
 
-[assembly: AssemblyVersion (Consts.FxVersion)]
+[assembly: AssemblyVersion(Consts.FxVersion)]
 
-[assembly: AssemblyCompany ("MONO development team")]
-[assembly: AssemblyCopyright ("(c) 2008 Novell, Inc")]
-[assembly: AssemblyDescription ("Mono.Simd.dll")]
-[assembly: AssemblyProduct ("MONO CLI")]
-[assembly: AssemblyTitle ("Mono.Simd.dll")]
-[assembly: ComVisible (false)]
-[assembly: NeutralResourcesLanguage ("en-US")]
+[assembly: AssemblyCompany("MONO development team")]
+[assembly: AssemblyCopyright("(c) 2008 Novell, Inc")]
+[assembly: AssemblyDescription("Mono.Simd.dll")]
+[assembly: AssemblyProduct("MONO CLI")]
+[assembly: AssemblyTitle("Mono.Simd.dll")]
+[assembly: ComVisible(false)]
+[assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyDelaySign(true)]
 [assembly: CLSCompliant(true)]

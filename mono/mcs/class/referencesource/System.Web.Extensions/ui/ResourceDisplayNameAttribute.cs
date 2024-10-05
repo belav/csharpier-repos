@@ -29,7 +29,10 @@ namespace System.Web.UI
                 if (!_resourceLoaded)
                 {
                     _resourceLoaded = true;
-                    DisplayNameValue = AtlasWeb.ResourceManager.GetString(_displayNameResourceName, AtlasWeb.Culture);
+                    DisplayNameValue = AtlasWeb.ResourceManager.GetString(
+                        _displayNameResourceName,
+                        AtlasWeb.Culture
+                    );
                 }
                 return base.DisplayName;
             }

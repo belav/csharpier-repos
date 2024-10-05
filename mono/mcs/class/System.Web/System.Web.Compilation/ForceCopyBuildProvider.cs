@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,16 +32,13 @@ using System;
 
 namespace System.Web.Compilation
 {
-	//
-	// This class is most probably a no-op one, used by the MS.NET
-	// aspnet compiler to mark files it should merely copy instead
-	// of compiling. See
-	//
-	//  http://forums.asp.net/thread/942690.aspx
-	//
-	[BuildProviderAppliesTo (BuildProviderAppliesTo.All)]
-        sealed class ForceCopyBuildProvider : BuildProvider
-        {
-        }
+    //
+    // This class is most probably a no-op one, used by the MS.NET
+    // aspnet compiler to mark files it should merely copy instead
+    // of compiling. See
+    //
+    //  http://forums.asp.net/thread/942690.aspx
+    //
+    [BuildProviderAppliesTo(BuildProviderAppliesTo.All)]
+    sealed class ForceCopyBuildProvider : BuildProvider { }
 }
-

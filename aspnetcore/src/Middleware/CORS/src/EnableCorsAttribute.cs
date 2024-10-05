@@ -8,7 +8,11 @@ using Microsoft.AspNetCore.Shared;
 namespace Microsoft.AspNetCore.Cors;
 
 /// <inheritdoc />
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Method,
+    AllowMultiple = false,
+    Inherited = true
+)]
 [DebuggerDisplay("{ToString(),nq}")]
 public class EnableCorsAttribute : Attribute, IEnableCorsAttribute
 {
@@ -17,9 +21,7 @@ public class EnableCorsAttribute : Attribute, IEnableCorsAttribute
     /// name defined by <see cref="CorsOptions.DefaultPolicyName"/>.
     /// </summary>
     public EnableCorsAttribute()
-        : this(policyName: null)
-    {
-    }
+        : this(policyName: null) { }
 
     /// <summary>
     /// Creates a new instance of the <see cref="EnableCorsAttribute"/> with the supplied policy name.

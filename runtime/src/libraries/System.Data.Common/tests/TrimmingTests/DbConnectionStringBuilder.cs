@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Data.Common;
-using System.ComponentModel;
 using System.Collections;
+using System.ComponentModel;
+using System.Data.Common;
 
 namespace DbConnectionStringBuilderTrimmingTests
 {
@@ -15,7 +15,10 @@ namespace DbConnectionStringBuilderTrimmingTests
             DbConnectionStringBuilder2 dcsb2 = new();
             ICustomTypeDescriptor td = dcsb2;
 
-            if (td.GetClassName() != "DbConnectionStringBuilderTrimmingTests.DbConnectionStringBuilder2")
+            if (
+                td.GetClassName()
+                != "DbConnectionStringBuilderTrimmingTests.DbConnectionStringBuilder2"
+            )
             {
                 throw new Exception("Class name got trimmed");
             }
@@ -116,12 +119,18 @@ namespace DbConnectionStringBuilderTrimmingTests
 #pragma warning disable CS0067 // The event is never used
         public event EventHandler Disposed;
         public event Action TestEvent;
+
         [DisplayName("Event With DisplayName")]
         public event Action TestEvent2;
 #pragma warning restore CS0067
 
         public string TestProperty { get; set; }
-        public ISite Site { get => new TestSite(); set => throw new NotImplementedException(); }
+        public ISite Site
+        {
+            get => new TestSite();
+            set => throw new NotImplementedException();
+        }
+
         public void Dispose() { }
 
         public Hashtable GetProperties2()
@@ -138,7 +147,12 @@ namespace DbConnectionStringBuilderTrimmingTests
         public IComponent Component => throw new NotImplementedException();
         public IContainer Container => null;
         public bool DesignMode => throw new NotImplementedException();
-        public string Name { get => "Test Component Name"; set => throw new NotImplementedException(); }
+        public string Name
+        {
+            get => "Test Component Name";
+            set => throw new NotImplementedException();
+        }
+
         public object GetService(Type serviceType) => null;
     }
 

@@ -1,32 +1,31 @@
 using System;
-using System.Timers;
-using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using System.Timers;
 
-class T {
-
+class T
+{
     static int count = 0;
     static object count_lock = new object();
 
     const long N = 500000;
     const int num_threads = 8;
 
-    static void UseMemory () {
-        
-        for (int i = 0; i < N; ++i) {
-
-            var l1 = new ArrayList ();
-            l1.Add(""+i);
-            var l2 = new ArrayList ();
-            l2.Add(""+(i+1));
-            var l3 = new ArrayList ();
-            l3.Add(""+(i+2));
-            var l4 = new ArrayList ();
-            l4.Add(""+(i+3));
+    static void UseMemory()
+    {
+        for (int i = 0; i < N; ++i)
+        {
+            var l1 = new ArrayList();
+            l1.Add("" + i);
+            var l2 = new ArrayList();
+            l2.Add("" + (i + 1));
+            var l3 = new ArrayList();
+            l3.Add("" + (i + 2));
+            var l4 = new ArrayList();
+            l4.Add("" + (i + 3));
         }
-       
-        
+
         lock (count_lock)
         {
             count++;
@@ -39,14 +38,21 @@ class T {
         HashSet<string> h = new HashSet<string>();
         for (int j = 0; j < 10000; j++)
         {
-            h.Add(""+j+""+j);
+            h.Add("" + j + "" + j);
         }
     }
 
-    static void Main (string[] args) {
+    static void Main(string[] args)
+    {
         int iterations = 0;
 
-        for (TestTimeout timeout = TestTimeout.Start(TimeSpan.FromSeconds(TestTimeout.IsStressTest ? 120 : 5)); timeout.HaveTimeLeft;)
+        for (
+            TestTimeout timeout = TestTimeout.Start(
+                TimeSpan.FromSeconds(TestTimeout.IsStressTest ? 120 : 5)
+            );
+            timeout.HaveTimeLeft;
+
+        )
         {
             count = 0;
 
@@ -55,11 +61,14 @@ class T {
 
             for (int i = 0; i < num_threads; i++)
             {
-                Thread t3 = new Thread (delegate () { 
-                    UseMemory();
-                    });
+                Thread t3 = new Thread(
+                    delegate()
+                    {
+                        UseMemory();
+                    }
+                );
 
-                t3.Start ();
+                t3.Start();
 
                 System.Timers.Timer timer = new System.Timers.Timer();
                 timer.Elapsed += Timer_Elapsed;
@@ -68,7 +77,7 @@ class T {
                 timer.Start();
                 timers.Add(timer);
             }
-            
+
             for (int i = 0; i < 4000; i++)
             {
                 System.Timers.Timer timer = new System.Timers.Timer();
@@ -83,7 +92,7 @@ class T {
             {
                 while (count < num_threads)
                 {
-                    Console.Write (".");
+                    Console.Write(".");
                     Monitor.Wait(count_lock);
                 }
             }
@@ -93,10 +102,10 @@ class T {
                 t.Join();
             }
 
-            Console.WriteLine ();
+            Console.WriteLine();
             iterations += 1;
         }
 
-        Console.WriteLine ($"done {iterations} iterations");
+        Console.WriteLine($"done {iterations} iterations");
     }
 }

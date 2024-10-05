@@ -5,17 +5,29 @@ namespace System.Configuration
 {
     public sealed class UriSection : ConfigurationSection
     {
-        private static readonly ConfigurationPropertyCollection _properties = new ConfigurationPropertyCollection();
+        private static readonly ConfigurationPropertyCollection _properties =
+            new ConfigurationPropertyCollection();
 
-        private static readonly ConfigurationProperty _idn = new ConfigurationProperty(CommonConfigurationStrings.Idn,
-            typeof(IdnElement), null, ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _idn = new ConfigurationProperty(
+            CommonConfigurationStrings.Idn,
+            typeof(IdnElement),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 
         private static readonly ConfigurationProperty _iriParsing = new ConfigurationProperty(
-            CommonConfigurationStrings.IriParsing, typeof(IriParsingElement), null, ConfigurationPropertyOptions.None);
+            CommonConfigurationStrings.IriParsing,
+            typeof(IriParsingElement),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 
-        private static readonly ConfigurationProperty _schemeSettings =
-            new ConfigurationProperty(CommonConfigurationStrings.SchemeSettings,
-            typeof(SchemeSettingElementCollection), null, ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _schemeSettings = new ConfigurationProperty(
+            CommonConfigurationStrings.SchemeSettings,
+            typeof(SchemeSettingElementCollection),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 
         static UriSection()
         {
@@ -31,7 +43,8 @@ namespace System.Configuration
         public IriParsingElement IriParsing => (IriParsingElement)this[_iriParsing];
 
         [ConfigurationProperty(CommonConfigurationStrings.SchemeSettings)]
-        public SchemeSettingElementCollection SchemeSettings => (SchemeSettingElementCollection)this[_schemeSettings];
+        public SchemeSettingElementCollection SchemeSettings =>
+            (SchemeSettingElementCollection)this[_schemeSettings];
 
         protected internal override ConfigurationPropertyCollection Properties => _properties;
     }

@@ -22,26 +22,23 @@ namespace System.Data
         /// <summary>
         /// Initializes a new instance of ObjectNotFoundException
         /// </summary>
-        public ObjectNotFoundException() 
-            : base() 
-        { }
+        public ObjectNotFoundException()
+            : base() { }
 
         /// <summary>
         /// Initializes a new instance of ObjectNotFoundException
         /// </summary>
         /// <param name="message"></param>
-        public ObjectNotFoundException(string message) 
-            : base(message) 
-        { }
-        
+        public ObjectNotFoundException(string message)
+            : base(message) { }
+
         /// <summary>
         /// Constructor that takes a message and an inner exception
         /// </summary>
         /// <param name="message"></param>
         /// <param name="innerException"></param>
         public ObjectNotFoundException(string message, Exception innerException)
-            : base(message, innerException) 
-        { }
+            : base(message, innerException) { }
 
         /// <summary>
         /// Initializes a new instance of ObjectNotFoundException
@@ -49,8 +46,6 @@ namespace System.Data
         /// <param name="info"></param>
         /// <param name="context"></param>
         private ObjectNotFoundException(SerializationInfo info, StreamingContext context)
-            : base(info, context) 
-        { }
+            : base(info, context) { }
     }
 }
-

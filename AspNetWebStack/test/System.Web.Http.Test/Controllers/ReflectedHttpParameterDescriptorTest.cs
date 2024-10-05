@@ -17,9 +17,13 @@ namespace System.Web.Http
         {
             UsersRpcController controller = new UsersRpcController();
             Func<string, string, User> echoUserMethod = controller.EchoUser;
-            ReflectedHttpActionDescriptor actionDescriptor = new ReflectedHttpActionDescriptor { MethodInfo = echoUserMethod.Method };
+            ReflectedHttpActionDescriptor actionDescriptor = new ReflectedHttpActionDescriptor
+            {
+                MethodInfo = echoUserMethod.Method,
+            };
             ParameterInfo parameterInfo = echoUserMethod.Method.GetParameters()[0];
-            ReflectedHttpParameterDescriptor parameterDescriptor = new ReflectedHttpParameterDescriptor(actionDescriptor, parameterInfo);
+            ReflectedHttpParameterDescriptor parameterDescriptor =
+                new ReflectedHttpParameterDescriptor(actionDescriptor, parameterInfo);
 
             Assert.Equal(actionDescriptor, parameterDescriptor.ActionDescriptor);
             Assert.Null(parameterDescriptor.DefaultValue);
@@ -35,8 +39,13 @@ namespace System.Web.Http
         public void Constructor_Throws_IfParameterInfoIsNull()
         {
             Assert.ThrowsArgumentNull(
-                () => new ReflectedHttpParameterDescriptor(new Mock<HttpActionDescriptor>().Object, null),
-                "parameterInfo");
+                () =>
+                    new ReflectedHttpParameterDescriptor(
+                        new Mock<HttpActionDescriptor>().Object,
+                        null
+                    ),
+                "parameterInfo"
+            );
         }
 
         [Fact]
@@ -44,14 +53,21 @@ namespace System.Web.Http
         {
             Assert.ThrowsArgumentNull(
                 () => new ReflectedHttpParameterDescriptor(null, new Mock<ParameterInfo>().Object),
-                "actionDescriptor");
+                "actionDescriptor"
+            );
         }
 
         [Fact]
         public void ParameterInfo_Property()
         {
             ParameterInfo referenceParameter = new Mock<ParameterInfo>().Object;
-            Assert.Reflection.Property(new ReflectedHttpParameterDescriptor(), d => d.ParameterInfo, expectedDefaultValue: null, allowNull: false, roundTripTestValue: referenceParameter);
+            Assert.Reflection.Property(
+                new ReflectedHttpParameterDescriptor(),
+                d => d.ParameterInfo,
+                expectedDefaultValue: null,
+                allowNull: false,
+                roundTripTestValue: referenceParameter
+            );
         }
 
         [Fact]
@@ -59,9 +75,13 @@ namespace System.Web.Http
         {
             UsersRpcController controller = new UsersRpcController();
             Action<User> addUserMethod = controller.AddUser;
-            ReflectedHttpActionDescriptor actionDescriptor = new ReflectedHttpActionDescriptor { MethodInfo = addUserMethod.Method };
+            ReflectedHttpActionDescriptor actionDescriptor = new ReflectedHttpActionDescriptor
+            {
+                MethodInfo = addUserMethod.Method,
+            };
             ParameterInfo parameterInfo = addUserMethod.Method.GetParameters()[0];
-            ReflectedHttpParameterDescriptor parameterDescriptor = new ReflectedHttpParameterDescriptor(actionDescriptor, parameterInfo);
+            ReflectedHttpParameterDescriptor parameterDescriptor =
+                new ReflectedHttpParameterDescriptor(actionDescriptor, parameterInfo);
             Assert.NotNull(parameterDescriptor.ParameterBinderAttribute);
         }
 
@@ -71,10 +91,15 @@ namespace System.Web.Http
         public void IsOptional_Returns_True_ForOptionalParameter()
         {
             UsersRpcController controller = new UsersRpcController();
-            MethodInfo methodWithOptionalParam = GetType().GetMethod("MethodWithOptionalParam", BindingFlags.Static | BindingFlags.NonPublic);
-            ReflectedHttpActionDescriptor actionDescriptor = new ReflectedHttpActionDescriptor { MethodInfo = methodWithOptionalParam };
+            MethodInfo methodWithOptionalParam = GetType()
+                .GetMethod("MethodWithOptionalParam", BindingFlags.Static | BindingFlags.NonPublic);
+            ReflectedHttpActionDescriptor actionDescriptor = new ReflectedHttpActionDescriptor
+            {
+                MethodInfo = methodWithOptionalParam,
+            };
             ParameterInfo parameterInfo = methodWithOptionalParam.GetParameters()[0];
-            ReflectedHttpParameterDescriptor parameterDescriptor = new ReflectedHttpParameterDescriptor(actionDescriptor, parameterInfo);
+            ReflectedHttpParameterDescriptor parameterDescriptor =
+                new ReflectedHttpParameterDescriptor(actionDescriptor, parameterInfo);
             Assert.True(parameterDescriptor.IsOptional);
         }
 
@@ -83,9 +108,13 @@ namespace System.Web.Http
         {
             UsersRpcController controller = new UsersRpcController();
             Action<User> addUserMethod = controller.AddUser;
-            ReflectedHttpActionDescriptor actionDescriptor = new ReflectedHttpActionDescriptor { MethodInfo = addUserMethod.Method };
+            ReflectedHttpActionDescriptor actionDescriptor = new ReflectedHttpActionDescriptor
+            {
+                MethodInfo = addUserMethod.Method,
+            };
             ParameterInfo parameterInfo = addUserMethod.Method.GetParameters()[0];
-            ReflectedHttpParameterDescriptor parameterDescriptor = new ReflectedHttpParameterDescriptor(actionDescriptor, parameterInfo);
+            ReflectedHttpParameterDescriptor parameterDescriptor =
+                new ReflectedHttpParameterDescriptor(actionDescriptor, parameterInfo);
             object[] attributes = parameterDescriptor.GetCustomAttributes<object>().ToArray();
 
             object attribute = Assert.Single(attributes);
@@ -97,10 +126,15 @@ namespace System.Web.Http
         {
             UsersRpcController controller = new UsersRpcController();
             Action<User> addUserMethod = controller.AddUser;
-            ReflectedHttpActionDescriptor actionDescriptor = new ReflectedHttpActionDescriptor { MethodInfo = addUserMethod.Method };
+            ReflectedHttpActionDescriptor actionDescriptor = new ReflectedHttpActionDescriptor
+            {
+                MethodInfo = addUserMethod.Method,
+            };
             ParameterInfo parameterInfo = addUserMethod.Method.GetParameters()[0];
-            ReflectedHttpParameterDescriptor parameterDescriptor = new ReflectedHttpParameterDescriptor(actionDescriptor, parameterInfo);
-            IEnumerable<FromBodyAttribute> attributes = parameterDescriptor.GetCustomAttributes<FromBodyAttribute>();
+            ReflectedHttpParameterDescriptor parameterDescriptor =
+                new ReflectedHttpParameterDescriptor(actionDescriptor, parameterInfo);
+            IEnumerable<FromBodyAttribute> attributes =
+                parameterDescriptor.GetCustomAttributes<FromBodyAttribute>();
 
             Assert.Single(attributes);
         }

@@ -3,9 +3,11 @@
 // </copyright>
 using System;
 
-namespace System.Runtime.Caching {
-    public enum CacheItemPriority {
+namespace System.Runtime.Caching
+{
+    public enum CacheItemPriority
+    {
         Default = 0,
-        NotRemovable
+        NotRemovable,
     }
 }

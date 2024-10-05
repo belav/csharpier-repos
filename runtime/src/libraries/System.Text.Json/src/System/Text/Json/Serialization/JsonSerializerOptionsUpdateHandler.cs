@@ -10,6 +10,7 @@ using System.Text.Json.Serialization.Metadata;
 
 [assembly: MetadataUpdateHandler(typeof(JsonSerializerOptionsUpdateHandler))]
 
+
 #pragma warning disable IDE0060
 
 namespace System.Text.Json
@@ -20,7 +21,11 @@ namespace System.Text.Json
         public static void ClearCache(Type[]? types)
         {
             // Ignore the types, and just clear out all reflection caches from serializer options.
-            foreach (KeyValuePair<JsonSerializerOptions, object?> options in JsonSerializerOptions.TrackedOptionsInstances.All)
+            foreach (
+                KeyValuePair<JsonSerializerOptions, object?> options in JsonSerializerOptions
+                    .TrackedOptionsInstances
+                    .All
+            )
             {
                 options.Key.ClearCaches();
             }

@@ -13,11 +13,18 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal;
 /// </summary>
 public class SqliteCharMethodTranslator : IMethodCallTranslator
 {
-    private static readonly Dictionary<MethodInfo, string> SupportedMethods = new()
-    {
-        { typeof(char).GetRuntimeMethod(nameof(char.ToLower), new[] { typeof(char) })!, "lower" },
-        { typeof(char).GetRuntimeMethod(nameof(char.ToUpper), new[] { typeof(char) })!, "upper" }
-    };
+    private static readonly Dictionary<MethodInfo, string> SupportedMethods =
+        new()
+        {
+            {
+                typeof(char).GetRuntimeMethod(nameof(char.ToLower), new[] { typeof(char) })!,
+                "lower"
+            },
+            {
+                typeof(char).GetRuntimeMethod(nameof(char.ToUpper), new[] { typeof(char) })!,
+                "upper"
+            },
+        };
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -42,7 +49,8 @@ public class SqliteCharMethodTranslator : IMethodCallTranslator
         SqlExpression? instance,
         MethodInfo method,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
         if (SupportedMethods.TryGetValue(method, out var sqlFunctionName))
         {
@@ -52,7 +60,8 @@ public class SqliteCharMethodTranslator : IMethodCallTranslator
                 nullable: true,
                 argumentsPropagateNullability: arguments.Select(_ => true).ToList(),
                 method.ReturnType,
-                arguments[0].TypeMapping);
+                arguments[0].TypeMapping
+            );
         }
 
         return null;

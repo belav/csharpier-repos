@@ -4,12 +4,12 @@
 
 namespace System.ServiceModel.Diagnostics
 {
-using System.Collections.Generic;
-using System.Diagnostics.PerformanceData;
-using System.Runtime;
-using System.Security;
-using System.ServiceModel;
-using System.ServiceModel.Administration;
+    using System.Collections.Generic;
+    using System.Diagnostics.PerformanceData;
+    using System.Runtime;
+    using System.Security;
+    using System.ServiceModel;
+    using System.ServiceModel.Administration;
 
     sealed class ServicePerformanceCountersV2 : ServicePerformanceCountersBase
     {
@@ -17,10 +17,11 @@ using System.ServiceModel.Administration;
         static Guid serviceModelProviderId = new Guid("{890c10c3-8c2a-4fe3-a36a-9eca153d47cb}");
         static Guid serviceCounterSetId = new Guid("{e829b6db-21ab-453b-83c9-d980ec708edd}");
 
-        private static readonly CounterSetInstanceCache counterSetInstanceCache = new CounterSetInstanceCache();
+        private static readonly CounterSetInstanceCache counterSetInstanceCache =
+            new CounterSetInstanceCache();
 
         // Double-checked locking pattern requires volatile for read/write synchronization
-        static volatile CounterSet serviceCounterSet;         // Defines the counter set
+        static volatile CounterSet serviceCounterSet; // Defines the counter set
         CounterSetInstance serviceCounterSetInstance; // Instance of the counter set
         CounterData[] counters;
 
@@ -35,45 +36,205 @@ using System.ServiceModel.Administration;
                     {
                         CounterSet localCounterSet = CreateCounterSet();
                         // Add the counters to the counter set definition.
-                        localCounterSet.AddCounter((int)PerfCounters.Calls, CounterType.RawData32, perfCounterNames[(int)PerfCounters.Calls]);
-                        localCounterSet.AddCounter((int)PerfCounters.CallsPerSecond, CounterType.RateOfCountPerSecond32, perfCounterNames[(int)PerfCounters.CallsPerSecond]);
-                        localCounterSet.AddCounter((int)PerfCounters.CallsOutstanding, CounterType.RawData32, perfCounterNames[(int)PerfCounters.CallsOutstanding]);
-                        localCounterSet.AddCounter((int)PerfCounters.CallsFailed, CounterType.RawData32, perfCounterNames[(int)PerfCounters.CallsFailed]);
-                        localCounterSet.AddCounter((int)PerfCounters.CallsFailedPerSecond, CounterType.RateOfCountPerSecond32, perfCounterNames[(int)PerfCounters.CallsFailedPerSecond]);
-                        localCounterSet.AddCounter((int)PerfCounters.CallsFaulted, CounterType.RawData32, perfCounterNames[(int)PerfCounters.CallsFaulted]);
-                        localCounterSet.AddCounter((int)PerfCounters.CallsFaultedPerSecond, CounterType.RateOfCountPerSecond32, perfCounterNames[(int)PerfCounters.CallsFaultedPerSecond]);
-                        localCounterSet.AddCounter((int)PerfCounters.CallDurationBase, CounterType.AverageBase, perfCounterNames[(int)PerfCounters.CallDurationBase]);
-                        localCounterSet.AddCounter((int)PerfCounters.CallDuration, CounterType.AverageTimer32, perfCounterNames[(int)PerfCounters.CallDuration]);
-                        localCounterSet.AddCounter((int)PerfCounters.SecurityValidationAuthenticationFailures, CounterType.RawData32, perfCounterNames[(int)PerfCounters.SecurityValidationAuthenticationFailures]);
-                        localCounterSet.AddCounter((int)PerfCounters.SecurityValidationAuthenticationFailuresPerSecond, CounterType.RateOfCountPerSecond32, perfCounterNames[(int)PerfCounters.SecurityValidationAuthenticationFailuresPerSecond]);
-                        localCounterSet.AddCounter((int)PerfCounters.CallsNotAuthorized, CounterType.RawData32, perfCounterNames[(int)PerfCounters.CallsNotAuthorized]);
-                        localCounterSet.AddCounter((int)PerfCounters.CallsNotAuthorizedPerSecond, CounterType.RateOfCountPerSecond32, perfCounterNames[(int)PerfCounters.CallsNotAuthorizedPerSecond]);
-                        localCounterSet.AddCounter((int)PerfCounters.Instances, CounterType.RawData32, perfCounterNames[(int)PerfCounters.Instances]);
-                        localCounterSet.AddCounter((int)PerfCounters.InstancesRate, CounterType.RateOfCountPerSecond32, perfCounterNames[(int)PerfCounters.InstancesRate]);
-                        localCounterSet.AddCounter((int)PerfCounters.RMSessionsFaulted, CounterType.RawData32, perfCounterNames[(int)PerfCounters.RMSessionsFaulted]);
-                        localCounterSet.AddCounter((int)PerfCounters.RMSessionsFaultedPerSecond, CounterType.RateOfCountPerSecond32, perfCounterNames[(int)PerfCounters.RMSessionsFaultedPerSecond]);
-                        localCounterSet.AddCounter((int)PerfCounters.RMMessagesDropped, CounterType.RawData32, perfCounterNames[(int)PerfCounters.RMMessagesDropped]);
-                        localCounterSet.AddCounter((int)PerfCounters.RMMessagesDroppedPerSecond, CounterType.RateOfCountPerSecond32, perfCounterNames[(int)PerfCounters.RMMessagesDroppedPerSecond]);
-                        localCounterSet.AddCounter((int)PerfCounters.TxFlowed, CounterType.RawData32, perfCounterNames[(int)PerfCounters.TxFlowed]);
-                        localCounterSet.AddCounter((int)PerfCounters.TxFlowedPerSecond, CounterType.RateOfCountPerSecond32, perfCounterNames[(int)PerfCounters.TxFlowedPerSecond]);
-                        localCounterSet.AddCounter((int)PerfCounters.TxCommitted, CounterType.RawData32, perfCounterNames[(int)PerfCounters.TxCommitted]);
-                        localCounterSet.AddCounter((int)PerfCounters.TxCommittedPerSecond, CounterType.RateOfCountPerSecond32, perfCounterNames[(int)PerfCounters.TxCommittedPerSecond]);
-                        localCounterSet.AddCounter((int)PerfCounters.TxAborted, CounterType.RawData32, perfCounterNames[(int)PerfCounters.TxAborted]);
-                        localCounterSet.AddCounter((int)PerfCounters.TxAbortedPerSecond, CounterType.RateOfCountPerSecond32, perfCounterNames[(int)PerfCounters.TxAbortedPerSecond]);
-                        localCounterSet.AddCounter((int)PerfCounters.TxInDoubt, CounterType.RawData32, perfCounterNames[(int)PerfCounters.TxInDoubt]);
-                        localCounterSet.AddCounter((int)PerfCounters.TxInDoubtPerSecond, CounterType.RateOfCountPerSecond32, perfCounterNames[(int)PerfCounters.TxInDoubtPerSecond]);
-                        localCounterSet.AddCounter((int)PerfCounters.MsmqPoisonMessages, CounterType.RawData32, perfCounterNames[(int)PerfCounters.MsmqPoisonMessages]);
-                        localCounterSet.AddCounter((int)PerfCounters.MsmqPoisonMessagesPerSecond, CounterType.RateOfCountPerSecond32, perfCounterNames[(int)PerfCounters.MsmqPoisonMessagesPerSecond]);
-                        localCounterSet.AddCounter((int)PerfCounters.MsmqRejectedMessages, CounterType.RawData32, perfCounterNames[(int)PerfCounters.MsmqRejectedMessages]);
-                        localCounterSet.AddCounter((int)PerfCounters.MsmqRejectedMessagesPerSecond, CounterType.RateOfCountPerSecond32, perfCounterNames[(int)PerfCounters.MsmqRejectedMessagesPerSecond]);
-                        localCounterSet.AddCounter((int)PerfCounters.MsmqDroppedMessages, CounterType.RawData32, perfCounterNames[(int)PerfCounters.MsmqDroppedMessages]);
-                        localCounterSet.AddCounter((int)PerfCounters.MsmqDroppedMessagesPerSecond, CounterType.RateOfCountPerSecond32, perfCounterNames[(int)PerfCounters.MsmqDroppedMessagesPerSecond]);
-                        localCounterSet.AddCounter((int)PerfCounters.CallsPercentMaxCalls, CounterType.RawFraction32, perfCounterNames[(int)PerfCounters.CallsPercentMaxCalls]);
-                        localCounterSet.AddCounter((int)PerfCounters.CallsPercentMaxCallsBase, CounterType.RawBase32, perfCounterNames[(int)PerfCounters.CallsPercentMaxCallsBase]);
-                        localCounterSet.AddCounter((int)PerfCounters.InstancesPercentMaxInstances, CounterType.RawFraction32, perfCounterNames[(int)PerfCounters.InstancesPercentMaxInstances]);
-                        localCounterSet.AddCounter((int)PerfCounters.InstancesPercentMaxInstancesBase, CounterType.RawBase32, perfCounterNames[(int)PerfCounters.InstancesPercentMaxInstancesBase]);
-                        localCounterSet.AddCounter((int)PerfCounters.SessionsPercentMaxSessions, CounterType.RawFraction32, perfCounterNames[(int)PerfCounters.SessionsPercentMaxSessions]);
-                        localCounterSet.AddCounter((int)PerfCounters.SessionsPercentMaxSessionsBase, CounterType.RawBase32, perfCounterNames[(int)PerfCounters.SessionsPercentMaxSessionsBase]);
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.Calls,
+                            CounterType.RawData32,
+                            perfCounterNames[(int)PerfCounters.Calls]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.CallsPerSecond,
+                            CounterType.RateOfCountPerSecond32,
+                            perfCounterNames[(int)PerfCounters.CallsPerSecond]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.CallsOutstanding,
+                            CounterType.RawData32,
+                            perfCounterNames[(int)PerfCounters.CallsOutstanding]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.CallsFailed,
+                            CounterType.RawData32,
+                            perfCounterNames[(int)PerfCounters.CallsFailed]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.CallsFailedPerSecond,
+                            CounterType.RateOfCountPerSecond32,
+                            perfCounterNames[(int)PerfCounters.CallsFailedPerSecond]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.CallsFaulted,
+                            CounterType.RawData32,
+                            perfCounterNames[(int)PerfCounters.CallsFaulted]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.CallsFaultedPerSecond,
+                            CounterType.RateOfCountPerSecond32,
+                            perfCounterNames[(int)PerfCounters.CallsFaultedPerSecond]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.CallDurationBase,
+                            CounterType.AverageBase,
+                            perfCounterNames[(int)PerfCounters.CallDurationBase]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.CallDuration,
+                            CounterType.AverageTimer32,
+                            perfCounterNames[(int)PerfCounters.CallDuration]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.SecurityValidationAuthenticationFailures,
+                            CounterType.RawData32,
+                            perfCounterNames[
+                                (int)PerfCounters.SecurityValidationAuthenticationFailures
+                            ]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.SecurityValidationAuthenticationFailuresPerSecond,
+                            CounterType.RateOfCountPerSecond32,
+                            perfCounterNames[
+                                (int)PerfCounters.SecurityValidationAuthenticationFailuresPerSecond
+                            ]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.CallsNotAuthorized,
+                            CounterType.RawData32,
+                            perfCounterNames[(int)PerfCounters.CallsNotAuthorized]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.CallsNotAuthorizedPerSecond,
+                            CounterType.RateOfCountPerSecond32,
+                            perfCounterNames[(int)PerfCounters.CallsNotAuthorizedPerSecond]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.Instances,
+                            CounterType.RawData32,
+                            perfCounterNames[(int)PerfCounters.Instances]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.InstancesRate,
+                            CounterType.RateOfCountPerSecond32,
+                            perfCounterNames[(int)PerfCounters.InstancesRate]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.RMSessionsFaulted,
+                            CounterType.RawData32,
+                            perfCounterNames[(int)PerfCounters.RMSessionsFaulted]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.RMSessionsFaultedPerSecond,
+                            CounterType.RateOfCountPerSecond32,
+                            perfCounterNames[(int)PerfCounters.RMSessionsFaultedPerSecond]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.RMMessagesDropped,
+                            CounterType.RawData32,
+                            perfCounterNames[(int)PerfCounters.RMMessagesDropped]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.RMMessagesDroppedPerSecond,
+                            CounterType.RateOfCountPerSecond32,
+                            perfCounterNames[(int)PerfCounters.RMMessagesDroppedPerSecond]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.TxFlowed,
+                            CounterType.RawData32,
+                            perfCounterNames[(int)PerfCounters.TxFlowed]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.TxFlowedPerSecond,
+                            CounterType.RateOfCountPerSecond32,
+                            perfCounterNames[(int)PerfCounters.TxFlowedPerSecond]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.TxCommitted,
+                            CounterType.RawData32,
+                            perfCounterNames[(int)PerfCounters.TxCommitted]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.TxCommittedPerSecond,
+                            CounterType.RateOfCountPerSecond32,
+                            perfCounterNames[(int)PerfCounters.TxCommittedPerSecond]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.TxAborted,
+                            CounterType.RawData32,
+                            perfCounterNames[(int)PerfCounters.TxAborted]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.TxAbortedPerSecond,
+                            CounterType.RateOfCountPerSecond32,
+                            perfCounterNames[(int)PerfCounters.TxAbortedPerSecond]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.TxInDoubt,
+                            CounterType.RawData32,
+                            perfCounterNames[(int)PerfCounters.TxInDoubt]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.TxInDoubtPerSecond,
+                            CounterType.RateOfCountPerSecond32,
+                            perfCounterNames[(int)PerfCounters.TxInDoubtPerSecond]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.MsmqPoisonMessages,
+                            CounterType.RawData32,
+                            perfCounterNames[(int)PerfCounters.MsmqPoisonMessages]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.MsmqPoisonMessagesPerSecond,
+                            CounterType.RateOfCountPerSecond32,
+                            perfCounterNames[(int)PerfCounters.MsmqPoisonMessagesPerSecond]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.MsmqRejectedMessages,
+                            CounterType.RawData32,
+                            perfCounterNames[(int)PerfCounters.MsmqRejectedMessages]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.MsmqRejectedMessagesPerSecond,
+                            CounterType.RateOfCountPerSecond32,
+                            perfCounterNames[(int)PerfCounters.MsmqRejectedMessagesPerSecond]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.MsmqDroppedMessages,
+                            CounterType.RawData32,
+                            perfCounterNames[(int)PerfCounters.MsmqDroppedMessages]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.MsmqDroppedMessagesPerSecond,
+                            CounterType.RateOfCountPerSecond32,
+                            perfCounterNames[(int)PerfCounters.MsmqDroppedMessagesPerSecond]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.CallsPercentMaxCalls,
+                            CounterType.RawFraction32,
+                            perfCounterNames[(int)PerfCounters.CallsPercentMaxCalls]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.CallsPercentMaxCallsBase,
+                            CounterType.RawBase32,
+                            perfCounterNames[(int)PerfCounters.CallsPercentMaxCallsBase]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.InstancesPercentMaxInstances,
+                            CounterType.RawFraction32,
+                            perfCounterNames[(int)PerfCounters.InstancesPercentMaxInstances]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.InstancesPercentMaxInstancesBase,
+                            CounterType.RawBase32,
+                            perfCounterNames[(int)PerfCounters.InstancesPercentMaxInstancesBase]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.SessionsPercentMaxSessions,
+                            CounterType.RawFraction32,
+                            perfCounterNames[(int)PerfCounters.SessionsPercentMaxSessions]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.SessionsPercentMaxSessionsBase,
+                            CounterType.RawBase32,
+                            perfCounterNames[(int)PerfCounters.SessionsPercentMaxSessionsBase]
+                        );
                         serviceCounterSet = localCounterSet;
                     }
                 }
@@ -88,18 +249,29 @@ using System.ServiceModel.Administration;
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls into Sys.Diag.PerformanceData.CounterSet..ctor marked as SecurityCritical", Safe = "No user provided data is passed to the call")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls into Sys.Diag.PerformanceData.CounterSet..ctor marked as SecurityCritical",
+            Safe = "No user provided data is passed to the call"
+        )]
         [SecuritySafeCritical]
         static CounterSet CreateCounterSet()
         {
-            return new CounterSet(serviceModelProviderId, serviceCounterSetId, CounterSetInstanceType.Multiple);
+            return new CounterSet(
+                serviceModelProviderId,
+                serviceCounterSetId,
+                CounterSetInstanceType.Multiple
+            );
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls into Sys.Diag.PerformanceData.CounterSetInstance.CreateCounterSetInstance marked as SecurityCritical", Safe = "No user provided data is passed to the call, instance name parameter is generated by Sys.ServiceModel.Diagnostics code from service description")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls into Sys.Diag.PerformanceData.CounterSetInstance.CreateCounterSetInstance marked as SecurityCritical",
+            Safe = "No user provided data is passed to the call, instance name parameter is generated by Sys.ServiceModel.Diagnostics code from service description"
+        )]
         [SecuritySafeCritical]
         static CounterSetInstance CreateCounterSetInstance(string name)
         {
-            return counterSetInstanceCache.Get(name) ?? serviceCounterSet.CreateCounterSetInstance(name);
+            return counterSetInstanceCache.Get(name)
+                ?? serviceCounterSet.CreateCounterSetInstance(name);
         }
 
         internal override void MethodCalled()
@@ -128,7 +300,6 @@ using System.ServiceModel.Administration;
             this.counters[(int)PerfCounters.CallsOutstanding].Decrement();
         }
 
-
         internal override void SaveCallDuration(long time)
         {
             this.counters[(int)PerfCounters.CallDuration].IncrementBy(time);
@@ -138,7 +309,8 @@ using System.ServiceModel.Administration;
         internal override void AuthenticationFailed()
         {
             this.counters[(int)PerfCounters.SecurityValidationAuthenticationFailures].Increment();
-            this.counters[(int)PerfCounters.SecurityValidationAuthenticationFailuresPerSecond].Increment();
+            this.counters[(int)PerfCounters.SecurityValidationAuthenticationFailuresPerSecond]
+                .Increment();
         }
 
         internal override void AuthorizationFailed()
@@ -248,7 +420,11 @@ using System.ServiceModel.Administration;
         {
             try
             {
-                if (disposing && PerformanceCounters.PerformanceCountersEnabled && this.serviceCounterSetInstance != null)
+                if (
+                    disposing
+                    && PerformanceCounters.PerformanceCountersEnabled
+                    && this.serviceCounterSetInstance != null
+                )
                 {
                     counterSetInstanceCache.Cleanup();
                     OperationPerformanceCountersV2.CleanupCache();

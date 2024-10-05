@@ -1,10 +1,10 @@
 // System.Configuration.Install.InstallEventArgs.cs
 //
-// Author: 
+// Author:
 // 	Alejandro Sánchez Acosta  <raciel@es.gnu.org>
 //
 // (C) Alejandro Sánchez Acosta
-// 
+//
 
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,21 +31,20 @@ using System.Collections;
 
 namespace System.Configuration.Install
 {
-	public class InstallEventArgs : EventArgs
-	{
-		private IDictionary savedstate;
-		
-		public InstallEventArgs() {
-		}
+    public class InstallEventArgs : EventArgs
+    {
+        private IDictionary savedstate;
 
-		public InstallEventArgs (IDictionary savedState) {
-			this.savedstate = savedState;
-		}
-		
-		public IDictionary SavedState {
-			get {
-				return savedstate;	
-			}
-		}		
-	}
+        public InstallEventArgs() { }
+
+        public InstallEventArgs(IDictionary savedState)
+        {
+            this.savedstate = savedState;
+        }
+
+        public IDictionary SavedState
+        {
+            get { return savedstate; }
+        }
+    }
 }

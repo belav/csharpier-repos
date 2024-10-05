@@ -21,23 +21,35 @@ namespace Microsoft.CodeAnalysis.Test.Utilities;
 
 internal static class VisualBasicCodeActionOptions
 {
-    public static CodeActionOptions Default = new()
-    {
-        CleanupOptions = new()
+    public static CodeActionOptions Default =
+        new()
         {
-            FormattingOptions = VisualBasicSyntaxFormattingOptions.Default,
-            SimplifierOptions = VisualBasicSimplifierOptions.Default,
-        },
-        CodeGenerationOptions = VisualBasicCodeGenerationOptions.Default,
-        CodeStyleOptions = VisualBasicIdeCodeStyleOptions.Default
-    };
+            CleanupOptions = new()
+            {
+                FormattingOptions = VisualBasicSyntaxFormattingOptions.Default,
+                SimplifierOptions = VisualBasicSimplifierOptions.Default,
+            },
+            CodeGenerationOptions = VisualBasicCodeGenerationOptions.Default,
+            CodeStyleOptions = VisualBasicIdeCodeStyleOptions.Default,
+        };
 
-    public static CodeActionOptions WithWrappingColumn(this CodeActionOptions options, int value)
-        => options with { WrappingColumn = value };
+    public static CodeActionOptions WithWrappingColumn(this CodeActionOptions options, int value) =>
+        options with
+        {
+            WrappingColumn = value,
+        };
 
-    public static CodeActionOptions With(this CodeActionOptions options, VisualBasicSyntaxFormattingOptions value)
-        => options with { CleanupOptions = options.CleanupOptions with { FormattingOptions = value } };
+    public static CodeActionOptions With(
+        this CodeActionOptions options,
+        VisualBasicSyntaxFormattingOptions value
+    ) =>
+        options with
+        {
+            CleanupOptions = options.CleanupOptions with { FormattingOptions = value },
+        };
 
-    public static CodeActionOptions With(this CodeActionOptions options, ImplementTypeOptions value)
-        => options with { ImplementTypeOptions = value };
+    public static CodeActionOptions With(
+        this CodeActionOptions options,
+        ImplementTypeOptions value
+    ) => options with { ImplementTypeOptions = value };
 }

@@ -37,11 +37,12 @@ public class PaginationState
     public event EventHandler<int?>? TotalItemCountChanged;
 
     internal EventCallbackSubscribable<PaginationState> CurrentPageItemsChanged { get; } = new();
-    internal EventCallbackSubscribable<PaginationState> TotalItemCountChangedSubscribable { get; } = new();
+    internal EventCallbackSubscribable<PaginationState> TotalItemCountChangedSubscribable { get; } =
+        new();
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => HashCode.Combine(ItemsPerPage, CurrentPageIndex, TotalItemCount);
+    public override int GetHashCode() =>
+        HashCode.Combine(ItemsPerPage, CurrentPageIndex, TotalItemCount);
 
     /// <summary>
     /// Sets the current page index, and notifies any associated <see cref="QuickGrid{TGridItem}"/>

@@ -12,14 +12,18 @@ public static class AssertExtensions
     {
         if (expected.Length != actual.Length)
         {
-            throw new XunitException($"Expected length to be {expected.Length} but was {actual.Length}");
+            throw new XunitException(
+                $"Expected length to be {expected.Length} but was {actual.Length}"
+            );
         }
 
         for (var i = 0; i < expected.Length; i++)
         {
             if (expected[i] != actual[i])
             {
-                throw new XunitException($@"Expected byte at index {i} to be '{expected[i]}' but was '{actual[i]}'");
+                throw new XunitException(
+                    $@"Expected byte at index {i} to be '{expected[i]}' but was '{actual[i]}'"
+                );
             }
         }
     }

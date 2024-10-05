@@ -15,19 +15,32 @@ namespace IdeBenchmarks.InheritanceMargin
 {
     internal static class BenchmarksHelpers
     {
-        public static async Task<ImmutableArray<InheritanceMarginItem>> GenerateInheritanceMarginItemsAsync(
+        public static async Task<
+            ImmutableArray<InheritanceMarginItem>
+        > GenerateInheritanceMarginItemsAsync(
             Solution solution,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             using var _ = ArrayBuilder<InheritanceMarginItem>.GetInstance(out var builder);
             foreach (var project in solution.Projects)
             {
-                var languageService = project.GetRequiredLanguageService<IInheritanceMarginService>();
+                var languageService =
+                    project.GetRequiredLanguageService<IInheritanceMarginService>();
                 foreach (var document in project.Documents)
                 {
-                    var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-                    var items = await languageService.GetInheritanceMemberItemsAsync(
-                        document, root.Span, includeGlobalImports: true, frozenPartialSemantics: true, cancellationToken).ConfigureAwait(false);
+                    var root = await document
+                        .GetRequiredSyntaxRootAsync(cancellationToken)
+                        .ConfigureAwait(false);
+                    var items = await languageService
+                        .GetInheritanceMemberItemsAsync(
+                            document,
+                            root.Span,
+                            includeGlobalImports: true,
+                            frozenPartialSemantics: true,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     builder.AddRange(items);
                 }
             }

@@ -14,9 +14,10 @@ public partial class VectorTest
     private const int DefaultSeed = 20010415;
     private static int Seed = Environment.GetEnvironmentVariable("CORECLR_SEED") switch
     {
-        string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) => new Random().Next(),
+        string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) =>
+            new Random().Next(),
         string seedStr when int.TryParse(seedStr, out int envSeed) => envSeed,
-        _ => DefaultSeed
+        _ => DefaultSeed,
     };
 
     // Matrix for test purposes only - no per-dim bounds checking, etc.
@@ -25,14 +26,14 @@ public partial class VectorTest
     {
         // data is a flattened matrix.
         private T[] _data;
-        public int xCount, yCount;
+        public int xCount,
+            yCount;
         private int _xTileCount;
         private int _yTileCount;
         private int _flattenedCount;
         private static readonly int s_tileSize = Vector<T>.Count;
 
-        public
-        Matrix(int theXCount, int theYCount)
+        public Matrix(int theXCount, int theYCount)
         {
             // Round up the dimensions so that we don't have to deal with remnants.
             int vectorCount = Vector<T>.Count;
@@ -46,14 +47,8 @@ public partial class VectorTest
 
         public T this[int indexX, int indexY]
         {
-            get
-            {
-                return _data[(indexX * yCount) + indexY];
-            }
-            set
-            {
-                _data[(indexX * yCount) + indexY] = value;
-            }
+            get { return _data[(indexX * yCount) + indexY]; }
+            set { _data[(indexX * yCount) + indexY] = value; }
         }
 
         public static void Transpose(Matrix<T> m, int xStart, int yStart, Vector<T>[] result)
@@ -108,13 +103,19 @@ public partial class VectorTest
                         Vector<T> dot = Vector<T>.Zero;
                         for (int m = 0; m < s_tileSize; m++)
                         {
-                            Vector<T> leftTileRow = new Vector<T>(left._data, (i + m) * left.yCount + k);
+                            Vector<T> leftTileRow = new Vector<T>(
+                                left._data,
+                                (i + m) * left.yCount + k
+                            );
 
                             for (int n = 0; n < s_tileSize; n++)
                             {
                                 temp2[n] = Vector.Dot<T>(leftTileRow, temp[n]);
                             }
-                            Vector<T> resultVector = new Vector<T>(result._data, (i + m) * result.yCount + j);
+                            Vector<T> resultVector = new Vector<T>(
+                                result._data,
+                                (i + m) * result.yCount + j
+                            );
 
                             resultVector += new Vector<T>(temp2);
                             // Store the resultTile
@@ -125,6 +126,7 @@ public partial class VectorTest
             }
             return result;
         }
+
         public void Print()
         {
             Console.WriteLine("[");
@@ -134,7 +136,8 @@ public partial class VectorTest
                 for (int j = 0; j < yCount; j++)
                 {
                     Console.Write(this[i, j]);
-                    if (j < (yCount - 1)) Console.Write(",");
+                    if (j < (yCount - 1))
+                        Console.Write(",");
                 }
                 Console.WriteLine("]");
             }
@@ -183,7 +186,16 @@ public partial class VectorTest
                 T testResult = Result[i, j];
                 if (!(CheckValue<T>(testResult, compareResult)))
                 {
-                    Console.WriteLine("  Mismatch at [" + i + "," + j + "]: expected " + compareResult + " got " + testResult);
+                    Console.WriteLine(
+                        "  Mismatch at ["
+                            + i
+                            + ","
+                            + j
+                            + "]: expected "
+                            + compareResult
+                            + " got "
+                            + testResult
+                    );
                     returnVal = Fail;
                 }
             }
@@ -211,22 +223,25 @@ public partial class VectorTest
         // Float
         Matrix<float> AFloat = GetRandomMatrix<float>(3, 4, random);
         Matrix<float> BFloat = GetRandomMatrix<float>(4, 2, random);
-        if (VectorMatrix<float>(AFloat, BFloat) != Pass) returnVal = Fail;
+        if (VectorMatrix<float>(AFloat, BFloat) != Pass)
+            returnVal = Fail;
 
         AFloat = GetRandomMatrix<float>(33, 20, random);
         BFloat = GetRandomMatrix<float>(20, 17, random);
-        if (VectorMatrix<float>(AFloat, BFloat) != Pass) returnVal = Fail;
+        if (VectorMatrix<float>(AFloat, BFloat) != Pass)
+            returnVal = Fail;
 
         // Double
         Matrix<double> ADouble = GetRandomMatrix<double>(3, 4, random);
         Matrix<double> BDouble = GetRandomMatrix<double>(4, 2, random);
-        if (VectorMatrix<double>(ADouble, BDouble) != Pass) returnVal = Fail;
+        if (VectorMatrix<double>(ADouble, BDouble) != Pass)
+            returnVal = Fail;
 
         ADouble = GetRandomMatrix<double>(33, 20, random);
         BDouble = GetRandomMatrix<double>(20, 17, random);
-        if (VectorMatrix<double>(ADouble, BDouble) != Pass) returnVal = Fail;
+        if (VectorMatrix<double>(ADouble, BDouble) != Pass)
+            returnVal = Fail;
 
         return returnVal;
     }
 }
-

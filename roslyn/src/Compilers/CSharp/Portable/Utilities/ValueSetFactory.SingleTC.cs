@@ -82,18 +82,20 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            float INumericTC<float>.FromConstantValue(ConstantValue constantValue) => constantValue.IsBad ? 0.0F : constantValue.SingleValue;
+            float INumericTC<float>.FromConstantValue(ConstantValue constantValue) =>
+                constantValue.IsBad ? 0.0F : constantValue.SingleValue;
 
-            ConstantValue INumericTC<float>.ToConstantValue(float value) => ConstantValue.Create(value);
+            ConstantValue INumericTC<float>.ToConstantValue(float value) =>
+                ConstantValue.Create(value);
 
             /// <summary>
             /// Produce a string for testing purposes that is likely to be the same independent of platform and locale.
             /// </summary>
             string INumericTC<float>.ToString(float value) =>
-                float.IsNaN(value) ? "NaN" :
-                value == float.NegativeInfinity ? "-Inf" :
-                value == float.PositiveInfinity ? "Inf" :
-                FormattableString.Invariant($"{value:G9}");
+                float.IsNaN(value) ? "NaN"
+                : value == float.NegativeInfinity ? "-Inf"
+                : value == float.PositiveInfinity ? "Inf"
+                : FormattableString.Invariant($"{value:G9}");
 
             float INumericTC<float>.Prev(float value)
             {

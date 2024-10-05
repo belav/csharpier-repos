@@ -9,7 +9,8 @@ namespace System.Configuration
         private int _max = int.MaxValue;
         private int _min = int.MinValue;
 
-        public override ConfigurationValidatorBase ValidatorInstance => new IntegerValidator(_min, _max, ExcludeRange);
+        public override ConfigurationValidatorBase ValidatorInstance =>
+            new IntegerValidator(_min, _max, ExcludeRange);
 
         public int MinValue
         {
@@ -17,7 +18,10 @@ namespace System.Configuration
             set
             {
                 if (_max < value)
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.Validator_min_greater_than_max);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.Validator_min_greater_than_max
+                    );
 
                 _min = value;
             }
@@ -29,7 +33,10 @@ namespace System.Configuration
             set
             {
                 if (_min > value)
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.Validator_min_greater_than_max);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.Validator_min_greater_than_max
+                    );
 
                 _max = value;
             }

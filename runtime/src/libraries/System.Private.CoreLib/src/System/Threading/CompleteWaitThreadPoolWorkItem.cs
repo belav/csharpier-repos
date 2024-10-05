@@ -10,6 +10,7 @@ namespace System.Threading
 {
     internal sealed partial class CompleteWaitThreadPoolWorkItem : IThreadPoolWorkItem
     {
-        void IThreadPoolWorkItem.Execute() => PortableThreadPool.CompleteWait(_registeredWaitHandle, _timedOut);
+        void IThreadPoolWorkItem.Execute() =>
+            PortableThreadPool.CompleteWait(_registeredWaitHandle, _timedOut);
     }
 }

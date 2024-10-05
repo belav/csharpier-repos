@@ -3,10 +3,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Runtime;
 using System.Reflection;
+using System.Runtime;
 using System.Threading;
-
 
 namespace LOHCompactAPI
 {
@@ -62,7 +61,6 @@ namespace LOHCompactAPI
             }
             Console.WriteLine("Test2 passed");
 
-
             testDone = true;
             AllocatingThread.Join();
             for (int i = 0; i < numThreads; i++)
@@ -74,8 +72,6 @@ namespace LOHCompactAPI
 
         public static bool Test1()
         {
-
-
             Console.WriteLine("Setting GCLargeObjectHeapCompactionMode.CompactOnce");
             int GCCount = 0;
             int initialGCCount = GetBlockingGen2Count();
@@ -83,30 +79,44 @@ namespace LOHCompactAPI
             GCCount = GetBlockingGen2Count();
             if (initialGCCount != GCCount)
             {
-                Console.WriteLine("A GC happened while setting CompactOnce. Old count {0}, new Count {1}", initialGCCount, GCCount);
+                Console.WriteLine(
+                    "A GC happened while setting CompactOnce. Old count {0}, new Count {1}",
+                    initialGCCount,
+                    GCCount
+                );
                 //skip this run
                 return true;
             }
-
 
             Thread.Sleep(100);
             int currentGCCount = GetBlockingGen2Count();
             GCLargeObjectHeapCompactionMode mode = GCSettings.LargeObjectHeapCompactionMode;
             GCCount = GetBlockingGen2Count();
-            if (currentGCCount != GCCount)  //a GC happened in between these calls
+            if (currentGCCount != GCCount) //a GC happened in between these calls
             {
-                Console.WriteLine("A GC happened while getting Compaction Mode. Old count {0}, new Count {1}", currentGCCount, GCCount);
+                Console.WriteLine(
+                    "A GC happened while getting Compaction Mode. Old count {0}, new Count {1}",
+                    currentGCCount,
+                    GCCount
+                );
                 //skip this run
                 return true;
             }
 
-            Console.WriteLine("initial GC count: {0}; currentGCCount: {1}", initialGCCount, currentGCCount);
+            Console.WriteLine(
+                "initial GC count: {0}; currentGCCount: {1}",
+                initialGCCount,
+                currentGCCount
+            );
             Console.WriteLine(mode);
             if (currentGCCount == initialGCCount)
             {
                 if (mode != GCLargeObjectHeapCompactionMode.CompactOnce)
                 {
-                    Console.WriteLine("GCLargeObjectHeapCompactionMode should be CompactOnce; instead it is " + mode);
+                    Console.WriteLine(
+                        "GCLargeObjectHeapCompactionMode should be CompactOnce; instead it is "
+                            + mode
+                    );
                     return false;
                 }
             }
@@ -114,18 +124,17 @@ namespace LOHCompactAPI
             {
                 if (mode != GCLargeObjectHeapCompactionMode.Default)
                 {
-                    Console.WriteLine("GCLargeObjectHeapCompactionMode should be Default; instead it is " + mode);
+                    Console.WriteLine(
+                        "GCLargeObjectHeapCompactionMode should be Default; instead it is " + mode
+                    );
                     return false;
                 }
             }
             return true;
-
         }
 
         public static bool Test2()
         {
-
-
             Console.WriteLine("Setting GCLargeObjectHeapCompactionMode.CompactOnce");
             GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
             GC.Collect();
@@ -133,7 +142,9 @@ namespace LOHCompactAPI
             Console.WriteLine(mode);
             if (mode != GCLargeObjectHeapCompactionMode.Default)
             {
-                Console.WriteLine("GCLargeObjectHeapCompactionMode should be CompactOnce; instead it is " + mode);
+                Console.WriteLine(
+                    "GCLargeObjectHeapCompactionMode should be CompactOnce; instead it is " + mode
+                );
                 return false;
             }
 
@@ -153,7 +164,6 @@ namespace LOHCompactAPI
                 }
                 tempList.Clear();
             }
-
         }
 
         public static void Allocate(object threadInfoObj)
@@ -163,7 +173,6 @@ namespace LOHCompactAPI
 
             int listSize2 = 1000;
             List<byte[]> newList = new List<byte[]>(500 + 1000);
-
 
             while (!testDone)
             {
@@ -181,19 +190,18 @@ namespace LOHCompactAPI
             }
         }
 
-
-
-
         //Only count the blocking gen2 GC's. Concurrent GC's should be subtracted from the total GC count.
         public static int GetBlockingGen2Count()
         {
-
             //Get the number of concurrent collections (can use this method only through reflection):
             MethodInfo collectionCountmethod = null;
             Type GCType = Type.GetType("System.GC");
-            foreach(MethodInfo m in GCType.GetMethods(BindingFlags.Static | BindingFlags.NonPublic))
+            foreach (
+                MethodInfo m in GCType.GetMethods(BindingFlags.Static | BindingFlags.NonPublic)
+            )
             {
-                if (m.Name.Equals("_CollectionCount") && m.GetParameters().Length == 2) collectionCountmethod = m;
+                if (m.Name.Equals("_CollectionCount") && m.GetParameters().Length == 2)
+                    collectionCountmethod = m;
             }
             if (collectionCountmethod == null)
             {
@@ -210,7 +218,11 @@ namespace LOHCompactAPI
             parameters[1] = 1; // special gc count
             int backgroundCollections = (int)collectionCountmethod.Invoke(null, parameters);
             int TotalCollections = GC.CollectionCount(2);
-            Console.WriteLine("Total collections {0}, background {1}", TotalCollections, backgroundCollections);
+            Console.WriteLine(
+                "Total collections {0}, background {1}",
+                TotalCollections,
+                backgroundCollections
+            );
             return (TotalCollections - backgroundCollections);
         }
     }

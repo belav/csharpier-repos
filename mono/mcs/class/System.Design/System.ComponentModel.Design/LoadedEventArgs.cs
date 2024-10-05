@@ -1,7 +1,7 @@
 //
 // System.ComponentModel.Design.LoadedEventArgs
 //
-// Authors:	 
+// Authors:
 //	  Ivan N. Zlatev (contact i-nZ.net)
 //
 // (C) 2006 Ivan N. Zlatev
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,31 +34,25 @@ using System.ComponentModel;
 
 namespace System.ComponentModel.Design
 {
+    public sealed class LoadedEventArgs : EventArgs
+    {
+        public LoadedEventArgs(bool succeeded, ICollection errors)
+        {
+            _succeeded = succeeded;
+            _errors = errors;
+        }
 
-	public sealed class LoadedEventArgs : EventArgs
-	{
-		
-		public LoadedEventArgs (bool succeeded, ICollection errors)
-		{
-			_succeeded = succeeded;
-			_errors = errors;
-		}
-		
-		private ICollection _errors;
-		private bool _succeeded; 
-		
-		public ICollection Errors {
-			get { return _errors; }
-		}
-		
-		public bool HasSucceeded {
-			get { return _succeeded;}
-		}
+        private ICollection _errors;
+        private bool _succeeded;
 
-		
+        public ICollection Errors
+        {
+            get { return _errors; }
+        }
 
-		
-	}
-
+        public bool HasSucceeded
+        {
+            get { return _succeeded; }
+        }
+    }
 }
-

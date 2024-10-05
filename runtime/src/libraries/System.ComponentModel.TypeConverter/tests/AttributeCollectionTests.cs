@@ -23,8 +23,16 @@ namespace System.ComponentModel.Tests
         {
             var attribute1 = new BrowsableAttribute(true);
             var attribute2 = new ReadOnlyAttribute(true);
-            yield return new object[] { new Attribute[] { attribute1, attribute2 }, new Attribute[] { attribute1, attribute2 } };
-            yield return new object[] { new Attribute[] { attribute1 }, new Attribute[] { attribute1 } };
+            yield return new object[]
+            {
+                new Attribute[] { attribute1, attribute2 },
+                new Attribute[] { attribute1, attribute2 },
+            };
+            yield return new object[]
+            {
+                new Attribute[] { attribute1 },
+                new Attribute[] { attribute1 },
+            };
             yield return new object[] { new Attribute[0], new Attribute[0] };
             yield return new object[] { null, new Attribute[0] };
         }
@@ -57,7 +65,10 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void Ctor_NullAttributeInAttributes_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("attributes", () => new AttributeCollection(new Attribute[] { null }));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "attributes",
+                () => new AttributeCollection(new Attribute[] { null })
+            );
         }
 
         [Fact]
@@ -101,7 +112,10 @@ namespace System.ComponentModel.Tests
         public void CopyTo_NullArray_ThrowsArgumentNullException()
         {
             var collection = new SubAttributeCollection();
-            Assert.Throws<ArgumentNullException>("destinationArray", () => collection.CopyTo(null, 0));
+            Assert.Throws<ArgumentNullException>(
+                "destinationArray",
+                () => collection.CopyTo(null, 0)
+            );
         }
 
         [Fact]
@@ -144,7 +158,11 @@ namespace System.ComponentModel.Tests
             Assert.True(collection.Contains(new Attribute[] { attribute1 }));
             Assert.False(collection.Contains(new Attribute[] { new BrowsableAttribute(false) }));
             Assert.True(collection.Contains(new Attribute[] { attribute1, attribute2 }));
-            Assert.False(collection.Contains(new Attribute[] { attribute1, attribute2, new EditorBrowsableAttribute() }));
+            Assert.False(
+                collection.Contains(
+                    new Attribute[] { attribute1, attribute2, new EditorBrowsableAttribute() }
+                )
+            );
             Assert.False(collection.Contains(new Attribute[] { new EditorBrowsableAttribute() }));
             Assert.False(collection.Contains(new Attribute[] { null }));
             Assert.True(collection.Contains(new Attribute[0]));
@@ -155,7 +173,9 @@ namespace System.ComponentModel.Tests
         public void GetDefaultAttribute_InvokeCustom_ReturnsExpected()
         {
             var collection = new SubAttributeCollection();
-            BrowsableAttribute result = Assert.IsType<BrowsableAttribute>(collection.GetDefaultAttribute(typeof(BrowsableAttribute)));
+            BrowsableAttribute result = Assert.IsType<BrowsableAttribute>(
+                collection.GetDefaultAttribute(typeof(BrowsableAttribute))
+            );
             Assert.True(result.Browsable);
 
             // Call again.
@@ -166,7 +186,9 @@ namespace System.ComponentModel.Tests
         public void GetDefaultAttribute_InvokeDefaultField_ReturnsExpected()
         {
             var collection = new SubAttributeCollection();
-            AttributeWithDefaultField result = Assert.IsType<AttributeWithDefaultField>(collection.GetDefaultAttribute(typeof(AttributeWithDefaultField)));
+            AttributeWithDefaultField result = Assert.IsType<AttributeWithDefaultField>(
+                collection.GetDefaultAttribute(typeof(AttributeWithDefaultField))
+            );
             Assert.Same(AttributeWithDefaultField.Default, result);
 
             // Call again.
@@ -177,21 +199,32 @@ namespace System.ComponentModel.Tests
         public void GetDefaultAttribute_InvokeDefaultFieldNotDefault_ReturnsExpected()
         {
             var collection = new SubAttributeCollection();
-            AttributeWithDefaultFieldNotDefault result = Assert.IsType<AttributeWithDefaultFieldNotDefault>(collection.GetDefaultAttribute(typeof(AttributeWithDefaultFieldNotDefault)));
+            AttributeWithDefaultFieldNotDefault result =
+                Assert.IsType<AttributeWithDefaultFieldNotDefault>(
+                    collection.GetDefaultAttribute(typeof(AttributeWithDefaultFieldNotDefault))
+                );
             Assert.Same(AttributeWithDefaultFieldNotDefault.Default, result);
 
             // Call again.
-            Assert.Same(result, collection.GetDefaultAttribute(typeof(AttributeWithDefaultFieldNotDefault)));
+            Assert.Same(
+                result,
+                collection.GetDefaultAttribute(typeof(AttributeWithDefaultFieldNotDefault))
+            );
         }
 
         [Fact]
         public void GetDefaultAttribute_InvokeParameterlessConstructorDefault_ReturnsExpected()
         {
             var collection = new SubAttributeCollection();
-            AttributeWithDefaultConstructor result = Assert.IsType<AttributeWithDefaultConstructor>(collection.GetDefaultAttribute(typeof(AttributeWithDefaultConstructor)));
+            AttributeWithDefaultConstructor result = Assert.IsType<AttributeWithDefaultConstructor>(
+                collection.GetDefaultAttribute(typeof(AttributeWithDefaultConstructor))
+            );
 
             // Call again.
-            Assert.Same(result, collection.GetDefaultAttribute(typeof(AttributeWithDefaultConstructor)));
+            Assert.Same(
+                result,
+                collection.GetDefaultAttribute(typeof(AttributeWithDefaultConstructor))
+            );
         }
 
         [Theory]
@@ -213,17 +246,24 @@ namespace System.ComponentModel.Tests
         public void GetDefaultAttribute_NullAttributeType_ThrowsArgumentNullException()
         {
             var collection = new SubAttributeCollection();
-            Assert.Throws<ArgumentNullException>("attributeType", () => collection.GetDefaultAttribute(null));
+            Assert.Throws<ArgumentNullException>(
+                "attributeType",
+                () => collection.GetDefaultAttribute(null)
+            );
         }
 
         [Fact]
         public void GetDefaultAttribute_InvalidType_ReturnsNull()
         {
             var collection = new SubAttributeCollection();
-            Assert.Throws<InvalidCastException>(() => collection.GetDefaultAttribute(typeof(AttributeCollectionTests)));
+            Assert.Throws<InvalidCastException>(
+                () => collection.GetDefaultAttribute(typeof(AttributeCollectionTests))
+            );
 
             // Call again.
-            Assert.Throws<InvalidCastException>(() => collection.GetDefaultAttribute(typeof(AttributeCollectionTests)));
+            Assert.Throws<InvalidCastException>(
+                () => collection.GetDefaultAttribute(typeof(AttributeCollectionTests))
+            );
         }
 
         [Fact]
@@ -269,7 +309,9 @@ namespace System.ComponentModel.Tests
             var attribute1 = new BrowsableAttribute(true);
             var attribute2 = new ReadOnlyAttribute(true);
             var attribute3 = new EditorBrowsableAttribute(EditorBrowsableState.Never);
-            var attribute4 = new DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Content);
+            var attribute4 = new DesignerSerializationVisibilityAttribute(
+                DesignerSerializationVisibility.Content
+            );
             var existingAttributes = new Attribute[] { attribute1, attribute2 };
             var newAttributes = new Attribute[] { attribute3, attribute4 };
             var existing = new AttributeCollection(existingAttributes);
@@ -289,20 +331,29 @@ namespace System.ComponentModel.Tests
             var existing = new AttributeCollection(existingAttributes);
 
             var collection = AttributeCollection.FromExisting(existing, newAttributes);
-            Assert.Equal(new Attribute[] { existingAttributes[0], newAttributes[0], newAttributes[1] }, collection.Cast<Attribute>());
+            Assert.Equal(
+                new Attribute[] { existingAttributes[0], newAttributes[0], newAttributes[1] },
+                collection.Cast<Attribute>()
+            );
         }
 
         [Fact]
         public void FromExisting_NullExisting_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("existing", () => AttributeCollection.FromExisting(null, new Attribute[0]));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "existing",
+                () => AttributeCollection.FromExisting(null, new Attribute[0])
+            );
         }
 
         [Fact]
         public void FromExisting_NullAttributeInNewAttributes_ThrowsArgumentNullException()
         {
             var existing = new AttributeCollection();
-            AssertExtensions.Throws<ArgumentNullException>("newAttributes", () => AttributeCollection.FromExisting(existing, new Attribute[] { null }));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "newAttributes",
+                () => AttributeCollection.FromExisting(existing, new Attribute[] { null })
+            );
         }
 
         [Fact]
@@ -336,7 +387,7 @@ namespace System.ComponentModel.Tests
                 new TestAttribute3(),
                 new TestAttribute4(),
                 new TestAttribute1(),
-                new TestAttribute5b()
+                new TestAttribute5b(),
             };
 
             var collection = new AttributeCollection(attributes);
@@ -347,7 +398,9 @@ namespace System.ComponentModel.Tests
         public void Item_GetTypeCustom_ReturnsExpected()
         {
             var collection = new SubAttributeCollection();
-            BrowsableAttribute result = Assert.IsType<BrowsableAttribute>(collection[typeof(BrowsableAttribute)]);
+            BrowsableAttribute result = Assert.IsType<BrowsableAttribute>(
+                collection[typeof(BrowsableAttribute)]
+            );
             Assert.True(result.Browsable);
 
             // Call again.
@@ -358,7 +411,9 @@ namespace System.ComponentModel.Tests
         public void Item_GetTypeDefaultField_ReturnsExpected()
         {
             var collection = new SubAttributeCollection();
-            AttributeWithDefaultField result = Assert.IsType<AttributeWithDefaultField>(collection[typeof(AttributeWithDefaultField)]);
+            AttributeWithDefaultField result = Assert.IsType<AttributeWithDefaultField>(
+                collection[typeof(AttributeWithDefaultField)]
+            );
             Assert.Same(AttributeWithDefaultField.Default, result);
 
             // Call again.
@@ -369,7 +424,10 @@ namespace System.ComponentModel.Tests
         public void Item_GetTypeDefaultFieldNotDefault_ReturnsExpected()
         {
             var collection = new SubAttributeCollection();
-            AttributeWithDefaultFieldNotDefault result = Assert.IsType<AttributeWithDefaultFieldNotDefault>(collection[typeof(AttributeWithDefaultFieldNotDefault)]);
+            AttributeWithDefaultFieldNotDefault result =
+                Assert.IsType<AttributeWithDefaultFieldNotDefault>(
+                    collection[typeof(AttributeWithDefaultFieldNotDefault)]
+                );
             Assert.Same(AttributeWithDefaultFieldNotDefault.Default, result);
 
             // Call again.
@@ -380,7 +438,9 @@ namespace System.ComponentModel.Tests
         public void Item_GetTypeParameterlessConstructorDefault_ReturnsExpected()
         {
             var collection = new SubAttributeCollection();
-            AttributeWithDefaultConstructor result = Assert.IsType<AttributeWithDefaultConstructor>(collection[typeof(AttributeWithDefaultConstructor)]);
+            AttributeWithDefaultConstructor result = Assert.IsType<AttributeWithDefaultConstructor>(
+                collection[typeof(AttributeWithDefaultConstructor)]
+            );
 
             // Call again.
             Assert.Same(result, collection[typeof(AttributeWithDefaultConstructor)]);
@@ -418,7 +478,7 @@ namespace System.ComponentModel.Tests
                 new TestAttribute3(),
                 new TestAttribute4(),
                 new TestAttribute1(),
-                new TestAttribute5b()
+                new TestAttribute5b(),
             };
 
             var collection = new AttributeCollection(attributes);
@@ -486,7 +546,11 @@ namespace System.ComponentModel.Tests
             Assert.True(collection.Matches(new Attribute[] { attribute1 }));
             Assert.False(collection.Matches(new Attribute[] { new BrowsableAttribute(false) }));
             Assert.True(collection.Matches(new Attribute[] { attribute1, attribute2 }));
-            Assert.False(collection.Matches(new Attribute[] { attribute1, attribute2, new EditorBrowsableAttribute() }));
+            Assert.False(
+                collection.Matches(
+                    new Attribute[] { attribute1, attribute2, new EditorBrowsableAttribute() }
+                )
+            );
             Assert.False(collection.Matches(new Attribute[] { new EditorBrowsableAttribute() }));
             Assert.False(collection.Matches(new Attribute[] { null }));
             Assert.True(collection.Matches(new Attribute[0]));
@@ -520,68 +584,73 @@ namespace System.ComponentModel.Tests
         }
 
         public class TestAttribute1 : Attribute { }
+
         public class TestAttribute2 : Attribute { }
+
         public class TestAttribute3 : Attribute { }
+
         public class TestAttribute4 : Attribute { }
+
         public class TestAttribute5a : Attribute { }
+
         public class TestAttribute5b : TestAttribute5a { }
+
         public class TestAttribute6 : Attribute { }
 
         private class AttributeWithDefaultField : Attribute
         {
-            public static readonly AttributeWithDefaultField Default = new AttributeWithDefaultField();
+            public static readonly AttributeWithDefaultField Default =
+                new AttributeWithDefaultField();
 
             public override bool IsDefaultAttribute() => true;
         }
 
         private class AttributeWithDefaultFieldNotDefault : Attribute
         {
-            public static readonly AttributeWithDefaultFieldNotDefault Default = new AttributeWithDefaultFieldNotDefault();
+            public static readonly AttributeWithDefaultFieldNotDefault Default =
+                new AttributeWithDefaultFieldNotDefault();
 
             public override bool IsDefaultAttribute() => false;
         }
 
         private class AttributeWithDefaultConstructor : Attribute
         {
-            public AttributeWithDefaultConstructor()
-            {
-            }
+            public AttributeWithDefaultConstructor() { }
 
             public override bool IsDefaultAttribute() => true;
         }
 
         private class AttributeWithDefaultConstructorNotDefault : Attribute
         {
-            public AttributeWithDefaultConstructorNotDefault()
-            {
-            }
+            public AttributeWithDefaultConstructorNotDefault() { }
 
             public override bool IsDefaultAttribute() => false;
         }
 
         private class AttributeWithDefaultProperty : Attribute
         {
-            public static AttributeWithDefaultProperty Default { get; } = new AttributeWithDefaultProperty();
+            public static AttributeWithDefaultProperty Default { get; } =
+                new AttributeWithDefaultProperty();
         }
 
         private class AttributeWithPrivateDefaultField : Attribute
         {
-            private static readonly AttributeWithPrivateDefaultField Default = new AttributeWithPrivateDefaultField();
+            private static readonly AttributeWithPrivateDefaultField Default =
+                new AttributeWithPrivateDefaultField();
         }
 
         public class SubAttributeCollection : AttributeCollection
         {
-            public SubAttributeCollection() : base()
-            {
-            }
+            public SubAttributeCollection()
+                : base() { }
 
-            public SubAttributeCollection(params Attribute[] attributes) : base(attributes)
-            {
-            }
+            public SubAttributeCollection(params Attribute[] attributes)
+                : base(attributes) { }
 
             public new Attribute[] Attributes => base.Attributes;
 
-            public new Attribute GetDefaultAttribute(Type attributeType) => base.GetDefaultAttribute(attributeType);
+            public new Attribute GetDefaultAttribute(Type attributeType) =>
+                base.GetDefaultAttribute(attributeType);
         }
     }
 }

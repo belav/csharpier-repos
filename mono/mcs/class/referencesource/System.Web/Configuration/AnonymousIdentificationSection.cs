@@ -4,18 +4,19 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Collections.Specialized;
     using System.Collections;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.Configuration;
     using System.Globalization;
     using System.IO;
+    using System.Security.Permissions;
     using System.Text;
     using System.Web.Security;
-    using System.ComponentModel;
-    using System.Security.Permissions;
+    using System.Xml;
 
     //        <!--
     //            anonymousIdentification configuration:
@@ -47,43 +48,76 @@ namespace System.Web.Configuration {
     //        "                domain=\"[domain]\"                                 Enables output of the "domain" cookie attribute set to the specified value" + "\r\n" +
     //        "        -->" + "\r\n" +
     //    )]
-    public sealed class AnonymousIdentificationSection : ConfigurationSection {
+    public sealed class AnonymousIdentificationSection : ConfigurationSection
+    {
         private static ConfigurationPropertyCollection _properties;
-        private static readonly ConfigurationProperty _propEnabled =
-            new ConfigurationProperty("enabled", typeof(bool), false, ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationProperty _propCookieName =
-            new ConfigurationProperty("cookieName",
-                                        typeof(string),
-                                        ".ASPXANONYMOUS",
-                                        null,
-                                        StdValidatorsAndConverters.NonEmptyStringValidator,
-                                        ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propEnabled = new ConfigurationProperty(
+            "enabled",
+            typeof(bool),
+            false,
+            ConfigurationPropertyOptions.None
+        );
+        private static readonly ConfigurationProperty _propCookieName = new ConfigurationProperty(
+            "cookieName",
+            typeof(string),
+            ".ASPXANONYMOUS",
+            null,
+            StdValidatorsAndConverters.NonEmptyStringValidator,
+            ConfigurationPropertyOptions.None
+        );
         private static readonly ConfigurationProperty _propCookieTimeout =
-            new ConfigurationProperty("cookieTimeout",
-                                        typeof(TimeSpan),
-                                        TimeSpan.FromMinutes(100000.0),
-                                        StdValidatorsAndConverters.TimeSpanMinutesOrInfiniteConverter,
-                                        StdValidatorsAndConverters.PositiveTimeSpanValidator,
-                                        ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationProperty _propCookiePath =
-            new ConfigurationProperty("cookiePath",
-                                        typeof(string),
-                                        "/",
-                                        null,
-                                        StdValidatorsAndConverters.NonEmptyStringValidator,
-                                        ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "cookieTimeout",
+                typeof(TimeSpan),
+                TimeSpan.FromMinutes(100000.0),
+                StdValidatorsAndConverters.TimeSpanMinutesOrInfiniteConverter,
+                StdValidatorsAndConverters.PositiveTimeSpanValidator,
+                ConfigurationPropertyOptions.None
+            );
+        private static readonly ConfigurationProperty _propCookiePath = new ConfigurationProperty(
+            "cookiePath",
+            typeof(string),
+            "/",
+            null,
+            StdValidatorsAndConverters.NonEmptyStringValidator,
+            ConfigurationPropertyOptions.None
+        );
         private static readonly ConfigurationProperty _propCookieRequireSSL =
-            new ConfigurationProperty("cookieRequireSSL", typeof(bool), false, ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "cookieRequireSSL",
+                typeof(bool),
+                false,
+                ConfigurationPropertyOptions.None
+            );
         private static readonly ConfigurationProperty _propCookieSlidingExpiration =
-            new ConfigurationProperty("cookieSlidingExpiration", typeof(bool), true, ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "cookieSlidingExpiration",
+                typeof(bool),
+                true,
+                ConfigurationPropertyOptions.None
+            );
         private static readonly ConfigurationProperty _propCookieProtection =
-            new ConfigurationProperty("cookieProtection", typeof(CookieProtection), CookieProtection.Validation, ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationProperty _propCookieless =
-            new ConfigurationProperty("cookieless", typeof(HttpCookieMode), HttpCookieMode.UseCookies, ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationProperty _propDomain =
-            new ConfigurationProperty("domain", typeof(string), null, ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "cookieProtection",
+                typeof(CookieProtection),
+                CookieProtection.Validation,
+                ConfigurationPropertyOptions.None
+            );
+        private static readonly ConfigurationProperty _propCookieless = new ConfigurationProperty(
+            "cookieless",
+            typeof(HttpCookieMode),
+            HttpCookieMode.UseCookies,
+            ConfigurationPropertyOptions.None
+        );
+        private static readonly ConfigurationProperty _propDomain = new ConfigurationProperty(
+            "domain",
+            typeof(string),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 
-        static AnonymousIdentificationSection() {
+        static AnonymousIdentificationSection()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
             _properties.Add(_propEnabled);
@@ -97,107 +131,81 @@ namespace System.Web.Configuration {
             _properties.Add(_propDomain);
         }
 
-        public AnonymousIdentificationSection() {
-        }
+        public AnonymousIdentificationSection() { }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
         [ConfigurationProperty("enabled", DefaultValue = false)]
-        public bool Enabled {
-            get {
-                return (bool)base[_propEnabled];
-            }
-            set {
-                base[_propEnabled] = value;
-            }
+        public bool Enabled
+        {
+            get { return (bool)base[_propEnabled]; }
+            set { base[_propEnabled] = value; }
         }
 
         [ConfigurationProperty("cookieName", DefaultValue = ".ASPXANONYMOUS")]
         [StringValidator(MinLength = 1)]
-        public string CookieName {
-            get {
-                return (string)base[_propCookieName];
-            }
-            set {
-                base[_propCookieName] = value;
-            }
+        public string CookieName
+        {
+            get { return (string)base[_propCookieName]; }
+            set { base[_propCookieName] = value; }
         }
 
         [ConfigurationProperty("cookieTimeout", DefaultValue = "69.10:40:00")]
-        [TimeSpanValidator(MinValueString="00:00:00", MaxValueString=TimeSpanValidatorAttribute.TimeSpanMaxValue)]
+        [TimeSpanValidator(
+            MinValueString = "00:00:00",
+            MaxValueString = TimeSpanValidatorAttribute.TimeSpanMaxValue
+        )]
         [TypeConverter(typeof(TimeSpanMinutesOrInfiniteConverter))]
-        public TimeSpan CookieTimeout {
-            get {
-                return (TimeSpan)base[_propCookieTimeout];
-            }
-            set {
-                base[_propCookieTimeout] = value;
-            }
+        public TimeSpan CookieTimeout
+        {
+            get { return (TimeSpan)base[_propCookieTimeout]; }
+            set { base[_propCookieTimeout] = value; }
         }
 
         [ConfigurationProperty("cookiePath", DefaultValue = "/")]
         [StringValidator(MinLength = 1)]
-        public string CookiePath {
-            get {
-                return (string)base[_propCookiePath];
-            }
-            set {
-                base[_propCookiePath] = value;
-            }
+        public string CookiePath
+        {
+            get { return (string)base[_propCookiePath]; }
+            set { base[_propCookiePath] = value; }
         }
 
         [ConfigurationProperty("cookieRequireSSL", DefaultValue = false)]
-        public bool CookieRequireSSL {
-            get {
-                return (bool)base[_propCookieRequireSSL];
-            }
-            set {
-                base[_propCookieRequireSSL] = value;
-            }
+        public bool CookieRequireSSL
+        {
+            get { return (bool)base[_propCookieRequireSSL]; }
+            set { base[_propCookieRequireSSL] = value; }
         }
 
         [ConfigurationProperty("cookieSlidingExpiration", DefaultValue = true)]
-        public bool CookieSlidingExpiration {
-            get {
-                return (bool)base[_propCookieSlidingExpiration];
-            }
-            set {
-                base[_propCookieSlidingExpiration] = value;
-            }
+        public bool CookieSlidingExpiration
+        {
+            get { return (bool)base[_propCookieSlidingExpiration]; }
+            set { base[_propCookieSlidingExpiration] = value; }
         }
 
         [ConfigurationProperty("cookieProtection", DefaultValue = CookieProtection.Validation)]
-        public CookieProtection CookieProtection {
-            get {
-                return (CookieProtection)base[_propCookieProtection];
-            }
-            set {
-                base[_propCookieProtection] = value;
-            }
+        public CookieProtection CookieProtection
+        {
+            get { return (CookieProtection)base[_propCookieProtection]; }
+            set { base[_propCookieProtection] = value; }
         }
 
         [ConfigurationProperty("cookieless", DefaultValue = HttpCookieMode.UseCookies)]
-        public HttpCookieMode Cookieless {
-            get {
-                return (HttpCookieMode)base[_propCookieless];
-            }
-            set {
-                base[_propCookieless] = value;
-            }
+        public HttpCookieMode Cookieless
+        {
+            get { return (HttpCookieMode)base[_propCookieless]; }
+            set { base[_propCookieless] = value; }
         }
 
         [ConfigurationProperty("domain")]
-        public string Domain {
-            get {
-                return (string)base[_propDomain];
-            }
-            set {
-                base[_propDomain] = value;
-            }
+        public string Domain
+        {
+            get { return (string)base[_propDomain]; }
+            set { base[_propDomain] = value; }
         }
     }
 }

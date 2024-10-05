@@ -50,17 +50,19 @@ namespace System.Runtime.InteropServices.Tests
         }
 
         [Fact]
-        [SkipOnMono("Marshal.WriteIntPtr will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.WriteIntPtr will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void WriteIntPtr_BlittableObject_Roundtrips()
         {
-            int offset1 = Marshal.OffsetOf<BlittableStruct>(nameof(BlittableStruct.value1)).ToInt32();
-            int offset2 = Marshal.OffsetOf<BlittableStruct>(nameof(BlittableStruct.value2)).ToInt32();
+            int offset1 = Marshal
+                .OffsetOf<BlittableStruct>(nameof(BlittableStruct.value1))
+                .ToInt32();
+            int offset2 = Marshal
+                .OffsetOf<BlittableStruct>(nameof(BlittableStruct.value2))
+                .ToInt32();
 
-            object structure = new BlittableStruct
-            {
-                value1 = (IntPtr)10,
-                value2 = (IntPtr)20
-            };
+            object structure = new BlittableStruct { value1 = (IntPtr)10, value2 = (IntPtr)20 };
 
             Marshal.WriteIntPtr(structure, offset1, (IntPtr)11);
             Marshal.WriteIntPtr(structure, offset2, (IntPtr)21);
@@ -72,18 +74,38 @@ namespace System.Runtime.InteropServices.Tests
         }
 
         [Fact]
-        [SkipOnMono("Marshal.WriteIntPtr will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.WriteIntPtr will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void WriteIntPtr_StructWithReferenceTypes_ReturnsExpected()
         {
-            int pointerOffset = Marshal.OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.pointerValue)).ToInt32();
-            int stringOffset = Marshal.OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.stringValue)).ToInt32();
-            int arrayOffset = Marshal.OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.byValueArray)).ToInt32();
+            int pointerOffset = Marshal
+                .OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.pointerValue))
+                .ToInt32();
+            int stringOffset = Marshal
+                .OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.stringValue))
+                .ToInt32();
+            int arrayOffset = Marshal
+                .OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.byValueArray))
+                .ToInt32();
 
             object structure = new StructWithReferenceTypes
             {
                 pointerValue = (IntPtr)100,
                 stringValue = "ABC",
-                byValueArray = new IntPtr[10] { (IntPtr)1, (IntPtr)2, (IntPtr)3, (IntPtr)4, (IntPtr)5, (IntPtr)6, (IntPtr)7, (IntPtr)8, (IntPtr)9, (IntPtr)10 }
+                byValueArray = new IntPtr[10]
+                {
+                    (IntPtr)1,
+                    (IntPtr)2,
+                    (IntPtr)3,
+                    (IntPtr)4,
+                    (IntPtr)5,
+                    (IntPtr)6,
+                    (IntPtr)7,
+                    (IntPtr)8,
+                    (IntPtr)9,
+                    (IntPtr)10,
+                },
             };
 
             Marshal.WriteIntPtr(structure, pointerOffset, (IntPtr)200);
@@ -91,42 +113,79 @@ namespace System.Runtime.InteropServices.Tests
 
             Assert.Equal((IntPtr)200, ((StructWithReferenceTypes)structure).pointerValue);
             Assert.Equal("ABC", ((StructWithReferenceTypes)structure).stringValue);
-            Assert.Equal(new IntPtr[10] { (IntPtr)1, (IntPtr)2, (IntPtr)3, (IntPtr)4, (IntPtr)5, (IntPtr)6, (IntPtr)7, (IntPtr)8, (IntPtr)9, (IntPtr)100 }, ((StructWithReferenceTypes)structure).byValueArray);
+            Assert.Equal(
+                new IntPtr[10]
+                {
+                    (IntPtr)1,
+                    (IntPtr)2,
+                    (IntPtr)3,
+                    (IntPtr)4,
+                    (IntPtr)5,
+                    (IntPtr)6,
+                    (IntPtr)7,
+                    (IntPtr)8,
+                    (IntPtr)9,
+                    (IntPtr)100,
+                },
+                ((StructWithReferenceTypes)structure).byValueArray
+            );
             Assert.Equal((IntPtr)200, Marshal.ReadIntPtr(structure, pointerOffset));
             Assert.NotEqual(IntPtr.Zero, Marshal.ReadIntPtr(structure, stringOffset));
             Assert.Equal((IntPtr)100, Marshal.ReadIntPtr(structure, arrayOffset + IntPtr.Size * 9));
         }
 
         [Fact]
-        [SkipOnMono("Marshal.ReadIntPtr will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.ReadIntPtr will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void ReadIntPtr_BlittableObject_ReturnsExpected()
         {
-            int offset1 = Marshal.OffsetOf<BlittableStruct>(nameof(BlittableStruct.value1)).ToInt32();
-            int offset2 = Marshal.OffsetOf<BlittableStruct>(nameof(BlittableStruct.value2)).ToInt32();
+            int offset1 = Marshal
+                .OffsetOf<BlittableStruct>(nameof(BlittableStruct.value1))
+                .ToInt32();
+            int offset2 = Marshal
+                .OffsetOf<BlittableStruct>(nameof(BlittableStruct.value2))
+                .ToInt32();
 
-            object structure = new BlittableStruct
-            {
-                value1 = (IntPtr)10,
-                value2 = (IntPtr)20
-            };
+            object structure = new BlittableStruct { value1 = (IntPtr)10, value2 = (IntPtr)20 };
 
             Assert.Equal((IntPtr)10, Marshal.ReadIntPtr(structure, offset1));
             Assert.Equal((IntPtr)20, Marshal.ReadIntPtr(structure, offset2));
         }
 
         [Fact]
-        [SkipOnMono("Marshal.ReadIntPtr will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.ReadIntPtr will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void ReadIntPtr_StructWithReferenceTypes_ReturnsExpected()
         {
-            int pointerOffset = Marshal.OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.pointerValue)).ToInt32();
-            int stringOffset = Marshal.OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.stringValue)).ToInt32();
-            int arrayOffset = Marshal.OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.byValueArray)).ToInt32();
+            int pointerOffset = Marshal
+                .OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.pointerValue))
+                .ToInt32();
+            int stringOffset = Marshal
+                .OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.stringValue))
+                .ToInt32();
+            int arrayOffset = Marshal
+                .OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.byValueArray))
+                .ToInt32();
 
             object structure = new StructWithReferenceTypes
             {
                 pointerValue = (IntPtr)100,
                 stringValue = "ABC",
-                byValueArray = new IntPtr[10] { (IntPtr)1, (IntPtr)2, (IntPtr)3, (IntPtr)4, (IntPtr)5, (IntPtr)6, (IntPtr)7, (IntPtr)8, (IntPtr)9, (IntPtr)10 }
+                byValueArray = new IntPtr[10]
+                {
+                    (IntPtr)1,
+                    (IntPtr)2,
+                    (IntPtr)3,
+                    (IntPtr)4,
+                    (IntPtr)5,
+                    (IntPtr)6,
+                    (IntPtr)7,
+                    (IntPtr)8,
+                    (IntPtr)9,
+                    (IntPtr)10,
+                },
             };
 
             Assert.Equal((IntPtr)100, Marshal.ReadIntPtr(structure, pointerOffset));
@@ -135,59 +194,97 @@ namespace System.Runtime.InteropServices.Tests
         }
 
         [Fact]
-        [SkipOnMono("Marshal.ReadByte will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.ReadByte will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void ReadIntPtr_ZeroPointer_ThrowsException()
         {
-            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(() => Marshal.ReadIntPtr(IntPtr.Zero));
-            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(() => Marshal.ReadIntPtr(IntPtr.Zero, 2));
+            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(
+                () => Marshal.ReadIntPtr(IntPtr.Zero)
+            );
+            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(
+                () => Marshal.ReadIntPtr(IntPtr.Zero, 2)
+            );
         }
 
         [Fact]
-        [SkipOnMono("Marshal.ReadIntPtr will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.ReadIntPtr will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void ReadIntPtr_NullObject_ThrowsAccessViolationException()
         {
             Assert.Throws<AccessViolationException>(() => Marshal.ReadIntPtr(null, 2));
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
-        [SkipOnMono("Marshal.ReadIntPtr will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
+        [SkipOnMono(
+            "Marshal.ReadIntPtr will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void ReadIntPtr_NotReadable_ThrowsArgumentException()
         {
-            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Assembly"), AssemblyBuilderAccess.RunAndCollect);
+            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                new AssemblyName("Assembly"),
+                AssemblyBuilderAccess.RunAndCollect
+            );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
             TypeBuilder typeBuilder = moduleBuilder.DefineType("Type");
             Type collectibleType = typeBuilder.CreateType();
             object collectibleObject = Activator.CreateInstance(collectibleType);
 
-            AssertExtensions.Throws<ArgumentException>(null, () => Marshal.ReadIntPtr(collectibleObject, 0));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Marshal.ReadIntPtr(collectibleObject, 0)
+            );
         }
 
         [Fact]
-        [SkipOnMono("Marshal.ReadByte will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.ReadByte will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void WriteIntPtr_ZeroPointer_ThrowsException()
         {
-            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(() => Marshal.WriteIntPtr(IntPtr.Zero, (IntPtr)0));
-            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(() => Marshal.WriteIntPtr(IntPtr.Zero, 2, (IntPtr)0));
+            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(
+                () => Marshal.WriteIntPtr(IntPtr.Zero, (IntPtr)0)
+            );
+            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(
+                () => Marshal.WriteIntPtr(IntPtr.Zero, 2, (IntPtr)0)
+            );
         }
 
         [Fact]
-        [SkipOnMono("Marshal.WriteIntPtr will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.WriteIntPtr will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void WriteIntPtr_NullObject_ThrowsAccessViolationException()
         {
             Assert.Throws<AccessViolationException>(() => Marshal.WriteIntPtr(null, 2, (IntPtr)0));
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
-        [SkipOnMono("Marshal.WriteIntPtr will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
+        [SkipOnMono(
+            "Marshal.WriteIntPtr will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void WriteIntPtr_NotReadable_ThrowsArgumentException()
         {
-            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Assembly"), AssemblyBuilderAccess.RunAndCollect);
+            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                new AssemblyName("Assembly"),
+                AssemblyBuilderAccess.RunAndCollect
+            );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
             TypeBuilder typeBuilder = moduleBuilder.DefineType("Type");
             Type collectibleType = typeBuilder.CreateType();
             object collectibleObject = Activator.CreateInstance(collectibleType);
 
-            AssertExtensions.Throws<ArgumentException>(null, () => Marshal.WriteIntPtr(collectibleObject, 0, IntPtr.Zero));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Marshal.WriteIntPtr(collectibleObject, 0, IntPtr.Zero)
+            );
         }
 
         public struct BlittableStruct
@@ -201,6 +298,7 @@ namespace System.Runtime.InteropServices.Tests
         {
             public IntPtr pointerValue;
             public string stringValue;
+
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 10)]
             public IntPtr[] byValueArray;
         }

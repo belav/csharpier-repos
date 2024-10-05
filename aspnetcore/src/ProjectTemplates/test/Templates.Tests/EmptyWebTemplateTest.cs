@@ -32,31 +32,49 @@ public class EmptyWebTemplateTest : LoggedTest
     }
 
     [ConditionalFact]
-    [SkipOnHelix("Cert failure, https://github.com/dotnet/aspnetcore/issues/28090", Queues = "All.OSX;" + HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64)]
+    [SkipOnHelix(
+        "Cert failure, https://github.com/dotnet/aspnetcore/issues/28090",
+        Queues = "All.OSX;" + HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64
+    )]
     public async Task EmptyWebTemplateCSharp()
     {
         await EmtpyTemplateCore(languageOverride: null);
     }
 
     [ConditionalFact]
-    [SkipOnHelix("Cert failure, https://github.com/dotnet/aspnetcore/issues/28090", Queues = "All.OSX;" + HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64)]
+    [SkipOnHelix(
+        "Cert failure, https://github.com/dotnet/aspnetcore/issues/28090",
+        Queues = "All.OSX;" + HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64
+    )]
     public async Task EmptyWebTemplateNoHttpsCSharp()
     {
         await EmtpyTemplateCore(languageOverride: null, args: new[] { ArgConstants.NoHttps });
     }
 
     [ConditionalFact]
-    [SkipOnHelix("Cert failure, https://github.com/dotnet/aspnetcore/issues/28090", Queues = "All.OSX;" + HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64)]
+    [SkipOnHelix(
+        "Cert failure, https://github.com/dotnet/aspnetcore/issues/28090",
+        Queues = "All.OSX;" + HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64
+    )]
     public async Task EmptyWebTemplateProgramMainCSharp()
     {
-        await EmtpyTemplateCore(languageOverride: null, args: new[] { ArgConstants.UseProgramMain });
+        await EmtpyTemplateCore(
+            languageOverride: null,
+            args: new[] { ArgConstants.UseProgramMain }
+        );
     }
 
     [ConditionalFact]
-    [SkipOnHelix("Cert failure, https://github.com/dotnet/aspnetcore/issues/28090", Queues = "All.OSX;" + HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64)]
+    [SkipOnHelix(
+        "Cert failure, https://github.com/dotnet/aspnetcore/issues/28090",
+        Queues = "All.OSX;" + HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64
+    )]
     public async Task EmptyWebTemplateProgramMainNoHttpsCSharp()
     {
-        await EmtpyTemplateCore(languageOverride: null, args: new[] { ArgConstants.UseProgramMain, ArgConstants.NoHttps });
+        await EmtpyTemplateCore(
+            languageOverride: null,
+            args: new[] { ArgConstants.UseProgramMain, ArgConstants.NoHttps }
+        );
     }
 
     [Fact]
@@ -100,8 +118,13 @@ public class EmptyWebTemplateTest : LoggedTest
         using (var aspNetProcess = project.StartBuiltProjectAsync())
         {
             Assert.False(
-               aspNetProcess.Process.HasExited,
-               ErrorMessages.GetFailedProcessMessageOrEmpty("Run built project", project, aspNetProcess.Process));
+                aspNetProcess.Process.HasExited,
+                ErrorMessages.GetFailedProcessMessageOrEmpty(
+                    "Run built project",
+                    project,
+                    aspNetProcess.Process
+                )
+            );
 
             await aspNetProcess.AssertOk("/");
         }
@@ -110,7 +133,12 @@ public class EmptyWebTemplateTest : LoggedTest
         {
             Assert.False(
                 aspNetProcess.Process.HasExited,
-                ErrorMessages.GetFailedProcessMessageOrEmpty("Run published project", project, aspNetProcess.Process));
+                ErrorMessages.GetFailedProcessMessageOrEmpty(
+                    "Run published project",
+                    project,
+                    aspNetProcess.Process
+                )
+            );
 
             await aspNetProcess.AssertOk("/");
         }

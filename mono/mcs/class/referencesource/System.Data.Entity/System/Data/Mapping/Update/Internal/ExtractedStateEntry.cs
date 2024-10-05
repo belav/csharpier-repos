@@ -12,6 +12,7 @@ using System.Data.Common.CommandTrees;
 using System.Data.Metadata.Edm;
 using System.Diagnostics;
 using System.Linq;
+
 namespace System.Data.Mapping.Update.Internal
 {
     /// <summary>
@@ -34,26 +35,44 @@ namespace System.Data.Mapping.Update.Internal
             switch (stateEntry.State)
             {
                 case EntityState.Deleted:
-                    this.Original = translator.RecordConverter.ConvertOriginalValuesToPropagatorResult(
-                        stateEntry, ModifiedPropertiesBehavior.AllModified);
+                    this.Original =
+                        translator.RecordConverter.ConvertOriginalValuesToPropagatorResult(
+                            stateEntry,
+                            ModifiedPropertiesBehavior.AllModified
+                        );
                     this.Current = null;
                     break;
                 case EntityState.Unchanged:
-                    this.Original = translator.RecordConverter.ConvertOriginalValuesToPropagatorResult(
-                        stateEntry, ModifiedPropertiesBehavior.NoneModified);
-                    this.Current = translator.RecordConverter.ConvertCurrentValuesToPropagatorResult(
-                        stateEntry, ModifiedPropertiesBehavior.NoneModified);
+                    this.Original =
+                        translator.RecordConverter.ConvertOriginalValuesToPropagatorResult(
+                            stateEntry,
+                            ModifiedPropertiesBehavior.NoneModified
+                        );
+                    this.Current =
+                        translator.RecordConverter.ConvertCurrentValuesToPropagatorResult(
+                            stateEntry,
+                            ModifiedPropertiesBehavior.NoneModified
+                        );
                     break;
                 case EntityState.Modified:
-                    this.Original = translator.RecordConverter.ConvertOriginalValuesToPropagatorResult(
-                        stateEntry, ModifiedPropertiesBehavior.SomeModified);
-                    this.Current = translator.RecordConverter.ConvertCurrentValuesToPropagatorResult(
-                        stateEntry, ModifiedPropertiesBehavior.SomeModified);
+                    this.Original =
+                        translator.RecordConverter.ConvertOriginalValuesToPropagatorResult(
+                            stateEntry,
+                            ModifiedPropertiesBehavior.SomeModified
+                        );
+                    this.Current =
+                        translator.RecordConverter.ConvertCurrentValuesToPropagatorResult(
+                            stateEntry,
+                            ModifiedPropertiesBehavior.SomeModified
+                        );
                     break;
                 case EntityState.Added:
                     this.Original = null;
-                    this.Current = translator.RecordConverter.ConvertCurrentValuesToPropagatorResult(
-                        stateEntry, ModifiedPropertiesBehavior.AllModified);
+                    this.Current =
+                        translator.RecordConverter.ConvertCurrentValuesToPropagatorResult(
+                            stateEntry,
+                            ModifiedPropertiesBehavior.AllModified
+                        );
                     break;
                 default:
                     Debug.Fail("unexpected IEntityStateEntry.State for entity " + stateEntry.State);

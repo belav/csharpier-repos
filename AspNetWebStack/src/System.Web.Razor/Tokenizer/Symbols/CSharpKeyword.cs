@@ -81,6 +81,6 @@ namespace System.Web.Razor.Tokenizer.Symbols
         Interface,
         Break,
         Checked,
-        Namespace
+        Namespace,
     }
 }

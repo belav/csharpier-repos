@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Reflection;
-using Microsoft.Extensions.Internal;
 using System.Runtime.CompilerServices;
+using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
@@ -19,12 +19,14 @@ public class ActionMethodExecutorTest
         var controller = new TestController();
         var objectMethodExecutor = GetExecutor(nameof(TestController.VoidAction));
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
-        var filterContext = new ControllerEndpointFilterInvocationContext(new Controllers.ControllerActionDescriptor(),
+        var filterContext = new ControllerEndpointFilterInvocationContext(
+            new Controllers.ControllerActionDescriptor(),
             new ActionContext(),
             objectMethodExecutor,
             mapper,
             controller,
-            Array.Empty<object>());
+            Array.Empty<object>()
+        );
 
         // Act
         var valueTask = Execute(actionMethodExecutor, filterContext, withFilter);
@@ -45,12 +47,14 @@ public class ActionMethodExecutorTest
         var controller = new TestController();
         var objectMethodExecutor = GetExecutor(nameof(TestController.ReturnIActionResult));
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
-        var filterContext = new ControllerEndpointFilterInvocationContext(new Controllers.ControllerActionDescriptor(),
-                    new ActionContext(),
-                    objectMethodExecutor,
-                    mapper,
-                    controller,
-                    Array.Empty<object>());
+        var filterContext = new ControllerEndpointFilterInvocationContext(
+            new Controllers.ControllerActionDescriptor(),
+            new ActionContext(),
+            objectMethodExecutor,
+            mapper,
+            controller,
+            Array.Empty<object>()
+        );
 
         // Act
         var valueTask = Execute(actionMethodExecutor, filterContext, withFilter);
@@ -71,12 +75,14 @@ public class ActionMethodExecutorTest
         var controller = new TestController();
         var objectMethodExecutor = GetExecutor(nameof(TestController.ReturnsIActionResultSubType));
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
-        var filterContext = new ControllerEndpointFilterInvocationContext(new Controllers.ControllerActionDescriptor(),
-                    new ActionContext(),
-                    objectMethodExecutor,
-                    mapper,
-                    controller,
-                    Array.Empty<object>());
+        var filterContext = new ControllerEndpointFilterInvocationContext(
+            new Controllers.ControllerActionDescriptor(),
+            new ActionContext(),
+            objectMethodExecutor,
+            mapper,
+            controller,
+            Array.Empty<object>()
+        );
 
         // Act
         var valueTask = Execute(actionMethodExecutor, filterContext, withFilter);
@@ -96,12 +102,14 @@ public class ActionMethodExecutorTest
         var controller = new TestController();
         var objectMethodExecutor = GetExecutor(nameof(TestController.ReturnsActionResultOfT));
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
-        var filterContext = new ControllerEndpointFilterInvocationContext(new Controllers.ControllerActionDescriptor(),
-                    new ActionContext(),
-                    objectMethodExecutor,
-                    mapper,
-                    controller,
-                    Array.Empty<object>());
+        var filterContext = new ControllerEndpointFilterInvocationContext(
+            new Controllers.ControllerActionDescriptor(),
+            new ActionContext(),
+            objectMethodExecutor,
+            mapper,
+            controller,
+            Array.Empty<object>()
+        );
 
         // Act
         var valueTask = Execute(actionMethodExecutor, filterContext, withFilter);
@@ -125,12 +133,14 @@ public class ActionMethodExecutorTest
         var controller = new TestController();
         var objectMethodExecutor = GetExecutor(nameof(TestController.ReturnsModelAsModel));
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
-        var filterContext = new ControllerEndpointFilterInvocationContext(new Controllers.ControllerActionDescriptor(),
-                    new ActionContext(),
-                    objectMethodExecutor,
-                    mapper,
-                    controller,
-                    Array.Empty<object>());
+        var filterContext = new ControllerEndpointFilterInvocationContext(
+            new Controllers.ControllerActionDescriptor(),
+            new ActionContext(),
+            objectMethodExecutor,
+            mapper,
+            controller,
+            Array.Empty<object>()
+        );
 
         // Act
         var valueTask = Execute(actionMethodExecutor, filterContext, withFilter);
@@ -154,12 +164,14 @@ public class ActionMethodExecutorTest
         var controller = new TestController();
         var objectMethodExecutor = GetExecutor(nameof(TestController.ReturnModelAsObject));
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
-        var filterContext = new ControllerEndpointFilterInvocationContext(new Controllers.ControllerActionDescriptor(),
+        var filterContext = new ControllerEndpointFilterInvocationContext(
+            new Controllers.ControllerActionDescriptor(),
             new ActionContext(),
             objectMethodExecutor,
             mapper,
             controller,
-            Array.Empty<object>());
+            Array.Empty<object>()
+        );
 
         // Act
         var valueTask = Execute(actionMethodExecutor, filterContext, withFilter);
@@ -183,12 +195,14 @@ public class ActionMethodExecutorTest
         var controller = new TestController();
         var objectMethodExecutor = GetExecutor(nameof(TestController.ReturnsIActionResultSubType));
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
-        var filterContext = new ControllerEndpointFilterInvocationContext(new Controllers.ControllerActionDescriptor(),
-                    new ActionContext(),
-                    objectMethodExecutor,
-                    mapper,
-                    controller,
-                    Array.Empty<object>());
+        var filterContext = new ControllerEndpointFilterInvocationContext(
+            new Controllers.ControllerActionDescriptor(),
+            new ActionContext(),
+            objectMethodExecutor,
+            mapper,
+            controller,
+            Array.Empty<object>()
+        );
 
         // Act
         var valueTask = Execute(actionMethodExecutor, filterContext, withFilter);
@@ -208,12 +222,14 @@ public class ActionMethodExecutorTest
         var controller = new TestController();
         var objectMethodExecutor = GetExecutor(nameof(TestController.ReturnsTask));
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
-        var filterContext = new ControllerEndpointFilterInvocationContext(new Controllers.ControllerActionDescriptor(),
-                    new ActionContext(),
-                    objectMethodExecutor,
-                    mapper,
-                    controller,
-                    Array.Empty<object>());
+        var filterContext = new ControllerEndpointFilterInvocationContext(
+            new Controllers.ControllerActionDescriptor(),
+            new ActionContext(),
+            objectMethodExecutor,
+            mapper,
+            controller,
+            Array.Empty<object>()
+        );
 
         // Act
         var valueTask = Execute(actionMethodExecutor, filterContext, withFilter);
@@ -234,12 +250,14 @@ public class ActionMethodExecutorTest
         var controller = new TestController();
         var objectMethodExecutor = GetExecutor(nameof(TestController.ReturnsAwaitable));
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
-        var filterContext = new ControllerEndpointFilterInvocationContext(new Controllers.ControllerActionDescriptor(),
-                    new ActionContext(),
-                    objectMethodExecutor,
-                    mapper,
-                    controller,
-                    Array.Empty<object>());
+        var filterContext = new ControllerEndpointFilterInvocationContext(
+            new Controllers.ControllerActionDescriptor(),
+            new ActionContext(),
+            objectMethodExecutor,
+            mapper,
+            controller,
+            Array.Empty<object>()
+        );
 
         // Act
         var valueTask = Execute(actionMethodExecutor, filterContext, withFilter);
@@ -253,19 +271,23 @@ public class ActionMethodExecutorTest
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public void ActionMethodExecutorExecutesActionsAsynchronouslyReturningIActionResult(bool withFilter)
+    public void ActionMethodExecutorExecutesActionsAsynchronouslyReturningIActionResult(
+        bool withFilter
+    )
     {
         // Arrange
         var mapper = new ActionResultTypeMapper();
         var controller = new TestController();
         var objectMethodExecutor = GetExecutor(nameof(TestController.ReturnIActionResultAsync));
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
-        var filterContext = new ControllerEndpointFilterInvocationContext(new Controllers.ControllerActionDescriptor(),
-                    new ActionContext(),
-                    objectMethodExecutor,
-                    mapper,
-                    controller,
-                    Array.Empty<object>());
+        var filterContext = new ControllerEndpointFilterInvocationContext(
+            new Controllers.ControllerActionDescriptor(),
+            new ActionContext(),
+            objectMethodExecutor,
+            mapper,
+            controller,
+            Array.Empty<object>()
+        );
 
         // Act
         var valueTask = Execute(actionMethodExecutor, filterContext, withFilter);
@@ -278,19 +300,23 @@ public class ActionMethodExecutorTest
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public async Task ActionMethodExecutor_ExecutesActionsAsynchronouslyReturningActionResultSubType(bool withFilter)
+    public async Task ActionMethodExecutor_ExecutesActionsAsynchronouslyReturningActionResultSubType(
+        bool withFilter
+    )
     {
         // Arrange
         var mapper = new ActionResultTypeMapper();
         var controller = new TestController();
         var objectMethodExecutor = GetExecutor(nameof(TestController.ReturnActionResultAsync));
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
-        var filterContext = new ControllerEndpointFilterInvocationContext(new Controllers.ControllerActionDescriptor(),
-                    new ActionContext(),
-                    objectMethodExecutor,
-                    mapper,
-                    controller,
-                    Array.Empty<object>());
+        var filterContext = new ControllerEndpointFilterInvocationContext(
+            new Controllers.ControllerActionDescriptor(),
+            new ActionContext(),
+            objectMethodExecutor,
+            mapper,
+            controller,
+            Array.Empty<object>()
+        );
 
         // Act
         var valueTask = Execute(actionMethodExecutor, filterContext, withFilter);
@@ -311,12 +337,14 @@ public class ActionMethodExecutorTest
         var controller = new TestController();
         var objectMethodExecutor = GetExecutor(nameof(TestController.ReturnsModelAsModelAsync));
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
-        var filterContext = new ControllerEndpointFilterInvocationContext(new Controllers.ControllerActionDescriptor(),
+        var filterContext = new ControllerEndpointFilterInvocationContext(
+            new Controllers.ControllerActionDescriptor(),
             new ActionContext(),
             objectMethodExecutor,
             mapper,
             controller,
-            Array.Empty<object>());
+            Array.Empty<object>()
+        );
 
         // Act
         var valueTask = Execute(actionMethodExecutor, filterContext, withFilter);
@@ -333,19 +361,23 @@ public class ActionMethodExecutorTest
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public void ActionMethodExecutor_ExecutesActionsAsynchronouslyReturningModelAsObject(bool withFilter)
+    public void ActionMethodExecutor_ExecutesActionsAsynchronouslyReturningModelAsObject(
+        bool withFilter
+    )
     {
         // Arrange
         var mapper = new ActionResultTypeMapper();
         var controller = new TestController();
         var objectMethodExecutor = GetExecutor(nameof(TestController.ReturnsModelAsObjectAsync));
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
-        var filterContext = new ControllerEndpointFilterInvocationContext(new Controllers.ControllerActionDescriptor(),
+        var filterContext = new ControllerEndpointFilterInvocationContext(
+            new Controllers.ControllerActionDescriptor(),
             new ActionContext(),
             objectMethodExecutor,
             mapper,
             controller,
-            Array.Empty<object>());
+            Array.Empty<object>()
+        );
 
         // Act
         var valueTask = Execute(actionMethodExecutor, filterContext, withFilter);
@@ -362,19 +394,25 @@ public class ActionMethodExecutorTest
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public void ActionMethodExecutor_ExecutesActionsAsynchronouslyReturningIActionResultAsObject(bool withFilter)
+    public void ActionMethodExecutor_ExecutesActionsAsynchronouslyReturningIActionResultAsObject(
+        bool withFilter
+    )
     {
         // Arrange
         var mapper = new ActionResultTypeMapper();
         var controller = new TestController();
-        var objectMethodExecutor = GetExecutor(nameof(TestController.ReturnIActionResultAsObjectAsync));
+        var objectMethodExecutor = GetExecutor(
+            nameof(TestController.ReturnIActionResultAsObjectAsync)
+        );
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
-        var filterContext = new ControllerEndpointFilterInvocationContext(new Controllers.ControllerActionDescriptor(),
+        var filterContext = new ControllerEndpointFilterInvocationContext(
+            new Controllers.ControllerActionDescriptor(),
             new ActionContext(),
             objectMethodExecutor,
             mapper,
             controller,
-            Array.Empty<object>());
+            Array.Empty<object>()
+        );
 
         // Act
         var valueTask = Execute(actionMethodExecutor, filterContext, withFilter);
@@ -387,19 +425,23 @@ public class ActionMethodExecutorTest
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public void ActionMethodExecutor_ExecutesActionsAsynchronouslyReturningActionResultOfT(bool withFilter)
+    public void ActionMethodExecutor_ExecutesActionsAsynchronouslyReturningActionResultOfT(
+        bool withFilter
+    )
     {
         // Arrange
         var mapper = new ActionResultTypeMapper();
         var controller = new TestController();
         var objectMethodExecutor = GetExecutor(nameof(TestController.ReturnActionResultOFTAsync));
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
-        var filterContext = new ControllerEndpointFilterInvocationContext(new Controllers.ControllerActionDescriptor(),
+        var filterContext = new ControllerEndpointFilterInvocationContext(
+            new Controllers.ControllerActionDescriptor(),
             new ActionContext(),
             objectMethodExecutor,
             mapper,
             controller,
-            Array.Empty<object>());
+            Array.Empty<object>()
+        );
 
         // Act
         var valueTask = Execute(actionMethodExecutor, filterContext, withFilter);
@@ -416,35 +458,54 @@ public class ActionMethodExecutorTest
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public async Task ActionMethodExecutor_ThrowsIfIConvertFromIActionResult_ReturnsNull(bool withFilter)
+    public async Task ActionMethodExecutor_ThrowsIfIConvertFromIActionResult_ReturnsNull(
+        bool withFilter
+    )
     {
         // Arrange
         var mapper = new ActionResultTypeMapper();
         var controller = new TestController();
-        var objectMethodExecutor = GetExecutor(nameof(TestController.ReturnsCustomConvertibleFromIActionResult));
+        var objectMethodExecutor = GetExecutor(
+            nameof(TestController.ReturnsCustomConvertibleFromIActionResult)
+        );
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
-        var filterContext = new ControllerEndpointFilterInvocationContext(new Controllers.ControllerActionDescriptor(),
+        var filterContext = new ControllerEndpointFilterInvocationContext(
+            new Controllers.ControllerActionDescriptor(),
             new ActionContext(),
             objectMethodExecutor,
             mapper,
             controller,
-            Array.Empty<object>());
+            Array.Empty<object>()
+        );
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => Execute(actionMethodExecutor, filterContext, withFilter).AsTask());
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => Execute(actionMethodExecutor, filterContext, withFilter).AsTask()
+        );
 
-        Assert.Equal($"Cannot return null from an action method with a return type of '{typeof(CustomConvertibleFromAction)}'.", ex.Message);
+        Assert.Equal(
+            $"Cannot return null from an action method with a return type of '{typeof(CustomConvertibleFromAction)}'.",
+            ex.Message
+        );
     }
 
-    private async ValueTask<IActionResult> Execute(ActionMethodExecutor actionMethodExecutor,
-                                                   ControllerEndpointFilterInvocationContext context,
-                                                   bool withFilter)
+    private async ValueTask<IActionResult> Execute(
+        ActionMethodExecutor actionMethodExecutor,
+        ControllerEndpointFilterInvocationContext context,
+        bool withFilter
+    )
     {
         if (withFilter)
         {
             return (IActionResult)await actionMethodExecutor.Execute(context);
         }
-        return await actionMethodExecutor.Execute(context.ActionContext, context.Mapper, context.Executor, context.Controller, (object[])context.Arguments);
+        return await actionMethodExecutor.Execute(
+            context.ActionContext,
+            context.Mapper,
+            context.Executor,
+            context.Controller,
+            (object[])context.Arguments
+        );
     }
 
     private static ObjectMethodExecutor GetExecutor(string methodName)
@@ -465,9 +526,11 @@ public class ActionMethodExecutorTest
 
         public ContentResult ReturnsIActionResultSubType() => new ContentResult();
 
-        public ActionResult<TestModel> ReturnsActionResultOfT() => new ActionResult<TestModel>(new TestModel());
+        public ActionResult<TestModel> ReturnsActionResultOfT() =>
+            new ActionResult<TestModel>(new TestModel());
 
-        public CustomConvertibleFromAction ReturnsCustomConvertibleFromIActionResult() => new CustomConvertibleFromAction();
+        public CustomConvertibleFromAction ReturnsCustomConvertibleFromIActionResult() =>
+            new CustomConvertibleFromAction();
 
         public TestModel ReturnsModelAsModel() => new TestModel();
 
@@ -487,24 +550,27 @@ public class ActionMethodExecutorTest
             return Task.Yield();
         }
 
-        public Task<IActionResult> ReturnIActionResultAsync() => Task.FromResult((IActionResult)new StatusCodeResult(201));
+        public Task<IActionResult> ReturnIActionResultAsync() =>
+            Task.FromResult((IActionResult)new StatusCodeResult(201));
 
-        public Task<ViewResult> ReturnActionResultAsync() => Task.FromResult(new ViewResult { StatusCode = 200 });
+        public Task<ViewResult> ReturnActionResultAsync() =>
+            Task.FromResult(new ViewResult { StatusCode = 200 });
 
-        public Task<StatusCodeResult> ReturnsIActionResultSubTypeAsync() => Task.FromResult(new StatusCodeResult(200));
+        public Task<StatusCodeResult> ReturnsIActionResultSubTypeAsync() =>
+            Task.FromResult(new StatusCodeResult(200));
 
         public Task<TestModel> ReturnsModelAsModelAsync() => Task.FromResult(new TestModel());
 
         public Task<object> ReturnsModelAsObjectAsync() => Task.FromResult((object)new TestModel());
 
-        public Task<object> ReturnIActionResultAsObjectAsync() => Task.FromResult((object)new OkResult());
+        public Task<object> ReturnIActionResultAsObjectAsync() =>
+            Task.FromResult((object)new OkResult());
 
-        public Task<ActionResult<TestModel>> ReturnActionResultOFTAsync() => Task.FromResult(new ActionResult<TestModel>(new TestModel()));
+        public Task<ActionResult<TestModel>> ReturnActionResultOFTAsync() =>
+            Task.FromResult(new ActionResult<TestModel>(new TestModel()));
     }
 
-    private class TestModel
-    {
-    }
+    private class TestModel { }
 
     private class CustomConvertibleFromAction : IConvertToActionResult
     {

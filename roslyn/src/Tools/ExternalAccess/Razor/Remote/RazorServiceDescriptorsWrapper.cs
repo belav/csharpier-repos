@@ -26,8 +26,14 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
             Func<string, string> featureDisplayNameProvider,
             ImmutableArray<IMessagePackFormatter> additionalFormatters,
             ImmutableArray<IFormatterResolver> additionalResolvers,
-            IEnumerable<(Type serviceInterface, Type? callbackInterface)> interfaces)
-            => UnderlyingObject = new ServiceDescriptors(componentName, featureDisplayNameProvider, new RemoteSerializationOptions(additionalFormatters, additionalResolvers), interfaces);
+            IEnumerable<(Type serviceInterface, Type? callbackInterface)> interfaces
+        ) =>
+            UnderlyingObject = new ServiceDescriptors(
+                componentName,
+                featureDisplayNameProvider,
+                new RemoteSerializationOptions(additionalFormatters, additionalResolvers),
+                interfaces
+            );
 
         /// <summary>
         /// Creates a service descriptor set for services using JSON serialization.
@@ -36,19 +42,25 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
             string componentName,
             Func<string, string> featureDisplayNameProvider,
             ImmutableArray<JsonConverter> jsonConverters,
-            IEnumerable<(Type serviceInterface, Type? callbackInterface)> interfaces)
-            => UnderlyingObject = new ServiceDescriptors(componentName, featureDisplayNameProvider, new RemoteSerializationOptions(jsonConverters), interfaces);
+            IEnumerable<(Type serviceInterface, Type? callbackInterface)> interfaces
+        ) =>
+            UnderlyingObject = new ServiceDescriptors(
+                componentName,
+                featureDisplayNameProvider,
+                new RemoteSerializationOptions(jsonConverters),
+                interfaces
+            );
 
         /// <summary>
         /// To be called from a service factory in OOP.
         /// </summary>
-        public ServiceJsonRpcDescriptor GetDescriptorForServiceFactory(Type serviceInterface)
-            => UnderlyingObject.GetServiceDescriptorForServiceFactory(serviceInterface);
+        public ServiceJsonRpcDescriptor GetDescriptorForServiceFactory(Type serviceInterface) =>
+            UnderlyingObject.GetServiceDescriptorForServiceFactory(serviceInterface);
 
-        public MessagePackSerializerOptions MessagePackOptions
-            => UnderlyingObject.Options.MessagePackOptions;
+        public MessagePackSerializerOptions MessagePackOptions =>
+            UnderlyingObject.Options.MessagePackOptions;
 
-        public ImmutableArray<JsonConverter> JsonConverters
-            => UnderlyingObject.Options.JsonConverters;
+        public ImmutableArray<JsonConverter> JsonConverters =>
+            UnderlyingObject.Options.JsonConverters;
     }
 }

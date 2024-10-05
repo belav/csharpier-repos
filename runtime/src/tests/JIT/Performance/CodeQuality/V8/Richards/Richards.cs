@@ -43,8 +43,10 @@ namespace V8.Richards
             scheduler.addDeviceTask(ID_DEVICE_B, 5000, null);
             scheduler.schedule();
 
-            return ((scheduler.queueCount == EXPECTED_QUEUE_COUNT)
-                && (scheduler.holdCount == EXPECTED_HOLD_COUNT));
+            return (
+                (scheduler.queueCount == EXPECTED_QUEUE_COUNT)
+                && (scheduler.holdCount == EXPECTED_HOLD_COUNT)
+            );
         }
 
         public const int COUNT = 1000;
@@ -124,8 +126,12 @@ namespace V8.Richards
             }
             DateTime end = DateTime.Now;
             TimeSpan dur = end - start;
-            Console.WriteLine("Doing {0} iters of Richards takes {1} ms; {2} us/iter.",
-                              n, dur.TotalMilliseconds, (1000.0 * dur.TotalMilliseconds) / n);
+            Console.WriteLine(
+                "Doing {0} iters of Richards takes {1} ms; {2} us/iter.",
+                n,
+                dur.TotalMilliseconds,
+                (1000.0 * dur.TotalMilliseconds) / n
+            );
             return result;
         }
     }
@@ -158,8 +164,7 @@ namespace V8.Richards
          */
         public void addIdleTask(int id, int priority, Packet queue, int count)
         {
-            this.addRunningTask(id, priority, queue,
-                                new IdleTask(this, 1, count));
+            this.addRunningTask(id, priority, queue, new IdleTask(this, 1, count));
         }
 
         /**
@@ -170,8 +175,7 @@ namespace V8.Richards
          */
         public void addWorkerTask(int id, int priority, Packet queue)
         {
-            this.addTask(id, priority, queue,
-                         new WorkerTask(this, Support.ID_HANDLER_A, 0));
+            this.addTask(id, priority, queue, new WorkerTask(this, Support.ID_HANDLER_A, 0));
         }
 
         /**
@@ -235,7 +239,8 @@ namespace V8.Richards
             while (this.currentTcb != null)
             {
 #if TRACEIT
-                Console.WriteLine("kkk = {0}", kkk); kkk++;
+                Console.WriteLine("kkk = {0}", kkk);
+                kkk++;
 #endif
                 if (this.currentTcb.isHeldOrSuspended())
                 {
@@ -262,7 +267,8 @@ namespace V8.Richards
         public TaskControlBlock release(int id)
         {
             TaskControlBlock tcb = this.blocks[id];
-            if (tcb == null) return tcb;
+            if (tcb == null)
+                return tcb;
             tcb.markAsNotHeld();
             if (tcb.priority >= this.currentTcb.priority)
             {
@@ -305,7 +311,8 @@ namespace V8.Richards
         public TaskControlBlock queue(Packet packet)
         {
             TaskControlBlock t = this.blocks[packet.id];
-            if (t == null) return t;
+            if (t == null)
+                return t;
             this.queueCount++;
             packet.link = null;
             packet.id = this.currentId;
@@ -332,8 +339,13 @@ namespace V8.Richards
         public Task task;
         public int state;
 
-        public TaskControlBlock(TaskControlBlock link, int id, int priority,
-                                Packet queue, Task task)
+        public TaskControlBlock(
+            TaskControlBlock link,
+            int id,
+            int priority,
+            Packet queue,
+            Task task
+        )
         {
             this.link = link;
             this.id = id;
@@ -367,7 +379,8 @@ namespace V8.Richards
 
         public bool isHeldOrSuspended()
         {
-            return ((this.state & Support.STATE_HELD) != 0) || (this.state == Support.STATE_SUSPENDED);
+            return ((this.state & Support.STATE_HELD) != 0)
+                || (this.state == Support.STATE_SUSPENDED);
         }
 
         public void markAsSuspended()
@@ -387,7 +400,7 @@ namespace V8.Richards
         {
             Packet packet;
 #if TRACEIT
-             Console.WriteLine("  TCB::run, state = {0}", this.state);
+            Console.WriteLine("  TCB::run, state = {0}", this.state);
 #endif
             if (this.state == Support.STATE_SUSPENDED_RUNNABLE)
             {
@@ -402,13 +415,13 @@ namespace V8.Richards
                     this.state = Support.STATE_RUNNABLE;
                 }
 #if TRACEIT
-                 Console.WriteLine("   State is now {0}", this.state);
+                Console.WriteLine("   State is now {0}", this.state);
 #endif
             }
             else
             {
 #if TRACEIT
-                 Console.WriteLine("  TCB::run, setting packet = Null.");
+                Console.WriteLine("  TCB::run, setting packet = Null.");
 #endif
                 packet = null;
             }
@@ -426,7 +439,8 @@ namespace V8.Richards
             {
                 this.queue = packet;
                 this.markAsRunnable();
-                if (this.priority >= task.priority) return this;
+                if (this.priority >= task.priority)
+                    return this;
             }
             else
             {
@@ -482,10 +496,11 @@ namespace V8.Richards
 #if !INTF_FOR_TASK
             override
 #endif
-            TaskControlBlock run(Packet packet)
+        TaskControlBlock run(Packet packet)
         {
             this._count--;
-            if (this._count == 0) return this.scheduler.holdCurrent();
+            if (this._count == 0)
+                return this.scheduler.holdCurrent();
             if ((this._v1 & 1) == 0)
             {
                 this._v1 = this._v1 >> 1;
@@ -502,7 +517,7 @@ namespace V8.Richards
 #if !INTF_FOR_TASK
             override
 #endif
-            String toString()
+        String toString()
         {
             return "IdleTask";
         }
@@ -529,11 +544,12 @@ namespace V8.Richards
 #if !INTF_FOR_TASK
              override
 #endif
-             TaskControlBlock run(Packet packet)
+        TaskControlBlock run(Packet packet)
         {
             if (packet == null)
             {
-                if (_v1 == null) return this.scheduler.suspendCurrent();
+                if (_v1 == null)
+                    return this.scheduler.suspendCurrent();
                 Packet v = _v1;
                 _v1 = null;
                 return this.scheduler.queue(v);
@@ -549,7 +565,7 @@ namespace V8.Richards
 #if !INTF_FOR_TASK
              override
 #endif
-             String toString()
+        String toString()
         {
             return "DeviceTask";
         }
@@ -579,7 +595,7 @@ namespace V8.Richards
 #if !INTF_FOR_TASK
              override
 #endif
-             TaskControlBlock run(Packet packet)
+        TaskControlBlock run(Packet packet)
         {
             if (packet == null)
             {
@@ -600,7 +616,8 @@ namespace V8.Richards
                 for (int i = 0; i < Support.DATA_SIZE; i++)
                 {
                     this._v2++;
-                    if (this._v2 > 26) this._v2 = 1;
+                    if (this._v2 > 26)
+                        this._v2 = 1;
                     packet.a2[i] = this._v2;
                 }
                 return this.scheduler.queue(packet);
@@ -611,7 +628,7 @@ namespace V8.Richards
 #if !INTF_FOR_TASK
              override
 #endif
-             String toString()
+        String toString()
         {
             return "WorkerTask";
         }
@@ -639,7 +656,7 @@ namespace V8.Richards
 #if !INTF_FOR_TASK
              override
 #endif
-             TaskControlBlock run(Packet packet)
+        TaskControlBlock run(Packet packet)
         {
             if (packet != null)
             {
@@ -681,7 +698,7 @@ namespace V8.Richards
 #if !INTF_FOR_TASK
              override
 #endif
-             String toString()
+        String toString()
         {
             return "HandlerTask";
         }
@@ -719,7 +736,8 @@ namespace V8.Richards
         public Packet addTo(Packet queue)
         {
             this.link = null;
-            if (queue == null) return this;
+            if (queue == null)
+                return this;
             Packet peek;
             Packet next = queue;
             while ((peek = next.link) != null)

@@ -9,4 +9,3 @@ namespace System.IdentityModel.Policy
         string Id { get; }
     }
 }
-

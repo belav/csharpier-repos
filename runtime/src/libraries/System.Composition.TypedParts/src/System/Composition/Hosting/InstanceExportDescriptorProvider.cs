@@ -10,17 +10,30 @@ namespace System.Composition.Hosting
     {
         private readonly object _exportedInstance;
 
-        public InstanceExportDescriptorProvider(object exportedInstance, Type contractType, string contractName, IDictionary<string, object> metadata)
+        public InstanceExportDescriptorProvider(
+            object exportedInstance,
+            Type contractType,
+            string contractName,
+            IDictionary<string, object> metadata
+        )
             : base(contractType, contractName, metadata)
         {
             _exportedInstance = exportedInstance;
         }
 
-        public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(CompositionContract contract, DependencyAccessor descriptorAccessor)
+        public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(
+            CompositionContract contract,
+            DependencyAccessor descriptorAccessor
+        )
         {
             if (IsSupportedContract(contract))
-                yield return new ExportDescriptorPromise(contract, _exportedInstance.ToString(), true, NoDependencies, _ =>
-                    ExportDescriptor.Create((c, o) => _exportedInstance, Metadata));
+                yield return new ExportDescriptorPromise(
+                    contract,
+                    _exportedInstance.ToString(),
+                    true,
+                    NoDependencies,
+                    _ => ExportDescriptor.Create((c, o) => _exportedInstance, Metadata)
+                );
         }
     }
 }

@@ -19,13 +19,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public LoadDirectiveCompletionProvider()
-        {
-        }
+        public LoadDirectiveCompletionProvider() { }
 
         protected override string DirectiveName => "load";
 
-        protected override bool TryGetStringLiteralToken(SyntaxTree tree, int position, out SyntaxToken stringLiteral, CancellationToken cancellationToken)
-            => DirectiveCompletionProviderUtilities.TryGetStringLiteralToken(tree, position, SyntaxKind.LoadDirectiveTrivia, out stringLiteral, cancellationToken);
+        protected override bool TryGetStringLiteralToken(
+            SyntaxTree tree,
+            int position,
+            out SyntaxToken stringLiteral,
+            CancellationToken cancellationToken
+        ) =>
+            DirectiveCompletionProviderUtilities.TryGetStringLiteralToken(
+                tree,
+                position,
+                SyntaxKind.LoadDirectiveTrivia,
+                out stringLiteral,
+                cancellationToken
+            );
     }
 }

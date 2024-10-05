@@ -11,7 +11,12 @@ internal static partial class Interop
         Debug.Assert(buffer != null);
         Debug.Assert(length >= 0);
 
-        BCrypt.NTSTATUS status = BCrypt.BCryptGenRandom(IntPtr.Zero, buffer, length, BCrypt.BCRYPT_USE_SYSTEM_PREFERRED_RNG);
+        BCrypt.NTSTATUS status = BCrypt.BCryptGenRandom(
+            IntPtr.Zero,
+            buffer,
+            length,
+            BCrypt.BCRYPT_USE_SYSTEM_PREFERRED_RNG
+        );
         if (status != BCrypt.NTSTATUS.STATUS_SUCCESS)
         {
             if (status == BCrypt.NTSTATUS.STATUS_NO_MEMORY)

@@ -26,7 +26,10 @@ public class BrowserFileTest
 
         // Act & Assert
         var ex = Assert.Throws<IOException>(() => file.OpenReadStream(80));
-        Assert.Equal("Supplied file with size 100 bytes exceeds the maximum of 80 bytes.", ex.Message);
+        Assert.Equal(
+            "Supplied file with size 100 bytes exceeds the maximum of 80 bytes.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -35,7 +38,14 @@ public class BrowserFileTest
         // Arrange: JS runtime that always returns a specific mock IJSStreamReference
         var jsRuntime = new Mock<IJSRuntime>(MockBehavior.Strict);
         var jsStreamReference = new Mock<IJSStreamReference>();
-        jsRuntime.Setup(x => x.InvokeAsync<IJSStreamReference>(It.IsAny<string>(), It.IsAny<CancellationToken>(), It.IsAny<object[]>()))
+        jsRuntime
+            .Setup(x =>
+                x.InvokeAsync<IJSStreamReference>(
+                    It.IsAny<string>(),
+                    It.IsAny<CancellationToken>(),
+                    It.IsAny<object[]>()
+                )
+            )
             .Returns(ValueTask.FromResult(jsStreamReference.Object));
 
         // Arrange: InputFile
@@ -59,7 +69,14 @@ public class BrowserFileTest
         // Arrange: JS runtime that always returns a specific mock IJSStreamReference whose disposal throws
         var jsRuntime = new Mock<IJSRuntime>(MockBehavior.Strict);
         var jsStreamReference = new Mock<IJSStreamReference>();
-        jsRuntime.Setup(x => x.InvokeAsync<IJSStreamReference>(It.IsAny<string>(), It.IsAny<CancellationToken>(), It.IsAny<object[]>()))
+        jsRuntime
+            .Setup(x =>
+                x.InvokeAsync<IJSStreamReference>(
+                    It.IsAny<string>(),
+                    It.IsAny<CancellationToken>(),
+                    It.IsAny<object[]>()
+                )
+            )
             .Returns(ValueTask.FromResult(jsStreamReference.Object));
         jsStreamReference.Setup(x => x.DisposeAsync()).Throws(new InvalidTimeZoneException());
 

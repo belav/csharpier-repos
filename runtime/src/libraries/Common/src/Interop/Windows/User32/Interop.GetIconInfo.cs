@@ -17,7 +17,9 @@ internal static partial class Interop
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hIcon, ref ICONINFO info);
+            HandleRef hIcon,
+            ref ICONINFO info
+        );
 
         [StructLayout(LayoutKind.Sequential)]
         internal struct ICONINFO

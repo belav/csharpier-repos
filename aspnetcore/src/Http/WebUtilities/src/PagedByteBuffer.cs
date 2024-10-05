@@ -40,8 +40,7 @@ internal sealed class PagedByteBuffer : IDisposable
         }
     }
 
-    public void Add(byte[] buffer, int offset, int count)
-        => Add(buffer.AsMemory(offset, count));
+    public void Add(byte[] buffer, int offset, int count) => Add(buffer.AsMemory(offset, count));
 
     public void Add(ReadOnlyMemory<byte> memory)
     {
@@ -68,9 +67,7 @@ internal sealed class PagedByteBuffer : IDisposable
         for (var i = 0; i < Pages.Count; i++)
         {
             var page = Pages[i];
-            var length = (i == Pages.Count - 1) ?
-                _currentPageIndex :
-                page.Length;
+            var length = (i == Pages.Count - 1) ? _currentPageIndex : page.Length;
 
             stream.Write(page, 0, length);
         }
@@ -85,9 +82,7 @@ internal sealed class PagedByteBuffer : IDisposable
         for (var i = 0; i < Pages.Count; i++)
         {
             var page = Pages[i];
-            var length = (i == Pages.Count - 1) ?
-                _currentPageIndex :
-                page.Length;
+            var length = (i == Pages.Count - 1) ? _currentPageIndex : page.Length;
 
             await writer.WriteAsync(page.AsMemory(0, length), cancellationToken);
         }
@@ -102,9 +97,7 @@ internal sealed class PagedByteBuffer : IDisposable
         for (var i = 0; i < Pages.Count; i++)
         {
             var page = Pages[i];
-            var length = (i == Pages.Count - 1) ?
-                _currentPageIndex :
-                page.Length;
+            var length = (i == Pages.Count - 1) ? _currentPageIndex : page.Length;
 
             await stream.WriteAsync(page.AsMemory(0, length), cancellationToken);
         }

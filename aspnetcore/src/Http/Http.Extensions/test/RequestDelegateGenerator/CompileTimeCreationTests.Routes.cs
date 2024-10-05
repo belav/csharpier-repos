@@ -17,10 +17,13 @@ app.MapGet(route, () =>
         var (result, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(result, endpointModel =>
-        {
-            Assert.Equal("MapGet", endpointModel.HttpMethod);
-        });
+        VerifyStaticEndpointModel(
+            result,
+            endpointModel =>
+            {
+                Assert.Equal("MapGet", endpointModel.HttpMethod);
+            }
+        );
 
         var httpContext = CreateHttpContext();
         await endpoint.RequestDelegate(httpContext);
@@ -40,10 +43,13 @@ app.MapGet(route, () =>
         var (result, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(result, endpointModel =>
-        {
-            Assert.Equal("MapGet", endpointModel.HttpMethod);
-        });
+        VerifyStaticEndpointModel(
+            result,
+            endpointModel =>
+            {
+                Assert.Equal("MapGet", endpointModel.HttpMethod);
+            }
+        );
 
         var httpContext = CreateHttpContext();
         await endpoint.RequestDelegate(httpContext);
@@ -66,10 +72,13 @@ for (int i = 0; i < 5; i++)
         var (result, compilation) = await RunGeneratorAsync(source);
         var endpoints = GetEndpointsFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(result, endpointModel =>
-        {
-            Assert.Equal("MapGet", endpointModel.HttpMethod);
-        });
+        VerifyStaticEndpointModel(
+            result,
+            endpointModel =>
+            {
+                Assert.Equal("MapGet", endpointModel.HttpMethod);
+            }
+        );
 
         for (int i = 0; i < 5; i++)
         {
@@ -78,6 +87,5 @@ for (int i = 0; i < 5; i++)
             await endpoint.RequestDelegate(httpContext);
             await VerifyResponseBodyAsync(httpContext, $"Hello world!");
         }
-
     }
 }

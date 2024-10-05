@@ -24,16 +24,23 @@ namespace System.IO.Tests
                     Assert.Equal(0, offset);
                     Assert.Equal(30, count);
 
-                    for (int i = 0; i < 10; i++) array[offset + i] = (byte)i;
+                    for (int i = 0; i < 10; i++)
+                        array[offset + i] = (byte)i;
                     return 10;
-                });
+                }
+            );
 
             byte[] buffer = new byte[30];
 
-            Assert.Equal(10, async ? await s.ReadAtLeastAsync(buffer, 10) : s.ReadAtLeast(buffer, 10));
+            Assert.Equal(
+                10,
+                async ? await s.ReadAtLeastAsync(buffer, 10) : s.ReadAtLeast(buffer, 10)
+            );
             Assert.True(readInvoked);
-            for (int i = 0; i < 10; i++) Assert.Equal(i, buffer[i]);
-            for (int i = 10; i < 30; i++) Assert.Equal(0, buffer[i]);
+            for (int i = 0; i < 10; i++)
+                Assert.Equal(i, buffer[i]);
+            for (int i = 10; i < 30; i++)
+                Assert.Equal(0, buffer[i]);
         }
 
         [Theory]
@@ -48,17 +55,25 @@ namespace System.IO.Tests
                 {
                     readInvokedCount++;
 
-                    for (int i = 0; i < 10; i++) array[offset + i] = (byte)i;
+                    for (int i = 0; i < 10; i++)
+                        array[offset + i] = (byte)i;
                     return 10;
-                });
+                }
+            );
 
             byte[] buffer = new byte[30];
 
-            Assert.Equal(20, async ? await s.ReadAtLeastAsync(buffer, 20) : s.ReadAtLeast(buffer, 20));
+            Assert.Equal(
+                20,
+                async ? await s.ReadAtLeastAsync(buffer, 20) : s.ReadAtLeast(buffer, 20)
+            );
             Assert.Equal(2, readInvokedCount);
-            for (int i = 0; i < 10; i++) Assert.Equal(i, buffer[i]);
-            for (int i = 10; i < 20; i++) Assert.Equal(i - 10, buffer[i]);
-            for (int i = 20; i < 30; i++) Assert.Equal(0, buffer[i]);
+            for (int i = 0; i < 10; i++)
+                Assert.Equal(i, buffer[i]);
+            for (int i = 10; i < 20; i++)
+                Assert.Equal(i - 10, buffer[i]);
+            for (int i = 20; i < 30; i++)
+                Assert.Equal(0, buffer[i]);
         }
 
         [Theory]
@@ -74,29 +89,44 @@ namespace System.IO.Tests
                     readInvokedCount++;
 
                     int byteCount = Math.Min(count, 10);
-                    for (int i = 0; i < byteCount; i++) array[offset + i] = (byte)i;
+                    for (int i = 0; i < byteCount; i++)
+                        array[offset + i] = (byte)i;
                     return byteCount;
-                });
+                }
+            );
 
             // first try with a buffer that doesn't fill 3 full pages
             byte[] buffer = new byte[28];
 
-            Assert.Equal(28, async ? await s.ReadAtLeastAsync(buffer, 22) : s.ReadAtLeast(buffer, 22));
+            Assert.Equal(
+                28,
+                async ? await s.ReadAtLeastAsync(buffer, 22) : s.ReadAtLeast(buffer, 22)
+            );
             Assert.Equal(3, readInvokedCount);
-            for (int i = 0; i < 10; i++) Assert.Equal(i, buffer[i]);
-            for (int i = 10; i < 20; i++) Assert.Equal(i - 10, buffer[i]);
-            for (int i = 20; i < 28; i++) Assert.Equal(i - 20, buffer[i]);
+            for (int i = 0; i < 10; i++)
+                Assert.Equal(i, buffer[i]);
+            for (int i = 10; i < 20; i++)
+                Assert.Equal(i - 10, buffer[i]);
+            for (int i = 20; i < 28; i++)
+                Assert.Equal(i - 20, buffer[i]);
 
             // now try with a buffer that is bigger than 3 pages
             readInvokedCount = 0;
             buffer = new byte[32];
 
-            Assert.Equal(30, async ? await s.ReadAtLeastAsync(buffer, 22) : s.ReadAtLeast(buffer, 22));
+            Assert.Equal(
+                30,
+                async ? await s.ReadAtLeastAsync(buffer, 22) : s.ReadAtLeast(buffer, 22)
+            );
             Assert.Equal(3, readInvokedCount);
-            for (int i = 0; i < 10; i++) Assert.Equal(i, buffer[i]);
-            for (int i = 10; i < 20; i++) Assert.Equal(i - 10, buffer[i]);
-            for (int i = 20; i < 30; i++) Assert.Equal(i - 20, buffer[i]);
-            for (int i = 30; i < 32; i++) Assert.Equal(0, buffer[i]);
+            for (int i = 0; i < 10; i++)
+                Assert.Equal(i, buffer[i]);
+            for (int i = 10; i < 20; i++)
+                Assert.Equal(i - 10, buffer[i]);
+            for (int i = 20; i < 30; i++)
+                Assert.Equal(i - 20, buffer[i]);
+            for (int i = 30; i < 32; i++)
+                Assert.Equal(0, buffer[i]);
         }
 
         [Theory]
@@ -112,9 +142,11 @@ namespace System.IO.Tests
                     readInvokedCount++;
 
                     int byteCount = Math.Min(count, 10);
-                    for (int i = 0; i < byteCount; i++) array[offset + i] = (byte)i;
+                    for (int i = 0; i < byteCount; i++)
+                        array[offset + i] = (byte)i;
                     return byteCount;
-                });
+                }
+            );
 
             byte[] buffer = new byte[20];
 
@@ -125,7 +157,10 @@ namespace System.IO.Tests
             // now try with an empty buffer
             byte[] emptyBuffer = Array.Empty<byte>();
 
-            Assert.Equal(0, async ? await s.ReadAtLeastAsync(emptyBuffer, 0) : s.ReadAtLeast(emptyBuffer, 0));
+            Assert.Equal(
+                0,
+                async ? await s.ReadAtLeastAsync(emptyBuffer, 0) : s.ReadAtLeast(emptyBuffer, 0)
+            );
             Assert.Equal(0, readInvokedCount);
         }
 
@@ -142,15 +177,21 @@ namespace System.IO.Tests
                     readInvokedCount++;
 
                     int byteCount = Math.Min(count, 10);
-                    for (int i = 0; i < byteCount; i++) array[offset + i] = (byte)i;
+                    for (int i = 0; i < byteCount; i++)
+                        array[offset + i] = (byte)i;
                     return byteCount;
-                });
+                }
+            );
 
             byte[] buffer = new byte[10];
             if (async)
             {
-                await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () => await s.ReadAtLeastAsync(buffer, -1));
-                await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () => await s.ReadAtLeastAsync(buffer, -10));
+                await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
+                    async () => await s.ReadAtLeastAsync(buffer, -1)
+                );
+                await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
+                    async () => await s.ReadAtLeastAsync(buffer, -10)
+                );
             }
             else
             {
@@ -173,16 +214,22 @@ namespace System.IO.Tests
                     readInvokedCount++;
 
                     int byteCount = Math.Min(count, 10);
-                    for (int i = 0; i < byteCount; i++) array[offset + i] = (byte)i;
+                    for (int i = 0; i < byteCount; i++)
+                        array[offset + i] = (byte)i;
                     return byteCount;
-                });
+                }
+            );
 
             byte[] buffer = new byte[20];
             byte[] emptyBuffer = Array.Empty<byte>();
             if (async)
             {
-                await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () => await s.ReadAtLeastAsync(buffer, 21));
-                await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () => await s.ReadAtLeastAsync(emptyBuffer, 1));
+                await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
+                    async () => await s.ReadAtLeastAsync(buffer, 21)
+                );
+                await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
+                    async () => await s.ReadAtLeastAsync(emptyBuffer, 1)
+                );
             }
             else
             {
@@ -206,19 +253,23 @@ namespace System.IO.Tests
                     if (readInvokedCount == 1)
                     {
                         int byteCount = Math.Min(count, 10);
-                        for (int i = 0; i < byteCount; i++) array[offset + i] = (byte)i;
+                        for (int i = 0; i < byteCount; i++)
+                            array[offset + i] = (byte)i;
                         return byteCount;
                     }
                     else
                     {
                         return 0;
                     }
-                });
+                }
+            );
 
             byte[] buffer = new byte[20];
             if (async)
             {
-                await Assert.ThrowsAsync<EndOfStreamException>(async () => await s.ReadAtLeastAsync(buffer, 11));
+                await Assert.ThrowsAsync<EndOfStreamException>(
+                    async () => await s.ReadAtLeastAsync(buffer, 11)
+                );
             }
             else
             {
@@ -228,9 +279,16 @@ namespace System.IO.Tests
 
             readInvokedCount = 0;
 
-            Assert.Equal(10, async ? await s.ReadAtLeastAsync(buffer, 11, throwOnEndOfStream: false) : s.ReadAtLeast(buffer, 11, throwOnEndOfStream: false));
-            for (int i = 0; i < 10; i++) Assert.Equal(i, buffer[i]);
-            for (int i = 10; i < 20; i++) Assert.Equal(0, buffer[i]);
+            Assert.Equal(
+                10,
+                async
+                    ? await s.ReadAtLeastAsync(buffer, 11, throwOnEndOfStream: false)
+                    : s.ReadAtLeast(buffer, 11, throwOnEndOfStream: false)
+            );
+            for (int i = 0; i < 10; i++)
+                Assert.Equal(i, buffer[i]);
+            for (int i = 10; i < 20; i++)
+                Assert.Equal(0, buffer[i]);
             Assert.Equal(2, readInvokedCount);
         }
 
@@ -246,9 +304,11 @@ namespace System.IO.Tests
                     cancellationToken.ThrowIfCancellationRequested();
 
                     int byteCount = Math.Min(count, 10);
-                    for (int i = 0; i < byteCount; i++) array[offset + i] = (byte)i;
+                    for (int i = 0; i < byteCount; i++)
+                        array[offset + i] = (byte)i;
                     return Task.FromResult(10);
-                });
+                }
+            );
 
             byte[] buffer = new byte[20];
 
@@ -256,7 +316,9 @@ namespace System.IO.Tests
             CancellationToken token = cts.Token;
             cts.Cancel();
 
-            await Assert.ThrowsAsync<OperationCanceledException>(async () => await s.ReadAtLeastAsync(buffer, 10, cancellationToken: token));
+            await Assert.ThrowsAsync<OperationCanceledException>(
+                async () => await s.ReadAtLeastAsync(buffer, 10, cancellationToken: token)
+            );
             Assert.Equal(1, readInvokedCount);
         }
     }

@@ -9,29 +9,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Xml;
-using Microsoft.CodeAnalysis.Text;
-using Xunit;
-using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.CodeGen;
+using Microsoft.CodeAnalysis.Test.Utilities;
+using Microsoft.CodeAnalysis.Text;
 using Roslyn.Test.Utilities;
+using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests
 {
     public class Win32ResTests
     {
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = ConditionalSkipReason.TestExecutionNeedsWindowsTypes)]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = ConditionalSkipReason.TestExecutionNeedsWindowsTypes
+        )]
         public void BasicResources2()
         {
-            //confirm that we can read resources produced by RC.EXE. 
+            //confirm that we can read resources produced by RC.EXE.
             var res = Resources.ResourceManager.GetObject("VerResourceBuiltByRC");
             var list = CvtResFile.ReadResFile(new System.IO.MemoryStream((byte[])res));
             Assert.Equal(3, list.Count);
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = ConditionalSkipReason.TestExecutionNeedsWindowsTypes)]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = ConditionalSkipReason.TestExecutionNeedsWindowsTypes
+        )]
         public void BasicResourcesWithStringTypes()
         {
-            //confirm that we can read resources produced by RC.EXE. 
+            //confirm that we can read resources produced by RC.EXE.
             var res = Resources.ResourceManager.GetObject("nativeWithStringIDsAndTypesAndIntTypes");
             var list = CvtResFile.ReadResFile(new System.IO.MemoryStream((byte[])res));
 
@@ -49,16 +55,19 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
         private IEnumerable<Microsoft.Cci.IWin32Resource> BuildResources()
         {
-            yield return new Win32Resource(null, 0, 0, -1, "goo", 1, null);//4
-            yield return new Win32Resource(null, 0, 0, -1, "b", -1, "a");//0
-            yield return new Win32Resource(null, 0, 0, 1, null, 1, null);//5
-            yield return new Win32Resource(null, 0, 0, -1, "b", 2, null);//6
-            yield return new Win32Resource(null, 0, 0, -1, "B", 1, null);//3
-            yield return new Win32Resource(null, 0, 0, -1, "b", -1, "A");//1
-            yield return new Win32Resource(null, 0, 0, 1, null, -1, "A");//2
+            yield return new Win32Resource(null, 0, 0, -1, "goo", 1, null); //4
+            yield return new Win32Resource(null, 0, 0, -1, "b", -1, "a"); //0
+            yield return new Win32Resource(null, 0, 0, 1, null, 1, null); //5
+            yield return new Win32Resource(null, 0, 0, -1, "b", 2, null); //6
+            yield return new Win32Resource(null, 0, 0, -1, "B", 1, null); //3
+            yield return new Win32Resource(null, 0, 0, -1, "b", -1, "A"); //1
+            yield return new Win32Resource(null, 0, 0, 1, null, -1, "A"); //2
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = ConditionalSkipReason.TestExecutionNeedsWindowsTypes)]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = ConditionalSkipReason.TestExecutionNeedsWindowsTypes
+        )]
         public void EnsureResourceSorting()
         {
             //confirm that we sort the resources in the order required by the serialization format.
@@ -87,28 +96,34 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Equal("b", elem.Name);
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = ConditionalSkipReason.TestExecutionNeedsWindowsTypes)]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = ConditionalSkipReason.TestExecutionNeedsWindowsTypes
+        )]
         public void BasicResources()
         {
             System.IO.MemoryStream strm = new System.IO.MemoryStream();
             Microsoft.CodeAnalysis.Compilation.AppendNullResource(strm);
 
             //choose version values such that they would cause overflow when shifted as an int
-            Win32ResourceConversions.AppendVersionToResourceStream(strm,
+            Win32ResourceConversions.AppendVersionToResourceStream(
+                strm,
                 true,
                 "41220.41221.41222.41223",
                 "originalFilenameMuddy.dll",
                 "internalNameZep.dll",
-                "41224.41225.41226.41227",  //4 ints
+                "41224.41225.41226.41227", //4 ints
                 new Version(41220, 41220, 41220, 41220),
-                "this is the file description",   //the old compiler put blank here if nothing was user-supplied
-                "this is the legal copyright",    //the old compiler put blank here if nothing was user-supplied
+                "this is the file description", //the old compiler put blank here if nothing was user-supplied
+                "this is the legal copyright", //the old compiler put blank here if nothing was user-supplied
                 "this is the legal trademark",
                 "product name the testproduct",
                 "some comments",
-                "testcompany");
+                "testcompany"
+            );
 
-            var xmlExpectedVersion = @"<?xml version=""1.0"" encoding=""utf-16""?>
+            var xmlExpectedVersion =
+                @"<?xml version=""1.0"" encoding=""utf-16""?>
 <VersionResource Size=""1124"">
   <VS_FIXEDFILEINFO FileVersionMS=""a104a105"" FileVersionLS=""a106a107"" ProductVersionMS=""a108a109"" ProductVersionLS=""a10aa10b"" />
   <KeyValuePair Key=""Comments"" Value=""some comments"" />
@@ -127,11 +142,18 @@ namespace Microsoft.CodeAnalysis.UnitTests
             System.IO.MemoryStream mft = new System.IO.MemoryStream();
             var manifestContents = Resources.ResourceManager.GetObject("defaultWin32Manifest");
 
-            Win32ResourceConversions.AppendManifestToResourceStream(strm, new System.IO.MemoryStream((byte[])manifestContents), false);
+            Win32ResourceConversions.AppendManifestToResourceStream(
+                strm,
+                new System.IO.MemoryStream((byte[])manifestContents),
+                false
+            );
 
             var icon = Resources.ResourceManager.GetObject("Roslyn_ico");
 
-            Win32ResourceConversions.AppendIconToResourceStream(strm, new System.IO.MemoryStream((byte[])icon));
+            Win32ResourceConversions.AppendIconToResourceStream(
+                strm,
+                new System.IO.MemoryStream((byte[])icon)
+            );
 
             strm.Position = 0;
 
@@ -139,7 +161,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             foreach (var r in resources)
             {
-                if (r.pstringType.Ordinal == 16)    //version
+                if (r.pstringType.Ordinal == 16) //version
                 {
                     string rsrcInXml;
 
@@ -151,11 +173,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
                     Assert.Equal(xmlExpectedVersion, rsrcInXml);
                 }
-                else if (r.pstringType.Ordinal == 24)    //manifest
+                else if (r.pstringType.Ordinal == 24) //manifest
                 {
                     Assert.Equal((byte[])manifestContents, r.data);
                 }
-                else if (r.pstringType.Ordinal == 14)    //icon group
+                else if (r.pstringType.Ordinal == 14) //icon group
                 {
                     //first three words of the data contain 0, 1, iconCount.
                     short[] threeWords = new short[3];
@@ -175,8 +197,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
                         bool found = false;
                         foreach (var rInner in resources)
                         {
-                            if ((rInner.pstringName.Ordinal == i + 1) &&    //ICON IDs start at 1
-                                (rInner.pstringType.Ordinal == 3))  //RT_ICON
+                            if (
+                                (rInner.pstringName.Ordinal == i + 1)
+                                && //ICON IDs start at 1
+                                (rInner.pstringType.Ordinal == 3)
+                            ) //RT_ICON
                             {
                                 found = true;
                                 break;

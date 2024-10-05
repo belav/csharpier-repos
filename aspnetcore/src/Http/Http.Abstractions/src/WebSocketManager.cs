@@ -44,14 +44,16 @@ public abstract class WebSocketManager
     /// </summary>
     /// <param name="acceptContext"></param>
     /// <returns></returns>
-    public virtual Task<WebSocket> AcceptWebSocketAsync(WebSocketAcceptContext acceptContext) => throw new NotImplementedException();
+    public virtual Task<WebSocket> AcceptWebSocketAsync(WebSocketAcceptContext acceptContext) =>
+        throw new NotImplementedException();
 
     private string DebuggerToString()
     {
         return IsWebSocketRequest switch
         {
             false => "IsWebSocketRequest = false",
-            true => $"IsWebSocketRequest = true, RequestedProtocols = {string.Join(",", WebSocketRequestedProtocols)}",
+            true =>
+                $"IsWebSocketRequest = true, RequestedProtocols = {string.Join(",", WebSocketRequestedProtocols)}",
         };
     }
 
@@ -60,6 +62,7 @@ public abstract class WebSocketManager
         private readonly WebSocketManager _manager = manager;
 
         public bool IsWebSocketRequest => _manager.IsWebSocketRequest;
-        public IList<string> WebSocketRequestedProtocols => new List<string>(_manager.WebSocketRequestedProtocols);
+        public IList<string> WebSocketRequestedProtocols =>
+            new List<string>(_manager.WebSocketRequestedProtocols);
     }
 }

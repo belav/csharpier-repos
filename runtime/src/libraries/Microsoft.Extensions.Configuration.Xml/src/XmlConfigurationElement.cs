@@ -20,7 +20,10 @@ namespace Microsoft.Extensions.Configuration.Xml
         /// <summary>
         /// The children of this element
         /// </summary>
-        public IDictionary<string, List<XmlConfigurationElement>>? ChildrenBySiblingName { get; set; }
+        public IDictionary<
+            string,
+            List<XmlConfigurationElement>
+        >? ChildrenBySiblingName { get; set; }
 
         /// <summary>
         /// Performance optimization: do not initialize a dictionary and a list for elements with a single child

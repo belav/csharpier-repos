@@ -28,7 +28,9 @@ namespace Microsoft.CodeAnalysis.Collections.UnitTests
             Assert.True(ByteSequenceComparer.Equals(new byte[] { 1 }, 1, new byte[] { 1 }, 1, 0));
             Assert.True(ByteSequenceComparer.Equals(new byte[] { 1 }, 0, new byte[] { 1 }, 0, 1));
             Assert.False(ByteSequenceComparer.Equals(new byte[] { 1 }, 0, new byte[] { 2 }, 0, 1));
-            Assert.True(ByteSequenceComparer.Equals(new byte[] { 1, 2 }, 1, new byte[] { 2 }, 0, 1));
+            Assert.True(
+                ByteSequenceComparer.Equals(new byte[] { 1, 2 }, 1, new byte[] { 2 }, 0, 1)
+            );
         }
 
         [Fact]

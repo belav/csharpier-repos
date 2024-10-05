@@ -28,40 +28,268 @@ namespace XLinqTests
 
         public override void AddChildren()
         {
-                AddChild(new TestVariation(ElementsFromMixedContent) { Attribute = new VariationAttribute("All elements from mixed content") { Priority = 0 } });
-                AddChild(new TestVariation(AllFromDocument) { Attribute = new VariationAttribute("All content from the XDocument (doc level)") { Priority = 0 } });
-                AddChild(new TestVariation(AllNodes) { Attribute = new VariationAttribute("All nodes from the XDocument") { Priority = 0 } });
-                AddChild(new TestVariation(TwoDocuments) { Attribute = new VariationAttribute("Nodes from two documents") { Priority = 0 } });
-                AddChild(new TestVariation(DuplicateNodes) { Attribute = new VariationAttribute("Duplicate nodes in sequence") { Priority = 0 } });
-                AddChild(new TestVariation(IdAttrsNulls) { Attribute = new VariationAttribute("Nodes from multiple elements + nulls") { Priority = 1 } });
-                AddChild(new TestVariation(EmptySequence) { Attribute = new VariationAttribute("Empty sequence") { Priority = 1 } });
-                AddChild(new TestVariation(XNodeAncestors) { Attribute = new VariationAttribute("XNode.Ancestors") { Priority = 1 } });
-                AddChild(new TestVariation(XNodeAncestorsXName) { Attribute = new VariationAttribute("XNode.Ancestors(XName)") { Priority = 1 } });
-                AddChild(new TestVariation(XNodesBeforeSelf) { Attribute = new VariationAttribute("XNode.NodesBeforeSelf") { Priority = 1 } });
-                AddChild(new TestVariation(XNodesAfterSelf) { Attribute = new VariationAttribute("XNode.NodesAfterSelf") { Priority = 1 } });
-                AddChild(new TestVariation(XElementsBeforeSelf) { Attribute = new VariationAttribute("XNode.ElementsBeforeSelf") { Priority = 1 } });
-                AddChild(new TestVariation(XElementsAfterSelf) { Attribute = new VariationAttribute("XNode.ElementsAfterSelf") { Priority = 1 } });
-                AddChild(new TestVariation(XElementsBeforeSelfXName) { Attribute = new VariationAttribute("XNode.ElementsBeforeSelf(XName)") { Priority = 1 } });
-                AddChild(new TestVariation(XElementsAfterSelfXName) { Attribute = new VariationAttribute("XNode.ElementsAfterSelf(XName)") { Priority = 1 } });
-                AddChild(new TestVariation(Document_Nodes) { Attribute = new VariationAttribute("XDocument.Nodes") { Priority = 2 } });
-                AddChild(new TestVariation(Document_DescendantNodes) { Attribute = new VariationAttribute("XDocument.DescendantNodes") { Priority = 2 } });
-                AddChild(new TestVariation(Document_Descendants) { Attribute = new VariationAttribute("XDocument.Descendants") { Priority = 2 } });
-                AddChild(new TestVariation(Document_Elements) { Attribute = new VariationAttribute("XDocument.Elements") { Priority = 2 } });
-                AddChild(new TestVariation(Document_DescendantsXName) { Attribute = new VariationAttribute("XDocument.Descendants(XName)") { Priority = 2 } });
-                AddChild(new TestVariation(Document_ElementsXName) { Attribute = new VariationAttribute("XDocument.Elements(XName)") { Priority = 2 } });
-                AddChild(new TestVariation(Element_Nodes) { Attribute = new VariationAttribute("XElement.Nodes") { Priority = 2 } });
-                AddChild(new TestVariation(Element_DescendantNodes) { Attribute = new VariationAttribute("XElement.DescendantNodes") { Priority = 2 } });
-                AddChild(new TestVariation(Element_Descendants) { Attribute = new VariationAttribute("XElement.Descendants") { Priority = 2 } });
-                AddChild(new TestVariation(Element_Elements) { Attribute = new VariationAttribute("XElement.Elements") { Priority = 2 } });
-                AddChild(new TestVariation(Element_DescendantsXName) { Attribute = new VariationAttribute("XElement.Descendants(XName)") { Priority = 2 } });
-                AddChild(new TestVariation(Element_ElementsXName) { Attribute = new VariationAttribute("XElement.Elements(XName)") { Priority = 2 } });
-                AddChild(new TestVariation(Element_AncestorsAndSelf) { Attribute = new VariationAttribute("XElement.AncestorsAndSelf") { Priority = 2 } });
-                AddChild(new TestVariation(Element_DescendantNodesAndSelf) { Attribute = new VariationAttribute("XElement.DescendantNodesAndSelf") { Priority = 2 } });
-                AddChild(new TestVariation(Element_DescendantsAndSelf) { Attribute = new VariationAttribute("XElement.DescendantsAndSelf") { Priority = 2 } });
-                AddChild(new TestVariation(Element_DescendantsAndSelfXName) { Attribute = new VariationAttribute("XElement.DescendantsAndSelf(XName) II.") { Param = false, Priority = 2 } });
-                AddChild(new TestVariation(Element_DescendantsAndSelfXName) { Attribute = new VariationAttribute("XElement.DescendantsAndSelf(XName) I.") { Param = true, Priority = 2 } });
-                AddChild(new TestVariation(Element_AncestorsAndSelfXName) { Attribute = new VariationAttribute("XElement.AncestorsAndSelf(XName) I.") { Param = true, Priority = 2 } });
-                AddChild(new TestVariation(Element_AncestorsAndSelfXName) { Attribute = new VariationAttribute("XElement.AncestorsAndSelf(XName) II.") { Param = false, Priority = 2 } });
+            AddChild(
+                new TestVariation(ElementsFromMixedContent)
+                {
+                    Attribute = new VariationAttribute("All elements from mixed content")
+                    {
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(AllFromDocument)
+                {
+                    Attribute = new VariationAttribute("All content from the XDocument (doc level)")
+                    {
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(AllNodes)
+                {
+                    Attribute = new VariationAttribute("All nodes from the XDocument")
+                    {
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(TwoDocuments)
+                {
+                    Attribute = new VariationAttribute("Nodes from two documents") { Priority = 0 },
+                }
+            );
+            AddChild(
+                new TestVariation(DuplicateNodes)
+                {
+                    Attribute = new VariationAttribute("Duplicate nodes in sequence")
+                    {
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(IdAttrsNulls)
+                {
+                    Attribute = new VariationAttribute("Nodes from multiple elements + nulls")
+                    {
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(EmptySequence)
+                {
+                    Attribute = new VariationAttribute("Empty sequence") { Priority = 1 },
+                }
+            );
+            AddChild(
+                new TestVariation(XNodeAncestors)
+                {
+                    Attribute = new VariationAttribute("XNode.Ancestors") { Priority = 1 },
+                }
+            );
+            AddChild(
+                new TestVariation(XNodeAncestorsXName)
+                {
+                    Attribute = new VariationAttribute("XNode.Ancestors(XName)") { Priority = 1 },
+                }
+            );
+            AddChild(
+                new TestVariation(XNodesBeforeSelf)
+                {
+                    Attribute = new VariationAttribute("XNode.NodesBeforeSelf") { Priority = 1 },
+                }
+            );
+            AddChild(
+                new TestVariation(XNodesAfterSelf)
+                {
+                    Attribute = new VariationAttribute("XNode.NodesAfterSelf") { Priority = 1 },
+                }
+            );
+            AddChild(
+                new TestVariation(XElementsBeforeSelf)
+                {
+                    Attribute = new VariationAttribute("XNode.ElementsBeforeSelf") { Priority = 1 },
+                }
+            );
+            AddChild(
+                new TestVariation(XElementsAfterSelf)
+                {
+                    Attribute = new VariationAttribute("XNode.ElementsAfterSelf") { Priority = 1 },
+                }
+            );
+            AddChild(
+                new TestVariation(XElementsBeforeSelfXName)
+                {
+                    Attribute = new VariationAttribute("XNode.ElementsBeforeSelf(XName)")
+                    {
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(XElementsAfterSelfXName)
+                {
+                    Attribute = new VariationAttribute("XNode.ElementsAfterSelf(XName)")
+                    {
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(Document_Nodes)
+                {
+                    Attribute = new VariationAttribute("XDocument.Nodes") { Priority = 2 },
+                }
+            );
+            AddChild(
+                new TestVariation(Document_DescendantNodes)
+                {
+                    Attribute = new VariationAttribute("XDocument.DescendantNodes")
+                    {
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(Document_Descendants)
+                {
+                    Attribute = new VariationAttribute("XDocument.Descendants") { Priority = 2 },
+                }
+            );
+            AddChild(
+                new TestVariation(Document_Elements)
+                {
+                    Attribute = new VariationAttribute("XDocument.Elements") { Priority = 2 },
+                }
+            );
+            AddChild(
+                new TestVariation(Document_DescendantsXName)
+                {
+                    Attribute = new VariationAttribute("XDocument.Descendants(XName)")
+                    {
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(Document_ElementsXName)
+                {
+                    Attribute = new VariationAttribute("XDocument.Elements(XName)")
+                    {
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(Element_Nodes)
+                {
+                    Attribute = new VariationAttribute("XElement.Nodes") { Priority = 2 },
+                }
+            );
+            AddChild(
+                new TestVariation(Element_DescendantNodes)
+                {
+                    Attribute = new VariationAttribute("XElement.DescendantNodes") { Priority = 2 },
+                }
+            );
+            AddChild(
+                new TestVariation(Element_Descendants)
+                {
+                    Attribute = new VariationAttribute("XElement.Descendants") { Priority = 2 },
+                }
+            );
+            AddChild(
+                new TestVariation(Element_Elements)
+                {
+                    Attribute = new VariationAttribute("XElement.Elements") { Priority = 2 },
+                }
+            );
+            AddChild(
+                new TestVariation(Element_DescendantsXName)
+                {
+                    Attribute = new VariationAttribute("XElement.Descendants(XName)")
+                    {
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(Element_ElementsXName)
+                {
+                    Attribute = new VariationAttribute("XElement.Elements(XName)") { Priority = 2 },
+                }
+            );
+            AddChild(
+                new TestVariation(Element_AncestorsAndSelf)
+                {
+                    Attribute = new VariationAttribute("XElement.AncestorsAndSelf")
+                    {
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(Element_DescendantNodesAndSelf)
+                {
+                    Attribute = new VariationAttribute("XElement.DescendantNodesAndSelf")
+                    {
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(Element_DescendantsAndSelf)
+                {
+                    Attribute = new VariationAttribute("XElement.DescendantsAndSelf")
+                    {
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(Element_DescendantsAndSelfXName)
+                {
+                    Attribute = new VariationAttribute("XElement.DescendantsAndSelf(XName) II.")
+                    {
+                        Param = false,
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(Element_DescendantsAndSelfXName)
+                {
+                    Attribute = new VariationAttribute("XElement.DescendantsAndSelf(XName) I.")
+                    {
+                        Param = true,
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(Element_AncestorsAndSelfXName)
+                {
+                    Attribute = new VariationAttribute("XElement.AncestorsAndSelf(XName) I.")
+                    {
+                        Param = true,
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(Element_AncestorsAndSelfXName)
+                {
+                    Attribute = new VariationAttribute("XElement.AncestorsAndSelf(XName) II.")
+                    {
+                        Param = false,
+                        Priority = 2,
+                    },
+                }
+            );
         }
 
         //[Variation(Priority = 0, Desc = "All elements from mixed content")]
@@ -72,7 +300,10 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Parse("\t<?PI?><A xmlns='a'/>\r\n <!--comment-->", LoadOptions.PreserveWhitespace);
+            XDocument doc = XDocument.Parse(
+                "\t<?PI?><A xmlns='a'/>\r\n <!--comment-->",
+                LoadOptions.PreserveWhitespace
+            );
             IEnumerable<XNode> toRemove = doc.Nodes();
             if (_runWithEvents)
             {
@@ -91,7 +322,10 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Parse("\t<?PI?><A xmlns='a'/>\r\n <!--comment-->", LoadOptions.PreserveWhitespace);
+            XDocument doc = XDocument.Parse(
+                "\t<?PI?><A xmlns='a'/>\r\n <!--comment-->",
+                LoadOptions.PreserveWhitespace
+            );
             IEnumerable<XNode> toRemove = doc.DescendantNodes();
             if (_runWithEvents)
             {
@@ -112,7 +346,10 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Load(FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")), LoadOptions.PreserveWhitespace);
+            XDocument doc = XDocument.Load(
+                FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")),
+                LoadOptions.PreserveWhitespace
+            );
             IEnumerable<XNode> toRemove = doc.DescendantNodes();
             if (_runWithEvents)
             {
@@ -131,7 +368,10 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Load(FilePathUtil.getStream(Path.Combine(@"TestData", "XLinq", "Books.xml")), LoadOptions.PreserveWhitespace);
+            XDocument doc = XDocument.Load(
+                FilePathUtil.getStream(Path.Combine(@"TestData", "XLinq", "Books.xml")),
+                LoadOptions.PreserveWhitespace
+            );
             IEnumerable<XNode> toRemove = doc.Descendants().OfType<XNode>();
             if (_runWithEvents)
             {
@@ -152,8 +392,12 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Load(FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")), LoadOptions.PreserveWhitespace);
-            IEnumerable<XNode> toRemove = doc.Descendants(@"{http://www.books.com/}book").OfType<XNode>();
+            XDocument doc = XDocument.Load(
+                FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")),
+                LoadOptions.PreserveWhitespace
+            );
+            IEnumerable<XNode> toRemove = doc.Descendants(@"{http://www.books.com/}book")
+                .OfType<XNode>();
             if (_runWithEvents)
             {
                 _eHelper = new EventsHelper(doc);
@@ -170,7 +414,10 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Load(FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")), LoadOptions.PreserveWhitespace);
+            XDocument doc = XDocument.Load(
+                FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")),
+                LoadOptions.PreserveWhitespace
+            );
             IEnumerable<XNode> toRemove = doc.Elements().OfType<XNode>();
             if (_runWithEvents)
             {
@@ -189,7 +436,10 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Load(FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")), LoadOptions.PreserveWhitespace);
+            XDocument doc = XDocument.Load(
+                FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")),
+                LoadOptions.PreserveWhitespace
+            );
             IEnumerable<XNode> toRemove = doc.Elements("bookstore").OfType<XNode>();
             if (_runWithEvents)
             {
@@ -207,7 +457,10 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Load(FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")), LoadOptions.PreserveWhitespace);
+            XDocument doc = XDocument.Load(
+                FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")),
+                LoadOptions.PreserveWhitespace
+            );
             IEnumerable<XNode> toRemove = doc.Nodes();
             if (_runWithEvents)
             {
@@ -225,7 +478,10 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Parse("<A xmlns='a'><!--comment-->text1<X/></A>", LoadOptions.PreserveWhitespace);
+            XDocument doc = XDocument.Parse(
+                "<A xmlns='a'><!--comment-->text1<X/></A>",
+                LoadOptions.PreserveWhitespace
+            );
             IEnumerable<XNode> toRemove = doc.Root.Nodes().Take(2).Concat2(doc.Root.Elements());
             if (_runWithEvents)
             {
@@ -253,8 +509,13 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Load(FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")), LoadOptions.PreserveWhitespace);
-            XElement e = doc.Descendants(@"{http://www.books.com/}book").Where(x => x.Element("title").Value == "XQL The Golden Years").First();
+            XDocument doc = XDocument.Load(
+                FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")),
+                LoadOptions.PreserveWhitespace
+            );
+            XElement e = doc.Descendants(@"{http://www.books.com/}book")
+                .Where(x => x.Element("title").Value == "XQL The Golden Years")
+                .First();
             TestLog.Compare(e != null, "TEST_FAILED: wrong starting position");
             IEnumerable<XNode> toRemove = e.AncestorsAndSelf().OfType<XNode>();
             if (_runWithEvents)
@@ -274,10 +535,18 @@ namespace XLinqTests
             int count = 0;
             _runWithEvents = (bool)Params[0];
             var useSelf = (bool)Variation.Param;
-            XDocument doc = XDocument.Load(FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")), LoadOptions.PreserveWhitespace);
-            XElement e = doc.Descendants(@"{http://www.books.com/}book").Where(x => x.Element("title").Value == "XQL The Golden Years").First();
+            XDocument doc = XDocument.Load(
+                FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")),
+                LoadOptions.PreserveWhitespace
+            );
+            XElement e = doc.Descendants(@"{http://www.books.com/}book")
+                .Where(x => x.Element("title").Value == "XQL The Golden Years")
+                .First();
             TestLog.Compare(e != null, "TEST_FAILED: wrong starting position");
-            IEnumerable<XNode> toRemove = e.AncestorsAndSelf(useSelf ? @"{http://www.books.com/}book" : @"bookstore").OfType<XNode>();
+            IEnumerable<XNode> toRemove = e.AncestorsAndSelf(
+                    useSelf ? @"{http://www.books.com/}book" : @"bookstore"
+                )
+                .OfType<XNode>();
             if (_runWithEvents)
             {
                 _eHelper = new EventsHelper(doc);
@@ -294,8 +563,13 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Load(FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")), LoadOptions.PreserveWhitespace);
-            XElement e = doc.Descendants(@"{http://www.books.com/}book").Where(x => x.Element("title").Value == "XQL The Golden Years").First();
+            XDocument doc = XDocument.Load(
+                FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")),
+                LoadOptions.PreserveWhitespace
+            );
+            XElement e = doc.Descendants(@"{http://www.books.com/}book")
+                .Where(x => x.Element("title").Value == "XQL The Golden Years")
+                .First();
             TestLog.Compare(e != null, "TEST_FAILING: wrong starting position");
             IEnumerable<XNode> toRemove = e.DescendantNodes();
             if (_runWithEvents)
@@ -315,8 +589,13 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Load(FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")), LoadOptions.PreserveWhitespace);
-            XElement e = doc.Descendants(@"{http://www.books.com/}book").Where(x => x.Element("title").Value == "XQL The Golden Years").First();
+            XDocument doc = XDocument.Load(
+                FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")),
+                LoadOptions.PreserveWhitespace
+            );
+            XElement e = doc.Descendants(@"{http://www.books.com/}book")
+                .Where(x => x.Element("title").Value == "XQL The Golden Years")
+                .First();
             TestLog.Compare(e != null, "TEST_FAILING: wrong starting position");
             IEnumerable<XNode> toRemove = e.DescendantNodesAndSelf();
             if (_runWithEvents)
@@ -335,8 +614,13 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Load(FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")), LoadOptions.PreserveWhitespace);
-            XElement e = doc.Descendants(@"{http://www.books.com/}book").Where(x => x.Element("title").Value == "XQL The Golden Years").First();
+            XDocument doc = XDocument.Load(
+                FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")),
+                LoadOptions.PreserveWhitespace
+            );
+            XElement e = doc.Descendants(@"{http://www.books.com/}book")
+                .Where(x => x.Element("title").Value == "XQL The Golden Years")
+                .First();
             TestLog.Compare(e != null, "TEST_FAILING: wrong starting position");
             IEnumerable<XNode> toRemove = e.Descendants().OfType<XNode>();
             if (_runWithEvents)
@@ -356,8 +640,13 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Load(FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")), LoadOptions.PreserveWhitespace);
-            XElement e = doc.Descendants(@"{http://www.books.com/}book").Where(x => x.Element("title").Value == "XQL The Golden Years").First();
+            XDocument doc = XDocument.Load(
+                FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")),
+                LoadOptions.PreserveWhitespace
+            );
+            XElement e = doc.Descendants(@"{http://www.books.com/}book")
+                .Where(x => x.Element("title").Value == "XQL The Golden Years")
+                .First();
             TestLog.Compare(e != null, "TEST_FAILING: wrong starting position");
             IEnumerable<XNode> toRemove = e.DescendantsAndSelf().OfType<XNode>();
             if (_runWithEvents)
@@ -379,10 +668,18 @@ namespace XLinqTests
             int count = 0;
             _runWithEvents = (bool)Params[0];
             var useSelf = (bool)Variation.Param;
-            XDocument doc = XDocument.Load(FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")), LoadOptions.PreserveWhitespace);
-            XElement e = useSelf ? doc.Descendants(@"{http://www.books.com/}book").Where(x => x.Element("title").Value == "XQL The Golden Years").First() : doc.Root;
+            XDocument doc = XDocument.Load(
+                FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")),
+                LoadOptions.PreserveWhitespace
+            );
+            XElement e = useSelf
+                ? doc.Descendants(@"{http://www.books.com/}book")
+                    .Where(x => x.Element("title").Value == "XQL The Golden Years")
+                    .First()
+                : doc.Root;
             TestLog.Compare(e != null, "TEST_FAILING: wrong starting position");
-            IEnumerable<XNode> toRemove = e.DescendantsAndSelf(@"{http://www.books.com/}book").OfType<XNode>();
+            IEnumerable<XNode> toRemove = e.DescendantsAndSelf(@"{http://www.books.com/}book")
+                .OfType<XNode>();
             if (_runWithEvents)
             {
                 _eHelper = new EventsHelper(doc);
@@ -399,8 +696,13 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Load(FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")), LoadOptions.PreserveWhitespace);
-            IEnumerable<XNode> toRemove = doc.Root.Descendants(@"{http://www.books.com/}book").OfType<XNode>();
+            XDocument doc = XDocument.Load(
+                FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")),
+                LoadOptions.PreserveWhitespace
+            );
+            IEnumerable<XNode> toRemove = doc
+                .Root.Descendants(@"{http://www.books.com/}book")
+                .OfType<XNode>();
             if (_runWithEvents)
             {
                 _eHelper = new EventsHelper(doc);
@@ -417,8 +719,13 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Load(FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")), LoadOptions.PreserveWhitespace);
-            XElement e = doc.Descendants(@"{http://www.books.com/}book").Where(x => x.Element("title").Value == "XQL The Golden Years").First();
+            XDocument doc = XDocument.Load(
+                FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")),
+                LoadOptions.PreserveWhitespace
+            );
+            XElement e = doc.Descendants(@"{http://www.books.com/}book")
+                .Where(x => x.Element("title").Value == "XQL The Golden Years")
+                .First();
             TestLog.Compare(e != null, "TEST_FAILING: wrong starting position");
             IEnumerable<XNode> toRemove = e.Elements().OfType<XNode>();
             if (_runWithEvents)
@@ -437,8 +744,13 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Load(FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")), LoadOptions.PreserveWhitespace);
-            IEnumerable<XNode> toRemove = doc.Root.Elements(@"{http://www.books.com/}book").OfType<XNode>();
+            XDocument doc = XDocument.Load(
+                FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")),
+                LoadOptions.PreserveWhitespace
+            );
+            IEnumerable<XNode> toRemove = doc
+                .Root.Elements(@"{http://www.books.com/}book")
+                .OfType<XNode>();
             if (_runWithEvents)
             {
                 _eHelper = new EventsHelper(doc);
@@ -455,8 +767,13 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Load(FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")), LoadOptions.PreserveWhitespace);
-            XElement e = doc.Descendants(@"{http://www.books.com/}book").Where(x => x.Element("title").Value == "XQL The Golden Years").First();
+            XDocument doc = XDocument.Load(
+                FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")),
+                LoadOptions.PreserveWhitespace
+            );
+            XElement e = doc.Descendants(@"{http://www.books.com/}book")
+                .Where(x => x.Element("title").Value == "XQL The Golden Years")
+                .First();
             TestLog.Compare(e != null, "TEST_FAILED: wrong starting position");
             IEnumerable<XNode> toRemove = e.Nodes();
             if (_runWithEvents)
@@ -475,7 +792,10 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Parse(@"<A xmlns='a'><B/>text1<p:B xmlns:p='nsp'/>text2<!--comment--><C><innerElement/></C></A>", LoadOptions.PreserveWhitespace);
+            XDocument doc = XDocument.Parse(
+                @"<A xmlns='a'><B/>text1<p:B xmlns:p='nsp'/>text2<!--comment--><C><innerElement/></C></A>",
+                LoadOptions.PreserveWhitespace
+            );
             IEnumerable<XElement> toRemove = doc.Root.Elements();
             if (_runWithEvents)
             {
@@ -493,8 +813,12 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Parse(@"<A id='a' xmlns:p1='nsp1'><B id='b' xmlns='nbs' xmlns:p='nsp' p:x='xx'>text</B><C/><p1:D id='x' datrt='dat'/></A>");
-            IEnumerable<XNode> noNodes = doc.Descendants().Where(x => x.Name == "NonExisting").OfType<XNode>();
+            XDocument doc = XDocument.Parse(
+                @"<A id='a' xmlns:p1='nsp1'><B id='b' xmlns='nbs' xmlns:p='nsp' p:x='xx'>text</B><C/><p1:D id='x' datrt='dat'/></A>"
+            );
+            IEnumerable<XNode> noNodes = doc.Descendants()
+                .Where(x => x.Name == "NonExisting")
+                .OfType<XNode>();
 
             var ms1 = new MemoryStream();
             doc.Save(new StreamWriter(ms1));
@@ -520,7 +844,9 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Parse(@"<A id='a' xmlns:p1='nsp1'><B id='b' xmlns='nbs' xmlns:p='nsp' p:x='xx'>text</B><C/><p1:D id='x' datrt='dat'/></A>");
+            XDocument doc = XDocument.Parse(
+                @"<A id='a' xmlns:p1='nsp1'><B id='b' xmlns='nbs' xmlns:p='nsp' p:x='xx'>text</B><C/><p1:D id='x' datrt='dat'/></A>"
+            );
             IEnumerable<XNode> someNodes = doc.Root.Descendants().OfType<XNode>().InsertNulls(1);
             if (_runWithEvents)
             {
@@ -538,13 +864,25 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc1 = XDocument.Parse("<A xmlns='a'><!--comment-->text1<X/></A>", LoadOptions.PreserveWhitespace);
-            XDocument doc2 = XDocument.Parse("<A xmlns='b'>text1<X/>text2</A>", LoadOptions.PreserveWhitespace);
-            IEnumerable<XNode> toRemove = doc1.Root.DescendantNodes().Where(x => x.NodeType == XmlNodeType.Comment).Concat2(doc2.Root.Elements());
+            XDocument doc1 = XDocument.Parse(
+                "<A xmlns='a'><!--comment-->text1<X/></A>",
+                LoadOptions.PreserveWhitespace
+            );
+            XDocument doc2 = XDocument.Parse(
+                "<A xmlns='b'>text1<X/>text2</A>",
+                LoadOptions.PreserveWhitespace
+            );
+            IEnumerable<XNode> toRemove = doc1
+                .Root.DescendantNodes()
+                .Where(x => x.NodeType == XmlNodeType.Comment)
+                .Concat2(doc2.Root.Elements());
             if (_runWithEvents)
             {
                 _eHelper = new EventsHelper(doc1);
-                count = doc1.Root.DescendantNodes().Where(x => x.NodeType == XmlNodeType.Comment).Count();
+                count = doc1
+                    .Root.DescendantNodes()
+                    .Where(x => x.NodeType == XmlNodeType.Comment)
+                    .Count();
             }
             VerifyDeleteNodes(toRemove);
             if (_runWithEvents)
@@ -557,8 +895,13 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Load(FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")), LoadOptions.PreserveWhitespace);
-            XElement e = doc.Descendants("magazine").Where(x => x.Element("title").Value == "PC Week").First();
+            XDocument doc = XDocument.Load(
+                FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")),
+                LoadOptions.PreserveWhitespace
+            );
+            XElement e = doc.Descendants("magazine")
+                .Where(x => x.Element("title").Value == "PC Week")
+                .First();
             TestLog.Compare(e != null, "TEST_FAILED: wrong starting position");
             IEnumerable<XNode> toRemove = e.ElementsAfterSelf().OfType<XNode>();
             if (_runWithEvents)
@@ -577,10 +920,16 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Load(FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")), LoadOptions.PreserveWhitespace);
-            XElement e = doc.Descendants("magazine").Where(x => x.Element("title").Value == "PC Week").First();
+            XDocument doc = XDocument.Load(
+                FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")),
+                LoadOptions.PreserveWhitespace
+            );
+            XElement e = doc.Descendants("magazine")
+                .Where(x => x.Element("title").Value == "PC Week")
+                .First();
             TestLog.Compare(e != null, "TEST_FAILED: wrong starting position");
-            IEnumerable<XNode> toRemove = e.ElementsAfterSelf(@"{http://www.books.com/}book").OfType<XNode>();
+            IEnumerable<XNode> toRemove = e.ElementsAfterSelf(@"{http://www.books.com/}book")
+                .OfType<XNode>();
             if (_runWithEvents)
             {
                 _eHelper = new EventsHelper(doc);
@@ -597,8 +946,13 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Load(FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")), LoadOptions.PreserveWhitespace);
-            XElement e = doc.Descendants("magazine").Where(x => x.Element("title").Value == "PC Week").First();
+            XDocument doc = XDocument.Load(
+                FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")),
+                LoadOptions.PreserveWhitespace
+            );
+            XElement e = doc.Descendants("magazine")
+                .Where(x => x.Element("title").Value == "PC Week")
+                .First();
             TestLog.Compare(e != null, "TEST_FAILED: wrong starting position");
             IEnumerable<XNode> toRemove = e.ElementsBeforeSelf().OfType<XNode>();
             if (_runWithEvents)
@@ -617,10 +971,16 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Load(FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")), LoadOptions.PreserveWhitespace);
-            XElement e = doc.Descendants("magazine").Where(x => x.Element("title").Value == "PC Week").First();
+            XDocument doc = XDocument.Load(
+                FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")),
+                LoadOptions.PreserveWhitespace
+            );
+            XElement e = doc.Descendants("magazine")
+                .Where(x => x.Element("title").Value == "PC Week")
+                .First();
             TestLog.Compare(e != null, "TEST_FAILED: wrong starting position");
-            IEnumerable<XNode> toRemove = e.ElementsBeforeSelf(@"{http://www.books.com/}book").OfType<XNode>();
+            IEnumerable<XNode> toRemove = e.ElementsBeforeSelf(@"{http://www.books.com/}book")
+                .OfType<XNode>();
             if (_runWithEvents)
             {
                 _eHelper = new EventsHelper(doc);
@@ -638,7 +998,10 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Load(FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")), LoadOptions.PreserveWhitespace);
+            XDocument doc = XDocument.Load(
+                FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")),
+                LoadOptions.PreserveWhitespace
+            );
             XElement e = doc.Descendants("last.name").Where(x => x.Value == "Marsh").First();
             TestLog.Compare(e != null, "TEST_FAILED: wrong starting position");
             IEnumerable<XNode> toRemove = e.Ancestors().OfType<XNode>();
@@ -659,7 +1022,10 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Load(FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")), LoadOptions.PreserveWhitespace);
+            XDocument doc = XDocument.Load(
+                FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")),
+                LoadOptions.PreserveWhitespace
+            );
             XElement e = doc.Descendants("last.name").Where(x => x.Value == "Marsh").First();
             TestLog.Compare(e != null, "TEST_FAILED: wrong starting position");
             IEnumerable<XNode> toRemove = e.Ancestors("author").OfType<XNode>();
@@ -679,8 +1045,13 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Load(FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")), LoadOptions.PreserveWhitespace);
-            XElement e = doc.Descendants("magazine").Where(x => x.Element("title").Value == "PC Week").First();
+            XDocument doc = XDocument.Load(
+                FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")),
+                LoadOptions.PreserveWhitespace
+            );
+            XElement e = doc.Descendants("magazine")
+                .Where(x => x.Element("title").Value == "PC Week")
+                .First();
             TestLog.Compare(e != null, "TEST_FAILED: wrong starting position");
             IEnumerable<XNode> toRemove = e.NodesAfterSelf();
             if (_runWithEvents)
@@ -699,8 +1070,13 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Load(FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")), LoadOptions.PreserveWhitespace);
-            XElement e = doc.Descendants("magazine").Where(x => x.Element("title").Value == "PC Week").First();
+            XDocument doc = XDocument.Load(
+                FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")),
+                LoadOptions.PreserveWhitespace
+            );
+            XElement e = doc.Descendants("magazine")
+                .Where(x => x.Element("title").Value == "PC Week")
+                .First();
             TestLog.Compare(e != null, "TEST_FAILED: wrong starting position");
             IEnumerable<XNode> toRemove = e.NodesBeforeSelf();
             if (_runWithEvents)
@@ -722,13 +1098,20 @@ namespace XLinqTests
 
         #region Methods
 
-        private void VerifyDeleteNodes<T>(IEnumerable<T> toRemove) where T : XNode
+        private void VerifyDeleteNodes<T>(IEnumerable<T> toRemove)
+            where T : XNode
         {
             // copy of the data to delete
             IEnumerable<XNode> toRemoveCopy = toRemove.OfType<XNode>().ToList();
 
             // Create array of parents
-            IEnumerable<XContainer> parents = toRemove.Select(x => (x == null) ? (XContainer)null : (x.Parent != null ? (XContainer)x.Parent : (XContainer)x.Document)).ToList();
+            IEnumerable<XContainer> parents = toRemove
+                .Select(x =>
+                    (x == null)
+                        ? (XContainer)null
+                        : (x.Parent != null ? (XContainer)x.Parent : (XContainer)x.Document)
+                )
+                .ToList();
 
             // calculate the expected results for the parents of the processed elements
             var expectedNodesForParent = new Dictionary<XContainer, List<ExpectedValue>>();
@@ -736,7 +1119,14 @@ namespace XLinqTests
             {
                 if (p != null)
                 {
-                    expectedNodesForParent.TryAdd(p, p.Nodes().Except(toRemoveCopy.Where(x => x != null)).Select(a => new ExpectedValue(!(a is XText), a)).ProcessNodes().ToList());
+                    expectedNodesForParent.TryAdd(
+                        p,
+                        p.Nodes()
+                            .Except(toRemoveCopy.Where(x => x != null))
+                            .Select(a => new ExpectedValue(!(a is XText), a))
+                            .ProcessNodes()
+                            .ToList()
+                    );
                 }
             }
 
@@ -760,17 +1150,27 @@ namespace XLinqTests
 
                     if (parent != null)
                     {
-                        TestLog.Compare(parent.Nodes().Where(x => x == node).IsEmpty(), "Nodes axis");
+                        TestLog.Compare(
+                            parent.Nodes().Where(x => x == node).IsEmpty(),
+                            "Nodes axis"
+                        );
                         if (node is XElement)
                         {
                             var e = node as XElement;
                             e.Verify();
                             TestLog.Compare(parent.Element(e.Name) != node, "Element axis");
-                            TestLog.Compare(parent.Elements(e.Name).Where(x => x == e).IsEmpty(), "Elements axis");
+                            TestLog.Compare(
+                                parent.Elements(e.Name).Where(x => x == e).IsEmpty(),
+                                "Elements axis"
+                            );
                         }
 
                         // Compare the rest of the elements
-                        TestLog.Compare(expectedNodesForParent[parent].EqualAll(parent.Nodes(), XNode.EqualityComparer), "The rest of the nodes");
+                        TestLog.Compare(
+                            expectedNodesForParent[parent]
+                                .EqualAll(parent.Nodes(), XNode.EqualityComparer),
+                            "The rest of the nodes"
+                        );
                     }
                 }
             }

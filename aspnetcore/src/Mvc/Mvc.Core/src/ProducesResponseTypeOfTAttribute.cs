@@ -11,7 +11,8 @@ public class ProducesResponseTypeAttribute<T> : ProducesResponseTypeAttribute
     /// Initializes an instance of <see cref="ProducesResponseTypeAttribute"/>.
     /// </summary>
     /// <param name="statusCode">The HTTP response status code.</param>
-    public ProducesResponseTypeAttribute(int statusCode) : base(typeof(T), statusCode) { }
+    public ProducesResponseTypeAttribute(int statusCode)
+        : base(typeof(T), statusCode) { }
 
     /// <summary>
     /// Initializes an instance of <see cref="ProducesResponseTypeAttribute"/>.
@@ -19,6 +20,10 @@ public class ProducesResponseTypeAttribute<T> : ProducesResponseTypeAttribute
     /// <param name="statusCode">The HTTP response status code.</param>
     /// <param name="contentType">The content type associated with the response.</param>
     /// <param name="additionalContentTypes">Additional content types supported by the response.</param>
-    public ProducesResponseTypeAttribute(int statusCode, string contentType, params string[] additionalContentTypes)
-            : base(typeof(T), statusCode, contentType, additionalContentTypes) { }
+    public ProducesResponseTypeAttribute(
+        int statusCode,
+        string contentType,
+        params string[] additionalContentTypes
+    )
+        : base(typeof(T), statusCode, contentType, additionalContentTypes) { }
 }

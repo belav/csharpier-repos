@@ -14,11 +14,14 @@ public class DataSourceDependentCacheTest
         var called = false;
 
         var dataSource = new DynamicEndpointDataSource();
-        var cache = new DataSourceDependentCache<string>(dataSource, (endpoints) =>
-        {
-            called = true;
-            return "hello, world!";
-        });
+        var cache = new DataSourceDependentCache<string>(
+            dataSource,
+            (endpoints) =>
+            {
+                called = true;
+                return "hello, world!";
+            }
+        );
 
         // Act
         cache.EnsureInitialized();
@@ -35,11 +38,14 @@ public class DataSourceDependentCacheTest
         var called = false;
 
         var dataSource = new DynamicEndpointDataSource();
-        var cache = new DataSourceDependentCache<string>(dataSource, (endpoints) =>
-        {
-            called = true;
-            return "hello, world!";
-        });
+        var cache = new DataSourceDependentCache<string>(
+            dataSource,
+            (endpoints) =>
+            {
+                called = true;
+                return "hello, world!";
+            }
+        );
 
         // Act
         GC.KeepAlive(cache.Value);
@@ -56,11 +62,14 @@ public class DataSourceDependentCacheTest
         var count = 0;
 
         var dataSource = new DynamicEndpointDataSource();
-        var cache = new DataSourceDependentCache<string>(dataSource, (endpoints) =>
-        {
-            count++;
-            return $"hello, {count}!";
-        });
+        var cache = new DataSourceDependentCache<string>(
+            dataSource,
+            (endpoints) =>
+            {
+                count++;
+                return $"hello, {count}!";
+            }
+        );
 
         cache.EnsureInitialized();
         Assert.Equal("hello, 1!", cache.Value);
@@ -80,11 +89,14 @@ public class DataSourceDependentCacheTest
         var count = 0;
 
         var dataSource = new DynamicEndpointDataSource();
-        var cache = new DataSourceDependentCache<string>(dataSource, (endpoints) =>
-        {
-            count++;
-            return $"hello, {count}!";
-        });
+        var cache = new DataSourceDependentCache<string>(
+            dataSource,
+            (endpoints) =>
+            {
+                count++;
+                return $"hello, {count}!";
+            }
+        );
 
         // Act
         cache.Dispose();
@@ -101,11 +113,14 @@ public class DataSourceDependentCacheTest
         var count = 0;
 
         var dataSource = new DynamicEndpointDataSource();
-        var cache = new DataSourceDependentCache<string>(dataSource, (endpoints) =>
-        {
-            count++;
-            return $"hello, {count}!";
-        });
+        var cache = new DataSourceDependentCache<string>(
+            dataSource,
+            (endpoints) =>
+            {
+                count++;
+                return $"hello, {count}!";
+            }
+        );
 
         cache.EnsureInitialized();
         Assert.Equal("hello, 1!", cache.Value);

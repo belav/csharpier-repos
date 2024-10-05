@@ -15,7 +15,10 @@ namespace Microsoft.AspNetCore.Routing.Constraints;
 /// <summary>
 /// Constrains a route parameter to be a string with a maximum length.
 /// </summary>
-public class MaxLengthRouteConstraint : IRouteConstraint, IParameterLiteralNodeMatchingPolicy, ICachableParameterPolicy
+public class MaxLengthRouteConstraint
+    : IRouteConstraint,
+        IParameterLiteralNodeMatchingPolicy,
+        ICachableParameterPolicy
 #else
 internal class MaxLengthRouteConstraint : IRouteConstraint
 #endif
@@ -47,10 +50,10 @@ internal class MaxLengthRouteConstraint : IRouteConstraint
         IRouter? route,
         string routeKey,
         RouteValueDictionary values,
-        RouteDirection routeDirection)
+        RouteDirection routeDirection
+    )
 #else
-        string routeKey,
-        RouteValueDictionary values)
+        string routeKey, RouteValueDictionary values)
 #endif
     {
         ArgumentNullException.ThrowIfNull(routeKey);

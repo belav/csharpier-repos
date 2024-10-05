@@ -12,7 +12,11 @@ internal static partial class Interop
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_CreateMemoryBio")]
         internal static partial SafeBioHandle CreateMemoryBio();
 
-        [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_BioNewFile", StringMarshalling = StringMarshalling.Utf8)]
+        [LibraryImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_BioNewFile",
+            StringMarshalling = StringMarshalling.Utf8
+        )]
         internal static partial SafeBioHandle BioNewFile(string filename, string mode);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_BioDestroy")]

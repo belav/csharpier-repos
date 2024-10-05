@@ -4,15 +4,15 @@
 
 /*
  * JIT64 bug The bug is triggered by a pattern of loops over arrays of medium sized structs (between 4
- * and ~32 bytes), but those are not the only cases that might hit it, just the easiest to describe 
- * (and maybe most likely?).  In this case the last part of the trigger was that on array was offset 
+ * and ~32 bytes), but those are not the only cases that might hit it, just the easiest to describe
+ * (and maybe most likely?).  In this case the last part of the trigger was that on array was offset
  * from the other:
  *                       batch[i] = keys[batchIndex + i];
  * OsrApplyReductions and OsrGroupIVsByStride had a very similar loop, but with one notable difference.
- * The former had a call to OsrRemoveGCCandidates, but the later did not.  If OsrRemvoeGCCandidates 
- * walked across a multiply, it would change the stride, which would make a given candidate no longer 
+ * The former had a call to OsrRemoveGCCandidates, but the later did not.  If OsrRemvoeGCCandidates
+ * walked across a multiply, it would change the stride, which would make a given candidate no longer
  * fit in the stride group it was placed in.  This bug has existed since 2003 when ltaylors first wrote
- * these routines.  I believe the fix is to add the call to OsrGroupIVsByStride so the loops match. 
+ * these routines.  I believe the fix is to add the call to OsrGroupIVsByStride so the loops match.
  */
 
 using System;
@@ -26,19 +26,17 @@ struct VT
 
     public VT(double d1, double d2, double d3)
     {
-        vt1 = d1; vt2 = d2; vt3 = d3;
+        vt1 = d1;
+        vt2 = d2;
+        vt3 = d3;
     }
-
 }
-
 
 public class DblArray3
 {
-
     // instance field of valuetype
     static void f4(VT[] keys, uint m_ReadMultipleMaxBatchSize)
     {
-
         // Create first batch.
         // Should have incoming m_ReadMultipleMaxBatchSize less than keys.length
         VT[] batch = keys;
@@ -70,11 +68,8 @@ public class DblArray3
 
             // Process the current batch and move to the next one.
             batchIndex += batch.Length;
-        }
-        while (batchIndex < keys.Length);
+        } while (batchIndex < keys.Length);
     }
-
-
 
     [Fact]
     public static int TestEntryPoint()
@@ -91,14 +86,14 @@ public class DblArray3
             Console.WriteLine(e.Message);
             Console.WriteLine("FAILED");
             Console.WriteLine();
-            Console.WriteLine(@"// 
+            Console.WriteLine(
+                @"// 
 // The bug is triggered by a pattern of loops over arrays of medium sized structs (between 4 and ~32 bytes), but those are not the only cases that might hit it, just the easiest to describe (and maybe most likely?).  In this case the last part of the trigger was that on array was offset from the other:
 //                        batch[i] = keys[batchIndex + i];"
-                            );
+            );
             return -1;
         }
         Console.WriteLine("PASSED");
         return 100;
     }
-
 }

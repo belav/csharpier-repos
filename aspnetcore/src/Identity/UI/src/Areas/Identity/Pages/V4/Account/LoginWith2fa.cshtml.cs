@@ -48,7 +48,11 @@ public abstract class LoginWith2faModel : PageModel
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         [Required]
-        [StringLength(7, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        [StringLength(
+            7,
+            ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.",
+            MinimumLength = 6
+        )]
         [DataType(DataType.Text)]
         [Display(Name = "Authenticator code")]
         public string TwoFactorCode { get; set; } = default!;
@@ -65,16 +69,23 @@ public abstract class LoginWith2faModel : PageModel
     ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
-    public virtual Task<IActionResult> OnGetAsync(bool rememberMe, [StringSyntax(StringSyntaxAttribute.Uri)] string? returnUrl = null) => throw new NotImplementedException();
+    public virtual Task<IActionResult> OnGetAsync(
+        bool rememberMe,
+        [StringSyntax(StringSyntaxAttribute.Uri)] string? returnUrl = null
+    ) => throw new NotImplementedException();
 
     /// <summary>
     ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
-    public virtual Task<IActionResult> OnPostAsync(bool rememberMe, [StringSyntax(StringSyntaxAttribute.Uri)] string? returnUrl = null) => throw new NotImplementedException();
+    public virtual Task<IActionResult> OnPostAsync(
+        bool rememberMe,
+        [StringSyntax(StringSyntaxAttribute.Uri)] string? returnUrl = null
+    ) => throw new NotImplementedException();
 }
 
-internal sealed class LoginWith2faModel<TUser> : LoginWith2faModel where TUser : class
+internal sealed class LoginWith2faModel<TUser> : LoginWith2faModel
+    where TUser : class
 {
     private readonly SignInManager<TUser> _signInManager;
     private readonly UserManager<TUser> _userManager;
@@ -83,7 +94,8 @@ internal sealed class LoginWith2faModel<TUser> : LoginWith2faModel where TUser :
     public LoginWith2faModel(
         SignInManager<TUser> signInManager,
         UserManager<TUser> userManager,
-        ILogger<LoginWith2faModel> logger)
+        ILogger<LoginWith2faModel> logger
+    )
     {
         _signInManager = signInManager;
         _userManager = userManager;
@@ -121,9 +133,15 @@ internal sealed class LoginWith2faModel<TUser> : LoginWith2faModel where TUser :
             throw new InvalidOperationException("Unable to load two-factor authentication user.");
         }
 
-        var authenticatorCode = Input.TwoFactorCode.Replace(" ", string.Empty).Replace("-", string.Empty);
+        var authenticatorCode = Input
+            .TwoFactorCode.Replace(" ", string.Empty)
+            .Replace("-", string.Empty);
 
-        var result = await _signInManager.TwoFactorAuthenticatorSignInAsync(authenticatorCode, rememberMe, Input.RememberMachine);
+        var result = await _signInManager.TwoFactorAuthenticatorSignInAsync(
+            authenticatorCode,
+            rememberMe,
+            Input.RememberMachine
+        );
 
         await _userManager.GetUserIdAsync(user);
 
@@ -139,7 +157,10 @@ internal sealed class LoginWith2faModel<TUser> : LoginWith2faModel where TUser :
         }
         else
         {
-            _logger.LogWarning(LoggerEventIds.InvalidAuthenticatorCode, "Invalid authenticator code entered.");
+            _logger.LogWarning(
+                LoggerEventIds.InvalidAuthenticatorCode,
+                "Invalid authenticator code entered."
+            );
             ModelState.AddModelError(string.Empty, "Invalid authenticator code.");
             return Page();
         }

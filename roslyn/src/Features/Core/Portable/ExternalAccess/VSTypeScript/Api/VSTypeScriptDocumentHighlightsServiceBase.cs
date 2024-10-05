@@ -16,10 +16,20 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
     internal abstract class VSTypeScriptDocumentHighlightsServiceBase : IDocumentHighlightsService
     {
         protected abstract Task<ImmutableArray<DocumentHighlights>> GetDocumentHighlightsAsync(
-            Document document, int position, IImmutableSet<Document> documentsToSearch, CancellationToken cancellationToken);
+            Document document,
+            int position,
+            IImmutableSet<Document> documentsToSearch,
+            CancellationToken cancellationToken
+        );
 
-        Task<ImmutableArray<DocumentHighlights>> IDocumentHighlightsService.GetDocumentHighlightsAsync(
-            Document document, int position, IImmutableSet<Document> documentsToSearch, HighlightingOptions options, CancellationToken cancellationToken)
-            => GetDocumentHighlightsAsync(document, position, documentsToSearch, cancellationToken);
+        Task<
+            ImmutableArray<DocumentHighlights>
+        > IDocumentHighlightsService.GetDocumentHighlightsAsync(
+            Document document,
+            int position,
+            IImmutableSet<Document> documentsToSearch,
+            HighlightingOptions options,
+            CancellationToken cancellationToken
+        ) => GetDocumentHighlightsAsync(document, position, documentsToSearch, cancellationToken);
     }
 }

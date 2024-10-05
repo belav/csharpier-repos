@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Interactive
     [Trait(Traits.Feature, Traits.Features.InteractiveHost)]
     public sealed class InteractiveHostDesktopInitTests : AbstractInteractiveHostTests
     {
-        internal override InteractiveHostPlatform DefaultPlatform => InteractiveHostPlatform.Desktop32;
+        internal override InteractiveHostPlatform DefaultPlatform =>
+            InteractiveHostPlatform.Desktop32;
         internal override bool UseDefaultInitializationFile => true;
 
         [Fact]
@@ -27,7 +28,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Interactive
         {
             var fxDir = await GetHostRuntimeDirectoryAsync();
 
-            var dll = Temp.CreateFile(extension: ".dll").WriteAllBytes(TestResources.MetadataTests.InterfaceAndClass.CSInterfaces01);
+            var dll = Temp.CreateFile(extension: ".dll")
+                .WriteAllBytes(TestResources.MetadataTests.InterfaceAndClass.CSInterfaces01);
             var srcDir = Temp.CreateDirectory();
             var dllDir = Path.GetDirectoryName(dll.Path)!;
             srcDir.CreateFile("goo.csx").WriteAllText("ReferencePaths.Add(@\"" + dllDir + "\");");
@@ -47,7 +49,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Interactive
             await Host.ExecuteAsync(@"SourcePaths");
 
             output = await ReadOutputToEnd();
-            AssertEx.AssertEqualToleratingWhitespaceDifferences(PrintSearchPaths(srcDir.Path), output);
+            AssertEx.AssertEqualToleratingWhitespaceDifferences(
+                PrintSearchPaths(srcDir.Path),
+                output
+            );
 
             // execute file (uses modified search paths), the file adds a reference path
             await Host.ExecuteFileAsync("goo.csx");
@@ -55,7 +60,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Interactive
             await Host.ExecuteAsync(@"ReferencePaths");
 
             output = await ReadOutputToEnd();
-            AssertEx.AssertEqualToleratingWhitespaceDifferences(PrintSearchPaths(fxDir, dllDir), output);
+            AssertEx.AssertEqualToleratingWhitespaceDifferences(
+                PrintSearchPaths(fxDir, dllDir),
+                output
+            );
 
             await Host.AddReferenceAsync(Path.GetFileName(dll.Path));
 

@@ -4,19 +4,22 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-
 using Xunit;
 
 namespace System.Net.Http.WinHttpHandlerUnitTests
 {
     public static class SendRequestHelper
     {
-        public static  HttpResponseMessage Send(WinHttpHandler handler, Action setup)
+        public static HttpResponseMessage Send(WinHttpHandler handler, Action setup)
         {
             return Send(handler, setup, TestServer.FakeServerEndpoint);
         }
 
-        public static HttpResponseMessage Send(WinHttpHandler handler, Action setup, string fakeServerEndpoint)
+        public static HttpResponseMessage Send(
+            WinHttpHandler handler,
+            Action setup,
+            string fakeServerEndpoint
+        )
         {
             TestServer.SetResponse(DecompressionMethods.None, TestServer.ExpectedResponseBody);
 

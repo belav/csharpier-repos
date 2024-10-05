@@ -8,10 +8,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
     {
         public int Rank
         {
-            get
-            {
-                return this.Sizes.Count;
-            }
+            get { return this.Sizes.Count; }
         }
     }
 }

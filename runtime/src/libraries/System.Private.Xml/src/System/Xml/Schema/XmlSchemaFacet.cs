@@ -51,14 +51,8 @@ namespace System.Xml.Schema
 
         internal FacetType FacetType
         {
-            get
-            {
-                return _facetType;
-            }
-            set
-            {
-                _facetType = value;
-            }
+            get { return _facetType; }
+            set { _facetType = value; }
         }
     }
 

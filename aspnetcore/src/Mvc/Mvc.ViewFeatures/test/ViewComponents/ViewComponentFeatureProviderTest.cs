@@ -24,7 +24,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.ViewComponents
             manager.PopulateFeature(feature);
 
             // Assert
-            Assert.Equal(new[] { typeof(ConventionsViewComponent).GetTypeInfo() }, feature.ViewComponents.ToArray());
+            Assert.Equal(
+                new[] { typeof(ConventionsViewComponent).GetTypeInfo() },
+                feature.ViewComponents.ToArray()
+            );
         }
 
         [Fact]
@@ -41,7 +44,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.ViewComponents
             manager.PopulateFeature(feature);
 
             // Assert
-            Assert.Equal(new[] { typeof(AttributeViewComponent).GetTypeInfo() }, feature.ViewComponents.ToArray());
+            Assert.Equal(
+                new[] { typeof(AttributeViewComponent).GetTypeInfo() },
+                feature.ViewComponents.ToArray()
+            );
         }
 
         private class TestPart : ApplicationPart, IApplicationPartTypeProvider

@@ -19,7 +19,9 @@ public class ConsumesConstraintForFormFileParameterConventionTest
         var convention = GetConvention();
 
         // Act
-        ConsumesConstraintForFormFileParameterConvention.AddMultipartFormDataConsumesAttribute(action);
+        ConsumesConstraintForFormFileParameterConvention.AddMultipartFormDataConsumesAttribute(
+            action
+        );
 
         // Assert
         var attribute = Assert.Single(action.Filters);
@@ -40,7 +42,9 @@ public class ConsumesConstraintForFormFileParameterConventionTest
         var convention = GetConvention();
 
         // Act
-        ConsumesConstraintForFormFileParameterConvention.AddMultipartFormDataConsumesAttribute(action);
+        ConsumesConstraintForFormFileParameterConvention.AddMultipartFormDataConsumesAttribute(
+            action
+        );
 
         // Assert
         var attribute = Assert.Single(action.Filters);
@@ -55,7 +59,8 @@ public class ConsumesConstraintForFormFileParameterConventionTest
 
     private static ApplicationModelProviderContext GetContext(
         Type type,
-        IModelMetadataProvider modelMetadataProvider = null)
+        IModelMetadataProvider modelMetadataProvider = null
+    )
     {
         var context = new ApplicationModelProviderContext(new[] { type.GetTypeInfo() });
         var mvcOptions = Options.Create(new MvcOptions());

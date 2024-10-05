@@ -14,7 +14,15 @@ namespace System.Diagnostics.Tests
         public static void InstanceData_CreateInstanceData_FromCounterSample()
         {
             long timestamp = DateTime.Now.ToFileTime();
-            CounterSample cs = new CounterSample(1, 2, 3, 4, timestamp, timestamp, PerformanceCounterType.SampleFraction);
+            CounterSample cs = new CounterSample(
+                1,
+                2,
+                3,
+                4,
+                timestamp,
+                timestamp,
+                PerformanceCounterType.SampleFraction
+            );
 
             InstanceData id = new InstanceData("foo", cs);
             Assert.Equal(cs.RawValue, id.Sample.RawValue);

@@ -18,20 +18,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
     public class UseExpressionBodyForLambdasRefactoringTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new UseExpressionBodyForLambdaCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new UseExpressionBodyForLambdaCodeRefactoringProvider();
 
-        private OptionsCollection UseExpressionBody
-            => this.Option(CSharpCodeStyleOptions.PreferExpressionBodiedLambdas, CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement);
+        private OptionsCollection UseExpressionBody =>
+            this.Option(
+                CSharpCodeStyleOptions.PreferExpressionBodiedLambdas,
+                CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement
+            );
 
-        private OptionsCollection UseExpressionBodyDisabledDiagnostic
-            => this.Option(CSharpCodeStyleOptions.PreferExpressionBodiedLambdas, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement);
+        private OptionsCollection UseExpressionBodyDisabledDiagnostic =>
+            this.Option(
+                CSharpCodeStyleOptions.PreferExpressionBodiedLambdas,
+                CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+            );
 
-        private OptionsCollection UseBlockBody
-            => this.Option(CSharpCodeStyleOptions.PreferExpressionBodiedLambdas, CSharpCodeStyleOptions.NeverWithSuggestionEnforcement);
+        private OptionsCollection UseBlockBody =>
+            this.Option(
+                CSharpCodeStyleOptions.PreferExpressionBodiedLambdas,
+                CSharpCodeStyleOptions.NeverWithSuggestionEnforcement
+            );
 
-        private OptionsCollection UseBlockBodyDisabledDiagnostic
-            => this.Option(CSharpCodeStyleOptions.PreferExpressionBodiedLambdas, CSharpCodeStyleOptions.NeverWithSilentEnforcement);
+        private OptionsCollection UseBlockBodyDisabledDiagnostic =>
+            this.Option(
+                CSharpCodeStyleOptions.PreferExpressionBodiedLambdas,
+                CSharpCodeStyleOptions.NeverWithSilentEnforcement
+            );
 
         [Fact]
         public async Task TestNotOfferedIfUserPrefersExpressionBodiesAndInBlockBody()
@@ -50,7 +64,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         }
                     }
                 }
-                """, parameters: new TestParameters(options: UseExpressionBody));
+                """,
+                parameters: new TestParameters(options: UseExpressionBody)
+            );
         }
 
         [Fact]
@@ -81,7 +97,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         Func<int, string> f = x => x.ToString();
                     }
                 }
-                """, parameters: new TestParameters(options: UseExpressionBodyDisabledDiagnostic));
+                """,
+                parameters: new TestParameters(options: UseExpressionBodyDisabledDiagnostic)
+            );
         }
 
         [Fact]
@@ -112,7 +130,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         Func<int, string> f = x => x.ToString();
                     }
                 }
-                """, parameters: new TestParameters(options: UseBlockBody));
+                """,
+                parameters: new TestParameters(options: UseBlockBody)
+            );
         }
 
         [Fact]
@@ -127,7 +147,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         return 1;
                     }
                 }
-                """, parameters: new TestParameters(options: UseBlockBody));
+                """,
+                parameters: new TestParameters(options: UseBlockBody)
+            );
         }
 
         [Fact]
@@ -144,7 +166,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         Func<int, string> f = x [||]=> x.ToString();
                     }
                 }
-                """, parameters: new TestParameters(options: UseBlockBody));
+                """,
+                parameters: new TestParameters(options: UseBlockBody)
+            );
         }
 
         [Fact]
@@ -175,7 +199,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         };
                     }
                 }
-                """, parameters: new TestParameters(options: UseBlockBodyDisabledDiagnostic));
+                """,
+                parameters: new TestParameters(options: UseBlockBodyDisabledDiagnostic)
+            );
         }
 
         [Fact]
@@ -206,7 +232,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         };
                     }
                 }
-                """, parameters: new TestParameters(options: UseExpressionBody));
+                """,
+                parameters: new TestParameters(options: UseExpressionBody)
+            );
         }
     }
 }

@@ -11,7 +11,10 @@ namespace System.IO.Pipes.Tests
         {
             ServerClientPair ret = new ServerClientPair();
             ret.readablePipe = new AnonymousPipeServerStream(PipeDirection.In);
-            ret.writeablePipe = new AnonymousPipeClientStream(PipeDirection.Out, ((AnonymousPipeServerStream)ret.readablePipe).ClientSafePipeHandle);
+            ret.writeablePipe = new AnonymousPipeClientStream(
+                PipeDirection.Out,
+                ((AnonymousPipeServerStream)ret.readablePipe).ClientSafePipeHandle
+            );
             return ret;
         }
     }

@@ -8,11 +8,15 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class BaseAddressElement : ConfigurationElement
     {
-        public BaseAddressElement() : base() { }
+        public BaseAddressElement()
+            : base() { }
 
         // BaseAddress is exposed as a string instead of an Uri so that WCF can do
         // special parsing of wildcards (e.g. '*').
-        [ConfigurationProperty(ConfigurationStrings.BaseAddress, Options = ConfigurationPropertyOptions.IsKey | ConfigurationPropertyOptions.IsRequired)]
+        [ConfigurationProperty(
+            ConfigurationStrings.BaseAddress,
+            Options = ConfigurationPropertyOptions.IsKey | ConfigurationPropertyOptions.IsRequired
+        )]
         [StringValidator(MinLength = 1)]
         public string BaseAddress
         {

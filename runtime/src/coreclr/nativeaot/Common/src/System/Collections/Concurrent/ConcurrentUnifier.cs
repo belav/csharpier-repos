@@ -79,7 +79,10 @@ namespace System.Collections.Concurrent
         public V GetOrAdd(K key)
         {
             Debug.Assert(key != null);
-            Debug.Assert(!_lock.IsHeldByCurrentThread, "GetOrAdd called while lock already acquired. A possible cause of this is an Equals or GetHashCode method that causes reentrancy in the table.");
+            Debug.Assert(
+                !_lock.IsHeldByCurrentThread,
+                "GetOrAdd called while lock already acquired. A possible cause of this is an Equals or GetHashCode method that causes reentrancy in the table."
+            );
 
             int hashCode = key.GetHashCode();
             V value;
@@ -100,7 +103,7 @@ namespace System.Collections.Concurrent
                 {
                     // State of a key must never go from found to not found, and only one value may exist per key.
                     Debug.Assert(checkedFound);
-                    if (default(V) == null)  // No good way to do the "only one value" check for value types.
+                    if (default(V) == null) // No good way to do the "only one value" check for value types.
                         Debug.Assert(object.ReferenceEquals(checkedValue, value));
                 }
             }
@@ -141,7 +144,12 @@ namespace System.Collections.Concurrent
                 _owner = owner;
             }
 
-            private Container(ConcurrentUnifier<K, V> owner, int[] buckets, Entry[] entries, int nextFreeEntry)
+            private Container(
+                ConcurrentUnifier<K, V> owner,
+                int[] buckets,
+                Entry[] entries,
+                int nextFreeEntry
+            )
             {
                 _buckets = buckets;
                 _entries = entries;
@@ -226,7 +234,10 @@ namespace System.Collections.Concurrent
                         newEntries[newNextFreeEntry]._key = _entries[entry]._key;
                         newEntries[newNextFreeEntry]._value = _entries[entry]._value;
                         newEntries[newNextFreeEntry]._hashCode = _entries[entry]._hashCode;
-                        int newBucket = ComputeBucket(newEntries[newNextFreeEntry]._hashCode, newSize);
+                        int newBucket = ComputeBucket(
+                            newEntries[newNextFreeEntry]._hashCode,
+                            newSize
+                        );
                         newEntries[newNextFreeEntry]._next = newBuckets[newBucket];
                         newBuckets[newBucket] = newNextFreeEntry;
                         newNextFreeEntry++;
@@ -263,7 +274,7 @@ namespace System.Collections.Concurrent
                 for (int bucket = 0; bucket < _buckets.Length; bucket++)
                 {
                     int walk1 = _buckets[bucket];
-                    int walk2 = _buckets[bucket];  // walk2 advances two elements at a time - if walk1 ever meets walk2, we've detected a cycle.
+                    int walk2 = _buckets[bucket]; // walk2 advances two elements at a time - if walk1 ever meets walk2, we've detected a cycle.
                     while (walk1 != -1)
                     {
                         numEntriesEncountered++;
@@ -272,7 +283,10 @@ namespace System.Collections.Concurrent
                         Debug.Assert(_entries[walk1]._key != null);
                         int hashCode = _entries[walk1]._key.GetHashCode();
                         Debug.Assert(hashCode == _entries[walk1]._hashCode);
-                        int storedBucket = ComputeBucket(_entries[walk1]._hashCode, _buckets.Length);
+                        int storedBucket = ComputeBucket(
+                            _entries[walk1]._hashCode,
+                            _buckets.Length
+                        );
                         Debug.Assert(storedBucket == bucket);
                         walk1 = _entries[walk1]._next;
                         if (walk2 != -1)

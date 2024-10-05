@@ -12,7 +12,15 @@ namespace System.Reflection.Emit.Tests
         [InlineData(false)]
         public void InitLocals_Set_ReturnsNewValue(bool newInitLocals)
         {
-            DynamicMethod method = new DynamicMethod("Method", MethodAttributes.Static | MethodAttributes.Public, CallingConventions.Standard, null, null, typeof(TestClass).GetTypeInfo().Module, true);
+            DynamicMethod method = new DynamicMethod(
+                "Method",
+                MethodAttributes.Static | MethodAttributes.Public,
+                CallingConventions.Standard,
+                null,
+                null,
+                typeof(TestClass).GetTypeInfo().Module,
+                true
+            );
             method.InitLocals = newInitLocals;
             Assert.Equal(newInitLocals, method.InitLocals);
         }

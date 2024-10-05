@@ -6,24 +6,16 @@
 // <owner current="true" primary="false">laled</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
+namespace System.Data
+{
     using System;
 
-    public interface IDbDataParameter : IDataParameter { // MDAC 68205
+    public interface IDbDataParameter : IDataParameter
+    { // MDAC 68205
+        byte Precision { get; set; }
 
-        byte Precision {
-            get;
-            set;
-        }
+        byte Scale { get; set; }
 
-        byte Scale {
-            get;
-            set;
-        }
-
-        int Size {
-            get;
-            set;
-        }
+        int Size { get; set; }
     }
 }

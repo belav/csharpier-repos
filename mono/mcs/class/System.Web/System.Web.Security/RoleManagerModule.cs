@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,148 +28,154 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.ComponentModel;
 using System.Collections;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Security.Principal;
 using System.Text;
 using System.Threading;
 using System.Web.Configuration;
 
-namespace System.Web.Security {
-	public sealed class RoleManagerModule : IHttpModule
-	{
-		static readonly object getRolesEvent = new object ();
-		
-		RoleManagerSection _config = null;
-		EventHandlerList events = new EventHandlerList ();
-		
-		public event RoleManagerEventHandler GetRoles {
-			add { events.AddHandler (getRolesEvent, value); }
-			remove { events.RemoveHandler (getRolesEvent, value); }
-		}
+namespace System.Web.Security
+{
+    public sealed class RoleManagerModule : IHttpModule
+    {
+        static readonly object getRolesEvent = new object();
 
-		public void Dispose ()
-		{
-		}
+        RoleManagerSection _config = null;
+        EventHandlerList events = new EventHandlerList();
 
-		void ClearCookie (HttpApplication app, string cookieName)
-		{
-			HttpCookie clearCookie = new HttpCookie (_config.CookieName, "");
+        public event RoleManagerEventHandler GetRoles
+        {
+            add { events.AddHandler(getRolesEvent, value); }
+            remove { events.RemoveHandler(getRolesEvent, value); }
+        }
 
-			clearCookie.Path = _config.CookiePath;
-			clearCookie.Expires = DateTime.MinValue;
-			clearCookie.Domain = _config.Domain;
-			clearCookie.Secure = _config.CookieRequireSSL;
-			app.Response.SetCookie (clearCookie);
-		}
+        public void Dispose() { }
 
-		void OnPostAuthenticateRequest (object sender, EventArgs args)
-		{
-			HttpApplication app = (HttpApplication)sender;
+        void ClearCookie(HttpApplication app, string cookieName)
+        {
+            HttpCookie clearCookie = new HttpCookie(_config.CookieName, "");
 
-			/* if we're disabled, bail out early */
-			if (_config == null || !_config.Enabled)
-				return;
+            clearCookie.Path = _config.CookiePath;
+            clearCookie.Expires = DateTime.MinValue;
+            clearCookie.Domain = _config.Domain;
+            clearCookie.Secure = _config.CookieRequireSSL;
+            app.Response.SetCookie(clearCookie);
+        }
 
-			/* allow the user to populate the Role */
-			RoleManagerEventHandler eh = events [getRolesEvent] as RoleManagerEventHandler;
-			if (eh != null) {
-				RoleManagerEventArgs role_args = new RoleManagerEventArgs (app.Context);
+        void OnPostAuthenticateRequest(object sender, EventArgs args)
+        {
+            HttpApplication app = (HttpApplication)sender;
 
-				eh (this, role_args);
+            /* if we're disabled, bail out early */
+            if (_config == null || !_config.Enabled)
+                return;
 
-				if (role_args.RolesPopulated)
-					return;
-			}
+            /* allow the user to populate the Role */
+            RoleManagerEventHandler eh = events[getRolesEvent] as RoleManagerEventHandler;
+            if (eh != null)
+            {
+                RoleManagerEventArgs role_args = new RoleManagerEventArgs(app.Context);
 
-			RolePrincipal principal;
+                eh(this, role_args);
 
-			HttpCookie cookie = app.Request.Cookies [_config.CookieName];
+                if (role_args.RolesPopulated)
+                    return;
+            }
 
-			IIdentity currentIdentity = app.Context.User.Identity;
-			if (app.Request.IsAuthenticated) {
-				if (cookie != null) {
-					if (!_config.CacheRolesInCookie)
-						cookie = null;
-					else if (_config.CookieRequireSSL && !app.Request.IsSecureConnection) {
-						cookie = null;
-						ClearCookie (app, _config.CookieName);
-					}
-						
-				}
+            RolePrincipal principal;
 
-				if (cookie == null || String.IsNullOrEmpty (cookie.Value))
-					principal = new RolePrincipal (currentIdentity);
-				else
-					principal = new RolePrincipal (currentIdentity, cookie.Value);
-			}
-			else {
-				/* anonymous request */
+            HttpCookie cookie = app.Request.Cookies[_config.CookieName];
 
-				if (cookie != null) {
-					ClearCookie (app, _config.CookieName);
-				}
+            IIdentity currentIdentity = app.Context.User.Identity;
+            if (app.Request.IsAuthenticated)
+            {
+                if (cookie != null)
+                {
+                    if (!_config.CacheRolesInCookie)
+                        cookie = null;
+                    else if (_config.CookieRequireSSL && !app.Request.IsSecureConnection)
+                    {
+                        cookie = null;
+                        ClearCookie(app, _config.CookieName);
+                    }
+                }
 
-				principal = new RolePrincipal (currentIdentity);
-			}
+                if (cookie == null || String.IsNullOrEmpty(cookie.Value))
+                    principal = new RolePrincipal(currentIdentity);
+                else
+                    principal = new RolePrincipal(currentIdentity, cookie.Value);
+            }
+            else
+            {
+                /* anonymous request */
 
-			app.Context.User = principal;
-			Thread.CurrentPrincipal = principal;
-		}
+                if (cookie != null)
+                {
+                    ClearCookie(app, _config.CookieName);
+                }
 
-		void OnEndRequest (object sender, EventArgs args)
-		{
-			HttpApplication app = (HttpApplication)sender;
+                principal = new RolePrincipal(currentIdentity);
+            }
 
-			/* if we're not enabled or configured to cache
-			 * cookies, bail out */
-			if (_config == null || !_config.Enabled || !_config.CacheRolesInCookie)
-				return;
+            app.Context.User = principal;
+            Thread.CurrentPrincipal = principal;
+        }
 
-			/* if the user isn't authenticated, bail
-			 * out */
-			if (!app.Request.IsAuthenticated)
-				return;
+        void OnEndRequest(object sender, EventArgs args)
+        {
+            HttpApplication app = (HttpApplication)sender;
 
-			/* if the configuration requires ssl for
-			 * cookies and we're not on an ssl connection,
-			 * bail out */
-			if (_config.CookieRequireSSL && !app.Request.IsSecureConnection)
-				return;
+            /* if we're not enabled or configured to cache
+             * cookies, bail out */
+            if (_config == null || !_config.Enabled || !_config.CacheRolesInCookie)
+                return;
 
-			RolePrincipal principal = app.Context.User as RolePrincipal;
-			if (principal == null) /* just for my sanity */
-				return;
+            /* if the user isn't authenticated, bail
+             * out */
+            if (!app.Request.IsAuthenticated)
+                return;
 
-			if (!principal.CachedListChanged)
-				return;
+            /* if the configuration requires ssl for
+             * cookies and we're not on an ssl connection,
+             * bail out */
+            if (_config.CookieRequireSSL && !app.Request.IsSecureConnection)
+                return;
 
-			string ticket = principal.ToEncryptedTicket ();
-			if (ticket == null || ticket.Length > 4096) {
-				ClearCookie (app, _config.CookieName);
-				return;
-			}
+            RolePrincipal principal = app.Context.User as RolePrincipal;
+            if (principal == null) /* just for my sanity */
+                return;
 
-			HttpCookie cookie = new HttpCookie (_config.CookieName, ticket);
+            if (!principal.CachedListChanged)
+                return;
 
-			cookie.HttpOnly = true;
-			if (!string.IsNullOrEmpty (_config.Domain))
-				cookie.Domain = _config.Domain;
-			if (_config.CookieRequireSSL)
-				cookie.Secure = true;
-			if (_config.CookiePath.Length > 1) // more than '/'
-				cookie.Path = _config.CookiePath;
-			app.Response.SetCookie (cookie);
-		}
+            string ticket = principal.ToEncryptedTicket();
+            if (ticket == null || ticket.Length > 4096)
+            {
+                ClearCookie(app, _config.CookieName);
+                return;
+            }
 
-		public void Init (HttpApplication app)
-		{
-			_config = (RoleManagerSection) WebConfigurationManager.GetSection ("system.web/roleManager");
+            HttpCookie cookie = new HttpCookie(_config.CookieName, ticket);
 
-			app.PostAuthenticateRequest += OnPostAuthenticateRequest;
-			app.EndRequest += OnEndRequest;
-		}
-	}
+            cookie.HttpOnly = true;
+            if (!string.IsNullOrEmpty(_config.Domain))
+                cookie.Domain = _config.Domain;
+            if (_config.CookieRequireSSL)
+                cookie.Secure = true;
+            if (_config.CookiePath.Length > 1) // more than '/'
+                cookie.Path = _config.CookiePath;
+            app.Response.SetCookie(cookie);
+        }
+
+        public void Init(HttpApplication app)
+        {
+            _config = (RoleManagerSection)
+                WebConfigurationManager.GetSection("system.web/roleManager");
+
+            app.PostAuthenticateRequest += OnPostAuthenticateRequest;
+            app.EndRequest += OnEndRequest;
+        }
+    }
 }
-

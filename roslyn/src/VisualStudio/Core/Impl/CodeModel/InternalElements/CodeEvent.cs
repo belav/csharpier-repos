@@ -20,7 +20,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
-            int? nodeKind)
+            int? nodeKind
+        )
         {
             var element = new CodeEvent(state, fileCodeModel, nodeKey, nodeKind);
             var result = (EnvDTE80.CodeEvent)ComAggregate.CreateAggregatedObject(element);
@@ -34,7 +35,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             int nodeKind,
-            string name)
+            string name
+        )
         {
             var element = new CodeEvent(state, fileCodeModel, nodeKind, name);
             return (EnvDTE80.CodeEvent)ComAggregate.CreateAggregatedObject(element);
@@ -44,19 +46,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
-            int? nodeKind)
-            : base(state, fileCodeModel, nodeKey, nodeKind)
-        {
-        }
+            int? nodeKind
+        )
+            : base(state, fileCodeModel, nodeKey, nodeKind) { }
 
         private CodeEvent(
             CodeModelState state,
             FileCodeModel fileCodeModel,
             int nodeKind,
-            string name)
-            : base(state, fileCodeModel, nodeKind, name)
-        {
-        }
+            string name
+        )
+            : base(state, fileCodeModel, nodeKind, name) { }
 
         private IEventSymbol EventSymbol
         {
@@ -84,7 +84,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
                 return null;
             }
-
             set
             {
                 // Stroke of luck: both C# and VB legacy code model implementations throw E_NOTIMPL
@@ -112,7 +111,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
                 return null;
             }
-
             set
             {
                 // Stroke of luck: both C# and VB legacy code model implementations throw E_NOTIMPL
@@ -136,7 +134,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
                 return null;
             }
-
             set
             {
                 // TODO: C# throws E_FAIL but VB throws E_NOTIMPL.
@@ -146,11 +143,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
         public EnvDTE.CodeTypeRef Type
         {
-            get
-            {
-                return CodeTypeRef.Create(this.State, this, GetProjectId(), EventSymbol.Type);
-            }
-
+            get { return CodeTypeRef.Create(this.State, this, GetProjectId(), EventSymbol.Type); }
             set
             {
                 // The type is sometimes part of the node key, so we should be sure to reacquire

@@ -31,30 +31,24 @@ using System.Resources;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
-namespace Microsoft.Build.Tasks {
-	public class TaskLoggingHelperExtension : TaskLoggingHelper {
-		
-		internal TaskLoggingHelperExtension ()
-			: base (null)
-		{
-		}
+namespace Microsoft.Build.Tasks
+{
+    public class TaskLoggingHelperExtension : TaskLoggingHelper
+    {
+        internal TaskLoggingHelperExtension()
+            : base(null) { }
 
-		[MonoTODO]
-		public ResourceManager TaskSharedResources {
-			get {
-				throw new NotImplementedException ();
-			}
-			set {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoTODO]
+        public ResourceManager TaskSharedResources
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public override string FormatResourceString (string resourceName, params object [] args)
-		{
-			throw new NotImplementedException ();
-		}
-
-	}
+        [MonoTODO]
+        public override string FormatResourceString(string resourceName, params object[] args)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
-

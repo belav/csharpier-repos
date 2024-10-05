@@ -5,16 +5,20 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-using System.Data.Metadata.Edm;
 using System.Data.Mapping;
+using System.Data.Metadata.Edm;
+
 namespace System.Data.Common.Internal.Materialization
 {
     static class Util
     {
         /// <summary>
-        /// Retrieves a mapping to CLR type for the given EDM type. Assumes the MetadataWorkspace has no    
+        /// Retrieves a mapping to CLR type for the given EDM type. Assumes the MetadataWorkspace has no
         /// </summary>
-        internal static ObjectTypeMapping GetObjectMapping(EdmType type, MetadataWorkspace workspace)
+        internal static ObjectTypeMapping GetObjectMapping(
+            EdmType type,
+            MetadataWorkspace workspace
+        )
         {
             // Check if the workspace has cspace item collection registered with it. If not, then its a case
             // of public materializer trying to create objects from PODR or EntityDataReader with no context.
@@ -35,7 +39,10 @@ namespace System.Data.Common.Internal.Materialization
                     // if its a primitive type, then the names will be different for CSpace type and OSpace type
                     if (Helper.IsPrimitiveType(type))
                     {
-                        ospaceType = workspace.GetMappedPrimitiveType(((PrimitiveType)type).PrimitiveTypeKind, DataSpace.OSpace);
+                        ospaceType = workspace.GetMappedPrimitiveType(
+                            ((PrimitiveType)type).PrimitiveTypeKind,
+                            DataSpace.OSpace
+                        );
                     }
                     else
                     {
@@ -55,7 +62,11 @@ namespace System.Data.Common.Internal.Materialization
 
                 // This condition must be hit only when someone is trying to materialize a legacy data reader and we
                 // don't have the CSpace metadata.
-                if (!Helper.IsPrimitiveType(ospaceType) && !Helper.IsEntityType(ospaceType) && !Helper.IsComplexType(ospaceType))
+                if (
+                    !Helper.IsPrimitiveType(ospaceType)
+                    && !Helper.IsEntityType(ospaceType)
+                    && !Helper.IsComplexType(ospaceType)
+                )
                 {
                     throw EntityUtil.MaterializerUnsupportedType();
                 }
@@ -68,7 +79,11 @@ namespace System.Data.Common.Internal.Materialization
                 }
                 else
                 {
-                    typeMapping = DefaultObjectMappingItemCollection.LoadObjectMapping(cspaceType, ospaceType, null);
+                    typeMapping = DefaultObjectMappingItemCollection.LoadObjectMapping(
+                        cspaceType,
+                        ospaceType,
+                        null
+                    );
                 }
 
                 return typeMapping;

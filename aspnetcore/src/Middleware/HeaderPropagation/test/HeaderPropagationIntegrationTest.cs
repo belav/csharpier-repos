@@ -25,33 +25,36 @@ public class HeaderPropagationIntegrationTest
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .ConfigureServices(services =>
-                {
-                    services.AddHttpClient("test").AddHeaderPropagation();
-                    services.AddHeaderPropagation(options =>
+                    .UseTestServer()
+                    .ConfigureServices(services =>
                     {
-                        options.Headers.Add("X-TraceId");
-                    });
-                })
-                .Configure(app =>
-                {
-                    // note: no header propagation middleware
+                        services.AddHttpClient("test").AddHeaderPropagation();
+                        services.AddHeaderPropagation(options =>
+                        {
+                            options.Headers.Add("X-TraceId");
+                        });
+                    })
+                    .Configure(app =>
+                    {
+                        // note: no header propagation middleware
 
-                    app.Run(async context =>
-                    {
-                        try
+                        app.Run(async context =>
                         {
-                            var client = context.RequestServices.GetRequiredService<IHttpClientFactory>().CreateClient("test");
-                            await client.GetAsync("http://localhost/"); // will throw
-                        }
-                        catch (Exception ex)
-                        {
-                            captured = ex;
-                        }
+                            try
+                            {
+                                var client = context
+                                    .RequestServices.GetRequiredService<IHttpClientFactory>()
+                                    .CreateClient("test");
+                                await client.GetAsync("http://localhost/"); // will throw
+                            }
+                            catch (Exception ex)
+                            {
+                                captured = ex;
+                            }
+                        });
                     });
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -67,10 +70,11 @@ public class HeaderPropagationIntegrationTest
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.IsType<InvalidOperationException>(captured);
         Assert.Equal(
-            "The HeaderPropagationValues.Headers property has not been initialized. Register the header propagation middleware " +
-            "by adding 'app.UseHeaderPropagation()' in the 'Configure(...)' method. Header propagation can only be used within " +
-            "the context of an HTTP request.",
-            captured.Message);
+            "The HeaderPropagationValues.Headers property has not been initialized. Register the header propagation middleware "
+                + "by adding 'app.UseHeaderPropagation()' in the 'Configure(...)' method. Header propagation can only be used within "
+                + "the context of an HTTP request.",
+            captured.Message
+        );
     }
 
     [Fact]
@@ -87,12 +91,15 @@ public class HeaderPropagationIntegrationTest
 
         // Act & Assert
         var client = serviceProvider.GetRequiredService<IHttpClientFactory>().CreateClient("test");
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => client.GetAsync("http://localhost/"));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => client.GetAsync("http://localhost/")
+        );
         Assert.Equal(
-            "The HeaderPropagationValues.Headers property has not been initialized. Register the header propagation middleware " +
-            "by adding 'app.UseHeaderPropagation()' in the 'Configure(...)' method. Header propagation can only be used within " +
-            "the context of an HTTP request.",
-            exception.Message);
+            "The HeaderPropagationValues.Headers property has not been initialized. Register the header propagation middleware "
+                + "by adding 'app.UseHeaderPropagation()' in the 'Configure(...)' method. Header propagation can only be used within "
+                + "the context of an HTTP request.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -100,9 +107,7 @@ public class HeaderPropagationIntegrationTest
     {
         // Arrange
         var handler = new SimpleHandler();
-        using var host = await CreateHost(c =>
-            c.Headers.Add("in", "out"),
-            handler);
+        using var host = await CreateHost(c => c.Headers.Add("in", "out"), handler);
         var server = host.GetTestServer();
         var client = server.CreateClient();
 
@@ -123,12 +128,14 @@ public class HeaderPropagationIntegrationTest
     {
         // Arrange
         var handler = new SimpleHandler();
-        using var host = await CreateHost(c =>
+        using var host = await CreateHost(
+            c =>
             {
                 c.Headers.Add("first");
                 c.Headers.Add("second");
             },
-            handler);
+            handler
+        );
         var server = host.GetTestServer();
         var client = server.CreateClient();
 
@@ -154,17 +161,21 @@ public class HeaderPropagationIntegrationTest
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseHeaderPropagation();
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseHeaderPropagation();
+                    });
+            })
+            .Build();
 
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => host.StartAsync());
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => host.StartAsync()
+        );
         Assert.Equal(
             "Unable to find the required services. Please add all the required services by calling 'IServiceCollection.AddHeaderPropagation' inside the call to 'ConfigureServices(...)' in the application startup code.",
-            exception.Message);
+            exception.Message
+        );
     }
 
     [Fact]
@@ -175,7 +186,8 @@ public class HeaderPropagationIntegrationTest
         using var host = await CreateHost(
             c => c.Headers.Add("in", "out"),
             handler,
-            c => c.Headers.Add("out", "different"));
+            c => c.Headers.Add("out", "different")
+        );
         var server = host.GetTestServer();
         var client = server.CreateClient();
 
@@ -191,34 +203,43 @@ public class HeaderPropagationIntegrationTest
         Assert.Equal(new[] { "test" }, handler.Headers.GetValues("different"));
     }
 
-    private async Task<IHost> CreateHost(Action<HeaderPropagationOptions> configure, HttpMessageHandler primaryHandler, Action<HeaderPropagationMessageHandlerOptions> configureClient = null)
+    private async Task<IHost> CreateHost(
+        Action<HeaderPropagationOptions> configure,
+        HttpMessageHandler primaryHandler,
+        Action<HeaderPropagationMessageHandlerOptions> configureClient = null
+    )
     {
         var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseHeaderPropagation();
-                    app.UseMiddleware<SimpleMiddleware>();
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddHeaderPropagation(configure);
-                    var client = services.AddHttpClient("example.com", c => c.BaseAddress = new Uri("http://example.com"))
-                        .ConfigurePrimaryHttpMessageHandler(() => primaryHandler);
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseHeaderPropagation();
+                        app.UseMiddleware<SimpleMiddleware>();
+                    })
+                    .ConfigureServices(services =>
+                    {
+                        services.AddHeaderPropagation(configure);
+                        var client = services
+                            .AddHttpClient(
+                                "example.com",
+                                c => c.BaseAddress = new Uri("http://example.com")
+                            )
+                            .ConfigurePrimaryHttpMessageHandler(() => primaryHandler);
 
-                    if (configureClient != null)
-                    {
-                        client.AddHeaderPropagation(configureClient);
-                    }
-                    else
-                    {
-                        client.AddHeaderPropagation();
-                    }
-                });
-            }).Build();
+                        if (configureClient != null)
+                        {
+                            client.AddHeaderPropagation(configureClient);
+                        }
+                        else
+                        {
+                            client.AddHeaderPropagation();
+                        }
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -229,7 +250,10 @@ public class HeaderPropagationIntegrationTest
     {
         public HttpHeaders Headers { get; private set; }
 
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             Headers = request.Headers;
             return Task.FromResult(new HttpResponseMessage());

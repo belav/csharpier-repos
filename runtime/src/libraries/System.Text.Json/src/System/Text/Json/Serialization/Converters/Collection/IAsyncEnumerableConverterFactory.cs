@@ -17,19 +17,29 @@ namespace System.Text.Json.Serialization
     {
         public IAsyncEnumerableConverterFactory() { }
 
-        public override bool CanConvert(Type typeToConvert) => GetAsyncEnumerableInterface(typeToConvert) is not null;
+        public override bool CanConvert(Type typeToConvert) =>
+            GetAsyncEnumerableInterface(typeToConvert) is not null;
 
-        public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
+        public override JsonConverter CreateConverter(
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             Type? asyncEnumerableInterface = GetAsyncEnumerableInterface(typeToConvert);
-            Debug.Assert(asyncEnumerableInterface is not null, $"{typeToConvert} not supported by converter.");
+            Debug.Assert(
+                asyncEnumerableInterface is not null,
+                $"{typeToConvert} not supported by converter."
+            );
 
             Type elementType = asyncEnumerableInterface.GetGenericArguments()[0];
-            Type converterType = typeof(IAsyncEnumerableOfTConverter<,>).MakeGenericType(typeToConvert, elementType);
+            Type converterType = typeof(IAsyncEnumerableOfTConverter<,>).MakeGenericType(
+                typeToConvert,
+                elementType
+            );
             return (JsonConverter)Activator.CreateInstance(converterType)!;
         }
 
-        private static Type? GetAsyncEnumerableInterface(Type type)
-            => type.GetCompatibleGenericInterface(typeof(IAsyncEnumerable<>));
+        private static Type? GetAsyncEnumerableInterface(Type type) =>
+            type.GetCompatibleGenericInterface(typeof(IAsyncEnumerable<>));
     }
 }

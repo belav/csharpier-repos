@@ -8,19 +8,19 @@ extern alias csc;
 extern alias vbc;
 
 using System;
-using System.IO;
-using Microsoft.CodeAnalysis.CommandLine;
-using System.Runtime.InteropServices;
-using Moq;
-using Xunit;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.CodeAnalysis.Test.Utilities;
-using Roslyn.Test.Utilities;
-using System.Threading;
+using System.IO;
 using System.IO.Pipes;
+using System.Runtime.InteropServices;
 using System.Security.AccessControl;
 using System.Security.Principal;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.CodeAnalysis.CommandLine;
+using Microsoft.CodeAnalysis.Test.Utilities;
+using Moq;
+using Roslyn.Test.Utilities;
+using Xunit;
 using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             {
                 _buildPaths = ServerUtil.CreateBuildPaths(
                     workingDir: Temp.CreateDirectory().Path,
-                    tempDir: Temp.CreateDirectory().Path);
+                    tempDir: Temp.CreateDirectory().Path
+                );
                 _logger = new XunitCompilerServerLogger(testOutputHelper);
             }
 
@@ -56,17 +57,27 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             private BuildClient CreateClient(
                 RequestLanguage? language = null,
                 CompileFunc compileFunc = null,
-                CompileOnServerFunc compileOnServerFunc = null)
+                CompileOnServerFunc compileOnServerFunc = null
+            )
             {
                 language ??= RequestLanguage.CSharpCompile;
-                compileFunc ??= delegate { return 0; };
-                compileOnServerFunc ??= delegate { throw new InvalidOperationException(); };
+                compileFunc ??= delegate
+                {
+                    return 0;
+                };
+                compileOnServerFunc ??= delegate
+                {
+                    throw new InvalidOperationException();
+                };
                 return new BuildClient(_logger, language.Value, compileFunc, compileOnServerFunc);
             }
 
             private ServerData CreateServer(string pipeName)
             {
-                var serverData = ServerUtil.CreateServer(_logger, pipeName).GetAwaiter().GetResult();
+                var serverData = ServerUtil
+                    .CreateServer(_logger, pipeName)
+                    .GetAwaiter()
+                    .GetResult();
                 _serverDataList.Add(serverData);
                 return serverData;
             }
@@ -79,9 +90,12 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                 // to connect. When it fails it should fall back to in-proc
                 // compilation.
                 bool holdsMutex;
-                using (var serverMutex = BuildServerConnection.OpenOrCreateMutex(
-                                                   name: BuildServerConnection.GetServerMutexName(_pipeName),
-                                                   createdNew: out holdsMutex))
+                using (
+                    var serverMutex = BuildServerConnection.OpenOrCreateMutex(
+                        name: BuildServerConnection.GetServerMutexName(_pipeName),
+                        createdNew: out holdsMutex
+                    )
+                )
                 {
                     Assert.True(holdsMutex);
                     var ranLocal = false;
@@ -91,8 +105,11 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                         {
                             ranLocal = true;
                             return 0;
-                        });
-                    var exitCode = client.RunCompilation(new[] { "/shared" }, _buildPaths, pipeName: _pipeName).ExitCode;
+                        }
+                    );
+                    var exitCode = client
+                        .RunCompilation(new[] { "/shared" }, _buildPaths, pipeName: _pipeName)
+                        .ExitCode;
                     Assert.Equal(0, exitCode);
                     Assert.True(ranLocal);
                 }
@@ -102,11 +119,23 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             [Fact]
             public void TestMutexConstructorException()
             {
-                using (var outer = new Mutex(initiallyOwned: true, name: BuildServerConnection.GetClientMutexName(_pipeName), out bool createdNew))
+                using (
+                    var outer = new Mutex(
+                        initiallyOwned: true,
+                        name: BuildServerConnection.GetClientMutexName(_pipeName),
+                        out bool createdNew
+                    )
+                )
                 {
                     Assert.True(createdNew);
                     var mutexSecurity = outer.GetAccessControl();
-                    mutexSecurity.AddAccessRule(new MutexAccessRule(WindowsIdentity.GetCurrent().Owner, MutexRights.FullControl, AccessControlType.Deny));
+                    mutexSecurity.AddAccessRule(
+                        new MutexAccessRule(
+                            WindowsIdentity.GetCurrent().Owner,
+                            MutexRights.FullControl,
+                            AccessControlType.Deny
+                        )
+                    );
                     outer.SetAccessControl(mutexSecurity);
 
                     var ranLocal = false;
@@ -115,8 +144,11 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                         {
                             ranLocal = true;
                             return 0;
-                        });
-                    var exitCode = client.RunCompilation(new[] { "/shared" }, _buildPaths, pipeName: _pipeName).ExitCode;
+                        }
+                    );
+                    var exitCode = client
+                        .RunCompilation(new[] { "/shared" }, _buildPaths, pipeName: _pipeName)
+                        .ExitCode;
                     Assert.Equal(0, exitCode);
                     Assert.True(ranLocal);
                 }
@@ -143,7 +175,12 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
 
                 var oneSec = TimeSpan.FromSeconds(1);
 
-                Assert.False(await tryConnectToNamedPipe((int)oneSec.TotalMilliseconds, cancellationToken: default));
+                Assert.False(
+                    await tryConnectToNamedPipe(
+                        (int)oneSec.TotalMilliseconds,
+                        cancellationToken: default
+                    )
+                );
 
                 // Try again with infinite timeout and cancel
                 var cts = new CancellationTokenSource();
@@ -151,15 +188,26 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                 Assert.False(connection.IsCompleted);
                 cts.Cancel();
                 await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                    async () => await connection);
+                    async () => await connection
+                );
 
                 // Create server and try again
                 using var serverData = CreateServer(pipeName);
-                Assert.True(await tryConnectToNamedPipe(Timeout.Infinite, cancellationToken: default));
+                Assert.True(
+                    await tryConnectToNamedPipe(Timeout.Infinite, cancellationToken: default)
+                );
 
-                async Task<bool> tryConnectToNamedPipe(int timeoutMs, CancellationToken cancellationToken)
+                async Task<bool> tryConnectToNamedPipe(
+                    int timeoutMs,
+                    CancellationToken cancellationToken
+                )
                 {
-                    using var pipeStream = await BuildServerConnection.TryConnectToServerAsync(pipeName, timeoutMs, _logger, cancellationToken);
+                    using var pipeStream = await BuildServerConnection.TryConnectToServerAsync(
+                        pipeName,
+                        timeoutMs,
+                        _logger,
+                        cancellationToken
+                    );
                     return pipeStream != null;
                 }
             }
@@ -179,9 +227,12 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                     {
                         ranServer = true;
                         return Task.FromResult<BuildResponse>(new RejectedBuildResponse(""));
-                    });
+                    }
+                );
 
-                var exitCode = client.RunCompilation(new[] { "/shared" }, _buildPaths, pipeName: _pipeName).ExitCode;
+                var exitCode = client
+                    .RunCompilation(new[] { "/shared" }, _buildPaths, pipeName: _pipeName)
+                    .ExitCode;
                 Assert.Equal(0, exitCode);
                 Assert.True(ranLocal);
                 Assert.True(ranServer);
@@ -205,7 +256,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                     out _hasShared,
                     out _keepAlive,
                     out _sessionKey,
-                    out _errorMessage);
+                    out _errorMessage
+                );
             }
 
             [Theory]
@@ -310,13 +362,17 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             [InlineData('/')]
             public void KeepAlive(char optionPrefix)
             {
-                Assert.True(Parse(optionPrefix + "keepalive:100", optionPrefix + "shared", "test.cs"));
+                Assert.True(
+                    Parse(optionPrefix + "keepalive:100", optionPrefix + "shared", "test.cs")
+                );
                 Assert.Equal("100", _keepAlive);
                 Assert.Equal(new[] { "test.cs" }, _parsedArgs);
                 Assert.True(_hasShared);
                 Assert.Null(_sessionKey);
 
-                Assert.True(Parse(optionPrefix + "keepalive=100", optionPrefix + "shared", "test.cs"));
+                Assert.True(
+                    Parse(optionPrefix + "keepalive=100", optionPrefix + "shared", "test.cs")
+                );
                 Assert.Equal("100", _keepAlive);
                 Assert.Equal(new[] { "test.cs" }, _parsedArgs);
                 Assert.True(_hasShared);
@@ -332,8 +388,16 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                 var path = string.Format(@"q:{0}the{0}path", Path.DirectorySeparatorChar);
                 var name = BuildServerConnection.GetPipeName(path);
                 Assert.Equal(name, BuildServerConnection.GetPipeName(path));
-                Assert.Equal(name, BuildServerConnection.GetPipeName(path + Path.DirectorySeparatorChar));
-                Assert.Equal(name, BuildServerConnection.GetPipeName(path + Path.DirectorySeparatorChar + Path.DirectorySeparatorChar));
+                Assert.Equal(
+                    name,
+                    BuildServerConnection.GetPipeName(path + Path.DirectorySeparatorChar)
+                );
+                Assert.Equal(
+                    name,
+                    BuildServerConnection.GetPipeName(
+                        path + Path.DirectorySeparatorChar + Path.DirectorySeparatorChar
+                    )
+                );
             }
 
             [Fact]

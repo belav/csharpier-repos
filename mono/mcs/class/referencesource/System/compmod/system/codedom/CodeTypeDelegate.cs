@@ -1,33 +1,31 @@
 //------------------------------------------------------------------------------
 // <copyright file="CodeTypeDelegate.cs" company="Microsoft">
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.CodeDom {
-
-    using System.Diagnostics;
+namespace System.CodeDom
+{
     using System;
-    using Microsoft.Win32;
     using System.Collections;
+    using System.Diagnostics;
     using System.Reflection;
     using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>
     ///       Represents a class or nested class.
     ///    </para>
     /// </devdoc>
-    [
-        ClassInterface(ClassInterfaceType.AutoDispatch),
-        ComVisible(true),
-        Serializable,
-    ]
-    public class CodeTypeDelegate : CodeTypeDeclaration {
-        private CodeParameterDeclarationExpressionCollection parameters = new CodeParameterDeclarationExpressionCollection();
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
+    public class CodeTypeDelegate : CodeTypeDeclaration
+    {
+        private CodeParameterDeclarationExpressionCollection parameters =
+            new CodeParameterDeclarationExpressionCollection();
         private CodeTypeReference returnType;
 
         /// <devdoc>
@@ -35,7 +33,8 @@ namespace System.CodeDom {
         ///       Initializes a new instance of <see cref='System.CodeDom.CodeTypeDelegate'/>.
         ///    </para>
         /// </devdoc>
-        public CodeTypeDelegate() {
+        public CodeTypeDelegate()
+        {
             TypeAttributes &= ~TypeAttributes.ClassSemanticsMask;
             TypeAttributes |= TypeAttributes.Class;
             BaseTypes.Clear();
@@ -47,7 +46,9 @@ namespace System.CodeDom {
         ///       Initializes a new instance of <see cref='System.CodeDom.CodeTypeDelegate'/>.
         ///    </para>
         /// </devdoc>
-        public CodeTypeDelegate(string name) : this() {
+        public CodeTypeDelegate(string name)
+            : this()
+        {
             Name = name;
         }
 
@@ -56,16 +57,17 @@ namespace System.CodeDom {
         ///       Gets or sets the return type of the delegate.
         ///    </para>
         /// </devdoc>
-        public CodeTypeReference ReturnType {
-            get {
-                if (returnType == null) {
+        public CodeTypeReference ReturnType
+        {
+            get
+            {
+                if (returnType == null)
+                {
                     returnType = new CodeTypeReference("");
                 }
                 return returnType;
             }
-            set {
-                returnType = value;
-            }
+            set { returnType = value; }
         }
 
         /// <devdoc>
@@ -73,10 +75,9 @@ namespace System.CodeDom {
         ///       The parameters of the delegate.
         ///    </para>
         /// </devdoc>
-        public CodeParameterDeclarationExpressionCollection Parameters {
-            get {
-                return parameters;
-            }
+        public CodeParameterDeclarationExpressionCollection Parameters
+        {
+            get { return parameters; }
         }
     }
 }

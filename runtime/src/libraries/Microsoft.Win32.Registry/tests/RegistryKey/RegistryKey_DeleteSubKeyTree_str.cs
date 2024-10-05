@@ -18,10 +18,16 @@ namespace Microsoft.Win32.RegistryTests
             Assert.Throws<ArgumentNullException>(() => TestRegistryKey.DeleteSubKeyTree(null));
 
             // Should throw if target subkey is system subkey and name is empty
-            AssertExtensions.Throws<ArgumentException>(null, () => Registry.CurrentUser.DeleteSubKeyTree(string.Empty));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Registry.CurrentUser.DeleteSubKeyTree(string.Empty)
+            );
 
             // Should throw because subkey doesn't exists
-            AssertExtensions.Throws<ArgumentException>(null, () => TestRegistryKey.DeleteSubKeyTree(name));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => TestRegistryKey.DeleteSubKeyTree(name)
+            );
 
             // Should throw because RegistryKey is readonly
             using (var rk = TestRegistryKey.OpenSubKey(string.Empty, false))
@@ -48,7 +54,7 @@ namespace Microsoft.Win32.RegistryTests
 
             Assert.Null(TestRegistryKey.OpenSubKey(TestRegistryKeyName));
         }
-        
+
         [Fact]
         public void SelfDeleteWithValuesTest()
         {
@@ -63,7 +69,7 @@ namespace Microsoft.Win32.RegistryTests
 
             Assert.Null(TestRegistryKey.OpenSubKey(TestRegistryKeyName));
         }
-        
+
         [Fact]
         public void SelfDeleteWithValuesTest_AnotherHandlePresent()
         {
@@ -97,7 +103,10 @@ namespace Microsoft.Win32.RegistryTests
         public void DeleteSubKeyTreeTest2()
         {
             // [] Add in multiple subkeys and then delete the root key
-            string[] subKeyNames = Enumerable.Range(1, 9).Select(x => "BLAH_" + x.ToString()).ToArray();
+            string[] subKeyNames = Enumerable
+                .Range(1, 9)
+                .Select(x => "BLAH_" + x.ToString())
+                .ToArray();
 
             using (RegistryKey rk = TestRegistryKey.CreateSubKey(TestRegistryKeyName))
             {
@@ -116,12 +125,15 @@ namespace Microsoft.Win32.RegistryTests
             TestRegistryKey.DeleteSubKeyTree(TestRegistryKeyName);
             Assert.Null(TestRegistryKey.OpenSubKey(TestRegistryKeyName));
         }
-        
+
         [Fact]
         public void DeleteSubKeyTreeTest3()
         {
             // [] Add in multiple subkeys and then delete the root key
-            string[] subKeyNames = Enumerable.Range(1, 9).Select(x => "BLAH_" + x.ToString()).ToArray();
+            string[] subKeyNames = Enumerable
+                .Range(1, 9)
+                .Select(x => "BLAH_" + x.ToString())
+                .ToArray();
 
             using (RegistryKey rk = TestRegistryKey.CreateSubKey(TestRegistryKeyName))
             {
@@ -151,12 +163,17 @@ namespace Microsoft.Win32.RegistryTests
         [Theory]
         [MemberData(nameof(TestRegistrySubKeyNames))]
         public void DeleteSubKeyTree_KeyExists_KeyDeleted(string expected, string subKeyName) =>
-            Verify_DeleteSubKeyTree_KeyExists_KeyDeleted(expected, () => TestRegistryKey.DeleteSubKeyTree(subKeyName));
-
+            Verify_DeleteSubKeyTree_KeyExists_KeyDeleted(
+                expected,
+                () => TestRegistryKey.DeleteSubKeyTree(subKeyName)
+            );
 
         [Theory]
         [MemberData(nameof(TestRegistrySubKeyNames))]
         public void DeleteSubKeyTree_KeyDoesNotExists_Throws(string expected, string subKeyName) =>
-            Verify_DeleteSubKeyTree_KeyDoesNotExists_Throws(expected, () => TestRegistryKey.DeleteSubKeyTree(subKeyName));
+            Verify_DeleteSubKeyTree_KeyDoesNotExists_Throws(
+                expected,
+                () => TestRegistryKey.DeleteSubKeyTree(subKeyName)
+            );
     }
 }

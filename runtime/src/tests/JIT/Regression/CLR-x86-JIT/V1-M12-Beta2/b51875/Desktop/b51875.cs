@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -20,11 +21,12 @@ namespace Test
             {
                 throw new Exception();
             }
-        EOM:
+            EOM:
             if (new Queue(10).Clone() == null)
                 return 1;
             return 0;
         }
+
         [Fact]
         public static int TestEntryPoint()
         {

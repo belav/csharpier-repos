@@ -47,16 +47,10 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             builder.WriteByte(0xcc);
             Assert.Equal(9, il.Offset);
 
-            AssertEx.Equal(new byte[]
-            {
-                0xFF,
-                0x58,
-                0xEE,
-                0xFE, 0x00,
-                0xDD,
-                0xFE, 0x1E,
-                0xCC
-            }, builder.ToArray());
+            AssertEx.Equal(
+                new byte[] { 0xFF, 0x58, 0xEE, 0xFE, 0x00, 0xDD, 0xFE, 0x1E, 0xCC },
+                builder.ToArray()
+            );
         }
 
         [Fact]
@@ -96,19 +90,60 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             il.CallIndirect(MetadataTokens.StandaloneSignatureHandle(0x001122));
             Assert.Equal(48, il.Offset);
 
-            AssertEx.Equal(new byte[]
-            {
-                0x56, 0x34, 0x12, 0x02,
-                0x7C, 0x7D, 0x7E, 0x7F,
-                (byte)ILOpCode.Ldstr, 0x03, 0x02, 0x01, 0x70,
-                (byte)ILOpCode.Call, 0xA2, 0xA1, 0xA0, 0x06,
-                (byte)ILOpCode.Call, 0xB2, 0xB1, 0xB0, 0x2B,
-                (byte)ILOpCode.Call, 0xC2, 0xC1, 0xC0, 0x0A,
-                (byte)ILOpCode.Call, 0xD2, 0xD1, 0xD0, 0x06,
-                (byte)ILOpCode.Call, 0xE2, 0xE1, 0xE0, 0x2B,
-                (byte)ILOpCode.Call, 0xF2, 0xF1, 0xF0, 0x0A,
-                (byte)ILOpCode.Calli, 0x22, 0x11, 0x00, 0x11
-            }, builder.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    0x56,
+                    0x34,
+                    0x12,
+                    0x02,
+                    0x7C,
+                    0x7D,
+                    0x7E,
+                    0x7F,
+                    (byte)ILOpCode.Ldstr,
+                    0x03,
+                    0x02,
+                    0x01,
+                    0x70,
+                    (byte)ILOpCode.Call,
+                    0xA2,
+                    0xA1,
+                    0xA0,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0xB2,
+                    0xB1,
+                    0xB0,
+                    0x2B,
+                    (byte)ILOpCode.Call,
+                    0xC2,
+                    0xC1,
+                    0xC0,
+                    0x0A,
+                    (byte)ILOpCode.Call,
+                    0xD2,
+                    0xD1,
+                    0xD0,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0xE2,
+                    0xE1,
+                    0xE0,
+                    0x2B,
+                    (byte)ILOpCode.Call,
+                    0xF2,
+                    0xF1,
+                    0xF0,
+                    0x0A,
+                    (byte)ILOpCode.Calli,
+                    0x22,
+                    0x11,
+                    0x00,
+                    0x11,
+                },
+                builder.ToArray()
+            );
         }
 
         [Fact]
@@ -129,25 +164,40 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             il.LoadConstantI4(int.MinValue);
             il.LoadConstantI4(int.MaxValue);
 
-            AssertEx.Equal(new byte[]
-            {
-                (byte)ILOpCode.Ldc_i4_m1,
-                (byte)ILOpCode.Ldc_i4_0,
-                (byte)ILOpCode.Ldc_i4_1,
-                (byte)ILOpCode.Ldc_i4_2,
-                (byte)ILOpCode.Ldc_i4_3,
-                (byte)ILOpCode.Ldc_i4_4,
-                (byte)ILOpCode.Ldc_i4_5,
-                (byte)ILOpCode.Ldc_i4_6,
-                (byte)ILOpCode.Ldc_i4_7,
-                (byte)ILOpCode.Ldc_i4_8,
-                (byte)ILOpCode.Ldc_i4_s, 0x80,
-                (byte)ILOpCode.Ldc_i4_s, 0x7F,
-                (byte)ILOpCode.Ldc_i4_s, 0xFE,
-                (byte)ILOpCode.Ldc_i4_s, 0x0A,
-                (byte)ILOpCode.Ldc_i4, 0x00, 0x00, 0x00, 0x80,
-                (byte)ILOpCode.Ldc_i4, 0xFF, 0xFF, 0xFF, 0x7F
-            }, builder.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    (byte)ILOpCode.Ldc_i4_m1,
+                    (byte)ILOpCode.Ldc_i4_0,
+                    (byte)ILOpCode.Ldc_i4_1,
+                    (byte)ILOpCode.Ldc_i4_2,
+                    (byte)ILOpCode.Ldc_i4_3,
+                    (byte)ILOpCode.Ldc_i4_4,
+                    (byte)ILOpCode.Ldc_i4_5,
+                    (byte)ILOpCode.Ldc_i4_6,
+                    (byte)ILOpCode.Ldc_i4_7,
+                    (byte)ILOpCode.Ldc_i4_8,
+                    (byte)ILOpCode.Ldc_i4_s,
+                    0x80,
+                    (byte)ILOpCode.Ldc_i4_s,
+                    0x7F,
+                    (byte)ILOpCode.Ldc_i4_s,
+                    0xFE,
+                    (byte)ILOpCode.Ldc_i4_s,
+                    0x0A,
+                    (byte)ILOpCode.Ldc_i4,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x80,
+                    (byte)ILOpCode.Ldc_i4,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0x7F,
+                },
+                builder.ToArray()
+            );
         }
 
         [Fact]
@@ -160,12 +210,39 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             il.LoadConstantI8(long.MinValue);
             il.LoadConstantI8(long.MaxValue);
 
-            AssertEx.Equal(new byte[]
-            {
-                (byte)ILOpCode.Ldc_i8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                (byte)ILOpCode.Ldc_i8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80,
-                (byte)ILOpCode.Ldc_i8, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x7F
-            }, builder.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    (byte)ILOpCode.Ldc_i8,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    (byte)ILOpCode.Ldc_i8,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x80,
+                    (byte)ILOpCode.Ldc_i8,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0x7F,
+                },
+                builder.ToArray()
+            );
         }
 
         [Fact]
@@ -182,16 +259,47 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             il.LoadConstantR4(float.PositiveInfinity);
             il.LoadConstantR4(float.Epsilon);
 
-            AssertEx.Equal(new byte[]
-            {
-                (byte)ILOpCode.Ldc_r4, 0x00, 0x00, 0x00, 0x00,
-                (byte)ILOpCode.Ldc_r4, 0xFF, 0xFF, 0x7F, 0x7F,
-                (byte)ILOpCode.Ldc_r4, 0xFF, 0xFF, 0x7F, 0xFF,
-                (byte)ILOpCode.Ldc_r4, 0x00, 0x00, 0xC0, 0xFF,
-                (byte)ILOpCode.Ldc_r4, 0x00, 0x00, 0x80, 0xFF,
-                (byte)ILOpCode.Ldc_r4, 0x00, 0x00, 0x80, 0x7F,
-                (byte)ILOpCode.Ldc_r4, 0x01, 0x00, 0x00, 0x00
-            }, builder.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    (byte)ILOpCode.Ldc_r4,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    (byte)ILOpCode.Ldc_r4,
+                    0xFF,
+                    0xFF,
+                    0x7F,
+                    0x7F,
+                    (byte)ILOpCode.Ldc_r4,
+                    0xFF,
+                    0xFF,
+                    0x7F,
+                    0xFF,
+                    (byte)ILOpCode.Ldc_r4,
+                    0x00,
+                    0x00,
+                    0xC0,
+                    0xFF,
+                    (byte)ILOpCode.Ldc_r4,
+                    0x00,
+                    0x00,
+                    0x80,
+                    0xFF,
+                    (byte)ILOpCode.Ldc_r4,
+                    0x00,
+                    0x00,
+                    0x80,
+                    0x7F,
+                    (byte)ILOpCode.Ldc_r4,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x00,
+                },
+                builder.ToArray()
+            );
         }
 
         [Fact]
@@ -208,16 +316,75 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             il.LoadConstantR8(double.PositiveInfinity);
             il.LoadConstantR8(double.Epsilon);
 
-            AssertEx.Equal(new byte[]
-            {
-                (byte)ILOpCode.Ldc_r8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                (byte)ILOpCode.Ldc_r8, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xEF, 0x7F,
-                (byte)ILOpCode.Ldc_r8, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xEF, 0xFF,
-                (byte)ILOpCode.Ldc_r8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF8, 0xFF,
-                (byte)ILOpCode.Ldc_r8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF0, 0xFF,
-                (byte)ILOpCode.Ldc_r8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF0, 0x7F,
-                (byte)ILOpCode.Ldc_r8, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-            }, builder.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    (byte)ILOpCode.Ldc_r8,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    (byte)ILOpCode.Ldc_r8,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xEF,
+                    0x7F,
+                    (byte)ILOpCode.Ldc_r8,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xEF,
+                    0xFF,
+                    (byte)ILOpCode.Ldc_r8,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0xF8,
+                    0xFF,
+                    (byte)ILOpCode.Ldc_r8,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0xF0,
+                    0xFF,
+                    (byte)ILOpCode.Ldc_r8,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0xF0,
+                    0x7F,
+                    (byte)ILOpCode.Ldc_r8,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                },
+                builder.ToArray()
+            );
         }
 
         [Fact]
@@ -235,17 +402,32 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             il.LoadLocal(byte.MaxValue + 1);
             il.LoadLocal(int.MaxValue);
 
-            AssertEx.Equal(new byte[]
-            {
-                (byte)ILOpCode.Ldloc_0,
-                (byte)ILOpCode.Ldloc_1,
-                (byte)ILOpCode.Ldloc_2,
-                (byte)ILOpCode.Ldloc_3,
-                (byte)ILOpCode.Ldloc_s, 0x04,
-                (byte)ILOpCode.Ldloc_s, 0xFF,
-                0xFE, 0x0C, 0x00, 0x01, 0x00, 0x00,
-                0xFE, 0x0C, 0xFF, 0xFF, 0xFF, 0x7F
-            }, builder.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    (byte)ILOpCode.Ldloc_0,
+                    (byte)ILOpCode.Ldloc_1,
+                    (byte)ILOpCode.Ldloc_2,
+                    (byte)ILOpCode.Ldloc_3,
+                    (byte)ILOpCode.Ldloc_s,
+                    0x04,
+                    (byte)ILOpCode.Ldloc_s,
+                    0xFF,
+                    0xFE,
+                    0x0C,
+                    0x00,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0xFE,
+                    0x0C,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0x7F,
+                },
+                builder.ToArray()
+            );
 
             Assert.Throws<ArgumentOutOfRangeException>(() => il.LoadLocal(-1));
             Assert.Throws<ArgumentOutOfRangeException>(() => il.LoadLocal(int.MinValue));
@@ -266,17 +448,32 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             il.StoreLocal(byte.MaxValue + 1);
             il.StoreLocal(int.MaxValue);
 
-            AssertEx.Equal(new byte[]
-            {
-                (byte)ILOpCode.Stloc_0,
-                (byte)ILOpCode.Stloc_1,
-                (byte)ILOpCode.Stloc_2,
-                (byte)ILOpCode.Stloc_3,
-                (byte)ILOpCode.Stloc_s, 0x04,
-                (byte)ILOpCode.Stloc_s, 0xFF,
-                0xFE, 0x0E, 0x00, 0x01, 0x00, 0x00,
-                0xFE, 0x0E, 0xFF, 0xFF, 0xFF, 0x7F
-            }, builder.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    (byte)ILOpCode.Stloc_0,
+                    (byte)ILOpCode.Stloc_1,
+                    (byte)ILOpCode.Stloc_2,
+                    (byte)ILOpCode.Stloc_3,
+                    (byte)ILOpCode.Stloc_s,
+                    0x04,
+                    (byte)ILOpCode.Stloc_s,
+                    0xFF,
+                    0xFE,
+                    0x0E,
+                    0x00,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0xFE,
+                    0x0E,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0x7F,
+                },
+                builder.ToArray()
+            );
 
             Assert.Throws<ArgumentOutOfRangeException>(() => il.StoreLocal(-1));
             Assert.Throws<ArgumentOutOfRangeException>(() => il.StoreLocal(int.MinValue));
@@ -297,17 +494,36 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             il.LoadLocalAddress(byte.MaxValue + 1);
             il.LoadLocalAddress(int.MaxValue);
 
-            AssertEx.Equal(new byte[]
-            {
-                (byte)ILOpCode.Ldloca_s, 0x00,
-                (byte)ILOpCode.Ldloca_s, 0x01,
-                (byte)ILOpCode.Ldloca_s, 0x02,
-                (byte)ILOpCode.Ldloca_s, 0x03,
-                (byte)ILOpCode.Ldloca_s, 0x04,
-                (byte)ILOpCode.Ldloca_s, 0xFF,
-                0xFE, 0x0D, 0x00, 0x01, 0x00, 0x00,
-                0xFE, 0x0D, 0xFF, 0xFF, 0xFF, 0x7F
-            }, builder.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    (byte)ILOpCode.Ldloca_s,
+                    0x00,
+                    (byte)ILOpCode.Ldloca_s,
+                    0x01,
+                    (byte)ILOpCode.Ldloca_s,
+                    0x02,
+                    (byte)ILOpCode.Ldloca_s,
+                    0x03,
+                    (byte)ILOpCode.Ldloca_s,
+                    0x04,
+                    (byte)ILOpCode.Ldloca_s,
+                    0xFF,
+                    0xFE,
+                    0x0D,
+                    0x00,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0xFE,
+                    0x0D,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0x7F,
+                },
+                builder.ToArray()
+            );
 
             Assert.Throws<ArgumentOutOfRangeException>(() => il.LoadLocalAddress(-1));
             Assert.Throws<ArgumentOutOfRangeException>(() => il.LoadLocalAddress(int.MinValue));
@@ -328,17 +544,32 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             il.LoadArgument(byte.MaxValue + 1);
             il.LoadArgument(int.MaxValue);
 
-            AssertEx.Equal(new byte[]
-            {
-                (byte)ILOpCode.Ldarg_0,
-                (byte)ILOpCode.Ldarg_1,
-                (byte)ILOpCode.Ldarg_2,
-                (byte)ILOpCode.Ldarg_3,
-                (byte)ILOpCode.Ldarg_s, 0x04,
-                (byte)ILOpCode.Ldarg_s, 0xFF,
-                0xFE, 0x09, 0x00, 0x01, 0x00, 0x00,
-                0xFE, 0x09, 0xFF, 0xFF, 0xFF, 0x7F
-            }, builder.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    (byte)ILOpCode.Ldarg_0,
+                    (byte)ILOpCode.Ldarg_1,
+                    (byte)ILOpCode.Ldarg_2,
+                    (byte)ILOpCode.Ldarg_3,
+                    (byte)ILOpCode.Ldarg_s,
+                    0x04,
+                    (byte)ILOpCode.Ldarg_s,
+                    0xFF,
+                    0xFE,
+                    0x09,
+                    0x00,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0xFE,
+                    0x09,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0x7F,
+                },
+                builder.ToArray()
+            );
 
             Assert.Throws<ArgumentOutOfRangeException>(() => il.LoadArgument(-1));
             Assert.Throws<ArgumentOutOfRangeException>(() => il.LoadArgument(int.MinValue));
@@ -359,17 +590,36 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             il.LoadArgumentAddress(byte.MaxValue + 1);
             il.LoadArgumentAddress(int.MaxValue);
 
-            AssertEx.Equal(new byte[]
-            {
-                (byte)ILOpCode.Ldarga_s, 0x00,
-                (byte)ILOpCode.Ldarga_s, 0x01,
-                (byte)ILOpCode.Ldarga_s, 0x02,
-                (byte)ILOpCode.Ldarga_s, 0x03,
-                (byte)ILOpCode.Ldarga_s, 0x04,
-                (byte)ILOpCode.Ldarga_s, 0xFF,
-                0xFE, 0x0A, 0x00, 0x01, 0x00, 0x00,
-                0xFE, 0x0A, 0xFF, 0xFF, 0xFF, 0x7F
-            }, builder.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    (byte)ILOpCode.Ldarga_s,
+                    0x00,
+                    (byte)ILOpCode.Ldarga_s,
+                    0x01,
+                    (byte)ILOpCode.Ldarga_s,
+                    0x02,
+                    (byte)ILOpCode.Ldarga_s,
+                    0x03,
+                    (byte)ILOpCode.Ldarga_s,
+                    0x04,
+                    (byte)ILOpCode.Ldarga_s,
+                    0xFF,
+                    0xFE,
+                    0x0A,
+                    0x00,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0xFE,
+                    0x0A,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0x7F,
+                },
+                builder.ToArray()
+            );
 
             Assert.Throws<ArgumentOutOfRangeException>(() => il.LoadArgumentAddress(-1));
             Assert.Throws<ArgumentOutOfRangeException>(() => il.LoadArgumentAddress(int.MinValue));
@@ -390,17 +640,36 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             il.StoreArgument(byte.MaxValue + 1);
             il.StoreArgument(int.MaxValue);
 
-            AssertEx.Equal(new byte[]
-            {
-                (byte)ILOpCode.Starg_s, 0x00,
-                (byte)ILOpCode.Starg_s, 0x01,
-                (byte)ILOpCode.Starg_s, 0x02,
-                (byte)ILOpCode.Starg_s, 0x03,
-                (byte)ILOpCode.Starg_s, 0x04,
-                (byte)ILOpCode.Starg_s, 0xFF,
-                0xFE, 0x0B, 0x00, 0x01, 0x00, 0x00,
-                0xFE, 0x0B, 0xFF, 0xFF, 0xFF, 0x7F
-            }, builder.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    (byte)ILOpCode.Starg_s,
+                    0x00,
+                    (byte)ILOpCode.Starg_s,
+                    0x01,
+                    (byte)ILOpCode.Starg_s,
+                    0x02,
+                    (byte)ILOpCode.Starg_s,
+                    0x03,
+                    (byte)ILOpCode.Starg_s,
+                    0x04,
+                    (byte)ILOpCode.Starg_s,
+                    0xFF,
+                    0xFE,
+                    0x0B,
+                    0x00,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0xFE,
+                    0x0B,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0x7F,
+                },
+                builder.ToArray()
+            );
 
             Assert.Throws<ArgumentOutOfRangeException>(() => il.StoreArgument(-1));
             Assert.Throws<ArgumentOutOfRangeException>(() => il.StoreArgument(int.MinValue));
@@ -442,37 +711,110 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             il.Branch(ILOpCode.Blt_un, l);
             il.Branch(ILOpCode.Leave, l);
 
-            AssertEx.Equal(new byte[]
-            {
-                (byte)ILOpCode.Br_s,      0xff,
-                (byte)ILOpCode.Brfalse_s, 0xff,
-                (byte)ILOpCode.Brtrue_s,  0xff,
-                (byte)ILOpCode.Beq_s,     0xff,
-                (byte)ILOpCode.Bge_s,     0xff,
-                (byte)ILOpCode.Bgt_s,     0xff,
-                (byte)ILOpCode.Ble_s,     0xff,
-                (byte)ILOpCode.Blt_s,     0xff,
-                (byte)ILOpCode.Bne_un_s,  0xff,
-                (byte)ILOpCode.Bge_un_s,  0xff,
-                (byte)ILOpCode.Bgt_un_s,  0xff,
-                (byte)ILOpCode.Ble_un_s,  0xff,
-                (byte)ILOpCode.Blt_un_s,  0xff,
-                (byte)ILOpCode.Leave_s,   0xff,
-                (byte)ILOpCode.Br,        0xff, 0xff, 0xff, 0xff,
-                (byte)ILOpCode.Brfalse,   0xff, 0xff, 0xff, 0xff,
-                (byte)ILOpCode.Brtrue,    0xff, 0xff, 0xff, 0xff,
-                (byte)ILOpCode.Beq,       0xff, 0xff, 0xff, 0xff,
-                (byte)ILOpCode.Bge,       0xff, 0xff, 0xff, 0xff,
-                (byte)ILOpCode.Bgt,       0xff, 0xff, 0xff, 0xff,
-                (byte)ILOpCode.Ble,       0xff, 0xff, 0xff, 0xff,
-                (byte)ILOpCode.Blt,       0xff, 0xff, 0xff, 0xff,
-                (byte)ILOpCode.Bne_un,    0xff, 0xff, 0xff, 0xff,
-                (byte)ILOpCode.Bge_un,    0xff, 0xff, 0xff, 0xff,
-                (byte)ILOpCode.Bgt_un,    0xff, 0xff, 0xff, 0xff,
-                (byte)ILOpCode.Ble_un,    0xff, 0xff, 0xff, 0xff,
-                (byte)ILOpCode.Blt_un,    0xff, 0xff, 0xff, 0xff,
-                (byte)ILOpCode.Leave,     0xff, 0xff, 0xff, 0xff,
-            }, builder.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    (byte)ILOpCode.Br_s,
+                    0xff,
+                    (byte)ILOpCode.Brfalse_s,
+                    0xff,
+                    (byte)ILOpCode.Brtrue_s,
+                    0xff,
+                    (byte)ILOpCode.Beq_s,
+                    0xff,
+                    (byte)ILOpCode.Bge_s,
+                    0xff,
+                    (byte)ILOpCode.Bgt_s,
+                    0xff,
+                    (byte)ILOpCode.Ble_s,
+                    0xff,
+                    (byte)ILOpCode.Blt_s,
+                    0xff,
+                    (byte)ILOpCode.Bne_un_s,
+                    0xff,
+                    (byte)ILOpCode.Bge_un_s,
+                    0xff,
+                    (byte)ILOpCode.Bgt_un_s,
+                    0xff,
+                    (byte)ILOpCode.Ble_un_s,
+                    0xff,
+                    (byte)ILOpCode.Blt_un_s,
+                    0xff,
+                    (byte)ILOpCode.Leave_s,
+                    0xff,
+                    (byte)ILOpCode.Br,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    (byte)ILOpCode.Brfalse,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    (byte)ILOpCode.Brtrue,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    (byte)ILOpCode.Beq,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    (byte)ILOpCode.Bge,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    (byte)ILOpCode.Bgt,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    (byte)ILOpCode.Ble,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    (byte)ILOpCode.Blt,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    (byte)ILOpCode.Bne_un,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    (byte)ILOpCode.Bge_un,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    (byte)ILOpCode.Bgt_un,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    (byte)ILOpCode.Ble_un,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    (byte)ILOpCode.Blt_un,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    (byte)ILOpCode.Leave,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                },
+                builder.ToArray()
+            );
         }
 
         [Fact]
@@ -487,22 +829,45 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             Assert.Throws<InvalidOperationException>(() => il.Token(0));
             Assert.Throws<InvalidOperationException>(() => il.DefineLabel());
             Assert.Throws<InvalidOperationException>(() => il.MarkLabel(l));
-            Assert.Throws<InvalidOperationException>(() => controlFlowBuilder.AddFinallyRegion(l, l, l, l));
-            Assert.Throws<InvalidOperationException>(() => new MethodBodyStreamEncoder(new BlobBuilder()).AddMethodBody(il));
+            Assert.Throws<InvalidOperationException>(
+                () => controlFlowBuilder.AddFinallyRegion(l, l, l, l)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => new MethodBodyStreamEncoder(new BlobBuilder()).AddMethodBody(il)
+            );
             switchEncoder.Branch(l);
             switchEncoder.Branch(l);
             switchEncoder.Branch(l);
             switchEncoder.Branch(l);
             Assert.Throws<InvalidOperationException>(() => switchEncoder.Branch(l));
 
-            AssertEx.Equal(new byte[]
-            {
-                (byte)ILOpCode.Switch, 0x04, 0x00, 0x00, 0x00,
-                0xff, 0xff, 0xff, 0xff,
-                0xff, 0xff, 0xff, 0xff,
-                0xff, 0xff, 0xff, 0xff,
-                0xff, 0xff, 0xff, 0xff
-            }, builder.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    (byte)ILOpCode.Switch,
+                    0x04,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                },
+                builder.ToArray()
+            );
         }
 
         [Fact]
@@ -518,15 +883,25 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             var l2 = ilcf2.DefineLabel();
 
             Assert.Throws<InvalidOperationException>(() => il.DefineLabel());
-            Assert.Throws<InvalidOperationException>(() => il.Branch(ILOpCode.Br, default(LabelHandle)));
+            Assert.Throws<InvalidOperationException>(
+                () => il.Branch(ILOpCode.Br, default(LabelHandle))
+            );
             Assert.Throws<InvalidOperationException>(() => il.MarkLabel(default(LabelHandle)));
 
-            Assert.Throws<ArgumentNullException>(() => ilcf1.Branch(ILOpCode.Br, default(LabelHandle)));
+            Assert.Throws<ArgumentNullException>(
+                () => ilcf1.Branch(ILOpCode.Br, default(LabelHandle))
+            );
             Assert.Throws<ArgumentNullException>(() => ilcf1.MarkLabel(default(LabelHandle)));
-            AssertExtensions.Throws<ArgumentException>("label", () => ilcf1.Branch(ILOpCode.Br, l2));
+            AssertExtensions.Throws<ArgumentException>(
+                "label",
+                () => ilcf1.Branch(ILOpCode.Br, l2)
+            );
             AssertExtensions.Throws<ArgumentException>("label", () => ilcf1.MarkLabel(l2));
 
-            AssertExtensions.Throws<ArgumentException>("opCode", () => ilcf1.Branch(ILOpCode.Box, l1));
+            AssertExtensions.Throws<ArgumentException>(
+                "opCode",
+                () => ilcf1.Branch(ILOpCode.Box, l1)
+            );
         }
 
         [Fact]
@@ -549,14 +924,18 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             var builder = new BlobBuilder();
             new MethodBodyStreamEncoder(builder).AddMethodBody(il);
 
-            AssertEx.Equal(new byte[]
-            {
-                0x16, // header
-                (byte)ILOpCode.Br_s, 0x02,
-                (byte)ILOpCode.Nop,
-                (byte)ILOpCode.Nop,
-                (byte)ILOpCode.Ret,
-            }, builder.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    0x16, // header
+                    (byte)ILOpCode.Br_s,
+                    0x02,
+                    (byte)ILOpCode.Nop,
+                    (byte)ILOpCode.Nop,
+                    (byte)ILOpCode.Ret,
+                },
+                builder.ToArray()
+            );
         }
     }
 }

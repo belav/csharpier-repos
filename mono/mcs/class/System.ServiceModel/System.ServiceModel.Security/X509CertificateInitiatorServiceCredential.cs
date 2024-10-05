@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,8 +27,8 @@
 //
 using System;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using System.IdentityModel.Selectors;
+using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Configuration;
 using System.ServiceModel.Description;
@@ -36,42 +36,60 @@ using System.ServiceModel.Security.Tokens;
 
 namespace System.ServiceModel.Security
 {
-	public sealed class X509CertificateInitiatorServiceCredential
-	{
-		internal X509CertificateInitiatorServiceCredential ()
-		{
-		}
+    public sealed class X509CertificateInitiatorServiceCredential
+    {
+        internal X509CertificateInitiatorServiceCredential() { }
 
-		X509ClientCertificateAuthentication auth =
-			new X509ClientCertificateAuthentication ();
-		X509Certificate2 certificate;
+        X509ClientCertificateAuthentication auth = new X509ClientCertificateAuthentication();
+        X509Certificate2 certificate;
 
-		internal X509CertificateInitiatorServiceCredential Clone ()
-		{
-			return new X509CertificateInitiatorServiceCredential () { auth = this.auth.Clone (), certificate = this.certificate };
-		}
+        internal X509CertificateInitiatorServiceCredential Clone()
+        {
+            return new X509CertificateInitiatorServiceCredential()
+            {
+                auth = this.auth.Clone(),
+                certificate = this.certificate,
+            };
+        }
 
-		public X509ClientCertificateAuthentication Authentication {
-			get { return auth; }
-		}
+        public X509ClientCertificateAuthentication Authentication
+        {
+            get { return auth; }
+        }
 
-		public X509Certificate2 Certificate {
-			get { return certificate; }
-			set { certificate = value; }
-		}
+        public X509Certificate2 Certificate
+        {
+            get { return certificate; }
+            set { certificate = value; }
+        }
 
-		public void SetCertificate (StoreLocation storeLocation,
-			StoreName storeName, X509FindType findType,
-			object findValue)
-		{
-			certificate = ConfigUtil.CreateCertificateFrom (storeLocation, storeName, findType, findValue);
-		}
+        public void SetCertificate(
+            StoreLocation storeLocation,
+            StoreName storeName,
+            X509FindType findType,
+            object findValue
+        )
+        {
+            certificate = ConfigUtil.CreateCertificateFrom(
+                storeLocation,
+                storeName,
+                findType,
+                findValue
+            );
+        }
 
-		public void SetCertificate (
-			string subjectName, StoreLocation storeLocation,
-			StoreName storeName)
-		{
-			certificate = ConfigUtil.CreateCertificateFrom (storeLocation, storeName, X509FindType.FindBySubjectName, subjectName);
-		}
-	}
+        public void SetCertificate(
+            string subjectName,
+            StoreLocation storeLocation,
+            StoreName storeName
+        )
+        {
+            certificate = ConfigUtil.CreateCertificateFrom(
+                storeLocation,
+                storeName,
+                X509FindType.FindBySubjectName,
+                subjectName
+            );
+        }
+    }
 }

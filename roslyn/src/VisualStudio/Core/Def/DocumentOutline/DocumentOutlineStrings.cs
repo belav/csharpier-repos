@@ -6,7 +6,6 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
 {
     internal static class DocumentOutlineStrings
     {
-        public static string Document_Outline
-            => ServicesVSResources.Document_Outline;
+        public static string Document_Outline => ServicesVSResources.Document_Outline;
     }
 }

@@ -13,9 +13,6 @@ namespace System.Web.Mvc
         /// <summary>
         /// Gets the MethodInfo
         /// </summary>
-        MethodInfo MethodInfo
-        {
-            get;
-        }
+        MethodInfo MethodInfo { get; }
     }
 }

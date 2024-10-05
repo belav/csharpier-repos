@@ -80,7 +80,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""CPU"": ""Intel"",
   ""PSU"": ""500W"",
   ""Drives"": [
@@ -89,7 +90,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
     ""500 gigabyte hard drive"",
     ""200 gigabyte hard drive""
   ]
-}", sb.ToString());
+}",
+                sb.ToString()
+            );
         }
     }
 }

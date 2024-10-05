@@ -12,14 +12,27 @@ using Microsoft.CodeAnalysis.SimplifyLinqExpression;
 
 namespace Microsoft.CodeAnalysis.CSharp.SimplifyLinqExpression
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.SimplifyLinqExpression), Shared]
-    internal sealed class CSharpSimplifyLinqExpressionCodeFixProvider : AbstractSimplifyLinqExpressionCodeFixProvider<InvocationExpressionSyntax, SimpleNameSyntax, ExpressionSyntax>
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.SimplifyLinqExpression
+        ),
+        Shared
+    ]
+    internal sealed class CSharpSimplifyLinqExpressionCodeFixProvider
+        : AbstractSimplifyLinqExpressionCodeFixProvider<
+            InvocationExpressionSyntax,
+            SimpleNameSyntax,
+            ExpressionSyntax
+        >
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpSimplifyLinqExpressionCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpSimplifyLinqExpressionCodeFixProvider() { }
 
         protected override ISyntaxFacts SyntaxFacts => CSharpSyntaxFacts.Instance;
     }

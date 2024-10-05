@@ -24,16 +24,16 @@ namespace System.Data.Mapping.ViewGeneration.Structures
     using AttributeSet = Set<MemberPath>;
 
     /// <summary>
-    /// This class stores the C or S query. For example, 
-    /// (C) SELECT (p type Person) AS D1, p.pid, p.name FROM p in P WHERE D1 
+    /// This class stores the C or S query. For example,
+    /// (C) SELECT (p type Person) AS D1, p.pid, p.name FROM p in P WHERE D1
     /// (S) SELECT True AS D1, pid, name FROM SPerson WHERE D1
-    /// 
+    ///
     /// The cell query is stored in a "factored" manner for ease of
     /// cell-merging and cell manipulation. It contains:
     /// * Projection: A sequence of slots and a sequence of boolean slots (one
     ///   for each cell in the extent)
     /// * A From part represented as a Join tree
-    /// * A where clause 
+    /// * A where clause
     /// </summary>
     internal class CellQuery : InternalBase
     {
@@ -44,22 +44,26 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         internal enum SelectDistinct
         {
             Yes,
-            No
+            No,
         }
 
         // The boolean expressions that essentially capture the type information
         // Fixed-size list; NULL in the list means 'unused'
         private List<BoolExpression> m_boolExprs;
+
         // The fields including the key fields
         // May contain NULLs - means 'not in the projection'
         private ProjectedSlot[] m_projectedSlots;
+
         // where clause: An expression formed using the boolExprs
         private BoolExpression m_whereClause;
         private BoolExpression m_originalWhereClause; // m_originalWhereClause is not changed
-        
+
         private SelectDistinct m_selectDistinct;
+
         // The from part of the query
         private MemberPath m_extentMemberPath;
+
         // The basic cell relation for all slots in this
         private BasicCellRelation m_basicCellRelation;
         #endregion
@@ -68,20 +72,29 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         // effects: Creates a cell query with the given projection (slots),
         // from part (joinTreeRoot) and the predicate (whereClause)
         // Used for cell creation
-        internal CellQuery(List<ProjectedSlot> slots, BoolExpression whereClause, MemberPath rootMember, SelectDistinct eliminateDuplicates)
-            : this(slots.ToArray(), whereClause, new List<BoolExpression>(), eliminateDuplicates, rootMember)
+        internal CellQuery(
+            List<ProjectedSlot> slots,
+            BoolExpression whereClause,
+            MemberPath rootMember,
+            SelectDistinct eliminateDuplicates
+        )
+            : this(
+                slots.ToArray(),
+                whereClause,
+                new List<BoolExpression>(),
+                eliminateDuplicates,
+                rootMember
+            ) { }
+
+        // effects: Given all the fields, just sets them.
+        internal CellQuery(
+            ProjectedSlot[] projectedSlots,
+            BoolExpression whereClause,
+            List<BoolExpression> boolExprs,
+            SelectDistinct elimDupl,
+            MemberPath rootMember
+        )
         {
-        }
-
-
-
-        // effects: Given all the fields, just sets them. 
-        internal CellQuery(ProjectedSlot[] projectedSlots,
-                          BoolExpression whereClause,
-                          List<BoolExpression> boolExprs,
-                          SelectDistinct elimDupl, MemberPath rootMember)
-        {
-            
             m_boolExprs = boolExprs;
             m_projectedSlots = projectedSlots;
             m_whereClause = whereClause;
@@ -106,11 +119,14 @@ namespace System.Data.Mapping.ViewGeneration.Structures
 
         // effects: Given an existing cellquery, makes a new one based on it
         // but uses the slots as specified with newSlots
-        private CellQuery(CellQuery existing, ProjectedSlot[] newSlots) :
-            this(newSlots, existing.m_whereClause, existing.m_boolExprs,
-                 existing.m_selectDistinct, existing.m_extentMemberPath)
-        {
-        }
+        private CellQuery(CellQuery existing, ProjectedSlot[] newSlots)
+            : this(
+                newSlots,
+                existing.m_whereClause,
+                existing.m_boolExprs,
+                existing.m_selectDistinct,
+                existing.m_extentMemberPath
+            ) { }
         #endregion
 
         #region Properties
@@ -170,7 +186,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         {
             get
             {
-                Debug.Assert(m_basicCellRelation != null, "BasicCellRelation must be created first");
+                Debug.Assert(
+                    m_basicCellRelation != null,
+                    "BasicCellRelation must be created first"
+                );
                 return m_basicCellRelation;
             }
         }
@@ -207,7 +226,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         {
             // slotMap stores the slots on the S-side and the
             // C-side properties that it maps to
-            KeyToListMap<MemberProjectedSlot, int> slotMap = new KeyToListMap<MemberProjectedSlot, int>(ProjectedSlot.EqualityComparer);
+            KeyToListMap<MemberProjectedSlot, int> slotMap = new KeyToListMap<
+                MemberProjectedSlot,
+                int
+            >(ProjectedSlot.EqualityComparer);
 
             // Note that this does work for self-association. In the manager
             // employee example, ManagerId and EmployeeId from the SEmployee
@@ -232,8 +254,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 ReadOnlyCollection<int> indexes = slotMap.ListForKey(slot);
                 Debug.Assert(indexes.Count >= 1, "Each slot must have one index at least");
 
-                if (indexes.Count > 1 &&
-                    cQuery.AreSlotsEquivalentViaRefConstraints(indexes) == false)
+                if (
+                    indexes.Count > 1
+                    && cQuery.AreSlotsEquivalentViaRefConstraints(indexes) == false
+                )
                 {
                     // The column is mapped to more than one property and it
                     // failed the "association corresponds to referential
@@ -242,7 +266,9 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                     isErrorSituation = true;
                     if (builder == null)
                     {
-                        builder = new StringBuilder(System.Data.Entity.Strings.ViewGen_Duplicate_CProperties(Extent.Name));
+                        builder = new StringBuilder(
+                            System.Data.Entity.Strings.ViewGen_Duplicate_CProperties(Extent.Name)
+                        );
                         builder.AppendLine();
                     }
                     StringBuilder tmpBuilder = new StringBuilder();
@@ -254,10 +280,16 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                             tmpBuilder.Append(", ");
                         }
                         // The slot must be a JoinTreeSlot. If it isn't it is an internal error
-                        MemberProjectedSlot cSlot = (MemberProjectedSlot)cQuery.m_projectedSlots[index];
+                        MemberProjectedSlot cSlot = (MemberProjectedSlot)
+                            cQuery.m_projectedSlots[index];
                         tmpBuilder.Append(cSlot.ToUserString());
                     }
-                    builder.AppendLine(Strings.ViewGen_Duplicate_CProperties_IsMapped(slot.ToUserString(), tmpBuilder.ToString()));
+                    builder.AppendLine(
+                        Strings.ViewGen_Duplicate_CProperties_IsMapped(
+                            slot.ToUserString(),
+                            tmpBuilder.ToString()
+                        )
+                    );
                 }
             }
 
@@ -266,14 +298,20 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 return null;
             }
 
-            ErrorLog.Record record = new ErrorLog.Record(true, ViewGenErrorCode.DuplicateCPropertiesMapped, builder.ToString(), sourceCell, String.Empty);
+            ErrorLog.Record record = new ErrorLog.Record(
+                true,
+                ViewGenErrorCode.DuplicateCPropertiesMapped,
+                builder.ToString(),
+                sourceCell,
+                String.Empty
+            );
             return record;
         }
 
         // requires: "this" is a query on the C-side
         // and cSideSlotIndexes corresponds to the indexes
         // (into "this") that the slot is being mapped into
-        // cSideSlotIndexes.Count > 1 - that is, a particular column in "this"'s corresponding S-Query 
+        // cSideSlotIndexes.Count > 1 - that is, a particular column in "this"'s corresponding S-Query
         // has been mapped to more than one property in "this"
         //
         // effects: Checks that the multiple mappings on the C-side are
@@ -287,7 +325,6 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         // kept equal via an RI constraint
         private bool AreSlotsEquivalentViaRefConstraints(ReadOnlyCollection<int> cSideSlotIndexes)
         {
-
             // Check (a): Must be an association
             AssociationSet assocSet = Extent as AssociationSet;
             if (assocSet == null)
@@ -303,7 +340,7 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 return false;
             }
 
-            // They better be join tree slots (if they are mapped!) and map to opposite ends 
+            // They better be join tree slots (if they are mapped!) and map to opposite ends
             MemberProjectedSlot slot0 = (MemberProjectedSlot)m_projectedSlots[cSideSlotIndexes[0]];
             MemberProjectedSlot slot1 = (MemberProjectedSlot)m_projectedSlots[cSideSlotIndexes[1]];
 
@@ -314,7 +351,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         // effects: For each slot that has a NotNull condition in the where
         // clause, checks if it is projected. If all such slots are
         // projected, returns null. Else returns an error record
-        internal ErrorLog.Record CheckForProjectedNotNullSlots(Cell sourceCell, IEnumerable<Cell> associationSets)
+        internal ErrorLog.Record CheckForProjectedNotNullSlots(
+            Cell sourceCell,
+            IEnumerable<Cell> associationSets
+        )
         {
             StringBuilder builder = new StringBuilder();
             bool foundError = false;
@@ -323,27 +363,59 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             {
                 if (restriction.Domain.ContainsNotNull())
                 {
-                    MemberProjectedSlot slot = MemberProjectedSlot.GetSlotForMember(m_projectedSlots, restriction.RestrictedMemberSlot.MemberPath);
+                    MemberProjectedSlot slot = MemberProjectedSlot.GetSlotForMember(
+                        m_projectedSlots,
+                        restriction.RestrictedMemberSlot.MemberPath
+                    );
                     if (slot == null) //member with not null condition is not mapped in this extent
                     {
                         bool missingMapping = true;
-                        if(Extent is EntitySet)
+                        if (Extent is EntitySet)
                         {
                             bool isCQuery = sourceCell.CQuery == this;
-                            ViewTarget target = isCQuery ? ViewTarget.QueryView : ViewTarget.UpdateView;
-                            CellQuery rightCellQuery = isCQuery? sourceCell.SQuery : sourceCell.CQuery;
-                            
+                            ViewTarget target = isCQuery
+                                ? ViewTarget.QueryView
+                                : ViewTarget.UpdateView;
+                            CellQuery rightCellQuery = isCQuery
+                                ? sourceCell.SQuery
+                                : sourceCell.CQuery;
+
                             //Find out if there is an association mapping but only if the current Not Null condition is on an EntitySet
                             EntitySet rightExtent = rightCellQuery.Extent as EntitySet;
                             if (rightExtent != null)
                             {
-                                List<AssociationSet> associations = MetadataHelper.GetAssociationsForEntitySet(rightCellQuery.Extent as EntitySet);
-                                foreach (var association in associations.Where(association => association.AssociationSetEnds.Any(end => ( end.CorrespondingAssociationEndMember.RelationshipMultiplicity == RelationshipMultiplicity.One && 
-                                    (MetadataHelper.GetOppositeEnd(end).EntitySet.EdmEquals(rightExtent))))))
+                                List<AssociationSet> associations =
+                                    MetadataHelper.GetAssociationsForEntitySet(
+                                        rightCellQuery.Extent as EntitySet
+                                    );
+                                foreach (
+                                    var association in associations.Where(association =>
+                                        association.AssociationSetEnds.Any(end =>
+                                            (
+                                                end.CorrespondingAssociationEndMember.RelationshipMultiplicity
+                                                    == RelationshipMultiplicity.One
+                                                && (
+                                                    MetadataHelper
+                                                        .GetOppositeEnd(end)
+                                                        .EntitySet.EdmEquals(rightExtent)
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
                                 {
-                                    foreach (var associationCell in associationSets.Where(c => c.GetRightQuery(target).Extent.EdmEquals(association)))
+                                    foreach (
+                                        var associationCell in associationSets.Where(c =>
+                                            c.GetRightQuery(target).Extent.EdmEquals(association)
+                                        )
+                                    )
                                     {
-                                        if (MemberProjectedSlot.GetSlotForMember(associationCell.GetLeftQuery(target).ProjectedSlots, restriction.RestrictedMemberSlot.MemberPath) != null)
+                                        if (
+                                            MemberProjectedSlot.GetSlotForMember(
+                                                associationCell.GetLeftQuery(target).ProjectedSlots,
+                                                restriction.RestrictedMemberSlot.MemberPath
+                                            ) != null
+                                        )
                                         {
                                             missingMapping = false;
                                         }
@@ -355,8 +427,11 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                         if (missingMapping)
                         {
                             // condition of NotNull and slot not being projected
-                            builder.AppendLine(System.Data.Entity.Strings.ViewGen_NotNull_No_Projected_Slot(
-                                               restriction.RestrictedMemberSlot.MemberPath.PathToString(false)));
+                            builder.AppendLine(
+                                System.Data.Entity.Strings.ViewGen_NotNull_No_Projected_Slot(
+                                    restriction.RestrictedMemberSlot.MemberPath.PathToString(false)
+                                )
+                            );
                             foundError = true;
                         }
                     }
@@ -366,18 +441,27 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             {
                 return null;
             }
-            ErrorLog.Record record = new ErrorLog.Record(true, ViewGenErrorCode.NotNullNoProjectedSlot, builder.ToString(), sourceCell, String.Empty);
+            ErrorLog.Record record = new ErrorLog.Record(
+                true,
+                ViewGenErrorCode.NotNullNoProjectedSlot,
+                builder.ToString(),
+                sourceCell,
+                String.Empty
+            );
             return record;
         }
 
         internal void FixMissingSlotAsDefaultConstant(int slotNumber, ConstantProjectedSlot slot)
         {
-            Debug.Assert(m_projectedSlots[slotNumber] == null, "Another attempt to plug in a default value");
+            Debug.Assert(
+                m_projectedSlots[slotNumber] == null,
+                "Another attempt to plug in a default value"
+            );
             m_projectedSlots[slotNumber] = slot;
         }
 
         // requires: projectedSlotMap which contains a mapping of the fields
-        // for "this" to integers 
+        // for "this" to integers
         // effects: Align the fields of this cell query using the
         // projectedSlotMap and generates a new query into newMainQuery
         // Based on the re-aligned fields in this, re-aligns the
@@ -389,10 +473,13 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         //            projectedSlotMap: A -> 0, B -> 1, C -> 2
         //   output:  Proj[A,B,null] = Proj[F,"7",null]
         //            Proj[null,B,C] = Proj[null,I,H]
-        internal void CreateFieldAlignedCellQueries(CellQuery otherQuery, MemberProjectionIndex projectedSlotMap,
-                                                    out CellQuery newMainQuery, out CellQuery newOtherQuery)
+        internal void CreateFieldAlignedCellQueries(
+            CellQuery otherQuery,
+            MemberProjectionIndex projectedSlotMap,
+            out CellQuery newMainQuery,
+            out CellQuery newOtherQuery
+        )
         {
-
             // mainSlots and otherSlots hold the new slots for two queries
             int numAlignedSlots = projectedSlotMap.Count;
             ProjectedSlot[] mainSlots = new ProjectedSlot[numAlignedSlots];
@@ -401,7 +488,6 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             // Go through the slots for this query and find the new slot for them
             for (int i = 0; i < m_projectedSlots.Length; i++)
             {
-
                 MemberProjectedSlot slot = m_projectedSlots[i] as MemberProjectedSlot;
                 Debug.Assert(slot != null, "All slots during cell normalization must field slots");
                 // Get the the ith slot's variable and then get the
@@ -455,8 +541,12 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         // present in the projected slots of this query. Returns null
         // otherwise. ownerCell indicates the cell that owns this and
         // resourceString is a resource used for error messages
-        internal ErrorLog.Record VerifyKeysPresent(Cell ownerCell, Func<object, object, string> formatEntitySetMessage,
-            Func<object, object, object, string> formatAssociationSetMessage, ViewGenErrorCode errorCode)
+        internal ErrorLog.Record VerifyKeysPresent(
+            Cell ownerCell,
+            Func<object, object, string> formatEntitySetMessage,
+            Func<object, object, object, string> formatAssociationSetMessage,
+            ViewGenErrorCode errorCode
+        )
         {
             List<MemberPath> prefixes = new List<MemberPath>(1);
             // Keep track of the key corresponding to each prefix
@@ -471,7 +561,6 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 List<ExtentKey> entitySetKeys = ExtentKey.GetKeysForEntityType(prefix, entityType);
                 Debug.Assert(entitySetKeys.Count == 1, "Currently, we only support primary keys");
                 keys.Add(entitySetKeys[0]);
-
             }
             else
             {
@@ -481,11 +570,14 @@ namespace System.Data.Mapping.ViewGeneration.Structures
 
                 foreach (AssociationSetEnd relationEnd in relationshipSet.AssociationSetEnds)
                 {
-                    AssociationEndMember assocEndMember = relationEnd.CorrespondingAssociationEndMember;
+                    AssociationEndMember assocEndMember =
+                        relationEnd.CorrespondingAssociationEndMember;
                     MemberPath prefix = new MemberPath(relationshipSet, assocEndMember);
                     prefixes.Add(prefix);
-                    List<ExtentKey> endKeys = ExtentKey.GetKeysForEntityType(prefix,
-                                                                             MetadataHelper.GetEntityTypeForEnd(assocEndMember));
+                    List<ExtentKey> endKeys = ExtentKey.GetKeysForEntityType(
+                        prefix,
+                        MetadataHelper.GetEntityTypeForEnd(assocEndMember)
+                    );
                     Debug.Assert(endKeys.Count == 1, "Currently, we only support primary keys");
                     keys.Add(endKeys[0]);
                 }
@@ -495,23 +587,42 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             {
                 MemberPath prefix = prefixes[i];
                 // Get all or none key slots that are being projected in this cell query
-                List<MemberProjectedSlot> keySlots = MemberProjectedSlot.GetKeySlots(GetMemberProjectedSlots(), prefix);
+                List<MemberProjectedSlot> keySlots = MemberProjectedSlot.GetKeySlots(
+                    GetMemberProjectedSlots(),
+                    prefix
+                );
                 if (keySlots == null)
                 {
                     ExtentKey key = keys[i];
                     string message;
                     if (Extent is EntitySet)
                     {
-                        string keyPropertiesString = MemberPath.PropertiesToUserString(key.KeyFields, true);
+                        string keyPropertiesString = MemberPath.PropertiesToUserString(
+                            key.KeyFields,
+                            true
+                        );
                         message = formatEntitySetMessage(keyPropertiesString, Extent.Name);
                     }
                     else
                     {
                         string endName = prefix.RootEdmMember.Name;
-                        string keyPropertiesString = MemberPath.PropertiesToUserString(key.KeyFields, false);
-                        message = formatAssociationSetMessage(keyPropertiesString, endName, Extent.Name);
+                        string keyPropertiesString = MemberPath.PropertiesToUserString(
+                            key.KeyFields,
+                            false
+                        );
+                        message = formatAssociationSetMessage(
+                            keyPropertiesString,
+                            endName,
+                            Extent.Name
+                        );
                     }
-                    ErrorLog.Record error = new ErrorLog.Record(true, errorCode, message, ownerCell, String.Empty);
+                    ErrorLog.Record error = new ErrorLog.Record(
+                        true,
+                        errorCode,
+                        message,
+                        ownerCell,
+                        String.Empty
+                    );
                     return error;
                 }
             }
@@ -543,7 +654,9 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         // Output list is a copy, i.e., can be modified by the caller
         internal List<MemberProjectedSlot> GetAllQuerySlots()
         {
-            HashSet<MemberProjectedSlot> slots = new HashSet<MemberProjectedSlot>(GetMemberProjectedSlots());
+            HashSet<MemberProjectedSlot> slots = new HashSet<MemberProjectedSlot>(
+                GetMemberProjectedSlots()
+            );
             slots.Add(new MemberProjectedSlot(SourceExtentMemberPath));
             foreach (var restriction in Conditions)
             {
@@ -597,13 +710,16 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 { // member is not projected
                     return null;
                 }
-                Debug.Assert(slotIndexes.Count == 1, "Expecting the path to be projected only once");
+                Debug.Assert(
+                    slotIndexes.Count == 1,
+                    "Expecting the path to be projected only once"
+                );
                 pathIndexes.Add(slotIndexes[0]);
             }
             return pathIndexes;
         }
 
-        // effects : Return the slot numbers for members in Cell Query that 
+        // effects : Return the slot numbers for members in Cell Query that
         //           represent the association end member passed in.
         internal List<int> GetAssociationEndSlots(AssociationEndMember endMember)
         {
@@ -624,8 +740,11 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         // Returns a set of those paths in the same order as paths. If even
         // one of the path entries is not projected in the cellquery, returns null
         // If a path is projected more than once, than we choose the one from the
-        // slotsToSearchFrom domain. 
-        internal List<int> GetProjectedPositions(IEnumerable<MemberPath> paths, List<int> slotsToSearchFrom)
+        // slotsToSearchFrom domain.
+        internal List<int> GetProjectedPositions(
+            IEnumerable<MemberPath> paths,
+            List<int> slotsToSearchFrom
+        )
         {
             List<int> pathIndexes = new List<int>();
             foreach (MemberPath member in paths)
@@ -662,7 +781,6 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             return pathIndexes;
         }
 
-
         // requires: The CellConstantDomains in the OneOfConsts of the where
         // clause are partially done
         // effects: Given the domains of different variables in domainMap,
@@ -675,10 +793,17 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             {
                 BoolLiteral literal = atom.AsLiteral;
                 MemberRestriction restriction = literal as MemberRestriction;
-                Debug.Assert(restriction != null, "All bool literals must be OneOfConst at this point");
+                Debug.Assert(
+                    restriction != null,
+                    "All bool literals must be OneOfConst at this point"
+                );
                 // The oneOfConst needs to be fixed with the new possible values from the domainMap.
-                IEnumerable<Constant> possibleValues = domainMap.GetDomain(restriction.RestrictedMemberSlot.MemberPath);
-                MemberRestriction newOneOf = restriction.CreateCompleteMemberRestriction(possibleValues);
+                IEnumerable<Constant> possibleValues = domainMap.GetDomain(
+                    restriction.RestrictedMemberSlot.MemberPath
+                );
+                MemberRestriction newOneOf = restriction.CreateCompleteMemberRestriction(
+                    possibleValues
+                );
 
                 // Prevent optimization of single constraint e.g: "300 in (300)"
                 // But we want to optimize type constants e.g: "category in (Category)"
@@ -686,10 +811,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
 
                 ScalarRestriction scalarConst = restriction as ScalarRestriction;
                 bool addSentinel =
-                    scalarConst != null &&
-                    !scalarConst.Domain.Contains(Constant.Null) &&
-                    !scalarConst.Domain.Contains(Constant.NotNull) &&
-                    !scalarConst.Domain.Contains(Constant.Undefined);
+                    scalarConst != null
+                    && !scalarConst.Domain.Contains(Constant.Null)
+                    && !scalarConst.Domain.Contains(Constant.NotNull)
+                    && !scalarConst.Domain.Contains(Constant.Undefined);
 
                 if (addSentinel)
                 {
@@ -702,7 +827,6 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 {
                     domainMap.RemoveSentinel(newOneOf.RestrictedMemberSlot.MemberPath);
                 }
-
             }
             // We create a new whereClause that has the memberDomainMap set
             if (atoms.Count > 0)
@@ -750,8 +874,9 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             return GetConjunctsFromWhereClause(m_originalWhereClause);
         }
 
-
-        private IEnumerable<MemberRestriction> GetConjunctsFromWhereClause(BoolExpression whereClause)
+        private IEnumerable<MemberRestriction> GetConjunctsFromWhereClause(
+            BoolExpression whereClause
+        )
         {
             foreach (BoolExpression boolExpr in whereClause.Atoms)
             {
@@ -767,7 +892,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
 
         // requires: whereClause is of the form specified in GetConjunctsFromWhereClause
         // effects: Converts the whereclause to a user-readable string
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Performance",
+            "CA1811:AvoidUncalledPrivateCode"
+        )]
         internal void WhereClauseToUserString(StringBuilder builder, MetadataWorkspace workspace)
         {
             bool isFirst = true;
@@ -803,8 +931,6 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             // Create a base cell relation that has all the scalar slots of this
             m_basicCellRelation = new BasicCellRelation(this, viewCellRelation, slots);
         }
-
-        
 
         #endregion
 
@@ -881,7 +1007,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         }
 
         // eSQL representation of cell query
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Performance",
+            "CA1811:AvoidUncalledPrivateCode"
+        )]
         internal string ToESqlString()
         {
             StringBuilder builder = new StringBuilder();
@@ -900,7 +1029,7 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 jtn.MemberPath.AsEsql(sb, "e");
                 builder.AppendFormat("{0}, ", sb.ToString());
             }
-            //remove the extra-comma after the last slot         
+            //remove the extra-comma after the last slot
             builder.Remove(builder.Length - 2, 2);
 
             builder.Append("\n\tFROM ");
@@ -923,7 +1052,5 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         }
 
         #endregion
-
     }
-
 }

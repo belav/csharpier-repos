@@ -6,19 +6,19 @@
 //------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using System.Xml.Schema;
 using System.Diagnostics;
+using System.Xml.Schema;
 
-namespace System.Xml.Xsl.Qil {
-
+namespace System.Xml.Xsl.Qil
+{
     /// <summary>
     /// View over a Qil operator having two children, the second of which is a literal type.
     /// </summary>
     /// <remarks>
     /// Don't construct QIL nodes directly; instead, use the <see cref="QilFactory">QilFactory</see>.
     /// </remarks>
-    internal class QilTargetType : QilBinary {
-
+    internal class QilTargetType : QilBinary
+    {
         //-----------------------------------------------
         // Constructor
         //-----------------------------------------------
@@ -26,23 +26,23 @@ namespace System.Xml.Xsl.Qil {
         /// <summary>
         /// Construct a new node
         /// </summary>
-        public QilTargetType(QilNodeType nodeType, QilNode expr, QilNode targetType) : base(nodeType, expr, targetType) {
-        }
-
+        public QilTargetType(QilNodeType nodeType, QilNode expr, QilNode targetType)
+            : base(nodeType, expr, targetType) { }
 
         //-----------------------------------------------
         // QilTargetType methods
         //-----------------------------------------------
 
-        public QilNode Source {
+        public QilNode Source
+        {
             get { return Left; }
             set { Left = value; }
         }
 
-        public XmlQueryType TargetType {
-            get { return (XmlQueryType) ((QilLiteral) Right).Value; }
-            set { ((QilLiteral) Right).Value = value; }
+        public XmlQueryType TargetType
+        {
+            get { return (XmlQueryType)((QilLiteral)Right).Value; }
+            set { ((QilLiteral)Right).Value = value; }
         }
     }
 }
-

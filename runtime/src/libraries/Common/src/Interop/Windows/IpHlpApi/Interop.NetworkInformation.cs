@@ -31,7 +31,7 @@ internal static partial class Interop
         internal enum AdapterAddressFlags
         {
             DnsEligible = 0x1,
-            Transient = 0x2
+            Transient = 0x2,
         }
 
         [Flags]
@@ -58,7 +58,9 @@ internal static partial class Interop
 
             internal IPAddress MarshalIPAddress()
             {
-                return IPEndPointExtensions.GetIPAddress(new Span<byte>((void*)address, addressLength));
+                return IPEndPointExtensions.GetIPAddress(
+                    new Span<byte>((void*)address, addressLength)
+                );
             }
         }
 
@@ -89,15 +91,21 @@ internal static partial class Interop
                 return addressList;
             }
 
-            internal static IPAddressInformationCollection MarshalIpAddressInformationCollection(IntPtr ptr)
+            internal static IPAddressInformationCollection MarshalIpAddressInformationCollection(
+                IntPtr ptr
+            )
             {
                 IPAddressInformationCollection addressList = new IPAddressInformationCollection();
 
                 IpAdapterAddress* pIpAdapterAddress = (IpAdapterAddress*)ptr;
                 while (pIpAdapterAddress != null)
                 {
-                    addressList.InternalAdd(new SystemIPAddressInformation(
-                        pIpAdapterAddress->address.MarshalIPAddress(), pIpAdapterAddress->flags));
+                    addressList.InternalAdd(
+                        new SystemIPAddressInformation(
+                            pIpAdapterAddress->address.MarshalIPAddress(),
+                            pIpAdapterAddress->flags
+                        )
+                    );
                     pIpAdapterAddress = pIpAdapterAddress->next;
                 }
 
@@ -149,7 +157,10 @@ internal static partial class Interop
 
             private fixed byte _address[MAX_ADAPTER_ADDRESS_LENGTH];
             private uint _addressLength;
-            internal byte[] Address => MemoryMarshal.CreateReadOnlySpan<byte>(ref _address[0], (int)_addressLength).ToArray();
+            internal byte[] Address =>
+                MemoryMarshal
+                    .CreateReadOnlySpan<byte>(ref _address[0], (int)_addressLength)
+                    .ToArray();
 
             internal AdapterFlags flags;
             internal uint mtu;
@@ -158,7 +169,8 @@ internal static partial class Interop
             internal uint ipv6Index;
 
             private fixed uint _zoneIndices[16];
-            internal uint[] ZoneIndices => MemoryMarshal.CreateReadOnlySpan<uint>(ref _zoneIndices[0], 16).ToArray();
+            internal uint[] ZoneIndices =>
+                MemoryMarshal.CreateReadOnlySpan<uint>(ref _zoneIndices[0], 16).ToArray();
 
             internal IntPtr firstPrefix;
 
@@ -222,7 +234,7 @@ internal static partial class Interop
         [StructLayout(LayoutKind.Sequential)]
         internal unsafe struct IpAddrString
         {
-            internal IpAddrString* Next;      /* struct _IpAddressList* */
+            internal IpAddrString* Next; /* struct _IpAddressList* */
             internal fixed byte IpAddress[16];
             internal fixed byte IpMask[16];
             internal uint Context;
@@ -389,6 +401,7 @@ internal static partial class Interop
             internal uint localAddr;
             internal byte localPort1;
             internal byte localPort2;
+
             // Ports are only 16 bit values (in network WORD order, 3,4,1,2).
             // There are reports where the high order bytes have garbage in them.
             internal byte ignoreLocalPort3;
@@ -396,6 +409,7 @@ internal static partial class Interop
             internal uint remoteAddr;
             internal byte remotePort1;
             internal byte remotePort2;
+
             // Ports are only 16 bit values (in network WORD order, 3,4,1,2).
             // There are reports where the high order bytes have garbage in them.
             internal byte ignoreRemotePort3;
@@ -415,6 +429,7 @@ internal static partial class Interop
             internal uint localScopeId;
             internal byte localPort1;
             internal byte localPort2;
+
             // Ports are only 16 bit values (in network WORD order, 3,4,1,2).
             // There are reports where the high order bytes have garbage in them.
             internal byte ignoreLocalPort3;
@@ -423,6 +438,7 @@ internal static partial class Interop
             internal uint remoteScopeId;
             internal byte remotePort1;
             internal byte remotePort2;
+
             // Ports are only 16 bit values (in network WORD order, 3,4,1,2).
             // There are reports where the high order bytes have garbage in them.
             internal byte ignoreRemotePort3;
@@ -430,8 +446,10 @@ internal static partial class Interop
             internal TcpState state;
             internal uint owningPid;
 
-            internal ReadOnlySpan<byte> localAddrAsSpan => MemoryMarshal.CreateSpan(ref localAddr[0], 16);
-            internal ReadOnlySpan<byte> remoteAddrAsSpan => MemoryMarshal.CreateSpan(ref remoteAddr[0], 16);
+            internal ReadOnlySpan<byte> localAddrAsSpan =>
+                MemoryMarshal.CreateSpan(ref localAddr[0], 16);
+            internal ReadOnlySpan<byte> remoteAddrAsSpan =>
+                MemoryMarshal.CreateSpan(ref remoteAddr[0], 16);
         }
 
         internal enum TcpTableClass
@@ -444,7 +462,7 @@ internal static partial class Interop
             TcpTableOwnerPidAll = 5,
             TcpTableOwnerModuleListener = 6,
             TcpTableOwnerModuleConnections = 7,
-            TcpTableOwnerModuleAll = 8
+            TcpTableOwnerModuleAll = 8,
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -459,6 +477,7 @@ internal static partial class Interop
             internal uint localAddr;
             internal byte localPort1;
             internal byte localPort2;
+
             // Ports are only 16 bit values (in network WORD order, 3,4,1,2).
             // There are reports where the high order bytes have garbage in them.
             internal byte ignoreLocalPort3;
@@ -469,7 +488,7 @@ internal static partial class Interop
         {
             UdpTableBasic = 0,
             UdpTableOwnerPid = 1,
-            UdpTableOwnerModule = 2
+            UdpTableOwnerModule = 2,
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -485,13 +504,15 @@ internal static partial class Interop
             internal uint localScopeId;
             internal byte localPort1;
             internal byte localPort2;
+
             // Ports are only 16 bit values (in network WORD order, 3,4,1,2).
             // There are reports where the high order bytes have garbage in them.
             internal byte ignoreLocalPort3;
             internal byte ignoreLocalPort4;
             internal uint owningPid;
 
-            internal ReadOnlySpan<byte> localAddrAsSpan => MemoryMarshal.CreateSpan(ref localAddr[0], 16);
+            internal ReadOnlySpan<byte> localAddrAsSpan =>
+                MemoryMarshal.CreateSpan(ref localAddr[0], 16);
         }
 
         [LibraryImport(Interop.Libraries.IpHlpApi)]
@@ -500,7 +521,8 @@ internal static partial class Interop
             uint flags,
             IntPtr pReserved,
             IntPtr adapterAddresses,
-            uint* outBufLen);
+            uint* outBufLen
+        );
 
         [LibraryImport(Interop.Libraries.IpHlpApi)]
         internal static unsafe partial uint GetBestInterfaceEx(Span<byte> ipAddress, int* index);
@@ -509,36 +531,72 @@ internal static partial class Interop
         internal static partial uint GetIfEntry2(ref MibIfRow2 pIfRow);
 
         [LibraryImport(Interop.Libraries.IpHlpApi)]
-        internal static unsafe partial uint GetIpStatisticsEx(MibIpStats* statistics, AddressFamily family);
+        internal static unsafe partial uint GetIpStatisticsEx(
+            MibIpStats* statistics,
+            AddressFamily family
+        );
 
         [LibraryImport(Interop.Libraries.IpHlpApi)]
-        internal static unsafe partial uint GetTcpStatisticsEx(MibTcpStats* statistics, AddressFamily family);
+        internal static unsafe partial uint GetTcpStatisticsEx(
+            MibTcpStats* statistics,
+            AddressFamily family
+        );
 
         [LibraryImport(Interop.Libraries.IpHlpApi)]
-        internal static unsafe partial uint GetUdpStatisticsEx(MibUdpStats* statistics, AddressFamily family);
+        internal static unsafe partial uint GetUdpStatisticsEx(
+            MibUdpStats* statistics,
+            AddressFamily family
+        );
 
         [LibraryImport(Interop.Libraries.IpHlpApi)]
         internal static unsafe partial uint GetIcmpStatistics(MibIcmpInfo* statistics);
 
         [LibraryImport(Interop.Libraries.IpHlpApi)]
-        internal static partial uint GetIcmpStatisticsEx(out MibIcmpInfoEx statistics, AddressFamily family);
+        internal static partial uint GetIcmpStatisticsEx(
+            out MibIcmpInfoEx statistics,
+            AddressFamily family
+        );
 
         [LibraryImport(Interop.Libraries.IpHlpApi)]
-        internal static unsafe partial uint GetTcpTable(IntPtr pTcpTable, uint* dwOutBufLen, [MarshalAs(UnmanagedType.Bool)] bool order);
+        internal static unsafe partial uint GetTcpTable(
+            IntPtr pTcpTable,
+            uint* dwOutBufLen,
+            [MarshalAs(UnmanagedType.Bool)] bool order
+        );
 
         [LibraryImport(Interop.Libraries.IpHlpApi)]
-        internal static unsafe partial uint GetExtendedTcpTable(IntPtr pTcpTable, uint* dwOutBufLen, [MarshalAs(UnmanagedType.Bool)] bool order,
-                                                        uint IPVersion, TcpTableClass tableClass, uint reserved);
+        internal static unsafe partial uint GetExtendedTcpTable(
+            IntPtr pTcpTable,
+            uint* dwOutBufLen,
+            [MarshalAs(UnmanagedType.Bool)] bool order,
+            uint IPVersion,
+            TcpTableClass tableClass,
+            uint reserved
+        );
 
         [LibraryImport(Interop.Libraries.IpHlpApi)]
-        internal static unsafe partial uint GetUdpTable(IntPtr pUdpTable, uint* dwOutBufLen, [MarshalAs(UnmanagedType.Bool)] bool order);
+        internal static unsafe partial uint GetUdpTable(
+            IntPtr pUdpTable,
+            uint* dwOutBufLen,
+            [MarshalAs(UnmanagedType.Bool)] bool order
+        );
 
         [LibraryImport(Interop.Libraries.IpHlpApi)]
-        internal static unsafe partial uint GetExtendedUdpTable(IntPtr pUdpTable, uint* dwOutBufLen, [MarshalAs(UnmanagedType.Bool)] bool order,
-                                                        uint IPVersion, UdpTableClass tableClass, uint reserved);
+        internal static unsafe partial uint GetExtendedUdpTable(
+            IntPtr pUdpTable,
+            uint* dwOutBufLen,
+            [MarshalAs(UnmanagedType.Bool)] bool order,
+            uint IPVersion,
+            UdpTableClass tableClass,
+            uint reserved
+        );
 
         [LibraryImport(Interop.Libraries.IpHlpApi)]
-        internal static unsafe partial uint GetPerAdapterInfo(uint IfIndex, IntPtr pPerAdapterInfo, uint* pOutBufLen);
+        internal static unsafe partial uint GetPerAdapterInfo(
+            uint IfIndex,
+            IntPtr pPerAdapterInfo,
+            uint* pOutBufLen
+        );
 
         [LibraryImport(Interop.Libraries.IpHlpApi)]
         internal static partial void FreeMibTable(IntPtr handle);
@@ -552,6 +610,7 @@ internal static partial class Interop
             out SafeFreeMibTable table,
             delegate* unmanaged<IntPtr, IntPtr, void> callback,
             IntPtr context,
-            out SafeCancelMibChangeNotify notificationHandle);
+            out SafeCancelMibChangeNotify notificationHandle
+        );
     }
 }

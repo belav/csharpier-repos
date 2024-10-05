@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,28 +29,35 @@
 using System.Runtime.InteropServices;
 using System.Security.Principal;
 
-namespace System.Security.AccessControl {
-	[ComVisible (false)]
-	public sealed class SemaphoreAccessRule : AccessRule
-	{
-		public SemaphoreAccessRule (IdentityReference identity,
-					    SemaphoreRights eventRights,
-					    AccessControlType type)
-			: base (identity, (int)eventRights, false, InheritanceFlags.None, PropagationFlags.None, type)
-		{
-		}
+namespace System.Security.AccessControl
+{
+    [ComVisible(false)]
+    public sealed class SemaphoreAccessRule : AccessRule
+    {
+        public SemaphoreAccessRule(
+            IdentityReference identity,
+            SemaphoreRights eventRights,
+            AccessControlType type
+        )
+            : base(
+                identity,
+                (int)eventRights,
+                false,
+                InheritanceFlags.None,
+                PropagationFlags.None,
+                type
+            ) { }
 
-		public SemaphoreAccessRule (string identity,
-					    SemaphoreRights eventRights,
-					    AccessControlType type)
-			: this (new NTAccount (identity), eventRights, type)
-		{
-		}
-		
-		public SemaphoreRights SemaphoreRights
-		{
-			get { return (SemaphoreRights)AccessMask; }
-		}
-	}
+        public SemaphoreAccessRule(
+            string identity,
+            SemaphoreRights eventRights,
+            AccessControlType type
+        )
+            : this(new NTAccount(identity), eventRights, type) { }
+
+        public SemaphoreRights SemaphoreRights
+        {
+            get { return (SemaphoreRights)AccessMask; }
+        }
+    }
 }
-

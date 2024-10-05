@@ -132,6 +132,17 @@ public class Test_b07483
             _f--;
     }
 
-    public bool IsTrue() { Console.WriteLine("\tIsTrue() called"); _t++; return (true); }
-    public bool IsFalse() { Console.WriteLine("\tIsFalse() called"); _f++; return (false); }
+    public bool IsTrue()
+    {
+        Console.WriteLine("\tIsTrue() called");
+        _t++;
+        return (true);
+    }
+
+    public bool IsFalse()
+    {
+        Console.WriteLine("\tIsFalse() called");
+        _f++;
+        return (false);
+    }
 }

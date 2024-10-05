@@ -19,7 +19,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             public AddProjectReferenceUndoUnit(
                 VisualStudioWorkspaceImpl workspace,
                 ProjectId fromProjectId,
-                ProjectId toProjectId)
+                ProjectId toProjectId
+            )
                 : base(workspace, fromProjectId)
             {
                 _toProjectId = toProjectId;
@@ -31,11 +32,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 var fromProject = currentSolution.GetProject(FromProjectId);
                 var toProject = currentSolution.GetProject(_toProjectId);
 
-                if (fromProject != null &&
-                    toProject != null &&
-                    !fromProject.ProjectReferences.Any(p => p.ProjectId == _toProjectId))
+                if (
+                    fromProject != null
+                    && toProject != null
+                    && !fromProject.ProjectReferences.Any(p => p.ProjectId == _toProjectId)
+                )
                 {
-                    var updatedProject = fromProject.AddProjectReference(new ProjectReference(_toProjectId));
+                    var updatedProject = fromProject.AddProjectReference(
+                        new ProjectReference(_toProjectId)
+                    );
                     Workspace.TryApplyChanges(updatedProject.Solution);
                 }
             }

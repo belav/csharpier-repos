@@ -10,7 +10,9 @@ namespace System.Collections.Tests
     {
         #region IDictionary Helper Methods
         protected override bool Enumerator_Empty_UsesSingletonInstance => true;
-        protected override bool Enumerator_Empty_ModifiedDuringEnumeration_ThrowsInvalidOperationException => false;
+        protected override bool Enumerator_Empty_ModifiedDuringEnumeration_ThrowsInvalidOperationException =>
+            false;
+
         protected override IDictionary NonGenericIDictionaryFactory()
         {
             return new SortedList<string, string>();
@@ -27,7 +29,8 @@ namespace System.Collections.Tests
 
         protected override object CreateTValue(int seed) => CreateTKey(seed);
 
-        protected override Type ICollection_NonGeneric_CopyTo_IndexLargerThanArrayCount_ThrowType => typeof(ArgumentOutOfRangeException);
+        protected override Type ICollection_NonGeneric_CopyTo_IndexLargerThanArrayCount_ThrowType =>
+            typeof(ArgumentOutOfRangeException);
 
         #endregion
 
@@ -46,7 +49,10 @@ namespace System.Collections.Tests
             if (!IsReadOnly)
             {
                 IDictionary dictionary = new SortedList<string, string>();
-                AssertExtensions.Throws<ArgumentNullException>("key", () => dictionary[23] = CreateTValue(12345));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "key",
+                    () => dictionary[23] = CreateTValue(12345)
+                );
                 Assert.Empty(dictionary);
             }
         }
@@ -58,7 +64,10 @@ namespace System.Collections.Tests
             {
                 IDictionary dictionary = new SortedList<string, string>();
                 object missingKey = GetNewKey(dictionary);
-                AssertExtensions.Throws<ArgumentException>("value", () => dictionary[missingKey] = 324);
+                AssertExtensions.Throws<ArgumentException>(
+                    "value",
+                    () => dictionary[missingKey] = 324
+                );
                 Assert.Empty(dictionary);
             }
         }
@@ -70,7 +79,10 @@ namespace System.Collections.Tests
             {
                 IDictionary dictionary = new SortedList<string, string>();
                 object missingKey = 23;
-                AssertExtensions.Throws<ArgumentException>("key", () => dictionary.Add(missingKey, CreateTValue(12345)));
+                AssertExtensions.Throws<ArgumentException>(
+                    "key",
+                    () => dictionary.Add(missingKey, CreateTValue(12345))
+                );
                 Assert.Empty(dictionary);
             }
         }
@@ -82,7 +94,10 @@ namespace System.Collections.Tests
             {
                 IDictionary dictionary = new SortedList<string, string>();
                 object missingKey = GetNewKey(dictionary);
-                AssertExtensions.Throws<ArgumentException>("value", () => dictionary.Add(missingKey, 324));
+                AssertExtensions.Throws<ArgumentException>(
+                    "value",
+                    () => dictionary.Add(missingKey, 324)
+                );
                 Assert.Empty(dictionary);
             }
         }
@@ -113,9 +128,11 @@ namespace System.Collections.Tests
         public void CantAcceptDuplicateKeysFromSourceDictionary()
         {
             Dictionary<string, int> source = new Dictionary<string, int> { { "a", 1 }, { "A", 1 } };
-            AssertExtensions.Throws<ArgumentException>(null, () => new SortedList<string, int>(source, StringComparer.OrdinalIgnoreCase));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new SortedList<string, int>(source, StringComparer.OrdinalIgnoreCase)
+            );
         }
-
 
         #endregion
 
@@ -127,7 +144,11 @@ namespace System.Collections.Tests
         {
             ICollection collection = NonGenericICollectionFactory(count);
             KeyValuePair<string, int>[] array = new KeyValuePair<string, int>[count * 3 / 2];
-            AssertExtensions.Throws<ArgumentException>("array", null, () => collection.CopyTo(array, 0));
+            AssertExtensions.Throws<ArgumentException>(
+                "array",
+                null,
+                () => collection.CopyTo(array, 0)
+            );
         }
 
         [Theory]

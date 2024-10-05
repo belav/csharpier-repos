@@ -4,12 +4,12 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System;
     using System.Configuration;
-    using System.Web.Util;
     using System.Security.Permissions;
-
+    using System.Web.Util;
 
     //
     // Holds the configuration file mapping for a Web server.
@@ -20,32 +20,45 @@ namespace System.Web.Configuration {
     // case, where the path to client ASP.NET files needs to be specified
     // in addition to the application path.
     //
-    public sealed class WebConfigurationFileMap : ConfigurationFileMap {
-        string                              _site;
-        VirtualDirectoryMappingCollection   _virtualDirectoryMapping;
+    public sealed class WebConfigurationFileMap : ConfigurationFileMap
+    {
+        string _site;
+        VirtualDirectoryMappingCollection _virtualDirectoryMapping;
 
-        public WebConfigurationFileMap() {
+        public WebConfigurationFileMap()
+        {
             _site = String.Empty;
             _virtualDirectoryMapping = new VirtualDirectoryMappingCollection();
         }
 
-        private WebConfigurationFileMap(string machineConfigFileName, string site, VirtualDirectoryMappingCollection VirtualDirectoryMapping)
-                : base(machineConfigFileName) {
-
+        private WebConfigurationFileMap(
+            string machineConfigFileName,
+            string site,
+            VirtualDirectoryMappingCollection VirtualDirectoryMapping
+        )
+            : base(machineConfigFileName)
+        {
             _site = site;
             _virtualDirectoryMapping = VirtualDirectoryMapping;
         }
 
         public WebConfigurationFileMap(string machineConfigFileName)
-                : base(machineConfigFileName) {
+            : base(machineConfigFileName)
+        {
             _site = String.Empty;
             _virtualDirectoryMapping = new VirtualDirectoryMappingCollection();
         }
 
-        public override object Clone() {
-            VirtualDirectoryMappingCollection virtualDirectoryMappingClone = _virtualDirectoryMapping.Clone();
+        public override object Clone()
+        {
+            VirtualDirectoryMappingCollection virtualDirectoryMappingClone =
+                _virtualDirectoryMapping.Clone();
 
-            return new WebConfigurationFileMap(MachineConfigFilename, _site, virtualDirectoryMappingClone);
+            return new WebConfigurationFileMap(
+                MachineConfigFilename,
+                _site,
+                virtualDirectoryMappingClone
+            );
         }
 
         //
@@ -53,13 +66,13 @@ namespace System.Web.Configuration {
         // If left unspecified, it will be supplied by the HostingEnvironment.
         // If there is no HostingEnvironment, it defaults to "Default Web Site".
         //
-        internal string Site {
-            get {
-                return _site;
-            }
-
-            set {
-                if (!WebConfigurationHost.IsValidSiteArgument(value)) {
+        internal string Site
+        {
+            get { return _site; }
+            set
+            {
+                if (!WebConfigurationHost.IsValidSiteArgument(value))
+                {
                     throw ExceptionUtil.PropertyInvalid("Site");
                 }
 
@@ -70,10 +83,9 @@ namespace System.Web.Configuration {
         //
         // Collection of virtual directory -> physical directory mappings.
         //
-        public VirtualDirectoryMappingCollection VirtualDirectories {
-            get {
-                return _virtualDirectoryMapping;
-            }
+        public VirtualDirectoryMappingCollection VirtualDirectories
+        {
+            get { return _virtualDirectoryMapping; }
         }
     }
 }

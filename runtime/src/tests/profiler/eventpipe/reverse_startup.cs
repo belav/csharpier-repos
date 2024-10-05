@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Profiler.Tests;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,6 +14,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Diagnostics.NETCore.Client;
+using Profiler.Tests;
 using Tracing.Tests.Common;
 
 namespace ReverseStartupTests
@@ -30,14 +30,15 @@ namespace ReverseStartupTests
             if (value != null)
                 @this.Write(Encoding.Unicode.GetBytes(value + '\0'));
         }
-
     }
 
     public delegate void ProfilerCallback();
 
     class ReverseStartup
     {
-        static readonly Guid ReverseStartupProfilerGuid = new Guid("9C1A6E14-2DEC-45CE-9061-F31964D8884D");
+        static readonly Guid ReverseStartupProfilerGuid = new Guid(
+            "9C1A6E14-2DEC-45CE-9061-F31964D8884D"
+        );
 
         public static int Main(string[] args)
         {
@@ -60,15 +61,22 @@ namespace ReverseStartupTests
                         {
                             IpcAdvertise advertise = IpcAdvertise.Parse(serverStream);
                             Console.WriteLine($"Got IpcAdvertise: {advertise}");
-                            
+
                             int processId = (int)advertise.ProcessId;
 
                             // While we are paused in startup send the profiler startup command
                             string profilerPath = GetProfilerPath();
-                            DiagnosticsIPCWorkaround client = new DiagnosticsIPCWorkaround(processId);
+                            DiagnosticsIPCWorkaround client = new DiagnosticsIPCWorkaround(
+                                processId
+                            );
                             client.SetStartupProfiler(ReverseStartupProfilerGuid, profilerPath);
 
-                            if (!client.SetEnvironmentVariable("ReverseServerTest_OverwriteMe", "Overwritten"))
+                            if (
+                                !client.SetEnvironmentVariable(
+                                    "ReverseServerTest_OverwriteMe",
+                                    "Overwritten"
+                                )
+                            )
                             {
                                 throw new Exception("Failed setting environment variable.");
                             }
@@ -79,9 +87,14 @@ namespace ReverseStartupTests
                             }
 
                             // Resume runtime message
-                            IpcMessage resumeMessage = new IpcMessage(0x04,0x01);
-                            Console.WriteLine($"Sent resume runtime message: {resumeMessage.ToString()}");
-                            IpcMessage resumeResponse = IpcClient.SendMessage(serverStream, resumeMessage);
+                            IpcMessage resumeMessage = new IpcMessage(0x04, 0x01);
+                            Console.WriteLine(
+                                $"Sent resume runtime message: {resumeMessage.ToString()}"
+                            );
+                            IpcMessage resumeResponse = IpcClient.SendMessage(
+                                serverStream,
+                                resumeMessage
+                            );
                             Logger.logger.Log($"Received: {resumeResponse.ToString()}");
                         }
                     });
@@ -93,10 +106,8 @@ namespace ReverseStartupTests
                     Console.WriteLine($"ReverseServer saw exception {e.Message}");
                     Console.WriteLine(e.StackTrace);
 
-
                     Console.WriteLine($"Inner exception {e.InnerException?.Message}");
                     Console.WriteLine(e.InnerException?.StackTrace);
-                    
                 }
                 finally
                 {
@@ -107,15 +118,18 @@ namespace ReverseStartupTests
             Dictionary<string, string> envVars = new Dictionary<string, string>()
             {
                 { "ReverseServerTest_OverwriteMe", "OriginalValue" },
-                { "ReverseServerTest_ClearMe", "OriginalValue" }
+                { "ReverseServerTest_ClearMe", "OriginalValue" },
             };
 
-            return ProfilerTestRunner.Run(profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
-                                          testName: "ReverseStartup",
-                                          profilerClsid: Guid.Empty,
-                                          profileeOptions: ProfileeOptions.NoStartupAttach | ProfileeOptions.ReverseDiagnosticsMode,
-                                          envVars: envVars,
-                                          reverseServerName: serverName);
+            return ProfilerTestRunner.Run(
+                profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
+                testName: "ReverseStartup",
+                profilerClsid: Guid.Empty,
+                profileeOptions: ProfileeOptions.NoStartupAttach
+                    | ProfileeOptions.ReverseDiagnosticsMode,
+                envVars: envVars,
+                reverseServerName: serverName
+            );
         }
 
         public static string GetProfilerPath()
@@ -134,7 +148,9 @@ namespace ReverseStartupTests
                 profilerName = "libProfiler.dylib";
             }
 
-            string rootPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            string rootPath = Path.GetDirectoryName(
+                System.Reflection.Assembly.GetExecutingAssembly().Location
+            );
             string profilerPath = Path.Combine(rootPath, profilerName);
 
             return profilerPath;

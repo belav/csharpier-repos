@@ -15,8 +15,10 @@ namespace Microsoft.Extensions.Configuration.Xml
     /// </summary>
     public class XmlDocumentDecryptor
     {
-        internal const string RequiresDynamicCodeMessage = "Microsoft.Extensions.Configuration.Xml can use EncryptedXml which may contain XSLTs in the xml. XSLTs require dynamic code.";
-        internal const string RequiresUnreferencedCodeMessage = "Microsoft.Extensions.Configuration.Xml can use EncryptedXml. If you use encrypted XML files, your application might not have the algorithm implementations it needs. To avoid this problem, one option you can use is a DynamicDependency attribute to keep the algorithm implementations in your application.";
+        internal const string RequiresDynamicCodeMessage =
+            "Microsoft.Extensions.Configuration.Xml can use EncryptedXml which may contain XSLTs in the xml. XSLTs require dynamic code.";
+        internal const string RequiresUnreferencedCodeMessage =
+            "Microsoft.Extensions.Configuration.Xml can use EncryptedXml. If you use encrypted XML files, your application might not have the algorithm implementations it needs. To avoid this problem, one option you can use is a DynamicDependency attribute to keep the algorithm implementations in your application.";
 
         /// <summary>
         /// Accesses the singleton decryptor instance.
@@ -103,7 +105,8 @@ namespace Microsoft.Extensions.Configuration.Xml
         protected virtual XmlReader DecryptDocumentAndCreateXmlReader(XmlDocument document)
         {
             // Perform the actual decryption step, updating the XmlDocument in-place.
-            EncryptedXml encryptedXml = _encryptedXmlFactory?.Invoke(document) ?? new EncryptedXml(document);
+            EncryptedXml encryptedXml =
+                _encryptedXmlFactory?.Invoke(document) ?? new EncryptedXml(document);
             encryptedXml.DecryptDocument();
 
             // Finally, return the new XmlReader from the updated XmlDocument.

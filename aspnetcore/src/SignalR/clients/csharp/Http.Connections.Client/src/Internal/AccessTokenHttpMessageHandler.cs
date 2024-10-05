@@ -14,22 +14,32 @@ internal sealed class AccessTokenHttpMessageHandler : DelegatingHandler
     private readonly HttpConnection _httpConnection;
     private string? _accessToken;
 
-    public AccessTokenHttpMessageHandler(HttpMessageHandler inner, HttpConnection httpConnection) : base(inner)
+    public AccessTokenHttpMessageHandler(HttpMessageHandler inner, HttpConnection httpConnection)
+        : base(inner)
     {
         _httpConnection = httpConnection;
     }
 
-    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+    protected override async Task<HttpResponseMessage> SendAsync(
+        HttpRequestMessage request,
+        CancellationToken cancellationToken
+    )
     {
         var shouldRetry = true;
-        if (string.IsNullOrEmpty(_accessToken) ||
+        if (
+            string.IsNullOrEmpty(_accessToken)
+            ||
             // Negotiate redirects likely will have a new access token so let's always grab a (potentially) new access token on negotiate
 #if NET5_0_OR_GREATER
-            request.Options.TryGetValue(new HttpRequestOptionsKey<bool>("IsNegotiate"), out var value) && value == true
+            request.Options.TryGetValue(
+                new HttpRequestOptionsKey<bool>("IsNegotiate"),
+                out var value
+            )
+                && value == true
 #else
             request.Properties.TryGetValue("IsNegotiate", out var value) && value is true
 #endif
-            )
+        )
         {
             shouldRetry = false;
             _accessToken = await _httpConnection.GetAccessTokenAsync().ConfigureAwait(false);

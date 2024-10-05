@@ -14,8 +14,10 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
 {
     internal class AnalyzerReferenceInformationProvider : IAnalyzerInformationProvider
     {
-        private static readonly Dictionary<string, Assembly> s_pathsToAssemblies = new(StringComparer.OrdinalIgnoreCase);
-        private static readonly Dictionary<string, Assembly> s_namesToAssemblies = new(StringComparer.OrdinalIgnoreCase);
+        private static readonly Dictionary<string, Assembly> s_pathsToAssemblies =
+            new(StringComparer.OrdinalIgnoreCase);
+        private static readonly Dictionary<string, Assembly> s_namesToAssemblies =
+            new(StringComparer.OrdinalIgnoreCase);
 
         private static readonly object s_guard = new();
 
@@ -23,24 +25,43 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             Workspace workspace,
             Solution solution,
             FormatOptions formatOptions,
-            ILogger logger)
+            ILogger logger
+        )
         {
-            return solution.Projects
-                .ToImmutableDictionary(project => project.Id, project => GetAnalyzersAndFixers(workspace, project));
+            return solution.Projects.ToImmutableDictionary(
+                project => project.Id,
+                project => GetAnalyzersAndFixers(workspace, project)
+            );
         }
 
-        private static AnalyzersAndFixers GetAnalyzersAndFixers(Workspace workspace, Project project)
+        private static AnalyzersAndFixers GetAnalyzersAndFixers(
+            Workspace workspace,
+            Project project
+        )
         {
-            var analyzerAssemblies = project.AnalyzerReferences
-                .Select(reference => TryLoadAssemblyFrom(workspace, reference.FullPath, reference))
+            var analyzerAssemblies = project
+                .AnalyzerReferences.Select(reference =>
+                    TryLoadAssemblyFrom(workspace, reference.FullPath, reference)
+                )
                 .OfType<Assembly>()
                 .ToImmutableArray();
 
-            var analyzers = project.AnalyzerReferences.SelectMany(reference => reference.GetAnalyzers(project.Language)).ToImmutableArray();
-            return new AnalyzersAndFixers(analyzers, AnalyzerFinderHelpers.LoadFixers(analyzerAssemblies, project.Language));
+            var analyzers = project
+                .AnalyzerReferences.SelectMany(reference =>
+                    reference.GetAnalyzers(project.Language)
+                )
+                .ToImmutableArray();
+            return new AnalyzersAndFixers(
+                analyzers,
+                AnalyzerFinderHelpers.LoadFixers(analyzerAssemblies, project.Language)
+            );
         }
 
-        private static Assembly? TryLoadAssemblyFrom(Workspace workspace, string? path, AnalyzerReference analyzerReference)
+        private static Assembly? TryLoadAssemblyFrom(
+            Workspace workspace,
+            string? path,
+            AnalyzerReference analyzerReference
+        )
         {
             // Since we are not deploying these assemblies we need to ensure the files exist.
             if (path is null || !File.Exists(path))
@@ -63,11 +84,16 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                         // If we have access to the analyzer file reference, we can update our
                         // cache and return the assembly.
                         analyzerAssembly = analyzerFileReference.GetAssembly();
-                        s_namesToAssemblies.TryAdd(analyzerAssembly.GetName().FullName, analyzerAssembly);
+                        s_namesToAssemblies.TryAdd(
+                            analyzerAssembly.GetName().FullName,
+                            analyzerAssembly
+                        );
                     }
                     else
                     {
-                        var analyzerService = workspace.Services.GetService<IAnalyzerService>() ?? throw new NotSupportedException();
+                        var analyzerService =
+                            workspace.Services.GetService<IAnalyzerService>()
+                            ?? throw new NotSupportedException();
                         var loader = analyzerService.GetLoader();
                         analyzerAssembly = loader.LoadFromPath(path);
                     }
@@ -76,14 +102,13 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
 
                     return analyzerAssembly;
                 }
-                catch
-                {
-                }
+                catch { }
             }
 
             return null;
         }
 
-        public DiagnosticSeverity GetSeverity(FormatOptions formatOptions) => formatOptions.AnalyzerSeverity;
+        public DiagnosticSeverity GetSeverity(FormatOptions formatOptions) =>
+            formatOptions.AnalyzerSeverity;
     }
 }

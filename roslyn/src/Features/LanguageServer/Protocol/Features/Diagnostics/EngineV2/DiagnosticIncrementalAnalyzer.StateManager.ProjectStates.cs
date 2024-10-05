@@ -16,16 +16,21 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
         {
             private readonly struct ProjectAnalyzerStateSets
             {
-                public static readonly ProjectAnalyzerStateSets Default = new(
-                    ImmutableArray<AnalyzerReference>.Empty,
-                    ImmutableDictionary<object, ImmutableArray<DiagnosticAnalyzer>>.Empty,
-                    ImmutableDictionary<DiagnosticAnalyzer, StateSet>.Empty,
-                    SkippedHostAnalyzersInfo.Empty);
+                public static readonly ProjectAnalyzerStateSets Default =
+                    new(
+                        ImmutableArray<AnalyzerReference>.Empty,
+                        ImmutableDictionary<object, ImmutableArray<DiagnosticAnalyzer>>.Empty,
+                        ImmutableDictionary<DiagnosticAnalyzer, StateSet>.Empty,
+                        SkippedHostAnalyzersInfo.Empty
+                    );
 
                 public readonly IReadOnlyList<AnalyzerReference> AnalyzerReferences;
 
                 // maps analyzer reference id to list of analyzers loaded from the reference
-                public readonly ImmutableDictionary<object, ImmutableArray<DiagnosticAnalyzer>> MapPerReferences;
+                public readonly ImmutableDictionary<
+                    object,
+                    ImmutableArray<DiagnosticAnalyzer>
+                > MapPerReferences;
 
                 public readonly ImmutableDictionary<DiagnosticAnalyzer, StateSet> StateSetMap;
 
@@ -33,9 +38,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
                 internal ProjectAnalyzerStateSets(
                     IReadOnlyList<AnalyzerReference> analyzerReferences,
-                    ImmutableDictionary<object, ImmutableArray<DiagnosticAnalyzer>> mapPerReferences,
+                    ImmutableDictionary<
+                        object,
+                        ImmutableArray<DiagnosticAnalyzer>
+                    > mapPerReferences,
                     ImmutableDictionary<DiagnosticAnalyzer, StateSet> stateSetMap,
-                    SkippedHostAnalyzersInfo skippedAnalyzersInfo)
+                    SkippedHostAnalyzersInfo skippedAnalyzersInfo
+                )
                 {
                     AnalyzerReferences = analyzerReferences;
                     MapPerReferences = mapPerReferences;
@@ -53,8 +62,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             private ProjectAnalyzerStateSets? TryGetProjectStateSets(Project project)
             {
                 // check if the analyzer references have changed since the last time we updated the map:
-                if (_projectAnalyzerStateMap.TryGetValue(project.Id, out var entry) &&
-                    entry.AnalyzerReferences.SequenceEqual(project.AnalyzerReferences))
+                if (
+                    _projectAnalyzerStateMap.TryGetValue(project.Id, out var entry)
+                    && entry.AnalyzerReferences.SequenceEqual(project.AnalyzerReferences)
+                )
                 {
                     return entry;
                 }
@@ -70,8 +81,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 return TryGetProjectStateSets(project) ?? CreateProjectStateSets(project);
             }
 
-            private ProjectAnalyzerStateSets GetOrUpdateProjectStateSets(Project project)
-                => TryGetProjectStateSets(project) ?? UpdateProjectStateSets(project);
+            private ProjectAnalyzerStateSets GetOrUpdateProjectStateSets(Project project) =>
+                TryGetProjectStateSets(project) ?? UpdateProjectStateSets(project);
 
             /// <summary>
             /// Creates a new project state sets.
@@ -84,15 +95,25 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 }
 
                 var hostAnalyzers = project.Solution.State.Analyzers;
-                var analyzersPerReference = hostAnalyzers.CreateProjectDiagnosticAnalyzersPerReference(project);
+                var analyzersPerReference =
+                    hostAnalyzers.CreateProjectDiagnosticAnalyzersPerReference(project);
                 if (analyzersPerReference.Count == 0)
                 {
                     return ProjectAnalyzerStateSets.Default;
                 }
 
-                var newMap = CreateStateSetMap(project.Language, analyzersPerReference.Values, includeWorkspacePlaceholderAnalyzers: false);
+                var newMap = CreateStateSetMap(
+                    project.Language,
+                    analyzersPerReference.Values,
+                    includeWorkspacePlaceholderAnalyzers: false
+                );
                 var skippedAnalyzersInfo = project.GetSkippedAnalyzersInfo(_analyzerInfoCache);
-                return new ProjectAnalyzerStateSets(project.AnalyzerReferences, analyzersPerReference, newMap, skippedAnalyzersInfo);
+                return new ProjectAnalyzerStateSets(
+                    project.AnalyzerReferences,
+                    analyzersPerReference,
+                    newMap,
+                    skippedAnalyzersInfo
+                );
             }
 
             /// <summary>
@@ -102,9 +123,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             {
                 var projectStateSets = CreateProjectStateSets(project);
 
-                RaiseProjectAnalyzerReferenceChangedIfNeeded(project, projectStateSets.MapPerReferences, projectStateSets.StateSetMap);
+                RaiseProjectAnalyzerReferenceChangedIfNeeded(
+                    project,
+                    projectStateSets.MapPerReferences,
+                    projectStateSets.StateSetMap
+                );
 
-                // update cache. 
+                // update cache.
                 _projectAnalyzerStateMap[project.Id] = projectStateSets;
 
                 return projectStateSets;
@@ -113,7 +138,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             private void RaiseProjectAnalyzerReferenceChangedIfNeeded(
                 Project project,
                 ImmutableDictionary<object, ImmutableArray<DiagnosticAnalyzer>> newMapPerReference,
-                ImmutableDictionary<DiagnosticAnalyzer, StateSet> newMap)
+                ImmutableDictionary<DiagnosticAnalyzer, StateSet> newMap
+            )
             {
                 if (!_projectAnalyzerStateMap.TryGetValue(project.Id, out var entry))
                 {
@@ -125,15 +151,28 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
                     // new reference added
                     RaiseProjectAnalyzerReferenceChanged(
-                        new ProjectAnalyzerReferenceChangedEventArgs(project, newMap.Values.ToImmutableArrayOrEmpty(), ImmutableArray<StateSet>.Empty));
+                        new ProjectAnalyzerReferenceChangedEventArgs(
+                            project,
+                            newMap.Values.ToImmutableArrayOrEmpty(),
+                            ImmutableArray<StateSet>.Empty
+                        )
+                    );
                     return;
                 }
 
                 Debug.Assert(!entry.AnalyzerReferences.Equals(project.AnalyzerReferences));
 
                 // there has been change. find out what has changed
-                var addedStates = DiffStateSets(project.AnalyzerReferences.Except(entry.AnalyzerReferences), newMapPerReference, newMap);
-                var removedStates = DiffStateSets(entry.AnalyzerReferences.Except(project.AnalyzerReferences), entry.MapPerReferences, entry.StateSetMap);
+                var addedStates = DiffStateSets(
+                    project.AnalyzerReferences.Except(entry.AnalyzerReferences),
+                    newMapPerReference,
+                    newMap
+                );
+                var removedStates = DiffStateSets(
+                    entry.AnalyzerReferences.Except(project.AnalyzerReferences),
+                    entry.MapPerReferences,
+                    entry.StateSetMap
+                );
 
                 // nothing has changed
                 if (addedStates.Length == 0 && removedStates.Length == 0)
@@ -142,13 +181,19 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 }
 
                 RaiseProjectAnalyzerReferenceChanged(
-                    new ProjectAnalyzerReferenceChangedEventArgs(project, addedStates, removedStates));
+                    new ProjectAnalyzerReferenceChangedEventArgs(
+                        project,
+                        addedStates,
+                        removedStates
+                    )
+                );
             }
 
             private static ImmutableArray<StateSet> DiffStateSets(
                 IEnumerable<AnalyzerReference> references,
                 ImmutableDictionary<object, ImmutableArray<DiagnosticAnalyzer>> mapPerReference,
-                ImmutableDictionary<DiagnosticAnalyzer, StateSet> map)
+                ImmutableDictionary<DiagnosticAnalyzer, StateSet> map
+            )
             {
                 if (mapPerReference.Count == 0 || map.Count == 0)
                 {

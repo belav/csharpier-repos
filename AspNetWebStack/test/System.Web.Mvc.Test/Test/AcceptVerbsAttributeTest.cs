@@ -12,7 +12,8 @@ namespace System.Web.Mvc.Test
 {
     public class AcceptVerbsAttributeTest
     {
-        private const string _invalidEnumFormatString = @"The enum '{0}' did not produce the correct array.
+        private const string _invalidEnumFormatString =
+            @"The enum '{0}' did not produce the correct array.
 Expected: {1}
 Actual: {2}";
 
@@ -21,7 +22,12 @@ Actual: {2}";
         {
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { new AcceptVerbsAttribute(new string[0]); }, "verbs");
+                delegate
+                {
+                    new AcceptVerbsAttribute(new string[0]);
+                },
+                "verbs"
+            );
         }
 
         [Fact]
@@ -29,7 +35,12 @@ Actual: {2}";
         {
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { new AcceptVerbsAttribute((string[])null); }, "verbs");
+                delegate
+                {
+                    new AcceptVerbsAttribute((string[])null);
+                },
+                "verbs"
+            );
         }
 
         [Fact]
@@ -53,15 +64,24 @@ Actual: {2}";
 
                 // get the resulting array
                 string[] array = AcceptVerbsAttribute.EnumToArray(aggrValues);
-                var aggrNamesOrdered = aggrNames.OrderBy(name => name, StringComparer.OrdinalIgnoreCase);
+                var aggrNamesOrdered = aggrNames.OrderBy(
+                    name => name,
+                    StringComparer.OrdinalIgnoreCase
+                );
                 var arrayOrdered = array.OrderBy(name => name, StringComparer.OrdinalIgnoreCase);
-                bool match = aggrNamesOrdered.SequenceEqual(arrayOrdered, StringComparer.OrdinalIgnoreCase);
+                bool match = aggrNamesOrdered.SequenceEqual(
+                    arrayOrdered,
+                    StringComparer.OrdinalIgnoreCase
+                );
 
                 if (!match)
                 {
-                    string message = String.Format(_invalidEnumFormatString, aggrValues,
-                                                   aggrNames.Aggregate((a, b) => a + ", " + b),
-                                                   array.Aggregate((a, b) => a + ", " + b));
+                    string message = String.Format(
+                        _invalidEnumFormatString,
+                        aggrValues,
+                        aggrNames.Aggregate((a, b) => a + ", " + b),
+                        array.Aggregate((a, b) => a + ", " + b)
+                    );
                     Assert.True(false, message);
                 }
             }
@@ -117,7 +137,12 @@ Actual: {2}";
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { attr.IsValidForRequest(null, null); }, "controllerContext");
+                delegate
+                {
+                    attr.IsValidForRequest(null, null);
+                },
+                "controllerContext"
+            );
         }
 
         [Fact]
@@ -157,10 +182,17 @@ Actual: {2}";
             return GetControllerContextWithHttpVerb(httpRequestVerb, null, null, null);
         }
 
-        internal static ControllerContext GetControllerContextWithHttpVerb(string httpRequestVerb, string httpHeaderVerb, string httpFormVerb, string httpQueryStringVerb)
+        internal static ControllerContext GetControllerContextWithHttpVerb(
+            string httpRequestVerb,
+            string httpHeaderVerb,
+            string httpFormVerb,
+            string httpQueryStringVerb
+        )
         {
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
-            mockControllerContext.Setup(c => c.HttpContext.Request.HttpMethod).Returns(httpRequestVerb);
+            mockControllerContext
+                .Setup(c => c.HttpContext.Request.HttpMethod)
+                .Returns(httpRequestVerb);
 
             NameValueCollection headers = new NameValueCollection();
             if (!String.IsNullOrEmpty(httpHeaderVerb))
@@ -181,7 +213,9 @@ Actual: {2}";
             {
                 queryString.Add(HttpRequestExtensions.XHttpMethodOverrideKey, httpQueryStringVerb);
             }
-            mockControllerContext.Setup(c => c.HttpContext.Request.QueryString).Returns(queryString);
+            mockControllerContext
+                .Setup(c => c.HttpContext.Request.QueryString)
+                .Returns(queryString);
 
             return mockControllerContext.Object;
         }
@@ -193,7 +227,9 @@ Actual: {2}";
             return values.ToDictionary(value => Enum.GetName(typeof(TEnum), value), value => value);
         }
 
-        private static IEnumerable<ICollection<T>> EnumerableToCombinations<T>(IEnumerable<T> elements)
+        private static IEnumerable<ICollection<T>> EnumerableToCombinations<T>(
+            IEnumerable<T> elements
+        )
         {
             List<T> allElements = elements.ToList();
 

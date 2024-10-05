@@ -29,23 +29,25 @@ using System;
 
 namespace System.Windows.Forms
 {
-	internal class ThemeEngine
-	{
-		static private Theme theme = null;
-		
-		static ThemeEngine ()
-		{
-			if (Application.VisualStylesEnabled) {
-				theme = new ThemeVisualStyles ();
-			} else {
-				theme = new ThemeWin32Classic ();
-			}
-		}
-		
-			
-		public static Theme Current {
-			get { return theme; }
-		}
-		
-	}
+    internal class ThemeEngine
+    {
+        private static Theme theme = null;
+
+        static ThemeEngine()
+        {
+            if (Application.VisualStylesEnabled)
+            {
+                theme = new ThemeVisualStyles();
+            }
+            else
+            {
+                theme = new ThemeWin32Classic();
+            }
+        }
+
+        public static Theme Current
+        {
+            get { return theme; }
+        }
+    }
 }

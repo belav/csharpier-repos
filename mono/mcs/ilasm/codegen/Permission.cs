@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,53 +29,55 @@
 using System;
 using System.Collections;
 
-namespace Mono.ILASM {
+namespace Mono.ILASM
+{
+    public class Permission
+    {
+        BaseTypeRef type_ref;
 
-        public class Permission
+        //PermissionMembers
+        ArrayList members;
+        PEAPI.Permission perm;
+
+        public Permission(BaseTypeRef type_ref, ArrayList members)
         {
-                BaseTypeRef type_ref;
-                
-                //PermissionMembers
-                ArrayList members;
-                PEAPI.Permission perm;
-
-                public Permission (BaseTypeRef type_ref, ArrayList members)
-                {
-                        this.type_ref = type_ref;
-                        this.members = members;
-                }
-
-                public PEAPI.Permission Resolve (CodeGen code_gen)
-                {
-                        string fname;
-
-                        type_ref.Resolve (code_gen);
-
-                        if (type_ref is ExternTypeRef) {
-                                ExternAssembly ea = ((ExternTypeRef) type_ref).ExternRef as ExternAssembly;
-                                if (ea == null)
-                                        //FIXME: module.. ?
-                                        throw new NotImplementedException ();
-
-                                string name;
-                                ExternTypeRef etr = type_ref as ExternTypeRef;
-                                if (etr != null)
-                                        name = etr.Name;
-                                else
-                                        name = type_ref.FullName;
-
-                                fname = String.Format ("{0}, {1}", name, ea.AssemblyName.FullName);
-                        } else {
-                                fname = type_ref.FullName;
-                        }
-
-                        perm = new PEAPI.Permission (type_ref.PeapiType, fname);
-                                        
-                        foreach (PermissionMember member in members)
-                                perm.AddMember (member.Resolve (code_gen));
-
-                        return perm;
-                }
+            this.type_ref = type_ref;
+            this.members = members;
         }
 
+        public PEAPI.Permission Resolve(CodeGen code_gen)
+        {
+            string fname;
+
+            type_ref.Resolve(code_gen);
+
+            if (type_ref is ExternTypeRef)
+            {
+                ExternAssembly ea = ((ExternTypeRef)type_ref).ExternRef as ExternAssembly;
+                if (ea == null)
+                    //FIXME: module.. ?
+                    throw new NotImplementedException();
+
+                string name;
+                ExternTypeRef etr = type_ref as ExternTypeRef;
+                if (etr != null)
+                    name = etr.Name;
+                else
+                    name = type_ref.FullName;
+
+                fname = String.Format("{0}, {1}", name, ea.AssemblyName.FullName);
+            }
+            else
+            {
+                fname = type_ref.FullName;
+            }
+
+            perm = new PEAPI.Permission(type_ref.PeapiType, fname);
+
+            foreach (PermissionMember member in members)
+                perm.AddMember(member.Resolve(code_gen));
+
+            return perm;
+        }
+    }
 }

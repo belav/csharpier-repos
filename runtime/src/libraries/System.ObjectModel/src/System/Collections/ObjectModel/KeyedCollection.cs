@@ -10,8 +10,11 @@ namespace System.Collections.ObjectModel
     [Serializable]
     [DebuggerTypeProxy(typeof(CollectionDebugView<>))]
     [DebuggerDisplay("Count = {Count}")]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
-    public abstract class KeyedCollection<TKey, TItem> : Collection<TItem> where TKey: notnull
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
+    public abstract class KeyedCollection<TKey, TItem> : Collection<TItem>
+        where TKey : notnull
     {
         private const int DefaultThreshold = 0;
 
@@ -20,25 +23,30 @@ namespace System.Collections.ObjectModel
         private int keyCount; // Do not rename (binary serialization)
         private readonly int threshold; // Do not rename (binary serialization)
 
-        protected KeyedCollection() : this(null, DefaultThreshold)
-        {
-        }
+        protected KeyedCollection()
+            : this(null, DefaultThreshold) { }
 
-        protected KeyedCollection(IEqualityComparer<TKey>? comparer) : this(comparer, DefaultThreshold)
-        {
-        }
+        protected KeyedCollection(IEqualityComparer<TKey>? comparer)
+            : this(comparer, DefaultThreshold) { }
 
-        protected KeyedCollection(IEqualityComparer<TKey>? comparer, int dictionaryCreationThreshold)
+        protected KeyedCollection(
+            IEqualityComparer<TKey>? comparer,
+            int dictionaryCreationThreshold
+        )
             : base(new List<TItem>()) // Be explicit about the use of List<T> so we can foreach over
-                                      // Items internally without enumerator allocations.
+        // Items internally without enumerator allocations.
         {
             if (dictionaryCreationThreshold < -1)
             {
-                throw new ArgumentOutOfRangeException(nameof(dictionaryCreationThreshold), SR.ArgumentOutOfRange_InvalidThreshold);
+                throw new ArgumentOutOfRangeException(
+                    nameof(dictionaryCreationThreshold),
+                    SR.ArgumentOutOfRange_InvalidThreshold
+                );
             }
 
             this.comparer = comparer ?? EqualityComparer<TKey>.Default;
-            threshold = dictionaryCreationThreshold == -1 ? int.MaxValue : dictionaryCreationThreshold;
+            threshold =
+                dictionaryCreationThreshold == -1 ? int.MaxValue : dictionaryCreationThreshold;
         }
 
         /// <summary>
@@ -65,7 +73,9 @@ namespace System.Collections.ObjectModel
                     return item;
                 }
 
-                throw new KeyNotFoundException(SR.Format(SR.Arg_KeyNotFoundWithKey, key.ToString()));
+                throw new KeyNotFoundException(
+                    SR.Format(SR.Arg_KeyNotFoundWithKey, key.ToString())
+                );
             }
         }
 
@@ -248,7 +258,10 @@ namespace System.Collections.ObjectModel
             {
                 if (Contains(key))
                 {
-                    throw new ArgumentException(SR.Format(SR.Argument_AddingDuplicate, key), nameof(key));
+                    throw new ArgumentException(
+                        SR.Format(SR.Argument_AddingDuplicate, key),
+                        nameof(key)
+                    );
                 }
 
                 keyCount++;

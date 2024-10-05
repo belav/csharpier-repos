@@ -12,7 +12,8 @@ namespace Microsoft.EntityFrameworkCore;
 /// <typeparam name="TConfiguration">The IEntityTypeConfiguration&lt;&gt; type to use.</typeparam>
 /// <typeparam name="TEntity">The entity type to be configured.</typeparam>
 [AttributeUsage(AttributeTargets.Class)]
-public sealed class EntityTypeConfigurationAttribute<TConfiguration, TEntity> : EntityTypeConfigurationAttribute
+public sealed class EntityTypeConfigurationAttribute<TConfiguration, TEntity>
+    : EntityTypeConfigurationAttribute
     where TConfiguration : class, IEntityTypeConfiguration<TEntity>
     where TEntity : class
 {
@@ -20,7 +21,5 @@ public sealed class EntityTypeConfigurationAttribute<TConfiguration, TEntity> : 
     ///     Initializes a new instance of the <see cref="EntityTypeConfigurationAttribute" /> class.
     /// </summary>
     public EntityTypeConfigurationAttribute()
-        : base(typeof(TConfiguration))
-    {
-    }
+        : base(typeof(TConfiguration)) { }
 }

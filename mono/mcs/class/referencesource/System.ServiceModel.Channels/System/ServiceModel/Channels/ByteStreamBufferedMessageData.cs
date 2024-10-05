@@ -15,15 +15,15 @@ namespace System.ServiceModel.Channels
         int refCount;
 
         public ByteStreamBufferedMessageData(ArraySegment<byte> buffer)
-            : this(buffer, null)
-        {
-        }
+            : this(buffer, null) { }
 
         public ByteStreamBufferedMessageData(ArraySegment<byte> buffer, BufferManager bufferManager)
         {
             if (buffer.Array == null)
             {
-                throw FxTrace.Exception.ArgumentNull(SR.ArgumentPropertyShouldNotBeNullError("buffer.Array"));
+                throw FxTrace.Exception.ArgumentNull(
+                    SR.ArgumentPropertyShouldNotBeNullError("buffer.Array")
+                );
             }
 
             this.buffer = buffer;
@@ -33,10 +33,7 @@ namespace System.ServiceModel.Channels
 
         bool IsClosed
         {
-            get
-            {
-                return this.refCount < 0;
-            }
+            get { return this.refCount < 0; }
         }
 
         public ArraySegment<byte> Buffer
@@ -88,8 +85,15 @@ namespace System.ServiceModel.Channels
         {
             ByteStreamBufferedMessageData byteStreamBufferedMessageData;
 
-            public ByteStreamBufferedMessageDataStream(ByteStreamBufferedMessageData byteStreamBufferedMessageData)
-                : base(byteStreamBufferedMessageData.Buffer.Array, byteStreamBufferedMessageData.Buffer.Offset, byteStreamBufferedMessageData.Buffer.Count, false)
+            public ByteStreamBufferedMessageDataStream(
+                ByteStreamBufferedMessageData byteStreamBufferedMessageData
+            )
+                : base(
+                    byteStreamBufferedMessageData.Buffer.Array,
+                    byteStreamBufferedMessageData.Buffer.Offset,
+                    byteStreamBufferedMessageData.Buffer.Count,
+                    false
+                )
             {
                 this.byteStreamBufferedMessageData = byteStreamBufferedMessageData;
                 this.byteStreamBufferedMessageData.Open(); //increment the refCount

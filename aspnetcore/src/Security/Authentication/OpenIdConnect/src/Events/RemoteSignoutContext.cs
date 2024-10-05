@@ -15,9 +15,14 @@ public class RemoteSignOutContext : RemoteAuthenticationContext<OpenIdConnectOpt
     /// Initializes a new instance of <see cref="RemoteSignOutContext"/>.
     /// </summary>
     /// <inheritdoc />
-    public RemoteSignOutContext(HttpContext context, AuthenticationScheme scheme, OpenIdConnectOptions options, OpenIdConnectMessage? message)
-        : base(context, scheme, options, new AuthenticationProperties())
-        => ProtocolMessage = message;
+    public RemoteSignOutContext(
+        HttpContext context,
+        AuthenticationScheme scheme,
+        OpenIdConnectOptions options,
+        OpenIdConnectMessage? message
+    )
+        : base(context, scheme, options, new AuthenticationProperties()) =>
+        ProtocolMessage = message;
 
     /// <summary>
     /// Gets or sets the <see cref="OpenIdConnectMessage"/>.

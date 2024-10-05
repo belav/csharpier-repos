@@ -17,9 +17,10 @@ namespace Microsoft.CodeAnalysis
 
         private DefaultTextDocumentServiceProvider() { }
 
-        public TService GetService<TService>() where TService : class, IDocumentService
+        public TService GetService<TService>()
+            where TService : class, IDocumentService
         {
-            // right now, it doesn't implement much services but we expect it to implements all 
+            // right now, it doesn't implement much services but we expect it to implements all
             // document services in future so that we can remove all if branches in feature code
             // but just delegate work to default document services.
             if (DocumentOperationService.Instance is TService documentOperationService)
@@ -42,7 +43,7 @@ namespace Microsoft.CodeAnalysis
             // right now, we return CanApplyChange for all C# documents, but we probably want to return
             // false for generated files such as resx files or winform designer files.
             // right now, we have a bug where if user renames Resource.[ResourceName] we actually do the rename
-            // but not actually change resx files which in turn, break code since generated file go back to 
+            // but not actually change resx files which in turn, break code since generated file go back to
             // original next time someone changes resx files but reference left as renamed.
             // with this, we now should be able to say no text changes for such files so that rename fails
             // in those cases. if resx people adapt IDocumentService pattern, then they should be able to

@@ -11,7 +11,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters;
 /// </summary>
 internal sealed class SaveTempDataFilter : IResourceFilter, IResultFilter
 {
-    private static readonly Func<object, Task> OnStartingCallback = (state) => OnStarting((HttpContext)state);
+    private static readonly Func<object, Task> OnStartingCallback = (state) =>
+        OnStarting((HttpContext)state);
+
     // Internal for unit testing
     internal static readonly object SaveTempDataFilterContextKey = new object();
 
@@ -34,7 +36,7 @@ internal sealed class SaveTempDataFilter : IResourceFilter, IResultFilter
             var tempDataContext = new SaveTempDataContext()
             {
                 Filters = context.Filters,
-                TempDataDictionaryFactory = _factory
+                TempDataDictionaryFactory = _factory,
             };
             context.HttpContext.Items.Add(SaveTempDataFilterContextKey, tempDataContext);
         }
@@ -43,7 +45,8 @@ internal sealed class SaveTempDataFilter : IResourceFilter, IResultFilter
         {
             context.HttpContext.Response.OnStarting(
                 callback: OnStartingCallback,
-                state: context.HttpContext);
+                state: context.HttpContext
+            );
         }
     }
 
@@ -69,7 +72,8 @@ internal sealed class SaveTempDataFilter : IResourceFilter, IResultFilter
             result: null,
             factory: saveTempDataContext.TempDataDictionaryFactory,
             filters: saveTempDataContext.Filters,
-            httpContext: httpContext);
+            httpContext: httpContext
+        );
 
         return Task.CompletedTask;
     }
@@ -92,9 +96,7 @@ internal sealed class SaveTempDataFilter : IResourceFilter, IResultFilter
     }
 
     /// <inheritdoc />
-    public void OnResultExecuting(ResultExecutingContext context)
-    {
-    }
+    public void OnResultExecuting(ResultExecutingContext context) { }
 
     /// <inheritdoc />
     public void OnResultExecuted(ResultExecutedContext context)
@@ -128,7 +130,8 @@ internal sealed class SaveTempDataFilter : IResourceFilter, IResultFilter
         IActionResult result,
         ITempDataDictionaryFactory factory,
         IList<IFilterMetadata> filters,
-        HttpContext httpContext)
+        HttpContext httpContext
+    )
     {
         var tempData = factory.GetTempData(httpContext);
 

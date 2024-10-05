@@ -13,6 +13,7 @@ internal static partial class Interop
         internal static partial int WebSocketReceive(
             SafeHandle webSocketHandle,
             IntPtr buffers,
-            IntPtr applicationContext);
+            IntPtr applicationContext
+        );
     }
 }

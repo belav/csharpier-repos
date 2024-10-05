@@ -12,7 +12,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 {
     internal abstract partial class AbstractOleCommandTarget
     {
-        public virtual int Exec(ref Guid pguidCmdGroup, uint commandId, uint executeInformation, IntPtr pvaIn, IntPtr pvaOut)
+        public virtual int Exec(
+            ref Guid pguidCmdGroup,
+            uint commandId,
+            uint executeInformation,
+            IntPtr pvaIn,
+            IntPtr pvaOut
+        )
         {
             try
             {
@@ -20,28 +26,57 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
                 // If we don't have a subject buffer, then that means we're outside our code and we should ignore it
                 // Also, ignore the command if executeInformation indicates isn't meant to be executed. From env\msenv\core\cmdwin.cpp:
-                //      To query the parameter type list of a command, we call Exec with 
+                //      To query the parameter type list of a command, we call Exec with
                 //      the LOWORD of nCmdexecopt set to OLECMDEXECOPT_SHOWHELP (instead of
                 //      the more usual OLECMDEXECOPT_DODEFAULT), the HIWORD of nCmdexecopt
-                //      set to VSCmdOptQueryParameterList, pvaIn set to NULL, and pvaOut 
+                //      set to VSCmdOptQueryParameterList, pvaIn set to NULL, and pvaOut
                 //      pointing to a VARIANT ready to receive the result BSTR.
-                var shouldSkipCommand = executeInformation == (((uint)VsMenus.VSCmdOptQueryParameterList << 16) | (uint)OLECMDEXECOPT.OLECMDEXECOPT_SHOWHELP);
+                var shouldSkipCommand =
+                    executeInformation
+                    == (
+                        ((uint)VsMenus.VSCmdOptQueryParameterList << 16)
+                        | (uint)OLECMDEXECOPT.OLECMDEXECOPT_SHOWHELP
+                    );
                 if (shouldSkipCommand || GetSubjectBufferContainingCaret() == null)
                 {
-                    return NextCommandTarget.Exec(ref pguidCmdGroup, commandId, executeInformation, pvaIn, pvaOut);
+                    return NextCommandTarget.Exec(
+                        ref pguidCmdGroup,
+                        commandId,
+                        executeInformation,
+                        pvaIn,
+                        pvaOut
+                    );
                 }
 
                 if (pguidCmdGroup == VSConstants.VSStd2K)
                 {
-                    return ExecuteVisualStudio2000(ref pguidCmdGroup, commandId, executeInformation, pvaIn, pvaOut);
+                    return ExecuteVisualStudio2000(
+                        ref pguidCmdGroup,
+                        commandId,
+                        executeInformation,
+                        pvaIn,
+                        pvaOut
+                    );
                 }
                 else if (pguidCmdGroup == VSConstants.GUID_VSStandardCommandSet97)
                 {
-                    return ExecuteVisualStudio97(ref pguidCmdGroup, commandId, executeInformation, pvaIn, pvaOut);
+                    return ExecuteVisualStudio97(
+                        ref pguidCmdGroup,
+                        commandId,
+                        executeInformation,
+                        pvaIn,
+                        pvaOut
+                    );
                 }
                 else
                 {
-                    return NextCommandTarget.Exec(ref pguidCmdGroup, commandId, executeInformation, pvaIn, pvaOut);
+                    return NextCommandTarget.Exec(
+                        ref pguidCmdGroup,
+                        commandId,
+                        executeInformation,
+                        pvaIn,
+                        pvaOut
+                    );
                 }
             }
             finally
@@ -50,7 +85,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             }
         }
 
-        private int ExecuteVisualStudio97(ref Guid pguidCmdGroup, uint commandId, uint executeInformation, IntPtr pvaIn, IntPtr pvaOut)
+        private int ExecuteVisualStudio97(
+            ref Guid pguidCmdGroup,
+            uint commandId,
+            uint executeInformation,
+            IntPtr pvaIn,
+            IntPtr pvaOut
+        )
         {
             switch ((VSConstants.VSStd97CmdID)commandId)
             {
@@ -62,14 +103,32 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 case VSConstants.VSStd97CmdID.MultiLevelUndo:
                 case VSConstants.VSStd97CmdID.MultiLevelRedo:
                     GCManager.UseLowLatencyModeForProcessingUserInput();
-                    return NextCommandTarget.Exec(ref pguidCmdGroup, commandId, executeInformation, pvaIn, pvaOut);
+                    return NextCommandTarget.Exec(
+                        ref pguidCmdGroup,
+                        commandId,
+                        executeInformation,
+                        pvaIn,
+                        pvaOut
+                    );
 
                 default:
-                    return NextCommandTarget.Exec(ref pguidCmdGroup, commandId, executeInformation, pvaIn, pvaOut);
+                    return NextCommandTarget.Exec(
+                        ref pguidCmdGroup,
+                        commandId,
+                        executeInformation,
+                        pvaIn,
+                        pvaOut
+                    );
             }
         }
 
-        protected virtual int ExecuteVisualStudio2000(ref Guid pguidCmdGroup, uint commandId, uint executeInformation, IntPtr pvaIn, IntPtr pvaOut)
+        protected virtual int ExecuteVisualStudio2000(
+            ref Guid pguidCmdGroup,
+            uint commandId,
+            uint executeInformation,
+            IntPtr pvaIn,
+            IntPtr pvaOut
+        )
         {
             switch ((VSConstants.VSStd2KCmdID)commandId)
             {
@@ -101,10 +160,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 case VSConstants.VSStd2KCmdID.INSERTSNIPPET:
                 case VSConstants.VSStd2KCmdID.SURROUNDWITH:
                     GCManager.UseLowLatencyModeForProcessingUserInput();
-                    return NextCommandTarget.Exec(ref pguidCmdGroup, commandId, executeInformation, pvaIn, pvaOut);
+                    return NextCommandTarget.Exec(
+                        ref pguidCmdGroup,
+                        commandId,
+                        executeInformation,
+                        pvaIn,
+                        pvaOut
+                    );
 
                 default:
-                    return NextCommandTarget.Exec(ref pguidCmdGroup, commandId, executeInformation, pvaIn, pvaOut);
+                    return NextCommandTarget.Exec(
+                        ref pguidCmdGroup,
+                        commandId,
+                        executeInformation,
+                        pvaIn,
+                        pvaOut
+                    );
             }
         }
     }

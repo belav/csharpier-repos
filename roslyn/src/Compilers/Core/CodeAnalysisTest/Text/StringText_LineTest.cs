@@ -59,21 +59,27 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void FromSpanZeroLengthNotEndOfLineThrows()
         {
             var text = SourceText.From("abcdef");
-            Assert.Throws<ArgumentOutOfRangeException>(() => TextLine.FromSpan(text, new TextSpan(0, 0)));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => TextLine.FromSpan(text, new TextSpan(0, 0))
+            );
         }
 
         [Fact]
         public void FromSpanNotEndOfLineThrows()
         {
             var text = SourceText.From("abcdef");
-            Assert.Throws<ArgumentOutOfRangeException>(() => TextLine.FromSpan(text, new TextSpan(0, 3)));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => TextLine.FromSpan(text, new TextSpan(0, 3))
+            );
         }
 
         [Fact]
         public void FromSpanNotStartOfLineThrows()
         {
             var text = SourceText.From("abcdef");
-            Assert.Throws<ArgumentOutOfRangeException>(() => TextLine.FromSpan(text, new TextSpan(1, 5)));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => TextLine.FromSpan(text, new TextSpan(1, 5))
+            );
         }
 
         [Fact]
@@ -104,21 +110,27 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void FromSpanLengthGreaterThanTextThrows()
         {
             var text = SourceText.From("abcdef");
-            Assert.Throws<ArgumentOutOfRangeException>(() => TextLine.FromSpan(text, new TextSpan(1, 10)));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => TextLine.FromSpan(text, new TextSpan(1, 10))
+            );
         }
 
         [Fact]
         public void FromSpanStartsBeforeZeroThrows()
         {
             var text = SourceText.From("abcdef");
-            Assert.Throws<ArgumentOutOfRangeException>(() => TextLine.FromSpan(text, new TextSpan(-1, 2)));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => TextLine.FromSpan(text, new TextSpan(-1, 2))
+            );
         }
 
         [Fact]
         public void FromSpanZeroLengthBeyondEndThrows()
         {
             var text = SourceText.From("abcdef");
-            Assert.Throws<ArgumentOutOfRangeException>(() => TextLine.FromSpan(text, new TextSpan(7, 0)));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => TextLine.FromSpan(text, new TextSpan(7, 0))
+            );
         }
 
         [Fact]

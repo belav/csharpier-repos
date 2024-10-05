@@ -8,7 +8,10 @@ namespace System.Linq
 {
     public static partial class Enumerable
     {
-        public static IEnumerable<TSource> Concat<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second)
+        public static IEnumerable<TSource> Concat<TSource>(
+            this IEnumerable<TSource> first,
+            IEnumerable<TSource> second
+        )
         {
             if (first == null)
             {
@@ -55,13 +58,15 @@ namespace System.Linq
                 _second = second;
             }
 
-            public override Iterator<TSource> Clone() => new Concat2Iterator<TSource>(_first, _second);
+            public override Iterator<TSource> Clone() =>
+                new Concat2Iterator<TSource>(_first, _second);
 
             internal override ConcatIterator<TSource> Concat(IEnumerable<TSource> next)
             {
-                bool hasOnlyCollections = next is ICollection<TSource> &&
-                                          _first is ICollection<TSource> &&
-                                          _second is ICollection<TSource>;
+                bool hasOnlyCollections =
+                    next is ICollection<TSource>
+                    && _first is ICollection<TSource>
+                    && _second is ICollection<TSource>;
                 return new ConcatNIterator<TSource>(this, next, 2, hasOnlyCollections);
             }
 
@@ -127,7 +132,12 @@ namespace System.Linq
             /// <c>true</c> if all sources this iterator concatenates implement <see cref="ICollection{TSource}"/>;
             /// otherwise, <c>false</c>.
             /// </param>
-            internal ConcatNIterator(ConcatIterator<TSource> tail, IEnumerable<TSource> head, int headIndex, bool hasOnlyCollections)
+            internal ConcatNIterator(
+                ConcatIterator<TSource> tail,
+                IEnumerable<TSource> head,
+                int headIndex,
+                bool hasOnlyCollections
+            )
             {
                 Debug.Assert(tail != null);
                 Debug.Assert(head != null);
@@ -141,7 +151,8 @@ namespace System.Linq
 
             private ConcatNIterator<TSource>? PreviousN => _tail as ConcatNIterator<TSource>;
 
-            public override Iterator<TSource> Clone() => new ConcatNIterator<TSource>(_tail, _head, _headIndex, _hasOnlyCollections);
+            public override Iterator<TSource> Clone() =>
+                new ConcatNIterator<TSource>(_tail, _head, _headIndex, _hasOnlyCollections);
 
             internal override ConcatIterator<TSource> Concat(IEnumerable<TSource> next)
             {
@@ -166,7 +177,8 @@ namespace System.Linq
                     return null;
                 }
 
-                ConcatNIterator<TSource>? node, previousN = this;
+                ConcatNIterator<TSource>? node,
+                    previousN = this;
                 do
                 {
                     node = previousN;
@@ -174,8 +186,7 @@ namespace System.Linq
                     {
                         return node._head;
                     }
-                }
-                while ((previousN = node.PreviousN) != null);
+                } while ((previousN = node.PreviousN) != null);
 
                 Debug.Assert(index == 0 || index == 1);
                 Debug.Assert(node._tail is Concat2Iterator<TSource>);

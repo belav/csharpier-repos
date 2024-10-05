@@ -22,7 +22,10 @@ namespace System.Reflection.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/60334", TestPlatforms.iOS | TestPlatforms.tvOS)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/60334",
+            TestPlatforms.iOS | TestPlatforms.tvOS
+        )]
         public static void Test_GetCurrentMethod_Inlineable()
         {
             // Verify that the result is not affected by inlining optimizations
@@ -39,10 +42,34 @@ namespace System.Reflection.Tests
         }
 
         [Theory]
-        [InlineData("MyOtherMethod", BindingFlags.Static | BindingFlags.Public, "MyOtherMethod", BindingFlags.Static | BindingFlags.Public, true)]  // Same methods
-        [InlineData("MyOtherMethod", BindingFlags.Static | BindingFlags.Public, "MyOtherMethod", BindingFlags.Static | BindingFlags.NonPublic, false)]  // Two methods of the same name
-        [InlineData("MyAnotherMethod", BindingFlags.Static | BindingFlags.NonPublic, "MyOtherMethod", BindingFlags.Static | BindingFlags.NonPublic, false)]  // Two similar methods with different names
-        public static void TestEqualityMethods(string methodName1, BindingFlags bindingFlags1, string methodName2, BindingFlags bindingFlags2, bool expected)
+        [InlineData(
+            "MyOtherMethod",
+            BindingFlags.Static | BindingFlags.Public,
+            "MyOtherMethod",
+            BindingFlags.Static | BindingFlags.Public,
+            true
+        )] // Same methods
+        [InlineData(
+            "MyOtherMethod",
+            BindingFlags.Static | BindingFlags.Public,
+            "MyOtherMethod",
+            BindingFlags.Static | BindingFlags.NonPublic,
+            false
+        )] // Two methods of the same name
+        [InlineData(
+            "MyAnotherMethod",
+            BindingFlags.Static | BindingFlags.NonPublic,
+            "MyOtherMethod",
+            BindingFlags.Static | BindingFlags.NonPublic,
+            false
+        )] // Two similar methods with different names
+        public static void TestEqualityMethods(
+            string methodName1,
+            BindingFlags bindingFlags1,
+            string methodName2,
+            BindingFlags bindingFlags2,
+            bool expected
+        )
         {
             MethodBase mb1 = typeof(MethodBaseTests).GetMethod(methodName1, bindingFlags1);
             MethodBase mb2 = typeof(MethodBaseTests).GetMethod(methodName2, bindingFlags2);
@@ -50,13 +77,19 @@ namespace System.Reflection.Tests
             Assert.NotEqual(expected, mb1 != mb2);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsMethodBodySupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsMethodBodySupported)
+        )]
         public static void TestMethodBody()
         {
-            MethodBase mbase = typeof(MethodBaseTests).GetMethod("MyOtherMethod", BindingFlags.Static | BindingFlags.Public);
+            MethodBase mbase = typeof(MethodBaseTests).GetMethod(
+                "MyOtherMethod",
+                BindingFlags.Static | BindingFlags.Public
+            );
             MethodBody mb = mbase.GetMethodBody();
             var codeSize = mb.GetILAsByteArray().Length;
-            Assert.True(mb.InitLocals);  // local variables are initialized
+            Assert.True(mb.InitLocals); // local variables are initialized
 
             if (codeSize == 0)
             {
@@ -78,9 +111,18 @@ namespace System.Reflection.Tests
 
                 foreach (LocalVariableInfo lvi in mb.LocalVariables)
                 {
-                    if (lvi.LocalIndex == 0) { Assert.Equal(typeof(int), lvi.LocalType); }
-                    if (lvi.LocalIndex == 1) { Assert.Equal(typeof(string), lvi.LocalType); }
-                    if (lvi.LocalIndex == 2) { Assert.Equal(typeof(bool), lvi.LocalType); }
+                    if (lvi.LocalIndex == 0)
+                    {
+                        Assert.Equal(typeof(int), lvi.LocalType);
+                    }
+                    if (lvi.LocalIndex == 1)
+                    {
+                        Assert.Equal(typeof(string), lvi.LocalType);
+                    }
+                    if (lvi.LocalIndex == 2)
+                    {
+                        Assert.Equal(typeof(bool), lvi.LocalType);
+                    }
                 }
 #else
                 Assert.Equal(1, mb.MaxStackSize);
@@ -88,8 +130,14 @@ namespace System.Reflection.Tests
 
                 foreach (LocalVariableInfo lvi in mb.LocalVariables)
                 {
-                    if (lvi.LocalIndex == 0) { Assert.Equal(typeof(int), lvi.LocalType); }
-                    if (lvi.LocalIndex == 1) { Assert.Equal(typeof(string), lvi.LocalType); }
+                    if (lvi.LocalIndex == 0)
+                    {
+                        Assert.Equal(typeof(int), lvi.LocalType);
+                    }
+                    if (lvi.LocalIndex == 1)
+                    {
+                        Assert.Equal(typeof(string), lvi.LocalType);
+                    }
                 }
 #endif
             }
@@ -97,12 +145,12 @@ namespace System.Reflection.Tests
 
         private static int MyAnotherMethod(int x)
         {
-            return x+1;
+            return x + 1;
         }
 
         private static int MyOtherMethod(int x)
         {
-            return x+1;
+            return x + 1;
         }
 
 #pragma warning disable xUnit1013 // Public method should be marked as test
@@ -121,7 +169,10 @@ namespace System.Reflection.Tests
         [Fact]
         public static void Test_GetCurrentMethod_ConstructedGenericMethod()
         {
-            MethodInfo mi = typeof(MethodBaseTests).GetMethod(nameof(MyFakeGenericMethod), BindingFlags.NonPublic | BindingFlags.Static);
+            MethodInfo mi = typeof(MethodBaseTests).GetMethod(
+                nameof(MyFakeGenericMethod),
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
             MethodBase m = mi.MakeGenericMethod(typeof(byte));
 
             Assert.Equal(nameof(MyFakeGenericMethod), m.Name);
@@ -136,7 +187,10 @@ namespace System.Reflection.Tests
         [Fact]
         public static void Test_GetCurrentMethod_GenericMethodDefinition()
         {
-            MethodBase m = typeof(MethodBaseTests).GetMethod(nameof(MyFakeGenericMethod), BindingFlags.NonPublic | BindingFlags.Static);
+            MethodBase m = typeof(MethodBaseTests).GetMethod(
+                nameof(MyFakeGenericMethod),
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
 
             Assert.Equal(nameof(MyFakeGenericMethod), m.Name);
             Assert.Equal(typeof(MethodBaseTests), m.ReflectedType);
@@ -147,8 +201,6 @@ namespace System.Reflection.Tests
             Assert.Equal("T", m.GetGenericArguments()[0].Name);
         }
 
-        private static void MyFakeGenericMethod<T>()
-        {
-        }
+        private static void MyFakeGenericMethod<T>() { }
     }
 }

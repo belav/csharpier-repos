@@ -20,7 +20,10 @@ public sealed class CngGcmAuthenticatedEncryptorDescriptor : IAuthenticatedEncry
     /// </summary>
     /// <param name="configuration">The <see cref="CngCbcAuthenticatedEncryptorConfiguration"/>.</param>
     /// <param name="masterKey">The master key.</param>
-    public CngGcmAuthenticatedEncryptorDescriptor(CngGcmAuthenticatedEncryptorConfiguration configuration, ISecret masterKey)
+    public CngGcmAuthenticatedEncryptorDescriptor(
+        CngGcmAuthenticatedEncryptorConfiguration configuration,
+        ISecret masterKey
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(configuration);
         ArgumentNullThrowHelper.ThrowIfNull(masterKey);
@@ -42,19 +45,31 @@ public sealed class CngGcmAuthenticatedEncryptorDescriptor : IAuthenticatedEncry
         //   <masterKey>...</masterKey>
         // </descriptor>
 
-        var encryptionElement = new XElement("encryption",
+        var encryptionElement = new XElement(
+            "encryption",
             new XAttribute("algorithm", Configuration.EncryptionAlgorithm),
-            new XAttribute("keyLength", Configuration.EncryptionAlgorithmKeySize));
+            new XAttribute("keyLength", Configuration.EncryptionAlgorithmKeySize)
+        );
         if (Configuration.EncryptionAlgorithmProvider != null)
         {
-            encryptionElement.SetAttributeValue("provider", Configuration.EncryptionAlgorithmProvider);
+            encryptionElement.SetAttributeValue(
+                "provider",
+                Configuration.EncryptionAlgorithmProvider
+            );
         }
 
-        var rootElement = new XElement("descriptor",
-            new XComment(" Algorithms provided by Windows CNG, using Galois/Counter Mode encryption and validation "),
+        var rootElement = new XElement(
+            "descriptor",
+            new XComment(
+                " Algorithms provided by Windows CNG, using Galois/Counter Mode encryption and validation "
+            ),
             encryptionElement,
-            MasterKey.ToMasterKeyElement());
+            MasterKey.ToMasterKeyElement()
+        );
 
-        return new XmlSerializedDescriptorInfo(rootElement, typeof(CngGcmAuthenticatedEncryptorDescriptorDeserializer));
+        return new XmlSerializedDescriptorInfo(
+            rootElement,
+            typeof(CngGcmAuthenticatedEncryptorDescriptorDeserializer)
+        );
     }
 }

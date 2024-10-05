@@ -25,7 +25,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
                 var csi = new Csi();
                 csi.Features = s;
                 csi.Source = MSBuildUtil.CreateTaskItem("test.csx");
-                Assert.Equal("/i- /features:a /features:b test.csx", csi.GenerateResponseFileContents());
+                Assert.Equal(
+                    "/i- /features:a /features:b test.csx",
+                    csi.GenerateResponseFileContents()
+                );
             };
 
             test("a;b");
@@ -62,8 +65,15 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         {
             var csi = new Csi();
             csi.Source = MSBuildUtil.CreateTaskItem("test.csx");
-            csi.ScriptArguments = new[] { @"C:\Some Path\Some File.ini", @"C:\Some Path\Some Other File.bak" };
-            Assert.Equal(@"/i- test.csx ""C:\Some Path\Some File.ini"" ""C:\Some Path\Some Other File.bak""", csi.GenerateResponseFileContents());
+            csi.ScriptArguments = new[]
+            {
+                @"C:\Some Path\Some File.ini",
+                @"C:\Some Path\Some Other File.bak",
+            };
+            Assert.Equal(
+                @"/i- test.csx ""C:\Some Path\Some File.ini"" ""C:\Some Path\Some Other File.bak""",
+                csi.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -71,8 +81,15 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         {
             var csi = new Csi();
             csi.Source = MSBuildUtil.CreateTaskItem("test.csx");
-            csi.ScriptArguments = new[] { @"""C:\Some Path\Some File.ini""", @"""C:\Some Path\Some Other File.bak""" };
-            Assert.Equal(@"/i- test.csx ""\""C:\Some Path\Some File.ini\"""" ""\""C:\Some Path\Some Other File.bak\""""", csi.GenerateResponseFileContents());
+            csi.ScriptArguments = new[]
+            {
+                @"""C:\Some Path\Some File.ini""",
+                @"""C:\Some Path\Some Other File.bak""",
+            };
+            Assert.Equal(
+                @"/i- test.csx ""\""C:\Some Path\Some File.ini\"""" ""\""C:\Some Path\Some Other File.bak\""""",
+                csi.GenerateResponseFileContents()
+            );
         }
 
         [Fact]

@@ -35,7 +35,8 @@ namespace System.Web.Mvc.Razor.Test
 
 #if VB_ENABLED
         [Fact]
-        public void DecorateGodeGenerator_ReplacesVBCodeGeneratorWithMvcSpecificOne() {
+        public void DecorateGodeGenerator_ReplacesVBCodeGeneratorWithMvcSpecificOne()
+        {
             // Arrange
             MvcWebPageRazorHost host = new MvcWebPageRazorHost("foo.vbhtml", "bar");
             var generator = new VBRazorCodeGenerator("someClass", "root.name", "foo.vbhtml", host);
@@ -57,7 +58,12 @@ namespace System.Web.Mvc.Razor.Test
         {
             // Arrange
             MvcWebPageRazorHost host = new MvcWebPageRazorHost("foo.cshtml", "bar");
-            var generator = new CSharpRazorCodeGenerator("someClass", "root.name", "foo.cshtml", host);
+            var generator = new CSharpRazorCodeGenerator(
+                "someClass",
+                "root.name",
+                "foo.cshtml",
+                host
+            );
 
             // Act
             var result = host.DecorateCodeGenerator(generator);
@@ -74,7 +80,13 @@ namespace System.Web.Mvc.Razor.Test
         public void DecorateCodeParser_ThrowsOnNull()
         {
             MvcWebPageRazorHost host = new MvcWebPageRazorHost("foo.cshtml", "bar");
-            Assert.ThrowsArgumentNull(delegate() { host.DecorateCodeParser(null); }, "incomingCodeParser");
+            Assert.ThrowsArgumentNull(
+                delegate()
+                {
+                    host.DecorateCodeParser(null);
+                },
+                "incomingCodeParser"
+            );
         }
 
         [Fact]
@@ -93,7 +105,8 @@ namespace System.Web.Mvc.Razor.Test
 
 #if VB_ENABLED
         [Fact]
-        public void DecorateCodeParser_ReplacesVBCodeParserWithMvcSpecificOne() {
+        public void DecorateCodeParser_ReplacesVBCodeParserWithMvcSpecificOne()
+        {
             // Arrange
             MvcWebPageRazorHost host = new MvcWebPageRazorHost("foo.vbhtml", "bar");
             var parser = new VBCodeParser();

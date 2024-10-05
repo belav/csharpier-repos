@@ -35,7 +35,7 @@ public class ParameterBindingTests
         boundName.Should().Be("Gandalf");
         boundAge.Should().Be(425);
     }
-    
+
     [Fact]
     public async Task Method_parameters_on_the_invoked_method_can_be_bound_to_hyphenated_option_names()
     {
@@ -46,10 +46,7 @@ public class ParameterBindingTests
             boundFirstName = firstName;
         }
 
-        var command = new CliCommand("command")
-        {
-            new CliOption<string>("--first-name")
-        };
+        var command = new CliCommand("command") { new CliOption<string>("--first-name") };
         command.Action = CommandHandler.Create<string>(Execute);
 
         await command.Parse("command --first-name Gandalf").InvokeAsync();
@@ -95,7 +92,7 @@ public class ParameterBindingTests
         var command = new CliCommand("command")
         {
             new CliOption<string>("--name"),
-            new CliOption<int>("--age")
+            new CliOption<int>("--age"),
         };
         command.Action = CommandHandler.Create<string, int>(Execute);
 
@@ -120,7 +117,7 @@ public class ParameterBindingTests
         var command = new CliCommand("command")
         {
             new CliOption<string>("--NAME", "-n"),
-            new CliOption<int>("--age", "-a")
+            new CliOption<int>("--age", "-a"),
         };
         command.Action = CommandHandler.Create<string, int>(Execute);
 
@@ -139,13 +136,15 @@ public class ParameterBindingTests
         var command = new CliCommand("command")
         {
             new CliOption<string>("--name"),
-            new CliOption<int>("--age")
+            new CliOption<int>("--age"),
         };
-        command.Action = CommandHandler.Create<string, int>((name, age) =>
-        {
-            boundName = name;
-            boundAge = age;
-        });
+        command.Action = CommandHandler.Create<string, int>(
+            (name, age) =>
+            {
+                boundName = name;
+                boundAge = age;
+            }
+        );
 
         await command.Parse("command --age 425 --name Gandalf").InvokeAsync();
 
@@ -158,10 +157,7 @@ public class ParameterBindingTests
     {
         int? boundAge = default;
 
-        var command = new CliCommand("command")
-        {
-            new CliOption<int?>("--age")
-        };
+        var command = new CliCommand("command") { new CliOption<int?>("--age") };
         command.Action = CommandHandler.Create<int?>(age =>
         {
             boundAge = age;
@@ -178,10 +174,7 @@ public class ParameterBindingTests
         var wasCalled = false;
         int? boundAge = default;
 
-        var command = new CliCommand("command")
-        {
-            new CliOption<int?>("--age")
-        };
+        var command = new CliCommand("command") { new CliOption<int?>("--age") };
         command.Action = CommandHandler.Create<int?>(age =>
         {
             wasCalled = true;
@@ -200,10 +193,7 @@ public class ParameterBindingTests
         DirectoryInfo boundDirectoryInfo = default;
         var tempPath = Path.GetTempPath();
 
-        var command = new CliCommand("command")
-        {
-            new CliOption<DirectoryInfo>("--dir")
-        };
+        var command = new CliCommand("command") { new CliOption<DirectoryInfo>("--dir") };
         command.Action = CommandHandler.Create<DirectoryInfo>(dir =>
         {
             boundDirectoryInfo = dir;
@@ -221,11 +211,11 @@ public class ParameterBindingTests
 
         var option = new CliOption<int>("-x");
 
-        var command = new CliCommand("command")
+        var command = new CliCommand("command") { option };
+        command.Action = CommandHandler.Create<ParseResult>(result =>
         {
-            option
-        };
-        command.Action = CommandHandler.Create<ParseResult>(result => { boundParseResult = result; });
+            boundParseResult = result;
+        });
 
         await command.Parse("command -x 123").InvokeAsync();
 
@@ -238,11 +228,11 @@ public class ParameterBindingTests
         BindingContext boundContext = default;
 
         var option = new CliOption<int>("-x");
-        var command = new CliCommand("command")
+        var command = new CliCommand("command") { option };
+        command.Action = CommandHandler.Create<BindingContext>(context =>
         {
-            option
-        };
-        command.Action = CommandHandler.Create<BindingContext>(context => { boundContext = context; });
+            boundContext = context;
+        });
 
         await command.Parse("command -x 123").InvokeAsync();
 
@@ -271,7 +261,7 @@ public class ParameterBindingTests
         var command = new CliCommand("command")
         {
             new CliOption<string>("--name"),
-            new CliOption<int>("--age")
+            new CliOption<int>("--age"),
         };
         command.Action = CommandHandler.Create((ExecuteTestDelegate)testClass.Execute);
 
@@ -289,11 +279,12 @@ public class ParameterBindingTests
         var command = new CliCommand("command")
         {
             new CliOption<string>("--name"),
-            new CliOption<int>("--age")
+            new CliOption<int>("--age"),
         };
         command.Action = CommandHandler.Create(
             testClass.GetType().GetMethod(nameof(ExecuteTestClass.Execute)),
-            testClass);
+            testClass
+        );
 
         await command.Parse("command --age 425 --name Gandalf").InvokeAsync();
 
@@ -334,10 +325,7 @@ public class ParameterBindingTests
             boundFirstName = firstName;
         }
 
-        var command = new CliCommand("command")
-        {
-            new CliArgument<string>("first-name")
-        };
+        var command = new CliCommand("command") { new CliArgument<string>("first-name") };
         command.Action = CommandHandler.Create<string>(Execute);
 
         await command.Parse("command Gandalf").InvokeAsync();
@@ -395,10 +383,15 @@ public class ParameterBindingTests
     [InlineData(typeof(ConcreteTestCommandHandler), 42)]
     [InlineData(typeof(VirtualTestCommandHandler), 42)]
     [InlineData(typeof(OverridenVirtualTestCommandHandler), 41)]
-    public async Task Method_invoked_is_matching_to_the_interface_implementation(Type type, int expectedResult)
+    public async Task Method_invoked_is_matching_to_the_interface_implementation(
+        Type type,
+        int expectedResult
+    )
     {
         var command = new CliCommand("command");
-        command.Action = CommandHandler.Create(type.GetMethod(nameof(AsynchronousCliAction.InvokeAsync)));
+        command.Action = CommandHandler.Create(
+            type.GetMethod(nameof(AsynchronousCliAction.InvokeAsync))
+        );
 
         int result = await command.Parse("command").InvokeAsync();
 
@@ -408,26 +401,31 @@ public class ParameterBindingTests
     public abstract class AbstractTestCommandHandler : AsynchronousCliAction
     {
         public abstract Task<int> DoJobAsync();
-        
-        public override Task<int> InvokeAsync(ParseResult context, CancellationToken cancellationToken)
-            => DoJobAsync();
+
+        public override Task<int> InvokeAsync(
+            ParseResult context,
+            CancellationToken cancellationToken
+        ) => DoJobAsync();
     }
 
     public sealed class ConcreteTestCommandHandler : AbstractTestCommandHandler
     {
-        public override Task<int> DoJobAsync()
-            => Task.FromResult(42);
+        public override Task<int> DoJobAsync() => Task.FromResult(42);
     }
 
     public class VirtualTestCommandHandler : AsynchronousCliAction
     {
-        public override Task<int> InvokeAsync(ParseResult context, CancellationToken cancellationToken)
-            => Task.FromResult(42);
+        public override Task<int> InvokeAsync(
+            ParseResult context,
+            CancellationToken cancellationToken
+        ) => Task.FromResult(42);
     }
 
     public class OverridenVirtualTestCommandHandler : VirtualTestCommandHandler
     {
-        public override Task<int> InvokeAsync(ParseResult context, CancellationToken cancellationToken)
-            => Task.FromResult(41);
+        public override Task<int> InvokeAsync(
+            ParseResult context,
+            CancellationToken cancellationToken
+        ) => Task.FromResult(41);
     }
 }

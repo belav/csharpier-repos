@@ -14,17 +14,19 @@ namespace System.IdentityModel.Selectors
     //
     internal class HashCryptoHandle : CryptoHandle
     {
-        public HashCryptoHandle(InternalRefCountedHandle nativeHandle, DateTime expiration, IntPtr parameters)
-            : base(nativeHandle, expiration, parameters, typeof(RpcHashCryptoParameters))
-        {
-        }
+        public HashCryptoHandle(
+            InternalRefCountedHandle nativeHandle,
+            DateTime expiration,
+            IntPtr parameters
+        )
+            : base(nativeHandle, expiration, parameters, typeof(RpcHashCryptoParameters)) { }
 
-        private HashCryptoHandle(InternalRefCountedHandle internalHandle) : base(internalHandle) { }
+        private HashCryptoHandle(InternalRefCountedHandle internalHandle)
+            : base(internalHandle) { }
 
         protected override CryptoHandle OnDuplicate()
         {
             return new HashCryptoHandle(InternalHandle);
         }
-
     }
 }

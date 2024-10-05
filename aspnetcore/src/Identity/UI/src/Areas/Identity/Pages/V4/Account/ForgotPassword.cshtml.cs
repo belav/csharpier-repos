@@ -48,7 +48,8 @@ public abstract class ForgotPasswordModel : PageModel
     public virtual Task<IActionResult> OnPostAsync() => throw new NotImplementedException();
 }
 
-internal sealed class ForgotPasswordModel<TUser> : ForgotPasswordModel where TUser : class
+internal sealed class ForgotPasswordModel<TUser> : ForgotPasswordModel
+    where TUser : class
 {
     private readonly UserManager<TUser> _userManager;
     private readonly IEmailSender<TUser> _emailSender;
@@ -78,9 +79,14 @@ internal sealed class ForgotPasswordModel<TUser> : ForgotPasswordModel where TUs
                 "/Account/ResetPassword",
                 pageHandler: null,
                 values: new { area = "Identity", code },
-                protocol: Request.Scheme)!;
+                protocol: Request.Scheme
+            )!;
 
-            await _emailSender.SendPasswordResetLinkAsync(user, Input.Email, HtmlEncoder.Default.Encode(callbackUrl));
+            await _emailSender.SendPasswordResetLinkAsync(
+                user,
+                Input.Email,
+                HtmlEncoder.Default.Encode(callbackUrl)
+            );
 
             return RedirectToPage("./ForgotPasswordConfirmation");
         }

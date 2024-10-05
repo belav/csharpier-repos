@@ -3,7 +3,5 @@
 
 namespace Microsoft.Extensions.DependencyInjection.Specification.Fakes
 {
-    public interface IFakeMultipleService : IFakeService
-    {
-    }
+    public interface IFakeMultipleService : IFakeService { }
 }

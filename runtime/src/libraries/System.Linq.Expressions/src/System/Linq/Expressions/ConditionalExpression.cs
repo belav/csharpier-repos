@@ -19,7 +19,12 @@ namespace System.Linq.Expressions
             IfTrue = ifTrue;
         }
 
-        internal static ConditionalExpression Make(Expression test, Expression ifTrue, Expression ifFalse, Type type)
+        internal static ConditionalExpression Make(
+            Expression test,
+            Expression ifTrue,
+            Expression ifFalse,
+            Type type
+        )
         {
             if (ifTrue.Type != type || ifFalse.Type != type)
             {
@@ -111,7 +116,12 @@ namespace System.Linq.Expressions
 
     internal sealed class FullConditionalExpressionWithType : FullConditionalExpression
     {
-        internal FullConditionalExpressionWithType(Expression test, Expression ifTrue, Expression ifFalse, Type type)
+        internal FullConditionalExpressionWithType(
+            Expression test,
+            Expression ifTrue,
+            Expression ifFalse,
+            Type type
+        )
             : base(test, ifTrue, ifFalse)
         {
             Type = type;
@@ -131,7 +141,11 @@ namespace System.Linq.Expressions
         /// <returns>A <see cref="ConditionalExpression"/> that has the <see cref="NodeType"/> property equal to
         /// <see cref="ExpressionType.Conditional"/> and the <see cref="ConditionalExpression.Test"/>, <see cref="ConditionalExpression.IfTrue"/>,
         /// and <see cref="ConditionalExpression.IfFalse"/> properties set to the specified values.</returns>
-        public static ConditionalExpression Condition(Expression test, Expression ifTrue, Expression ifFalse)
+        public static ConditionalExpression Condition(
+            Expression test,
+            Expression ifTrue,
+            Expression ifFalse
+        )
         {
             ExpressionUtils.RequiresCanRead(test, nameof(test));
             ExpressionUtils.RequiresCanRead(ifTrue, nameof(ifTrue));
@@ -162,7 +176,12 @@ namespace System.Linq.Expressions
         /// <remarks>This method allows explicitly unifying the result type of the conditional expression in cases where the types of <paramref name="ifTrue"/>
         /// and <paramref name="ifFalse"/> expressions are not equal. Types of both <paramref name="ifTrue"/> and <paramref name="ifFalse"/> must be implicitly
         /// reference assignable to the result type. The <paramref name="type"/> is allowed to be <see cref="Void"/>.</remarks>
-        public static ConditionalExpression Condition(Expression test, Expression ifTrue, Expression ifFalse, Type type)
+        public static ConditionalExpression Condition(
+            Expression test,
+            Expression ifTrue,
+            Expression ifFalse,
+            Type type
+        )
         {
             ExpressionUtils.RequiresCanRead(test, nameof(test));
             ExpressionUtils.RequiresCanRead(ifTrue, nameof(ifTrue));
@@ -176,8 +195,10 @@ namespace System.Linq.Expressions
 
             if (type != typeof(void))
             {
-                if (!TypeUtils.AreReferenceAssignable(type, ifTrue.Type) ||
-                    !TypeUtils.AreReferenceAssignable(type, ifFalse.Type))
+                if (
+                    !TypeUtils.AreReferenceAssignable(type, ifTrue.Type)
+                    || !TypeUtils.AreReferenceAssignable(type, ifFalse.Type)
+                )
                 {
                     throw Error.ArgumentTypesMustMatch();
                 }
@@ -210,7 +231,11 @@ namespace System.Linq.Expressions
         /// <see cref="ExpressionType.Conditional"/> and the <see cref="ConditionalExpression.Test"/>, <see cref="ConditionalExpression.IfTrue"/>,
         /// and <see cref="ConditionalExpression.IfFalse"/> properties set to the specified values. The type of the resulting <see cref="ConditionalExpression"/>
         /// returned by this method is <see cref="Void"/>.</returns>
-        public static ConditionalExpression IfThenElse(Expression test, Expression ifTrue, Expression ifFalse)
+        public static ConditionalExpression IfThenElse(
+            Expression test,
+            Expression ifTrue,
+            Expression ifFalse
+        )
         {
             return Condition(test, ifTrue, ifFalse, typeof(void));
         }

@@ -20,8 +20,19 @@ namespace Microsoft.Web.UnitTestUtil
         {
             HttpContextBase httpcontext = GetHttpContext("/app/", null, null);
             RouteCollection rt = new RouteCollection();
-            rt.Add(new Route("{controller}/{action}/{id}", null) { Defaults = new RouteValueDictionary(new { id = "defaultid" }) });
-            rt.Add("namedroute", new Route("named/{controller}/{action}/{id}", null) { Defaults = new RouteValueDictionary(new { id = "defaultid" }) });
+            rt.Add(
+                new Route("{controller}/{action}/{id}", null)
+                {
+                    Defaults = new RouteValueDictionary(new { id = "defaultid" }),
+                }
+            );
+            rt.Add(
+                "namedroute",
+                new Route("named/{controller}/{action}/{id}", null)
+                {
+                    Defaults = new RouteValueDictionary(new { id = "defaultid" }),
+                }
+            );
             RouteData rd = new RouteData();
             rd.Values.Add("controller", "home");
             rd.Values.Add("action", "oldaction");
@@ -32,7 +43,7 @@ namespace Microsoft.Web.UnitTestUtil
             {
                 HttpContext = httpcontext,
                 RouteData = rd,
-                ViewData = vdd
+                ViewData = vdd,
             };
             Mock<IViewDataContainer> mockVdc = new Mock<IViewDataContainer>();
             mockVdc.Setup(vdc => vdc.ViewData).Returns(vdd);
@@ -45,8 +56,19 @@ namespace Microsoft.Web.UnitTestUtil
         {
             HttpContextBase httpcontext = GetHttpContext("/app/", null, null, protocol, port);
             RouteCollection rt = new RouteCollection();
-            rt.Add(new Route("{controller}/{action}/{id}", null) { Defaults = new RouteValueDictionary(new { id = "defaultid" }) });
-            rt.Add("namedroute", new Route("named/{controller}/{action}/{id}", null) { Defaults = new RouteValueDictionary(new { id = "defaultid" }) });
+            rt.Add(
+                new Route("{controller}/{action}/{id}", null)
+                {
+                    Defaults = new RouteValueDictionary(new { id = "defaultid" }),
+                }
+            );
+            rt.Add(
+                "namedroute",
+                new Route("named/{controller}/{action}/{id}", null)
+                {
+                    Defaults = new RouteValueDictionary(new { id = "defaultid" }),
+                }
+            );
             RouteData rd = new RouteData();
             rd.Values.Add("controller", "home");
             rd.Values.Add("action", "oldaction");
@@ -96,7 +118,10 @@ namespace Microsoft.Web.UnitTestUtil
             return new HtmlHelper(viewContext, container, new RouteCollection());
         }
 
-        public static HtmlHelper<TModel> GetHtmlHelperWithPath<TModel>(ViewDataDictionary<TModel> viewData, string appPath)
+        public static HtmlHelper<TModel> GetHtmlHelperWithPath<TModel>(
+            ViewDataDictionary<TModel> viewData,
+            string appPath
+        )
         {
             ViewContext viewContext = GetViewContextWithPath(appPath, viewData);
             Mock<IViewDataContainer> mockContainer = new Mock<IViewDataContainer>();
@@ -105,12 +130,20 @@ namespace Microsoft.Web.UnitTestUtil
             return new HtmlHelper<TModel>(viewContext, container, new RouteCollection());
         }
 
-        public static HtmlHelper<TModel> GetHtmlHelperWithPath<TModel>(ViewDataDictionary<TModel> viewData)
+        public static HtmlHelper<TModel> GetHtmlHelperWithPath<TModel>(
+            ViewDataDictionary<TModel> viewData
+        )
         {
             return GetHtmlHelperWithPath(viewData, "/");
         }
 
-        public static HttpContextBase GetHttpContext(string appPath, string requestPath, string httpMethod, string protocol, int port)
+        public static HttpContextBase GetHttpContext(
+            string appPath,
+            string requestPath,
+            string httpMethod,
+            string protocol,
+            int port
+        )
         {
             Mock<HttpContextBase> mockHttpContext = new Mock<HttpContextBase>();
 
@@ -121,7 +154,9 @@ namespace Microsoft.Web.UnitTestUtil
             }
             if (!String.IsNullOrEmpty(requestPath))
             {
-                mockHttpContext.Setup(o => o.Request.AppRelativeCurrentExecutionFilePath).Returns(requestPath);
+                mockHttpContext
+                    .Setup(o => o.Request.AppRelativeCurrentExecutionFilePath)
+                    .Returns(requestPath);
             }
 
             Uri uri;
@@ -143,21 +178,35 @@ namespace Microsoft.Web.UnitTestUtil
             }
 
             mockHttpContext.Setup(o => o.Session).Returns((HttpSessionStateBase)null);
-            mockHttpContext.Setup(o => o.Response.ApplyAppPathModifier(It.IsAny<string>())).Returns<string>(r => AppPathModifier + r);
+            mockHttpContext
+                .Setup(o => o.Response.ApplyAppPathModifier(It.IsAny<string>()))
+                .Returns<string>(r => AppPathModifier + r);
             mockHttpContext.Setup(o => o.Items).Returns(new Hashtable());
             return mockHttpContext.Object;
         }
 
-        public static HttpContextBase GetHttpContext(string appPath, string requestPath, string httpMethod)
+        public static HttpContextBase GetHttpContext(
+            string appPath,
+            string requestPath,
+            string httpMethod
+        )
         {
-            return GetHttpContext(appPath, requestPath, httpMethod, Uri.UriSchemeHttp.ToString(), -1);
+            return GetHttpContext(
+                appPath,
+                requestPath,
+                httpMethod,
+                Uri.UriSchemeHttp.ToString(),
+                -1
+            );
         }
 
-        public static ViewDataDictionary<TValue> GetNestedViewData<TModel, TValue>(ViewDataDictionary<TModel> viewData, Expression<Func<TModel, TValue>> expression)
+        public static ViewDataDictionary<TValue> GetNestedViewData<TModel, TValue>(
+            ViewDataDictionary<TModel> viewData,
+            Expression<Func<TModel, TValue>> expression
+        )
         {
             var metadata = ModelMetadata.FromLambdaExpression(expression, viewData);
             var htmlFieldName = ExpressionHelper.GetExpressionText(expression);
-
 
             ViewDataDictionary nestedViewData = new ViewDataDictionary(viewData)
             {
@@ -166,17 +215,23 @@ namespace Microsoft.Web.UnitTestUtil
                 TemplateInfo = new TemplateInfo
                 {
                     HtmlFieldPrefix = viewData.TemplateInfo.GetFullHtmlFieldName(htmlFieldName),
-                }
+                },
             };
 
             return new ViewDataDictionary<TValue>(nestedViewData);
         }
 
-        public static ViewContext GetViewContextWithPath(string appPath, ViewDataDictionary viewData)
+        public static ViewContext GetViewContextWithPath(
+            string appPath,
+            ViewDataDictionary viewData
+        )
         {
             HttpContextBase httpContext = GetHttpContext(appPath, "/request", "GET");
 
-            Mock<ViewContext> mockViewContext = new Mock<ViewContext>() { DefaultValue = DefaultValue.Mock };
+            Mock<ViewContext> mockViewContext = new Mock<ViewContext>()
+            {
+                DefaultValue = DefaultValue.Mock,
+            };
             mockViewContext.Setup(c => c.HttpContext).Returns(httpContext);
             mockViewContext.Setup(c => c.ViewData).Returns(viewData);
             mockViewContext.Setup(c => c.Writer).Returns(new StringWriter());

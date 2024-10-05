@@ -29,55 +29,77 @@ namespace Microsoft.CodeAnalysis.Debugging
         {
             public static readonly DummySymReaderMetadataProvider Instance = new();
 
-            public unsafe bool TryGetStandaloneSignature(int standaloneSignatureToken, out byte* signature, out int length)
-                => throw ExceptionUtilities.Unreachable();
+            public unsafe bool TryGetStandaloneSignature(
+                int standaloneSignatureToken,
+                out byte* signature,
+                out int length
+            ) => throw ExceptionUtilities.Unreachable();
 
-            public bool TryGetTypeDefinitionInfo(int typeDefinitionToken, out string namespaceName, out string typeName, out TypeAttributes attributes)
-                => throw ExceptionUtilities.Unreachable();
+            public bool TryGetTypeDefinitionInfo(
+                int typeDefinitionToken,
+                out string namespaceName,
+                out string typeName,
+                out TypeAttributes attributes
+            ) => throw ExceptionUtilities.Unreachable();
 
-            public bool TryGetTypeReferenceInfo(int typeReferenceToken, out string namespaceName, out string typeName)
-                => throw ExceptionUtilities.Unreachable();
+            public bool TryGetTypeReferenceInfo(
+                int typeReferenceToken,
+                out string namespaceName,
+                out string typeName
+            ) => throw ExceptionUtilities.Unreachable();
         }
 
-        private sealed class Portable(MetadataReaderProvider pdbReaderProvider) : DebugInformationReaderProvider
+        private sealed class Portable(MetadataReaderProvider pdbReaderProvider)
+            : DebugInformationReaderProvider
         {
             private readonly MetadataReaderProvider _pdbReaderProvider = pdbReaderProvider;
 
-            public override EditAndContinueMethodDebugInfoReader CreateEditAndContinueMethodDebugInfoReader()
-                => EditAndContinueMethodDebugInfoReader.Create(_pdbReaderProvider.GetMetadataReader());
+            public override EditAndContinueMethodDebugInfoReader CreateEditAndContinueMethodDebugInfoReader() =>
+                EditAndContinueMethodDebugInfoReader.Create(_pdbReaderProvider.GetMetadataReader());
 
-            public override ValueTask CopyContentToAsync(Stream stream, CancellationToken cancellationToken)
+            public override ValueTask CopyContentToAsync(
+                Stream stream,
+                CancellationToken cancellationToken
+            )
             {
                 var reader = _pdbReaderProvider.GetMetadataReader();
                 unsafe
                 {
-                    using var metadataStream = new UnmanagedMemoryStream(reader.MetadataPointer, reader.MetadataLength);
+                    using var metadataStream = new UnmanagedMemoryStream(
+                        reader.MetadataPointer,
+                        reader.MetadataLength
+                    );
                     metadataStream.CopyTo(stream);
                 }
 
                 return ValueTaskFactory.CompletedTask;
             }
 
-            public override void Dispose()
-                => _pdbReaderProvider.Dispose();
+            public override void Dispose() => _pdbReaderProvider.Dispose();
         }
 
-        private sealed class Native(Stream stream, ISymUnmanagedReader5 symReader, int version) : DebugInformationReaderProvider
+        private sealed class Native(Stream stream, ISymUnmanagedReader5 symReader, int version)
+            : DebugInformationReaderProvider
         {
             private readonly Stream _stream = stream;
             private readonly int _version = version;
             private ISymUnmanagedReader5 _symReader = symReader;
 
-            public override EditAndContinueMethodDebugInfoReader CreateEditAndContinueMethodDebugInfoReader()
-                => EditAndContinueMethodDebugInfoReader.Create(_symReader, _version);
+            public override EditAndContinueMethodDebugInfoReader CreateEditAndContinueMethodDebugInfoReader() =>
+                EditAndContinueMethodDebugInfoReader.Create(_symReader, _version);
 
-            public override async ValueTask CopyContentToAsync(Stream stream, CancellationToken cancellationToken)
+            public override async ValueTask CopyContentToAsync(
+                Stream stream,
+                CancellationToken cancellationToken
+            )
             {
                 var position = _stream.Position;
                 try
                 {
                     _stream.Position = 0;
-                    await _stream.CopyToAsync(stream, bufferSize: 4 * 1024, cancellationToken).ConfigureAwait(false);
+                    await _stream
+                        .CopyToAsync(stream, bufferSize: 4 * 1024, cancellationToken)
+                        .ConfigureAwait(false);
                 }
                 finally
                 {
@@ -107,7 +129,10 @@ namespace Microsoft.CodeAnalysis.Debugging
         /// </summary>
         public abstract EditAndContinueMethodDebugInfoReader CreateEditAndContinueMethodDebugInfoReader();
 
-        public abstract ValueTask CopyContentToAsync(Stream stream, CancellationToken cancellationToken);
+        public abstract ValueTask CopyContentToAsync(
+            Stream stream,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Creates <see cref="DebugInformationReaderProvider"/> from a stream of Portable or Windows PDB.
@@ -130,10 +155,17 @@ namespace Microsoft.CodeAnalysis.Debugging
 
             if (!stream.CanRead || !stream.CanSeek)
             {
-                throw new ArgumentException(FeaturesResources.StreamMustSupportReadAndSeek, nameof(stream));
+                throw new ArgumentException(
+                    FeaturesResources.StreamMustSupportReadAndSeek,
+                    nameof(stream)
+                );
             }
 
-            var isPortable = stream.ReadByte() == 'B' && stream.ReadByte() == 'S' && stream.ReadByte() == 'J' && stream.ReadByte() == 'B';
+            var isPortable =
+                stream.ReadByte() == 'B'
+                && stream.ReadByte() == 'S'
+                && stream.ReadByte() == 'J'
+                && stream.ReadByte() == 'B';
             stream.Position = 0;
 
             if (isPortable)
@@ -148,10 +180,17 @@ namespace Microsoft.CodeAnalysis.Debugging
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static DebugInformationReaderProvider CreateNative(Stream stream)
         {
-            // We can use DummySymReaderMetadataProvider since we do not need to decode signatures, 
+            // We can use DummySymReaderMetadataProvider since we do not need to decode signatures,
             // which is the only operation SymReader needs the provider for.
-            return new Native(stream, SymUnmanagedReaderFactory.CreateReader<ISymUnmanagedReader5>(
-                stream, DummySymReaderMetadataProvider.Instance, SymUnmanagedReaderCreationOptions.UseAlternativeLoadPath), version: 1);
+            return new Native(
+                stream,
+                SymUnmanagedReaderFactory.CreateReader<ISymUnmanagedReader5>(
+                    stream,
+                    DummySymReaderMetadataProvider.Instance,
+                    SymUnmanagedReaderCreationOptions.UseAlternativeLoadPath
+                ),
+                version: 1
+            );
         }
 
         /// <summary>
@@ -161,7 +200,11 @@ namespace Microsoft.CodeAnalysis.Debugging
         /// Provider instance, which takes ownership of the <paramref name="metadataProvider"/> until disposed.
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="metadataProvider"/> is null.</exception>
-        public static DebugInformationReaderProvider CreateFromMetadataReader(MetadataReaderProvider metadataProvider)
-            => new Portable(metadataProvider ?? throw new ArgumentNullException(nameof(metadataProvider)));
+        public static DebugInformationReaderProvider CreateFromMetadataReader(
+            MetadataReaderProvider metadataProvider
+        ) =>
+            new Portable(
+                metadataProvider ?? throw new ArgumentNullException(nameof(metadataProvider))
+            );
     }
 }

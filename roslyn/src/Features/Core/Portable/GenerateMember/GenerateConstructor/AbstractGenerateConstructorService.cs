@@ -21,34 +21,105 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
 {
-    internal abstract partial class AbstractGenerateConstructorService<TService, TExpressionSyntax> :
-        IGenerateConstructorService
+    internal abstract partial class AbstractGenerateConstructorService<TService, TExpressionSyntax>
+        : IGenerateConstructorService
         where TService : AbstractGenerateConstructorService<TService, TExpressionSyntax>
         where TExpressionSyntax : SyntaxNode
     {
-        protected abstract bool ContainingTypesOrSelfHasUnsafeKeyword(INamedTypeSymbol containingType);
-        protected abstract bool IsSimpleNameGeneration(SemanticDocument document, SyntaxNode node, CancellationToken cancellationToken);
-        protected abstract bool IsConstructorInitializerGeneration(SemanticDocument document, SyntaxNode node, CancellationToken cancellationToken);
-        protected abstract bool IsImplicitObjectCreation(SemanticDocument document, SyntaxNode node, CancellationToken cancellationToken);
+        protected abstract bool ContainingTypesOrSelfHasUnsafeKeyword(
+            INamedTypeSymbol containingType
+        );
+        protected abstract bool IsSimpleNameGeneration(
+            SemanticDocument document,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        );
+        protected abstract bool IsConstructorInitializerGeneration(
+            SemanticDocument document,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        );
+        protected abstract bool IsImplicitObjectCreation(
+            SemanticDocument document,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        );
 
-        protected abstract bool TryInitializeImplicitObjectCreation(SemanticDocument document, SyntaxNode node, CancellationToken cancellationToken, out SyntaxToken token, out ImmutableArray<Argument> arguments, out INamedTypeSymbol typeToGenerateIn);
-        protected abstract bool TryInitializeSimpleNameGenerationState(SemanticDocument document, SyntaxNode simpleName, CancellationToken cancellationToken, out SyntaxToken token, out ImmutableArray<Argument> arguments, out INamedTypeSymbol typeToGenerateIn);
-        protected abstract bool TryInitializeConstructorInitializerGeneration(SemanticDocument document, SyntaxNode constructorInitializer, CancellationToken cancellationToken, out SyntaxToken token, out ImmutableArray<Argument> arguments, out INamedTypeSymbol typeToGenerateIn);
-        protected abstract bool TryInitializeSimpleAttributeNameGenerationState(SemanticDocument document, SyntaxNode simpleName, CancellationToken cancellationToken, out SyntaxToken token, out ImmutableArray<Argument> arguments, out INamedTypeSymbol typeToGenerateIn);
+        protected abstract bool TryInitializeImplicitObjectCreation(
+            SemanticDocument document,
+            SyntaxNode node,
+            CancellationToken cancellationToken,
+            out SyntaxToken token,
+            out ImmutableArray<Argument> arguments,
+            out INamedTypeSymbol typeToGenerateIn
+        );
+        protected abstract bool TryInitializeSimpleNameGenerationState(
+            SemanticDocument document,
+            SyntaxNode simpleName,
+            CancellationToken cancellationToken,
+            out SyntaxToken token,
+            out ImmutableArray<Argument> arguments,
+            out INamedTypeSymbol typeToGenerateIn
+        );
+        protected abstract bool TryInitializeConstructorInitializerGeneration(
+            SemanticDocument document,
+            SyntaxNode constructorInitializer,
+            CancellationToken cancellationToken,
+            out SyntaxToken token,
+            out ImmutableArray<Argument> arguments,
+            out INamedTypeSymbol typeToGenerateIn
+        );
+        protected abstract bool TryInitializeSimpleAttributeNameGenerationState(
+            SemanticDocument document,
+            SyntaxNode simpleName,
+            CancellationToken cancellationToken,
+            out SyntaxToken token,
+            out ImmutableArray<Argument> arguments,
+            out INamedTypeSymbol typeToGenerateIn
+        );
 
-        protected abstract ITypeSymbol GetArgumentType(SemanticModel semanticModel, Argument argument, CancellationToken cancellationToken);
-        protected abstract string GenerateNameForExpression(SemanticModel semanticModel, TExpressionSyntax expression, CancellationToken cancellationToken);
+        protected abstract ITypeSymbol GetArgumentType(
+            SemanticModel semanticModel,
+            Argument argument,
+            CancellationToken cancellationToken
+        );
+        protected abstract string GenerateNameForExpression(
+            SemanticModel semanticModel,
+            TExpressionSyntax expression,
+            CancellationToken cancellationToken
+        );
 
-        protected abstract bool IsConversionImplicit(Compilation compilation, ITypeSymbol sourceType, ITypeSymbol targetType);
+        protected abstract bool IsConversionImplicit(
+            Compilation compilation,
+            ITypeSymbol sourceType,
+            ITypeSymbol targetType
+        );
 
-        protected abstract IMethodSymbol GetCurrentConstructor(SemanticModel semanticModel, SyntaxToken token, CancellationToken cancellationToken);
-        protected abstract IMethodSymbol GetDelegatedConstructor(SemanticModel semanticModel, IMethodSymbol constructor, CancellationToken cancellationToken);
+        protected abstract IMethodSymbol GetCurrentConstructor(
+            SemanticModel semanticModel,
+            SyntaxToken token,
+            CancellationToken cancellationToken
+        );
+        protected abstract IMethodSymbol GetDelegatedConstructor(
+            SemanticModel semanticModel,
+            IMethodSymbol constructor,
+            CancellationToken cancellationToken
+        );
 
-        protected bool WillCauseConstructorCycle(State state, SemanticDocument document, IMethodSymbol delegatedConstructor, CancellationToken cancellationToken)
+        protected bool WillCauseConstructorCycle(
+            State state,
+            SemanticDocument document,
+            IMethodSymbol delegatedConstructor,
+            CancellationToken cancellationToken
+        )
         {
             // Check if we're in a constructor.  If not, then we can always have our new constructor delegate to
             // another, as it can't cause a cycle.
-            var currentConstructor = GetCurrentConstructor(document.SemanticModel, state.Token, cancellationToken);
+            var currentConstructor = GetCurrentConstructor(
+                document.SemanticModel,
+                state.Token,
+                cancellationToken
+            );
             if (currentConstructor == null)
                 return false;
 
@@ -65,7 +136,11 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
             var constructorsCount = delegatedConstructor.ContainingType.InstanceConstructors.Length;
             for (var i = 0; i < constructorsCount; i++)
             {
-                delegatedConstructor = GetDelegatedConstructor(document.SemanticModel, delegatedConstructor, cancellationToken);
+                delegatedConstructor = GetDelegatedConstructor(
+                    document.SemanticModel,
+                    delegatedConstructor,
+                    cancellationToken
+                );
                 if (delegatedConstructor == null)
                     return false;
 
@@ -76,13 +151,33 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
             return true;
         }
 
-        public async Task<ImmutableArray<CodeAction>> GenerateConstructorAsync(Document document, SyntaxNode node, CodeAndImportGenerationOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+        public async Task<ImmutableArray<CodeAction>> GenerateConstructorAsync(
+            Document document,
+            SyntaxNode node,
+            CodeAndImportGenerationOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
-            using (Logger.LogBlock(FunctionId.Refactoring_GenerateMember_GenerateConstructor, cancellationToken))
+            using (
+                Logger.LogBlock(
+                    FunctionId.Refactoring_GenerateMember_GenerateConstructor,
+                    cancellationToken
+                )
+            )
             {
-                var semanticDocument = await SemanticDocument.CreateAsync(document, cancellationToken).ConfigureAwait(false);
+                var semanticDocument = await SemanticDocument
+                    .CreateAsync(document, cancellationToken)
+                    .ConfigureAwait(false);
 
-                var state = await State.GenerateAsync((TService)this, semanticDocument, node, fallbackOptions, cancellationToken).ConfigureAwait(false);
+                var state = await State
+                    .GenerateAsync(
+                        (TService)this,
+                        semanticDocument,
+                        node,
+                        fallbackOptions,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (state != null)
                 {
                     Contract.ThrowIfNull(state.TypeToGenerateIn);
@@ -92,26 +187,68 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                     // If we have any fields we'd like to generate, offer a code action to do that.
                     if (state.ParameterToNewFieldMap.Count > 0)
                     {
-                        result.Add(CodeAction.Create(
-                            string.Format(FeaturesResources.Generate_constructor_in_0_with_fields, state.TypeToGenerateIn.Name),
-                            c => state.GetChangedDocumentAsync(document, withFields: true, withProperties: false, c),
-                            nameof(FeaturesResources.Generate_constructor_in_0_with_fields) + "_" + state.TypeToGenerateIn.Name));
+                        result.Add(
+                            CodeAction.Create(
+                                string.Format(
+                                    FeaturesResources.Generate_constructor_in_0_with_fields,
+                                    state.TypeToGenerateIn.Name
+                                ),
+                                c =>
+                                    state.GetChangedDocumentAsync(
+                                        document,
+                                        withFields: true,
+                                        withProperties: false,
+                                        c
+                                    ),
+                                nameof(FeaturesResources.Generate_constructor_in_0_with_fields)
+                                    + "_"
+                                    + state.TypeToGenerateIn.Name
+                            )
+                        );
                     }
 
                     // Same with a version that generates properties instead.
                     if (state.ParameterToNewPropertyMap.Count > 0)
                     {
-                        result.Add(CodeAction.Create(
-                            string.Format(FeaturesResources.Generate_constructor_in_0_with_properties, state.TypeToGenerateIn.Name),
-                            c => state.GetChangedDocumentAsync(document, withFields: false, withProperties: true, c),
-                            nameof(FeaturesResources.Generate_constructor_in_0_with_properties) + "_" + state.TypeToGenerateIn.Name));
+                        result.Add(
+                            CodeAction.Create(
+                                string.Format(
+                                    FeaturesResources.Generate_constructor_in_0_with_properties,
+                                    state.TypeToGenerateIn.Name
+                                ),
+                                c =>
+                                    state.GetChangedDocumentAsync(
+                                        document,
+                                        withFields: false,
+                                        withProperties: true,
+                                        c
+                                    ),
+                                nameof(FeaturesResources.Generate_constructor_in_0_with_properties)
+                                    + "_"
+                                    + state.TypeToGenerateIn.Name
+                            )
+                        );
                     }
 
                     // Always offer to just generate the constructor and nothing else.
-                    result.Add(CodeAction.Create(
-                        string.Format(FeaturesResources.Generate_constructor_in_0, state.TypeToGenerateIn.Name),
-                        c => state.GetChangedDocumentAsync(document, withFields: false, withProperties: false, c),
-                        nameof(FeaturesResources.Generate_constructor_in_0) + "_" + state.TypeToGenerateIn.Name));
+                    result.Add(
+                        CodeAction.Create(
+                            string.Format(
+                                FeaturesResources.Generate_constructor_in_0,
+                                state.TypeToGenerateIn.Name
+                            ),
+                            c =>
+                                state.GetChangedDocumentAsync(
+                                    document,
+                                    withFields: false,
+                                    withProperties: false,
+                                    c
+                                ),
+                            nameof(FeaturesResources.Generate_constructor_in_0)
+                                + "_"
+                                + state.TypeToGenerateIn.Name
+                        )
+                    );
 
                     return result.ToImmutable();
                 }
@@ -148,14 +285,19 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                 case Accessibility.ProtectedAndInternal:
                 case Accessibility.Internal:
                     return document.SemanticModel.Compilation.Assembly.IsSameAssemblyOrHasFriendAccessTo(
-                        symbol.ContainingAssembly);
+                        symbol.ContainingAssembly
+                    );
 
                 default:
                     return false;
             }
         }
 
-        protected string GenerateNameForArgument(SemanticModel semanticModel, Argument argument, CancellationToken cancellationToken)
+        protected string GenerateNameForArgument(
+            SemanticModel semanticModel,
+            Argument argument,
+            CancellationToken cancellationToken
+        )
         {
             // If it named argument then we use the name provided.
             if (argument.IsNamed)
@@ -164,27 +306,51 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
             if (argument.Expression is null)
                 return ITypeSymbolExtensions.DefaultParameterName;
 
-            var name = this.GenerateNameForExpression(semanticModel, argument.Expression, cancellationToken);
+            var name = this.GenerateNameForExpression(
+                semanticModel,
+                argument.Expression,
+                cancellationToken
+            );
             return string.IsNullOrEmpty(name) ? ITypeSymbolExtensions.DefaultParameterName : name;
         }
 
         private ImmutableArray<ParameterName> GenerateParameterNames(
-            SemanticDocument document, IEnumerable<Argument> arguments, IList<string> reservedNames, NamingRule parameterNamingRule, CancellationToken cancellationToken)
+            SemanticDocument document,
+            IEnumerable<Argument> arguments,
+            IList<string> reservedNames,
+            NamingRule parameterNamingRule,
+            CancellationToken cancellationToken
+        )
         {
             reservedNames ??= SpecializedCollections.EmptyList<string>();
 
             // We can't change the names of named parameters.  Any other names we're flexible on.
-            var isFixed = reservedNames.Select(s => true).Concat(
-                arguments.Select(a => a.IsNamed)).ToImmutableArray();
+            var isFixed = reservedNames
+                .Select(s => true)
+                .Concat(arguments.Select(a => a.IsNamed))
+                .ToImmutableArray();
 
-            var parameterNames = reservedNames.Concat(
-                arguments.Select(a => this.GenerateNameForArgument(document.SemanticModel, a, cancellationToken))).ToImmutableArray();
+            var parameterNames = reservedNames
+                .Concat(
+                    arguments.Select(a =>
+                        this.GenerateNameForArgument(document.SemanticModel, a, cancellationToken)
+                    )
+                )
+                .ToImmutableArray();
 
             var syntaxFacts = document.Document.GetRequiredLanguageService<ISyntaxFactsService>();
             var comparer = syntaxFacts.StringComparer;
-            return NameGenerator.EnsureUniqueness(parameterNames, isFixed, canUse: s => !reservedNames.Any(n => comparer.Equals(s, n)))
-                .Select((name, index) => new ParameterName(name, isFixed[index], parameterNamingRule))
-                .Skip(reservedNames.Count).ToImmutableArray();
+            return NameGenerator
+                .EnsureUniqueness(
+                    parameterNames,
+                    isFixed,
+                    canUse: s => !reservedNames.Any(n => comparer.Equals(s, n))
+                )
+                .Select(
+                    (name, index) => new ParameterName(name, isFixed[index], parameterNamingRule)
+                )
+                .Skip(reservedNames.Count)
+                .ToImmutableArray();
         }
     }
 }

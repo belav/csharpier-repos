@@ -17,13 +17,17 @@ namespace Microsoft.CodeAnalysis.SymbolMapping
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultSymbolMappingService()
-        {
-        }
+        public DefaultSymbolMappingService() { }
 
-        public async Task<SymbolMappingResult> MapSymbolAsync(Document document, SymbolKey symbolId, CancellationToken cancellationToken)
+        public async Task<SymbolMappingResult> MapSymbolAsync(
+            Document document,
+            SymbolKey symbolId,
+            CancellationToken cancellationToken
+        )
         {
-            var compilation = await document.Project.GetCompilationAsync(cancellationToken).ConfigureAwait(false);
+            var compilation = await document
+                .Project.GetCompilationAsync(cancellationToken)
+                .ConfigureAwait(false);
             var symbol = symbolId.Resolve(compilation, cancellationToken: cancellationToken).Symbol;
             if (symbol != null)
             {
@@ -33,7 +37,10 @@ namespace Microsoft.CodeAnalysis.SymbolMapping
             return null;
         }
 
-        public Task<SymbolMappingResult> MapSymbolAsync(Document document, ISymbol symbol, CancellationToken cancellationToken)
-            => Task.FromResult(new SymbolMappingResult(document.Project, symbol));
+        public Task<SymbolMappingResult> MapSymbolAsync(
+            Document document,
+            ISymbol symbol,
+            CancellationToken cancellationToken
+        ) => Task.FromResult(new SymbolMappingResult(document.Project, symbol));
     }
 }

@@ -17,13 +17,19 @@ public class VerifiableLoggedTest : LoggedTest
         LoggerFactory = NullLoggerFactory.Instance;
     }
 
-    public virtual VerifyNoErrorsScope StartVerifiableLog(Func<WriteContext, bool> expectedErrorsFilter = null)
+    public virtual VerifyNoErrorsScope StartVerifiableLog(
+        Func<WriteContext, bool> expectedErrorsFilter = null
+    )
     {
         return CreateScope(expectedErrorsFilter);
     }
 
     private VerifyNoErrorsScope CreateScope(Func<WriteContext, bool> expectedErrorsFilter = null)
     {
-        return new VerifyNoErrorsScope(LoggerFactory, wrappedDisposable: null, expectedErrorsFilter);
+        return new VerifyNoErrorsScope(
+            LoggerFactory,
+            wrappedDisposable: null,
+            expectedErrorsFilter
+        );
     }
 }

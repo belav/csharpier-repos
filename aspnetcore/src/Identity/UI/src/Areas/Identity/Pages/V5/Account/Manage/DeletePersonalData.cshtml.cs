@@ -56,7 +56,8 @@ public abstract class DeletePersonalDataModel : PageModel
     public virtual Task<IActionResult> OnPostAsync() => throw new NotImplementedException();
 }
 
-internal sealed class DeletePersonalDataModel<TUser> : DeletePersonalDataModel where TUser : class
+internal sealed class DeletePersonalDataModel<TUser> : DeletePersonalDataModel
+    where TUser : class
 {
     private readonly UserManager<TUser> _userManager;
     private readonly SignInManager<TUser> _signInManager;
@@ -65,7 +66,8 @@ internal sealed class DeletePersonalDataModel<TUser> : DeletePersonalDataModel w
     public DeletePersonalDataModel(
         UserManager<TUser> userManager,
         SignInManager<TUser> signInManager,
-        ILogger<DeletePersonalDataModel> logger)
+        ILogger<DeletePersonalDataModel> logger
+    )
     {
         _userManager = userManager;
         _signInManager = signInManager;

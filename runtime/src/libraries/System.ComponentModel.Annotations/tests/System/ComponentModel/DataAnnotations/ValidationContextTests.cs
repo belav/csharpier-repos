@@ -11,7 +11,10 @@ namespace System.ComponentModel.DataAnnotations.Tests
         [Fact]
         public static void Constructor_throws_if_passed_null_instance()
         {
-            AssertExtensions.Throws<ArgumentNullException>("instance", () => new ValidationContext(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "instance",
+                () => new ValidationContext(null)
+            );
         }
 
         [Fact]
@@ -97,8 +100,14 @@ namespace System.ComponentModel.DataAnnotations.Tests
             Assert.Equal("ExistingMember", validationContext.DisplayName);
             validationContext.DisplayName = "NonExistentDisplayName";
             Assert.Equal("NonExistentDisplayName", validationContext.DisplayName);
-            AssertExtensions.Throws<ArgumentNullException>("value", () => validationContext.DisplayName = null);
-            AssertExtensions.Throws<ArgumentNullException>("value", () => validationContext.DisplayName = string.Empty);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => validationContext.DisplayName = null
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => validationContext.DisplayName = string.Empty
+            );
         }
 
         // DisplayName_returns_class_name_for_unset_member_name_and_can_be_overridden()

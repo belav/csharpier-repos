@@ -24,7 +24,11 @@ namespace Microsoft.AspNetCore.Mvc;
 /// using <see cref="ApiConventionTypeMatchBehavior.AssignableFrom"/>.
 /// </para>
 /// </summary>
-[AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
+[AttributeUsage(
+    AttributeTargets.Assembly | AttributeTargets.Class,
+    AllowMultiple = true,
+    Inherited = true
+)]
 public sealed class ApiConventionTypeAttribute : Attribute
 {
     /// <summary>
@@ -55,12 +59,16 @@ public sealed class ApiConventionTypeAttribute : Attribute
         if (!conventionType.IsSealed || !conventionType.IsAbstract)
         {
             // Conventions must be static viz abstract + sealed.
-            throw new ArgumentException(Resources.FormatApiConventionMustBeStatic(conventionType), nameof(conventionType));
+            throw new ArgumentException(
+                Resources.FormatApiConventionMustBeStatic(conventionType),
+                nameof(conventionType)
+            );
         }
 
         foreach (var method in conventionType.GetMethods(BindingFlags.Public | BindingFlags.Static))
         {
-            var unsupportedAttributes = method.GetCustomAttributes(inherit: true)
+            var unsupportedAttributes = method
+                .GetCustomAttributes(inherit: true)
                 .Where(attribute => !IsAllowedAttribute(attribute))
                 .ToArray();
 
@@ -69,11 +77,15 @@ public sealed class ApiConventionTypeAttribute : Attribute
                 continue;
             }
 
-            var methodDisplayName = TypeNameHelper.GetTypeDisplayName(method.DeclaringType!) + "." + method.Name;
+            var methodDisplayName =
+                TypeNameHelper.GetTypeDisplayName(method.DeclaringType!) + "." + method.Name;
             var errorMessage = Resources.FormatApiConvention_UnsupportedAttributesOnConvention(
                 methodDisplayName,
-                Environment.NewLine + string.Join(Environment.NewLine, unsupportedAttributes) + Environment.NewLine,
-                $"{nameof(ProducesResponseTypeAttribute)}, {nameof(ProducesDefaultResponseTypeAttribute)}, {nameof(ApiConventionNameMatchAttribute)}");
+                Environment.NewLine
+                    + string.Join(Environment.NewLine, unsupportedAttributes)
+                    + Environment.NewLine,
+                $"{nameof(ProducesResponseTypeAttribute)}, {nameof(ProducesDefaultResponseTypeAttribute)}, {nameof(ApiConventionNameMatchAttribute)}"
+            );
 
             throw new ArgumentException(errorMessage, nameof(conventionType));
         }
@@ -81,9 +93,10 @@ public sealed class ApiConventionTypeAttribute : Attribute
 
     private static bool IsAllowedAttribute(object attribute)
     {
-        return attribute is ProducesResponseTypeAttribute ||
-            attribute is ProducesDefaultResponseTypeAttribute ||
-            attribute is ApiConventionNameMatchAttribute ||
-            attribute.GetType().FullName == "System.Runtime.CompilerServices.NullableContextAttribute";
+        return attribute is ProducesResponseTypeAttribute
+            || attribute is ProducesDefaultResponseTypeAttribute
+            || attribute is ApiConventionNameMatchAttribute
+            || attribute.GetType().FullName
+                == "System.Runtime.CompilerServices.NullableContextAttribute";
     }
 }

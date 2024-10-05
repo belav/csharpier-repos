@@ -19,7 +19,7 @@ internal sealed class DevToolsDebuggerConnection : WasmDebuggerConnection
     private readonly ILogger _logger;
 
     public DevToolsDebuggerConnection(WebSocket webSocket, string id, ILogger logger)
-            : base(id)
+        : base(id)
     {
         ArgumentNullException.ThrowIfNull(webSocket);
         ArgumentNullException.ThrowIfNull(logger);
@@ -51,20 +51,25 @@ internal sealed class DevToolsDebuggerConnection : WasmDebuggerConnection
         }
     }
 
-    public override Task SendAsync(byte[] bytes, CancellationToken token)
-        => WebSocket.SendAsync(new ArraySegment<byte>(bytes),
-                               WebSocketMessageType.Text,
-                               true,
-                               token);
+    public override Task SendAsync(byte[] bytes, CancellationToken token) =>
+        WebSocket.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, true, token);
 
     public override async Task ShutdownAsync(CancellationToken cancellationToken)
     {
         try
         {
-            if (!cancellationToken.IsCancellationRequested && WebSocket.State == WebSocketState.Open)
-                await WebSocket.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "Closing", cancellationToken);
+            if (
+                !cancellationToken.IsCancellationRequested
+                && WebSocket.State == WebSocketState.Open
+            )
+                await WebSocket.CloseOutputAsync(
+                    WebSocketCloseStatus.NormalClosure,
+                    "Closing",
+                    cancellationToken
+                );
         }
-        catch (Exception ex) when (ex is IOException || ex is WebSocketException || ex is OperationCanceledException)
+        catch (Exception ex)
+            when (ex is IOException || ex is WebSocketException || ex is OperationCanceledException)
         {
             _logger.LogDebug($"Shutdown: Close failed, but ignoring: {ex}");
         }

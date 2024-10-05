@@ -103,21 +103,24 @@ namespace System.Text
     {
         // This is the table of 4 byte conversions.
         private const int GBLast4ByteCode = 0x99FB;
-        internal unsafe char* map4BytesToUnicode = null;       // new char[GBLast4ByteCode + 1]; // Need to map all 4 byte sequences to Unicode
-        internal unsafe byte* mapUnicodeTo4BytesFlags = null;  // new byte[0x10000 / 8];         // Need 1 bit for each code point to say if its 4 byte or not
+        internal unsafe char* map4BytesToUnicode = null; // new char[GBLast4ByteCode + 1]; // Need to map all 4 byte sequences to Unicode
+        internal unsafe byte* mapUnicodeTo4BytesFlags = null; // new byte[0x10000 / 8];         // Need 1 bit for each code point to say if its 4 byte or not
 
         private const int GB18030 = 54936;
 
         // First and last character of surrogate range as offset from 4 byte GB18030 GB81308130
-        private const int GBSurrogateOffset = 0x2E248;      // GB90308130
+        private const int GBSurrogateOffset = 0x2E248; // GB90308130
         private const int GBLastSurrogateOffset = 0x12E247; // GBE3329A35
 
         // We have to load the 936 code page tables, so impersonate 936 as our base
         internal GB18030Encoding()
             // For GB18030Encoding just use default replacement fallbacks because its only for bad surrogates
-            : base(GB18030, 936, EncoderFallback.ReplacementFallback, DecoderFallback.ReplacementFallback)
-        {
-        }
+            : base(
+                GB18030,
+                936,
+                EncoderFallback.ReplacementFallback,
+                DecoderFallback.ReplacementFallback
+            ) { }
 
         // This loads our base 936 code page and then applies the changes from the tableUnicodeToGBDiffs table.
         // See table comments for table format.
@@ -163,15 +166,19 @@ namespace System.Text
                     // It was GB 18030 4 byte data, next <data> characters are 4 byte sequences.
                     while (data > 0)
                     {
-                        Debug.Assert(count4Byte <= GBLast4ByteCode,
-                            "[GB18030Encoding.LoadManagedCodePage] Found too many 4 byte codes in data table.");
+                        Debug.Assert(
+                            count4Byte <= GBLast4ByteCode,
+                            "[GB18030Encoding.LoadManagedCodePage] Found too many 4 byte codes in data table."
+                        );
 
                         // Set the 4 byte -> Unicode value
                         map4BytesToUnicode[count4Byte] = unicodeCount;
                         // Set the unicode -> 4 bytes value, including flag that its a 4 byte sequence
                         mapUnicodeToBytes[unicodeCount] = count4Byte;
                         // Set the flag saying its a 4 byte sequence
-                        mapUnicodeTo4BytesFlags[unicodeCount / 8] |= unchecked((byte)(1 << (unicodeCount % 8)));
+                        mapUnicodeTo4BytesFlags[unicodeCount / 8] |= unchecked(
+                            (byte)(1 << (unicodeCount % 8))
+                        );
                         unchecked
                         {
                             unicodeCount++;
@@ -183,12 +190,16 @@ namespace System.Text
             }
 
             // unicodeCount should've wrapped back to 0
-            Debug.Assert(unicodeCount == 0,
-                "[GB18030Encoding.LoadManagedCodePage] Expected unicodeCount to wrap around to 0 as all chars were processed");
+            Debug.Assert(
+                unicodeCount == 0,
+                "[GB18030Encoding.LoadManagedCodePage] Expected unicodeCount to wrap around to 0 as all chars were processed"
+            );
 
             // We should've read in GBLast4ByteCode 4 byte sequences
-            Debug.Assert(count4Byte == GBLast4ByteCode + 1,
-                $"[GB18030Encoding.LoadManagedCodePage] Expected 0x99FB to be last 4 byte offset, found 0x{count4Byte:X4}");
+            Debug.Assert(
+                count4Byte == GBLast4ByteCode + 1,
+                $"[GB18030Encoding.LoadManagedCodePage] Expected 0x99FB to be last 4 byte offset, found 0x{count4Byte:X4}"
+            );
         }
 
         // Is4Byte
@@ -208,8 +219,13 @@ namespace System.Text
             return GetBytes(chars, count, null, 0, encoder);
         }
 
-        public override unsafe int GetBytes(char* chars, int charCount,
-                                                byte* bytes, int byteCount, EncoderNLS? encoder)
+        public override unsafe int GetBytes(
+            char* chars,
+            int charCount,
+            byte* bytes,
+            int byteCount,
+            EncoderNLS? encoder
+        )
         {
             // Just need to ASSERT, this is called by something else internal that checked parameters already
             // We'll allow null bytes as a count
@@ -219,7 +235,10 @@ namespace System.Text
             Debug.Assert(charCount >= 0, "[GB18030Encoding.GetBytes]charCount is negative");
 
             // Assert because we shouldn't be able to have a null encoder.
-            Debug.Assert(EncoderFallback != null, "[GB18030Encoding.GetBytes]Attempting to use null encoder fallback");
+            Debug.Assert(
+                EncoderFallback != null,
+                "[GB18030Encoding.GetBytes]Attempting to use null encoder fallback"
+            );
 
             // Get any left over characters
             char charLeftOver = (char)0;
@@ -227,10 +246,17 @@ namespace System.Text
                 charLeftOver = encoder.charLeftOver;
 
             // prepare our helpers
-            EncodingByteBuffer buffer = new EncodingByteBuffer(this, encoder, bytes, byteCount, chars, charCount);
+            EncodingByteBuffer buffer = new EncodingByteBuffer(
+                this,
+                encoder,
+                bytes,
+                byteCount,
+                chars,
+                charCount
+            );
 
-        // Try again if we were MustFlush
-        TryAgain:
+            // Try again if we were MustFlush
+            TryAgain:
 
             // Go ahead and do it, including the fallback.
             while (buffer.MoreData)
@@ -241,14 +267,16 @@ namespace System.Text
                 // Have to check for charLeftOver
                 if (charLeftOver != 0)
                 {
-                    Debug.Assert(char.IsHighSurrogate(charLeftOver),
-                        $"[GB18030Encoding.GetBytes] leftover character should be high surrogate, not 0x{(int)charLeftOver:X4}");
+                    Debug.Assert(
+                        char.IsHighSurrogate(charLeftOver),
+                        $"[GB18030Encoding.GetBytes] leftover character should be high surrogate, not 0x{(int)charLeftOver:X4}"
+                    );
 
                     // If our next char isn't a low surrogate, then we need to do fallback.
                     if (!char.IsLowSurrogate(ch))
                     {
                         // No low surrogate, fallback high surrogate & try this one again
-                        buffer.MovePrevious(false);                  // (Ignoring this character, don't throw)
+                        buffer.MovePrevious(false); // (Ignoring this character, don't throw)
                         if (!buffer.Fallback(charLeftOver))
                         {
                             charLeftOver = (char)0;
@@ -271,14 +299,16 @@ namespace System.Text
                         offset /= 0x7e;
                         byte byte2 = (byte)((offset % 0x0a) + 0x30);
                         offset /= 0x0a;
-                        Debug.Assert(offset < 0x6f,
-                            $"[GB18030Encoding.GetBytes](1) Expected offset < 0x6f, not 0x{offset:X2}");
+                        Debug.Assert(
+                            offset < 0x6f,
+                            $"[GB18030Encoding.GetBytes](1) Expected offset < 0x6f, not 0x{offset:X2}"
+                        );
 
                         charLeftOver = (char)0;
                         if (!buffer.AddByte((byte)(offset + 0x90), byte2, byte3, byte4))
                         {
                             // Didn't work, need to back up for both surrogates (AddByte already backed up one)
-                            buffer.MovePrevious(false);             // (don't throw)
+                            buffer.MovePrevious(false); // (don't throw)
                             break;
                         }
                     }
@@ -321,15 +351,22 @@ namespace System.Text
                         iBytes /= 0x7e;
                         byte byte2 = (byte)((iBytes % 0x0a) + 0x30);
                         iBytes /= 0x0a;
-                        Debug.Assert(iBytes < 0x7e,
-                            $"[GB18030Encoding.GetBytes]Expected iBytes < 0x7e, not 0x{iBytes:X2}");
+                        Debug.Assert(
+                            iBytes < 0x7e,
+                            $"[GB18030Encoding.GetBytes]Expected iBytes < 0x7e, not 0x{iBytes:X2}"
+                        );
                         if (!buffer.AddByte((byte)(iBytes + 0x81), byte2, byte3, byte4))
                             break;
                     }
                     else
                     {
                         // Its 2 byte, use it
-                        if (!buffer.AddByte(unchecked((byte)(iBytes >> 8)), unchecked((byte)(iBytes & 0xff))))
+                        if (
+                            !buffer.AddByte(
+                                unchecked((byte)(iBytes >> 8)),
+                                unchecked((byte)(iBytes & 0xff))
+                            )
+                        )
                             break;
                     }
                 }
@@ -369,8 +406,7 @@ namespace System.Text
         internal static bool IsGBTwoByteTrailing(short ch)
         {
             // Return true if we are in range for the trailing byte of a 2 byte sequence
-            return (((ch) >= 0x40 && (ch) <= 0x7e) ||
-                    ((ch) >= 0x80 && (ch) <= 0xfe));
+            return (((ch) >= 0x40 && (ch) <= 0x7e) || ((ch) >= 0x80 && (ch) <= 0xfe));
         }
 
         internal static bool IsGBFourByteTrailing(short ch)
@@ -379,12 +415,20 @@ namespace System.Text
             return ((ch) >= 0x30 && (ch) <= 0x39);
         }
 
-        internal static int GetFourBytesOffset(short offset1, short offset2, short offset3, short offset4)
+        internal static int GetFourBytesOffset(
+            short offset1,
+            short offset2,
+            short offset3,
+            short offset4
+        )
         {
-            return ((offset1 - 0x81) * 0x0a * 0x7e * 0x0a +
-                    (offset2 - 0x30) * 0x7e * 0x0a +
-                    (offset3 - 0x81) * 0x0a +
-                     offset4 - 0x30);
+            return (
+                (offset1 - 0x81) * 0x0a * 0x7e * 0x0a
+                + (offset2 - 0x30) * 0x7e * 0x0a
+                + (offset3 - 0x81) * 0x0a
+                + offset4
+                - 0x30
+            );
         }
 
         // This is internal and called by something else,
@@ -394,8 +438,13 @@ namespace System.Text
             return GetChars(bytes, count, null, 0, baseDecoder);
         }
 
-        public override unsafe int GetChars(byte* bytes, int byteCount,
-                                                char* chars, int charCount, DecoderNLS? baseDecoder)
+        public override unsafe int GetChars(
+            byte* bytes,
+            int byteCount,
+            char* chars,
+            int charCount,
+            DecoderNLS? baseDecoder
+        )
         {
             // Just need to ASSERT, this is called by something else internal that checked parameters already
             // We'll allow null chars as a count
@@ -408,7 +457,14 @@ namespace System.Text
             GB18030Decoder? decoder = (GB18030Decoder?)baseDecoder;
 
             // Get our info.
-            EncodingCharBuffer buffer = new EncodingCharBuffer(this, decoder, chars, charCount, bytes, byteCount);
+            EncodingCharBuffer buffer = new EncodingCharBuffer(
+                this,
+                decoder,
+                chars,
+                charCount,
+                bytes,
+                byteCount
+            );
 
             // Need temp bytes because we can't muss up decoder
             short byte1 = -1;
@@ -436,12 +492,12 @@ namespace System.Text
                         // This is either a ? or ASCII, need 1 char output
                         if (byte1 <= 0x7f)
                         {
-                            if (!buffer.AddChar((char)byte1))      // Its ASCII
+                            if (!buffer.AddChar((char)byte1)) // Its ASCII
                                 break;
                         }
                         else
                         {
-                            if (!buffer.Fallback((byte)byte1))     // Not a valid byte
+                            if (!buffer.Fallback((byte)byte1)) // Not a valid byte
                                 break;
                         }
 
@@ -453,8 +509,7 @@ namespace System.Text
                     }
 
                     // Read in more bytes as needed
-                    while (byte2 == -1 ||
-                           (IsGBFourByteTrailing(byte2) && byte4 == -1))
+                    while (byte2 == -1 || (IsGBFourByteTrailing(byte2) && byte4 == -1))
                     {
                         // Do we have room?
                         if (!buffer.MoreData)
@@ -484,9 +539,12 @@ namespace System.Text
                         }
 
                         // Read them in
-                        if (byte2 == -1) byte2 = buffer.GetNextByte();
-                        else if (byte3 == -1) byte3 = buffer.GetNextByte();
-                        else byte4 = buffer.GetNextByte();
+                        if (byte2 == -1)
+                            byte2 = buffer.GetNextByte();
+                        else if (byte3 == -1)
+                            byte3 = buffer.GetNextByte();
+                        else
+                            byte4 = buffer.GetNextByte();
                     }
 
                     // Now we have our 2 or 4 bytes
@@ -504,16 +562,17 @@ namespace System.Text
                         byte1 = -1;
                         byte2 = -1;
                     }
-                    else if (IsGBFourByteTrailing(byte2) &&
-                             IsGBLeadByte(byte3) &&
-                             IsGBFourByteTrailing(byte4))
+                    else if (
+                        IsGBFourByteTrailing(byte2)
+                        && IsGBLeadByte(byte3)
+                        && IsGBFourByteTrailing(byte4)
+                    )
                     {
                         //
                         // Four-byte GB18030
                         //
 
-                        int sFourBytesOffset = GetFourBytesOffset(
-                            byte1, byte2, byte3, byte4);
+                        int sFourBytesOffset = GetFourBytesOffset(byte1, byte2, byte3, byte4);
 
                         // What kind is it?
                         if (sFourBytesOffset <= GBLast4ByteCode)
@@ -524,8 +583,10 @@ namespace System.Text
                             if (!buffer.AddChar(map4BytesToUnicode[sFourBytesOffset], 4))
                                 break;
                         }
-                        else if (sFourBytesOffset >= GBSurrogateOffset &&
-                                 sFourBytesOffset <= GBLastSurrogateOffset)
+                        else if (
+                            sFourBytesOffset >= GBSurrogateOffset
+                            && sFourBytesOffset <= GBLastSurrogateOffset
+                        )
                         {
                             //
                             // This will be converted to a surrogate pair, need another char
@@ -533,8 +594,13 @@ namespace System.Text
 
                             // Use our surrogate
                             sFourBytesOffset -= GBSurrogateOffset;
-                            if (!buffer.AddChar(unchecked((char)(0xd800 + (sFourBytesOffset / 0x400))),
-                                                unchecked((char)(0xdc00 + (sFourBytesOffset % 0x400))), 4))
+                            if (
+                                !buffer.AddChar(
+                                    unchecked((char)(0xd800 + (sFourBytesOffset / 0x400))),
+                                    unchecked((char)(0xdc00 + (sFourBytesOffset % 0x400))),
+                                    4
+                                )
+                            )
                                 break;
                         }
                         else
@@ -542,7 +608,9 @@ namespace System.Text
                             // Real GB18030 codepoint, but can't be mapped to unicode
                             // We already checked our buffer space.
                             // Do fallback here if we implement decoderfallbacks.
-                            if (!buffer.Fallback((byte)byte1, (byte)byte2, (byte)byte3, (byte)byte4))
+                            if (
+                                !buffer.Fallback((byte)byte1, (byte)byte2, (byte)byte3, (byte)byte4)
+                            )
                                 break;
                         }
 
@@ -577,7 +645,7 @@ namespace System.Text
                 {
                     // ASCII, have room?
                     if (!buffer.AddChar((char)ch))
-                        break;              // No room in convert buffer, so stop
+                        break; // No room in convert buffer, so stop
                 }
                 // See if its a lead byte
                 else if (IsGBLeadByte(ch))
@@ -608,8 +676,7 @@ namespace System.Text
                                 // Is it a valid 4 byte sequence?
                                 byte ch3 = buffer.GetNextByte();
                                 byte ch4 = buffer.GetNextByte();
-                                if (IsGBLeadByte(ch3) &&
-                                    IsGBFourByteTrailing(ch4))
+                                if (IsGBLeadByte(ch3) && IsGBFourByteTrailing(ch4))
                                 {
                                     //
                                     // Four-byte GB18030
@@ -624,11 +691,15 @@ namespace System.Text
                                         //
                                         // The Unicode will be in the BMP range.
                                         //
-                                        if (!buffer.AddChar(map4BytesToUnicode[sFourBytesOffset], 4))
+                                        if (
+                                            !buffer.AddChar(map4BytesToUnicode[sFourBytesOffset], 4)
+                                        )
                                             break;
                                     }
-                                    else if (sFourBytesOffset >= GBSurrogateOffset &&
-                                             sFourBytesOffset <= GBLastSurrogateOffset)
+                                    else if (
+                                        sFourBytesOffset >= GBSurrogateOffset
+                                        && sFourBytesOffset <= GBLastSurrogateOffset
+                                    )
                                     {
                                         //
                                         // This will be converted to a surrogate pair, need another char
@@ -636,8 +707,17 @@ namespace System.Text
 
                                         // Use our surrogate
                                         sFourBytesOffset -= GBSurrogateOffset;
-                                        if (!buffer.AddChar(unchecked((char)(0xd800 + (sFourBytesOffset / 0x400))),
-                                                             unchecked((char)(0xdc00 + (sFourBytesOffset % 0x400))), 4))
+                                        if (
+                                            !buffer.AddChar(
+                                                unchecked(
+                                                    (char)(0xd800 + (sFourBytesOffset / 0x400))
+                                                ),
+                                                unchecked(
+                                                    (char)(0xdc00 + (sFourBytesOffset % 0x400))
+                                                ),
+                                                4
+                                            )
+                                        )
                                             break;
                                     }
                                     else
@@ -742,7 +822,10 @@ namespace System.Text
         public override int GetMaxByteCount(int charCount)
         {
             if (charCount < 0)
-                throw new ArgumentOutOfRangeException(nameof(charCount), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(charCount),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             // Characters would be # of characters + 1 in case high surrogate is ? * max fallback
             long byteCount = (long)charCount + 1;
@@ -754,7 +837,10 @@ namespace System.Text
             byteCount *= 4;
 
             if (byteCount > 0x7fffffff)
-                throw new ArgumentOutOfRangeException(nameof(charCount), SR.ArgumentOutOfRange_GetByteCountOverflow);
+                throw new ArgumentOutOfRangeException(
+                    nameof(charCount),
+                    SR.ArgumentOutOfRange_GetByteCountOverflow
+                );
 
             return (int)byteCount;
         }
@@ -762,7 +848,10 @@ namespace System.Text
         public override int GetMaxCharCount(int byteCount)
         {
             if (byteCount < 0)
-                throw new ArgumentOutOfRangeException(nameof(byteCount), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(byteCount),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             // Just return length, we could have a single char for each byte + whatever extra our decoder could do to us.
             // If decoder is messed up it could spit out 3 ?s.
@@ -773,7 +862,10 @@ namespace System.Text
                 charCount *= DecoderFallback.MaxCharCount;
 
             if (charCount > 0x7fffffff)
-                throw new ArgumentOutOfRangeException(nameof(byteCount), SR.ArgumentOutOfRange_GetCharCountOverflow);
+                throw new ArgumentOutOfRangeException(
+                    nameof(byteCount),
+                    SR.ArgumentOutOfRange_GetCharCountOverflow
+                );
 
             return (int)charCount;
         }
@@ -790,7 +882,8 @@ namespace System.Text
             internal short bLeftOver3 = -1;
             internal short bLeftOver4 = -1;
 
-            internal GB18030Decoder(EncodingNLS encoding) : base(encoding)
+            internal GB18030Decoder(EncodingNLS encoding)
+                : base(encoding)
             {
                 // DecoderNLS Calls reset
             }
@@ -807,10 +900,7 @@ namespace System.Text
             // Anything left in our decoder?
             internal override bool HasState
             {
-                get
-                {
-                    return (bLeftOver1 >= 0);
-                }
+                get { return (bLeftOver1 >= 0); }
             }
         }
 

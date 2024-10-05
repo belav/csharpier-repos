@@ -1,7 +1,7 @@
-// 
+//
 // Policy.cs: Implements the managed SecPolicy wrapper.
 //
-// Authors: 
+// Authors:
 //	Miguel de Icaza
 //  Sebastien Pouliot  <sebastien@xamarin.com>
 //
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,57 +29,66 @@
 //
 using System;
 using System.Runtime.InteropServices;
-using ObjCRuntimeInternal;
 using Mono.Net;
+using ObjCRuntimeInternal;
 
-namespace Mono.AppleTls {
-	partial class SecPolicy : INativeObject, IDisposable {
-		IntPtr handle;
+namespace Mono.AppleTls
+{
+    partial class SecPolicy : INativeObject, IDisposable
+    {
+        IntPtr handle;
 
-		internal SecPolicy (IntPtr handle, bool owns = false)
-		{
-			if (handle == IntPtr.Zero)
-				throw new Exception ("Invalid handle");
+        internal SecPolicy(IntPtr handle, bool owns = false)
+        {
+            if (handle == IntPtr.Zero)
+                throw new Exception("Invalid handle");
 
-			this.handle = handle;
-			if (!owns)
-				CFObject.CFRetain (handle);
-		}
+            this.handle = handle;
+            if (!owns)
+                CFObject.CFRetain(handle);
+        }
 
-		[DllImport (AppleTlsContext.SecurityLibrary)]
-		extern static IntPtr /* SecPolicyRef */ SecPolicyCreateSSL (bool server, IntPtr /* CFStringRef */ hostname);
+        [DllImport(AppleTlsContext.SecurityLibrary)]
+        static extern IntPtr /* SecPolicyRef */
+        SecPolicyCreateSSL(
+            bool server,
+            IntPtr /* CFStringRef */
+            hostname
+        );
 
-		static public SecPolicy CreateSslPolicy (bool server, string hostName)
-		{
-			CFString host = hostName == null ? null : CFString.Create (hostName);
-			IntPtr handle = host == null ? IntPtr.Zero : host.Handle; 
-			SecPolicy policy = new SecPolicy (SecPolicyCreateSSL (server, handle), true);
-			if (host != null)
-				host.Dispose ();
-			return policy;
-		}
+        public static SecPolicy CreateSslPolicy(bool server, string hostName)
+        {
+            CFString host = hostName == null ? null : CFString.Create(hostName);
+            IntPtr handle = host == null ? IntPtr.Zero : host.Handle;
+            SecPolicy policy = new SecPolicy(SecPolicyCreateSSL(server, handle), true);
+            if (host != null)
+                host.Dispose();
+            return policy;
+        }
 
-		~SecPolicy ()
-		{
-			Dispose (false);
-		}
+        ~SecPolicy()
+        {
+            Dispose(false);
+        }
 
-		public void Dispose ()
-		{
-			Dispose (true);
-			GC.SuppressFinalize (this);
-		}
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
-		public IntPtr Handle {
-			get { return handle; }
-		}
+        public IntPtr Handle
+        {
+            get { return handle; }
+        }
 
-		protected virtual void Dispose (bool disposing)
-		{
-			if (handle != IntPtr.Zero){
-				CFObject.CFRelease (handle);
-				handle = IntPtr.Zero;
-			}
-		}
-	}
+        protected virtual void Dispose(bool disposing)
+        {
+            if (handle != IntPtr.Zero)
+            {
+                CFObject.CFRelease(handle);
+                handle = IntPtr.Zero;
+            }
+        }
+    }
 }

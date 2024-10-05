@@ -5,9 +5,7 @@ public class SomeSource
     public int IgnoreMe { get; set; }
 }
 
-public class Destination : DestinationBase
-{
-}
+public class Destination : DestinationBase { }
 
 public class DestinationBase
 {
@@ -22,8 +20,7 @@ public class IgnoreAllPropertiesWithAnInaccessibleSetterTests
         // Arrange
         var config = new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap<SomeSource, Destination>()
-                .IgnoreAllPropertiesWithAnInaccessibleSetter();
+            cfg.CreateMap<SomeSource, Destination>().IgnoreAllPropertiesWithAnInaccessibleSetter();
         });
         var mapper = config.CreateMapper();
 

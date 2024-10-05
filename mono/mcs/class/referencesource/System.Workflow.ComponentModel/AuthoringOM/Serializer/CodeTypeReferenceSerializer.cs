@@ -1,8 +1,8 @@
 using System;
 using System.CodeDom;
+using System.Globalization;
 using System.Text;
 using System.Workflow.ComponentModel.Compiler;
-using System.Globalization;
 
 namespace System.Workflow.ComponentModel.Serialization
 {
@@ -16,12 +16,18 @@ namespace System.Workflow.ComponentModel.Serialization
         // this must match the name used by rules (RuleUserDataKeys.QualifiedName)
         internal const string QualifiedName = "QualifiedName";
 
-        protected internal override bool CanSerializeToString(WorkflowMarkupSerializationManager serializationManager, object value)
+        protected internal override bool CanSerializeToString(
+            WorkflowMarkupSerializationManager serializationManager,
+            object value
+        )
         {
             return (value is CodeTypeReference);
         }
 
-        protected internal override string SerializeToString(WorkflowMarkupSerializationManager serializationManager, object value)
+        protected internal override string SerializeToString(
+            WorkflowMarkupSerializationManager serializationManager,
+            object value
+        )
         {
             if (serializationManager == null)
                 throw new ArgumentNullException("serializationManager");
@@ -50,7 +56,8 @@ namespace System.Workflow.ComponentModel.Serialization
             //
             // If we get a real type make sure that we get the correct fully qualified name for the target framework version
             string assemblyFullName = null;
-            TypeProvider typeProvider = serializationManager.GetService(typeof(ITypeProvider)) as TypeProvider;
+            TypeProvider typeProvider =
+                serializationManager.GetService(typeof(ITypeProvider)) as TypeProvider;
             if (typeProvider != null)
             {
                 assemblyFullName = typeProvider.GetAssemblyName(type);
@@ -67,12 +74,21 @@ namespace System.Workflow.ComponentModel.Serialization
             }
             else
             {
-                typeName = string.Format(CultureInfo.InvariantCulture, "{0}, {1}", type.FullName, assemblyFullName);
+                typeName = string.Format(
+                    CultureInfo.InvariantCulture,
+                    "{0}, {1}",
+                    type.FullName,
+                    assemblyFullName
+                );
             }
             return typeName;
         }
 
-        protected internal override object DeserializeFromString(WorkflowMarkupSerializationManager serializationManager, Type propertyType, string value)
+        protected internal override object DeserializeFromString(
+            WorkflowMarkupSerializationManager serializationManager,
+            Type propertyType,
+            string value
+        )
         {
             if (!propertyType.IsAssignableFrom(typeof(CodeTypeReference)))
                 return null;
@@ -115,7 +131,9 @@ namespace System.Workflow.ComponentModel.Serialization
             if (reference.ArrayElementType != null)
             {
                 // type represents an array
-                result = new StringBuilder(ConvertTypeReferenceToString(reference.ArrayElementType));
+                result = new StringBuilder(
+                    ConvertTypeReferenceToString(reference.ArrayElementType)
+                );
                 if (reference.ArrayRank > 0)
                 {
                     result.Append("[");

@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Net.Sockets {
+namespace System.Net.Sockets
+{
     using System;
     using System.Net;
     using System.Runtime.InteropServices;
@@ -14,26 +15,30 @@ namespace System.Net.Sockets {
     //
     //  AcceptOverlappedAsyncResult - used to take care of storage for async Socket BeginAccept call.
     //
-    internal class AcceptOverlappedAsyncResult : BaseOverlappedAsyncResult {
-
+    internal class AcceptOverlappedAsyncResult : BaseOverlappedAsyncResult
+    {
         //
         // internal class members
         //
 
-        private int             m_LocalBytesTransferred;
-        private Socket          m_ListenSocket;
-        private Socket          m_AcceptSocket;
+        private int m_LocalBytesTransferred;
+        private Socket m_ListenSocket;
+        private Socket m_AcceptSocket;
 
-        private     int         m_AddressBufferLength;
-        private     byte[]      m_Buffer;
+        private int m_AddressBufferLength;
+        private byte[] m_Buffer;
 
         // Constructor. We take in the socket that's creating us, the caller's
         // state object, and the buffer on which the I/O will be performed.
         // We save the socket and state, pin the callers's buffer, and allocate
         // an event for the WaitHandle.
         //
-        internal AcceptOverlappedAsyncResult(Socket listenSocket, Object asyncState, AsyncCallback asyncCallback) :
-            base(listenSocket, asyncState, asyncCallback)
+        internal AcceptOverlappedAsyncResult(
+            Socket listenSocket,
+            Object asyncState,
+            AsyncCallback asyncCallback
+        )
+            : base(listenSocket, asyncState, asyncCallback)
         {
             m_ListenSocket = listenSocket;
         }
@@ -45,14 +50,16 @@ namespace System.Net.Sockets {
         // by the ThreadPool when the IO completes asynchronously. (only called on WinNT)
         //
 
-        internal override object PostCompletion(int numBytes) {
+        internal override object PostCompletion(int numBytes)
+        {
             SocketError errorCode = (SocketError)ErrorCode;
 
             SocketAddress remoteSocketAddress = null;
-            if (errorCode==SocketError.Success) {
-
+            if (errorCode == SocketError.Success)
+            {
                 m_LocalBytesTransferred = numBytes;
-                if(Logging.On)LogBuffer((long)numBytes);
+                if (Logging.On)
+                    LogBuffer((long)numBytes);
 
                 //get the endpoint
 
@@ -66,17 +73,22 @@ namespace System.Net.Sockets {
                 try
                 {
                     m_ListenSocket.GetAcceptExSockaddrs(
-                                    Marshal.UnsafeAddrOfPinnedArrayElement(m_Buffer, 0),
-                                    m_Buffer.Length - (m_AddressBufferLength * 2),
-                                    m_AddressBufferLength,
-                                    m_AddressBufferLength,
-                                    out localAddr,
-                                    out localAddrLength,
-                                    out remoteAddr,
-                                    out remoteSocketAddress.m_Size
-                                    );
-                    Marshal.Copy(remoteAddr, remoteSocketAddress.m_Buffer, 0, remoteSocketAddress.m_Size);
-                
+                        Marshal.UnsafeAddrOfPinnedArrayElement(m_Buffer, 0),
+                        m_Buffer.Length - (m_AddressBufferLength * 2),
+                        m_AddressBufferLength,
+                        m_AddressBufferLength,
+                        out localAddr,
+                        out localAddrLength,
+                        out remoteAddr,
+                        out remoteSocketAddress.m_Size
+                    );
+                    Marshal.Copy(
+                        remoteAddr,
+                        remoteSocketAddress.m_Buffer,
+                        0,
+                        remoteSocketAddress.m_Size
+                    );
+
                     IntPtr handle = m_ListenSocket.SafeHandle.DangerousGetHandle();
 
                     errorCode = UnsafeNclNativeMethods.OSSOCK.setsockopt(
@@ -84,10 +96,23 @@ namespace System.Net.Sockets {
                         SocketOptionLevel.Socket,
                         SocketOptionName.UpdateAcceptContext,
                         ref handle,
-                        Marshal.SizeOf(handle));
+                        Marshal.SizeOf(handle)
+                    );
 
-                    if (errorCode == SocketError.SocketError) errorCode = (SocketError) Marshal.GetLastWin32Error();
-                    GlobalLog.Print("AcceptOverlappedAsyncResult#" + ValidationHelper.HashString(this) + "::PostCallback() setsockopt handle:" + handle.ToString() + " AcceptSocket:" + ValidationHelper.HashString(m_AcceptSocket) + " itsHandle:" + m_AcceptSocket.SafeHandle.DangerousGetHandle().ToString() + " returns:" + errorCode.ToString());
+                    if (errorCode == SocketError.SocketError)
+                        errorCode = (SocketError)Marshal.GetLastWin32Error();
+                    GlobalLog.Print(
+                        "AcceptOverlappedAsyncResult#"
+                            + ValidationHelper.HashString(this)
+                            + "::PostCallback() setsockopt handle:"
+                            + handle.ToString()
+                            + " AcceptSocket:"
+                            + ValidationHelper.HashString(m_AcceptSocket)
+                            + " itsHandle:"
+                            + m_AcceptSocket.SafeHandle.DangerousGetHandle().ToString()
+                            + " returns:"
+                            + errorCode.ToString()
+                    );
                 }
                 catch (ObjectDisposedException)
                 {
@@ -97,15 +122,18 @@ namespace System.Net.Sockets {
                 ErrorCode = (int)errorCode;
             }
 
-            if (errorCode==SocketError.Success) {
-                return m_ListenSocket.UpdateAcceptSocket(m_AcceptSocket, m_ListenSocket.m_RightEndPoint.Create(remoteSocketAddress), false);
+            if (errorCode == SocketError.Success)
+            {
+                return m_ListenSocket.UpdateAcceptSocket(
+                    m_AcceptSocket,
+                    m_ListenSocket.m_RightEndPoint.Create(remoteSocketAddress),
+                    false
+                );
             }
             else
                 return null;
         }
-
 #endif // !FEATURE_PAL
-
 
         //
         // SetUnmanagedStructures -
@@ -114,8 +142,8 @@ namespace System.Net.Sockets {
         //   to prepare specific structures and ints that lie in unmanaged memory
         //   since the Overlapped calls can be Async
         //
-        internal void SetUnmanagedStructures(byte[] buffer, int addressBufferLength) {
-
+        internal void SetUnmanagedStructures(byte[] buffer, int addressBufferLength)
+        {
             // has to be called first to pin memory
             base.SetUnmanagedStructures(buffer);
 
@@ -135,37 +163,52 @@ namespace System.Net.Sockets {
         }
         */
 
-        void LogBuffer(long size) {
-            GlobalLog.Assert(Logging.On, "AcceptOverlappedAsyncResult#{0}::LogBuffer()|Logging is off!", ValidationHelper.HashString(this));
+        void LogBuffer(long size)
+        {
+            GlobalLog.Assert(
+                Logging.On,
+                "AcceptOverlappedAsyncResult#{0}::LogBuffer()|Logging is off!",
+                ValidationHelper.HashString(this)
+            );
             IntPtr pinnedBuffer = Marshal.UnsafeAddrOfPinnedArrayElement(m_Buffer, 0);
-            if (pinnedBuffer != IntPtr.Zero) {
-                if (size > -1) {
-                    Logging.Dump(Logging.Sockets, m_ListenSocket, "PostCompletion", pinnedBuffer, (int)Math.Min(size, (long)m_Buffer.Length));
+            if (pinnedBuffer != IntPtr.Zero)
+            {
+                if (size > -1)
+                {
+                    Logging.Dump(
+                        Logging.Sockets,
+                        m_ListenSocket,
+                        "PostCompletion",
+                        pinnedBuffer,
+                        (int)Math.Min(size, (long)m_Buffer.Length)
+                    );
                 }
-                else {
-                    Logging.Dump(Logging.Sockets, m_ListenSocket, "PostCompletion", pinnedBuffer, (int)m_Buffer.Length);
+                else
+                {
+                    Logging.Dump(
+                        Logging.Sockets,
+                        m_ListenSocket,
+                        "PostCompletion",
+                        pinnedBuffer,
+                        (int)m_Buffer.Length
+                    );
                 }
             }
         }
 
-        internal byte[] Buffer {
-            get {
-                return m_Buffer;
-            }
+        internal byte[] Buffer
+        {
+            get { return m_Buffer; }
         }
 
-        internal int BytesTransferred {
-            get {
-                return m_LocalBytesTransferred;
-            }
+        internal int BytesTransferred
+        {
+            get { return m_LocalBytesTransferred; }
         }
 
         internal Socket AcceptSocket
         {
-            set
-            {
-                m_AcceptSocket = value;
-            }
+            set { m_AcceptSocket = value; }
         }
     }
 }

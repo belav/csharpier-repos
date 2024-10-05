@@ -2,40 +2,36 @@
 {
     using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
-    using System.ServiceModel.Configuration;
-    using System.ServiceModel.Activities.Description;
     using System.Runtime;
+    using System.ServiceModel.Activities.Description;
+    using System.ServiceModel.Configuration;
 
     [Fx.Tag.XamlVisible(false)]
     public class WorkflowInstanceManagementElement : BehaviorExtensionElement
     {
-        
         const string authorizedWindowsGroup = "authorizedWindowsGroup";
         ConfigurationPropertyCollection properties;
 
-        public WorkflowInstanceManagementElement()
-        {
-        }
+        public WorkflowInstanceManagementElement() { }
 
         [SuppressMessage(
             FxCop.Category.Configuration,
             FxCop.Rule.ConfigurationPropertyAttributeRule,
-            Justification = "This property only overrides the base property.")]
+            Justification = "This property only overrides the base property."
+        )]
         public override Type BehaviorType
         {
             get { return typeof(WorkflowInstanceManagementBehavior); }
-        }        
+        }
 
-        [ConfigurationProperty(
-            authorizedWindowsGroup,
-            IsRequired = false)]
+        [ConfigurationProperty(authorizedWindowsGroup, IsRequired = false)]
         [StringValidator(MinLength = 0)]
         public string AuthorizedWindowsGroup
         {
             get { return (string)base[authorizedWindowsGroup]; }
             set { base[authorizedWindowsGroup] = value; }
         }
-        
+
         protected internal override object CreateBehavior()
         {
             string authorizedWindowsGroup;
@@ -45,13 +41,12 @@
             }
             else
             {
-                authorizedWindowsGroup = WorkflowInstanceManagementBehavior.GetDefaultBuiltinAdministratorsGroup();
+                authorizedWindowsGroup =
+                    WorkflowInstanceManagementBehavior.GetDefaultBuiltinAdministratorsGroup();
             }
 
-            WorkflowInstanceManagementBehavior workflowInstanceManagementBehavior = new WorkflowInstanceManagementBehavior
-            {
-                WindowsGroup = authorizedWindowsGroup
-            };
+            WorkflowInstanceManagementBehavior workflowInstanceManagementBehavior =
+                new WorkflowInstanceManagementBehavior { WindowsGroup = authorizedWindowsGroup };
             return workflowInstanceManagementBehavior;
         }
 
@@ -61,8 +56,18 @@
             {
                 if (this.properties == null)
                 {
-                    ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
-                    properties.Add(new ConfigurationProperty(authorizedWindowsGroup, typeof(System.String), string.Empty, null, new System.Configuration.StringValidator(0, int.MaxValue, null), System.Configuration.ConfigurationPropertyOptions.None));
+                    ConfigurationPropertyCollection properties =
+                        new ConfigurationPropertyCollection();
+                    properties.Add(
+                        new ConfigurationProperty(
+                            authorizedWindowsGroup,
+                            typeof(System.String),
+                            string.Empty,
+                            null,
+                            new System.Configuration.StringValidator(0, int.MaxValue, null),
+                            System.Configuration.ConfigurationPropertyOptions.None
+                        )
+                    );
                     this.properties = properties;
                 }
                 return this.properties;

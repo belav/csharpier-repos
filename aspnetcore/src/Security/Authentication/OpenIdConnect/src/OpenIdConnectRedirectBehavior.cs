@@ -19,5 +19,5 @@ public enum OpenIdConnectRedirectBehavior
     /// Emits an HTML form to redirect the user agent to
     /// the OpenID Connect provider using a POST request.
     /// </summary>
-    FormPost = 1
+    FormPost = 1,
 }

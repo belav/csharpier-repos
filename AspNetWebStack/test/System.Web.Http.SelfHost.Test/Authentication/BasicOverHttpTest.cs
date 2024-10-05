@@ -16,35 +16,53 @@ namespace System.Web.Http
         [Fact]
         public Task AuthenticateWithUsernameTokenSucceed()
         {
-            return RunBasicAuthTest("Sample", "", new NetworkCredential("username", "password"),
+            return RunBasicAuthTest(
+                "Sample",
+                "",
+                new NetworkCredential("username", "password"),
                 (response) => Assert.Equal(HttpStatusCode.OK, response.StatusCode)
-                );
+            );
         }
 
         [Fact]
         public Task AuthenticateWithWrongPasswordFail()
         {
-            return RunBasicAuthTest("Sample", "", new NetworkCredential("username", "wrong password"),
+            return RunBasicAuthTest(
+                "Sample",
+                "",
+                new NetworkCredential("username", "wrong password"),
                 (response) => Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode)
-                );
+            );
         }
 
         [Fact]
         public Task AuthenticateWithNoCredentialFail()
         {
-            return RunBasicAuthTest("Sample", "", null,
+            return RunBasicAuthTest(
+                "Sample",
+                "",
+                null,
                 (response) => Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode)
-                );
+            );
         }
 
-        private static async Task RunBasicAuthTest(string controllerName, string routeSuffix, NetworkCredential credential, Action<HttpResponseMessage> assert)
+        private static async Task RunBasicAuthTest(
+            string controllerName,
+            string routeSuffix,
+            NetworkCredential credential,
+            Action<HttpResponseMessage> assert
+        )
         {
             using (var port = new PortReserver())
             {
                 // Arrange
                 HttpSelfHostConfiguration config = new HttpSelfHostConfiguration(port.BaseUri);
                 config.HostNameComparisonMode = HostNameComparisonMode.Exact;
-                config.Routes.MapHttpRoute("Default", "{controller}" + routeSuffix, new { controller = controllerName });
+                config.Routes.MapHttpRoute(
+                    "Default",
+                    "{controller}" + routeSuffix,
+                    new { controller = controllerName }
+                );
                 config.UserNamePasswordValidator = new CustomUsernamePasswordValidator();
                 config.MessageHandlers.Add(new CustomMessageHandler());
                 HttpSelfHostServer server = new HttpSelfHostServer(config);
@@ -77,6 +95,5 @@ namespace System.Web.Http
                 await server.CloseAsync();
             }
         }
-
     }
 }

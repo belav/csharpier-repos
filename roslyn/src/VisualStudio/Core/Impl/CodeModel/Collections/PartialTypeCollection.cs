@@ -7,8 +7,8 @@
 using System.Collections.Immutable;
 using System.Linq;
 using System.Runtime.InteropServices;
-using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.InternalElements;
 using Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Interop;
 using Microsoft.VisualStudio.LanguageServices.Implementation.Interop;
@@ -19,20 +19,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
     [ComDefaultInterface(typeof(ICodeElements))]
     public sealed class PartialTypeCollection : AbstractCodeElementCollection
     {
-        internal static EnvDTE.CodeElements Create(
-            CodeModelState state,
-            AbstractCodeType parent)
+        internal static EnvDTE.CodeElements Create(CodeModelState state, AbstractCodeType parent)
         {
             var collection = new PartialTypeCollection(state, parent);
             return (EnvDTE.CodeElements)ComAggregate.CreateAggregatedObject(collection);
         }
 
-        private PartialTypeCollection(
-            CodeModelState state,
-            AbstractCodeType parent)
-            : base(state, parent)
-        {
-        }
+        private PartialTypeCollection(CodeModelState state, AbstractCodeType parent)
+            : base(state, parent) { }
 
         private ImmutableArray<EnvDTE.CodeElement> _parts;
 
@@ -60,9 +54,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
                         var fileCodeModelObject = this.Workspace.GetFileCodeModel(document.Id);
                         if (fileCodeModelObject != null)
                         {
-                            var fileCodeModel = ComAggregate.GetManagedObject<FileCodeModel>(fileCodeModelObject);
+                            var fileCodeModel = ComAggregate.GetManagedObject<FileCodeModel>(
+                                fileCodeModelObject
+                            );
 
-                            var element = fileCodeModel.CodeElementFromPosition(location.SourceSpan.Start, ParentType.Kind);
+                            var element = fileCodeModel.CodeElementFromPosition(
+                                location.SourceSpan.Start,
+                                ParentType.Kind
+                            );
                             if (element != null)
                             {
                                 partsBuilder.Add(element);

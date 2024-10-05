@@ -25,7 +25,9 @@ namespace System
 
             while (ucount >= 2)
             {
-                tempValue = Unsafe.ReadUnaligned<uint>(ref Unsafe.As<char, byte>(ref Unsafe.AddByteOffset(ref data, byteOffset)));
+                tempValue = Unsafe.ReadUnaligned<uint>(
+                    ref Unsafe.As<char, byte>(ref Unsafe.AddByteOffset(ref data, byteOffset))
+                );
                 if (!Utf16Utility.AllCharsInUInt32AreAscii(tempValue))
                 {
                     goto NotAscii;
@@ -51,12 +53,17 @@ namespace System
                 if (BitConverter.IsLittleEndian)
                 {
                     // addition is written with -0x80u to allow fall-through to next statement rather than jmp past it
-                    p0 += Utf16Utility.ConvertAllAsciiCharsInUInt32ToUppercase(tempValue) + (0x800000u - 0x80u);
+                    p0 +=
+                        Utf16Utility.ConvertAllAsciiCharsInUInt32ToUppercase(tempValue)
+                        + (0x800000u - 0x80u);
                 }
                 else
                 {
                     // as above, addition is modified to allow fall-through to next statement rather than jmp past it
-                    p0 += (Utf16Utility.ConvertAllAsciiCharsInUInt32ToUppercase(tempValue) << 16) + 0x8000u - 0x80000000u;
+                    p0 +=
+                        (Utf16Utility.ConvertAllAsciiCharsInUInt32ToUppercase(tempValue) << 16)
+                        + 0x8000u
+                        - 0x80000000u;
                 }
             }
             if (BitConverter.IsLittleEndian)
@@ -73,24 +80,45 @@ namespace System
 
             return (int)(p1 ^ p0);
 
-        NotAscii:
+            NotAscii:
             Debug.Assert(ucount <= int.MaxValue); // this should fit into a signed int
-            return ComputeHash32OrdinalIgnoreCaseSlow(ref Unsafe.AddByteOffset(ref data, byteOffset), (int)ucount, p0, p1);
+            return ComputeHash32OrdinalIgnoreCaseSlow(
+                ref Unsafe.AddByteOffset(ref data, byteOffset),
+                (int)ucount,
+                p0,
+                p1
+            );
         }
 
-        private static int ComputeHash32OrdinalIgnoreCaseSlow(ref char data, int count, uint p0, uint p1)
+        private static int ComputeHash32OrdinalIgnoreCaseSlow(
+            ref char data,
+            int count,
+            uint p0,
+            uint p1
+        )
         {
             Debug.Assert(count > 0);
 
             char[]? borrowedArr = null;
-            Span<char> scratch = (uint)count <= 64 ? stackalloc char[64] : (borrowedArr = ArrayPool<char>.Shared.Rent(count));
+            Span<char> scratch =
+                (uint)count <= 64
+                    ? stackalloc char[64]
+                    : (borrowedArr = ArrayPool<char>.Shared.Rent(count));
 
-            int charsWritten = Globalization.Ordinal.ToUpperOrdinal(new ReadOnlySpan<char>(ref data, count), scratch);
+            int charsWritten = Globalization.Ordinal.ToUpperOrdinal(
+                new ReadOnlySpan<char>(ref data, count),
+                scratch
+            );
             Debug.Assert(charsWritten == count); // invariant case conversion should involve simple folding; preserve code unit count
 
             // Slice the array to the size returned by ToUpperInvariant.
             // Multiplication below will not overflow since going from positive Int32 to UInt32.
-            int hash = ComputeHash32(ref Unsafe.As<char, byte>(ref MemoryMarshal.GetReference(scratch)), (uint)charsWritten * 2, p0, p1);
+            int hash = ComputeHash32(
+                ref Unsafe.As<char, byte>(ref MemoryMarshal.GetReference(scratch)),
+                (uint)charsWritten * 2,
+                p0,
+                p1
+            );
 
             // Return the borrowed array if necessary.
             if (borrowedArr != null)

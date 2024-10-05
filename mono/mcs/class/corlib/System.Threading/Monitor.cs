@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,90 +31,97 @@
 //
 
 using System.Runtime.CompilerServices;
+using System.Runtime.ConstrainedExecution;
+using System.Runtime.InteropServices;
 #if FEATURE_REMOTING
 using System.Runtime.Remoting.Contexts;
 #endif
-using System.Runtime.ConstrainedExecution;
-using System.Runtime.InteropServices;
 
 namespace System.Threading
 {
-	public static partial class Monitor
-	{
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		extern static bool Monitor_test_synchronised(object obj);
+    public static partial class Monitor
+    {
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        static extern bool Monitor_test_synchronised(object obj);
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		extern static void Monitor_pulse(object obj);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        static extern void Monitor_pulse(object obj);
 
-		static void ObjPulse(Object obj)
-		{
-			if (!Monitor_test_synchronised (obj))
-				throw new SynchronizationLockException("Object is not synchronized");
+        static void ObjPulse(Object obj)
+        {
+            if (!Monitor_test_synchronised(obj))
+                throw new SynchronizationLockException("Object is not synchronized");
 
-			Monitor_pulse (obj);
-		}
+            Monitor_pulse(obj);
+        }
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		extern static void Monitor_pulse_all(object obj);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        static extern void Monitor_pulse_all(object obj);
 
-		static void ObjPulseAll(Object obj)
-		{
-			if (!Monitor_test_synchronised (obj))
-				throw new SynchronizationLockException("Object is not synchronized");
+        static void ObjPulseAll(Object obj)
+        {
+            if (!Monitor_test_synchronised(obj))
+                throw new SynchronizationLockException("Object is not synchronized");
 
-			Monitor_pulse_all (obj);
-		}
+            Monitor_pulse_all(obj);
+        }
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		extern static bool Monitor_wait(object obj, int ms);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        static extern bool Monitor_wait(object obj, int ms);
 
-		static bool ObjWait(bool exitContext, int millisecondsTimeout, Object obj)
-		{
-			if (millisecondsTimeout < 0 && millisecondsTimeout != (int) Timeout.Infinite)
-				throw new ArgumentOutOfRangeException ("millisecondsTimeout");
-			if (!Monitor_test_synchronised (obj))
-				throw new SynchronizationLockException ("Object is not synchronized");
+        static bool ObjWait(bool exitContext, int millisecondsTimeout, Object obj)
+        {
+            if (millisecondsTimeout < 0 && millisecondsTimeout != (int)Timeout.Infinite)
+                throw new ArgumentOutOfRangeException("millisecondsTimeout");
+            if (!Monitor_test_synchronised(obj))
+                throw new SynchronizationLockException("Object is not synchronized");
 
-			try {
+            try
+            {
 #if FEATURE_REMOTING
-				if (exitContext)
-					SynchronizationAttribute.ExitContext ();
+                if (exitContext)
+                    SynchronizationAttribute.ExitContext();
 #endif
 
-				return Monitor_wait (obj, millisecondsTimeout);
-			} finally {
+                return Monitor_wait(obj, millisecondsTimeout);
+            }
+            finally
+            {
 #if FEATURE_REMOTING
-				if (exitContext)
-					SynchronizationAttribute.EnterContext ();
+                if (exitContext)
+                    SynchronizationAttribute.EnterContext();
 #endif
-			}
-		}
+            }
+        }
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		extern static void try_enter_with_atomic_var (object obj, int millisecondsTimeout, ref bool lockTaken);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        static extern void try_enter_with_atomic_var(
+            object obj,
+            int millisecondsTimeout,
+            ref bool lockTaken
+        );
 
-		static void ReliableEnterTimeout(Object obj, int timeout, ref bool lockTaken)
-		{
-			if (obj == null)
-				throw new ArgumentNullException ("obj");
-			if (timeout < 0 && timeout != (int) Timeout.Infinite)
-				throw new ArgumentOutOfRangeException ("millisecondsTimeout");
+        static void ReliableEnterTimeout(Object obj, int timeout, ref bool lockTaken)
+        {
+            if (obj == null)
+                throw new ArgumentNullException("obj");
+            if (timeout < 0 && timeout != (int)Timeout.Infinite)
+                throw new ArgumentOutOfRangeException("millisecondsTimeout");
 
-			try_enter_with_atomic_var (obj, timeout, ref lockTaken);
-		}
+            try_enter_with_atomic_var(obj, timeout, ref lockTaken);
+        }
 
-		static void ReliableEnter(Object obj, ref bool lockTaken)
-		{
-			ReliableEnterTimeout (obj, (int) Timeout.Infinite, ref lockTaken);
-		}
+        static void ReliableEnter(Object obj, ref bool lockTaken)
+        {
+            ReliableEnterTimeout(obj, (int)Timeout.Infinite, ref lockTaken);
+        }
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		extern static bool Monitor_test_owner (object obj);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        static extern bool Monitor_test_owner(object obj);
 
-		static bool IsEnteredNative(Object obj)
-		{
-			return Monitor_test_owner (obj);
-		}
-	}
+        static bool IsEnteredNative(Object obj)
+        {
+            return Monitor_test_owner(obj);
+        }
+    }
 }

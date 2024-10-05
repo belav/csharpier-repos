@@ -166,7 +166,6 @@ namespace Internal.NativeFormat
             return ComputeArrayTypeHashCode(elementType.GetHashCode(), rank);
         }
 
-
         public static int ComputePointerTypeHashCode(int pointeeTypeHashCode)
         {
             return (pointeeTypeHashCode + _rotl(pointeeTypeHashCode, 5)) ^ 0x12D0;
@@ -176,7 +175,6 @@ namespace Internal.NativeFormat
         {
             return ComputePointerTypeHashCode(pointeeType.GetHashCode());
         }
-
 
         public static int ComputeByrefTypeHashCode(int parameterTypeHashCode)
         {
@@ -188,14 +186,18 @@ namespace Internal.NativeFormat
             return ComputeByrefTypeHashCode(parameterType.GetHashCode());
         }
 
-
-        public static int ComputeNestedTypeHashCode(int enclosingTypeHashCode, int nestedTypeNameHash)
+        public static int ComputeNestedTypeHashCode(
+            int enclosingTypeHashCode,
+            int nestedTypeNameHash
+        )
         {
             return (enclosingTypeHashCode + _rotl(enclosingTypeHashCode, 11)) ^ nestedTypeNameHash;
         }
 
-
-        public static int ComputeGenericInstanceHashCode<ARG>(int genericDefinitionHashCode, ARG[] genericTypeArguments)
+        public static int ComputeGenericInstanceHashCode<ARG>(
+            int genericDefinitionHashCode,
+            ARG[] genericTypeArguments
+        )
         {
             int hashcode = genericDefinitionHashCode;
             for (int i = 0; i < genericTypeArguments.Length; i++)
@@ -206,7 +208,10 @@ namespace Internal.NativeFormat
             return (hashcode + _rotl(hashcode, 15));
         }
 
-        public static int ComputeMethodSignatureHashCode<ARG>(int returnTypeHashCode, ARG[] parameters)
+        public static int ComputeMethodSignatureHashCode<ARG>(
+            int returnTypeHashCode,
+            ARG[] parameters
+        )
         {
             // We're not taking calling conventions into consideration here mostly because there's no
             // exchange enum type that would define them. We could define one, but the amount of additional
@@ -226,7 +231,10 @@ namespace Internal.NativeFormat
         /// <param name="typeHashCode">HashCode of the type that owns the method</param>
         /// <param name="nameOrNameAndGenericArgumentsHashCode">HashCode of either the name of the method (for non-generic methods) or the GenericInstanceHashCode of the name+generic arguments of the method.</param>
         /// <returns></returns>
-        public static int ComputeMethodHashCode(int typeHashCode, int nameOrNameAndGenericArgumentsHashCode)
+        public static int ComputeMethodHashCode(
+            int typeHashCode,
+            int nameOrNameAndGenericArgumentsHashCode
+        )
         {
             // TODO! This hash combining function isn't good, but it matches logic used in the past
             // consider changing to a better combining function once all uses use this function

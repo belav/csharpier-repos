@@ -6,14 +6,14 @@ using System.Collections;
 namespace System.Data.Odbc
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public sealed class OdbcErrorCollection : ICollection
     {
         private readonly ArrayList _items = new ArrayList(); // Do not rename (binary serialization)
 
-        internal OdbcErrorCollection()
-        {
-        }
+        internal OdbcErrorCollection() { }
 
         object System.Collections.ICollection.SyncRoot
         {
@@ -27,18 +27,12 @@ namespace System.Data.Odbc
 
         public int Count
         {
-            get
-            {
-                return _items.Count;
-            }
+            get { return _items.Count; }
         }
 
         public OdbcError this[int i]
         {
-            get
-            {
-                return (OdbcError)_items[i]!;
-            }
+            get { return (OdbcError)_items[i]!; }
         }
 
         internal void Add(OdbcError error)

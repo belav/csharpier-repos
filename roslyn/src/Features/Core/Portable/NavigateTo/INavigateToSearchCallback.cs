@@ -12,7 +12,11 @@ namespace Microsoft.CodeAnalysis.NavigateTo
         void Done(bool isFullyLoaded);
         void ReportIncomplete();
 
-        Task AddItemAsync(Project project, INavigateToSearchResult result, CancellationToken cancellationToken);
+        Task AddItemAsync(
+            Project project,
+            INavigateToSearchResult result,
+            CancellationToken cancellationToken
+        );
 
         void ReportProgress(int current, int maximum);
     }

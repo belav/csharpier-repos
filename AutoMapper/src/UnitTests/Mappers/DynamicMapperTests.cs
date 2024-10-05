@@ -60,7 +60,17 @@ public class When_mapping_to_dynamic
     {
         var config = new MapperConfiguration(cfg => { });
         var data = new[] { 1, 2, 3 };
-        _destination = config.CreateMapper().Map<DynamicDictionary>(new Destination { Foo = "Foo", Bar = "Bar", Data = data, Baz = 12 });
+        _destination = config
+            .CreateMapper()
+            .Map<DynamicDictionary>(
+                new Destination
+                {
+                    Foo = "Foo",
+                    Bar = "Bar",
+                    Data = data,
+                    Baz = 12,
+                }
+            );
         ((int)_destination.Count).ShouldBe(4);
         Assert.Equal("Foo", _destination.Foo);
         Assert.Equal("Bar", _destination.Bar);
@@ -126,6 +136,7 @@ public class When_mapping_from_dynamic_with_missing_property
         destination.Foo.ShouldBe("Foo");
         destination.Bar.ShouldBeNull();
     }
+
     [Fact]
     public void Should_keep_existing_value()
     {

@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace DefaultNamespace
 {
     using System;
@@ -10,7 +11,6 @@ namespace DefaultNamespace
 
     public class test
     {
-
         internal static void ccc(byte[] bytes)
         {
             int[] m_array;
@@ -28,10 +28,11 @@ namespace DefaultNamespace
             int j = 0;
             while (bytes.Length - j >= 4)
             {
-                m_array[i++] = (bytes[j] & 0xff) |
-                              ((bytes[j + 1] & 0xff) << 8) |
-                              ((bytes[j + 2] & 0xff) << 16) |
-                              ((bytes[j + 3] & 0xff) << 24);
+                m_array[i++] =
+                    (bytes[j] & 0xff)
+                    | ((bytes[j + 1] & 0xff) << 8)
+                    | ((bytes[j + 2] & 0xff) << 16)
+                    | ((bytes[j + 3] & 0xff) << 24);
                 j += 4;
             }
             if (bytes.Length - j >= 0)

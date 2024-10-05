@@ -17,7 +17,10 @@ public abstract class ParameterPolicyFactory
     /// <param name="parameter">The parameter the parameter policy is being created for.</param>
     /// <param name="inlineText">The inline text to resolve.</param>
     /// <returns>The <see cref="IParameterPolicy"/> for the parameter.</returns>
-    public abstract IParameterPolicy Create(RoutePatternParameterPart? parameter, string inlineText);
+    public abstract IParameterPolicy Create(
+        RoutePatternParameterPart? parameter,
+        string inlineText
+    );
 
     /// <summary>
     /// Creates a parameter policy.
@@ -25,7 +28,10 @@ public abstract class ParameterPolicyFactory
     /// <param name="parameter">The parameter the parameter policy is being created for.</param>
     /// <param name="parameterPolicy">An existing parameter policy.</param>
     /// <returns>The <see cref="IParameterPolicy"/> for the parameter.</returns>
-    public abstract IParameterPolicy Create(RoutePatternParameterPart? parameter, IParameterPolicy parameterPolicy);
+    public abstract IParameterPolicy Create(
+        RoutePatternParameterPart? parameter,
+        IParameterPolicy parameterPolicy
+    );
 
     /// <summary>
     /// Creates a parameter policy.
@@ -33,7 +39,10 @@ public abstract class ParameterPolicyFactory
     /// <param name="parameter">The parameter the parameter policy is being created for.</param>
     /// <param name="reference">The reference to resolve.</param>
     /// <returns>The <see cref="IParameterPolicy"/> for the parameter.</returns>
-    public IParameterPolicy Create(RoutePatternParameterPart? parameter, RoutePatternParameterPolicyReference reference)
+    public IParameterPolicy Create(
+        RoutePatternParameterPart? parameter,
+        RoutePatternParameterPolicyReference reference
+    )
     {
         ArgumentNullException.ThrowIfNull(reference);
 

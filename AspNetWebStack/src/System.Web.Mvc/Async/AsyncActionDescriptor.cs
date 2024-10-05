@@ -9,14 +9,25 @@ namespace System.Web.Mvc.Async
 {
     public abstract class AsyncActionDescriptor : ActionDescriptor
     {
-        public abstract IAsyncResult BeginExecute(ControllerContext controllerContext, IDictionary<string, object> parameters, AsyncCallback callback, object state);
+        public abstract IAsyncResult BeginExecute(
+            ControllerContext controllerContext,
+            IDictionary<string, object> parameters,
+            AsyncCallback callback,
+            object state
+        );
 
         public abstract object EndExecute(IAsyncResult asyncResult);
 
-        public override object Execute(ControllerContext controllerContext, IDictionary<string, object> parameters)
+        public override object Execute(
+            ControllerContext controllerContext,
+            IDictionary<string, object> parameters
+        )
         {
-            string errorMessage = String.Format(CultureInfo.CurrentCulture, MvcResources.AsyncActionDescriptor_CannotExecuteSynchronously,
-                                                ActionName);
+            string errorMessage = String.Format(
+                CultureInfo.CurrentCulture,
+                MvcResources.AsyncActionDescriptor_CannotExecuteSynchronously,
+                ActionName
+            );
 
             throw new InvalidOperationException(errorMessage);
         }
@@ -26,7 +37,9 @@ namespace System.Web.Mvc.Async
             IAsyncManagerContainer helperContainer = controller as IAsyncManagerContainer;
             if (helperContainer == null)
             {
-                throw Error.AsyncCommon_ControllerMustImplementIAsyncManagerContainer(controller.GetType());
+                throw Error.AsyncCommon_ControllerMustImplementIAsyncManagerContainer(
+                    controller.GetType()
+                );
             }
 
             return helperContainer.AsyncManager;

@@ -35,10 +35,13 @@ namespace System.ComponentModel.Composition.AttributedModel
         {
             var origin = ElementFactory.Create();
 
-            Assert.Throws<ArgumentNullException>("type", () =>
-            {
-                AttributedModelServices.CreatePartDefinition((Type)null, origin);
-            });
+            Assert.Throws<ArgumentNullException>(
+                "type",
+                () =>
+                {
+                    AttributedModelServices.CreatePartDefinition((Type)null, origin);
+                }
+            );
         }
 
         [Fact]
@@ -46,21 +49,27 @@ namespace System.ComponentModel.Composition.AttributedModel
         {
             var origin = ElementFactory.Create();
 
-            Assert.Throws<ArgumentNullException>("type", () =>
-            {
-                AttributedModelServices.CreatePartDefinition((Type)null, origin, false);
-            });
+            Assert.Throws<ArgumentNullException>(
+                "type",
+                () =>
+                {
+                    AttributedModelServices.CreatePartDefinition((Type)null, origin, false);
+                }
+            );
         }
 
         [Fact]
         public void CreatePart_From_InvalidPartDefinition_ShouldThrowArgumentException()
         {
-            Assert.Throws<ArgumentException>("partDefinition", () =>
-            {
-                var partDefinition = new ConcreteCPD();
-                var instance = new CPDTest();
-                AttributedModelServices.CreatePart(partDefinition, instance);
-            });
+            Assert.Throws<ArgumentException>(
+                "partDefinition",
+                () =>
+                {
+                    var partDefinition = new ConcreteCPD();
+                    var instance = new CPDTest();
+                    AttributedModelServices.CreatePart(partDefinition, instance);
+                }
+            );
         }
 
         [Fact]
@@ -68,10 +77,13 @@ namespace System.ComponentModel.Composition.AttributedModel
         {
             ComposablePartDefinition part = null;
             Type contractType = typeof(IContract1);
-            Assert.Throws<ArgumentNullException>("part", () =>
-            {
-                part.Exports(contractType);
-            });
+            Assert.Throws<ArgumentNullException>(
+                "part",
+                () =>
+                {
+                    part.Exports(contractType);
+                }
+            );
         }
 
         [Fact]
@@ -79,10 +91,13 @@ namespace System.ComponentModel.Composition.AttributedModel
         {
             ComposablePartDefinition part = typeof(PartExportingContract1).AsPart();
             Type contractType = null;
-            Assert.Throws<ArgumentNullException>("contractType", () =>
-            {
-                part.Exports(contractType);
-            });
+            Assert.Throws<ArgumentNullException>(
+                "contractType",
+                () =>
+                {
+                    part.Exports(contractType);
+                }
+            );
         }
 
         [Fact]
@@ -102,10 +117,13 @@ namespace System.ComponentModel.Composition.AttributedModel
         public void ExportsGeneric_Throws_OnNullPart()
         {
             ComposablePartDefinition part = null;
-            Assert.Throws<ArgumentNullException>("part", () =>
-            {
-                part.Exports<IContract1>();
-            });
+            Assert.Throws<ArgumentNullException>(
+                "part",
+                () =>
+                {
+                    part.Exports<IContract1>();
+                }
+            );
         }
 
         [Fact]
@@ -126,10 +144,13 @@ namespace System.ComponentModel.Composition.AttributedModel
         {
             ComposablePartDefinition part = null;
             Type contractType = typeof(IContract1);
-            Assert.Throws<ArgumentNullException>("part", () =>
-            {
-                part.Imports(contractType);
-            });
+            Assert.Throws<ArgumentNullException>(
+                "part",
+                () =>
+                {
+                    part.Imports(contractType);
+                }
+            );
         }
 
         [Fact]
@@ -137,10 +158,13 @@ namespace System.ComponentModel.Composition.AttributedModel
         {
             ComposablePartDefinition part = typeof(PartImportingContract1).AsPart();
             Type contractType = null;
-            Assert.Throws<ArgumentNullException>("contractType", () =>
-            {
-                part.Imports(contractType);
-            });
+            Assert.Throws<ArgumentNullException>(
+                "contractType",
+                () =>
+                {
+                    part.Imports(contractType);
+                }
+            );
         }
 
         [Fact]
@@ -160,8 +184,10 @@ namespace System.ComponentModel.Composition.AttributedModel
         public void Imports_CardinalityIgnored_WhenNotSpecified()
         {
             ComposablePartDefinition part1 = typeof(PartImportingContract1).AsPart();
-            ComposablePartDefinition part1Multiple = typeof(PartImportingContract1Multiple).AsPart();
-            ComposablePartDefinition part1Optional = typeof(PartImportingContract1Optionally).AsPart();
+            ComposablePartDefinition part1Multiple =
+                typeof(PartImportingContract1Multiple).AsPart();
+            ComposablePartDefinition part1Optional =
+                typeof(PartImportingContract1Optionally).AsPart();
 
             Assert.True(part1.Imports(typeof(IContract1)));
             Assert.True(part1Optional.Imports(typeof(IContract1)));
@@ -172,8 +198,10 @@ namespace System.ComponentModel.Composition.AttributedModel
         public void Imports_CardinalityNotIgnored_WhenSpecified()
         {
             ComposablePartDefinition part1 = typeof(PartImportingContract1).AsPart();
-            ComposablePartDefinition part1Multiple = typeof(PartImportingContract1Multiple).AsPart();
-            ComposablePartDefinition part1Optional = typeof(PartImportingContract1Optionally).AsPart();
+            ComposablePartDefinition part1Multiple =
+                typeof(PartImportingContract1Multiple).AsPart();
+            ComposablePartDefinition part1Optional =
+                typeof(PartImportingContract1Optionally).AsPart();
 
             Assert.True(part1.Imports(typeof(IContract1), ImportCardinality.ExactlyOne));
             Assert.False(part1.Imports(typeof(IContract1), ImportCardinality.ZeroOrMore));
@@ -192,10 +220,13 @@ namespace System.ComponentModel.Composition.AttributedModel
         public void ImportsGeneric_Throws_OnNullPart()
         {
             ComposablePartDefinition part = null;
-            Assert.Throws<ArgumentNullException>("part", () =>
-            {
-                part.Imports<IContract1>();
-            });
+            Assert.Throws<ArgumentNullException>(
+                "part",
+                () =>
+                {
+                    part.Imports<IContract1>();
+                }
+            );
         }
 
         [Fact]
@@ -215,8 +246,10 @@ namespace System.ComponentModel.Composition.AttributedModel
         public void ImportsGeneric_CardinalityIgnored_WhenNotSpecified()
         {
             ComposablePartDefinition part1 = typeof(PartImportingContract1).AsPart();
-            ComposablePartDefinition part1Multiple = typeof(PartImportingContract1Multiple).AsPart();
-            ComposablePartDefinition part1Optional = typeof(PartImportingContract1Optionally).AsPart();
+            ComposablePartDefinition part1Multiple =
+                typeof(PartImportingContract1Multiple).AsPart();
+            ComposablePartDefinition part1Optional =
+                typeof(PartImportingContract1Optionally).AsPart();
 
             Assert.True(part1.Imports<IContract1>());
             Assert.True(part1Optional.Imports<IContract1>());
@@ -227,8 +260,10 @@ namespace System.ComponentModel.Composition.AttributedModel
         public void ImportsGeneric_CardinalityNotIgnored_WhenSpecified()
         {
             ComposablePartDefinition part1 = typeof(PartImportingContract1).AsPart();
-            ComposablePartDefinition part1Multiple = typeof(PartImportingContract1Multiple).AsPart();
-            ComposablePartDefinition part1Optional = typeof(PartImportingContract1Optionally).AsPart();
+            ComposablePartDefinition part1Multiple =
+                typeof(PartImportingContract1Multiple).AsPart();
+            ComposablePartDefinition part1Optional =
+                typeof(PartImportingContract1Optionally).AsPart();
 
             Assert.True(part1.Imports<IContract1>(ImportCardinality.ExactlyOne));
             Assert.False(part1.Imports<IContract1>(ImportCardinality.ZeroOrMore));
@@ -243,23 +278,15 @@ namespace System.ComponentModel.Composition.AttributedModel
             Assert.True(part1Optional.Imports<IContract1>(ImportCardinality.ZeroOrOne));
         }
 
-        public interface IContract1
-        {
-        }
+        public interface IContract1 { }
 
-        public interface IContract2
-        {
-        }
+        public interface IContract2 { }
 
         [Export(typeof(IContract1))]
-        public class PartExportingContract1 : IContract1
-        {
-        }
+        public class PartExportingContract1 : IContract1 { }
 
         [Export(typeof(IContract2))]
-        public class PartExportingContract2 : IContract2
-        {
-        }
+        public class PartExportingContract2 : IContract2 { }
 
         public class PartImportingContract1
         {

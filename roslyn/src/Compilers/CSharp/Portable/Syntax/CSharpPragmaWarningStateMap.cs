@@ -36,12 +36,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
     internal class CSharpPragmaWarningStateMap : AbstractWarningStateMap<PragmaWarningState>
     {
-        public CSharpPragmaWarningStateMap(SyntaxTree syntaxTree) :
-            base(syntaxTree)
-        {
-        }
+        public CSharpPragmaWarningStateMap(SyntaxTree syntaxTree)
+            : base(syntaxTree) { }
 
-        protected override WarningStateMapEntry[] CreateWarningStateMapEntries(SyntaxTree syntaxTree)
+        protected override WarningStateMapEntry[] CreateWarningStateMapEntries(
+            SyntaxTree syntaxTree
+        )
         {
             // Accumulate all the pragma warning directives, in source code order
             var directives = ArrayBuilder<DirectiveTriviaSyntax>.GetInstance();
@@ -55,7 +55,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
         }
 
         // Add all active #pragma warn and #nullable directives under trivia into the list, in source code order.
-        private static void GetAllPragmaWarningDirectives(SyntaxTree syntaxTree, ArrayBuilder<DirectiveTriviaSyntax> directiveList)
+        private static void GetAllPragmaWarningDirectives(
+            SyntaxTree syntaxTree,
+            ArrayBuilder<DirectiveTriviaSyntax> directiveList
+        )
         {
             foreach (var d in syntaxTree.GetRoot().GetDirectives())
             {
@@ -77,18 +80,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
         // Given the ordered list of all pragma warning and nullable directives in the syntax tree, return a list of mapping entries,
         // containing the cumulative set of warnings that are disabled for that point in the source.
         // This mapping also contains a global warning option, accumulated of all #pragma up to the current line position.
-        private static WarningStateMapEntry[] CreatePragmaWarningStateEntries(ArrayBuilder<DirectiveTriviaSyntax> directiveList)
+        private static WarningStateMapEntry[] CreatePragmaWarningStateEntries(
+            ArrayBuilder<DirectiveTriviaSyntax> directiveList
+        )
         {
             var entries = new WarningStateMapEntry[directiveList.Count + 1];
             var index = 0;
 
             // Captures the mapping of a warning number to the reporting option, accumulated of all #pragma up to the current directive.
-            var accumulatedSpecificWarningState = ImmutableDictionary.Create<string, PragmaWarningState>();
+            var accumulatedSpecificWarningState = ImmutableDictionary.Create<
+                string,
+                PragmaWarningState
+            >();
 
             // Captures the general reporting option, accumulated of all #pragma up to the current directive.
             var accumulatedGeneralWarningState = PragmaWarningState.Default;
 
-            var current = new WarningStateMapEntry(0, PragmaWarningState.Default, accumulatedSpecificWarningState);
+            var current = new WarningStateMapEntry(
+                0,
+                PragmaWarningState.Default,
+                accumulatedSpecificWarningState
+            );
             entries[index] = current;
 
             while (index < directiveList.Count)
@@ -97,20 +109,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 var currentPragmaDirective = (PragmaWarningDirectiveTriviaSyntax)currentDirective;
 
                 // Compute the directive state
-                PragmaWarningState directiveState = currentPragmaDirective.DisableOrRestoreKeyword.Kind() switch
-                {
-                    SyntaxKind.DisableKeyword => PragmaWarningState.Disabled,
-                    SyntaxKind.RestoreKeyword => PragmaWarningState.Default,
-                    SyntaxKind.EnableKeyword => PragmaWarningState.Enabled,
-                    var kind => throw ExceptionUtilities.UnexpectedValue(kind)
-                };
+                PragmaWarningState directiveState =
+                    currentPragmaDirective.DisableOrRestoreKeyword.Kind() switch
+                    {
+                        SyntaxKind.DisableKeyword => PragmaWarningState.Disabled,
+                        SyntaxKind.RestoreKeyword => PragmaWarningState.Default,
+                        SyntaxKind.EnableKeyword => PragmaWarningState.Enabled,
+                        var kind => throw ExceptionUtilities.UnexpectedValue(kind),
+                    };
 
                 // Check if this directive applies for all (e.g., #pragma warning disable)
                 if (currentPragmaDirective.ErrorCodes.Count == 0)
                 {
                     // Update the warning state and reset the specific one
                     accumulatedGeneralWarningState = directiveState;
-                    accumulatedSpecificWarningState = ImmutableDictionary.Create<string, PragmaWarningState>();
+                    accumulatedSpecificWarningState = ImmutableDictionary.Create<
+                        string,
+                        PragmaWarningState
+                    >();
                 }
                 else
                 {
@@ -135,12 +151,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                         if (!string.IsNullOrWhiteSpace(errorId))
                         {
                             // Update the state of this error code with the current directive state
-                            accumulatedSpecificWarningState = accumulatedSpecificWarningState.SetItem(errorId, directiveState);
+                            accumulatedSpecificWarningState =
+                                accumulatedSpecificWarningState.SetItem(errorId, directiveState);
                         }
                     }
                 }
 
-                current = new WarningStateMapEntry(currentDirective.Location.SourceSpan.End, accumulatedGeneralWarningState, accumulatedSpecificWarningState);
+                current = new WarningStateMapEntry(
+                    currentDirective.Location.SourceSpan.End,
+                    accumulatedGeneralWarningState,
+                    accumulatedSpecificWarningState
+                );
                 ++index;
                 entries[index] = current;
             }

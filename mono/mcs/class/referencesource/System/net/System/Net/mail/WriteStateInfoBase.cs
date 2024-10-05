@@ -15,7 +15,8 @@ namespace System.Net.Mime
         internal WriteStateInfoBase()
         {
             this.buffer = new byte[defaultBufferSize];
-            this._header = new byte[0]; ;
+            this._header = new byte[0];
+            ;
             this._footer = new byte[0];
             this._maxLineLength = EncodedStreamFactory.DefaultMaxLineLength;
             this._currentLineLength = 0;
@@ -23,11 +24,15 @@ namespace System.Net.Mime
         }
 
         internal WriteStateInfoBase(int bufferSize, byte[] header, byte[] footer, int maxLineLength)
-            : this(bufferSize, header, footer, maxLineLength, 0) 
-        { 
-        }
+            : this(bufferSize, header, footer, maxLineLength, 0) { }
 
-        internal WriteStateInfoBase(int bufferSize, byte[] header, byte[] footer, int maxLineLength, int mimeHeaderLength)
+        internal WriteStateInfoBase(
+            int bufferSize,
+            byte[] header,
+            byte[] footer,
+            int maxLineLength,
+            int mimeHeaderLength
+        )
         {
             this.buffer = new byte[bufferSize];
             this._header = header;
@@ -40,50 +45,32 @@ namespace System.Net.Mime
 
         internal int FooterLength
         {
-            get
-            {
-                return _footer.Length;
-            }
+            get { return _footer.Length; }
         }
 
         internal byte[] Footer
         {
-            get
-            {
-                return _footer;
-            }
+            get { return _footer; }
         }
 
         internal byte[] Header
         {
-            get
-            {
-                return _header;
-            }
+            get { return _header; }
         }
 
         internal byte[] Buffer
         {
-            get
-            {
-                return this.buffer;
-            }
+            get { return this.buffer; }
         }
 
         internal int Length
         {
-            get
-            {
-                return this._currentBufferUsed;
-            }
+            get { return this._currentBufferUsed; }
         }
 
-        internal int CurrentLineLength 
+        internal int CurrentLineLength
         {
-            get
-            {
-                return this._currentLineLength;
-            }
+            get { return this._currentLineLength; }
         }
 
         // Make sure there is enough space in the buffer to write at least this many more bytes.
@@ -123,7 +110,7 @@ namespace System.Net.Mime
 
         internal void AppendCRLF(bool includeSpace)
         {
-            AppendFooter();            
+            AppendFooter();
 
             //add soft line break
             Append((byte)'\r', (byte)'\n');
@@ -156,10 +143,7 @@ namespace System.Net.Mime
 
         internal int MaxLineLength
         {
-            get
-            {
-                return this._maxLineLength;
-            }
+            get { return this._maxLineLength; }
         }
 
         internal void Reset()

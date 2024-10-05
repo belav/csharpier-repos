@@ -16,7 +16,7 @@ namespace System.Activities
 
     abstract class LocationFactory<T> : LocationFactory
     {
-        public abstract new Location<T> CreateLocation(ActivityContext context);
+        public new abstract Location<T> CreateLocation(ActivityContext context);
 
         protected override Location CreateLocationCore(ActivityContext context)
         {

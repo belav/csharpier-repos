@@ -9,7 +9,10 @@ public class ControllerRouteTokenTransformerConvention : RouteTokenTransformerCo
 {
     private readonly Type _controllerType;
 
-    public ControllerRouteTokenTransformerConvention(Type controllerType, IOutboundParameterTransformer parameterTransformer)
+    public ControllerRouteTokenTransformerConvention(
+        Type controllerType,
+        IOutboundParameterTransformer parameterTransformer
+    )
         : base(parameterTransformer)
     {
         ArgumentNullException.ThrowIfNull(parameterTransformer);

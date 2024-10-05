@@ -16,12 +16,40 @@ namespace System.Numerics
     internal static class BitOperations
     {
         private static ReadOnlySpan<byte> Log2DeBruijn => // 32
-        [
-            00, 09, 01, 10, 13, 21, 02, 29,
-            11, 14, 16, 18, 22, 25, 03, 30,
-            08, 12, 20, 28, 15, 17, 24, 07,
-            19, 27, 23, 06, 26, 05, 04, 31
-        ];
+            [
+                00,
+                09,
+                01,
+                10,
+                13,
+                21,
+                02,
+                29,
+                11,
+                14,
+                16,
+                18,
+                22,
+                25,
+                03,
+                30,
+                08,
+                12,
+                20,
+                28,
+                15,
+                17,
+                24,
+                07,
+                19,
+                27,
+                23,
+                06,
+                26,
+                05,
+                04,
+                31,
+            ];
 
         /// <summary>
         /// Returns the integer (floor) log of the specified value, base 2.
@@ -58,7 +86,8 @@ namespace System.Numerics
                 // Using deBruijn sequence, k=2, n=5 (2^5=32) : 0b_0000_0111_1100_0100_1010_1100_1101_1101u
                 ref MemoryMarshal.GetReference(Log2DeBruijn),
                 // uint|long -> IntPtr cast on 32-bit platforms does expensive overflow checks not needed here
-                (nint)((value * 0x07C4ACDDu) >> 27));
+                (nint)((value * 0x07C4ACDDu) >> 27)
+            );
         }
     }
 }

@@ -4,17 +4,16 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
-
+namespace System.Web.UI
+{
     using System;
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Web.Util;
 
-
-    [AttributeUsage(AttributeTargets.Assembly, AllowMultiple=true)]
-    public sealed class WebResourceAttribute : Attribute {
-
+    [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
+    public sealed class WebResourceAttribute : Attribute
+    {
         private string _contentType;
         private bool _performSubstitution;
         private string _webResource;
@@ -24,12 +23,15 @@ namespace System.Web.UI {
 
         internal const string _microsoftCdnBasePath = "http://ajax.aspnetcdn.com/ajax/4.6/1/";
 
-        public WebResourceAttribute(string webResource, string contentType) {
-            if (String.IsNullOrEmpty(webResource)) {
+        public WebResourceAttribute(string webResource, string contentType)
+        {
+            if (String.IsNullOrEmpty(webResource))
+            {
                 throw ExceptionUtil.ParameterNullOrEmpty("webResource");
             }
 
-            if (String.IsNullOrEmpty(contentType)) {
+            if (String.IsNullOrEmpty(contentType))
+            {
                 throw ExceptionUtil.ParameterNullOrEmpty("contentType");
             }
 
@@ -38,29 +40,37 @@ namespace System.Web.UI {
             _performSubstitution = false;
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId="Cdn", Justification="Stands for Content Delivery Network.")]
-        public string CdnPath {
-            get {
-                return _cdnPath ?? String.Empty;
-            }
-            set {
-                _cdnPath = value;
-            }
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Cdn",
+            Justification = "Stands for Content Delivery Network."
+        )]
+        public string CdnPath
+        {
+            get { return _cdnPath ?? String.Empty; }
+            set { _cdnPath = value; }
         }
 
-        public string LoadSuccessExpression {
-            get;
-            set;
-        }
+        public string LoadSuccessExpression { get; set; }
 
-        internal string CdnPathSecureConnection {
-            get {
-                if (_cdnPathSecureConnection == null) {
+        internal string CdnPathSecureConnection
+        {
+            get
+            {
+                if (_cdnPathSecureConnection == null)
+                {
                     string cdnPath = CdnPath;
-                    if (String.IsNullOrEmpty(cdnPath) || !CdnSupportsSecureConnection || !cdnPath.StartsWith("http://", StringComparison.OrdinalIgnoreCase)) {
+                    if (
+                        String.IsNullOrEmpty(cdnPath)
+                        || !CdnSupportsSecureConnection
+                        || !cdnPath.StartsWith("http://", StringComparison.OrdinalIgnoreCase)
+                    )
+                    {
                         cdnPath = String.Empty;
                     }
-                    else {
+                    else
+                    {
                         // convert http to https
                         cdnPath = "https" + cdnPath.Substring(4);
                     }
@@ -70,39 +80,32 @@ namespace System.Web.UI {
             }
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Cdn", Justification = "Stands for Content Delivery Network.")]
-        public bool CdnSupportsSecureConnection {
-            get {
-                return _cdnSupportsSecureConnection;
-            }
-            set {
-                _cdnSupportsSecureConnection = value;
-            }
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Cdn",
+            Justification = "Stands for Content Delivery Network."
+        )]
+        public bool CdnSupportsSecureConnection
+        {
+            get { return _cdnSupportsSecureConnection; }
+            set { _cdnSupportsSecureConnection = value; }
         }
 
-        public string ContentType {
-            get {
-                return _contentType;
-            }
+        public string ContentType
+        {
+            get { return _contentType; }
         }
 
-
-        public bool PerformSubstitution {
-            get {
-                return _performSubstitution;
-            }
-            set {
-                _performSubstitution = value;
-            }
+        public bool PerformSubstitution
+        {
+            get { return _performSubstitution; }
+            set { _performSubstitution = value; }
         }
 
-
-        public string WebResource {
-            get {
-                return _webResource;
-            }
+        public string WebResource
+        {
+            get { return _webResource; }
         }
     }
 }
-
-

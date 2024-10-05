@@ -9,16 +9,16 @@ namespace SQLitePCL
 {
     internal static class SQLitePCLExtensions
     {
-        private static readonly Dictionary<string, bool> _knownLibraries = new()
-        {
-            { "e_sqlcipher", true },
-            { "e_sqlite3", false },
-            { "sqlcipher", true },
-            { "winsqlite3", false }
-        };
+        private static readonly Dictionary<string, bool> _knownLibraries =
+            new()
+            {
+                { "e_sqlcipher", true },
+                { "e_sqlite3", false },
+                { "sqlcipher", true },
+                { "winsqlite3", false },
+            };
 
-        public static bool? EncryptionSupported()
-            => EncryptionSupported(out _);
+        public static bool? EncryptionSupported() => EncryptionSupported(out _);
 
         public static bool? EncryptionSupported(out string libraryName)
         {

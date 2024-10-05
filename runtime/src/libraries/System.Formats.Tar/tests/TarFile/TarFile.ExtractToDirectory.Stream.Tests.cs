@@ -14,23 +14,56 @@ namespace System.Formats.Tar.Tests
         [Fact]
         public void NullStream_Throws()
         {
-            Assert.Throws<ArgumentNullException>(() => TarFile.ExtractToDirectory(source: null, destinationDirectoryName: "path", overwriteFiles: false));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    TarFile.ExtractToDirectory(
+                        source: null,
+                        destinationDirectoryName: "path",
+                        overwriteFiles: false
+                    )
+            );
         }
 
         [Fact]
         public void InvalidPath_Throws()
         {
             using MemoryStream archive = new MemoryStream();
-            Assert.Throws<ArgumentNullException>(() => TarFile.ExtractToDirectory(archive, destinationDirectoryName: null, overwriteFiles: false));
-            Assert.Throws<ArgumentException>(() => TarFile.ExtractToDirectory(archive, destinationDirectoryName: string.Empty, overwriteFiles: false));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    TarFile.ExtractToDirectory(
+                        archive,
+                        destinationDirectoryName: null,
+                        overwriteFiles: false
+                    )
+            );
+            Assert.Throws<ArgumentException>(
+                () =>
+                    TarFile.ExtractToDirectory(
+                        archive,
+                        destinationDirectoryName: string.Empty,
+                        overwriteFiles: false
+                    )
+            );
         }
 
         [Fact]
         public void UnreadableStream_Throws()
         {
             using MemoryStream archive = new MemoryStream();
-            using WrappedStream unreadable = new WrappedStream(archive, canRead: false, canWrite: true, canSeek: true);
-            Assert.Throws<ArgumentException>(() => TarFile.ExtractToDirectory(unreadable, destinationDirectoryName: "path", overwriteFiles: false));
+            using WrappedStream unreadable = new WrappedStream(
+                archive,
+                canRead: false,
+                canWrite: true,
+                canSeek: true
+            );
+            Assert.Throws<ArgumentException>(
+                () =>
+                    TarFile.ExtractToDirectory(
+                        unreadable,
+                        destinationDirectoryName: "path",
+                        overwriteFiles: false
+                    )
+            );
         }
 
         [Fact]
@@ -40,7 +73,14 @@ namespace System.Formats.Tar.Tests
             string dirPath = Path.Join(root.Path, "dir");
 
             using MemoryStream archive = new MemoryStream();
-            Assert.Throws<DirectoryNotFoundException>(() => TarFile.ExtractToDirectory(archive, destinationDirectoryName: dirPath, overwriteFiles: false));
+            Assert.Throws<DirectoryNotFoundException>(
+                () =>
+                    TarFile.ExtractToDirectory(
+                        archive,
+                        destinationDirectoryName: dirPath,
+                        overwriteFiles: false
+                    )
+            );
         }
 
         [Fact]
@@ -56,7 +96,10 @@ namespace System.Formats.Tar.Tests
             using (TarWriter writer = new TarWriter(archive, TarEntryFormat.Ustar, leaveOpen: true))
             {
                 // No preceding directory entries for the segments
-                UstarTarEntry entry = new UstarTarEntry(TarEntryType.RegularFile, fileWithTwoSegments);
+                UstarTarEntry entry = new UstarTarEntry(
+                    TarEntryType.RegularFile,
+                    fileWithTwoSegments
+                );
 
                 entry.DataStream = new MemoryStream();
                 entry.DataStream.Write(new byte[] { 0x1 });
@@ -82,7 +125,9 @@ namespace System.Formats.Tar.Tests
             using (TarWriter writer = new TarWriter(archive, TarEntryFormat.Ustar, leaveOpen: true))
             {
                 UstarTarEntry entry = new UstarTarEntry(entryType, "link");
-                entry.LinkName = PlatformDetection.IsWindows ? @"C:\Windows\System32\notepad.exe" : "/usr/bin/nano";
+                entry.LinkName = PlatformDetection.IsWindows
+                    ? @"C:\Windows\System32\notepad.exe"
+                    : "/usr/bin/nano";
                 writer.WriteEntry(entry);
             }
 
@@ -90,7 +135,9 @@ namespace System.Formats.Tar.Tests
 
             using TempDirectory root = new TempDirectory();
 
-            Assert.ThrowsAny<IOException>(() => TarFile.ExtractToDirectory(archive, root.Path, overwriteFiles: false));
+            Assert.ThrowsAny<IOException>(
+                () => TarFile.ExtractToDirectory(archive, root.Path, overwriteFiles: false)
+            );
 
             Assert.Equal(0, Directory.GetFileSystemEntries(root.Path).Count());
         }
@@ -98,28 +145,58 @@ namespace System.Formats.Tar.Tests
         [ConditionalTheory(typeof(MountHelper), nameof(MountHelper.CanCreateSymbolicLinks))]
         [InlineData(TarEntryFormat.Pax)]
         [InlineData(TarEntryFormat.Gnu)]
-        public void Extract_SymbolicLinkEntry_TargetInsideDirectory(TarEntryFormat format) => Extract_LinkEntry_TargetInsideDirectory_Internal(TarEntryType.SymbolicLink, format, null);
+        public void Extract_SymbolicLinkEntry_TargetInsideDirectory(TarEntryFormat format) =>
+            Extract_LinkEntry_TargetInsideDirectory_Internal(
+                TarEntryType.SymbolicLink,
+                format,
+                null
+            );
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.SupportsHardLinkCreation))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.SupportsHardLinkCreation)
+        )]
         [InlineData(TarEntryFormat.Pax)]
         [InlineData(TarEntryFormat.Gnu)]
-        public void Extract_HardLinkEntry_TargetInsideDirectory(TarEntryFormat format) => Extract_LinkEntry_TargetInsideDirectory_Internal(TarEntryType.HardLink, format, null);
+        public void Extract_HardLinkEntry_TargetInsideDirectory(TarEntryFormat format) =>
+            Extract_LinkEntry_TargetInsideDirectory_Internal(TarEntryType.HardLink, format, null);
 
         [ConditionalTheory(typeof(MountHelper), nameof(MountHelper.CanCreateSymbolicLinks))]
         [InlineData(TarEntryFormat.Pax)]
         [InlineData(TarEntryFormat.Gnu)]
-        public void Extract_SymbolicLinkEntry_TargetInsideDirectory_LongBaseDir(TarEntryFormat format) => Extract_LinkEntry_TargetInsideDirectory_Internal(TarEntryType.SymbolicLink, format, new string('a', 99));
+        public void Extract_SymbolicLinkEntry_TargetInsideDirectory_LongBaseDir(
+            TarEntryFormat format
+        ) =>
+            Extract_LinkEntry_TargetInsideDirectory_Internal(
+                TarEntryType.SymbolicLink,
+                format,
+                new string('a', 99)
+            );
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.SupportsHardLinkCreation))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.SupportsHardLinkCreation)
+        )]
         [InlineData(TarEntryFormat.Pax)]
         [InlineData(TarEntryFormat.Gnu)]
-        public void Extract_HardLinkEntry_TargetInsideDirectory_LongBaseDir(TarEntryFormat format) => Extract_LinkEntry_TargetInsideDirectory_Internal(TarEntryType.HardLink, format, new string('a', 99));
+        public void Extract_HardLinkEntry_TargetInsideDirectory_LongBaseDir(
+            TarEntryFormat format
+        ) =>
+            Extract_LinkEntry_TargetInsideDirectory_Internal(
+                TarEntryType.HardLink,
+                format,
+                new string('a', 99)
+            );
 
         // This test would not pass for the V7 and Ustar formats in some OSs like MacCatalyst, tvOSSimulator and OSX, because the TempDirectory gets created in
         // a folder with a path longer than 100 bytes, and those tar formats have no way of handling pathnames and linknames longer than that length.
         // The rest of the OSs create the TempDirectory in a path that does not surpass the 100 bytes, so the 'subfolder' parameter gives a chance to extend
         // the base directory past that length, to ensure this scenario is tested everywhere.
-        private void Extract_LinkEntry_TargetInsideDirectory_Internal(TarEntryType entryType, TarEntryFormat format, string subfolder)
+        private void Extract_LinkEntry_TargetInsideDirectory_Internal(
+            TarEntryType entryType,
+            TarEntryFormat format,
+            string subfolder
+        )
         {
             using TempDirectory root = new TempDirectory();
 
@@ -128,12 +205,18 @@ namespace System.Formats.Tar.Tests
 
             string linkName = "link";
             string targetName = "target";
-            string targetPath = string.IsNullOrEmpty(subfolder) ? targetName : Path.Join(subfolder, targetName);
+            string targetPath = string.IsNullOrEmpty(subfolder)
+                ? targetName
+                : Path.Join(subfolder, targetName);
 
             using MemoryStream archive = new MemoryStream();
             using (TarWriter writer = new TarWriter(archive, format, leaveOpen: true))
             {
-                TarEntry fileEntry = InvokeTarEntryCreationConstructor(format, TarEntryType.RegularFile, targetPath);
+                TarEntry fileEntry = InvokeTarEntryCreationConstructor(
+                    format,
+                    TarEntryType.RegularFile,
+                    targetPath
+                );
                 writer.WriteEntry(fileEntry);
 
                 TarEntry entry = InvokeTarEntryCreationConstructor(format, entryType, linkName);
@@ -152,13 +235,17 @@ namespace System.Formats.Tar.Tests
         [InlineData(512)]
         [InlineData(512 + 1)]
         [InlineData(512 + 512 - 1)]
-        public void Extract_UnseekableStream_BlockAlignmentPadding_DoesNotAffectNextEntries(int contentSize)
+        public void Extract_UnseekableStream_BlockAlignmentPadding_DoesNotAffectNextEntries(
+            int contentSize
+        )
         {
             byte[] fileContents = new byte[contentSize];
             Array.Fill<byte>(fileContents, 0x1);
 
             using var archive = new MemoryStream();
-            using (var compressor = new GZipStream(archive, CompressionMode.Compress, leaveOpen: true))
+            using (
+                var compressor = new GZipStream(archive, CompressionMode.Compress, leaveOpen: true)
+            )
             {
                 using var writer = new TarWriter(compressor);
                 var entry1 = new PaxTarEntry(TarEntryType.RegularFile, "file");
@@ -176,7 +263,12 @@ namespace System.Formats.Tar.Tests
             using TempDirectory destination = new TempDirectory();
             TarFile.ExtractToDirectory(decompressor, destination.Path, overwriteFiles: true);
 
-            Assert.Equal(2, Directory.GetFileSystemEntries(destination.Path, "*", SearchOption.AllDirectories).Count());
+            Assert.Equal(
+                2,
+                Directory
+                    .GetFileSystemEntries(destination.Path, "*", SearchOption.AllDirectories)
+                    .Count()
+            );
         }
 
         [Fact]
@@ -184,7 +276,11 @@ namespace System.Formats.Tar.Tests
         {
             using TempDirectory root = new();
 
-            string sharedRootFolders = Path.Join(root.Path, "folder with spaces", new string('a', 100));
+            string sharedRootFolders = Path.Join(
+                root.Path,
+                "folder with spaces",
+                new string('a', 100)
+            );
             string path1 = Path.Join(sharedRootFolders, "entry 1 with spaces.txt");
             string path2 = Path.Join(sharedRootFolders, "entry 2 with spaces.txt");
 
@@ -212,19 +308,35 @@ namespace System.Formats.Tar.Tests
         {
             using TempDirectory root = new();
 
-            using MemoryStream sourceStream = GetTarMemoryStream(CompressionMethod.Uncompressed, testFormat, "many_small_files");
-            using WrappedStream sourceUnseekableArchiveStream = new(sourceStream, canRead: true, canWrite: false, canSeek: false);
+            using MemoryStream sourceStream = GetTarMemoryStream(
+                CompressionMethod.Uncompressed,
+                testFormat,
+                "many_small_files"
+            );
+            using WrappedStream sourceUnseekableArchiveStream =
+                new(sourceStream, canRead: true, canWrite: false, canSeek: false);
 
-            TarFile.ExtractToDirectory(sourceUnseekableArchiveStream, root.Path, overwriteFiles: false);
+            TarFile.ExtractToDirectory(
+                sourceUnseekableArchiveStream,
+                root.Path,
+                overwriteFiles: false
+            );
 
             using MemoryStream destinationStream = new();
-            using WrappedStream destinationUnseekableArchiveStream = new(destinationStream, canRead: true, canWrite: true, canSeek: false);
-            TarFile.CreateFromDirectory(root.Path, destinationUnseekableArchiveStream, includeBaseDirectory: false);
+            using WrappedStream destinationUnseekableArchiveStream =
+                new(destinationStream, canRead: true, canWrite: true, canSeek: false);
+            TarFile.CreateFromDirectory(
+                root.Path,
+                destinationUnseekableArchiveStream,
+                includeBaseDirectory: false
+            );
 
-            FileSystemEnumerable<FileSystemInfo> fileSystemEntries = new FileSystemEnumerable<FileSystemInfo>(
-                directory: root.Path,
-                transform: (ref FileSystemEntry entry) => entry.ToFileSystemInfo(),
-                options: new EnumerationOptions() { RecurseSubdirectories = true });
+            FileSystemEnumerable<FileSystemInfo> fileSystemEntries =
+                new FileSystemEnumerable<FileSystemInfo>(
+                    directory: root.Path,
+                    transform: (ref FileSystemEntry entry) => entry.ToFileSystemInfo(),
+                    options: new EnumerationOptions() { RecurseSubdirectories = true }
+                );
 
             destinationStream.Position = 0;
             using TarReader reader = new TarReader(destinationStream, leaveOpen: false);
@@ -237,9 +349,12 @@ namespace System.Formats.Tar.Tests
             do
             {
                 Assert.NotNull(entry);
-                string entryPath = Path.TrimEndingDirectorySeparator(Path.GetFullPath(Path.Join(root.Path, entry.Name)));
+                string entryPath = Path.TrimEndingDirectorySeparator(
+                    Path.GetFullPath(Path.Join(root.Path, entry.Name))
+                );
                 FileSystemInfo fsi = fileSystemEntries.SingleOrDefault(file =>
-                    file.FullName == entryPath);
+                    file.FullName == entryPath
+                );
                 Assert.NotNull(fsi);
                 if (entry.EntryType is TarEntryType.RegularFile or TarEntryType.V7RegularFile)
                 {
@@ -262,21 +377,40 @@ namespace System.Formats.Tar.Tests
 
                     AssertExtensions.SequenceEqual(fileContent, dataStreamContent);
                 }
-            }
-            while ((entry = reader.GetNextEntry()) != null);
+            } while ((entry = reader.GetNextEntry()) != null);
         }
 
         [Theory]
         [MemberData(nameof(GetExactRootDirMatchCases))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/88049", TestPlatforms.iOS | TestPlatforms.tvOS)]
-        public void ExtractToDirectory_ExactRootDirMatch_RegularFile_And_Directory_Throws(TarEntryFormat format, TarEntryType entryType, string fileName)
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/88049",
+            TestPlatforms.iOS | TestPlatforms.tvOS
+        )]
+        public void ExtractToDirectory_ExactRootDirMatch_RegularFile_And_Directory_Throws(
+            TarEntryFormat format,
+            TarEntryType entryType,
+            string fileName
+        )
         {
-            ExtractToDirectory_ExactRootDirMatch_RegularFile_And_Directory_Throws_Internal(format, entryType, fileName, inverted: false);
-            ExtractToDirectory_ExactRootDirMatch_RegularFile_And_Directory_Throws_Internal(format, entryType, fileName, inverted: true);
+            ExtractToDirectory_ExactRootDirMatch_RegularFile_And_Directory_Throws_Internal(
+                format,
+                entryType,
+                fileName,
+                inverted: false
+            );
+            ExtractToDirectory_ExactRootDirMatch_RegularFile_And_Directory_Throws_Internal(
+                format,
+                entryType,
+                fileName,
+                inverted: true
+            );
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/88049", TestPlatforms.iOS | TestPlatforms.tvOS)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/88049",
+            TestPlatforms.iOS | TestPlatforms.tvOS
+        )]
         public void ExtractToDirectory_ExactRootDirMatch_Directory_Relative_Throws()
         {
             string entryFolderName = "folder";
@@ -292,22 +426,52 @@ namespace System.Formats.Tar.Tests
 
             // Relative segments should not change the final destination folder
             string dirPath1 = Path.Join(entryFolderPath, "..", "folder");
-            string dirPath2 = Path.Join(entryFolderPath, "..", "folder" + Path.DirectorySeparatorChar);
+            string dirPath2 = Path.Join(
+                entryFolderPath,
+                "..",
+                "folder" + Path.DirectorySeparatorChar
+            );
 
-            ExtractRootDirMatch_Verify_Throws(TarEntryFormat.Ustar, TarEntryType.Directory, destinationFolderPath, dirPath1, linkTargetPath: null);
-            ExtractRootDirMatch_Verify_Throws(TarEntryFormat.Ustar, TarEntryType.Directory, destinationFolderPath, dirPath2, linkTargetPath: null);
+            ExtractRootDirMatch_Verify_Throws(
+                TarEntryFormat.Ustar,
+                TarEntryType.Directory,
+                destinationFolderPath,
+                dirPath1,
+                linkTargetPath: null
+            );
+            ExtractRootDirMatch_Verify_Throws(
+                TarEntryFormat.Ustar,
+                TarEntryType.Directory,
+                destinationFolderPath,
+                dirPath2,
+                linkTargetPath: null
+            );
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.SupportsHardLinkCreation))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.SupportsHardLinkCreation)
+        )]
         [InlineData(TarEntryFormat.V7)]
         [InlineData(TarEntryFormat.Ustar)]
         [InlineData(TarEntryFormat.Pax)]
         [InlineData(TarEntryFormat.Gnu)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/88049", TestPlatforms.iOS | TestPlatforms.tvOS)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/88049",
+            TestPlatforms.iOS | TestPlatforms.tvOS
+        )]
         public void ExtractToDirectory_ExactRootDirMatch_HardLinks_Throws(TarEntryFormat format)
         {
-            ExtractToDirectory_ExactRootDirMatch_Links_Throws(format, TarEntryType.HardLink, inverted: false);
-            ExtractToDirectory_ExactRootDirMatch_Links_Throws(format, TarEntryType.HardLink, inverted: true);
+            ExtractToDirectory_ExactRootDirMatch_Links_Throws(
+                format,
+                TarEntryType.HardLink,
+                inverted: false
+            );
+            ExtractToDirectory_ExactRootDirMatch_Links_Throws(
+                format,
+                TarEntryType.HardLink,
+                inverted: true
+            );
         }
 
         [ConditionalTheory(typeof(MountHelper), nameof(MountHelper.CanCreateSymbolicLinks))]
@@ -317,8 +481,16 @@ namespace System.Formats.Tar.Tests
         [InlineData(TarEntryFormat.Gnu)]
         public void ExtractToDirectory_ExactRootDirMatch_SymLinks_Throws(TarEntryFormat format)
         {
-            ExtractToDirectory_ExactRootDirMatch_Links_Throws(format, TarEntryType.SymbolicLink, inverted: false);
-            ExtractToDirectory_ExactRootDirMatch_Links_Throws(format, TarEntryType.SymbolicLink, inverted: true);
+            ExtractToDirectory_ExactRootDirMatch_Links_Throws(
+                format,
+                TarEntryType.SymbolicLink,
+                inverted: false
+            );
+            ExtractToDirectory_ExactRootDirMatch_Links_Throws(
+                format,
+                TarEntryType.SymbolicLink,
+                inverted: true
+            );
         }
 
         [ConditionalFact(typeof(MountHelper), nameof(MountHelper.CanCreateSymbolicLinks))]
@@ -340,13 +512,34 @@ namespace System.Formats.Tar.Tests
             // Links target outside the destination path should not be allowed
             // Ensure relative segments do not go around this restriction
             string linkTargetPath1 = Path.Join(entryFolderPath, "..", entryFolderName);
-            string linkTargetPath2 = Path.Join(entryFolderPath, "..", entryFolderName + Path.DirectorySeparatorChar);
+            string linkTargetPath2 = Path.Join(
+                entryFolderPath,
+                "..",
+                entryFolderName + Path.DirectorySeparatorChar
+            );
 
-            ExtractRootDirMatch_Verify_Throws(TarEntryFormat.Ustar, TarEntryType.Directory, destinationFolderPath, linkPath, linkTargetPath1);
-            ExtractRootDirMatch_Verify_Throws(TarEntryFormat.Ustar, TarEntryType.Directory, destinationFolderPath, linkPath, linkTargetPath2);
+            ExtractRootDirMatch_Verify_Throws(
+                TarEntryFormat.Ustar,
+                TarEntryType.Directory,
+                destinationFolderPath,
+                linkPath,
+                linkTargetPath1
+            );
+            ExtractRootDirMatch_Verify_Throws(
+                TarEntryFormat.Ustar,
+                TarEntryType.Directory,
+                destinationFolderPath,
+                linkPath,
+                linkTargetPath2
+            );
         }
 
-        private void ExtractToDirectory_ExactRootDirMatch_RegularFile_And_Directory_Throws_Internal(TarEntryFormat format, TarEntryType entryType, string fileName, bool inverted)
+        private void ExtractToDirectory_ExactRootDirMatch_RegularFile_And_Directory_Throws_Internal(
+            TarEntryFormat format,
+            TarEntryType entryType,
+            string fileName,
+            bool inverted
+        )
         {
             // inverted == false:
             //   destination: folderSibling/
@@ -369,10 +562,20 @@ namespace System.Formats.Tar.Tests
 
             string filePath = Path.Join(entryFolderPath, fileName);
 
-            ExtractRootDirMatch_Verify_Throws(format, entryType, destinationFolderPath, filePath, linkTargetPath: null);
+            ExtractRootDirMatch_Verify_Throws(
+                format,
+                entryType,
+                destinationFolderPath,
+                filePath,
+                linkTargetPath: null
+            );
         }
 
-        private void ExtractToDirectory_ExactRootDirMatch_Links_Throws(TarEntryFormat format, TarEntryType entryType, bool inverted)
+        private void ExtractToDirectory_ExactRootDirMatch_Links_Throws(
+            TarEntryFormat format,
+            TarEntryType entryType,
+            bool inverted
+        )
         {
             // inverted == false:
             //   destination: folderSibling/
@@ -402,15 +605,31 @@ namespace System.Formats.Tar.Tests
             Directory.CreateDirectory(destinationFolderPath);
             File.Create(linkTargetPath).Dispose();
 
-            ExtractRootDirMatch_Verify_Throws(format, entryType, destinationFolderPath, linkPath, linkTargetPath);
+            ExtractRootDirMatch_Verify_Throws(
+                format,
+                entryType,
+                destinationFolderPath,
+                linkPath,
+                linkTargetPath
+            );
         }
 
-        private void ExtractRootDirMatch_Verify_Throws(TarEntryFormat format, TarEntryType entryType, string destinationFolderPath, string entryFilePath, string linkTargetPath)
+        private void ExtractRootDirMatch_Verify_Throws(
+            TarEntryFormat format,
+            TarEntryType entryType,
+            string destinationFolderPath,
+            string entryFilePath,
+            string linkTargetPath
+        )
         {
             using MemoryStream archive = new();
             using (TarWriter writer = new TarWriter(archive, format, leaveOpen: true))
             {
-                TarEntry entry = InvokeTarEntryCreationConstructor(format, entryType, entryFilePath);
+                TarEntry entry = InvokeTarEntryCreationConstructor(
+                    format,
+                    entryType,
+                    entryFilePath
+                );
                 MemoryStream dataStream = null;
                 if (entryType is TarEntryType.RegularFile or TarEntryType.V7RegularFile)
                 {
@@ -430,7 +649,14 @@ namespace System.Formats.Tar.Tests
             }
             archive.Position = 0;
 
-            Assert.Throws<IOException>(() => TarFile.ExtractToDirectory(archive, destinationFolderPath, overwriteFiles: false));
+            Assert.Throws<IOException>(
+                () =>
+                    TarFile.ExtractToDirectory(
+                        archive,
+                        destinationFolderPath,
+                        overwriteFiles: false
+                    )
+            );
             Assert.False(File.Exists(entryFilePath), $"File should not exist: {entryFilePath}");
         }
     }

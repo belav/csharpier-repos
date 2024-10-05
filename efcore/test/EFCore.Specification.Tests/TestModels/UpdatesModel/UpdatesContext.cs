@@ -17,33 +17,32 @@ public class UpdatesContext : PoolableDbContext
     public DbSet<Rodney> Trotters { get; set; } = null!;
 
     public UpdatesContext(DbContextOptions options)
-        : base(options)
-    {
-    }
+        : base(options) { }
 
     public static void Seed(UpdatesContext context)
     {
         var productId1 = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146");
         var productId2 = new Guid("0edc9136-7eed-463b-9b97-bdb9648ab877");
 
-        context.Add(
-            new Category { PrincipalId = 778 });
+        context.Add(new Category { PrincipalId = 778 });
         context.Add(
             new Product
             {
                 Id = productId1,
                 Name = "Apple Cider",
                 Price = 1.49M,
-                DependentId = 778
-            });
+                DependentId = 778,
+            }
+        );
         context.Add(
             new Product
             {
                 Id = productId2,
                 Name = "Apple Cobler",
                 Price = 2.49M,
-                DependentId = 778
-            });
+                DependentId = 778,
+            }
+        );
 
         context.SaveChanges();
     }

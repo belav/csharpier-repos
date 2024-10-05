@@ -4,15 +4,15 @@
 
 namespace System.ServiceModel.Diagnostics
 {
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
-    using System.Diagnostics;
-    using System.Threading;
     using System.Runtime.InteropServices;
     using System.Security;
     using System.Security.Permissions;
-    using System.Diagnostics.CodeAnalysis;
+    using System.Threading;
 
     class Utility
     {
@@ -25,14 +25,20 @@ namespace System.ServiceModel.Diagnostics
         }
 
         // Call this when a p/invoke with an 'out SafeHandle' parameter returns an error.  This will safely clean up the handle.
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.TransparentMethodsMustNotReferenceCriticalCode)] // we got APTCA approval with no requirement to fix this transparency warning
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.TransparentMethodsMustNotReferenceCriticalCode
+        )] // we got APTCA approval with no requirement to fix this transparency warning
         internal static void CloseInvalidOutSafeHandle(SafeHandle handle)
         {
             // Workaround for 64-bit CLR bug VSWhidbey 546830 - sometimes invalid SafeHandles come back null.
             if (handle != null)
             {
 #pragma warning disable 618
-                Fx.Assert(handle.IsInvalid, "CloseInvalidOutSafeHandle called with a valid handle!");
+                Fx.Assert(
+                    handle.IsInvalid,
+                    "CloseInvalidOutSafeHandle called with a valid handle!"
+                );
 #pragma warning restore 618
 
                 // Calls SuppressFinalize.
@@ -41,13 +47,19 @@ namespace System.ServiceModel.Diagnostics
         }
 
         // Copy of the above for CriticalHandles.
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.TransparentMethodsMustNotReferenceCriticalCode)] // we got APTCA approval with no requirement to fix this transparency warning. plus, the callers of this method are not supported in partial trust.
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.TransparentMethodsMustNotReferenceCriticalCode
+        )] // we got APTCA approval with no requirement to fix this transparency warning. plus, the callers of this method are not supported in partial trust.
         internal static void CloseInvalidOutCriticalHandle(CriticalHandle handle)
         {
             if (handle != null)
             {
 #pragma warning disable 618
-                Fx.Assert(handle.IsInvalid, "CloseInvalidOutCriticalHandle called with a valid handle!");
+                Fx.Assert(
+                    handle.IsInvalid,
+                    "CloseInvalidOutCriticalHandle called with a valid handle!"
+                );
 #pragma warning restore 618
 
                 handle.SetHandleAsInvalid();

@@ -22,6 +22,13 @@ namespace Microsoft.CodeAnalysis.LegacySolutionEvents
         /// <param name="kind"><inheritdoc cref="WorkspaceChangeEventArgs.Kind"/></param>
         /// <param name="projectId"><inheritdoc cref="WorkspaceChangeEventArgs.ProjectId"/></param>
         /// <param name="documentId"><inheritdoc cref="WorkspaceChangeEventArgs.DocumentId"/></param>
-        ValueTask OnWorkspaceChangedAsync(Checksum oldSolutionChecksum, Checksum newSolutionChecksum, WorkspaceChangeKind kind, ProjectId? projectId, DocumentId? documentId, CancellationToken cancellationToken);
+        ValueTask OnWorkspaceChangedAsync(
+            Checksum oldSolutionChecksum,
+            Checksum newSolutionChecksum,
+            WorkspaceChangeKind kind,
+            ProjectId? projectId,
+            DocumentId? documentId,
+            CancellationToken cancellationToken
+        );
     }
 }

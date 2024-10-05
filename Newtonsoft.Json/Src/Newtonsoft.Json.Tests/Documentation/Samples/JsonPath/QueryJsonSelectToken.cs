@@ -23,15 +23,16 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Text;
+using Newtonsoft.Json.Linq;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
 #endif
-using System.Text;
+
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;
@@ -50,7 +51,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.JsonPath
         public void Example()
         {
             #region Usage
-            JObject o = JObject.Parse(@"{
+            JObject o = JObject.Parse(
+                @"{
               'Stores': [
                 'Lambton Quay',
                 'Willis Street'
@@ -79,7 +81,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.JsonPath
                   ]
                 }
               ]
-            }");
+            }"
+            );
 
             string name = (string)o.SelectToken("Manufacturers[0].Name");
 

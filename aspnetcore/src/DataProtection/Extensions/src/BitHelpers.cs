@@ -12,13 +12,13 @@ internal static class BitHelpers
     public static ulong ReadUInt64(byte[] buffer, int offset)
     {
         return (((ulong)buffer[offset + 0]) << 56)
-               | (((ulong)buffer[offset + 1]) << 48)
-               | (((ulong)buffer[offset + 2]) << 40)
-               | (((ulong)buffer[offset + 3]) << 32)
-               | (((ulong)buffer[offset + 4]) << 24)
-               | (((ulong)buffer[offset + 5]) << 16)
-               | (((ulong)buffer[offset + 6]) << 8)
-               | (ulong)buffer[offset + 7];
+            | (((ulong)buffer[offset + 1]) << 48)
+            | (((ulong)buffer[offset + 2]) << 40)
+            | (((ulong)buffer[offset + 3]) << 32)
+            | (((ulong)buffer[offset + 4]) << 24)
+            | (((ulong)buffer[offset + 5]) << 16)
+            | (((ulong)buffer[offset + 6]) << 8)
+            | (ulong)buffer[offset + 7];
     }
 
     /// <summary>

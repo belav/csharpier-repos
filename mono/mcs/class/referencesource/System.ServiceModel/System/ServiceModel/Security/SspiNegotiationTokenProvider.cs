@@ -18,21 +18,19 @@ namespace System.ServiceModel.Security
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Security.Tokens;
     using System.Xml;
-
     using CanonicalizationDriver = System.IdentityModel.CanonicalizationDriver;
     using Psha1DerivedKeyGenerator = System.IdentityModel.Psha1DerivedKeyGenerator;
     using SafeFreeCredentials = System.IdentityModel.SafeFreeCredentials;
 
-    abstract class SspiNegotiationTokenProvider : NegotiationTokenProvider<SspiNegotiationTokenProviderState>
+    abstract class SspiNegotiationTokenProvider
+        : NegotiationTokenProvider<SspiNegotiationTokenProviderState>
     {
         bool negotiateTokenOnOpen;
         SecurityBindingElement securityBindingElement;
 
         protected SspiNegotiationTokenProvider()
-            : this(null)
-        {
-        }
-        
+            : this(null) { }
+
         protected SspiNegotiationTokenProvider(SecurityBindingElement securityBindingElement)
             : base()
         {
@@ -41,10 +39,7 @@ namespace System.ServiceModel.Security
 
         public bool NegotiateTokenOnOpen
         {
-            get
-            {
-                return this.negotiateTokenOnOpen;
-            }
+            get { return this.negotiateTokenOnOpen; }
             set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
@@ -53,9 +48,11 @@ namespace System.ServiceModel.Security
         }
 
         // SspiNegotiationTokenProvider abstract methods
-        protected abstract ReadOnlyCollection<IAuthorizationPolicy> ValidateSspiNegotiation(ISspiNegotiation sspiNegotiation);
+        protected abstract ReadOnlyCollection<IAuthorizationPolicy> ValidateSspiNegotiation(
+            ISspiNegotiation sspiNegotiation
+        );
         public abstract XmlDictionaryString NegotiationValueType { get; }
-        
+
         public override void OnOpen(TimeSpan timeout)
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
@@ -67,7 +64,10 @@ namespace System.ServiceModel.Security
             }
         }
 
-        protected override IChannelFactory<IRequestChannel> GetNegotiationChannelFactory(IChannelFactory<IRequestChannel> transportChannelFactory, ChannelBuilder channelBuilder)
+        protected override IChannelFactory<IRequestChannel> GetNegotiationChannelFactory(
+            IChannelFactory<IRequestChannel> transportChannelFactory,
+            ChannelBuilder channelBuilder
+        )
         {
             return transportChannelFactory;
         }
@@ -87,11 +87,20 @@ namespace System.ServiceModel.Security
             byte[] canonicalizedData = canonicalizer.GetBytes();
             lock (negotiationDigest)
             {
-                negotiationDigest.TransformBlock(canonicalizedData, 0, canonicalizedData.Length, canonicalizedData, 0);
+                negotiationDigest.TransformBlock(
+                    canonicalizedData,
+                    0,
+                    canonicalizedData.Length,
+                    canonicalizedData,
+                    0
+                );
             }
         }
 
-        static void AddToDigest(SspiNegotiationTokenProviderState sspiState, RequestSecurityToken rst)
+        static void AddToDigest(
+            SspiNegotiationTokenProviderState sspiState,
+            RequestSecurityToken rst
+        )
         {
             MemoryStream stream = new MemoryStream();
             XmlDictionaryWriter writer = XmlDictionaryWriter.CreateTextWriter(stream);
@@ -100,7 +109,12 @@ namespace System.ServiceModel.Security
             AddToDigest(sspiState.NegotiationDigest, stream);
         }
 
-        void AddToDigest(SspiNegotiationTokenProviderState sspiState, RequestSecurityTokenResponse rstr, bool wasReceived, bool isFinalRstr)
+        void AddToDigest(
+            SspiNegotiationTokenProviderState sspiState,
+            RequestSecurityTokenResponse rstr,
+            bool wasReceived,
+            bool isFinalRstr
+        )
         {
             MemoryStream stream = new MemoryStream();
             XmlDictionaryWriter writer = XmlDictionaryWriter.CreateTextWriter(stream);
@@ -116,16 +130,27 @@ namespace System.ServiceModel.Security
                 }
                 else
                 {
-                    XmlElement rstrClone = (XmlElement) rstr.RequestSecurityTokenResponseXml.CloneNode(true);
+                    XmlElement rstrClone = (XmlElement)
+                        rstr.RequestSecurityTokenResponseXml.CloneNode(true);
                     List<XmlNode> nodesToRemove = new List<XmlNode>(2);
                     for (int i = 0; i < rstrClone.ChildNodes.Count; ++i)
                     {
                         XmlNode child = (rstrClone.ChildNodes[i]);
-                        if (this.StandardsManager.TrustDriver.IsRequestedSecurityTokenElement(child.LocalName, child.NamespaceURI))
+                        if (
+                            this.StandardsManager.TrustDriver.IsRequestedSecurityTokenElement(
+                                child.LocalName,
+                                child.NamespaceURI
+                            )
+                        )
                         {
                             nodesToRemove.Add(child);
                         }
-                        else if (this.StandardsManager.TrustDriver.IsRequestedProofTokenElement(child.LocalName, child.NamespaceURI))
+                        else if (
+                            this.StandardsManager.TrustDriver.IsRequestedProofTokenElement(
+                                child.LocalName,
+                                child.NamespaceURI
+                            )
+                        )
                         {
                             nodesToRemove.Add(child);
                         }
@@ -141,7 +166,11 @@ namespace System.ServiceModel.Security
             AddToDigest(sspiState.NegotiationDigest, stream);
         }
 
-        static bool IsCorrectAuthenticator(SspiNegotiationTokenProviderState sspiState, byte[] proofKey, byte[] serverAuthenticator)
+        static bool IsCorrectAuthenticator(
+            SspiNegotiationTokenProviderState sspiState,
+            byte[] proofKey,
+            byte[] serverAuthenticator
+        )
         {
             byte[] negotiationHash;
             lock (sspiState.NegotiationDigest)
@@ -150,7 +179,12 @@ namespace System.ServiceModel.Security
                 negotiationHash = sspiState.NegotiationDigest.Hash;
             }
             Psha1DerivedKeyGenerator generator = new Psha1DerivedKeyGenerator(proofKey);
-            byte[] clientAuthenticator = generator.GenerateDerivedKey(SecurityUtils.CombinedHashLabel, negotiationHash, SecurityNegotiationConstants.NegotiationAuthenticatorSize, 0);
+            byte[] clientAuthenticator = generator.GenerateDerivedKey(
+                SecurityUtils.CombinedHashLabel,
+                negotiationHash,
+                SecurityNegotiationConstants.NegotiationAuthenticatorSize,
+                0
+            );
             if (clientAuthenticator.Length != serverAuthenticator.Length)
             {
                 return false;
@@ -165,9 +199,11 @@ namespace System.ServiceModel.Security
             return true;
         }
 
-        BodyWriter PrepareRstr( SspiNegotiationTokenProviderState sspiState, byte[] outgoingBlob )
+        BodyWriter PrepareRstr(SspiNegotiationTokenProviderState sspiState, byte[] outgoingBlob)
         {
-            RequestSecurityTokenResponse rstr = new RequestSecurityTokenResponse(this.StandardsManager);
+            RequestSecurityTokenResponse rstr = new RequestSecurityTokenResponse(
+                this.StandardsManager
+            );
             rstr.Context = sspiState.Context;
             rstr.SetBinaryNegotiation(new BinaryNegotiation(NegotiationValueType, outgoingBlob));
             rstr.MakeReadOnly();
@@ -175,12 +211,15 @@ namespace System.ServiceModel.Security
             return rstr;
         }
 
-        protected override BodyWriter GetFirstOutgoingMessageBody( SspiNegotiationTokenProviderState sspiState, out MessageProperties messageProperties )
+        protected override BodyWriter GetFirstOutgoingMessageBody(
+            SspiNegotiationTokenProviderState sspiState,
+            out MessageProperties messageProperties
+        )
         {
             messageProperties = null;
 
-            // both message logging and Visual Studio trigger message serialization and hence can cause 
-            // premature invocation of OnGetBinaryNegotiation(); flag this RST as streamed to block 
+            // both message logging and Visual Studio trigger message serialization and hence can cause
+            // premature invocation of OnGetBinaryNegotiation(); flag this RST as streamed to block
             // serialization of its body and hence premature calls to InitializeSecurityContext()
 
             RequestSecurityToken rst = new RequestSecurityToken(this.StandardsManager, false);
@@ -191,16 +230,21 @@ namespace System.ServiceModel.Security
             // delay GetOutgoingBlob()'s first call to InitializeSecurityContext() until a channel binding
             // is available
 
-            rst.OnGetBinaryNegotiation = (new GetOutgoingBlobProxy(sspiState, this, rst)).GetOutgoingBlob;
+            rst.OnGetBinaryNegotiation = (
+                new GetOutgoingBlobProxy(sspiState, this, rst)
+            ).GetOutgoingBlob;
 
             return rst;
         }
 
-        protected override IRequestChannel CreateClientChannel( EndpointAddress target, Uri via )
+        protected override IRequestChannel CreateClientChannel(EndpointAddress target, Uri via)
         {
             IRequestChannel rstChannel = base.CreateClientChannel(target, via);
 
-            if (!SecurityUtils.IsChannelBindingDisabled && (this.securityBindingElement is TransportSecurityBindingElement))
+            if (
+                !SecurityUtils.IsChannelBindingDisabled
+                && (this.securityBindingElement is TransportSecurityBindingElement)
+            )
             {
                 // enable channel binding on this side channel
                 IChannelBindingProvider cbp = rstChannel.GetProperty<IChannelBindingProvider>();
@@ -214,7 +258,7 @@ namespace System.ServiceModel.Security
         }
 
         /// <summary>
-        /// Proxy helps in implementating the delay of obtaining the binary data till later in the stack until the 
+        /// Proxy helps in implementating the delay of obtaining the binary data till later in the stack until the
         /// ChannelBinding is obtained from the message.
         /// </summary>
         class GetOutgoingBlobProxy
@@ -223,29 +267,44 @@ namespace System.ServiceModel.Security
             SspiNegotiationTokenProvider _sspiProvider;
             SspiNegotiationTokenProviderState _sspiState;
 
-            public GetOutgoingBlobProxy( SspiNegotiationTokenProviderState sspiState, SspiNegotiationTokenProvider sspiProvider, RequestSecurityToken rst )
+            public GetOutgoingBlobProxy(
+                SspiNegotiationTokenProviderState sspiState,
+                SspiNegotiationTokenProvider sspiProvider,
+                RequestSecurityToken rst
+            )
             {
                 _sspiState = sspiState;
                 _sspiProvider = sspiProvider;
                 _rst = rst;
             }
 
-            public void GetOutgoingBlob( ChannelBinding channelBinding )
-            {                
-                byte[] outgoingBlob = _sspiState.SspiNegotiation.GetOutgoingBlob(null, channelBinding, null);
+            public void GetOutgoingBlob(ChannelBinding channelBinding)
+            {
+                byte[] outgoingBlob = _sspiState.SspiNegotiation.GetOutgoingBlob(
+                    null,
+                    channelBinding,
+                    null
+                );
 
                 if (outgoingBlob == null && _sspiState.SspiNegotiation.IsCompleted == false)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.NoBinaryNegoToSend)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityNegotiationException(SR.GetString(SR.NoBinaryNegoToSend))
+                    );
                 }
 
-                _rst.SetBinaryNegotiation(new BinaryNegotiation(_sspiProvider.NegotiationValueType, outgoingBlob));
+                _rst.SetBinaryNegotiation(
+                    new BinaryNegotiation(_sspiProvider.NegotiationValueType, outgoingBlob)
+                );
                 SspiNegotiationTokenProvider.AddToDigest(_sspiState, _rst);
                 _rst.MakeReadOnly();
             }
         }
 
-        protected override BodyWriter GetNextOutgoingMessageBody(Message incomingMessage, SspiNegotiationTokenProviderState sspiState)
+        protected override BodyWriter GetNextOutgoingMessageBody(
+            Message incomingMessage,
+            SspiNegotiationTokenProviderState sspiState
+        )
         {
             try
             {
@@ -255,10 +314,26 @@ namespace System.ServiceModel.Security
             {
                 if (fault.Code.IsSenderFault)
                 {
-                    if (fault.Code.SubCode.Name == TrustApr2004Strings.FailedAuthenticationFaultCode || fault.Code.SubCode.Name == TrustFeb2005Strings.FailedAuthenticationFaultCode)
-                        throw TraceUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.AuthenticationOfClientFailed), fault), incomingMessage);
+                    if (
+                        fault.Code.SubCode.Name == TrustApr2004Strings.FailedAuthenticationFaultCode
+                        || fault.Code.SubCode.Name
+                            == TrustFeb2005Strings.FailedAuthenticationFaultCode
+                    )
+                        throw TraceUtility.ThrowHelperError(
+                            new SecurityNegotiationException(
+                                SR.GetString(SR.AuthenticationOfClientFailed),
+                                fault
+                            ),
+                            incomingMessage
+                        );
 
-                    throw TraceUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.FailedSspiNegotiation), fault), incomingMessage);
+                    throw TraceUtility.ThrowHelperError(
+                        new SecurityNegotiationException(
+                            SR.GetString(SR.FailedSspiNegotiation),
+                            fault
+                        ),
+                        incomingMessage
+                    );
                 }
                 else
                 {
@@ -270,10 +345,20 @@ namespace System.ServiceModel.Security
             XmlDictionaryReader bodyReader = incomingMessage.GetReaderAtBodyContents();
             using (bodyReader)
             {
-                if (this.StandardsManager.TrustDriver.IsAtRequestSecurityTokenResponseCollection(bodyReader))
+                if (
+                    this.StandardsManager.TrustDriver.IsAtRequestSecurityTokenResponseCollection(
+                        bodyReader
+                    )
+                )
                 {
-                    RequestSecurityTokenResponseCollection rstrCollection = this.StandardsManager.TrustDriver.CreateRequestSecurityTokenResponseCollection(bodyReader);
-                    using (IEnumerator<RequestSecurityTokenResponse> enumerator = rstrCollection.RstrCollection.GetEnumerator())
+                    RequestSecurityTokenResponseCollection rstrCollection =
+                        this.StandardsManager.TrustDriver.CreateRequestSecurityTokenResponseCollection(
+                            bodyReader
+                        );
+                    using (
+                        IEnumerator<RequestSecurityTokenResponse> enumerator =
+                            rstrCollection.RstrCollection.GetEnumerator()
+                    )
                     {
                         enumerator.MoveNext();
                         negotiationRstr = enumerator.Current;
@@ -284,17 +369,32 @@ namespace System.ServiceModel.Security
                     }
                     if (authenticatorRstr == null)
                     {
-                        throw TraceUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.AuthenticatorNotPresentInRSTRCollection)), incomingMessage);
+                        throw TraceUtility.ThrowHelperError(
+                            new SecurityNegotiationException(
+                                SR.GetString(SR.AuthenticatorNotPresentInRSTRCollection)
+                            ),
+                            incomingMessage
+                        );
                     }
                     else if (authenticatorRstr.Context != negotiationRstr.Context)
                     {
-                        throw TraceUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.RSTRAuthenticatorHasBadContext)), incomingMessage);
+                        throw TraceUtility.ThrowHelperError(
+                            new SecurityNegotiationException(
+                                SR.GetString(SR.RSTRAuthenticatorHasBadContext)
+                            ),
+                            incomingMessage
+                        );
                     }
                     AddToDigest(sspiState, negotiationRstr, true, true);
                 }
-                else if (this.StandardsManager.TrustDriver.IsAtRequestSecurityTokenResponse(bodyReader))
+                else if (
+                    this.StandardsManager.TrustDriver.IsAtRequestSecurityTokenResponse(bodyReader)
+                )
                 {
-                    negotiationRstr = RequestSecurityTokenResponse.CreateFrom(this.StandardsManager, bodyReader);
+                    negotiationRstr = RequestSecurityTokenResponse.CreateFrom(
+                        this.StandardsManager,
+                        bodyReader
+                    );
                     AddToDigest(sspiState, negotiationRstr, true, false);
                 }
                 else
@@ -305,7 +405,12 @@ namespace System.ServiceModel.Security
             }
             if (negotiationRstr.Context != sspiState.Context)
             {
-                throw TraceUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.BadSecurityNegotiationContext)), incomingMessage);
+                throw TraceUtility.ThrowHelperError(
+                    new SecurityNegotiationException(
+                        SR.GetString(SR.BadSecurityNegotiationContext)
+                    ),
+                    incomingMessage
+                );
             }
             BinaryNegotiation incomingBinaryNego = negotiationRstr.GetBinaryNegotiation();
             byte[] incomingBlob;
@@ -321,7 +426,10 @@ namespace System.ServiceModel.Security
             BodyWriter nextMessageBody;
             if (incomingBlob == null && sspiState.SspiNegotiation.IsCompleted == false)
             {
-                throw TraceUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.NoBinaryNegoToReceive)), incomingMessage);
+                throw TraceUtility.ThrowHelperError(
+                    new SecurityNegotiationException(SR.GetString(SR.NoBinaryNegoToReceive)),
+                    incomingMessage
+                );
             }
             else if (incomingBlob == null && sspiState.SspiNegotiation.IsCompleted == true)
             {
@@ -332,13 +440,18 @@ namespace System.ServiceModel.Security
             else
             {
                 // we got an incoming blob. Process it and see if there is an outgoing blob
-                byte[] outgoingBlob = sspiState.SspiNegotiation.GetOutgoingBlob(incomingBlob, 
-                                                            SecurityUtils.GetChannelBindingFromMessage(incomingMessage), 
-                                                            null);
+                byte[] outgoingBlob = sspiState.SspiNegotiation.GetOutgoingBlob(
+                    incomingBlob,
+                    SecurityUtils.GetChannelBindingFromMessage(incomingMessage),
+                    null
+                );
 
                 if (outgoingBlob == null && sspiState.SspiNegotiation.IsCompleted == false)
                 {
-                    throw TraceUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.NoBinaryNegoToSend)), incomingMessage);
+                    throw TraceUtility.ThrowHelperError(
+                        new SecurityNegotiationException(SR.GetString(SR.NoBinaryNegoToSend)),
+                        incomingMessage
+                    );
                 }
                 else if (outgoingBlob == null && sspiState.SspiNegotiation.IsCompleted == true)
                 {
@@ -354,37 +467,67 @@ namespace System.ServiceModel.Security
             return nextMessageBody;
         }
 
-        void OnNegotiationComplete(SspiNegotiationTokenProviderState sspiState, RequestSecurityTokenResponse negotiationRstr, RequestSecurityTokenResponse authenticatorRstr)
+        void OnNegotiationComplete(
+            SspiNegotiationTokenProviderState sspiState,
+            RequestSecurityTokenResponse negotiationRstr,
+            RequestSecurityTokenResponse authenticatorRstr
+        )
         {
             ISspiNegotiation sspiNegotiation = sspiState.SspiNegotiation;
-            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies = ValidateSspiNegotiation(sspiNegotiation);
+            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies =
+                ValidateSspiNegotiation(sspiNegotiation);
             // the negotiation has completed successfully - the service token needs to be extracted from the
             // negotiationRstr
             SecurityTokenResolver tokenResolver = new SspiSecurityTokenResolver(sspiNegotiation);
-            GenericXmlSecurityToken serviceToken = negotiationRstr.GetIssuedToken(tokenResolver, EmptyReadOnlyCollection<SecurityTokenAuthenticator>.Instance, 
-                SecurityKeyEntropyMode.ServerEntropy, null, this.SecurityContextTokenUri, authorizationPolicies, 0, false);
+            GenericXmlSecurityToken serviceToken = negotiationRstr.GetIssuedToken(
+                tokenResolver,
+                EmptyReadOnlyCollection<SecurityTokenAuthenticator>.Instance,
+                SecurityKeyEntropyMode.ServerEntropy,
+                null,
+                this.SecurityContextTokenUri,
+                authorizationPolicies,
+                0,
+                false
+            );
             if (serviceToken == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.NoServiceTokenReceived)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityNegotiationException(SR.GetString(SR.NoServiceTokenReceived))
+                );
             }
-            WrappedKeySecurityToken wrappedToken = (serviceToken.ProofToken as WrappedKeySecurityToken);
-            if (wrappedToken == null || wrappedToken.WrappingAlgorithm != sspiNegotiation.KeyEncryptionAlgorithm)
+            WrappedKeySecurityToken wrappedToken = (
+                serviceToken.ProofToken as WrappedKeySecurityToken
+            );
+            if (
+                wrappedToken == null
+                || wrappedToken.WrappingAlgorithm != sspiNegotiation.KeyEncryptionAlgorithm
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.ProofTokenWasNotWrappedCorrectly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityNegotiationException(
+                        SR.GetString(SR.ProofTokenWasNotWrappedCorrectly)
+                    )
+                );
             }
             byte[] proofKey = wrappedToken.GetWrappedKey();
             if (authenticatorRstr == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.RSTRAuthenticatorNotPresent)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityNegotiationException(SR.GetString(SR.RSTRAuthenticatorNotPresent))
+                );
             }
             byte[] serverAuthenticator = authenticatorRstr.GetAuthenticator();
             if (serverAuthenticator == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.RSTRAuthenticatorNotPresent)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityNegotiationException(SR.GetString(SR.RSTRAuthenticatorNotPresent))
+                );
             }
             if (!IsCorrectAuthenticator(sspiState, proofKey, serverAuthenticator))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.RSTRAuthenticatorIncorrect)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityNegotiationException(SR.GetString(SR.RSTRAuthenticatorIncorrect))
+                );
             }
             sspiState.SetServiceToken(serviceToken);
         }
@@ -398,27 +541,42 @@ namespace System.ServiceModel.Security
                 this.sspiNegotiation = sspiNegotiation;
             }
 
-            public ISspiNegotiation SspiNegotiation 
+            public ISspiNegotiation SspiNegotiation
             {
                 get { return this.sspiNegotiation; }
             }
 
-            protected override bool TryResolveTokenCore(SecurityKeyIdentifier keyIdentifier, out SecurityToken token)
+            protected override bool TryResolveTokenCore(
+                SecurityKeyIdentifier keyIdentifier,
+                out SecurityToken token
+            )
             {
                 token = null;
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotImplementedException()
+                );
             }
 
-            protected override bool TryResolveTokenCore(SecurityKeyIdentifierClause keyIdentifierClause, out SecurityToken token)
+            protected override bool TryResolveTokenCore(
+                SecurityKeyIdentifierClause keyIdentifierClause,
+                out SecurityToken token
+            )
             {
                 token = null;
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotImplementedException()
+                );
             }
 
-            protected override bool TryResolveSecurityKeyCore(SecurityKeyIdentifierClause keyIdentifierClause, out SecurityKey key)
+            protected override bool TryResolveSecurityKeyCore(
+                SecurityKeyIdentifierClause keyIdentifierClause,
+                out SecurityKey key
+            )
             {
                 key = null;
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotImplementedException()
+                );
             }
         }
     }
@@ -428,7 +586,10 @@ namespace System.ServiceModel.Security
         bool getTokenOnOpen;
         SafeFreeCredentials credentialsHandle;
 
-        public SspiIssuanceChannelParameter(bool getTokenOnOpen, SafeFreeCredentials credentialsHandle)
+        public SspiIssuanceChannelParameter(
+            bool getTokenOnOpen,
+            SafeFreeCredentials credentialsHandle
+        )
         {
             this.getTokenOnOpen = getTokenOnOpen;
             this.credentialsHandle = credentialsHandle;
@@ -444,5 +605,4 @@ namespace System.ServiceModel.Security
             get { return this.credentialsHandle; }
         }
     }
-
 }

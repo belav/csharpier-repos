@@ -16,14 +16,19 @@ namespace System.Dynamic.Utils
         /// <summary>
         /// See overload with <see cref="IArgumentProvider"/> for more information.
         /// </summary>
-        public static ReadOnlyCollection<ParameterExpression> ReturnReadOnly(IParameterProvider provider, ref object collection)
+        public static ReadOnlyCollection<ParameterExpression> ReturnReadOnly(
+            IParameterProvider provider,
+            ref object collection
+        )
         {
             if (collection is ParameterExpression tObj)
             {
                 // otherwise make sure only one read-only collection ever gets exposed
                 Interlocked.CompareExchange(
                     ref collection!,
-                    new ReadOnlyCollection<ParameterExpression>(new ListParameterProvider(provider, tObj)),
+                    new ReadOnlyCollection<ParameterExpression>(
+                        new ListParameterProvider(provider, tObj)
+                    ),
                     tObj
                 );
             }
@@ -63,7 +68,10 @@ namespace System.Dynamic.Utils
         /// it was just an array.  Meanwhile The DLR internally avoids accessing  which would force
         /// the read-only collection to be created resulting in a typical memory savings.
         /// </summary>
-        public static ReadOnlyCollection<Expression> ReturnReadOnly(IArgumentProvider provider, ref object collection)
+        public static ReadOnlyCollection<Expression> ReturnReadOnly(
+            IArgumentProvider provider,
+            ref object collection
+        )
         {
             if (collection is Expression tObj)
             {
@@ -87,7 +95,8 @@ namespace System.Dynamic.Utils
         /// contains a ReadOnlyCollection or the Expression.  We check for the Expression and if it's
         /// present we return that, otherwise we return the 1st element of the ReadOnlyCollection.
         /// </summary>
-        public static T ReturnObject<T>(object collectionOrT) where T : class
+        public static T ReturnObject<T>(object collectionOrT)
+            where T : class
         {
             if (collectionOrT is T t)
             {
@@ -97,9 +106,19 @@ namespace System.Dynamic.Utils
             return ((ReadOnlyCollection<T>)collectionOrT)[0];
         }
 
-        public static void ValidateArgumentTypes(MethodBase method, ExpressionType nodeKind, ref ReadOnlyCollection<Expression> arguments, string? methodParamName)
+        public static void ValidateArgumentTypes(
+            MethodBase method,
+            ExpressionType nodeKind,
+            ref ReadOnlyCollection<Expression> arguments,
+            string? methodParamName
+        )
         {
-            Debug.Assert(nodeKind == ExpressionType.Invoke || nodeKind == ExpressionType.Call || nodeKind == ExpressionType.Dynamic || nodeKind == ExpressionType.New);
+            Debug.Assert(
+                nodeKind == ExpressionType.Invoke
+                    || nodeKind == ExpressionType.Call
+                    || nodeKind == ExpressionType.Dynamic
+                    || nodeKind == ExpressionType.New
+            );
 
             ParameterInfo[] pis = GetParametersForValidation(method, nodeKind);
 
@@ -110,7 +129,15 @@ namespace System.Dynamic.Utils
             {
                 Expression arg = arguments[i];
                 ParameterInfo pi = pis[i];
-                arg = ValidateOneArgument(method, nodeKind, arg, pi, methodParamName, nameof(arguments), i);
+                arg = ValidateOneArgument(
+                    method,
+                    nodeKind,
+                    arg,
+                    pi,
+                    methodParamName,
+                    nameof(arguments),
+                    i
+                );
 
                 if (newArgs == null && arg != arguments[i])
                 {
@@ -131,7 +158,12 @@ namespace System.Dynamic.Utils
             }
         }
 
-        public static void ValidateArgumentCount(MethodBase method, ExpressionType nodeKind, int count, ParameterInfo[] pis)
+        public static void ValidateArgumentCount(
+            MethodBase method,
+            ExpressionType nodeKind,
+            int count,
+            ParameterInfo[] pis
+        )
         {
             if (pis.Length != count)
             {
@@ -151,7 +183,15 @@ namespace System.Dynamic.Utils
             }
         }
 
-        public static Expression ValidateOneArgument(MethodBase method, ExpressionType nodeKind, Expression arguments, ParameterInfo pi, string? methodParamName, string argumentParamName, int index = -1)
+        public static Expression ValidateOneArgument(
+            MethodBase method,
+            ExpressionType nodeKind,
+            Expression arguments,
+            ParameterInfo pi,
+            string? methodParamName,
+            string argumentParamName,
+            int index = -1
+        )
         {
             RequiresCanRead(arguments, argumentParamName, index);
             Type pType = pi.ParameterType;
@@ -169,12 +209,28 @@ namespace System.Dynamic.Utils
                     switch (nodeKind)
                     {
                         case ExpressionType.New:
-                            throw Error.ExpressionTypeDoesNotMatchConstructorParameter(arguments.Type, pType, argumentParamName, index);
+                            throw Error.ExpressionTypeDoesNotMatchConstructorParameter(
+                                arguments.Type,
+                                pType,
+                                argumentParamName,
+                                index
+                            );
                         case ExpressionType.Invoke:
-                            throw Error.ExpressionTypeDoesNotMatchParameter(arguments.Type, pType, argumentParamName, index);
+                            throw Error.ExpressionTypeDoesNotMatchParameter(
+                                arguments.Type,
+                                pType,
+                                argumentParamName,
+                                index
+                            );
                         case ExpressionType.Dynamic:
                         case ExpressionType.Call:
-                            throw Error.ExpressionTypeDoesNotMatchMethodParameter(arguments.Type, pType, method, argumentParamName, index);
+                            throw Error.ExpressionTypeDoesNotMatchMethodParameter(
+                                arguments.Type,
+                                pType,
+                                method,
+                                argumentParamName,
+                                index
+                            );
                         default:
                             throw ContractUtils.Unreachable;
                     }
@@ -223,7 +279,10 @@ namespace System.Dynamic.Utils
             // works consistently for lambdas
             Type quoteable = typeof(LambdaExpression);
 
-            if (TypeUtils.IsSameOrSubclass(quoteable, parameterType) && parameterType.IsInstanceOfType(argument))
+            if (
+                TypeUtils.IsSameOrSubclass(quoteable, parameterType)
+                && parameterType.IsInstanceOfType(argument)
+            )
             {
                 argument = Expression.Quote(argument);
                 return true;
@@ -232,7 +291,10 @@ namespace System.Dynamic.Utils
             return false;
         }
 
-        internal static ParameterInfo[] GetParametersForValidation(MethodBase method, ExpressionType nodeKind)
+        internal static ParameterInfo[] GetParametersForValidation(
+            MethodBase method,
+            ExpressionType nodeKind
+        )
         {
             ParameterInfo[] pis = method.GetParametersCached();
 
@@ -243,7 +305,8 @@ namespace System.Dynamic.Utils
             return pis;
         }
 
-        internal static bool SameElements<T>(ICollection<T>? replacement, IReadOnlyList<T> current) where T : class
+        internal static bool SameElements<T>(ICollection<T>? replacement, IReadOnlyList<T> current)
+            where T : class
         {
             Debug.Assert(current != null);
             if (replacement == current) // Relatively common case, so particularly useful to take the short-circuit.
@@ -259,7 +322,11 @@ namespace System.Dynamic.Utils
             return SameElementsInCollection(replacement, current);
         }
 
-        internal static bool SameElements<T>(ref IEnumerable<T>? replacement, IReadOnlyList<T> current) where T : class
+        internal static bool SameElements<T>(
+            ref IEnumerable<T>? replacement,
+            IReadOnlyList<T> current
+        )
+            where T : class
         {
             Debug.Assert(current != null);
             if (replacement == current) // Relatively common case, so particularly useful to take the short-circuit.
@@ -284,7 +351,11 @@ namespace System.Dynamic.Utils
             return SameElementsInCollection(replacementCol, current);
         }
 
-        private static bool SameElementsInCollection<T>(ICollection<T> replacement, IReadOnlyList<T> current) where T : class
+        private static bool SameElementsInCollection<T>(
+            ICollection<T> replacement,
+            IReadOnlyList<T> current
+        )
+            where T : class
         {
             int count = current.Count;
             if (replacement.Count != count)

@@ -12,7 +12,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.Internal;
 // 2. Doesn't do ValueTask validation using the token
 // 3. Doesn't support usage outside of async/await (doesn't try to capture and restore the execution context)
 // 4. Doesn't use cancellation tokens
-internal class SocketAwaitableEventArgs : SocketAsyncEventArgs, IValueTaskSource<SocketOperationResult>
+internal class SocketAwaitableEventArgs
+    : SocketAsyncEventArgs,
+        IValueTaskSource<SocketOperationResult>
 {
     private static readonly Action<object?> _continuationCompleted = _ => { };
 
@@ -34,7 +36,11 @@ internal class SocketAwaitableEventArgs : SocketAsyncEventArgs, IValueTaskSource
     {
         var c = _continuation;
 
-        if (c != null || (c = Interlocked.CompareExchange(ref _continuation, _continuationCompleted, null)) != null)
+        if (
+            c != null
+            || (c = Interlocked.CompareExchange(ref _continuation, _continuationCompleted, null))
+                != null
+        )
         {
             var continuationState = UserToken;
             UserToken = null;
@@ -63,12 +69,18 @@ internal class SocketAwaitableEventArgs : SocketAsyncEventArgs, IValueTaskSource
 
     public ValueTaskSourceStatus GetStatus(short token)
     {
-        return !ReferenceEquals(_continuation, _continuationCompleted) ? ValueTaskSourceStatus.Pending :
-                SocketError == SocketError.Success ? ValueTaskSourceStatus.Succeeded :
-                ValueTaskSourceStatus.Faulted;
+        return !ReferenceEquals(_continuation, _continuationCompleted)
+                ? ValueTaskSourceStatus.Pending
+            : SocketError == SocketError.Success ? ValueTaskSourceStatus.Succeeded
+            : ValueTaskSourceStatus.Faulted;
     }
 
-    public void OnCompleted(Action<object?> continuation, object? state, short token, ValueTaskSourceOnCompletedFlags flags)
+    public void OnCompleted(
+        Action<object?> continuation,
+        object? state,
+        short token,
+        ValueTaskSourceOnCompletedFlags flags
+    )
     {
         UserToken = state;
         var prevContinuation = Interlocked.CompareExchange(ref _continuation, continuation, null);

@@ -15,11 +15,13 @@ namespace System.ServiceModel.Channels
         ReliableMessagingVersion reliableMessagingVersion;
 
         public TerminateSequence()
-            : base(true)
-        {
-        }
+            : base(true) { }
 
-        public TerminateSequence(ReliableMessagingVersion reliableMessagingVersion, UniqueId identifier, Int64 last)
+        public TerminateSequence(
+            ReliableMessagingVersion reliableMessagingVersion,
+            UniqueId identifier,
+            Int64 last
+        )
             : base(true)
         {
             this.reliableMessagingVersion = reliableMessagingVersion;
@@ -27,8 +29,10 @@ namespace System.ServiceModel.Channels
             this.lastMsgNumber = last;
         }
 
-        public static TerminateSequenceInfo Create(ReliableMessagingVersion reliableMessagingVersion,
-            XmlDictionaryReader reader)
+        public static TerminateSequenceInfo Create(
+            ReliableMessagingVersion reliableMessagingVersion,
+            XmlDictionaryReader reader
+        )
         {
             if (reader == null)
             {
@@ -50,7 +54,10 @@ namespace System.ServiceModel.Channels
                 if (reader.IsStartElement(DXD.Wsrm11Dictionary.LastMsgNumber, wsrmNs))
                 {
                     reader.ReadStartElement();
-                    terminateSequenceInfo.LastMsgNumber = WsrmUtilities.ReadSequenceNumber(reader, false);
+                    terminateSequenceInfo.LastMsgNumber = WsrmUtilities.ReadSequenceNumber(
+                        reader,
+                        false
+                    );
                     reader.ReadEndElement();
                 }
             }

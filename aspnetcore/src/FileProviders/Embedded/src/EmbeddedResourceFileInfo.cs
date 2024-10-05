@@ -28,7 +28,8 @@ public class EmbeddedResourceFileInfo : IFileInfo
         Assembly assembly,
         string resourcePath,
         string name,
-        DateTimeOffset lastModified)
+        DateTimeOffset lastModified
+    )
     {
         _assembly = assembly;
         _resourcePath = resourcePath;

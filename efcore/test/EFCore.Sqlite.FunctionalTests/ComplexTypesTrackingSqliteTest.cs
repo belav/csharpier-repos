@@ -3,7 +3,8 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class ComplexTypesTrackingSqliteTest : ComplexTypesTrackingTestBase<ComplexTypesTrackingSqliteTest.SqliteFixture>
+public class ComplexTypesTrackingSqliteTest
+    : ComplexTypesTrackingTestBase<ComplexTypesTrackingSqliteTest.SqliteFixture>
 {
     public ComplexTypesTrackingSqliteTest(SqliteFixture fixture, ITestOutputHelper testOutputHelper)
         : base(fixture)
@@ -12,15 +13,15 @@ public class ComplexTypesTrackingSqliteTest : ComplexTypesTrackingTestBase<Compl
         fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
     }
 
-    protected override void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-        => facade.UseTransaction(transaction.GetDbTransaction());
+    protected override void UseTransaction(
+        DatabaseFacade facade,
+        IDbContextTransaction transaction
+    ) => facade.UseTransaction(transaction.GetDbTransaction());
 
     public class SqliteFixture : FixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqliteTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 
-        public TestSqlLoggerFactory TestSqlLoggerFactory
-            => (TestSqlLoggerFactory)ListLoggerFactory;
+        public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
     }
 }

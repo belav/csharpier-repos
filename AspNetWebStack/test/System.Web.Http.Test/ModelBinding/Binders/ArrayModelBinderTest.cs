@@ -17,25 +17,35 @@ namespace System.Web.Http.ModelBinding.Binders
             // Arrange
             Mock<IModelBinder> mockIntBinder = new Mock<IModelBinder>();
             HttpActionContext context = ContextUtil.CreateActionContext();
-            context.ControllerContext.Configuration.Services.Replace(typeof(ModelBinderProvider), new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object));
+            context.ControllerContext.Configuration.Services.Replace(
+                typeof(ModelBinderProvider),
+                new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object)
+            );
 
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(int[])),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(int[])
+                ),
                 ModelName = "someName",
                 ValueProvider = new SimpleHttpValueProvider
                 {
                     { "someName[0]", "42" },
-                    { "someName[1]", "84" }
-                }
+                    { "someName[1]", "84" },
+                },
             };
             mockIntBinder
                 .Setup(o => o.BindModel(context, It.IsAny<ModelBindingContext>()))
-                .Returns((HttpActionContext ec, ModelBindingContext mbc) =>
-                {
-                    mbc.Model = mbc.ValueProvider.GetValue(mbc.ModelName).ConvertTo(mbc.ModelType);
-                    return true;
-                });
+                .Returns(
+                    (HttpActionContext ec, ModelBindingContext mbc) =>
+                    {
+                        mbc.Model = mbc
+                            .ValueProvider.GetValue(mbc.ModelName)
+                            .ConvertTo(mbc.ModelType);
+                        return true;
+                    }
+                );
 
             // Act
             bool retVal = new ArrayModelBinder<int>().BindModel(context, bindingContext);
@@ -53,9 +63,12 @@ namespace System.Web.Http.ModelBinding.Binders
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(int[])),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(int[])
+                ),
                 ModelName = "foo",
-                ValueProvider = new SimpleHttpValueProvider()
+                ValueProvider = new SimpleHttpValueProvider(),
             };
 
             ArrayModelBinderProvider binderProvider = new ArrayModelBinderProvider();
@@ -74,12 +87,12 @@ namespace System.Web.Http.ModelBinding.Binders
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(int[])),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(int[])
+                ),
                 ModelName = "foo",
-                ValueProvider = new SimpleHttpValueProvider
-                {
-                    { "foo[0]", "42" },
-                }
+                ValueProvider = new SimpleHttpValueProvider { { "foo[0]", "42" } },
             };
             bindingContext.ModelMetadata.IsReadOnly = true;
 

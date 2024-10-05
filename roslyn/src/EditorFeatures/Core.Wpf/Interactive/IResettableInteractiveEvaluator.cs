@@ -13,6 +13,10 @@ namespace Microsoft.CodeAnalysis.Interactive
     internal interface IResettableInteractiveEvaluator : IInteractiveEvaluator
     {
         InteractiveEvaluatorResetOptions ResetOptions { get; set; }
-        Task SetPathsAsync(ImmutableArray<string> referenceSearchPaths, ImmutableArray<string> sourceSearchPaths, string workingDirectory);
+        Task SetPathsAsync(
+            ImmutableArray<string> referenceSearchPaths,
+            ImmutableArray<string> sourceSearchPaths,
+            string workingDirectory
+        );
     }
 }

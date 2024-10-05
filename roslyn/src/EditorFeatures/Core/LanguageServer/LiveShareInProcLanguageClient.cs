@@ -33,15 +33,27 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
         ExperimentalCapabilitiesProvider experimentalCapabilitiesProvider,
         ILspServiceLoggerFactory lspLoggerFactory,
         IThreadingContext threadingContext,
-        ExportProvider exportProvider) : AbstractInProcLanguageClient(lspServiceProvider, globalOptions, lspLoggerFactory, threadingContext, exportProvider)
+        ExportProvider exportProvider
+    )
+        : AbstractInProcLanguageClient(
+            lspServiceProvider,
+            globalOptions,
+            lspLoggerFactory,
+            threadingContext,
+            exportProvider
+        )
     {
-        private readonly ExperimentalCapabilitiesProvider _experimentalCapabilitiesProvider = experimentalCapabilitiesProvider;
+        private readonly ExperimentalCapabilitiesProvider _experimentalCapabilitiesProvider =
+            experimentalCapabilitiesProvider;
 
-        protected override ImmutableArray<string> SupportedLanguages => ProtocolConstants.RoslynLspLanguages;
+        protected override ImmutableArray<string> SupportedLanguages =>
+            ProtocolConstants.RoslynLspLanguages;
 
         public override ServerCapabilities GetCapabilities(ClientCapabilities clientCapabilities)
         {
-            var isLspEditorEnabled = GlobalOptions.GetOption(LspOptionsStorage.LspEditorFeatureFlag);
+            var isLspEditorEnabled = GlobalOptions.GetOption(
+                LspOptionsStorage.LspEditorFeatureFlag
+            );
 
             // If the preview feature flag to turn on the LSP editor in local scenarios is on, advertise no capabilities for this Live Share
             // LSP server as LSP requests will be serviced by the AlwaysActiveInProcLanguageClient in both local and remote scenarios.
@@ -53,16 +65,20 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
                     {
                         OpenClose = false,
                         Change = TextDocumentSyncKind.None,
-                    }
+                    },
                 };
             }
 
-            var defaultCapabilities = _experimentalCapabilitiesProvider.GetCapabilities(clientCapabilities);
+            var defaultCapabilities = _experimentalCapabilitiesProvider.GetCapabilities(
+                clientCapabilities
+            );
 
             // If the LSP semantic tokens feature flag is enabled, advertise no semantic tokens capabilities for this Live Share
             // LSP server as LSP semantic tokens requests will be serviced by the AlwaysActiveInProcLanguageClient in both local and
             // remote scenarios.
-            var isLspSemanticTokenEnabled = GlobalOptions.GetOption(LspOptionsStorage.LspSemanticTokensFeatureFlag);
+            var isLspSemanticTokenEnabled = GlobalOptions.GetOption(
+                LspOptionsStorage.LspSemanticTokensFeatureFlag
+            );
             if (isLspSemanticTokenEnabled)
             {
                 defaultCapabilities.SemanticTokensOptions = null;
@@ -74,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
             if (!isPullDiagnosticsEnabled)
             {
                 // Pull diagnostics isn't enabled, let the live share server provide pull diagnostics.
-                ((VSInternalServerCapabilities)defaultCapabilities).SupportsDiagnosticRequests = true;
+                ((VSInternalServerCapabilities)defaultCapabilities).SupportsDiagnosticRequests =
+                    true;
             }
 
             return defaultCapabilities;
@@ -85,6 +102,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
         /// </summary>
         public override bool ShowNotificationOnInitializeFailed => true;
 
-        public override WellKnownLspServerKinds ServerKind => WellKnownLspServerKinds.LiveShareLspServer;
+        public override WellKnownLspServerKinds ServerKind =>
+            WellKnownLspServerKinds.LiveShareLspServer;
     }
 }

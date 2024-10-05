@@ -12,7 +12,10 @@ namespace System.Activities
     using System.Runtime;
 
     [Fx.Tag.XamlVisible(false)]
-    public sealed class WorkflowDataContext : CustomTypeDescriptor, INotifyPropertyChanged, IDisposable
+    public sealed class WorkflowDataContext
+        : CustomTypeDescriptor,
+            INotifyPropertyChanged,
+            IDisposable
     {
         ActivityExecutor executor;
         ActivityInstance activityInstance;
@@ -21,7 +24,11 @@ namespace System.Activities
         PropertyDescriptorCollection properties;
         ActivityContext cachedResolutionContext;
 
-        internal WorkflowDataContext(ActivityExecutor executor, ActivityInstance activityInstance, bool includeLocalVariables)
+        internal WorkflowDataContext(
+            ActivityExecutor executor,
+            ActivityInstance activityInstance,
+            bool includeLocalVariables
+        )
         {
             this.executor = executor;
             this.activityInstance = activityInstance;
@@ -29,11 +36,7 @@ namespace System.Activities
             this.properties = CreateProperties();
         }
 
-        internal bool IncludesLocalVariables
-        {
-            get;
-            set;
-        }
+        internal bool IncludesLocalVariables { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -47,7 +50,10 @@ namespace System.Activities
                 ThrowIfEnvironmentDisposed();
                 if (this.cachedResolutionContext == null)
                 {
-                    this.cachedResolutionContext = new ActivityContext(this.activityInstance, this.executor);
+                    this.cachedResolutionContext = new ActivityContext(
+                        this.activityInstance,
+                        this.executor
+                    );
                     this.cachedResolutionContext.AllowChainedEnvironmentAccess = true;
                 }
                 else
@@ -64,7 +70,9 @@ namespace System.Activities
             {
                 if (this.propertyChangedEventHandler == null)
                 {
-                    this.propertyChangedEventHandler = new PropertyChangedEventHandler(this.OnLocationChanged);
+                    this.propertyChangedEventHandler = new PropertyChangedEventHandler(
+                        this.OnLocationChanged
+                    );
                 }
                 return this.propertyChangedEventHandler;
             }
@@ -77,7 +85,9 @@ namespace System.Activities
 
             List<PropertyDescriptorImpl> propertyList = new List<PropertyDescriptorImpl>();
 
-            LocationReferenceEnvironment environment = this.activityInstance.Activity.PublicEnvironment;
+            LocationReferenceEnvironment environment = this.activityInstance
+                .Activity
+                .PublicEnvironment;
             bool isLocalEnvironment = true;
             while (environment != null)
             {
@@ -96,11 +106,13 @@ namespace System.Activities
             return new PropertyDescriptorCollection(propertyList.ToArray(), true);
         }
 
-        void AddProperty(LocationReference reference, Dictionary<string, object> names,
-            List<PropertyDescriptorImpl> propertyList)
+        void AddProperty(
+            LocationReference reference,
+            Dictionary<string, object> names,
+            List<PropertyDescriptorImpl> propertyList
+        )
         {
-            if (!string.IsNullOrEmpty(reference.Name) &&
-                !names.ContainsKey(reference.Name))
+            if (!string.IsNullOrEmpty(reference.Name) && !names.ContainsKey(reference.Name))
             {
                 names.Add(reference.Name, reference);
                 PropertyDescriptorImpl property = new PropertyDescriptorImpl(reference);
@@ -150,7 +162,10 @@ namespace System.Activities
                     }
                     else
                     {
-                        handler(this, new PropertyChangedEventArgs(property.Name + "." + e.PropertyName));
+                        handler(
+                            this,
+                            new PropertyChangedEventArgs(property.Name + "." + e.PropertyName)
+                        );
                     }
                 }
             }
@@ -160,7 +175,9 @@ namespace System.Activities
         {
             if (this.locationMapping != null)
             {
-                foreach (KeyValuePair<Location, PropertyDescriptorImpl> pair in this.locationMapping)
+                foreach (
+                    KeyValuePair<Location, PropertyDescriptorImpl> pair in this.locationMapping
+                )
                 {
                     INotifyPropertyChanged notify = pair.Key as INotifyPropertyChanged;
                     if (notify != null)
@@ -183,7 +200,8 @@ namespace System.Activities
             if (this.activityInstance == null)
             {
                 throw FxTrace.Exception.AsError(
-                    new ObjectDisposedException(this.GetType().FullName, SR.WDCDisposed));
+                    new ObjectDisposedException(this.GetType().FullName, SR.WDCDisposed)
+                );
             }
         }
 
@@ -195,7 +213,8 @@ namespace System.Activities
         class PropertyDescriptorImpl : PropertyDescriptor
         {
             LocationReference reference;
-            // 
+
+            //
 
 
 
@@ -214,7 +233,7 @@ namespace System.Activities
             {
                 get
                 {
-                    // 
+                    //
 
                     return false;
                 }
@@ -222,18 +241,12 @@ namespace System.Activities
 
             public override Type PropertyType
             {
-                get
-                {
-                    return this.reference.Type;
-                }
+                get { return this.reference.Type; }
             }
 
             public LocationReference LocationReference
             {
-                get
-                {
-                    return this.reference;
-                }
+                get { return this.reference; }
             }
 
             public override bool CanResetValue(object component)
@@ -258,14 +271,20 @@ namespace System.Activities
 
             public override void ResetValue(object component)
             {
-                throw FxTrace.Exception.AsError(new NotSupportedException(SR.CannotResetPropertyInDataContext));
+                throw FxTrace.Exception.AsError(
+                    new NotSupportedException(SR.CannotResetPropertyInDataContext)
+                );
             }
 
             public override void SetValue(object component, object value)
             {
                 if (IsReadOnly)
                 {
-                    throw FxTrace.Exception.AsError(new NotSupportedException(SR.PropertyReadOnlyInWorkflowDataContext(this.Name)));
+                    throw FxTrace.Exception.AsError(
+                        new NotSupportedException(
+                            SR.PropertyReadOnlyInWorkflowDataContext(this.Name)
+                        )
+                    );
                 }
 
                 WorkflowDataContext dataContext = (WorkflowDataContext)component;

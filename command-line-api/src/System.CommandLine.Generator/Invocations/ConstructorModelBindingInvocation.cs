@@ -1,15 +1,18 @@
-﻿using Microsoft.CodeAnalysis;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
+using Microsoft.CodeAnalysis;
 
 namespace System.CommandLine.Generator.Invocations
 {
-    internal class ConstructorModelBindingInvocation : DelegateInvocation, IEquatable<ConstructorModelBindingInvocation>
+    internal class ConstructorModelBindingInvocation
+        : DelegateInvocation,
+            IEquatable<ConstructorModelBindingInvocation>
     {
         public ConstructorModelBindingInvocation(
-            IMethodSymbol constructor, 
+            IMethodSymbol constructor,
             ReturnPattern returnPattern,
-            ITypeSymbol delegateType)
+            ITypeSymbol delegateType
+        )
             : base(delegateType, returnPattern, 1)
         {
             Constructor = constructor;
@@ -20,10 +23,18 @@ namespace System.CommandLine.Generator.Invocations
         public override string InvokeContents()
         {
             StringBuilder builder = new();
-            builder.Append($@"
-                var model = new {Constructor.ContainingType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)}(");
-            builder.Append(string.Join(", ", Parameters.Take(Constructor.Parameters.Length)
-                .Select(x => x.GetValueFromContext())));
+            builder.Append(
+                $@"
+                var model = new {Constructor.ContainingType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)}("
+            );
+            builder.Append(
+                string.Join(
+                    ", ",
+                    Parameters
+                        .Take(Constructor.Parameters.Length)
+                        .Select(x => x.GetValueFromContext())
+                )
+            );
             builder.AppendLine(");");
 
             switch (ReturnPattern)
@@ -34,35 +45,49 @@ namespace System.CommandLine.Generator.Invocations
                     builder.Append("var rv = ");
                     break;
             }
-            builder.Append(@"
-                Method.Invoke(model");
+            builder.Append(
+                @"
+                Method.Invoke(model"
+            );
             var remainigParameters = Parameters.Skip(Constructor.Parameters.Length).ToArray();
             if (remainigParameters.Length > 0)
             {
                 builder.Append(", ");
-                builder.Append(string.Join(", ", remainigParameters.Select(x => x.GetValueFromContext())));
+                builder.Append(
+                    string.Join(", ", remainigParameters.Select(x => x.GetValueFromContext()))
+                );
             }
             builder.Append(");");
 
             switch (ReturnPattern)
             {
                 case ReturnPattern.InvocationContextExitCode:
-                    builder.Append(@"
-                return 0;");
+                    builder.Append(
+                        @"
+                return 0;"
+                    );
                     break;
                 case ReturnPattern.FunctionReturnValue:
-                    builder.Append(@"
-                return rv;");
+                    builder.Append(
+                        @"
+                return rv;"
+                    );
                     break;
                 case ReturnPattern.AwaitFunction:
-                    builder.Append(@"
-                await rv;");
-                    builder.Append(@"
-                return 0;");
+                    builder.Append(
+                        @"
+                await rv;"
+                    );
+                    builder.Append(
+                        @"
+                return 0;"
+                    );
                     break;
                 case ReturnPattern.AwaitFunctionReturnValue:
-                    builder.Append(@"
-                return await rv;");
+                    builder.Append(
+                        @"
+                return await rv;"
+                    );
                     break;
             }
 
@@ -71,18 +96,17 @@ namespace System.CommandLine.Generator.Invocations
 
         public override int GetHashCode()
         {
-            return base.GetHashCode() * -1521134295 +
-                SymbolComparer.GetHashCode(Constructor);
+            return base.GetHashCode() * -1521134295 + SymbolComparer.GetHashCode(Constructor);
         }
 
-        public override bool Equals(object? obj)
-            => Equals(obj as ConstructorModelBindingInvocation);
+        public override bool Equals(object? obj) =>
+            Equals(obj as ConstructorModelBindingInvocation);
 
         public bool Equals(ConstructorModelBindingInvocation? other)
         {
-            if (other is null) return false;
-            return base.Equals(other) &&
-                SymbolComparer.Equals(Constructor, other.Constructor);
+            if (other is null)
+                return false;
+            return base.Equals(other) && SymbolComparer.Equals(Constructor, other.Constructor);
         }
     }
 }

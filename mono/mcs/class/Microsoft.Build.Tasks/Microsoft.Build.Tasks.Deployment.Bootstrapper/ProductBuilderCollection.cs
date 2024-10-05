@@ -32,31 +32,30 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.Bootstrapper {
+namespace Microsoft.Build.Tasks.Deployment.Bootstrapper
+{
+    [ClassInterface(ClassInterfaceType.None)]
+    [Guid("D25C0741-99CA-49f7-9460-95E5F25EEF43")]
+    [ComVisible(true)]
+    public class ProductBuilderCollection : IProductBuilderCollection, IEnumerable
+    {
+        List<ProductBuilder> list;
 
-	[ClassInterface (ClassInterfaceType.None)]
-	[Guid ("D25C0741-99CA-49f7-9460-95E5F25EEF43")]
-	[ComVisible (true)]
-	public class ProductBuilderCollection : IProductBuilderCollection, IEnumerable {
+        ProductBuilderCollection()
+        {
+            list = new List<ProductBuilder>();
+        }
 
-		List <ProductBuilder> list;
+        [MonoTODO]
+        public void Add(ProductBuilder builder)
+        {
+            list.Add(builder);
+        }
 
-		ProductBuilderCollection ()
-		{
-			list = new List <ProductBuilder> ();
-		}
-		
-		[MonoTODO]
-		public void Add (ProductBuilder builder)
-		{
-			list.Add (builder);
-		}
-		
-		[MonoTODO]
-		public IEnumerator GetEnumerator ()
-		{
-			return list.GetEnumerator ();
-		}
-	}
+        [MonoTODO]
+        public IEnumerator GetEnumerator()
+        {
+            return list.GetEnumerator();
+        }
+    }
 }
-

@@ -23,8 +23,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.MoveToNamespace
 {
     public abstract partial class AbstractMoveToNamespaceTests : AbstractCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new MoveToNamespaceCodeActionProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new MoveToNamespaceCodeActionProvider();
 
         public async Task TestMoveToNamespaceAsync(
             string markup,
@@ -33,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.MoveToNamespace
             TestParameters testParameters = null,
             string targetNamespace = null,
             bool optionCancelled = false,
-            IReadOnlyDictionary<string, string> expectedSymbolChanges = null)
+            IReadOnlyDictionary<string, string> expectedSymbolChanges = null
+        )
         {
             testParameters ??= new TestParameters();
 
@@ -51,11 +54,19 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.MoveToNamespace
                     testState.InvocationDocument,
                     testState.TestInvocationDocument.SelectedSpans.Single(),
                     CodeActionOptions.DefaultProvider,
-                    CancellationToken.None);
+                    CancellationToken.None
+                );
 
                 var operationTasks = actions
                     .Cast<AbstractMoveToNamespaceCodeAction>()
-                    .Select(action => action.GetOperationsAsync(workspace.CurrentSolution, action.GetOptions(CancellationToken.None), CodeAnalysisProgress.None, CancellationToken.None));
+                    .Select(action =>
+                        action.GetOperationsAsync(
+                            workspace.CurrentSolution,
+                            action.GetOptions(CancellationToken.None),
+                            CodeAnalysisProgress.None,
+                            CancellationToken.None
+                        )
+                    );
 
                 foreach (var task in operationTasks)
                 {
@@ -69,7 +80,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.MoveToNamespace
                     {
                         Assert.NotEmpty(operations);
                         var renamedCodeActionsOperations = operations
-                            .Where(operation => operation is TestSymbolRenamedCodeActionOperationFactoryWorkspaceService.Operation)
+                            .Where(operation =>
+                                operation
+                                is TestSymbolRenamedCodeActionOperationFactoryWorkspaceService.Operation
+                            )
                             .Cast<TestSymbolRenamedCodeActionOperationFactoryWorkspaceService.Operation>()
                             .ToImmutableArray();
 
@@ -77,10 +91,15 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.MoveToNamespace
 
                         Assert.NotNull(expectedSymbolChanges);
 
-                        var checkedCodeActions = new HashSet<TestSymbolRenamedCodeActionOperationFactoryWorkspaceService.Operation>(renamedCodeActionsOperations.Length);
+                        var checkedCodeActions =
+                            new HashSet<TestSymbolRenamedCodeActionOperationFactoryWorkspaceService.Operation>(
+                                renamedCodeActionsOperations.Length
+                            );
                         foreach (var (originalName, newName) in expectedSymbolChanges)
                         {
-                            var codeAction = renamedCodeActionsOperations.FirstOrDefault(a => a._symbol.ToDisplayString() == originalName);
+                            var codeAction = renamedCodeActionsOperations.FirstOrDefault(a =>
+                                a._symbol.ToDisplayString() == originalName
+                            );
                             Assert.Equal(newName, codeAction?._newName);
                             Assert.False(checkedCodeActions.Contains(codeAction));
 
@@ -91,7 +110,11 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.MoveToNamespace
 
                 if (!optionCancelled && !string.IsNullOrEmpty(targetNamespace))
                 {
-                    await TestInRegularAndScriptAsync(markup, expectedMarkup, options: testParameters.options);
+                    await TestInRegularAndScriptAsync(
+                        markup,
+                        expectedMarkup,
+                        options: testParameters.options
+                    );
                 }
             }
             else
@@ -100,7 +123,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.MoveToNamespace
             }
         }
 
-        public async Task TestMoveToNamespaceAnalysisAsync(string markup, string expectedNamespaceName)
+        public async Task TestMoveToNamespaceAnalysisAsync(
+            string markup,
+            string expectedNamespaceName
+        )
         {
             var workspace = CreateWorkspaceFromOptions(markup, new TestParameters());
             using var testState = new TestState(workspace);
@@ -108,13 +134,15 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.MoveToNamespace
             var analysis = await testState.MoveToNamespaceService.AnalyzeTypeAtPositionAsync(
                 testState.InvocationDocument,
                 testState.TestInvocationDocument.SelectedSpans.Single().Start,
-                CancellationToken.None);
+                CancellationToken.None
+            );
 
             Assert.True(analysis.CanPerform);
             Assert.Equal(expectedNamespaceName, analysis.OriginalNamespace);
             Assert.NotEmpty(analysis.Namespaces);
         }
 
-        public Task TestCancelledOption(string markup) => TestMoveToNamespaceAsync(markup, expectedMarkup: markup, optionCancelled: true);
+        public Task TestCancelledOption(string markup) =>
+            TestMoveToNamespaceAsync(markup, expectedMarkup: markup, optionCancelled: true);
     }
 }

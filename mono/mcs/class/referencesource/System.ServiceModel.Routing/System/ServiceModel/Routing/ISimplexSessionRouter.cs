@@ -8,7 +8,10 @@ namespace System.ServiceModel.Routing
     using System.ServiceModel;
     using System.ServiceModel.Channels;
 
-    [ServiceContract(Namespace = RoutingUtilities.RoutingNamespace, SessionMode = SessionMode.Required)]
+    [ServiceContract(
+        Namespace = RoutingUtilities.RoutingNamespace,
+        SessionMode = SessionMode.Required
+    )]
     public interface ISimplexSessionRouter
     {
         [OperationContract(AsyncPattern = true, IsOneWay = true, Action = "*")]

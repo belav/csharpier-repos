@@ -4,15 +4,15 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Util {
+namespace System.Web.Util
+{
     using System;
 
     // Used to perform some post-processing that needs to take place around a callback
     // in order to set up the appropriate synchronization primitives.
 
-    internal interface ISyncContextLock {
-
+    internal interface ISyncContextLock
+    {
         void Leave();
-
     }
 }

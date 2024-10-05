@@ -1,19 +1,19 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // This class represents the Ole Automation binder.
 
 // #define DISPLAY_DEBUG_INFO
 
-namespace System {
-
+namespace System
+{
     using System;
-    using System.Runtime.InteropServices;
     using System.Reflection;
+    using System.Runtime.InteropServices;
     using Microsoft.Win32;
-    using CultureInfo = System.Globalization.CultureInfo;    
+    using CultureInfo = System.Globalization.CultureInfo;
 
     // Made serializable in anticipation of this class eventually having state.
     [Serializable]
@@ -27,16 +27,20 @@ namespace System {
             Variant myValue = new Variant(value);
             if (cultureInfo == null)
                 cultureInfo = CultureInfo.CurrentCulture;
-                
-    #if DISPLAY_DEBUG_INFO      
-            Console.WriteLine("In OleAutBinder::ChangeType converting variant of type: {0} to type: {1}", myValue.VariantType, type.Name);
-    #endif
+
+#if DISPLAY_DEBUG_INFO
+            Console.WriteLine(
+                "In OleAutBinder::ChangeType converting variant of type: {0} to type: {1}",
+                myValue.VariantType,
+                type.Name
+            );
+#endif
 
             if (type.IsByRef)
             {
-    #if DISPLAY_DEBUG_INFO      
+#if DISPLAY_DEBUG_INFO
                 Console.WriteLine("Stripping byref from the type to convert to.");
-    #endif      
+#endif
                 type = type.GetElementType();
             }
 
@@ -44,9 +48,9 @@ namespace System {
             // need the OLEAUT change type, we can just use the normal COM+ mechanisms.
             if (!type.IsPrimitive && type.IsInstanceOfType(value))
             {
-    #if DISPLAY_DEBUG_INFO      
+#if DISPLAY_DEBUG_INFO
                 Console.WriteLine("Source variant can be assigned to destination type");
-    #endif      
+#endif
                 return value;
             }
 
@@ -55,9 +59,9 @@ namespace System {
             // Handle converting primitives to enums.
             if (type.IsEnum && srcType.IsPrimitive)
             {
-    #if DISPLAY_DEBUG_INFO      
+#if DISPLAY_DEBUG_INFO
                 Console.WriteLine("Converting primitive to enum");
-    #endif      
+#endif
                 return Enum.Parse(type, value.ToString());
             }
 
@@ -65,7 +69,7 @@ namespace System {
             // Special case the convertion from DBNull.
             if (srcType == typeof(DBNull))
             {
-                // The requested type is a DBNull so no convertion is required.            
+                // The requested type is a DBNull so no convertion is required.
                 if (type == typeof(DBNull))
                     return value;
 
@@ -73,7 +77,7 @@ namespace System {
                 // have requested (via a CDCR) that DBNull be convertible to null.
                 // We don't however allow this when converting to a value class, since null
                 // doesn't make sense for these, or to object since this would change existing
-                // semantics.               
+                // semantics.
                 if ((type.IsClass && type != typeof(Object)) || type.IsInterface)
                     return null;
             }
@@ -82,33 +86,38 @@ namespace System {
             // Use the OA variant lib to convert primitive types.
             try
             {
-#if DISPLAY_DEBUG_INFO      
+#if DISPLAY_DEBUG_INFO
                 Console.WriteLine("Using OAVariantLib.ChangeType() to do the conversion");
-#endif      
+#endif
                 // Specify the LocalBool flag to have BOOL values converted to local language rather
                 // than 0 or -1.
-                Object RetObj = OAVariantLib.ChangeType(myValue, type, OAVariantLib.LocalBool, cultureInfo).ToObject();
+                Object RetObj = OAVariantLib
+                    .ChangeType(myValue, type, OAVariantLib.LocalBool, cultureInfo)
+                    .ToObject();
 
-#if DISPLAY_DEBUG_INFO      
-                Console.WriteLine("Object returned from ChangeType is of type: " + RetObj.GetType().Name);
+#if DISPLAY_DEBUG_INFO
+                Console.WriteLine(
+                    "Object returned from ChangeType is of type: " + RetObj.GetType().Name
+                );
 #endif
 
                 return RetObj;
             }
-#if DISPLAY_DEBUG_INFO      
-            catch(NotSupportedException e)
+#if DISPLAY_DEBUG_INFO
+            catch (NotSupportedException e)
 #else
-            catch(NotSupportedException)
-#endif      
+            catch (NotSupportedException)
+#endif
             {
-#if DISPLAY_DEBUG_INFO      
+#if DISPLAY_DEBUG_INFO
                 Console.Write("Exception thrown: ");
                 Console.WriteLine(e);
-#endif      
-                throw new COMException(Environment.GetResourceString("Interop.COM_TypeMismatch"), unchecked((int)0x80020005));
+#endif
+                throw new COMException(
+                    Environment.GetResourceString("Interop.COM_TypeMismatch"),
+                    unchecked((int)0x80020005)
+                );
             }
         }
-        
-        
     }
 }

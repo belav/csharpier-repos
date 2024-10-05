@@ -12,9 +12,7 @@ namespace System.Web.Mvc
     public class ValidatableObjectAdapter : ModelValidator
     {
         public ValidatableObjectAdapter(ModelMetadata metadata, ControllerContext context)
-            : base(metadata, context)
-        {
-        }
+            : base(metadata, context) { }
 
         public override IEnumerable<ModelValidationResult> Validate(object container)
         {
@@ -35,14 +33,18 @@ namespace System.Web.Mvc
                         CultureInfo.CurrentCulture,
                         MvcResources.ValidatableObjectAdapter_IncompatibleType,
                         typeof(IValidatableObject).FullName,
-                        model.GetType().FullName));
+                        model.GetType().FullName
+                    )
+                );
             }
 
             ValidationContext validationContext = new ValidationContext(validatable, null, null);
             return ConvertResults(validatable.Validate(validationContext));
         }
 
-        private static IEnumerable<ModelValidationResult> ConvertResults(IEnumerable<ValidationResult> results)
+        private static IEnumerable<ModelValidationResult> ConvertResults(
+            IEnumerable<ValidationResult> results
+        )
         {
             foreach (ValidationResult result in results)
             {
@@ -56,7 +58,11 @@ namespace System.Web.Mvc
                     {
                         foreach (string memberName in result.MemberNames)
                         {
-                            yield return new ModelValidationResult { Message = result.ErrorMessage, MemberName = memberName };
+                            yield return new ModelValidationResult
+                            {
+                                Message = result.ErrorMessage,
+                                MemberName = memberName,
+                            };
                         }
                     }
                 }

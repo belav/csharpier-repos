@@ -21,9 +21,7 @@ public class ControllerModel : ICommonModel, IFilterModel, IApiExplorerModel
     /// </summary>
     /// <param name="controllerType">The type of the controller.</param>
     /// <param name="attributes">The attributes.</param>
-    public ControllerModel(
-        TypeInfo controllerType,
-        IReadOnlyList<object> attributes)
+    public ControllerModel(TypeInfo controllerType, IReadOnlyList<object> attributes)
     {
         ArgumentNullException.ThrowIfNull(controllerType);
         ArgumentNullException.ThrowIfNull(attributes);
@@ -57,14 +55,20 @@ public class ControllerModel : ICommonModel, IFilterModel, IApiExplorerModel
         // These are just metadata, safe to create new collections
         Attributes = new List<object>(other.Attributes);
         Filters = new List<IFilterMetadata>(other.Filters);
-        RouteValues = new Dictionary<string, string?>(other.RouteValues, StringComparer.OrdinalIgnoreCase);
+        RouteValues = new Dictionary<string, string?>(
+            other.RouteValues,
+            StringComparer.OrdinalIgnoreCase
+        );
         Properties = new Dictionary<object, object?>(other.Properties);
 
         // Make a deep copy of other 'model' types.
-        Actions = new List<ActionModel>(other.Actions.Select(a => new ActionModel(a) { Controller = this }));
+        Actions = new List<ActionModel>(
+            other.Actions.Select(a => new ActionModel(a) { Controller = this })
+        );
         ApiExplorer = new ApiExplorerModel(other.ApiExplorer);
-        ControllerProperties =
-            new List<PropertyModel>(other.ControllerProperties.Select(p => new PropertyModel(p) { Controller = this }));
+        ControllerProperties = new List<PropertyModel>(
+            other.ControllerProperties.Select(p => new PropertyModel(p) { Controller = this })
+        );
         Selectors = new List<SelectorModel>(other.Selectors.Select(s => new SelectorModel(s)));
     }
 

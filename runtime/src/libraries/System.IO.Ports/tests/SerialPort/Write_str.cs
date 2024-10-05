@@ -39,7 +39,6 @@ namespace System.IO.Ports.Tests
             VerifyWrite(new UTF8Encoding(), ENCODING_STRING_SIZE);
         }
 
-
         [ConditionalFact(nameof(HasLoopbackOrNullModem))]
         public void UTF32Encoding()
         {
@@ -57,7 +56,11 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void NullString()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 Debug.WriteLine("Verifying Write with a null string");
                 com.Open();
@@ -66,9 +69,7 @@ namespace System.IO.Ports.Tests
                 {
                     com.Write(null);
                 }
-                catch (ArgumentNullException)
-                {
-                }
+                catch (ArgumentNullException) { }
             }
         }
 
@@ -95,7 +96,9 @@ namespace System.IO.Ports.Tests
             using (SerialPort com1 = TCSupport.InitFirstSerialPort())
             using (SerialPort com2 = TCSupport.InitSecondSerialPort(com1))
             {
-                Debug.WriteLine("Verifying Write with an string containing only the null character");
+                Debug.WriteLine(
+                    "Verifying Write with an string containing only the null character"
+                );
 
                 com1.Open();
 
@@ -126,7 +129,10 @@ namespace System.IO.Ports.Tests
             using (SerialPort com1 = TCSupport.InitFirstSerialPort())
             using (SerialPort com2 = TCSupport.InitSecondSerialPort(com1))
             {
-                string stringToWrite = TCSupport.GetRandomString(strSize, TCSupport.CharacterOptions.Surrogates);
+                string stringToWrite = TCSupport.GetRandomString(
+                    strSize,
+                    TCSupport.CharacterOptions.Surrogates
+                );
 
                 com1.Encoding = encoding;
                 com1.Open();
@@ -143,10 +149,16 @@ namespace System.IO.Ports.Tests
             VerifyWriteStr(com1, com2, stringToWrite, DEFAULT_NUM_WRITES);
         }
 
-        private void VerifyWriteStr(SerialPort com1, SerialPort com2, string stringToWrite, int numWrites)
+        private void VerifyWriteStr(
+            SerialPort com1,
+            SerialPort com2,
+            string stringToWrite,
+            int numWrites
+        )
         {
             char[] actualChars;
-            byte[] expectedBytes, actualBytes;
+            byte[] expectedBytes,
+                actualBytes;
             int byteRead;
             int index = 0;
 
@@ -191,8 +203,11 @@ namespace System.IO.Ports.Tests
 
             if (actualChars.Length != expectedChars.Length * numWrites)
             {
-                Fail("ERROR!!!: Expected to read {0} chars actually read {1}", expectedChars.Length * numWrites,
-                    actualChars.Length);
+                Fail(
+                    "ERROR!!!: Expected to read {0} chars actually read {1}",
+                    expectedChars.Length * numWrites,
+                    actualChars.Length
+                );
             }
             else
             {
@@ -203,8 +218,12 @@ namespace System.IO.Ports.Tests
                     {
                         if (expectedChars[i] != actualChars[i + expectedChars.Length * j])
                         {
-                            Fail("ERROR!!!: Expected to read {0}  actual read {1} at {2}", (int)expectedChars[i],
-                                (int)actualChars[i + expectedChars.Length * j], i);
+                            Fail(
+                                "ERROR!!!: Expected to read {0}  actual read {1} at {2}",
+                                (int)expectedChars[i],
+                                (int)actualChars[i + expectedChars.Length * j],
+                                i
+                            );
                         }
                     }
                 }
@@ -217,8 +236,12 @@ namespace System.IO.Ports.Tests
                 {
                     if (expectedBytes[i] != actualBytes[i + expectedBytes.Length * j])
                     {
-                        Fail("ERROR!!!: Expected to read byte {0}  actual read {1} at {2}", (int)expectedBytes[i],
-                            (int)actualBytes[i + expectedBytes.Length * j], i);
+                        Fail(
+                            "ERROR!!!: Expected to read byte {0}  actual read {1} at {2}",
+                            (int)expectedBytes[i],
+                            (int)actualBytes[i + expectedBytes.Length * j],
+                            i
+                        );
                     }
                 }
             }

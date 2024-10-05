@@ -30,5 +30,8 @@ internal sealed class DelegateHealthCheck : IHealthCheck
     /// <param name="context">A context object associated with the current execution.</param>
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> that can be used to cancel the health check.</param>
     /// <returns>A <see cref="Task{HealthCheckResult}"/> that completes when the health check has finished, yielding the status of the component being checked.</returns>
-    public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default) => _check(cancellationToken);
+    public Task<HealthCheckResult> CheckHealthAsync(
+        HealthCheckContext context,
+        CancellationToken cancellationToken = default
+    ) => _check(cancellationToken);
 }

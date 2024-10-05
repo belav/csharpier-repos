@@ -22,15 +22,16 @@ internal sealed class JsonConverterFactoryForEnum : JsonConverterFactory
         return typeToConvert.IsEnum;
     }
 
-    public override JsonConverter CreateConverter(
-        Type typeToConvert, JsonSerializerOptions options)
+    public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
     {
-        var converter = (JsonConverter)Activator.CreateInstance(
-            typeof(EnumConverter<>).MakeGenericType(new Type[] { typeToConvert }),
-            BindingFlags.Instance | BindingFlags.Public,
-            binder: null,
-            args: new object[] { _context },
-            culture: null)!;
+        var converter = (JsonConverter)
+            Activator.CreateInstance(
+                typeof(EnumConverter<>).MakeGenericType(new Type[] { typeToConvert }),
+                BindingFlags.Instance | BindingFlags.Public,
+                binder: null,
+                args: new object[] { _context },
+                culture: null
+            )!;
 
         return converter;
     }

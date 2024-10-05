@@ -15,8 +15,12 @@ namespace System.Security.Cryptography
     /// </summary>
     public sealed class RSASignaturePadding : IEquatable<RSASignaturePadding>
     {
-        private static readonly RSASignaturePadding s_pkcs1 = new RSASignaturePadding(RSASignaturePaddingMode.Pkcs1);
-        private static readonly RSASignaturePadding s_pss = new RSASignaturePadding(RSASignaturePaddingMode.Pss);
+        private static readonly RSASignaturePadding s_pkcs1 = new RSASignaturePadding(
+            RSASignaturePaddingMode.Pkcs1
+        );
+        private static readonly RSASignaturePadding s_pss = new RSASignaturePadding(
+            RSASignaturePaddingMode.Pss
+        );
 
         private readonly RSASignaturePaddingMode _mode;
 

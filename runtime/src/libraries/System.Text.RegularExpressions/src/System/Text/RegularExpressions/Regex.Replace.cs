@@ -18,19 +18,34 @@ namespace System.Text.RegularExpressions
         /// Replaces all occurrences of the pattern with the <paramref name="replacement"/> pattern, starting at
         /// the first character in the input string.
         /// </summary>
-        public static string Replace(string input, [StringSyntax(StringSyntaxAttribute.Regex)] string pattern, string replacement) =>
-            RegexCache.GetOrAdd(pattern).Replace(input, replacement);
+        public static string Replace(
+            string input,
+            [StringSyntax(StringSyntaxAttribute.Regex)] string pattern,
+            string replacement
+        ) => RegexCache.GetOrAdd(pattern).Replace(input, replacement);
 
         /// <summary>
         /// Replaces all occurrences of
         /// the <paramref name="pattern "/>with the <paramref name="replacement "/>
         /// pattern, starting at the first character in the input string.
         /// </summary>
-        public static string Replace(string input, [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern, string replacement, RegexOptions options) =>
-            RegexCache.GetOrAdd(pattern, options, s_defaultMatchTimeout).Replace(input, replacement);
+        public static string Replace(
+            string input,
+            [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern,
+            string replacement,
+            RegexOptions options
+        ) =>
+            RegexCache
+                .GetOrAdd(pattern, options, s_defaultMatchTimeout)
+                .Replace(input, replacement);
 
-        public static string Replace(string input, [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern, string replacement, RegexOptions options, TimeSpan matchTimeout) =>
-            RegexCache.GetOrAdd(pattern, options, matchTimeout).Replace(input, replacement);
+        public static string Replace(
+            string input,
+            [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern,
+            string replacement,
+            RegexOptions options,
+            TimeSpan matchTimeout
+        ) => RegexCache.GetOrAdd(pattern, options, matchTimeout).Replace(input, replacement);
 
         /// <summary>
         /// Replaces all occurrences of the previously defined pattern with the
@@ -80,27 +95,46 @@ namespace System.Text.RegularExpressions
 
             // Gets the weakly cached replacement helper or creates one if there isn't one already,
             // then uses it to perform the replace.
-            return
-                RegexReplacement.GetOrCreate(RegexReplacementWeakReference, replacement, caps!, capsize, capnames!, roptions).
-                Replace(this, input, count, startat);
+            return RegexReplacement
+                .GetOrCreate(
+                    RegexReplacementWeakReference,
+                    replacement,
+                    caps!,
+                    capsize,
+                    capnames!,
+                    roptions
+                )
+                .Replace(this, input, count, startat);
         }
 
         /// <summary>
         /// Replaces all occurrences of the <paramref name="pattern"/> with the recent
         /// replacement pattern.
         /// </summary>
-        public static string Replace(string input, [StringSyntax(StringSyntaxAttribute.Regex)] string pattern, MatchEvaluator evaluator) =>
-            RegexCache.GetOrAdd(pattern).Replace(input, evaluator);
+        public static string Replace(
+            string input,
+            [StringSyntax(StringSyntaxAttribute.Regex)] string pattern,
+            MatchEvaluator evaluator
+        ) => RegexCache.GetOrAdd(pattern).Replace(input, evaluator);
 
         /// <summary>
         /// Replaces all occurrences of the <paramref name="pattern"/> with the recent
         /// replacement pattern, starting at the first character.
         /// </summary>
-        public static string Replace(string input, [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern, MatchEvaluator evaluator, RegexOptions options) =>
-            RegexCache.GetOrAdd(pattern, options, s_defaultMatchTimeout).Replace(input, evaluator);
+        public static string Replace(
+            string input,
+            [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern,
+            MatchEvaluator evaluator,
+            RegexOptions options
+        ) => RegexCache.GetOrAdd(pattern, options, s_defaultMatchTimeout).Replace(input, evaluator);
 
-        public static string Replace(string input, [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern, MatchEvaluator evaluator, RegexOptions options, TimeSpan matchTimeout) =>
-            RegexCache.GetOrAdd(pattern, options, matchTimeout).Replace(input, evaluator);
+        public static string Replace(
+            string input,
+            [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern,
+            MatchEvaluator evaluator,
+            RegexOptions options,
+            TimeSpan matchTimeout
+        ) => RegexCache.GetOrAdd(pattern, options, matchTimeout).Replace(input, evaluator);
 
         /// <summary>
         /// Replaces all occurrences of the previously defined pattern with the recent
@@ -154,7 +188,13 @@ namespace System.Text.RegularExpressions
         /// The right-to-left case is split out because StringBuilder
         /// doesn't handle right-to-left string building directly very well.
         /// </summary>
-        private static string Replace(MatchEvaluator evaluator, Regex regex, string input, int count, int startat)
+        private static string Replace(
+            MatchEvaluator evaluator,
+            Regex regex,
+            string input,
+            int count,
+            int startat
+        )
         {
             if (evaluator is null)
             {
@@ -162,11 +202,17 @@ namespace System.Text.RegularExpressions
             }
             if (count < -1)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.CountTooSmall);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.count,
+                    ExceptionResource.CountTooSmall
+                );
             }
             if ((uint)startat > (uint)input.Length)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.startat, ExceptionResource.BeginIndexNotNegative);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.startat,
+                    ExceptionResource.BeginIndexNotNegative
+                );
             }
 
             if (count == 0)
@@ -174,17 +220,41 @@ namespace System.Text.RegularExpressions
                 return input;
             }
 
-            var state = (segments: new StructListBuilder<ReadOnlyMemory<char>>(), evaluator, prevat: 0, input, count);
+            var state = (
+                segments: new StructListBuilder<ReadOnlyMemory<char>>(),
+                evaluator,
+                prevat: 0,
+                input,
+                count
+            );
 
             if (!regex.RightToLeft)
             {
-                regex.RunAllMatchesWithCallback(input, startat, ref state, static (ref (StructListBuilder<ReadOnlyMemory<char>> segments, MatchEvaluator evaluator, int prevat, string input, int count) state, Match match) =>
-                {
-                    state.segments.Add(state.input.AsMemory(state.prevat, match.Index - state.prevat));
-                    state.prevat = match.Index + match.Length;
-                    state.segments.Add(state.evaluator(match).AsMemory());
-                    return --state.count != 0;
-                }, RegexRunnerMode.FullMatchRequired, reuseMatchObject: false);
+                regex.RunAllMatchesWithCallback(
+                    input,
+                    startat,
+                    ref state,
+                    static (
+                        ref (
+                            StructListBuilder<ReadOnlyMemory<char>> segments,
+                            MatchEvaluator evaluator,
+                            int prevat,
+                            string input,
+                            int count
+                        ) state,
+                        Match match
+                    ) =>
+                    {
+                        state.segments.Add(
+                            state.input.AsMemory(state.prevat, match.Index - state.prevat)
+                        );
+                        state.prevat = match.Index + match.Length;
+                        state.segments.Add(state.evaluator(match).AsMemory());
+                        return --state.count != 0;
+                    },
+                    RegexRunnerMode.FullMatchRequired,
+                    reuseMatchObject: false
+                );
 
                 if (state.segments.Count == 0)
                 {
@@ -197,13 +267,34 @@ namespace System.Text.RegularExpressions
             {
                 state.prevat = input.Length;
 
-                regex.RunAllMatchesWithCallback(input, startat, ref state, static (ref (StructListBuilder<ReadOnlyMemory<char>> segments, MatchEvaluator evaluator, int prevat, string input, int count) state, Match match) =>
-                {
-                    state.segments.Add(state.input.AsMemory(match.Index + match.Length, state.prevat - match.Index - match.Length));
-                    state.prevat = match.Index;
-                    state.segments.Add(state.evaluator(match).AsMemory());
-                    return --state.count != 0;
-                }, RegexRunnerMode.FullMatchRequired, reuseMatchObject: false);
+                regex.RunAllMatchesWithCallback(
+                    input,
+                    startat,
+                    ref state,
+                    static (
+                        ref (
+                            StructListBuilder<ReadOnlyMemory<char>> segments,
+                            MatchEvaluator evaluator,
+                            int prevat,
+                            string input,
+                            int count
+                        ) state,
+                        Match match
+                    ) =>
+                    {
+                        state.segments.Add(
+                            state.input.AsMemory(
+                                match.Index + match.Length,
+                                state.prevat - match.Index - match.Length
+                            )
+                        );
+                        state.prevat = match.Index;
+                        state.segments.Add(state.evaluator(match).AsMemory());
+                        return --state.count != 0;
+                    },
+                    RegexRunnerMode.FullMatchRequired,
+                    reuseMatchObject: false
+                );
 
                 if (state.segments.Count == 0)
                 {
@@ -218,7 +309,9 @@ namespace System.Text.RegularExpressions
         }
 
         /// <summary>Creates a string from all the segments in the builder and then disposes of the builder.</summary>
-        internal static unsafe string SegmentsToStringAndDispose(ref StructListBuilder<ReadOnlyMemory<char>> segments)
+        internal static unsafe string SegmentsToStringAndDispose(
+            ref StructListBuilder<ReadOnlyMemory<char>> segments
+        )
         {
             Span<ReadOnlyMemory<char>> span = segments.AsSpan();
 
@@ -229,16 +322,20 @@ namespace System.Text.RegularExpressions
             }
 
             ReadOnlySpan<ReadOnlyMemory<char>> tmpSpan = span; // avoid address exposing the span and impacting the other code in the method that uses it
-            string result = string.Create(length, (IntPtr)(&tmpSpan), static (dest, spanPtr) =>
-            {
-                Span<ReadOnlyMemory<char>> span = *(Span<ReadOnlyMemory<char>>*)spanPtr;
-                for (int i = 0; i < span.Length; i++)
+            string result = string.Create(
+                length,
+                (IntPtr)(&tmpSpan),
+                static (dest, spanPtr) =>
                 {
-                    ReadOnlySpan<char> segment = span[i].Span;
-                    segment.CopyTo(dest);
-                    dest = dest.Slice(segment.Length);
+                    Span<ReadOnlyMemory<char>> span = *(Span<ReadOnlyMemory<char>>*)spanPtr;
+                    for (int i = 0; i < span.Length; i++)
+                    {
+                        ReadOnlySpan<char> segment = span[i].Span;
+                        segment.CopyTo(dest);
+                        dest = dest.Slice(segment.Length);
+                    }
                 }
-            });
+            );
 
             segments.Dispose();
 

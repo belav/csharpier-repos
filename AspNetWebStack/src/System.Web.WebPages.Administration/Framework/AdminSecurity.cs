@@ -16,10 +16,20 @@ namespace System.Web.WebPages.Administration
         private const string AdminUserNameToken = "ADMIN";
 
         // Bug941370: Renamed the file to .config to prevent IIS6 from serving this files.
-        internal static readonly string AdminPasswordFile = VirtualPathUtility.Combine(SiteAdmin.AdminSettingsFolder, "Password.config");
-        internal static readonly string TemporaryPasswordFile = VirtualPathUtility.Combine(SiteAdmin.AdminSettingsFolder, "_Password.config");
+        internal static readonly string AdminPasswordFile = VirtualPathUtility.Combine(
+            SiteAdmin.AdminSettingsFolder,
+            "Password.config"
+        );
+        internal static readonly string TemporaryPasswordFile = VirtualPathUtility.Combine(
+            SiteAdmin.AdminSettingsFolder,
+            "_Password.config"
+        );
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "We catch all exceptions to prevent any decryption failure results from being exposed.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "We catch all exceptions to prevent any decryption failure results from being exposed."
+        )]
         internal static bool IsAuthenticated(HttpRequestBase request)
         {
             HttpCookie authCookie = request.Cookies[AuthCookieName];
@@ -47,7 +57,9 @@ namespace System.Web.WebPages.Administration
             FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
 
             // Ensure that the ticket hasn't expired and that the custom UserData string is our AdminUserNameToken
-            return !ticket.Expired && ticket.UserData != null && ticket.UserData.Equals(AdminUserNameToken);
+            return !ticket.Expired
+                && ticket.UserData != null
+                && ticket.UserData.Equals(AdminUserNameToken);
         }
 
         internal static void SetAuthCookie(HttpResponseBase response)
@@ -66,14 +78,16 @@ namespace System.Web.WebPages.Administration
         {
             // Create a new forms auth ticket for the admin section
             // Add the admin user name as user data so that we distinguish between a regular
-            // ticket issued by ASP.NET's auth system versus our own            
-            var ticket = new FormsAuthenticationTicket(2,
-                                                       AdminUserNameToken,
-                                                       DateTime.Now,
-                                                       DateTime.Now.Add(FormsAuthentication.Timeout),
-                                                       false,
-                                                       AdminUserNameToken,
-                                                       FormsAuthentication.FormsCookiePath);
+            // ticket issued by ASP.NET's auth system versus our own
+            var ticket = new FormsAuthenticationTicket(
+                2,
+                AdminUserNameToken,
+                DateTime.Now,
+                DateTime.Now.Add(FormsAuthentication.Timeout),
+                false,
+                AdminUserNameToken,
+                FormsAuthentication.FormsCookiePath
+            );
 
             // Encrypt the ticket and create the cookie
             string encryptedValue = FormsAuthentication.Encrypt(ticket);
@@ -133,7 +147,10 @@ namespace System.Web.WebPages.Administration
             return File.OpenWrite(passwordFilePath);
         }
 
-        internal static bool SaveTemporaryPassword(string password, Func<Stream> getPasswordFileStream)
+        internal static bool SaveTemporaryPassword(
+            string password,
+            Func<Stream> getPasswordFileStream
+        )
         {
             Stream stream = null;
             try
@@ -158,12 +175,17 @@ namespace System.Web.WebPages.Administration
 
         internal static bool CheckPassword(string password)
         {
-            return CheckPassword(password, () =>
-            {
-                VirtualFile passwordFile = HostingEnvironment.VirtualPathProvider.GetFile(AdminPasswordFile);
-                Debug.Assert(passwordFile != null, "password file should not be null");
-                return passwordFile.Open();
-            });
+            return CheckPassword(
+                password,
+                () =>
+                {
+                    VirtualFile passwordFile = HostingEnvironment.VirtualPathProvider.GetFile(
+                        AdminPasswordFile
+                    );
+                    Debug.Assert(passwordFile != null, "password file should not be null");
+                    return passwordFile.Open();
+                }
+            );
         }
 
         internal static bool CheckPassword(string password, Func<Stream> getPasswordFileStream)
@@ -181,15 +203,23 @@ namespace System.Web.WebPages.Administration
         }
 
         /// <summary>
-        /// Ensure that the current request is authorized. 
+        /// Ensure that the current request is authorized.
         /// If the request is authenticated, then we skip all other checks.
         /// </summary>
         internal static void Authorize(StartPage page)
         {
-            Authorize(page, HostingEnvironment.VirtualPathProvider, VirtualPathUtility.ToAppRelative);
+            Authorize(
+                page,
+                HostingEnvironment.VirtualPathProvider,
+                VirtualPathUtility.ToAppRelative
+            );
         }
 
-        internal static void Authorize(StartPage page, VirtualPathProvider vpp, Func<string, string> makeAppRelative)
+        internal static void Authorize(
+            StartPage page,
+            VirtualPathProvider vpp,
+            Func<string, string> makeAppRelative
+        )
         {
             if (!IsAuthenticated(page.Request))
             {
@@ -216,7 +246,11 @@ namespace System.Web.WebPages.Administration
         /// Doesn't do a redirect if the requesting page is itself the same as the virtual path.
         /// We need to do this since it is called from the _pagestart.cshtml which always runs.
         /// </summary>
-        private static void RedirectSafe(StartPage page, string virtualPath, Func<string, string> makeAppRelative)
+        private static void RedirectSafe(
+            StartPage page,
+            string virtualPath,
+            Func<string, string> makeAppRelative
+        )
         {
             // Make sure we get the virtual path
             virtualPath = SiteAdmin.GetVirtualPath(virtualPath);

@@ -66,7 +66,11 @@ namespace Microsoft.CodeAnalysis
                 return _list.GetHashCode();
             }
 
-            [SuppressMessage("Performance", "CA1067", Justification = "Equality not actually implemented")]
+            [SuppressMessage(
+                "Performance",
+                "CA1067",
+                Justification = "Equality not actually implemented"
+            )]
             [StructLayout(LayoutKind.Auto)]
             public struct Enumerator
             {
@@ -163,9 +167,7 @@ namespace Microsoft.CodeAnalysis
                     throw new NotSupportedException();
                 }
 
-                public void Dispose()
-                {
-                }
+                public void Dispose() { }
             }
         }
     }

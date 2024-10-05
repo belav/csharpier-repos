@@ -16,24 +16,24 @@ namespace System.Workflow.Activities.Rules
         Comma,
         LParen,
         RParen,
-        Plus,               // +
-        Minus,              // -
-        Divide,             // /
-        Multiply,           // *
-        Modulus,            // MOD
-        BitAnd,             // &
-        BitOr,              // |
-        And,                // AND, &&
-        Or,                 // OR, ||
-        Not,                // NOT, !
-        Equal,              // ==
-        NotEqual,           // !=, <>
-        Less,               // <
-        LessEqual,          // <=
-        Greater,            // >
-        GreaterEqual,       // >=
-        StringLiteral,      // " ... "
-        CharacterLiteral,   // ' ... '
+        Plus, // +
+        Minus, // -
+        Divide, // /
+        Multiply, // *
+        Modulus, // MOD
+        BitAnd, // &
+        BitOr, // |
+        And, // AND, &&
+        Or, // OR, ||
+        Not, // NOT, !
+        Equal, // ==
+        NotEqual, // !=, <>
+        Less, // <
+        LessEqual, // <=
+        Greater, // >
+        GreaterEqual, // >=
+        StringLiteral, // " ... "
+        CharacterLiteral, // ' ... '
         IntegerLiteral,
         DecimalLiteral,
         FloatLiteral,
@@ -48,15 +48,15 @@ namespace System.Workflow.Activities.Rules
         TypeName,
         Update,
         Halt,
-        Semicolon,          // ;
-        LBracket,           // [
-        RBracket,           // ]
-        LCurlyBrace,        // {
-        RCurlyBrace,        // }
+        Semicolon, // ;
+        LBracket, // [
+        RBracket, // ]
+        LCurlyBrace, // {
+        RCurlyBrace, // }
         New,
         Illegal,
 
-        EndOfInput
+        EndOfInput,
     }
 
     internal class Token

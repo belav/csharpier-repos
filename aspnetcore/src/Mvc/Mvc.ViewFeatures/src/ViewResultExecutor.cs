@@ -39,8 +39,16 @@ public partial class ViewResultExecutor : ViewExecutor, IActionResultExecutor<Vi
         ITempDataDictionaryFactory tempDataFactory,
         DiagnosticListener diagnosticListener,
         ILoggerFactory loggerFactory,
-        IModelMetadataProvider modelMetadataProvider)
-        : base(viewOptions, writerFactory, viewEngine, tempDataFactory, diagnosticListener, modelMetadataProvider)
+        IModelMetadataProvider modelMetadataProvider
+    )
+        : base(
+            viewOptions,
+            writerFactory,
+            viewEngine,
+            tempDataFactory,
+            diagnosticListener,
+            modelMetadataProvider
+        )
     {
         ArgumentNullException.ThrowIfNull(loggerFactory);
 
@@ -69,7 +77,11 @@ public partial class ViewResultExecutor : ViewExecutor, IActionResultExecutor<Vi
 
         var stopwatch = ValueStopwatch.StartNew();
 
-        var result = viewEngine.GetView(executingFilePath: null, viewPath: viewName, isMainPage: true);
+        var result = viewEngine.GetView(
+            executingFilePath: null,
+            viewPath: viewName,
+            isMainPage: true
+        );
         var originalResult = result;
         if (!result.Success)
         {
@@ -113,7 +125,12 @@ public partial class ViewResultExecutor : ViewExecutor, IActionResultExecutor<Vi
         return result;
     }
 
-    private void OutputDiagnostics(ActionContext actionContext, ViewResult viewResult, string viewName, ViewEngineResult result)
+    private void OutputDiagnostics(
+        ActionContext actionContext,
+        ViewResult viewResult,
+        string viewName,
+        ViewEngineResult result
+    )
     {
         if (result.Success)
         {
@@ -122,7 +139,8 @@ public partial class ViewResultExecutor : ViewExecutor, IActionResultExecutor<Vi
                 isMainPage: true,
                 viewResult,
                 viewName,
-                view: result.View);
+                view: result.View
+            );
         }
         else
         {
@@ -131,7 +149,8 @@ public partial class ViewResultExecutor : ViewExecutor, IActionResultExecutor<Vi
                 isMainPage: true,
                 viewResult,
                 viewName,
-                searchedLocations: result.SearchedLocations);
+                searchedLocations: result.SearchedLocations
+            );
         }
     }
 
@@ -155,7 +174,8 @@ public partial class ViewResultExecutor : ViewExecutor, IActionResultExecutor<Vi
                 result.ViewData,
                 result.TempData,
                 result.ContentType,
-                result.StatusCode);
+                result.StatusCode
+            );
         }
 
         Log.ViewResultExecuted(Logger, viewEngineResult.ViewName, stopwatch.GetElapsedTime());
@@ -172,8 +192,10 @@ public partial class ViewResultExecutor : ViewExecutor, IActionResultExecutor<Vi
 
         var actionDescriptor = context.ActionDescriptor;
         string? normalizedValue = null;
-        if (actionDescriptor.RouteValues.TryGetValue(ActionNameKey, out var value) &&
-            !string.IsNullOrEmpty(value))
+        if (
+            actionDescriptor.RouteValues.TryGetValue(ActionNameKey, out var value)
+            && !string.IsNullOrEmpty(value)
+        )
         {
             normalizedValue = value;
         }
@@ -189,22 +211,54 @@ public partial class ViewResultExecutor : ViewExecutor, IActionResultExecutor<Vi
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Information, "Executing ViewResult, running view {ViewName}.", EventName = "ViewResultExecuting")]
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
+            "Executing ViewResult, running view {ViewName}.",
+            EventName = "ViewResultExecuting"
+        )]
         public static partial void ViewResultExecuting(ILogger logger, string viewName);
 
-        [LoggerMessage(2, LogLevel.Debug, "The view path '{ViewFilePath}' was found in {ElapsedMilliseconds}ms.", EventName = "ViewFound")]
-        private static partial void ViewFound(ILogger logger, string viewFilePath, double elapsedMilliseconds);
+        [LoggerMessage(
+            2,
+            LogLevel.Debug,
+            "The view path '{ViewFilePath}' was found in {ElapsedMilliseconds}ms.",
+            EventName = "ViewFound"
+        )]
+        private static partial void ViewFound(
+            ILogger logger,
+            string viewFilePath,
+            double elapsedMilliseconds
+        );
 
         public static void ViewFound(ILogger logger, IView view, TimeSpan timespan)
         {
             ViewFound(logger, view.Path, timespan.TotalMilliseconds);
         }
 
-        [LoggerMessage(3, LogLevel.Error, "The view '{ViewName}' was not found. Searched locations: {SearchedViewLocations}", EventName = "ViewNotFound")]
-        public static partial void ViewNotFound(ILogger logger, string viewName, IEnumerable<string> searchedViewLocations);
+        [LoggerMessage(
+            3,
+            LogLevel.Error,
+            "The view '{ViewName}' was not found. Searched locations: {SearchedViewLocations}",
+            EventName = "ViewNotFound"
+        )]
+        public static partial void ViewNotFound(
+            ILogger logger,
+            string viewName,
+            IEnumerable<string> searchedViewLocations
+        );
 
-        [LoggerMessage(4, LogLevel.Information, "Executed ViewResult - view {ViewName} executed in {ElapsedMilliseconds}ms.", EventName = "ViewResultExecuted")]
-        private static partial void ViewResultExecuted(ILogger logger, string viewName, double elapsedMilliseconds);
+        [LoggerMessage(
+            4,
+            LogLevel.Information,
+            "Executed ViewResult - view {ViewName} executed in {ElapsedMilliseconds}ms.",
+            EventName = "ViewResultExecuted"
+        )]
+        private static partial void ViewResultExecuted(
+            ILogger logger,
+            string viewName,
+            double elapsedMilliseconds
+        );
 
         public static void ViewResultExecuted(ILogger logger, string viewName, TimeSpan timespan)
         {

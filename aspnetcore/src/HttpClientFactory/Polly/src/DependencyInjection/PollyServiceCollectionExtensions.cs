@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using Polly.Registry;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Polly.Registry;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -16,7 +16,7 @@ public static class PollyServiceCollectionExtensions
     /// <summary>
     /// Registers an empty <see cref="PolicyRegistry"/> in the service collection with service types
     /// <see cref="IPolicyRegistry{String}"/>, <see cref="IReadOnlyPolicyRegistry{String}"/>, and
-     /// <see cref="IConcurrentPolicyRegistry{String}"/> if the service types haven't already been registered
+    /// <see cref="IConcurrentPolicyRegistry{String}"/> if the service types haven't already been registered
     /// and returns the existing or newly created registry.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/>.</param>
@@ -37,11 +37,15 @@ public static class PollyServiceCollectionExtensions
 
         // Try to register for the missing interfaces
         services.TryAddEnumerable(ServiceDescriptor.Singleton<IPolicyRegistry<string>>(registry));
-        services.TryAddEnumerable(ServiceDescriptor.Singleton<IReadOnlyPolicyRegistry<string>>(registry));
+        services.TryAddEnumerable(
+            ServiceDescriptor.Singleton<IReadOnlyPolicyRegistry<string>>(registry)
+        );
 
         if (registry is IConcurrentPolicyRegistry<string> concurrentRegistry)
         {
-            services.TryAddEnumerable(ServiceDescriptor.Singleton<IConcurrentPolicyRegistry<string>>(concurrentRegistry));
+            services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<IConcurrentPolicyRegistry<string>>(concurrentRegistry)
+            );
         }
 
         return registry;
@@ -55,7 +59,10 @@ public static class PollyServiceCollectionExtensions
     /// <param name="services">The <see cref="IServiceCollection"/>.</param>
     /// <param name="registry">The <see cref="IPolicyRegistry{String}"/>.</param>
     /// <returns>The provided <see cref="IPolicyRegistry{String}"/>.</returns>
-    public static IPolicyRegistry<string> AddPolicyRegistry(this IServiceCollection services, IPolicyRegistry<string> registry)
+    public static IPolicyRegistry<string> AddPolicyRegistry(
+        this IServiceCollection services,
+        IPolicyRegistry<string> registry
+    )
     {
         if (services == null)
         {
@@ -86,7 +93,10 @@ public static class PollyServiceCollectionExtensions
     /// <param name="services">The <see cref="IServiceCollection"/>.</param>
     /// <param name="configureRegistry">A delegate that is used to configure an <see cref="IPolicyRegistry{String}"/>.</param>
     /// <returns>The provided <see cref="IServiceCollection"/>.</returns>
-    public static IServiceCollection AddPolicyRegistry(this IServiceCollection services, Action<IServiceProvider, IPolicyRegistry<string>> configureRegistry)
+    public static IServiceCollection AddPolicyRegistry(
+        this IServiceCollection services,
+        Action<IServiceProvider, IPolicyRegistry<string>> configureRegistry
+    )
     {
         if (services == null)
         {
@@ -109,9 +119,15 @@ public static class PollyServiceCollectionExtensions
             return registry;
         });
 
-        services.AddSingleton<IConcurrentPolicyRegistry<string>>(serviceProvider => serviceProvider.GetRequiredService<PolicyRegistry>());
-        services.AddSingleton<IPolicyRegistry<string>>(serviceProvider => serviceProvider.GetRequiredService<PolicyRegistry>());
-        services.AddSingleton<IReadOnlyPolicyRegistry<string>>(serviceProvider => serviceProvider.GetRequiredService<PolicyRegistry>());
+        services.AddSingleton<IConcurrentPolicyRegistry<string>>(serviceProvider =>
+            serviceProvider.GetRequiredService<PolicyRegistry>()
+        );
+        services.AddSingleton<IPolicyRegistry<string>>(serviceProvider =>
+            serviceProvider.GetRequiredService<PolicyRegistry>()
+        );
+        services.AddSingleton<IReadOnlyPolicyRegistry<string>>(serviceProvider =>
+            serviceProvider.GetRequiredService<PolicyRegistry>()
+        );
 
         return services;
     }

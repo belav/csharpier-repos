@@ -14,25 +14,42 @@ namespace Internal.TypeSystem
             return type == type.Context.GetWellKnownType(wellKnownType, false);
         }
 
-        public static InstantiatedType MakeInstantiatedType(this MetadataType typeDef, Instantiation instantiation)
+        public static InstantiatedType MakeInstantiatedType(
+            this MetadataType typeDef,
+            Instantiation instantiation
+        )
         {
             return typeDef.Context.GetInstantiatedType(typeDef, instantiation);
         }
 
-        public static InstantiatedType MakeInstantiatedType(this MetadataType typeDef, params TypeDesc[] genericParameters)
+        public static InstantiatedType MakeInstantiatedType(
+            this MetadataType typeDef,
+            params TypeDesc[] genericParameters
+        )
         {
-            return typeDef.Context.GetInstantiatedType(typeDef, new Instantiation(genericParameters));
+            return typeDef.Context.GetInstantiatedType(
+                typeDef,
+                new Instantiation(genericParameters)
+            );
         }
 
-
-        public static InstantiatedMethod MakeInstantiatedMethod(this MethodDesc methodDef, Instantiation instantiation)
+        public static InstantiatedMethod MakeInstantiatedMethod(
+            this MethodDesc methodDef,
+            Instantiation instantiation
+        )
         {
             return methodDef.Context.GetInstantiatedMethod(methodDef, instantiation);
         }
 
-        public static InstantiatedMethod MakeInstantiatedMethod(this MethodDesc methodDef, params TypeDesc[] genericParameters)
+        public static InstantiatedMethod MakeInstantiatedMethod(
+            this MethodDesc methodDef,
+            params TypeDesc[] genericParameters
+        )
         {
-            return methodDef.Context.GetInstantiatedMethod(methodDef, new Instantiation(genericParameters));
+            return methodDef.Context.GetInstantiatedMethod(
+                methodDef,
+                new Instantiation(genericParameters)
+            );
         }
 
         public static ArrayType MakeArrayType(this TypeDesc type)
@@ -88,7 +105,12 @@ namespace Internal.TypeSystem
         public static MethodDesc GetParameterlessConstructor(this TypeDesc type)
         {
             // TODO: Do we want check for specialname/rtspecialname? Maybe add another overload on GetMethod?
-            var sig = new MethodSignature(0, 0, type.Context.GetWellKnownType(WellKnownType.Void), TypeDesc.EmptyTypes);
+            var sig = new MethodSignature(
+                0,
+                0,
+                type.Context.GetWellKnownType(WellKnownType.Void),
+                TypeDesc.EmptyTypes
+            );
             return type.GetMethod(".ctor", sig);
         }
 
@@ -97,15 +119,23 @@ namespace Internal.TypeSystem
             return type.IsValueType || type.GetDefaultConstructor() != null;
         }
 
-        internal static MethodDesc FindMethodOnExactTypeWithMatchingTypicalMethod(this TypeDesc type, MethodDesc method)
+        internal static MethodDesc FindMethodOnExactTypeWithMatchingTypicalMethod(
+            this TypeDesc type,
+            MethodDesc method
+        )
         {
             MethodDesc methodTypicalDefinition = method.GetTypicalMethodDefinition();
 
             var instantiatedType = type as InstantiatedType;
             if (instantiatedType != null)
             {
-                Debug.Assert(instantiatedType.GetTypeDefinition() == methodTypicalDefinition.OwningType);
-                return method.Context.GetMethodForInstantiatedType(methodTypicalDefinition, instantiatedType);
+                Debug.Assert(
+                    instantiatedType.GetTypeDefinition() == methodTypicalDefinition.OwningType
+                );
+                return method.Context.GetMethodForInstantiatedType(
+                    methodTypicalDefinition,
+                    instantiatedType
+                );
             }
             else if (type.IsArray)
             {
@@ -128,7 +158,10 @@ namespace Internal.TypeSystem
         /// </summary>
         /// <param name="targetType">A potentially derived type</param>
         /// <param name="method">A base class's virtual method</param>
-        public static MethodDesc FindMethodOnTypeWithMatchingTypicalMethod(this TypeDesc targetType, MethodDesc method)
+        public static MethodDesc FindMethodOnTypeWithMatchingTypicalMethod(
+            this TypeDesc targetType,
+            MethodDesc method
+        )
         {
             // If method is nongeneric and on a nongeneric type, then it is the matching method
             if (!method.HasInstantiation && !method.OwningType.HasInstantiation)
@@ -151,7 +184,8 @@ namespace Internal.TypeSystem
                 if (openTargetOrBase == typicalTypeOfTargetMethod)
                 {
                     // Found an open match. Now find an equivalent method on the original target typeOrBase
-                    MethodDesc matchingMethod = targetOrBase.FindMethodOnExactTypeWithMatchingTypicalMethod(method);
+                    MethodDesc matchingMethod =
+                        targetOrBase.FindMethodOnExactTypeWithMatchingTypicalMethod(method);
                     return matchingMethod;
                 }
                 targetOrBase = targetOrBase.BaseType;
@@ -195,42 +229,87 @@ namespace Internal.TypeSystem
         /// Resolves interface method '<paramref name="interfaceMethod"/>' to a method on '<paramref name="type"/>'
         /// that implements the method.
         /// </summary>
-        public static MethodDesc ResolveInterfaceMethodToVirtualMethodOnType(this TypeDesc type, MethodDesc interfaceMethod)
+        public static MethodDesc ResolveInterfaceMethodToVirtualMethodOnType(
+            this TypeDesc type,
+            MethodDesc interfaceMethod
+        )
         {
-            return type.Context.GetVirtualMethodAlgorithmForType(type).ResolveInterfaceMethodToVirtualMethodOnType(interfaceMethod, type);
+            return type
+                .Context.GetVirtualMethodAlgorithmForType(type)
+                .ResolveInterfaceMethodToVirtualMethodOnType(interfaceMethod, type);
         }
 
-        public static MethodDesc ResolveVariantInterfaceMethodToVirtualMethodOnType(this TypeDesc type, MethodDesc interfaceMethod)
+        public static MethodDesc ResolveVariantInterfaceMethodToVirtualMethodOnType(
+            this TypeDesc type,
+            MethodDesc interfaceMethod
+        )
         {
-            return type.Context.GetVirtualMethodAlgorithmForType(type).ResolveVariantInterfaceMethodToVirtualMethodOnType(interfaceMethod, type);
+            return type
+                .Context.GetVirtualMethodAlgorithmForType(type)
+                .ResolveVariantInterfaceMethodToVirtualMethodOnType(interfaceMethod, type);
         }
 
-        public static MethodDesc ResolveInterfaceMethodToStaticVirtualMethodOnType(this TypeDesc type, MethodDesc interfaceMethod)
+        public static MethodDesc ResolveInterfaceMethodToStaticVirtualMethodOnType(
+            this TypeDesc type,
+            MethodDesc interfaceMethod
+        )
         {
-            return type.Context.GetVirtualMethodAlgorithmForType(type).ResolveInterfaceMethodToStaticVirtualMethodOnType(interfaceMethod, type);
+            return type
+                .Context.GetVirtualMethodAlgorithmForType(type)
+                .ResolveInterfaceMethodToStaticVirtualMethodOnType(interfaceMethod, type);
         }
 
-        public static MethodDesc ResolveVariantInterfaceMethodToStaticVirtualMethodOnType(this TypeDesc type, MethodDesc interfaceMethod)
+        public static MethodDesc ResolveVariantInterfaceMethodToStaticVirtualMethodOnType(
+            this TypeDesc type,
+            MethodDesc interfaceMethod
+        )
         {
-            return type.Context.GetVirtualMethodAlgorithmForType(type).ResolveVariantInterfaceMethodToStaticVirtualMethodOnType(interfaceMethod, type);
+            return type
+                .Context.GetVirtualMethodAlgorithmForType(type)
+                .ResolveVariantInterfaceMethodToStaticVirtualMethodOnType(interfaceMethod, type);
         }
 
-        public static DefaultInterfaceMethodResolution ResolveInterfaceMethodToDefaultImplementationOnType(this TypeDesc type, MethodDesc interfaceMethod, out MethodDesc implMethod)
+        public static DefaultInterfaceMethodResolution ResolveInterfaceMethodToDefaultImplementationOnType(
+            this TypeDesc type,
+            MethodDesc interfaceMethod,
+            out MethodDesc implMethod
+        )
         {
-            return type.Context.GetVirtualMethodAlgorithmForType(type).ResolveInterfaceMethodToDefaultImplementationOnType(interfaceMethod, type, out implMethod);
+            return type
+                .Context.GetVirtualMethodAlgorithmForType(type)
+                .ResolveInterfaceMethodToDefaultImplementationOnType(
+                    interfaceMethod,
+                    type,
+                    out implMethod
+                );
         }
 
-        public static DefaultInterfaceMethodResolution ResolveVariantInterfaceMethodToDefaultImplementationOnType(this TypeDesc type, MethodDesc interfaceMethod, out MethodDesc implMethod)
+        public static DefaultInterfaceMethodResolution ResolveVariantInterfaceMethodToDefaultImplementationOnType(
+            this TypeDesc type,
+            MethodDesc interfaceMethod,
+            out MethodDesc implMethod
+        )
         {
-            return type.Context.GetVirtualMethodAlgorithmForType(type).ResolveVariantInterfaceMethodToDefaultImplementationOnType(interfaceMethod, type, out implMethod);
+            return type
+                .Context.GetVirtualMethodAlgorithmForType(type)
+                .ResolveVariantInterfaceMethodToDefaultImplementationOnType(
+                    interfaceMethod,
+                    type,
+                    out implMethod
+                );
         }
 
         /// <summary>
         /// Resolves a virtual method call.
         /// </summary>
-        public static MethodDesc FindVirtualFunctionTargetMethodOnObjectType(this TypeDesc type, MethodDesc targetMethod)
+        public static MethodDesc FindVirtualFunctionTargetMethodOnObjectType(
+            this TypeDesc type,
+            MethodDesc targetMethod
+        )
         {
-            return type.Context.GetVirtualMethodAlgorithmForType(type).FindVirtualFunctionTargetMethodOnObjectType(targetMethod, type);
+            return type
+                .Context.GetVirtualMethodAlgorithmForType(type)
+                .FindVirtualFunctionTargetMethodOnObjectType(targetMethod, type);
         }
 
         /// <summary>
@@ -288,7 +367,10 @@ namespace Internal.TypeSystem
             if (owner.HasInstantiation)
             {
                 MetadataType instantiatedOwner = (MetadataType)owner.InstantiateAsOpen();
-                return method.Context.GetMethodForInstantiatedType(method, (InstantiatedType)instantiatedOwner);
+                return method.Context.GetMethodForInstantiatedType(
+                    method,
+                    (InstantiatedType)instantiatedOwner
+                );
             }
 
             return method;
@@ -298,7 +380,10 @@ namespace Internal.TypeSystem
         /// Scan the type and its base types for an implementation of an interface method. Returns null if no
         /// implementation is found.
         /// </summary>
-        public static MethodDesc ResolveInterfaceMethodTarget(this TypeDesc thisType, MethodDesc interfaceMethodToResolve)
+        public static MethodDesc ResolveInterfaceMethodTarget(
+            this TypeDesc thisType,
+            MethodDesc interfaceMethodToResolve
+        )
         {
             Debug.Assert(interfaceMethodToResolve.OwningType.IsInterface);
 
@@ -306,10 +391,11 @@ namespace Internal.TypeSystem
             TypeDesc currentType = thisType;
             do
             {
-                result = currentType.ResolveInterfaceMethodToVirtualMethodOnType(interfaceMethodToResolve);
+                result = currentType.ResolveInterfaceMethodToVirtualMethodOnType(
+                    interfaceMethodToResolve
+                );
                 currentType = currentType.BaseType;
-            }
-            while (result == null && currentType != null);
+            } while (result == null && currentType != null);
 
             return result;
         }
@@ -318,7 +404,10 @@ namespace Internal.TypeSystem
         /// Scan the type and its base types for an implementation of an interface method. Returns null if no
         /// implementation is found.
         /// </summary>
-        public static MethodDesc ResolveInterfaceMethodTargetWithVariance(this TypeDesc thisType, MethodDesc interfaceMethodToResolve)
+        public static MethodDesc ResolveInterfaceMethodTargetWithVariance(
+            this TypeDesc thisType,
+            MethodDesc interfaceMethodToResolve
+        )
         {
             Debug.Assert(interfaceMethodToResolve.OwningType.IsInterface);
 
@@ -326,15 +415,19 @@ namespace Internal.TypeSystem
             TypeDesc currentType = thisType;
             do
             {
-                result = currentType.ResolveVariantInterfaceMethodToVirtualMethodOnType(interfaceMethodToResolve);
+                result = currentType.ResolveVariantInterfaceMethodToVirtualMethodOnType(
+                    interfaceMethodToResolve
+                );
                 currentType = currentType.BaseType;
-            }
-            while (result == null && currentType != null);
+            } while (result == null && currentType != null);
 
             return result;
         }
 
-        public static bool ContainsSignatureVariables(this TypeDesc thisType, bool treatGenericParameterLikeSignatureVariable = false)
+        public static bool ContainsSignatureVariables(
+            this TypeDesc thisType,
+            bool treatGenericParameterLikeSignatureVariable = false
+        )
         {
             switch (thisType.Category)
             {
@@ -342,16 +435,25 @@ namespace Internal.TypeSystem
                 case TypeFlags.SzArray:
                 case TypeFlags.ByRef:
                 case TypeFlags.Pointer:
-                    return ((ParameterizedType)thisType).ParameterType.ContainsSignatureVariables(treatGenericParameterLikeSignatureVariable);
+                    return ((ParameterizedType)thisType).ParameterType.ContainsSignatureVariables(
+                        treatGenericParameterLikeSignatureVariable
+                    );
 
                 case TypeFlags.FunctionPointer:
                     MethodSignature pointerSignature = ((FunctionPointerType)thisType).Signature;
 
                     for (int i = 0; i < pointerSignature.Length; i++)
-                        if (pointerSignature[i].ContainsSignatureVariables(treatGenericParameterLikeSignatureVariable))
+                        if (
+                            pointerSignature[i]
+                                .ContainsSignatureVariables(
+                                    treatGenericParameterLikeSignatureVariable
+                                )
+                        )
                             return true;
 
-                    return pointerSignature.ReturnType.ContainsSignatureVariables(treatGenericParameterLikeSignatureVariable);
+                    return pointerSignature.ReturnType.ContainsSignatureVariables(
+                        treatGenericParameterLikeSignatureVariable
+                    );
 
                 case TypeFlags.SignatureMethodVariable:
                 case TypeFlags.SignatureTypeVariable:
@@ -369,7 +471,11 @@ namespace Internal.TypeSystem
                     Debug.Assert(thisType is DefType);
                     foreach (TypeDesc arg in thisType.Instantiation)
                     {
-                        if (arg.ContainsSignatureVariables(treatGenericParameterLikeSignatureVariable))
+                        if (
+                            arg.ContainsSignatureVariables(
+                                treatGenericParameterLikeSignatureVariable
+                            )
+                        )
                             return true;
                     }
 
@@ -384,7 +490,12 @@ namespace Internal.TypeSystem
         /// <returns>True when the method is marked with the PreserveBaseOverrides custom attribute, false otherwise.</returns>
         public static bool RequiresSlotUnification(this MethodDesc method)
         {
-            if (method.HasCustomAttribute("System.Runtime.CompilerServices", "PreserveBaseOverridesAttribute"))
+            if (
+                method.HasCustomAttribute(
+                    "System.Runtime.CompilerServices",
+                    "PreserveBaseOverridesAttribute"
+                )
+            )
             {
 #if DEBUG
                 // We shouldn't be calling this for non-MethodImpls, so verify that the method being checked is really a MethodImpl
@@ -415,7 +526,10 @@ namespace Internal.TypeSystem
         /// </summary>
         public static bool RequiresAlign8(this TypeDesc type)
         {
-            if (type.Context.Target.Architecture != TargetArchitecture.ARM && type.Context.Target.Architecture != TargetArchitecture.Wasm32)
+            if (
+                type.Context.Target.Architecture != TargetArchitecture.ARM
+                && type.Context.Target.Architecture != TargetArchitecture.Wasm32
+            )
             {
                 return false;
             }

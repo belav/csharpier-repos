@@ -45,8 +45,11 @@ namespace System.Numerics.Tensors
         /// If either of the element-wise input values is equal to <see cref="float.NaN"/>, the resulting element-wise value is also NaN.
         /// </para>
         /// </remarks>
-        public static void Add(ReadOnlySpan<float> x, ReadOnlySpan<float> y, Span<float> destination) =>
-            InvokeSpanSpanIntoSpan<AddOperator>(x, y, destination);
+        public static void Add(
+            ReadOnlySpan<float> x,
+            ReadOnlySpan<float> y,
+            Span<float> destination
+        ) => InvokeSpanSpanIntoSpan<AddOperator>(x, y, destination);
 
         /// <summary>Computes the element-wise addition of single-precision floating-point numbers in the specified tensors.</summary>
         /// <param name="x">The first tensor, represented as a span.</param>
@@ -83,8 +86,12 @@ namespace System.Numerics.Tensors
         /// If any of the element-wise input values is equal to <see cref="float.NaN"/>, the resulting element-wise value is also NaN.
         /// </para>
         /// </remarks>
-        public static void AddMultiply(ReadOnlySpan<float> x, ReadOnlySpan<float> y, ReadOnlySpan<float> multiplier, Span<float> destination) =>
-            InvokeSpanSpanSpanIntoSpan<AddMultiplyOperator>(x, y, multiplier, destination);
+        public static void AddMultiply(
+            ReadOnlySpan<float> x,
+            ReadOnlySpan<float> y,
+            ReadOnlySpan<float> multiplier,
+            Span<float> destination
+        ) => InvokeSpanSpanSpanIntoSpan<AddMultiplyOperator>(x, y, multiplier, destination);
 
         /// <summary>Computes the element-wise result of <c>(<paramref name="x" /> + <paramref name="y" />) * <paramref name="multiplier" /></c> for the specified tensors.</summary>
         /// <param name="x">The first tensor, represented as a span.</param>
@@ -103,8 +110,12 @@ namespace System.Numerics.Tensors
         /// If any of the element-wise input values is equal to <see cref="float.NaN"/>, the resulting element-wise value is also NaN.
         /// </para>
         /// </remarks>
-        public static void AddMultiply(ReadOnlySpan<float> x, ReadOnlySpan<float> y, float multiplier, Span<float> destination) =>
-            InvokeSpanSpanScalarIntoSpan<AddMultiplyOperator>(x, y, multiplier, destination);
+        public static void AddMultiply(
+            ReadOnlySpan<float> x,
+            ReadOnlySpan<float> y,
+            float multiplier,
+            Span<float> destination
+        ) => InvokeSpanSpanScalarIntoSpan<AddMultiplyOperator>(x, y, multiplier, destination);
 
         /// <summary>Computes the element-wise result of <c>(<paramref name="x" /> + <paramref name="y" />) * <paramref name="multiplier" /></c> for the specified tensors.</summary>
         /// <param name="x">The first tensor, represented as a span.</param>
@@ -123,8 +134,12 @@ namespace System.Numerics.Tensors
         /// If any of the element-wise input values is equal to <see cref="float.NaN"/>, the resulting element-wise value is also NaN.
         /// </para>
         /// </remarks>
-        public static void AddMultiply(ReadOnlySpan<float> x, float y, ReadOnlySpan<float> multiplier, Span<float> destination) =>
-            InvokeSpanScalarSpanIntoSpan<AddMultiplyOperator>(x, y, multiplier, destination);
+        public static void AddMultiply(
+            ReadOnlySpan<float> x,
+            float y,
+            ReadOnlySpan<float> multiplier,
+            Span<float> destination
+        ) => InvokeSpanScalarSpanIntoSpan<AddMultiplyOperator>(x, y, multiplier, destination);
 
         /// <summary>Computes the element-wise hyperbolic cosine of each single-precision floating-point radian angle in the specified tensor.</summary>
         /// <param name="x">The tensor, represented as a span.</param>
@@ -222,8 +237,11 @@ namespace System.Numerics.Tensors
         /// If either of the element-wise input values is equal to <see cref="float.NaN"/>, the resulting element-wise value is also NaN.
         /// </para>
         /// </remarks>
-        public static void Divide(ReadOnlySpan<float> x, ReadOnlySpan<float> y, Span<float> destination) =>
-            InvokeSpanSpanIntoSpan<DivideOperator>(x, y, destination);
+        public static void Divide(
+            ReadOnlySpan<float> x,
+            ReadOnlySpan<float> y,
+            Span<float> destination
+        ) => InvokeSpanSpanIntoSpan<DivideOperator>(x, y, destination);
 
         /// <summary>Computes the element-wise division of single-precision floating-point numbers in the specified tensors.</summary>
         /// <param name="x">The first tensor, represented as a span.</param>
@@ -415,8 +433,7 @@ namespace System.Numerics.Tensors
         /// operating systems or architectures.
         /// </para>
         /// </remarks>
-        public static float Max(ReadOnlySpan<float> x) =>
-            MinMaxCore<MaxOperator>(x);
+        public static float Max(ReadOnlySpan<float> x) => MinMaxCore<MaxOperator>(x);
 
         /// <summary>Computes the element-wise maximum of the single-precision floating-point numbers in the specified tensors.</summary>
         /// <param name="x">The first tensor, represented as a span.</param>
@@ -439,8 +456,11 @@ namespace System.Numerics.Tensors
         /// operating systems or architectures.
         /// </para>
         /// </remarks>
-        public static void Max(ReadOnlySpan<float> x, ReadOnlySpan<float> y, Span<float> destination) =>
-            InvokeSpanSpanIntoSpan<MaxPropagateNaNOperator>(x, y, destination);
+        public static void Max(
+            ReadOnlySpan<float> x,
+            ReadOnlySpan<float> y,
+            Span<float> destination
+        ) => InvokeSpanSpanIntoSpan<MaxPropagateNaNOperator>(x, y, destination);
 
         /// <summary>Searches for the single-precision floating-point number with the largest magnitude in the specified tensor.</summary>
         /// <param name="x">The tensor, represented as a span.</param>
@@ -475,8 +495,11 @@ namespace System.Numerics.Tensors
         /// operating systems or architectures.
         /// </para>
         /// </remarks>
-        public static void MaxMagnitude(ReadOnlySpan<float> x, ReadOnlySpan<float> y, Span<float> destination) =>
-            InvokeSpanSpanIntoSpan<MaxMagnitudePropagateNaNOperator>(x, y, destination);
+        public static void MaxMagnitude(
+            ReadOnlySpan<float> x,
+            ReadOnlySpan<float> y,
+            Span<float> destination
+        ) => InvokeSpanSpanIntoSpan<MaxMagnitudePropagateNaNOperator>(x, y, destination);
 
         /// <summary>Searches for the smallest single-precision floating-point number in the specified tensor.</summary>
         /// <param name="x">The tensor, represented as a span.</param>
@@ -492,8 +515,7 @@ namespace System.Numerics.Tensors
         /// operating systems or architectures.
         /// </para>
         /// </remarks>
-        public static float Min(ReadOnlySpan<float> x) =>
-            MinMaxCore<MinOperator>(x);
+        public static float Min(ReadOnlySpan<float> x) => MinMaxCore<MinOperator>(x);
 
         /// <summary>Computes the element-wise minimum of the single-precision floating-point numbers in the specified tensors.</summary>
         /// <param name="x">The first tensor, represented as a span.</param>
@@ -516,8 +538,11 @@ namespace System.Numerics.Tensors
         /// operating systems or architectures.
         /// </para>
         /// </remarks>
-        public static void Min(ReadOnlySpan<float> x, ReadOnlySpan<float> y, Span<float> destination) =>
-            InvokeSpanSpanIntoSpan<MinPropagateNaNOperator>(x, y, destination);
+        public static void Min(
+            ReadOnlySpan<float> x,
+            ReadOnlySpan<float> y,
+            Span<float> destination
+        ) => InvokeSpanSpanIntoSpan<MinPropagateNaNOperator>(x, y, destination);
 
         /// <summary>Searches for the single-precision floating-point number with the smallest magnitude in the specified tensor.</summary>
         /// <param name="x">The tensor, represented as a span.</param>
@@ -557,8 +582,11 @@ namespace System.Numerics.Tensors
         /// operating systems or architectures.
         /// </para>
         /// </remarks>
-        public static void MinMagnitude(ReadOnlySpan<float> x, ReadOnlySpan<float> y, Span<float> destination) =>
-            InvokeSpanSpanIntoSpan<MinMagnitudePropagateNaNOperator>(x, y, destination);
+        public static void MinMagnitude(
+            ReadOnlySpan<float> x,
+            ReadOnlySpan<float> y,
+            Span<float> destination
+        ) => InvokeSpanSpanIntoSpan<MinMagnitudePropagateNaNOperator>(x, y, destination);
 
         /// <summary>Computes the element-wise product of single-precision floating-point numbers in the specified tensors.</summary>
         /// <param name="x">The first tensor, represented as a span.</param>
@@ -576,8 +604,11 @@ namespace System.Numerics.Tensors
         /// If either of the element-wise input values is equal to <see cref="float.NaN"/>, the resulting element-wise value is also NaN.
         /// </para>
         /// </remarks>
-        public static void Multiply(ReadOnlySpan<float> x, ReadOnlySpan<float> y, Span<float> destination) =>
-            InvokeSpanSpanIntoSpan<MultiplyOperator>(x, y, destination);
+        public static void Multiply(
+            ReadOnlySpan<float> x,
+            ReadOnlySpan<float> y,
+            Span<float> destination
+        ) => InvokeSpanSpanIntoSpan<MultiplyOperator>(x, y, destination);
 
         /// <summary>Computes the element-wise product of single-precision floating-point numbers in the specified tensors.</summary>
         /// <param name="x">The first tensor, represented as a span.</param>
@@ -615,8 +646,12 @@ namespace System.Numerics.Tensors
         /// If either of the element-wise input values is equal to <see cref="float.NaN"/>, the resulting element-wise value is also NaN.
         /// </para>
         /// </remarks>
-        public static void MultiplyAdd(ReadOnlySpan<float> x, ReadOnlySpan<float> y, ReadOnlySpan<float> addend, Span<float> destination) =>
-            InvokeSpanSpanSpanIntoSpan<MultiplyAddOperator>(x, y, addend, destination);
+        public static void MultiplyAdd(
+            ReadOnlySpan<float> x,
+            ReadOnlySpan<float> y,
+            ReadOnlySpan<float> addend,
+            Span<float> destination
+        ) => InvokeSpanSpanSpanIntoSpan<MultiplyAddOperator>(x, y, addend, destination);
 
         /// <summary>Computes the element-wise result of <c>(<paramref name="x" /> * <paramref name="y" />) * <paramref name="addend" /></c> for the specified tensors of single-precision floating-point numbers.</summary>
         /// <param name="x">The first tensor, represented as a span.</param>
@@ -636,8 +671,12 @@ namespace System.Numerics.Tensors
         /// If either of the element-wise input values is equal to <see cref="float.NaN"/>, the resulting element-wise value is also NaN.
         /// </para>
         /// </remarks>
-        public static void MultiplyAdd(ReadOnlySpan<float> x, ReadOnlySpan<float> y, float addend, Span<float> destination) =>
-            InvokeSpanSpanScalarIntoSpan<MultiplyAddOperator>(x, y, addend, destination);
+        public static void MultiplyAdd(
+            ReadOnlySpan<float> x,
+            ReadOnlySpan<float> y,
+            float addend,
+            Span<float> destination
+        ) => InvokeSpanSpanScalarIntoSpan<MultiplyAddOperator>(x, y, addend, destination);
 
         /// <summary>Computes the element-wise result of <c>(<paramref name="x" /> * <paramref name="y" />) * <paramref name="addend" /></c> for the specified tensors of single-precision floating-point numbers.</summary>
         /// <param name="x">The first tensor, represented as a span.</param>
@@ -656,8 +695,12 @@ namespace System.Numerics.Tensors
         /// If either of the element-wise input values is equal to <see cref="float.NaN"/>, the resulting element-wise value is also NaN.
         /// </para>
         /// </remarks>
-        public static void MultiplyAdd(ReadOnlySpan<float> x, float y, ReadOnlySpan<float> addend, Span<float> destination) =>
-            InvokeSpanScalarSpanIntoSpan<MultiplyAddOperator>(x, y, addend, destination);
+        public static void MultiplyAdd(
+            ReadOnlySpan<float> x,
+            float y,
+            ReadOnlySpan<float> addend,
+            Span<float> destination
+        ) => InvokeSpanScalarSpanIntoSpan<MultiplyAddOperator>(x, y, addend, destination);
 
         /// <summary>Computes the element-wise negation of each single-precision floating-point number in the specified tensor.</summary>
         /// <param name="x">The tensor, represented as a span.</param>
@@ -692,8 +735,7 @@ namespace System.Numerics.Tensors
         /// operating systems or architectures.
         /// </para>
         /// </remarks>
-        public static float Norm(ReadOnlySpan<float> x) =>
-            MathF.Sqrt(SumOfSquares(x));
+        public static float Norm(ReadOnlySpan<float> x) => MathF.Sqrt(SumOfSquares(x));
 
         /// <summary>Computes the product of all elements in the specified non-empty tensor of single-precision floating-point numbers.</summary>
         /// <param name="x">The tensor, represented as a span.</param>
@@ -880,8 +922,11 @@ namespace System.Numerics.Tensors
         /// If either of the element-wise input values is equal to <see cref="float.NaN"/>, the resulting element-wise value is also NaN.
         /// </para>
         /// </remarks>
-        public static void Subtract(ReadOnlySpan<float> x, ReadOnlySpan<float> y, Span<float> destination) =>
-            InvokeSpanSpanIntoSpan<SubtractOperator>(x, y, destination);
+        public static void Subtract(
+            ReadOnlySpan<float> x,
+            ReadOnlySpan<float> y,
+            Span<float> destination
+        ) => InvokeSpanSpanIntoSpan<SubtractOperator>(x, y, destination);
 
         /// <summary>Computes the element-wise difference between single-precision floating-point numbers in the specified tensors.</summary>
         /// <param name="x">The first tensor, represented as a span.</param>
@@ -984,10 +1029,17 @@ namespace System.Numerics.Tensors
 
         /// <summary>Throws an exception if the <paramref name="input"/> and <paramref name="output"/> spans overlap and don't begin at the same memory location.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void ValidateInputOutputSpanNonOverlapping(ReadOnlySpan<float> input, Span<float> output)
+        private static void ValidateInputOutputSpanNonOverlapping(
+            ReadOnlySpan<float> input,
+            Span<float> output
+        )
         {
-            if (!Unsafe.AreSame(ref MemoryMarshal.GetReference(input), ref MemoryMarshal.GetReference(output)) &&
-                input.Overlaps(output))
+            if (
+                !Unsafe.AreSame(
+                    ref MemoryMarshal.GetReference(input),
+                    ref MemoryMarshal.GetReference(output)
+                ) && input.Overlaps(output)
+            )
             {
                 ThrowHelper.ThrowArgument_InputAndDestinationSpanMustNotOverlap();
             }
@@ -1004,25 +1056,280 @@ namespace System.Numerics.Tensors
         /// double process them. This allows us to avoid an additional branch.
         /// </remarks>
         private static ReadOnlySpan<uint> AlignmentUInt32Mask_16x16 =>
-        [
-            0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
-            0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-            0xFFFFFFFF, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-            0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-            0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-            0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-            0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-            0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-            0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-            0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-            0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-            0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-            0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-            0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000,
-            0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x00000000, 0x00000000,
-            0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x00000000,
-            0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
-        ];
+            [
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0x00000000,
+                0x00000000,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0x00000000,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+            ];
 
         /// <summary>Mask used to handle remaining elements after vectorized handling of the input.</summary>
         /// <remarks>
@@ -1034,24 +1341,279 @@ namespace System.Numerics.Tensors
         /// last 16 elements via a conditional select instead.
         /// </remarks>
         private static ReadOnlySpan<uint> RemainderUInt32Mask_16x16 =>
-        [
-            0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-            0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0xFFFFFFFF,
-            0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0xFFFFFFFF, 0xFFFFFFFF,
-            0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
-            0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
-            0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
-            0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
-            0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
-            0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
-            0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
-            0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
-            0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
-            0x00000000, 0x00000000, 0x00000000, 0x00000000, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
-            0x00000000, 0x00000000, 0x00000000, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
-            0x00000000, 0x00000000, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
-            0x00000000, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
-            0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-        ];
+            [
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0xFFFFFFFF,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0x00000000,
+                0x00000000,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0x00000000,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0xFFFFFFFF,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+                0x00000000,
+            ];
     }
 }

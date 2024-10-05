@@ -41,7 +41,7 @@ namespace Microsoft.CodeAnalysis.PatternMatching
         /// <summary>
         /// All camel-humps in the pattern matched a camel-hump in the candidate.  All camel-humps
         /// in the candidate were matched by a camel-hump in the pattern.
-        /// 
+        ///
         /// Example: "CFPS" matching "CodeFixProviderService"
         /// Example: "cfps" matching "CodeFixProviderService"
         /// Example: "CoFiPrSe" matching "CodeFixProviderService"
@@ -61,7 +61,7 @@ namespace Microsoft.CodeAnalysis.PatternMatching
 
         /// <summary>
         /// All camel-humps in the pattern matched a camel-hump in the candidate.  The first camel-hump
-        /// in the pattern matched the first camel-hump in the candidate.  There was at least one gap in 
+        /// in the pattern matched the first camel-hump in the candidate.  There was at least one gap in
         /// the camel-humps in the candidate that were matched.
         ///
         /// Example: "CP" matching "CodeFixProviderService"
@@ -83,7 +83,7 @@ namespace Microsoft.CodeAnalysis.PatternMatching
 
         /// <summary>
         /// All camel-humps in the pattern matched a camel-hump in the candidate.  The first camel-hump
-        /// in the pattern did not match the first camel-hump in the pattern.  There was at least one gap in 
+        /// in the pattern did not match the first camel-hump in the pattern.  There was at least one gap in
         /// the camel-humps in the candidate that were matched.
         ///
         /// Example: "FS" matching "CodeFixProviderService"
@@ -93,8 +93,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
         CamelCaseNonContiguousSubstring,
 
         /// <summary>
-        /// The pattern matches the candidate in a fuzzy manner.  Fuzzy matching allows for 
-        /// a certain amount of misspellings, missing words, etc. See <see cref="SpellChecker"/> for 
+        /// The pattern matches the candidate in a fuzzy manner.  Fuzzy matching allows for
+        /// a certain amount of misspellings, missing words, etc. See <see cref="SpellChecker"/> for
         /// more details.
         /// </summary>
         Fuzzy,

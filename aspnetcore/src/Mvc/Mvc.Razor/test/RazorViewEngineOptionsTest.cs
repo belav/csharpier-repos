@@ -16,10 +16,10 @@ public class RazorViewEngineOptionsTest
         var services = new ServiceCollection().AddOptions();
         var areaViewLocations = new[]
         {
-                "/Areas/{2}/MvcViews/{1}/{0}.cshtml",
-                "/Areas/{2}/MvcViews/Shared/{0}.cshtml",
-                "/MvcViews/Shared/{0}.cshtml"
-            };
+            "/Areas/{2}/MvcViews/{1}/{0}.cshtml",
+            "/Areas/{2}/MvcViews/Shared/{0}.cshtml",
+            "/MvcViews/Shared/{0}.cshtml",
+        };
         var builder = new MvcBuilder(services, new ApplicationPartManager());
         builder.AddRazorOptions(options =>
         {
@@ -45,11 +45,7 @@ public class RazorViewEngineOptionsTest
     {
         // Arrange
         var services = new ServiceCollection().AddOptions();
-        var viewLocations = new[]
-        {
-                "/MvcViews/{1}/{0}.cshtml",
-                "/MvcViews/Shared/{0}.cshtml"
-            };
+        var viewLocations = new[] { "/MvcViews/{1}/{0}.cshtml", "/MvcViews/Shared/{0}.cshtml" };
         var builder = new MvcBuilder(services, new ApplicationPartManager());
         builder.AddRazorOptions(options =>
         {

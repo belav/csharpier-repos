@@ -69,7 +69,8 @@ public abstract class PageBase : RazorPageBase
     {
         get
         {
-            _metadataProvider ??= HttpContext?.RequestServices?.GetRequiredService<IModelMetadataProvider>();
+            _metadataProvider ??=
+                HttpContext?.RequestServices?.GetRequiredService<IModelMetadataProvider>();
             return _metadataProvider!;
         }
         set => _metadataProvider = value ?? throw new ArgumentNullException(nameof(value));
@@ -81,7 +82,8 @@ public abstract class PageBase : RazorPageBase
         {
             if (_objectValidator == null)
             {
-                _objectValidator = HttpContext?.RequestServices?.GetRequiredService<IObjectModelValidator>();
+                _objectValidator =
+                    HttpContext?.RequestServices?.GetRequiredService<IObjectModelValidator>();
             }
 
             return _objectValidator!;
@@ -94,7 +96,8 @@ public abstract class PageBase : RazorPageBase
         {
             if (_modelBinderFactory == null)
             {
-                _modelBinderFactory = HttpContext?.RequestServices?.GetRequiredService<IModelBinderFactory>();
+                _modelBinderFactory =
+                    HttpContext?.RequestServices?.GetRequiredService<IModelBinderFactory>();
             }
 
             return _modelBinderFactory!;
@@ -124,16 +127,15 @@ public abstract class PageBase : RazorPageBase
     /// Creates a <see cref="BadRequestResult"/> that produces a <see cref="StatusCodes.Status400BadRequest"/> response.
     /// </summary>
     /// <returns>The created <see cref="BadRequestResult"/> for the response.</returns>
-    public virtual BadRequestResult BadRequest()
-        => new BadRequestResult();
+    public virtual BadRequestResult BadRequest() => new BadRequestResult();
 
     /// <summary>
     /// Creates a <see cref="BadRequestObjectResult"/> that produces a <see cref="StatusCodes.Status400BadRequest"/> response.
     /// </summary>
     /// <param name="error">An error object to be returned to the client.</param>
     /// <returns>The created <see cref="BadRequestObjectResult"/> for the response.</returns>
-    public virtual BadRequestObjectResult BadRequest(object error)
-        => new BadRequestObjectResult(error);
+    public virtual BadRequestObjectResult BadRequest(object error) =>
+        new BadRequestObjectResult(error);
 
     /// <summary>
     /// Creates a <see cref="BadRequestObjectResult"/> that produces a <see cref="StatusCodes.Status400BadRequest"/> response.
@@ -156,8 +158,7 @@ public abstract class PageBase : RazorPageBase
     /// <see cref="StatusCodes.Status401Unauthorized"/> and <see cref="StatusCodes.Status403Forbidden"/>
     /// are among likely status results.
     /// </remarks>
-    public virtual ChallengeResult Challenge()
-        => new ChallengeResult();
+    public virtual ChallengeResult Challenge() => new ChallengeResult();
 
     /// <summary>
     /// Creates a <see cref="ChallengeResult"/> with the specified authentication schemes.
@@ -169,8 +170,8 @@ public abstract class PageBase : RazorPageBase
     /// <see cref="StatusCodes.Status401Unauthorized"/> and <see cref="StatusCodes.Status403Forbidden"/>
     /// are among likely status results.
     /// </remarks>
-    public virtual ChallengeResult Challenge(params string[] authenticationSchemes)
-        => new ChallengeResult(authenticationSchemes);
+    public virtual ChallengeResult Challenge(params string[] authenticationSchemes) =>
+        new ChallengeResult(authenticationSchemes);
 
     /// <summary>
     /// Creates a <see cref="ChallengeResult"/> with the specified <paramref name="properties" />.
@@ -183,8 +184,8 @@ public abstract class PageBase : RazorPageBase
     /// <see cref="StatusCodes.Status401Unauthorized"/> and <see cref="StatusCodes.Status403Forbidden"/>
     /// are among likely status results.
     /// </remarks>
-    public virtual ChallengeResult Challenge(AuthenticationProperties properties)
-        => new ChallengeResult(properties);
+    public virtual ChallengeResult Challenge(AuthenticationProperties properties) =>
+        new ChallengeResult(properties);
 
     /// <summary>
     /// Creates a <see cref="ChallengeResult"/> with the specified authentication schemes and
@@ -201,8 +202,8 @@ public abstract class PageBase : RazorPageBase
     /// </remarks>
     public virtual ChallengeResult Challenge(
         AuthenticationProperties properties,
-        params string[] authenticationSchemes)
-        => new ChallengeResult(authenticationSchemes, properties);
+        params string[] authenticationSchemes
+    ) => new ChallengeResult(authenticationSchemes, properties);
 
     /// <summary>
     /// Creates a <see cref="ContentResult"/> object with <see cref="StatusCodes.Status200OK"/> by specifying a
@@ -210,8 +211,8 @@ public abstract class PageBase : RazorPageBase
     /// </summary>
     /// <param name="content">The content to write to the response.</param>
     /// <returns>The created <see cref="ContentResult"/> object for the response.</returns>
-    public virtual ContentResult Content(string content)
-        => Content(content, (MediaTypeHeaderValue?)null);
+    public virtual ContentResult Content(string content) =>
+        Content(content, (MediaTypeHeaderValue?)null);
 
     /// <summary>
     /// Creates a <see cref="ContentResult"/> object with <see cref="StatusCodes.Status200OK"/> by specifying a
@@ -220,8 +221,8 @@ public abstract class PageBase : RazorPageBase
     /// <param name="content">The content to write to the response.</param>
     /// <param name="contentType">The content type (MIME type).</param>
     /// <returns>The created <see cref="ContentResult"/> object for the response.</returns>
-    public virtual ContentResult Content(string content, string contentType)
-        => Content(content, MediaTypeHeaderValue.Parse(contentType));
+    public virtual ContentResult Content(string content, string contentType) =>
+        Content(content, MediaTypeHeaderValue.Parse(contentType));
 
     /// <summary>
     /// Creates a <see cref="ContentResult"/> object with <see cref="StatusCodes.Status200OK"/> by specifying a
@@ -235,7 +236,11 @@ public abstract class PageBase : RazorPageBase
     /// If encoding is provided by both the 'charset' and the <paramref name="contentEncoding"/> parameters, then
     /// the <paramref name="contentEncoding"/> parameter is chosen as the final encoding.
     /// </remarks>
-    public virtual ContentResult Content(string content, string contentType, Encoding contentEncoding)
+    public virtual ContentResult Content(
+        string content,
+        string contentType,
+        Encoding contentEncoding
+    )
     {
         var mediaTypeHeaderValue = MediaTypeHeaderValue.Parse(contentType);
         mediaTypeHeaderValue.Encoding = contentEncoding ?? mediaTypeHeaderValue.Encoding;
@@ -251,11 +256,7 @@ public abstract class PageBase : RazorPageBase
     /// <returns>The created <see cref="ContentResult"/> object for the response.</returns>
     public virtual ContentResult Content(string content, MediaTypeHeaderValue? contentType)
     {
-        return new ContentResult
-        {
-            Content = content,
-            ContentType = contentType?.ToString()
-        };
+        return new ContentResult { Content = content, ContentType = contentType?.ToString() };
     }
 
     /// <summary>
@@ -266,8 +267,7 @@ public abstract class PageBase : RazorPageBase
     /// Some authentication schemes, such as cookies, will convert <see cref="StatusCodes.Status403Forbidden"/> to
     /// a redirect to show a login page.
     /// </remarks>
-    public virtual ForbidResult Forbid()
-        => new ForbidResult();
+    public virtual ForbidResult Forbid() => new ForbidResult();
 
     /// <summary>
     /// Creates a <see cref="ForbidResult"/> (<see cref="StatusCodes.Status403Forbidden"/> by default) with the
@@ -279,8 +279,8 @@ public abstract class PageBase : RazorPageBase
     /// Some authentication schemes, such as cookies, will convert <see cref="StatusCodes.Status403Forbidden"/> to
     /// a redirect to show a login page.
     /// </remarks>
-    public virtual ForbidResult Forbid(params string[] authenticationSchemes)
-        => new ForbidResult(authenticationSchemes);
+    public virtual ForbidResult Forbid(params string[] authenticationSchemes) =>
+        new ForbidResult(authenticationSchemes);
 
     /// <summary>
     /// Creates a <see cref="ForbidResult"/> (<see cref="StatusCodes.Status403Forbidden"/> by default) with the
@@ -293,8 +293,8 @@ public abstract class PageBase : RazorPageBase
     /// Some authentication schemes, such as cookies, will convert <see cref="StatusCodes.Status403Forbidden"/> to
     /// a redirect to show a login page.
     /// </remarks>
-    public virtual ForbidResult Forbid(AuthenticationProperties properties)
-        => new ForbidResult(properties);
+    public virtual ForbidResult Forbid(AuthenticationProperties properties) =>
+        new ForbidResult(properties);
 
     /// <summary>
     /// Creates a <see cref="ForbidResult"/> (<see cref="StatusCodes.Status403Forbidden"/> by default) with the
@@ -308,8 +308,10 @@ public abstract class PageBase : RazorPageBase
     /// Some authentication schemes, such as cookies, will convert <see cref="StatusCodes.Status403Forbidden"/> to
     /// a redirect to show a login page.
     /// </remarks>
-    public virtual ForbidResult Forbid(AuthenticationProperties properties, params string[] authenticationSchemes)
-        => new ForbidResult(authenticationSchemes, properties);
+    public virtual ForbidResult Forbid(
+        AuthenticationProperties properties,
+        params string[] authenticationSchemes
+    ) => new ForbidResult(authenticationSchemes, properties);
 
     /// <summary>
     /// Returns a file with the specified <paramref name="fileContents" /> as content
@@ -318,8 +320,8 @@ public abstract class PageBase : RazorPageBase
     /// <param name="fileContents">The file contents.</param>
     /// <param name="contentType">The Content-Type of the file.</param>
     /// <returns>The created <see cref="FileContentResult"/> for the response.</returns>
-    public virtual FileContentResult File(byte[] fileContents, string contentType)
-        => File(fileContents, contentType, fileDownloadName: null);
+    public virtual FileContentResult File(byte[] fileContents, string contentType) =>
+        File(fileContents, contentType, fileDownloadName: null);
 
     /// <summary>
     /// Returns a file with the specified <paramref name="fileContents" /> as content (<see cref="StatusCodes.Status200OK"/>), the
@@ -330,8 +332,11 @@ public abstract class PageBase : RazorPageBase
     /// <param name="contentType">The Content-Type of the file.</param>
     /// <param name="fileDownloadName">The suggested file name.</param>
     /// <returns>The created <see cref="FileContentResult"/> for the response.</returns>
-    public virtual FileContentResult File(byte[] fileContents, string contentType, string? fileDownloadName)
-        => new FileContentResult(fileContents, contentType) { FileDownloadName = fileDownloadName };
+    public virtual FileContentResult File(
+        byte[] fileContents,
+        string contentType,
+        string? fileDownloadName
+    ) => new FileContentResult(fileContents, contentType) { FileDownloadName = fileDownloadName };
 
     /// <summary>
     /// Returns a file in the specified <paramref name="fileStream" /> (<see cref="StatusCodes.Status200OK"/>)
@@ -340,8 +345,8 @@ public abstract class PageBase : RazorPageBase
     /// <param name="fileStream">The <see cref="Stream"/> with the contents of the file.</param>
     /// <param name="contentType">The Content-Type of the file.</param>
     /// <returns>The created <see cref="FileStreamResult"/> for the response.</returns>
-    public virtual FileStreamResult File(Stream fileStream, string contentType)
-        => File(fileStream, contentType, fileDownloadName: null);
+    public virtual FileStreamResult File(Stream fileStream, string contentType) =>
+        File(fileStream, contentType, fileDownloadName: null);
 
     /// <summary>
     /// Returns a file in the specified <paramref name="fileStream" /> (<see cref="StatusCodes.Status200OK"/>) with the
@@ -352,8 +357,11 @@ public abstract class PageBase : RazorPageBase
     /// <param name="contentType">The Content-Type of the file.</param>
     /// <param name="fileDownloadName">The suggested file name.</param>
     /// <returns>The created <see cref="FileStreamResult"/> for the response.</returns>
-    public virtual FileStreamResult File(Stream fileStream, string contentType, string? fileDownloadName)
-        => new FileStreamResult(fileStream, contentType) { FileDownloadName = fileDownloadName };
+    public virtual FileStreamResult File(
+        Stream fileStream,
+        string contentType,
+        string? fileDownloadName
+    ) => new FileStreamResult(fileStream, contentType) { FileDownloadName = fileDownloadName };
 
     /// <summary>
     /// Returns the file specified by <paramref name="virtualPath" /> (<see cref="StatusCodes.Status200OK"/>) with the
@@ -362,8 +370,8 @@ public abstract class PageBase : RazorPageBase
     /// <param name="virtualPath">The virtual path of the file to be returned.</param>
     /// <param name="contentType">The Content-Type of the file.</param>
     /// <returns>The created <see cref="VirtualFileResult"/> for the response.</returns>
-    public virtual VirtualFileResult File(string virtualPath, string contentType)
-        => File(virtualPath, contentType, fileDownloadName: null);
+    public virtual VirtualFileResult File(string virtualPath, string contentType) =>
+        File(virtualPath, contentType, fileDownloadName: null);
 
     /// <summary>
     /// Returns the file specified by <paramref name="virtualPath" /> (<see cref="StatusCodes.Status200OK"/>) with the
@@ -374,8 +382,11 @@ public abstract class PageBase : RazorPageBase
     /// <param name="contentType">The Content-Type of the file.</param>
     /// <param name="fileDownloadName">The suggested file name.</param>
     /// <returns>The created <see cref="VirtualFileResult"/> for the response.</returns>
-    public virtual VirtualFileResult File(string virtualPath, string contentType, string? fileDownloadName)
-        => new VirtualFileResult(virtualPath, contentType) { FileDownloadName = fileDownloadName };
+    public virtual VirtualFileResult File(
+        string virtualPath,
+        string contentType,
+        string? fileDownloadName
+    ) => new VirtualFileResult(virtualPath, contentType) { FileDownloadName = fileDownloadName };
 
     /// <summary>
     /// Returns the file specified by <paramref name="physicalPath" /> (<see cref="StatusCodes.Status200OK"/>) with the
@@ -384,8 +395,8 @@ public abstract class PageBase : RazorPageBase
     /// <param name="physicalPath">The physical path of the file to be returned.</param>
     /// <param name="contentType">The Content-Type of the file.</param>
     /// <returns>The created <see cref="PhysicalFileResult"/> for the response.</returns>
-    public virtual PhysicalFileResult PhysicalFile(string physicalPath, string contentType)
-        => PhysicalFile(physicalPath, contentType, fileDownloadName: null);
+    public virtual PhysicalFileResult PhysicalFile(string physicalPath, string contentType) =>
+        PhysicalFile(physicalPath, contentType, fileDownloadName: null);
 
     /// <summary>
     /// Returns the file specified by <paramref name="physicalPath" /> (<see cref="StatusCodes.Status200OK"/>) with the
@@ -399,8 +410,8 @@ public abstract class PageBase : RazorPageBase
     public virtual PhysicalFileResult PhysicalFile(
         string physicalPath,
         string contentType,
-        string? fileDownloadName)
-        => new PhysicalFileResult(physicalPath, contentType) { FileDownloadName = fileDownloadName };
+        string? fileDownloadName
+    ) => new PhysicalFileResult(physicalPath, contentType) { FileDownloadName = fileDownloadName };
 
     /// <summary>
     /// Creates a <see cref="LocalRedirectResult"/> object that redirects
@@ -408,7 +419,9 @@ public abstract class PageBase : RazorPageBase
     /// </summary>
     /// <param name="localUrl">The local URL to redirect to.</param>
     /// <returns>The created <see cref="LocalRedirectResult"/> for the response.</returns>
-    public virtual LocalRedirectResult LocalRedirect([StringSyntax(StringSyntaxAttribute.Uri, UriKind.Relative)] string localUrl)
+    public virtual LocalRedirectResult LocalRedirect(
+        [StringSyntax(StringSyntaxAttribute.Uri, UriKind.Relative)] string localUrl
+    )
     {
         if (string.IsNullOrEmpty(localUrl))
         {
@@ -424,7 +437,9 @@ public abstract class PageBase : RazorPageBase
     /// </summary>
     /// <param name="localUrl">The local URL to redirect to.</param>
     /// <returns>The created <see cref="LocalRedirectResult"/> for the response.</returns>
-    public virtual LocalRedirectResult LocalRedirectPermanent([StringSyntax(StringSyntaxAttribute.Uri, UriKind.Relative)] string localUrl)
+    public virtual LocalRedirectResult LocalRedirectPermanent(
+        [StringSyntax(StringSyntaxAttribute.Uri, UriKind.Relative)] string localUrl
+    )
     {
         if (string.IsNullOrEmpty(localUrl))
         {
@@ -441,7 +456,9 @@ public abstract class PageBase : RazorPageBase
     /// </summary>
     /// <param name="localUrl">The local URL to redirect to.</param>
     /// <returns>The created <see cref="LocalRedirectResult"/> for the response.</returns>
-    public virtual LocalRedirectResult LocalRedirectPreserveMethod([StringSyntax(StringSyntaxAttribute.Uri, UriKind.Relative)] string localUrl)
+    public virtual LocalRedirectResult LocalRedirectPreserveMethod(
+        [StringSyntax(StringSyntaxAttribute.Uri, UriKind.Relative)] string localUrl
+    )
     {
         if (string.IsNullOrEmpty(localUrl))
         {
@@ -458,7 +475,9 @@ public abstract class PageBase : RazorPageBase
     /// </summary>
     /// <param name="localUrl">The local URL to redirect to.</param>
     /// <returns>The created <see cref="LocalRedirectResult"/> for the response.</returns>
-    public virtual LocalRedirectResult LocalRedirectPermanentPreserveMethod([StringSyntax(StringSyntaxAttribute.Uri, UriKind.Relative)] string localUrl)
+    public virtual LocalRedirectResult LocalRedirectPermanentPreserveMethod(
+        [StringSyntax(StringSyntaxAttribute.Uri, UriKind.Relative)] string localUrl
+    )
     {
         if (string.IsNullOrEmpty(localUrl))
         {
@@ -472,15 +491,13 @@ public abstract class PageBase : RazorPageBase
     /// Creates an <see cref="NotFoundResult"/> that produces a <see cref="StatusCodes.Status404NotFound"/> response.
     /// </summary>
     /// <returns>The created <see cref="NotFoundResult"/> for the response.</returns>
-    public virtual NotFoundResult NotFound()
-        => new NotFoundResult();
+    public virtual NotFoundResult NotFound() => new NotFoundResult();
 
     /// <summary>
     /// Creates an <see cref="NotFoundObjectResult"/> that produces a <see cref="StatusCodes.Status404NotFound"/> response.
     /// </summary>
     /// <returns>The created <see cref="NotFoundObjectResult"/> for the response.</returns>
-    public virtual NotFoundObjectResult NotFound(object value)
-        => new NotFoundObjectResult(value);
+    public virtual NotFoundObjectResult NotFound(object value) => new NotFoundObjectResult(value);
 
     /// <summary>
     /// Creates a <see cref="PageResult"/> object that renders this page as a view to the response.
@@ -513,7 +530,9 @@ public abstract class PageBase : RazorPageBase
     /// </summary>
     /// <param name="url">The URL to redirect to.</param>
     /// <returns>The created <see cref="RedirectResult"/> for the response.</returns>
-    public virtual RedirectResult RedirectPermanent([StringSyntax(StringSyntaxAttribute.Uri)] string url)
+    public virtual RedirectResult RedirectPermanent(
+        [StringSyntax(StringSyntaxAttribute.Uri)] string url
+    )
     {
         if (string.IsNullOrEmpty(url))
         {
@@ -530,7 +549,9 @@ public abstract class PageBase : RazorPageBase
     /// </summary>
     /// <param name="url">The URL to redirect to.</param>
     /// <returns>The created <see cref="RedirectResult"/> for the response.</returns>
-    public virtual RedirectResult RedirectPreserveMethod([StringSyntax(StringSyntaxAttribute.Uri)] string url)
+    public virtual RedirectResult RedirectPreserveMethod(
+        [StringSyntax(StringSyntaxAttribute.Uri)] string url
+    )
     {
         if (string.IsNullOrEmpty(url))
         {
@@ -547,7 +568,9 @@ public abstract class PageBase : RazorPageBase
     /// </summary>
     /// <param name="url">The URL to redirect to.</param>
     /// <returns>The created <see cref="RedirectResult"/> for the response.</returns>
-    public virtual RedirectResult RedirectPermanentPreserveMethod([StringSyntax(StringSyntaxAttribute.Uri)] string url)
+    public virtual RedirectResult RedirectPermanentPreserveMethod(
+        [StringSyntax(StringSyntaxAttribute.Uri)] string url
+    )
     {
         if (string.IsNullOrEmpty(url))
         {
@@ -562,8 +585,8 @@ public abstract class PageBase : RazorPageBase
     /// </summary>
     /// <param name="actionName">The name of the action.</param>
     /// <returns>The created <see cref="RedirectToActionResult"/> for the response.</returns>
-    public virtual RedirectToActionResult RedirectToAction(string? actionName)
-        => RedirectToAction(actionName, routeValues: null);
+    public virtual RedirectToActionResult RedirectToAction(string? actionName) =>
+        RedirectToAction(actionName, routeValues: null);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status302Found"/>) to the specified action using the
@@ -572,8 +595,10 @@ public abstract class PageBase : RazorPageBase
     /// <param name="actionName">The name of the action.</param>
     /// <param name="routeValues">The parameters for a route.</param>
     /// <returns>The created <see cref="RedirectToActionResult"/> for the response.</returns>
-    public virtual RedirectToActionResult RedirectToAction(string? actionName, object? routeValues)
-        => RedirectToAction(actionName, controllerName: null, routeValues: routeValues);
+    public virtual RedirectToActionResult RedirectToAction(
+        string? actionName,
+        object? routeValues
+    ) => RedirectToAction(actionName, controllerName: null, routeValues: routeValues);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status302Found"/>) to the specified action using the
@@ -582,8 +607,10 @@ public abstract class PageBase : RazorPageBase
     /// <param name="actionName">The name of the action.</param>
     /// <param name="controllerName">The name of the controller.</param>
     /// <returns>The created <see cref="RedirectToActionResult"/> for the response.</returns>
-    public virtual RedirectToActionResult RedirectToAction(string? actionName, string? controllerName)
-        => RedirectToAction(actionName, controllerName, routeValues: null);
+    public virtual RedirectToActionResult RedirectToAction(
+        string? actionName,
+        string? controllerName
+    ) => RedirectToAction(actionName, controllerName, routeValues: null);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status302Found"/>) to the specified action using the specified
@@ -596,8 +623,8 @@ public abstract class PageBase : RazorPageBase
     public virtual RedirectToActionResult RedirectToAction(
         string? actionName,
         string? controllerName,
-        object? routeValues)
-        => RedirectToAction(actionName, controllerName, routeValues, fragment: null);
+        object? routeValues
+    ) => RedirectToAction(actionName, controllerName, routeValues, fragment: null);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status302Found"/>) to the specified action using the specified
@@ -610,8 +637,8 @@ public abstract class PageBase : RazorPageBase
     public virtual RedirectToActionResult RedirectToAction(
         string? actionName,
         string? controllerName,
-        string? fragment)
-        => RedirectToAction(actionName, controllerName, routeValues: null, fragment: fragment);
+        string? fragment
+    ) => RedirectToAction(actionName, controllerName, routeValues: null, fragment: fragment);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status302Found"/>) to the specified action using the specified <paramref name="actionName"/>,
@@ -626,8 +653,8 @@ public abstract class PageBase : RazorPageBase
         string? actionName,
         string? controllerName,
         object? routeValues,
-        string? fragment)
-        => new RedirectToActionResult(actionName, controllerName, routeValues, fragment);
+        string? fragment
+    ) => new RedirectToActionResult(actionName, controllerName, routeValues, fragment);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status307TemporaryRedirect"/>) to the specified action with
@@ -644,7 +671,8 @@ public abstract class PageBase : RazorPageBase
         string? actionName = null,
         string? controllerName = null,
         object? routeValues = null,
-        string? fragment = null)
+        string? fragment = null
+    )
     {
         return new RedirectToActionResult(
             actionName: actionName,
@@ -652,7 +680,8 @@ public abstract class PageBase : RazorPageBase
             routeValues: routeValues,
             permanent: false,
             preserveMethod: true,
-            fragment: fragment);
+            fragment: fragment
+        );
     }
 
     /// <summary>
@@ -674,9 +703,16 @@ public abstract class PageBase : RazorPageBase
     /// <param name="actionName">The name of the action.</param>
     /// <param name="routeValues">The parameters for a route.</param>
     /// <returns>The created <see cref="RedirectToActionResult"/> for the response.</returns>
-    public virtual RedirectToActionResult RedirectToActionPermanent(string? actionName, object? routeValues)
+    public virtual RedirectToActionResult RedirectToActionPermanent(
+        string? actionName,
+        object? routeValues
+    )
     {
-        return RedirectToActionPermanent(actionName, controllerName: null, routeValues: routeValues);
+        return RedirectToActionPermanent(
+            actionName,
+            controllerName: null,
+            routeValues: routeValues
+        );
     }
 
     /// <summary>
@@ -687,7 +723,10 @@ public abstract class PageBase : RazorPageBase
     /// <param name="actionName">The name of the action.</param>
     /// <param name="controllerName">The name of the controller.</param>
     /// <returns>The created <see cref="RedirectToActionResult"/> for the response.</returns>
-    public virtual RedirectToActionResult RedirectToActionPermanent(string? actionName, string? controllerName)
+    public virtual RedirectToActionResult RedirectToActionPermanent(
+        string? actionName,
+        string? controllerName
+    )
     {
         return RedirectToActionPermanent(actionName, controllerName, routeValues: null);
     }
@@ -704,9 +743,15 @@ public abstract class PageBase : RazorPageBase
     public virtual RedirectToActionResult RedirectToActionPermanent(
         string? actionName,
         string? controllerName,
-        string? fragment)
+        string? fragment
+    )
     {
-        return RedirectToActionPermanent(actionName, controllerName, routeValues: null, fragment: fragment);
+        return RedirectToActionPermanent(
+            actionName,
+            controllerName,
+            routeValues: null,
+            fragment: fragment
+        );
     }
 
     /// <summary>
@@ -721,7 +766,8 @@ public abstract class PageBase : RazorPageBase
     public virtual RedirectToActionResult RedirectToActionPermanent(
         string? actionName,
         string? controllerName,
-        object? routeValues)
+        object? routeValues
+    )
     {
         return RedirectToActionPermanent(actionName, controllerName, routeValues, fragment: null);
     }
@@ -740,14 +786,16 @@ public abstract class PageBase : RazorPageBase
         string? actionName,
         string? controllerName,
         object? routeValues,
-        string? fragment)
+        string? fragment
+    )
     {
         return new RedirectToActionResult(
             actionName,
             controllerName,
             routeValues,
             permanent: true,
-            fragment: fragment);
+            fragment: fragment
+        );
     }
 
     /// <summary>
@@ -765,7 +813,8 @@ public abstract class PageBase : RazorPageBase
         string? actionName = null,
         string? controllerName = null,
         object? routeValues = null,
-        string? fragment = null)
+        string? fragment = null
+    )
     {
         return new RedirectToActionResult(
             actionName: actionName,
@@ -773,7 +822,8 @@ public abstract class PageBase : RazorPageBase
             routeValues: routeValues,
             permanent: true,
             preserveMethod: true,
-            fragment: fragment);
+            fragment: fragment
+        );
     }
 
     /// <summary>
@@ -831,7 +881,8 @@ public abstract class PageBase : RazorPageBase
     public virtual RedirectToRouteResult RedirectToRoute(
         string? routeName,
         object? routeValues,
-        string? fragment)
+        string? fragment
+    )
     {
         return new RedirectToRouteResult(routeName, routeValues, fragment);
     }
@@ -848,14 +899,16 @@ public abstract class PageBase : RazorPageBase
     public virtual RedirectToRouteResult RedirectToRoutePreserveMethod(
         string? routeName = null,
         object? routeValues = null,
-        string? fragment = null)
+        string? fragment = null
+    )
     {
         return new RedirectToRouteResult(
             routeName: routeName,
             routeValues: routeValues,
             permanent: false,
             preserveMethod: true,
-            fragment: fragment);
+            fragment: fragment
+        );
     }
 
     /// <summary>
@@ -888,7 +941,10 @@ public abstract class PageBase : RazorPageBase
     /// <param name="routeName">The name of the route.</param>
     /// <param name="routeValues">The parameters for a route.</param>
     /// <returns>The created <see cref="RedirectToRouteResult"/> for the response.</returns>
-    public virtual RedirectToRouteResult RedirectToRoutePermanent(string? routeName, object? routeValues)
+    public virtual RedirectToRouteResult RedirectToRoutePermanent(
+        string? routeName,
+        object? routeValues
+    )
     {
         return RedirectToRoutePermanent(routeName, routeValues, fragment: null);
     }
@@ -901,7 +957,10 @@ public abstract class PageBase : RazorPageBase
     /// <param name="routeName">The name of the route.</param>
     /// <param name="fragment">The fragment to add to the URL.</param>
     /// <returns>The created <see cref="RedirectToRouteResult"/> for the response.</returns>
-    public virtual RedirectToRouteResult RedirectToRoutePermanent(string? routeName, string? fragment)
+    public virtual RedirectToRouteResult RedirectToRoutePermanent(
+        string? routeName,
+        string? fragment
+    )
     {
         return RedirectToRoutePermanent(routeName, routeValues: null, fragment: fragment);
     }
@@ -918,8 +977,8 @@ public abstract class PageBase : RazorPageBase
     public virtual RedirectToRouteResult RedirectToRoutePermanent(
         string? routeName,
         object? routeValues,
-        string? fragment)
-        => new RedirectToRouteResult(routeName, routeValues, permanent: true, fragment: fragment);
+        string? fragment
+    ) => new RedirectToRouteResult(routeName, routeValues, permanent: true, fragment: fragment);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status308PermanentRedirect"/>) to the specified route with
@@ -933,38 +992,39 @@ public abstract class PageBase : RazorPageBase
     public virtual RedirectToRouteResult RedirectToRoutePermanentPreserveMethod(
         string? routeName = null,
         object? routeValues = null,
-        string? fragment = null)
+        string? fragment = null
+    )
     {
         return new RedirectToRouteResult(
             routeName: routeName,
             routeValues: routeValues,
             permanent: true,
             preserveMethod: true,
-            fragment: fragment);
+            fragment: fragment
+        );
     }
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status302Found"/>) to the current page.
     /// </summary>
     /// <returns>The <see cref="RedirectToPageResult"/>.</returns>
-    public virtual RedirectToPageResult RedirectToPage()
-        => RedirectToPage(pageName: null);
+    public virtual RedirectToPageResult RedirectToPage() => RedirectToPage(pageName: null);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status302Found"/>) to the current page with the specified <paramref name="routeValues"/>.
     /// </summary>
     /// <param name="routeValues">The parameters for a route.</param>
     /// <returns>The <see cref="RedirectToPageResult"/>.</returns>
-    public virtual RedirectToPageResult RedirectToPage(object? routeValues)
-        => RedirectToPage(pageName: null, routeValues: routeValues);
+    public virtual RedirectToPageResult RedirectToPage(object? routeValues) =>
+        RedirectToPage(pageName: null, routeValues: routeValues);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status302Found"/>) to the specified <paramref name="pageName"/>.
     /// </summary>
     /// <param name="pageName">The name of the page.</param>
     /// <returns>The <see cref="RedirectToPageResult"/>.</returns>
-    public virtual RedirectToPageResult RedirectToPage(string? pageName)
-        => RedirectToPage(pageName, routeValues: null);
+    public virtual RedirectToPageResult RedirectToPage(string? pageName) =>
+        RedirectToPage(pageName, routeValues: null);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status302Found"/>) to the specified <paramref name="pageName"/>
@@ -973,8 +1033,8 @@ public abstract class PageBase : RazorPageBase
     /// <param name="pageName">The name of the page.</param>
     /// <param name="pageHandler">The page handler to redirect to.</param>
     /// <returns>The <see cref="RedirectToPageResult"/>.</returns>
-    public virtual RedirectToPageResult RedirectToPage(string? pageName, string? pageHandler)
-        => RedirectToPage(pageName, pageHandler, routeValues: null, fragment: null);
+    public virtual RedirectToPageResult RedirectToPage(string? pageName, string? pageHandler) =>
+        RedirectToPage(pageName, pageHandler, routeValues: null, fragment: null);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status302Found"/>) to the specified <paramref name="pageName"/>
@@ -983,8 +1043,8 @@ public abstract class PageBase : RazorPageBase
     /// <param name="pageName">The name of the page.</param>
     /// <param name="routeValues">The parameters for a route.</param>
     /// <returns>The <see cref="RedirectToPageResult"/>.</returns>
-    public virtual RedirectToPageResult RedirectToPage(string? pageName, object? routeValues)
-        => RedirectToPage(pageName, pageHandler: null, routeValues: routeValues, fragment: null);
+    public virtual RedirectToPageResult RedirectToPage(string? pageName, object? routeValues) =>
+        RedirectToPage(pageName, pageHandler: null, routeValues: routeValues, fragment: null);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status302Found"/>) to the specified <paramref name="pageName"/>
@@ -994,8 +1054,11 @@ public abstract class PageBase : RazorPageBase
     /// <param name="pageHandler">The page handler to redirect to.</param>
     /// <param name="fragment">The fragment to add to the URL.</param>
     /// <returns>The <see cref="RedirectToPageResult"/>.</returns>
-    public virtual RedirectToPageResult RedirectToPage(string? pageName, string? pageHandler, string? fragment)
-        => RedirectToPage(pageName, pageHandler, routeValues: null, fragment: fragment);
+    public virtual RedirectToPageResult RedirectToPage(
+        string? pageName,
+        string? pageHandler,
+        string? fragment
+    ) => RedirectToPage(pageName, pageHandler, routeValues: null, fragment: fragment);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status302Found"/>) to the specified <paramref name="pageName"/>
@@ -1006,16 +1069,20 @@ public abstract class PageBase : RazorPageBase
     /// <param name="routeValues">The parameters for a route.</param>
     /// <param name="fragment">The fragment to add to the URL.</param>
     /// <returns>The <see cref="RedirectToPageResult"/>.</returns>
-    public virtual RedirectToPageResult RedirectToPage(string? pageName, string? pageHandler, object? routeValues, string? fragment)
-        => new RedirectToPageResult(pageName, pageHandler, routeValues, fragment);
+    public virtual RedirectToPageResult RedirectToPage(
+        string? pageName,
+        string? pageHandler,
+        object? routeValues,
+        string? fragment
+    ) => new RedirectToPageResult(pageName, pageHandler, routeValues, fragment);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status301MovedPermanently"/>) to the specified <paramref name="pageName"/>.
     /// </summary>
     /// <param name="pageName">The name of the page.</param>
     /// <returns>The <see cref="RedirectToPageResult"/> with <see cref="RedirectToPageResult.Permanent"/> set.</returns>
-    public virtual RedirectToPageResult RedirectToPagePermanent(string? pageName)
-        => RedirectToPagePermanent(pageName, pageHandler: null);
+    public virtual RedirectToPageResult RedirectToPagePermanent(string? pageName) =>
+        RedirectToPagePermanent(pageName, pageHandler: null);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status301MovedPermanently"/>) to the specified <paramref name="pageName"/>
@@ -1024,8 +1091,16 @@ public abstract class PageBase : RazorPageBase
     /// <param name="pageName">The name of the page.</param>
     /// <param name="routeValues">The parameters for a route.</param>
     /// <returns>The <see cref="RedirectToPageResult"/> with <see cref="RedirectToPageResult.Permanent"/> set.</returns>
-    public virtual RedirectToPageResult RedirectToPagePermanent(string? pageName, object? routeValues)
-        => RedirectToPagePermanent(pageName, pageHandler: null, routeValues: routeValues, fragment: null);
+    public virtual RedirectToPageResult RedirectToPagePermanent(
+        string? pageName,
+        object? routeValues
+    ) =>
+        RedirectToPagePermanent(
+            pageName,
+            pageHandler: null,
+            routeValues: routeValues,
+            fragment: null
+        );
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status301MovedPermanently"/>) to the specified <paramref name="pageName"/>
@@ -1034,8 +1109,10 @@ public abstract class PageBase : RazorPageBase
     /// <param name="pageName">The name of the page.</param>
     /// <param name="pageHandler">The page handler to redirect to.</param>
     /// <returns>The <see cref="RedirectToPageResult"/> with <see cref="RedirectToPageResult.Permanent"/> set.</returns>
-    public virtual RedirectToPageResult RedirectToPagePermanent(string? pageName, string? pageHandler)
-        => RedirectToPagePermanent(pageName, pageHandler, routeValues: null);
+    public virtual RedirectToPageResult RedirectToPagePermanent(
+        string? pageName,
+        string? pageHandler
+    ) => RedirectToPagePermanent(pageName, pageHandler, routeValues: null);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status301MovedPermanently"/>) to the specified <paramref name="pageName"/>
@@ -1045,8 +1122,11 @@ public abstract class PageBase : RazorPageBase
     /// <param name="pageHandler">The page handler to redirect to.</param>
     /// <param name="routeValues">The parameters for a route.</param>
     /// <returns>The <see cref="RedirectToPageResult"/> with <see cref="RedirectToPageResult.Permanent"/> set.</returns>
-    public virtual RedirectToPageResult RedirectToPagePermanent(string? pageName, string? pageHandler, object? routeValues)
-        => RedirectToPagePermanent(pageName, pageHandler, routeValues, fragment: null);
+    public virtual RedirectToPageResult RedirectToPagePermanent(
+        string? pageName,
+        string? pageHandler,
+        object? routeValues
+    ) => RedirectToPagePermanent(pageName, pageHandler, routeValues, fragment: null);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status301MovedPermanently"/>) to the specified <paramref name="pageName"/>
@@ -1056,8 +1136,11 @@ public abstract class PageBase : RazorPageBase
     /// <param name="pageHandler">The page handler to redirect to.</param>
     /// <param name="fragment">The fragment to add to the URL.</param>
     /// <returns>The <see cref="RedirectToPageResult"/> with <see cref="RedirectToPageResult.Permanent"/> set.</returns>
-    public virtual RedirectToPageResult RedirectToPagePermanent(string? pageName, string? pageHandler, string? fragment)
-        => RedirectToPagePermanent(pageName, pageHandler, routeValues: null, fragment: fragment);
+    public virtual RedirectToPageResult RedirectToPagePermanent(
+        string? pageName,
+        string? pageHandler,
+        string? fragment
+    ) => RedirectToPagePermanent(pageName, pageHandler, routeValues: null, fragment: fragment);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status301MovedPermanently"/>) to the specified <paramref name="pageName"/>
@@ -1068,8 +1151,19 @@ public abstract class PageBase : RazorPageBase
     /// <param name="routeValues">The parameters for a route.</param>
     /// <param name="fragment">The fragment to add to the URL.</param>
     /// <returns>The <see cref="RedirectToPageResult"/> with <see cref="RedirectToPageResult.Permanent"/> set.</returns>
-    public virtual RedirectToPageResult RedirectToPagePermanent(string? pageName, string? pageHandler, object? routeValues, string? fragment)
-        => new RedirectToPageResult(pageName, pageHandler, routeValues, permanent: true, fragment: fragment);
+    public virtual RedirectToPageResult RedirectToPagePermanent(
+        string? pageName,
+        string? pageHandler,
+        object? routeValues,
+        string? fragment
+    ) =>
+        new RedirectToPageResult(
+            pageName,
+            pageHandler,
+            routeValues,
+            permanent: true,
+            fragment: fragment
+        );
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status307TemporaryRedirect"/>) to the specified page with
@@ -1085,7 +1179,8 @@ public abstract class PageBase : RazorPageBase
         string? pageName = null,
         string? pageHandler = null,
         object? routeValues = null,
-        string? fragment = null)
+        string? fragment = null
+    )
     {
         return new RedirectToPageResult(
             pageName: pageName,
@@ -1093,7 +1188,8 @@ public abstract class PageBase : RazorPageBase
             routeValues: routeValues,
             permanent: false,
             preserveMethod: true,
-            fragment: fragment);
+            fragment: fragment
+        );
     }
 
     /// <summary>
@@ -1110,7 +1206,8 @@ public abstract class PageBase : RazorPageBase
         string? pageName = null,
         string? pageHandler = null,
         object? routeValues = null,
-        string? fragment = null)
+        string? fragment = null
+    )
     {
         return new RedirectToPageResult(
             pageName: pageName,
@@ -1118,7 +1215,8 @@ public abstract class PageBase : RazorPageBase
             routeValues: routeValues,
             permanent: true,
             preserveMethod: true,
-            fragment: fragment);
+            fragment: fragment
+        );
     }
 
     /// <summary>
@@ -1127,8 +1225,8 @@ public abstract class PageBase : RazorPageBase
     /// <param name="principal">The <see cref="ClaimsPrincipal"/> containing the user claims.</param>
     /// <param name="authenticationScheme">The authentication scheme to use for the sign-in operation.</param>
     /// <returns>The created <see cref="SignInResult"/> for the response.</returns>
-    public virtual SignInResult SignIn(ClaimsPrincipal principal, string authenticationScheme)
-        => new SignInResult(authenticationScheme, principal);
+    public virtual SignInResult SignIn(ClaimsPrincipal principal, string authenticationScheme) =>
+        new SignInResult(authenticationScheme, principal);
 
     /// <summary>
     /// Creates a <see cref="SignInResult"/> with the specified authentication scheme and
@@ -1141,16 +1239,16 @@ public abstract class PageBase : RazorPageBase
     public virtual SignInResult SignIn(
         ClaimsPrincipal principal,
         AuthenticationProperties properties,
-        string authenticationScheme)
-        => new SignInResult(authenticationScheme, principal, properties);
+        string authenticationScheme
+    ) => new SignInResult(authenticationScheme, principal, properties);
 
     /// <summary>
     /// Creates a <see cref="SignOutResult"/> with the specified authentication schemes.
     /// </summary>
     /// <param name="authenticationSchemes">The authentication schemes to use for the sign-out operation.</param>
     /// <returns>The created <see cref="SignOutResult"/> for the response.</returns>
-    public virtual SignOutResult SignOut(params string[] authenticationSchemes)
-        => new SignOutResult(authenticationSchemes);
+    public virtual SignOutResult SignOut(params string[] authenticationSchemes) =>
+        new SignOutResult(authenticationSchemes);
 
     /// <summary>
     /// Creates a <see cref="SignOutResult"/> with the specified authentication schemes and
@@ -1159,16 +1257,17 @@ public abstract class PageBase : RazorPageBase
     /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the sign-out operation.</param>
     /// <param name="authenticationSchemes">The authentication scheme to use for the sign-out operation.</param>
     /// <returns>The created <see cref="SignOutResult"/> for the response.</returns>
-    public virtual SignOutResult SignOut(AuthenticationProperties properties, params string[] authenticationSchemes)
-        => new SignOutResult(authenticationSchemes, properties);
+    public virtual SignOutResult SignOut(
+        AuthenticationProperties properties,
+        params string[] authenticationSchemes
+    ) => new SignOutResult(authenticationSchemes, properties);
 
     /// <summary>
     /// Creates a <see cref="StatusCodeResult"/> object by specifying a <paramref name="statusCode"/>.
     /// </summary>
     /// <param name="statusCode">The status code to set on the response.</param>
     /// <returns>The created <see cref="StatusCodeResult"/> object for the response.</returns>
-    public virtual StatusCodeResult StatusCode(int statusCode)
-        => new StatusCodeResult(statusCode);
+    public virtual StatusCodeResult StatusCode(int statusCode) => new StatusCodeResult(statusCode);
 
     /// <summary>
     /// Creates a <see cref="ObjectResult"/> object by specifying a <paramref name="statusCode"/> and <paramref name="value"/>
@@ -1176,15 +1275,14 @@ public abstract class PageBase : RazorPageBase
     /// <param name="statusCode">The status code to set on the response.</param>
     /// <param name="value">The value to set on the <see cref="ObjectResult"/>.</param>
     /// <returns>The created <see cref="ObjectResult"/> object for the response.</returns>
-    public virtual ObjectResult StatusCode(int statusCode, object value)
-        => new ObjectResult(value) { StatusCode = statusCode };
+    public virtual ObjectResult StatusCode(int statusCode, object value) =>
+        new ObjectResult(value) { StatusCode = statusCode };
 
     /// <summary>
     /// Creates an <see cref="UnauthorizedResult"/> that produces an <see cref="StatusCodes.Status401Unauthorized"/> response.
     /// </summary>
     /// <returns>The created <see cref="UnauthorizedResult"/> for the response.</returns>
-    public virtual UnauthorizedResult Unauthorized()
-        => new UnauthorizedResult();
+    public virtual UnauthorizedResult Unauthorized() => new UnauthorizedResult();
 
     /// <summary>
     /// Creates a <see cref="PartialViewResult"/> by specifying the name of a partial to render.
@@ -1211,11 +1309,7 @@ public abstract class PageBase : RazorPageBase
             Model = model,
         };
 
-        return new PartialViewResult
-        {
-            ViewName = viewName,
-            ViewData = viewData
-        };
+        return new PartialViewResult { ViewName = viewName, ViewData = viewData };
     }
 
     #region ViewComponentResult
@@ -1263,7 +1357,7 @@ public abstract class PageBase : RazorPageBase
             ViewComponentName = componentName,
             Arguments = arguments,
             ViewData = ViewContext.ViewData,
-            TempData = TempData
+            TempData = TempData,
         };
     }
 
@@ -1285,7 +1379,7 @@ public abstract class PageBase : RazorPageBase
             ViewComponentType = componentType,
             Arguments = arguments,
             ViewData = ViewContext.ViewData,
-            TempData = TempData
+            TempData = TempData,
         };
     }
     #endregion
@@ -1297,8 +1391,7 @@ public abstract class PageBase : RazorPageBase
     /// <typeparam name="TModel">The type of the model object.</typeparam>
     /// <param name="model">The model instance to update.</param>
     /// <returns>A <see cref="Task"/> that on completion returns <c>true</c> if the update is successful.</returns>
-    public virtual Task<bool> TryUpdateModelAsync<TModel>(
-        TModel model)
+    public virtual Task<bool> TryUpdateModelAsync<TModel>(TModel model)
         where TModel : class
     {
         ArgumentNullException.ThrowIfNull(model);
@@ -1315,15 +1408,16 @@ public abstract class PageBase : RazorPageBase
     /// <param name="prefix">The prefix to use when looking up values in the current <see cref="IValueProvider"/>.
     /// </param>
     /// <returns>A <see cref="Task"/> that on completion returns <c>true</c> if the update is successful.</returns>
-    public virtual async Task<bool> TryUpdateModelAsync<TModel>(
-        TModel model,
-        string prefix)
+    public virtual async Task<bool> TryUpdateModelAsync<TModel>(TModel model, string prefix)
         where TModel : class
     {
         ArgumentNullException.ThrowIfNull(model);
         ArgumentNullException.ThrowIfNull(prefix);
 
-        var (success, valueProvider) = await CompositeValueProvider.TryCreateAsync(PageContext, PageContext.ValueProviderFactories);
+        var (success, valueProvider) = await CompositeValueProvider.TryCreateAsync(
+            PageContext,
+            PageContext.ValueProviderFactories
+        );
         if (!success)
         {
             return false;
@@ -1345,7 +1439,8 @@ public abstract class PageBase : RazorPageBase
     public virtual Task<bool> TryUpdateModelAsync<TModel>(
         TModel model,
         string prefix,
-        IValueProvider valueProvider)
+        IValueProvider valueProvider
+    )
         where TModel : class
     {
         ArgumentNullException.ThrowIfNull(model);
@@ -1359,7 +1454,8 @@ public abstract class PageBase : RazorPageBase
             MetadataProvider,
             ModelBinderFactory,
             valueProvider,
-            ObjectValidator);
+            ObjectValidator
+        );
     }
 
     /// <summary>
@@ -1376,13 +1472,17 @@ public abstract class PageBase : RazorPageBase
     public async Task<bool> TryUpdateModelAsync<TModel>(
         TModel model,
         string prefix,
-        params Expression<Func<TModel, object?>>[] includeExpressions)
-       where TModel : class
+        params Expression<Func<TModel, object?>>[] includeExpressions
+    )
+        where TModel : class
     {
         ArgumentNullException.ThrowIfNull(model);
         ArgumentNullException.ThrowIfNull(includeExpressions);
 
-        var (success, valueProvider) = await CompositeValueProvider.TryCreateAsync(PageContext, PageContext.ValueProviderFactories);
+        var (success, valueProvider) = await CompositeValueProvider.TryCreateAsync(
+            PageContext,
+            PageContext.ValueProviderFactories
+        );
         if (!success)
         {
             return false;
@@ -1396,7 +1496,8 @@ public abstract class PageBase : RazorPageBase
             ModelBinderFactory,
             valueProvider!,
             ObjectValidator,
-            includeExpressions);
+            includeExpressions
+        );
     }
 
     /// <summary>
@@ -1412,13 +1513,17 @@ public abstract class PageBase : RazorPageBase
     public async Task<bool> TryUpdateModelAsync<TModel>(
         TModel model,
         string prefix,
-        Func<ModelMetadata, bool> propertyFilter)
+        Func<ModelMetadata, bool> propertyFilter
+    )
         where TModel : class
     {
         ArgumentNullException.ThrowIfNull(model);
         ArgumentNullException.ThrowIfNull(propertyFilter);
 
-        var (success, valueProvider) = await CompositeValueProvider.TryCreateAsync(PageContext, PageContext.ValueProviderFactories);
+        var (success, valueProvider) = await CompositeValueProvider.TryCreateAsync(
+            PageContext,
+            PageContext.ValueProviderFactories
+        );
         if (!success)
         {
             return false;
@@ -1432,7 +1537,8 @@ public abstract class PageBase : RazorPageBase
             ModelBinderFactory,
             valueProvider!,
             ObjectValidator,
-            propertyFilter);
+            propertyFilter
+        );
     }
 
     /// <summary>
@@ -1451,8 +1557,9 @@ public abstract class PageBase : RazorPageBase
         TModel model,
         string prefix,
         IValueProvider valueProvider,
-        params Expression<Func<TModel, object?>>[] includeExpressions)
-       where TModel : class
+        params Expression<Func<TModel, object?>>[] includeExpressions
+    )
+        where TModel : class
     {
         ArgumentNullException.ThrowIfNull(model);
         ArgumentNullException.ThrowIfNull(valueProvider);
@@ -1466,7 +1573,8 @@ public abstract class PageBase : RazorPageBase
             ModelBinderFactory,
             valueProvider,
             ObjectValidator,
-            includeExpressions);
+            includeExpressions
+        );
     }
 
     /// <summary>
@@ -1484,7 +1592,8 @@ public abstract class PageBase : RazorPageBase
         TModel model,
         string prefix,
         IValueProvider valueProvider,
-        Func<ModelMetadata, bool> propertyFilter)
+        Func<ModelMetadata, bool> propertyFilter
+    )
         where TModel : class
     {
         ArgumentNullException.ThrowIfNull(model);
@@ -1499,7 +1608,8 @@ public abstract class PageBase : RazorPageBase
             ModelBinderFactory,
             valueProvider,
             ObjectValidator,
-            propertyFilter);
+            propertyFilter
+        );
     }
 
     /// <summary>
@@ -1511,15 +1621,15 @@ public abstract class PageBase : RazorPageBase
     /// <param name="prefix">The prefix to use when looking up values in the current <see cref="IValueProvider"/>.
     /// </param>
     /// <returns>A <see cref="Task"/> that on completion returns <c>true</c> if the update is successful.</returns>
-    public virtual async Task<bool> TryUpdateModelAsync(
-        object model,
-        Type modelType,
-        string prefix)
+    public virtual async Task<bool> TryUpdateModelAsync(object model, Type modelType, string prefix)
     {
         ArgumentNullException.ThrowIfNull(model);
         ArgumentNullException.ThrowIfNull(modelType);
 
-        var (success, valueProvider) = await CompositeValueProvider.TryCreateAsync(PageContext, PageContext.ValueProviderFactories);
+        var (success, valueProvider) = await CompositeValueProvider.TryCreateAsync(
+            PageContext,
+            PageContext.ValueProviderFactories
+        );
         if (!success)
         {
             return false;
@@ -1533,7 +1643,8 @@ public abstract class PageBase : RazorPageBase
             MetadataProvider,
             ModelBinderFactory,
             valueProvider!,
-            ObjectValidator);
+            ObjectValidator
+        );
     }
 
     /// <summary>
@@ -1552,7 +1663,8 @@ public abstract class PageBase : RazorPageBase
         Type modelType,
         string prefix,
         IValueProvider valueProvider,
-        Func<ModelMetadata, bool> propertyFilter)
+        Func<ModelMetadata, bool> propertyFilter
+    )
     {
         ArgumentNullException.ThrowIfNull(model);
         ArgumentNullException.ThrowIfNull(modelType);
@@ -1568,7 +1680,8 @@ public abstract class PageBase : RazorPageBase
             ModelBinderFactory,
             valueProvider,
             ObjectValidator,
-            propertyFilter);
+            propertyFilter
+        );
     }
 
     /// <summary>
@@ -1576,8 +1689,7 @@ public abstract class PageBase : RazorPageBase
     /// </summary>
     /// <param name="model">The model to validate.</param>
     /// <returns><c>true</c> if the <see cref="ModelState"/> is valid; <c>false</c> otherwise.</returns>
-    public virtual bool TryValidateModel(
-        object model)
+    public virtual bool TryValidateModel(object model)
     {
         ArgumentNullException.ThrowIfNull(model);
 
@@ -1591,9 +1703,7 @@ public abstract class PageBase : RazorPageBase
     /// <param name="prefix">The key to use when looking up information in <see cref="ModelState"/>.
     /// </param>
     /// <returns><c>true</c> if the <see cref="ModelState"/> is valid;<c>false</c> otherwise.</returns>
-    public virtual bool TryValidateModel(
-        object model,
-        string? prefix)
+    public virtual bool TryValidateModel(object model, string? prefix)
     {
         ArgumentNullException.ThrowIfNull(model);
 
@@ -1601,7 +1711,8 @@ public abstract class PageBase : RazorPageBase
             PageContext,
             validationState: null,
             prefix: prefix ?? string.Empty,
-            model: model);
+            model: model
+        );
         return ModelState.IsValid;
     }
 }

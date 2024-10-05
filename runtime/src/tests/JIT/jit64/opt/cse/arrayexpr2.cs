@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 //((((((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+(a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3]))))-(a[6]+((a[5]+(a[4]*a[5]))-(a[6]*a[7]))))+((a[0]+((a[7]+(a[5]+a[6]))-(a[15]*a[20])))*(((a[0]+a[1])+a[6])-((a[2]+a[1])*a[10]))))-(((a[1]*a[1])+a[6])-((a[2]+a[1])*a[10])))
 
 //permutations for  ((((((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+(a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3]))))-(a[6]+((a[5]+(a[4]*a[5]))-(a[6]*a[7]))))+((a[0]+((a[7]+(a[5]+a[6]))-(a[15]*a[20])))*(((a[0]+a[1])+a[6])-((a[2]+a[1])*a[10]))))-(((a[1]*a[1])+a[6])-((a[2]+a[1])*a[10])))
@@ -356,10 +357,8 @@ namespace CseTest
 {
     using System;
 
-
     public class Test_Main
     {
-
         [Fact]
         public static int TestEntryPoint()
         {
@@ -380,86 +379,183 @@ namespace CseTest
             int v;
 
 #if LOOP
-			do {
+            do
+            {
 #endif
-            v = ((((((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))) + (a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3])))) - (a[6] + ((a[5] + (a[4] * a[5])) - (a[6] * a[7])))) + ((a[0] + ((a[7] + (a[5] + a[6])) - (a[15] * a[20]))) * (((a[0] + a[1]) + a[6]) - ((a[2] + a[1]) * a[10])))) - (((a[1] * a[1]) + a[6]) - ((a[2] + a[1]) * a[10])));
+            v = (
+                (
+                    (
+                        (
+                            (
+                                (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])))
+                                - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))
+                            ) + (a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3])))
+                        ) - (a[6] + ((a[5] + (a[4] * a[5])) - (a[6] * a[7])))
+                    )
+                    + (
+                        (a[0] + ((a[7] + (a[5] + a[6])) - (a[15] * a[20])))
+                        * (((a[0] + a[1]) + a[6]) - ((a[2] + a[1]) * a[10]))
+                    )
+                ) - (((a[1] * a[1]) + a[6]) - ((a[2] + a[1]) * a[10]))
+            );
             if (v != 57525047)
             {
-                Console.WriteLine("test0: for ((((((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+(a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3]))))-(a[6]+((a[5]+(a[4]*a[5]))-(a[6]*a[7]))))+((a[0]+((a[7]+(a[5]+a[6]))-(a[15]*a[20])))*(((a[0]+a[1])+a[6])-((a[2]+a[1])*a[10]))))-(((a[1]*a[1])+a[6])-((a[2]+a[1])*a[10])))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test0: for ((((((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+(a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3]))))-(a[6]+((a[5]+(a[4]*a[5]))-(a[6]*a[7]))))+((a[0]+((a[7]+(a[5]+a[6]))-(a[15]*a[20])))*(((a[0]+a[1])+a[6])-((a[2]+a[1])*a[10]))))-(((a[1]*a[1])+a[6])-((a[2]+a[1])*a[10])))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
-            v = (((((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))) + (a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3])))) - (a[6] + ((a[5] + (a[4] * a[5])) - (a[6] * a[7])))) + ((a[0] + ((a[7] + (a[5] + a[6])) - (a[15] * a[20]))) * (((a[0] + a[1]) + a[6]) - ((a[2] + a[1]) * a[10]))));
+            v = (
+                (
+                    (
+                        (
+                            (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])))
+                            - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))
+                        ) + (a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3])))
+                    ) - (a[6] + ((a[5] + (a[4] * a[5])) - (a[6] * a[7])))
+                )
+                + (
+                    (a[0] + ((a[7] + (a[5] + a[6])) - (a[15] * a[20])))
+                    * (((a[0] + a[1]) + a[6]) - ((a[2] + a[1]) * a[10]))
+                )
+            );
             if (v != 57515859)
             {
-                Console.WriteLine("test1: for (((((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+(a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3]))))-(a[6]+((a[5]+(a[4]*a[5]))-(a[6]*a[7]))))+((a[0]+((a[7]+(a[5]+a[6]))-(a[15]*a[20])))*(((a[0]+a[1])+a[6])-((a[2]+a[1])*a[10]))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test1: for (((((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+(a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3]))))-(a[6]+((a[5]+(a[4]*a[5]))-(a[6]*a[7]))))+((a[0]+((a[7]+(a[5]+a[6]))-(a[15]*a[20])))*(((a[0]+a[1])+a[6])-((a[2]+a[1])*a[10]))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             a[7] = return_int(false, -52);
 #if LOOP
-			for (int i = 0; i < 10; i++) {
+                for (int i = 0; i < 10; i++)
+                {
 #endif
-            v = (((a[0] + ((a[7] + (a[5] + a[6])) - (a[15] * a[20]))) * (((a[0] + a[1]) + a[6]) - ((a[2] + a[1]) * a[10]))) + ((((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))) + (a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3])))) - (a[6] + ((a[5] + (a[4] * a[5])) - (a[6] * a[7])))));
+            v = (
+                (
+                    (a[0] + ((a[7] + (a[5] + a[6])) - (a[15] * a[20])))
+                    * (((a[0] + a[1]) + a[6]) - ((a[2] + a[1]) * a[10]))
+                )
+                + (
+                    (
+                        (
+                            (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])))
+                            - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))
+                        ) + (a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3])))
+                    ) - (a[6] + ((a[5] + (a[4] * a[5])) - (a[6] * a[7])))
+                )
+            );
             if (v != 57338941)
             {
-                Console.WriteLine("test2: for (((a[0]+((a[7]+(a[5]+a[6]))-(a[15]*a[20])))*(((a[0]+a[1])+a[6])-((a[2]+a[1])*a[10])))+((((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+(a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3]))))-(a[6]+((a[5]+(a[4]*a[5]))-(a[6]*a[7])))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test2: for (((a[0]+((a[7]+(a[5]+a[6]))-(a[15]*a[20])))*(((a[0]+a[1])+a[6])-((a[2]+a[1])*a[10])))+((((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+(a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3]))))-(a[6]+((a[5]+(a[4]*a[5]))-(a[6]*a[7])))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
-            v = ((((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))) + (a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3])))) - (a[6] + ((a[5] + (a[4] * a[5])) - (a[6] * a[7]))));
+            v = (
+                (
+                    (
+                        (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])))
+                        - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))
+                    ) + (a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3])))
+                ) - (a[6] + ((a[5] + (a[4] * a[5])) - (a[6] * a[7])))
+            );
             if (v != 159091)
             {
-                Console.WriteLine("test3: for ((((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+(a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3]))))-(a[6]+((a[5]+(a[4]*a[5]))-(a[6]*a[7]))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test3: for ((((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+(a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3]))))-(a[6]+((a[5]+(a[4]*a[5]))-(a[6]*a[7]))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 #if TRY
-				try {
-#endif
-            v = (((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))) + (a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3]))));
-            if (v != 154737)
+            try
             {
-                Console.WriteLine("test4: for (((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+(a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3]))))  failed actual value {0} ", v);
-                ret = ret + 1;
-            }
-#if TRY
-				} finally {
 #endif
-            v = ((a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3]))) + ((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))));
-            if (v != 154737)
-            {
-                Console.WriteLine("test5: for ((a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3])))+((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7]))))  failed actual value {0} ", v);
-                ret = ret + 1;
-            }
+                v = (
+                    (
+                        (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])))
+                        - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))
+                    ) + (a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3])))
+                );
+                if (v != 154737)
+                {
+                    Console.WriteLine(
+                        "test4: for (((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+(a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3]))))  failed actual value {0} ",
+                        v
+                    );
+                    ret = ret + 1;
+                }
 #if TRY
-				}
+            }
+            finally
+            {
+#endif
+                v = (
+                    (a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3])))
+                    + (
+                        (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])))
+                        - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))
+                    )
+                );
+                if (v != 154737)
+                {
+                    Console.WriteLine(
+                        "test5: for ((a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3])))+((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7]))))  failed actual value {0} ",
+                        v
+                    );
+                    ret = ret + 1;
+                }
+#if TRY
+            }
 
 #endif
-            v = ((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7])));
+            v = (
+                (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])))
+                - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))
+            );
             if (v != 155033)
             {
-                Console.WriteLine("test6: for ((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test6: for ((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])));
             if (v != 150838)
             {
-                Console.WriteLine("test7: for (a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test7: for (a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = (((a[0] + (a[1] * a[2])) - (a[2] * a[3])) * a[6]);
             if (v != 150838)
             {
-                Console.WriteLine("test8: for (((a[0]+(a[1]*a[2]))-(a[2]*a[3]))*a[6])  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test8: for (((a[0]+(a[1]*a[2]))-(a[2]*a[3]))*a[6])  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = ((a[0] + (a[1] * a[2])) - (a[2] * a[3]));
             if (v != -1423)
             {
-                Console.WriteLine("test9: for ((a[0]+(a[1]*a[2]))-(a[2]*a[3]))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test9: for ((a[0]+(a[1]*a[2]))-(a[2]*a[3]))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
@@ -514,7 +610,7 @@ namespace CseTest
 
             a[7] = return_int(false, -52);
 #if LOOP
-			}
+                }
 #endif
 
             a[3] = return_int(false, -56);
@@ -563,28 +659,40 @@ namespace CseTest
             v = ((a[0] + (a[1] * a[2])) - (a[2] * a[3]));
             if (v != -45)
             {
-                Console.WriteLine("test23: for ((a[0]+(a[1]*a[2]))-(a[2]*a[3]))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test23: for ((a[0]+(a[1]*a[2]))-(a[2]*a[3]))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = (((a[0] + (a[1] * a[2])) - (a[2] * a[3])) * a[6]);
             if (v != 4770)
             {
-                Console.WriteLine("test24: for (((a[0]+(a[1]*a[2]))-(a[2]*a[3]))*a[6])  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test24: for (((a[0]+(a[1]*a[2]))-(a[2]*a[3]))*a[6])  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])));
             if (v != 4770)
             {
-                Console.WriteLine("test25: for (a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test25: for (a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = ((a[2] + (a[4] * a[5])) - (a[6] * a[7]));
             if (v != -4195)
             {
-                Console.WriteLine("test26: for ((a[2]+(a[4]*a[5]))-(a[6]*a[7]))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test26: for ((a[2]+(a[4]*a[5]))-(a[6]*a[7]))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
@@ -683,42 +791,63 @@ namespace CseTest
             v = ((a[2] + (a[4] * a[5])) - (a[6] * a[7]));
             if (v != -4124)
             {
-                Console.WriteLine("test40: for ((a[2]+(a[4]*a[5]))-(a[6]*a[7]))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test40: for ((a[2]+(a[4]*a[5]))-(a[6]*a[7]))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])));
             if (v != 4770)
             {
-                Console.WriteLine("test41: for (a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test41: for (a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
-            v = ((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7])));
+            v = (
+                (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])))
+                - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))
+            );
             if (v != 8894)
             {
-                Console.WriteLine("test42: for ((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test42: for ((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = (a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3])));
             if (v != 5058)
             {
-                Console.WriteLine("test43: for (a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3])))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test43: for (a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3])))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = (((a[8] + (a[10] * a[4])) - (a[2] * a[3])) + a[4]);
             if (v != 5058)
             {
-                Console.WriteLine("test44: for (((a[8]+(a[10]*a[4]))-(a[2]*a[3]))+a[4])  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test44: for (((a[8]+(a[10]*a[4]))-(a[2]*a[3]))+a[4])  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = ((a[8] + (a[10] * a[4])) - (a[2] * a[3]));
             if (v != 5075)
             {
-                Console.WriteLine("test45: for ((a[8]+(a[10]*a[4]))-(a[2]*a[3]))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test45: for ((a[8]+(a[10]*a[4]))-(a[2]*a[3]))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
@@ -817,56 +946,109 @@ namespace CseTest
             v = ((a[8] + (a[10] * a[4])) - (a[2] * a[3]));
             if (v != 5075)
             {
-                Console.WriteLine("test59: for ((a[8]+(a[10]*a[4]))-(a[2]*a[3]))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test59: for ((a[8]+(a[10]*a[4]))-(a[2]*a[3]))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = (((a[8] + (a[10] * a[4])) - (a[2] * a[3])) + a[4]);
             if (v != 5058)
             {
-                Console.WriteLine("test60: for (((a[8]+(a[10]*a[4]))-(a[2]*a[3]))+a[4])  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test60: for (((a[8]+(a[10]*a[4]))-(a[2]*a[3]))+a[4])  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = (a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3])));
             if (v != 5058)
             {
-                Console.WriteLine("test61: for (a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3])))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test61: for (a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3])))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
-            v = (a[4] + (((a[8] + (a[10] * a[4])) - (a[2] * a[3])) + ((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7])))));
+            v = (
+                a[4]
+                + (
+                    ((a[8] + (a[10] * a[4])) - (a[2] * a[3]))
+                    + (
+                        (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])))
+                        - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))
+                    )
+                )
+            );
             if (v != 14020)
             {
-                Console.WriteLine("test62: for (a[4]+(((a[8]+(a[10]*a[4]))-(a[2]*a[3]))+((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test62: for (a[4]+(((a[8]+(a[10]*a[4]))-(a[2]*a[3]))+((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
-            v = (((a[8] + (a[10] * a[4])) - (a[2] * a[3])) + (a[4] + ((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7])))));
+            v = (
+                ((a[8] + (a[10] * a[4])) - (a[2] * a[3]))
+                + (
+                    a[4]
+                    + (
+                        (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])))
+                        - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))
+                    )
+                )
+            );
             if (v != 14020)
             {
-                Console.WriteLine("test63: for (((a[8]+(a[10]*a[4]))-(a[2]*a[3]))+(a[4]+((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test63: for (((a[8]+(a[10]*a[4]))-(a[2]*a[3]))+(a[4]+((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
-            v = (((a[8] + (a[10] * a[4])) - (a[2] * a[3])) + ((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))));
+            v = (
+                ((a[8] + (a[10] * a[4])) - (a[2] * a[3]))
+                + (
+                    (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])))
+                    - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))
+                )
+            );
             if (v != 14037)
             {
-                Console.WriteLine("test64: for (((a[8]+(a[10]*a[4]))-(a[2]*a[3]))+((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7]))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test64: for (((a[8]+(a[10]*a[4]))-(a[2]*a[3]))+((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7]))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
-            v = (((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))) + ((a[8] + (a[10] * a[4])) - (a[2] * a[3])));
+            v = (
+                (
+                    (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])))
+                    - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))
+                ) + ((a[8] + (a[10] * a[4])) - (a[2] * a[3]))
+            );
             if (v != 14037)
             {
-                Console.WriteLine("test65: for (((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+((a[8]+(a[10]*a[4]))-(a[2]*a[3])))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test65: for (((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+((a[8]+(a[10]*a[4]))-(a[2]*a[3])))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = ((a[8] + (a[10] * a[4])) - (a[2] * a[3]));
             if (v != 5075)
             {
-                Console.WriteLine("test66: for ((a[8]+(a[10]*a[4]))-(a[2]*a[3]))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test66: for ((a[8]+(a[10]*a[4]))-(a[2]*a[3]))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
@@ -965,35 +1147,53 @@ namespace CseTest
             v = ((a[8] + (a[10] * a[4])) - (a[2] * a[3]));
             if (v != 5075)
             {
-                Console.WriteLine("test80: for ((a[8]+(a[10]*a[4]))-(a[2]*a[3]))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test80: for ((a[8]+(a[10]*a[4]))-(a[2]*a[3]))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
-            v = ((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7])));
+            v = (
+                (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])))
+                - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))
+            );
             if (v != 8962)
             {
-                Console.WriteLine("test81: for ((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test81: for ((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])));
             if (v != 4770)
             {
-                Console.WriteLine("test82: for (a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test82: for (a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = (((a[0] + (a[1] * a[2])) - (a[2] * a[3])) * a[6]);
             if (v != 4770)
             {
-                Console.WriteLine("test83: for (((a[0]+(a[1]*a[2]))-(a[2]*a[3]))*a[6])  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test83: for (((a[0]+(a[1]*a[2]))-(a[2]*a[3]))*a[6])  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = ((a[0] + (a[1] * a[2])) - (a[2] * a[3]));
             if (v != -45)
             {
-                Console.WriteLine("test84: for ((a[0]+(a[1]*a[2]))-(a[2]*a[3]))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test84: for ((a[0]+(a[1]*a[2]))-(a[2]*a[3]))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
@@ -1095,28 +1295,40 @@ namespace CseTest
             v = ((a[0] + (a[1] * a[2])) - (a[2] * a[3]));
             if (v != -45)
             {
-                Console.WriteLine("test98: for ((a[0]+(a[1]*a[2]))-(a[2]*a[3]))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test98: for ((a[0]+(a[1]*a[2]))-(a[2]*a[3]))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = (((a[0] + (a[1] * a[2])) - (a[2] * a[3])) * a[6]);
             if (v != 4770)
             {
-                Console.WriteLine("test99: for (((a[0]+(a[1]*a[2]))-(a[2]*a[3]))*a[6])  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test99: for (((a[0]+(a[1]*a[2]))-(a[2]*a[3]))*a[6])  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])));
             if (v != 4770)
             {
-                Console.WriteLine("test100: for (a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test100: for (a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = ((a[2] + (a[4] * a[5])) - (a[6] * a[7]));
             if (v != 2708)
             {
-                Console.WriteLine("test101: for ((a[2]+(a[4]*a[5]))-(a[6]*a[7]))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test101: for ((a[2]+(a[4]*a[5]))-(a[6]*a[7]))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
@@ -1216,77 +1428,138 @@ namespace CseTest
             v = ((a[2] + (a[4] * a[5])) - (a[6] * a[7]));
             if (v != 3904)
             {
-                Console.WriteLine("test115: for ((a[2]+(a[4]*a[5]))-(a[6]*a[7]))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test115: for ((a[2]+(a[4]*a[5]))-(a[6]*a[7]))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])));
             if (v != 6225)
             {
-                Console.WriteLine("test116: for (a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test116: for (a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
-            v = ((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7])));
+            v = (
+                (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])))
+                - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))
+            );
             if (v != 2321)
             {
-                Console.WriteLine("test117: for ((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test117: for ((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
-            v = (((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))) + ((a[8] + (a[10] * a[4])) - (a[2] * a[3])));
+            v = (
+                (
+                    (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])))
+                    - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))
+                ) + ((a[8] + (a[10] * a[4])) - (a[2] * a[3]))
+            );
             if (v != 21104)
             {
-                Console.WriteLine("test118: for (((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+((a[8]+(a[10]*a[4]))-(a[2]*a[3])))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test118: for (((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+((a[8]+(a[10]*a[4]))-(a[2]*a[3])))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
-            v = (((a[8] + (a[10] * a[4])) - (a[2] * a[3])) + ((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))));
+            v = (
+                ((a[8] + (a[10] * a[4])) - (a[2] * a[3]))
+                + (
+                    (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])))
+                    - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))
+                )
+            );
             if (v != 21104)
             {
-                Console.WriteLine("test119: for (((a[8]+(a[10]*a[4]))-(a[2]*a[3]))+((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7]))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test119: for (((a[8]+(a[10]*a[4]))-(a[2]*a[3]))+((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7]))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
-            v = (a[4] + ((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))));
+            v = (
+                a[4]
+                + (
+                    (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])))
+                    - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))
+                )
+            );
             if (v != 2212)
             {
-                Console.WriteLine("test120: for (a[4]+((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7]))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test120: for (a[4]+((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7]))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
-            v = (((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))) + a[4]);
+            v = (
+                (
+                    (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])))
+                    - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))
+                ) + a[4]
+            );
             if (v != 2212)
             {
-                Console.WriteLine("test121: for (((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+a[4])  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test121: for (((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+a[4])  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
-            v = ((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7])));
+            v = (
+                (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])))
+                - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))
+            );
             if (v != 2321)
             {
-                Console.WriteLine("test122: for ((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test122: for ((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])));
             if (v != 6225)
             {
-                Console.WriteLine("test123: for (a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test123: for (a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = (((a[0] + (a[1] * a[2])) - (a[2] * a[3])) * a[6]);
             if (v != 6225)
             {
-                Console.WriteLine("test124: for (((a[0]+(a[1]*a[2]))-(a[2]*a[3]))*a[6])  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test124: for (((a[0]+(a[1]*a[2]))-(a[2]*a[3]))*a[6])  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = ((a[0] + (a[1] * a[2])) - (a[2] * a[3]));
             if (v != -75)
             {
-                Console.WriteLine("test125: for ((a[0]+(a[1]*a[2]))-(a[2]*a[3]))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test125: for ((a[0]+(a[1]*a[2]))-(a[2]*a[3]))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
@@ -1387,28 +1660,40 @@ namespace CseTest
             v = ((a[0] + (a[1] * a[2])) - (a[2] * a[3]));
             if (v != -1740)
             {
-                Console.WriteLine("test139: for ((a[0]+(a[1]*a[2]))-(a[2]*a[3]))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test139: for ((a[0]+(a[1]*a[2]))-(a[2]*a[3]))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = (((a[0] + (a[1] * a[2])) - (a[2] * a[3])) * a[6]);
             if (v != 144420)
             {
-                Console.WriteLine("test140: for (((a[0]+(a[1]*a[2]))-(a[2]*a[3]))*a[6])  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test140: for (((a[0]+(a[1]*a[2]))-(a[2]*a[3]))*a[6])  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])));
             if (v != 144420)
             {
-                Console.WriteLine("test141: for (a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test141: for (a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = ((a[2] + (a[4] * a[5])) - (a[6] * a[7]));
             if (v != 3904)
             {
-                Console.WriteLine("test142: for ((a[2]+(a[4]*a[5]))-(a[6]*a[7]))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test142: for ((a[2]+(a[4]*a[5]))-(a[6]*a[7]))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
@@ -1506,57 +1791,106 @@ namespace CseTest
             v = ((a[2] + (a[4] * a[5])) - (a[6] * a[7]));
             if (v != 3904)
             {
-                Console.WriteLine("test156: for ((a[2]+(a[4]*a[5]))-(a[6]*a[7]))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test156: for ((a[2]+(a[4]*a[5]))-(a[6]*a[7]))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])));
             if (v != 144420)
             {
-                Console.WriteLine("test157: for (a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test157: for (a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             a[20] = return_int(false, -64);
-            v = ((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7])));
+            v = (
+                (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])))
+                - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))
+            );
             if (v != 140516)
             {
-                Console.WriteLine("test158: for ((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test158: for ((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
-            v = (((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))) + a[4]);
+            v = (
+                (
+                    (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])))
+                    - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))
+                ) + a[4]
+            );
             if (v != 140407)
             {
-                Console.WriteLine("test159: for (((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+a[4])  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test159: for (((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+a[4])  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
-            v = (a[4] + ((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))));
+            v = (
+                a[4]
+                + (
+                    (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])))
+                    - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))
+                )
+            );
             if (v != 140407)
             {
-                Console.WriteLine("test160: for (a[4]+((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7]))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test160: for (a[4]+((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7]))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
-            v = ((a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3]))) + ((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))));
+            v = (
+                (a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3])))
+                + (
+                    (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])))
+                    - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))
+                )
+            );
             if (v != 157525)
             {
-                Console.WriteLine("test161: for ((a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3])))+((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7]))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test161: for ((a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3])))+((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7]))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
-            v = (((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))) + (a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3]))));
+            v = (
+                (
+                    (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])))
+                    - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))
+                ) + (a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3])))
+            );
             if (v != 157525)
             {
-                Console.WriteLine("test162: for (((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+(a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3]))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test162: for (((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+(a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3]))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = (a[6] + ((a[5] + (a[4] * a[5])) - (a[6] * a[7])));
             if (v != 3701)
             {
-                Console.WriteLine("test163: for (a[6]+((a[5]+(a[4]*a[5]))-(a[6]*a[7])))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test163: for (a[6]+((a[5]+(a[4]*a[5]))-(a[6]*a[7])))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
@@ -1564,14 +1898,20 @@ namespace CseTest
             v = (((a[5] + (a[4] * a[5])) - (a[6] * a[7])) + a[6]);
             if (v != 3701)
             {
-                Console.WriteLine("test164: for (((a[5]+(a[4]*a[5]))-(a[6]*a[7]))+a[6])  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test164: for (((a[5]+(a[4]*a[5]))-(a[6]*a[7]))+a[6])  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = ((a[5] + (a[4] * a[5])) - (a[6] * a[7]));
             if (v != 3784)
             {
-                Console.WriteLine("test165: for ((a[5]+(a[4]*a[5]))-(a[6]*a[7]))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test165: for ((a[5]+(a[4]*a[5]))-(a[6]*a[7]))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
@@ -1671,70 +2011,118 @@ namespace CseTest
             v = ((a[5] + (a[4] * a[5])) - (a[6] * a[7]));
             if (v != 3784)
             {
-                Console.WriteLine("test179: for ((a[5]+(a[4]*a[5]))-(a[6]*a[7]))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test179: for ((a[5]+(a[4]*a[5]))-(a[6]*a[7]))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = (((a[5] + (a[4] * a[5])) - (a[6] * a[7])) + a[6]);
             if (v != 3701)
             {
-                Console.WriteLine("test180: for (((a[5]+(a[4]*a[5]))-(a[6]*a[7]))+a[6])  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test180: for (((a[5]+(a[4]*a[5]))-(a[6]*a[7]))+a[6])  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = (a[6] + ((a[5] + (a[4] * a[5])) - (a[6] * a[7])));
             if (v != 3701)
             {
-                Console.WriteLine("test181: for (a[6]+((a[5]+(a[4]*a[5]))-(a[6]*a[7])))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test181: for (a[6]+((a[5]+(a[4]*a[5]))-(a[6]*a[7])))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
-            v = (((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))) + (a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3]))));
+            v = (
+                (
+                    (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])))
+                    - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))
+                ) + (a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3])))
+            );
             if (v != 157525)
             {
-                Console.WriteLine("test182: for (((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+(a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3]))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test182: for (((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+(a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3]))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
-            v = ((((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))) + (a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3])))) - (a[6] + ((a[5] + (a[4] * a[5])) - (a[6] * a[7]))));
+            v = (
+                (
+                    (
+                        (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])))
+                        - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))
+                    ) + (a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3])))
+                ) - (a[6] + ((a[5] + (a[4] * a[5])) - (a[6] * a[7])))
+            );
             if (v != 153824)
             {
-                Console.WriteLine("test183: for ((((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+(a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3]))))-(a[6]+((a[5]+(a[4]*a[5]))-(a[6]*a[7]))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test183: for ((((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+(a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3]))))-(a[6]+((a[5]+(a[4]*a[5]))-(a[6]*a[7]))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
-            v = ((a[0] + ((a[7] + (a[5] + a[6])) - (a[15] * a[20]))) * (((a[0] + a[1]) + a[6]) - ((a[2] + a[1]) * a[10])));
+            v = (
+                (a[0] + ((a[7] + (a[5] + a[6])) - (a[15] * a[20])))
+                * (((a[0] + a[1]) + a[6]) - ((a[2] + a[1]) * a[10]))
+            );
             if (v != 69908131)
             {
-                Console.WriteLine("test184: for ((a[0]+((a[7]+(a[5]+a[6]))-(a[15]*a[20])))*(((a[0]+a[1])+a[6])-((a[2]+a[1])*a[10])))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test184: for ((a[0]+((a[7]+(a[5]+a[6]))-(a[15]*a[20])))*(((a[0]+a[1])+a[6])-((a[2]+a[1])*a[10])))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
-            v = ((((a[0] + a[1]) + a[6]) - ((a[2] + a[1]) * a[10])) * (a[0] + ((a[7] + (a[5] + a[6])) - (a[15] * a[20]))));
+            v = (
+                (((a[0] + a[1]) + a[6]) - ((a[2] + a[1]) * a[10]))
+                * (a[0] + ((a[7] + (a[5] + a[6])) - (a[15] * a[20])))
+            );
             if (v != 69908131)
             {
-                Console.WriteLine("test185: for ((((a[0]+a[1])+a[6])-((a[2]+a[1])*a[10]))*(a[0]+((a[7]+(a[5]+a[6]))-(a[15]*a[20]))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test185: for ((((a[0]+a[1])+a[6])-((a[2]+a[1])*a[10]))*(a[0]+((a[7]+(a[5]+a[6]))-(a[15]*a[20]))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = (a[0] + ((a[7] + (a[5] + a[6])) - (a[15] * a[20])));
             if (v != -37727)
             {
-                Console.WriteLine("test186: for (a[0]+((a[7]+(a[5]+a[6]))-(a[15]*a[20])))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test186: for (a[0]+((a[7]+(a[5]+a[6]))-(a[15]*a[20])))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = (((a[7] + (a[5] + a[6])) - (a[15] * a[20])) + a[0]);
             if (v != -37727)
             {
-                Console.WriteLine("test187: for (((a[7]+(a[5]+a[6]))-(a[15]*a[20]))+a[0])  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test187: for (((a[7]+(a[5]+a[6]))-(a[15]*a[20]))+a[0])  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = ((a[7] + (a[5] + a[6])) - (a[15] * a[20]));
             if (v != -37652)
             {
-                Console.WriteLine("test188: for ((a[7]+(a[5]+a[6]))-(a[15]*a[20]))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test188: for ((a[7]+(a[5]+a[6]))-(a[15]*a[20]))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
@@ -1904,7 +2292,10 @@ namespace CseTest
             v = ((a[7] + (a[5] + a[6])) - (a[15] * a[20]));
             if (v != -37649)
             {
-                Console.WriteLine("test212: for ((a[7]+(a[5]+a[6]))-(a[15]*a[20]))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test212: for ((a[7]+(a[5]+a[6]))-(a[15]*a[20]))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
@@ -1912,7 +2303,10 @@ namespace CseTest
             v = (((a[7] + (a[5] + a[6])) - (a[15] * a[20])) + a[0]);
             if (v != -37703)
             {
-                Console.WriteLine("test213: for (((a[7]+(a[5]+a[6]))-(a[15]*a[20]))+a[0])  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test213: for (((a[7]+(a[5]+a[6]))-(a[15]*a[20]))+a[0])  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
@@ -1920,14 +2314,20 @@ namespace CseTest
             v = (a[0] + ((a[7] + (a[5] + a[6])) - (a[15] * a[20])));
             if (v != -22842)
             {
-                Console.WriteLine("test214: for (a[0]+((a[7]+(a[5]+a[6]))-(a[15]*a[20])))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test214: for (a[0]+((a[7]+(a[5]+a[6]))-(a[15]*a[20])))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = (((a[0] + a[1]) + a[6]) - ((a[2] + a[1]) * a[10]));
             if (v != 4921)
             {
-                Console.WriteLine("test215: for (((a[0]+a[1])+a[6])-((a[2]+a[1])*a[10]))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test215: for (((a[0]+a[1])+a[6])-((a[2]+a[1])*a[10]))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
@@ -2126,42 +2526,92 @@ namespace CseTest
             v = (((a[0] + a[1]) + a[6]) - ((a[2] + a[1]) * a[10]));
             if (v != -12913)
             {
-                Console.WriteLine("test243: for (((a[0]+a[1])+a[6])-((a[2]+a[1])*a[10]))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test243: for (((a[0]+a[1])+a[6])-((a[2]+a[1])*a[10]))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
-            v = ((((a[0] + a[1]) + a[6]) - ((a[2] + a[1]) * a[10])) * (a[0] + ((a[7] + (a[5] + a[6])) - (a[15] * a[20]))));
+            v = (
+                (((a[0] + a[1]) + a[6]) - ((a[2] + a[1]) * a[10]))
+                * (a[0] + ((a[7] + (a[5] + a[6])) - (a[15] * a[20])))
+            );
             if (v != 294364748)
             {
-                Console.WriteLine("test244: for ((((a[0]+a[1])+a[6])-((a[2]+a[1])*a[10]))*(a[0]+((a[7]+(a[5]+a[6]))-(a[15]*a[20]))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test244: for ((((a[0]+a[1])+a[6])-((a[2]+a[1])*a[10]))*(a[0]+((a[7]+(a[5]+a[6]))-(a[15]*a[20]))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
-            v = ((a[0] + ((a[7] + (a[5] + a[6])) - (a[15] * a[20]))) * (((a[0] + a[1]) + a[6]) - ((a[2] + a[1]) * a[10])));
+            v = (
+                (a[0] + ((a[7] + (a[5] + a[6])) - (a[15] * a[20])))
+                * (((a[0] + a[1]) + a[6]) - ((a[2] + a[1]) * a[10]))
+            );
             if (v != 294364748)
             {
-                Console.WriteLine("test245: for ((a[0]+((a[7]+(a[5]+a[6]))-(a[15]*a[20])))*(((a[0]+a[1])+a[6])-((a[2]+a[1])*a[10])))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test245: for ((a[0]+((a[7]+(a[5]+a[6]))-(a[15]*a[20])))*(((a[0]+a[1])+a[6])-((a[2]+a[1])*a[10])))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
-            v = (((a[0] + ((a[7] + (a[5] + a[6])) - (a[15] * a[20]))) * (((a[0] + a[1]) + a[6]) - ((a[2] + a[1]) * a[10]))) + ((((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))) + (a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3])))) - (a[6] + ((a[5] + (a[4] * a[5])) - (a[6] * a[7])))));
+            v = (
+                (
+                    (a[0] + ((a[7] + (a[5] + a[6])) - (a[15] * a[20])))
+                    * (((a[0] + a[1]) + a[6]) - ((a[2] + a[1]) * a[10]))
+                )
+                + (
+                    (
+                        (
+                            (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])))
+                            - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))
+                        ) + (a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3])))
+                    ) - (a[6] + ((a[5] + (a[4] * a[5])) - (a[6] * a[7])))
+                )
+            );
             if (v != 294389083)
             {
-                Console.WriteLine("test246: for (((a[0]+((a[7]+(a[5]+a[6]))-(a[15]*a[20])))*(((a[0]+a[1])+a[6])-((a[2]+a[1])*a[10])))+((((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+(a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3]))))-(a[6]+((a[5]+(a[4]*a[5]))-(a[6]*a[7])))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test246: for (((a[0]+((a[7]+(a[5]+a[6]))-(a[15]*a[20])))*(((a[0]+a[1])+a[6])-((a[2]+a[1])*a[10])))+((((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+(a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3]))))-(a[6]+((a[5]+(a[4]*a[5]))-(a[6]*a[7])))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
-            v = (((((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))) + (a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3])))) - (a[6] + ((a[5] + (a[4] * a[5])) - (a[6] * a[7])))) + ((a[0] + ((a[7] + (a[5] + a[6])) - (a[15] * a[20]))) * (((a[0] + a[1]) + a[6]) - ((a[2] + a[1]) * a[10]))));
+            v = (
+                (
+                    (
+                        (
+                            (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])))
+                            - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))
+                        ) + (a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3])))
+                    ) - (a[6] + ((a[5] + (a[4] * a[5])) - (a[6] * a[7])))
+                )
+                + (
+                    (a[0] + ((a[7] + (a[5] + a[6])) - (a[15] * a[20])))
+                    * (((a[0] + a[1]) + a[6]) - ((a[2] + a[1]) * a[10]))
+                )
+            );
             if (v != 294389083)
             {
-                Console.WriteLine("test247: for (((((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+(a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3]))))-(a[6]+((a[5]+(a[4]*a[5]))-(a[6]*a[7]))))+((a[0]+((a[7]+(a[5]+a[6]))-(a[15]*a[20])))*(((a[0]+a[1])+a[6])-((a[2]+a[1])*a[10]))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test247: for (((((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+(a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3]))))-(a[6]+((a[5]+(a[4]*a[5]))-(a[6]*a[7]))))+((a[0]+((a[7]+(a[5]+a[6]))-(a[15]*a[20])))*(((a[0]+a[1])+a[6])-((a[2]+a[1])*a[10]))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
             v = (((a[1] * a[1]) + a[6]) - ((a[2] + a[1]) * a[10]));
             if (v != -12727)
             {
-                Console.WriteLine("test248: for (((a[1]*a[1])+a[6])-((a[2]+a[1])*a[10]))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test248: for (((a[1]*a[1])+a[6])-((a[2]+a[1])*a[10]))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
@@ -2249,9 +2699,10 @@ namespace CseTest
                 Console.WriteLine("test260: for (a[1]+a[2])  failed actual value {0} ", v);
                 ret = ret + 1;
             }
-#if LOOP            
+#if LOOP
 
-          do {
+                do
+                {
 #endif
             v = (a[1] + a[2]);
             if (v != -86)
@@ -2261,7 +2712,7 @@ namespace CseTest
             }
 
 #if LOOP
-            } while (v==0);
+                } while (v == 0);
 #endif
             v = (a[2] + a[1]);
             if (v != -86)
@@ -2294,25 +2745,62 @@ namespace CseTest
             v = (((a[1] * a[1]) + a[6]) - ((a[2] + a[1]) * a[10]));
             if (v != -12727)
             {
-                Console.WriteLine("test266: for (((a[1]*a[1])+a[6])-((a[2]+a[1])*a[10]))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test266: for (((a[1]*a[1])+a[6])-((a[2]+a[1])*a[10]))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
-            v = (((((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))) + (a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3])))) - (a[6] + ((a[5] + (a[4] * a[5])) - (a[6] * a[7])))) + ((a[0] + ((a[7] + (a[5] + a[6])) - (a[15] * a[20]))) * (((a[0] + a[1]) + a[6]) - ((a[2] + a[1]) * a[10]))));
+            v = (
+                (
+                    (
+                        (
+                            (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])))
+                            - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))
+                        ) + (a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3])))
+                    ) - (a[6] + ((a[5] + (a[4] * a[5])) - (a[6] * a[7])))
+                )
+                + (
+                    (a[0] + ((a[7] + (a[5] + a[6])) - (a[15] * a[20])))
+                    * (((a[0] + a[1]) + a[6]) - ((a[2] + a[1]) * a[10]))
+                )
+            );
             if (v != 233956243)
             {
-                Console.WriteLine("test267: for (((((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+(a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3]))))-(a[6]+((a[5]+(a[4]*a[5]))-(a[6]*a[7]))))+((a[0]+((a[7]+(a[5]+a[6]))-(a[15]*a[20])))*(((a[0]+a[1])+a[6])-((a[2]+a[1])*a[10]))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test267: for (((((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+(a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3]))))-(a[6]+((a[5]+(a[4]*a[5]))-(a[6]*a[7]))))+((a[0]+((a[7]+(a[5]+a[6]))-(a[15]*a[20])))*(((a[0]+a[1])+a[6])-((a[2]+a[1])*a[10]))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 
-            v = ((((((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))) + (a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3])))) - (a[6] + ((a[5] + (a[4] * a[5])) - (a[6] * a[7])))) + ((a[0] + ((a[7] + (a[5] + a[6])) - (a[15] * a[20]))) * (((a[0] + a[1]) + a[6]) - ((a[2] + a[1]) * a[10])))) - (((a[1] * a[1]) + a[6]) - ((a[2] + a[1]) * a[10])));
+            v = (
+                (
+                    (
+                        (
+                            (
+                                (a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3])))
+                                - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))
+                            ) + (a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3])))
+                        ) - (a[6] + ((a[5] + (a[4] * a[5])) - (a[6] * a[7])))
+                    )
+                    + (
+                        (a[0] + ((a[7] + (a[5] + a[6])) - (a[15] * a[20])))
+                        * (((a[0] + a[1]) + a[6]) - ((a[2] + a[1]) * a[10]))
+                    )
+                ) - (((a[1] * a[1]) + a[6]) - ((a[2] + a[1]) * a[10]))
+            );
             if (v != 233968970)
             {
-                Console.WriteLine("test268: for ((((((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+(a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3]))))-(a[6]+((a[5]+(a[4]*a[5]))-(a[6]*a[7]))))+((a[0]+((a[7]+(a[5]+a[6]))-(a[15]*a[20])))*(((a[0]+a[1])+a[6])-((a[2]+a[1])*a[10]))))-(((a[1]*a[1])+a[6])-((a[2]+a[1])*a[10])))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test268: for ((((((a[6]*((a[0]+(a[1]*a[2]))-(a[2]*a[3])))-((a[2]+(a[4]*a[5]))-(a[6]*a[7])))+(a[4]+((a[8]+(a[10]*a[4]))-(a[2]*a[3]))))-(a[6]+((a[5]+(a[4]*a[5]))-(a[6]*a[7]))))+((a[0]+((a[7]+(a[5]+a[6]))-(a[15]*a[20])))*(((a[0]+a[1])+a[6])-((a[2]+a[1])*a[10]))))-(((a[1]*a[1])+a[6])-((a[2]+a[1])*a[10])))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
 #if LOOP
-			} while (v == 0);
+            } while (v == 0);
 #endif
             Console.WriteLine(ret);
             return ret;
@@ -2336,4 +2824,3 @@ namespace CseTest
         }
     }
 }
-

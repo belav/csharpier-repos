@@ -21,15 +21,22 @@ namespace System.Runtime.CompilerServices
         private static unsafe void* GetSpanDataFrom(
             RuntimeFieldHandle fldHandle,
             RuntimeTypeHandle targetTypeHandle,
-            out int count)
+            out int count
+        )
         {
-            fixed (int *pCount = &count)
+            fixed (int* pCount = &count)
             {
-                return (void*)GetSpanDataFrom(fldHandle.Value, targetTypeHandle.Value, new IntPtr(pCount));
+                return (void*)GetSpanDataFrom(
+                    fldHandle.Value,
+                    targetTypeHandle.Value,
+                    new IntPtr(pCount)
+                );
             }
         }
 
-        [Obsolete("OffsetToStringData has been deprecated. Use string.GetPinnableReference() instead.")]
+        [Obsolete(
+            "OffsetToStringData has been deprecated. Use string.GetPinnableReference() instead."
+        )]
         public static int OffsetToStringData => string.OFFSET_TO_STRING;
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -39,7 +46,7 @@ namespace System.Runtime.CompilerServices
         public static int GetHashCode(object? o)
         {
             // NOTE: the interpreter does not run this code.  It intrinsifies the whole RuntimeHelpers.GetHashCode function
-            if (Threading.ObjectHeader.TryGetHashCode (o, out int hash))
+            if (Threading.ObjectHeader.TryGetHashCode(o, out int hash))
                 return hash;
             return InternalGetHashCode(o);
         }
@@ -56,7 +63,7 @@ namespace System.Runtime.CompilerServices
         internal static int TryGetHashCode(object? o)
         {
             // NOTE: the interpreter does not run this code.  It intrinsifies the whole RuntimeHelpers.TryGetHashCode function
-            if (Threading.ObjectHeader.TryGetHashCode (o, out int hash))
+            if (Threading.ObjectHeader.TryGetHashCode(o, out int hash))
                 return hash;
             return 0;
         }
@@ -82,7 +89,10 @@ namespace System.Runtime.CompilerServices
         public static void RunClassConstructor(RuntimeTypeHandle type)
         {
             if (type.Value == IntPtr.Zero)
-                throw new ArgumentException(SR.InvalidOperation_HandleIsNotInitialized, nameof(type));
+                throw new ArgumentException(
+                    SR.InvalidOperation_HandleIsNotInitialized,
+                    nameof(type)
+                );
 
             RunClassConstructor(type.Value);
         }
@@ -100,9 +110,7 @@ namespace System.Runtime.CompilerServices
             return SufficientExecutionStack();
         }
 
-        public static void PrepareDelegate(Delegate d)
-        {
-        }
+        public static void PrepareDelegate(Delegate d) { }
 
         public static void PrepareMethod(RuntimeMethodHandle method)
         {
@@ -114,13 +122,19 @@ namespace System.Runtime.CompilerServices
             }
         }
 
-        public static void PrepareMethod(RuntimeMethodHandle method, RuntimeTypeHandle[]? instantiation)
+        public static void PrepareMethod(
+            RuntimeMethodHandle method,
+            RuntimeTypeHandle[]? instantiation
+        )
         {
             if (method.IsNullHandle())
                 throw new ArgumentException(SR.Argument_InvalidHandle);
             unsafe
             {
-                IntPtr[]? instantiations = RuntimeTypeHandle.CopyRuntimeTypeHandles(instantiation, out int length);
+                IntPtr[]? instantiations = RuntimeTypeHandle.CopyRuntimeTypeHandles(
+                    instantiation,
+                    out int length
+                );
                 fixed (IntPtr* pinst = instantiations)
                 {
                     PrepareMethod(method.Value, pinst, length);
@@ -132,7 +146,10 @@ namespace System.Runtime.CompilerServices
         public static void RunModuleConstructor(ModuleHandle module)
         {
             if (module == ModuleHandle.EmptyHandle)
-                throw new ArgumentException(SR.InvalidOperation_HandleIsNotInitialized, nameof(module));
+                throw new ArgumentException(
+                    SR.InvalidOperation_HandleIsNotInitialized,
+                    nameof(module)
+                );
 
             RunModuleConstructor(module.Value);
         }
@@ -146,7 +163,8 @@ namespace System.Runtime.CompilerServices
         internal static ref byte GetRawData(this object obj) => ref obj.GetRawData();
 
         [Intrinsic]
-        public static bool IsReferenceOrContainsReferences<T>() => IsReferenceOrContainsReferences<T>();
+        public static bool IsReferenceOrContainsReferences<T>() =>
+            IsReferenceOrContainsReferences<T>();
 
         [Intrinsic]
         internal static bool IsBitwiseEquatable<T>() => IsBitwiseEquatable<T>();
@@ -167,8 +185,12 @@ namespace System.Runtime.CompilerServices
             // This obviously won't cover a type with no constructor. Reference types with no
             // constructor are an academic problem. Valuetypes with no constructors are a problem,
             // but IL Linker currently treats them as always implicitly boxed.
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-            Type type)
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.NonPublicConstructors
+            )]
+                Type type
+        )
         {
             if (type is not RuntimeType rt)
             {
@@ -180,9 +202,12 @@ namespace System.Runtime.CompilerServices
             return GetUninitializedObjectInternal(new RuntimeTypeHandle(rt).Value);
         }
 
-
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern unsafe void PrepareMethod(IntPtr method, IntPtr* instantiations, int ninst);
+        private static extern unsafe void PrepareMethod(
+            IntPtr method,
+            IntPtr* instantiations,
+            int ninst
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern object GetUninitializedObjectInternal(IntPtr type);
@@ -194,7 +219,8 @@ namespace System.Runtime.CompilerServices
         private static extern unsafe IntPtr GetSpanDataFrom(
             IntPtr fldHandle,
             IntPtr targetTypeHandle,
-            IntPtr count);
+            IntPtr count
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern void RunClassConstructor(IntPtr type);

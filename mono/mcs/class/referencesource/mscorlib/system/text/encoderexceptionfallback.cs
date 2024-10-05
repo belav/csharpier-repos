@@ -7,16 +7,14 @@
 namespace System.Text
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Diagnostics.Contracts;
+    using System.Runtime.Serialization;
 
     [Serializable]
     public sealed class EncoderExceptionFallback : EncoderFallback
     {
         // Construction
-        public EncoderExceptionFallback()
-        {
-        }
+        public EncoderExceptionFallback() { }
 
         public override EncoderFallbackBuffer CreateFallbackBuffer()
         {
@@ -26,10 +24,7 @@ namespace System.Text
         // Maximum number of characters that this instance of this fallback could return
         public override int MaxCharCount
         {
-            get
-            {
-                return 0;
-            }
+            get { return 0; }
         }
 
         public override bool Equals(Object value)
@@ -48,31 +43,39 @@ namespace System.Text
         }
     }
 
-
     public sealed class EncoderExceptionFallbackBuffer : EncoderFallbackBuffer
     {
-        public EncoderExceptionFallbackBuffer(){}
+        public EncoderExceptionFallbackBuffer() { }
+
         public override bool Fallback(char charUnknown, int index)
         {
             // Fall back our char
             throw new EncoderFallbackException(
-                Environment.GetResourceString("Argument_InvalidCodePageConversionIndex",
-                    (int)charUnknown, index), charUnknown, index);
+                Environment.GetResourceString(
+                    "Argument_InvalidCodePageConversionIndex",
+                    (int)charUnknown,
+                    index
+                ),
+                charUnknown,
+                index
+            );
         }
 
         public override bool Fallback(char charUnknownHigh, char charUnknownLow, int index)
         {
             if (!Char.IsHighSurrogate(charUnknownHigh))
             {
-                throw new ArgumentOutOfRangeException("charUnknownHigh",
-                    Environment.GetResourceString("ArgumentOutOfRange_Range",
-                    0xD800, 0xDBFF));
+                throw new ArgumentOutOfRangeException(
+                    "charUnknownHigh",
+                    Environment.GetResourceString("ArgumentOutOfRange_Range", 0xD800, 0xDBFF)
+                );
             }
             if (!Char.IsLowSurrogate(charUnknownLow))
             {
-                throw new ArgumentOutOfRangeException("charUnknownLow",
-                    Environment.GetResourceString("ArgumentOutOfRange_Range",
-                    0xDC00, 0xDFFF));
+                throw new ArgumentOutOfRangeException(
+                    "charUnknownLow",
+                    Environment.GetResourceString("ArgumentOutOfRange_Range", 0xDC00, 0xDFFF)
+                );
             }
             Contract.EndContractBlock();
 
@@ -80,8 +83,15 @@ namespace System.Text
 
             // Fall back our char
             throw new EncoderFallbackException(
-                Environment.GetResourceString("Argument_InvalidCodePageConversionIndex",
-                    iTemp, index), charUnknownHigh, charUnknownLow, index);
+                Environment.GetResourceString(
+                    "Argument_InvalidCodePageConversionIndex",
+                    iTemp,
+                    index
+                ),
+                charUnknownHigh,
+                charUnknownLow,
+                index
+            );
         }
 
         public override char GetNextChar()
@@ -98,20 +108,17 @@ namespace System.Text
         // Exceptions are always empty
         public override int Remaining
         {
-            get
-            {
-                return 0;
-            }
+            get { return 0; }
         }
     }
 
     [Serializable]
     public sealed class EncoderFallbackException : ArgumentException
     {
-        char    charUnknown;
-        char    charUnknownHigh;
-        char    charUnknownLow;
-        int     index;
+        char charUnknown;
+        char charUnknownHigh;
+        char charUnknownLow;
+        int index;
 
         public EncoderFallbackException()
             : base(Environment.GetResourceString("Arg_ArgumentException"))
@@ -131,31 +138,37 @@ namespace System.Text
             SetErrorCode(__HResults.COR_E_ARGUMENT);
         }
 
-        internal EncoderFallbackException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        internal EncoderFallbackException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
-        internal EncoderFallbackException(
-            String message, char charUnknown, int index) : base(message)
+        internal EncoderFallbackException(String message, char charUnknown, int index)
+            : base(message)
         {
             this.charUnknown = charUnknown;
             this.index = index;
         }
 
         internal EncoderFallbackException(
-            String message, char charUnknownHigh, char charUnknownLow, int index) : base(message)
+            String message,
+            char charUnknownHigh,
+            char charUnknownLow,
+            int index
+        )
+            : base(message)
         {
             if (!Char.IsHighSurrogate(charUnknownHigh))
             {
-                throw new ArgumentOutOfRangeException("charUnknownHigh",
-                    Environment.GetResourceString("ArgumentOutOfRange_Range",
-                    0xD800, 0xDBFF));
+                throw new ArgumentOutOfRangeException(
+                    "charUnknownHigh",
+                    Environment.GetResourceString("ArgumentOutOfRange_Range", 0xD800, 0xDBFF)
+                );
             }
             if (!Char.IsLowSurrogate(charUnknownLow))
             {
-                throw new ArgumentOutOfRangeException("charUnknownLow",
-                    Environment.GetResourceString("ArgumentOutOfRange_Range",
-                    0xDC00, 0xDFFF));
+                throw new ArgumentOutOfRangeException(
+                    "charUnknownLow",
+                    Environment.GetResourceString("ArgumentOutOfRange_Range", 0xDC00, 0xDFFF)
+                );
             }
             Contract.EndContractBlock();
 
@@ -166,34 +179,22 @@ namespace System.Text
 
         public char CharUnknown
         {
-            get
-            {
-                return (charUnknown);
-            }
+            get { return (charUnknown); }
         }
 
         public char CharUnknownHigh
         {
-            get
-            {
-                return (charUnknownHigh);
-            }
+            get { return (charUnknownHigh); }
         }
 
         public char CharUnknownLow
         {
-            get
-            {
-                return (charUnknownLow);
-            }
+            get { return (charUnknownLow); }
         }
 
         public int Index
         {
-            get
-            {
-                return index;
-            }
+            get { return index; }
         }
 
         // Return true if the unknown character is a surrogate pair.

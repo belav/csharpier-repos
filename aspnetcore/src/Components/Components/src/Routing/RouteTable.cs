@@ -11,27 +11,33 @@ namespace Microsoft.AspNetCore.Components.Routing;
 internal sealed class RouteTable(TreeRouter treeRouter)
 {
     private readonly TreeRouter _router = treeRouter;
-    private static readonly ConcurrentDictionary<(Type, string), InboundRouteEntry> _routeEntryCache = new();
+    private static readonly ConcurrentDictionary<
+        (Type, string),
+        InboundRouteEntry
+    > _routeEntryCache = new();
 
     public TreeRouter? TreeRouter => _router;
 
     [UnconditionalSuppressMessage(
         "Trimming",
         "IL2077:Target parameter argument does not satisfy 'DynamicallyAccessedMembersAttribute' in call to target method. The source field does not have matching annotations.",
-        Justification = "We don't trim the user assemblies and this code is only used on the server.")]
+        Justification = "We don't trim the user assemblies and this code is only used on the server."
+    )]
     internal static RouteData ProcessParameters(RouteData endpointRouteData)
     {
         if (endpointRouteData.Template != null)
         {
             var entry = _routeEntryCache.GetOrAdd(
                 (endpointRouteData.PageType, endpointRouteData.Template),
-                ((Type page, string template) key) => RouteTableFactory.CreateEntry(key.page, key.template));
+                ((Type page, string template) key) =>
+                    RouteTableFactory.CreateEntry(key.page, key.template)
+            );
 
             var routeValueDictionary = new RouteValueDictionary(endpointRouteData.RouteValues);
             ProcessParameters(entry, routeValueDictionary);
             return new RouteData(endpointRouteData.PageType, routeValueDictionary)
             {
-                Template = endpointRouteData.Template
+                Template = endpointRouteData.Template,
             };
         }
         else
@@ -86,25 +92,46 @@ internal sealed class RouteTable(TreeRouter treeRouter)
                             routeValues[parameter.Name] = bool.Parse((string)parameterValue!);
                             break;
                         case "datetime":
-                            routeValues[parameter.Name] = DateTime.Parse((string)parameterValue!, CultureInfo.InvariantCulture);
+                            routeValues[parameter.Name] = DateTime.Parse(
+                                (string)parameterValue!,
+                                CultureInfo.InvariantCulture
+                            );
                             break;
                         case "decimal":
-                            routeValues[parameter.Name] = decimal.Parse((string)parameterValue!, CultureInfo.InvariantCulture);
+                            routeValues[parameter.Name] = decimal.Parse(
+                                (string)parameterValue!,
+                                CultureInfo.InvariantCulture
+                            );
                             break;
                         case "double":
-                            routeValues[parameter.Name] = double.Parse((string)parameterValue!, CultureInfo.InvariantCulture);
+                            routeValues[parameter.Name] = double.Parse(
+                                (string)parameterValue!,
+                                CultureInfo.InvariantCulture
+                            );
                             break;
                         case "float":
-                            routeValues[parameter.Name] = float.Parse((string)parameterValue!, CultureInfo.InvariantCulture);
+                            routeValues[parameter.Name] = float.Parse(
+                                (string)parameterValue!,
+                                CultureInfo.InvariantCulture
+                            );
                             break;
                         case "guid":
-                            routeValues[parameter.Name] = Guid.Parse((string)parameterValue!, CultureInfo.InvariantCulture);
+                            routeValues[parameter.Name] = Guid.Parse(
+                                (string)parameterValue!,
+                                CultureInfo.InvariantCulture
+                            );
                             break;
                         case "int":
-                            routeValues[parameter.Name] = int.Parse((string)parameterValue!, CultureInfo.InvariantCulture);
+                            routeValues[parameter.Name] = int.Parse(
+                                (string)parameterValue!,
+                                CultureInfo.InvariantCulture
+                            );
                             break;
                         case "long":
-                            routeValues[parameter.Name] = long.Parse((string)parameterValue!, CultureInfo.InvariantCulture);
+                            routeValues[parameter.Name] = long.Parse(
+                                (string)parameterValue!,
+                                CultureInfo.InvariantCulture
+                            );
                             break;
                         default:
                             continue;

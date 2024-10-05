@@ -11,8 +11,7 @@ internal sealed class ServerSession : IDisposable
     internal unsafe ServerSession()
     {
         ulong serverSessionId = 0;
-        var statusCode = PInvoke.HttpCreateServerSession(
-            HttpApi.Version, &serverSessionId, 0);
+        var statusCode = PInvoke.HttpCreateServerSession(HttpApi.Version, &serverSessionId, 0);
 
         if (statusCode != ErrorCodes.ERROR_SUCCESS)
         {

@@ -9,9 +9,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class InternalCheckConstraintBuilder :
-    AnnotatableBuilder<CheckConstraint, IConventionModelBuilder>,
-    IConventionCheckConstraintBuilder
+public class InternalCheckConstraintBuilder
+    : AnnotatableBuilder<CheckConstraint, IConventionModelBuilder>,
+        IConventionCheckConstraintBuilder
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -19,10 +19,11 @@ public class InternalCheckConstraintBuilder :
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public InternalCheckConstraintBuilder(CheckConstraint checkConstraint, IConventionModelBuilder modelBuilder)
-        : base(checkConstraint, modelBuilder)
-    {
-    }
+    public InternalCheckConstraintBuilder(
+        CheckConstraint checkConstraint,
+        IConventionModelBuilder modelBuilder
+    )
+        : base(checkConstraint, modelBuilder) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -30,7 +31,10 @@ public class InternalCheckConstraintBuilder :
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IConventionCheckConstraintBuilder? HasName(string? name, ConfigurationSource configurationSource)
+    public virtual IConventionCheckConstraintBuilder? HasName(
+        string? name,
+        ConfigurationSource configurationSource
+    )
     {
         if (CanSetName(name, configurationSource))
         {
@@ -47,9 +51,9 @@ public class InternalCheckConstraintBuilder :
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool CanSetName(string? name, ConfigurationSource configurationSource)
-        => configurationSource.Overrides(Metadata.GetNameConfigurationSource())
-            || Metadata.Name == name;
+    public virtual bool CanSetName(string? name, ConfigurationSource configurationSource) =>
+        configurationSource.Overrides(Metadata.GetNameConfigurationSource())
+        || Metadata.Name == name;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -61,7 +65,8 @@ public class InternalCheckConstraintBuilder :
         IConventionEntityType entityType,
         string name,
         string? sql,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         List<IConventionCheckConstraint>? checkConstraintsToBeDetached = null;
         var constraint = entityType.FindCheckConstraint(name);
@@ -85,15 +90,19 @@ public class InternalCheckConstraintBuilder :
         {
             foreach (var derivedType in entityType.GetDerivedTypes())
             {
-                var derivedCheckConstraint =
-                    (IConventionCheckConstraint?)CheckConstraint.FindDeclaredCheckConstraint(derivedType, name);
+                var derivedCheckConstraint = (IConventionCheckConstraint?)
+                    CheckConstraint.FindDeclaredCheckConstraint(derivedType, name);
                 if (derivedCheckConstraint == null)
                 {
                     continue;
                 }
 
-                if (derivedCheckConstraint.Sql != sql
-                    && !configurationSource.Overrides(derivedCheckConstraint.GetConfigurationSource()))
+                if (
+                    derivedCheckConstraint.Sql != sql
+                    && !configurationSource.Overrides(
+                        derivedCheckConstraint.GetConfigurationSource()
+                    )
+                )
                 {
                     return null;
                 }
@@ -111,13 +120,21 @@ public class InternalCheckConstraintBuilder :
             foreach (var checkConstraintToBeDetached in checkConstraintsToBeDetached)
             {
                 detachedCheckConstraints.Add(
-                    checkConstraintToBeDetached.EntityType.RemoveCheckConstraint(checkConstraintToBeDetached.ModelName)!);
+                    checkConstraintToBeDetached.EntityType.RemoveCheckConstraint(
+                        checkConstraintToBeDetached.ModelName
+                    )!
+                );
             }
         }
 
         if (sql != null)
         {
-            constraint = new CheckConstraint((IMutableEntityType)entityType, name, sql, configurationSource);
+            constraint = new CheckConstraint(
+                (IMutableEntityType)entityType,
+                name,
+                sql,
+                configurationSource
+            );
 
             if (detachedCheckConstraints != null)
             {
@@ -141,7 +158,8 @@ public class InternalCheckConstraintBuilder :
         IConventionEntityType entityType,
         string name,
         string? sql,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         var constraint = entityType.FindCheckConstraint(name);
         if (constraint != null)
@@ -152,14 +170,17 @@ public class InternalCheckConstraintBuilder :
 
         foreach (var derivedType in entityType.GetDerivedTypes())
         {
-            var derivedCheckConstraint = (IConventionCheckConstraint?)CheckConstraint.FindDeclaredCheckConstraint(derivedType, name);
+            var derivedCheckConstraint = (IConventionCheckConstraint?)
+                CheckConstraint.FindDeclaredCheckConstraint(derivedType, name);
             if (derivedCheckConstraint == null)
             {
                 continue;
             }
 
-            if (derivedCheckConstraint.Sql != sql
-                && !configurationSource.Overrides(derivedCheckConstraint.GetConfigurationSource()))
+            if (
+                derivedCheckConstraint.Sql != sql
+                && !configurationSource.Overrides(derivedCheckConstraint.GetConfigurationSource())
+            )
             {
                 return false;
             }
@@ -176,32 +197,66 @@ public class InternalCheckConstraintBuilder :
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IConventionCheckConstraintBuilder? IConventionCheckConstraintBuilder.HasAnnotation(string name, object? value, bool fromDataAnnotation)
-        => (IConventionCheckConstraintBuilder?)base.HasAnnotation(
-            name, value, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    IConventionCheckConstraintBuilder? IConventionCheckConstraintBuilder.HasAnnotation(
+        string name,
+        object? value,
+        bool fromDataAnnotation
+    ) =>
+        (IConventionCheckConstraintBuilder?)
+            base.HasAnnotation(
+                name,
+                value,
+                fromDataAnnotation
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
+            );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
     IConventionCheckConstraintBuilder? IConventionCheckConstraintBuilder.HasNonNullAnnotation(
         string name,
         object? value,
-        bool fromDataAnnotation)
-        => (IConventionCheckConstraintBuilder?)base.HasNonNullAnnotation(
-            name, value, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+        bool fromDataAnnotation
+    ) =>
+        (IConventionCheckConstraintBuilder?)
+            base.HasNonNullAnnotation(
+                name,
+                value,
+                fromDataAnnotation
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
+            );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IConventionCheckConstraintBuilder? IConventionCheckConstraintBuilder.HasNoAnnotation(string name, bool fromDataAnnotation)
-        => (IConventionCheckConstraintBuilder?)base.HasNoAnnotation(
-            name, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    IConventionCheckConstraintBuilder? IConventionCheckConstraintBuilder.HasNoAnnotation(
+        string name,
+        bool fromDataAnnotation
+    ) =>
+        (IConventionCheckConstraintBuilder?)
+            base.HasNoAnnotation(
+                name,
+                fromDataAnnotation
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
+            );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IConventionCheckConstraintBuilder? IConventionCheckConstraintBuilder.HasName(string? name, bool fromDataAnnotation)
-        => HasName(name, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    IConventionCheckConstraintBuilder? IConventionCheckConstraintBuilder.HasName(
+        string? name,
+        bool fromDataAnnotation
+    ) =>
+        HasName(
+            name,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    bool IConventionCheckConstraintBuilder.CanSetName(string? name, bool fromDataAnnotation)
-        => CanSetName(name, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    bool IConventionCheckConstraintBuilder.CanSetName(string? name, bool fromDataAnnotation) =>
+        CanSetName(
+            name,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 }

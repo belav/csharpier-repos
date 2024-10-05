@@ -22,7 +22,7 @@ namespace System.Net.Http.Unit.Tests.HPack
 
         private static int Encode(byte[] source, byte[] destination, bool injectEOS)
         {
-            ulong currentBits = 0;  // We can have 7 bits of rollover plus 30 bits for the next encoded value, so use a ulong
+            ulong currentBits = 0; // We can have 7 bits of rollover plus 30 bits for the next encoded value, so use a ulong
             int currentBitCount = 0;
             int dstOffset = 0;
 
@@ -71,7 +71,10 @@ namespace System.Net.Http.Unit.Tests.HPack
                 // Worst case decoding is an output byte per 5 input bits, so make the decoded buffer 2 times as big
                 byte[] decoded = new byte[encoded.Length * 2];
 
-                int decodedByteCount = Huffman.Decode(new ReadOnlySpan<byte>(encoded, 0, encodedByteCount), ref decoded);
+                int decodedByteCount = Huffman.Decode(
+                    new ReadOnlySpan<byte>(encoded, 0, encodedByteCount),
+                    ref decoded
+                );
 
                 Assert.Equal(input.Length, decodedByteCount);
                 Assert.Equal(input, decoded.Take(decodedByteCount));
@@ -93,7 +96,12 @@ namespace System.Net.Http.Unit.Tests.HPack
         // This input sequence will encode to 17 bits, thus offsetting the next character to encode
         // by exactly one bit. We use this below to generate a prefix that encodes all of the possible starting
         // bit offsets for a character, from 0 to 7.
-        private static readonly byte[] s_offsetByOneBit = new byte[] { (byte)'c', (byte)'l', (byte)'r' };
+        private static readonly byte[] s_offsetByOneBit = new byte[]
+        {
+            (byte)'c',
+            (byte)'l',
+            (byte)'r',
+        };
 
         public static IEnumerable<byte[]> TestData()
         {
@@ -124,7 +132,9 @@ namespace System.Net.Http.Unit.Tests.HPack
 
                 for (int i = 0; i < 256; i++)
                 {
-                    yield return currentPrefix.Concat(new byte[] { (byte)i }.Concat(currentPrefix)).ToArray();
+                    yield return currentPrefix
+                        .Concat(new byte[] { (byte)i }.Concat(currentPrefix))
+                        .ToArray();
                 }
             }
 
@@ -159,7 +169,7 @@ namespace System.Net.Http.Unit.Tests.HPack
 
             // Pad encodings with invalid trailing one bits. This is disallowed.
             byte[] pad1 = new byte[] { 0xFF };
-            byte[] pad2 = new byte[] { 0xFF, 0xFF, };
+            byte[] pad2 = new byte[] { 0xFF, 0xFF };
             byte[] pad3 = new byte[] { 0xFF, 0xFF, 0xFF };
             byte[] pad4 = new byte[] { 0xFF, 0xFF, 0xFF, 0xFF };
 
@@ -187,7 +197,10 @@ namespace System.Net.Http.Unit.Tests.HPack
             }
         }
 
-        public static readonly TheoryData<byte[], byte[]> _validData = new TheoryData<byte[], byte[]>
+        public static readonly TheoryData<byte[], byte[]> _validData = new TheoryData<
+            byte[],
+            byte[]
+        >
         {
             // Single 5-bit symbol
             { new byte[] { 0x07 }, Encoding.ASCII.GetBytes("0") },
@@ -231,15 +244,45 @@ namespace System.Net.Http.Unit.Tests.HPack
             { new byte[] { 0xff, 0xff, 0xfe, 0x2f }, new byte[] { 0x02 } },
             // Single 30-bit symbol
             { new byte[] { 0xff, 0xff, 0xff, 0xf3 }, new byte[] { 0x0a } },
-
             //               h      e         l          l      o         *
-            { new byte[] { 0b100111_00, 0b101_10100, 0b0_101000_0, 0b0111_1111 }, Encoding.ASCII.GetBytes("hello") },
-
+            {
+                new byte[] { 0b100111_00, 0b101_10100, 0b0_101000_0, 0b0111_1111 },
+                Encoding.ASCII.GetBytes("hello")
+            },
             // Sequences that uncovered errors
-            { new byte[] { 0xb6, 0xb9, 0xac, 0x1c, 0x85, 0x58, 0xd5, 0x20, 0xa4, 0xb6, 0xc2, 0xad, 0x61, 0x7b, 0x5a, 0x54, 0x25, 0x1f }, Encoding.ASCII.GetBytes("upgrade-insecure-requests") },
+            {
+                new byte[]
+                {
+                    0xb6,
+                    0xb9,
+                    0xac,
+                    0x1c,
+                    0x85,
+                    0x58,
+                    0xd5,
+                    0x20,
+                    0xa4,
+                    0xb6,
+                    0xc2,
+                    0xad,
+                    0x61,
+                    0x7b,
+                    0x5a,
+                    0x54,
+                    0x25,
+                    0x1f,
+                },
+                Encoding.ASCII.GetBytes("upgrade-insecure-requests")
+            },
             { new byte[] { 0xfe, 0x53 }, Encoding.ASCII.GetBytes("\"t") },
-            { new byte[] { 0xff, 0xff, 0xf6, 0xff, 0xff, 0xfd, 0x68 }, new byte[] { 0xcf, 0xf0, 0x73 } },
-            { new byte[] { 0xff, 0xff, 0xf9, 0xff, 0xff, 0xfd, 0x86 }, new byte[] { 0xd5, 0xc7, 0x69 } },
+            {
+                new byte[] { 0xff, 0xff, 0xf6, 0xff, 0xff, 0xfd, 0x68 },
+                new byte[] { 0xcf, 0xf0, 0x73 }
+            },
+            {
+                new byte[] { 0xff, 0xff, 0xf9, 0xff, 0xff, 0xfd, 0x86 },
+                new byte[] { 0xd5, 0xc7, 0x69 }
+            },
         };
 
         [Theory]
@@ -255,12 +298,10 @@ namespace System.Net.Http.Unit.Tests.HPack
         {
             //             h      e         l          l      o         *
             new byte[] { 0b100111_00, 0b101_10100, 0b0_101000_0, 0b0111_1111, 0b11111111 },
-
             // '&' (8 bits) + 8 bit padding
             new byte[] { 0xf8, 0xff },
-
             // ':' (7 bits) + 9 bit padding
-            new byte[] { 0xb9, 0xff }
+            new byte[] { 0xb9, 0xff },
         };
 
         [Theory]
@@ -268,7 +309,9 @@ namespace System.Net.Http.Unit.Tests.HPack
         public void ThrowsOnPaddingLongerThanSevenBits(byte[] encoded)
         {
             byte[] dst = new byte[encoded.Length * 2];
-            Exception exception = Assert.Throws<HuffmanDecodingException>(() => Huffman.Decode(new ReadOnlySpan<byte>(encoded), ref dst));
+            Exception exception = Assert.Throws<HuffmanDecodingException>(
+                () => Huffman.Decode(new ReadOnlySpan<byte>(encoded), ref dst)
+            );
             Assert.Equal(SR.net_http_hpack_huffman_decode_failed, exception.Message);
         }
 
@@ -277,7 +320,7 @@ namespace System.Net.Http.Unit.Tests.HPack
             // EOS
             new byte[] { 0xff, 0xff, 0xff, 0xff },
             // '&' + EOS + '0'
-            new byte[] { 0xf8, 0xff, 0xff, 0xff, 0xfc, 0x1f }
+            new byte[] { 0xf8, 0xff, 0xff, 0xff, 0xfc, 0x1f },
         };
 
         [Theory]
@@ -285,7 +328,9 @@ namespace System.Net.Http.Unit.Tests.HPack
         public void ThrowsOnEOS(byte[] encoded)
         {
             byte[] dst = new byte[encoded.Length * 2];
-            Exception exception = Assert.Throws<HuffmanDecodingException>(() => Huffman.Decode(new ReadOnlySpan<byte>(encoded), ref dst));
+            Exception exception = Assert.Throws<HuffmanDecodingException>(
+                () => Huffman.Decode(new ReadOnlySpan<byte>(encoded), ref dst)
+            );
             Assert.Equal(SR.net_http_hpack_huffman_decode_failed, exception.Message);
         }
 
@@ -296,7 +341,10 @@ namespace System.Net.Http.Unit.Tests.HPack
             byte[] encoded = new byte[] { 0b100111_00, 0b101_10100, 0b0_101000_0, 0b0111_1111 };
             byte[] originalDestination = new byte[encoded.Length];
             byte[] actualDestination = originalDestination;
-            int decodedCount = Huffman.Decode(new ReadOnlySpan<byte>(encoded), ref actualDestination);
+            int decodedCount = Huffman.Decode(
+                new ReadOnlySpan<byte>(encoded),
+                ref actualDestination
+            );
             Assert.Equal(5, decodedCount);
             Assert.NotSame(originalDestination, actualDestination);
         }
@@ -305,7 +353,6 @@ namespace System.Net.Http.Unit.Tests.HPack
         {
             //             h      e         l          l      o (incomplete)
             new byte[] { 0b100111_00, 0b101_10100, 0b0_101000_0 },
-
             // Non-zero padding will be seen as incomplete symbol
             //             h      e         l          l      o         *
             new byte[] { 0b100111_00, 0b101_10100, 0b0_101000_0, 0b0111_0000 },
@@ -322,7 +369,7 @@ namespace System.Net.Http.Unit.Tests.HPack
             new byte[] { 0b100111_00, 0b101_10100, 0b0_101000_0, 0b0111_1011 },
             new byte[] { 0b100111_00, 0b101_10100, 0b0_101000_0, 0b0111_1100 },
             new byte[] { 0b100111_00, 0b101_10100, 0b0_101000_0, 0b0111_1101 },
-            new byte[] { 0b100111_00, 0b101_10100, 0b0_101000_0, 0b0111_1110 }
+            new byte[] { 0b100111_00, 0b101_10100, 0b0_101000_0, 0b0111_1110 },
         };
 
         [Theory]
@@ -330,7 +377,9 @@ namespace System.Net.Http.Unit.Tests.HPack
         public void ThrowsOnIncompleteSymbol(byte[] encoded)
         {
             byte[] dst = new byte[encoded.Length * 2];
-            Exception exception = Assert.Throws<HuffmanDecodingException>(() => Huffman.Decode(new ReadOnlySpan<byte>(encoded), ref dst));
+            Exception exception = Assert.Throws<HuffmanDecodingException>(
+                () => Huffman.Decode(new ReadOnlySpan<byte>(encoded), ref dst)
+            );
             Assert.Equal(SR.net_http_hpack_huffman_decode_failed, exception.Message);
         }
 
@@ -340,8 +389,18 @@ namespace System.Net.Http.Unit.Tests.HPack
             int expectedLength = 2;
             byte[] decodedBytes = new byte[expectedLength];
             //                           B       LF                                             EOS
-            byte[] encoded = new byte[] { 0b1011101_1, 0b11111111, 0b11111111, 0b11111111, 0b11100_111 };
-            int decodedLength = Huffman.Decode(new ReadOnlySpan<byte>(encoded, 0, encoded.Length), ref decodedBytes);
+            byte[] encoded = new byte[]
+            {
+                0b1011101_1,
+                0b11111111,
+                0b11111111,
+                0b11111111,
+                0b11100_111,
+            };
+            int decodedLength = Huffman.Decode(
+                new ReadOnlySpan<byte>(encoded, 0, encoded.Length),
+                ref decodedBytes
+            );
 
             Assert.Equal(expectedLength, decodedLength);
             Assert.Equal(new byte[] { (byte)'B', (byte)'\n' }, decodedBytes);

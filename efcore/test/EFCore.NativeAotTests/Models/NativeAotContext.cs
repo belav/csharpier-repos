@@ -14,12 +14,12 @@ public class NativeAotContext : DbContext
 
     public DbSet<User> Users { get; set; } = null!;
 
-    protected override void OnConfiguring(DbContextOptionsBuilder options)
-        => options
+    protected override void OnConfiguring(DbContextOptionsBuilder options) =>
+        options
             .UseModel(NativeAotContextModel.Instance)
-            .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TestDb;Trusted_Connection=True;");
+            .UseSqlServer(
+                "Server=(localdb)\\mssqllocaldb;Database=TestDb;Trusted_Connection=True;"
+            );
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-    }
+    protected override void OnModelCreating(ModelBuilder modelBuilder) { }
 }

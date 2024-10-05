@@ -2,9 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
-using Internal.TypeSystem;
 using Internal.IL;
+using Internal.TypeSystem;
 
 namespace Internal.Compiler
 {
@@ -28,10 +27,7 @@ namespace Internal.Compiler
 
         public bool HasNextInstruction
         {
-            get
-            {
-                return _reader.HasNext;
-            }
+            get { return _reader.HasNext; }
         }
 
         public bool TryReadLdtoken(out int token)

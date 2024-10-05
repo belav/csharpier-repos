@@ -12,7 +12,7 @@ namespace System.Reflection.Context.Tests
         private readonly Dictionary<string, object> _properties = new Dictionary<string, object>
         {
             { "text", "abc" },
-            { "boolean", true }
+            { "boolean", true },
         };
 
         protected override IEnumerable<PropertyInfo> AddProperties(Type type)
@@ -25,20 +25,31 @@ namespace System.Reflection.Context.Tests
                 {
                     Type newType = MapType(prop.Value.GetType().GetTypeInfo());
 
-                    yield return CreateProperty(newType, prop.Key,
+                    yield return CreateProperty(
+                        newType,
+                        prop.Key,
                         _ => _properties[prop.Key],
-                        (_, value) => _properties[prop.Key] = value);
+                        (_, value) => _properties[prop.Key] = value
+                    );
                 }
 
                 Type numberType = MapType(typeof(int).GetTypeInfo());
-                yield return CreateProperty(numberType, "number", _ => 42, (a, b) => { },
+                yield return CreateProperty(
+                    numberType,
+                    "number",
+                    _ => 42,
+                    (a, b) => { },
                     new Attribute[] { new TestPropertyAttribute() },
                     new Attribute[] { new TestGetterSetterAttribute() },
-                    new Attribute[] { new TestGetterSetterAttribute() });
+                    new Attribute[] { new TestGetterSetterAttribute() }
+                );
             }
         }
 
-        protected override IEnumerable<object> GetCustomAttributes(ParameterInfo parameter, IEnumerable<object> declaredAttributes)
+        protected override IEnumerable<object> GetCustomAttributes(
+            ParameterInfo parameter,
+            IEnumerable<object> declaredAttributes
+        )
         {
             base.GetCustomAttributes(parameter, declaredAttributes);
 
@@ -48,7 +59,10 @@ namespace System.Reflection.Context.Tests
             }
         }
 
-        protected override IEnumerable<object> GetCustomAttributes(MemberInfo member, IEnumerable<object> declaredAttributes)
+        protected override IEnumerable<object> GetCustomAttributes(
+            MemberInfo member,
+            IEnumerable<object> declaredAttributes
+        )
         {
             base.GetCustomAttributes(member, declaredAttributes);
 
@@ -61,9 +75,8 @@ namespace System.Reflection.Context.Tests
 
     internal class FaultyTestCustomReflectionContext : CustomReflectionContext
     {
-        public FaultyTestCustomReflectionContext() : base(null)
-        {
-        }
+        public FaultyTestCustomReflectionContext()
+            : base(null) { }
     }
 
     internal class VirtualPropertyInfoCustomReflectionContext : CustomReflectionContext
@@ -103,10 +116,15 @@ namespace System.Reflection.Context.Tests
             if (type == typeof(TestObject))
             {
                 Type numberType = MapType(typeof(int).GetTypeInfo());
-                yield return CreateProperty(numberType, "number", _ => 42, (a, b) => { },
+                yield return CreateProperty(
+                    numberType,
+                    "number",
+                    _ => 42,
+                    (a, b) => { },
                     new Attribute[] { new TestPropertyAttribute() },
                     new Attribute[] { new TestGetterSetterAttribute() },
-                    new Attribute[] { new TestGetterSetterAttribute() });
+                    new Attribute[] { new TestGetterSetterAttribute() }
+                );
 
                 yield return CreateProperty(numberType, "number2", null, (a, b) => { });
                 yield return CreateProperty(numberType, "number3", _ => 42, null);
@@ -146,42 +164,31 @@ namespace System.Reflection.Context.Tests
             get => 42;
             set { }
         }
-
     }
 
     internal class SecondTestObject : TestObject
     {
         [Test]
         public int field = 2;
-        public SecondTestObject(string a) : base(a)
-        {
-        }
+
+        public SecondTestObject(string a)
+            : base(a) { }
     }
 
     [AttributeUsage(AttributeTargets.Field)]
-    internal class TestAttribute : Attribute
-    {
-    }
+    internal class TestAttribute : Attribute { }
 
     [AttributeUsage(AttributeTargets.Parameter)]
-    internal class TestParameterAttribute : Attribute
-    {
-    }
+    internal class TestParameterAttribute : Attribute { }
 
-    internal class TestPropertyAttribute : Attribute
-    {
-    }
+    internal class TestPropertyAttribute : Attribute { }
 
     [AttributeUsage(AttributeTargets.Property)]
-    internal class TestGetterSetterAttribute : Attribute
-    {
-    }
+    internal class TestGetterSetterAttribute : Attribute { }
 
     [AttributeUsage(AttributeTargets.Assembly)]
-    internal class TestAssemblyAttribute : Attribute
-    {
-    }
+    internal class TestAssemblyAttribute : Attribute { }
 
     [AttributeUsage(AttributeTargets.Module)]
-    internal class TestModuleAttribute: Attribute { }
+    internal class TestModuleAttribute : Attribute { }
 }

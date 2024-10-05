@@ -10,5 +10,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle;
 internal interface ICodeStyleService : ILanguageService
 {
     IdeCodeStyleOptions DefaultOptions { get; }
-    IdeCodeStyleOptions GetIdeCodeStyleOptions(IOptionsReader options, IdeCodeStyleOptions? fallbackOptions);
+    IdeCodeStyleOptions GetIdeCodeStyleOptions(
+        IOptionsReader options,
+        IdeCodeStyleOptions? fallbackOptions
+    );
 }

@@ -12,17 +12,27 @@ using System.Text;
 
 namespace System.Runtime.Serialization
 {
-    [Obsolete(Obsoletions.LegacyFormatterMessage, DiagnosticId = Obsoletions.LegacyFormatterDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.LegacyFormatterMessage,
+        DiagnosticId = Obsoletions.LegacyFormatterDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
     public static class FormatterServices
     {
-        private static readonly ConcurrentDictionary<MemberHolder, MemberInfo[]> s_memberInfoTable = new ConcurrentDictionary<MemberHolder, MemberInfo[]>();
+        private static readonly ConcurrentDictionary<MemberHolder, MemberInfo[]> s_memberInfoTable =
+            new ConcurrentDictionary<MemberHolder, MemberInfo[]>();
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2065:UnrecognizedReflectionPattern",
-            Justification = "The parentType is read from an array which currently can't be annotated," +
-                            "but the input type is annotated with All, so all of its base types are also All.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2065:UnrecognizedReflectionPattern",
+            Justification = "The parentType is read from an array which currently can't be annotated,"
+                + "but the input type is annotated with All, so all of its base types are also All."
+        )]
         private static FieldInfo[] InternalGetSerializableMembers(
             // currently the only way to preserve base, non-public fields is to use All
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type)
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
+                Type type
+        )
         {
             Debug.Assert(type != null);
 
@@ -33,7 +43,9 @@ namespace System.Runtime.Serialization
 
             if (!type.IsSerializable)
             {
-                throw new SerializationException(SR.Format(SR.Serialization_NonSerType, type.FullName, type.Assembly.FullName));
+                throw new SerializationException(
+                    SR.Format(SR.Serialization_NonSerType, type.FullName, type.Assembly.FullName)
+                );
             }
 
             // Get all of the serializable members in the class to be serialized.
@@ -45,7 +57,11 @@ namespace System.Runtime.Serialization
             Type? parentType = type.BaseType;
             if (parentType != null && parentType != typeof(object))
             {
-                bool classNamesUnique = GetParentTypes(parentType, out Type[]? parentTypes, out int parentTypeCount);
+                bool classNamesUnique = GetParentTypes(
+                    parentType,
+                    out Type[]? parentTypes,
+                    out int parentTypeCount
+                );
 
                 if (parentTypeCount > 0)
                 {
@@ -55,10 +71,18 @@ namespace System.Runtime.Serialization
                         parentType = parentTypes![i];
                         if (!parentType.IsSerializable)
                         {
-                            throw new SerializationException(SR.Format(SR.Serialization_NonSerType, parentType.FullName, parentType.Module.Assembly.FullName));
+                            throw new SerializationException(
+                                SR.Format(
+                                    SR.Serialization_NonSerType,
+                                    parentType.FullName,
+                                    parentType.Module.Assembly.FullName
+                                )
+                            );
                         }
 
-                        FieldInfo[] typeFields = parentType.GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
+                        FieldInfo[] typeFields = parentType.GetFields(
+                            BindingFlags.NonPublic | BindingFlags.Instance
+                        );
                         string typeName = classNamesUnique ? parentType.Name : parentType.FullName!;
                         foreach (FieldInfo field in typeFields)
                         {
@@ -86,15 +110,25 @@ namespace System.Runtime.Serialization
         }
 
         private static FieldInfo[] GetSerializableFields(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.NonPublicFields)] Type type)
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicFields
+                    | DynamicallyAccessedMemberTypes.NonPublicFields
+            )]
+                Type type
+        )
         {
             // Get the list of all fields
-            FieldInfo[] fields = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            FieldInfo[] fields = type.GetFields(
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+            );
 
             int countProper = 0;
             for (int i = 0; i < fields.Length; i++)
             {
-                if ((fields[i].Attributes & FieldAttributes.NotSerialized) == FieldAttributes.NotSerialized)
+                if (
+                    (fields[i].Attributes & FieldAttributes.NotSerialized)
+                    == FieldAttributes.NotSerialized
+                )
                 {
                     continue;
                 }
@@ -108,7 +142,10 @@ namespace System.Runtime.Serialization
                 countProper = 0;
                 for (int i = 0; i < fields.Length; i++)
                 {
-                    if ((fields[i].Attributes & FieldAttributes.NotSerialized) == FieldAttributes.NotSerialized)
+                    if (
+                        (fields[i].Attributes & FieldAttributes.NotSerialized)
+                        == FieldAttributes.NotSerialized
+                    )
                     {
                         continue;
                     }
@@ -124,7 +161,11 @@ namespace System.Runtime.Serialization
             }
         }
 
-        private static bool GetParentTypes(Type parentType, out Type[]? parentTypes, out int parentTypeCount)
+        private static bool GetParentTypes(
+            Type parentType,
+            out Type[]? parentTypes,
+            out int parentTypeCount
+        )
         {
             parentTypes = null;
             parentTypeCount = 0;
@@ -144,7 +185,11 @@ namespace System.Runtime.Serialization
                 for (int i = 0; unique && i < parentTypeCount; i++)
                 {
                     string t2Name = parentTypes![i].Name;
-                    if (t2Name.Length == t1Name.Length && t2Name[0] == t1Name[0] && t1Name == t2Name)
+                    if (
+                        t2Name.Length == t1Name.Length
+                        && t2Name[0] == t1Name[0]
+                        && t1Name == t2Name
+                    )
                     {
                         unique = false;
                         break;
@@ -164,14 +209,16 @@ namespace System.Runtime.Serialization
         }
 
         public static MemberInfo[] GetSerializableMembers(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type)
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type
+        )
         {
             return GetSerializableMembers(type, new StreamingContext(StreamingContextStates.All));
         }
 
         public static MemberInfo[] GetSerializableMembers(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type,
-            StreamingContext context)
+            StreamingContext context
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -179,7 +226,8 @@ namespace System.Runtime.Serialization
             // Otherwise, get them and add them.
             return s_memberInfoTable.GetOrAdd(
                 new MemberHolder(type, context),
-                mh => InternalGetSerializableMembers(mh._memberType));
+                mh => InternalGetSerializableMembers(mh._memberType)
+            );
         }
 
         public static void CheckTypeSecurity(Type t, TypeFilterLevel securityLevel)
@@ -193,12 +241,20 @@ namespace System.Runtime.Serialization
             // This obviously won't cover a type with no constructor. Reference types with no
             // constructor are an academic problem. Valuetypes with no constructors are a problem,
             // but IL Linker currently treats them as always implicitly boxed.
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-            Type type) => RuntimeHelpers.GetUninitializedObject(type);
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.NonPublicConstructors
+            )]
+                Type type
+        ) => RuntimeHelpers.GetUninitializedObject(type);
 
         public static object GetSafeUninitializedObject(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-            Type type) => RuntimeHelpers.GetUninitializedObject(type);
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.NonPublicConstructors
+            )]
+                Type type
+        ) => RuntimeHelpers.GetUninitializedObject(type);
 
         internal static void SerializationSetValue(MemberInfo fi, object? target, object? value)
         {
@@ -229,7 +285,10 @@ namespace System.Runtime.Serialization
                 MemberInfo member = members[i];
                 if (member == null)
                 {
-                    throw new ArgumentNullException(nameof(members), SR.Format(SR.ArgumentNull_NullMember, i));
+                    throw new ArgumentNullException(
+                        nameof(members),
+                        SR.Format(SR.ArgumentNull_NullMember, i)
+                    );
                 }
 
                 // If we find an empty, it means that the value was never set during deserialization.
@@ -266,7 +325,10 @@ namespace System.Runtime.Serialization
                 MemberInfo member = members[i];
                 if (member == null)
                 {
-                    throw new ArgumentNullException(nameof(members), SR.Format(SR.ArgumentNull_NullMember, i));
+                    throw new ArgumentNullException(
+                        nameof(members),
+                        SR.Format(SR.ArgumentNull_NullMember, i)
+                    );
                 }
 
                 FieldInfo? field = member as FieldInfo;
@@ -280,7 +342,9 @@ namespace System.Runtime.Serialization
             return data;
         }
 
-        public static ISerializationSurrogate GetSurrogateForCyclicalReference(ISerializationSurrogate innerSurrogate)
+        public static ISerializationSurrogate GetSurrogateForCyclicalReference(
+            ISerializationSurrogate innerSurrogate
+        )
         {
             ArgumentNullException.ThrowIfNull(innerSurrogate);
 
@@ -321,7 +385,12 @@ namespace System.Runtime.Serialization
                 attributedType = attributedType.GetElementType()!;
             }
 
-            foreach (Attribute first in attributedType.GetCustomAttributes(typeof(TypeForwardedFromAttribute), false))
+            foreach (
+                Attribute first in attributedType.GetCustomAttributes(
+                    typeof(TypeForwardedFromAttribute),
+                    false
+                )
+            )
             {
                 hasTypeForwardedFrom = true;
                 return ((TypeForwardedFromAttribute)first).AssemblyFullName;
@@ -333,9 +402,9 @@ namespace System.Runtime.Serialization
 
         internal static string GetClrTypeFullName(Type type)
         {
-            return type.IsArray ?
-                GetClrTypeFullNameForArray(type) :
-                GetClrTypeFullNameForNonArrayTypes(type);
+            return type.IsArray
+                ? GetClrTypeFullNameForArray(type)
+                : GetClrTypeFullNameForNonArrayTypes(type);
         }
 
         private static string GetClrTypeFullNameForArray(Type type)
@@ -343,9 +412,7 @@ namespace System.Runtime.Serialization
             int rank = type.GetArrayRank();
             Debug.Assert(rank >= 1);
             string typeName = GetClrTypeFullName(type.GetElementType()!);
-            return rank == 1 ?
-                typeName + "[]" :
-                typeName + "[" + new string(',', rank - 1) + "]";
+            return rank == 1 ? typeName + "[]" : typeName + "[" + new string(',', rank - 1) + "]";
         }
 
         private static string GetClrTypeFullNameForNonArrayTypes(Type type)
@@ -361,7 +428,9 @@ namespace System.Runtime.Serialization
             foreach (Type genericArgument in type.GetGenericArguments())
             {
                 builder.Append('[').Append(GetClrTypeFullName(genericArgument)).Append(", ");
-                builder.Append(GetClrAssemblyName(genericArgument, out hasTypeForwardedFrom)).Append("],");
+                builder
+                    .Append(GetClrAssemblyName(genericArgument, out hasTypeForwardedFrom))
+                    .Append("],");
             }
 
             //remove the last comma and close typename for generic with a close bracket
@@ -384,7 +453,12 @@ namespace System.Runtime.Serialization
             _innerSurrogate.GetObjectData(obj, info, context);
         }
 
-        public object SetObjectData(object obj, SerializationInfo info, StreamingContext context, ISurrogateSelector? selector)
+        public object SetObjectData(
+            object obj,
+            SerializationInfo info,
+            StreamingContext context,
+            ISurrogateSelector? selector
+        )
         {
             return _innerSurrogate.SetObjectData(obj, info, context, selector);
         }

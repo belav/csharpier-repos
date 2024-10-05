@@ -18,7 +18,8 @@ public class FormCollection : IFormCollection
     private static readonly string[] EmptyKeys = Array.Empty<string>();
 
     // Pre-box
-    private static readonly IEnumerator<KeyValuePair<string, StringValues>> EmptyIEnumeratorType = default(Enumerator);
+    private static readonly IEnumerator<KeyValuePair<string, StringValues>> EmptyIEnumeratorType =
+        default(Enumerator);
     private static readonly IEnumerator EmptyIEnumerator = default(Enumerator);
 
     private static readonly IFormFileCollection EmptyFiles = new FormFileCollection();
@@ -35,7 +36,10 @@ public class FormCollection : IFormCollection
     /// </summary>
     /// <param name="fields">The backing fields.</param>
     /// <param name="files">The files associated with the form.</param>
-    public FormCollection(Dictionary<string, StringValues>? fields, IFormFileCollection? files = null)
+    public FormCollection(
+        Dictionary<string, StringValues>? fields,
+        IFormFileCollection? files = null
+    )
     {
         // can be null
         Store = fields;
@@ -79,10 +83,7 @@ public class FormCollection : IFormCollection
     /// <inheritdoc />
     public int Count
     {
-        get
-        {
-            return Store?.Count ?? 0;
-        }
+        get { return Store?.Count ?? 0; }
     }
 
     /// <inheritdoc />
@@ -139,7 +140,9 @@ public class FormCollection : IFormCollection
     /// Returns an enumerator that iterates through a collection, boxes in non-empty path.
     /// </summary>
     /// <returns>An <see cref="IEnumerator" /> object that can be used to iterate through the collection.</returns>
-    IEnumerator<KeyValuePair<string, StringValues>> IEnumerable<KeyValuePair<string, StringValues>>.GetEnumerator()
+    IEnumerator<KeyValuePair<string, StringValues>> IEnumerable<
+        KeyValuePair<string, StringValues>
+    >.GetEnumerator()
     {
         if (Store == null || Store.Count == 0)
         {
@@ -210,16 +213,11 @@ public class FormCollection : IFormCollection
         }
 
         /// <inheritdoc />
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         object IEnumerator.Current
         {
-            get
-            {
-                return Current;
-            }
+            get { return Current; }
         }
 
         void IEnumerator.Reset()

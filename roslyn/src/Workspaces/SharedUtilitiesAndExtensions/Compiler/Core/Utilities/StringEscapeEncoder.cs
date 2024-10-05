@@ -9,7 +9,11 @@ namespace Roslyn.Utilities
 {
     internal static class StringEscapeEncoder
     {
-        public static string Escape(this string text, char escapePrefix, params char[] prohibitedCharacters)
+        public static string Escape(
+            this string text,
+            char escapePrefix,
+            params char[] prohibitedCharacters
+        )
         {
             StringBuilder? builder = null;
 
@@ -18,10 +22,11 @@ namespace Roslyn.Utilities
             {
                 var prefixIndex = text.IndexOf(escapePrefix, startIndex);
                 var prohibitIndex = text.IndexOfAny(prohibitedCharacters, startIndex);
-                var index = prefixIndex >= 0 && prohibitIndex >= 0 ? Math.Min(prefixIndex, prohibitIndex)
-                        : prefixIndex >= 0 ? prefixIndex
-                        : prohibitIndex >= 0 ? prohibitIndex
-                        : -1;
+                var index =
+                    prefixIndex >= 0 && prohibitIndex >= 0 ? Math.Min(prefixIndex, prohibitIndex)
+                    : prefixIndex >= 0 ? prefixIndex
+                    : prohibitIndex >= 0 ? prohibitIndex
+                    : -1;
 
                 if (index < 0)
                 {

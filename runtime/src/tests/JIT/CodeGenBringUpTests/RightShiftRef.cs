@@ -6,20 +6,26 @@
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;
+
 public class BringUpTest_RightShiftRef
 {
     const int Pass = 100;
     const int Fail = -1;
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    internal static void RightShiftRef(ref int x, int y) { x >>= y; }
+    internal static void RightShiftRef(ref int x, int y)
+    {
+        x >>= y;
+    }
 
     [Fact]
     public static int TestEntryPoint()
     {
         int x = 36;
         RightShiftRef(ref x, 3);
-        if (x == 4) return Pass;
-        else return Fail;
+        if (x == 4)
+            return Pass;
+        else
+            return Fail;
     }
 }

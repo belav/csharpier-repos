@@ -21,7 +21,7 @@ internal sealed partial class NewtonsoftJsonResultExecutor : IActionResultExecut
 {
     private static readonly string DefaultContentType = new MediaTypeHeaderValue("application/json")
     {
-        Encoding = Encoding.UTF8
+        Encoding = Encoding.UTF8,
     }.ToString();
 
     private readonly IHttpResponseStreamWriterFactory _writerFactory;
@@ -44,7 +44,8 @@ internal sealed partial class NewtonsoftJsonResultExecutor : IActionResultExecut
         ILogger<NewtonsoftJsonResultExecutor> logger,
         IOptions<MvcOptions> mvcOptions,
         IOptions<MvcNewtonsoftJsonOptions> jsonOptions,
-        ArrayPool<char> charPool)
+        ArrayPool<char> charPool
+    )
     {
         ArgumentNullException.ThrowIfNull(writerFactory);
         ArgumentNullException.ThrowIfNull(logger);
@@ -80,7 +81,8 @@ internal sealed partial class NewtonsoftJsonResultExecutor : IActionResultExecut
             (DefaultContentType, Encoding.UTF8),
             MediaType.GetEncoding,
             out var resolvedContentType,
-            out var resolvedContentTypeEncoding);
+            out var resolvedContentTypeEncoding
+        );
 
         response.ContentType = resolvedContentType;
 
@@ -102,21 +104,30 @@ internal sealed partial class NewtonsoftJsonResultExecutor : IActionResultExecut
         try
         {
             var value = result.Value;
-            if (value != null && _asyncEnumerableReaderFactory.TryGetReader(value.GetType(), out var reader))
+            if (
+                value != null
+                && _asyncEnumerableReaderFactory.TryGetReader(value.GetType(), out var reader)
+            )
             {
                 Log.BufferingAsyncEnumerable(_logger, value);
                 try
                 {
                     value = await reader(value, context.HttpContext.RequestAborted);
                 }
-                catch (OperationCanceledException) when (context.HttpContext.RequestAborted.IsCancellationRequested) { }
+                catch (OperationCanceledException)
+                    when (context.HttpContext.RequestAborted.IsCancellationRequested) { }
                 if (context.HttpContext.RequestAborted.IsCancellationRequested)
                 {
                     return;
                 }
             }
 
-            await using (var writer = _writerFactory.CreateWriter(responseStream, resolvedContentTypeEncoding))
+            await using (
+                var writer = _writerFactory.CreateWriter(
+                    responseStream,
+                    resolvedContentTypeEncoding
+                )
+            )
             {
                 using var jsonWriter = new JsonTextWriter(writer);
                 jsonWriter.ArrayPool = _charPool;
@@ -153,10 +164,13 @@ internal sealed partial class NewtonsoftJsonResultExecutor : IActionResultExecut
         {
             if (!(serializerSettings is JsonSerializerSettings settingsFromResult))
             {
-                throw new InvalidOperationException(Resources.FormatProperty_MustBeInstanceOfType(
-                    nameof(JsonResult),
-                    nameof(JsonResult.SerializerSettings),
-                    typeof(JsonSerializerSettings)));
+                throw new InvalidOperationException(
+                    Resources.FormatProperty_MustBeInstanceOfType(
+                        nameof(JsonResult),
+                        nameof(JsonResult.SerializerSettings),
+                        typeof(JsonSerializerSettings)
+                    )
+                );
             }
 
             return settingsFromResult;
@@ -165,7 +179,13 @@ internal sealed partial class NewtonsoftJsonResultExecutor : IActionResultExecut
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Debug, "Buffering IAsyncEnumerable instance of type '{Type}'.", EventName = "BufferingAsyncEnumerable", SkipEnabledCheck = true)]
+        [LoggerMessage(
+            1,
+            LogLevel.Debug,
+            "Buffering IAsyncEnumerable instance of type '{Type}'.",
+            EventName = "BufferingAsyncEnumerable",
+            SkipEnabledCheck = true
+        )]
         private static partial void BufferingAsyncEnumerable(ILogger logger, string? type);
 
         public static void BufferingAsyncEnumerable(ILogger logger, object asyncEnumerable)
@@ -176,7 +196,13 @@ internal sealed partial class NewtonsoftJsonResultExecutor : IActionResultExecut
             }
         }
 
-        [LoggerMessage(2, LogLevel.Information, "Executing JsonResult, writing value of type '{Type}'.", EventName = "JsonResultExecuting", SkipEnabledCheck = true)]
+        [LoggerMessage(
+            2,
+            LogLevel.Information,
+            "Executing JsonResult, writing value of type '{Type}'.",
+            EventName = "JsonResultExecuting",
+            SkipEnabledCheck = true
+        )]
         private static partial void JsonResultExecuting(ILogger logger, string? type);
 
         public static void JsonResultExecuting(ILogger logger, object? value)

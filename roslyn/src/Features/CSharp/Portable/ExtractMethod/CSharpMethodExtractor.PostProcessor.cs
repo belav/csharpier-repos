@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 _contextPosition = contextPosition;
             }
 
-            public static ImmutableArray<StatementSyntax> RemoveRedundantBlock(ImmutableArray<StatementSyntax> statements)
+            public static ImmutableArray<StatementSyntax> RemoveRedundantBlock(
+                ImmutableArray<StatementSyntax> statements
+            )
             {
                 // it must have only one statement
                 if (statements.Count() != 1)
@@ -54,7 +56,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 {
                     // either remove the block if it doesn't have any trivia, or return as it is if
                     // there are trivia attached to block
-                    return (block.OpenBraceToken.GetAllTrivia().IsEmpty() && block.CloseBraceToken.GetAllTrivia().IsEmpty())
+                    return (
+                        block.OpenBraceToken.GetAllTrivia().IsEmpty()
+                        && block.CloseBraceToken.GetAllTrivia().IsEmpty()
+                    )
                         ? ImmutableArray<StatementSyntax>.Empty
                         : ImmutableArray.Create<StatementSyntax>(block);
                 }
@@ -62,20 +67,29 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 // okay transfer asset attached to block to statements
                 var firstStatement = block.Statements.First();
                 var firstToken = firstStatement.GetFirstToken(includeZeroWidth: true);
-                var firstTokenWithAsset = block.OpenBraceToken.CopyAnnotationsTo(firstToken).WithPrependedLeadingTrivia(block.OpenBraceToken.GetAllTrivia());
+                var firstTokenWithAsset = block
+                    .OpenBraceToken.CopyAnnotationsTo(firstToken)
+                    .WithPrependedLeadingTrivia(block.OpenBraceToken.GetAllTrivia());
 
                 var lastStatement = block.Statements.Last();
                 var lastToken = lastStatement.GetLastToken(includeZeroWidth: true);
-                var lastTokenWithAsset = block.CloseBraceToken.CopyAnnotationsTo(lastToken).WithAppendedTrailingTrivia(block.CloseBraceToken.GetAllTrivia());
+                var lastTokenWithAsset = block
+                    .CloseBraceToken.CopyAnnotationsTo(lastToken)
+                    .WithAppendedTrailingTrivia(block.CloseBraceToken.GetAllTrivia());
 
                 // create new block with new tokens
-                block = block.ReplaceTokens(new[] { firstToken, lastToken }, (o, c) => (o == firstToken) ? firstTokenWithAsset : lastTokenWithAsset);
+                block = block.ReplaceTokens(
+                    new[] { firstToken, lastToken },
+                    (o, c) => (o == firstToken) ? firstTokenWithAsset : lastTokenWithAsset
+                );
 
                 // return only statements without the wrapping block
                 return ImmutableArray.CreateRange(block.Statements);
             }
 
-            public ImmutableArray<StatementSyntax> MergeDeclarationStatements(ImmutableArray<StatementSyntax> statements)
+            public ImmutableArray<StatementSyntax> MergeDeclarationStatements(
+                ImmutableArray<StatementSyntax> statements
+            )
             {
                 if (statements.FirstOrDefault() == null)
                 {
@@ -85,7 +99,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 return MergeDeclarationStatementsWorker(statements);
             }
 
-            private ImmutableArray<StatementSyntax> MergeDeclarationStatementsWorker(ImmutableArray<StatementSyntax> statements)
+            private ImmutableArray<StatementSyntax> MergeDeclarationStatementsWorker(
+                ImmutableArray<StatementSyntax> statements
+            )
             {
                 using var _ = ArrayBuilder<StatementSyntax>.GetInstance(out var result);
 
@@ -99,7 +115,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                         continue;
                     }
 
-                    AppendDeclarationStatementToMap(statement as LocalDeclarationStatementSyntax, map);
+                    AppendDeclarationStatementToMap(
+                        statement as LocalDeclarationStatementSyntax,
+                        map
+                    );
                 }
 
                 // merge leftover
@@ -111,18 +130,26 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
             private void AppendDeclarationStatementToMap(
                 LocalDeclarationStatementSyntax statement,
-                Dictionary<ITypeSymbol, List<LocalDeclarationStatementSyntax>> map)
+                Dictionary<ITypeSymbol, List<LocalDeclarationStatementSyntax>> map
+            )
             {
                 Contract.ThrowIfNull(statement);
 
-                var type = _semanticModel.GetSpeculativeTypeInfo(_contextPosition, statement.Declaration.Type, SpeculativeBindingOption.BindAsTypeOrNamespace).Type;
+                var type = _semanticModel
+                    .GetSpeculativeTypeInfo(
+                        _contextPosition,
+                        statement.Declaration.Type,
+                        SpeculativeBindingOption.BindAsTypeOrNamespace
+                    )
+                    .Type;
                 Contract.ThrowIfNull(type);
 
                 map.GetOrAdd(type, _ => new List<LocalDeclarationStatementSyntax>()).Add(statement);
             }
 
             private static IEnumerable<LocalDeclarationStatementSyntax> GetMergedDeclarationStatements(
-                Dictionary<ITypeSymbol, List<LocalDeclarationStatementSyntax>> map)
+                Dictionary<ITypeSymbol, List<LocalDeclarationStatementSyntax>> map
+            )
             {
                 foreach (var keyValuePair in map)
                 {
@@ -140,9 +167,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
                     // and create one decl statement
                     // use type name from the first decl statement
-                    yield return
-                        SyntaxFactory.LocalDeclarationStatement(
-                            SyntaxFactory.VariableDeclaration(keyValuePair.Value.First().Declaration.Type, SyntaxFactory.SeparatedList(variables)));
+                    yield return SyntaxFactory.LocalDeclarationStatement(
+                        SyntaxFactory.VariableDeclaration(
+                            keyValuePair.Value.First().Declaration.Type,
+                            SyntaxFactory.SeparatedList(variables)
+                        )
+                    );
                 }
 
                 map.Clear();
@@ -163,9 +193,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     return false;
                 }
 
-                if (declarationStatement.Modifiers.Count > 0 ||
-                    declarationStatement.IsConst ||
-                    declarationStatement.IsMissing)
+                if (
+                    declarationStatement.Modifiers.Count > 0
+                    || declarationStatement.IsConst
+                    || declarationStatement.IsMissing
+                )
                 {
                     return false;
                 }
@@ -180,10 +212,18 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     return false;
                 }
 
-                var semanticInfo = _semanticModel.GetSpeculativeTypeInfo(_contextPosition, declarationStatement.Declaration.Type, SpeculativeBindingOption.BindAsTypeOrNamespace).Type;
-                if (semanticInfo == null ||
-                    semanticInfo.TypeKind == TypeKind.Error ||
-                    semanticInfo.TypeKind == TypeKind.Unknown)
+                var semanticInfo = _semanticModel
+                    .GetSpeculativeTypeInfo(
+                        _contextPosition,
+                        declarationStatement.Declaration.Type,
+                        SpeculativeBindingOption.BindAsTypeOrNamespace
+                    )
+                    .Type;
+                if (
+                    semanticInfo == null
+                    || semanticInfo.TypeKind == TypeKind.Error
+                    || semanticInfo.TypeKind == TypeKind.Unknown
+                )
                 {
                     return false;
                 }
@@ -210,8 +250,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 {
                     foreach (var trivia in token.LeadingTrivia.Concat(token.TrailingTrivia))
                     {
-                        if (trivia.Kind() is not SyntaxKind.WhitespaceTrivia and
-                            not SyntaxKind.EndOfLineTrivia)
+                        if (
+                            trivia.Kind()
+                            is not SyntaxKind.WhitespaceTrivia
+                                and not SyntaxKind.EndOfLineTrivia
+                        )
                         {
                             return false;
                         }
@@ -221,7 +264,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 return true;
             }
 
-            public static ImmutableArray<StatementSyntax> RemoveInitializedDeclarationAndReturnPattern(ImmutableArray<StatementSyntax> statements)
+            public static ImmutableArray<StatementSyntax> RemoveInitializedDeclarationAndReturnPattern(
+                ImmutableArray<StatementSyntax> statements
+            )
             {
                 // if we have inline temp variable as service, we could just use that service here.
                 // since it is not a service right now, do very simple clean up
@@ -230,23 +275,32 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     return statements;
                 }
 
-                if (statements.ElementAtOrDefault(0) is not LocalDeclarationStatementSyntax declaration || statements.ElementAtOrDefault(1) is not ReturnStatementSyntax returnStatement)
+                if (
+                    statements.ElementAtOrDefault(0)
+                        is not LocalDeclarationStatementSyntax declaration
+                    || statements.ElementAtOrDefault(1) is not ReturnStatementSyntax returnStatement
+                )
                 {
                     return statements;
                 }
 
-                if (declaration.Declaration == null ||
-                    declaration.Declaration.Variables.Count != 1 ||
-                    declaration.Declaration.Variables[0].Initializer == null ||
-                    declaration.Declaration.Variables[0].Initializer.Value == null ||
-                    declaration.Declaration.Variables[0].Initializer.Value is StackAllocArrayCreationExpressionSyntax ||
-                    returnStatement.Expression == null)
+                if (
+                    declaration.Declaration == null
+                    || declaration.Declaration.Variables.Count != 1
+                    || declaration.Declaration.Variables[0].Initializer == null
+                    || declaration.Declaration.Variables[0].Initializer.Value == null
+                    || declaration.Declaration.Variables[0].Initializer.Value
+                        is StackAllocArrayCreationExpressionSyntax
+                    || returnStatement.Expression == null
+                )
                 {
                     return statements;
                 }
 
-                if (!ContainsOnlyWhitespaceTrivia(declaration) ||
-                    !ContainsOnlyWhitespaceTrivia(returnStatement))
+                if (
+                    !ContainsOnlyWhitespaceTrivia(declaration)
+                    || !ContainsOnlyWhitespaceTrivia(returnStatement)
+                )
                 {
                     return statements;
                 }
@@ -257,27 +311,41 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     return statements;
                 }
 
-                return ImmutableArray.Create<StatementSyntax>(SyntaxFactory.ReturnStatement(declaration.Declaration.Variables[0].Initializer.Value));
+                return ImmutableArray.Create<StatementSyntax>(
+                    SyntaxFactory.ReturnStatement(
+                        declaration.Declaration.Variables[0].Initializer.Value
+                    )
+                );
             }
 
-            public static ImmutableArray<StatementSyntax> RemoveDeclarationAssignmentPattern(ImmutableArray<StatementSyntax> statements)
+            public static ImmutableArray<StatementSyntax> RemoveDeclarationAssignmentPattern(
+                ImmutableArray<StatementSyntax> statements
+            )
             {
-                if (statements.ElementAtOrDefault(0) is not LocalDeclarationStatementSyntax declaration || statements.ElementAtOrDefault(1) is not ExpressionStatementSyntax assignment)
+                if (
+                    statements.ElementAtOrDefault(0)
+                        is not LocalDeclarationStatementSyntax declaration
+                    || statements.ElementAtOrDefault(1) is not ExpressionStatementSyntax assignment
+                )
                 {
                     return statements;
                 }
 
-                if (ContainsAnyInitialization(declaration) ||
-                    declaration.Declaration == null ||
-                    declaration.Declaration.Variables.Count != 1 ||
-                    assignment.Expression == null ||
-                    assignment.Expression.Kind() != SyntaxKind.SimpleAssignmentExpression)
+                if (
+                    ContainsAnyInitialization(declaration)
+                    || declaration.Declaration == null
+                    || declaration.Declaration.Variables.Count != 1
+                    || assignment.Expression == null
+                    || assignment.Expression.Kind() != SyntaxKind.SimpleAssignmentExpression
+                )
                 {
                     return statements;
                 }
 
-                if (!ContainsOnlyWhitespaceTrivia(declaration) ||
-                    !ContainsOnlyWhitespaceTrivia(assignment))
+                if (
+                    !ContainsOnlyWhitespaceTrivia(declaration)
+                    || !ContainsOnlyWhitespaceTrivia(assignment)
+                )
                 {
                     return statements;
                 }
@@ -285,19 +353,27 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 var variableName = declaration.Declaration.Variables[0].Identifier.ToString();
 
                 var assignmentExpression = assignment.Expression as AssignmentExpressionSyntax;
-                if (assignmentExpression.Left == null ||
-                    assignmentExpression.Right == null ||
-                    assignmentExpression.Left.ToString() != variableName)
+                if (
+                    assignmentExpression.Left == null
+                    || assignmentExpression.Right == null
+                    || assignmentExpression.Left.ToString() != variableName
+                )
                 {
                     return statements;
                 }
 
-                var variable = declaration.Declaration.Variables[0].WithInitializer(SyntaxFactory.EqualsValueClause(assignmentExpression.Right));
+                var variable = declaration
+                    .Declaration.Variables[0]
+                    .WithInitializer(SyntaxFactory.EqualsValueClause(assignmentExpression.Right));
                 using var _ = ArrayBuilder<StatementSyntax>.GetInstance(out var result);
 
-                result.Add(declaration.WithDeclaration(
-                    declaration.Declaration.WithVariables(
-                        SyntaxFactory.SingletonSeparatedList(variable))));
+                result.Add(
+                    declaration.WithDeclaration(
+                        declaration.Declaration.WithVariables(
+                            SyntaxFactory.SingletonSeparatedList(variable)
+                        )
+                    )
+                );
                 result.AddRange(statements.Skip(2));
 
                 return result.ToImmutable();

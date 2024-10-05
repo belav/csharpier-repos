@@ -10,13 +10,16 @@ namespace Microsoft.AspNetCore.Builder;
 
 public class FallbackEndpointRouteBuilderExtensionsTest
 {
-    private EndpointDataSource GetBuilderEndpointDataSource(IEndpointRouteBuilder endpointRouteBuilder) =>
-        Assert.Single(endpointRouteBuilder.DataSources);
+    private EndpointDataSource GetBuilderEndpointDataSource(
+        IEndpointRouteBuilder endpointRouteBuilder
+    ) => Assert.Single(endpointRouteBuilder.DataSources);
 
     [Fact]
     public void MapFallback_AddFallbackMetadata()
     {
-        var builder = new DefaultEndpointRouteBuilder(new ApplicationBuilder(EmptyServiceProvider.Instance));
+        var builder = new DefaultEndpointRouteBuilder(
+            new ApplicationBuilder(EmptyServiceProvider.Instance)
+        );
 
         RequestDelegate initialRequestDelegate = static (context) => Task.CompletedTask;
 
@@ -32,7 +35,9 @@ public class FallbackEndpointRouteBuilderExtensionsTest
     [Fact]
     public void MapFallback_Pattern_AddFallbackMetadata()
     {
-        var builder = new DefaultEndpointRouteBuilder(new ApplicationBuilder(EmptyServiceProvider.Instance));
+        var builder = new DefaultEndpointRouteBuilder(
+            new ApplicationBuilder(EmptyServiceProvider.Instance)
+        );
 
         RequestDelegate initialRequestDelegate = static (context) => Task.CompletedTask;
 
@@ -48,6 +53,7 @@ public class FallbackEndpointRouteBuilderExtensionsTest
     private sealed class EmptyServiceProvider : IServiceProvider
     {
         public static EmptyServiceProvider Instance { get; } = new EmptyServiceProvider();
+
         public object? GetService(Type serviceType) => null;
     }
 }

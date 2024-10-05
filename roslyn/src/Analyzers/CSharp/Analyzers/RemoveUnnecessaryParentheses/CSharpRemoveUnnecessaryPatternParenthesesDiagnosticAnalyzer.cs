@@ -16,24 +16,35 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryParentheses
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal class CSharpRemoveUnnecessaryPatternParenthesesDiagnosticAnalyzer
-        : AbstractRemoveUnnecessaryParenthesesDiagnosticAnalyzer<SyntaxKind, ParenthesizedPatternSyntax>
+        : AbstractRemoveUnnecessaryParenthesesDiagnosticAnalyzer<
+            SyntaxKind,
+            ParenthesizedPatternSyntax
+        >
     {
-        protected override SyntaxKind GetSyntaxKind()
-            => SyntaxKind.ParenthesizedPattern;
+        protected override SyntaxKind GetSyntaxKind() => SyntaxKind.ParenthesizedPattern;
 
-        protected override ISyntaxFacts GetSyntaxFacts()
-            => CSharpSyntaxFacts.Instance;
+        protected override ISyntaxFacts GetSyntaxFacts() => CSharpSyntaxFacts.Instance;
 
         protected override bool CanRemoveParentheses(
             ParenthesizedPatternSyntax parenthesizedExpression,
-            SemanticModel semanticModel, CancellationToken cancellationToken,
-            out PrecedenceKind precedence, out bool clarifiesPrecedence)
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken,
+            out PrecedenceKind precedence,
+            out bool clarifiesPrecedence
+        )
         {
-            return CanRemoveParenthesesHelper(parenthesizedExpression, out precedence, out clarifiesPrecedence);
+            return CanRemoveParenthesesHelper(
+                parenthesizedExpression,
+                out precedence,
+                out clarifiesPrecedence
+            );
         }
 
         public static bool CanRemoveParenthesesHelper(
-            ParenthesizedPatternSyntax parenthesizedPattern, out PrecedenceKind parentPrecedenceKind, out bool clarifiesPrecedence)
+            ParenthesizedPatternSyntax parenthesizedPattern,
+            out PrecedenceKind parentPrecedenceKind,
+            out bool clarifiesPrecedence
+        )
         {
             var result = parenthesizedPattern.CanRemoveParentheses();
             if (!result)
@@ -45,8 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryParentheses
 
             var inner = parenthesizedPattern.Pattern;
             var innerPrecedence = inner.GetOperatorPrecedence();
-            var innerIsSimple = innerPrecedence is OperatorPrecedence.Primary or
-                                OperatorPrecedence.None;
+            var innerIsSimple =
+                innerPrecedence is OperatorPrecedence.Primary or OperatorPrecedence.None;
 
             if (parenthesizedPattern.Parent is not PatternSyntax)
             {
@@ -66,8 +77,10 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryParentheses
                 return true;
             }
 
-            // We're parented by something binary-like. 
-            parentPrecedenceKind = CSharpPatternPrecedenceService.Instance.GetPrecedenceKind(parentPattern);
+            // We're parented by something binary-like.
+            parentPrecedenceKind = CSharpPatternPrecedenceService.Instance.GetPrecedenceKind(
+                parentPattern
+            );
 
             // Precedence is clarified any time we have expression with different precedence
             // (and the inner expression is not a primary expression).  in other words, this
@@ -78,8 +91,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryParentheses
             // However, this does not:
             //
             //      a or (b)
-            clarifiesPrecedence = !innerIsSimple &&
-                                  parentPattern.GetOperatorPrecedence() != innerPrecedence;
+            clarifiesPrecedence =
+                !innerIsSimple && parentPattern.GetOperatorPrecedence() != innerPrecedence;
             return true;
         }
     }

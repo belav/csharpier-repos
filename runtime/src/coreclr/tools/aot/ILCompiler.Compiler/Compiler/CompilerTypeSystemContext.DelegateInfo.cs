@@ -12,25 +12,28 @@ namespace ILCompiler
         {
             private readonly DelegateFeature _delegateFeatures;
 
-            public DelegateInfoHashtable(DelegateFeature features)
-                => _delegateFeatures = features;
+            public DelegateInfoHashtable(DelegateFeature features) => _delegateFeatures = features;
 
             protected override int GetKeyHashCode(TypeDesc key)
             {
                 return key.GetHashCode();
             }
+
             protected override int GetValueHashCode(DelegateInfo value)
             {
                 return value.Type.GetHashCode();
             }
+
             protected override bool CompareKeyToValue(TypeDesc key, DelegateInfo value)
             {
                 return ReferenceEquals(key, value.Type);
             }
+
             protected override bool CompareValueToValue(DelegateInfo value1, DelegateInfo value2)
             {
                 return ReferenceEquals(value1.Type, value2.Type);
             }
+
             protected override DelegateInfo CreateValueFromKey(TypeDesc key)
             {
                 return new DelegateInfo(key, _delegateFeatures);

@@ -23,8 +23,11 @@ public class ServiceProviderCacheTest
         Assert.Single(loggerFactory.Log);
 
         Assert.Equal(
-            CoreResources.LogServiceProviderCreated(new TestLogger<TestLoggingDefinitions>()).GenerateMessage(),
-            loggerFactory.Log[0].Message);
+            CoreResources
+                .LogServiceProviderCreated(new TestLogger<TestLoggingDefinitions>())
+                .GenerateMessage(),
+            loggerFactory.Log[0].Message
+        );
     }
 
     [ConditionalFact]
@@ -45,16 +48,24 @@ public class ServiceProviderCacheTest
         Assert.Equal(2, loggerFactory.Log.Count);
 
         Assert.Equal(
-            CoreResources.LogServiceProviderCreated(new TestLogger<TestLoggingDefinitions>()).GenerateMessage(),
-            loggerFactory.Log[0].Message);
+            CoreResources
+                .LogServiceProviderCreated(new TestLogger<TestLoggingDefinitions>())
+                .GenerateMessage(),
+            loggerFactory.Log[0].Message
+        );
 
         Assert.Equal(
-            CoreResources.LogServiceProviderDebugInfo(new TestLogger<TestLoggingDefinitions>()).GenerateMessage(
-                string.Join(
-                    ", ",
-                    CoreStrings.ServiceProviderConfigRemoved("Fake1"),
-                    CoreStrings.ServiceProviderConfigAdded("Fake2"))),
-            loggerFactory.Log[1].Message);
+            CoreResources
+                .LogServiceProviderDebugInfo(new TestLogger<TestLoggingDefinitions>())
+                .GenerateMessage(
+                    string.Join(
+                        ", ",
+                        CoreStrings.ServiceProviderConfigRemoved("Fake1"),
+                        CoreStrings.ServiceProviderConfigAdded("Fake2")
+                    )
+                ),
+            loggerFactory.Log[1].Message
+        );
     }
 
     [ConditionalFact]
@@ -64,30 +75,51 @@ public class ServiceProviderCacheTest
 
         var config1Log = new List<string>();
         var config1Builder = new DbContextOptionsBuilder();
-        ((IDbContextOptionsBuilderInfrastructure)config1Builder)
-            .AddOrUpdateExtension(new FakeDbContextOptionsExtension1(config1Log));
-        ((IDbContextOptionsBuilderInfrastructure)config1Builder)
-            .AddOrUpdateExtension(new FakeDbContextOptionsExtension2(config1Log));
+        ((IDbContextOptionsBuilderInfrastructure)config1Builder).AddOrUpdateExtension(
+            new FakeDbContextOptionsExtension1(config1Log)
+        );
+        ((IDbContextOptionsBuilderInfrastructure)config1Builder).AddOrUpdateExtension(
+            new FakeDbContextOptionsExtension2(config1Log)
+        );
         config1Builder.UseLoggerFactory(loggerFactory);
         config1Builder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 
         var config2Log = new List<string>();
         var config2Builder = new DbContextOptionsBuilder();
-        ((IDbContextOptionsBuilderInfrastructure)config2Builder)
-            .AddOrUpdateExtension(new FakeDbContextOptionsExtension2(config2Log));
-        ((IDbContextOptionsBuilderInfrastructure)config2Builder)
-            .AddOrUpdateExtension(new FakeDbContextOptionsExtension1(config2Log));
+        ((IDbContextOptionsBuilderInfrastructure)config2Builder).AddOrUpdateExtension(
+            new FakeDbContextOptionsExtension2(config2Log)
+        );
+        ((IDbContextOptionsBuilderInfrastructure)config2Builder).AddOrUpdateExtension(
+            new FakeDbContextOptionsExtension1(config2Log)
+        );
         config2Builder.UseLoggerFactory(loggerFactory);
         config2Builder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 
         var cache = new ServiceProviderCache();
 
-        Assert.NotSame(cache.GetOrAdd(config1Builder.Options, true), cache.GetOrAdd(config2Builder.Options, true));
+        Assert.NotSame(
+            cache.GetOrAdd(config1Builder.Options, true),
+            cache.GetOrAdd(config2Builder.Options, true)
+        );
 
         Assert.Equal(2, loggerFactory.Log.Count);
 
-        Assert.Equal(new[] { nameof(FakeDbContextOptionsExtension1), nameof(FakeDbContextOptionsExtension2) }, config1Log);
-        Assert.Equal(new[] { nameof(FakeDbContextOptionsExtension2), nameof(FakeDbContextOptionsExtension1) }, config2Log);
+        Assert.Equal(
+            new[]
+            {
+                nameof(FakeDbContextOptionsExtension1),
+                nameof(FakeDbContextOptionsExtension2),
+            },
+            config1Log
+        );
+        Assert.Equal(
+            new[]
+            {
+                nameof(FakeDbContextOptionsExtension2),
+                nameof(FakeDbContextOptionsExtension1),
+            },
+            config2Log
+        );
     }
 
     [ConditionalFact]
@@ -97,13 +129,17 @@ public class ServiceProviderCacheTest
 
         var config1 = CreateOptions<CoreOptionsExtension>(loggerFactory);
         config1 = config1.WithExtension(
-            config1.FindExtension<CoreOptionsExtension>()
-                .WithReplacedService(typeof(object), typeof(Random)));
+            config1
+                .FindExtension<CoreOptionsExtension>()
+                .WithReplacedService(typeof(object), typeof(Random))
+        );
 
         var config2 = CreateOptions<CoreOptionsExtension>(loggerFactory);
         config2 = config2.WithExtension(
-            config2.FindExtension<CoreOptionsExtension>()
-                .WithReplacedService(typeof(object), typeof(Random)));
+            config2
+                .FindExtension<CoreOptionsExtension>()
+                .WithReplacedService(typeof(object), typeof(Random))
+        );
 
         var cache = new ServiceProviderCache();
 
@@ -112,8 +148,11 @@ public class ServiceProviderCacheTest
         Assert.Single(loggerFactory.Log);
 
         Assert.Equal(
-            CoreResources.LogServiceProviderCreated(new TestLogger<TestLoggingDefinitions>()).GenerateMessage(),
-            loggerFactory.Log[0].Message);
+            CoreResources
+                .LogServiceProviderCreated(new TestLogger<TestLoggingDefinitions>())
+                .GenerateMessage(),
+            loggerFactory.Log[0].Message
+        );
     }
 
     [ConditionalFact]
@@ -123,13 +162,17 @@ public class ServiceProviderCacheTest
 
         var config1 = CreateOptions<CoreOptionsExtension>(loggerFactory);
         config1 = config1.WithExtension(
-            config1.FindExtension<CoreOptionsExtension>()
-                .WithReplacedService(typeof(object), typeof(Random)));
+            config1
+                .FindExtension<CoreOptionsExtension>()
+                .WithReplacedService(typeof(object), typeof(Random))
+        );
 
         var config2 = CreateOptions<CoreOptionsExtension>(loggerFactory);
         config2 = config2.WithExtension(
-            config2.FindExtension<CoreOptionsExtension>()
-                .WithReplacedService(typeof(object), typeof(string)));
+            config2
+                .FindExtension<CoreOptionsExtension>()
+                .WithReplacedService(typeof(object), typeof(string))
+        );
 
         var cache = new ServiceProviderCache();
 
@@ -141,13 +184,22 @@ public class ServiceProviderCacheTest
         Assert.Equal(2, loggerFactory.Log.Count);
 
         Assert.Equal(
-            CoreResources.LogServiceProviderCreated(new TestLogger<TestLoggingDefinitions>()).GenerateMessage(),
-            loggerFactory.Log[0].Message);
+            CoreResources
+                .LogServiceProviderCreated(new TestLogger<TestLoggingDefinitions>())
+                .GenerateMessage(),
+            loggerFactory.Log[0].Message
+        );
 
         Assert.Equal(
-            CoreResources.LogServiceProviderDebugInfo(new TestLogger<TestLoggingDefinitions>()).GenerateMessage(
-                CoreStrings.ServiceProviderConfigChanged("Core:ReplaceService:" + typeof(object).DisplayName())),
-            loggerFactory.Log[1].Message);
+            CoreResources
+                .LogServiceProviderDebugInfo(new TestLogger<TestLoggingDefinitions>())
+                .GenerateMessage(
+                    CoreStrings.ServiceProviderConfigChanged(
+                        "Core:ReplaceService:" + typeof(object).DisplayName()
+                    )
+                ),
+            loggerFactory.Log[1].Message
+        );
     }
 
     [ConditionalFact]
@@ -175,24 +227,32 @@ public class ServiceProviderCacheTest
         {
             var loggerFactory = new ListLoggerFactory();
 
-            var config1 = new DbContextOptionsBuilder(CreateOptions<CoreOptionsExtension>(loggerFactory))
+            var config1 = new DbContextOptionsBuilder(
+                CreateOptions<CoreOptionsExtension>(loggerFactory)
+            )
                 .EnableDetailedErrors()
                 .EnableSensitiveDataLogging()
                 .ConfigureWarnings(w => w.Throw(CoreEventId.CascadeDelete))
                 .Options;
 
-            var config2 = new DbContextOptionsBuilder(CreateOptions<CoreOptionsExtension>(loggerFactory))
+            var config2 = new DbContextOptionsBuilder(
+                CreateOptions<CoreOptionsExtension>(loggerFactory)
+            )
                 .EnableDetailedErrors()
                 .EnableSensitiveDataLogging()
                 .ConfigureWarnings(w => w.Throw(CoreEventId.CascadeDeleteOrphan))
                 .Options;
 
-            var config3 = new DbContextOptionsBuilder(CreateOptions<CoreOptionsExtension>(loggerFactory))
+            var config3 = new DbContextOptionsBuilder(
+                CreateOptions<CoreOptionsExtension>(loggerFactory)
+            )
                 .EnableDetailedErrors()
                 .ConfigureWarnings(w => w.Throw(CoreEventId.CascadeDelete))
                 .Options;
 
-            var config4 = new DbContextOptionsBuilder(CreateOptions<CoreOptionsExtension>(loggerFactory))
+            var config4 = new DbContextOptionsBuilder(
+                CreateOptions<CoreOptionsExtension>(loggerFactory)
+            )
                 .EnableSensitiveDataLogging()
                 .ConfigureWarnings(w => w.Throw(CoreEventId.ContextDisposed))
                 .Options;
@@ -214,26 +274,42 @@ public class ServiceProviderCacheTest
             Assert.Equal(4, loggerFactory.Log.Count);
 
             Assert.Equal(
-                CoreResources.LogServiceProviderCreated(new TestLogger<TestLoggingDefinitions>()).GenerateMessage(),
-                loggerFactory.Log[0].Message);
+                CoreResources
+                    .LogServiceProviderCreated(new TestLogger<TestLoggingDefinitions>())
+                    .GenerateMessage(),
+                loggerFactory.Log[0].Message
+            );
 
             Assert.Equal(
-                CoreResources.LogServiceProviderDebugInfo(new TestLogger<TestLoggingDefinitions>()).GenerateMessage(
-                    CoreStrings.ServiceProviderConfigChanged("Core:ConfigureWarnings")),
-                loggerFactory.Log[1].Message);
+                CoreResources
+                    .LogServiceProviderDebugInfo(new TestLogger<TestLoggingDefinitions>())
+                    .GenerateMessage(
+                        CoreStrings.ServiceProviderConfigChanged("Core:ConfigureWarnings")
+                    ),
+                loggerFactory.Log[1].Message
+            );
 
             Assert.Equal(
-                CoreResources.LogServiceProviderDebugInfo(new TestLogger<TestLoggingDefinitions>()).GenerateMessage(
-                    CoreStrings.ServiceProviderConfigChanged("Core:EnableSensitiveDataLogging")),
-                loggerFactory.Log[2].Message);
+                CoreResources
+                    .LogServiceProviderDebugInfo(new TestLogger<TestLoggingDefinitions>())
+                    .GenerateMessage(
+                        CoreStrings.ServiceProviderConfigChanged("Core:EnableSensitiveDataLogging")
+                    ),
+                loggerFactory.Log[2].Message
+            );
 
             Assert.Equal(
-                CoreResources.LogServiceProviderDebugInfo(new TestLogger<TestLoggingDefinitions>()).GenerateMessage(
-                    string.Join(
-                        ", ",
-                        CoreStrings.ServiceProviderConfigChanged("Core:EnableDetailedErrors"),
-                        CoreStrings.ServiceProviderConfigChanged("Core:ConfigureWarnings"))),
-                loggerFactory.Log[3].Message);
+                CoreResources
+                    .LogServiceProviderDebugInfo(new TestLogger<TestLoggingDefinitions>())
+                    .GenerateMessage(
+                        string.Join(
+                            ", ",
+                            CoreStrings.ServiceProviderConfigChanged("Core:EnableDetailedErrors"),
+                            CoreStrings.ServiceProviderConfigChanged("Core:ConfigureWarnings")
+                        )
+                    ),
+                loggerFactory.Log[3].Message
+            );
         }
     }
 
@@ -241,7 +317,9 @@ public class ServiceProviderCacheTest
         where TExtension : class, IDbContextOptionsExtension, new()
     {
         var optionsBuilder = new DbContextOptionsBuilder();
-        ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(new TExtension());
+        ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
+            new TExtension()
+        );
         optionsBuilder.UseLoggerFactory(loggerFactory);
         optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 
@@ -255,47 +333,38 @@ public class ServiceProviderCacheTest
 
         public string Something { get; set; }
 
-        public DbContextOptionsExtensionInfo Info
-            => _info ??= new ExtensionInfo(this);
+        public DbContextOptionsExtensionInfo Info => _info ??= new ExtensionInfo(this);
 
         public FakeDbContextOptionsExtension1()
-            : this(new List<string>())
-        {
-        }
+            : this(new List<string>()) { }
 
         public FakeDbContextOptionsExtension1(List<string> log)
         {
             _log = log;
         }
 
-        public virtual void ApplyServices(IServiceCollection services)
-            => _log.Add(GetType().ShortDisplayName());
+        public virtual void ApplyServices(IServiceCollection services) =>
+            _log.Add(GetType().ShortDisplayName());
 
-        public virtual void Validate(IDbContextOptions options)
-        {
-        }
+        public virtual void Validate(IDbContextOptions options) { }
 
         private sealed class ExtensionInfo : DbContextOptionsExtensionInfo
         {
             public ExtensionInfo(IDbContextOptionsExtension extension)
-                : base(extension)
-            {
-            }
+                : base(extension) { }
 
-            public override bool IsDatabaseProvider
-                => false;
+            public override bool IsDatabaseProvider => false;
 
-            public override int GetServiceProviderHashCode()
-                => 0;
+            public override int GetServiceProviderHashCode() => 0;
 
-            public override bool ShouldUseSameServiceProvider(DbContextOptionsExtensionInfo other)
-                => true;
+            public override bool ShouldUseSameServiceProvider(
+                DbContextOptionsExtensionInfo other
+            ) => true;
 
-            public override string LogFragment
-                => "";
+            public override string LogFragment => "";
 
-            public override void PopulateDebugInfo(IDictionary<string, string> debugInfo)
-                => debugInfo["Fake1"] = "1";
+            public override void PopulateDebugInfo(IDictionary<string, string> debugInfo) =>
+                debugInfo["Fake1"] = "1";
         }
     }
 
@@ -304,47 +373,38 @@ public class ServiceProviderCacheTest
         private DbContextOptionsExtensionInfo _info;
         private readonly List<string> _log;
 
-        public DbContextOptionsExtensionInfo Info
-            => _info ??= new ExtensionInfo(this);
+        public DbContextOptionsExtensionInfo Info => _info ??= new ExtensionInfo(this);
 
         public FakeDbContextOptionsExtension2()
-            : this(new List<string>())
-        {
-        }
+            : this(new List<string>()) { }
 
         public FakeDbContextOptionsExtension2(List<string> log)
         {
             _log = log;
         }
 
-        public virtual void ApplyServices(IServiceCollection services)
-            => _log.Add(GetType().ShortDisplayName());
+        public virtual void ApplyServices(IServiceCollection services) =>
+            _log.Add(GetType().ShortDisplayName());
 
-        public virtual void Validate(IDbContextOptions options)
-        {
-        }
+        public virtual void Validate(IDbContextOptions options) { }
 
         private sealed class ExtensionInfo : DbContextOptionsExtensionInfo
         {
             public ExtensionInfo(IDbContextOptionsExtension extension)
-                : base(extension)
-            {
-            }
+                : base(extension) { }
 
-            public override bool IsDatabaseProvider
-                => false;
+            public override bool IsDatabaseProvider => false;
 
-            public override int GetServiceProviderHashCode()
-                => 0;
+            public override int GetServiceProviderHashCode() => 0;
 
-            public override bool ShouldUseSameServiceProvider(DbContextOptionsExtensionInfo other)
-                => true;
+            public override bool ShouldUseSameServiceProvider(
+                DbContextOptionsExtensionInfo other
+            ) => true;
 
-            public override string LogFragment
-                => "";
+            public override string LogFragment => "";
 
-            public override void PopulateDebugInfo(IDictionary<string, string> debugInfo)
-                => debugInfo["Fake2"] = "1";
+            public override void PopulateDebugInfo(IDictionary<string, string> debugInfo) =>
+                debugInfo["Fake2"] = "1";
         }
     }
 }

@@ -7,9 +7,9 @@ using Xunit;
 
 namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
 {
-    public abstract class PerAssemblyVersionResolutionMultipleFrameworksBase :
-        ComponentDependencyResolutionBase,
-        IClassFixture<PerAssemblyVersionResolutionBase.SharedTestState>
+    public abstract class PerAssemblyVersionResolutionMultipleFrameworksBase
+        : ComponentDependencyResolutionBase,
+            IClassFixture<PerAssemblyVersionResolutionBase.SharedTestState>
     {
         protected readonly SharedTestState SharedState;
 
@@ -35,9 +35,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         [Theory]
         [InlineData(TestAssemblyWithBothVersions, null, null, MicrosoftNETCoreApp)] // NetCoreApp has higher version than HighWare
         [InlineData(TestAssemblyWithBothVersions, "1.0.0.0", "1.0.0.0", MicrosoftNETCoreApp)]
-        [InlineData(TestAssemblyWithBothVersions, "3.0.0.0", "4.0.0.0", null)]  // App has higher version than any framework
-        [InlineData(TestAssemblyWithBothVersions, "2.1.1.1", "3.3.0.0", null)]  // App has higher file version
-        [InlineData(TestAssemblyWithBothVersions, "2.1.1.1", "3.2.2.2", MicrosoftNETCoreApp)]  // Lower level framework always wins on equality (this is intentional)
+        [InlineData(TestAssemblyWithBothVersions, "3.0.0.0", "4.0.0.0", null)] // App has higher version than any framework
+        [InlineData(TestAssemblyWithBothVersions, "2.1.1.1", "3.3.0.0", null)] // App has higher file version
+        [InlineData(TestAssemblyWithBothVersions, "2.1.1.1", "3.2.2.2", MicrosoftNETCoreApp)] // Lower level framework always wins on equality (this is intentional)
         [InlineData(TestAssemblyWithBothVersions, null, "4.0.0.0", MicrosoftNETCoreApp)] // The one with version wins
         [InlineData(TestAssemblyWithBothVersions, null, "2.0.0.0", MicrosoftNETCoreApp)] // The one with version wins
         [InlineData(TestAssemblyWithBothVersions, "3.0.0.0", null, null)]
@@ -57,46 +57,81 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         [InlineData(TestAssemblyWithFileVersion, null, "1.0.0.0", MicrosoftNETCoreApp)]
         [InlineData(TestAssemblyWithFileVersion, null, "4.0.0.0", null)] // App has higher version than either framework
         [InlineData(TestAssemblyWithFileVersion, null, "3.2.2.2", MicrosoftNETCoreApp)] // Exactly equal - lower one wins
-        public void AppWithSameAssemblyAsFramework(string testAssemblyName, string appAsmVersion, string appFileVersion, string frameWorkWins)
+        public void AppWithSameAssemblyAsFramework(
+            string testAssemblyName,
+            string appAsmVersion,
+            string appFileVersion,
+            string frameWorkWins
+        )
         {
             RunTest(null, testAssemblyName, appAsmVersion, appFileVersion, frameWorkWins);
         }
 
         [Theory]
-        [InlineData("1.1.1")]  // Exact match - no roll forward
-        [InlineData("1.1.0")]  // Patch roll forward
-        [InlineData("1.0.0")]  // Minor
-        [InlineData("0.0.0")]  // Major
-        public void AppWithExactlySameAssemblyAsFrameworkWithRollForward(string frameworkReferenceVersion)
+        [InlineData("1.1.1")] // Exact match - no roll forward
+        [InlineData("1.1.0")] // Patch roll forward
+        [InlineData("1.0.0")] // Minor
+        [InlineData("0.0.0")] // Major
+        public void AppWithExactlySameAssemblyAsFrameworkWithRollForward(
+            string frameworkReferenceVersion
+        )
         {
             RunTest(
-                runtimeConfig => runtimeConfig
-                    .WithFramework(HighWare, frameworkReferenceVersion)
-                    .WithRollForward(Constants.RollForwardSetting.Major),
-                TestAssemblyWithBothVersions, "2.1.1.1", "3.2.2.2", MicrosoftNETCoreApp);
+                runtimeConfig =>
+                    runtimeConfig
+                        .WithFramework(HighWare, frameworkReferenceVersion)
+                        .WithRollForward(Constants.RollForwardSetting.Major),
+                TestAssemblyWithBothVersions,
+                "2.1.1.1",
+                "3.2.2.2",
+                MicrosoftNETCoreApp
+            );
         }
 
-        protected abstract void RunTest(Action<RuntimeConfig> runtimeConfigCustomizer, string testAssemblyName, string appAsmVersion, string appFileVersion, string frameWorkWins);
+        protected abstract void RunTest(
+            Action<RuntimeConfig> runtimeConfigCustomizer,
+            string testAssemblyName,
+            string appAsmVersion,
+            string appFileVersion,
+            string frameWorkWins
+        );
 
         public class SharedTestState : ComponentSharedTestStateBase
         {
-            public string HighWarePath => Path.Combine(DotNetWithNetCoreApp.BinPath, "shared", HighWare, "1.1.1");
+            public string HighWarePath =>
+                Path.Combine(DotNetWithNetCoreApp.BinPath, "shared", HighWare, "1.1.1");
 
-            public SharedTestState()
+            public SharedTestState() { }
+
+            protected override TestApp CreateTestFrameworkReferenceApp() =>
+                CreateFrameworkReferenceApp(HighWare, "1.1.1");
+
+            protected override void CustomizeDotNetWithNetCoreAppMicrosoftNETCoreApp(
+                NetCoreAppBuilder builder
+            )
             {
-            }
-
-            protected override TestApp CreateTestFrameworkReferenceApp() => CreateFrameworkReferenceApp(HighWare, "1.1.1");
-
-            protected override void CustomizeDotNetWithNetCoreAppMicrosoftNETCoreApp(NetCoreAppBuilder builder)
-            {
-                builder
-                    .WithPackage(TestVersionsPackage, "1.1.1", b => b
-                        .WithAssemblyGroup(null, g => g
-                            .WithAsset(TestAssemblyWithNoVersions + ".dll")
-                            .WithAsset(TestAssemblyWithAssemblyVersion + ".dll", rf => rf.WithVersion("2.1.1.1", null))
-                            .WithAsset(TestAssemblyWithFileVersion + ".dll", rf => rf.WithVersion(null, "3.2.2.2"))
-                            .WithAsset(TestAssemblyWithBothVersions + ".dll", rf => rf.WithVersion("2.1.1.1", "3.2.2.2"))));
+                builder.WithPackage(
+                    TestVersionsPackage,
+                    "1.1.1",
+                    b =>
+                        b.WithAssemblyGroup(
+                            null,
+                            g =>
+                                g.WithAsset(TestAssemblyWithNoVersions + ".dll")
+                                    .WithAsset(
+                                        TestAssemblyWithAssemblyVersion + ".dll",
+                                        rf => rf.WithVersion("2.1.1.1", null)
+                                    )
+                                    .WithAsset(
+                                        TestAssemblyWithFileVersion + ".dll",
+                                        rf => rf.WithVersion(null, "3.2.2.2")
+                                    )
+                                    .WithAsset(
+                                        TestAssemblyWithBothVersions + ".dll",
+                                        rf => rf.WithVersion("2.1.1.1", "3.2.2.2")
+                                    )
+                        )
+                );
             }
 
             protected override void CustomizeDotNetWithNetCoreApp(DotNetBuilder builder)
@@ -105,44 +140,76 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                     HighWare,
                     "1.1.1",
                     runtimeConfig => runtimeConfig.WithFramework(MicrosoftNETCoreApp, "4.0.0"),
-                    path => NetCoreAppBuilder.ForNETCoreApp(HighWare, TestContext.TargetRID)
-                        .WithProject(HighWare, "1.1.1", p => p
-                            .WithAssemblyGroup(null, g => g
-                            .WithAsset(TestAssemblyWithNoVersions + ".dll")
-                            .WithAsset(TestAssemblyWithAssemblyVersion + ".dll", rf => rf.WithVersion("2.1.1.2", null))
-                            .WithAsset(TestAssemblyWithFileVersion + ".dll", rf => rf.WithVersion(null, "3.2.2.2"))
-                            .WithAsset(TestAssemblyWithBothVersions + ".dll", rf => rf.WithVersion("2.1.1.0", "3.2.2.0"))))
-                        .Build(new TestApp(path, HighWare)));
+                    path =>
+                        NetCoreAppBuilder
+                            .ForNETCoreApp(HighWare, TestContext.TargetRID)
+                            .WithProject(
+                                HighWare,
+                                "1.1.1",
+                                p =>
+                                    p.WithAssemblyGroup(
+                                        null,
+                                        g =>
+                                            g.WithAsset(TestAssemblyWithNoVersions + ".dll")
+                                                .WithAsset(
+                                                    TestAssemblyWithAssemblyVersion + ".dll",
+                                                    rf => rf.WithVersion("2.1.1.2", null)
+                                                )
+                                                .WithAsset(
+                                                    TestAssemblyWithFileVersion + ".dll",
+                                                    rf => rf.WithVersion(null, "3.2.2.2")
+                                                )
+                                                .WithAsset(
+                                                    TestAssemblyWithBothVersions + ".dll",
+                                                    rf => rf.WithVersion("2.1.1.0", "3.2.2.0")
+                                                )
+                                    )
+                            )
+                            .Build(new TestApp(path, HighWare))
+                );
             }
 
             public TestApp CreateTestFrameworkReferenceApp(Action<NetCoreAppBuilder> customizer)
             {
                 TestApp testApp = FrameworkReferenceApp.Copy();
                 NetCoreAppBuilder builder = NetCoreAppBuilder.PortableForNETCoreApp(testApp);
-                builder.WithProject(p => p
-                    .WithAssemblyGroup(null, g => g.WithMainAssembly()));
+                builder.WithProject(p => p.WithAssemblyGroup(null, g => g.WithMainAssembly()));
                 customizer(builder);
                 return builder.Build(testApp);
             }
         }
     }
 
-    public class AppPerAssemblyVersionResolutionMultipleFrameworks :
-        PerAssemblyVersionResolutionMultipleFrameworksBase,
-        IClassFixture<PerAssemblyVersionResolutionMultipleFrameworksBase.SharedTestState>
+    public class AppPerAssemblyVersionResolutionMultipleFrameworks
+        : PerAssemblyVersionResolutionMultipleFrameworksBase,
+            IClassFixture<PerAssemblyVersionResolutionMultipleFrameworksBase.SharedTestState>
     {
         public AppPerAssemblyVersionResolutionMultipleFrameworks(SharedTestState sharedState)
-            : base(sharedState)
-        {
-        }
+            : base(sharedState) { }
 
-        protected override void RunTest(Action<RuntimeConfig> runtimeConfigCustomizer, string testAssemblyName, string appAsmVersion, string appFileVersion, string frameworkWins)
+        protected override void RunTest(
+            Action<RuntimeConfig> runtimeConfigCustomizer,
+            string testAssemblyName,
+            string appAsmVersion,
+            string appFileVersion,
+            string frameworkWins
+        )
         {
-            var app = SharedState.CreateTestFrameworkReferenceApp(b => b
-                .WithPackage(TestVersionsPackage, "1.0.0", lib => lib
-                    .WithAssemblyGroup(null, g => g
-                        .WithAsset(testAssemblyName + ".dll", rf => rf
-                            .WithVersion(appAsmVersion, appFileVersion)))));
+            var app = SharedState.CreateTestFrameworkReferenceApp(b =>
+                b.WithPackage(
+                    TestVersionsPackage,
+                    "1.0.0",
+                    lib =>
+                        lib.WithAssemblyGroup(
+                            null,
+                            g =>
+                                g.WithAsset(
+                                    testAssemblyName + ".dll",
+                                    rf => rf.WithVersion(appAsmVersion, appFileVersion)
+                                )
+                        )
+                )
+            );
             if (runtimeConfigCustomizer is not null)
             {
                 var runtimeConfig = new RuntimeConfig(app.RuntimeConfigJson);
@@ -156,34 +223,56 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 HighWare => SharedState.HighWarePath,
                 _ => app.Location,
             };
-            string expectedTestAssemblyPath = Path.Combine(expectedBaseLocation, testAssemblyName + ".dll");
+            string expectedTestAssemblyPath = Path.Combine(
+                expectedBaseLocation,
+                testAssemblyName + ".dll"
+            );
 
-            SharedState.DotNetWithNetCoreApp.Exec(app.AppDll)
+            SharedState
+                .DotNetWithNetCoreApp.Exec(app.AppDll)
                 .EnableTracingAndCaptureOutputs()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveResolvedAssembly(expectedTestAssemblyPath)
                 .And.HaveUsedFrameworkProbe(SharedState.HighWarePath, level: 1)
-                .And.HaveUsedFrameworkProbe(SharedState.DotNetWithNetCoreApp.GreatestVersionSharedFxPath, level: 2);
+                .And.HaveUsedFrameworkProbe(
+                    SharedState.DotNetWithNetCoreApp.GreatestVersionSharedFxPath,
+                    level: 2
+                );
         }
     }
 
-    public class ComponentPerAssemblyVersionResolutionMultipleFrameworks :
-        PerAssemblyVersionResolutionMultipleFrameworksBase,
-        IClassFixture<PerAssemblyVersionResolutionMultipleFrameworksBase.SharedTestState>
+    public class ComponentPerAssemblyVersionResolutionMultipleFrameworks
+        : PerAssemblyVersionResolutionMultipleFrameworksBase,
+            IClassFixture<PerAssemblyVersionResolutionMultipleFrameworksBase.SharedTestState>
     {
         public ComponentPerAssemblyVersionResolutionMultipleFrameworks(SharedTestState sharedState)
-            : base(sharedState)
-        {
-        }
+            : base(sharedState) { }
 
-        protected override void RunTest(Action<RuntimeConfig> runtimeConfigCustomizer, string testAssemblyName, string appAsmVersion, string appFileVersion, string frameworkWins)
+        protected override void RunTest(
+            Action<RuntimeConfig> runtimeConfigCustomizer,
+            string testAssemblyName,
+            string appAsmVersion,
+            string appFileVersion,
+            string frameworkWins
+        )
         {
-            var component = SharedState.CreateComponentWithNoDependencies(b => b
-                .WithPackage(TestVersionsPackage, "1.0.0", lib => lib
-                    .WithAssemblyGroup(null, g => g
-                        .WithAsset(testAssemblyName + ".dll", rf => rf
-                            .WithVersion(appAsmVersion, appFileVersion)))));
+            var component = SharedState.CreateComponentWithNoDependencies(b =>
+                b.WithPackage(
+                    TestVersionsPackage,
+                    "1.0.0",
+                    lib =>
+                        lib.WithAssemblyGroup(
+                            null,
+                            g =>
+                                g.WithAsset(
+                                    testAssemblyName + ".dll",
+                                    rf => rf.WithVersion(appAsmVersion, appFileVersion)
+                                )
+                        )
+                )
+            );
             if (runtimeConfigCustomizer is not null)
             {
                 var runtimeConfig = RuntimeConfig.FromFile(component.RuntimeConfigJson);
@@ -192,14 +281,23 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             }
 
             // For component dependency resolution, frameworks are not considered, so the assembly from the component always wins
-            string expectedTestAssemblyPath = Path.Combine(component.Location, testAssemblyName + ".dll");
+            string expectedTestAssemblyPath = Path.Combine(
+                component.Location,
+                testAssemblyName + ".dll"
+            );
 
-            SharedState.RunComponentResolutionTest(component)
-                .Should().Pass()
+            SharedState
+                .RunComponentResolutionTest(component)
+                .Should()
+                .Pass()
                 .And.HaveSuccessfullyResolvedComponentDependencies()
-                .And.HaveResolvedComponentDependencyAssembly($"{component.AppDll};{expectedTestAssemblyPath}")
+                .And.HaveResolvedComponentDependencyAssembly(
+                    $"{component.AppDll};{expectedTestAssemblyPath}"
+                )
                 .And.NotHaveUsedFrameworkProbe(SharedState.HighWarePath)
-                .And.NotHaveUsedFrameworkProbe(SharedState.DotNetWithNetCoreApp.GreatestVersionSharedFxPath);
+                .And.NotHaveUsedFrameworkProbe(
+                    SharedState.DotNetWithNetCoreApp.GreatestVersionSharedFxPath
+                );
         }
     }
 }

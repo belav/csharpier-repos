@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides an abstraction for a store which maps users to roles.
 /// </summary>
 /// <typeparam name="TUser">The type encapsulating a user.</typeparam>
-public interface IUserRoleStore<TUser> : IUserStore<TUser> where TUser : class
+public interface IUserRoleStore<TUser> : IUserStore<TUser>
+    where TUser : class
 {
     /// <summary>
     /// Add the specified <paramref name="user"/> to the named role.

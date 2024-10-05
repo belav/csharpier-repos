@@ -14,9 +14,7 @@ public class ValidatorItem
     /// <summary>
     /// Creates a new <see cref="ValidatorItem"/>.
     /// </summary>
-    public ValidatorItem()
-    {
-    }
+    public ValidatorItem() { }
 
     /// <summary>
     /// Creates a new <see cref="ValidatorItem"/>.

@@ -23,10 +23,9 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using Newtonsoft.Json.Linq;
 using System.Globalization;
+using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Tests.Documentation.Samples.Linq;
-
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;
@@ -45,10 +44,13 @@ namespace Newtonsoft.Json.Tests.Issues
         {
             Test(true);
             Test(false);
-            
+
             static void Test(bool value)
             {
-                var obj = (JObject)JToken.Parse(@"{""x"": XXX, ""y"": XXX}".Replace("XXX", value ? "true" : "false"));
+                var obj = (JObject)
+                    JToken.Parse(
+                        @"{""x"": XXX, ""y"": XXX}".Replace("XXX", value ? "true" : "false")
+                    );
                 var x = ((JValue)obj["x"]).Value;
                 var y = ((JValue)obj["y"]).Value;
 
@@ -70,7 +72,13 @@ namespace Newtonsoft.Json.Tests.Issues
 
             static void Test(double value, bool expectSame)
             {
-                var obj = (JObject)JToken.Parse(@"{""x"": XXX, ""y"": XXX}".Replace("XXX", value.ToString("0.0###", CultureInfo.InvariantCulture)));
+                var obj = (JObject)
+                    JToken.Parse(
+                        @"{""x"": XXX, ""y"": XXX}".Replace(
+                            "XXX",
+                            value.ToString("0.0###", CultureInfo.InvariantCulture)
+                        )
+                    );
                 var x = ((JValue)obj["x"]).Value;
                 var y = ((JValue)obj["y"]).Value;
 
@@ -86,8 +94,14 @@ namespace Newtonsoft.Json.Tests.Issues
                 }
                 var unboxed = (double)x;
                 Assert.AreEqual(double.IsNaN(value), double.IsNaN(unboxed));
-                Assert.AreEqual(double.IsPositiveInfinity(value), double.IsPositiveInfinity(unboxed));
-                Assert.AreEqual(double.IsNegativeInfinity(value), double.IsNegativeInfinity(unboxed));
+                Assert.AreEqual(
+                    double.IsPositiveInfinity(value),
+                    double.IsPositiveInfinity(unboxed)
+                );
+                Assert.AreEqual(
+                    double.IsNegativeInfinity(value),
+                    double.IsNegativeInfinity(unboxed)
+                );
             }
         }
 
@@ -109,7 +123,13 @@ namespace Newtonsoft.Json.Tests.Issues
 
             static void Test(long value, bool expectSame)
             {
-                var obj = (JObject)JToken.Parse(@"{""x"": XXX, ""y"": XXX}".Replace("XXX", value.ToString(CultureInfo.InvariantCulture)));
+                var obj = (JObject)
+                    JToken.Parse(
+                        @"{""x"": XXX, ""y"": XXX}".Replace(
+                            "XXX",
+                            value.ToString(CultureInfo.InvariantCulture)
+                        )
+                    );
                 var x = ((JValue)obj["x"]).Value;
                 var y = ((JValue)obj["y"]).Value;
 

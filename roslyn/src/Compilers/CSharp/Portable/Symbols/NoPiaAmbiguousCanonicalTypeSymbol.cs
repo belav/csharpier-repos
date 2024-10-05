@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             AssemblySymbol embeddingAssembly,
             NamedTypeSymbol firstCandidate,
             NamedTypeSymbol secondCandidate,
-            TupleExtraData? tupleData = null)
+            TupleExtraData? tupleData = null
+        )
             : base(tupleData)
         {
             _embeddingAssembly = embeddingAssembly;
@@ -37,7 +38,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected override NamedTypeSymbol WithTupleDataCore(TupleExtraData newData)
         {
-            return new NoPiaAmbiguousCanonicalTypeSymbol(_embeddingAssembly, _firstCandidate, _secondCandidate, newData);
+            return new NoPiaAmbiguousCanonicalTypeSymbol(
+                _embeddingAssembly,
+                _firstCandidate,
+                _secondCandidate,
+                newData
+            );
         }
 
         internal override bool MangleName
@@ -54,34 +60,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public AssemblySymbol EmbeddingAssembly
         {
-            get
-            {
-                return _embeddingAssembly;
-            }
+            get { return _embeddingAssembly; }
         }
 
         public NamedTypeSymbol FirstCandidate
         {
-            get
-            {
-                return _firstCandidate;
-            }
+            get { return _firstCandidate; }
         }
 
         public NamedTypeSymbol SecondCandidate
         {
-            get
-            {
-                return _secondCandidate;
-            }
+            get { return _secondCandidate; }
         }
 
         internal override DiagnosticInfo ErrorInfo
         {
-            get
-            {
-                return new CSDiagnosticInfo(ErrorCode.ERR_NoCanonicalView, _firstCandidate);
-            }
+            get { return new CSDiagnosticInfo(ErrorCode.ERR_NoCanonicalView, _firstCandidate); }
         }
 
         public override int GetHashCode()

@@ -13,14 +13,16 @@ namespace System.Web.Http.Tracing.Tracers
     /// <summary>
     /// Tracer for <see cref="IAuthorizationFilter"/>.
     /// </summary>
-    internal class AuthorizationFilterTracer : FilterTracer, IAuthorizationFilter, IDecorator<IAuthorizationFilter>
+    internal class AuthorizationFilterTracer
+        : FilterTracer,
+            IAuthorizationFilter,
+            IDecorator<IAuthorizationFilter>
     {
-        private const string ExecuteAuthorizationFilterAsyncMethodName = "ExecuteAuthorizationFilterAsync";
+        private const string ExecuteAuthorizationFilterAsyncMethodName =
+            "ExecuteAuthorizationFilterAsync";
 
         public AuthorizationFilterTracer(IAuthorizationFilter innerFilter, ITraceWriter traceWriter)
-            : base(innerFilter, traceWriter)
-        {
-        }
+            : base(innerFilter, traceWriter) { }
 
         public new IAuthorizationFilter Inner
         {
@@ -32,9 +34,11 @@ namespace System.Web.Http.Tracing.Tracers
             get { return InnerFilter as IAuthorizationFilter; }
         }
 
-        public Task<HttpResponseMessage> ExecuteAuthorizationFilterAsync(HttpActionContext actionContext,
-                                                                         CancellationToken cancellationToken,
-                                                                         Func<Task<HttpResponseMessage>> continuation)
+        public Task<HttpResponseMessage> ExecuteAuthorizationFilterAsync(
+            HttpActionContext actionContext,
+            CancellationToken cancellationToken,
+            Func<Task<HttpResponseMessage>> continuation
+        )
         {
             return TraceWriter.TraceBeginEndAsync<HttpResponseMessage>(
                 actionContext.Request,
@@ -43,7 +47,12 @@ namespace System.Web.Http.Tracing.Tracers
                 InnerAuthorizationFilter.GetType().Name,
                 ExecuteAuthorizationFilterAsyncMethodName,
                 beginTrace: null,
-                execute: () => InnerAuthorizationFilter.ExecuteAuthorizationFilterAsync(actionContext, cancellationToken, continuation),
+                execute: () =>
+                    InnerAuthorizationFilter.ExecuteAuthorizationFilterAsync(
+                        actionContext,
+                        cancellationToken,
+                        continuation
+                    ),
                 endTrace: (tr, response) =>
                 {
                     if (response != null)
@@ -51,7 +60,8 @@ namespace System.Web.Http.Tracing.Tracers
                         tr.Status = response.StatusCode;
                     }
                 },
-                errorTrace: null);
+                errorTrace: null
+            );
         }
     }
 }

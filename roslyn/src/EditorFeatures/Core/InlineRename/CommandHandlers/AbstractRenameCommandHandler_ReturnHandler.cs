@@ -9,10 +9,10 @@ using Microsoft.VisualStudio.Text.Editor.Commanding.Commands;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
-    internal abstract partial class AbstractRenameCommandHandler : ICommandHandler<ReturnKeyCommandArgs>
+    internal abstract partial class AbstractRenameCommandHandler
+        : ICommandHandler<ReturnKeyCommandArgs>
     {
-        public CommandState GetCommandState(ReturnKeyCommandArgs args)
-            => GetCommandState();
+        public CommandState GetCommandState(ReturnKeyCommandArgs args) => GetCommandState();
 
         public bool ExecuteCommand(ReturnKeyCommandArgs args, CommandExecutionContext context)
         {

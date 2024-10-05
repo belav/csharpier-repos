@@ -21,21 +21,25 @@ internal static class BrokeredServiceDescriptors
     {
         private const string AsyncSuffix = "Async";
 
-        private static readonly Func<string, string> NameNormalize =
-            name => CommonMethodNameTransforms.CamelCase(name.EndsWith(AsyncSuffix, StringComparison.OrdinalIgnoreCase) ? name.Substring(0, name.Length - AsyncSuffix.Length) : name);
+        private static readonly Func<string, string> NameNormalize = name =>
+            CommonMethodNameTransforms.CamelCase(
+                name.EndsWith(AsyncSuffix, StringComparison.OrdinalIgnoreCase)
+                    ? name.Substring(0, name.Length - AsyncSuffix.Length)
+                    : name
+            );
 
         public ClientServiceDescriptor(ServiceMoniker serviceMoniker, Type? clientInterface = null)
-            : base(serviceMoniker, clientInterface, Formatters.MessagePack, MessageDelimiters.BigEndianInt32LengthHeader)
-        {
-        }
+            : base(
+                serviceMoniker,
+                clientInterface,
+                Formatters.MessagePack,
+                MessageDelimiters.BigEndianInt32LengthHeader
+            ) { }
 
         public ClientServiceDescriptor(ClientServiceDescriptor copyFrom)
-            : base(copyFrom)
-        {
-        }
+            : base(copyFrom) { }
 
-        protected override ServiceRpcDescriptor Clone()
-            => new ClientServiceDescriptor(this);
+        protected override ServiceRpcDescriptor Clone() => new ClientServiceDescriptor(this);
 
         protected override JsonRpcConnection CreateConnection(JsonRpc jsonRpc)
         {
@@ -68,32 +72,71 @@ internal static class BrokeredServiceDescriptors
     /// </summary>
     internal const string DebuggerComponentName = "Debugger";
 
-    public static readonly ServiceRpcDescriptor SolutionSnapshotProvider = CreateClientServiceDescriptor("SolutionSnapshotProvider", new Version(0, 1));
-    public static readonly ServiceRpcDescriptor DebuggerManagedHotReloadService = CreateDebuggerServiceDescriptor("ManagedHotReloadService", new Version(0, 1));
+    public static readonly ServiceRpcDescriptor SolutionSnapshotProvider =
+        CreateClientServiceDescriptor("SolutionSnapshotProvider", new Version(0, 1));
+    public static readonly ServiceRpcDescriptor DebuggerManagedHotReloadService =
+        CreateDebuggerServiceDescriptor("ManagedHotReloadService", new Version(0, 1));
 
-    public static ServiceMoniker CreateMoniker(string namespaceName, string componentName, string serviceName, Version? version)
-        => new(namespaceName + "." + componentName + "." + serviceName, version);
+    public static ServiceMoniker CreateMoniker(
+        string namespaceName,
+        string componentName,
+        string serviceName,
+        Version? version
+    ) => new(namespaceName + "." + componentName + "." + serviceName, version);
 
     /// <summary>
     /// Descriptor for services proferred by the client extension (implemented in TypeScript).
     /// </summary>
-    public static ServiceJsonRpcDescriptor CreateClientServiceDescriptor(string serviceName, Version? version)
-        => new ClientServiceDescriptor(CreateMoniker(LanguageServerComponentNamespace, LanguageClientComponentName, serviceName, version), clientInterface: null)
-           .WithExceptionStrategy(ExceptionProcessing.ISerializable);
+    public static ServiceJsonRpcDescriptor CreateClientServiceDescriptor(
+        string serviceName,
+        Version? version
+    ) =>
+        new ClientServiceDescriptor(
+            CreateMoniker(
+                LanguageServerComponentNamespace,
+                LanguageClientComponentName,
+                serviceName,
+                version
+            ),
+            clientInterface: null
+        ).WithExceptionStrategy(ExceptionProcessing.ISerializable);
 
     /// <summary>
-    /// Descriptor for services proferred by Roslyn server (implemented in C#). 
+    /// Descriptor for services proferred by Roslyn server (implemented in C#).
     /// </summary>
-    public static ServiceJsonRpcDescriptor CreateServerServiceDescriptor(string serviceName, Version? version)
-        => CreateDescriptor(CreateMoniker(LanguageServerComponentNamespace, LanguageServerComponentName, serviceName, version));
+    public static ServiceJsonRpcDescriptor CreateServerServiceDescriptor(
+        string serviceName,
+        Version? version
+    ) =>
+        CreateDescriptor(
+            CreateMoniker(
+                LanguageServerComponentNamespace,
+                LanguageServerComponentName,
+                serviceName,
+                version
+            )
+        );
 
     /// <summary>
-    /// Descriptor for services proferred by the debugger server (implemented in C#). 
+    /// Descriptor for services proferred by the debugger server (implemented in C#).
     /// </summary>
-    public static ServiceJsonRpcDescriptor CreateDebuggerServiceDescriptor(string serviceName, Version? version)
-        => CreateDescriptor(CreateMoniker(VisualStudioComponentNamespace, DebuggerComponentName, serviceName, version));
+    public static ServiceJsonRpcDescriptor CreateDebuggerServiceDescriptor(
+        string serviceName,
+        Version? version
+    ) =>
+        CreateDescriptor(
+            CreateMoniker(
+                VisualStudioComponentNamespace,
+                DebuggerComponentName,
+                serviceName,
+                version
+            )
+        );
 
-    private static ServiceJsonRpcDescriptor CreateDescriptor(ServiceMoniker moniker)
-        => new ServiceJsonRpcDescriptor(moniker, Formatters.MessagePack, MessageDelimiters.BigEndianInt32LengthHeader)
-           .WithExceptionStrategy(ExceptionProcessing.ISerializable);
+    private static ServiceJsonRpcDescriptor CreateDescriptor(ServiceMoniker moniker) =>
+        new ServiceJsonRpcDescriptor(
+            moniker,
+            Formatters.MessagePack,
+            MessageDelimiters.BigEndianInt32LengthHeader
+        ).WithExceptionStrategy(ExceptionProcessing.ISerializable);
 }

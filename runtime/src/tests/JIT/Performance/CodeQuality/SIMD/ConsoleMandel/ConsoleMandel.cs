@@ -24,36 +24,70 @@ namespace SIMD
             Console.Write((count < 1000) ? ' ' : '*');
         }
 
-        private static Algorithms.FractalRenderer.Render GetRenderer(Action<int, int, int> draw, int which)
+        private static Algorithms.FractalRenderer.Render GetRenderer(
+            Action<int, int, int> draw,
+            int which
+        )
         {
-            return Algorithms.FractalRenderer.SelectRender(draw, Abort, IsVector(which), IsDouble(which), IsMulti(which), UsesADT(which), !UseIntTypes(which));
+            return Algorithms.FractalRenderer.SelectRender(
+                draw,
+                Abort,
+                IsVector(which),
+                IsDouble(which),
+                IsMulti(which),
+                UsesADT(which),
+                !UseIntTypes(which)
+            );
         }
 
-        private static bool Abort() { return false; }
+        private static bool Abort()
+        {
+            return false;
+        }
 
-        private static bool UseIntTypes(int num) { return (num & 8) == 0; }
+        private static bool UseIntTypes(int num)
+        {
+            return (num & 8) == 0;
+        }
 
-        private static bool IsVector(int num) { return num > 7; }
+        private static bool IsVector(int num)
+        {
+            return num > 7;
+        }
 
-        private static bool IsDouble(int num) { return (num & 4) != 0; }
+        private static bool IsDouble(int num)
+        {
+            return (num & 4) != 0;
+        }
 
-        private static bool IsMulti(int num) { return (num & 2) != 0; }
+        private static bool IsMulti(int num)
+        {
+            return (num & 2) != 0;
+        }
 
-        private static bool UsesADT(int num) { return (num & 1) != 0; }
+        private static bool UsesADT(int num)
+        {
+            return (num & 1) != 0;
+        }
 
         private static void PrintDescription(int i)
         {
-            Console.WriteLine("{0}: {1} {2}-Precision {3}Threaded using {4} and {5} int types", i,
+            Console.WriteLine(
+                "{0}: {1} {2}-Precision {3}Threaded using {4} and {5} int types",
+                i,
                 IsVector(i) ? "Vector" : "Scalar",
                 IsDouble(i) ? "Double" : "Single",
                 IsMulti(i) ? "Multi" : "Single",
                 UsesADT(i) ? "ADT" : "Raw Values",
-                UseIntTypes(i) ? "using" : "not using any");
+                UseIntTypes(i) ? "using" : "not using any"
+            );
         }
 
         private static void PrintUsage()
         {
-            Console.WriteLine("Usage:\n    ConsoleMandel [0-23] -[bench #] where # is the number of iterations.");
+            Console.WriteLine(
+                "Usage:\n    ConsoleMandel [0-23] -[bench #] where # is the number of iterations."
+            );
             for (int i = 0; i < 24; i++)
             {
                 PrintDescription(i);
@@ -85,7 +119,10 @@ namespace SIMD
                     if (args[argNum].ToUpperInvariant() == "-BENCH")
                     {
                         bench = true;
-                        if ((args.Length <= (argNum + 1)) || !Int32.TryParse(args[argNum + 1], out iters))
+                        if (
+                            (args.Length <= (argNum + 1))
+                            || !Int32.TryParse(args[argNum + 1], out iters)
+                        )
                         {
                             iters = 5;
                         }
@@ -124,8 +161,16 @@ namespace SIMD
                 {
                     if (verbose)
                     {
-                        Console.WriteLine("  Vector Count is {0}", IsDouble(which) ? System.Numerics.Vector<Double>.Count : System.Numerics.Vector<Single>.Count);
-                        Console.WriteLine("  {0} Accelerated.", System.Numerics.Vector.IsHardwareAccelerated ? "IS" : "IS NOT");
+                        Console.WriteLine(
+                            "  Vector Count is {0}",
+                            IsDouble(which)
+                                ? System.Numerics.Vector<Double>.Count
+                                : System.Numerics.Vector<Single>.Count
+                        );
+                        Console.WriteLine(
+                            "  {0} Accelerated.",
+                            System.Numerics.Vector.IsHardwareAccelerated ? "IS" : "IS NOT"
+                        );
                     }
                 }
                 var render = GetRenderer(DrawDot, which);
@@ -149,7 +194,9 @@ namespace SIMD
             float ymax = YC + Range;
             float step = Range / 1000f; // This will render one million pixels
             float warm = Range / 100f; // To warm up, just render 10000 pixels :-)
-            Algorithms.FractalRenderer.Render[] renderers = new Algorithms.FractalRenderer.Render[24];
+            Algorithms.FractalRenderer.Render[] renderers = new Algorithms.FractalRenderer.Render[
+                24
+            ];
             // Warm up each renderer
             if (!s_silent)
             {
@@ -166,18 +213,22 @@ namespace SIMD
                 timer.Stop();
                 if (!s_silent)
                 {
-                    Console.WriteLine("{0}{1}{2}{3}{4} Complete [{5} ms]",
+                    Console.WriteLine(
+                        "{0}{1}{2}{3}{4} Complete [{5} ms]",
                         UseIntTypes(i) ? "IntBV  " : "Strict ",
                         IsVector(i) ? "Vector " : "Scalar ",
                         IsDouble(i) ? "Double " : "Single ",
                         UsesADT(i) ? "ADT " : "Raw ",
                         IsMulti(i) ? "Multi  " : "Single ",
-                        timer.ElapsedMilliseconds);
+                        timer.ElapsedMilliseconds
+                    );
                 }
             }
             if (!s_silent)
             {
-                Console.WriteLine(" Run Type                       :      Min      Max    Average    Std-Dev");
+                Console.WriteLine(
+                    " Run Type                       :      Min      Max    Average    Std-Dev"
+                );
             }
             for (int i = firstRenderer; i <= lastRenderer; i++)
             {
@@ -202,13 +253,18 @@ namespace SIMD
                 }
                 else
                 {
-                    Console.WriteLine("{0}{1}{2}{3}{4}: {5,8} {6,8} {7,10:0.0} {8,10:P}",
+                    Console.WriteLine(
+                        "{0}{1}{2}{3}{4}: {5,8} {6,8} {7,10:0.0} {8,10:P}",
                         UseIntTypes(i) ? "IntBV  " : "Strict ",
                         IsVector(i) ? "Vector " : "Scalar ",
                         IsDouble(i) ? "Double " : "Single ",
                         UsesADT(i) ? "ADT " : "Raw ",
                         IsMulti(i) ? "Multi  " : "Single ",
-                        min, max, avg, stdDev);
+                        min,
+                        max,
+                        avg,
+                        stdDev
+                    );
                 }
             }
         }

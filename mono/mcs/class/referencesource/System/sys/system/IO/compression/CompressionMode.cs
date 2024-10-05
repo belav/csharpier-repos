@@ -1,8 +1,8 @@
 namespace System.IO.Compression
 {
-    public enum CompressionMode {
+    public enum CompressionMode
+    {
         Decompress = 0,
-        Compress   = 1
+        Compress = 1,
     }
 }
-

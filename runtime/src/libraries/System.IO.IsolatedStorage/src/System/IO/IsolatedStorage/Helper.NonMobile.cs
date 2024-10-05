@@ -18,11 +18,16 @@ namespace System.IO.IsolatedStorage
             // (note that Silverlight used "CoreIsolatedStorage" for a directory name and did not support machine scope)
 
             Environment.SpecialFolder specialFolder =
-            IsMachine(scope) ? Environment.SpecialFolder.CommonApplicationData : // e.g. C:\ProgramData
-            IsRoaming(scope) ? Environment.SpecialFolder.ApplicationData : // e.g. C:\Users\Joe\AppData\Roaming
-            Environment.SpecialFolder.LocalApplicationData; // e.g. C:\Users\Joe\AppData\Local
+                IsMachine(scope) ? Environment.SpecialFolder.CommonApplicationData
+                : // e.g. C:\ProgramData
+                IsRoaming(scope) ? Environment.SpecialFolder.ApplicationData
+                : // e.g. C:\Users\Joe\AppData\Roaming
+                Environment.SpecialFolder.LocalApplicationData; // e.g. C:\Users\Joe\AppData\Local
 
-            string dataDirectory = Environment.GetFolderPath(specialFolder, Environment.SpecialFolderOption.Create);
+            string dataDirectory = Environment.GetFolderPath(
+                specialFolder,
+                Environment.SpecialFolderOption.Create
+            );
             dataDirectory = Path.Combine(dataDirectory, IsolatedStorageDirectoryName);
 
             return dataDirectory;
@@ -46,7 +51,11 @@ namespace System.IO.IsolatedStorage
                         if (string.IsNullOrEmpty(randomDirectory))
                         {
                             // Someone else hasn't created the directory before we took the lock
-                            randomDirectory = Path.Combine(rootDirectory, Path.GetRandomFileName(), Path.GetRandomFileName());
+                            randomDirectory = Path.Combine(
+                                rootDirectory,
+                                Path.GetRandomFileName(),
+                                Path.GetRandomFileName()
+                            );
                             CreateDirectory(randomDirectory, scope);
                         }
                     }
@@ -62,7 +71,10 @@ namespace System.IO.IsolatedStorage
 
         private static Mutex CreateMutexNotOwned(string pathName)
         {
-            return new Mutex(initiallyOwned: false, name: @"Global\" + IdentityHelper.GetStrongHashSuitableForObjectName(pathName));
+            return new Mutex(
+                initiallyOwned: false,
+                name: @"Global\" + IdentityHelper.GetStrongHashSuitableForObjectName(pathName)
+            );
         }
     }
 }

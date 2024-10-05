@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Reflection.Runtime.General;
-
 using Internal.Reflection.Core;
 using Internal.Reflection.Core.Execution;
 using Internal.Reflection.Execution.FieldAccessors;
@@ -24,7 +23,16 @@ namespace Internal.Reflection.Execution
     //==========================================================================================================
     internal sealed partial class ExecutionEnvironmentImplementation : ExecutionEnvironment
     {
-        public sealed override void GetInterfaceMap(Type instanceType, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)] Type interfaceType, out MethodInfo[] interfaceMethods, out MethodInfo[] targetMethods)
+        public sealed override void GetInterfaceMap(
+            Type instanceType,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicMethods
+                    | DynamicallyAccessedMemberTypes.NonPublicMethods
+            )]
+                Type interfaceType,
+            out MethodInfo[] interfaceMethods,
+            out MethodInfo[] targetMethods
+        )
         {
             MethodInfo[] ifaceMethods = interfaceType.GetMethods();
             var tMethods = new MethodInfo[ifaceMethods.Length];
@@ -38,7 +46,10 @@ namespace Internal.Reflection.Execution
                     goto notFound;
                 }
 
-                MethodBase methodBase = ReflectionExecution.GetMethodBaseFromStartAddressIfAvailable(classRtMethodHandle);
+                MethodBase methodBase =
+                    ReflectionExecution.GetMethodBaseFromStartAddressIfAvailable(
+                        classRtMethodHandle
+                    );
                 if (methodBase == null)
                 {
                     goto notFound;
@@ -47,10 +58,16 @@ namespace Internal.Reflection.Execution
                 tMethods[i] = (MethodInfo)methodBase;
                 continue;
 
-            notFound:
+                notFound:
                 if (instanceType.IsAbstract)
                 {
-                    throw new PlatformNotSupportedException(SR.Format(SR.Arg_InterfaceMapMustNotBeAbstract, interfaceType.FullName, instanceType.FullName));
+                    throw new PlatformNotSupportedException(
+                        SR.Format(
+                            SR.Arg_InterfaceMapMustNotBeAbstract,
+                            interfaceType.FullName,
+                            instanceType.FullName
+                        )
+                    );
                 }
 
                 throw new NotSupportedException();
@@ -63,12 +80,20 @@ namespace Internal.Reflection.Execution
         //==============================================================================================
         // Miscellaneous
         //==============================================================================================
-        public sealed override FieldAccessor CreateLiteralFieldAccessor(object value, RuntimeTypeHandle fieldTypeHandle)
+        public sealed override FieldAccessor CreateLiteralFieldAccessor(
+            object value,
+            RuntimeTypeHandle fieldTypeHandle
+        )
         {
             return new LiteralFieldAccessor(value, fieldTypeHandle);
         }
 
-        public sealed override void GetEnumInfo(RuntimeTypeHandle typeHandle, out string[] names, out object[] values, out bool isFlags)
+        public sealed override void GetEnumInfo(
+            RuntimeTypeHandle typeHandle,
+            out string[] names,
+            out object[] values,
+            out bool isFlags
+        )
         {
             // Handle the weird case of an enum type nested under a generic type that makes the
             // enum itself generic
@@ -78,7 +103,8 @@ namespace Internal.Reflection.Execution
                 typeDefHandle = RuntimeAugments.GetGenericDefinition(typeHandle);
             }
 
-            QTypeDefinition qTypeDefinition = ReflectionExecution.ExecutionEnvironment.GetMetadataForNamedType(typeDefHandle);
+            QTypeDefinition qTypeDefinition =
+                ReflectionExecution.ExecutionEnvironment.GetMetadataForNamedType(typeDefHandle);
 
             if (qTypeDefinition.IsNativeFormatMetadataBased)
             {
@@ -87,13 +113,18 @@ namespace Internal.Reflection.Execution
                     qTypeDefinition.NativeFormatHandle,
                     out values,
                     out names,
-                    out isFlags);
+                    out isFlags
+                );
                 return;
             }
 #if ECMA_METADATA_SUPPORT
             if (qTypeDefinition.IsEcmaFormatMetadataBased)
             {
-                return EcmaFormatEnumInfo.Create<TUnderlyingValue>(typeHandle, qTypeDefinition.EcmaFormatReader, qTypeDefinition.EcmaFormatHandle);
+                return EcmaFormatEnumInfo.Create<TUnderlyingValue>(
+                    typeHandle,
+                    qTypeDefinition.EcmaFormatReader,
+                    qTypeDefinition.EcmaFormatHandle
+                );
             }
 #endif
             names = Array.Empty<string>();
@@ -112,7 +143,9 @@ namespace Internal.Reflection.Execution
             return DelegateMethodInfoRetriever.GetDelegateMethodInfo(del);
         }
 
-        public override MethodBase GetMethodBaseFromStartAddressIfAvailable(IntPtr methodStartAddress)
+        public override MethodBase GetMethodBaseFromStartAddressIfAvailable(
+            IntPtr methodStartAddress
+        )
         {
             return ReflectionExecution.GetMethodBaseFromStartAddressIfAvailable(methodStartAddress);
         }
@@ -136,16 +169,21 @@ namespace Internal.Reflection.Execution
 
             if (pertainant is MethodBase methodBase)
             {
-                resourceName = methodBase.IsConstructedGenericMethod ? SR.MakeGenericMethod_NoMetadata : SR.Object_NotInvokable;
+                resourceName = methodBase.IsConstructedGenericMethod
+                    ? SR.MakeGenericMethod_NoMetadata
+                    : SR.Object_NotInvokable;
                 if (methodBase is ConstructorInfo)
                 {
                     Type declaringType = methodBase.DeclaringType;
                     if (declaringType.BaseType == typeof(MulticastDelegate))
-                        throw new PlatformNotSupportedException(SR.PlatformNotSupported_CannotInvokeDelegateCtor);
+                        throw new PlatformNotSupportedException(
+                            SR.PlatformNotSupported_CannotInvokeDelegateCtor
+                        );
                 }
             }
 
-            string pertainantString = MissingMetadataExceptionCreator.ComputeUsefulPertainantIfPossible(pertainant);
+            string pertainantString =
+                MissingMetadataExceptionCreator.ComputeUsefulPertainantIfPossible(pertainant);
             return new NotSupportedException(SR.Format(resourceName, pertainantString ?? "?"));
         }
     }

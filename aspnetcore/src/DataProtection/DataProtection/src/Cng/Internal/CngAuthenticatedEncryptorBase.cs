@@ -9,9 +9,14 @@ namespace Microsoft.AspNetCore.DataProtection.Cng.Internal;
 /// <summary>
 /// Base class used for all CNG-related authentication encryption operations.
 /// </summary>
-internal abstract unsafe class CngAuthenticatedEncryptorBase : IOptimizedAuthenticatedEncryptor, IDisposable
+internal abstract unsafe class CngAuthenticatedEncryptorBase
+    : IOptimizedAuthenticatedEncryptor,
+        IDisposable
 {
-    public byte[] Decrypt(ArraySegment<byte> ciphertext, ArraySegment<byte> additionalAuthenticatedData)
+    public byte[] Decrypt(
+        ArraySegment<byte> ciphertext,
+        ArraySegment<byte> additionalAuthenticatedData
+    )
     {
         // This wrapper simply converts ArraySegment<byte> to byte* and calls the impl method.
 
@@ -27,10 +32,17 @@ internal abstract unsafe class CngAuthenticatedEncryptorBase : IOptimizedAuthent
                 try
                 {
                     return DecryptImpl(
-                        pbCiphertext: (pbCiphertextArray != null) ? &pbCiphertextArray[ciphertext.Offset] : &dummy,
+                        pbCiphertext: (pbCiphertextArray != null)
+                            ? &pbCiphertextArray[ciphertext.Offset]
+                            : &dummy,
                         cbCiphertext: (uint)ciphertext.Count,
-                        pbAdditionalAuthenticatedData: (pbAdditionalAuthenticatedDataArray != null) ? &pbAdditionalAuthenticatedDataArray[additionalAuthenticatedData.Offset] : &dummy,
-                        cbAdditionalAuthenticatedData: (uint)additionalAuthenticatedData.Count);
+                        pbAdditionalAuthenticatedData: (pbAdditionalAuthenticatedDataArray != null)
+                            ? &pbAdditionalAuthenticatedDataArray[
+                                additionalAuthenticatedData.Offset
+                            ]
+                            : &dummy,
+                        cbAdditionalAuthenticatedData: (uint)additionalAuthenticatedData.Count
+                    );
                 }
                 catch (Exception ex) when (ex.RequiresHomogenization())
                 {
@@ -41,16 +53,29 @@ internal abstract unsafe class CngAuthenticatedEncryptorBase : IOptimizedAuthent
         }
     }
 
-    protected abstract byte[] DecryptImpl(byte* pbCiphertext, uint cbCiphertext, byte* pbAdditionalAuthenticatedData, uint cbAdditionalAuthenticatedData);
+    protected abstract byte[] DecryptImpl(
+        byte* pbCiphertext,
+        uint cbCiphertext,
+        byte* pbAdditionalAuthenticatedData,
+        uint cbAdditionalAuthenticatedData
+    );
 
     public abstract void Dispose();
 
-    public byte[] Encrypt(ArraySegment<byte> plaintext, ArraySegment<byte> additionalAuthenticatedData)
+    public byte[] Encrypt(
+        ArraySegment<byte> plaintext,
+        ArraySegment<byte> additionalAuthenticatedData
+    )
     {
         return Encrypt(plaintext, additionalAuthenticatedData, 0, 0);
     }
 
-    public byte[] Encrypt(ArraySegment<byte> plaintext, ArraySegment<byte> additionalAuthenticatedData, uint preBufferSize, uint postBufferSize)
+    public byte[] Encrypt(
+        ArraySegment<byte> plaintext,
+        ArraySegment<byte> additionalAuthenticatedData,
+        uint preBufferSize,
+        uint postBufferSize
+    )
     {
         // This wrapper simply converts ArraySegment<byte> to byte* and calls the impl method.
 
@@ -66,12 +91,19 @@ internal abstract unsafe class CngAuthenticatedEncryptorBase : IOptimizedAuthent
                 try
                 {
                     return EncryptImpl(
-                        pbPlaintext: (pbPlaintextArray != null) ? &pbPlaintextArray[plaintext.Offset] : &dummy,
+                        pbPlaintext: (pbPlaintextArray != null)
+                            ? &pbPlaintextArray[plaintext.Offset]
+                            : &dummy,
                         cbPlaintext: (uint)plaintext.Count,
-                        pbAdditionalAuthenticatedData: (pbAdditionalAuthenticatedDataArray != null) ? &pbAdditionalAuthenticatedDataArray[additionalAuthenticatedData.Offset] : &dummy,
+                        pbAdditionalAuthenticatedData: (pbAdditionalAuthenticatedDataArray != null)
+                            ? &pbAdditionalAuthenticatedDataArray[
+                                additionalAuthenticatedData.Offset
+                            ]
+                            : &dummy,
                         cbAdditionalAuthenticatedData: (uint)additionalAuthenticatedData.Count,
                         cbPreBuffer: preBufferSize,
-                        cbPostBuffer: postBufferSize);
+                        cbPostBuffer: postBufferSize
+                    );
                 }
                 catch (Exception ex) when (ex.RequiresHomogenization())
                 {
@@ -82,5 +114,12 @@ internal abstract unsafe class CngAuthenticatedEncryptorBase : IOptimizedAuthent
         }
     }
 
-    protected abstract byte[] EncryptImpl(byte* pbPlaintext, uint cbPlaintext, byte* pbAdditionalAuthenticatedData, uint cbAdditionalAuthenticatedData, uint cbPreBuffer, uint cbPostBuffer);
+    protected abstract byte[] EncryptImpl(
+        byte* pbPlaintext,
+        uint cbPlaintext,
+        byte* pbAdditionalAuthenticatedData,
+        uint cbAdditionalAuthenticatedData,
+        uint cbPreBuffer,
+        uint cbPostBuffer
+    );
 }

@@ -3,24 +3,19 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class ConcurrencyDetectorEnabledCosmosTest : ConcurrencyDetectorEnabledTestBase<
-    ConcurrencyDetectorEnabledCosmosTest.ConcurrencyDetectorCosmosFixture>
+public class ConcurrencyDetectorEnabledCosmosTest
+    : ConcurrencyDetectorEnabledTestBase<ConcurrencyDetectorEnabledCosmosTest.ConcurrencyDetectorCosmosFixture>
 {
     public ConcurrencyDetectorEnabledCosmosTest(ConcurrencyDetectorCosmosFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     [ConditionalTheory(Skip = "Issue #17246")]
-    public override Task Any(bool async)
-        => base.Any(async);
+    public override Task Any(bool async) => base.Any(async);
 
     public class ConcurrencyDetectorCosmosFixture : ConcurrencyDetectorFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => CosmosTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => CosmosTestStoreFactory.Instance;
 
-        public TestSqlLoggerFactory TestSqlLoggerFactory
-            => (TestSqlLoggerFactory)ListLoggerFactory;
+        public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
     }
 }

@@ -13,7 +13,18 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
         IImmutableSet<string> KindsProvided { get; }
         bool CanFilter { get; }
 
-        Task<ImmutableArray<IVSTypeScriptNavigateToSearchResult>> SearchProjectAsync(Project project, ImmutableArray<Document> priorityDocuments, string searchPattern, IImmutableSet<string> kinds, CancellationToken cancellationToken);
-        Task<ImmutableArray<IVSTypeScriptNavigateToSearchResult>> SearchDocumentAsync(Document document, string searchPattern, IImmutableSet<string> kinds, CancellationToken cancellationToken);
+        Task<ImmutableArray<IVSTypeScriptNavigateToSearchResult>> SearchProjectAsync(
+            Project project,
+            ImmutableArray<Document> priorityDocuments,
+            string searchPattern,
+            IImmutableSet<string> kinds,
+            CancellationToken cancellationToken
+        );
+        Task<ImmutableArray<IVSTypeScriptNavigateToSearchResult>> SearchDocumentAsync(
+            Document document,
+            string searchPattern,
+            IImmutableSet<string> kinds,
+            CancellationToken cancellationToken
+        );
     }
 }

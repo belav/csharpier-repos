@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,31 +31,35 @@ using System.Globalization;
 
 namespace System.Configuration
 {
-	public class TimeSpanSecondsConverter: ConfigurationConverterBase
-	{
-		public override object ConvertFrom (ITypeDescriptorContext ctx, CultureInfo ci, object data)
-		{
-			long v;
-			if (!(data is string))
-				throw new ArgumentException ("data");
+    public class TimeSpanSecondsConverter : ConfigurationConverterBase
+    {
+        public override object ConvertFrom(ITypeDescriptorContext ctx, CultureInfo ci, object data)
+        {
+            long v;
+            if (!(data is string))
+                throw new ArgumentException("data");
 
-			if (!Int64.TryParse ((string)data, out v))
-				throw new ArgumentException ("data");
+            if (!Int64.TryParse((string)data, out v))
+                throw new ArgumentException("data");
 
-			return TimeSpan.FromSeconds (v);
-		}
+            return TimeSpan.FromSeconds(v);
+        }
 
-		public override object ConvertTo (ITypeDescriptorContext ctx, CultureInfo ci, object value, Type type)
-		{
-			/* don't use "value is TimeSpan" here, since
-			 * we want to generate both a NRE on null
-			 * value, and ArgumentException on non-null,
-			 * but non-TimeSpan. */
-			if (value.GetType () != typeof (TimeSpan))
-				throw new ArgumentException ();
+        public override object ConvertTo(
+            ITypeDescriptorContext ctx,
+            CultureInfo ci,
+            object value,
+            Type type
+        )
+        {
+            /* don't use "value is TimeSpan" here, since
+             * we want to generate both a NRE on null
+             * value, and ArgumentException on non-null,
+             * but non-TimeSpan. */
+            if (value.GetType() != typeof(TimeSpan))
+                throw new ArgumentException();
 
-			return ((Int64)((TimeSpan)value).TotalSeconds).ToString();
-		}
-	}
+            return ((Int64)((TimeSpan)value).TotalSeconds).ToString();
+        }
+    }
 }
-

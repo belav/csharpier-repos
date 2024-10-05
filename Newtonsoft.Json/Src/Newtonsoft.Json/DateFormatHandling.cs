@@ -38,6 +38,6 @@ namespace Newtonsoft.Json
         /// <summary>
         /// Dates are written in the Microsoft JSON format, e.g. <c>"\/Date(1198908717056)\/"</c>.
         /// </summary>
-        MicrosoftDateFormat
+        MicrosoftDateFormat,
     }
 }

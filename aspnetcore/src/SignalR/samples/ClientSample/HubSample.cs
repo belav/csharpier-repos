@@ -15,14 +15,17 @@ internal class HubSample
 {
     internal static void Register(CommandLineApplication app)
     {
-        app.Command("hub", cmd =>
-        {
-            cmd.Description = "Tests a connection to a hub";
+        app.Command(
+            "hub",
+            cmd =>
+            {
+                cmd.Description = "Tests a connection to a hub";
 
-            var baseUrlArgument = cmd.Argument("<BASEURL>", "The URL to the Chat Hub to test");
+                var baseUrlArgument = cmd.Argument("<BASEURL>", "The URL to the Chat Hub to test");
 
-            cmd.OnExecute(() => ExecuteAsync(baseUrlArgument.Value));
-        });
+                cmd.OnExecute(() => ExecuteAsync(baseUrlArgument.Value));
+            }
+        );
     }
 
     public static async Task<int> ExecuteAsync(string baseUrl)
@@ -31,11 +34,10 @@ internal class HubSample
 
         Console.WriteLine("Connecting to {0}", uri);
 
-        var connectionBuilder = new HubConnectionBuilder()
-            .ConfigureLogging(logging =>
-            {
-                logging.AddConsole();
-            });
+        var connectionBuilder = new HubConnectionBuilder().ConfigureLogging(logging =>
+        {
+            logging.AddConsole();
+        });
 
         connectionBuilder.Services.Configure<LoggerFilterOptions>(options =>
         {
@@ -77,7 +79,10 @@ internal class HubSample
 
             if (!await ConnectAsync(connection, closedTokenSource.Token))
             {
-                Console.WriteLine("Failed to establish a connection to '{0}' because the CancelKeyPress event fired first. Exiting...", uri);
+                Console.WriteLine(
+                    "Failed to establish a connection to '{0}' because the CancelKeyPress event fired first. Exiting...",
+                    uri
+                );
                 return 0;
             }
 
@@ -104,7 +109,10 @@ internal class HubSample
                 catch when (closedTokenSource.IsCancellationRequested)
                 {
                     // We're shutting down the client
-                    Console.WriteLine("Failed to send '{0}' because the CancelKeyPress event fired first. Exiting...", line);
+                    Console.WriteLine(
+                        "Failed to send '{0}' because the CancelKeyPress event fired first. Exiting...",
+                        line
+                    );
                     break;
                 }
                 catch (Exception ex)

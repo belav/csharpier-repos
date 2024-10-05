@@ -36,7 +36,10 @@ namespace System.IO.Enumeration
             // didn't have a separator. Join() would handle it if we did trim it, not doing so is an optimization.
 
             ReadOnlySpan<char> relativePath = Directory.Slice(RootDirectory.Length);
-            if (Path.EndsInDirectorySeparator(OriginalRootDirectory) && PathInternal.StartsWithDirectorySeparator(relativePath))
+            if (
+                Path.EndsInDirectorySeparator(OriginalRootDirectory)
+                && PathInternal.StartsWithDirectorySeparator(relativePath)
+            )
                 relativePath = relativePath.Slice(1);
 
             return Join(OriginalRootDirectory, relativePath, FileName);

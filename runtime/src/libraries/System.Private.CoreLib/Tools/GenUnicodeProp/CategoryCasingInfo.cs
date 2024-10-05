@@ -15,13 +15,15 @@ namespace GenUnicodeProp
     /// </summary>
     internal sealed class CategoryCasingInfo : IEquatable<CategoryCasingInfo>
     {
-        private readonly (UnicodeCategory generalCategory,
+        private readonly (
+            UnicodeCategory generalCategory,
             StrongBidiCategory strongBidiCategory,
             ushort offsetToSimpleUppercase,
             ushort offsetToSimpleLowercase,
             ushort offsetToSimpleTitlecase,
             ushort offsetToSimpleCasefold,
-            bool isWhitespace) _data;
+            bool isWhitespace
+        ) _data;
 
         public CategoryCasingInfo(CodePoint codePoint)
         {
@@ -44,12 +46,25 @@ namespace GenUnicodeProp
             }
 
             // For compatibility reasons we are not mapping the Turkish I's nor Latin small letter long S with invariant casing.
-            if (Program.IncludeCasingData && codePoint.Value != 0x0130 && codePoint.Value != 0x0131 && codePoint.Value != 0x017f)
+            if (
+                Program.IncludeCasingData
+                && codePoint.Value != 0x0130
+                && codePoint.Value != 0x0131
+                && codePoint.Value != 0x017f
+            )
             {
-                _data.offsetToSimpleUppercase = (ushort)(codePoint.SimpleUppercaseMapping - codePoint.Value);
-                _data.offsetToSimpleLowercase = (ushort)(codePoint.SimpleLowercaseMapping - codePoint.Value);
-                _data.offsetToSimpleTitlecase = (ushort)(codePoint.SimpleTitlecaseMapping - codePoint.Value);
-                _data.offsetToSimpleCasefold = (ushort)(codePoint.SimpleCaseFoldMapping - codePoint.Value);
+                _data.offsetToSimpleUppercase = (ushort)(
+                    codePoint.SimpleUppercaseMapping - codePoint.Value
+                );
+                _data.offsetToSimpleLowercase = (ushort)(
+                    codePoint.SimpleLowercaseMapping - codePoint.Value
+                );
+                _data.offsetToSimpleTitlecase = (ushort)(
+                    codePoint.SimpleTitlecaseMapping - codePoint.Value
+                );
+                _data.offsetToSimpleCasefold = (ushort)(
+                    codePoint.SimpleCaseFoldMapping - codePoint.Value
+                );
             }
             else
             {

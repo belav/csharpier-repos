@@ -13,7 +13,10 @@ namespace Microsoft.AspNetCore.App.Analyzers.Infrastructure;
 
 internal sealed class RouteUsageCache
 {
-    private static readonly BoundedCacheWithFactory<Compilation, RouteUsageCache> LazyRouteUsageCache = new();
+    private static readonly BoundedCacheWithFactory<
+        Compilation,
+        RouteUsageCache
+    > LazyRouteUsageCache = new();
 
     public static RouteUsageCache GetOrCreate(Compilation compilation) =>
         LazyRouteUsageCache.GetOrCreateValue(compilation, static c => new RouteUsageCache(c));
@@ -37,43 +40,60 @@ internal sealed class RouteUsageCache
         return GetAndCache(syntaxToken, cancellationToken);
     }
 
-    private RouteUsageModel? GetAndCache(SyntaxToken syntaxToken, CancellationToken cancellationToken)
+    private RouteUsageModel? GetAndCache(
+        SyntaxToken syntaxToken,
+        CancellationToken cancellationToken
+    )
     {
-        return _lazyRoutePatterns.GetOrAdd(syntaxToken, token =>
-        {
-            if (syntaxToken.SyntaxTree == null)
+        return _lazyRoutePatterns.GetOrAdd(
+            syntaxToken,
+            token =>
             {
-                return null;
+                if (syntaxToken.SyntaxTree == null)
+                {
+                    return null;
+                }
+
+                var semanticModel = _compilation.GetSemanticModel(syntaxToken.SyntaxTree);
+
+                if (
+                    !RouteStringSyntaxDetector.IsRouteStringSyntaxToken(
+                        token,
+                        semanticModel,
+                        cancellationToken,
+                        out var options
+                    )
+                )
+                {
+                    return null;
+                }
+
+                var wellKnownTypes = WellKnownTypes.GetOrCreate(_compilation);
+                var usageContext = RouteUsageDetector.BuildContext(
+                    options,
+                    token,
+                    semanticModel,
+                    wellKnownTypes,
+                    cancellationToken
+                );
+
+                var virtualChars = CSharpVirtualCharService.Instance.TryConvertToVirtualChars(
+                    token
+                );
+                var isMvc =
+                    usageContext.UsageType == RouteUsageType.MvcAction
+                    || usageContext.UsageType == RouteUsageType.MvcController;
+                var tree = RoutePatternParser.TryParse(
+                    virtualChars,
+                    usageContext.RoutePatternOptions
+                );
+                if (tree == null)
+                {
+                    return null;
+                }
+
+                return new RouteUsageModel { RoutePattern = tree, UsageContext = usageContext };
             }
-
-            var semanticModel = _compilation.GetSemanticModel(syntaxToken.SyntaxTree);
-
-            if (!RouteStringSyntaxDetector.IsRouteStringSyntaxToken(token, semanticModel, cancellationToken, out var options))
-            {
-                return null;
-            }
-
-            var wellKnownTypes = WellKnownTypes.GetOrCreate(_compilation);
-            var usageContext = RouteUsageDetector.BuildContext(
-                options,
-                token,
-                semanticModel,
-                wellKnownTypes,
-                cancellationToken);
-
-            var virtualChars = CSharpVirtualCharService.Instance.TryConvertToVirtualChars(token);
-            var isMvc = usageContext.UsageType == RouteUsageType.MvcAction || usageContext.UsageType == RouteUsageType.MvcController;
-            var tree = RoutePatternParser.TryParse(virtualChars, usageContext.RoutePatternOptions);
-            if (tree == null)
-            {
-                return null;
-            }
-
-            return new RouteUsageModel
-            {
-                RoutePattern = tree,
-                UsageContext = usageContext
-            };
-        });
+        );
     }
 }

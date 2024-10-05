@@ -52,7 +52,11 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         #endregion
 
         #region BoolLiteral members
-        internal override StringBuilder AsEsql(StringBuilder builder, string blockAlias, bool skipIsNotNull)
+        internal override StringBuilder AsEsql(
+            StringBuilder builder,
+            string blockAlias,
+            bool skipIsNotNull
+        )
         {
             // Get e.g., T2._from1 using the table alias
             string qualifiedName = CqlWriter.GetQualifiedName(blockAlias, SlotName);
@@ -66,12 +70,20 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             return row.Property(SlotName);
         }
 
-        internal override StringBuilder AsUserString(StringBuilder builder, string blockAlias, bool skipIsNotNull)
+        internal override StringBuilder AsUserString(
+            StringBuilder builder,
+            string blockAlias,
+            bool skipIsNotNull
+        )
         {
             return AsEsql(builder, blockAlias, skipIsNotNull);
         }
 
-        internal override StringBuilder AsNegatedUserString(StringBuilder builder, string blockAlias, bool skipIsNotNull)
+        internal override StringBuilder AsNegatedUserString(
+            StringBuilder builder,
+            string blockAlias,
+            bool skipIsNotNull
+        )
         {
             builder.Append("NOT(");
             builder = AsUserString(builder, blockAlias, skipIsNotNull);
@@ -79,7 +91,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             return builder;
         }
 
-        internal override void GetRequiredSlots(MemberProjectionIndex projectedSlotMap, bool[] requiredSlots)
+        internal override void GetRequiredSlots(
+            MemberProjectionIndex projectedSlotMap,
+            bool[] requiredSlots
+        )
         {
             // The slot corresponding to from1, etc
             int numBoolSlots = requiredSlots.Length - projectedSlotMap.Count;

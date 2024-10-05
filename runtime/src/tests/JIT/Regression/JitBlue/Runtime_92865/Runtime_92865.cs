@@ -16,8 +16,7 @@ public class Runtime_92865
         Test(arr, ref data);
     }
 
-    [MethodImpl(MethodImplOptions.NoInlining |
-                MethodImplOptions.NoOptimization)]
+    [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
     private static long Test(long[] arr, ref ulong data)
     {
         return arr[(int)(data >> 7)];
